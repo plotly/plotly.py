@@ -127,7 +127,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
 
     import re
     _subplotid_prop_re = re.compile(
-        '^(' + '|'.join(_subplotid_prop_names) + r')(\d+)$')
+        '^(' + '|'.join(_subplotid_prop_names) + r')(\\d+)$')
 """
         )
 
@@ -323,8 +323,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
 
     buffer.write(
         f"""
-        super({datatype_class}, self).__init__('{node.name_property}')
-
+        super().__init__('{node.name_property}')
         if '_parent' in kwargs:
             self._parent = kwargs['_parent']
             return
@@ -373,10 +372,7 @@ an instance of :class:`{class_name}`\"\"\")
         name_prop = subtype_node.name_property
         buffer.write(
             f"""
-        _v = arg.pop('{name_prop}', None)
-        _v = {name_prop} if {name_prop} is not None else _v
-        if _v is not None:
-            self['{name_prop}'] = _v"""
+        self._init_provided('{name_prop}', arg, {name_prop})"""
         )
 
     # ### Literals ###

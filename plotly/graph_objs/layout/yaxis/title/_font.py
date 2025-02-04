@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -6,19 +8,9 @@ class Font(_BaseLayoutHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "layout.yaxis.title"
-    _path_str = "layout.yaxis.title.font"
-    _valid_props = {
-        "color",
-        "family",
-        "lineposition",
-        "shadow",
-        "size",
-        "style",
-        "textcase",
-        "variant",
-        "weight",
-    }
+    _parent_path_str = 'layout.yaxis.title'
+    _path_str = 'layout.yaxis.title.font'
+    _valid_props = {"color", "family", "lineposition", "shadow", "size", "style", "textcase", "variant", "weight"}
 
     # color
     # -----
@@ -30,52 +22,17 @@ class Font(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # family
     # ------
@@ -83,17 +40,10 @@ class Font(_BaseLayoutHierarchyType):
     def family(self):
         """
         HTML font family - the typeface that will be applied by the web
-        browser. The web browser will only be able to apply a font if
-        it is available on the system which it operates. Provide
-        multiple font families, separated by commas, to indicate the
-        preference in which to apply fonts if they aren't available on
-        the system. The Chart Studio Cloud (at https://chart-
-        studio.plotly.com or on-premise) generates images on a server,
-        where only a select number of fonts are installed and
-        supported. These include "Arial", "Balto", "Courier New",
-        "Droid Sans", "Droid Serif", "Droid Sans Mono", "Gravitas One",
-        "Old Standard TT", "Open Sans", "Overpass", "PT Sans Narrow",
-        "Raleway", "Times New Roman".
+        browser. The web browser can only apply a font if it is
+        available on the system where it runs. Provide multiple font
+        families, separated by commas, to indicate the order in which
+        to apply fonts if they aren't available.
 
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -102,11 +52,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["family"]
+        return self['family']
 
     @family.setter
     def family(self, val):
-        self["family"] = val
+        self['family'] = val
 
     # lineposition
     # ------------
@@ -127,11 +77,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["lineposition"]
+        return self['lineposition']
 
     @lineposition.setter
     def lineposition(self, val):
-        self["lineposition"] = val
+        self['lineposition'] = val
 
     # shadow
     # ------
@@ -151,11 +101,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["shadow"]
+        return self['shadow']
 
     @shadow.setter
     def shadow(self, val):
-        self["shadow"] = val
+        self['shadow'] = val
 
     # size
     # ----
@@ -169,11 +119,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     # style
     # -----
@@ -191,11 +141,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["style"]
+        return self['style']
 
     @style.setter
     def style(self, val):
-        self["style"] = val
+        self['style'] = val
 
     # textcase
     # --------
@@ -214,11 +164,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["textcase"]
+        return self['textcase']
 
     @textcase.setter
     def textcase(self, val):
-        self["textcase"] = val
+        self['textcase'] = val
 
     # variant
     # -------
@@ -236,11 +186,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["variant"]
+        return self['variant']
 
     @variant.setter
     def variant(self, val):
-        self["variant"] = val
+        self['variant'] = val
 
     # weight
     # ------
@@ -258,11 +208,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["weight"]
+        return self['weight']
 
     @weight.setter
     def weight(self, val):
-        self["weight"] = val
+        self['weight'] = val
 
     # Self properties description
     # ---------------------------
@@ -273,18 +223,11 @@ class Font(_BaseLayoutHierarchyType):
 
         family
             HTML font family - the typeface that will be applied by
-            the web browser. The web browser will only be able to
-            apply a font if it is available on the system which it
-            operates. Provide multiple font families, separated by
-            commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The Chart
-            Studio Cloud (at https://chart-studio.plotly.com or on-
-            premise) generates images on a server, where only a
-            select number of fonts are installed and supported.
-            These include "Arial", "Balto", "Courier New", "Droid
-            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
-            One", "Old Standard TT", "Open Sans", "Overpass", "PT
-            Sans Narrow", "Raleway", "Times New Roman".
+            the web browser. The web browser can only apply a font
+            if it is available on the system where it runs. Provide
+            multiple font families, separated by commas, to
+            indicate the order in which to apply fonts if they
+            aren't available.
         lineposition
             Sets the kind of decoration line(s) with text, such as
             an "under", "over" or "through" as well as combinations
@@ -308,21 +251,19 @@ class Font(_BaseLayoutHierarchyType):
         weight
             Sets the weight (or boldness) of the font.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        color=None,
-        family=None,
-        lineposition=None,
-        shadow=None,
-        size=None,
-        style=None,
-        textcase=None,
-        variant=None,
-        weight=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            color=None,
+            family=None,
+            lineposition=None,
+            shadow=None,
+            size=None,
+            style=None,
+            textcase=None,
+            variant=None,
+            weight=None,
+            **kwargs
+        ):
         """
         Construct a new Font object
 
@@ -338,18 +279,11 @@ class Font(_BaseLayoutHierarchyType):
 
         family
             HTML font family - the typeface that will be applied by
-            the web browser. The web browser will only be able to
-            apply a font if it is available on the system which it
-            operates. Provide multiple font families, separated by
-            commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The Chart
-            Studio Cloud (at https://chart-studio.plotly.com or on-
-            premise) generates images on a server, where only a
-            select number of fonts are installed and supported.
-            These include "Arial", "Balto", "Courier New", "Droid
-            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
-            One", "Old Standard TT", "Open Sans", "Overpass", "PT
-            Sans Narrow", "Raleway", "Times New Roman".
+            the web browser. The web browser can only apply a font
+            if it is available on the system where it runs. Provide
+            multiple font families, separated by commas, to
+            indicate the order in which to apply fonts if they
+            aren't available.
         lineposition
             Sets the kind of decoration line(s) with text, such as
             an "under", "over" or "through" as well as combinations
@@ -377,10 +311,9 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Font
         """
-        super(Font, self).__init__("font")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('font')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -392,56 +325,28 @@ class Font(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.yaxis.title.Font
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.yaxis.title.Font`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.yaxis.title.Font`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("family", None)
-        _v = family if family is not None else _v
-        if _v is not None:
-            self["family"] = _v
-        _v = arg.pop("lineposition", None)
-        _v = lineposition if lineposition is not None else _v
-        if _v is not None:
-            self["lineposition"] = _v
-        _v = arg.pop("shadow", None)
-        _v = shadow if shadow is not None else _v
-        if _v is not None:
-            self["shadow"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("style", None)
-        _v = style if style is not None else _v
-        if _v is not None:
-            self["style"] = _v
-        _v = arg.pop("textcase", None)
-        _v = textcase if textcase is not None else _v
-        if _v is not None:
-            self["textcase"] = _v
-        _v = arg.pop("variant", None)
-        _v = variant if variant is not None else _v
-        if _v is not None:
-            self["variant"] = _v
-        _v = arg.pop("weight", None)
-        _v = weight if weight is not None else _v
-        if _v is not None:
-            self["weight"] = _v
+        self._init_provided('color', arg, color)
+        self._init_provided('family', arg, family)
+        self._init_provided('lineposition', arg, lineposition)
+        self._init_provided('shadow', arg, shadow)
+        self._init_provided('size', arg, size)
+        self._init_provided('style', arg, style)
+        self._init_provided('textcase', arg, textcase)
+        self._init_provided('variant', arg, variant)
+        self._init_provided('weight', arg, weight)
 
         # Process unknown kwargs
         # ----------------------

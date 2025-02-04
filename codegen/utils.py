@@ -75,16 +75,12 @@ def build_from_imports_py(rel_modules=(), rel_classes=(), init_extra=""):
 
     result = f"""\
 import sys
-from typing import TYPE_CHECKING
-if sys.version_info < (3, 7) or TYPE_CHECKING:
-    {imports_str}
-else:
-    from _plotly_utils.importers import relative_import
-    __all__, __getattr__, __dir__ = relative_import(
-        __name__,
-        {repr(rel_modules)},
-        {repr(rel_classes)}
-    )
+from _plotly_utils.importers import relative_import
+__all__, __getattr__, __dir__ = relative_import(
+    __name__,
+    {repr(rel_modules)},
+    {repr(rel_classes)}
+)
 
 {init_extra}
 """
@@ -126,14 +122,14 @@ def write_init_py(pkg_root, path_parts, rel_modules=(), rel_classes=(), init_ext
 def format_description(desc):
 
     # Remove surrounding *s from numbers
-    desc = re.sub("(^|[\s(,.:])\*([\d.]+)\*([\s),.:]|$)", r"\1\2\3", desc)
+    desc = re.sub(r"(^|[\s(,.:])\*([\d.]+)\*([\s),.:]|$)", r"\1\2\3", desc)
 
     # replace *true* with True
     desc = desc.replace("*true*", "True")
     desc = desc.replace("*false*", "False")
 
     # Replace *word* with "word"
-    desc = re.sub("(^|[\s(,.:])\*(\S+)\*([\s),.:]|$)", r'\1"\2"\3', desc)
+    desc = re.sub(r"(^|[\s(,.:])\*(\S+)\*([\s),.:]|$)", r'\1"\2"\3', desc)
 
     # Special case strings that don't satisfy regex above
     other_strings = [
@@ -456,9 +452,7 @@ class PlotlyNode:
 
         if self.is_compound:
             params["data_class_str"] = repr(self.name_datatype_class)
-            params["data_docs"] = (
-                '"""' + self.get_constructor_params_docstring() + '\n"""'
-            )
+            params["data_docs"] = '"""\n"""'
         else:
             assert self.is_simple
 

@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,21 +8,9 @@ class Contours(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "contour"
-    _path_str = "contour.contours"
-    _valid_props = {
-        "coloring",
-        "end",
-        "labelfont",
-        "labelformat",
-        "operation",
-        "showlabels",
-        "showlines",
-        "size",
-        "start",
-        "type",
-        "value",
-    }
+    _parent_path_str = 'contour'
+    _path_str = 'contour.contours'
+    _valid_props = {"coloring", "end", "labelfont", "labelformat", "operation", "showlabels", "showlines", "size", "start", "type", "value"}
 
     # coloring
     # --------
@@ -41,11 +31,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["coloring"]
+        return self['coloring']
 
     @coloring.setter
     def coloring(self, val):
-        self["coloring"] = val
+        self['coloring'] = val
 
     # end
     # ---
@@ -62,11 +52,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["end"]
+        return self['end']
 
     @end.setter
     def end(self, val):
-        self["end"] = val
+        self['end'] = val
 
     # labelfont
     # ---------
@@ -83,61 +73,15 @@ class Contours(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Labelfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.contour.contours.Labelfont
         """
-        return self["labelfont"]
+        return self['labelfont']
 
     @labelfont.setter
     def labelfont(self, val):
-        self["labelfont"] = val
+        self['labelfont'] = val
 
     # labelformat
     # -----------
@@ -157,11 +101,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["labelformat"]
+        return self['labelformat']
 
     @labelformat.setter
     def labelformat(self, val):
-        self["labelformat"] = val
+        self['labelformat'] = val
 
     # operation
     # ---------
@@ -186,11 +130,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["operation"]
+        return self['operation']
 
     @operation.setter
     def operation(self, val):
-        self["operation"] = val
+        self['operation'] = val
 
     # showlabels
     # ----------
@@ -207,11 +151,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["showlabels"]
+        return self['showlabels']
 
     @showlabels.setter
     def showlabels(self, val):
-        self["showlabels"] = val
+        self['showlabels'] = val
 
     # showlines
     # ---------
@@ -228,11 +172,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["showlines"]
+        return self['showlines']
 
     @showlines.setter
     def showlines(self, val):
-        self["showlines"] = val
+        self['showlines'] = val
 
     # size
     # ----
@@ -248,11 +192,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     # start
     # -----
@@ -269,11 +213,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["start"]
+        return self['start']
 
     @start.setter
     def start(self, val):
-        self["start"] = val
+        self['start'] = val
 
     # type
     # ----
@@ -293,11 +237,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     # value
     # -----
@@ -318,11 +262,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["value"]
+        return self['value']
 
     @value.setter
     def value(self, val):
-        self["value"] = val
+        self['value'] = val
 
     # Self properties description
     # ---------------------------
@@ -385,23 +329,21 @@ class Contours(_BaseTraceHierarchyType):
             array of two numbers where the first is the lower bound
             and the second is the upper bound.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        coloring=None,
-        end=None,
-        labelfont=None,
-        labelformat=None,
-        operation=None,
-        showlabels=None,
-        showlines=None,
-        size=None,
-        start=None,
-        type=None,
-        value=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            coloring=None,
+            end=None,
+            labelfont=None,
+            labelformat=None,
+            operation=None,
+            showlabels=None,
+            showlines=None,
+            size=None,
+            start=None,
+            type=None,
+            value=None,
+            **kwargs
+        ):
         """
         Construct a new Contours object
 
@@ -471,10 +413,9 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Contours
         """
-        super(Contours, self).__init__("contours")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('contours')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -486,64 +427,30 @@ class Contours(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.contour.Contours
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.contour.Contours`"""
-            )
+an instance of :class:`plotly.graph_objs.contour.Contours`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("coloring", None)
-        _v = coloring if coloring is not None else _v
-        if _v is not None:
-            self["coloring"] = _v
-        _v = arg.pop("end", None)
-        _v = end if end is not None else _v
-        if _v is not None:
-            self["end"] = _v
-        _v = arg.pop("labelfont", None)
-        _v = labelfont if labelfont is not None else _v
-        if _v is not None:
-            self["labelfont"] = _v
-        _v = arg.pop("labelformat", None)
-        _v = labelformat if labelformat is not None else _v
-        if _v is not None:
-            self["labelformat"] = _v
-        _v = arg.pop("operation", None)
-        _v = operation if operation is not None else _v
-        if _v is not None:
-            self["operation"] = _v
-        _v = arg.pop("showlabels", None)
-        _v = showlabels if showlabels is not None else _v
-        if _v is not None:
-            self["showlabels"] = _v
-        _v = arg.pop("showlines", None)
-        _v = showlines if showlines is not None else _v
-        if _v is not None:
-            self["showlines"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("start", None)
-        _v = start if start is not None else _v
-        if _v is not None:
-            self["start"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
+        self._init_provided('coloring', arg, coloring)
+        self._init_provided('end', arg, end)
+        self._init_provided('labelfont', arg, labelfont)
+        self._init_provided('labelformat', arg, labelformat)
+        self._init_provided('operation', arg, operation)
+        self._init_provided('showlabels', arg, showlabels)
+        self._init_provided('showlines', arg, showlines)
+        self._init_provided('size', arg, size)
+        self._init_provided('start', arg, start)
+        self._init_provided('type', arg, type)
+        self._init_provided('value', arg, value)
 
         # Process unknown kwargs
         # ----------------------

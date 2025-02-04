@@ -176,13 +176,15 @@ class NPM(Command):
 
 class CodegenCommand(Command):
     description = "Generate class hierarchy from Plotly JSON schema"
-    user_options = []
+    user_options = [
+        ("reformat=", None, "reformat "),
+    ]
 
     def initialize_options(self):
-        pass
+        self.reformat = "true"
 
     def finalize_options(self):
-        pass
+        self.reformat = self.reformat.lower() in {"true", "t", "yes", "y", "1"}
 
     def run(self):
         if sys.version_info < (3, 8):
@@ -190,7 +192,7 @@ class CodegenCommand(Command):
 
         from codegen import perform_codegen
 
-        perform_codegen()
+        perform_codegen(self.reformat)
 
 
 def overwrite_schema_local(uri):

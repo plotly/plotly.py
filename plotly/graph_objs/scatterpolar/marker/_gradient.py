@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Gradient(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "scatterpolar.marker"
-    _path_str = "scatterpolar.marker.gradient"
+    _parent_path_str = 'scatterpolar.marker'
+    _path_str = 'scatterpolar.marker.gradient'
     _valid_props = {"color", "colorsrc", "type", "typesrc"}
 
     # color
@@ -23,53 +25,18 @@ class Gradient(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # colorsrc
     # --------
@@ -85,11 +52,11 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["colorsrc"]
+        return self['colorsrc']
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self["colorsrc"] = val
+        self['colorsrc'] = val
 
     # type
     # ----
@@ -107,11 +74,11 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     # typesrc
     # -------
@@ -127,11 +94,11 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["typesrc"]
+        return self['typesrc']
 
     @typesrc.setter
     def typesrc(self, val):
-        self["typesrc"] = val
+        self['typesrc'] = val
 
     # Self properties description
     # ---------------------------
@@ -151,10 +118,14 @@ class Gradient(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `type`.
         """
-
-    def __init__(
-        self, arg=None, color=None, colorsrc=None, type=None, typesrc=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            color=None,
+            colorsrc=None,
+            type=None,
+            typesrc=None,
+            **kwargs
+        ):
         """
         Construct a new Gradient object
 
@@ -181,10 +152,9 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         Gradient
         """
-        super(Gradient, self).__init__("gradient")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('gradient')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -196,36 +166,23 @@ class Gradient(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatterpolar.marker.Gradient
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterpolar.marker.Gradient`"""
-            )
+an instance of :class:`plotly.graph_objs.scatterpolar.marker.Gradient`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("colorsrc", None)
-        _v = colorsrc if colorsrc is not None else _v
-        if _v is not None:
-            self["colorsrc"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-        _v = arg.pop("typesrc", None)
-        _v = typesrc if typesrc is not None else _v
-        if _v is not None:
-            self["typesrc"] = _v
+        self._init_provided('color', arg, color)
+        self._init_provided('colorsrc', arg, colorsrc)
+        self._init_provided('type', arg, type)
+        self._init_provided('typesrc', arg, typesrc)
 
         # Process unknown kwargs
         # ----------------------

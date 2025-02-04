@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,8 +8,8 @@ class Connector(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "waterfall"
-    _path_str = "waterfall.connector"
+    _parent_path_str = 'waterfall'
+    _path_str = 'waterfall.connector'
     _valid_props = {"line", "mode", "visible"}
 
     # line
@@ -21,27 +23,15 @@ class Connector(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Line constructor
 
-            Supported dict properties:
-
-                color
-                    Sets the line color.
-                dash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                width
-                    Sets the line width (in px).
-
         Returns
         -------
         plotly.graph_objs.waterfall.connector.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     # mode
     # ----
@@ -58,11 +48,11 @@ class Connector(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["mode"]
+        return self['mode']
 
     @mode.setter
     def mode(self, val):
-        self["mode"] = val
+        self['mode'] = val
 
     # visible
     # -------
@@ -78,11 +68,11 @@ class Connector(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # Self properties description
     # ---------------------------
@@ -97,8 +87,13 @@ class Connector(_BaseTraceHierarchyType):
         visible
             Determines if connector lines are drawn.
         """
-
-    def __init__(self, arg=None, line=None, mode=None, visible=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            line=None,
+            mode=None,
+            visible=None,
+            **kwargs
+        ):
         """
         Construct a new Connector object
 
@@ -120,10 +115,9 @@ class Connector(_BaseTraceHierarchyType):
         -------
         Connector
         """
-        super(Connector, self).__init__("connector")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('connector')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -135,32 +129,22 @@ class Connector(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.waterfall.Connector
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.waterfall.Connector`"""
-            )
+an instance of :class:`plotly.graph_objs.waterfall.Connector`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("mode", None)
-        _v = mode if mode is not None else _v
-        if _v is not None:
-            self["mode"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
+        self._init_provided('line', arg, line)
+        self._init_provided('mode', arg, mode)
+        self._init_provided('visible', arg, visible)
 
         # Process unknown kwargs
         # ----------------------

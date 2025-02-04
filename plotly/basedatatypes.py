@@ -385,6 +385,18 @@ def _generator(i):
         yield x
 
 
+def _initialize_provided(obj, name, arg, provided):
+    """
+    Initialize a property of this object using the provided value
+    or a value popped from the arguments dictionary. If neither
+    is available, do not set the property.
+    """
+    val = arg.pop(name, None)
+    val = provided if provided is not None else val
+    if val is not None:
+        obj[name] = val
+
+
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
@@ -833,6 +845,14 @@ class BaseFigure(object):
             pio.show(self)
         else:
             print(repr(self))
+
+    def _init_provided(self, name, arg, provided):
+        """
+        Initialize a property of this object using the provided value
+        or a value popped from the arguments dictionary. If neither
+        is available, do not set the property.
+        """
+        _initialize_provided(self, name, arg, provided)
 
     def update(self, dict1=None, overwrite=False, **kwargs):
         """
@@ -4328,6 +4348,14 @@ class BasePlotlyType(object):
         from .validator_cache import ValidatorCache
 
         return ValidatorCache.get_validator(self._path_str, prop)
+
+    def _init_provided(self, name, arg, provided):
+        """
+        Initialize a property of this object using the provided value
+        or a value popped from the arguments dictionary. If neither
+        is available, do not set the property.
+        """
+        _initialize_provided(self, name, arg, provided)
 
     @property
     def _validators(self):

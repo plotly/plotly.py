@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,19 +8,9 @@ class Delta(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "indicator"
-    _path_str = "indicator.delta"
-    _valid_props = {
-        "decreasing",
-        "font",
-        "increasing",
-        "position",
-        "prefix",
-        "reference",
-        "relative",
-        "suffix",
-        "valueformat",
-    }
+    _parent_path_str = 'indicator'
+    _path_str = 'indicator.delta'
+    _valid_props = {"decreasing", "font", "increasing", "position", "prefix", "reference", "relative", "suffix", "valueformat"}
 
     # decreasing
     # ----------
@@ -31,22 +23,15 @@ class Delta(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
 
-            Supported dict properties:
-
-                color
-                    Sets the color for increasing value.
-                symbol
-                    Sets the symbol to display for increasing value
-
         Returns
         -------
         plotly.graph_objs.indicator.delta.Decreasing
         """
-        return self["decreasing"]
+        return self['decreasing']
 
     @decreasing.setter
     def decreasing(self, val):
-        self["decreasing"] = val
+        self['decreasing'] = val
 
     # font
     # ----
@@ -61,61 +46,15 @@ class Delta(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Font constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.indicator.delta.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     # increasing
     # ----------
@@ -128,22 +67,15 @@ class Delta(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Increasing constructor
 
-            Supported dict properties:
-
-                color
-                    Sets the color for increasing value.
-                symbol
-                    Sets the symbol to display for increasing value
-
         Returns
         -------
         plotly.graph_objs.indicator.delta.Increasing
         """
-        return self["increasing"]
+        return self['increasing']
 
     @increasing.setter
     def increasing(self, val):
-        self["increasing"] = val
+        self['increasing'] = val
 
     # position
     # --------
@@ -160,11 +92,11 @@ class Delta(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["position"]
+        return self['position']
 
     @position.setter
     def position(self, val):
-        self["position"] = val
+        self['position'] = val
 
     # prefix
     # ------
@@ -181,11 +113,11 @@ class Delta(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["prefix"]
+        return self['prefix']
 
     @prefix.setter
     def prefix(self, val):
-        self["prefix"] = val
+        self['prefix'] = val
 
     # reference
     # ---------
@@ -202,11 +134,11 @@ class Delta(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["reference"]
+        return self['reference']
 
     @reference.setter
     def reference(self, val):
-        self["reference"] = val
+        self['reference'] = val
 
     # relative
     # --------
@@ -222,11 +154,11 @@ class Delta(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["relative"]
+        return self['relative']
 
     @relative.setter
     def relative(self, val):
-        self["relative"] = val
+        self['relative'] = val
 
     # suffix
     # ------
@@ -243,11 +175,11 @@ class Delta(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["suffix"]
+        return self['suffix']
 
     @suffix.setter
     def suffix(self, val):
-        self["suffix"] = val
+        self['suffix'] = val
 
     # valueformat
     # -----------
@@ -267,11 +199,11 @@ class Delta(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["valueformat"]
+        return self['valueformat']
 
     @valueformat.setter
     def valueformat(self, val):
-        self["valueformat"] = val
+        self['valueformat'] = val
 
     # Self properties description
     # ---------------------------
@@ -303,21 +235,19 @@ class Delta(_BaseTraceHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        decreasing=None,
-        font=None,
-        increasing=None,
-        position=None,
-        prefix=None,
-        reference=None,
-        relative=None,
-        suffix=None,
-        valueformat=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            decreasing=None,
+            font=None,
+            increasing=None,
+            position=None,
+            prefix=None,
+            reference=None,
+            relative=None,
+            suffix=None,
+            valueformat=None,
+            **kwargs
+        ):
         """
         Construct a new Delta object
 
@@ -356,10 +286,9 @@ class Delta(_BaseTraceHierarchyType):
         -------
         Delta
         """
-        super(Delta, self).__init__("delta")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('delta')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -371,56 +300,28 @@ class Delta(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.Delta
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Delta`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.Delta`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("decreasing", None)
-        _v = decreasing if decreasing is not None else _v
-        if _v is not None:
-            self["decreasing"] = _v
-        _v = arg.pop("font", None)
-        _v = font if font is not None else _v
-        if _v is not None:
-            self["font"] = _v
-        _v = arg.pop("increasing", None)
-        _v = increasing if increasing is not None else _v
-        if _v is not None:
-            self["increasing"] = _v
-        _v = arg.pop("position", None)
-        _v = position if position is not None else _v
-        if _v is not None:
-            self["position"] = _v
-        _v = arg.pop("prefix", None)
-        _v = prefix if prefix is not None else _v
-        if _v is not None:
-            self["prefix"] = _v
-        _v = arg.pop("reference", None)
-        _v = reference if reference is not None else _v
-        if _v is not None:
-            self["reference"] = _v
-        _v = arg.pop("relative", None)
-        _v = relative if relative is not None else _v
-        if _v is not None:
-            self["relative"] = _v
-        _v = arg.pop("suffix", None)
-        _v = suffix if suffix is not None else _v
-        if _v is not None:
-            self["suffix"] = _v
-        _v = arg.pop("valueformat", None)
-        _v = valueformat if valueformat is not None else _v
-        if _v is not None:
-            self["valueformat"] = _v
+        self._init_provided('decreasing', arg, decreasing)
+        self._init_provided('font', arg, font)
+        self._init_provided('increasing', arg, increasing)
+        self._init_provided('position', arg, position)
+        self._init_provided('prefix', arg, prefix)
+        self._init_provided('reference', arg, reference)
+        self._init_provided('relative', arg, relative)
+        self._init_provided('suffix', arg, suffix)
+        self._init_provided('valueformat', arg, valueformat)
 
         # Process unknown kwargs
         # ----------------------

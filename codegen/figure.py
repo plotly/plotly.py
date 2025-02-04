@@ -108,9 +108,7 @@ class {fig_classname}({base_classname}):\n"""
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         \"\"\"
-        super({fig_classname} ,self).__init__(data, layout,
-                                              frames, skip_invalid,
-                                              **kwargs)
+        super().__init__(data, layout, frames, skip_invalid, **kwargs)
     """
     )
 
@@ -121,7 +119,7 @@ class {fig_classname}({base_classname}):\n"""
         '''
         {getattr(BaseFigure, wrapped_name).__doc__}
         '''
-        return super({fig_classname}, self).{wrapped_name}({param_list})
+        return super().{wrapped_name}({param_list})
     """
         )
 

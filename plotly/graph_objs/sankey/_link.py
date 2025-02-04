@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -6,32 +8,9 @@ class Link(_BaseTraceHierarchyType):
 
     # class properties
     # --------------------
-    _parent_path_str = "sankey"
-    _path_str = "sankey.link"
-    _valid_props = {
-        "arrowlen",
-        "color",
-        "colorscaledefaults",
-        "colorscales",
-        "colorsrc",
-        "customdata",
-        "customdatasrc",
-        "hovercolor",
-        "hovercolorsrc",
-        "hoverinfo",
-        "hoverlabel",
-        "hovertemplate",
-        "hovertemplatesrc",
-        "label",
-        "labelsrc",
-        "line",
-        "source",
-        "sourcesrc",
-        "target",
-        "targetsrc",
-        "value",
-        "valuesrc",
-    }
+    _parent_path_str = 'sankey'
+    _path_str = 'sankey.link'
+    _valid_props = {"arrowlen", "color", "colorscaledefaults", "colorscales", "colorsrc", "customdata", "customdatasrc", "hovercolor", "hovercolorsrc", "hoverinfo", "hoverlabel", "hovertemplate", "hovertemplatesrc", "label", "labelsrc", "line", "source", "sourcesrc", "target", "targetsrc", "value", "valuesrc"}
 
     # arrowlen
     # --------
@@ -48,11 +27,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["arrowlen"]
+        return self['arrowlen']
 
     @arrowlen.setter
     def arrowlen(self, val):
-        self["arrowlen"] = val
+        self['arrowlen'] = val
 
     # color
     # -----
@@ -68,53 +47,18 @@ class Link(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     # colorscales
     # -----------
@@ -127,60 +71,15 @@ class Link(_BaseTraceHierarchyType):
           - A list or tuple of dicts of string/value properties that
             will be passed to the Colorscale constructor
 
-            Supported dict properties:
-
-                cmax
-                    Sets the upper bound of the color domain.
-                cmin
-                    Sets the lower bound of the color domain.
-                colorscale
-                    Sets the colorscale. The colorscale must be an
-                    array containing arrays mapping a normalized
-                    value to an rgb, rgba, hex, hsl, hsv, or named
-                    color string. At minimum, a mapping for the
-                    lowest (0) and highest (1) values are required.
-                    For example, `[[0, 'rgb(0,0,255)'], [1,
-                    'rgb(255,0,0)']]`. To control the bounds of the
-                    colorscale in color space, use `cmin` and
-                    `cmax`. Alternatively, `colorscale` may be a
-                    palette name string of the following list: Blac
-                    kbody,Bluered,Blues,Cividis,Earth,Electric,Gree
-                    ns,Greys,Hot,Jet,Picnic,Portland,Rainbow,RdBu,R
-                    eds,Viridis,YlGnBu,YlOrRd.
-                label
-                    The label of the links to color based on their
-                    concentration within a flow.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-
         Returns
         -------
         tuple[plotly.graph_objs.sankey.link.Colorscale]
         """
-        return self["colorscales"]
+        return self['colorscales']
 
     @colorscales.setter
     def colorscales(self, val):
-        self["colorscales"] = val
+        self['colorscales'] = val
 
     # colorscaledefaults
     # ------------------
@@ -198,17 +97,15 @@ class Link(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Colorscale constructor
 
-            Supported dict properties:
-
         Returns
         -------
         plotly.graph_objs.sankey.link.Colorscale
         """
-        return self["colorscaledefaults"]
+        return self['colorscaledefaults']
 
     @colorscaledefaults.setter
     def colorscaledefaults(self, val):
-        self["colorscaledefaults"] = val
+        self['colorscaledefaults'] = val
 
     # colorsrc
     # --------
@@ -224,11 +121,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["colorsrc"]
+        return self['colorsrc']
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self["colorsrc"] = val
+        self['colorsrc'] = val
 
     # customdata
     # ----------
@@ -244,11 +141,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     # customdatasrc
     # -------------
@@ -265,11 +162,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     # hovercolor
     # ----------
@@ -286,53 +183,18 @@ class Link(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self["hovercolor"]
+        return self['hovercolor']
 
     @hovercolor.setter
     def hovercolor(self, val):
-        self["hovercolor"] = val
+        self['hovercolor'] = val
 
     # hovercolorsrc
     # -------------
@@ -349,11 +211,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["hovercolorsrc"]
+        return self['hovercolorsrc']
 
     @hovercolorsrc.setter
     def hovercolorsrc(self, val):
-        self["hovercolorsrc"] = val
+        self['hovercolorsrc'] = val
 
     # hoverinfo
     # ---------
@@ -373,11 +235,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     # hoverlabel
     # ----------
@@ -390,53 +252,15 @@ class Link(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
 
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
-
         Returns
         -------
         plotly.graph_objs.sankey.link.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     # hovertemplate
     # -------------
@@ -478,11 +302,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertemplate"]
+        return self['hovertemplate']
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self["hovertemplate"] = val
+        self['hovertemplate'] = val
 
     # hovertemplatesrc
     # ----------------
@@ -499,11 +323,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["hovertemplatesrc"]
+        return self['hovertemplatesrc']
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+        self['hovertemplatesrc'] = val
 
     # label
     # -----
@@ -519,11 +343,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["label"]
+        return self['label']
 
     @label.setter
     def label(self, val):
-        self["label"] = val
+        self['label'] = val
 
     # labelsrc
     # --------
@@ -539,11 +363,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["labelsrc"]
+        return self['labelsrc']
 
     @labelsrc.setter
     def labelsrc(self, val):
-        self["labelsrc"] = val
+        self['labelsrc'] = val
 
     # line
     # ----
@@ -556,30 +380,15 @@ class Link(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Line constructor
 
-            Supported dict properties:
-
-                color
-                    Sets the color of the `line` around each
-                    `link`.
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                width
-                    Sets the width (in px) of the `line` around
-                    each `link`.
-                widthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `width`.
-
         Returns
         -------
         plotly.graph_objs.sankey.link.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     # source
     # ------
@@ -596,11 +405,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["source"]
+        return self['source']
 
     @source.setter
     def source(self, val):
-        self["source"] = val
+        self['source'] = val
 
     # sourcesrc
     # ---------
@@ -616,11 +425,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["sourcesrc"]
+        return self['sourcesrc']
 
     @sourcesrc.setter
     def sourcesrc(self, val):
-        self["sourcesrc"] = val
+        self['sourcesrc'] = val
 
     # target
     # ------
@@ -637,11 +446,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["target"]
+        return self['target']
 
     @target.setter
     def target(self, val):
-        self["target"] = val
+        self['target'] = val
 
     # targetsrc
     # ---------
@@ -657,11 +466,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["targetsrc"]
+        return self['targetsrc']
 
     @targetsrc.setter
     def targetsrc(self, val):
-        self["targetsrc"] = val
+        self['targetsrc'] = val
 
     # value
     # -----
@@ -677,11 +486,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["value"]
+        return self['value']
 
     @value.setter
     def value(self, val):
-        self["value"] = val
+        self['value'] = val
 
     # valuesrc
     # --------
@@ -697,11 +506,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["valuesrc"]
+        return self['valuesrc']
 
     @valuesrc.setter
     def valuesrc(self, val):
-        self["valuesrc"] = val
+        self['valuesrc'] = val
 
     # Self properties description
     # ---------------------------
@@ -810,34 +619,32 @@ class Link(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `value`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        arrowlen=None,
-        color=None,
-        colorscales=None,
-        colorscaledefaults=None,
-        colorsrc=None,
-        customdata=None,
-        customdatasrc=None,
-        hovercolor=None,
-        hovercolorsrc=None,
-        hoverinfo=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        label=None,
-        labelsrc=None,
-        line=None,
-        source=None,
-        sourcesrc=None,
-        target=None,
-        targetsrc=None,
-        value=None,
-        valuesrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            arrowlen=None,
+            color=None,
+            colorscales=None,
+            colorscaledefaults=None,
+            colorsrc=None,
+            customdata=None,
+            customdatasrc=None,
+            hovercolor=None,
+            hovercolorsrc=None,
+            hoverinfo=None,
+            hoverlabel=None,
+            hovertemplate=None,
+            hovertemplatesrc=None,
+            label=None,
+            labelsrc=None,
+            line=None,
+            source=None,
+            sourcesrc=None,
+            target=None,
+            targetsrc=None,
+            value=None,
+            valuesrc=None,
+            **kwargs
+        ):
         """
         Construct a new Link object
 
@@ -954,10 +761,9 @@ class Link(_BaseTraceHierarchyType):
         -------
         Link
         """
-        super(Link, self).__init__("link")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('link')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -969,108 +775,41 @@ class Link(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.sankey.Link
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.sankey.Link`"""
-            )
+an instance of :class:`plotly.graph_objs.sankey.Link`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("arrowlen", None)
-        _v = arrowlen if arrowlen is not None else _v
-        if _v is not None:
-            self["arrowlen"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("colorscales", None)
-        _v = colorscales if colorscales is not None else _v
-        if _v is not None:
-            self["colorscales"] = _v
-        _v = arg.pop("colorscaledefaults", None)
-        _v = colorscaledefaults if colorscaledefaults is not None else _v
-        if _v is not None:
-            self["colorscaledefaults"] = _v
-        _v = arg.pop("colorsrc", None)
-        _v = colorsrc if colorsrc is not None else _v
-        if _v is not None:
-            self["colorsrc"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("hovercolor", None)
-        _v = hovercolor if hovercolor is not None else _v
-        if _v is not None:
-            self["hovercolor"] = _v
-        _v = arg.pop("hovercolorsrc", None)
-        _v = hovercolorsrc if hovercolorsrc is not None else _v
-        if _v is not None:
-            self["hovercolorsrc"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("label", None)
-        _v = label if label is not None else _v
-        if _v is not None:
-            self["label"] = _v
-        _v = arg.pop("labelsrc", None)
-        _v = labelsrc if labelsrc is not None else _v
-        if _v is not None:
-            self["labelsrc"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("source", None)
-        _v = source if source is not None else _v
-        if _v is not None:
-            self["source"] = _v
-        _v = arg.pop("sourcesrc", None)
-        _v = sourcesrc if sourcesrc is not None else _v
-        if _v is not None:
-            self["sourcesrc"] = _v
-        _v = arg.pop("target", None)
-        _v = target if target is not None else _v
-        if _v is not None:
-            self["target"] = _v
-        _v = arg.pop("targetsrc", None)
-        _v = targetsrc if targetsrc is not None else _v
-        if _v is not None:
-            self["targetsrc"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
-        _v = arg.pop("valuesrc", None)
-        _v = valuesrc if valuesrc is not None else _v
-        if _v is not None:
-            self["valuesrc"] = _v
+        self._init_provided('arrowlen', arg, arrowlen)
+        self._init_provided('color', arg, color)
+        self._init_provided('colorscales', arg, colorscales)
+        self._init_provided('colorscaledefaults', arg, colorscaledefaults)
+        self._init_provided('colorsrc', arg, colorsrc)
+        self._init_provided('customdata', arg, customdata)
+        self._init_provided('customdatasrc', arg, customdatasrc)
+        self._init_provided('hovercolor', arg, hovercolor)
+        self._init_provided('hovercolorsrc', arg, hovercolorsrc)
+        self._init_provided('hoverinfo', arg, hoverinfo)
+        self._init_provided('hoverlabel', arg, hoverlabel)
+        self._init_provided('hovertemplate', arg, hovertemplate)
+        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
+        self._init_provided('label', arg, label)
+        self._init_provided('labelsrc', arg, labelsrc)
+        self._init_provided('line', arg, line)
+        self._init_provided('source', arg, source)
+        self._init_provided('sourcesrc', arg, sourcesrc)
+        self._init_provided('target', arg, target)
+        self._init_provided('targetsrc', arg, targetsrc)
+        self._init_provided('value', arg, value)
+        self._init_provided('valuesrc', arg, valuesrc)
 
         # Process unknown kwargs
         # ----------------------

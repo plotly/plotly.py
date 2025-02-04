@@ -1,11 +1,13 @@
-import _plotly_utils.basevalidators
 
 
-class HighValidator(_plotly_utils.basevalidators.DataArrayValidator):
-    def __init__(self, plotly_name="high", parent_name="ohlc", **kwargs):
-        super(HighValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            **kwargs,
-        )
+import _plotly_utils.basevalidators as _bv
+
+
+class HighValidator(_bv.DataArrayValidator):
+    def __init__(self, plotly_name='high',
+                       parent_name='ohlc',
+                       **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name,
+                 edit_type=kwargs.pop('edit_type', 'calc'),
+        **kwargs)

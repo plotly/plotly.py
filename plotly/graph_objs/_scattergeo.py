@@ -1,3 +1,5 @@
+
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -6,62 +8,9 @@ class Scattergeo(_BaseTraceType):
 
     # class properties
     # --------------------
-    _parent_path_str = ""
-    _path_str = "scattergeo"
-    _valid_props = {
-        "connectgaps",
-        "customdata",
-        "customdatasrc",
-        "featureidkey",
-        "fill",
-        "fillcolor",
-        "geo",
-        "geojson",
-        "hoverinfo",
-        "hoverinfosrc",
-        "hoverlabel",
-        "hovertemplate",
-        "hovertemplatesrc",
-        "hovertext",
-        "hovertextsrc",
-        "ids",
-        "idssrc",
-        "lat",
-        "latsrc",
-        "legend",
-        "legendgroup",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "line",
-        "locationmode",
-        "locations",
-        "locationssrc",
-        "lon",
-        "lonsrc",
-        "marker",
-        "meta",
-        "metasrc",
-        "mode",
-        "name",
-        "opacity",
-        "selected",
-        "selectedpoints",
-        "showlegend",
-        "stream",
-        "text",
-        "textfont",
-        "textposition",
-        "textpositionsrc",
-        "textsrc",
-        "texttemplate",
-        "texttemplatesrc",
-        "type",
-        "uid",
-        "uirevision",
-        "unselected",
-        "visible",
-    }
+    _parent_path_str = ''
+    _path_str = 'scattergeo'
+    _valid_props = {"connectgaps", "customdata", "customdatasrc", "featureidkey", "fill", "fillcolor", "geo", "geojson", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "lat", "latsrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "locationmode", "locations", "locationssrc", "lon", "lonsrc", "marker", "meta", "metasrc", "mode", "name", "opacity", "selected", "selectedpoints", "showlegend", "stream", "text", "textfont", "textposition", "textpositionsrc", "textsrc", "texttemplate", "texttemplatesrc", "type", "uid", "uirevision", "unselected", "visible"}
 
     # connectgaps
     # -----------
@@ -78,11 +27,11 @@ class Scattergeo(_BaseTraceType):
         -------
         bool
         """
-        return self["connectgaps"]
+        return self['connectgaps']
 
     @connectgaps.setter
     def connectgaps(self, val):
-        self["connectgaps"] = val
+        self['connectgaps'] = val
 
     # customdata
     # ----------
@@ -101,11 +50,11 @@ class Scattergeo(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     # customdatasrc
     # -------------
@@ -122,11 +71,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     # featureidkey
     # ------------
@@ -146,11 +95,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["featureidkey"]
+        return self['featureidkey']
 
     @featureidkey.setter
     def featureidkey(self, val):
-        self["featureidkey"] = val
+        self['featureidkey'] = val
 
     # fill
     # ----
@@ -169,11 +118,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     # fillcolor
     # ---------
@@ -189,52 +138,17 @@ class Scattergeo(_BaseTraceType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
         str
         """
-        return self["fillcolor"]
+        return self['fillcolor']
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self["fillcolor"] = val
+        self['fillcolor'] = val
 
     # geo
     # ---
@@ -255,11 +169,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["geo"]
+        return self['geo']
 
     @geo.setter
     def geo(self, val):
-        self["geo"] = val
+        self['geo'] = val
 
     # geojson
     # -------
@@ -279,11 +193,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any
         """
-        return self["geojson"]
+        return self['geojson']
 
     @geojson.setter
     def geojson(self, val):
-        self["geojson"] = val
+        self['geojson'] = val
 
     # hoverinfo
     # ---------
@@ -305,11 +219,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     # hoverinfosrc
     # ------------
@@ -326,11 +240,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["hoverinfosrc"]
+        return self['hoverinfosrc']
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
+        self['hoverinfosrc'] = val
 
     # hoverlabel
     # ----------
@@ -343,53 +257,15 @@ class Scattergeo(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
 
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
-
         Returns
         -------
         plotly.graph_objs.scattergeo.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     # hovertemplate
     # -------------
@@ -429,11 +305,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertemplate"]
+        return self['hovertemplate']
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self["hovertemplate"] = val
+        self['hovertemplate'] = val
 
     # hovertemplatesrc
     # ----------------
@@ -450,11 +326,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["hovertemplatesrc"]
+        return self['hovertemplatesrc']
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+        self['hovertemplatesrc'] = val
 
     # hovertext
     # ---------
@@ -477,11 +353,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertext"]
+        return self['hovertext']
 
     @hovertext.setter
     def hovertext(self, val):
-        self["hovertext"] = val
+        self['hovertext'] = val
 
     # hovertextsrc
     # ------------
@@ -498,11 +374,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["hovertextsrc"]
+        return self['hovertextsrc']
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
+        self['hovertextsrc'] = val
 
     # ids
     # ---
@@ -520,11 +396,11 @@ class Scattergeo(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     # idssrc
     # ------
@@ -540,11 +416,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     # lat
     # ---
@@ -560,11 +436,11 @@ class Scattergeo(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["lat"]
+        return self['lat']
 
     @lat.setter
     def lat(self, val):
-        self["lat"] = val
+        self['lat'] = val
 
     # latsrc
     # ------
@@ -580,11 +456,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["latsrc"]
+        return self['latsrc']
 
     @latsrc.setter
     def latsrc(self, val):
-        self["latsrc"] = val
+        self['latsrc'] = val
 
     # legend
     # ------
@@ -605,11 +481,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     # legendgroup
     # -----------
@@ -628,11 +504,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["legendgroup"]
+        return self['legendgroup']
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self["legendgroup"] = val
+        self['legendgroup'] = val
 
     # legendgrouptitle
     # ----------------
@@ -645,22 +521,15 @@ class Scattergeo(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
 
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
-
         Returns
         -------
         plotly.graph_objs.scattergeo.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     # legendrank
     # ----------
@@ -683,11 +552,11 @@ class Scattergeo(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     # legendwidth
     # -----------
@@ -704,11 +573,11 @@ class Scattergeo(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     # line
     # ----
@@ -721,27 +590,15 @@ class Scattergeo(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Line constructor
 
-            Supported dict properties:
-
-                color
-                    Sets the line color.
-                dash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                width
-                    Sets the line width (in px).
-
         Returns
         -------
         plotly.graph_objs.scattergeo.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     # locationmode
     # ------------
@@ -762,11 +619,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any
         """
-        return self["locationmode"]
+        return self['locationmode']
 
     @locationmode.setter
     def locationmode(self, val):
-        self["locationmode"] = val
+        self['locationmode'] = val
 
     # locations
     # ---------
@@ -784,11 +641,11 @@ class Scattergeo(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["locations"]
+        return self['locations']
 
     @locations.setter
     def locations(self, val):
-        self["locations"] = val
+        self['locations'] = val
 
     # locationssrc
     # ------------
@@ -805,11 +662,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["locationssrc"]
+        return self['locationssrc']
 
     @locationssrc.setter
     def locationssrc(self, val):
-        self["locationssrc"] = val
+        self['locationssrc'] = val
 
     # lon
     # ---
@@ -825,11 +682,11 @@ class Scattergeo(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["lon"]
+        return self['lon']
 
     @lon.setter
     def lon(self, val):
-        self["lon"] = val
+        self['lon'] = val
 
     # lonsrc
     # ------
@@ -845,11 +702,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["lonsrc"]
+        return self['lonsrc']
 
     @lonsrc.setter
     def lonsrc(self, val):
-        self["lonsrc"] = val
+        self['lonsrc'] = val
 
     # marker
     # ------
@@ -862,167 +719,15 @@ class Scattergeo(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Marker constructor
 
-            Supported dict properties:
-
-                angle
-                    Sets the marker angle in respect to `angleref`.
-                angleref
-                    Sets the reference for marker angle. With
-                    "previous", angle 0 points along the line from
-                    the previous point to this one. With "up",
-                    angle 0 points toward the top of the screen.
-                    With "north", angle 0 points north based on the
-                    current map projection.
-                anglesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `angle`.
-                autocolorscale
-                    Determines whether the colorscale is a default
-                    palette (`autocolorscale: true`) or the palette
-                    determined by `marker.colorscale`. Has an
-                    effect only if in `marker.color` is set to a
-                    numerical array. In case `colorscale` is
-                    unspecified or `autocolorscale` is true, the
-                    default palette will be chosen according to
-                    whether numbers in the `color` array are all
-                    positive, all negative or mixed.
-                cauto
-                    Determines whether or not the color domain is
-                    computed with respect to the input data (here
-                    in `marker.color`) or the bounds set in
-                    `marker.cmin` and `marker.cmax` Has an effect
-                    only if in `marker.color` is set to a numerical
-                    array. Defaults to `false` when `marker.cmin`
-                    and `marker.cmax` are set by the user.
-                cmax
-                    Sets the upper bound of the color domain. Has
-                    an effect only if in `marker.color` is set to a
-                    numerical array. Value should have the same
-                    units as in `marker.color` and if set,
-                    `marker.cmin` must be set as well.
-                cmid
-                    Sets the mid-point of the color domain by
-                    scaling `marker.cmin` and/or `marker.cmax` to
-                    be equidistant to this point. Has an effect
-                    only if in `marker.color` is set to a numerical
-                    array. Value should have the same units as in
-                    `marker.color`. Has no effect when
-                    `marker.cauto` is `false`.
-                cmin
-                    Sets the lower bound of the color domain. Has
-                    an effect only if in `marker.color` is set to a
-                    numerical array. Value should have the same
-                    units as in `marker.color` and if set,
-                    `marker.cmax` must be set as well.
-                color
-                    Sets the marker color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `marker.cmin` and `marker.cmax` if set.
-                coloraxis
-                    Sets a reference to a shared color axis.
-                    References to these shared color axes are
-                    "coloraxis", "coloraxis2", "coloraxis3", etc.
-                    Settings for these shared color axes are set in
-                    the layout, under `layout.coloraxis`,
-                    `layout.coloraxis2`, etc. Note that multiple
-                    color scales can be linked to the same color
-                    axis.
-                colorbar
-                    :class:`plotly.graph_objects.scattergeo.marker.
-                    ColorBar` instance or dict with compatible
-                    properties
-                colorscale
-                    Sets the colorscale. Has an effect only if in
-                    `marker.color` is set to a numerical array. The
-                    colorscale must be an array containing arrays
-                    mapping a normalized value to an rgb, rgba,
-                    hex, hsl, hsv, or named color string. At
-                    minimum, a mapping for the lowest (0) and
-                    highest (1) values are required. For example,
-                    `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
-                    To control the bounds of the colorscale in
-                    color space, use `marker.cmin` and
-                    `marker.cmax`. Alternatively, `colorscale` may
-                    be a palette name string of the following list:
-                    Blackbody,Bluered,Blues,Cividis,Earth,Electric,
-                    Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
-                    Bu,Reds,Viridis,YlGnBu,YlOrRd.
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                gradient
-                    :class:`plotly.graph_objects.scattergeo.marker.
-                    Gradient` instance or dict with compatible
-                    properties
-                line
-                    :class:`plotly.graph_objects.scattergeo.marker.
-                    Line` instance or dict with compatible
-                    properties
-                opacity
-                    Sets the marker opacity.
-                opacitysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `opacity`.
-                reversescale
-                    Reverses the color mapping if true. Has an
-                    effect only if in `marker.color` is set to a
-                    numerical array. If true, `marker.cmin` will
-                    correspond to the last color in the array and
-                    `marker.cmax` will correspond to the first
-                    color.
-                showscale
-                    Determines whether or not a colorbar is
-                    displayed for this trace. Has an effect only if
-                    in `marker.color` is set to a numerical array.
-                size
-                    Sets the marker size (in px).
-                sizemin
-                    Has an effect only if `marker.size` is set to a
-                    numerical array. Sets the minimum size (in px)
-                    of the rendered marker points.
-                sizemode
-                    Has an effect only if `marker.size` is set to a
-                    numerical array. Sets the rule for which the
-                    data in `size` is converted to pixels.
-                sizeref
-                    Has an effect only if `marker.size` is set to a
-                    numerical array. Sets the scale factor used to
-                    determine the rendered size of marker points.
-                    Use with `sizemin` and `sizemode`.
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                standoff
-                    Moves the marker away from the data point in
-                    the direction of `angle` (in px). This can be
-                    useful for example if you have another marker
-                    at this location and you want to point an
-                    arrowhead marker at it.
-                standoffsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `standoff`.
-                symbol
-                    Sets the marker symbol type. Adding 100 is
-                    equivalent to appending "-open" to a symbol
-                    name. Adding 200 is equivalent to appending
-                    "-dot" to a symbol name. Adding 300 is
-                    equivalent to appending "-open-dot" or "dot-
-                    open" to a symbol name.
-                symbolsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `symbol`.
-
         Returns
         -------
         plotly.graph_objs.scattergeo.Marker
         """
-        return self["marker"]
+        return self['marker']
 
     @marker.setter
     def marker(self, val):
-        self["marker"] = val
+        self['marker'] = val
 
     # meta
     # ----
@@ -1046,11 +751,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     # metasrc
     # -------
@@ -1066,11 +771,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -1094,11 +799,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any
         """
-        return self["mode"]
+        return self['mode']
 
     @mode.setter
     def mode(self, val):
-        self["mode"] = val
+        self['mode'] = val
 
     # name
     # ----
@@ -1116,11 +821,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     # opacity
     # -------
@@ -1136,11 +841,11 @@ class Scattergeo(_BaseTraceType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     # selected
     # --------
@@ -1153,26 +858,15 @@ class Scattergeo(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Selected constructor
 
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.scattergeo.selecte
-                    d.Marker` instance or dict with compatible
-                    properties
-                textfont
-                    :class:`plotly.graph_objects.scattergeo.selecte
-                    d.Textfont` instance or dict with compatible
-                    properties
-
         Returns
         -------
         plotly.graph_objs.scattergeo.Selected
         """
-        return self["selected"]
+        return self['selected']
 
     @selected.setter
     def selected(self, val):
-        self["selected"] = val
+        self['selected'] = val
 
     # selectedpoints
     # --------------
@@ -1192,11 +886,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any
         """
-        return self["selectedpoints"]
+        return self['selectedpoints']
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self["selectedpoints"] = val
+        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -1213,11 +907,11 @@ class Scattergeo(_BaseTraceType):
         -------
         bool
         """
-        return self["showlegend"]
+        return self['showlegend']
 
     @showlegend.setter
     def showlegend(self, val):
-        self["showlegend"] = val
+        self['showlegend'] = val
 
     # stream
     # ------
@@ -1230,27 +924,15 @@ class Scattergeo(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Stream constructor
 
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
-
         Returns
         -------
         plotly.graph_objs.scattergeo.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     # text
     # ----
@@ -1274,11 +956,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     # textfont
     # --------
@@ -1293,88 +975,15 @@ class Scattergeo(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.scattergeo.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     # textposition
     # ------------
@@ -1395,11 +1004,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["textposition"]
+        return self['textposition']
 
     @textposition.setter
     def textposition(self, val):
-        self["textposition"] = val
+        self['textposition'] = val
 
     # textpositionsrc
     # ---------------
@@ -1416,11 +1025,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["textpositionsrc"]
+        return self['textpositionsrc']
 
     @textpositionsrc.setter
     def textpositionsrc(self, val):
-        self["textpositionsrc"] = val
+        self['textpositionsrc'] = val
 
     # textsrc
     # -------
@@ -1436,11 +1045,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["textsrc"]
+        return self['textsrc']
 
     @textsrc.setter
     def textsrc(self, val):
-        self["textsrc"] = val
+        self['textsrc'] = val
 
     # texttemplate
     # ------------
@@ -1471,11 +1080,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["texttemplate"]
+        return self['texttemplate']
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self["texttemplate"] = val
+        self['texttemplate'] = val
 
     # texttemplatesrc
     # ---------------
@@ -1492,11 +1101,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["texttemplatesrc"]
+        return self['texttemplatesrc']
 
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
-        self["texttemplatesrc"] = val
+        self['texttemplatesrc'] = val
 
     # uid
     # ---
@@ -1514,11 +1123,11 @@ class Scattergeo(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     # uirevision
     # ----------
@@ -1547,11 +1156,11 @@ class Scattergeo(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     # unselected
     # ----------
@@ -1564,26 +1173,15 @@ class Scattergeo(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Unselected constructor
 
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.scattergeo.unselec
-                    ted.Marker` instance or dict with compatible
-                    properties
-                textfont
-                    :class:`plotly.graph_objects.scattergeo.unselec
-                    ted.Textfont` instance or dict with compatible
-                    properties
-
         Returns
         -------
         plotly.graph_objs.scattergeo.Unselected
         """
-        return self["unselected"]
+        return self['unselected']
 
     @unselected.setter
     def unselected(self, val):
-        self["unselected"] = val
+        self['unselected'] = val
 
     # visible
     # -------
@@ -1602,17 +1200,17 @@ class Scattergeo(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     # type
     # ----
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     # Self properties description
     # ---------------------------
@@ -1889,63 +1487,61 @@ class Scattergeo(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-
-    def __init__(
-        self,
-        arg=None,
-        connectgaps=None,
-        customdata=None,
-        customdatasrc=None,
-        featureidkey=None,
-        fill=None,
-        fillcolor=None,
-        geo=None,
-        geojson=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        lat=None,
-        latsrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        line=None,
-        locationmode=None,
-        locations=None,
-        locationssrc=None,
-        lon=None,
-        lonsrc=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        mode=None,
-        name=None,
-        opacity=None,
-        selected=None,
-        selectedpoints=None,
-        showlegend=None,
-        stream=None,
-        text=None,
-        textfont=None,
-        textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
-        texttemplate=None,
-        texttemplatesrc=None,
-        uid=None,
-        uirevision=None,
-        unselected=None,
-        visible=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            connectgaps=None,
+            customdata=None,
+            customdatasrc=None,
+            featureidkey=None,
+            fill=None,
+            fillcolor=None,
+            geo=None,
+            geojson=None,
+            hoverinfo=None,
+            hoverinfosrc=None,
+            hoverlabel=None,
+            hovertemplate=None,
+            hovertemplatesrc=None,
+            hovertext=None,
+            hovertextsrc=None,
+            ids=None,
+            idssrc=None,
+            lat=None,
+            latsrc=None,
+            legend=None,
+            legendgroup=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            line=None,
+            locationmode=None,
+            locations=None,
+            locationssrc=None,
+            lon=None,
+            lonsrc=None,
+            marker=None,
+            meta=None,
+            metasrc=None,
+            mode=None,
+            name=None,
+            opacity=None,
+            selected=None,
+            selectedpoints=None,
+            showlegend=None,
+            stream=None,
+            text=None,
+            textfont=None,
+            textposition=None,
+            textpositionsrc=None,
+            textsrc=None,
+            texttemplate=None,
+            texttemplatesrc=None,
+            uid=None,
+            uirevision=None,
+            unselected=None,
+            visible=None,
+            **kwargs
+        ):
         """
         Construct a new Scattergeo object
 
@@ -2233,10 +1829,9 @@ class Scattergeo(_BaseTraceType):
         -------
         Scattergeo
         """
-        super(Scattergeo, self).__init__("scattergeo")
-
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('scattergeo')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         # Validate arg
@@ -2248,230 +1843,76 @@ class Scattergeo(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Scattergeo
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scattergeo`"""
-            )
+an instance of :class:`plotly.graph_objs.Scattergeo`""")
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop("connectgaps", None)
-        _v = connectgaps if connectgaps is not None else _v
-        if _v is not None:
-            self["connectgaps"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("featureidkey", None)
-        _v = featureidkey if featureidkey is not None else _v
-        if _v is not None:
-            self["featureidkey"] = _v
-        _v = arg.pop("fill", None)
-        _v = fill if fill is not None else _v
-        if _v is not None:
-            self["fill"] = _v
-        _v = arg.pop("fillcolor", None)
-        _v = fillcolor if fillcolor is not None else _v
-        if _v is not None:
-            self["fillcolor"] = _v
-        _v = arg.pop("geo", None)
-        _v = geo if geo is not None else _v
-        if _v is not None:
-            self["geo"] = _v
-        _v = arg.pop("geojson", None)
-        _v = geojson if geojson is not None else _v
-        if _v is not None:
-            self["geojson"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("lat", None)
-        _v = lat if lat is not None else _v
-        if _v is not None:
-            self["lat"] = _v
-        _v = arg.pop("latsrc", None)
-        _v = latsrc if latsrc is not None else _v
-        if _v is not None:
-            self["latsrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("locationmode", None)
-        _v = locationmode if locationmode is not None else _v
-        if _v is not None:
-            self["locationmode"] = _v
-        _v = arg.pop("locations", None)
-        _v = locations if locations is not None else _v
-        if _v is not None:
-            self["locations"] = _v
-        _v = arg.pop("locationssrc", None)
-        _v = locationssrc if locationssrc is not None else _v
-        if _v is not None:
-            self["locationssrc"] = _v
-        _v = arg.pop("lon", None)
-        _v = lon if lon is not None else _v
-        if _v is not None:
-            self["lon"] = _v
-        _v = arg.pop("lonsrc", None)
-        _v = lonsrc if lonsrc is not None else _v
-        if _v is not None:
-            self["lonsrc"] = _v
-        _v = arg.pop("marker", None)
-        _v = marker if marker is not None else _v
-        if _v is not None:
-            self["marker"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("mode", None)
-        _v = mode if mode is not None else _v
-        if _v is not None:
-            self["mode"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("selected", None)
-        _v = selected if selected is not None else _v
-        if _v is not None:
-            self["selected"] = _v
-        _v = arg.pop("selectedpoints", None)
-        _v = selectedpoints if selectedpoints is not None else _v
-        if _v is not None:
-            self["selectedpoints"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("textposition", None)
-        _v = textposition if textposition is not None else _v
-        if _v is not None:
-            self["textposition"] = _v
-        _v = arg.pop("textpositionsrc", None)
-        _v = textpositionsrc if textpositionsrc is not None else _v
-        if _v is not None:
-            self["textpositionsrc"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("texttemplate", None)
-        _v = texttemplate if texttemplate is not None else _v
-        if _v is not None:
-            self["texttemplate"] = _v
-        _v = arg.pop("texttemplatesrc", None)
-        _v = texttemplatesrc if texttemplatesrc is not None else _v
-        if _v is not None:
-            self["texttemplatesrc"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("unselected", None)
-        _v = unselected if unselected is not None else _v
-        if _v is not None:
-            self["unselected"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
+        self._init_provided('connectgaps', arg, connectgaps)
+        self._init_provided('customdata', arg, customdata)
+        self._init_provided('customdatasrc', arg, customdatasrc)
+        self._init_provided('featureidkey', arg, featureidkey)
+        self._init_provided('fill', arg, fill)
+        self._init_provided('fillcolor', arg, fillcolor)
+        self._init_provided('geo', arg, geo)
+        self._init_provided('geojson', arg, geojson)
+        self._init_provided('hoverinfo', arg, hoverinfo)
+        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
+        self._init_provided('hoverlabel', arg, hoverlabel)
+        self._init_provided('hovertemplate', arg, hovertemplate)
+        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
+        self._init_provided('hovertext', arg, hovertext)
+        self._init_provided('hovertextsrc', arg, hovertextsrc)
+        self._init_provided('ids', arg, ids)
+        self._init_provided('idssrc', arg, idssrc)
+        self._init_provided('lat', arg, lat)
+        self._init_provided('latsrc', arg, latsrc)
+        self._init_provided('legend', arg, legend)
+        self._init_provided('legendgroup', arg, legendgroup)
+        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
+        self._init_provided('legendrank', arg, legendrank)
+        self._init_provided('legendwidth', arg, legendwidth)
+        self._init_provided('line', arg, line)
+        self._init_provided('locationmode', arg, locationmode)
+        self._init_provided('locations', arg, locations)
+        self._init_provided('locationssrc', arg, locationssrc)
+        self._init_provided('lon', arg, lon)
+        self._init_provided('lonsrc', arg, lonsrc)
+        self._init_provided('marker', arg, marker)
+        self._init_provided('meta', arg, meta)
+        self._init_provided('metasrc', arg, metasrc)
+        self._init_provided('mode', arg, mode)
+        self._init_provided('name', arg, name)
+        self._init_provided('opacity', arg, opacity)
+        self._init_provided('selected', arg, selected)
+        self._init_provided('selectedpoints', arg, selectedpoints)
+        self._init_provided('showlegend', arg, showlegend)
+        self._init_provided('stream', arg, stream)
+        self._init_provided('text', arg, text)
+        self._init_provided('textfont', arg, textfont)
+        self._init_provided('textposition', arg, textposition)
+        self._init_provided('textpositionsrc', arg, textpositionsrc)
+        self._init_provided('textsrc', arg, textsrc)
+        self._init_provided('texttemplate', arg, texttemplate)
+        self._init_provided('texttemplatesrc', arg, texttemplatesrc)
+        self._init_provided('uid', arg, uid)
+        self._init_provided('uirevision', arg, uirevision)
+        self._init_provided('unselected', arg, unselected)
+        self._init_provided('visible', arg, visible)
 
         # Read-only literals
         # ------------------
 
-        self._props["type"] = "scattergeo"
-        arg.pop("type", None)
+        self._props['type'] = 'scattergeo'
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------
