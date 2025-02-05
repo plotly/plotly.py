@@ -21,6 +21,6 @@ vaex
 pydantic<=1.10.11 # for vaex, see https://github.com/vaexio/vaex/issues/2384
 polars[timezone]
 pyarrow
-narwhals>=1.15.1
+narwhals==1.25.0
 polars
 anywidget==0.9.13
