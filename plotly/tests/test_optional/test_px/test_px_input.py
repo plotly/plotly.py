@@ -8,9 +8,17 @@ import pytest
 from packaging import version
 import unittest.mock as mock
 from plotly.express._core import build_dataframe
+from plotly import optional_imports
 from pandas.testing import assert_frame_equal
 import sys
 import warnings
+
+
+# FIXME: don't test with vaex if vaex isn't installed
+if (optional_imports.get_module("vaex") is None) and (sys.version_info >= (3, 12)):
+    TEST_LIBS = ["polars"]
+else:
+    TEST_LIBS = ["vaex", "polars"]
 
 
 def test_numpy():
@@ -342,7 +350,7 @@ def test_build_df_using_interchange_protocol_mock():
     or sys.version_info >= (3, 12),
     reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
 )
-@pytest.mark.parametrize("test_lib", ["vaex", "polars"])
+@pytest.mark.parametrize("test_lib", TEST_LIBS)
 def test_build_df_from_vaex_and_polars(test_lib):
     if test_lib == "vaex":
         import vaex as lib
@@ -365,7 +373,7 @@ def test_build_df_from_vaex_and_polars(test_lib):
     or sys.version_info >= (3, 12),
     reason="plotly doesn't use a dataframe interchange protocol for pandas < 2.0.2",
 )
-@pytest.mark.parametrize("test_lib", ["vaex", "polars"])
+@pytest.mark.parametrize("test_lib", TEST_LIBS)
 @pytest.mark.parametrize(
     "hover_data", [["sepal_width"], {"sepal_length": False, "sepal_width": ":.2f"}]
 )
@@ -391,7 +399,12 @@ def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
     )
 
 
-def test_timezones(constructor):
+def test_timezones(request, constructor):
+    # FIXME: PyArrow requires a different format for datetime constructors with timezones
+    from .conftest import pyarrow_table_constructor
+    if constructor is pyarrow_table_constructor:
+        request.applymarker(pytest.mark.xfail)
+
     df = nw.from_native(
         constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
     ).with_columns(nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S%z"))
