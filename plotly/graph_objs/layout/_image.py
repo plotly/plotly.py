@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -470,21 +473,21 @@ class Image(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            layer=None,
-            name=None,
-            opacity=None,
-            sizex=None,
-            sizey=None,
-            sizing=None,
-            source=None,
-            templateitemname=None,
-            visible=None,
-            x=None,
-            xanchor=None,
-            xref=None,
-            y=None,
-            yanchor=None,
-            yref=None,
+            layer: Any|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            sizex: int|float|None = None,
+            sizey: int|float|None = None,
+            sizing: Any|None = None,
+            source: str|None = None,
+            templateitemname: str|None = None,
+            visible: bool|None = None,
+            x: Any|None = None,
+            xanchor: Any|None = None,
+            xref: Any|None = None,
+            y: Any|None = None,
+            yanchor: Any|None = None,
+            yref: Any|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -63,7 +66,7 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['include']
 
@@ -154,12 +157,12 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            clipmax=None,
-            clipmin=None,
-            include=None,
-            includesrc=None,
-            maxallowed=None,
-            minallowed=None,
+            clipmax: Any|None = None,
+            clipmin: Any|None = None,
+            include: Any|None = None,
+            includesrc: str|None = None,
+            maxallowed: Any|None = None,
+            minallowed: Any|None = None,
             **kwargs
         ):
         """

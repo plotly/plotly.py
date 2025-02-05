@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -194,13 +197,13 @@ class Lataxis(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            dtick=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            range=None,
-            showgrid=None,
-            tick0=None,
+            dtick: int|float|None = None,
+            gridcolor: str|None = None,
+            griddash: str|None = None,
+            gridwidth: int|float|None = None,
+            range: list|None = None,
+            showgrid: bool|None = None,
+            tick0: int|float|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -373,18 +376,18 @@ class Selection(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            line=None,
-            name=None,
-            opacity=None,
-            path=None,
-            templateitemname=None,
-            type=None,
-            x0=None,
-            x1=None,
-            xref=None,
-            y0=None,
-            y1=None,
-            yref=None,
+            line: None|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            path: str|None = None,
+            templateitemname: str|None = None,
+            type: Any|None = None,
+            x0: Any|None = None,
+            x1: Any|None = None,
+            xref: Any|None = None,
+            y0: Any|None = None,
+            y1: Any|None = None,
+            yref: Any|None = None,
             **kwargs
         ):
         """

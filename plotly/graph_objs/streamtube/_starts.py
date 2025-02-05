@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -25,7 +28,7 @@ class Starts(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -66,7 +69,7 @@ class Starts(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -107,7 +110,7 @@ class Starts(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -161,12 +164,12 @@ class Starts(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            x=None,
-            xsrc=None,
-            y=None,
-            ysrc=None,
-            z=None,
-            zsrc=None,
+            x: NDArray|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            ysrc: str|None = None,
+            z: NDArray|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

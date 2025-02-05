@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -247,15 +250,15 @@ class Gauge(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            axis=None,
-            bar=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderwidth=None,
-            shape=None,
-            steps=None,
-            stepdefaults=None,
-            threshold=None,
+            axis: None|None = None,
+            bar: None|None = None,
+            bgcolor: str|None = None,
+            bordercolor: str|None = None,
+            borderwidth: int|float|None = None,
+            shape: Any|None = None,
+            steps: None|None = None,
+            stepdefaults: None|None = None,
+            threshold: None|None = None,
             **kwargs
         ):
         """

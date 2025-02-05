@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -90,9 +93,9 @@ class Threshold(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            line=None,
-            thickness=None,
-            value=None,
+            line: None|None = None,
+            thickness: int|float|None = None,
+            value: int|float|None = None,
             **kwargs
         ):
         """

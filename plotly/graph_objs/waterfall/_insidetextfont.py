@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -27,7 +30,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['color']
 
@@ -72,7 +75,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['family']
 
@@ -118,7 +121,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['lineposition']
 
@@ -164,7 +167,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['shadow']
 
@@ -203,7 +206,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['size']
 
@@ -246,7 +249,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['style']
 
@@ -290,7 +293,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['textcase']
 
@@ -333,7 +336,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['variant']
 
@@ -376,7 +379,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|numpy.ndarray
+        int|NDArray
         """
         return self['weight']
 
@@ -470,24 +473,24 @@ class Insidetextfont(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            colorsrc=None,
-            family=None,
-            familysrc=None,
-            lineposition=None,
-            linepositionsrc=None,
-            shadow=None,
-            shadowsrc=None,
-            size=None,
-            sizesrc=None,
-            style=None,
-            stylesrc=None,
-            textcase=None,
-            textcasesrc=None,
-            variant=None,
-            variantsrc=None,
-            weight=None,
-            weightsrc=None,
+            color: str|None = None,
+            colorsrc: str|None = None,
+            family: str|None = None,
+            familysrc: str|None = None,
+            lineposition: Any|None = None,
+            linepositionsrc: str|None = None,
+            shadow: str|None = None,
+            shadowsrc: str|None = None,
+            size: int|float|None = None,
+            sizesrc: str|None = None,
+            style: Any|None = None,
+            stylesrc: str|None = None,
+            textcase: Any|None = None,
+            textcasesrc: str|None = None,
+            variant: Any|None = None,
+            variantsrc: str|None = None,
+            weight: int|None = None,
+            weightsrc: str|None = None,
             **kwargs
         ):
         """

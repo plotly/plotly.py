@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -177,7 +180,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -224,7 +227,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -310,7 +313,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -357,7 +360,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -400,7 +403,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -440,7 +443,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['lat']
 
@@ -597,7 +600,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['lon']
 
@@ -645,7 +648,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -730,7 +733,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['radius']
 
@@ -887,7 +890,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -1006,7 +1009,7 @@ class Densitymap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -1383,53 +1386,53 @@ class Densitymap(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            autocolorscale=None,
-            below=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            customdata=None,
-            customdatasrc=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            lat=None,
-            latsrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            lon=None,
-            lonsrc=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            radius=None,
-            radiussrc=None,
-            reversescale=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            subplot=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            z=None,
-            zauto=None,
-            zmax=None,
-            zmid=None,
-            zmin=None,
-            zsrc=None,
+            autocolorscale: bool|None = None,
+            below: str|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            lat: NDArray|None = None,
+            latsrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            lon: NDArray|None = None,
+            lonsrc: str|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            radius: int|float|None = None,
+            radiussrc: str|None = None,
+            reversescale: bool|None = None,
+            showlegend: bool|None = None,
+            showscale: bool|None = None,
+            stream: None|None = None,
+            subplot: str|None = None,
+            text: str|None = None,
+            textsrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            z: NDArray|None = None,
+            zauto: bool|None = None,
+            zmax: int|float|None = None,
+            zmid: int|float|None = None,
+            zmin: int|float|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -737,32 +740,32 @@ class Legend(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderwidth=None,
-            entrywidth=None,
-            entrywidthmode=None,
-            font=None,
-            groupclick=None,
-            grouptitlefont=None,
-            indentation=None,
-            itemclick=None,
-            itemdoubleclick=None,
-            itemsizing=None,
-            itemwidth=None,
-            orientation=None,
-            title=None,
-            tracegroupgap=None,
-            traceorder=None,
-            uirevision=None,
-            valign=None,
-            visible=None,
-            x=None,
-            xanchor=None,
-            xref=None,
-            y=None,
-            yanchor=None,
-            yref=None,
+            bgcolor: str|None = None,
+            bordercolor: str|None = None,
+            borderwidth: int|float|None = None,
+            entrywidth: int|float|None = None,
+            entrywidthmode: Any|None = None,
+            font: None|None = None,
+            groupclick: Any|None = None,
+            grouptitlefont: None|None = None,
+            indentation: int|float|None = None,
+            itemclick: Any|None = None,
+            itemdoubleclick: Any|None = None,
+            itemsizing: Any|None = None,
+            itemwidth: int|float|None = None,
+            orientation: Any|None = None,
+            title: None|None = None,
+            tracegroupgap: int|float|None = None,
+            traceorder: Any|None = None,
+            uirevision: Any|None = None,
+            valign: Any|None = None,
+            visible: bool|None = None,
+            x: int|float|None = None,
+            xanchor: Any|None = None,
+            xref: Any|None = None,
+            y: int|float|None = None,
+            yanchor: Any|None = None,
+            yref: Any|None = None,
             **kwargs
         ):
         """

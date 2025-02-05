@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -299,7 +302,7 @@ class Minor(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['tickvals']
 
@@ -434,20 +437,20 @@ class Minor(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            dtick=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            nticks=None,
-            showgrid=None,
-            tick0=None,
-            tickcolor=None,
-            ticklen=None,
-            tickmode=None,
-            ticks=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
+            dtick: Any|None = None,
+            gridcolor: str|None = None,
+            griddash: str|None = None,
+            gridwidth: int|float|None = None,
+            nticks: int|None = None,
+            showgrid: bool|None = None,
+            tick0: Any|None = None,
+            tickcolor: str|None = None,
+            ticklen: int|float|None = None,
+            tickmode: Any|None = None,
+            ticks: Any|None = None,
+            tickvals: NDArray|None = None,
+            tickvalssrc: str|None = None,
+            tickwidth: int|float|None = None,
             **kwargs
         ):
         """

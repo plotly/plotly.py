@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -77,8 +80,8 @@ class YAxis(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            range=None,
-            rangemode=None,
+            range: list|None = None,
+            rangemode: Any|None = None,
             **kwargs
         ):
         """

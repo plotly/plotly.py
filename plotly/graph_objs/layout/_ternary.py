@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -191,13 +194,13 @@ class Ternary(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            aaxis=None,
-            baxis=None,
-            bgcolor=None,
-            caxis=None,
-            domain=None,
-            sum=None,
-            uirevision=None,
+            aaxis: None|None = None,
+            baxis: None|None = None,
+            bgcolor: str|None = None,
+            caxis: None|None = None,
+            domain: None|None = None,
+            sum: int|float|None = None,
+            uirevision: Any|None = None,
             **kwargs
         ):
         """

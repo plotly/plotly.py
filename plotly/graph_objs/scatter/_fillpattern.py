@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -32,7 +35,7 @@ class Fillpattern(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['bgcolor']
 
@@ -80,7 +83,7 @@ class Fillpattern(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['fgcolor']
 
@@ -166,7 +169,7 @@ class Fillpattern(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['shape']
 
@@ -208,7 +211,7 @@ class Fillpattern(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['size']
 
@@ -252,7 +255,7 @@ class Fillpattern(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['solidity']
 
@@ -334,18 +337,18 @@ class Fillpattern(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            bgcolor=None,
-            bgcolorsrc=None,
-            fgcolor=None,
-            fgcolorsrc=None,
-            fgopacity=None,
-            fillmode=None,
-            shape=None,
-            shapesrc=None,
-            size=None,
-            sizesrc=None,
-            solidity=None,
-            soliditysrc=None,
+            bgcolor: str|None = None,
+            bgcolorsrc: str|None = None,
+            fgcolor: str|None = None,
+            fgcolorsrc: str|None = None,
+            fgopacity: int|float|None = None,
+            fillmode: Any|None = None,
+            shape: Any|None = None,
+            shapesrc: str|None = None,
+            size: int|float|None = None,
+            sizesrc: str|None = None,
+            solidity: int|float|None = None,
+            soliditysrc: str|None = None,
             **kwargs
         ):
         """

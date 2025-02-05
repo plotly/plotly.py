@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -283,17 +286,17 @@ class Y(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            end=None,
-            highlight=None,
-            highlightcolor=None,
-            highlightwidth=None,
-            project=None,
-            show=None,
-            size=None,
-            start=None,
-            usecolormap=None,
-            width=None,
+            color: str|None = None,
+            end: int|float|None = None,
+            highlight: bool|None = None,
+            highlightcolor: str|None = None,
+            highlightwidth: int|float|None = None,
+            project: None|None = None,
+            show: bool|None = None,
+            size: int|float|None = None,
+            start: int|float|None = None,
+            usecolormap: bool|None = None,
+            width: int|float|None = None,
             **kwargs
         ):
         """

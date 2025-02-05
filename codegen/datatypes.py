@@ -12,7 +12,7 @@ deprecated_mapbox_traces = [
 ]
 
 
-def get_typing_type(plotly_type, array_ok=False):
+def get_python_type(plotly_type, array_ok=False, compound_as_none=False):
     """
     Get Python type corresponding to a valType string from the plotly schema
 
@@ -28,7 +28,7 @@ def get_typing_type(plotly_type, array_ok=False):
         Python type string
     """
     if plotly_type == "data_array":
-        pytype = "numpy.ndarray"
+        pytype = "NDArray"
     elif plotly_type == "info_array":
         pytype = "list"
     elif plotly_type == "colorlist":
@@ -43,11 +43,13 @@ def get_typing_type(plotly_type, array_ok=False):
         pytype = "int"
     elif plotly_type == "boolean":
         pytype = "bool"
+    elif (plotly_type in ("compound", "compound_array")) and compound_as_none:
+        pytype = None
     else:
         raise ValueError("Unknown plotly type: %s" % plotly_type)
 
     if array_ok:
-        return f"{pytype}|numpy.ndarray"
+        return f"{pytype}|NDArray"
     else:
         return pytype
 
@@ -96,11 +98,14 @@ def build_datatype_py(node):
 
     # Imports
     # -------
+    buffer.write("from __future__ import annotations\n")
+    buffer.write("from typing import Any\n")
+    buffer.write("from numpy.typing import NDArray\n")
     buffer.write(
-        f"from plotly.basedatatypes "
+        "from plotly.basedatatypes "
         f"import {node.name_base_datatype} as _{node.name_base_datatype}\n"
     )
-    buffer.write(f"import copy as _copy\n")
+    buffer.write("import copy as _copy\n")
 
     if node.name_property in deprecated_mapbox_traces:
         buffer.write(f"from warnings import warn\n")
@@ -127,7 +132,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
 
     import re
     _subplotid_prop_re = re.compile(
-        '^(' + '|'.join(_subplotid_prop_names) + r')(\\d+)$')
+        '^(' + '|'.join(_subplotid_prop_names) + r')(\d+)$')
 """
         )
 
@@ -197,7 +202,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         elif subtype_node.is_mapped:
             prop_type = ""
         else:
-            prop_type = get_typing_type(subtype_node.datatype, subtype_node.is_array_ok)
+            prop_type = get_python_type(subtype_node.datatype, array_ok=subtype_node.is_array_ok)
 
         # #### Get property description ####
         raw_description = subtype_node.description
@@ -474,10 +479,11 @@ def add_constructor_params(
             {extra}=None"""
         )
 
-    for i, subtype_node in enumerate(subtype_nodes):
+    for subtype_node in subtype_nodes:
+        py_type = get_python_type(subtype_node.datatype, compound_as_none=True)
         buffer.write(
             f""",
-            {subtype_node.name_property}=None"""
+            {subtype_node.name_property}: {py_type}|None = None"""
         )
 
     for extra in append_extras:

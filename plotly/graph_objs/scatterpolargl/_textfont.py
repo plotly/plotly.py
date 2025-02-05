@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -27,7 +30,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['color']
 
@@ -72,7 +75,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['family']
 
@@ -111,7 +114,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['size']
 
@@ -154,7 +157,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['style']
 
@@ -196,7 +199,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['variant']
 
@@ -238,7 +241,7 @@ class Textfont(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['weight']
 
@@ -310,18 +313,18 @@ class Textfont(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            colorsrc=None,
-            family=None,
-            familysrc=None,
-            size=None,
-            sizesrc=None,
-            style=None,
-            stylesrc=None,
-            variant=None,
-            variantsrc=None,
-            weight=None,
-            weightsrc=None,
+            color: str|None = None,
+            colorsrc: str|None = None,
+            family: str|None = None,
+            familysrc: str|None = None,
+            size: int|float|None = None,
+            sizesrc: str|None = None,
+            style: Any|None = None,
+            stylesrc: str|None = None,
+            variant: Any|None = None,
+            variantsrc: str|None = None,
+            weight: Any|None = None,
+            weightsrc: str|None = None,
             **kwargs
         ):
         """

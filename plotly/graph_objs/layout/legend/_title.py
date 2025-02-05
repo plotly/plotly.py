@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -102,9 +105,9 @@ class Title(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            font=None,
-            side=None,
-            text=None,
+            font: None|None = None,
+            side: Any|None = None,
+            text: str|None = None,
             **kwargs
         ):
         """

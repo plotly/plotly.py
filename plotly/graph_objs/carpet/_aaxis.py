@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -115,7 +118,7 @@ class Aaxis(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['categoryarray']
 
@@ -1201,7 +1204,7 @@ class Aaxis(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ticktext']
 
@@ -1242,7 +1245,7 @@ class Aaxis(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['tickvals']
 
@@ -1538,64 +1541,64 @@ class Aaxis(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            arraydtick=None,
-            arraytick0=None,
-            autorange=None,
-            autotypenumbers=None,
-            categoryarray=None,
-            categoryarraysrc=None,
-            categoryorder=None,
-            cheatertype=None,
-            color=None,
-            dtick=None,
-            endline=None,
-            endlinecolor=None,
-            endlinewidth=None,
-            exponentformat=None,
-            fixedrange=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            labelalias=None,
-            labelpadding=None,
-            labelprefix=None,
-            labelsuffix=None,
-            linecolor=None,
-            linewidth=None,
-            minexponent=None,
-            minorgridcolor=None,
-            minorgridcount=None,
-            minorgriddash=None,
-            minorgridwidth=None,
-            nticks=None,
-            range=None,
-            rangemode=None,
-            separatethousands=None,
-            showexponent=None,
-            showgrid=None,
-            showline=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            smoothing=None,
-            startline=None,
-            startlinecolor=None,
-            startlinewidth=None,
-            tick0=None,
-            tickangle=None,
-            tickfont=None,
-            tickformat=None,
-            tickformatstops=None,
-            tickformatstopdefaults=None,
-            tickmode=None,
-            tickprefix=None,
-            ticksuffix=None,
-            ticktext=None,
-            ticktextsrc=None,
-            tickvals=None,
-            tickvalssrc=None,
-            title=None,
-            type=None,
+            arraydtick: int|None = None,
+            arraytick0: int|None = None,
+            autorange: Any|None = None,
+            autotypenumbers: Any|None = None,
+            categoryarray: NDArray|None = None,
+            categoryarraysrc: str|None = None,
+            categoryorder: Any|None = None,
+            cheatertype: Any|None = None,
+            color: str|None = None,
+            dtick: int|float|None = None,
+            endline: bool|None = None,
+            endlinecolor: str|None = None,
+            endlinewidth: int|float|None = None,
+            exponentformat: Any|None = None,
+            fixedrange: bool|None = None,
+            gridcolor: str|None = None,
+            griddash: str|None = None,
+            gridwidth: int|float|None = None,
+            labelalias: Any|None = None,
+            labelpadding: int|None = None,
+            labelprefix: str|None = None,
+            labelsuffix: str|None = None,
+            linecolor: str|None = None,
+            linewidth: int|float|None = None,
+            minexponent: int|float|None = None,
+            minorgridcolor: str|None = None,
+            minorgridcount: int|None = None,
+            minorgriddash: str|None = None,
+            minorgridwidth: int|float|None = None,
+            nticks: int|None = None,
+            range: list|None = None,
+            rangemode: Any|None = None,
+            separatethousands: bool|None = None,
+            showexponent: Any|None = None,
+            showgrid: bool|None = None,
+            showline: bool|None = None,
+            showticklabels: Any|None = None,
+            showtickprefix: Any|None = None,
+            showticksuffix: Any|None = None,
+            smoothing: int|float|None = None,
+            startline: bool|None = None,
+            startlinecolor: str|None = None,
+            startlinewidth: int|float|None = None,
+            tick0: int|float|None = None,
+            tickangle: int|float|None = None,
+            tickfont: None|None = None,
+            tickformat: str|None = None,
+            tickformatstops: None|None = None,
+            tickformatstopdefaults: None|None = None,
+            tickmode: Any|None = None,
+            tickprefix: str|None = None,
+            ticksuffix: str|None = None,
+            ticktext: NDArray|None = None,
+            ticktextsrc: str|None = None,
+            tickvals: NDArray|None = None,
+            tickvalssrc: str|None = None,
+            title: None|None = None,
+            type: Any|None = None,
             **kwargs
         ):
         """

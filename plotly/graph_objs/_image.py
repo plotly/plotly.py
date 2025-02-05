@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -51,7 +54,7 @@ class Image(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -138,7 +141,7 @@ class Image(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -226,7 +229,7 @@ class Image(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -267,7 +270,7 @@ class Image(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['hovertext']
 
@@ -310,7 +313,7 @@ class Image(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -452,7 +455,7 @@ class Image(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -577,7 +580,7 @@ class Image(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['text']
 
@@ -791,7 +794,7 @@ class Image(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -1157,45 +1160,45 @@ class Image(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            colormodel=None,
-            customdata=None,
-            customdatasrc=None,
-            dx=None,
-            dy=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            source=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            x0=None,
-            xaxis=None,
-            y0=None,
-            yaxis=None,
-            z=None,
-            zmax=None,
-            zmin=None,
-            zorder=None,
-            zsmooth=None,
-            zsrc=None,
+            colormodel: Any|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            dx: int|float|None = None,
+            dy: int|float|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: NDArray|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            source: str|None = None,
+            stream: None|None = None,
+            text: NDArray|None = None,
+            textsrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            x0: Any|None = None,
+            xaxis: str|None = None,
+            y0: Any|None = None,
+            yaxis: str|None = None,
+            z: NDArray|None = None,
+            zmax: list|None = None,
+            zmin: list|None = None,
+            zorder: int|None = None,
+            zsmooth: Any|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

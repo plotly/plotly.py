@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -68,8 +71,8 @@ class Template(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            data=None,
-            layout=None,
+            data: None|None = None,
+            layout: None|None = None,
             **kwargs
         ):
         """

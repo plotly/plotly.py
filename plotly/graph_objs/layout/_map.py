@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -295,16 +298,16 @@ class Map(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            bearing=None,
-            bounds=None,
-            center=None,
-            domain=None,
-            layers=None,
-            layerdefaults=None,
-            pitch=None,
-            style=None,
-            uirevision=None,
-            zoom=None,
+            bearing: int|float|None = None,
+            bounds: None|None = None,
+            center: None|None = None,
+            domain: None|None = None,
+            layers: None|None = None,
+            layerdefaults: None|None = None,
+            pitch: int|float|None = None,
+            style: Any|None = None,
+            uirevision: Any|None = None,
+            zoom: int|float|None = None,
             **kwargs
         ):
         """

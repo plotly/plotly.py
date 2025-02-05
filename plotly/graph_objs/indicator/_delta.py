@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -237,15 +240,15 @@ class Delta(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            decreasing=None,
-            font=None,
-            increasing=None,
-            position=None,
-            prefix=None,
-            reference=None,
-            relative=None,
-            suffix=None,
-            valueformat=None,
+            decreasing: None|None = None,
+            font: None|None = None,
+            increasing: None|None = None,
+            position: Any|None = None,
+            prefix: str|None = None,
+            reference: int|float|None = None,
+            relative: bool|None = None,
+            suffix: str|None = None,
+            valueformat: str|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -266,7 +269,7 @@ class Histogram2dContour(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -373,7 +376,7 @@ class Histogram2dContour(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -460,7 +463,7 @@ class Histogram2dContour(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -503,7 +506,7 @@ class Histogram2dContour(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -710,7 +713,7 @@ class Histogram2dContour(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -1086,7 +1089,7 @@ class Histogram2dContour(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1252,7 +1255,7 @@ class Histogram2dContour(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1418,7 +1421,7 @@ class Histogram2dContour(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -1941,70 +1944,70 @@ class Histogram2dContour(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            autobinx=None,
-            autobiny=None,
-            autocolorscale=None,
-            autocontour=None,
-            bingroup=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            contours=None,
-            customdata=None,
-            customdatasrc=None,
-            histfunc=None,
-            histnorm=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            nbinsx=None,
-            nbinsy=None,
-            ncontours=None,
-            opacity=None,
-            reversescale=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            textfont=None,
-            texttemplate=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            x=None,
-            xaxis=None,
-            xbingroup=None,
-            xbins=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            yaxis=None,
-            ybingroup=None,
-            ybins=None,
-            ycalendar=None,
-            yhoverformat=None,
-            ysrc=None,
-            z=None,
-            zauto=None,
-            zhoverformat=None,
-            zmax=None,
-            zmid=None,
-            zmin=None,
-            zsrc=None,
+            autobinx: bool|None = None,
+            autobiny: bool|None = None,
+            autocolorscale: bool|None = None,
+            autocontour: bool|None = None,
+            bingroup: str|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            contours: None|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            histfunc: Any|None = None,
+            histnorm: Any|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            nbinsx: int|None = None,
+            nbinsy: int|None = None,
+            ncontours: int|None = None,
+            opacity: int|float|None = None,
+            reversescale: bool|None = None,
+            showlegend: bool|None = None,
+            showscale: bool|None = None,
+            stream: None|None = None,
+            textfont: None|None = None,
+            texttemplate: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            x: NDArray|None = None,
+            xaxis: str|None = None,
+            xbingroup: str|None = None,
+            xbins: None|None = None,
+            xcalendar: Any|None = None,
+            xhoverformat: str|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            yaxis: str|None = None,
+            ybingroup: str|None = None,
+            ybins: None|None = None,
+            ycalendar: Any|None = None,
+            yhoverformat: str|None = None,
+            ysrc: str|None = None,
+            z: NDArray|None = None,
+            zauto: bool|None = None,
+            zhoverformat: str|None = None,
+            zmax: int|float|None = None,
+            zmid: int|float|None = None,
+            zmin: int|float|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -103,7 +106,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -218,7 +221,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -327,7 +330,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -370,7 +373,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -413,7 +416,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -618,7 +621,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['lowerfence']
 
@@ -684,7 +687,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['mean']
 
@@ -725,7 +728,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['median']
 
@@ -773,7 +776,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -870,7 +873,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['notchspan']
 
@@ -1022,7 +1025,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['q1']
 
@@ -1063,7 +1066,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['q3']
 
@@ -1139,7 +1142,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['sd']
 
@@ -1340,7 +1343,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -1460,7 +1463,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['upperfence']
 
@@ -1568,7 +1571,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1777,7 +1780,7 @@ class Box(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -2454,92 +2457,92 @@ class Box(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            alignmentgroup=None,
-            boxmean=None,
-            boxpoints=None,
-            customdata=None,
-            customdatasrc=None,
-            dx=None,
-            dy=None,
-            fillcolor=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hoveron=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            jitter=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            lowerfence=None,
-            lowerfencesrc=None,
-            marker=None,
-            mean=None,
-            meansrc=None,
-            median=None,
-            mediansrc=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            notched=None,
-            notchspan=None,
-            notchspansrc=None,
-            notchwidth=None,
-            offsetgroup=None,
-            opacity=None,
-            orientation=None,
-            pointpos=None,
-            q1=None,
-            q1src=None,
-            q3=None,
-            q3src=None,
-            quartilemethod=None,
-            sd=None,
-            sdmultiple=None,
-            sdsrc=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            showwhiskers=None,
-            sizemode=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            upperfence=None,
-            upperfencesrc=None,
-            visible=None,
-            whiskerwidth=None,
-            width=None,
-            x=None,
-            x0=None,
-            xaxis=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xperiod=None,
-            xperiod0=None,
-            xperiodalignment=None,
-            xsrc=None,
-            y=None,
-            y0=None,
-            yaxis=None,
-            ycalendar=None,
-            yhoverformat=None,
-            yperiod=None,
-            yperiod0=None,
-            yperiodalignment=None,
-            ysrc=None,
-            zorder=None,
+            alignmentgroup: str|None = None,
+            boxmean: Any|None = None,
+            boxpoints: Any|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            dx: int|float|None = None,
+            dy: int|float|None = None,
+            fillcolor: str|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hoveron: Any|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            jitter: int|float|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            lowerfence: NDArray|None = None,
+            lowerfencesrc: str|None = None,
+            marker: None|None = None,
+            mean: NDArray|None = None,
+            meansrc: str|None = None,
+            median: NDArray|None = None,
+            mediansrc: str|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            notched: bool|None = None,
+            notchspan: NDArray|None = None,
+            notchspansrc: str|None = None,
+            notchwidth: int|float|None = None,
+            offsetgroup: str|None = None,
+            opacity: int|float|None = None,
+            orientation: Any|None = None,
+            pointpos: int|float|None = None,
+            q1: NDArray|None = None,
+            q1src: str|None = None,
+            q3: NDArray|None = None,
+            q3src: str|None = None,
+            quartilemethod: Any|None = None,
+            sd: NDArray|None = None,
+            sdmultiple: int|float|None = None,
+            sdsrc: str|None = None,
+            selected: None|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            showwhiskers: bool|None = None,
+            sizemode: Any|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            textsrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            unselected: None|None = None,
+            upperfence: NDArray|None = None,
+            upperfencesrc: str|None = None,
+            visible: Any|None = None,
+            whiskerwidth: int|float|None = None,
+            width: int|float|None = None,
+            x: NDArray|None = None,
+            x0: Any|None = None,
+            xaxis: str|None = None,
+            xcalendar: Any|None = None,
+            xhoverformat: str|None = None,
+            xperiod: Any|None = None,
+            xperiod0: Any|None = None,
+            xperiodalignment: Any|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            y0: Any|None = None,
+            yaxis: str|None = None,
+            ycalendar: Any|None = None,
+            yhoverformat: str|None = None,
+            yperiod: Any|None = None,
+            yperiod0: Any|None = None,
+            yperiodalignment: Any|None = None,
+            ysrc: str|None = None,
+            zorder: int|None = None,
             **kwargs
         ):
         """

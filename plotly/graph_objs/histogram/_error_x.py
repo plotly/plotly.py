@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -25,7 +28,7 @@ class ErrorX(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['array']
 
@@ -47,7 +50,7 @@ class ErrorX(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['arrayminus']
 
@@ -394,21 +397,21 @@ class ErrorX(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            array=None,
-            arrayminus=None,
-            arrayminussrc=None,
-            arraysrc=None,
-            color=None,
-            copy_ystyle=None,
-            symmetric=None,
-            thickness=None,
-            traceref=None,
-            tracerefminus=None,
-            type=None,
-            value=None,
-            valueminus=None,
-            visible=None,
-            width=None,
+            array: NDArray|None = None,
+            arrayminus: NDArray|None = None,
+            arrayminussrc: str|None = None,
+            arraysrc: str|None = None,
+            color: str|None = None,
+            copy_ystyle: bool|None = None,
+            symmetric: bool|None = None,
+            thickness: int|float|None = None,
+            traceref: int|None = None,
+            tracerefminus: int|None = None,
+            type: Any|None = None,
+            value: int|float|None = None,
+            valueminus: int|float|None = None,
+            visible: bool|None = None,
+            width: int|float|None = None,
             **kwargs
         ):
         """

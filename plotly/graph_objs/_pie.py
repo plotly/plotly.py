@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -47,7 +50,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -178,7 +181,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -266,7 +269,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -313,7 +316,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -356,7 +359,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -473,7 +476,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['labels']
 
@@ -659,7 +662,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -768,7 +771,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['pull']
 
@@ -921,7 +924,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['text']
 
@@ -989,7 +992,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['textposition']
 
@@ -1065,7 +1068,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['texttemplate']
 
@@ -1183,7 +1186,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['values']
 
@@ -1510,59 +1513,59 @@ class Pie(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            automargin=None,
-            customdata=None,
-            customdatasrc=None,
-            direction=None,
-            dlabel=None,
-            domain=None,
-            hole=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            insidetextfont=None,
-            insidetextorientation=None,
-            label0=None,
-            labels=None,
-            labelssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            outsidetextfont=None,
-            pull=None,
-            pullsrc=None,
-            rotation=None,
-            scalegroup=None,
-            showlegend=None,
-            sort=None,
-            stream=None,
-            text=None,
-            textfont=None,
-            textinfo=None,
-            textposition=None,
-            textpositionsrc=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            title=None,
-            uid=None,
-            uirevision=None,
-            values=None,
-            valuessrc=None,
-            visible=None,
+            automargin: bool|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            direction: Any|None = None,
+            dlabel: int|float|None = None,
+            domain: None|None = None,
+            hole: int|float|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            insidetextfont: None|None = None,
+            insidetextorientation: Any|None = None,
+            label0: int|float|None = None,
+            labels: NDArray|None = None,
+            labelssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            outsidetextfont: None|None = None,
+            pull: int|float|None = None,
+            pullsrc: str|None = None,
+            rotation: int|float|None = None,
+            scalegroup: str|None = None,
+            showlegend: bool|None = None,
+            sort: bool|None = None,
+            stream: None|None = None,
+            text: NDArray|None = None,
+            textfont: None|None = None,
+            textinfo: Any|None = None,
+            textposition: Any|None = None,
+            textpositionsrc: str|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            texttemplatesrc: str|None = None,
+            title: None|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            values: NDArray|None = None,
+            valuessrc: str|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

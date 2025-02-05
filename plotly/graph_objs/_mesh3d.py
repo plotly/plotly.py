@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -325,7 +328,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -391,7 +394,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['facecolor']
 
@@ -460,7 +463,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -546,7 +549,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -589,7 +592,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -636,7 +639,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['i']
 
@@ -658,7 +661,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -699,7 +702,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['intensity']
 
@@ -787,7 +790,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['j']
 
@@ -833,7 +836,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['k']
 
@@ -1040,7 +1043,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -1241,7 +1244,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -1339,7 +1342,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['vertexcolor']
 
@@ -1405,7 +1408,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1502,7 +1505,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1599,7 +1602,7 @@ class Mesh3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -2079,76 +2082,76 @@ class Mesh3d(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            alphahull=None,
-            autocolorscale=None,
-            cauto=None,
-            cmax=None,
-            cmid=None,
-            cmin=None,
-            color=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            contour=None,
-            customdata=None,
-            customdatasrc=None,
-            delaunayaxis=None,
-            facecolor=None,
-            facecolorsrc=None,
-            flatshading=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            i=None,
-            ids=None,
-            idssrc=None,
-            intensity=None,
-            intensitymode=None,
-            intensitysrc=None,
-            isrc=None,
-            j=None,
-            jsrc=None,
-            k=None,
-            ksrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            lighting=None,
-            lightposition=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            reversescale=None,
-            scene=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            vertexcolor=None,
-            vertexcolorsrc=None,
-            visible=None,
-            x=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            ycalendar=None,
-            yhoverformat=None,
-            ysrc=None,
-            z=None,
-            zcalendar=None,
-            zhoverformat=None,
-            zsrc=None,
+            alphahull: int|float|None = None,
+            autocolorscale: bool|None = None,
+            cauto: bool|None = None,
+            cmax: int|float|None = None,
+            cmid: int|float|None = None,
+            cmin: int|float|None = None,
+            color: str|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            contour: None|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            delaunayaxis: Any|None = None,
+            facecolor: NDArray|None = None,
+            facecolorsrc: str|None = None,
+            flatshading: bool|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            i: NDArray|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            intensity: NDArray|None = None,
+            intensitymode: Any|None = None,
+            intensitysrc: str|None = None,
+            isrc: str|None = None,
+            j: NDArray|None = None,
+            jsrc: str|None = None,
+            k: NDArray|None = None,
+            ksrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            lighting: None|None = None,
+            lightposition: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            reversescale: bool|None = None,
+            scene: str|None = None,
+            showlegend: bool|None = None,
+            showscale: bool|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            textsrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            vertexcolor: NDArray|None = None,
+            vertexcolorsrc: str|None = None,
+            visible: Any|None = None,
+            x: NDArray|None = None,
+            xcalendar: Any|None = None,
+            xhoverformat: str|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            ycalendar: Any|None = None,
+            yhoverformat: str|None = None,
+            ysrc: str|None = None,
+            z: NDArray|None = None,
+            zcalendar: Any|None = None,
+            zhoverformat: str|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

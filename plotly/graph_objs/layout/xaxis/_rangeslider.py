@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -234,14 +237,14 @@ class Rangeslider(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            autorange=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderwidth=None,
-            range=None,
-            thickness=None,
-            visible=None,
-            yaxis=None,
+            autorange: bool|None = None,
+            bgcolor: str|None = None,
+            bordercolor: str|None = None,
+            borderwidth: int|None = None,
+            range: list|None = None,
+            thickness: int|float|None = None,
+            visible: bool|None = None,
+            yaxis: None|None = None,
             **kwargs
         ):
         """

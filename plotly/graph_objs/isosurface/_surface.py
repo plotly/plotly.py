@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -138,10 +141,10 @@ class Surface(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            count=None,
-            fill=None,
-            pattern=None,
-            show=None,
+            count: int|None = None,
+            fill: int|float|None = None,
+            pattern: Any|None = None,
+            show: bool|None = None,
             **kwargs
         ):
         """

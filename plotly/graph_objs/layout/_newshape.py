@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -424,21 +427,21 @@ class Newshape(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            drawdirection=None,
-            fillcolor=None,
-            fillrule=None,
-            label=None,
-            layer=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            name=None,
-            opacity=None,
-            showlegend=None,
-            visible=None,
+            drawdirection: Any|None = None,
+            fillcolor: str|None = None,
+            fillrule: Any|None = None,
+            label: None|None = None,
+            layer: Any|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            showlegend: bool|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -50,7 +53,7 @@ class Indicator(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -158,7 +161,7 @@ class Indicator(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -300,7 +303,7 @@ class Indicator(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -664,29 +667,29 @@ class Indicator(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            align=None,
-            customdata=None,
-            customdatasrc=None,
-            delta=None,
-            domain=None,
-            gauge=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            meta=None,
-            metasrc=None,
-            mode=None,
-            name=None,
-            number=None,
-            stream=None,
-            title=None,
-            uid=None,
-            uirevision=None,
-            value=None,
-            visible=None,
+            align: Any|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            delta: None|None = None,
+            domain: None|None = None,
+            gauge: None|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            mode: Any|None = None,
+            name: str|None = None,
+            number: None|None = None,
+            stream: None|None = None,
+            title: None|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            value: int|float|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 from warnings import warn
@@ -178,7 +181,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -270,7 +273,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -357,7 +360,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -400,7 +403,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -443,7 +446,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -601,7 +604,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['locations']
 
@@ -671,7 +674,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -894,7 +897,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -1033,7 +1036,7 @@ class Choroplethmapbox(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -1417,54 +1420,54 @@ class Choroplethmapbox(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            autocolorscale=None,
-            below=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            customdata=None,
-            customdatasrc=None,
-            featureidkey=None,
-            geojson=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            locations=None,
-            locationssrc=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            reversescale=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            subplot=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
-            z=None,
-            zauto=None,
-            zmax=None,
-            zmid=None,
-            zmin=None,
-            zsrc=None,
+            autocolorscale: bool|None = None,
+            below: str|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            featureidkey: str|None = None,
+            geojson: Any|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            locations: NDArray|None = None,
+            locationssrc: str|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            reversescale: bool|None = None,
+            selected: None|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            showscale: bool|None = None,
+            stream: None|None = None,
+            subplot: str|None = None,
+            text: str|None = None,
+            textsrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            unselected: None|None = None,
+            visible: Any|None = None,
+            z: NDArray|None = None,
+            zauto: bool|None = None,
+            zmax: int|float|None = None,
+            zmid: int|float|None = None,
+            zmin: int|float|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

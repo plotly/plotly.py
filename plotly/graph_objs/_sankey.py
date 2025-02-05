@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -54,7 +57,7 @@ class Sankey(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -166,7 +169,7 @@ class Sankey(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -331,7 +334,7 @@ class Sankey(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -763,32 +766,32 @@ class Sankey(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            arrangement=None,
-            customdata=None,
-            customdatasrc=None,
-            domain=None,
-            hoverinfo=None,
-            hoverlabel=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            link=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            node=None,
-            orientation=None,
-            selectedpoints=None,
-            stream=None,
-            textfont=None,
-            uid=None,
-            uirevision=None,
-            valueformat=None,
-            valuesuffix=None,
-            visible=None,
+            arrangement: Any|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            domain: None|None = None,
+            hoverinfo: Any|None = None,
+            hoverlabel: None|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            link: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            node: None|None = None,
+            orientation: Any|None = None,
+            selectedpoints: Any|None = None,
+            stream: None|None = None,
+            textfont: None|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            valueformat: str|None = None,
+            valuesuffix: str|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

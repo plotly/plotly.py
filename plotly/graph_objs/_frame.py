@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseFrameHierarchyType as _BaseFrameHierarchyType
 import copy as _copy
 
@@ -163,12 +166,12 @@ class Frame(_BaseFrameHierarchyType):
         """
     def __init__(self,
             arg=None,
-            baseframe=None,
-            data=None,
-            group=None,
-            layout=None,
-            name=None,
-            traces=None,
+            baseframe: str|None = None,
+            data: Any|None = None,
+            group: str|None = None,
+            layout: Any|None = None,
+            name: str|None = None,
+            traces: Any|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -608,7 +611,7 @@ class Axis(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ticktext']
 
@@ -649,7 +652,7 @@ class Axis(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['tickvals']
 
@@ -883,36 +886,36 @@ class Axis(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            dtick=None,
-            exponentformat=None,
-            labelalias=None,
-            minexponent=None,
-            nticks=None,
-            range=None,
-            separatethousands=None,
-            showexponent=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            tick0=None,
-            tickangle=None,
-            tickcolor=None,
-            tickfont=None,
-            tickformat=None,
-            tickformatstops=None,
-            tickformatstopdefaults=None,
-            ticklabelstep=None,
-            ticklen=None,
-            tickmode=None,
-            tickprefix=None,
-            ticks=None,
-            ticksuffix=None,
-            ticktext=None,
-            ticktextsrc=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            visible=None,
+            dtick: Any|None = None,
+            exponentformat: Any|None = None,
+            labelalias: Any|None = None,
+            minexponent: int|float|None = None,
+            nticks: int|None = None,
+            range: list|None = None,
+            separatethousands: bool|None = None,
+            showexponent: Any|None = None,
+            showticklabels: bool|None = None,
+            showtickprefix: Any|None = None,
+            showticksuffix: Any|None = None,
+            tick0: Any|None = None,
+            tickangle: int|float|None = None,
+            tickcolor: str|None = None,
+            tickfont: None|None = None,
+            tickformat: str|None = None,
+            tickformatstops: None|None = None,
+            tickformatstopdefaults: None|None = None,
+            ticklabelstep: int|None = None,
+            ticklen: int|float|None = None,
+            tickmode: Any|None = None,
+            tickprefix: str|None = None,
+            ticks: Any|None = None,
+            ticksuffix: str|None = None,
+            ticktext: NDArray|None = None,
+            ticktextsrc: str|None = None,
+            tickvals: NDArray|None = None,
+            tickvalssrc: str|None = None,
+            tickwidth: int|float|None = None,
+            visible: bool|None = None,
             **kwargs
         ):
         """

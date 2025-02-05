@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -56,7 +59,7 @@ class Node(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['color']
 
@@ -96,7 +99,7 @@ class Node(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -233,7 +236,7 @@ class Node(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -274,7 +277,7 @@ class Node(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['label']
 
@@ -375,7 +378,7 @@ class Node(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -415,7 +418,7 @@ class Node(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -537,25 +540,25 @@ class Node(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            align=None,
-            color=None,
-            colorsrc=None,
-            customdata=None,
-            customdatasrc=None,
-            groups=None,
-            hoverinfo=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            label=None,
-            labelsrc=None,
-            line=None,
-            pad=None,
-            thickness=None,
-            x=None,
-            xsrc=None,
-            y=None,
-            ysrc=None,
+            align: Any|None = None,
+            color: str|None = None,
+            colorsrc: str|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            groups: list|None = None,
+            hoverinfo: Any|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            label: NDArray|None = None,
+            labelsrc: str|None = None,
+            line: None|None = None,
+            pad: int|float|None = None,
+            thickness: int|float|None = None,
+            x: NDArray|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            ysrc: str|None = None,
             **kwargs
         ):
         """

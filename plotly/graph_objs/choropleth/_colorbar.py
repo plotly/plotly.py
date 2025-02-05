@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -853,7 +856,7 @@ class ColorBar(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ticktext']
 
@@ -894,7 +897,7 @@ class ColorBar(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['tickvals']
 
@@ -1395,55 +1398,55 @@ class ColorBar(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderwidth=None,
-            dtick=None,
-            exponentformat=None,
-            labelalias=None,
-            len=None,
-            lenmode=None,
-            minexponent=None,
-            nticks=None,
-            orientation=None,
-            outlinecolor=None,
-            outlinewidth=None,
-            separatethousands=None,
-            showexponent=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            thickness=None,
-            thicknessmode=None,
-            tick0=None,
-            tickangle=None,
-            tickcolor=None,
-            tickfont=None,
-            tickformat=None,
-            tickformatstops=None,
-            tickformatstopdefaults=None,
-            ticklabeloverflow=None,
-            ticklabelposition=None,
-            ticklabelstep=None,
-            ticklen=None,
-            tickmode=None,
-            tickprefix=None,
-            ticks=None,
-            ticksuffix=None,
-            ticktext=None,
-            ticktextsrc=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            title=None,
-            x=None,
-            xanchor=None,
-            xpad=None,
-            xref=None,
-            y=None,
-            yanchor=None,
-            ypad=None,
-            yref=None,
+            bgcolor: str|None = None,
+            bordercolor: str|None = None,
+            borderwidth: int|float|None = None,
+            dtick: Any|None = None,
+            exponentformat: Any|None = None,
+            labelalias: Any|None = None,
+            len: int|float|None = None,
+            lenmode: Any|None = None,
+            minexponent: int|float|None = None,
+            nticks: int|None = None,
+            orientation: Any|None = None,
+            outlinecolor: str|None = None,
+            outlinewidth: int|float|None = None,
+            separatethousands: bool|None = None,
+            showexponent: Any|None = None,
+            showticklabels: bool|None = None,
+            showtickprefix: Any|None = None,
+            showticksuffix: Any|None = None,
+            thickness: int|float|None = None,
+            thicknessmode: Any|None = None,
+            tick0: Any|None = None,
+            tickangle: int|float|None = None,
+            tickcolor: str|None = None,
+            tickfont: None|None = None,
+            tickformat: str|None = None,
+            tickformatstops: None|None = None,
+            tickformatstopdefaults: None|None = None,
+            ticklabeloverflow: Any|None = None,
+            ticklabelposition: Any|None = None,
+            ticklabelstep: int|None = None,
+            ticklen: int|float|None = None,
+            tickmode: Any|None = None,
+            tickprefix: str|None = None,
+            ticks: Any|None = None,
+            ticksuffix: str|None = None,
+            ticktext: NDArray|None = None,
+            ticktextsrc: str|None = None,
+            tickvals: NDArray|None = None,
+            tickvalssrc: str|None = None,
+            tickwidth: int|float|None = None,
+            title: None|None = None,
+            x: int|float|None = None,
+            xanchor: Any|None = None,
+            xpad: int|float|None = None,
+            xref: Any|None = None,
+            y: int|float|None = None,
+            yanchor: Any|None = None,
+            ypad: int|float|None = None,
+            yref: Any|None = None,
             **kwargs
         ):
         """

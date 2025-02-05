@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -176,7 +179,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -263,7 +266,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -370,7 +373,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -411,7 +414,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['hovertext']
 
@@ -454,7 +457,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -619,7 +622,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -786,7 +789,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['text']
 
@@ -981,7 +984,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1233,7 +1236,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1485,7 +1488,7 @@ class Heatmap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -2042,77 +2045,77 @@ class Heatmap(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            autocolorscale=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            connectgaps=None,
-            customdata=None,
-            customdatasrc=None,
-            dx=None,
-            dy=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hoverongaps=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            reversescale=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            text=None,
-            textfont=None,
-            textsrc=None,
-            texttemplate=None,
-            transpose=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            x=None,
-            x0=None,
-            xaxis=None,
-            xcalendar=None,
-            xgap=None,
-            xhoverformat=None,
-            xperiod=None,
-            xperiod0=None,
-            xperiodalignment=None,
-            xsrc=None,
-            xtype=None,
-            y=None,
-            y0=None,
-            yaxis=None,
-            ycalendar=None,
-            ygap=None,
-            yhoverformat=None,
-            yperiod=None,
-            yperiod0=None,
-            yperiodalignment=None,
-            ysrc=None,
-            ytype=None,
-            z=None,
-            zauto=None,
-            zhoverformat=None,
-            zmax=None,
-            zmid=None,
-            zmin=None,
-            zorder=None,
-            zsmooth=None,
-            zsrc=None,
+            autocolorscale: bool|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            connectgaps: bool|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            dx: int|float|None = None,
+            dy: int|float|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hoverongaps: bool|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: NDArray|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            reversescale: bool|None = None,
+            showlegend: bool|None = None,
+            showscale: bool|None = None,
+            stream: None|None = None,
+            text: NDArray|None = None,
+            textfont: None|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            transpose: bool|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            x: NDArray|None = None,
+            x0: Any|None = None,
+            xaxis: str|None = None,
+            xcalendar: Any|None = None,
+            xgap: int|float|None = None,
+            xhoverformat: str|None = None,
+            xperiod: Any|None = None,
+            xperiod0: Any|None = None,
+            xperiodalignment: Any|None = None,
+            xsrc: str|None = None,
+            xtype: Any|None = None,
+            y: NDArray|None = None,
+            y0: Any|None = None,
+            yaxis: str|None = None,
+            ycalendar: Any|None = None,
+            ygap: int|float|None = None,
+            yhoverformat: str|None = None,
+            yperiod: Any|None = None,
+            yperiod0: Any|None = None,
+            yperiodalignment: Any|None = None,
+            ysrc: str|None = None,
+            ytype: Any|None = None,
+            z: NDArray|None = None,
+            zauto: bool|None = None,
+            zhoverformat: str|None = None,
+            zmax: int|float|None = None,
+            zmid: int|float|None = None,
+            zmin: int|float|None = None,
+            zorder: int|None = None,
+            zsmooth: Any|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

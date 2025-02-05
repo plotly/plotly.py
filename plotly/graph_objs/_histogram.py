@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -189,7 +192,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -338,7 +341,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -425,7 +428,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -468,7 +471,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -511,7 +514,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -742,7 +745,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -1032,7 +1035,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -1281,7 +1284,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1422,7 +1425,7 @@ class Histogram(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1947,72 +1950,72 @@ class Histogram(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            alignmentgroup=None,
-            autobinx=None,
-            autobiny=None,
-            bingroup=None,
-            cliponaxis=None,
-            constraintext=None,
-            cumulative=None,
-            customdata=None,
-            customdatasrc=None,
-            error_x=None,
-            error_y=None,
-            histfunc=None,
-            histnorm=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            insidetextanchor=None,
-            insidetextfont=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            nbinsx=None,
-            nbinsy=None,
-            offsetgroup=None,
-            opacity=None,
-            orientation=None,
-            outsidetextfont=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            stream=None,
-            text=None,
-            textangle=None,
-            textfont=None,
-            textposition=None,
-            textsrc=None,
-            texttemplate=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
-            x=None,
-            xaxis=None,
-            xbins=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            yaxis=None,
-            ybins=None,
-            ycalendar=None,
-            yhoverformat=None,
-            ysrc=None,
-            zorder=None,
+            alignmentgroup: str|None = None,
+            autobinx: bool|None = None,
+            autobiny: bool|None = None,
+            bingroup: str|None = None,
+            cliponaxis: bool|None = None,
+            constraintext: Any|None = None,
+            cumulative: None|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            error_x: None|None = None,
+            error_y: None|None = None,
+            histfunc: Any|None = None,
+            histnorm: Any|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            insidetextanchor: Any|None = None,
+            insidetextfont: None|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            nbinsx: int|None = None,
+            nbinsy: int|None = None,
+            offsetgroup: str|None = None,
+            opacity: int|float|None = None,
+            orientation: Any|None = None,
+            outsidetextfont: None|None = None,
+            selected: None|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            textangle: int|float|None = None,
+            textfont: None|None = None,
+            textposition: Any|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            unselected: None|None = None,
+            visible: Any|None = None,
+            x: NDArray|None = None,
+            xaxis: str|None = None,
+            xbins: None|None = None,
+            xcalendar: Any|None = None,
+            xhoverformat: str|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            yaxis: str|None = None,
+            ybins: None|None = None,
+            ycalendar: Any|None = None,
+            yhoverformat: str|None = None,
+            ysrc: str|None = None,
+            zorder: int|None = None,
             **kwargs
         ):
         """

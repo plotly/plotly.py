@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -391,18 +394,18 @@ class Grid(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            columns=None,
-            domain=None,
-            pattern=None,
-            roworder=None,
-            rows=None,
-            subplots=None,
-            xaxes=None,
-            xgap=None,
-            xside=None,
-            yaxes=None,
-            ygap=None,
-            yside=None,
+            columns: int|None = None,
+            domain: None|None = None,
+            pattern: Any|None = None,
+            roworder: Any|None = None,
+            rows: int|None = None,
+            subplots: list|None = None,
+            xaxes: list|None = None,
+            xgap: int|float|None = None,
+            xside: Any|None = None,
+            yaxes: list|None = None,
+            ygap: int|float|None = None,
+            yside: Any|None = None,
             **kwargs
         ):
         """

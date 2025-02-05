@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -243,7 +246,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -290,7 +293,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -379,7 +382,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -443,7 +446,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -671,7 +674,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -935,7 +938,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['u']
 
@@ -1055,7 +1058,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['v']
 
@@ -1143,7 +1146,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['w']
 
@@ -1208,7 +1211,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1279,7 +1282,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1350,7 +1353,7 @@ class Streamtube(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -1740,65 +1743,65 @@ class Streamtube(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            autocolorscale=None,
-            cauto=None,
-            cmax=None,
-            cmid=None,
-            cmin=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            customdata=None,
-            customdatasrc=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            lighting=None,
-            lightposition=None,
-            maxdisplayed=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            reversescale=None,
-            scene=None,
-            showlegend=None,
-            showscale=None,
-            sizeref=None,
-            starts=None,
-            stream=None,
-            text=None,
-            u=None,
-            uhoverformat=None,
-            uid=None,
-            uirevision=None,
-            usrc=None,
-            v=None,
-            vhoverformat=None,
-            visible=None,
-            vsrc=None,
-            w=None,
-            whoverformat=None,
-            wsrc=None,
-            x=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            yhoverformat=None,
-            ysrc=None,
-            z=None,
-            zhoverformat=None,
-            zsrc=None,
+            autocolorscale: bool|None = None,
+            cauto: bool|None = None,
+            cmax: int|float|None = None,
+            cmid: int|float|None = None,
+            cmin: int|float|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            lighting: None|None = None,
+            lightposition: None|None = None,
+            maxdisplayed: int|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            reversescale: bool|None = None,
+            scene: str|None = None,
+            showlegend: bool|None = None,
+            showscale: bool|None = None,
+            sizeref: int|float|None = None,
+            starts: None|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            u: NDArray|None = None,
+            uhoverformat: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            usrc: str|None = None,
+            v: NDArray|None = None,
+            vhoverformat: str|None = None,
+            visible: Any|None = None,
+            vsrc: str|None = None,
+            w: NDArray|None = None,
+            whoverformat: str|None = None,
+            wsrc: str|None = None,
+            x: NDArray|None = None,
+            xhoverformat: str|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            yhoverformat: str|None = None,
+            ysrc: str|None = None,
+            z: NDArray|None = None,
+            zhoverformat: str|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

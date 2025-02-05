@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -517,7 +520,7 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['tickvals']
 
@@ -698,31 +701,31 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            hoverformat=None,
-            labelalias=None,
-            layer=None,
-            linecolor=None,
-            linewidth=None,
-            showgrid=None,
-            showline=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            tickcolor=None,
-            tickfont=None,
-            tickformat=None,
-            ticklen=None,
-            tickprefix=None,
-            ticks=None,
-            ticksuffix=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            visible=None,
+            color: str|None = None,
+            gridcolor: str|None = None,
+            griddash: str|None = None,
+            gridwidth: int|float|None = None,
+            hoverformat: str|None = None,
+            labelalias: Any|None = None,
+            layer: Any|None = None,
+            linecolor: str|None = None,
+            linewidth: int|float|None = None,
+            showgrid: bool|None = None,
+            showline: bool|None = None,
+            showticklabels: bool|None = None,
+            showtickprefix: Any|None = None,
+            showticksuffix: Any|None = None,
+            tickcolor: str|None = None,
+            tickfont: None|None = None,
+            tickformat: str|None = None,
+            ticklen: int|float|None = None,
+            tickprefix: str|None = None,
+            ticks: Any|None = None,
+            ticksuffix: str|None = None,
+            tickvals: NDArray|None = None,
+            tickvalssrc: str|None = None,
+            tickwidth: int|float|None = None,
+            visible: bool|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -72,7 +75,7 @@ class Parcats(_BaseTraceType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['counts']
 
@@ -375,7 +378,7 @@ class Parcats(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -726,29 +729,29 @@ class Parcats(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            arrangement=None,
-            bundlecolors=None,
-            counts=None,
-            countssrc=None,
-            dimensions=None,
-            dimensiondefaults=None,
-            domain=None,
-            hoverinfo=None,
-            hoveron=None,
-            hovertemplate=None,
-            labelfont=None,
-            legendgrouptitle=None,
-            legendwidth=None,
-            line=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            sortpaths=None,
-            stream=None,
-            tickfont=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
+            arrangement: Any|None = None,
+            bundlecolors: bool|None = None,
+            counts: int|float|None = None,
+            countssrc: str|None = None,
+            dimensions: None|None = None,
+            dimensiondefaults: None|None = None,
+            domain: None|None = None,
+            hoverinfo: Any|None = None,
+            hoveron: Any|None = None,
+            hovertemplate: str|None = None,
+            labelfont: None|None = None,
+            legendgrouptitle: None|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            sortpaths: Any|None = None,
+            stream: None|None = None,
+            tickfont: None|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

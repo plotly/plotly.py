@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -290,14 +293,14 @@ class Label(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            font=None,
-            padding=None,
-            text=None,
-            textangle=None,
-            textposition=None,
-            texttemplate=None,
-            xanchor=None,
-            yanchor=None,
+            font: None|None = None,
+            padding: int|float|None = None,
+            text: str|None = None,
+            textangle: int|float|None = None,
+            textposition: Any|None = None,
+            texttemplate: str|None = None,
+            xanchor: Any|None = None,
+            yanchor: Any|None = None,
             **kwargs
         ):
         """

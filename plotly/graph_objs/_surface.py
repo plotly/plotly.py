@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -285,7 +288,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -354,7 +357,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -440,7 +443,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -483,7 +486,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -526,7 +529,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -733,7 +736,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -958,7 +961,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['surfacecolor']
 
@@ -1003,7 +1006,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -1121,7 +1124,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1216,7 +1219,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1311,7 +1314,7 @@ class Surface(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -1719,64 +1722,64 @@ class Surface(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            autocolorscale=None,
-            cauto=None,
-            cmax=None,
-            cmid=None,
-            cmin=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            connectgaps=None,
-            contours=None,
-            customdata=None,
-            customdatasrc=None,
-            hidesurface=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            lighting=None,
-            lightposition=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            opacityscale=None,
-            reversescale=None,
-            scene=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            surfacecolor=None,
-            surfacecolorsrc=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            x=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            ycalendar=None,
-            yhoverformat=None,
-            ysrc=None,
-            z=None,
-            zcalendar=None,
-            zhoverformat=None,
-            zsrc=None,
+            autocolorscale: bool|None = None,
+            cauto: bool|None = None,
+            cmax: int|float|None = None,
+            cmid: int|float|None = None,
+            cmin: int|float|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            connectgaps: bool|None = None,
+            contours: None|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            hidesurface: bool|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            lighting: None|None = None,
+            lightposition: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            opacityscale: Any|None = None,
+            reversescale: bool|None = None,
+            scene: str|None = None,
+            showlegend: bool|None = None,
+            showscale: bool|None = None,
+            stream: None|None = None,
+            surfacecolor: NDArray|None = None,
+            surfacecolorsrc: str|None = None,
+            text: str|None = None,
+            textsrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            x: NDArray|None = None,
+            xcalendar: Any|None = None,
+            xhoverformat: str|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            ycalendar: Any|None = None,
+            yhoverformat: str|None = None,
+            ysrc: str|None = None,
+            z: NDArray|None = None,
+            zcalendar: Any|None = None,
+            zhoverformat: str|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

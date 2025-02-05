@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -166,12 +169,12 @@ class Currentvalue(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            font=None,
-            offset=None,
-            prefix=None,
-            suffix=None,
-            visible=None,
-            xanchor=None,
+            font: None|None = None,
+            offset: int|float|None = None,
+            prefix: str|None = None,
+            suffix: str|None = None,
+            visible: bool|None = None,
+            xanchor: Any|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -50,7 +53,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['categoryarray']
 
@@ -1019,7 +1022,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ticktext']
 
@@ -1060,7 +1063,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['tickvals']
 
@@ -1435,55 +1438,55 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            autotypenumbers=None,
-            categoryarray=None,
-            categoryarraysrc=None,
-            categoryorder=None,
-            color=None,
-            direction=None,
-            dtick=None,
-            exponentformat=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            hoverformat=None,
-            labelalias=None,
-            layer=None,
-            linecolor=None,
-            linewidth=None,
-            minexponent=None,
-            nticks=None,
-            period=None,
-            rotation=None,
-            separatethousands=None,
-            showexponent=None,
-            showgrid=None,
-            showline=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            thetaunit=None,
-            tick0=None,
-            tickangle=None,
-            tickcolor=None,
-            tickfont=None,
-            tickformat=None,
-            tickformatstops=None,
-            tickformatstopdefaults=None,
-            ticklabelstep=None,
-            ticklen=None,
-            tickmode=None,
-            tickprefix=None,
-            ticks=None,
-            ticksuffix=None,
-            ticktext=None,
-            ticktextsrc=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            type=None,
-            uirevision=None,
-            visible=None,
+            autotypenumbers: Any|None = None,
+            categoryarray: NDArray|None = None,
+            categoryarraysrc: str|None = None,
+            categoryorder: Any|None = None,
+            color: str|None = None,
+            direction: Any|None = None,
+            dtick: Any|None = None,
+            exponentformat: Any|None = None,
+            gridcolor: str|None = None,
+            griddash: str|None = None,
+            gridwidth: int|float|None = None,
+            hoverformat: str|None = None,
+            labelalias: Any|None = None,
+            layer: Any|None = None,
+            linecolor: str|None = None,
+            linewidth: int|float|None = None,
+            minexponent: int|float|None = None,
+            nticks: int|None = None,
+            period: int|float|None = None,
+            rotation: int|float|None = None,
+            separatethousands: bool|None = None,
+            showexponent: Any|None = None,
+            showgrid: bool|None = None,
+            showline: bool|None = None,
+            showticklabels: bool|None = None,
+            showtickprefix: Any|None = None,
+            showticksuffix: Any|None = None,
+            thetaunit: Any|None = None,
+            tick0: Any|None = None,
+            tickangle: int|float|None = None,
+            tickcolor: str|None = None,
+            tickfont: None|None = None,
+            tickformat: str|None = None,
+            tickformatstops: None|None = None,
+            tickformatstopdefaults: None|None = None,
+            ticklabelstep: int|None = None,
+            ticklen: int|float|None = None,
+            tickmode: Any|None = None,
+            tickprefix: str|None = None,
+            ticks: Any|None = None,
+            ticksuffix: str|None = None,
+            ticktext: NDArray|None = None,
+            ticktextsrc: str|None = None,
+            tickvals: NDArray|None = None,
+            tickvalssrc: str|None = None,
+            tickwidth: int|float|None = None,
+            type: Any|None = None,
+            uirevision: Any|None = None,
+            visible: bool|None = None,
             **kwargs
         ):
         """

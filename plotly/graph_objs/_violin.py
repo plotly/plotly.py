@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -93,7 +96,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -166,7 +169,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -277,7 +280,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -320,7 +323,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -363,7 +366,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -614,7 +617,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -1049,7 +1052,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -1211,7 +1214,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1329,7 +1332,7 @@ class Violin(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1813,67 +1816,67 @@ class Violin(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            alignmentgroup=None,
-            bandwidth=None,
-            box=None,
-            customdata=None,
-            customdatasrc=None,
-            fillcolor=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hoveron=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            jitter=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            marker=None,
-            meanline=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            offsetgroup=None,
-            opacity=None,
-            orientation=None,
-            pointpos=None,
-            points=None,
-            quartilemethod=None,
-            scalegroup=None,
-            scalemode=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            side=None,
-            span=None,
-            spanmode=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
-            width=None,
-            x=None,
-            x0=None,
-            xaxis=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            y0=None,
-            yaxis=None,
-            yhoverformat=None,
-            ysrc=None,
-            zorder=None,
+            alignmentgroup: str|None = None,
+            bandwidth: int|float|None = None,
+            box: None|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            fillcolor: str|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hoveron: Any|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            jitter: int|float|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            marker: None|None = None,
+            meanline: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            offsetgroup: str|None = None,
+            opacity: int|float|None = None,
+            orientation: Any|None = None,
+            pointpos: int|float|None = None,
+            points: Any|None = None,
+            quartilemethod: Any|None = None,
+            scalegroup: str|None = None,
+            scalemode: Any|None = None,
+            selected: None|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            side: Any|None = None,
+            span: list|None = None,
+            spanmode: Any|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            textsrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            unselected: None|None = None,
+            visible: Any|None = None,
+            width: int|float|None = None,
+            x: NDArray|None = None,
+            x0: Any|None = None,
+            xaxis: str|None = None,
+            xhoverformat: str|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            y0: Any|None = None,
+            yaxis: str|None = None,
+            yhoverformat: str|None = None,
+            ysrc: str|None = None,
+            zorder: int|None = None,
             **kwargs
         ):
         """

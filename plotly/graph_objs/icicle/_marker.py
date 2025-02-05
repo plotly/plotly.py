@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -191,7 +194,7 @@ class Marker(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['colors']
 
@@ -448,20 +451,20 @@ class Marker(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            autocolorscale=None,
-            cauto=None,
-            cmax=None,
-            cmid=None,
-            cmin=None,
-            coloraxis=None,
-            colorbar=None,
-            colors=None,
-            colorscale=None,
-            colorssrc=None,
-            line=None,
-            pattern=None,
-            reversescale=None,
-            showscale=None,
+            autocolorscale: bool|None = None,
+            cauto: bool|None = None,
+            cmax: int|float|None = None,
+            cmid: int|float|None = None,
+            cmin: int|float|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colors: NDArray|None = None,
+            colorscale: str|None = None,
+            colorssrc: str|None = None,
+            line: None|None = None,
+            pattern: None|None = None,
+            reversescale: bool|None = None,
+            showscale: bool|None = None,
             **kwargs
         ):
         """

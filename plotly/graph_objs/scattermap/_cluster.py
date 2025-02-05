@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -29,7 +32,7 @@ class Cluster(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['color']
 
@@ -111,7 +114,7 @@ class Cluster(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['opacity']
 
@@ -152,7 +155,7 @@ class Cluster(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['size']
 
@@ -197,7 +200,7 @@ class Cluster(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['step']
 
@@ -263,16 +266,16 @@ class Cluster(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            colorsrc=None,
-            enabled=None,
-            maxzoom=None,
-            opacity=None,
-            opacitysrc=None,
-            size=None,
-            sizesrc=None,
-            step=None,
-            stepsrc=None,
+            color: str|None = None,
+            colorsrc: str|None = None,
+            enabled: bool|None = None,
+            maxzoom: int|float|None = None,
+            opacity: int|float|None = None,
+            opacitysrc: str|None = None,
+            size: int|float|None = None,
+            sizesrc: str|None = None,
+            step: int|float|None = None,
+            stepsrc: str|None = None,
             **kwargs
         ):
         """

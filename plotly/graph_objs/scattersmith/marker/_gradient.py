@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -30,7 +33,7 @@ class Gradient(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['color']
 
@@ -72,7 +75,7 @@ class Gradient(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['type']
 
@@ -120,10 +123,10 @@ class Gradient(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            colorsrc=None,
-            type=None,
-            typesrc=None,
+            color: str|None = None,
+            colorsrc: str|None = None,
+            type: Any|None = None,
+            typesrc: str|None = None,
             **kwargs
         ):
         """

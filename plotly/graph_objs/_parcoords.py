@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -27,7 +30,7 @@ class Parcoords(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -141,7 +144,7 @@ class Parcoords(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -376,7 +379,7 @@ class Parcoords(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -728,31 +731,31 @@ class Parcoords(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            customdata=None,
-            customdatasrc=None,
-            dimensions=None,
-            dimensiondefaults=None,
-            domain=None,
-            ids=None,
-            idssrc=None,
-            labelangle=None,
-            labelfont=None,
-            labelside=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            rangefont=None,
-            stream=None,
-            tickfont=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            dimensions: None|None = None,
+            dimensiondefaults: None|None = None,
+            domain: None|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            labelangle: int|float|None = None,
+            labelfont: None|None = None,
+            labelside: Any|None = None,
+            legend: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            rangefont: None|None = None,
+            stream: None|None = None,
+            tickfont: None|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            unselected: None|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

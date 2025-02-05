@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -194,12 +197,12 @@ class Projection(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            distance=None,
-            parallels=None,
-            rotation=None,
-            scale=None,
-            tilt=None,
-            type=None,
+            distance: int|float|None = None,
+            parallels: list|None = None,
+            rotation: None|None = None,
+            scale: int|float|None = None,
+            tilt: int|float|None = None,
+            type: Any|None = None,
             **kwargs
         ):
         """

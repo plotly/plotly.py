@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -239,13 +242,13 @@ class Rangebreak(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            bounds=None,
-            dvalue=None,
-            enabled=None,
-            name=None,
-            pattern=None,
-            templateitemname=None,
-            values=None,
+            bounds: list|None = None,
+            dvalue: int|float|None = None,
+            enabled: bool|None = None,
+            name: str|None = None,
+            pattern: Any|None = None,
+            templateitemname: str|None = None,
+            values: list|None = None,
             **kwargs
         ):
         """

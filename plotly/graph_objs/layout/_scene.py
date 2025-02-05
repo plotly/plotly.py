@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -355,19 +358,19 @@ class Scene(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            annotations=None,
-            annotationdefaults=None,
-            aspectmode=None,
-            aspectratio=None,
-            bgcolor=None,
-            camera=None,
-            domain=None,
-            dragmode=None,
-            hovermode=None,
-            uirevision=None,
-            xaxis=None,
-            yaxis=None,
-            zaxis=None,
+            annotations: None|None = None,
+            annotationdefaults: None|None = None,
+            aspectmode: Any|None = None,
+            aspectratio: None|None = None,
+            bgcolor: str|None = None,
+            camera: None|None = None,
+            domain: None|None = None,
+            dragmode: Any|None = None,
+            hovermode: Any|None = None,
+            uirevision: Any|None = None,
+            xaxis: None|None = None,
+            yaxis: None|None = None,
+            zaxis: None|None = None,
             **kwargs
         ):
         """

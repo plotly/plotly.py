@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -187,12 +190,12 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            align=None,
-            bgcolor=None,
-            bordercolor=None,
-            font=None,
-            grouptitlefont=None,
-            namelength=None,
+            align: Any|None = None,
+            bgcolor: str|None = None,
+            bordercolor: str|None = None,
+            font: None|None = None,
+            grouptitlefont: None|None = None,
+            namelength: int|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -28,7 +31,7 @@ class Line(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['backoff']
 
@@ -205,13 +208,13 @@ class Line(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            backoff=None,
-            backoffsrc=None,
-            color=None,
-            dash=None,
-            shape=None,
-            smoothing=None,
-            width=None,
+            backoff: int|float|None = None,
+            backoffsrc: str|None = None,
+            color: str|None = None,
+            dash: str|None = None,
+            shape: Any|None = None,
+            smoothing: int|float|None = None,
+            width: int|float|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -292,16 +295,16 @@ class Polar(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            angularaxis=None,
-            bargap=None,
-            barmode=None,
-            bgcolor=None,
-            domain=None,
-            gridshape=None,
-            hole=None,
-            radialaxis=None,
-            sector=None,
-            uirevision=None,
+            angularaxis: None|None = None,
+            bargap: int|float|None = None,
+            barmode: Any|None = None,
+            bgcolor: str|None = None,
+            domain: None|None = None,
+            gridshape: Any|None = None,
+            hole: int|float|None = None,
+            radialaxis: None|None = None,
+            sector: list|None = None,
+            uirevision: Any|None = None,
             **kwargs
         ):
         """

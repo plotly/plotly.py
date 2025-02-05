@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -228,12 +231,12 @@ class Colorscale(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            cmax=None,
-            cmin=None,
-            colorscale=None,
-            label=None,
-            name=None,
-            templateitemname=None,
+            cmax: int|float|None = None,
+            cmin: int|float|None = None,
+            colorscale: str|None = None,
+            label: str|None = None,
+            name: str|None = None,
+            templateitemname: str|None = None,
             **kwargs
         ):
         """

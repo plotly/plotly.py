@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -300,15 +303,15 @@ class Coloraxis(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            autocolorscale=None,
-            cauto=None,
-            cmax=None,
-            cmid=None,
-            cmin=None,
-            colorbar=None,
-            colorscale=None,
-            reversescale=None,
-            showscale=None,
+            autocolorscale: bool|None = None,
+            cauto: bool|None = None,
+            cmax: int|float|None = None,
+            cmid: int|float|None = None,
+            cmin: int|float|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            reversescale: bool|None = None,
+            showscale: bool|None = None,
             **kwargs
         ):
         """

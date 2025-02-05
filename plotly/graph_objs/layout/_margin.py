@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -159,12 +162,12 @@ class Margin(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            autoexpand=None,
-            b=None,
-            l=None,
-            pad=None,
-            r=None,
-            t=None,
+            autoexpand: bool|None = None,
+            b: int|float|None = None,
+            l: int|float|None = None,
+            pad: int|float|None = None,
+            r: int|float|None = None,
+            t: int|float|None = None,
             **kwargs
         ):
         """

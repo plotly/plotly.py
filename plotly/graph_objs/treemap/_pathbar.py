@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -145,11 +148,11 @@ class Pathbar(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            edgeshape=None,
-            side=None,
-            textfont=None,
-            thickness=None,
-            visible=None,
+            edgeshape: Any|None = None,
+            side: Any|None = None,
+            textfont: None|None = None,
+            thickness: int|float|None = None,
+            visible: bool|None = None,
             **kwargs
         ):
         """

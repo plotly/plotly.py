@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -82,8 +85,8 @@ class Domain(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            x=None,
-            y=None,
+            x: list|None = None,
+            y: list|None = None,
             **kwargs
         ):
         """

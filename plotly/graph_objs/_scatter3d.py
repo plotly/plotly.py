@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -48,7 +51,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -158,7 +161,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -244,7 +247,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -291,7 +294,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -334,7 +337,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -541,7 +544,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -793,7 +796,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -841,7 +844,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['textposition']
 
@@ -915,7 +918,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['texttemplate']
 
@@ -1034,7 +1037,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1129,7 +1132,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1224,7 +1227,7 @@ class Scatter3d(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -1607,61 +1610,61 @@ class Scatter3d(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            connectgaps=None,
-            customdata=None,
-            customdatasrc=None,
-            error_x=None,
-            error_y=None,
-            error_z=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            mode=None,
-            name=None,
-            opacity=None,
-            projection=None,
-            scene=None,
-            showlegend=None,
-            stream=None,
-            surfaceaxis=None,
-            surfacecolor=None,
-            text=None,
-            textfont=None,
-            textposition=None,
-            textpositionsrc=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            x=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            ycalendar=None,
-            yhoverformat=None,
-            ysrc=None,
-            z=None,
-            zcalendar=None,
-            zhoverformat=None,
-            zsrc=None,
+            connectgaps: bool|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            error_x: None|None = None,
+            error_y: None|None = None,
+            error_z: None|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            mode: Any|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            projection: None|None = None,
+            scene: str|None = None,
+            showlegend: bool|None = None,
+            stream: None|None = None,
+            surfaceaxis: Any|None = None,
+            surfacecolor: str|None = None,
+            text: str|None = None,
+            textfont: None|None = None,
+            textposition: Any|None = None,
+            textpositionsrc: str|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            texttemplatesrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            x: NDArray|None = None,
+            xcalendar: Any|None = None,
+            xhoverformat: str|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            ycalendar: Any|None = None,
+            yhoverformat: str|None = None,
+            ysrc: str|None = None,
+            z: NDArray|None = None,
+            zcalendar: Any|None = None,
+            zhoverformat: str|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -107,9 +110,9 @@ class Project(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            x=None,
-            y=None,
-            z=None,
+            x: bool|None = None,
+            y: bool|None = None,
+            z: bool|None = None,
             **kwargs
         ):
         """

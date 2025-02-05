@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -71,7 +74,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -215,7 +218,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -326,7 +329,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -373,7 +376,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -416,7 +419,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -623,7 +626,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -733,7 +736,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['r']
 
@@ -913,7 +916,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -961,7 +964,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['textposition']
 
@@ -1037,7 +1040,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['texttemplate']
 
@@ -1078,7 +1081,7 @@ class Scatterpolar(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['theta']
 
@@ -1537,59 +1540,59 @@ class Scatterpolar(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            cliponaxis=None,
-            connectgaps=None,
-            customdata=None,
-            customdatasrc=None,
-            dr=None,
-            dtheta=None,
-            fill=None,
-            fillcolor=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hoveron=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            mode=None,
-            name=None,
-            opacity=None,
-            r=None,
-            r0=None,
-            rsrc=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            stream=None,
-            subplot=None,
-            text=None,
-            textfont=None,
-            textposition=None,
-            textpositionsrc=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            theta=None,
-            theta0=None,
-            thetasrc=None,
-            thetaunit=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
+            cliponaxis: bool|None = None,
+            connectgaps: bool|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            dr: int|float|None = None,
+            dtheta: int|float|None = None,
+            fill: Any|None = None,
+            fillcolor: str|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hoveron: Any|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            mode: Any|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            r: NDArray|None = None,
+            r0: Any|None = None,
+            rsrc: str|None = None,
+            selected: None|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            stream: None|None = None,
+            subplot: str|None = None,
+            text: str|None = None,
+            textfont: None|None = None,
+            textposition: Any|None = None,
+            textpositionsrc: str|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            texttemplatesrc: str|None = None,
+            theta: NDArray|None = None,
+            theta0: Any|None = None,
+            thetasrc: str|None = None,
+            thetaunit: Any|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            unselected: None|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

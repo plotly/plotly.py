@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -540,24 +543,24 @@ class Layer(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            below=None,
-            circle=None,
-            color=None,
-            coordinates=None,
-            fill=None,
-            line=None,
-            maxzoom=None,
-            minzoom=None,
-            name=None,
-            opacity=None,
-            source=None,
-            sourceattribution=None,
-            sourcelayer=None,
-            sourcetype=None,
-            symbol=None,
-            templateitemname=None,
-            type=None,
-            visible=None,
+            below: str|None = None,
+            circle: None|None = None,
+            color: str|None = None,
+            coordinates: Any|None = None,
+            fill: None|None = None,
+            line: None|None = None,
+            maxzoom: int|float|None = None,
+            minzoom: int|float|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            source: Any|None = None,
+            sourceattribution: str|None = None,
+            sourcelayer: str|None = None,
+            sourcetype: Any|None = None,
+            symbol: None|None = None,
+            templateitemname: str|None = None,
+            type: Any|None = None,
+            visible: bool|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -205,7 +208,7 @@ class XAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['categoryarray']
 
@@ -1684,7 +1687,7 @@ class XAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        int|numpy.ndarray
+        int|NDArray
         """
         return self['ticklabelindex']
 
@@ -2021,7 +2024,7 @@ class XAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ticktext']
 
@@ -2062,7 +2065,7 @@ class XAxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['tickvals']
 
@@ -2778,99 +2781,99 @@ class XAxis(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            anchor=None,
-            automargin=None,
-            autorange=None,
-            autorangeoptions=None,
-            autotickangles=None,
-            autotypenumbers=None,
-            calendar=None,
-            categoryarray=None,
-            categoryarraysrc=None,
-            categoryorder=None,
-            color=None,
-            constrain=None,
-            constraintoward=None,
-            dividercolor=None,
-            dividerwidth=None,
-            domain=None,
-            dtick=None,
-            exponentformat=None,
-            fixedrange=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            hoverformat=None,
-            insiderange=None,
-            labelalias=None,
-            layer=None,
-            linecolor=None,
-            linewidth=None,
-            matches=None,
-            maxallowed=None,
-            minallowed=None,
-            minexponent=None,
-            minor=None,
-            mirror=None,
-            nticks=None,
-            overlaying=None,
-            position=None,
-            range=None,
-            rangebreaks=None,
-            rangebreakdefaults=None,
-            rangemode=None,
-            rangeselector=None,
-            rangeslider=None,
-            scaleanchor=None,
-            scaleratio=None,
-            separatethousands=None,
-            showdividers=None,
-            showexponent=None,
-            showgrid=None,
-            showline=None,
-            showspikes=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            side=None,
-            spikecolor=None,
-            spikedash=None,
-            spikemode=None,
-            spikesnap=None,
-            spikethickness=None,
-            tick0=None,
-            tickangle=None,
-            tickcolor=None,
-            tickfont=None,
-            tickformat=None,
-            tickformatstops=None,
-            tickformatstopdefaults=None,
-            ticklabelindex=None,
-            ticklabelindexsrc=None,
-            ticklabelmode=None,
-            ticklabeloverflow=None,
-            ticklabelposition=None,
-            ticklabelshift=None,
-            ticklabelstandoff=None,
-            ticklabelstep=None,
-            ticklen=None,
-            tickmode=None,
-            tickprefix=None,
-            ticks=None,
-            tickson=None,
-            ticksuffix=None,
-            ticktext=None,
-            ticktextsrc=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            title=None,
-            type=None,
-            uirevision=None,
-            visible=None,
-            zeroline=None,
-            zerolinecolor=None,
-            zerolinewidth=None,
+            anchor: Any|None = None,
+            automargin: Any|None = None,
+            autorange: Any|None = None,
+            autorangeoptions: None|None = None,
+            autotickangles: list|None = None,
+            autotypenumbers: Any|None = None,
+            calendar: Any|None = None,
+            categoryarray: NDArray|None = None,
+            categoryarraysrc: str|None = None,
+            categoryorder: Any|None = None,
+            color: str|None = None,
+            constrain: Any|None = None,
+            constraintoward: Any|None = None,
+            dividercolor: str|None = None,
+            dividerwidth: int|float|None = None,
+            domain: list|None = None,
+            dtick: Any|None = None,
+            exponentformat: Any|None = None,
+            fixedrange: bool|None = None,
+            gridcolor: str|None = None,
+            griddash: str|None = None,
+            gridwidth: int|float|None = None,
+            hoverformat: str|None = None,
+            insiderange: list|None = None,
+            labelalias: Any|None = None,
+            layer: Any|None = None,
+            linecolor: str|None = None,
+            linewidth: int|float|None = None,
+            matches: Any|None = None,
+            maxallowed: Any|None = None,
+            minallowed: Any|None = None,
+            minexponent: int|float|None = None,
+            minor: None|None = None,
+            mirror: Any|None = None,
+            nticks: int|None = None,
+            overlaying: Any|None = None,
+            position: int|float|None = None,
+            range: list|None = None,
+            rangebreaks: None|None = None,
+            rangebreakdefaults: None|None = None,
+            rangemode: Any|None = None,
+            rangeselector: None|None = None,
+            rangeslider: None|None = None,
+            scaleanchor: Any|None = None,
+            scaleratio: int|float|None = None,
+            separatethousands: bool|None = None,
+            showdividers: bool|None = None,
+            showexponent: Any|None = None,
+            showgrid: bool|None = None,
+            showline: bool|None = None,
+            showspikes: bool|None = None,
+            showticklabels: bool|None = None,
+            showtickprefix: Any|None = None,
+            showticksuffix: Any|None = None,
+            side: Any|None = None,
+            spikecolor: str|None = None,
+            spikedash: str|None = None,
+            spikemode: Any|None = None,
+            spikesnap: Any|None = None,
+            spikethickness: int|float|None = None,
+            tick0: Any|None = None,
+            tickangle: int|float|None = None,
+            tickcolor: str|None = None,
+            tickfont: None|None = None,
+            tickformat: str|None = None,
+            tickformatstops: None|None = None,
+            tickformatstopdefaults: None|None = None,
+            ticklabelindex: int|None = None,
+            ticklabelindexsrc: str|None = None,
+            ticklabelmode: Any|None = None,
+            ticklabeloverflow: Any|None = None,
+            ticklabelposition: Any|None = None,
+            ticklabelshift: int|None = None,
+            ticklabelstandoff: int|None = None,
+            ticklabelstep: int|None = None,
+            ticklen: int|float|None = None,
+            tickmode: Any|None = None,
+            tickprefix: str|None = None,
+            ticks: Any|None = None,
+            tickson: Any|None = None,
+            ticksuffix: str|None = None,
+            ticktext: NDArray|None = None,
+            ticktextsrc: str|None = None,
+            tickvals: NDArray|None = None,
+            tickvalssrc: str|None = None,
+            tickwidth: int|float|None = None,
+            title: None|None = None,
+            type: Any|None = None,
+            uirevision: Any|None = None,
+            visible: bool|None = None,
+            zeroline: bool|None = None,
+            zerolinecolor: str|None = None,
+            zerolinewidth: int|float|None = None,
             **kwargs
         ):
         """

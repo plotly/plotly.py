@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -843,7 +846,7 @@ class Aaxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ticktext']
 
@@ -884,7 +887,7 @@ class Aaxis(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['tickvals']
 
@@ -1188,47 +1191,47 @@ class Aaxis(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            dtick=None,
-            exponentformat=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            hoverformat=None,
-            labelalias=None,
-            layer=None,
-            linecolor=None,
-            linewidth=None,
-            min=None,
-            minexponent=None,
-            nticks=None,
-            separatethousands=None,
-            showexponent=None,
-            showgrid=None,
-            showline=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            tick0=None,
-            tickangle=None,
-            tickcolor=None,
-            tickfont=None,
-            tickformat=None,
-            tickformatstops=None,
-            tickformatstopdefaults=None,
-            ticklabelstep=None,
-            ticklen=None,
-            tickmode=None,
-            tickprefix=None,
-            ticks=None,
-            ticksuffix=None,
-            ticktext=None,
-            ticktextsrc=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            title=None,
-            uirevision=None,
+            color: str|None = None,
+            dtick: Any|None = None,
+            exponentformat: Any|None = None,
+            gridcolor: str|None = None,
+            griddash: str|None = None,
+            gridwidth: int|float|None = None,
+            hoverformat: str|None = None,
+            labelalias: Any|None = None,
+            layer: Any|None = None,
+            linecolor: str|None = None,
+            linewidth: int|float|None = None,
+            min: int|float|None = None,
+            minexponent: int|float|None = None,
+            nticks: int|None = None,
+            separatethousands: bool|None = None,
+            showexponent: Any|None = None,
+            showgrid: bool|None = None,
+            showline: bool|None = None,
+            showticklabels: bool|None = None,
+            showtickprefix: Any|None = None,
+            showticksuffix: Any|None = None,
+            tick0: Any|None = None,
+            tickangle: int|float|None = None,
+            tickcolor: str|None = None,
+            tickfont: None|None = None,
+            tickformat: str|None = None,
+            tickformatstops: None|None = None,
+            tickformatstopdefaults: None|None = None,
+            ticklabelstep: int|None = None,
+            ticklen: int|float|None = None,
+            tickmode: Any|None = None,
+            tickprefix: str|None = None,
+            ticks: Any|None = None,
+            ticksuffix: str|None = None,
+            ticktext: NDArray|None = None,
+            ticktextsrc: str|None = None,
+            tickvals: NDArray|None = None,
+            tickvalssrc: str|None = None,
+            tickwidth: int|float|None = None,
+            title: None|None = None,
+            uirevision: Any|None = None,
             **kwargs
         ):
         """

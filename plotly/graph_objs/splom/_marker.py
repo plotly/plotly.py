@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -26,7 +29,7 @@ class Marker(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['angle']
 
@@ -197,7 +200,7 @@ class Marker(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['color']
 
@@ -361,7 +364,7 @@ class Marker(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['opacity']
 
@@ -447,7 +450,7 @@ class Marker(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['size']
 
@@ -647,7 +650,7 @@ class Marker(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['symbol']
 
@@ -799,30 +802,30 @@ class Marker(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            angle=None,
-            anglesrc=None,
-            autocolorscale=None,
-            cauto=None,
-            cmax=None,
-            cmid=None,
-            cmin=None,
-            color=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            colorsrc=None,
-            line=None,
-            opacity=None,
-            opacitysrc=None,
-            reversescale=None,
-            showscale=None,
-            size=None,
-            sizemin=None,
-            sizemode=None,
-            sizeref=None,
-            sizesrc=None,
-            symbol=None,
-            symbolsrc=None,
+            angle: int|float|None = None,
+            anglesrc: str|None = None,
+            autocolorscale: bool|None = None,
+            cauto: bool|None = None,
+            cmax: int|float|None = None,
+            cmid: int|float|None = None,
+            cmin: int|float|None = None,
+            color: str|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            colorsrc: str|None = None,
+            line: None|None = None,
+            opacity: int|float|None = None,
+            opacitysrc: str|None = None,
+            reversescale: bool|None = None,
+            showscale: bool|None = None,
+            size: int|float|None = None,
+            sizemin: int|float|None = None,
+            sizemode: Any|None = None,
+            sizeref: int|float|None = None,
+            sizesrc: str|None = None,
+            symbol: Any|None = None,
+            symbolsrc: str|None = None,
             **kwargs
         ):
         """

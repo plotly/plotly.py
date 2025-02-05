@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -229,13 +232,13 @@ class Button(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            count=None,
-            label=None,
-            name=None,
-            step=None,
-            stepmode=None,
-            templateitemname=None,
-            visible=None,
+            count: int|float|None = None,
+            label: str|None = None,
+            name: str|None = None,
+            step: Any|None = None,
+            stepmode: Any|None = None,
+            templateitemname: str|None = None,
+            visible: bool|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -24,7 +27,7 @@ class Carpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['a']
 
@@ -107,7 +110,7 @@ class Carpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['b']
 
@@ -264,7 +267,7 @@ class Carpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -370,7 +373,7 @@ class Carpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -512,7 +515,7 @@ class Carpet(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -695,7 +698,7 @@ class Carpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -760,7 +763,7 @@ class Carpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1011,43 +1014,43 @@ class Carpet(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            a=None,
-            a0=None,
-            aaxis=None,
-            asrc=None,
-            b=None,
-            b0=None,
-            baxis=None,
-            bsrc=None,
-            carpet=None,
-            cheaterslope=None,
-            color=None,
-            customdata=None,
-            customdatasrc=None,
-            da=None,
-            db=None,
-            font=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            stream=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            x=None,
-            xaxis=None,
-            xsrc=None,
-            y=None,
-            yaxis=None,
-            ysrc=None,
-            zorder=None,
+            a: NDArray|None = None,
+            a0: int|float|None = None,
+            aaxis: None|None = None,
+            asrc: str|None = None,
+            b: NDArray|None = None,
+            b0: int|float|None = None,
+            baxis: None|None = None,
+            bsrc: str|None = None,
+            carpet: str|None = None,
+            cheaterslope: int|float|None = None,
+            color: str|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            da: int|float|None = None,
+            db: int|float|None = None,
+            font: None|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            stream: None|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            x: NDArray|None = None,
+            xaxis: str|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            yaxis: str|None = None,
+            ysrc: str|None = None,
+            zorder: int|None = None,
             **kwargs
         ):
         """

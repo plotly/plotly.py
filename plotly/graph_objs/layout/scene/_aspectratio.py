@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -80,9 +83,9 @@ class Aspectratio(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            x=None,
-            y=None,
-            z=None,
+            x: int|float|None = None,
+            y: int|float|None = None,
+            z: int|float|None = None,
             **kwargs
         ):
         """

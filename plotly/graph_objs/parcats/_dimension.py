@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -26,7 +29,7 @@ class Dimension(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['categoryarray']
 
@@ -144,7 +147,7 @@ class Dimension(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ticktext']
 
@@ -187,7 +190,7 @@ class Dimension(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['values']
 
@@ -288,16 +291,16 @@ class Dimension(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            categoryarray=None,
-            categoryarraysrc=None,
-            categoryorder=None,
-            displayindex=None,
-            label=None,
-            ticktext=None,
-            ticktextsrc=None,
-            values=None,
-            valuessrc=None,
-            visible=None,
+            categoryarray: NDArray|None = None,
+            categoryarraysrc: str|None = None,
+            categoryorder: Any|None = None,
+            displayindex: int|None = None,
+            label: str|None = None,
+            ticktext: NDArray|None = None,
+            ticktextsrc: str|None = None,
+            values: NDArray|None = None,
+            valuessrc: str|None = None,
+            visible: bool|None = None,
             **kwargs
         ):
         """

@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -24,7 +27,7 @@ class Contourcarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['a']
 
@@ -157,7 +160,7 @@ class Contourcarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['b']
 
@@ -389,7 +392,7 @@ class Contourcarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -498,7 +501,7 @@ class Contourcarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['hovertext']
 
@@ -541,7 +544,7 @@ class Contourcarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -727,7 +730,7 @@ class Contourcarpet(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -918,7 +921,7 @@ class Contourcarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['text']
 
@@ -1106,7 +1109,7 @@ class Contourcarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['z']
 
@@ -1498,60 +1501,60 @@ class Contourcarpet(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            a=None,
-            a0=None,
-            asrc=None,
-            atype=None,
-            autocolorscale=None,
-            autocontour=None,
-            b=None,
-            b0=None,
-            bsrc=None,
-            btype=None,
-            carpet=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            contours=None,
-            customdata=None,
-            customdatasrc=None,
-            da=None,
-            db=None,
-            fillcolor=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            ncontours=None,
-            opacity=None,
-            reversescale=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            transpose=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            xaxis=None,
-            yaxis=None,
-            z=None,
-            zauto=None,
-            zmax=None,
-            zmid=None,
-            zmin=None,
-            zorder=None,
-            zsrc=None,
+            a: NDArray|None = None,
+            a0: Any|None = None,
+            asrc: str|None = None,
+            atype: Any|None = None,
+            autocolorscale: bool|None = None,
+            autocontour: bool|None = None,
+            b: NDArray|None = None,
+            b0: Any|None = None,
+            bsrc: str|None = None,
+            btype: Any|None = None,
+            carpet: str|None = None,
+            coloraxis: str|None = None,
+            colorbar: None|None = None,
+            colorscale: str|None = None,
+            contours: None|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            da: int|float|None = None,
+            db: int|float|None = None,
+            fillcolor: str|None = None,
+            hovertext: NDArray|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            ncontours: int|None = None,
+            opacity: int|float|None = None,
+            reversescale: bool|None = None,
+            showlegend: bool|None = None,
+            showscale: bool|None = None,
+            stream: None|None = None,
+            text: NDArray|None = None,
+            textsrc: str|None = None,
+            transpose: bool|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            xaxis: str|None = None,
+            yaxis: str|None = None,
+            z: NDArray|None = None,
+            zauto: bool|None = None,
+            zmax: int|float|None = None,
+            zmid: int|float|None = None,
+            zmin: int|float|None = None,
+            zorder: int|None = None,
+            zsrc: str|None = None,
             **kwargs
         ):
         """

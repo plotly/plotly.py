@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -504,24 +507,24 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            active=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderwidth=None,
-            buttons=None,
-            buttondefaults=None,
-            direction=None,
-            font=None,
-            name=None,
-            pad=None,
-            showactive=None,
-            templateitemname=None,
-            type=None,
-            visible=None,
-            x=None,
-            xanchor=None,
-            y=None,
-            yanchor=None,
+            active: int|None = None,
+            bgcolor: str|None = None,
+            bordercolor: str|None = None,
+            borderwidth: int|float|None = None,
+            buttons: None|None = None,
+            buttondefaults: None|None = None,
+            direction: Any|None = None,
+            font: None|None = None,
+            name: str|None = None,
+            pad: None|None = None,
+            showactive: bool|None = None,
+            templateitemname: str|None = None,
+            type: Any|None = None,
+            visible: bool|None = None,
+            x: int|float|None = None,
+            xanchor: Any|None = None,
+            y: int|float|None = None,
+            yanchor: Any|None = None,
             **kwargs
         ):
         """

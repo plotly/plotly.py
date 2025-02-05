@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -331,17 +334,17 @@ class Contours(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            coloring=None,
-            end=None,
-            labelfont=None,
-            labelformat=None,
-            operation=None,
-            showlabels=None,
-            showlines=None,
-            size=None,
-            start=None,
-            type=None,
-            value=None,
+            coloring: Any|None = None,
+            end: int|float|None = None,
+            labelfont: None|None = None,
+            labelformat: str|None = None,
+            operation: Any|None = None,
+            showlabels: bool|None = None,
+            showlines: bool|None = None,
+            size: int|float|None = None,
+            start: int|float|None = None,
+            type: Any|None = None,
+            value: Any|None = None,
             **kwargs
         ):
         """

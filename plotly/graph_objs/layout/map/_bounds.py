@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -116,10 +119,10 @@ class Bounds(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            east=None,
-            north=None,
-            south=None,
-            west=None,
+            east: int|float|None = None,
+            north: int|float|None = None,
+            south: int|float|None = None,
+            west: int|float|None = None,
             **kwargs
         ):
         """

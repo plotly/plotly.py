@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -102,9 +105,9 @@ class Transition(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            duration=None,
-            easing=None,
-            ordering=None,
+            duration: int|float|None = None,
+            easing: Any|None = None,
+            ordering: Any|None = None,
             **kwargs
         ):
         """

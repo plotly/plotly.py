@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -28,7 +31,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['align']
 
@@ -73,7 +76,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['bgcolor']
 
@@ -118,7 +121,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['bordercolor']
 
@@ -189,7 +192,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|numpy.ndarray
+        int|NDArray
         """
         return self['namelength']
 
@@ -282,16 +285,16 @@ class Hoverlabel(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            align=None,
-            alignsrc=None,
-            bgcolor=None,
-            bgcolorsrc=None,
-            bordercolor=None,
-            bordercolorsrc=None,
-            font=None,
-            namelength=None,
-            namelengthsrc=None,
-            split=None,
+            align: Any|None = None,
+            alignsrc: str|None = None,
+            bgcolor: str|None = None,
+            bgcolorsrc: str|None = None,
+            bordercolor: str|None = None,
+            bordercolorsrc: str|None = None,
+            font: None|None = None,
+            namelength: int|None = None,
+            namelengthsrc: str|None = None,
+            split: bool|None = None,
             **kwargs
         ):
         """

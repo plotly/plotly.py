@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -24,7 +27,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['a']
 
@@ -64,7 +67,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['b']
 
@@ -151,7 +154,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -253,7 +256,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -364,7 +367,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -411,7 +414,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -454,7 +457,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -661,7 +664,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -865,7 +868,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -913,7 +916,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['textposition']
 
@@ -989,7 +992,7 @@ class Scattercarpet(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['texttemplate']
 
@@ -1468,56 +1471,56 @@ class Scattercarpet(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            a=None,
-            asrc=None,
-            b=None,
-            bsrc=None,
-            carpet=None,
-            connectgaps=None,
-            customdata=None,
-            customdatasrc=None,
-            fill=None,
-            fillcolor=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hoveron=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            mode=None,
-            name=None,
-            opacity=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            stream=None,
-            text=None,
-            textfont=None,
-            textposition=None,
-            textpositionsrc=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
-            xaxis=None,
-            yaxis=None,
-            zorder=None,
+            a: NDArray|None = None,
+            asrc: str|None = None,
+            b: NDArray|None = None,
+            bsrc: str|None = None,
+            carpet: str|None = None,
+            connectgaps: bool|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            fill: Any|None = None,
+            fillcolor: str|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hoveron: Any|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            mode: Any|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            selected: None|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            textfont: None|None = None,
+            textposition: Any|None = None,
+            textpositionsrc: str|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            texttemplatesrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            unselected: None|None = None,
+            visible: Any|None = None,
+            xaxis: str|None = None,
+            yaxis: str|None = None,
+            zorder: int|None = None,
             **kwargs
         ):
         """

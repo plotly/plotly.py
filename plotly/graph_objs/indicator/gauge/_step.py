@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -195,12 +198,12 @@ class Step(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            line=None,
-            name=None,
-            range=None,
-            templateitemname=None,
-            thickness=None,
+            color: str|None = None,
+            line: None|None = None,
+            name: str|None = None,
+            range: list|None = None,
+            templateitemname: str|None = None,
+            thickness: int|float|None = None,
             **kwargs
         ):
         """

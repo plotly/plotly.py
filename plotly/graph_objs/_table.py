@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -48,7 +51,7 @@ class Table(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['columnorder']
 
@@ -91,7 +94,7 @@ class Table(_BaseTraceType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self['columnwidth']
 
@@ -135,7 +138,7 @@ class Table(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -224,7 +227,7 @@ class Table(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -288,7 +291,7 @@ class Table(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -430,7 +433,7 @@ class Table(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -715,31 +718,31 @@ class Table(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            cells=None,
-            columnorder=None,
-            columnordersrc=None,
-            columnwidth=None,
-            columnwidthsrc=None,
-            customdata=None,
-            customdatasrc=None,
-            domain=None,
-            header=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            stream=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
+            cells: None|None = None,
+            columnorder: NDArray|None = None,
+            columnordersrc: str|None = None,
+            columnwidth: int|float|None = None,
+            columnwidthsrc: str|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            domain: None|None = None,
+            header: None|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            legend: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            stream: None|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

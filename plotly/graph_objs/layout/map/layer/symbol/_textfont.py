@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -144,11 +147,11 @@ class Textfont(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            color=None,
-            family=None,
-            size=None,
-            style=None,
-            weight=None,
+            color: str|None = None,
+            family: str|None = None,
+            size: int|float|None = None,
+            style: Any|None = None,
+            weight: int|None = None,
             **kwargs
         ):
         """

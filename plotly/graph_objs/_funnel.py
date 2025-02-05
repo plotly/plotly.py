@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -116,7 +119,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -203,7 +206,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -291,7 +294,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -338,7 +341,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -381,7 +384,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -612,7 +615,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -861,7 +864,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -963,7 +966,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['textposition']
 
@@ -1040,7 +1043,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['texttemplate']
 
@@ -1179,7 +1182,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1363,7 +1366,7 @@ class Funnel(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['y']
 
@@ -1925,72 +1928,72 @@ class Funnel(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            alignmentgroup=None,
-            cliponaxis=None,
-            connector=None,
-            constraintext=None,
-            customdata=None,
-            customdatasrc=None,
-            dx=None,
-            dy=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            insidetextanchor=None,
-            insidetextfont=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            offset=None,
-            offsetgroup=None,
-            opacity=None,
-            orientation=None,
-            outsidetextfont=None,
-            selectedpoints=None,
-            showlegend=None,
-            stream=None,
-            text=None,
-            textangle=None,
-            textfont=None,
-            textinfo=None,
-            textposition=None,
-            textpositionsrc=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            width=None,
-            x=None,
-            x0=None,
-            xaxis=None,
-            xhoverformat=None,
-            xperiod=None,
-            xperiod0=None,
-            xperiodalignment=None,
-            xsrc=None,
-            y=None,
-            y0=None,
-            yaxis=None,
-            yhoverformat=None,
-            yperiod=None,
-            yperiod0=None,
-            yperiodalignment=None,
-            ysrc=None,
-            zorder=None,
+            alignmentgroup: str|None = None,
+            cliponaxis: bool|None = None,
+            connector: None|None = None,
+            constraintext: Any|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            dx: int|float|None = None,
+            dy: int|float|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            insidetextanchor: Any|None = None,
+            insidetextfont: None|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            offset: int|float|None = None,
+            offsetgroup: str|None = None,
+            opacity: int|float|None = None,
+            orientation: Any|None = None,
+            outsidetextfont: None|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            textangle: int|float|None = None,
+            textfont: None|None = None,
+            textinfo: Any|None = None,
+            textposition: Any|None = None,
+            textpositionsrc: str|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            texttemplatesrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            width: int|float|None = None,
+            x: NDArray|None = None,
+            x0: Any|None = None,
+            xaxis: str|None = None,
+            xhoverformat: str|None = None,
+            xperiod: Any|None = None,
+            xperiod0: Any|None = None,
+            xperiodalignment: Any|None = None,
+            xsrc: str|None = None,
+            y: NDArray|None = None,
+            y0: Any|None = None,
+            yaxis: str|None = None,
+            yhoverformat: str|None = None,
+            yperiod: Any|None = None,
+            yperiod0: Any|None = None,
+            yperiodalignment: Any|None = None,
+            ysrc: str|None = None,
+            zorder: int|None = None,
             **kwargs
         ):
         """

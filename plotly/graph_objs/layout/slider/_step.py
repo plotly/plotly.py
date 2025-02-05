@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -261,14 +264,14 @@ class Step(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            args=None,
-            execute=None,
-            label=None,
-            method=None,
-            name=None,
-            templateitemname=None,
-            value=None,
-            visible=None,
+            args: list|None = None,
+            execute: bool|None = None,
+            label: str|None = None,
+            method: Any|None = None,
+            name: str|None = None,
+            templateitemname: str|None = None,
+            value: str|None = None,
+            visible: bool|None = None,
             **kwargs
         ):
         """

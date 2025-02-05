@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -24,7 +27,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['close']
 
@@ -67,7 +70,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -129,7 +132,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['high']
 
@@ -175,7 +178,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -239,7 +242,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -282,7 +285,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -481,7 +484,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['low']
 
@@ -529,7 +532,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -611,7 +614,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['open']
 
@@ -722,7 +725,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -862,7 +865,7 @@ class Candlestick(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['x']
 
@@ -1354,55 +1357,55 @@ class Candlestick(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            close=None,
-            closesrc=None,
-            customdata=None,
-            customdatasrc=None,
-            decreasing=None,
-            high=None,
-            highsrc=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            increasing=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            low=None,
-            lowsrc=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            open=None,
-            opensrc=None,
-            selectedpoints=None,
-            showlegend=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            whiskerwidth=None,
-            x=None,
-            xaxis=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xperiod=None,
-            xperiod0=None,
-            xperiodalignment=None,
-            xsrc=None,
-            yaxis=None,
-            yhoverformat=None,
-            zorder=None,
+            close: NDArray|None = None,
+            closesrc: str|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            decreasing: None|None = None,
+            high: NDArray|None = None,
+            highsrc: str|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            increasing: None|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            low: NDArray|None = None,
+            lowsrc: str|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            open: NDArray|None = None,
+            opensrc: str|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            textsrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            visible: Any|None = None,
+            whiskerwidth: int|float|None = None,
+            x: NDArray|None = None,
+            xaxis: str|None = None,
+            xcalendar: Any|None = None,
+            xhoverformat: str|None = None,
+            xperiod: Any|None = None,
+            xperiod0: Any|None = None,
+            xperiodalignment: Any|None = None,
+            xsrc: str|None = None,
+            yaxis: str|None = None,
+            yhoverformat: str|None = None,
+            zorder: int|None = None,
             **kwargs
         ):
         """

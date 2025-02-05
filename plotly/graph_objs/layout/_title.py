@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -343,17 +346,17 @@ class Title(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            automargin=None,
-            font=None,
-            pad=None,
-            subtitle=None,
-            text=None,
-            x=None,
-            xanchor=None,
-            xref=None,
-            y=None,
-            yanchor=None,
-            yref=None,
+            automargin: bool|None = None,
+            font: None|None = None,
+            pad: None|None = None,
+            subtitle: None|None = None,
+            text: str|None = None,
+            x: int|float|None = None,
+            xanchor: Any|None = None,
+            xref: Any|None = None,
+            y: int|float|None = None,
+            yanchor: Any|None = None,
+            yref: Any|None = None,
             **kwargs
         ):
         """

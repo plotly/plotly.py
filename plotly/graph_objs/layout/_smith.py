@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -118,10 +121,10 @@ class Smith(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            bgcolor=None,
-            domain=None,
-            imaginaryaxis=None,
-            realaxis=None,
+            bgcolor: str|None = None,
+            domain: None|None = None,
+            imaginaryaxis: None|None = None,
+            realaxis: None|None = None,
             **kwargs
         ):
         """

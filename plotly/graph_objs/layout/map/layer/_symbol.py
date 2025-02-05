@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -182,12 +185,12 @@ class Symbol(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            icon=None,
-            iconsize=None,
-            placement=None,
-            text=None,
-            textfont=None,
-            textposition=None,
+            icon: str|None = None,
+            iconsize: int|float|None = None,
+            placement: Any|None = None,
+            text: str|None = None,
+            textfont: None|None = None,
+            textposition: Any|None = None,
             **kwargs
         ):
         """

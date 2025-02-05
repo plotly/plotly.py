@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -77,7 +80,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -145,7 +148,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -234,7 +237,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -281,7 +284,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -324,7 +327,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -387,7 +390,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['labels']
 
@@ -593,7 +596,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -707,7 +710,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['parents']
 
@@ -835,7 +838,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['text']
 
@@ -960,7 +963,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['texttemplate']
 
@@ -1078,7 +1081,7 @@ class Treemap(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['values']
 
@@ -1394,54 +1397,54 @@ class Treemap(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            branchvalues=None,
-            count=None,
-            customdata=None,
-            customdatasrc=None,
-            domain=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            insidetextfont=None,
-            labels=None,
-            labelssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            level=None,
-            marker=None,
-            maxdepth=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            outsidetextfont=None,
-            parents=None,
-            parentssrc=None,
-            pathbar=None,
-            root=None,
-            sort=None,
-            stream=None,
-            text=None,
-            textfont=None,
-            textinfo=None,
-            textposition=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            tiling=None,
-            uid=None,
-            uirevision=None,
-            values=None,
-            valuessrc=None,
-            visible=None,
+            branchvalues: Any|None = None,
+            count: Any|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            domain: None|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            insidetextfont: None|None = None,
+            labels: NDArray|None = None,
+            labelssrc: str|None = None,
+            legend: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            level: Any|None = None,
+            marker: None|None = None,
+            maxdepth: int|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            outsidetextfont: None|None = None,
+            parents: NDArray|None = None,
+            parentssrc: str|None = None,
+            pathbar: None|None = None,
+            root: None|None = None,
+            sort: bool|None = None,
+            stream: None|None = None,
+            text: NDArray|None = None,
+            textfont: None|None = None,
+            textinfo: Any|None = None,
+            textposition: Any|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            texttemplatesrc: str|None = None,
+            tiling: None|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            values: NDArray|None = None,
+            valuessrc: str|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """

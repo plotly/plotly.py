@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -191,13 +194,13 @@ class Lighting(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            ambient=None,
-            diffuse=None,
-            facenormalsepsilon=None,
-            fresnel=None,
-            roughness=None,
-            specular=None,
-            vertexnormalsepsilon=None,
+            ambient: int|float|None = None,
+            diffuse: int|float|None = None,
+            facenormalsepsilon: int|float|None = None,
+            fresnel: int|float|None = None,
+            roughness: int|float|None = None,
+            specular: int|float|None = None,
+            vertexnormalsepsilon: int|float|None = None,
             **kwargs
         ):
         """

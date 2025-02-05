@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -29,7 +32,7 @@ class Cells(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['align']
 
@@ -114,7 +117,7 @@ class Cells(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['format']
 
@@ -197,7 +200,7 @@ class Cells(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['prefix']
 
@@ -239,7 +242,7 @@ class Cells(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['suffix']
 
@@ -282,7 +285,7 @@ class Cells(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['values']
 
@@ -365,20 +368,20 @@ class Cells(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            align=None,
-            alignsrc=None,
-            fill=None,
-            font=None,
-            format=None,
-            formatsrc=None,
-            height=None,
-            line=None,
-            prefix=None,
-            prefixsrc=None,
-            suffix=None,
-            suffixsrc=None,
-            values=None,
-            valuessrc=None,
+            align: Any|None = None,
+            alignsrc: str|None = None,
+            fill: None|None = None,
+            font: None|None = None,
+            format: NDArray|None = None,
+            formatsrc: str|None = None,
+            height: int|float|None = None,
+            line: None|None = None,
+            prefix: str|None = None,
+            prefixsrc: str|None = None,
+            suffix: str|None = None,
+            suffixsrc: str|None = None,
+            values: NDArray|None = None,
+            valuessrc: str|None = None,
             **kwargs
         ):
         """

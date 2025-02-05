@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -52,7 +55,7 @@ class Link(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['color']
 
@@ -139,7 +142,7 @@ class Link(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -188,7 +191,7 @@ class Link(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovercolor']
 
@@ -300,7 +303,7 @@ class Link(_BaseTraceHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -341,7 +344,7 @@ class Link(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['label']
 
@@ -403,7 +406,7 @@ class Link(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['source']
 
@@ -444,7 +447,7 @@ class Link(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['target']
 
@@ -484,7 +487,7 @@ class Link(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['value']
 
@@ -621,28 +624,28 @@ class Link(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            arrowlen=None,
-            color=None,
-            colorscales=None,
-            colorscaledefaults=None,
-            colorsrc=None,
-            customdata=None,
-            customdatasrc=None,
-            hovercolor=None,
-            hovercolorsrc=None,
-            hoverinfo=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            label=None,
-            labelsrc=None,
-            line=None,
-            source=None,
-            sourcesrc=None,
-            target=None,
-            targetsrc=None,
-            value=None,
-            valuesrc=None,
+            arrowlen: int|float|None = None,
+            color: str|None = None,
+            colorscales: None|None = None,
+            colorscaledefaults: None|None = None,
+            colorsrc: str|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            hovercolor: str|None = None,
+            hovercolorsrc: str|None = None,
+            hoverinfo: Any|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            label: NDArray|None = None,
+            labelsrc: str|None = None,
+            line: None|None = None,
+            source: NDArray|None = None,
+            sourcesrc: str|None = None,
+            target: NDArray|None = None,
+            targetsrc: str|None = None,
+            value: NDArray|None = None,
+            valuesrc: str|None = None,
             **kwargs
         ):
         """

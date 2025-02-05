@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -169,9 +172,9 @@ class Colorscale(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            diverging=None,
-            sequential=None,
-            sequentialminus=None,
+            diverging: str|None = None,
+            sequential: str|None = None,
+            sequentialminus: str|None = None,
             **kwargs
         ):
         """

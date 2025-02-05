@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -640,30 +643,30 @@ class Slider(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            active=None,
-            activebgcolor=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderwidth=None,
-            currentvalue=None,
-            font=None,
-            len=None,
-            lenmode=None,
-            minorticklen=None,
-            name=None,
-            pad=None,
-            steps=None,
-            stepdefaults=None,
-            templateitemname=None,
-            tickcolor=None,
-            ticklen=None,
-            tickwidth=None,
-            transition=None,
-            visible=None,
-            x=None,
-            xanchor=None,
-            y=None,
-            yanchor=None,
+            active: int|float|None = None,
+            activebgcolor: str|None = None,
+            bgcolor: str|None = None,
+            bordercolor: str|None = None,
+            borderwidth: int|float|None = None,
+            currentvalue: None|None = None,
+            font: None|None = None,
+            len: int|float|None = None,
+            lenmode: Any|None = None,
+            minorticklen: int|float|None = None,
+            name: str|None = None,
+            pad: None|None = None,
+            steps: None|None = None,
+            stepdefaults: None|None = None,
+            templateitemname: str|None = None,
+            tickcolor: str|None = None,
+            ticklen: int|float|None = None,
+            tickwidth: int|float|None = None,
+            transition: None|None = None,
+            visible: bool|None = None,
+            x: int|float|None = None,
+            xanchor: Any|None = None,
+            y: int|float|None = None,
+            yanchor: Any|None = None,
             **kwargs
         ):
         """

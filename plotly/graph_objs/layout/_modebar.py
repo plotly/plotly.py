@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -57,7 +60,7 @@ class Modebar(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['add']
 
@@ -183,7 +186,7 @@ class Modebar(_BaseLayoutHierarchyType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['remove']
 
@@ -290,15 +293,15 @@ class Modebar(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            activecolor=None,
-            add=None,
-            addsrc=None,
-            bgcolor=None,
-            color=None,
-            orientation=None,
-            remove=None,
-            removesrc=None,
-            uirevision=None,
+            activecolor: str|None = None,
+            add: str|None = None,
+            addsrc: str|None = None,
+            bgcolor: str|None = None,
+            color: str|None = None,
+            orientation: Any|None = None,
+            remove: str|None = None,
+            removesrc: str|None = None,
+            uirevision: Any|None = None,
             **kwargs
         ):
         """

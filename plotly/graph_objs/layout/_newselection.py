@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -76,8 +79,8 @@ class Newselection(_BaseLayoutHierarchyType):
         """
     def __init__(self,
             arg=None,
-            line=None,
-            mode=None,
+            line: None|None = None,
+            mode: Any|None = None,
             **kwargs
         ):
         """

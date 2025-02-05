@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -140,10 +143,10 @@ class Tiling(_BaseTraceHierarchyType):
         """
     def __init__(self,
             arg=None,
-            flip=None,
-            packing=None,
-            pad=None,
-            squarifyratio=None,
+            flip: Any|None = None,
+            packing: Any|None = None,
+            pad: int|float|None = None,
+            squarifyratio: int|float|None = None,
             **kwargs
         ):
         """

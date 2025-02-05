@@ -1,5 +1,8 @@
 
 
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
@@ -48,7 +51,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['customdata']
 
@@ -217,7 +220,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['hoverinfo']
 
@@ -303,7 +306,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertemplate']
 
@@ -351,7 +354,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['hovertext']
 
@@ -394,7 +397,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['ids']
 
@@ -434,7 +437,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['lat']
 
@@ -639,7 +642,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['locations']
 
@@ -680,7 +683,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self['lon']
 
@@ -749,7 +752,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['meta']
 
@@ -954,7 +957,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['text']
 
@@ -1002,7 +1005,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self['textposition']
 
@@ -1078,7 +1081,7 @@ class Scattergeo(_BaseTraceType):
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self['texttemplate']
 
@@ -1489,57 +1492,57 @@ class Scattergeo(_BaseTraceType):
         """
     def __init__(self,
             arg=None,
-            connectgaps=None,
-            customdata=None,
-            customdatasrc=None,
-            featureidkey=None,
-            fill=None,
-            fillcolor=None,
-            geo=None,
-            geojson=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            lat=None,
-            latsrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            locationmode=None,
-            locations=None,
-            locationssrc=None,
-            lon=None,
-            lonsrc=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            mode=None,
-            name=None,
-            opacity=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            stream=None,
-            text=None,
-            textfont=None,
-            textposition=None,
-            textpositionsrc=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
+            connectgaps: bool|None = None,
+            customdata: NDArray|None = None,
+            customdatasrc: str|None = None,
+            featureidkey: str|None = None,
+            fill: Any|None = None,
+            fillcolor: str|None = None,
+            geo: str|None = None,
+            geojson: Any|None = None,
+            hoverinfo: Any|None = None,
+            hoverinfosrc: str|None = None,
+            hoverlabel: None|None = None,
+            hovertemplate: str|None = None,
+            hovertemplatesrc: str|None = None,
+            hovertext: str|None = None,
+            hovertextsrc: str|None = None,
+            ids: NDArray|None = None,
+            idssrc: str|None = None,
+            lat: NDArray|None = None,
+            latsrc: str|None = None,
+            legend: str|None = None,
+            legendgroup: str|None = None,
+            legendgrouptitle: None|None = None,
+            legendrank: int|float|None = None,
+            legendwidth: int|float|None = None,
+            line: None|None = None,
+            locationmode: Any|None = None,
+            locations: NDArray|None = None,
+            locationssrc: str|None = None,
+            lon: NDArray|None = None,
+            lonsrc: str|None = None,
+            marker: None|None = None,
+            meta: Any|None = None,
+            metasrc: str|None = None,
+            mode: Any|None = None,
+            name: str|None = None,
+            opacity: int|float|None = None,
+            selected: None|None = None,
+            selectedpoints: Any|None = None,
+            showlegend: bool|None = None,
+            stream: None|None = None,
+            text: str|None = None,
+            textfont: None|None = None,
+            textposition: Any|None = None,
+            textpositionsrc: str|None = None,
+            textsrc: str|None = None,
+            texttemplate: str|None = None,
+            texttemplatesrc: str|None = None,
+            uid: str|None = None,
+            uirevision: Any|None = None,
+            unselected: None|None = None,
+            visible: Any|None = None,
             **kwargs
         ):
         """
