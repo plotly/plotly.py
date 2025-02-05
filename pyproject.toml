@@ -44,7 +44,7 @@ dynamic = ["dependencies"]
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["plotly*", "_plotly*"]
-exclude = ["__pycache__", "tests"]
+exclude = ["__pycache__*", "tests*"]
 
 [tool.setuptools.package-data]
 plotly = [
