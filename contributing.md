@@ -254,10 +254,7 @@ $ python commands.py updateplotlyjsdev --local /path/to/your/plotly.js/
 
 ## Testing
 
-We take advantage of two tools to run tests:
-
-* [`tox`](https://tox.readthedocs.io/en/latest/), which is both a virtualenv management and test tool.
-* [`pytest`](https://docs.pytest.org/en/latest/), a powerful framework for unit testing.
+To run tests, we use [`pytest`](https://docs.pytest.org/en/latest/), a powerful framework for unit testing.
 
 ### Running Tests with `pytest`
 
@@ -293,51 +290,8 @@ or for a specific test function
 pytest plotly/tests/test_plotly/test_plot.py::test_function
 ```
 
-### Running tests with `tox`
-
-Running tests with tox is much more powerful, but requires a bit more setup.
-
-You'll need to export an environment variable for *each* tox environment you wish to test with. For example, if you want to test with `Python 3.9` and
-`Python 3.6`, but only care to check the `core` specs, you would need to ensure that the following variables are exported:
-
-```
-export PLOTLY_TOX_PYTHON_39=<python binary>
-export PLOTLY_TOX_PYTHON_36=<python binary>
-```
-
-Where the `<python binary` is going to be specific to your development setup. As a more complete example, you might have this loaded in a `.bash_profile` (or equivalent shell loader):
-
-```bash
-############
-# tox envs #
-############
-
-export PLOTLY_TOX_PYTHON_39=python3.9
-export PLOTLY_TOX_PYTHON_36=python3.6
-export TOXENV=py39-core,py36-core
-```
-
-Where `TOXENV` is the environment list you want to use when invoking `tox` from the command line. Note that the `PLOTLY_TOX_*` pattern is used to pass in variables for use in the `tox.ini` file. Though this is a little setup, intensive, you'll get the following benefits:
-
-* `tox` will automatically manage a virtual env for each environment you want to test in.
-* You only have to run `tox` and know that the module is working in all included Python versions.
-
-Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our configuration of [pytest markers](http://doc.pytest.org/en/latest/example/markers.html), which are set up in `pytest.ini`. To run only tests that are *not* tagged with `nodev`, you could use the following command:
-
-```bash
-tox -- -a '!nodev'
-```
-
-Note that anything after `--` is substituted in for `{posargs}` in the tox.ini. For completeness, because it's reasonably confusing, if you want to force a match for *multiple* `pytest` marker tags, you comma-separate the tags like so:
-
-```bash
-tox -- -a '!nodev','!matplotlib'
-```
-
 ### Writing Tests
 
 You're *strongly* encouraged to write tests that check your added functionality.
 
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
-
-Test accounts include: `PythonTest`, `PlotlyImageTest`, and  `PlotlyStageTest`.
