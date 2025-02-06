@@ -6,9 +6,9 @@ import plotly.figure_factory as ff
 import plotly.io as pio
 
 from plotly.exceptions import PlotlyError
-from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
+from ...test_optional.optional_utils import NumpyTestUtilsMixin
 from plotly.graph_objs import graph_objs
-from plotly.tests.utils import TestCaseNoTemplate
+from ...utils import TestCaseNoTemplate
 
 
 class TestQuiver(TestCaseNoTemplate, NumpyTestUtilsMixin):

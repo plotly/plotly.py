@@ -1,6 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import SubplotidValidator
-from plotly.tests.test_optional.test_utils.test_utils import np_nan, np_inf
+from ...test_optional.test_utils.test_utils import np_nan, np_inf
 
 
 # Fixtures

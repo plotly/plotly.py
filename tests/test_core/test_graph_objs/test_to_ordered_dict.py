@@ -1,6 +1,6 @@
 import plotly.graph_objs as go
 from collections import OrderedDict
-from plotly.tests.utils import TestCaseNoTemplate
+from ...utils import TestCaseNoTemplate
 
 
 class FigureTest(TestCaseNoTemplate):

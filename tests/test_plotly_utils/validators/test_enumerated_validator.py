@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 import pandas as pd
 from _plotly_utils.basevalidators import EnumeratedValidator
-from plotly.tests.test_optional.test_utils.test_utils import np_inf
+from ...test_optional.test_utils.test_utils import np_inf
 
 # Fixtures
 # --------

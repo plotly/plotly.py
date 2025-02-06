@@ -15,8 +15,8 @@ else:
 
 # Constants
 # ---------
-project_root = os.path.dirname(os.path.realpath(plotly.__file__))
-images_root = os.path.join(project_root, "tests", "test_orca", "images")
+orca_test_root = os.path.dirname(os.path.abspath(__file__))
+images_root = os.path.join(orca_test_root, "images")
 print(images_root)
 if sys.platform.startswith("linux"):
     images_dir = os.path.join(images_root, "linux")
