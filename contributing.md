@@ -20,14 +20,14 @@ There are many ways to contribute to plotly.py. To contribute effectively, it is
   is [generated from the Plotly.js schema](https://plotly.com/python/figure-structure/),
   so changes to be made in this package need to be
   [contributed to Plotly.js](https://github.com/plotly/plotly.js) or to the `codegen` system
-  in `packages/python/plotly/codegen`. Most of the codegen code concerns the generation of docstrings from
+  in `codegen/`. Most of the codegen code concerns the generation of docstrings from
   the schema JSON in Plotly.js. Traces and
   Layout classes have a direct correspondence with their Javascript
-  counterpart. Higher-level methods that work on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`) are defined in `packages/python/plotly/plotly/basedatatypes.py`. Additional helper methods are defined there for the `Figure` object, such as
+  counterpart. Higher-level methods that work on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`) are defined in `plotly/basedatatypes.py`. Additional helper methods are defined there for the `Figure` object, such as
   `update_layout`, `add_trace`, etc.
 
 - [the `plotly.express` module](https://plotly.com/python/plotly-express/) (usually imported as `px`) is a high-level
-  functional API that uses `graph_objects` under the hood. Its code is in `packages/python/plotly/plotly/express`.
+  functional API that uses `graph_objects` under the hood. Its code is in `plotly/express/`.
   Plotly Express functions
   are designed to be highly consistent with each other, and to do *as little computation
   in Python as possible*, generally concerning themselves with formatting data and creating
@@ -49,13 +49,13 @@ There are many ways to contribute to plotly.py. To contribute effectively, it is
   as we are introducing more features into `plotly.express`. Some issues in the
   tracker are labeled "figure_factory" and can be good issues to work on. More
   instructions on figure factories are found
-  [here](packages/python/plotly/plotly/figure_factory/README.md).
+  [here](plotly/figure_factory/README.md).
 
 - other pure-Python submodules are: `plotly.io` (low-level interface for
   displaying, reading and writing figures), `plotly.subplots` (helper function
   for layout of multi-plot figures)
 
-- tests are found in `packages/python/plotly/plotly/tests`. Different
+- tests are found in `plotly/tests`. Different
   directories correspond to different test jobs (with different dependency sets)
   run in continuous integration. More is explained about tests
   in the following "Technical aspects" section.
@@ -138,7 +138,7 @@ We will support Python 3.12 and higher versions soon.
 
 ### Install development requirements (Non-Windows)
 ```bash
-(plotly_dev) $ pip install -r packages/python/plotly/requires-optional.txt
+(plotly_dev) $ pip install -r requires-optional.txt
  ```
 ### Install development requirements (Windows + Conda)
 Because Windows requires Visual Studio libraries to compile some of the optional dependencies, follow these steps to
@@ -146,19 +146,17 @@ complete installation and avoid gdal-config errors.
 
 ```bash
 (plotly_dev) $ conda install fiona
-(plotly_dev) $ pip install -r packages/python/plotly/requires-optional.txt
+(plotly_dev) $ pip install -r requires-optional.txt
 ```
 
 ### Editable install of plotly packages
 ```bash
-(plotly_dev) $ pip install -e packages/python/plotly/
-(plotly_dev) $ pip install -e packages/python/chart-studio/
-(plotly_dev) $ pip install -e packages/python/plotly-geo/
+(plotly_dev) $ pip install -e .
 ```
 
 **Note**: To test `go.FigureWidget` locally, you'll need to generate the javascript bundle as follows:
 ```
-cd packages/python/plotly/js
+cd js
 npm install && npm run build
 ```
 
@@ -176,7 +174,7 @@ documentation on _development mode_.
 This repo uses the [Black](https://black.readthedocs.io/en/stable/) code formatter,
 and the [pre-commit](https://pre-commit.com/) library to manage a git commit hook to
 run Black prior to each commit.  Both pre-commit and black are included in the
-`packages/python/plotly/requires-optional.txt` file, so you should have them
+`requires-optional.txt` file, so you should have them
 installed already if you've been following along.
 
 To enable the Black formatting git hook, run the following from within your virtual
@@ -216,12 +214,11 @@ make that pull request!
 
 
 ## Update to a new version of Plotly.js
-First update the version of the `plotly.js` dependency in `packages/python/plotly/js/package.json`.
+First update the version of the `plotly.js` dependency in `js/package.json`.
 
 Then run the `updateplotlyjs` command with:
 
 ```bash
-$ cd packages/python/plotly
 $ python setup.py updateplotlyjs
 ```
 
@@ -251,16 +248,13 @@ $ npm run build
 $ npm pack
 $ mv plotly.js-*.tgz plotly.js.tgz
 
-# In your plotly.py/packages/python/plotly/ directory:
+# In your plotly.py/ directory:
 $ python setup.py updateplotlyjsdev --local /path/to/your/plotly.js/
 ```
 
 ## Testing
 
-We take advantage of two tools to run tests:
-
-* [`tox`](https://tox.readthedocs.io/en/latest/), which is both a virtualenv management and test tool.
-* [`pytest`](https://docs.pytest.org/en/latest/), a powerful framework for unit testing.
+To run tests, we use [`pytest`](https://docs.pytest.org/en/latest/), a powerful framework for unit testing.
 
 ### Running Tests with `pytest`
 
@@ -269,19 +263,19 @@ Since our tests cover *all* the functionality, to prevent tons of errors from sh
 After you've done that, go ahead and run the test suite!
 
 ```bash
-pytest  packages/python/plotly/plotly/tests/
+pytest plotly/tests/
 ```
 
 Or for more *verbose* output:
 
 ```bash
-pytest -v  packages/python/plotly/plotly/tests/
+pytest -v plotly/tests/
 ```
 
 Either of those will run *every* test we've written for the Python API. You can get more granular by running something like:
 
 ```bash
-pytest  packages/python/plotly/plotly/tests/test_core/
+pytest plotly/tests/test_core/
 ```
 
 ... or even more granular by running something like:
@@ -296,52 +290,8 @@ or for a specific test function
 pytest plotly/tests/test_plotly/test_plot.py::test_function
 ```
 
-### Running tests with `tox`
-
-Running tests with tox is much more powerful, but requires a bit more setup.
-
-You'll need to export an environment variable for *each* tox environment you wish to test with. For example, if you want to test with `Python 3.9` and
-`Python 3.6`, but only care to check the `core` specs, you would need to ensure that the following variables are exported:
-
-```
-export PLOTLY_TOX_PYTHON_39=<python binary>
-export PLOTLY_TOX_PYTHON_36=<python binary>
-```
-
-Where the `<python binary` is going to be specific to your development setup. As a more complete example, you might have this loaded in a `.bash_profile` (or equivalent shell loader):
-
-```bash
-############
-# tox envs #
-############
-
-export PLOTLY_TOX_PYTHON_39=python3.9
-export PLOTLY_TOX_PYTHON_36=python3.6
-export TOXENV=py39-core,py36-core
-```
-
-Where `TOXENV` is the environment list you want to use when invoking `tox` from the command line. Note that the `PLOTLY_TOX_*` pattern is used to pass in variables for use in the `tox.ini` file. Though this is a little setup, intensive, you'll get the following benefits:
-
-* `tox` will automatically manage a virtual env for each environment you want to test in.
-* You only have to run `tox` and know that the module is working in all included Python versions.
-
-Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our configuration of [pytest markers](http://doc.pytest.org/en/latest/example/markers.html), which are set up in `packages/python/plotly/pytest.ini`. To run only tests that are *not* tagged with `nodev`, you could use the following command:
-
-```bash
-tox -- -a '!nodev'
-```
-
-Note that anything after `--` is substituted in for `{posargs}` in the tox.ini. For completeness, because it's reasonably confusing, if you want to force a match for *multiple* `pytest` marker tags, you comma-separate the tags like so:
-
-```bash
-tox -- -a '!nodev','!matplotlib'
-```
-
 ### Writing Tests
 
 You're *strongly* encouraged to write tests that check your added functionality.
 
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
-
-Test accounts include: `PythonTest`, `PlotlyImageTest`, and  `PlotlyStageTest`.
-
