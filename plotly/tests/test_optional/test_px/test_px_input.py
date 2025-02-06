@@ -400,11 +400,6 @@ def test_build_df_with_hover_data_from_vaex_and_polars(test_lib, hover_data):
 
 
 def test_timezones(request, constructor):
-    # FIXME: PyArrow requires a different format for datetime constructors with timezones
-    from .conftest import pyarrow_table_constructor
-    if constructor is pyarrow_table_constructor:
-        request.applymarker(pytest.mark.xfail)
-
     df = nw.from_native(
         constructor({"date": ["2015-04-04 19:31:30+0100"], "value": [3]})
     ).with_columns(nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S%z"))
