@@ -67,7 +67,7 @@ commands:
           name: Test utils
           command: |
             . venv/bin/activate
-            pytest _plotly_utils/tests/
+            pytest tests/test_plotly_utils/
           no_output_timeout: 20m
       - run:
           name: Test io

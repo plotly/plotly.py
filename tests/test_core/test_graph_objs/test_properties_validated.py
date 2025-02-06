@@ -12,7 +12,7 @@ class TestPropertyValidation(TestCase):
     def test_validators_work_attr(self):
         """
         Note: all of the individual validators are tested in
-        `_plotly_utils/tests/validators`. Here we're just making sure that
+        `tests/test_plotly_utils/validators`. Here we're just making sure that
         datatypes make use of validators
         """
         with pytest.raises(ValueError):
@@ -21,7 +21,7 @@ class TestPropertyValidation(TestCase):
     def test_validators_work_item(self):
         """
         Note: all of the individual validators are tested in
-        `_plotly_utils/tests/validators`. Here we're just making sure that
+        `tests/test_plotly_utils/validators`. Here we're just making sure that
         datatypes make use of validators
         """
         with pytest.raises(ValueError):
