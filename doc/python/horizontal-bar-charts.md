@@ -216,6 +216,107 @@ fig.update_layout(annotations=annotations)
 
 fig.show()
 ```
+### Diverging Bar (or Butterfly) Chart with Neutral Column
+
+Diverging bar charts offer two imperfect options for responses that are neither positive nor negative:  omit them, leaving them implicit when the categories add to 100%, as we did above or put them in a separate column, as we do in this example.  Jonathan Schwabish discusses this on page 92-97 of  _Better Data Visualizations_.
+
+```
+import pandas as pd
+import plotly.graph_objects as go
+
+data = {
+    "Category": ["Content Quality", "Value for Money", "Ease of Use", "Customer Support", "Scale Fidelity"],
+    "Neutral": [10, 15, 18, 15,20],
+    "Somewhat Agree": [25, 25, 22, 20, 20],
+    "Strongly Agree": [35, 35, 25, 40, 20],
+    "Somewhat Disagree": [-20, -15, -20, -10, -20],
+    "Strongly Disagree": [-10, -10, -15, -15,-20]
+}
+df = pd.DataFrame(data)
+
+fig = go.Figure()
+# this color palette conveys meaning:  blues for negative, reds for positive, gray for neutral
+color_by_category={
+    "Strongly Agree":'darkblue',
+    "Somewhat Agree":'lightblue',
+    "Somewhat Disagree":'orange',
+    "Strongly Disagree":'red',
+    "Neutral":'gray',
+}
+
+# We want the legend to be ordered in the same order that the categories appear, left to right --
+# which is different from the order in which we have to add the traces to the figure.
+# since we need to create the "somewhat" traces before the "strongly" traces to display
+# the segments in the desired order
+
+legend_rank_by_category={
+    "Strongly Disagree":1,
+    "Somewhat Disagree":2,
+    "Somewhat Agree":3,
+    "Strongly Agree":4,
+    "Neutral":5
+}
+
+# Add bars
+for col in df[["Somewhat Disagree","Strongly Disagree","Somewhat Agree","Strongly Agree","Neutral"]]:
+    fig.add_trace(go.Bar(
+        y=df["Category"],
+        x=df[col],
+        name=col,
+        orientation='h',
+        marker=dict(color=color_by_category[col]),
+        legendrank=legend_rank_by_category[col],
+        xaxis=f"x{1+(col=="Neutral")}", # in this context, putting neutral on a secondary x-axis on a different domain 
+                       # yields results equivalent to subplots with far less code
+
+
+    )
+)
+
+# make calculations to split the plot into two columns with a shared x axis scale
+# by setting the domain and range of the x axes appropriately
+
+# Find the maximum width of the bars to the left and right sides of the origin; remember that the width of 
+# the plot is the sum of the longest negative bar and the longest positive bar even if they are on separate rows
+max_left = min(df[["Somewhat Disagree","Strongly Disagree"]].sum(axis=1))
+max_right = max(df[["Somewhat Agree","Strongly Agree"]].sum(axis=1))
+
+# we are working in percent, but coded the negative reactions as negative numbers; so we need to take the absolute value
+max_width_signed = abs(max_left)+max_right
+max_width_neutral = max(df["Neutral"])
+
+fig.update_layout(
+   title="Reactions to the statement, 'The service met your expectations for':",
+    plot_bgcolor="white",
+    barmode='relative',  # Allows bars to diverge from the center
+    )
+fig.update_xaxes(
+        zeroline=True, #the zero line distinguishes between positive and negative segments
+        zerolinecolor="black",
+        #starting here, we set domain and range to create a shared x-axis scale
+        # multiply by .98 to add space between the two columns
+        range=[max_left, max_right],  
+        domain=[0, 0.98*(max_width_signed/(max_width_signed+max_width_neutral))]  
+)    
+fig.update_layout(
+    xaxis2=dict(
+        range=[0, max_width_neutral],  
+        domain=[(1-.98*(1-max_width_signed/(max_width_signed+max_width_neutral))), 1.0],
+    )
+)
+fig.update_legends(
+        orientation="h",  # a horizontal legend matches the horizontal bars
+        yref="container",
+        yanchor="bottom",
+        y=0.02,
+        xanchor="center",
+        x=0.5
+)
+
+fig.update_yaxes(title="")
+
+fig.show()
+```
 
 ### Bar Chart with Line Plot
 
@@ -260,7 +361,7 @@ fig.append_trace(go.Scatter(
 ), 1, 2)
 
 fig.update_layout(
-    title='Household savings & net worth for eight OECD countries',
+    title=dict(text='Household savings & net worth for eight OECD countries'),
     yaxis=dict(
         showgrid=False,
         showline=False,
