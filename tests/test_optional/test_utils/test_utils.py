@@ -400,7 +400,12 @@ class TestJSONEncoder(TestCase):
         import _plotly_utils
 
         img_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "..", "..", "test_plotly_utils", "resources", "1x1-black.png"
+            os.path.dirname(os.path.abspath(__file__)),
+            "..",
+            "..",
+            "test_plotly_utils",
+            "resources",
+            "1x1-black.png",
         )
 
         with open(img_path, "rb") as f:
