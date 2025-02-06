@@ -24,7 +24,7 @@ commands:
           name: Test core
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_core
+            pytest tests/test_core
           no_output_timeout: 20m
 
   test_optional:
@@ -55,13 +55,13 @@ commands:
           name: Test core
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_core
+            pytest tests/test_core
           no_output_timeout: 20m
       - run:
           name: Test optional
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_optional
+            pytest tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
@@ -73,7 +73,7 @@ commands:
           name: Test io
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_io
+            pytest tests/test_io
           no_output_timeout: 20m
       - run:
           name: Test dependencdies not imported
@@ -117,7 +117,7 @@ commands:
           name: Test orca
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_orca
+            pytest tests/test_orca
           no_output_timeout: 20m
       - store_artifacts:
           path: plotly/tests/test_orca/images/linux/failed
