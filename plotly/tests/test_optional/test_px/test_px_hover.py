@@ -191,7 +191,7 @@ def test_date_in_hover(request, constructor):
         request.applymarker(pytest.mark.xfail)
 
     df = nw.from_native(
-        constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
+        constructor({"date": ["2015-04-04 19:31:30+0100"], "value": [3]})
     ).with_columns(date=nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S%z"))
     fig = px.scatter(df.to_native(), x="value", y="value", hover_data=["date"])
 
