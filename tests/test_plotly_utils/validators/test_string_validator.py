@@ -2,7 +2,7 @@ import pytest
 
 from _plotly_utils.basevalidators import StringValidator
 import numpy as np
-from plotly.tests.test_optional.test_utils.test_utils import np_nan
+from ...test_optional.test_utils.test_utils import np_nan
 
 
 # Fixtures

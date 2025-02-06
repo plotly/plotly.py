@@ -1,8 +1,8 @@
 import pytest
 
 from plotly import optional_imports
-from plotly.tests.test_optional.optional_utils import run_fig
-from plotly.tests.test_optional.test_matplotlylib.data.data import *
+from ...test_optional.optional_utils import run_fig
+from ...test_optional.test_matplotlylib.data.data import *
 
 matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 

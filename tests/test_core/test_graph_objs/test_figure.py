@@ -1,6 +1,6 @@
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from plotly.tests.utils import TestCaseNoTemplate
+from ...utils import TestCaseNoTemplate
 import pytest
 
 

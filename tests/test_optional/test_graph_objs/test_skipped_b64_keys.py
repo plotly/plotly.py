@@ -1,7 +1,7 @@
 import json
 from unittest import TestCase
 import numpy as np
-from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
+from ...test_optional.optional_utils import NumpyTestUtilsMixin
 import plotly.graph_objs as go
 
 

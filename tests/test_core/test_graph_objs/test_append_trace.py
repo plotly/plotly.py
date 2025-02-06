@@ -10,7 +10,7 @@ from plotly.graph_objs import (
     XAxis,
     YAxis,
 )
-from plotly.tests.utils import strip_dict_params
+from ...utils import strip_dict_params
 
 import plotly.tools as tls
 

@@ -1,9 +1,9 @@
 import pytest
 
 from plotly import optional_imports
-from plotly.tests.utils import compare_dict, strip_dict_params
-from plotly.tests.test_optional.optional_utils import run_fig
-from plotly.tests.test_optional.test_matplotlylib.data.subplots import *
+from ...utils import compare_dict, strip_dict_params
+from ...test_optional.optional_utils import run_fig
+from ...test_optional.test_matplotlylib.data.subplots import *
 
 matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 

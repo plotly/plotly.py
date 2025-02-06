@@ -3,7 +3,7 @@ import narwhals.stable.v1 as nw
 import numpy as np
 import pytest
 from datetime import datetime
-from plotly.tests.test_optional.test_utils.test_utils import np_nan
+from ...test_optional.test_utils.test_utils import np_nan
 
 
 @pytest.mark.parametrize(

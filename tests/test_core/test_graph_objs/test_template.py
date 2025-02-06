@@ -4,7 +4,7 @@ import pytest
 
 import plotly.io as pio
 import plotly.graph_objs as go
-from plotly.tests.utils import TestCaseNoTemplate
+from ...utils import TestCaseNoTemplate
 
 
 class TemplateTest(TestCase):

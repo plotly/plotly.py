@@ -4,7 +4,7 @@ from pytest import approx
 from _plotly_utils.basevalidators import NumberValidator
 import numpy as np
 import pandas as pd
-from plotly.tests.test_optional.test_utils.test_utils import np_nan, np_inf
+from ...test_optional.test_utils.test_utils import np_nan, np_inf
 
 # Fixtures
 # --------
