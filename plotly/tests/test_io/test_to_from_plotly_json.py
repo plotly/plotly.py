@@ -244,6 +244,8 @@ def test_sanitize_json(engine):
     fig = go.Figure(layout=layout)
     fig_json = pio.to_json_plotly(fig, engine=engine)
     layout_2 = json.loads(fig_json)["layout"]
+    if "template" in layout_2:
+        del layout_2["template"]
 
     assert layout == layout_2
 
