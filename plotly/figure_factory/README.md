@@ -137,7 +137,7 @@ It is best to make all other functions besides `create_foo()` secret so a user c
 5. Tests
 
 Add unit tests in
-`plotly/tests/test_optional/test_figure_factory/test_figure_factory.py`.
+`tests/test_optional/test_figure_factory/test_figure_factory.py`.
 
 ## Create a Pull Request
 

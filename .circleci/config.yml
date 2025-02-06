@@ -120,7 +120,7 @@ commands:
             pytest tests/test_orca
           no_output_timeout: 20m
       - store_artifacts:
-          path: plotly/tests/test_orca/images/linux/failed
+          path: tests/test_orca/images/linux/failed
 
 jobs:
   check-code-formatting:
@@ -322,7 +322,7 @@ jobs:
           command: |
             . venv/bin/activate
             locale
-            pytest -k 'not nodev' plotly/tests/test_core
+            pytest -k 'not nodev' tests/test_core
           no_output_timeout: 20m
       - run:
           name: Commit

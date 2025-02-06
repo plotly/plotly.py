@@ -48,7 +48,7 @@ def strip_dict_params(d1, d2, ignore=["uid"]):
     """
     Helper function for assert_dict_equal
 
-    Nearly duplicate of assert_fig_equal in plotly/tests/test_optional/optional_utils.py
+    Nearly duplicate of assert_fig_equal in tests/test_optional/optional_utils.py
     Removes `ignore` params from d1 and/or d2 if they exist
     then returns stripped dictionaries
 

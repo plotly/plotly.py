@@ -1,7 +1,7 @@
 """Test compatibility with pathlib.Path.
 
 See also relevant tests in
-   plotly/tests/test_optional/test_kaleido/test_kaleido.py
+   tests/test_optional/test_kaleido/test_kaleido.py
 """
 
 from unittest import mock

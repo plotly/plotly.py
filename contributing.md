@@ -263,31 +263,31 @@ Since our tests cover *all* the functionality, to prevent tons of errors from sh
 After you've done that, go ahead and run the test suite!
 
 ```bash
-pytest plotly/tests/
+pytest tests/
 ```
 
 Or for more *verbose* output:
 
 ```bash
-pytest -v plotly/tests/
+pytest -v tests/
 ```
 
 Either of those will run *every* test we've written for the Python API. You can get more granular by running something like:
 
 ```bash
-pytest plotly/tests/test_core/
+pytest tests/test_core/
 ```
 
 ... or even more granular by running something like:
 
 ```bash
-pytest plotly/tests/test_plotly/test_plot.py
+pytest tests/test_plotly/test_plot.py
 ```
 
 or for a specific test function
 
 ```bash
-pytest plotly/tests/test_plotly/test_plot.py::test_function
+pytest tests/test_plotly/test_plot.py::test_function
 ```
 
 ### Writing Tests
