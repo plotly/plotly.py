@@ -406,7 +406,7 @@ def test_timezones(request, constructor):
         request.applymarker(pytest.mark.xfail)
 
     df = nw.from_native(
-        constructor({"date": ["2015-04-04 19:31:30+01:00"], "value": [3]})
+        constructor({"date": ["2015-04-04 19:31:30+0100"], "value": [3]})
     ).with_columns(nw.col("date").str.to_datetime(format="%Y-%m-%d %H:%M:%S%z"))
     args = dict(data_frame=df.to_native(), x="date", y="value")
     out = build_dataframe(args, go.Scatter)
