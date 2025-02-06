@@ -24,7 +24,7 @@ class OptionalImportsTest(TestCase):
 
     def test_get_module_import_exception(self):
         # Get module that raises an exception on import
-        module_str = ".." "test_optional_imports.exploding_module"
+        module_str = "plotly.tests.test_core." "test_optional_imports.exploding_module"
 
         if sys.version_info >= (3, 4):
             with self.assertLogs("_plotly_utils.optional_imports", level="ERROR") as cm:
