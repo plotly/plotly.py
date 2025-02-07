@@ -18,13 +18,13 @@ commands:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip wheel
+            pip install -e .
             pip install -r ./test_requirements/requirements_<<parameters.py>>_core.txt
       - run:
           name: Test core
           command: |
             . venv/bin/activate
-            python -m pytest plotly/tests/test_core
+            pytest tests/test_core
           no_output_timeout: 20m
 
   test_optional:
@@ -41,7 +41,7 @@ commands:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip wheel
+            pip install -e .
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
             cd js
             npm ci
@@ -55,25 +55,25 @@ commands:
           name: Test core
           command: |
             . venv/bin/activate
-            python -m pytest plotly/tests/test_core
+            pytest tests/test_core
           no_output_timeout: 20m
       - run:
           name: Test optional
           command: |
             . venv/bin/activate
-            python -m pytest plotly/tests/test_optional
+            pytest tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
           command: |
             . venv/bin/activate
-            python -m pytest _plotly_utils/tests/
+            pytest tests/test_plotly_utils/
           no_output_timeout: 20m
       - run:
           name: Test io
           command: |
             . venv/bin/activate
-            python -m pytest plotly/tests/test_io
+            pytest tests/test_io
           no_output_timeout: 20m
       - run:
           name: Test dependencdies not imported
@@ -99,7 +99,6 @@ commands:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip wheel
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
       - run:
           name: Install plotly-geo
@@ -118,10 +117,10 @@ commands:
           name: Test orca
           command: |
             . venv/bin/activate
-            python -m pytest plotly/tests/test_orca
+            pytest tests/test_orca
           no_output_timeout: 20m
       - store_artifacts:
-          path: plotly/tests/test_orca/images/linux/failed
+          path: tests/test_orca/images/linux/failed
 
 jobs:
   check-code-formatting:
@@ -269,7 +268,6 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip wheel
             pip install -e .
             pip install plotly-geo
             pip install -r test_requirements/requirements_39_pandas_2_optional.txt
@@ -299,7 +297,7 @@ jobs:
 
   plotlyjs_dev_build:
     docker:
-      - image: cimg/python:3.8-node
+      - image: cimg/python:3.11-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -311,25 +309,20 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_38_core.txt black inflect
+            pip install -e .
+            pip install -r ./test_requirements/requirements_311_core.txt black inflect
             pip install jupyterlab
-      - run:
-          name: Update jupyter widget plotly.js version
-          command: |
-            . venv/bin/activate
-            python setup.py updateplotlywidgetversion
       - run:
           name: Update plotly.js to dev
           command: |
             . venv/bin/activate
-            python setup.py updateplotlyjsdev
+            python commands.py updateplotlyjsdev
       - run:
           name: Test core
           command: |
             . venv/bin/activate
             locale
-            python -m pytest -k 'not nodev' plotly/tests/test_core
+            pytest -k 'not nodev' tests/test_core
           no_output_timeout: 20m
       - run:
           name: Commit
@@ -343,14 +336,15 @@ jobs:
           name: Build source distribution packages
           command: |
             . venv/bin/activate
-            python setup.py sdist
+            pip install build
+            python -m build --sdist --wheel -o dist
           when: always
       - store_artifacts:
           path: dist/
 
   full_build:
     docker:
-      - image: continuumio/miniconda3:24.3.0-0
+      - image: cimg/python:3.11-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -359,20 +353,10 @@ jobs:
       - checkout
 
       - run:
-          name: Create conda environment
-          command: |
-            conda config --remove channels defaults
-            conda config --add channels conda-forge
-            conda create -n env --yes python=3.9 conda-build=3.28.4 conda-verify
-            conda install -n env -c conda-forge jupyterlab nodejs=16
-            conda init bash
-            mkdir output
-
-      - run:
           name: initial NPM Build
           command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
+            python -m venv venv
+            . venv/bin/activate
             cd js
             npm ci
             npm run build
@@ -381,40 +365,16 @@ jobs:
       - run:
           name: PyPI Build
           command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            python setup.py sdist bdist_wheel
-            cp -R dist output/dist
+            . venv/bin/activate
+            pip install build
+            python -m build --sdist --wheel -o dist
+            cp -R dist output
             git status
-
-      - run:
-          name: Conda Build
-          command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            conda build recipe/
-            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 output/
-            git status
-
-      - run:
-          name: Build Widget javascript bundle
-          command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd js
-            npm ci
-            npm run build
 
       - run:
           name: Zip output
           command: |
             tar czf output.tgz output
-
-      - run:
-          name: Git Diff
-          command: |
-            git status
-            git diff
 
       - store_artifacts:
           path: output.tgz
@@ -445,7 +405,6 @@ jobs:
             cd doc
             python -m venv venv
             . venv/bin/activate
-            pip install --upgrade pip wheel
             pip uninstall -y plotly
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
