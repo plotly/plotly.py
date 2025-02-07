@@ -34,6 +34,8 @@ commands:
         type: string
     steps:
       - checkout
+      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "test_requirements/requirements-optional.txt" }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
@@ -80,6 +82,10 @@ commands:
           command: |
             . venv/bin/activate
             python -m pytest -x test_init/test_lazy_imports.py
+      - save_cache: # ** special step to save dependency cache **
+          key: *deps1-cache
+          paths:
+            - "venv"
 
 jobs:
   check-code-formatting:
