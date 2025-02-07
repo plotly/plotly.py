@@ -24,7 +24,7 @@ commands:
           name: Test core
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_core
+            python -m pytest plotly/tests/test_core
           no_output_timeout: 20m
 
   test_optional:
@@ -55,36 +55,36 @@ commands:
           name: Test core
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_core
+            python -m pytest plotly/tests/test_core
           no_output_timeout: 20m
       - run:
           name: Test optional
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_optional
+            python -m pytest plotly/tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
           command: |
             . venv/bin/activate
-            pytest _plotly_utils/tests/
+            python -m pytest _plotly_utils/tests/
           no_output_timeout: 20m
       - run:
           name: Test io
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_io
+            python -m pytest plotly/tests/test_io
           no_output_timeout: 20m
       - run:
           name: Test dependencdies not imported
           command: |
             . venv/bin/activate
-            pytest -x test_init/test_dependencies_not_imported.py
+            python -m pytest -x test_init/test_dependencies_not_imported.py
       - run:
           name: Test lazy imports
           command: |
             . venv/bin/activate
-            pytest -x test_init/test_lazy_imports.py
+            python -m pytest -x test_init/test_lazy_imports.py
   test_orca:
     parameters:
       py:
@@ -118,7 +118,7 @@ commands:
           name: Test orca
           command: |
             . venv/bin/activate
-            pytest plotly/tests/test_orca
+            python -m pytest plotly/tests/test_orca
           no_output_timeout: 20m
       - store_artifacts:
           path: plotly/tests/test_orca/images/linux/failed
@@ -329,7 +329,7 @@ jobs:
           command: |
             . venv/bin/activate
             locale
-            pytest -k 'not nodev' plotly/tests/test_core
+            python -m pytest -k 'not nodev' plotly/tests/test_core
           no_output_timeout: 20m
       - run:
           name: Commit

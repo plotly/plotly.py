@@ -1954,10 +1954,10 @@ def test_make_subplots_spacing_error():
     # vertical_spacing is raised when spacing exceeds that value
     for match in [
         (
-            "^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
+            r"^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
             % ("Vertical", "rows", 1.0 / 50.0)
-        ).replace(".", "\."),
-        "The resulting plot would have 51 rows \(rows=51\)\.$",
+        ).replace(".", r"\."),
+        r"The resulting plot would have 51 rows \(rows=51\)\.$",
     ]:
         with pytest.raises(
             ValueError,
@@ -1966,10 +1966,10 @@ def test_make_subplots_spacing_error():
             fig = subplots.make_subplots(51, 1, vertical_spacing=0.0201)
     for match in [
         (
-            "^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
+            r"^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
             % ("Horizontal", "cols", 1.0 / 50.0)
-        ).replace(".", "\."),
-        "The resulting plot would have 51 columns \(cols=51\)\.$",
+        ).replace(".", r"\."),
+        r"The resulting plot would have 51 columns \(cols=51\)\.$",
     ]:
         with pytest.raises(
             ValueError,
@@ -2011,18 +2011,18 @@ def test_make_subplots_spacing_error():
         # This shouldn't happen so we assert False to force failure
         assert False
     with pytest.raises(
-        ValueError, match="^Horizontal spacing must be between 0 and 1\.$"
+        ValueError, match=r"^Horizontal spacing must be between 0 and 1\.$"
     ):
         fig = subplots.make_subplots(1, 1, horizontal_spacing=-0.01)
     with pytest.raises(
-        ValueError, match="^Horizontal spacing must be between 0 and 1\.$"
+        ValueError, match=r"^Horizontal spacing must be between 0 and 1\.$"
     ):
         fig = subplots.make_subplots(1, 1, horizontal_spacing=1.01)
     with pytest.raises(
-        ValueError, match="^Vertical spacing must be between 0 and 1\.$"
+        ValueError, match=r"^Vertical spacing must be between 0 and 1\.$"
     ):
         fig = subplots.make_subplots(1, 1, vertical_spacing=-0.01)
     with pytest.raises(
-        ValueError, match="^Vertical spacing must be between 0 and 1\.$"
+        ValueError, match=r"^Vertical spacing must be between 0 and 1\.$"
     ):
         fig = subplots.make_subplots(1, 1, vertical_spacing=1.01)

@@ -14,7 +14,7 @@ def validator():
 
 @pytest.fixture()
 def validator_re():
-    values = ["foo", "/bar(\d)+/", "baz"]
+    values = ["foo", r"/bar(\d)+/", "baz"]
     return EnumeratedValidator("prop", "parent", values, array_ok=False)
 
 
@@ -26,7 +26,7 @@ def validator_aok():
 
 @pytest.fixture()
 def validator_aok_re():
-    values = ["foo", "/bar(\d)+/", "baz"]
+    values = ["foo", r"/bar(\d)+/", "baz"]
     return EnumeratedValidator("prop", "parent", values, array_ok=True)
 
 
