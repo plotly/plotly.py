@@ -25,10 +25,10 @@ where you can edit the page on Github).
 
 For more important edits where you need to run the notebook to check the output,
 clone the repository and setup an environment as described in the [main
-contributing notes](../contributing.md). If you're writing documentation at the
+contributing notes](../CONTRIBUTING.md). If you're writing documentation at the
 same time as you are developing a feature, make sure to install with editable
 install (`pip install -e`, as described in [main
-contributing notes](../contributing.md)), so that you only need to restart
+contributing notes](../CONTRIBUTING.md)), so that you only need to restart
 the Jupyter kernel when you have changed the source code of the feature.
 
 ### Branches
