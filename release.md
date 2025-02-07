@@ -24,29 +24,20 @@ a link to the plotly.js CHANGELOG.
 
 Manually update the versions to `X.Y.Z` in the files specified below.
 
+ - `pyproject.toml`
+   + update version
  - `CHANGELOG.md`
    + update the release date
- - `plotly/_widget_version.py`:
-   + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
  - Commit your changes on the branch:
    + `git commit -a -m "version changes for vX.Y.Z"`
-
- ### Triggering (and Retriggering) the build
-
- - Commit and add this specific tag which `versioneer` will pick up, and push to Github so that CI will build the release artifacts. This is an atomic push so that CI will read the tag on the commit:
+ - Create a tag for Github release
    + `git tag vX.Y.Z`
    + `git push --atomic origin release-X.Y.Z vX.Y.Z`
  - Create a Github pull request from `release-X.Y.Z` to `master` and wait for CI to be green
- - *If something goes wrong below*, you'll need to trigger the build process again after a fix. You'll need to commit your changes in the release branch, move the tag and atomically force push:
-   + `git commit ....`
-   + `git tag -f vX.Y.Z`
-   + `git push --force --atomic origin release-X.Y.Z vX.Y.Z`
 
 ### Download and QA CI Artifacts
 
 The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` which you should download and decompress, which will give you a directory called `output`. The filenames contained within will contain version numbers.
-
-**Note: if any of the version numbers are not simply `X.Y.Z` but include some kind of git hash, then this is a dirty build and you'll need to clean up whatever is dirtying the tree and follow the instructions above to trigger the build again.** (That said, you can do QA on dirty builds, you just can't publish them.)
 
 To locally install the PyPI dist, make sure you have an environment with JupyterLab installed (maybe one created with `conda create -n condatest python=3.10 jupyter anywidget pandas`):
 
@@ -55,15 +46,7 @@ To locally install the PyPI dist, make sure you have an environment with Jupyter
 - `conda uninstall plotly` (just in case!)
 - `pip install path/to/output/dist/plotly-X.Y.X-py3-none-any.whl`
 
-To locally install the Conda dist (generally do this in a different, clean environment from the one above!):
-
-- `conda uninstall plotly`
-- `pip uninstall plotly` (just in case!)
-- `conda install path/to/output/plotly-X.Y.Z.tar.bz2`
-
 You'll want to check, in both Lab and Notebook, **in a brand new notebook in each** so that there is no caching of previous results, that `go.Figure()` and `go.FigureWidget()` work without error.
-
-If something is broken, you'll need to fix it and trigger the build again (see above section).
 
 ### Publishing
 
@@ -73,17 +56,9 @@ you can publish the artifacts. **You will need special credentials from Plotly l
 
 Publishing to PyPI:
 ```bash
-(plotly_dev) $ cd path/to/output/dist
+(plotly_dev) $ cd path/to/output
 (plotly_dev) $ twine upload plotly-X.Y.Z*
 ```
-
-Publishing to `plotly` conda channel (make sure you have run `conda install anaconda-client` to get the `anaconda` command):
-
-```
-(plotly_dev) $ cd path/to/output
-(plotly_dev) $ anaconda upload plotly-X.Y.Z.tar.bz2
-```
-
 
 ### Merge the PR and make a Release
 
@@ -130,13 +105,4 @@ PyPI RC (no special flags, just the `rc1` suffix):
 ```
 
 The `--tag next` part ensures that users won't install this version unless
-they explicitly ask for the version or for the version with the `next` tag.
-
-Conda RC:
-
-```
-$ anaconda upload --label test plotly-*.tar.bz2
-```
-
-The `--label test` part ensures that users won't install this version unless
 they explicitly ask for the version or for the version with the `next` tag.

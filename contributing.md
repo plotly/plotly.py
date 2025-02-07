@@ -219,7 +219,7 @@ First update the version of the `plotly.js` dependency in `js/package.json`.
 Then run the `updateplotlyjs` command with:
 
 ```bash
-$ python setup.py updateplotlyjs
+$ python commands.py updateplotlyjs
 ```
 
 This will download new versions of `plot-schema.json` and `plotly.min.js` from
@@ -233,7 +233,7 @@ For dev branches, it is also possible to use `updateplotlyjsdev` in two configur
 
 If your devbranch is part of the official plotly.js repository, you can use
 ```bash
-python setup.py updateplotlyjsdev --devrepo reponame --devbranch branchname
+python commands.py updateplotlyjsdev --devrepo reponame --devbranch branchname
 ```
 to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively.
 
@@ -249,7 +249,7 @@ $ npm pack
 $ mv plotly.js-*.tgz plotly.js.tgz
 
 # In your plotly.py/ directory:
-$ python setup.py updateplotlyjsdev --local /path/to/your/plotly.js/
+$ python commands.py updateplotlyjsdev --local /path/to/your/plotly.js/
 ```
 
 ## Testing
@@ -263,31 +263,31 @@ Since our tests cover *all* the functionality, to prevent tons of errors from sh
 After you've done that, go ahead and run the test suite!
 
 ```bash
-pytest plotly/tests/
+pytest tests/
 ```
 
 Or for more *verbose* output:
 
 ```bash
-pytest -v plotly/tests/
+pytest -v tests/
 ```
 
 Either of those will run *every* test we've written for the Python API. You can get more granular by running something like:
 
 ```bash
-pytest plotly/tests/test_core/
+pytest tests/test_core/
 ```
 
 ... or even more granular by running something like:
 
 ```bash
-pytest plotly/tests/test_plotly/test_plot.py
+pytest tests/test_plotly/test_plot.py
 ```
 
 or for a specific test function
 
 ```bash
-pytest plotly/tests/test_plotly/test_plot.py::test_function
+pytest tests/test_plotly/test_plot.py::test_function
 ```
 
 ### Writing Tests
