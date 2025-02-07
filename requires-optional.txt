@@ -20,15 +20,12 @@ numpy
 # matplotlib==2.2.2
 
 ## testing dependencies ##
+# see also test_requirements/*.txt for specific Python versions
 coverage==4.3.1
 mock==2.0.0
 pytest==8.1.1
 xarray
 pytz
-
-## orca dependencies ##
-requests
-psutil
 
 ## code formatting ##
 pre-commit
