@@ -79,12 +79,12 @@ commands:
           name: Test dependencdies not imported
           command: |
             . venv/bin/activate
-            pytest -x test_init/test_dependencies_not_imported.py
+            python -m pytest -x test_init/test_dependencies_not_imported.py
       - run:
           name: Test lazy imports
           command: |
             . venv/bin/activate
-            pytest -x test_init/test_lazy_imports.py
+            python -m pytest -x test_init/test_lazy_imports.py
   test_orca:
     parameters:
       py:
