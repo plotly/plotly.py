@@ -66,7 +66,7 @@ class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):
                 "center": {"lon": 0.5, "lat": 51},
             },
         }
-        data = [{"type": "scattermapbox"}]
+        data = [{"type": "scattermap"}]
 
         fig = go.Figure(data=data, layout=layout)
 
