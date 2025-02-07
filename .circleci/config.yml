@@ -47,11 +47,6 @@ commands:
             npm ci
             npm run build
       - run:
-          name: Install plotly-geo
-          command: |
-            . venv/bin/activate
-            pip install plotly-geo
-      - run:
           name: Test core
           command: |
             . venv/bin/activate
@@ -85,42 +80,6 @@ commands:
           command: |
             . venv/bin/activate
             python -m pytest -x test_init/test_lazy_imports.py
-  test_orca:
-    parameters:
-      py:
-        default: "310"
-        type: string
-    steps:
-      - checkout
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
-      - run:
-          name: Install dependencies
-          command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -r ./test_requirements/requirements_optional.txt
-      - run:
-          name: Install plotly-geo
-          command: |
-            . venv/bin/activate
-            pip install plotly-geo
-      - run:
-          name: Install orca
-          command: |
-            npm install electron@1.8.4
-            npm install orca
-            sudo apt-get update
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
-            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - run:
-          name: Test orca
-          command: |
-            . venv/bin/activate
-            pytest tests/test_orca
-          no_output_timeout: 20m
-      - store_artifacts:
-          path: tests/test_orca/images/linux/failed
 
 jobs:
   check-code-formatting:
@@ -417,14 +376,6 @@ jobs:
               cd ../doc
             fi
             cd ..
-      - run:
-          name: Install orca
-          command: |
-            npm install electron@1.8.4
-            npm install orca
-            sudo apt-get update
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
-            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
 
       - save_cache:
           paths:

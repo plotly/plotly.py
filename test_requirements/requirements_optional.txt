@@ -22,5 +22,5 @@ polars[timezone]
 pyarrow
 narwhals
 anywidget
-jupyter-console
 plotly-geo
+vaex;python_version<="3.11"
