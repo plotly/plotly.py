@@ -1,6 +1,7 @@
 requests
 pandas
 numpy
+fiona<=1.9.6;python_version<="3.8"
 xarray
 statsmodels
 Pillow
@@ -23,4 +24,4 @@ pyarrow
 narwhals
 anywidget
 plotly-geo
-vaex;python_version<="3.11"
+vaex;python_version<="3.9"
