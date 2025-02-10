@@ -276,24 +276,24 @@ jobs:
           name: Build html figures (Pandas 2)
           command: |
             . venv/bin/activate
-            python test/percy/plotly-express.py
+            python tests/percy/plotly-express.py
       - run:
           name: Build html figures (Pandas 1) and compare
           command: |
             . venv/bin/activate
-            mkdir test/percy/pandas2
-            mv test/percy/*.html test/percy/pandas2/
+            mkdir tests/percy/pandas2
+            mv tests/percy/*.html tests/percy/pandas2/
             # 1.1 is the earliest minor with Py3.9 wheels
             pip install "pandas==1.1.5"
-            python test/percy/plotly-express.py
-            python test/percy/compare-pandas.py
-            rm -rf test/percy/pandas2
+            python tests/percy/plotly-express.py
+            python tests/percy/compare-pandas.py
+            rm -rf tests/percy/pandas2
       - run:
           name: Run percy snapshots
           command: |
             npm i @percy/cli
-            npx percy snapshot -c test/percy/snapshots.yml test/percy/
-            rm test/percy/*.html
+            npx percy snapshot -c tests/percy/snapshots.yml tests/percy/
+            rm tests/percy/*.html
 
   plotlyjs_dev_build:
     docker:
