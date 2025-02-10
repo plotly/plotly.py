@@ -41,8 +41,8 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            python -m venv venv
             ls -R venv
+            python -m venv venv
             . venv/bin/activate
             pip install -e .
             pip install -r ./test_requirements/requirements_optional.txt
