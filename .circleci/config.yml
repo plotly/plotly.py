@@ -34,8 +34,8 @@ commands:
         type: string
     steps:
       - checkout
-      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "test_requirements/requirements_optional.txt" }}
+      - restore_cache:
+          key: optional-dependencies-{{ checksum "test_requirements/requirements_optional.txt" }}-{{ checksum ".circleci/config.yml" }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
@@ -48,6 +48,12 @@ commands:
             cd js
             npm ci
             npm run build
+      
+      - save_cache:
+          paths:
+            - ./venv
+          key: optional-dependencies-{{ checksum "test_requirements/requirements_optional.txt" }}-{{ checksum ".circleci/config.yml" }}
+      
       - run:
           name: Test core
           command: |
@@ -73,7 +79,7 @@ commands:
             pytest tests/test_io
           no_output_timeout: 20m
       - run:
-          name: Test dependencdies not imported
+          name: Test dependencies not imported
           command: |
             . venv/bin/activate
             python -m pytest -x test_init/test_dependencies_not_imported.py
@@ -82,10 +88,6 @@ commands:
           command: |
             . venv/bin/activate
             python -m pytest -x test_init/test_lazy_imports.py
-      - save_cache: # ** special step to save dependency cache **
-          key: *deps1-cache
-          paths:
-            - "venv"
 
 jobs:
   check-code-formatting:
