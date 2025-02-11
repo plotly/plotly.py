@@ -50,8 +50,8 @@ commands:
       - run:
           name: Install plotly-geo
           command: |
-            . venv/bin/activate
-            pip install plotly-geo
+            source .venv/bin/activate
+            uv pip install plotly-geo
       - run:
           name: Test core
           command: |
