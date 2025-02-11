@@ -39,9 +39,10 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -e .
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install .
             pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
             cd js
             npm ci
