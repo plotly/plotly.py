@@ -61,5 +61,5 @@ tags
 doc/check-or-enforce-order.py
 plotly/package_data/widgetbundle.js
 
-test/percy/*.html
-test/percy/pandas2/*.html
+tests/percy/*.html
+tests/percy/pandas2/*.html
