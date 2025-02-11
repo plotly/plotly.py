@@ -35,13 +35,12 @@ commands:
     steps:
       - checkout
       - restore_cache:
-          key: optional-dependencies-{{ checksum "test_requirements/requirements_optional.txt" }}-{{ checksum ".circleci/config.yml" }}
+          key: optional-dependencies-{{ checksum "test_requirements/requirements_optional.txt" }}-{{ checksum parameters.py }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
           name: Install dependencies
           command: |
-            ls -R venv
             python -m venv venv
             . venv/bin/activate
             pip install -e .
@@ -52,8 +51,8 @@ commands:
       
       - save_cache:
           paths:
-            - ./venv
-          key: optional-dependencies-{{ checksum "test_requirements/requirements_optional.txt" }}-{{ checksum ".circleci/config.yml" }}
+            - venv
+          key: optional-dependencies-{{ checksum "test_requirements/requirements_optional.txt" }}-{{ checksum parameters.py }}
       
       - run:
           name: Test core
