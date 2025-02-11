@@ -14,7 +14,7 @@ import sys
 import warnings
 
 
-if optional_imports.get_module("vaex") is None:
+if optional_imports.get_module("vaex") is None and sys.version_info > (3, 9):
     TEST_LIBS = ["polars"]
 else:
     TEST_LIBS = ["vaex", "polars"]
