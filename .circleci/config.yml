@@ -35,7 +35,7 @@ commands:
     steps:
       - checkout
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "test_requirements/requirements-optional.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "test_requirements/requirements_optional.txt" }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
