@@ -393,10 +393,6 @@ jobs:
             - "dc:5f:39:48:00:b4:72:34:e1:d2:c4:e1:1f:d1:e2:ce" #plotlydocbot
 
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          key: v2-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
 
@@ -404,14 +400,15 @@ jobs:
           name: install dependencies
           command: |
             cd doc
-            python -m venv venv
-            . venv/bin/activate
-            pip uninstall -y plotly
-            pip install -r requirements.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip uninstall -y plotly
+            uv pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
-              pip uninstall -y plotly
+              uv pip uninstall -y plotly
               cd ..
-              pip install -e .
+              uv pip install -e .
               cd js
               npm ci
               npm run build
@@ -427,17 +424,11 @@ jobs:
             sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
             echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
 
-      - save_cache:
-          paths:
-            - ./doc/venv
-            - ./doc/node_modules
-          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
-
       - run:
           name: make html
           command: |
             cd doc
-            . venv/bin/activate
+            source .venv/bin/activate
             echo ${mapbox_token} > python/.mapbox_token
             make -kj8 || make -kj8
             curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
@@ -486,14 +477,14 @@ jobs:
           name: make doc
           command: |
             cd doc
-            . venv/bin/activate
+            source .venv/bin/activate
             # For the API doc, we need to use the local version of plotly
             # since we are tweaking the source because of
             # graph_objs/graph_objects
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              pip uninstall -y plotly
+              uv pip uninstall -y plotly
               cd ..
-              pip install -e .
+              uv pip install -e .
               cd doc
               cd apidoc
               make html
