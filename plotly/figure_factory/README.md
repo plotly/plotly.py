@@ -137,7 +137,7 @@ It is best to make all other functions besides `create_foo()` secret so a user c
 5. Tests
 
 Add unit tests in
-`plotly/tests/test_optional/test_figure_factory/test_figure_factory.py`.
+`tests/test_optional/test_figure_factory/test_figure_factory.py`.
 
 ## Create a Pull Request
 
@@ -161,7 +161,7 @@ $ git push origin add-ff-type
 
 ## Be Part of the Discussion
 
-Go check out your newly pushed branch at https://github.com/plotly/plotly.py. If you have any other questions, check out the [Plotly Contributing Page](https://github.com/plotly/plotly.py/blob/master/contributing.md). Thanks for contributing to Plotly's Graphing Library!
+Go check out your newly pushed branch at https://github.com/plotly/plotly.py. If you have any other questions, check out the [Plotly Contributing Page](https://github.com/plotly/plotly.py/blob/master/CONTRIBUTING.md). Thanks for contributing to Plotly's Graphing Library!
 
 ### Table of Current Figure Factories
 | Name              | Documentation                             | In GitHub     |

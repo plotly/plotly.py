@@ -1,5 +1,5 @@
 requests==2.25.1
-pandas==2.2.0
+pandas==2.2.3
 numpy==1.22.4
 xarray==0.17.0
 statsmodels
