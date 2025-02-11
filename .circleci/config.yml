@@ -43,7 +43,7 @@ commands:
             uv venv
             source .venv/bin/activate
             uv pip install .
-            pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
+            uv pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
             cd js
             npm ci
             npm run build
@@ -77,7 +77,7 @@ commands:
             pytest tests/test_io
           no_output_timeout: 20m
       - run:
-          name: Test dependencdies not imported
+          name: Test dependencies not imported
           command: |
             . venv/bin/activate
             python -m pytest -x test_init/test_dependencies_not_imported.py
