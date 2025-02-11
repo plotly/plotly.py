@@ -403,7 +403,6 @@ jobs:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip uninstall plotly
             uv pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               uv pip uninstall plotly
