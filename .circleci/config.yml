@@ -74,7 +74,7 @@ commands:
           name: Test io
           command: |
             source .venv/bin/activate
-            pytest tests/test_io
+            python -m pytest tests/test_io
           no_output_timeout: 20m
       - run:
           name: Test dependencies not imported
