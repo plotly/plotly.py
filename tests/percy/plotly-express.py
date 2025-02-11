@@ -7,7 +7,7 @@ import pandas as pd
 # tested with percy.
 
 # this directory
-dir_name = os.path.join("test", "percy")
+dir_name = os.path.join("tests", "percy")
 
 # #### Scatter and Line plots
 
