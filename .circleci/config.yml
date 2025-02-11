@@ -482,7 +482,7 @@ jobs:
             # since we are tweaking the source because of
             # graph_objs/graph_objects
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              uv pip uninstall -y plotly
+              uv pip uninstall plotly
               cd ..
               uv pip install -e .
               cd doc
