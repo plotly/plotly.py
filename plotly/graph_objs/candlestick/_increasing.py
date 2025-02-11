@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Increasing(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'candlestick'
-    _path_str = 'candlestick.increasing'
+    _parent_path_str = "candlestick"
+    _path_str = "candlestick.increasing"
     _valid_props = {"fillcolor", "line"}
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -32,14 +26,12 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -53,14 +45,12 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.candlestick.increasing.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -72,12 +62,8 @@ class Increasing(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.candlestick.increasing.Lin
             e` instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            fillcolor=None,
-            line=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
         """
         Construct a new Increasing object
 
@@ -99,13 +85,11 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         Increasing
         """
-        super().__init__('increasing')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("increasing")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -113,26 +97,17 @@ class Increasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.candlestick.Increasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.candlestick.Increasing`""")
+an instance of :class:`plotly.graph_objs.candlestick.Increasing`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('fillcolor', arg, fillcolor)
-        self._init_provided('line', arg, line)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("fillcolor", arg, fillcolor)
+        self._init_provided("line", arg, line)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

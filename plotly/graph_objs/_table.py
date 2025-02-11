@@ -1,19 +1,40 @@
-
-
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Table(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'table'
-    _valid_props = {"cells", "columnorder", "columnordersrc", "columnwidth", "columnwidthsrc", "customdata", "customdatasrc", "domain", "header", "hoverinfo", "hoverinfosrc", "hoverlabel", "ids", "idssrc", "legend", "legendgrouptitle", "legendrank", "legendwidth", "meta", "metasrc", "name", "stream", "type", "uid", "uirevision", "visible"}
+    _parent_path_str = ""
+    _path_str = "table"
+    _valid_props = {
+        "cells",
+        "columnorder",
+        "columnordersrc",
+        "columnwidth",
+        "columnwidthsrc",
+        "customdata",
+        "customdatasrc",
+        "domain",
+        "header",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "ids",
+        "idssrc",
+        "legend",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "meta",
+        "metasrc",
+        "name",
+        "stream",
+        "type",
+        "uid",
+        "uirevision",
+        "visible",
+    }
 
-    # cells
-    # -----
     @property
     def cells(self):
         """
@@ -27,14 +48,12 @@ class Table(_BaseTraceType):
         -------
         plotly.graph_objs.table.Cells
         """
-        return self['cells']
+        return self["cells"]
 
     @cells.setter
     def cells(self, val):
-        self['cells'] = val
+        self["cells"] = val
 
-    # columnorder
-    # -----------
     @property
     def columnorder(self):
         """
@@ -50,14 +69,12 @@ class Table(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['columnorder']
+        return self["columnorder"]
 
     @columnorder.setter
     def columnorder(self, val):
-        self['columnorder'] = val
+        self["columnorder"] = val
 
-    # columnordersrc
-    # --------------
     @property
     def columnordersrc(self):
         """
@@ -71,14 +88,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['columnordersrc']
+        return self["columnordersrc"]
 
     @columnordersrc.setter
     def columnordersrc(self, val):
-        self['columnordersrc'] = val
+        self["columnordersrc"] = val
 
-    # columnwidth
-    # -----------
     @property
     def columnwidth(self):
         """
@@ -93,14 +108,12 @@ class Table(_BaseTraceType):
         -------
         int|float|numpy.ndarray
         """
-        return self['columnwidth']
+        return self["columnwidth"]
 
     @columnwidth.setter
     def columnwidth(self, val):
-        self['columnwidth'] = val
+        self["columnwidth"] = val
 
-    # columnwidthsrc
-    # --------------
     @property
     def columnwidthsrc(self):
         """
@@ -114,14 +127,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['columnwidthsrc']
+        return self["columnwidthsrc"]
 
     @columnwidthsrc.setter
     def columnwidthsrc(self, val):
-        self['columnwidthsrc'] = val
+        self["columnwidthsrc"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -137,14 +148,12 @@ class Table(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -158,14 +167,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -179,14 +186,12 @@ class Table(_BaseTraceType):
         -------
         plotly.graph_objs.table.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # header
-    # ------
     @property
     def header(self):
         """
@@ -200,14 +205,12 @@ class Table(_BaseTraceType):
         -------
         plotly.graph_objs.table.Header
         """
-        return self['header']
+        return self["header"]
 
     @header.setter
     def header(self, val):
-        self['header'] = val
+        self["header"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -226,14 +229,12 @@ class Table(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -247,14 +248,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -268,14 +267,12 @@ class Table(_BaseTraceType):
         -------
         plotly.graph_objs.table.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -290,14 +287,12 @@ class Table(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -310,14 +305,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -335,14 +328,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -356,14 +347,12 @@ class Table(_BaseTraceType):
         -------
         plotly.graph_objs.table.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -383,14 +372,12 @@ class Table(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -404,14 +391,12 @@ class Table(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -432,14 +417,12 @@ class Table(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -452,14 +435,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -474,14 +455,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -495,14 +474,12 @@ class Table(_BaseTraceType):
         -------
         plotly.graph_objs.table.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -517,14 +494,12 @@ class Table(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -550,14 +525,12 @@ class Table(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -573,20 +546,16 @@ class Table(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -713,35 +682,37 @@ class Table(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-    def __init__(self,
-            arg=None,
-            cells=None,
-            columnorder=None,
-            columnordersrc=None,
-            columnwidth=None,
-            columnwidthsrc=None,
-            customdata=None,
-            customdatasrc=None,
-            domain=None,
-            header=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            stream=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        cells=None,
+        columnorder=None,
+        columnordersrc=None,
+        columnwidth=None,
+        columnwidthsrc=None,
+        customdata=None,
+        customdatasrc=None,
+        domain=None,
+        header=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        ids=None,
+        idssrc=None,
+        legend=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        stream=None,
+        uid=None,
+        uirevision=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Table object
 
@@ -883,13 +854,11 @@ class Table(_BaseTraceType):
         -------
         Table
         """
-        super().__init__('table')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("table")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -897,55 +866,43 @@ class Table(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Table
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Table`""")
+an instance of :class:`plotly.graph_objs.Table`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('cells', arg, cells)
-        self._init_provided('columnorder', arg, columnorder)
-        self._init_provided('columnordersrc', arg, columnordersrc)
-        self._init_provided('columnwidth', arg, columnwidth)
-        self._init_provided('columnwidthsrc', arg, columnwidthsrc)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('header', arg, header)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('visible', arg, visible)
+        self._init_provided("cells", arg, cells)
+        self._init_provided("columnorder", arg, columnorder)
+        self._init_provided("columnordersrc", arg, columnordersrc)
+        self._init_provided("columnwidth", arg, columnwidth)
+        self._init_provided("columnwidthsrc", arg, columnwidthsrc)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("header", arg, header)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("visible", arg, visible)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'table'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "table"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

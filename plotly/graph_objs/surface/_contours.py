@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Contours(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'surface'
-    _path_str = 'surface.contours'
+    _parent_path_str = "surface"
+    _path_str = "surface.contours"
     _valid_props = {"x", "y", "z"}
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -27,14 +21,12 @@ class Contours(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.X
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -48,14 +40,12 @@ class Contours(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.Y
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # z
-    # -
     @property
     def z(self):
         """
@@ -69,14 +59,12 @@ class Contours(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.Z
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -90,13 +78,8 @@ class Contours(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.surface.contours.Z`
             instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            x=None,
-            y=None,
-            z=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Contours object
 
@@ -120,13 +103,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Contours
         """
-        super().__init__('contours')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("contours")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -134,27 +115,18 @@ class Contours(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.surface.Contours
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.Contours`""")
+an instance of :class:`plotly.graph_objs.surface.Contours`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('x', arg, x)
-        self._init_provided('y', arg, y)
-        self._init_provided('z', arg, z)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("x", arg, x)
+        self._init_provided("y", arg, y)
+        self._init_provided("z", arg, z)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

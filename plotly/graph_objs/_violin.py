@@ -1,19 +1,76 @@
-
-
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Violin(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'violin'
-    _valid_props = {"alignmentgroup", "bandwidth", "box", "customdata", "customdatasrc", "fillcolor", "hoverinfo", "hoverinfosrc", "hoverlabel", "hoveron", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "jitter", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "marker", "meanline", "meta", "metasrc", "name", "offsetgroup", "opacity", "orientation", "pointpos", "points", "quartilemethod", "scalegroup", "scalemode", "selected", "selectedpoints", "showlegend", "side", "span", "spanmode", "stream", "text", "textsrc", "type", "uid", "uirevision", "unselected", "visible", "width", "x", "x0", "xaxis", "xhoverformat", "xsrc", "y", "y0", "yaxis", "yhoverformat", "ysrc", "zorder"}
+    _parent_path_str = ""
+    _path_str = "violin"
+    _valid_props = {
+        "alignmentgroup",
+        "bandwidth",
+        "box",
+        "customdata",
+        "customdatasrc",
+        "fillcolor",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hoveron",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "jitter",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "line",
+        "marker",
+        "meanline",
+        "meta",
+        "metasrc",
+        "name",
+        "offsetgroup",
+        "opacity",
+        "orientation",
+        "pointpos",
+        "points",
+        "quartilemethod",
+        "scalegroup",
+        "scalemode",
+        "selected",
+        "selectedpoints",
+        "showlegend",
+        "side",
+        "span",
+        "spanmode",
+        "stream",
+        "text",
+        "textsrc",
+        "type",
+        "uid",
+        "uirevision",
+        "unselected",
+        "visible",
+        "width",
+        "x",
+        "x0",
+        "xaxis",
+        "xhoverformat",
+        "xsrc",
+        "y",
+        "y0",
+        "yaxis",
+        "yhoverformat",
+        "ysrc",
+        "zorder",
+    }
 
-    # alignmentgroup
-    # --------------
     @property
     def alignmentgroup(self):
         """
@@ -29,14 +86,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['alignmentgroup']
+        return self["alignmentgroup"]
 
     @alignmentgroup.setter
     def alignmentgroup(self, val):
-        self['alignmentgroup'] = val
+        self["alignmentgroup"] = val
 
-    # bandwidth
-    # ---------
     @property
     def bandwidth(self):
         """
@@ -51,14 +106,12 @@ class Violin(_BaseTraceType):
         -------
         int|float
         """
-        return self['bandwidth']
+        return self["bandwidth"]
 
     @bandwidth.setter
     def bandwidth(self, val):
-        self['bandwidth'] = val
+        self["bandwidth"] = val
 
-    # box
-    # ---
     @property
     def box(self):
         """
@@ -72,14 +125,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Box
         """
-        return self['box']
+        return self["box"]
 
     @box.setter
     def box(self, val):
-        self['box'] = val
+        self["box"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -95,14 +146,12 @@ class Violin(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -116,14 +165,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -142,14 +189,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -168,14 +213,12 @@ class Violin(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -189,14 +232,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -210,14 +251,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hoveron
-    # -------
     @property
     def hoveron(self):
         """
@@ -235,14 +274,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['hoveron']
+        return self["hoveron"]
 
     @hoveron.setter
     def hoveron(self, val):
-        self['hoveron'] = val
+        self["hoveron"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -279,14 +316,12 @@ class Violin(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -300,14 +335,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -322,14 +355,12 @@ class Violin(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -343,14 +374,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -365,14 +394,12 @@ class Violin(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -385,14 +412,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # jitter
-    # ------
     @property
     def jitter(self):
         """
@@ -408,14 +433,12 @@ class Violin(_BaseTraceType):
         -------
         int|float
         """
-        return self['jitter']
+        return self["jitter"]
 
     @jitter.setter
     def jitter(self, val):
-        self['jitter'] = val
+        self["jitter"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -433,14 +456,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -456,14 +477,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -477,14 +496,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -504,14 +521,12 @@ class Violin(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -525,14 +540,12 @@ class Violin(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -546,14 +559,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -567,14 +578,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
-    # meanline
-    # --------
     @property
     def meanline(self):
         """
@@ -588,14 +597,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Meanline
         """
-        return self['meanline']
+        return self["meanline"]
 
     @meanline.setter
     def meanline(self, val):
-        self['meanline'] = val
+        self["meanline"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -616,14 +623,12 @@ class Violin(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -636,14 +641,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -663,14 +666,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # offsetgroup
-    # -----------
     @property
     def offsetgroup(self):
         """
@@ -686,14 +687,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['offsetgroup']
+        return self["offsetgroup"]
 
     @offsetgroup.setter
     def offsetgroup(self, val):
-        self['offsetgroup'] = val
+        self["offsetgroup"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -706,14 +705,12 @@ class Violin(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -728,14 +725,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['orientation']
+        return self["orientation"]
 
     @orientation.setter
     def orientation(self, val):
-        self['orientation'] = val
+        self["orientation"] = val
 
-    # pointpos
-    # --------
     @property
     def pointpos(self):
         """
@@ -752,14 +747,12 @@ class Violin(_BaseTraceType):
         -------
         int|float
         """
-        return self['pointpos']
+        return self["pointpos"]
 
     @pointpos.setter
     def pointpos(self, val):
-        self['pointpos'] = val
+        self["pointpos"] = val
 
-    # points
-    # ------
     @property
     def points(self):
         """
@@ -780,14 +773,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['points']
+        return self["points"]
 
     @points.setter
     def points(self, val):
-        self['points'] = val
+        self["points"] = val
 
-    # quartilemethod
-    # --------------
     @property
     def quartilemethod(self):
         """
@@ -812,14 +803,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['quartilemethod']
+        return self["quartilemethod"]
 
     @quartilemethod.setter
     def quartilemethod(self, val):
-        self['quartilemethod'] = val
+        self["quartilemethod"] = val
 
-    # scalegroup
-    # ----------
     @property
     def scalegroup(self):
         """
@@ -838,14 +827,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['scalegroup']
+        return self["scalegroup"]
 
     @scalegroup.setter
     def scalegroup(self, val):
-        self['scalegroup'] = val
+        self["scalegroup"] = val
 
-    # scalemode
-    # ---------
     @property
     def scalemode(self):
         """
@@ -862,14 +849,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['scalemode']
+        return self["scalemode"]
 
     @scalemode.setter
     def scalemode(self, val):
-        self['scalemode'] = val
+        self["scalemode"] = val
 
-    # selected
-    # --------
     @property
     def selected(self):
         """
@@ -883,14 +868,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Selected
         """
-        return self['selected']
+        return self["selected"]
 
     @selected.setter
     def selected(self, val):
-        self['selected'] = val
+        self["selected"] = val
 
-    # selectedpoints
-    # --------------
     @property
     def selectedpoints(self):
         """
@@ -907,14 +890,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['selectedpoints']
+        return self["selectedpoints"]
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self['selectedpoints'] = val
+        self["selectedpoints"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -928,14 +909,12 @@ class Violin(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # side
-    # ----
     @property
     def side(self):
         """
@@ -952,39 +931,35 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['side']
+        return self["side"]
 
     @side.setter
     def side(self, val):
-        self['side'] = val
+        self["side"] = val
 
-    # span
-    # ----
     @property
     def span(self):
         """
-        Sets the span in data space for which the density function will
-        be computed. Has an effect only when `spanmode` is set to
-        "manual".
+            Sets the span in data space for which the density function will
+            be computed. Has an effect only when `spanmode` is set to
+            "manual".
 
-        The 'span' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'span[0]' property accepts values of any type
-    (1) The 'span[1]' property accepts values of any type
+            The 'span' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'span[0]' property accepts values of any type
+        (1) The 'span[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
-        return self['span']
+        return self["span"]
 
     @span.setter
     def span(self, val):
-        self['span'] = val
+        self["span"] = val
 
-    # spanmode
-    # --------
     @property
     def spanmode(self):
         """
@@ -1004,14 +979,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['spanmode']
+        return self["spanmode"]
 
     @spanmode.setter
     def spanmode(self, val):
-        self['spanmode'] = val
+        self["spanmode"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1025,14 +998,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -1051,14 +1022,12 @@ class Violin(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1071,14 +1040,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1093,14 +1060,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1126,14 +1091,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # unselected
-    # ----------
     @property
     def unselected(self):
         """
@@ -1147,14 +1110,12 @@ class Violin(_BaseTraceType):
         -------
         plotly.graph_objs.violin.Unselected
         """
-        return self['unselected']
+        return self["unselected"]
 
     @unselected.setter
     def unselected(self, val):
-        self['unselected'] = val
+        self["unselected"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1170,14 +1131,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -1192,14 +1151,12 @@ class Violin(_BaseTraceType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1213,14 +1170,12 @@ class Violin(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # x0
-    # --
     @property
     def x0(self):
         """
@@ -1234,14 +1189,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['x0']
+        return self["x0"]
 
     @x0.setter
     def x0(self, val):
-        self['x0'] = val
+        self["x0"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -1259,14 +1212,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['xaxis']
+        return self["xaxis"]
 
     @xaxis.setter
     def xaxis(self, val):
-        self['xaxis'] = val
+        self["xaxis"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1290,14 +1241,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1310,14 +1259,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1331,14 +1278,12 @@ class Violin(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # y0
-    # --
     @property
     def y0(self):
         """
@@ -1352,14 +1297,12 @@ class Violin(_BaseTraceType):
         -------
         Any
         """
-        return self['y0']
+        return self["y0"]
 
     @y0.setter
     def y0(self, val):
-        self['y0'] = val
+        self["y0"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -1377,14 +1320,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1408,14 +1349,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -1428,14 +1367,12 @@ class Violin(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -1450,20 +1387,16 @@ class Violin(_BaseTraceType):
         -------
         int
         """
-        return self['zorder']
+        return self["zorder"]
 
     @zorder.setter
     def zorder(self, val):
-        self['zorder'] = val
+        self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1811,71 +1744,73 @@ class Violin(_BaseTraceType):
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
         """
-    def __init__(self,
-            arg=None,
-            alignmentgroup=None,
-            bandwidth=None,
-            box=None,
-            customdata=None,
-            customdatasrc=None,
-            fillcolor=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hoveron=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            jitter=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            marker=None,
-            meanline=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            offsetgroup=None,
-            opacity=None,
-            orientation=None,
-            pointpos=None,
-            points=None,
-            quartilemethod=None,
-            scalegroup=None,
-            scalemode=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            side=None,
-            span=None,
-            spanmode=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
-            width=None,
-            x=None,
-            x0=None,
-            xaxis=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            y0=None,
-            yaxis=None,
-            yhoverformat=None,
-            ysrc=None,
-            zorder=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        alignmentgroup=None,
+        bandwidth=None,
+        box=None,
+        customdata=None,
+        customdatasrc=None,
+        fillcolor=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        jitter=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        line=None,
+        marker=None,
+        meanline=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        offsetgroup=None,
+        opacity=None,
+        orientation=None,
+        pointpos=None,
+        points=None,
+        quartilemethod=None,
+        scalegroup=None,
+        scalemode=None,
+        selected=None,
+        selectedpoints=None,
+        showlegend=None,
+        side=None,
+        span=None,
+        spanmode=None,
+        stream=None,
+        text=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        unselected=None,
+        visible=None,
+        width=None,
+        x=None,
+        x0=None,
+        xaxis=None,
+        xhoverformat=None,
+        xsrc=None,
+        y=None,
+        y0=None,
+        yaxis=None,
+        yhoverformat=None,
+        ysrc=None,
+        zorder=None,
+        **kwargs,
+    ):
         """
         Construct a new Violin object
 
@@ -2239,13 +2174,11 @@ class Violin(_BaseTraceType):
         -------
         Violin
         """
-        super().__init__('violin')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("violin")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2253,91 +2186,79 @@ class Violin(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Violin
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Violin`""")
+an instance of :class:`plotly.graph_objs.Violin`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('alignmentgroup', arg, alignmentgroup)
-        self._init_provided('bandwidth', arg, bandwidth)
-        self._init_provided('box', arg, box)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('fillcolor', arg, fillcolor)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hoveron', arg, hoveron)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('hovertext', arg, hovertext)
-        self._init_provided('hovertextsrc', arg, hovertextsrc)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('jitter', arg, jitter)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('line', arg, line)
-        self._init_provided('marker', arg, marker)
-        self._init_provided('meanline', arg, meanline)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('offsetgroup', arg, offsetgroup)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('orientation', arg, orientation)
-        self._init_provided('pointpos', arg, pointpos)
-        self._init_provided('points', arg, points)
-        self._init_provided('quartilemethod', arg, quartilemethod)
-        self._init_provided('scalegroup', arg, scalegroup)
-        self._init_provided('scalemode', arg, scalemode)
-        self._init_provided('selected', arg, selected)
-        self._init_provided('selectedpoints', arg, selectedpoints)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('side', arg, side)
-        self._init_provided('span', arg, span)
-        self._init_provided('spanmode', arg, spanmode)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('text', arg, text)
-        self._init_provided('textsrc', arg, textsrc)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('unselected', arg, unselected)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('width', arg, width)
-        self._init_provided('x', arg, x)
-        self._init_provided('x0', arg, x0)
-        self._init_provided('xaxis', arg, xaxis)
-        self._init_provided('xhoverformat', arg, xhoverformat)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('y', arg, y)
-        self._init_provided('y0', arg, y0)
-        self._init_provided('yaxis', arg, yaxis)
-        self._init_provided('yhoverformat', arg, yhoverformat)
-        self._init_provided('ysrc', arg, ysrc)
-        self._init_provided('zorder', arg, zorder)
+        self._init_provided("alignmentgroup", arg, alignmentgroup)
+        self._init_provided("bandwidth", arg, bandwidth)
+        self._init_provided("box", arg, box)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("fillcolor", arg, fillcolor)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hoveron", arg, hoveron)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("jitter", arg, jitter)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("line", arg, line)
+        self._init_provided("marker", arg, marker)
+        self._init_provided("meanline", arg, meanline)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("offsetgroup", arg, offsetgroup)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("orientation", arg, orientation)
+        self._init_provided("pointpos", arg, pointpos)
+        self._init_provided("points", arg, points)
+        self._init_provided("quartilemethod", arg, quartilemethod)
+        self._init_provided("scalegroup", arg, scalegroup)
+        self._init_provided("scalemode", arg, scalemode)
+        self._init_provided("selected", arg, selected)
+        self._init_provided("selectedpoints", arg, selectedpoints)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("side", arg, side)
+        self._init_provided("span", arg, span)
+        self._init_provided("spanmode", arg, spanmode)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("unselected", arg, unselected)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("width", arg, width)
+        self._init_provided("x", arg, x)
+        self._init_provided("x0", arg, x0)
+        self._init_provided("xaxis", arg, xaxis)
+        self._init_provided("xhoverformat", arg, xhoverformat)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("y0", arg, y0)
+        self._init_provided("yaxis", arg, yaxis)
+        self._init_provided("yhoverformat", arg, yhoverformat)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("zorder", arg, zorder)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'violin'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "violin"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

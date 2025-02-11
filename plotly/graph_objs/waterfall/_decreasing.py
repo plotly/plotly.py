@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Decreasing(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'waterfall'
-    _path_str = 'waterfall.decreasing'
+    _parent_path_str = "waterfall"
+    _path_str = "waterfall.decreasing"
     _valid_props = {"marker"}
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -27,14 +21,12 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.waterfall.decreasing.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -42,11 +34,8 @@ class Decreasing(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.waterfall.decreasing.Marke
             r` instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            marker=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, marker=None, **kwargs):
         """
         Construct a new Decreasing object
 
@@ -64,13 +53,11 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         Decreasing
         """
-        super().__init__('decreasing')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("decreasing")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -78,25 +65,16 @@ class Decreasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.waterfall.Decreasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.waterfall.Decreasing`""")
+an instance of :class:`plotly.graph_objs.waterfall.Decreasing`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('marker', arg, marker)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("marker", arg, marker)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

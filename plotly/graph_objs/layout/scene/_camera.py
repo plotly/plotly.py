@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Camera(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.scene'
-    _path_str = 'layout.scene.camera'
+    _parent_path_str = "layout.scene"
+    _path_str = "layout.scene.camera"
     _valid_props = {"center", "eye", "projection", "up"}
 
-    # center
-    # ------
     @property
     def center(self):
         """
@@ -31,14 +25,12 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Center
         """
-        return self['center']
+        return self["center"]
 
     @center.setter
     def center(self, val):
-        self['center'] = val
+        self["center"] = val
 
-    # eye
-    # ---
     @property
     def eye(self):
         """
@@ -56,14 +48,12 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Eye
         """
-        return self['eye']
+        return self["eye"]
 
     @eye.setter
     def eye(self, val):
-        self['eye'] = val
+        self["eye"] = val
 
-    # projection
-    # ----------
     @property
     def projection(self):
         """
@@ -77,14 +67,12 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Projection
         """
-        return self['projection']
+        return self["projection"]
 
     @projection.setter
     def projection(self, val):
-        self['projection'] = val
+        self["projection"] = val
 
-    # up
-    # --
     @property
     def up(self):
         """
@@ -103,14 +91,12 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Up
         """
-        return self['up']
+        return self["up"]
 
     @up.setter
     def up(self, val):
-        self['up'] = val
+        self["up"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -132,14 +118,10 @@ class Camera(_BaseLayoutHierarchyType):
             with respect to the page. The default is *{x: 0, y: 0,
             z: 1}* which means that the z axis points up.
         """
-    def __init__(self,
-            arg=None,
-            center=None,
-            eye=None,
-            projection=None,
-            up=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, center=None, eye=None, projection=None, up=None, **kwargs
+    ):
         """
         Construct a new Camera object
 
@@ -171,13 +153,11 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         Camera
         """
-        super().__init__('camera')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("camera")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -185,28 +165,19 @@ class Camera(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.scene.Camera
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.Camera`""")
+an instance of :class:`plotly.graph_objs.layout.scene.Camera`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('center', arg, center)
-        self._init_provided('eye', arg, eye)
-        self._init_provided('projection', arg, projection)
-        self._init_provided('up', arg, up)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("center", arg, center)
+        self._init_provided("eye", arg, eye)
+        self._init_provided("projection", arg, projection)
+        self._init_provided("up", arg, up)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

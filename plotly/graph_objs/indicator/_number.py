@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Number(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'indicator'
-    _path_str = 'indicator.number'
+    _parent_path_str = "indicator"
+    _path_str = "indicator.number"
     _valid_props = {"font", "prefix", "suffix", "valueformat"}
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -29,14 +23,12 @@ class Number(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.number.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
-    # prefix
-    # ------
     @property
     def prefix(self):
         """
@@ -50,14 +42,12 @@ class Number(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['prefix']
+        return self["prefix"]
 
     @prefix.setter
     def prefix(self, val):
-        self['prefix'] = val
+        self["prefix"] = val
 
-    # suffix
-    # ------
     @property
     def suffix(self):
         """
@@ -71,14 +61,12 @@ class Number(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['suffix']
+        return self["suffix"]
 
     @suffix.setter
     def suffix(self, val):
-        self['suffix'] = val
+        self["suffix"] = val
 
-    # valueformat
-    # -----------
     @property
     def valueformat(self):
         """
@@ -95,14 +83,12 @@ class Number(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valueformat']
+        return self["valueformat"]
 
     @valueformat.setter
     def valueformat(self, val):
-        self['valueformat'] = val
+        self["valueformat"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -118,14 +104,10 @@ class Number(_BaseTraceHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         """
-    def __init__(self,
-            arg=None,
-            font=None,
-            prefix=None,
-            suffix=None,
-            valueformat=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, font=None, prefix=None, suffix=None, valueformat=None, **kwargs
+    ):
         """
         Construct a new Number object
 
@@ -151,13 +133,11 @@ class Number(_BaseTraceHierarchyType):
         -------
         Number
         """
-        super().__init__('number')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("number")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -165,28 +145,19 @@ class Number(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.Number
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Number`""")
+an instance of :class:`plotly.graph_objs.indicator.Number`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('font', arg, font)
-        self._init_provided('prefix', arg, prefix)
-        self._init_provided('suffix', arg, suffix)
-        self._init_provided('valueformat', arg, valueformat)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("font", arg, font)
+        self._init_provided("prefix", arg, prefix)
+        self._init_provided("suffix", arg, suffix)
+        self._init_provided("valueformat", arg, valueformat)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,19 +1,85 @@
-
-
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Mesh3d(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'mesh3d'
-    _valid_props = {"alphahull", "autocolorscale", "cauto", "cmax", "cmid", "cmin", "color", "coloraxis", "colorbar", "colorscale", "contour", "customdata", "customdatasrc", "delaunayaxis", "facecolor", "facecolorsrc", "flatshading", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "i", "ids", "idssrc", "intensity", "intensitymode", "intensitysrc", "isrc", "j", "jsrc", "k", "ksrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "lighting", "lightposition", "meta", "metasrc", "name", "opacity", "reversescale", "scene", "showlegend", "showscale", "stream", "text", "textsrc", "type", "uid", "uirevision", "vertexcolor", "vertexcolorsrc", "visible", "x", "xcalendar", "xhoverformat", "xsrc", "y", "ycalendar", "yhoverformat", "ysrc", "z", "zcalendar", "zhoverformat", "zsrc"}
+    _parent_path_str = ""
+    _path_str = "mesh3d"
+    _valid_props = {
+        "alphahull",
+        "autocolorscale",
+        "cauto",
+        "cmax",
+        "cmid",
+        "cmin",
+        "color",
+        "coloraxis",
+        "colorbar",
+        "colorscale",
+        "contour",
+        "customdata",
+        "customdatasrc",
+        "delaunayaxis",
+        "facecolor",
+        "facecolorsrc",
+        "flatshading",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "i",
+        "ids",
+        "idssrc",
+        "intensity",
+        "intensitymode",
+        "intensitysrc",
+        "isrc",
+        "j",
+        "jsrc",
+        "k",
+        "ksrc",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "lighting",
+        "lightposition",
+        "meta",
+        "metasrc",
+        "name",
+        "opacity",
+        "reversescale",
+        "scene",
+        "showlegend",
+        "showscale",
+        "stream",
+        "text",
+        "textsrc",
+        "type",
+        "uid",
+        "uirevision",
+        "vertexcolor",
+        "vertexcolorsrc",
+        "visible",
+        "x",
+        "xcalendar",
+        "xhoverformat",
+        "xsrc",
+        "y",
+        "ycalendar",
+        "yhoverformat",
+        "ysrc",
+        "z",
+        "zcalendar",
+        "zhoverformat",
+        "zsrc",
+    }
 
-    # alphahull
-    # ---------
     @property
     def alphahull(self):
         """
@@ -41,14 +107,12 @@ class Mesh3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['alphahull']
+        return self["alphahull"]
 
     @alphahull.setter
     def alphahull(self, val):
-        self['alphahull'] = val
+        self["alphahull"] = val
 
-    # autocolorscale
-    # --------------
     @property
     def autocolorscale(self):
         """
@@ -66,14 +130,12 @@ class Mesh3d(_BaseTraceType):
         -------
         bool
         """
-        return self['autocolorscale']
+        return self["autocolorscale"]
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self['autocolorscale'] = val
+        self["autocolorscale"] = val
 
-    # cauto
-    # -----
     @property
     def cauto(self):
         """
@@ -89,14 +151,12 @@ class Mesh3d(_BaseTraceType):
         -------
         bool
         """
-        return self['cauto']
+        return self["cauto"]
 
     @cauto.setter
     def cauto(self, val):
-        self['cauto'] = val
+        self["cauto"] = val
 
-    # cmax
-    # ----
     @property
     def cmax(self):
         """
@@ -111,14 +171,12 @@ class Mesh3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['cmax']
+        return self["cmax"]
 
     @cmax.setter
     def cmax(self, val):
-        self['cmax'] = val
+        self["cmax"] = val
 
-    # cmid
-    # ----
     @property
     def cmid(self):
         """
@@ -134,14 +192,12 @@ class Mesh3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['cmid']
+        return self["cmid"]
 
     @cmid.setter
     def cmid(self, val):
-        self['cmid'] = val
+        self["cmid"] = val
 
-    # cmin
-    # ----
     @property
     def cmin(self):
         """
@@ -156,14 +212,12 @@ class Mesh3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['cmin']
+        return self["cmin"]
 
     @cmin.setter
     def cmin(self, val):
-        self['cmin'] = val
+        self["cmin"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -182,14 +236,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # coloraxis
-    # ---------
     @property
     def coloraxis(self):
         """
@@ -209,14 +261,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['coloraxis']
+        return self["coloraxis"]
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self['coloraxis'] = val
+        self["coloraxis"] = val
 
-    # colorbar
-    # --------
     @property
     def colorbar(self):
         """
@@ -230,14 +280,12 @@ class Mesh3d(_BaseTraceType):
         -------
         plotly.graph_objs.mesh3d.ColorBar
         """
-        return self['colorbar']
+        return self["colorbar"]
 
     @colorbar.setter
     def colorbar(self, val):
-        self['colorbar'] = val
+        self["colorbar"] = val
 
-    # colorscale
-    # ----------
     @property
     def colorscale(self):
         """
@@ -283,14 +331,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
-    # contour
-    # -------
     @property
     def contour(self):
         """
@@ -304,14 +350,12 @@ class Mesh3d(_BaseTraceType):
         -------
         plotly.graph_objs.mesh3d.Contour
         """
-        return self['contour']
+        return self["contour"]
 
     @contour.setter
     def contour(self, val):
-        self['contour'] = val
+        self["contour"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -327,14 +371,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -348,14 +390,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # delaunayaxis
-    # ------------
     @property
     def delaunayaxis(self):
         """
@@ -372,14 +412,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any
         """
-        return self['delaunayaxis']
+        return self["delaunayaxis"]
 
     @delaunayaxis.setter
     def delaunayaxis(self, val):
-        self['delaunayaxis'] = val
+        self["delaunayaxis"] = val
 
-    # facecolor
-    # ---------
     @property
     def facecolor(self):
         """
@@ -393,14 +431,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['facecolor']
+        return self["facecolor"]
 
     @facecolor.setter
     def facecolor(self, val):
-        self['facecolor'] = val
+        self["facecolor"] = val
 
-    # facecolorsrc
-    # ------------
     @property
     def facecolorsrc(self):
         """
@@ -414,14 +450,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['facecolorsrc']
+        return self["facecolorsrc"]
 
     @facecolorsrc.setter
     def facecolorsrc(self, val):
-        self['facecolorsrc'] = val
+        self["facecolorsrc"] = val
 
-    # flatshading
-    # -----------
     @property
     def flatshading(self):
         """
@@ -436,14 +470,12 @@ class Mesh3d(_BaseTraceType):
         -------
         bool
         """
-        return self['flatshading']
+        return self["flatshading"]
 
     @flatshading.setter
     def flatshading(self, val):
-        self['flatshading'] = val
+        self["flatshading"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -462,14 +494,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -483,14 +513,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -504,14 +532,12 @@ class Mesh3d(_BaseTraceType):
         -------
         plotly.graph_objs.mesh3d.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -548,14 +574,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -569,14 +593,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -591,14 +613,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -612,14 +632,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
-    # i
-    # -
     @property
     def i(self):
         """
@@ -638,14 +656,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['i']
+        return self["i"]
 
     @i.setter
     def i(self, val):
-        self['i'] = val
+        self["i"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -660,14 +676,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -680,14 +694,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # intensity
-    # ---------
     @property
     def intensity(self):
         """
@@ -701,14 +713,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['intensity']
+        return self["intensity"]
 
     @intensity.setter
     def intensity(self, val):
-        self['intensity'] = val
+        self["intensity"] = val
 
-    # intensitymode
-    # -------------
     @property
     def intensitymode(self):
         """
@@ -722,14 +732,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any
         """
-        return self['intensitymode']
+        return self["intensitymode"]
 
     @intensitymode.setter
     def intensitymode(self, val):
-        self['intensitymode'] = val
+        self["intensitymode"] = val
 
-    # intensitysrc
-    # ------------
     @property
     def intensitysrc(self):
         """
@@ -743,14 +751,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['intensitysrc']
+        return self["intensitysrc"]
 
     @intensitysrc.setter
     def intensitysrc(self, val):
-        self['intensitysrc'] = val
+        self["intensitysrc"] = val
 
-    # isrc
-    # ----
     @property
     def isrc(self):
         """
@@ -763,14 +769,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['isrc']
+        return self["isrc"]
 
     @isrc.setter
     def isrc(self, val):
-        self['isrc'] = val
+        self["isrc"] = val
 
-    # j
-    # -
     @property
     def j(self):
         """
@@ -789,14 +793,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['j']
+        return self["j"]
 
     @j.setter
     def j(self, val):
-        self['j'] = val
+        self["j"] = val
 
-    # jsrc
-    # ----
     @property
     def jsrc(self):
         """
@@ -809,14 +811,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['jsrc']
+        return self["jsrc"]
 
     @jsrc.setter
     def jsrc(self, val):
-        self['jsrc'] = val
+        self["jsrc"] = val
 
-    # k
-    # -
     @property
     def k(self):
         """
@@ -835,14 +835,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['k']
+        return self["k"]
 
     @k.setter
     def k(self, val):
-        self['k'] = val
+        self["k"] = val
 
-    # ksrc
-    # ----
     @property
     def ksrc(self):
         """
@@ -855,14 +853,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['ksrc']
+        return self["ksrc"]
 
     @ksrc.setter
     def ksrc(self, val):
-        self['ksrc'] = val
+        self["ksrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -880,14 +876,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -903,14 +897,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -924,14 +916,12 @@ class Mesh3d(_BaseTraceType):
         -------
         plotly.graph_objs.mesh3d.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -951,14 +941,12 @@ class Mesh3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -972,14 +960,12 @@ class Mesh3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # lighting
-    # --------
     @property
     def lighting(self):
         """
@@ -993,14 +979,12 @@ class Mesh3d(_BaseTraceType):
         -------
         plotly.graph_objs.mesh3d.Lighting
         """
-        return self['lighting']
+        return self["lighting"]
 
     @lighting.setter
     def lighting(self, val):
-        self['lighting'] = val
+        self["lighting"] = val
 
-    # lightposition
-    # -------------
     @property
     def lightposition(self):
         """
@@ -1014,14 +998,12 @@ class Mesh3d(_BaseTraceType):
         -------
         plotly.graph_objs.mesh3d.Lightposition
         """
-        return self['lightposition']
+        return self["lightposition"]
 
     @lightposition.setter
     def lightposition(self, val):
-        self['lightposition'] = val
+        self["lightposition"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -1042,14 +1024,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -1062,14 +1042,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -1084,14 +1062,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -1109,14 +1085,12 @@ class Mesh3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # reversescale
-    # ------------
     @property
     def reversescale(self):
         """
@@ -1131,14 +1105,12 @@ class Mesh3d(_BaseTraceType):
         -------
         bool
         """
-        return self['reversescale']
+        return self["reversescale"]
 
     @reversescale.setter
     def reversescale(self, val):
-        self['reversescale'] = val
+        self["reversescale"] = val
 
-    # scene
-    # -----
     @property
     def scene(self):
         """
@@ -1156,14 +1128,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['scene']
+        return self["scene"]
 
     @scene.setter
     def scene(self, val):
-        self['scene'] = val
+        self["scene"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -1177,14 +1147,12 @@ class Mesh3d(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # showscale
-    # ---------
     @property
     def showscale(self):
         """
@@ -1198,14 +1166,12 @@ class Mesh3d(_BaseTraceType):
         -------
         bool
         """
-        return self['showscale']
+        return self["showscale"]
 
     @showscale.setter
     def showscale(self, val):
-        self['showscale'] = val
+        self["showscale"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1219,14 +1185,12 @@ class Mesh3d(_BaseTraceType):
         -------
         plotly.graph_objs.mesh3d.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -1243,14 +1207,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1263,14 +1225,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1285,14 +1245,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1318,14 +1276,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # vertexcolor
-    # -----------
     @property
     def vertexcolor(self):
         """
@@ -1341,14 +1297,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['vertexcolor']
+        return self["vertexcolor"]
 
     @vertexcolor.setter
     def vertexcolor(self, val):
-        self['vertexcolor'] = val
+        self["vertexcolor"] = val
 
-    # vertexcolorsrc
-    # --------------
     @property
     def vertexcolorsrc(self):
         """
@@ -1362,14 +1316,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['vertexcolorsrc']
+        return self["vertexcolorsrc"]
 
     @vertexcolorsrc.setter
     def vertexcolorsrc(self, val):
-        self['vertexcolorsrc'] = val
+        self["vertexcolorsrc"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1385,14 +1337,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1407,14 +1357,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # xcalendar
-    # ---------
     @property
     def xcalendar(self):
         """
@@ -1431,14 +1379,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any
         """
-        return self['xcalendar']
+        return self["xcalendar"]
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self['xcalendar'] = val
+        self["xcalendar"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1462,14 +1408,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1482,14 +1426,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1504,14 +1446,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # ycalendar
-    # ---------
     @property
     def ycalendar(self):
         """
@@ -1528,14 +1468,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any
         """
-        return self['ycalendar']
+        return self["ycalendar"]
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self['ycalendar'] = val
+        self["ycalendar"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1559,14 +1497,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -1579,14 +1515,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
-    # z
-    # -
     @property
     def z(self):
         """
@@ -1601,14 +1535,12 @@ class Mesh3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
-    # zcalendar
-    # ---------
     @property
     def zcalendar(self):
         """
@@ -1625,14 +1557,12 @@ class Mesh3d(_BaseTraceType):
         -------
         Any
         """
-        return self['zcalendar']
+        return self["zcalendar"]
 
     @zcalendar.setter
     def zcalendar(self, val):
-        self['zcalendar'] = val
+        self["zcalendar"] = val
 
-    # zhoverformat
-    # ------------
     @property
     def zhoverformat(self):
         """
@@ -1656,14 +1586,12 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['zhoverformat']
+        return self["zhoverformat"]
 
     @zhoverformat.setter
     def zhoverformat(self, val):
-        self['zhoverformat'] = val
+        self["zhoverformat"] = val
 
-    # zsrc
-    # ----
     @property
     def zsrc(self):
         """
@@ -1676,20 +1604,16 @@ class Mesh3d(_BaseTraceType):
         -------
         str
         """
-        return self['zsrc']
+        return self["zsrc"]
 
     @zsrc.setter
     def zsrc(self, val):
-        self['zsrc'] = val
+        self["zsrc"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -2077,80 +2001,82 @@ class Mesh3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-    def __init__(self,
-            arg=None,
-            alphahull=None,
-            autocolorscale=None,
-            cauto=None,
-            cmax=None,
-            cmid=None,
-            cmin=None,
-            color=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            contour=None,
-            customdata=None,
-            customdatasrc=None,
-            delaunayaxis=None,
-            facecolor=None,
-            facecolorsrc=None,
-            flatshading=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            i=None,
-            ids=None,
-            idssrc=None,
-            intensity=None,
-            intensitymode=None,
-            intensitysrc=None,
-            isrc=None,
-            j=None,
-            jsrc=None,
-            k=None,
-            ksrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            lighting=None,
-            lightposition=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            reversescale=None,
-            scene=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            vertexcolor=None,
-            vertexcolorsrc=None,
-            visible=None,
-            x=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            ycalendar=None,
-            yhoverformat=None,
-            ysrc=None,
-            z=None,
-            zcalendar=None,
-            zhoverformat=None,
-            zsrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        alphahull=None,
+        autocolorscale=None,
+        cauto=None,
+        cmax=None,
+        cmid=None,
+        cmin=None,
+        color=None,
+        coloraxis=None,
+        colorbar=None,
+        colorscale=None,
+        contour=None,
+        customdata=None,
+        customdatasrc=None,
+        delaunayaxis=None,
+        facecolor=None,
+        facecolorsrc=None,
+        flatshading=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        i=None,
+        ids=None,
+        idssrc=None,
+        intensity=None,
+        intensitymode=None,
+        intensitysrc=None,
+        isrc=None,
+        j=None,
+        jsrc=None,
+        k=None,
+        ksrc=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        lighting=None,
+        lightposition=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        opacity=None,
+        reversescale=None,
+        scene=None,
+        showlegend=None,
+        showscale=None,
+        stream=None,
+        text=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        vertexcolor=None,
+        vertexcolorsrc=None,
+        visible=None,
+        x=None,
+        xcalendar=None,
+        xhoverformat=None,
+        xsrc=None,
+        y=None,
+        ycalendar=None,
+        yhoverformat=None,
+        ysrc=None,
+        z=None,
+        zcalendar=None,
+        zhoverformat=None,
+        zsrc=None,
+        **kwargs,
+    ):
         """
         Construct a new Mesh3d object
 
@@ -2552,13 +2478,11 @@ class Mesh3d(_BaseTraceType):
         -------
         Mesh3d
         """
-        super().__init__('mesh3d')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("mesh3d")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2566,100 +2490,88 @@ class Mesh3d(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Mesh3d
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Mesh3d`""")
+an instance of :class:`plotly.graph_objs.Mesh3d`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('alphahull', arg, alphahull)
-        self._init_provided('autocolorscale', arg, autocolorscale)
-        self._init_provided('cauto', arg, cauto)
-        self._init_provided('cmax', arg, cmax)
-        self._init_provided('cmid', arg, cmid)
-        self._init_provided('cmin', arg, cmin)
-        self._init_provided('color', arg, color)
-        self._init_provided('coloraxis', arg, coloraxis)
-        self._init_provided('colorbar', arg, colorbar)
-        self._init_provided('colorscale', arg, colorscale)
-        self._init_provided('contour', arg, contour)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('delaunayaxis', arg, delaunayaxis)
-        self._init_provided('facecolor', arg, facecolor)
-        self._init_provided('facecolorsrc', arg, facecolorsrc)
-        self._init_provided('flatshading', arg, flatshading)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('hovertext', arg, hovertext)
-        self._init_provided('hovertextsrc', arg, hovertextsrc)
-        self._init_provided('i', arg, i)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('intensity', arg, intensity)
-        self._init_provided('intensitymode', arg, intensitymode)
-        self._init_provided('intensitysrc', arg, intensitysrc)
-        self._init_provided('isrc', arg, isrc)
-        self._init_provided('j', arg, j)
-        self._init_provided('jsrc', arg, jsrc)
-        self._init_provided('k', arg, k)
-        self._init_provided('ksrc', arg, ksrc)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('lighting', arg, lighting)
-        self._init_provided('lightposition', arg, lightposition)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('reversescale', arg, reversescale)
-        self._init_provided('scene', arg, scene)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('showscale', arg, showscale)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('text', arg, text)
-        self._init_provided('textsrc', arg, textsrc)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('vertexcolor', arg, vertexcolor)
-        self._init_provided('vertexcolorsrc', arg, vertexcolorsrc)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('x', arg, x)
-        self._init_provided('xcalendar', arg, xcalendar)
-        self._init_provided('xhoverformat', arg, xhoverformat)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('y', arg, y)
-        self._init_provided('ycalendar', arg, ycalendar)
-        self._init_provided('yhoverformat', arg, yhoverformat)
-        self._init_provided('ysrc', arg, ysrc)
-        self._init_provided('z', arg, z)
-        self._init_provided('zcalendar', arg, zcalendar)
-        self._init_provided('zhoverformat', arg, zhoverformat)
-        self._init_provided('zsrc', arg, zsrc)
+        self._init_provided("alphahull", arg, alphahull)
+        self._init_provided("autocolorscale", arg, autocolorscale)
+        self._init_provided("cauto", arg, cauto)
+        self._init_provided("cmax", arg, cmax)
+        self._init_provided("cmid", arg, cmid)
+        self._init_provided("cmin", arg, cmin)
+        self._init_provided("color", arg, color)
+        self._init_provided("coloraxis", arg, coloraxis)
+        self._init_provided("colorbar", arg, colorbar)
+        self._init_provided("colorscale", arg, colorscale)
+        self._init_provided("contour", arg, contour)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("delaunayaxis", arg, delaunayaxis)
+        self._init_provided("facecolor", arg, facecolor)
+        self._init_provided("facecolorsrc", arg, facecolorsrc)
+        self._init_provided("flatshading", arg, flatshading)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("i", arg, i)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("intensity", arg, intensity)
+        self._init_provided("intensitymode", arg, intensitymode)
+        self._init_provided("intensitysrc", arg, intensitysrc)
+        self._init_provided("isrc", arg, isrc)
+        self._init_provided("j", arg, j)
+        self._init_provided("jsrc", arg, jsrc)
+        self._init_provided("k", arg, k)
+        self._init_provided("ksrc", arg, ksrc)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("lighting", arg, lighting)
+        self._init_provided("lightposition", arg, lightposition)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("reversescale", arg, reversescale)
+        self._init_provided("scene", arg, scene)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("showscale", arg, showscale)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("vertexcolor", arg, vertexcolor)
+        self._init_provided("vertexcolorsrc", arg, vertexcolorsrc)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("x", arg, x)
+        self._init_provided("xcalendar", arg, xcalendar)
+        self._init_provided("xhoverformat", arg, xhoverformat)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("ycalendar", arg, ycalendar)
+        self._init_provided("yhoverformat", arg, yhoverformat)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("z", arg, z)
+        self._init_provided("zcalendar", arg, zcalendar)
+        self._init_provided("zhoverformat", arg, zhoverformat)
+        self._init_provided("zsrc", arg, zsrc)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'mesh3d'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "mesh3d"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

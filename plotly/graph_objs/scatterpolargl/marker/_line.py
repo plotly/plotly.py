@@ -1,19 +1,26 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scatterpolargl.marker'
-    _path_str = 'scatterpolargl.marker.line'
-    _valid_props = {"autocolorscale", "cauto", "cmax", "cmid", "cmin", "color", "coloraxis", "colorscale", "colorsrc", "reversescale", "width", "widthsrc"}
+    _parent_path_str = "scatterpolargl.marker"
+    _path_str = "scatterpolargl.marker.line"
+    _valid_props = {
+        "autocolorscale",
+        "cauto",
+        "cmax",
+        "cmid",
+        "cmin",
+        "color",
+        "coloraxis",
+        "colorscale",
+        "colorsrc",
+        "reversescale",
+        "width",
+        "widthsrc",
+    }
 
-    # autocolorscale
-    # --------------
     @property
     def autocolorscale(self):
         """
@@ -32,14 +39,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['autocolorscale']
+        return self["autocolorscale"]
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self['autocolorscale'] = val
+        self["autocolorscale"] = val
 
-    # cauto
-    # -----
     @property
     def cauto(self):
         """
@@ -57,14 +62,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['cauto']
+        return self["cauto"]
 
     @cauto.setter
     def cauto(self, val):
-        self['cauto'] = val
+        self["cauto"] = val
 
-    # cmax
-    # ----
     @property
     def cmax(self):
         """
@@ -80,14 +83,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmax']
+        return self["cmax"]
 
     @cmax.setter
     def cmax(self, val):
-        self['cmax'] = val
+        self["cmax"] = val
 
-    # cmid
-    # ----
     @property
     def cmid(self):
         """
@@ -105,14 +106,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmid']
+        return self["cmid"]
 
     @cmid.setter
     def cmid(self, val):
-        self['cmid'] = val
+        self["cmid"] = val
 
-    # cmin
-    # ----
     @property
     def cmin(self):
         """
@@ -128,14 +127,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmin']
+        return self["cmin"]
 
     @cmin.setter
     def cmin(self, val):
-        self['cmin'] = val
+        self["cmin"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -158,14 +155,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # coloraxis
-    # ---------
     @property
     def coloraxis(self):
         """
@@ -185,14 +180,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['coloraxis']
+        return self["coloraxis"]
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self['coloraxis'] = val
+        self["coloraxis"] = val
 
-    # colorscale
-    # ----------
     @property
     def colorscale(self):
         """
@@ -240,14 +233,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -260,14 +251,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
-    # reversescale
-    # ------------
     @property
     def reversescale(self):
         """
@@ -284,14 +273,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['reversescale']
+        return self["reversescale"]
 
     @reversescale.setter
     def reversescale(self, val):
-        self['reversescale'] = val
+        self["reversescale"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -305,14 +292,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
-    # widthsrc
-    # --------
     @property
     def widthsrc(self):
         """
@@ -325,14 +310,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['widthsrc']
+        return self["widthsrc"]
 
     @widthsrc.setter
     def widthsrc(self, val):
-        self['widthsrc'] = val
+        self["widthsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -415,22 +398,24 @@ class Line(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `width`.
         """
-    def __init__(self,
-            arg=None,
-            autocolorscale=None,
-            cauto=None,
-            cmax=None,
-            cmid=None,
-            cmin=None,
-            color=None,
-            coloraxis=None,
-            colorscale=None,
-            colorsrc=None,
-            reversescale=None,
-            width=None,
-            widthsrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        autocolorscale=None,
+        cauto=None,
+        cmax=None,
+        cmid=None,
+        cmin=None,
+        color=None,
+        coloraxis=None,
+        colorscale=None,
+        colorsrc=None,
+        reversescale=None,
+        width=None,
+        widthsrc=None,
+        **kwargs,
+    ):
         """
         Construct a new Line object
 
@@ -523,13 +508,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super().__init__('line')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("line")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -537,36 +520,27 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatterpolargl.marker.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterpolargl.marker.Line`""")
+an instance of :class:`plotly.graph_objs.scatterpolargl.marker.Line`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('autocolorscale', arg, autocolorscale)
-        self._init_provided('cauto', arg, cauto)
-        self._init_provided('cmax', arg, cmax)
-        self._init_provided('cmid', arg, cmid)
-        self._init_provided('cmin', arg, cmin)
-        self._init_provided('color', arg, color)
-        self._init_provided('coloraxis', arg, coloraxis)
-        self._init_provided('colorscale', arg, colorscale)
-        self._init_provided('colorsrc', arg, colorsrc)
-        self._init_provided('reversescale', arg, reversescale)
-        self._init_provided('width', arg, width)
-        self._init_provided('widthsrc', arg, widthsrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("autocolorscale", arg, autocolorscale)
+        self._init_provided("cauto", arg, cauto)
+        self._init_provided("cmax", arg, cmax)
+        self._init_provided("cmid", arg, cmid)
+        self._init_provided("cmin", arg, cmin)
+        self._init_provided("color", arg, color)
+        self._init_provided("coloraxis", arg, coloraxis)
+        self._init_provided("colorscale", arg, colorscale)
+        self._init_provided("colorsrc", arg, colorsrc)
+        self._init_provided("reversescale", arg, reversescale)
+        self._init_provided("width", arg, width)
+        self._init_provided("widthsrc", arg, widthsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

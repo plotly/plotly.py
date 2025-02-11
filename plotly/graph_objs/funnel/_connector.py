@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Connector(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'funnel'
-    _path_str = 'funnel.connector'
+    _parent_path_str = "funnel"
+    _path_str = "funnel.connector"
     _valid_props = {"fillcolor", "line", "visible"}
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -30,14 +24,12 @@ class Connector(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -51,14 +43,12 @@ class Connector(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.funnel.connector.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -71,14 +61,12 @@ class Connector(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -90,13 +78,8 @@ class Connector(_BaseTraceHierarchyType):
         visible
             Determines if connector regions and lines are drawn.
         """
-    def __init__(self,
-            arg=None,
-            fillcolor=None,
-            line=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, fillcolor=None, line=None, visible=None, **kwargs):
         """
         Construct a new Connector object
 
@@ -118,13 +101,11 @@ class Connector(_BaseTraceHierarchyType):
         -------
         Connector
         """
-        super().__init__('connector')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("connector")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -132,27 +113,18 @@ class Connector(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.funnel.Connector
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.funnel.Connector`""")
+an instance of :class:`plotly.graph_objs.funnel.Connector`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('fillcolor', arg, fillcolor)
-        self._init_provided('line', arg, line)
-        self._init_provided('visible', arg, visible)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("fillcolor", arg, fillcolor)
+        self._init_provided("line", arg, line)
+        self._init_provided("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

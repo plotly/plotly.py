@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Decreasing(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'indicator.delta'
-    _path_str = 'indicator.delta.decreasing'
+    _parent_path_str = "indicator.delta"
+    _path_str = "indicator.delta.decreasing"
     _valid_props = {"color", "symbol"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -30,14 +24,12 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # symbol
-    # ------
     @property
     def symbol(self):
         """
@@ -51,14 +43,12 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['symbol']
+        return self["symbol"]
 
     @symbol.setter
     def symbol(self, val):
-        self['symbol'] = val
+        self["symbol"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -67,12 +57,8 @@ class Decreasing(_BaseTraceHierarchyType):
         symbol
             Sets the symbol to display for increasing value
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            symbol=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, symbol=None, **kwargs):
         """
         Construct a new Decreasing object
 
@@ -91,13 +77,11 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         Decreasing
         """
-        super().__init__('decreasing')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("decreasing")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -105,26 +89,17 @@ class Decreasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.delta.Decreasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`""")
+an instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('symbol', arg, symbol)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("symbol", arg, symbol)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

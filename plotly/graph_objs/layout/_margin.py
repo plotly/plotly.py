@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Margin(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.margin'
+    _parent_path_str = "layout"
+    _path_str = "layout.margin"
     _valid_props = {"autoexpand", "b", "l", "pad", "r", "t"}
 
-    # autoexpand
-    # ----------
     @property
     def autoexpand(self):
         """
@@ -28,14 +22,12 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['autoexpand']
+        return self["autoexpand"]
 
     @autoexpand.setter
     def autoexpand(self, val):
-        self['autoexpand'] = val
+        self["autoexpand"] = val
 
-    # b
-    # -
     @property
     def b(self):
         """
@@ -48,14 +40,12 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['b']
+        return self["b"]
 
     @b.setter
     def b(self, val):
-        self['b'] = val
+        self["b"] = val
 
-    # l
-    # -
     @property
     def l(self):
         """
@@ -68,14 +58,12 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['l']
+        return self["l"]
 
     @l.setter
     def l(self, val):
-        self['l'] = val
+        self["l"] = val
 
-    # pad
-    # ---
     @property
     def pad(self):
         """
@@ -89,14 +77,12 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['pad']
+        return self["pad"]
 
     @pad.setter
     def pad(self, val):
-        self['pad'] = val
+        self["pad"] = val
 
-    # r
-    # -
     @property
     def r(self):
         """
@@ -109,14 +95,12 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['r']
+        return self["r"]
 
     @r.setter
     def r(self, val):
-        self['r'] = val
+        self["r"] = val
 
-    # t
-    # -
     @property
     def t(self):
         """
@@ -129,14 +113,12 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['t']
+        return self["t"]
 
     @t.setter
     def t(self, val):
-        self['t'] = val
+        self["t"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -157,16 +139,18 @@ class Margin(_BaseLayoutHierarchyType):
         t
             Sets the top margin (in px).
         """
-    def __init__(self,
-            arg=None,
-            autoexpand=None,
-            b=None,
-            l=None,
-            pad=None,
-            r=None,
-            t=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        autoexpand=None,
+        b=None,
+        l=None,
+        pad=None,
+        r=None,
+        t=None,
+        **kwargs,
+    ):
         """
         Construct a new Margin object
 
@@ -196,13 +180,11 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         Margin
         """
-        super().__init__('margin')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("margin")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -210,30 +192,21 @@ class Margin(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Margin
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Margin`""")
+an instance of :class:`plotly.graph_objs.layout.Margin`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('autoexpand', arg, autoexpand)
-        self._init_provided('b', arg, b)
-        self._init_provided('l', arg, l)
-        self._init_provided('pad', arg, pad)
-        self._init_provided('r', arg, r)
-        self._init_provided('t', arg, t)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("autoexpand", arg, autoexpand)
+        self._init_provided("b", arg, b)
+        self._init_provided("l", arg, l)
+        self._init_provided("pad", arg, pad)
+        self._init_provided("r", arg, r)
+        self._init_provided("t", arg, t)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

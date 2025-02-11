@@ -1,31 +1,30 @@
+from distutils import log
+import json
 import os
+import platform
+import shutil
+from subprocess import check_call
 import sys
 import time
-import platform
-import json
-import shutil
 
-from subprocess import check_call
-from distutils import log
-
-project_root = os.path.dirname(os.path.abspath(__file__))
-node_root = os.path.join(project_root, "js")
-is_repo = os.path.exists(os.path.join(project_root, ".git"))
-node_modules = os.path.join(node_root, "node_modules")
-targets = [
-    os.path.join(project_root, "plotly", "package_data", "widgetbundle.js"),
+USAGE = "usage: python commands.py [updateplotlyjsdev | updateplotlyjs | codegen]"
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+NODE_ROOT = os.path.join(PROJECT_ROOT, "js")
+NODE_MODULES = os.path.join(NODE_ROOT, "node_modules")
+TARGETS = [
+    os.path.join(PROJECT_ROOT, "plotly", "package_data", "widgetbundle.js"),
 ]
 
-npm_path = os.pathsep.join(
+NPM_PATH = os.pathsep.join(
     [
-        os.path.join(node_root, "node_modules", ".bin"),
+        os.path.join(NODE_ROOT, "node_modules", ".bin"),
         os.environ.get("PATH", os.defpath),
     ]
 )
 
 # Load plotly.js version from js/package.json
 def plotly_js_version():
-    path = os.path.join(project_root, "js", "package.json")
+    path = os.path.join(PROJECT_ROOT, "js", "package.json")
     with open(path, "rt") as f:
         package_json = json.load(f)
         version = package_json["dependencies"]["plotly.js"]
@@ -57,13 +56,13 @@ def install_js_deps(local):
         )
 
     env = os.environ.copy()
-    env["PATH"] = npm_path
+    env["PATH"] = NPM_PATH
 
     if has_npm:
         log.info("Installing build dependencies with npm.  This may take a while...")
         check_call(
             [npmName, "install"],
-            cwd=node_root,
+            cwd=NODE_ROOT,
             stdout=sys.stdout,
             stderr=sys.stderr,
         )
@@ -71,19 +70,19 @@ def install_js_deps(local):
             plotly_archive = os.path.join(local, "plotly.js.tgz")
             check_call(
                 [npmName, "install", plotly_archive],
-                cwd=node_root,
+                cwd=NODE_ROOT,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
         check_call(
             [npmName, "run", "build"],
-            cwd=node_root,
+            cwd=NODE_ROOT,
             stdout=sys.stdout,
             stderr=sys.stderr,
         )
-        os.utime(node_modules, None)
+        os.utime(NODE_MODULES, None)
 
-    for t in targets:
+    for t in TARGETS:
         if not os.path.exists(t):
             msg = "Missing file: %s" % t
             raise ValueError(msg)
@@ -100,7 +99,7 @@ def run_codegen():
 
 
 def overwrite_schema_local(uri):
-    path = os.path.join(project_root, "codegen", "resources", "plot-schema.json")
+    path = os.path.join(PROJECT_ROOT, "codegen", "resources", "plot-schema.json")
     shutil.copyfile(uri, path)
 
 
@@ -109,13 +108,13 @@ def overwrite_schema(url):
 
     req = requests.get(url)
     assert req.status_code == 200
-    path = os.path.join(project_root, "codegen", "resources", "plot-schema.json")
+    path = os.path.join(PROJECT_ROOT, "codegen", "resources", "plot-schema.json")
     with open(path, "wb") as f:
         f.write(req.content)
 
 
 def overwrite_bundle_local(uri):
-    path = os.path.join(project_root, "plotly", "package_data", "plotly.min.js")
+    path = os.path.join(PROJECT_ROOT, "plotly", "package_data", "plotly.min.js")
     shutil.copyfile(uri, path)
 
 
@@ -125,13 +124,13 @@ def overwrite_bundle(url):
     req = requests.get(url)
     print("url:", url)
     assert req.status_code == 200
-    path = os.path.join(project_root, "plotly", "package_data", "plotly.min.js")
+    path = os.path.join(PROJECT_ROOT, "plotly", "package_data", "plotly.min.js")
     with open(path, "wb") as f:
         f.write(req.content)
 
 
 def overwrite_plotlyjs_version_file(plotlyjs_version):
-    path = os.path.join(project_root, "plotly", "offline", "_plotlyjs_version.py")
+    path = os.path.join(PROJECT_ROOT, "plotly", "offline", "_plotlyjs_version.py")
     with open(path, "w") as f:
         f.write(
             """\
@@ -274,7 +273,7 @@ def update_schema_bundle_from_master():
         overwrite_schema_local(schema_uri)
 
     # Update plotly.js url in package.json
-    package_json_path = os.path.join(node_root, "package.json")
+    package_json_path = os.path.join(NODE_ROOT, "package.json")
     with open(package_json_path, "r") as f:
         package_json = json.load(f)
 
@@ -299,9 +298,18 @@ def update_plotlyjs_dev():
     run_codegen()
 
 
-if __name__ == "__main__":
-    if "updateplotlyjsdev" in sys.argv:
+def main():
+    if len(sys.argv) != 2:
+        print(USAGE, file=sys.stderr)
+        sys.exit(1)
+    elif sys.argv[1] == "codegen":
+        run_codegen()
+    elif sys.argv[1] == "updateplotlyjsdev":
         update_plotlyjs_dev()
-    elif "updateplotlyjs" in sys.argv:
+    elif sys.argv[1] == "updateplotlyjs":
         print(plotly_js_version())
         update_plotlyjs(plotly_js_version())
+
+
+if __name__ == "__main__":
+    main()

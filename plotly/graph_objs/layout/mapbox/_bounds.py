@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Bounds(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.mapbox'
-    _path_str = 'layout.mapbox.bounds'
+    _parent_path_str = "layout.mapbox"
+    _path_str = "layout.mapbox.bounds"
     _valid_props = {"east", "north", "south", "west"}
 
-    # east
-    # ----
     @property
     def east(self):
         """
@@ -27,14 +21,12 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['east']
+        return self["east"]
 
     @east.setter
     def east(self, val):
-        self['east'] = val
+        self["east"] = val
 
-    # north
-    # -----
     @property
     def north(self):
         """
@@ -48,14 +40,12 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['north']
+        return self["north"]
 
     @north.setter
     def north(self, val):
-        self['north'] = val
+        self["north"] = val
 
-    # south
-    # -----
     @property
     def south(self):
         """
@@ -69,14 +59,12 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['south']
+        return self["south"]
 
     @south.setter
     def south(self, val):
-        self['south'] = val
+        self["south"] = val
 
-    # west
-    # ----
     @property
     def west(self):
         """
@@ -90,14 +78,12 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['west']
+        return self["west"]
 
     @west.setter
     def west(self, val):
-        self['west'] = val
+        self["west"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -114,14 +100,10 @@ class Bounds(_BaseLayoutHierarchyType):
             Sets the minimum longitude of the map (in degrees East)
             if `east`, `south` and `north` are declared.
         """
-    def __init__(self,
-            arg=None,
-            east=None,
-            north=None,
-            south=None,
-            west=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, east=None, north=None, south=None, west=None, **kwargs
+    ):
         """
         Construct a new Bounds object
 
@@ -148,13 +130,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         Bounds
         """
-        super().__init__('bounds')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("bounds")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -162,28 +142,19 @@ class Bounds(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.mapbox.Bounds
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.mapbox.Bounds`""")
+an instance of :class:`plotly.graph_objs.layout.mapbox.Bounds`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('east', arg, east)
-        self._init_provided('north', arg, north)
-        self._init_provided('south', arg, south)
-        self._init_provided('west', arg, west)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("east", arg, east)
+        self._init_provided("north", arg, north)
+        self._init_provided("south", arg, south)
+        self._init_provided("west", arg, west)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

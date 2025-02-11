@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Fillgradient(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scatter'
-    _path_str = 'scatter.fillgradient'
+    _parent_path_str = "scatter"
+    _path_str = "scatter.fillgradient"
     _valid_props = {"colorscale", "start", "stop", "type"}
 
-    # colorscale
-    # ----------
     @property
     def colorscale(self):
         """
@@ -54,14 +48,12 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
-    # start
-    # -----
     @property
     def start(self):
         """
@@ -79,14 +71,12 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['start']
+        return self["start"]
 
     @start.setter
     def start(self, val):
-        self['start'] = val
+        self["start"] = val
 
-    # stop
-    # ----
     @property
     def stop(self):
         """
@@ -104,14 +94,12 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['stop']
+        return self["stop"]
 
     @stop.setter
     def stop(self, val):
-        self['stop'] = val
+        self["stop"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -126,14 +114,12 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -164,14 +150,10 @@ class Fillgradient(_BaseTraceHierarchyType):
             Sets the type/orientation of the color gradient for the
             fill. Defaults to "none".
         """
-    def __init__(self,
-            arg=None,
-            colorscale=None,
-            start=None,
-            stop=None,
-            type=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, colorscale=None, start=None, stop=None, type=None, **kwargs
+    ):
         """
         Construct a new Fillgradient object
 
@@ -215,13 +197,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         Fillgradient
         """
-        super().__init__('fillgradient')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("fillgradient")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -229,28 +209,19 @@ class Fillgradient(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatter.Fillgradient
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter.Fillgradient`""")
+an instance of :class:`plotly.graph_objs.scatter.Fillgradient`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('colorscale', arg, colorscale)
-        self._init_provided('start', arg, start)
-        self._init_provided('stop', arg, stop)
-        self._init_provided('type', arg, type)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("colorscale", arg, colorscale)
+        self._init_provided("start", arg, start)
+        self._init_provided("stop", arg, stop)
+        self._init_provided("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

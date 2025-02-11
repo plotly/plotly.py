@@ -1,9 +1,8 @@
 import sys
 from _plotly_utils.importers import relative_import
+
 __all__, __getattr__, __dir__ = relative_import(
     __name__,
-    ['.colorbar'],
-    ['._colorbar.ColorBar', '._gradient.Gradient', '._line.Line']
+    [".colorbar"],
+    ["._colorbar.ColorBar", "._gradient.Gradient", "._line.Line"],
 )
-
-

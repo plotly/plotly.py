@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Root(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'treemap'
-    _path_str = 'treemap.root'
+    _parent_path_str = "treemap"
+    _path_str = "treemap.root"
     _valid_props = {"color"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -32,14 +26,12 @@ class Root(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -48,11 +40,8 @@ class Root(_BaseTraceHierarchyType):
             sunburst/treemap/icicle trace. this has no effect when
             a colorscale is used to set the markers.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Root object
 
@@ -70,13 +59,11 @@ class Root(_BaseTraceHierarchyType):
         -------
         Root
         """
-        super().__init__('root')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("root")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -84,25 +71,16 @@ class Root(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.treemap.Root
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.Root`""")
+an instance of :class:`plotly.graph_objs.treemap.Root`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Tiling(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'treemap'
-    _path_str = 'treemap.tiling'
+    _parent_path_str = "treemap"
+    _path_str = "treemap.tiling"
     _valid_props = {"flip", "packing", "pad", "squarifyratio"}
 
-    # flip
-    # ----
     @property
     def flip(self):
         """
@@ -29,14 +23,12 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['flip']
+        return self["flip"]
 
     @flip.setter
     def flip(self, val):
-        self['flip'] = val
+        self["flip"] = val
 
-    # packing
-    # -------
     @property
     def packing(self):
         """
@@ -52,14 +44,12 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['packing']
+        return self["packing"]
 
     @packing.setter
     def packing(self, val):
-        self['packing'] = val
+        self["packing"] = val
 
-    # pad
-    # ---
     @property
     def pad(self):
         """
@@ -72,14 +62,12 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['pad']
+        return self["pad"]
 
     @pad.setter
     def pad(self, val):
-        self['pad'] = val
+        self["pad"] = val
 
-    # squarifyratio
-    # -------------
     @property
     def squarifyratio(self):
         """
@@ -103,14 +91,12 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['squarifyratio']
+        return self["squarifyratio"]
 
     @squarifyratio.setter
     def squarifyratio(self, val):
-        self['squarifyratio'] = val
+        self["squarifyratio"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -138,14 +124,10 @@ class Tiling(_BaseTraceHierarchyType):
             i.e. 1.618034, Plotly applies 1 to increase squares in
             treemap layouts.
         """
-    def __init__(self,
-            arg=None,
-            flip=None,
-            packing=None,
-            pad=None,
-            squarifyratio=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, flip=None, packing=None, pad=None, squarifyratio=None, **kwargs
+    ):
         """
         Construct a new Tiling object
 
@@ -183,13 +165,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Tiling
         """
-        super().__init__('tiling')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("tiling")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -197,28 +177,19 @@ class Tiling(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.treemap.Tiling
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.Tiling`""")
+an instance of :class:`plotly.graph_objs.treemap.Tiling`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('flip', arg, flip)
-        self._init_provided('packing', arg, packing)
-        self._init_provided('pad', arg, pad)
-        self._init_provided('squarifyratio', arg, squarifyratio)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("flip", arg, flip)
+        self._init_provided("packing", arg, packing)
+        self._init_provided("pad", arg, pad)
+        self._init_provided("squarifyratio", arg, squarifyratio)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

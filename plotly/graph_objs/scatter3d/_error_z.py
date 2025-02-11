@@ -1,19 +1,28 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class ErrorZ(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scatter3d'
-    _path_str = 'scatter3d.error_z'
-    _valid_props = {"array", "arrayminus", "arrayminussrc", "arraysrc", "color", "symmetric", "thickness", "traceref", "tracerefminus", "type", "value", "valueminus", "visible", "width"}
+    _parent_path_str = "scatter3d"
+    _path_str = "scatter3d.error_z"
+    _valid_props = {
+        "array",
+        "arrayminus",
+        "arrayminussrc",
+        "arraysrc",
+        "color",
+        "symmetric",
+        "thickness",
+        "traceref",
+        "tracerefminus",
+        "type",
+        "value",
+        "valueminus",
+        "visible",
+        "width",
+    }
 
-    # array
-    # -----
     @property
     def array(self):
         """
@@ -27,14 +36,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['array']
+        return self["array"]
 
     @array.setter
     def array(self, val):
-        self['array'] = val
+        self["array"] = val
 
-    # arrayminus
-    # ----------
     @property
     def arrayminus(self):
         """
@@ -49,14 +56,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['arrayminus']
+        return self["arrayminus"]
 
     @arrayminus.setter
     def arrayminus(self, val):
-        self['arrayminus'] = val
+        self["arrayminus"] = val
 
-    # arrayminussrc
-    # -------------
     @property
     def arrayminussrc(self):
         """
@@ -70,14 +75,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['arrayminussrc']
+        return self["arrayminussrc"]
 
     @arrayminussrc.setter
     def arrayminussrc(self, val):
-        self['arrayminussrc'] = val
+        self["arrayminussrc"] = val
 
-    # arraysrc
-    # --------
     @property
     def arraysrc(self):
         """
@@ -90,14 +93,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['arraysrc']
+        return self["arraysrc"]
 
     @arraysrc.setter
     def arraysrc(self, val):
-        self['arraysrc'] = val
+        self["arraysrc"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -114,14 +115,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # symmetric
-    # ---------
     @property
     def symmetric(self):
         """
@@ -136,14 +135,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['symmetric']
+        return self["symmetric"]
 
     @symmetric.setter
     def symmetric(self, val):
-        self['symmetric'] = val
+        self["symmetric"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -156,14 +153,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['thickness']
+        return self["thickness"]
 
     @thickness.setter
     def thickness(self, val):
-        self['thickness'] = val
+        self["thickness"] = val
 
-    # traceref
-    # --------
     @property
     def traceref(self):
         """
@@ -175,14 +170,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['traceref']
+        return self["traceref"]
 
     @traceref.setter
     def traceref(self, val):
-        self['traceref'] = val
+        self["traceref"] = val
 
-    # tracerefminus
-    # -------------
     @property
     def tracerefminus(self):
         """
@@ -194,14 +187,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['tracerefminus']
+        return self["tracerefminus"]
 
     @tracerefminus.setter
     def tracerefminus(self, val):
-        self['tracerefminus'] = val
+        self["tracerefminus"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -221,14 +212,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
-    # value
-    # -----
     @property
     def value(self):
         """
@@ -243,14 +232,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
-    # valueminus
-    # ----------
     @property
     def valueminus(self):
         """
@@ -266,14 +253,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['valueminus']
+        return self["valueminus"]
 
     @valueminus.setter
     def valueminus(self, val):
-        self['valueminus'] = val
+        self["valueminus"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -286,14 +271,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -307,14 +290,12 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -372,24 +353,26 @@ class ErrorZ(_BaseTraceHierarchyType):
             Sets the width (in px) of the cross-bar at both ends of
             the error bars.
         """
-    def __init__(self,
-            arg=None,
-            array=None,
-            arrayminus=None,
-            arrayminussrc=None,
-            arraysrc=None,
-            color=None,
-            symmetric=None,
-            thickness=None,
-            traceref=None,
-            tracerefminus=None,
-            type=None,
-            value=None,
-            valueminus=None,
-            visible=None,
-            width=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        array=None,
+        arrayminus=None,
+        arrayminussrc=None,
+        arraysrc=None,
+        color=None,
+        symmetric=None,
+        thickness=None,
+        traceref=None,
+        tracerefminus=None,
+        type=None,
+        value=None,
+        valueminus=None,
+        visible=None,
+        width=None,
+        **kwargs,
+    ):
         """
         Construct a new ErrorZ object
 
@@ -457,13 +440,11 @@ class ErrorZ(_BaseTraceHierarchyType):
         -------
         ErrorZ
         """
-        super().__init__('error_z')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("error_z")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -471,38 +452,29 @@ class ErrorZ(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatter3d.ErrorZ
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.ErrorZ`""")
+an instance of :class:`plotly.graph_objs.scatter3d.ErrorZ`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('array', arg, array)
-        self._init_provided('arrayminus', arg, arrayminus)
-        self._init_provided('arrayminussrc', arg, arrayminussrc)
-        self._init_provided('arraysrc', arg, arraysrc)
-        self._init_provided('color', arg, color)
-        self._init_provided('symmetric', arg, symmetric)
-        self._init_provided('thickness', arg, thickness)
-        self._init_provided('traceref', arg, traceref)
-        self._init_provided('tracerefminus', arg, tracerefminus)
-        self._init_provided('type', arg, type)
-        self._init_provided('value', arg, value)
-        self._init_provided('valueminus', arg, valueminus)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('width', arg, width)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("array", arg, array)
+        self._init_provided("arrayminus", arg, arrayminus)
+        self._init_provided("arrayminussrc", arg, arrayminussrc)
+        self._init_provided("arraysrc", arg, arraysrc)
+        self._init_provided("color", arg, color)
+        self._init_provided("symmetric", arg, symmetric)
+        self._init_provided("thickness", arg, thickness)
+        self._init_provided("traceref", arg, traceref)
+        self._init_provided("tracerefminus", arg, tracerefminus)
+        self._init_provided("type", arg, type)
+        self._init_provided("value", arg, value)
+        self._init_provided("valueminus", arg, valueminus)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

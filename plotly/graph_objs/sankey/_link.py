@@ -1,19 +1,36 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Link(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'sankey'
-    _path_str = 'sankey.link'
-    _valid_props = {"arrowlen", "color", "colorscaledefaults", "colorscales", "colorsrc", "customdata", "customdatasrc", "hovercolor", "hovercolorsrc", "hoverinfo", "hoverlabel", "hovertemplate", "hovertemplatesrc", "label", "labelsrc", "line", "source", "sourcesrc", "target", "targetsrc", "value", "valuesrc"}
+    _parent_path_str = "sankey"
+    _path_str = "sankey.link"
+    _valid_props = {
+        "arrowlen",
+        "color",
+        "colorscaledefaults",
+        "colorscales",
+        "colorsrc",
+        "customdata",
+        "customdatasrc",
+        "hovercolor",
+        "hovercolorsrc",
+        "hoverinfo",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "label",
+        "labelsrc",
+        "line",
+        "source",
+        "sourcesrc",
+        "target",
+        "targetsrc",
+        "value",
+        "valuesrc",
+    }
 
-    # arrowlen
-    # --------
     @property
     def arrowlen(self):
         """
@@ -27,14 +44,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['arrowlen']
+        return self["arrowlen"]
 
     @arrowlen.setter
     def arrowlen(self, val):
-        self['arrowlen'] = val
+        self["arrowlen"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -54,14 +69,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # colorscales
-    # -----------
     @property
     def colorscales(self):
         """
@@ -75,14 +88,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         tuple[plotly.graph_objs.sankey.link.Colorscale]
         """
-        return self['colorscales']
+        return self["colorscales"]
 
     @colorscales.setter
     def colorscales(self, val):
-        self['colorscales'] = val
+        self["colorscales"] = val
 
-    # colorscaledefaults
-    # ------------------
     @property
     def colorscaledefaults(self):
         """
@@ -101,14 +112,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.sankey.link.Colorscale
         """
-        return self['colorscaledefaults']
+        return self["colorscaledefaults"]
 
     @colorscaledefaults.setter
     def colorscaledefaults(self, val):
-        self['colorscaledefaults'] = val
+        self["colorscaledefaults"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -121,14 +130,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -141,14 +148,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -162,14 +167,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # hovercolor
-    # ----------
     @property
     def hovercolor(self):
         """
@@ -190,14 +193,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['hovercolor']
+        return self["hovercolor"]
 
     @hovercolor.setter
     def hovercolor(self, val):
-        self['hovercolor'] = val
+        self["hovercolor"] = val
 
-    # hovercolorsrc
-    # -------------
     @property
     def hovercolorsrc(self):
         """
@@ -211,14 +212,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['hovercolorsrc']
+        return self["hovercolorsrc"]
 
     @hovercolorsrc.setter
     def hovercolorsrc(self, val):
-        self['hovercolorsrc'] = val
+        self["hovercolorsrc"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -235,14 +234,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -256,14 +253,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.sankey.link.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -302,14 +297,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -323,14 +316,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # label
-    # -----
     @property
     def label(self):
         """
@@ -343,14 +334,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
-    # labelsrc
-    # --------
     @property
     def labelsrc(self):
         """
@@ -363,14 +352,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['labelsrc']
+        return self["labelsrc"]
 
     @labelsrc.setter
     def labelsrc(self, val):
-        self['labelsrc'] = val
+        self["labelsrc"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -384,14 +371,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.sankey.link.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # source
-    # ------
     @property
     def source(self):
         """
@@ -405,14 +390,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['source']
+        return self["source"]
 
     @source.setter
     def source(self, val):
-        self['source'] = val
+        self["source"] = val
 
-    # sourcesrc
-    # ---------
     @property
     def sourcesrc(self):
         """
@@ -425,14 +408,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sourcesrc']
+        return self["sourcesrc"]
 
     @sourcesrc.setter
     def sourcesrc(self, val):
-        self['sourcesrc'] = val
+        self["sourcesrc"] = val
 
-    # target
-    # ------
     @property
     def target(self):
         """
@@ -446,14 +427,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['target']
+        return self["target"]
 
     @target.setter
     def target(self, val):
-        self['target'] = val
+        self["target"] = val
 
-    # targetsrc
-    # ---------
     @property
     def targetsrc(self):
         """
@@ -466,14 +445,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['targetsrc']
+        return self["targetsrc"]
 
     @targetsrc.setter
     def targetsrc(self, val):
-        self['targetsrc'] = val
+        self["targetsrc"] = val
 
-    # value
-    # -----
     @property
     def value(self):
         """
@@ -486,14 +463,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
-    # valuesrc
-    # --------
     @property
     def valuesrc(self):
         """
@@ -506,14 +481,12 @@ class Link(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valuesrc']
+        return self["valuesrc"]
 
     @valuesrc.setter
     def valuesrc(self, val):
-        self['valuesrc'] = val
+        self["valuesrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -619,32 +592,34 @@ class Link(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `value`.
         """
-    def __init__(self,
-            arg=None,
-            arrowlen=None,
-            color=None,
-            colorscales=None,
-            colorscaledefaults=None,
-            colorsrc=None,
-            customdata=None,
-            customdatasrc=None,
-            hovercolor=None,
-            hovercolorsrc=None,
-            hoverinfo=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            label=None,
-            labelsrc=None,
-            line=None,
-            source=None,
-            sourcesrc=None,
-            target=None,
-            targetsrc=None,
-            value=None,
-            valuesrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        arrowlen=None,
+        color=None,
+        colorscales=None,
+        colorscaledefaults=None,
+        colorsrc=None,
+        customdata=None,
+        customdatasrc=None,
+        hovercolor=None,
+        hovercolorsrc=None,
+        hoverinfo=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        label=None,
+        labelsrc=None,
+        line=None,
+        source=None,
+        sourcesrc=None,
+        target=None,
+        targetsrc=None,
+        value=None,
+        valuesrc=None,
+        **kwargs,
+    ):
         """
         Construct a new Link object
 
@@ -761,13 +736,11 @@ class Link(_BaseTraceHierarchyType):
         -------
         Link
         """
-        super().__init__('link')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("link")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -775,46 +748,37 @@ class Link(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.sankey.Link
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.sankey.Link`""")
+an instance of :class:`plotly.graph_objs.sankey.Link`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('arrowlen', arg, arrowlen)
-        self._init_provided('color', arg, color)
-        self._init_provided('colorscales', arg, colorscales)
-        self._init_provided('colorscaledefaults', arg, colorscaledefaults)
-        self._init_provided('colorsrc', arg, colorsrc)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('hovercolor', arg, hovercolor)
-        self._init_provided('hovercolorsrc', arg, hovercolorsrc)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('label', arg, label)
-        self._init_provided('labelsrc', arg, labelsrc)
-        self._init_provided('line', arg, line)
-        self._init_provided('source', arg, source)
-        self._init_provided('sourcesrc', arg, sourcesrc)
-        self._init_provided('target', arg, target)
-        self._init_provided('targetsrc', arg, targetsrc)
-        self._init_provided('value', arg, value)
-        self._init_provided('valuesrc', arg, valuesrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("arrowlen", arg, arrowlen)
+        self._init_provided("color", arg, color)
+        self._init_provided("colorscales", arg, colorscales)
+        self._init_provided("colorscaledefaults", arg, colorscaledefaults)
+        self._init_provided("colorsrc", arg, colorsrc)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("hovercolor", arg, hovercolor)
+        self._init_provided("hovercolorsrc", arg, hovercolorsrc)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("label", arg, label)
+        self._init_provided("labelsrc", arg, labelsrc)
+        self._init_provided("line", arg, line)
+        self._init_provided("source", arg, source)
+        self._init_provided("sourcesrc", arg, sourcesrc)
+        self._init_provided("target", arg, target)
+        self._init_provided("targetsrc", arg, targetsrc)
+        self._init_provided("value", arg, value)
+        self._init_provided("valuesrc", arg, valuesrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'waterfall.totals'
-    _path_str = 'waterfall.totals.marker'
+    _parent_path_str = "waterfall.totals"
+    _path_str = "waterfall.totals.marker"
     _valid_props = {"color", "line"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -31,14 +25,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -52,14 +44,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.waterfall.totals.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -70,12 +60,8 @@ class Marker(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.waterfall.totals.marker.Li
             ne` instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            line=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, line=None, **kwargs):
         """
         Construct a new Marker object
 
@@ -96,13 +82,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -110,26 +94,17 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.waterfall.totals.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.waterfall.totals.Marker`""")
+an instance of :class:`plotly.graph_objs.waterfall.totals.Marker`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('line', arg, line)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("line", arg, line)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

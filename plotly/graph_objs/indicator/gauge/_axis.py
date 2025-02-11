@@ -1,19 +1,44 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Axis(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'indicator.gauge'
-    _path_str = 'indicator.gauge.axis'
-    _valid_props = {"dtick", "exponentformat", "labelalias", "minexponent", "nticks", "range", "separatethousands", "showexponent", "showticklabels", "showtickprefix", "showticksuffix", "tick0", "tickangle", "tickcolor", "tickfont", "tickformat", "tickformatstopdefaults", "tickformatstops", "ticklabelstep", "ticklen", "tickmode", "tickprefix", "ticks", "ticksuffix", "ticktext", "ticktextsrc", "tickvals", "tickvalssrc", "tickwidth", "visible"}
+    _parent_path_str = "indicator.gauge"
+    _path_str = "indicator.gauge.axis"
+    _valid_props = {
+        "dtick",
+        "exponentformat",
+        "labelalias",
+        "minexponent",
+        "nticks",
+        "range",
+        "separatethousands",
+        "showexponent",
+        "showticklabels",
+        "showtickprefix",
+        "showticksuffix",
+        "tick0",
+        "tickangle",
+        "tickcolor",
+        "tickfont",
+        "tickformat",
+        "tickformatstopdefaults",
+        "tickformatstops",
+        "ticklabelstep",
+        "ticklen",
+        "tickmode",
+        "tickprefix",
+        "ticks",
+        "ticksuffix",
+        "ticktext",
+        "ticktextsrc",
+        "tickvals",
+        "tickvalssrc",
+        "tickwidth",
+        "visible",
+    }
 
-    # dtick
-    # -----
     @property
     def dtick(self):
         """
@@ -44,14 +69,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
-    # exponentformat
-    # --------------
     @property
     def exponentformat(self):
         """
@@ -69,14 +92,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['exponentformat']
+        return self["exponentformat"]
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self['exponentformat'] = val
+        self["exponentformat"] = val
 
-    # labelalias
-    # ----------
     @property
     def labelalias(self):
         """
@@ -96,14 +117,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['labelalias']
+        return self["labelalias"]
 
     @labelalias.setter
     def labelalias(self, val):
-        self['labelalias'] = val
+        self["labelalias"] = val
 
-    # minexponent
-    # -----------
     @property
     def minexponent(self):
         """
@@ -117,14 +136,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['minexponent']
+        return self["minexponent"]
 
     @minexponent.setter
     def minexponent(self, val):
-        self['minexponent'] = val
+        self["minexponent"] = val
 
-    # nticks
-    # ------
     @property
     def nticks(self):
         """
@@ -141,39 +158,35 @@ class Axis(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
-    # range
-    # -----
     @property
     def range(self):
         """
-        Sets the range of this axis.
+            Sets the range of this axis.
 
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'range[1]' property is a number and may be specified as:
-          - An int or float
+            The 'range' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'range[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
-    # separatethousands
-    # -----------------
     @property
     def separatethousands(self):
         """
@@ -186,14 +199,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['separatethousands']
+        return self["separatethousands"]
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self['separatethousands'] = val
+        self["separatethousands"] = val
 
-    # showexponent
-    # ------------
     @property
     def showexponent(self):
         """
@@ -210,14 +221,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['showexponent']
+        return self["showexponent"]
 
     @showexponent.setter
     def showexponent(self, val):
-        self['showexponent'] = val
+        self["showexponent"] = val
 
-    # showticklabels
-    # --------------
     @property
     def showticklabels(self):
         """
@@ -230,14 +239,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
-    # showtickprefix
-    # --------------
     @property
     def showtickprefix(self):
         """
@@ -254,14 +261,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
-    # showticksuffix
-    # --------------
     @property
     def showticksuffix(self):
         """
@@ -275,14 +280,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
-    # tick0
-    # -----
     @property
     def tick0(self):
         """
@@ -302,14 +305,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
-    # tickangle
-    # ---------
     @property
     def tickangle(self):
         """
@@ -326,14 +327,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
-    # tickcolor
-    # ---------
     @property
     def tickcolor(self):
         """
@@ -350,14 +349,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
-    # tickfont
-    # --------
     @property
     def tickfont(self):
         """
@@ -373,14 +370,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.axis.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
-    # tickformat
-    # ----------
     @property
     def tickformat(self):
         """
@@ -403,14 +398,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
-    # tickformatstops
-    # ---------------
     @property
     def tickformatstops(self):
         """
@@ -424,14 +417,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         tuple[plotly.graph_objs.indicator.gauge.axis.Tickformatstop]
         """
-        return self['tickformatstops']
+        return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self['tickformatstops'] = val
+        self["tickformatstops"] = val
 
-    # tickformatstopdefaults
-    # ----------------------
     @property
     def tickformatstopdefaults(self):
         """
@@ -450,14 +441,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.axis.Tickformatstop
         """
-        return self['tickformatstopdefaults']
+        return self["tickformatstopdefaults"]
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self['tickformatstopdefaults'] = val
+        self["tickformatstopdefaults"] = val
 
-    # ticklabelstep
-    # -------------
     @property
     def ticklabelstep(self):
         """
@@ -476,14 +465,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['ticklabelstep']
+        return self["ticklabelstep"]
 
     @ticklabelstep.setter
     def ticklabelstep(self, val):
-        self['ticklabelstep'] = val
+        self["ticklabelstep"] = val
 
-    # ticklen
-    # -------
     @property
     def ticklen(self):
         """
@@ -496,14 +483,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
-    # tickmode
-    # --------
     @property
     def tickmode(self):
         """
@@ -523,14 +508,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
-    # tickprefix
-    # ----------
     @property
     def tickprefix(self):
         """
@@ -544,14 +527,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
-    # ticks
-    # -----
     @property
     def ticks(self):
         """
@@ -567,14 +548,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
-    # ticksuffix
-    # ----------
     @property
     def ticksuffix(self):
         """
@@ -588,14 +567,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
-    # ticktext
-    # --------
     @property
     def ticktext(self):
         """
@@ -610,14 +587,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
-    # ticktextsrc
-    # -----------
     @property
     def ticktextsrc(self):
         """
@@ -630,14 +605,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
-    # tickvals
-    # --------
     @property
     def tickvals(self):
         """
@@ -651,14 +624,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
-    # tickvalssrc
-    # -----------
     @property
     def tickvalssrc(self):
         """
@@ -671,14 +642,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
-    # tickwidth
-    # ---------
     @property
     def tickwidth(self):
         """
@@ -691,14 +660,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -713,14 +680,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -881,40 +846,42 @@ class Axis(_BaseTraceHierarchyType):
             interaction like dragging. Default is true when a
             cheater plot is present on the axis, otherwise false
         """
-    def __init__(self,
-            arg=None,
-            dtick=None,
-            exponentformat=None,
-            labelalias=None,
-            minexponent=None,
-            nticks=None,
-            range=None,
-            separatethousands=None,
-            showexponent=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            tick0=None,
-            tickangle=None,
-            tickcolor=None,
-            tickfont=None,
-            tickformat=None,
-            tickformatstops=None,
-            tickformatstopdefaults=None,
-            ticklabelstep=None,
-            ticklen=None,
-            tickmode=None,
-            tickprefix=None,
-            ticks=None,
-            ticksuffix=None,
-            ticktext=None,
-            ticktextsrc=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        dtick=None,
+        exponentformat=None,
+        labelalias=None,
+        minexponent=None,
+        nticks=None,
+        range=None,
+        separatethousands=None,
+        showexponent=None,
+        showticklabels=None,
+        showtickprefix=None,
+        showticksuffix=None,
+        tick0=None,
+        tickangle=None,
+        tickcolor=None,
+        tickfont=None,
+        tickformat=None,
+        tickformatstops=None,
+        tickformatstopdefaults=None,
+        ticklabelstep=None,
+        ticklen=None,
+        tickmode=None,
+        tickprefix=None,
+        ticks=None,
+        ticksuffix=None,
+        ticktext=None,
+        ticktextsrc=None,
+        tickvals=None,
+        tickvalssrc=None,
+        tickwidth=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Axis object
 
@@ -1085,13 +1052,11 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Axis
         """
-        super().__init__('axis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("axis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1099,54 +1064,45 @@ class Axis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.gauge.Axis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.gauge.Axis`""")
+an instance of :class:`plotly.graph_objs.indicator.gauge.Axis`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('dtick', arg, dtick)
-        self._init_provided('exponentformat', arg, exponentformat)
-        self._init_provided('labelalias', arg, labelalias)
-        self._init_provided('minexponent', arg, minexponent)
-        self._init_provided('nticks', arg, nticks)
-        self._init_provided('range', arg, range)
-        self._init_provided('separatethousands', arg, separatethousands)
-        self._init_provided('showexponent', arg, showexponent)
-        self._init_provided('showticklabels', arg, showticklabels)
-        self._init_provided('showtickprefix', arg, showtickprefix)
-        self._init_provided('showticksuffix', arg, showticksuffix)
-        self._init_provided('tick0', arg, tick0)
-        self._init_provided('tickangle', arg, tickangle)
-        self._init_provided('tickcolor', arg, tickcolor)
-        self._init_provided('tickfont', arg, tickfont)
-        self._init_provided('tickformat', arg, tickformat)
-        self._init_provided('tickformatstops', arg, tickformatstops)
-        self._init_provided('tickformatstopdefaults', arg, tickformatstopdefaults)
-        self._init_provided('ticklabelstep', arg, ticklabelstep)
-        self._init_provided('ticklen', arg, ticklen)
-        self._init_provided('tickmode', arg, tickmode)
-        self._init_provided('tickprefix', arg, tickprefix)
-        self._init_provided('ticks', arg, ticks)
-        self._init_provided('ticksuffix', arg, ticksuffix)
-        self._init_provided('ticktext', arg, ticktext)
-        self._init_provided('ticktextsrc', arg, ticktextsrc)
-        self._init_provided('tickvals', arg, tickvals)
-        self._init_provided('tickvalssrc', arg, tickvalssrc)
-        self._init_provided('tickwidth', arg, tickwidth)
-        self._init_provided('visible', arg, visible)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("dtick", arg, dtick)
+        self._init_provided("exponentformat", arg, exponentformat)
+        self._init_provided("labelalias", arg, labelalias)
+        self._init_provided("minexponent", arg, minexponent)
+        self._init_provided("nticks", arg, nticks)
+        self._init_provided("range", arg, range)
+        self._init_provided("separatethousands", arg, separatethousands)
+        self._init_provided("showexponent", arg, showexponent)
+        self._init_provided("showticklabels", arg, showticklabels)
+        self._init_provided("showtickprefix", arg, showtickprefix)
+        self._init_provided("showticksuffix", arg, showticksuffix)
+        self._init_provided("tick0", arg, tick0)
+        self._init_provided("tickangle", arg, tickangle)
+        self._init_provided("tickcolor", arg, tickcolor)
+        self._init_provided("tickfont", arg, tickfont)
+        self._init_provided("tickformat", arg, tickformat)
+        self._init_provided("tickformatstops", arg, tickformatstops)
+        self._init_provided("tickformatstopdefaults", arg, tickformatstopdefaults)
+        self._init_provided("ticklabelstep", arg, ticklabelstep)
+        self._init_provided("ticklen", arg, ticklen)
+        self._init_provided("tickmode", arg, tickmode)
+        self._init_provided("tickprefix", arg, tickprefix)
+        self._init_provided("ticks", arg, ticks)
+        self._init_provided("ticksuffix", arg, ticksuffix)
+        self._init_provided("ticktext", arg, ticktext)
+        self._init_provided("ticktextsrc", arg, ticktextsrc)
+        self._init_provided("tickvals", arg, tickvals)
+        self._init_provided("tickvalssrc", arg, tickvalssrc)
+        self._init_provided("tickwidth", arg, tickwidth)
+        self._init_provided("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

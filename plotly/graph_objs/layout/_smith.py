@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Smith(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.smith'
+    _parent_path_str = "layout"
+    _path_str = "layout.smith"
     _valid_props = {"bgcolor", "domain", "imaginaryaxis", "realaxis"}
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -30,14 +24,12 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -51,14 +43,12 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.smith.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # imaginaryaxis
-    # -------------
     @property
     def imaginaryaxis(self):
         """
@@ -72,14 +62,12 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.smith.Imaginaryaxis
         """
-        return self['imaginaryaxis']
+        return self["imaginaryaxis"]
 
     @imaginaryaxis.setter
     def imaginaryaxis(self, val):
-        self['imaginaryaxis'] = val
+        self["imaginaryaxis"] = val
 
-    # realaxis
-    # --------
     @property
     def realaxis(self):
         """
@@ -93,14 +81,12 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.smith.Realaxis
         """
-        return self['realaxis']
+        return self["realaxis"]
 
     @realaxis.setter
     def realaxis(self, val):
-        self['realaxis'] = val
+        self["realaxis"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -116,14 +102,16 @@ class Smith(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.layout.smith.Realaxis`
             instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            bgcolor=None,
-            domain=None,
-            imaginaryaxis=None,
-            realaxis=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        bgcolor=None,
+        domain=None,
+        imaginaryaxis=None,
+        realaxis=None,
+        **kwargs,
+    ):
         """
         Construct a new Smith object
 
@@ -148,13 +136,11 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         Smith
         """
-        super().__init__('smith')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("smith")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -162,28 +148,19 @@ class Smith(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Smith
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Smith`""")
+an instance of :class:`plotly.graph_objs.layout.Smith`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('imaginaryaxis', arg, imaginaryaxis)
-        self._init_provided('realaxis', arg, realaxis)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("imaginaryaxis", arg, imaginaryaxis)
+        self._init_provided("realaxis", arg, realaxis)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Textfont(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.map.layer.symbol'
-    _path_str = 'layout.map.layer.symbol.textfont'
+    _parent_path_str = "layout.map.layer.symbol"
+    _path_str = "layout.map.layer.symbol.textfont"
     _valid_props = {"color", "family", "size", "style", "weight"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -28,14 +22,12 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # family
-    # ------
     @property
     def family(self):
         """
@@ -52,14 +44,12 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -70,14 +60,12 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
-    # style
-    # -----
     @property
     def style(self):
         """
@@ -92,14 +80,12 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['style']
+        return self["style"]
 
     @style.setter
     def style(self, val):
-        self['style'] = val
+        self["style"] = val
 
-    # weight
-    # ------
     @property
     def weight(self):
         """
@@ -114,14 +100,12 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['weight']
+        return self["weight"]
 
     @weight.setter
     def weight(self, val):
-        self['weight'] = val
+        self["weight"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -142,15 +126,17 @@ class Textfont(_BaseLayoutHierarchyType):
         weight
             Sets the weight (or boldness) of the font.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            family=None,
-            size=None,
-            style=None,
-            weight=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        family=None,
+        size=None,
+        style=None,
+        weight=None,
+        **kwargs,
+    ):
         """
         Construct a new Textfont object
 
@@ -185,13 +171,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         Textfont
         """
-        super().__init__('textfont')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("textfont")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -199,29 +183,20 @@ class Textfont(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.map.layer.symbol.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.layer.symbol.Textfont`""")
+an instance of :class:`plotly.graph_objs.layout.map.layer.symbol.Textfont`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('family', arg, family)
-        self._init_provided('size', arg, size)
-        self._init_provided('style', arg, style)
-        self._init_provided('weight', arg, weight)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("family", arg, family)
+        self._init_provided("size", arg, size)
+        self._init_provided("style", arg, style)
+        self._init_provided("weight", arg, weight)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

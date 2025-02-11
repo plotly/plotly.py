@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Textfont(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scattergeo.selected'
-    _path_str = 'scattergeo.selected.textfont'
+    _parent_path_str = "scattergeo.selected"
+    _path_str = "scattergeo.selected.textfont"
     _valid_props = {"color"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -30,25 +24,20 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
         color
             Sets the text font color of selected points.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Textfont object
 
@@ -65,13 +54,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         Textfont
         """
-        super().__init__('textfont')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("textfont")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -79,25 +66,16 @@ class Textfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scattergeo.selected.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattergeo.selected.Textfont`""")
+an instance of :class:`plotly.graph_objs.scattergeo.selected.Textfont`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
