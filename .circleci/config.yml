@@ -24,7 +24,7 @@ commands:
           name: Test core
           command: |
             . venv/bin/activate
-            pytest tests/test_core
+            python -m pytest tests/test_core
           no_output_timeout: 20m
 
   test_optional:
@@ -56,19 +56,19 @@ commands:
           name: Test core
           command: |
             source .venv/bin/activate
-            pytest tests/test_core
+            python -m pytest tests/test_core
           no_output_timeout: 20m
       - run:
           name: Test optional
           command: |
             source .venv/bin/activate
-            pytest tests/test_optional
+            python -m pytest tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
           command: |
             source .venv/bin/activate
-            pytest tests/test_plotly_utils/
+            python -m pytest tests/test_plotly_utils/
           no_output_timeout: 20m
       - run:
           name: Test io
