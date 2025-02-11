@@ -6,7 +6,6 @@ from plotly.io._renderers import display_jupyter_version_warnings
 from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
 from .serializers import custom_serializers
-from .version import __frontend_version__
 import anywidget
 
 
