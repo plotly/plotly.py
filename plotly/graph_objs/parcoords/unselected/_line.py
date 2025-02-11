@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'parcoords.unselected'
-    _path_str = 'parcoords.unselected.line'
+    _parent_path_str = "parcoords.unselected"
+    _path_str = "parcoords.unselected.line"
     _valid_props = {"color", "opacity"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -31,14 +25,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -53,14 +45,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -73,12 +63,8 @@ class Line(_BaseTraceHierarchyType):
             lines increases. Use 1 to achieve exact
             `unselected.line.color`.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            opacity=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, opacity=None, **kwargs):
         """
         Construct a new Line object
 
@@ -101,13 +87,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super().__init__('line')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("line")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -115,26 +99,17 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.parcoords.unselected.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcoords.unselected.Line`""")
+an instance of :class:`plotly.graph_objs.parcoords.unselected.Line`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('opacity', arg, opacity)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("opacity", arg, opacity)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

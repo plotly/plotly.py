@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Connector(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'waterfall'
-    _path_str = 'waterfall.connector'
+    _parent_path_str = "waterfall"
+    _path_str = "waterfall.connector"
     _valid_props = {"line", "mode", "visible"}
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -27,14 +21,12 @@ class Connector(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.waterfall.connector.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # mode
-    # ----
     @property
     def mode(self):
         """
@@ -48,14 +40,12 @@ class Connector(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['mode']
+        return self["mode"]
 
     @mode.setter
     def mode(self, val):
-        self['mode'] = val
+        self["mode"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -68,14 +58,12 @@ class Connector(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -87,13 +75,8 @@ class Connector(_BaseTraceHierarchyType):
         visible
             Determines if connector lines are drawn.
         """
-    def __init__(self,
-            arg=None,
-            line=None,
-            mode=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, line=None, mode=None, visible=None, **kwargs):
         """
         Construct a new Connector object
 
@@ -115,13 +98,11 @@ class Connector(_BaseTraceHierarchyType):
         -------
         Connector
         """
-        super().__init__('connector')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("connector")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -129,27 +110,18 @@ class Connector(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.waterfall.Connector
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.waterfall.Connector`""")
+an instance of :class:`plotly.graph_objs.waterfall.Connector`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('line', arg, line)
-        self._init_provided('mode', arg, mode)
-        self._init_provided('visible', arg, visible)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("line", arg, line)
+        self._init_provided("mode", arg, mode)
+        self._init_provided("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

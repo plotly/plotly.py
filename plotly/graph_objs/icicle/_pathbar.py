@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Pathbar(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'icicle'
-    _path_str = 'icicle.pathbar'
+    _parent_path_str = "icicle"
+    _path_str = "icicle.pathbar"
     _valid_props = {"edgeshape", "side", "textfont", "thickness", "visible"}
 
-    # edgeshape
-    # ---------
     @property
     def edgeshape(self):
         """
@@ -28,14 +22,12 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['edgeshape']
+        return self["edgeshape"]
 
     @edgeshape.setter
     def edgeshape(self, val):
-        self['edgeshape'] = val
+        self["edgeshape"] = val
 
-    # side
-    # ----
     @property
     def side(self):
         """
@@ -50,14 +42,12 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['side']
+        return self["side"]
 
     @side.setter
     def side(self, val):
-        self['side'] = val
+        self["side"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -73,14 +63,12 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.icicle.pathbar.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -95,14 +83,12 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['thickness']
+        return self["thickness"]
 
     @thickness.setter
     def thickness(self, val):
-        self['thickness'] = val
+        self["thickness"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -116,14 +102,12 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -143,15 +127,17 @@ class Pathbar(_BaseTraceHierarchyType):
             Determines if the path bar is drawn i.e. outside the
             trace `domain` and with one pixel gap.
         """
-    def __init__(self,
-            arg=None,
-            edgeshape=None,
-            side=None,
-            textfont=None,
-            thickness=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        edgeshape=None,
+        side=None,
+        textfont=None,
+        thickness=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Pathbar object
 
@@ -181,13 +167,11 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         Pathbar
         """
-        super().__init__('pathbar')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("pathbar")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -195,29 +179,20 @@ class Pathbar(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.icicle.Pathbar
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.icicle.Pathbar`""")
+an instance of :class:`plotly.graph_objs.icicle.Pathbar`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('edgeshape', arg, edgeshape)
-        self._init_provided('side', arg, side)
-        self._init_provided('textfont', arg, textfont)
-        self._init_provided('thickness', arg, thickness)
-        self._init_provided('visible', arg, visible)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("edgeshape", arg, edgeshape)
+        self._init_provided("side", arg, side)
+        self._init_provided("textfont", arg, textfont)
+        self._init_provided("thickness", arg, thickness)
+        self._init_provided("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

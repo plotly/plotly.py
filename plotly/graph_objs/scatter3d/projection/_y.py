@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Y(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scatter3d.projection'
-    _path_str = 'scatter3d.projection.y'
+    _parent_path_str = "scatter3d.projection"
+    _path_str = "scatter3d.projection.y"
     _valid_props = {"opacity", "scale", "show"}
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -26,14 +20,12 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # scale
-    # -----
     @property
     def scale(self):
         """
@@ -47,14 +39,12 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['scale']
+        return self["scale"]
 
     @scale.setter
     def scale(self, val):
-        self['scale'] = val
+        self["scale"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -67,14 +57,12 @@ class Y(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -87,13 +75,8 @@ class Y(_BaseTraceHierarchyType):
             Sets whether or not projections are shown along the y
             axis.
         """
-    def __init__(self,
-            arg=None,
-            opacity=None,
-            scale=None,
-            show=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, opacity=None, scale=None, show=None, **kwargs):
         """
         Construct a new Y object
 
@@ -116,13 +99,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         Y
         """
-        super().__init__('y')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("y")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -130,27 +111,18 @@ class Y(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatter3d.projection.Y
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.projection.Y`""")
+an instance of :class:`plotly.graph_objs.scatter3d.projection.Y`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('scale', arg, scale)
-        self._init_provided('show', arg, show)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("scale", arg, scale)
+        self._init_provided("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

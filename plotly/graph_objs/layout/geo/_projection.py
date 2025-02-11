@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Projection(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.geo'
-    _path_str = 'layout.geo.projection'
+    _parent_path_str = "layout.geo"
+    _path_str = "layout.geo.projection"
     _valid_props = {"distance", "parallels", "rotation", "scale", "tilt", "type"}
 
-    # distance
-    # --------
     @property
     def distance(self):
         """
@@ -28,40 +22,36 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['distance']
+        return self["distance"]
 
     @distance.setter
     def distance(self, val):
-        self['distance'] = val
+        self["distance"] = val
 
-    # parallels
-    # ---------
     @property
     def parallels(self):
         """
-        For conic projection types only. Sets the parallels (tangent,
-        secant) where the cone intersects the sphere.
+            For conic projection types only. Sets the parallels (tangent,
+            secant) where the cone intersects the sphere.
 
-        The 'parallels' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'parallels[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'parallels[1]' property is a number and may be specified as:
-          - An int or float
+            The 'parallels' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'parallels[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'parallels[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
-        return self['parallels']
+        return self["parallels"]
 
     @parallels.setter
     def parallels(self, val):
-        self['parallels'] = val
+        self["parallels"] = val
 
-    # rotation
-    # --------
     @property
     def rotation(self):
         """
@@ -75,14 +65,12 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.geo.projection.Rotation
         """
-        return self['rotation']
+        return self["rotation"]
 
     @rotation.setter
     def rotation(self, val):
-        self['rotation'] = val
+        self["rotation"] = val
 
-    # scale
-    # -----
     @property
     def scale(self):
         """
@@ -96,14 +84,12 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['scale']
+        return self["scale"]
 
     @scale.setter
     def scale(self, val):
-        self['scale'] = val
+        self["scale"] = val
 
-    # tilt
-    # ----
     @property
     def tilt(self):
         """
@@ -117,14 +103,12 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tilt']
+        return self["tilt"]
 
     @tilt.setter
     def tilt(self, val):
-        self['tilt'] = val
+        self["tilt"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -161,14 +145,12 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -192,16 +174,18 @@ class Projection(_BaseLayoutHierarchyType):
         type
             Sets the projection type.
         """
-    def __init__(self,
-            arg=None,
-            distance=None,
-            parallels=None,
-            rotation=None,
-            scale=None,
-            tilt=None,
-            type=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        distance=None,
+        parallels=None,
+        rotation=None,
+        scale=None,
+        tilt=None,
+        type=None,
+        **kwargs,
+    ):
         """
         Construct a new Projection object
 
@@ -235,13 +219,11 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Projection
         """
-        super().__init__('projection')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("projection")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -249,30 +231,21 @@ class Projection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.geo.Projection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.Projection`""")
+an instance of :class:`plotly.graph_objs.layout.geo.Projection`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('distance', arg, distance)
-        self._init_provided('parallels', arg, parallels)
-        self._init_provided('rotation', arg, rotation)
-        self._init_provided('scale', arg, scale)
-        self._init_provided('tilt', arg, tilt)
-        self._init_provided('type', arg, type)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("distance", arg, distance)
+        self._init_provided("parallels", arg, parallels)
+        self._init_provided("rotation", arg, rotation)
+        self._init_provided("scale", arg, scale)
+        self._init_provided("tilt", arg, tilt)
+        self._init_provided("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

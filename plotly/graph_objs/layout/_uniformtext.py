@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Uniformtext(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.uniformtext'
+    _parent_path_str = "layout"
+    _path_str = "layout.uniformtext"
     _valid_props = {"minsize", "mode"}
 
-    # minsize
-    # -------
     @property
     def minsize(self):
         """
@@ -26,14 +20,12 @@ class Uniformtext(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['minsize']
+        return self["minsize"]
 
     @minsize.setter
     def minsize(self, val):
-        self['minsize'] = val
+        self["minsize"] = val
 
-    # mode
-    # ----
     @property
     def mode(self):
         """
@@ -54,14 +46,12 @@ class Uniformtext(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['mode']
+        return self["mode"]
 
     @mode.setter
     def mode(self, val):
-        self['mode'] = val
+        self["mode"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -78,12 +68,8 @@ class Uniformtext(_BaseLayoutHierarchyType):
             defined by `minsize` is greater than the font size
             defined by trace, then the `minsize` is used.
         """
-    def __init__(self,
-            arg=None,
-            minsize=None,
-            mode=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, minsize=None, mode=None, **kwargs):
         """
         Construct a new Uniformtext object
 
@@ -110,13 +96,11 @@ class Uniformtext(_BaseLayoutHierarchyType):
         -------
         Uniformtext
         """
-        super().__init__('uniformtext')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("uniformtext")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -124,26 +108,17 @@ class Uniformtext(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Uniformtext
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Uniformtext`""")
+an instance of :class:`plotly.graph_objs.layout.Uniformtext`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('minsize', arg, minsize)
-        self._init_provided('mode', arg, mode)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("minsize", arg, minsize)
+        self._init_provided("mode", arg, mode)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

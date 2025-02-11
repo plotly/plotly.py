@@ -1,19 +1,25 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Z(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'surface.contours'
-    _path_str = 'surface.contours.z'
-    _valid_props = {"color", "end", "highlight", "highlightcolor", "highlightwidth", "project", "show", "size", "start", "usecolormap", "width"}
+    _parent_path_str = "surface.contours"
+    _path_str = "surface.contours.z"
+    _valid_props = {
+        "color",
+        "end",
+        "highlight",
+        "highlightcolor",
+        "highlightwidth",
+        "project",
+        "show",
+        "size",
+        "start",
+        "usecolormap",
+        "width",
+    }
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -30,14 +36,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # end
-    # ---
     @property
     def end(self):
         """
@@ -51,14 +55,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['end']
+        return self["end"]
 
     @end.setter
     def end(self, val):
-        self['end'] = val
+        self["end"] = val
 
-    # highlight
-    # ---------
     @property
     def highlight(self):
         """
@@ -72,14 +74,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['highlight']
+        return self["highlight"]
 
     @highlight.setter
     def highlight(self, val):
-        self['highlight'] = val
+        self["highlight"] = val
 
-    # highlightcolor
-    # --------------
     @property
     def highlightcolor(self):
         """
@@ -96,14 +96,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['highlightcolor']
+        return self["highlightcolor"]
 
     @highlightcolor.setter
     def highlightcolor(self, val):
-        self['highlightcolor'] = val
+        self["highlightcolor"] = val
 
-    # highlightwidth
-    # --------------
     @property
     def highlightwidth(self):
         """
@@ -116,14 +114,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['highlightwidth']
+        return self["highlightwidth"]
 
     @highlightwidth.setter
     def highlightwidth(self, val):
-        self['highlightwidth'] = val
+        self["highlightwidth"] = val
 
-    # project
-    # -------
     @property
     def project(self):
         """
@@ -137,14 +133,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.z.Project
         """
-        return self['project']
+        return self["project"]
 
     @project.setter
     def project(self, val):
-        self['project'] = val
+        self["project"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -158,14 +152,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -178,14 +170,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
-    # start
-    # -----
     @property
     def start(self):
         """
@@ -199,14 +189,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['start']
+        return self["start"]
 
     @start.setter
     def start(self, val):
-        self['start'] = val
+        self["start"] = val
 
-    # usecolormap
-    # -----------
     @property
     def usecolormap(self):
         """
@@ -220,14 +208,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['usecolormap']
+        return self["usecolormap"]
 
     @usecolormap.setter
     def usecolormap(self, val):
-        self['usecolormap'] = val
+        self["usecolormap"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -240,14 +226,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -281,21 +265,23 @@ class Z(_BaseTraceHierarchyType):
         width
             Sets the width of the contour lines.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            end=None,
-            highlight=None,
-            highlightcolor=None,
-            highlightwidth=None,
-            project=None,
-            show=None,
-            size=None,
-            start=None,
-            usecolormap=None,
-            width=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        end=None,
+        highlight=None,
+        highlightcolor=None,
+        highlightwidth=None,
+        project=None,
+        show=None,
+        size=None,
+        start=None,
+        usecolormap=None,
+        width=None,
+        **kwargs,
+    ):
         """
         Construct a new Z object
 
@@ -339,13 +325,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         Z
         """
-        super().__init__('z')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("z")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -353,35 +337,26 @@ class Z(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.surface.contours.Z
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.contours.Z`""")
+an instance of :class:`plotly.graph_objs.surface.contours.Z`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('end', arg, end)
-        self._init_provided('highlight', arg, highlight)
-        self._init_provided('highlightcolor', arg, highlightcolor)
-        self._init_provided('highlightwidth', arg, highlightwidth)
-        self._init_provided('project', arg, project)
-        self._init_provided('show', arg, show)
-        self._init_provided('size', arg, size)
-        self._init_provided('start', arg, start)
-        self._init_provided('usecolormap', arg, usecolormap)
-        self._init_provided('width', arg, width)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("end", arg, end)
+        self._init_provided("highlight", arg, highlight)
+        self._init_provided("highlightcolor", arg, highlightcolor)
+        self._init_provided("highlightwidth", arg, highlightwidth)
+        self._init_provided("project", arg, project)
+        self._init_provided("show", arg, show)
+        self._init_provided("size", arg, size)
+        self._init_provided("start", arg, start)
+        self._init_provided("usecolormap", arg, usecolormap)
+        self._init_provided("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

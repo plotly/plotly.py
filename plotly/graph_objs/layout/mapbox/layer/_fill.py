@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Fill(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.mapbox.layer'
-    _path_str = 'layout.mapbox.layer.fill'
+    _parent_path_str = "layout.mapbox.layer"
+    _path_str = "layout.mapbox.layer.fill"
     _valid_props = {"outlinecolor"}
 
-    # outlinecolor
-    # ------------
     @property
     def outlinecolor(self):
         """
@@ -31,14 +25,12 @@ class Fill(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['outlinecolor']
+        return self["outlinecolor"]
 
     @outlinecolor.setter
     def outlinecolor(self, val):
-        self['outlinecolor'] = val
+        self["outlinecolor"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -47,11 +39,8 @@ class Fill(_BaseLayoutHierarchyType):
             outline-color). Has an effect only when `type` is set
             to "fill".
         """
-    def __init__(self,
-            arg=None,
-            outlinecolor=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, outlinecolor=None, **kwargs):
         """
         Construct a new Fill object
 
@@ -70,13 +59,11 @@ class Fill(_BaseLayoutHierarchyType):
         -------
         Fill
         """
-        super().__init__('fill')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("fill")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -84,25 +71,16 @@ class Fill(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Fill
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Fill`""")
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Fill`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('outlinecolor', arg, outlinecolor)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("outlinecolor", arg, outlinecolor)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

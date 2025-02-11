@@ -1,9 +1,13 @@
 import sys
 from _plotly_utils.importers import relative_import
+
 __all__, __getattr__, __dir__ = relative_import(
     __name__,
     [],
-    ['._show.ShowValidator', '._pattern.PatternValidator', '._fill.FillValidator', '._count.CountValidator']
+    [
+        "._show.ShowValidator",
+        "._pattern.PatternValidator",
+        "._fill.FillValidator",
+        "._count.CountValidator",
+    ],
 )
-
-

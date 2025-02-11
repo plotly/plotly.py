@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Title(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.scene.xaxis'
-    _path_str = 'layout.scene.xaxis.title'
+    _parent_path_str = "layout.scene.xaxis"
+    _path_str = "layout.scene.xaxis.title"
     _valid_props = {"font", "text"}
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -29,14 +23,12 @@ class Title(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.xaxis.title.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -50,14 +42,12 @@ class Title(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -66,12 +56,8 @@ class Title(_BaseLayoutHierarchyType):
         text
             Sets the title of this axis.
         """
-    def __init__(self,
-            arg=None,
-            font=None,
-            text=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, font=None, text=None, **kwargs):
         """
         Construct a new Title object
 
@@ -90,13 +76,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         Title
         """
-        super().__init__('title')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("title")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -104,26 +88,17 @@ class Title(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.scene.xaxis.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.xaxis.Title`""")
+an instance of :class:`plotly.graph_objs.layout.scene.xaxis.Title`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('font', arg, font)
-        self._init_provided('text', arg, text)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("font", arg, font)
+        self._init_provided("text", arg, text)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,19 +1,28 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Cells(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'table'
-    _path_str = 'table.cells'
-    _valid_props = {"align", "alignsrc", "fill", "font", "format", "formatsrc", "height", "line", "prefix", "prefixsrc", "suffix", "suffixsrc", "values", "valuessrc"}
+    _parent_path_str = "table"
+    _path_str = "table.cells"
+    _valid_props = {
+        "align",
+        "alignsrc",
+        "fill",
+        "font",
+        "format",
+        "formatsrc",
+        "height",
+        "line",
+        "prefix",
+        "prefixsrc",
+        "suffix",
+        "suffixsrc",
+        "values",
+        "valuessrc",
+    }
 
-    # align
-    # -----
     @property
     def align(self):
         """
@@ -31,14 +40,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
-    # alignsrc
-    # --------
     @property
     def alignsrc(self):
         """
@@ -51,14 +58,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['alignsrc']
+        return self["alignsrc"]
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self['alignsrc'] = val
+        self["alignsrc"] = val
 
-    # fill
-    # ----
     @property
     def fill(self):
         """
@@ -72,14 +77,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.cells.Fill
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -93,14 +96,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.cells.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
-    # format
-    # ------
     @property
     def format(self):
         """
@@ -116,14 +117,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['format']
+        return self["format"]
 
     @format.setter
     def format(self, val):
-        self['format'] = val
+        self["format"] = val
 
-    # formatsrc
-    # ---------
     @property
     def formatsrc(self):
         """
@@ -136,14 +135,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['formatsrc']
+        return self["formatsrc"]
 
     @formatsrc.setter
     def formatsrc(self, val):
-        self['formatsrc'] = val
+        self["formatsrc"] = val
 
-    # height
-    # ------
     @property
     def height(self):
         """
@@ -156,14 +153,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['height']
+        return self["height"]
 
     @height.setter
     def height(self, val):
-        self['height'] = val
+        self["height"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -177,14 +172,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.cells.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # prefix
-    # ------
     @property
     def prefix(self):
         """
@@ -199,14 +192,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['prefix']
+        return self["prefix"]
 
     @prefix.setter
     def prefix(self, val):
-        self['prefix'] = val
+        self["prefix"] = val
 
-    # prefixsrc
-    # ---------
     @property
     def prefixsrc(self):
         """
@@ -219,14 +210,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['prefixsrc']
+        return self["prefixsrc"]
 
     @prefixsrc.setter
     def prefixsrc(self, val):
-        self['prefixsrc'] = val
+        self["prefixsrc"] = val
 
-    # suffix
-    # ------
     @property
     def suffix(self):
         """
@@ -241,14 +230,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['suffix']
+        return self["suffix"]
 
     @suffix.setter
     def suffix(self, val):
-        self['suffix'] = val
+        self["suffix"] = val
 
-    # suffixsrc
-    # ---------
     @property
     def suffixsrc(self):
         """
@@ -261,14 +248,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['suffixsrc']
+        return self["suffixsrc"]
 
     @suffixsrc.setter
     def suffixsrc(self, val):
-        self['suffixsrc'] = val
+        self["suffixsrc"] = val
 
-    # values
-    # ------
     @property
     def values(self):
         """
@@ -284,14 +269,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
-    # valuessrc
-    # ---------
     @property
     def valuessrc(self):
         """
@@ -304,14 +287,12 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -363,24 +344,26 @@ class Cells(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `values`.
         """
-    def __init__(self,
-            arg=None,
-            align=None,
-            alignsrc=None,
-            fill=None,
-            font=None,
-            format=None,
-            formatsrc=None,
-            height=None,
-            line=None,
-            prefix=None,
-            prefixsrc=None,
-            suffix=None,
-            suffixsrc=None,
-            values=None,
-            valuessrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        align=None,
+        alignsrc=None,
+        fill=None,
+        font=None,
+        format=None,
+        formatsrc=None,
+        height=None,
+        line=None,
+        prefix=None,
+        prefixsrc=None,
+        suffix=None,
+        suffixsrc=None,
+        values=None,
+        valuessrc=None,
+        **kwargs,
+    ):
         """
         Construct a new Cells object
 
@@ -441,13 +424,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         Cells
         """
-        super().__init__('cells')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("cells")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -455,38 +436,29 @@ class Cells(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.table.Cells
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.table.Cells`""")
+an instance of :class:`plotly.graph_objs.table.Cells`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('align', arg, align)
-        self._init_provided('alignsrc', arg, alignsrc)
-        self._init_provided('fill', arg, fill)
-        self._init_provided('font', arg, font)
-        self._init_provided('format', arg, format)
-        self._init_provided('formatsrc', arg, formatsrc)
-        self._init_provided('height', arg, height)
-        self._init_provided('line', arg, line)
-        self._init_provided('prefix', arg, prefix)
-        self._init_provided('prefixsrc', arg, prefixsrc)
-        self._init_provided('suffix', arg, suffix)
-        self._init_provided('suffixsrc', arg, suffixsrc)
-        self._init_provided('values', arg, values)
-        self._init_provided('valuessrc', arg, valuessrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("align", arg, align)
+        self._init_provided("alignsrc", arg, alignsrc)
+        self._init_provided("fill", arg, fill)
+        self._init_provided("font", arg, font)
+        self._init_provided("format", arg, format)
+        self._init_provided("formatsrc", arg, formatsrc)
+        self._init_provided("height", arg, height)
+        self._init_provided("line", arg, line)
+        self._init_provided("prefix", arg, prefix)
+        self._init_provided("prefixsrc", arg, prefixsrc)
+        self._init_provided("suffix", arg, suffix)
+        self._init_provided("suffixsrc", arg, suffixsrc)
+        self._init_provided("values", arg, values)
+        self._init_provided("valuessrc", arg, valuessrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

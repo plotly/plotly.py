@@ -1,19 +1,24 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Hoverlabel(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'candlestick'
-    _path_str = 'candlestick.hoverlabel'
-    _valid_props = {"align", "alignsrc", "bgcolor", "bgcolorsrc", "bordercolor", "bordercolorsrc", "font", "namelength", "namelengthsrc", "split"}
+    _parent_path_str = "candlestick"
+    _path_str = "candlestick.hoverlabel"
+    _valid_props = {
+        "align",
+        "alignsrc",
+        "bgcolor",
+        "bgcolorsrc",
+        "bordercolor",
+        "bordercolorsrc",
+        "font",
+        "namelength",
+        "namelengthsrc",
+        "split",
+    }
 
-    # align
-    # -----
     @property
     def align(self):
         """
@@ -30,14 +35,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
-    # alignsrc
-    # --------
     @property
     def alignsrc(self):
         """
@@ -50,14 +53,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['alignsrc']
+        return self["alignsrc"]
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self['alignsrc'] = val
+        self["alignsrc"] = val
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -75,14 +76,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # bgcolorsrc
-    # ----------
     @property
     def bgcolorsrc(self):
         """
@@ -95,14 +94,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bgcolorsrc']
+        return self["bgcolorsrc"]
 
     @bgcolorsrc.setter
     def bgcolorsrc(self, val):
-        self['bgcolorsrc'] = val
+        self["bgcolorsrc"] = val
 
-    # bordercolor
-    # -----------
     @property
     def bordercolor(self):
         """
@@ -120,14 +117,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
-    # bordercolorsrc
-    # --------------
     @property
     def bordercolorsrc(self):
         """
@@ -141,14 +136,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bordercolorsrc']
+        return self["bordercolorsrc"]
 
     @bordercolorsrc.setter
     def bordercolorsrc(self, val):
-        self['bordercolorsrc'] = val
+        self["bordercolorsrc"] = val
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -164,14 +157,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.candlestick.hoverlabel.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
-    # namelength
-    # ----------
     @property
     def namelength(self):
         """
@@ -191,14 +182,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         int|numpy.ndarray
         """
-        return self['namelength']
+        return self["namelength"]
 
     @namelength.setter
     def namelength(self, val):
-        self['namelength'] = val
+        self["namelength"] = val
 
-    # namelengthsrc
-    # -------------
     @property
     def namelengthsrc(self):
         """
@@ -212,14 +201,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['namelengthsrc']
+        return self["namelengthsrc"]
 
     @namelengthsrc.setter
     def namelengthsrc(self, val):
-        self['namelengthsrc'] = val
+        self["namelengthsrc"] = val
 
-    # split
-    # -----
     @property
     def split(self):
         """
@@ -233,14 +220,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['split']
+        return self["split"]
 
     @split.setter
     def split(self, val):
-        self['split'] = val
+        self["split"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -280,20 +265,22 @@ class Hoverlabel(_BaseTraceHierarchyType):
             Show hover information (open, close, high, low) in
             separate labels.
         """
-    def __init__(self,
-            arg=None,
-            align=None,
-            alignsrc=None,
-            bgcolor=None,
-            bgcolorsrc=None,
-            bordercolor=None,
-            bordercolorsrc=None,
-            font=None,
-            namelength=None,
-            namelengthsrc=None,
-            split=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        align=None,
+        alignsrc=None,
+        bgcolor=None,
+        bgcolorsrc=None,
+        bordercolor=None,
+        bordercolorsrc=None,
+        font=None,
+        namelength=None,
+        namelengthsrc=None,
+        split=None,
+        **kwargs,
+    ):
         """
         Construct a new Hoverlabel object
 
@@ -343,13 +330,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Hoverlabel
         """
-        super().__init__('hoverlabel')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("hoverlabel")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -357,34 +342,25 @@ class Hoverlabel(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.candlestick.Hoverlabel
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.candlestick.Hoverlabel`""")
+an instance of :class:`plotly.graph_objs.candlestick.Hoverlabel`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('align', arg, align)
-        self._init_provided('alignsrc', arg, alignsrc)
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('bgcolorsrc', arg, bgcolorsrc)
-        self._init_provided('bordercolor', arg, bordercolor)
-        self._init_provided('bordercolorsrc', arg, bordercolorsrc)
-        self._init_provided('font', arg, font)
-        self._init_provided('namelength', arg, namelength)
-        self._init_provided('namelengthsrc', arg, namelengthsrc)
-        self._init_provided('split', arg, split)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("align", arg, align)
+        self._init_provided("alignsrc", arg, alignsrc)
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("bgcolorsrc", arg, bgcolorsrc)
+        self._init_provided("bordercolor", arg, bordercolor)
+        self._init_provided("bordercolorsrc", arg, bordercolorsrc)
+        self._init_provided("font", arg, font)
+        self._init_provided("namelength", arg, namelength)
+        self._init_provided("namelengthsrc", arg, namelengthsrc)
+        self._init_provided("split", arg, split)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

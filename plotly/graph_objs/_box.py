@@ -1,19 +1,101 @@
-
-
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Box(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'box'
-    _valid_props = {"alignmentgroup", "boxmean", "boxpoints", "customdata", "customdatasrc", "dx", "dy", "fillcolor", "hoverinfo", "hoverinfosrc", "hoverlabel", "hoveron", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "jitter", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "lowerfence", "lowerfencesrc", "marker", "mean", "meansrc", "median", "mediansrc", "meta", "metasrc", "name", "notched", "notchspan", "notchspansrc", "notchwidth", "offsetgroup", "opacity", "orientation", "pointpos", "q1", "q1src", "q3", "q3src", "quartilemethod", "sd", "sdmultiple", "sdsrc", "selected", "selectedpoints", "showlegend", "showwhiskers", "sizemode", "stream", "text", "textsrc", "type", "uid", "uirevision", "unselected", "upperfence", "upperfencesrc", "visible", "whiskerwidth", "width", "x", "x0", "xaxis", "xcalendar", "xhoverformat", "xperiod", "xperiod0", "xperiodalignment", "xsrc", "y", "y0", "yaxis", "ycalendar", "yhoverformat", "yperiod", "yperiod0", "yperiodalignment", "ysrc", "zorder"}
+    _parent_path_str = ""
+    _path_str = "box"
+    _valid_props = {
+        "alignmentgroup",
+        "boxmean",
+        "boxpoints",
+        "customdata",
+        "customdatasrc",
+        "dx",
+        "dy",
+        "fillcolor",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hoveron",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "jitter",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "line",
+        "lowerfence",
+        "lowerfencesrc",
+        "marker",
+        "mean",
+        "meansrc",
+        "median",
+        "mediansrc",
+        "meta",
+        "metasrc",
+        "name",
+        "notched",
+        "notchspan",
+        "notchspansrc",
+        "notchwidth",
+        "offsetgroup",
+        "opacity",
+        "orientation",
+        "pointpos",
+        "q1",
+        "q1src",
+        "q3",
+        "q3src",
+        "quartilemethod",
+        "sd",
+        "sdmultiple",
+        "sdsrc",
+        "selected",
+        "selectedpoints",
+        "showlegend",
+        "showwhiskers",
+        "sizemode",
+        "stream",
+        "text",
+        "textsrc",
+        "type",
+        "uid",
+        "uirevision",
+        "unselected",
+        "upperfence",
+        "upperfencesrc",
+        "visible",
+        "whiskerwidth",
+        "width",
+        "x",
+        "x0",
+        "xaxis",
+        "xcalendar",
+        "xhoverformat",
+        "xperiod",
+        "xperiod0",
+        "xperiodalignment",
+        "xsrc",
+        "y",
+        "y0",
+        "yaxis",
+        "ycalendar",
+        "yhoverformat",
+        "yperiod",
+        "yperiod0",
+        "yperiodalignment",
+        "ysrc",
+        "zorder",
+    }
 
-    # alignmentgroup
-    # --------------
     @property
     def alignmentgroup(self):
         """
@@ -29,14 +111,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['alignmentgroup']
+        return self["alignmentgroup"]
 
     @alignmentgroup.setter
     def alignmentgroup(self, val):
-        self['alignmentgroup'] = val
+        self["alignmentgroup"] = val
 
-    # boxmean
-    # -------
     @property
     def boxmean(self):
         """
@@ -53,14 +133,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['boxmean']
+        return self["boxmean"]
 
     @boxmean.setter
     def boxmean(self, val):
-        self['boxmean'] = val
+        self["boxmean"] = val
 
-    # boxpoints
-    # ---------
     @property
     def boxpoints(self):
         """
@@ -82,14 +160,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['boxpoints']
+        return self["boxpoints"]
 
     @boxpoints.setter
     def boxpoints(self, val):
-        self['boxpoints'] = val
+        self["boxpoints"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -105,14 +181,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -126,14 +200,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # dx
-    # --
     @property
     def dx(self):
         """
@@ -147,14 +219,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['dx']
+        return self["dx"]
 
     @dx.setter
     def dx(self, val):
-        self['dx'] = val
+        self["dx"] = val
 
-    # dy
-    # --
     @property
     def dy(self):
         """
@@ -168,14 +238,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['dy']
+        return self["dy"]
 
     @dy.setter
     def dy(self, val):
-        self['dy'] = val
+        self["dy"] = val
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -194,14 +262,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -220,14 +286,12 @@ class Box(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -241,14 +305,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -262,14 +324,12 @@ class Box(_BaseTraceType):
         -------
         plotly.graph_objs.box.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hoveron
-    # -------
     @property
     def hoveron(self):
         """
@@ -285,14 +345,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['hoveron']
+        return self["hoveron"]
 
     @hoveron.setter
     def hoveron(self, val):
-        self['hoveron'] = val
+        self["hoveron"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -329,14 +387,12 @@ class Box(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -350,14 +406,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -372,14 +426,12 @@ class Box(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -393,14 +445,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -415,14 +465,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -435,14 +483,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # jitter
-    # ------
     @property
     def jitter(self):
         """
@@ -458,14 +504,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['jitter']
+        return self["jitter"]
 
     @jitter.setter
     def jitter(self, val):
-        self['jitter'] = val
+        self["jitter"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -483,14 +527,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -506,14 +548,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -527,14 +567,12 @@ class Box(_BaseTraceType):
         -------
         plotly.graph_objs.box.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -554,14 +592,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -575,14 +611,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -596,14 +630,12 @@ class Box(_BaseTraceType):
         -------
         plotly.graph_objs.box.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # lowerfence
-    # ----------
     @property
     def lowerfence(self):
         """
@@ -620,14 +652,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['lowerfence']
+        return self["lowerfence"]
 
     @lowerfence.setter
     def lowerfence(self, val):
-        self['lowerfence'] = val
+        self["lowerfence"] = val
 
-    # lowerfencesrc
-    # -------------
     @property
     def lowerfencesrc(self):
         """
@@ -641,14 +671,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['lowerfencesrc']
+        return self["lowerfencesrc"]
 
     @lowerfencesrc.setter
     def lowerfencesrc(self, val):
-        self['lowerfencesrc'] = val
+        self["lowerfencesrc"] = val
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -662,14 +690,12 @@ class Box(_BaseTraceType):
         -------
         plotly.graph_objs.box.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
-    # mean
-    # ----
     @property
     def mean(self):
         """
@@ -686,14 +712,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['mean']
+        return self["mean"]
 
     @mean.setter
     def mean(self, val):
-        self['mean'] = val
+        self["mean"] = val
 
-    # meansrc
-    # -------
     @property
     def meansrc(self):
         """
@@ -706,14 +730,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['meansrc']
+        return self["meansrc"]
 
     @meansrc.setter
     def meansrc(self, val):
-        self['meansrc'] = val
+        self["meansrc"] = val
 
-    # median
-    # ------
     @property
     def median(self):
         """
@@ -727,14 +749,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['median']
+        return self["median"]
 
     @median.setter
     def median(self, val):
-        self['median'] = val
+        self["median"] = val
 
-    # mediansrc
-    # ---------
     @property
     def mediansrc(self):
         """
@@ -747,14 +767,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['mediansrc']
+        return self["mediansrc"]
 
     @mediansrc.setter
     def mediansrc(self, val):
-        self['mediansrc'] = val
+        self["mediansrc"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -775,14 +793,12 @@ class Box(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -795,14 +811,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -819,14 +833,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # notched
-    # -------
     @property
     def notched(self):
         """
@@ -847,14 +859,12 @@ class Box(_BaseTraceType):
         -------
         bool
         """
-        return self['notched']
+        return self["notched"]
 
     @notched.setter
     def notched(self, val):
-        self['notched'] = val
+        self["notched"] = val
 
-    # notchspan
-    # ---------
     @property
     def notchspan(self):
         """
@@ -872,14 +882,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['notchspan']
+        return self["notchspan"]
 
     @notchspan.setter
     def notchspan(self, val):
-        self['notchspan'] = val
+        self["notchspan"] = val
 
-    # notchspansrc
-    # ------------
     @property
     def notchspansrc(self):
         """
@@ -893,14 +901,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['notchspansrc']
+        return self["notchspansrc"]
 
     @notchspansrc.setter
     def notchspansrc(self, val):
-        self['notchspansrc'] = val
+        self["notchspansrc"] = val
 
-    # notchwidth
-    # ----------
     @property
     def notchwidth(self):
         """
@@ -914,14 +920,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['notchwidth']
+        return self["notchwidth"]
 
     @notchwidth.setter
     def notchwidth(self, val):
-        self['notchwidth'] = val
+        self["notchwidth"] = val
 
-    # offsetgroup
-    # -----------
     @property
     def offsetgroup(self):
         """
@@ -937,14 +941,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['offsetgroup']
+        return self["offsetgroup"]
 
     @offsetgroup.setter
     def offsetgroup(self, val):
-        self['offsetgroup'] = val
+        self["offsetgroup"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -957,14 +959,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -979,14 +979,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['orientation']
+        return self["orientation"]
 
     @orientation.setter
     def orientation(self, val):
-        self['orientation'] = val
+        self["orientation"] = val
 
-    # pointpos
-    # --------
     @property
     def pointpos(self):
         """
@@ -1003,14 +1001,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['pointpos']
+        return self["pointpos"]
 
     @pointpos.setter
     def pointpos(self, val):
-        self['pointpos'] = val
+        self["pointpos"] = val
 
-    # q1
-    # --
     @property
     def q1(self):
         """
@@ -1024,14 +1020,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['q1']
+        return self["q1"]
 
     @q1.setter
     def q1(self, val):
-        self['q1'] = val
+        self["q1"] = val
 
-    # q1src
-    # -----
     @property
     def q1src(self):
         """
@@ -1044,14 +1038,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['q1src']
+        return self["q1src"]
 
     @q1src.setter
     def q1src(self, val):
-        self['q1src'] = val
+        self["q1src"] = val
 
-    # q3
-    # --
     @property
     def q3(self):
         """
@@ -1065,14 +1057,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['q3']
+        return self["q3"]
 
     @q3.setter
     def q3(self, val):
-        self['q3'] = val
+        self["q3"] = val
 
-    # q3src
-    # -----
     @property
     def q3src(self):
         """
@@ -1085,14 +1075,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['q3src']
+        return self["q3src"]
 
     @q3src.setter
     def q3src(self, val):
-        self['q3src'] = val
+        self["q3src"] = val
 
-    # quartilemethod
-    # --------------
     @property
     def quartilemethod(self):
         """
@@ -1117,14 +1105,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['quartilemethod']
+        return self["quartilemethod"]
 
     @quartilemethod.setter
     def quartilemethod(self, val):
-        self['quartilemethod'] = val
+        self["quartilemethod"] = val
 
-    # sd
-    # --
     @property
     def sd(self):
         """
@@ -1141,14 +1127,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['sd']
+        return self["sd"]
 
     @sd.setter
     def sd(self, val):
-        self['sd'] = val
+        self["sd"] = val
 
-    # sdmultiple
-    # ----------
     @property
     def sdmultiple(self):
         """
@@ -1163,14 +1147,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['sdmultiple']
+        return self["sdmultiple"]
 
     @sdmultiple.setter
     def sdmultiple(self, val):
-        self['sdmultiple'] = val
+        self["sdmultiple"] = val
 
-    # sdsrc
-    # -----
     @property
     def sdsrc(self):
         """
@@ -1183,14 +1165,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['sdsrc']
+        return self["sdsrc"]
 
     @sdsrc.setter
     def sdsrc(self, val):
-        self['sdsrc'] = val
+        self["sdsrc"] = val
 
-    # selected
-    # --------
     @property
     def selected(self):
         """
@@ -1204,14 +1184,12 @@ class Box(_BaseTraceType):
         -------
         plotly.graph_objs.box.Selected
         """
-        return self['selected']
+        return self["selected"]
 
     @selected.setter
     def selected(self, val):
-        self['selected'] = val
+        self["selected"] = val
 
-    # selectedpoints
-    # --------------
     @property
     def selectedpoints(self):
         """
@@ -1228,14 +1206,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['selectedpoints']
+        return self["selectedpoints"]
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self['selectedpoints'] = val
+        self["selectedpoints"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -1249,14 +1225,12 @@ class Box(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # showwhiskers
-    # ------------
     @property
     def showwhiskers(self):
         """
@@ -1270,14 +1244,12 @@ class Box(_BaseTraceType):
         -------
         bool
         """
-        return self['showwhiskers']
+        return self["showwhiskers"]
 
     @showwhiskers.setter
     def showwhiskers(self, val):
-        self['showwhiskers'] = val
+        self["showwhiskers"] = val
 
-    # sizemode
-    # --------
     @property
     def sizemode(self):
         """
@@ -1295,14 +1267,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['sizemode']
+        return self["sizemode"]
 
     @sizemode.setter
     def sizemode(self, val):
-        self['sizemode'] = val
+        self["sizemode"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1316,14 +1286,12 @@ class Box(_BaseTraceType):
         -------
         plotly.graph_objs.box.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -1342,14 +1310,12 @@ class Box(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1362,14 +1328,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1384,14 +1348,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1417,14 +1379,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # unselected
-    # ----------
     @property
     def unselected(self):
         """
@@ -1438,14 +1398,12 @@ class Box(_BaseTraceType):
         -------
         plotly.graph_objs.box.Unselected
         """
-        return self['unselected']
+        return self["unselected"]
 
     @unselected.setter
     def unselected(self, val):
-        self['unselected'] = val
+        self["unselected"] = val
 
-    # upperfence
-    # ----------
     @property
     def upperfence(self):
         """
@@ -1462,14 +1420,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['upperfence']
+        return self["upperfence"]
 
     @upperfence.setter
     def upperfence(self, val):
-        self['upperfence'] = val
+        self["upperfence"] = val
 
-    # upperfencesrc
-    # -------------
     @property
     def upperfencesrc(self):
         """
@@ -1483,14 +1439,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['upperfencesrc']
+        return self["upperfencesrc"]
 
     @upperfencesrc.setter
     def upperfencesrc(self, val):
-        self['upperfencesrc'] = val
+        self["upperfencesrc"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1506,14 +1460,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # whiskerwidth
-    # ------------
     @property
     def whiskerwidth(self):
         """
@@ -1527,14 +1479,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['whiskerwidth']
+        return self["whiskerwidth"]
 
     @whiskerwidth.setter
     def whiskerwidth(self, val):
-        self['whiskerwidth'] = val
+        self["whiskerwidth"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -1549,14 +1499,12 @@ class Box(_BaseTraceType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1570,14 +1518,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # x0
-    # --
     @property
     def x0(self):
         """
@@ -1591,14 +1537,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['x0']
+        return self["x0"]
 
     @x0.setter
     def x0(self, val):
-        self['x0'] = val
+        self["x0"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -1616,14 +1560,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['xaxis']
+        return self["xaxis"]
 
     @xaxis.setter
     def xaxis(self, val):
-        self['xaxis'] = val
+        self["xaxis"] = val
 
-    # xcalendar
-    # ---------
     @property
     def xcalendar(self):
         """
@@ -1640,14 +1582,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['xcalendar']
+        return self["xcalendar"]
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self['xcalendar'] = val
+        self["xcalendar"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1671,14 +1611,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
-    # xperiod
-    # -------
     @property
     def xperiod(self):
         """
@@ -1693,14 +1631,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiod']
+        return self["xperiod"]
 
     @xperiod.setter
     def xperiod(self, val):
-        self['xperiod'] = val
+        self["xperiod"] = val
 
-    # xperiod0
-    # --------
     @property
     def xperiod0(self):
         """
@@ -1716,14 +1652,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiod0']
+        return self["xperiod0"]
 
     @xperiod0.setter
     def xperiod0(self, val):
-        self['xperiod0'] = val
+        self["xperiod0"] = val
 
-    # xperiodalignment
-    # ----------------
     @property
     def xperiodalignment(self):
         """
@@ -1738,14 +1672,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiodalignment']
+        return self["xperiodalignment"]
 
     @xperiodalignment.setter
     def xperiodalignment(self, val):
-        self['xperiodalignment'] = val
+        self["xperiodalignment"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1758,14 +1690,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1779,14 +1709,12 @@ class Box(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # y0
-    # --
     @property
     def y0(self):
         """
@@ -1800,14 +1728,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['y0']
+        return self["y0"]
 
     @y0.setter
     def y0(self, val):
-        self['y0'] = val
+        self["y0"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -1825,14 +1751,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
-    # ycalendar
-    # ---------
     @property
     def ycalendar(self):
         """
@@ -1849,14 +1773,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['ycalendar']
+        return self["ycalendar"]
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self['ycalendar'] = val
+        self["ycalendar"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1880,14 +1802,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
-    # yperiod
-    # -------
     @property
     def yperiod(self):
         """
@@ -1902,14 +1822,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiod']
+        return self["yperiod"]
 
     @yperiod.setter
     def yperiod(self, val):
-        self['yperiod'] = val
+        self["yperiod"] = val
 
-    # yperiod0
-    # --------
     @property
     def yperiod0(self):
         """
@@ -1925,14 +1843,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiod0']
+        return self["yperiod0"]
 
     @yperiod0.setter
     def yperiod0(self, val):
-        self['yperiod0'] = val
+        self["yperiod0"] = val
 
-    # yperiodalignment
-    # ----------------
     @property
     def yperiodalignment(self):
         """
@@ -1947,14 +1863,12 @@ class Box(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiodalignment']
+        return self["yperiodalignment"]
 
     @yperiodalignment.setter
     def yperiodalignment(self, val):
-        self['yperiodalignment'] = val
+        self["yperiodalignment"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -1967,14 +1881,12 @@ class Box(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -1989,20 +1901,16 @@ class Box(_BaseTraceType):
         -------
         int
         """
-        return self['zorder']
+        return self["zorder"]
 
     @zorder.setter
     def zorder(self, val):
-        self['zorder'] = val
+        self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -2452,96 +2360,98 @@ class Box(_BaseTraceType):
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
         """
-    def __init__(self,
-            arg=None,
-            alignmentgroup=None,
-            boxmean=None,
-            boxpoints=None,
-            customdata=None,
-            customdatasrc=None,
-            dx=None,
-            dy=None,
-            fillcolor=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hoveron=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            jitter=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            lowerfence=None,
-            lowerfencesrc=None,
-            marker=None,
-            mean=None,
-            meansrc=None,
-            median=None,
-            mediansrc=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            notched=None,
-            notchspan=None,
-            notchspansrc=None,
-            notchwidth=None,
-            offsetgroup=None,
-            opacity=None,
-            orientation=None,
-            pointpos=None,
-            q1=None,
-            q1src=None,
-            q3=None,
-            q3src=None,
-            quartilemethod=None,
-            sd=None,
-            sdmultiple=None,
-            sdsrc=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            showwhiskers=None,
-            sizemode=None,
-            stream=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            upperfence=None,
-            upperfencesrc=None,
-            visible=None,
-            whiskerwidth=None,
-            width=None,
-            x=None,
-            x0=None,
-            xaxis=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xperiod=None,
-            xperiod0=None,
-            xperiodalignment=None,
-            xsrc=None,
-            y=None,
-            y0=None,
-            yaxis=None,
-            ycalendar=None,
-            yhoverformat=None,
-            yperiod=None,
-            yperiod0=None,
-            yperiodalignment=None,
-            ysrc=None,
-            zorder=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        alignmentgroup=None,
+        boxmean=None,
+        boxpoints=None,
+        customdata=None,
+        customdatasrc=None,
+        dx=None,
+        dy=None,
+        fillcolor=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        jitter=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        line=None,
+        lowerfence=None,
+        lowerfencesrc=None,
+        marker=None,
+        mean=None,
+        meansrc=None,
+        median=None,
+        mediansrc=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        notched=None,
+        notchspan=None,
+        notchspansrc=None,
+        notchwidth=None,
+        offsetgroup=None,
+        opacity=None,
+        orientation=None,
+        pointpos=None,
+        q1=None,
+        q1src=None,
+        q3=None,
+        q3src=None,
+        quartilemethod=None,
+        sd=None,
+        sdmultiple=None,
+        sdsrc=None,
+        selected=None,
+        selectedpoints=None,
+        showlegend=None,
+        showwhiskers=None,
+        sizemode=None,
+        stream=None,
+        text=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        unselected=None,
+        upperfence=None,
+        upperfencesrc=None,
+        visible=None,
+        whiskerwidth=None,
+        width=None,
+        x=None,
+        x0=None,
+        xaxis=None,
+        xcalendar=None,
+        xhoverformat=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
+        xsrc=None,
+        y=None,
+        y0=None,
+        yaxis=None,
+        ycalendar=None,
+        yhoverformat=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
+        ysrc=None,
+        zorder=None,
+        **kwargs,
+    ):
         """
         Construct a new Box object
 
@@ -3025,13 +2935,11 @@ class Box(_BaseTraceType):
         -------
         Box
         """
-        super().__init__('box')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("box")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -3039,116 +2947,104 @@ class Box(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Box
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Box`""")
+an instance of :class:`plotly.graph_objs.Box`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('alignmentgroup', arg, alignmentgroup)
-        self._init_provided('boxmean', arg, boxmean)
-        self._init_provided('boxpoints', arg, boxpoints)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('dx', arg, dx)
-        self._init_provided('dy', arg, dy)
-        self._init_provided('fillcolor', arg, fillcolor)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hoveron', arg, hoveron)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('hovertext', arg, hovertext)
-        self._init_provided('hovertextsrc', arg, hovertextsrc)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('jitter', arg, jitter)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('line', arg, line)
-        self._init_provided('lowerfence', arg, lowerfence)
-        self._init_provided('lowerfencesrc', arg, lowerfencesrc)
-        self._init_provided('marker', arg, marker)
-        self._init_provided('mean', arg, mean)
-        self._init_provided('meansrc', arg, meansrc)
-        self._init_provided('median', arg, median)
-        self._init_provided('mediansrc', arg, mediansrc)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('notched', arg, notched)
-        self._init_provided('notchspan', arg, notchspan)
-        self._init_provided('notchspansrc', arg, notchspansrc)
-        self._init_provided('notchwidth', arg, notchwidth)
-        self._init_provided('offsetgroup', arg, offsetgroup)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('orientation', arg, orientation)
-        self._init_provided('pointpos', arg, pointpos)
-        self._init_provided('q1', arg, q1)
-        self._init_provided('q1src', arg, q1src)
-        self._init_provided('q3', arg, q3)
-        self._init_provided('q3src', arg, q3src)
-        self._init_provided('quartilemethod', arg, quartilemethod)
-        self._init_provided('sd', arg, sd)
-        self._init_provided('sdmultiple', arg, sdmultiple)
-        self._init_provided('sdsrc', arg, sdsrc)
-        self._init_provided('selected', arg, selected)
-        self._init_provided('selectedpoints', arg, selectedpoints)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('showwhiskers', arg, showwhiskers)
-        self._init_provided('sizemode', arg, sizemode)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('text', arg, text)
-        self._init_provided('textsrc', arg, textsrc)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('unselected', arg, unselected)
-        self._init_provided('upperfence', arg, upperfence)
-        self._init_provided('upperfencesrc', arg, upperfencesrc)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('whiskerwidth', arg, whiskerwidth)
-        self._init_provided('width', arg, width)
-        self._init_provided('x', arg, x)
-        self._init_provided('x0', arg, x0)
-        self._init_provided('xaxis', arg, xaxis)
-        self._init_provided('xcalendar', arg, xcalendar)
-        self._init_provided('xhoverformat', arg, xhoverformat)
-        self._init_provided('xperiod', arg, xperiod)
-        self._init_provided('xperiod0', arg, xperiod0)
-        self._init_provided('xperiodalignment', arg, xperiodalignment)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('y', arg, y)
-        self._init_provided('y0', arg, y0)
-        self._init_provided('yaxis', arg, yaxis)
-        self._init_provided('ycalendar', arg, ycalendar)
-        self._init_provided('yhoverformat', arg, yhoverformat)
-        self._init_provided('yperiod', arg, yperiod)
-        self._init_provided('yperiod0', arg, yperiod0)
-        self._init_provided('yperiodalignment', arg, yperiodalignment)
-        self._init_provided('ysrc', arg, ysrc)
-        self._init_provided('zorder', arg, zorder)
+        self._init_provided("alignmentgroup", arg, alignmentgroup)
+        self._init_provided("boxmean", arg, boxmean)
+        self._init_provided("boxpoints", arg, boxpoints)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("dx", arg, dx)
+        self._init_provided("dy", arg, dy)
+        self._init_provided("fillcolor", arg, fillcolor)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hoveron", arg, hoveron)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("jitter", arg, jitter)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("line", arg, line)
+        self._init_provided("lowerfence", arg, lowerfence)
+        self._init_provided("lowerfencesrc", arg, lowerfencesrc)
+        self._init_provided("marker", arg, marker)
+        self._init_provided("mean", arg, mean)
+        self._init_provided("meansrc", arg, meansrc)
+        self._init_provided("median", arg, median)
+        self._init_provided("mediansrc", arg, mediansrc)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("notched", arg, notched)
+        self._init_provided("notchspan", arg, notchspan)
+        self._init_provided("notchspansrc", arg, notchspansrc)
+        self._init_provided("notchwidth", arg, notchwidth)
+        self._init_provided("offsetgroup", arg, offsetgroup)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("orientation", arg, orientation)
+        self._init_provided("pointpos", arg, pointpos)
+        self._init_provided("q1", arg, q1)
+        self._init_provided("q1src", arg, q1src)
+        self._init_provided("q3", arg, q3)
+        self._init_provided("q3src", arg, q3src)
+        self._init_provided("quartilemethod", arg, quartilemethod)
+        self._init_provided("sd", arg, sd)
+        self._init_provided("sdmultiple", arg, sdmultiple)
+        self._init_provided("sdsrc", arg, sdsrc)
+        self._init_provided("selected", arg, selected)
+        self._init_provided("selectedpoints", arg, selectedpoints)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("showwhiskers", arg, showwhiskers)
+        self._init_provided("sizemode", arg, sizemode)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("unselected", arg, unselected)
+        self._init_provided("upperfence", arg, upperfence)
+        self._init_provided("upperfencesrc", arg, upperfencesrc)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("whiskerwidth", arg, whiskerwidth)
+        self._init_provided("width", arg, width)
+        self._init_provided("x", arg, x)
+        self._init_provided("x0", arg, x0)
+        self._init_provided("xaxis", arg, xaxis)
+        self._init_provided("xcalendar", arg, xcalendar)
+        self._init_provided("xhoverformat", arg, xhoverformat)
+        self._init_provided("xperiod", arg, xperiod)
+        self._init_provided("xperiod0", arg, xperiod0)
+        self._init_provided("xperiodalignment", arg, xperiodalignment)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("y0", arg, y0)
+        self._init_provided("yaxis", arg, yaxis)
+        self._init_provided("ycalendar", arg, ycalendar)
+        self._init_provided("yhoverformat", arg, yhoverformat)
+        self._init_provided("yperiod", arg, yperiod)
+        self._init_provided("yperiod0", arg, yperiod0)
+        self._init_provided("yperiodalignment", arg, yperiodalignment)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("zorder", arg, zorder)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'box'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "box"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

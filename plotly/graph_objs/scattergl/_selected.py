@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Selected(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scattergl'
-    _path_str = 'scattergl.selected'
+    _parent_path_str = "scattergl"
+    _path_str = "scattergl.selected"
     _valid_props = {"marker", "textfont"}
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -27,14 +21,12 @@ class Selected(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.scattergl.selected.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -48,14 +40,12 @@ class Selected(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.scattergl.selected.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -66,12 +56,8 @@ class Selected(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.scattergl.selected.Textfon
             t` instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            marker=None,
-            textfont=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
         """
         Construct a new Selected object
 
@@ -92,13 +78,11 @@ class Selected(_BaseTraceHierarchyType):
         -------
         Selected
         """
-        super().__init__('selected')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("selected")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -106,26 +90,17 @@ class Selected(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scattergl.Selected
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattergl.Selected`""")
+an instance of :class:`plotly.graph_objs.scattergl.Selected`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('marker', arg, marker)
-        self._init_provided('textfont', arg, textfont)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("marker", arg, marker)
+        self._init_provided("textfont", arg, textfont)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

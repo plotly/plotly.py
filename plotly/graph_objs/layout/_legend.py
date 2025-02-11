@@ -1,19 +1,40 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Legend(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.legend'
-    _valid_props = {"bgcolor", "bordercolor", "borderwidth", "entrywidth", "entrywidthmode", "font", "groupclick", "grouptitlefont", "indentation", "itemclick", "itemdoubleclick", "itemsizing", "itemwidth", "orientation", "title", "tracegroupgap", "traceorder", "uirevision", "valign", "visible", "x", "xanchor", "xref", "y", "yanchor", "yref"}
+    _parent_path_str = "layout"
+    _path_str = "layout.legend"
+    _valid_props = {
+        "bgcolor",
+        "bordercolor",
+        "borderwidth",
+        "entrywidth",
+        "entrywidthmode",
+        "font",
+        "groupclick",
+        "grouptitlefont",
+        "indentation",
+        "itemclick",
+        "itemdoubleclick",
+        "itemsizing",
+        "itemwidth",
+        "orientation",
+        "title",
+        "tracegroupgap",
+        "traceorder",
+        "uirevision",
+        "valign",
+        "visible",
+        "x",
+        "xanchor",
+        "xref",
+        "y",
+        "yanchor",
+        "yref",
+    }
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -31,14 +52,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # bordercolor
-    # -----------
     @property
     def bordercolor(self):
         """
@@ -55,14 +74,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
-    # borderwidth
-    # -----------
     @property
     def borderwidth(self):
         """
@@ -75,14 +92,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
-    # entrywidth
-    # ----------
     @property
     def entrywidth(self):
         """
@@ -97,14 +112,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['entrywidth']
+        return self["entrywidth"]
 
     @entrywidth.setter
     def entrywidth(self, val):
-        self['entrywidth'] = val
+        self["entrywidth"] = val
 
-    # entrywidthmode
-    # --------------
     @property
     def entrywidthmode(self):
         """
@@ -118,14 +131,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['entrywidthmode']
+        return self["entrywidthmode"]
 
     @entrywidthmode.setter
     def entrywidthmode(self, val):
-        self['entrywidthmode'] = val
+        self["entrywidthmode"] = val
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -141,14 +152,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.legend.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
-    # groupclick
-    # ----------
     @property
     def groupclick(self):
         """
@@ -166,14 +175,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['groupclick']
+        return self["groupclick"]
 
     @groupclick.setter
     def groupclick(self, val):
-        self['groupclick'] = val
+        self["groupclick"] = val
 
-    # grouptitlefont
-    # --------------
     @property
     def grouptitlefont(self):
         """
@@ -190,14 +197,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.legend.Grouptitlefont
         """
-        return self['grouptitlefont']
+        return self["grouptitlefont"]
 
     @grouptitlefont.setter
     def grouptitlefont(self, val):
-        self['grouptitlefont'] = val
+        self["grouptitlefont"] = val
 
-    # indentation
-    # -----------
     @property
     def indentation(self):
         """
@@ -210,14 +215,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['indentation']
+        return self["indentation"]
 
     @indentation.setter
     def indentation(self, val):
-        self['indentation'] = val
+        self["indentation"] = val
 
-    # itemclick
-    # ---------
     @property
     def itemclick(self):
         """
@@ -234,14 +237,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['itemclick']
+        return self["itemclick"]
 
     @itemclick.setter
     def itemclick(self, val):
-        self['itemclick'] = val
+        self["itemclick"] = val
 
-    # itemdoubleclick
-    # ---------------
     @property
     def itemdoubleclick(self):
         """
@@ -259,14 +260,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['itemdoubleclick']
+        return self["itemdoubleclick"]
 
     @itemdoubleclick.setter
     def itemdoubleclick(self, val):
-        self['itemdoubleclick'] = val
+        self["itemdoubleclick"] = val
 
-    # itemsizing
-    # ----------
     @property
     def itemsizing(self):
         """
@@ -282,14 +281,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['itemsizing']
+        return self["itemsizing"]
 
     @itemsizing.setter
     def itemsizing(self, val):
-        self['itemsizing'] = val
+        self["itemsizing"] = val
 
-    # itemwidth
-    # ---------
     @property
     def itemwidth(self):
         """
@@ -303,14 +300,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['itemwidth']
+        return self["itemwidth"]
 
     @itemwidth.setter
     def itemwidth(self, val):
-        self['itemwidth'] = val
+        self["itemwidth"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -324,14 +319,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['orientation']
+        return self["orientation"]
 
     @orientation.setter
     def orientation(self, val):
-        self['orientation'] = val
+        self["orientation"] = val
 
-    # title
-    # -----
     @property
     def title(self):
         """
@@ -345,14 +338,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.legend.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
-    # tracegroupgap
-    # -------------
     @property
     def tracegroupgap(self):
         """
@@ -366,14 +357,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tracegroupgap']
+        return self["tracegroupgap"]
 
     @tracegroupgap.setter
     def tracegroupgap(self, val):
-        self['tracegroupgap'] = val
+        self["tracegroupgap"] = val
 
-    # traceorder
-    # ----------
     @property
     def traceorder(self):
         """
@@ -395,14 +384,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['traceorder']
+        return self["traceorder"]
 
     @traceorder.setter
     def traceorder(self, val):
-        self['traceorder'] = val
+        self["traceorder"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -415,14 +402,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # valign
-    # ------
     @property
     def valign(self):
         """
@@ -437,14 +422,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['valign']
+        return self["valign"]
 
     @valign.setter
     def valign(self, val):
-        self['valign'] = val
+        self["valign"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -457,14 +440,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -483,14 +464,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # xanchor
-    # -------
     @property
     def xanchor(self):
         """
@@ -509,14 +488,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
-    # xref
-    # ----
     @property
     def xref(self):
         """
@@ -532,14 +509,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xref']
+        return self["xref"]
 
     @xref.setter
     def xref(self, val):
-        self['xref'] = val
+        self["xref"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -559,14 +534,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # yanchor
-    # -------
     @property
     def yanchor(self):
         """
@@ -585,14 +558,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yanchor']
+        return self["yanchor"]
 
     @yanchor.setter
     def yanchor(self, val):
-        self['yanchor'] = val
+        self["yanchor"] = val
 
-    # yref
-    # ----
     @property
     def yref(self):
         """
@@ -608,14 +579,12 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yref']
+        return self["yref"]
 
     @yref.setter
     def yref(self, val):
-        self['yref'] = val
+        self["yref"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -735,36 +704,38 @@ class Legend(_BaseLayoutHierarchyType):
             entire `height` of the plot. "paper" refers to the
             height of the plotting area only.
         """
-    def __init__(self,
-            arg=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderwidth=None,
-            entrywidth=None,
-            entrywidthmode=None,
-            font=None,
-            groupclick=None,
-            grouptitlefont=None,
-            indentation=None,
-            itemclick=None,
-            itemdoubleclick=None,
-            itemsizing=None,
-            itemwidth=None,
-            orientation=None,
-            title=None,
-            tracegroupgap=None,
-            traceorder=None,
-            uirevision=None,
-            valign=None,
-            visible=None,
-            x=None,
-            xanchor=None,
-            xref=None,
-            y=None,
-            yanchor=None,
-            yref=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        bgcolor=None,
+        bordercolor=None,
+        borderwidth=None,
+        entrywidth=None,
+        entrywidthmode=None,
+        font=None,
+        groupclick=None,
+        grouptitlefont=None,
+        indentation=None,
+        itemclick=None,
+        itemdoubleclick=None,
+        itemsizing=None,
+        itemwidth=None,
+        orientation=None,
+        title=None,
+        tracegroupgap=None,
+        traceorder=None,
+        uirevision=None,
+        valign=None,
+        visible=None,
+        x=None,
+        xanchor=None,
+        xref=None,
+        y=None,
+        yanchor=None,
+        yref=None,
+        **kwargs,
+    ):
         """
         Construct a new Legend object
 
@@ -893,13 +864,11 @@ class Legend(_BaseLayoutHierarchyType):
         -------
         Legend
         """
-        super().__init__('legend')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("legend")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -907,50 +876,41 @@ class Legend(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Legend
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Legend`""")
+an instance of :class:`plotly.graph_objs.layout.Legend`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('bordercolor', arg, bordercolor)
-        self._init_provided('borderwidth', arg, borderwidth)
-        self._init_provided('entrywidth', arg, entrywidth)
-        self._init_provided('entrywidthmode', arg, entrywidthmode)
-        self._init_provided('font', arg, font)
-        self._init_provided('groupclick', arg, groupclick)
-        self._init_provided('grouptitlefont', arg, grouptitlefont)
-        self._init_provided('indentation', arg, indentation)
-        self._init_provided('itemclick', arg, itemclick)
-        self._init_provided('itemdoubleclick', arg, itemdoubleclick)
-        self._init_provided('itemsizing', arg, itemsizing)
-        self._init_provided('itemwidth', arg, itemwidth)
-        self._init_provided('orientation', arg, orientation)
-        self._init_provided('title', arg, title)
-        self._init_provided('tracegroupgap', arg, tracegroupgap)
-        self._init_provided('traceorder', arg, traceorder)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('valign', arg, valign)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('x', arg, x)
-        self._init_provided('xanchor', arg, xanchor)
-        self._init_provided('xref', arg, xref)
-        self._init_provided('y', arg, y)
-        self._init_provided('yanchor', arg, yanchor)
-        self._init_provided('yref', arg, yref)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("bordercolor", arg, bordercolor)
+        self._init_provided("borderwidth", arg, borderwidth)
+        self._init_provided("entrywidth", arg, entrywidth)
+        self._init_provided("entrywidthmode", arg, entrywidthmode)
+        self._init_provided("font", arg, font)
+        self._init_provided("groupclick", arg, groupclick)
+        self._init_provided("grouptitlefont", arg, grouptitlefont)
+        self._init_provided("indentation", arg, indentation)
+        self._init_provided("itemclick", arg, itemclick)
+        self._init_provided("itemdoubleclick", arg, itemdoubleclick)
+        self._init_provided("itemsizing", arg, itemsizing)
+        self._init_provided("itemwidth", arg, itemwidth)
+        self._init_provided("orientation", arg, orientation)
+        self._init_provided("title", arg, title)
+        self._init_provided("tracegroupgap", arg, tracegroupgap)
+        self._init_provided("traceorder", arg, traceorder)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("valign", arg, valign)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("x", arg, x)
+        self._init_provided("xanchor", arg, xanchor)
+        self._init_provided("xref", arg, xref)
+        self._init_provided("y", arg, y)
+        self._init_provided("yanchor", arg, yanchor)
+        self._init_provided("yref", arg, yref)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

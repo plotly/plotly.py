@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Gradient(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scattersmith.marker'
-    _path_str = 'scattersmith.marker.gradient'
+    _parent_path_str = "scattersmith.marker"
+    _path_str = "scattersmith.marker.gradient"
     _valid_props = {"color", "colorsrc", "type", "typesrc"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -32,14 +26,12 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -52,14 +44,12 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -74,14 +64,12 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
-    # typesrc
-    # -------
     @property
     def typesrc(self):
         """
@@ -94,14 +82,12 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['typesrc']
+        return self["typesrc"]
 
     @typesrc.setter
     def typesrc(self, val):
-        self['typesrc'] = val
+        self["typesrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -118,14 +104,10 @@ class Gradient(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `type`.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            colorsrc=None,
-            type=None,
-            typesrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, color=None, colorsrc=None, type=None, typesrc=None, **kwargs
+    ):
         """
         Construct a new Gradient object
 
@@ -152,13 +134,11 @@ class Gradient(_BaseTraceHierarchyType):
         -------
         Gradient
         """
-        super().__init__('gradient')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("gradient")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -166,28 +146,19 @@ class Gradient(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scattersmith.marker.Gradient
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattersmith.marker.Gradient`""")
+an instance of :class:`plotly.graph_objs.scattersmith.marker.Gradient`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('colorsrc', arg, colorsrc)
-        self._init_provided('type', arg, type)
-        self._init_provided('typesrc', arg, typesrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("colorsrc", arg, colorsrc)
+        self._init_provided("type", arg, type)
+        self._init_provided("typesrc", arg, typesrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

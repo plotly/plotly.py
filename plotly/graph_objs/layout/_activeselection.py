@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Activeselection(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.activeselection'
+    _parent_path_str = "layout"
+    _path_str = "layout.activeselection"
     _valid_props = {"fillcolor", "opacity"}
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -30,14 +24,12 @@ class Activeselection(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -50,14 +42,12 @@ class Activeselection(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -66,12 +56,8 @@ class Activeselection(_BaseLayoutHierarchyType):
         opacity
             Sets the opacity of the active selection.
         """
-    def __init__(self,
-            arg=None,
-            fillcolor=None,
-            opacity=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, fillcolor=None, opacity=None, **kwargs):
         """
         Construct a new Activeselection object
 
@@ -90,13 +76,11 @@ class Activeselection(_BaseLayoutHierarchyType):
         -------
         Activeselection
         """
-        super().__init__('activeselection')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("activeselection")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -104,26 +88,17 @@ class Activeselection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Activeselection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Activeselection`""")
+an instance of :class:`plotly.graph_objs.layout.Activeselection`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('fillcolor', arg, fillcolor)
-        self._init_provided('opacity', arg, opacity)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("fillcolor", arg, fillcolor)
+        self._init_provided("opacity", arg, opacity)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

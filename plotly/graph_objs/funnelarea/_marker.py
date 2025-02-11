@@ -1,19 +1,13 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'funnelarea'
-    _path_str = 'funnelarea.marker'
+    _parent_path_str = "funnelarea"
+    _path_str = "funnelarea.marker"
     _valid_props = {"colors", "colorssrc", "line", "pattern"}
 
-    # colors
-    # ------
     @property
     def colors(self):
         """
@@ -27,14 +21,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['colors']
+        return self["colors"]
 
     @colors.setter
     def colors(self, val):
-        self['colors'] = val
+        self["colors"] = val
 
-    # colorssrc
-    # ---------
     @property
     def colorssrc(self):
         """
@@ -47,14 +39,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorssrc']
+        return self["colorssrc"]
 
     @colorssrc.setter
     def colorssrc(self, val):
-        self['colorssrc'] = val
+        self["colorssrc"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -68,14 +58,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.funnelarea.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # pattern
-    # -------
     @property
     def pattern(self):
         """
@@ -91,14 +79,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.funnelarea.marker.Pattern
         """
-        return self['pattern']
+        return self["pattern"]
 
     @pattern.setter
     def pattern(self, val):
-        self['pattern'] = val
+        self["pattern"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -115,14 +101,10 @@ class Marker(_BaseTraceHierarchyType):
         pattern
             Sets the pattern within the marker.
         """
-    def __init__(self,
-            arg=None,
-            colors=None,
-            colorssrc=None,
-            line=None,
-            pattern=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, colors=None, colorssrc=None, line=None, pattern=None, **kwargs
+    ):
         """
         Construct a new Marker object
 
@@ -149,13 +131,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -163,28 +143,19 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.funnelarea.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.funnelarea.Marker`""")
+an instance of :class:`plotly.graph_objs.funnelarea.Marker`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('colors', arg, colors)
-        self._init_provided('colorssrc', arg, colorssrc)
-        self._init_provided('line', arg, line)
-        self._init_provided('pattern', arg, pattern)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("colors", arg, colors)
+        self._init_provided("colorssrc", arg, colorssrc)
+        self._init_provided("line", arg, line)
+        self._init_provided("pattern", arg, pattern)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
