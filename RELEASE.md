@@ -73,7 +73,6 @@ Publishing to PyPI:
     - `doc/python/getting-started.md`
     - `doc/apidoc/conf.py`
     - `doc/requirements.txt`
-    - `binder/requirements.txt`
 2. `doc-prod` should already have been merged on a regular basis into `master`, but
 start by doing it first if not. Then merge `master` into `doc-prod` to deploy the doc related
 to features in the release.
