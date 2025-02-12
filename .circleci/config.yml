@@ -5,10 +5,6 @@ orbs:
 
 commands:
   test_core:
-    parameters:
-      py:
-        default: "310"
-        type: string
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -29,9 +25,9 @@ commands:
 
   test_optional:
     parameters:
-      py:
-        default: "310"
-        type: string
+      numpy_installed:
+        default: true
+        type: boolean
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -47,6 +43,16 @@ commands:
             cd js
             npm ci
             npm run build
+      - when:
+        condition:
+          equal: ["<< parameters.numpy_installed >>", false]
+          steps:
+            - run:
+              name: Uninstall numpy
+              command: |
+                source .venv/bin/activate
+                uv pip uninstall numpy
+
       - run:
           name: Test core
           command: |
@@ -106,105 +112,70 @@ jobs:
     docker:
       - image: cimg/python:3.8-browsers
     steps:
-      - test_core:
-          py: "38"
+      - test_core
 
   python_39_core:
     docker:
       - image: cimg/python:3.9-browsers
     steps:
-      - test_core:
-          py: "39"
+      - test_core
 
   python_310_core:
     docker:
       - image: cimg/python:3.10-browsers
     steps:
-      - test_core:
-          py: "310"
+      - test_core
 
   python_311_core:
     docker:
       - image: cimg/python:3.11-browsers
     steps:
-      - test_core:
-          py: "311"
+      - test_core
 
   python_312_core:
     docker:
       - image: cimg/python:3.12-browsers
     steps:
-      - test_core:
-          py: "312"
+      - test_core
 
   # Optional
-
   python_38_optional:
     docker:
       - image: cimg/python:3.8-browsers
     steps:
-      - test_optional:
-          py: "38"
+      - test_optional
 
   python_39_optional:
     docker:
       - image: cimg/python:3.9-browsers
     steps:
-      - test_optional:
-          py: "39"
+      - test_optional
 
   python_310_optional:
     docker:
       - image: cimg/python:3.10-browsers
     steps:
-      - test_optional:
-          py: "310"
+      - test_optional
 
   python_311_optional:
     docker:
       - image: cimg/python:3.11-browsers
     steps:
-      - test_optional:
-          py: "311"
+      - test_optional
 
   python_312_optional:
     docker:
       - image: cimg/python:3.12-browsers
     steps:
-      - test_optional:
-          py: "312"
-
-  # Pandas
-
-  python_39_pandas_2_optional:
-    docker:
-      - image: cimg/python:3.9-browsers
-    steps:
-      - test_optional:
-          py: "39_pandas_2"
+      - test_optional
 
   # No numpy
   python_312_no_numpy:
     docker:
       - image: cimg/python:3.12-browsers
     steps:
-      - run:
-          name: Check that numpy is not installed
-          command: |
-            if pip list | grep numpy > /dev/null 2>&1
-            then exit 1
-            else exit 0
-            fi
       - test_optional:
-          py: "312_no_numpy"
-
-  python_312_np2:
-    docker:
-      - image: cimg/python:3.12-browsers
-    steps:
-      - test_optional:
-          py: "312_np2"
-
+          numpy_installed: false
 
   # Percy
   python_39_percy:
@@ -229,8 +200,7 @@ jobs:
             python -m venv venv
             . venv/bin/activate
             pip install -e .
-            pip install plotly-geo
-            pip install -r test_requirements/requirements_39_pandas_2_optional.txt
+            pip install -r test_requirements/requirements_optional.txt
 
       - run:
           name: Build html figures (Pandas 2)
@@ -477,8 +447,6 @@ workflows:
       - python_310_optional
       - python_311_optional
       - python_312_optional
-      - python_39_pandas_2_optional
       - python_39_percy
       - python_312_no_numpy
-      - python_312_np2
       - build-doc
