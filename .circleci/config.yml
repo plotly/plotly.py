@@ -45,7 +45,7 @@ commands:
             npm run build
       - when:
         condition:
-          equal: ["<< parameters.numpy_installed >>", false]
+          not: << parameters.numpy_installed >>
           steps:
             - run:
               name: Uninstall numpy
