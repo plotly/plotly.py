@@ -44,12 +44,12 @@ commands:
             npm ci
             npm run build
       - when:
-        condition:
-          not: << parameters.numpy_installed >>
+          condition:
+              not: << parameters.numpy_installed >>
           steps:
-            - run: |
-                source .venv/bin/activate
-                uv pip uninstall numpy
+              - run: |
+                  source .venv/bin/activate
+                  uv pip uninstall numpy
 
       - run:
           name: Test core
