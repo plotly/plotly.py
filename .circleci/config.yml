@@ -3,6 +3,16 @@ version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.4.8
 
+executors:
+  docker-container:
+    parameters:
+      version:
+        description: "python version"
+        default: "310"
+        type: string
+    docker:
+      - image: cimg/python:<<parameters.version>>-browsers
+
 commands:
   test_core:
     steps:
@@ -43,13 +53,6 @@ commands:
             cd js
             npm ci
             npm run build
-      - when:
-          condition:
-              not: << parameters.numpy_installed >>
-          steps:
-              - run: |
-                  source .venv/bin/activate
-                  uv pip uninstall numpy
 
       - run:
           name: Test core
@@ -105,75 +108,27 @@ jobs:
             . venv/bin/activate
             black --check . --exclude venv
 
-  # Core
-  python_38_core:
-    docker:
-      - image: cimg/python:3.8-browsers
+  test_core:
+    parameters:
+      version:
+        default: "310"
+        type: string
+    executor:
+      name: docker-container
+      version: <<parameters.version>>
     steps:
       - test_core
 
-  python_39_core:
-    docker:
-      - image: cimg/python:3.9-browsers
-    steps:
-      - test_core
-
-  python_310_core:
-    docker:
-      - image: cimg/python:3.10-browsers
-    steps:
-      - test_core
-
-  python_311_core:
-    docker:
-      - image: cimg/python:3.11-browsers
-    steps:
-      - test_core
-
-  python_312_core:
-    docker:
-      - image: cimg/python:3.12-browsers
-    steps:
-      - test_core
-
-  # Optional
-  python_38_optional:
-    docker:
-      - image: cimg/python:3.8-browsers
+  test_optional:
+    parameters:
+      version:
+        default: "310"
+        type: string
+    executor:
+      name: docker-container
+      version: <<parameters.version>>
     steps:
       - test_optional
-
-  python_39_optional:
-    docker:
-      - image: cimg/python:3.9-browsers
-    steps:
-      - test_optional
-
-  python_310_optional:
-    docker:
-      - image: cimg/python:3.10-browsers
-    steps:
-      - test_optional
-
-  python_311_optional:
-    docker:
-      - image: cimg/python:3.11-browsers
-    steps:
-      - test_optional
-
-  python_312_optional:
-    docker:
-      - image: cimg/python:3.12-browsers
-    steps:
-      - test_optional
-
-  # No numpy
-  python_312_no_numpy:
-    docker:
-      - image: cimg/python:3.12-browsers
-    steps:
-      - test_optional:
-          numpy_installed: false
 
   # Percy
   python_39_percy:
@@ -435,16 +390,23 @@ workflows:
 
   build:
     jobs:
-      - python_38_core
-      - python_39_core
-      - python_310_core
-      - python_311_core
-      - python_312_core
-      - python_38_optional
-      - python_39_optional
-      - python_310_optional
-      - python_311_optional
-      - python_312_optional
+      - test_core:
+        matrix:
+          parameters:
+            version:
+              - "38"
+              - "39"
+              - "310"
+              - "311"
+              - "312"
+      - test_optional:
+        matrix:
+          parameters:
+            version:
+              - "38"
+              - "39"
+              - "310"
+              - "311"
+              - "312"
       - python_39_percy
-      - python_312_no_numpy
       - build-doc
