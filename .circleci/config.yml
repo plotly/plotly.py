@@ -47,9 +47,7 @@ commands:
         condition:
           not: << parameters.numpy_installed >>
           steps:
-            - run:
-              name: Uninstall numpy
-              command: |
+            - run: |
                 source .venv/bin/activate
                 uv pip uninstall numpy
 
