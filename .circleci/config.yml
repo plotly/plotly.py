@@ -418,8 +418,8 @@ workflows:
                 - "3.12"
             name: "Test optional with python << parameters.python_version >>"
       - test_optional_py:
-          name: "Test optional with pandas 1.1"
+          name: "Test optional with pandas 1.2.4"
           python_version: "3.9"
-          pandas_version: "1.1"
+          pandas_version: "1.2.4"
       - python_39_percy
       - build-doc
