@@ -35,9 +35,6 @@ commands:
 
   test_optional:
     parameters:
-      numpy_installed:
-        default: true
-        type: boolean
       pandas_version:
         type: string
     steps:
