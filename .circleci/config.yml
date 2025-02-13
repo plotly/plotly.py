@@ -6,12 +6,12 @@ orbs:
 executors:
   docker-container:
     parameters:
-      version:
+      python_version:
         description: "python version"
         default: "3.10"
         type: string
     docker:
-      - image: cimg/python:<<parameters.version>>-browsers
+      - image: cimg/python:<<parameters.python_version>>-browsers
 
 commands:
   test_core:
@@ -38,6 +38,8 @@ commands:
       numpy_installed:
         default: true
         type: boolean
+      pandas_version:
+        type: string
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -53,6 +55,15 @@ commands:
             cd js
             npm ci
             npm run build
+      
+      - when:
+          condition: <<parameters.pandas_version>>
+          steps:
+            - run:
+                name: Install pandas
+                command: |
+                  source .venv/bin/activate
+                  uv pip install pandas==<<parameters.pandas_version>>
 
       - run:
           name: Test core
@@ -110,25 +121,29 @@ jobs:
 
   test_core_py:
     parameters:
-      version:
+      python_version:
         default: "3.10"
         type: string
     executor:
       name: docker-container
-      version: <<parameters.version>>
+      python_version: <<parameters.python_version>>
     steps:
       - test_core
 
   test_optional_py:
     parameters:
-      version:
+      python_version:
         default: "3.10"
+        type: string
+      pandas_version:
+        default: "2"
         type: string
     executor:
       name: docker-container
-      version: <<parameters.version>>
+      python_version: <<parameters.python_version>>
     steps:
-      - test_optional
+      - test_optional:
+          pandas_version: <<parameters.pandas_version>>
 
   # Percy
   python_39_percy:
@@ -209,14 +224,6 @@ jobs:
             pytest -k 'not nodev' tests/test_core
           no_output_timeout: 20m
       - run:
-          name: Commit
-          command: |
-            git config --global user.email "you@example.com"
-            git config --global user.name "Your Name"
-            git add -A
-            git commit -m "Codegen"
-          when: always
-      - run:
           name: Build source distribution packages
           command: |
             source .venv/bin/activate
@@ -280,7 +287,7 @@ jobs:
       - browser-tools/install-chromedriver
 
       - run:
-          name: install dependencies
+          name: Install dependencies
           command: |
             cd doc
             curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -394,7 +401,7 @@ workflows:
       - test_core_py:
           matrix:
             parameters:
-              version:
+              python_version:
                 - "3.8"
                 - "3.9"
                 - "3.10"
@@ -403,11 +410,14 @@ workflows:
       - test_optional_py:
           matrix:
             parameters:
-              version:
+              python_version:
                 - "3.8"
                 - "3.9"
                 - "3.10"
                 - "3.11"
                 - "3.12"
+      - test_optional_py:
+          python_version: "3.9"
+          pandas_version: "1.1"
       - python_39_percy
       - build-doc
