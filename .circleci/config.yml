@@ -8,7 +8,7 @@ executors:
     parameters:
       version:
         description: "python version"
-        default: "310"
+        default: "3.10"
         type: string
     docker:
       - image: cimg/python:<<parameters.version>>-browsers
@@ -111,7 +111,7 @@ jobs:
   test_core:
     parameters:
       version:
-        default: "310"
+        default: "3.10"
         type: string
     executor:
       name: docker-container
@@ -122,7 +122,7 @@ jobs:
   test_optional:
     parameters:
       version:
-        default: "310"
+        default: "3.10"
         type: string
     executor:
       name: docker-container
@@ -394,19 +394,19 @@ workflows:
         matrix:
           parameters:
             version:
-              - "38"
-              - "39"
-              - "310"
-              - "311"
-              - "312"
+              - "3.8"
+              - "3.9"
+              - "3.10"
+              - "3.11"
+              - "3.12"
       - test_optional:
         matrix:
           parameters:
             version:
-              - "38"
-              - "39"
-              - "310"
-              - "311"
-              - "312"
+              - "3.8"
+              - "3.9"
+              - "3.10"
+              - "3.11"
+              - "3.12"
       - python_39_percy
       - build-doc
