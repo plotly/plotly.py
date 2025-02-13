@@ -7,7 +7,7 @@ below :-).
 ### Documentation PR
 
 - [ ] I've [seen the `doc/README.md` file](https://github.com/plotly/plotly.py/blob/master/doc/README.md)
-- [ ] This change runs in the current version of Plotly on PyPI and targets the `doc-prod` branch OR it targets the `master` branch
+- [ ] This change runs in the current version of Plotly on PyPI and targets the `doc-prod` branch OR it targets the `main` branch
 - [ ] If this PR modifies the first example in a page or adds a new one, it is a `px` example if at all possible
 - [ ] Every new/modified example has a descriptive title and motivating sentence or paragraph
 - [ ] Every new/modified example is independently runnable
