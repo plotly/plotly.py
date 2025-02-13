@@ -108,7 +108,7 @@ jobs:
             . venv/bin/activate
             black --check . --exclude venv
 
-  test_core_job:
+  test_core_py:
     parameters:
       version:
         default: "3.10"
@@ -119,7 +119,7 @@ jobs:
     steps:
       - test_core
 
-  test_optional_job:
+  test_optional_py:
     parameters:
       version:
         default: "3.10"
@@ -390,7 +390,7 @@ workflows:
 
   build:
     jobs:
-      - test_core_job:
+      - test_core_py:
           matrix:
             parameters:
               version:
@@ -399,7 +399,7 @@ workflows:
                 - "3.10"
                 - "3.11"
                 - "3.12"
-      - test_optional_job:
+      - test_optional_py:
           matrix:
             parameters:
               version:
