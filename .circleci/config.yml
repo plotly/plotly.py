@@ -92,7 +92,7 @@ commands:
 jobs:
   check-code-formatting:
     docker:
-      - image: cimg/python:3.11
+      - image: cimg/python:3.7
 
     steps:
       - checkout
@@ -101,7 +101,7 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install black
+            pip install black==22.3.0
       - run:
           name: Check formatting with black
           command: |
