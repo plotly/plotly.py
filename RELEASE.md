@@ -33,7 +33,7 @@ Manually update the versions to `X.Y.Z` in the files specified below.
  - Create a tag for Github release
    + `git tag vX.Y.Z`
    + `git push --atomic origin release-X.Y.Z vX.Y.Z`
- - Create a Github pull request from `release-X.Y.Z` to `master` and wait for CI to be green
+ - Create a Github pull request from `release-X.Y.Z` to `main` and wait for CI to be green
 
 ### Download and QA CI Artifacts
 
@@ -62,7 +62,7 @@ Publishing to PyPI:
 
 ### Merge the PR and make a Release
 
-1. Merge the pull request you created above into `master`
+1. Merge the pull request you created above into `main`
 2. Go to https://github.com/plotly/plotly.py/releases and "Draft a new release"
 3. Enter the `vX.Y.Z` tag you created already above and make "Release title" the same string as the tag.
 4. Copy the changelog section for this version as the "Describe this release"
@@ -73,8 +73,8 @@ Publishing to PyPI:
     - `doc/python/getting-started.md`
     - `doc/apidoc/conf.py`
     - `doc/requirements.txt`
-2. `doc-prod` should already have been merged on a regular basis into `master`, but
-start by doing it first if not. Then merge `master` into `doc-prod` to deploy the doc related
+2. `doc-prod` should already have been merged on a regular basis into `main`, but
+start by doing it first if not. Then merge `main` into `doc-prod` to deploy the doc related
 to features in the release.
 3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
     1. bump the version of Plotly.py in  `_data/pyversion.json`
