@@ -63,7 +63,7 @@ commands:
                 name: Install pandas
                 command: |
                   source .venv/bin/activate
-                  uv pip install pandas==<<parameters.pandas_version>>
+                  pip install pandas==<<parameters.pandas_version>>
 
       - run:
           name: Test core
@@ -417,6 +417,7 @@ workflows:
                 - "3.11"
                 - "3.12"
       - test_optional_py:
+          name: "Test optional with pandas 1.1"
           python_version: "3.9"
           pandas_version: "1.1"
       - python_39_percy
