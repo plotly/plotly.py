@@ -92,7 +92,7 @@ commands:
 jobs:
   check-code-formatting:
     docker:
-      - image: cimg/python:3.7
+      - image: cimg/python:3.11
 
     steps:
       - checkout
@@ -101,7 +101,7 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install black==22.3.0
+            pip install black
       - run:
           name: Check formatting with black
           command: |
@@ -150,24 +150,25 @@ jobs:
       - run:
           name: Install requirements
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -e .
-            pip install -r test_requirements/requirements_optional.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install -e .
+            uv pip install -r test_requirements/requirements_optional.txt
 
       - run:
           name: Build html figures (Pandas 2)
           command: |
-            . venv/bin/activate
+            source .venv/bin/activate
             python tests/percy/plotly-express.py
       - run:
           name: Build html figures (Pandas 1) and compare
           command: |
-            . venv/bin/activate
+            source .venv/bin/activate
             mkdir tests/percy/pandas2
             mv tests/percy/*.html tests/percy/pandas2/
             # 1.1 is the earliest minor with Py3.9 wheels
-            pip install "pandas==1.1.5"
+            uv pip install "pandas==1.1.5"
             python tests/percy/plotly-express.py
             python tests/percy/compare-pandas.py
             rm -rf tests/percy/pandas2
@@ -190,20 +191,20 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -e .
-            pip install -r ./test_requirements/requirements_core.txt black inflect
-            pip install jupyterlab
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install -e .
+            uv pip install -r ./test_requirements/requirements_core.txt black inflect jupyterlab
       - run:
           name: Update plotly.js to dev
           command: |
-            . venv/bin/activate
+            source .venv/bin/activate
             python commands.py updateplotlyjsdev
       - run:
           name: Test core
           command: |
-            . venv/bin/activate
+            source .venv/bin/activate
             locale
             pytest -k 'not nodev' tests/test_core
           no_output_timeout: 20m
@@ -218,8 +219,8 @@ jobs:
       - run:
           name: Build source distribution packages
           command: |
-            . venv/bin/activate
-            pip install build
+            source .venv/bin/activate
+            uv pip install build
             python -m build --sdist --wheel -o dist
           when: always
       - store_artifacts:
