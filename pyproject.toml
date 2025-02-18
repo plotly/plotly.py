@@ -38,9 +38,14 @@ classifiers = [
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
 version = "6.0.0"
-dynamic = ["dependencies"]
+dependencies = [
+    "narwhals>=1.13.3",
+    "packaging"
+]
 
-# TODO: check that this works
+[project.optional-dependencies]
+express = ["numpy"]
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["plotly*", "_plotly*"]
