@@ -54,7 +54,11 @@ commands:
             npm run build
       
       - when:
-          condition: <<parameters.pandas_version>>
+          condition: 
+            not:
+              equal:
+                - <<parameters.pandas_version>>
+                - ""
           steps:
             - run:
                 name: Install pandas
@@ -133,7 +137,7 @@ jobs:
         default: "3.10"
         type: string
       pandas_version:
-        default: "2"
+        default: ""
         type: string
     executor:
       name: docker-container
