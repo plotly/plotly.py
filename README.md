@@ -67,7 +67,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ---
 
 - [Online Documentation](https://plotly.com/python/)
-- [Contributing to plotly](https://github.com/plotly/plotly.py/blob/master/contributing.md)
+- [Contributing to plotly](https://github.com/plotly/plotly.py/blob/master/CONTRIBUTING.md)
 - [Changelog](https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md)
 - [Code of Conduct](https://github.com/plotly/plotly.py/blob/master/CODE_OF_CONDUCT.md)
 - [Community forum](https://community.plotly.com)
@@ -140,6 +140,8 @@ or conda
 ```
 conda install -c plotly plotly-geo=1.0.0
 ```
+
+`plotly-geo` can be found on Github at https://github.com/plotly/plotly-geo.
 
 ## Copyright and Licenses
 
