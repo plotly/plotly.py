@@ -260,3 +260,9 @@ def test_sanitize_json(engine):
     for bad, good in replacements.items():
         assert bad not in fig_json
         assert good in fig_json
+
+
+@pytest.mark.parametrize("na_value", [np.nan, pd.NaT, pd.NA])
+def test_na_values(engine, na_value):
+    result = pio.to_json_plotly(na_value, engine=engine)
+    assert result == "null"
