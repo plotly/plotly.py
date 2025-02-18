@@ -39,7 +39,7 @@ requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
 version = "6.0.0"
 dependencies = [
-    "narwhals>=1.13.3",
+    "narwhals>=1.15.1",
     "packaging"
 ]
 
