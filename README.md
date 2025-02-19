@@ -85,7 +85,7 @@ pip install plotly
 or conda.
 
 ```
-conda install -c plotly plotly
+conda install -c conda-forge plotly
 ```
 
 ### Jupyter Widget Support
