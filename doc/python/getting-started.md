@@ -64,7 +64,7 @@ $ pip install plotly
 or `conda`:
 
 ```
-$ conda install -c plotly plotly
+$ conda install -c conda-forge plotly
 ```
 
 If you want to use Plotly Express, install its required dependencies with:
