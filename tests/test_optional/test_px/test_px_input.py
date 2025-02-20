@@ -14,8 +14,7 @@ import sys
 import warnings
 
 
-# FIXME: don't test with vaex if vaex isn't installed
-if (optional_imports.get_module("vaex") is None) and (sys.version_info >= (3, 12)):
+if optional_imports.get_module("vaex") is None and sys.version_info > (3, 9):
     TEST_LIBS = ["polars"]
 else:
     TEST_LIBS = ["vaex", "polars"]
