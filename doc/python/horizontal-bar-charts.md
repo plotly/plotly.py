@@ -217,6 +217,78 @@ fig.update_layout(annotations=annotations)
 fig.show()
 ```
 
+### Diverging Bar (or Butterfly) Chart
+
+Diverging bar charts show counts of positive outcomes or sentiments to the right of zero and counts of negative outcomes to the left of zero, allowing the reader to easily spot areas of excellence and concern.  Implementing presentation-ready versions of them in Plotly requires a few non standard layout and legendrank options.
+
+```
+import pandas as pd
+import plotly.graph_objects as go
+
+data = {
+    "Category": ["Content Quality", "Instructor Effectiveness", "Ease of Use", "Customer Support", "Value for Money"],
+    "Somewhat Agree": [30, 25, 40, 20, 49],
+    "Strongly Agree": [40, 35, 50, 30, 60],
+    "Somewhat Disagree": [-20, -15, -25, -10, -30],
+    "Strongly Disagree": [-10, -50, -15, -15,-20]
+}
+df = pd.DataFrame(data)
+print(df.columns)
+
+fig = go.Figure()
+
+color_by_category={
+    "Strongly Agree":'darkblue',
+    "Somewhat Agree":'lightblue',
+    "Somewhat Disagree":'orange',
+    "Strongly Disagree":'red',
+}
+
+# We want the legend to be ordered in the same order that the categories appear, left to right -- 
+# which is different from the order in which we add the traces to the figure.
+# since we need to create the "somewhat" traces first, then the "strongly" traces to display 
+# the segments in the desired order
+
+legend_rank_by_category={
+    "Strongly Disagree":1,
+    "Somewhat Disagree":2,
+    "Somewhat Agree":3,
+    "Strongly Agree":4,
+}
+
+# Add bars for each category
+for col in df.columns[1:]:
+    fig.add_trace(go.Bar(
+        y=df["Category"], 
+        x=df[col], 
+        name=col, 
+        orientation='h',
+        marker=dict(color=color_by_category[col]),
+        legendrank=legend_rank_by_category[col]
+
+    ))
+
+
+fig.update_layout(
+   title="Reactions to the statement, 'The service met your expectations for':",
+    xaxis=dict(
+        title="Number of Responses",
+        zeroline=True,  # Ensure there's a zero line for divergence
+        zerolinecolor="black",
+        # use array tick mode to show that the counts to the left of zero are still positive.
+        # this is hard coded; generalize this if you plan to create a function that takes unknown or widely varying data
+        tickmode = 'array',     
+        tickvals = [-50, 0, 50, 100],
+        ticktext = [50, 0, 50, 100]
+    ),
+    yaxis_title = "",
+    barmode='relative',  # Allows bars to diverge from the center
+    plot_bgcolor="white",
+)
+
+fig.show()
+```
+
 ### Bar Chart with Line Plot
 
 ```python
