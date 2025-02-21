@@ -22,7 +22,7 @@ jobs:
         node-version: '14'
 
     - name: Install npm dependencies
-      run: >-
+      run: |
         cd js
         npm ci
         npm run build
