@@ -4,8 +4,6 @@ import copy as _copy
 
 class Lighting(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "isosurface"
     _path_str = "isosurface.lighting"
     _valid_props = {
@@ -18,8 +16,6 @@ class Lighting(_BaseTraceHierarchyType):
         "vertexnormalsepsilon",
     }
 
-    # ambient
-    # -------
     @property
     def ambient(self):
         """
@@ -39,8 +35,6 @@ class Lighting(_BaseTraceHierarchyType):
     def ambient(self, val):
         self["ambient"] = val
 
-    # diffuse
-    # -------
     @property
     def diffuse(self):
         """
@@ -60,8 +54,6 @@ class Lighting(_BaseTraceHierarchyType):
     def diffuse(self, val):
         self["diffuse"] = val
 
-    # facenormalsepsilon
-    # ------------------
     @property
     def facenormalsepsilon(self):
         """
@@ -81,8 +73,6 @@ class Lighting(_BaseTraceHierarchyType):
     def facenormalsepsilon(self, val):
         self["facenormalsepsilon"] = val
 
-    # fresnel
-    # -------
     @property
     def fresnel(self):
         """
@@ -103,8 +93,6 @@ class Lighting(_BaseTraceHierarchyType):
     def fresnel(self, val):
         self["fresnel"] = val
 
-    # roughness
-    # ---------
     @property
     def roughness(self):
         """
@@ -124,8 +112,6 @@ class Lighting(_BaseTraceHierarchyType):
     def roughness(self, val):
         self["roughness"] = val
 
-    # specular
-    # --------
     @property
     def specular(self):
         """
@@ -145,8 +131,6 @@ class Lighting(_BaseTraceHierarchyType):
     def specular(self, val):
         self["specular"] = val
 
-    # vertexnormalsepsilon
-    # --------------------
     @property
     def vertexnormalsepsilon(self):
         """
@@ -166,8 +150,6 @@ class Lighting(_BaseTraceHierarchyType):
     def vertexnormalsepsilon(self, val):
         self["vertexnormalsepsilon"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -245,14 +227,11 @@ class Lighting(_BaseTraceHierarchyType):
         -------
         Lighting
         """
-        super(Lighting, self).__init__("lighting")
-
+        super().__init__("lighting")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -267,46 +246,15 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.isosurface.Lighting`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("ambient", None)
-        _v = ambient if ambient is not None else _v
-        if _v is not None:
-            self["ambient"] = _v
-        _v = arg.pop("diffuse", None)
-        _v = diffuse if diffuse is not None else _v
-        if _v is not None:
-            self["diffuse"] = _v
-        _v = arg.pop("facenormalsepsilon", None)
-        _v = facenormalsepsilon if facenormalsepsilon is not None else _v
-        if _v is not None:
-            self["facenormalsepsilon"] = _v
-        _v = arg.pop("fresnel", None)
-        _v = fresnel if fresnel is not None else _v
-        if _v is not None:
-            self["fresnel"] = _v
-        _v = arg.pop("roughness", None)
-        _v = roughness if roughness is not None else _v
-        if _v is not None:
-            self["roughness"] = _v
-        _v = arg.pop("specular", None)
-        _v = specular if specular is not None else _v
-        if _v is not None:
-            self["specular"] = _v
-        _v = arg.pop("vertexnormalsepsilon", None)
-        _v = vertexnormalsepsilon if vertexnormalsepsilon is not None else _v
-        if _v is not None:
-            self["vertexnormalsepsilon"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("ambient", arg, ambient)
+        self._init_provided("diffuse", arg, diffuse)
+        self._init_provided("facenormalsepsilon", arg, facenormalsepsilon)
+        self._init_provided("fresnel", arg, fresnel)
+        self._init_provided("roughness", arg, roughness)
+        self._init_provided("specular", arg, specular)
+        self._init_provided("vertexnormalsepsilon", arg, vertexnormalsepsilon)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
