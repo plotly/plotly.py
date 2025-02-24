@@ -41,7 +41,7 @@ released, or which has just been included but not yet released.
   your branch off the `doc-prod` branch and open your pull request against this
   `doc-prod` branch.
 - Case of a new (not released yet) feature: start your branch / pull request
-  against the `master` branch. `master` and `doc-prod` will be synchronized at
+  against the `main` branch. `main` and `doc-prod` will be synchronized at
   release time, so that the documentation of the feature is only deployed when
   it is available in a released version of `plotly.py`.
 

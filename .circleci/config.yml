@@ -24,7 +24,7 @@ commands:
           name: Test core
           command: |
             . venv/bin/activate
-            pytest tests/test_core
+            python -m pytest tests/test_core
           no_output_timeout: 20m
 
   test_optional:
@@ -39,51 +39,52 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -e .
-            pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install .
+            uv pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
             cd js
             npm ci
             npm run build
       - run:
           name: Install plotly-geo
           command: |
-            . venv/bin/activate
-            pip install plotly-geo
+            source .venv/bin/activate
+            uv pip install plotly-geo
       - run:
           name: Test core
           command: |
-            . venv/bin/activate
-            pytest tests/test_core
+            source .venv/bin/activate
+            python -m pytest tests/test_core
           no_output_timeout: 20m
       - run:
           name: Test optional
           command: |
-            . venv/bin/activate
-            pytest tests/test_optional
+            source .venv/bin/activate
+            python -m pytest tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
           command: |
-            . venv/bin/activate
-            pytest tests/test_plotly_utils/
+            source .venv/bin/activate
+            python -m pytest tests/test_plotly_utils/
           no_output_timeout: 20m
       - run:
           name: Test io
           command: |
-            . venv/bin/activate
-            pytest tests/test_io
+            source .venv/bin/activate
+            python -m pytest tests/test_io
           no_output_timeout: 20m
       - run:
-          name: Test dependencdies not imported
+          name: Test dependencies not imported
           command: |
-            . venv/bin/activate
+            source .venv/bin/activate
             python -m pytest -x test_init/test_dependencies_not_imported.py
       - run:
           name: Test lazy imports
           command: |
-            . venv/bin/activate
+            source .venv/bin/activate
             python -m pytest -x test_init/test_lazy_imports.py
   test_orca:
     parameters:
@@ -392,10 +393,6 @@ jobs:
             - "dc:5f:39:48:00:b4:72:34:e1:d2:c4:e1:1f:d1:e2:ce" #plotlydocbot
 
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          key: v2-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
 
@@ -403,14 +400,14 @@ jobs:
           name: install dependencies
           command: |
             cd doc
-            python -m venv venv
-            . venv/bin/activate
-            pip uninstall -y plotly
-            pip install -r requirements.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
-              pip uninstall -y plotly
+              uv pip uninstall plotly
               cd ..
-              pip install -e .
+              uv pip install -e .
               cd js
               npm ci
               npm run build
@@ -426,17 +423,11 @@ jobs:
             sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
             echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
 
-      - save_cache:
-          paths:
-            - ./doc/venv
-            - ./doc/node_modules
-          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
-
       - run:
           name: make html
           command: |
             cd doc
-            . venv/bin/activate
+            source .venv/bin/activate
             echo ${mapbox_token} > python/.mapbox_token
             make -kj8 || make -kj8
             curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
@@ -485,14 +476,14 @@ jobs:
           name: make doc
           command: |
             cd doc
-            . venv/bin/activate
+            source .venv/bin/activate
             # For the API doc, we need to use the local version of plotly
             # since we are tweaking the source because of
             # graph_objs/graph_objects
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              pip uninstall -y plotly
+              uv pip uninstall plotly
               cd ..
-              pip install -e .
+              uv pip install -e .
               cd doc
               cd apidoc
               make html

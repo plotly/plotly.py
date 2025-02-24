@@ -198,7 +198,7 @@ a PR as follows.
 
 ### Making a Development Branch
 
-Third, *don't* work in the `master` branch. As soon as you get your master branch ready, run:
+Third, *don't* work in the `main` branch. As soon as you get your main branch ready, run:
 
 **DO THIS (but change the branch name)**
 ```bash
