@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Rotation(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.geo.projection'
-    _path_str = 'layout.geo.projection.rotation'
+    _parent_path_str = "layout.geo.projection"
+    _path_str = "layout.geo.projection.rotation"
     _valid_props = {"lat", "lon", "roll"}
 
-    # lat
-    # ---
     @property
     def lat(self):
         """
@@ -29,14 +23,12 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['lat']
+        return self["lat"]
 
     @lat.setter
     def lat(self, val):
-        self['lat'] = val
+        self["lat"] = val
 
-    # lon
-    # ---
     @property
     def lon(self):
         """
@@ -50,14 +42,12 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['lon']
+        return self["lon"]
 
     @lon.setter
     def lon(self, val):
-        self['lon'] = val
+        self["lon"] = val
 
-    # roll
-    # ----
     @property
     def roll(self):
         """
@@ -71,14 +61,12 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['roll']
+        return self["roll"]
 
     @roll.setter
     def roll(self, val):
-        self['roll'] = val
+        self["roll"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -91,13 +79,15 @@ class Rotation(_BaseLayoutHierarchyType):
             Roll the map (in degrees) For example, a roll of 180
             makes the map appear upside down.
         """
-    def __init__(self,
-            arg=None,
-            lat: int|float|None = None,
-            lon: int|float|None = None,
-            roll: int|float|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        lat: int | float | None = None,
+        lon: int | float | None = None,
+        roll: int | float | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Rotation object
 
@@ -120,13 +110,11 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         Rotation
         """
-        super().__init__('rotation')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("rotation")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -134,27 +122,18 @@ class Rotation(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.geo.projection.Rotation
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`""")
+an instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('lat', arg, lat)
-        self._init_provided('lon', arg, lon)
-        self._init_provided('roll', arg, roll)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("lat", arg, lat)
+        self._init_provided("lon", arg, lon)
+        self._init_provided("roll", arg, roll)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

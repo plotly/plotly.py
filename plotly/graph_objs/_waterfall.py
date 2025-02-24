@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,85 @@ import copy as _copy
 
 class Waterfall(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'waterfall'
-    _valid_props = {"alignmentgroup", "base", "cliponaxis", "connector", "constraintext", "customdata", "customdatasrc", "decreasing", "dx", "dy", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "increasing", "insidetextanchor", "insidetextfont", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "measure", "measuresrc", "meta", "metasrc", "name", "offset", "offsetgroup", "offsetsrc", "opacity", "orientation", "outsidetextfont", "selectedpoints", "showlegend", "stream", "text", "textangle", "textfont", "textinfo", "textposition", "textpositionsrc", "textsrc", "texttemplate", "texttemplatesrc", "totals", "type", "uid", "uirevision", "visible", "width", "widthsrc", "x", "x0", "xaxis", "xhoverformat", "xperiod", "xperiod0", "xperiodalignment", "xsrc", "y", "y0", "yaxis", "yhoverformat", "yperiod", "yperiod0", "yperiodalignment", "ysrc", "zorder"}
+    _parent_path_str = ""
+    _path_str = "waterfall"
+    _valid_props = {
+        "alignmentgroup",
+        "base",
+        "cliponaxis",
+        "connector",
+        "constraintext",
+        "customdata",
+        "customdatasrc",
+        "decreasing",
+        "dx",
+        "dy",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "increasing",
+        "insidetextanchor",
+        "insidetextfont",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "measure",
+        "measuresrc",
+        "meta",
+        "metasrc",
+        "name",
+        "offset",
+        "offsetgroup",
+        "offsetsrc",
+        "opacity",
+        "orientation",
+        "outsidetextfont",
+        "selectedpoints",
+        "showlegend",
+        "stream",
+        "text",
+        "textangle",
+        "textfont",
+        "textinfo",
+        "textposition",
+        "textpositionsrc",
+        "textsrc",
+        "texttemplate",
+        "texttemplatesrc",
+        "totals",
+        "type",
+        "uid",
+        "uirevision",
+        "visible",
+        "width",
+        "widthsrc",
+        "x",
+        "x0",
+        "xaxis",
+        "xhoverformat",
+        "xperiod",
+        "xperiod0",
+        "xperiodalignment",
+        "xsrc",
+        "y",
+        "y0",
+        "yaxis",
+        "yhoverformat",
+        "yperiod",
+        "yperiod0",
+        "yperiodalignment",
+        "ysrc",
+        "zorder",
+    }
 
-    # alignmentgroup
-    # --------------
     @property
     def alignmentgroup(self):
         """
@@ -32,14 +101,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['alignmentgroup']
+        return self["alignmentgroup"]
 
     @alignmentgroup.setter
     def alignmentgroup(self, val):
-        self['alignmentgroup'] = val
+        self["alignmentgroup"] = val
 
-    # base
-    # ----
     @property
     def base(self):
         """
@@ -52,14 +119,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float
         """
-        return self['base']
+        return self["base"]
 
     @base.setter
     def base(self, val):
-        self['base'] = val
+        self["base"] = val
 
-    # cliponaxis
-    # ----------
     @property
     def cliponaxis(self):
         """
@@ -75,14 +140,12 @@ class Waterfall(_BaseTraceType):
         -------
         bool
         """
-        return self['cliponaxis']
+        return self["cliponaxis"]
 
     @cliponaxis.setter
     def cliponaxis(self, val):
-        self['cliponaxis'] = val
+        self["cliponaxis"] = val
 
-    # connector
-    # ---------
     @property
     def connector(self):
         """
@@ -96,14 +159,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Connector
         """
-        return self['connector']
+        return self["connector"]
 
     @connector.setter
     def connector(self, val):
-        self['connector'] = val
+        self["connector"] = val
 
-    # constraintext
-    # -------------
     @property
     def constraintext(self):
         """
@@ -118,14 +179,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['constraintext']
+        return self["constraintext"]
 
     @constraintext.setter
     def constraintext(self, val):
-        self['constraintext'] = val
+        self["constraintext"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -141,14 +200,12 @@ class Waterfall(_BaseTraceType):
         -------
         NDArray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -162,14 +219,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # decreasing
-    # ----------
     @property
     def decreasing(self):
         """
@@ -183,14 +238,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Decreasing
         """
-        return self['decreasing']
+        return self["decreasing"]
 
     @decreasing.setter
     def decreasing(self, val):
-        self['decreasing'] = val
+        self["decreasing"] = val
 
-    # dx
-    # --
     @property
     def dx(self):
         """
@@ -203,14 +256,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float
         """
-        return self['dx']
+        return self["dx"]
 
     @dx.setter
     def dx(self, val):
-        self['dx'] = val
+        self["dx"] = val
 
-    # dy
-    # --
     @property
     def dy(self):
         """
@@ -223,14 +274,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float
         """
-        return self['dy']
+        return self["dy"]
 
     @dy.setter
     def dy(self, val):
-        self['dy'] = val
+        self["dy"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -249,14 +298,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -270,14 +317,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -291,14 +336,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -337,14 +380,12 @@ class Waterfall(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -358,14 +399,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -384,14 +423,12 @@ class Waterfall(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -405,14 +442,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -427,14 +462,12 @@ class Waterfall(_BaseTraceType):
         -------
         NDArray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -447,14 +480,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # increasing
-    # ----------
     @property
     def increasing(self):
         """
@@ -468,14 +499,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Increasing
         """
-        return self['increasing']
+        return self["increasing"]
 
     @increasing.setter
     def increasing(self, val):
-        self['increasing'] = val
+        self["increasing"] = val
 
-    # insidetextanchor
-    # ----------------
     @property
     def insidetextanchor(self):
         """
@@ -490,14 +519,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['insidetextanchor']
+        return self["insidetextanchor"]
 
     @insidetextanchor.setter
     def insidetextanchor(self, val):
-        self['insidetextanchor'] = val
+        self["insidetextanchor"] = val
 
-    # insidetextfont
-    # --------------
     @property
     def insidetextfont(self):
         """
@@ -513,14 +540,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Insidetextfont
         """
-        return self['insidetextfont']
+        return self["insidetextfont"]
 
     @insidetextfont.setter
     def insidetextfont(self, val):
-        self['insidetextfont'] = val
+        self["insidetextfont"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -538,14 +563,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -561,14 +584,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -582,14 +603,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -609,14 +628,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -630,14 +647,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # measure
-    # -------
     @property
     def measure(self):
         """
@@ -654,14 +669,12 @@ class Waterfall(_BaseTraceType):
         -------
         NDArray
         """
-        return self['measure']
+        return self["measure"]
 
     @measure.setter
     def measure(self, val):
-        self['measure'] = val
+        self["measure"] = val
 
-    # measuresrc
-    # ----------
     @property
     def measuresrc(self):
         """
@@ -674,14 +687,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['measuresrc']
+        return self["measuresrc"]
 
     @measuresrc.setter
     def measuresrc(self, val):
-        self['measuresrc'] = val
+        self["measuresrc"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -702,14 +713,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -722,14 +731,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -744,14 +751,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # offset
-    # ------
     @property
     def offset(self):
         """
@@ -767,14 +772,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float|NDArray
         """
-        return self['offset']
+        return self["offset"]
 
     @offset.setter
     def offset(self, val):
-        self['offset'] = val
+        self["offset"] = val
 
-    # offsetgroup
-    # -----------
     @property
     def offsetgroup(self):
         """
@@ -790,14 +793,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['offsetgroup']
+        return self["offsetgroup"]
 
     @offsetgroup.setter
     def offsetgroup(self, val):
-        self['offsetgroup'] = val
+        self["offsetgroup"] = val
 
-    # offsetsrc
-    # ---------
     @property
     def offsetsrc(self):
         """
@@ -810,14 +811,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['offsetsrc']
+        return self["offsetsrc"]
 
     @offsetsrc.setter
     def offsetsrc(self, val):
-        self['offsetsrc'] = val
+        self["offsetsrc"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -830,14 +829,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -852,14 +849,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['orientation']
+        return self["orientation"]
 
     @orientation.setter
     def orientation(self, val):
-        self['orientation'] = val
+        self["orientation"] = val
 
-    # outsidetextfont
-    # ---------------
     @property
     def outsidetextfont(self):
         """
@@ -875,14 +870,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Outsidetextfont
         """
-        return self['outsidetextfont']
+        return self["outsidetextfont"]
 
     @outsidetextfont.setter
     def outsidetextfont(self, val):
-        self['outsidetextfont'] = val
+        self["outsidetextfont"] = val
 
-    # selectedpoints
-    # --------------
     @property
     def selectedpoints(self):
         """
@@ -899,14 +892,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['selectedpoints']
+        return self["selectedpoints"]
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self['selectedpoints'] = val
+        self["selectedpoints"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -920,14 +911,12 @@ class Waterfall(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -941,14 +930,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -968,14 +955,12 @@ class Waterfall(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # textangle
-    # ---------
     @property
     def textangle(self):
         """
@@ -993,14 +978,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float
         """
-        return self['textangle']
+        return self["textangle"]
 
     @textangle.setter
     def textangle(self, val):
-        self['textangle'] = val
+        self["textangle"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -1016,14 +999,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
-    # textinfo
-    # --------
     @property
     def textinfo(self):
         """
@@ -1041,14 +1022,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['textinfo']
+        return self["textinfo"]
 
     @textinfo.setter
     def textinfo(self, val):
-        self['textinfo'] = val
+        self["textinfo"] = val
 
-    # textposition
-    # ------------
     @property
     def textposition(self):
         """
@@ -1070,14 +1049,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['textposition']
+        return self["textposition"]
 
     @textposition.setter
     def textposition(self, val):
-        self['textposition'] = val
+        self["textposition"] = val
 
-    # textpositionsrc
-    # ---------------
     @property
     def textpositionsrc(self):
         """
@@ -1091,14 +1068,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['textpositionsrc']
+        return self["textpositionsrc"]
 
     @textpositionsrc.setter
     def textpositionsrc(self, val):
-        self['textpositionsrc'] = val
+        self["textpositionsrc"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1111,14 +1086,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
-    # texttemplate
-    # ------------
     @property
     def texttemplate(self):
         """
@@ -1146,14 +1119,12 @@ class Waterfall(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['texttemplate']
+        return self["texttemplate"]
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self['texttemplate'] = val
+        self["texttemplate"] = val
 
-    # texttemplatesrc
-    # ---------------
     @property
     def texttemplatesrc(self):
         """
@@ -1167,14 +1138,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['texttemplatesrc']
+        return self["texttemplatesrc"]
 
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
-        self['texttemplatesrc'] = val
+        self["texttemplatesrc"] = val
 
-    # totals
-    # ------
     @property
     def totals(self):
         """
@@ -1188,14 +1157,12 @@ class Waterfall(_BaseTraceType):
         -------
         plotly.graph_objs.waterfall.Totals
         """
-        return self['totals']
+        return self["totals"]
 
     @totals.setter
     def totals(self, val):
-        self['totals'] = val
+        self["totals"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1210,14 +1177,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1243,14 +1208,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1266,14 +1229,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -1287,14 +1248,12 @@ class Waterfall(_BaseTraceType):
         -------
         int|float|NDArray
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
-    # widthsrc
-    # --------
     @property
     def widthsrc(self):
         """
@@ -1307,14 +1266,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['widthsrc']
+        return self["widthsrc"]
 
     @widthsrc.setter
     def widthsrc(self, val):
-        self['widthsrc'] = val
+        self["widthsrc"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1327,14 +1284,12 @@ class Waterfall(_BaseTraceType):
         -------
         NDArray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # x0
-    # --
     @property
     def x0(self):
         """
@@ -1348,14 +1303,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['x0']
+        return self["x0"]
 
     @x0.setter
     def x0(self, val):
-        self['x0'] = val
+        self["x0"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -1373,14 +1326,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['xaxis']
+        return self["xaxis"]
 
     @xaxis.setter
     def xaxis(self, val):
-        self['xaxis'] = val
+        self["xaxis"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1404,14 +1355,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
-    # xperiod
-    # -------
     @property
     def xperiod(self):
         """
@@ -1426,14 +1375,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiod']
+        return self["xperiod"]
 
     @xperiod.setter
     def xperiod(self, val):
-        self['xperiod'] = val
+        self["xperiod"] = val
 
-    # xperiod0
-    # --------
     @property
     def xperiod0(self):
         """
@@ -1449,14 +1396,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiod0']
+        return self["xperiod0"]
 
     @xperiod0.setter
     def xperiod0(self, val):
-        self['xperiod0'] = val
+        self["xperiod0"] = val
 
-    # xperiodalignment
-    # ----------------
     @property
     def xperiodalignment(self):
         """
@@ -1471,14 +1416,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiodalignment']
+        return self["xperiodalignment"]
 
     @xperiodalignment.setter
     def xperiodalignment(self, val):
-        self['xperiodalignment'] = val
+        self["xperiodalignment"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1491,14 +1434,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1511,14 +1452,12 @@ class Waterfall(_BaseTraceType):
         -------
         NDArray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # y0
-    # --
     @property
     def y0(self):
         """
@@ -1532,14 +1471,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['y0']
+        return self["y0"]
 
     @y0.setter
     def y0(self, val):
-        self['y0'] = val
+        self["y0"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -1557,14 +1494,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1588,14 +1523,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
-    # yperiod
-    # -------
     @property
     def yperiod(self):
         """
@@ -1610,14 +1543,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiod']
+        return self["yperiod"]
 
     @yperiod.setter
     def yperiod(self, val):
-        self['yperiod'] = val
+        self["yperiod"] = val
 
-    # yperiod0
-    # --------
     @property
     def yperiod0(self):
         """
@@ -1633,14 +1564,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiod0']
+        return self["yperiod0"]
 
     @yperiod0.setter
     def yperiod0(self, val):
-        self['yperiod0'] = val
+        self["yperiod0"] = val
 
-    # yperiodalignment
-    # ----------------
     @property
     def yperiodalignment(self):
         """
@@ -1655,14 +1584,12 @@ class Waterfall(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiodalignment']
+        return self["yperiodalignment"]
 
     @yperiodalignment.setter
     def yperiodalignment(self, val):
-        self['yperiodalignment'] = val
+        self["yperiodalignment"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -1675,14 +1602,12 @@ class Waterfall(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -1697,20 +1622,16 @@ class Waterfall(_BaseTraceType):
         -------
         int
         """
-        return self['zorder']
+        return self["zorder"]
 
     @zorder.setter
     def zorder(self, val):
-        self['zorder'] = val
+        self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -2088,83 +2009,85 @@ class Waterfall(_BaseTraceType):
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
         """
-    def __init__(self,
-            arg=None,
-            alignmentgroup: str|None = None,
-            base: int|float|None = None,
-            cliponaxis: bool|None = None,
-            connector: None|None = None,
-            constraintext: Any|None = None,
-            customdata: NDArray|None = None,
-            customdatasrc: str|None = None,
-            decreasing: None|None = None,
-            dx: int|float|None = None,
-            dy: int|float|None = None,
-            hoverinfo: Any|None = None,
-            hoverinfosrc: str|None = None,
-            hoverlabel: None|None = None,
-            hovertemplate: str|None = None,
-            hovertemplatesrc: str|None = None,
-            hovertext: str|None = None,
-            hovertextsrc: str|None = None,
-            ids: NDArray|None = None,
-            idssrc: str|None = None,
-            increasing: None|None = None,
-            insidetextanchor: Any|None = None,
-            insidetextfont: None|None = None,
-            legend: str|None = None,
-            legendgroup: str|None = None,
-            legendgrouptitle: None|None = None,
-            legendrank: int|float|None = None,
-            legendwidth: int|float|None = None,
-            measure: NDArray|None = None,
-            measuresrc: str|None = None,
-            meta: Any|None = None,
-            metasrc: str|None = None,
-            name: str|None = None,
-            offset: int|float|None = None,
-            offsetgroup: str|None = None,
-            offsetsrc: str|None = None,
-            opacity: int|float|None = None,
-            orientation: Any|None = None,
-            outsidetextfont: None|None = None,
-            selectedpoints: Any|None = None,
-            showlegend: bool|None = None,
-            stream: None|None = None,
-            text: str|None = None,
-            textangle: int|float|None = None,
-            textfont: None|None = None,
-            textinfo: Any|None = None,
-            textposition: Any|None = None,
-            textpositionsrc: str|None = None,
-            textsrc: str|None = None,
-            texttemplate: str|None = None,
-            texttemplatesrc: str|None = None,
-            totals: None|None = None,
-            uid: str|None = None,
-            uirevision: Any|None = None,
-            visible: Any|None = None,
-            width: int|float|None = None,
-            widthsrc: str|None = None,
-            x: NDArray|None = None,
-            x0: Any|None = None,
-            xaxis: str|None = None,
-            xhoverformat: str|None = None,
-            xperiod: Any|None = None,
-            xperiod0: Any|None = None,
-            xperiodalignment: Any|None = None,
-            xsrc: str|None = None,
-            y: NDArray|None = None,
-            y0: Any|None = None,
-            yaxis: str|None = None,
-            yhoverformat: str|None = None,
-            yperiod: Any|None = None,
-            yperiod0: Any|None = None,
-            yperiodalignment: Any|None = None,
-            ysrc: str|None = None,
-            zorder: int|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        alignmentgroup: str | None = None,
+        base: int | float | None = None,
+        cliponaxis: bool | None = None,
+        connector: None | None = None,
+        constraintext: Any | None = None,
+        customdata: NDArray | None = None,
+        customdatasrc: str | None = None,
+        decreasing: None | None = None,
+        dx: int | float | None = None,
+        dy: int | float | None = None,
+        hoverinfo: Any | None = None,
+        hoverinfosrc: str | None = None,
+        hoverlabel: None | None = None,
+        hovertemplate: str | None = None,
+        hovertemplatesrc: str | None = None,
+        hovertext: str | None = None,
+        hovertextsrc: str | None = None,
+        ids: NDArray | None = None,
+        idssrc: str | None = None,
+        increasing: None | None = None,
+        insidetextanchor: Any | None = None,
+        insidetextfont: None | None = None,
+        legend: str | None = None,
+        legendgroup: str | None = None,
+        legendgrouptitle: None | None = None,
+        legendrank: int | float | None = None,
+        legendwidth: int | float | None = None,
+        measure: NDArray | None = None,
+        measuresrc: str | None = None,
+        meta: Any | None = None,
+        metasrc: str | None = None,
+        name: str | None = None,
+        offset: int | float | None = None,
+        offsetgroup: str | None = None,
+        offsetsrc: str | None = None,
+        opacity: int | float | None = None,
+        orientation: Any | None = None,
+        outsidetextfont: None | None = None,
+        selectedpoints: Any | None = None,
+        showlegend: bool | None = None,
+        stream: None | None = None,
+        text: str | None = None,
+        textangle: int | float | None = None,
+        textfont: None | None = None,
+        textinfo: Any | None = None,
+        textposition: Any | None = None,
+        textpositionsrc: str | None = None,
+        textsrc: str | None = None,
+        texttemplate: str | None = None,
+        texttemplatesrc: str | None = None,
+        totals: None | None = None,
+        uid: str | None = None,
+        uirevision: Any | None = None,
+        visible: Any | None = None,
+        width: int | float | None = None,
+        widthsrc: str | None = None,
+        x: NDArray | None = None,
+        x0: Any | None = None,
+        xaxis: str | None = None,
+        xhoverformat: str | None = None,
+        xperiod: Any | None = None,
+        xperiod0: Any | None = None,
+        xperiodalignment: Any | None = None,
+        xsrc: str | None = None,
+        y: NDArray | None = None,
+        y0: Any | None = None,
+        yaxis: str | None = None,
+        yhoverformat: str | None = None,
+        yperiod: Any | None = None,
+        yperiod0: Any | None = None,
+        yperiodalignment: Any | None = None,
+        ysrc: str | None = None,
+        zorder: int | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Waterfall object
 
@@ -2558,13 +2481,11 @@ class Waterfall(_BaseTraceType):
         -------
         Waterfall
         """
-        super().__init__('waterfall')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("waterfall")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2572,103 +2493,91 @@ class Waterfall(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Waterfall
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Waterfall`""")
+an instance of :class:`plotly.graph_objs.Waterfall`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('alignmentgroup', arg, alignmentgroup)
-        self._init_provided('base', arg, base)
-        self._init_provided('cliponaxis', arg, cliponaxis)
-        self._init_provided('connector', arg, connector)
-        self._init_provided('constraintext', arg, constraintext)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('decreasing', arg, decreasing)
-        self._init_provided('dx', arg, dx)
-        self._init_provided('dy', arg, dy)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('hovertext', arg, hovertext)
-        self._init_provided('hovertextsrc', arg, hovertextsrc)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('increasing', arg, increasing)
-        self._init_provided('insidetextanchor', arg, insidetextanchor)
-        self._init_provided('insidetextfont', arg, insidetextfont)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('measure', arg, measure)
-        self._init_provided('measuresrc', arg, measuresrc)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('offset', arg, offset)
-        self._init_provided('offsetgroup', arg, offsetgroup)
-        self._init_provided('offsetsrc', arg, offsetsrc)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('orientation', arg, orientation)
-        self._init_provided('outsidetextfont', arg, outsidetextfont)
-        self._init_provided('selectedpoints', arg, selectedpoints)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('text', arg, text)
-        self._init_provided('textangle', arg, textangle)
-        self._init_provided('textfont', arg, textfont)
-        self._init_provided('textinfo', arg, textinfo)
-        self._init_provided('textposition', arg, textposition)
-        self._init_provided('textpositionsrc', arg, textpositionsrc)
-        self._init_provided('textsrc', arg, textsrc)
-        self._init_provided('texttemplate', arg, texttemplate)
-        self._init_provided('texttemplatesrc', arg, texttemplatesrc)
-        self._init_provided('totals', arg, totals)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('width', arg, width)
-        self._init_provided('widthsrc', arg, widthsrc)
-        self._init_provided('x', arg, x)
-        self._init_provided('x0', arg, x0)
-        self._init_provided('xaxis', arg, xaxis)
-        self._init_provided('xhoverformat', arg, xhoverformat)
-        self._init_provided('xperiod', arg, xperiod)
-        self._init_provided('xperiod0', arg, xperiod0)
-        self._init_provided('xperiodalignment', arg, xperiodalignment)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('y', arg, y)
-        self._init_provided('y0', arg, y0)
-        self._init_provided('yaxis', arg, yaxis)
-        self._init_provided('yhoverformat', arg, yhoverformat)
-        self._init_provided('yperiod', arg, yperiod)
-        self._init_provided('yperiod0', arg, yperiod0)
-        self._init_provided('yperiodalignment', arg, yperiodalignment)
-        self._init_provided('ysrc', arg, ysrc)
-        self._init_provided('zorder', arg, zorder)
+        self._init_provided("alignmentgroup", arg, alignmentgroup)
+        self._init_provided("base", arg, base)
+        self._init_provided("cliponaxis", arg, cliponaxis)
+        self._init_provided("connector", arg, connector)
+        self._init_provided("constraintext", arg, constraintext)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("decreasing", arg, decreasing)
+        self._init_provided("dx", arg, dx)
+        self._init_provided("dy", arg, dy)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("increasing", arg, increasing)
+        self._init_provided("insidetextanchor", arg, insidetextanchor)
+        self._init_provided("insidetextfont", arg, insidetextfont)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("measure", arg, measure)
+        self._init_provided("measuresrc", arg, measuresrc)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("offset", arg, offset)
+        self._init_provided("offsetgroup", arg, offsetgroup)
+        self._init_provided("offsetsrc", arg, offsetsrc)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("orientation", arg, orientation)
+        self._init_provided("outsidetextfont", arg, outsidetextfont)
+        self._init_provided("selectedpoints", arg, selectedpoints)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textangle", arg, textangle)
+        self._init_provided("textfont", arg, textfont)
+        self._init_provided("textinfo", arg, textinfo)
+        self._init_provided("textposition", arg, textposition)
+        self._init_provided("textpositionsrc", arg, textpositionsrc)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("texttemplate", arg, texttemplate)
+        self._init_provided("texttemplatesrc", arg, texttemplatesrc)
+        self._init_provided("totals", arg, totals)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("width", arg, width)
+        self._init_provided("widthsrc", arg, widthsrc)
+        self._init_provided("x", arg, x)
+        self._init_provided("x0", arg, x0)
+        self._init_provided("xaxis", arg, xaxis)
+        self._init_provided("xhoverformat", arg, xhoverformat)
+        self._init_provided("xperiod", arg, xperiod)
+        self._init_provided("xperiod0", arg, xperiod0)
+        self._init_provided("xperiodalignment", arg, xperiodalignment)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("y0", arg, y0)
+        self._init_provided("yaxis", arg, yaxis)
+        self._init_provided("yhoverformat", arg, yhoverformat)
+        self._init_provided("yperiod", arg, yperiod)
+        self._init_provided("yperiod0", arg, yperiod0)
+        self._init_provided("yperiodalignment", arg, yperiodalignment)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("zorder", arg, zorder)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'waterfall'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "waterfall"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Marker(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'splom.unselected'
-    _path_str = 'splom.unselected.marker'
+    _parent_path_str = "splom.unselected"
+    _path_str = "splom.unselected.marker"
     _valid_props = {"color", "opacity", "size"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -34,14 +28,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -55,14 +47,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -76,14 +66,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -97,13 +85,15 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker size of unselected points, applied only
             when a selection exists.
         """
-    def __init__(self,
-            arg=None,
-            color: str|None = None,
-            opacity: int|float|None = None,
-            size: int|float|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color: str | None = None,
+        opacity: int | float | None = None,
+        size: int | float | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Marker object
 
@@ -127,13 +117,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -141,27 +129,18 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.splom.unselected.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.unselected.Marker`""")
+an instance of :class:`plotly.graph_objs.splom.unselected.Marker`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('size', arg, size)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("size", arg, size)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

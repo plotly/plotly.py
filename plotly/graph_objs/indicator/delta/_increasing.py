@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Increasing(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'indicator.delta'
-    _path_str = 'indicator.delta.increasing'
+    _parent_path_str = "indicator.delta"
+    _path_str = "indicator.delta.increasing"
     _valid_props = {"color", "symbol"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -33,14 +27,12 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # symbol
-    # ------
     @property
     def symbol(self):
         """
@@ -54,14 +46,12 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['symbol']
+        return self["symbol"]
 
     @symbol.setter
     def symbol(self, val):
-        self['symbol'] = val
+        self["symbol"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -70,12 +60,10 @@ class Increasing(_BaseTraceHierarchyType):
         symbol
             Sets the symbol to display for increasing value
         """
-    def __init__(self,
-            arg=None,
-            color: str|None = None,
-            symbol: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, color: str | None = None, symbol: str | None = None, **kwargs
+    ):
         """
         Construct a new Increasing object
 
@@ -94,13 +82,11 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         Increasing
         """
-        super().__init__('increasing')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("increasing")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -108,26 +94,17 @@ class Increasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.delta.Increasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.delta.Increasing`""")
+an instance of :class:`plotly.graph_objs.indicator.delta.Increasing`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('symbol', arg, symbol)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("symbol", arg, symbol)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

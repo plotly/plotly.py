@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,26 @@ import copy as _copy
 
 class Newshape(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.newshape'
-    _valid_props = {"drawdirection", "fillcolor", "fillrule", "label", "layer", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "name", "opacity", "showlegend", "visible"}
+    _parent_path_str = "layout"
+    _path_str = "layout.newshape"
+    _valid_props = {
+        "drawdirection",
+        "fillcolor",
+        "fillrule",
+        "label",
+        "layer",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "line",
+        "name",
+        "opacity",
+        "showlegend",
+        "visible",
+    }
 
-    # drawdirection
-    # -------------
     @property
     def drawdirection(self):
         """
@@ -35,14 +45,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['drawdirection']
+        return self["drawdirection"]
 
     @drawdirection.setter
     def drawdirection(self, val):
-        self['drawdirection'] = val
+        self["drawdirection"] = val
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -62,14 +70,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
-    # fillrule
-    # --------
     @property
     def fillrule(self):
         """
@@ -85,14 +91,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['fillrule']
+        return self["fillrule"]
 
     @fillrule.setter
     def fillrule(self, val):
-        self['fillrule'] = val
+        self["fillrule"] = val
 
-    # label
-    # -----
     @property
     def label(self):
         """
@@ -106,14 +110,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.newshape.Label
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
-    # layer
-    # -----
     @property
     def layer(self):
         """
@@ -129,14 +131,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['layer']
+        return self["layer"]
 
     @layer.setter
     def layer(self, val):
-        self['layer'] = val
+        self["layer"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -154,14 +154,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -177,14 +175,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -198,14 +194,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.newshape.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -223,14 +217,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -243,14 +235,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -264,14 +254,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.newshape.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -285,14 +273,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -305,14 +291,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -325,14 +309,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -348,14 +330,12 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -425,25 +405,27 @@ class Newshape(_BaseLayoutHierarchyType):
             a legend item (provided that the legend itself is
             visible).
         """
-    def __init__(self,
-            arg=None,
-            drawdirection: Any|None = None,
-            fillcolor: str|None = None,
-            fillrule: Any|None = None,
-            label: None|None = None,
-            layer: Any|None = None,
-            legend: str|None = None,
-            legendgroup: str|None = None,
-            legendgrouptitle: None|None = None,
-            legendrank: int|float|None = None,
-            legendwidth: int|float|None = None,
-            line: None|None = None,
-            name: str|None = None,
-            opacity: int|float|None = None,
-            showlegend: bool|None = None,
-            visible: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        drawdirection: Any | None = None,
+        fillcolor: str | None = None,
+        fillrule: Any | None = None,
+        label: None | None = None,
+        layer: Any | None = None,
+        legend: str | None = None,
+        legendgroup: str | None = None,
+        legendgrouptitle: None | None = None,
+        legendrank: int | float | None = None,
+        legendwidth: int | float | None = None,
+        line: None | None = None,
+        name: str | None = None,
+        opacity: int | float | None = None,
+        showlegend: bool | None = None,
+        visible: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Newshape object
 
@@ -523,13 +505,11 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         Newshape
         """
-        super().__init__('newshape')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("newshape")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -537,39 +517,30 @@ class Newshape(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Newshape
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Newshape`""")
+an instance of :class:`plotly.graph_objs.layout.Newshape`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('drawdirection', arg, drawdirection)
-        self._init_provided('fillcolor', arg, fillcolor)
-        self._init_provided('fillrule', arg, fillrule)
-        self._init_provided('label', arg, label)
-        self._init_provided('layer', arg, layer)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('line', arg, line)
-        self._init_provided('name', arg, name)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('visible', arg, visible)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("drawdirection", arg, drawdirection)
+        self._init_provided("fillcolor", arg, fillcolor)
+        self._init_provided("fillrule", arg, fillrule)
+        self._init_provided("label", arg, label)
+        self._init_provided("layer", arg, layer)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("line", arg, line)
+        self._init_provided("name", arg, name)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

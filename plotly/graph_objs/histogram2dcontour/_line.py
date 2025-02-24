@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Line(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'histogram2dcontour'
-    _path_str = 'histogram2dcontour.line'
+    _parent_path_str = "histogram2dcontour"
+    _path_str = "histogram2dcontour.line"
     _valid_props = {"color", "dash", "smoothing", "width"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -34,14 +28,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # dash
-    # ----
     @property
     def dash(self):
         """
@@ -60,14 +52,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['dash']
+        return self["dash"]
 
     @dash.setter
     def dash(self, val):
-        self['dash'] = val
+        self["dash"] = val
 
-    # smoothing
-    # ---------
     @property
     def smoothing(self):
         """
@@ -81,14 +71,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['smoothing']
+        return self["smoothing"]
 
     @smoothing.setter
     def smoothing(self, val):
-        self['smoothing'] = val
+        self["smoothing"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -101,14 +89,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -126,14 +112,16 @@ class Line(_BaseTraceHierarchyType):
         width
             Sets the contour line width in (in px)
         """
-    def __init__(self,
-            arg=None,
-            color: str|None = None,
-            dash: str|None = None,
-            smoothing: int|float|None = None,
-            width: int|float|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color: str | None = None,
+        dash: str | None = None,
+        smoothing: int | float | None = None,
+        width: int | float | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Line object
 
@@ -161,13 +149,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super().__init__('line')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("line")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -175,28 +161,19 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.histogram2dcontour.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram2dcontour.Line`""")
+an instance of :class:`plotly.graph_objs.histogram2dcontour.Line`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('dash', arg, dash)
-        self._init_provided('smoothing', arg, smoothing)
-        self._init_provided('width', arg, width)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("dash", arg, dash)
+        self._init_provided("smoothing", arg, smoothing)
+        self._init_provided("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

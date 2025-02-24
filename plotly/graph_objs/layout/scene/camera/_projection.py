@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Projection(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.scene.camera'
-    _path_str = 'layout.scene.camera.projection'
+    _parent_path_str = "layout.scene.camera"
+    _path_str = "layout.scene.camera.projection"
     _valid_props = {"type"}
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -31,14 +25,12 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -47,11 +39,8 @@ class Projection(_BaseLayoutHierarchyType):
             either "perspective" or "orthographic". The default is
             "perspective".
         """
-    def __init__(self,
-            arg=None,
-            type: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, type: Any | None = None, **kwargs):
         """
         Construct a new Projection object
 
@@ -70,13 +59,11 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Projection
         """
-        super().__init__('projection')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("projection")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -84,25 +71,16 @@ class Projection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.scene.camera.Projection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.camera.Projection`""")
+an instance of :class:`plotly.graph_objs.layout.scene.camera.Projection`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('type', arg, type)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

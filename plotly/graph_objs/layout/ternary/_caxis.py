@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,52 @@ import copy as _copy
 
 class Caxis(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.ternary'
-    _path_str = 'layout.ternary.caxis'
-    _valid_props = {"color", "dtick", "exponentformat", "gridcolor", "griddash", "gridwidth", "hoverformat", "labelalias", "layer", "linecolor", "linewidth", "min", "minexponent", "nticks", "separatethousands", "showexponent", "showgrid", "showline", "showticklabels", "showtickprefix", "showticksuffix", "tick0", "tickangle", "tickcolor", "tickfont", "tickformat", "tickformatstopdefaults", "tickformatstops", "ticklabelstep", "ticklen", "tickmode", "tickprefix", "ticks", "ticksuffix", "ticktext", "ticktextsrc", "tickvals", "tickvalssrc", "tickwidth", "title", "uirevision"}
+    _parent_path_str = "layout.ternary"
+    _path_str = "layout.ternary.caxis"
+    _valid_props = {
+        "color",
+        "dtick",
+        "exponentformat",
+        "gridcolor",
+        "griddash",
+        "gridwidth",
+        "hoverformat",
+        "labelalias",
+        "layer",
+        "linecolor",
+        "linewidth",
+        "min",
+        "minexponent",
+        "nticks",
+        "separatethousands",
+        "showexponent",
+        "showgrid",
+        "showline",
+        "showticklabels",
+        "showtickprefix",
+        "showticksuffix",
+        "tick0",
+        "tickangle",
+        "tickcolor",
+        "tickfont",
+        "tickformat",
+        "tickformatstopdefaults",
+        "tickformatstops",
+        "ticklabelstep",
+        "ticklen",
+        "tickmode",
+        "tickprefix",
+        "ticks",
+        "ticksuffix",
+        "ticktext",
+        "ticktextsrc",
+        "tickvals",
+        "tickvalssrc",
+        "tickwidth",
+        "title",
+        "uirevision",
+    }
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -36,14 +72,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # dtick
-    # -----
     @property
     def dtick(self):
         """
@@ -74,14 +108,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
-    # exponentformat
-    # --------------
     @property
     def exponentformat(self):
         """
@@ -99,14 +131,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['exponentformat']
+        return self["exponentformat"]
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self['exponentformat'] = val
+        self["exponentformat"] = val
 
-    # gridcolor
-    # ---------
     @property
     def gridcolor(self):
         """
@@ -123,14 +153,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
-    # griddash
-    # --------
     @property
     def griddash(self):
         """
@@ -149,14 +177,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['griddash']
+        return self["griddash"]
 
     @griddash.setter
     def griddash(self, val):
-        self['griddash'] = val
+        self["griddash"] = val
 
-    # gridwidth
-    # ---------
     @property
     def gridwidth(self):
         """
@@ -169,14 +195,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
-    # hoverformat
-    # -----------
     @property
     def hoverformat(self):
         """
@@ -199,14 +223,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['hoverformat']
+        return self["hoverformat"]
 
     @hoverformat.setter
     def hoverformat(self, val):
-        self['hoverformat'] = val
+        self["hoverformat"] = val
 
-    # labelalias
-    # ----------
     @property
     def labelalias(self):
         """
@@ -226,14 +248,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['labelalias']
+        return self["labelalias"]
 
     @labelalias.setter
     def labelalias(self, val):
-        self['labelalias'] = val
+        self["labelalias"] = val
 
-    # layer
-    # -----
     @property
     def layer(self):
         """
@@ -252,14 +272,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['layer']
+        return self["layer"]
 
     @layer.setter
     def layer(self, val):
-        self['layer'] = val
+        self["layer"] = val
 
-    # linecolor
-    # ---------
     @property
     def linecolor(self):
         """
@@ -276,14 +294,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['linecolor']
+        return self["linecolor"]
 
     @linecolor.setter
     def linecolor(self, val):
-        self['linecolor'] = val
+        self["linecolor"] = val
 
-    # linewidth
-    # ---------
     @property
     def linewidth(self):
         """
@@ -296,14 +312,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['linewidth']
+        return self["linewidth"]
 
     @linewidth.setter
     def linewidth(self, val):
-        self['linewidth'] = val
+        self["linewidth"] = val
 
-    # min
-    # ---
     @property
     def min(self):
         """
@@ -318,14 +332,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['min']
+        return self["min"]
 
     @min.setter
     def min(self, val):
-        self['min'] = val
+        self["min"] = val
 
-    # minexponent
-    # -----------
     @property
     def minexponent(self):
         """
@@ -339,14 +351,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['minexponent']
+        return self["minexponent"]
 
     @minexponent.setter
     def minexponent(self, val):
-        self['minexponent'] = val
+        self["minexponent"] = val
 
-    # nticks
-    # ------
     @property
     def nticks(self):
         """
@@ -363,14 +373,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
-    # separatethousands
-    # -----------------
     @property
     def separatethousands(self):
         """
@@ -383,14 +391,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['separatethousands']
+        return self["separatethousands"]
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self['separatethousands'] = val
+        self["separatethousands"] = val
 
-    # showexponent
-    # ------------
     @property
     def showexponent(self):
         """
@@ -407,14 +413,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showexponent']
+        return self["showexponent"]
 
     @showexponent.setter
     def showexponent(self, val):
-        self['showexponent'] = val
+        self["showexponent"] = val
 
-    # showgrid
-    # --------
     @property
     def showgrid(self):
         """
@@ -428,14 +432,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
-    # showline
-    # --------
     @property
     def showline(self):
         """
@@ -448,14 +450,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showline']
+        return self["showline"]
 
     @showline.setter
     def showline(self, val):
-        self['showline'] = val
+        self["showline"] = val
 
-    # showticklabels
-    # --------------
     @property
     def showticklabels(self):
         """
@@ -468,14 +468,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
-    # showtickprefix
-    # --------------
     @property
     def showtickprefix(self):
         """
@@ -492,14 +490,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
-    # showticksuffix
-    # --------------
     @property
     def showticksuffix(self):
         """
@@ -513,14 +509,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
-    # tick0
-    # -----
     @property
     def tick0(self):
         """
@@ -540,14 +534,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
-    # tickangle
-    # ---------
     @property
     def tickangle(self):
         """
@@ -564,14 +556,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
-    # tickcolor
-    # ---------
     @property
     def tickcolor(self):
         """
@@ -588,14 +578,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
-    # tickfont
-    # --------
     @property
     def tickfont(self):
         """
@@ -611,14 +599,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.caxis.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
-    # tickformat
-    # ----------
     @property
     def tickformat(self):
         """
@@ -641,14 +627,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
-    # tickformatstops
-    # ---------------
     @property
     def tickformatstops(self):
         """
@@ -662,14 +646,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.ternary.caxis.Tickformatstop]
         """
-        return self['tickformatstops']
+        return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self['tickformatstops'] = val
+        self["tickformatstops"] = val
 
-    # tickformatstopdefaults
-    # ----------------------
     @property
     def tickformatstopdefaults(self):
         """
@@ -688,14 +670,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.caxis.Tickformatstop
         """
-        return self['tickformatstopdefaults']
+        return self["tickformatstopdefaults"]
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self['tickformatstopdefaults'] = val
+        self["tickformatstopdefaults"] = val
 
-    # ticklabelstep
-    # -------------
     @property
     def ticklabelstep(self):
         """
@@ -714,14 +694,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['ticklabelstep']
+        return self["ticklabelstep"]
 
     @ticklabelstep.setter
     def ticklabelstep(self, val):
-        self['ticklabelstep'] = val
+        self["ticklabelstep"] = val
 
-    # ticklen
-    # -------
     @property
     def ticklen(self):
         """
@@ -734,14 +712,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
-    # tickmode
-    # --------
     @property
     def tickmode(self):
         """
@@ -761,14 +737,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
-    # tickprefix
-    # ----------
     @property
     def tickprefix(self):
         """
@@ -782,14 +756,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
-    # ticks
-    # -----
     @property
     def ticks(self):
         """
@@ -805,14 +777,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
-    # ticksuffix
-    # ----------
     @property
     def ticksuffix(self):
         """
@@ -826,14 +796,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
-    # ticktext
-    # --------
     @property
     def ticktext(self):
         """
@@ -848,14 +816,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         NDArray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
-    # ticktextsrc
-    # -----------
     @property
     def ticktextsrc(self):
         """
@@ -868,14 +834,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
-    # tickvals
-    # --------
     @property
     def tickvals(self):
         """
@@ -889,14 +853,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         NDArray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
-    # tickvalssrc
-    # -----------
     @property
     def tickvalssrc(self):
         """
@@ -909,14 +871,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
-    # tickwidth
-    # ---------
     @property
     def tickwidth(self):
         """
@@ -929,14 +889,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
-    # title
-    # -----
     @property
     def title(self):
         """
@@ -950,14 +908,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.caxis.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -971,14 +927,12 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1189,51 +1143,53 @@ class Caxis(_BaseLayoutHierarchyType):
             `min`, and `title` if in `editable: true`
             configuration. Defaults to `ternary<N>.uirevision`.
         """
-    def __init__(self,
-            arg=None,
-            color: str|None = None,
-            dtick: Any|None = None,
-            exponentformat: Any|None = None,
-            gridcolor: str|None = None,
-            griddash: str|None = None,
-            gridwidth: int|float|None = None,
-            hoverformat: str|None = None,
-            labelalias: Any|None = None,
-            layer: Any|None = None,
-            linecolor: str|None = None,
-            linewidth: int|float|None = None,
-            min: int|float|None = None,
-            minexponent: int|float|None = None,
-            nticks: int|None = None,
-            separatethousands: bool|None = None,
-            showexponent: Any|None = None,
-            showgrid: bool|None = None,
-            showline: bool|None = None,
-            showticklabels: bool|None = None,
-            showtickprefix: Any|None = None,
-            showticksuffix: Any|None = None,
-            tick0: Any|None = None,
-            tickangle: int|float|None = None,
-            tickcolor: str|None = None,
-            tickfont: None|None = None,
-            tickformat: str|None = None,
-            tickformatstops: None|None = None,
-            tickformatstopdefaults: None|None = None,
-            ticklabelstep: int|None = None,
-            ticklen: int|float|None = None,
-            tickmode: Any|None = None,
-            tickprefix: str|None = None,
-            ticks: Any|None = None,
-            ticksuffix: str|None = None,
-            ticktext: NDArray|None = None,
-            ticktextsrc: str|None = None,
-            tickvals: NDArray|None = None,
-            tickvalssrc: str|None = None,
-            tickwidth: int|float|None = None,
-            title: None|None = None,
-            uirevision: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color: str | None = None,
+        dtick: Any | None = None,
+        exponentformat: Any | None = None,
+        gridcolor: str | None = None,
+        griddash: str | None = None,
+        gridwidth: int | float | None = None,
+        hoverformat: str | None = None,
+        labelalias: Any | None = None,
+        layer: Any | None = None,
+        linecolor: str | None = None,
+        linewidth: int | float | None = None,
+        min: int | float | None = None,
+        minexponent: int | float | None = None,
+        nticks: int | None = None,
+        separatethousands: bool | None = None,
+        showexponent: Any | None = None,
+        showgrid: bool | None = None,
+        showline: bool | None = None,
+        showticklabels: bool | None = None,
+        showtickprefix: Any | None = None,
+        showticksuffix: Any | None = None,
+        tick0: Any | None = None,
+        tickangle: int | float | None = None,
+        tickcolor: str | None = None,
+        tickfont: None | None = None,
+        tickformat: str | None = None,
+        tickformatstops: None | None = None,
+        tickformatstopdefaults: None | None = None,
+        ticklabelstep: int | None = None,
+        ticklen: int | float | None = None,
+        tickmode: Any | None = None,
+        tickprefix: str | None = None,
+        ticks: Any | None = None,
+        ticksuffix: str | None = None,
+        ticktext: NDArray | None = None,
+        ticktextsrc: str | None = None,
+        tickvals: NDArray | None = None,
+        tickvalssrc: str | None = None,
+        tickwidth: int | float | None = None,
+        title: None | None = None,
+        uirevision: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Caxis object
 
@@ -1454,13 +1410,11 @@ class Caxis(_BaseLayoutHierarchyType):
         -------
         Caxis
         """
-        super().__init__('caxis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("caxis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1468,65 +1422,56 @@ class Caxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.ternary.Caxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.ternary.Caxis`""")
+an instance of :class:`plotly.graph_objs.layout.ternary.Caxis`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('dtick', arg, dtick)
-        self._init_provided('exponentformat', arg, exponentformat)
-        self._init_provided('gridcolor', arg, gridcolor)
-        self._init_provided('griddash', arg, griddash)
-        self._init_provided('gridwidth', arg, gridwidth)
-        self._init_provided('hoverformat', arg, hoverformat)
-        self._init_provided('labelalias', arg, labelalias)
-        self._init_provided('layer', arg, layer)
-        self._init_provided('linecolor', arg, linecolor)
-        self._init_provided('linewidth', arg, linewidth)
-        self._init_provided('min', arg, min)
-        self._init_provided('minexponent', arg, minexponent)
-        self._init_provided('nticks', arg, nticks)
-        self._init_provided('separatethousands', arg, separatethousands)
-        self._init_provided('showexponent', arg, showexponent)
-        self._init_provided('showgrid', arg, showgrid)
-        self._init_provided('showline', arg, showline)
-        self._init_provided('showticklabels', arg, showticklabels)
-        self._init_provided('showtickprefix', arg, showtickprefix)
-        self._init_provided('showticksuffix', arg, showticksuffix)
-        self._init_provided('tick0', arg, tick0)
-        self._init_provided('tickangle', arg, tickangle)
-        self._init_provided('tickcolor', arg, tickcolor)
-        self._init_provided('tickfont', arg, tickfont)
-        self._init_provided('tickformat', arg, tickformat)
-        self._init_provided('tickformatstops', arg, tickformatstops)
-        self._init_provided('tickformatstopdefaults', arg, tickformatstopdefaults)
-        self._init_provided('ticklabelstep', arg, ticklabelstep)
-        self._init_provided('ticklen', arg, ticklen)
-        self._init_provided('tickmode', arg, tickmode)
-        self._init_provided('tickprefix', arg, tickprefix)
-        self._init_provided('ticks', arg, ticks)
-        self._init_provided('ticksuffix', arg, ticksuffix)
-        self._init_provided('ticktext', arg, ticktext)
-        self._init_provided('ticktextsrc', arg, ticktextsrc)
-        self._init_provided('tickvals', arg, tickvals)
-        self._init_provided('tickvalssrc', arg, tickvalssrc)
-        self._init_provided('tickwidth', arg, tickwidth)
-        self._init_provided('title', arg, title)
-        self._init_provided('uirevision', arg, uirevision)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("dtick", arg, dtick)
+        self._init_provided("exponentformat", arg, exponentformat)
+        self._init_provided("gridcolor", arg, gridcolor)
+        self._init_provided("griddash", arg, griddash)
+        self._init_provided("gridwidth", arg, gridwidth)
+        self._init_provided("hoverformat", arg, hoverformat)
+        self._init_provided("labelalias", arg, labelalias)
+        self._init_provided("layer", arg, layer)
+        self._init_provided("linecolor", arg, linecolor)
+        self._init_provided("linewidth", arg, linewidth)
+        self._init_provided("min", arg, min)
+        self._init_provided("minexponent", arg, minexponent)
+        self._init_provided("nticks", arg, nticks)
+        self._init_provided("separatethousands", arg, separatethousands)
+        self._init_provided("showexponent", arg, showexponent)
+        self._init_provided("showgrid", arg, showgrid)
+        self._init_provided("showline", arg, showline)
+        self._init_provided("showticklabels", arg, showticklabels)
+        self._init_provided("showtickprefix", arg, showtickprefix)
+        self._init_provided("showticksuffix", arg, showticksuffix)
+        self._init_provided("tick0", arg, tick0)
+        self._init_provided("tickangle", arg, tickangle)
+        self._init_provided("tickcolor", arg, tickcolor)
+        self._init_provided("tickfont", arg, tickfont)
+        self._init_provided("tickformat", arg, tickformat)
+        self._init_provided("tickformatstops", arg, tickformatstops)
+        self._init_provided("tickformatstopdefaults", arg, tickformatstopdefaults)
+        self._init_provided("ticklabelstep", arg, ticklabelstep)
+        self._init_provided("ticklen", arg, ticklen)
+        self._init_provided("tickmode", arg, tickmode)
+        self._init_provided("tickprefix", arg, tickprefix)
+        self._init_provided("ticks", arg, ticks)
+        self._init_provided("ticksuffix", arg, ticksuffix)
+        self._init_provided("ticktext", arg, ticktext)
+        self._init_provided("ticktextsrc", arg, ticktextsrc)
+        self._init_provided("tickvals", arg, tickvals)
+        self._init_provided("tickvalssrc", arg, tickvalssrc)
+        self._init_provided("tickwidth", arg, tickwidth)
+        self._init_provided("title", arg, title)
+        self._init_provided("uirevision", arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

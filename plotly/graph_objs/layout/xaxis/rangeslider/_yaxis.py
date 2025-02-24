@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,37 +7,31 @@ import copy as _copy
 
 class YAxis(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.xaxis.rangeslider'
-    _path_str = 'layout.xaxis.rangeslider.yaxis'
+    _parent_path_str = "layout.xaxis.rangeslider"
+    _path_str = "layout.xaxis.rangeslider.yaxis"
     _valid_props = {"range", "rangemode"}
 
-    # range
-    # -----
     @property
     def range(self):
         """
-        Sets the range of this axis for the rangeslider.
+            Sets the range of this axis for the rangeslider.
 
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            The 'range' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
-    # rangemode
-    # ---------
     @property
     def rangemode(self):
         """
@@ -57,14 +49,12 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['rangemode']
+        return self["rangemode"]
 
     @rangemode.setter
     def rangemode(self, val):
-        self['rangemode'] = val
+        self["rangemode"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -78,12 +68,14 @@ class YAxis(_BaseLayoutHierarchyType):
             current range of the corresponding y-axis on the main
             subplot is used.
         """
-    def __init__(self,
-            arg=None,
-            range: list|None = None,
-            rangemode: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        range: list | None = None,
+        rangemode: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new YAxis object
 
@@ -107,13 +99,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         YAxis
         """
-        super().__init__('yaxis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("yaxis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -121,26 +111,17 @@ class YAxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.xaxis.rangeslider.YAxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`""")
+an instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('range', arg, range)
-        self._init_provided('rangemode', arg, rangemode)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("range", arg, range)
+        self._init_provided("rangemode", arg, rangemode)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

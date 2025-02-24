@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,23 @@ import copy as _copy
 
 class Pattern(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'funnelarea.marker'
-    _path_str = 'funnelarea.marker.pattern'
-    _valid_props = {"bgcolor", "bgcolorsrc", "fgcolor", "fgcolorsrc", "fgopacity", "fillmode", "shape", "shapesrc", "size", "sizesrc", "solidity", "soliditysrc"}
+    _parent_path_str = "funnelarea.marker"
+    _path_str = "funnelarea.marker.pattern"
+    _valid_props = {
+        "bgcolor",
+        "bgcolorsrc",
+        "fgcolor",
+        "fgcolorsrc",
+        "fgopacity",
+        "fillmode",
+        "shape",
+        "shapesrc",
+        "size",
+        "sizesrc",
+        "solidity",
+        "soliditysrc",
+    }
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -37,14 +44,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str|NDArray
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # bgcolorsrc
-    # ----------
     @property
     def bgcolorsrc(self):
         """
@@ -57,14 +62,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bgcolorsrc']
+        return self["bgcolorsrc"]
 
     @bgcolorsrc.setter
     def bgcolorsrc(self, val):
-        self['bgcolorsrc'] = val
+        self["bgcolorsrc"] = val
 
-    # fgcolor
-    # -------
     @property
     def fgcolor(self):
         """
@@ -85,14 +88,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str|NDArray
         """
-        return self['fgcolor']
+        return self["fgcolor"]
 
     @fgcolor.setter
     def fgcolor(self, val):
-        self['fgcolor'] = val
+        self["fgcolor"] = val
 
-    # fgcolorsrc
-    # ----------
     @property
     def fgcolorsrc(self):
         """
@@ -105,14 +106,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['fgcolorsrc']
+        return self["fgcolorsrc"]
 
     @fgcolorsrc.setter
     def fgcolorsrc(self, val):
-        self['fgcolorsrc'] = val
+        self["fgcolorsrc"] = val
 
-    # fgopacity
-    # ---------
     @property
     def fgopacity(self):
         """
@@ -126,14 +125,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['fgopacity']
+        return self["fgopacity"]
 
     @fgopacity.setter
     def fgopacity(self, val):
-        self['fgopacity'] = val
+        self["fgopacity"] = val
 
-    # fillmode
-    # --------
     @property
     def fillmode(self):
         """
@@ -148,14 +145,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['fillmode']
+        return self["fillmode"]
 
     @fillmode.setter
     def fillmode(self, val):
-        self['fillmode'] = val
+        self["fillmode"] = val
 
-    # shape
-    # -----
     @property
     def shape(self):
         """
@@ -171,14 +166,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         Any|NDArray
         """
-        return self['shape']
+        return self["shape"]
 
     @shape.setter
     def shape(self, val):
-        self['shape'] = val
+        self["shape"] = val
 
-    # shapesrc
-    # --------
     @property
     def shapesrc(self):
         """
@@ -191,14 +184,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['shapesrc']
+        return self["shapesrc"]
 
     @shapesrc.setter
     def shapesrc(self, val):
-        self['shapesrc'] = val
+        self["shapesrc"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -213,14 +204,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         int|float|NDArray
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
-    # sizesrc
-    # -------
     @property
     def sizesrc(self):
         """
@@ -233,14 +222,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sizesrc']
+        return self["sizesrc"]
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self['sizesrc'] = val
+        self["sizesrc"] = val
 
-    # solidity
-    # --------
     @property
     def solidity(self):
         """
@@ -257,14 +244,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         int|float|NDArray
         """
-        return self['solidity']
+        return self["solidity"]
 
     @solidity.setter
     def solidity(self, val):
-        self['solidity'] = val
+        self["solidity"] = val
 
-    # soliditysrc
-    # -----------
     @property
     def soliditysrc(self):
         """
@@ -277,14 +262,12 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['soliditysrc']
+        return self["soliditysrc"]
 
     @soliditysrc.setter
     def soliditysrc(self, val):
-        self['soliditysrc'] = val
+        self["soliditysrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -335,22 +318,24 @@ class Pattern(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `solidity`.
         """
-    def __init__(self,
-            arg=None,
-            bgcolor: str|None = None,
-            bgcolorsrc: str|None = None,
-            fgcolor: str|None = None,
-            fgcolorsrc: str|None = None,
-            fgopacity: int|float|None = None,
-            fillmode: Any|None = None,
-            shape: Any|None = None,
-            shapesrc: str|None = None,
-            size: int|float|None = None,
-            sizesrc: str|None = None,
-            solidity: int|float|None = None,
-            soliditysrc: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        bgcolor: str | None = None,
+        bgcolorsrc: str | None = None,
+        fgcolor: str | None = None,
+        fgcolorsrc: str | None = None,
+        fgopacity: int | float | None = None,
+        fillmode: Any | None = None,
+        shape: Any | None = None,
+        shapesrc: str | None = None,
+        size: int | float | None = None,
+        sizesrc: str | None = None,
+        solidity: int | float | None = None,
+        soliditysrc: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Pattern object
 
@@ -413,13 +398,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         Pattern
         """
-        super().__init__('pattern')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("pattern")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -427,36 +410,27 @@ class Pattern(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.funnelarea.marker.Pattern
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.funnelarea.marker.Pattern`""")
+an instance of :class:`plotly.graph_objs.funnelarea.marker.Pattern`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('bgcolorsrc', arg, bgcolorsrc)
-        self._init_provided('fgcolor', arg, fgcolor)
-        self._init_provided('fgcolorsrc', arg, fgcolorsrc)
-        self._init_provided('fgopacity', arg, fgopacity)
-        self._init_provided('fillmode', arg, fillmode)
-        self._init_provided('shape', arg, shape)
-        self._init_provided('shapesrc', arg, shapesrc)
-        self._init_provided('size', arg, size)
-        self._init_provided('sizesrc', arg, sizesrc)
-        self._init_provided('solidity', arg, solidity)
-        self._init_provided('soliditysrc', arg, soliditysrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("bgcolorsrc", arg, bgcolorsrc)
+        self._init_provided("fgcolor", arg, fgcolor)
+        self._init_provided("fgcolorsrc", arg, fgcolorsrc)
+        self._init_provided("fgopacity", arg, fgopacity)
+        self._init_provided("fillmode", arg, fillmode)
+        self._init_provided("shape", arg, shape)
+        self._init_provided("shapesrc", arg, shapesrc)
+        self._init_provided("size", arg, size)
+        self._init_provided("sizesrc", arg, sizesrc)
+        self._init_provided("solidity", arg, solidity)
+        self._init_provided("soliditysrc", arg, soliditysrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

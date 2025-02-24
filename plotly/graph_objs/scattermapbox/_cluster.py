@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,21 @@ import copy as _copy
 
 class Cluster(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scattermapbox'
-    _path_str = 'scattermapbox.cluster'
-    _valid_props = {"color", "colorsrc", "enabled", "maxzoom", "opacity", "opacitysrc", "size", "sizesrc", "step", "stepsrc"}
+    _parent_path_str = "scattermapbox"
+    _path_str = "scattermapbox.cluster"
+    _valid_props = {
+        "color",
+        "colorsrc",
+        "enabled",
+        "maxzoom",
+        "opacity",
+        "opacitysrc",
+        "size",
+        "sizesrc",
+        "step",
+        "stepsrc",
+    }
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -34,14 +39,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str|NDArray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -54,14 +57,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
-    # enabled
-    # -------
     @property
     def enabled(self):
         """
@@ -74,14 +75,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['enabled']
+        return self["enabled"]
 
     @enabled.setter
     def enabled(self, val):
-        self['enabled'] = val
+        self["enabled"] = val
 
-    # maxzoom
-    # -------
     @property
     def maxzoom(self):
         """
@@ -95,14 +94,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['maxzoom']
+        return self["maxzoom"]
 
     @maxzoom.setter
     def maxzoom(self, val):
-        self['maxzoom'] = val
+        self["maxzoom"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -116,14 +113,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         int|float|NDArray
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # opacitysrc
-    # ----------
     @property
     def opacitysrc(self):
         """
@@ -136,14 +131,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['opacitysrc']
+        return self["opacitysrc"]
 
     @opacitysrc.setter
     def opacitysrc(self, val):
-        self['opacitysrc'] = val
+        self["opacitysrc"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -157,14 +150,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         int|float|NDArray
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
-    # sizesrc
-    # -------
     @property
     def sizesrc(self):
         """
@@ -177,14 +168,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sizesrc']
+        return self["sizesrc"]
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self['sizesrc'] = val
+        self["sizesrc"] = val
 
-    # step
-    # ----
     @property
     def step(self):
         """
@@ -202,14 +191,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         int|float|NDArray
         """
-        return self['step']
+        return self["step"]
 
     @step.setter
     def step(self, val):
-        self['step'] = val
+        self["step"] = val
 
-    # stepsrc
-    # -------
     @property
     def stepsrc(self):
         """
@@ -222,14 +209,12 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['stepsrc']
+        return self["stepsrc"]
 
     @stepsrc.setter
     def stepsrc(self, val):
-        self['stepsrc'] = val
+        self["stepsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -264,20 +249,22 @@ class Cluster(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `step`.
         """
-    def __init__(self,
-            arg=None,
-            color: str|None = None,
-            colorsrc: str|None = None,
-            enabled: bool|None = None,
-            maxzoom: int|float|None = None,
-            opacity: int|float|None = None,
-            opacitysrc: str|None = None,
-            size: int|float|None = None,
-            sizesrc: str|None = None,
-            step: int|float|None = None,
-            stepsrc: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color: str | None = None,
+        colorsrc: str | None = None,
+        enabled: bool | None = None,
+        maxzoom: int | float | None = None,
+        opacity: int | float | None = None,
+        opacitysrc: str | None = None,
+        size: int | float | None = None,
+        sizesrc: str | None = None,
+        step: int | float | None = None,
+        stepsrc: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Cluster object
 
@@ -322,13 +309,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         Cluster
         """
-        super().__init__('cluster')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("cluster")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -336,34 +321,25 @@ class Cluster(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scattermapbox.Cluster
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattermapbox.Cluster`""")
+an instance of :class:`plotly.graph_objs.scattermapbox.Cluster`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('colorsrc', arg, colorsrc)
-        self._init_provided('enabled', arg, enabled)
-        self._init_provided('maxzoom', arg, maxzoom)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('opacitysrc', arg, opacitysrc)
-        self._init_provided('size', arg, size)
-        self._init_provided('sizesrc', arg, sizesrc)
-        self._init_provided('step', arg, step)
-        self._init_provided('stepsrc', arg, stepsrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("colorsrc", arg, colorsrc)
+        self._init_provided("enabled", arg, enabled)
+        self._init_provided("maxzoom", arg, maxzoom)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("opacitysrc", arg, opacitysrc)
+        self._init_provided("size", arg, size)
+        self._init_provided("sizesrc", arg, sizesrc)
+        self._init_provided("step", arg, step)
+        self._init_provided("stepsrc", arg, stepsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

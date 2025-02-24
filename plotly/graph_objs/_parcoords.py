@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,37 @@ import copy as _copy
 
 class Parcoords(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'parcoords'
-    _valid_props = {"customdata", "customdatasrc", "dimensiondefaults", "dimensions", "domain", "ids", "idssrc", "labelangle", "labelfont", "labelside", "legend", "legendgrouptitle", "legendrank", "legendwidth", "line", "meta", "metasrc", "name", "rangefont", "stream", "tickfont", "type", "uid", "uirevision", "unselected", "visible"}
+    _parent_path_str = ""
+    _path_str = "parcoords"
+    _valid_props = {
+        "customdata",
+        "customdatasrc",
+        "dimensiondefaults",
+        "dimensions",
+        "domain",
+        "ids",
+        "idssrc",
+        "labelangle",
+        "labelfont",
+        "labelside",
+        "legend",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "line",
+        "meta",
+        "metasrc",
+        "name",
+        "rangefont",
+        "stream",
+        "tickfont",
+        "type",
+        "uid",
+        "uirevision",
+        "unselected",
+        "visible",
+    }
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -32,14 +53,12 @@ class Parcoords(_BaseTraceType):
         -------
         NDArray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -53,14 +72,12 @@ class Parcoords(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # dimensions
-    # ----------
     @property
     def dimensions(self):
         """
@@ -77,14 +94,12 @@ class Parcoords(_BaseTraceType):
         -------
         tuple[plotly.graph_objs.parcoords.Dimension]
         """
-        return self['dimensions']
+        return self["dimensions"]
 
     @dimensions.setter
     def dimensions(self, val):
-        self['dimensions'] = val
+        self["dimensions"] = val
 
-    # dimensiondefaults
-    # -----------------
     @property
     def dimensiondefaults(self):
         """
@@ -103,14 +118,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Dimension
         """
-        return self['dimensiondefaults']
+        return self["dimensiondefaults"]
 
     @dimensiondefaults.setter
     def dimensiondefaults(self, val):
-        self['dimensiondefaults'] = val
+        self["dimensiondefaults"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -124,14 +137,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -146,14 +157,12 @@ class Parcoords(_BaseTraceType):
         -------
         NDArray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -166,14 +175,12 @@ class Parcoords(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # labelangle
-    # ----------
     @property
     def labelangle(self):
         """
@@ -191,14 +198,12 @@ class Parcoords(_BaseTraceType):
         -------
         int|float
         """
-        return self['labelangle']
+        return self["labelangle"]
 
     @labelangle.setter
     def labelangle(self, val):
-        self['labelangle'] = val
+        self["labelangle"] = val
 
-    # labelfont
-    # ---------
     @property
     def labelfont(self):
         """
@@ -214,14 +219,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Labelfont
         """
-        return self['labelfont']
+        return self["labelfont"]
 
     @labelfont.setter
     def labelfont(self, val):
-        self['labelfont'] = val
+        self["labelfont"] = val
 
-    # labelside
-    # ---------
     @property
     def labelside(self):
         """
@@ -238,14 +241,12 @@ class Parcoords(_BaseTraceType):
         -------
         Any
         """
-        return self['labelside']
+        return self["labelside"]
 
     @labelside.setter
     def labelside(self, val):
-        self['labelside'] = val
+        self["labelside"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -263,14 +264,12 @@ class Parcoords(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -284,14 +283,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -311,14 +308,12 @@ class Parcoords(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -332,14 +327,12 @@ class Parcoords(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -353,14 +346,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -381,14 +372,12 @@ class Parcoords(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -401,14 +390,12 @@ class Parcoords(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -423,14 +410,12 @@ class Parcoords(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # rangefont
-    # ---------
     @property
     def rangefont(self):
         """
@@ -446,14 +431,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Rangefont
         """
-        return self['rangefont']
+        return self["rangefont"]
 
     @rangefont.setter
     def rangefont(self, val):
-        self['rangefont'] = val
+        self["rangefont"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -467,14 +450,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # tickfont
-    # --------
     @property
     def tickfont(self):
         """
@@ -490,14 +471,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -512,14 +491,12 @@ class Parcoords(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -545,14 +522,12 @@ class Parcoords(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # unselected
-    # ----------
     @property
     def unselected(self):
         """
@@ -566,14 +541,12 @@ class Parcoords(_BaseTraceType):
         -------
         plotly.graph_objs.parcoords.Unselected
         """
-        return self['unselected']
+        return self["unselected"]
 
     @unselected.setter
     def unselected(self, val):
-        self['unselected'] = val
+        self["unselected"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -589,20 +562,16 @@ class Parcoords(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -729,35 +698,37 @@ class Parcoords(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-    def __init__(self,
-            arg=None,
-            customdata: NDArray|None = None,
-            customdatasrc: str|None = None,
-            dimensions: None|None = None,
-            dimensiondefaults: None|None = None,
-            domain: None|None = None,
-            ids: NDArray|None = None,
-            idssrc: str|None = None,
-            labelangle: int|float|None = None,
-            labelfont: None|None = None,
-            labelside: Any|None = None,
-            legend: str|None = None,
-            legendgrouptitle: None|None = None,
-            legendrank: int|float|None = None,
-            legendwidth: int|float|None = None,
-            line: None|None = None,
-            meta: Any|None = None,
-            metasrc: str|None = None,
-            name: str|None = None,
-            rangefont: None|None = None,
-            stream: None|None = None,
-            tickfont: None|None = None,
-            uid: str|None = None,
-            uirevision: Any|None = None,
-            unselected: None|None = None,
-            visible: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        customdata: NDArray | None = None,
+        customdatasrc: str | None = None,
+        dimensions: None | None = None,
+        dimensiondefaults: None | None = None,
+        domain: None | None = None,
+        ids: NDArray | None = None,
+        idssrc: str | None = None,
+        labelangle: int | float | None = None,
+        labelfont: None | None = None,
+        labelside: Any | None = None,
+        legend: str | None = None,
+        legendgrouptitle: None | None = None,
+        legendrank: int | float | None = None,
+        legendwidth: int | float | None = None,
+        line: None | None = None,
+        meta: Any | None = None,
+        metasrc: str | None = None,
+        name: str | None = None,
+        rangefont: None | None = None,
+        stream: None | None = None,
+        tickfont: None | None = None,
+        uid: str | None = None,
+        uirevision: Any | None = None,
+        unselected: None | None = None,
+        visible: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Parcoords object
 
@@ -897,13 +868,11 @@ class Parcoords(_BaseTraceType):
         -------
         Parcoords
         """
-        super().__init__('parcoords')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("parcoords")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -911,55 +880,43 @@ class Parcoords(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Parcoords
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Parcoords`""")
+an instance of :class:`plotly.graph_objs.Parcoords`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('dimensions', arg, dimensions)
-        self._init_provided('dimensiondefaults', arg, dimensiondefaults)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('labelangle', arg, labelangle)
-        self._init_provided('labelfont', arg, labelfont)
-        self._init_provided('labelside', arg, labelside)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('line', arg, line)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('rangefont', arg, rangefont)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('tickfont', arg, tickfont)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('unselected', arg, unselected)
-        self._init_provided('visible', arg, visible)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("dimensions", arg, dimensions)
+        self._init_provided("dimensiondefaults", arg, dimensiondefaults)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("labelangle", arg, labelangle)
+        self._init_provided("labelfont", arg, labelfont)
+        self._init_provided("labelside", arg, labelside)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("line", arg, line)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("rangefont", arg, rangefont)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("tickfont", arg, tickfont)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("unselected", arg, unselected)
+        self._init_provided("visible", arg, visible)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'parcoords'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "parcoords"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

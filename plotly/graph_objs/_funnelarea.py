@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,58 @@ import copy as _copy
 
 class Funnelarea(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'funnelarea'
-    _valid_props = {"aspectratio", "baseratio", "customdata", "customdatasrc", "dlabel", "domain", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "insidetextfont", "label0", "labels", "labelssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "marker", "meta", "metasrc", "name", "opacity", "scalegroup", "showlegend", "stream", "text", "textfont", "textinfo", "textposition", "textpositionsrc", "textsrc", "texttemplate", "texttemplatesrc", "title", "type", "uid", "uirevision", "values", "valuessrc", "visible"}
+    _parent_path_str = ""
+    _path_str = "funnelarea"
+    _valid_props = {
+        "aspectratio",
+        "baseratio",
+        "customdata",
+        "customdatasrc",
+        "dlabel",
+        "domain",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "insidetextfont",
+        "label0",
+        "labels",
+        "labelssrc",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "marker",
+        "meta",
+        "metasrc",
+        "name",
+        "opacity",
+        "scalegroup",
+        "showlegend",
+        "stream",
+        "text",
+        "textfont",
+        "textinfo",
+        "textposition",
+        "textpositionsrc",
+        "textsrc",
+        "texttemplate",
+        "texttemplatesrc",
+        "title",
+        "type",
+        "uid",
+        "uirevision",
+        "values",
+        "valuessrc",
+        "visible",
+    }
 
-    # aspectratio
-    # -----------
     @property
     def aspectratio(self):
         """
@@ -29,14 +71,12 @@ class Funnelarea(_BaseTraceType):
         -------
         int|float
         """
-        return self['aspectratio']
+        return self["aspectratio"]
 
     @aspectratio.setter
     def aspectratio(self, val):
-        self['aspectratio'] = val
+        self["aspectratio"] = val
 
-    # baseratio
-    # ---------
     @property
     def baseratio(self):
         """
@@ -49,14 +89,12 @@ class Funnelarea(_BaseTraceType):
         -------
         int|float
         """
-        return self['baseratio']
+        return self["baseratio"]
 
     @baseratio.setter
     def baseratio(self, val):
-        self['baseratio'] = val
+        self["baseratio"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -72,14 +110,12 @@ class Funnelarea(_BaseTraceType):
         -------
         NDArray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -93,14 +129,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # dlabel
-    # ------
     @property
     def dlabel(self):
         """
@@ -113,14 +147,12 @@ class Funnelarea(_BaseTraceType):
         -------
         int|float
         """
-        return self['dlabel']
+        return self["dlabel"]
 
     @dlabel.setter
     def dlabel(self, val):
-        self['dlabel'] = val
+        self["dlabel"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -134,14 +166,12 @@ class Funnelarea(_BaseTraceType):
         -------
         plotly.graph_objs.funnelarea.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -160,14 +190,12 @@ class Funnelarea(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -181,14 +209,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -202,14 +228,12 @@ class Funnelarea(_BaseTraceType):
         -------
         plotly.graph_objs.funnelarea.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -248,14 +272,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -269,14 +291,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -295,14 +315,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -316,14 +334,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -338,14 +354,12 @@ class Funnelarea(_BaseTraceType):
         -------
         NDArray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -358,14 +372,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # insidetextfont
-    # --------------
     @property
     def insidetextfont(self):
         """
@@ -381,14 +393,12 @@ class Funnelarea(_BaseTraceType):
         -------
         plotly.graph_objs.funnelarea.Insidetextfont
         """
-        return self['insidetextfont']
+        return self["insidetextfont"]
 
     @insidetextfont.setter
     def insidetextfont(self, val):
-        self['insidetextfont'] = val
+        self["insidetextfont"] = val
 
-    # label0
-    # ------
     @property
     def label0(self):
         """
@@ -403,14 +413,12 @@ class Funnelarea(_BaseTraceType):
         -------
         int|float
         """
-        return self['label0']
+        return self["label0"]
 
     @label0.setter
     def label0(self, val):
-        self['label0'] = val
+        self["label0"] = val
 
-    # labels
-    # ------
     @property
     def labels(self):
         """
@@ -427,14 +435,12 @@ class Funnelarea(_BaseTraceType):
         -------
         NDArray
         """
-        return self['labels']
+        return self["labels"]
 
     @labels.setter
     def labels(self, val):
-        self['labels'] = val
+        self["labels"] = val
 
-    # labelssrc
-    # ---------
     @property
     def labelssrc(self):
         """
@@ -447,14 +453,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['labelssrc']
+        return self["labelssrc"]
 
     @labelssrc.setter
     def labelssrc(self, val):
-        self['labelssrc'] = val
+        self["labelssrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -472,14 +476,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -495,14 +497,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -516,14 +516,12 @@ class Funnelarea(_BaseTraceType):
         -------
         plotly.graph_objs.funnelarea.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -543,14 +541,12 @@ class Funnelarea(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -564,14 +560,12 @@ class Funnelarea(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -585,14 +579,12 @@ class Funnelarea(_BaseTraceType):
         -------
         plotly.graph_objs.funnelarea.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -613,14 +605,12 @@ class Funnelarea(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -633,14 +623,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -655,14 +643,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -675,14 +661,12 @@ class Funnelarea(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # scalegroup
-    # ----------
     @property
     def scalegroup(self):
         """
@@ -698,14 +682,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['scalegroup']
+        return self["scalegroup"]
 
     @scalegroup.setter
     def scalegroup(self, val):
-        self['scalegroup'] = val
+        self["scalegroup"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -719,14 +701,12 @@ class Funnelarea(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -740,14 +720,12 @@ class Funnelarea(_BaseTraceType):
         -------
         plotly.graph_objs.funnelarea.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -764,14 +742,12 @@ class Funnelarea(_BaseTraceType):
         -------
         NDArray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -787,14 +763,12 @@ class Funnelarea(_BaseTraceType):
         -------
         plotly.graph_objs.funnelarea.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
-    # textinfo
-    # --------
     @property
     def textinfo(self):
         """
@@ -810,14 +784,12 @@ class Funnelarea(_BaseTraceType):
         -------
         Any
         """
-        return self['textinfo']
+        return self["textinfo"]
 
     @textinfo.setter
     def textinfo(self, val):
-        self['textinfo'] = val
+        self["textinfo"] = val
 
-    # textposition
-    # ------------
     @property
     def textposition(self):
         """
@@ -832,14 +804,12 @@ class Funnelarea(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['textposition']
+        return self["textposition"]
 
     @textposition.setter
     def textposition(self, val):
-        self['textposition'] = val
+        self["textposition"] = val
 
-    # textpositionsrc
-    # ---------------
     @property
     def textpositionsrc(self):
         """
@@ -853,14 +823,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['textpositionsrc']
+        return self["textpositionsrc"]
 
     @textpositionsrc.setter
     def textpositionsrc(self, val):
-        self['textpositionsrc'] = val
+        self["textpositionsrc"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -873,14 +841,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
-    # texttemplate
-    # ------------
     @property
     def texttemplate(self):
         """
@@ -908,14 +874,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['texttemplate']
+        return self["texttemplate"]
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self['texttemplate'] = val
+        self["texttemplate"] = val
 
-    # texttemplatesrc
-    # ---------------
     @property
     def texttemplatesrc(self):
         """
@@ -929,14 +893,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['texttemplatesrc']
+        return self["texttemplatesrc"]
 
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
-        self['texttemplatesrc'] = val
+        self["texttemplatesrc"] = val
 
-    # title
-    # -----
     @property
     def title(self):
         """
@@ -950,14 +912,12 @@ class Funnelarea(_BaseTraceType):
         -------
         plotly.graph_objs.funnelarea.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -972,14 +932,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1005,14 +963,12 @@ class Funnelarea(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # values
-    # ------
     @property
     def values(self):
         """
@@ -1026,14 +982,12 @@ class Funnelarea(_BaseTraceType):
         -------
         NDArray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
-    # valuessrc
-    # ---------
     @property
     def valuessrc(self):
         """
@@ -1046,14 +1000,12 @@ class Funnelarea(_BaseTraceType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1069,20 +1021,16 @@ class Funnelarea(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1318,56 +1266,58 @@ class Funnelarea(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-    def __init__(self,
-            arg=None,
-            aspectratio: int|float|None = None,
-            baseratio: int|float|None = None,
-            customdata: NDArray|None = None,
-            customdatasrc: str|None = None,
-            dlabel: int|float|None = None,
-            domain: None|None = None,
-            hoverinfo: Any|None = None,
-            hoverinfosrc: str|None = None,
-            hoverlabel: None|None = None,
-            hovertemplate: str|None = None,
-            hovertemplatesrc: str|None = None,
-            hovertext: str|None = None,
-            hovertextsrc: str|None = None,
-            ids: NDArray|None = None,
-            idssrc: str|None = None,
-            insidetextfont: None|None = None,
-            label0: int|float|None = None,
-            labels: NDArray|None = None,
-            labelssrc: str|None = None,
-            legend: str|None = None,
-            legendgroup: str|None = None,
-            legendgrouptitle: None|None = None,
-            legendrank: int|float|None = None,
-            legendwidth: int|float|None = None,
-            marker: None|None = None,
-            meta: Any|None = None,
-            metasrc: str|None = None,
-            name: str|None = None,
-            opacity: int|float|None = None,
-            scalegroup: str|None = None,
-            showlegend: bool|None = None,
-            stream: None|None = None,
-            text: NDArray|None = None,
-            textfont: None|None = None,
-            textinfo: Any|None = None,
-            textposition: Any|None = None,
-            textpositionsrc: str|None = None,
-            textsrc: str|None = None,
-            texttemplate: str|None = None,
-            texttemplatesrc: str|None = None,
-            title: None|None = None,
-            uid: str|None = None,
-            uirevision: Any|None = None,
-            values: NDArray|None = None,
-            valuessrc: str|None = None,
-            visible: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        aspectratio: int | float | None = None,
+        baseratio: int | float | None = None,
+        customdata: NDArray | None = None,
+        customdatasrc: str | None = None,
+        dlabel: int | float | None = None,
+        domain: None | None = None,
+        hoverinfo: Any | None = None,
+        hoverinfosrc: str | None = None,
+        hoverlabel: None | None = None,
+        hovertemplate: str | None = None,
+        hovertemplatesrc: str | None = None,
+        hovertext: str | None = None,
+        hovertextsrc: str | None = None,
+        ids: NDArray | None = None,
+        idssrc: str | None = None,
+        insidetextfont: None | None = None,
+        label0: int | float | None = None,
+        labels: NDArray | None = None,
+        labelssrc: str | None = None,
+        legend: str | None = None,
+        legendgroup: str | None = None,
+        legendgrouptitle: None | None = None,
+        legendrank: int | float | None = None,
+        legendwidth: int | float | None = None,
+        marker: None | None = None,
+        meta: Any | None = None,
+        metasrc: str | None = None,
+        name: str | None = None,
+        opacity: int | float | None = None,
+        scalegroup: str | None = None,
+        showlegend: bool | None = None,
+        stream: None | None = None,
+        text: NDArray | None = None,
+        textfont: None | None = None,
+        textinfo: Any | None = None,
+        textposition: Any | None = None,
+        textpositionsrc: str | None = None,
+        textsrc: str | None = None,
+        texttemplate: str | None = None,
+        texttemplatesrc: str | None = None,
+        title: None | None = None,
+        uid: str | None = None,
+        uirevision: Any | None = None,
+        values: NDArray | None = None,
+        valuessrc: str | None = None,
+        visible: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Funnelarea object
 
@@ -1618,13 +1568,11 @@ class Funnelarea(_BaseTraceType):
         -------
         Funnelarea
         """
-        super().__init__('funnelarea')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("funnelarea")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1632,76 +1580,64 @@ class Funnelarea(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Funnelarea
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Funnelarea`""")
+an instance of :class:`plotly.graph_objs.Funnelarea`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('aspectratio', arg, aspectratio)
-        self._init_provided('baseratio', arg, baseratio)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('dlabel', arg, dlabel)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('hovertext', arg, hovertext)
-        self._init_provided('hovertextsrc', arg, hovertextsrc)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('insidetextfont', arg, insidetextfont)
-        self._init_provided('label0', arg, label0)
-        self._init_provided('labels', arg, labels)
-        self._init_provided('labelssrc', arg, labelssrc)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('marker', arg, marker)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('scalegroup', arg, scalegroup)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('text', arg, text)
-        self._init_provided('textfont', arg, textfont)
-        self._init_provided('textinfo', arg, textinfo)
-        self._init_provided('textposition', arg, textposition)
-        self._init_provided('textpositionsrc', arg, textpositionsrc)
-        self._init_provided('textsrc', arg, textsrc)
-        self._init_provided('texttemplate', arg, texttemplate)
-        self._init_provided('texttemplatesrc', arg, texttemplatesrc)
-        self._init_provided('title', arg, title)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('values', arg, values)
-        self._init_provided('valuessrc', arg, valuessrc)
-        self._init_provided('visible', arg, visible)
+        self._init_provided("aspectratio", arg, aspectratio)
+        self._init_provided("baseratio", arg, baseratio)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("dlabel", arg, dlabel)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("insidetextfont", arg, insidetextfont)
+        self._init_provided("label0", arg, label0)
+        self._init_provided("labels", arg, labels)
+        self._init_provided("labelssrc", arg, labelssrc)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("marker", arg, marker)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("scalegroup", arg, scalegroup)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textfont", arg, textfont)
+        self._init_provided("textinfo", arg, textinfo)
+        self._init_provided("textposition", arg, textposition)
+        self._init_provided("textpositionsrc", arg, textpositionsrc)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("texttemplate", arg, texttemplate)
+        self._init_provided("texttemplatesrc", arg, texttemplatesrc)
+        self._init_provided("title", arg, title)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("values", arg, values)
+        self._init_provided("valuessrc", arg, valuessrc)
+        self._init_provided("visible", arg, visible)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'funnelarea'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "funnelarea"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

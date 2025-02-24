@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,23 @@ import copy as _copy
 
 class Rangeselector(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.xaxis'
-    _path_str = 'layout.xaxis.rangeselector'
-    _valid_props = {"activecolor", "bgcolor", "bordercolor", "borderwidth", "buttondefaults", "buttons", "font", "visible", "x", "xanchor", "y", "yanchor"}
+    _parent_path_str = "layout.xaxis"
+    _path_str = "layout.xaxis.rangeselector"
+    _valid_props = {
+        "activecolor",
+        "bgcolor",
+        "bordercolor",
+        "borderwidth",
+        "buttondefaults",
+        "buttons",
+        "font",
+        "visible",
+        "x",
+        "xanchor",
+        "y",
+        "yanchor",
+    }
 
-    # activecolor
-    # -----------
     @property
     def activecolor(self):
         """
@@ -33,14 +40,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['activecolor']
+        return self["activecolor"]
 
     @activecolor.setter
     def activecolor(self, val):
-        self['activecolor'] = val
+        self["activecolor"] = val
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -57,14 +62,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # bordercolor
-    # -----------
     @property
     def bordercolor(self):
         """
@@ -81,14 +84,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
-    # borderwidth
-    # -----------
     @property
     def borderwidth(self):
         """
@@ -102,14 +103,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
-    # buttons
-    # -------
     @property
     def buttons(self):
         """
@@ -126,14 +125,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.xaxis.rangeselector.Button]
         """
-        return self['buttons']
+        return self["buttons"]
 
     @buttons.setter
     def buttons(self, val):
-        self['buttons'] = val
+        self["buttons"] = val
 
-    # buttondefaults
-    # --------------
     @property
     def buttondefaults(self):
         """
@@ -152,14 +149,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.rangeselector.Button
         """
-        return self['buttondefaults']
+        return self["buttondefaults"]
 
     @buttondefaults.setter
     def buttondefaults(self, val):
-        self['buttondefaults'] = val
+        self["buttondefaults"] = val
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -175,14 +170,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.rangeselector.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -197,14 +190,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -218,14 +209,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # xanchor
-    # -------
     @property
     def xanchor(self):
         """
@@ -241,14 +230,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -262,14 +249,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # yanchor
-    # -------
     @property
     def yanchor(self):
         """
@@ -285,14 +270,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yanchor']
+        return self["yanchor"]
 
     @yanchor.setter
     def yanchor(self, val):
-        self['yanchor'] = val
+        self["yanchor"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -337,22 +320,24 @@ class Rangeselector(_BaseLayoutHierarchyType):
             anchor binds the `y` position to the "top", "middle" or
             "bottom" of the range selector.
         """
-    def __init__(self,
-            arg=None,
-            activecolor: str|None = None,
-            bgcolor: str|None = None,
-            bordercolor: str|None = None,
-            borderwidth: int|float|None = None,
-            buttons: None|None = None,
-            buttondefaults: None|None = None,
-            font: None|None = None,
-            visible: bool|None = None,
-            x: int|float|None = None,
-            xanchor: Any|None = None,
-            y: int|float|None = None,
-            yanchor: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        activecolor: str | None = None,
+        bgcolor: str | None = None,
+        bordercolor: str | None = None,
+        borderwidth: int | float | None = None,
+        buttons: None | None = None,
+        buttondefaults: None | None = None,
+        font: None | None = None,
+        visible: bool | None = None,
+        x: int | float | None = None,
+        xanchor: Any | None = None,
+        y: int | float | None = None,
+        yanchor: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Rangeselector object
 
@@ -407,13 +392,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         Rangeselector
         """
-        super().__init__('rangeselector')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("rangeselector")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -421,36 +404,27 @@ class Rangeselector(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeselector
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`""")
+an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('activecolor', arg, activecolor)
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('bordercolor', arg, bordercolor)
-        self._init_provided('borderwidth', arg, borderwidth)
-        self._init_provided('buttons', arg, buttons)
-        self._init_provided('buttondefaults', arg, buttondefaults)
-        self._init_provided('font', arg, font)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('x', arg, x)
-        self._init_provided('xanchor', arg, xanchor)
-        self._init_provided('y', arg, y)
-        self._init_provided('yanchor', arg, yanchor)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("activecolor", arg, activecolor)
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("bordercolor", arg, bordercolor)
+        self._init_provided("borderwidth", arg, borderwidth)
+        self._init_provided("buttons", arg, buttons)
+        self._init_provided("buttondefaults", arg, buttondefaults)
+        self._init_provided("font", arg, font)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("x", arg, x)
+        self._init_provided("xanchor", arg, xanchor)
+        self._init_provided("y", arg, y)
+        self._init_provided("yanchor", arg, yanchor)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

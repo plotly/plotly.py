@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Frame(_BaseFrameHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'frame'
+    _parent_path_str = ""
+    _path_str = "frame"
     _valid_props = {"baseframe", "data", "group", "layout", "name", "traces"}
 
-    # baseframe
-    # ---------
     @property
     def baseframe(self):
         """
@@ -33,14 +27,12 @@ class Frame(_BaseFrameHierarchyType):
         -------
         str
         """
-        return self['baseframe']
+        return self["baseframe"]
 
     @baseframe.setter
     def baseframe(self, val):
-        self['baseframe'] = val
+        self["baseframe"] = val
 
-    # data
-    # ----
     @property
     def data(self):
         """
@@ -51,14 +43,12 @@ class Frame(_BaseFrameHierarchyType):
         -------
         Any
         """
-        return self['data']
+        return self["data"]
 
     @data.setter
     def data(self, val):
-        self['data'] = val
+        self["data"] = val
 
-    # group
-    # -----
     @property
     def group(self):
         """
@@ -73,14 +63,12 @@ class Frame(_BaseFrameHierarchyType):
         -------
         str
         """
-        return self['group']
+        return self["group"]
 
     @group.setter
     def group(self, val):
-        self['group'] = val
+        self["group"] = val
 
-    # layout
-    # ------
     @property
     def layout(self):
         """
@@ -91,14 +79,12 @@ class Frame(_BaseFrameHierarchyType):
         -------
         Any
         """
-        return self['layout']
+        return self["layout"]
 
     @layout.setter
     def layout(self, val):
-        self['layout'] = val
+        self["layout"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -112,14 +98,12 @@ class Frame(_BaseFrameHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # traces
-    # ------
     @property
     def traces(self):
         """
@@ -132,14 +116,12 @@ class Frame(_BaseFrameHierarchyType):
         -------
         Any
         """
-        return self['traces']
+        return self["traces"]
 
     @traces.setter
     def traces(self, val):
-        self['traces'] = val
+        self["traces"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -164,16 +146,18 @@ class Frame(_BaseFrameHierarchyType):
             A list of trace indices that identify the respective
             traces in the data attribute
         """
-    def __init__(self,
-            arg=None,
-            baseframe: str|None = None,
-            data: Any|None = None,
-            group: str|None = None,
-            layout: Any|None = None,
-            name: str|None = None,
-            traces: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        baseframe: str | None = None,
+        data: Any | None = None,
+        group: str | None = None,
+        layout: Any | None = None,
+        name: str | None = None,
+        traces: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Frame object
 
@@ -207,13 +191,11 @@ class Frame(_BaseFrameHierarchyType):
         -------
         Frame
         """
-        super().__init__('frames')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("frames")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -221,30 +203,21 @@ class Frame(_BaseFrameHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Frame
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Frame`""")
+an instance of :class:`plotly.graph_objs.Frame`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('baseframe', arg, baseframe)
-        self._init_provided('data', arg, data)
-        self._init_provided('group', arg, group)
-        self._init_provided('layout', arg, layout)
-        self._init_provided('name', arg, name)
-        self._init_provided('traces', arg, traces)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("baseframe", arg, baseframe)
+        self._init_provided("data", arg, data)
+        self._init_provided("group", arg, group)
+        self._init_provided("layout", arg, layout)
+        self._init_provided("name", arg, name)
+        self._init_provided("traces", arg, traces)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

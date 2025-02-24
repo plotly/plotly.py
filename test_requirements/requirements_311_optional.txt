@@ -16,9 +16,10 @@ pyshp==2.1.3
 matplotlib==3.8.0
 scikit-image==0.22.0
 psutil==5.7.0
-kaleido
 orjson==3.8.12
-polars[timezone]
-pyarrow
 narwhals>=1.15.1
 anywidget==0.9.13
+polars[timezone]
+pyarrow
+kaleido
+plotly-geo

@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,18 @@ import copy as _copy
 
 class Lonaxis(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.geo'
-    _path_str = 'layout.geo.lonaxis'
-    _valid_props = {"dtick", "gridcolor", "griddash", "gridwidth", "range", "showgrid", "tick0"}
+    _parent_path_str = "layout.geo"
+    _path_str = "layout.geo.lonaxis"
+    _valid_props = {
+        "dtick",
+        "gridcolor",
+        "griddash",
+        "gridwidth",
+        "range",
+        "showgrid",
+        "tick0",
+    }
 
-    # dtick
-    # -----
     @property
     def dtick(self):
         """
@@ -29,14 +31,12 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
-    # gridcolor
-    # ---------
     @property
     def gridcolor(self):
         """
@@ -53,14 +53,12 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
-    # griddash
-    # --------
     @property
     def griddash(self):
         """
@@ -79,14 +77,12 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['griddash']
+        return self["griddash"]
 
     @griddash.setter
     def griddash(self, val):
-        self['griddash'] = val
+        self["griddash"] = val
 
-    # gridwidth
-    # ---------
     @property
     def gridwidth(self):
         """
@@ -99,40 +95,36 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
-    # range
-    # -----
     @property
     def range(self):
         """
-        Sets the range of this axis (in degrees), sets the map's
-        clipped coordinates.
+            Sets the range of this axis (in degrees), sets the map's
+            clipped coordinates.
 
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'range[1]' property is a number and may be specified as:
-          - An int or float
+            The 'range' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'range[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
-    # showgrid
-    # --------
     @property
     def showgrid(self):
         """
@@ -145,14 +137,12 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
-    # tick0
-    # -----
     @property
     def tick0(self):
         """
@@ -165,14 +155,12 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -195,17 +183,19 @@ class Lonaxis(_BaseLayoutHierarchyType):
         tick0
             Sets the graticule's starting tick longitude/latitude.
         """
-    def __init__(self,
-            arg=None,
-            dtick: int|float|None = None,
-            gridcolor: str|None = None,
-            griddash: str|None = None,
-            gridwidth: int|float|None = None,
-            range: list|None = None,
-            showgrid: bool|None = None,
-            tick0: int|float|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        dtick: int | float | None = None,
+        gridcolor: str | None = None,
+        griddash: str | None = None,
+        gridwidth: int | float | None = None,
+        range: list | None = None,
+        showgrid: bool | None = None,
+        tick0: int | float | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Lonaxis object
 
@@ -238,13 +228,11 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         Lonaxis
         """
-        super().__init__('lonaxis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("lonaxis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -252,31 +240,22 @@ class Lonaxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.geo.Lonaxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.Lonaxis`""")
+an instance of :class:`plotly.graph_objs.layout.geo.Lonaxis`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('dtick', arg, dtick)
-        self._init_provided('gridcolor', arg, gridcolor)
-        self._init_provided('griddash', arg, griddash)
-        self._init_provided('gridwidth', arg, gridwidth)
-        self._init_provided('range', arg, range)
-        self._init_provided('showgrid', arg, showgrid)
-        self._init_provided('tick0', arg, tick0)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("dtick", arg, dtick)
+        self._init_provided("gridcolor", arg, gridcolor)
+        self._init_provided("griddash", arg, griddash)
+        self._init_provided("gridwidth", arg, gridwidth)
+        self._init_provided("range", arg, range)
+        self._init_provided("showgrid", arg, showgrid)
+        self._init_provided("tick0", arg, tick0)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Spaceframe(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'volume'
-    _path_str = 'volume.spaceframe'
+    _parent_path_str = "volume"
+    _path_str = "volume.spaceframe"
     _valid_props = {"fill", "show"}
 
-    # fill
-    # ----
     @property
     def fill(self):
         """
@@ -32,14 +26,12 @@ class Spaceframe(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -54,14 +46,12 @@ class Spaceframe(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -76,12 +66,14 @@ class Spaceframe(_BaseTraceHierarchyType):
             surfaces are disabled or filled with values less than
             1.
         """
-    def __init__(self,
-            arg=None,
-            fill: int|float|None = None,
-            show: bool|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        fill: int | float | None = None,
+        show: bool | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Spaceframe object
 
@@ -106,13 +98,11 @@ class Spaceframe(_BaseTraceHierarchyType):
         -------
         Spaceframe
         """
-        super().__init__('spaceframe')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("spaceframe")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -120,26 +110,17 @@ class Spaceframe(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.volume.Spaceframe
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.volume.Spaceframe`""")
+an instance of :class:`plotly.graph_objs.volume.Spaceframe`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('fill', arg, fill)
-        self._init_provided('show', arg, show)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("fill", arg, fill)
+        self._init_provided("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

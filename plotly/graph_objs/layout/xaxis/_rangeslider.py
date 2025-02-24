@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,19 @@ import copy as _copy
 
 class Rangeslider(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout.xaxis'
-    _path_str = 'layout.xaxis.rangeslider'
-    _valid_props = {"autorange", "bgcolor", "bordercolor", "borderwidth", "range", "thickness", "visible", "yaxis"}
+    _parent_path_str = "layout.xaxis"
+    _path_str = "layout.xaxis.rangeslider"
+    _valid_props = {
+        "autorange",
+        "bgcolor",
+        "bordercolor",
+        "borderwidth",
+        "range",
+        "thickness",
+        "visible",
+        "yaxis",
+    }
 
-    # autorange
-    # ---------
     @property
     def autorange(self):
         """
@@ -31,14 +34,12 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['autorange']
+        return self["autorange"]
 
     @autorange.setter
     def autorange(self, val):
-        self['autorange'] = val
+        self["autorange"] = val
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -55,14 +56,12 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # bordercolor
-    # -----------
     @property
     def bordercolor(self):
         """
@@ -79,14 +78,12 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
-    # borderwidth
-    # -----------
     @property
     def borderwidth(self):
         """
@@ -100,44 +97,40 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
-    # range
-    # -----
     @property
     def range(self):
         """
-        Sets the range of the range slider. If not set, defaults to the
-        full xaxis range. If the axis `type` is "log", then you must
-        take the log of your desired range. If the axis `type` is
-        "date", it should be date strings, like date data, though Date
-        objects and unix milliseconds will be accepted and converted to
-        strings. If the axis `type` is "category", it should be
-        numbers, using the scale where each category is assigned a
-        serial number from zero in the order it appears.
+            Sets the range of the range slider. If not set, defaults to the
+            full xaxis range. If the axis `type` is "log", then you must
+            take the log of your desired range. If the axis `type` is
+            "date", it should be date strings, like date data, though Date
+            objects and unix milliseconds will be accepted and converted to
+            strings. If the axis `type` is "category", it should be
+            numbers, using the scale where each category is assigned a
+            serial number from zero in the order it appears.
 
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            The 'range' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -151,14 +144,12 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['thickness']
+        return self["thickness"]
 
     @thickness.setter
     def thickness(self, val):
-        self['thickness'] = val
+        self["thickness"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -172,14 +163,12 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -193,14 +182,12 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.rangeslider.YAxis
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -235,18 +222,20 @@ class Rangeslider(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.layout.xaxis.rangeslider.Y
             Axis` instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            autorange: bool|None = None,
-            bgcolor: str|None = None,
-            bordercolor: str|None = None,
-            borderwidth: int|None = None,
-            range: list|None = None,
-            thickness: int|float|None = None,
-            visible: bool|None = None,
-            yaxis: None|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        autorange: bool | None = None,
+        bgcolor: str | None = None,
+        bordercolor: str | None = None,
+        borderwidth: int | None = None,
+        range: list | None = None,
+        thickness: int | float | None = None,
+        visible: bool | None = None,
+        yaxis: None | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Rangeslider object
 
@@ -291,13 +280,11 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         Rangeslider
         """
-        super().__init__('rangeslider')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("rangeslider")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -305,32 +292,23 @@ class Rangeslider(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeslider
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`""")
+an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('autorange', arg, autorange)
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('bordercolor', arg, bordercolor)
-        self._init_provided('borderwidth', arg, borderwidth)
-        self._init_provided('range', arg, range)
-        self._init_provided('thickness', arg, thickness)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('yaxis', arg, yaxis)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("autorange", arg, autorange)
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("bordercolor", arg, bordercolor)
+        self._init_provided("borderwidth", arg, borderwidth)
+        self._init_provided("range", arg, range)
+        self._init_provided("thickness", arg, thickness)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("yaxis", arg, yaxis)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

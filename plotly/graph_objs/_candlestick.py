@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,61 @@ import copy as _copy
 
 class Candlestick(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'candlestick'
-    _valid_props = {"close", "closesrc", "customdata", "customdatasrc", "decreasing", "high", "highsrc", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertext", "hovertextsrc", "ids", "idssrc", "increasing", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "low", "lowsrc", "meta", "metasrc", "name", "opacity", "open", "opensrc", "selectedpoints", "showlegend", "stream", "text", "textsrc", "type", "uid", "uirevision", "visible", "whiskerwidth", "x", "xaxis", "xcalendar", "xhoverformat", "xperiod", "xperiod0", "xperiodalignment", "xsrc", "yaxis", "yhoverformat", "zorder"}
+    _parent_path_str = ""
+    _path_str = "candlestick"
+    _valid_props = {
+        "close",
+        "closesrc",
+        "customdata",
+        "customdatasrc",
+        "decreasing",
+        "high",
+        "highsrc",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "increasing",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "line",
+        "low",
+        "lowsrc",
+        "meta",
+        "metasrc",
+        "name",
+        "opacity",
+        "open",
+        "opensrc",
+        "selectedpoints",
+        "showlegend",
+        "stream",
+        "text",
+        "textsrc",
+        "type",
+        "uid",
+        "uirevision",
+        "visible",
+        "whiskerwidth",
+        "x",
+        "xaxis",
+        "xcalendar",
+        "xhoverformat",
+        "xperiod",
+        "xperiod0",
+        "xperiodalignment",
+        "xsrc",
+        "yaxis",
+        "yhoverformat",
+        "zorder",
+    }
 
-    # close
-    # -----
     @property
     def close(self):
         """
@@ -29,14 +74,12 @@ class Candlestick(_BaseTraceType):
         -------
         NDArray
         """
-        return self['close']
+        return self["close"]
 
     @close.setter
     def close(self, val):
-        self['close'] = val
+        self["close"] = val
 
-    # closesrc
-    # --------
     @property
     def closesrc(self):
         """
@@ -49,14 +92,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['closesrc']
+        return self["closesrc"]
 
     @closesrc.setter
     def closesrc(self, val):
-        self['closesrc'] = val
+        self["closesrc"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -72,14 +113,12 @@ class Candlestick(_BaseTraceType):
         -------
         NDArray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -93,14 +132,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # decreasing
-    # ----------
     @property
     def decreasing(self):
         """
@@ -114,14 +151,12 @@ class Candlestick(_BaseTraceType):
         -------
         plotly.graph_objs.candlestick.Decreasing
         """
-        return self['decreasing']
+        return self["decreasing"]
 
     @decreasing.setter
     def decreasing(self, val):
-        self['decreasing'] = val
+        self["decreasing"] = val
 
-    # high
-    # ----
     @property
     def high(self):
         """
@@ -134,14 +169,12 @@ class Candlestick(_BaseTraceType):
         -------
         NDArray
         """
-        return self['high']
+        return self["high"]
 
     @high.setter
     def high(self, val):
-        self['high'] = val
+        self["high"] = val
 
-    # highsrc
-    # -------
     @property
     def highsrc(self):
         """
@@ -154,14 +187,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['highsrc']
+        return self["highsrc"]
 
     @highsrc.setter
     def highsrc(self, val):
-        self['highsrc'] = val
+        self["highsrc"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -180,14 +211,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -201,14 +230,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -222,14 +249,12 @@ class Candlestick(_BaseTraceType):
         -------
         plotly.graph_objs.candlestick.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -244,14 +269,12 @@ class Candlestick(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -265,14 +288,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -287,14 +308,12 @@ class Candlestick(_BaseTraceType):
         -------
         NDArray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -307,14 +326,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # increasing
-    # ----------
     @property
     def increasing(self):
         """
@@ -328,14 +345,12 @@ class Candlestick(_BaseTraceType):
         -------
         plotly.graph_objs.candlestick.Increasing
         """
-        return self['increasing']
+        return self["increasing"]
 
     @increasing.setter
     def increasing(self, val):
-        self['increasing'] = val
+        self["increasing"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -353,14 +368,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -376,14 +389,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -397,14 +408,12 @@ class Candlestick(_BaseTraceType):
         -------
         plotly.graph_objs.candlestick.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -424,14 +433,12 @@ class Candlestick(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -445,14 +452,12 @@ class Candlestick(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -466,14 +471,12 @@ class Candlestick(_BaseTraceType):
         -------
         plotly.graph_objs.candlestick.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # low
-    # ---
     @property
     def low(self):
         """
@@ -486,14 +489,12 @@ class Candlestick(_BaseTraceType):
         -------
         NDArray
         """
-        return self['low']
+        return self["low"]
 
     @low.setter
     def low(self, val):
-        self['low'] = val
+        self["low"] = val
 
-    # lowsrc
-    # ------
     @property
     def lowsrc(self):
         """
@@ -506,14 +507,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['lowsrc']
+        return self["lowsrc"]
 
     @lowsrc.setter
     def lowsrc(self, val):
-        self['lowsrc'] = val
+        self["lowsrc"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -534,14 +533,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -554,14 +551,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -576,14 +571,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -596,14 +589,12 @@ class Candlestick(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # open
-    # ----
     @property
     def open(self):
         """
@@ -616,14 +607,12 @@ class Candlestick(_BaseTraceType):
         -------
         NDArray
         """
-        return self['open']
+        return self["open"]
 
     @open.setter
     def open(self, val):
-        self['open'] = val
+        self["open"] = val
 
-    # opensrc
-    # -------
     @property
     def opensrc(self):
         """
@@ -636,14 +625,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['opensrc']
+        return self["opensrc"]
 
     @opensrc.setter
     def opensrc(self, val):
-        self['opensrc'] = val
+        self["opensrc"] = val
 
-    # selectedpoints
-    # --------------
     @property
     def selectedpoints(self):
         """
@@ -660,14 +647,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any
         """
-        return self['selectedpoints']
+        return self["selectedpoints"]
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self['selectedpoints'] = val
+        self["selectedpoints"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -681,14 +666,12 @@ class Candlestick(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -702,14 +685,12 @@ class Candlestick(_BaseTraceType):
         -------
         plotly.graph_objs.candlestick.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -727,14 +708,12 @@ class Candlestick(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -747,14 +726,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -769,14 +746,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -802,14 +777,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -825,14 +798,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # whiskerwidth
-    # ------------
     @property
     def whiskerwidth(self):
         """
@@ -846,14 +817,12 @@ class Candlestick(_BaseTraceType):
         -------
         int|float
         """
-        return self['whiskerwidth']
+        return self["whiskerwidth"]
 
     @whiskerwidth.setter
     def whiskerwidth(self, val):
-        self['whiskerwidth'] = val
+        self["whiskerwidth"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -867,14 +836,12 @@ class Candlestick(_BaseTraceType):
         -------
         NDArray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -892,14 +859,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['xaxis']
+        return self["xaxis"]
 
     @xaxis.setter
     def xaxis(self, val):
-        self['xaxis'] = val
+        self["xaxis"] = val
 
-    # xcalendar
-    # ---------
     @property
     def xcalendar(self):
         """
@@ -916,14 +881,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any
         """
-        return self['xcalendar']
+        return self["xcalendar"]
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self['xcalendar'] = val
+        self["xcalendar"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -947,14 +910,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
-    # xperiod
-    # -------
     @property
     def xperiod(self):
         """
@@ -969,14 +930,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiod']
+        return self["xperiod"]
 
     @xperiod.setter
     def xperiod(self, val):
-        self['xperiod'] = val
+        self["xperiod"] = val
 
-    # xperiod0
-    # --------
     @property
     def xperiod0(self):
         """
@@ -992,14 +951,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiod0']
+        return self["xperiod0"]
 
     @xperiod0.setter
     def xperiod0(self, val):
-        self['xperiod0'] = val
+        self["xperiod0"] = val
 
-    # xperiodalignment
-    # ----------------
     @property
     def xperiodalignment(self):
         """
@@ -1014,14 +971,12 @@ class Candlestick(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiodalignment']
+        return self["xperiodalignment"]
 
     @xperiodalignment.setter
     def xperiodalignment(self, val):
-        self['xperiodalignment'] = val
+        self["xperiodalignment"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1034,14 +989,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -1059,14 +1012,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1090,14 +1041,12 @@ class Candlestick(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -1112,20 +1061,16 @@ class Candlestick(_BaseTraceType):
         -------
         int
         """
-        return self['zorder']
+        return self["zorder"]
 
     @zorder.setter
     def zorder(self, val):
-        self['zorder'] = val
+        self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1355,59 +1300,61 @@ class Candlestick(_BaseTraceType):
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
         """
-    def __init__(self,
-            arg=None,
-            close: NDArray|None = None,
-            closesrc: str|None = None,
-            customdata: NDArray|None = None,
-            customdatasrc: str|None = None,
-            decreasing: None|None = None,
-            high: NDArray|None = None,
-            highsrc: str|None = None,
-            hoverinfo: Any|None = None,
-            hoverinfosrc: str|None = None,
-            hoverlabel: None|None = None,
-            hovertext: str|None = None,
-            hovertextsrc: str|None = None,
-            ids: NDArray|None = None,
-            idssrc: str|None = None,
-            increasing: None|None = None,
-            legend: str|None = None,
-            legendgroup: str|None = None,
-            legendgrouptitle: None|None = None,
-            legendrank: int|float|None = None,
-            legendwidth: int|float|None = None,
-            line: None|None = None,
-            low: NDArray|None = None,
-            lowsrc: str|None = None,
-            meta: Any|None = None,
-            metasrc: str|None = None,
-            name: str|None = None,
-            opacity: int|float|None = None,
-            open: NDArray|None = None,
-            opensrc: str|None = None,
-            selectedpoints: Any|None = None,
-            showlegend: bool|None = None,
-            stream: None|None = None,
-            text: str|None = None,
-            textsrc: str|None = None,
-            uid: str|None = None,
-            uirevision: Any|None = None,
-            visible: Any|None = None,
-            whiskerwidth: int|float|None = None,
-            x: NDArray|None = None,
-            xaxis: str|None = None,
-            xcalendar: Any|None = None,
-            xhoverformat: str|None = None,
-            xperiod: Any|None = None,
-            xperiod0: Any|None = None,
-            xperiodalignment: Any|None = None,
-            xsrc: str|None = None,
-            yaxis: str|None = None,
-            yhoverformat: str|None = None,
-            zorder: int|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        close: NDArray | None = None,
+        closesrc: str | None = None,
+        customdata: NDArray | None = None,
+        customdatasrc: str | None = None,
+        decreasing: None | None = None,
+        high: NDArray | None = None,
+        highsrc: str | None = None,
+        hoverinfo: Any | None = None,
+        hoverinfosrc: str | None = None,
+        hoverlabel: None | None = None,
+        hovertext: str | None = None,
+        hovertextsrc: str | None = None,
+        ids: NDArray | None = None,
+        idssrc: str | None = None,
+        increasing: None | None = None,
+        legend: str | None = None,
+        legendgroup: str | None = None,
+        legendgrouptitle: None | None = None,
+        legendrank: int | float | None = None,
+        legendwidth: int | float | None = None,
+        line: None | None = None,
+        low: NDArray | None = None,
+        lowsrc: str | None = None,
+        meta: Any | None = None,
+        metasrc: str | None = None,
+        name: str | None = None,
+        opacity: int | float | None = None,
+        open: NDArray | None = None,
+        opensrc: str | None = None,
+        selectedpoints: Any | None = None,
+        showlegend: bool | None = None,
+        stream: None | None = None,
+        text: str | None = None,
+        textsrc: str | None = None,
+        uid: str | None = None,
+        uirevision: Any | None = None,
+        visible: Any | None = None,
+        whiskerwidth: int | float | None = None,
+        x: NDArray | None = None,
+        xaxis: str | None = None,
+        xcalendar: Any | None = None,
+        xhoverformat: str | None = None,
+        xperiod: Any | None = None,
+        xperiod0: Any | None = None,
+        xperiodalignment: Any | None = None,
+        xsrc: str | None = None,
+        yaxis: str | None = None,
+        yhoverformat: str | None = None,
+        zorder: int | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Candlestick object
 
@@ -1655,13 +1602,11 @@ class Candlestick(_BaseTraceType):
         -------
         Candlestick
         """
-        super().__init__('candlestick')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("candlestick")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1669,79 +1614,67 @@ class Candlestick(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Candlestick
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Candlestick`""")
+an instance of :class:`plotly.graph_objs.Candlestick`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('close', arg, close)
-        self._init_provided('closesrc', arg, closesrc)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('decreasing', arg, decreasing)
-        self._init_provided('high', arg, high)
-        self._init_provided('highsrc', arg, highsrc)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hovertext', arg, hovertext)
-        self._init_provided('hovertextsrc', arg, hovertextsrc)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('increasing', arg, increasing)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('line', arg, line)
-        self._init_provided('low', arg, low)
-        self._init_provided('lowsrc', arg, lowsrc)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('open', arg, open)
-        self._init_provided('opensrc', arg, opensrc)
-        self._init_provided('selectedpoints', arg, selectedpoints)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('text', arg, text)
-        self._init_provided('textsrc', arg, textsrc)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('whiskerwidth', arg, whiskerwidth)
-        self._init_provided('x', arg, x)
-        self._init_provided('xaxis', arg, xaxis)
-        self._init_provided('xcalendar', arg, xcalendar)
-        self._init_provided('xhoverformat', arg, xhoverformat)
-        self._init_provided('xperiod', arg, xperiod)
-        self._init_provided('xperiod0', arg, xperiod0)
-        self._init_provided('xperiodalignment', arg, xperiodalignment)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('yaxis', arg, yaxis)
-        self._init_provided('yhoverformat', arg, yhoverformat)
-        self._init_provided('zorder', arg, zorder)
+        self._init_provided("close", arg, close)
+        self._init_provided("closesrc", arg, closesrc)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("decreasing", arg, decreasing)
+        self._init_provided("high", arg, high)
+        self._init_provided("highsrc", arg, highsrc)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("increasing", arg, increasing)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("line", arg, line)
+        self._init_provided("low", arg, low)
+        self._init_provided("lowsrc", arg, lowsrc)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("open", arg, open)
+        self._init_provided("opensrc", arg, opensrc)
+        self._init_provided("selectedpoints", arg, selectedpoints)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("whiskerwidth", arg, whiskerwidth)
+        self._init_provided("x", arg, x)
+        self._init_provided("xaxis", arg, xaxis)
+        self._init_provided("xcalendar", arg, xcalendar)
+        self._init_provided("xhoverformat", arg, xhoverformat)
+        self._init_provided("xperiod", arg, xperiod)
+        self._init_provided("xperiod0", arg, xperiod0)
+        self._init_provided("xperiodalignment", arg, xperiodalignment)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("yaxis", arg, yaxis)
+        self._init_provided("yhoverformat", arg, yhoverformat)
+        self._init_provided("zorder", arg, zorder)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'candlestick'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "candlestick"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

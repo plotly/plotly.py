@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,18 @@ import copy as _copy
 
 class Marker(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'violin'
-    _path_str = 'violin.marker'
-    _valid_props = {"angle", "color", "line", "opacity", "outliercolor", "size", "symbol"}
+    _parent_path_str = "violin"
+    _path_str = "violin.marker"
+    _valid_props = {
+        "angle",
+        "color",
+        "line",
+        "opacity",
+        "outliercolor",
+        "size",
+        "symbol",
+    }
 
-    # angle
-    # -----
     @property
     def angle(self):
         """
@@ -31,14 +33,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['angle']
+        return self["angle"]
 
     @angle.setter
     def angle(self, val):
-        self['angle'] = val
+        self["angle"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -58,14 +58,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -79,14 +77,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.violin.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -99,14 +95,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # outliercolor
-    # ------------
     @property
     def outliercolor(self):
         """
@@ -123,14 +117,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['outliercolor']
+        return self["outliercolor"]
 
     @outliercolor.setter
     def outliercolor(self, val):
-        self['outliercolor'] = val
+        self["outliercolor"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -143,14 +135,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
-    # symbol
-    # ------
     @property
     def symbol(self):
         """
@@ -255,14 +245,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['symbol']
+        return self["symbol"]
 
     @symbol.setter
     def symbol(self, val):
-        self['symbol'] = val
+        self["symbol"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -290,17 +278,19 @@ class Marker(_BaseTraceHierarchyType):
             300 is equivalent to appending "-open-dot" or "dot-
             open" to a symbol name.
         """
-    def __init__(self,
-            arg=None,
-            angle: int|float|None = None,
-            color: str|None = None,
-            line: None|None = None,
-            opacity: int|float|None = None,
-            outliercolor: str|None = None,
-            size: int|float|None = None,
-            symbol: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        angle: int | float | None = None,
+        color: str | None = None,
+        line: None | None = None,
+        opacity: int | float | None = None,
+        outliercolor: str | None = None,
+        size: int | float | None = None,
+        symbol: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Marker object
 
@@ -337,13 +327,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -351,31 +339,22 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.violin.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.violin.Marker`""")
+an instance of :class:`plotly.graph_objs.violin.Marker`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('angle', arg, angle)
-        self._init_provided('color', arg, color)
-        self._init_provided('line', arg, line)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('outliercolor', arg, outliercolor)
-        self._init_provided('size', arg, size)
-        self._init_provided('symbol', arg, symbol)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("angle", arg, angle)
+        self._init_provided("color", arg, color)
+        self._init_provided("line", arg, line)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("outliercolor", arg, outliercolor)
+        self._init_provided("size", arg, size)
+        self._init_provided("symbol", arg, symbol)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

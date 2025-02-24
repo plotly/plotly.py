@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,86 @@ import copy as _copy
 
 class Scatter(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'scatter'
-    _valid_props = {"alignmentgroup", "cliponaxis", "connectgaps", "customdata", "customdatasrc", "dx", "dy", "error_x", "error_y", "fill", "fillcolor", "fillgradient", "fillpattern", "groupnorm", "hoverinfo", "hoverinfosrc", "hoverlabel", "hoveron", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "marker", "meta", "metasrc", "mode", "name", "offsetgroup", "opacity", "orientation", "selected", "selectedpoints", "showlegend", "stackgaps", "stackgroup", "stream", "text", "textfont", "textposition", "textpositionsrc", "textsrc", "texttemplate", "texttemplatesrc", "type", "uid", "uirevision", "unselected", "visible", "x", "x0", "xaxis", "xcalendar", "xhoverformat", "xperiod", "xperiod0", "xperiodalignment", "xsrc", "y", "y0", "yaxis", "ycalendar", "yhoverformat", "yperiod", "yperiod0", "yperiodalignment", "ysrc", "zorder"}
+    _parent_path_str = ""
+    _path_str = "scatter"
+    _valid_props = {
+        "alignmentgroup",
+        "cliponaxis",
+        "connectgaps",
+        "customdata",
+        "customdatasrc",
+        "dx",
+        "dy",
+        "error_x",
+        "error_y",
+        "fill",
+        "fillcolor",
+        "fillgradient",
+        "fillpattern",
+        "groupnorm",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hoveron",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "line",
+        "marker",
+        "meta",
+        "metasrc",
+        "mode",
+        "name",
+        "offsetgroup",
+        "opacity",
+        "orientation",
+        "selected",
+        "selectedpoints",
+        "showlegend",
+        "stackgaps",
+        "stackgroup",
+        "stream",
+        "text",
+        "textfont",
+        "textposition",
+        "textpositionsrc",
+        "textsrc",
+        "texttemplate",
+        "texttemplatesrc",
+        "type",
+        "uid",
+        "uirevision",
+        "unselected",
+        "visible",
+        "x",
+        "x0",
+        "xaxis",
+        "xcalendar",
+        "xhoverformat",
+        "xperiod",
+        "xperiod0",
+        "xperiodalignment",
+        "xsrc",
+        "y",
+        "y0",
+        "yaxis",
+        "ycalendar",
+        "yhoverformat",
+        "yperiod",
+        "yperiod0",
+        "yperiodalignment",
+        "ysrc",
+        "zorder",
+    }
 
-    # alignmentgroup
-    # --------------
     @property
     def alignmentgroup(self):
         """
@@ -32,14 +102,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['alignmentgroup']
+        return self["alignmentgroup"]
 
     @alignmentgroup.setter
     def alignmentgroup(self, val):
-        self['alignmentgroup'] = val
+        self["alignmentgroup"] = val
 
-    # cliponaxis
-    # ----------
     @property
     def cliponaxis(self):
         """
@@ -55,14 +123,12 @@ class Scatter(_BaseTraceType):
         -------
         bool
         """
-        return self['cliponaxis']
+        return self["cliponaxis"]
 
     @cliponaxis.setter
     def cliponaxis(self, val):
-        self['cliponaxis'] = val
+        self["cliponaxis"] = val
 
-    # connectgaps
-    # -----------
     @property
     def connectgaps(self):
         """
@@ -76,14 +142,12 @@ class Scatter(_BaseTraceType):
         -------
         bool
         """
-        return self['connectgaps']
+        return self["connectgaps"]
 
     @connectgaps.setter
     def connectgaps(self, val):
-        self['connectgaps'] = val
+        self["connectgaps"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -99,14 +163,12 @@ class Scatter(_BaseTraceType):
         -------
         NDArray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -120,14 +182,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # dx
-    # --
     @property
     def dx(self):
         """
@@ -140,14 +200,12 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self['dx']
+        return self["dx"]
 
     @dx.setter
     def dx(self, val):
-        self['dx'] = val
+        self["dx"] = val
 
-    # dy
-    # --
     @property
     def dy(self):
         """
@@ -160,14 +218,12 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self['dy']
+        return self["dy"]
 
     @dy.setter
     def dy(self, val):
-        self['dy'] = val
+        self["dy"] = val
 
-    # error_x
-    # -------
     @property
     def error_x(self):
         """
@@ -181,14 +237,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.ErrorX
         """
-        return self['error_x']
+        return self["error_x"]
 
     @error_x.setter
     def error_x(self, val):
-        self['error_x'] = val
+        self["error_x"] = val
 
-    # error_y
-    # -------
     @property
     def error_y(self):
         """
@@ -202,14 +256,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.ErrorY
         """
-        return self['error_y']
+        return self["error_y"]
 
     @error_y.setter
     def error_y(self, val):
-        self['error_y'] = val
+        self["error_y"] = val
 
-    # fill
-    # ----
     @property
     def fill(self):
         """
@@ -242,14 +294,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -270,14 +320,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
-    # fillgradient
-    # ------------
     @property
     def fillgradient(self):
         """
@@ -294,14 +342,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Fillgradient
         """
-        return self['fillgradient']
+        return self["fillgradient"]
 
     @fillgradient.setter
     def fillgradient(self, val):
-        self['fillgradient'] = val
+        self["fillgradient"] = val
 
-    # fillpattern
-    # -----------
     @property
     def fillpattern(self):
         """
@@ -317,14 +363,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Fillpattern
         """
-        return self['fillpattern']
+        return self["fillpattern"]
 
     @fillpattern.setter
     def fillpattern(self, val):
-        self['fillpattern'] = val
+        self["fillpattern"] = val
 
-    # groupnorm
-    # ---------
     @property
     def groupnorm(self):
         """
@@ -346,14 +390,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['groupnorm']
+        return self["groupnorm"]
 
     @groupnorm.setter
     def groupnorm(self, val):
-        self['groupnorm'] = val
+        self["groupnorm"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -372,14 +414,12 @@ class Scatter(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -393,14 +433,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -414,14 +452,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hoveron
-    # -------
     @property
     def hoveron(self):
         """
@@ -439,14 +475,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['hoveron']
+        return self["hoveron"]
 
     @hoveron.setter
     def hoveron(self, val):
-        self['hoveron'] = val
+        self["hoveron"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -483,14 +517,12 @@ class Scatter(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -504,14 +536,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -530,14 +560,12 @@ class Scatter(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -551,14 +579,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -573,14 +599,12 @@ class Scatter(_BaseTraceType):
         -------
         NDArray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -593,14 +617,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -618,14 +640,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -641,14 +661,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -662,14 +680,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -689,14 +705,12 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -710,14 +724,12 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -731,14 +743,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -752,14 +762,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -780,14 +788,12 @@ class Scatter(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -800,14 +806,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # mode
-    # ----
     @property
     def mode(self):
         """
@@ -828,14 +832,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['mode']
+        return self["mode"]
 
     @mode.setter
     def mode(self, val):
-        self['mode'] = val
+        self["mode"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -850,14 +852,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # offsetgroup
-    # -----------
     @property
     def offsetgroup(self):
         """
@@ -873,14 +873,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['offsetgroup']
+        return self["offsetgroup"]
 
     @offsetgroup.setter
     def offsetgroup(self, val):
-        self['offsetgroup'] = val
+        self["offsetgroup"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -893,14 +891,12 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -920,14 +916,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['orientation']
+        return self["orientation"]
 
     @orientation.setter
     def orientation(self, val):
-        self['orientation'] = val
+        self["orientation"] = val
 
-    # selected
-    # --------
     @property
     def selected(self):
         """
@@ -941,14 +935,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Selected
         """
-        return self['selected']
+        return self["selected"]
 
     @selected.setter
     def selected(self, val):
-        self['selected'] = val
+        self["selected"] = val
 
-    # selectedpoints
-    # --------------
     @property
     def selectedpoints(self):
         """
@@ -965,14 +957,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['selectedpoints']
+        return self["selectedpoints"]
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self['selectedpoints'] = val
+        self["selectedpoints"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -986,14 +976,12 @@ class Scatter(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # stackgaps
-    # ---------
     @property
     def stackgaps(self):
         """
@@ -1014,14 +1002,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['stackgaps']
+        return self["stackgaps"]
 
     @stackgaps.setter
     def stackgaps(self, val):
-        self['stackgaps'] = val
+        self["stackgaps"] = val
 
-    # stackgroup
-    # ----------
     @property
     def stackgroup(self):
         """
@@ -1046,14 +1032,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['stackgroup']
+        return self["stackgroup"]
 
     @stackgroup.setter
     def stackgroup(self, val):
-        self['stackgroup'] = val
+        self["stackgroup"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1067,14 +1051,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -1094,14 +1076,12 @@ class Scatter(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -1117,14 +1097,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
-    # textposition
-    # ------------
     @property
     def textposition(self):
         """
@@ -1142,14 +1120,12 @@ class Scatter(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['textposition']
+        return self["textposition"]
 
     @textposition.setter
     def textposition(self, val):
-        self['textposition'] = val
+        self["textposition"] = val
 
-    # textpositionsrc
-    # ---------------
     @property
     def textpositionsrc(self):
         """
@@ -1163,14 +1139,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['textpositionsrc']
+        return self["textpositionsrc"]
 
     @textpositionsrc.setter
     def textpositionsrc(self, val):
-        self['textpositionsrc'] = val
+        self["textpositionsrc"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1183,14 +1157,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
-    # texttemplate
-    # ------------
     @property
     def texttemplate(self):
         """
@@ -1216,14 +1188,12 @@ class Scatter(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['texttemplate']
+        return self["texttemplate"]
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self['texttemplate'] = val
+        self["texttemplate"] = val
 
-    # texttemplatesrc
-    # ---------------
     @property
     def texttemplatesrc(self):
         """
@@ -1237,14 +1207,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['texttemplatesrc']
+        return self["texttemplatesrc"]
 
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
-        self['texttemplatesrc'] = val
+        self["texttemplatesrc"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1259,14 +1227,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1292,14 +1258,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # unselected
-    # ----------
     @property
     def unselected(self):
         """
@@ -1313,14 +1277,12 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Unselected
         """
-        return self['unselected']
+        return self["unselected"]
 
     @unselected.setter
     def unselected(self, val):
-        self['unselected'] = val
+        self["unselected"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1336,14 +1298,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1356,14 +1316,12 @@ class Scatter(_BaseTraceType):
         -------
         NDArray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # x0
-    # --
     @property
     def x0(self):
         """
@@ -1377,14 +1335,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['x0']
+        return self["x0"]
 
     @x0.setter
     def x0(self, val):
-        self['x0'] = val
+        self["x0"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -1402,14 +1358,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['xaxis']
+        return self["xaxis"]
 
     @xaxis.setter
     def xaxis(self, val):
-        self['xaxis'] = val
+        self["xaxis"] = val
 
-    # xcalendar
-    # ---------
     @property
     def xcalendar(self):
         """
@@ -1426,14 +1380,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['xcalendar']
+        return self["xcalendar"]
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self['xcalendar'] = val
+        self["xcalendar"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1457,14 +1409,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
-    # xperiod
-    # -------
     @property
     def xperiod(self):
         """
@@ -1479,14 +1429,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiod']
+        return self["xperiod"]
 
     @xperiod.setter
     def xperiod(self, val):
-        self['xperiod'] = val
+        self["xperiod"] = val
 
-    # xperiod0
-    # --------
     @property
     def xperiod0(self):
         """
@@ -1502,14 +1450,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiod0']
+        return self["xperiod0"]
 
     @xperiod0.setter
     def xperiod0(self, val):
-        self['xperiod0'] = val
+        self["xperiod0"] = val
 
-    # xperiodalignment
-    # ----------------
     @property
     def xperiodalignment(self):
         """
@@ -1524,14 +1470,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['xperiodalignment']
+        return self["xperiodalignment"]
 
     @xperiodalignment.setter
     def xperiodalignment(self, val):
-        self['xperiodalignment'] = val
+        self["xperiodalignment"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1544,14 +1488,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1564,14 +1506,12 @@ class Scatter(_BaseTraceType):
         -------
         NDArray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # y0
-    # --
     @property
     def y0(self):
         """
@@ -1585,14 +1525,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['y0']
+        return self["y0"]
 
     @y0.setter
     def y0(self, val):
-        self['y0'] = val
+        self["y0"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -1610,14 +1548,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
-    # ycalendar
-    # ---------
     @property
     def ycalendar(self):
         """
@@ -1634,14 +1570,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['ycalendar']
+        return self["ycalendar"]
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self['ycalendar'] = val
+        self["ycalendar"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1665,14 +1599,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
-    # yperiod
-    # -------
     @property
     def yperiod(self):
         """
@@ -1687,14 +1619,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiod']
+        return self["yperiod"]
 
     @yperiod.setter
     def yperiod(self, val):
-        self['yperiod'] = val
+        self["yperiod"] = val
 
-    # yperiod0
-    # --------
     @property
     def yperiod0(self):
         """
@@ -1710,14 +1640,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiod0']
+        return self["yperiod0"]
 
     @yperiod0.setter
     def yperiod0(self, val):
-        self['yperiod0'] = val
+        self["yperiod0"] = val
 
-    # yperiodalignment
-    # ----------------
     @property
     def yperiodalignment(self):
         """
@@ -1732,14 +1660,12 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self['yperiodalignment']
+        return self["yperiodalignment"]
 
     @yperiodalignment.setter
     def yperiodalignment(self, val):
-        self['yperiodalignment'] = val
+        self["yperiodalignment"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -1752,14 +1678,12 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -1774,20 +1698,16 @@ class Scatter(_BaseTraceType):
         -------
         int
         """
-        return self['zorder']
+        return self["zorder"]
 
     @zorder.setter
     def zorder(self, val):
-        self['zorder'] = val
+        self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -2211,84 +2131,86 @@ class Scatter(_BaseTraceType):
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
         """
-    def __init__(self,
-            arg=None,
-            alignmentgroup: str|None = None,
-            cliponaxis: bool|None = None,
-            connectgaps: bool|None = None,
-            customdata: NDArray|None = None,
-            customdatasrc: str|None = None,
-            dx: int|float|None = None,
-            dy: int|float|None = None,
-            error_x: None|None = None,
-            error_y: None|None = None,
-            fill: Any|None = None,
-            fillcolor: str|None = None,
-            fillgradient: None|None = None,
-            fillpattern: None|None = None,
-            groupnorm: Any|None = None,
-            hoverinfo: Any|None = None,
-            hoverinfosrc: str|None = None,
-            hoverlabel: None|None = None,
-            hoveron: Any|None = None,
-            hovertemplate: str|None = None,
-            hovertemplatesrc: str|None = None,
-            hovertext: str|None = None,
-            hovertextsrc: str|None = None,
-            ids: NDArray|None = None,
-            idssrc: str|None = None,
-            legend: str|None = None,
-            legendgroup: str|None = None,
-            legendgrouptitle: None|None = None,
-            legendrank: int|float|None = None,
-            legendwidth: int|float|None = None,
-            line: None|None = None,
-            marker: None|None = None,
-            meta: Any|None = None,
-            metasrc: str|None = None,
-            mode: Any|None = None,
-            name: str|None = None,
-            offsetgroup: str|None = None,
-            opacity: int|float|None = None,
-            orientation: Any|None = None,
-            selected: None|None = None,
-            selectedpoints: Any|None = None,
-            showlegend: bool|None = None,
-            stackgaps: Any|None = None,
-            stackgroup: str|None = None,
-            stream: None|None = None,
-            text: str|None = None,
-            textfont: None|None = None,
-            textposition: Any|None = None,
-            textpositionsrc: str|None = None,
-            textsrc: str|None = None,
-            texttemplate: str|None = None,
-            texttemplatesrc: str|None = None,
-            uid: str|None = None,
-            uirevision: Any|None = None,
-            unselected: None|None = None,
-            visible: Any|None = None,
-            x: NDArray|None = None,
-            x0: Any|None = None,
-            xaxis: str|None = None,
-            xcalendar: Any|None = None,
-            xhoverformat: str|None = None,
-            xperiod: Any|None = None,
-            xperiod0: Any|None = None,
-            xperiodalignment: Any|None = None,
-            xsrc: str|None = None,
-            y: NDArray|None = None,
-            y0: Any|None = None,
-            yaxis: str|None = None,
-            ycalendar: Any|None = None,
-            yhoverformat: str|None = None,
-            yperiod: Any|None = None,
-            yperiod0: Any|None = None,
-            yperiodalignment: Any|None = None,
-            ysrc: str|None = None,
-            zorder: int|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        alignmentgroup: str | None = None,
+        cliponaxis: bool | None = None,
+        connectgaps: bool | None = None,
+        customdata: NDArray | None = None,
+        customdatasrc: str | None = None,
+        dx: int | float | None = None,
+        dy: int | float | None = None,
+        error_x: None | None = None,
+        error_y: None | None = None,
+        fill: Any | None = None,
+        fillcolor: str | None = None,
+        fillgradient: None | None = None,
+        fillpattern: None | None = None,
+        groupnorm: Any | None = None,
+        hoverinfo: Any | None = None,
+        hoverinfosrc: str | None = None,
+        hoverlabel: None | None = None,
+        hoveron: Any | None = None,
+        hovertemplate: str | None = None,
+        hovertemplatesrc: str | None = None,
+        hovertext: str | None = None,
+        hovertextsrc: str | None = None,
+        ids: NDArray | None = None,
+        idssrc: str | None = None,
+        legend: str | None = None,
+        legendgroup: str | None = None,
+        legendgrouptitle: None | None = None,
+        legendrank: int | float | None = None,
+        legendwidth: int | float | None = None,
+        line: None | None = None,
+        marker: None | None = None,
+        meta: Any | None = None,
+        metasrc: str | None = None,
+        mode: Any | None = None,
+        name: str | None = None,
+        offsetgroup: str | None = None,
+        opacity: int | float | None = None,
+        orientation: Any | None = None,
+        selected: None | None = None,
+        selectedpoints: Any | None = None,
+        showlegend: bool | None = None,
+        stackgaps: Any | None = None,
+        stackgroup: str | None = None,
+        stream: None | None = None,
+        text: str | None = None,
+        textfont: None | None = None,
+        textposition: Any | None = None,
+        textpositionsrc: str | None = None,
+        textsrc: str | None = None,
+        texttemplate: str | None = None,
+        texttemplatesrc: str | None = None,
+        uid: str | None = None,
+        uirevision: Any | None = None,
+        unselected: None | None = None,
+        visible: Any | None = None,
+        x: NDArray | None = None,
+        x0: Any | None = None,
+        xaxis: str | None = None,
+        xcalendar: Any | None = None,
+        xhoverformat: str | None = None,
+        xperiod: Any | None = None,
+        xperiod0: Any | None = None,
+        xperiodalignment: Any | None = None,
+        xsrc: str | None = None,
+        y: NDArray | None = None,
+        y0: Any | None = None,
+        yaxis: str | None = None,
+        ycalendar: Any | None = None,
+        yhoverformat: str | None = None,
+        yperiod: Any | None = None,
+        yperiod0: Any | None = None,
+        yperiodalignment: Any | None = None,
+        ysrc: str | None = None,
+        zorder: int | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Scatter object
 
@@ -2728,13 +2650,11 @@ class Scatter(_BaseTraceType):
         -------
         Scatter
         """
-        super().__init__('scatter')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("scatter")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2742,104 +2662,92 @@ class Scatter(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Scatter
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scatter`""")
+an instance of :class:`plotly.graph_objs.Scatter`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('alignmentgroup', arg, alignmentgroup)
-        self._init_provided('cliponaxis', arg, cliponaxis)
-        self._init_provided('connectgaps', arg, connectgaps)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('dx', arg, dx)
-        self._init_provided('dy', arg, dy)
-        self._init_provided('error_x', arg, error_x)
-        self._init_provided('error_y', arg, error_y)
-        self._init_provided('fill', arg, fill)
-        self._init_provided('fillcolor', arg, fillcolor)
-        self._init_provided('fillgradient', arg, fillgradient)
-        self._init_provided('fillpattern', arg, fillpattern)
-        self._init_provided('groupnorm', arg, groupnorm)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hoveron', arg, hoveron)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('hovertext', arg, hovertext)
-        self._init_provided('hovertextsrc', arg, hovertextsrc)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('line', arg, line)
-        self._init_provided('marker', arg, marker)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('mode', arg, mode)
-        self._init_provided('name', arg, name)
-        self._init_provided('offsetgroup', arg, offsetgroup)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('orientation', arg, orientation)
-        self._init_provided('selected', arg, selected)
-        self._init_provided('selectedpoints', arg, selectedpoints)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('stackgaps', arg, stackgaps)
-        self._init_provided('stackgroup', arg, stackgroup)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('text', arg, text)
-        self._init_provided('textfont', arg, textfont)
-        self._init_provided('textposition', arg, textposition)
-        self._init_provided('textpositionsrc', arg, textpositionsrc)
-        self._init_provided('textsrc', arg, textsrc)
-        self._init_provided('texttemplate', arg, texttemplate)
-        self._init_provided('texttemplatesrc', arg, texttemplatesrc)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('unselected', arg, unselected)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('x', arg, x)
-        self._init_provided('x0', arg, x0)
-        self._init_provided('xaxis', arg, xaxis)
-        self._init_provided('xcalendar', arg, xcalendar)
-        self._init_provided('xhoverformat', arg, xhoverformat)
-        self._init_provided('xperiod', arg, xperiod)
-        self._init_provided('xperiod0', arg, xperiod0)
-        self._init_provided('xperiodalignment', arg, xperiodalignment)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('y', arg, y)
-        self._init_provided('y0', arg, y0)
-        self._init_provided('yaxis', arg, yaxis)
-        self._init_provided('ycalendar', arg, ycalendar)
-        self._init_provided('yhoverformat', arg, yhoverformat)
-        self._init_provided('yperiod', arg, yperiod)
-        self._init_provided('yperiod0', arg, yperiod0)
-        self._init_provided('yperiodalignment', arg, yperiodalignment)
-        self._init_provided('ysrc', arg, ysrc)
-        self._init_provided('zorder', arg, zorder)
+        self._init_provided("alignmentgroup", arg, alignmentgroup)
+        self._init_provided("cliponaxis", arg, cliponaxis)
+        self._init_provided("connectgaps", arg, connectgaps)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("dx", arg, dx)
+        self._init_provided("dy", arg, dy)
+        self._init_provided("error_x", arg, error_x)
+        self._init_provided("error_y", arg, error_y)
+        self._init_provided("fill", arg, fill)
+        self._init_provided("fillcolor", arg, fillcolor)
+        self._init_provided("fillgradient", arg, fillgradient)
+        self._init_provided("fillpattern", arg, fillpattern)
+        self._init_provided("groupnorm", arg, groupnorm)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hoveron", arg, hoveron)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("line", arg, line)
+        self._init_provided("marker", arg, marker)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("mode", arg, mode)
+        self._init_provided("name", arg, name)
+        self._init_provided("offsetgroup", arg, offsetgroup)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("orientation", arg, orientation)
+        self._init_provided("selected", arg, selected)
+        self._init_provided("selectedpoints", arg, selectedpoints)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("stackgaps", arg, stackgaps)
+        self._init_provided("stackgroup", arg, stackgroup)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textfont", arg, textfont)
+        self._init_provided("textposition", arg, textposition)
+        self._init_provided("textpositionsrc", arg, textpositionsrc)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("texttemplate", arg, texttemplate)
+        self._init_provided("texttemplatesrc", arg, texttemplatesrc)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("unselected", arg, unselected)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("x", arg, x)
+        self._init_provided("x0", arg, x0)
+        self._init_provided("xaxis", arg, xaxis)
+        self._init_provided("xcalendar", arg, xcalendar)
+        self._init_provided("xhoverformat", arg, xhoverformat)
+        self._init_provided("xperiod", arg, xperiod)
+        self._init_provided("xperiod0", arg, xperiod0)
+        self._init_provided("xperiodalignment", arg, xperiodalignment)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("y0", arg, y0)
+        self._init_provided("yaxis", arg, yaxis)
+        self._init_provided("ycalendar", arg, ycalendar)
+        self._init_provided("yhoverformat", arg, yhoverformat)
+        self._init_provided("yperiod", arg, yperiod)
+        self._init_provided("yperiod0", arg, yperiod0)
+        self._init_provided("yperiodalignment", arg, yperiodalignment)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("zorder", arg, zorder)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'scatter'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "scatter"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

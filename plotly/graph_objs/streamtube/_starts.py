@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Starts(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'streamtube'
-    _path_str = 'streamtube.starts'
+    _parent_path_str = "streamtube"
+    _path_str = "streamtube.starts"
     _valid_props = {"x", "xsrc", "y", "ysrc", "z", "zsrc"}
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -30,14 +24,12 @@ class Starts(_BaseTraceHierarchyType):
         -------
         NDArray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -50,14 +42,12 @@ class Starts(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -71,14 +61,12 @@ class Starts(_BaseTraceHierarchyType):
         -------
         NDArray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -91,14 +79,12 @@ class Starts(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
-    # z
-    # -
     @property
     def z(self):
         """
@@ -112,14 +98,12 @@ class Starts(_BaseTraceHierarchyType):
         -------
         NDArray
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
-    # zsrc
-    # ----
     @property
     def zsrc(self):
         """
@@ -132,14 +116,12 @@ class Starts(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['zsrc']
+        return self["zsrc"]
 
     @zsrc.setter
     def zsrc(self, val):
-        self['zsrc'] = val
+        self["zsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -162,16 +144,18 @@ class Starts(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-    def __init__(self,
-            arg=None,
-            x: NDArray|None = None,
-            xsrc: str|None = None,
-            y: NDArray|None = None,
-            ysrc: str|None = None,
-            z: NDArray|None = None,
-            zsrc: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        x: NDArray | None = None,
+        xsrc: str | None = None,
+        y: NDArray | None = None,
+        ysrc: str | None = None,
+        z: NDArray | None = None,
+        zsrc: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Starts object
 
@@ -204,13 +188,11 @@ class Starts(_BaseTraceHierarchyType):
         -------
         Starts
         """
-        super().__init__('starts')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("starts")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -218,30 +200,21 @@ class Starts(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.streamtube.Starts
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.streamtube.Starts`""")
+an instance of :class:`plotly.graph_objs.streamtube.Starts`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('x', arg, x)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('y', arg, y)
-        self._init_provided('ysrc', arg, ysrc)
-        self._init_provided('z', arg, z)
-        self._init_provided('zsrc', arg, zsrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("x", arg, x)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("z", arg, z)
+        self._init_provided("zsrc", arg, zsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

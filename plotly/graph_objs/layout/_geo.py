@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,43 @@ import copy as _copy
 
 class Geo(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.geo'
-    _valid_props = {"bgcolor", "center", "coastlinecolor", "coastlinewidth", "countrycolor", "countrywidth", "domain", "fitbounds", "framecolor", "framewidth", "lakecolor", "landcolor", "lataxis", "lonaxis", "oceancolor", "projection", "resolution", "rivercolor", "riverwidth", "scope", "showcoastlines", "showcountries", "showframe", "showlakes", "showland", "showocean", "showrivers", "showsubunits", "subunitcolor", "subunitwidth", "uirevision", "visible"}
+    _parent_path_str = "layout"
+    _path_str = "layout.geo"
+    _valid_props = {
+        "bgcolor",
+        "center",
+        "coastlinecolor",
+        "coastlinewidth",
+        "countrycolor",
+        "countrywidth",
+        "domain",
+        "fitbounds",
+        "framecolor",
+        "framewidth",
+        "lakecolor",
+        "landcolor",
+        "lataxis",
+        "lonaxis",
+        "oceancolor",
+        "projection",
+        "resolution",
+        "rivercolor",
+        "riverwidth",
+        "scope",
+        "showcoastlines",
+        "showcountries",
+        "showframe",
+        "showlakes",
+        "showland",
+        "showocean",
+        "showrivers",
+        "showsubunits",
+        "subunitcolor",
+        "subunitwidth",
+        "uirevision",
+        "visible",
+    }
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -33,14 +60,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # center
-    # ------
     @property
     def center(self):
         """
@@ -54,14 +79,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.geo.Center
         """
-        return self['center']
+        return self["center"]
 
     @center.setter
     def center(self, val):
-        self['center'] = val
+        self["center"] = val
 
-    # coastlinecolor
-    # --------------
     @property
     def coastlinecolor(self):
         """
@@ -78,14 +101,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['coastlinecolor']
+        return self["coastlinecolor"]
 
     @coastlinecolor.setter
     def coastlinecolor(self, val):
-        self['coastlinecolor'] = val
+        self["coastlinecolor"] = val
 
-    # coastlinewidth
-    # --------------
     @property
     def coastlinewidth(self):
         """
@@ -98,14 +119,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['coastlinewidth']
+        return self["coastlinewidth"]
 
     @coastlinewidth.setter
     def coastlinewidth(self, val):
-        self['coastlinewidth'] = val
+        self["coastlinewidth"] = val
 
-    # countrycolor
-    # ------------
     @property
     def countrycolor(self):
         """
@@ -122,14 +141,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['countrycolor']
+        return self["countrycolor"]
 
     @countrycolor.setter
     def countrycolor(self, val):
-        self['countrycolor'] = val
+        self["countrycolor"] = val
 
-    # countrywidth
-    # ------------
     @property
     def countrywidth(self):
         """
@@ -142,14 +159,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['countrywidth']
+        return self["countrywidth"]
 
     @countrywidth.setter
     def countrywidth(self, val):
-        self['countrywidth'] = val
+        self["countrywidth"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -163,14 +178,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.geo.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # fitbounds
-    # ---------
     @property
     def fitbounds(self):
         """
@@ -196,14 +209,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['fitbounds']
+        return self["fitbounds"]
 
     @fitbounds.setter
     def fitbounds(self, val):
-        self['fitbounds'] = val
+        self["fitbounds"] = val
 
-    # framecolor
-    # ----------
     @property
     def framecolor(self):
         """
@@ -220,14 +231,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['framecolor']
+        return self["framecolor"]
 
     @framecolor.setter
     def framecolor(self, val):
-        self['framecolor'] = val
+        self["framecolor"] = val
 
-    # framewidth
-    # ----------
     @property
     def framewidth(self):
         """
@@ -240,14 +249,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['framewidth']
+        return self["framewidth"]
 
     @framewidth.setter
     def framewidth(self, val):
-        self['framewidth'] = val
+        self["framewidth"] = val
 
-    # lakecolor
-    # ---------
     @property
     def lakecolor(self):
         """
@@ -264,14 +271,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['lakecolor']
+        return self["lakecolor"]
 
     @lakecolor.setter
     def lakecolor(self, val):
-        self['lakecolor'] = val
+        self["lakecolor"] = val
 
-    # landcolor
-    # ---------
     @property
     def landcolor(self):
         """
@@ -288,14 +293,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['landcolor']
+        return self["landcolor"]
 
     @landcolor.setter
     def landcolor(self, val):
-        self['landcolor'] = val
+        self["landcolor"] = val
 
-    # lataxis
-    # -------
     @property
     def lataxis(self):
         """
@@ -309,14 +312,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.geo.Lataxis
         """
-        return self['lataxis']
+        return self["lataxis"]
 
     @lataxis.setter
     def lataxis(self, val):
-        self['lataxis'] = val
+        self["lataxis"] = val
 
-    # lonaxis
-    # -------
     @property
     def lonaxis(self):
         """
@@ -330,14 +331,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.geo.Lonaxis
         """
-        return self['lonaxis']
+        return self["lonaxis"]
 
     @lonaxis.setter
     def lonaxis(self, val):
-        self['lonaxis'] = val
+        self["lonaxis"] = val
 
-    # oceancolor
-    # ----------
     @property
     def oceancolor(self):
         """
@@ -354,14 +353,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['oceancolor']
+        return self["oceancolor"]
 
     @oceancolor.setter
     def oceancolor(self, val):
-        self['oceancolor'] = val
+        self["oceancolor"] = val
 
-    # projection
-    # ----------
     @property
     def projection(self):
         """
@@ -375,14 +372,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.geo.Projection
         """
-        return self['projection']
+        return self["projection"]
 
     @projection.setter
     def projection(self, val):
-        self['projection'] = val
+        self["projection"] = val
 
-    # resolution
-    # ----------
     @property
     def resolution(self):
         """
@@ -398,14 +393,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['resolution']
+        return self["resolution"]
 
     @resolution.setter
     def resolution(self, val):
-        self['resolution'] = val
+        self["resolution"] = val
 
-    # rivercolor
-    # ----------
     @property
     def rivercolor(self):
         """
@@ -422,14 +415,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['rivercolor']
+        return self["rivercolor"]
 
     @rivercolor.setter
     def rivercolor(self, val):
-        self['rivercolor'] = val
+        self["rivercolor"] = val
 
-    # riverwidth
-    # ----------
     @property
     def riverwidth(self):
         """
@@ -442,14 +433,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['riverwidth']
+        return self["riverwidth"]
 
     @riverwidth.setter
     def riverwidth(self, val):
-        self['riverwidth'] = val
+        self["riverwidth"] = val
 
-    # scope
-    # -----
     @property
     def scope(self):
         """
@@ -464,14 +453,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['scope']
+        return self["scope"]
 
     @scope.setter
     def scope(self, val):
-        self['scope'] = val
+        self["scope"] = val
 
-    # showcoastlines
-    # --------------
     @property
     def showcoastlines(self):
         """
@@ -484,14 +471,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showcoastlines']
+        return self["showcoastlines"]
 
     @showcoastlines.setter
     def showcoastlines(self, val):
-        self['showcoastlines'] = val
+        self["showcoastlines"] = val
 
-    # showcountries
-    # -------------
     @property
     def showcountries(self):
         """
@@ -504,14 +489,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showcountries']
+        return self["showcountries"]
 
     @showcountries.setter
     def showcountries(self, val):
-        self['showcountries'] = val
+        self["showcountries"] = val
 
-    # showframe
-    # ---------
     @property
     def showframe(self):
         """
@@ -524,14 +507,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showframe']
+        return self["showframe"]
 
     @showframe.setter
     def showframe(self, val):
-        self['showframe'] = val
+        self["showframe"] = val
 
-    # showlakes
-    # ---------
     @property
     def showlakes(self):
         """
@@ -544,14 +525,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showlakes']
+        return self["showlakes"]
 
     @showlakes.setter
     def showlakes(self, val):
-        self['showlakes'] = val
+        self["showlakes"] = val
 
-    # showland
-    # --------
     @property
     def showland(self):
         """
@@ -564,14 +543,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showland']
+        return self["showland"]
 
     @showland.setter
     def showland(self, val):
-        self['showland'] = val
+        self["showland"] = val
 
-    # showocean
-    # ---------
     @property
     def showocean(self):
         """
@@ -584,14 +561,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showocean']
+        return self["showocean"]
 
     @showocean.setter
     def showocean(self, val):
-        self['showocean'] = val
+        self["showocean"] = val
 
-    # showrivers
-    # ----------
     @property
     def showrivers(self):
         """
@@ -604,14 +579,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showrivers']
+        return self["showrivers"]
 
     @showrivers.setter
     def showrivers(self, val):
-        self['showrivers'] = val
+        self["showrivers"] = val
 
-    # showsubunits
-    # ------------
     @property
     def showsubunits(self):
         """
@@ -625,14 +598,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showsubunits']
+        return self["showsubunits"]
 
     @showsubunits.setter
     def showsubunits(self, val):
-        self['showsubunits'] = val
+        self["showsubunits"] = val
 
-    # subunitcolor
-    # ------------
     @property
     def subunitcolor(self):
         """
@@ -649,14 +620,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['subunitcolor']
+        return self["subunitcolor"]
 
     @subunitcolor.setter
     def subunitcolor(self, val):
-        self['subunitcolor'] = val
+        self["subunitcolor"] = val
 
-    # subunitwidth
-    # ------------
     @property
     def subunitwidth(self):
         """
@@ -669,14 +638,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['subunitwidth']
+        return self["subunitwidth"]
 
     @subunitwidth.setter
     def subunitwidth(self, val):
-        self['subunitwidth'] = val
+        self["subunitwidth"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -689,14 +656,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -709,14 +674,12 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -810,42 +773,44 @@ class Geo(_BaseLayoutHierarchyType):
         visible
             Sets the default visibility of the base layers.
         """
-    def __init__(self,
-            arg=None,
-            bgcolor: str|None = None,
-            center: None|None = None,
-            coastlinecolor: str|None = None,
-            coastlinewidth: int|float|None = None,
-            countrycolor: str|None = None,
-            countrywidth: int|float|None = None,
-            domain: None|None = None,
-            fitbounds: Any|None = None,
-            framecolor: str|None = None,
-            framewidth: int|float|None = None,
-            lakecolor: str|None = None,
-            landcolor: str|None = None,
-            lataxis: None|None = None,
-            lonaxis: None|None = None,
-            oceancolor: str|None = None,
-            projection: None|None = None,
-            resolution: Any|None = None,
-            rivercolor: str|None = None,
-            riverwidth: int|float|None = None,
-            scope: Any|None = None,
-            showcoastlines: bool|None = None,
-            showcountries: bool|None = None,
-            showframe: bool|None = None,
-            showlakes: bool|None = None,
-            showland: bool|None = None,
-            showocean: bool|None = None,
-            showrivers: bool|None = None,
-            showsubunits: bool|None = None,
-            subunitcolor: str|None = None,
-            subunitwidth: int|float|None = None,
-            uirevision: Any|None = None,
-            visible: bool|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        bgcolor: str | None = None,
+        center: None | None = None,
+        coastlinecolor: str | None = None,
+        coastlinewidth: int | float | None = None,
+        countrycolor: str | None = None,
+        countrywidth: int | float | None = None,
+        domain: None | None = None,
+        fitbounds: Any | None = None,
+        framecolor: str | None = None,
+        framewidth: int | float | None = None,
+        lakecolor: str | None = None,
+        landcolor: str | None = None,
+        lataxis: None | None = None,
+        lonaxis: None | None = None,
+        oceancolor: str | None = None,
+        projection: None | None = None,
+        resolution: Any | None = None,
+        rivercolor: str | None = None,
+        riverwidth: int | float | None = None,
+        scope: Any | None = None,
+        showcoastlines: bool | None = None,
+        showcountries: bool | None = None,
+        showframe: bool | None = None,
+        showlakes: bool | None = None,
+        showland: bool | None = None,
+        showocean: bool | None = None,
+        showrivers: bool | None = None,
+        showsubunits: bool | None = None,
+        subunitcolor: str | None = None,
+        subunitwidth: int | float | None = None,
+        uirevision: Any | None = None,
+        visible: bool | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Geo object
 
@@ -948,13 +913,11 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         Geo
         """
-        super().__init__('geo')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("geo")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -962,56 +925,47 @@ class Geo(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Geo
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Geo`""")
+an instance of :class:`plotly.graph_objs.layout.Geo`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('center', arg, center)
-        self._init_provided('coastlinecolor', arg, coastlinecolor)
-        self._init_provided('coastlinewidth', arg, coastlinewidth)
-        self._init_provided('countrycolor', arg, countrycolor)
-        self._init_provided('countrywidth', arg, countrywidth)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('fitbounds', arg, fitbounds)
-        self._init_provided('framecolor', arg, framecolor)
-        self._init_provided('framewidth', arg, framewidth)
-        self._init_provided('lakecolor', arg, lakecolor)
-        self._init_provided('landcolor', arg, landcolor)
-        self._init_provided('lataxis', arg, lataxis)
-        self._init_provided('lonaxis', arg, lonaxis)
-        self._init_provided('oceancolor', arg, oceancolor)
-        self._init_provided('projection', arg, projection)
-        self._init_provided('resolution', arg, resolution)
-        self._init_provided('rivercolor', arg, rivercolor)
-        self._init_provided('riverwidth', arg, riverwidth)
-        self._init_provided('scope', arg, scope)
-        self._init_provided('showcoastlines', arg, showcoastlines)
-        self._init_provided('showcountries', arg, showcountries)
-        self._init_provided('showframe', arg, showframe)
-        self._init_provided('showlakes', arg, showlakes)
-        self._init_provided('showland', arg, showland)
-        self._init_provided('showocean', arg, showocean)
-        self._init_provided('showrivers', arg, showrivers)
-        self._init_provided('showsubunits', arg, showsubunits)
-        self._init_provided('subunitcolor', arg, subunitcolor)
-        self._init_provided('subunitwidth', arg, subunitwidth)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('visible', arg, visible)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("center", arg, center)
+        self._init_provided("coastlinecolor", arg, coastlinecolor)
+        self._init_provided("coastlinewidth", arg, coastlinewidth)
+        self._init_provided("countrycolor", arg, countrycolor)
+        self._init_provided("countrywidth", arg, countrywidth)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("fitbounds", arg, fitbounds)
+        self._init_provided("framecolor", arg, framecolor)
+        self._init_provided("framewidth", arg, framewidth)
+        self._init_provided("lakecolor", arg, lakecolor)
+        self._init_provided("landcolor", arg, landcolor)
+        self._init_provided("lataxis", arg, lataxis)
+        self._init_provided("lonaxis", arg, lonaxis)
+        self._init_provided("oceancolor", arg, oceancolor)
+        self._init_provided("projection", arg, projection)
+        self._init_provided("resolution", arg, resolution)
+        self._init_provided("rivercolor", arg, rivercolor)
+        self._init_provided("riverwidth", arg, riverwidth)
+        self._init_provided("scope", arg, scope)
+        self._init_provided("showcoastlines", arg, showcoastlines)
+        self._init_provided("showcountries", arg, showcountries)
+        self._init_provided("showframe", arg, showframe)
+        self._init_provided("showlakes", arg, showlakes)
+        self._init_provided("showland", arg, showland)
+        self._init_provided("showocean", arg, showocean)
+        self._init_provided("showrivers", arg, showrivers)
+        self._init_provided("showsubunits", arg, showsubunits)
+        self._init_provided("subunitcolor", arg, subunitcolor)
+        self._init_provided("subunitwidth", arg, subunitwidth)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

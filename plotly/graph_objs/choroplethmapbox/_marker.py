@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Marker(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'choroplethmapbox'
-    _path_str = 'choroplethmapbox.marker'
+    _parent_path_str = "choroplethmapbox"
+    _path_str = "choroplethmapbox.marker"
     _valid_props = {"line", "opacity", "opacitysrc"}
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -30,14 +24,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.choroplethmapbox.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -51,14 +43,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float|NDArray
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # opacitysrc
-    # ----------
     @property
     def opacitysrc(self):
         """
@@ -71,14 +61,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['opacitysrc']
+        return self["opacitysrc"]
 
     @opacitysrc.setter
     def opacitysrc(self, val):
-        self['opacitysrc'] = val
+        self["opacitysrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -91,13 +79,15 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `opacity`.
         """
-    def __init__(self,
-            arg=None,
-            line: None|None = None,
-            opacity: int|float|None = None,
-            opacitysrc: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        line: None | None = None,
+        opacity: int | float | None = None,
+        opacitysrc: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Marker object
 
@@ -120,13 +110,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -134,27 +122,18 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.choroplethmapbox.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.choroplethmapbox.Marker`""")
+an instance of :class:`plotly.graph_objs.choroplethmapbox.Marker`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('line', arg, line)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('opacitysrc', arg, opacitysrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("line", arg, line)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("opacitysrc", arg, opacitysrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

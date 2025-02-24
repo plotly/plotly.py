@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,30 @@ import copy as _copy
 
 class Node(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'sankey'
-    _path_str = 'sankey.node'
-    _valid_props = {"align", "color", "colorsrc", "customdata", "customdatasrc", "groups", "hoverinfo", "hoverlabel", "hovertemplate", "hovertemplatesrc", "label", "labelsrc", "line", "pad", "thickness", "x", "xsrc", "y", "ysrc"}
+    _parent_path_str = "sankey"
+    _path_str = "sankey.node"
+    _valid_props = {
+        "align",
+        "color",
+        "colorsrc",
+        "customdata",
+        "customdatasrc",
+        "groups",
+        "hoverinfo",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "label",
+        "labelsrc",
+        "line",
+        "pad",
+        "thickness",
+        "x",
+        "xsrc",
+        "y",
+        "ysrc",
+    }
 
-    # align
-    # -----
     @property
     def align(self):
         """
@@ -31,14 +45,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -61,14 +73,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         str|NDArray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -81,14 +91,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -101,14 +109,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         NDArray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -122,14 +128,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # groups
-    # ------
     @property
     def groups(self):
         """
@@ -146,14 +150,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['groups']
+        return self["groups"]
 
     @groups.setter
     def groups(self, val):
-        self['groups'] = val
+        self["groups"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -170,14 +172,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -191,14 +191,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.sankey.node.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -238,14 +236,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         str|NDArray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -259,14 +255,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # label
-    # -----
     @property
     def label(self):
         """
@@ -279,14 +273,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         NDArray
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
-    # labelsrc
-    # --------
     @property
     def labelsrc(self):
         """
@@ -299,14 +291,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['labelsrc']
+        return self["labelsrc"]
 
     @labelsrc.setter
     def labelsrc(self, val):
-        self['labelsrc'] = val
+        self["labelsrc"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -320,14 +310,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.sankey.node.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # pad
-    # ---
     @property
     def pad(self):
         """
@@ -340,14 +328,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['pad']
+        return self["pad"]
 
     @pad.setter
     def pad(self, val):
-        self['pad'] = val
+        self["pad"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -360,14 +346,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['thickness']
+        return self["thickness"]
 
     @thickness.setter
     def thickness(self, val):
-        self['thickness'] = val
+        self["thickness"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -380,14 +364,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         NDArray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -400,14 +382,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -420,14 +400,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         NDArray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -440,14 +418,12 @@ class Node(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -538,29 +514,31 @@ class Node(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `y`.
         """
-    def __init__(self,
-            arg=None,
-            align: Any|None = None,
-            color: str|None = None,
-            colorsrc: str|None = None,
-            customdata: NDArray|None = None,
-            customdatasrc: str|None = None,
-            groups: list|None = None,
-            hoverinfo: Any|None = None,
-            hoverlabel: None|None = None,
-            hovertemplate: str|None = None,
-            hovertemplatesrc: str|None = None,
-            label: NDArray|None = None,
-            labelsrc: str|None = None,
-            line: None|None = None,
-            pad: int|float|None = None,
-            thickness: int|float|None = None,
-            x: NDArray|None = None,
-            xsrc: str|None = None,
-            y: NDArray|None = None,
-            ysrc: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        align: Any | None = None,
+        color: str | None = None,
+        colorsrc: str | None = None,
+        customdata: NDArray | None = None,
+        customdatasrc: str | None = None,
+        groups: list | None = None,
+        hoverinfo: Any | None = None,
+        hoverlabel: None | None = None,
+        hovertemplate: str | None = None,
+        hovertemplatesrc: str | None = None,
+        label: NDArray | None = None,
+        labelsrc: str | None = None,
+        line: None | None = None,
+        pad: int | float | None = None,
+        thickness: int | float | None = None,
+        x: NDArray | None = None,
+        xsrc: str | None = None,
+        y: NDArray | None = None,
+        ysrc: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Node object
 
@@ -662,13 +640,11 @@ class Node(_BaseTraceHierarchyType):
         -------
         Node
         """
-        super().__init__('node')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("node")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -676,43 +652,34 @@ class Node(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.sankey.Node
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.sankey.Node`""")
+an instance of :class:`plotly.graph_objs.sankey.Node`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('align', arg, align)
-        self._init_provided('color', arg, color)
-        self._init_provided('colorsrc', arg, colorsrc)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('groups', arg, groups)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('label', arg, label)
-        self._init_provided('labelsrc', arg, labelsrc)
-        self._init_provided('line', arg, line)
-        self._init_provided('pad', arg, pad)
-        self._init_provided('thickness', arg, thickness)
-        self._init_provided('x', arg, x)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('y', arg, y)
-        self._init_provided('ysrc', arg, ysrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("align", arg, align)
+        self._init_provided("color", arg, color)
+        self._init_provided("colorsrc", arg, colorsrc)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("groups", arg, groups)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("label", arg, label)
+        self._init_provided("labelsrc", arg, labelsrc)
+        self._init_provided("line", arg, line)
+        self._init_provided("pad", arg, pad)
+        self._init_provided("thickness", arg, thickness)
+        self._init_provided("x", arg, x)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("ysrc", arg, ysrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

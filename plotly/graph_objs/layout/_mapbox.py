@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,22 @@ import copy as _copy
 
 class Mapbox(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.mapbox'
-    _valid_props = {"accesstoken", "bearing", "bounds", "center", "domain", "layerdefaults", "layers", "pitch", "style", "uirevision", "zoom"}
+    _parent_path_str = "layout"
+    _path_str = "layout.mapbox"
+    _valid_props = {
+        "accesstoken",
+        "bearing",
+        "bounds",
+        "center",
+        "domain",
+        "layerdefaults",
+        "layers",
+        "pitch",
+        "style",
+        "uirevision",
+        "zoom",
+    }
 
-    # accesstoken
-    # -----------
     @property
     def accesstoken(self):
         """
@@ -34,14 +40,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['accesstoken']
+        return self["accesstoken"]
 
     @accesstoken.setter
     def accesstoken(self, val):
-        self['accesstoken'] = val
+        self["accesstoken"] = val
 
-    # bearing
-    # -------
     @property
     def bearing(self):
         """
@@ -55,14 +59,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['bearing']
+        return self["bearing"]
 
     @bearing.setter
     def bearing(self, val):
-        self['bearing'] = val
+        self["bearing"] = val
 
-    # bounds
-    # ------
     @property
     def bounds(self):
         """
@@ -76,14 +78,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.Bounds
         """
-        return self['bounds']
+        return self["bounds"]
 
     @bounds.setter
     def bounds(self, val):
-        self['bounds'] = val
+        self["bounds"] = val
 
-    # center
-    # ------
     @property
     def center(self):
         """
@@ -97,14 +97,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.Center
         """
-        return self['center']
+        return self["center"]
 
     @center.setter
     def center(self, val):
-        self['center'] = val
+        self["center"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -118,14 +116,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # layers
-    # ------
     @property
     def layers(self):
         """
@@ -139,14 +135,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.mapbox.Layer]
         """
-        return self['layers']
+        return self["layers"]
 
     @layers.setter
     def layers(self, val):
-        self['layers'] = val
+        self["layers"] = val
 
-    # layerdefaults
-    # -------------
     @property
     def layerdefaults(self):
         """
@@ -164,14 +158,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.Layer
         """
-        return self['layerdefaults']
+        return self["layerdefaults"]
 
     @layerdefaults.setter
     def layerdefaults(self, val):
-        self['layerdefaults'] = val
+        self["layerdefaults"] = val
 
-    # pitch
-    # -----
     @property
     def pitch(self):
         """
@@ -185,14 +177,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['pitch']
+        return self["pitch"]
 
     @pitch.setter
     def pitch(self, val):
-        self['pitch'] = val
+        self["pitch"] = val
 
-    # style
-    # -----
     @property
     def style(self):
         """
@@ -223,14 +213,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['style']
+        return self["style"]
 
     @style.setter
     def style(self, val):
-        self['style'] = val
+        self["style"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -244,14 +232,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # zoom
-    # ----
     @property
     def zoom(self):
         """
@@ -264,14 +250,12 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['zoom']
+        return self["zoom"]
 
     @zoom.setter
     def zoom(self, val):
-        self['zoom'] = val
+        self["zoom"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -340,21 +324,23 @@ class Mapbox(_BaseLayoutHierarchyType):
         zoom
             Sets the zoom level of the map (mapbox.zoom).
         """
-    def __init__(self,
-            arg=None,
-            accesstoken: str|None = None,
-            bearing: int|float|None = None,
-            bounds: None|None = None,
-            center: None|None = None,
-            domain: None|None = None,
-            layers: None|None = None,
-            layerdefaults: None|None = None,
-            pitch: int|float|None = None,
-            style: Any|None = None,
-            uirevision: Any|None = None,
-            zoom: int|float|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        accesstoken: str | None = None,
+        bearing: int | float | None = None,
+        bounds: None | None = None,
+        center: None | None = None,
+        domain: None | None = None,
+        layers: None | None = None,
+        layerdefaults: None | None = None,
+        pitch: int | float | None = None,
+        style: Any | None = None,
+        uirevision: Any | None = None,
+        zoom: int | float | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Mapbox object
 
@@ -432,13 +418,11 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         Mapbox
         """
-        super().__init__('mapbox')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("mapbox")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -446,35 +430,26 @@ class Mapbox(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Mapbox
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Mapbox`""")
+an instance of :class:`plotly.graph_objs.layout.Mapbox`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('accesstoken', arg, accesstoken)
-        self._init_provided('bearing', arg, bearing)
-        self._init_provided('bounds', arg, bounds)
-        self._init_provided('center', arg, center)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('layers', arg, layers)
-        self._init_provided('layerdefaults', arg, layerdefaults)
-        self._init_provided('pitch', arg, pitch)
-        self._init_provided('style', arg, style)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('zoom', arg, zoom)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("accesstoken", arg, accesstoken)
+        self._init_provided("bearing", arg, bearing)
+        self._init_provided("bounds", arg, bounds)
+        self._init_provided("center", arg, center)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("layers", arg, layers)
+        self._init_provided("layerdefaults", arg, layerdefaults)
+        self._init_provided("pitch", arg, pitch)
+        self._init_provided("style", arg, style)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("zoom", arg, zoom)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

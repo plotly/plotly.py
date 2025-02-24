@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Cumulative(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'histogram'
-    _path_str = 'histogram.cumulative'
+    _parent_path_str = "histogram"
+    _path_str = "histogram.cumulative"
     _valid_props = {"currentbin", "direction", "enabled"}
 
-    # currentbin
-    # ----------
     @property
     def currentbin(self):
         """
@@ -35,14 +29,12 @@ class Cumulative(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['currentbin']
+        return self["currentbin"]
 
     @currentbin.setter
     def currentbin(self, val):
-        self['currentbin'] = val
+        self["currentbin"] = val
 
-    # direction
-    # ---------
     @property
     def direction(self):
         """
@@ -59,14 +51,12 @@ class Cumulative(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['direction']
+        return self["direction"]
 
     @direction.setter
     def direction(self, val):
-        self['direction'] = val
+        self["direction"] = val
 
-    # enabled
-    # -------
     @property
     def enabled(self):
         """
@@ -85,14 +75,12 @@ class Cumulative(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['enabled']
+        return self["enabled"]
 
     @enabled.setter
     def enabled(self, val):
-        self['enabled'] = val
+        self["enabled"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -119,13 +107,15 @@ class Cumulative(_BaseTraceHierarchyType):
             "probability" and *probability density* both rise to
             the number of sample points.
         """
-    def __init__(self,
-            arg=None,
-            currentbin: Any|None = None,
-            direction: Any|None = None,
-            enabled: bool|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        currentbin: Any | None = None,
+        direction: Any | None = None,
+        enabled: bool | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Cumulative object
 
@@ -162,13 +152,11 @@ class Cumulative(_BaseTraceHierarchyType):
         -------
         Cumulative
         """
-        super().__init__('cumulative')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("cumulative")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -176,27 +164,18 @@ class Cumulative(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.histogram.Cumulative
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram.Cumulative`""")
+an instance of :class:`plotly.graph_objs.histogram.Cumulative`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('currentbin', arg, currentbin)
-        self._init_provided('direction', arg, direction)
-        self._init_provided('enabled', arg, enabled)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("currentbin", arg, currentbin)
+        self._init_provided("direction", arg, direction)
+        self._init_provided("enabled", arg, enabled)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

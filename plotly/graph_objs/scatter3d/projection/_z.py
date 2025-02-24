@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Z(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'scatter3d.projection'
-    _path_str = 'scatter3d.projection.z'
+    _parent_path_str = "scatter3d.projection"
+    _path_str = "scatter3d.projection.z"
     _valid_props = {"opacity", "scale", "show"}
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -29,14 +23,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # scale
-    # -----
     @property
     def scale(self):
         """
@@ -50,14 +42,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['scale']
+        return self["scale"]
 
     @scale.setter
     def scale(self, val):
-        self['scale'] = val
+        self["scale"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -70,14 +60,12 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -90,13 +78,15 @@ class Z(_BaseTraceHierarchyType):
             Sets whether or not projections are shown along the z
             axis.
         """
-    def __init__(self,
-            arg=None,
-            opacity: int|float|None = None,
-            scale: int|float|None = None,
-            show: bool|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        opacity: int | float | None = None,
+        scale: int | float | None = None,
+        show: bool | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Z object
 
@@ -119,13 +109,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         Z
         """
-        super().__init__('z')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("z")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -133,27 +121,18 @@ class Z(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatter3d.projection.Z
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.projection.Z`""")
+an instance of :class:`plotly.graph_objs.scatter3d.projection.Z`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('scale', arg, scale)
-        self._init_provided('show', arg, show)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("scale", arg, scale)
+        self._init_provided("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

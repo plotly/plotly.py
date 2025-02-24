@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,26 @@ import copy as _copy
 
 class Marker(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'funnel'
-    _path_str = 'funnel.marker'
-    _valid_props = {"autocolorscale", "cauto", "cmax", "cmid", "cmin", "color", "coloraxis", "colorbar", "colorscale", "colorsrc", "line", "opacity", "opacitysrc", "reversescale", "showscale"}
+    _parent_path_str = "funnel"
+    _path_str = "funnel.marker"
+    _valid_props = {
+        "autocolorscale",
+        "cauto",
+        "cmax",
+        "cmid",
+        "cmin",
+        "color",
+        "coloraxis",
+        "colorbar",
+        "colorscale",
+        "colorsrc",
+        "line",
+        "opacity",
+        "opacitysrc",
+        "reversescale",
+        "showscale",
+    }
 
-    # autocolorscale
-    # --------------
     @property
     def autocolorscale(self):
         """
@@ -35,14 +45,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['autocolorscale']
+        return self["autocolorscale"]
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self['autocolorscale'] = val
+        self["autocolorscale"] = val
 
-    # cauto
-    # -----
     @property
     def cauto(self):
         """
@@ -60,14 +68,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['cauto']
+        return self["cauto"]
 
     @cauto.setter
     def cauto(self, val):
-        self['cauto'] = val
+        self["cauto"] = val
 
-    # cmax
-    # ----
     @property
     def cmax(self):
         """
@@ -83,14 +89,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmax']
+        return self["cmax"]
 
     @cmax.setter
     def cmax(self, val):
-        self['cmax'] = val
+        self["cmax"] = val
 
-    # cmid
-    # ----
     @property
     def cmid(self):
         """
@@ -107,14 +111,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmid']
+        return self["cmid"]
 
     @cmid.setter
     def cmid(self, val):
-        self['cmid'] = val
+        self["cmid"] = val
 
-    # cmin
-    # ----
     @property
     def cmin(self):
         """
@@ -130,14 +132,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmin']
+        return self["cmin"]
 
     @cmin.setter
     def cmin(self, val):
-        self['cmin'] = val
+        self["cmin"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -160,14 +160,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str|NDArray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # coloraxis
-    # ---------
     @property
     def coloraxis(self):
         """
@@ -187,14 +185,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['coloraxis']
+        return self["coloraxis"]
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self['coloraxis'] = val
+        self["coloraxis"] = val
 
-    # colorbar
-    # --------
     @property
     def colorbar(self):
         """
@@ -208,14 +204,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.funnel.marker.ColorBar
         """
-        return self['colorbar']
+        return self["colorbar"]
 
     @colorbar.setter
     def colorbar(self, val):
-        self['colorbar'] = val
+        self["colorbar"] = val
 
-    # colorscale
-    # ----------
     @property
     def colorscale(self):
         """
@@ -262,14 +256,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -282,14 +274,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -303,14 +293,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.funnel.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -324,14 +312,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float|NDArray
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # opacitysrc
-    # ----------
     @property
     def opacitysrc(self):
         """
@@ -344,14 +330,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['opacitysrc']
+        return self["opacitysrc"]
 
     @opacitysrc.setter
     def opacitysrc(self, val):
-        self['opacitysrc'] = val
+        self["opacitysrc"] = val
 
-    # reversescale
-    # ------------
     @property
     def reversescale(self):
         """
@@ -367,14 +351,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['reversescale']
+        return self["reversescale"]
 
     @reversescale.setter
     def reversescale(self, val):
-        self['reversescale'] = val
+        self["reversescale"] = val
 
-    # showscale
-    # ---------
     @property
     def showscale(self):
         """
@@ -389,14 +371,12 @@ class Marker(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['showscale']
+        return self["showscale"]
 
     @showscale.setter
     def showscale(self, val):
-        self['showscale'] = val
+        self["showscale"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -485,25 +465,27 @@ class Marker(_BaseTraceHierarchyType):
             this trace. Has an effect only if in `marker.color` is
             set to a numerical array.
         """
-    def __init__(self,
-            arg=None,
-            autocolorscale: bool|None = None,
-            cauto: bool|None = None,
-            cmax: int|float|None = None,
-            cmid: int|float|None = None,
-            cmin: int|float|None = None,
-            color: str|None = None,
-            coloraxis: str|None = None,
-            colorbar: None|None = None,
-            colorscale: str|None = None,
-            colorsrc: str|None = None,
-            line: None|None = None,
-            opacity: int|float|None = None,
-            opacitysrc: str|None = None,
-            reversescale: bool|None = None,
-            showscale: bool|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        autocolorscale: bool | None = None,
+        cauto: bool | None = None,
+        cmax: int | float | None = None,
+        cmid: int | float | None = None,
+        cmin: int | float | None = None,
+        color: str | None = None,
+        coloraxis: str | None = None,
+        colorbar: None | None = None,
+        colorscale: str | None = None,
+        colorsrc: str | None = None,
+        line: None | None = None,
+        opacity: int | float | None = None,
+        opacitysrc: str | None = None,
+        reversescale: bool | None = None,
+        showscale: bool | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Marker object
 
@@ -601,13 +583,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -615,39 +595,30 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.funnel.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.funnel.Marker`""")
+an instance of :class:`plotly.graph_objs.funnel.Marker`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('autocolorscale', arg, autocolorscale)
-        self._init_provided('cauto', arg, cauto)
-        self._init_provided('cmax', arg, cmax)
-        self._init_provided('cmid', arg, cmid)
-        self._init_provided('cmin', arg, cmin)
-        self._init_provided('color', arg, color)
-        self._init_provided('coloraxis', arg, coloraxis)
-        self._init_provided('colorbar', arg, colorbar)
-        self._init_provided('colorscale', arg, colorscale)
-        self._init_provided('colorsrc', arg, colorsrc)
-        self._init_provided('line', arg, line)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('opacitysrc', arg, opacitysrc)
-        self._init_provided('reversescale', arg, reversescale)
-        self._init_provided('showscale', arg, showscale)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("autocolorscale", arg, autocolorscale)
+        self._init_provided("cauto", arg, cauto)
+        self._init_provided("cmax", arg, cmax)
+        self._init_provided("cmid", arg, cmid)
+        self._init_provided("cmin", arg, cmin)
+        self._init_provided("color", arg, color)
+        self._init_provided("coloraxis", arg, coloraxis)
+        self._init_provided("colorbar", arg, colorbar)
+        self._init_provided("colorscale", arg, colorscale)
+        self._init_provided("colorsrc", arg, colorsrc)
+        self._init_provided("line", arg, line)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("opacitysrc", arg, opacitysrc)
+        self._init_provided("reversescale", arg, reversescale)
+        self._init_provided("showscale", arg, showscale)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

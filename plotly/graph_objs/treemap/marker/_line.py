@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Line(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'treemap.marker'
-    _path_str = 'treemap.marker.line'
+    _parent_path_str = "treemap.marker"
+    _path_str = "treemap.marker.line"
     _valid_props = {"color", "colorsrc", "width", "widthsrc"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -35,14 +29,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str|NDArray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -55,14 +47,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -76,14 +66,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float|NDArray
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
-    # widthsrc
-    # --------
     @property
     def widthsrc(self):
         """
@@ -96,14 +84,12 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['widthsrc']
+        return self["widthsrc"]
 
     @widthsrc.setter
     def widthsrc(self, val):
-        self['widthsrc'] = val
+        self["widthsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -120,14 +106,16 @@ class Line(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `width`.
         """
-    def __init__(self,
-            arg=None,
-            color: str|None = None,
-            colorsrc: str|None = None,
-            width: int|float|None = None,
-            widthsrc: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color: str | None = None,
+        colorsrc: str | None = None,
+        width: int | float | None = None,
+        widthsrc: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Line object
 
@@ -154,13 +142,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super().__init__('line')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("line")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -168,28 +154,19 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.treemap.marker.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.marker.Line`""")
+an instance of :class:`plotly.graph_objs.treemap.marker.Line`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('colorsrc', arg, colorsrc)
-        self._init_provided('width', arg, width)
-        self._init_provided('widthsrc', arg, widthsrc)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("colorsrc", arg, colorsrc)
+        self._init_provided("width", arg, width)
+        self._init_provided("widthsrc", arg, widthsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

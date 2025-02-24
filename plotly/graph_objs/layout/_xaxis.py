@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,104 @@ import copy as _copy
 
 class XAxis(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.xaxis'
-    _valid_props = {"anchor", "automargin", "autorange", "autorangeoptions", "autotickangles", "autotypenumbers", "calendar", "categoryarray", "categoryarraysrc", "categoryorder", "color", "constrain", "constraintoward", "dividercolor", "dividerwidth", "domain", "dtick", "exponentformat", "fixedrange", "gridcolor", "griddash", "gridwidth", "hoverformat", "insiderange", "labelalias", "layer", "linecolor", "linewidth", "matches", "maxallowed", "minallowed", "minexponent", "minor", "mirror", "nticks", "overlaying", "position", "range", "rangebreakdefaults", "rangebreaks", "rangemode", "rangeselector", "rangeslider", "scaleanchor", "scaleratio", "separatethousands", "showdividers", "showexponent", "showgrid", "showline", "showspikes", "showticklabels", "showtickprefix", "showticksuffix", "side", "spikecolor", "spikedash", "spikemode", "spikesnap", "spikethickness", "tick0", "tickangle", "tickcolor", "tickfont", "tickformat", "tickformatstopdefaults", "tickformatstops", "ticklabelindex", "ticklabelindexsrc", "ticklabelmode", "ticklabeloverflow", "ticklabelposition", "ticklabelshift", "ticklabelstandoff", "ticklabelstep", "ticklen", "tickmode", "tickprefix", "ticks", "tickson", "ticksuffix", "ticktext", "ticktextsrc", "tickvals", "tickvalssrc", "tickwidth", "title", "type", "uirevision", "visible", "zeroline", "zerolinecolor", "zerolinewidth"}
+    _parent_path_str = "layout"
+    _path_str = "layout.xaxis"
+    _valid_props = {
+        "anchor",
+        "automargin",
+        "autorange",
+        "autorangeoptions",
+        "autotickangles",
+        "autotypenumbers",
+        "calendar",
+        "categoryarray",
+        "categoryarraysrc",
+        "categoryorder",
+        "color",
+        "constrain",
+        "constraintoward",
+        "dividercolor",
+        "dividerwidth",
+        "domain",
+        "dtick",
+        "exponentformat",
+        "fixedrange",
+        "gridcolor",
+        "griddash",
+        "gridwidth",
+        "hoverformat",
+        "insiderange",
+        "labelalias",
+        "layer",
+        "linecolor",
+        "linewidth",
+        "matches",
+        "maxallowed",
+        "minallowed",
+        "minexponent",
+        "minor",
+        "mirror",
+        "nticks",
+        "overlaying",
+        "position",
+        "range",
+        "rangebreakdefaults",
+        "rangebreaks",
+        "rangemode",
+        "rangeselector",
+        "rangeslider",
+        "scaleanchor",
+        "scaleratio",
+        "separatethousands",
+        "showdividers",
+        "showexponent",
+        "showgrid",
+        "showline",
+        "showspikes",
+        "showticklabels",
+        "showtickprefix",
+        "showticksuffix",
+        "side",
+        "spikecolor",
+        "spikedash",
+        "spikemode",
+        "spikesnap",
+        "spikethickness",
+        "tick0",
+        "tickangle",
+        "tickcolor",
+        "tickfont",
+        "tickformat",
+        "tickformatstopdefaults",
+        "tickformatstops",
+        "ticklabelindex",
+        "ticklabelindexsrc",
+        "ticklabelmode",
+        "ticklabeloverflow",
+        "ticklabelposition",
+        "ticklabelshift",
+        "ticklabelstandoff",
+        "ticklabelstep",
+        "ticklen",
+        "tickmode",
+        "tickprefix",
+        "ticks",
+        "tickson",
+        "ticksuffix",
+        "ticktext",
+        "ticktextsrc",
+        "tickvals",
+        "tickvalssrc",
+        "tickwidth",
+        "title",
+        "type",
+        "uirevision",
+        "visible",
+        "zeroline",
+        "zerolinecolor",
+        "zerolinewidth",
+    }
 
-    # anchor
-    # ------
     @property
     def anchor(self):
         """
@@ -35,14 +123,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['anchor']
+        return self["anchor"]
 
     @anchor.setter
     def anchor(self, val):
-        self['anchor'] = val
+        self["anchor"] = val
 
-    # automargin
-    # ----------
     @property
     def automargin(self):
         """
@@ -59,14 +145,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['automargin']
+        return self["automargin"]
 
     @automargin.setter
     def automargin(self, val):
-        self['automargin'] = val
+        self["automargin"] = val
 
-    # autorange
-    # ---------
     @property
     def autorange(self):
         """
@@ -90,14 +174,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['autorange']
+        return self["autorange"]
 
     @autorange.setter
     def autorange(self, val):
-        self['autorange'] = val
+        self["autorange"] = val
 
-    # autorangeoptions
-    # ----------------
     @property
     def autorangeoptions(self):
         """
@@ -111,14 +193,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.Autorangeoptions
         """
-        return self['autorangeoptions']
+        return self["autorangeoptions"]
 
     @autorangeoptions.setter
     def autorangeoptions(self, val):
-        self['autorangeoptions'] = val
+        self["autorangeoptions"] = val
 
-    # autotickangles
-    # --------------
     @property
     def autotickangles(self):
         """
@@ -137,14 +217,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['autotickangles']
+        return self["autotickangles"]
 
     @autotickangles.setter
     def autotickangles(self, val):
-        self['autotickangles'] = val
+        self["autotickangles"] = val
 
-    # autotypenumbers
-    # ---------------
     @property
     def autotypenumbers(self):
         """
@@ -161,14 +239,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['autotypenumbers']
+        return self["autotypenumbers"]
 
     @autotypenumbers.setter
     def autotypenumbers(self, val):
-        self['autotypenumbers'] = val
+        self["autotypenumbers"] = val
 
-    # calendar
-    # --------
     @property
     def calendar(self):
         """
@@ -188,14 +264,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['calendar']
+        return self["calendar"]
 
     @calendar.setter
     def calendar(self, val):
-        self['calendar'] = val
+        self["calendar"] = val
 
-    # categoryarray
-    # -------------
     @property
     def categoryarray(self):
         """
@@ -210,14 +284,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         NDArray
         """
-        return self['categoryarray']
+        return self["categoryarray"]
 
     @categoryarray.setter
     def categoryarray(self, val):
-        self['categoryarray'] = val
+        self["categoryarray"] = val
 
-    # categoryarraysrc
-    # ----------------
     @property
     def categoryarraysrc(self):
         """
@@ -231,14 +303,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['categoryarraysrc']
+        return self["categoryarraysrc"]
 
     @categoryarraysrc.setter
     def categoryarraysrc(self, val):
-        self['categoryarraysrc'] = val
+        self["categoryarraysrc"] = val
 
-    # categoryorder
-    # -------------
     @property
     def categoryorder(self):
         """
@@ -272,14 +342,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['categoryorder']
+        return self["categoryorder"]
 
     @categoryorder.setter
     def categoryorder(self, val):
-        self['categoryorder'] = val
+        self["categoryorder"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -299,14 +367,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # constrain
-    # ---------
     @property
     def constrain(self):
         """
@@ -324,14 +390,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['constrain']
+        return self["constrain"]
 
     @constrain.setter
     def constrain(self, val):
-        self['constrain'] = val
+        self["constrain"] = val
 
-    # constraintoward
-    # ---------------
     @property
     def constraintoward(self):
         """
@@ -350,14 +414,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['constraintoward']
+        return self["constraintoward"]
 
     @constraintoward.setter
     def constraintoward(self, val):
-        self['constraintoward'] = val
+        self["constraintoward"] = val
 
-    # dividercolor
-    # ------------
     @property
     def dividercolor(self):
         """
@@ -375,14 +437,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['dividercolor']
+        return self["dividercolor"]
 
     @dividercolor.setter
     def dividercolor(self, val):
-        self['dividercolor'] = val
+        self["dividercolor"] = val
 
-    # dividerwidth
-    # ------------
     @property
     def dividerwidth(self):
         """
@@ -396,39 +456,35 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['dividerwidth']
+        return self["dividerwidth"]
 
     @dividerwidth.setter
     def dividerwidth(self, val):
-        self['dividerwidth'] = val
+        self["dividerwidth"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
-        Sets the domain of this axis (in plot fraction).
+            Sets the domain of this axis (in plot fraction).
 
-        The 'domain' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'domain[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-    (1) The 'domain[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+            The 'domain' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'domain[0]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+        (1) The 'domain[1]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+
+            Returns
+            -------
+            list
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # dtick
-    # -----
     @property
     def dtick(self):
         """
@@ -459,14 +515,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
-    # exponentformat
-    # --------------
     @property
     def exponentformat(self):
         """
@@ -484,14 +538,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['exponentformat']
+        return self["exponentformat"]
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self['exponentformat'] = val
+        self["exponentformat"] = val
 
-    # fixedrange
-    # ----------
     @property
     def fixedrange(self):
         """
@@ -505,14 +557,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['fixedrange']
+        return self["fixedrange"]
 
     @fixedrange.setter
     def fixedrange(self, val):
-        self['fixedrange'] = val
+        self["fixedrange"] = val
 
-    # gridcolor
-    # ---------
     @property
     def gridcolor(self):
         """
@@ -529,14 +579,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
-    # griddash
-    # --------
     @property
     def griddash(self):
         """
@@ -555,14 +603,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['griddash']
+        return self["griddash"]
 
     @griddash.setter
     def griddash(self, val):
-        self['griddash'] = val
+        self["griddash"] = val
 
-    # gridwidth
-    # ---------
     @property
     def gridwidth(self):
         """
@@ -575,14 +621,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
-    # hoverformat
-    # -----------
     @property
     def hoverformat(self):
         """
@@ -605,40 +649,36 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['hoverformat']
+        return self["hoverformat"]
 
     @hoverformat.setter
     def hoverformat(self, val):
-        self['hoverformat'] = val
+        self["hoverformat"] = val
 
-    # insiderange
-    # -----------
     @property
     def insiderange(self):
         """
-        Could be used to set the desired inside range of this axis
-        (excluding the labels) when `ticklabelposition` of the anchored
-        axis has "inside". Not implemented for axes with `type` "log".
-        This would be ignored when `range` is provided.
+            Could be used to set the desired inside range of this axis
+            (excluding the labels) when `ticklabelposition` of the anchored
+            axis has "inside". Not implemented for axes with `type` "log".
+            This would be ignored when `range` is provided.
 
-        The 'insiderange' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'insiderange[0]' property accepts values of any type
-    (1) The 'insiderange[1]' property accepts values of any type
+            The 'insiderange' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'insiderange[0]' property accepts values of any type
+        (1) The 'insiderange[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
-        return self['insiderange']
+        return self["insiderange"]
 
     @insiderange.setter
     def insiderange(self, val):
-        self['insiderange'] = val
+        self["insiderange"] = val
 
-    # labelalias
-    # ----------
     @property
     def labelalias(self):
         """
@@ -658,14 +698,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['labelalias']
+        return self["labelalias"]
 
     @labelalias.setter
     def labelalias(self, val):
-        self['labelalias'] = val
+        self["labelalias"] = val
 
-    # layer
-    # -----
     @property
     def layer(self):
         """
@@ -684,14 +722,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['layer']
+        return self["layer"]
 
     @layer.setter
     def layer(self, val):
-        self['layer'] = val
+        self["layer"] = val
 
-    # linecolor
-    # ---------
     @property
     def linecolor(self):
         """
@@ -708,14 +744,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['linecolor']
+        return self["linecolor"]
 
     @linecolor.setter
     def linecolor(self, val):
-        self['linecolor'] = val
+        self["linecolor"] = val
 
-    # linewidth
-    # ---------
     @property
     def linewidth(self):
         """
@@ -728,14 +762,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['linewidth']
+        return self["linewidth"]
 
     @linewidth.setter
     def linewidth(self, val):
-        self['linewidth'] = val
+        self["linewidth"] = val
 
-    # matches
-    # -------
     @property
     def matches(self):
         """
@@ -756,14 +788,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['matches']
+        return self["matches"]
 
     @matches.setter
     def matches(self, val):
-        self['matches'] = val
+        self["matches"] = val
 
-    # maxallowed
-    # ----------
     @property
     def maxallowed(self):
         """
@@ -775,14 +805,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['maxallowed']
+        return self["maxallowed"]
 
     @maxallowed.setter
     def maxallowed(self, val):
-        self['maxallowed'] = val
+        self["maxallowed"] = val
 
-    # minallowed
-    # ----------
     @property
     def minallowed(self):
         """
@@ -794,14 +822,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['minallowed']
+        return self["minallowed"]
 
     @minallowed.setter
     def minallowed(self, val):
-        self['minallowed'] = val
+        self["minallowed"] = val
 
-    # minexponent
-    # -----------
     @property
     def minexponent(self):
         """
@@ -815,14 +841,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['minexponent']
+        return self["minexponent"]
 
     @minexponent.setter
     def minexponent(self, val):
-        self['minexponent'] = val
+        self["minexponent"] = val
 
-    # minor
-    # -----
     @property
     def minor(self):
         """
@@ -836,14 +860,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.Minor
         """
-        return self['minor']
+        return self["minor"]
 
     @minor.setter
     def minor(self, val):
-        self['minor'] = val
+        self["minor"] = val
 
-    # mirror
-    # ------
     @property
     def mirror(self):
         """
@@ -862,14 +884,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['mirror']
+        return self["mirror"]
 
     @mirror.setter
     def mirror(self, val):
-        self['mirror'] = val
+        self["mirror"] = val
 
-    # nticks
-    # ------
     @property
     def nticks(self):
         """
@@ -886,14 +906,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
-    # overlaying
-    # ----------
     @property
     def overlaying(self):
         """
@@ -914,14 +932,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['overlaying']
+        return self["overlaying"]
 
     @overlaying.setter
     def overlaying(self, val):
-        self['overlaying'] = val
+        self["overlaying"] = val
 
-    # position
-    # --------
     @property
     def position(self):
         """
@@ -936,46 +952,42 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['position']
+        return self["position"]
 
     @position.setter
     def position(self, val):
-        self['position'] = val
+        self["position"] = val
 
-    # range
-    # -----
     @property
     def range(self):
         """
-        Sets the range of this axis. If the axis `type` is "log", then
-        you must take the log of your desired range (e.g. to set the
-        range from 1 to 100, set the range from 0 to 2). If the axis
-        `type` is "date", it should be date strings, like date data,
-        though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is "category", it
-        should be numbers, using the scale where each category is
-        assigned a serial number from zero in the order it appears.
-        Leaving either or both elements `null` impacts the default
-        `autorange`.
+            Sets the range of this axis. If the axis `type` is "log", then
+            you must take the log of your desired range (e.g. to set the
+            range from 1 to 100, set the range from 0 to 2). If the axis
+            `type` is "date", it should be date strings, like date data,
+            though Date objects and unix milliseconds will be accepted and
+            converted to strings. If the axis `type` is "category", it
+            should be numbers, using the scale where each category is
+            assigned a serial number from zero in the order it appears.
+            Leaving either or both elements `null` impacts the default
+            `autorange`.
 
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            The 'range' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
-    # rangebreaks
-    # -----------
     @property
     def rangebreaks(self):
         """
@@ -989,14 +1001,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.xaxis.Rangebreak]
         """
-        return self['rangebreaks']
+        return self["rangebreaks"]
 
     @rangebreaks.setter
     def rangebreaks(self, val):
-        self['rangebreaks'] = val
+        self["rangebreaks"] = val
 
-    # rangebreakdefaults
-    # ------------------
     @property
     def rangebreakdefaults(self):
         """
@@ -1015,14 +1025,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.Rangebreak
         """
-        return self['rangebreakdefaults']
+        return self["rangebreakdefaults"]
 
     @rangebreakdefaults.setter
     def rangebreakdefaults(self, val):
-        self['rangebreakdefaults'] = val
+        self["rangebreakdefaults"] = val
 
-    # rangemode
-    # ---------
     @property
     def rangemode(self):
         """
@@ -1040,14 +1048,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['rangemode']
+        return self["rangemode"]
 
     @rangemode.setter
     def rangemode(self, val):
-        self['rangemode'] = val
+        self["rangemode"] = val
 
-    # rangeselector
-    # -------------
     @property
     def rangeselector(self):
         """
@@ -1061,14 +1067,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.Rangeselector
         """
-        return self['rangeselector']
+        return self["rangeselector"]
 
     @rangeselector.setter
     def rangeselector(self, val):
-        self['rangeselector'] = val
+        self["rangeselector"] = val
 
-    # rangeslider
-    # -----------
     @property
     def rangeslider(self):
         """
@@ -1082,14 +1086,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.Rangeslider
         """
-        return self['rangeslider']
+        return self["rangeslider"]
 
     @rangeslider.setter
     def rangeslider(self, val):
-        self['rangeslider'] = val
+        self["rangeslider"] = val
 
-    # scaleanchor
-    # -----------
     @property
     def scaleanchor(self):
         """
@@ -1127,14 +1129,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['scaleanchor']
+        return self["scaleanchor"]
 
     @scaleanchor.setter
     def scaleanchor(self, val):
-        self['scaleanchor'] = val
+        self["scaleanchor"] = val
 
-    # scaleratio
-    # ----------
     @property
     def scaleratio(self):
         """
@@ -1152,14 +1152,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['scaleratio']
+        return self["scaleratio"]
 
     @scaleratio.setter
     def scaleratio(self, val):
-        self['scaleratio'] = val
+        self["scaleratio"] = val
 
-    # separatethousands
-    # -----------------
     @property
     def separatethousands(self):
         """
@@ -1172,14 +1170,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['separatethousands']
+        return self["separatethousands"]
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self['separatethousands'] = val
+        self["separatethousands"] = val
 
-    # showdividers
-    # ------------
     @property
     def showdividers(self):
         """
@@ -1194,14 +1190,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showdividers']
+        return self["showdividers"]
 
     @showdividers.setter
     def showdividers(self, val):
-        self['showdividers'] = val
+        self["showdividers"] = val
 
-    # showexponent
-    # ------------
     @property
     def showexponent(self):
         """
@@ -1218,14 +1212,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showexponent']
+        return self["showexponent"]
 
     @showexponent.setter
     def showexponent(self, val):
-        self['showexponent'] = val
+        self["showexponent"] = val
 
-    # showgrid
-    # --------
     @property
     def showgrid(self):
         """
@@ -1239,14 +1231,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
-    # showline
-    # --------
     @property
     def showline(self):
         """
@@ -1259,14 +1249,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showline']
+        return self["showline"]
 
     @showline.setter
     def showline(self, val):
-        self['showline'] = val
+        self["showline"] = val
 
-    # showspikes
-    # ----------
     @property
     def showspikes(self):
         """
@@ -1281,14 +1269,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showspikes']
+        return self["showspikes"]
 
     @showspikes.setter
     def showspikes(self, val):
-        self['showspikes'] = val
+        self["showspikes"] = val
 
-    # showticklabels
-    # --------------
     @property
     def showticklabels(self):
         """
@@ -1301,14 +1287,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
-    # showtickprefix
-    # --------------
     @property
     def showtickprefix(self):
         """
@@ -1325,14 +1309,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
-    # showticksuffix
-    # --------------
     @property
     def showticksuffix(self):
         """
@@ -1346,14 +1328,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
-    # side
-    # ----
     @property
     def side(self):
         """
@@ -1368,14 +1348,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['side']
+        return self["side"]
 
     @side.setter
     def side(self, val):
-        self['side'] = val
+        self["side"] = val
 
-    # spikecolor
-    # ----------
     @property
     def spikecolor(self):
         """
@@ -1392,14 +1370,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['spikecolor']
+        return self["spikecolor"]
 
     @spikecolor.setter
     def spikecolor(self, val):
-        self['spikecolor'] = val
+        self["spikecolor"] = val
 
-    # spikedash
-    # ---------
     @property
     def spikedash(self):
         """
@@ -1418,14 +1394,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['spikedash']
+        return self["spikedash"]
 
     @spikedash.setter
     def spikedash(self, val):
-        self['spikedash'] = val
+        self["spikedash"] = val
 
-    # spikemode
-    # ---------
     @property
     def spikemode(self):
         """
@@ -1444,14 +1418,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['spikemode']
+        return self["spikemode"]
 
     @spikemode.setter
     def spikemode(self, val):
-        self['spikemode'] = val
+        self["spikemode"] = val
 
-    # spikesnap
-    # ---------
     @property
     def spikesnap(self):
         """
@@ -1466,14 +1438,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['spikesnap']
+        return self["spikesnap"]
 
     @spikesnap.setter
     def spikesnap(self, val):
-        self['spikesnap'] = val
+        self["spikesnap"] = val
 
-    # spikethickness
-    # --------------
     @property
     def spikethickness(self):
         """
@@ -1486,14 +1456,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['spikethickness']
+        return self["spikethickness"]
 
     @spikethickness.setter
     def spikethickness(self, val):
-        self['spikethickness'] = val
+        self["spikethickness"] = val
 
-    # tick0
-    # -----
     @property
     def tick0(self):
         """
@@ -1513,14 +1481,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
-    # tickangle
-    # ---------
     @property
     def tickangle(self):
         """
@@ -1537,14 +1503,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
-    # tickcolor
-    # ---------
     @property
     def tickcolor(self):
         """
@@ -1561,14 +1525,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
-    # tickfont
-    # --------
     @property
     def tickfont(self):
         """
@@ -1584,14 +1546,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
-    # tickformat
-    # ----------
     @property
     def tickformat(self):
         """
@@ -1614,14 +1574,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
-    # tickformatstops
-    # ---------------
     @property
     def tickformatstops(self):
         """
@@ -1635,14 +1593,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.xaxis.Tickformatstop]
         """
-        return self['tickformatstops']
+        return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self['tickformatstops'] = val
+        self["tickformatstops"] = val
 
-    # tickformatstopdefaults
-    # ----------------------
     @property
     def tickformatstopdefaults(self):
         """
@@ -1661,14 +1617,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.Tickformatstop
         """
-        return self['tickformatstopdefaults']
+        return self["tickformatstopdefaults"]
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self['tickformatstopdefaults'] = val
+        self["tickformatstopdefaults"] = val
 
-    # ticklabelindex
-    # --------------
     @property
     def ticklabelindex(self):
         """
@@ -1689,14 +1643,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|NDArray
         """
-        return self['ticklabelindex']
+        return self["ticklabelindex"]
 
     @ticklabelindex.setter
     def ticklabelindex(self, val):
-        self['ticklabelindex'] = val
+        self["ticklabelindex"] = val
 
-    # ticklabelindexsrc
-    # -----------------
     @property
     def ticklabelindexsrc(self):
         """
@@ -1710,14 +1662,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticklabelindexsrc']
+        return self["ticklabelindexsrc"]
 
     @ticklabelindexsrc.setter
     def ticklabelindexsrc(self, val):
-        self['ticklabelindexsrc'] = val
+        self["ticklabelindexsrc"] = val
 
-    # ticklabelmode
-    # -------------
     @property
     def ticklabelmode(self):
         """
@@ -1734,14 +1684,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticklabelmode']
+        return self["ticklabelmode"]
 
     @ticklabelmode.setter
     def ticklabelmode(self, val):
-        self['ticklabelmode'] = val
+        self["ticklabelmode"] = val
 
-    # ticklabeloverflow
-    # -----------------
     @property
     def ticklabeloverflow(self):
         """
@@ -1759,14 +1707,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticklabeloverflow']
+        return self["ticklabeloverflow"]
 
     @ticklabeloverflow.setter
     def ticklabeloverflow(self, val):
-        self['ticklabeloverflow'] = val
+        self["ticklabeloverflow"] = val
 
-    # ticklabelposition
-    # -----------------
     @property
     def ticklabelposition(self):
         """
@@ -1789,14 +1735,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticklabelposition']
+        return self["ticklabelposition"]
 
     @ticklabelposition.setter
     def ticklabelposition(self, val):
-        self['ticklabelposition'] = val
+        self["ticklabelposition"] = val
 
-    # ticklabelshift
-    # --------------
     @property
     def ticklabelshift(self):
         """
@@ -1811,14 +1755,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['ticklabelshift']
+        return self["ticklabelshift"]
 
     @ticklabelshift.setter
     def ticklabelshift(self, val):
-        self['ticklabelshift'] = val
+        self["ticklabelshift"] = val
 
-    # ticklabelstandoff
-    # -----------------
     @property
     def ticklabelstandoff(self):
         """
@@ -1839,14 +1781,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['ticklabelstandoff']
+        return self["ticklabelstandoff"]
 
     @ticklabelstandoff.setter
     def ticklabelstandoff(self, val):
-        self['ticklabelstandoff'] = val
+        self["ticklabelstandoff"] = val
 
-    # ticklabelstep
-    # -------------
     @property
     def ticklabelstep(self):
         """
@@ -1865,14 +1805,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['ticklabelstep']
+        return self["ticklabelstep"]
 
     @ticklabelstep.setter
     def ticklabelstep(self, val):
-        self['ticklabelstep'] = val
+        self["ticklabelstep"] = val
 
-    # ticklen
-    # -------
     @property
     def ticklen(self):
         """
@@ -1885,14 +1823,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
-    # tickmode
-    # --------
     @property
     def tickmode(self):
         """
@@ -1914,14 +1850,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
-    # tickprefix
-    # ----------
     @property
     def tickprefix(self):
         """
@@ -1935,14 +1869,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
-    # ticks
-    # -----
     @property
     def ticks(self):
         """
@@ -1958,14 +1890,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
-    # tickson
-    # -------
     @property
     def tickson(self):
         """
@@ -1983,14 +1913,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tickson']
+        return self["tickson"]
 
     @tickson.setter
     def tickson(self, val):
-        self['tickson'] = val
+        self["tickson"] = val
 
-    # ticksuffix
-    # ----------
     @property
     def ticksuffix(self):
         """
@@ -2004,14 +1932,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
-    # ticktext
-    # --------
     @property
     def ticktext(self):
         """
@@ -2026,14 +1952,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         NDArray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
-    # ticktextsrc
-    # -----------
     @property
     def ticktextsrc(self):
         """
@@ -2046,14 +1970,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
-    # tickvals
-    # --------
     @property
     def tickvals(self):
         """
@@ -2067,14 +1989,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         NDArray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
-    # tickvalssrc
-    # -----------
     @property
     def tickvalssrc(self):
         """
@@ -2087,14 +2007,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
-    # tickwidth
-    # ---------
     @property
     def tickwidth(self):
         """
@@ -2107,14 +2025,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
-    # title
-    # -----
     @property
     def title(self):
         """
@@ -2128,14 +2044,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -2152,14 +2066,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -2173,14 +2085,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -2195,14 +2105,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # zeroline
-    # --------
     @property
     def zeroline(self):
         """
@@ -2217,14 +2125,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['zeroline']
+        return self["zeroline"]
 
     @zeroline.setter
     def zeroline(self, val):
-        self['zeroline'] = val
+        self["zeroline"] = val
 
-    # zerolinecolor
-    # -------------
     @property
     def zerolinecolor(self):
         """
@@ -2241,14 +2147,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['zerolinecolor']
+        return self["zerolinecolor"]
 
     @zerolinecolor.setter
     def zerolinecolor(self, val):
-        self['zerolinecolor'] = val
+        self["zerolinecolor"] = val
 
-    # zerolinewidth
-    # -------------
     @property
     def zerolinewidth(self):
         """
@@ -2261,14 +2165,12 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['zerolinewidth']
+        return self["zerolinewidth"]
 
     @zerolinewidth.setter
     def zerolinewidth(self, val):
-        self['zerolinewidth'] = val
+        self["zerolinewidth"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -2779,103 +2681,105 @@ class XAxis(_BaseLayoutHierarchyType):
         zerolinewidth
             Sets the width (in px) of the zero line.
         """
-    def __init__(self,
-            arg=None,
-            anchor: Any|None = None,
-            automargin: Any|None = None,
-            autorange: Any|None = None,
-            autorangeoptions: None|None = None,
-            autotickangles: list|None = None,
-            autotypenumbers: Any|None = None,
-            calendar: Any|None = None,
-            categoryarray: NDArray|None = None,
-            categoryarraysrc: str|None = None,
-            categoryorder: Any|None = None,
-            color: str|None = None,
-            constrain: Any|None = None,
-            constraintoward: Any|None = None,
-            dividercolor: str|None = None,
-            dividerwidth: int|float|None = None,
-            domain: list|None = None,
-            dtick: Any|None = None,
-            exponentformat: Any|None = None,
-            fixedrange: bool|None = None,
-            gridcolor: str|None = None,
-            griddash: str|None = None,
-            gridwidth: int|float|None = None,
-            hoverformat: str|None = None,
-            insiderange: list|None = None,
-            labelalias: Any|None = None,
-            layer: Any|None = None,
-            linecolor: str|None = None,
-            linewidth: int|float|None = None,
-            matches: Any|None = None,
-            maxallowed: Any|None = None,
-            minallowed: Any|None = None,
-            minexponent: int|float|None = None,
-            minor: None|None = None,
-            mirror: Any|None = None,
-            nticks: int|None = None,
-            overlaying: Any|None = None,
-            position: int|float|None = None,
-            range: list|None = None,
-            rangebreaks: None|None = None,
-            rangebreakdefaults: None|None = None,
-            rangemode: Any|None = None,
-            rangeselector: None|None = None,
-            rangeslider: None|None = None,
-            scaleanchor: Any|None = None,
-            scaleratio: int|float|None = None,
-            separatethousands: bool|None = None,
-            showdividers: bool|None = None,
-            showexponent: Any|None = None,
-            showgrid: bool|None = None,
-            showline: bool|None = None,
-            showspikes: bool|None = None,
-            showticklabels: bool|None = None,
-            showtickprefix: Any|None = None,
-            showticksuffix: Any|None = None,
-            side: Any|None = None,
-            spikecolor: str|None = None,
-            spikedash: str|None = None,
-            spikemode: Any|None = None,
-            spikesnap: Any|None = None,
-            spikethickness: int|float|None = None,
-            tick0: Any|None = None,
-            tickangle: int|float|None = None,
-            tickcolor: str|None = None,
-            tickfont: None|None = None,
-            tickformat: str|None = None,
-            tickformatstops: None|None = None,
-            tickformatstopdefaults: None|None = None,
-            ticklabelindex: int|None = None,
-            ticklabelindexsrc: str|None = None,
-            ticklabelmode: Any|None = None,
-            ticklabeloverflow: Any|None = None,
-            ticklabelposition: Any|None = None,
-            ticklabelshift: int|None = None,
-            ticklabelstandoff: int|None = None,
-            ticklabelstep: int|None = None,
-            ticklen: int|float|None = None,
-            tickmode: Any|None = None,
-            tickprefix: str|None = None,
-            ticks: Any|None = None,
-            tickson: Any|None = None,
-            ticksuffix: str|None = None,
-            ticktext: NDArray|None = None,
-            ticktextsrc: str|None = None,
-            tickvals: NDArray|None = None,
-            tickvalssrc: str|None = None,
-            tickwidth: int|float|None = None,
-            title: None|None = None,
-            type: Any|None = None,
-            uirevision: Any|None = None,
-            visible: bool|None = None,
-            zeroline: bool|None = None,
-            zerolinecolor: str|None = None,
-            zerolinewidth: int|float|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        anchor: Any | None = None,
+        automargin: Any | None = None,
+        autorange: Any | None = None,
+        autorangeoptions: None | None = None,
+        autotickangles: list | None = None,
+        autotypenumbers: Any | None = None,
+        calendar: Any | None = None,
+        categoryarray: NDArray | None = None,
+        categoryarraysrc: str | None = None,
+        categoryorder: Any | None = None,
+        color: str | None = None,
+        constrain: Any | None = None,
+        constraintoward: Any | None = None,
+        dividercolor: str | None = None,
+        dividerwidth: int | float | None = None,
+        domain: list | None = None,
+        dtick: Any | None = None,
+        exponentformat: Any | None = None,
+        fixedrange: bool | None = None,
+        gridcolor: str | None = None,
+        griddash: str | None = None,
+        gridwidth: int | float | None = None,
+        hoverformat: str | None = None,
+        insiderange: list | None = None,
+        labelalias: Any | None = None,
+        layer: Any | None = None,
+        linecolor: str | None = None,
+        linewidth: int | float | None = None,
+        matches: Any | None = None,
+        maxallowed: Any | None = None,
+        minallowed: Any | None = None,
+        minexponent: int | float | None = None,
+        minor: None | None = None,
+        mirror: Any | None = None,
+        nticks: int | None = None,
+        overlaying: Any | None = None,
+        position: int | float | None = None,
+        range: list | None = None,
+        rangebreaks: None | None = None,
+        rangebreakdefaults: None | None = None,
+        rangemode: Any | None = None,
+        rangeselector: None | None = None,
+        rangeslider: None | None = None,
+        scaleanchor: Any | None = None,
+        scaleratio: int | float | None = None,
+        separatethousands: bool | None = None,
+        showdividers: bool | None = None,
+        showexponent: Any | None = None,
+        showgrid: bool | None = None,
+        showline: bool | None = None,
+        showspikes: bool | None = None,
+        showticklabels: bool | None = None,
+        showtickprefix: Any | None = None,
+        showticksuffix: Any | None = None,
+        side: Any | None = None,
+        spikecolor: str | None = None,
+        spikedash: str | None = None,
+        spikemode: Any | None = None,
+        spikesnap: Any | None = None,
+        spikethickness: int | float | None = None,
+        tick0: Any | None = None,
+        tickangle: int | float | None = None,
+        tickcolor: str | None = None,
+        tickfont: None | None = None,
+        tickformat: str | None = None,
+        tickformatstops: None | None = None,
+        tickformatstopdefaults: None | None = None,
+        ticklabelindex: int | None = None,
+        ticklabelindexsrc: str | None = None,
+        ticklabelmode: Any | None = None,
+        ticklabeloverflow: Any | None = None,
+        ticklabelposition: Any | None = None,
+        ticklabelshift: int | None = None,
+        ticklabelstandoff: int | None = None,
+        ticklabelstep: int | None = None,
+        ticklen: int | float | None = None,
+        tickmode: Any | None = None,
+        tickprefix: str | None = None,
+        ticks: Any | None = None,
+        tickson: Any | None = None,
+        ticksuffix: str | None = None,
+        ticktext: NDArray | None = None,
+        ticktextsrc: str | None = None,
+        tickvals: NDArray | None = None,
+        tickvalssrc: str | None = None,
+        tickwidth: int | float | None = None,
+        title: None | None = None,
+        type: Any | None = None,
+        uirevision: Any | None = None,
+        visible: bool | None = None,
+        zeroline: bool | None = None,
+        zerolinecolor: str | None = None,
+        zerolinewidth: int | float | None = None,
+        **kwargs,
+    ):
         """
         Construct a new XAxis object
 
@@ -3395,13 +3299,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         XAxis
         """
-        super().__init__('xaxis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("xaxis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -3409,117 +3311,108 @@ class XAxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.XAxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.XAxis`""")
+an instance of :class:`plotly.graph_objs.layout.XAxis`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('anchor', arg, anchor)
-        self._init_provided('automargin', arg, automargin)
-        self._init_provided('autorange', arg, autorange)
-        self._init_provided('autorangeoptions', arg, autorangeoptions)
-        self._init_provided('autotickangles', arg, autotickangles)
-        self._init_provided('autotypenumbers', arg, autotypenumbers)
-        self._init_provided('calendar', arg, calendar)
-        self._init_provided('categoryarray', arg, categoryarray)
-        self._init_provided('categoryarraysrc', arg, categoryarraysrc)
-        self._init_provided('categoryorder', arg, categoryorder)
-        self._init_provided('color', arg, color)
-        self._init_provided('constrain', arg, constrain)
-        self._init_provided('constraintoward', arg, constraintoward)
-        self._init_provided('dividercolor', arg, dividercolor)
-        self._init_provided('dividerwidth', arg, dividerwidth)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('dtick', arg, dtick)
-        self._init_provided('exponentformat', arg, exponentformat)
-        self._init_provided('fixedrange', arg, fixedrange)
-        self._init_provided('gridcolor', arg, gridcolor)
-        self._init_provided('griddash', arg, griddash)
-        self._init_provided('gridwidth', arg, gridwidth)
-        self._init_provided('hoverformat', arg, hoverformat)
-        self._init_provided('insiderange', arg, insiderange)
-        self._init_provided('labelalias', arg, labelalias)
-        self._init_provided('layer', arg, layer)
-        self._init_provided('linecolor', arg, linecolor)
-        self._init_provided('linewidth', arg, linewidth)
-        self._init_provided('matches', arg, matches)
-        self._init_provided('maxallowed', arg, maxallowed)
-        self._init_provided('minallowed', arg, minallowed)
-        self._init_provided('minexponent', arg, minexponent)
-        self._init_provided('minor', arg, minor)
-        self._init_provided('mirror', arg, mirror)
-        self._init_provided('nticks', arg, nticks)
-        self._init_provided('overlaying', arg, overlaying)
-        self._init_provided('position', arg, position)
-        self._init_provided('range', arg, range)
-        self._init_provided('rangebreaks', arg, rangebreaks)
-        self._init_provided('rangebreakdefaults', arg, rangebreakdefaults)
-        self._init_provided('rangemode', arg, rangemode)
-        self._init_provided('rangeselector', arg, rangeselector)
-        self._init_provided('rangeslider', arg, rangeslider)
-        self._init_provided('scaleanchor', arg, scaleanchor)
-        self._init_provided('scaleratio', arg, scaleratio)
-        self._init_provided('separatethousands', arg, separatethousands)
-        self._init_provided('showdividers', arg, showdividers)
-        self._init_provided('showexponent', arg, showexponent)
-        self._init_provided('showgrid', arg, showgrid)
-        self._init_provided('showline', arg, showline)
-        self._init_provided('showspikes', arg, showspikes)
-        self._init_provided('showticklabels', arg, showticklabels)
-        self._init_provided('showtickprefix', arg, showtickprefix)
-        self._init_provided('showticksuffix', arg, showticksuffix)
-        self._init_provided('side', arg, side)
-        self._init_provided('spikecolor', arg, spikecolor)
-        self._init_provided('spikedash', arg, spikedash)
-        self._init_provided('spikemode', arg, spikemode)
-        self._init_provided('spikesnap', arg, spikesnap)
-        self._init_provided('spikethickness', arg, spikethickness)
-        self._init_provided('tick0', arg, tick0)
-        self._init_provided('tickangle', arg, tickangle)
-        self._init_provided('tickcolor', arg, tickcolor)
-        self._init_provided('tickfont', arg, tickfont)
-        self._init_provided('tickformat', arg, tickformat)
-        self._init_provided('tickformatstops', arg, tickformatstops)
-        self._init_provided('tickformatstopdefaults', arg, tickformatstopdefaults)
-        self._init_provided('ticklabelindex', arg, ticklabelindex)
-        self._init_provided('ticklabelindexsrc', arg, ticklabelindexsrc)
-        self._init_provided('ticklabelmode', arg, ticklabelmode)
-        self._init_provided('ticklabeloverflow', arg, ticklabeloverflow)
-        self._init_provided('ticklabelposition', arg, ticklabelposition)
-        self._init_provided('ticklabelshift', arg, ticklabelshift)
-        self._init_provided('ticklabelstandoff', arg, ticklabelstandoff)
-        self._init_provided('ticklabelstep', arg, ticklabelstep)
-        self._init_provided('ticklen', arg, ticklen)
-        self._init_provided('tickmode', arg, tickmode)
-        self._init_provided('tickprefix', arg, tickprefix)
-        self._init_provided('ticks', arg, ticks)
-        self._init_provided('tickson', arg, tickson)
-        self._init_provided('ticksuffix', arg, ticksuffix)
-        self._init_provided('ticktext', arg, ticktext)
-        self._init_provided('ticktextsrc', arg, ticktextsrc)
-        self._init_provided('tickvals', arg, tickvals)
-        self._init_provided('tickvalssrc', arg, tickvalssrc)
-        self._init_provided('tickwidth', arg, tickwidth)
-        self._init_provided('title', arg, title)
-        self._init_provided('type', arg, type)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('zeroline', arg, zeroline)
-        self._init_provided('zerolinecolor', arg, zerolinecolor)
-        self._init_provided('zerolinewidth', arg, zerolinewidth)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("anchor", arg, anchor)
+        self._init_provided("automargin", arg, automargin)
+        self._init_provided("autorange", arg, autorange)
+        self._init_provided("autorangeoptions", arg, autorangeoptions)
+        self._init_provided("autotickangles", arg, autotickangles)
+        self._init_provided("autotypenumbers", arg, autotypenumbers)
+        self._init_provided("calendar", arg, calendar)
+        self._init_provided("categoryarray", arg, categoryarray)
+        self._init_provided("categoryarraysrc", arg, categoryarraysrc)
+        self._init_provided("categoryorder", arg, categoryorder)
+        self._init_provided("color", arg, color)
+        self._init_provided("constrain", arg, constrain)
+        self._init_provided("constraintoward", arg, constraintoward)
+        self._init_provided("dividercolor", arg, dividercolor)
+        self._init_provided("dividerwidth", arg, dividerwidth)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("dtick", arg, dtick)
+        self._init_provided("exponentformat", arg, exponentformat)
+        self._init_provided("fixedrange", arg, fixedrange)
+        self._init_provided("gridcolor", arg, gridcolor)
+        self._init_provided("griddash", arg, griddash)
+        self._init_provided("gridwidth", arg, gridwidth)
+        self._init_provided("hoverformat", arg, hoverformat)
+        self._init_provided("insiderange", arg, insiderange)
+        self._init_provided("labelalias", arg, labelalias)
+        self._init_provided("layer", arg, layer)
+        self._init_provided("linecolor", arg, linecolor)
+        self._init_provided("linewidth", arg, linewidth)
+        self._init_provided("matches", arg, matches)
+        self._init_provided("maxallowed", arg, maxallowed)
+        self._init_provided("minallowed", arg, minallowed)
+        self._init_provided("minexponent", arg, minexponent)
+        self._init_provided("minor", arg, minor)
+        self._init_provided("mirror", arg, mirror)
+        self._init_provided("nticks", arg, nticks)
+        self._init_provided("overlaying", arg, overlaying)
+        self._init_provided("position", arg, position)
+        self._init_provided("range", arg, range)
+        self._init_provided("rangebreaks", arg, rangebreaks)
+        self._init_provided("rangebreakdefaults", arg, rangebreakdefaults)
+        self._init_provided("rangemode", arg, rangemode)
+        self._init_provided("rangeselector", arg, rangeselector)
+        self._init_provided("rangeslider", arg, rangeslider)
+        self._init_provided("scaleanchor", arg, scaleanchor)
+        self._init_provided("scaleratio", arg, scaleratio)
+        self._init_provided("separatethousands", arg, separatethousands)
+        self._init_provided("showdividers", arg, showdividers)
+        self._init_provided("showexponent", arg, showexponent)
+        self._init_provided("showgrid", arg, showgrid)
+        self._init_provided("showline", arg, showline)
+        self._init_provided("showspikes", arg, showspikes)
+        self._init_provided("showticklabels", arg, showticklabels)
+        self._init_provided("showtickprefix", arg, showtickprefix)
+        self._init_provided("showticksuffix", arg, showticksuffix)
+        self._init_provided("side", arg, side)
+        self._init_provided("spikecolor", arg, spikecolor)
+        self._init_provided("spikedash", arg, spikedash)
+        self._init_provided("spikemode", arg, spikemode)
+        self._init_provided("spikesnap", arg, spikesnap)
+        self._init_provided("spikethickness", arg, spikethickness)
+        self._init_provided("tick0", arg, tick0)
+        self._init_provided("tickangle", arg, tickangle)
+        self._init_provided("tickcolor", arg, tickcolor)
+        self._init_provided("tickfont", arg, tickfont)
+        self._init_provided("tickformat", arg, tickformat)
+        self._init_provided("tickformatstops", arg, tickformatstops)
+        self._init_provided("tickformatstopdefaults", arg, tickformatstopdefaults)
+        self._init_provided("ticklabelindex", arg, ticklabelindex)
+        self._init_provided("ticklabelindexsrc", arg, ticklabelindexsrc)
+        self._init_provided("ticklabelmode", arg, ticklabelmode)
+        self._init_provided("ticklabeloverflow", arg, ticklabeloverflow)
+        self._init_provided("ticklabelposition", arg, ticklabelposition)
+        self._init_provided("ticklabelshift", arg, ticklabelshift)
+        self._init_provided("ticklabelstandoff", arg, ticklabelstandoff)
+        self._init_provided("ticklabelstep", arg, ticklabelstep)
+        self._init_provided("ticklen", arg, ticklen)
+        self._init_provided("tickmode", arg, tickmode)
+        self._init_provided("tickprefix", arg, tickprefix)
+        self._init_provided("ticks", arg, ticks)
+        self._init_provided("tickson", arg, tickson)
+        self._init_provided("ticksuffix", arg, ticksuffix)
+        self._init_provided("ticktext", arg, ticktext)
+        self._init_provided("ticktextsrc", arg, ticktextsrc)
+        self._init_provided("tickvals", arg, tickvals)
+        self._init_provided("tickvalssrc", arg, tickvalssrc)
+        self._init_provided("tickwidth", arg, tickwidth)
+        self._init_provided("title", arg, title)
+        self._init_provided("type", arg, type)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("zeroline", arg, zeroline)
+        self._init_provided("zerolinecolor", arg, zerolinecolor)
+        self._init_provided("zerolinewidth", arg, zerolinewidth)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

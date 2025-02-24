@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,24 @@ import copy as _copy
 
 class Scene(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.scene'
-    _valid_props = {"annotationdefaults", "annotations", "aspectmode", "aspectratio", "bgcolor", "camera", "domain", "dragmode", "hovermode", "uirevision", "xaxis", "yaxis", "zaxis"}
+    _parent_path_str = "layout"
+    _path_str = "layout.scene"
+    _valid_props = {
+        "annotationdefaults",
+        "annotations",
+        "aspectmode",
+        "aspectratio",
+        "bgcolor",
+        "camera",
+        "domain",
+        "dragmode",
+        "hovermode",
+        "uirevision",
+        "xaxis",
+        "yaxis",
+        "zaxis",
+    }
 
-    # annotations
-    # -----------
     @property
     def annotations(self):
         """
@@ -30,14 +38,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.scene.Annotation]
         """
-        return self['annotations']
+        return self["annotations"]
 
     @annotations.setter
     def annotations(self, val):
-        self['annotations'] = val
+        self["annotations"] = val
 
-    # annotationdefaults
-    # ------------------
     @property
     def annotationdefaults(self):
         """
@@ -56,14 +62,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.Annotation
         """
-        return self['annotationdefaults']
+        return self["annotationdefaults"]
 
     @annotationdefaults.setter
     def annotationdefaults(self, val):
-        self['annotationdefaults'] = val
+        self["annotationdefaults"] = val
 
-    # aspectmode
-    # ----------
     @property
     def aspectmode(self):
         """
@@ -84,14 +88,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['aspectmode']
+        return self["aspectmode"]
 
     @aspectmode.setter
     def aspectmode(self, val):
-        self['aspectmode'] = val
+        self["aspectmode"] = val
 
-    # aspectratio
-    # -----------
     @property
     def aspectratio(self):
         """
@@ -107,14 +109,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.Aspectratio
         """
-        return self['aspectratio']
+        return self["aspectratio"]
 
     @aspectratio.setter
     def aspectratio(self, val):
-        self['aspectratio'] = val
+        self["aspectratio"] = val
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -129,14 +129,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # camera
-    # ------
     @property
     def camera(self):
         """
@@ -150,14 +148,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.Camera
         """
-        return self['camera']
+        return self["camera"]
 
     @camera.setter
     def camera(self, val):
-        self['camera'] = val
+        self["camera"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -171,14 +167,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # dragmode
-    # --------
     @property
     def dragmode(self):
         """
@@ -192,14 +186,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['dragmode']
+        return self["dragmode"]
 
     @dragmode.setter
     def dragmode(self, val):
-        self['dragmode'] = val
+        self["dragmode"] = val
 
-    # hovermode
-    # ---------
     @property
     def hovermode(self):
         """
@@ -213,14 +205,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['hovermode']
+        return self["hovermode"]
 
     @hovermode.setter
     def hovermode(self, val):
-        self['hovermode'] = val
+        self["hovermode"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -233,14 +223,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -254,14 +242,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.XAxis
         """
-        return self['xaxis']
+        return self["xaxis"]
 
     @xaxis.setter
     def xaxis(self, val):
-        self['xaxis'] = val
+        self["xaxis"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -275,14 +261,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.YAxis
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
-    # zaxis
-    # -----
     @property
     def zaxis(self):
         """
@@ -296,14 +280,12 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.ZAxis
         """
-        return self['zaxis']
+        return self["zaxis"]
 
     @zaxis.setter
     def zaxis(self, val):
-        self['zaxis'] = val
+        self["zaxis"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -356,23 +338,25 @@ class Scene(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.layout.scene.ZAxis`
             instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            annotations: None|None = None,
-            annotationdefaults: None|None = None,
-            aspectmode: Any|None = None,
-            aspectratio: None|None = None,
-            bgcolor: str|None = None,
-            camera: None|None = None,
-            domain: None|None = None,
-            dragmode: Any|None = None,
-            hovermode: Any|None = None,
-            uirevision: Any|None = None,
-            xaxis: None|None = None,
-            yaxis: None|None = None,
-            zaxis: None|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        annotations: None | None = None,
+        annotationdefaults: None | None = None,
+        aspectmode: Any | None = None,
+        aspectratio: None | None = None,
+        bgcolor: str | None = None,
+        camera: None | None = None,
+        domain: None | None = None,
+        dragmode: Any | None = None,
+        hovermode: Any | None = None,
+        uirevision: Any | None = None,
+        xaxis: None | None = None,
+        yaxis: None | None = None,
+        zaxis: None | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Scene object
 
@@ -434,13 +418,11 @@ class Scene(_BaseLayoutHierarchyType):
         -------
         Scene
         """
-        super().__init__('scene')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("scene")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -448,37 +430,28 @@ class Scene(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Scene
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Scene`""")
+an instance of :class:`plotly.graph_objs.layout.Scene`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('annotations', arg, annotations)
-        self._init_provided('annotationdefaults', arg, annotationdefaults)
-        self._init_provided('aspectmode', arg, aspectmode)
-        self._init_provided('aspectratio', arg, aspectratio)
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('camera', arg, camera)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('dragmode', arg, dragmode)
-        self._init_provided('hovermode', arg, hovermode)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('xaxis', arg, xaxis)
-        self._init_provided('yaxis', arg, yaxis)
-        self._init_provided('zaxis', arg, zaxis)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("annotations", arg, annotations)
+        self._init_provided("annotationdefaults", arg, annotationdefaults)
+        self._init_provided("aspectmode", arg, aspectmode)
+        self._init_provided("aspectratio", arg, aspectratio)
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("camera", arg, camera)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("dragmode", arg, dragmode)
+        self._init_provided("hovermode", arg, hovermode)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("xaxis", arg, xaxis)
+        self._init_provided("yaxis", arg, yaxis)
+        self._init_provided("zaxis", arg, zaxis)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

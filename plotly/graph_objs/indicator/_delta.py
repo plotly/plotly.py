@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,20 @@ import copy as _copy
 
 class Delta(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'indicator'
-    _path_str = 'indicator.delta'
-    _valid_props = {"decreasing", "font", "increasing", "position", "prefix", "reference", "relative", "suffix", "valueformat"}
+    _parent_path_str = "indicator"
+    _path_str = "indicator.delta"
+    _valid_props = {
+        "decreasing",
+        "font",
+        "increasing",
+        "position",
+        "prefix",
+        "reference",
+        "relative",
+        "suffix",
+        "valueformat",
+    }
 
-    # decreasing
-    # ----------
     @property
     def decreasing(self):
         """
@@ -30,14 +34,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.delta.Decreasing
         """
-        return self['decreasing']
+        return self["decreasing"]
 
     @decreasing.setter
     def decreasing(self, val):
-        self['decreasing'] = val
+        self["decreasing"] = val
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -53,14 +55,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.delta.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
-    # increasing
-    # ----------
     @property
     def increasing(self):
         """
@@ -74,14 +74,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.delta.Increasing
         """
-        return self['increasing']
+        return self["increasing"]
 
     @increasing.setter
     def increasing(self, val):
-        self['increasing'] = val
+        self["increasing"] = val
 
-    # position
-    # --------
     @property
     def position(self):
         """
@@ -95,14 +93,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['position']
+        return self["position"]
 
     @position.setter
     def position(self, val):
-        self['position'] = val
+        self["position"] = val
 
-    # prefix
-    # ------
     @property
     def prefix(self):
         """
@@ -116,14 +112,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['prefix']
+        return self["prefix"]
 
     @prefix.setter
     def prefix(self, val):
-        self['prefix'] = val
+        self["prefix"] = val
 
-    # reference
-    # ---------
     @property
     def reference(self):
         """
@@ -137,14 +131,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['reference']
+        return self["reference"]
 
     @reference.setter
     def reference(self, val):
-        self['reference'] = val
+        self["reference"] = val
 
-    # relative
-    # --------
     @property
     def relative(self):
         """
@@ -157,14 +149,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['relative']
+        return self["relative"]
 
     @relative.setter
     def relative(self, val):
-        self['relative'] = val
+        self["relative"] = val
 
-    # suffix
-    # ------
     @property
     def suffix(self):
         """
@@ -178,14 +168,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['suffix']
+        return self["suffix"]
 
     @suffix.setter
     def suffix(self, val):
-        self['suffix'] = val
+        self["suffix"] = val
 
-    # valueformat
-    # -----------
     @property
     def valueformat(self):
         """
@@ -202,14 +190,12 @@ class Delta(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valueformat']
+        return self["valueformat"]
 
     @valueformat.setter
     def valueformat(self, val):
-        self['valueformat'] = val
+        self["valueformat"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -238,19 +224,21 @@ class Delta(_BaseTraceHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         """
-    def __init__(self,
-            arg=None,
-            decreasing: None|None = None,
-            font: None|None = None,
-            increasing: None|None = None,
-            position: Any|None = None,
-            prefix: str|None = None,
-            reference: int|float|None = None,
-            relative: bool|None = None,
-            suffix: str|None = None,
-            valueformat: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        decreasing: None | None = None,
+        font: None | None = None,
+        increasing: None | None = None,
+        position: Any | None = None,
+        prefix: str | None = None,
+        reference: int | float | None = None,
+        relative: bool | None = None,
+        suffix: str | None = None,
+        valueformat: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Delta object
 
@@ -289,13 +277,11 @@ class Delta(_BaseTraceHierarchyType):
         -------
         Delta
         """
-        super().__init__('delta')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("delta")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -303,33 +289,24 @@ class Delta(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.Delta
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Delta`""")
+an instance of :class:`plotly.graph_objs.indicator.Delta`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('decreasing', arg, decreasing)
-        self._init_provided('font', arg, font)
-        self._init_provided('increasing', arg, increasing)
-        self._init_provided('position', arg, position)
-        self._init_provided('prefix', arg, prefix)
-        self._init_provided('reference', arg, reference)
-        self._init_provided('relative', arg, relative)
-        self._init_provided('suffix', arg, suffix)
-        self._init_provided('valueformat', arg, valueformat)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("decreasing", arg, decreasing)
+        self._init_provided("font", arg, font)
+        self._init_provided("increasing", arg, increasing)
+        self._init_provided("position", arg, position)
+        self._init_provided("prefix", arg, prefix)
+        self._init_provided("reference", arg, reference)
+        self._init_provided("relative", arg, relative)
+        self._init_provided("suffix", arg, suffix)
+        self._init_provided("valueformat", arg, valueformat)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

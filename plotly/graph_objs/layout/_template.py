@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Template(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.template'
+    _parent_path_str = "layout"
+    _path_str = "layout.template"
     _valid_props = {"data", "layout"}
 
-    # data
-    # ----
     @property
     def data(self):
         """
@@ -30,14 +24,12 @@ class Template(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.template.Data
         """
-        return self['data']
+        return self["data"]
 
     @data.setter
     def data(self, val):
-        self['data'] = val
+        self["data"] = val
 
-    # layout
-    # ------
     @property
     def layout(self):
         """
@@ -51,14 +43,12 @@ class Template(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.template.Layout
         """
-        return self['layout']
+        return self["layout"]
 
     @layout.setter
     def layout(self, val):
-        self['layout'] = val
+        self["layout"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -69,12 +59,10 @@ class Template(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.Layout` instance or dict
             with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            data: None|None = None,
-            layout: None|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, data: None | None = None, layout: None | None = None, **kwargs
+    ):
         """
         Construct a new Template object
 
@@ -115,13 +103,11 @@ class Template(_BaseLayoutHierarchyType):
         -------
         Template
         """
-        super().__init__('template')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("template")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -129,26 +115,17 @@ class Template(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Template
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Template`""")
+an instance of :class:`plotly.graph_objs.layout.Template`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('data', arg, data)
-        self._init_provided('layout', arg, layout)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("data", arg, data)
+        self._init_provided("layout", arg, layout)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

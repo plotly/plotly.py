@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Domain(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'treemap'
-    _path_str = 'treemap.domain'
+    _parent_path_str = "treemap"
+    _path_str = "treemap.domain"
     _valid_props = {"column", "row", "x", "y"}
 
-    # column
-    # ------
     @property
     def column(self):
         """
@@ -31,14 +25,12 @@ class Domain(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['column']
+        return self["column"]
 
     @column.setter
     def column(self, val):
-        self['column'] = val
+        self["column"] = val
 
-    # row
-    # ---
     @property
     def row(self):
         """
@@ -53,66 +45,60 @@ class Domain(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['row']
+        return self["row"]
 
     @row.setter
     def row(self, val):
-        self['row'] = val
+        self["row"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
-        Sets the horizontal domain of this treemap trace (in plot
-        fraction).
+            Sets the horizontal domain of this treemap trace (in plot
+            fraction).
 
-        The 'x' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'x[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-    (1) The 'x[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+            The 'x' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'x[0]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+        (1) The 'x[1]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+
+            Returns
+            -------
+            list
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
-        Sets the vertical domain of this treemap trace (in plot
-        fraction).
+            Sets the vertical domain of this treemap trace (in plot
+            fraction).
 
-        The 'y' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'y[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-    (1) The 'y[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+            The 'y' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'y[0]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+        (1) The 'y[1]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+
+            Returns
+            -------
+            list
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -129,14 +115,16 @@ class Domain(_BaseTraceHierarchyType):
             Sets the vertical domain of this treemap trace (in plot
             fraction).
         """
-    def __init__(self,
-            arg=None,
-            column: int|None = None,
-            row: int|None = None,
-            x: list|None = None,
-            y: list|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        column: int | None = None,
+        row: int | None = None,
+        x: list | None = None,
+        y: list | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Domain object
 
@@ -163,13 +151,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         Domain
         """
-        super().__init__('domain')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("domain")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -177,28 +163,19 @@ class Domain(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.treemap.Domain
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.Domain`""")
+an instance of :class:`plotly.graph_objs.treemap.Domain`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('column', arg, column)
-        self._init_provided('row', arg, row)
-        self._init_provided('x', arg, x)
-        self._init_provided('y', arg, y)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("column", arg, column)
+        self._init_provided("row", arg, row)
+        self._init_provided("x", arg, x)
+        self._init_provided("y", arg, y)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

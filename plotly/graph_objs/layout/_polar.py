@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,21 @@ import copy as _copy
 
 class Polar(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.polar'
-    _valid_props = {"angularaxis", "bargap", "barmode", "bgcolor", "domain", "gridshape", "hole", "radialaxis", "sector", "uirevision"}
+    _parent_path_str = "layout"
+    _path_str = "layout.polar"
+    _valid_props = {
+        "angularaxis",
+        "bargap",
+        "barmode",
+        "bgcolor",
+        "domain",
+        "gridshape",
+        "hole",
+        "radialaxis",
+        "sector",
+        "uirevision",
+    }
 
-    # angularaxis
-    # -----------
     @property
     def angularaxis(self):
         """
@@ -30,14 +35,12 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.polar.AngularAxis
         """
-        return self['angularaxis']
+        return self["angularaxis"]
 
     @angularaxis.setter
     def angularaxis(self, val):
-        self['angularaxis'] = val
+        self["angularaxis"] = val
 
-    # bargap
-    # ------
     @property
     def bargap(self):
         """
@@ -52,14 +55,12 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['bargap']
+        return self["bargap"]
 
     @bargap.setter
     def bargap(self, val):
-        self['bargap'] = val
+        self["bargap"] = val
 
-    # barmode
-    # -------
     @property
     def barmode(self):
         """
@@ -77,14 +78,12 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['barmode']
+        return self["barmode"]
 
     @barmode.setter
     def barmode(self, val):
-        self['barmode'] = val
+        self["barmode"] = val
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -101,14 +100,12 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -122,14 +119,12 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.polar.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
-    # gridshape
-    # ---------
     @property
     def gridshape(self):
         """
@@ -148,14 +143,12 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['gridshape']
+        return self["gridshape"]
 
     @gridshape.setter
     def gridshape(self, val):
-        self['gridshape'] = val
+        self["gridshape"] = val
 
-    # hole
-    # ----
     @property
     def hole(self):
         """
@@ -169,14 +162,12 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['hole']
+        return self["hole"]
 
     @hole.setter
     def hole(self, val):
-        self['hole'] = val
+        self["hole"] = val
 
-    # radialaxis
-    # ----------
     @property
     def radialaxis(self):
         """
@@ -190,42 +181,38 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.polar.RadialAxis
         """
-        return self['radialaxis']
+        return self["radialaxis"]
 
     @radialaxis.setter
     def radialaxis(self, val):
-        self['radialaxis'] = val
+        self["radialaxis"] = val
 
-    # sector
-    # ------
     @property
     def sector(self):
         """
-        Sets angular span of this polar subplot with two angles (in
-        degrees). Sector are assumed to be spanned in the
-        counterclockwise direction with 0 corresponding to rightmost
-        limit of the polar subplot.
+            Sets angular span of this polar subplot with two angles (in
+            degrees). Sector are assumed to be spanned in the
+            counterclockwise direction with 0 corresponding to rightmost
+            limit of the polar subplot.
 
-        The 'sector' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'sector[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'sector[1]' property is a number and may be specified as:
-          - An int or float
+            The 'sector' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'sector[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'sector[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
-        return self['sector']
+        return self["sector"]
 
     @sector.setter
     def sector(self, val):
-        self['sector'] = val
+        self["sector"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -239,14 +226,12 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -293,20 +278,22 @@ class Polar(_BaseLayoutHierarchyType):
             attributes, if not overridden in the individual axes.
             Defaults to `layout.uirevision`.
         """
-    def __init__(self,
-            arg=None,
-            angularaxis: None|None = None,
-            bargap: int|float|None = None,
-            barmode: Any|None = None,
-            bgcolor: str|None = None,
-            domain: None|None = None,
-            gridshape: Any|None = None,
-            hole: int|float|None = None,
-            radialaxis: None|None = None,
-            sector: list|None = None,
-            uirevision: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        angularaxis: None | None = None,
+        bargap: int | float | None = None,
+        barmode: Any | None = None,
+        bgcolor: str | None = None,
+        domain: None | None = None,
+        gridshape: Any | None = None,
+        hole: int | float | None = None,
+        radialaxis: None | None = None,
+        sector: list | None = None,
+        uirevision: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Polar object
 
@@ -362,13 +349,11 @@ class Polar(_BaseLayoutHierarchyType):
         -------
         Polar
         """
-        super().__init__('polar')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("polar")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -376,34 +361,25 @@ class Polar(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Polar
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Polar`""")
+an instance of :class:`plotly.graph_objs.layout.Polar`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('angularaxis', arg, angularaxis)
-        self._init_provided('bargap', arg, bargap)
-        self._init_provided('barmode', arg, barmode)
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('domain', arg, domain)
-        self._init_provided('gridshape', arg, gridshape)
-        self._init_provided('hole', arg, hole)
-        self._init_provided('radialaxis', arg, radialaxis)
-        self._init_provided('sector', arg, sector)
-        self._init_provided('uirevision', arg, uirevision)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("angularaxis", arg, angularaxis)
+        self._init_provided("bargap", arg, bargap)
+        self._init_provided("barmode", arg, barmode)
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("gridshape", arg, gridshape)
+        self._init_provided("hole", arg, hole)
+        self._init_provided("radialaxis", arg, radialaxis)
+        self._init_provided("sector", arg, sector)
+        self._init_provided("uirevision", arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

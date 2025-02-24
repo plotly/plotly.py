@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Y(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'isosurface.slices'
-    _path_str = 'isosurface.slices.y'
+    _parent_path_str = "isosurface.slices"
+    _path_str = "isosurface.slices.y"
     _valid_props = {"fill", "locations", "locationssrc", "show"}
 
-    # fill
-    # ----
     @property
     def fill(self):
         """
@@ -32,14 +26,12 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
-    # locations
-    # ---------
     @property
     def locations(self):
         """
@@ -54,14 +46,12 @@ class Y(_BaseTraceHierarchyType):
         -------
         NDArray
         """
-        return self['locations']
+        return self["locations"]
 
     @locations.setter
     def locations(self, val):
-        self['locations'] = val
+        self["locations"] = val
 
-    # locationssrc
-    # ------------
     @property
     def locationssrc(self):
         """
@@ -75,14 +65,12 @@ class Y(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['locationssrc']
+        return self["locationssrc"]
 
     @locationssrc.setter
     def locationssrc(self, val):
-        self['locationssrc'] = val
+        self["locationssrc"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -96,14 +84,12 @@ class Y(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -124,14 +110,16 @@ class Y(_BaseTraceHierarchyType):
             Determines whether or not slice planes about the y
             dimension are drawn.
         """
-    def __init__(self,
-            arg=None,
-            fill: int|float|None = None,
-            locations: NDArray|None = None,
-            locationssrc: str|None = None,
-            show: bool|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        fill: int | float | None = None,
+        locations: NDArray | None = None,
+        locationssrc: str | None = None,
+        show: bool | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Y object
 
@@ -162,13 +150,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         Y
         """
-        super().__init__('y')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("y")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -176,28 +162,19 @@ class Y(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.isosurface.slices.Y
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.slices.Y`""")
+an instance of :class:`plotly.graph_objs.isosurface.slices.Y`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('fill', arg, fill)
-        self._init_provided('locations', arg, locations)
-        self._init_provided('locationssrc', arg, locationssrc)
-        self._init_provided('show', arg, show)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("fill", arg, fill)
+        self._init_provided("locations", arg, locations)
+        self._init_provided("locationssrc", arg, locationssrc)
+        self._init_provided("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

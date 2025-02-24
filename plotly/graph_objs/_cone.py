@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,73 @@ import copy as _copy
 
 class Cone(_BaseTraceType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = ''
-    _path_str = 'cone'
-    _valid_props = {"anchor", "autocolorscale", "cauto", "cmax", "cmid", "cmin", "coloraxis", "colorbar", "colorscale", "customdata", "customdatasrc", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "lighting", "lightposition", "meta", "metasrc", "name", "opacity", "reversescale", "scene", "showlegend", "showscale", "sizemode", "sizeref", "stream", "text", "textsrc", "type", "u", "uhoverformat", "uid", "uirevision", "usrc", "v", "vhoverformat", "visible", "vsrc", "w", "whoverformat", "wsrc", "x", "xhoverformat", "xsrc", "y", "yhoverformat", "ysrc", "z", "zhoverformat", "zsrc"}
+    _parent_path_str = ""
+    _path_str = "cone"
+    _valid_props = {
+        "anchor",
+        "autocolorscale",
+        "cauto",
+        "cmax",
+        "cmid",
+        "cmin",
+        "coloraxis",
+        "colorbar",
+        "colorscale",
+        "customdata",
+        "customdatasrc",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "lighting",
+        "lightposition",
+        "meta",
+        "metasrc",
+        "name",
+        "opacity",
+        "reversescale",
+        "scene",
+        "showlegend",
+        "showscale",
+        "sizemode",
+        "sizeref",
+        "stream",
+        "text",
+        "textsrc",
+        "type",
+        "u",
+        "uhoverformat",
+        "uid",
+        "uirevision",
+        "usrc",
+        "v",
+        "vhoverformat",
+        "visible",
+        "vsrc",
+        "w",
+        "whoverformat",
+        "wsrc",
+        "x",
+        "xhoverformat",
+        "xsrc",
+        "y",
+        "yhoverformat",
+        "ysrc",
+        "z",
+        "zhoverformat",
+        "zsrc",
+    }
 
-    # anchor
-    # ------
     @property
     def anchor(self):
         """
@@ -32,14 +89,12 @@ class Cone(_BaseTraceType):
         -------
         Any
         """
-        return self['anchor']
+        return self["anchor"]
 
     @anchor.setter
     def anchor(self, val):
-        self['anchor'] = val
+        self["anchor"] = val
 
-    # autocolorscale
-    # --------------
     @property
     def autocolorscale(self):
         """
@@ -57,14 +112,12 @@ class Cone(_BaseTraceType):
         -------
         bool
         """
-        return self['autocolorscale']
+        return self["autocolorscale"]
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self['autocolorscale'] = val
+        self["autocolorscale"] = val
 
-    # cauto
-    # -----
     @property
     def cauto(self):
         """
@@ -80,14 +133,12 @@ class Cone(_BaseTraceType):
         -------
         bool
         """
-        return self['cauto']
+        return self["cauto"]
 
     @cauto.setter
     def cauto(self, val):
-        self['cauto'] = val
+        self["cauto"] = val
 
-    # cmax
-    # ----
     @property
     def cmax(self):
         """
@@ -102,14 +153,12 @@ class Cone(_BaseTraceType):
         -------
         int|float
         """
-        return self['cmax']
+        return self["cmax"]
 
     @cmax.setter
     def cmax(self, val):
-        self['cmax'] = val
+        self["cmax"] = val
 
-    # cmid
-    # ----
     @property
     def cmid(self):
         """
@@ -125,14 +174,12 @@ class Cone(_BaseTraceType):
         -------
         int|float
         """
-        return self['cmid']
+        return self["cmid"]
 
     @cmid.setter
     def cmid(self, val):
-        self['cmid'] = val
+        self["cmid"] = val
 
-    # cmin
-    # ----
     @property
     def cmin(self):
         """
@@ -147,14 +194,12 @@ class Cone(_BaseTraceType):
         -------
         int|float
         """
-        return self['cmin']
+        return self["cmin"]
 
     @cmin.setter
     def cmin(self, val):
-        self['cmin'] = val
+        self["cmin"] = val
 
-    # coloraxis
-    # ---------
     @property
     def coloraxis(self):
         """
@@ -174,14 +219,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['coloraxis']
+        return self["coloraxis"]
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self['coloraxis'] = val
+        self["coloraxis"] = val
 
-    # colorbar
-    # --------
     @property
     def colorbar(self):
         """
@@ -195,14 +238,12 @@ class Cone(_BaseTraceType):
         -------
         plotly.graph_objs.cone.ColorBar
         """
-        return self['colorbar']
+        return self["colorbar"]
 
     @colorbar.setter
     def colorbar(self, val):
-        self['colorbar'] = val
+        self["colorbar"] = val
 
-    # colorscale
-    # ----------
     @property
     def colorscale(self):
         """
@@ -248,14 +289,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -271,14 +310,12 @@ class Cone(_BaseTraceType):
         -------
         NDArray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -292,14 +329,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -318,14 +353,12 @@ class Cone(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -339,14 +372,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -360,14 +391,12 @@ class Cone(_BaseTraceType):
         -------
         plotly.graph_objs.cone.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -405,14 +434,12 @@ class Cone(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -426,14 +453,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -448,14 +473,12 @@ class Cone(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -469,14 +492,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -491,14 +512,12 @@ class Cone(_BaseTraceType):
         -------
         NDArray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -511,14 +530,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -536,14 +553,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -559,14 +574,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -580,14 +593,12 @@ class Cone(_BaseTraceType):
         -------
         plotly.graph_objs.cone.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -607,14 +618,12 @@ class Cone(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -628,14 +637,12 @@ class Cone(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
-    # lighting
-    # --------
     @property
     def lighting(self):
         """
@@ -649,14 +656,12 @@ class Cone(_BaseTraceType):
         -------
         plotly.graph_objs.cone.Lighting
         """
-        return self['lighting']
+        return self["lighting"]
 
     @lighting.setter
     def lighting(self, val):
-        self['lighting'] = val
+        self["lighting"] = val
 
-    # lightposition
-    # -------------
     @property
     def lightposition(self):
         """
@@ -670,14 +675,12 @@ class Cone(_BaseTraceType):
         -------
         plotly.graph_objs.cone.Lightposition
         """
-        return self['lightposition']
+        return self["lightposition"]
 
     @lightposition.setter
     def lightposition(self, val):
-        self['lightposition'] = val
+        self["lightposition"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -698,14 +701,12 @@ class Cone(_BaseTraceType):
         -------
         Any|NDArray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -718,14 +719,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -740,14 +739,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -765,14 +762,12 @@ class Cone(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # reversescale
-    # ------------
     @property
     def reversescale(self):
         """
@@ -787,14 +782,12 @@ class Cone(_BaseTraceType):
         -------
         bool
         """
-        return self['reversescale']
+        return self["reversescale"]
 
     @reversescale.setter
     def reversescale(self, val):
-        self['reversescale'] = val
+        self["reversescale"] = val
 
-    # scene
-    # -----
     @property
     def scene(self):
         """
@@ -812,14 +805,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['scene']
+        return self["scene"]
 
     @scene.setter
     def scene(self, val):
-        self['scene'] = val
+        self["scene"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -833,14 +824,12 @@ class Cone(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
-    # showscale
-    # ---------
     @property
     def showscale(self):
         """
@@ -854,14 +843,12 @@ class Cone(_BaseTraceType):
         -------
         bool
         """
-        return self['showscale']
+        return self["showscale"]
 
     @showscale.setter
     def showscale(self, val):
-        self['showscale'] = val
+        self["showscale"] = val
 
-    # sizemode
-    # --------
     @property
     def sizemode(self):
         """
@@ -879,14 +866,12 @@ class Cone(_BaseTraceType):
         -------
         Any
         """
-        return self['sizemode']
+        return self["sizemode"]
 
     @sizemode.setter
     def sizemode(self, val):
-        self['sizemode'] = val
+        self["sizemode"] = val
 
-    # sizeref
-    # -------
     @property
     def sizeref(self):
         """
@@ -909,14 +894,12 @@ class Cone(_BaseTraceType):
         -------
         int|float
         """
-        return self['sizeref']
+        return self["sizeref"]
 
     @sizeref.setter
     def sizeref(self, val):
-        self['sizeref'] = val
+        self["sizeref"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -930,14 +913,12 @@ class Cone(_BaseTraceType):
         -------
         plotly.graph_objs.cone.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -954,14 +935,12 @@ class Cone(_BaseTraceType):
         -------
         str|NDArray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -974,14 +953,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
-    # u
-    # -
     @property
     def u(self):
         """
@@ -994,14 +971,12 @@ class Cone(_BaseTraceType):
         -------
         NDArray
         """
-        return self['u']
+        return self["u"]
 
     @u.setter
     def u(self, val):
-        self['u'] = val
+        self["u"] = val
 
-    # uhoverformat
-    # ------------
     @property
     def uhoverformat(self):
         """
@@ -1019,14 +994,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['uhoverformat']
+        return self["uhoverformat"]
 
     @uhoverformat.setter
     def uhoverformat(self, val):
-        self['uhoverformat'] = val
+        self["uhoverformat"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1041,14 +1014,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1074,14 +1045,12 @@ class Cone(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
-    # usrc
-    # ----
     @property
     def usrc(self):
         """
@@ -1094,14 +1063,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['usrc']
+        return self["usrc"]
 
     @usrc.setter
     def usrc(self, val):
-        self['usrc'] = val
+        self["usrc"] = val
 
-    # v
-    # -
     @property
     def v(self):
         """
@@ -1114,14 +1081,12 @@ class Cone(_BaseTraceType):
         -------
         NDArray
         """
-        return self['v']
+        return self["v"]
 
     @v.setter
     def v(self, val):
-        self['v'] = val
+        self["v"] = val
 
-    # vhoverformat
-    # ------------
     @property
     def vhoverformat(self):
         """
@@ -1139,14 +1104,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['vhoverformat']
+        return self["vhoverformat"]
 
     @vhoverformat.setter
     def vhoverformat(self, val):
-        self['vhoverformat'] = val
+        self["vhoverformat"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1162,14 +1125,12 @@ class Cone(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # vsrc
-    # ----
     @property
     def vsrc(self):
         """
@@ -1182,14 +1143,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['vsrc']
+        return self["vsrc"]
 
     @vsrc.setter
     def vsrc(self, val):
-        self['vsrc'] = val
+        self["vsrc"] = val
 
-    # w
-    # -
     @property
     def w(self):
         """
@@ -1202,14 +1161,12 @@ class Cone(_BaseTraceType):
         -------
         NDArray
         """
-        return self['w']
+        return self["w"]
 
     @w.setter
     def w(self, val):
-        self['w'] = val
+        self["w"] = val
 
-    # whoverformat
-    # ------------
     @property
     def whoverformat(self):
         """
@@ -1227,14 +1184,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['whoverformat']
+        return self["whoverformat"]
 
     @whoverformat.setter
     def whoverformat(self, val):
-        self['whoverformat'] = val
+        self["whoverformat"] = val
 
-    # wsrc
-    # ----
     @property
     def wsrc(self):
         """
@@ -1247,14 +1202,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['wsrc']
+        return self["wsrc"]
 
     @wsrc.setter
     def wsrc(self, val):
-        self['wsrc'] = val
+        self["wsrc"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1268,14 +1221,12 @@ class Cone(_BaseTraceType):
         -------
         NDArray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1299,14 +1250,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1319,14 +1268,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1340,14 +1287,12 @@ class Cone(_BaseTraceType):
         -------
         NDArray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1371,14 +1316,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -1391,14 +1334,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
-    # z
-    # -
     @property
     def z(self):
         """
@@ -1412,14 +1353,12 @@ class Cone(_BaseTraceType):
         -------
         NDArray
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
-    # zhoverformat
-    # ------------
     @property
     def zhoverformat(self):
         """
@@ -1443,14 +1382,12 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['zhoverformat']
+        return self["zhoverformat"]
 
     @zhoverformat.setter
     def zhoverformat(self, val):
-        self['zhoverformat'] = val
+        self["zhoverformat"] = val
 
-    # zsrc
-    # ----
     @property
     def zsrc(self):
         """
@@ -1463,20 +1400,16 @@ class Cone(_BaseTraceType):
         -------
         str
         """
-        return self['zsrc']
+        return self["zsrc"]
 
     @zsrc.setter
     def zsrc(self, val):
-        self['zsrc'] = val
+        self["zsrc"] = val
 
-    # type
-    # ----
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1818,71 +1751,73 @@ class Cone(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-    def __init__(self,
-            arg=None,
-            anchor: Any|None = None,
-            autocolorscale: bool|None = None,
-            cauto: bool|None = None,
-            cmax: int|float|None = None,
-            cmid: int|float|None = None,
-            cmin: int|float|None = None,
-            coloraxis: str|None = None,
-            colorbar: None|None = None,
-            colorscale: str|None = None,
-            customdata: NDArray|None = None,
-            customdatasrc: str|None = None,
-            hoverinfo: Any|None = None,
-            hoverinfosrc: str|None = None,
-            hoverlabel: None|None = None,
-            hovertemplate: str|None = None,
-            hovertemplatesrc: str|None = None,
-            hovertext: str|None = None,
-            hovertextsrc: str|None = None,
-            ids: NDArray|None = None,
-            idssrc: str|None = None,
-            legend: str|None = None,
-            legendgroup: str|None = None,
-            legendgrouptitle: None|None = None,
-            legendrank: int|float|None = None,
-            legendwidth: int|float|None = None,
-            lighting: None|None = None,
-            lightposition: None|None = None,
-            meta: Any|None = None,
-            metasrc: str|None = None,
-            name: str|None = None,
-            opacity: int|float|None = None,
-            reversescale: bool|None = None,
-            scene: str|None = None,
-            showlegend: bool|None = None,
-            showscale: bool|None = None,
-            sizemode: Any|None = None,
-            sizeref: int|float|None = None,
-            stream: None|None = None,
-            text: str|None = None,
-            textsrc: str|None = None,
-            u: NDArray|None = None,
-            uhoverformat: str|None = None,
-            uid: str|None = None,
-            uirevision: Any|None = None,
-            usrc: str|None = None,
-            v: NDArray|None = None,
-            vhoverformat: str|None = None,
-            visible: Any|None = None,
-            vsrc: str|None = None,
-            w: NDArray|None = None,
-            whoverformat: str|None = None,
-            wsrc: str|None = None,
-            x: NDArray|None = None,
-            xhoverformat: str|None = None,
-            xsrc: str|None = None,
-            y: NDArray|None = None,
-            yhoverformat: str|None = None,
-            ysrc: str|None = None,
-            z: NDArray|None = None,
-            zhoverformat: str|None = None,
-            zsrc: str|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        anchor: Any | None = None,
+        autocolorscale: bool | None = None,
+        cauto: bool | None = None,
+        cmax: int | float | None = None,
+        cmid: int | float | None = None,
+        cmin: int | float | None = None,
+        coloraxis: str | None = None,
+        colorbar: None | None = None,
+        colorscale: str | None = None,
+        customdata: NDArray | None = None,
+        customdatasrc: str | None = None,
+        hoverinfo: Any | None = None,
+        hoverinfosrc: str | None = None,
+        hoverlabel: None | None = None,
+        hovertemplate: str | None = None,
+        hovertemplatesrc: str | None = None,
+        hovertext: str | None = None,
+        hovertextsrc: str | None = None,
+        ids: NDArray | None = None,
+        idssrc: str | None = None,
+        legend: str | None = None,
+        legendgroup: str | None = None,
+        legendgrouptitle: None | None = None,
+        legendrank: int | float | None = None,
+        legendwidth: int | float | None = None,
+        lighting: None | None = None,
+        lightposition: None | None = None,
+        meta: Any | None = None,
+        metasrc: str | None = None,
+        name: str | None = None,
+        opacity: int | float | None = None,
+        reversescale: bool | None = None,
+        scene: str | None = None,
+        showlegend: bool | None = None,
+        showscale: bool | None = None,
+        sizemode: Any | None = None,
+        sizeref: int | float | None = None,
+        stream: None | None = None,
+        text: str | None = None,
+        textsrc: str | None = None,
+        u: NDArray | None = None,
+        uhoverformat: str | None = None,
+        uid: str | None = None,
+        uirevision: Any | None = None,
+        usrc: str | None = None,
+        v: NDArray | None = None,
+        vhoverformat: str | None = None,
+        visible: Any | None = None,
+        vsrc: str | None = None,
+        w: NDArray | None = None,
+        whoverformat: str | None = None,
+        wsrc: str | None = None,
+        x: NDArray | None = None,
+        xhoverformat: str | None = None,
+        xsrc: str | None = None,
+        y: NDArray | None = None,
+        yhoverformat: str | None = None,
+        ysrc: str | None = None,
+        z: NDArray | None = None,
+        zhoverformat: str | None = None,
+        zsrc: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Cone object
 
@@ -2238,13 +2173,11 @@ class Cone(_BaseTraceType):
         -------
         Cone
         """
-        super().__init__('cone')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("cone")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2252,91 +2185,79 @@ class Cone(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Cone
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Cone`""")
+an instance of :class:`plotly.graph_objs.Cone`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('anchor', arg, anchor)
-        self._init_provided('autocolorscale', arg, autocolorscale)
-        self._init_provided('cauto', arg, cauto)
-        self._init_provided('cmax', arg, cmax)
-        self._init_provided('cmid', arg, cmid)
-        self._init_provided('cmin', arg, cmin)
-        self._init_provided('coloraxis', arg, coloraxis)
-        self._init_provided('colorbar', arg, colorbar)
-        self._init_provided('colorscale', arg, colorscale)
-        self._init_provided('customdata', arg, customdata)
-        self._init_provided('customdatasrc', arg, customdatasrc)
-        self._init_provided('hoverinfo', arg, hoverinfo)
-        self._init_provided('hoverinfosrc', arg, hoverinfosrc)
-        self._init_provided('hoverlabel', arg, hoverlabel)
-        self._init_provided('hovertemplate', arg, hovertemplate)
-        self._init_provided('hovertemplatesrc', arg, hovertemplatesrc)
-        self._init_provided('hovertext', arg, hovertext)
-        self._init_provided('hovertextsrc', arg, hovertextsrc)
-        self._init_provided('ids', arg, ids)
-        self._init_provided('idssrc', arg, idssrc)
-        self._init_provided('legend', arg, legend)
-        self._init_provided('legendgroup', arg, legendgroup)
-        self._init_provided('legendgrouptitle', arg, legendgrouptitle)
-        self._init_provided('legendrank', arg, legendrank)
-        self._init_provided('legendwidth', arg, legendwidth)
-        self._init_provided('lighting', arg, lighting)
-        self._init_provided('lightposition', arg, lightposition)
-        self._init_provided('meta', arg, meta)
-        self._init_provided('metasrc', arg, metasrc)
-        self._init_provided('name', arg, name)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('reversescale', arg, reversescale)
-        self._init_provided('scene', arg, scene)
-        self._init_provided('showlegend', arg, showlegend)
-        self._init_provided('showscale', arg, showscale)
-        self._init_provided('sizemode', arg, sizemode)
-        self._init_provided('sizeref', arg, sizeref)
-        self._init_provided('stream', arg, stream)
-        self._init_provided('text', arg, text)
-        self._init_provided('textsrc', arg, textsrc)
-        self._init_provided('u', arg, u)
-        self._init_provided('uhoverformat', arg, uhoverformat)
-        self._init_provided('uid', arg, uid)
-        self._init_provided('uirevision', arg, uirevision)
-        self._init_provided('usrc', arg, usrc)
-        self._init_provided('v', arg, v)
-        self._init_provided('vhoverformat', arg, vhoverformat)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('vsrc', arg, vsrc)
-        self._init_provided('w', arg, w)
-        self._init_provided('whoverformat', arg, whoverformat)
-        self._init_provided('wsrc', arg, wsrc)
-        self._init_provided('x', arg, x)
-        self._init_provided('xhoverformat', arg, xhoverformat)
-        self._init_provided('xsrc', arg, xsrc)
-        self._init_provided('y', arg, y)
-        self._init_provided('yhoverformat', arg, yhoverformat)
-        self._init_provided('ysrc', arg, ysrc)
-        self._init_provided('z', arg, z)
-        self._init_provided('zhoverformat', arg, zhoverformat)
-        self._init_provided('zsrc', arg, zsrc)
+        self._init_provided("anchor", arg, anchor)
+        self._init_provided("autocolorscale", arg, autocolorscale)
+        self._init_provided("cauto", arg, cauto)
+        self._init_provided("cmax", arg, cmax)
+        self._init_provided("cmid", arg, cmid)
+        self._init_provided("cmin", arg, cmin)
+        self._init_provided("coloraxis", arg, coloraxis)
+        self._init_provided("colorbar", arg, colorbar)
+        self._init_provided("colorscale", arg, colorscale)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("lighting", arg, lighting)
+        self._init_provided("lightposition", arg, lightposition)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("reversescale", arg, reversescale)
+        self._init_provided("scene", arg, scene)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("showscale", arg, showscale)
+        self._init_provided("sizemode", arg, sizemode)
+        self._init_provided("sizeref", arg, sizeref)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("u", arg, u)
+        self._init_provided("uhoverformat", arg, uhoverformat)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("usrc", arg, usrc)
+        self._init_provided("v", arg, v)
+        self._init_provided("vhoverformat", arg, vhoverformat)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("vsrc", arg, vsrc)
+        self._init_provided("w", arg, w)
+        self._init_provided("whoverformat", arg, whoverformat)
+        self._init_provided("wsrc", arg, wsrc)
+        self._init_provided("x", arg, x)
+        self._init_provided("xhoverformat", arg, xhoverformat)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("yhoverformat", arg, yhoverformat)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("z", arg, z)
+        self._init_provided("zhoverformat", arg, zhoverformat)
+        self._init_provided("zsrc", arg, zsrc)
 
-        # Read-only literals
-        # ------------------
-
-        self._props['type'] = 'cone'
-        arg.pop('type', None)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._props["type"] = "cone"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

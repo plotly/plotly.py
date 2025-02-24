@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Axis(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'splom.dimension'
-    _path_str = 'splom.dimension.axis'
+    _parent_path_str = "splom.dimension"
+    _path_str = "splom.dimension.axis"
     _valid_props = {"matches", "type"}
 
-    # matches
-    # -------
     @property
     def matches(self):
         """
@@ -31,14 +25,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['matches']
+        return self["matches"]
 
     @matches.setter
     def matches(self, val):
-        self['matches'] = val
+        self["matches"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -54,14 +46,12 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -75,12 +65,10 @@ class Axis(_BaseTraceHierarchyType):
             y axes. Note that the axis `type` values set in layout
             take precedence over this attribute.
         """
-    def __init__(self,
-            arg=None,
-            matches: bool|None = None,
-            type: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, matches: bool | None = None, type: Any | None = None, **kwargs
+    ):
         """
         Construct a new Axis object
 
@@ -104,13 +92,11 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Axis
         """
-        super().__init__('axis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("axis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -118,26 +104,17 @@ class Axis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.splom.dimension.Axis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.dimension.Axis`""")
+an instance of :class:`plotly.graph_objs.splom.dimension.Axis`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('matches', arg, matches)
-        self._init_provided('type', arg, type)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("matches", arg, matches)
+        self._init_provided("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,10 @@ import copy as _copy
 
 class Bar(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'indicator.gauge'
-    _path_str = 'indicator.gauge.bar'
+    _parent_path_str = "indicator.gauge"
+    _path_str = "indicator.gauge.bar"
     _valid_props = {"color", "line", "thickness"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -33,14 +27,12 @@ class Bar(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -54,14 +46,12 @@ class Bar(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.bar.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -75,14 +65,12 @@ class Bar(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['thickness']
+        return self["thickness"]
 
     @thickness.setter
     def thickness(self, val):
-        self['thickness'] = val
+        self["thickness"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -95,13 +83,15 @@ class Bar(_BaseTraceHierarchyType):
             Sets the thickness of the bar as a fraction of the
             total thickness of the gauge.
         """
-    def __init__(self,
-            arg=None,
-            color: str|None = None,
-            line: None|None = None,
-            thickness: int|float|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color: str | None = None,
+        line: None | None = None,
+        thickness: int | float | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Bar object
 
@@ -126,13 +116,11 @@ class Bar(_BaseTraceHierarchyType):
         -------
         Bar
         """
-        super().__init__('bar')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("bar")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -140,27 +128,18 @@ class Bar(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.gauge.Bar
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.gauge.Bar`""")
+an instance of :class:`plotly.graph_objs.indicator.gauge.Bar`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('color', arg, color)
-        self._init_provided('line', arg, line)
-        self._init_provided('thickness', arg, thickness)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("line", arg, line)
+        self._init_provided("thickness", arg, thickness)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

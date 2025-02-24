@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,35 @@ import copy as _copy
 
 class Slider(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.slider'
-    _valid_props = {"active", "activebgcolor", "bgcolor", "bordercolor", "borderwidth", "currentvalue", "font", "len", "lenmode", "minorticklen", "name", "pad", "stepdefaults", "steps", "templateitemname", "tickcolor", "ticklen", "tickwidth", "transition", "visible", "x", "xanchor", "y", "yanchor"}
+    _parent_path_str = "layout"
+    _path_str = "layout.slider"
+    _valid_props = {
+        "active",
+        "activebgcolor",
+        "bgcolor",
+        "bordercolor",
+        "borderwidth",
+        "currentvalue",
+        "font",
+        "len",
+        "lenmode",
+        "minorticklen",
+        "name",
+        "pad",
+        "stepdefaults",
+        "steps",
+        "templateitemname",
+        "tickcolor",
+        "ticklen",
+        "tickwidth",
+        "transition",
+        "visible",
+        "x",
+        "xanchor",
+        "y",
+        "yanchor",
+    }
 
-    # active
-    # ------
     @property
     def active(self):
         """
@@ -30,14 +49,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['active']
+        return self["active"]
 
     @active.setter
     def active(self, val):
-        self['active'] = val
+        self["active"] = val
 
-    # activebgcolor
-    # -------------
     @property
     def activebgcolor(self):
         """
@@ -54,14 +71,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['activebgcolor']
+        return self["activebgcolor"]
 
     @activebgcolor.setter
     def activebgcolor(self, val):
-        self['activebgcolor'] = val
+        self["activebgcolor"] = val
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -78,14 +93,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
-    # bordercolor
-    # -----------
     @property
     def bordercolor(self):
         """
@@ -102,14 +115,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
-    # borderwidth
-    # -----------
     @property
     def borderwidth(self):
         """
@@ -122,14 +133,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
-    # currentvalue
-    # ------------
     @property
     def currentvalue(self):
         """
@@ -143,14 +152,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.slider.Currentvalue
         """
-        return self['currentvalue']
+        return self["currentvalue"]
 
     @currentvalue.setter
     def currentvalue(self, val):
-        self['currentvalue'] = val
+        self["currentvalue"] = val
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -166,14 +173,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.slider.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
-    # len
-    # ---
     @property
     def len(self):
         """
@@ -188,14 +193,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['len']
+        return self["len"]
 
     @len.setter
     def len(self, val):
-        self['len'] = val
+        self["len"] = val
 
-    # lenmode
-    # -------
     @property
     def lenmode(self):
         """
@@ -210,14 +213,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['lenmode']
+        return self["lenmode"]
 
     @lenmode.setter
     def lenmode(self, val):
-        self['lenmode'] = val
+        self["lenmode"] = val
 
-    # minorticklen
-    # ------------
     @property
     def minorticklen(self):
         """
@@ -230,14 +231,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['minorticklen']
+        return self["minorticklen"]
 
     @minorticklen.setter
     def minorticklen(self, val):
-        self['minorticklen'] = val
+        self["minorticklen"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -257,14 +256,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # pad
-    # ---
     @property
     def pad(self):
         """
@@ -280,14 +277,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.slider.Pad
         """
-        return self['pad']
+        return self["pad"]
 
     @pad.setter
     def pad(self, val):
-        self['pad'] = val
+        self["pad"] = val
 
-    # steps
-    # -----
     @property
     def steps(self):
         """
@@ -301,14 +296,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.slider.Step]
         """
-        return self['steps']
+        return self["steps"]
 
     @steps.setter
     def steps(self, val):
-        self['steps'] = val
+        self["steps"] = val
 
-    # stepdefaults
-    # ------------
     @property
     def stepdefaults(self):
         """
@@ -326,14 +319,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.slider.Step
         """
-        return self['stepdefaults']
+        return self["stepdefaults"]
 
     @stepdefaults.setter
     def stepdefaults(self, val):
-        self['stepdefaults'] = val
+        self["stepdefaults"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -354,14 +345,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
-    # tickcolor
-    # ---------
     @property
     def tickcolor(self):
         """
@@ -378,14 +367,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
-    # ticklen
-    # -------
     @property
     def ticklen(self):
         """
@@ -398,14 +385,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
-    # tickwidth
-    # ---------
     @property
     def tickwidth(self):
         """
@@ -418,14 +403,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
-    # transition
-    # ----------
     @property
     def transition(self):
         """
@@ -439,14 +422,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.slider.Transition
         """
-        return self['transition']
+        return self["transition"]
 
     @transition.setter
     def transition(self, val):
-        self['transition'] = val
+        self["transition"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -459,14 +440,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -479,14 +458,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
-    # xanchor
-    # -------
     @property
     def xanchor(self):
         """
@@ -502,14 +479,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -522,14 +497,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
-    # yanchor
-    # -------
     @property
     def yanchor(self):
         """
@@ -545,14 +518,12 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yanchor']
+        return self["yanchor"]
 
     @yanchor.setter
     def yanchor(self, val):
-        self['yanchor'] = val
+        self["yanchor"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -641,34 +612,36 @@ class Slider(_BaseLayoutHierarchyType):
             binds the `y` position to the "top", "middle" or
             "bottom" of the range selector.
         """
-    def __init__(self,
-            arg=None,
-            active: int|float|None = None,
-            activebgcolor: str|None = None,
-            bgcolor: str|None = None,
-            bordercolor: str|None = None,
-            borderwidth: int|float|None = None,
-            currentvalue: None|None = None,
-            font: None|None = None,
-            len: int|float|None = None,
-            lenmode: Any|None = None,
-            minorticklen: int|float|None = None,
-            name: str|None = None,
-            pad: None|None = None,
-            steps: None|None = None,
-            stepdefaults: None|None = None,
-            templateitemname: str|None = None,
-            tickcolor: str|None = None,
-            ticklen: int|float|None = None,
-            tickwidth: int|float|None = None,
-            transition: None|None = None,
-            visible: bool|None = None,
-            x: int|float|None = None,
-            xanchor: Any|None = None,
-            y: int|float|None = None,
-            yanchor: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        active: int | float | None = None,
+        activebgcolor: str | None = None,
+        bgcolor: str | None = None,
+        bordercolor: str | None = None,
+        borderwidth: int | float | None = None,
+        currentvalue: None | None = None,
+        font: None | None = None,
+        len: int | float | None = None,
+        lenmode: Any | None = None,
+        minorticklen: int | float | None = None,
+        name: str | None = None,
+        pad: None | None = None,
+        steps: None | None = None,
+        stepdefaults: None | None = None,
+        templateitemname: str | None = None,
+        tickcolor: str | None = None,
+        ticklen: int | float | None = None,
+        tickwidth: int | float | None = None,
+        transition: None | None = None,
+        visible: bool | None = None,
+        x: int | float | None = None,
+        xanchor: Any | None = None,
+        y: int | float | None = None,
+        yanchor: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Slider object
 
@@ -766,13 +739,11 @@ class Slider(_BaseLayoutHierarchyType):
         -------
         Slider
         """
-        super().__init__('sliders')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("sliders")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -780,48 +751,39 @@ class Slider(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Slider
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Slider`""")
+an instance of :class:`plotly.graph_objs.layout.Slider`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('active', arg, active)
-        self._init_provided('activebgcolor', arg, activebgcolor)
-        self._init_provided('bgcolor', arg, bgcolor)
-        self._init_provided('bordercolor', arg, bordercolor)
-        self._init_provided('borderwidth', arg, borderwidth)
-        self._init_provided('currentvalue', arg, currentvalue)
-        self._init_provided('font', arg, font)
-        self._init_provided('len', arg, len)
-        self._init_provided('lenmode', arg, lenmode)
-        self._init_provided('minorticklen', arg, minorticklen)
-        self._init_provided('name', arg, name)
-        self._init_provided('pad', arg, pad)
-        self._init_provided('steps', arg, steps)
-        self._init_provided('stepdefaults', arg, stepdefaults)
-        self._init_provided('templateitemname', arg, templateitemname)
-        self._init_provided('tickcolor', arg, tickcolor)
-        self._init_provided('ticklen', arg, ticklen)
-        self._init_provided('tickwidth', arg, tickwidth)
-        self._init_provided('transition', arg, transition)
-        self._init_provided('visible', arg, visible)
-        self._init_provided('x', arg, x)
-        self._init_provided('xanchor', arg, xanchor)
-        self._init_provided('y', arg, y)
-        self._init_provided('yanchor', arg, yanchor)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("active", arg, active)
+        self._init_provided("activebgcolor", arg, activebgcolor)
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("bordercolor", arg, bordercolor)
+        self._init_provided("borderwidth", arg, borderwidth)
+        self._init_provided("currentvalue", arg, currentvalue)
+        self._init_provided("font", arg, font)
+        self._init_provided("len", arg, len)
+        self._init_provided("lenmode", arg, lenmode)
+        self._init_provided("minorticklen", arg, minorticklen)
+        self._init_provided("name", arg, name)
+        self._init_provided("pad", arg, pad)
+        self._init_provided("steps", arg, steps)
+        self._init_provided("stepdefaults", arg, stepdefaults)
+        self._init_provided("templateitemname", arg, templateitemname)
+        self._init_provided("tickcolor", arg, tickcolor)
+        self._init_provided("ticklen", arg, ticklen)
+        self._init_provided("tickwidth", arg, tickwidth)
+        self._init_provided("transition", arg, transition)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("x", arg, x)
+        self._init_provided("xanchor", arg, xanchor)
+        self._init_provided("y", arg, y)
+        self._init_provided("yanchor", arg, yanchor)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,5 +1,3 @@
-
-
 from __future__ import annotations
 from typing import Any
 from numpy.typing import NDArray
@@ -9,14 +7,23 @@ import copy as _copy
 
 class Selection(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
-    _parent_path_str = 'layout'
-    _path_str = 'layout.selection'
-    _valid_props = {"line", "name", "opacity", "path", "templateitemname", "type", "x0", "x1", "xref", "y0", "y1", "yref"}
+    _parent_path_str = "layout"
+    _path_str = "layout.selection"
+    _valid_props = {
+        "line",
+        "name",
+        "opacity",
+        "path",
+        "templateitemname",
+        "type",
+        "x0",
+        "x1",
+        "xref",
+        "y0",
+        "y1",
+        "yref",
+    }
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -30,14 +37,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.selection.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -57,14 +62,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -77,14 +80,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
-    # path
-    # ----
     @property
     def path(self):
         """
@@ -99,14 +100,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['path']
+        return self["path"]
 
     @path.setter
     def path(self, val):
-        self['path'] = val
+        self["path"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -127,14 +126,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -151,14 +148,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
-    # x0
-    # --
     @property
     def x0(self):
         """
@@ -170,14 +165,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['x0']
+        return self["x0"]
 
     @x0.setter
     def x0(self, val):
-        self['x0'] = val
+        self["x0"] = val
 
-    # x1
-    # --
     @property
     def x1(self):
         """
@@ -189,14 +182,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['x1']
+        return self["x1"]
 
     @x1.setter
     def x1(self, val):
-        self['x1'] = val
+        self["x1"] = val
 
-    # xref
-    # ----
     @property
     def xref(self):
         """
@@ -222,14 +213,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xref']
+        return self["xref"]
 
     @xref.setter
     def xref(self, val):
-        self['xref'] = val
+        self["xref"] = val
 
-    # y0
-    # --
     @property
     def y0(self):
         """
@@ -241,14 +230,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['y0']
+        return self["y0"]
 
     @y0.setter
     def y0(self, val):
-        self['y0'] = val
+        self["y0"] = val
 
-    # y1
-    # --
     @property
     def y1(self):
         """
@@ -260,14 +247,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['y1']
+        return self["y1"]
 
     @y1.setter
     def y1(self, val):
-        self['y1'] = val
+        self["y1"] = val
 
-    # yref
-    # ----
     @property
     def yref(self):
         """
@@ -293,14 +278,12 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yref']
+        return self["yref"]
 
     @yref.setter
     def yref(self, val):
-        self['yref'] = val
+        self["yref"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -374,22 +357,24 @@ class Selection(_BaseLayoutHierarchyType):
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         """
-    def __init__(self,
-            arg=None,
-            line: None|None = None,
-            name: str|None = None,
-            opacity: int|float|None = None,
-            path: str|None = None,
-            templateitemname: str|None = None,
-            type: Any|None = None,
-            x0: Any|None = None,
-            x1: Any|None = None,
-            xref: Any|None = None,
-            y0: Any|None = None,
-            y1: Any|None = None,
-            yref: Any|None = None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        line: None | None = None,
+        name: str | None = None,
+        opacity: int | float | None = None,
+        path: str | None = None,
+        templateitemname: str | None = None,
+        type: Any | None = None,
+        x0: Any | None = None,
+        x1: Any | None = None,
+        xref: Any | None = None,
+        y0: Any | None = None,
+        y1: Any | None = None,
+        yref: Any | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Selection object
 
@@ -473,13 +458,11 @@ class Selection(_BaseLayoutHierarchyType):
         -------
         Selection
         """
-        super().__init__('selections')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("selections")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -487,36 +470,27 @@ class Selection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Selection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Selection`""")
+an instance of :class:`plotly.graph_objs.layout.Selection`"""
+            )
 
-        # Handle skip_invalid
-        # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        self._init_provided('line', arg, line)
-        self._init_provided('name', arg, name)
-        self._init_provided('opacity', arg, opacity)
-        self._init_provided('path', arg, path)
-        self._init_provided('templateitemname', arg, templateitemname)
-        self._init_provided('type', arg, type)
-        self._init_provided('x0', arg, x0)
-        self._init_provided('x1', arg, x1)
-        self._init_provided('xref', arg, xref)
-        self._init_provided('y0', arg, y0)
-        self._init_provided('y1', arg, y1)
-        self._init_provided('yref', arg, yref)
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("line", arg, line)
+        self._init_provided("name", arg, name)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("path", arg, path)
+        self._init_provided("templateitemname", arg, templateitemname)
+        self._init_provided("type", arg, type)
+        self._init_provided("x0", arg, x0)
+        self._init_provided("x1", arg, x1)
+        self._init_provided("xref", arg, xref)
+        self._init_provided("y0", arg, y0)
+        self._init_provided("y1", arg, y1)
+        self._init_provided("yref", arg, yref)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
