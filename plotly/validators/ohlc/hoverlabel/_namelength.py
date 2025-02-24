@@ -1,13 +1,13 @@
-import _plotly_utils.basevalidators
+import _plotly_utils.basevalidators as _bv
 
 
-class NamelengthValidator(_plotly_utils.basevalidators.IntegerValidator):
+class NamelengthValidator(_bv.IntegerValidator):
     def __init__(
         self, plotly_name="namelength", parent_name="ohlc.hoverlabel", **kwargs
     ):
-        super(NamelengthValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "none"),
             min=kwargs.pop("min", -1),
