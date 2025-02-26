@@ -61,9 +61,6 @@ def warning_on_one_line(message, category, filename, lineno, file=None, line=Non
 
 warnings.formatwarning = warning_on_one_line
 
-ipython_core_display = optional_imports.get_module("IPython.core.display")
-sage_salvus = optional_imports.get_module("sage_salvus")
-
 
 ### mpl-related tools ###
 def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
