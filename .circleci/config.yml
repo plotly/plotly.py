@@ -64,7 +64,8 @@ commands:
                 name: Install pandas
                 command: |
                   source .venv/bin/activate
-                  pip install pandas==<<parameters.pandas_version>>
+                  uv pip install pip
+                  python -m pip install pandas==<<parameters.pandas_version>>
 
       - run:
           name: Test core
