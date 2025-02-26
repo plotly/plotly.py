@@ -76,6 +76,7 @@ commands:
           name: Test optional
           command: |
             source .venv/bin/activate
+            uv pip list | grep pandas
             python -m pytest tests/test_optional
           no_output_timeout: 40m
       - run:
