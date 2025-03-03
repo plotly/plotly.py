@@ -1,5 +1,6 @@
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
+from warnings import warn
 
 
 class Densitymapbox(_BaseTraceType):
@@ -366,21 +367,6 @@ class Densitymapbox(_BaseTraceType):
                     :class:`plotly.graph_objects.densitymapbox.colo
                     rbar.Title` instance or dict with compatible
                     properties
-                titlefont
-                    Deprecated: Please use
-                    densitymapbox.colorbar.title.font instead. Sets
-                    this color bar's title font. Note that the
-                    title's font used to be set by the now
-                    deprecated `titlefont` attribute.
-                titleside
-                    Deprecated: Please use
-                    densitymapbox.colorbar.title.side instead.
-                    Determines the location of color bar's title
-                    with respect to the color bar. Defaults to
-                    "top" when `orientation` if "v" and  defaults
-                    to "right" when `orientation` if "h". Note that
-                    the title's location used to be set by the now
-                    deprecated `titleside` attribute.
                 x
                     Sets the x position with respect to `xref` of
                     the color bar (in plot fraction). When `xref`
@@ -1236,6 +1222,7 @@ class Densitymapbox(_BaseTraceType):
         """
         mapbox subplots and traces are deprecated! Please consider
         switching to `map` subplots and traces. Learn more at:
+        https://plotly.com/python/maplibre-migration/ as well as
         https://plotly.com/javascript/maplibre-migration/ Sets a
         reference between this trace's data coordinates and a mapbox
         subplot. If "mapbox" (the default value), the data refer to
@@ -1704,7 +1691,8 @@ class Densitymapbox(_BaseTraceType):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -1832,7 +1820,8 @@ class Densitymapbox(_BaseTraceType):
 
         "densitymapbox" trace is deprecated! Please consider switching
         to the "densitymap" trace type and `map` subplots. Learn more
-        at: https://plotly.com/javascript/maplibre-migration/ Draws a
+        at: https://plotly.com/python/maplibre-migration/ as well as
+        https://plotly.com/javascript/maplibre-migration/ Draws a
         bivariate kernel density estimation with a Gaussian kernel from
         `lon` and `lat` coordinates and optional `z` values using a
         colorscale.
@@ -2025,7 +2014,8 @@ class Densitymapbox(_BaseTraceType):
         subplot
             mapbox subplots and traces are deprecated! Please
             consider switching to `map` subplots and traces. Learn
-            more at: https://plotly.com/javascript/maplibre-
+            more at: https://plotly.com/python/maplibre-migration/
+            as well as https://plotly.com/javascript/maplibre-
             migration/ Sets a reference between this trace's data
             coordinates and a mapbox subplot. If "mapbox" (the
             default value), the data refer to `layout.mapbox`. If
@@ -2330,3 +2320,11 @@ an instance of :class:`plotly.graph_objs.Densitymapbox`"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+        warn(
+            "*densitymapbox* is deprecated!"
+            + " Use *densitymap* instead."
+            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+            stacklevel=2,
+            category=DeprecationWarning,
+        )

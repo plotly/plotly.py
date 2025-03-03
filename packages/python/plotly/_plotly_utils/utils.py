@@ -1,3 +1,4 @@
+import base64
 import decimal
 import json as _json
 import sys
@@ -5,7 +6,112 @@ import re
 from functools import reduce
 
 from _plotly_utils.optional_imports import get_module
-from _plotly_utils.basevalidators import ImageUriValidator
+from _plotly_utils.basevalidators import (
+    ImageUriValidator,
+    copy_to_readonly_numpy_array,
+    is_homogeneous_array,
+)
+
+
+int8min = -128
+int8max = 127
+int16min = -32768
+int16max = 32767
+int32min = -2147483648
+int32max = 2147483647
+
+uint8max = 255
+uint16max = 65535
+uint32max = 4294967295
+
+plotlyjsShortTypes = {
+    "int8": "i1",
+    "uint8": "u1",
+    "int16": "i2",
+    "uint16": "u2",
+    "int32": "i4",
+    "uint32": "u4",
+    "float32": "f4",
+    "float64": "f8",
+}
+
+
+def to_typed_array_spec(v):
+    """
+    Convert numpy array to plotly.js typed array spec
+    If not possible return the original value
+    """
+    v = copy_to_readonly_numpy_array(v)
+
+    # Skip b64 encoding if numpy is not installed,
+    # or if v is not a numpy array, or if v is empty
+    np = get_module("numpy", should_load=False)
+    if not np or not isinstance(v, np.ndarray) or v.size == 0:
+        return v
+
+    dtype = str(v.dtype)
+
+    # convert default Big Ints until we could support them in plotly.js
+    if dtype == "int64":
+        max = v.max()
+        min = v.min()
+        if max <= int8max and min >= int8min:
+            v = v.astype("int8")
+        elif max <= int16max and min >= int16min:
+            v = v.astype("int16")
+        elif max <= int32max and min >= int32min:
+            v = v.astype("int32")
+        else:
+            return v
+
+    elif dtype == "uint64":
+        max = v.max()
+        min = v.min()
+        if max <= uint8max and min >= 0:
+            v = v.astype("uint8")
+        elif max <= uint16max and min >= 0:
+            v = v.astype("uint16")
+        elif max <= uint32max and min >= 0:
+            v = v.astype("uint32")
+        else:
+            return v
+
+    dtype = str(v.dtype)
+
+    if dtype in plotlyjsShortTypes:
+        arrObj = {
+            "dtype": plotlyjsShortTypes[dtype],
+            "bdata": base64.b64encode(v).decode("ascii"),
+        }
+
+        if v.ndim > 1:
+            arrObj["shape"] = str(v.shape)[1:-1]
+
+        return arrObj
+
+    return v
+
+
+def is_skipped_key(key):
+    """
+    Return whether the key is skipped for conversion to the typed array spec
+    """
+    skipped_keys = ["geojson", "layer", "layers", "range"]
+    return any(skipped_key == key for skipped_key in skipped_keys)
+
+
+def convert_to_base64(obj):
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            if is_skipped_key(key):
+                continue
+            elif is_homogeneous_array(value):
+                obj[key] = to_typed_array_spec(value)
+            else:
+                convert_to_base64(value)
+    elif isinstance(obj, list) or isinstance(obj, tuple):
+        for value in obj:
+            convert_to_base64(value)
 
 
 def cumsum(x):

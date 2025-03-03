@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Kruchten"
+  given-names: "Nicolas"
+  orcid: https://orcid.org/0000-0002-8416-789X
+- family-names: "Seier"
+  given-names: "Andrew"
+- family-names: "Parmer"
+  given-names: "Chris"
+title: "An interactive, open-source, and browser-based graphing library for Python"
+version: 5.24.1
+doi: 10.5281/zenodo.14503524
+date-released: 2024-09-12
+url: "https://github.com/plotly/plotly.py"

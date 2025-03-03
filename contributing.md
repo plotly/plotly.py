@@ -57,9 +57,7 @@ There are many ways to contribute to plotly.py. To contribute effectively, it is
 
 - tests are found in `packages/python/plotly/plotly/tests`. Different
   directories correspond to different test jobs (with different dependency sets)
-  run in continuous integration. These jobs are configured in
-  `packages/python/plotly/tox.ini`, which itself is used in the Circle CI
-  configuration file `.circleci/config.yml`. More is explained about tests
+  run in continuous integration. More is explained about tests
   in the following "Technical aspects" section.
 
 - the **documentation** is part of this repository. Its structure and some
@@ -138,19 +136,17 @@ We will support Python 3.12 and higher versions soon.
 [conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
 [virtualenv]: http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
-### Install requirements - (Non-Windows)
+### Install development requirements (Non-Windows)
 ```bash
-(plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
-(plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
+(plotly_dev) $ pip install -r packages/python/plotly/requires-optional.txt
  ```
-### Install requirements - (Windows + Conda)
+### Install development requirements (Windows + Conda)
 Because Windows requires Visual Studio libraries to compile some of the optional dependencies, follow these steps to
 complete installation and avoid gdal-config errors.
 
 ```bash
-(plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
 (plotly_dev) $ conda install fiona
-(plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
+(plotly_dev) $ pip install -r packages/python/plotly/requires-optional.txt
 ```
 
 ### Editable install of plotly packages
@@ -159,7 +155,14 @@ complete installation and avoid gdal-config errors.
 (plotly_dev) $ pip install -e packages/python/chart-studio/
 (plotly_dev) $ pip install -e packages/python/plotly-geo/
 ```
-This will ensure that the installed packages links to your local development
+
+**Note**: To test `go.FigureWidget` locally, you'll need to generate the javascript bundle as follows:
+```
+cd packages/python/plotly/js
+npm install && npm run build
+```
+
+Running `pip install -e` will ensure that the installed packages links to your local development
 directory, meaning that all changes you make reflect directly in your
 environment (don't forget to restart the Jupyter kernel though!). For more
 information see the
@@ -173,7 +176,7 @@ documentation on _development mode_.
 This repo uses the [Black](https://black.readthedocs.io/en/stable/) code formatter,
 and the [pre-commit](https://pre-commit.com/) library to manage a git commit hook to
 run Black prior to each commit.  Both pre-commit and black are included in the
-`packages/python/plotly/optional-requirements.txt` file, so you should have them
+`packages/python/plotly/requires-optional.txt` file, so you should have them
 installed already if you've been following along.
 
 To enable the Black formatting git hook, run the following from within your virtual
@@ -213,7 +216,7 @@ make that pull request!
 
 
 ## Update to a new version of Plotly.js
-First update the version of the `plotly.js` dependency in `packages/javascript/jupyterlab-plotly/package.json`.
+First update the version of the `plotly.js` dependency in `packages/python/plotly/js/package.json`.
 
 Then run the `updateplotlyjs` command with:
 
@@ -231,10 +234,10 @@ For dev branches, it is also possible to use `updateplotlyjsdev` in two configur
 
 ### CircleCI Release
 
-If your devbranch is part of the official plotly.js repository, you can use 
+If your devbranch is part of the official plotly.js repository, you can use
 ```bash
 python setup.py updateplotlyjsdev --devrepo reponame --devbranch branchname
-``` 
+```
 to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively.
 
 ### Local Repository
@@ -261,7 +264,7 @@ We take advantage of two tools to run tests:
 
 ### Running Tests with `pytest`
 
-Since our tests cover *all* the functionality, to prevent tons of errors from showing up and having to parse through a messy output, you'll need to install `optional-requirements.txt` as explained above.
+Since our tests cover *all* the functionality, to prevent tons of errors from showing up and having to parse through a messy output, you'll need to install `requires-optional.txt` as explained above.
 
 After you've done that, go ahead and run the test suite!
 
@@ -341,3 +344,4 @@ You're *strongly* encouraged to write tests that check your added functionality.
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
 
 Test accounts include: `PythonTest`, `PlotlyImageTest`, and  `PlotlyStageTest`.
+
