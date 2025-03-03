@@ -15,6 +15,7 @@ from _plotly_utils.utils import (
     display_string_positions,
     chomp_empty_strings,
     find_closest_string,
+    convert_to_base64,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
@@ -3310,6 +3311,9 @@ Invalid property path '{key_path_str}' for layout
         if frames:
             res["frames"] = frames
 
+        # Add base64 conversion before sending to the front-end
+        convert_to_base64(res)
+
         return res
 
     def to_plotly_json(self):
@@ -3534,12 +3538,6 @@ Invalid property path '{key_path_str}' for layout
             plotly.min.js bundle that is assumed to reside in the same
             directory as the HTML file.
 
-            If 'require', Plotly.js is loaded using require.js.  This option
-            assumes that require.js is globally available and that it has been
-            globally configured to know how to find Plotly.js as 'plotly'.
-            This option is not advised when full_html=True as it will result
-            in a non-functional html file.
-
             If a string that ends in '.js', a script tag is included that
             references the specified path. This approach can be used to point
             the resulting HTML file to an alternative CDN or local bundle.
@@ -3642,12 +3640,6 @@ Invalid property path '{key_path_str}' for layout
             useful when many figures will be saved as HTML files in the same
             directory because the plotly.js source code will be included only
             once per output directory, rather than once per output file.
-
-            If 'require', Plotly.js is loaded using require.js.  This option
-            assumes that require.js is globally available and that it has been
-            globally configured to know how to find Plotly.js as 'plotly'.
-            This option is not advised when full_html=True as it will result
-            in a non-functional html file.
 
             If a string that ends in '.js', a script tag is included that
             references the specified path. This approach can be used to point
@@ -4259,7 +4251,7 @@ class BasePlotlyType(object):
     """
 
     # ### Mapped (deprecated) properties ###
-    # dict for deprecated property name (e.g. 'titlefont') to tuple
+    # dict for deprecated property name (e.g. 'title_font') to tuple
     # of relative path to new property (e.g. ('title', 'font')
     _mapped_properties = {}
 
