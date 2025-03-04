@@ -24,3 +24,4 @@ pyarrow
 narwhals>=1.15.1
 polars
 anywidget==0.9.13
+pdfrw
