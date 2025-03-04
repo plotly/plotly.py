@@ -529,7 +529,7 @@ def clean_to_json_compatible(obj, **kwargs):
 
     # pandas
     if pd is not None:
-        if obj is pd.NaT:
+        if obj is pd.NaT or obj is pd.NA:
             return None
         elif isinstance(obj, (pd.Series, pd.DatetimeIndex)):
             if numpy_allowed and obj.dtype.kind in ("b", "i", "u", "f"):
