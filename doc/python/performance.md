@@ -78,6 +78,10 @@ The following [array data types](https://numpy.org/devdocs/reference/arrays.scal
 
 Arrays or data types that are not supported for base64 encoding to Plotly.js's typed arrays specification will still work and render correctly with Plotly. Those arrays and or data types just won't have the performance benefits that Plotly.js's base64 typed arrays feature provides.
 
+### Dash Design Kit Compatibility
+
+The Dash Design Kit `Graph` component from versions of Dash Design Kit earlier than 1.13 doesn't work with Plotly.py version 6 when using Python objects listed in the previous "Arrays and Data Types Supported". Upgrade Dash Design Kit to 1.13 or later to resolve this issue.
+
 ### Unsupported Attributes
 
 Arrays passed to attributes with the following names are not supported for base64 encoding for rendering with Plotly.js.
