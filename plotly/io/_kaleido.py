@@ -107,20 +107,15 @@ which can be installed using pip:
     # Request image bytes
     if kaleido_major > 0:
         # Kaleido v1
-        opts = {
-            k: v
-            for k, v in dict(
+        img_bytes = kaleido.calc_fig_sync(
+            fig_dict,
+            path=None,
+            opts=dict(
                 format=format,
                 width=width,
                 height=height,
                 scale=scale,
-            ).items()
-            if v is not None
-        }
-        img_bytes = kaleido.calc_fig_sync(
-            fig_dict,
-            path=None,
-            opts=opts,
+            ),
         )
     else:
         # Kaleido v0
