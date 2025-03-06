@@ -1,13 +1,13 @@
-import _plotly_utils.basevalidators
+import _plotly_utils.basevalidators as _bv
 
 
-class StartlinewidthValidator(_plotly_utils.basevalidators.NumberValidator):
+class StartlinewidthValidator(_bv.NumberValidator):
     def __init__(
         self, plotly_name="startlinewidth", parent_name="carpet.baxis", **kwargs
     ):
-        super(StartlinewidthValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             **kwargs,
         )
