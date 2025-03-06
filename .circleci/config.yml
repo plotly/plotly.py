@@ -205,7 +205,7 @@ jobs:
             mv tests/percy/*.html tests/percy/pandas2/
             # 1.1 is the earliest minor with Py3.9 wheels
             uv pip install pip
-            python -m pip install pandas==1.1.5 numpy==1.22.4
+            python -m pip install pandas==1.1.5 numpy==2.0.2
             python tests/percy/plotly-express.py
             python tests/percy/compare-pandas.py
             rm -rf tests/percy/pandas2
