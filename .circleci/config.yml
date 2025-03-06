@@ -37,6 +37,8 @@ commands:
     parameters:
       pandas_version:
         type: string
+      numpy_version:
+        type: string
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -65,7 +67,7 @@ commands:
                 command: |
                   source .venv/bin/activate
                   uv pip install pip
-                  python -m pip install pandas==<<parameters.pandas_version>>
+                  python -m pip install pandas==<<parameters.pandas_version>> numpy==<<parameters.numpy_version>>
 
       - run:
           name: Test core
@@ -74,10 +76,15 @@ commands:
             python -m pytest tests/test_core
           no_output_timeout: 20m
       - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
+      - run:
           name: Test optional
           command: |
             source .venv/bin/activate
-            uv pip list | grep pandas
             python -m pytest tests/test_optional
           no_output_timeout: 40m
       - run:
@@ -141,12 +148,16 @@ jobs:
       pandas_version:
         default: ""
         type: string
+      numpy_version:
+        default: ""
+        type: string
     executor:
       name: docker-container
       python_version: <<parameters.python_version>>
     steps:
       - test_optional:
           pandas_version: <<parameters.pandas_version>>
+          numpy_version: <<parameters.numpy_version>>
 
   # Percy
   python_39_percy:
@@ -423,5 +434,6 @@ workflows:
           name: "Test optional with pandas 1.2.4"
           python_version: "3.9"
           pandas_version: "1.2.4"
+          numpy_version: "1.26.4"
       - python_39_percy
       - build-doc
