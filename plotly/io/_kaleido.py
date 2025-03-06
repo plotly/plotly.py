@@ -313,18 +313,11 @@ which can be installed using pip:
 
     if kaleido_major > 0:
         # Kaleido v1
-        try:
-            json_file = Path(tempfile.mkstemp(suffix=".json")[1])
-            kaleido.write_fig_sync(
-                fig,
-                json_file,
-                dict(format="json"),
-            )
-            with open(json_file, "r") as f:
-                fig = json.load(f)
-        finally:
-            # Cleanup: remove temp file
-            json_file.unlink()
+        bytes = kaleido.calc_fig_sync(
+            fig,
+            opts=dict(format="json"),
+        )
+        fig = json.loads(bytes.decode("utf-8"))
     else:
         # Kaleido v0
         fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
