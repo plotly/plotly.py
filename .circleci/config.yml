@@ -445,7 +445,7 @@ workflows:
                 - "3.11"
                 - "3.12"
       - test_optional_py:
-          name: "Test optional with pandas 1.2.4"
+          name: "test_optional_py-3.9_pandas-1.2.4"
           python_version: "3.9"
           pandas_version: "1.2.4"
           numpy_version: "1.26.4"
