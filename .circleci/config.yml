@@ -22,14 +22,21 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -e .
-            pip install -r ./test_requirements/requirements_core.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install .
+            uv pip install -r ./test_requirements/requirements_core.txt
+      - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
       - run:
           name: Test core
           command: |
-            . venv/bin/activate
+            source .venv/bin/activate
             python -m pytest tests/test_core
           no_output_timeout: 20m
 
