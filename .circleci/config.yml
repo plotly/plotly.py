@@ -167,9 +167,9 @@ jobs:
           numpy_version: <<parameters.numpy_version>>
 
   # Percy
-  python_312_percy:
+  python_311_percy:
     docker:
-      - image: cimg/python:3.12-browsers
+      - image: cimg/python:3.11-browsers
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
@@ -450,5 +450,5 @@ workflows:
           python_version: "3.9"
           pandas_version: "1.2.4"
           numpy_version: "1.26.4"
-      - python_312_percy
+      - python_311_percy
       - build-doc
