@@ -167,9 +167,9 @@ jobs:
           numpy_version: <<parameters.numpy_version>>
 
   # Percy
-  python_39_percy:
+  python_312_percy:
     docker:
-      - image: cimg/python:3.9-browsers
+      - image: cimg/python:3.12-browsers
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
@@ -203,7 +203,6 @@ jobs:
             source .venv/bin/activate
             mkdir tests/percy/pandas2
             mv tests/percy/*.html tests/percy/pandas2/
-            # 1.1 is the earliest minor with Py3.9 wheels
             uv pip install pip
             python -m pip install pandas==1.1.5 numpy==1.26.4
             python tests/percy/plotly-express.py
@@ -451,5 +450,5 @@ workflows:
           python_version: "3.9"
           pandas_version: "1.2.4"
           numpy_version: "1.26.4"
-      - python_39_percy
+      - python_312_percy
       - build-doc
