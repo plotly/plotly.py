@@ -7,8 +7,8 @@ Pillow
 pytest
 pytz
 ipython
-ipykernel
 jupyter
+anywidget
 scipy
 Shapely
 geopandas
@@ -21,6 +21,5 @@ kaleido
 orjson
 polars[timezone]
 pyarrow
-anywidget
 plotly-geo
 vaex;python_version<="3.9"
