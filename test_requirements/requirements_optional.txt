@@ -6,7 +6,7 @@ statsmodels
 Pillow
 pytest
 pytz
-ipython[all]
+ipython
 ipykernel
 jupyter
 scipy
