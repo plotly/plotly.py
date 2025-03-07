@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.0.2] - 2025-03-02
+
+### Fixed
+- Fix `ValueError` when dragging and dropping a `FigureWidget` shape.
+
 ## [6.0.1] - 2025-02-16
 
 ### Fixed

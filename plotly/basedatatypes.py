@@ -4682,6 +4682,7 @@ class BasePlotlyType(object):
             CompoundArrayValidator,
             BaseDataValidator,
         )
+        from .validators.layout._shapes import ShapesValidator
 
         # Normalize prop
         # --------------
@@ -4707,7 +4708,6 @@ class BasePlotlyType(object):
                 )
 
             validator = self._get_validator(prop)
-
             if isinstance(validator, CompoundValidator):
                 if self._compound_props.get(prop, None) is None:
                     # Init compound objects
@@ -4719,6 +4719,12 @@ class BasePlotlyType(object):
                     self._compound_props[prop]._plotly_name = prop
 
                 return validator.present(self._compound_props[prop])
+            elif isinstance(validator, ShapesValidator):
+                props = []
+                if self._props is not None and prop in self._props:
+                    props = [validator.data_class() for _ in self._props.get(prop, [])]
+
+                return validator.present(props)
             elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
                 if self._compound_array_props.get(prop, None) is None:
                     # Init list of compound objects
