@@ -589,6 +589,121 @@ fig.update_layout(
 )
 ```
 
+### Clarifying the size of smaller categories by wrapping the largest bars
+
+This bar-style pictogram clearly presents the relative sizes of smaller entities by wrapping the bar for the largest entry into multiple columns.  The clarity about the size of the smaller entities comes at the cost of reduced clarity about the wrapped entry.  It also rounds values so they can be represented with a whole number of icons.  You could make it even more of a pictogram by using Font Awesome to replace the square markers we use below with icons like mortar boards for students.
+
+```
+import plotly.graph_objects as go
+import pandas as pd
+import math
+
+def pictogram_bar(df,
+                  x,  # string containing the column name of the categories
+                  y,  # string containing the column name of the values
+                  title="",  # title of the figure
+                  icon_size=25,  # icon size in px
+                  max_icons_per_column=10,  
+                  units_per_icon=1,  
+                  column_spacing=0.005,
+                  spacing_between_categories=1,  # horizontal blank space between categories
+                  icon_spacing=0.005,
+                  scale_factor=1.45,  #higher values of this move icons farther apart and make the graph bigger
+                  description_of_unit=""  # text for the legend, which contains
+                                        # "(1 icon =<br> {units_per_icon} {description_of_unit})"
+):
+    fig = go.Figure()
+    x_coordinate_of_left_edge_of_group = 1
+    tick_locations = []
+
+    # iterate through each category with its name in the x column and its value in the y column
+    # in the data and generate lists of X coordinates and Y coordinates to visualize its value
+    # in the form of icons in a single, vertical bar if its value is less than units_per_icon * max_icons_per_column
+    # and in the form of multiple columns of  icons if its value is greater than that
+    for i, row in df.iterrows():
+        category=row[x]
+        value = row[y]
+        icon_count = round(value / units_per_icon) # compute the number of icons needed to represent value
+        num_columns = math.ceil(icon_count / max_icons_per_column)  # compute the number of columns we'll arrange them into
+
+        #generate list of x and y coordinates for the icons representing this category
+        x_coordinates = []
+        y_coordinates = []
+        for col in range(num_columns):
+            column_icons = min(max_icons_per_column, icon_count - col * max_icons_per_column)
+            x_coordinates.extend([(x_coordinate_of_left_edge_of_group + col)*(1 + icon_spacing)] * column_icons)
+            y_coordinates.extend([(1 + icon_spacing) * y for y in range(2, column_icons + 2)])
+
+
+        # Add scatter plot trace for the current category
+        fig.add_trace(go.Scatter(
+            x=x_coordinates,
+            y=y_coordinates,
+            mode='markers',
+            marker=dict(size=icon_size, symbol="square", color= i),
+            hoverinfo="text",
+            #make one label for each icon in this category
+            text=[f"{category}: {value}" for _ in range(len(x_coordinates))],
+            name= f"(1 icon =<br> {units_per_icon} {description_of_unit})",
+            showlegend=(i==0)
+
+        ))
+
+        # compute the x coordinate where we'll label this category
+        center_of_category_x = (x_coordinate_of_left_edge_of_group + (num_columns - 1) / 2)*(1 + icon_spacing)
+        
+        # Add the numeric values for each category underneath the category's icons
+        fig.add_trace(go.Scatter(
+            x=[center_of_category_x],
+            y=[1],#(max_icons_per_column+ 1)*(1 + icon_spacing) 
+            mode="text",
+            text=[f"{value:,.0f}"],
+            textfont=dict(size=14, color="black"),
+            showlegend=False,
+        ))
+
+        # Track tick locations
+        tick_locations.append(center_of_category_x)
+        x_coordinate_of_left_edge_of_group += num_columns + column_spacing + spacing_between_categories
+
+    fig.update_layout(
+        title=title,
+        xaxis=dict(
+            tickvals=tick_locations,
+            ticktext=list(df[x]),
+            tickangle=-45,
+            showgrid=False,
+        ),
+        # hide the y-axis
+        yaxis=dict(
+             visible= False,
+        ),
+        
+        # put the legend in the lower right, on the assumption that it's the biggest category which left a space
+        legend=dict(  
+                yanchor="top",
+                y=-0.1,
+                xanchor="right",
+                x=1),
+        # we specify the plot area size because care about the ratio of the icon size to the size of the plot area
+        height=(max_icons_per_column * (icon_size*(1+icon_spacing)*scale_factor) + 200),  
+        width=((x_coordinate_of_left_edge_of_group-spacing_between_categories)  #subtract to remove spacing between categories to the right of the final category
+                * (icon_size*(1+icon_spacing)*scale_factor) + 100)  
+    )
+    fig.show()
+
+
+df = pd.DataFrame({
+    'School': ["Haverford College", "University of Mary Washington", "Brown University", "Arizona State University"],
+    'Enrollment': [1421, 3611, 7226, 65174]
+})
+
+pictogram_bar(
+    df, x='School', y='Enrollment',
+    title="Undergraduate Enrollment at Participating Schools",
+    units_per_icon=1000, icon_size=20, icon_spacing=0.7, spacing_between_categories = 0.6, description_of_unit="students" )
+```
+
 ### Customizing Individual Bar Base
 
 ```python
