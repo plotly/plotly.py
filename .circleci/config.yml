@@ -8,7 +8,7 @@ executors:
     parameters:
       python_version:
         description: "python version"
-        default: "3.10"
+        default: "3.12"
         type: string
     docker:
       - image: cimg/python:<<parameters.python_version>>-browsers
@@ -120,7 +120,7 @@ commands:
 jobs:
   check-code-formatting:
     docker:
-      - image: cimg/python:3.7
+      - image: cimg/python:3.12
 
     steps:
       - checkout
@@ -139,7 +139,7 @@ jobs:
   test_core_py:
     parameters:
       python_version:
-        default: "3.10"
+        default: "3.12"
         type: string
     executor:
       name: docker-container
@@ -150,7 +150,7 @@ jobs:
   test_optional_py:
     parameters:
       python_version:
-        default: "3.10"
+        default: "3.12"
         type: string
       pandas_version:
         default: ""
@@ -167,9 +167,9 @@ jobs:
           numpy_version: <<parameters.numpy_version>>
 
   # Percy
-  python_39_percy:
+  python_311_percy:
     docker:
-      - image: cimg/python:3.9-browsers
+      - image: cimg/python:3.11-browsers
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
@@ -203,9 +203,8 @@ jobs:
             source .venv/bin/activate
             mkdir tests/percy/pandas2
             mv tests/percy/*.html tests/percy/pandas2/
-            # 1.1 is the earliest minor with Py3.9 wheels
             uv pip install pip
-            python -m pip install pandas==1.1.5 numpy==1.26.4
+            python -m pip install pandas==1.5.3 numpy==1.26.4
             python tests/percy/plotly-express.py
             python tests/percy/compare-pandas.py
             rm -rf tests/percy/pandas2
@@ -224,7 +223,7 @@ jobs:
 
   plotlyjs_dev_build:
     docker:
-      - image: cimg/python:3.11-node
+      - image: cimg/python:3.12-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -263,7 +262,7 @@ jobs:
 
   full_build:
     docker:
-      - image: cimg/python:3.11-node
+      - image: cimg/python:3.12-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -301,8 +300,6 @@ jobs:
   build-doc:
     resource_class: xlarge
     docker:
-      # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, for example, `3.9-browsers`
       - image: cimg/python:3.9-browsers
 
     steps:
@@ -435,6 +432,7 @@ workflows:
                 - "3.10"
                 - "3.11"
                 - "3.12"
+                - "3.13"
       - test_optional_py:
           matrix:
             parameters:
@@ -444,10 +442,11 @@ workflows:
                 - "3.10"
                 - "3.11"
                 - "3.12"
+                - "3.13"
       - test_optional_py:
           name: "test_optional_py-3.9_pandas-1.2.4"
           python_version: "3.9"
           pandas_version: "1.2.4"
           numpy_version: "1.26.4"
-      - python_39_percy
+      - python_311_percy
       - build-doc
