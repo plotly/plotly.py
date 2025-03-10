@@ -4,8 +4,6 @@ import copy as _copy
 
 class Box(_BaseTraceType):
 
-    # class properties
-    # --------------------
     _parent_path_str = ""
     _path_str = "box"
     _valid_props = {
@@ -98,8 +96,6 @@ class Box(_BaseTraceType):
         "zorder",
     }
 
-    # alignmentgroup
-    # --------------
     @property
     def alignmentgroup(self):
         """
@@ -121,8 +117,6 @@ class Box(_BaseTraceType):
     def alignmentgroup(self, val):
         self["alignmentgroup"] = val
 
-    # boxmean
-    # -------
     @property
     def boxmean(self):
         """
@@ -145,8 +139,6 @@ class Box(_BaseTraceType):
     def boxmean(self, val):
         self["boxmean"] = val
 
-    # boxpoints
-    # ---------
     @property
     def boxpoints(self):
         """
@@ -174,8 +166,6 @@ class Box(_BaseTraceType):
     def boxpoints(self, val):
         self["boxpoints"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -197,8 +187,6 @@ class Box(_BaseTraceType):
     def customdata(self, val):
         self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -218,8 +206,6 @@ class Box(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
-    # dx
-    # --
     @property
     def dx(self):
         """
@@ -239,8 +225,6 @@ class Box(_BaseTraceType):
     def dx(self, val):
         self["dx"] = val
 
-    # dy
-    # --
     @property
     def dy(self):
         """
@@ -260,8 +244,6 @@ class Box(_BaseTraceType):
     def dy(self, val):
         self["dy"] = val
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -274,42 +256,7 @@ class Box(_BaseTraceType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -321,8 +268,6 @@ class Box(_BaseTraceType):
     def fillcolor(self, val):
         self["fillcolor"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -347,8 +292,6 @@ class Box(_BaseTraceType):
     def hoverinfo(self, val):
         self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -368,8 +311,6 @@ class Box(_BaseTraceType):
     def hoverinfosrc(self, val):
         self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -378,44 +319,6 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
 
         Returns
         -------
@@ -427,8 +330,6 @@ class Box(_BaseTraceType):
     def hoverlabel(self, val):
         self["hoverlabel"] = val
 
-    # hoveron
-    # -------
     @property
     def hoveron(self):
         """
@@ -450,8 +351,6 @@ class Box(_BaseTraceType):
     def hoveron(self, val):
         self["hoveron"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -494,8 +393,6 @@ class Box(_BaseTraceType):
     def hovertemplate(self, val):
         self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -515,8 +412,6 @@ class Box(_BaseTraceType):
     def hovertemplatesrc(self, val):
         self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -537,8 +432,6 @@ class Box(_BaseTraceType):
     def hovertext(self, val):
         self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -558,8 +451,6 @@ class Box(_BaseTraceType):
     def hovertextsrc(self, val):
         self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -580,8 +471,6 @@ class Box(_BaseTraceType):
     def ids(self, val):
         self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -600,8 +489,6 @@ class Box(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
-    # jitter
-    # ------
     @property
     def jitter(self):
         """
@@ -623,8 +510,6 @@ class Box(_BaseTraceType):
     def jitter(self, val):
         self["jitter"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -648,8 +533,6 @@ class Box(_BaseTraceType):
     def legend(self, val):
         self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -671,8 +554,6 @@ class Box(_BaseTraceType):
     def legendgroup(self, val):
         self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -681,13 +562,6 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
 
         Returns
         -------
@@ -699,8 +573,6 @@ class Box(_BaseTraceType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -726,8 +598,6 @@ class Box(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -747,8 +617,6 @@ class Box(_BaseTraceType):
     def legendwidth(self, val):
         self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -757,14 +625,6 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
-            Supported dict properties:
-
-                color
-                    Sets the color of line bounding the box(es).
-                width
-                    Sets the width (in px) of line bounding the
-                    box(es).
 
         Returns
         -------
@@ -776,8 +636,6 @@ class Box(_BaseTraceType):
     def line(self, val):
         self["line"] = val
 
-    # lowerfence
-    # ----------
     @property
     def lowerfence(self):
         """
@@ -800,8 +658,6 @@ class Box(_BaseTraceType):
     def lowerfence(self, val):
         self["lowerfence"] = val
 
-    # lowerfencesrc
-    # -------------
     @property
     def lowerfencesrc(self):
         """
@@ -821,8 +677,6 @@ class Box(_BaseTraceType):
     def lowerfencesrc(self, val):
         self["lowerfencesrc"] = val
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -831,33 +685,6 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
-            Supported dict properties:
-
-                angle
-                    Sets the marker angle in respect to `angleref`.
-                color
-                    Sets the marker color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `marker.cmin` and `marker.cmax` if set.
-                line
-                    :class:`plotly.graph_objects.box.marker.Line`
-                    instance or dict with compatible properties
-                opacity
-                    Sets the marker opacity.
-                outliercolor
-                    Sets the color of the outlier sample points.
-                size
-                    Sets the marker size (in px).
-                symbol
-                    Sets the marker symbol type. Adding 100 is
-                    equivalent to appending "-open" to a symbol
-                    name. Adding 200 is equivalent to appending
-                    "-dot" to a symbol name. Adding 300 is
-                    equivalent to appending "-open-dot" or "dot-
-                    open" to a symbol name.
 
         Returns
         -------
@@ -869,8 +696,6 @@ class Box(_BaseTraceType):
     def marker(self, val):
         self["marker"] = val
 
-    # mean
-    # ----
     @property
     def mean(self):
         """
@@ -893,8 +718,6 @@ class Box(_BaseTraceType):
     def mean(self, val):
         self["mean"] = val
 
-    # meansrc
-    # -------
     @property
     def meansrc(self):
         """
@@ -913,8 +736,6 @@ class Box(_BaseTraceType):
     def meansrc(self, val):
         self["meansrc"] = val
 
-    # median
-    # ------
     @property
     def median(self):
         """
@@ -934,8 +755,6 @@ class Box(_BaseTraceType):
     def median(self, val):
         self["median"] = val
 
-    # mediansrc
-    # ---------
     @property
     def mediansrc(self):
         """
@@ -954,8 +773,6 @@ class Box(_BaseTraceType):
     def mediansrc(self, val):
         self["mediansrc"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -982,8 +799,6 @@ class Box(_BaseTraceType):
     def meta(self, val):
         self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -1002,8 +817,6 @@ class Box(_BaseTraceType):
     def metasrc(self, val):
         self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -1026,8 +839,6 @@ class Box(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
-    # notched
-    # -------
     @property
     def notched(self):
         """
@@ -1054,8 +865,6 @@ class Box(_BaseTraceType):
     def notched(self, val):
         self["notched"] = val
 
-    # notchspan
-    # ---------
     @property
     def notchspan(self):
         """
@@ -1079,8 +888,6 @@ class Box(_BaseTraceType):
     def notchspan(self, val):
         self["notchspan"] = val
 
-    # notchspansrc
-    # ------------
     @property
     def notchspansrc(self):
         """
@@ -1100,8 +907,6 @@ class Box(_BaseTraceType):
     def notchspansrc(self, val):
         self["notchspansrc"] = val
 
-    # notchwidth
-    # ----------
     @property
     def notchwidth(self):
         """
@@ -1121,8 +926,6 @@ class Box(_BaseTraceType):
     def notchwidth(self, val):
         self["notchwidth"] = val
 
-    # offsetgroup
-    # -----------
     @property
     def offsetgroup(self):
         """
@@ -1144,8 +947,6 @@ class Box(_BaseTraceType):
     def offsetgroup(self, val):
         self["offsetgroup"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -1164,8 +965,6 @@ class Box(_BaseTraceType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -1186,8 +985,6 @@ class Box(_BaseTraceType):
     def orientation(self, val):
         self["orientation"] = val
 
-    # pointpos
-    # --------
     @property
     def pointpos(self):
         """
@@ -1210,8 +1007,6 @@ class Box(_BaseTraceType):
     def pointpos(self, val):
         self["pointpos"] = val
 
-    # q1
-    # --
     @property
     def q1(self):
         """
@@ -1231,8 +1026,6 @@ class Box(_BaseTraceType):
     def q1(self, val):
         self["q1"] = val
 
-    # q1src
-    # -----
     @property
     def q1src(self):
         """
@@ -1251,8 +1044,6 @@ class Box(_BaseTraceType):
     def q1src(self, val):
         self["q1src"] = val
 
-    # q3
-    # --
     @property
     def q3(self):
         """
@@ -1272,8 +1063,6 @@ class Box(_BaseTraceType):
     def q3(self, val):
         self["q3"] = val
 
-    # q3src
-    # -----
     @property
     def q3src(self):
         """
@@ -1292,8 +1081,6 @@ class Box(_BaseTraceType):
     def q3src(self, val):
         self["q3src"] = val
 
-    # quartilemethod
-    # --------------
     @property
     def quartilemethod(self):
         """
@@ -1324,8 +1111,6 @@ class Box(_BaseTraceType):
     def quartilemethod(self, val):
         self["quartilemethod"] = val
 
-    # sd
-    # --
     @property
     def sd(self):
         """
@@ -1348,8 +1133,6 @@ class Box(_BaseTraceType):
     def sd(self, val):
         self["sd"] = val
 
-    # sdmultiple
-    # ----------
     @property
     def sdmultiple(self):
         """
@@ -1370,8 +1153,6 @@ class Box(_BaseTraceType):
     def sdmultiple(self, val):
         self["sdmultiple"] = val
 
-    # sdsrc
-    # -----
     @property
     def sdsrc(self):
         """
@@ -1390,8 +1171,6 @@ class Box(_BaseTraceType):
     def sdsrc(self, val):
         self["sdsrc"] = val
 
-    # selected
-    # --------
     @property
     def selected(self):
         """
@@ -1400,12 +1179,6 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.box.selected.Marke
-                    r` instance or dict with compatible properties
 
         Returns
         -------
@@ -1417,8 +1190,6 @@ class Box(_BaseTraceType):
     def selected(self, val):
         self["selected"] = val
 
-    # selectedpoints
-    # --------------
     @property
     def selectedpoints(self):
         """
@@ -1441,8 +1212,6 @@ class Box(_BaseTraceType):
     def selectedpoints(self, val):
         self["selectedpoints"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -1462,8 +1231,6 @@ class Box(_BaseTraceType):
     def showlegend(self, val):
         self["showlegend"] = val
 
-    # showwhiskers
-    # ------------
     @property
     def showwhiskers(self):
         """
@@ -1483,8 +1250,6 @@ class Box(_BaseTraceType):
     def showwhiskers(self, val):
         self["showwhiskers"] = val
 
-    # sizemode
-    # --------
     @property
     def sizemode(self):
         """
@@ -1508,8 +1273,6 @@ class Box(_BaseTraceType):
     def sizemode(self, val):
         self["sizemode"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1518,18 +1281,6 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
 
         Returns
         -------
@@ -1541,8 +1292,6 @@ class Box(_BaseTraceType):
     def stream(self, val):
         self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -1567,8 +1316,6 @@ class Box(_BaseTraceType):
     def text(self, val):
         self["text"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1587,8 +1334,6 @@ class Box(_BaseTraceType):
     def textsrc(self, val):
         self["textsrc"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1609,8 +1354,6 @@ class Box(_BaseTraceType):
     def uid(self, val):
         self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1642,8 +1385,6 @@ class Box(_BaseTraceType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # unselected
-    # ----------
     @property
     def unselected(self):
         """
@@ -1652,13 +1393,6 @@ class Box(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.box.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.box.unselected.Mar
-                    ker` instance or dict with compatible
-                    properties
 
         Returns
         -------
@@ -1670,8 +1404,6 @@ class Box(_BaseTraceType):
     def unselected(self, val):
         self["unselected"] = val
 
-    # upperfence
-    # ----------
     @property
     def upperfence(self):
         """
@@ -1694,8 +1426,6 @@ class Box(_BaseTraceType):
     def upperfence(self, val):
         self["upperfence"] = val
 
-    # upperfencesrc
-    # -------------
     @property
     def upperfencesrc(self):
         """
@@ -1715,8 +1445,6 @@ class Box(_BaseTraceType):
     def upperfencesrc(self, val):
         self["upperfencesrc"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1738,8 +1466,6 @@ class Box(_BaseTraceType):
     def visible(self, val):
         self["visible"] = val
 
-    # whiskerwidth
-    # ------------
     @property
     def whiskerwidth(self):
         """
@@ -1759,8 +1485,6 @@ class Box(_BaseTraceType):
     def whiskerwidth(self, val):
         self["whiskerwidth"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -1781,8 +1505,6 @@ class Box(_BaseTraceType):
     def width(self, val):
         self["width"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1802,8 +1524,6 @@ class Box(_BaseTraceType):
     def x(self, val):
         self["x"] = val
 
-    # x0
-    # --
     @property
     def x0(self):
         """
@@ -1823,8 +1543,6 @@ class Box(_BaseTraceType):
     def x0(self, val):
         self["x0"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -1848,8 +1566,6 @@ class Box(_BaseTraceType):
     def xaxis(self, val):
         self["xaxis"] = val
 
-    # xcalendar
-    # ---------
     @property
     def xcalendar(self):
         """
@@ -1872,8 +1588,6 @@ class Box(_BaseTraceType):
     def xcalendar(self, val):
         self["xcalendar"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1903,8 +1617,6 @@ class Box(_BaseTraceType):
     def xhoverformat(self, val):
         self["xhoverformat"] = val
 
-    # xperiod
-    # -------
     @property
     def xperiod(self):
         """
@@ -1925,8 +1637,6 @@ class Box(_BaseTraceType):
     def xperiod(self, val):
         self["xperiod"] = val
 
-    # xperiod0
-    # --------
     @property
     def xperiod0(self):
         """
@@ -1948,8 +1658,6 @@ class Box(_BaseTraceType):
     def xperiod0(self, val):
         self["xperiod0"] = val
 
-    # xperiodalignment
-    # ----------------
     @property
     def xperiodalignment(self):
         """
@@ -1970,8 +1678,6 @@ class Box(_BaseTraceType):
     def xperiodalignment(self, val):
         self["xperiodalignment"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1990,8 +1696,6 @@ class Box(_BaseTraceType):
     def xsrc(self, val):
         self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -2011,8 +1715,6 @@ class Box(_BaseTraceType):
     def y(self, val):
         self["y"] = val
 
-    # y0
-    # --
     @property
     def y0(self):
         """
@@ -2032,8 +1734,6 @@ class Box(_BaseTraceType):
     def y0(self, val):
         self["y0"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -2057,8 +1757,6 @@ class Box(_BaseTraceType):
     def yaxis(self, val):
         self["yaxis"] = val
 
-    # ycalendar
-    # ---------
     @property
     def ycalendar(self):
         """
@@ -2081,8 +1779,6 @@ class Box(_BaseTraceType):
     def ycalendar(self, val):
         self["ycalendar"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -2112,8 +1808,6 @@ class Box(_BaseTraceType):
     def yhoverformat(self, val):
         self["yhoverformat"] = val
 
-    # yperiod
-    # -------
     @property
     def yperiod(self):
         """
@@ -2134,8 +1828,6 @@ class Box(_BaseTraceType):
     def yperiod(self, val):
         self["yperiod"] = val
 
-    # yperiod0
-    # --------
     @property
     def yperiod0(self):
         """
@@ -2157,8 +1849,6 @@ class Box(_BaseTraceType):
     def yperiod0(self, val):
         self["yperiod0"] = val
 
-    # yperiodalignment
-    # ----------------
     @property
     def yperiodalignment(self):
         """
@@ -2179,8 +1869,6 @@ class Box(_BaseTraceType):
     def yperiodalignment(self, val):
         self["yperiodalignment"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -2199,8 +1887,6 @@ class Box(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -2221,14 +1907,10 @@ class Box(_BaseTraceType):
     def zorder(self, val):
         self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -3253,14 +2935,11 @@ class Box(_BaseTraceType):
         -------
         Box
         """
-        super(Box, self).__init__("box")
-
+        super().__init__("box")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -3275,368 +2954,97 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Box`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("alignmentgroup", None)
-        _v = alignmentgroup if alignmentgroup is not None else _v
-        if _v is not None:
-            self["alignmentgroup"] = _v
-        _v = arg.pop("boxmean", None)
-        _v = boxmean if boxmean is not None else _v
-        if _v is not None:
-            self["boxmean"] = _v
-        _v = arg.pop("boxpoints", None)
-        _v = boxpoints if boxpoints is not None else _v
-        if _v is not None:
-            self["boxpoints"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("dx", None)
-        _v = dx if dx is not None else _v
-        if _v is not None:
-            self["dx"] = _v
-        _v = arg.pop("dy", None)
-        _v = dy if dy is not None else _v
-        if _v is not None:
-            self["dy"] = _v
-        _v = arg.pop("fillcolor", None)
-        _v = fillcolor if fillcolor is not None else _v
-        if _v is not None:
-            self["fillcolor"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hoveron", None)
-        _v = hoveron if hoveron is not None else _v
-        if _v is not None:
-            self["hoveron"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("jitter", None)
-        _v = jitter if jitter is not None else _v
-        if _v is not None:
-            self["jitter"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("lowerfence", None)
-        _v = lowerfence if lowerfence is not None else _v
-        if _v is not None:
-            self["lowerfence"] = _v
-        _v = arg.pop("lowerfencesrc", None)
-        _v = lowerfencesrc if lowerfencesrc is not None else _v
-        if _v is not None:
-            self["lowerfencesrc"] = _v
-        _v = arg.pop("marker", None)
-        _v = marker if marker is not None else _v
-        if _v is not None:
-            self["marker"] = _v
-        _v = arg.pop("mean", None)
-        _v = mean if mean is not None else _v
-        if _v is not None:
-            self["mean"] = _v
-        _v = arg.pop("meansrc", None)
-        _v = meansrc if meansrc is not None else _v
-        if _v is not None:
-            self["meansrc"] = _v
-        _v = arg.pop("median", None)
-        _v = median if median is not None else _v
-        if _v is not None:
-            self["median"] = _v
-        _v = arg.pop("mediansrc", None)
-        _v = mediansrc if mediansrc is not None else _v
-        if _v is not None:
-            self["mediansrc"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("notched", None)
-        _v = notched if notched is not None else _v
-        if _v is not None:
-            self["notched"] = _v
-        _v = arg.pop("notchspan", None)
-        _v = notchspan if notchspan is not None else _v
-        if _v is not None:
-            self["notchspan"] = _v
-        _v = arg.pop("notchspansrc", None)
-        _v = notchspansrc if notchspansrc is not None else _v
-        if _v is not None:
-            self["notchspansrc"] = _v
-        _v = arg.pop("notchwidth", None)
-        _v = notchwidth if notchwidth is not None else _v
-        if _v is not None:
-            self["notchwidth"] = _v
-        _v = arg.pop("offsetgroup", None)
-        _v = offsetgroup if offsetgroup is not None else _v
-        if _v is not None:
-            self["offsetgroup"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("orientation", None)
-        _v = orientation if orientation is not None else _v
-        if _v is not None:
-            self["orientation"] = _v
-        _v = arg.pop("pointpos", None)
-        _v = pointpos if pointpos is not None else _v
-        if _v is not None:
-            self["pointpos"] = _v
-        _v = arg.pop("q1", None)
-        _v = q1 if q1 is not None else _v
-        if _v is not None:
-            self["q1"] = _v
-        _v = arg.pop("q1src", None)
-        _v = q1src if q1src is not None else _v
-        if _v is not None:
-            self["q1src"] = _v
-        _v = arg.pop("q3", None)
-        _v = q3 if q3 is not None else _v
-        if _v is not None:
-            self["q3"] = _v
-        _v = arg.pop("q3src", None)
-        _v = q3src if q3src is not None else _v
-        if _v is not None:
-            self["q3src"] = _v
-        _v = arg.pop("quartilemethod", None)
-        _v = quartilemethod if quartilemethod is not None else _v
-        if _v is not None:
-            self["quartilemethod"] = _v
-        _v = arg.pop("sd", None)
-        _v = sd if sd is not None else _v
-        if _v is not None:
-            self["sd"] = _v
-        _v = arg.pop("sdmultiple", None)
-        _v = sdmultiple if sdmultiple is not None else _v
-        if _v is not None:
-            self["sdmultiple"] = _v
-        _v = arg.pop("sdsrc", None)
-        _v = sdsrc if sdsrc is not None else _v
-        if _v is not None:
-            self["sdsrc"] = _v
-        _v = arg.pop("selected", None)
-        _v = selected if selected is not None else _v
-        if _v is not None:
-            self["selected"] = _v
-        _v = arg.pop("selectedpoints", None)
-        _v = selectedpoints if selectedpoints is not None else _v
-        if _v is not None:
-            self["selectedpoints"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("showwhiskers", None)
-        _v = showwhiskers if showwhiskers is not None else _v
-        if _v is not None:
-            self["showwhiskers"] = _v
-        _v = arg.pop("sizemode", None)
-        _v = sizemode if sizemode is not None else _v
-        if _v is not None:
-            self["sizemode"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("unselected", None)
-        _v = unselected if unselected is not None else _v
-        if _v is not None:
-            self["unselected"] = _v
-        _v = arg.pop("upperfence", None)
-        _v = upperfence if upperfence is not None else _v
-        if _v is not None:
-            self["upperfence"] = _v
-        _v = arg.pop("upperfencesrc", None)
-        _v = upperfencesrc if upperfencesrc is not None else _v
-        if _v is not None:
-            self["upperfencesrc"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("whiskerwidth", None)
-        _v = whiskerwidth if whiskerwidth is not None else _v
-        if _v is not None:
-            self["whiskerwidth"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("x0", None)
-        _v = x0 if x0 is not None else _v
-        if _v is not None:
-            self["x0"] = _v
-        _v = arg.pop("xaxis", None)
-        _v = xaxis if xaxis is not None else _v
-        if _v is not None:
-            self["xaxis"] = _v
-        _v = arg.pop("xcalendar", None)
-        _v = xcalendar if xcalendar is not None else _v
-        if _v is not None:
-            self["xcalendar"] = _v
-        _v = arg.pop("xhoverformat", None)
-        _v = xhoverformat if xhoverformat is not None else _v
-        if _v is not None:
-            self["xhoverformat"] = _v
-        _v = arg.pop("xperiod", None)
-        _v = xperiod if xperiod is not None else _v
-        if _v is not None:
-            self["xperiod"] = _v
-        _v = arg.pop("xperiod0", None)
-        _v = xperiod0 if xperiod0 is not None else _v
-        if _v is not None:
-            self["xperiod0"] = _v
-        _v = arg.pop("xperiodalignment", None)
-        _v = xperiodalignment if xperiodalignment is not None else _v
-        if _v is not None:
-            self["xperiodalignment"] = _v
-        _v = arg.pop("xsrc", None)
-        _v = xsrc if xsrc is not None else _v
-        if _v is not None:
-            self["xsrc"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("y0", None)
-        _v = y0 if y0 is not None else _v
-        if _v is not None:
-            self["y0"] = _v
-        _v = arg.pop("yaxis", None)
-        _v = yaxis if yaxis is not None else _v
-        if _v is not None:
-            self["yaxis"] = _v
-        _v = arg.pop("ycalendar", None)
-        _v = ycalendar if ycalendar is not None else _v
-        if _v is not None:
-            self["ycalendar"] = _v
-        _v = arg.pop("yhoverformat", None)
-        _v = yhoverformat if yhoverformat is not None else _v
-        if _v is not None:
-            self["yhoverformat"] = _v
-        _v = arg.pop("yperiod", None)
-        _v = yperiod if yperiod is not None else _v
-        if _v is not None:
-            self["yperiod"] = _v
-        _v = arg.pop("yperiod0", None)
-        _v = yperiod0 if yperiod0 is not None else _v
-        if _v is not None:
-            self["yperiod0"] = _v
-        _v = arg.pop("yperiodalignment", None)
-        _v = yperiodalignment if yperiodalignment is not None else _v
-        if _v is not None:
-            self["yperiodalignment"] = _v
-        _v = arg.pop("ysrc", None)
-        _v = ysrc if ysrc is not None else _v
-        if _v is not None:
-            self["ysrc"] = _v
-        _v = arg.pop("zorder", None)
-        _v = zorder if zorder is not None else _v
-        if _v is not None:
-            self["zorder"] = _v
-
-        # Read-only literals
-        # ------------------
+        self._init_provided("alignmentgroup", arg, alignmentgroup)
+        self._init_provided("boxmean", arg, boxmean)
+        self._init_provided("boxpoints", arg, boxpoints)
+        self._init_provided("customdata", arg, customdata)
+        self._init_provided("customdatasrc", arg, customdatasrc)
+        self._init_provided("dx", arg, dx)
+        self._init_provided("dy", arg, dy)
+        self._init_provided("fillcolor", arg, fillcolor)
+        self._init_provided("hoverinfo", arg, hoverinfo)
+        self._init_provided("hoverinfosrc", arg, hoverinfosrc)
+        self._init_provided("hoverlabel", arg, hoverlabel)
+        self._init_provided("hoveron", arg, hoveron)
+        self._init_provided("hovertemplate", arg, hovertemplate)
+        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
+        self._init_provided("hovertext", arg, hovertext)
+        self._init_provided("hovertextsrc", arg, hovertextsrc)
+        self._init_provided("ids", arg, ids)
+        self._init_provided("idssrc", arg, idssrc)
+        self._init_provided("jitter", arg, jitter)
+        self._init_provided("legend", arg, legend)
+        self._init_provided("legendgroup", arg, legendgroup)
+        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
+        self._init_provided("legendrank", arg, legendrank)
+        self._init_provided("legendwidth", arg, legendwidth)
+        self._init_provided("line", arg, line)
+        self._init_provided("lowerfence", arg, lowerfence)
+        self._init_provided("lowerfencesrc", arg, lowerfencesrc)
+        self._init_provided("marker", arg, marker)
+        self._init_provided("mean", arg, mean)
+        self._init_provided("meansrc", arg, meansrc)
+        self._init_provided("median", arg, median)
+        self._init_provided("mediansrc", arg, mediansrc)
+        self._init_provided("meta", arg, meta)
+        self._init_provided("metasrc", arg, metasrc)
+        self._init_provided("name", arg, name)
+        self._init_provided("notched", arg, notched)
+        self._init_provided("notchspan", arg, notchspan)
+        self._init_provided("notchspansrc", arg, notchspansrc)
+        self._init_provided("notchwidth", arg, notchwidth)
+        self._init_provided("offsetgroup", arg, offsetgroup)
+        self._init_provided("opacity", arg, opacity)
+        self._init_provided("orientation", arg, orientation)
+        self._init_provided("pointpos", arg, pointpos)
+        self._init_provided("q1", arg, q1)
+        self._init_provided("q1src", arg, q1src)
+        self._init_provided("q3", arg, q3)
+        self._init_provided("q3src", arg, q3src)
+        self._init_provided("quartilemethod", arg, quartilemethod)
+        self._init_provided("sd", arg, sd)
+        self._init_provided("sdmultiple", arg, sdmultiple)
+        self._init_provided("sdsrc", arg, sdsrc)
+        self._init_provided("selected", arg, selected)
+        self._init_provided("selectedpoints", arg, selectedpoints)
+        self._init_provided("showlegend", arg, showlegend)
+        self._init_provided("showwhiskers", arg, showwhiskers)
+        self._init_provided("sizemode", arg, sizemode)
+        self._init_provided("stream", arg, stream)
+        self._init_provided("text", arg, text)
+        self._init_provided("textsrc", arg, textsrc)
+        self._init_provided("uid", arg, uid)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("unselected", arg, unselected)
+        self._init_provided("upperfence", arg, upperfence)
+        self._init_provided("upperfencesrc", arg, upperfencesrc)
+        self._init_provided("visible", arg, visible)
+        self._init_provided("whiskerwidth", arg, whiskerwidth)
+        self._init_provided("width", arg, width)
+        self._init_provided("x", arg, x)
+        self._init_provided("x0", arg, x0)
+        self._init_provided("xaxis", arg, xaxis)
+        self._init_provided("xcalendar", arg, xcalendar)
+        self._init_provided("xhoverformat", arg, xhoverformat)
+        self._init_provided("xperiod", arg, xperiod)
+        self._init_provided("xperiod0", arg, xperiod0)
+        self._init_provided("xperiodalignment", arg, xperiodalignment)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("y0", arg, y0)
+        self._init_provided("yaxis", arg, yaxis)
+        self._init_provided("ycalendar", arg, ycalendar)
+        self._init_provided("yhoverformat", arg, yhoverformat)
+        self._init_provided("yperiod", arg, yperiod)
+        self._init_provided("yperiod0", arg, yperiod0)
+        self._init_provided("yperiodalignment", arg, yperiodalignment)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("zorder", arg, zorder)
 
         self._props["type"] = "box"
         arg.pop("type", None)
-
-        # Process unknown kwargs
-        # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
