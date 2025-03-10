@@ -24,3 +24,4 @@ pyarrow
 anywidget
 plotly-geo
 vaex;python_version<="3.9"
+pdfrw
