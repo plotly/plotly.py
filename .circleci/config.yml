@@ -131,7 +131,7 @@ commands:
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
             # Install Kaleido v1 instead of the default version
-            uv pip uninstall -y kaleido
+            uv pip uninstall kaleido
             uv pip install 'git+https://github.com/plotly/Kaleido.git@v1.0.0rc10#subdirectory=src/py'
       - run:
           name: List installed packages and python version
