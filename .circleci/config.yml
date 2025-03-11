@@ -140,10 +140,10 @@ commands:
             uv pip list
             python --version
       - run:
-          name: Test plotly.io with Kaleido v1
+          name: Test plotly.io image output with Kaleido v1
           command: |
             source .venv/bin/activate
-            python -m pytest tests/test_io
+            python -m pytest tests/test_optional/test_kaleido
           no_output_timeout: 20m
 
 jobs:
