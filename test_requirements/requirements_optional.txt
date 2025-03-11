@@ -1,18 +1,18 @@
 requests
 pandas
 numpy
-fiona<=1.9.6;python_version<="3.8"
 xarray
 statsmodels
 Pillow
 pytest
 pytz
-ipython[all]
-ipykernel
+ipython
 jupyter
+anywidget
 scipy
 Shapely
 geopandas
+fiona<=1.9.6;python_version<="3.8"  # fiona>1.9.6 is not compatible with geopandas<1; geopandas>=1 is not compatible with python 3.8
 pyshp
 matplotlib
 scikit-image
@@ -21,7 +21,6 @@ kaleido
 orjson
 polars[timezone]
 pyarrow
-anywidget
 plotly-geo
 vaex;python_version<="3.9"
 pdfrw
