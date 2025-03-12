@@ -325,9 +325,10 @@ an instance of :class:`plotly.graph_objs.layout.Template`"""
         _v = arg.pop("data", None)
         _v = data if data is not None else _v
         if _v is not None:
-            # Template.data contains key for deprecated scattermapbox trace
+            # Template.data contains a 'scattermapbox' key, which causes a
+            # go.Scattermapbox trace object to be created during validation.
             # In order to prevent false deprecation warnings from surfacing,
-            # we suppress deprecation warnings for this line only
+            # we suppress deprecation warnings for this line only.
             with warnings.catch_warnings():
                 warnings.filterwarnings("ignore", category=DeprecationWarning)
                 self["data"] = _v
