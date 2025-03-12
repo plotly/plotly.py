@@ -1,5 +1,7 @@
 from unittest import TestCase
+import warnings
 
+import pytest
 import plotly.graph_objs as go
 
 
@@ -154,3 +156,28 @@ class TestPop(TestCase):
 
     def test_pop_invalid_prop_with_default(self):
         self.assertEqual(self.layout.pop("bogus", 42), 42)
+
+class TestDeprecationWarnings(TestCase):
+    def test_warn_on_deprecated_mapbox_traces(self):
+        # This test will fail if any of the following traces
+        # fails to emit a DeprecationWarning
+        for trace_constructor in [
+            go.Scattermapbox,
+            go.Densitymapbox,
+            go.Choroplethmapbox,
+        ]:
+            with pytest.warns(DeprecationWarning):
+                _ = go.Figure([trace_constructor()])
+
+    def test_no_warn_on_non_deprecated_traces(self):
+        # This test will fail if any of the following traces emits a DeprecationWarning
+        for trace_constructor in [
+            go.Scatter,
+            go.Bar,
+            go.Scattermap,
+            go.Densitymap,
+            go.Choroplethmap,
+        ]:
+            with warnings.catch_warnings():
+                warnings.simplefilter("error")
+                _ = go.Figure([trace_constructor()])
