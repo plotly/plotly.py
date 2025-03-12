@@ -415,6 +415,7 @@ def test_warn_on_deprecated_mapbox_px_constructors():
             else:
                 fig_constructor(lat=[10, 20, 30], lon=[10, 20, 30])
 
+
 def test_no_warn_on_non_deprecated_px_constructors():
     # This test will fail if any of the following px constructors
     # emits a DeprecationWarning
@@ -433,6 +434,7 @@ def test_no_warn_on_non_deprecated_px_constructors():
                 fig_constructor(lat=[10, 20, 30], lon=[10, 20, 30])
             else:
                 fig_constructor(x=[1, 2, 3], y=[1, 2, 3])
+
 
 def test_no_warn_on_update_template():
     # This test will fail if update_layout(template=...) emits a DeprecationWarning

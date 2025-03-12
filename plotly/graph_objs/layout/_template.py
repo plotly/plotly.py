@@ -3,8 +3,8 @@ import warnings
 
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 
-class Template(_BaseLayoutHierarchyType):
 
+class Template(_BaseLayoutHierarchyType):
     # class properties
     # --------------------
     _parent_path_str = "layout"
