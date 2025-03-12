@@ -48,7 +48,6 @@ OLD_CLASS_NAMES = [
 
 class TestBackwardsCompat(TestCase):
     def test_old_class_names(self):
-
         # these were all defined at one point, we want to maintain backwards
         # compat, so we basically just create a checkpoint with this test.
 
@@ -156,6 +155,7 @@ class TestPop(TestCase):
 
     def test_pop_invalid_prop_with_default(self):
         self.assertEqual(self.layout.pop("bogus", 42), 42)
+
 
 class TestDeprecationWarnings(TestCase):
     def test_warn_on_deprecated_mapbox_traces(self):
