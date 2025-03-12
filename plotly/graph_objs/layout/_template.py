@@ -1,6 +1,7 @@
-from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
+import warnings
 
+from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 
 class Template(_BaseLayoutHierarchyType):
 
@@ -324,7 +325,12 @@ an instance of :class:`plotly.graph_objs.layout.Template`"""
         _v = arg.pop("data", None)
         _v = data if data is not None else _v
         if _v is not None:
-            self["data"] = _v
+            # Template.data contains key for deprecated scattermapbox trace
+            # In order to prevent false deprecation warnings from surfacing,
+            # we suppress deprecation warnings for this line only
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=DeprecationWarning)
+                self["data"] = _v
         _v = arg.pop("layout", None)
         _v = layout if layout is not None else _v
         if _v is not None:
