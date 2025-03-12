@@ -102,6 +102,6 @@ dash_bio.Clustergram(
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+snippet_url = 'https://test-snippets-pp-0c64a1035941.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-clustergram', width='100%', height=1200)
 ```

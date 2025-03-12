@@ -76,7 +76,7 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 ```python hide_code=true
 from IPython.display import IFrame
-snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
+snippet_url = 'https://test-snippets-pp-0c64a1035941.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'horizontal-vertical-shapes', width='100%', height=1200)
 ```
 
@@ -95,9 +95,9 @@ import plotly.express as px
 df = px.data.stocks(indexed=True)
 fig = px.line(df)
 fig.add_hline(y=1, line_dash="dot",
-              annotation_text="Jan 1, 2018 baseline", 
+              annotation_text="Jan 1, 2018 baseline",
               annotation_position="bottom right")
-fig.add_vrect(x0="2018-09-24", x1="2018-12-18", 
+fig.add_vrect(x0="2018-09-24", x1="2018-12-18",
               annotation_text="decline", annotation_position="top left",
               fillcolor="green", opacity=0.25, line_width=0)
 fig.show()
@@ -111,12 +111,12 @@ import plotly.express as px
 df = px.data.stocks(indexed=True)
 fig = px.line(df)
 fig.add_hline(y=1, line_dash="dot",
-              annotation_text="Jan 1, 2018 baseline", 
+              annotation_text="Jan 1, 2018 baseline",
               annotation_position="bottom right",
               annotation_font_size=20,
               annotation_font_color="blue"
              )
-fig.add_vrect(x0="2018-09-24", x1="2018-12-18", 
+fig.add_vrect(x0="2018-09-24", x1="2018-12-18",
               annotation_text="decline", annotation_position="top left",
               annotation=dict(font_size=20, font_family="Times New Roman"),
               fillcolor="green", opacity=0.25, line_width=0)
@@ -132,7 +132,7 @@ import plotly.express as px
 df = px.data.stocks(indexed=True)
 fig = px.line(df, facet_col="company", facet_col_wrap=2)
 fig.add_hline(y=1, line_dash="dot", row=3, col="all",
-              annotation_text="Jan 1, 2018 baseline", 
+              annotation_text="Jan 1, 2018 baseline",
               annotation_position="bottom right")
 fig.add_vrect(x0="2018-09-24", x1="2018-12-18", row="all", col=1,
               annotation_text="decline", annotation_position="top left",
@@ -176,11 +176,11 @@ fig.show()
 
 ```
 
-With [text labels on shapes](/python/shapes/#adding-text-labels-to-shapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user. 
+With [text labels on shapes](/python/shapes/#adding-text-labels-to-shapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user.
 
 
 ### Reference
 
-More details are available about [layout shapes](/python/shapes/) and [annotations](/python/text-and-annotations). 
+More details are available about [layout shapes](/python/shapes/) and [annotations](/python/text-and-annotations).
 
 Reference documentation is also available for [`add_hline`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_hline#plotly.graph_objects.Figure.add_hline), [`add_vline`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_vline#plotly.graph_objects.Figure.add_vline), [`add_hrect`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_hrect#plotly.graph_objects.Figure.add_hrect), [`add_vrect`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_vrect#plotly.graph_objects.Figure.add_vrect).
