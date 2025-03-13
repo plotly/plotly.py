@@ -1,9 +1,11 @@
+from itertools import permutations
+import warnings
+
 import plotly.express as px
 import plotly.io as pio
 import narwhals.stable.v1 as nw
 import numpy as np
 import pytest
-from itertools import permutations
 
 
 def test_scatter(backend):
@@ -394,3 +396,49 @@ def test_load_px_data(return_type):
         else:
             df = getattr(px.data, fname)(return_type=return_type)
         assert len(df) > 0
+
+
+def test_warn_on_deprecated_mapbox_px_constructors():
+    # This test will fail if any of the following px constructors
+    # fails to emit a DeprecationWarning
+    for fig_constructor in [
+        px.line_mapbox,
+        px.scatter_mapbox,
+        px.density_mapbox,
+        px.choropleth_mapbox,
+    ]:
+        # Look for warnings with the string "_mapbox" in them
+        # to make sure the warning is coming from px rather than go
+        with pytest.warns(DeprecationWarning, match="_mapbox"):
+            if fig_constructor == px.choropleth_mapbox:
+                fig_constructor(locations=["CA", "TX", "NY"])
+            else:
+                fig_constructor(lat=[10, 20, 30], lon=[10, 20, 30])
+
+
+def test_no_warn_on_non_deprecated_px_constructors():
+    # This test will fail if any of the following px constructors
+    # emits a DeprecationWarning
+    for fig_constructor in [
+        px.scatter,
+        px.line,
+        px.scatter_map,
+        px.density_map,
+        px.choropleth_map,
+    ]:
+        with warnings.catch_warnings():
+            warnings.simplefilter("error")
+            if fig_constructor == px.choropleth_map:
+                fig_constructor(locations=["CA", "TX", "NY"])
+            elif fig_constructor in {px.scatter_map, px.density_map}:
+                fig_constructor(lat=[10, 20, 30], lon=[10, 20, 30])
+            else:
+                fig_constructor(x=[1, 2, 3], y=[1, 2, 3])
+
+
+def test_no_warn_on_update_template():
+    # This test will fail if update_layout(template=...) emits a DeprecationWarning
+    fig = px.line(x=[1, 2, 3], y=[1, 2, 3])
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        fig.update_layout(template="plotly_white")
