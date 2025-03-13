@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import importlib.metadata as importlib_metadata
 from packaging.version import Version
-import tempfile
+import warnings
 
 import plotly
 from plotly.io._utils import validate_coerce_fig_to_dict
@@ -91,6 +91,55 @@ def to_image(
         The image data
     """
 
+    # Handle engine
+    # -------------
+    if engine is not None:
+        warnings.warn(
+            "The 'engine' parameter is deprecated and will be removed in a future version.",
+            DeprecationWarning,
+        )
+        engine = "auto"
+
+    if engine == "auto":
+        if kaleido_available:
+            # Default to kaleido if available
+            engine = "kaleido"
+        else:
+            # See if orca is available
+            from ._orca import validate_executable
+
+            try:
+                validate_executable()
+                engine = "orca"
+            except:
+                # If orca not configured properly, make sure we display the error
+                # message advising the installation of kaleido
+                engine = "kaleido"
+
+    if engine == "orca":
+        warnings.warn(
+            "Support for the 'orca' engine is deprecated and will be removed in a future version. "
+            "Please use the 'kaleido' engine instead.",
+            DeprecationWarning,
+        )
+        # Fall back to legacy orca image export path
+        from ._orca import to_image as to_image_orca
+
+        return to_image_orca(
+            fig,
+            format=format,
+            width=width,
+            height=height,
+            scale=scale,
+            validate=validate,
+        )
+    elif engine != "kaleido":
+        raise ValueError(
+            "Invalid image export engine specified: {engine}".format(
+                engine=repr(engine)
+            )
+        )
+
     # Raise informative error message if Kaleido is not installed
     if not kaleido_available:
         raise ValueError(
@@ -119,6 +168,11 @@ which can be installed using pip:
         )
     else:
         # Kaleido v0
+        warnings.warn(
+            "Support for kaleido v0 is deprecated and will be removed in a future version. "
+            "Please upgrade to kaleido v1 by running `pip install kaleido>=1.0.0`.",
+            DeprecationWarning,
+        )
         img_bytes = scope.transform(
             fig_dict, format=format, width=width, height=height, scale=scale
         )
@@ -320,6 +374,11 @@ which can be installed using pip:
         fig = json.loads(bytes.decode("utf-8"))
     else:
         # Kaleido v0
+        warnings.warn(
+            "Support for kaleido v0 is deprecated and will be removed in a future version. "
+            "Please upgrade to kaleido v1 by running `pip install kaleido>=1.0.0`.",
+            DeprecationWarning,
+        )
         fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
 
     if as_dict:
