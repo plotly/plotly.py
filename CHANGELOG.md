@@ -2,10 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [6.0.1] - 2025-02-16
+## Unreleased
 
 ### Fixed
 - Fix `TypeError` when using `orjson` to serialize `pandas.NA`.
+- Fix issue where using `category_orders` on `px.pie` raised `ColumnNotFoundError`.
 
 ## [6.0.0] - 2025-01-28
 
