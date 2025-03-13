@@ -102,8 +102,8 @@ def build_datatype_py(node):
     )
     buffer.write(f"import copy as _copy\n")
 
-    if node.name_property in deprecated_mapbox_traces:
-        buffer.write(f"from warnings import warn\n")
+    if node.name_property in deprecated_mapbox_traces or node.name_property == "template":
+        buffer.write(f"import warnings\n")
 
     # Write class definition
     # ----------------------
@@ -375,9 +375,24 @@ an instance of :class:`{class_name}`\"\"\")
             f"""
         _v = arg.pop('{name_prop}', None)
         _v = {name_prop} if {name_prop} is not None else _v
-        if _v is not None:
-            self['{name_prop}'] = _v"""
+        if _v is not None:"""
         )
+        if datatype_class == "Template" and name_prop == "data":
+            buffer.write(
+                """
+            # Template.data contains a 'scattermapbox' key, which causes a
+            # go.Scattermapbox trace object to be created during validation.
+            # In order to prevent false deprecation warnings from surfacing,
+            # we suppress deprecation warnings for this line only.
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=DeprecationWarning)
+                self["data"] = _v"""
+            )
+        else:
+            buffer.write(
+                f"""
+                self['{name_prop}'] = _v"""
+            )
 
     # ### Literals ###
     if literal_nodes:
@@ -413,7 +428,7 @@ an instance of :class:`{class_name}`\"\"\")
     if node.name_property in deprecated_mapbox_traces:
         buffer.write(
             f"""
-        warn(
+        warnings.warn(
             "*{node.name_property}* is deprecated!"
             + " Use *{node.name_property.replace("mapbox", "map")}* instead."
             + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
