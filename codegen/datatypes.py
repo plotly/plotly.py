@@ -102,7 +102,10 @@ def build_datatype_py(node):
     )
     buffer.write(f"import copy as _copy\n")
 
-    if node.name_property in deprecated_mapbox_traces or node.name_property == "template":
+    if (
+        node.name_property in deprecated_mapbox_traces
+        or node.name_property == "template"
+    ):
         buffer.write(f"import warnings\n")
 
     # Write class definition
