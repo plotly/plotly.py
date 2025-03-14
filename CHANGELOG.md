@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix `TypeError` when using `orjson` to serialize `pandas.NA` [[#5040](https://github.com/plotly/plotly.py/pull/5040)].
 - Fix issue where using `category_orders` on `px.pie` raised `ColumnNotFoundError` [[#5000](https://github.com/plotly/plotly.py/pull/5000)].
+- Fix incorrect `DeprecationWarning` shown when creating a `px` chart [[#5080](https://github.com/plotly/plotly.py/pull/5080), [#5086](https://github.com/plotly/plotly.py/pull/5086)]
 
 
 ## [6.0.0] - 2025-01-28
