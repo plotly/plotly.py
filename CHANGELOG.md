@@ -4,9 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Updated
+- Updated Plotly.js from version 3.0.0 to version 3.0.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#301----2025-02-18) for more information.
+
+
 ### Fixed
 - Fix `TypeError` when using `orjson` to serialize `pandas.NA`.
 - Fix issue where using `category_orders` on `px.pie` raised `ColumnNotFoundError`.
+
 
 ## [6.0.0] - 2025-01-28
 
