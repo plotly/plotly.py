@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [6.0.1] - 2025-03-14
 
 ### Updated
 - Updated Plotly.js from version 3.0.0 to version 3.0.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#301----2025-02-18) for more information.
