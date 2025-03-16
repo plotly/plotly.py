@@ -225,39 +225,39 @@ Diverging bar charts show counts of positive outcomes or sentiments to the right
 import pandas as pd
 import plotly.graph_objects as go
 
-data = {
-    "Category": ["Content Quality", "Instructor Effectiveness", "Ease of Use", "Customer Support", "Value for Money"],
-    "Somewhat Agree": [30, 25, 40, 20, 49],
-    "Strongly Agree": [40, 35, 50, 30, 60],
-    "Somewhat Disagree": [-20, -15, -25, -10, -30],
-    "Strongly Disagree": [-10, -50, -15, -15,-20]
-}
-df = pd.DataFrame(data)
-print(df.columns)
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/refs/heads/master/gss_2002_5_pt_likert.csv')
+#data source details are in this CSV file
+df.rename(columns={'Unnamed: 0':"Category"}, inplace=True)
+
+#achieve the diverging effect by putting a negative sign on the "disagree" answers 
+for v in ["Disagree","Strongly Disagree"]:
+    df[v]=df[v]*-1
 
 fig = go.Figure()
-
+# this color palette conveys meaning:  blues for negative, reds for positive, gray for Neither Agree nor Disagree
 color_by_category={
     "Strongly Agree":'darkblue',
-    "Somewhat Agree":'lightblue',
-    "Somewhat Disagree":'orange',
+    "Agree":'lightblue',
+    "Disagree":'orange',
     "Strongly Disagree":'red',
+    "Neither Agree nor Disagree":'gray',
 }
 
-# We want the legend to be ordered in the same order that the categories appear, left to right -- 
-# which is different from the order in which we add the traces to the figure.
-# since we need to create the "somewhat" traces first, then the "strongly" traces to display 
-# the segments in the desired order
 
+# We want the legend to be ordered in the same order that the categories appear, left to right --
+# which is different from the order in which we have to add the traces to the figure.
+# since we need to create the "somewhat" traces before the "strongly" traces to display
+# the segments in the desired order
 legend_rank_by_category={
     "Strongly Disagree":1,
-    "Somewhat Disagree":2,
-    "Somewhat Agree":3,
+    "Disagree":2,
+    "Agree":3,
     "Strongly Agree":4,
+    "Neither Agree nor Disagree":5
 }
-
 # Add bars for each category
-for col in df.columns[1:]:
+for col in ["Disagree","Strongly Disagree","Agree","Strongly Agree"]:
     fig.add_trace(go.Bar(
         y=df["Category"], 
         x=df[col], 
@@ -265,14 +265,11 @@ for col in df.columns[1:]:
         orientation='h',
         marker=dict(color=color_by_category[col]),
         legendrank=legend_rank_by_category[col]
-
     ))
-
-
 fig.update_layout(
-   title="Reactions to the statement, 'The service met your expectations for':",
+   title="Reactions to statements from the 2002 General Social Survey:",
     xaxis=dict(
-        title="Number of Responses",
+        title="Percent of Responses",
         zeroline=True,  # Ensure there's a zero line for divergence
         zerolinecolor="black",
         # use array tick mode to show that the counts to the left of zero are still positive.
@@ -285,7 +282,6 @@ fig.update_layout(
     barmode='relative',  # Allows bars to diverge from the center
     plot_bgcolor="white",
 )
-
 fig.show()
 ```
 
