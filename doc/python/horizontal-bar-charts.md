@@ -224,25 +224,26 @@ Diverging bar charts offer two imperfect options for responses that are neither 
 import pandas as pd
 import plotly.graph_objects as go
 
-data = {
-    "Category": ["Content Quality", "Value for Money", "Ease of Use", "Customer Support", "Scale Fidelity"],
-    "Neutral": [10, 15, 18, 15,20],
-    "Somewhat Agree": [25, 25, 22, 20, 20],
-    "Strongly Agree": [35, 35, 25, 40, 20],
-    "Somewhat Disagree": [-20, -15, -20, -10, -20],
-    "Strongly Disagree": [-10, -10, -15, -15,-20]
-}
-df = pd.DataFrame(data)
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/refs/heads/master/gss_2002_5_pt_likert.csv')
+#data source details are in this CSV file
+df.rename(columns={'Unnamed: 0':"Category"}, inplace=True)
+
+
+#achieve the diverging effect by putting a negative sign on the "disagree" answers 
+for v in ["Disagree","Strongly Disagree"]:
+    df[v]=df[v]*-1
 
 fig = go.Figure()
-# this color palette conveys meaning:  blues for negative, reds for positive, gray for neutral
+# this color palette conveys meaning:  blues for negative, reds for positive, gray for Neither Agree nor Disagree
 color_by_category={
     "Strongly Agree":'darkblue',
-    "Somewhat Agree":'lightblue',
-    "Somewhat Disagree":'orange',
+    "Agree":'lightblue',
+    "Disagree":'orange',
     "Strongly Disagree":'red',
-    "Neutral":'gray',
+    "Neither Agree nor Disagree":'gray',
 }
+
 
 # We want the legend to be ordered in the same order that the categories appear, left to right --
 # which is different from the order in which we have to add the traces to the figure.
@@ -251,14 +252,14 @@ color_by_category={
 
 legend_rank_by_category={
     "Strongly Disagree":1,
-    "Somewhat Disagree":2,
-    "Somewhat Agree":3,
+    "Disagree":2,
+    "Agree":3,
     "Strongly Agree":4,
-    "Neutral":5
+    "Neither Agree nor Disagree":5
 }
 
 # Add bars
-for col in df[["Somewhat Disagree","Strongly Disagree","Somewhat Agree","Strongly Agree","Neutral"]]:
+for col in df[["Disagree","Strongly Disagree","Agree","Strongly Agree","Neither Agree nor Disagree"]]:
     fig.add_trace(go.Bar(
         y=df["Category"],
         x=df[col],
@@ -266,10 +267,8 @@ for col in df[["Somewhat Disagree","Strongly Disagree","Somewhat Agree","Strongl
         orientation='h',
         marker=dict(color=color_by_category[col]),
         legendrank=legend_rank_by_category[col],
-        xaxis=f"x{1+(col=="Neutral")}", # in this context, putting neutral on a secondary x-axis on a different domain 
+        xaxis=f"x{1+(col=="Neither Agree nor Disagree")}", # in this context, putting "Neither Agree nor Disagree" on a secondary x-axis on a different domain 
                        # yields results equivalent to subplots with far less code
-
-
     )
 )
 
@@ -278,15 +277,16 @@ for col in df[["Somewhat Disagree","Strongly Disagree","Somewhat Agree","Strongl
 
 # Find the maximum width of the bars to the left and right sides of the origin; remember that the width of 
 # the plot is the sum of the longest negative bar and the longest positive bar even if they are on separate rows
-max_left = min(df[["Somewhat Disagree","Strongly Disagree"]].sum(axis=1))
-max_right = max(df[["Somewhat Agree","Strongly Agree"]].sum(axis=1))
+max_left = min(df[["Disagree","Strongly Disagree"]].sum(axis=1))
+max_right = max(df[["Agree","Strongly Agree"]].sum(axis=1))
 
 # we are working in percent, but coded the negative reactions as negative numbers; so we need to take the absolute value
 max_width_signed = abs(max_left)+max_right
-max_width_neutral = max(df["Neutral"])
+max_width_neither = max(df["Neither Agree nor Disagree"])
 
 fig.update_layout(
-   title="Reactions to the statement, 'The service met your expectations for':",
+    
+    title="Reactions to statements from the 2002 General Social Survey:",
     plot_bgcolor="white",
     barmode='relative',  # Allows bars to diverge from the center
     )
@@ -296,12 +296,12 @@ fig.update_xaxes(
         #starting here, we set domain and range to create a shared x-axis scale
         # multiply by .98 to add space between the two columns
         range=[max_left, max_right],  
-        domain=[0, 0.98*(max_width_signed/(max_width_signed+max_width_neutral))]  
+        domain=[0, 0.98*(max_width_signed/(max_width_signed+max_width_neither))]  
 )    
 fig.update_layout(
     xaxis2=dict(
-        range=[0, max_width_neutral],  
-        domain=[(1-.98*(1-max_width_signed/(max_width_signed+max_width_neutral))), 1.0],
+        range=[0, max_width_neither],  
+        domain=[(1-.98*(1-max_width_signed/(max_width_signed+max_width_neither))), 1.0],
     )
 )
 fig.update_legends(
