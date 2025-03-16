@@ -1,3 +1,7 @@
+[build-system]
+requires = ["jupyterlab~=3.0;python_version>='3.6'", "setuptools>=40.8.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [tool.black]
 line-length = 88
 target_version = ['py36', 'py37', 'py38', 'py39']
@@ -17,8 +21,7 @@ exclude = '''
     | build
     | dist
     | submodules
-    | packages/javascript
-    | packages/python/plotly/plotly/matplotlylib/mplexporter
+    | plotly/matplotlylib/mplexporter
   )/
   | versioneer.py
 )
