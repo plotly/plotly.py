@@ -266,9 +266,15 @@ for col in ["Disagree","Strongly Disagree","Agree","Strongly Agree"]:
         marker=dict(color=color_by_category[col]),
         legendrank=legend_rank_by_category[col]
     ))
+
 fig.update_layout(
    title="Reactions to statements from the 2002 General Social Survey:",
-    xaxis=dict(
+    yaxis_title = "",
+    barmode='relative',  # Allows bars to diverge from the center
+    plot_bgcolor="white",
+)
+
+fig.update_xaxes(
         title="Percent of Responses",
         zeroline=True,  # Ensure there's a zero line for divergence
         zerolinecolor="black",
@@ -277,11 +283,8 @@ fig.update_layout(
         tickmode = 'array',     
         tickvals = [-50, 0, 50, 100],
         ticktext = [50, 0, 50, 100]
-    ),
-    yaxis_title = "",
-    barmode='relative',  # Allows bars to diverge from the center
-    plot_bgcolor="white",
 )
+
 fig.show()
 ```
 
