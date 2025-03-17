@@ -1,8 +1,0 @@
-### Required dependencies for Plotly Express    ###
-###                                             ###
-### To install, run:                            ###
-###      $ pip install -r requires-express.txt  ###
-###                                             ###
-###################################################
-
-numpy

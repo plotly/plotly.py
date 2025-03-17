@@ -25,10 +25,10 @@ where you can edit the page on Github).
 
 For more important edits where you need to run the notebook to check the output,
 clone the repository and setup an environment as described in the [main
-contributing notes](../contributing.md). If you're writing documentation at the
+contributing notes](../CONTRIBUTING.md). If you're writing documentation at the
 same time as you are developing a feature, make sure to install with editable
 install (`pip install -e`, as described in [main
-contributing notes](../contributing.md)), so that you only need to restart
+contributing notes](../CONTRIBUTING.md)), so that you only need to restart
 the Jupyter kernel when you have changed the source code of the feature.
 
 ### Branches
@@ -41,7 +41,7 @@ released, or which has just been included but not yet released.
   your branch off the `doc-prod` branch and open your pull request against this
   `doc-prod` branch.
 - Case of a new (not released yet) feature: start your branch / pull request
-  against the `master` branch. `master` and `doc-prod` will be synchronized at
+  against the `main` branch. `main` and `doc-prod` will be synchronized at
   release time, so that the documentation of the feature is only deployed when
   it is available in a released version of `plotly.py`.
 
