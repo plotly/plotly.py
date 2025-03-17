@@ -549,10 +549,10 @@ elif ipython and ipython.get_ipython():
         default_renderer = "browser"
 
     # Fallback to renderer combination that will work automatically
-    # in the classic notebook (offline), jupyterlab, nteract, vscode, and
+    # in the classic notebook, jupyterlab, nteract, vscode, and
     # nbconvert HTML export.
     if not default_renderer:
-        default_renderer = "plotly_mimetype+notebook"
+        default_renderer = "plotly_mimetype+notebook_connected"
 else:
     # If ipython isn't available, try to display figures in the default
     # browser
