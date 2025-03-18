@@ -1,6 +1,6 @@
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
-from warnings import warn
+import warnings
 
 
 class Densitymapbox(_BaseTraceType):
@@ -1740,7 +1740,7 @@ an instance of :class:`plotly.graph_objs.Densitymapbox`"""
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
 
-        warn(
+        warnings.warn(
             "*densitymapbox* is deprecated!"
             + " Use *densitymap* instead."
             + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",

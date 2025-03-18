@@ -1,5 +1,6 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
+import warnings
 
 
 class Template(_BaseLayoutHierarchyType):
@@ -120,7 +121,13 @@ an instance of :class:`plotly.graph_objs.layout.Template`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("data", arg, data)
+        # Template.data contains a 'scattermapbox' key, which causes a
+        # go.Scattermapbox trace object to be created during validation.
+        # In order to prevent false deprecation warnings from surfacing,
+        # we suppress deprecation warnings for this line only.
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=DeprecationWarning)
+            self._init_provided("data", arg, data)
         self._init_provided("layout", arg, layout)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
