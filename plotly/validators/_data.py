@@ -2,6 +2,7 @@ import _plotly_utils.basevalidators
 
 
 class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
+
     def __init__(self, plotly_name="data", parent_name="", **kwargs):
 
         super().__init__(

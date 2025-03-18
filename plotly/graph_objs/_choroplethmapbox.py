@@ -1,6 +1,6 @@
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
-from warnings import warn
+import warnings
 
 
 class Choroplethmapbox(_BaseTraceType):
@@ -1768,7 +1768,7 @@ an instance of :class:`plotly.graph_objs.Choroplethmapbox`"""
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
 
-        warn(
+        warnings.warn(
             "*choroplethmapbox* is deprecated!"
             + " Use *choroplethmap* instead."
             + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
