@@ -382,6 +382,8 @@ jobs:
       - run:
           name: make doc
           command: |
+            sudo apt-get update
+            sudo apt-get install rename
             cd doc
             source .venv/bin/activate
             # For the API doc, we need to use the local version of plotly
