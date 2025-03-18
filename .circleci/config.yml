@@ -383,15 +383,13 @@ jobs:
           name: make doc
           command: |
             cd doc
-            python -m venv venv
-            source venv/bin/activate
-            pip install -r requirements.txt
+            source .venv/bin/activate
             # For the API doc, we need to use the local version of plotly
             # since we are tweaking the source because of
             # graph_objs/graph_objects
-            pip uninstall -y plotly
+            uv pip uninstall plotly
             cd ..
-            pip install -e .
+            uv pip install -e .
             cd doc
             cd apidoc
             make html
