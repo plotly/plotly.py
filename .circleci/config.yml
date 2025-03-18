@@ -408,10 +408,16 @@ jobs:
               rm -rf .git
               cd ../..
             fi
+            tar -czf api_docs_html.tgz _build/html
 
       - store_artifacts:
           path: doc/build
           destination: doc/build
+
+      - store_artifacts:
+          path: doc/apidoc/api_docs_html.tgz
+          destination: doc/apidoc
+
 workflows:
   code_formatting:
     jobs:
