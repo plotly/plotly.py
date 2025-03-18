@@ -552,7 +552,7 @@ elif ipython and ipython.get_ipython():
     # in the classic notebook, jupyterlab, nteract, vscode, and
     # nbconvert HTML export.
     if not default_renderer:
-        default_renderer = "plotly_mimetype+notebook_connected"
+        default_renderer = "plotly_mimetype+notebook"
 else:
     # If ipython isn't available, try to display figures in the default
     # browser

@@ -180,3 +180,24 @@ def hist_series(data_frame, **kwargs):
     skip += ["figsize", "bins", "legend"]
     new_kwargs = {k: kwargs[k] for k in kwargs if k not in skip}
     return histogram(data_frame, **new_kwargs)
+
+def _jupyter_labextension_paths():
+    """Called by Jupyter Lab Server to detect if it is a valid labextension and
+    to install the extension.
+    """
+    return [{
+        'src': 'labextension',
+        'dest': 'jupyterlab_plotly',
+    }]
+
+# For the mime renderer extension
+def _jupyter_mimetype_metadata():
+    """Metadata for the mimetype extension"""
+    return {
+        "name": "plotly",
+        "version": __version__,
+        "description": "A MIME renderer extension for Jupyter Lab",
+        "author": "Martha Cryan",
+        "main": "js/mimerenderer.js",
+        "license": "BSD-3-Clause"
+    }
