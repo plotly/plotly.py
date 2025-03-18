@@ -61,9 +61,9 @@ commands:
             cd js
             npm ci
             npm run build
-      
+
       - when:
-          condition: 
+          condition:
             not:
               equal:
                 - <<parameters.pandas_version>>
@@ -387,13 +387,13 @@ jobs:
             # For the API doc, we need to use the local version of plotly
             # since we are tweaking the source because of
             # graph_objs/graph_objects
+            uv pip uninstall plotly
+            cd ..
+            uv pip install -e .
+            cd doc
+            cd apidoc
+            make html
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              uv pip uninstall plotly
-              cd ..
-              uv pip install -e .
-              cd doc
-              cd apidoc
-              make html
               cd _build/html
               touch .nojekyll
               git init
