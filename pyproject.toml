@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "jupyter_packaging~=0.10.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
@@ -83,3 +83,16 @@ exclude = '''
   | versioneer.py
 )
 '''
+
+[tool.jupyter-packaging.options]
+skip-if-exists = ["plotly/labextension/static/style.js"]
+
+[tool.jupyter-packaging.builder]
+factory = "jupyter_packaging.npm_builder"
+
+[tool.jupyter-packaging.build-args]
+build_cmd = "build:prod"
+npm = ["jlpm"]
+
+[project.entry-points."jupyterlab.mime_renderers"]
+"application/vnd.plotly.v1+json" = "plotly:plugin"
