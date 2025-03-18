@@ -415,8 +415,8 @@ jobs:
           destination: doc/build
 
       - store_artifacts:
-          path: doc/apidoc/
-          destination: doc/apidoc
+          path: doc/apidoc/api_docs_html.tgz
+          destination: doc/apidoc/api_docs_html.tgz
 
 workflows:
   code_formatting:
