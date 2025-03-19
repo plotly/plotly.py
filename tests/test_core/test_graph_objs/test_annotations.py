@@ -5,6 +5,7 @@ test_annotations:
 A module intended for use with Nose.
 
 """
+
 from unittest import skip
 
 from plotly.exceptions import (

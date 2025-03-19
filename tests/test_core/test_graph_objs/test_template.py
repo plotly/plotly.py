@@ -416,7 +416,7 @@ class TestMergeTemplates(TestCase):
                     go.Bar(marker={"opacity": 0.7}),
                     go.Bar(marker={"opacity": 0.4}),
                 ],
-                "parcoords": [go.Parcoords(dimensiondefaults={"multiselect": True})]
+                "parcoords": [go.Parcoords(dimensiondefaults={"multiselect": True})],
                 # no 'scattergl'
             },
         )
