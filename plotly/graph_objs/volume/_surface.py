@@ -4,14 +4,10 @@ import copy as _copy
 
 class Surface(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "volume"
     _path_str = "volume.surface"
     _valid_props = {"count", "fill", "pattern", "show"}
 
-    # count
-    # -----
     @property
     def count(self):
         """
@@ -33,8 +29,6 @@ class Surface(_BaseTraceHierarchyType):
     def count(self, val):
         self["count"] = val
 
-    # fill
-    # ----
     @property
     def fill(self):
         """
@@ -56,8 +50,6 @@ class Surface(_BaseTraceHierarchyType):
     def fill(self, val):
         self["fill"] = val
 
-    # pattern
-    # -------
     @property
     def pattern(self):
         """
@@ -85,8 +77,6 @@ class Surface(_BaseTraceHierarchyType):
     def pattern(self, val):
         self["pattern"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -105,8 +95,6 @@ class Surface(_BaseTraceHierarchyType):
     def show(self, val):
         self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -175,14 +163,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         Surface
         """
-        super(Surface, self).__init__("surface")
-
+        super().__init__("surface")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -197,34 +182,12 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.volume.Surface`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("count", None)
-        _v = count if count is not None else _v
-        if _v is not None:
-            self["count"] = _v
-        _v = arg.pop("fill", None)
-        _v = fill if fill is not None else _v
-        if _v is not None:
-            self["fill"] = _v
-        _v = arg.pop("pattern", None)
-        _v = pattern if pattern is not None else _v
-        if _v is not None:
-            self["pattern"] = _v
-        _v = arg.pop("show", None)
-        _v = show if show is not None else _v
-        if _v is not None:
-            self["show"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("count", arg, count)
+        self._init_provided("fill", arg, fill)
+        self._init_provided("pattern", arg, pattern)
+        self._init_provided("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

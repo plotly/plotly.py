@@ -4,14 +4,10 @@ import copy as _copy
 
 class Line(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "candlestick"
     _path_str = "candlestick.line"
     _valid_props = {"width"}
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -32,8 +28,6 @@ class Line(_BaseTraceHierarchyType):
     def width(self, val):
         self["width"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -64,14 +58,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super(Line, self).__init__("line")
-
+        super().__init__("line")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -86,22 +77,9 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.candlestick.Line`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,11 +1,11 @@
-import _plotly_utils.basevalidators
+import _plotly_utils.basevalidators as _bv
 
 
-class WeightValidator(_plotly_utils.basevalidators.IntegerValidator):
+class WeightValidator(_bv.IntegerValidator):
     def __init__(self, plotly_name="weight", parent_name="table.cells.font", **kwargs):
-        super(WeightValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             extras=kwargs.pop("extras", ["normal", "bold"]),

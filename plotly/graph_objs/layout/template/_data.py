@@ -4,8 +4,6 @@ import copy as _copy
 
 class Data(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "layout.template"
     _path_str = "layout.template.data"
     _valid_props = {
@@ -60,8 +58,6 @@ class Data(_BaseLayoutHierarchyType):
         "waterfall",
     }
 
-    # barpolar
-    # --------
     @property
     def barpolar(self):
         """
@@ -70,8 +66,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Barpolar
           - A list or tuple of dicts of string/value properties that
             will be passed to the Barpolar constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -83,8 +77,6 @@ class Data(_BaseLayoutHierarchyType):
     def barpolar(self, val):
         self["barpolar"] = val
 
-    # bar
-    # ---
     @property
     def bar(self):
         """
@@ -93,8 +85,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Bar
           - A list or tuple of dicts of string/value properties that
             will be passed to the Bar constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -106,8 +96,6 @@ class Data(_BaseLayoutHierarchyType):
     def bar(self, val):
         self["bar"] = val
 
-    # box
-    # ---
     @property
     def box(self):
         """
@@ -116,8 +104,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Box
           - A list or tuple of dicts of string/value properties that
             will be passed to the Box constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -129,8 +115,6 @@ class Data(_BaseLayoutHierarchyType):
     def box(self, val):
         self["box"] = val
 
-    # candlestick
-    # -----------
     @property
     def candlestick(self):
         """
@@ -139,8 +123,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Candlestick
           - A list or tuple of dicts of string/value properties that
             will be passed to the Candlestick constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -152,8 +134,6 @@ class Data(_BaseLayoutHierarchyType):
     def candlestick(self, val):
         self["candlestick"] = val
 
-    # carpet
-    # ------
     @property
     def carpet(self):
         """
@@ -162,8 +142,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Carpet
           - A list or tuple of dicts of string/value properties that
             will be passed to the Carpet constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -175,8 +153,6 @@ class Data(_BaseLayoutHierarchyType):
     def carpet(self, val):
         self["carpet"] = val
 
-    # choroplethmapbox
-    # ----------------
     @property
     def choroplethmapbox(self):
         """
@@ -185,8 +161,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Choroplethmapbox
           - A list or tuple of dicts of string/value properties that
             will be passed to the Choroplethmapbox constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -198,8 +172,6 @@ class Data(_BaseLayoutHierarchyType):
     def choroplethmapbox(self, val):
         self["choroplethmapbox"] = val
 
-    # choroplethmap
-    # -------------
     @property
     def choroplethmap(self):
         """
@@ -208,8 +180,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Choroplethmap
           - A list or tuple of dicts of string/value properties that
             will be passed to the Choroplethmap constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -221,8 +191,6 @@ class Data(_BaseLayoutHierarchyType):
     def choroplethmap(self, val):
         self["choroplethmap"] = val
 
-    # choropleth
-    # ----------
     @property
     def choropleth(self):
         """
@@ -231,8 +199,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Choropleth
           - A list or tuple of dicts of string/value properties that
             will be passed to the Choropleth constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -244,8 +210,6 @@ class Data(_BaseLayoutHierarchyType):
     def choropleth(self, val):
         self["choropleth"] = val
 
-    # cone
-    # ----
     @property
     def cone(self):
         """
@@ -254,8 +218,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Cone
           - A list or tuple of dicts of string/value properties that
             will be passed to the Cone constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -267,8 +229,6 @@ class Data(_BaseLayoutHierarchyType):
     def cone(self, val):
         self["cone"] = val
 
-    # contourcarpet
-    # -------------
     @property
     def contourcarpet(self):
         """
@@ -277,8 +237,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Contourcarpet
           - A list or tuple of dicts of string/value properties that
             will be passed to the Contourcarpet constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -290,8 +248,6 @@ class Data(_BaseLayoutHierarchyType):
     def contourcarpet(self, val):
         self["contourcarpet"] = val
 
-    # contour
-    # -------
     @property
     def contour(self):
         """
@@ -300,8 +256,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Contour
           - A list or tuple of dicts of string/value properties that
             will be passed to the Contour constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -313,8 +267,6 @@ class Data(_BaseLayoutHierarchyType):
     def contour(self, val):
         self["contour"] = val
 
-    # densitymapbox
-    # -------------
     @property
     def densitymapbox(self):
         """
@@ -323,8 +275,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Densitymapbox
           - A list or tuple of dicts of string/value properties that
             will be passed to the Densitymapbox constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -336,8 +286,6 @@ class Data(_BaseLayoutHierarchyType):
     def densitymapbox(self, val):
         self["densitymapbox"] = val
 
-    # densitymap
-    # ----------
     @property
     def densitymap(self):
         """
@@ -346,8 +294,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Densitymap
           - A list or tuple of dicts of string/value properties that
             will be passed to the Densitymap constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -359,8 +305,6 @@ class Data(_BaseLayoutHierarchyType):
     def densitymap(self, val):
         self["densitymap"] = val
 
-    # funnelarea
-    # ----------
     @property
     def funnelarea(self):
         """
@@ -369,8 +313,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Funnelarea
           - A list or tuple of dicts of string/value properties that
             will be passed to the Funnelarea constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -382,8 +324,6 @@ class Data(_BaseLayoutHierarchyType):
     def funnelarea(self, val):
         self["funnelarea"] = val
 
-    # funnel
-    # ------
     @property
     def funnel(self):
         """
@@ -392,8 +332,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Funnel
           - A list or tuple of dicts of string/value properties that
             will be passed to the Funnel constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -405,8 +343,6 @@ class Data(_BaseLayoutHierarchyType):
     def funnel(self, val):
         self["funnel"] = val
 
-    # heatmap
-    # -------
     @property
     def heatmap(self):
         """
@@ -415,8 +351,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Heatmap
           - A list or tuple of dicts of string/value properties that
             will be passed to the Heatmap constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -428,8 +362,6 @@ class Data(_BaseLayoutHierarchyType):
     def heatmap(self, val):
         self["heatmap"] = val
 
-    # histogram2dcontour
-    # ------------------
     @property
     def histogram2dcontour(self):
         """
@@ -438,8 +370,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Histogram2dContour
           - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram2dContour constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -451,8 +381,6 @@ class Data(_BaseLayoutHierarchyType):
     def histogram2dcontour(self, val):
         self["histogram2dcontour"] = val
 
-    # histogram2d
-    # -----------
     @property
     def histogram2d(self):
         """
@@ -461,8 +389,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Histogram2d
           - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram2d constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -474,8 +400,6 @@ class Data(_BaseLayoutHierarchyType):
     def histogram2d(self, val):
         self["histogram2d"] = val
 
-    # histogram
-    # ---------
     @property
     def histogram(self):
         """
@@ -484,8 +408,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Histogram
           - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -497,8 +419,6 @@ class Data(_BaseLayoutHierarchyType):
     def histogram(self, val):
         self["histogram"] = val
 
-    # icicle
-    # ------
     @property
     def icicle(self):
         """
@@ -507,8 +427,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Icicle
           - A list or tuple of dicts of string/value properties that
             will be passed to the Icicle constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -520,8 +438,6 @@ class Data(_BaseLayoutHierarchyType):
     def icicle(self, val):
         self["icicle"] = val
 
-    # image
-    # -----
     @property
     def image(self):
         """
@@ -530,8 +446,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Image
           - A list or tuple of dicts of string/value properties that
             will be passed to the Image constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -543,8 +457,6 @@ class Data(_BaseLayoutHierarchyType):
     def image(self, val):
         self["image"] = val
 
-    # indicator
-    # ---------
     @property
     def indicator(self):
         """
@@ -553,8 +465,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Indicator
           - A list or tuple of dicts of string/value properties that
             will be passed to the Indicator constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -566,8 +476,6 @@ class Data(_BaseLayoutHierarchyType):
     def indicator(self, val):
         self["indicator"] = val
 
-    # isosurface
-    # ----------
     @property
     def isosurface(self):
         """
@@ -576,8 +484,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Isosurface
           - A list or tuple of dicts of string/value properties that
             will be passed to the Isosurface constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -589,8 +495,6 @@ class Data(_BaseLayoutHierarchyType):
     def isosurface(self, val):
         self["isosurface"] = val
 
-    # mesh3d
-    # ------
     @property
     def mesh3d(self):
         """
@@ -599,8 +503,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Mesh3d
           - A list or tuple of dicts of string/value properties that
             will be passed to the Mesh3d constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -612,8 +514,6 @@ class Data(_BaseLayoutHierarchyType):
     def mesh3d(self, val):
         self["mesh3d"] = val
 
-    # ohlc
-    # ----
     @property
     def ohlc(self):
         """
@@ -622,8 +522,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Ohlc
           - A list or tuple of dicts of string/value properties that
             will be passed to the Ohlc constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -635,8 +533,6 @@ class Data(_BaseLayoutHierarchyType):
     def ohlc(self, val):
         self["ohlc"] = val
 
-    # parcats
-    # -------
     @property
     def parcats(self):
         """
@@ -645,8 +541,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Parcats
           - A list or tuple of dicts of string/value properties that
             will be passed to the Parcats constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -658,8 +552,6 @@ class Data(_BaseLayoutHierarchyType):
     def parcats(self, val):
         self["parcats"] = val
 
-    # parcoords
-    # ---------
     @property
     def parcoords(self):
         """
@@ -668,8 +560,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Parcoords
           - A list or tuple of dicts of string/value properties that
             will be passed to the Parcoords constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -681,8 +571,6 @@ class Data(_BaseLayoutHierarchyType):
     def parcoords(self, val):
         self["parcoords"] = val
 
-    # pie
-    # ---
     @property
     def pie(self):
         """
@@ -691,8 +579,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Pie
           - A list or tuple of dicts of string/value properties that
             will be passed to the Pie constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -704,8 +590,6 @@ class Data(_BaseLayoutHierarchyType):
     def pie(self, val):
         self["pie"] = val
 
-    # sankey
-    # ------
     @property
     def sankey(self):
         """
@@ -714,8 +598,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Sankey
           - A list or tuple of dicts of string/value properties that
             will be passed to the Sankey constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -727,8 +609,6 @@ class Data(_BaseLayoutHierarchyType):
     def sankey(self, val):
         self["sankey"] = val
 
-    # scatter3d
-    # ---------
     @property
     def scatter3d(self):
         """
@@ -737,8 +617,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatter3d
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatter3d constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -750,8 +628,6 @@ class Data(_BaseLayoutHierarchyType):
     def scatter3d(self, val):
         self["scatter3d"] = val
 
-    # scattercarpet
-    # -------------
     @property
     def scattercarpet(self):
         """
@@ -760,8 +636,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattercarpet
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattercarpet constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -773,8 +647,6 @@ class Data(_BaseLayoutHierarchyType):
     def scattercarpet(self, val):
         self["scattercarpet"] = val
 
-    # scattergeo
-    # ----------
     @property
     def scattergeo(self):
         """
@@ -783,8 +655,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattergeo
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattergeo constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -796,8 +666,6 @@ class Data(_BaseLayoutHierarchyType):
     def scattergeo(self, val):
         self["scattergeo"] = val
 
-    # scattergl
-    # ---------
     @property
     def scattergl(self):
         """
@@ -806,8 +674,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattergl
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattergl constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -819,8 +685,6 @@ class Data(_BaseLayoutHierarchyType):
     def scattergl(self, val):
         self["scattergl"] = val
 
-    # scattermapbox
-    # -------------
     @property
     def scattermapbox(self):
         """
@@ -829,8 +693,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattermapbox
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattermapbox constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -842,8 +704,6 @@ class Data(_BaseLayoutHierarchyType):
     def scattermapbox(self, val):
         self["scattermapbox"] = val
 
-    # scattermap
-    # ----------
     @property
     def scattermap(self):
         """
@@ -852,8 +712,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattermap
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattermap constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -865,8 +723,6 @@ class Data(_BaseLayoutHierarchyType):
     def scattermap(self, val):
         self["scattermap"] = val
 
-    # scatterpolargl
-    # --------------
     @property
     def scatterpolargl(self):
         """
@@ -875,8 +731,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatterpolargl
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterpolargl constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -888,8 +742,6 @@ class Data(_BaseLayoutHierarchyType):
     def scatterpolargl(self, val):
         self["scatterpolargl"] = val
 
-    # scatterpolar
-    # ------------
     @property
     def scatterpolar(self):
         """
@@ -898,8 +750,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatterpolar
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterpolar constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -911,8 +761,6 @@ class Data(_BaseLayoutHierarchyType):
     def scatterpolar(self, val):
         self["scatterpolar"] = val
 
-    # scatter
-    # -------
     @property
     def scatter(self):
         """
@@ -921,8 +769,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatter
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatter constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -934,8 +780,6 @@ class Data(_BaseLayoutHierarchyType):
     def scatter(self, val):
         self["scatter"] = val
 
-    # scattersmith
-    # ------------
     @property
     def scattersmith(self):
         """
@@ -944,8 +788,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattersmith
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scattersmith constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -957,8 +799,6 @@ class Data(_BaseLayoutHierarchyType):
     def scattersmith(self, val):
         self["scattersmith"] = val
 
-    # scatterternary
-    # --------------
     @property
     def scatterternary(self):
         """
@@ -967,8 +807,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scatterternary
           - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterternary constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -980,8 +818,6 @@ class Data(_BaseLayoutHierarchyType):
     def scatterternary(self, val):
         self["scatterternary"] = val
 
-    # splom
-    # -----
     @property
     def splom(self):
         """
@@ -990,8 +826,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Splom
           - A list or tuple of dicts of string/value properties that
             will be passed to the Splom constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1003,8 +837,6 @@ class Data(_BaseLayoutHierarchyType):
     def splom(self, val):
         self["splom"] = val
 
-    # streamtube
-    # ----------
     @property
     def streamtube(self):
         """
@@ -1013,8 +845,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Streamtube
           - A list or tuple of dicts of string/value properties that
             will be passed to the Streamtube constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1026,8 +856,6 @@ class Data(_BaseLayoutHierarchyType):
     def streamtube(self, val):
         self["streamtube"] = val
 
-    # sunburst
-    # --------
     @property
     def sunburst(self):
         """
@@ -1036,8 +864,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Sunburst
           - A list or tuple of dicts of string/value properties that
             will be passed to the Sunburst constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1049,8 +875,6 @@ class Data(_BaseLayoutHierarchyType):
     def sunburst(self, val):
         self["sunburst"] = val
 
-    # surface
-    # -------
     @property
     def surface(self):
         """
@@ -1059,8 +883,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Surface
           - A list or tuple of dicts of string/value properties that
             will be passed to the Surface constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1072,8 +894,6 @@ class Data(_BaseLayoutHierarchyType):
     def surface(self, val):
         self["surface"] = val
 
-    # table
-    # -----
     @property
     def table(self):
         """
@@ -1082,8 +902,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Table
           - A list or tuple of dicts of string/value properties that
             will be passed to the Table constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1095,8 +913,6 @@ class Data(_BaseLayoutHierarchyType):
     def table(self, val):
         self["table"] = val
 
-    # treemap
-    # -------
     @property
     def treemap(self):
         """
@@ -1105,8 +921,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Treemap
           - A list or tuple of dicts of string/value properties that
             will be passed to the Treemap constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1118,8 +932,6 @@ class Data(_BaseLayoutHierarchyType):
     def treemap(self, val):
         self["treemap"] = val
 
-    # violin
-    # ------
     @property
     def violin(self):
         """
@@ -1128,8 +940,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Violin
           - A list or tuple of dicts of string/value properties that
             will be passed to the Violin constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1141,8 +951,6 @@ class Data(_BaseLayoutHierarchyType):
     def violin(self, val):
         self["violin"] = val
 
-    # volume
-    # ------
     @property
     def volume(self):
         """
@@ -1151,8 +959,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Volume
           - A list or tuple of dicts of string/value properties that
             will be passed to the Volume constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1164,8 +970,6 @@ class Data(_BaseLayoutHierarchyType):
     def volume(self, val):
         self["volume"] = val
 
-    # waterfall
-    # ---------
     @property
     def waterfall(self):
         """
@@ -1174,8 +978,6 @@ class Data(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.template.data.Waterfall
           - A list or tuple of dicts of string/value properties that
             will be passed to the Waterfall constructor
-
-            Supported dict properties:
 
         Returns
         -------
@@ -1187,8 +989,6 @@ class Data(_BaseLayoutHierarchyType):
     def waterfall(self, val):
         self["waterfall"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1560,14 +1360,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         Data
         """
-        super(Data, self).__init__("data")
-
+        super().__init__("data")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1582,214 +1379,57 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.template.Data`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("barpolar", None)
-        _v = barpolar if barpolar is not None else _v
-        if _v is not None:
-            self["barpolar"] = _v
-        _v = arg.pop("bar", None)
-        _v = bar if bar is not None else _v
-        if _v is not None:
-            self["bar"] = _v
-        _v = arg.pop("box", None)
-        _v = box if box is not None else _v
-        if _v is not None:
-            self["box"] = _v
-        _v = arg.pop("candlestick", None)
-        _v = candlestick if candlestick is not None else _v
-        if _v is not None:
-            self["candlestick"] = _v
-        _v = arg.pop("carpet", None)
-        _v = carpet if carpet is not None else _v
-        if _v is not None:
-            self["carpet"] = _v
-        _v = arg.pop("choroplethmapbox", None)
-        _v = choroplethmapbox if choroplethmapbox is not None else _v
-        if _v is not None:
-            self["choroplethmapbox"] = _v
-        _v = arg.pop("choroplethmap", None)
-        _v = choroplethmap if choroplethmap is not None else _v
-        if _v is not None:
-            self["choroplethmap"] = _v
-        _v = arg.pop("choropleth", None)
-        _v = choropleth if choropleth is not None else _v
-        if _v is not None:
-            self["choropleth"] = _v
-        _v = arg.pop("cone", None)
-        _v = cone if cone is not None else _v
-        if _v is not None:
-            self["cone"] = _v
-        _v = arg.pop("contourcarpet", None)
-        _v = contourcarpet if contourcarpet is not None else _v
-        if _v is not None:
-            self["contourcarpet"] = _v
-        _v = arg.pop("contour", None)
-        _v = contour if contour is not None else _v
-        if _v is not None:
-            self["contour"] = _v
-        _v = arg.pop("densitymapbox", None)
-        _v = densitymapbox if densitymapbox is not None else _v
-        if _v is not None:
-            self["densitymapbox"] = _v
-        _v = arg.pop("densitymap", None)
-        _v = densitymap if densitymap is not None else _v
-        if _v is not None:
-            self["densitymap"] = _v
-        _v = arg.pop("funnelarea", None)
-        _v = funnelarea if funnelarea is not None else _v
-        if _v is not None:
-            self["funnelarea"] = _v
-        _v = arg.pop("funnel", None)
-        _v = funnel if funnel is not None else _v
-        if _v is not None:
-            self["funnel"] = _v
-        _v = arg.pop("heatmap", None)
-        _v = heatmap if heatmap is not None else _v
-        if _v is not None:
-            self["heatmap"] = _v
-        _v = arg.pop("histogram2dcontour", None)
-        _v = histogram2dcontour if histogram2dcontour is not None else _v
-        if _v is not None:
-            self["histogram2dcontour"] = _v
-        _v = arg.pop("histogram2d", None)
-        _v = histogram2d if histogram2d is not None else _v
-        if _v is not None:
-            self["histogram2d"] = _v
-        _v = arg.pop("histogram", None)
-        _v = histogram if histogram is not None else _v
-        if _v is not None:
-            self["histogram"] = _v
-        _v = arg.pop("icicle", None)
-        _v = icicle if icicle is not None else _v
-        if _v is not None:
-            self["icicle"] = _v
-        _v = arg.pop("image", None)
-        _v = image if image is not None else _v
-        if _v is not None:
-            self["image"] = _v
-        _v = arg.pop("indicator", None)
-        _v = indicator if indicator is not None else _v
-        if _v is not None:
-            self["indicator"] = _v
-        _v = arg.pop("isosurface", None)
-        _v = isosurface if isosurface is not None else _v
-        if _v is not None:
-            self["isosurface"] = _v
-        _v = arg.pop("mesh3d", None)
-        _v = mesh3d if mesh3d is not None else _v
-        if _v is not None:
-            self["mesh3d"] = _v
-        _v = arg.pop("ohlc", None)
-        _v = ohlc if ohlc is not None else _v
-        if _v is not None:
-            self["ohlc"] = _v
-        _v = arg.pop("parcats", None)
-        _v = parcats if parcats is not None else _v
-        if _v is not None:
-            self["parcats"] = _v
-        _v = arg.pop("parcoords", None)
-        _v = parcoords if parcoords is not None else _v
-        if _v is not None:
-            self["parcoords"] = _v
-        _v = arg.pop("pie", None)
-        _v = pie if pie is not None else _v
-        if _v is not None:
-            self["pie"] = _v
-        _v = arg.pop("sankey", None)
-        _v = sankey if sankey is not None else _v
-        if _v is not None:
-            self["sankey"] = _v
-        _v = arg.pop("scatter3d", None)
-        _v = scatter3d if scatter3d is not None else _v
-        if _v is not None:
-            self["scatter3d"] = _v
-        _v = arg.pop("scattercarpet", None)
-        _v = scattercarpet if scattercarpet is not None else _v
-        if _v is not None:
-            self["scattercarpet"] = _v
-        _v = arg.pop("scattergeo", None)
-        _v = scattergeo if scattergeo is not None else _v
-        if _v is not None:
-            self["scattergeo"] = _v
-        _v = arg.pop("scattergl", None)
-        _v = scattergl if scattergl is not None else _v
-        if _v is not None:
-            self["scattergl"] = _v
-        _v = arg.pop("scattermapbox", None)
-        _v = scattermapbox if scattermapbox is not None else _v
-        if _v is not None:
-            self["scattermapbox"] = _v
-        _v = arg.pop("scattermap", None)
-        _v = scattermap if scattermap is not None else _v
-        if _v is not None:
-            self["scattermap"] = _v
-        _v = arg.pop("scatterpolargl", None)
-        _v = scatterpolargl if scatterpolargl is not None else _v
-        if _v is not None:
-            self["scatterpolargl"] = _v
-        _v = arg.pop("scatterpolar", None)
-        _v = scatterpolar if scatterpolar is not None else _v
-        if _v is not None:
-            self["scatterpolar"] = _v
-        _v = arg.pop("scatter", None)
-        _v = scatter if scatter is not None else _v
-        if _v is not None:
-            self["scatter"] = _v
-        _v = arg.pop("scattersmith", None)
-        _v = scattersmith if scattersmith is not None else _v
-        if _v is not None:
-            self["scattersmith"] = _v
-        _v = arg.pop("scatterternary", None)
-        _v = scatterternary if scatterternary is not None else _v
-        if _v is not None:
-            self["scatterternary"] = _v
-        _v = arg.pop("splom", None)
-        _v = splom if splom is not None else _v
-        if _v is not None:
-            self["splom"] = _v
-        _v = arg.pop("streamtube", None)
-        _v = streamtube if streamtube is not None else _v
-        if _v is not None:
-            self["streamtube"] = _v
-        _v = arg.pop("sunburst", None)
-        _v = sunburst if sunburst is not None else _v
-        if _v is not None:
-            self["sunburst"] = _v
-        _v = arg.pop("surface", None)
-        _v = surface if surface is not None else _v
-        if _v is not None:
-            self["surface"] = _v
-        _v = arg.pop("table", None)
-        _v = table if table is not None else _v
-        if _v is not None:
-            self["table"] = _v
-        _v = arg.pop("treemap", None)
-        _v = treemap if treemap is not None else _v
-        if _v is not None:
-            self["treemap"] = _v
-        _v = arg.pop("violin", None)
-        _v = violin if violin is not None else _v
-        if _v is not None:
-            self["violin"] = _v
-        _v = arg.pop("volume", None)
-        _v = volume if volume is not None else _v
-        if _v is not None:
-            self["volume"] = _v
-        _v = arg.pop("waterfall", None)
-        _v = waterfall if waterfall is not None else _v
-        if _v is not None:
-            self["waterfall"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("barpolar", arg, barpolar)
+        self._init_provided("bar", arg, bar)
+        self._init_provided("box", arg, box)
+        self._init_provided("candlestick", arg, candlestick)
+        self._init_provided("carpet", arg, carpet)
+        self._init_provided("choroplethmapbox", arg, choroplethmapbox)
+        self._init_provided("choroplethmap", arg, choroplethmap)
+        self._init_provided("choropleth", arg, choropleth)
+        self._init_provided("cone", arg, cone)
+        self._init_provided("contourcarpet", arg, contourcarpet)
+        self._init_provided("contour", arg, contour)
+        self._init_provided("densitymapbox", arg, densitymapbox)
+        self._init_provided("densitymap", arg, densitymap)
+        self._init_provided("funnelarea", arg, funnelarea)
+        self._init_provided("funnel", arg, funnel)
+        self._init_provided("heatmap", arg, heatmap)
+        self._init_provided("histogram2dcontour", arg, histogram2dcontour)
+        self._init_provided("histogram2d", arg, histogram2d)
+        self._init_provided("histogram", arg, histogram)
+        self._init_provided("icicle", arg, icicle)
+        self._init_provided("image", arg, image)
+        self._init_provided("indicator", arg, indicator)
+        self._init_provided("isosurface", arg, isosurface)
+        self._init_provided("mesh3d", arg, mesh3d)
+        self._init_provided("ohlc", arg, ohlc)
+        self._init_provided("parcats", arg, parcats)
+        self._init_provided("parcoords", arg, parcoords)
+        self._init_provided("pie", arg, pie)
+        self._init_provided("sankey", arg, sankey)
+        self._init_provided("scatter3d", arg, scatter3d)
+        self._init_provided("scattercarpet", arg, scattercarpet)
+        self._init_provided("scattergeo", arg, scattergeo)
+        self._init_provided("scattergl", arg, scattergl)
+        self._init_provided("scattermapbox", arg, scattermapbox)
+        self._init_provided("scattermap", arg, scattermap)
+        self._init_provided("scatterpolargl", arg, scatterpolargl)
+        self._init_provided("scatterpolar", arg, scatterpolar)
+        self._init_provided("scatter", arg, scatter)
+        self._init_provided("scattersmith", arg, scattersmith)
+        self._init_provided("scatterternary", arg, scatterternary)
+        self._init_provided("splom", arg, splom)
+        self._init_provided("streamtube", arg, streamtube)
+        self._init_provided("sunburst", arg, sunburst)
+        self._init_provided("surface", arg, surface)
+        self._init_provided("table", arg, table)
+        self._init_provided("treemap", arg, treemap)
+        self._init_provided("violin", arg, violin)
+        self._init_provided("volume", arg, volume)
+        self._init_provided("waterfall", arg, waterfall)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
