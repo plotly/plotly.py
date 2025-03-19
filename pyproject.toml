@@ -46,6 +46,9 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
+dev = [
+    "black==25.1.0"
+]
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -61,7 +64,7 @@ plotly = [
 
 [tool.black]
 line-length = 88
-target_version = ['py36', 'py37', 'py38', 'py39']
+target_version = ['py38', 'py39', 'py310', 'py311', 'py312']
 include = '\.pyi?$'
 exclude = '''
 

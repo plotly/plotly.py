@@ -1,11 +1,12 @@
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Step(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "layout.slider"
     _path_str = "layout.slider.step"
     _valid_props = {
@@ -19,8 +20,6 @@ class Step(_BaseLayoutHierarchyType):
         "visible",
     }
 
-    # args
-    # ----
     @property
     def args(self):
         """
@@ -44,8 +43,6 @@ class Step(_BaseLayoutHierarchyType):
     def args(self, val):
         self["args"] = val
 
-    # execute
-    # -------
     @property
     def execute(self):
         """
@@ -70,8 +67,6 @@ class Step(_BaseLayoutHierarchyType):
     def execute(self, val):
         self["execute"] = val
 
-    # label
-    # -----
     @property
     def label(self):
         """
@@ -91,8 +86,6 @@ class Step(_BaseLayoutHierarchyType):
     def label(self, val):
         self["label"] = val
 
-    # method
-    # ------
     @property
     def method(self):
         """
@@ -117,8 +110,6 @@ class Step(_BaseLayoutHierarchyType):
     def method(self, val):
         self["method"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -144,8 +135,6 @@ class Step(_BaseLayoutHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -172,8 +161,6 @@ class Step(_BaseLayoutHierarchyType):
     def templateitemname(self, val):
         self["templateitemname"] = val
 
-    # value
-    # -----
     @property
     def value(self):
         """
@@ -194,8 +181,6 @@ class Step(_BaseLayoutHierarchyType):
     def value(self, val):
         self["value"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -214,8 +199,6 @@ class Step(_BaseLayoutHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -270,14 +253,14 @@ class Step(_BaseLayoutHierarchyType):
     def __init__(
         self,
         arg=None,
-        args=None,
-        execute=None,
-        label=None,
-        method=None,
-        name=None,
-        templateitemname=None,
-        value=None,
-        visible=None,
+        args: list | None = None,
+        execute: bool | None = None,
+        label: str | None = None,
+        method: Any | None = None,
+        name: str | None = None,
+        templateitemname: str | None = None,
+        value: str | None = None,
+        visible: bool | None = None,
         **kwargs,
     ):
         """
@@ -340,14 +323,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         Step
         """
-        super(Step, self).__init__("steps")
-
+        super().__init__("steps")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -362,50 +342,16 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.slider.Step`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("args", None)
-        _v = args if args is not None else _v
-        if _v is not None:
-            self["args"] = _v
-        _v = arg.pop("execute", None)
-        _v = execute if execute is not None else _v
-        if _v is not None:
-            self["execute"] = _v
-        _v = arg.pop("label", None)
-        _v = label if label is not None else _v
-        if _v is not None:
-            self["label"] = _v
-        _v = arg.pop("method", None)
-        _v = method if method is not None else _v
-        if _v is not None:
-            self["method"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("args", arg, args)
+        self._init_provided("execute", arg, execute)
+        self._init_provided("label", arg, label)
+        self._init_provided("method", arg, method)
+        self._init_provided("name", arg, name)
+        self._init_provided("templateitemname", arg, templateitemname)
+        self._init_provided("value", arg, value)
+        self._init_provided("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -3,6 +3,7 @@ from _plotly_utils.basevalidators import DataArrayValidator
 import numpy as np
 import pandas as pd
 
+
 # Fixtures
 # --------
 @pytest.fixture()
