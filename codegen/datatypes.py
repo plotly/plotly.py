@@ -199,7 +199,9 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         elif subtype_node.is_mapped:
             prop_type = ""
         else:
-            prop_type = get_python_type(subtype_node.datatype, array_ok=subtype_node.is_array_ok)
+            prop_type = get_python_type(
+                subtype_node.datatype, array_ok=subtype_node.is_array_ok
+            )
 
         #### Get property description ####
         raw_description = subtype_node.description
