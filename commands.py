@@ -22,6 +22,7 @@ NPM_PATH = os.pathsep.join(
     ]
 )
 
+
 # Load plotly.js version from js/package.json
 def plotly_js_version():
     path = os.path.join(PROJECT_ROOT, "js", "package.json")

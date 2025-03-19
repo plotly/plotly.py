@@ -25,6 +25,7 @@ Modules:
 - exceptions: defines our custom exception classes
 
 """
+
 import sys
 from typing import TYPE_CHECKING
 from _plotly_utils.importers import relative_import

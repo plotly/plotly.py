@@ -5,6 +5,7 @@ tools
 Functions that USERS will possibly want access to.
 
 """
+
 import json
 import warnings
 
@@ -570,6 +571,7 @@ _DEFAULT_DECREASING_COLOR = "#FF4136"
 
 DIAG_CHOICES = ["scatter", "histogram", "box"]
 VALID_COLORMAP_TYPES = ["cat", "seq"]
+
 
 # Deprecations
 class FigureFactory(object):

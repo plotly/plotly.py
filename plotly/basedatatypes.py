@@ -86,6 +86,7 @@ def _str_to_dict_path_full(key_path_str):
             return key.replace("-", "_")
 
         key_path2b = list(map(_make_hyphen_key, key_path2))
+
         # Here we want to split up each non-empty string in the list at
         # underscores and recombine the strings using chomp_empty_strings so
         # that leading, trailing and multiple _ will be preserved
@@ -1611,6 +1612,7 @@ is of type {subplot_type}.""".format(
                 )
             ):
                 return self
+
             # in case the user specified they wanted an axis to refer to the
             # domain of that axis and not the data, append ' domain' to the
             # computed axis accordingly
