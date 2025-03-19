@@ -94,5 +94,8 @@ factory = "jupyter_packaging.npm_builder"
 build_cmd = "build:prod"
 npm = ["jlpm"]
 
-[project.entry-points."jupyterlab.mime_renderers"]
-"application/vnd.plotly.v1+json" = "plotly:plugin"
+[tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
+build_cmd = "build"
+npm = ["jlpm"]
+source_dir = "js"
+build_dir = "plotly/labextension"

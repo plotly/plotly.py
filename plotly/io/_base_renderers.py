@@ -85,6 +85,7 @@ class PlotlyRenderer(MimetypeRenderer):
         self.config = dict(config) if config else {}
 
     def to_mimebundle(self, fig_dict):
+        print("in PlotlyRenderer")
         config = _get_jconfig(self.config)
         if config:
             fig_dict["config"] = config
