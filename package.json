@@ -1,17 +1,18 @@
 {
-    "name": "plotly-jupyter-mime-renderer",
+    "name": "jupyterlab-plotly",
     "version": "0.1.0",
     "main": "js/mimerenderer.js",
     "scripts": {
         "build:widget": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=plotly/package_data/widgetbundle.js js/widget.ts",
         "build:mimerenderer": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=js/mimerenderer.js js/index.ts",
+        "build": "npm run build:widget && npm run build:mimerenderer",
         "watch": "npm run build -- --watch --sourcemap=inline",
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {
         "lodash-es": "^4.17.21",
         "plotly.js": "3.0.1",
-        "@lumino/widgets": "^1.16.0"
+        "@lumino/widgets": "~2.4.0"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.3.6",

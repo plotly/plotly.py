@@ -187,7 +187,7 @@ def _jupyter_labextension_paths():
     """
     return [{
         'src': 'labextension',
-        'dest': 'jupyterlab_plotly',
+        'dest': 'jupyterlab-plotly',
     }]
 
 # For the mime renderer extension
