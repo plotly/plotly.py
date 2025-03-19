@@ -5,6 +5,7 @@ from plotly.basewidget import BaseFigureWidget
 
 
 class FigureWidget(BaseFigureWidget):
+
     def __init__(
         self, data=None, layout=None, frames=None, skip_invalid: bool = False, **kwargs
     ):
