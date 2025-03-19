@@ -2,6 +2,7 @@
 Module to test plotly.utils with optional dependencies.
 
 """
+
 import datetime
 import math
 import decimal

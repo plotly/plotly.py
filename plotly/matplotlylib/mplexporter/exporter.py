@@ -4,6 +4,7 @@ Matplotlib Exporter
 This submodule contains tools for crawling a matplotlib figure and exporting
 relevant pieces to a renderer.
 """
+
 import warnings
 import io
 from . import utils
