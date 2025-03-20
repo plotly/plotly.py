@@ -186,18 +186,6 @@ def _jupyter_labextension_paths():
     to install the extension.
     """
     return [{
-        'src': 'labextension',
+        'src': 'labextension/static',
         'dest': 'jupyterlab-plotly',
     }]
-
-# For the mime renderer extension
-def _jupyter_mimetype_metadata():
-    """Metadata for the mimetype extension"""
-    return {
-        "name": "plotly",
-        "version": __version__,
-        "description": "A MIME renderer extension for Jupyter Lab",
-        "author": "Martha Cryan",
-        "main": "js/mimerenderer.js",
-        "license": "BSD-3-Clause"
-    }

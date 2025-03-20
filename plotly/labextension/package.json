@@ -1,10 +1,10 @@
 {
   "name": "jupyterlab-plotly",
   "version": "0.1.0",
-  "main": "js/mimerenderer.js",
+  "main": "lib/mimeExtension.js",
   "scripts": {
-    "build:widget": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=plotly/package_data/widgetbundle.js js/widget.ts",
-    "build:mimerenderer": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=js/mimerenderer.js js/index.ts",
+    "build:widget": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=../package_data/widgetbundle.js src/widget.ts",
+    "build:mimerenderer": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=lib/mimeExtension.js src/mimeExtension.ts",
     "build": "npm run build:widget && npm run build:mimerenderer",
     "watch": "npm run build -- --watch --sourcemap=inline",
     "typecheck": "tsc --noEmit"
@@ -21,11 +21,6 @@
     "typescript": "^5.6.2"
   },
   "jupyterlab": {
-    "mimeExtension": true,
-    "outputDir": "plotly/labextension",
-    "_build": {
-      "load": "static/remoteEntry.7b040a094074912f557c.js",
-      "mimeExtension": "./mimeExtension"
-    }
+    "mimeExtension": true
   }
 }
