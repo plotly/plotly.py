@@ -117,7 +117,7 @@ commands:
             source .venv/bin/activate
             python -m pytest -x test_init/test_lazy_imports.py
 
-  test_io_kaleido_v1:
+  test_io_kaleido_v0:
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -130,9 +130,9 @@ commands:
             source .venv/bin/activate
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
-            # Install Kaleido v1 instead of the default version
+            # Install Kaleido v0 instead of the v1 specified in requirements_optional.txt
             uv pip uninstall kaleido
-            uv pip install 'git+https://github.com/plotly/Kaleido.git@v1.0.0rc10#subdirectory=src/py'
+            uv pip install kaleido==0.2.1
       - run:
           name: List installed packages and python version
           command: |
@@ -140,7 +140,7 @@ commands:
             uv pip list
             python --version
       - run:
-          name: Test plotly.io image output with Kaleido v1
+          name: Test plotly.io image output with Kaleido v0
           command: |
             source .venv/bin/activate
             python -m pytest tests/test_optional/test_kaleido
@@ -195,7 +195,7 @@ jobs:
           pandas_version: <<parameters.pandas_version>>
           numpy_version: <<parameters.numpy_version>>
 
-  test_kaleido_v1:
+  test_kaleido_v0:
     parameters:
       python_version:
         default: "3.12"
@@ -204,7 +204,7 @@ jobs:
       name: docker-container
       python_version: <<parameters.python_version>>
     steps:  
-      - test_io_kaleido_v1
+      - test_io_kaleido_v0
 
   # Percy
   python_311_percy:
@@ -488,7 +488,7 @@ workflows:
           python_version: "3.9"
           pandas_version: "1.2.4"
           numpy_version: "1.26.4"
-      - test_kaleido_v1:
+      - test_kaleido_v0:
           matrix:
             parameters:
               python_version:

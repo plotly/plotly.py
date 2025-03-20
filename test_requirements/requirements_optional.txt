@@ -17,7 +17,8 @@ pyshp
 matplotlib
 scikit-image
 psutil
-kaleido
+# kaleido>=1.0.0  # Uncomment and delete line below once Kaleido v1 is released
+git+https://github.com/plotly/Kaleido.git@v1.0.0rc10#subdirectory=src/py
 orjson
 polars[timezone]
 pyarrow
