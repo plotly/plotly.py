@@ -61,7 +61,7 @@ tags
 doc/check-or-enforce-order.py
 plotly/package_data/widgetbundle.js
 plotly/labextension/static
-js/mimerenderer.js
+plotly/labextension/lib
 
 tests/percy/*.html
 tests/percy/pandas2/*.html
