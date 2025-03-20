@@ -566,13 +566,13 @@ jobs:
             # For the API doc, we need to use the local version of plotly
             # since we are tweaking the source because of
             # graph_objs/graph_objects
+            pip uninstall -y plotly
+            cd ../packages/python/plotly
+            pip install -e .
+            cd ../../../doc
+            cd apidoc
+            make html
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              pip uninstall -y plotly
-              cd ../packages/python/plotly
-              pip install -e .
-              cd ../../../doc
-              cd apidoc
-              make html
               cd _build/html
               touch .nojekyll
               git init
@@ -585,10 +585,16 @@ jobs:
               rm -rf .git
               cd ../..
             fi
+            tar -czf api_docs_html.tgz _build/html
 
       - store_artifacts:
           path: doc/build
           destination: doc/build
+
+      - store_artifacts:
+          path: doc/apidoc/api_docs_html.tgz
+          destination: doc/apidoc/api_docs_html.tgz
+
 workflows:
   code_formatting:
     jobs:
