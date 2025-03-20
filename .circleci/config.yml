@@ -61,9 +61,9 @@ commands:
             cd js
             npm ci
             npm run build
-      
+
       - when:
-          condition: 
+          condition:
             not:
               equal:
                 - <<parameters.pandas_version>>
@@ -315,6 +315,8 @@ jobs:
           name: Install dependencies
           command: |
             cd doc
+            sudo apt-get update
+            sudo apt-get install rename
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
