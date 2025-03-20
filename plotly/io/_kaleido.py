@@ -156,6 +156,15 @@ which can be installed using pip:
     # Request image bytes
     if kaleido_major > 0:
         # Kaleido v1
+        # Check if trying to export to EPS format, which is not supported in Kaleido v1
+        if format == 'eps':
+            raise ValueError(
+                """
+EPS export is not supported with Kaleido v1.
+Please downgrade to Kaleido v0 to use EPS export:
+    $ pip install kaleido==0.2.1
+"""
+            )
         img_bytes = kaleido.calc_fig_sync(
             fig_dict,
             path=None,
