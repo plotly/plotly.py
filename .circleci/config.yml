@@ -273,8 +273,9 @@ jobs:
       - run:
           name: initial NPM Build
           command: |
-            python -m venv venv
-            . venv/bin/activate
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
             uv pip install jupyter
             cd plotly/labextension
             npm ci
@@ -284,8 +285,8 @@ jobs:
       - run:
           name: PyPI Build
           command: |
-            . venv/bin/activate
-            pip install build
+            source .venv/bin/activate
+            uv pip install build
             python -m build --sdist --wheel -o dist
             cp -R dist output
             git status
