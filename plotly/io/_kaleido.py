@@ -157,7 +157,7 @@ which can be installed using pip:
     if kaleido_major > 0:
         # Kaleido v1
         # Check if trying to export to EPS format, which is not supported in Kaleido v1
-        if format == 'eps':
+        if format == "eps":
             raise ValueError(
                 """
 EPS export is not supported with Kaleido v1.
@@ -288,9 +288,7 @@ For example:
 
     >>> import plotly.io as pio
     >>> pio.write_image(fig, file_path, format='png')
-""".format(
-                    file=file
-                )
+""".format(file=file)
             )
 
     # Request image
@@ -319,9 +317,7 @@ For example:
         raise ValueError(
             """
 The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
-""".format(
-                file=file
-            )
+""".format(file=file)
         )
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.
