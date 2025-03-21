@@ -1,29 +1,41 @@
 import os
 import json
 from pathlib import Path
+import importlib.metadata as importlib_metadata
+from packaging.version import Version
+import warnings
+
 import plotly
 from plotly.io._utils import validate_coerce_fig_to_dict
 
 try:
-    from kaleido.scopes.plotly import PlotlyScope
+    import kaleido
 
-    scope = PlotlyScope()
+    kaleido_available = True
+    kaleido_major = Version(importlib_metadata.version("kaleido")).major
 
-    # Compute absolute path to the 'plotly/package_data/' directory
-    root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
-    package_dir = os.path.join(root_dir, "package_data")
-    scope.plotlyjs = os.path.join(package_dir, "plotly.min.js")
-    if scope.mathjax is None:
-        scope.mathjax = (
-            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
-        )
-except ImportError:
+    if kaleido_major < 1:
+        # Kaleido v0
+        from kaleido.scopes.plotly import PlotlyScope
+
+        scope = PlotlyScope()
+        # Compute absolute path to the 'plotly/package_data/' directory
+        root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
+        package_dir = os.path.join(root_dir, "package_data")
+        scope.plotlyjs = os.path.join(package_dir, "plotly.min.js")
+        if scope.mathjax is None:
+            scope.mathjax = (
+                "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+            )
+except ImportError as e:
+    kaleido_available = False
+    kaleido_major = -1
     PlotlyScope = None
     scope = None
 
 
 def to_image(
-    fig, format=None, width=None, height=None, scale=None, validate=True, engine="auto"
+    fig, format=None, width=None, height=None, scale=None, validate=True, engine=None
 ):
     """
     Convert a figure to a static image bytes string
@@ -35,34 +47,28 @@ def to_image(
 
     format: str or None
         The desired image format. One of
-          - 'png'
-          - 'jpg' or 'jpeg'
-          - 'webp'
-          - 'svg'
-          - 'pdf'
-          - 'eps' (Requires the poppler library to be installed and on the PATH)
+            - 'png'
+            - 'jpg' or 'jpeg'
+            - 'webp'
+            - 'svg'
+            - 'pdf'
+            - 'eps' (Requires the poppler library to be installed and on the PATH)
 
-        If not specified, will default to:
-             - `plotly.io.kaleido.scope.default_format` if engine is "kaleido"
-             - `plotly.io.orca.config.default_format` if engine is "orca"
+        If not specified, will default to `plotly.io.kaleido.scope.default_format`
 
     width: int or None
         The width of the exported image in layout pixels. If the `scale`
         property is 1.0, this will also be the width of the exported image
         in physical pixels.
 
-        If not specified, will default to:
-             - `plotly.io.kaleido.scope.default_width` if engine is "kaleido"
-             - `plotly.io.orca.config.default_width` if engine is "orca"
+        If not specified, will default to `plotly.io.kaleido.scope.default_width`
 
     height: int or None
         The height of the exported image in layout pixels. If the `scale`
         property is 1.0, this will also be the height of the exported image
         in physical pixels.
 
-        If not specified, will default to:
-             - `plotly.io.kaleido.scope.default_height` if engine is "kaleido"
-             - `plotly.io.orca.config.default_height` if engine is "orca"
+        If not specified, will default to `plotly.io.kaleido.scope.default_height`
 
     scale: int or float or None
         The scale factor to use when exporting the figure. A scale factor
@@ -70,30 +76,32 @@ def to_image(
         to the figure's layout pixel dimensions. Whereas as scale factor of
         less than 1.0 will decrease the image resolution.
 
-        If not specified, will default to:
-             - `plotly.io.kaleido.scope.default_scale` if engine is "kaleido"
-             - `plotly.io.orca.config.default_scale` if engine is "orca"
-
+        If not specified, will default to `plotly.io.kaleido.scope.default_scale`
 
     validate: bool
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine: str
-        Image export engine to use:
-         - "kaleido": Use Kaleido for image export
-         - "orca": Use Orca for image export
-         - "auto" (default): Use Kaleido if installed, otherwise use orca
+    engine (deprecated): str
+        No longer used. Kaleido is the only supported engine.
 
     Returns
     -------
     bytes
         The image data
     """
+
     # Handle engine
     # -------------
+    if engine is not None:
+        warnings.warn(
+            "The 'engine' parameter is deprecated and will be removed in a future version.",
+            DeprecationWarning,
+        )
+        engine = "auto"
+
     if engine == "auto":
-        if scope is not None:
+        if kaleido_available:
             # Default to kaleido if available
             engine = "kaleido"
         else:
@@ -109,6 +117,11 @@ def to_image(
                 engine = "kaleido"
 
     if engine == "orca":
+        warnings.warn(
+            "Support for the 'orca' engine is deprecated and will be removed in a future version. "
+            "Please use the 'kaleido' engine instead.",
+            DeprecationWarning,
+        )
         # Fall back to legacy orca image export path
         from ._orca import to_image as to_image_orca
 
@@ -128,7 +141,7 @@ def to_image(
         )
 
     # Raise informative error message if Kaleido is not installed
-    if scope is None:
+    if not kaleido_available:
         raise ValueError(
             """
 Image export using the "kaleido" engine requires the kaleido package,
@@ -137,12 +150,41 @@ which can be installed using pip:
 """
         )
 
-    # Validate figure
-    # ---------------
+    # Convert figure to dict (and validate if requested)
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
-    img_bytes = scope.transform(
-        fig_dict, format=format, width=width, height=height, scale=scale
-    )
+
+    # Request image bytes
+    if kaleido_major > 0:
+        # Kaleido v1
+        # Check if trying to export to EPS format, which is not supported in Kaleido v1
+        if format == "eps":
+            raise ValueError(
+                """
+EPS export is not supported with Kaleido v1.
+Please downgrade to Kaleido v0 to use EPS export:
+    $ pip install kaleido==0.2.1
+"""
+            )
+        img_bytes = kaleido.calc_fig_sync(
+            fig_dict,
+            path=None,
+            opts=dict(
+                format=format,
+                width=width,
+                height=height,
+                scale=scale,
+            ),
+        )
+    else:
+        # Kaleido v0
+        warnings.warn(
+            "Support for kaleido v0 is deprecated and will be removed in a future version. "
+            "Please upgrade to kaleido v1 by running `pip install kaleido>=1.0.0`.",
+            DeprecationWarning,
+        )
+        img_bytes = scope.transform(
+            fig_dict, format=format, width=width, height=height, scale=scale
+        )
 
     return img_bytes
 
@@ -190,18 +232,14 @@ def write_image(
         property is 1.0, this will also be the width of the exported image
         in physical pixels.
 
-        If not specified, will default to:
-            - `plotly.io.kaleido.scope.default_width` if engine is "kaleido"
-            - `plotly.io.orca.config.default_width` if engine is "orca"
+        If not specified, will default to`plotly.io.kaleido.scope.default_width`
 
     height: int or None
         The height of the exported image in layout pixels. If the `scale`
         property is 1.0, this will also be the height of the exported image
         in physical pixels.
 
-        If not specified, will default to:
-            - `plotly.io.kaleido.scope.default_height` if engine is "kaleido"
-            - `plotly.io.orca.config.default_height` if engine is "orca"
+        If not specified, will default to `plotly.io.kaleido.scope.default_height`
 
     scale: int or float or None
         The scale factor to use when exporting the figure. A scale factor
@@ -209,19 +247,14 @@ def write_image(
         to the figure's layout pixel dimensions. Whereas as scale factor of
         less than 1.0 will decrease the image resolution.
 
-        If not specified, will default to:
-            - `plotly.io.kaleido.scope.default_scale` if engine is "kaleido"
-            - `plotly.io.orca.config.default_scale` if engine is "orca"
+        If not specified, will default to `plotly.io.kaleido.scope.default_scale`
 
     validate: bool
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine: str
-        Image export engine to use:
-         - "kaleido": Use Kaleido for image export
-         - "orca": Use Orca for image export
-         - "auto" (default): Use Kaleido if installed, otherwise use orca
+    engine (deprecated): str
+        No longer used. Kaleido is the only supported engine.
 
     Returns
     -------
@@ -255,9 +288,7 @@ For example:
 
     >>> import plotly.io as pio
     >>> pio.write_image(fig, file_path, format='png')
-""".format(
-                    file=file
-                )
+""".format(file=file)
             )
 
     # Request image
@@ -286,9 +317,7 @@ For example:
         raise ValueError(
             """
 The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
-""".format(
-                file=file
-            )
+""".format(file=file)
         )
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.
@@ -323,7 +352,7 @@ def full_figure_for_development(fig, warn=True, as_dict=False):
     """
 
     # Raise informative error message if Kaleido is not installed
-    if scope is None:
+    if not kaleido_available:
         raise ValueError(
             """
 Full figure generation requires the kaleido package,
@@ -341,7 +370,22 @@ which can be installed using pip:
             "To suppress this warning, set warn=False"
         )
 
-    fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
+    if kaleido_major > 0:
+        # Kaleido v1
+        bytes = kaleido.calc_fig_sync(
+            fig,
+            opts=dict(format="json"),
+        )
+        fig = json.loads(bytes.decode("utf-8"))
+    else:
+        # Kaleido v0
+        warnings.warn(
+            "Support for kaleido v0 is deprecated and will be removed in a future version. "
+            "Please upgrade to kaleido v1 by running `pip install kaleido>=1.0.0`.",
+            DeprecationWarning,
+        )
+        fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
+
     if as_dict:
         return fig
     else:

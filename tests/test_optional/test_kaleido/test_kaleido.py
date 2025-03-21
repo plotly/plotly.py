@@ -1,66 +1,31 @@
-import plotly.io as pio
-import plotly.io.kaleido
-from contextlib import contextmanager
 from io import BytesIO
 from pathlib import Path
-from unittest.mock import Mock
+import tempfile
 
-fig = {"layout": {"title": {"text": "figure title"}}}
+from pdfrw import PdfReader
+from PIL import Image
+import plotly.io as pio
 
-
-def make_writeable_mocks():
-    """Produce some mocks which we will use for testing the `write_image()` function.
-
-    These mocks should be passed as the `file=` argument to `write_image()`.
-
-    The tests should verify that the method specified in the `active_write_function`
-    attribute is called once, and that scope.transform is called with the `format=`
-    argument specified by the `.expected_format` attribute.
-
-    In total we provide two mocks: one for a writable file descriptor, and other for a
-    pathlib.Path object.
-    """
-
-    # Part 1: A mock for a file descriptor
-    # ------------------------------------
-    mock_file_descriptor = Mock()
-
-    # A file descriptor has no write_bytes method, unlike a pathlib Path.
-    del mock_file_descriptor.write_bytes
-
-    # The expected write method for a file descriptor is .write
-    mock_file_descriptor.active_write_function = mock_file_descriptor.write
-
-    # Since there is no filename, there should be no format detected.
-    mock_file_descriptor.expected_format = None
-
-    # Part 2: A mock for a pathlib path
-    # ---------------------------------
-    mock_pathlib_path = Mock(spec=Path)
-
-    # A pathlib Path object has no write method, unlike a file descriptor.
-    del mock_pathlib_path.write
-
-    # The expected write method for a pathlib Path is .write_bytes
-    mock_pathlib_path.active_write_function = mock_pathlib_path.write_bytes
-
-    # Mock a path with PNG suffix
-    mock_pathlib_path.suffix = ".png"
-    mock_pathlib_path.expected_format = "png"
-
-    return mock_file_descriptor, mock_pathlib_path
+fig = {"data": [], "layout": {"title": {"text": "figure title"}}}
 
 
-@contextmanager
-def mocked_scope():
-    # Code to acquire resource, e.g.:
-    scope_mock = Mock()
-    original_scope = pio._kaleido.scope
-    pio._kaleido.scope = scope_mock
-    try:
-        yield scope_mock
-    finally:
-        pio._kaleido.scope = original_scope
+def check_image(path_or_buffer, size=(700, 500), format="PNG"):
+    if format == "PDF":
+        img = PdfReader(path_or_buffer)
+        # TODO: There is a conversion factor needed here
+        # In Kaleido v0 the conversion factor is 0.75
+        factor = 0.75
+        expected_size = tuple(int(s * factor) for s in size)
+        actual_size = tuple(int(s) for s in img.pages[0].MediaBox[2:])
+        assert actual_size == expected_size
+    else:
+        if isinstance(path_or_buffer, (str, Path)):
+            with open(path_or_buffer, "rb") as f:
+                img = Image.open(f)
+        else:
+            img = Image.open(path_or_buffer)
+        assert img.size == size
+        assert img.format == format
 
 
 def test_kaleido_engine_to_image_returns_bytes():
@@ -75,80 +40,66 @@ def test_kaleido_fulljson():
 
 
 def test_kaleido_engine_to_image():
-    with mocked_scope() as scope:
-        pio.to_image(fig, engine="kaleido", validate=False)
+    bytes = pio.to_image(fig, engine="kaleido", validate=False)
 
-    scope.transform.assert_called_with(
-        fig, format=None, width=None, height=None, scale=None
-    )
+    # Check that image dimensions match default dimensions (700x500)
+    # and format is default format (png)
+    check_image(BytesIO(bytes))
 
 
-def test_kaleido_engine_write_image():
-    for writeable_mock in make_writeable_mocks():
-        with mocked_scope() as scope:
-            pio.write_image(fig, writeable_mock, engine="kaleido", validate=False)
+def test_kaleido_engine_write_image(tmp_path):
+    path_str = tempfile.mkstemp(suffix=".png", dir=tmp_path)[1]
+    path_path = Path(tempfile.mkstemp(suffix=".png", dir=tmp_path)[1])
 
-        scope.transform.assert_called_with(
-            fig,
-            format=writeable_mock.expected_format,
-            width=None,
-            height=None,
-            scale=None,
-        )
-
-        assert writeable_mock.active_write_function.call_count == 1
+    for out_path in [path_str, path_path]:
+        pio.write_image(fig, out_path, engine="kaleido", validate=False)
+        check_image(out_path)
 
 
 def test_kaleido_engine_to_image_kwargs():
-    with mocked_scope() as scope:
-        pio.to_image(
+    bytes = pio.to_image(
+        fig,
+        format="pdf",
+        width=700,
+        height=600,
+        scale=2,
+        engine="kaleido",
+        validate=False,
+    )
+    check_image(BytesIO(bytes), size=(700 * 2, 600 * 2), format="PDF")
+
+
+def test_kaleido_engine_write_image_kwargs(tmp_path):
+    path_str = tempfile.mkstemp(suffix=".png", dir=tmp_path)[1]
+    path_path = Path(tempfile.mkstemp(suffix=".png", dir=tmp_path)[1])
+
+    for out_path in [path_str, path_path]:
+        pio.write_image(
             fig,
-            format="pdf",
+            out_path,
+            format="jpg",
             width=700,
             height=600,
             scale=2,
             engine="kaleido",
             validate=False,
         )
-
-    scope.transform.assert_called_with(
-        fig, format="pdf", width=700, height=600, scale=2
-    )
-
-
-def test_kaleido_engine_write_image_kwargs():
-    for writeable_mock in make_writeable_mocks():
-        with mocked_scope() as scope:
-            pio.write_image(
-                fig,
-                writeable_mock,
-                format="jpg",
-                width=700,
-                height=600,
-                scale=2,
-                engine="kaleido",
-                validate=False,
-            )
-
-        scope.transform.assert_called_with(
-            fig, format="jpg", width=700, height=600, scale=2
-        )
-
-        assert writeable_mock.active_write_function.call_count == 1
+        check_image(out_path, size=(700 * 2, 600 * 2), format="JPEG")
 
 
 def test_image_renderer():
-    with mocked_scope() as scope:
-        pio.show(fig, renderer="svg", engine="kaleido", validate=False)
+    # TODO: How to replicate this test using kaleido v1?
+    # with mocked_scope() as scope:
+    pio.show(fig, renderer="svg", engine="kaleido", validate=False)
 
     renderer = pio.renderers["svg"]
-    scope.transform.assert_called_with(
-        fig,
-        format="svg",
-        width=None,
-        height=None,
-        scale=renderer.scale,
-    )
+    # scope.transform.assert_called_with(
+    #     fig,
+    #     format="svg",
+    #     width=None,
+    #     height=None,
+    #     scale=renderer.scale,
+    # )
 
 
 def test_bytesio():
