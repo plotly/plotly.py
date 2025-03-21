@@ -9,7 +9,7 @@ from subprocess import check_call
 from distutils import log
 
 project_root = os.path.dirname(os.path.abspath(__file__))
-node_root = os.path.join(project_root, "js")
+node_root = os.path.join(project_root, "plotly", "labextension")
 is_repo = os.path.exists(os.path.join(project_root, ".git"))
 node_modules = os.path.join(node_root, "node_modules")
 targets = [
@@ -23,9 +23,9 @@ npm_path = os.pathsep.join(
     ]
 )
 
-# Load plotly.js version from js/package.json
+# Load plotly.js version from plotly/labextension/package.json
 def plotly_js_version():
-    path = os.path.join(project_root, "js", "package.json")
+    path = os.path.join(project_root, "plotly", "labextension", "package.json")
     with open(path, "rt") as f:
         package_json = json.load(f)
         version = package_json["dependencies"]["plotly.js"]
