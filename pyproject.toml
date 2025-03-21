@@ -58,6 +58,7 @@ plotly = [
     "package_data/templates/*",
     "package_data/datasets/*",
     "labextension/static/*",
+    "labextension/static/static/*",
 ]
 
 [tool.black]
