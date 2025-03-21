@@ -50,7 +50,7 @@ def display_jupyter_version_warnings():
         return
     elif "jupyter-notebook" in parent_process:
         jupyter_notebook = optional_imports.get_module("notebook")
-        if jupyter_notebook is not None jupyter_notebook.__version__ < "7":
+        if jupyter_notebook is not None and jupyter_notebook.__version__ < "7":
             # Add warning about upgrading notebook
             warnings.warn(
                 f"Plotly version >= 6 requires Jupyter Notebook >= 7 but you have {jupyter_notebook.__version__} installed.\n To upgrade Jupyter Notebook, please run `pip install notebook --upgrade`."
