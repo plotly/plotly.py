@@ -142,6 +142,11 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         # views of this widget
         self._view_count = 0
 
+        # Initialize widget layout and data for third-party widget integration
+        # --------------------------------------------------------------------
+        self._widget_layout = deepcopy(self._layout_obj._props)
+        self._widget_data = deepcopy(self._data)
+
     def show(self, *args, **kwargs):
         return self
 
