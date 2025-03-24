@@ -97,9 +97,10 @@ def to_image(
     # -------------
     if engine is not None:
         warnings.warn(
-            f"DeprecationWarning: The 'engine' argument is deprecated. Kaleido will be the only supported engine after {ENGINE_SUPPORT_TIMELINE}.",
+            f"The 'engine' argument is deprecated. Kaleido will be the only supported engine after {ENGINE_SUPPORT_TIMELINE}.",
             DeprecationWarning,
         )
+    else:
         engine = "auto"
 
     if engine == "auto":
@@ -180,7 +181,8 @@ Please downgrade to Kaleido v0 to use EPS export:
     else:
         # Kaleido v0
         warnings.warn(
-            f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade kaleido`).",
+            f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. "
+            + "Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade kaleido`).",
             DeprecationWarning,
         )
         img_bytes = scope.transform(
@@ -385,7 +387,8 @@ which can be installed using pip:
     else:
         # Kaleido v0
         warnings.warn(
-            f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade kaleido`).",
+            f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. "
+            + "Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade kaleido`).",
             DeprecationWarning,
         )
         fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
