@@ -8,6 +8,8 @@ import warnings
 import plotly
 from plotly.io._utils import validate_coerce_fig_to_dict
 
+ENGINE_SUPPORT_TIMELINE = "September 2025"
+
 try:
     import kaleido
 
@@ -95,7 +97,7 @@ def to_image(
     # -------------
     if engine is not None:
         warnings.warn(
-            "The 'engine' parameter is deprecated and will be removed in a future version.",
+            f"DeprecationWarning: The 'engine' argument is deprecated. Kaleido will be the only supported engine after {ENGINE_SUPPORT_TIMELINE}.",
             DeprecationWarning,
         )
         engine = "auto"
@@ -118,8 +120,8 @@ def to_image(
 
     if engine == "orca":
         warnings.warn(
-            "Support for the 'orca' engine is deprecated and will be removed in a future version. "
-            "Please use the 'kaleido' engine instead.",
+            f"Support for the orca engine is deprecated and  will be removed after {ENGINE_SUPPORT_TIMELINE}. "
+            + "Please install Kaleido (`pip install kaleido`) to use the Kaleido engine.",
             DeprecationWarning,
         )
         # Fall back to legacy orca image export path
@@ -178,8 +180,7 @@ Please downgrade to Kaleido v0 to use EPS export:
     else:
         # Kaleido v0
         warnings.warn(
-            "Support for kaleido v0 is deprecated and will be removed in a future version. "
-            "Please upgrade to kaleido v1 by running `pip install kaleido>=1.0.0`.",
+            f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade kaleido`).",
             DeprecationWarning,
         )
         img_bytes = scope.transform(
@@ -288,7 +289,9 @@ For example:
 
     >>> import plotly.io as pio
     >>> pio.write_image(fig, file_path, format='png')
-""".format(file=file)
+""".format(
+                    file=file
+                )
             )
 
     # Request image
@@ -317,7 +320,9 @@ For example:
         raise ValueError(
             """
 The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
-""".format(file=file)
+""".format(
+                file=file
+            )
         )
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.
@@ -380,8 +385,7 @@ which can be installed using pip:
     else:
         # Kaleido v0
         warnings.warn(
-            "Support for kaleido v0 is deprecated and will be removed in a future version. "
-            "Please upgrade to kaleido v1 by running `pip install kaleido>=1.0.0`.",
+            f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade kaleido`).",
             DeprecationWarning,
         )
         fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
