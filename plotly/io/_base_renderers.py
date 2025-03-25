@@ -254,6 +254,7 @@ class HtmlRenderer(MimetypeRenderer):
         auto_play=False,
         post_script=None,
         animation_opts=None,
+        include_plotlyjs=True,
     ):
 
         self.config = dict(config) if config else {}
@@ -263,6 +264,7 @@ class HtmlRenderer(MimetypeRenderer):
         self.full_html = full_html
         self.animation_opts = animation_opts
         self.post_script = post_script
+        self.include_plotlyjs = 'cdn' if self.connected else include_plotlyjs
 
     def activate(self):
         if self.global_init:
@@ -307,12 +309,7 @@ class HtmlRenderer(MimetypeRenderer):
 
         from plotly.io import to_html
 
-        if self.connected:
-            include_plotlyjs = "cdn"
-            include_mathjax = "cdn"
-        else:
-            include_plotlyjs = True
-            include_mathjax = "cdn"
+        include_mathjax = "cdn"
 
         # build post script
         post_script = [
@@ -352,7 +349,7 @@ if (outputEl) {{
             fig_dict,
             config=self.config,
             auto_play=self.auto_play,
-            include_plotlyjs=include_plotlyjs,
+            include_plotlyjs=self.include_plotlyjs,
             include_mathjax=include_mathjax,
             post_script=post_script,
             full_html=self.full_html,
@@ -385,6 +382,7 @@ class NotebookRenderer(HtmlRenderer):
         auto_play=False,
         post_script=None,
         animation_opts=None,
+        include_plotlyjs=False,
     ):
         super(NotebookRenderer, self).__init__(
             connected=connected,
@@ -394,6 +392,7 @@ class NotebookRenderer(HtmlRenderer):
             auto_play=auto_play,
             post_script=post_script,
             animation_opts=animation_opts,
+            include_plotlyjs=include_plotlyjs,
         )
 
 
@@ -421,6 +420,7 @@ class KaggleRenderer(HtmlRenderer):
             auto_play=auto_play,
             post_script=post_script,
             animation_opts=animation_opts,
+            include_plotlyjs=False,
         )
 
 
@@ -448,6 +448,7 @@ class AzureRenderer(HtmlRenderer):
             auto_play=auto_play,
             post_script=post_script,
             animation_opts=animation_opts,
+            include_plotlyjs=False,
         )
 
 
