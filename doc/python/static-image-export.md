@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.11.10
   plotly:
     description: Plotly allows you to save static images of your plots. Save the image
       to your local computer, or embed it inside your Jupyter notebooks as a static
@@ -35,150 +35,128 @@ jupyter:
     thumbnail: thumbnail/static-image-export.png
 ---
 
-### Interactive vs Static Export
-
-Plotly figures are interactive when viewed in a web browser: you can hover over data points, pan and zoom axes, and show and hide traces by clicking or double-clicking on the legend. You can export figures either to static image file formats like PNG, JPEG, SVG or PDF or you can [export them to HTML files which can be opened in a browser and remain interactive](/python/interactive-html-export/). This page explains how to do the former.
-
+This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](/python/interactive-html-export/)
 
 <!-- #region -->
-#### Install Dependencies
+## Install Dependencies
 
-Static image generation requires either [Kaleido](https://github.com/plotly/Kaleido) (recommended, supported as of `plotly` 4.9) or [orca](https://github.com/plotly/orca) (legacy as of `plotly` 4.9). The `kaleido` package can be installed using pip...
+### Kaleido
+
+Static image generation requires [Kaleido](https://github.com/plotly/Kaleido).
+Install Kaleido with pip:
 ```
 $ pip install -U kaleido
 ```
-
-or conda.
+or with conda:
 ```
 $ conda install -c conda-forge python-kaleido
 ```
 
-While Kaleido is now the recommended approach, image export can also be supported by the legacy [orca](https://github.com/plotly/orca) command line utility. See the [Orca Management](/python/orca-management/) section for instructions on installing, configuring, and troubleshooting orca.
+It's also possible to generate static images using [orca](https://github.com/plotly/orca), though support for orca will be removed after September 2025. See the [Orca Management](/python/orca-management/) page for more details.
 
+### Chrome
+
+Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome. Kaleido v1 and later uses Chrome that's available on the machine on which it's running. If you need to install Chrome for static image generation, Plotly provides a CLI.
+
+Run `plotly_get_chrome` to install Chrome. 
+
+You can also install Chrome from within Python using `plotly.io.install_chrome()`
+
+```python
+import plotly.io as pio
+
+pio.install_chrome()
+```
 <!-- #endregion -->
 
-### Create a Figure
+## Write Image to a File
 
-Now let's create a simple scatter plot with 100 random points of varying color and size.
+Plotly figures have a `write_image` method to write a figure to a file. `write_image` supports PNG, JPEG, WebP, SVG, and PDF. 
 
-```python
-import plotly.graph_objects as go
-import numpy as np
-np.random.seed(1)
-
-N = 100
-x = np.random.rand(N)
-y = np.random.rand(N)
-colors = np.random.rand(N)
-sz = np.random.rand(N) * 30
-
-fig = go.Figure()
-fig.add_trace(go.Scatter(
-    x=x,
-    y=y,
-    mode="markers",
-    marker=go.scatter.Marker(
-        size=sz,
-        color=colors,
-        opacity=0.6,
-        colorscale="Viridis"
-    )
-))
-
-fig.show()
-```
-
-### Write Image File
-
-The `plotly.io.write_image` function is used to write an image to a file or file-like python object.  You can also use the `.write_image` graph object figure method.
-
-Let's first create an output directory to store our images
-
-```python
-import os
-
-if not os.path.exists("images"):
-    os.mkdir("images")
-```
-
-If you are running this notebook live, click to open the output directory so you can examine the images as they are written.
+To export a figure using `write_image`, call `write_image` on the figure with the filename where you want to save the figure on the figure. The file format is inferred from the extension: 
 
 
-#### Raster Formats: PNG, JPEG, and WebP
+### Raster Formats
 
-
-plotly.py can output figures to several raster image formats including **PNG**, ...
-
+**PNG** 
 ~~~python
-fig.write_image("images/fig1.png")
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+fig.write_image("fig1.png")
 ~~~
 
-**JPEG**, ...
+**JPEG**
 
 ~~~python
+...
 fig.write_image("images/fig1.jpeg")
 ~~~
 
-and **WebP**
+**WebP**
 
 ~~~python
+...
 fig.write_image("images/fig1.webp")
 ~~~
 
-#### Vector Formats: SVG and PDF...
+### Vector Formats
 
-
-plotly.py can also output figures in several vector formats including **SVG**, ...
-
+**SVG**
 ~~~python
+...
 fig.write_image("images/fig1.svg")
 ~~~
 
-**PDF**, ...
+**PDF**
 
 ~~~python
+...
 fig.write_image("images/fig1.pdf")
 ~~~
 
-and **EPS** (requires the poppler library)
+---
+
+**EPS** (Kaleido<1.0.0)
+
+Kaleido versions earlier than 1.0.0 also support **EPS** (requires the poppler library)
 
 ~~~python
+...
 fig.write_image("images/fig1.eps")
 ~~~
 
-**Note:** It is important to note that any figures containing WebGL traces (i.e. of type `scattergl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
+
+**Note:** Figures containing WebGL traces (i.e. of type `scattergl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
 
 
-### Image Export in Dash
+### Specifying a Format
 
-[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+In the earlier example, Plotly inferred the image format from the extension of the filename. You can also specify this with the `format` parameter.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+~~~python
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+fig.write_image("fig1", format="png")
+~~~
 
 
-```python hide_code=true
-from IPython.display import IFrame
-snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
-IFrame(snippet_url + 'static-image-export', width='100%', height=1200)
-```
 
-### Get Image as Bytes
+## Get Image as Bytes
 
-The `plotly.io.to_image` function is used to return an image as a bytes object. You can also use the `.to_image` graph object figure method.
-
-Let convert the figure to a **PNG** bytes object...
+As well as exporting to a file, Plotly figures also support conversion to a bytes object. 
+To convert a figure to a **PNG** bytes object, call the figure's `to_image` method with a `format`
 
 ```python
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+
 img_bytes = fig.to_image(format="png")
 ```
 
-and then display the first 20 bytes.
-
-```python
-img_bytes[:20]
-```
-
-#### Display Bytes as Image Using `IPython.display.Image`
+### Display Bytes as Image Using `IPython.display.Image`
 A bytes object representing a PNG image can be displayed directly in the notebook using the `IPython.display.Image` class. This also works in the [Qt Console for Jupyter](https://qtconsole.readthedocs.io/en/stable/)!
 
 ```python
@@ -186,7 +164,7 @@ from IPython.display import Image
 Image(img_bytes)
 ```
 
-### Change Image Dimensions and Scale
+## Change Image Dimensions and Scale
 In addition to the image format, the `to_image` and `write_image` functions provide arguments to specify the image `width` and `height` in logical pixels. They also provide a `scale` parameter that can be used to increase (`scale` > 1) or decrease (`scale` < 1) the physical resolution of the resulting image.
 
 ```python
@@ -194,8 +172,10 @@ img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
 Image(img_bytes)
 ```
 
-<!-- #region -->
-### Specify Image Export Engine
+## Specify Image Export Engine
+
+> The `engine` parameter is deprecated in Plotly.py 6.1.0 and will be removed after September 2025.
+
 If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 
 Here is an example of specifying that orca should be used:
@@ -208,31 +188,26 @@ And, here is an example of specifying that Kaleido should be used:
 fig.to_image(format="png", engine="kaleido")
 ~~~
 
-<!-- #endregion -->
 
 <!-- #region -->
-### Image Export Settings (Kaleido)
-Various image export settings can be configured using the `plotly.io.kaleido.scope` object. For example, the `default_format` property can be used to specify that the default export format should be `svg` instead of `png`
+## plotly.io Functions
 
-```python
+Previous examples on this page access `write_image` and `to_image` as methods on Plotly Figure objects. This functionality is also available via the `plotly.io` subpackage.
+
+The following example uses the `write_image` function from  `plotly.io`. The function takes the figure or a `dict` representing a figure (as shown in the example) as it's first argument.
+
+
+~~~python
 import plotly.io as pio
-pio.kaleido.scope.default_format = "svg"
-```
 
-Here is a complete listing of the available image export settings:
 
- - **`default_width`**: The default pixel width to use on image export.
- - **`default_height`**: The default pixel height to use on image export.
- - **`default_scale`**: The default image scale factor applied on image export.
- - **`default_format`**: The default image format used on export. One of `"png"`, `"jpeg"`, `"webp"`, `"svg"`, `"pdf"`, or `"eps"`.
- - **`mathjax`**: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
- - **`topojson`**: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the [Plotly.js topojson files](https://github.com/plotly/plotly.js/tree/master/dist/topojson).
- - **`mapbox_access_token`**: The default Mapbox access token.
+fig = dict({
+    "data": [{"type": "bar",
+              "x": [1, 2, 3],
+              "y": [1, 3, 2]}],
+    "layout": {"title": {"text": "A Figure Specified By Python Dictionary"}}
+})
 
+pio.write_image(fig, "fig.png")
+~~~
 <!-- #endregion -->
-
-### Image Export Settings (Orca)
-See the [Orca Management](/python/orca-management/) section for information on how to specify image export settings when using orca.
-
-### Summary
-In summary, to export high-quality static images from plotly.py, all you need to do is install the `kaleido` package and then use the `plotly.io.write_image` and `plotly.io.to_image` functions (or the `.write_image` and `.to_image` graph object figure methods).
