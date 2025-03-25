@@ -6,7 +6,7 @@ from packaging.version import Version
 import warnings
 
 import plotly
-from plotly.io._utils import validate_coerce_fig_to_dict
+from plotly.io._utils import validate_coerce_fig_to_dict, as_individual_kwargs
 
 ENGINE_SUPPORT_TIMELINE = "September 2025"
 
@@ -29,6 +29,7 @@ try:
             scope.mathjax = (
                 "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
             )
+
 except ImportError as e:
     kaleido_available = False
     kaleido_major = -1
@@ -37,7 +38,14 @@ except ImportError as e:
 
 
 def to_image(
-    fig, format=None, width=None, height=None, scale=None, validate=True, engine=None
+    fig,
+    format=None,
+    width=None,
+    height=None,
+    scale=None,
+    validate=True,
+    engine=None,
+    kaleido_instance=None,
 ):
     """
     Convert a figure to a static image bytes string
@@ -86,6 +94,9 @@ def to_image(
 
     engine (deprecated): str
         No longer used. Kaleido is the only supported engine.
+
+    kaleido_instance: kaleido.Kaleido or None
+        An instance of the Kaleido class. If None, a new instance will be created.
 
     Returns
     -------
@@ -162,15 +173,17 @@ which can be installed using pip:
         # Check if trying to export to EPS format, which is not supported in Kaleido v1
         if format == "eps":
             raise ValueError(
-                """
-EPS export is not supported with Kaleido v1.
-Please downgrade to Kaleido v0 to use EPS export:
-    $ pip install kaleido==0.2.1
+                f"""
+EPS export is not supported with Kaleido v1. Please use SVG or PDF instead.
+You can also downgrade to Kaleido v0, but support for v0 will be removed after {ENGINE_SUPPORT_TIMELINE}.
+To downgrade to Kaleido v0, run:
+    $ pip install kaleido<1.0.0
 """
             )
         import choreographer
 
         try:
+            # TODO: Actually use provided kaleido_instance here
             img_bytes = kaleido.calc_fig_sync(
                 fig_dict,
                 path=None,
@@ -204,35 +217,6 @@ Kaleido requires Google Chrome to be installed. Install it by running:
     return img_bytes
 
 
-def install_chrome():
-    """
-    Install Google Chrome for Kaleido
-    This function can be run from the command line using the command plotly_install_chrome
-    defined in pyproject.toml
-    """
-    if not kaleido_available or kaleido_major < 1:
-        raise ValueError(
-            "This command requires Kaleido v1.0.0 or greater. Install it using `pip install kaleido`."
-        )
-    import choreographer
-    import sys
-
-    cli_yes = len(sys.argv) > 1 and sys.argv[1] == "-y"
-    if not cli_yes:
-        print(
-            "\nPlotly will install a copy of Google Chrome to be used for generating static images of plots.\n"
-        )
-        # TODO: Print path where Chrome will be installed
-        # print(f"Chrome will be installed at {chrome_download_path}\n")
-        response = input("Do you want to proceed? [y/n] ")
-        if not response or response[0].lower() != "y":
-            print("Cancelled")
-            return
-    print("Installing Chrome for Plotly...")
-    kaleido.get_chrome_sync()
-    print("Chrome installed successfully.")
-
-
 def write_image(
     fig,
     file,
@@ -242,6 +226,7 @@ def write_image(
     height=None,
     validate=True,
     engine="auto",
+    kaleido_instance=None,
 ):
     """
     Convert a figure to a static image and write it to a file or writeable
@@ -300,6 +285,9 @@ def write_image(
     engine (deprecated): str
         No longer used. Kaleido is the only supported engine.
 
+    kaleido_instance: kaleido.Kaleido or None
+        An instance of the Kaleido class. If None, a new instance will be created.
+
     Returns
     -------
     None
@@ -348,6 +336,7 @@ For example:
         height=height,
         validate=validate,
         engine=engine,
+        kaleido_instance=kaleido_instance,
     )
 
     # Open file
@@ -371,6 +360,69 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
         # We previously succeeded in interpreting `file` as a pathlib object.
         # Now we can use `write_bytes()`.
         path.write_bytes(img_data)
+
+
+def to_images(**kwargs):
+    """
+    Convert multiple figures to static images and return a list of image bytes
+
+    Parameters
+    ----------
+    Accepts the same parameters as pio.to_image(), but any parameter may be either
+    a single value or a list of values. If more than one parameter is a list,
+    all must be the same length.
+
+    Returns
+    -------
+    list of bytes
+        The image data
+    """
+    individual_kwargs = as_individual_kwargs(**kwargs)
+
+    if kaleido_available and kaleido_major > 0:
+        # Kaleido v1
+        # TODO: Use a single shared kaleido instance for all images
+        return [to_image(**kw) for kw in individual_kwargs]
+    else:
+        # Kaleido v0, or orca
+        return [to_image(**kw) for kw in individual_kwargs]
+
+
+def write_images(**kwargs):
+    """
+    Write multiple images to files or writeable objects. This is much faster than
+    calling write_image() multiple times.
+
+    Parameters
+    ----------
+    Accepts the same parameters as pio.write_image(), but any parameter may be either
+    a single value or a list of values. If more than one parameter is a list,
+    all must be the same length.
+
+    Returns
+    -------
+    None
+    """
+
+    if "file" not in kwargs:
+        raise ValueError("'file' argument is required")
+
+    # Get individual arguments, and separate out the 'file' argument
+    individual_kwargs = as_individual_kwargs(**kwargs)
+    files = [kw["file"] for kw in individual_kwargs]
+    individual_kwargs = [
+        {k: v for k, v in kw.items() if k != "file"} for kw in individual_kwargs
+    ]
+
+    if kaleido_available and kaleido_major > 0:
+        # Kaleido v1
+        # TODO: Use a single shared kaleido instance for all images
+        for f, kw in zip(files, individual_kwargs):
+            write_image(file=f, **kw)
+    else:
+        # Kaleido v0, or orca
+        for f, kw in zip(files, individual_kwargs):
+            write_image(file=f, **kw)
 
 
 def full_figure_for_development(fig, warn=True, as_dict=False):
@@ -440,6 +492,34 @@ which can be installed using pip:
         import plotly.graph_objects as go
 
         return go.Figure(fig, skip_invalid=True)
+
+
+def install_chrome():
+    """
+    Install Google Chrome for Kaleido
+    This function can be run from the command line using the command `plotly_install_chrome`
+    defined in pyproject.toml
+    """
+    if not kaleido_available or kaleido_major < 1:
+        raise ValueError(
+            "This command requires Kaleido v1.0.0 or greater. Install it using `pip install kaleido`."
+        )
+    import sys
+
+    cli_yes = len(sys.argv) > 1 and sys.argv[1] == "-y"
+    if not cli_yes:
+        print(
+            "\nPlotly will install a copy of Google Chrome to be used for generating static images of plots.\n"
+        )
+        # TODO: Print path where Chrome will be installed
+        # print(f"Chrome will be installed at {chrome_download_path}\n")
+        response = input("Do you want to proceed? [y/n] ")
+        if not response or response[0].lower() != "y":
+            print("Cancelled")
+            return
+    print("Installing Chrome for Plotly...")
+    kaleido.get_chrome_sync()
+    print("Chrome installed successfully.")
 
 
 __all__ = ["to_image", "write_image", "scope", "full_figure_for_development"]
