@@ -3,7 +3,7 @@ import sys
 from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
-    from ._kaleido import to_image, write_image, full_figure_for_development
+    from ._kaleido import to_image, write_image, to_images, write_images, full_figure_for_development
     from . import orca, kaleido
     from . import json
     from ._json import to_json, from_json, read_json, write_json
@@ -15,6 +15,8 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     __all__ = [
         "to_image",
         "write_image",
+        "to_images",
+        "write_images",
         "orca",
         "json",
         "to_json",
@@ -37,6 +39,8 @@ else:
         [
             "._kaleido.to_image",
             "._kaleido.write_image",
+            "._kaleido.to_images",
+            "._kaleido.write_images",
             "._kaleido.full_figure_for_development",
             "._json.to_json",
             "._json.from_json",
