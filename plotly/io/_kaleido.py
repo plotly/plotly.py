@@ -168,16 +168,28 @@ Please downgrade to Kaleido v0 to use EPS export:
     $ pip install kaleido==0.2.1
 """
             )
-        img_bytes = kaleido.calc_fig_sync(
-            fig_dict,
-            path=None,
-            opts=dict(
-                format=format,
-                width=width,
-                height=height,
-                scale=scale,
-            ),
-        )
+        import choreographer
+
+        try:
+            img_bytes = kaleido.calc_fig_sync(
+                fig_dict,
+                path=None,
+                opts=dict(
+                    format=format,
+                    width=width,
+                    height=height,
+                    scale=scale,
+                ),
+            )
+        except choreographer.errors.ChromeNotFoundError:
+            raise RuntimeError(
+                """
+
+Kaleido requires Google Chrome to be installed. Install it by running:
+    $ plotly_install_chrome
+"""
+            )
+
     else:
         # Kaleido v0
         warnings.warn(
@@ -190,6 +202,35 @@ Please downgrade to Kaleido v0 to use EPS export:
         )
 
     return img_bytes
+
+
+def install_chrome():
+    """
+    Install Google Chrome for Kaleido
+    This function can be run from the command line using the command plotly_install_chrome
+    defined in pyproject.toml
+    """
+    if not kaleido_available or kaleido_major < 1:
+        raise ValueError(
+            "This command requires Kaleido v1.0.0 or greater. Install it using `pip install kaleido`."
+        )
+    import choreographer
+    import sys
+
+    cli_yes = len(sys.argv) > 1 and sys.argv[1] == "-y"
+    if not cli_yes:
+        print(
+            "\nPlotly will install a copy of Google Chrome to be used for generating static images of plots.\n"
+        )
+        # TODO: Print path where Chrome will be installed
+        # print(f"Chrome will be installed at {chrome_download_path}\n")
+        response = input("Do you want to proceed? [y/n] ")
+        if not response or response[0].lower() != "y":
+            print("Cancelled")
+            return
+    print("Installing Chrome for Plotly...")
+    kaleido.get_chrome_sync()
+    print("Chrome installed successfully.")
 
 
 def write_image(
