@@ -264,7 +264,7 @@ class HtmlRenderer(MimetypeRenderer):
         self.full_html = full_html
         self.animation_opts = animation_opts
         self.post_script = post_script
-        self.include_plotlyjs = 'cdn' if self.connected else include_plotlyjs
+        self.include_plotlyjs = "cdn" if self.connected else include_plotlyjs
 
     def activate(self):
         if self.global_init:
