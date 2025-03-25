@@ -3,7 +3,13 @@ import sys
 from typing import TYPE_CHECKING
 
 if sys.version_info < (3, 7) or TYPE_CHECKING:
-    from ._kaleido import to_image, write_image, to_images, write_images, full_figure_for_development
+    from ._kaleido import (
+        to_image,
+        write_image,
+        to_images,
+        write_images,
+        full_figure_for_development,
+    )
     from . import orca, kaleido
     from . import json
     from ._json import to_json, from_json, read_json, write_json
