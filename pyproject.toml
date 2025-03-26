@@ -32,12 +32,13 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering :: Visualization",
     "License :: OSI Approved :: MIT License"
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.0.0"
+version = "6.0.1"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
