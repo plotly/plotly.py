@@ -2,6 +2,7 @@ import pytest
 from _plotly_utils.basevalidators import BooleanValidator
 from ...test_optional.test_utils.test_utils import np_nan
 
+
 # Boolean Validator
 # =================
 # ### Fixtures ###

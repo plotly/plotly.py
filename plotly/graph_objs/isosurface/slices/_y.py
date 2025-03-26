@@ -1,17 +1,16 @@
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Y(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "isosurface.slices"
     _path_str = "isosurface.slices.y"
     _valid_props = {"fill", "locations", "locationssrc", "show"}
 
-    # fill
-    # ----
     @property
     def fill(self):
         """
@@ -33,8 +32,6 @@ class Y(_BaseTraceHierarchyType):
     def fill(self, val):
         self["fill"] = val
 
-    # locations
-    # ---------
     @property
     def locations(self):
         """
@@ -47,7 +44,7 @@ class Y(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self["locations"]
 
@@ -55,8 +52,6 @@ class Y(_BaseTraceHierarchyType):
     def locations(self, val):
         self["locations"] = val
 
-    # locationssrc
-    # ------------
     @property
     def locationssrc(self):
         """
@@ -76,8 +71,6 @@ class Y(_BaseTraceHierarchyType):
     def locationssrc(self, val):
         self["locationssrc"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -97,8 +90,6 @@ class Y(_BaseTraceHierarchyType):
     def show(self, val):
         self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -123,10 +114,10 @@ class Y(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
-        fill=None,
-        locations=None,
-        locationssrc=None,
-        show=None,
+        fill: int | float | None = None,
+        locations: NDArray | None = None,
+        locationssrc: str | None = None,
+        show: bool | None = None,
         **kwargs,
     ):
         """
@@ -159,14 +150,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         Y
         """
-        super(Y, self).__init__("y")
-
+        super().__init__("y")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -181,34 +169,12 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.isosurface.slices.Y`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("fill", None)
-        _v = fill if fill is not None else _v
-        if _v is not None:
-            self["fill"] = _v
-        _v = arg.pop("locations", None)
-        _v = locations if locations is not None else _v
-        if _v is not None:
-            self["locations"] = _v
-        _v = arg.pop("locationssrc", None)
-        _v = locationssrc if locationssrc is not None else _v
-        if _v is not None:
-            self["locationssrc"] = _v
-        _v = arg.pop("show", None)
-        _v = show if show is not None else _v
-        if _v is not None:
-            self["show"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("fill", arg, fill)
+        self._init_provided("locations", arg, locations)
+        self._init_provided("locationssrc", arg, locationssrc)
+        self._init_provided("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
