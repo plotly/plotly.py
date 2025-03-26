@@ -218,7 +218,7 @@ fig.show()
 ```
 ### Diverging Bar (or Butterfly) Chart with Neutral Column
 
-Diverging bar charts offer two imperfect options for responses that are neither positive nor negative:  omit them, leaving them implicit when the categories add to 100%, as we did above or put them in a separate column, as we do in this example.  Jonathan Schwabish discusses this on page 92-97 of  _Better Data Visualizations_.
+Diverging bar charts offer two imperfect options for responses that are neither positive nor negative:  put them in a separate column, as in this example or omit them as in the example above.  That leaves the unreported neutral value implicit when the categories add to 100%,   Jonathan Schwabish discusses this on page 92-97 of  _Better Data Visualizations_.
 
 ```
 import pandas as pd
@@ -226,7 +226,6 @@ import plotly.graph_objects as go
 
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/refs/heads/master/gss_2002_5_pt_likert.csv')
-#data source details are in this CSV file
 df.rename(columns={'Unnamed: 0':"Category"}, inplace=True)
 
 
@@ -235,7 +234,7 @@ for v in ["Disagree","Strongly Disagree"]:
     df[v]=df[v]*-1
 
 fig = go.Figure()
-# this color palette conveys meaning:  blues for negative, reds for positive, gray for Neither Agree nor Disagree
+# this color palette conveys meaning:  blues for agreement, reds and oranges for disagreement, gray for Neither Agree nor Disagree
 color_by_category={
     "Strongly Agree":'darkblue',
     "Agree":'lightblue',
@@ -285,11 +284,11 @@ max_width_signed = abs(max_left)+max_right
 max_width_neither = max(df["Neither Agree nor Disagree"])
 
 fig.update_layout(
-    
     title="Reactions to statements from the 2002 General Social Survey:",
     plot_bgcolor="white",
     barmode='relative',  # Allows bars to diverge from the center
     )
+
 fig.update_xaxes(
         zeroline=True, #the zero line distinguishes between positive and negative segments
         zerolinecolor="black",
@@ -297,13 +296,15 @@ fig.update_xaxes(
         # multiply by .98 to add space between the two columns
         range=[max_left, max_right],  
         domain=[0, 0.98*(max_width_signed/(max_width_signed+max_width_neither))]  
-)    
+)
+    
 fig.update_layout(
     xaxis2=dict(
         range=[0, max_width_neither],  
         domain=[(1-.98*(1-max_width_signed/(max_width_signed+max_width_neither))), 1.0],
     )
 )
+
 fig.update_legends(
         orientation="h",  # a horizontal legend matches the horizontal bars
         yref="container",
