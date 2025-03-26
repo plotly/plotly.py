@@ -226,7 +226,7 @@ import plotly.graph_objects as go
 
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/refs/heads/master/gss_2002_5_pt_likert.csv')
-#data source details are in this CSV file
+
 df.rename(columns={'Unnamed: 0':"Category"}, inplace=True)
 
 #achieve the diverging effect by putting a negative sign on the "disagree" answers 
