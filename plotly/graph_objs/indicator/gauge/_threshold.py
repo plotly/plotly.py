@@ -4,14 +4,10 @@ import copy as _copy
 
 class Threshold(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "indicator.gauge"
     _path_str = "indicator.gauge.threshold"
     _valid_props = {"line", "thickness", "value"}
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -20,13 +16,6 @@ class Threshold(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.gauge.threshold.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
-            Supported dict properties:
-
-                color
-                    Sets the color of the threshold line.
-                width
-                    Sets the width (in px) of the threshold line.
 
         Returns
         -------
@@ -38,8 +27,6 @@ class Threshold(_BaseTraceHierarchyType):
     def line(self, val):
         self["line"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -59,8 +46,6 @@ class Threshold(_BaseTraceHierarchyType):
     def thickness(self, val):
         self["thickness"] = val
 
-    # value
-    # -----
     @property
     def value(self):
         """
@@ -79,8 +64,6 @@ class Threshold(_BaseTraceHierarchyType):
     def value(self, val):
         self["value"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -117,14 +100,11 @@ class Threshold(_BaseTraceHierarchyType):
         -------
         Threshold
         """
-        super(Threshold, self).__init__("threshold")
-
+        super().__init__("threshold")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -139,30 +119,11 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("thickness", None)
-        _v = thickness if thickness is not None else _v
-        if _v is not None:
-            self["thickness"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("line", arg, line)
+        self._init_provided("thickness", arg, thickness)
+        self._init_provided("value", arg, value)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

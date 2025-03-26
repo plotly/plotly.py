@@ -4,8 +4,6 @@ import copy as _copy
 
 class Autorangeoptions(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "layout.polar.radialaxis"
     _path_str = "layout.polar.radialaxis.autorangeoptions"
     _valid_props = {
@@ -17,8 +15,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         "minallowed",
     }
 
-    # clipmax
-    # -------
     @property
     def clipmax(self):
         """
@@ -37,8 +33,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
     def clipmax(self, val):
         self["clipmax"] = val
 
-    # clipmin
-    # -------
     @property
     def clipmin(self):
         """
@@ -57,8 +51,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
     def clipmin(self, val):
         self["clipmin"] = val
 
-    # include
-    # -------
     @property
     def include(self):
         """
@@ -76,8 +68,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
     def include(self, val):
         self["include"] = val
 
-    # includesrc
-    # ----------
     @property
     def includesrc(self):
         """
@@ -96,8 +86,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
     def includesrc(self, val):
         self["includesrc"] = val
 
-    # maxallowed
-    # ----------
     @property
     def maxallowed(self):
         """
@@ -115,8 +103,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
     def maxallowed(self, val):
         self["maxallowed"] = val
 
-    # minallowed
-    # ----------
     @property
     def minallowed(self):
         """
@@ -134,8 +120,6 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
     def minallowed(self, val):
         self["minallowed"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -200,14 +184,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Autorangeoptions
         """
-        super(Autorangeoptions, self).__init__("autorangeoptions")
-
+        super().__init__("autorangeoptions")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -222,42 +203,14 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.polar.radialaxis.Autorangeoptions`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("clipmax", None)
-        _v = clipmax if clipmax is not None else _v
-        if _v is not None:
-            self["clipmax"] = _v
-        _v = arg.pop("clipmin", None)
-        _v = clipmin if clipmin is not None else _v
-        if _v is not None:
-            self["clipmin"] = _v
-        _v = arg.pop("include", None)
-        _v = include if include is not None else _v
-        if _v is not None:
-            self["include"] = _v
-        _v = arg.pop("includesrc", None)
-        _v = includesrc if includesrc is not None else _v
-        if _v is not None:
-            self["includesrc"] = _v
-        _v = arg.pop("maxallowed", None)
-        _v = maxallowed if maxallowed is not None else _v
-        if _v is not None:
-            self["maxallowed"] = _v
-        _v = arg.pop("minallowed", None)
-        _v = minallowed if minallowed is not None else _v
-        if _v is not None:
-            self["minallowed"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("clipmax", arg, clipmax)
+        self._init_provided("clipmin", arg, clipmin)
+        self._init_provided("include", arg, include)
+        self._init_provided("includesrc", arg, includesrc)
+        self._init_provided("maxallowed", arg, maxallowed)
+        self._init_provided("minallowed", arg, minallowed)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

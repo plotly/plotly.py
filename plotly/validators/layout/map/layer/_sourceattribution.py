@@ -1,13 +1,13 @@
-import _plotly_utils.basevalidators
+import _plotly_utils.basevalidators as _bv
 
 
-class SourceattributionValidator(_plotly_utils.basevalidators.StringValidator):
+class SourceattributionValidator(_bv.StringValidator):
     def __init__(
         self, plotly_name="sourceattribution", parent_name="layout.map.layer", **kwargs
     ):
-        super(SourceattributionValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             **kwargs,
         )

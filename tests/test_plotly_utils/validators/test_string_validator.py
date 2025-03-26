@@ -54,7 +54,7 @@ def validator_no_blanks_aok():
 # Not strict
 # ### Acceptance ###
 @pytest.mark.parametrize(
-    "val", ["bar", 234, np_nan(), "HELLO!!!", "world!@#$%^&*()", "", "\u03BC"]
+    "val", ["bar", 234, np_nan(), "HELLO!!!", "world!@#$%^&*()", "", "\u03bc"]
 )
 def test_acceptance(val, validator):
     expected = str(val) if not isinstance(val, str) else val
@@ -87,7 +87,7 @@ def test_rejection_values(val, validator_values):
 
 
 # ### No blanks ###
-@pytest.mark.parametrize("val", ["bar", "HELLO!!!", "world!@#$%^&*()", "\u03BC"])
+@pytest.mark.parametrize("val", ["bar", "HELLO!!!", "world!@#$%^&*()", "\u03bc"])
 def test_acceptance_no_blanks(val, validator_no_blanks):
     assert validator_no_blanks.validate_coerce(val) == val
 
@@ -103,7 +103,7 @@ def test_rejection_no_blanks(val, validator_no_blanks):
 # Strict
 # ------
 # ### Acceptance ###
-@pytest.mark.parametrize("val", ["bar", "HELLO!!!", "world!@#$%^&*()", "", "\u03BC"])
+@pytest.mark.parametrize("val", ["bar", "HELLO!!!", "world!@#$%^&*()", "", "\u03bc"])
 def test_acceptance_strict(val, validator_strict):
     assert validator_strict.validate_coerce(val) == val
 
@@ -120,7 +120,7 @@ def test_rejection_strict(val, validator_strict):
 # Array ok
 # --------
 # ### Acceptance ###
-@pytest.mark.parametrize("val", ["foo", "BAR", "", "baz", "\u03BC"])
+@pytest.mark.parametrize("val", ["foo", "BAR", "", "baz", "\u03bc"])
 def test_acceptance_aok_scalars(val, validator_aok):
     assert validator_aok.validate_coerce(val) == val
 
@@ -130,9 +130,9 @@ def test_acceptance_aok_scalars(val, validator_aok):
     [
         "foo",
         ["foo"],
-        np.array(["BAR", "", "\u03BC"], dtype="object"),
+        np.array(["BAR", "", "\u03bc"], dtype="object"),
         ["baz", "baz", "baz"],
-        ["foo", None, "bar", "\u03BC"],
+        ["foo", None, "bar", "\u03bc"],
     ],
 )
 def test_acceptance_aok_list(val, validator_aok):
@@ -173,7 +173,7 @@ def test_rejection_aok_values(val, validator_aok_values):
         "123",
         ["bar", "HELLO!!!"],
         np.array(["bar", "HELLO!!!"], dtype="object"),
-        ["world!@#$%^&*()", "\u03BC"],
+        ["world!@#$%^&*()", "\u03bc"],
     ],
 )
 def test_acceptance_no_blanks_aok(val, validator_no_blanks_aok):

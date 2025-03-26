@@ -4,8 +4,6 @@ import copy as _copy
 
 class Geo(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "layout"
     _path_str = "layout.geo"
     _valid_props = {
@@ -43,8 +41,6 @@ class Geo(_BaseLayoutHierarchyType):
         "visible",
     }
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -55,42 +51,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -102,8 +63,6 @@ class Geo(_BaseLayoutHierarchyType):
     def bgcolor(self, val):
         self["bgcolor"] = val
 
-    # center
-    # ------
     @property
     def center(self):
         """
@@ -112,20 +71,6 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
-
-            Supported dict properties:
-
-                lat
-                    Sets the latitude of the map's center. For all
-                    projection types, the map's latitude center
-                    lies at the middle of the latitude range by
-                    default.
-                lon
-                    Sets the longitude of the map's center. By
-                    default, the map's longitude center lies at the
-                    middle of the longitude range for scoped
-                    projection and above `projection.rotation.lon`
-                    otherwise.
 
         Returns
         -------
@@ -137,8 +82,6 @@ class Geo(_BaseLayoutHierarchyType):
     def center(self, val):
         self["center"] = val
 
-    # coastlinecolor
-    # --------------
     @property
     def coastlinecolor(self):
         """
@@ -149,42 +92,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -196,8 +104,6 @@ class Geo(_BaseLayoutHierarchyType):
     def coastlinecolor(self, val):
         self["coastlinecolor"] = val
 
-    # coastlinewidth
-    # --------------
     @property
     def coastlinewidth(self):
         """
@@ -216,8 +122,6 @@ class Geo(_BaseLayoutHierarchyType):
     def coastlinewidth(self, val):
         self["coastlinewidth"] = val
 
-    # countrycolor
-    # ------------
     @property
     def countrycolor(self):
         """
@@ -228,42 +132,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -275,8 +144,6 @@ class Geo(_BaseLayoutHierarchyType):
     def countrycolor(self, val):
         self["countrycolor"] = val
 
-    # countrywidth
-    # ------------
     @property
     def countrywidth(self):
         """
@@ -295,8 +162,6 @@ class Geo(_BaseLayoutHierarchyType):
     def countrywidth(self, val):
         self["countrywidth"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -305,35 +170,6 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-
-            Supported dict properties:
-
-                column
-                    If there is a layout grid, use the domain for
-                    this column in the grid for this geo subplot .
-                    Note that geo subplots are constrained by
-                    domain. In general, when `projection.scale` is
-                    set to 1. a map will fit either its x or y
-                    domain, but not both.
-                row
-                    If there is a layout grid, use the domain for
-                    this row in the grid for this geo subplot .
-                    Note that geo subplots are constrained by
-                    domain. In general, when `projection.scale` is
-                    set to 1. a map will fit either its x or y
-                    domain, but not both.
-                x
-                    Sets the horizontal domain of this geo subplot
-                    (in plot fraction). Note that geo subplots are
-                    constrained by domain. In general, when
-                    `projection.scale` is set to 1. a map will fit
-                    either its x or y domain, but not both.
-                y
-                    Sets the vertical domain of this geo subplot
-                    (in plot fraction). Note that geo subplots are
-                    constrained by domain. In general, when
-                    `projection.scale` is set to 1. a map will fit
-                    either its x or y domain, but not both.
 
         Returns
         -------
@@ -345,8 +181,6 @@ class Geo(_BaseLayoutHierarchyType):
     def domain(self, val):
         self["domain"] = val
 
-    # fitbounds
-    # ---------
     @property
     def fitbounds(self):
         """
@@ -378,8 +212,6 @@ class Geo(_BaseLayoutHierarchyType):
     def fitbounds(self, val):
         self["fitbounds"] = val
 
-    # framecolor
-    # ----------
     @property
     def framecolor(self):
         """
@@ -390,42 +222,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -437,8 +234,6 @@ class Geo(_BaseLayoutHierarchyType):
     def framecolor(self, val):
         self["framecolor"] = val
 
-    # framewidth
-    # ----------
     @property
     def framewidth(self):
         """
@@ -457,8 +252,6 @@ class Geo(_BaseLayoutHierarchyType):
     def framewidth(self, val):
         self["framewidth"] = val
 
-    # lakecolor
-    # ---------
     @property
     def lakecolor(self):
         """
@@ -469,42 +262,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -516,8 +274,6 @@ class Geo(_BaseLayoutHierarchyType):
     def lakecolor(self, val):
         self["lakecolor"] = val
 
-    # landcolor
-    # ---------
     @property
     def landcolor(self):
         """
@@ -528,42 +284,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -575,8 +296,6 @@ class Geo(_BaseLayoutHierarchyType):
     def landcolor(self, val):
         self["landcolor"] = val
 
-    # lataxis
-    # -------
     @property
     def lataxis(self):
         """
@@ -585,30 +304,6 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Lataxis`
           - A dict of string/value properties that will be passed
             to the Lataxis constructor
-
-            Supported dict properties:
-
-                dtick
-                    Sets the graticule's longitude/latitude tick
-                    step.
-                gridcolor
-                    Sets the graticule's stroke color.
-                griddash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                gridwidth
-                    Sets the graticule's stroke width (in px).
-                range
-                    Sets the range of this axis (in degrees), sets
-                    the map's clipped coordinates.
-                showgrid
-                    Sets whether or not graticule are shown on the
-                    map.
-                tick0
-                    Sets the graticule's starting tick
-                    longitude/latitude.
 
         Returns
         -------
@@ -620,8 +315,6 @@ class Geo(_BaseLayoutHierarchyType):
     def lataxis(self, val):
         self["lataxis"] = val
 
-    # lonaxis
-    # -------
     @property
     def lonaxis(self):
         """
@@ -630,30 +323,6 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Lonaxis`
           - A dict of string/value properties that will be passed
             to the Lonaxis constructor
-
-            Supported dict properties:
-
-                dtick
-                    Sets the graticule's longitude/latitude tick
-                    step.
-                gridcolor
-                    Sets the graticule's stroke color.
-                griddash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                gridwidth
-                    Sets the graticule's stroke width (in px).
-                range
-                    Sets the range of this axis (in degrees), sets
-                    the map's clipped coordinates.
-                showgrid
-                    Sets whether or not graticule are shown on the
-                    map.
-                tick0
-                    Sets the graticule's starting tick
-                    longitude/latitude.
 
         Returns
         -------
@@ -665,8 +334,6 @@ class Geo(_BaseLayoutHierarchyType):
     def lonaxis(self, val):
         self["lonaxis"] = val
 
-    # oceancolor
-    # ----------
     @property
     def oceancolor(self):
         """
@@ -677,42 +344,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -724,8 +356,6 @@ class Geo(_BaseLayoutHierarchyType):
     def oceancolor(self, val):
         self["oceancolor"] = val
 
-    # projection
-    # ----------
     @property
     def projection(self):
         """
@@ -734,31 +364,6 @@ class Geo(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
-
-            Supported dict properties:
-
-                distance
-                    For satellite projection type only. Sets the
-                    distance from the center of the sphere to the
-                    point of view as a proportion of the sphere’s
-                    radius.
-                parallels
-                    For conic projection types only. Sets the
-                    parallels (tangent, secant) where the cone
-                    intersects the sphere.
-                rotation
-                    :class:`plotly.graph_objects.layout.geo.project
-                    ion.Rotation` instance or dict with compatible
-                    properties
-                scale
-                    Zooms in or out on the map view. A scale of 1
-                    corresponds to the largest zoom level that fits
-                    the map's lon and lat ranges.
-                tilt
-                    For satellite projection type only. Sets the
-                    tilt angle of perspective projection.
-                type
-                    Sets the projection type.
 
         Returns
         -------
@@ -770,8 +375,6 @@ class Geo(_BaseLayoutHierarchyType):
     def projection(self, val):
         self["projection"] = val
 
-    # resolution
-    # ----------
     @property
     def resolution(self):
         """
@@ -793,8 +396,6 @@ class Geo(_BaseLayoutHierarchyType):
     def resolution(self, val):
         self["resolution"] = val
 
-    # rivercolor
-    # ----------
     @property
     def rivercolor(self):
         """
@@ -805,42 +406,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -852,8 +418,6 @@ class Geo(_BaseLayoutHierarchyType):
     def rivercolor(self, val):
         self["rivercolor"] = val
 
-    # riverwidth
-    # ----------
     @property
     def riverwidth(self):
         """
@@ -872,8 +436,6 @@ class Geo(_BaseLayoutHierarchyType):
     def riverwidth(self, val):
         self["riverwidth"] = val
 
-    # scope
-    # -----
     @property
     def scope(self):
         """
@@ -894,8 +456,6 @@ class Geo(_BaseLayoutHierarchyType):
     def scope(self, val):
         self["scope"] = val
 
-    # showcoastlines
-    # --------------
     @property
     def showcoastlines(self):
         """
@@ -914,8 +474,6 @@ class Geo(_BaseLayoutHierarchyType):
     def showcoastlines(self, val):
         self["showcoastlines"] = val
 
-    # showcountries
-    # -------------
     @property
     def showcountries(self):
         """
@@ -934,8 +492,6 @@ class Geo(_BaseLayoutHierarchyType):
     def showcountries(self, val):
         self["showcountries"] = val
 
-    # showframe
-    # ---------
     @property
     def showframe(self):
         """
@@ -954,8 +510,6 @@ class Geo(_BaseLayoutHierarchyType):
     def showframe(self, val):
         self["showframe"] = val
 
-    # showlakes
-    # ---------
     @property
     def showlakes(self):
         """
@@ -974,8 +528,6 @@ class Geo(_BaseLayoutHierarchyType):
     def showlakes(self, val):
         self["showlakes"] = val
 
-    # showland
-    # --------
     @property
     def showland(self):
         """
@@ -994,8 +546,6 @@ class Geo(_BaseLayoutHierarchyType):
     def showland(self, val):
         self["showland"] = val
 
-    # showocean
-    # ---------
     @property
     def showocean(self):
         """
@@ -1014,8 +564,6 @@ class Geo(_BaseLayoutHierarchyType):
     def showocean(self, val):
         self["showocean"] = val
 
-    # showrivers
-    # ----------
     @property
     def showrivers(self):
         """
@@ -1034,8 +582,6 @@ class Geo(_BaseLayoutHierarchyType):
     def showrivers(self, val):
         self["showrivers"] = val
 
-    # showsubunits
-    # ------------
     @property
     def showsubunits(self):
         """
@@ -1055,8 +601,6 @@ class Geo(_BaseLayoutHierarchyType):
     def showsubunits(self, val):
         self["showsubunits"] = val
 
-    # subunitcolor
-    # ------------
     @property
     def subunitcolor(self):
         """
@@ -1067,42 +611,7 @@ class Geo(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
 
         Returns
         -------
@@ -1114,8 +623,6 @@ class Geo(_BaseLayoutHierarchyType):
     def subunitcolor(self, val):
         self["subunitcolor"] = val
 
-    # subunitwidth
-    # ------------
     @property
     def subunitwidth(self):
         """
@@ -1134,8 +641,6 @@ class Geo(_BaseLayoutHierarchyType):
     def subunitwidth(self, val):
         self["subunitwidth"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1154,8 +659,6 @@ class Geo(_BaseLayoutHierarchyType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1174,8 +677,6 @@ class Geo(_BaseLayoutHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1409,14 +910,11 @@ class Geo(_BaseLayoutHierarchyType):
         -------
         Geo
         """
-        super(Geo, self).__init__("geo")
-
+        super().__init__("geo")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1431,146 +929,40 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.Geo`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("bgcolor", None)
-        _v = bgcolor if bgcolor is not None else _v
-        if _v is not None:
-            self["bgcolor"] = _v
-        _v = arg.pop("center", None)
-        _v = center if center is not None else _v
-        if _v is not None:
-            self["center"] = _v
-        _v = arg.pop("coastlinecolor", None)
-        _v = coastlinecolor if coastlinecolor is not None else _v
-        if _v is not None:
-            self["coastlinecolor"] = _v
-        _v = arg.pop("coastlinewidth", None)
-        _v = coastlinewidth if coastlinewidth is not None else _v
-        if _v is not None:
-            self["coastlinewidth"] = _v
-        _v = arg.pop("countrycolor", None)
-        _v = countrycolor if countrycolor is not None else _v
-        if _v is not None:
-            self["countrycolor"] = _v
-        _v = arg.pop("countrywidth", None)
-        _v = countrywidth if countrywidth is not None else _v
-        if _v is not None:
-            self["countrywidth"] = _v
-        _v = arg.pop("domain", None)
-        _v = domain if domain is not None else _v
-        if _v is not None:
-            self["domain"] = _v
-        _v = arg.pop("fitbounds", None)
-        _v = fitbounds if fitbounds is not None else _v
-        if _v is not None:
-            self["fitbounds"] = _v
-        _v = arg.pop("framecolor", None)
-        _v = framecolor if framecolor is not None else _v
-        if _v is not None:
-            self["framecolor"] = _v
-        _v = arg.pop("framewidth", None)
-        _v = framewidth if framewidth is not None else _v
-        if _v is not None:
-            self["framewidth"] = _v
-        _v = arg.pop("lakecolor", None)
-        _v = lakecolor if lakecolor is not None else _v
-        if _v is not None:
-            self["lakecolor"] = _v
-        _v = arg.pop("landcolor", None)
-        _v = landcolor if landcolor is not None else _v
-        if _v is not None:
-            self["landcolor"] = _v
-        _v = arg.pop("lataxis", None)
-        _v = lataxis if lataxis is not None else _v
-        if _v is not None:
-            self["lataxis"] = _v
-        _v = arg.pop("lonaxis", None)
-        _v = lonaxis if lonaxis is not None else _v
-        if _v is not None:
-            self["lonaxis"] = _v
-        _v = arg.pop("oceancolor", None)
-        _v = oceancolor if oceancolor is not None else _v
-        if _v is not None:
-            self["oceancolor"] = _v
-        _v = arg.pop("projection", None)
-        _v = projection if projection is not None else _v
-        if _v is not None:
-            self["projection"] = _v
-        _v = arg.pop("resolution", None)
-        _v = resolution if resolution is not None else _v
-        if _v is not None:
-            self["resolution"] = _v
-        _v = arg.pop("rivercolor", None)
-        _v = rivercolor if rivercolor is not None else _v
-        if _v is not None:
-            self["rivercolor"] = _v
-        _v = arg.pop("riverwidth", None)
-        _v = riverwidth if riverwidth is not None else _v
-        if _v is not None:
-            self["riverwidth"] = _v
-        _v = arg.pop("scope", None)
-        _v = scope if scope is not None else _v
-        if _v is not None:
-            self["scope"] = _v
-        _v = arg.pop("showcoastlines", None)
-        _v = showcoastlines if showcoastlines is not None else _v
-        if _v is not None:
-            self["showcoastlines"] = _v
-        _v = arg.pop("showcountries", None)
-        _v = showcountries if showcountries is not None else _v
-        if _v is not None:
-            self["showcountries"] = _v
-        _v = arg.pop("showframe", None)
-        _v = showframe if showframe is not None else _v
-        if _v is not None:
-            self["showframe"] = _v
-        _v = arg.pop("showlakes", None)
-        _v = showlakes if showlakes is not None else _v
-        if _v is not None:
-            self["showlakes"] = _v
-        _v = arg.pop("showland", None)
-        _v = showland if showland is not None else _v
-        if _v is not None:
-            self["showland"] = _v
-        _v = arg.pop("showocean", None)
-        _v = showocean if showocean is not None else _v
-        if _v is not None:
-            self["showocean"] = _v
-        _v = arg.pop("showrivers", None)
-        _v = showrivers if showrivers is not None else _v
-        if _v is not None:
-            self["showrivers"] = _v
-        _v = arg.pop("showsubunits", None)
-        _v = showsubunits if showsubunits is not None else _v
-        if _v is not None:
-            self["showsubunits"] = _v
-        _v = arg.pop("subunitcolor", None)
-        _v = subunitcolor if subunitcolor is not None else _v
-        if _v is not None:
-            self["subunitcolor"] = _v
-        _v = arg.pop("subunitwidth", None)
-        _v = subunitwidth if subunitwidth is not None else _v
-        if _v is not None:
-            self["subunitwidth"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("center", arg, center)
+        self._init_provided("coastlinecolor", arg, coastlinecolor)
+        self._init_provided("coastlinewidth", arg, coastlinewidth)
+        self._init_provided("countrycolor", arg, countrycolor)
+        self._init_provided("countrywidth", arg, countrywidth)
+        self._init_provided("domain", arg, domain)
+        self._init_provided("fitbounds", arg, fitbounds)
+        self._init_provided("framecolor", arg, framecolor)
+        self._init_provided("framewidth", arg, framewidth)
+        self._init_provided("lakecolor", arg, lakecolor)
+        self._init_provided("landcolor", arg, landcolor)
+        self._init_provided("lataxis", arg, lataxis)
+        self._init_provided("lonaxis", arg, lonaxis)
+        self._init_provided("oceancolor", arg, oceancolor)
+        self._init_provided("projection", arg, projection)
+        self._init_provided("resolution", arg, resolution)
+        self._init_provided("rivercolor", arg, rivercolor)
+        self._init_provided("riverwidth", arg, riverwidth)
+        self._init_provided("scope", arg, scope)
+        self._init_provided("showcoastlines", arg, showcoastlines)
+        self._init_provided("showcountries", arg, showcountries)
+        self._init_provided("showframe", arg, showframe)
+        self._init_provided("showlakes", arg, showlakes)
+        self._init_provided("showland", arg, showland)
+        self._init_provided("showocean", arg, showocean)
+        self._init_provided("showrivers", arg, showrivers)
+        self._init_provided("showsubunits", arg, showsubunits)
+        self._init_provided("subunitcolor", arg, subunitcolor)
+        self._init_provided("subunitwidth", arg, subunitwidth)
+        self._init_provided("uirevision", arg, uirevision)
+        self._init_provided("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
