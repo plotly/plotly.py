@@ -221,8 +221,7 @@ fig.show()
 
 Diverging bar charts show counts of positive outcomes or sentiments to the right of zero and counts of negative outcomes to the left of zero, allowing the reader to easily spot areas of excellence and concern.  Implementing presentation-ready versions of them in Plotly requires a few non standard layout and legendrank options.
 
-```
-import pandas as pd
+```import pandas as pd
 import plotly.graph_objects as go
 
 
@@ -235,13 +234,12 @@ for v in ["Disagree","Strongly Disagree"]:
     df[v]=df[v]*-1
 
 fig = go.Figure()
-# this color palette conveys meaning:  blues for negative, reds for positive, gray for Neither Agree nor Disagree
+# this color palette conveys meaning:  blues for positive, red and orange for negative
 color_by_category={
     "Strongly Agree":'darkblue',
     "Agree":'lightblue',
     "Disagree":'orange',
     "Strongly Disagree":'red',
-    "Neither Agree nor Disagree":'gray',
 }
 
 
@@ -254,7 +252,6 @@ legend_rank_by_category={
     "Disagree":2,
     "Agree":3,
     "Strongly Agree":4,
-    "Neither Agree nor Disagree":5
 }
 # Add bars for each category
 for col in ["Disagree","Strongly Disagree","Agree","Strongly Agree"]:
@@ -286,6 +283,7 @@ fig.update_xaxes(
 )
 
 fig.show()
+
 ```
 
 ### Bar Chart with Line Plot
