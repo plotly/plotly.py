@@ -6,7 +6,7 @@ from packaging.version import Version
 import warnings
 
 import plotly
-from plotly.io._utils import validate_coerce_fig_to_dict, as_individual_kwargs
+from plotly.io._utils import validate_coerce_fig_to_dict, as_individual_args
 
 ENGINE_SUPPORT_TIMELINE = "September 2025"
 
@@ -199,7 +199,7 @@ To downgrade to Kaleido v0, run:
                 """
 
 Kaleido requires Google Chrome to be installed. Install it by running:
-    $ plotly_install_chrome
+    $ plotly_get_chrome
 """
             )
 
@@ -362,7 +362,7 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
         path.write_bytes(img_data)
 
 
-def to_images(**kwargs):
+def to_images(*args, **kwargs):
     """
     Convert multiple figures to static images and return a list of image bytes
 
@@ -377,18 +377,18 @@ def to_images(**kwargs):
     list of bytes
         The image data
     """
-    individual_kwargs = as_individual_kwargs(**kwargs)
+    individual_args, individual_kwargs = as_individual_args(*args, **kwargs)
 
     if kaleido_available and kaleido_major > 0:
         # Kaleido v1
         # TODO: Use a single shared kaleido instance for all images
-        return [to_image(**kw) for kw in individual_kwargs]
+        return [to_image(*a, **kw) for a, kw in zip(individual_args, individual_kwargs)]
     else:
         # Kaleido v0, or orca
-        return [to_image(**kw) for kw in individual_kwargs]
+        return [to_image(*a, **kw) for a, kw in zip(individual_args, individual_kwargs)]
 
 
-def write_images(**kwargs):
+def write_images(*args, **kwargs):
     """
     Write multiple images to files or writeable objects. This is much faster than
     calling write_image() multiple times.
@@ -404,25 +404,18 @@ def write_images(**kwargs):
     None
     """
 
-    if "file" not in kwargs:
-        raise ValueError("'file' argument is required")
-
-    # Get individual arguments, and separate out the 'file' argument
-    individual_kwargs = as_individual_kwargs(**kwargs)
-    files = [kw["file"] for kw in individual_kwargs]
-    individual_kwargs = [
-        {k: v for k, v in kw.items() if k != "file"} for kw in individual_kwargs
-    ]
+    # Get individual arguments
+    individual_args, individual_kwargs = as_individual_args(*args, **kwargs)
 
     if kaleido_available and kaleido_major > 0:
         # Kaleido v1
         # TODO: Use a single shared kaleido instance for all images
-        for f, kw in zip(files, individual_kwargs):
-            write_image(file=f, **kw)
+        for a, kw in zip(individual_args, individual_kwargs):
+            write_image(**kw)
     else:
         # Kaleido v0, or orca
-        for f, kw in zip(files, individual_kwargs):
-            write_image(file=f, **kw)
+        for a, kw in zip(individual_args, individual_kwargs):
+            write_image(*a, **kw)
 
 
 def full_figure_for_development(fig, warn=True, as_dict=False):
@@ -494,10 +487,10 @@ which can be installed using pip:
         return go.Figure(fig, skip_invalid=True)
 
 
-def install_chrome():
+def get_chrome():
     """
     Install Google Chrome for Kaleido
-    This function can be run from the command line using the command `plotly_install_chrome`
+    This function can be run from the command line using the command `plotly_get_chrome`
     defined in pyproject.toml
     """
     if not kaleido_available or kaleido_major < 1:
