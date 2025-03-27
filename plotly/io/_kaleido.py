@@ -186,7 +186,6 @@ To downgrade to Kaleido v0, run:
             # TODO: Actually use provided kaleido_instance here
             img_bytes = kaleido.calc_fig_sync(
                 fig_dict,
-                path=None,
                 opts=dict(
                     format=format,
                     width=width,
@@ -411,7 +410,7 @@ def write_images(*args, **kwargs):
         # Kaleido v1
         # TODO: Use a single shared kaleido instance for all images
         for a, kw in zip(individual_args, individual_kwargs):
-            write_image(**kw)
+            write_image(*a, **kw)
     else:
         # Kaleido v0, or orca
         for a, kw in zip(individual_args, individual_kwargs):
