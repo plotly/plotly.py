@@ -67,15 +67,15 @@ def as_individual_args(*args, **kwargs):
     # Check that all list arguments have the same length,
     # and find out what that length is
     # If there are no list arguments, length is 1
-    list_lengths = [len(v) for v in args + tuple(kwargs.values()) if isinstance(v, list)]
+    list_lengths = [
+        len(v) for v in args + tuple(kwargs.values()) if isinstance(v, list)
+    ]
     if list_lengths and len(set(list_lengths)) > 1:
         raise ValueError("All list arguments must have the same length.")
     list_length = list_lengths[0] if list_lengths else 1
 
     # Expand all arguments to lists of the same length
-    expanded_args = [
-        [v] * list_length if not isinstance(v, list) else v for v in args
-    ]
+    expanded_args = [[v] * list_length if not isinstance(v, list) else v for v in args]
     expanded_kwargs = {
         k: [v] * list_length if not isinstance(v, list) else v
         for k, v in kwargs.items()
@@ -87,7 +87,9 @@ def as_individual_args(*args, **kwargs):
 
     # Reshape into a list of dictionaries
     # Each dictionary represents the keyword arguments for a single function call
-    list_of_kwargs = [{k: v[i] for k, v in expanded_kwargs.items()} for i in range(list_length)]
+    list_of_kwargs = [
+        {k: v[i] for k, v in expanded_kwargs.items()} for i in range(list_length)
+    ]
 
     return list_of_args, list_of_kwargs
 
