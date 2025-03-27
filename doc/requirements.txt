@@ -1,6 +1,5 @@
 plotly==6.0.1
 jupytext==1.16.4
-jupyter-client<7
 jupyter
 notebook
 pandas==1.4.0
