@@ -211,3 +211,51 @@ fig = dict({
 pio.write_image(fig, "fig.png")
 ~~~
 <!-- #endregion -->
+
+## Image Export Settings
+
+As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can specify defaults to be used. 
+
+### Available Settings
+
+The following settings are availble. 
+
+`default_width`: The default pixel width to use on image export.
+
+`default_height`: The default pixel height to use on image export.
+
+`default_scale`: The default image scale factor applied on image export.
+
+`default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", "pdf", or "eps" (Kaleido v1 only).
+
+`mathjax`: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
+
+`topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
+
+`mapbox_access_token`: The default Mapbox access token.
+
+### Configuring Defaults
+
+Since Plotly.py 6.1, settings are available on `plotly.io.defaults`
+
+To set the `default_format` to "jpeg":
+
+~~~python
+import plotly.io as pio
+pio.defaults.default_format = "jpeg"
+~~~
+
+You can also access current defaults. To see the default value for height:
+
+~~~python
+import plotly.io as pio
+pio.defaults.default_height
+~~~
+
+In earlier versions of Plotly.py, these settings are available on `plotly.io.kaleido.scope`. This is deprecated since version 6.1. Use `plotly.io.defaults` instead.
+
+~~~python
+import plotly.io as pio
+pio.kaleido.scope.default_format = "jpeg"
+~~~
+
