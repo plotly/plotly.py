@@ -47,7 +47,7 @@ dependencies = [
 express = ["numpy"]
 
 [project.scripts]
-plotly_install_chrome = "plotly.io._kaleido:install_chrome"
+plotly_get_chrome = "plotly.io._kaleido:get_chrome"
 
 [tool.setuptools.packages.find]
 where = ["."]

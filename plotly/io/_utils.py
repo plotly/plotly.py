@@ -43,40 +43,53 @@ Invalid output type: {output_type}
     return cls
 
 
-def as_individual_kwargs(**kwargs):
+def as_individual_args(*args, **kwargs):
     """
-    Given one or more keyword arguments which may be either a single value or a list of values,
-    return a list of dictionaries where each dictionary has only single values for each keyword
+    Given one or more positional or keyword arguments which may be either a single value
+    or a list of values, return a list of lists and a list of dictionaries
     by expanding the single values into lists.
-    If more than one keyword is a list, all lists must be the same length.
+    If more than one item in the input is a list, all lists must be the same length.
 
     Parameters
     ----------
-    kwargs: dict
+    *args: list
+        The positional arguments
+    **kwargs: dict
         The keyword arguments
 
     Returns
     -------
+    list of lists
+        A list of lists
     list of dicts
         A list of dictionaries
     """
     # Check that all list arguments have the same length,
     # and find out what that length is
     # If there are no list arguments, length is 1
-    list_lengths = [len(v) for v in kwargs.values() if isinstance(v, list)]
+    list_lengths = [len(v) for v in args + tuple(kwargs.values()) if isinstance(v, list)]
     if list_lengths and len(set(list_lengths)) > 1:
         raise ValueError("All list arguments must have the same length.")
     list_length = list_lengths[0] if list_lengths else 1
 
     # Expand all arguments to lists of the same length
+    expanded_args = [
+        [v] * list_length if not isinstance(v, list) else v for v in args
+    ]
     expanded_kwargs = {
         k: [v] * list_length if not isinstance(v, list) else v
         for k, v in kwargs.items()
     }
 
+    # Reshape into a list of lists
+    # Each list represents the positional arguments for a single function call
+    list_of_args = [[v[i] for v in expanded_args] for i in range(list_length)]
+
     # Reshape into a list of dictionaries
-    # Each dictionary represents the arguments for a single call to to_image
-    return [{k: v[i] for k, v in expanded_kwargs.items()} for i in range(list_length)]
+    # Each dictionary represents the keyword arguments for a single function call
+    list_of_kwargs = [{k: v[i] for k, v in expanded_kwargs.items()} for i in range(list_length)]
+
+    return list_of_args, list_of_kwargs
 
 
 def plotly_cdn_url(cdn_ver=get_plotlyjs_version()):
