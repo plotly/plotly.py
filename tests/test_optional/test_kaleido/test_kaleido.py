@@ -1,6 +1,8 @@
-from io import BytesIO
+from io import BytesIO, StringIO
 from pathlib import Path
 import tempfile
+from contextlib import redirect_stdout
+import base64
 
 from pdfrw import PdfReader
 from PIL import Image
@@ -88,18 +90,23 @@ def test_kaleido_engine_write_image_kwargs(tmp_path):
 
 
 def test_image_renderer():
-    # TODO: How to replicate this test using kaleido v1?
-    # with mocked_scope() as scope:
-    pio.show(fig, renderer="svg", engine="kaleido", validate=False)
-
-    renderer = pio.renderers["svg"]
-    # scope.transform.assert_called_with(
-    #     fig,
-    #     format="svg",
-    #     width=None,
-    #     height=None,
-    #     scale=renderer.scale,
-    # )
+    """Verify that the image renderer returns the expected mimebundle."""
+    with redirect_stdout(StringIO()) as f:
+        pio.show(fig, renderer="png", engine="kaleido", validate=False)
+    mimebundle = f.getvalue().strip()
+    mimebundle_expected = str(
+        {
+            "image/png": base64.b64encode(
+                pio.to_image(
+                    fig,
+                    format="png",
+                    engine="kaleido",
+                    validate=False,
+                )
+            ).decode("utf8")
+        }
+    )
+    assert mimebundle == mimebundle_expected
 
 
 def test_bytesio():
