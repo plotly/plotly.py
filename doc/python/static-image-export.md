@@ -130,7 +130,7 @@ fig.write_image("images/fig1.eps")
 **Note:** Figures containing WebGL traces (i.e. of type `scattergl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
 
 
-### Specifying a Format
+### Specify a Format
 
 In the earlier example, Plotly inferred the image format from the extension of the filename. You can also specify this with the `format` parameter.
 
@@ -212,7 +212,7 @@ pio.write_image(fig, "fig.png")
 ~~~
 <!-- #endregion -->
 
-## Image Export Settings
+## Image Export Settings (Kaleido)
 
 As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can specify defaults to be used. 
 
@@ -234,7 +234,7 @@ The following settings are availble.
 
 `mapbox_access_token`: The default Mapbox access token.
 
-### Configuring Defaults
+### Set Defaults
 
 Since Plotly.py 6.1, settings are available on `plotly.io.defaults`
 
@@ -256,6 +256,12 @@ In earlier versions of Plotly.py, these settings are available on `plotly.io.kal
 
 ~~~python
 import plotly.io as pio
+# Example using deprecated `plotly.io.kaleido.scope`
 pio.kaleido.scope.default_format = "jpeg"
 ~~~
 
+
+
+**Image Export Settings (Orca)**
+
+See the [Orca Management section](https://plotly.com/python/orca-management/) for information on how to specify image export settings when using orca. Support for orca will be removed after September 2025.
