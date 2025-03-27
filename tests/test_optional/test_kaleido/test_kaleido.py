@@ -251,3 +251,16 @@ def test_write_images_multiple(mock_write_image):
     ]
     mock_write_image.assert_has_calls(expected_calls, any_order=False)
     assert mock_write_image.call_count == 2
+
+
+def test_defaults():
+    """Test that image output defaults can be set using pio.defaults.*"""
+    try:
+        assert pio.defaults.default_format == "png"
+        pio.defaults.default_format = "svg"
+        assert pio.defaults.default_format == "svg"
+        result = pio.to_image(fig, format="svg", validate=False)
+        assert result.startswith(b"<svg")
+    finally:
+        pio.defaults.default_format = "png"
+        assert pio.defaults.default_format == "png"

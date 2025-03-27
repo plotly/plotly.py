@@ -17,6 +17,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._html import to_html, write_html
     from ._renderers import renderers, show
     from . import base_renderers
+    from ._defaults import defaults
 
     __all__ = [
         "to_image",
@@ -37,6 +38,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
         "show",
         "base_renderers",
         "full_figure_for_development",
+        "defaults",
     ]
 else:
     __all__, __getattr__, __dir__ = relative_import(
@@ -58,6 +60,7 @@ else:
             "._html.write_html",
             "._renderers.renderers",
             "._renderers.show",
+            "._defaults.defaults",
         ],
     )
 
