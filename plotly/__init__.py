@@ -181,11 +181,14 @@ def hist_series(data_frame, **kwargs):
     new_kwargs = {k: kwargs[k] for k in kwargs if k not in skip}
     return histogram(data_frame, **new_kwargs)
 
+
 def _jupyter_labextension_paths():
     """Called by Jupyter Lab Server to detect if it is a valid labextension and
     to install the extension.
     """
-    return [{
-        'src': 'labextension/static',
-        'dest': 'jupyterlab-plotly',
-    }]
+    return [
+        {
+            "src": "labextension/static",
+            "dest": "jupyterlab-plotly",
+        }
+    ]
