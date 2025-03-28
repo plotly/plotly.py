@@ -36,7 +36,7 @@ kaleido
 umap-learn==0.5.1
 pooch
 wget
-nbconvert==5.6.1
+nbconvert>=6.4.4
 orjson
 dash-bio
 jinja2<3.1
