@@ -321,17 +321,16 @@ jobs:
             uv venv
             source .venv/bin/activate
             uv pip install -r requirements.txt
+            cd ..
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               uv pip uninstall plotly
-              cd ..
               uv pip install -e .
               uv pip install jupyter
               cd plotly/labextension
               npm ci
               npm run build
-              cd ../doc
+              cd ../..
             fi
-            cd ..
 
       - run:
           name: make html
