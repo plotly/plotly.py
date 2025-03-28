@@ -540,8 +540,6 @@ which can be installed using pip:
         )
 
     if warn:
-        import warnings
-
         warnings.warn(
             "full_figure_for_development is not recommended or necessary for "
             "production use in most circumstances. \n"
