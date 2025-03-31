@@ -589,6 +589,92 @@ fig.update_layout(
 )
 ```
 
+### Using a scatterplot to wrap long bars into multiple columns 
+
+This bar-style pictogram allows readers to focus on the relative sizes of smaller entities by wrapping the bar for largest entries into multiple columns.  You could make it even more of a pictogram by using fontawesome to replace the square markers we use below with icons like mortar boards for students.
+
+```
+import plotly.graph_objects as go
+import pandas as pd
+
+#TODO:  make the results and the code compellingly clear, terse, and well designed; for example, make sure all the variable names are descriptive
+#TODO:  when we're happy, remove print statements
+#TODO:  consider adding the value for each group either above its section or to its title
+
+def pictogram_bar(data, title, icon_size, max_height=10, units_per_icon=1,columns_between_units=.5):
+    fig = go.Figure()
+   
+    # Iterate through the data and create a scatter plot for each category
+    x_start = 1
+    tick_locations = []
+    for i, (category, count) in enumerate(data.items()):
+        #convert the real number input to an integer number of icons.  Depending on the context, you might want to take floor or a ceiling rather than rouding
+        count = round(count / units_per_icon)
+        num_cols = (count + max_height - 1) // max_height  # Ceiling division
+        x_coordinates = []
+        y_coordinates = []
+        for col in range(num_cols):
+            print([x_start+col]*min(max_height, count-col*max_height))
+            x_coordinates += [x_start+col]*min(max_height, count-col*max_height)
+            print(list(range(0, min(max_height, count-col*max_height))))
+            for yc in range(1, min(max_height, count-col*max_height)+1):
+                y_coordinates.append(yc)
+        print(f"{category=}")
+        print(f"{x_coordinates=}")
+        print(f"{y_coordinates=}")
+        # Add dots for this category
+        fig.add_trace(go.Scatter(
+            x=x_coordinates,  # All dots are in the same x position (category)
+            y=y_coordinates,
+            mode='markers',
+            marker=dict(size=icon_size, symbol="square", color=i),
+            name=category,
+            #text=[category] * (y_end - y_start),  # Hover text
+            hoverinfo="text"
+        ))
+        tick_locations += [x_start+ (col)/2]
+        x_start += col+1+columns_between_units
+        print(f"{tick_locations=}")
+   
+    # Update layout for better visualization
+    fig.update_layout(
+        title=title,
+        xaxis=dict(
+            tickvals=tick_locations,
+            ticktext=list(data.keys()),
+            tickangle=-45,
+            showgrid=False
+        ),
+        #TODO:  HIDE THE Y-AXIS?  OR ENUMERATE IT IN "NATURAL UNITS" -- so count
+        yaxis=dict(
+            title="Units",
+            showgrid=False,
+            showline=False,
+            zeroline=False
+        ),
+        #TO DO:  SHOW THE LEGEND, BUT JUST FOR ONE TRACE; LABEL IT WITH SOMETHING LIKE "EACH ICON REPRESENTS {units_per_icon} {Y_VARNAME}"
+        showlegend=False,
+        #setting the width implicitly sets the amount of space between columns within groups and it's desirable to keep those columns close but not too close
+        #TODO:  set the width to a value that makes the spacing between columns reasonable; try it as a function of the number of columns of data, number of columns left blank as spacers, the icon size; and the left and right margins
+        # there's no right answer; but some answers will look a lot better than others; I'm guessing that roughly 2-3 times as many px as we fill with icons might be good
+        height=600
+    )
+
+    # Show the plot
+    fig.show()
+
+# TODO:  CHANGE THIS THROUGHOUT TO A DF NAMED DF.
+
+data = {
+    "Haverford College": 1421, #https://www.usnews.com/best-colleges/haverford-college-3274
+    "University of Mary Washington": 3611,  #https://www.usnews.com/best-colleges/university-of-mary-washington-3746#:~:text=Overview,campus%20size%20is%20234%20acres.
+    "Brown University": 7226,  #https://oir.brown.edu/institutional-data/factbooks/enrollment
+    "Arizona State University": 65174,  #https://www.usnews.com/best-colleges/arizona-state-university-1081
+}
+
+pictogram_bar(data, title="Undergraduate Enrollment at Participating Schools", units_per_icon=1000, icon_size=27)
+```
+
 ### Customizing Individual Bar Base
 
 ```python
