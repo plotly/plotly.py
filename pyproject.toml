@@ -46,6 +46,7 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
+kaleido = ["kaleido==1.0.0rc11"]
 
 [project.scripts]
 plotly_get_chrome = "plotly.io._kaleido:get_chrome"
