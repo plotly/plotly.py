@@ -226,13 +226,13 @@ The following settings are availble.
 
 `default_scale`: The default image scale factor applied on image export.
 
-`default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", "pdf", or "eps" (Kaleido v1 only).
+`default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", "pdf", or "eps" (Kaleido v0 only).
 
 `mathjax`: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
 
 `topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
 
-`mapbox_access_token`: The default Mapbox access token.
+`mapbox_access_token`: The default Mapbox access token (Kaleido v0 only). Mapbox traces are deprecated. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for more details.
 
 ### Set Defaults
 
