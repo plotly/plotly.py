@@ -219,7 +219,7 @@ fig.show()
 
 ### Diverging Bar (or Butterfly) Chart
 
-Diverging bar charts show counts of positive outcomes or sentiments to the right of zero and counts of negative outcomes to the left of zero, allowing the reader to easily spot areas of excellence and concern.  Implementing presentation-ready versions of them in Plotly requires a few non standard layout and legendrank options.
+Diverging bar charts show counts of positive outcomes or sentiments to the right of zero and counts of negative outcomes to the left of zero, allowing the reader to easily spot areas of excellence and concern.
 
 ```python
 import plotly.graph_objects as go
