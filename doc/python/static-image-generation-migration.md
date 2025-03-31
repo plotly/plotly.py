@@ -40,19 +40,31 @@ Plotly.py 6.1 introduces support for Kaleido v1, which [improves static image ge
 
 While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for orca, another static image generation library. Support for earlier verisons of Kaleido and orca will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate to Kaleido v1 and outlines any changes in functionality. 
 
-## Installing Kaleido
 
-Install the latest kaleido with:
+To migrate from either Orca or Kaleido v0, first install the latest Kaleido with:
 
 ```bash
 pip install -U kaleido
 ```
 
-## Updating Existing Code
+## Engine Parameter
 
-After September 2025, Kaleido v1 will  be the sole supported static image generator for Plotly.py. 
-With this change, the `engine` parameter on Plotly figure methods and functions that generate static images will be removed. For example, `fig.to_image(format="png", engine="orca")` or `fig.to_image(format="png", engine="kaleido")` needs to be updted to `fig.to_image(format="png")`. 
+The `engine` parameter on static image export methods and functions is deprecated with this Plotly.py release and will be removed after September 2025. You'll need to update your code to remove references to this parameter. For example, `fig.to_image(format="png", engine="orca")` or `fig.to_image(format="png", engine="kaleido")` needs to be updated to `fig.to_image(format="png")`. This change applies to: `fig.to_image`, `fig.write_image`, `plotly.io.to_image`, and `plotly.io.write_image`.
 
-This change applies to: `fig.to_image`, `fig.write_image`, `plotly.io.to_image`, and `plotly.io.write_image`.
+## EPS Format
 
+The `eps` format is no longer supported in Kaleido v1. If your existing code sets `format=eps`, you'll need to update it to use another format, for example `pdf`. 
+
+## Config Settings
+
+Accessing Kaleido defaults and config settings via `plotly.io.kaleido.scope` is now deprecated and will be removed after September 2025. You'll need to update any code that uses `plotly.io.kaleido.scope` to instead use `plotly.io.defaults`. For example, to set the `default_format` to "jpeg":
+
+~~~python
+import plotly.io as pio
+pio.defaults.default_format = "jpeg"
+~~~
+
+The `mapbox_access_token` config setting is not available on `plotly.io.defaults` because Mapbox maps are deprecated and will be removed in future version of Plotly.py. See [MapLibre Migration ](https://plotly.com/python/mapbox-to-maplibre/) for more details.
+
+If you are migrating from Orca, the following config settings do not apply to Kaleido: `server_url`, `port`, `timeout`, and `use_xvfb`, but other settings, such as `default_format`, can be accessed via `plotly.io.defaults`.
 <!-- #endregion -->
