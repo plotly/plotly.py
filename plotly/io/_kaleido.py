@@ -18,13 +18,12 @@ Support for Kaleido versions less than 1.0.0 is deprecated and will be removed a
 Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade --pre kaleido` or `pip install plotly[kaleido]`).
 """
 ORCA_DEPRECATION_MSG = f"""
-Support for the orca engine is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}.
+Support for the Orca engine is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}.
 Please install Kaleido (`pip install --upgrade --pre kaleido` or `pip install plotly[kaleido]`) to use the Kaleido engine.
 """
 ENGINE_PARAM_DEPRECATION_MSG = f"""
 Support for the 'engine' argument is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}.
 Kaleido will be the only supported engine at that time.
-Please install Kaleido (`pip install --upgrade --pre kaleido` or `pip install plotly[kaleido]`) to use the Kaleido engine.
 """
 
 _KALEIDO_AVAILABLE = None
