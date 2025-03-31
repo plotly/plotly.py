@@ -5,7 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 ### Fixed
-- Fix third-party widget display issues in v6 [[#5102]https://github.com/plotly/plotly.py/pull/5102]
+- Fix third-party widget display issues in v6 [[#5102](https://github.com/plotly/plotly.py/pull/5102)]\
+- Add handling for case where `jupyterlab` or `notebook` is not installed [[#5104](https://github.com/plotly/plotly.py/pull/5104/files)]
+- Fix issue causing Plotly.js script to be embedded multiple times in Jupyter notebooks [[#5112](https://github.com/plotly/plotly.py/pull/5112)]
 
 ## [6.0.1] - 2025-03-14
 
