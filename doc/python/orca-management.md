@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/orca-management.png
 ---
 
-> Support for orca in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](/python/static-image-export/) for details on using Kaleido for static image generation.
+> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](/python/static-image-export/) for details on using Kaleido for static image generation.
 
 ### Overview
 This section covers the lower-level details of how plotly.py can use orca to perform static image generation.

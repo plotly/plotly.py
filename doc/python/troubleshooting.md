@@ -77,7 +77,7 @@ The situation is similar for environments like Nteract and Streamlit: in these e
 
 ### Orca Problems
 
-> Support for orca in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](/python/static-image-export/) for details on using Kaleido for static image generation.
+> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](/python/static-image-export/) for details on using Kaleido for static image generation.
 
 If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
 
