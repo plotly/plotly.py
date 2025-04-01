@@ -52,7 +52,7 @@ or with conda:
 $ conda install -c conda-forge python-kaleido
 ```
 
-It's also possible to generate static images using [orca](https://github.com/plotly/orca), though support for orca will be removed after September 2025. See the [Orca Management](/python/orca-management/) page for more details.
+It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](/python/orca-management/) page for more details.
 
 ### Chrome
 
@@ -178,7 +178,7 @@ Image(img_bytes)
 
 If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 
-Here is an example of specifying that orca should be used:
+Here is an example of specifying `orca` for the image export engine:
 ~~~python
 fig.to_image(format="png", engine="orca")
 ~~~
@@ -264,4 +264,4 @@ pio.kaleido.scope.default_format = "jpeg"
 
 **Image Export Settings (Orca)**
 
-See the [Orca Management section](https://plotly.com/python/orca-management/) for information on how to specify image export settings when using orca. Support for orca will be removed after September 2025.
+See the [Orca Management section](https://plotly.com/python/orca-management/) for information on how to specify image export settings when using Orca. Support for Orca will be removed after September 2025.
