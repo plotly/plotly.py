@@ -38,7 +38,7 @@ jupyter:
 
 Plotly.py 6.1 introduces support for Kaleido v1, which [improves static image generation](https://plotly.com/blog/kaleido-the-next-generation/) for Plotly figures.
 
-While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for orca, another static image generation library. Support for earlier verisons of Kaleido and orca will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate to Kaleido v1 and outlines any changes in functionality. 
+While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for Orca, another static image generation library. Support for earlier verisons of Kaleido and Orca will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate to Kaleido v1 and outlines any changes in functionality.
 
 
 To migrate from either Orca or Kaleido v0, first install the latest Kaleido with:
@@ -53,7 +53,7 @@ The `engine` parameter on static image export methods and functions is deprecate
 
 ## EPS Format
 
-The `eps` format is no longer supported in Kaleido v1. If your existing code sets `format=eps`, you'll need to update it to use another format, for example `pdf`. 
+The `eps` format is no longer supported in Kaleido v1. If your existing code sets `format=eps`, you'll need to update it to use another format, for example `pdf`.
 
 ## Config Settings
 
