@@ -184,8 +184,8 @@ See [_Displaying Figures in Python_](/python/renderers/) for more information on
 
 plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
 using the either the [`kaleido`](https://github.com/plotly/Kaleido)
-package (recommended, supported as of `plotly` version 4.9) or the [orca](https://github.com/plotly/orca)
-command line utility (legacy as of `plotly` version 4.9).
+package (recommended, supported as of `plotly` version 4.9) or [`orca`](https://github.com/plotly/orca)
+command line utility (deprecated and will be removed after September 2025).
 
 #### Kaleido
 
@@ -201,28 +201,6 @@ or conda.
 ```
 $ conda install -c plotly python-kaleido
 ```
-
-#### Orca
-
-While Kaleido is now the recommended image export approach because it is easier to install
-and more widely compatible, [static image export](https://plotly.com/python/static-image-export/)
-can also be supported
-by the legacy [orca](https://github.com/plotly/orca) command line utility and the
- [`psutil`](https://github.com/giampaolo/psutil) Python package.
-
-These dependencies can both be installed using conda:
-
-```
-conda install -c plotly plotly-orca==1.3.1 psutil
-```
-
-Or, `psutil` can be installed using pip...
-
-```
-pip install psutil
-```
-
-and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
 
 #### Extended Geo Support
 
