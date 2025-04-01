@@ -1,3 +1,0 @@
-requests==2.25.1
-pytest==6.2.3
-narwhals>=1.15.1
