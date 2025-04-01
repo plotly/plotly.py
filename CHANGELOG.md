@@ -2,10 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [6.0.1] - 2025-02-16
+## Unreleased
 
 ### Fixed
-- Fix `TypeError` when using `orjson` to serialize `pandas.NA`.
+- Fix third-party widget display issues in v6 [[#5102]https://github.com/plotly/plotly.py/pull/5102]
+
+## [6.0.1] - 2025-03-14
+
+### Updated
+- Updated Plotly.js from version 3.0.0 to version 3.0.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#301----2025-02-18) for more information.
+
+
+### Fixed
+- Fix `TypeError` when using `orjson` to serialize `pandas.NA` [[#5040](https://github.com/plotly/plotly.py/pull/5040)].
+- Fix issue where using `category_orders` on `px.pie` raised `ColumnNotFoundError` [[#5000](https://github.com/plotly/plotly.py/pull/5000)].
+- Fix incorrect `DeprecationWarning` shown when creating a `px` chart [[#5080](https://github.com/plotly/plotly.py/pull/5080), [#5086](https://github.com/plotly/plotly.py/pull/5086)]
+
 
 ## [6.0.0] - 2025-01-28
 
