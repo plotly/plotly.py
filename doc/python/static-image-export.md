@@ -56,7 +56,7 @@ It's also possible to generate static images using [Orca](https://github.com/plo
 
 ### Chrome
 
-Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome. Kaleido v1 and later uses Chrome that's available on the machine on which it's running. If you need to install Chrome for static image generation, Plotly provides a CLI.
+Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome. Kaleido v1 and later uses the Chrome that's available on the machine on which it's running. If you need to install Chrome for static image generation, Plotly provides a CLI.
 
 Run `plotly_get_chrome` to install Chrome. 
 
