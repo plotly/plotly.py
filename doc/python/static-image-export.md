@@ -214,7 +214,7 @@ pio.write_image(fig, "fig.png")
 
 ## Image Export Settings (Kaleido)
 
-As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can specify defaults to be used. 
+As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can also set a single default to be used throughout the duration of the program. 
 
 ### Available Settings
 
