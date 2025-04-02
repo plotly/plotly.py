@@ -73,7 +73,7 @@ pio.install_chrome()
 
 Plotly figures have a `write_image` method to write a figure to a file. `write_image` supports PNG, JPEG, WebP, SVG, and PDF. 
 
-To export a figure using `write_image`, call `write_image` on the figure with the filename where you want to save the figure on the figure. The file format is inferred from the extension: 
+To export a figure using `write_image`, call `write_image` on the figure, and pass as an argument the filename where you want to save the figure. The file format is inferred from the extension: 
 
 
 ### Raster Formats
