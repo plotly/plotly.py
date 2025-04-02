@@ -194,7 +194,7 @@ fig.to_image(format="png", engine="kaleido")
 
 Previous examples on this page access `write_image` and `to_image` as methods on Plotly Figure objects. This functionality is also available via the `plotly.io` subpackage.
 
-The following example uses the `write_image` function from  `plotly.io`. The function takes the figure or a `dict` representing a figure (as shown in the example) as it's first argument.
+The following example uses the `write_image` function from  `plotly.io`. The function takes the figure or a `dict` representing a figure (as shown in the example) as its first argument.
 
 
 ~~~python
