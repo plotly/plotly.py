@@ -132,7 +132,7 @@ fig.write_image("images/fig1.eps")
 
 ### Specify a Format
 
-In the earlier example, Plotly inferred the image format from the extension of the filename. You can also specify this with the `format` parameter.
+In the earlier example, Plotly inferred the image format from the extension of the filename. You can also specify the format explicitly using the `format` parameter.
 
 ~~~python
 import plotly.express as px
