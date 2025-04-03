@@ -50,7 +50,7 @@ anywidget
 ## deps for _county_choropleth.py (Figure Factory) ##
 pyshp
 geopandas
-shapely
+shapely<2.1
 
 ## image uri conversion ##
 pillow
