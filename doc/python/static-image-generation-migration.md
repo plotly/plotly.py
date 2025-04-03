@@ -40,7 +40,6 @@ Plotly.py 6.1 introduces support for Kaleido v1, which [improves static image ge
 
 While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for Orca, another static image generation library. Support for earlier verisons of Kaleido and Orca will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate to Kaleido v1 and outlines any changes in functionality.
 
-
 To migrate from either Orca or Kaleido v0, first install the latest Kaleido with:
 
 ```bash
@@ -49,7 +48,9 @@ pip install -U kaleido
 
 ## Engine Parameter
 
-The `engine` parameter on static image export methods and functions is deprecated with this Plotly.py release and will be removed after September 2025. You'll need to update your code to remove references to this parameter. For example, `fig.to_image(format="png", engine="orca")` or `fig.to_image(format="png", engine="kaleido")` needs to be updated to `fig.to_image(format="png")`. This change applies to: `fig.to_image`, `fig.write_image`, `plotly.io.to_image`, and `plotly.io.write_image`.
+The `engine` parameter on static image export methods and functions is deprecated with this Plotly.py release and will be removed after September 2025. Once the `engine` parameter is removed, static image generation will use `Kaleido` if it's installed or raise an error if it isn't.
+
+You'll need to update your code to remove references to `engine`. For example, `fig.to_image(format="png", engine="orca")` or `fig.to_image(format="png", engine="kaleido")` needs to be updated to `fig.to_image(format="png")`. This change applies to: `fig.to_image`, `fig.write_image`, `plotly.io.to_image`, and `plotly.io.write_image`.
 
 ## EPS Format
 
