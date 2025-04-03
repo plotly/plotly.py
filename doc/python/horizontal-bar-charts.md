@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.11.10
   plotly:
     description: How to make horizontal bar charts in Python with Plotly.
     display_as: basic
@@ -239,7 +239,7 @@ x = ['Japan', 'United Kingdom', 'Canada', 'Netherlands',
 fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
                     shared_yaxes=False, vertical_spacing=0.001)
 
-fig.append_trace(go.Bar(
+fig.add_trace(go.Bar(
     x=y_saving,
     y=x,
     marker=dict(
@@ -252,7 +252,7 @@ fig.append_trace(go.Bar(
     orientation='h',
 ), 1, 1)
 
-fig.append_trace(go.Scatter(
+fig.add_trace(go.Scatter(
     x=y_net_worth, y=x,
     mode='lines+markers',
     line_color='rgb(128, 0, 128)',
