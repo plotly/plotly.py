@@ -89,7 +89,7 @@ class {class_name}({base_class_name}):
         {depr_msg}
         \"\"\"
         warnings.warn(\"\"\"{depr_msg}\"\"\", DeprecationWarning)
-        super({class_name}, self).__init__(*args, **kwargs)\n\n\n"""
+        super().__init__(*args, **kwargs)\n\n\n"""
         )
 
     # Return source string
