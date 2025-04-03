@@ -56,7 +56,7 @@ It's also possible to generate static images using [Orca](https://github.com/plo
 
 ### Chrome
 
-Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome. Kaleido v1 and later uses Chrome that's available on the machine on which it's running. If you need to install Chrome for static image generation, Plotly provides a CLI.
+Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome. Kaleido v1 and later uses the Chrome that's available on the machine on which it's running. If you need to install Chrome for static image generation, Plotly provides a CLI.
 
 Run `plotly_get_chrome` to install Chrome. 
 
@@ -73,7 +73,7 @@ pio.install_chrome()
 
 Plotly figures have a `write_image` method to write a figure to a file. `write_image` supports PNG, JPEG, WebP, SVG, and PDF. 
 
-To export a figure using `write_image`, call `write_image` on the figure with the filename where you want to save the figure on the figure. The file format is inferred from the extension: 
+To export a figure using `write_image`, call `write_image` on the figure, and pass as an argument the filename where you want to save the figure. The file format is inferred from the extension: 
 
 
 ### Raster Formats
@@ -132,7 +132,7 @@ fig.write_image("images/fig1.eps")
 
 ### Specify a Format
 
-In the earlier example, Plotly inferred the image format from the extension of the filename. You can also specify this with the `format` parameter.
+In the earlier example, Plotly inferred the image format from the extension of the filename. You can also specify the format explicitly using the `format` parameter.
 
 ~~~python
 import plotly.express as px
@@ -194,7 +194,7 @@ fig.to_image(format="png", engine="kaleido")
 
 Previous examples on this page access `write_image` and `to_image` as methods on Plotly Figure objects. This functionality is also available via the `plotly.io` subpackage.
 
-The following example uses the `write_image` function from  `plotly.io`. The function takes the figure or a `dict` representing a figure (as shown in the example) as it's first argument.
+The following example uses the `write_image` function from  `plotly.io`. The function takes the figure or a `dict` representing a figure (as shown in the example) as its first argument.
 
 
 ~~~python
@@ -214,7 +214,7 @@ pio.write_image(fig, "fig.png")
 
 ## Image Export Settings (Kaleido)
 
-As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can specify defaults to be used. 
+As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can also set a single default to be used throughout the duration of the program. 
 
 ### Available Settings
 
