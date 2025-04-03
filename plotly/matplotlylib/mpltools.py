@@ -4,6 +4,7 @@ Tools
 A module for converting from mpl language to plotly language.
 
 """
+
 import math
 
 import warnings
@@ -291,7 +292,7 @@ def convert_rgba_array(color_list):
     clean_color_list = list()
     for c in color_list:
         clean_color_list += [
-            (dict(r=int(c[0] * 255), g=int(c[1] * 255), b=int(c[2] * 255), a=c[3]))
+            dict(r=int(c[0] * 255), g=int(c[1] * 255), b=int(c[2] * 255), a=c[3])
         ]
     plotly_colors = list()
     for rgba in clean_color_list:

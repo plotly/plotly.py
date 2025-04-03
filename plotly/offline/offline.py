@@ -1,8 +1,9 @@
-""" Plotly Offline
-    A module to use Plotly's graphing library with Python
-    without connecting to a public or private plotly enterprise
-    server.
+"""Plotly Offline
+A module to use Plotly's graphing library with Python
+without connecting to a public or private plotly enterprise
+server.
 """
+
 import os
 import warnings
 import pkgutil

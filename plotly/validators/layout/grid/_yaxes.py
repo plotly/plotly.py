@@ -1,11 +1,11 @@
-import _plotly_utils.basevalidators
+import _plotly_utils.basevalidators as _bv
 
 
-class YaxesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
+class YaxesValidator(_bv.InfoArrayValidator):
     def __init__(self, plotly_name="yaxes", parent_name="layout.grid", **kwargs):
-        super(YaxesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             free_length=kwargs.pop("free_length", True),
             items=kwargs.pop(
