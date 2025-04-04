@@ -16,7 +16,7 @@
     "@lumino/widgets": "~2.4.0"
   },
   "devDependencies": {
-    "@jupyterlab/builder": "^4.3.6",
+    "@jupyterlab/builder": "^4.3.6 || ^3.6.8",
     "@types/plotly.js": "^2.33.4",
     "esbuild": "^0.23.1",
     "typescript": "^5.6.2"
