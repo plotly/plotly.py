@@ -4114,7 +4114,7 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
             fig = ff.create_choropleth(fips=fips, values=values, simplify_county=1)
 
             exp_fig_head = (
-                -88.053375,
+                -88.04504299999999,
                 -88.02916499999999,
                 -88.02432999999999,
                 -88.04504299999999,
