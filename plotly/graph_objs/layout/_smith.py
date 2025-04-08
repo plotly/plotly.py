@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -158,9 +161,9 @@ an instance of :class:`plotly.graph_objs.layout.Smith`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("domain", arg, domain)
-        self._init_provided("imaginaryaxis", arg, imaginaryaxis)
-        self._init_provided("realaxis", arg, realaxis)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("domain", arg, domain)
+        self._set_property("imaginaryaxis", arg, imaginaryaxis)
+        self._set_property("realaxis", arg, realaxis)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

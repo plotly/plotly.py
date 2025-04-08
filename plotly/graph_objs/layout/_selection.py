@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -477,17 +480,17 @@ an instance of :class:`plotly.graph_objs.layout.Selection`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("line", arg, line)
-        self._init_provided("name", arg, name)
-        self._init_provided("opacity", arg, opacity)
-        self._init_provided("path", arg, path)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("type", arg, type)
-        self._init_provided("x0", arg, x0)
-        self._init_provided("x1", arg, x1)
-        self._init_provided("xref", arg, xref)
-        self._init_provided("y0", arg, y0)
-        self._init_provided("y1", arg, y1)
-        self._init_provided("yref", arg, yref)
+        self._set_property("line", arg, line)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("path", arg, path)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("type", arg, type)
+        self._set_property("x0", arg, x0)
+        self._set_property("x1", arg, x1)
+        self._set_property("xref", arg, xref)
+        self._set_property("y0", arg, y0)
+        self._set_property("y1", arg, y1)
+        self._set_property("yref", arg, yref)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

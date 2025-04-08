@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -129,8 +132,8 @@ an instance of :class:`plotly.graph_objs.scatter.unselected.Marker`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("color", arg, color)
-        self._init_provided("opacity", arg, opacity)
-        self._init_provided("size", arg, size)
+        self._set_property("color", arg, color)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("size", arg, size)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

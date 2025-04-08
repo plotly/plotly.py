@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -107,7 +110,7 @@ an instance of :class:`plotly.graph_objs.sankey.Stream`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("maxpoints", arg, maxpoints)
-        self._init_provided("token", arg, token)
+        self._set_property("maxpoints", arg, maxpoints)
+        self._set_property("token", arg, token)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -411,17 +414,17 @@ an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("activecolor", arg, activecolor)
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("bordercolor", arg, bordercolor)
-        self._init_provided("borderwidth", arg, borderwidth)
-        self._init_provided("buttons", arg, buttons)
-        self._init_provided("buttondefaults", arg, buttondefaults)
-        self._init_provided("font", arg, font)
-        self._init_provided("visible", arg, visible)
-        self._init_provided("x", arg, x)
-        self._init_provided("xanchor", arg, xanchor)
-        self._init_provided("y", arg, y)
-        self._init_provided("yanchor", arg, yanchor)
+        self._set_property("activecolor", arg, activecolor)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("borderwidth", arg, borderwidth)
+        self._set_property("buttons", arg, buttons)
+        self._set_property("buttondefaults", arg, buttondefaults)
+        self._set_property("font", arg, font)
+        self._set_property("visible", arg, visible)
+        self._set_property("x", arg, x)
+        self._set_property("xanchor", arg, xanchor)
+        self._set_property("y", arg, y)
+        self._set_property("yanchor", arg, yanchor)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

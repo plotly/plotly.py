@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -233,11 +236,11 @@ an instance of :class:`plotly.graph_objs.layout.map.layer.Symbol`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("icon", arg, icon)
-        self._init_provided("iconsize", arg, iconsize)
-        self._init_provided("placement", arg, placement)
-        self._init_provided("text", arg, text)
-        self._init_provided("textfont", arg, textfont)
-        self._init_provided("textposition", arg, textposition)
+        self._set_property("icon", arg, icon)
+        self._set_property("iconsize", arg, iconsize)
+        self._set_property("placement", arg, placement)
+        self._set_property("text", arg, text)
+        self._set_property("textfont", arg, textfont)
+        self._set_property("textposition", arg, textposition)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -307,12 +310,12 @@ an instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("count", arg, count)
-        self._init_provided("label", arg, label)
-        self._init_provided("name", arg, name)
-        self._init_provided("step", arg, step)
-        self._init_provided("stepmode", arg, stepmode)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("visible", arg, visible)
+        self._set_property("count", arg, count)
+        self._set_property("label", arg, label)
+        self._set_property("name", arg, name)
+        self._set_property("step", arg, step)
+        self._set_property("stepmode", arg, stepmode)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

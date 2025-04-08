@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -347,13 +350,13 @@ an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("args", arg, args)
-        self._init_provided("args2", arg, args2)
-        self._init_provided("execute", arg, execute)
-        self._init_provided("label", arg, label)
-        self._init_provided("method", arg, method)
-        self._init_provided("name", arg, name)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("visible", arg, visible)
+        self._set_property("args", arg, args)
+        self._set_property("args2", arg, args2)
+        self._set_property("execute", arg, execute)
+        self._set_property("label", arg, label)
+        self._set_property("method", arg, method)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

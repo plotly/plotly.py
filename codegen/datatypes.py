@@ -2,7 +2,7 @@ import os.path as opath
 import textwrap
 from io import StringIO
 
-from codegen.utils import PlotlyNode, write_source_py
+from codegen.utils import CAVEAT, PlotlyNode, write_source_py
 
 
 deprecated_mapbox_traces = [
@@ -90,6 +90,7 @@ def build_datatype_py(node):
 
     # Initialze source code buffer
     buffer = StringIO()
+    buffer.write(CAVEAT)
 
     # Imports
     buffer.write(
@@ -362,12 +363,12 @@ an instance of :class:`{class_name}`\"\"\")
         # we suppress deprecation warnings for this line only.
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=DeprecationWarning)
-            self._init_provided('{name_prop}', arg, {name_prop})"""
+            self._set_property('{name_prop}', arg, {name_prop})"""
             )
         else:
             buffer.write(
                 f"""
-        self._init_provided('{name_prop}', arg, {name_prop})"""
+        self._set_property('{name_prop}', arg, {name_prop})"""
             )
 
     ### Literals

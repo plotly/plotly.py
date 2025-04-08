@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -630,21 +633,21 @@ an instance of :class:`plotly.graph_objs.barpolar.Marker`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("autocolorscale", arg, autocolorscale)
-        self._init_provided("cauto", arg, cauto)
-        self._init_provided("cmax", arg, cmax)
-        self._init_provided("cmid", arg, cmid)
-        self._init_provided("cmin", arg, cmin)
-        self._init_provided("color", arg, color)
-        self._init_provided("coloraxis", arg, coloraxis)
-        self._init_provided("colorbar", arg, colorbar)
-        self._init_provided("colorscale", arg, colorscale)
-        self._init_provided("colorsrc", arg, colorsrc)
-        self._init_provided("line", arg, line)
-        self._init_provided("opacity", arg, opacity)
-        self._init_provided("opacitysrc", arg, opacitysrc)
-        self._init_provided("pattern", arg, pattern)
-        self._init_provided("reversescale", arg, reversescale)
-        self._init_provided("showscale", arg, showscale)
+        self._set_property("autocolorscale", arg, autocolorscale)
+        self._set_property("cauto", arg, cauto)
+        self._set_property("cmax", arg, cmax)
+        self._set_property("cmid", arg, cmid)
+        self._set_property("cmin", arg, cmin)
+        self._set_property("color", arg, color)
+        self._set_property("coloraxis", arg, coloraxis)
+        self._set_property("colorbar", arg, colorbar)
+        self._set_property("colorscale", arg, colorscale)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("line", arg, line)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("opacitysrc", arg, opacitysrc)
+        self._set_property("pattern", arg, pattern)
+        self._set_property("reversescale", arg, reversescale)
+        self._set_property("showscale", arg, showscale)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

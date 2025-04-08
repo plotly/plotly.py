@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -417,17 +420,17 @@ an instance of :class:`plotly.graph_objs.barpolar.marker.Pattern`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("bgcolorsrc", arg, bgcolorsrc)
-        self._init_provided("fgcolor", arg, fgcolor)
-        self._init_provided("fgcolorsrc", arg, fgcolorsrc)
-        self._init_provided("fgopacity", arg, fgopacity)
-        self._init_provided("fillmode", arg, fillmode)
-        self._init_provided("shape", arg, shape)
-        self._init_provided("shapesrc", arg, shapesrc)
-        self._init_provided("size", arg, size)
-        self._init_provided("sizesrc", arg, sizesrc)
-        self._init_provided("solidity", arg, solidity)
-        self._init_provided("soliditysrc", arg, soliditysrc)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bgcolorsrc", arg, bgcolorsrc)
+        self._set_property("fgcolor", arg, fgcolor)
+        self._set_property("fgcolorsrc", arg, fgcolorsrc)
+        self._set_property("fgopacity", arg, fgopacity)
+        self._set_property("fillmode", arg, fillmode)
+        self._set_property("shape", arg, shape)
+        self._set_property("shapesrc", arg, shapesrc)
+        self._set_property("size", arg, size)
+        self._set_property("sizesrc", arg, sizesrc)
+        self._set_property("solidity", arg, solidity)
+        self._set_property("soliditysrc", arg, soliditysrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

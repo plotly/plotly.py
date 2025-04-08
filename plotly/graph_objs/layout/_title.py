@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -435,16 +438,16 @@ an instance of :class:`plotly.graph_objs.layout.Title`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("automargin", arg, automargin)
-        self._init_provided("font", arg, font)
-        self._init_provided("pad", arg, pad)
-        self._init_provided("subtitle", arg, subtitle)
-        self._init_provided("text", arg, text)
-        self._init_provided("x", arg, x)
-        self._init_provided("xanchor", arg, xanchor)
-        self._init_provided("xref", arg, xref)
-        self._init_provided("y", arg, y)
-        self._init_provided("yanchor", arg, yanchor)
-        self._init_provided("yref", arg, yref)
+        self._set_property("automargin", arg, automargin)
+        self._set_property("font", arg, font)
+        self._set_property("pad", arg, pad)
+        self._set_property("subtitle", arg, subtitle)
+        self._set_property("text", arg, text)
+        self._set_property("x", arg, x)
+        self._set_property("xanchor", arg, xanchor)
+        self._set_property("xref", arg, xref)
+        self._set_property("y", arg, y)
+        self._set_property("yanchor", arg, yanchor)
+        self._set_property("yref", arg, yref)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -6,7 +6,7 @@ from codegen.datatypes import (
     add_constructor_params,
     add_docstring,
 )
-from codegen.utils import write_source_py
+from codegen.utils import CAVEAT, write_source_py
 
 import inflect
 from plotly.basedatatypes import BaseFigure
@@ -55,6 +55,7 @@ def build_figure_py(
     # Initialize source code buffer
     # -----------------------------
     buffer = StringIO()
+    buffer.write(CAVEAT)
 
     # Get list of trace type nodes
     # ----------------------------

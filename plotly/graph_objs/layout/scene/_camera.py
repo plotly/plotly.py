@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -175,9 +178,9 @@ an instance of :class:`plotly.graph_objs.layout.scene.Camera`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("center", arg, center)
-        self._init_provided("eye", arg, eye)
-        self._init_provided("projection", arg, projection)
-        self._init_provided("up", arg, up)
+        self._set_property("center", arg, center)
+        self._set_property("eye", arg, eye)
+        self._set_property("projection", arg, projection)
+        self._set_property("up", arg, up)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

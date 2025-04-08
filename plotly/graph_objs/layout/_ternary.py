@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -239,12 +242,12 @@ an instance of :class:`plotly.graph_objs.layout.Ternary`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("aaxis", arg, aaxis)
-        self._init_provided("baxis", arg, baxis)
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("caxis", arg, caxis)
-        self._init_provided("domain", arg, domain)
-        self._init_provided("sum", arg, sum)
-        self._init_provided("uirevision", arg, uirevision)
+        self._set_property("aaxis", arg, aaxis)
+        self._set_property("baxis", arg, baxis)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("caxis", arg, caxis)
+        self._set_property("domain", arg, domain)
+        self._set_property("sum", arg, sum)
+        self._set_property("uirevision", arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

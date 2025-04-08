@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -294,11 +297,11 @@ an instance of :class:`plotly.graph_objs.sankey.link.Colorscale`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("cmax", arg, cmax)
-        self._init_provided("cmin", arg, cmin)
-        self._init_provided("colorscale", arg, colorscale)
-        self._init_provided("label", arg, label)
-        self._init_provided("name", arg, name)
-        self._init_provided("templateitemname", arg, templateitemname)
+        self._set_property("cmax", arg, cmax)
+        self._set_property("cmin", arg, cmin)
+        self._set_property("colorscale", arg, colorscale)
+        self._set_property("label", arg, label)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

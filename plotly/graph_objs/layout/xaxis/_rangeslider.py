@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -299,13 +302,13 @@ an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("autorange", arg, autorange)
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("bordercolor", arg, bordercolor)
-        self._init_provided("borderwidth", arg, borderwidth)
-        self._init_provided("range", arg, range)
-        self._init_provided("thickness", arg, thickness)
-        self._init_provided("visible", arg, visible)
-        self._init_provided("yaxis", arg, yaxis)
+        self._set_property("autorange", arg, autorange)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("borderwidth", arg, borderwidth)
+        self._set_property("range", arg, range)
+        self._set_property("thickness", arg, thickness)
+        self._set_property("visible", arg, visible)
+        self._set_property("yaxis", arg, yaxis)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

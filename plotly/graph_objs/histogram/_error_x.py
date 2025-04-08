@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -484,20 +487,20 @@ an instance of :class:`plotly.graph_objs.histogram.ErrorX`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("array", arg, array)
-        self._init_provided("arrayminus", arg, arrayminus)
-        self._init_provided("arrayminussrc", arg, arrayminussrc)
-        self._init_provided("arraysrc", arg, arraysrc)
-        self._init_provided("color", arg, color)
-        self._init_provided("copy_ystyle", arg, copy_ystyle)
-        self._init_provided("symmetric", arg, symmetric)
-        self._init_provided("thickness", arg, thickness)
-        self._init_provided("traceref", arg, traceref)
-        self._init_provided("tracerefminus", arg, tracerefminus)
-        self._init_provided("type", arg, type)
-        self._init_provided("value", arg, value)
-        self._init_provided("valueminus", arg, valueminus)
-        self._init_provided("visible", arg, visible)
-        self._init_provided("width", arg, width)
+        self._set_property("array", arg, array)
+        self._set_property("arrayminus", arg, arrayminus)
+        self._set_property("arrayminussrc", arg, arrayminussrc)
+        self._set_property("arraysrc", arg, arraysrc)
+        self._set_property("color", arg, color)
+        self._set_property("copy_ystyle", arg, copy_ystyle)
+        self._set_property("symmetric", arg, symmetric)
+        self._set_property("thickness", arg, thickness)
+        self._set_property("traceref", arg, traceref)
+        self._set_property("tracerefminus", arg, tracerefminus)
+        self._set_property("type", arg, type)
+        self._set_property("value", arg, value)
+        self._set_property("valueminus", arg, valueminus)
+        self._set_property("visible", arg, visible)
+        self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

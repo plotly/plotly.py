@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -368,15 +371,15 @@ an instance of :class:`plotly.graph_objs.layout.Polar`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("angularaxis", arg, angularaxis)
-        self._init_provided("bargap", arg, bargap)
-        self._init_provided("barmode", arg, barmode)
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("domain", arg, domain)
-        self._init_provided("gridshape", arg, gridshape)
-        self._init_provided("hole", arg, hole)
-        self._init_provided("radialaxis", arg, radialaxis)
-        self._init_provided("sector", arg, sector)
-        self._init_provided("uirevision", arg, uirevision)
+        self._set_property("angularaxis", arg, angularaxis)
+        self._set_property("bargap", arg, bargap)
+        self._set_property("barmode", arg, barmode)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("domain", arg, domain)
+        self._set_property("gridshape", arg, gridshape)
+        self._set_property("hole", arg, hole)
+        self._set_property("radialaxis", arg, radialaxis)
+        self._set_property("sector", arg, sector)
+        self._set_property("uirevision", arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

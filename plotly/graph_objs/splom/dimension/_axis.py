@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -109,7 +112,7 @@ an instance of :class:`plotly.graph_objs.splom.dimension.Axis`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("matches", arg, matches)
-        self._init_provided("type", arg, type)
+        self._set_property("matches", arg, matches)
+        self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

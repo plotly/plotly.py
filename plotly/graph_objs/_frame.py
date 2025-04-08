@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseFrameHierarchyType as _BaseFrameHierarchyType
 import copy as _copy
 
@@ -210,11 +213,11 @@ an instance of :class:`plotly.graph_objs.Frame`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("baseframe", arg, baseframe)
-        self._init_provided("data", arg, data)
-        self._init_provided("group", arg, group)
-        self._init_provided("layout", arg, layout)
-        self._init_provided("name", arg, name)
-        self._init_provided("traces", arg, traces)
+        self._set_property("baseframe", arg, baseframe)
+        self._set_property("data", arg, data)
+        self._set_property("group", arg, group)
+        self._set_property("layout", arg, layout)
+        self._set_property("name", arg, name)
+        self._set_property("traces", arg, traces)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

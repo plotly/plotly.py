@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -378,15 +381,15 @@ an instance of :class:`plotly.graph_objs.layout.Map`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("bearing", arg, bearing)
-        self._init_provided("bounds", arg, bounds)
-        self._init_provided("center", arg, center)
-        self._init_provided("domain", arg, domain)
-        self._init_provided("layers", arg, layers)
-        self._init_provided("layerdefaults", arg, layerdefaults)
-        self._init_provided("pitch", arg, pitch)
-        self._init_provided("style", arg, style)
-        self._init_provided("uirevision", arg, uirevision)
-        self._init_provided("zoom", arg, zoom)
+        self._set_property("bearing", arg, bearing)
+        self._set_property("bounds", arg, bounds)
+        self._set_property("center", arg, center)
+        self._set_property("domain", arg, domain)
+        self._set_property("layers", arg, layers)
+        self._set_property("layerdefaults", arg, layerdefaults)
+        self._set_property("pitch", arg, pitch)
+        self._set_property("style", arg, style)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("zoom", arg, zoom)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

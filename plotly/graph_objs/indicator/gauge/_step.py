@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -252,11 +255,11 @@ an instance of :class:`plotly.graph_objs.indicator.gauge.Step`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("color", arg, color)
-        self._init_provided("line", arg, line)
-        self._init_provided("name", arg, name)
-        self._init_provided("range", arg, range)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("thickness", arg, thickness)
+        self._set_property("color", arg, color)
+        self._set_property("line", arg, line)
+        self._set_property("name", arg, name)
+        self._set_property("range", arg, range)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("thickness", arg, thickness)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

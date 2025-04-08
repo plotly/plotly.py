@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -495,17 +498,17 @@ an instance of :class:`plotly.graph_objs.layout.Grid`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("columns", arg, columns)
-        self._init_provided("domain", arg, domain)
-        self._init_provided("pattern", arg, pattern)
-        self._init_provided("roworder", arg, roworder)
-        self._init_provided("rows", arg, rows)
-        self._init_provided("subplots", arg, subplots)
-        self._init_provided("xaxes", arg, xaxes)
-        self._init_provided("xgap", arg, xgap)
-        self._init_provided("xside", arg, xside)
-        self._init_provided("yaxes", arg, yaxes)
-        self._init_provided("ygap", arg, ygap)
-        self._init_provided("yside", arg, yside)
+        self._set_property("columns", arg, columns)
+        self._set_property("domain", arg, domain)
+        self._set_property("pattern", arg, pattern)
+        self._set_property("roworder", arg, roworder)
+        self._set_property("rows", arg, rows)
+        self._set_property("subplots", arg, subplots)
+        self._set_property("xaxes", arg, xaxes)
+        self._set_property("xgap", arg, xgap)
+        self._set_property("xside", arg, xside)
+        self._set_property("yaxes", arg, yaxes)
+        self._set_property("ygap", arg, ygap)
+        self._set_property("yside", arg, yside)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

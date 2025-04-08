@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -328,15 +331,15 @@ an instance of :class:`plotly.graph_objs.scattermapbox.Cluster`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("color", arg, color)
-        self._init_provided("colorsrc", arg, colorsrc)
-        self._init_provided("enabled", arg, enabled)
-        self._init_provided("maxzoom", arg, maxzoom)
-        self._init_provided("opacity", arg, opacity)
-        self._init_provided("opacitysrc", arg, opacitysrc)
-        self._init_provided("size", arg, size)
-        self._init_provided("sizesrc", arg, sizesrc)
-        self._init_provided("step", arg, step)
-        self._init_provided("stepsrc", arg, stepsrc)
+        self._set_property("color", arg, color)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("enabled", arg, enabled)
+        self._set_property("maxzoom", arg, maxzoom)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("opacitysrc", arg, opacitysrc)
+        self._set_property("size", arg, size)
+        self._set_property("sizesrc", arg, sizesrc)
+        self._set_property("step", arg, step)
+        self._set_property("stepsrc", arg, stepsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

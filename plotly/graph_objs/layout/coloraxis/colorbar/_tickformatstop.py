@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -232,10 +235,10 @@ an instance of :class:`plotly.graph_objs.layout.coloraxis.colorbar.Tickformatsto
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("dtickrange", arg, dtickrange)
-        self._init_provided("enabled", arg, enabled)
-        self._init_provided("name", arg, name)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("value", arg, value)
+        self._set_property("dtickrange", arg, dtickrange)
+        self._set_property("enabled", arg, enabled)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("value", arg, value)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

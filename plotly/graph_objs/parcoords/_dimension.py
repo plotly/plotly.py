@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -528,19 +531,19 @@ an instance of :class:`plotly.graph_objs.parcoords.Dimension`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("constraintrange", arg, constraintrange)
-        self._init_provided("label", arg, label)
-        self._init_provided("multiselect", arg, multiselect)
-        self._init_provided("name", arg, name)
-        self._init_provided("range", arg, range)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("tickformat", arg, tickformat)
-        self._init_provided("ticktext", arg, ticktext)
-        self._init_provided("ticktextsrc", arg, ticktextsrc)
-        self._init_provided("tickvals", arg, tickvals)
-        self._init_provided("tickvalssrc", arg, tickvalssrc)
-        self._init_provided("values", arg, values)
-        self._init_provided("valuessrc", arg, valuessrc)
-        self._init_provided("visible", arg, visible)
+        self._set_property("constraintrange", arg, constraintrange)
+        self._set_property("label", arg, label)
+        self._set_property("multiselect", arg, multiselect)
+        self._set_property("name", arg, name)
+        self._set_property("range", arg, range)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("tickformat", arg, tickformat)
+        self._set_property("ticktext", arg, ticktext)
+        self._set_property("ticktextsrc", arg, ticktextsrc)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

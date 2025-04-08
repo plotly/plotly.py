@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -282,12 +285,12 @@ an instance of :class:`plotly.graph_objs.splom.Dimension`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("axis", arg, axis)
-        self._init_provided("label", arg, label)
-        self._init_provided("name", arg, name)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("values", arg, values)
-        self._init_provided("valuessrc", arg, valuessrc)
-        self._init_provided("visible", arg, visible)
+        self._set_property("axis", arg, axis)
+        self._set_property("label", arg, label)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

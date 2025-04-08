@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -241,11 +244,11 @@ an instance of :class:`plotly.graph_objs.layout.geo.Projection`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("distance", arg, distance)
-        self._init_provided("parallels", arg, parallels)
-        self._init_provided("rotation", arg, rotation)
-        self._init_provided("scale", arg, scale)
-        self._init_provided("tilt", arg, tilt)
-        self._init_provided("type", arg, type)
+        self._set_property("distance", arg, distance)
+        self._set_property("parallels", arg, parallels)
+        self._set_property("rotation", arg, rotation)
+        self._set_property("scale", arg, scale)
+        self._set_property("tilt", arg, tilt)
+        self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

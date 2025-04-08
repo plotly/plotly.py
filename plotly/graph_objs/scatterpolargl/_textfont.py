@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -383,17 +386,17 @@ an instance of :class:`plotly.graph_objs.scatterpolargl.Textfont`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("color", arg, color)
-        self._init_provided("colorsrc", arg, colorsrc)
-        self._init_provided("family", arg, family)
-        self._init_provided("familysrc", arg, familysrc)
-        self._init_provided("size", arg, size)
-        self._init_provided("sizesrc", arg, sizesrc)
-        self._init_provided("style", arg, style)
-        self._init_provided("stylesrc", arg, stylesrc)
-        self._init_provided("variant", arg, variant)
-        self._init_provided("variantsrc", arg, variantsrc)
-        self._init_provided("weight", arg, weight)
-        self._init_provided("weightsrc", arg, weightsrc)
+        self._set_property("color", arg, color)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("family", arg, family)
+        self._set_property("familysrc", arg, familysrc)
+        self._set_property("size", arg, size)
+        self._set_property("sizesrc", arg, sizesrc)
+        self._set_property("style", arg, style)
+        self._set_property("stylesrc", arg, stylesrc)
+        self._set_property("variant", arg, variant)
+        self._set_property("variantsrc", arg, variantsrc)
+        self._set_property("weight", arg, weight)
+        self._set_property("weightsrc", arg, weightsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

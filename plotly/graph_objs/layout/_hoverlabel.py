@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -244,11 +247,11 @@ an instance of :class:`plotly.graph_objs.layout.Hoverlabel`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("align", arg, align)
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("bordercolor", arg, bordercolor)
-        self._init_provided("font", arg, font)
-        self._init_provided("grouptitlefont", arg, grouptitlefont)
-        self._init_provided("namelength", arg, namelength)
+        self._set_property("align", arg, align)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("font", arg, font)
+        self._set_property("grouptitlefont", arg, grouptitlefont)
+        self._set_property("namelength", arg, namelength)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

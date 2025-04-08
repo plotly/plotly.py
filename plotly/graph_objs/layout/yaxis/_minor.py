@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -548,19 +551,19 @@ an instance of :class:`plotly.graph_objs.layout.yaxis.Minor`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("dtick", arg, dtick)
-        self._init_provided("gridcolor", arg, gridcolor)
-        self._init_provided("griddash", arg, griddash)
-        self._init_provided("gridwidth", arg, gridwidth)
-        self._init_provided("nticks", arg, nticks)
-        self._init_provided("showgrid", arg, showgrid)
-        self._init_provided("tick0", arg, tick0)
-        self._init_provided("tickcolor", arg, tickcolor)
-        self._init_provided("ticklen", arg, ticklen)
-        self._init_provided("tickmode", arg, tickmode)
-        self._init_provided("ticks", arg, ticks)
-        self._init_provided("tickvals", arg, tickvals)
-        self._init_provided("tickvalssrc", arg, tickvalssrc)
-        self._init_provided("tickwidth", arg, tickwidth)
+        self._set_property("dtick", arg, dtick)
+        self._set_property("gridcolor", arg, gridcolor)
+        self._set_property("griddash", arg, griddash)
+        self._set_property("gridwidth", arg, gridwidth)
+        self._set_property("nticks", arg, nticks)
+        self._set_property("showgrid", arg, showgrid)
+        self._set_property("tick0", arg, tick0)
+        self._set_property("tickcolor", arg, tickcolor)
+        self._set_property("ticklen", arg, ticklen)
+        self._set_property("tickmode", arg, tickmode)
+        self._set_property("ticks", arg, ticks)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("tickwidth", arg, tickwidth)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

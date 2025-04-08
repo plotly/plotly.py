@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -524,20 +527,20 @@ an instance of :class:`plotly.graph_objs.layout.Newshape`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("drawdirection", arg, drawdirection)
-        self._init_provided("fillcolor", arg, fillcolor)
-        self._init_provided("fillrule", arg, fillrule)
-        self._init_provided("label", arg, label)
-        self._init_provided("layer", arg, layer)
-        self._init_provided("legend", arg, legend)
-        self._init_provided("legendgroup", arg, legendgroup)
-        self._init_provided("legendgrouptitle", arg, legendgrouptitle)
-        self._init_provided("legendrank", arg, legendrank)
-        self._init_provided("legendwidth", arg, legendwidth)
-        self._init_provided("line", arg, line)
-        self._init_provided("name", arg, name)
-        self._init_provided("opacity", arg, opacity)
-        self._init_provided("showlegend", arg, showlegend)
-        self._init_provided("visible", arg, visible)
+        self._set_property("drawdirection", arg, drawdirection)
+        self._set_property("fillcolor", arg, fillcolor)
+        self._set_property("fillrule", arg, fillrule)
+        self._set_property("label", arg, label)
+        self._set_property("layer", arg, layer)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgroup", arg, legendgroup)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("line", arg, line)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("showlegend", arg, showlegend)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

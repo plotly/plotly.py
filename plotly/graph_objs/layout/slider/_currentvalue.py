@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -210,11 +213,11 @@ an instance of :class:`plotly.graph_objs.layout.slider.Currentvalue`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("font", arg, font)
-        self._init_provided("offset", arg, offset)
-        self._init_provided("prefix", arg, prefix)
-        self._init_provided("suffix", arg, suffix)
-        self._init_provided("visible", arg, visible)
-        self._init_provided("xanchor", arg, xanchor)
+        self._set_property("font", arg, font)
+        self._set_property("offset", arg, offset)
+        self._set_property("prefix", arg, prefix)
+        self._set_property("suffix", arg, suffix)
+        self._set_property("visible", arg, visible)
+        self._set_property("xanchor", arg, xanchor)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

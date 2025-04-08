@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -589,20 +592,20 @@ an instance of :class:`plotly.graph_objs.layout.Image`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("layer", arg, layer)
-        self._init_provided("name", arg, name)
-        self._init_provided("opacity", arg, opacity)
-        self._init_provided("sizex", arg, sizex)
-        self._init_provided("sizey", arg, sizey)
-        self._init_provided("sizing", arg, sizing)
-        self._init_provided("source", arg, source)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("visible", arg, visible)
-        self._init_provided("x", arg, x)
-        self._init_provided("xanchor", arg, xanchor)
-        self._init_provided("xref", arg, xref)
-        self._init_provided("y", arg, y)
-        self._init_provided("yanchor", arg, yanchor)
-        self._init_provided("yref", arg, yref)
+        self._set_property("layer", arg, layer)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("sizex", arg, sizex)
+        self._set_property("sizey", arg, sizey)
+        self._set_property("sizing", arg, sizing)
+        self._set_property("source", arg, source)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("visible", arg, visible)
+        self._set_property("x", arg, x)
+        self._set_property("xanchor", arg, xanchor)
+        self._set_property("xref", arg, xref)
+        self._set_property("y", arg, y)
+        self._set_property("yanchor", arg, yanchor)
+        self._set_property("yref", arg, yref)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

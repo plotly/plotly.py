@@ -2,7 +2,7 @@ import os.path as opath
 from io import StringIO
 
 import _plotly_utils.basevalidators
-from codegen.utils import PlotlyNode, TraceNode, write_source_py
+from codegen.utils import CAVEAT, PlotlyNode, TraceNode, write_source_py
 
 
 def build_validator_py(node: PlotlyNode):
@@ -25,8 +25,9 @@ def build_validator_py(node: PlotlyNode):
     assert node.is_datatype
 
     # Initialize
-    buffer = StringIO()
     import_alias = "_bv"
+    buffer = StringIO()
+    buffer.write(CAVEAT)
 
     # Imports
     # -------

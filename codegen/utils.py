@@ -8,6 +8,13 @@ from typing import List
 import re
 import errno
 
+CAVEAT = """
+
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+"""
+
 
 # Source code utilities
 # =====================
