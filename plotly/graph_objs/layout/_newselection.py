@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -112,7 +115,7 @@ an instance of :class:`plotly.graph_objs.layout.Newselection`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("line", arg, line)
-        self._init_provided("mode", arg, mode)
+        self._set_property("line", arg, line)
+        self._set_property("mode", arg, mode)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

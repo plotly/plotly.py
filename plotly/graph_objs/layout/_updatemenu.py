@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -610,23 +613,23 @@ an instance of :class:`plotly.graph_objs.layout.Updatemenu`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("active", arg, active)
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("bordercolor", arg, bordercolor)
-        self._init_provided("borderwidth", arg, borderwidth)
-        self._init_provided("buttons", arg, buttons)
-        self._init_provided("buttondefaults", arg, buttondefaults)
-        self._init_provided("direction", arg, direction)
-        self._init_provided("font", arg, font)
-        self._init_provided("name", arg, name)
-        self._init_provided("pad", arg, pad)
-        self._init_provided("showactive", arg, showactive)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("type", arg, type)
-        self._init_provided("visible", arg, visible)
-        self._init_provided("x", arg, x)
-        self._init_provided("xanchor", arg, xanchor)
-        self._init_provided("y", arg, y)
-        self._init_provided("yanchor", arg, yanchor)
+        self._set_property("active", arg, active)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("borderwidth", arg, borderwidth)
+        self._set_property("buttons", arg, buttons)
+        self._set_property("buttondefaults", arg, buttondefaults)
+        self._set_property("direction", arg, direction)
+        self._set_property("font", arg, font)
+        self._set_property("name", arg, name)
+        self._set_property("pad", arg, pad)
+        self._set_property("showactive", arg, showactive)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("type", arg, type)
+        self._set_property("visible", arg, visible)
+        self._set_property("x", arg, x)
+        self._set_property("xanchor", arg, xanchor)
+        self._set_property("y", arg, y)
+        self._set_property("yanchor", arg, yanchor)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

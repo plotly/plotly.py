@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -320,14 +323,14 @@ an instance of :class:`plotly.graph_objs.carpet.Font`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("color", arg, color)
-        self._init_provided("family", arg, family)
-        self._init_provided("lineposition", arg, lineposition)
-        self._init_provided("shadow", arg, shadow)
-        self._init_provided("size", arg, size)
-        self._init_provided("style", arg, style)
-        self._init_provided("textcase", arg, textcase)
-        self._init_provided("variant", arg, variant)
-        self._init_provided("weight", arg, weight)
+        self._set_property("color", arg, color)
+        self._set_property("family", arg, family)
+        self._set_property("lineposition", arg, lineposition)
+        self._set_property("shadow", arg, shadow)
+        self._set_property("size", arg, size)
+        self._set_property("style", arg, style)
+        self._set_property("textcase", arg, textcase)
+        self._set_property("variant", arg, variant)
+        self._set_property("weight", arg, weight)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

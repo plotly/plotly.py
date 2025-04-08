@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -207,8 +210,8 @@ an instance of :class:`plotly.graph_objs.layout.Colorscale`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("diverging", arg, diverging)
-        self._init_provided("sequential", arg, sequential)
-        self._init_provided("sequentialminus", arg, sequentialminus)
+        self._set_property("diverging", arg, diverging)
+        self._set_property("sequential", arg, sequential)
+        self._set_property("sequentialminus", arg, sequentialminus)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

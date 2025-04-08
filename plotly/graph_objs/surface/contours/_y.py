@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -347,16 +350,16 @@ an instance of :class:`plotly.graph_objs.surface.contours.Y`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("color", arg, color)
-        self._init_provided("end", arg, end)
-        self._init_provided("highlight", arg, highlight)
-        self._init_provided("highlightcolor", arg, highlightcolor)
-        self._init_provided("highlightwidth", arg, highlightwidth)
-        self._init_provided("project", arg, project)
-        self._init_provided("show", arg, show)
-        self._init_provided("size", arg, size)
-        self._init_provided("start", arg, start)
-        self._init_provided("usecolormap", arg, usecolormap)
-        self._init_provided("width", arg, width)
+        self._set_property("color", arg, color)
+        self._set_property("end", arg, end)
+        self._set_property("highlight", arg, highlight)
+        self._set_property("highlightcolor", arg, highlightcolor)
+        self._set_property("highlightwidth", arg, highlightwidth)
+        self._set_property("project", arg, project)
+        self._set_property("show", arg, show)
+        self._set_property("size", arg, size)
+        self._set_property("start", arg, start)
+        self._set_property("usecolormap", arg, usecolormap)
+        self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

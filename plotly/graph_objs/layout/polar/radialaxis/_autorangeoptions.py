@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -206,11 +209,11 @@ an instance of :class:`plotly.graph_objs.layout.polar.radialaxis.Autorangeoption
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("clipmax", arg, clipmax)
-        self._init_provided("clipmin", arg, clipmin)
-        self._init_provided("include", arg, include)
-        self._init_provided("includesrc", arg, includesrc)
-        self._init_provided("maxallowed", arg, maxallowed)
-        self._init_provided("minallowed", arg, minallowed)
+        self._set_property("clipmax", arg, clipmax)
+        self._set_property("clipmin", arg, clipmin)
+        self._set_property("include", arg, include)
+        self._set_property("includesrc", arg, includesrc)
+        self._set_property("maxallowed", arg, maxallowed)
+        self._set_property("minallowed", arg, minallowed)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

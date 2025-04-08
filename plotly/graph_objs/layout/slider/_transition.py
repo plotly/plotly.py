@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -103,7 +106,7 @@ an instance of :class:`plotly.graph_objs.layout.slider.Transition`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("duration", arg, duration)
-        self._init_provided("easing", arg, easing)
+        self._set_property("duration", arg, duration)
+        self._set_property("easing", arg, easing)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -659,24 +662,24 @@ an instance of :class:`plotly.graph_objs.sankey.Node`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("align", arg, align)
-        self._init_provided("color", arg, color)
-        self._init_provided("colorsrc", arg, colorsrc)
-        self._init_provided("customdata", arg, customdata)
-        self._init_provided("customdatasrc", arg, customdatasrc)
-        self._init_provided("groups", arg, groups)
-        self._init_provided("hoverinfo", arg, hoverinfo)
-        self._init_provided("hoverlabel", arg, hoverlabel)
-        self._init_provided("hovertemplate", arg, hovertemplate)
-        self._init_provided("hovertemplatesrc", arg, hovertemplatesrc)
-        self._init_provided("label", arg, label)
-        self._init_provided("labelsrc", arg, labelsrc)
-        self._init_provided("line", arg, line)
-        self._init_provided("pad", arg, pad)
-        self._init_provided("thickness", arg, thickness)
-        self._init_provided("x", arg, x)
-        self._init_provided("xsrc", arg, xsrc)
-        self._init_provided("y", arg, y)
-        self._init_provided("ysrc", arg, ysrc)
+        self._set_property("align", arg, align)
+        self._set_property("color", arg, color)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("groups", arg, groups)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("label", arg, label)
+        self._set_property("labelsrc", arg, labelsrc)
+        self._set_property("line", arg, line)
+        self._set_property("pad", arg, pad)
+        self._set_property("thickness", arg, thickness)
+        self._set_property("x", arg, x)
+        self._set_property("xsrc", arg, xsrc)
+        self._set_property("y", arg, y)
+        self._set_property("ysrc", arg, ysrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

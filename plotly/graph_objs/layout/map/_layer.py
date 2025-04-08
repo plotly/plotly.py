@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -669,23 +672,23 @@ an instance of :class:`plotly.graph_objs.layout.map.Layer`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("below", arg, below)
-        self._init_provided("circle", arg, circle)
-        self._init_provided("color", arg, color)
-        self._init_provided("coordinates", arg, coordinates)
-        self._init_provided("fill", arg, fill)
-        self._init_provided("line", arg, line)
-        self._init_provided("maxzoom", arg, maxzoom)
-        self._init_provided("minzoom", arg, minzoom)
-        self._init_provided("name", arg, name)
-        self._init_provided("opacity", arg, opacity)
-        self._init_provided("source", arg, source)
-        self._init_provided("sourceattribution", arg, sourceattribution)
-        self._init_provided("sourcelayer", arg, sourcelayer)
-        self._init_provided("sourcetype", arg, sourcetype)
-        self._init_provided("symbol", arg, symbol)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("type", arg, type)
-        self._init_provided("visible", arg, visible)
+        self._set_property("below", arg, below)
+        self._set_property("circle", arg, circle)
+        self._set_property("color", arg, color)
+        self._set_property("coordinates", arg, coordinates)
+        self._set_property("fill", arg, fill)
+        self._set_property("line", arg, line)
+        self._set_property("maxzoom", arg, maxzoom)
+        self._set_property("minzoom", arg, minzoom)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("source", arg, source)
+        self._set_property("sourceattribution", arg, sourceattribution)
+        self._set_property("sourcelayer", arg, sourcelayer)
+        self._set_property("sourcetype", arg, sourcetype)
+        self._set_property("symbol", arg, symbol)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("type", arg, type)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

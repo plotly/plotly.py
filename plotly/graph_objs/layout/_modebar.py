@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -374,14 +377,14 @@ an instance of :class:`plotly.graph_objs.layout.Modebar`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("activecolor", arg, activecolor)
-        self._init_provided("add", arg, add)
-        self._init_provided("addsrc", arg, addsrc)
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("color", arg, color)
-        self._init_provided("orientation", arg, orientation)
-        self._init_provided("remove", arg, remove)
-        self._init_provided("removesrc", arg, removesrc)
-        self._init_provided("uirevision", arg, uirevision)
+        self._set_property("activecolor", arg, activecolor)
+        self._set_property("add", arg, add)
+        self._set_property("addsrc", arg, addsrc)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("color", arg, color)
+        self._set_property("orientation", arg, orientation)
+        self._set_property("remove", arg, remove)
+        self._set_property("removesrc", arg, removesrc)
+        self._set_property("uirevision", arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

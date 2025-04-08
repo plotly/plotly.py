@@ -386,7 +386,7 @@ def _generator(i):
         yield x
 
 
-def _initialize_provided(obj, name, arg, provided):
+def _set_property_provided_value(obj, name, arg, provided):
     """
     Initialize a property of this object using the provided value
     or a value popped from the arguments dictionary. If neither
@@ -847,13 +847,13 @@ class BaseFigure(object):
         else:
             print(repr(self))
 
-    def _init_provided(self, name, arg, provided):
+    def _set_property(self, name, arg, provided):
         """
         Initialize a property of this object using the provided value
         or a value popped from the arguments dictionary. If neither
         is available, do not set the property.
         """
-        _initialize_provided(self, name, arg, provided)
+        _set_property_provided_value(self, name, arg, provided)
 
     def update(self, dict1=None, overwrite=False, **kwargs):
         """
@@ -4351,13 +4351,13 @@ class BasePlotlyType(object):
 
         return ValidatorCache.get_validator(self._path_str, prop)
 
-    def _init_provided(self, name, arg, provided):
+    def _set_property(self, name, arg, provided):
         """
         Initialize a property of this object using the provided value
         or a value popped from the arguments dictionary. If neither
         is available, do not set the property.
         """
-        _initialize_provided(self, name, arg, provided)
+        _set_property_provided_value(self, name, arg, provided)
 
     @property
     def _validators(self):

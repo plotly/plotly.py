@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -247,12 +250,12 @@ an instance of :class:`plotly.graph_objs.layout.geo.Lonaxis`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("dtick", arg, dtick)
-        self._init_provided("gridcolor", arg, gridcolor)
-        self._init_provided("griddash", arg, griddash)
-        self._init_provided("gridwidth", arg, gridwidth)
-        self._init_provided("range", arg, range)
-        self._init_provided("showgrid", arg, showgrid)
-        self._init_provided("tick0", arg, tick0)
+        self._set_property("dtick", arg, dtick)
+        self._set_property("gridcolor", arg, gridcolor)
+        self._set_property("griddash", arg, griddash)
+        self._set_property("gridwidth", arg, gridwidth)
+        self._set_property("range", arg, range)
+        self._set_property("showgrid", arg, showgrid)
+        self._set_property("tick0", arg, tick0)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

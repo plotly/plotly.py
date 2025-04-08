@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -421,16 +424,16 @@ an instance of :class:`plotly.graph_objs.histogram2dcontour.Contours`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("coloring", arg, coloring)
-        self._init_provided("end", arg, end)
-        self._init_provided("labelfont", arg, labelfont)
-        self._init_provided("labelformat", arg, labelformat)
-        self._init_provided("operation", arg, operation)
-        self._init_provided("showlabels", arg, showlabels)
-        self._init_provided("showlines", arg, showlines)
-        self._init_provided("size", arg, size)
-        self._init_provided("start", arg, start)
-        self._init_provided("type", arg, type)
-        self._init_provided("value", arg, value)
+        self._set_property("coloring", arg, coloring)
+        self._set_property("end", arg, end)
+        self._set_property("labelfont", arg, labelfont)
+        self._set_property("labelformat", arg, labelformat)
+        self._set_property("operation", arg, operation)
+        self._set_property("showlabels", arg, showlabels)
+        self._set_property("showlines", arg, showlines)
+        self._set_property("size", arg, size)
+        self._set_property("start", arg, start)
+        self._set_property("type", arg, type)
+        self._set_property("value", arg, value)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

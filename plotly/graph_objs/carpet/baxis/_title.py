@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -123,8 +126,8 @@ an instance of :class:`plotly.graph_objs.carpet.baxis.Title`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("font", arg, font)
-        self._init_provided("offset", arg, offset)
-        self._init_provided("text", arg, text)
+        self._set_property("font", arg, font)
+        self._set_property("offset", arg, offset)
+        self._set_property("text", arg, text)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

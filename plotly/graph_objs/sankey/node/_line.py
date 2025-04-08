@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -152,9 +155,9 @@ an instance of :class:`plotly.graph_objs.sankey.node.Line`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("color", arg, color)
-        self._init_provided("colorsrc", arg, colorsrc)
-        self._init_provided("width", arg, width)
-        self._init_provided("widthsrc", arg, widthsrc)
+        self._set_property("color", arg, color)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("width", arg, width)
+        self._set_property("widthsrc", arg, widthsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -249,12 +252,12 @@ an instance of :class:`plotly.graph_objs.isosurface.Lighting`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("ambient", arg, ambient)
-        self._init_provided("diffuse", arg, diffuse)
-        self._init_provided("facenormalsepsilon", arg, facenormalsepsilon)
-        self._init_provided("fresnel", arg, fresnel)
-        self._init_provided("roughness", arg, roughness)
-        self._init_provided("specular", arg, specular)
-        self._init_provided("vertexnormalsepsilon", arg, vertexnormalsepsilon)
+        self._set_property("ambient", arg, ambient)
+        self._set_property("diffuse", arg, diffuse)
+        self._set_property("facenormalsepsilon", arg, facenormalsepsilon)
+        self._set_property("fresnel", arg, fresnel)
+        self._set_property("roughness", arg, roughness)
+        self._set_property("specular", arg, specular)
+        self._set_property("vertexnormalsepsilon", arg, vertexnormalsepsilon)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

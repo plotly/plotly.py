@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -202,11 +205,11 @@ an instance of :class:`plotly.graph_objs.layout.Margin`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("autoexpand", arg, autoexpand)
-        self._init_provided("b", arg, b)
-        self._init_provided("l", arg, l)
-        self._init_provided("pad", arg, pad)
-        self._init_provided("r", arg, r)
-        self._init_provided("t", arg, t)
+        self._set_property("autoexpand", arg, autoexpand)
+        self._set_property("b", arg, b)
+        self._set_property("l", arg, l)
+        self._set_property("pad", arg, pad)
+        self._set_property("r", arg, r)
+        self._set_property("t", arg, t)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

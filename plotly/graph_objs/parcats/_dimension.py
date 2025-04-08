@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -369,15 +372,15 @@ an instance of :class:`plotly.graph_objs.parcats.Dimension`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("categoryarray", arg, categoryarray)
-        self._init_provided("categoryarraysrc", arg, categoryarraysrc)
-        self._init_provided("categoryorder", arg, categoryorder)
-        self._init_provided("displayindex", arg, displayindex)
-        self._init_provided("label", arg, label)
-        self._init_provided("ticktext", arg, ticktext)
-        self._init_provided("ticktextsrc", arg, ticktextsrc)
-        self._init_provided("values", arg, values)
-        self._init_provided("valuessrc", arg, valuessrc)
-        self._init_provided("visible", arg, visible)
+        self._set_property("categoryarray", arg, categoryarray)
+        self._set_property("categoryarraysrc", arg, categoryarraysrc)
+        self._set_property("categoryorder", arg, categoryorder)
+        self._set_property("displayindex", arg, displayindex)
+        self._set_property("label", arg, label)
+        self._set_property("ticktext", arg, ticktext)
+        self._set_property("ticktextsrc", arg, ticktextsrc)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

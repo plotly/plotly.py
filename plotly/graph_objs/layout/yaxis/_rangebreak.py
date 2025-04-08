@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -319,12 +322,12 @@ an instance of :class:`plotly.graph_objs.layout.yaxis.Rangebreak`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("bounds", arg, bounds)
-        self._init_provided("dvalue", arg, dvalue)
-        self._init_provided("enabled", arg, enabled)
-        self._init_provided("name", arg, name)
-        self._init_provided("pattern", arg, pattern)
-        self._init_provided("templateitemname", arg, templateitemname)
-        self._init_provided("values", arg, values)
+        self._set_property("bounds", arg, bounds)
+        self._set_property("dvalue", arg, dvalue)
+        self._set_property("enabled", arg, enabled)
+        self._set_property("name", arg, name)
+        self._set_property("pattern", arg, pattern)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("values", arg, values)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

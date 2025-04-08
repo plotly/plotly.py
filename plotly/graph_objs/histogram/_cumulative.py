@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -166,8 +169,8 @@ an instance of :class:`plotly.graph_objs.histogram.Cumulative`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("currentbin", arg, currentbin)
-        self._init_provided("direction", arg, direction)
-        self._init_provided("enabled", arg, enabled)
+        self._set_property("currentbin", arg, currentbin)
+        self._set_property("direction", arg, direction)
+        self._set_property("enabled", arg, enabled)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

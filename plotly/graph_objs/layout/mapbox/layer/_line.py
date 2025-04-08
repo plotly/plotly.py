@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -126,8 +129,8 @@ an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Line`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("dash", arg, dash)
-        self._init_provided("dashsrc", arg, dashsrc)
-        self._init_provided("width", arg, width)
+        self._set_property("dash", arg, dash)
+        self._set_property("dashsrc", arg, dashsrc)
+        self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

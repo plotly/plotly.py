@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -296,14 +299,14 @@ an instance of :class:`plotly.graph_objs.indicator.Delta`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("decreasing", arg, decreasing)
-        self._init_provided("font", arg, font)
-        self._init_provided("increasing", arg, increasing)
-        self._init_provided("position", arg, position)
-        self._init_provided("prefix", arg, prefix)
-        self._init_provided("reference", arg, reference)
-        self._init_provided("relative", arg, relative)
-        self._init_provided("suffix", arg, suffix)
-        self._init_provided("valueformat", arg, valueformat)
+        self._set_property("decreasing", arg, decreasing)
+        self._set_property("font", arg, font)
+        self._set_property("increasing", arg, increasing)
+        self._set_property("position", arg, position)
+        self._set_property("prefix", arg, prefix)
+        self._set_property("reference", arg, reference)
+        self._set_property("relative", arg, relative)
+        self._set_property("suffix", arg, suffix)
+        self._set_property("valueformat", arg, valueformat)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

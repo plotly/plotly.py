@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -437,18 +440,18 @@ an instance of :class:`plotly.graph_objs.layout.Scene`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("annotations", arg, annotations)
-        self._init_provided("annotationdefaults", arg, annotationdefaults)
-        self._init_provided("aspectmode", arg, aspectmode)
-        self._init_provided("aspectratio", arg, aspectratio)
-        self._init_provided("bgcolor", arg, bgcolor)
-        self._init_provided("camera", arg, camera)
-        self._init_provided("domain", arg, domain)
-        self._init_provided("dragmode", arg, dragmode)
-        self._init_provided("hovermode", arg, hovermode)
-        self._init_provided("uirevision", arg, uirevision)
-        self._init_provided("xaxis", arg, xaxis)
-        self._init_provided("yaxis", arg, yaxis)
-        self._init_provided("zaxis", arg, zaxis)
+        self._set_property("annotations", arg, annotations)
+        self._set_property("annotationdefaults", arg, annotationdefaults)
+        self._set_property("aspectmode", arg, aspectmode)
+        self._set_property("aspectratio", arg, aspectratio)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("camera", arg, camera)
+        self._set_property("domain", arg, domain)
+        self._set_property("dragmode", arg, dragmode)
+        self._set_property("hovermode", arg, hovermode)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("xaxis", arg, xaxis)
+        self._set_property("yaxis", arg, yaxis)
+        self._set_property("zaxis", arg, zaxis)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

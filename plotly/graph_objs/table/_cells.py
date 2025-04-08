@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -446,19 +449,19 @@ an instance of :class:`plotly.graph_objs.table.Cells`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("align", arg, align)
-        self._init_provided("alignsrc", arg, alignsrc)
-        self._init_provided("fill", arg, fill)
-        self._init_provided("font", arg, font)
-        self._init_provided("format", arg, format)
-        self._init_provided("formatsrc", arg, formatsrc)
-        self._init_provided("height", arg, height)
-        self._init_provided("line", arg, line)
-        self._init_provided("prefix", arg, prefix)
-        self._init_provided("prefixsrc", arg, prefixsrc)
-        self._init_provided("suffix", arg, suffix)
-        self._init_provided("suffixsrc", arg, suffixsrc)
-        self._init_provided("values", arg, values)
-        self._init_provided("valuessrc", arg, valuessrc)
+        self._set_property("align", arg, align)
+        self._set_property("alignsrc", arg, alignsrc)
+        self._set_property("fill", arg, fill)
+        self._set_property("font", arg, font)
+        self._set_property("format", arg, format)
+        self._set_property("formatsrc", arg, formatsrc)
+        self._set_property("height", arg, height)
+        self._set_property("line", arg, line)
+        self._set_property("prefix", arg, prefix)
+        self._set_property("prefixsrc", arg, prefixsrc)
+        self._set_property("suffix", arg, suffix)
+        self._set_property("suffixsrc", arg, suffixsrc)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

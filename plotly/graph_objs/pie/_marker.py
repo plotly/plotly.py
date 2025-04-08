@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -152,9 +155,9 @@ an instance of :class:`plotly.graph_objs.pie.Marker`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("colors", arg, colors)
-        self._init_provided("colorssrc", arg, colorssrc)
-        self._init_provided("line", arg, line)
-        self._init_provided("pattern", arg, pattern)
+        self._set_property("colors", arg, colors)
+        self._set_property("colorssrc", arg, colorssrc)
+        self._set_property("line", arg, line)
+        self._set_property("pattern", arg, pattern)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 import warnings
@@ -127,7 +130,7 @@ an instance of :class:`plotly.graph_objs.layout.Template`"""
         # we suppress deprecation warnings for this line only.
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=DeprecationWarning)
-            self._init_provided("data", arg, data)
-        self._init_provided("layout", arg, layout)
+            self._set_property("data", arg, data)
+        self._set_property("layout", arg, layout)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

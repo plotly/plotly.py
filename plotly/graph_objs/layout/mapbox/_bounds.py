@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -152,9 +155,9 @@ an instance of :class:`plotly.graph_objs.layout.mapbox.Bounds`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("east", arg, east)
-        self._init_provided("north", arg, north)
-        self._init_provided("south", arg, south)
-        self._init_provided("west", arg, west)
+        self._set_property("east", arg, east)
+        self._set_property("north", arg, north)
+        self._set_property("south", arg, south)
+        self._set_property("west", arg, west)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

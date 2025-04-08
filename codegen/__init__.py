@@ -28,7 +28,7 @@ from codegen.validators import (
 
 # Target Python version for code formatting with Black.
 # Must be one of the values listed in pyproject.toml.
-BLACK_TARGET_VERSION = "py311"
+BLACK_TARGET_VERSIONS = "py38 py39 py310 py311 py312"
 
 
 # Import notes
@@ -330,10 +330,12 @@ def __getattr__(import_name):
 
     # ### Run black code formatter on output directories ###
     if reformat:
-        target_version = f"--target-version={BLACK_TARGET_VERSION}"
-        subprocess.call(["black", target_version, validators_pkgdir])
-        subprocess.call(["black", target_version, graph_objs_pkgdir])
-        subprocess.call(["black", target_version, graph_objects_path])
+        target_version = [
+            f"--target-version={v}" for v in BLACK_TARGET_VERSIONS.split()
+        ]
+        subprocess.call(["black", *target_version, validators_pkgdir])
+        subprocess.call(["black", *target_version, graph_objs_pkgdir])
+        subprocess.call(["black", *target_version, graph_objects_path])
     else:
         print("skipping reformatting")
 

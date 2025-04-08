@@ -1,3 +1,6 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -266,12 +269,12 @@ an instance of :class:`plotly.graph_objs.scattersmith.Line`"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        self._init_provided("backoff", arg, backoff)
-        self._init_provided("backoffsrc", arg, backoffsrc)
-        self._init_provided("color", arg, color)
-        self._init_provided("dash", arg, dash)
-        self._init_provided("shape", arg, shape)
-        self._init_provided("smoothing", arg, smoothing)
-        self._init_provided("width", arg, width)
+        self._set_property("backoff", arg, backoff)
+        self._set_property("backoffsrc", arg, backoffsrc)
+        self._set_property("color", arg, color)
+        self._set_property("dash", arg, dash)
+        self._set_property("shape", arg, shape)
+        self._set_property("smoothing", arg, smoothing)
+        self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
