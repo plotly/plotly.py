@@ -218,7 +218,7 @@ def make_subplots(
     >>> fig.add_scatter(y=[1, 3, 2], row=2, col=1) # doctest: +ELLIPSIS
     Figure(...)
 
-    or see Figure.append_trace
+    or see Figure.add_trace
 
     Example 2:
 
