@@ -1,6 +1,63 @@
 [build-system]
-requires = ["jupyterlab~=3.0;python_version>='3.6'", "setuptools>=40.8.0", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[project.urls]
+"HomePage" = "https://plotly.com/python/"
+"Documentation" = "https://plotly.com/python/"
+"Github" = "https://github.com/plotly/plotly.py"
+"Changelog" = "https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md"
+
+[tool.pytest.ini_options]
+markers = [
+    "nodev: mark a test as nodev",
+    "matplotlib: mark a test as matplotlib"
+]
+
+[project]
+name = "plotly"
+authors = [
+    { name = "Chris P", email = "chris@plot.ly" }
+]
+maintainers = [
+    { name="Martha Cryan", email="martha.cryan@plot.ly" },
+    { name="Emily Kellison-Linn", email="emily@plot.ly" }
+]
+description = "An open-source interactive data visualization library for Python"
+readme = {file = "README.md", content-type = "text/markdown"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "License :: OSI Approved :: MIT License"
+]
+requires-python = ">=3.8"
+license = {file="LICENSE.txt"}
+version = "6.0.1"
+dependencies = [
+    "narwhals>=1.15.1",
+    "packaging"
+]
+
+[project.optional-dependencies]
+express = ["numpy"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["plotly*", "_plotly*"]
+exclude = ["__pycache__*", "tests*"]
+
+[tool.setuptools.package-data]
+plotly = [
+    "package_data/*",
+    "package_data/templates/*",
+    "package_data/datasets/*",
+]
 
 [tool.black]
 line-length = 88

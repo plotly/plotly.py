@@ -1,6 +1,23 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
+
+## Unreleased
+
+### Fixed
+- Fix third-party widget display issues in v6 [[#5102]https://github.com/plotly/plotly.py/pull/5102]
+
+## [6.0.1] - 2025-03-14
+
+### Updated
+- Updated Plotly.js from version 3.0.0 to version 3.0.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#301----2025-02-18) for more information.
+
+
+### Fixed
+- Fix `TypeError` when using `orjson` to serialize `pandas.NA` [[#5040](https://github.com/plotly/plotly.py/pull/5040)].
+- Fix issue where using `category_orders` on `px.pie` raised `ColumnNotFoundError` [[#5000](https://github.com/plotly/plotly.py/pull/5000)].
+- Fix incorrect `DeprecationWarning` shown when creating a `px` chart [[#5080](https://github.com/plotly/plotly.py/pull/5080), [#5086](https://github.com/plotly/plotly.py/pull/5086)]
+
 
 ## [6.0.0] - 2025-01-28
 
@@ -716,7 +733,7 @@ This version includes several performance improvements ([#2368](https://github.c
     - Introduce range breaks on date axes (for example, to remove week-ends) via `layout.xaxis.rangebreaks`
     - Introduce a new unified x (or y) hovermode (`layout.hovermode="x unified"`), in which the hover box shows the information for all traces at a given x (or y) position
     - Add `node.customdata` and `link.customdata` to sankey traces
-- Updated [contributing notes](https://github.com/plotly/plotly.py/blob/master/contributing.md) for more explanations on how to contribute to plotly.py [#2290](https://github.com/plotly/plotly.py/pull/2290). Please give feedback on these notes!
+- Updated [contributing notes](https://github.com/plotly/plotly.py/blob/master/CONTRIBUTING.md) for more explanations on how to contribute to plotly.py [#2290](https://github.com/plotly/plotly.py/pull/2290). Please give feedback on these notes!
 - Updated documentation examples [#2325](https://github.com/plotly/plotly.py/pull/2325), and to show how to color links in Sankey diagrams [#2291](https://github.com/plotly/plotly.py/pull/2291).
 - Special thanks to [@SylwiaOliwia2](https://github.com/SylwiaOliwia2) and [@dangercrow](https://github.com/dangercrow) for improving our documentation!
 
@@ -1738,7 +1755,7 @@ This is a major version with many exciting updates. See the [Introducing plotly.
 - Error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
 
 ### Changed / Deprecated
-Please see the [migration guid](migration-guide.md) for a full list of the changes and deprecations in version 3.0.0
+Please see the [migration guide](MIGRATION_GUIDE.md) for a full list of the changes and deprecations in version 3.0.0
 
 
 
