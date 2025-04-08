@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.11.10
   plotly:
     description: How to make subplots in with Plotly's Python graphing library. Examples
       of stacked, custom-sized, gridded, and annotated subplots.
@@ -80,17 +80,17 @@ import plotly.graph_objects as go
 
 fig = make_subplots(rows=3, cols=1)
 
-fig.append_trace(go.Scatter(
+fig.add_trace(go.Scatter(
     x=[3, 4, 5],
     y=[1000, 1100, 1200],
 ), row=1, col=1)
 
-fig.append_trace(go.Scatter(
+fig.add_trace(go.Scatter(
     x=[2, 3, 4],
     y=[100, 110, 120],
 ), row=2, col=1)
 
-fig.append_trace(go.Scatter(
+fig.add_trace(go.Scatter(
     x=[0, 1, 2],
     y=[10, 11, 12]
 ), row=3, col=1)
