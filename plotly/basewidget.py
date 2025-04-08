@@ -6,7 +6,6 @@ from plotly.io._renderers import display_jupyter_version_warnings
 from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
 from .serializers import custom_serializers
-from .version import __frontend_version__
 import anywidget
 
 
@@ -142,6 +141,11 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         # ipywidget property that stores the number of active frontend
         # views of this widget
         self._view_count = 0
+
+        # Initialize widget layout and data for third-party widget integration
+        # --------------------------------------------------------------------
+        self._widget_layout = deepcopy(self._layout_obj._props)
+        self._widget_data = deepcopy(self._data)
 
     def show(self, *args, **kwargs):
         return self
