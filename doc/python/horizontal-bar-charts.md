@@ -258,7 +258,7 @@ legend_rank_by_category={
 }
 
 # Add bars
-for col in df[["Disagree","Strongly Disagree","Agree","Strongly Agree","Neither Agree nor Disagree"]]:
+for col in ["Disagree","Strongly Disagree","Agree","Strongly Agree","Neither Agree nor Disagree"]:
     fig.add_trace(go.Bar(
         y=df["Category"],
         x=df[col],
@@ -266,7 +266,7 @@ for col in df[["Disagree","Strongly Disagree","Agree","Strongly Agree","Neither 
         orientation='h',
         marker=dict(color=color_by_category[col]),
         legendrank=legend_rank_by_category[col],
-        xaxis=f"x{1+(col=="Neither Agree nor Disagree")}", # in this context, putting "Neither Agree nor Disagree" on a secondary x-axis on a different domain 
+        xaxis=f"x{1+(col=='Neither Agree nor Disagree')}", # in this context, putting "Neither Agree nor Disagree" on a secondary x-axis on a different domain 
                        # yields results equivalent to subplots with far less code
     )
 )
