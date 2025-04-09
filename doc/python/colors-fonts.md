@@ -26,8 +26,8 @@ jupyter:
     display_as: file_settings
     language: python
     layout: base
-    name: Changes in Version 6
-    order: 8
+    name: Supported Colors and Fonts
+    order: 40
     page_type: example_index
     permalink: python/colors-fonts/
     thumbnail: null
