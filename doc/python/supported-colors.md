@@ -117,7 +117,7 @@ for i, color in enumerate(supported_colors):
     )
 
 fig.update_layout(
-    height=((len(supported_colors) // 5) + (1 if len(color_names) % 5 else 0)) * 120,
+    height=((len(supported_colors) // 5) + (1 if len(supported_colors) % 5 else 0)) * 120,
     width=800,
     showlegend=False,
     plot_bgcolor='rgba(0,0,0,0)',
