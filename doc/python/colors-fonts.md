@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Changes in Version 6
-    order: 8
+    order: 40
     page_type: example_index
     permalink: python/colors-fonts/
     thumbnail: null
@@ -78,15 +78,12 @@ supported_colors = ["aliceblue", "antiquewhite", "aqua", "aquamarine", "azure",
                 "yellow", "yellowgreen"]
 
 def display_colors_as_shapes(color_names):
-    fig = go.Figure()
+    fig = go.Figure(layout=dict(title="Supported CSS Colors in Plotly.py"))
     
-    # Add a colored rectangle for each color name
     for i, color in enumerate(color_names):
-        # Position rectangles in a grid
         row, col = i // 5, i % 5
         x0, y0 = col * 1.2, -row * 1.2
         
-        # Add the colored rectangle
         fig.add_shape(
             type="rect",
             x0=x0, y0=y0,
@@ -130,4 +127,8 @@ def display_colors_as_shapes(color_names):
 
 fig = display_colors_as_shapes(supported_colors)
 fig.show()
+```
+
+```python
+
 ```
