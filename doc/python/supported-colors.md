@@ -46,7 +46,7 @@ fig = go.Figure([
         y=[20, 14, 25, 16],
         name='Primary Product',
         # Named CSS color
-        marker_color='indianred'
+        marker_color='royalblue'
     )
 ])
     
