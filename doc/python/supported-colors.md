@@ -106,7 +106,7 @@ for i, color in enumerate(supported_colors):
         x0=x0, y0=y0,
         x1=x0+1, y1=y0+1,
         fillcolor=color,
-        line=dict(color="black", width=1),
+        line=dict(color="black", width=0.2),
     )
     
     fig.add_annotation(
@@ -116,10 +116,8 @@ for i, color in enumerate(supported_colors):
         font=dict(size=10)
     )
 
-height = ((len(supported_colors) // 5) + (1 if len(color_names) % 5 else 0)) * 120
-
 fig.update_layout(
-    height=height,
+    height=((len(supported_colors) // 5) + (1 if len(color_names) % 5 else 0)) * 120,
     width=800,
     showlegend=False,
     plot_bgcolor='rgba(0,0,0,0)',
@@ -141,12 +139,4 @@ fig.update_layout(
 )
 
 fig.show()
-```
-
-```python
-
-```
-
-```python
-
 ```
