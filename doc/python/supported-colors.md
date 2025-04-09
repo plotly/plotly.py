@@ -22,15 +22,15 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.13.2
   plotly:
-    description: Supported Colors and Fonts
+    description: A list of supported named CSS Colors
     display_as: file_settings
     language: python
     layout: base
-    name: Changes in Version 6
+    name: Supported CSS Colors
     order: 40
     page_type: example_index
-    permalink: python/colors-fonts/
-    thumbnail: null
+    permalink: python/css-colors/
+    thumbnail: thumbnail/shape.jpg
 ---
 
 # Supported CSS Colors
