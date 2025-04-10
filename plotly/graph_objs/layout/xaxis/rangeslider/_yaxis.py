@@ -1,17 +1,16 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class YAxis(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "layout.xaxis.rangeslider"
     _path_str = "layout.xaxis.rangeslider.yaxis"
     _valid_props = {"range", "rangemode"}
 
-    # range
-    # -----
     @property
     def range(self):
         """
@@ -33,8 +32,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def range(self, val):
         self["range"] = val
 
-    # rangemode
-    # ---------
     @property
     def rangemode(self):
         """
@@ -58,8 +55,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def rangemode(self, val):
         self["rangemode"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -98,14 +93,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         YAxis
         """
-        super(YAxis, self).__init__("yaxis")
-
+        super().__init__("yaxis")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -120,26 +112,10 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("range", None)
-        _v = range if range is not None else _v
-        if _v is not None:
-            self["range"] = _v
-        _v = arg.pop("rangemode", None)
-        _v = rangemode if rangemode is not None else _v
-        if _v is not None:
-            self["rangemode"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("range", arg, range)
+        self._set_property("rangemode", arg, rangemode)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

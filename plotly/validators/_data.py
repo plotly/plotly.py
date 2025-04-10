@@ -2,10 +2,11 @@ import _plotly_utils.basevalidators
 
 
 class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
+
     def __init__(self, plotly_name="data", parent_name="", **kwargs):
 
-        super(DataValidator, self).__init__(
-            class_strs_map={
+        super().__init__(
+            {
                 "bar": "Bar",
                 "barpolar": "Barpolar",
                 "box": "Box",
@@ -56,7 +57,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "volume": "Volume",
                 "waterfall": "Waterfall",
             },
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+            plotly_name,
+            parent_name,
             **kwargs,
         )

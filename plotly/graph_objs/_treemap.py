@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Treemap(_BaseTraceType):
 
-    # class properties
-    # --------------------
     _parent_path_str = ""
     _path_str = "treemap"
     _valid_props = {
@@ -60,8 +61,6 @@ class Treemap(_BaseTraceType):
         "visible",
     }
 
-    # branchvalues
-    # ------------
     @property
     def branchvalues(self):
         """
@@ -86,8 +85,6 @@ class Treemap(_BaseTraceType):
     def branchvalues(self, val):
         self["branchvalues"] = val
 
-    # count
-    # -----
     @property
     def count(self):
         """
@@ -110,8 +107,6 @@ class Treemap(_BaseTraceType):
     def count(self, val):
         self["count"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -133,8 +128,6 @@ class Treemap(_BaseTraceType):
     def customdata(self, val):
         self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -154,8 +147,6 @@ class Treemap(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -164,22 +155,6 @@ class Treemap(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.treemap.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-
-            Supported dict properties:
-
-                column
-                    If there is a layout grid, use the domain for
-                    this column in the grid for this treemap trace
-                    .
-                row
-                    If there is a layout grid, use the domain for
-                    this row in the grid for this treemap trace .
-                x
-                    Sets the horizontal domain of this treemap
-                    trace (in plot fraction).
-                y
-                    Sets the vertical domain of this treemap trace
-                    (in plot fraction).
 
         Returns
         -------
@@ -191,8 +166,6 @@ class Treemap(_BaseTraceType):
     def domain(self, val):
         self["domain"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -217,8 +190,6 @@ class Treemap(_BaseTraceType):
     def hoverinfo(self, val):
         self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -238,8 +209,6 @@ class Treemap(_BaseTraceType):
     def hoverinfosrc(self, val):
         self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -248,44 +217,6 @@ class Treemap(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.treemap.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
 
         Returns
         -------
@@ -297,8 +228,6 @@ class Treemap(_BaseTraceType):
     def hoverlabel(self, val):
         self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -344,8 +273,6 @@ class Treemap(_BaseTraceType):
     def hovertemplate(self, val):
         self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -365,8 +292,6 @@ class Treemap(_BaseTraceType):
     def hovertemplatesrc(self, val):
         self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -391,8 +316,6 @@ class Treemap(_BaseTraceType):
     def hovertext(self, val):
         self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -412,8 +335,6 @@ class Treemap(_BaseTraceType):
     def hovertextsrc(self, val):
         self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -434,8 +355,6 @@ class Treemap(_BaseTraceType):
     def ids(self, val):
         self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -454,8 +373,6 @@ class Treemap(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
-    # insidetextfont
-    # --------------
     @property
     def insidetextfont(self):
         """
@@ -467,79 +384,6 @@ class Treemap(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.treemap.Insidetextfont
@@ -550,8 +394,6 @@ class Treemap(_BaseTraceType):
     def insidetextfont(self, val):
         self["insidetextfont"] = val
 
-    # labels
-    # ------
     @property
     def labels(self):
         """
@@ -570,8 +412,6 @@ class Treemap(_BaseTraceType):
     def labels(self, val):
         self["labels"] = val
 
-    # labelssrc
-    # ---------
     @property
     def labelssrc(self):
         """
@@ -590,8 +430,6 @@ class Treemap(_BaseTraceType):
     def labelssrc(self, val):
         self["labelssrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -615,8 +453,6 @@ class Treemap(_BaseTraceType):
     def legend(self, val):
         self["legend"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -625,13 +461,6 @@ class Treemap(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.treemap.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
 
         Returns
         -------
@@ -643,8 +472,6 @@ class Treemap(_BaseTraceType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -670,8 +497,6 @@ class Treemap(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -691,8 +516,6 @@ class Treemap(_BaseTraceType):
     def legendwidth(self, val):
         self["legendwidth"] = val
 
-    # level
-    # -----
     @property
     def level(self):
         """
@@ -713,8 +536,6 @@ class Treemap(_BaseTraceType):
     def level(self, val):
         self["level"] = val
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -723,114 +544,6 @@ class Treemap(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.treemap.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
-            Supported dict properties:
-
-                autocolorscale
-                    Determines whether the colorscale is a default
-                    palette (`autocolorscale: true`) or the palette
-                    determined by `marker.colorscale`. Has an
-                    effect only if colors is set to a numerical
-                    array. In case `colorscale` is unspecified or
-                    `autocolorscale` is true, the default palette
-                    will be chosen according to whether numbers in
-                    the `color` array are all positive, all
-                    negative or mixed.
-                cauto
-                    Determines whether or not the color domain is
-                    computed with respect to the input data (here
-                    colors) or the bounds set in `marker.cmin` and
-                    `marker.cmax` Has an effect only if colors is
-                    set to a numerical array. Defaults to `false`
-                    when `marker.cmin` and `marker.cmax` are set by
-                    the user.
-                cmax
-                    Sets the upper bound of the color domain. Has
-                    an effect only if colors is set to a numerical
-                    array. Value should have the same units as
-                    colors and if set, `marker.cmin` must be set as
-                    well.
-                cmid
-                    Sets the mid-point of the color domain by
-                    scaling `marker.cmin` and/or `marker.cmax` to
-                    be equidistant to this point. Has an effect
-                    only if colors is set to a numerical array.
-                    Value should have the same units as colors. Has
-                    no effect when `marker.cauto` is `false`.
-                cmin
-                    Sets the lower bound of the color domain. Has
-                    an effect only if colors is set to a numerical
-                    array. Value should have the same units as
-                    colors and if set, `marker.cmax` must be set as
-                    well.
-                coloraxis
-                    Sets a reference to a shared color axis.
-                    References to these shared color axes are
-                    "coloraxis", "coloraxis2", "coloraxis3", etc.
-                    Settings for these shared color axes are set in
-                    the layout, under `layout.coloraxis`,
-                    `layout.coloraxis2`, etc. Note that multiple
-                    color scales can be linked to the same color
-                    axis.
-                colorbar
-                    :class:`plotly.graph_objects.treemap.marker.Col
-                    orBar` instance or dict with compatible
-                    properties
-                colors
-                    Sets the color of each sector of this trace. If
-                    not specified, the default trace color set is
-                    used to pick the sector colors.
-                colorscale
-                    Sets the colorscale. Has an effect only if
-                    colors is set to a numerical array. The
-                    colorscale must be an array containing arrays
-                    mapping a normalized value to an rgb, rgba,
-                    hex, hsl, hsv, or named color string. At
-                    minimum, a mapping for the lowest (0) and
-                    highest (1) values are required. For example,
-                    `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
-                    To control the bounds of the colorscale in
-                    color space, use `marker.cmin` and
-                    `marker.cmax`. Alternatively, `colorscale` may
-                    be a palette name string of the following list:
-                    Blackbody,Bluered,Blues,Cividis,Earth,Electric,
-                    Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
-                    Bu,Reds,Viridis,YlGnBu,YlOrRd.
-                colorssrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `colors`.
-                cornerradius
-                    Sets the maximum rounding of corners (in px).
-                depthfade
-                    Determines if the sector colors are faded
-                    towards the background from the leaves up to
-                    the headers. This option is unavailable when a
-                    `colorscale` is present, defaults to false when
-                    `marker.colors` is set, but otherwise defaults
-                    to true. When set to "reversed", the fading
-                    direction is inverted, that is the top elements
-                    within hierarchy are drawn with fully saturated
-                    colors while the leaves are faded towards the
-                    background color.
-                line
-                    :class:`plotly.graph_objects.treemap.marker.Lin
-                    e` instance or dict with compatible properties
-                pad
-                    :class:`plotly.graph_objects.treemap.marker.Pad
-                    ` instance or dict with compatible properties
-                pattern
-                    Sets the pattern within the marker.
-                reversescale
-                    Reverses the color mapping if true. Has an
-                    effect only if colors is set to a numerical
-                    array. If true, `marker.cmin` will correspond
-                    to the last color in the array and
-                    `marker.cmax` will correspond to the first
-                    color.
-                showscale
-                    Determines whether or not a colorbar is
-                    displayed for this trace. Has an effect only if
-                    colors is set to a numerical array.
 
         Returns
         -------
@@ -842,8 +555,6 @@ class Treemap(_BaseTraceType):
     def marker(self, val):
         self["marker"] = val
 
-    # maxdepth
-    # --------
     @property
     def maxdepth(self):
         """
@@ -863,8 +574,6 @@ class Treemap(_BaseTraceType):
     def maxdepth(self, val):
         self["maxdepth"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -891,8 +600,6 @@ class Treemap(_BaseTraceType):
     def meta(self, val):
         self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -911,8 +618,6 @@ class Treemap(_BaseTraceType):
     def metasrc(self, val):
         self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -933,8 +638,6 @@ class Treemap(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -953,8 +656,6 @@ class Treemap(_BaseTraceType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # outsidetextfont
-    # ---------------
     @property
     def outsidetextfont(self):
         """
@@ -970,79 +671,6 @@ class Treemap(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.treemap.Outsidetextfont
@@ -1053,8 +681,6 @@ class Treemap(_BaseTraceType):
     def outsidetextfont(self, val):
         self["outsidetextfont"] = val
 
-    # parents
-    # -------
     @property
     def parents(self):
         """
@@ -1078,8 +704,6 @@ class Treemap(_BaseTraceType):
     def parents(self, val):
         self["parents"] = val
 
-    # parentssrc
-    # ----------
     @property
     def parentssrc(self):
         """
@@ -1098,8 +722,6 @@ class Treemap(_BaseTraceType):
     def parentssrc(self, val):
         self["parentssrc"] = val
 
-    # pathbar
-    # -------
     @property
     def pathbar(self):
         """
@@ -1108,25 +730,6 @@ class Treemap(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.treemap.Pathbar`
           - A dict of string/value properties that will be passed
             to the Pathbar constructor
-
-            Supported dict properties:
-
-                edgeshape
-                    Determines which shape is used for edges
-                    between `barpath` labels.
-                side
-                    Determines on which side of the the treemap the
-                    `pathbar` should be presented.
-                textfont
-                    Sets the font used inside `pathbar`.
-                thickness
-                    Sets the thickness of `pathbar` (in px). If not
-                    specified the `pathbar.textfont.size` is used
-                    with 3 pixles extra padding on each side.
-                visible
-                    Determines if the path bar is drawn i.e.
-                    outside the trace `domain` and with one pixel
-                    gap.
 
         Returns
         -------
@@ -1138,8 +741,6 @@ class Treemap(_BaseTraceType):
     def pathbar(self, val):
         self["pathbar"] = val
 
-    # root
-    # ----
     @property
     def root(self):
         """
@@ -1148,14 +749,6 @@ class Treemap(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.treemap.Root`
           - A dict of string/value properties that will be passed
             to the Root constructor
-
-            Supported dict properties:
-
-                color
-                    sets the color of the root node for a
-                    sunburst/treemap/icicle trace. this has no
-                    effect when a colorscale is used to set the
-                    markers.
 
         Returns
         -------
@@ -1167,8 +760,6 @@ class Treemap(_BaseTraceType):
     def root(self, val):
         self["root"] = val
 
-    # sort
-    # ----
     @property
     def sort(self):
         """
@@ -1188,8 +779,6 @@ class Treemap(_BaseTraceType):
     def sort(self, val):
         self["sort"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1198,18 +787,6 @@ class Treemap(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.treemap.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
 
         Returns
         -------
@@ -1221,8 +798,6 @@ class Treemap(_BaseTraceType):
     def stream(self, val):
         self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -1245,8 +820,6 @@ class Treemap(_BaseTraceType):
     def text(self, val):
         self["text"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -1258,79 +831,6 @@ class Treemap(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.treemap.Textfont
@@ -1341,8 +841,6 @@ class Treemap(_BaseTraceType):
     def textfont(self, val):
         self["textfont"] = val
 
-    # textinfo
-    # --------
     @property
     def textinfo(self):
         """
@@ -1364,8 +862,6 @@ class Treemap(_BaseTraceType):
     def textinfo(self, val):
         self["textinfo"] = val
 
-    # textposition
-    # ------------
     @property
     def textposition(self):
         """
@@ -1387,8 +883,6 @@ class Treemap(_BaseTraceType):
     def textposition(self, val):
         self["textposition"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1407,8 +901,6 @@ class Treemap(_BaseTraceType):
     def textsrc(self, val):
         self["textsrc"] = val
 
-    # texttemplate
-    # ------------
     @property
     def texttemplate(self):
         """
@@ -1443,8 +935,6 @@ class Treemap(_BaseTraceType):
     def texttemplate(self, val):
         self["texttemplate"] = val
 
-    # texttemplatesrc
-    # ---------------
     @property
     def texttemplatesrc(self):
         """
@@ -1464,8 +954,6 @@ class Treemap(_BaseTraceType):
     def texttemplatesrc(self, val):
         self["texttemplatesrc"] = val
 
-    # tiling
-    # ------
     @property
     def tiling(self):
         """
@@ -1474,34 +962,6 @@ class Treemap(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.treemap.Tiling`
           - A dict of string/value properties that will be passed
             to the Tiling constructor
-
-            Supported dict properties:
-
-                flip
-                    Determines if the positions obtained from
-                    solver are flipped on each axis.
-                packing
-                    Determines d3 treemap solver. For more info
-                    please refer to
-                    https://github.com/d3/d3-hierarchy#treemap-
-                    tiling
-                pad
-                    Sets the inner padding (in px).
-                squarifyratio
-                    When using "squarify" `packing` algorithm,
-                    according to https://github.com/d3/d3-
-                    hierarchy/blob/v3.1.1/README.md#squarify_ratio
-                    this option specifies the desired aspect ratio
-                    of the generated rectangles. The ratio must be
-                    specified as a number greater than or equal to
-                    one. Note that the orientation of the generated
-                    rectangles (tall or wide) is not implied by the
-                    ratio; for example, a ratio of two will attempt
-                    to produce a mixture of rectangles whose
-                    width:height ratio is either 2:1 or 1:2. When
-                    using "squarify", unlike d3 which uses the
-                    Golden Ratio i.e. 1.618034, Plotly applies 1 to
-                    increase squares in treemap layouts.
 
         Returns
         -------
@@ -1513,8 +973,6 @@ class Treemap(_BaseTraceType):
     def tiling(self, val):
         self["tiling"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1535,8 +993,6 @@ class Treemap(_BaseTraceType):
     def uid(self, val):
         self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1568,8 +1024,6 @@ class Treemap(_BaseTraceType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # values
-    # ------
     @property
     def values(self):
         """
@@ -1589,8 +1043,6 @@ class Treemap(_BaseTraceType):
     def values(self, val):
         self["values"] = val
 
-    # valuessrc
-    # ---------
     @property
     def valuessrc(self):
         """
@@ -1609,8 +1061,6 @@ class Treemap(_BaseTraceType):
     def valuessrc(self, val):
         self["valuessrc"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1632,14 +1082,10 @@ class Treemap(_BaseTraceType):
     def visible(self, val):
         self["visible"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -2218,14 +1664,11 @@ class Treemap(_BaseTraceType):
         -------
         Treemap
         """
-        super(Treemap, self).__init__("treemap")
-
+        super().__init__("treemap")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2240,216 +1683,59 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Treemap`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("branchvalues", None)
-        _v = branchvalues if branchvalues is not None else _v
-        if _v is not None:
-            self["branchvalues"] = _v
-        _v = arg.pop("count", None)
-        _v = count if count is not None else _v
-        if _v is not None:
-            self["count"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("domain", None)
-        _v = domain if domain is not None else _v
-        if _v is not None:
-            self["domain"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("insidetextfont", None)
-        _v = insidetextfont if insidetextfont is not None else _v
-        if _v is not None:
-            self["insidetextfont"] = _v
-        _v = arg.pop("labels", None)
-        _v = labels if labels is not None else _v
-        if _v is not None:
-            self["labels"] = _v
-        _v = arg.pop("labelssrc", None)
-        _v = labelssrc if labelssrc is not None else _v
-        if _v is not None:
-            self["labelssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("level", None)
-        _v = level if level is not None else _v
-        if _v is not None:
-            self["level"] = _v
-        _v = arg.pop("marker", None)
-        _v = marker if marker is not None else _v
-        if _v is not None:
-            self["marker"] = _v
-        _v = arg.pop("maxdepth", None)
-        _v = maxdepth if maxdepth is not None else _v
-        if _v is not None:
-            self["maxdepth"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("outsidetextfont", None)
-        _v = outsidetextfont if outsidetextfont is not None else _v
-        if _v is not None:
-            self["outsidetextfont"] = _v
-        _v = arg.pop("parents", None)
-        _v = parents if parents is not None else _v
-        if _v is not None:
-            self["parents"] = _v
-        _v = arg.pop("parentssrc", None)
-        _v = parentssrc if parentssrc is not None else _v
-        if _v is not None:
-            self["parentssrc"] = _v
-        _v = arg.pop("pathbar", None)
-        _v = pathbar if pathbar is not None else _v
-        if _v is not None:
-            self["pathbar"] = _v
-        _v = arg.pop("root", None)
-        _v = root if root is not None else _v
-        if _v is not None:
-            self["root"] = _v
-        _v = arg.pop("sort", None)
-        _v = sort if sort is not None else _v
-        if _v is not None:
-            self["sort"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("textinfo", None)
-        _v = textinfo if textinfo is not None else _v
-        if _v is not None:
-            self["textinfo"] = _v
-        _v = arg.pop("textposition", None)
-        _v = textposition if textposition is not None else _v
-        if _v is not None:
-            self["textposition"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("texttemplate", None)
-        _v = texttemplate if texttemplate is not None else _v
-        if _v is not None:
-            self["texttemplate"] = _v
-        _v = arg.pop("texttemplatesrc", None)
-        _v = texttemplatesrc if texttemplatesrc is not None else _v
-        if _v is not None:
-            self["texttemplatesrc"] = _v
-        _v = arg.pop("tiling", None)
-        _v = tiling if tiling is not None else _v
-        if _v is not None:
-            self["tiling"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("values", None)
-        _v = values if values is not None else _v
-        if _v is not None:
-            self["values"] = _v
-        _v = arg.pop("valuessrc", None)
-        _v = valuessrc if valuessrc is not None else _v
-        if _v is not None:
-            self["valuessrc"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Read-only literals
-        # ------------------
+        self._set_property("branchvalues", arg, branchvalues)
+        self._set_property("count", arg, count)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("domain", arg, domain)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverinfosrc", arg, hoverinfosrc)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("hovertextsrc", arg, hovertextsrc)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("insidetextfont", arg, insidetextfont)
+        self._set_property("labels", arg, labels)
+        self._set_property("labelssrc", arg, labelssrc)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("level", arg, level)
+        self._set_property("marker", arg, marker)
+        self._set_property("maxdepth", arg, maxdepth)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("outsidetextfont", arg, outsidetextfont)
+        self._set_property("parents", arg, parents)
+        self._set_property("parentssrc", arg, parentssrc)
+        self._set_property("pathbar", arg, pathbar)
+        self._set_property("root", arg, root)
+        self._set_property("sort", arg, sort)
+        self._set_property("stream", arg, stream)
+        self._set_property("text", arg, text)
+        self._set_property("textfont", arg, textfont)
+        self._set_property("textinfo", arg, textinfo)
+        self._set_property("textposition", arg, textposition)
+        self._set_property("textsrc", arg, textsrc)
+        self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatesrc", arg, texttemplatesrc)
+        self._set_property("tiling", arg, tiling)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
 
         self._props["type"] = "treemap"
         arg.pop("type", None)
-
-        # Process unknown kwargs
-        # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,21 +1,18 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class TemplateValidator(_plotly_utils.basevalidators.BaseTemplateValidator):
+class TemplateValidator(_bv.BaseTemplateValidator):
     def __init__(self, plotly_name="template", parent_name="layout", **kwargs):
-        super(TemplateValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             data_class_str=kwargs.pop("data_class_str", "Template"),
             data_docs=kwargs.pop(
                 "data_docs",
                 """
-            data
-                :class:`plotly.graph_objects.layout.template.Da
-                ta` instance or dict with compatible properties
-            layout
-                :class:`plotly.graph_objects.Layout` instance
-                or dict with compatible properties
 """,
             ),
             **kwargs,

@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Contours(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "contour"
     _path_str = "contour.contours"
     _valid_props = {
@@ -22,8 +23,6 @@ class Contours(_BaseTraceHierarchyType):
         "value",
     }
 
-    # coloring
-    # --------
     @property
     def coloring(self):
         """
@@ -47,8 +46,6 @@ class Contours(_BaseTraceHierarchyType):
     def coloring(self, val):
         self["coloring"] = val
 
-    # end
-    # ---
     @property
     def end(self):
         """
@@ -68,8 +65,6 @@ class Contours(_BaseTraceHierarchyType):
     def end(self, val):
         self["end"] = val
 
-    # labelfont
-    # ---------
     @property
     def labelfont(self):
         """
@@ -83,52 +78,6 @@ class Contours(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Labelfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.contour.contours.Labelfont
@@ -139,8 +88,6 @@ class Contours(_BaseTraceHierarchyType):
     def labelfont(self, val):
         self["labelfont"] = val
 
-    # labelformat
-    # -----------
     @property
     def labelformat(self):
         """
@@ -163,8 +110,6 @@ class Contours(_BaseTraceHierarchyType):
     def labelformat(self, val):
         self["labelformat"] = val
 
-    # operation
-    # ---------
     @property
     def operation(self):
         """
@@ -192,8 +137,6 @@ class Contours(_BaseTraceHierarchyType):
     def operation(self, val):
         self["operation"] = val
 
-    # showlabels
-    # ----------
     @property
     def showlabels(self):
         """
@@ -213,8 +156,6 @@ class Contours(_BaseTraceHierarchyType):
     def showlabels(self, val):
         self["showlabels"] = val
 
-    # showlines
-    # ---------
     @property
     def showlines(self):
         """
@@ -234,8 +175,6 @@ class Contours(_BaseTraceHierarchyType):
     def showlines(self, val):
         self["showlines"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -254,8 +193,6 @@ class Contours(_BaseTraceHierarchyType):
     def size(self, val):
         self["size"] = val
 
-    # start
-    # -----
     @property
     def start(self):
         """
@@ -275,8 +212,6 @@ class Contours(_BaseTraceHierarchyType):
     def start(self, val):
         self["start"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -299,8 +234,6 @@ class Contours(_BaseTraceHierarchyType):
     def type(self, val):
         self["type"] = val
 
-    # value
-    # -----
     @property
     def value(self):
         """
@@ -324,8 +257,6 @@ class Contours(_BaseTraceHierarchyType):
     def value(self, val):
         self["value"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -471,14 +402,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Contours
         """
-        super(Contours, self).__init__("contours")
-
+        super().__init__("contours")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -493,62 +421,19 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.contour.Contours`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("coloring", None)
-        _v = coloring if coloring is not None else _v
-        if _v is not None:
-            self["coloring"] = _v
-        _v = arg.pop("end", None)
-        _v = end if end is not None else _v
-        if _v is not None:
-            self["end"] = _v
-        _v = arg.pop("labelfont", None)
-        _v = labelfont if labelfont is not None else _v
-        if _v is not None:
-            self["labelfont"] = _v
-        _v = arg.pop("labelformat", None)
-        _v = labelformat if labelformat is not None else _v
-        if _v is not None:
-            self["labelformat"] = _v
-        _v = arg.pop("operation", None)
-        _v = operation if operation is not None else _v
-        if _v is not None:
-            self["operation"] = _v
-        _v = arg.pop("showlabels", None)
-        _v = showlabels if showlabels is not None else _v
-        if _v is not None:
-            self["showlabels"] = _v
-        _v = arg.pop("showlines", None)
-        _v = showlines if showlines is not None else _v
-        if _v is not None:
-            self["showlines"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("start", None)
-        _v = start if start is not None else _v
-        if _v is not None:
-            self["start"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("coloring", arg, coloring)
+        self._set_property("end", arg, end)
+        self._set_property("labelfont", arg, labelfont)
+        self._set_property("labelformat", arg, labelformat)
+        self._set_property("operation", arg, operation)
+        self._set_property("showlabels", arg, showlabels)
+        self._set_property("showlines", arg, showlines)
+        self._set_property("size", arg, size)
+        self._set_property("start", arg, start)
+        self._set_property("type", arg, type)
+        self._set_property("value", arg, value)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

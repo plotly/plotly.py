@@ -1,29 +1,20 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
+class HoverlabelValidator(_bv.CompoundValidator):
     def __init__(
         self, plotly_name="hoverlabel", parent_name="layout.annotation", **kwargs
     ):
-        super(HoverlabelValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             data_class_str=kwargs.pop("data_class_str", "Hoverlabel"),
             data_docs=kwargs.pop(
                 "data_docs",
                 """
-            bgcolor
-                Sets the background color of the hover label.
-                By default uses the annotation's `bgcolor` made
-                opaque, or white if it was transparent.
-            bordercolor
-                Sets the border color of the hover label. By
-                default uses either dark grey or white, for
-                maximum contrast with `hoverlabel.bgcolor`.
-            font
-                Sets the hover label text font. By default uses
-                the global hover font and size, with color from
-                `hoverlabel.bordercolor`.
 """,
             ),
             **kwargs,
