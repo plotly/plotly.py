@@ -1,7 +1,13 @@
 {
     "name": "jupyterlab-plotly",
-    "version": "0.1.0",
     "main": "lib/mimeExtension.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/plotly/plotly.py"
+    },
+    "description": "The plotly Jupyter extension",
+    "author": "The plotly.py team",
+    "license": "MIT",
     "scripts": {
       "build:widget": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=../plotly/package_data/widgetbundle.js src/widget.ts",
       "build:mimerenderer": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=lib/mimeExtension.js src/mimeExtension.ts",
