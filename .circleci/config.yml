@@ -25,6 +25,11 @@ commands:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
+            uv pip install jupyter
+            cd js
+            npm ci
+            npm run build
+            cd ..
             uv pip install .
             uv pip install -r ./test_requirements/requirements_core.txt
       - run:
@@ -56,6 +61,11 @@ commands:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
+            uv pip install jupyter
+            cd js
+            npm ci
+            npm run build
+            cd ..
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
             cd js
