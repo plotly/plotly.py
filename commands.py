@@ -23,9 +23,9 @@ npm_path = os.pathsep.join(
     ]
 )
 
-# Load plotly.js version from plotly/labextension/package.json
+# Load plotly.js version from js/package.json
 def plotly_js_version():
-    path = os.path.join(project_root, "plotly", "labextension", "package.json")
+    path = os.path.join(project_root, "js", "package.json")
     with open(path, "rt") as f:
         package_json = json.load(f)
         version = package_json["dependencies"]["plotly.js"]
