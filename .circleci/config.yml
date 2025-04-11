@@ -427,6 +427,10 @@ workflows:
   release_build:
     jobs:
       - full_build
+  
+  check_js_build:
+    jobs:
+      - check-js-build
 
   build:
     jobs:
