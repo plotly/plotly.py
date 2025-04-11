@@ -14,32 +14,11 @@ executors:
       - image: cimg/python:<<parameters.python_version>>-browsers
 
 commands:
-  check-js-build:
-    description: Fail if JupyterLab extension build artifacts are out of date
-    steps:
-      - run:
-          name: Build JupyterLab extension
-          command: |
-            echo "Building JupyterLab extension..."
-            curl -LsSf https://astral.sh/uv/install.sh | sh
-            uv venv
-            source .venv/bin/activate
-            uv pip install jupyter
-            cd js
-            npm ci
-            npm run build
-      - run:
-          name: Check JupyterLab build artifacts
-          command: |
-            echo "Checking for uncommitted changes in plotly/labextension/..."
-            git diff --exit-code plotly/labextension/ || (echo "Error: JupyterLab build artifacts out of date. Run 'npm run build' in js/ and commit the results." && exit 1)
-
   test_core:
     steps:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - check-js-build
       - run:
           name: Install dependencies
           command: |
@@ -71,7 +50,6 @@ commands:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - check-js-build
       - run:
           name: Install dependencies
           command: |
@@ -184,6 +162,31 @@ jobs:
       - test_optional:
           pandas_version: <<parameters.pandas_version>>
           numpy_version: <<parameters.numpy_version>>
+
+  check-js-build:
+    docker:
+      - image: cimg/python:3.12-node
+        environment:
+          LANG: en_US.UTF-8
+    resource_class: large
+
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install -e .
+            cd js
+            npm ci
+            npm run build
+      - run:
+          name: Check JupyterLab build artifacts
+          command: |
+            echo "Checking for uncommitted changes in plotly/labextension/..."
+            git diff --exit-code plotly/labextension/ || (echo "Error: JupyterLab build artifacts out of date. Run 'npm run build' in js/ and commit the results." && exit 1)
 
   # Percy
   python_311_percy:
@@ -320,8 +323,6 @@ jobs:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - check-js-build
-
       - run:
           name: Install dependencies
           command: |
@@ -456,3 +457,5 @@ workflows:
           numpy_version: "1.26.4"
       - python_311_percy
       - build-doc
+      - check-js-build:
+          name: "Check for uncommitted changes in plotly/labextension"
