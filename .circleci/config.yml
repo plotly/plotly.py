@@ -14,22 +14,27 @@ executors:
       - image: cimg/python:<<parameters.python_version>>-browsers
 
 commands:
+  check-js-build:
+    description: Fail if JupyterLab extension build artifacts are out of date
+    steps:
+      - run:
+          name: Check JupyterLab build artifacts
+          command: |
+            echo "Checking for uncommitted changes in plotly/labextension/..."
+            git diff --exit-code plotly/labextension/ || (echo "Error: JupyterLab build artifacts out of date. Run 'npm run build' in js/ and commit the results." && exit 1)
+
   test_core:
     steps:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      - check-js-build
       - run:
           name: Install dependencies
           command: |
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install jupyter
-            cd js
-            npm ci
-            npm run build
-            cd ..
             uv pip install .
             uv pip install -r ./test_requirements/requirements_core.txt
       - run:
@@ -55,17 +60,13 @@ commands:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      - check-js-build
       - run:
           name: Install dependencies
           command: |
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install jupyter
-            cd js
-            npm ci
-            npm run build
-            cd ..
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
       
@@ -243,11 +244,6 @@ jobs:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install jupyter
-            cd js
-            npm i
-            npm run build
-            cd ..
             uv pip install -e .
             uv pip install -r ./test_requirements/requirements_core.txt black inflect jupyterlab
       - run:
@@ -281,19 +277,6 @@ jobs:
 
     steps:
       - checkout
-
-      - run:
-          name: initial NPM Build
-          command: |
-            curl -LsSf https://astral.sh/uv/install.sh | sh
-            uv venv
-            source .venv/bin/activate
-            uv pip install jupyter
-            cd js
-            npm ci
-            npm run build
-            git status
-
       - run:
           name: PyPI Build
           command: |
@@ -324,6 +307,7 @@ jobs:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      - check-js-build
 
       - run:
           name: Install dependencies
@@ -337,11 +321,6 @@ jobs:
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               uv pip uninstall plotly
               uv pip install -e .
-              uv pip install jupyter
-              cd js
-              npm ci
-              npm run build
-              cd ../..
             fi
 
       - run:
