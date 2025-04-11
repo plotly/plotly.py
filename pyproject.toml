@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "jupyter_packaging~=0.10.0", "wheel"]
+requires = ["setuptools>=61", "jupyter_packaging~=0.10.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
@@ -86,9 +86,6 @@ exclude = '''
 )
 '''
 
-[tool.jupyter-packaging.options]
-skip-if-exists = ["plotly/labextension/static/style.js"]
-
 [tool.jupyter-packaging.builder]
 factory = "jupyter_packaging.npm_builder"
 
@@ -101,3 +98,13 @@ build_cmd = "build"
 npm = ["jlpm"]
 source_dir = "js"
 build_dir = "plotly/labextension"
+
+[tool.setuptools.data-files]
+"share/jupyter/labextensions/jupyterlab-plotly" = [
+  "plotly/labextension/package.json",
+  "js/install.json"
+]
+
+"share/jupyter/labextensions/jupyterlab-plotly/static" = [
+  "plotly/labextension/static/*.js"
+]
