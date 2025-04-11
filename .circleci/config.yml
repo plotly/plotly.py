@@ -68,9 +68,6 @@ commands:
             cd ..
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
-            cd js
-            npm ci
-            npm run build
       
       - when:
           condition: 

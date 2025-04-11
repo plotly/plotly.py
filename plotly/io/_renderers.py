@@ -549,10 +549,12 @@ elif ipython:
         default_renderer = "browser"
 
     # Check if we're running in a Jupyter notebook or JupyterLab
-    if not default_renderer and (shell == 'ZMQInteractiveShell') and (
-        type(ipython_info).__module__.startswith('ipykernel.')
+    if (
+        not default_renderer
+        and (shell == "ZMQInteractiveShell")
+        and (type(ipython_info).__module__.startswith("ipykernel."))
     ):
-        default_renderer = 'plotly_mimetype'
+        default_renderer = "plotly_mimetype"
 
     # Fallback to renderer combination that will work automatically
     # in the jupyter notebook, jupyterlab, nteract, vscode, and
