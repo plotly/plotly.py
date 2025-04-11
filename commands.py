@@ -9,7 +9,7 @@ from subprocess import check_call
 from distutils import log
 
 project_root = os.path.dirname(os.path.abspath(__file__))
-node_root = os.path.join(project_root, "plotly", "labextension")
+node_root = os.path.join(project_root, "js")
 is_repo = os.path.exists(os.path.join(project_root, ".git"))
 node_modules = os.path.join(node_root, "node_modules")
 targets = [
