@@ -18,6 +18,17 @@ commands:
     description: Fail if JupyterLab extension build artifacts are out of date
     steps:
       - run:
+          name: Build JupyterLab extension
+          command: |
+            echo "Building JupyterLab extension..."
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install jupyter
+            cd js
+            npm ci
+            npm run build
+      - run:
           name: Check JupyterLab build artifacts
           command: |
             echo "Checking for uncommitted changes in plotly/labextension/..."
@@ -280,6 +291,8 @@ jobs:
       - run:
           name: PyPI Build
           command: |
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
             source .venv/bin/activate
             uv pip install build
             python -m build --sdist --wheel -o dist
