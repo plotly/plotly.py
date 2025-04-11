@@ -173,6 +173,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Copy current files to a temporary directory
+          command: |
+            cp -R plotly/labextension/ plotly/labextension-tmp/
+      - run:
           name: Install dependencies
           command: |
             curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -186,7 +190,15 @@ jobs:
           name: Check JupyterLab build artifacts
           command: |
             echo "Checking for uncommitted changes in plotly/labextension/..."
-            git diff --exit-code plotly/labextension/ || (echo "Error: JupyterLab build artifacts out of date. Run 'npm run build' in js/ and commit the results." && exit 1)
+            git diff --exit-code plotly/labextension-tmp/ plotly/labextension/
+            if [ $? -ne 0 ]; then
+              echo "Uncommitted changes found in plotly/labextension/"
+              echo "Please run 'git diff' to see the changes."
+              echo "If you are sure you want to commit these changes, run 'git add plotly/labextension/' and 'git commit -m \"Update labextension\"'."
+              exit 1
+            else
+              echo "No uncommitted changes found in plotly/labextension/"
+            fi
 
   # Percy
   python_311_percy:
