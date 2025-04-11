@@ -473,5 +473,3 @@ workflows:
           numpy_version: "1.26.4"
       - python_311_percy
       - build-doc
-      - check-js-build:
-          name: "Check for uncommitted changes in plotly/labextension"
