@@ -58,7 +58,7 @@ commands:
             source .venv/bin/activate
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
-            cd plotly/labextension
+            cd js
             npm ci
             npm run build
       
@@ -277,7 +277,7 @@ jobs:
             uv venv
             source .venv/bin/activate
             uv pip install jupyter
-            cd plotly/labextension
+            cd js
             npm ci
             npm run build
             git status
@@ -326,7 +326,7 @@ jobs:
               uv pip uninstall plotly
               uv pip install -e .
               uv pip install jupyter
-              cd plotly/labextension
+              cd js
               npm ci
               npm run build
               cd ../..
