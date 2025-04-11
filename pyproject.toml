@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61", "jupyter_packaging~=0.10.0", "wheel"]
+requires = ["setuptools>=61", "hatch", "jupyter_packaging~=0.10.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
@@ -84,16 +84,21 @@ exclude = '''
 
 [tool.jupyter-packaging.builder]
 factory = "jupyter_packaging.npm_builder"
+auto_data_files = true
 
 [tool.jupyter-packaging.build-args]
 build_cmd = "build:prod"
 npm = ["jlpm"]
+
+[tool.hatch.build.hooks.jupyter-builder]
+editable-frontend = true
 
 [tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
 build_cmd = "build"
 npm = ["jlpm"]
 source_dir = "js"
 build_dir = "plotly/labextension"
+skip_symlink = true
 
 [tool.setuptools.data-files]
 "share/jupyter/labextensions/jupyterlab-plotly" = [
