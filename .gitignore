@@ -60,8 +60,7 @@ doc/.ipynb_checkpoints
 tags
 doc/check-or-enforce-order.py
 plotly/package_data/widgetbundle.js
-plotly/labextension/static
-plotly/labextension/lib
+plotly/labextension/*
 
 tests/percy/*.html
 tests/percy/pandas2/*.html
