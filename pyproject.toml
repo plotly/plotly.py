@@ -66,7 +66,6 @@ include = '\.pyi?$'
 exclude = '''
 
 (
-  /(
       \.eggs         # exclude a few common directories in the
     | \.git          # root of the project
     | \.hg
@@ -77,10 +76,9 @@ exclude = '''
     | buck-out
     | build
     | dist
+    | js
     | submodules
     | plotly/matplotlylib/mplexporter
-  )/
-  | versioneer.py
 )
 '''
 
