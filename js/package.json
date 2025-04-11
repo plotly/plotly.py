@@ -4,7 +4,7 @@
     "main": "lib/mimeExtension.js",
     "scripts": {
       "build:widget": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=../plotly/package_data/widgetbundle.js src/widget.ts",
-      "build:mimerenderer": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=../plotly/labextension/lib/mimeExtension.js src/mimeExtension.ts",
+      "build:mimerenderer": "esbuild --bundle --alias:plotly.js=plotly.js/dist/plotly --format=esm --minify --outfile=lib/mimeExtension.js src/mimeExtension.ts",
       "build:labextension": "jupyter labextension build .",
       "build": "npm run build:widget && npm run build:mimerenderer && npm run build:labextension",
       "watch": "npm run build -- --watch --sourcemap=inline",
