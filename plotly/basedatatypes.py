@@ -2006,7 +2006,14 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
     def add_trace(
-        self, trace, row=None, col=None, secondary_y=None, exclude_empty_subplots=False
+    self,
+    trace,
+    row=None,
+    col=None,
+    secondary_y=None,
+    exclude_empty_subplots=False,
+    xaxis_title=None,
+    yaxis_title=None,
     ):
         """
         Add a trace to the figure
@@ -2050,6 +2057,12 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         exclude_empty_subplots: boolean
             If True, the trace will not be added to subplots that don't already
             have traces.
+        x_axis_title: str or None (default None)
+            The title of the x-axis for the subplot at the specified row and
+            col. 
+        y_axis_title: str or None (default None)
+            The title of the y-axis for the subplot at the specified row and
+            col.
         Returns
         -------
         BaseFigure
@@ -2101,16 +2114,26 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                     col=c,
                     secondary_y=secondary_y,
                     exclude_empty_subplots=exclude_empty_subplots,
+                    xaxis_title=xaxis_title,
+                    yaxis_title=yaxis_title,
                 )
             return self
-
-        return self.add_traces(
+        
+        result = self.add_traces(
             data=[trace],
             rows=[row] if row is not None else None,
             cols=[col] if col is not None else None,
             secondary_ys=[secondary_y] if secondary_y is not None else None,
             exclude_empty_subplots=exclude_empty_subplots,
         )
+
+        if row is not None and col is not None:
+            if xaxis_title is not None:
+                self.update_xaxes(title_text=xaxis_title, row=row, col=col)
+            if yaxis_title is not None:
+                self.update_yaxes(title_text=yaxis_title, row=row, col=col)
+            
+        return result
 
     def add_traces(
         self,
