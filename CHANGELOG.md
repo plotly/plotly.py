@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix third-party widget display issues in v6 [[#5102]https://github.com/plotly/plotly.py/pull/5102]
 
+### Added
+- Added `xaxis_title` and `yaxis_title` parameters to `add_trace()` method for more concise subplot creation
+
 ## [6.0.1] - 2025-03-14
 
 ### Updated
