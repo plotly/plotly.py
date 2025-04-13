@@ -471,32 +471,6 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
         path.write_bytes(img_data)
 
 
-def to_images(*args, **kwargs):
-    """
-    Convert multiple figures to static images and return a list of image bytes
-
-    Parameters
-    ----------
-    Accepts the same parameters as pio.to_image(), but any parameter may be either
-    a single value or a list of values. If more than one parameter is a list,
-    all must be the same length.
-
-    Returns
-    -------
-    list of bytes
-        The image data
-    """
-    individual_args, individual_kwargs = as_individual_args(*args, **kwargs)
-
-    if kaleido_available() and kaleido_major() > 0:
-        # Kaleido v1
-        # TODO: Use a single shared kaleido instance for all images
-        return [to_image(*a, **kw) for a, kw in zip(individual_args, individual_kwargs)]
-    else:
-        # Kaleido v0, or orca
-        return [to_image(*a, **kw) for a, kw in zip(individual_args, individual_kwargs)]
-
-
 def write_images(*args, **kwargs):
     """
     Write multiple images to files or writeable objects. This is much faster than
