@@ -196,15 +196,22 @@ jobs:
             # Compare all files except 'Only in' cases
             diff -qr plotly/labextension-tmp/ plotly/labextension/ | grep -v '^Only in' > build_diff.txt || true
 
+            cat build_diff.txt
+
             # Filter out package.json from the global diff (we’ll check it separately)
             grep -v 'package.json' build_diff.txt > filtered_diff.txt
+
+            cat filtered_diff.txt
 
             # Check if package.json differs
             diff plotly/labextension/package.json plotly/labextension-tmp/package.json > package_json_diff.txt || true
 
+            cat package_json_diff.txt
 
             # Allow only the "load": "static/..." line to differ
             grep -vE '"load": "static/.*\.js"' package_json_diff.txt > package_json_diff_filtered.txt
+
+            cat package_json_diff_filtered.txt
 
             # Check both filtered diffs
             if [ -s filtered_diff.txt ] || [ -s package_json_diff_filtered.txt ]; then
