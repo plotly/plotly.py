@@ -193,19 +193,30 @@ jobs:
       - run:
           name: Check JupyterLab build artifacts
           command: |
+            # Compare all files except 'Only in' cases
             diff -qr plotly/labextension-tmp/ plotly/labextension/ | grep -v '^Only in' > build_diff.txt || true
 
-            ls -l build_diff.txt
-            wc -l build_diff.txt
-            cat build_diff.txt
+            # Filter out package.json from the global diff (we’ll check it separately)
+            grep -v 'package.json' build_diff.txt > filtered_diff.txt
 
-            if [ -s build_diff.txt ]; then
-              echo "❌ Build artifacts differ from committed files:"
-              cat build_diff.txt
+            # Check if package.json differs
+            diff plotly/labextension/package.json plotly/labextension-tmp/package.json > package_json_diff.txt || true
+
+            # Filter package.json diff to ignore allowed hash changes (e.g. jupyterlab/build keys)
+            grep -vE '"(jupyterlab|build)"\s*:' package_json_diff.txt > package_json_diff_filtered.txt
+
+            # Check both filtered diffs
+            if [ -s filtered_diff.txt ] || [ -s package_json_diff_filtered.txt ]; then
+              echo "❌ Build artifacts differ:"
+              echo "--- Unexpected diffs ---"
+              cat filtered_diff.txt
+              echo "--- Unexpected package.json diffs ---"
+              cat package_json_diff_filtered.txt
               exit 1
             else
-              echo "✅ Build artifacts are identical to committed files."
+              echo "✅ Build artifacts match expected output (ignoring allowed hash in package.json)."
             fi
+
 
   # Percy
   python_311_percy:
