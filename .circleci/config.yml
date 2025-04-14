@@ -193,14 +193,18 @@ jobs:
       - run:
           name: Check JupyterLab build artifacts
           command: |
-            diff -qr plotly/labextension-tmp/ plotly/labextension/ | grep -v '^Only in' > build_diff.txt
+            diff -qr plotly/labextension-tmp/ plotly/labextension/ | grep -v '^Only in' > build_diff.txt || true
+
+            ls -l build_diff.txt
+            wc -l build_diff.txt
+            cat build_diff.txt
 
             if [ -s build_diff.txt ]; then
-              echo "Build artifacts differ from committed files:"
+              echo "❌ Build artifacts differ from committed files:"
               cat build_diff.txt
               exit 1
             else
-              echo "Build artifacts are identical to committed files."
+              echo "✅ Build artifacts are identical to committed files."
             fi
 
   # Percy
