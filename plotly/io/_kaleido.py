@@ -140,6 +140,44 @@ except ImportError as e:
     scope = None
 
 
+def as_path_object(file: str | Path) -> Path | None:
+    """
+    Cast the `file` argument, which may be either a string or a Path object,
+    to a Path object.
+    If `file` is neither a string nor a Path object, None will be returned.
+    """
+    if isinstance(file, str):
+        # Use the standard Path constructor to make a pathlib object.
+        path = Path(file)
+    elif isinstance(file, Path):
+        # `file` is already a Path object.
+        path = file
+    else:
+        # We could not make a Path object out of file. Either `file` is an open file
+        # descriptor with a `write()` method or it's an invalid object.
+        path = None
+    return path
+
+def infer_format(path: Path | None, format: str | None) -> str | None:
+    if path is not None and format is None:
+        ext = path.suffix
+        if ext:
+            format = ext.lstrip(".")
+        else:
+            raise ValueError(
+                f"""
+Cannot infer image type from output path '{path}'.
+Please specify the type using the format parameter, or add a file extension.
+For example:
+
+    >>> import plotly.io as pio
+    >>> pio.write_image(fig, file_path, format='png')
+"""
+            )
+    return format
+
+
+
 def to_image(
     fig,
     format=None,
@@ -216,7 +254,6 @@ def to_image(
     """
 
     # Handle engine
-    # -------------
     if engine is not None:
         warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
     else:
@@ -394,7 +431,6 @@ def write_image(
     None
     """
     # Show Kaleido deprecation warning if needed
-    # ------------------------------------------
     if (
         engine in {None, "auto", "kaleido"}
         and kaleido_available()
@@ -407,38 +443,12 @@ def write_image(
         warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
 
     # Try to cast `file` as a pathlib object `path`.
-    # ----------------------------------------------
-    if isinstance(file, str):
-        # Use the standard Path constructor to make a pathlib object.
-        path = Path(file)
-    elif isinstance(file, Path):
-        # `file` is already a Path object.
-        path = file
-    else:
-        # We could not make a Path object out of file. Either `file` is an open file
-        # descriptor with a `write()` method or it's an invalid object.
-        path = None
+    path = as_path_object(file)
 
-    # Infer format if not specified
-    # -----------------------------
-    if path is not None and format is None:
-        ext = path.suffix
-        if ext:
-            format = ext.lstrip(".")
-        else:
-            raise ValueError(
-                f"""
-Cannot infer image type from output path '{file}'.
-Please add a file extension or specify the type using the format parameter.
-For example:
-
-    >>> import plotly.io as pio
-    >>> pio.write_image(fig, file_path, format='png')
-"""
-            )
+    # Infer image format if not specified
+    format = infer_format(path, format)
 
     # Request image
-    # -------------
     # Do this first so we don't create a file if image conversion fails
     img_data = to_image(
         fig,
@@ -451,7 +461,6 @@ For example:
     )
 
     # Open file
-    # ---------
     if path is None:
         # We previously failed to make sense of `file` as a pathlib object.
         # Attempt to write to `file` as an open file descriptor.
@@ -471,34 +480,121 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
         path.write_bytes(img_data)
 
 
-def write_images(*args, **kwargs):
+def write_images(
+    figs,
+    file,
+    format=None,
+    scale=None,
+    width=None,
+    height=None,
+    validate=True,
+):
     """
     Write multiple images to files or writeable objects. This is much faster than
-    calling write_image() multiple times.
+    calling write_image() multiple times. This function can only be used with the Kaleido
+    engine, v1.0.0 or greater.
 
     Parameters
     ----------
-    Accepts the same parameters as pio.write_image(), but any parameter may be either
-    a single value or a list of values. If more than one parameter is a list,
-    all must be the same length.
+    figs:
+        Iterable of figure objects or dicts representing a figure
+
+    directory: str or writeable
+        A string or pathlib.Path object representing a local directory path.
+
+    format: str or None
+        The desired image format. One of
+          - 'png'
+          - 'jpg' or 'jpeg'
+          - 'webp'
+          - 'svg'
+          - 'pdf'
+
+        If not specified, this will default to `plotly.io.defaults.default_format`.
+
+    width: int or None
+        The width of the exported image in layout pixels. If the `scale`
+        property is 1.0, this will also be the width of the exported image
+        in physical pixels.
+
+        If not specified, will default to `plotly.io.defaults.default_width`.
+
+    height: int or None
+        The height of the exported image in layout pixels. If the `scale`
+        property is 1.0, this will also be the height of the exported image
+        in physical pixels.
+
+        If not specified, will default to `plotly.io.defaults.default_height`.
+
+    scale: int or float or None
+        The scale factor to use when exporting the figure. A scale factor
+        larger than 1.0 will increase the image resolution with respect
+        to the figure's layout pixel dimensions. Whereas as scale factor of
+        less than 1.0 will decrease the image resolution.
+
+        If not specified, will default to `plotly.io.defaults.default_scale`.
+
+    validate: bool
+        True if the figure should be validated before being converted to
+        an image, False otherwise.
 
     Returns
     -------
     None
     """
 
-    # Get individual arguments
-    individual_args, individual_kwargs = as_individual_args(*args, **kwargs)
+    # Raise informative error message if Kaleido v1 is not installed
+    if not kaleido_available():
+        raise ValueError(
+            """
+The `write_images()` function requires the kaleido package,
+which can be installed using pip:
+    $ pip install -U kaleido
+"""
+        )
+    elif kaleido_major() < 1:
+        raise ValueError(
+            f"""
+You have Kaleido version {Version(importlib_metadata.version("kaleido"))} installed.
+The `write_images()` function requires the kaleido package version 1 or greater,
+which can be installed using pip:
+    $ pip install -U 'kaleido>=1.0.0'
+"""
+        )
 
-    if kaleido_available() and kaleido_major() > 0:
-        # Kaleido v1
-        # TODO: Use a single shared kaleido instance for all images
-        for a, kw in zip(individual_args, individual_kwargs):
-            write_image(*a, **kw)
-    else:
-        # Kaleido v0, or orca
-        for a, kw in zip(individual_args, individual_kwargs):
-            write_image(*a, **kw)
+    # Try to cast `file` as a pathlib object `path`.
+    path = as_path_object(file)
+
+    # Infer image format if not specified
+    format = infer_format(path, format)
+
+    # Convert figures to dicts (and validate if requested)
+    # TODO: Keep same iterable type
+    fig_dicts = [validate_coerce_fig_to_dict(fig, validate) for fig in figs]    
+
+    kaleido.write_fig_sync(
+        fig_dicts,
+        directory=path,
+        opts=dict(
+            format=format or defaults.default_format,
+            width=width or defaults.default_width,
+            height=height or defaults.default_height,
+            scale=scale or defaults.default_scale,
+        ),
+    )
+
+    # # Get individual arguments
+    # individual_args, individual_kwargs = as_individual_args(*args, **kwargs)
+
+    # if kaleido_available() and kaleido_major() > 0:
+    #     # Kaleido v1
+    #     # TODO: Use a single shared kaleido instance for all images
+    #     for a, kw in zip(individual_args, individual_kwargs):
+    #         write_image(*a, **kw)
+    # else:
+    #     # Kaleido v0, or orca
+    #     for a, kw in zip(individual_args, individual_kwargs):
+    #         write_image(*a, **kw)
 
 
 def full_figure_for_development(fig, warn=True, as_dict=False):
