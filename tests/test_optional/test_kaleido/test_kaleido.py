@@ -3,12 +3,12 @@ from pathlib import Path
 import tempfile
 from contextlib import redirect_stdout
 import base64
-import unittest
-from unittest import mock
 
 from pdfrw import PdfReader
 from PIL import Image
 import plotly.io as pio
+from plotly.io.kaleido import kaleido_available, kaleido_major
+import pytest
 
 fig = {"data": [], "layout": {"title": {"text": "figure title"}}}
 
@@ -91,6 +91,30 @@ def test_kaleido_engine_write_image_kwargs(tmp_path):
         check_image(out_path, size=(700 * 2, 600 * 2), format="JPEG")
 
 
+@pytest.mark.skipif(
+    not kaleido_available() or kaleido_major() < 1,
+    reason="requires Kaleido v1.0.0 or higher",
+)
+def test_kaleido_engine_write_images(tmp_path):
+    fig1 = {"data": [], "layout": {"title": {"text": "figure 1"}}}
+    fig2 = {"data": [], "layout": {"title": {"text": "figure 2"}}}
+
+    path_str = tempfile.mkstemp(suffix=".png", dir=tmp_path)[1]
+    path_path = Path(tempfile.mkstemp(suffix=".png", dir=tmp_path)[1])
+
+    pio.write_images(
+        [fig1, fig2],
+        [path_str, path_path],
+        format=["jpg", "png"],
+        width=[700, 900],
+        height=600,
+        scale=2,
+        validate=False,
+    )
+    check_image(path_str, size=(700 * 2, 600 * 2), format="JPEG")
+    check_image(str(path_path), size=(900 * 2, 600 * 2), format="PNG")
+
+
 def test_image_renderer():
     """Verify that the image renderer returns the expected mimebundle."""
     with redirect_stdout(StringIO()) as f:
@@ -123,70 +147,6 @@ def test_bytesio():
     bio_bytes = bio.read()
     to_image_bytes = pio.to_image(fig, format="jpg", engine="kaleido", validate=False)
     assert bio_bytes == to_image_bytes
-
-
-@mock.patch("plotly.io._kaleido.write_image")
-def test_write_images_single(mock_write_image):
-    """Test write_images with only single arguments"""
-    pio.write_images(
-        fig,
-        "output.png",
-        format="png",
-        width=800,
-        height=600,
-        scale=2,
-    )
-
-    # Verify that write_image was called once with the correct arguments
-    expected_calls = [
-        mock.call(
-            fig,
-            "output.png",
-            format="png",
-            width=800,
-            height=600,
-            scale=2,
-        )
-    ]
-    mock_write_image.assert_has_calls(expected_calls, any_order=False)
-    assert mock_write_image.call_count == 1
-
-
-@mock.patch("plotly.io._kaleido.write_image")
-def test_write_images_multiple(mock_write_image):
-    """Test write_images with list arguments"""
-    fig1 = {"data": [], "layout": {"title": {"text": "figure 1"}}}
-    fig2 = {"data": [], "layout": {"title": {"text": "figure 2"}}}
-    pio.write_images(
-        [fig1, fig2],
-        ["output1.png", "output2.jpg"],
-        format=["png", "jpeg"],
-        width=800,
-        height=[600, 400],
-        scale=2,
-    )
-
-    # Verify that write_image was called with the correct arguments in the correct order
-    expected_calls = [
-        mock.call(
-            fig1,
-            "output1.png",
-            format="png",
-            width=800,
-            height=600,
-            scale=2,
-        ),
-        mock.call(
-            fig2,
-            "output2.jpg",
-            format="jpeg",
-            width=800,
-            height=400,
-            scale=2,
-        ),
-    ]
-    mock_write_image.assert_has_calls(expected_calls, any_order=False)
-    assert mock_write_image.call_count == 2
 
 
 def test_defaults():
