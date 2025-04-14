@@ -1,6 +1,7 @@
 import os
 import json
 from pathlib import Path
+from typing import Union, List
 import importlib.metadata as importlib_metadata
 from packaging.version import Version
 import warnings
@@ -50,7 +51,10 @@ Please use plotly.io.defaults.* instead.
 )
 
 
-def kaleido_available():
+def kaleido_available() -> bool:
+    """
+    Returns True if any version of Kaleido is installed, otherwise False.
+    """
     global _KALEIDO_AVAILABLE
     global _KALEIDO_MAJOR
     if _KALEIDO_AVAILABLE is not None:
@@ -64,7 +68,11 @@ def kaleido_available():
     return _KALEIDO_AVAILABLE
 
 
-def kaleido_major():
+def kaleido_major() -> int:
+    """
+    Returns the major version number of Kaleido if it is installed, 
+    otherwise raises a ValueError.
+    """
     global _KALEIDO_MAJOR
     if _KALEIDO_MAJOR is not None:
         return _KALEIDO_MAJOR
@@ -146,7 +154,7 @@ except ImportError as e:
     scope = None
 
 
-def as_path_object(file: str | Path) -> Path | None:
+def as_path_object(file: Union[str, Path]) -> Union[Path, None]:
     """
     Cast the `file` argument, which may be either a string or a Path object,
     to a Path object.
@@ -185,14 +193,15 @@ For example:
 
 
 def to_image(
-    fig,
-    format=None,
-    width=None,
-    height=None,
-    scale=None,
-    validate=True,
-    engine=None,
-):
+    fig: Union[dict, plotly.graph_objects.Figure],
+    format: Union[str, None]=None,
+    width: Union[int, None]=None,
+    height: Union[int, None]=None,
+    scale: Union[int, float, None]=None,
+    validate: bool=True,
+    # Deprecated
+    engine: Union[str, None]=None,
+) -> bytes:
     """
     Convert a figure to a static image bytes string
 
@@ -350,14 +359,15 @@ To downgrade to Kaleido v0, run:
 
 
 def write_image(
-    fig,
-    file,
-    format=None,
-    scale=None,
-    width=None,
-    height=None,
-    validate=True,
-    engine="auto",
+    fig: Union[dict, plotly.graph_objects.Figure],
+    file: Union[str, Path],
+    format: Union[str, None]=None,
+    scale: Union[int, float, None]=None,
+    width: Union[int, None]=None,
+    height: Union[int, None]=None,
+    validate: bool=True,
+    # Deprecated
+    engine: Union[str, None]="auto",
 ):
     """
     Convert a figure to a static image and write it to a file or writeable
@@ -481,14 +491,14 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
 
 
 def write_images(
-    fig,
-    file,
-    format=None,
-    scale=None,
-    width=None,
-    height=None,
-    validate=True,
-):
+    fig: Union[List[Union[dict, plotly.graph_objects.Figure]], Union[dict, plotly.graph_objects.Figure]],
+    file: Union[List[Union[str, Path]], Union[str, Path]],
+    format: Union[List[Union[str, None]], Union[str, None]] = None,
+    scale: Union[List[Union[int, float, None]], Union[int, float, None]] = None,
+    width: Union[List[Union[int, None]], Union[int, None]] = None,
+    height: Union[List[Union[int, None]], Union[int, None]] = None,
+    validate: Union[List[bool], bool] = True,
+) -> None:
     """
     Write multiple images to files or writeable objects. This is much faster than
     calling write_image() multiple times. This function can only be used with the Kaleido
@@ -610,7 +620,11 @@ which can be installed using pip:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
 
-def full_figure_for_development(fig, warn=True, as_dict=False):
+def full_figure_for_development(
+    fig: Union[dict, plotly.graph_objects.Figure],
+    warn: bool=True,
+    as_dict: bool=False,
+) -> Union[plotly.graph_objects.Figure, dict]:
     """
     Compute default values for all attributes not specified in the input figure and
     returns the output as a "full" figure. This function calls Plotly.js via Kaleido
@@ -677,7 +691,7 @@ which can be installed using pip:
         return go.Figure(fig, skip_invalid=True)
 
 
-def get_chrome():
+def get_chrome() -> None:
     """
     Install Google Chrome for Kaleido
     This function can be run from the command line using the command `plotly_get_chrome`
