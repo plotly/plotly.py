@@ -194,28 +194,23 @@ jobs:
           name: Check JupyterLab build artifacts
           command: |
             # 1. Compare all files except 'Only in' cases
-            diff -qr plotly/labextension-tmp/ plotly/labextension/ | grep -v '^Only in' > build_diff.txt || true
+            diff -qr plotly/labextension-tmp/static plotly/labextension/static | grep -v '^Only in' > build_diff.txt || true
             cat build_diff.txt
 
-            # 2. Filter out package.json from overall diff
-            grep -v 'package.json' build_diff.txt > filtered_diff.txt
-            cat filtered_diff.txt
+            # Remove the "load" line from both package.json files before comparing
+            grep -v '"load": "static/' plotly/labextension/package.json > pkg1.json
+            grep -v '"load": "static/' plotly/labextension-tmp/package.json > pkg2.json
 
-            # 3. Diff package.json in unified mode
-            diff -u plotly/labextension/package.json plotly/labextension-tmp/package.json > package_json_diff.txt || true
-            cat package_json_diff.txt
-
-            # 4. Filter out the line that changes ("load": "static/...js")
-            grep -vE '"load": "static/.*\.js"' package_json_diff.txt > package_json_diff_filtered.txt
-            cat package_json_diff_filtered.txt
+            # Compare stripped versions
+            diff pkg1.json pkg2.json > package_json_diff.txt || true
 
             # 5. Final check
-            if [ -s filtered_diff.txt ] || [ -s package_json_diff_filtered.txt ]; then
+            if [ -s build_diff.txt ] || [ -s package_json_diff.txt ]; then
               echo "❌ Build artifacts differ:"
               echo "--- Unexpected diffs ---"
-              cat filtered_diff.txt
+              cat build_diff.txt
               echo "--- Unexpected package.json diffs ---"
-              cat package_json_diff_filtered.txt
+              cat package_json_diff.txt
               exit 1
             else
               echo "✅ Build artifacts match expected output (ignoring known 'load' hash in package.json)."
