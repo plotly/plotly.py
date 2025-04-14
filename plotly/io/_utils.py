@@ -1,3 +1,5 @@
+from typing import List
+
 import plotly
 import plotly.graph_objs as go
 from plotly.offline import get_plotlyjs_version
@@ -43,7 +45,7 @@ Invalid output type: {output_type}
     return cls
 
 
-def broadcast_args_to_dicts(**kwargs):
+def broadcast_args_to_dicts(**kwargs: dict) -> List[dict]:
     """
     Given one or more keyword arguments which may be either a single value or a list of values,
     return a list of keyword dictionaries by broadcasting the single valuesacross all the dicts.
