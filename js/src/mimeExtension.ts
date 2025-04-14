@@ -226,7 +226,7 @@ const extensions: IRenderMime.IExtension | IRenderMime.IExtension[] = [
   {
     id: "@jupyterlab/plotly-extension:factory",
     rendererFactory,
-    rank: 0,
+    rank: 1,
     dataType: "json",
     fileTypes: [
       {
