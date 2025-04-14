@@ -6,10 +6,16 @@ from packaging.version import Version
 import warnings
 
 import plotly
-from plotly.io._utils import validate_coerce_fig_to_dict, as_individual_args
+from plotly.io._utils import validate_coerce_fig_to_dict, broadcast_args_to_dicts
 from plotly.io import defaults
 
 ENGINE_SUPPORT_TIMELINE = "September 2025"
+
+PLOTLY_GET_CHROME_ERROR_MSG = """
+
+Kaleido requires Google Chrome to be installed. Install it by running:
+    $ plotly_get_chrome
+"""
 
 
 # TODO: Remove --pre flag once Kaleido v1 full release is available
@@ -158,6 +164,7 @@ def as_path_object(file: str | Path) -> Path | None:
         path = None
     return path
 
+
 def infer_format(path: Path | None, format: str | None) -> str | None:
     if path is not None and format is None:
         ext = path.suffix
@@ -175,7 +182,6 @@ For example:
 """
             )
     return format
-
 
 
 def to_image(
@@ -331,13 +337,7 @@ To downgrade to Kaleido v0, run:
                 ),
             )
         except choreographer.errors.ChromeNotFoundError:
-            raise RuntimeError(
-                """
-
-Kaleido requires Google Chrome to be installed. Install it by running:
-    $ plotly_get_chrome
-"""
-            )
+            raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
     else:
         # Kaleido v0
@@ -481,7 +481,7 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
 
 
 def write_images(
-    figs,
+    fig,
     file,
     format=None,
     scale=None,
@@ -494,13 +494,17 @@ def write_images(
     calling write_image() multiple times. This function can only be used with the Kaleido
     engine, v1.0.0 or greater.
 
+    This function accepts the same arguments as write_image() (minus the `engine` argument),
+    except that any of the arguments may be either a single value or an iterable of values.
+    If multiple arguments are iterable, they must all have the same length.
+
     Parameters
     ----------
-    figs:
+    fig:
         Iterable of figure objects or dicts representing a figure
 
-    directory: str or writeable
-        A string or pathlib.Path object representing a local directory path.
+    file: str or writeable
+        Iterables of strings or pathlib.Path objects representing local file paths to write to.
 
     format: str or None
         The desired image format. One of
@@ -562,39 +566,48 @@ which can be installed using pip:
 """
         )
 
-    # Try to cast `file` as a pathlib object `path`.
-    path = as_path_object(file)
-
-    # Infer image format if not specified
-    format = infer_format(path, format)
-
-    # Convert figures to dicts (and validate if requested)
-    # TODO: Keep same iterable type
-    fig_dicts = [validate_coerce_fig_to_dict(fig, validate) for fig in figs]    
-
-    kaleido.write_fig_sync(
-        fig_dicts,
-        directory=path,
-        opts=dict(
-            format=format or defaults.default_format,
-            width=width or defaults.default_width,
-            height=height or defaults.default_height,
-            scale=scale or defaults.default_scale,
-        ),
+    # Broadcast arguments into correct format for passing to Kaleido
+    arg_dicts = broadcast_args_to_dicts(
+        fig=fig,
+        file=file,
+        format=format,
+        scale=scale,
+        width=width,
+        height=height,
+        validate=validate,
     )
 
-    # # Get individual arguments
-    # individual_args, individual_kwargs = as_individual_args(*args, **kwargs)
+    # For each dict:
+    #   - convert figures to dicts (and validate if requested)
+    #   - try to cast `file` as a Path object
+    for d in arg_dicts:
+        d["fig"] = validate_coerce_fig_to_dict(d["fig"], d["validate"])
+        d["file"] = as_path_object(d["file"])
 
-    # if kaleido_available() and kaleido_major() > 0:
-    #     # Kaleido v1
-    #     # TODO: Use a single shared kaleido instance for all images
-    #     for a, kw in zip(individual_args, individual_kwargs):
-    #         write_image(*a, **kw)
-    # else:
-    #     # Kaleido v0, or orca
-    #     for a, kw in zip(individual_args, individual_kwargs):
-    #         write_image(*a, **kw)
+    # Reshape arg_dicts into correct format for passing to Kaleido
+    # We call infer_format() here rather than above so that the `file` argument
+    # has already been cast to a Path object.
+    # Also insert defaults for any missing arguments as needed
+    kaleido_specs = [
+        {
+            "fig": d["fig"],
+            "path": d["file"],
+            "opts": dict(
+                format=infer_format(d["file"], d["format"]) or defaults.default_format,
+                width=d["width"] or defaults.default_width,
+                height=d["height"] or defaults.default_height,
+                scale=d["scale"] or defaults.default_scale,
+            ),
+        }
+        for d in arg_dicts
+    ]
+
+    import choreographer
+
+    try:
+        kaleido.write_fig_from_object_sync(kaleido_specs)
+    except choreographer.errors.ChromeNotFoundError:
+        raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
 
 def full_figure_for_development(fig, warn=True, as_dict=False):
