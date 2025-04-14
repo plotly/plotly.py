@@ -173,6 +173,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Skip if no JS changes
+          command: |
+            git diff --name-only origin/main...HEAD | grep '^js/' || exit 0
+      - run:
           name: Copy current files to a temporary directory
           command: |
             cp -R plotly/labextension/ plotly/labextension-tmp/
@@ -440,10 +444,6 @@ workflows:
       - full_build
   
   check_js_build:
-    filters:
-      paths:
-        only:
-          - js/**
     jobs:
       - check-js-build
 
