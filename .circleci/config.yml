@@ -189,15 +189,14 @@ jobs:
       - run:
           name: Check JupyterLab build artifacts
           command: |
-            echo "Checking for uncommitted changes in plotly/labextension/..."
-            git diff --exit-code plotly/labextension-tmp/ plotly/labextension/
-            if [ $? -ne 0 ]; then
-              echo "Uncommitted changes found in plotly/labextension/"
-              echo "Please run 'git diff' to see the changes."
-              echo "If you are sure you want to commit these changes, run 'git add plotly/labextension/' and 'git commit -m \"Update labextension\"'."
+            diff -qr plotly/labextension-tmp/ plotly/labextension/ | grep -v '^Only in' > build_diff.txt
+
+            if [ -s build_diff.txt ]; then
+              echo "Build artifacts differ from committed files:"
+              cat build_diff.txt
               exit 1
             else
-              echo "No uncommitted changes found in plotly/labextension/"
+              echo "Build artifacts are identical to committed files."
             fi
 
   # Percy
@@ -441,6 +440,10 @@ workflows:
       - full_build
   
   check_js_build:
+    filters:
+      paths:
+        only:
+          - js/**
     jobs:
       - check-js-build
 
