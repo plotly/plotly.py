@@ -202,8 +202,9 @@ jobs:
             # Check if package.json differs
             diff plotly/labextension/package.json plotly/labextension-tmp/package.json > package_json_diff.txt || true
 
-            # Filter package.json diff to ignore allowed hash changes (e.g. jupyterlab/build keys)
-            grep -vE '"(jupyterlab|build)"\s*:' package_json_diff.txt > package_json_diff_filtered.txt
+
+            # Allow only the "load": "static/..." line to differ
+            grep -vE '"load": "static/.*\.js"' package_json_diff.txt > package_json_diff_filtered.txt
 
             # Check both filtered diffs
             if [ -s filtered_diff.txt ] || [ -s package_json_diff_filtered.txt ]; then
