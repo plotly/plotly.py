@@ -31,6 +31,6 @@
     "jupyterlab": {
       "mimeExtension": true,
       "outputDir": "../plotly/labextension"
-    }
+    } 
   }
   
