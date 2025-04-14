@@ -211,11 +211,15 @@ jobs:
               cat build_diff.txt
               echo "--- Unexpected package.json diffs ---"
               cat package_json_diff.txt
+              echo "Please replace the `plotly/labextension` directory with the artifacts of this CI run."
               exit 1
             else
               echo "✅ Build artifacts match expected output (ignoring known 'load' hash in package.json)."
             fi
-
+      - store_artifacts:
+          path: plotly/labextension
+          destination: labextension
+          when: on_fail
 
 
   # Percy
