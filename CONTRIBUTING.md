@@ -171,7 +171,7 @@ documentation on _development mode_.
 
 ### Updating the `js/` directory
 **This is only necessary if you're making changes to the `js/` directory.**
-To rebuild the javascript, you can run `npm install && npm run build` from the `js/` directory. 
+To rebuild the FigureWidget and JupyterLab extension, you can run `npm install && npm run build` from the `js/` directory. 
 
 **Notes on the contents of the `js/` directory:**
 The `js/` directory contains code to run plotly in Jupyter notebooks. It is shipped
