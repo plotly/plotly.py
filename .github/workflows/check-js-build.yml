@@ -16,7 +16,7 @@ jobs:
     - name: Install Node
       uses: actions/setup-node@v2
       with:
-        node-version: '18'
+        node-version: '22'
 
     - name: Copy current files to a temporary directory
       run: |
