@@ -1,8 +1,4 @@
-on:
-    pull_request:
-        paths:
-        - 'js/**'
-        - 'plotly/labextension/**'
+on: push
 
 jobs:
   check-js-build:
@@ -26,6 +22,14 @@ jobs:
       run: |
         cp -R plotly/labextension/ plotly/labextension-tmp/
 
+    - name: Check if JS or labextension files changed
+      run: |
+        git fetch origin ${{ github.base_ref }}
+        CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '^js/|^plotly/labextension/' || true)
+        if [ -z "$CHANGED" ]; then
+          exit 0
+        fi
+      
     - name: Install dependencies
       run: |
         curl -LsSf https://astral.sh/uv/install.sh | sh
