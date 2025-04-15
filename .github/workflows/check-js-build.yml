@@ -42,7 +42,7 @@ jobs:
         find plotly/labextension-tmp/static -type f -exec sha256sum {} \; | awk '{print $1}' | sort > old_hashes.txt
 
         # 2. Compare the sorted content hashes
-        diff old_hashes.txt new_hashes.txt > content_diff.txt || true
+        diff old_hashes.txt new_hashes.txt > content_diff.txt
         cat content_diff.txt
 
         # Remove the "load" line from both package.json files before comparing
@@ -50,7 +50,7 @@ jobs:
         grep -v '"load": "static/' plotly/labextension-tmp/package.json > pkg2.json
 
         # Compare stripped versions
-        diff pkg1.json pkg2.json > package_json_diff.txt || true
+        diff pkg1.json pkg2.json > package_json_diff.txt
 
         # 5. Final check
         if [ -s content_diff.txt ] || [ -s package_json_diff.txt ]; then
