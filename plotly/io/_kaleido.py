@@ -70,7 +70,7 @@ def kaleido_available() -> bool:
 
 def kaleido_major() -> int:
     """
-    Returns the major version number of Kaleido if it is installed, 
+    Returns the major version number of Kaleido if it is installed,
     otherwise raises a ValueError.
     """
     global _KALEIDO_MAJOR
@@ -194,13 +194,13 @@ For example:
 
 def to_image(
     fig: Union[dict, plotly.graph_objects.Figure],
-    format: Union[str, None]=None,
-    width: Union[int, None]=None,
-    height: Union[int, None]=None,
-    scale: Union[int, float, None]=None,
-    validate: bool=True,
+    format: Union[str, None] = None,
+    width: Union[int, None] = None,
+    height: Union[int, None] = None,
+    scale: Union[int, float, None] = None,
+    validate: bool = True,
     # Deprecated
-    engine: Union[str, None]=None,
+    engine: Union[str, None] = None,
 ) -> bytes:
     """
     Convert a figure to a static image bytes string
@@ -344,7 +344,9 @@ To downgrade to Kaleido v0, run:
                     height=height or defaults.default_height,
                     scale=scale or defaults.default_scale,
                 ),
-                topojson=Path(defaults.topojson).as_uri() if defaults.topojson else None,
+                topojson=Path(defaults.topojson).as_uri()
+                if defaults.topojson
+                else None,
                 # mathjax=Path(defaults.mathjax).as_uri() if defaults.mathjax else None,
             )
         except choreographer.errors.ChromeNotFoundError:
@@ -363,13 +365,13 @@ To downgrade to Kaleido v0, run:
 def write_image(
     fig: Union[dict, plotly.graph_objects.Figure],
     file: Union[str, Path],
-    format: Union[str, None]=None,
-    scale: Union[int, float, None]=None,
-    width: Union[int, None]=None,
-    height: Union[int, None]=None,
-    validate: bool=True,
+    format: Union[str, None] = None,
+    scale: Union[int, float, None] = None,
+    width: Union[int, None] = None,
+    height: Union[int, None] = None,
+    validate: bool = True,
     # Deprecated
-    engine: Union[str, None]="auto",
+    engine: Union[str, None] = "auto",
 ):
     """
     Convert a figure to a static image and write it to a file or writeable
@@ -493,7 +495,10 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
 
 
 def write_images(
-    fig: Union[List[Union[dict, plotly.graph_objects.Figure]], Union[dict, plotly.graph_objects.Figure]],
+    fig: Union[
+        List[Union[dict, plotly.graph_objects.Figure]],
+        Union[dict, plotly.graph_objects.Figure],
+    ],
     file: Union[List[Union[str, Path]], Union[str, Path]],
     format: Union[List[Union[str, None]], Union[str, None]] = None,
     scale: Union[List[Union[int, float, None]], Union[int, float, None]] = None,
@@ -626,8 +631,8 @@ which can be installed using pip:
 
 def full_figure_for_development(
     fig: Union[dict, plotly.graph_objects.Figure],
-    warn: bool=True,
-    as_dict: bool=False,
+    warn: bool = True,
+    as_dict: bool = False,
 ) -> Union[plotly.graph_objects.Figure, dict]:
     """
     Compute default values for all attributes not specified in the input figure and
