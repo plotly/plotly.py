@@ -30,7 +30,7 @@ jobs:
           exit 0
         fi
       
-    - name: Install dependencies
+    - name: Install dependencies and build
       run: |
         curl -LsSf https://astral.sh/uv/install.sh | sh
         uv venv
