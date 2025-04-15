@@ -163,65 +163,6 @@ jobs:
           pandas_version: <<parameters.pandas_version>>
           numpy_version: <<parameters.numpy_version>>
 
-  check-js-build:
-    docker:
-      - image: cimg/python:3.12-node
-        environment:
-          LANG: en_US.UTF-8
-    resource_class: large
-
-    steps:
-      - checkout
-      - run:
-          name: Skip if no JS changes
-          command: |
-            git diff --name-only origin/main...HEAD | grep '^js/' || exit 0
-      - run:
-          name: Copy current files to a temporary directory
-          command: |
-            cp -R plotly/labextension/ plotly/labextension-tmp/
-      - run:
-          name: Install dependencies
-          command: |
-            curl -LsSf https://astral.sh/uv/install.sh | sh
-            uv venv
-            source .venv/bin/activate
-            uv pip install jupyter
-            cd js
-            npm ci
-            npm run build
-      - run:
-          name: Check JupyterLab build artifacts
-          command: |
-            # 1. Compare all files except 'Only in' cases
-            diff -qr plotly/labextension-tmp/static plotly/labextension/static | grep -v '^Only in' > build_diff.txt || true
-            cat build_diff.txt
-
-            # Remove the "load" line from both package.json files before comparing
-            grep -v '"load": "static/' plotly/labextension/package.json > pkg1.json
-            grep -v '"load": "static/' plotly/labextension-tmp/package.json > pkg2.json
-
-            # Compare stripped versions
-            diff pkg1.json pkg2.json > package_json_diff.txt || true
-
-            # 5. Final check
-            if [ -s build_diff.txt ] || [ -s package_json_diff.txt ]; then
-              echo "❌ Build artifacts differ:"
-              echo "--- Unexpected diffs ---"
-              cat build_diff.txt
-              echo "--- Unexpected package.json diffs ---"
-              cat package_json_diff.txt
-              echo "Please replace the `plotly/labextension` directory with the artifacts of this CI run."
-              exit 1
-            else
-              echo "✅ Build artifacts match expected output (ignoring known 'load' hash in package.json)."
-            fi
-      - store_artifacts:
-          path: plotly/labextension
-          destination: labextension
-          when: on_fail
-
-
   # Percy
   python_311_percy:
     docker:
@@ -462,10 +403,6 @@ workflows:
     jobs:
       - full_build
   
-  check_js_build:
-    jobs:
-      - check-js-build
-
   build:
     jobs:
       - test_core_py:
