@@ -47,7 +47,6 @@ jobs:
 
         # 2. Compare the sorted content hashes
         diff old_hashes.txt new_hashes.txt > content_diff.txt
-        cat content_diff.txt
 
         # Remove the "load" line from both package.json files before comparing
         grep -v '"load": "static/' plotly/labextension/package.json > pkg1.json
