@@ -170,24 +170,17 @@ and
 documentation on _development mode_.
 
 ### Updating the `js/` directory
-**This is only necessary if you're making changes to the `js/` directory.**
-To rebuild the FigureWidget and JupyterLab extension, you can run `npm install && npm run build` from the `js/` directory. 
+**This is only necessary if you're making changes to files in the `js/` directory.**
+If you make changes to any files in the `js/` directory, you must run `npm install && npm run build` from the `js/` directory to rebuild the FigureWidget and JupyterLab extension.
+You must then commit the build artifacts produced in `plotly/labextension`. A CI job will verify that this step has been done correctly.
 
 **Notes on the contents of the `js/` directory:**
-The `js/` directory contains code to run plotly in Jupyter notebooks. It is shipped
-as part of the python package, so the build files are located in the `plotly/` directory
-under `plotly/labextension`. The files in that directory are committed so that if you
-aren't making a change to the `js/` directory, you don't have to worry about building it.
+The `js/` directory contains Javascript code which helps with using Plotly in Jupyter notebooks.
+
 There are two kinds of Jupyter support included in the `js/` directory:
-1. **Widget**: This is a more interactive model for rendering plotly in notebooks. You can use this
-through `FigureWidget`. It allows for communication between the javascript frontend and the python backend,
-but it has the drawback of requiring an additional package (`anywidget`). The code for this is located under
-`js/src/widget.ts`, and is included in the python package through `plotly/package_data/widgetbundle.js`. 
-2. **Mime Renderer**: This is a less interactive model. The plot is rendered but can't send any
-information back to the python side. For most people this is enough, so this is the default
-renderer for the `Figure` class. The mime renderer is used automatically by JupyterLab / Jupyter Notebook
-when it sees the mimetype `application/vnd.plotly.v1+json` in the notebook output. We include a JupyterLab extension in our python package that loads `plotly.js` and renders it when that mimetype is found in notebook
-output. This allows for us to avoid having to embed `plotly.js` in the notebook output. The code for this is found under `js/src/mimeExtension.ts` and is compiled into `plotly/labextension` through `jupyter labextension build`, which is included in `npm run build`. 
+1. **Mime Renderer JupyterLab extension**: This is the default renderer for Plotly `Figure()` objects in Jupyter notebooks. The Plotly mime renderer JupyterLab extension is used automatically by JupyterLab / Jupyter Notebook
+when it sees the mimetype `application/vnd.plotly.v1+json` in the notebook output. The mime renderer loads `plotly.js` a single time and references it each time a Plotly figure is used in the notebook. This allows us to avoid embedding `plotly.js` in the notebook output. The JupyterLab extension source code is located at `js/src/mimeExtension.ts` and the compiled extension code is located at `plotly/labextension` in the built Python package. The command `jupyter labextension build` (which is one of the steps called by `npm run build`) compiles the extension and places the build artifacts in `plotly/labextension`. 
+2. **FigureWidget**: This is a more-interactive method for rendering Plotly charts in notebooks. FigureWidget used by creating a `FigureWidget()` object inside the notebook code (in place of a `Figure()`). It allows for communication between the Javascript frontend and Python backend, and requires the installation of an additional Python package (`anywidget`). The FigureWidget source code is located at `js/src/widget.ts`, and is included in the built Python package at `plotly/package_data/widgetbundle.js`. 
 
 ### Configure black code formatting
 
