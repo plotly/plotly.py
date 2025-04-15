@@ -1,7 +1,7 @@
 {
   "name": "jupyterlab-plotly",
   "main": "lib/mimeExtension.js",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/plotly/plotly.py"
@@ -32,7 +32,7 @@
     "mimeExtension": true,
     "outputDir": "../plotly/labextension",
     "_build": {
-      "load": "static/remoteEntry.933f9f3dd8abfdb3d565.js",
+      "load": "static/remoteEntry.2ca9ac9976314255d84a.js",
       "mimeExtension": "./mimeExtension"
     }
   }
