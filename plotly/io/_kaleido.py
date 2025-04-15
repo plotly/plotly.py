@@ -173,7 +173,7 @@ def as_path_object(file: Union[str, Path]) -> Union[Path, None]:
     return path
 
 
-def infer_format(path: Path | None, format: str | None) -> str | None:
+def infer_format(path: Union[Path, None], format: Union[str, None]) -> Union[str, None]:
     if path is not None and format is None:
         ext = path.suffix
         if ext:
@@ -344,6 +344,8 @@ To downgrade to Kaleido v0, run:
                     height=height or defaults.default_height,
                     scale=scale or defaults.default_scale,
                 ),
+                topojson=Path(defaults.topojson).as_uri() if defaults.topojson else None,
+                # mathjax=Path(defaults.mathjax).as_uri() if defaults.mathjax else None,
             )
         except choreographer.errors.ChromeNotFoundError:
             raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
@@ -608,6 +610,8 @@ which can be installed using pip:
                 height=d["height"] or defaults.default_height,
                 scale=d["scale"] or defaults.default_scale,
             ),
+            "topojson": Path(defaults.topojson).as_uri() if defaults.topojson else None,
+            # "mathjax": Path(defaults.mathjax).as_uri() if defaults.mathjax else None,
         }
         for d in arg_dicts
     ]

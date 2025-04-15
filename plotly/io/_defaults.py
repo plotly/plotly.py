@@ -11,6 +11,8 @@ class _Defaults(object):
         self.default_width = 700
         self.default_height = 500
         self.default_scale = 1
+        self.mathjax = None
+        self.topojson = None
 
 
 defaults = _Defaults()
