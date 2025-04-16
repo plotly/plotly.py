@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=61", "hatch", "jupyter_packaging~=0.10.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
@@ -66,7 +66,6 @@ include = '\.pyi?$'
 exclude = '''
 
 (
-  /(
       \.eggs         # exclude a few common directories in the
     | \.git          # root of the project
     | \.hg
@@ -77,9 +76,36 @@ exclude = '''
     | buck-out
     | build
     | dist
+    | js
     | submodules
     | plotly/matplotlylib/mplexporter
-  )/
-  | versioneer.py
 )
 '''
+
+[tool.jupyter-packaging.builder]
+factory = "jupyter_packaging.npm_builder"
+auto_data_files = true
+
+[tool.jupyter-packaging.build-args]
+build_cmd = "build:prod"
+npm = ["jlpm"]
+
+[tool.hatch.build.hooks.jupyter-builder]
+editable-frontend = true
+
+[tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
+build_cmd = "build"
+npm = ["jlpm"]
+source_dir = "js"
+build_dir = "plotly/labextension"
+skip_symlink = true
+
+[tool.setuptools.data-files]
+"share/jupyter/labextensions/jupyterlab-plotly" = [
+  "plotly/labextension/package.json",
+  "js/install.json"
+]
+
+"share/jupyter/labextensions/jupyterlab-plotly/static" = [
+  "plotly/labextension/static/*.js"
+]
