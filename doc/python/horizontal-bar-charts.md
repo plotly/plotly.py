@@ -233,7 +233,13 @@ df.rename(columns={'Unnamed: 0':"Category"}, inplace=True)
 for v in ["Disagree","Strongly Disagree"]:
     df[v]=df[v]*-1
 
-fig = go.Figure()
+fig = go.Figure(layout=go.Layout(
+    title="Reactions to statements from the 2002 General Social Survey:",
+    plot_bgcolor="white",
+    barmode='relative'  # Allows bars to diverge from the center
+    ))
+
+
 # this color palette conveys meaning:  blues for agreement, reds and oranges for disagreement, gray for Neither Agree nor Disagree
 color_by_category={
     "Strongly Agree":'darkblue',
@@ -282,12 +288,6 @@ max_right = max(df[["Agree","Strongly Agree"]].sum(axis=1))
 # we are working in percent, but coded the negative reactions as negative numbers; so we need to take the absolute value
 max_width_signed = abs(max_left)+max_right
 max_width_neither = max(df["Neither Agree nor Disagree"])
-
-fig.update_layout(
-    title="Reactions to statements from the 2002 General Social Survey:",
-    plot_bgcolor="white",
-    barmode='relative',  # Allows bars to diverge from the center
-    )
 
 fig.update_xaxes(
         zeroline=True, #the zero line distinguishes between positive and negative segments
