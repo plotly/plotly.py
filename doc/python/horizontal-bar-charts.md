@@ -218,7 +218,7 @@ fig.show()
 ```
 ### Diverging Bar (or Butterfly) Chart with Neutral Column
 
-Diverging bar charts offer two imperfect options for responses that are neither positive nor negative:  put them in a separate column, as in this example or omit them as in the example above.  That leaves the unreported neutral value implicit when the categories add to 100%,   Jonathan Schwabish discusses this on page 92-97 of  _Better Data Visualizations_.
+The previous diverging bar chart example excluded neutral responses. This variation includes them in a separate column.  Jonathan Schwabish discusses tradeoffs between these options on page 92-97 of _Better Data Visualizations_.
 
 ```python
 import pandas as pd
