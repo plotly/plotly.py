@@ -236,8 +236,21 @@ for v in ["Disagree","Strongly Disagree"]:
 fig = go.Figure(layout=go.Layout(
     title="Reactions to statements from the 2002 General Social Survey:",
     plot_bgcolor="white",
-    barmode='relative'  # Allows bars to diverge from the center
-    ))
+    barmode='relative',  # Allows bars to diverge from the center
+    # Put the legend at the bottom center of the figure
+    legend=dict(
+        orientation="h",  # a horizontal legend matches the horizontal bars
+        yref="container",
+        yanchor="bottom",
+        y=0.02,
+        xanchor="center",
+        x=0.5),
+    # use an unlabeled Y axis, since we're going to list specific questions on the y-axis.
+    yaxis=dict(
+        title=""  
+    ),
+    )
+)
 
 
 # this color palette conveys meaning:  blues for agreement, reds and oranges for disagreement, gray for Neither Agree nor Disagree
@@ -304,17 +317,6 @@ fig.update_layout(
         domain=[(1-.98*(1-max_width_signed/(max_width_signed+max_width_neither))), 1.0],
     )
 )
-
-fig.update_legends(
-        orientation="h",  # a horizontal legend matches the horizontal bars
-        yref="container",
-        yanchor="bottom",
-        y=0.02,
-        xanchor="center",
-        x=0.5
-)
-
-fig.update_yaxes(title="")
 
 fig.show()
 ```
