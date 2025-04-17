@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Line(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'funnel.connector'
-    _path_str = 'funnel.connector.line'
+    _parent_path_str = "funnel.connector"
+    _path_str = "funnel.connector.line"
     _valid_props = {"color", "dash", "width"}
 
     @property
@@ -31,11 +27,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def dash(self):
@@ -55,11 +51,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['dash']
+        return self["dash"]
 
     @dash.setter
     def dash(self, val):
-        self['dash'] = val
+        self["dash"] = val
 
     @property
     def width(self):
@@ -73,11 +69,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     @property
     def _prop_descriptions(self):
@@ -92,13 +88,8 @@ class Line(_BaseTraceHierarchyType):
         width
             Sets the line width (in px).
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            dash=None,
-            width=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, dash=None, width=None, **kwargs):
         """
         Construct a new Line object
 
@@ -122,9 +113,9 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super().__init__('line')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("line")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -134,18 +125,18 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.funnel.connector.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.funnel.connector.Line`""")
+an instance of :class:`plotly.graph_objs.funnel.connector.Line`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('color', arg, color)
-        self._set_property('dash', arg, dash)
-        self._set_property('width', arg, width)
+        self._set_property("color", arg, color)
+        self._set_property("dash", arg, dash)
+        self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

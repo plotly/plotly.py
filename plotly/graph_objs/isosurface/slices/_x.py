@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class X(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'isosurface.slices'
-    _path_str = 'isosurface.slices.x'
+    _parent_path_str = "isosurface.slices"
+    _path_str = "isosurface.slices.x"
     _valid_props = {"fill", "locations", "locationssrc", "show"}
 
     @property
@@ -30,11 +26,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     @property
     def locations(self):
@@ -50,11 +46,11 @@ class X(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['locations']
+        return self["locations"]
 
     @locations.setter
     def locations(self, val):
-        self['locations'] = val
+        self["locations"] = val
 
     @property
     def locationssrc(self):
@@ -69,11 +65,11 @@ class X(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['locationssrc']
+        return self["locationssrc"]
 
     @locationssrc.setter
     def locationssrc(self, val):
-        self['locationssrc'] = val
+        self["locationssrc"] = val
 
     @property
     def show(self):
@@ -88,11 +84,11 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     @property
     def _prop_descriptions(self):
@@ -114,14 +110,16 @@ class X(_BaseTraceHierarchyType):
             Determines whether or not slice planes about the x
             dimension are drawn.
         """
-    def __init__(self,
-            arg=None,
-            fill=None,
-            locations=None,
-            locationssrc=None,
-            show=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        fill=None,
+        locations=None,
+        locationssrc=None,
+        show=None,
+        **kwargs,
+    ):
         """
         Construct a new X object
 
@@ -152,9 +150,9 @@ class X(_BaseTraceHierarchyType):
         -------
         X
         """
-        super().__init__('x')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("x")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -164,19 +162,19 @@ class X(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.isosurface.slices.X
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.slices.X`""")
+an instance of :class:`plotly.graph_objs.isosurface.slices.X`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('fill', arg, fill)
-        self._set_property('locations', arg, locations)
-        self._set_property('locationssrc', arg, locationssrc)
-        self._set_property('show', arg, show)
+        self._set_property("fill", arg, fill)
+        self._set_property("locations", arg, locations)
+        self._set_property("locationssrc", arg, locationssrc)
+        self._set_property("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

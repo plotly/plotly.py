@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Currentvalue(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.slider'
-    _path_str = 'layout.slider.currentvalue'
+    _parent_path_str = "layout.slider"
+    _path_str = "layout.slider.currentvalue"
     _valid_props = {"font", "offset", "prefix", "suffix", "visible", "xanchor"}
 
     @property
@@ -30,11 +26,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.slider.currentvalue.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     @property
     def offset(self):
@@ -49,11 +45,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['offset']
+        return self["offset"]
 
     @offset.setter
     def offset(self, val):
-        self['offset'] = val
+        self["offset"] = val
 
     @property
     def prefix(self):
@@ -69,11 +65,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['prefix']
+        return self["prefix"]
 
     @prefix.setter
     def prefix(self, val):
-        self['prefix'] = val
+        self["prefix"] = val
 
     @property
     def suffix(self):
@@ -89,11 +85,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['suffix']
+        return self["suffix"]
 
     @suffix.setter
     def suffix(self, val):
-        self['suffix'] = val
+        self["suffix"] = val
 
     @property
     def visible(self):
@@ -107,11 +103,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def xanchor(self):
@@ -127,11 +123,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
     @property
     def _prop_descriptions(self):
@@ -153,16 +149,18 @@ class Currentvalue(_BaseLayoutHierarchyType):
             The alignment of the value readout relative to the
             length of the slider.
         """
-    def __init__(self,
-            arg=None,
-            font=None,
-            offset=None,
-            prefix=None,
-            suffix=None,
-            visible=None,
-            xanchor=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        font=None,
+        offset=None,
+        prefix=None,
+        suffix=None,
+        visible=None,
+        xanchor=None,
+        **kwargs,
+    ):
         """
         Construct a new Currentvalue object
 
@@ -193,9 +191,9 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         Currentvalue
         """
-        super().__init__('currentvalue')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("currentvalue")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -205,21 +203,21 @@ class Currentvalue(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.slider.Currentvalue
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.slider.Currentvalue`""")
+an instance of :class:`plotly.graph_objs.layout.slider.Currentvalue`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('font', arg, font)
-        self._set_property('offset', arg, offset)
-        self._set_property('prefix', arg, prefix)
-        self._set_property('suffix', arg, suffix)
-        self._set_property('visible', arg, visible)
-        self._set_property('xanchor', arg, xanchor)
+        self._set_property("font", arg, font)
+        self._set_property("offset", arg, offset)
+        self._set_property("prefix", arg, prefix)
+        self._set_property("suffix", arg, suffix)
+        self._set_property("visible", arg, visible)
+        self._set_property("xanchor", arg, xanchor)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,53 @@ import copy as _copy
 
 class Annotation(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.annotation'
-    _valid_props = {"align", "arrowcolor", "arrowhead", "arrowside", "arrowsize", "arrowwidth", "ax", "axref", "ay", "ayref", "bgcolor", "bordercolor", "borderpad", "borderwidth", "captureevents", "clicktoshow", "font", "height", "hoverlabel", "hovertext", "name", "opacity", "showarrow", "standoff", "startarrowhead", "startarrowsize", "startstandoff", "templateitemname", "text", "textangle", "valign", "visible", "width", "x", "xanchor", "xclick", "xref", "xshift", "y", "yanchor", "yclick", "yref", "yshift"}
+    _parent_path_str = "layout"
+    _path_str = "layout.annotation"
+    _valid_props = {
+        "align",
+        "arrowcolor",
+        "arrowhead",
+        "arrowside",
+        "arrowsize",
+        "arrowwidth",
+        "ax",
+        "axref",
+        "ay",
+        "ayref",
+        "bgcolor",
+        "bordercolor",
+        "borderpad",
+        "borderwidth",
+        "captureevents",
+        "clicktoshow",
+        "font",
+        "height",
+        "hoverlabel",
+        "hovertext",
+        "name",
+        "opacity",
+        "showarrow",
+        "standoff",
+        "startarrowhead",
+        "startarrowsize",
+        "startstandoff",
+        "templateitemname",
+        "text",
+        "textangle",
+        "valign",
+        "visible",
+        "width",
+        "x",
+        "xanchor",
+        "xclick",
+        "xref",
+        "xshift",
+        "y",
+        "yanchor",
+        "yclick",
+        "yref",
+        "yshift",
+    }
 
     @property
     def align(self):
@@ -31,11 +71,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     @property
     def arrowcolor(self):
@@ -53,11 +93,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['arrowcolor']
+        return self["arrowcolor"]
 
     @arrowcolor.setter
     def arrowcolor(self, val):
-        self['arrowcolor'] = val
+        self["arrowcolor"] = val
 
     @property
     def arrowhead(self):
@@ -72,11 +112,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['arrowhead']
+        return self["arrowhead"]
 
     @arrowhead.setter
     def arrowhead(self, val):
-        self['arrowhead'] = val
+        self["arrowhead"] = val
 
     @property
     def arrowside(self):
@@ -93,11 +133,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['arrowside']
+        return self["arrowside"]
 
     @arrowside.setter
     def arrowside(self, val):
-        self['arrowside'] = val
+        self["arrowside"] = val
 
     @property
     def arrowsize(self):
@@ -113,11 +153,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['arrowsize']
+        return self["arrowsize"]
 
     @arrowsize.setter
     def arrowsize(self, val):
-        self['arrowsize'] = val
+        self["arrowsize"] = val
 
     @property
     def arrowwidth(self):
@@ -131,11 +171,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['arrowwidth']
+        return self["arrowwidth"]
 
     @arrowwidth.setter
     def arrowwidth(self, val):
-        self['arrowwidth'] = val
+        self["arrowwidth"] = val
 
     @property
     def ax(self):
@@ -153,11 +193,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ax']
+        return self["ax"]
 
     @ax.setter
     def ax(self, val):
-        self['ax'] = val
+        self["ax"] = val
 
     @property
     def axref(self):
@@ -193,11 +233,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['axref']
+        return self["axref"]
 
     @axref.setter
     def axref(self, val):
-        self['axref'] = val
+        self["axref"] = val
 
     @property
     def ay(self):
@@ -215,11 +255,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ay']
+        return self["ay"]
 
     @ay.setter
     def ay(self, val):
-        self['ay'] = val
+        self["ay"] = val
 
     @property
     def ayref(self):
@@ -255,11 +295,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ayref']
+        return self["ayref"]
 
     @ayref.setter
     def ayref(self, val):
-        self['ayref'] = val
+        self["ayref"] = val
 
     @property
     def bgcolor(self):
@@ -277,11 +317,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     @property
     def bordercolor(self):
@@ -299,11 +339,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     @property
     def borderpad(self):
@@ -318,11 +358,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderpad']
+        return self["borderpad"]
 
     @borderpad.setter
     def borderpad(self, val):
-        self['borderpad'] = val
+        self["borderpad"] = val
 
     @property
     def borderwidth(self):
@@ -337,11 +377,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
     @property
     def captureevents(self):
@@ -360,11 +400,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['captureevents']
+        return self["captureevents"]
 
     @captureevents.setter
     def captureevents(self, val):
-        self['captureevents'] = val
+        self["captureevents"] = val
 
     @property
     def clicktoshow(self):
@@ -390,11 +430,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['clicktoshow']
+        return self["clicktoshow"]
 
     @clicktoshow.setter
     def clicktoshow(self, val):
-        self['clicktoshow'] = val
+        self["clicktoshow"] = val
 
     @property
     def font(self):
@@ -411,11 +451,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.annotation.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     @property
     def height(self):
@@ -430,11 +470,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['height']
+        return self["height"]
 
     @height.setter
     def height(self, val):
-        self['height'] = val
+        self["height"] = val
 
     @property
     def hoverlabel(self):
@@ -449,11 +489,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.annotation.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
     @property
     def hovertext(self):
@@ -469,11 +509,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
     @property
     def name(self):
@@ -494,11 +534,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def opacity(self):
@@ -512,11 +552,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def showarrow(self):
@@ -532,11 +572,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showarrow']
+        return self["showarrow"]
 
     @showarrow.setter
     def showarrow(self, val):
-        self['showarrow'] = val
+        self["showarrow"] = val
 
     @property
     def standoff(self):
@@ -554,11 +594,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['standoff']
+        return self["standoff"]
 
     @standoff.setter
     def standoff(self, val):
-        self['standoff'] = val
+        self["standoff"] = val
 
     @property
     def startarrowhead(self):
@@ -573,11 +613,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['startarrowhead']
+        return self["startarrowhead"]
 
     @startarrowhead.setter
     def startarrowhead(self, val):
-        self['startarrowhead'] = val
+        self["startarrowhead"] = val
 
     @property
     def startarrowsize(self):
@@ -593,11 +633,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['startarrowsize']
+        return self["startarrowsize"]
 
     @startarrowsize.setter
     def startarrowsize(self, val):
-        self['startarrowsize'] = val
+        self["startarrowsize"] = val
 
     @property
     def startstandoff(self):
@@ -615,11 +655,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['startstandoff']
+        return self["startstandoff"]
 
     @startstandoff.setter
     def startstandoff(self, val):
-        self['startstandoff'] = val
+        self["startstandoff"] = val
 
     @property
     def templateitemname(self):
@@ -641,11 +681,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     @property
     def text(self):
@@ -663,11 +703,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     @property
     def textangle(self):
@@ -684,11 +724,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['textangle']
+        return self["textangle"]
 
     @textangle.setter
     def textangle(self, val):
-        self['textangle'] = val
+        self["textangle"] = val
 
     @property
     def valign(self):
@@ -705,11 +745,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['valign']
+        return self["valign"]
 
     @valign.setter
     def valign(self, val):
-        self['valign'] = val
+        self["valign"] = val
 
     @property
     def visible(self):
@@ -723,11 +763,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def width(self):
@@ -743,11 +783,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     @property
     def x(self):
@@ -766,11 +806,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     @property
     def xanchor(self):
@@ -793,11 +833,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
     @property
     def xclick(self):
@@ -811,11 +851,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xclick']
+        return self["xclick"]
 
     @xclick.setter
     def xclick(self, val):
-        self['xclick'] = val
+        self["xclick"] = val
 
     @property
     def xref(self):
@@ -842,11 +882,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xref']
+        return self["xref"]
 
     @xref.setter
     def xref(self, val):
-        self['xref'] = val
+        self["xref"] = val
 
     @property
     def xshift(self):
@@ -861,11 +901,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['xshift']
+        return self["xshift"]
 
     @xshift.setter
     def xshift(self, val):
-        self['xshift'] = val
+        self["xshift"] = val
 
     @property
     def y(self):
@@ -884,11 +924,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     @property
     def yanchor(self):
@@ -911,11 +951,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yanchor']
+        return self["yanchor"]
 
     @yanchor.setter
     def yanchor(self, val):
-        self['yanchor'] = val
+        self["yanchor"] = val
 
     @property
     def yclick(self):
@@ -929,11 +969,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yclick']
+        return self["yclick"]
 
     @yclick.setter
     def yclick(self, val):
-        self['yclick'] = val
+        self["yclick"] = val
 
     @property
     def yref(self):
@@ -960,11 +1000,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yref']
+        return self["yref"]
 
     @yref.setter
     def yref(self, val):
-        self['yref'] = val
+        self["yref"] = val
 
     @property
     def yshift(self):
@@ -979,11 +1019,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['yshift']
+        return self["yshift"]
 
     @yshift.setter
     def yshift(self, val):
-        self['yshift'] = val
+        self["yshift"] = val
 
     @property
     def _prop_descriptions(self):
@@ -1267,53 +1307,55 @@ class Annotation(_BaseLayoutHierarchyType):
             Shifts the position of the whole annotation and arrow
             up (positive) or down (negative) by this many pixels.
         """
-    def __init__(self,
-            arg=None,
-            align=None,
-            arrowcolor=None,
-            arrowhead=None,
-            arrowside=None,
-            arrowsize=None,
-            arrowwidth=None,
-            ax=None,
-            axref=None,
-            ay=None,
-            ayref=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderpad=None,
-            borderwidth=None,
-            captureevents=None,
-            clicktoshow=None,
-            font=None,
-            height=None,
-            hoverlabel=None,
-            hovertext=None,
-            name=None,
-            opacity=None,
-            showarrow=None,
-            standoff=None,
-            startarrowhead=None,
-            startarrowsize=None,
-            startstandoff=None,
-            templateitemname=None,
-            text=None,
-            textangle=None,
-            valign=None,
-            visible=None,
-            width=None,
-            x=None,
-            xanchor=None,
-            xclick=None,
-            xref=None,
-            xshift=None,
-            y=None,
-            yanchor=None,
-            yclick=None,
-            yref=None,
-            yshift=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        align=None,
+        arrowcolor=None,
+        arrowhead=None,
+        arrowside=None,
+        arrowsize=None,
+        arrowwidth=None,
+        ax=None,
+        axref=None,
+        ay=None,
+        ayref=None,
+        bgcolor=None,
+        bordercolor=None,
+        borderpad=None,
+        borderwidth=None,
+        captureevents=None,
+        clicktoshow=None,
+        font=None,
+        height=None,
+        hoverlabel=None,
+        hovertext=None,
+        name=None,
+        opacity=None,
+        showarrow=None,
+        standoff=None,
+        startarrowhead=None,
+        startarrowsize=None,
+        startstandoff=None,
+        templateitemname=None,
+        text=None,
+        textangle=None,
+        valign=None,
+        visible=None,
+        width=None,
+        x=None,
+        xanchor=None,
+        xclick=None,
+        xref=None,
+        xshift=None,
+        y=None,
+        yanchor=None,
+        yclick=None,
+        yref=None,
+        yshift=None,
+        **kwargs,
+    ):
         """
         Construct a new Annotation object
 
@@ -1606,9 +1648,9 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Annotation
         """
-        super().__init__('annotations')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("annotations")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -1618,58 +1660,58 @@ class Annotation(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Annotation
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Annotation`""")
+an instance of :class:`plotly.graph_objs.layout.Annotation`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('align', arg, align)
-        self._set_property('arrowcolor', arg, arrowcolor)
-        self._set_property('arrowhead', arg, arrowhead)
-        self._set_property('arrowside', arg, arrowside)
-        self._set_property('arrowsize', arg, arrowsize)
-        self._set_property('arrowwidth', arg, arrowwidth)
-        self._set_property('ax', arg, ax)
-        self._set_property('axref', arg, axref)
-        self._set_property('ay', arg, ay)
-        self._set_property('ayref', arg, ayref)
-        self._set_property('bgcolor', arg, bgcolor)
-        self._set_property('bordercolor', arg, bordercolor)
-        self._set_property('borderpad', arg, borderpad)
-        self._set_property('borderwidth', arg, borderwidth)
-        self._set_property('captureevents', arg, captureevents)
-        self._set_property('clicktoshow', arg, clicktoshow)
-        self._set_property('font', arg, font)
-        self._set_property('height', arg, height)
-        self._set_property('hoverlabel', arg, hoverlabel)
-        self._set_property('hovertext', arg, hovertext)
-        self._set_property('name', arg, name)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('showarrow', arg, showarrow)
-        self._set_property('standoff', arg, standoff)
-        self._set_property('startarrowhead', arg, startarrowhead)
-        self._set_property('startarrowsize', arg, startarrowsize)
-        self._set_property('startstandoff', arg, startstandoff)
-        self._set_property('templateitemname', arg, templateitemname)
-        self._set_property('text', arg, text)
-        self._set_property('textangle', arg, textangle)
-        self._set_property('valign', arg, valign)
-        self._set_property('visible', arg, visible)
-        self._set_property('width', arg, width)
-        self._set_property('x', arg, x)
-        self._set_property('xanchor', arg, xanchor)
-        self._set_property('xclick', arg, xclick)
-        self._set_property('xref', arg, xref)
-        self._set_property('xshift', arg, xshift)
-        self._set_property('y', arg, y)
-        self._set_property('yanchor', arg, yanchor)
-        self._set_property('yclick', arg, yclick)
-        self._set_property('yref', arg, yref)
-        self._set_property('yshift', arg, yshift)
+        self._set_property("align", arg, align)
+        self._set_property("arrowcolor", arg, arrowcolor)
+        self._set_property("arrowhead", arg, arrowhead)
+        self._set_property("arrowside", arg, arrowside)
+        self._set_property("arrowsize", arg, arrowsize)
+        self._set_property("arrowwidth", arg, arrowwidth)
+        self._set_property("ax", arg, ax)
+        self._set_property("axref", arg, axref)
+        self._set_property("ay", arg, ay)
+        self._set_property("ayref", arg, ayref)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("borderpad", arg, borderpad)
+        self._set_property("borderwidth", arg, borderwidth)
+        self._set_property("captureevents", arg, captureevents)
+        self._set_property("clicktoshow", arg, clicktoshow)
+        self._set_property("font", arg, font)
+        self._set_property("height", arg, height)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("showarrow", arg, showarrow)
+        self._set_property("standoff", arg, standoff)
+        self._set_property("startarrowhead", arg, startarrowhead)
+        self._set_property("startarrowsize", arg, startarrowsize)
+        self._set_property("startstandoff", arg, startstandoff)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("text", arg, text)
+        self._set_property("textangle", arg, textangle)
+        self._set_property("valign", arg, valign)
+        self._set_property("visible", arg, visible)
+        self._set_property("width", arg, width)
+        self._set_property("x", arg, x)
+        self._set_property("xanchor", arg, xanchor)
+        self._set_property("xclick", arg, xclick)
+        self._set_property("xref", arg, xref)
+        self._set_property("xshift", arg, xshift)
+        self._set_property("y", arg, y)
+        self._set_property("yanchor", arg, yanchor)
+        self._set_property("yclick", arg, yclick)
+        self._set_property("yref", arg, yref)
+        self._set_property("yshift", arg, yshift)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

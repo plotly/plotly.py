@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,22 @@ import copy as _copy
 
 class Textfont(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'scatterpolargl'
-    _path_str = 'scatterpolargl.textfont'
-    _valid_props = {"color", "colorsrc", "family", "familysrc", "size", "sizesrc", "style", "stylesrc", "variant", "variantsrc", "weight", "weightsrc"}
+    _parent_path_str = "scatterpolargl"
+    _path_str = "scatterpolargl.textfont"
+    _valid_props = {
+        "color",
+        "colorsrc",
+        "family",
+        "familysrc",
+        "size",
+        "sizesrc",
+        "style",
+        "stylesrc",
+        "variant",
+        "variantsrc",
+        "weight",
+        "weightsrc",
+    }
 
     @property
     def color(self):
@@ -30,11 +39,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def colorsrc(self):
@@ -48,11 +57,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     @property
     def family(self):
@@ -71,11 +80,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     @property
     def familysrc(self):
@@ -89,11 +98,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['familysrc']
+        return self["familysrc"]
 
     @familysrc.setter
     def familysrc(self, val):
-        self['familysrc'] = val
+        self["familysrc"] = val
 
     @property
     def size(self):
@@ -106,11 +115,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     @property
     def sizesrc(self):
@@ -124,11 +133,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sizesrc']
+        return self["sizesrc"]
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self['sizesrc'] = val
+        self["sizesrc"] = val
 
     @property
     def style(self):
@@ -145,11 +154,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['style']
+        return self["style"]
 
     @style.setter
     def style(self, val):
-        self['style'] = val
+        self["style"] = val
 
     @property
     def stylesrc(self):
@@ -163,11 +172,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['stylesrc']
+        return self["stylesrc"]
 
     @stylesrc.setter
     def stylesrc(self, val):
-        self['stylesrc'] = val
+        self["stylesrc"] = val
 
     @property
     def variant(self):
@@ -183,11 +192,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['variant']
+        return self["variant"]
 
     @variant.setter
     def variant(self, val):
-        self['variant'] = val
+        self["variant"] = val
 
     @property
     def variantsrc(self):
@@ -201,11 +210,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['variantsrc']
+        return self["variantsrc"]
 
     @variantsrc.setter
     def variantsrc(self, val):
-        self['variantsrc'] = val
+        self["variantsrc"] = val
 
     @property
     def weight(self):
@@ -221,11 +230,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['weight']
+        return self["weight"]
 
     @weight.setter
     def weight(self, val):
-        self['weight'] = val
+        self["weight"] = val
 
     @property
     def weightsrc(self):
@@ -239,11 +248,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['weightsrc']
+        return self["weightsrc"]
 
     @weightsrc.setter
     def weightsrc(self, val):
-        self['weightsrc'] = val
+        self["weightsrc"] = val
 
     @property
     def _prop_descriptions(self):
@@ -285,22 +294,24 @@ class Textfont(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `weight`.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            colorsrc=None,
-            family=None,
-            familysrc=None,
-            size=None,
-            sizesrc=None,
-            style=None,
-            stylesrc=None,
-            variant=None,
-            variantsrc=None,
-            weight=None,
-            weightsrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        colorsrc=None,
+        family=None,
+        familysrc=None,
+        size=None,
+        sizesrc=None,
+        style=None,
+        stylesrc=None,
+        variant=None,
+        variantsrc=None,
+        weight=None,
+        weightsrc=None,
+        **kwargs,
+    ):
         """
         Construct a new Textfont object
 
@@ -353,9 +364,9 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         Textfont
         """
-        super().__init__('textfont')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("textfont")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -365,27 +376,27 @@ class Textfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatterpolargl.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterpolargl.Textfont`""")
+an instance of :class:`plotly.graph_objs.scatterpolargl.Textfont`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('color', arg, color)
-        self._set_property('colorsrc', arg, colorsrc)
-        self._set_property('family', arg, family)
-        self._set_property('familysrc', arg, familysrc)
-        self._set_property('size', arg, size)
-        self._set_property('sizesrc', arg, sizesrc)
-        self._set_property('style', arg, style)
-        self._set_property('stylesrc', arg, stylesrc)
-        self._set_property('variant', arg, variant)
-        self._set_property('variantsrc', arg, variantsrc)
-        self._set_property('weight', arg, weight)
-        self._set_property('weightsrc', arg, weightsrc)
+        self._set_property("color", arg, color)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("family", arg, family)
+        self._set_property("familysrc", arg, familysrc)
+        self._set_property("size", arg, size)
+        self._set_property("sizesrc", arg, sizesrc)
+        self._set_property("style", arg, style)
+        self._set_property("stylesrc", arg, stylesrc)
+        self._set_property("variant", arg, variant)
+        self._set_property("variantsrc", arg, variantsrc)
+        self._set_property("weight", arg, weight)
+        self._set_property("weightsrc", arg, weightsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

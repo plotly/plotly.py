@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,20 @@ import copy as _copy
 
 class Dimension(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'parcats'
-    _path_str = 'parcats.dimension'
-    _valid_props = {"categoryarray", "categoryarraysrc", "categoryorder", "displayindex", "label", "ticktext", "ticktextsrc", "values", "valuessrc", "visible"}
+    _parent_path_str = "parcats"
+    _path_str = "parcats.dimension"
+    _valid_props = {
+        "categoryarray",
+        "categoryarraysrc",
+        "categoryorder",
+        "displayindex",
+        "label",
+        "ticktext",
+        "ticktextsrc",
+        "values",
+        "valuessrc",
+        "visible",
+    }
 
     @property
     def categoryarray(self):
@@ -29,11 +36,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['categoryarray']
+        return self["categoryarray"]
 
     @categoryarray.setter
     def categoryarray(self, val):
-        self['categoryarray'] = val
+        self["categoryarray"] = val
 
     @property
     def categoryarraysrc(self):
@@ -48,11 +55,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['categoryarraysrc']
+        return self["categoryarraysrc"]
 
     @categoryarraysrc.setter
     def categoryarraysrc(self, val):
-        self['categoryarraysrc'] = val
+        self["categoryarraysrc"] = val
 
     @property
     def categoryorder(self):
@@ -78,11 +85,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['categoryorder']
+        return self["categoryorder"]
 
     @categoryorder.setter
     def categoryorder(self, val):
-        self['categoryorder'] = val
+        self["categoryorder"] = val
 
     @property
     def displayindex(self):
@@ -97,11 +104,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['displayindex']
+        return self["displayindex"]
 
     @displayindex.setter
     def displayindex(self, val):
-        self['displayindex'] = val
+        self["displayindex"] = val
 
     @property
     def label(self):
@@ -116,11 +123,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     @property
     def ticktext(self):
@@ -137,11 +144,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
     @property
     def ticktextsrc(self):
@@ -155,11 +162,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
     @property
     def values(self):
@@ -176,11 +183,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
     @property
     def valuessrc(self):
@@ -194,11 +201,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
     @property
     def visible(self):
@@ -213,11 +220,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def _prop_descriptions(self):
@@ -267,20 +274,22 @@ class Dimension(_BaseTraceHierarchyType):
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
         """
-    def __init__(self,
-            arg=None,
-            categoryarray=None,
-            categoryarraysrc=None,
-            categoryorder=None,
-            displayindex=None,
-            label=None,
-            ticktext=None,
-            ticktextsrc=None,
-            values=None,
-            valuessrc=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        categoryarray=None,
+        categoryarraysrc=None,
+        categoryorder=None,
+        displayindex=None,
+        label=None,
+        ticktext=None,
+        ticktextsrc=None,
+        values=None,
+        valuessrc=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Dimension object
 
@@ -341,9 +350,9 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         Dimension
         """
-        super().__init__('dimensions')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("dimensions")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -353,25 +362,25 @@ class Dimension(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.parcats.Dimension
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcats.Dimension`""")
+an instance of :class:`plotly.graph_objs.parcats.Dimension`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('categoryarray', arg, categoryarray)
-        self._set_property('categoryarraysrc', arg, categoryarraysrc)
-        self._set_property('categoryorder', arg, categoryorder)
-        self._set_property('displayindex', arg, displayindex)
-        self._set_property('label', arg, label)
-        self._set_property('ticktext', arg, ticktext)
-        self._set_property('ticktextsrc', arg, ticktextsrc)
-        self._set_property('values', arg, values)
-        self._set_property('valuessrc', arg, valuessrc)
-        self._set_property('visible', arg, visible)
+        self._set_property("categoryarray", arg, categoryarray)
+        self._set_property("categoryarraysrc", arg, categoryarraysrc)
+        self._set_property("categoryorder", arg, categoryorder)
+        self._set_property("displayindex", arg, displayindex)
+        self._set_property("label", arg, label)
+        self._set_property("ticktext", arg, ticktext)
+        self._set_property("ticktextsrc", arg, ticktextsrc)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

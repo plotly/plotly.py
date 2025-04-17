@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class YBins(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'histogram2d'
-    _path_str = 'histogram2d.ybins'
+    _parent_path_str = "histogram2d"
+    _path_str = "histogram2d.ybins"
     _valid_props = {"end", "size", "start"}
 
     @property
@@ -31,11 +27,11 @@ class YBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['end']
+        return self["end"]
 
     @end.setter
     def end(self, val):
-        self['end'] = val
+        self["end"] = val
 
     @property
     def size(self):
@@ -55,11 +51,11 @@ class YBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     @property
     def start(self):
@@ -81,11 +77,11 @@ class YBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['start']
+        return self["start"]
 
     @start.setter
     def start(self, val):
-        self['start'] = val
+        self["start"] = val
 
     @property
     def _prop_descriptions(self):
@@ -120,13 +116,8 @@ class YBins(_BaseTraceHierarchyType):
             string. For category data, `start` is based on the
             category serial numbers, and defaults to -0.5.
         """
-    def __init__(self,
-            arg=None,
-            end=None,
-            size=None,
-            start=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, end=None, size=None, start=None, **kwargs):
         """
         Construct a new YBins object
 
@@ -170,9 +161,9 @@ class YBins(_BaseTraceHierarchyType):
         -------
         YBins
         """
-        super().__init__('ybins')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("ybins")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -182,18 +173,18 @@ class YBins(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.histogram2d.YBins
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram2d.YBins`""")
+an instance of :class:`plotly.graph_objs.histogram2d.YBins`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('end', arg, end)
-        self._set_property('size', arg, size)
-        self._set_property('start', arg, start)
+        self._set_property("end", arg, end)
+        self._set_property("size", arg, size)
+        self._set_property("start", arg, start)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

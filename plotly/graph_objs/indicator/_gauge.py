@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,19 @@ import copy as _copy
 
 class Gauge(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'indicator'
-    _path_str = 'indicator.gauge'
-    _valid_props = {"axis", "bar", "bgcolor", "bordercolor", "borderwidth", "shape", "stepdefaults", "steps", "threshold"}
+    _parent_path_str = "indicator"
+    _path_str = "indicator.gauge"
+    _valid_props = {
+        "axis",
+        "bar",
+        "bgcolor",
+        "bordercolor",
+        "borderwidth",
+        "shape",
+        "stepdefaults",
+        "steps",
+        "threshold",
+    }
 
     @property
     def axis(self):
@@ -28,11 +34,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.Axis
         """
-        return self['axis']
+        return self["axis"]
 
     @axis.setter
     def axis(self, val):
-        self['axis'] = val
+        self["axis"] = val
 
     @property
     def bar(self):
@@ -49,11 +55,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.Bar
         """
-        return self['bar']
+        return self["bar"]
 
     @bar.setter
     def bar(self, val):
-        self['bar'] = val
+        self["bar"] = val
 
     @property
     def bgcolor(self):
@@ -71,11 +77,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     @property
     def bordercolor(self):
@@ -93,11 +99,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     @property
     def borderwidth(self):
@@ -111,11 +117,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
     @property
     def shape(self):
@@ -130,11 +136,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['shape']
+        return self["shape"]
 
     @shape.setter
     def shape(self, val):
-        self['shape'] = val
+        self["shape"] = val
 
     @property
     def steps(self):
@@ -149,11 +155,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         tuple[plotly.graph_objs.indicator.gauge.Step]
         """
-        return self['steps']
+        return self["steps"]
 
     @steps.setter
     def steps(self, val):
-        self['steps'] = val
+        self["steps"] = val
 
     @property
     def stepdefaults(self):
@@ -173,11 +179,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.Step
         """
-        return self['stepdefaults']
+        return self["stepdefaults"]
 
     @stepdefaults.setter
     def stepdefaults(self, val):
-        self['stepdefaults'] = val
+        self["stepdefaults"] = val
 
     @property
     def threshold(self):
@@ -192,11 +198,11 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.Threshold
         """
-        return self['threshold']
+        return self["threshold"]
 
     @threshold.setter
     def threshold(self, val):
-        self['threshold'] = val
+        self["threshold"] = val
 
     @property
     def _prop_descriptions(self):
@@ -228,19 +234,21 @@ class Gauge(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.indicator.gauge.Threshold`
             instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            axis=None,
-            bar=None,
-            bgcolor=None,
-            bordercolor=None,
-            borderwidth=None,
-            shape=None,
-            steps=None,
-            stepdefaults=None,
-            threshold=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        axis=None,
+        bar=None,
+        bgcolor=None,
+        bordercolor=None,
+        borderwidth=None,
+        shape=None,
+        steps=None,
+        stepdefaults=None,
+        threshold=None,
+        **kwargs,
+    ):
         """
         Construct a new Gauge object
 
@@ -283,9 +291,9 @@ class Gauge(_BaseTraceHierarchyType):
         -------
         Gauge
         """
-        super().__init__('gauge')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("gauge")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -295,24 +303,24 @@ class Gauge(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.Gauge
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Gauge`""")
+an instance of :class:`plotly.graph_objs.indicator.Gauge`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('axis', arg, axis)
-        self._set_property('bar', arg, bar)
-        self._set_property('bgcolor', arg, bgcolor)
-        self._set_property('bordercolor', arg, bordercolor)
-        self._set_property('borderwidth', arg, borderwidth)
-        self._set_property('shape', arg, shape)
-        self._set_property('steps', arg, steps)
-        self._set_property('stepdefaults', arg, stepdefaults)
-        self._set_property('threshold', arg, threshold)
+        self._set_property("axis", arg, axis)
+        self._set_property("bar", arg, bar)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("borderwidth", arg, borderwidth)
+        self._set_property("shape", arg, shape)
+        self._set_property("steps", arg, steps)
+        self._set_property("stepdefaults", arg, stepdefaults)
+        self._set_property("threshold", arg, threshold)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

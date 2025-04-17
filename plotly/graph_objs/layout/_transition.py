@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Transition(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.transition'
+    _parent_path_str = "layout"
+    _path_str = "layout.transition"
     _valid_props = {"duration", "easing", "ordering"}
 
     @property
@@ -28,11 +24,11 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['duration']
+        return self["duration"]
 
     @duration.setter
     def duration(self, val):
-        self['duration'] = val
+        self["duration"] = val
 
     @property
     def easing(self):
@@ -55,11 +51,11 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['easing']
+        return self["easing"]
 
     @easing.setter
     def easing(self, val):
-        self['easing'] = val
+        self["easing"] = val
 
     @property
     def ordering(self):
@@ -76,11 +72,11 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ordering']
+        return self["ordering"]
 
     @ordering.setter
     def ordering(self, val):
-        self['ordering'] = val
+        self["ordering"] = val
 
     @property
     def _prop_descriptions(self):
@@ -95,13 +91,8 @@ class Transition(_BaseLayoutHierarchyType):
             smoothly transitions during updates that make both
             traces and layout change.
         """
-    def __init__(self,
-            arg=None,
-            duration=None,
-            easing=None,
-            ordering=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, duration=None, easing=None, ordering=None, **kwargs):
         """
         Construct a new Transition object
 
@@ -127,9 +118,9 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         Transition
         """
-        super().__init__('transition')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("transition")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -139,18 +130,18 @@ class Transition(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Transition
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Transition`""")
+an instance of :class:`plotly.graph_objs.layout.Transition`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('duration', arg, duration)
-        self._set_property('easing', arg, easing)
-        self._set_property('ordering', arg, ordering)
+        self._set_property("duration", arg, duration)
+        self._set_property("easing", arg, easing)
+        self._set_property("ordering", arg, ordering)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,48 @@ import copy as _copy
 
 class Carpet(_BaseTraceType):
 
-    _parent_path_str = ''
-    _path_str = 'carpet'
-    _valid_props = {"a", "a0", "aaxis", "asrc", "b", "b0", "baxis", "bsrc", "carpet", "cheaterslope", "color", "customdata", "customdatasrc", "da", "db", "font", "ids", "idssrc", "legend", "legendgrouptitle", "legendrank", "legendwidth", "meta", "metasrc", "name", "opacity", "stream", "type", "uid", "uirevision", "visible", "x", "xaxis", "xsrc", "y", "yaxis", "ysrc", "zorder"}
+    _parent_path_str = ""
+    _path_str = "carpet"
+    _valid_props = {
+        "a",
+        "a0",
+        "aaxis",
+        "asrc",
+        "b",
+        "b0",
+        "baxis",
+        "bsrc",
+        "carpet",
+        "cheaterslope",
+        "color",
+        "customdata",
+        "customdatasrc",
+        "da",
+        "db",
+        "font",
+        "ids",
+        "idssrc",
+        "legend",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "meta",
+        "metasrc",
+        "name",
+        "opacity",
+        "stream",
+        "type",
+        "uid",
+        "uirevision",
+        "visible",
+        "x",
+        "xaxis",
+        "xsrc",
+        "y",
+        "yaxis",
+        "ysrc",
+        "zorder",
+    }
 
     @property
     def a(self):
@@ -27,11 +62,11 @@ class Carpet(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['a']
+        return self["a"]
 
     @a.setter
     def a(self, val):
-        self['a'] = val
+        self["a"] = val
 
     @property
     def a0(self):
@@ -47,11 +82,11 @@ class Carpet(_BaseTraceType):
         -------
         int|float
         """
-        return self['a0']
+        return self["a0"]
 
     @a0.setter
     def a0(self, val):
-        self['a0'] = val
+        self["a0"] = val
 
     @property
     def aaxis(self):
@@ -66,11 +101,11 @@ class Carpet(_BaseTraceType):
         -------
         plotly.graph_objs.carpet.Aaxis
         """
-        return self['aaxis']
+        return self["aaxis"]
 
     @aaxis.setter
     def aaxis(self, val):
-        self['aaxis'] = val
+        self["aaxis"] = val
 
     @property
     def asrc(self):
@@ -84,11 +119,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['asrc']
+        return self["asrc"]
 
     @asrc.setter
     def asrc(self, val):
-        self['asrc'] = val
+        self["asrc"] = val
 
     @property
     def b(self):
@@ -102,11 +137,11 @@ class Carpet(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['b']
+        return self["b"]
 
     @b.setter
     def b(self, val):
-        self['b'] = val
+        self["b"] = val
 
     @property
     def b0(self):
@@ -122,11 +157,11 @@ class Carpet(_BaseTraceType):
         -------
         int|float
         """
-        return self['b0']
+        return self["b0"]
 
     @b0.setter
     def b0(self, val):
-        self['b0'] = val
+        self["b0"] = val
 
     @property
     def baxis(self):
@@ -141,11 +176,11 @@ class Carpet(_BaseTraceType):
         -------
         plotly.graph_objs.carpet.Baxis
         """
-        return self['baxis']
+        return self["baxis"]
 
     @baxis.setter
     def baxis(self, val):
-        self['baxis'] = val
+        self["baxis"] = val
 
     @property
     def bsrc(self):
@@ -159,11 +194,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['bsrc']
+        return self["bsrc"]
 
     @bsrc.setter
     def bsrc(self, val):
-        self['bsrc'] = val
+        self["bsrc"] = val
 
     @property
     def carpet(self):
@@ -180,11 +215,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['carpet']
+        return self["carpet"]
 
     @carpet.setter
     def carpet(self, val):
-        self['carpet'] = val
+        self["carpet"] = val
 
     @property
     def cheaterslope(self):
@@ -199,11 +234,11 @@ class Carpet(_BaseTraceType):
         -------
         int|float
         """
-        return self['cheaterslope']
+        return self["cheaterslope"]
 
     @cheaterslope.setter
     def cheaterslope(self, val):
-        self['cheaterslope'] = val
+        self["cheaterslope"] = val
 
     @property
     def color(self):
@@ -224,11 +259,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def customdata(self):
@@ -245,11 +280,11 @@ class Carpet(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
     @property
     def customdatasrc(self):
@@ -264,11 +299,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
     @property
     def da(self):
@@ -282,11 +317,11 @@ class Carpet(_BaseTraceType):
         -------
         int|float
         """
-        return self['da']
+        return self["da"]
 
     @da.setter
     def da(self, val):
-        self['da'] = val
+        self["da"] = val
 
     @property
     def db(self):
@@ -300,11 +335,11 @@ class Carpet(_BaseTraceType):
         -------
         int|float
         """
-        return self['db']
+        return self["db"]
 
     @db.setter
     def db(self, val):
-        self['db'] = val
+        self["db"] = val
 
     @property
     def font(self):
@@ -321,11 +356,11 @@ class Carpet(_BaseTraceType):
         -------
         plotly.graph_objs.carpet.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     @property
     def ids(self):
@@ -341,11 +376,11 @@ class Carpet(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
     @property
     def idssrc(self):
@@ -359,11 +394,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -382,11 +417,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
     @property
     def legendgrouptitle(self):
@@ -401,11 +436,11 @@ class Carpet(_BaseTraceType):
         -------
         plotly.graph_objs.carpet.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
     @property
     def legendrank(self):
@@ -426,11 +461,11 @@ class Carpet(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
     @property
     def legendwidth(self):
@@ -445,11 +480,11 @@ class Carpet(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
     @property
     def meta(self):
@@ -471,11 +506,11 @@ class Carpet(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
     @property
     def metasrc(self):
@@ -489,11 +524,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
     @property
     def name(self):
@@ -509,11 +544,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def opacity(self):
@@ -527,11 +562,11 @@ class Carpet(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def stream(self):
@@ -546,11 +581,11 @@ class Carpet(_BaseTraceType):
         -------
         plotly.graph_objs.carpet.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
     @property
     def uid(self):
@@ -566,11 +601,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
     @property
     def uirevision(self):
@@ -597,11 +632,11 @@ class Carpet(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def visible(self):
@@ -618,11 +653,11 @@ class Carpet(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def x(self):
@@ -638,11 +673,11 @@ class Carpet(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     @property
     def xaxis(self):
@@ -661,11 +696,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['xaxis']
+        return self["xaxis"]
 
     @xaxis.setter
     def xaxis(self, val):
-        self['xaxis'] = val
+        self["xaxis"] = val
 
     @property
     def xsrc(self):
@@ -679,11 +714,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
     @property
     def y(self):
@@ -697,11 +732,11 @@ class Carpet(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     @property
     def yaxis(self):
@@ -720,11 +755,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
     @property
     def ysrc(self):
@@ -738,11 +773,11 @@ class Carpet(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
     @property
     def zorder(self):
@@ -758,15 +793,15 @@ class Carpet(_BaseTraceType):
         -------
         int
         """
-        return self['zorder']
+        return self["zorder"]
 
     @zorder.setter
     def zorder(self, val):
-        self['zorder'] = val
+        self["zorder"] = val
 
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
     @property
     def _prop_descriptions(self):
@@ -934,47 +969,49 @@ class Carpet(_BaseTraceType):
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
         """
-    def __init__(self,
-            arg=None,
-            a=None,
-            a0=None,
-            aaxis=None,
-            asrc=None,
-            b=None,
-            b0=None,
-            baxis=None,
-            bsrc=None,
-            carpet=None,
-            cheaterslope=None,
-            color=None,
-            customdata=None,
-            customdatasrc=None,
-            da=None,
-            db=None,
-            font=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            stream=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            x=None,
-            xaxis=None,
-            xsrc=None,
-            y=None,
-            yaxis=None,
-            ysrc=None,
-            zorder=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        a=None,
+        a0=None,
+        aaxis=None,
+        asrc=None,
+        b=None,
+        b0=None,
+        baxis=None,
+        bsrc=None,
+        carpet=None,
+        cheaterslope=None,
+        color=None,
+        customdata=None,
+        customdatasrc=None,
+        da=None,
+        db=None,
+        font=None,
+        ids=None,
+        idssrc=None,
+        legend=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        opacity=None,
+        stream=None,
+        uid=None,
+        uirevision=None,
+        visible=None,
+        x=None,
+        xaxis=None,
+        xsrc=None,
+        y=None,
+        yaxis=None,
+        ysrc=None,
+        zorder=None,
+        **kwargs,
+    ):
         """
         Construct a new Carpet object
 
@@ -1157,9 +1194,9 @@ class Carpet(_BaseTraceType):
         -------
         Carpet
         """
-        super().__init__('carpet')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("carpet")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -1169,56 +1206,55 @@ class Carpet(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Carpet
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Carpet`""")
+an instance of :class:`plotly.graph_objs.Carpet`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
+        self._set_property("a", arg, a)
+        self._set_property("a0", arg, a0)
+        self._set_property("aaxis", arg, aaxis)
+        self._set_property("asrc", arg, asrc)
+        self._set_property("b", arg, b)
+        self._set_property("b0", arg, b0)
+        self._set_property("baxis", arg, baxis)
+        self._set_property("bsrc", arg, bsrc)
+        self._set_property("carpet", arg, carpet)
+        self._set_property("cheaterslope", arg, cheaterslope)
+        self._set_property("color", arg, color)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("da", arg, da)
+        self._set_property("db", arg, db)
+        self._set_property("font", arg, font)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("stream", arg, stream)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("visible", arg, visible)
+        self._set_property("x", arg, x)
+        self._set_property("xaxis", arg, xaxis)
+        self._set_property("xsrc", arg, xsrc)
+        self._set_property("y", arg, y)
+        self._set_property("yaxis", arg, yaxis)
+        self._set_property("ysrc", arg, ysrc)
+        self._set_property("zorder", arg, zorder)
 
-        self._set_property('a', arg, a)
-        self._set_property('a0', arg, a0)
-        self._set_property('aaxis', arg, aaxis)
-        self._set_property('asrc', arg, asrc)
-        self._set_property('b', arg, b)
-        self._set_property('b0', arg, b0)
-        self._set_property('baxis', arg, baxis)
-        self._set_property('bsrc', arg, bsrc)
-        self._set_property('carpet', arg, carpet)
-        self._set_property('cheaterslope', arg, cheaterslope)
-        self._set_property('color', arg, color)
-        self._set_property('customdata', arg, customdata)
-        self._set_property('customdatasrc', arg, customdatasrc)
-        self._set_property('da', arg, da)
-        self._set_property('db', arg, db)
-        self._set_property('font', arg, font)
-        self._set_property('ids', arg, ids)
-        self._set_property('idssrc', arg, idssrc)
-        self._set_property('legend', arg, legend)
-        self._set_property('legendgrouptitle', arg, legendgrouptitle)
-        self._set_property('legendrank', arg, legendrank)
-        self._set_property('legendwidth', arg, legendwidth)
-        self._set_property('meta', arg, meta)
-        self._set_property('metasrc', arg, metasrc)
-        self._set_property('name', arg, name)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('stream', arg, stream)
-        self._set_property('uid', arg, uid)
-        self._set_property('uirevision', arg, uirevision)
-        self._set_property('visible', arg, visible)
-        self._set_property('x', arg, x)
-        self._set_property('xaxis', arg, xaxis)
-        self._set_property('xsrc', arg, xsrc)
-        self._set_property('y', arg, y)
-        self._set_property('yaxis', arg, yaxis)
-        self._set_property('ysrc', arg, ysrc)
-        self._set_property('zorder', arg, zorder)
-
-
-        self._props['type'] = 'carpet'
-        arg.pop('type', None)
+        self._props["type"] = "carpet"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

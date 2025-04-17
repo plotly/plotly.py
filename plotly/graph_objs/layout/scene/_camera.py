@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Camera(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.scene'
-    _path_str = 'layout.scene.camera'
+    _parent_path_str = "layout.scene"
+    _path_str = "layout.scene.camera"
     _valid_props = {"center", "eye", "projection", "up"}
 
     @property
@@ -32,11 +28,11 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Center
         """
-        return self['center']
+        return self["center"]
 
     @center.setter
     def center(self, val):
-        self['center'] = val
+        self["center"] = val
 
     @property
     def eye(self):
@@ -55,11 +51,11 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Eye
         """
-        return self['eye']
+        return self["eye"]
 
     @eye.setter
     def eye(self, val):
-        self['eye'] = val
+        self["eye"] = val
 
     @property
     def projection(self):
@@ -74,11 +70,11 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Projection
         """
-        return self['projection']
+        return self["projection"]
 
     @projection.setter
     def projection(self, val):
-        self['projection'] = val
+        self["projection"] = val
 
     @property
     def up(self):
@@ -98,11 +94,11 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Up
         """
-        return self['up']
+        return self["up"]
 
     @up.setter
     def up(self, val):
-        self['up'] = val
+        self["up"] = val
 
     @property
     def _prop_descriptions(self):
@@ -125,14 +121,10 @@ class Camera(_BaseLayoutHierarchyType):
             with respect to the page. The default is *{x: 0, y: 0,
             z: 1}* which means that the z axis points up.
         """
-    def __init__(self,
-            arg=None,
-            center=None,
-            eye=None,
-            projection=None,
-            up=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, center=None, eye=None, projection=None, up=None, **kwargs
+    ):
         """
         Construct a new Camera object
 
@@ -164,9 +156,9 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         Camera
         """
-        super().__init__('camera')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("camera")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -176,19 +168,19 @@ class Camera(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.scene.Camera
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.Camera`""")
+an instance of :class:`plotly.graph_objs.layout.scene.Camera`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('center', arg, center)
-        self._set_property('eye', arg, eye)
-        self._set_property('projection', arg, projection)
-        self._set_property('up', arg, up)
+        self._set_property("center", arg, center)
+        self._set_property("eye", arg, eye)
+        self._set_property("projection", arg, projection)
+        self._set_property("up", arg, up)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

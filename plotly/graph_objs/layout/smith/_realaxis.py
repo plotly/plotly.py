@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,37 @@ import copy as _copy
 
 class Realaxis(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.smith'
-    _path_str = 'layout.smith.realaxis'
-    _valid_props = {"color", "gridcolor", "griddash", "gridwidth", "hoverformat", "labelalias", "layer", "linecolor", "linewidth", "showgrid", "showline", "showticklabels", "showtickprefix", "showticksuffix", "side", "tickangle", "tickcolor", "tickfont", "tickformat", "ticklen", "tickprefix", "ticks", "ticksuffix", "tickvals", "tickvalssrc", "tickwidth", "visible"}
+    _parent_path_str = "layout.smith"
+    _path_str = "layout.smith.realaxis"
+    _valid_props = {
+        "color",
+        "gridcolor",
+        "griddash",
+        "gridwidth",
+        "hoverformat",
+        "labelalias",
+        "layer",
+        "linecolor",
+        "linewidth",
+        "showgrid",
+        "showline",
+        "showticklabels",
+        "showtickprefix",
+        "showticksuffix",
+        "side",
+        "tickangle",
+        "tickcolor",
+        "tickfont",
+        "tickformat",
+        "ticklen",
+        "tickprefix",
+        "ticks",
+        "ticksuffix",
+        "tickvals",
+        "tickvalssrc",
+        "tickwidth",
+        "visible",
+    }
 
     @property
     def color(self):
@@ -34,11 +58,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def gridcolor(self):
@@ -56,11 +80,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
     @property
     def griddash(self):
@@ -80,11 +104,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['griddash']
+        return self["griddash"]
 
     @griddash.setter
     def griddash(self, val):
-        self['griddash'] = val
+        self["griddash"] = val
 
     @property
     def gridwidth(self):
@@ -98,11 +122,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
     @property
     def hoverformat(self):
@@ -126,11 +150,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['hoverformat']
+        return self["hoverformat"]
 
     @hoverformat.setter
     def hoverformat(self, val):
-        self['hoverformat'] = val
+        self["hoverformat"] = val
 
     @property
     def labelalias(self):
@@ -151,11 +175,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['labelalias']
+        return self["labelalias"]
 
     @labelalias.setter
     def labelalias(self, val):
-        self['labelalias'] = val
+        self["labelalias"] = val
 
     @property
     def layer(self):
@@ -175,11 +199,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['layer']
+        return self["layer"]
 
     @layer.setter
     def layer(self, val):
-        self['layer'] = val
+        self["layer"] = val
 
     @property
     def linecolor(self):
@@ -197,11 +221,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['linecolor']
+        return self["linecolor"]
 
     @linecolor.setter
     def linecolor(self, val):
-        self['linecolor'] = val
+        self["linecolor"] = val
 
     @property
     def linewidth(self):
@@ -215,11 +239,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['linewidth']
+        return self["linewidth"]
 
     @linewidth.setter
     def linewidth(self, val):
-        self['linewidth'] = val
+        self["linewidth"] = val
 
     @property
     def showgrid(self):
@@ -234,11 +258,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
     @property
     def showline(self):
@@ -252,11 +276,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showline']
+        return self["showline"]
 
     @showline.setter
     def showline(self, val):
-        self['showline'] = val
+        self["showline"] = val
 
     @property
     def showticklabels(self):
@@ -270,11 +294,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
     @property
     def showtickprefix(self):
@@ -292,11 +316,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
     @property
     def showticksuffix(self):
@@ -311,11 +335,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
     @property
     def side(self):
@@ -331,11 +355,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['side']
+        return self["side"]
 
     @side.setter
     def side(self, val):
-        self['side'] = val
+        self["side"] = val
 
     @property
     def tickangle(self):
@@ -353,11 +377,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
     @property
     def tickcolor(self):
@@ -375,11 +399,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
     @property
     def tickfont(self):
@@ -396,11 +420,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.smith.realaxis.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
     @property
     def tickformat(self):
@@ -424,11 +448,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
     @property
     def ticklen(self):
@@ -442,11 +466,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
     @property
     def tickprefix(self):
@@ -461,11 +485,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
     @property
     def ticks(self):
@@ -482,11 +506,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
     @property
     def ticksuffix(self):
@@ -501,11 +525,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
     @property
     def tickvals(self):
@@ -519,11 +543,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
     @property
     def tickvalssrc(self):
@@ -537,11 +561,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
     @property
     def tickwidth(self):
@@ -555,11 +579,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
     @property
     def visible(self):
@@ -575,11 +599,11 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def _prop_descriptions(self):
@@ -693,37 +717,39 @@ class Realaxis(_BaseLayoutHierarchyType):
             interaction like dragging. Default is true when a
             cheater plot is present on the axis, otherwise false
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            hoverformat=None,
-            labelalias=None,
-            layer=None,
-            linecolor=None,
-            linewidth=None,
-            showgrid=None,
-            showline=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            side=None,
-            tickangle=None,
-            tickcolor=None,
-            tickfont=None,
-            tickformat=None,
-            ticklen=None,
-            tickprefix=None,
-            ticks=None,
-            ticksuffix=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        gridcolor=None,
+        griddash=None,
+        gridwidth=None,
+        hoverformat=None,
+        labelalias=None,
+        layer=None,
+        linecolor=None,
+        linewidth=None,
+        showgrid=None,
+        showline=None,
+        showticklabels=None,
+        showtickprefix=None,
+        showticksuffix=None,
+        side=None,
+        tickangle=None,
+        tickcolor=None,
+        tickfont=None,
+        tickformat=None,
+        ticklen=None,
+        tickprefix=None,
+        ticks=None,
+        ticksuffix=None,
+        tickvals=None,
+        tickvalssrc=None,
+        tickwidth=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Realaxis object
 
@@ -846,9 +872,9 @@ class Realaxis(_BaseLayoutHierarchyType):
         -------
         Realaxis
         """
-        super().__init__('realaxis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("realaxis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -858,42 +884,42 @@ class Realaxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.smith.Realaxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.smith.Realaxis`""")
+an instance of :class:`plotly.graph_objs.layout.smith.Realaxis`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('color', arg, color)
-        self._set_property('gridcolor', arg, gridcolor)
-        self._set_property('griddash', arg, griddash)
-        self._set_property('gridwidth', arg, gridwidth)
-        self._set_property('hoverformat', arg, hoverformat)
-        self._set_property('labelalias', arg, labelalias)
-        self._set_property('layer', arg, layer)
-        self._set_property('linecolor', arg, linecolor)
-        self._set_property('linewidth', arg, linewidth)
-        self._set_property('showgrid', arg, showgrid)
-        self._set_property('showline', arg, showline)
-        self._set_property('showticklabels', arg, showticklabels)
-        self._set_property('showtickprefix', arg, showtickprefix)
-        self._set_property('showticksuffix', arg, showticksuffix)
-        self._set_property('side', arg, side)
-        self._set_property('tickangle', arg, tickangle)
-        self._set_property('tickcolor', arg, tickcolor)
-        self._set_property('tickfont', arg, tickfont)
-        self._set_property('tickformat', arg, tickformat)
-        self._set_property('ticklen', arg, ticklen)
-        self._set_property('tickprefix', arg, tickprefix)
-        self._set_property('ticks', arg, ticks)
-        self._set_property('ticksuffix', arg, ticksuffix)
-        self._set_property('tickvals', arg, tickvals)
-        self._set_property('tickvalssrc', arg, tickvalssrc)
-        self._set_property('tickwidth', arg, tickwidth)
-        self._set_property('visible', arg, visible)
+        self._set_property("color", arg, color)
+        self._set_property("gridcolor", arg, gridcolor)
+        self._set_property("griddash", arg, griddash)
+        self._set_property("gridwidth", arg, gridwidth)
+        self._set_property("hoverformat", arg, hoverformat)
+        self._set_property("labelalias", arg, labelalias)
+        self._set_property("layer", arg, layer)
+        self._set_property("linecolor", arg, linecolor)
+        self._set_property("linewidth", arg, linewidth)
+        self._set_property("showgrid", arg, showgrid)
+        self._set_property("showline", arg, showline)
+        self._set_property("showticklabels", arg, showticklabels)
+        self._set_property("showtickprefix", arg, showtickprefix)
+        self._set_property("showticksuffix", arg, showticksuffix)
+        self._set_property("side", arg, side)
+        self._set_property("tickangle", arg, tickangle)
+        self._set_property("tickcolor", arg, tickcolor)
+        self._set_property("tickfont", arg, tickfont)
+        self._set_property("tickformat", arg, tickformat)
+        self._set_property("ticklen", arg, ticklen)
+        self._set_property("tickprefix", arg, tickprefix)
+        self._set_property("ticks", arg, ticks)
+        self._set_property("ticksuffix", arg, ticksuffix)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("tickwidth", arg, tickwidth)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

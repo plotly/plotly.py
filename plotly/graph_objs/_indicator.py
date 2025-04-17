@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,34 @@ import copy as _copy
 
 class Indicator(_BaseTraceType):
 
-    _parent_path_str = ''
-    _path_str = 'indicator'
-    _valid_props = {"align", "customdata", "customdatasrc", "delta", "domain", "gauge", "ids", "idssrc", "legend", "legendgrouptitle", "legendrank", "legendwidth", "meta", "metasrc", "mode", "name", "number", "stream", "title", "type", "uid", "uirevision", "value", "visible"}
+    _parent_path_str = ""
+    _path_str = "indicator"
+    _valid_props = {
+        "align",
+        "customdata",
+        "customdatasrc",
+        "delta",
+        "domain",
+        "gauge",
+        "ids",
+        "idssrc",
+        "legend",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "meta",
+        "metasrc",
+        "mode",
+        "name",
+        "number",
+        "stream",
+        "title",
+        "type",
+        "uid",
+        "uirevision",
+        "value",
+        "visible",
+    }
 
     @property
     def align(self):
@@ -30,11 +51,11 @@ class Indicator(_BaseTraceType):
         -------
         Any
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     @property
     def customdata(self):
@@ -51,11 +72,11 @@ class Indicator(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
     @property
     def customdatasrc(self):
@@ -70,11 +91,11 @@ class Indicator(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
     @property
     def delta(self):
@@ -89,11 +110,11 @@ class Indicator(_BaseTraceType):
         -------
         plotly.graph_objs.indicator.Delta
         """
-        return self['delta']
+        return self["delta"]
 
     @delta.setter
     def delta(self, val):
-        self['delta'] = val
+        self["delta"] = val
 
     @property
     def domain(self):
@@ -108,11 +129,11 @@ class Indicator(_BaseTraceType):
         -------
         plotly.graph_objs.indicator.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
     @property
     def gauge(self):
@@ -129,11 +150,11 @@ class Indicator(_BaseTraceType):
         -------
         plotly.graph_objs.indicator.Gauge
         """
-        return self['gauge']
+        return self["gauge"]
 
     @gauge.setter
     def gauge(self, val):
-        self['gauge'] = val
+        self["gauge"] = val
 
     @property
     def ids(self):
@@ -149,11 +170,11 @@ class Indicator(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
     @property
     def idssrc(self):
@@ -167,11 +188,11 @@ class Indicator(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -190,11 +211,11 @@ class Indicator(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
     @property
     def legendgrouptitle(self):
@@ -209,11 +230,11 @@ class Indicator(_BaseTraceType):
         -------
         plotly.graph_objs.indicator.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
     @property
     def legendrank(self):
@@ -234,11 +255,11 @@ class Indicator(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
     @property
     def legendwidth(self):
@@ -253,11 +274,11 @@ class Indicator(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
     @property
     def meta(self):
@@ -279,11 +300,11 @@ class Indicator(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
     @property
     def metasrc(self):
@@ -297,11 +318,11 @@ class Indicator(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
     @property
     def mode(self):
@@ -320,11 +341,11 @@ class Indicator(_BaseTraceType):
         -------
         Any
         """
-        return self['mode']
+        return self["mode"]
 
     @mode.setter
     def mode(self, val):
-        self['mode'] = val
+        self["mode"] = val
 
     @property
     def name(self):
@@ -340,11 +361,11 @@ class Indicator(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def number(self):
@@ -359,11 +380,11 @@ class Indicator(_BaseTraceType):
         -------
         plotly.graph_objs.indicator.Number
         """
-        return self['number']
+        return self["number"]
 
     @number.setter
     def number(self, val):
-        self['number'] = val
+        self["number"] = val
 
     @property
     def stream(self):
@@ -378,11 +399,11 @@ class Indicator(_BaseTraceType):
         -------
         plotly.graph_objs.indicator.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
     @property
     def title(self):
@@ -397,11 +418,11 @@ class Indicator(_BaseTraceType):
         -------
         plotly.graph_objs.indicator.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
     @property
     def uid(self):
@@ -417,11 +438,11 @@ class Indicator(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
     @property
     def uirevision(self):
@@ -448,11 +469,11 @@ class Indicator(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def value(self):
@@ -466,11 +487,11 @@ class Indicator(_BaseTraceType):
         -------
         int|float
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
     @property
     def visible(self):
@@ -487,15 +508,15 @@ class Indicator(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
     @property
     def _prop_descriptions(self):
@@ -615,33 +636,35 @@ class Indicator(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-    def __init__(self,
-            arg=None,
-            align=None,
-            customdata=None,
-            customdatasrc=None,
-            delta=None,
-            domain=None,
-            gauge=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            meta=None,
-            metasrc=None,
-            mode=None,
-            name=None,
-            number=None,
-            stream=None,
-            title=None,
-            uid=None,
-            uirevision=None,
-            value=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        align=None,
+        customdata=None,
+        customdatasrc=None,
+        delta=None,
+        domain=None,
+        gauge=None,
+        ids=None,
+        idssrc=None,
+        legend=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        meta=None,
+        metasrc=None,
+        mode=None,
+        name=None,
+        number=None,
+        stream=None,
+        title=None,
+        uid=None,
+        uirevision=None,
+        value=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Indicator object
 
@@ -776,9 +799,9 @@ class Indicator(_BaseTraceType):
         -------
         Indicator
         """
-        super().__init__('indicator')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("indicator")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -788,42 +811,41 @@ class Indicator(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Indicator
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Indicator`""")
+an instance of :class:`plotly.graph_objs.Indicator`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
+        self._set_property("align", arg, align)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("delta", arg, delta)
+        self._set_property("domain", arg, domain)
+        self._set_property("gauge", arg, gauge)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("mode", arg, mode)
+        self._set_property("name", arg, name)
+        self._set_property("number", arg, number)
+        self._set_property("stream", arg, stream)
+        self._set_property("title", arg, title)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("value", arg, value)
+        self._set_property("visible", arg, visible)
 
-        self._set_property('align', arg, align)
-        self._set_property('customdata', arg, customdata)
-        self._set_property('customdatasrc', arg, customdatasrc)
-        self._set_property('delta', arg, delta)
-        self._set_property('domain', arg, domain)
-        self._set_property('gauge', arg, gauge)
-        self._set_property('ids', arg, ids)
-        self._set_property('idssrc', arg, idssrc)
-        self._set_property('legend', arg, legend)
-        self._set_property('legendgrouptitle', arg, legendgrouptitle)
-        self._set_property('legendrank', arg, legendrank)
-        self._set_property('legendwidth', arg, legendwidth)
-        self._set_property('meta', arg, meta)
-        self._set_property('metasrc', arg, metasrc)
-        self._set_property('mode', arg, mode)
-        self._set_property('name', arg, name)
-        self._set_property('number', arg, number)
-        self._set_property('stream', arg, stream)
-        self._set_property('title', arg, title)
-        self._set_property('uid', arg, uid)
-        self._set_property('uirevision', arg, uirevision)
-        self._set_property('value', arg, value)
-        self._set_property('visible', arg, visible)
-
-
-        self._props['type'] = 'indicator'
-        arg.pop('type', None)
+        self._props["type"] = "indicator"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Transition(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.slider'
-    _path_str = 'layout.slider.transition'
+    _parent_path_str = "layout.slider"
+    _path_str = "layout.slider.transition"
     _valid_props = {"duration", "easing"}
 
     @property
@@ -27,11 +23,11 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['duration']
+        return self["duration"]
 
     @duration.setter
     def duration(self, val):
-        self['duration'] = val
+        self["duration"] = val
 
     @property
     def easing(self):
@@ -54,11 +50,11 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['easing']
+        return self["easing"]
 
     @easing.setter
     def easing(self, val):
-        self['easing'] = val
+        self["easing"] = val
 
     @property
     def _prop_descriptions(self):
@@ -68,12 +64,8 @@ class Transition(_BaseLayoutHierarchyType):
         easing
             Sets the easing function of the slider transition
         """
-    def __init__(self,
-            arg=None,
-            duration=None,
-            easing=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, duration=None, easing=None, **kwargs):
         """
         Construct a new Transition object
 
@@ -92,9 +84,9 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         Transition
         """
-        super().__init__('transition')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("transition")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -104,17 +96,17 @@ class Transition(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.slider.Transition
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.slider.Transition`""")
+an instance of :class:`plotly.graph_objs.layout.slider.Transition`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('duration', arg, duration)
-        self._set_property('easing', arg, easing)
+        self._set_property("duration", arg, duration)
+        self._set_property("easing", arg, easing)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

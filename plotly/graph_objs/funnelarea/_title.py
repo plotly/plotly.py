@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Title(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'funnelarea'
-    _path_str = 'funnelarea.title'
+    _parent_path_str = "funnelarea"
+    _path_str = "funnelarea.title"
     _valid_props = {"font", "position", "text"}
 
     @property
@@ -30,11 +26,11 @@ class Title(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.funnelarea.title.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     @property
     def position(self):
@@ -49,11 +45,11 @@ class Title(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['position']
+        return self["position"]
 
     @position.setter
     def position(self, val):
-        self['position'] = val
+        self["position"] = val
 
     @property
     def text(self):
@@ -69,11 +65,11 @@ class Title(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     @property
     def _prop_descriptions(self):
@@ -86,13 +82,8 @@ class Title(_BaseTraceHierarchyType):
             Sets the title of the chart. If it is empty, no title
             is displayed.
         """
-    def __init__(self,
-            arg=None,
-            font=None,
-            position=None,
-            text=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, font=None, position=None, text=None, **kwargs):
         """
         Construct a new Title object
 
@@ -114,9 +105,9 @@ class Title(_BaseTraceHierarchyType):
         -------
         Title
         """
-        super().__init__('title')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("title")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -126,18 +117,18 @@ class Title(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.funnelarea.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.funnelarea.Title`""")
+an instance of :class:`plotly.graph_objs.funnelarea.Title`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('font', arg, font)
-        self._set_property('position', arg, position)
-        self._set_property('text', arg, text)
+        self._set_property("font", arg, font)
+        self._set_property("position", arg, position)
+        self._set_property("text", arg, text)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

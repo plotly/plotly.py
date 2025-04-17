@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,16 @@ import copy as _copy
 
 class Hoverlabel(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.hoverlabel'
-    _valid_props = {"align", "bgcolor", "bordercolor", "font", "grouptitlefont", "namelength"}
+    _parent_path_str = "layout"
+    _path_str = "layout.hoverlabel"
+    _valid_props = {
+        "align",
+        "bgcolor",
+        "bordercolor",
+        "font",
+        "grouptitlefont",
+        "namelength",
+    }
 
     @property
     def align(self):
@@ -30,11 +33,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     @property
     def bgcolor(self):
@@ -52,11 +55,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     @property
     def bordercolor(self):
@@ -74,11 +77,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     @property
     def font(self):
@@ -96,11 +99,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.hoverlabel.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     @property
     def grouptitlefont(self):
@@ -118,11 +121,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.hoverlabel.Grouptitlefont
         """
-        return self['grouptitlefont']
+        return self["grouptitlefont"]
 
     @grouptitlefont.setter
     def grouptitlefont(self, val):
-        self['grouptitlefont'] = val
+        self["grouptitlefont"] = val
 
     @property
     def namelength(self):
@@ -142,11 +145,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['namelength']
+        return self["namelength"]
 
     @namelength.setter
     def namelength(self, val):
-        self['namelength'] = val
+        self["namelength"] = val
 
     @property
     def _prop_descriptions(self):
@@ -174,16 +177,18 @@ class Hoverlabel(_BaseLayoutHierarchyType):
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
         """
-    def __init__(self,
-            arg=None,
-            align=None,
-            bgcolor=None,
-            bordercolor=None,
-            font=None,
-            grouptitlefont=None,
-            namelength=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        align=None,
+        bgcolor=None,
+        bordercolor=None,
+        font=None,
+        grouptitlefont=None,
+        namelength=None,
+        **kwargs,
+    ):
         """
         Construct a new Hoverlabel object
 
@@ -220,9 +225,9 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         Hoverlabel
         """
-        super().__init__('hoverlabel')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("hoverlabel")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -232,21 +237,21 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Hoverlabel
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Hoverlabel`""")
+an instance of :class:`plotly.graph_objs.layout.Hoverlabel`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('align', arg, align)
-        self._set_property('bgcolor', arg, bgcolor)
-        self._set_property('bordercolor', arg, bordercolor)
-        self._set_property('font', arg, font)
-        self._set_property('grouptitlefont', arg, grouptitlefont)
-        self._set_property('namelength', arg, namelength)
+        self._set_property("align", arg, align)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("font", arg, font)
+        self._set_property("grouptitlefont", arg, grouptitlefont)
+        self._set_property("namelength", arg, namelength)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
