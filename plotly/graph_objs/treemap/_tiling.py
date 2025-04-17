@@ -1,17 +1,16 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Tiling(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "treemap"
     _path_str = "treemap.tiling"
     _valid_props = {"flip", "packing", "pad", "squarifyratio"}
 
-    # flip
-    # ----
     @property
     def flip(self):
         """
@@ -33,8 +32,6 @@ class Tiling(_BaseTraceHierarchyType):
     def flip(self, val):
         self["flip"] = val
 
-    # packing
-    # -------
     @property
     def packing(self):
         """
@@ -56,8 +53,6 @@ class Tiling(_BaseTraceHierarchyType):
     def packing(self, val):
         self["packing"] = val
 
-    # pad
-    # ---
     @property
     def pad(self):
         """
@@ -76,23 +71,20 @@ class Tiling(_BaseTraceHierarchyType):
     def pad(self, val):
         self["pad"] = val
 
-    # squarifyratio
-    # -------------
     @property
     def squarifyratio(self):
         """
         When using "squarify" `packing` algorithm, according to https:/
-        /github.com/d3/d3-
-        hierarchy/blob/v3.1.1/README.md#squarify_ratio this option
-        specifies the desired aspect ratio of the generated rectangles.
-        The ratio must be specified as a number greater than or equal
-        to one. Note that the orientation of the generated rectangles
-        (tall or wide) is not implied by the ratio; for example, a
-        ratio of two will attempt to produce a mixture of rectangles
-        whose width:height ratio is either 2:1 or 1:2. When using
-        "squarify", unlike d3 which uses the Golden Ratio i.e.
-        1.618034, Plotly applies 1 to increase squares in treemap
-        layouts.
+        /github.com/d3/d3-hierarchy/blob/v3.1.1/README.md#squarify_rati
+        o this option specifies the desired aspect ratio of the
+        generated rectangles. The ratio must be specified as a number
+        greater than or equal to one. Note that the orientation of the
+        generated rectangles (tall or wide) is not implied by the
+        ratio; for example, a ratio of two will attempt to produce a
+        mixture of rectangles whose width:height ratio is either 2:1 or
+        1:2. When using "squarify", unlike d3 which uses the Golden
+        Ratio i.e. 1.618034, Plotly applies 1 to increase squares in
+        treemap layouts.
 
         The 'squarifyratio' property is a number and may be specified as:
           - An int or float in the interval [1, inf]
@@ -107,8 +99,6 @@ class Tiling(_BaseTraceHierarchyType):
     def squarifyratio(self, val):
         self["squarifyratio"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -123,18 +113,17 @@ class Tiling(_BaseTraceHierarchyType):
             Sets the inner padding (in px).
         squarifyratio
             When using "squarify" `packing` algorithm, according to
-            https://github.com/d3/d3-
-            hierarchy/blob/v3.1.1/README.md#squarify_ratio this
-            option specifies the desired aspect ratio of the
-            generated rectangles. The ratio must be specified as a
-            number greater than or equal to one. Note that the
-            orientation of the generated rectangles (tall or wide)
-            is not implied by the ratio; for example, a ratio of
-            two will attempt to produce a mixture of rectangles
-            whose width:height ratio is either 2:1 or 1:2. When
-            using "squarify", unlike d3 which uses the Golden Ratio
-            i.e. 1.618034, Plotly applies 1 to increase squares in
-            treemap layouts.
+            https://github.com/d3/d3-hierarchy/blob/v3.1.1/README.m
+            d#squarify_ratio this option specifies the desired
+            aspect ratio of the generated rectangles. The ratio
+            must be specified as a number greater than or equal to
+            one. Note that the orientation of the generated
+            rectangles (tall or wide) is not implied by the ratio;
+            for example, a ratio of two will attempt to produce a
+            mixture of rectangles whose width:height ratio is
+            either 2:1 or 1:2. When using "squarify", unlike d3
+            which uses the Golden Ratio i.e. 1.618034, Plotly
+            applies 1 to increase squares in treemap layouts.
         """
 
     def __init__(
@@ -160,31 +149,27 @@ class Tiling(_BaseTraceHierarchyType):
             Sets the inner padding (in px).
         squarifyratio
             When using "squarify" `packing` algorithm, according to
-            https://github.com/d3/d3-
-            hierarchy/blob/v3.1.1/README.md#squarify_ratio this
-            option specifies the desired aspect ratio of the
-            generated rectangles. The ratio must be specified as a
-            number greater than or equal to one. Note that the
-            orientation of the generated rectangles (tall or wide)
-            is not implied by the ratio; for example, a ratio of
-            two will attempt to produce a mixture of rectangles
-            whose width:height ratio is either 2:1 or 1:2. When
-            using "squarify", unlike d3 which uses the Golden Ratio
-            i.e. 1.618034, Plotly applies 1 to increase squares in
-            treemap layouts.
+            https://github.com/d3/d3-hierarchy/blob/v3.1.1/README.m
+            d#squarify_ratio this option specifies the desired
+            aspect ratio of the generated rectangles. The ratio
+            must be specified as a number greater than or equal to
+            one. Note that the orientation of the generated
+            rectangles (tall or wide) is not implied by the ratio;
+            for example, a ratio of two will attempt to produce a
+            mixture of rectangles whose width:height ratio is
+            either 2:1 or 1:2. When using "squarify", unlike d3
+            which uses the Golden Ratio i.e. 1.618034, Plotly
+            applies 1 to increase squares in treemap layouts.
 
         Returns
         -------
         Tiling
         """
-        super(Tiling, self).__init__("tiling")
-
+        super().__init__("tiling")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -199,34 +184,12 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.treemap.Tiling`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("flip", None)
-        _v = flip if flip is not None else _v
-        if _v is not None:
-            self["flip"] = _v
-        _v = arg.pop("packing", None)
-        _v = packing if packing is not None else _v
-        if _v is not None:
-            self["packing"] = _v
-        _v = arg.pop("pad", None)
-        _v = pad if pad is not None else _v
-        if _v is not None:
-            self["pad"] = _v
-        _v = arg.pop("squarifyratio", None)
-        _v = squarifyratio if squarifyratio is not None else _v
-        if _v is not None:
-            self["squarifyratio"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("flip", arg, flip)
+        self._set_property("packing", arg, packing)
+        self._set_property("pad", arg, pad)
+        self._set_property("squarifyratio", arg, squarifyratio)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

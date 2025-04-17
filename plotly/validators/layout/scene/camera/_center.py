@@ -1,23 +1,20 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
+class CenterValidator(_bv.CompoundValidator):
     def __init__(
         self, plotly_name="center", parent_name="layout.scene.camera", **kwargs
     ):
-        super(CenterValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             data_class_str=kwargs.pop("data_class_str", "Center"),
             data_docs=kwargs.pop(
                 "data_docs",
                 """
-            x
-
-            y
-
-            z
-
 """,
             ),
             **kwargs,

@@ -5,6 +5,7 @@ test_error_bars:
 A module intended for use with Nose.
 
 """
+
 from plotly.graph_objs import ErrorX, ErrorY
 from plotly.exceptions import PlotlyDictKeyError
 

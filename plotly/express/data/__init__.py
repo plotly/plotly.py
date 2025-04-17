@@ -1,5 +1,4 @@
-"""Built-in datasets for demonstration, educational and test purposes.
-"""
+"""Built-in datasets for demonstration, educational and test purposes."""
 
 from plotly.data import *
 
