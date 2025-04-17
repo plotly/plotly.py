@@ -22,6 +22,10 @@ jobs:
 
     - name: Install npm dependencies
       run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        uv venv
+        source .venv/bin/activate
+        uv pip install jupyter
         cd js
         npm ci --verbose
         npm run build --verbose
