@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Increasing(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'waterfall'
-    _path_str = 'waterfall.increasing'
+    _parent_path_str = "waterfall"
+    _path_str = "waterfall.increasing"
     _valid_props = {"marker"}
 
     @property
@@ -28,11 +24,11 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.waterfall.increasing.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
     @property
     def _prop_descriptions(self):
@@ -41,11 +37,8 @@ class Increasing(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.waterfall.increasing.Marke
             r` instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            marker=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, marker=None, **kwargs):
         """
         Construct a new Increasing object
 
@@ -63,9 +56,9 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         Increasing
         """
-        super().__init__('increasing')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("increasing")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -75,16 +68,16 @@ class Increasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.waterfall.Increasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.waterfall.Increasing`""")
+an instance of :class:`plotly.graph_objs.waterfall.Increasing`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('marker', arg, marker)
+        self._set_property("marker", arg, marker)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

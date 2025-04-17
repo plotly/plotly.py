@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Marker(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'scatterpolargl.selected'
-    _path_str = 'scatterpolargl.selected.marker'
+    _parent_path_str = "scatterpolargl.selected"
+    _path_str = "scatterpolargl.selected.marker"
     _valid_props = {"color", "opacity", "size"}
 
     @property
@@ -31,11 +27,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def opacity(self):
@@ -49,11 +45,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def size(self):
@@ -67,11 +63,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     @property
     def _prop_descriptions(self):
@@ -83,13 +79,8 @@ class Marker(_BaseTraceHierarchyType):
         size
             Sets the marker size of selected points.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            opacity=None,
-            size=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, opacity=None, size=None, **kwargs):
         """
         Construct a new Marker object
 
@@ -110,9 +101,9 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -122,18 +113,18 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatterpolargl.selected.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterpolargl.selected.Marker`""")
+an instance of :class:`plotly.graph_objs.scatterpolargl.selected.Marker`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('color', arg, color)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('size', arg, size)
+        self._set_property("color", arg, color)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("size", arg, size)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

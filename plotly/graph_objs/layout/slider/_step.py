@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,32 +7,41 @@ import copy as _copy
 
 class Step(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.slider'
-    _path_str = 'layout.slider.step'
-    _valid_props = {"args", "execute", "label", "method", "name", "templateitemname", "value", "visible"}
+    _parent_path_str = "layout.slider"
+    _path_str = "layout.slider.step"
+    _valid_props = {
+        "args",
+        "execute",
+        "label",
+        "method",
+        "name",
+        "templateitemname",
+        "value",
+        "visible",
+    }
 
     @property
     def args(self):
         """
-        Sets the arguments values to be passed to the Plotly method set
-        in `method` on slide.
+            Sets the arguments values to be passed to the Plotly method set
+            in `method` on slide.
 
-        The 'args' property is an info array that may be specified as:
-    
-        * a list or tuple of up to 3 elements where:
-    (0) The 'args[0]' property accepts values of any type
-    (1) The 'args[1]' property accepts values of any type
-    (2) The 'args[2]' property accepts values of any type
+            The 'args' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of up to 3 elements where:
+        (0) The 'args[0]' property accepts values of any type
+        (1) The 'args[1]' property accepts values of any type
+        (2) The 'args[2]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
-        return self['args']
+        return self["args"]
 
     @args.setter
     def args(self, val):
-        self['args'] = val
+        self["args"] = val
 
     @property
     def execute(self):
@@ -56,11 +61,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['execute']
+        return self["execute"]
 
     @execute.setter
     def execute(self, val):
-        self['execute'] = val
+        self["execute"] = val
 
     @property
     def label(self):
@@ -75,11 +80,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     @property
     def method(self):
@@ -99,11 +104,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['method']
+        return self["method"]
 
     @method.setter
     def method(self, val):
-        self['method'] = val
+        self["method"] = val
 
     @property
     def name(self):
@@ -124,11 +129,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def templateitemname(self):
@@ -150,11 +155,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     @property
     def value(self):
@@ -170,11 +175,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
     @property
     def visible(self):
@@ -188,11 +193,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def _prop_descriptions(self):
@@ -244,18 +249,20 @@ class Step(_BaseLayoutHierarchyType):
             Determines whether or not this step is included in the
             slider.
         """
-    def __init__(self,
-            arg=None,
-            args=None,
-            execute=None,
-            label=None,
-            method=None,
-            name=None,
-            templateitemname=None,
-            value=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        args=None,
+        execute=None,
+        label=None,
+        method=None,
+        name=None,
+        templateitemname=None,
+        value=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Step object
 
@@ -316,9 +323,9 @@ class Step(_BaseLayoutHierarchyType):
         -------
         Step
         """
-        super().__init__('steps')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("steps")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -328,23 +335,23 @@ class Step(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.slider.Step
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.slider.Step`""")
+an instance of :class:`plotly.graph_objs.layout.slider.Step`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('args', arg, args)
-        self._set_property('execute', arg, execute)
-        self._set_property('label', arg, label)
-        self._set_property('method', arg, method)
-        self._set_property('name', arg, name)
-        self._set_property('templateitemname', arg, templateitemname)
-        self._set_property('value', arg, value)
-        self._set_property('visible', arg, visible)
+        self._set_property("args", arg, args)
+        self._set_property("execute", arg, execute)
+        self._set_property("label", arg, label)
+        self._set_property("method", arg, method)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("value", arg, value)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

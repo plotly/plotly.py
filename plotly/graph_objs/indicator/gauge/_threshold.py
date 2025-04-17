@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Threshold(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'indicator.gauge'
-    _path_str = 'indicator.gauge.threshold'
+    _parent_path_str = "indicator.gauge"
+    _path_str = "indicator.gauge.threshold"
     _valid_props = {"line", "thickness", "value"}
 
     @property
@@ -28,11 +24,11 @@ class Threshold(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.threshold.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     @property
     def thickness(self):
@@ -47,11 +43,11 @@ class Threshold(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['thickness']
+        return self["thickness"]
 
     @thickness.setter
     def thickness(self, val):
-        self['thickness'] = val
+        self["thickness"] = val
 
     @property
     def value(self):
@@ -65,11 +61,11 @@ class Threshold(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
     @property
     def _prop_descriptions(self):
@@ -83,13 +79,8 @@ class Threshold(_BaseTraceHierarchyType):
         value
             Sets a treshold value drawn as a line.
         """
-    def __init__(self,
-            arg=None,
-            line=None,
-            thickness=None,
-            value=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, line=None, thickness=None, value=None, **kwargs):
         """
         Construct a new Threshold object
 
@@ -112,9 +103,9 @@ class Threshold(_BaseTraceHierarchyType):
         -------
         Threshold
         """
-        super().__init__('threshold')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("threshold")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -124,18 +115,18 @@ class Threshold(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.gauge.Threshold
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`""")
+an instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('line', arg, line)
-        self._set_property('thickness', arg, thickness)
-        self._set_property('value', arg, value)
+        self._set_property("line", arg, line)
+        self._set_property("thickness", arg, thickness)
+        self._set_property("value", arg, value)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

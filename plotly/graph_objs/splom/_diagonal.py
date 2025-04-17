@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Diagonal(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'splom'
-    _path_str = 'splom.diagonal'
+    _parent_path_str = "splom"
+    _path_str = "splom.diagonal"
     _valid_props = {"visible"}
 
     @property
@@ -28,11 +24,11 @@ class Diagonal(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def _prop_descriptions(self):
@@ -41,11 +37,8 @@ class Diagonal(_BaseTraceHierarchyType):
             Determines whether or not subplots on the diagonal are
             displayed.
         """
-    def __init__(self,
-            arg=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, visible=None, **kwargs):
         """
         Construct a new Diagonal object
 
@@ -63,9 +56,9 @@ class Diagonal(_BaseTraceHierarchyType):
         -------
         Diagonal
         """
-        super().__init__('diagonal')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("diagonal")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -75,16 +68,16 @@ class Diagonal(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.splom.Diagonal
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.Diagonal`""")
+an instance of :class:`plotly.graph_objs.splom.Diagonal`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('visible', arg, visible)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

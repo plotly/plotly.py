@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Lightposition(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'cone'
-    _path_str = 'cone.lightposition'
+    _parent_path_str = "cone"
+    _path_str = "cone.lightposition"
     _valid_props = {"x", "y", "z"}
 
     @property
@@ -27,11 +23,11 @@ class Lightposition(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     @property
     def y(self):
@@ -45,11 +41,11 @@ class Lightposition(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     @property
     def z(self):
@@ -63,11 +59,11 @@ class Lightposition(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     @property
     def _prop_descriptions(self):
@@ -82,13 +78,8 @@ class Lightposition(_BaseTraceHierarchyType):
             Numeric vector, representing the Z coordinate for each
             vertex.
         """
-    def __init__(self,
-            arg=None,
-            x=None,
-            y=None,
-            z=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Lightposition object
 
@@ -112,9 +103,9 @@ class Lightposition(_BaseTraceHierarchyType):
         -------
         Lightposition
         """
-        super().__init__('lightposition')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("lightposition")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -124,18 +115,18 @@ class Lightposition(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.cone.Lightposition
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.cone.Lightposition`""")
+an instance of :class:`plotly.graph_objs.cone.Lightposition`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('x', arg, x)
-        self._set_property('y', arg, y)
-        self._set_property('z', arg, z)
+        self._set_property("x", arg, x)
+        self._set_property("y", arg, y)
+        self._set_property("z", arg, z)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

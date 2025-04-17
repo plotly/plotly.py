@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,58 @@ import copy as _copy
 
 class Densitymap(_BaseTraceType):
 
-    _parent_path_str = ''
-    _path_str = 'densitymap'
-    _valid_props = {"autocolorscale", "below", "coloraxis", "colorbar", "colorscale", "customdata", "customdatasrc", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "lat", "latsrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "lon", "lonsrc", "meta", "metasrc", "name", "opacity", "radius", "radiussrc", "reversescale", "showlegend", "showscale", "stream", "subplot", "text", "textsrc", "type", "uid", "uirevision", "visible", "z", "zauto", "zmax", "zmid", "zmin", "zsrc"}
+    _parent_path_str = ""
+    _path_str = "densitymap"
+    _valid_props = {
+        "autocolorscale",
+        "below",
+        "coloraxis",
+        "colorbar",
+        "colorscale",
+        "customdata",
+        "customdatasrc",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "lat",
+        "latsrc",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "lon",
+        "lonsrc",
+        "meta",
+        "metasrc",
+        "name",
+        "opacity",
+        "radius",
+        "radiussrc",
+        "reversescale",
+        "showlegend",
+        "showscale",
+        "stream",
+        "subplot",
+        "text",
+        "textsrc",
+        "type",
+        "uid",
+        "uirevision",
+        "visible",
+        "z",
+        "zauto",
+        "zmax",
+        "zmid",
+        "zmin",
+        "zsrc",
+    }
 
     @property
     def autocolorscale(self):
@@ -32,11 +77,11 @@ class Densitymap(_BaseTraceType):
         -------
         bool
         """
-        return self['autocolorscale']
+        return self["autocolorscale"]
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self['autocolorscale'] = val
+        self["autocolorscale"] = val
 
     @property
     def below(self):
@@ -54,11 +99,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['below']
+        return self["below"]
 
     @below.setter
     def below(self, val):
-        self['below'] = val
+        self["below"] = val
 
     @property
     def coloraxis(self):
@@ -79,11 +124,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['coloraxis']
+        return self["coloraxis"]
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self['coloraxis'] = val
+        self["coloraxis"] = val
 
     @property
     def colorbar(self):
@@ -98,11 +143,11 @@ class Densitymap(_BaseTraceType):
         -------
         plotly.graph_objs.densitymap.ColorBar
         """
-        return self['colorbar']
+        return self["colorbar"]
 
     @colorbar.setter
     def colorbar(self, val):
-        self['colorbar'] = val
+        self["colorbar"] = val
 
     @property
     def colorscale(self):
@@ -149,11 +194,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
     @property
     def customdata(self):
@@ -170,11 +215,11 @@ class Densitymap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
     @property
     def customdatasrc(self):
@@ -189,11 +234,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
     @property
     def hoverinfo(self):
@@ -213,11 +258,11 @@ class Densitymap(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
     @property
     def hoverinfosrc(self):
@@ -232,11 +277,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -251,11 +296,11 @@ class Densitymap(_BaseTraceType):
         -------
         plotly.graph_objs.densitymap.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
     @property
     def hovertemplate(self):
@@ -293,11 +338,11 @@ class Densitymap(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
     @property
     def hovertemplatesrc(self):
@@ -312,11 +357,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
     @property
     def hovertext(self):
@@ -336,11 +381,11 @@ class Densitymap(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
     @property
     def hovertextsrc(self):
@@ -355,11 +400,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
     @property
     def ids(self):
@@ -375,11 +420,11 @@ class Densitymap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
     @property
     def idssrc(self):
@@ -393,11 +438,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
     @property
     def lat(self):
@@ -411,11 +456,11 @@ class Densitymap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['lat']
+        return self["lat"]
 
     @lat.setter
     def lat(self, val):
-        self['lat'] = val
+        self["lat"] = val
 
     @property
     def latsrc(self):
@@ -429,11 +474,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['latsrc']
+        return self["latsrc"]
 
     @latsrc.setter
     def latsrc(self, val):
-        self['latsrc'] = val
+        self["latsrc"] = val
 
     @property
     def legend(self):
@@ -452,11 +497,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
     @property
     def legendgroup(self):
@@ -473,11 +518,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
     @property
     def legendgrouptitle(self):
@@ -492,11 +537,11 @@ class Densitymap(_BaseTraceType):
         -------
         plotly.graph_objs.densitymap.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
     @property
     def legendrank(self):
@@ -517,11 +562,11 @@ class Densitymap(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
     @property
     def legendwidth(self):
@@ -536,11 +581,11 @@ class Densitymap(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
     @property
     def lon(self):
@@ -554,11 +599,11 @@ class Densitymap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['lon']
+        return self["lon"]
 
     @lon.setter
     def lon(self, val):
-        self['lon'] = val
+        self["lon"] = val
 
     @property
     def lonsrc(self):
@@ -572,11 +617,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['lonsrc']
+        return self["lonsrc"]
 
     @lonsrc.setter
     def lonsrc(self, val):
-        self['lonsrc'] = val
+        self["lonsrc"] = val
 
     @property
     def meta(self):
@@ -598,11 +643,11 @@ class Densitymap(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
     @property
     def metasrc(self):
@@ -616,11 +661,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
     @property
     def name(self):
@@ -636,11 +681,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def opacity(self):
@@ -654,11 +699,11 @@ class Densitymap(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def radius(self):
@@ -675,11 +720,11 @@ class Densitymap(_BaseTraceType):
         -------
         int|float|numpy.ndarray
         """
-        return self['radius']
+        return self["radius"]
 
     @radius.setter
     def radius(self, val):
-        self['radius'] = val
+        self["radius"] = val
 
     @property
     def radiussrc(self):
@@ -693,11 +738,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['radiussrc']
+        return self["radiussrc"]
 
     @radiussrc.setter
     def radiussrc(self, val):
-        self['radiussrc'] = val
+        self["radiussrc"] = val
 
     @property
     def reversescale(self):
@@ -713,11 +758,11 @@ class Densitymap(_BaseTraceType):
         -------
         bool
         """
-        return self['reversescale']
+        return self["reversescale"]
 
     @reversescale.setter
     def reversescale(self, val):
-        self['reversescale'] = val
+        self["reversescale"] = val
 
     @property
     def showlegend(self):
@@ -732,11 +777,11 @@ class Densitymap(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
     @property
     def showscale(self):
@@ -751,11 +796,11 @@ class Densitymap(_BaseTraceType):
         -------
         bool
         """
-        return self['showscale']
+        return self["showscale"]
 
     @showscale.setter
     def showscale(self, val):
-        self['showscale'] = val
+        self["showscale"] = val
 
     @property
     def stream(self):
@@ -770,11 +815,11 @@ class Densitymap(_BaseTraceType):
         -------
         plotly.graph_objs.densitymap.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
     @property
     def subplot(self):
@@ -793,11 +838,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['subplot']
+        return self["subplot"]
 
     @subplot.setter
     def subplot(self, val):
-        self['subplot'] = val
+        self["subplot"] = val
 
     @property
     def text(self):
@@ -818,11 +863,11 @@ class Densitymap(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     @property
     def textsrc(self):
@@ -836,11 +881,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -856,11 +901,11 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
     @property
     def uirevision(self):
@@ -887,11 +932,11 @@ class Densitymap(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def visible(self):
@@ -908,11 +953,11 @@ class Densitymap(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def z(self):
@@ -927,11 +972,11 @@ class Densitymap(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     @property
     def zauto(self):
@@ -948,11 +993,11 @@ class Densitymap(_BaseTraceType):
         -------
         bool
         """
-        return self['zauto']
+        return self["zauto"]
 
     @zauto.setter
     def zauto(self, val):
-        self['zauto'] = val
+        self["zauto"] = val
 
     @property
     def zmax(self):
@@ -967,11 +1012,11 @@ class Densitymap(_BaseTraceType):
         -------
         int|float
         """
-        return self['zmax']
+        return self["zmax"]
 
     @zmax.setter
     def zmax(self, val):
-        self['zmax'] = val
+        self["zmax"] = val
 
     @property
     def zmid(self):
@@ -987,11 +1032,11 @@ class Densitymap(_BaseTraceType):
         -------
         int|float
         """
-        return self['zmid']
+        return self["zmid"]
 
     @zmid.setter
     def zmid(self, val):
-        self['zmid'] = val
+        self["zmid"] = val
 
     @property
     def zmin(self):
@@ -1006,11 +1051,11 @@ class Densitymap(_BaseTraceType):
         -------
         int|float
         """
-        return self['zmin']
+        return self["zmin"]
 
     @zmin.setter
     def zmin(self, val):
-        self['zmin'] = val
+        self["zmin"] = val
 
     @property
     def zsrc(self):
@@ -1024,15 +1069,15 @@ class Densitymap(_BaseTraceType):
         -------
         str
         """
-        return self['zsrc']
+        return self["zsrc"]
 
     @zsrc.setter
     def zsrc(self, val):
-        self['zsrc'] = val
+        self["zsrc"] = val
 
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
     @property
     def _prop_descriptions(self):
@@ -1286,57 +1331,59 @@ class Densitymap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-    def __init__(self,
-            arg=None,
-            autocolorscale=None,
-            below=None,
-            coloraxis=None,
-            colorbar=None,
-            colorscale=None,
-            customdata=None,
-            customdatasrc=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            lat=None,
-            latsrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            lon=None,
-            lonsrc=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            radius=None,
-            radiussrc=None,
-            reversescale=None,
-            showlegend=None,
-            showscale=None,
-            stream=None,
-            subplot=None,
-            text=None,
-            textsrc=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            z=None,
-            zauto=None,
-            zmax=None,
-            zmid=None,
-            zmin=None,
-            zsrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        autocolorscale=None,
+        below=None,
+        coloraxis=None,
+        colorbar=None,
+        colorscale=None,
+        customdata=None,
+        customdatasrc=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        lat=None,
+        latsrc=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        lon=None,
+        lonsrc=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        opacity=None,
+        radius=None,
+        radiussrc=None,
+        reversescale=None,
+        showlegend=None,
+        showscale=None,
+        stream=None,
+        subplot=None,
+        text=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        visible=None,
+        z=None,
+        zauto=None,
+        zmax=None,
+        zmid=None,
+        zmin=None,
+        zsrc=None,
+        **kwargs,
+    ):
         """
         Construct a new Densitymap object
 
@@ -1602,9 +1649,9 @@ class Densitymap(_BaseTraceType):
         -------
         Densitymap
         """
-        super().__init__('densitymap')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("densitymap")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -1614,66 +1661,65 @@ class Densitymap(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Densitymap
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Densitymap`""")
+an instance of :class:`plotly.graph_objs.Densitymap`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
+        self._set_property("autocolorscale", arg, autocolorscale)
+        self._set_property("below", arg, below)
+        self._set_property("coloraxis", arg, coloraxis)
+        self._set_property("colorbar", arg, colorbar)
+        self._set_property("colorscale", arg, colorscale)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverinfosrc", arg, hoverinfosrc)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("hovertextsrc", arg, hovertextsrc)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("lat", arg, lat)
+        self._set_property("latsrc", arg, latsrc)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgroup", arg, legendgroup)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("lon", arg, lon)
+        self._set_property("lonsrc", arg, lonsrc)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("radius", arg, radius)
+        self._set_property("radiussrc", arg, radiussrc)
+        self._set_property("reversescale", arg, reversescale)
+        self._set_property("showlegend", arg, showlegend)
+        self._set_property("showscale", arg, showscale)
+        self._set_property("stream", arg, stream)
+        self._set_property("subplot", arg, subplot)
+        self._set_property("text", arg, text)
+        self._set_property("textsrc", arg, textsrc)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("visible", arg, visible)
+        self._set_property("z", arg, z)
+        self._set_property("zauto", arg, zauto)
+        self._set_property("zmax", arg, zmax)
+        self._set_property("zmid", arg, zmid)
+        self._set_property("zmin", arg, zmin)
+        self._set_property("zsrc", arg, zsrc)
 
-        self._set_property('autocolorscale', arg, autocolorscale)
-        self._set_property('below', arg, below)
-        self._set_property('coloraxis', arg, coloraxis)
-        self._set_property('colorbar', arg, colorbar)
-        self._set_property('colorscale', arg, colorscale)
-        self._set_property('customdata', arg, customdata)
-        self._set_property('customdatasrc', arg, customdatasrc)
-        self._set_property('hoverinfo', arg, hoverinfo)
-        self._set_property('hoverinfosrc', arg, hoverinfosrc)
-        self._set_property('hoverlabel', arg, hoverlabel)
-        self._set_property('hovertemplate', arg, hovertemplate)
-        self._set_property('hovertemplatesrc', arg, hovertemplatesrc)
-        self._set_property('hovertext', arg, hovertext)
-        self._set_property('hovertextsrc', arg, hovertextsrc)
-        self._set_property('ids', arg, ids)
-        self._set_property('idssrc', arg, idssrc)
-        self._set_property('lat', arg, lat)
-        self._set_property('latsrc', arg, latsrc)
-        self._set_property('legend', arg, legend)
-        self._set_property('legendgroup', arg, legendgroup)
-        self._set_property('legendgrouptitle', arg, legendgrouptitle)
-        self._set_property('legendrank', arg, legendrank)
-        self._set_property('legendwidth', arg, legendwidth)
-        self._set_property('lon', arg, lon)
-        self._set_property('lonsrc', arg, lonsrc)
-        self._set_property('meta', arg, meta)
-        self._set_property('metasrc', arg, metasrc)
-        self._set_property('name', arg, name)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('radius', arg, radius)
-        self._set_property('radiussrc', arg, radiussrc)
-        self._set_property('reversescale', arg, reversescale)
-        self._set_property('showlegend', arg, showlegend)
-        self._set_property('showscale', arg, showscale)
-        self._set_property('stream', arg, stream)
-        self._set_property('subplot', arg, subplot)
-        self._set_property('text', arg, text)
-        self._set_property('textsrc', arg, textsrc)
-        self._set_property('uid', arg, uid)
-        self._set_property('uirevision', arg, uirevision)
-        self._set_property('visible', arg, visible)
-        self._set_property('z', arg, z)
-        self._set_property('zauto', arg, zauto)
-        self._set_property('zmax', arg, zmax)
-        self._set_property('zmid', arg, zmid)
-        self._set_property('zmin', arg, zmin)
-        self._set_property('zsrc', arg, zsrc)
-
-
-        self._props['type'] = 'densitymap'
-        arg.pop('type', None)
+        self._props["type"] = "densitymap"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

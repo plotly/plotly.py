@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Fillgradient(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'scatter'
-    _path_str = 'scatter.fillgradient'
+    _parent_path_str = "scatter"
+    _path_str = "scatter.fillgradient"
     _valid_props = {"colorscale", "start", "stop", "type"}
 
     @property
@@ -55,11 +51,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
     @property
     def start(self):
@@ -78,11 +74,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['start']
+        return self["start"]
 
     @start.setter
     def start(self, val):
-        self['start'] = val
+        self["start"] = val
 
     @property
     def stop(self):
@@ -101,11 +97,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['stop']
+        return self["stop"]
 
     @stop.setter
     def stop(self, val):
-        self['stop'] = val
+        self["stop"] = val
 
     @property
     def type(self):
@@ -121,11 +117,11 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     @property
     def _prop_descriptions(self):
@@ -157,14 +153,10 @@ class Fillgradient(_BaseTraceHierarchyType):
             Sets the type/orientation of the color gradient for the
             fill. Defaults to "none".
         """
-    def __init__(self,
-            arg=None,
-            colorscale=None,
-            start=None,
-            stop=None,
-            type=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, colorscale=None, start=None, stop=None, type=None, **kwargs
+    ):
         """
         Construct a new Fillgradient object
 
@@ -208,9 +200,9 @@ class Fillgradient(_BaseTraceHierarchyType):
         -------
         Fillgradient
         """
-        super().__init__('fillgradient')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("fillgradient")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -220,19 +212,19 @@ class Fillgradient(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatter.Fillgradient
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter.Fillgradient`""")
+an instance of :class:`plotly.graph_objs.scatter.Fillgradient`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('colorscale', arg, colorscale)
-        self._set_property('start', arg, start)
-        self._set_property('stop', arg, stop)
-        self._set_property('type', arg, type)
+        self._set_property("colorscale", arg, colorscale)
+        self._set_property("start", arg, start)
+        self._set_property("stop", arg, stop)
+        self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

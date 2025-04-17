@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Leaf(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'icicle'
-    _path_str = 'icicle.leaf'
+    _parent_path_str = "icicle"
+    _path_str = "icicle.leaf"
     _valid_props = {"opacity"}
 
     @property
@@ -28,11 +24,11 @@ class Leaf(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def _prop_descriptions(self):
@@ -41,11 +37,8 @@ class Leaf(_BaseTraceHierarchyType):
             Sets the opacity of the leaves. With colorscale it is
             defaulted to 1; otherwise it is defaulted to 0.7
         """
-    def __init__(self,
-            arg=None,
-            opacity=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, opacity=None, **kwargs):
         """
         Construct a new Leaf object
 
@@ -62,9 +55,9 @@ class Leaf(_BaseTraceHierarchyType):
         -------
         Leaf
         """
-        super().__init__('leaf')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("leaf")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -74,16 +67,16 @@ class Leaf(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.icicle.Leaf
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.icicle.Leaf`""")
+an instance of :class:`plotly.graph_objs.icicle.Leaf`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('opacity', arg, opacity)
+        self._set_property("opacity", arg, opacity)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

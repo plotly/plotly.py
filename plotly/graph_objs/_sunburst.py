@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,59 @@ import copy as _copy
 
 class Sunburst(_BaseTraceType):
 
-    _parent_path_str = ''
-    _path_str = 'sunburst'
-    _valid_props = {"branchvalues", "count", "customdata", "customdatasrc", "domain", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "insidetextfont", "insidetextorientation", "labels", "labelssrc", "leaf", "legend", "legendgrouptitle", "legendrank", "legendwidth", "level", "marker", "maxdepth", "meta", "metasrc", "name", "opacity", "outsidetextfont", "parents", "parentssrc", "root", "rotation", "sort", "stream", "text", "textfont", "textinfo", "textsrc", "texttemplate", "texttemplatesrc", "type", "uid", "uirevision", "values", "valuessrc", "visible"}
+    _parent_path_str = ""
+    _path_str = "sunburst"
+    _valid_props = {
+        "branchvalues",
+        "count",
+        "customdata",
+        "customdatasrc",
+        "domain",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "insidetextfont",
+        "insidetextorientation",
+        "labels",
+        "labelssrc",
+        "leaf",
+        "legend",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "level",
+        "marker",
+        "maxdepth",
+        "meta",
+        "metasrc",
+        "name",
+        "opacity",
+        "outsidetextfont",
+        "parents",
+        "parentssrc",
+        "root",
+        "rotation",
+        "sort",
+        "stream",
+        "text",
+        "textfont",
+        "textinfo",
+        "textsrc",
+        "texttemplate",
+        "texttemplatesrc",
+        "type",
+        "uid",
+        "uirevision",
+        "values",
+        "valuessrc",
+        "visible",
+    }
 
     @property
     def branchvalues(self):
@@ -33,11 +79,11 @@ class Sunburst(_BaseTraceType):
         -------
         Any
         """
-        return self['branchvalues']
+        return self["branchvalues"]
 
     @branchvalues.setter
     def branchvalues(self, val):
-        self['branchvalues'] = val
+        self["branchvalues"] = val
 
     @property
     def count(self):
@@ -55,11 +101,11 @@ class Sunburst(_BaseTraceType):
         -------
         Any
         """
-        return self['count']
+        return self["count"]
 
     @count.setter
     def count(self, val):
-        self['count'] = val
+        self["count"] = val
 
     @property
     def customdata(self):
@@ -76,11 +122,11 @@ class Sunburst(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
     @property
     def customdatasrc(self):
@@ -95,11 +141,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
     @property
     def domain(self):
@@ -114,11 +160,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
     @property
     def hoverinfo(self):
@@ -138,11 +184,11 @@ class Sunburst(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
     @property
     def hoverinfosrc(self):
@@ -157,11 +203,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -176,11 +222,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
     @property
     def hovertemplate(self):
@@ -221,11 +267,11 @@ class Sunburst(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
     @property
     def hovertemplatesrc(self):
@@ -240,11 +286,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
     @property
     def hovertext(self):
@@ -264,11 +310,11 @@ class Sunburst(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
     @property
     def hovertextsrc(self):
@@ -283,11 +329,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
     @property
     def ids(self):
@@ -303,11 +349,11 @@ class Sunburst(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
     @property
     def idssrc(self):
@@ -321,11 +367,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
     @property
     def insidetextfont(self):
@@ -342,11 +388,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Insidetextfont
         """
-        return self['insidetextfont']
+        return self["insidetextfont"]
 
     @insidetextfont.setter
     def insidetextfont(self, val):
-        self['insidetextfont'] = val
+        self["insidetextfont"] = val
 
     @property
     def insidetextorientation(self):
@@ -368,11 +414,11 @@ class Sunburst(_BaseTraceType):
         -------
         Any
         """
-        return self['insidetextorientation']
+        return self["insidetextorientation"]
 
     @insidetextorientation.setter
     def insidetextorientation(self, val):
-        self['insidetextorientation'] = val
+        self["insidetextorientation"] = val
 
     @property
     def labels(self):
@@ -386,11 +432,11 @@ class Sunburst(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['labels']
+        return self["labels"]
 
     @labels.setter
     def labels(self, val):
-        self['labels'] = val
+        self["labels"] = val
 
     @property
     def labelssrc(self):
@@ -404,11 +450,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['labelssrc']
+        return self["labelssrc"]
 
     @labelssrc.setter
     def labelssrc(self, val):
-        self['labelssrc'] = val
+        self["labelssrc"] = val
 
     @property
     def leaf(self):
@@ -423,11 +469,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Leaf
         """
-        return self['leaf']
+        return self["leaf"]
 
     @leaf.setter
     def leaf(self, val):
-        self['leaf'] = val
+        self["leaf"] = val
 
     @property
     def legend(self):
@@ -446,11 +492,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
     @property
     def legendgrouptitle(self):
@@ -465,11 +511,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
     @property
     def legendrank(self):
@@ -490,11 +536,11 @@ class Sunburst(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
     @property
     def legendwidth(self):
@@ -509,11 +555,11 @@ class Sunburst(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
     @property
     def level(self):
@@ -529,11 +575,11 @@ class Sunburst(_BaseTraceType):
         -------
         Any
         """
-        return self['level']
+        return self["level"]
 
     @level.setter
     def level(self, val):
-        self['level'] = val
+        self["level"] = val
 
     @property
     def marker(self):
@@ -548,11 +594,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
     @property
     def maxdepth(self):
@@ -567,11 +613,11 @@ class Sunburst(_BaseTraceType):
         -------
         int
         """
-        return self['maxdepth']
+        return self["maxdepth"]
 
     @maxdepth.setter
     def maxdepth(self, val):
-        self['maxdepth'] = val
+        self["maxdepth"] = val
 
     @property
     def meta(self):
@@ -593,11 +639,11 @@ class Sunburst(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
     @property
     def metasrc(self):
@@ -611,11 +657,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
     @property
     def name(self):
@@ -631,11 +677,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def opacity(self):
@@ -649,11 +695,11 @@ class Sunburst(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def outsidetextfont(self):
@@ -674,11 +720,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Outsidetextfont
         """
-        return self['outsidetextfont']
+        return self["outsidetextfont"]
 
     @outsidetextfont.setter
     def outsidetextfont(self, val):
-        self['outsidetextfont'] = val
+        self["outsidetextfont"] = val
 
     @property
     def parents(self):
@@ -697,11 +743,11 @@ class Sunburst(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['parents']
+        return self["parents"]
 
     @parents.setter
     def parents(self, val):
-        self['parents'] = val
+        self["parents"] = val
 
     @property
     def parentssrc(self):
@@ -715,11 +761,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['parentssrc']
+        return self["parentssrc"]
 
     @parentssrc.setter
     def parentssrc(self, val):
-        self['parentssrc'] = val
+        self["parentssrc"] = val
 
     @property
     def root(self):
@@ -734,11 +780,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Root
         """
-        return self['root']
+        return self["root"]
 
     @root.setter
     def root(self, val):
-        self['root'] = val
+        self["root"] = val
 
     @property
     def rotation(self):
@@ -755,11 +801,11 @@ class Sunburst(_BaseTraceType):
         -------
         int|float
         """
-        return self['rotation']
+        return self["rotation"]
 
     @rotation.setter
     def rotation(self, val):
-        self['rotation'] = val
+        self["rotation"] = val
 
     @property
     def sort(self):
@@ -774,11 +820,11 @@ class Sunburst(_BaseTraceType):
         -------
         bool
         """
-        return self['sort']
+        return self["sort"]
 
     @sort.setter
     def sort(self, val):
-        self['sort'] = val
+        self["sort"] = val
 
     @property
     def stream(self):
@@ -793,11 +839,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
     @property
     def text(self):
@@ -815,11 +861,11 @@ class Sunburst(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     @property
     def textfont(self):
@@ -836,11 +882,11 @@ class Sunburst(_BaseTraceType):
         -------
         plotly.graph_objs.sunburst.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
     @property
     def textinfo(self):
@@ -857,11 +903,11 @@ class Sunburst(_BaseTraceType):
         -------
         Any
         """
-        return self['textinfo']
+        return self["textinfo"]
 
     @textinfo.setter
     def textinfo(self, val):
-        self['textinfo'] = val
+        self["textinfo"] = val
 
     @property
     def textsrc(self):
@@ -875,11 +921,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
     @property
     def texttemplate(self):
@@ -909,11 +955,11 @@ class Sunburst(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['texttemplate']
+        return self["texttemplate"]
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self['texttemplate'] = val
+        self["texttemplate"] = val
 
     @property
     def texttemplatesrc(self):
@@ -928,11 +974,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['texttemplatesrc']
+        return self["texttemplatesrc"]
 
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
-        self['texttemplatesrc'] = val
+        self["texttemplatesrc"] = val
 
     @property
     def uid(self):
@@ -948,11 +994,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
     @property
     def uirevision(self):
@@ -979,11 +1025,11 @@ class Sunburst(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def values(self):
@@ -998,11 +1044,11 @@ class Sunburst(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
     @property
     def valuessrc(self):
@@ -1016,11 +1062,11 @@ class Sunburst(_BaseTraceType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
     @property
     def visible(self):
@@ -1037,15 +1083,15 @@ class Sunburst(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
     @property
     def _prop_descriptions(self):
@@ -1310,58 +1356,60 @@ class Sunburst(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-    def __init__(self,
-            arg=None,
-            branchvalues=None,
-            count=None,
-            customdata=None,
-            customdatasrc=None,
-            domain=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            insidetextfont=None,
-            insidetextorientation=None,
-            labels=None,
-            labelssrc=None,
-            leaf=None,
-            legend=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            level=None,
-            marker=None,
-            maxdepth=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            opacity=None,
-            outsidetextfont=None,
-            parents=None,
-            parentssrc=None,
-            root=None,
-            rotation=None,
-            sort=None,
-            stream=None,
-            text=None,
-            textfont=None,
-            textinfo=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            uid=None,
-            uirevision=None,
-            values=None,
-            valuessrc=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        branchvalues=None,
+        count=None,
+        customdata=None,
+        customdatasrc=None,
+        domain=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        insidetextfont=None,
+        insidetextorientation=None,
+        labels=None,
+        labelssrc=None,
+        leaf=None,
+        legend=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        level=None,
+        marker=None,
+        maxdepth=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        opacity=None,
+        outsidetextfont=None,
+        parents=None,
+        parentssrc=None,
+        root=None,
+        rotation=None,
+        sort=None,
+        stream=None,
+        text=None,
+        textfont=None,
+        textinfo=None,
+        textsrc=None,
+        texttemplate=None,
+        texttemplatesrc=None,
+        uid=None,
+        uirevision=None,
+        values=None,
+        valuessrc=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Sunburst object
 
@@ -1638,9 +1686,9 @@ class Sunburst(_BaseTraceType):
         -------
         Sunburst
         """
-        super().__init__('sunburst')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("sunburst")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -1650,67 +1698,66 @@ class Sunburst(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Sunburst
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Sunburst`""")
+an instance of :class:`plotly.graph_objs.Sunburst`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
+        self._set_property("branchvalues", arg, branchvalues)
+        self._set_property("count", arg, count)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("domain", arg, domain)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverinfosrc", arg, hoverinfosrc)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("hovertextsrc", arg, hovertextsrc)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("insidetextfont", arg, insidetextfont)
+        self._set_property("insidetextorientation", arg, insidetextorientation)
+        self._set_property("labels", arg, labels)
+        self._set_property("labelssrc", arg, labelssrc)
+        self._set_property("leaf", arg, leaf)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("level", arg, level)
+        self._set_property("marker", arg, marker)
+        self._set_property("maxdepth", arg, maxdepth)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("outsidetextfont", arg, outsidetextfont)
+        self._set_property("parents", arg, parents)
+        self._set_property("parentssrc", arg, parentssrc)
+        self._set_property("root", arg, root)
+        self._set_property("rotation", arg, rotation)
+        self._set_property("sort", arg, sort)
+        self._set_property("stream", arg, stream)
+        self._set_property("text", arg, text)
+        self._set_property("textfont", arg, textfont)
+        self._set_property("textinfo", arg, textinfo)
+        self._set_property("textsrc", arg, textsrc)
+        self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatesrc", arg, texttemplatesrc)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
 
-        self._set_property('branchvalues', arg, branchvalues)
-        self._set_property('count', arg, count)
-        self._set_property('customdata', arg, customdata)
-        self._set_property('customdatasrc', arg, customdatasrc)
-        self._set_property('domain', arg, domain)
-        self._set_property('hoverinfo', arg, hoverinfo)
-        self._set_property('hoverinfosrc', arg, hoverinfosrc)
-        self._set_property('hoverlabel', arg, hoverlabel)
-        self._set_property('hovertemplate', arg, hovertemplate)
-        self._set_property('hovertemplatesrc', arg, hovertemplatesrc)
-        self._set_property('hovertext', arg, hovertext)
-        self._set_property('hovertextsrc', arg, hovertextsrc)
-        self._set_property('ids', arg, ids)
-        self._set_property('idssrc', arg, idssrc)
-        self._set_property('insidetextfont', arg, insidetextfont)
-        self._set_property('insidetextorientation', arg, insidetextorientation)
-        self._set_property('labels', arg, labels)
-        self._set_property('labelssrc', arg, labelssrc)
-        self._set_property('leaf', arg, leaf)
-        self._set_property('legend', arg, legend)
-        self._set_property('legendgrouptitle', arg, legendgrouptitle)
-        self._set_property('legendrank', arg, legendrank)
-        self._set_property('legendwidth', arg, legendwidth)
-        self._set_property('level', arg, level)
-        self._set_property('marker', arg, marker)
-        self._set_property('maxdepth', arg, maxdepth)
-        self._set_property('meta', arg, meta)
-        self._set_property('metasrc', arg, metasrc)
-        self._set_property('name', arg, name)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('outsidetextfont', arg, outsidetextfont)
-        self._set_property('parents', arg, parents)
-        self._set_property('parentssrc', arg, parentssrc)
-        self._set_property('root', arg, root)
-        self._set_property('rotation', arg, rotation)
-        self._set_property('sort', arg, sort)
-        self._set_property('stream', arg, stream)
-        self._set_property('text', arg, text)
-        self._set_property('textfont', arg, textfont)
-        self._set_property('textinfo', arg, textinfo)
-        self._set_property('textsrc', arg, textsrc)
-        self._set_property('texttemplate', arg, texttemplate)
-        self._set_property('texttemplatesrc', arg, texttemplatesrc)
-        self._set_property('uid', arg, uid)
-        self._set_property('uirevision', arg, uirevision)
-        self._set_property('values', arg, values)
-        self._set_property('valuessrc', arg, valuessrc)
-        self._set_property('visible', arg, visible)
-
-
-        self._props['type'] = 'sunburst'
-        arg.pop('type', None)
+        self._props["type"] = "sunburst"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

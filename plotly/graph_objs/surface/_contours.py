@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Contours(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'surface'
-    _path_str = 'surface.contours'
+    _parent_path_str = "surface"
+    _path_str = "surface.contours"
     _valid_props = {"x", "y", "z"}
 
     @property
@@ -28,11 +24,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.X
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     @property
     def y(self):
@@ -47,11 +43,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.Y
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     @property
     def z(self):
@@ -66,11 +62,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.Z
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     @property
     def _prop_descriptions(self):
@@ -85,13 +81,8 @@ class Contours(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.surface.contours.Z`
             instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            x=None,
-            y=None,
-            z=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Contours object
 
@@ -115,9 +106,9 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Contours
         """
-        super().__init__('contours')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("contours")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -127,18 +118,18 @@ class Contours(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.surface.Contours
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.Contours`""")
+an instance of :class:`plotly.graph_objs.surface.Contours`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('x', arg, x)
-        self._set_property('y', arg, y)
-        self._set_property('z', arg, z)
+        self._set_property("x", arg, x)
+        self._set_property("y", arg, y)
+        self._set_property("z", arg, z)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

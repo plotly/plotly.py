@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,17 @@ import copy as _copy
 
 class Button(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.xaxis.rangeselector'
-    _path_str = 'layout.xaxis.rangeselector.button'
-    _valid_props = {"count", "label", "name", "step", "stepmode", "templateitemname", "visible"}
+    _parent_path_str = "layout.xaxis.rangeselector"
+    _path_str = "layout.xaxis.rangeselector.button"
+    _valid_props = {
+        "count",
+        "label",
+        "name",
+        "step",
+        "stepmode",
+        "templateitemname",
+        "visible",
+    }
 
     @property
     def count(self):
@@ -28,11 +32,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['count']
+        return self["count"]
 
     @count.setter
     def count(self, val):
-        self['count'] = val
+        self["count"] = val
 
     @property
     def label(self):
@@ -47,11 +51,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     @property
     def name(self):
@@ -72,11 +76,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def step(self):
@@ -93,11 +97,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['step']
+        return self["step"]
 
     @step.setter
     def step(self, val):
-        self['step'] = val
+        self["step"] = val
 
     @property
     def stepmode(self):
@@ -120,11 +124,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['stepmode']
+        return self["stepmode"]
 
     @stepmode.setter
     def stepmode(self, val):
-        self['stepmode'] = val
+        self["stepmode"] = val
 
     @property
     def templateitemname(self):
@@ -146,11 +150,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     @property
     def visible(self):
@@ -164,11 +168,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def _prop_descriptions(self):
@@ -214,17 +218,19 @@ class Button(_BaseLayoutHierarchyType):
         visible
             Determines whether or not this button is visible.
         """
-    def __init__(self,
-            arg=None,
-            count=None,
-            label=None,
-            name=None,
-            step=None,
-            stepmode=None,
-            templateitemname=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        count=None,
+        label=None,
+        name=None,
+        step=None,
+        stepmode=None,
+        templateitemname=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Button object
 
@@ -282,9 +288,9 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Button
         """
-        super().__init__('buttons')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("buttons")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -294,22 +300,22 @@ class Button(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.xaxis.rangeselector.Button
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`""")
+an instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('count', arg, count)
-        self._set_property('label', arg, label)
-        self._set_property('name', arg, name)
-        self._set_property('step', arg, step)
-        self._set_property('stepmode', arg, stepmode)
-        self._set_property('templateitemname', arg, templateitemname)
-        self._set_property('visible', arg, visible)
+        self._set_property("count", arg, count)
+        self._set_property("label", arg, label)
+        self._set_property("name", arg, name)
+        self._set_property("step", arg, step)
+        self._set_property("stepmode", arg, stepmode)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

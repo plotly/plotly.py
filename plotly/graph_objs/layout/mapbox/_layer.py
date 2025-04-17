@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,28 @@ import copy as _copy
 
 class Layer(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.mapbox'
-    _path_str = 'layout.mapbox.layer'
-    _valid_props = {"below", "circle", "color", "coordinates", "fill", "line", "maxzoom", "minzoom", "name", "opacity", "source", "sourceattribution", "sourcelayer", "sourcetype", "symbol", "templateitemname", "type", "visible"}
+    _parent_path_str = "layout.mapbox"
+    _path_str = "layout.mapbox.layer"
+    _valid_props = {
+        "below",
+        "circle",
+        "color",
+        "coordinates",
+        "fill",
+        "line",
+        "maxzoom",
+        "minzoom",
+        "name",
+        "opacity",
+        "source",
+        "sourceattribution",
+        "sourcelayer",
+        "sourcetype",
+        "symbol",
+        "templateitemname",
+        "type",
+        "visible",
+    }
 
     @property
     def below(self):
@@ -30,11 +45,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['below']
+        return self["below"]
 
     @below.setter
     def below(self, val):
-        self['below'] = val
+        self["below"] = val
 
     @property
     def circle(self):
@@ -49,11 +64,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.Circle
         """
-        return self['circle']
+        return self["circle"]
 
     @circle.setter
     def circle(self, val):
-        self['circle'] = val
+        self["circle"] = val
 
     @property
     def color(self):
@@ -77,11 +92,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def coordinates(self):
@@ -97,11 +112,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['coordinates']
+        return self["coordinates"]
 
     @coordinates.setter
     def coordinates(self, val):
-        self['coordinates'] = val
+        self["coordinates"] = val
 
     @property
     def fill(self):
@@ -116,11 +131,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.Fill
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     @property
     def line(self):
@@ -135,11 +150,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     @property
     def maxzoom(self):
@@ -155,11 +170,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['maxzoom']
+        return self["maxzoom"]
 
     @maxzoom.setter
     def maxzoom(self, val):
-        self['maxzoom'] = val
+        self["maxzoom"] = val
 
     @property
     def minzoom(self):
@@ -174,11 +189,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['minzoom']
+        return self["minzoom"]
 
     @minzoom.setter
     def minzoom(self, val):
-        self['minzoom'] = val
+        self["minzoom"] = val
 
     @property
     def name(self):
@@ -199,11 +214,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def opacity(self):
@@ -224,11 +239,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def source(self):
@@ -246,11 +261,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['source']
+        return self["source"]
 
     @source.setter
     def source(self, val):
-        self['source'] = val
+        self["source"] = val
 
     @property
     def sourceattribution(self):
@@ -265,11 +280,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['sourceattribution']
+        return self["sourceattribution"]
 
     @sourceattribution.setter
     def sourceattribution(self, val):
-        self['sourceattribution'] = val
+        self["sourceattribution"] = val
 
     @property
     def sourcelayer(self):
@@ -286,11 +301,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['sourcelayer']
+        return self["sourcelayer"]
 
     @sourcelayer.setter
     def sourcelayer(self, val):
-        self['sourcelayer'] = val
+        self["sourcelayer"] = val
 
     @property
     def sourcetype(self):
@@ -306,11 +321,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['sourcetype']
+        return self["sourcetype"]
 
     @sourcetype.setter
     def sourcetype(self, val):
-        self['sourcetype'] = val
+        self["sourcetype"] = val
 
     @property
     def symbol(self):
@@ -325,11 +340,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.Symbol
         """
-        return self['symbol']
+        return self["symbol"]
 
     @symbol.setter
     def symbol(self, val):
-        self['symbol'] = val
+        self["symbol"] = val
 
     @property
     def templateitemname(self):
@@ -351,11 +366,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     @property
     def type(self):
@@ -377,11 +392,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     @property
     def visible(self):
@@ -395,11 +410,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def _prop_descriptions(self):
@@ -503,28 +518,30 @@ class Layer(_BaseLayoutHierarchyType):
         visible
             Determines whether this layer is displayed
         """
-    def __init__(self,
-            arg=None,
-            below=None,
-            circle=None,
-            color=None,
-            coordinates=None,
-            fill=None,
-            line=None,
-            maxzoom=None,
-            minzoom=None,
-            name=None,
-            opacity=None,
-            source=None,
-            sourceattribution=None,
-            sourcelayer=None,
-            sourcetype=None,
-            symbol=None,
-            templateitemname=None,
-            type=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        below=None,
+        circle=None,
+        color=None,
+        coordinates=None,
+        fill=None,
+        line=None,
+        maxzoom=None,
+        minzoom=None,
+        name=None,
+        opacity=None,
+        source=None,
+        sourceattribution=None,
+        sourcelayer=None,
+        sourcetype=None,
+        symbol=None,
+        templateitemname=None,
+        type=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Layer object
 
@@ -637,9 +654,9 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Layer
         """
-        super().__init__('layers')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("layers")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -649,33 +666,33 @@ class Layer(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.mapbox.Layer
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.mapbox.Layer`""")
+an instance of :class:`plotly.graph_objs.layout.mapbox.Layer`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('below', arg, below)
-        self._set_property('circle', arg, circle)
-        self._set_property('color', arg, color)
-        self._set_property('coordinates', arg, coordinates)
-        self._set_property('fill', arg, fill)
-        self._set_property('line', arg, line)
-        self._set_property('maxzoom', arg, maxzoom)
-        self._set_property('minzoom', arg, minzoom)
-        self._set_property('name', arg, name)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('source', arg, source)
-        self._set_property('sourceattribution', arg, sourceattribution)
-        self._set_property('sourcelayer', arg, sourcelayer)
-        self._set_property('sourcetype', arg, sourcetype)
-        self._set_property('symbol', arg, symbol)
-        self._set_property('templateitemname', arg, templateitemname)
-        self._set_property('type', arg, type)
-        self._set_property('visible', arg, visible)
+        self._set_property("below", arg, below)
+        self._set_property("circle", arg, circle)
+        self._set_property("color", arg, color)
+        self._set_property("coordinates", arg, coordinates)
+        self._set_property("fill", arg, fill)
+        self._set_property("line", arg, line)
+        self._set_property("maxzoom", arg, maxzoom)
+        self._set_property("minzoom", arg, minzoom)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("source", arg, source)
+        self._set_property("sourceattribution", arg, sourceattribution)
+        self._set_property("sourcelayer", arg, sourcelayer)
+        self._set_property("sourcetype", arg, sourcetype)
+        self._set_property("symbol", arg, symbol)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("type", arg, type)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

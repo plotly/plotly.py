@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Starts(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'streamtube'
-    _path_str = 'streamtube.starts'
+    _parent_path_str = "streamtube"
+    _path_str = "streamtube.starts"
     _valid_props = {"x", "xsrc", "y", "ysrc", "z", "zsrc"}
 
     @property
@@ -28,11 +24,11 @@ class Starts(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     @property
     def xsrc(self):
@@ -46,11 +42,11 @@ class Starts(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
     @property
     def y(self):
@@ -65,11 +61,11 @@ class Starts(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     @property
     def ysrc(self):
@@ -83,11 +79,11 @@ class Starts(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
     @property
     def z(self):
@@ -102,11 +98,11 @@ class Starts(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     @property
     def zsrc(self):
@@ -120,11 +116,11 @@ class Starts(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['zsrc']
+        return self["zsrc"]
 
     @zsrc.setter
     def zsrc(self, val):
-        self['zsrc'] = val
+        self["zsrc"] = val
 
     @property
     def _prop_descriptions(self):
@@ -148,16 +144,18 @@ class Starts(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-    def __init__(self,
-            arg=None,
-            x=None,
-            xsrc=None,
-            y=None,
-            ysrc=None,
-            z=None,
-            zsrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        x=None,
+        xsrc=None,
+        y=None,
+        ysrc=None,
+        z=None,
+        zsrc=None,
+        **kwargs,
+    ):
         """
         Construct a new Starts object
 
@@ -190,9 +188,9 @@ class Starts(_BaseTraceHierarchyType):
         -------
         Starts
         """
-        super().__init__('starts')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("starts")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -202,21 +200,21 @@ class Starts(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.streamtube.Starts
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.streamtube.Starts`""")
+an instance of :class:`plotly.graph_objs.streamtube.Starts`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('x', arg, x)
-        self._set_property('xsrc', arg, xsrc)
-        self._set_property('y', arg, y)
-        self._set_property('ysrc', arg, ysrc)
-        self._set_property('z', arg, z)
-        self._set_property('zsrc', arg, zsrc)
+        self._set_property("x", arg, x)
+        self._set_property("xsrc", arg, xsrc)
+        self._set_property("y", arg, y)
+        self._set_property("ysrc", arg, ysrc)
+        self._set_property("z", arg, z)
+        self._set_property("zsrc", arg, zsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
