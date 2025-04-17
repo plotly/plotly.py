@@ -70,7 +70,6 @@ Publishing to PyPI:
 ### Update documentation site
 
 1. Search for the previous version string in the docs and replace it with the new version string, including but not necessarily limited to the following files:
-    - `doc/python/getting-started.md`
     - `doc/apidoc/conf.py`
     - `doc/requirements.txt`
 2. `doc-prod` should already have been merged on a regular basis into `main`, but
