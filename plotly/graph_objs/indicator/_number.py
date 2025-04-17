@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Number(_BaseTraceHierarchyType):
 
-    _parent_path_str = "indicator"
-    _path_str = "indicator.number"
+    _parent_path_str = 'indicator'
+    _path_str = 'indicator.number'
     _valid_props = {"font", "prefix", "suffix", "valueformat"}
 
     @property
@@ -26,11 +30,11 @@ class Number(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.number.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     @property
     def prefix(self):
@@ -45,11 +49,11 @@ class Number(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["prefix"]
+        return self['prefix']
 
     @prefix.setter
     def prefix(self, val):
-        self["prefix"] = val
+        self['prefix'] = val
 
     @property
     def suffix(self):
@@ -64,11 +68,11 @@ class Number(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["suffix"]
+        return self['suffix']
 
     @suffix.setter
     def suffix(self, val):
-        self["suffix"] = val
+        self['suffix'] = val
 
     @property
     def valueformat(self):
@@ -86,11 +90,11 @@ class Number(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["valueformat"]
+        return self['valueformat']
 
     @valueformat.setter
     def valueformat(self, val):
-        self["valueformat"] = val
+        self['valueformat'] = val
 
     @property
     def _prop_descriptions(self):
@@ -107,10 +111,14 @@ class Number(_BaseTraceHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
         """
-
-    def __init__(
-        self, arg=None, font=None, prefix=None, suffix=None, valueformat=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            font=None,
+            prefix=None,
+            suffix=None,
+            valueformat=None,
+            **kwargs
+        ):
         """
         Construct a new Number object
 
@@ -136,9 +144,9 @@ class Number(_BaseTraceHierarchyType):
         -------
         Number
         """
-        super().__init__("number")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('number')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -148,19 +156,19 @@ class Number(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.Number
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Number`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.Number`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("font", arg, font)
-        self._set_property("prefix", arg, prefix)
-        self._set_property("suffix", arg, suffix)
-        self._set_property("valueformat", arg, valueformat)
+
+        self._set_property('font', arg, font)
+        self._set_property('prefix', arg, prefix)
+        self._set_property('suffix', arg, suffix)
+        self._set_property('valueformat', arg, valueformat)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

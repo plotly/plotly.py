@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Decreasing(_BaseTraceHierarchyType):
 
-    _parent_path_str = "indicator.delta"
-    _path_str = "indicator.delta.decreasing"
+    _parent_path_str = 'indicator.delta'
+    _path_str = 'indicator.delta.decreasing'
     _valid_props = {"color", "symbol"}
 
     @property
@@ -27,11 +31,11 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     @property
     def symbol(self):
@@ -46,11 +50,11 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["symbol"]
+        return self['symbol']
 
     @symbol.setter
     def symbol(self, val):
-        self["symbol"] = val
+        self['symbol'] = val
 
     @property
     def _prop_descriptions(self):
@@ -60,8 +64,12 @@ class Decreasing(_BaseTraceHierarchyType):
         symbol
             Sets the symbol to display for increasing value
         """
-
-    def __init__(self, arg=None, color=None, symbol=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            color=None,
+            symbol=None,
+            **kwargs
+        ):
         """
         Construct a new Decreasing object
 
@@ -80,9 +88,9 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         Decreasing
         """
-        super().__init__("decreasing")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('decreasing')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -92,17 +100,17 @@ class Decreasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.delta.Decreasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("color", arg, color)
-        self._set_property("symbol", arg, symbol)
+
+        self._set_property('color', arg, color)
+        self._set_property('symbol', arg, symbol)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

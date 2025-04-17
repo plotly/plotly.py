@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Title(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.scene.yaxis"
-    _path_str = "layout.scene.yaxis.title"
+    _parent_path_str = 'layout.scene.yaxis'
+    _path_str = 'layout.scene.yaxis.title'
     _valid_props = {"font", "text"}
 
     @property
@@ -26,11 +30,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.yaxis.title.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     @property
     def text(self):
@@ -45,11 +49,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     @property
     def _prop_descriptions(self):
@@ -59,8 +63,12 @@ class Title(_BaseLayoutHierarchyType):
         text
             Sets the title of this axis.
         """
-
-    def __init__(self, arg=None, font=None, text=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            font=None,
+            text=None,
+            **kwargs
+        ):
         """
         Construct a new Title object
 
@@ -79,9 +87,9 @@ class Title(_BaseLayoutHierarchyType):
         -------
         Title
         """
-        super().__init__("title")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('title')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -91,17 +99,17 @@ class Title(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.scene.yaxis.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.yaxis.Title`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.scene.yaxis.Title`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("font", arg, font)
-        self._set_property("text", arg, text)
+
+        self._set_property('font', arg, font)
+        self._set_property('text', arg, text)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

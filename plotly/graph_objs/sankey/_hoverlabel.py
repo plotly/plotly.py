@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,19 +11,9 @@ import copy as _copy
 
 class Hoverlabel(_BaseTraceHierarchyType):
 
-    _parent_path_str = "sankey"
-    _path_str = "sankey.hoverlabel"
-    _valid_props = {
-        "align",
-        "alignsrc",
-        "bgcolor",
-        "bgcolorsrc",
-        "bordercolor",
-        "bordercolorsrc",
-        "font",
-        "namelength",
-        "namelengthsrc",
-    }
+    _parent_path_str = 'sankey'
+    _path_str = 'sankey.hoverlabel'
+    _valid_props = {"align", "alignsrc", "bgcolor", "bgcolorsrc", "bordercolor", "bordercolorsrc", "font", "namelength", "namelengthsrc"}
 
     @property
     def align(self):
@@ -37,11 +31,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self["align"]
+        return self['align']
 
     @align.setter
     def align(self, val):
-        self["align"] = val
+        self['align'] = val
 
     @property
     def alignsrc(self):
@@ -55,11 +49,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["alignsrc"]
+        return self['alignsrc']
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self["alignsrc"] = val
+        self['alignsrc'] = val
 
     @property
     def bgcolor(self):
@@ -78,11 +72,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self["bgcolor"]
+        return self['bgcolor']
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self["bgcolor"] = val
+        self['bgcolor'] = val
 
     @property
     def bgcolorsrc(self):
@@ -96,11 +90,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["bgcolorsrc"]
+        return self['bgcolorsrc']
 
     @bgcolorsrc.setter
     def bgcolorsrc(self, val):
-        self["bgcolorsrc"] = val
+        self['bgcolorsrc'] = val
 
     @property
     def bordercolor(self):
@@ -119,11 +113,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self["bordercolor"]
+        return self['bordercolor']
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self["bordercolor"] = val
+        self['bordercolor'] = val
 
     @property
     def bordercolorsrc(self):
@@ -138,11 +132,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["bordercolorsrc"]
+        return self['bordercolorsrc']
 
     @bordercolorsrc.setter
     def bordercolorsrc(self, val):
-        self["bordercolorsrc"] = val
+        self['bordercolorsrc'] = val
 
     @property
     def font(self):
@@ -159,11 +153,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.sankey.hoverlabel.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     @property
     def namelength(self):
@@ -184,11 +178,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         int|numpy.ndarray
         """
-        return self["namelength"]
+        return self['namelength']
 
     @namelength.setter
     def namelength(self, val):
-        self["namelength"] = val
+        self['namelength'] = val
 
     @property
     def namelengthsrc(self):
@@ -203,11 +197,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["namelengthsrc"]
+        return self['namelengthsrc']
 
     @namelengthsrc.setter
     def namelengthsrc(self, val):
-        self["namelengthsrc"] = val
+        self['namelengthsrc'] = val
 
     @property
     def _prop_descriptions(self):
@@ -245,21 +239,19 @@ class Hoverlabel(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `namelength`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        align=None,
-        alignsrc=None,
-        bgcolor=None,
-        bgcolorsrc=None,
-        bordercolor=None,
-        bordercolorsrc=None,
-        font=None,
-        namelength=None,
-        namelengthsrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            align=None,
+            alignsrc=None,
+            bgcolor=None,
+            bgcolorsrc=None,
+            bordercolor=None,
+            bordercolorsrc=None,
+            font=None,
+            namelength=None,
+            namelengthsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Hoverlabel object
 
@@ -306,9 +298,9 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Hoverlabel
         """
-        super().__init__("hoverlabel")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('hoverlabel')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -318,24 +310,24 @@ class Hoverlabel(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.sankey.Hoverlabel
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.sankey.Hoverlabel`"""
-            )
+an instance of :class:`plotly.graph_objs.sankey.Hoverlabel`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("align", arg, align)
-        self._set_property("alignsrc", arg, alignsrc)
-        self._set_property("bgcolor", arg, bgcolor)
-        self._set_property("bgcolorsrc", arg, bgcolorsrc)
-        self._set_property("bordercolor", arg, bordercolor)
-        self._set_property("bordercolorsrc", arg, bordercolorsrc)
-        self._set_property("font", arg, font)
-        self._set_property("namelength", arg, namelength)
-        self._set_property("namelengthsrc", arg, namelengthsrc)
+
+        self._set_property('align', arg, align)
+        self._set_property('alignsrc', arg, alignsrc)
+        self._set_property('bgcolor', arg, bgcolor)
+        self._set_property('bgcolorsrc', arg, bgcolorsrc)
+        self._set_property('bordercolor', arg, bordercolor)
+        self._set_property('bordercolorsrc', arg, bordercolorsrc)
+        self._set_property('font', arg, font)
+        self._set_property('namelength', arg, namelength)
+        self._set_property('namelengthsrc', arg, namelengthsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

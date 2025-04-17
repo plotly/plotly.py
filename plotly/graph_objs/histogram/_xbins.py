@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class XBins(_BaseTraceHierarchyType):
 
-    _parent_path_str = "histogram"
-    _path_str = "histogram.xbins"
+    _parent_path_str = 'histogram'
+    _path_str = 'histogram.xbins'
     _valid_props = {"end", "size", "start"}
 
     @property
@@ -27,11 +31,11 @@ class XBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["end"]
+        return self['end']
 
     @end.setter
     def end(self, val):
-        self["end"] = val
+        self['end'] = val
 
     @property
     def size(self):
@@ -55,11 +59,11 @@ class XBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     @property
     def start(self):
@@ -84,11 +88,11 @@ class XBins(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["start"]
+        return self['start']
 
     @start.setter
     def start(self, val):
-        self["start"] = val
+        self['start'] = val
 
     @property
     def _prop_descriptions(self):
@@ -131,8 +135,13 @@ class XBins(_BaseTraceHierarchyType):
             are shifted down (if necessary) to differ from that one
             by an integer number of bins.
         """
-
-    def __init__(self, arg=None, end=None, size=None, start=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            end=None,
+            size=None,
+            start=None,
+            **kwargs
+        ):
         """
         Construct a new XBins object
 
@@ -184,9 +193,9 @@ class XBins(_BaseTraceHierarchyType):
         -------
         XBins
         """
-        super().__init__("xbins")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('xbins')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -196,18 +205,18 @@ class XBins(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.histogram.XBins
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram.XBins`"""
-            )
+an instance of :class:`plotly.graph_objs.histogram.XBins`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("end", arg, end)
-        self._set_property("size", arg, size)
-        self._set_property("start", arg, start)
+
+        self._set_property('end', arg, end)
+        self._set_property('size', arg, size)
+        self._set_property('start', arg, start)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
