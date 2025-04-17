@@ -1,11 +1,11 @@
-import _plotly_utils.basevalidators
+import _plotly_utils.basevalidators as _bv
 
 
-class OffsetValidator(_plotly_utils.basevalidators.NumberValidator):
+class OffsetValidator(_bv.NumberValidator):
     def __init__(self, plotly_name="offset", parent_name="barpolar", **kwargs):
-        super(OffsetValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             **kwargs,

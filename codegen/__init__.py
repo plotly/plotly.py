@@ -26,6 +26,10 @@ from codegen.validators import (
     get_data_validator_instance,
 )
 
+# Target Python version for code formatting with Black.
+# Must be one of the values listed in pyproject.toml.
+BLACK_TARGET_VERSION = "py311"
+
 
 # Import notes
 # ------------
@@ -85,7 +89,7 @@ an item with matching `templateitemname` and `visible: false`.""",
         items["colorscale"] = items.pop("concentrationscales")
 
 
-def perform_codegen():
+def perform_codegen(reformat=True):
     # Set root codegen output directory
     # ---------------------------------
     # (relative to project root)
@@ -267,36 +271,24 @@ def perform_codegen():
         root_datatype_imports.append(f"._deprecations.{dep_clas}")
 
     optional_figure_widget_import = f"""
-if sys.version_info < (3, 7) or TYPE_CHECKING:
-    try:
-        import ipywidgets as _ipywidgets
-        from packaging.version import Version as _Version
-        if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
-            from ..graph_objs._figurewidget import FigureWidget
-        else:
-            raise ImportError()
-    except Exception:
-        from ..missing_anywidget import FigureWidget
-else:
-    __all__.append("FigureWidget")
-    orig_getattr = __getattr__
-    def __getattr__(import_name):
-        if import_name == "FigureWidget":
-            try:
-                import ipywidgets
-                from packaging.version import Version
+__all__.append("FigureWidget")
+orig_getattr = __getattr__
+def __getattr__(import_name):
+    if import_name == "FigureWidget":
+        try:
+            import ipywidgets
+            from packaging.version import Version
 
-                if Version(ipywidgets.__version__) >= Version("7.0.0"):
-                    from ..graph_objs._figurewidget import FigureWidget
-
-                    return FigureWidget
-                else:
-                    raise ImportError()
-            except Exception:
-                from ..missing_anywidget import FigureWidget
+            if Version(ipywidgets.__version__) >= Version("7.0.0"):
+                from ..graph_objs._figurewidget import FigureWidget
                 return FigureWidget
+            else:
+                raise ImportError()
+        except Exception:
+            from ..missing_anywidget import FigureWidget
+            return FigureWidget
 
-        return orig_getattr(import_name)
+    return orig_getattr(import_name)
 """
     # ### __all__ ###
     for path_parts, class_names in alls.items():
@@ -337,9 +329,13 @@ else:
         f.write(graph_objects_init_source)
 
     # ### Run black code formatter on output directories ###
-    subprocess.call(["black", "--target-version=py36", validators_pkgdir])
-    subprocess.call(["black", "--target-version=py36", graph_objs_pkgdir])
-    subprocess.call(["black", "--target-version=py36", graph_objects_path])
+    if reformat:
+        target_version = f"--target-version={BLACK_TARGET_VERSION}"
+        subprocess.call(["black", target_version, validators_pkgdir])
+        subprocess.call(["black", target_version, graph_objs_pkgdir])
+        subprocess.call(["black", target_version, graph_objects_path])
+    else:
+        print("skipping reformatting")
 
 
 if __name__ == "__main__":

@@ -1,17 +1,16 @@
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "choroplethmap.selected"
     _path_str = "choroplethmap.selected.marker"
     _valid_props = {"opacity"}
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -30,8 +29,6 @@ class Marker(_BaseTraceHierarchyType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -39,7 +36,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker opacity of selected points.
         """
 
-    def __init__(self, arg=None, opacity=None, **kwargs):
+    def __init__(self, arg=None, opacity: int | float | None = None, **kwargs):
         """
         Construct a new Marker object
 
@@ -56,14 +53,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__("marker")
-
+        super().__init__("marker")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -78,22 +72,9 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.choroplethmap.selected.Marker`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("opacity", arg, opacity)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,17 +1,16 @@
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Center(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "layout.scene.camera"
     _path_str = "layout.scene.camera.center"
     _valid_props = {"x", "y", "z"}
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -28,8 +27,6 @@ class Center(_BaseLayoutHierarchyType):
     def x(self, val):
         self["x"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -46,8 +43,6 @@ class Center(_BaseLayoutHierarchyType):
     def y(self, val):
         self["y"] = val
 
-    # z
-    # -
     @property
     def z(self):
         """
@@ -64,8 +59,6 @@ class Center(_BaseLayoutHierarchyType):
     def z(self, val):
         self["z"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -77,7 +70,14 @@ class Center(_BaseLayoutHierarchyType):
 
         """
 
-    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        x: int | float | None = None,
+        y: int | float | None = None,
+        z: int | float | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Center object
 
@@ -102,14 +102,11 @@ class Center(_BaseLayoutHierarchyType):
         -------
         Center
         """
-        super(Center, self).__init__("center")
-
+        super().__init__("center")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -124,30 +121,11 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.scene.camera.Center`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("z", None)
-        _v = z if z is not None else _v
-        if _v is not None:
-            self["z"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("x", arg, x)
+        self._init_provided("y", arg, y)
+        self._init_provided("z", arg, z)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,17 +1,16 @@
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Starts(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "streamtube"
     _path_str = "streamtube.starts"
     _valid_props = {"x", "xsrc", "y", "ysrc", "z", "zsrc"}
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -23,7 +22,7 @@ class Starts(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self["x"]
 
@@ -31,8 +30,6 @@ class Starts(_BaseTraceHierarchyType):
     def x(self, val):
         self["x"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -51,8 +48,6 @@ class Starts(_BaseTraceHierarchyType):
     def xsrc(self, val):
         self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -64,7 +59,7 @@ class Starts(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self["y"]
 
@@ -72,8 +67,6 @@ class Starts(_BaseTraceHierarchyType):
     def y(self, val):
         self["y"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -92,8 +85,6 @@ class Starts(_BaseTraceHierarchyType):
     def ysrc(self, val):
         self["ysrc"] = val
 
-    # z
-    # -
     @property
     def z(self):
         """
@@ -105,7 +96,7 @@ class Starts(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self["z"]
 
@@ -113,8 +104,6 @@ class Starts(_BaseTraceHierarchyType):
     def z(self, val):
         self["z"] = val
 
-    # zsrc
-    # ----
     @property
     def zsrc(self):
         """
@@ -133,8 +122,6 @@ class Starts(_BaseTraceHierarchyType):
     def zsrc(self, val):
         self["zsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -161,12 +148,12 @@ class Starts(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
-        x=None,
-        xsrc=None,
-        y=None,
-        ysrc=None,
-        z=None,
-        zsrc=None,
+        x: NDArray | None = None,
+        xsrc: str | None = None,
+        y: NDArray | None = None,
+        ysrc: str | None = None,
+        z: NDArray | None = None,
+        zsrc: str | None = None,
         **kwargs,
     ):
         """
@@ -201,14 +188,11 @@ class Starts(_BaseTraceHierarchyType):
         -------
         Starts
         """
-        super(Starts, self).__init__("starts")
-
+        super().__init__("starts")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -223,42 +207,14 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.streamtube.Starts`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("xsrc", None)
-        _v = xsrc if xsrc is not None else _v
-        if _v is not None:
-            self["xsrc"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("ysrc", None)
-        _v = ysrc if ysrc is not None else _v
-        if _v is not None:
-            self["ysrc"] = _v
-        _v = arg.pop("z", None)
-        _v = z if z is not None else _v
-        if _v is not None:
-            self["z"] = _v
-        _v = arg.pop("zsrc", None)
-        _v = zsrc if zsrc is not None else _v
-        if _v is not None:
-            self["zsrc"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("x", arg, x)
+        self._init_provided("xsrc", arg, xsrc)
+        self._init_provided("y", arg, y)
+        self._init_provided("ysrc", arg, ysrc)
+        self._init_provided("z", arg, z)
+        self._init_provided("zsrc", arg, zsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

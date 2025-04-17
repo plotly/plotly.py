@@ -61,8 +61,9 @@ def build_figure_py(
     trace_nodes = trace_node.child_compound_datatypes
 
     # Write imports
-    # -------------
-    # ### Import base class ###
+    buffer.write("from __future__ import annotations\n")
+    buffer.write("from typing import Any\n")
+    buffer.write("from numpy.typing import NDArray\n")
     buffer.write(f"from plotly.{base_package} import {base_classname}\n")
 
     # Write class definition
@@ -82,7 +83,7 @@ class {fig_classname}({base_classname}):\n"""
     buffer.write(
         f"""
     def __init__(self, data=None, layout=None,
-                 frames=None, skip_invalid=False, **kwargs):
+                 frames=None, skip_invalid: bool = False, **kwargs):
         \"\"\"
         Create a new :class:{fig_classname} instance
 
@@ -108,9 +109,7 @@ class {fig_classname}({base_classname}):\n"""
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         \"\"\"
-        super({fig_classname} ,self).__init__(data, layout,
-                                              frames, skip_invalid,
-                                              **kwargs)
+        super().__init__(data, layout, frames, skip_invalid, **kwargs)
     """
     )
 
@@ -121,7 +120,7 @@ class {fig_classname}({base_classname}):\n"""
         '''
         {getattr(BaseFigure, wrapped_name).__doc__}
         '''
-        return super({fig_classname}, self).{wrapped_name}({param_list})
+        return super().{wrapped_name}({param_list})
     """
         )
 

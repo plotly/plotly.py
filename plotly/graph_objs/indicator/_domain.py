@@ -1,17 +1,16 @@
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Domain(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "indicator"
     _path_str = "indicator.domain"
     _valid_props = {"column", "row", "x", "y"}
 
-    # column
-    # ------
     @property
     def column(self):
         """
@@ -32,8 +31,6 @@ class Domain(_BaseTraceHierarchyType):
     def column(self, val):
         self["column"] = val
 
-    # row
-    # ---
     @property
     def row(self):
         """
@@ -54,8 +51,6 @@ class Domain(_BaseTraceHierarchyType):
     def row(self, val):
         self["row"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -80,8 +75,6 @@ class Domain(_BaseTraceHierarchyType):
     def x(self, val):
         self["x"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -106,8 +99,6 @@ class Domain(_BaseTraceHierarchyType):
     def y(self, val):
         self["y"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -125,7 +116,15 @@ class Domain(_BaseTraceHierarchyType):
             plot fraction).
         """
 
-    def __init__(self, arg=None, column=None, row=None, x=None, y=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        column: int | None = None,
+        row: int | None = None,
+        x: list | None = None,
+        y: list | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Domain object
 
@@ -152,14 +151,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         Domain
         """
-        super(Domain, self).__init__("domain")
-
+        super().__init__("domain")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -174,34 +170,12 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.indicator.Domain`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("column", None)
-        _v = column if column is not None else _v
-        if _v is not None:
-            self["column"] = _v
-        _v = arg.pop("row", None)
-        _v = row if row is not None else _v
-        if _v is not None:
-            self["row"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("column", arg, column)
+        self._init_provided("row", arg, row)
+        self._init_provided("x", arg, x)
+        self._init_provided("y", arg, y)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

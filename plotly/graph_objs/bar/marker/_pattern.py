@@ -1,11 +1,12 @@
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Pattern(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "bar.marker"
     _path_str = "bar.marker.pattern"
     _valid_props = {
@@ -23,8 +24,6 @@ class Pattern(_BaseTraceHierarchyType):
         "soliditysrc",
     }
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -38,47 +37,12 @@ class Pattern(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
           - A list or array of any of the above
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self["bgcolor"]
 
@@ -86,8 +50,6 @@ class Pattern(_BaseTraceHierarchyType):
     def bgcolor(self, val):
         self["bgcolor"] = val
 
-    # bgcolorsrc
-    # ----------
     @property
     def bgcolorsrc(self):
         """
@@ -106,8 +68,6 @@ class Pattern(_BaseTraceHierarchyType):
     def bgcolorsrc(self, val):
         self["bgcolorsrc"] = val
 
-    # fgcolor
-    # -------
     @property
     def fgcolor(self):
         """
@@ -121,47 +81,12 @@ class Pattern(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color
           - A list or array of any of the above
 
         Returns
         -------
-        str|numpy.ndarray
+        str|NDArray
         """
         return self["fgcolor"]
 
@@ -169,8 +94,6 @@ class Pattern(_BaseTraceHierarchyType):
     def fgcolor(self, val):
         self["fgcolor"] = val
 
-    # fgcolorsrc
-    # ----------
     @property
     def fgcolorsrc(self):
         """
@@ -189,8 +112,6 @@ class Pattern(_BaseTraceHierarchyType):
     def fgcolorsrc(self, val):
         self["fgcolorsrc"] = val
 
-    # fgopacity
-    # ---------
     @property
     def fgopacity(self):
         """
@@ -210,8 +131,6 @@ class Pattern(_BaseTraceHierarchyType):
     def fgopacity(self, val):
         self["fgopacity"] = val
 
-    # fillmode
-    # --------
     @property
     def fillmode(self):
         """
@@ -232,8 +151,6 @@ class Pattern(_BaseTraceHierarchyType):
     def fillmode(self, val):
         self["fillmode"] = val
 
-    # shape
-    # -----
     @property
     def shape(self):
         """
@@ -247,7 +164,7 @@ class Pattern(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any|NDArray
         """
         return self["shape"]
 
@@ -255,8 +172,6 @@ class Pattern(_BaseTraceHierarchyType):
     def shape(self, val):
         self["shape"] = val
 
-    # shapesrc
-    # --------
     @property
     def shapesrc(self):
         """
@@ -275,8 +190,6 @@ class Pattern(_BaseTraceHierarchyType):
     def shapesrc(self, val):
         self["shapesrc"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -289,7 +202,7 @@ class Pattern(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self["size"]
 
@@ -297,8 +210,6 @@ class Pattern(_BaseTraceHierarchyType):
     def size(self, val):
         self["size"] = val
 
-    # sizesrc
-    # -------
     @property
     def sizesrc(self):
         """
@@ -317,8 +228,6 @@ class Pattern(_BaseTraceHierarchyType):
     def sizesrc(self, val):
         self["sizesrc"] = val
 
-    # solidity
-    # --------
     @property
     def solidity(self):
         """
@@ -333,7 +242,7 @@ class Pattern(_BaseTraceHierarchyType):
 
         Returns
         -------
-        int|float|numpy.ndarray
+        int|float|NDArray
         """
         return self["solidity"]
 
@@ -341,8 +250,6 @@ class Pattern(_BaseTraceHierarchyType):
     def solidity(self, val):
         self["solidity"] = val
 
-    # soliditysrc
-    # -----------
     @property
     def soliditysrc(self):
         """
@@ -361,8 +268,6 @@ class Pattern(_BaseTraceHierarchyType):
     def soliditysrc(self, val):
         self["soliditysrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -417,18 +322,18 @@ class Pattern(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
-        bgcolor=None,
-        bgcolorsrc=None,
-        fgcolor=None,
-        fgcolorsrc=None,
-        fgopacity=None,
-        fillmode=None,
-        shape=None,
-        shapesrc=None,
-        size=None,
-        sizesrc=None,
-        solidity=None,
-        soliditysrc=None,
+        bgcolor: str | None = None,
+        bgcolorsrc: str | None = None,
+        fgcolor: str | None = None,
+        fgcolorsrc: str | None = None,
+        fgopacity: int | float | None = None,
+        fillmode: Any | None = None,
+        shape: Any | None = None,
+        shapesrc: str | None = None,
+        size: int | float | None = None,
+        sizesrc: str | None = None,
+        solidity: int | float | None = None,
+        soliditysrc: str | None = None,
         **kwargs,
     ):
         """
@@ -493,14 +398,11 @@ class Pattern(_BaseTraceHierarchyType):
         -------
         Pattern
         """
-        super(Pattern, self).__init__("pattern")
-
+        super().__init__("pattern")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -515,66 +417,20 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.bar.marker.Pattern`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("bgcolor", None)
-        _v = bgcolor if bgcolor is not None else _v
-        if _v is not None:
-            self["bgcolor"] = _v
-        _v = arg.pop("bgcolorsrc", None)
-        _v = bgcolorsrc if bgcolorsrc is not None else _v
-        if _v is not None:
-            self["bgcolorsrc"] = _v
-        _v = arg.pop("fgcolor", None)
-        _v = fgcolor if fgcolor is not None else _v
-        if _v is not None:
-            self["fgcolor"] = _v
-        _v = arg.pop("fgcolorsrc", None)
-        _v = fgcolorsrc if fgcolorsrc is not None else _v
-        if _v is not None:
-            self["fgcolorsrc"] = _v
-        _v = arg.pop("fgopacity", None)
-        _v = fgopacity if fgopacity is not None else _v
-        if _v is not None:
-            self["fgopacity"] = _v
-        _v = arg.pop("fillmode", None)
-        _v = fillmode if fillmode is not None else _v
-        if _v is not None:
-            self["fillmode"] = _v
-        _v = arg.pop("shape", None)
-        _v = shape if shape is not None else _v
-        if _v is not None:
-            self["shape"] = _v
-        _v = arg.pop("shapesrc", None)
-        _v = shapesrc if shapesrc is not None else _v
-        if _v is not None:
-            self["shapesrc"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("sizesrc", None)
-        _v = sizesrc if sizesrc is not None else _v
-        if _v is not None:
-            self["sizesrc"] = _v
-        _v = arg.pop("solidity", None)
-        _v = solidity if solidity is not None else _v
-        if _v is not None:
-            self["solidity"] = _v
-        _v = arg.pop("soliditysrc", None)
-        _v = soliditysrc if soliditysrc is not None else _v
-        if _v is not None:
-            self["soliditysrc"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("bgcolor", arg, bgcolor)
+        self._init_provided("bgcolorsrc", arg, bgcolorsrc)
+        self._init_provided("fgcolor", arg, fgcolor)
+        self._init_provided("fgcolorsrc", arg, fgcolorsrc)
+        self._init_provided("fgopacity", arg, fgopacity)
+        self._init_provided("fillmode", arg, fillmode)
+        self._init_provided("shape", arg, shape)
+        self._init_provided("shapesrc", arg, shapesrc)
+        self._init_provided("size", arg, size)
+        self._init_provided("sizesrc", arg, sizesrc)
+        self._init_provided("solidity", arg, solidity)
+        self._init_provided("soliditysrc", arg, soliditysrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

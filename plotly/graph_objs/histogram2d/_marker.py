@@ -1,17 +1,16 @@
+from __future__ import annotations
+from typing import Any
+from numpy.typing import NDArray
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "histogram2d"
     _path_str = "histogram2d.marker"
     _valid_props = {"color", "colorsrc"}
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -22,7 +21,7 @@ class Marker(_BaseTraceHierarchyType):
 
         Returns
         -------
-        numpy.ndarray
+        NDArray
         """
         return self["color"]
 
@@ -30,8 +29,6 @@ class Marker(_BaseTraceHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -50,8 +47,6 @@ class Marker(_BaseTraceHierarchyType):
     def colorsrc(self, val):
         self["colorsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -62,7 +57,13 @@ class Marker(_BaseTraceHierarchyType):
             `color`.
         """
 
-    def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        color: NDArray | None = None,
+        colorsrc: str | None = None,
+        **kwargs,
+    ):
         """
         Construct a new Marker object
 
@@ -82,14 +83,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__("marker")
-
+        super().__init__("marker")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -104,26 +102,10 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.histogram2d.Marker`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("colorsrc", None)
-        _v = colorsrc if colorsrc is not None else _v
-        if _v is not None:
-            self["colorsrc"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._init_provided("color", arg, color)
+        self._init_provided("colorsrc", arg, colorsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

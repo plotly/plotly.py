@@ -1,11 +1,11 @@
-import _plotly_utils.basevalidators
+import _plotly_utils.basevalidators as _bv
 
 
-class SliderdefaultsValidator(_plotly_utils.basevalidators.CompoundValidator):
+class SliderdefaultsValidator(_bv.CompoundValidator):
     def __init__(self, plotly_name="sliderdefaults", parent_name="layout", **kwargs):
-        super(SliderdefaultsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             data_class_str=kwargs.pop("data_class_str", "Slider"),
             data_docs=kwargs.pop(
                 "data_docs",
