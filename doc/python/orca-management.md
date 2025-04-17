@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
+      format_version: '1.3'
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.11.10
   plotly:
     description: This section covers the low-level details of how plotly.py uses orca
       to perform static image generation.
@@ -33,10 +33,10 @@ jupyter:
     thumbnail: thumbnail/orca-management.png
 ---
 
+> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](/python/static-image-export/) for details on using Kaleido for static image generation.
+
 ### Overview
 This section covers the lower-level details of how plotly.py can use orca to perform static image generation.
-
-> As of `plotly` version 4.9, Orca is no longer the recommended way to do static image export.  We now recommend Kaleido, as described in the [Static Image Export](/python/static-image-export/) section .
 
 Please refer to the [Static Image Export](/python/static-image-export/) section for general information on creating static images from plotly.py figures.
 
@@ -50,26 +50,26 @@ There are 3 general approaches to installing orca and its Python dependencies.
 
 ##### conda
 Using the [conda](https://conda.io/docs/) package manager, you can install these dependencies in a single command:
-```
+<!-- #raw -->
 $ conda install -c plotly plotly-orca==1.2.1 psutil requests
-```
+<!-- #endraw -->
 
 **Note:** Even if you do not want to use conda to manage your Python dependencies, it is still useful as a cross platform tool for managing native libraries and command-line utilities (e.g. git, wget, graphviz, boost, gcc, nodejs, cairo, etc.).  For this use-case, start with [Miniconda](https://conda.io/miniconda.html) (~60MB) and tell the installer to add itself to your system `PATH`.  Then run `conda install plotly-orca==1.2.1` and the orca executable will be available system wide.
 
 ##### npm + pip
 You can use the [npm](https://www.npmjs.com/get-npm) package manager to install `orca` (and its `electron` dependency), and then use pip to install `psutil`:
 
-```
+<!-- #raw -->
 $ npm install -g electron@1.8.4 orca
 $ pip install psutil requests
-```
+<!-- #endraw -->
 
 ##### Standalone Binaries + pip
 If you are unable to install conda or npm, you can install orca as a precompiled binary for your operating system. Follow the instructions in the orca [README](https://github.com/plotly/orca) to install orca and add it to your system `PATH`. Then use pip to install `psutil`.
 
-```
+<!-- #raw -->
 $ pip install psutil requests
-```
+<!-- #endraw -->
 
 <!-- #region -->
 ### Install orca on Google Colab
