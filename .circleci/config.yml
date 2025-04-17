@@ -126,7 +126,7 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install black==22.3.0
+            pip install black==25.1.0
       - run:
           name: Check formatting with black
           command: |

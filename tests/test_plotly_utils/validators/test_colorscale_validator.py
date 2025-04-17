@@ -5,6 +5,7 @@ import numpy as np
 import inspect
 import itertools
 
+
 # Fixtures
 # --------
 @pytest.fixture()
