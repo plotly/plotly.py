@@ -1,6 +1,11 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
+
+## Unreleased
+
+### Fixed
+- Fix third-party widget display issues in v6 [[#5102]https://github.com/plotly/plotly.py/pull/5102]
 
 ## [6.0.1] - 2025-03-14
 

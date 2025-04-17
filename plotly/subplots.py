@@ -59,8 +59,8 @@ def make_subplots(
           - 'bottom-left': Subplots are numbererd with (1, 1) in the bottom
                            left corner
 
-    print_grid: boolean (default True):
-        If True, prints a string representation of the plot grid.  Grid may
+    print_grid: boolean (default False):
+        If True, prints a string representation of the plot grid. Grid may
         also be printed using the `Figure.print_grid()` method on the
         resulting figure.
 
@@ -218,7 +218,7 @@ def make_subplots(
     >>> fig.add_scatter(y=[1, 3, 2], row=2, col=1) # doctest: +ELLIPSIS
     Figure(...)
 
-    or see Figure.append_trace
+    or see Figure.add_trace
 
     Example 2:
 
