@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -8,8 +12,8 @@ import warnings
 
 class Template(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout"
-    _path_str = "layout.template"
+    _parent_path_str = 'layout'
+    _path_str = 'layout.template'
     _valid_props = {"data", "layout"}
 
     @property
@@ -25,11 +29,11 @@ class Template(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.template.Data
         """
-        return self["data"]
+        return self['data']
 
     @data.setter
     def data(self, val):
-        self["data"] = val
+        self['data'] = val
 
     @property
     def layout(self):
@@ -44,11 +48,11 @@ class Template(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.template.Layout
         """
-        return self["layout"]
+        return self['layout']
 
     @layout.setter
     def layout(self, val):
-        self["layout"] = val
+        self['layout'] = val
 
     @property
     def _prop_descriptions(self):
@@ -60,8 +64,12 @@ class Template(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.Layout` instance or dict
             with compatible properties
         """
-
-    def __init__(self, arg=None, data=None, layout=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            data=None,
+            layout=None,
+            **kwargs
+        ):
         """
         Construct a new Template object
 
@@ -102,9 +110,9 @@ class Template(_BaseLayoutHierarchyType):
         -------
         Template
         """
-        super().__init__("template")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('template')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -114,15 +122,15 @@ class Template(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Template
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Template`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Template`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
+
 
         # Template.data contains a 'scattermapbox' key, which causes a
         # go.Scattermapbox trace object to be created during validation.
@@ -130,7 +138,7 @@ an instance of :class:`plotly.graph_objs.layout.Template`"""
         # we suppress deprecation warnings for this line only.
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=DeprecationWarning)
-            self._set_property("data", arg, data)
-        self._set_property("layout", arg, layout)
+            self._set_property('data', arg, data)
+        self._set_property('layout', arg, layout)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

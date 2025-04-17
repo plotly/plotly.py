@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,22 +11,9 @@ import copy as _copy
 
 class Grid(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout"
-    _path_str = "layout.grid"
-    _valid_props = {
-        "columns",
-        "domain",
-        "pattern",
-        "roworder",
-        "rows",
-        "subplots",
-        "xaxes",
-        "xgap",
-        "xside",
-        "yaxes",
-        "ygap",
-        "yside",
-    }
+    _parent_path_str = 'layout'
+    _path_str = 'layout.grid'
+    _valid_props = {"columns", "domain", "pattern", "roworder", "rows", "subplots", "xaxes", "xgap", "xside", "yaxes", "ygap", "yside"}
 
     @property
     def columns(self):
@@ -42,11 +33,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["columns"]
+        return self['columns']
 
     @columns.setter
     def columns(self, val):
-        self["columns"] = val
+        self['columns'] = val
 
     @property
     def domain(self):
@@ -61,11 +52,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.grid.Domain
         """
-        return self["domain"]
+        return self['domain']
 
     @domain.setter
     def domain(self, val):
-        self["domain"] = val
+        self['domain'] = val
 
     @property
     def pattern(self):
@@ -85,11 +76,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["pattern"]
+        return self['pattern']
 
     @pattern.setter
     def pattern(self, val):
-        self["pattern"] = val
+        self['pattern'] = val
 
     @property
     def roworder(self):
@@ -105,11 +96,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["roworder"]
+        return self['roworder']
 
     @roworder.setter
     def roworder(self, val):
-        self["roworder"] = val
+        self['roworder'] = val
 
     @property
     def rows(self):
@@ -127,11 +118,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["rows"]
+        return self['rows']
 
     @rows.setter
     def rows(self, val):
-        self["rows"] = val
+        self['rows'] = val
 
     @property
     def subplots(self):
@@ -156,11 +147,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self["subplots"]
+        return self['subplots']
 
     @subplots.setter
     def subplots(self, val):
-        self["subplots"] = val
+        self['subplots'] = val
 
     @property
     def xaxes(self):
@@ -184,11 +175,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self["xaxes"]
+        return self['xaxes']
 
     @xaxes.setter
     def xaxes(self, val):
-        self["xaxes"] = val
+        self['xaxes'] = val
 
     @property
     def xgap(self):
@@ -204,11 +195,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["xgap"]
+        return self['xgap']
 
     @xgap.setter
     def xgap(self, val):
-        self["xgap"] = val
+        self['xgap'] = val
 
     @property
     def xside(self):
@@ -225,11 +216,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["xside"]
+        return self['xside']
 
     @xside.setter
     def xside(self, val):
-        self["xside"] = val
+        self['xside'] = val
 
     @property
     def yaxes(self):
@@ -253,11 +244,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self["yaxes"]
+        return self['yaxes']
 
     @yaxes.setter
     def yaxes(self, val):
-        self["yaxes"] = val
+        self['yaxes'] = val
 
     @property
     def ygap(self):
@@ -273,11 +264,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["ygap"]
+        return self['ygap']
 
     @ygap.setter
     def ygap(self, val):
-        self["ygap"] = val
+        self['ygap'] = val
 
     @property
     def yside(self):
@@ -295,11 +286,11 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["yside"]
+        return self['yside']
 
     @yside.setter
     def yside(self, val):
-        self["yside"] = val
+        self['yside'] = val
 
     @property
     def _prop_descriptions(self):
@@ -375,24 +366,22 @@ class Grid(_BaseLayoutHierarchyType):
             the leftmost plot that each y axis is used in. "right"
             and *right plot* are similar.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        columns=None,
-        domain=None,
-        pattern=None,
-        roworder=None,
-        rows=None,
-        subplots=None,
-        xaxes=None,
-        xgap=None,
-        xside=None,
-        yaxes=None,
-        ygap=None,
-        yside=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            columns=None,
+            domain=None,
+            pattern=None,
+            roworder=None,
+            rows=None,
+            subplots=None,
+            xaxes=None,
+            xgap=None,
+            xside=None,
+            yaxes=None,
+            ygap=None,
+            yside=None,
+            **kwargs
+        ):
         """
         Construct a new Grid object
 
@@ -476,9 +465,9 @@ class Grid(_BaseLayoutHierarchyType):
         -------
         Grid
         """
-        super().__init__("grid")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('grid')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -488,27 +477,27 @@ class Grid(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Grid
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Grid`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Grid`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("columns", arg, columns)
-        self._set_property("domain", arg, domain)
-        self._set_property("pattern", arg, pattern)
-        self._set_property("roworder", arg, roworder)
-        self._set_property("rows", arg, rows)
-        self._set_property("subplots", arg, subplots)
-        self._set_property("xaxes", arg, xaxes)
-        self._set_property("xgap", arg, xgap)
-        self._set_property("xside", arg, xside)
-        self._set_property("yaxes", arg, yaxes)
-        self._set_property("ygap", arg, ygap)
-        self._set_property("yside", arg, yside)
+
+        self._set_property('columns', arg, columns)
+        self._set_property('domain', arg, domain)
+        self._set_property('pattern', arg, pattern)
+        self._set_property('roworder', arg, roworder)
+        self._set_property('rows', arg, rows)
+        self._set_property('subplots', arg, subplots)
+        self._set_property('xaxes', arg, xaxes)
+        self._set_property('xgap', arg, xgap)
+        self._set_property('xside', arg, xside)
+        self._set_property('yaxes', arg, yaxes)
+        self._set_property('ygap', arg, ygap)
+        self._set_property('yside', arg, yside)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

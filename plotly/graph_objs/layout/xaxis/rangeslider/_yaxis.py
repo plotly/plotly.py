@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,30 +11,30 @@ import copy as _copy
 
 class YAxis(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.xaxis.rangeslider"
-    _path_str = "layout.xaxis.rangeslider.yaxis"
+    _parent_path_str = 'layout.xaxis.rangeslider'
+    _path_str = 'layout.xaxis.rangeslider.yaxis'
     _valid_props = {"range", "rangemode"}
 
     @property
     def range(self):
         """
-            Sets the range of this axis for the rangeslider.
+        Sets the range of this axis for the rangeslider.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'range[0]' property accepts values of any type
+    (1) The 'range[1]' property accepts values of any type
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property accepts values of any type
-        (1) The 'range[1]' property accepts values of any type
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["range"]
+        return self['range']
 
     @range.setter
     def range(self, val):
-        self["range"] = val
+        self['range'] = val
 
     @property
     def rangemode(self):
@@ -49,11 +53,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["rangemode"]
+        return self['rangemode']
 
     @rangemode.setter
     def rangemode(self, val):
-        self["rangemode"] = val
+        self['rangemode'] = val
 
     @property
     def _prop_descriptions(self):
@@ -68,8 +72,12 @@ class YAxis(_BaseLayoutHierarchyType):
             current range of the corresponding y-axis on the main
             subplot is used.
         """
-
-    def __init__(self, arg=None, range=None, rangemode=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            range=None,
+            rangemode=None,
+            **kwargs
+        ):
         """
         Construct a new YAxis object
 
@@ -93,9 +101,9 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         YAxis
         """
-        super().__init__("yaxis")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('yaxis')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -105,17 +113,17 @@ class YAxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.xaxis.rangeslider.YAxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("range", arg, range)
-        self._set_property("rangemode", arg, rangemode)
+
+        self._set_property('range', arg, range)
+        self._set_property('rangemode', arg, rangemode)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

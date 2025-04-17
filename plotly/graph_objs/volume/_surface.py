@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Surface(_BaseTraceHierarchyType):
 
-    _parent_path_str = "volume"
-    _path_str = "volume.surface"
+    _parent_path_str = 'volume'
+    _path_str = 'volume.surface'
     _valid_props = {"count", "fill", "pattern", "show"}
 
     @property
@@ -26,11 +30,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self["count"]
+        return self['count']
 
     @count.setter
     def count(self, val):
-        self["count"] = val
+        self['count'] = val
 
     @property
     def fill(self):
@@ -47,11 +51,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     @property
     def pattern(self):
@@ -74,11 +78,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["pattern"]
+        return self['pattern']
 
     @pattern.setter
     def pattern(self, val):
-        self["pattern"] = val
+        self['pattern'] = val
 
     @property
     def show(self):
@@ -92,11 +96,11 @@ class Surface(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["show"]
+        return self['show']
 
     @show.setter
     def show(self, val):
-        self["show"] = val
+        self['show'] = val
 
     @property
     def _prop_descriptions(self):
@@ -125,10 +129,14 @@ class Surface(_BaseTraceHierarchyType):
             Hides/displays surfaces between minimum and maximum
             iso-values.
         """
-
-    def __init__(
-        self, arg=None, count=None, fill=None, pattern=None, show=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            count=None,
+            fill=None,
+            pattern=None,
+            show=None,
+            **kwargs
+        ):
         """
         Construct a new Surface object
 
@@ -166,9 +174,9 @@ class Surface(_BaseTraceHierarchyType):
         -------
         Surface
         """
-        super().__init__("surface")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('surface')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -178,19 +186,19 @@ class Surface(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.volume.Surface
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.volume.Surface`"""
-            )
+an instance of :class:`plotly.graph_objs.volume.Surface`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("count", arg, count)
-        self._set_property("fill", arg, fill)
-        self._set_property("pattern", arg, pattern)
-        self._set_property("show", arg, show)
+
+        self._set_property('count', arg, count)
+        self._set_property('fill', arg, fill)
+        self._set_property('pattern', arg, pattern)
+        self._set_property('show', arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Textfont(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.mapbox.layer.symbol"
-    _path_str = "layout.mapbox.layer.symbol.textfont"
+    _parent_path_str = 'layout.mapbox.layer.symbol'
+    _path_str = 'layout.mapbox.layer.symbol.textfont'
     _valid_props = {"color", "family", "size", "style", "weight"}
 
     @property
@@ -25,11 +29,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     @property
     def family(self):
@@ -47,11 +51,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["family"]
+        return self['family']
 
     @family.setter
     def family(self, val):
-        self["family"] = val
+        self['family'] = val
 
     @property
     def size(self):
@@ -63,11 +67,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     @property
     def style(self):
@@ -83,11 +87,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["style"]
+        return self['style']
 
     @style.setter
     def style(self, val):
-        self["style"] = val
+        self['style'] = val
 
     @property
     def weight(self):
@@ -103,11 +107,11 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["weight"]
+        return self['weight']
 
     @weight.setter
     def weight(self, val):
-        self["weight"] = val
+        self['weight'] = val
 
     @property
     def _prop_descriptions(self):
@@ -129,17 +133,15 @@ class Textfont(_BaseLayoutHierarchyType):
         weight
             Sets the weight (or boldness) of the font.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        color=None,
-        family=None,
-        size=None,
-        style=None,
-        weight=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            color=None,
+            family=None,
+            size=None,
+            style=None,
+            weight=None,
+            **kwargs
+        ):
         """
         Construct a new Textfont object
 
@@ -174,9 +176,9 @@ class Textfont(_BaseLayoutHierarchyType):
         -------
         Textfont
         """
-        super().__init__("textfont")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('textfont')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -186,20 +188,20 @@ class Textfont(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.symbol.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.mapbox.layer.symbol.Textfont`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.symbol.Textfont`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("color", arg, color)
-        self._set_property("family", arg, family)
-        self._set_property("size", arg, size)
-        self._set_property("style", arg, style)
-        self._set_property("weight", arg, weight)
+
+        self._set_property('color', arg, color)
+        self._set_property('family', arg, family)
+        self._set_property('size', arg, size)
+        self._set_property('style', arg, style)
+        self._set_property('weight', arg, weight)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

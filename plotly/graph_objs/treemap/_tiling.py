@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Tiling(_BaseTraceHierarchyType):
 
-    _parent_path_str = "treemap"
-    _path_str = "treemap.tiling"
+    _parent_path_str = 'treemap'
+    _path_str = 'treemap.tiling'
     _valid_props = {"flip", "packing", "pad", "squarifyratio"}
 
     @property
@@ -26,11 +30,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["flip"]
+        return self['flip']
 
     @flip.setter
     def flip(self, val):
-        self["flip"] = val
+        self['flip'] = val
 
     @property
     def packing(self):
@@ -47,11 +51,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["packing"]
+        return self['packing']
 
     @packing.setter
     def packing(self, val):
-        self["packing"] = val
+        self['packing'] = val
 
     @property
     def pad(self):
@@ -65,11 +69,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["pad"]
+        return self['pad']
 
     @pad.setter
     def pad(self, val):
-        self["pad"] = val
+        self['pad'] = val
 
     @property
     def squarifyratio(self):
@@ -93,11 +97,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["squarifyratio"]
+        return self['squarifyratio']
 
     @squarifyratio.setter
     def squarifyratio(self, val):
-        self["squarifyratio"] = val
+        self['squarifyratio'] = val
 
     @property
     def _prop_descriptions(self):
@@ -125,10 +129,14 @@ class Tiling(_BaseTraceHierarchyType):
             which uses the Golden Ratio i.e. 1.618034, Plotly
             applies 1 to increase squares in treemap layouts.
         """
-
-    def __init__(
-        self, arg=None, flip=None, packing=None, pad=None, squarifyratio=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            flip=None,
+            packing=None,
+            pad=None,
+            squarifyratio=None,
+            **kwargs
+        ):
         """
         Construct a new Tiling object
 
@@ -165,9 +173,9 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Tiling
         """
-        super().__init__("tiling")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('tiling')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -177,19 +185,19 @@ class Tiling(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.treemap.Tiling
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.Tiling`"""
-            )
+an instance of :class:`plotly.graph_objs.treemap.Tiling`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("flip", arg, flip)
-        self._set_property("packing", arg, packing)
-        self._set_property("pad", arg, pad)
-        self._set_property("squarifyratio", arg, squarifyratio)
+
+        self._set_property('flip', arg, flip)
+        self._set_property('packing', arg, packing)
+        self._set_property('pad', arg, pad)
+        self._set_property('squarifyratio', arg, squarifyratio)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

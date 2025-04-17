@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,21 +11,9 @@ import copy as _copy
 
 class Title(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout"
-    _path_str = "layout.title"
-    _valid_props = {
-        "automargin",
-        "font",
-        "pad",
-        "subtitle",
-        "text",
-        "x",
-        "xanchor",
-        "xref",
-        "y",
-        "yanchor",
-        "yref",
-    }
+    _parent_path_str = 'layout'
+    _path_str = 'layout.title'
+    _valid_props = {"automargin", "font", "pad", "subtitle", "text", "x", "xanchor", "xref", "y", "yanchor", "yref"}
 
     @property
     def automargin(self):
@@ -45,11 +37,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["automargin"]
+        return self['automargin']
 
     @automargin.setter
     def automargin(self, val):
-        self["automargin"] = val
+        self['automargin'] = val
 
     @property
     def font(self):
@@ -66,11 +58,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.title.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     @property
     def pad(self):
@@ -92,11 +84,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.title.Pad
         """
-        return self["pad"]
+        return self['pad']
 
     @pad.setter
     def pad(self, val):
-        self["pad"] = val
+        self['pad'] = val
 
     @property
     def subtitle(self):
@@ -111,11 +103,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.title.Subtitle
         """
-        return self["subtitle"]
+        return self['subtitle']
 
     @subtitle.setter
     def subtitle(self, val):
-        self["subtitle"] = val
+        self['subtitle'] = val
 
     @property
     def text(self):
@@ -130,11 +122,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     @property
     def x(self):
@@ -149,11 +141,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     @property
     def xanchor(self):
@@ -173,11 +165,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["xanchor"]
+        return self['xanchor']
 
     @xanchor.setter
     def xanchor(self, val):
-        self["xanchor"] = val
+        self['xanchor'] = val
 
     @property
     def xref(self):
@@ -194,11 +186,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["xref"]
+        return self['xref']
 
     @xref.setter
     def xref(self, val):
-        self["xref"] = val
+        self['xref'] = val
 
     @property
     def y(self):
@@ -215,11 +207,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     @property
     def yanchor(self):
@@ -239,11 +231,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["yanchor"]
+        return self['yanchor']
 
     @yanchor.setter
     def yanchor(self, val):
-        self["yanchor"] = val
+        self['yanchor'] = val
 
     @property
     def yref(self):
@@ -260,11 +252,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["yref"]
+        return self['yref']
 
     @yref.setter
     def yref(self, val):
-        self["yref"] = val
+        self['yref'] = val
 
     @property
     def _prop_descriptions(self):
@@ -328,23 +320,21 @@ class Title(_BaseLayoutHierarchyType):
             entire `height` of the plot. "paper" refers to the
             height of the plotting area only.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        automargin=None,
-        font=None,
-        pad=None,
-        subtitle=None,
-        text=None,
-        x=None,
-        xanchor=None,
-        xref=None,
-        y=None,
-        yanchor=None,
-        yref=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            automargin=None,
+            font=None,
+            pad=None,
+            subtitle=None,
+            text=None,
+            x=None,
+            xanchor=None,
+            xref=None,
+            y=None,
+            yanchor=None,
+            yref=None,
+            **kwargs
+        ):
         """
         Construct a new Title object
 
@@ -416,9 +406,9 @@ class Title(_BaseLayoutHierarchyType):
         -------
         Title
         """
-        super().__init__("title")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('title')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -428,26 +418,26 @@ class Title(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Title`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Title`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("automargin", arg, automargin)
-        self._set_property("font", arg, font)
-        self._set_property("pad", arg, pad)
-        self._set_property("subtitle", arg, subtitle)
-        self._set_property("text", arg, text)
-        self._set_property("x", arg, x)
-        self._set_property("xanchor", arg, xanchor)
-        self._set_property("xref", arg, xref)
-        self._set_property("y", arg, y)
-        self._set_property("yanchor", arg, yanchor)
-        self._set_property("yref", arg, yref)
+
+        self._set_property('automargin', arg, automargin)
+        self._set_property('font', arg, font)
+        self._set_property('pad', arg, pad)
+        self._set_property('subtitle', arg, subtitle)
+        self._set_property('text', arg, text)
+        self._set_property('x', arg, x)
+        self._set_property('xanchor', arg, xanchor)
+        self._set_property('xref', arg, xref)
+        self._set_property('y', arg, y)
+        self._set_property('yanchor', arg, yanchor)
+        self._set_property('yref', arg, yref)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

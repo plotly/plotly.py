@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Marker(_BaseTraceHierarchyType):
 
-    _parent_path_str = "choroplethmapbox"
-    _path_str = "choroplethmapbox.marker"
+    _parent_path_str = 'choroplethmapbox'
+    _path_str = 'choroplethmapbox.marker'
     _valid_props = {"line", "opacity", "opacitysrc"}
 
     @property
@@ -24,11 +28,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.choroplethmapbox.marker.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     @property
     def opacity(self):
@@ -43,11 +47,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     @property
     def opacitysrc(self):
@@ -61,11 +65,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["opacitysrc"]
+        return self['opacitysrc']
 
     @opacitysrc.setter
     def opacitysrc(self, val):
-        self["opacitysrc"] = val
+        self['opacitysrc'] = val
 
     @property
     def _prop_descriptions(self):
@@ -79,8 +83,13 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `opacity`.
         """
-
-    def __init__(self, arg=None, line=None, opacity=None, opacitysrc=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            line=None,
+            opacity=None,
+            opacitysrc=None,
+            **kwargs
+        ):
         """
         Construct a new Marker object
 
@@ -103,9 +112,9 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__("marker")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('marker')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -115,18 +124,18 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.choroplethmapbox.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.choroplethmapbox.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.choroplethmapbox.Marker`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("line", arg, line)
-        self._set_property("opacity", arg, opacity)
-        self._set_property("opacitysrc", arg, opacitysrc)
+
+        self._set_property('line', arg, line)
+        self._set_property('opacity', arg, opacity)
+        self._set_property('opacitysrc', arg, opacitysrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
