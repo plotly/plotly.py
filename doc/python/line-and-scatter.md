@@ -365,12 +365,14 @@ def swarm(
     ticks='',               # Remove the ticks
     title=""
     )
-    fig.show()
+    return fig
 
 
 
 df_iris = px.data.iris() # iris is a pandas DataFrame
-swarm(df_iris["sepal_length"])
+fig = swarm(df_iris["sepal_length"])
+fig.show()    
+
 ```
 
 ## Scatter and line plots with go.Scatter
