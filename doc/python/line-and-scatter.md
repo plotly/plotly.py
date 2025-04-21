@@ -293,12 +293,23 @@ import pandas as pd
 import plotly.express as px
 import collections
 
+def negative_1_if_count_is_odd(count):
+        # if this is an odd numbered entry in its bin, make its y coordinate negative
+        # the y coordinate of the first entry is 0, so entries 3, 5, and 7 get negative y coordinates
+        if count%2 == 1:
+            return -1
+        else:
+            return 1
+
+
+
 
 def swarm(
     X_series,
     point_size=16,
     fig_width = 800,
     gap_multiplier=1.2,
+    center_even_groups = False
 ):
     #sorting will align columns in attractive arcs rather than having columns the vary unpredicatbly in the x-dimension
     X_series=X_series.copy().sort_values()
@@ -309,7 +320,7 @@ def swarm(
     # minimum X value to the maximum X value
     min_x = min(X_series)
     max_x = max(X_series)
-    
+
     list_of_rows = []
     # we will count the number of points in each "bin" / vertical strip of the graph
     # to be able to assign a y-coordinate that avoids overlapping
@@ -319,33 +330,43 @@ def swarm(
         # assign this x_value to bin number
         # each bin is a vertical strip wide enough for one marker
         bin=(((fig_width*(x_val-min_x))/(max_x-min_x))  // point_size)
-        
+
         #update the count of dots in that strip
         bin_counter.update([bin])
-        
-        # if this is an odd numbered entry in its bin, make its y coordinate negative
-        # the y coordinate of the first entry is 0, so entries 3, 5, and 7 get negative y coordinates
-        if bin_counter[bin]%2 == 1:
-            negative_1_if_count_is_odd = -1
-        else:
-            negative_1_if_count_is_odd = 1
+
 
         # the collision free y coordinate gives the items in a vertical bin
         # coordinates:  0, 1, -1, 2, -2, 3, -3 ... and so on to evenly spread
         # their locations above and below the y-axis (we'll make a correction below to deal with even numbers of entries)
         # we then scale this by the point_size*gap_multiplier to get a y coordinate in px
 
-        collision_free_y_coordinate=(bin_counter[bin]//2)*negative_1_if_count_is_odd*point_size*gap_multiplier              
-        list_of_rows.append({"x":x_val,"y":collision_free_y_coordinate,"bin":bin})
+        collision_free_y_coordinate=(bin_counter[bin]//2)*negative_1_if_count_is_odd(bin_counter[bin])*point_size*gap_multiplier
+        list_of_rows.append({"x":x_val,"y":collision_free_y_coordinate,"bin":bin, "adj":0})
 
     # if the number of points is even, 
     # move y-coordinates down to put an equal number of entries above and below the axis
+    #this can sometimes break the collision avoidance routine, but makes small N outputs look better otherwise
+    if center_even_groups:
+        for row in list_of_rows:
+            if bin_counter[row["bin"]]%2==0:
+                row["y"]-=point_size*gap_multiplier/2
+                row["adj"]=-point_size*gap_multiplier/2
+
+
     for row in list_of_rows:
-        if bin_counter[row["bin"]]%2==0:
-            row["y"]-=point_size*gap_multiplier/2
+        bin = row["bin"]
+        #see if we need to "look left" to avoid a possible collision
+        for other_row in list_of_rows:
+            if (other_row["bin"]==bin-1 ):
+                if (((other_row["y"]==row["y"]) or (other_row["y"]==row["y"]+row["adj"]))
+                    and (((fig_width*(row["x"]-other_row["x"]))/(max_x-min_x)  // point_size) < 1)):
+                    bin_counter.update([bin])
+                    row["y"]=(bin_counter[bin]//2)*negative_1_if_count_is_odd(bin_counter[bin])*point_size*gap_multiplier+row["adj"]
+
+
 
     df = pd.DataFrame(list_of_rows)
-    
+
     fig = px.scatter(
         df,
         x="x",
@@ -370,9 +391,12 @@ def swarm(
 
 
 df_iris = px.data.iris() # iris is a pandas DataFrame
-fig = swarm(df_iris["sepal_length"])
+x = df_iris["sepal_length"]
+x2 = pd.Series([5.05])
+x = pd.concat([x,x2], ignore_index=True)
+fig = swarm(x)
+#fig = swarm(pd.Series([1,1.5, 1.78, 1.79,2,2,12]))
 fig.show()    
-
 ```
 
 ## Scatter and line plots with go.Scatter
