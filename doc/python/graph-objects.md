@@ -68,7 +68,9 @@ Note that the figures produced by Plotly Express **in a single function-call** a
 
 The figures produced by Plotly Express can always be built from the ground up using graph objects, but this approach typically takes **5-100 lines of code rather than 1**. 
 
-Here is a simple example of how to produce the same figure object from the same data, once with Plotly Express and once without. The data in this example is in "long form" but [Plotly Express also accepts data in "wide form"](/python/wide-form/) and the line-count savings from Plotly Express over graph objects are comparable. More complex figures such as [sunbursts](/python/sunburst-charts/), [parallel coordinates](/python/parallel-coordinates-plot/), [facet plots](/python/facet-plots/) or [animations](/python/animations/) require many more lines of figure-specific graph objects code, whereas switching from one representation to another with Plotly Express usually involves changing just a few characters.
+Here is a simple example of how to produce the same figure object from the same data, once with Plotly Express and once without. Note that [Plotly Express functions](/python-api-reference/plotly.express.html) like [`px.bar()`](/python/bar-charts/) accept a DataFrame and names of columns as the `x` and `y` arguments, while [Graph Objects functions](/python-api-reference/plotly.graph_objects.html) like [`go.Bar()`](/python/bar-charts/#basic-bar-charts-with-plotlygraphobjects) require the values to be passed to the `x` and `y` as a Series/list.
+
+The data in this example is in "long form" but [Plotly Express also accepts data in "wide form"](/python/wide-form/) and the line-count savings from Plotly Express over graph objects are comparable. More complex figures such as [sunbursts](/python/sunburst-charts/), [parallel coordinates](/python/parallel-coordinates-plot/), [facet plots](/python/facet-plots/) or [animations](/python/animations/) require many more lines of figure-specific graph objects code, whereas switching from one representation to another with Plotly Express usually involves changing just a few characters.
 
 ```python
 import pandas as pd
