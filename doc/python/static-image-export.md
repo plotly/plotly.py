@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.4
+      jupytext_version: 1.17.0
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.11.10
+    version: 3.13.2
   plotly:
     description: Plotly allows you to save static images of your plots. Save the image
       to your local computer, or embed it inside your Jupyter notebooks as a static
@@ -58,7 +58,7 @@ It's also possible to generate static images using [Orca](https://github.com/plo
 
 Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome. Kaleido v1 and later uses the Chrome that's available on the machine on which it's running. If you need to install Chrome for static image generation, Plotly provides a CLI.
 
-Run `plotly_get_chrome` to install Chrome. 
+Run `plotly_get_chrome` to install Chrome.
 
 You can also install Chrome from within Python using `plotly.io.install_chrome()`
 
@@ -71,14 +71,14 @@ pio.install_chrome()
 
 ## Write Image to a File
 
-Plotly figures have a `write_image` method to write a figure to a file. `write_image` supports PNG, JPEG, WebP, SVG, and PDF. 
+Plotly figures have a `write_image` method to write a figure to a file. `write_image` supports PNG, JPEG, WebP, SVG, and PDF.
 
-To export a figure using `write_image`, call `write_image` on the figure, and pass as an argument the filename where you want to save the figure. The file format is inferred from the extension: 
+To export a figure using `write_image`, call `write_image` on the figure, and pass as an argument the filename where you want to save the figure. The file format is inferred from the extension:
 
 
 ### Raster Formats
 
-**PNG** 
+**PNG**
 ~~~python
 import plotly.express as px
 data_canada = px.data.gapminder().query("country == 'Canada'")
@@ -145,19 +145,17 @@ fig.write_image("fig1", format="png")
 
 ## Get Image as Bytes
 
-As well as exporting to a file, Plotly figures also support conversion to a bytes object. 
+As well as exporting to a file, Plotly figures also support conversion to a bytes object.
 To convert a figure to a **PNG** bytes object, call the figure's `to_image` method with a `format`
 
 ```python
 import plotly.express as px
 data_canada = px.data.gapminder().query("country == 'Canada'")
 fig = px.bar(data_canada, x='year', y='pop')
-
 img_bytes = fig.to_image(format="png")
 ```
 
-### Display Bytes as Image Using `IPython.display.Image`
-A bytes object representing a PNG image can be displayed directly in the notebook using the `IPython.display.Image` class. This also works in the [Qt Console for Jupyter](https://qtconsole.readthedocs.io/en/stable/)!
+Here's the bytes object displayed using `IPython.display.Image`:
 
 ```python
 from IPython.display import Image
@@ -214,11 +212,11 @@ pio.write_image(fig, "fig.png")
 
 ## Image Export Settings (Kaleido)
 
-As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can also set a single default to be used throughout the duration of the program. 
+As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can also set a single default to be used throughout the duration of the program.
 
 ### Available Settings
 
-The following settings are availble. 
+The following settings are availble.
 
 `default_width`: The default pixel width to use on image export.
 
