@@ -133,7 +133,7 @@ try:
         if scope.mathjax is None:
             with warnings.catch_warnings():
                 warnings.filterwarnings(
-                    "ignore", message=".*scope\.mathjax.*", category=DeprecationWarning
+                    "ignore", message=r".*scope\.mathjax.*", category=DeprecationWarning
                 )
                 scope.mathjax = (
                     "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
@@ -351,8 +351,6 @@ To downgrade to Kaleido v0, run:
     $ pip install kaleido<1.0.0
 """
             )
-        import choreographer
-
         try:
             # TODO: Refactor to make it possible to use a shared Kaleido instance here
             img_bytes = kaleido.calc_fig_sync(
@@ -366,7 +364,7 @@ To downgrade to Kaleido v0, run:
                 topojson=defaults.topojson,
                 # mathjax=Path(defaults.mathjax).as_uri() if defaults.mathjax else None,
             )
-        except choreographer.errors.ChromeNotFoundError:
+        except kaleido.errors.ChromeNotFoundError:
             raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
     else:
@@ -638,11 +636,9 @@ which can be installed using pip:
         for d in arg_dicts
     ]
 
-    import choreographer
-
     try:
         kaleido.write_fig_from_object_sync(kaleido_specs)
-    except choreographer.errors.ChromeNotFoundError:
+    except kaleido.errors.ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
 
