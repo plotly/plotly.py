@@ -8,7 +8,7 @@ import warnings
 
 import plotly
 from plotly.io._utils import validate_coerce_fig_to_dict, broadcast_args_to_dicts
-from plotly.io import defaults
+from plotly.io._defaults import defaults
 
 ENGINE_SUPPORT_TIMELINE = "September 2025"
 
@@ -98,27 +98,46 @@ try:
                         DeprecationWarning,
                         stacklevel=2,
                     )
-                    setattr(defaults, name, value)
-                super(PlotlyScopeWithDeprecationWarnings, self).__setattr__(name, value)
+                super().__setattr__(name, value)
 
             def __getattr__(self, name):
-                if name in defaults.__dict__:
+                if hasattr(defaults, name):
                     warnings.warn(
                         kaleido_scope_default_warning_func(name),
                         DeprecationWarning,
                         stacklevel=2,
                     )
-                return super(PlotlyScopeWithDeprecationWarnings, self).__getattr__(name)
+                return super().__getattr__(name)
+
+        # Ensure the new method of setting defaults is backwards compatible with Kaleido v0
+        class DefaultsBackwardsCompatible(defaults.__class__):
+            def __init__(self, scope):
+                self._scope = scope
+                super().__init__()
+
+            def __setattr__(self, name, value):
+                if not name == "_scope":
+                    if (
+                        hasattr(self._scope, name)
+                        and getattr(self._scope, name) != value
+                    ):
+                        setattr(self._scope, name, value)
+                super().__setattr__(name, value)
 
         scope = PlotlyScopeWithDeprecationWarnings()
+        defaults = DefaultsBackwardsCompatible(scope)
         # Compute absolute path to the 'plotly/package_data/' directory
         root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
         package_dir = os.path.join(root_dir, "package_data")
         scope.plotlyjs = os.path.join(package_dir, "plotly.min.js")
         if scope.mathjax is None:
-            scope.mathjax = (
-                "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
-            )
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore", message=".*scope\.mathjax.*", category=DeprecationWarning
+                )
+                scope.mathjax = (
+                    "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+                )
     else:
         # Kaleido v1
         import kaleido
@@ -126,7 +145,7 @@ try:
         # Show a deprecation warning if the old method of setting defaults is used
         class DefaultsDeprecationWarning:
             def __getattr__(self, name):
-                if name in defaults.__dict__:
+                if hasattr(defaults, name):
                     warnings.warn(
                         kaleido_scope_default_warning_func(name),
                         DeprecationWarning,
@@ -137,7 +156,7 @@ try:
                     raise AttributeError(bad_attribute_error_msg_func(name))
 
             def __setattr__(self, name, value):
-                if name in defaults.__dict__:
+                if hasattr(defaults, name):
                     warnings.warn(
                         kaleido_scope_default_warning_func(name),
                         DeprecationWarning,
@@ -344,9 +363,7 @@ To downgrade to Kaleido v0, run:
                     height=height or defaults.default_height,
                     scale=scale or defaults.default_scale,
                 ),
-                topojson=Path(defaults.topojson).as_uri()
-                if defaults.topojson
-                else None,
+                topojson=defaults.topojson,
                 # mathjax=Path(defaults.mathjax).as_uri() if defaults.mathjax else None,
             )
         except choreographer.errors.ChromeNotFoundError:
@@ -615,7 +632,7 @@ which can be installed using pip:
                 height=d["height"] or defaults.default_height,
                 scale=d["scale"] or defaults.default_scale,
             ),
-            "topojson": Path(defaults.topojson).as_uri() if defaults.topojson else None,
+            "topojson": defaults.topojson,
             # "mathjax": Path(defaults.mathjax).as_uri() if defaults.mathjax else None,
         }
         for d in arg_dicts

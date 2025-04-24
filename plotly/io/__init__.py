@@ -16,7 +16,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
     from ._html import to_html, write_html
     from ._renderers import renderers, show
     from . import base_renderers
-    from ._defaults import defaults
+    from ._kaleido import defaults
 
     __all__ = [
         "to_image",
@@ -57,7 +57,7 @@ else:
             "._html.write_html",
             "._renderers.renderers",
             "._renderers.show",
-            "._defaults.defaults",
+            "._kaleido.defaults",
         ],
     )
 
