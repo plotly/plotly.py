@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from ...test_optional.test_utils.test_utils import np_nan, np_inf
 
+
 # Fixtures
 # --------
 @pytest.fixture

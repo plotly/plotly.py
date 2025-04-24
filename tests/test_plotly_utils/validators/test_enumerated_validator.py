@@ -4,6 +4,7 @@ import pandas as pd
 from _plotly_utils.basevalidators import EnumeratedValidator
 from ...test_optional.test_utils.test_utils import np_inf
 
+
 # Fixtures
 # --------
 @pytest.fixture()

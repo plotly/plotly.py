@@ -86,6 +86,7 @@ def _str_to_dict_path_full(key_path_str):
             return key.replace("-", "_")
 
         key_path2b = list(map(_make_hyphen_key, key_path2))
+
         # Here we want to split up each non-empty string in the list at
         # underscores and recombine the strings using chomp_empty_strings so
         # that leading, trailing and multiple _ will be preserved
@@ -383,6 +384,18 @@ def _generator(i):
     """ "cast" an iterator to a generator"""
     for x in i:
         yield x
+
+
+def _set_property_provided_value(obj, name, arg, provided):
+    """
+    Initialize a property of this object using the provided value
+    or a value popped from the arguments dictionary. If neither
+    is available, do not set the property.
+    """
+    val = arg.pop(name, None)
+    val = provided if provided is not None else val
+    if val is not None:
+        obj[name] = val
 
 
 class BaseFigure(object):
@@ -833,6 +846,14 @@ class BaseFigure(object):
             pio.show(self)
         else:
             print(repr(self))
+
+    def _set_property(self, name, arg, provided):
+        """
+        Initialize a property of this object using the provided value
+        or a value popped from the arguments dictionary. If neither
+        is available, do not set the property.
+        """
+        _set_property_provided_value(self, name, arg, provided)
 
     def update(self, dict1=None, overwrite=False, **kwargs):
         """
@@ -1591,6 +1612,7 @@ is of type {subplot_type}.""".format(
                 )
             ):
                 return self
+
             # in case the user specified they wanted an axis to refer to the
             # domain of that axis and not the data, append ' domain' to the
             # computed axis accordingly
@@ -4351,6 +4373,14 @@ class BasePlotlyType(object):
         from .validator_cache import ValidatorCache
 
         return ValidatorCache.get_validator(self._path_str, prop)
+
+    def _set_property(self, name, arg, provided):
+        """
+        Initialize a property of this object using the provided value
+        or a value popped from the arguments dictionary. If neither
+        is available, do not set the property.
+        """
+        _set_property_provided_value(self, name, arg, provided)
 
     @property
     def _validators(self):
