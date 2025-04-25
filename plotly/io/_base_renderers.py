@@ -295,7 +295,7 @@ class HtmlRenderer(MimetypeRenderer):
         {win_config}
         {mathjax_config}
         </script>
-        <script type="module">{script}</script>
+        <script>{script}</script>
         """.format(
                     script=get_plotlyjs(),
                     win_config=_window_plotly_config,
