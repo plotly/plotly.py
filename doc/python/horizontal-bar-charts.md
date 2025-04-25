@@ -216,6 +216,110 @@ fig.update_layout(annotations=annotations)
 
 fig.show()
 ```
+### Diverging Bar (or Butterfly) Chart with Neutral Column
+
+The previous diverging bar chart example excluded neutral responses. This variation includes them in a separate column.  Jonathan Schwabish discusses tradeoffs between these options on page 92-97 of _Better Data Visualizations_.
+
+```python
+import pandas as pd
+import plotly.graph_objects as go
+
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/refs/heads/master/gss_2002_5_pt_likert.csv')
+df.rename(columns={'Unnamed: 0':"Category"}, inplace=True)
+
+
+#achieve the diverging effect by putting a negative sign on the "disagree" answers 
+for v in ["Disagree","Strongly Disagree"]:
+    df[v]=df[v]*-1
+
+fig = go.Figure(layout=go.Layout(
+    title="Reactions to statements from the 2002 General Social Survey:",
+    plot_bgcolor="white",
+    barmode='relative',  # Allows bars to diverge from the center
+    # Put the legend at the bottom center of the figure
+    legend=dict(
+        orientation="h",  # a horizontal legend matches the horizontal bars
+        yref="container",
+        yanchor="bottom",
+        y=0.02,
+        xanchor="center",
+        x=0.5),
+    # use an unlabeled Y axis, since we're going to list specific questions on the y-axis.
+    yaxis=dict(
+        title=""  
+    ),
+    )
+)
+
+
+# this color palette conveys meaning:  blues for agreement, reds and oranges for disagreement, gray for Neither Agree nor Disagree
+color_by_category={
+    "Strongly Agree":'darkblue',
+    "Agree":'lightblue',
+    "Disagree":'orange',
+    "Strongly Disagree":'red',
+    "Neither Agree nor Disagree":'gray',
+}
+
+
+# We want the legend to be ordered in the same order that the categories appear, left to right --
+# which is different from the order in which we have to add the traces to the figure.
+# since we need to create the "somewhat" traces before the "strongly" traces to display
+# the segments in the desired order
+
+legend_rank_by_category={
+    "Strongly Disagree":1,
+    "Disagree":2,
+    "Agree":3,
+    "Strongly Agree":4,
+    "Neither Agree nor Disagree":5
+}
+
+# Add bars
+for col in ["Disagree","Strongly Disagree","Agree","Strongly Agree","Neither Agree nor Disagree"]:
+    fig.add_trace(go.Bar(
+        y=df["Category"],
+        x=df[col],
+        name=col,
+        orientation='h',
+        marker=dict(color=color_by_category[col]),
+        legendrank=legend_rank_by_category[col],
+        xaxis=f"x{1+(col=='Neither Agree nor Disagree')}", # in this context, putting "Neither Agree nor Disagree" on a secondary x-axis on a different domain 
+                       # yields results equivalent to subplots with far less code
+    )
+)
+
+# make calculations to split the plot into two columns with a shared x axis scale
+# by setting the domain and range of the x axes appropriately
+
+# Find the maximum width of the bars to the left and right sides of the origin; remember that the width of 
+# the plot is the sum of the longest negative bar and the longest positive bar even if they are on separate rows
+max_left = min(df[["Disagree","Strongly Disagree"]].sum(axis=1))
+max_right = max(df[["Agree","Strongly Agree"]].sum(axis=1))
+
+# we are working in percent, but coded the negative reactions as negative numbers; so we need to take the absolute value
+max_width_signed = abs(max_left)+max_right
+max_width_neither = max(df["Neither Agree nor Disagree"])
+
+fig.update_xaxes(
+        zeroline=True, #the zero line distinguishes between positive and negative segments
+        zerolinecolor="black",
+        #starting here, we set domain and range to create a shared x-axis scale
+        # multiply by .98 to add space between the two columns
+        range=[max_left, max_right],  
+        domain=[0, 0.98*(max_width_signed/(max_width_signed+max_width_neither))]  
+)
+    
+fig.update_layout(
+    xaxis2=dict(
+        range=[0, max_width_neither],  
+        domain=[(1-.98*(1-max_width_signed/(max_width_signed+max_width_neither))), 1.0],
+    )
+)
+
+fig.show()
+```
 
 ### Diverging Bar (or Butterfly) Chart
 
