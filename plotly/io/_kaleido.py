@@ -785,6 +785,7 @@ Install it using `pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]
             user_specified_path = True
     else:
         from choreographer.cli.defaults import default_download_path
+
         chrome_install_path = default_download_path
 
     # If install path was chosen by user, make sure there is an existing directory
