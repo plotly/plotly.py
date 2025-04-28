@@ -1,8 +1,9 @@
-import plotly.validators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import plotly.validators as _bv
 
 
-class LayoutValidator(plotly.validators.LayoutValidator):
+class LayoutValidator(_bv.LayoutValidator):
     def __init__(self, plotly_name="layout", parent_name="frame", **kwargs):
-        super(LayoutValidator, self).__init__(
-            plotly_name=plotly_name, parent_name=parent_name, **kwargs
-        )
+        super().__init__(plotly_name, parent_name, **kwargs)

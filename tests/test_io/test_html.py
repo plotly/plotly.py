@@ -16,6 +16,7 @@ else:
     import mock
     from mock import MagicMock
 
+
 # fixtures
 # --------
 @pytest.fixture

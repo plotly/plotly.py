@@ -25,6 +25,7 @@ Modules:
 - exceptions: defines our custom exception classes
 
 """
+
 import sys
 from typing import TYPE_CHECKING
 from _plotly_utils.importers import relative_import
@@ -180,3 +181,15 @@ def hist_series(data_frame, **kwargs):
     skip += ["figsize", "bins", "legend"]
     new_kwargs = {k: kwargs[k] for k in kwargs if k not in skip}
     return histogram(data_frame, **new_kwargs)
+
+
+def _jupyter_labextension_paths():
+    """Called by Jupyter Lab Server to detect if it is a valid labextension and
+    to install the extension.
+    """
+    return [
+        {
+            "src": "labextension/static",
+            "dest": "jupyterlab-plotly",
+        }
+    ]
