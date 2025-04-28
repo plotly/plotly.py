@@ -273,6 +273,7 @@ Templates configuration
 templates = TemplatesConfig()
 del TemplatesConfig
 
+
 # Template utilities
 # ------------------
 def walk_push_to_template(fig_obj, template_obj, skip):

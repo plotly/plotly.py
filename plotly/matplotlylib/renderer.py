@@ -6,6 +6,7 @@ fig_to_plotly, which is intended to be the main way that user's will interact
 with the matplotlylib package.
 
 """
+
 import warnings
 
 import plotly.graph_objs as go

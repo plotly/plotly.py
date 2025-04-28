@@ -58,9 +58,6 @@ commands:
             source .venv/bin/activate
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
-            cd js
-            npm ci
-            npm run build
       
       - when:
           condition: 
@@ -158,7 +155,7 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install black==22.3.0
+            pip install black==25.1.0
       - run:
           name: Check formatting with black
           command: |
@@ -309,22 +306,18 @@ jobs:
 
     steps:
       - checkout
-
-      - run:
-          name: initial NPM Build
-          command: |
-            python -m venv venv
-            . venv/bin/activate
-            cd js
-            npm ci
-            npm run build
-            git status
-
       - run:
           name: PyPI Build
           command: |
-            . venv/bin/activate
-            pip install build
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install build
+            uv pip install jupyter
+            cd js
+            npm ci
+            npm run build
+            cd ..
             python -m build --sdist --wheel -o dist
             cp -R dist output
             git status
@@ -350,7 +343,6 @@ jobs:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-
       - run:
           name: Install dependencies
           command: |
@@ -359,16 +351,11 @@ jobs:
             uv venv
             source .venv/bin/activate
             uv pip install -r requirements.txt
+            cd ..
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               uv pip uninstall plotly
-              cd ..
               uv pip install -e .
-              cd js
-              npm ci
-              npm run build
-              cd ../doc
             fi
-            cd ..
 
       - run:
           name: make html
@@ -460,7 +447,7 @@ workflows:
   release_build:
     jobs:
       - full_build
-
+  
   build:
     jobs:
       - test_core_py:

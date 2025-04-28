@@ -76,8 +76,7 @@ class JsonRenderer(MimetypeRenderer):
 class PlotlyRenderer(MimetypeRenderer):
     """
     Renderer to display figures using the plotly mime type.  This renderer is
-    compatible with JupyterLab (using the @jupyterlab/plotly-extension),
-    VSCode, and nteract.
+    compatible with VSCode and nteract.
 
     mime type: 'application/vnd.plotly.v1+json'
     """
@@ -296,7 +295,7 @@ class HtmlRenderer(MimetypeRenderer):
         {win_config}
         {mathjax_config}
         </script>
-        <script type="module">{script}</script>
+        <script>{script}</script>
         """.format(
                     script=get_plotlyjs(),
                     win_config=_window_plotly_config,

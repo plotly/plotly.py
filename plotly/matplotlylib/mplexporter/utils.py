@@ -2,6 +2,7 @@
 Utility Routines for Working with Matplotlib Objects
 ====================================================
 """
+
 import itertools
 import io
 import base64
