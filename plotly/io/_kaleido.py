@@ -740,30 +740,86 @@ which can be installed using pip:
 
 def get_chrome() -> None:
     """
-    Install Google Chrome for Kaleido
+    Install Google Chrome for Kaleido (Required for Plotly image export).
     This function can be run from the command line using the command `plotly_get_chrome`
     defined in pyproject.toml
     """
+
+    usage = """
+Usage: plotly_get_chrome [-y] [--path PATH]
+
+Installs Google Chrome for Plotly image export.
+
+Options:
+  -y  Skip confirmation prompt
+  --path PATH  Specify the path to install Chrome. Must be a path to an existing directory.
+  --help  Show this message and exit.
+"""
+
     if not kaleido_available() or kaleido_major() < 1:
         raise ValueError("""
 This command requires Kaleido v1.0.0 or greater.
 Install it using `pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]'`."
 """)
+
+    # Handle command line arguments
     import sys
 
-    cli_yes = len(sys.argv) > 1 and sys.argv[1] == "-y"
+    cli_args = sys.argv
+
+    # Handle "-y" flag
+    cli_yes = "-y" in cli_args
+    if cli_yes:
+        cli_args.remove("-y")
+
+    # Handle "--path" flag
+    chrome_install_path = None
+    user_specified_path = False
+    if "--path" in cli_args:
+        path_index = cli_args.index("--path") + 1
+        if path_index < len(cli_args):
+            chrome_install_path = cli_args[path_index]
+            cli_args.remove("--path")
+            cli_args.remove(chrome_install_path)
+            chrome_install_path = Path(chrome_install_path)
+            user_specified_path = True
+    else:
+        from choreographer.cli.defaults import default_download_path
+        chrome_install_path = default_download_path
+
+    # If install path was chosen by user, make sure there is an existing directory
+    # located at chrome_install_path; otherwise fail
+    if user_specified_path:
+        if not chrome_install_path.exists():
+            raise ValueError(f"""
+The specified install path '{chrome_install_path}' does not exist.
+Please specify a path to an existing directory using the --path argument,
+or omit the --path argument to use the default download path.
+""")
+        # Make sure the path is a directory
+        if not chrome_install_path.is_dir():
+            raise ValueError(f"""
+The specified install path '{chrome_install_path}' already exists but is not a directory.
+Please specify a path to an existing directory using the --path argument,
+or omit the --path argument to use the default download path.
+""")
+
+    # If any arguments remain, command syntax was incorrect -- print usage and exit
+    if len(cli_args) > 1:
+        print(usage)
+        sys.exit(1)
+
     if not cli_yes:
-        print(
-            "\nPlotly will install a copy of Google Chrome to be used for generating static images of plots.\n"
-        )
-        # TODO: Print path where Chrome will be installed
-        # print(f"Chrome will be installed at {chrome_download_path}\n")
+        print(f"""
+Plotly will install a copy of Google Chrome to be used for generating static images of plots.
+Chrome will be installed at: {chrome_install_path}
+ """)
         response = input("Do you want to proceed? [y/n] ")
         if not response or response[0].lower() != "y":
             print("Cancelled")
             return
     print("Installing Chrome for Plotly...")
-    kaleido.get_chrome_sync()
+    kaleido.get_chrome_sync(path=chrome_install_path)
     print("Chrome installed successfully.")
 
 
