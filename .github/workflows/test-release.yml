@@ -20,10 +20,14 @@ jobs:
     - name: Install Node
       uses: actions/setup-node@v2
       with:
-        node-version: '18'
+        node-version: '22'
 
     - name: Install npm dependencies
       run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        uv venv
+        source .venv/bin/activate
+        uv pip install jupyter
         cd js
         npm ci --verbose
         npm run build --verbose

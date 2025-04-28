@@ -985,9 +985,11 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
 
 def make_trendline_spec(args, constructor):
     trace_spec = TraceSpec(
-        constructor=go.Scattergl
-        if constructor == go.Scattergl  # could be contour
-        else go.Scatter,
+        constructor=(
+            go.Scattergl
+            if constructor == go.Scattergl  # could be contour
+            else go.Scatter
+        ),
         attrs=["trendline"],
         trace_patch=dict(mode="lines"),
         marginal=None,
@@ -2456,9 +2458,11 @@ def get_groups_and_orders(args, grouper):
         full_sorted_group_names = [
             tuple(
                 [
-                    ""
-                    if col == one_group
-                    else sub_group_names[required_grouper.index(col)]
+                    (
+                        ""
+                        if col == one_group
+                        else sub_group_names[required_grouper.index(col)]
+                    )
                     for col in grouper
                 ]
             )

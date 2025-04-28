@@ -400,8 +400,8 @@ def show(fig, renderer=None, validate=True, **kwargs):
         plot is. The default is set in plotly.js.
 
     height: int or float
-        An integer or float that determines the number of pixels wide the
-        plot is. The default is set in plotly.js.
+        An integer or float specifying the height of the plot in pixels.
+        The default is set in plotly.js.
 
     config: dict
         A dict of parameters to configure the figure. The defaults are set
@@ -497,7 +497,7 @@ environment variable: {env_renderer}""".format(
         )
 
     default_renderer = env_renderer
-elif ipython and ipython.get_ipython():
+elif ipython:
     # Try to detect environment so that we can enable a useful
     # default renderer
     if not default_renderer:
@@ -543,13 +543,21 @@ elif ipython and ipython.get_ipython():
             pass
 
     # Check if we're running in ipython terminal
-    if not default_renderer and (
-        ipython.get_ipython().__class__.__name__ == "TerminalInteractiveShell"
-    ):
+    ipython_info = ipython.get_ipython()
+    shell = ipython_info.__class__.__name__
+    if not default_renderer and (shell == "TerminalInteractiveShell"):
         default_renderer = "browser"
 
+    # Check if we're running in a Jupyter notebook or JupyterLab
+    if (
+        not default_renderer
+        and (shell == "ZMQInteractiveShell")
+        and (type(ipython_info).__module__.startswith("ipykernel."))
+    ):
+        default_renderer = "plotly_mimetype"
+
     # Fallback to renderer combination that will work automatically
-    # in the classic notebook (offline), jupyterlab, nteract, vscode, and
+    # in the jupyter notebook, jupyterlab, nteract, vscode, and
     # nbconvert HTML export.
     if not default_renderer:
         default_renderer = "plotly_mimetype+notebook"

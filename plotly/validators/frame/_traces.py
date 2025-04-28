@@ -1,8 +1,9 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class TracesValidator(_plotly_utils.basevalidators.AnyValidator):
+class TracesValidator(_bv.AnyValidator):
     def __init__(self, plotly_name="traces", parent_name="frame", **kwargs):
-        super(TracesValidator, self).__init__(
-            plotly_name=plotly_name, parent_name=parent_name, **kwargs
-        )
+        super().__init__(plotly_name, parent_name, **kwargs)
