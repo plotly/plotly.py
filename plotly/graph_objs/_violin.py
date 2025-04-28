@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Violin(_BaseTraceType):
 
-    # class properties
-    # --------------------
     _parent_path_str = ""
     _path_str = "violin"
     _valid_props = {
@@ -73,8 +74,6 @@ class Violin(_BaseTraceType):
         "zorder",
     }
 
-    # alignmentgroup
-    # --------------
     @property
     def alignmentgroup(self):
         """
@@ -96,8 +95,6 @@ class Violin(_BaseTraceType):
     def alignmentgroup(self, val):
         self["alignmentgroup"] = val
 
-    # bandwidth
-    # ---------
     @property
     def bandwidth(self):
         """
@@ -118,8 +115,6 @@ class Violin(_BaseTraceType):
     def bandwidth(self, val):
         self["bandwidth"] = val
 
-    # box
-    # ---
     @property
     def box(self):
         """
@@ -128,21 +123,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Box`
           - A dict of string/value properties that will be passed
             to the Box constructor
-
-            Supported dict properties:
-
-                fillcolor
-                    Sets the inner box plot fill color.
-                line
-                    :class:`plotly.graph_objects.violin.box.Line`
-                    instance or dict with compatible properties
-                visible
-                    Determines if an miniature box plot is drawn
-                    inside the violins.
-                width
-                    Sets the width of the inner box plots relative
-                    to the violins' width. For example, with 1, the
-                    inner box plots are as wide as the violins.
 
         Returns
         -------
@@ -154,8 +134,6 @@ class Violin(_BaseTraceType):
     def box(self, val):
         self["box"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -177,8 +155,6 @@ class Violin(_BaseTraceType):
     def customdata(self, val):
         self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -198,8 +174,6 @@ class Violin(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -212,42 +186,7 @@ class Violin(_BaseTraceType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -259,8 +198,6 @@ class Violin(_BaseTraceType):
     def fillcolor(self, val):
         self["fillcolor"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -285,8 +222,6 @@ class Violin(_BaseTraceType):
     def hoverinfo(self, val):
         self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -306,8 +241,6 @@ class Violin(_BaseTraceType):
     def hoverinfosrc(self, val):
         self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -316,44 +249,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
 
         Returns
         -------
@@ -365,8 +260,6 @@ class Violin(_BaseTraceType):
     def hoverlabel(self, val):
         self["hoverlabel"] = val
 
-    # hoveron
-    # -------
     @property
     def hoveron(self):
         """
@@ -390,8 +283,6 @@ class Violin(_BaseTraceType):
     def hoveron(self, val):
         self["hoveron"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -434,8 +325,6 @@ class Violin(_BaseTraceType):
     def hovertemplate(self, val):
         self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -455,8 +344,6 @@ class Violin(_BaseTraceType):
     def hovertemplatesrc(self, val):
         self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -477,8 +364,6 @@ class Violin(_BaseTraceType):
     def hovertext(self, val):
         self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -498,8 +383,6 @@ class Violin(_BaseTraceType):
     def hovertextsrc(self, val):
         self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -520,8 +403,6 @@ class Violin(_BaseTraceType):
     def ids(self, val):
         self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -540,8 +421,6 @@ class Violin(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
-    # jitter
-    # ------
     @property
     def jitter(self):
         """
@@ -563,8 +442,6 @@ class Violin(_BaseTraceType):
     def jitter(self, val):
         self["jitter"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -588,8 +465,6 @@ class Violin(_BaseTraceType):
     def legend(self, val):
         self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -611,8 +486,6 @@ class Violin(_BaseTraceType):
     def legendgroup(self, val):
         self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -621,13 +494,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
 
         Returns
         -------
@@ -639,8 +505,6 @@ class Violin(_BaseTraceType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -666,8 +530,6 @@ class Violin(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -687,8 +549,6 @@ class Violin(_BaseTraceType):
     def legendwidth(self, val):
         self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -697,14 +557,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
-            Supported dict properties:
-
-                color
-                    Sets the color of line bounding the violin(s).
-                width
-                    Sets the width (in px) of line bounding the
-                    violin(s).
 
         Returns
         -------
@@ -716,8 +568,6 @@ class Violin(_BaseTraceType):
     def line(self, val):
         self["line"] = val
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -726,33 +576,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
-            Supported dict properties:
-
-                angle
-                    Sets the marker angle in respect to `angleref`.
-                color
-                    Sets the marker color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `marker.cmin` and `marker.cmax` if set.
-                line
-                    :class:`plotly.graph_objects.violin.marker.Line
-                    ` instance or dict with compatible properties
-                opacity
-                    Sets the marker opacity.
-                outliercolor
-                    Sets the color of the outlier sample points.
-                size
-                    Sets the marker size (in px).
-                symbol
-                    Sets the marker symbol type. Adding 100 is
-                    equivalent to appending "-open" to a symbol
-                    name. Adding 200 is equivalent to appending
-                    "-dot" to a symbol name. Adding 300 is
-                    equivalent to appending "-open-dot" or "dot-
-                    open" to a symbol name.
 
         Returns
         -------
@@ -764,8 +587,6 @@ class Violin(_BaseTraceType):
     def marker(self, val):
         self["marker"] = val
 
-    # meanline
-    # --------
     @property
     def meanline(self):
         """
@@ -774,20 +595,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Meanline`
           - A dict of string/value properties that will be passed
             to the Meanline constructor
-
-            Supported dict properties:
-
-                color
-                    Sets the mean line color.
-                visible
-                    Determines if a line corresponding to the
-                    sample's mean is shown inside the violins. If
-                    `box.visible` is turned on, the mean line is
-                    drawn inside the inner box. Otherwise, the mean
-                    line is drawn from one side of the violin to
-                    other.
-                width
-                    Sets the mean line width.
 
         Returns
         -------
@@ -799,8 +606,6 @@ class Violin(_BaseTraceType):
     def meanline(self, val):
         self["meanline"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -827,8 +632,6 @@ class Violin(_BaseTraceType):
     def meta(self, val):
         self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -847,8 +650,6 @@ class Violin(_BaseTraceType):
     def metasrc(self, val):
         self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -874,8 +675,6 @@ class Violin(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
-    # offsetgroup
-    # -----------
     @property
     def offsetgroup(self):
         """
@@ -897,8 +696,6 @@ class Violin(_BaseTraceType):
     def offsetgroup(self, val):
         self["offsetgroup"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -917,8 +714,6 @@ class Violin(_BaseTraceType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -939,8 +734,6 @@ class Violin(_BaseTraceType):
     def orientation(self, val):
         self["orientation"] = val
 
-    # pointpos
-    # --------
     @property
     def pointpos(self):
         """
@@ -963,8 +756,6 @@ class Violin(_BaseTraceType):
     def pointpos(self, val):
         self["pointpos"] = val
 
-    # points
-    # ------
     @property
     def points(self):
         """
@@ -991,8 +782,6 @@ class Violin(_BaseTraceType):
     def points(self, val):
         self["points"] = val
 
-    # quartilemethod
-    # --------------
     @property
     def quartilemethod(self):
         """
@@ -1023,8 +812,6 @@ class Violin(_BaseTraceType):
     def quartilemethod(self, val):
         self["quartilemethod"] = val
 
-    # scalegroup
-    # ----------
     @property
     def scalegroup(self):
         """
@@ -1049,8 +836,6 @@ class Violin(_BaseTraceType):
     def scalegroup(self, val):
         self["scalegroup"] = val
 
-    # scalemode
-    # ---------
     @property
     def scalemode(self):
         """
@@ -1073,8 +858,6 @@ class Violin(_BaseTraceType):
     def scalemode(self, val):
         self["scalemode"] = val
 
-    # selected
-    # --------
     @property
     def selected(self):
         """
@@ -1083,13 +866,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.violin.selected.Ma
-                    rker` instance or dict with compatible
-                    properties
 
         Returns
         -------
@@ -1101,8 +877,6 @@ class Violin(_BaseTraceType):
     def selected(self, val):
         self["selected"] = val
 
-    # selectedpoints
-    # --------------
     @property
     def selectedpoints(self):
         """
@@ -1125,8 +899,6 @@ class Violin(_BaseTraceType):
     def selectedpoints(self, val):
         self["selectedpoints"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -1146,8 +918,6 @@ class Violin(_BaseTraceType):
     def showlegend(self, val):
         self["showlegend"] = val
 
-    # side
-    # ----
     @property
     def side(self):
         """
@@ -1170,8 +940,6 @@ class Violin(_BaseTraceType):
     def side(self, val):
         self["side"] = val
 
-    # span
-    # ----
     @property
     def span(self):
         """
@@ -1195,8 +963,6 @@ class Violin(_BaseTraceType):
     def span(self, val):
         self["span"] = val
 
-    # spanmode
-    # --------
     @property
     def spanmode(self):
         """
@@ -1222,8 +988,6 @@ class Violin(_BaseTraceType):
     def spanmode(self, val):
         self["spanmode"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1232,18 +996,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
 
         Returns
         -------
@@ -1255,8 +1007,6 @@ class Violin(_BaseTraceType):
     def stream(self, val):
         self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -1281,8 +1031,6 @@ class Violin(_BaseTraceType):
     def text(self, val):
         self["text"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1301,8 +1049,6 @@ class Violin(_BaseTraceType):
     def textsrc(self, val):
         self["textsrc"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1323,8 +1069,6 @@ class Violin(_BaseTraceType):
     def uid(self, val):
         self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1356,8 +1100,6 @@ class Violin(_BaseTraceType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # unselected
-    # ----------
     @property
     def unselected(self):
         """
@@ -1366,13 +1108,6 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.violin.unselected.
-                    Marker` instance or dict with compatible
-                    properties
 
         Returns
         -------
@@ -1384,8 +1119,6 @@ class Violin(_BaseTraceType):
     def unselected(self, val):
         self["unselected"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1407,8 +1140,6 @@ class Violin(_BaseTraceType):
     def visible(self, val):
         self["visible"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -1429,8 +1160,6 @@ class Violin(_BaseTraceType):
     def width(self, val):
         self["width"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1450,8 +1179,6 @@ class Violin(_BaseTraceType):
     def x(self, val):
         self["x"] = val
 
-    # x0
-    # --
     @property
     def x0(self):
         """
@@ -1471,8 +1198,6 @@ class Violin(_BaseTraceType):
     def x0(self, val):
         self["x0"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -1496,8 +1221,6 @@ class Violin(_BaseTraceType):
     def xaxis(self, val):
         self["xaxis"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1527,8 +1250,6 @@ class Violin(_BaseTraceType):
     def xhoverformat(self, val):
         self["xhoverformat"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1547,8 +1268,6 @@ class Violin(_BaseTraceType):
     def xsrc(self, val):
         self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1568,8 +1287,6 @@ class Violin(_BaseTraceType):
     def y(self, val):
         self["y"] = val
 
-    # y0
-    # --
     @property
     def y0(self):
         """
@@ -1589,8 +1306,6 @@ class Violin(_BaseTraceType):
     def y0(self, val):
         self["y0"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -1614,8 +1329,6 @@ class Violin(_BaseTraceType):
     def yaxis(self, val):
         self["yaxis"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1645,8 +1358,6 @@ class Violin(_BaseTraceType):
     def yhoverformat(self, val):
         self["yhoverformat"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -1665,8 +1376,6 @@ class Violin(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -1687,14 +1396,10 @@ class Violin(_BaseTraceType):
     def zorder(self, val):
         self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -2472,14 +2177,11 @@ class Violin(_BaseTraceType):
         -------
         Violin
         """
-        super(Violin, self).__init__("violin")
-
+        super().__init__("violin")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2494,268 +2196,72 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Violin`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("alignmentgroup", None)
-        _v = alignmentgroup if alignmentgroup is not None else _v
-        if _v is not None:
-            self["alignmentgroup"] = _v
-        _v = arg.pop("bandwidth", None)
-        _v = bandwidth if bandwidth is not None else _v
-        if _v is not None:
-            self["bandwidth"] = _v
-        _v = arg.pop("box", None)
-        _v = box if box is not None else _v
-        if _v is not None:
-            self["box"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("fillcolor", None)
-        _v = fillcolor if fillcolor is not None else _v
-        if _v is not None:
-            self["fillcolor"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hoveron", None)
-        _v = hoveron if hoveron is not None else _v
-        if _v is not None:
-            self["hoveron"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("jitter", None)
-        _v = jitter if jitter is not None else _v
-        if _v is not None:
-            self["jitter"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("marker", None)
-        _v = marker if marker is not None else _v
-        if _v is not None:
-            self["marker"] = _v
-        _v = arg.pop("meanline", None)
-        _v = meanline if meanline is not None else _v
-        if _v is not None:
-            self["meanline"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("offsetgroup", None)
-        _v = offsetgroup if offsetgroup is not None else _v
-        if _v is not None:
-            self["offsetgroup"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("orientation", None)
-        _v = orientation if orientation is not None else _v
-        if _v is not None:
-            self["orientation"] = _v
-        _v = arg.pop("pointpos", None)
-        _v = pointpos if pointpos is not None else _v
-        if _v is not None:
-            self["pointpos"] = _v
-        _v = arg.pop("points", None)
-        _v = points if points is not None else _v
-        if _v is not None:
-            self["points"] = _v
-        _v = arg.pop("quartilemethod", None)
-        _v = quartilemethod if quartilemethod is not None else _v
-        if _v is not None:
-            self["quartilemethod"] = _v
-        _v = arg.pop("scalegroup", None)
-        _v = scalegroup if scalegroup is not None else _v
-        if _v is not None:
-            self["scalegroup"] = _v
-        _v = arg.pop("scalemode", None)
-        _v = scalemode if scalemode is not None else _v
-        if _v is not None:
-            self["scalemode"] = _v
-        _v = arg.pop("selected", None)
-        _v = selected if selected is not None else _v
-        if _v is not None:
-            self["selected"] = _v
-        _v = arg.pop("selectedpoints", None)
-        _v = selectedpoints if selectedpoints is not None else _v
-        if _v is not None:
-            self["selectedpoints"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("side", None)
-        _v = side if side is not None else _v
-        if _v is not None:
-            self["side"] = _v
-        _v = arg.pop("span", None)
-        _v = span if span is not None else _v
-        if _v is not None:
-            self["span"] = _v
-        _v = arg.pop("spanmode", None)
-        _v = spanmode if spanmode is not None else _v
-        if _v is not None:
-            self["spanmode"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("unselected", None)
-        _v = unselected if unselected is not None else _v
-        if _v is not None:
-            self["unselected"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("x0", None)
-        _v = x0 if x0 is not None else _v
-        if _v is not None:
-            self["x0"] = _v
-        _v = arg.pop("xaxis", None)
-        _v = xaxis if xaxis is not None else _v
-        if _v is not None:
-            self["xaxis"] = _v
-        _v = arg.pop("xhoverformat", None)
-        _v = xhoverformat if xhoverformat is not None else _v
-        if _v is not None:
-            self["xhoverformat"] = _v
-        _v = arg.pop("xsrc", None)
-        _v = xsrc if xsrc is not None else _v
-        if _v is not None:
-            self["xsrc"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("y0", None)
-        _v = y0 if y0 is not None else _v
-        if _v is not None:
-            self["y0"] = _v
-        _v = arg.pop("yaxis", None)
-        _v = yaxis if yaxis is not None else _v
-        if _v is not None:
-            self["yaxis"] = _v
-        _v = arg.pop("yhoverformat", None)
-        _v = yhoverformat if yhoverformat is not None else _v
-        if _v is not None:
-            self["yhoverformat"] = _v
-        _v = arg.pop("ysrc", None)
-        _v = ysrc if ysrc is not None else _v
-        if _v is not None:
-            self["ysrc"] = _v
-        _v = arg.pop("zorder", None)
-        _v = zorder if zorder is not None else _v
-        if _v is not None:
-            self["zorder"] = _v
-
-        # Read-only literals
-        # ------------------
+        self._set_property("alignmentgroup", arg, alignmentgroup)
+        self._set_property("bandwidth", arg, bandwidth)
+        self._set_property("box", arg, box)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("fillcolor", arg, fillcolor)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverinfosrc", arg, hoverinfosrc)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hoveron", arg, hoveron)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("hovertextsrc", arg, hovertextsrc)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("jitter", arg, jitter)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgroup", arg, legendgroup)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("line", arg, line)
+        self._set_property("marker", arg, marker)
+        self._set_property("meanline", arg, meanline)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("offsetgroup", arg, offsetgroup)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("orientation", arg, orientation)
+        self._set_property("pointpos", arg, pointpos)
+        self._set_property("points", arg, points)
+        self._set_property("quartilemethod", arg, quartilemethod)
+        self._set_property("scalegroup", arg, scalegroup)
+        self._set_property("scalemode", arg, scalemode)
+        self._set_property("selected", arg, selected)
+        self._set_property("selectedpoints", arg, selectedpoints)
+        self._set_property("showlegend", arg, showlegend)
+        self._set_property("side", arg, side)
+        self._set_property("span", arg, span)
+        self._set_property("spanmode", arg, spanmode)
+        self._set_property("stream", arg, stream)
+        self._set_property("text", arg, text)
+        self._set_property("textsrc", arg, textsrc)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("unselected", arg, unselected)
+        self._set_property("visible", arg, visible)
+        self._set_property("width", arg, width)
+        self._set_property("x", arg, x)
+        self._set_property("x0", arg, x0)
+        self._set_property("xaxis", arg, xaxis)
+        self._set_property("xhoverformat", arg, xhoverformat)
+        self._set_property("xsrc", arg, xsrc)
+        self._set_property("y", arg, y)
+        self._set_property("y0", arg, y0)
+        self._set_property("yaxis", arg, yaxis)
+        self._set_property("yhoverformat", arg, yhoverformat)
+        self._set_property("ysrc", arg, ysrc)
+        self._set_property("zorder", arg, zorder)
 
         self._props["type"] = "violin"
         arg.pop("type", None)
-
-        # Process unknown kwargs
-        # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

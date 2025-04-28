@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class ErrorY(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "bar"
     _path_str = "bar.error_y"
     _valid_props = {
@@ -25,8 +26,6 @@ class ErrorY(_BaseTraceHierarchyType):
         "width",
     }
 
-    # array
-    # -----
     @property
     def array(self):
         """
@@ -46,8 +45,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def array(self, val):
         self["array"] = val
 
-    # arrayminus
-    # ----------
     @property
     def arrayminus(self):
         """
@@ -68,8 +65,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def arrayminus(self, val):
         self["arrayminus"] = val
 
-    # arrayminussrc
-    # -------------
     @property
     def arrayminussrc(self):
         """
@@ -89,8 +84,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def arrayminussrc(self, val):
         self["arrayminussrc"] = val
 
-    # arraysrc
-    # --------
     @property
     def arraysrc(self):
         """
@@ -109,8 +102,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def arraysrc(self, val):
         self["arraysrc"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -121,42 +112,7 @@ class ErrorY(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -168,8 +124,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # symmetric
-    # ---------
     @property
     def symmetric(self):
         """
@@ -190,8 +144,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def symmetric(self, val):
         self["symmetric"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -210,8 +162,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def thickness(self, val):
         self["thickness"] = val
 
-    # traceref
-    # --------
     @property
     def traceref(self):
         """
@@ -229,8 +179,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def traceref(self, val):
         self["traceref"] = val
 
-    # tracerefminus
-    # -------------
     @property
     def tracerefminus(self):
         """
@@ -248,13 +196,11 @@ class ErrorY(_BaseTraceHierarchyType):
     def tracerefminus(self, val):
         self["tracerefminus"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
         Determines the rule used to generate the error bars. If
-        *constant`, the bar lengths are of a constant value. Set this
+        "constant", the bar lengths are of a constant value. Set this
         constant in `value`. If "percent", the bar lengths correspond
         to a percentage of underlying data. Set this percentage in
         `value`. If "sqrt", the bar lengths correspond to the square of
@@ -275,8 +221,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def type(self, val):
         self["type"] = val
 
-    # value
-    # -----
     @property
     def value(self):
         """
@@ -297,8 +241,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def value(self, val):
         self["value"] = val
 
-    # valueminus
-    # ----------
     @property
     def valueminus(self):
         """
@@ -320,8 +262,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def valueminus(self, val):
         self["valueminus"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -340,8 +280,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -361,8 +299,6 @@ class ErrorY(_BaseTraceHierarchyType):
     def width(self, val):
         self["width"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -395,7 +331,7 @@ class ErrorY(_BaseTraceHierarchyType):
 
         type
             Determines the rule used to generate the error bars. If
-            *constant`, the bar lengths are of a constant value.
+            "constant", the bar lengths are of a constant value.
             Set this constant in `value`. If "percent", the bar
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
@@ -477,7 +413,7 @@ class ErrorY(_BaseTraceHierarchyType):
 
         type
             Determines the rule used to generate the error bars. If
-            *constant`, the bar lengths are of a constant value.
+            "constant", the bar lengths are of a constant value.
             Set this constant in `value`. If "percent", the bar
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
@@ -506,14 +442,11 @@ class ErrorY(_BaseTraceHierarchyType):
         -------
         ErrorY
         """
-        super(ErrorY, self).__init__("error_y")
-
+        super().__init__("error_y")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -528,74 +461,22 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.bar.ErrorY`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("array", None)
-        _v = array if array is not None else _v
-        if _v is not None:
-            self["array"] = _v
-        _v = arg.pop("arrayminus", None)
-        _v = arrayminus if arrayminus is not None else _v
-        if _v is not None:
-            self["arrayminus"] = _v
-        _v = arg.pop("arrayminussrc", None)
-        _v = arrayminussrc if arrayminussrc is not None else _v
-        if _v is not None:
-            self["arrayminussrc"] = _v
-        _v = arg.pop("arraysrc", None)
-        _v = arraysrc if arraysrc is not None else _v
-        if _v is not None:
-            self["arraysrc"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("symmetric", None)
-        _v = symmetric if symmetric is not None else _v
-        if _v is not None:
-            self["symmetric"] = _v
-        _v = arg.pop("thickness", None)
-        _v = thickness if thickness is not None else _v
-        if _v is not None:
-            self["thickness"] = _v
-        _v = arg.pop("traceref", None)
-        _v = traceref if traceref is not None else _v
-        if _v is not None:
-            self["traceref"] = _v
-        _v = arg.pop("tracerefminus", None)
-        _v = tracerefminus if tracerefminus is not None else _v
-        if _v is not None:
-            self["tracerefminus"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
-        _v = arg.pop("valueminus", None)
-        _v = valueminus if valueminus is not None else _v
-        if _v is not None:
-            self["valueminus"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("array", arg, array)
+        self._set_property("arrayminus", arg, arrayminus)
+        self._set_property("arrayminussrc", arg, arrayminussrc)
+        self._set_property("arraysrc", arg, arraysrc)
+        self._set_property("color", arg, color)
+        self._set_property("symmetric", arg, symmetric)
+        self._set_property("thickness", arg, thickness)
+        self._set_property("traceref", arg, traceref)
+        self._set_property("tracerefminus", arg, tracerefminus)
+        self._set_property("type", arg, type)
+        self._set_property("value", arg, value)
+        self._set_property("valueminus", arg, valueminus)
+        self._set_property("visible", arg, visible)
+        self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

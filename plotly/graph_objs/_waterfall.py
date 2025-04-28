@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Waterfall(_BaseTraceType):
 
-    # class properties
-    # --------------------
     _parent_path_str = ""
     _path_str = "waterfall"
     _valid_props = {
@@ -85,8 +86,6 @@ class Waterfall(_BaseTraceType):
         "zorder",
     }
 
-    # alignmentgroup
-    # --------------
     @property
     def alignmentgroup(self):
         """
@@ -108,8 +107,6 @@ class Waterfall(_BaseTraceType):
     def alignmentgroup(self, val):
         self["alignmentgroup"] = val
 
-    # base
-    # ----
     @property
     def base(self):
         """
@@ -128,8 +125,6 @@ class Waterfall(_BaseTraceType):
     def base(self, val):
         self["base"] = val
 
-    # cliponaxis
-    # ----------
     @property
     def cliponaxis(self):
         """
@@ -151,8 +146,6 @@ class Waterfall(_BaseTraceType):
     def cliponaxis(self, val):
         self["cliponaxis"] = val
 
-    # connector
-    # ---------
     @property
     def connector(self):
         """
@@ -161,17 +154,6 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Connector`
           - A dict of string/value properties that will be passed
             to the Connector constructor
-
-            Supported dict properties:
-
-                line
-                    :class:`plotly.graph_objects.waterfall.connecto
-                    r.Line` instance or dict with compatible
-                    properties
-                mode
-                    Sets the shape of connector lines.
-                visible
-                    Determines if connector lines are drawn.
 
         Returns
         -------
@@ -183,8 +165,6 @@ class Waterfall(_BaseTraceType):
     def connector(self, val):
         self["connector"] = val
 
-    # constraintext
-    # -------------
     @property
     def constraintext(self):
         """
@@ -205,8 +185,6 @@ class Waterfall(_BaseTraceType):
     def constraintext(self, val):
         self["constraintext"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -228,8 +206,6 @@ class Waterfall(_BaseTraceType):
     def customdata(self, val):
         self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -249,8 +225,6 @@ class Waterfall(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
-    # decreasing
-    # ----------
     @property
     def decreasing(self):
         """
@@ -259,13 +233,6 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
-
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.waterfall.decreasi
-                    ng.Marker` instance or dict with compatible
-                    properties
 
         Returns
         -------
@@ -277,8 +244,6 @@ class Waterfall(_BaseTraceType):
     def decreasing(self, val):
         self["decreasing"] = val
 
-    # dx
-    # --
     @property
     def dx(self):
         """
@@ -297,8 +262,6 @@ class Waterfall(_BaseTraceType):
     def dx(self, val):
         self["dx"] = val
 
-    # dy
-    # --
     @property
     def dy(self):
         """
@@ -317,8 +280,6 @@ class Waterfall(_BaseTraceType):
     def dy(self, val):
         self["dy"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -343,8 +304,6 @@ class Waterfall(_BaseTraceType):
     def hoverinfo(self, val):
         self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -364,8 +323,6 @@ class Waterfall(_BaseTraceType):
     def hoverinfosrc(self, val):
         self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -374,44 +331,6 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
 
         Returns
         -------
@@ -423,8 +342,6 @@ class Waterfall(_BaseTraceType):
     def hoverlabel(self, val):
         self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -469,8 +386,6 @@ class Waterfall(_BaseTraceType):
     def hovertemplate(self, val):
         self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -490,8 +405,6 @@ class Waterfall(_BaseTraceType):
     def hovertemplatesrc(self, val):
         self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -516,8 +429,6 @@ class Waterfall(_BaseTraceType):
     def hovertext(self, val):
         self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -537,8 +448,6 @@ class Waterfall(_BaseTraceType):
     def hovertextsrc(self, val):
         self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -559,8 +468,6 @@ class Waterfall(_BaseTraceType):
     def ids(self, val):
         self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -579,8 +486,6 @@ class Waterfall(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
-    # increasing
-    # ----------
     @property
     def increasing(self):
         """
@@ -589,13 +494,6 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
-
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.waterfall.increasi
-                    ng.Marker` instance or dict with compatible
-                    properties
 
         Returns
         -------
@@ -607,8 +505,6 @@ class Waterfall(_BaseTraceType):
     def increasing(self, val):
         self["increasing"] = val
 
-    # insidetextanchor
-    # ----------------
     @property
     def insidetextanchor(self):
         """
@@ -629,8 +525,6 @@ class Waterfall(_BaseTraceType):
     def insidetextanchor(self, val):
         self["insidetextanchor"] = val
 
-    # insidetextfont
-    # --------------
     @property
     def insidetextfont(self):
         """
@@ -642,79 +536,6 @@ class Waterfall(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.waterfall.Insidetextfont
@@ -725,8 +546,6 @@ class Waterfall(_BaseTraceType):
     def insidetextfont(self, val):
         self["insidetextfont"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -750,8 +569,6 @@ class Waterfall(_BaseTraceType):
     def legend(self, val):
         self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -773,8 +590,6 @@ class Waterfall(_BaseTraceType):
     def legendgroup(self, val):
         self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -783,13 +598,6 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
 
         Returns
         -------
@@ -801,8 +609,6 @@ class Waterfall(_BaseTraceType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -828,8 +634,6 @@ class Waterfall(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -849,8 +653,6 @@ class Waterfall(_BaseTraceType):
     def legendwidth(self, val):
         self["legendwidth"] = val
 
-    # measure
-    # -------
     @property
     def measure(self):
         """
@@ -873,8 +675,6 @@ class Waterfall(_BaseTraceType):
     def measure(self, val):
         self["measure"] = val
 
-    # measuresrc
-    # ----------
     @property
     def measuresrc(self):
         """
@@ -893,8 +693,6 @@ class Waterfall(_BaseTraceType):
     def measuresrc(self, val):
         self["measuresrc"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -921,8 +719,6 @@ class Waterfall(_BaseTraceType):
     def meta(self, val):
         self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -941,8 +737,6 @@ class Waterfall(_BaseTraceType):
     def metasrc(self, val):
         self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -963,8 +757,6 @@ class Waterfall(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
-    # offset
-    # ------
     @property
     def offset(self):
         """
@@ -986,8 +778,6 @@ class Waterfall(_BaseTraceType):
     def offset(self, val):
         self["offset"] = val
 
-    # offsetgroup
-    # -----------
     @property
     def offsetgroup(self):
         """
@@ -1009,8 +799,6 @@ class Waterfall(_BaseTraceType):
     def offsetgroup(self, val):
         self["offsetgroup"] = val
 
-    # offsetsrc
-    # ---------
     @property
     def offsetsrc(self):
         """
@@ -1029,8 +817,6 @@ class Waterfall(_BaseTraceType):
     def offsetsrc(self, val):
         self["offsetsrc"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -1049,8 +835,6 @@ class Waterfall(_BaseTraceType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -1071,8 +855,6 @@ class Waterfall(_BaseTraceType):
     def orientation(self, val):
         self["orientation"] = val
 
-    # outsidetextfont
-    # ---------------
     @property
     def outsidetextfont(self):
         """
@@ -1084,79 +866,6 @@ class Waterfall(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.waterfall.Outsidetextfont
@@ -1167,8 +876,6 @@ class Waterfall(_BaseTraceType):
     def outsidetextfont(self, val):
         self["outsidetextfont"] = val
 
-    # selectedpoints
-    # --------------
     @property
     def selectedpoints(self):
         """
@@ -1191,8 +898,6 @@ class Waterfall(_BaseTraceType):
     def selectedpoints(self, val):
         self["selectedpoints"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -1212,8 +917,6 @@ class Waterfall(_BaseTraceType):
     def showlegend(self, val):
         self["showlegend"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1222,18 +925,6 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
 
         Returns
         -------
@@ -1245,8 +936,6 @@ class Waterfall(_BaseTraceType):
     def stream(self, val):
         self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -1272,8 +961,6 @@ class Waterfall(_BaseTraceType):
     def text(self, val):
         self["text"] = val
 
-    # textangle
-    # ---------
     @property
     def textangle(self):
         """
@@ -1297,8 +984,6 @@ class Waterfall(_BaseTraceType):
     def textangle(self, val):
         self["textangle"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -1310,79 +995,6 @@ class Waterfall(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.waterfall.Textfont
@@ -1393,8 +1005,6 @@ class Waterfall(_BaseTraceType):
     def textfont(self, val):
         self["textfont"] = val
 
-    # textinfo
-    # --------
     @property
     def textinfo(self):
         """
@@ -1418,8 +1028,6 @@ class Waterfall(_BaseTraceType):
     def textinfo(self, val):
         self["textinfo"] = val
 
-    # textposition
-    # ------------
     @property
     def textposition(self):
         """
@@ -1447,8 +1055,6 @@ class Waterfall(_BaseTraceType):
     def textposition(self, val):
         self["textposition"] = val
 
-    # textpositionsrc
-    # ---------------
     @property
     def textpositionsrc(self):
         """
@@ -1468,8 +1074,6 @@ class Waterfall(_BaseTraceType):
     def textpositionsrc(self, val):
         self["textpositionsrc"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1488,8 +1092,6 @@ class Waterfall(_BaseTraceType):
     def textsrc(self, val):
         self["textsrc"] = val
 
-    # texttemplate
-    # ------------
     @property
     def texttemplate(self):
         """
@@ -1523,8 +1125,6 @@ class Waterfall(_BaseTraceType):
     def texttemplate(self, val):
         self["texttemplate"] = val
 
-    # texttemplatesrc
-    # ---------------
     @property
     def texttemplatesrc(self):
         """
@@ -1544,8 +1144,6 @@ class Waterfall(_BaseTraceType):
     def texttemplatesrc(self, val):
         self["texttemplatesrc"] = val
 
-    # totals
-    # ------
     @property
     def totals(self):
         """
@@ -1554,13 +1152,6 @@ class Waterfall(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.waterfall.Totals`
           - A dict of string/value properties that will be passed
             to the Totals constructor
-
-            Supported dict properties:
-
-                marker
-                    :class:`plotly.graph_objects.waterfall.totals.M
-                    arker` instance or dict with compatible
-                    properties
 
         Returns
         -------
@@ -1572,8 +1163,6 @@ class Waterfall(_BaseTraceType):
     def totals(self, val):
         self["totals"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1594,8 +1183,6 @@ class Waterfall(_BaseTraceType):
     def uid(self, val):
         self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1627,8 +1214,6 @@ class Waterfall(_BaseTraceType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1650,8 +1235,6 @@ class Waterfall(_BaseTraceType):
     def visible(self, val):
         self["visible"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -1671,8 +1254,6 @@ class Waterfall(_BaseTraceType):
     def width(self, val):
         self["width"] = val
 
-    # widthsrc
-    # --------
     @property
     def widthsrc(self):
         """
@@ -1691,8 +1272,6 @@ class Waterfall(_BaseTraceType):
     def widthsrc(self, val):
         self["widthsrc"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1711,8 +1290,6 @@ class Waterfall(_BaseTraceType):
     def x(self, val):
         self["x"] = val
 
-    # x0
-    # --
     @property
     def x0(self):
         """
@@ -1732,8 +1309,6 @@ class Waterfall(_BaseTraceType):
     def x0(self, val):
         self["x0"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -1757,8 +1332,6 @@ class Waterfall(_BaseTraceType):
     def xaxis(self, val):
         self["xaxis"] = val
 
-    # xhoverformat
-    # ------------
     @property
     def xhoverformat(self):
         """
@@ -1788,8 +1361,6 @@ class Waterfall(_BaseTraceType):
     def xhoverformat(self, val):
         self["xhoverformat"] = val
 
-    # xperiod
-    # -------
     @property
     def xperiod(self):
         """
@@ -1810,8 +1381,6 @@ class Waterfall(_BaseTraceType):
     def xperiod(self, val):
         self["xperiod"] = val
 
-    # xperiod0
-    # --------
     @property
     def xperiod0(self):
         """
@@ -1833,8 +1402,6 @@ class Waterfall(_BaseTraceType):
     def xperiod0(self, val):
         self["xperiod0"] = val
 
-    # xperiodalignment
-    # ----------------
     @property
     def xperiodalignment(self):
         """
@@ -1855,8 +1422,6 @@ class Waterfall(_BaseTraceType):
     def xperiodalignment(self, val):
         self["xperiodalignment"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1875,8 +1440,6 @@ class Waterfall(_BaseTraceType):
     def xsrc(self, val):
         self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1895,8 +1458,6 @@ class Waterfall(_BaseTraceType):
     def y(self, val):
         self["y"] = val
 
-    # y0
-    # --
     @property
     def y0(self):
         """
@@ -1916,8 +1477,6 @@ class Waterfall(_BaseTraceType):
     def y0(self, val):
         self["y0"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -1941,8 +1500,6 @@ class Waterfall(_BaseTraceType):
     def yaxis(self, val):
         self["yaxis"] = val
 
-    # yhoverformat
-    # ------------
     @property
     def yhoverformat(self):
         """
@@ -1972,8 +1529,6 @@ class Waterfall(_BaseTraceType):
     def yhoverformat(self, val):
         self["yhoverformat"] = val
 
-    # yperiod
-    # -------
     @property
     def yperiod(self):
         """
@@ -1994,8 +1549,6 @@ class Waterfall(_BaseTraceType):
     def yperiod(self, val):
         self["yperiod"] = val
 
-    # yperiod0
-    # --------
     @property
     def yperiod0(self):
         """
@@ -2017,8 +1570,6 @@ class Waterfall(_BaseTraceType):
     def yperiod0(self, val):
         self["yperiod0"] = val
 
-    # yperiodalignment
-    # ----------------
     @property
     def yperiodalignment(self):
         """
@@ -2039,8 +1590,6 @@ class Waterfall(_BaseTraceType):
     def yperiodalignment(self, val):
         self["yperiodalignment"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -2059,8 +1608,6 @@ class Waterfall(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -2081,14 +1628,10 @@ class Waterfall(_BaseTraceType):
     def zorder(self, val):
         self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -2938,14 +2481,11 @@ class Waterfall(_BaseTraceType):
         -------
         Waterfall
         """
-        super(Waterfall, self).__init__("waterfall")
-
+        super().__init__("waterfall")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2960,316 +2500,84 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Waterfall`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("alignmentgroup", None)
-        _v = alignmentgroup if alignmentgroup is not None else _v
-        if _v is not None:
-            self["alignmentgroup"] = _v
-        _v = arg.pop("base", None)
-        _v = base if base is not None else _v
-        if _v is not None:
-            self["base"] = _v
-        _v = arg.pop("cliponaxis", None)
-        _v = cliponaxis if cliponaxis is not None else _v
-        if _v is not None:
-            self["cliponaxis"] = _v
-        _v = arg.pop("connector", None)
-        _v = connector if connector is not None else _v
-        if _v is not None:
-            self["connector"] = _v
-        _v = arg.pop("constraintext", None)
-        _v = constraintext if constraintext is not None else _v
-        if _v is not None:
-            self["constraintext"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("decreasing", None)
-        _v = decreasing if decreasing is not None else _v
-        if _v is not None:
-            self["decreasing"] = _v
-        _v = arg.pop("dx", None)
-        _v = dx if dx is not None else _v
-        if _v is not None:
-            self["dx"] = _v
-        _v = arg.pop("dy", None)
-        _v = dy if dy is not None else _v
-        if _v is not None:
-            self["dy"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("increasing", None)
-        _v = increasing if increasing is not None else _v
-        if _v is not None:
-            self["increasing"] = _v
-        _v = arg.pop("insidetextanchor", None)
-        _v = insidetextanchor if insidetextanchor is not None else _v
-        if _v is not None:
-            self["insidetextanchor"] = _v
-        _v = arg.pop("insidetextfont", None)
-        _v = insidetextfont if insidetextfont is not None else _v
-        if _v is not None:
-            self["insidetextfont"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("measure", None)
-        _v = measure if measure is not None else _v
-        if _v is not None:
-            self["measure"] = _v
-        _v = arg.pop("measuresrc", None)
-        _v = measuresrc if measuresrc is not None else _v
-        if _v is not None:
-            self["measuresrc"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("offset", None)
-        _v = offset if offset is not None else _v
-        if _v is not None:
-            self["offset"] = _v
-        _v = arg.pop("offsetgroup", None)
-        _v = offsetgroup if offsetgroup is not None else _v
-        if _v is not None:
-            self["offsetgroup"] = _v
-        _v = arg.pop("offsetsrc", None)
-        _v = offsetsrc if offsetsrc is not None else _v
-        if _v is not None:
-            self["offsetsrc"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("orientation", None)
-        _v = orientation if orientation is not None else _v
-        if _v is not None:
-            self["orientation"] = _v
-        _v = arg.pop("outsidetextfont", None)
-        _v = outsidetextfont if outsidetextfont is not None else _v
-        if _v is not None:
-            self["outsidetextfont"] = _v
-        _v = arg.pop("selectedpoints", None)
-        _v = selectedpoints if selectedpoints is not None else _v
-        if _v is not None:
-            self["selectedpoints"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textangle", None)
-        _v = textangle if textangle is not None else _v
-        if _v is not None:
-            self["textangle"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("textinfo", None)
-        _v = textinfo if textinfo is not None else _v
-        if _v is not None:
-            self["textinfo"] = _v
-        _v = arg.pop("textposition", None)
-        _v = textposition if textposition is not None else _v
-        if _v is not None:
-            self["textposition"] = _v
-        _v = arg.pop("textpositionsrc", None)
-        _v = textpositionsrc if textpositionsrc is not None else _v
-        if _v is not None:
-            self["textpositionsrc"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("texttemplate", None)
-        _v = texttemplate if texttemplate is not None else _v
-        if _v is not None:
-            self["texttemplate"] = _v
-        _v = arg.pop("texttemplatesrc", None)
-        _v = texttemplatesrc if texttemplatesrc is not None else _v
-        if _v is not None:
-            self["texttemplatesrc"] = _v
-        _v = arg.pop("totals", None)
-        _v = totals if totals is not None else _v
-        if _v is not None:
-            self["totals"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-        _v = arg.pop("widthsrc", None)
-        _v = widthsrc if widthsrc is not None else _v
-        if _v is not None:
-            self["widthsrc"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("x0", None)
-        _v = x0 if x0 is not None else _v
-        if _v is not None:
-            self["x0"] = _v
-        _v = arg.pop("xaxis", None)
-        _v = xaxis if xaxis is not None else _v
-        if _v is not None:
-            self["xaxis"] = _v
-        _v = arg.pop("xhoverformat", None)
-        _v = xhoverformat if xhoverformat is not None else _v
-        if _v is not None:
-            self["xhoverformat"] = _v
-        _v = arg.pop("xperiod", None)
-        _v = xperiod if xperiod is not None else _v
-        if _v is not None:
-            self["xperiod"] = _v
-        _v = arg.pop("xperiod0", None)
-        _v = xperiod0 if xperiod0 is not None else _v
-        if _v is not None:
-            self["xperiod0"] = _v
-        _v = arg.pop("xperiodalignment", None)
-        _v = xperiodalignment if xperiodalignment is not None else _v
-        if _v is not None:
-            self["xperiodalignment"] = _v
-        _v = arg.pop("xsrc", None)
-        _v = xsrc if xsrc is not None else _v
-        if _v is not None:
-            self["xsrc"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("y0", None)
-        _v = y0 if y0 is not None else _v
-        if _v is not None:
-            self["y0"] = _v
-        _v = arg.pop("yaxis", None)
-        _v = yaxis if yaxis is not None else _v
-        if _v is not None:
-            self["yaxis"] = _v
-        _v = arg.pop("yhoverformat", None)
-        _v = yhoverformat if yhoverformat is not None else _v
-        if _v is not None:
-            self["yhoverformat"] = _v
-        _v = arg.pop("yperiod", None)
-        _v = yperiod if yperiod is not None else _v
-        if _v is not None:
-            self["yperiod"] = _v
-        _v = arg.pop("yperiod0", None)
-        _v = yperiod0 if yperiod0 is not None else _v
-        if _v is not None:
-            self["yperiod0"] = _v
-        _v = arg.pop("yperiodalignment", None)
-        _v = yperiodalignment if yperiodalignment is not None else _v
-        if _v is not None:
-            self["yperiodalignment"] = _v
-        _v = arg.pop("ysrc", None)
-        _v = ysrc if ysrc is not None else _v
-        if _v is not None:
-            self["ysrc"] = _v
-        _v = arg.pop("zorder", None)
-        _v = zorder if zorder is not None else _v
-        if _v is not None:
-            self["zorder"] = _v
-
-        # Read-only literals
-        # ------------------
+        self._set_property("alignmentgroup", arg, alignmentgroup)
+        self._set_property("base", arg, base)
+        self._set_property("cliponaxis", arg, cliponaxis)
+        self._set_property("connector", arg, connector)
+        self._set_property("constraintext", arg, constraintext)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("decreasing", arg, decreasing)
+        self._set_property("dx", arg, dx)
+        self._set_property("dy", arg, dy)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverinfosrc", arg, hoverinfosrc)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("hovertextsrc", arg, hovertextsrc)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("increasing", arg, increasing)
+        self._set_property("insidetextanchor", arg, insidetextanchor)
+        self._set_property("insidetextfont", arg, insidetextfont)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgroup", arg, legendgroup)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("measure", arg, measure)
+        self._set_property("measuresrc", arg, measuresrc)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("offset", arg, offset)
+        self._set_property("offsetgroup", arg, offsetgroup)
+        self._set_property("offsetsrc", arg, offsetsrc)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("orientation", arg, orientation)
+        self._set_property("outsidetextfont", arg, outsidetextfont)
+        self._set_property("selectedpoints", arg, selectedpoints)
+        self._set_property("showlegend", arg, showlegend)
+        self._set_property("stream", arg, stream)
+        self._set_property("text", arg, text)
+        self._set_property("textangle", arg, textangle)
+        self._set_property("textfont", arg, textfont)
+        self._set_property("textinfo", arg, textinfo)
+        self._set_property("textposition", arg, textposition)
+        self._set_property("textpositionsrc", arg, textpositionsrc)
+        self._set_property("textsrc", arg, textsrc)
+        self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatesrc", arg, texttemplatesrc)
+        self._set_property("totals", arg, totals)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("visible", arg, visible)
+        self._set_property("width", arg, width)
+        self._set_property("widthsrc", arg, widthsrc)
+        self._set_property("x", arg, x)
+        self._set_property("x0", arg, x0)
+        self._set_property("xaxis", arg, xaxis)
+        self._set_property("xhoverformat", arg, xhoverformat)
+        self._set_property("xperiod", arg, xperiod)
+        self._set_property("xperiod0", arg, xperiod0)
+        self._set_property("xperiodalignment", arg, xperiodalignment)
+        self._set_property("xsrc", arg, xsrc)
+        self._set_property("y", arg, y)
+        self._set_property("y0", arg, y0)
+        self._set_property("yaxis", arg, yaxis)
+        self._set_property("yhoverformat", arg, yhoverformat)
+        self._set_property("yperiod", arg, yperiod)
+        self._set_property("yperiod0", arg, yperiod0)
+        self._set_property("yperiodalignment", arg, yperiodalignment)
+        self._set_property("ysrc", arg, ysrc)
+        self._set_property("zorder", arg, zorder)
 
         self._props["type"] = "waterfall"
         arg.pop("type", None)
-
-        # Process unknown kwargs
-        # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

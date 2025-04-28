@@ -5,6 +5,7 @@ tools
 Functions that USERS will possibly want access to.
 
 """
+
 import json
 import warnings
 
@@ -249,7 +250,7 @@ def make_subplots(
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
-    # or see Figure.append_trace
+    # or see Figure.add_trace
 
     Example 2:
     # subplots with shared x axes
@@ -570,6 +571,7 @@ _DEFAULT_DECREASING_COLOR = "#FF4136"
 
 DIAG_CHOICES = ["scatter", "histogram", "box"]
 VALID_COLORMAP_TYPES = ["cat", "seq"]
+
 
 # Deprecations
 class FigureFactory(object):
