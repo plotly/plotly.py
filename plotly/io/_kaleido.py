@@ -14,19 +14,24 @@ ENGINE_SUPPORT_TIMELINE = "September 2025"
 
 PLOTLY_GET_CHROME_ERROR_MSG = """
 
-Kaleido requires Google Chrome to be installed. Install it by running:
+Kaleido requires Google Chrome to be installed. 
+
+Either download and install Chrome yourself following Google's instructions for your operating system,
+or install it from your terminal by running:
+
     $ plotly_get_chrome
+
 """
 
 
 # TODO: Remove --pre flag once Kaleido v1 full release is available
 KALEIDO_DEPRECATION_MSG = f"""
 Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}.
-Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade --pre kaleido` or `pip install plotly[kaleido]`).
+Please upgrade Kaleido to version 1.0.0 or greater (`pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]'`).
 """
 ORCA_DEPRECATION_MSG = f"""
 Support for the Orca engine is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}.
-Please install Kaleido (`pip install --upgrade --pre kaleido` or `pip install plotly[kaleido]`) to use the Kaleido engine.
+Please install Kaleido (`pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]'`) to use the Kaleido engine.
 """
 ENGINE_PARAM_DEPRECATION_MSG = f"""
 Support for the 'engine' argument is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}.
@@ -110,6 +115,8 @@ try:
                 return super().__getattr__(name)
 
         # Ensure the new method of setting defaults is backwards compatible with Kaleido v0
+        # DefaultsBackwardsCompatible sets the attributes on `scope` object at the same time
+        # as they are set on the `defaults` object
         class DefaultsBackwardsCompatible(defaults.__class__):
             def __init__(self, scope):
                 self._scope = scope
@@ -267,7 +274,7 @@ def to_image(
         less than 1.0 will decrease the image resolution.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_scale` if engine is "kaliedo"
+            - `plotly.io.defaults.default_scale` if engine is "kaleido"
             - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
     validate: bool
@@ -329,9 +336,10 @@ def to_image(
     if not kaleido_available():
         raise ValueError(
             """
-Image export using the "kaleido" engine requires the kaleido package,
+Image export using the "kaleido" engine requires the Kaleido package,
 which can be installed using pip:
-    $ pip install -U kaleido
+
+    $ pip install --upgrade kaleido
 """
         )
 
@@ -348,9 +356,11 @@ which can be installed using pip:
 EPS export is not supported by Kaleido v1. Please use SVG or PDF instead.
 You can also downgrade to Kaleido v0, but support for Kaleido v0 will be removed after {ENGINE_SUPPORT_TIMELINE}.
 To downgrade to Kaleido v0, run:
-    $ pip install kaleido<1.0.0
+    $ pip install 'kaleido<1.0.0'
 """
             )
+        from kaleido.errors import ChromeNotFoundError
+
         try:
             # TODO: Refactor to make it possible to use a shared Kaleido instance here
             img_bytes = kaleido.calc_fig_sync(
@@ -362,9 +372,13 @@ To downgrade to Kaleido v0, run:
                     scale=scale or defaults.default_scale,
                 ),
                 topojson=defaults.topojson,
-                # mathjax=Path(defaults.mathjax).as_uri() if defaults.mathjax else None,
+                kopts=dict(
+                    mathjax=defaults.mathjax,
+                )
+                if defaults.mathjax
+                else None,
             )
-        except kaleido.errors.ChromeNotFoundError:
+        except ChromeNotFoundError:
             raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
     else:
@@ -583,18 +597,20 @@ def write_images(
     if not kaleido_available():
         raise ValueError(
             """
-The `write_images()` function requires the kaleido package,
+The `write_images()` function requires the Kaleido package,
 which can be installed using pip:
-    $ pip install -U kaleido
+
+    $ pip install --upgrade kaleido
 """
         )
     elif kaleido_major() < 1:
         raise ValueError(
             f"""
 You have Kaleido version {Version(importlib_metadata.version("kaleido"))} installed.
-The `write_images()` function requires the kaleido package version 1 or greater,
+The `write_images()` function requires the Kaleido package version 1.0.0 or greater,
 which can be installed using pip:
-    $ pip install -U 'kaleido>=1.0.0'
+
+    $ pip install 'kaleido>=1.0.0'
 """
         )
 
@@ -621,24 +637,32 @@ which can be installed using pip:
     # has already been cast to a Path object.
     # Also insert defaults for any missing arguments as needed
     kaleido_specs = [
-        {
-            "fig": d["fig"],
-            "path": d["file"],
-            "opts": dict(
+        dict(
+            fig=d["fig"],
+            path=d["file"],
+            opts=dict(
                 format=infer_format(d["file"], d["format"]) or defaults.default_format,
                 width=d["width"] or defaults.default_width,
                 height=d["height"] or defaults.default_height,
                 scale=d["scale"] or defaults.default_scale,
             ),
-            "topojson": defaults.topojson,
-            # "mathjax": Path(defaults.mathjax).as_uri() if defaults.mathjax else None,
-        }
+            topojson=defaults.topojson,
+        )
         for d in arg_dicts
     ]
 
+    from kaleido.errors import ChromeNotFoundError
+
     try:
-        kaleido.write_fig_from_object_sync(kaleido_specs)
-    except kaleido.errors.ChromeNotFoundError:
+        kaleido.write_fig_from_object_sync(
+            kaleido_specs,
+            kopts=dict(
+                mathjax=defaults.mathjax,
+            )
+            if defaults.mathjax
+            else None,
+        )
+    except ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
 
@@ -676,9 +700,10 @@ def full_figure_for_development(
     if not kaleido_available():
         raise ValueError(
             """
-Full figure generation requires the kaleido package,
+Full figure generation requires the Kaleido package,
 which can be installed using pip:
-    $ pip install -U kaleido
+
+    $ pip install --upgrade kaleido
 """
         )
 
@@ -700,7 +725,7 @@ which can be installed using pip:
         # Kaleido v0
         warnings.warn(
             f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. "
-            + "Please upgrade Kaleido to version 1.0.0 or greater (`pip install --upgrade kaleido`).",
+            + "Please upgrade Kaleido to version 1.0.0 or greater (`pip install 'kaleido>=1.0.0'`).",
             DeprecationWarning,
         )
         fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
@@ -720,9 +745,10 @@ def get_chrome() -> None:
     defined in pyproject.toml
     """
     if not kaleido_available() or kaleido_major() < 1:
-        raise ValueError(
-            "This command requires Kaleido v1.0.0 or greater. Install it using `pip install kaleido`."
-        )
+        raise ValueError("""
+This command requires Kaleido v1.0.0 or greater.
+Install it using `pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]'`."
+""")
     import sys
 
     cli_yes = len(sys.argv) > 1 and sys.argv[1] == "-y"
