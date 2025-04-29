@@ -757,10 +757,12 @@ Options:
 """
 
     if not kaleido_available() or kaleido_major() < 1:
-        raise ValueError("""
+        raise ValueError(
+            """
 This command requires Kaleido v1.0.0 or greater.
 Install it using `pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]'`."
-""")
+"""
+        )
 
     # Handle command line arguments
     import sys
@@ -792,18 +794,22 @@ Install it using `pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]
     # located at chrome_install_path; otherwise fail
     if user_specified_path:
         if not chrome_install_path.exists():
-            raise ValueError(f"""
+            raise ValueError(
+                f"""
 The specified install path '{chrome_install_path}' does not exist.
 Please specify a path to an existing directory using the --path argument,
 or omit the --path argument to use the default download path.
-""")
+"""
+            )
         # Make sure the path is a directory
         if not chrome_install_path.is_dir():
-            raise ValueError(f"""
+            raise ValueError(
+                f"""
 The specified install path '{chrome_install_path}' already exists but is not a directory.
 Please specify a path to an existing directory using the --path argument,
 or omit the --path argument to use the default download path.
-""")
+"""
+            )
 
     # If any arguments remain, command syntax was incorrect -- print usage and exit
     if len(cli_args) > 1:
@@ -811,9 +817,11 @@ or omit the --path argument to use the default download path.
         sys.exit(1)
 
     if not cli_yes:
-        print(f"""
+        print(
+            f"""
 Plotly will install a copy of Google Chrome to be used for generating static images of plots.
-Chrome will be installed at: {chrome_install_path}""")
+Chrome will be installed at: {chrome_install_path}"""
+        )
         response = input("Do you want to proceed? [y/n] ")
         if not response or response[0].lower() != "y":
             print("Cancelled")
