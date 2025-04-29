@@ -1,11 +1,14 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class PullValidator(_plotly_utils.basevalidators.NumberValidator):
+class PullValidator(_bv.NumberValidator):
     def __init__(self, plotly_name="pull", parent_name="pie", **kwargs):
-        super(PullValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             max=kwargs.pop("max", 1),

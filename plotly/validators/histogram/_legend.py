@@ -1,11 +1,14 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class LegendValidator(_plotly_utils.basevalidators.SubplotidValidator):
+class LegendValidator(_bv.SubplotidValidator):
     def __init__(self, plotly_name="legend", parent_name="histogram", **kwargs):
-        super(LegendValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             dflt=kwargs.pop("dflt", "legend"),
             edit_type=kwargs.pop("edit_type", "style"),
             **kwargs,
