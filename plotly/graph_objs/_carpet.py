@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Carpet(_BaseTraceType):
 
-    # class properties
-    # --------------------
     _parent_path_str = ""
     _path_str = "carpet"
     _valid_props = {
@@ -49,8 +50,6 @@ class Carpet(_BaseTraceType):
         "zorder",
     }
 
-    # a
-    # -
     @property
     def a(self):
         """
@@ -69,8 +68,6 @@ class Carpet(_BaseTraceType):
     def a(self, val):
         self["a"] = val
 
-    # a0
-    # --
     @property
     def a0(self):
         """
@@ -91,8 +88,6 @@ class Carpet(_BaseTraceType):
     def a0(self, val):
         self["a0"] = val
 
-    # aaxis
-    # -----
     @property
     def aaxis(self):
         """
@@ -101,244 +96,6 @@ class Carpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.carpet.Aaxis`
           - A dict of string/value properties that will be passed
             to the Aaxis constructor
-
-            Supported dict properties:
-
-                arraydtick
-                    The stride between grid lines along the axis
-                arraytick0
-                    The starting index of grid lines along the axis
-                autorange
-                    Determines whether or not the range of this
-                    axis is computed in relation to the input data.
-                    See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
-                autotypenumbers
-                    Using "strict" a numeric string in trace data
-                    is not converted to a number. Using *convert
-                    types* a numeric string in trace data may be
-                    treated as a number during automatic axis
-                    `type` detection. Defaults to
-                    layout.autotypenumbers.
-                categoryarray
-                    Sets the order in which categories on this axis
-                    appear. Only has an effect if `categoryorder`
-                    is set to "array". Used with `categoryorder`.
-                categoryarraysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `categoryarray`.
-                categoryorder
-                    Specifies the ordering logic for the case of
-                    categorical variables. By default, plotly uses
-                    "trace", which specifies the order that is
-                    present in the data supplied. Set
-                    `categoryorder` to *category ascending* or
-                    *category descending* if order should be
-                    determined by the alphanumerical order of the
-                    category names. Set `categoryorder` to "array"
-                    to derive the ordering from the attribute
-                    `categoryarray`. If a category is not found in
-                    the `categoryarray` array, the sorting behavior
-                    for that attribute will be identical to the
-                    "trace" mode. The unspecified categories will
-                    follow the categories in `categoryarray`.
-                cheatertype
-
-                color
-                    Sets default for all colors associated with
-                    this axis all at once: line, font, tick, and
-                    grid colors. Grid color is lightened by
-                    blending this with the plot background
-                    Individual pieces can override this.
-                dtick
-                    The stride between grid lines along the axis
-                endline
-                    Determines whether or not a line is drawn at
-                    along the final value of this axis. If True,
-                    the end line is drawn on top of the grid lines.
-                endlinecolor
-                    Sets the line color of the end line.
-                endlinewidth
-                    Sets the width (in px) of the end line.
-                exponentformat
-                    Determines a formatting rule for the tick
-                    exponents. For example, consider the number
-                    1,000,000,000. If "none", it appears as
-                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
-                    "power", 1x10^9 (with 9 in a super script). If
-                    "SI", 1G. If "B", 1B.
-                fixedrange
-                    Determines whether or not this axis is zoom-
-                    able. If true, then zoom is disabled.
-                gridcolor
-                    Sets the axis line color.
-                griddash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                gridwidth
-                    Sets the width (in px) of the axis line.
-                labelalias
-                    Replacement text for specific tick or hover
-                    labels. For example using {US: 'USA', CA:
-                    'Canada'} changes US to USA and CA to Canada.
-                    The labels we would have shown must match the
-                    keys exactly, after adding any tickprefix or
-                    ticksuffix. For negative numbers the minus sign
-                    symbol used (U+2212) is wider than the regular
-                    ascii dash. That means you need to use −1
-                    instead of -1. labelalias can be used with any
-                    axis type, and both keys (if needed) and values
-                    (if desired) can include html-like tags or
-                    MathJax.
-                labelpadding
-                    Extra padding between label and the axis
-                labelprefix
-                    Sets a axis label prefix.
-                labelsuffix
-                    Sets a axis label suffix.
-                linecolor
-                    Sets the axis line color.
-                linewidth
-                    Sets the width (in px) of the axis line.
-                minexponent
-                    Hide SI prefix for 10^n if |n| is below this
-                    number
-                minorgridcolor
-                    Sets the color of the grid lines.
-                minorgridcount
-                    Sets the number of minor grid ticks per major
-                    grid tick
-                minorgriddash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                minorgridwidth
-                    Sets the width (in px) of the grid lines.
-                nticks
-                    Specifies the maximum number of ticks for the
-                    particular axis. The actual number of ticks
-                    will be chosen automatically to be less than or
-                    equal to `nticks`. Has an effect only if
-                    `tickmode` is set to "auto".
-                range
-                    Sets the range of this axis. If the axis `type`
-                    is "log", then you must take the log of your
-                    desired range (e.g. to set the range from 1 to
-                    100, set the range from 0 to 2). If the axis
-                    `type` is "date", it should be date strings,
-                    like date data, though Date objects and unix
-                    milliseconds will be accepted and converted to
-                    strings. If the axis `type` is "category", it
-                    should be numbers, using the scale where each
-                    category is assigned a serial number from zero
-                    in the order it appears.
-                rangemode
-                    If "normal", the range is computed in relation
-                    to the extrema of the input data. If *tozero*`,
-                    the range extends to 0, regardless of the input
-                    data If "nonnegative", the range is non-
-                    negative, regardless of the input data.
-                separatethousands
-                    If "true", even 4-digit integers are separated
-                showexponent
-                    If "all", all exponents are shown besides their
-                    significands. If "first", only the exponent of
-                    the first tick is shown. If "last", only the
-                    exponent of the last tick is shown. If "none",
-                    no exponents appear.
-                showgrid
-                    Determines whether or not grid lines are drawn.
-                    If True, the grid lines are drawn at every tick
-                    mark.
-                showline
-                    Determines whether or not a line bounding this
-                    axis is drawn.
-                showticklabels
-                    Determines whether axis labels are drawn on the
-                    low side, the high side, both, or neither side
-                    of the axis.
-                showtickprefix
-                    If "all", all tick labels are displayed with a
-                    prefix. If "first", only the first tick is
-                    displayed with a prefix. If "last", only the
-                    last tick is displayed with a suffix. If
-                    "none", tick prefixes are hidden.
-                showticksuffix
-                    Same as `showtickprefix` but for tick suffixes.
-                smoothing
-
-                startline
-                    Determines whether or not a line is drawn at
-                    along the starting value of this axis. If True,
-                    the start line is drawn on top of the grid
-                    lines.
-                startlinecolor
-                    Sets the line color of the start line.
-                startlinewidth
-                    Sets the width (in px) of the start line.
-                tick0
-                    The starting index of grid lines along the axis
-                tickangle
-                    Sets the angle of the tick labels with respect
-                    to the horizontal. For example, a `tickangle`
-                    of -90 draws the tick labels vertically.
-                tickfont
-                    Sets the tick font.
-                tickformat
-                    Sets the tick label formatting rule using d3
-                    formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format. And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/tree/v2.2.3#locale_format. We add two
-                    items to d3's date formatter: "%h" for half of
-                    the year as a decimal number as well as "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
-                tickformatstops
-                    A tuple of :class:`plotly.graph_objects.carpet.
-                    aaxis.Tickformatstop` instances or dicts with
-                    compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.dat
-                    a.carpet.aaxis.tickformatstopdefaults), sets
-                    the default property values to use for elements
-                    of carpet.aaxis.tickformatstops
-                tickmode
-
-                tickprefix
-                    Sets a tick label prefix.
-                ticksuffix
-                    Sets a tick label suffix.
-                ticktext
-                    Sets the text displayed at the ticks position
-                    via `tickvals`. Only has an effect if
-                    `tickmode` is set to "array". Used with
-                    `tickvals`.
-                ticktextsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `ticktext`.
-                tickvals
-                    Sets the values at which ticks on this axis
-                    appear. Only has an effect if `tickmode` is set
-                    to "array". Used with `ticktext`.
-                tickvalssrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `tickvals`.
-                title
-                    :class:`plotly.graph_objects.carpet.aaxis.Title
-                    ` instance or dict with compatible properties
-                type
-                    Sets the axis type. By default, plotly attempts
-                    to determined the axis type by looking into the
-                    data of the traces that referenced the axis in
-                    question.
 
         Returns
         -------
@@ -350,8 +107,6 @@ class Carpet(_BaseTraceType):
     def aaxis(self, val):
         self["aaxis"] = val
 
-    # asrc
-    # ----
     @property
     def asrc(self):
         """
@@ -370,8 +125,6 @@ class Carpet(_BaseTraceType):
     def asrc(self, val):
         self["asrc"] = val
 
-    # b
-    # -
     @property
     def b(self):
         """
@@ -390,8 +143,6 @@ class Carpet(_BaseTraceType):
     def b(self, val):
         self["b"] = val
 
-    # b0
-    # --
     @property
     def b0(self):
         """
@@ -412,8 +163,6 @@ class Carpet(_BaseTraceType):
     def b0(self, val):
         self["b0"] = val
 
-    # baxis
-    # -----
     @property
     def baxis(self):
         """
@@ -422,244 +171,6 @@ class Carpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.carpet.Baxis`
           - A dict of string/value properties that will be passed
             to the Baxis constructor
-
-            Supported dict properties:
-
-                arraydtick
-                    The stride between grid lines along the axis
-                arraytick0
-                    The starting index of grid lines along the axis
-                autorange
-                    Determines whether or not the range of this
-                    axis is computed in relation to the input data.
-                    See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to False.
-                autotypenumbers
-                    Using "strict" a numeric string in trace data
-                    is not converted to a number. Using *convert
-                    types* a numeric string in trace data may be
-                    treated as a number during automatic axis
-                    `type` detection. Defaults to
-                    layout.autotypenumbers.
-                categoryarray
-                    Sets the order in which categories on this axis
-                    appear. Only has an effect if `categoryorder`
-                    is set to "array". Used with `categoryorder`.
-                categoryarraysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `categoryarray`.
-                categoryorder
-                    Specifies the ordering logic for the case of
-                    categorical variables. By default, plotly uses
-                    "trace", which specifies the order that is
-                    present in the data supplied. Set
-                    `categoryorder` to *category ascending* or
-                    *category descending* if order should be
-                    determined by the alphanumerical order of the
-                    category names. Set `categoryorder` to "array"
-                    to derive the ordering from the attribute
-                    `categoryarray`. If a category is not found in
-                    the `categoryarray` array, the sorting behavior
-                    for that attribute will be identical to the
-                    "trace" mode. The unspecified categories will
-                    follow the categories in `categoryarray`.
-                cheatertype
-
-                color
-                    Sets default for all colors associated with
-                    this axis all at once: line, font, tick, and
-                    grid colors. Grid color is lightened by
-                    blending this with the plot background
-                    Individual pieces can override this.
-                dtick
-                    The stride between grid lines along the axis
-                endline
-                    Determines whether or not a line is drawn at
-                    along the final value of this axis. If True,
-                    the end line is drawn on top of the grid lines.
-                endlinecolor
-                    Sets the line color of the end line.
-                endlinewidth
-                    Sets the width (in px) of the end line.
-                exponentformat
-                    Determines a formatting rule for the tick
-                    exponents. For example, consider the number
-                    1,000,000,000. If "none", it appears as
-                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
-                    "power", 1x10^9 (with 9 in a super script). If
-                    "SI", 1G. If "B", 1B.
-                fixedrange
-                    Determines whether or not this axis is zoom-
-                    able. If true, then zoom is disabled.
-                gridcolor
-                    Sets the axis line color.
-                griddash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                gridwidth
-                    Sets the width (in px) of the axis line.
-                labelalias
-                    Replacement text for specific tick or hover
-                    labels. For example using {US: 'USA', CA:
-                    'Canada'} changes US to USA and CA to Canada.
-                    The labels we would have shown must match the
-                    keys exactly, after adding any tickprefix or
-                    ticksuffix. For negative numbers the minus sign
-                    symbol used (U+2212) is wider than the regular
-                    ascii dash. That means you need to use −1
-                    instead of -1. labelalias can be used with any
-                    axis type, and both keys (if needed) and values
-                    (if desired) can include html-like tags or
-                    MathJax.
-                labelpadding
-                    Extra padding between label and the axis
-                labelprefix
-                    Sets a axis label prefix.
-                labelsuffix
-                    Sets a axis label suffix.
-                linecolor
-                    Sets the axis line color.
-                linewidth
-                    Sets the width (in px) of the axis line.
-                minexponent
-                    Hide SI prefix for 10^n if |n| is below this
-                    number
-                minorgridcolor
-                    Sets the color of the grid lines.
-                minorgridcount
-                    Sets the number of minor grid ticks per major
-                    grid tick
-                minorgriddash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                minorgridwidth
-                    Sets the width (in px) of the grid lines.
-                nticks
-                    Specifies the maximum number of ticks for the
-                    particular axis. The actual number of ticks
-                    will be chosen automatically to be less than or
-                    equal to `nticks`. Has an effect only if
-                    `tickmode` is set to "auto".
-                range
-                    Sets the range of this axis. If the axis `type`
-                    is "log", then you must take the log of your
-                    desired range (e.g. to set the range from 1 to
-                    100, set the range from 0 to 2). If the axis
-                    `type` is "date", it should be date strings,
-                    like date data, though Date objects and unix
-                    milliseconds will be accepted and converted to
-                    strings. If the axis `type` is "category", it
-                    should be numbers, using the scale where each
-                    category is assigned a serial number from zero
-                    in the order it appears.
-                rangemode
-                    If "normal", the range is computed in relation
-                    to the extrema of the input data. If *tozero*`,
-                    the range extends to 0, regardless of the input
-                    data If "nonnegative", the range is non-
-                    negative, regardless of the input data.
-                separatethousands
-                    If "true", even 4-digit integers are separated
-                showexponent
-                    If "all", all exponents are shown besides their
-                    significands. If "first", only the exponent of
-                    the first tick is shown. If "last", only the
-                    exponent of the last tick is shown. If "none",
-                    no exponents appear.
-                showgrid
-                    Determines whether or not grid lines are drawn.
-                    If True, the grid lines are drawn at every tick
-                    mark.
-                showline
-                    Determines whether or not a line bounding this
-                    axis is drawn.
-                showticklabels
-                    Determines whether axis labels are drawn on the
-                    low side, the high side, both, or neither side
-                    of the axis.
-                showtickprefix
-                    If "all", all tick labels are displayed with a
-                    prefix. If "first", only the first tick is
-                    displayed with a prefix. If "last", only the
-                    last tick is displayed with a suffix. If
-                    "none", tick prefixes are hidden.
-                showticksuffix
-                    Same as `showtickprefix` but for tick suffixes.
-                smoothing
-
-                startline
-                    Determines whether or not a line is drawn at
-                    along the starting value of this axis. If True,
-                    the start line is drawn on top of the grid
-                    lines.
-                startlinecolor
-                    Sets the line color of the start line.
-                startlinewidth
-                    Sets the width (in px) of the start line.
-                tick0
-                    The starting index of grid lines along the axis
-                tickangle
-                    Sets the angle of the tick labels with respect
-                    to the horizontal. For example, a `tickangle`
-                    of -90 draws the tick labels vertically.
-                tickfont
-                    Sets the tick font.
-                tickformat
-                    Sets the tick label formatting rule using d3
-                    formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format. And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/tree/v2.2.3#locale_format. We add two
-                    items to d3's date formatter: "%h" for half of
-                    the year as a decimal number as well as "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
-                tickformatstops
-                    A tuple of :class:`plotly.graph_objects.carpet.
-                    baxis.Tickformatstop` instances or dicts with
-                    compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.dat
-                    a.carpet.baxis.tickformatstopdefaults), sets
-                    the default property values to use for elements
-                    of carpet.baxis.tickformatstops
-                tickmode
-
-                tickprefix
-                    Sets a tick label prefix.
-                ticksuffix
-                    Sets a tick label suffix.
-                ticktext
-                    Sets the text displayed at the ticks position
-                    via `tickvals`. Only has an effect if
-                    `tickmode` is set to "array". Used with
-                    `tickvals`.
-                ticktextsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `ticktext`.
-                tickvals
-                    Sets the values at which ticks on this axis
-                    appear. Only has an effect if `tickmode` is set
-                    to "array". Used with `ticktext`.
-                tickvalssrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `tickvals`.
-                title
-                    :class:`plotly.graph_objects.carpet.baxis.Title
-                    ` instance or dict with compatible properties
-                type
-                    Sets the axis type. By default, plotly attempts
-                    to determined the axis type by looking into the
-                    data of the traces that referenced the axis in
-                    question.
 
         Returns
         -------
@@ -671,8 +182,6 @@ class Carpet(_BaseTraceType):
     def baxis(self, val):
         self["baxis"] = val
 
-    # bsrc
-    # ----
     @property
     def bsrc(self):
         """
@@ -691,8 +200,6 @@ class Carpet(_BaseTraceType):
     def bsrc(self, val):
         self["bsrc"] = val
 
-    # carpet
-    # ------
     @property
     def carpet(self):
         """
@@ -714,8 +221,6 @@ class Carpet(_BaseTraceType):
     def carpet(self, val):
         self["carpet"] = val
 
-    # cheaterslope
-    # ------------
     @property
     def cheaterslope(self):
         """
@@ -735,8 +240,6 @@ class Carpet(_BaseTraceType):
     def cheaterslope(self, val):
         self["cheaterslope"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -750,42 +253,7 @@ class Carpet(_BaseTraceType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -797,8 +265,6 @@ class Carpet(_BaseTraceType):
     def color(self, val):
         self["color"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -820,8 +286,6 @@ class Carpet(_BaseTraceType):
     def customdata(self, val):
         self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -841,8 +305,6 @@ class Carpet(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
-    # da
-    # --
     @property
     def da(self):
         """
@@ -861,8 +323,6 @@ class Carpet(_BaseTraceType):
     def da(self, val):
         self["da"] = val
 
-    # db
-    # --
     @property
     def db(self):
         """
@@ -881,8 +341,6 @@ class Carpet(_BaseTraceType):
     def db(self, val):
         self["db"] = val
 
-    # font
-    # ----
     @property
     def font(self):
         """
@@ -894,52 +352,6 @@ class Carpet(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Font constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.carpet.Font
@@ -950,8 +362,6 @@ class Carpet(_BaseTraceType):
     def font(self, val):
         self["font"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -972,8 +382,6 @@ class Carpet(_BaseTraceType):
     def ids(self, val):
         self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -992,8 +400,6 @@ class Carpet(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -1017,8 +423,6 @@ class Carpet(_BaseTraceType):
     def legend(self, val):
         self["legend"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -1027,13 +431,6 @@ class Carpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.carpet.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
 
         Returns
         -------
@@ -1045,8 +442,6 @@ class Carpet(_BaseTraceType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -1072,8 +467,6 @@ class Carpet(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -1093,8 +486,6 @@ class Carpet(_BaseTraceType):
     def legendwidth(self, val):
         self["legendwidth"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -1121,8 +512,6 @@ class Carpet(_BaseTraceType):
     def meta(self, val):
         self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -1141,8 +530,6 @@ class Carpet(_BaseTraceType):
     def metasrc(self, val):
         self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -1163,8 +550,6 @@ class Carpet(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -1183,8 +568,6 @@ class Carpet(_BaseTraceType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -1193,18 +576,6 @@ class Carpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.carpet.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
 
         Returns
         -------
@@ -1216,8 +587,6 @@ class Carpet(_BaseTraceType):
     def stream(self, val):
         self["stream"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1238,8 +607,6 @@ class Carpet(_BaseTraceType):
     def uid(self, val):
         self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1271,8 +638,6 @@ class Carpet(_BaseTraceType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1294,8 +659,6 @@ class Carpet(_BaseTraceType):
     def visible(self, val):
         self["visible"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1316,8 +679,6 @@ class Carpet(_BaseTraceType):
     def x(self, val):
         self["x"] = val
 
-    # xaxis
-    # -----
     @property
     def xaxis(self):
         """
@@ -1341,8 +702,6 @@ class Carpet(_BaseTraceType):
     def xaxis(self, val):
         self["xaxis"] = val
 
-    # xsrc
-    # ----
     @property
     def xsrc(self):
         """
@@ -1361,8 +720,6 @@ class Carpet(_BaseTraceType):
     def xsrc(self, val):
         self["xsrc"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1381,8 +738,6 @@ class Carpet(_BaseTraceType):
     def y(self, val):
         self["y"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -1406,8 +761,6 @@ class Carpet(_BaseTraceType):
     def yaxis(self, val):
         self["yaxis"] = val
 
-    # ysrc
-    # ----
     @property
     def ysrc(self):
         """
@@ -1426,8 +779,6 @@ class Carpet(_BaseTraceType):
     def ysrc(self, val):
         self["ysrc"] = val
 
-    # zorder
-    # ------
     @property
     def zorder(self):
         """
@@ -1448,14 +799,10 @@ class Carpet(_BaseTraceType):
     def zorder(self, val):
         self["zorder"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1847,14 +1194,11 @@ class Carpet(_BaseTraceType):
         -------
         Carpet
         """
-        super(Carpet, self).__init__("carpet")
-
+        super().__init__("carpet")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1869,172 +1213,48 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Carpet`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("a", None)
-        _v = a if a is not None else _v
-        if _v is not None:
-            self["a"] = _v
-        _v = arg.pop("a0", None)
-        _v = a0 if a0 is not None else _v
-        if _v is not None:
-            self["a0"] = _v
-        _v = arg.pop("aaxis", None)
-        _v = aaxis if aaxis is not None else _v
-        if _v is not None:
-            self["aaxis"] = _v
-        _v = arg.pop("asrc", None)
-        _v = asrc if asrc is not None else _v
-        if _v is not None:
-            self["asrc"] = _v
-        _v = arg.pop("b", None)
-        _v = b if b is not None else _v
-        if _v is not None:
-            self["b"] = _v
-        _v = arg.pop("b0", None)
-        _v = b0 if b0 is not None else _v
-        if _v is not None:
-            self["b0"] = _v
-        _v = arg.pop("baxis", None)
-        _v = baxis if baxis is not None else _v
-        if _v is not None:
-            self["baxis"] = _v
-        _v = arg.pop("bsrc", None)
-        _v = bsrc if bsrc is not None else _v
-        if _v is not None:
-            self["bsrc"] = _v
-        _v = arg.pop("carpet", None)
-        _v = carpet if carpet is not None else _v
-        if _v is not None:
-            self["carpet"] = _v
-        _v = arg.pop("cheaterslope", None)
-        _v = cheaterslope if cheaterslope is not None else _v
-        if _v is not None:
-            self["cheaterslope"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("da", None)
-        _v = da if da is not None else _v
-        if _v is not None:
-            self["da"] = _v
-        _v = arg.pop("db", None)
-        _v = db if db is not None else _v
-        if _v is not None:
-            self["db"] = _v
-        _v = arg.pop("font", None)
-        _v = font if font is not None else _v
-        if _v is not None:
-            self["font"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("xaxis", None)
-        _v = xaxis if xaxis is not None else _v
-        if _v is not None:
-            self["xaxis"] = _v
-        _v = arg.pop("xsrc", None)
-        _v = xsrc if xsrc is not None else _v
-        if _v is not None:
-            self["xsrc"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("yaxis", None)
-        _v = yaxis if yaxis is not None else _v
-        if _v is not None:
-            self["yaxis"] = _v
-        _v = arg.pop("ysrc", None)
-        _v = ysrc if ysrc is not None else _v
-        if _v is not None:
-            self["ysrc"] = _v
-        _v = arg.pop("zorder", None)
-        _v = zorder if zorder is not None else _v
-        if _v is not None:
-            self["zorder"] = _v
-
-        # Read-only literals
-        # ------------------
+        self._set_property("a", arg, a)
+        self._set_property("a0", arg, a0)
+        self._set_property("aaxis", arg, aaxis)
+        self._set_property("asrc", arg, asrc)
+        self._set_property("b", arg, b)
+        self._set_property("b0", arg, b0)
+        self._set_property("baxis", arg, baxis)
+        self._set_property("bsrc", arg, bsrc)
+        self._set_property("carpet", arg, carpet)
+        self._set_property("cheaterslope", arg, cheaterslope)
+        self._set_property("color", arg, color)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("da", arg, da)
+        self._set_property("db", arg, db)
+        self._set_property("font", arg, font)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("stream", arg, stream)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("visible", arg, visible)
+        self._set_property("x", arg, x)
+        self._set_property("xaxis", arg, xaxis)
+        self._set_property("xsrc", arg, xsrc)
+        self._set_property("y", arg, y)
+        self._set_property("yaxis", arg, yaxis)
+        self._set_property("ysrc", arg, ysrc)
+        self._set_property("zorder", arg, zorder)
 
         self._props["type"] = "carpet"
         arg.pop("type", None)
-
-        # Process unknown kwargs
-        # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

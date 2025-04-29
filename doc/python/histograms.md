@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.11.10
   plotly:
     description: How to make Histograms in Python with Plotly.
     display_as: statistical
@@ -438,12 +438,12 @@ trace5 = go.Histogram(x=x,
                       autobinx = False
                       )
 
-fig.append_trace(trace0, 1, 1)
-fig.append_trace(trace1, 1, 2)
-fig.append_trace(trace2, 2, 1)
-fig.append_trace(trace3, 2, 2)
-fig.append_trace(trace4, 3, 1)
-fig.append_trace(trace5, 3, 2)
+fig.add_trace(trace0, 1, 1)
+fig.add_trace(trace1, 1, 2)
+fig.add_trace(trace2, 2, 1)
+fig.add_trace(trace3, 2, 2)
+fig.add_trace(trace4, 3, 1)
+fig.add_trace(trace5, 3, 2)
 
 fig.show()
 ```

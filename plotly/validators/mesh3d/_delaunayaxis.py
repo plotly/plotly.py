@@ -1,11 +1,14 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class DelaunayaxisValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+class DelaunayaxisValidator(_bv.EnumeratedValidator):
     def __init__(self, plotly_name="delaunayaxis", parent_name="mesh3d", **kwargs):
-        super(DelaunayaxisValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             values=kwargs.pop("values", ["x", "y", "z"]),
             **kwargs,

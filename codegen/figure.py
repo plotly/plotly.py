@@ -6,7 +6,7 @@ from codegen.datatypes import (
     add_constructor_params,
     add_docstring,
 )
-from codegen.utils import write_source_py
+from codegen.utils import CAVEAT, write_source_py
 
 import inflect
 from plotly.basedatatypes import BaseFigure
@@ -55,6 +55,7 @@ def build_figure_py(
     # Initialize source code buffer
     # -----------------------------
     buffer = StringIO()
+    buffer.write(CAVEAT)
 
     # Get list of trace type nodes
     # ----------------------------
@@ -108,9 +109,7 @@ class {fig_classname}({base_classname}):\n"""
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         \"\"\"
-        super({fig_classname} ,self).__init__(data, layout,
-                                              frames, skip_invalid,
-                                              **kwargs)
+        super().__init__(data, layout, frames, skip_invalid, **kwargs)
     """
     )
 
@@ -121,7 +120,7 @@ class {fig_classname}({base_classname}):\n"""
         '''
         {getattr(BaseFigure, wrapped_name).__doc__}
         '''
-        return super({fig_classname}, self).{wrapped_name}({param_list})
+        return super().{wrapped_name}({param_list})
     """
         )
 
