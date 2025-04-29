@@ -3740,23 +3740,29 @@ Invalid property path '{key_path_str}' for layout
               - 'webp'
               - 'svg'
               - 'pdf'
-              - 'eps' (Requires the poppler library to be installed)
+              - 'eps' (deprecated) (Requires the poppler library to be installed)
 
-            If not specified, will default to `plotly.io.config.default_format`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_format` if engine is "kaleido"
+                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
 
         width: int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_width`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_width` if engine is "kaleido"
+                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
 
         height: int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_height`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_height` if engine is "kaleido"
+                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
 
         scale: int or float or None
             The scale factor to use when exporting the figure. A scale factor
@@ -3764,17 +3770,20 @@ Invalid property path '{key_path_str}' for layout
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to `plotly.io.config.default_scale`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_scale` if engine is "kaliedo"
+                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
         validate: bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine: str
-            Image export engine to use:
-             - "kaleido": Use Kaleido for image export
-             - "orca": Use Orca for image export
-             - "auto" (default): Use Kaleido if installed, otherwise use orca
+        engine (deprecated): str
+            Image export engine to use. This parameter is deprecated and Orca engine support will be
+            dropped in the next major Plotly version. Until then, the following values are supported:
+            - "kaleido": Use Kaleido for image export
+            - "orca": Use Orca for image export
+            - "auto" (default): Use Kaleido if installed, otherwise use Orca
 
         Returns
         -------
@@ -3782,6 +3791,26 @@ Invalid property path '{key_path_str}' for layout
             The image data
         """
         import plotly.io as pio
+        from plotly.io.kaleido import (
+            kaleido_available,
+            kaleido_major,
+            KALEIDO_DEPRECATION_MSG,
+            ORCA_DEPRECATION_MSG,
+            ENGINE_PARAM_DEPRECATION_MSG,
+        )
+
+        if (
+            kwargs.get("engine", None) in {None, "auto", "kaleido"}
+            and kaleido_available()
+            and kaleido_major() < 1
+        ):
+            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if kwargs.get("engine", None) == "orca":
+            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if kwargs.get("engine", None):
+            warnings.warn(
+                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+            )
 
         return pio.to_image(self, *args, **kwargs)
 
@@ -3803,25 +3832,31 @@ Invalid property path '{key_path_str}' for layout
               - 'webp'
               - 'svg'
               - 'pdf'
-              - 'eps' (Requires the poppler library to be installed)
+              - 'eps' (deprecated) (Requires the poppler library to be installed)
 
             If not specified and `file` is a string then this will default to the
             file extension. If not specified and `file` is not a string then this
-            will default to `plotly.io.config.default_format`
+            will default to:
+                - `plotly.io.defaults.default_format` if engine is "kaleido"
+                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
 
         width: int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_width`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_width` if engine is "kaleido"
+                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
 
         height: int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_height`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_height` if engine is "kaleido"
+                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
 
         scale: int or float or None
             The scale factor to use when exporting the figure. A scale factor
@@ -3829,23 +3864,46 @@ Invalid property path '{key_path_str}' for layout
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to `plotly.io.config.default_scale`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_scale` if engine is "kaleido"
+                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
         validate: bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine: str
-            Image export engine to use:
-             - "kaleido": Use Kaleido for image export
-             - "orca": Use Orca for image export
-             - "auto" (default): Use Kaleido if installed, otherwise use orca
+        engine (deprecated): str
+            Image export engine to use. This parameter is deprecated and Orca engine support will be
+            dropped in the next major Plotly version. Until then, the following values are supported:
+            - "kaleido": Use Kaleido for image export
+            - "orca": Use Orca for image export
+            - "auto" (default): Use Kaleido if installed, otherwise use Orca
+
         Returns
         -------
         None
         """
         import plotly.io as pio
+        from plotly.io.kaleido import (
+            kaleido_available,
+            kaleido_major,
+            KALEIDO_DEPRECATION_MSG,
+            ORCA_DEPRECATION_MSG,
+            ENGINE_PARAM_DEPRECATION_MSG,
+        )
 
+        if (
+            kwargs.get("engine", None) in {None, "auto", "kaleido"}
+            and kaleido_available()
+            and kaleido_major() < 1
+        ):
+            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if kwargs.get("engine", None) == "orca":
+            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if kwargs.get("engine", None):
+            warnings.warn(
+                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+            )
         return pio.write_image(self, *args, **kwargs)
 
     # Static helpers
