@@ -38,7 +38,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.0.1"
+version = "6.1.0b0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -46,9 +46,12 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
-dev = [
-    "black==25.1.0"
-]
+kaleido = ["kaleido==1.0.0rc11"]
+dev = ["black==25.1.0"]
+
+[project.scripts]
+plotly_get_chrome = "plotly.io._kaleido:get_chrome"
+
 
 [tool.setuptools.packages.find]
 where = ["."]
