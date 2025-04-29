@@ -813,15 +813,15 @@ or omit the --path argument to use the default download path.
     if not cli_yes:
         print(f"""
 Plotly will install a copy of Google Chrome to be used for generating static images of plots.
-Chrome will be installed at: {chrome_install_path}
- """)
+Chrome will be installed at: {chrome_install_path}""")
         response = input("Do you want to proceed? [y/n] ")
         if not response or response[0].lower() != "y":
             print("Cancelled")
             return
     print("Installing Chrome for Plotly...")
-    kaleido.get_chrome_sync(path=chrome_install_path)
+    exe_path = kaleido.get_chrome_sync(path=chrome_install_path)
     print("Chrome installed successfully.")
+    print(f"The Chrome executable is now located at: {exe_path}")
 
 
 __all__ = ["to_image", "write_image", "scope", "full_figure_for_development"]
