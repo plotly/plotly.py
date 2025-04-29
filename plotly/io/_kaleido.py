@@ -372,11 +372,13 @@ To downgrade to Kaleido v0, run:
                     scale=scale or defaults.default_scale,
                 ),
                 topojson=defaults.topojson,
-                kopts=dict(
-                    mathjax=defaults.mathjax,
-                )
-                if defaults.mathjax
-                else None,
+                kopts=(
+                    dict(
+                        mathjax=defaults.mathjax,
+                    )
+                    if defaults.mathjax
+                    else None
+                ),
             )
         except ChromeNotFoundError:
             raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
@@ -656,11 +658,13 @@ which can be installed using pip:
     try:
         kaleido.write_fig_from_object_sync(
             kaleido_specs,
-            kopts=dict(
-                mathjax=defaults.mathjax,
-            )
-            if defaults.mathjax
-            else None,
+            kopts=(
+                dict(
+                    mathjax=defaults.mathjax,
+                )
+                if defaults.mathjax
+                else None
+            ),
         )
     except ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
