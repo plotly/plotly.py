@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.17.0
+      jupytext_version: 1.17.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.13.2
+    version: 3.13.3
   plotly:
     description: Plotly allows you to save static images of your plots. Save the image
       to your local computer, or embed it inside your Jupyter notebooks as a static
@@ -56,7 +56,7 @@ It's also possible to generate static images using [Orca](https://github.com/plo
 
 ### Chrome
 
-Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome. Kaleido v1 and later uses the Chrome that's available on the machine on which it's running. If you need to install Chrome for static image generation, Plotly provides a CLI.
+Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome. Kaleido v1 and later uses Chrome (or Chromium) if it can find a compatible version on the machine on which it's running. If you need to install Chrome for static image generation, Plotly provides a CLI.
 
 Run `plotly_get_chrome` to install Chrome.
 
@@ -67,6 +67,9 @@ import plotly.io as pio
 
 pio.install_chrome()
 ```
+
+See the **Additional Information on Browsers with Kaleido** section below for more details on browser compatibility for Kaleido.
+
 <!-- #endregion -->
 
 ## Write Image to a File
@@ -216,7 +219,7 @@ As well as configuring height, width, and other settings by passing arguments wh
 
 ### Available Settings
 
-The following settings are availble.
+The following settings are available.
 
 `default_width`: The default pixel width to use on image export.
 
@@ -258,8 +261,34 @@ import plotly.io as pio
 pio.kaleido.scope.default_format = "jpeg"
 ~~~
 
+### Additional Information on Browsers with Kaleido
 
+When you export images from Plotly.py, Kaleido will attempt to find a version of [Chrome](https://www.google.com/chrome/index.html) or [Chromium](https://www.chromium.org/getting-involved/download-chromium/) that it can use for the export. It checks in the operating system's PATH for the executables with the following names: "chromium", "chromium-browser",  "chrome", "Chrome", "google-chrome" "google-chrome-stable", "Chrome.app", "Google Chrome", "Google Chrome.app", and "Google Chrome for Testing".
 
-**Image Export Settings (Orca)**
+Kaleido will also check the following locations:
 
-See the [Orca Management section](https://plotly.com/python/orca-management/) for information on how to specify image export settings when using Orca. Support for Orca will be removed after September 2025.
+**Windows**
+
+- r"c:\Program Files\Google\Chrome\Application\chrome.exe"
+- f"c:\\Users\\{os.environ.get('USER', 'default')}\\AppData\\"
+- "Local\\Google\\Chrome\\Application\\chrome.exe"
+
+**Linux"**
+
+- "/usr/bin/google-chrome-stable"
+- "/usr/bin/google-chrome"
+- "/usr/bin/chrome"
+
+**Mac OS**
+
+- "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+---
+
+Most recent versions of Chrome or Chromium should work with Kaleido. When you run `plotly_get_chrome`, [the following Chrome version](https://github.com/plotly/choreographer/blob/main/choreographer/resources/last_known_good_chrome.json#L2C17-L2C30) is installed.
+
+Other Chromium-based browsers may also work, though Kaleido won't discover them automatically. You can set a browser to use by setting the path to search using an environment variable called `BROWSER_PATH`. For example:
+
+```
+BROWSER_PATH=/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge
+```
