@@ -165,7 +165,7 @@ from IPython.display import Image
 Image(img_bytes)
 ```
 
-## Change Image Dimensions and Scale
+## Specify Image Dimensions and Scale
 In addition to the image format, the `to_image` and `write_image` functions provide arguments to specify the image `width` and `height` in logical pixels. They also provide a `scale` parameter that can be used to increase (`scale` > 1) or decrease (`scale` < 1) the physical resolution of the resulting image.
 
 ```python
