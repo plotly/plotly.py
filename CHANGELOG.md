@@ -2,15 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [6.1.0b0] - 2025-03-31
+## [6.1.0rc0] - 2025-05-01
 
 ### Updated
-- Add support for Kaleido >= v1.0.0 for image generation, and deprecate support for Kaleido<1 and Orca [[#5062](https://github.com/plotly/plotly.py/pull/5062)]
+- Add support for Kaleido>=v1.0.0 for image generation, and deprecate support for Kaleido<1 and Orca [[#5062](https://github.com/plotly/plotly.py/pull/5062)]
+- Reduce package bundle size by 18-24% via changes to code generation [[#4978](https://github.com/plotly/plotly.py/pull/4978)]
 
 ### Fixed
 - Fix third-party widget display issues in v6 [[#5102](https://github.com/plotly/plotly.py/pull/5102)]
 - Add handling for case where `jupyterlab` or `notebook` is not installed [[#5104](https://github.com/plotly/plotly.py/pull/5104/files)]
 - Fix issue causing Plotly.js script to be embedded multiple times in Jupyter notebooks [[#5112](https://github.com/plotly/plotly.py/pull/5112)]
+- Re-add MIME renderer JupyterLab extension with JupyterLab 4 support to reduce file sizes for offline notebooks [[#5096](https://github.com/plotly/plotly.py/pull/5096)]
+- Fix issue preventing plots from rendering in HTML notebook export when using 'vscode+notebook' renderer [[#5154](https://github.com/plotly/plotly.py/pull/5154)]
 
 ## [6.0.1] - 2025-03-14
 
