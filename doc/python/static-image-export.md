@@ -227,7 +227,7 @@ The following settings are available.
 
 `default_scale`: The default image scale factor applied on image export.
 
-`default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", "pdf", or "eps" (Kaleido v0 only).
+`default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", or "pdf". ("eps" support is deprecated and available with Kaleido v0 only)
 
 `mathjax`: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
 
