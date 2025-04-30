@@ -203,14 +203,6 @@ fig.show()
 
 You can define the symbol on your map by setting [`symbol`](https://plotly.com/python/reference/scattermap/#scattermap-marker-symbol) attribute.
 
-- basic
-- streets
-- outdoors
-- light
-- dark
-- satellite
-- satellite-streets
-
 ```python
 import plotly.graph_objects as go
 
