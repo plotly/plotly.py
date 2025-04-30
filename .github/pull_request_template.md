@@ -6,7 +6,7 @@ below :-).
 
 ### Documentation PR
 
-- [ ] I've [seen the `doc/README.md` file](https://github.com/plotly/plotly.py/blob/master/doc/README.md)
+- [ ] I've [seen the `doc/README.md` file](https://github.com/plotly/plotly.py/blob/main/doc/README.md)
 - [ ] This change runs in the current version of Plotly on PyPI and targets the `doc-prod` branch OR it targets the `main` branch
 - [ ] If this PR modifies the first example in a page or adds a new one, it is a `px` example if at all possible
 - [ ] Every new/modified example has a descriptive title and motivating sentence or paragraph
@@ -27,7 +27,7 @@ below :-).
 
 ## Code PR
 
-- [ ] I have read through the [contributing notes](https://github.com/plotly/plotly.py/blob/master/CONTRIBUTING.md) and understand the structure of the package. In particular, if my PR modifies code of `plotly.graph_objects`, my modifications concern the `codegen` files and not generated files.
+- [ ] I have read through the [contributing notes](https://github.com/plotly/plotly.py/blob/main/CONTRIBUTING.md) and understand the structure of the package. In particular, if my PR modifies code of `plotly.graph_objects`, my modifications concern the `codegen` files and not generated files.
 - [ ] I have added tests (if submitting a new feature or correcting a bug) or
   modified existing tests.
 - [ ] For a new feature, I have added documentation examples in an existing or
