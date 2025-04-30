@@ -54,7 +54,7 @@ You'll need to update your code to remove references to `engine`. For example, `
 
 ## EPS Format
 
-The `eps` format is no longer supported in Kaleido v1. If your existing code sets `format=eps`, you'll need to update it to use another format, for example `pdf`.
+The `eps` format is no longer supported in Kaleido v1. If your existing code sets `format="eps"`, you'll need to update it to use another format, for example `pdf`.
 
 ## Config Settings
 
