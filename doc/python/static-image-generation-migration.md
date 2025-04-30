@@ -38,7 +38,7 @@ jupyter:
 
 Plotly.py 6.1 introduces support for Kaleido v1, which [improves static image generation](https://plotly.com/blog/kaleido-the-next-generation/) for Plotly figures.
 
-While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for Orca, another static image generation library. Support for earlier verisons of Kaleido and Orca will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate to Kaleido v1 and outlines any changes in functionality.
+While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for [Orca](/python/orca-management/). Support for Orca and earlier versions of Kaleido will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate your Plotly code to Kaleido v1 and outlines the changes in functionality.
 
 To migrate from either Orca or Kaleido v0, first install the latest Kaleido with:
 
