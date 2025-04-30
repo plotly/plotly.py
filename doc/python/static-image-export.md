@@ -74,7 +74,7 @@ See the **Additional Information on Browsers with Kaleido** section below for mo
 
 ## Write Image to a File
 
-Plotly figures have a `write_image` method to write a figure to a file. `write_image` supports PNG, JPEG, WebP, SVG, and PDF.
+Plotly figures have a `write_image` method to write a figure to a file. `write_image` supports PNG, JPEG, WebP, SVG, and PDF formats.
 
 To export a figure using `write_image`, call `write_image` on the figure, and pass as an argument the filename where you want to save the figure. The file format is inferred from the extension:
 
