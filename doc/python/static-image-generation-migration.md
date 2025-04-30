@@ -63,6 +63,8 @@ Accessing Kaleido defaults and config settings via `plotly.io.kaleido.scope` is 
 ~~~python
 import plotly.io as pio
 pio.defaults.default_format = "jpeg"
+# Instead of: 
+# pio.kaleido.scope.default_format = "jpeg"
 ~~~
 
 The `mapbox_access_token` config setting is not available on `plotly.io.defaults` because Mapbox maps are deprecated and will be removed in a future version of Plotly.py. See [MapLibre Migration ](https://plotly.com/python/mapbox-to-maplibre/) for more details.
