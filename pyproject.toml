@@ -46,7 +46,7 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
-kaleido = ["kaleido==1.0.0rc11"]
+kaleido = ["kaleido==1.0.0rc13"]
 dev = ["black==25.1.0"]
 
 [project.scripts]
