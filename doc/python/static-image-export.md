@@ -263,7 +263,7 @@ pio.kaleido.scope.default_format = "jpeg"
 
 ### Additional Information on Browsers with Kaleido
 
-When you export images from Plotly.py, Kaleido will attempt to find a version of [Chrome](https://www.google.com/chrome/index.html) or [Chromium](https://www.chromium.org/getting-involved/download-chromium/) that it can use for the export. It checks in the operating system's PATH for the executables with the following names: "chromium", "chromium-browser",  "chrome", "Chrome", "google-chrome" "google-chrome-stable", "Chrome.app", "Google Chrome", "Google Chrome.app", and "Google Chrome for Testing".
+When exporting images from Plotly.py, Kaleido will attempt to find a version of [Chrome](https://www.google.com/chrome/index.html) or [Chromium](https://www.chromium.org/getting-involved/download-chromium/) that it can use for the export. It checks in the operating system's PATH for executables with the following names: "chromium", "chromium-browser",  "chrome", "Chrome", "google-chrome" "google-chrome-stable", "Chrome.app", "Google Chrome", "Google Chrome.app", and "Google Chrome for Testing".
 
 Kaleido will also check the following locations:
 
