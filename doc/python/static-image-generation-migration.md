@@ -48,7 +48,7 @@ pip install --upgrade kaleido
 
 ## Engine Parameter
 
-The `engine` parameter on static image export methods and functions is deprecated in Plotly.py 6.1 and will be removed after September 2025. Once the `engine` parameter is removed, static image generation will use `Kaleido` if it's installed or raise an error if it isn't.
+The `engine` parameter on static image export methods and functions is deprecated in Plotly.py 6.1 and will be removed after September 2025. Once the `engine` parameter is removed, static image generation will use Kaleido v1 if it's installed, or raise an error if it isn't.
 
 You'll need to update your code to remove references to `engine`. For example, `fig.to_image(format="png", engine="orca")` or `fig.to_image(format="png", engine="kaleido")` needs to be updated to `fig.to_image(format="png")`. This change applies to: `fig.to_image`, `fig.write_image`, `plotly.io.to_image`, and `plotly.io.write_image`.
 
