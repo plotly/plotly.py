@@ -43,7 +43,7 @@ While adding support for Kaleido v1, we are deprecating support for earlier vers
 To migrate from either Orca or Kaleido v0, first install the latest Kaleido with:
 
 ```bash
-pip install -U kaleido
+pip install --upgrade kaleido
 ```
 
 ## Engine Parameter

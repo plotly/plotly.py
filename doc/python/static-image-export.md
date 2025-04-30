@@ -45,7 +45,7 @@ This page demonstrates how to export interactive Plotly figures to static image 
 Static image generation requires [Kaleido](https://github.com/plotly/Kaleido).
 Install Kaleido with pip:
 ```
-$ pip install -U kaleido
+$ pip install --upgrade kaleido
 ```
 or with conda:
 ```

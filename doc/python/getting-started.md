@@ -193,7 +193,7 @@ The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies a
 using pip...
 
 ```
-$ pip install -U kaleido
+$ pip install --upgrade kaleido
 ```
 
 or conda.
