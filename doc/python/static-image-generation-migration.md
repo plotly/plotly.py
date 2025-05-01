@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.4
+      jupytext_version: 1.17.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.11.10
+    version: 3.13.3
   plotly:
     description: Details about changes to static image generation in Plotly.py 6.1.
     display_as: file_settings
@@ -46,6 +46,12 @@ To migrate from either Orca or Kaleido v0, first install the latest Kaleido with
 pip install --upgrade kaleido
 ```
 
+## Chrome 
+
+Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome as part of the Kaleido package. Kaleido v1 does not include Chrome; instead, it looks for a compatible version of Chrome (or Chromium) already installed on the machine on which it's running.
+
+See the [Chrome section](/python/static-image-export/) on the Static Image Export page for more details on Chome and Kaleido.
+
 ## Engine Parameter
 
 The `engine` parameter on static image export methods and functions is deprecated in Plotly.py 6.1 and will be removed after September 2025. Once the `engine` parameter is removed, static image generation will use Kaleido v1 if it's installed, or raise an error if it isn't.
@@ -67,7 +73,7 @@ pio.defaults.default_format = "jpeg"
 # pio.kaleido.scope.default_format = "jpeg"
 ~~~
 
-The `mapbox_access_token` config setting is not available on `plotly.io.defaults` because Mapbox maps are deprecated and will be removed in a future version of Plotly.py. See [MapLibre Migration ](https://plotly.com/python/mapbox-to-maplibre/) for more details.
+The `mapbox_access_token` config setting is not available on `plotly.io.defaults` because Mapbox maps are deprecated and will be removed in a future version of Plotly.py. See [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) for more details.
 
 If you are migrating from Orca, the following config settings do not apply to Kaleido: `server_url`, `port`, `timeout`, and `use_xvfb`, but other settings, such as `default_format`, can be accessed via `plotly.io.defaults`.
 <!-- #endregion -->
