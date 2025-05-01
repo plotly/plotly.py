@@ -50,7 +50,7 @@ pip install --upgrade kaleido
 
 Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome as part of the Kaleido package. Kaleido v1 does not include Chrome; instead, it looks for a compatible version of Chrome (or Chromium) already installed on the machine on which it's running.
 
-See the [Chrome section](/python/static-image-export/) on the Static Image Export page for more details on Chome and Kaleido.
+See the [Chrome section](/python/static-image-export#chrome) on the Static Image Export page for more details on Chome and Kaleido.
 
 ## Engine Parameter
 
@@ -76,4 +76,8 @@ pio.defaults.default_format = "jpeg"
 The `mapbox_access_token` config setting is not available on `plotly.io.defaults` because Mapbox maps are deprecated and will be removed in a future version of Plotly.py. See [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) for more details.
 
 If you are migrating from Orca, the following config settings do not apply to Kaleido: `server_url`, `port`, `timeout`, and `use_xvfb`, but other settings, such as `default_format`, can be accessed via `plotly.io.defaults`.
+
+## Multiple Image Export
+
+Plotly.py 6.1 includes a `write_images` function (`plotly.io.write_images`), which we recommend over `write_image` when exporting more than one figure. Calling `write_images` with a list of figures (or dicts representing figures) to export provides better performance than multiple calls with `write_image`. See the [Write Multiple Images](/python/static-image-export#write-multiple-images) section for more details.
 <!-- #endregion -->
