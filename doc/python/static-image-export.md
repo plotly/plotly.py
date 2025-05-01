@@ -149,6 +149,44 @@ fig.write_image("fig1", format="png")
 ~~~
 
 
+<!-- #region -->
+### Write Multiple Images
+
+*Kaleido v1 and later*
+
+`plotly.io` provides a `write_images` function for writing multiple figures to images. Using `write_images` is faster than calling `fig.write_image` multiple times.
+
+`write_images` takes a list of figure objects or dicts representing figures as its first argument, `fig`. The second argument `file` is a list of paths to export to. These paths can be specified as `str`s or [`pathlib.Path` objects](https://docs.python.org/3/library/pathlib.html).
+
+~~~python
+import plotly.graph_objects as go
+import plotly.express as px
+import plotly.io as pio
+
+
+fig1 = go.Figure(
+    data=go.Scatter(x=[1, 2, 3], y=[4, 5, 6], mode='lines+markers'),
+    layout=go.Layout(title='Line Chart')
+)
+
+fig2 = go.Figure(
+    data=go.Bar(x=['A', 'B', 'C'], y=[10, 5, 15]),
+    layout=go.Layout(title='Bar Chart')
+)
+
+fig3 = px.pie(
+    values=[30, 20, 10, 40], 
+    names=['A', 'B', 'C', 'D'],
+    title='Pie Chart'
+)
+
+pio.write_images(
+    fig=[fig1, fig2, fig3],
+    file=['export_images/line_chart.png', 'export_images/bar_chart.png', 'export_images/pie_chart.png']
+)
+~~~
+
+<!-- #endregion -->
 
 ## Get Image as Bytes
 
