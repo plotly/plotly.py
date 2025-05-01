@@ -126,7 +126,7 @@ fig.write_image("images/fig1.pdf")
 
 **EPS** (Kaleido<1.0.0)
 
-Kaleido versions earlier than 1.0.0 also support **EPS** (requires the poppler library)
+Kaleido versions earlier than 1.0.0 also support **EPS** (requires the poppler library). If using Kaleido v1 or later, we recommend PDF or SVG format.
 
 ~~~python
 ...
