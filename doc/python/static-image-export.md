@@ -327,9 +327,7 @@ Kaleido will also check the following locations:
 
 ---
 
-Most recent versions of Chrome or Chromium should work with Kaleido. When you run `plotly_get_chrome`, [the following Chrome version](https://github.com/plotly/choreographer/blob/main/choreographer/resources/last_known_good_chrome.json#L2C17-L2C30) is installed.
-
-Other Chromium-based browsers may also work, though Kaleido won't discover them automatically. You can set a browser to use by setting the path to search using an environment variable called `BROWSER_PATH`. For example:
+Most recent versions of Chrome or Chromium should work with Kaleido. Other Chromium-based browsers may also work, though Kaleido won't discover them automatically. You can set a browser to use by setting the path to search using an environment variable called `BROWSER_PATH`. For example:
 
 ```
 BROWSER_PATH=/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge
