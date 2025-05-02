@@ -14,9 +14,9 @@ _json = get_module("json")
 def _generate_sri_hash(content):
     """Generate SHA256 hash for SRI (Subresource Integrity)"""
     if isinstance(content, str):
-        content = content.encode('utf-8')
+        content = content.encode("utf-8")
     sha256_hash = hashlib.sha256(content).digest()
-    return 'sha256-' + base64.b64encode(sha256_hash).decode('utf-8')
+    return "sha256-" + base64.b64encode(sha256_hash).decode("utf-8")
 
 
 # Build script to set global PlotlyConfig object. This must execute before
@@ -265,14 +265,14 @@ def to_html(
         # Generate SRI hash from the bundled plotly.js content
         plotlyjs_content = get_plotlyjs()
         sri_hash = _generate_sri_hash(plotlyjs_content)
-        
+
         load_plotlyjs = """\
         {win_config}
         <script charset="utf-8" src="{cdn_url}" integrity="{integrity}" crossorigin="anonymous"></script>\
     """.format(
-            win_config=_window_plotly_config, 
+            win_config=_window_plotly_config,
             cdn_url=plotly_cdn_url(),
-            integrity=sri_hash
+            integrity=sri_hash,
         )
 
     elif include_plotlyjs == "directory":
