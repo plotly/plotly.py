@@ -303,7 +303,7 @@ def test_repr_html(renderer):
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
         '<script charset="utf-8" src="'
         + plotly_cdn_url()
-        + '"></script>                '
+        + '" integrity="sha256-oy6Be7Eh6eiQFs5M7oXuPxxm9qbJXEtTpfSI93dW16Q=" crossorigin="anonymous"></script>        '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
         'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
         "                window.PLOTLYENV=window.PLOTLYENV || {};"
