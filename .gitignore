@@ -62,5 +62,3 @@ doc/check-or-enforce-order.py
 
 tests/percy/*.html
 tests/percy/pandas2/*.html
-
-**/.claude/settings.local.json
