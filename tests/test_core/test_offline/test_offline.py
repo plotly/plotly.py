@@ -37,7 +37,7 @@ plotly_config_script = """\
 <script type="text/javascript">\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
-cdn_script = '<script charset="utf-8" src="{cdn_url}"></script>'.format(
+cdn_script = '<script charset="utf-8" src="{cdn_url}"'.format(
     cdn_url=plotly_cdn_url()
 )
 
