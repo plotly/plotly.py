@@ -309,8 +309,8 @@ def swarm(
     point_size=16,
     fig_width = 800,
     gap_multiplier=1.2,
-    center_even_groups = False
-):
+    bin_fraction=0.95,  #bin fraction slightly undersizes the bins to avoid collisions
+    ):
     #sorting will align columns in attractive arcs rather than having columns the vary unpredicatbly in the x-dimension
     X_series=X_series.copy().sort_values()
 
@@ -328,8 +328,9 @@ def swarm(
 
     for x_val in X_series:
         # assign this x_value to bin number
-        # each bin is a vertical strip wide enough for one marker
-        bin=(((fig_width*(x_val-min_x))/(max_x-min_x))  // point_size)
+        # each bin is a vertical strip slightly narrower than one marker
+    
+        bin=(((fig_width*bin_fraction*(x_val-min_x))/(max_x-min_x))  // point_size)
 
         #update the count of dots in that strip
         bin_counter.update([bin])
@@ -341,16 +342,8 @@ def swarm(
         # we then scale this by the point_size*gap_multiplier to get a y coordinate in px
 
         collision_free_y_coordinate=(bin_counter[bin]//2)*negative_1_if_count_is_odd(bin_counter[bin])*point_size*gap_multiplier
-        list_of_rows.append({"x":x_val,"y":collision_free_y_coordinate,"bin":bin, "adj":0})
+        list_of_rows.append({"x":x_val,"y":collision_free_y_coordinate,"bin":bin})
 
-    # if the number of points is even, 
-    # move y-coordinates down to put an equal number of entries above and below the axis
-    #this can sometimes break the collision avoidance routine, but makes small N outputs look better otherwise
-    if center_even_groups:
-        for row in list_of_rows:
-            if bin_counter[row["bin"]]%2==0:
-                row["y"]-=point_size*gap_multiplier/2
-                row["adj"]=-point_size*gap_multiplier/2
 
 
     for row in list_of_rows:
@@ -358,24 +351,39 @@ def swarm(
         #see if we need to "look left" to avoid a possible collision
         for other_row in list_of_rows:
             if (other_row["bin"]==bin-1 ):
-                if (((other_row["y"]==row["y"]) or (other_row["y"]==row["y"]+row["adj"]))
+                #"bubble" the entry up until we find a slot that avoids a collision
+                while ((other_row["y"]==row["y"])
                     and (((fig_width*(row["x"]-other_row["x"]))/(max_x-min_x)  // point_size) < 1)):
-                    bin_counter.update([bin])
-                    row["y"]=(bin_counter[bin]//2)*negative_1_if_count_is_odd(bin_counter[bin])*point_size*gap_multiplier+row["adj"]
+                    print(row)
+                    print(other_row)
+                    print(((fig_width*(row["x"]-other_row["x"] ))/(max_x-min_x)  // point_size))
 
+                    print("updating to fix collision")
+                    bin_counter.update([bin])
+                    print(bin_counter[bin])
+                    row["y"]=(bin_counter[bin]//2)*negative_1_if_count_is_odd(bin_counter[bin])*point_size*gap_multiplier
+                    print(row["y"])
+
+    # if the number of points is even, 
+    # move y-coordinates down to put an equal number of entries above and below the axis
+    for row in list_of_rows:
+        if bin_counter[row["bin"]]%2==0:
+            row["y"]-=point_size*gap_multiplier/2
 
 
     df = pd.DataFrame(list_of_rows)
+    # one way to make this code more flexible to e.g. handle multiple categories would be to return a list of "swarmified" y coordinates here
+    # you could then generate "swarmified" y coordinates for each category and add category specific offsets before scatterplotting them
 
     fig = px.scatter(
         df,
         x="x",
         y="y",
-        hover_data="x",
     )
     #we want to suppress the y coordinate in the hover value because the y-coordinate is irrelevant/misleading
     fig.update_traces(
         marker_size=point_size,
+        #suppress the y coordinate because the y-coordinate is irrelevant
         hovertemplate="<b>value</b>: %{x}",
     )
     # we have to set the width and height because we aim to avoid icon collisions and we specify the icon size
@@ -392,10 +400,7 @@ def swarm(
 
 df_iris = px.data.iris() # iris is a pandas DataFrame
 x = df_iris["sepal_length"]
-x2 = pd.Series([5.05])
-x = pd.concat([x,x2], ignore_index=True)
 fig = swarm(x)
-#fig = swarm(pd.Series([1,1.5, 1.78, 1.79,2,2,12]))
 fig.show()    
 ```
 
