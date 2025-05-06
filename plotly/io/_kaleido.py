@@ -569,7 +569,8 @@ def write_images(
         Use a list to specify formats for each figure or dict in the list
         provided to the `fig` argument.
         Specify format as a `str` to apply the same format to all exported images.
-        If not specified, will default to `plotly.io.defaults.default_format`.
+        If not specified, and the corresponding `file` argument has a file extension, then `format` will default to the
+        file extension. Otherwise, will default to `plotly.io.defaults.default_format`.
 
     width: int, None, or list of (int or None)
         The width of the exported image in layout pixels. If the `scale`
