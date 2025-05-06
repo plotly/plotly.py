@@ -20,7 +20,7 @@ a link to the plotly.js CHANGELOG.
 
 ### Finalize versions
 
-**Create a branch `git checkout -b release-X.Y.Z` *from the tip of `origin/master`*.**
+**Create a branch `git checkout -b release-X.Y.Z` *from the tip of `origin/main`*.**
 
 Manually update the versions to `X.Y.Z` in the files specified below.
 

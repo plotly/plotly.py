@@ -14,7 +14,7 @@ ENGINE_SUPPORT_TIMELINE = "September 2025"
 
 PLOTLY_GET_CHROME_ERROR_MSG = """
 
-Kaleido requires Google Chrome to be installed. 
+Kaleido requires Google Chrome to be installed.
 
 Either download and install Chrome yourself following Google's instructions for your operating system,
 or install it from your terminal by running:
@@ -549,46 +549,67 @@ def write_images(
     Parameters
     ----------
     fig:
-        Iterable of figure objects or dicts representing a figure
+        List of figure objects or dicts representing a figure.
+        Also accepts a single figure or dict representing a figure.
 
-    file: str or writeable
-        Iterables of strings or pathlib.Path objects representing local file paths to write to.
+    file: str, pathlib.Path, or list of (str or pathlib.Path)
+        List of str or pathlib.Path objects representing local file paths to write to.
+        Can also be a single str or pathlib.Path object if fig argument is
+        a single figure or dict representing a figure.
 
-    format: str or None
-        The desired image format. One of
+    format: str, None, or list of (str or None)
+        The image format to use for exported images.
+        Supported formats are:
           - 'png'
           - 'jpg' or 'jpeg'
           - 'webp'
           - 'svg'
           - 'pdf'
 
-        If not specified, this will default to `plotly.io.defaults.default_format`.
+        Use a list to specify formats for each figure or dict in the list
+        provided to the `fig` argument.
+        Specify format as a `str` to apply the same format to all exported images.
+        If not specified, and the corresponding `file` argument has a file extension, then `format` will default to the
+        file extension. Otherwise, will default to `plotly.io.defaults.default_format`.
 
-    width: int or None
+    width: int, None, or list of (int or None)
         The width of the exported image in layout pixels. If the `scale`
         property is 1.0, this will also be the width of the exported image
         in physical pixels.
 
+        Use a list to specify widths for each figure or dict in the list
+        provided to the `fig` argument.
+        Specify width as an `int` to apply the same width to all exported images.
         If not specified, will default to `plotly.io.defaults.default_width`.
 
-    height: int or None
+    height: int, None, or list of (int or None)
         The height of the exported image in layout pixels. If the `scale`
         property is 1.0, this will also be the height of the exported image
         in physical pixels.
 
+        Use a list to specify heights for each figure or dict in the list
+        provided to the `fig` argument.
+        Specify height as an `int` to apply the same height to all exported images.
         If not specified, will default to `plotly.io.defaults.default_height`.
 
-    scale: int or float or None
+    scale: int, float, None, or list of (int, float, or None)
         The scale factor to use when exporting the figure. A scale factor
         larger than 1.0 will increase the image resolution with respect
         to the figure's layout pixel dimensions. Whereas as scale factor of
         less than 1.0 will decrease the image resolution.
 
+        Use a list to specify scale for each figure or dict in the list
+        provided to the `fig` argument.
+        Specify scale as an `int` or `float` to apply the same scale to all exported images.
         If not specified, will default to `plotly.io.defaults.default_scale`.
 
-    validate: bool
+    validate: bool or list of bool
         True if the figure should be validated before being converted to
         an image, False otherwise.
+
+        Use a list to specify validation setting for each figure in the list
+        provided to the `fig` argument.
+        Specify validate as a boolean to apply the same validation setting to all figures.
 
     Returns
     -------

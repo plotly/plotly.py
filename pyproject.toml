@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 "HomePage" = "https://plotly.com/python/"
 "Documentation" = "https://plotly.com/python/"
 "Github" = "https://github.com/plotly/plotly.py"
-"Changelog" = "https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md"
+"Changelog" = "https://github.com/plotly/plotly.py/blob/main/CHANGELOG.md"
 
 [tool.pytest.ini_options]
 markers = [
@@ -38,7 +38,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.1.0b0"
+version = "6.1.0rc0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -46,7 +46,7 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
-kaleido = ["kaleido==1.0.0rc11"]
+kaleido = ["kaleido==1.0.0rc13"]
 dev = ["black==25.1.0"]
 
 [project.scripts]
