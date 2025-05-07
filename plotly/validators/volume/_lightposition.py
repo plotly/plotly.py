@@ -1,24 +1,18 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class LightpositionValidator(_plotly_utils.basevalidators.CompoundValidator):
+class LightpositionValidator(_bv.CompoundValidator):
     def __init__(self, plotly_name="lightposition", parent_name="volume", **kwargs):
-        super(LightpositionValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             data_class_str=kwargs.pop("data_class_str", "Lightposition"),
             data_docs=kwargs.pop(
                 "data_docs",
                 """
-            x
-                Numeric vector, representing the X coordinate
-                for each vertex.
-            y
-                Numeric vector, representing the Y coordinate
-                for each vertex.
-            z
-                Numeric vector, representing the Z coordinate
-                for each vertex.
 """,
             ),
             **kwargs,

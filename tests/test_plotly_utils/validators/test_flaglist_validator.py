@@ -7,6 +7,7 @@ import numpy as np
 EXTRAS = ["none", "all", True, False, 3]
 FLAGS = ["lines", "markers", "text"]
 
+
 # Fixtures
 # --------
 @pytest.fixture(params=[None, EXTRAS])

@@ -287,7 +287,6 @@ fig.show()
 
 ```
 
-
 ### Bar Chart with Line Plot
 
 ```python

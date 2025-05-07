@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Funnelarea(_BaseTraceType):
 
-    # class properties
-    # --------------------
     _parent_path_str = ""
     _path_str = "funnelarea"
     _valid_props = {
@@ -58,8 +59,6 @@ class Funnelarea(_BaseTraceType):
         "visible",
     }
 
-    # aspectratio
-    # -----------
     @property
     def aspectratio(self):
         """
@@ -78,8 +77,6 @@ class Funnelarea(_BaseTraceType):
     def aspectratio(self, val):
         self["aspectratio"] = val
 
-    # baseratio
-    # ---------
     @property
     def baseratio(self):
         """
@@ -98,8 +95,6 @@ class Funnelarea(_BaseTraceType):
     def baseratio(self, val):
         self["baseratio"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -121,8 +116,6 @@ class Funnelarea(_BaseTraceType):
     def customdata(self, val):
         self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -142,8 +135,6 @@ class Funnelarea(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
-    # dlabel
-    # ------
     @property
     def dlabel(self):
         """
@@ -162,8 +153,6 @@ class Funnelarea(_BaseTraceType):
     def dlabel(self, val):
         self["dlabel"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -172,23 +161,6 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-
-            Supported dict properties:
-
-                column
-                    If there is a layout grid, use the domain for
-                    this column in the grid for this funnelarea
-                    trace .
-                row
-                    If there is a layout grid, use the domain for
-                    this row in the grid for this funnelarea trace
-                    .
-                x
-                    Sets the horizontal domain of this funnelarea
-                    trace (in plot fraction).
-                y
-                    Sets the vertical domain of this funnelarea
-                    trace (in plot fraction).
 
         Returns
         -------
@@ -200,8 +172,6 @@ class Funnelarea(_BaseTraceType):
     def domain(self, val):
         self["domain"] = val
 
-    # hoverinfo
-    # ---------
     @property
     def hoverinfo(self):
         """
@@ -226,8 +196,6 @@ class Funnelarea(_BaseTraceType):
     def hoverinfo(self, val):
         self["hoverinfo"] = val
 
-    # hoverinfosrc
-    # ------------
     @property
     def hoverinfosrc(self):
         """
@@ -247,8 +215,6 @@ class Funnelarea(_BaseTraceType):
     def hoverinfosrc(self, val):
         self["hoverinfosrc"] = val
 
-    # hoverlabel
-    # ----------
     @property
     def hoverlabel(self):
         """
@@ -257,44 +223,6 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the text
-                    content within hover label box. Has an effect
-                    only if the hover label text spans more two or
-                    more lines
-                alignsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `align`.
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bgcolor`.
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `bordercolor`.
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the default length (in number of
-                    characters) of the trace name in the hover
-                    labels for all traces. -1 shows the whole name
-                    regardless of length. 0-3 shows the first 0-3
-                    characters, and an integer >3 will show the
-                    whole name if it is less than that many
-                    characters, but if it is longer, will truncate
-                    to `namelength - 3` characters and add an
-                    ellipsis.
-                namelengthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `namelength`.
 
         Returns
         -------
@@ -306,8 +234,6 @@ class Funnelarea(_BaseTraceType):
     def hoverlabel(self, val):
         self["hoverlabel"] = val
 
-    # hovertemplate
-    # -------------
     @property
     def hovertemplate(self):
         """
@@ -352,8 +278,6 @@ class Funnelarea(_BaseTraceType):
     def hovertemplate(self, val):
         self["hovertemplate"] = val
 
-    # hovertemplatesrc
-    # ----------------
     @property
     def hovertemplatesrc(self):
         """
@@ -373,8 +297,6 @@ class Funnelarea(_BaseTraceType):
     def hovertemplatesrc(self, val):
         self["hovertemplatesrc"] = val
 
-    # hovertext
-    # ---------
     @property
     def hovertext(self):
         """
@@ -399,8 +321,6 @@ class Funnelarea(_BaseTraceType):
     def hovertext(self, val):
         self["hovertext"] = val
 
-    # hovertextsrc
-    # ------------
     @property
     def hovertextsrc(self):
         """
@@ -420,8 +340,6 @@ class Funnelarea(_BaseTraceType):
     def hovertextsrc(self, val):
         self["hovertextsrc"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -442,8 +360,6 @@ class Funnelarea(_BaseTraceType):
     def ids(self, val):
         self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -462,8 +378,6 @@ class Funnelarea(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
-    # insidetextfont
-    # --------------
     @property
     def insidetextfont(self):
         """
@@ -475,79 +389,6 @@ class Funnelarea(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.funnelarea.Insidetextfont
@@ -558,8 +399,6 @@ class Funnelarea(_BaseTraceType):
     def insidetextfont(self, val):
         self["insidetextfont"] = val
 
-    # label0
-    # ------
     @property
     def label0(self):
         """
@@ -580,8 +419,6 @@ class Funnelarea(_BaseTraceType):
     def label0(self, val):
         self["label0"] = val
 
-    # labels
-    # ------
     @property
     def labels(self):
         """
@@ -604,8 +441,6 @@ class Funnelarea(_BaseTraceType):
     def labels(self, val):
         self["labels"] = val
 
-    # labelssrc
-    # ---------
     @property
     def labelssrc(self):
         """
@@ -624,8 +459,6 @@ class Funnelarea(_BaseTraceType):
     def labelssrc(self, val):
         self["labelssrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -649,8 +482,6 @@ class Funnelarea(_BaseTraceType):
     def legend(self, val):
         self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -672,8 +503,6 @@ class Funnelarea(_BaseTraceType):
     def legendgroup(self, val):
         self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -682,13 +511,6 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
 
         Returns
         -------
@@ -700,8 +522,6 @@ class Funnelarea(_BaseTraceType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -727,8 +547,6 @@ class Funnelarea(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -748,8 +566,6 @@ class Funnelarea(_BaseTraceType):
     def legendwidth(self, val):
         self["legendwidth"] = val
 
-    # marker
-    # ------
     @property
     def marker(self):
         """
@@ -758,22 +574,6 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
-            Supported dict properties:
-
-                colors
-                    Sets the color of each sector. If not
-                    specified, the default trace color set is used
-                    to pick the sector colors.
-                colorssrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `colors`.
-                line
-                    :class:`plotly.graph_objects.funnelarea.marker.
-                    Line` instance or dict with compatible
-                    properties
-                pattern
-                    Sets the pattern within the marker.
 
         Returns
         -------
@@ -785,8 +585,6 @@ class Funnelarea(_BaseTraceType):
     def marker(self, val):
         self["marker"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -813,8 +611,6 @@ class Funnelarea(_BaseTraceType):
     def meta(self, val):
         self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -833,8 +629,6 @@ class Funnelarea(_BaseTraceType):
     def metasrc(self, val):
         self["metasrc"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -855,8 +649,6 @@ class Funnelarea(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -875,8 +667,6 @@ class Funnelarea(_BaseTraceType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # scalegroup
-    # ----------
     @property
     def scalegroup(self):
         """
@@ -898,8 +688,6 @@ class Funnelarea(_BaseTraceType):
     def scalegroup(self, val):
         self["scalegroup"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -919,8 +707,6 @@ class Funnelarea(_BaseTraceType):
     def showlegend(self, val):
         self["showlegend"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -929,18 +715,6 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
 
         Returns
         -------
@@ -952,8 +726,6 @@ class Funnelarea(_BaseTraceType):
     def stream(self, val):
         self["stream"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -976,8 +748,6 @@ class Funnelarea(_BaseTraceType):
     def text(self, val):
         self["text"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -989,79 +759,6 @@ class Funnelarea(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `family`.
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                linepositionsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `lineposition`.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                shadowsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `shadow`.
-                size
-
-                sizesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `size`.
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                stylesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `style`.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                textcasesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `textcase`.
-                variant
-                    Sets the variant of the font.
-                variantsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `variant`.
-                weight
-                    Sets the weight (or boldness) of the font.
-                weightsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `weight`.
-
         Returns
         -------
         plotly.graph_objs.funnelarea.Textfont
@@ -1072,8 +769,6 @@ class Funnelarea(_BaseTraceType):
     def textfont(self, val):
         self["textfont"] = val
 
-    # textinfo
-    # --------
     @property
     def textinfo(self):
         """
@@ -1095,8 +790,6 @@ class Funnelarea(_BaseTraceType):
     def textinfo(self, val):
         self["textinfo"] = val
 
-    # textposition
-    # ------------
     @property
     def textposition(self):
         """
@@ -1117,8 +810,6 @@ class Funnelarea(_BaseTraceType):
     def textposition(self, val):
         self["textposition"] = val
 
-    # textpositionsrc
-    # ---------------
     @property
     def textpositionsrc(self):
         """
@@ -1138,8 +829,6 @@ class Funnelarea(_BaseTraceType):
     def textpositionsrc(self, val):
         self["textpositionsrc"] = val
 
-    # textsrc
-    # -------
     @property
     def textsrc(self):
         """
@@ -1158,8 +847,6 @@ class Funnelarea(_BaseTraceType):
     def textsrc(self, val):
         self["textsrc"] = val
 
-    # texttemplate
-    # ------------
     @property
     def texttemplate(self):
         """
@@ -1193,8 +880,6 @@ class Funnelarea(_BaseTraceType):
     def texttemplate(self, val):
         self["texttemplate"] = val
 
-    # texttemplatesrc
-    # ---------------
     @property
     def texttemplatesrc(self):
         """
@@ -1214,8 +899,6 @@ class Funnelarea(_BaseTraceType):
     def texttemplatesrc(self, val):
         self["texttemplatesrc"] = val
 
-    # title
-    # -----
     @property
     def title(self):
         """
@@ -1224,16 +907,6 @@ class Funnelarea(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.funnelarea.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-
-            Supported dict properties:
-
-                font
-                    Sets the font used for `title`.
-                position
-                    Specifies the location of the `title`.
-                text
-                    Sets the title of the chart. If it is empty, no
-                    title is displayed.
 
         Returns
         -------
@@ -1245,8 +918,6 @@ class Funnelarea(_BaseTraceType):
     def title(self, val):
         self["title"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -1267,8 +938,6 @@ class Funnelarea(_BaseTraceType):
     def uid(self, val):
         self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -1300,8 +969,6 @@ class Funnelarea(_BaseTraceType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # values
-    # ------
     @property
     def values(self):
         """
@@ -1321,8 +988,6 @@ class Funnelarea(_BaseTraceType):
     def values(self, val):
         self["values"] = val
 
-    # valuessrc
-    # ---------
     @property
     def valuessrc(self):
         """
@@ -1341,8 +1006,6 @@ class Funnelarea(_BaseTraceType):
     def valuessrc(self, val):
         self["valuessrc"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -1364,14 +1027,10 @@ class Funnelarea(_BaseTraceType):
     def visible(self, val):
         self["visible"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1909,14 +1568,11 @@ class Funnelarea(_BaseTraceType):
         -------
         Funnelarea
         """
-        super(Funnelarea, self).__init__("funnelarea")
-
+        super().__init__("funnelarea")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1931,208 +1587,57 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Funnelarea`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("aspectratio", None)
-        _v = aspectratio if aspectratio is not None else _v
-        if _v is not None:
-            self["aspectratio"] = _v
-        _v = arg.pop("baseratio", None)
-        _v = baseratio if baseratio is not None else _v
-        if _v is not None:
-            self["baseratio"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("dlabel", None)
-        _v = dlabel if dlabel is not None else _v
-        if _v is not None:
-            self["dlabel"] = _v
-        _v = arg.pop("domain", None)
-        _v = domain if domain is not None else _v
-        if _v is not None:
-            self["domain"] = _v
-        _v = arg.pop("hoverinfo", None)
-        _v = hoverinfo if hoverinfo is not None else _v
-        if _v is not None:
-            self["hoverinfo"] = _v
-        _v = arg.pop("hoverinfosrc", None)
-        _v = hoverinfosrc if hoverinfosrc is not None else _v
-        if _v is not None:
-            self["hoverinfosrc"] = _v
-        _v = arg.pop("hoverlabel", None)
-        _v = hoverlabel if hoverlabel is not None else _v
-        if _v is not None:
-            self["hoverlabel"] = _v
-        _v = arg.pop("hovertemplate", None)
-        _v = hovertemplate if hovertemplate is not None else _v
-        if _v is not None:
-            self["hovertemplate"] = _v
-        _v = arg.pop("hovertemplatesrc", None)
-        _v = hovertemplatesrc if hovertemplatesrc is not None else _v
-        if _v is not None:
-            self["hovertemplatesrc"] = _v
-        _v = arg.pop("hovertext", None)
-        _v = hovertext if hovertext is not None else _v
-        if _v is not None:
-            self["hovertext"] = _v
-        _v = arg.pop("hovertextsrc", None)
-        _v = hovertextsrc if hovertextsrc is not None else _v
-        if _v is not None:
-            self["hovertextsrc"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("insidetextfont", None)
-        _v = insidetextfont if insidetextfont is not None else _v
-        if _v is not None:
-            self["insidetextfont"] = _v
-        _v = arg.pop("label0", None)
-        _v = label0 if label0 is not None else _v
-        if _v is not None:
-            self["label0"] = _v
-        _v = arg.pop("labels", None)
-        _v = labels if labels is not None else _v
-        if _v is not None:
-            self["labels"] = _v
-        _v = arg.pop("labelssrc", None)
-        _v = labelssrc if labelssrc is not None else _v
-        if _v is not None:
-            self["labelssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("marker", None)
-        _v = marker if marker is not None else _v
-        if _v is not None:
-            self["marker"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("scalegroup", None)
-        _v = scalegroup if scalegroup is not None else _v
-        if _v is not None:
-            self["scalegroup"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("textinfo", None)
-        _v = textinfo if textinfo is not None else _v
-        if _v is not None:
-            self["textinfo"] = _v
-        _v = arg.pop("textposition", None)
-        _v = textposition if textposition is not None else _v
-        if _v is not None:
-            self["textposition"] = _v
-        _v = arg.pop("textpositionsrc", None)
-        _v = textpositionsrc if textpositionsrc is not None else _v
-        if _v is not None:
-            self["textpositionsrc"] = _v
-        _v = arg.pop("textsrc", None)
-        _v = textsrc if textsrc is not None else _v
-        if _v is not None:
-            self["textsrc"] = _v
-        _v = arg.pop("texttemplate", None)
-        _v = texttemplate if texttemplate is not None else _v
-        if _v is not None:
-            self["texttemplate"] = _v
-        _v = arg.pop("texttemplatesrc", None)
-        _v = texttemplatesrc if texttemplatesrc is not None else _v
-        if _v is not None:
-            self["texttemplatesrc"] = _v
-        _v = arg.pop("title", None)
-        _v = title if title is not None else _v
-        if _v is not None:
-            self["title"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("values", None)
-        _v = values if values is not None else _v
-        if _v is not None:
-            self["values"] = _v
-        _v = arg.pop("valuessrc", None)
-        _v = valuessrc if valuessrc is not None else _v
-        if _v is not None:
-            self["valuessrc"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Read-only literals
-        # ------------------
+        self._set_property("aspectratio", arg, aspectratio)
+        self._set_property("baseratio", arg, baseratio)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("dlabel", arg, dlabel)
+        self._set_property("domain", arg, domain)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverinfosrc", arg, hoverinfosrc)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("hovertextsrc", arg, hovertextsrc)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("insidetextfont", arg, insidetextfont)
+        self._set_property("label0", arg, label0)
+        self._set_property("labels", arg, labels)
+        self._set_property("labelssrc", arg, labelssrc)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgroup", arg, legendgroup)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("marker", arg, marker)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("scalegroup", arg, scalegroup)
+        self._set_property("showlegend", arg, showlegend)
+        self._set_property("stream", arg, stream)
+        self._set_property("text", arg, text)
+        self._set_property("textfont", arg, textfont)
+        self._set_property("textinfo", arg, textinfo)
+        self._set_property("textposition", arg, textposition)
+        self._set_property("textpositionsrc", arg, textpositionsrc)
+        self._set_property("textsrc", arg, textsrc)
+        self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatesrc", arg, texttemplatesrc)
+        self._set_property("title", arg, title)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
 
         self._props["type"] = "funnelarea"
         arg.pop("type", None)
-
-        # Process unknown kwargs
-        # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

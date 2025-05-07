@@ -1,31 +1,18 @@
-import _plotly_utils.basevalidators
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
+import _plotly_utils.basevalidators as _bv
 
 
-class PathbarValidator(_plotly_utils.basevalidators.CompoundValidator):
+class PathbarValidator(_bv.CompoundValidator):
     def __init__(self, plotly_name="pathbar", parent_name="icicle", **kwargs):
-        super(PathbarValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
+        super().__init__(
+            plotly_name,
+            parent_name,
             data_class_str=kwargs.pop("data_class_str", "Pathbar"),
             data_docs=kwargs.pop(
                 "data_docs",
                 """
-            edgeshape
-                Determines which shape is used for edges
-                between `barpath` labels.
-            side
-                Determines on which side of the the treemap the
-                `pathbar` should be presented.
-            textfont
-                Sets the font used inside `pathbar`.
-            thickness
-                Sets the thickness of `pathbar` (in px). If not
-                specified the `pathbar.textfont.size` is used
-                with 3 pixles extra padding on each side.
-            visible
-                Determines if the path bar is drawn i.e.
-                outside the trace `domain` and with one pixel
-                gap.
 """,
             ),
             **kwargs,
