@@ -58,9 +58,6 @@ commands:
             source .venv/bin/activate
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
-            cd js
-            npm ci
-            npm run build
 
       - when:
           condition:
@@ -117,6 +114,35 @@ commands:
             source .venv/bin/activate
             python -m pytest -x test_init/test_lazy_imports.py
 
+  test_io_kaleido_v0:
+    steps:
+      - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          name: Install dependencies
+          command: |
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install .
+            uv pip install -r ./test_requirements/requirements_optional.txt
+            # Install Kaleido v0 instead of the v1 specified in requirements_optional.txt
+            uv pip uninstall kaleido
+            uv pip install kaleido==0.2.1
+      - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
+      - run:
+          name: Test plotly.io image output with Kaleido v0
+          command: |
+            source .venv/bin/activate
+            python -m pytest tests/test_optional/test_kaleido
+          no_output_timeout: 20m
+
 jobs:
   check-code-formatting:
     docker:
@@ -129,7 +155,7 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install black==22.3.0
+            pip install black==25.1.0
       - run:
           name: Check formatting with black
           command: |
@@ -165,6 +191,17 @@ jobs:
       - test_optional:
           pandas_version: <<parameters.pandas_version>>
           numpy_version: <<parameters.numpy_version>>
+
+  test_kaleido_v0:
+    parameters:
+      python_version:
+        default: "3.12"
+        type: string
+    executor:
+      name: docker-container
+      python_version: <<parameters.python_version>>
+    steps:  
+      - test_io_kaleido_v0
 
   # Percy
   python_311_percy:
@@ -269,22 +306,18 @@ jobs:
 
     steps:
       - checkout
-
-      - run:
-          name: initial NPM Build
-          command: |
-            python -m venv venv
-            . venv/bin/activate
-            cd js
-            npm ci
-            npm run build
-            git status
-
       - run:
           name: PyPI Build
           command: |
-            . venv/bin/activate
-            pip install build
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install build
+            uv pip install jupyter
+            cd js
+            npm ci
+            npm run build
+            cd ..
             python -m build --sdist --wheel -o dist
             cp -R dist output
             git status
@@ -310,7 +343,6 @@ jobs:
       - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-
       - run:
           name: Install dependencies
           command: |
@@ -321,16 +353,11 @@ jobs:
             uv venv
             source .venv/bin/activate
             uv pip install -r requirements.txt
+            cd ..
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               uv pip uninstall plotly
-              cd ..
               uv pip install -e .
-              cd js
-              npm ci
-              npm run build
-              cd ../doc
             fi
-            cd ..
 
       - run:
           name: make html
@@ -422,7 +449,7 @@ workflows:
   release_build:
     jobs:
       - full_build
-
+  
   build:
     jobs:
       - test_core_py:
@@ -450,5 +477,10 @@ workflows:
           python_version: "3.9"
           pandas_version: "1.2.4"
           numpy_version: "1.26.4"
+      - test_kaleido_v0:
+          matrix:
+            parameters:
+              python_version:
+                - "3.12"
       - python_311_percy
       - build-doc

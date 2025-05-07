@@ -1328,25 +1328,14 @@ class ColorValidator(BaseValidator):
         return self.colorscale_path is not None
 
     def description(self):
-
-        named_clrs_str = "\n".join(
-            textwrap.wrap(
-                ", ".join(self.named_colors),
-                width=79 - 16,
-                initial_indent=" " * 12,
-                subsequent_indent=" " * 12,
-            )
-        )
-
         valid_color_description = """\
     The '{plotly_name}' property is a color and may be specified as:
       - A hex string (e.g. '#ff0000')
       - An rgb/rgba string (e.g. 'rgb(255,0,0)')
       - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
       - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-      - A named CSS color:
-{clrs}""".format(
-            plotly_name=self.plotly_name, clrs=named_clrs_str
+      - A named CSS color: see https://plotly.com/python/css-colors/ for a list""".format(
+            plotly_name=self.plotly_name
         )
 
         if self.colorscale_path:
@@ -2483,15 +2472,11 @@ class CompoundValidator(BaseValidator):
     that may be specified as:
       - An instance of :class:`{module_str}.{class_str}`
       - A dict of string/value properties that will be passed
-        to the {class_str} constructor
-
-        Supported dict properties:
-            {constructor_params_str}"""
+        to the {class_str} constructor"""
         ).format(
             plotly_name=self.plotly_name,
             class_str=self.data_class_str,
             module_str=self.module_str,
-            constructor_params_str=self.data_docs,
         )
 
         return desc
@@ -2560,15 +2545,11 @@ class CompoundArrayValidator(BaseValidator):
     {class_str} that may be specified as:
       - A list or tuple of instances of {module_str}.{class_str}
       - A list or tuple of dicts of string/value properties that
-        will be passed to the {class_str} constructor
-
-        Supported dict properties:
-            {constructor_params_str}"""
+        will be passed to the {class_str} constructor"""
         ).format(
             plotly_name=self.plotly_name,
             class_str=self.data_class_str,
             module_str=self.module_str,
-            constructor_params_str=self.data_docs,
         )
 
         return desc
