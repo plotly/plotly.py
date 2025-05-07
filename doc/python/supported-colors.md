@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Supported CSS Colors
-    order: 40
+    order: 41
     page_type: example_index
     permalink: python/css-colors/
     thumbnail: thumbnail/shape.jpg
@@ -49,7 +49,7 @@ fig = go.Figure([
         marker_color='royalblue'
     )
 ])
-    
+
 fig.show()
 ```
 
@@ -100,7 +100,7 @@ fig = go.Figure(layout=dict(title="Supported Named CSS Colors"))
 for i, color in enumerate(supported_colors):
     row, col = i // 5, i % 5
     x0, y0 = col * 1.2, -row * 1.2
-    
+
     fig.add_shape(
         type="rect",
         x0=x0, y0=y0,
@@ -108,7 +108,7 @@ for i, color in enumerate(supported_colors):
         fillcolor=color,
         line=dict(color="black", width=0.2),
     )
-    
+
     fig.add_annotation(
         x=x0+0.5, y=y0-0.1,
         text=color,
