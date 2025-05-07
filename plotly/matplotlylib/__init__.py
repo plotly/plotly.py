@@ -9,5 +9,6 @@ Most of the functionality should be accessed through the parent directory's
 'tools' module or 'plotly' package.
 
 """
+
 from plotly.matplotlylib.renderer import PlotlyRenderer
 from plotly.matplotlylib.mplexporter import Exporter

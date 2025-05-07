@@ -86,6 +86,7 @@ def _str_to_dict_path_full(key_path_str):
             return key.replace("-", "_")
 
         key_path2b = list(map(_make_hyphen_key, key_path2))
+
         # Here we want to split up each non-empty string in the list at
         # underscores and recombine the strings using chomp_empty_strings so
         # that leading, trailing and multiple _ will be preserved
@@ -383,6 +384,18 @@ def _generator(i):
     """ "cast" an iterator to a generator"""
     for x in i:
         yield x
+
+
+def _set_property_provided_value(obj, name, arg, provided):
+    """
+    Initialize a property of this object using the provided value
+    or a value popped from the arguments dictionary. If neither
+    is available, do not set the property.
+    """
+    val = arg.pop(name, None)
+    val = provided if provided is not None else val
+    if val is not None:
+        obj[name] = val
 
 
 class BaseFigure(object):
@@ -833,6 +846,14 @@ class BaseFigure(object):
             pio.show(self)
         else:
             print(repr(self))
+
+    def _set_property(self, name, arg, provided):
+        """
+        Initialize a property of this object using the provided value
+        or a value popped from the arguments dictionary. If neither
+        is available, do not set the property.
+        """
+        _set_property_provided_value(self, name, arg, provided)
 
     def update(self, dict1=None, overwrite=False, **kwargs):
         """
@@ -1591,6 +1612,7 @@ is of type {subplot_type}.""".format(
                 )
             ):
                 return self
+
             # in case the user specified they wanted an axis to refer to the
             # domain of that axis and not the data, append ' domain' to the
             # computed axis accordingly
@@ -3718,23 +3740,29 @@ Invalid property path '{key_path_str}' for layout
               - 'webp'
               - 'svg'
               - 'pdf'
-              - 'eps' (Requires the poppler library to be installed)
+              - 'eps' (deprecated) (Requires the poppler library to be installed)
 
-            If not specified, will default to `plotly.io.config.default_format`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_format` if engine is "kaleido"
+                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
 
         width: int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_width`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_width` if engine is "kaleido"
+                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
 
         height: int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_height`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_height` if engine is "kaleido"
+                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
 
         scale: int or float or None
             The scale factor to use when exporting the figure. A scale factor
@@ -3742,17 +3770,20 @@ Invalid property path '{key_path_str}' for layout
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to `plotly.io.config.default_scale`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_scale` if engine is "kaliedo"
+                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
         validate: bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine: str
-            Image export engine to use:
-             - "kaleido": Use Kaleido for image export
-             - "orca": Use Orca for image export
-             - "auto" (default): Use Kaleido if installed, otherwise use orca
+        engine (deprecated): str
+            Image export engine to use. This parameter is deprecated and Orca engine support will be
+            dropped in the next major Plotly version. Until then, the following values are supported:
+            - "kaleido": Use Kaleido for image export
+            - "orca": Use Orca for image export
+            - "auto" (default): Use Kaleido if installed, otherwise use Orca
 
         Returns
         -------
@@ -3760,6 +3791,26 @@ Invalid property path '{key_path_str}' for layout
             The image data
         """
         import plotly.io as pio
+        from plotly.io.kaleido import (
+            kaleido_available,
+            kaleido_major,
+            KALEIDO_DEPRECATION_MSG,
+            ORCA_DEPRECATION_MSG,
+            ENGINE_PARAM_DEPRECATION_MSG,
+        )
+
+        if (
+            kwargs.get("engine", None) in {None, "auto", "kaleido"}
+            and kaleido_available()
+            and kaleido_major() < 1
+        ):
+            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if kwargs.get("engine", None) == "orca":
+            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if kwargs.get("engine", None):
+            warnings.warn(
+                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+            )
 
         return pio.to_image(self, *args, **kwargs)
 
@@ -3781,25 +3832,31 @@ Invalid property path '{key_path_str}' for layout
               - 'webp'
               - 'svg'
               - 'pdf'
-              - 'eps' (Requires the poppler library to be installed)
+              - 'eps' (deprecated) (Requires the poppler library to be installed)
 
             If not specified and `file` is a string then this will default to the
             file extension. If not specified and `file` is not a string then this
-            will default to `plotly.io.config.default_format`
+            will default to:
+                - `plotly.io.defaults.default_format` if engine is "kaleido"
+                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
 
         width: int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_width`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_width` if engine is "kaleido"
+                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
 
         height: int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_height`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_height` if engine is "kaleido"
+                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
 
         scale: int or float or None
             The scale factor to use when exporting the figure. A scale factor
@@ -3807,23 +3864,46 @@ Invalid property path '{key_path_str}' for layout
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to `plotly.io.config.default_scale`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_scale` if engine is "kaleido"
+                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
         validate: bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine: str
-            Image export engine to use:
-             - "kaleido": Use Kaleido for image export
-             - "orca": Use Orca for image export
-             - "auto" (default): Use Kaleido if installed, otherwise use orca
+        engine (deprecated): str
+            Image export engine to use. This parameter is deprecated and Orca engine support will be
+            dropped in the next major Plotly version. Until then, the following values are supported:
+            - "kaleido": Use Kaleido for image export
+            - "orca": Use Orca for image export
+            - "auto" (default): Use Kaleido if installed, otherwise use Orca
+
         Returns
         -------
         None
         """
         import plotly.io as pio
+        from plotly.io.kaleido import (
+            kaleido_available,
+            kaleido_major,
+            KALEIDO_DEPRECATION_MSG,
+            ORCA_DEPRECATION_MSG,
+            ENGINE_PARAM_DEPRECATION_MSG,
+        )
 
+        if (
+            kwargs.get("engine", None) in {None, "auto", "kaleido"}
+            and kaleido_available()
+            and kaleido_major() < 1
+        ):
+            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if kwargs.get("engine", None) == "orca":
+            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if kwargs.get("engine", None):
+            warnings.warn(
+                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+            )
         return pio.write_image(self, *args, **kwargs)
 
     # Static helpers
@@ -4328,6 +4408,14 @@ class BasePlotlyType(object):
         from .validator_cache import ValidatorCache
 
         return ValidatorCache.get_validator(self._path_str, prop)
+
+    def _set_property(self, name, arg, provided):
+        """
+        Initialize a property of this object using the provided value
+        or a value popped from the arguments dictionary. If neither
+        is available, do not set the property.
+        """
+        _set_property_provided_value(self, name, arg, provided)
 
     @property
     def _validators(self):
