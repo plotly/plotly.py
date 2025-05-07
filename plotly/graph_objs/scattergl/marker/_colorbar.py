@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class ColorBar(_BaseTraceHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "scattergl.marker"
     _path_str = "scattergl.marker.colorbar"
     _valid_props = {
@@ -60,8 +61,6 @@ class ColorBar(_BaseTraceHierarchyType):
         "yref",
     }
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -72,42 +71,7 @@ class ColorBar(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -119,8 +83,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def bgcolor(self, val):
         self["bgcolor"] = val
 
-    # bordercolor
-    # -----------
     @property
     def bordercolor(self):
         """
@@ -131,42 +93,7 @@ class ColorBar(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -178,8 +105,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def bordercolor(self, val):
         self["bordercolor"] = val
 
-    # borderwidth
-    # -----------
     @property
     def borderwidth(self):
         """
@@ -198,8 +123,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def borderwidth(self, val):
         self["borderwidth"] = val
 
-    # dtick
-    # -----
     @property
     def dtick(self):
         """
@@ -236,8 +159,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def dtick(self, val):
         self["dtick"] = val
 
-    # exponentformat
-    # --------------
     @property
     def exponentformat(self):
         """
@@ -261,8 +182,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def exponentformat(self, val):
         self["exponentformat"] = val
 
-    # labelalias
-    # ----------
     @property
     def labelalias(self):
         """
@@ -288,8 +207,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def labelalias(self, val):
         self["labelalias"] = val
 
-    # len
-    # ---
     @property
     def len(self):
         """
@@ -310,8 +227,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def len(self, val):
         self["len"] = val
 
-    # lenmode
-    # -------
     @property
     def lenmode(self):
         """
@@ -333,8 +248,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def lenmode(self, val):
         self["lenmode"] = val
 
-    # minexponent
-    # -----------
     @property
     def minexponent(self):
         """
@@ -354,8 +267,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def minexponent(self, val):
         self["minexponent"] = val
 
-    # nticks
-    # ------
     @property
     def nticks(self):
         """
@@ -378,8 +289,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def nticks(self, val):
         self["nticks"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -399,8 +308,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def orientation(self, val):
         self["orientation"] = val
 
-    # outlinecolor
-    # ------------
     @property
     def outlinecolor(self):
         """
@@ -411,42 +318,7 @@ class ColorBar(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -458,8 +330,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def outlinecolor(self, val):
         self["outlinecolor"] = val
 
-    # outlinewidth
-    # ------------
     @property
     def outlinewidth(self):
         """
@@ -478,8 +348,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def outlinewidth(self, val):
         self["outlinewidth"] = val
 
-    # separatethousands
-    # -----------------
     @property
     def separatethousands(self):
         """
@@ -498,8 +366,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def separatethousands(self, val):
         self["separatethousands"] = val
 
-    # showexponent
-    # ------------
     @property
     def showexponent(self):
         """
@@ -522,8 +388,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def showexponent(self, val):
         self["showexponent"] = val
 
-    # showticklabels
-    # --------------
     @property
     def showticklabels(self):
         """
@@ -542,8 +406,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def showticklabels(self, val):
         self["showticklabels"] = val
 
-    # showtickprefix
-    # --------------
     @property
     def showtickprefix(self):
         """
@@ -566,8 +428,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def showtickprefix(self, val):
         self["showtickprefix"] = val
 
-    # showticksuffix
-    # --------------
     @property
     def showticksuffix(self):
         """
@@ -587,8 +447,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def showticksuffix(self, val):
         self["showticksuffix"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -608,8 +466,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def thickness(self, val):
         self["thickness"] = val
 
-    # thicknessmode
-    # -------------
     @property
     def thicknessmode(self):
         """
@@ -631,8 +487,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def thicknessmode(self, val):
         self["thicknessmode"] = val
 
-    # tick0
-    # -----
     @property
     def tick0(self):
         """
@@ -658,8 +512,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tick0(self, val):
         self["tick0"] = val
 
-    # tickangle
-    # ---------
     @property
     def tickangle(self):
         """
@@ -682,8 +534,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickangle(self, val):
         self["tickangle"] = val
 
-    # tickcolor
-    # ---------
     @property
     def tickcolor(self):
         """
@@ -694,42 +544,7 @@ class ColorBar(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -741,8 +556,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickcolor(self, val):
         self["tickcolor"] = val
 
-    # tickfont
-    # --------
     @property
     def tickfont(self):
         """
@@ -754,52 +567,6 @@ class ColorBar(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.scattergl.marker.colorbar.Tickfont
@@ -810,8 +577,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickfont(self, val):
         self["tickfont"] = val
 
-    # tickformat
-    # ----------
     @property
     def tickformat(self):
         """
@@ -840,8 +605,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickformat(self, val):
         self["tickformat"] = val
 
-    # tickformatstops
-    # ---------------
     @property
     def tickformatstops(self):
         """
@@ -850,42 +613,6 @@ class ColorBar(_BaseTraceHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.scattergl.marker.colorbar.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-
-            Supported dict properties:
-
-                dtickrange
-                    range [*min*, *max*], where "min", "max" -
-                    dtick values which describe some zoom level, it
-                    is possible to omit "min" or "max" value by
-                    passing "null"
-                enabled
-                    Determines whether or not this stop is used. If
-                    `false`, this stop is ignored even within its
-                    `dtickrange`.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-                value
-                    string - dtickformat for described zoom level,
-                    the same as "tickformat"
 
         Returns
         -------
@@ -897,8 +624,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickformatstops(self, val):
         self["tickformatstops"] = val
 
-    # tickformatstopdefaults
-    # ----------------------
     @property
     def tickformatstopdefaults(self):
         """
@@ -913,8 +638,6 @@ class ColorBar(_BaseTraceHierarchyType):
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
 
-            Supported dict properties:
-
         Returns
         -------
         plotly.graph_objs.scattergl.marker.colorbar.Tickformatstop
@@ -925,8 +648,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
-    # ticklabeloverflow
-    # -----------------
     @property
     def ticklabeloverflow(self):
         """
@@ -949,8 +670,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticklabeloverflow(self, val):
         self["ticklabeloverflow"] = val
 
-    # ticklabelposition
-    # -----------------
     @property
     def ticklabelposition(self):
         """
@@ -974,8 +693,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticklabelposition(self, val):
         self["ticklabelposition"] = val
 
-    # ticklabelstep
-    # -------------
     @property
     def ticklabelstep(self):
         """
@@ -1000,8 +717,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticklabelstep(self, val):
         self["ticklabelstep"] = val
 
-    # ticklen
-    # -------
     @property
     def ticklen(self):
         """
@@ -1020,8 +735,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticklen(self, val):
         self["ticklen"] = val
 
-    # tickmode
-    # --------
     @property
     def tickmode(self):
         """
@@ -1047,8 +760,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickmode(self, val):
         self["tickmode"] = val
 
-    # tickprefix
-    # ----------
     @property
     def tickprefix(self):
         """
@@ -1068,8 +779,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickprefix(self, val):
         self["tickprefix"] = val
 
-    # ticks
-    # -----
     @property
     def ticks(self):
         """
@@ -1091,8 +800,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticks(self, val):
         self["ticks"] = val
 
-    # ticksuffix
-    # ----------
     @property
     def ticksuffix(self):
         """
@@ -1112,8 +819,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticksuffix(self, val):
         self["ticksuffix"] = val
 
-    # ticktext
-    # --------
     @property
     def ticktext(self):
         """
@@ -1134,8 +839,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticktext(self, val):
         self["ticktext"] = val
 
-    # ticktextsrc
-    # -----------
     @property
     def ticktextsrc(self):
         """
@@ -1154,8 +857,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ticktextsrc(self, val):
         self["ticktextsrc"] = val
 
-    # tickvals
-    # --------
     @property
     def tickvals(self):
         """
@@ -1175,8 +876,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickvals(self, val):
         self["tickvals"] = val
 
-    # tickvalssrc
-    # -----------
     @property
     def tickvalssrc(self):
         """
@@ -1195,8 +894,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickvalssrc(self, val):
         self["tickvalssrc"] = val
 
-    # tickwidth
-    # ---------
     @property
     def tickwidth(self):
         """
@@ -1215,8 +912,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickwidth(self, val):
         self["tickwidth"] = val
 
-    # title
-    # -----
     @property
     def title(self):
         """
@@ -1225,18 +920,6 @@ class ColorBar(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scattergl.marker.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this color bar's title font.
-                side
-                    Determines the location of color bar's title
-                    with respect to the color bar. Defaults to
-                    "top" when `orientation` if "v" and  defaults
-                    to "right" when `orientation` if "h".
-                text
-                    Sets the title of the color bar.
 
         Returns
         -------
@@ -1248,8 +931,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def title(self, val):
         self["title"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -1274,8 +955,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def x(self, val):
         self["x"] = val
 
-    # xanchor
-    # -------
     @property
     def xanchor(self):
         """
@@ -1298,8 +977,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def xanchor(self, val):
         self["xanchor"] = val
 
-    # xpad
-    # ----
     @property
     def xpad(self):
         """
@@ -1318,8 +995,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def xpad(self, val):
         self["xpad"] = val
 
-    # xref
-    # ----
     @property
     def xref(self):
         """
@@ -1341,8 +1016,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def xref(self, val):
         self["xref"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -1367,8 +1040,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def y(self, val):
         self["y"] = val
 
-    # yanchor
-    # -------
     @property
     def yanchor(self):
         """
@@ -1391,8 +1062,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def yanchor(self, val):
         self["yanchor"] = val
 
-    # ypad
-    # ----
     @property
     def ypad(self):
         """
@@ -1411,8 +1080,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def ypad(self, val):
         self["ypad"] = val
 
-    # yref
-    # ----
     @property
     def yref(self):
         """
@@ -1434,8 +1101,6 @@ class ColorBar(_BaseTraceHierarchyType):
     def yref(self, val):
         self["yref"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1985,14 +1650,11 @@ class ColorBar(_BaseTraceHierarchyType):
         -------
         ColorBar
         """
-        super(ColorBar, self).__init__("colorbar")
-
+        super().__init__("colorbar")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -2007,214 +1669,57 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.scattergl.marker.ColorBar`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("bgcolor", None)
-        _v = bgcolor if bgcolor is not None else _v
-        if _v is not None:
-            self["bgcolor"] = _v
-        _v = arg.pop("bordercolor", None)
-        _v = bordercolor if bordercolor is not None else _v
-        if _v is not None:
-            self["bordercolor"] = _v
-        _v = arg.pop("borderwidth", None)
-        _v = borderwidth if borderwidth is not None else _v
-        if _v is not None:
-            self["borderwidth"] = _v
-        _v = arg.pop("dtick", None)
-        _v = dtick if dtick is not None else _v
-        if _v is not None:
-            self["dtick"] = _v
-        _v = arg.pop("exponentformat", None)
-        _v = exponentformat if exponentformat is not None else _v
-        if _v is not None:
-            self["exponentformat"] = _v
-        _v = arg.pop("labelalias", None)
-        _v = labelalias if labelalias is not None else _v
-        if _v is not None:
-            self["labelalias"] = _v
-        _v = arg.pop("len", None)
-        _v = len if len is not None else _v
-        if _v is not None:
-            self["len"] = _v
-        _v = arg.pop("lenmode", None)
-        _v = lenmode if lenmode is not None else _v
-        if _v is not None:
-            self["lenmode"] = _v
-        _v = arg.pop("minexponent", None)
-        _v = minexponent if minexponent is not None else _v
-        if _v is not None:
-            self["minexponent"] = _v
-        _v = arg.pop("nticks", None)
-        _v = nticks if nticks is not None else _v
-        if _v is not None:
-            self["nticks"] = _v
-        _v = arg.pop("orientation", None)
-        _v = orientation if orientation is not None else _v
-        if _v is not None:
-            self["orientation"] = _v
-        _v = arg.pop("outlinecolor", None)
-        _v = outlinecolor if outlinecolor is not None else _v
-        if _v is not None:
-            self["outlinecolor"] = _v
-        _v = arg.pop("outlinewidth", None)
-        _v = outlinewidth if outlinewidth is not None else _v
-        if _v is not None:
-            self["outlinewidth"] = _v
-        _v = arg.pop("separatethousands", None)
-        _v = separatethousands if separatethousands is not None else _v
-        if _v is not None:
-            self["separatethousands"] = _v
-        _v = arg.pop("showexponent", None)
-        _v = showexponent if showexponent is not None else _v
-        if _v is not None:
-            self["showexponent"] = _v
-        _v = arg.pop("showticklabels", None)
-        _v = showticklabels if showticklabels is not None else _v
-        if _v is not None:
-            self["showticklabels"] = _v
-        _v = arg.pop("showtickprefix", None)
-        _v = showtickprefix if showtickprefix is not None else _v
-        if _v is not None:
-            self["showtickprefix"] = _v
-        _v = arg.pop("showticksuffix", None)
-        _v = showticksuffix if showticksuffix is not None else _v
-        if _v is not None:
-            self["showticksuffix"] = _v
-        _v = arg.pop("thickness", None)
-        _v = thickness if thickness is not None else _v
-        if _v is not None:
-            self["thickness"] = _v
-        _v = arg.pop("thicknessmode", None)
-        _v = thicknessmode if thicknessmode is not None else _v
-        if _v is not None:
-            self["thicknessmode"] = _v
-        _v = arg.pop("tick0", None)
-        _v = tick0 if tick0 is not None else _v
-        if _v is not None:
-            self["tick0"] = _v
-        _v = arg.pop("tickangle", None)
-        _v = tickangle if tickangle is not None else _v
-        if _v is not None:
-            self["tickangle"] = _v
-        _v = arg.pop("tickcolor", None)
-        _v = tickcolor if tickcolor is not None else _v
-        if _v is not None:
-            self["tickcolor"] = _v
-        _v = arg.pop("tickfont", None)
-        _v = tickfont if tickfont is not None else _v
-        if _v is not None:
-            self["tickfont"] = _v
-        _v = arg.pop("tickformat", None)
-        _v = tickformat if tickformat is not None else _v
-        if _v is not None:
-            self["tickformat"] = _v
-        _v = arg.pop("tickformatstops", None)
-        _v = tickformatstops if tickformatstops is not None else _v
-        if _v is not None:
-            self["tickformatstops"] = _v
-        _v = arg.pop("tickformatstopdefaults", None)
-        _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
-        if _v is not None:
-            self["tickformatstopdefaults"] = _v
-        _v = arg.pop("ticklabeloverflow", None)
-        _v = ticklabeloverflow if ticklabeloverflow is not None else _v
-        if _v is not None:
-            self["ticklabeloverflow"] = _v
-        _v = arg.pop("ticklabelposition", None)
-        _v = ticklabelposition if ticklabelposition is not None else _v
-        if _v is not None:
-            self["ticklabelposition"] = _v
-        _v = arg.pop("ticklabelstep", None)
-        _v = ticklabelstep if ticklabelstep is not None else _v
-        if _v is not None:
-            self["ticklabelstep"] = _v
-        _v = arg.pop("ticklen", None)
-        _v = ticklen if ticklen is not None else _v
-        if _v is not None:
-            self["ticklen"] = _v
-        _v = arg.pop("tickmode", None)
-        _v = tickmode if tickmode is not None else _v
-        if _v is not None:
-            self["tickmode"] = _v
-        _v = arg.pop("tickprefix", None)
-        _v = tickprefix if tickprefix is not None else _v
-        if _v is not None:
-            self["tickprefix"] = _v
-        _v = arg.pop("ticks", None)
-        _v = ticks if ticks is not None else _v
-        if _v is not None:
-            self["ticks"] = _v
-        _v = arg.pop("ticksuffix", None)
-        _v = ticksuffix if ticksuffix is not None else _v
-        if _v is not None:
-            self["ticksuffix"] = _v
-        _v = arg.pop("ticktext", None)
-        _v = ticktext if ticktext is not None else _v
-        if _v is not None:
-            self["ticktext"] = _v
-        _v = arg.pop("ticktextsrc", None)
-        _v = ticktextsrc if ticktextsrc is not None else _v
-        if _v is not None:
-            self["ticktextsrc"] = _v
-        _v = arg.pop("tickvals", None)
-        _v = tickvals if tickvals is not None else _v
-        if _v is not None:
-            self["tickvals"] = _v
-        _v = arg.pop("tickvalssrc", None)
-        _v = tickvalssrc if tickvalssrc is not None else _v
-        if _v is not None:
-            self["tickvalssrc"] = _v
-        _v = arg.pop("tickwidth", None)
-        _v = tickwidth if tickwidth is not None else _v
-        if _v is not None:
-            self["tickwidth"] = _v
-        _v = arg.pop("title", None)
-        _v = title if title is not None else _v
-        if _v is not None:
-            self["title"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("xanchor", None)
-        _v = xanchor if xanchor is not None else _v
-        if _v is not None:
-            self["xanchor"] = _v
-        _v = arg.pop("xpad", None)
-        _v = xpad if xpad is not None else _v
-        if _v is not None:
-            self["xpad"] = _v
-        _v = arg.pop("xref", None)
-        _v = xref if xref is not None else _v
-        if _v is not None:
-            self["xref"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("yanchor", None)
-        _v = yanchor if yanchor is not None else _v
-        if _v is not None:
-            self["yanchor"] = _v
-        _v = arg.pop("ypad", None)
-        _v = ypad if ypad is not None else _v
-        if _v is not None:
-            self["ypad"] = _v
-        _v = arg.pop("yref", None)
-        _v = yref if yref is not None else _v
-        if _v is not None:
-            self["yref"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("borderwidth", arg, borderwidth)
+        self._set_property("dtick", arg, dtick)
+        self._set_property("exponentformat", arg, exponentformat)
+        self._set_property("labelalias", arg, labelalias)
+        self._set_property("len", arg, len)
+        self._set_property("lenmode", arg, lenmode)
+        self._set_property("minexponent", arg, minexponent)
+        self._set_property("nticks", arg, nticks)
+        self._set_property("orientation", arg, orientation)
+        self._set_property("outlinecolor", arg, outlinecolor)
+        self._set_property("outlinewidth", arg, outlinewidth)
+        self._set_property("separatethousands", arg, separatethousands)
+        self._set_property("showexponent", arg, showexponent)
+        self._set_property("showticklabels", arg, showticklabels)
+        self._set_property("showtickprefix", arg, showtickprefix)
+        self._set_property("showticksuffix", arg, showticksuffix)
+        self._set_property("thickness", arg, thickness)
+        self._set_property("thicknessmode", arg, thicknessmode)
+        self._set_property("tick0", arg, tick0)
+        self._set_property("tickangle", arg, tickangle)
+        self._set_property("tickcolor", arg, tickcolor)
+        self._set_property("tickfont", arg, tickfont)
+        self._set_property("tickformat", arg, tickformat)
+        self._set_property("tickformatstops", arg, tickformatstops)
+        self._set_property("tickformatstopdefaults", arg, tickformatstopdefaults)
+        self._set_property("ticklabeloverflow", arg, ticklabeloverflow)
+        self._set_property("ticklabelposition", arg, ticklabelposition)
+        self._set_property("ticklabelstep", arg, ticklabelstep)
+        self._set_property("ticklen", arg, ticklen)
+        self._set_property("tickmode", arg, tickmode)
+        self._set_property("tickprefix", arg, tickprefix)
+        self._set_property("ticks", arg, ticks)
+        self._set_property("ticksuffix", arg, ticksuffix)
+        self._set_property("ticktext", arg, ticktext)
+        self._set_property("ticktextsrc", arg, ticktextsrc)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("tickwidth", arg, tickwidth)
+        self._set_property("title", arg, title)
+        self._set_property("x", arg, x)
+        self._set_property("xanchor", arg, xanchor)
+        self._set_property("xpad", arg, xpad)
+        self._set_property("xref", arg, xref)
+        self._set_property("y", arg, y)
+        self._set_property("yanchor", arg, yanchor)
+        self._set_property("ypad", arg, ypad)
+        self._set_property("yref", arg, yref)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,0 +1,66 @@
+on: push
+
+jobs:
+  check-js-build:
+    name: Check JS build artifacts
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+        
+    - name: Install Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '22'
+
+    - name: Copy current files to a temporary directory
+      run: |
+        cp -R plotly/labextension/ plotly/labextension-tmp/
+
+    - name: Install dependencies and build
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        uv venv
+        source .venv/bin/activate
+        uv pip install jupyter
+        cd js
+        npm ci
+        npm run build
+    - name: Check JupyterLab build artifacts
+      run: |
+        # 1. Hash contents of all static files, sort by content hash
+        find plotly/labextension/static -type f -exec sha256sum {} \; | awk '{print $1}' | sort > new_hashes.txt
+        find plotly/labextension-tmp/static -type f -exec sha256sum {} \; | awk '{print $1}' | sort > old_hashes.txt
+
+        # 2. Compare the sorted content hashes
+        diff old_hashes.txt new_hashes.txt > content_diff.txt
+
+        # Remove the "load" line from both package.json files before comparing
+        grep -v '"load": "static/' plotly/labextension/package.json > pkg1.json
+        grep -v '"load": "static/' plotly/labextension-tmp/package.json > pkg2.json
+
+        # Compare stripped versions
+        diff pkg1.json pkg2.json > package_json_diff.txt
+
+        # 5. Final check
+        if [ -s content_diff.txt ] || [ -s package_json_diff.txt ]; then
+        echo "❌ Build artifacts differ:"
+        echo "--- Unexpected diffs ---"
+        cat content_diff.txt
+        echo "--- Unexpected package.json diffs ---"
+        cat package_json_diff.txt
+        echo "Please replace the 'plotly/labextension' directory with the artifacts of this CI run."
+        exit 1
+        else
+        echo "✅ Build artifacts match expected output (ignoring known 'load' hash in package.json)."
+        fi
+
+    - name: Store the build artifacts from plotly/labextension
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: labextension
+        path: plotly/labextension

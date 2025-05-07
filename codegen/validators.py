@@ -2,7 +2,7 @@ import os.path as opath
 from io import StringIO
 
 import _plotly_utils.basevalidators
-from codegen.utils import PlotlyNode, TraceNode, write_source_py
+from codegen.utils import CAVEAT, PlotlyNode, TraceNode, write_source_py
 
 
 def build_validator_py(node: PlotlyNode):
@@ -24,15 +24,16 @@ def build_validator_py(node: PlotlyNode):
     # ---------------
     assert node.is_datatype
 
-    # Initialize source code buffer
-    # -----------------------------
+    # Initialize
+    import_alias = "_bv"
     buffer = StringIO()
+    buffer.write(CAVEAT)
 
     # Imports
     # -------
     # ### Import package of the validator's superclass ###
     import_str = ".".join(node.name_base_validator.split(".")[:-1])
-    buffer.write(f"import {import_str }\n")
+    buffer.write(f"import {import_str} as {import_alias}\n")
 
     # Build Validator
     # ---------------
@@ -41,11 +42,11 @@ def build_validator_py(node: PlotlyNode):
 
     # ### Write class definition ###
     class_name = node.name_validator_class
-    superclass_name = node.name_base_validator
+    superclass_name = node.name_base_validator.split(".")[-1]
     buffer.write(
         f"""
 
-class {class_name}({superclass_name}):
+class {class_name}({import_alias}.{superclass_name}):
     def __init__(self, plotly_name={params['plotly_name']},
                        parent_name={params['parent_name']},
                        **kwargs):"""
@@ -54,8 +55,7 @@ class {class_name}({superclass_name}):
     # ### Write constructor ###
     buffer.write(
         f"""
-        super({class_name}, self).__init__(plotly_name=plotly_name,
-                         parent_name=parent_name"""
+        super().__init__(plotly_name, parent_name"""
     )
 
     # Write out remaining constructor parameters
@@ -198,10 +198,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                        parent_name={params['parent_name']},
                        **kwargs):
 
-        super(DataValidator, self).__init__(class_strs_map={params['class_strs_map']},
-                         plotly_name=plotly_name,
-                         parent_name=parent_name,
-                         **kwargs)"""
+        super().__init__({params['class_strs_map']}, plotly_name, parent_name, **kwargs)"""
     )
 
     return buffer.getvalue()

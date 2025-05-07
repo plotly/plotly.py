@@ -471,8 +471,7 @@ def write_html(
 
     Returns
     -------
-    str
-        Representation of figure as an HTML div string
+    None
     """
 
     # Build HTML string

@@ -1,12 +1,12 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=61", "hatch", "jupyter_packaging~=0.10.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
 "HomePage" = "https://plotly.com/python/"
 "Documentation" = "https://plotly.com/python/"
 "Github" = "https://github.com/plotly/plotly.py"
-"Changelog" = "https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md"
+"Changelog" = "https://github.com/plotly/plotly.py/blob/main/CHANGELOG.md"
 
 [tool.pytest.ini_options]
 markers = [
@@ -38,7 +38,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.0.1"
+version = "6.1.0rc0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -46,6 +46,12 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
+kaleido = ["kaleido==1.0.0rc13"]
+dev = ["black==25.1.0"]
+
+[project.scripts]
+plotly_get_chrome = "plotly.io._kaleido:get_chrome"
+
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -61,12 +67,11 @@ plotly = [
 
 [tool.black]
 line-length = 88
-target_version = ['py36', 'py37', 'py38', 'py39']
+target_version = ['py38', 'py39', 'py310', 'py311', 'py312']
 include = '\.pyi?$'
 exclude = '''
 
 (
-  /(
       \.eggs         # exclude a few common directories in the
     | \.git          # root of the project
     | \.hg
@@ -77,9 +82,36 @@ exclude = '''
     | buck-out
     | build
     | dist
+    | js
     | submodules
     | plotly/matplotlylib/mplexporter
-  )/
-  | versioneer.py
 )
 '''
+
+[tool.jupyter-packaging.builder]
+factory = "jupyter_packaging.npm_builder"
+auto_data_files = true
+
+[tool.jupyter-packaging.build-args]
+build_cmd = "build:prod"
+npm = ["jlpm"]
+
+[tool.hatch.build.hooks.jupyter-builder]
+editable-frontend = true
+
+[tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
+build_cmd = "build"
+npm = ["jlpm"]
+source_dir = "js"
+build_dir = "plotly/labextension"
+skip_symlink = true
+
+[tool.setuptools.data-files]
+"share/jupyter/labextensions/jupyterlab-plotly" = [
+  "plotly/labextension/package.json",
+  "js/install.json"
+]
+
+"share/jupyter/labextensions/jupyterlab-plotly/static" = [
+  "plotly/labextension/static/*.js"
+]

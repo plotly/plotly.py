@@ -1,11 +1,12 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class YAxis(_BaseLayoutHierarchyType):
 
-    # class properties
-    # --------------------
     _parent_path_str = "layout"
     _path_str = "layout.yaxis"
     _valid_props = {
@@ -104,8 +105,6 @@ class YAxis(_BaseLayoutHierarchyType):
         "zerolinewidth",
     }
 
-    # anchor
-    # ------
     @property
     def anchor(self):
         """
@@ -130,8 +129,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def anchor(self, val):
         self["anchor"] = val
 
-    # automargin
-    # ----------
     @property
     def automargin(self):
         """
@@ -154,8 +151,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def automargin(self, val):
         self["automargin"] = val
 
-    # autorange
-    # ---------
     @property
     def autorange(self):
         """
@@ -185,8 +180,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def autorange(self, val):
         self["autorange"] = val
 
-    # autorangeoptions
-    # ----------------
     @property
     def autorangeoptions(self):
         """
@@ -195,26 +188,6 @@ class YAxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.yaxis.Autorangeoptions`
           - A dict of string/value properties that will be passed
             to the Autorangeoptions constructor
-
-            Supported dict properties:
-
-                clipmax
-                    Clip autorange maximum if it goes beyond this
-                    value. Has no effect when
-                    `autorangeoptions.maxallowed` is provided.
-                clipmin
-                    Clip autorange minimum if it goes beyond this
-                    value. Has no effect when
-                    `autorangeoptions.minallowed` is provided.
-                include
-                    Ensure this value is included in autorange.
-                includesrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `include`.
-                maxallowed
-                    Use this value exactly as autorange maximum.
-                minallowed
-                    Use this value exactly as autorange minimum.
 
         Returns
         -------
@@ -226,8 +199,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def autorangeoptions(self, val):
         self["autorangeoptions"] = val
 
-    # autoshift
-    # ---------
     @property
     def autoshift(self):
         """
@@ -250,8 +221,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def autoshift(self, val):
         self["autoshift"] = val
 
-    # autotickangles
-    # --------------
     @property
     def autotickangles(self):
         """
@@ -276,8 +245,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def autotickangles(self, val):
         self["autotickangles"] = val
 
-    # autotypenumbers
-    # ---------------
     @property
     def autotypenumbers(self):
         """
@@ -300,8 +267,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def autotypenumbers(self, val):
         self["autotypenumbers"] = val
 
-    # calendar
-    # --------
     @property
     def calendar(self):
         """
@@ -327,8 +292,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def calendar(self, val):
         self["calendar"] = val
 
-    # categoryarray
-    # -------------
     @property
     def categoryarray(self):
         """
@@ -349,8 +312,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def categoryarray(self, val):
         self["categoryarray"] = val
 
-    # categoryarraysrc
-    # ----------------
     @property
     def categoryarraysrc(self):
         """
@@ -370,8 +331,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def categoryarraysrc(self, val):
         self["categoryarraysrc"] = val
 
-    # categoryorder
-    # -------------
     @property
     def categoryorder(self):
         """
@@ -411,8 +370,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def categoryorder(self, val):
         self["categoryorder"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -426,42 +383,7 @@ class YAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -473,8 +395,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # constrain
-    # ---------
     @property
     def constrain(self):
         """
@@ -498,8 +418,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def constrain(self, val):
         self["constrain"] = val
 
-    # constraintoward
-    # ---------------
     @property
     def constraintoward(self):
         """
@@ -524,8 +442,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def constraintoward(self, val):
         self["constraintoward"] = val
 
-    # dividercolor
-    # ------------
     @property
     def dividercolor(self):
         """
@@ -537,42 +453,7 @@ class YAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -584,8 +465,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def dividercolor(self, val):
         self["dividercolor"] = val
 
-    # dividerwidth
-    # ------------
     @property
     def dividerwidth(self):
         """
@@ -605,8 +484,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def dividerwidth(self, val):
         self["dividerwidth"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -630,8 +507,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def domain(self, val):
         self["domain"] = val
 
-    # dtick
-    # -----
     @property
     def dtick(self):
         """
@@ -668,8 +543,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def dtick(self, val):
         self["dtick"] = val
 
-    # exponentformat
-    # --------------
     @property
     def exponentformat(self):
         """
@@ -693,8 +566,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def exponentformat(self, val):
         self["exponentformat"] = val
 
-    # fixedrange
-    # ----------
     @property
     def fixedrange(self):
         """
@@ -714,8 +585,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def fixedrange(self, val):
         self["fixedrange"] = val
 
-    # gridcolor
-    # ---------
     @property
     def gridcolor(self):
         """
@@ -726,42 +595,7 @@ class YAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -773,8 +607,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def gridcolor(self, val):
         self["gridcolor"] = val
 
-    # griddash
-    # --------
     @property
     def griddash(self):
         """
@@ -799,8 +631,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def griddash(self, val):
         self["griddash"] = val
 
-    # gridwidth
-    # ---------
     @property
     def gridwidth(self):
         """
@@ -819,8 +649,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def gridwidth(self, val):
         self["gridwidth"] = val
 
-    # hoverformat
-    # -----------
     @property
     def hoverformat(self):
         """
@@ -849,8 +677,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def hoverformat(self, val):
         self["hoverformat"] = val
 
-    # insiderange
-    # -----------
     @property
     def insiderange(self):
         """
@@ -875,8 +701,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def insiderange(self, val):
         self["insiderange"] = val
 
-    # labelalias
-    # ----------
     @property
     def labelalias(self):
         """
@@ -902,8 +726,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def labelalias(self, val):
         self["labelalias"] = val
 
-    # layer
-    # -----
     @property
     def layer(self):
         """
@@ -928,8 +750,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def layer(self, val):
         self["layer"] = val
 
-    # linecolor
-    # ---------
     @property
     def linecolor(self):
         """
@@ -940,42 +760,7 @@ class YAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -987,8 +772,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def linecolor(self, val):
         self["linecolor"] = val
 
-    # linewidth
-    # ---------
     @property
     def linewidth(self):
         """
@@ -1007,8 +790,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def linewidth(self, val):
         self["linewidth"] = val
 
-    # matches
-    # -------
     @property
     def matches(self):
         """
@@ -1035,8 +816,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def matches(self, val):
         self["matches"] = val
 
-    # maxallowed
-    # ----------
     @property
     def maxallowed(self):
         """
@@ -1054,8 +833,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def maxallowed(self, val):
         self["maxallowed"] = val
 
-    # minallowed
-    # ----------
     @property
     def minallowed(self):
         """
@@ -1073,8 +850,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def minallowed(self, val):
         self["minallowed"] = val
 
-    # minexponent
-    # -----------
     @property
     def minexponent(self):
         """
@@ -1094,8 +869,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def minexponent(self, val):
         self["minexponent"] = val
 
-    # minor
-    # -----
     @property
     def minor(self):
         """
@@ -1104,97 +877,6 @@ class YAxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.yaxis.Minor`
           - A dict of string/value properties that will be passed
             to the Minor constructor
-
-            Supported dict properties:
-
-                dtick
-                    Sets the step in-between ticks on this axis.
-                    Use with `tick0`. Must be a positive number, or
-                    special strings available to "log" and "date"
-                    axes. If the axis `type` is "log", then ticks
-                    are set every 10^(n*dtick) where n is the tick
-                    number. For example, to set a tick mark at 1,
-                    10, 100, 1000, ... set dtick to 1. To set tick
-                    marks at 1, 100, 10000, ... set dtick to 2. To
-                    set tick marks at 1, 5, 25, 125, 625, 3125, ...
-                    set dtick to log_10(5), or 0.69897000433. "log"
-                    has several special values; "L<f>", where `f`
-                    is a positive number, gives ticks linearly
-                    spaced in value (but not position). For example
-                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
-                    at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
-                    plus small digits between, use "D1" (all
-                    digits) or "D2" (only 2 and 5). `tick0` is
-                    ignored for "D1" and "D2". If the axis `type`
-                    is "date", then you must convert the time to
-                    milliseconds. For example, to set the interval
-                    between ticks to one day, set `dtick` to
-                    86400000.0. "date" also has special values
-                    "M<n>" gives ticks spaced by a number of
-                    months. `n` must be a positive integer. To set
-                    ticks on the 15th of every third month, set
-                    `tick0` to "2000-01-15" and `dtick` to "M3". To
-                    set ticks every 4 years, set `dtick` to "M48"
-                gridcolor
-                    Sets the color of the grid lines.
-                griddash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                gridwidth
-                    Sets the width (in px) of the grid lines.
-                nticks
-                    Specifies the maximum number of ticks for the
-                    particular axis. The actual number of ticks
-                    will be chosen automatically to be less than or
-                    equal to `nticks`. Has an effect only if
-                    `tickmode` is set to "auto".
-                showgrid
-                    Determines whether or not grid lines are drawn.
-                    If True, the grid lines are drawn at every tick
-                    mark.
-                tick0
-                    Sets the placement of the first tick on this
-                    axis. Use with `dtick`. If the axis `type` is
-                    "log", then you must take the log of your
-                    starting tick (e.g. to set the starting tick to
-                    100, set the `tick0` to 2) except when
-                    `dtick`=*L<f>* (see `dtick` for more info). If
-                    the axis `type` is "date", it should be a date
-                    string, like date data. If the axis `type` is
-                    "category", it should be a number, using the
-                    scale where each category is assigned a serial
-                    number from zero in the order it appears.
-                tickcolor
-                    Sets the tick color.
-                ticklen
-                    Sets the tick length (in px).
-                tickmode
-                    Sets the tick mode for this axis. If "auto",
-                    the number of ticks is set via `nticks`. If
-                    "linear", the placement of the ticks is
-                    determined by a starting position `tick0` and a
-                    tick step `dtick` ("linear" is the default
-                    value if `tick0` and `dtick` are provided). If
-                    "array", the placement of the ticks is set via
-                    `tickvals` and the tick text is `ticktext`.
-                    ("array" is the default value if `tickvals` is
-                    provided).
-                ticks
-                    Determines whether ticks are drawn or not. If
-                    "", this axis' ticks are not drawn. If
-                    "outside" ("inside"), this axis' are drawn
-                    outside (inside) the axis lines.
-                tickvals
-                    Sets the values at which ticks on this axis
-                    appear. Only has an effect if `tickmode` is set
-                    to "array". Used with `ticktext`.
-                tickvalssrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `tickvals`.
-                tickwidth
-                    Sets the tick width (in px).
 
         Returns
         -------
@@ -1206,8 +888,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def minor(self, val):
         self["minor"] = val
 
-    # mirror
-    # ------
     @property
     def mirror(self):
         """
@@ -1232,8 +912,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def mirror(self, val):
         self["mirror"] = val
 
-    # nticks
-    # ------
     @property
     def nticks(self):
         """
@@ -1256,8 +934,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def nticks(self, val):
         self["nticks"] = val
 
-    # overlaying
-    # ----------
     @property
     def overlaying(self):
         """
@@ -1284,8 +960,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def overlaying(self, val):
         self["overlaying"] = val
 
-    # position
-    # --------
     @property
     def position(self):
         """
@@ -1306,8 +980,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def position(self, val):
         self["position"] = val
 
-    # range
-    # -----
     @property
     def range(self):
         """
@@ -1338,8 +1010,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def range(self, val):
         self["range"] = val
 
-    # rangebreaks
-    # -----------
     @property
     def rangebreaks(self):
         """
@@ -1348,60 +1018,6 @@ class YAxis(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.yaxis.Rangebreak
           - A list or tuple of dicts of string/value properties that
             will be passed to the Rangebreak constructor
-
-            Supported dict properties:
-
-                bounds
-                    Sets the lower and upper bounds of this axis
-                    rangebreak. Can be used with `pattern`.
-                dvalue
-                    Sets the size of each `values` item. The
-                    default is one day in milliseconds.
-                enabled
-                    Determines whether this axis rangebreak is
-                    enabled or disabled. Please note that
-                    `rangebreaks` only work for "date" axis type.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                pattern
-                    Determines a pattern on the time line that
-                    generates breaks. If *day of week* - days of
-                    the week in English e.g. 'Sunday' or `sun`
-                    (matching is case-insensitive and considers
-                    only the first three characters), as well as
-                    Sunday-based integers between 0 and 6. If
-                    "hour" - hour (24-hour clock) as decimal
-                    numbers between 0 and 24. for more info.
-                    Examples: - { pattern: 'day of week', bounds:
-                    [6, 1] }  or simply { bounds: ['sat', 'mon'] }
-                    breaks from Saturday to Monday (i.e. skips the
-                    weekends). - { pattern: 'hour', bounds: [17, 8]
-                    }   breaks from 5pm to 8am (i.e. skips non-work
-                    hours).
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-                values
-                    Sets the coordinate values corresponding to the
-                    rangebreaks. An alternative to `bounds`. Use
-                    `dvalue` to set the size of the values along
-                    the axis.
 
         Returns
         -------
@@ -1413,8 +1029,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def rangebreaks(self, val):
         self["rangebreaks"] = val
 
-    # rangebreakdefaults
-    # ------------------
     @property
     def rangebreakdefaults(self):
         """
@@ -1429,8 +1043,6 @@ class YAxis(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Rangebreak constructor
 
-            Supported dict properties:
-
         Returns
         -------
         plotly.graph_objs.layout.yaxis.Rangebreak
@@ -1441,13 +1053,11 @@ class YAxis(_BaseLayoutHierarchyType):
     def rangebreakdefaults(self, val):
         self["rangebreakdefaults"] = val
 
-    # rangemode
-    # ---------
     @property
     def rangemode(self):
         """
         If "normal", the range is computed in relation to the extrema
-        of the input data. If *tozero*`, the range extends to 0,
+        of the input data. If "tozero", the range extends to 0,
         regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data. Applies only to
         linear axes.
@@ -1466,8 +1076,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def rangemode(self, val):
         self["rangemode"] = val
 
-    # scaleanchor
-    # -----------
     @property
     def scaleanchor(self):
         """
@@ -1511,8 +1119,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def scaleanchor(self, val):
         self["scaleanchor"] = val
 
-    # scaleratio
-    # ----------
     @property
     def scaleratio(self):
         """
@@ -1536,8 +1142,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def scaleratio(self, val):
         self["scaleratio"] = val
 
-    # separatethousands
-    # -----------------
     @property
     def separatethousands(self):
         """
@@ -1556,8 +1160,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def separatethousands(self, val):
         self["separatethousands"] = val
 
-    # shift
-    # -----
     @property
     def shift(self):
         """
@@ -1582,8 +1184,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def shift(self, val):
         self["shift"] = val
 
-    # showdividers
-    # ------------
     @property
     def showdividers(self):
         """
@@ -1604,8 +1204,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def showdividers(self, val):
         self["showdividers"] = val
 
-    # showexponent
-    # ------------
     @property
     def showexponent(self):
         """
@@ -1628,8 +1226,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def showexponent(self, val):
         self["showexponent"] = val
 
-    # showgrid
-    # --------
     @property
     def showgrid(self):
         """
@@ -1649,8 +1245,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def showgrid(self, val):
         self["showgrid"] = val
 
-    # showline
-    # --------
     @property
     def showline(self):
         """
@@ -1669,8 +1263,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def showline(self, val):
         self["showline"] = val
 
-    # showspikes
-    # ----------
     @property
     def showspikes(self):
         """
@@ -1691,8 +1283,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def showspikes(self, val):
         self["showspikes"] = val
 
-    # showticklabels
-    # --------------
     @property
     def showticklabels(self):
         """
@@ -1711,8 +1301,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def showticklabels(self, val):
         self["showticklabels"] = val
 
-    # showtickprefix
-    # --------------
     @property
     def showtickprefix(self):
         """
@@ -1735,8 +1323,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def showtickprefix(self, val):
         self["showtickprefix"] = val
 
-    # showticksuffix
-    # --------------
     @property
     def showticksuffix(self):
         """
@@ -1756,8 +1342,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def showticksuffix(self, val):
         self["showticksuffix"] = val
 
-    # side
-    # ----
     @property
     def side(self):
         """
@@ -1778,8 +1362,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def side(self, val):
         self["side"] = val
 
-    # spikecolor
-    # ----------
     @property
     def spikecolor(self):
         """
@@ -1790,42 +1372,7 @@ class YAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -1837,8 +1384,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def spikecolor(self, val):
         self["spikecolor"] = val
 
-    # spikedash
-    # ---------
     @property
     def spikedash(self):
         """
@@ -1863,8 +1408,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def spikedash(self, val):
         self["spikedash"] = val
 
-    # spikemode
-    # ---------
     @property
     def spikemode(self):
         """
@@ -1889,8 +1432,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def spikemode(self, val):
         self["spikemode"] = val
 
-    # spikesnap
-    # ---------
     @property
     def spikesnap(self):
         """
@@ -1911,8 +1452,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def spikesnap(self, val):
         self["spikesnap"] = val
 
-    # spikethickness
-    # --------------
     @property
     def spikethickness(self):
         """
@@ -1931,8 +1470,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def spikethickness(self, val):
         self["spikethickness"] = val
 
-    # tick0
-    # -----
     @property
     def tick0(self):
         """
@@ -1958,8 +1495,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tick0(self, val):
         self["tick0"] = val
 
-    # tickangle
-    # ---------
     @property
     def tickangle(self):
         """
@@ -1982,8 +1517,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickangle(self, val):
         self["tickangle"] = val
 
-    # tickcolor
-    # ---------
     @property
     def tickcolor(self):
         """
@@ -1994,42 +1527,7 @@ class YAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -2041,8 +1539,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickcolor(self, val):
         self["tickcolor"] = val
 
-    # tickfont
-    # --------
     @property
     def tickfont(self):
         """
@@ -2054,52 +1550,6 @@ class YAxis(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.layout.yaxis.Tickfont
@@ -2110,8 +1560,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickfont(self, val):
         self["tickfont"] = val
 
-    # tickformat
-    # ----------
     @property
     def tickformat(self):
         """
@@ -2140,8 +1588,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickformat(self, val):
         self["tickformat"] = val
 
-    # tickformatstops
-    # ---------------
     @property
     def tickformatstops(self):
         """
@@ -2150,42 +1596,6 @@ class YAxis(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.yaxis.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-
-            Supported dict properties:
-
-                dtickrange
-                    range [*min*, *max*], where "min", "max" -
-                    dtick values which describe some zoom level, it
-                    is possible to omit "min" or "max" value by
-                    passing "null"
-                enabled
-                    Determines whether or not this stop is used. If
-                    `false`, this stop is ignored even within its
-                    `dtickrange`.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-                value
-                    string - dtickformat for described zoom level,
-                    the same as "tickformat"
 
         Returns
         -------
@@ -2197,8 +1607,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickformatstops(self, val):
         self["tickformatstops"] = val
 
-    # tickformatstopdefaults
-    # ----------------------
     @property
     def tickformatstopdefaults(self):
         """
@@ -2213,8 +1621,6 @@ class YAxis(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
 
-            Supported dict properties:
-
         Returns
         -------
         plotly.graph_objs.layout.yaxis.Tickformatstop
@@ -2225,8 +1631,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
-    # ticklabelindex
-    # --------------
     @property
     def ticklabelindex(self):
         """
@@ -2253,8 +1657,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelindex(self, val):
         self["ticklabelindex"] = val
 
-    # ticklabelindexsrc
-    # -----------------
     @property
     def ticklabelindexsrc(self):
         """
@@ -2274,8 +1676,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelindexsrc(self, val):
         self["ticklabelindexsrc"] = val
 
-    # ticklabelmode
-    # -------------
     @property
     def ticklabelmode(self):
         """
@@ -2298,8 +1698,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelmode(self, val):
         self["ticklabelmode"] = val
 
-    # ticklabeloverflow
-    # -----------------
     @property
     def ticklabeloverflow(self):
         """
@@ -2323,8 +1721,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabeloverflow(self, val):
         self["ticklabeloverflow"] = val
 
-    # ticklabelposition
-    # -----------------
     @property
     def ticklabelposition(self):
         """
@@ -2353,8 +1749,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelposition(self, val):
         self["ticklabelposition"] = val
 
-    # ticklabelshift
-    # --------------
     @property
     def ticklabelshift(self):
         """
@@ -2375,8 +1769,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelshift(self, val):
         self["ticklabelshift"] = val
 
-    # ticklabelstandoff
-    # -----------------
     @property
     def ticklabelstandoff(self):
         """
@@ -2403,8 +1795,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelstandoff(self, val):
         self["ticklabelstandoff"] = val
 
-    # ticklabelstep
-    # -------------
     @property
     def ticklabelstep(self):
         """
@@ -2429,8 +1819,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelstep(self, val):
         self["ticklabelstep"] = val
 
-    # ticklen
-    # -------
     @property
     def ticklen(self):
         """
@@ -2449,8 +1837,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklen(self, val):
         self["ticklen"] = val
 
-    # tickmode
-    # --------
     @property
     def tickmode(self):
         """
@@ -2478,8 +1864,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickmode(self, val):
         self["tickmode"] = val
 
-    # tickprefix
-    # ----------
     @property
     def tickprefix(self):
         """
@@ -2499,8 +1883,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickprefix(self, val):
         self["tickprefix"] = val
 
-    # ticks
-    # -----
     @property
     def ticks(self):
         """
@@ -2522,8 +1904,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticks(self, val):
         self["ticks"] = val
 
-    # tickson
-    # -------
     @property
     def tickson(self):
         """
@@ -2547,8 +1927,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickson(self, val):
         self["tickson"] = val
 
-    # ticksuffix
-    # ----------
     @property
     def ticksuffix(self):
         """
@@ -2568,8 +1946,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticksuffix(self, val):
         self["ticksuffix"] = val
 
-    # ticktext
-    # --------
     @property
     def ticktext(self):
         """
@@ -2590,8 +1966,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticktext(self, val):
         self["ticktext"] = val
 
-    # ticktextsrc
-    # -----------
     @property
     def ticktextsrc(self):
         """
@@ -2610,8 +1984,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticktextsrc(self, val):
         self["ticktextsrc"] = val
 
-    # tickvals
-    # --------
     @property
     def tickvals(self):
         """
@@ -2631,8 +2003,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickvals(self, val):
         self["tickvals"] = val
 
-    # tickvalssrc
-    # -----------
     @property
     def tickvalssrc(self):
         """
@@ -2651,8 +2021,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickvalssrc(self, val):
         self["tickvalssrc"] = val
 
-    # tickwidth
-    # ---------
     @property
     def tickwidth(self):
         """
@@ -2671,8 +2039,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def tickwidth(self, val):
         self["tickwidth"] = val
 
-    # title
-    # -----
     @property
     def title(self):
         """
@@ -2681,25 +2047,6 @@ class YAxis(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.yaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this axis' title font.
-                standoff
-                    Sets the standoff distance (in px) between the
-                    axis labels and the title text The default
-                    value is a function of the axis tick labels,
-                    the title `font.size` and the axis `linewidth`.
-                    Note that the axis title position is always
-                    constrained within the margins, so the actual
-                    standoff distance is always less than the set
-                    or default value. By setting `standoff` and
-                    turning on `automargin`, plotly.js will push
-                    the margins to fit the axis title at given
-                    standoff distance.
-                text
-                    Sets the title of this axis.
 
         Returns
         -------
@@ -2711,8 +2058,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def title(self, val):
         self["title"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -2735,8 +2080,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def type(self, val):
         self["type"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -2756,8 +2099,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -2778,8 +2119,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # zeroline
-    # --------
     @property
     def zeroline(self):
         """
@@ -2800,8 +2139,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def zeroline(self, val):
         self["zeroline"] = val
 
-    # zerolinecolor
-    # -------------
     @property
     def zerolinecolor(self):
         """
@@ -2812,42 +2149,7 @@ class YAxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -2859,8 +2161,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def zerolinecolor(self, val):
         self["zerolinecolor"] = val
 
-    # zerolinewidth
-    # -------------
     @property
     def zerolinewidth(self):
         """
@@ -2879,8 +2179,6 @@ class YAxis(_BaseLayoutHierarchyType):
     def zerolinewidth(self, val):
         self["zerolinewidth"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -3132,7 +2430,7 @@ class YAxis(_BaseLayoutHierarchyType):
             layout.yaxis.rangebreaks
         rangemode
             If "normal", the range is computed in relation to the
-            extrema of the input data. If *tozero*`, the range
+            extrema of the input data. If "tozero", the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
@@ -3756,7 +3054,7 @@ class YAxis(_BaseLayoutHierarchyType):
             layout.yaxis.rangebreaks
         rangemode
             If "normal", the range is computed in relation to the
-            extrema of the input data. If *tozero*`, the range
+            extrema of the input data. If "tozero", the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
@@ -4029,14 +3327,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         YAxis
         """
-        super(YAxis, self).__init__("yaxis")
-
+        super().__init__("yaxis")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -4051,390 +3346,101 @@ constructor must be a dict or
 an instance of :class:`plotly.graph_objs.layout.YAxis`"""
             )
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("anchor", None)
-        _v = anchor if anchor is not None else _v
-        if _v is not None:
-            self["anchor"] = _v
-        _v = arg.pop("automargin", None)
-        _v = automargin if automargin is not None else _v
-        if _v is not None:
-            self["automargin"] = _v
-        _v = arg.pop("autorange", None)
-        _v = autorange if autorange is not None else _v
-        if _v is not None:
-            self["autorange"] = _v
-        _v = arg.pop("autorangeoptions", None)
-        _v = autorangeoptions if autorangeoptions is not None else _v
-        if _v is not None:
-            self["autorangeoptions"] = _v
-        _v = arg.pop("autoshift", None)
-        _v = autoshift if autoshift is not None else _v
-        if _v is not None:
-            self["autoshift"] = _v
-        _v = arg.pop("autotickangles", None)
-        _v = autotickangles if autotickangles is not None else _v
-        if _v is not None:
-            self["autotickangles"] = _v
-        _v = arg.pop("autotypenumbers", None)
-        _v = autotypenumbers if autotypenumbers is not None else _v
-        if _v is not None:
-            self["autotypenumbers"] = _v
-        _v = arg.pop("calendar", None)
-        _v = calendar if calendar is not None else _v
-        if _v is not None:
-            self["calendar"] = _v
-        _v = arg.pop("categoryarray", None)
-        _v = categoryarray if categoryarray is not None else _v
-        if _v is not None:
-            self["categoryarray"] = _v
-        _v = arg.pop("categoryarraysrc", None)
-        _v = categoryarraysrc if categoryarraysrc is not None else _v
-        if _v is not None:
-            self["categoryarraysrc"] = _v
-        _v = arg.pop("categoryorder", None)
-        _v = categoryorder if categoryorder is not None else _v
-        if _v is not None:
-            self["categoryorder"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("constrain", None)
-        _v = constrain if constrain is not None else _v
-        if _v is not None:
-            self["constrain"] = _v
-        _v = arg.pop("constraintoward", None)
-        _v = constraintoward if constraintoward is not None else _v
-        if _v is not None:
-            self["constraintoward"] = _v
-        _v = arg.pop("dividercolor", None)
-        _v = dividercolor if dividercolor is not None else _v
-        if _v is not None:
-            self["dividercolor"] = _v
-        _v = arg.pop("dividerwidth", None)
-        _v = dividerwidth if dividerwidth is not None else _v
-        if _v is not None:
-            self["dividerwidth"] = _v
-        _v = arg.pop("domain", None)
-        _v = domain if domain is not None else _v
-        if _v is not None:
-            self["domain"] = _v
-        _v = arg.pop("dtick", None)
-        _v = dtick if dtick is not None else _v
-        if _v is not None:
-            self["dtick"] = _v
-        _v = arg.pop("exponentformat", None)
-        _v = exponentformat if exponentformat is not None else _v
-        if _v is not None:
-            self["exponentformat"] = _v
-        _v = arg.pop("fixedrange", None)
-        _v = fixedrange if fixedrange is not None else _v
-        if _v is not None:
-            self["fixedrange"] = _v
-        _v = arg.pop("gridcolor", None)
-        _v = gridcolor if gridcolor is not None else _v
-        if _v is not None:
-            self["gridcolor"] = _v
-        _v = arg.pop("griddash", None)
-        _v = griddash if griddash is not None else _v
-        if _v is not None:
-            self["griddash"] = _v
-        _v = arg.pop("gridwidth", None)
-        _v = gridwidth if gridwidth is not None else _v
-        if _v is not None:
-            self["gridwidth"] = _v
-        _v = arg.pop("hoverformat", None)
-        _v = hoverformat if hoverformat is not None else _v
-        if _v is not None:
-            self["hoverformat"] = _v
-        _v = arg.pop("insiderange", None)
-        _v = insiderange if insiderange is not None else _v
-        if _v is not None:
-            self["insiderange"] = _v
-        _v = arg.pop("labelalias", None)
-        _v = labelalias if labelalias is not None else _v
-        if _v is not None:
-            self["labelalias"] = _v
-        _v = arg.pop("layer", None)
-        _v = layer if layer is not None else _v
-        if _v is not None:
-            self["layer"] = _v
-        _v = arg.pop("linecolor", None)
-        _v = linecolor if linecolor is not None else _v
-        if _v is not None:
-            self["linecolor"] = _v
-        _v = arg.pop("linewidth", None)
-        _v = linewidth if linewidth is not None else _v
-        if _v is not None:
-            self["linewidth"] = _v
-        _v = arg.pop("matches", None)
-        _v = matches if matches is not None else _v
-        if _v is not None:
-            self["matches"] = _v
-        _v = arg.pop("maxallowed", None)
-        _v = maxallowed if maxallowed is not None else _v
-        if _v is not None:
-            self["maxallowed"] = _v
-        _v = arg.pop("minallowed", None)
-        _v = minallowed if minallowed is not None else _v
-        if _v is not None:
-            self["minallowed"] = _v
-        _v = arg.pop("minexponent", None)
-        _v = minexponent if minexponent is not None else _v
-        if _v is not None:
-            self["minexponent"] = _v
-        _v = arg.pop("minor", None)
-        _v = minor if minor is not None else _v
-        if _v is not None:
-            self["minor"] = _v
-        _v = arg.pop("mirror", None)
-        _v = mirror if mirror is not None else _v
-        if _v is not None:
-            self["mirror"] = _v
-        _v = arg.pop("nticks", None)
-        _v = nticks if nticks is not None else _v
-        if _v is not None:
-            self["nticks"] = _v
-        _v = arg.pop("overlaying", None)
-        _v = overlaying if overlaying is not None else _v
-        if _v is not None:
-            self["overlaying"] = _v
-        _v = arg.pop("position", None)
-        _v = position if position is not None else _v
-        if _v is not None:
-            self["position"] = _v
-        _v = arg.pop("range", None)
-        _v = range if range is not None else _v
-        if _v is not None:
-            self["range"] = _v
-        _v = arg.pop("rangebreaks", None)
-        _v = rangebreaks if rangebreaks is not None else _v
-        if _v is not None:
-            self["rangebreaks"] = _v
-        _v = arg.pop("rangebreakdefaults", None)
-        _v = rangebreakdefaults if rangebreakdefaults is not None else _v
-        if _v is not None:
-            self["rangebreakdefaults"] = _v
-        _v = arg.pop("rangemode", None)
-        _v = rangemode if rangemode is not None else _v
-        if _v is not None:
-            self["rangemode"] = _v
-        _v = arg.pop("scaleanchor", None)
-        _v = scaleanchor if scaleanchor is not None else _v
-        if _v is not None:
-            self["scaleanchor"] = _v
-        _v = arg.pop("scaleratio", None)
-        _v = scaleratio if scaleratio is not None else _v
-        if _v is not None:
-            self["scaleratio"] = _v
-        _v = arg.pop("separatethousands", None)
-        _v = separatethousands if separatethousands is not None else _v
-        if _v is not None:
-            self["separatethousands"] = _v
-        _v = arg.pop("shift", None)
-        _v = shift if shift is not None else _v
-        if _v is not None:
-            self["shift"] = _v
-        _v = arg.pop("showdividers", None)
-        _v = showdividers if showdividers is not None else _v
-        if _v is not None:
-            self["showdividers"] = _v
-        _v = arg.pop("showexponent", None)
-        _v = showexponent if showexponent is not None else _v
-        if _v is not None:
-            self["showexponent"] = _v
-        _v = arg.pop("showgrid", None)
-        _v = showgrid if showgrid is not None else _v
-        if _v is not None:
-            self["showgrid"] = _v
-        _v = arg.pop("showline", None)
-        _v = showline if showline is not None else _v
-        if _v is not None:
-            self["showline"] = _v
-        _v = arg.pop("showspikes", None)
-        _v = showspikes if showspikes is not None else _v
-        if _v is not None:
-            self["showspikes"] = _v
-        _v = arg.pop("showticklabels", None)
-        _v = showticklabels if showticklabels is not None else _v
-        if _v is not None:
-            self["showticklabels"] = _v
-        _v = arg.pop("showtickprefix", None)
-        _v = showtickprefix if showtickprefix is not None else _v
-        if _v is not None:
-            self["showtickprefix"] = _v
-        _v = arg.pop("showticksuffix", None)
-        _v = showticksuffix if showticksuffix is not None else _v
-        if _v is not None:
-            self["showticksuffix"] = _v
-        _v = arg.pop("side", None)
-        _v = side if side is not None else _v
-        if _v is not None:
-            self["side"] = _v
-        _v = arg.pop("spikecolor", None)
-        _v = spikecolor if spikecolor is not None else _v
-        if _v is not None:
-            self["spikecolor"] = _v
-        _v = arg.pop("spikedash", None)
-        _v = spikedash if spikedash is not None else _v
-        if _v is not None:
-            self["spikedash"] = _v
-        _v = arg.pop("spikemode", None)
-        _v = spikemode if spikemode is not None else _v
-        if _v is not None:
-            self["spikemode"] = _v
-        _v = arg.pop("spikesnap", None)
-        _v = spikesnap if spikesnap is not None else _v
-        if _v is not None:
-            self["spikesnap"] = _v
-        _v = arg.pop("spikethickness", None)
-        _v = spikethickness if spikethickness is not None else _v
-        if _v is not None:
-            self["spikethickness"] = _v
-        _v = arg.pop("tick0", None)
-        _v = tick0 if tick0 is not None else _v
-        if _v is not None:
-            self["tick0"] = _v
-        _v = arg.pop("tickangle", None)
-        _v = tickangle if tickangle is not None else _v
-        if _v is not None:
-            self["tickangle"] = _v
-        _v = arg.pop("tickcolor", None)
-        _v = tickcolor if tickcolor is not None else _v
-        if _v is not None:
-            self["tickcolor"] = _v
-        _v = arg.pop("tickfont", None)
-        _v = tickfont if tickfont is not None else _v
-        if _v is not None:
-            self["tickfont"] = _v
-        _v = arg.pop("tickformat", None)
-        _v = tickformat if tickformat is not None else _v
-        if _v is not None:
-            self["tickformat"] = _v
-        _v = arg.pop("tickformatstops", None)
-        _v = tickformatstops if tickformatstops is not None else _v
-        if _v is not None:
-            self["tickformatstops"] = _v
-        _v = arg.pop("tickformatstopdefaults", None)
-        _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
-        if _v is not None:
-            self["tickformatstopdefaults"] = _v
-        _v = arg.pop("ticklabelindex", None)
-        _v = ticklabelindex if ticklabelindex is not None else _v
-        if _v is not None:
-            self["ticklabelindex"] = _v
-        _v = arg.pop("ticklabelindexsrc", None)
-        _v = ticklabelindexsrc if ticklabelindexsrc is not None else _v
-        if _v is not None:
-            self["ticklabelindexsrc"] = _v
-        _v = arg.pop("ticklabelmode", None)
-        _v = ticklabelmode if ticklabelmode is not None else _v
-        if _v is not None:
-            self["ticklabelmode"] = _v
-        _v = arg.pop("ticklabeloverflow", None)
-        _v = ticklabeloverflow if ticklabeloverflow is not None else _v
-        if _v is not None:
-            self["ticklabeloverflow"] = _v
-        _v = arg.pop("ticklabelposition", None)
-        _v = ticklabelposition if ticklabelposition is not None else _v
-        if _v is not None:
-            self["ticklabelposition"] = _v
-        _v = arg.pop("ticklabelshift", None)
-        _v = ticklabelshift if ticklabelshift is not None else _v
-        if _v is not None:
-            self["ticklabelshift"] = _v
-        _v = arg.pop("ticklabelstandoff", None)
-        _v = ticklabelstandoff if ticklabelstandoff is not None else _v
-        if _v is not None:
-            self["ticklabelstandoff"] = _v
-        _v = arg.pop("ticklabelstep", None)
-        _v = ticklabelstep if ticklabelstep is not None else _v
-        if _v is not None:
-            self["ticklabelstep"] = _v
-        _v = arg.pop("ticklen", None)
-        _v = ticklen if ticklen is not None else _v
-        if _v is not None:
-            self["ticklen"] = _v
-        _v = arg.pop("tickmode", None)
-        _v = tickmode if tickmode is not None else _v
-        if _v is not None:
-            self["tickmode"] = _v
-        _v = arg.pop("tickprefix", None)
-        _v = tickprefix if tickprefix is not None else _v
-        if _v is not None:
-            self["tickprefix"] = _v
-        _v = arg.pop("ticks", None)
-        _v = ticks if ticks is not None else _v
-        if _v is not None:
-            self["ticks"] = _v
-        _v = arg.pop("tickson", None)
-        _v = tickson if tickson is not None else _v
-        if _v is not None:
-            self["tickson"] = _v
-        _v = arg.pop("ticksuffix", None)
-        _v = ticksuffix if ticksuffix is not None else _v
-        if _v is not None:
-            self["ticksuffix"] = _v
-        _v = arg.pop("ticktext", None)
-        _v = ticktext if ticktext is not None else _v
-        if _v is not None:
-            self["ticktext"] = _v
-        _v = arg.pop("ticktextsrc", None)
-        _v = ticktextsrc if ticktextsrc is not None else _v
-        if _v is not None:
-            self["ticktextsrc"] = _v
-        _v = arg.pop("tickvals", None)
-        _v = tickvals if tickvals is not None else _v
-        if _v is not None:
-            self["tickvals"] = _v
-        _v = arg.pop("tickvalssrc", None)
-        _v = tickvalssrc if tickvalssrc is not None else _v
-        if _v is not None:
-            self["tickvalssrc"] = _v
-        _v = arg.pop("tickwidth", None)
-        _v = tickwidth if tickwidth is not None else _v
-        if _v is not None:
-            self["tickwidth"] = _v
-        _v = arg.pop("title", None)
-        _v = title if title is not None else _v
-        if _v is not None:
-            self["title"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("zeroline", None)
-        _v = zeroline if zeroline is not None else _v
-        if _v is not None:
-            self["zeroline"] = _v
-        _v = arg.pop("zerolinecolor", None)
-        _v = zerolinecolor if zerolinecolor is not None else _v
-        if _v is not None:
-            self["zerolinecolor"] = _v
-        _v = arg.pop("zerolinewidth", None)
-        _v = zerolinewidth if zerolinewidth is not None else _v
-        if _v is not None:
-            self["zerolinewidth"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("anchor", arg, anchor)
+        self._set_property("automargin", arg, automargin)
+        self._set_property("autorange", arg, autorange)
+        self._set_property("autorangeoptions", arg, autorangeoptions)
+        self._set_property("autoshift", arg, autoshift)
+        self._set_property("autotickangles", arg, autotickangles)
+        self._set_property("autotypenumbers", arg, autotypenumbers)
+        self._set_property("calendar", arg, calendar)
+        self._set_property("categoryarray", arg, categoryarray)
+        self._set_property("categoryarraysrc", arg, categoryarraysrc)
+        self._set_property("categoryorder", arg, categoryorder)
+        self._set_property("color", arg, color)
+        self._set_property("constrain", arg, constrain)
+        self._set_property("constraintoward", arg, constraintoward)
+        self._set_property("dividercolor", arg, dividercolor)
+        self._set_property("dividerwidth", arg, dividerwidth)
+        self._set_property("domain", arg, domain)
+        self._set_property("dtick", arg, dtick)
+        self._set_property("exponentformat", arg, exponentformat)
+        self._set_property("fixedrange", arg, fixedrange)
+        self._set_property("gridcolor", arg, gridcolor)
+        self._set_property("griddash", arg, griddash)
+        self._set_property("gridwidth", arg, gridwidth)
+        self._set_property("hoverformat", arg, hoverformat)
+        self._set_property("insiderange", arg, insiderange)
+        self._set_property("labelalias", arg, labelalias)
+        self._set_property("layer", arg, layer)
+        self._set_property("linecolor", arg, linecolor)
+        self._set_property("linewidth", arg, linewidth)
+        self._set_property("matches", arg, matches)
+        self._set_property("maxallowed", arg, maxallowed)
+        self._set_property("minallowed", arg, minallowed)
+        self._set_property("minexponent", arg, minexponent)
+        self._set_property("minor", arg, minor)
+        self._set_property("mirror", arg, mirror)
+        self._set_property("nticks", arg, nticks)
+        self._set_property("overlaying", arg, overlaying)
+        self._set_property("position", arg, position)
+        self._set_property("range", arg, range)
+        self._set_property("rangebreaks", arg, rangebreaks)
+        self._set_property("rangebreakdefaults", arg, rangebreakdefaults)
+        self._set_property("rangemode", arg, rangemode)
+        self._set_property("scaleanchor", arg, scaleanchor)
+        self._set_property("scaleratio", arg, scaleratio)
+        self._set_property("separatethousands", arg, separatethousands)
+        self._set_property("shift", arg, shift)
+        self._set_property("showdividers", arg, showdividers)
+        self._set_property("showexponent", arg, showexponent)
+        self._set_property("showgrid", arg, showgrid)
+        self._set_property("showline", arg, showline)
+        self._set_property("showspikes", arg, showspikes)
+        self._set_property("showticklabels", arg, showticklabels)
+        self._set_property("showtickprefix", arg, showtickprefix)
+        self._set_property("showticksuffix", arg, showticksuffix)
+        self._set_property("side", arg, side)
+        self._set_property("spikecolor", arg, spikecolor)
+        self._set_property("spikedash", arg, spikedash)
+        self._set_property("spikemode", arg, spikemode)
+        self._set_property("spikesnap", arg, spikesnap)
+        self._set_property("spikethickness", arg, spikethickness)
+        self._set_property("tick0", arg, tick0)
+        self._set_property("tickangle", arg, tickangle)
+        self._set_property("tickcolor", arg, tickcolor)
+        self._set_property("tickfont", arg, tickfont)
+        self._set_property("tickformat", arg, tickformat)
+        self._set_property("tickformatstops", arg, tickformatstops)
+        self._set_property("tickformatstopdefaults", arg, tickformatstopdefaults)
+        self._set_property("ticklabelindex", arg, ticklabelindex)
+        self._set_property("ticklabelindexsrc", arg, ticklabelindexsrc)
+        self._set_property("ticklabelmode", arg, ticklabelmode)
+        self._set_property("ticklabeloverflow", arg, ticklabeloverflow)
+        self._set_property("ticklabelposition", arg, ticklabelposition)
+        self._set_property("ticklabelshift", arg, ticklabelshift)
+        self._set_property("ticklabelstandoff", arg, ticklabelstandoff)
+        self._set_property("ticklabelstep", arg, ticklabelstep)
+        self._set_property("ticklen", arg, ticklen)
+        self._set_property("tickmode", arg, tickmode)
+        self._set_property("tickprefix", arg, tickprefix)
+        self._set_property("ticks", arg, ticks)
+        self._set_property("tickson", arg, tickson)
+        self._set_property("ticksuffix", arg, ticksuffix)
+        self._set_property("ticktext", arg, ticktext)
+        self._set_property("ticktextsrc", arg, ticktextsrc)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("tickwidth", arg, tickwidth)
+        self._set_property("title", arg, title)
+        self._set_property("type", arg, type)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("visible", arg, visible)
+        self._set_property("zeroline", arg, zeroline)
+        self._set_property("zerolinecolor", arg, zerolinecolor)
+        self._set_property("zerolinewidth", arg, zerolinewidth)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
