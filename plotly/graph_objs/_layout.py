@@ -34,33 +34,46 @@ class Layout(_BaseLayoutType):
         -------
         dict
         """
-        from plotly.validators.layout import (
-            ColoraxisValidator,
-            GeoValidator,
-            LegendValidator,
-            MapValidator,
-            MapboxValidator,
-            PolarValidator,
-            SceneValidator,
-            SmithValidator,
-            TernaryValidator,
-            XaxisValidator,
-            YaxisValidator,
-        )
+        # from plotly.validators.layout import (
+        #     ColoraxisValidator,
+        #     GeoValidator,
+        #     LegendValidator,
+        #     MapValidator,
+        #     MapboxValidator,
+        #     PolarValidator,
+        #     SceneValidator,
+        #     SmithValidator,
+        #     TernaryValidator,
+        #     XaxisValidator,
+        #     YaxisValidator,
+        # )
+
+        from plotly.validator_cache import ValidatorCache
 
         return {
-            "coloraxis": ColoraxisValidator,
-            "geo": GeoValidator,
-            "legend": LegendValidator,
-            "map": MapValidator,
-            "mapbox": MapboxValidator,
-            "polar": PolarValidator,
-            "scene": SceneValidator,
-            "smith": SmithValidator,
-            "ternary": TernaryValidator,
-            "xaxis": XaxisValidator,
-            "yaxis": YaxisValidator,
+            "coloraxis": ValidatorCache.get_validator("layout", "coloraxis"),
+            "geo": ValidatorCache.get_validator("layout", "geo"),
+            "legend": ValidatorCache.get_validator("layout", "legend"),
+            "map": ValidatorCache.get_validator("layout", "map"),
+            "mapbox": ValidatorCache.get_validator("layout", "mapbox"),
+            "polar": ValidatorCache.get_validator("layout", "polar"),
+            "scene": ValidatorCache.get_validator("layout", "scene"),
+            "smith": ValidatorCache.get_validator("layout", "smith"),
+            "ternary": ValidatorCache.get_validator("layout", "ternary"),
+            "xaxis": ValidatorCache.get_validator("layout", "xaxis"),
+            "yaxis": ValidatorCache.get_validator("layout", "yaxis"),
         }
+        #     "geo": GeoValidator,
+        #     "legend": LegendValidator,
+        #     "map": MapValidator,
+        #     "mapbox": MapboxValidator,
+        #     "polar": PolarValidator,
+        #     "scene": SceneValidator,
+        #     "smith": SmithValidator,
+        #     "ternary": TernaryValidator,
+        #     "xaxis": XaxisValidator,
+        #     "yaxis": YaxisValidator,
+        # }
 
     def _subplot_re_match(self, prop):
         return self._subplotid_prop_re.match(prop)
