@@ -1066,7 +1066,7 @@ def _subplot_type_for_trace_type(trace_type):
     DataValidator = ValidatorCache.get_validator("", "data")
     # from plotly.validators import DataValidator
 
-    trace_validator = DataValidator
+    trace_validator = DataValidator()
     if trace_type in trace_validator.class_strs_map:
         # subplot_type is a trace name, find the subplot type for trace
         trace = trace_validator.validate_coerce([{"type": trace_type}])[0]
