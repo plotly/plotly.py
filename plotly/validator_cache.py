@@ -4,6 +4,11 @@ import _plotly_utils.basevalidators as basevalidators
 import json
 import os.path as opath
 
+DERIVED_CLASSES = {
+    "DataValidator": "data",
+    "LayoutValidator": "layout",
+}
+
 class ValidatorCache(object):
     _cache = {}
     _json_cache = None
@@ -43,8 +48,23 @@ class ValidatorCache(object):
                 lookup_name = lookup_name or prop_name
                 lookup = f"{parent_path}.{lookup_name}" if parent_path else lookup_name
                 validator_item = ValidatorCache._json_cache.get(lookup)
+                validator_classname = validator_item["superclass"]
+                if validator_classname in DERIVED_CLASSES:
+                    # If the superclass is a derived class, we need to get the base class
+                    # and pass the derived class name as a parameter
+                    base_item = ValidatorCache._json_cache.get(
+                        DERIVED_CLASSES[validator_classname]
+                    )
+                    validator_args = base_item["params"]
+                    validator_args.update(validator_item["params"])
+                    validator_classname = base_item["superclass"]
+                else:
+                    validator_args = validator_item["params"]
+
+                validator_class = getattr(basevalidators, validator_classname)
+
                 print("validator_item", key, validator_item)
-                validator = generate_validator(validator_item["params"], validator_item["superclass"])
+                validator = validator_class(**validator_args)
             ValidatorCache._cache[key] = validator
 
         return ValidatorCache._cache[key]
