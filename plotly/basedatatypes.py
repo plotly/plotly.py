@@ -524,7 +524,10 @@ class BaseFigure(object):
         # ### Construct data validator ###
         # This is the validator that handles importing sequences of trace
         # objects
-        self._data_validator = DataValidator(set_uid=self._set_trace_uid)
+        # We make a copy because we are overriding the set_uid attribute
+        # and do not want to alter all other uses of the cached DataValidator
+        self._data_validator = copy(DataValidator)
+        self._data_validator.set_uid = self._set_trace_uid
 
         # ### Import traces ###
         data = self._data_validator.validate_coerce(
