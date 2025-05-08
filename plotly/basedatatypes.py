@@ -468,7 +468,11 @@ class BaseFigure(object):
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         """
-        from .validators import DataValidator, LayoutValidator, FramesValidator
+        from .validator_cache import ValidatorCache
+        DataValidator = ValidatorCache.get_validator("", "data")
+        FramesValidator = ValidatorCache.get_validator("", "frames")
+        LayoutValidator = ValidatorCache.get_validator("", "layout")
+        # from .validators import DataValidator, LayoutValidator, FramesValidator
 
         super(BaseFigure, self).__init__()
 
@@ -563,7 +567,7 @@ class BaseFigure(object):
         # ------
         # ### Construct layout validator ###
         # This is the validator that handles importing Layout objects
-        self._layout_validator = LayoutValidator()
+        self._layout_validator = LayoutValidator
 
         # ### Import Layout ###
         self._layout_obj = self._layout_validator.validate_coerce(
@@ -598,7 +602,7 @@ class BaseFigure(object):
         # ### Construct frames validator ###
         # This is the validator that handles importing sequences of frame
         # objects
-        self._frames_validator = FramesValidator()
+        self._frames_validator = FramesValidator
 
         # ### Import frames ###
         self._frame_objs = self._frames_validator.validate_coerce(
