@@ -1,5 +1,4 @@
 from _plotly_utils.basevalidators import LiteralValidator
-from plotly.validators._data import DataValidator
 import _plotly_utils.basevalidators as basevalidators
 import json
 import os.path as opath
@@ -33,9 +32,6 @@ class ValidatorCache(object):
             if "." not in parent_path and prop_name == "type":
                 # Special case for .type property of traces
                 validator = LiteralValidator("type", parent_path, parent_path)
-            elif parent_path == "" and prop_name == "data":
-                # Special case for .data property of Figure
-                validator = DataValidator
             else:
                 lookup_name = None
                 if parent_path == "layout":
@@ -47,6 +43,7 @@ class ValidatorCache(object):
 
                 lookup_name = lookup_name or prop_name
                 lookup = f"{parent_path}.{lookup_name}" if parent_path else lookup_name
+
                 validator_item = ValidatorCache._json_cache.get(lookup)
                 validator_classname = validator_item["superclass"]
                 if validator_classname in DERIVED_CLASSES:
@@ -55,20 +52,16 @@ class ValidatorCache(object):
                     base_item = ValidatorCache._json_cache.get(
                         DERIVED_CLASSES[validator_classname]
                     )
-                    validator_args = base_item["params"]
-                    validator_args.update(validator_item["params"])
+                    validator_params = base_item["params"]
+                    validator_params.update(validator_item["params"])
                     validator_classname = base_item["superclass"]
                 else:
-                    validator_args = validator_item["params"]
-
+                    validator_params = validator_item["params"]
+                validator_params["plotly_name"] = prop_name
                 validator_class = getattr(basevalidators, validator_classname)
 
-                print("validator_item", key, validator_item)
-                validator = validator_class(**validator_args)
+                validator = validator_class(**validator_params)
             ValidatorCache._cache[key] = validator
 
         return ValidatorCache._cache[key]
 
-def generate_validator(params: dict, superclass_name: str):
-    superclass = getattr(basevalidators, superclass_name)
-    return superclass(**params)
