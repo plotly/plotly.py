@@ -3,7 +3,7 @@ from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.validator_cache import ValidatorCache
-# from _plotly_utils.basevalidators import ColorscaleValidator
+# from plotly.validators.heatmap import ColorscaleValidator
 
 # Optional imports, may be None for users that only use our core functionality.
 np = optional_imports.get_module("numpy")
@@ -103,7 +103,7 @@ def create_annotated_heatmap(
     validate_annotated_heatmap(z, x, y, annotation_text)
 
     # validate colorscale
-    colorscale_validator = ValidatorCache.get_validator("layout", "colorscale")
+    colorscale_validator = ValidatorCache.get_validator("heatmap", "colorscale")
     colorscale = colorscale_validator.validate_coerce(colorscale)
 
     annotations = _AnnotatedHeatmap(
