@@ -22,6 +22,8 @@ from codegen.utils import (
 )
 from codegen.validators import (
     write_validator_py,
+    get_validator_params,
+    write_validator_json,
     write_data_validator_py,
     get_data_validator_instance,
 )
@@ -171,20 +173,26 @@ def perform_codegen(reformat=True):
         if node.is_compound and not isinstance(node, ElementDefaultsNode)
     ]
 
+    validator_params = {}
     # Write out validators
     # --------------------
     # # ### Layout ###
     for node in all_layout_nodes:
-        write_validator_py(outdir, node)
+        # write_validator_py(outdir, node)
+        get_validator_params(node, validator_params)
 
     # ### Trace ###
     for node in all_trace_nodes:
-        write_validator_py(outdir, node)
+        # write_validator_py(outdir, node)
+        get_validator_params(node, validator_params)
 
     # ### Frames ###
     for node in all_frame_nodes:
-        write_validator_py(outdir, node)
-
+        # write_validator_py(outdir, node)
+        get_validator_params(node, validator_params)
+        
+    os.makedirs(validators_pkgdir, exist_ok=True)
+    write_validator_json(outdir, validator_params)
     # ### Data (traces) validator ###
     write_data_validator_py(outdir, base_traces_node)
 
@@ -235,8 +243,8 @@ def perform_codegen(reformat=True):
 
     # Output validator __init__.py files
     validators_pkg = opath.join(outdir, "validators")
-    for path_parts, rel_classes in validator_rel_class_imports.items():
-        write_init_py(validators_pkg, path_parts, [], rel_classes)
+    # for path_parts, rel_classes in validator_rel_class_imports.items():
+        # write_init_py(validators_pkg, path_parts, [], rel_classes)
 
     # Write datatype __init__.py files
     # --------------------------------
