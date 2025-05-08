@@ -1,5 +1,6 @@
 import os.path as opath
 from io import StringIO
+import json
 
 import _plotly_utils.basevalidators
 from codegen.utils import CAVEAT, PlotlyNode, TraceNode, write_source_py
@@ -113,6 +114,58 @@ def write_validator_py(outdir, node: PlotlyNode):
     )
 
     write_source_py(validator_source, filepath, leading_newlines=2)
+
+def get_validator_params(node: PlotlyNode, store: dict):
+    """
+    Write out the JSON schema for the validator
+
+    Parameters
+    ----------
+    node : PlotlyNode
+        The datatype node (node.is_datatype must evaluate to true) for which
+        to build a validator class
+    store : dict
+        Dictionary to store the JSON data for the validator
+    Returns
+    -------
+    None
+    """
+    assert isinstance(store, dict)    
+    assert node.is_datatype
+
+    raw_params = node.get_validator_params()
+    params = dict([(k, eval(v)) for k, v in raw_params.items()])
+    superclass_name = node.name_base_validator.split(".")[-1]
+
+    key = ".".join(node.parent_path_parts + (node.name_property,))
+    store[key] = {"params": params, "superclass": superclass_name}
+
+def write_validator_json(outdir, params: dict):
+    """
+    Write out the JSON schema for the validator
+
+    Parameters
+    ----------
+    outdir : str
+        Root outdir in which the validators package should reside
+    params : dict
+        Dictionary to store the JSON data for the validator
+    Returns
+    -------
+    None
+    """
+    import json
+    # Validate inputs
+    # ---------------
+    if not isinstance(params, dict):
+        raise ValueError("Expected params to be a dictionary")
+
+    # Write file
+    # ----------
+    filepath = opath.join(outdir, "validators", "_validators.json")
+    with open(filepath, "w") as f:
+        f.write(json.dumps(params, indent=4))
+        # f.write(str(params))
 
 
 def build_data_validator_params(base_trace_node: TraceNode):
