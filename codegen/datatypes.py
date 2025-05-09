@@ -130,14 +130,11 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
 """
         )
 
-        subplot_validator_names = [n.name_validator_class for n in subplot_nodes]
-
-        validator_csv = ", ".join(subplot_validator_names)
         subplot_dict_str = (
             "{"
             + ", ".join(
-                f"'{subname}': {valname}"
-                for subname, valname in zip(subplot_names, subplot_validator_names)
+                f"\"{subname}\": ValidatorCache.get_validator(\"layout\", \"{subname}\")"
+                for subname in subplot_names
             )
             + "}"
         )
@@ -153,7 +150,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         -------
         dict
         \"\"\"
-        from plotly.validators.layout import ({validator_csv})
+        from plotly.validator_cache import ValidatorCache
 
         return {subplot_dict_str}
 
