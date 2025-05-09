@@ -1062,9 +1062,11 @@ def _init_subplot_domain(x_domain, y_domain):
 
 
 def _subplot_type_for_trace_type(trace_type):
-    from plotly.validators import DataValidator
+    from plotly.validator_cache import ValidatorCache
 
-    trace_validator = DataValidator()
+    DataValidator = ValidatorCache.get_validator("", "data")
+
+    trace_validator = DataValidator
     if trace_type in trace_validator.class_strs_map:
         # subplot_type is a trace name, find the subplot type for trace
         trace = trace_validator.validate_coerce([{"type": trace_type}])[0]
