@@ -11,6 +11,7 @@ from plotly.io._utils import validate_coerce_fig_to_dict, broadcast_args_to_dict
 from plotly.io._defaults import defaults
 
 ENGINE_SUPPORT_TIMELINE = "September 2025"
+ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS = False
 
 PLOTLY_GET_CHROME_ERROR_MSG = """
 
@@ -23,8 +24,6 @@ or install it from your terminal by running:
 
 """
 
-
-# TODO: Remove --pre flag once Kaleido v1 full release is available
 KALEIDO_DEPRECATION_MSG = f"""
 Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}.
 Please upgrade Kaleido to version 1.0.0 or greater (`pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]'`).
@@ -95,23 +94,25 @@ try:
         from kaleido.scopes.plotly import PlotlyScope
 
         # Show a deprecation warning if the old method of setting defaults is used
-        class PlotlyScopeWithDeprecationWarnings(PlotlyScope):
+        class PlotlyScopeWrapper(PlotlyScope):
             def __setattr__(self, name, value):
                 if name in defaults.__dict__:
-                    warnings.warn(
-                        kaleido_scope_default_warning_func(name),
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
+                    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+                        warnings.warn(
+                            kaleido_scope_default_warning_func(name),
+                            DeprecationWarning,
+                            stacklevel=2,
+                        )
                 super().__setattr__(name, value)
 
             def __getattr__(self, name):
                 if hasattr(defaults, name):
-                    warnings.warn(
-                        kaleido_scope_default_warning_func(name),
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
+                    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+                        warnings.warn(
+                            kaleido_scope_default_warning_func(name),
+                            DeprecationWarning,
+                            stacklevel=2,
+                        )
                 return super().__getattr__(name)
 
         # Ensure the new method of setting defaults is backwards compatible with Kaleido v0
@@ -131,7 +132,7 @@ try:
                         setattr(self._scope, name, value)
                 super().__setattr__(name, value)
 
-        scope = PlotlyScopeWithDeprecationWarnings()
+        scope = PlotlyScopeWrapper()
         defaults = DefaultsBackwardsCompatible(scope)
         # Compute absolute path to the 'plotly/package_data/' directory
         root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
@@ -150,30 +151,32 @@ try:
         import kaleido
 
         # Show a deprecation warning if the old method of setting defaults is used
-        class DefaultsDeprecationWarning:
+        class DefaultsWrapper:
             def __getattr__(self, name):
                 if hasattr(defaults, name):
-                    warnings.warn(
-                        kaleido_scope_default_warning_func(name),
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
+                    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+                        warnings.warn(
+                            kaleido_scope_default_warning_func(name),
+                            DeprecationWarning,
+                            stacklevel=2,
+                        )
                     return getattr(defaults, name)
                 else:
                     raise AttributeError(bad_attribute_error_msg_func(name))
 
             def __setattr__(self, name, value):
                 if hasattr(defaults, name):
-                    warnings.warn(
-                        kaleido_scope_default_warning_func(name),
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
+                    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+                        warnings.warn(
+                            kaleido_scope_default_warning_func(name),
+                            DeprecationWarning,
+                            stacklevel=2,
+                        )
                     setattr(defaults, name, value)
                 else:
                     raise AttributeError(bad_attribute_error_msg_func(name))
 
-        scope = DefaultsDeprecationWarning()
+        scope = DefaultsWrapper()
 
 except ImportError as e:
     PlotlyScope = None
@@ -296,7 +299,8 @@ def to_image(
 
     # Handle engine
     if engine is not None:
-        warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
     else:
         engine = "auto"
 
@@ -317,7 +321,8 @@ def to_image(
                 engine = "kaleido"
 
     if engine == "orca":
-        warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
         # Fall back to legacy orca image export path
         from ._orca import to_image as to_image_orca
 
@@ -385,7 +390,8 @@ To downgrade to Kaleido v0, run:
 
     else:
         # Kaleido v0
-        warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
         img_bytes = scope.transform(
             fig_dict, format=format, width=width, height=height, scale=scale
         )
@@ -476,16 +482,17 @@ def write_image(
     None
     """
     # Show Kaleido deprecation warning if needed
-    if (
-        engine in {None, "auto", "kaleido"}
-        and kaleido_available()
-        and kaleido_major() < 1
-    ):
-        warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-    if engine == "orca":
-        warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-    if engine not in {None, "auto"}:
-        warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+        if (
+            engine in {None, "auto", "kaleido"}
+            and kaleido_available()
+            and kaleido_major() < 1
+        ):
+            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if engine == "orca":
+            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if engine not in {None, "auto"}:
+            warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
 
     # Try to cast `file` as a pathlib object `path`.
     path = as_path_object(file)
@@ -748,11 +755,12 @@ which can be installed using pip:
         fig = json.loads(bytes.decode("utf-8"))
     else:
         # Kaleido v0
-        warnings.warn(
-            f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. "
-            + "Please upgrade Kaleido to version 1.0.0 or greater (`pip install 'kaleido>=1.0.0'`).",
-            DeprecationWarning,
-        )
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            warnings.warn(
+                f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. "
+                + "Please upgrade Kaleido to version 1.0.0 or greater (`pip install 'kaleido>=1.0.0'`).",
+                DeprecationWarning,
+            )
         fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
 
     if as_dict:
