@@ -133,7 +133,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         subplot_dict_str = (
             "{"
             + ", ".join(
-                f"\"{subname}\": ValidatorCache.get_validator(\"layout\", \"{subname}\")"
+                f'"{subname}": ValidatorCache.get_validator("layout", "{subname}")'
                 for subname in subplot_names
             )
             + "}"
