@@ -246,11 +246,11 @@ def to_image(
             - 'webp'
             - 'svg'
             - 'pdf'
-            - 'eps' (deprecated) (Requires the poppler library to be installed and on the PATH)
+            - 'eps' (Kaleido v0.* only) (Requires the poppler library to be installed and on the PATH)
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_format` if engine is "kaleido"
-            - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_format` or `plotly.io.kaleido.scope.default_format` if engine is "kaleido"
+            - `plotly.io.orca.config.default_format` if engine is "orca"
 
     width: int or None
         The width of the exported image in layout pixels. If the `scale`
@@ -258,8 +258,8 @@ def to_image(
         in physical pixels.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_width` if engine is "kaleido"
-            - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_width` or `plotly.io.kaleido.scope.default_width` if engine is "kaleido"
+            - `plotly.io.orca.config.default_width` if engine is "orca"
 
     height: int or None
         The height of the exported image in layout pixels. If the `scale`
@@ -267,8 +267,8 @@ def to_image(
         in physical pixels.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_height` if engine is "kaleido"
-            - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_height` or `plotly.io.kaleido.scope.default_height` if engine is "kaleido"
+            - `plotly.io.orca.config.default_height` if engine is "orca"
 
     scale: int or float or None
         The scale factor to use when exporting the figure. A scale factor
@@ -277,14 +277,14 @@ def to_image(
         less than 1.0 will decrease the image resolution.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_scale` if engine is "kaleido"
-            - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_scale` or `plotly.io.kaleido.scope.default_scale` if engine is "kaleido"
+            - `plotly.io.orca.config.default_scale` if engine is "orca"
 
     validate: bool
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine (deprecated): str
+    engine: str
         Image export engine to use. This parameter is deprecated and Orca engine support will be
         dropped in the next major Plotly version. Until then, the following values are supported:
           - "kaleido": Use Kaleido for image export
@@ -430,13 +430,13 @@ def write_image(
           - 'webp'
           - 'svg'
           - 'pdf'
-          - 'eps' (deprecated) (Requires the poppler library to be installed and on the PATH)
+          - 'eps'  (Kaleido v0.* only) (Requires the poppler library to be installed and on the PATH)
 
         If not specified and `file` is a string then this will default to the
         file extension. If not specified and `file` is not a string then this
         will default to:
-            - `plotly.io.defaults.default_format` if engine is "kaleido"
-            - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_format` or `plotly.io.kaleido.scope.default_format` if engine is "kaleido"
+            - `plotly.io.orca.config.default_format` if engine is "orca"
 
     width: int or None
         The width of the exported image in layout pixels. If the `scale`
@@ -444,8 +444,8 @@ def write_image(
         in physical pixels.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_width` if engine is "kaleido"
-            - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_width` or `plotly.io.kaleido.scope.default_width` if engine is "kaleido"
+            - `plotly.io.orca.config.default_width` if engine is "orca"
 
     height: int or None
         The height of the exported image in layout pixels. If the `scale`
@@ -453,8 +453,8 @@ def write_image(
         in physical pixels.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_height` if engine is "kaleido"
-            - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_height` or `plotly.io.kaleido.scope.default_height` if engine is "kaleido"
+            - `plotly.io.orca.config.default_height` if engine is "orca"
 
     scale: int or float or None
         The scale factor to use when exporting the figure. A scale factor
@@ -463,14 +463,14 @@ def write_image(
         less than 1.0 will decrease the image resolution.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_scale` if engine is "kaleido"
-            - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_scale` or `plotly.io.kaleido.scope.default_scale` if engine is "kaleido"
+            - `plotly.io.orca.config.default_scale` if engine is "orca"
 
     validate: bool
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine (deprecated): str
+    engine: str
         Image export engine to use. This parameter is deprecated and Orca engine support will be
         dropped in the next major Plotly version. Until then, the following values are supported:
           - "kaleido": Use Kaleido for image export
@@ -577,7 +577,8 @@ def write_images(
         provided to the `fig` argument.
         Specify format as a `str` to apply the same format to all exported images.
         If not specified, and the corresponding `file` argument has a file extension, then `format` will default to the
-        file extension. Otherwise, will default to `plotly.io.defaults.default_format`.
+        file extension. Otherwise, will default to `plotly.io.defaults.default_format`
+        or `plotly.io.kaleido.scope.default_format`.
 
     width: int, None, or list of (int or None)
         The width of the exported image in layout pixels. If the `scale`
@@ -587,7 +588,8 @@ def write_images(
         Use a list to specify widths for each figure or dict in the list
         provided to the `fig` argument.
         Specify width as an `int` to apply the same width to all exported images.
-        If not specified, will default to `plotly.io.defaults.default_width`.
+        If not specified, will default to `plotly.io.defaults.default_width`
+        or `plotly.io.kaleido.scope.default_width`.
 
     height: int, None, or list of (int or None)
         The height of the exported image in layout pixels. If the `scale`
@@ -597,7 +599,8 @@ def write_images(
         Use a list to specify heights for each figure or dict in the list
         provided to the `fig` argument.
         Specify height as an `int` to apply the same height to all exported images.
-        If not specified, will default to `plotly.io.defaults.default_height`.
+        If not specified, will default to `plotly.io.defaults.default_height`
+        or `plotly.io.kaleido.scope.default_height`.
 
     scale: int, float, None, or list of (int, float, or None)
         The scale factor to use when exporting the figure. A scale factor
@@ -608,7 +611,8 @@ def write_images(
         Use a list to specify scale for each figure or dict in the list
         provided to the `fig` argument.
         Specify scale as an `int` or `float` to apply the same scale to all exported images.
-        If not specified, will default to `plotly.io.defaults.default_scale`.
+        If not specified, will default to `plotly.io.defaults.default_scale`
+        or `plotly.io.kaleido.scope.default_scale`.
 
     validate: bool or list of bool
         True if the figure should be validated before being converted to
