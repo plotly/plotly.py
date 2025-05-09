@@ -469,6 +469,7 @@ class BaseFigure(object):
             is invalid AND skip_invalid is False
         """
         from .validator_cache import ValidatorCache
+
         DataValidator = ValidatorCache.get_validator("", "data")
         FramesValidator = ValidatorCache.get_validator("", "frames")
         LayoutValidator = ValidatorCache.get_validator("", "layout")
