@@ -300,7 +300,9 @@ def to_image(
     # Handle engine
     if engine is not None:
         if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
-            warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            warnings.warn(
+                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+            )
     else:
         engine = "auto"
 
@@ -492,7 +494,9 @@ def write_image(
         if engine == "orca":
             warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
         if engine not in {None, "auto"}:
-            warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            warnings.warn(
+                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+            )
 
     # Try to cast `file` as a pathlib object `path`.
     path = as_path_object(file)
