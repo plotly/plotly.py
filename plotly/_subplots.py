@@ -1063,6 +1063,7 @@ def _init_subplot_domain(x_domain, y_domain):
 
 def _subplot_type_for_trace_type(trace_type):
     from plotly.validator_cache import ValidatorCache
+
     DataValidator = ValidatorCache.get_validator("", "data")
     # from plotly.validators import DataValidator
 

@@ -8,6 +8,7 @@ DERIVED_CLASSES = {
     "LayoutValidator": "layout",
 }
 
+
 class ValidatorCache(object):
     _cache = {}
     _json_cache = None
@@ -64,4 +65,3 @@ class ValidatorCache(object):
             ValidatorCache._cache[key] = validator
 
         return ValidatorCache._cache[key]
-
