@@ -8,7 +8,7 @@ from codegen.utils import CAVEAT, PlotlyNode, TraceNode, write_source_py
 
 def get_validator_params(node: PlotlyNode, store: dict):
     """
-    Get params for the validator instance for the supplied node 
+    Get params for the validator instance for the supplied node
     and add them to the store.
 
     Parameters
@@ -22,7 +22,7 @@ def get_validator_params(node: PlotlyNode, store: dict):
     -------
     None
     """
-    assert isinstance(store, dict)    
+    assert isinstance(store, dict)
     assert node.is_datatype
 
     raw_params = node.get_validator_params()
@@ -59,8 +59,8 @@ def write_validator_json(outdir, params: dict):
     """
     Write out a JSON serialization of the validator arguments
     for all validators (keyed by f"{parent_name}.{plotly_name})
-    
-    Each validator has a "params": {kwargs} entry and 
+
+    Each validator has a "params": {kwargs} entry and
     a "superclass": str to indicate the class to be instantiated
 
     Parameters
@@ -74,6 +74,7 @@ def write_validator_json(outdir, params: dict):
     None
     """
     import json
+
     # Validate inputs
     # ---------------
     if not isinstance(params, dict):
@@ -103,8 +104,9 @@ def build_data_validator_params(base_trace_node: TraceNode):
     # Get list of trace nodes
     # -----------------------
     tracetype_nodes = base_trace_node.child_compound_datatypes
-    class_strs_map = dict([
-        (node.name_property, node.name_datatype_class) for node in tracetype_nodes])
+    class_strs_map = dict(
+        [(node.name_property, node.name_datatype_class) for node in tracetype_nodes]
+    )
 
     return {
         "class_strs_map": class_strs_map,
