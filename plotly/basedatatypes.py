@@ -3794,23 +3794,25 @@ Invalid property path '{key_path_str}' for layout
         from plotly.io.kaleido import (
             kaleido_available,
             kaleido_major,
+            ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS,
             KALEIDO_DEPRECATION_MSG,
             ORCA_DEPRECATION_MSG,
             ENGINE_PARAM_DEPRECATION_MSG,
         )
 
-        if (
-            kwargs.get("engine", None) in {None, "auto", "kaleido"}
-            and kaleido_available()
-            and kaleido_major() < 1
-        ):
-            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-        if kwargs.get("engine", None) == "orca":
-            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-        if kwargs.get("engine", None):
-            warnings.warn(
-                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
-            )
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            if (
+                kwargs.get("engine", None) in {None, "auto", "kaleido"}
+                and kaleido_available()
+                and kaleido_major() < 1
+            ):
+                warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            if kwargs.get("engine", None) == "orca":
+                warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            if kwargs.get("engine", None):
+                warnings.warn(
+                    ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+                )
 
         return pio.to_image(self, *args, **kwargs)
 
@@ -3887,24 +3889,26 @@ Invalid property path '{key_path_str}' for layout
         from plotly.io.kaleido import (
             kaleido_available,
             kaleido_major,
+            ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS,
             KALEIDO_DEPRECATION_MSG,
             ORCA_DEPRECATION_MSG,
             ENGINE_PARAM_DEPRECATION_MSG,
         )
 
-        if (
-            kwargs.get("engine", None) in {None, "auto", "kaleido"}
-            and kaleido_available()
-            and kaleido_major() < 1
-        ):
-            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-        if kwargs.get("engine", None) == "orca":
-            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-        if kwargs.get("engine", None):
-            warnings.warn(
-                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
-            )
-        return pio.write_image(self, *args, **kwargs)
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            if (
+                kwargs.get("engine", None) in {None, "auto", "kaleido"}
+                and kaleido_available()
+                and kaleido_major() < 1
+            ):
+                warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            if kwargs.get("engine", None) == "orca":
+                warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            if kwargs.get("engine", None):
+                warnings.warn(
+                    ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+                )
+            return pio.write_image(self, *args, **kwargs)
 
     # Static helpers
     # --------------
