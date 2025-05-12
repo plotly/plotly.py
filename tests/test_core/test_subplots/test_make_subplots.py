@@ -1937,14 +1937,14 @@ class TestMakeSubplots(TestCase):
             )
 
             if shared_y_axes:
-                expected['layout']['yaxis2']['matches'] = 'y4'
-                expected['layout']['yaxis2']['showticklabels'] = False
-                expected['layout']['yaxis3']['matches'] = 'y'
-                expected['layout']['yaxis3']['showticklabels'] = False
-                expected['layout']['yaxis6']['matches'] = 'y8'
-                expected['layout']['yaxis6']['showticklabels'] = False
-                expected['layout']['yaxis7']['matches'] = 'y5'
-                expected['layout']['yaxis7']['showticklabels'] = False
+                expected["layout"]["yaxis2"]["matches"] = "y4"
+                expected["layout"]["yaxis2"]["showticklabels"] = False
+                expected["layout"]["yaxis3"]["matches"] = "y"
+                expected["layout"]["yaxis3"]["showticklabels"] = False
+                expected["layout"]["yaxis6"]["matches"] = "y8"
+                expected["layout"]["yaxis6"]["showticklabels"] = False
+                expected["layout"]["yaxis7"]["matches"] = "y5"
+                expected["layout"]["yaxis7"]["showticklabels"] = False
 
             expected.update_traces(uid=None)
 
