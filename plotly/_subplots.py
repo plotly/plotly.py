@@ -757,7 +757,9 @@ The row_titles argument to make_subplots must be a list or tuple
     _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir, False)
     _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir, False)
     if secondary_y:
-        _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir, True)
+        _configure_shared_axes(
+            layout, grid_ref, specs, "y", shared_yaxes, row_dir, True
+        )
 
     # Build inset reference
     # ---------------------
@@ -889,7 +891,9 @@ The row_titles argument to make_subplots must be a list or tuple
     return figure
 
 
-def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir, secondary_y):
+def _configure_shared_axes(
+    layout, grid_ref, specs, x_or_y, shared, row_dir, secondary_y
+):
     rows = len(grid_ref)
     cols = len(grid_ref[0])
 
