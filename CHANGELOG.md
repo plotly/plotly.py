@@ -2,10 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [6.1.0rc0] - 2025-05-01
+## [6.1.0] - 2025-05-15
 
 ### Updated
-- Add support for Kaleido>=v1.0.0 for image generation, and deprecate support for Kaleido<1 and Orca [[#5062](https://github.com/plotly/plotly.py/pull/5062)]
+- Add support for Kaleido>=v1.0.0 for image generation [[#5062](https://github.com/plotly/plotly.py/pull/5062), [#5177](https://github.com/plotly/plotly.py/pull/5177)]
 - Reduce package bundle size by 18-24% via changes to code generation [[#4978](https://github.com/plotly/plotly.py/pull/4978)]
 
 ### Fixed
