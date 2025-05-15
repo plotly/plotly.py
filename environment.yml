@@ -1,0 +1,22 @@
+name: plotly
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - nodejs=18
+  - python=3.10
+  - pip=22.3.1
+  - anaconda-client
+  - pandas
+  - black
+  - pytest
+  - inflect
+  - jupyterlab
+  - ipywidgets
+  - statsmodels
+  - numpy
+  - requests
+  - python-frontmatter
+  - twine
+  - pip:
+      - algoliasearch==1.20

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.4
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.11
+    version: 3.8.8
   plotly:
     description: The structure of a figure - data, traces and layout explained.
     display_as: file_settings
@@ -62,6 +62,10 @@ snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-
 IFrame(snippet_url + 'figure-structure', width='100%', height=1200)
 ```
 
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
+
 ### Figures as Trees of Attributes
 
 Plotly.js supports inputs adhering to a well-defined schema, whose overall architecture is explained in this page and which is exhaustively documented in the [Figure Reference](/python/reference/index/) (which is itself generated from a [machine-readable JSON representation of the schema](https://raw.githubusercontent.com/plotly/plotly.js/master/dist/plot-schema.json)). Figures are represented as trees with named nodes called "attributes". The root node of the tree has three top-level attributes: `data`, `layout` and `frames` (see below).
@@ -93,7 +97,7 @@ The second of the three top-level attributes of a figure is `layout`, whose valu
   * Subplots of various types on which can be drawn multiple traces and which are positioned in paper coordinates:
     * `xaxis`, `yaxis`, `xaxis2`, `yaxis3` etc: X and Y cartesian axes, the intersections of which are cartesian subplots
     * `scene`, `scene2`, `scene3` etc: 3d scene subplots
-    * `ternary`, `ternary2`, `ternary3`, `polar`, `polar2`, `polar3`, `geo`, `geo2`, `geo3`, `mapbox`, `mapbox2`, `mabox3`, `smith`, `smith2` etc: ternary, polar, geo, mapbox or smith subplots
+    * `ternary`, `ternary2`, `ternary3`, `polar`, `polar2`, `polar3`, `geo`, `geo2`, `geo3`, `map`, `map2`, `map3`, `smith`, `smith2` etc: ternary, polar, geo, map or smith subplots
   * Non-data marks which can be positioned in paper coordinates, or in data coordinates linked to 2d cartesian subplots:
     * `annotations`: [textual annotations with or without arrows](/python/text-and-annotations/)
     * `shapes`: [lines, rectangles, ellipses or open or closed paths](/python/shapes/)
@@ -177,18 +181,18 @@ The following trace types are compatible with smith subplots via the `smith` att
 
 ### Map Trace Types and Subplots
 
-Figures can include two different types of map subplots: [geo subplots for outline maps](/python/map-configuration/) and [mapbox subplots for tile maps](/python/mapbox-layers/). The following trace types support attributes named `geo` or `mapbox`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.mapbox` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
+Figures can include two different types of map subplots: [geo subplots for outline maps](/python/map-configuration/) and [tile-based maps](/python/tile-map-layers/). The following trace types support attributes named `geo` or `map`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.map` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
 The following trace types are compatible with geo subplots via the `geo` attribute:
 
 * [`scattergeo`](/python/scatter-plots-on-maps/), which can be used to draw [individual markers](/python/scatter-plots-on-maps/), [line and curves](/python/lines-on-maps/) and filled areas on outline maps
 * [`choropleth`](/python/choropleth-maps/): [colored polygons](/python/choropleth-maps/) on outline maps
 
-The following trace types are compatible with mapbox subplots via the `mapbox` attribute:
+The following trace types are compatible with tile map subplots via the `map` attribute:
 
-* [`scattermapbox`](/python/scattermapbox/), which can be used to draw [individual markers](/python/scattermapbox/), [lines and curves](/python/lines-on-mapbox/) and [filled areas](/python/filled-area-on-mapbox/) on tile maps
-* [`choroplethmapbox`](/python/mapbox-county-choropleth/): colored polygons on tile maps
-* [`densitymapbox`](/python/mapbox-density-heatmaps/): density heatmaps on tile maps
+* [`scattermap`](/python/tile-scatter-maps/), which can be used to draw [individual markers](/python/tile-scatter-maps/), [lines and curves](/python/lines-on-tile-maps/) and [filled areas](/python/filled-area-tile-maps/) on tile maps
+* [`choroplethmap`](/python/tile-county-choropleth/): colored polygons on tile maps
+* [`densitymap`](/python/tile-density-heatmaps/): density heatmaps on tile maps
 
 ### Traces Which Are Their Own Subplots
 

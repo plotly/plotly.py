@@ -41,7 +41,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://git.io/manhattan_data.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
 
 
 dash_bio.ManhattanPlot(
@@ -57,7 +57,7 @@ import pandas as pd
 import dash_bio
 
 
-df = pd.read_csv('https://git.io/manhattan_data.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
 
 dash_bio.ManhattanPlot(
     dataframe=df,

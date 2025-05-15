@@ -153,8 +153,8 @@ fig.add_trace(go.Contour(z=z, showscale=False, connectgaps=True), 1, 2)
 fig.add_trace(go.Heatmap(z=z, showscale=False, zsmooth='best'), 2, 1)
 fig.add_trace(go.Heatmap(z=z, showscale=False, connectgaps=True, zsmooth='best'), 2, 2)
 
-fig['layout']['yaxis1'].update(title='Contour map')
-fig['layout']['yaxis3'].update(title='Heatmap')
+fig['layout']['yaxis1'].update(title=dict(text='Contour map'))
+fig['layout']['yaxis3'].update(title=dict(text='Heatmap'))
 
 fig.show()
 ```
@@ -281,12 +281,15 @@ fig = go.Figure(data=
            [0.625, 1.25, 3.125, 6.25, 10.625],
            [0, 0.625, 2.5, 5.625, 10]],
         colorbar=dict(
-            title='Color bar title', # title here
-            titleside='right',
-            titlefont=dict(
-                size=14,
-                family='Arial, sans-serif')
-        )))
+            title=dict(
+                text='Color bar title', # title here
+                side='right',
+                font=dict(
+                    size=14,
+                    family='Arial, sans-serif')
+                )
+            ),
+        ))
 
 fig.show()
 ```

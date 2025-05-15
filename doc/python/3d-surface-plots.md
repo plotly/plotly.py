@@ -46,7 +46,7 @@ z_data = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/a
 
 fig = go.Figure(data=[go.Surface(z=z_data.values)])
 
-fig.update_layout(title='Mt Bruno Elevation', autosize=False,
+fig.update_layout(title=dict(text='Mt Bruno Elevation'), autosize=False,
                   width=500, height=500,
                   margin=dict(l=65, r=50, b=65, t=90))
 
@@ -67,7 +67,7 @@ z = z_data.values
 sh_0, sh_1 = z.shape
 x, y = np.linspace(0, 1, sh_0), np.linspace(0, 1, sh_1)
 fig = go.Figure(data=[go.Surface(z=z, x=x, y=y)])
-fig.update_layout(title='Mt Bruno Elevation', autosize=False,
+fig.update_layout(title=dict(text='Mt Bruno Elevation'), autosize=False,
                   width=500, height=500,
                   margin=dict(l=65, r=50, b=65, t=90))
 fig.show()
@@ -77,7 +77,7 @@ fig.show()
 #### Surface Plot With Contours
 
 
-Display and customize contour data for each axis using the `contours` attribute ([reference](plotly.com/python/reference/surface/#surface-contours)).
+Display and customize contour data for each axis using the `contours` attribute ([reference](https://plotly.com/python/reference/surface/#surface-contours)).
 
 ```python
 import plotly.graph_objects as go
@@ -90,7 +90,7 @@ z_data = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/a
 fig = go.Figure(data=[go.Surface(z=z_data.values)])
 fig.update_traces(contours_z=dict(show=True, usecolormap=True,
                                   highlightcolor="limegreen", project_z=True))
-fig.update_layout(title='Mt Bruno Elevation', autosize=False,
+fig.update_layout(title=dict(text='Mt Bruno Elevation'), autosize=False,
                   scene_camera_eye=dict(x=1.87, y=0.88, z=-0.64),
                   width=500, height=500,
                   margin=dict(l=65, r=50, b=65, t=90)

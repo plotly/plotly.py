@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.0
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.10.11
   plotly:
     description: How to make 3D Cone plots in Python with Plotly.
     display_as: 3d_charts
@@ -124,6 +124,44 @@ fig.update_layout(scene=dict(aspectratio=dict(x=1, y=1, z=0.8),
                              camera_eye=dict(x=1.2, y=1.2, z=0.6)))
 
 fig.show()
+```
+
+### Sizemode
+
+Earlier examples use `sizemode="absolute"` when adjusting the cone size scaling with `sizeref`. `sizemode` also supports `raw`(new in 5.21) and `scaled`.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/plotly/datasets/master/cone_plot_data.csv"
+)
+
+fig = go.Figure(
+    data=go.Cone(
+        x=df["x"],
+        y=df["y"],
+        z=df["z"],
+        u=df["u"],
+        v=df["v"],
+        w=df["w"],
+        sizemode="raw",
+        sizeref=0.1,
+        colorscale="Portland",
+        cmin=0,
+        cmax=80,
+        hoverinfo="u+v+w+text",
+        text="-> wind <-",
+    ),
+    layout=dict(
+        width=900, height=600, scene=dict(camera=dict(eye=dict(x=1.2, y=0, z=0.6)))
+    ),
+)
+
+
+fig.show()
+
 ```
 
 #### Reference

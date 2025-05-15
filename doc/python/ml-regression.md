@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.10.0
   plotly:
     description: Visualize regression in scikit-learn with Plotly.
     display_as: ai_ml
@@ -104,6 +104,10 @@ snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-
 IFrame(snippet_url + 'ml-regression', width='100%', height=1200)
 ```
 
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
+
 ## Model generalization on unseen data
 
 With `go.Scatter`, you can easily color your plot based on a predefined data split. By coloring the training and the testing data points with different colors, you can easily see if whether the model generalizes well to the test data or not.
@@ -116,7 +120,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 df = px.data.tips()
-X = df.total_bill[:, None]
+X = df.total_bill.to_numpy()[:, None]
 X_train, X_test, y_train, y_test = train_test_split(X, df.tip, random_state=0)
 
 model = LinearRegression()
@@ -124,7 +128,6 @@ model.fit(X_train, y_train)
 
 x_range = np.linspace(X.min(), X.max(), 100)
 y_range = model.predict(x_range.reshape(-1, 1))
-
 
 fig = go.Figure([
     go.Scatter(x=X_train.squeeze(), y=y_train, name='train', mode='markers'),
@@ -408,6 +411,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.linear_model import LassoCV
+from sklearn.preprocessing import StandardScaler
 
 N_FOLD = 6
 
@@ -417,9 +421,13 @@ X = df.drop(columns=['lifeExp', 'iso_num'])
 X = pd.get_dummies(X, columns=['country', 'continent', 'iso_alpha'])
 y = df['lifeExp']
 
+# Normalize the data
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
 # Train model to predict life expectancy
-model = LassoCV(cv=N_FOLD, normalize=True)
-model.fit(X, y)
+model = LassoCV(cv=N_FOLD)
+model.fit(X_scaled, y)
 mean_alphas = model.mse_path_.mean(axis=-1)
 
 fig = go.Figure([
@@ -444,9 +452,17 @@ fig.add_shape(
 )
 
 fig.update_layout(
-    xaxis_title='alpha',
-    xaxis_type="log",
-    yaxis_title="Mean Square Error (MSE)"
+    xaxis=dict(
+        title=dict(
+            text='alpha'
+        ),
+        type='log'
+    ),
+    yaxis=dict(
+        title=dict(
+            text='Mean Square Error (MSE)'
+        )
+    ),
 )
 fig.show()
 ```

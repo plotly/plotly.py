@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to make Sunburst Charts.
     display_as: basic
@@ -214,7 +214,7 @@ fig.show()
 
 ### Large Number of Slices
 
-This example uses a [plotly grid attribute](https://plotly.com/python/reference/layout/#layout-grid) for the suplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/sunburst/#sunburst-domain) attribute.
+This example uses a [plotly grid attribute](https://plotly.com/python/reference/layout/#layout-grid) for the subplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/sunburst/#sunburst-domain) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -300,6 +300,36 @@ fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
 fig.show()
 ```
 
+### Pattern Fills
+
+*New in 5.15*
+
+Sunburst charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a different pattern to each level of the hierarchy. We also specify the `solidity` of the pattern.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    go.Sunburst(
+        labels=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+        parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+        values=[65, 14, 12, 10, 2, 6, 6, 4, 4],
+        branchvalues="total",
+        textfont_size=16,
+        marker=dict(
+            pattern=dict(
+                shape=["", "/", "/", ".", ".", "/", "/", ".", "/"], solidity=0.9
+            )
+        ),
+    )
+)
+
+fig.update_layout(margin=dict(t=0, l=0, r=0, b=0))
+
+fig.show()
+
+```
+
 ### Sunburst chart with a continuous colorscale
 
 The example below visualizes a breakdown of sales (corresponding to sector width) and call success rate (corresponding to sector color) by region, county and salesperson level. For example, when exploring the data you can see that although the East region is behaving poorly, the Tyler county is still above average -- however, its performance is reduced by the poor success rate of salesperson GT.
@@ -325,7 +355,7 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     Levels are given starting from the bottom to the top of the hierarchy,
     ie the last level corresponds to the root.
     """
-    df_all_trees = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
+    df_list = []
     for i, level in enumerate(levels):
         df_tree = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
         dfg = df.groupby(levels[i:]).sum()
@@ -337,11 +367,12 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
             df_tree['parent'] = 'total'
         df_tree['value'] = dfg[value_column]
         df_tree['color'] = dfg[color_columns[0]] / dfg[color_columns[1]]
-        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+        df_list.append(df_tree)
     total = pd.Series(dict(id='total', parent='',
                               value=df[value_column].sum(),
-                              color=df[color_columns[0]].sum() / df[color_columns[1]].sum()))
-    df_all_trees = df_all_trees.append(total, ignore_index=True)
+                              color=df[color_columns[0]].sum() / df[color_columns[1]].sum()), name=0)
+    df_list.append(total)
+    df_all_trees = pd.concat(df_list, ignore_index=True)
     return df_all_trees
 
 

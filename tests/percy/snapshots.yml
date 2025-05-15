@@ -1,0 +1,22 @@
+version: 2
+static:
+  options:
+    waitForTimeout: 6000
+    execute:
+      beforeSnapshot: |
+        const stash = window._canvasStash = [];
+        Array.from(document.querySelectorAll('canvas')).forEach(c => {
+            const i = document.createElement('img');
+            i.src = c.toDataURL();
+            i.width = c.width;
+            i.height = c.height;
+            i.setAttribute('style', c.getAttribute('style'));
+            i.className = c.className;
+            i.setAttribute('data-canvasnum', stash.length);
+            stash.push(c);
+            c.parentElement.insertBefore(i, c);
+            c.parentElement.removeChild(c);
+        });
+snapshot:
+  widths:
+    - 1280
