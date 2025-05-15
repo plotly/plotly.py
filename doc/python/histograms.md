@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.4
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.11
+    version: 3.11.10
   plotly:
     description: How to make Histograms in Python with Plotly.
     display_as: statistical
@@ -40,7 +40,7 @@ jupyter:
 In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in Plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...) which can be used to visualize data on categorical and date axes as well as linear axes.
 
 
-Alternatives to violin plots for visualizing distributions include [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+Alternatives to histogram plots for visualizing distributions include [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
 
 > If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
 bar, go to the [Bar Chart tutorial](/python/bar-charts/).
@@ -112,6 +112,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'histograms', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 #### Accessing the counts (y-axis) values
 
@@ -434,12 +438,12 @@ trace5 = go.Histogram(x=x,
                       autobinx = False
                       )
 
-fig.append_trace(trace0, 1, 1)
-fig.append_trace(trace1, 1, 2)
-fig.append_trace(trace2, 2, 1)
-fig.append_trace(trace3, 2, 2)
-fig.append_trace(trace4, 3, 1)
-fig.append_trace(trace5, 3, 2)
+fig.add_trace(trace0, 1, 1)
+fig.add_trace(trace1, 1, 2)
+fig.add_trace(trace2, 2, 1)
+fig.add_trace(trace3, 2, 2)
+fig.add_trace(trace4, 3, 1)
+fig.add_trace(trace5, 3, 2)
 
 fig.show()
 ```

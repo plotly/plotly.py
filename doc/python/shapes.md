@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.16.3
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.10.14
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -51,7 +51,7 @@ The differences between these two approaches are that:
 
 ### Shape-drawing with Scatter traces
 
-There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the of the sequence to have a closed shape.
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
 
 ```python
 import plotly.graph_objects as go
@@ -81,6 +81,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'shapes', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 #### Vertical and Horizontal Lines Positioned Relative to the Axis Data
 
@@ -565,7 +569,7 @@ fig.update_layout(
         # filled Polygon
         dict(
             type="path",
-            path=" M 3,7 L2,8 L2,9 L3,10, L4,10 L5,9 L5,8 L4,7 Z",
+            path=" M 3,7 L2,8 L2,9 L3,10 L4,10 L5,9 L5,8 L4,7 Z",
             fillcolor="PaleTurquoise",
             line_color="LightSeaGreen",
         ),
@@ -573,6 +577,82 @@ fig.update_layout(
 )
 
 fig.show()
+```
+
+#### Shifting Shapes on Categorical Axes
+
+*New in 5.23*
+
+When drawing shapes where `xref` or `yref` reference axes of type category or multicategory, you can shift `x0`, `x1`, `y0`, and `y1` away from the center of the category using `x0shift`, `x1shift`, `y0shift`, and `y1shift` by specifying a value between -1 and 1.
+
+-1 is the center of the previous category, 0 is the center of the referenced category, and 1 is the center of the next category.
+
+In the following example, the `x0` and `x1` values for both shapes reference category values on the x-axis.
+
+In this example, the first shape:
+- Shifts `x0` half way between the center of category "Germany" and the center of the previous category by setting `x0shift=-0.5`
+- Shifts `x1`half way between the center of category "Germany" and the center of the next category by setting `x1shift=0.5`
+
+The second shape:
+- Shifts `x0` back to the center of the previous category by setting `x0shift=-1`
+- Shifts `x1`forward to the center of the next category by setting `x1shift=1`
+
+```python
+import plotly.graph_objects as go
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Europe' and year == 1952")
+
+fig = go.Figure(
+    data=go.Bar(x=df["country"], y=df["lifeExp"], marker_color="LightSalmon"),
+    layout=dict(
+        shapes=[
+            dict(
+                type="rect",
+                x0="Germany",
+                y0=0,
+                x1="Germany",
+                y1=0.5,
+                xref="x",
+                yref="paper",
+                x0shift=-0.5,
+                x1shift=0.5,
+                line=dict(color="LightGreen", width=4),
+            ),
+            dict(
+                type="rect",
+                x0="Spain",
+                y0=0,
+                x1="Spain",
+                y1=0.5,
+                xref="x",
+                yref="paper",
+                x0shift=-1,
+                x1shift=1,
+                line=dict(color="MediumTurquoise", width=4),
+            ),
+        ]
+    ),
+)
+
+fig.update_layout(
+    title=dict(
+        text="GDP per Capita in Europe (1972)"
+    ),
+    xaxis=dict(
+        title=dict(
+            text="Country"
+        )
+    ),
+    yaxis=dict(
+        title=dict(
+            text="GDP per Capita"
+        )
+    ),
+)
+
+fig.show()
+
 ```
 
 ### Drawing shapes with a Mouse on Cartesian plots
@@ -659,6 +739,504 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
                                         'drawrect',
                                         'eraseshape'
                                        ]})
+```
+
+### Adding Text Labels to Shapes
+
+*New in 5.14*
+
+Add a text `label` to a shape by adding a `label` property to a shape with `text`. In this example, we add a `rect` and `line` shape and add a text label to both.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect",
+    fillcolor='turquoise',
+    x0=1,
+    y0=1,
+    x1=2,
+    y1=3,
+    label=dict(text="Text in rectangle")
+)
+fig.add_shape(
+    type="line",
+    x0=3,
+    y0=0.5,
+    x1=5,
+    y1=0.8,
+    line_width=3,
+    label=dict(text="Text above line")
+)
+
+fig.show()
+
+```
+
+#### Styling Text Labels
+
+Use the `font` property to configure the `color`, `size`, and `family` of the label font.
+In this example, we change the label color of the first rectangle to "DarkOrange", set the size of the text above the line to 20, and change the font family and set the font size on the second rectangle.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect",
+    fillcolor='MediumSlateBlue',
+    x0=1,
+    y0=1,
+    x1=2,
+    y1=3,
+    label=dict(text="Text in rectangle", font=dict(color="DarkOrange")),
+)
+fig.add_shape(
+    type="line",
+    x0=3,
+    y0=0.5,
+    x1=5,
+    y1=0.8,
+    line_width=3,
+    label=dict(text="Text above line", font=dict(size=20)),
+)
+fig.add_shape(
+    type="rect",
+    fillcolor='Lavender',
+    x0=2.5,
+    y0=2.5,
+    x1=5,
+    y1=3.5,
+    label=dict(
+        text="Text in rectangle 2", font=dict(family="Courier New, monospace", size=20)
+    ),
+)
+
+fig.show()
+
+```
+
+#### Setting Label Position
+
+Set a label's position relative to the shape by setting `textposition`. The default position for lines is `middle`. The default position for other shapes is `middle center`.
+
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect",
+    fillcolor='Lavender',
+    x0=0,
+    y0=0,
+    x1=1.5,
+    y1=1.5,
+    label=dict(text="Text at middle center"),
+)
+
+fig.add_shape(
+    type="rect",
+    fillcolor='Lavender',
+    x0=3,
+    y0=0,
+    x1=4.5,
+    y1=1.5,
+    label=dict(text="Text at top left", textposition="top left"),
+)
+
+
+fig.add_shape(
+    type="line",
+    line_color="MediumSlateBlue",
+    x0=3,
+    y0=2,
+    x1=5,
+    y1=3,
+    line_width=3,
+    label=dict(text="Text at start", textposition="start"),
+)
+
+
+fig.add_shape(
+    type="line",
+    line_color="MediumSlateBlue",
+    x0=0,
+    y0=2,
+    x1=2,
+    y1=3,
+    line_width=3,
+    label=dict(text="Text at middle"),
+)
+
+fig.show()
+
+```
+
+#### Setting Label Angle
+
+Use `textangle` to rotate a label by setting a value between -180 and 180. The default angle for a label on a line is the angle of the line. The default angle for a label on other shapes is 0. In this example, in the first shape, the label is at 45 degrees, and in the second, the label is at -45 degrees.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="rect",
+    fillcolor='LightGreen',
+    x0=0,
+    y0=0,
+    x1=2,
+    y1=2,
+    label=dict(text="Text at 45", textangle=45),
+)
+
+fig.add_shape(
+    type="rect",
+    fillcolor='Gold',
+    x0=3,
+    y0=0,
+    x1=5,
+    y1=2,
+    label=dict(text="Text at -45", textangle=-45),
+)
+
+fig.show()
+
+```
+
+#### Setting Label Padding
+
+`padding` adds padding between the label and shape. This example shows one line with padding of 30px and another with the default padding, which is 3px.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_shape(
+    type="line",
+    line_color="RoyalBlue",
+    x0=3,
+    y0=0,
+    x1=5,
+    y1=3,
+    line_width=3,
+    label=dict(text="Label padding of 30px", padding=30),
+)
+
+fig.add_shape(
+    type="line",
+    line_color="RoyalBlue",
+    x0=0,
+    y0=0,
+    x1=2,
+    y1=3,
+    line_width=3,
+    label=dict(text="Default label padding of 3px"),
+)
+
+fig.show()
+```
+
+#### Setting Label Anchors
+
+`xanchor` sets a label's horizontal positional anchor and `yanchor` sets its vertical position anchor.
+Use `xanchor` to bind the `textposition` to the "left", "center" or "right" of the label text and `yanchor` to bind `textposition` to the "top", "middle" or "bottom" of the label text.
+
+In this example, `yanchor`is set to "top", instead of the default of "bottom" for lines, meaning the text displays below the line.
+
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+fig = px.line(df)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-09-24",
+    y0=0,
+    x1="2018-12-18",
+    y1=3,
+    line_width=0,
+    label=dict(text="Decline", textposition="top center", font=dict(size=20)),
+    fillcolor="green",
+    opacity=0.25,
+)
+
+fig.add_shape(
+    type="line",
+    x0=min(df.index),
+    y0=1,
+    x1=max(df.index),
+    y1=1,
+    line_width=3,
+    line_dash="dot",
+    label=dict(
+        text="Jan 1 2018 Baseline",
+        textposition="end",
+        font=dict(size=20, color="blue"),
+        yanchor="top",
+    ),
+)
+
+fig.show()
+```
+
+#### Variables in Shape Label Text
+
+*New in 5.15*
+
+Use `texttemplate` to add text with variables to shapes. You have access to raw variables (`x0`, `x1`, `y0`, `y1`), which use raw data values from the shape definition, and the following calculated variables:
+
+- `xcenter`: (x0 + x1) / 2
+- `ycenter`: (y0 + y1) / 2
+- `dx`: x1 - x0
+- `dy`: y1 - y0
+- `width`: abs(x1 - x0)
+- `height`: abs(y1 - y0)
+- `length` (for lines only): sqrt(dx^2 + dy^2)
+- `slope`: (y1 - y0) / (x1 - x0)
+
+`texttemplate` supports d3 number and date formatting.
+
+Add a variable with "%{variable}". This example adds the raw variables `x0` and `y0` to a rectangle and shows the calculated variables `height`, `slope`, `length`, and `width` on three other shapes.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+
+fig.add_shape(
+    type="rect",
+    fillcolor="MediumSlateBlue",
+    x0=-0.5,
+    y0=-0.5,
+    x1=1,
+    y1=1,
+    label=dict(
+        texttemplate="x0 is %{x0:.3f}, y0 is %{y0:.3f}", font=dict(color="DarkOrange")
+    ),
+)
+
+fig.add_shape(
+    type="rect",
+    fillcolor="LightGreen",
+    x0=1,
+    y0=1.75,
+    x1=2.25,
+    y1=3,
+    label=dict(texttemplate="Height: %{height:.3f}", font=dict(color="DarkOrange")),
+)
+fig.add_shape(
+    type="line",
+    x0=3,
+    y0=0.5,
+    x1=5,
+    y1=1.5,
+    line_width=3,
+    label=dict(
+        texttemplate="Slope of %{slope:.3f} and length of %{length:.3f}",
+        font=dict(size=20),
+    ),
+)
+fig.add_shape(
+    type="rect",
+    fillcolor="Lavender",
+    x0=2.5,
+    y0=2.5,
+    x1=5,
+    y1=3.5,
+    label=dict(
+        texttemplate="Width: %{width:.3f}",
+        font=dict(family="Courier New, monospace", size=20),
+    ),
+)
+
+fig.show()
+
+```
+
+#### Variables in Shape Label Text for New Shapes
+
+*New in 5.15*
+
+You can also use `texttemplate` to add text with variables to new shapes drawn on the graph.
+
+In this example, we enable drawing lines on the figure by adding `drawline` to `modeBarButtonsToAdd` in `config`. We then define a `texttemplate` for shapes that shows the calculated variable `dy`. Select **Draw line** in the modebar to try it out.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.stocks()
+
+fig = go.Figure(
+    data=go.Scatter(
+        x=df.date,
+        y=df.GOOG,
+    ),
+    layout=go.Layout(
+        yaxis=dict(
+            title=dict(
+                text="Price in USD"
+            )),
+        newshape=dict(
+            label=dict(texttemplate="Change: %{dy:.2f}")
+        ),
+        title=dict(text="Google Share Price 2018/2019"),
+    ),
+)
+
+
+fig.show(
+    config={
+        "modeBarButtonsToAdd": [
+            "drawline",
+        ]
+    }
+)
+```
+
+#### Shapes in the Legend
+
+*New in 5.16*
+
+You can add a shape to the legend by setting `showlegend=True` on the shape. In this example, we add the second shape to the legend. The name that appears for the shape in the legend is the shape's `name` if it is provided. If no `name` is provided, the shape label's `text` is used. If neither is provided, the legend item appears as "shape \<shape number>". For example, "shape 1".
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+
+fig = px.line(df)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-09-24",
+    y0=0,
+    x1="2018-12-18",
+    y1=3,
+    line_width=0,
+    label=dict(text="Decline", textposition="top center", font=dict(size=20)),
+    fillcolor="green",
+    opacity=0.25,
+)
+
+fig.add_shape(
+    showlegend=True,
+    type="line",
+    x0=min(df.index),
+    y0=1,
+    x1=max(df.index),
+    y1=1,
+    line_width=3,
+    line_dash="dot",
+    label=dict(
+        text="Jan 1 2018 Baseline",
+        textposition="end",
+        font=dict(size=20, color="blue"),
+        yanchor="top",
+    ),
+)
+
+fig.show()
+```
+
+`newshape` also supports `showlegend`. In this example, each new line drawn on the graph appears in the legend.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.stocks()
+
+fig = go.Figure(
+    data=go.Scatter(
+        x=df.date,
+        y=df.AAPL,
+        name="Apple"
+    ),
+    layout=go.Layout(
+        yaxis=dict(
+            title=dict(text="Price in USD"),
+            ),
+        newshape=dict(
+            showlegend=True,
+            label=dict(texttemplate="Change: %{dy:.2f}")
+        ),
+        title=dict(text="Apple Share Price 2018/2019"),
+    ),
+)
+
+
+fig.show(
+    config={
+        "modeBarButtonsToAdd": [
+            "drawline",
+        ]
+    }
+)
+```
+
+#### Shape Layer
+
+By default, shapes are drawn above traces. You can also configure them to be drawn between traces and gridlines with `layer="between"` (new in 5.21), or below gridlines with `layer="below"`.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+
+fig = px.line(df)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-03-01",
+    y0=0,
+    x1="2018-08-01",
+    y1=3,
+    line_width=0,
+    layer="above",
+    label=dict(text="Above", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.add_shape(
+    type="rect",
+    x0="2018-10-01",
+    y0=0,
+    x1="2019-03-01",
+    y1=3,
+    line_width=0,
+    layer="between",
+    label=dict(text="Between", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.add_shape(
+    type="rect",
+    x0="2019-05-01",
+    y0=0,
+    x1="2019-10-01",
+    y1=3,
+    line_width=0,
+    layer="below",
+    label=dict(text="Below", textposition="top center", font=dict(size=15)),
+    fillcolor="LightGreen",
+    opacity=0.80,
+)
+
+fig.show()
 ```
 
 ### Reference

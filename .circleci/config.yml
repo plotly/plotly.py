@@ -1,167 +1,175 @@
 version: 2.1
 
+orbs:
+  browser-tools: circleci/browser-tools@1.4.8
+
+executors:
+  docker-container:
+    parameters:
+      python_version:
+        description: "python version"
+        default: "3.12"
+        type: string
+    docker:
+      - image: cimg/python:<<parameters.python_version>>-browsers
+
 commands:
   test_core:
-    parameters:
-      py:
-        default: "36"
-        type: string
     steps:
       - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_core.txt"
+          command: |
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install .
+            uv pip install -r ./test_requirements/requirements_core.txt
+      - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
       - run:
           name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          command: |
+            source .venv/bin/activate
+            python -m pytest tests/test_core
           no_output_timeout: 20m
 
   test_optional:
     parameters:
-      py:
-        default: "36"
+      pandas_version:
+        type: string
+      numpy_version:
         type: string
     steps:
       - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_optional.txt"
-      - run:
-          name: Install plotly-geo
-          command: "cd packages/python/plotly-geo; sudo pip install -e ."
+          command: |
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install .
+            uv pip install -r ./test_requirements/requirements_optional.txt
+            cd js
+            npm ci
+            npm run build
+
+      - when:
+          condition:
+            not:
+              equal:
+                - <<parameters.pandas_version>>
+                - ""
+          steps:
+            - run:
+                name: Install pandas
+                command: |
+                  source .venv/bin/activate
+                  uv pip install pip
+                  python -m pip install pandas==<<parameters.pandas_version>> numpy==<<parameters.numpy_version>>
+
       - run:
           name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          command: |
+            source .venv/bin/activate
+            python -m pytest tests/test_core
           no_output_timeout: 20m
       - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
+      - run:
           name: Test optional
-          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
+          command: |
+            source .venv/bin/activate
+            python -m pytest tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
-          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
+          command: |
+            source .venv/bin/activate
+            python -m pytest tests/test_plotly_utils/
           no_output_timeout: 20m
       - run:
           name: Test io
-          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
+          command: |
+            source .venv/bin/activate
+            python -m pytest tests/test_io
           no_output_timeout: 20m
       - run:
-          name: Test dependencdies not imported
-          command: "cd packages/python/plotly; pytest -x test_init/test_dependencies_not_imported.py"
+          name: Test dependencies not imported
+          command: |
+            source .venv/bin/activate
+            python -m pytest -x test_init/test_dependencies_not_imported.py
       - run:
           name: Test lazy imports
-          command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
-
-  test_orca:
-    parameters:
-      py:
-        default: "36"
-        type: string
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_optional.txt"
-      - run:
-          name: Install plotly-geo
-          command: "cd packages/python/plotly-geo; sudo pip install -e ."
-      - run:
-          name: Install orca
           command: |
-            sudo npm install electron@1.8.4 sudo npm install orca
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
-            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - run:
-          name: Test orca
-          command: "cd packages/python/plotly; pytest plotly/tests/test_orca"
-          no_output_timeout: 20m
-      - store_artifacts:
-          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
+            source .venv/bin/activate
+            python -m pytest -x test_init/test_lazy_imports.py
 
 jobs:
   check-code-formatting:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: cimg/python:3.12
 
     steps:
       - checkout
       - run:
           name: Install black
-          command: "sudo pip install black==22.3.0"
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install black==22.3.0
       - run:
           name: Check formatting with black
-          command: "black --check ."
+          command: |
+            . venv/bin/activate
+            black --check . --exclude venv
 
-  # Core
-  python_36_core:
-    docker:
-      - image: circleci/python:3.6-stretch-node-browsers
+  test_core_py:
+    parameters:
+      python_version:
+        default: "3.12"
+        type: string
+    executor:
+      name: docker-container
+      python_version: <<parameters.python_version>>
     steps:
-      - test_core:
-          py: "36"
+      - test_core
 
-  python_37_core:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
-    steps:
-      - test_core:
-          py: "37"
-
-  python_38_core:
-    docker:
-      - image: circleci/python:3.8-buster-node-browsers
-    steps:
-      - test_core:
-          py: "38"
-
-  python_39_core:
-    docker:
-      - image: circleci/python:3.9-buster-node-browsers
-    steps:
-      - test_core:
-          py: "39"
-
-  # Optional
-  python_36_optional:
-    docker:
-      - image: circleci/python:3.6-stretch-node-browsers
+  test_optional_py:
+    parameters:
+      python_version:
+        default: "3.12"
+        type: string
+      pandas_version:
+        default: ""
+        type: string
+      numpy_version:
+        default: ""
+        type: string
+    executor:
+      name: docker-container
+      python_version: <<parameters.python_version>>
     steps:
       - test_optional:
-          py: "36"
-
-  python_37_optional:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
-    steps:
-      - test_optional:
-          py: "37"
-
-  python_38_optional:
-    docker:
-      - image: circleci/python:3.8-buster-node-browsers
-    steps:
-      - test_optional:
-          py: "38"
-
-  python_39_optional:
-    docker:
-      - image: circleci/python:3.9-buster-node-browsers
-    steps:
-      - test_optional:
-          py: "39"
-
-  # Orca
-  python_38_orca:
-    docker:
-      - image: circleci/python:3.8-buster-node-browsers
-    steps:
-      - test_orca:
-          py: "38"
+          pandas_version: <<parameters.pandas_version>>
+          numpy_version: <<parameters.numpy_version>>
 
   # Percy
-  python_37_percy:
+  python_311_percy:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: cimg/python:3.11-browsers
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
@@ -169,6 +177,8 @@ jobs:
 
     steps:
       - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
           name: Inject Percy Environment variables
           command: |
@@ -176,42 +186,44 @@ jobs:
       - run:
           name: Install requirements
           command: |
-            sudo pip install --upgrade virtualenv
-            python -m venv venv || virtualenv venv
-            . venv/bin/activate
-            pip install -e ./packages/python/plotly
-            pip install -e ./packages/python/plotly-geo
-            pip install -r ./packages/python/plotly/test_requirements/requirements_37_optional.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install -e .
+            uv pip install -r test_requirements/requirements_optional.txt
+
       - run:
-          name: Build html figures
+          name: Build html figures (Pandas 2)
           command: |
-            . venv/bin/activate
-            python test/percy/plotly-express.py
+            source .venv/bin/activate
+            python tests/percy/plotly-express.py
+      - run:
+          name: Build html figures (Pandas 1) and compare
+          command: |
+            source .venv/bin/activate
+            mkdir tests/percy/pandas2
+            mv tests/percy/*.html tests/percy/pandas2/
+            uv pip install pip
+            python -m pip install pandas==1.5.3 numpy==1.26.4
+            python tests/percy/plotly-express.py
+            python tests/percy/compare-pandas.py
+            rm -rf tests/percy/pandas2
+      - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
       - run:
           name: Run percy snapshots
           command: |
-            npx percy snapshot test/percy/
-            rm test/percy/*.html
-
-  # Chart studio
-  python_37_chart_studio:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
-    resource_class: large
-
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./chart-studio/test_requirements/requirements_37.txt"
-      - run:
-          name: Tests
-          command: "cd packages/python/chart-studio; pytest -x chart_studio/tests/"
-          no_output_timeout: 20m
+            npm i @percy/cli
+            npx percy snapshot -c tests/percy/snapshots.yml tests/percy/
+            rm tests/percy/*.html
 
   plotlyjs_dev_build:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: cimg/python:3.12-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -220,108 +232,75 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect; sudo pip install jupyterlab~=3.0"
-      - run:
-          name: Update jupyterlab-plotly version
-          command: "cd packages/python/plotly; python setup.py updateplotlywidgetversion"
+          command: |
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install -e .
+            uv pip install -r ./test_requirements/requirements_core.txt black inflect jupyterlab
       - run:
           name: Update plotly.js to dev
-          command: "cd packages/python/plotly; python setup.py updateplotlyjsdev"
+          command: |
+            source .venv/bin/activate
+            python commands.py updateplotlyjsdev
       - run:
           name: Test core
-          command: "cd packages/python/plotly; locale; pytest -k 'not nodev' plotly/tests/test_core"
-          no_output_timeout: 20m
-      - run:
-          name: Commit
           command: |
-            cd packages/python/plotly
-            git config --global user.email "you@example.com"
-            git config --global user.name "Your Name"
-            git add -A
-            git commit -m "Codegen"
-          when: always
+            source .venv/bin/activate
+            locale
+            pytest -k 'not nodev' tests/test_core
+          no_output_timeout: 20m
       - run:
           name: Build source distribution packages
           command: |
-            cd packages/python/plotly
-            python setup.py sdist
+            source .venv/bin/activate
+            uv pip install build
+            python -m build --sdist --wheel -o dist
           when: always
       - store_artifacts:
-          path: packages/python/plotly/dist
+          path: dist/
 
   full_build:
     docker:
-      - image: continuumio/miniconda3
+      - image: cimg/python:3.12-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
 
     steps:
       - checkout
-
-      - run:
-          name: Create conda environment
-          command: |
-            conda create -n env --yes python=3.9 conda-build conda-verify
-            conda install -n env -c conda-forge jupyterlab nodejs=12
-            conda init bash
 
       - run:
           name: initial NPM Build
           command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/javascript/jupyterlab-plotly
-            npm install
-            npm run build:prod
+            python -m venv venv
+            . venv/bin/activate
+            cd js
+            npm ci
+            npm run build
             git status
 
       - run:
           name: PyPI Build
           command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/python/plotly
-            python setup.py sdist bdist_wheel
-
-      - store_artifacts:
-          path: packages/python/plotly/dist
-          destination: dist
+            . venv/bin/activate
+            pip install build
+            python -m build --sdist --wheel -o dist
+            cp -R dist output
+            git status
 
       - run:
-          name: Conda Build
+          name: Zip output
           command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/python/plotly
-            conda build recipe/
-            mkdir conda_dist
-            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 conda_dist
+            tar czf output.tgz output
 
       - store_artifacts:
-          path: packages/python/plotly/conda_dist
-          destination: conda_dist
-
-      - run:
-          name: NPM Pack
-          command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/javascript/jupyterlab-plotly
-            npm pack
-            mkdir npm_dist
-            mv jupyterlab-plotly*.tgz npm_dist
-
-      - store_artifacts:
-          path: packages/javascript/jupyterlab-plotly/npm_dist
-          destination: npm_dist
+          path: output.tgz
 
   build-doc:
     resource_class: xlarge
     docker:
-      # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: cimg/python:3.9-browsers
 
     steps:
       - add_ssh_keys:
@@ -329,46 +308,35 @@ jobs:
             - "dc:5f:39:48:00:b4:72:34:e1:d2:c4:e1:1f:d1:e2:ce" #plotlydocbot
 
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "doc/requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
 
       - run:
-          name: install dependencies
+          name: Install dependencies
           command: |
             cd doc
-            python3 -m venv venv
-            . venv/bin/activate
-            npm install electron@1.8.4
-            npm install orca
-            pip install -U pip
-            pip uninstall -y plotly
-            pip install -r requirements.txt
+            sudo apt-get update
+            sudo apt-get install rename
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
-              pip uninstall -y plotly
-              cd ../packages/python/plotly
-              pip install -e .
-              cd ../../../doc
+              uv pip uninstall plotly
+              cd ..
+              uv pip install -e .
+              cd js
+              npm ci
+              npm run build
+              cd ../doc
             fi
-            echo 'export PATH="/home/circleci/project/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
             cd ..
-
-      - save_cache:
-          paths:
-            - ./doc/venv
-            - ./doc/node_modules
-          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}
 
       - run:
           name: make html
           command: |
             cd doc
-            . venv/bin/activate
+            source .venv/bin/activate
             echo ${mapbox_token} > python/.mapbox_token
             make -kj8 || make -kj8
             curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
@@ -417,15 +385,15 @@ jobs:
           name: make doc
           command: |
             cd doc
-            . venv/bin/activate
+            source .venv/bin/activate
             # For the API doc, we need to use the local version of plotly
             # since we are tweaking the source because of
             # graph_objs/graph_objects
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              pip uninstall -y plotly
-              cd ../packages/python/plotly
-              pip install -e .
-              cd ../../../doc
+              uv pip uninstall plotly
+              cd ..
+              uv pip install -e .
+              cd doc
               cd apidoc
               make html
               cd _build/html
@@ -457,15 +425,30 @@ workflows:
 
   build:
     jobs:
-      - python_36_core
-      - python_37_core
-      - python_38_core
-      - python_39_core
-      - python_36_optional
-      - python_37_optional
-      - python_38_optional
-      - python_39_optional
-      - python_38_orca
-      - python_37_percy
-      - python_37_chart_studio
+      - test_core_py:
+          matrix:
+            parameters:
+              python_version:
+                - "3.8"
+                - "3.9"
+                - "3.10"
+                - "3.11"
+                - "3.12"
+                - "3.13"
+      - test_optional_py:
+          matrix:
+            parameters:
+              python_version:
+                - "3.8"
+                - "3.9"
+                - "3.10"
+                - "3.11"
+                - "3.12"
+                - "3.13"
+      - test_optional_py:
+          name: "test_optional_py-3.9_pandas-1.2.4"
+          python_version: "3.9"
+          pandas_version: "1.2.4"
+          numpy_version: "1.26.4"
+      - python_311_percy
       - build-doc

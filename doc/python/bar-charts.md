@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.4
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.11
+    version: 3.11.10
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -37,7 +37,7 @@ jupyter:
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
-With `px.bar`, **each row of the DataFrame is represented as a rectangular mark**. To aggregate multiple data points into the same rectangular mark, please refer to the [histogram documentation](/python/histograms). 
+With `px.bar`, **each row of the DataFrame is represented as a rectangular mark**. To aggregate multiple data points into the same rectangular mark, please refer to the [histogram documentation](/python/histograms).
 
 In the example below, there is only a single row of data per year, so a single bar is displayed per year.
 
@@ -100,6 +100,10 @@ snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-
 IFrame(snippet_url + 'bar-charts', width='100%', height=1200)
 ```
 
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
+
 ### Colored Bars
 
 The bar plot can be customized using keyword arguments, for example to use [continuous color](https://plotly.com/python/colorscales/), as below, or [discrete color](/python/discrete-color/), as above.
@@ -120,7 +124,7 @@ import plotly.express as px
 df = px.data.gapminder().query("continent == 'Oceania'")
 fig = px.bar(df, x='year', y='pop',
              hover_data=['lifeExp', 'gdpPercap'], color='country',
-             labels={'pop':'population of Canada'}, height=400)
+             labels={'pop':'population of Oceania'}, height=400)
 fig.show()
 ```
 
@@ -148,7 +152,7 @@ fig.show()
 
 ### Aggregating into Single Colored Bars
 
-As noted above `px.bar()` will result in **one rectangle drawn per row of input**. This can sometimes result in a striped look as in the examples above. To combine these rectangles into one per color per position, you can use `px.histogram()`, which has [its own detailed documentation page](/python/histogram). 
+As noted above `px.bar()` will result in **one rectangle drawn per row of input**. This can sometimes result in a striped look as in the examples above. To combine these rectangles into one per color per position, you can use `px.histogram()`, which has [its own detailed documentation page](/python/histogram).
 
 > `px.bar` and `px.histogram` are designed  to be nearly interchangeable in their call signatures, so as to be able to switch between aggregated and disaggregated bar representations.
 
@@ -299,6 +303,133 @@ fig = go.Figure(data=[
 fig.update_layout(barmode='stack')
 fig.show()
 ```
+
+### Bar Chart with Relative Barmode
+
+With "relative" barmode, the bars are stacked on top of one another, with negative values
+below the axis and positive values above.
+
+```python
+import plotly.graph_objects as go
+x = [1, 2, 3, 4]
+
+fig = go.Figure()
+fig.add_trace(go.Bar(x=x, y=[1, 4, 9, 16]))
+fig.add_trace(go.Bar(x=x, y=[6, -8, -4.5, 8]))
+fig.add_trace(go.Bar(x=x, y=[-15, -3, 4.5, -8]))
+fig.add_trace(go.Bar(x=x, y=[-1, 3, -3, -4]))
+
+fig.update_layout(barmode='relative', title_text='Relative Barmode')
+fig.show()
+```
+
+### Grouped Stacked Bar Chart
+
+*Supported in Plotly.py 6.0.0 and later*
+
+Use the `offsetgroup` property with `barmode="stacked"` or `barmode="relative"` to create grouped stacked bar charts. Bars that have the same `offsetgroup` will share the same position on the axis. Bars with no `offsetgroup` set will also share the same position on the axis. In the following example, for each quarter, the value for cities that belong to the same `offsetgroup` are stacked together.
+
+```python
+import plotly.graph_objects as go
+
+data = [
+    go.Bar(
+        x=['Q1', 'Q2', 'Q3', 'Q4'],
+        y=[150, 200, 250, 300],
+        name='New York',
+        offsetgroup="USA"
+    ),
+    go.Bar(
+        x=['Q1', 'Q2', 'Q3', 'Q4'],
+        y=[180, 220, 270, 320],
+        name='Boston',
+        offsetgroup="USA"
+    ),
+    go.Bar(
+        x=['Q1', 'Q2', 'Q3', 'Q4'],
+        y=[130, 170, 210, 260],
+        name='Montreal',
+        offsetgroup="Canada"
+    ),
+    go.Bar(
+        x=['Q1', 'Q2', 'Q3', 'Q4'],
+        y=[160, 210, 260, 310],
+        name='Toronto',
+        offsetgroup="Canada"
+    )
+]
+
+layout = go.Layout(
+    title={
+        'text': 'Quarterly Sales by City, Grouped by Country'
+    },
+    xaxis={
+        'title': {
+            'text': 'Quarter'
+        }
+    },
+    yaxis={
+        'title': {
+            'text': 'Sales'
+        }
+    },
+    barmode='stack'
+)
+
+fig = go.Figure(data=data, layout=layout)
+
+fig.show()
+```
+
+### Stacked Bar Chart From Aggregating a DataFrame
+
+Stacked bar charts are a powerful way to present results summarizing categories generated using the Pandas aggregate commands. `pandas.DataFrame.agg` produces a wide data set format incompatible with `px.bar`. Transposing and updating the indexes to achieve `px.bar` compatibility is a somewhat involved option. Here is one straightforward alternative, which presents the aggregated data as a stacked bar using plotly.graph_objects.
+
+```python
+from plotly import graph_objects as go
+import pandas as pd
+
+# Get one year of gapminder data
+url = 'https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv'
+df = pd.read_csv(url)
+df = df[df['year']==2007]
+df["gdp"]=df["pop"]*df['gdpPercap']
+
+
+# Build the summary of interest
+df_summarized = df.groupby("continent", observed=True).agg("sum").reset_index()
+
+df_summarized["percent of world population"]=100*df_summarized["pop"]/df_summarized["pop"].sum()
+df_summarized["percent of world GDP"]=100*df_summarized["gdp"]/df_summarized["gdp"].sum()
+
+
+df = df_summarized[["continent",
+"percent of world population",
+"percent of world GDP",
+]]
+
+# We now have a wide data frame, but it's in the opposite orientation from the one that px is designed to deal with.
+# Transposing it and rebuilding the indexes is an option, but iterating through the DF using graph objects is more succinct.
+
+fig=go.Figure()
+for category in df_summarized["continent"].values:
+    fig.add_trace(go.Bar(
+            x=df.columns[1:],
+            # We need to get a pandas series that contains just the values to graph;
+            # We do so by selecting the right row, selecting the right columns
+            # and then transposing and using iloc to convert to a series
+            # Here, we assume that the bar element category variable is in column 0
+            y=list(df.loc[df["continent"]==category][list(df.columns[1:])].transpose().iloc[:,0]),
+            name=str(category)
+
+
+        )
+)
+fig.update_layout(barmode="stack")
+
+fig.show()
+```
+
 
 ### Bar Chart with Hover Text
 
@@ -479,6 +610,64 @@ fig.add_trace(go.Bar(x=years, y=[300, 400, 700],
 fig.show()
 ```
 
+### Rounded Bars
+
+*New in 5.19*
+
+You can round the corners on all bar traces in a figure by setting `barcornerradius` on the figure's layout. `barcornerradius` can be a number of pixels or a percentage of the bar width (using a string ending in %, for example "20%").
+
+In this example, we set all bars to have a radius of 15 pixels.
+
+```python
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.medals_wide()
+
+fig = go.Figure(
+    data=[
+        go.Bar(x=df.nation, y=df.gold, name="Gold"),
+        go.Bar(x=df.nation, y=df.silver, name="Silver"),
+        go.Bar(x=df.nation, y=df.bronze, name="Bronze"),
+    ],
+    layout=dict(
+        barcornerradius=15,
+    ),
+)
+
+fig.show()
+```
+
+When you don't want all bar traces in a figure to have the same rounded corners, you can instead configure rounded corners on each trace using `marker.cornerradius`. In this example, which uses subplots, the first trace has a corner radius of 30 pixels, the second trace has a bar corner radius of 30% of the bar width, and the third trace has no rounded corners set.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from plotly import data
+
+df = data.medals_wide()
+
+fig = make_subplots(rows=1, cols=3, shared_yaxes=True)
+
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.gold, name="Gold", marker=dict(cornerradius=30)), 1, 1
+)
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.silver, name="Silver", marker=dict(cornerradius="30%")),
+    1,
+    2,
+)
+
+fig.add_trace(
+    go.Bar(x=df.nation, y=df.bronze, name="Bronze"),
+    1,
+    3,
+)
+
+
+fig.show()
+```
+
 ### Colored and Styled Bar Chart
 
 In this example several parameters of the layout as customized, hence it is convenient to use directly the `go.Layout(...)` constructor instead of calling `fig.update`.
@@ -504,12 +693,15 @@ fig.add_trace(go.Bar(x=years,
                 ))
 
 fig.update_layout(
-    title='US Export of Plastic Scrap',
+    title=dict(text='US Export of Plastic Scrap'),
     xaxis_tickfont_size=14,
     yaxis=dict(
-        title='USD (millions)',
-        titlefont_size=16,
-        tickfont_size=14,
+        title=dict(
+            text="USD (millions)",
+            font=dict(
+                size=16
+            )
+        ),
     ),
     legend=dict(
         x=0,
@@ -521,25 +713,6 @@ fig.update_layout(
     bargap=0.15, # gap between bars of adjacent location coordinates.
     bargroupgap=0.1 # gap between bars of the same location coordinate.
 )
-fig.show()
-```
-
-### Bar Chart with Relative Barmode
-
-With "relative" barmode, the bars are stacked on top of one another, with negative values
-below the axis, positive values above.
-
-```python
-import plotly.graph_objects as go
-x = [1, 2, 3, 4]
-
-fig = go.Figure()
-fig.add_trace(go.Bar(x=x, y=[1, 4, 9, 16]))
-fig.add_trace(go.Bar(x=x, y=[6, -8, -4.5, 8]))
-fig.add_trace(go.Bar(x=x, y=[-15, -3, 4.5, -8]))
-fig.add_trace(go.Bar(x=x, y=[-1, 3, -3, -4]))
-
-fig.update_layout(barmode='relative', title_text='Relative Barmode')
 fig.show()
 ```
 

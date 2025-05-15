@@ -30,6 +30,7 @@ jupyter:
     order: 1
     page_type: example_index
     permalink: python/animations/
+    redirect_from: python/visualizing-mri-volume-slices/
     thumbnail: thumbnail/animations.gif
 ---
 
@@ -37,7 +38,7 @@ jupyter:
 
 Several [Plotly Express](/python/plotly-express/)  functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
 
-Here is an example of an animated scatter plot creating using Plotly Express. Note that you should always fix the `x_range` and `y_range` to ensure that your data remains visible throughout the animation.
+Here is an example of an animated scatter plot created with Plotly Express. Note that you should always fix the `x_range` and `y_range` to ensure that your data remains visible throughout the animation.
 
 ```python
 import plotly.express as px
@@ -125,7 +126,7 @@ fig = go.Figure(
     layout=go.Layout(
         xaxis=dict(range=[0, 5], autorange=False),
         yaxis=dict(range=[0, 5], autorange=False),
-        title="Start Title",
+        title=dict(text="Start Title"),
         updatemenus=[dict(
             type="buttons",
             buttons=[dict(label="Play",
@@ -145,9 +146,7 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
-
 import numpy as np
-
 # Generate curve data
 t = np.linspace(-1, 1, 100)
 x = t + t ** 2
@@ -156,7 +155,7 @@ xm = np.min(x) - 1.5
 xM = np.max(x) + 1.5
 ym = np.min(y) - 1.5
 yM = np.max(y) + 1.5
-N = 50
+N = 25
 s = np.linspace(-1, 1, N)
 xx = s + s ** 2
 yy = s - s ** 2
@@ -167,26 +166,29 @@ fig = go.Figure(
     data=[go.Scatter(x=x, y=y,
                      mode="lines",
                      line=dict(width=2, color="blue")),
-          go.Scatter(x=x, y=y,
-                     mode="lines",
-                     line=dict(width=2, color="blue"))],
-    layout=go.Layout(
+          go.Scatter(x=[xx[0]], y=[yy[0]],
+                     mode="markers",
+                     marker=dict(color="red", size=10))])
+fig.update_layout(width=600, height=450,
         xaxis=dict(range=[xm, xM], autorange=False, zeroline=False),
         yaxis=dict(range=[ym, yM], autorange=False, zeroline=False),
-        title_text="Kinematic Generation of a Planar Curve", hovermode="closest",
-        updatemenus=[dict(type="buttons",
-                          buttons=[dict(label="Play",
-                                        method="animate",
-                                        args=[None])])]),
-    frames=[go.Frame(
-        data=[go.Scatter(
-            x=[xx[k]],
-            y=[yy[k]],
-            mode="markers",
-            marker=dict(color="red", size=10))])
+        title_text="Kinematic Generation of a Planar Curve", title_x=0.5,
+        updatemenus = [dict(type = "buttons",
+        buttons = [
+            dict(
+                args = [None, {"frame": {"duration": 10, "redraw": False},
+                                "fromcurrent": True, "transition": {"duration": 10}}],
+                label = "Play",
+                method = "animate",
 
-        for k in range(N)]
-)
+                )])])
+
+fig.update(frames=[go.Frame(
+                        data=[go.Scatter(
+                                   x=[xx[k]],
+                                   y=[yy[k]])],
+                        traces=[1]) # fig.data[1] is updated by each frame
+        for k in range(N)])
 
 fig.show()
 ```
@@ -238,7 +240,7 @@ fig = go.Figure(
     layout=go.Layout(width=600, height=600,
                      xaxis=dict(range=[xm, xM], autorange=False, zeroline=False),
                      yaxis=dict(range=[ym, yM], autorange=False, zeroline=False),
-                     title="Moving Frenet Frame Along a Planar Curve",
+                     title=dict(text="Moving Frenet Frame Along a Planar Curve"),
                      hovermode="closest",
                      updatemenus=[dict(type="buttons",
                                        buttons=[dict(label="Play",

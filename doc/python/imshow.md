@@ -40,7 +40,7 @@ This tutorial shows how to display and explore image data. If you would like
 instead a logo or static image, use `go.layout.Image` as explained
 [here](/python/images).
 
-### Displaying RBG image data with px.imshow
+### Displaying RGB image data with px.imshow
 
 `px.imshow` displays multichannel (RGB) or single-channel ("grayscale") image data.
 

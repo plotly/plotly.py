@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.16.1
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.11
   plotly:
     description: How to make scatter plots in Python with Plotly.
     display_as: basic
@@ -98,9 +98,13 @@ snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-
 IFrame(snippet_url + 'line-and-scatter', width='100%', height=1200)
 ```
 
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
+
 ### Scatter plots and Categorical Axes
 
-Scatters plots can be made on using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or [date](https://plotly.com/python/time-series/) axes.
+Scatter plots can be made using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or [date](https://plotly.com/python/time-series/) axes.
 
 Scatter plots where one axis is categorical are often known as [dot plots](https://plotly.com/python/dot-plots/).
 
@@ -110,6 +114,39 @@ df = px.data.medals_long()
 
 fig = px.scatter(df, y="nation", x="count", color="medal", symbol="medal")
 fig.update_traces(marker_size=10)
+fig.show()
+```
+
+### Grouped Scatter Points
+
+*New in 5.12*
+
+By default, scatter points at the same location are overlayed. We can see this in the previous example, with the values for Canada for bronze and silver. Set `scattermode='group'` to plot scatter points next to one another, centered around the shared location.
+
+```python
+import plotly.express as px
+
+df = px.data.medals_long()
+
+fig = px.scatter(df, y="count", x="nation", color="medal")
+fig.update_traces(marker_size=10)
+fig.update_layout(scattermode="group")
+fig.show()
+```
+
+*New in 5.12*
+
+You can configure the gap between groups of scatter points using `scattergap`. Here we set it to `0.75`, which brings the points closer together by allocating more space to the gap between groups. If you don't set `scattergap`, a default value of `0` is used, unless you have `bargap` set. If you have `bargap` set, the `scattergap` defaults to that value.
+
+
+```python
+import plotly.express as px
+
+df = px.data.medals_long()
+
+fig = px.scatter(df, y="count", x="nation", color="medal")
+fig.update_traces(marker_size=10)
+fig.update_layout(scattermode="group", scattergap=0.75)
 fig.show()
 ```
 
@@ -213,7 +250,7 @@ fig.show()
 
 ### Data Order in Scatter and Line Charts
 
-Plotly line charts are implemented as [connected scatterplots](https://www.data-to-viz.com/graph/connectedscatter.html) (see below), meaning that the points are plotted and connected with lines **in the order they are provided, with no automatic reordering**. 
+Plotly line charts are implemented as [connected scatterplots](https://www.data-to-viz.com/graph/connectedscatter.html) (see below), meaning that the points are plotted and connected with lines **in the order they are provided, with no automatic reordering**.
 
 This makes it possible to make charts like the one below, but also means that it may be required to explicitly sort data before passing it to Plotly to avoid lines moving "backwards" across the chart.
 
@@ -225,17 +262,17 @@ df = pd.DataFrame(dict(
     x = [1, 3, 2, 4],
     y = [1, 2, 3, 4]
 ))
-fig = px.line(df, x="x", y="y", title="Unsorted Input") 
+fig = px.line(df, x="x", y="y", title="Unsorted Input")
 fig.show()
 
 df = df.sort_values(by="x")
-fig = px.line(df, x="x", y="y", title="Sorted Input") 
+fig = px.line(df, x="x", y="y", title="Sorted Input")
 fig.show()
 ```
 
 ### Connected Scatterplots
 
-In a connected scatterplot, two continuous variables are plotted against each other, with a line connecting them in some meaningful order, usually a time variable. In the plot below, we show the "trajectory" of a pair of countries through a space defined by GDP per Capita and Life Expectancy. Botswana's life expectancy 
+In a connected scatterplot, two continuous variables are plotted against each other, with a line connecting them in some meaningful order, usually a time variable. In the plot below, we show the "trajectory" of a pair of countries through a space defined by GDP per Capita and Life Expectancy. Botswana's life expectancy
 
 ```python
 import plotly.express as px
@@ -343,7 +380,7 @@ fig.add_trace(go.Scatter(
 
 # Set options common to all traces with fig.update_traces
 fig.update_traces(mode='markers', marker_line_width=2, marker_size=10)
-fig.update_layout(title='Styled Scatter',
+fig.update_layout(title=dict(text='Styled Scatter'),
                   yaxis_zeroline=False, xaxis_zeroline=False)
 
 
@@ -364,7 +401,7 @@ fig = go.Figure(data=go.Scatter(x=data['Postal'],
                                 marker_color=data['Population'],
                                 text=data['State'])) # hover text goes here
 
-fig.update_layout(title='Population of USA States')
+fig.update_layout(title=dict(text='Population of USA States'))
 fig.show()
 
 ```
@@ -385,6 +422,48 @@ fig = go.Figure(data=go.Scatter(
         showscale=True
     )
 ))
+
+fig.show()
+```
+
+#### Trace Zorder
+
+*New in 5.21*
+
+For many trace types, including `go.Scatter`, you can define the order traces are drawn in by setting a `zorder`. Traces with a higher `zorder` appear at the front, with traces with a lower `zorder` at the back. In this example, we give our trace for 'France' the highest `zorder`, meaning it is drawn in front of the other two traces:
+
+```python
+import plotly.graph_objects as go
+import plotly.data as data
+
+df = data.gapminder()
+
+df_europe = df[df['continent'] == 'Europe']
+
+trace1 = go.Scatter(x=df_europe[df_europe['country'] == 'France']['year'],
+                    y=df_europe[df_europe['country'] == 'France']['lifeExp'],
+                    mode='lines+markers',
+                    zorder=3,
+                    name='France',
+                    marker=dict(size=15))
+
+trace2 = go.Scatter(x=df_europe[df_europe['country'] == 'Germany']['year'],
+                    y=df_europe[df_europe['country'] == 'Germany']['lifeExp'],
+                    mode='lines+markers',
+                    zorder=1,
+                    name='Germany',
+                    marker=dict(size=15))
+
+trace3 = go.Scatter(x=df_europe[df_europe['country'] == 'Spain']['year'],
+                    y=df_europe[df_europe['country'] == 'Spain']['lifeExp'],
+                    mode='lines+markers',
+                    zorder=2,
+                    name='Spain',
+                    marker=dict(size=15))
+
+layout = go.Layout(title=dict(text='Life Expectancy in Europe Over Time'))
+
+fig = go.Figure(data=[trace1, trace2, trace3], layout=layout)
 
 fig.show()
 ```

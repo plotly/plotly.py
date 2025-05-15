@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.16.3
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,14 +20,14 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.10.0
   plotly:
     description: How to make bubble maps in Python with Plotly.
     display_as: maps
     language: python
     layout: base
     name: Bubble Maps
-    order: 4
+    order: 5
     page_type: example_index
     permalink: python/bubble-maps/
     thumbnail: thumbnail/bubble-map.jpg
@@ -85,7 +85,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_
 df.head()
 
 df['text'] = df['name'] + '<br>Population ' + (df['pop']/1e6).astype(str)+' million'
-limits = [(0,2),(3,10),(11,20),(21,50),(50,3000)]
+limits = [(0,3),(3,11),(11,21),(21,50),(50,3000)]
 colors = ["royalblue","crimson","lightseagreen","orange","lightgrey"]
 cities = []
 scale = 5000

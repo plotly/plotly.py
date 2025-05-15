@@ -86,7 +86,7 @@ np.random.seed(0)
 l = 30
 X, Y, Z = np.mgrid[:l, :l, :l]
 vol = np.zeros((l, l, l))
-pts = (l * np.random.rand(3, 15)).astype(np.int)
+pts = (l * np.random.rand(3, 15)).astype(int)
 vol[tuple(indices for indices in pts)] = 1
 from scipy import ndimage
 vol = ndimage.gaussian_filter(vol, 4)

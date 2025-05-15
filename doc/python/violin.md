@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.9.0
   plotly:
     description: How to make violin plots in Python with Plotly.
     display_as: statistical
@@ -271,6 +271,28 @@ A [strip chart](/python/strip-charts/) is like a violin plot with points showing
 import plotly.express as px
 df = px.data.tips()
 fig = px.strip(df, x='day', y='tip')
+fig.show()
+```
+
+### Choosing The Algorithm For Computing Quartiles
+
+*New in 5.10*
+
+By default, quartiles for violin plots are computed using the `linear` method (for more about linear interpolation, see #10 listed on [http://jse.amstat.org/v14n3/langford.html](http://jse.amstat.org/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details).
+
+However, you can also choose to use an `exclusive` or an `inclusive` algorithm to compute quartiles.
+
+The _exclusive_ algorithm uses the median to divide the ordered dataset into two halves. If the sample is odd, it does not include the median in either half. Q1 is then the median of the lower half and Q3 is the median of the upper half.
+
+The _inclusive_ algorithm also uses the median to divide the ordered dataset into two halves, but if the sample is odd, it includes the median in both halves. Q1 is then the median of the lower half and Q3 the median of the upper half.
+
+```python
+import plotly.express as px
+
+df = px.data.tips()
+fig = px.violin(df, y="total_bill")
+fig.update_traces(quartilemethod="exclusive") # or "inclusive", or "linear" by default
+
 fig.show()
 ```
 

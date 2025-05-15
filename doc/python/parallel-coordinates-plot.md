@@ -5,12 +5,12 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.13.7
   kernel_info:
     name: python2
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -22,7 +22,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.9.0
   plotly:
     description: How to make parallel coordinates plots in Python with Plotly.
     display_as: scientific
@@ -166,6 +166,39 @@ fig = go.Figure(data=
                  label = 'Assembly Penalty Wt', values = df['assemblyPW']),
             dict(range = [49000,568000],
                  label = 'Height st Width', values = df['HstW'])])
+    )
+)
+fig.show()
+```
+
+### Unselected Line Color and Opacity
+
+
+*New in 5.10*
+
+The color and opacity of unselected lines can be set with `unselected`. By setting `opacity=0`, you can hide the unselected lines. Here, we set the color to `lightgray` and the opacity to `0.5`.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(data=
+    go.Parcoords(
+        line_color='blue',
+        dimensions = list([
+            dict(range = [1,5],
+                 constraintrange = [1,2], # change this range by dragging the pink line
+                 label = 'A', values = [1,4]),
+            dict(range = [1.5,5],
+                 tickvals = [1.5,3,4.5],
+                 label = 'B', values = [3,1.5]),
+            dict(range = [1,5],
+                 tickvals = [1,2,4,5],
+                 label = 'C', values = [2,4],
+                 ticktext = ['text 1', 'text 2', 'text 3', 'text 4']),
+            dict(range = [1,5],
+                 label = 'D', values = [4,2])
+        ]),
+        unselected = dict(line = dict(color = 'green', opacity = 0.5))
     )
 )
 fig.show()

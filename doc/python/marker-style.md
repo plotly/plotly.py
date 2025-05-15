@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
+      format_version: '1.3'
+      jupytext_version: 1.14.6
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.10.11
   plotly:
     description: How to style markers in Python with Plotly.
     display_as: file_settings
@@ -119,6 +119,10 @@ from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'marker-style', width='100%', height=1200)
 ```
+
+<div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
+<u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
+
 
 ### Opacity
 
@@ -322,11 +326,13 @@ fig.show()
 
 The `marker_symbol` attribute allows you to choose from a wide array of symbols to represent markers in your figures.
 
-The basic symbols are: `circle`, `square`, `diamond`, `cross`, `x`, `triangle`, `pentagon`, `hexagram`, `star`, `diamond`, `hourglass`, `bowtie`, `asterisk`, `hash`, `y`, and `line`.
+The basic symbols are: `circle`, `square`, `diamond`, `cross`, `x`, `triangle`, `pentagon`, `hexagram`, `star`, `hourglass`, `bowtie`, `asterisk`, `hash`, `y`, and `line`.
 
 Each basic symbol is also represented by a number. Adding 100 to that number is equivalent to appending the suffix "-open" to a symbol name. Adding 200 is equivalent to appending "-dot" to a symbol name. Adding 300 is equivalent to appending "-open-dot" or "dot-open" to a symbol name.
 
 In the following figure, hover over a symbol to see its name or number. Set the `marker_symbol` attribute equal to that name or number to change the marker symbol in your figure.
+
+> The `arrow-wide` and `arrow` marker symbols are new in 5.11
 
 ```python
 import plotly.graph_objects as go
@@ -346,12 +352,189 @@ fig = go.Figure(go.Scatter(mode="markers", x=namevariants, y=namestems, marker_s
                            marker_line_color="midnightblue", marker_color="lightskyblue",
                            marker_line_width=2, marker_size=15,
                            hovertemplate="name: %{y}%{x}<br>number: %{marker.symbol}<extra></extra>"))
-fig.update_layout(title="Mouse over symbols for name & number!",
+fig.update_layout(title=dict(text="Mouse over symbols for name & number!"),
                   xaxis_range=[-1,4], yaxis_range=[len(set(namestems)),-1],
                   margin=dict(b=0,r=0), xaxis_side="top", height=1400, width=400)
 fig.show()
 ```
 
+
+### Using a Custom Marker
+
+To use a custom marker, set the `symbol` on the `marker`. Here we set it to `diamond`.
+
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+
+fig.update_traces(
+    marker=dict(size=8, symbol="diamond", line=dict(width=2, color="DarkSlateGrey")),
+    selector=dict(mode="markers"),
+)
+fig.show()
+
+```
+
+#### Open Marker Colors
+
+In the previous example, each marker has two colors, a marker color (set in Plotly Express with `color="species"`)  and a line color (set on the line with `color="DarkSlateGrey"`. All open markers, like "diamond-open" in the following example, have a transparent fill, which means you can specify only one color.  Specify this color using the marker color parameter. This controls the outline color and any dot or cross. For open markers, the line color does nothing.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+
+fig.update_traces(
+    marker=dict(
+        size=8,
+        symbol="diamond-open",
+        line=dict(
+            width=2,
+#             color="DarkSlateGrey" Line colors don't apply to open markers
+        )
+    ),
+    selector=dict(mode="markers"),
+)
+
+fig.show()
+```
+
+### Setting Marker Angles
+
+
+*New in 5.11*
+
+Change the angle of markers by setting `angle`. Here we set the angle on the `arrow` markers to `45`.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+
+fig.update_traces(
+    marker=dict(
+        size=12, symbol="arrow", angle=45, line=dict(width=2, color="DarkSlateGrey")
+    ),
+    selector=dict(mode="markers"),
+)
+fig.show()
+
+```
+
+### Setting Angle Reference
+
+*New in 5.11*
+
+In the previous example the angle reference is the default `up`, which
+means all makers start at the angle reference point of 0. Set `angleref` to `previous` and a marker will take its angle reference from the previous data point.
+
+```python
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+
+df = px.data.gapminder()
+
+fig = go.Figure()
+
+for x in df.loc[df.continent.isin(["Europe"])].country.unique()[:5]:
+    fil = df.loc[(df.country.str.contains(x))]
+    fig.add_trace(
+        go.Scatter(
+            x=fil["year"],
+            y=fil["pop"],
+            mode="lines+markers",
+            marker=dict(
+                symbol="arrow",
+                size=15,
+                angleref="previous",
+            ),
+            name=x,
+        )
+    )
+fig.show()
+
+```
+
+### Using Standoff to Position a Marker
+
+*New in 5.11*
+
+When you have multiple markers at one location, you can use `standoff` on a marker to move it away from the other marker in the direction of the `angle`.
+In this example, we set `standoff=8` on the `arrow` marker, which is half the size of the other `circle` marker, meaning it points exactly at the `circle`.
+
+```python
+import pandas as pd
+import plotly.graph_objects as go
+from plotly import data
+
+df = data.gapminder()
+df = df.loc[(df.continent == "Americas") & (df.year.isin([1987, 2007]))]
+
+countries = (
+    df.loc[(df.continent == "Americas") & (df.year.isin([2007]))]
+    .sort_values(by=["pop"], ascending=True)["country"]
+    .unique()
+)[5:-10]
+
+data = {"x": [], "y": [], "colors": [], "years": []}
+
+for country in countries:
+    data["x"].extend(
+        [
+            df.loc[(df.year == 1987) & (df.country == country)]["pop"].values[0],
+            df.loc[(df.year == 2007) & (df.country == country)]["pop"].values[0],
+            None,
+        ]
+    )
+    data["y"].extend([country, country, None]),
+    data["colors"].extend(["cyan", "darkblue", "white"]),
+    data["years"].extend(["1987", "2007", None])
+
+fig = go.Figure(
+    data=[
+        go.Scatter(
+            x=data["x"],
+            y=data["y"],
+            mode="markers+lines",
+            marker=dict(
+                symbol="arrow",
+                color="royalblue",
+                size=16,
+                angleref="previous",
+                standoff=8,
+            ),
+        ),
+        go.Scatter(
+            x=data["x"],
+            y=data["y"],
+            text=data["years"],
+            mode="markers",
+            marker=dict(
+                color=data["colors"],
+                size=16,
+            ),
+            hovertemplate="""Country: %{y} <br> Population: %{x} <br> Year: %{text} <br><extra></extra>""",
+        ),
+    ]
+)
+
+fig.update_layout(
+    title=dict(text="Population changes 1987 to 2007"),
+    width=1000,
+    height=1000,
+    showlegend=False,
+)
+
+
+fig.show()
+
+```
 
 ### Reference
 

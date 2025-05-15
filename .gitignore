@@ -1,3 +1,8 @@
+0
+0.html
+iframe_figures/
+tests/test_orca/images/linux/failed/
+
 *.egg-info
 
 *.pyc
@@ -6,8 +11,11 @@
 
 *~
 
+doc/python/raw.githubusercontent.com/
+
 # Don't ignore dataset files
 !*.csv.gz
+!*.geojson.gz
 
 *.ipynb
 
@@ -38,9 +46,12 @@ build
 dist
 plotly.egg-info/
 
-plotly/tests/test_orca/images/*/failed
-plotly/tests/test_orca/images/*/tmp
-/plotly-package/plotly/tests/test_core/test_offline/plotly.min.js
+# macOS utility file
+**/.DS_Store
+
+tests/test_orca/images/*/failed
+tests/test_orca/images/*/tmp
+tests/test_core/test_offline/plotly.min.js
 temp-plot.html
 .vscode
 doc/python/.ipynb_checkpoints
@@ -48,7 +59,7 @@ doc/python/.mapbox_token
 doc/.ipynb_checkpoints
 tags
 doc/check-or-enforce-order.py
+plotly/package_data/widgetbundle.js
 
-packages/javascript/jupyterlab-plotly/lib/
-packages/python/plotly/jupyterlab_plotly/labextension/
-packages/python/plotly/jupyterlab_plotly/nbextension/index.js*
+tests/percy/*.html
+tests/percy/pandas2/*.html

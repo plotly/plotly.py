@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Scatter Plots on Maps
-    order: 11
+    order: 12
     page_type: u-guide
     permalink: python/scatter-plots-on-maps/
     thumbnail: thumbnail/scatter-plot-on-maps.jpg
@@ -144,7 +144,11 @@ fig = go.Figure(data=go.Scattergeo(
             cmin = 0,
             color = df['cnt'],
             cmax = df['cnt'].max(),
-            colorbar_title="Incoming flights<br>February 2011"
+            colorbar=dict(
+                title=dict(
+                    text="Incoming flights<br>February 2011"
+                )
+            )
         )))
 
 fig.update_layout(
@@ -187,7 +191,9 @@ fig = go.Figure(data=go.Scattergeo(
         opacity = 0.7,
         size = 2,
         colorbar = dict(
-            titleside = "right",
+            title = dict(
+                side="right"
+            ),
             outlinecolor = "rgba(68, 68, 68, 0)",
             ticks = "outside",
             showticksuffix = "last",
@@ -225,7 +231,7 @@ fig.update_layout(
             dtick = 5
         )
     ),
-    title='US Precipitation 06-30-2015<br>Source: <a href="http://water.weather.gov/precip/">NOAA</a>',
+    title=dict(text='US Precipitation 06-30-2015<br>Source: <a href="http://water.weather.gov/precip/">NOAA</a>'),
 )
 fig.show()
 ```
