@@ -111,10 +111,7 @@ fig.show()
 ```
 ### Small multiple horizontal bar charts show each component's size more clearly than a stacked bar
 
-Bar charts with multiple components pose a fundamental trade off between presenting the total clearly and presenting the component values clearly.  This small multiples approach shows the component magnitudes clearly at the cost of slightly obscuring the totals.  A stacked bar does the opposite.  Small multiple bar charts often work better in a horizontal orientation; and are easy to create with the px.bar orientation and facet_col parameters.
-
-  .
-
+Bar charts with multiple components pose a fundamental trade off between presenting the total clearly and presenting the component values clearly. This small multiples approach shows the component magnitudes clearly at the cost of slightly obscuring the totals. A stacked bar does the opposite. Small multiple bar charts often work better in a horizontal orientation; and are easy to create with the px.bar orientation and facet_col parameters.
 ```
 import pandas as pd
 import plotly.express as px
@@ -144,7 +141,7 @@ fig.update_layout(
     showlegend=False,  # the legend does not add anything
 )
 
-#remove up the default "facet_variable =" text from the title of each facet graph
+# remove the default "facet_variable =" text from the title of each facet graph
 fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))  
 
 # Remove duplicate axis labels
