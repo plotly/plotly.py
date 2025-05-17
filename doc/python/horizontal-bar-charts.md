@@ -221,7 +221,7 @@ fig.show()
 
 ### Diverging Bar (or Butterfly) Chart with Neutral Column
 
-The previous diverging bar chart example excluded neutral responses. This variation includes them in a separate column.  Jonathan Schwabish discusses tradeoffs between these options on page 92-97 of _Better Data Visualizations_.
+The other diverging bar chart example excludes neutral responses. This variation includes them in a separate column.  Jonathan Schwabish discusses tradeoffs between these options on page 92-97 of _Better Data Visualizations_.
 
 ```python
 import pandas as pd
