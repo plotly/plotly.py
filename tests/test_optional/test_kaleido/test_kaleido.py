@@ -1,14 +1,17 @@
+import base64
+from contextlib import redirect_stdout
 from io import BytesIO, StringIO
 from pathlib import Path
 import tempfile
-from contextlib import redirect_stdout
-import base64
+from unittest.mock import patch
 
 from pdfrw import PdfReader
 from PIL import Image
+import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.io.kaleido import kaleido_available, kaleido_major
 import pytest
+
 
 fig = {"data": [], "layout": {"title": {"text": "figure title"}}}
 
@@ -160,3 +163,43 @@ def test_defaults():
     finally:
         pio.defaults.default_format = "png"
         assert pio.defaults.default_format == "png"
+
+
+def test_fig_write_image():
+    """Test that fig.write_image() calls the correct underlying Kaleido function."""
+
+    test_fig = go.Figure(fig)
+    test_image_bytes = b"mock image data"
+
+    if kaleido_major() > 0:
+        patch_funcname = "plotly.io._kaleido.kaleido.calc_fig_sync"
+    else:
+        patch_funcname = "plotly.io._kaleido.scope.transform"
+
+    with patch(patch_funcname, return_value=test_image_bytes) as mock_calc_fig:
+        test_fig.write_image("test_path.png")
+
+        # Verify patched function was called once with fig dict as first argument
+        mock_calc_fig.assert_called_once()
+        args, _ = mock_calc_fig.call_args
+        assert args[0] == test_fig.to_dict()
+
+
+def test_fig_to_image():
+    """Test that fig.to_image() calls the correct underlying Kaleido function."""
+
+    test_fig = go.Figure(fig)
+    test_image_bytes = b"mock image data"
+
+    if kaleido_major() > 0:
+        patch_funcname = "plotly.io._kaleido.kaleido.calc_fig_sync"
+    else:
+        patch_funcname = "plotly.io._kaleido.scope.transform"
+
+    with patch(patch_funcname, return_value=test_image_bytes) as mock_calc_fig:
+        test_fig.to_image()
+
+        # Verify patched function was called once with fig dict as first argument
+        mock_calc_fig.assert_called_once()
+        args, _ = mock_calc_fig.call_args
+        assert args[0] == test_fig.to_dict()
