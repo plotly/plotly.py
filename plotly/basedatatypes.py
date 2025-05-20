@@ -3908,7 +3908,7 @@ Invalid property path '{key_path_str}' for layout
                 warnings.warn(
                     ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
                 )
-            return pio.write_image(self, *args, **kwargs)
+        return pio.write_image(self, *args, **kwargs)
 
     # Static helpers
     # --------------
