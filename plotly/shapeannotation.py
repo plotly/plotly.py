@@ -4,6 +4,9 @@
 def _mean(x):
     if len(x) == 0:
         raise ValueError("x must have positive length")
+
+    if len(x) == 2 and x[0] == x[1]:
+        return x[0]
     return float(sum(x)) / len(x)
 
 
