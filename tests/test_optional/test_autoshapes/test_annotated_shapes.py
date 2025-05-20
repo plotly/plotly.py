@@ -51,7 +51,10 @@ def multi_plot_fixture():
         fig.add_trace(go.Scatter(x=[], y=[]), row=r, col=c)
     return fig
 
+
 from datetime import datetime, timedelta
+
+
 def test_add_shape_with_dates():
     start_date = datetime(2025, 1, 1)
     end_date = datetime(2025, 10, 10)
@@ -65,7 +68,7 @@ def test_add_shape_with_dates():
         data=[go.Scatter(x=[x for x in range(1, 20, 2)], y=dates)],
         layout=go.Layout(
             title=go.layout.Title(text="A Figure Specified By A Graph Object")
-        )
+        ),
     )
     fig.add_vline(x="2025-06-24", annotation_text="test")
     assert len(fig.layout.annotations) == 1
