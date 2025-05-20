@@ -38,7 +38,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.1.0"
+version = "6.1.1"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
