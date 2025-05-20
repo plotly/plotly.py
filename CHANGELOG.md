@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.1.1] - 2025-05-20
+
+### Fixed
+- Prevent swallowing of `ValueError` when creating a figure with subplots [[#3888](https://github.com/plotly/plotly.py/pull/3888)]
+- Fix issue causing `fig.write_image()` to not generate an image [[#5193](https://github.com/plotly/plotly.py/pull/5193)]
+
 ## [6.1.0] - 2025-05-15
 
 ### Updated
