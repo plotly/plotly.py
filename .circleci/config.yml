@@ -200,7 +200,7 @@ jobs:
     executor:
       name: docker-container
       python_version: <<parameters.python_version>>
-    steps:  
+    steps:
       - test_io_kaleido_v0
 
   # Percy
@@ -416,13 +416,13 @@ jobs:
             # For the API doc, we need to use the local version of plotly
             # since we are tweaking the source because of
             # graph_objs/graph_objects
+            uv pip uninstall plotly
+            cd ..
+            uv pip install -e .
+            cd doc
+            cd apidoc
+            make html
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              uv pip uninstall plotly
-              cd ..
-              uv pip install -e .
-              cd doc
-              cd apidoc
-              make html
               cd _build/html
               touch .nojekyll
               git init
@@ -435,10 +435,16 @@ jobs:
               rm -rf .git
               cd ../..
             fi
+            tar -czf api_docs_html.tgz _build/html
 
       - store_artifacts:
           path: doc/build
           destination: doc/build
+
+      - store_artifacts:
+          path: doc/apidoc/api_docs_html.tgz
+          destination: doc/apidoc/api_docs_html.tgz
+
 workflows:
   code_formatting:
     jobs:
@@ -449,7 +455,7 @@ workflows:
   release_build:
     jobs:
       - full_build
-  
+
   build:
     jobs:
       - test_core_py:
