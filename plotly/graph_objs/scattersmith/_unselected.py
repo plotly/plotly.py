@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Unselected(_BaseTraceHierarchyType):
 
-    _parent_path_str = "scattersmith"
-    _path_str = "scattersmith.unselected"
+    _parent_path_str = 'scattersmith'
+    _path_str = 'scattersmith.unselected'
     _valid_props = {"marker", "textfont"}
 
     @property
@@ -24,11 +28,11 @@ class Unselected(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.scattersmith.unselected.Marker
         """
-        return self["marker"]
+        return self['marker']
 
     @marker.setter
     def marker(self, val):
-        self["marker"] = val
+        self['marker'] = val
 
     @property
     def textfont(self):
@@ -43,11 +47,11 @@ class Unselected(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.scattersmith.unselected.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     @property
     def _prop_descriptions(self):
@@ -59,8 +63,12 @@ class Unselected(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.scattersmith.unselected.Te
             xtfont` instance or dict with compatible properties
         """
-
-    def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            marker=None,
+            textfont=None,
+            **kwargs
+        ):
         """
         Construct a new Unselected object
 
@@ -81,9 +89,9 @@ class Unselected(_BaseTraceHierarchyType):
         -------
         Unselected
         """
-        super().__init__("unselected")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('unselected')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -93,17 +101,17 @@ class Unselected(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scattersmith.Unselected
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattersmith.Unselected`"""
-            )
+an instance of :class:`plotly.graph_objs.scattersmith.Unselected`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("marker", arg, marker)
-        self._set_property("textfont", arg, textfont)
+
+        self._set_property('marker', arg, marker)
+        self._set_property('textfont', arg, textfont)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

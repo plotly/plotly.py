@@ -36,7 +36,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Visualization",
     "License :: OSI Approved :: MIT License"
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = {file="LICENSE.txt"}
 version = "6.1.1"
 dependencies = [

@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class X(_BaseTraceHierarchyType):
 
-    _parent_path_str = "scatter3d.projection"
-    _path_str = "scatter3d.projection.x"
+    _parent_path_str = 'scatter3d.projection'
+    _path_str = 'scatter3d.projection.x'
     _valid_props = {"opacity", "scale", "show"}
 
     @property
@@ -23,11 +27,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     @property
     def scale(self):
@@ -42,11 +46,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["scale"]
+        return self['scale']
 
     @scale.setter
     def scale(self, val):
-        self["scale"] = val
+        self['scale'] = val
 
     @property
     def show(self):
@@ -60,11 +64,11 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["show"]
+        return self['show']
 
     @show.setter
     def show(self, val):
-        self["show"] = val
+        self['show'] = val
 
     @property
     def _prop_descriptions(self):
@@ -78,8 +82,13 @@ class X(_BaseTraceHierarchyType):
             Sets whether or not projections are shown along the x
             axis.
         """
-
-    def __init__(self, arg=None, opacity=None, scale=None, show=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            opacity=None,
+            scale=None,
+            show=None,
+            **kwargs
+        ):
         """
         Construct a new X object
 
@@ -102,9 +111,9 @@ class X(_BaseTraceHierarchyType):
         -------
         X
         """
-        super().__init__("x")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('x')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -114,18 +123,18 @@ class X(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter3d.projection.X
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.projection.X`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter3d.projection.X`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("opacity", arg, opacity)
-        self._set_property("scale", arg, scale)
-        self._set_property("show", arg, show)
+
+        self._set_property('opacity', arg, opacity)
+        self._set_property('scale', arg, scale)
+        self._set_property('show', arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Step(_BaseTraceHierarchyType):
 
-    _parent_path_str = "indicator.gauge"
-    _path_str = "indicator.gauge.step"
+    _parent_path_str = 'indicator.gauge'
+    _path_str = 'indicator.gauge.step'
     _valid_props = {"color", "line", "name", "range", "templateitemname", "thickness"}
 
     @property
@@ -27,11 +31,11 @@ class Step(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     @property
     def line(self):
@@ -46,11 +50,11 @@ class Step(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.gauge.step.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     @property
     def name(self):
@@ -71,34 +75,34 @@ class Step(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     @property
     def range(self):
         """
-            Sets the range of this axis.
+        Sets the range of this axis.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'range[0]' property is a number and may be specified as:
+          - An int or float
+    (1) The 'range[1]' property is a number and may be specified as:
+          - An int or float
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'range[1]' property is a number and may be specified as:
-              - An int or float
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["range"]
+        return self['range']
 
     @range.setter
     def range(self, val):
-        self["range"] = val
+        self['range'] = val
 
     @property
     def templateitemname(self):
@@ -120,11 +124,11 @@ class Step(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["templateitemname"]
+        return self['templateitemname']
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self["templateitemname"] = val
+        self['templateitemname'] = val
 
     @property
     def thickness(self):
@@ -139,11 +143,11 @@ class Step(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["thickness"]
+        return self['thickness']
 
     @thickness.setter
     def thickness(self, val):
-        self["thickness"] = val
+        self['thickness'] = val
 
     @property
     def _prop_descriptions(self):
@@ -178,18 +182,16 @@ class Step(_BaseTraceHierarchyType):
             Sets the thickness of the bar as a fraction of the
             total thickness of the gauge.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        color=None,
-        line=None,
-        name=None,
-        range=None,
-        templateitemname=None,
-        thickness=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            color=None,
+            line=None,
+            name=None,
+            range=None,
+            templateitemname=None,
+            thickness=None,
+            **kwargs
+        ):
         """
         Construct a new Step object
 
@@ -233,9 +235,9 @@ class Step(_BaseTraceHierarchyType):
         -------
         Step
         """
-        super().__init__("steps")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('steps')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -245,21 +247,21 @@ class Step(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.gauge.Step
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.gauge.Step`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.gauge.Step`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("color", arg, color)
-        self._set_property("line", arg, line)
-        self._set_property("name", arg, name)
-        self._set_property("range", arg, range)
-        self._set_property("templateitemname", arg, templateitemname)
-        self._set_property("thickness", arg, thickness)
+
+        self._set_property('color', arg, color)
+        self._set_property('line', arg, line)
+        self._set_property('name', arg, name)
+        self._set_property('range', arg, range)
+        self._set_property('templateitemname', arg, templateitemname)
+        self._set_property('thickness', arg, thickness)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

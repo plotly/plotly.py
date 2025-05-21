@@ -29,7 +29,7 @@ pytz
 
 ## code formatting ##
 pre-commit
-black==22.3.0
+black==25.1.0
 
 ## codegen dependencies ##
 inflect
