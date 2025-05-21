@@ -289,14 +289,11 @@ def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
 
 
 def convert_rgba_array(color_list):
-    clean_color_list = list()
-    for c in color_list:
-        clean_color_list += [
-            dict(r=int(c[0] * 255), g=int(c[1] * 255), b=int(c[2] * 255), a=c[3])
-        ]
-    plotly_colors = list()
-    for rgba in clean_color_list:
-        plotly_colors += ["rgba({r},{g},{b},{a})".format(**rgba)]
+    # Use a single list comprehension to both process and format the color list
+    plotly_colors = [
+        f"rgba({int(c[0] * 255)},{int(c[1] * 255)},{int(c[2] * 255)},{c[3]})"
+        for c in color_list
+    ]
     if len(plotly_colors) == 1:
         return plotly_colors[0]
     else:
