@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,21 +11,9 @@ import copy as _copy
 
 class Contours(_BaseTraceHierarchyType):
 
-    _parent_path_str = "contourcarpet"
-    _path_str = "contourcarpet.contours"
-    _valid_props = {
-        "coloring",
-        "end",
-        "labelfont",
-        "labelformat",
-        "operation",
-        "showlabels",
-        "showlines",
-        "size",
-        "start",
-        "type",
-        "value",
-    }
+    _parent_path_str = 'contourcarpet'
+    _path_str = 'contourcarpet.contours'
+    _valid_props = {"coloring", "end", "labelfont", "labelformat", "operation", "showlabels", "showlines", "size", "start", "type", "value"}
 
     @property
     def coloring(self):
@@ -39,11 +31,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["coloring"]
+        return self['coloring']
 
     @coloring.setter
     def coloring(self, val):
-        self["coloring"] = val
+        self['coloring'] = val
 
     @property
     def end(self):
@@ -58,11 +50,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["end"]
+        return self['end']
 
     @end.setter
     def end(self, val):
-        self["end"] = val
+        self['end'] = val
 
     @property
     def labelfont(self):
@@ -81,11 +73,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.contourcarpet.contours.Labelfont
         """
-        return self["labelfont"]
+        return self['labelfont']
 
     @labelfont.setter
     def labelfont(self, val):
-        self["labelfont"] = val
+        self['labelfont'] = val
 
     @property
     def labelformat(self):
@@ -103,11 +95,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["labelformat"]
+        return self['labelformat']
 
     @labelformat.setter
     def labelformat(self, val):
-        self["labelformat"] = val
+        self['labelformat'] = val
 
     @property
     def operation(self):
@@ -130,11 +122,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["operation"]
+        return self['operation']
 
     @operation.setter
     def operation(self, val):
-        self["operation"] = val
+        self['operation'] = val
 
     @property
     def showlabels(self):
@@ -149,11 +141,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["showlabels"]
+        return self['showlabels']
 
     @showlabels.setter
     def showlabels(self, val):
-        self["showlabels"] = val
+        self['showlabels'] = val
 
     @property
     def showlines(self):
@@ -168,11 +160,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["showlines"]
+        return self['showlines']
 
     @showlines.setter
     def showlines(self, val):
-        self["showlines"] = val
+        self['showlines'] = val
 
     @property
     def size(self):
@@ -186,11 +178,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["size"]
+        return self['size']
 
     @size.setter
     def size(self, val):
-        self["size"] = val
+        self['size'] = val
 
     @property
     def start(self):
@@ -205,11 +197,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["start"]
+        return self['start']
 
     @start.setter
     def start(self, val):
-        self["start"] = val
+        self['start'] = val
 
     @property
     def type(self):
@@ -227,11 +219,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     @property
     def value(self):
@@ -250,11 +242,11 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["value"]
+        return self['value']
 
     @value.setter
     def value(self, val):
-        self["value"] = val
+        self['value'] = val
 
     @property
     def _prop_descriptions(self):
@@ -314,23 +306,21 @@ class Contours(_BaseTraceHierarchyType):
             array of two numbers where the first is the lower bound
             and the second is the upper bound.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        coloring=None,
-        end=None,
-        labelfont=None,
-        labelformat=None,
-        operation=None,
-        showlabels=None,
-        showlines=None,
-        size=None,
-        start=None,
-        type=None,
-        value=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            coloring=None,
+            end=None,
+            labelfont=None,
+            labelformat=None,
+            operation=None,
+            showlabels=None,
+            showlines=None,
+            size=None,
+            start=None,
+            type=None,
+            value=None,
+            **kwargs
+        ):
         """
         Construct a new Contours object
 
@@ -399,9 +389,9 @@ class Contours(_BaseTraceHierarchyType):
         -------
         Contours
         """
-        super().__init__("contours")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('contours')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -411,26 +401,26 @@ class Contours(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.contourcarpet.Contours
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.contourcarpet.Contours`"""
-            )
+an instance of :class:`plotly.graph_objs.contourcarpet.Contours`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("coloring", arg, coloring)
-        self._set_property("end", arg, end)
-        self._set_property("labelfont", arg, labelfont)
-        self._set_property("labelformat", arg, labelformat)
-        self._set_property("operation", arg, operation)
-        self._set_property("showlabels", arg, showlabels)
-        self._set_property("showlines", arg, showlines)
-        self._set_property("size", arg, size)
-        self._set_property("start", arg, start)
-        self._set_property("type", arg, type)
-        self._set_property("value", arg, value)
+
+        self._set_property('coloring', arg, coloring)
+        self._set_property('end', arg, end)
+        self._set_property('labelfont', arg, labelfont)
+        self._set_property('labelformat', arg, labelformat)
+        self._set_property('operation', arg, operation)
+        self._set_property('showlabels', arg, showlabels)
+        self._set_property('showlines', arg, showlines)
+        self._set_property('size', arg, size)
+        self._set_property('start', arg, start)
+        self._set_property('type', arg, type)
+        self._set_property('value', arg, value)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

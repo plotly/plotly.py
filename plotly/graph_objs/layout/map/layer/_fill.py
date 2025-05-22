@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Fill(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.map.layer"
-    _path_str = "layout.map.layer.fill"
+    _parent_path_str = 'layout.map.layer'
+    _path_str = 'layout.map.layer.fill'
     _valid_props = {"outlinecolor"}
 
     @property
@@ -28,11 +32,11 @@ class Fill(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["outlinecolor"]
+        return self['outlinecolor']
 
     @outlinecolor.setter
     def outlinecolor(self, val):
-        self["outlinecolor"] = val
+        self['outlinecolor'] = val
 
     @property
     def _prop_descriptions(self):
@@ -42,8 +46,11 @@ class Fill(_BaseLayoutHierarchyType):
             outline-color). Has an effect only when `type` is set
             to "fill".
         """
-
-    def __init__(self, arg=None, outlinecolor=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            outlinecolor=None,
+            **kwargs
+        ):
         """
         Construct a new Fill object
 
@@ -62,9 +69,9 @@ class Fill(_BaseLayoutHierarchyType):
         -------
         Fill
         """
-        super().__init__("fill")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('fill')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -74,16 +81,16 @@ class Fill(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.layer.Fill
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.layer.Fill`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.layer.Fill`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("outlinecolor", arg, outlinecolor)
+
+        self._set_property('outlinecolor', arg, outlinecolor)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

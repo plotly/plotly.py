@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Increasing(_BaseTraceHierarchyType):
 
-    _parent_path_str = "ohlc"
-    _path_str = "ohlc.increasing"
+    _parent_path_str = 'ohlc'
+    _path_str = 'ohlc.increasing'
     _valid_props = {"line"}
 
     @property
@@ -24,11 +28,11 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.ohlc.increasing.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     @property
     def _prop_descriptions(self):
@@ -37,8 +41,11 @@ class Increasing(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.ohlc.increasing.Line`
             instance or dict with compatible properties
         """
-
-    def __init__(self, arg=None, line=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            line=None,
+            **kwargs
+        ):
         """
         Construct a new Increasing object
 
@@ -56,9 +63,9 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         Increasing
         """
-        super().__init__("increasing")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('increasing')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -68,16 +75,16 @@ class Increasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.ohlc.Increasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.ohlc.Increasing`"""
-            )
+an instance of :class:`plotly.graph_objs.ohlc.Increasing`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("line", arg, line)
+
+        self._set_property('line', arg, line)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Center(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.geo"
-    _path_str = "layout.geo.center"
+    _parent_path_str = 'layout.geo'
+    _path_str = 'layout.geo.center'
     _valid_props = {"lat", "lon"}
 
     @property
@@ -25,11 +29,11 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["lat"]
+        return self['lat']
 
     @lat.setter
     def lat(self, val):
-        self["lat"] = val
+        self['lat'] = val
 
     @property
     def lon(self):
@@ -46,11 +50,11 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["lon"]
+        return self['lon']
 
     @lon.setter
     def lon(self, val):
-        self["lon"] = val
+        self['lon'] = val
 
     @property
     def _prop_descriptions(self):
@@ -65,8 +69,12 @@ class Center(_BaseLayoutHierarchyType):
             longitude range for scoped projection and above
             `projection.rotation.lon` otherwise.
         """
-
-    def __init__(self, arg=None, lat=None, lon=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            lat=None,
+            lon=None,
+            **kwargs
+        ):
         """
         Construct a new Center object
 
@@ -90,9 +98,9 @@ class Center(_BaseLayoutHierarchyType):
         -------
         Center
         """
-        super().__init__("center")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('center')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -102,17 +110,17 @@ class Center(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.geo.Center
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.Center`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.geo.Center`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("lat", arg, lat)
-        self._set_property("lon", arg, lon)
+
+        self._set_property('lat', arg, lat)
+        self._set_property('lon', arg, lon)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
