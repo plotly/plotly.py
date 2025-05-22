@@ -82,12 +82,16 @@ def build_from_imports_py(rel_modules=(), rel_classes=(), init_extra=""):
 
     result = f"""\
 import sys
-from _plotly_utils.importers import relative_import
-__all__, __getattr__, __dir__ = relative_import(
-    __name__,
-    {repr(rel_modules)},
-    {repr(rel_classes)}
-)
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    {imports_str}
+else:
+    from _plotly_utils.importers import relative_import
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        {repr(rel_modules)},
+        {repr(rel_classes)}
+    )
 
 {init_extra}
 """
