@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Increasing(_BaseTraceHierarchyType):
 
-    _parent_path_str = "indicator.delta"
-    _path_str = "indicator.delta.increasing"
+    _parent_path_str = 'indicator.delta'
+    _path_str = 'indicator.delta.increasing'
     _valid_props = {"color", "symbol"}
 
     @property
@@ -27,11 +31,11 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     @property
     def symbol(self):
@@ -46,11 +50,11 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["symbol"]
+        return self['symbol']
 
     @symbol.setter
     def symbol(self, val):
-        self["symbol"] = val
+        self['symbol'] = val
 
     @property
     def _prop_descriptions(self):
@@ -60,8 +64,12 @@ class Increasing(_BaseTraceHierarchyType):
         symbol
             Sets the symbol to display for increasing value
         """
-
-    def __init__(self, arg=None, color=None, symbol=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            color=None,
+            symbol=None,
+            **kwargs
+        ):
         """
         Construct a new Increasing object
 
@@ -80,9 +88,9 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         Increasing
         """
-        super().__init__("increasing")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('increasing')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -92,17 +100,17 @@ class Increasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.delta.Increasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.delta.Increasing`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.delta.Increasing`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("color", arg, color)
-        self._set_property("symbol", arg, symbol)
+
+        self._set_property('color', arg, color)
+        self._set_property('symbol', arg, symbol)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

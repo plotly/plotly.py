@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,51 +11,9 @@ import copy as _copy
 
 class Aaxis(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.ternary"
-    _path_str = "layout.ternary.aaxis"
-    _valid_props = {
-        "color",
-        "dtick",
-        "exponentformat",
-        "gridcolor",
-        "griddash",
-        "gridwidth",
-        "hoverformat",
-        "labelalias",
-        "layer",
-        "linecolor",
-        "linewidth",
-        "min",
-        "minexponent",
-        "nticks",
-        "separatethousands",
-        "showexponent",
-        "showgrid",
-        "showline",
-        "showticklabels",
-        "showtickprefix",
-        "showticksuffix",
-        "tick0",
-        "tickangle",
-        "tickcolor",
-        "tickfont",
-        "tickformat",
-        "tickformatstopdefaults",
-        "tickformatstops",
-        "ticklabelstep",
-        "ticklen",
-        "tickmode",
-        "tickprefix",
-        "ticks",
-        "ticksuffix",
-        "ticktext",
-        "ticktextsrc",
-        "tickvals",
-        "tickvalssrc",
-        "tickwidth",
-        "title",
-        "uirevision",
-    }
+    _parent_path_str = 'layout.ternary'
+    _path_str = 'layout.ternary.aaxis'
+    _valid_props = {"color", "dtick", "exponentformat", "gridcolor", "griddash", "gridwidth", "hoverformat", "labelalias", "layer", "linecolor", "linewidth", "min", "minexponent", "nticks", "separatethousands", "showexponent", "showgrid", "showline", "showticklabels", "showtickprefix", "showticksuffix", "tick0", "tickangle", "tickcolor", "tickfont", "tickformat", "tickformatstopdefaults", "tickformatstops", "ticklabelstep", "ticklen", "tickmode", "tickprefix", "ticks", "ticksuffix", "ticktext", "ticktextsrc", "tickvals", "tickvalssrc", "tickwidth", "title", "uirevision"}
 
     @property
     def color(self):
@@ -72,11 +34,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     @property
     def dtick(self):
@@ -108,11 +70,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["dtick"]
+        return self['dtick']
 
     @dtick.setter
     def dtick(self, val):
-        self["dtick"] = val
+        self['dtick'] = val
 
     @property
     def exponentformat(self):
@@ -131,11 +93,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["exponentformat"]
+        return self['exponentformat']
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self["exponentformat"] = val
+        self['exponentformat'] = val
 
     @property
     def gridcolor(self):
@@ -153,11 +115,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["gridcolor"]
+        return self['gridcolor']
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self["gridcolor"] = val
+        self['gridcolor'] = val
 
     @property
     def griddash(self):
@@ -177,11 +139,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["griddash"]
+        return self['griddash']
 
     @griddash.setter
     def griddash(self, val):
-        self["griddash"] = val
+        self['griddash'] = val
 
     @property
     def gridwidth(self):
@@ -195,11 +157,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["gridwidth"]
+        return self['gridwidth']
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self["gridwidth"] = val
+        self['gridwidth'] = val
 
     @property
     def hoverformat(self):
@@ -223,11 +185,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["hoverformat"]
+        return self['hoverformat']
 
     @hoverformat.setter
     def hoverformat(self, val):
-        self["hoverformat"] = val
+        self['hoverformat'] = val
 
     @property
     def labelalias(self):
@@ -248,11 +210,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["labelalias"]
+        return self['labelalias']
 
     @labelalias.setter
     def labelalias(self, val):
-        self["labelalias"] = val
+        self['labelalias'] = val
 
     @property
     def layer(self):
@@ -272,11 +234,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["layer"]
+        return self['layer']
 
     @layer.setter
     def layer(self, val):
-        self["layer"] = val
+        self['layer'] = val
 
     @property
     def linecolor(self):
@@ -294,11 +256,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["linecolor"]
+        return self['linecolor']
 
     @linecolor.setter
     def linecolor(self, val):
-        self["linecolor"] = val
+        self['linecolor'] = val
 
     @property
     def linewidth(self):
@@ -312,11 +274,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["linewidth"]
+        return self['linewidth']
 
     @linewidth.setter
     def linewidth(self, val):
-        self["linewidth"] = val
+        self['linewidth'] = val
 
     @property
     def min(self):
@@ -332,11 +294,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["min"]
+        return self['min']
 
     @min.setter
     def min(self, val):
-        self["min"] = val
+        self['min'] = val
 
     @property
     def minexponent(self):
@@ -351,11 +313,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["minexponent"]
+        return self['minexponent']
 
     @minexponent.setter
     def minexponent(self, val):
-        self["minexponent"] = val
+        self['minexponent'] = val
 
     @property
     def nticks(self):
@@ -373,11 +335,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["nticks"]
+        return self['nticks']
 
     @nticks.setter
     def nticks(self, val):
-        self["nticks"] = val
+        self['nticks'] = val
 
     @property
     def separatethousands(self):
@@ -391,11 +353,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["separatethousands"]
+        return self['separatethousands']
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self["separatethousands"] = val
+        self['separatethousands'] = val
 
     @property
     def showexponent(self):
@@ -413,11 +375,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["showexponent"]
+        return self['showexponent']
 
     @showexponent.setter
     def showexponent(self, val):
-        self["showexponent"] = val
+        self['showexponent'] = val
 
     @property
     def showgrid(self):
@@ -432,11 +394,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showgrid"]
+        return self['showgrid']
 
     @showgrid.setter
     def showgrid(self, val):
-        self["showgrid"] = val
+        self['showgrid'] = val
 
     @property
     def showline(self):
@@ -450,11 +412,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showline"]
+        return self['showline']
 
     @showline.setter
     def showline(self, val):
-        self["showline"] = val
+        self['showline'] = val
 
     @property
     def showticklabels(self):
@@ -468,11 +430,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showticklabels"]
+        return self['showticklabels']
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self["showticklabels"] = val
+        self['showticklabels'] = val
 
     @property
     def showtickprefix(self):
@@ -490,11 +452,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["showtickprefix"]
+        return self['showtickprefix']
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self["showtickprefix"] = val
+        self['showtickprefix'] = val
 
     @property
     def showticksuffix(self):
@@ -509,11 +471,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["showticksuffix"]
+        return self['showticksuffix']
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self["showticksuffix"] = val
+        self['showticksuffix'] = val
 
     @property
     def tick0(self):
@@ -534,11 +496,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["tick0"]
+        return self['tick0']
 
     @tick0.setter
     def tick0(self, val):
-        self["tick0"] = val
+        self['tick0'] = val
 
     @property
     def tickangle(self):
@@ -556,11 +518,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["tickangle"]
+        return self['tickangle']
 
     @tickangle.setter
     def tickangle(self, val):
-        self["tickangle"] = val
+        self['tickangle'] = val
 
     @property
     def tickcolor(self):
@@ -578,11 +540,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["tickcolor"]
+        return self['tickcolor']
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self["tickcolor"] = val
+        self['tickcolor'] = val
 
     @property
     def tickfont(self):
@@ -599,11 +561,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.aaxis.Tickfont
         """
-        return self["tickfont"]
+        return self['tickfont']
 
     @tickfont.setter
     def tickfont(self, val):
-        self["tickfont"] = val
+        self['tickfont'] = val
 
     @property
     def tickformat(self):
@@ -627,11 +589,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["tickformat"]
+        return self['tickformat']
 
     @tickformat.setter
     def tickformat(self, val):
-        self["tickformat"] = val
+        self['tickformat'] = val
 
     @property
     def tickformatstops(self):
@@ -646,11 +608,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.ternary.aaxis.Tickformatstop]
         """
-        return self["tickformatstops"]
+        return self['tickformatstops']
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self["tickformatstops"] = val
+        self['tickformatstops'] = val
 
     @property
     def tickformatstopdefaults(self):
@@ -670,11 +632,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.aaxis.Tickformatstop
         """
-        return self["tickformatstopdefaults"]
+        return self['tickformatstopdefaults']
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self["tickformatstopdefaults"] = val
+        self['tickformatstopdefaults'] = val
 
     @property
     def ticklabelstep(self):
@@ -694,11 +656,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["ticklabelstep"]
+        return self['ticklabelstep']
 
     @ticklabelstep.setter
     def ticklabelstep(self, val):
-        self["ticklabelstep"] = val
+        self['ticklabelstep'] = val
 
     @property
     def ticklen(self):
@@ -712,11 +674,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["ticklen"]
+        return self['ticklen']
 
     @ticklen.setter
     def ticklen(self, val):
-        self["ticklen"] = val
+        self['ticklen'] = val
 
     @property
     def tickmode(self):
@@ -737,11 +699,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["tickmode"]
+        return self['tickmode']
 
     @tickmode.setter
     def tickmode(self, val):
-        self["tickmode"] = val
+        self['tickmode'] = val
 
     @property
     def tickprefix(self):
@@ -756,11 +718,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["tickprefix"]
+        return self['tickprefix']
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self["tickprefix"] = val
+        self['tickprefix'] = val
 
     @property
     def ticks(self):
@@ -777,11 +739,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["ticks"]
+        return self['ticks']
 
     @ticks.setter
     def ticks(self, val):
-        self["ticks"] = val
+        self['ticks'] = val
 
     @property
     def ticksuffix(self):
@@ -796,11 +758,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["ticksuffix"]
+        return self['ticksuffix']
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self["ticksuffix"] = val
+        self['ticksuffix'] = val
 
     @property
     def ticktext(self):
@@ -816,11 +778,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["ticktext"]
+        return self['ticktext']
 
     @ticktext.setter
     def ticktext(self, val):
-        self["ticktext"] = val
+        self['ticktext'] = val
 
     @property
     def ticktextsrc(self):
@@ -834,11 +796,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["ticktextsrc"]
+        return self['ticktextsrc']
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
+        self['ticktextsrc'] = val
 
     @property
     def tickvals(self):
@@ -853,11 +815,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["tickvals"]
+        return self['tickvals']
 
     @tickvals.setter
     def tickvals(self, val):
-        self["tickvals"] = val
+        self['tickvals'] = val
 
     @property
     def tickvalssrc(self):
@@ -871,11 +833,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["tickvalssrc"]
+        return self['tickvalssrc']
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
+        self['tickvalssrc'] = val
 
     @property
     def tickwidth(self):
@@ -889,11 +851,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["tickwidth"]
+        return self['tickwidth']
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self["tickwidth"] = val
+        self['tickwidth'] = val
 
     @property
     def title(self):
@@ -908,11 +870,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.aaxis.Title
         """
-        return self["title"]
+        return self['title']
 
     @title.setter
     def title(self, val):
-        self["title"] = val
+        self['title'] = val
 
     @property
     def uirevision(self):
@@ -927,11 +889,11 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     @property
     def _prop_descriptions(self):
@@ -1143,53 +1105,51 @@ class Aaxis(_BaseLayoutHierarchyType):
             `min`, and `title` if in `editable: true`
             configuration. Defaults to `ternary<N>.uirevision`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        color=None,
-        dtick=None,
-        exponentformat=None,
-        gridcolor=None,
-        griddash=None,
-        gridwidth=None,
-        hoverformat=None,
-        labelalias=None,
-        layer=None,
-        linecolor=None,
-        linewidth=None,
-        min=None,
-        minexponent=None,
-        nticks=None,
-        separatethousands=None,
-        showexponent=None,
-        showgrid=None,
-        showline=None,
-        showticklabels=None,
-        showtickprefix=None,
-        showticksuffix=None,
-        tick0=None,
-        tickangle=None,
-        tickcolor=None,
-        tickfont=None,
-        tickformat=None,
-        tickformatstops=None,
-        tickformatstopdefaults=None,
-        ticklabelstep=None,
-        ticklen=None,
-        tickmode=None,
-        tickprefix=None,
-        ticks=None,
-        ticksuffix=None,
-        ticktext=None,
-        ticktextsrc=None,
-        tickvals=None,
-        tickvalssrc=None,
-        tickwidth=None,
-        title=None,
-        uirevision=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            color=None,
+            dtick=None,
+            exponentformat=None,
+            gridcolor=None,
+            griddash=None,
+            gridwidth=None,
+            hoverformat=None,
+            labelalias=None,
+            layer=None,
+            linecolor=None,
+            linewidth=None,
+            min=None,
+            minexponent=None,
+            nticks=None,
+            separatethousands=None,
+            showexponent=None,
+            showgrid=None,
+            showline=None,
+            showticklabels=None,
+            showtickprefix=None,
+            showticksuffix=None,
+            tick0=None,
+            tickangle=None,
+            tickcolor=None,
+            tickfont=None,
+            tickformat=None,
+            tickformatstops=None,
+            tickformatstopdefaults=None,
+            ticklabelstep=None,
+            ticklen=None,
+            tickmode=None,
+            tickprefix=None,
+            ticks=None,
+            ticksuffix=None,
+            ticktext=None,
+            ticktextsrc=None,
+            tickvals=None,
+            tickvalssrc=None,
+            tickwidth=None,
+            title=None,
+            uirevision=None,
+            **kwargs
+        ):
         """
         Construct a new Aaxis object
 
@@ -1410,9 +1370,9 @@ class Aaxis(_BaseLayoutHierarchyType):
         -------
         Aaxis
         """
-        super().__init__("aaxis")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('aaxis')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -1422,56 +1382,56 @@ class Aaxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.ternary.Aaxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.ternary.Aaxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.ternary.Aaxis`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("color", arg, color)
-        self._set_property("dtick", arg, dtick)
-        self._set_property("exponentformat", arg, exponentformat)
-        self._set_property("gridcolor", arg, gridcolor)
-        self._set_property("griddash", arg, griddash)
-        self._set_property("gridwidth", arg, gridwidth)
-        self._set_property("hoverformat", arg, hoverformat)
-        self._set_property("labelalias", arg, labelalias)
-        self._set_property("layer", arg, layer)
-        self._set_property("linecolor", arg, linecolor)
-        self._set_property("linewidth", arg, linewidth)
-        self._set_property("min", arg, min)
-        self._set_property("minexponent", arg, minexponent)
-        self._set_property("nticks", arg, nticks)
-        self._set_property("separatethousands", arg, separatethousands)
-        self._set_property("showexponent", arg, showexponent)
-        self._set_property("showgrid", arg, showgrid)
-        self._set_property("showline", arg, showline)
-        self._set_property("showticklabels", arg, showticklabels)
-        self._set_property("showtickprefix", arg, showtickprefix)
-        self._set_property("showticksuffix", arg, showticksuffix)
-        self._set_property("tick0", arg, tick0)
-        self._set_property("tickangle", arg, tickangle)
-        self._set_property("tickcolor", arg, tickcolor)
-        self._set_property("tickfont", arg, tickfont)
-        self._set_property("tickformat", arg, tickformat)
-        self._set_property("tickformatstops", arg, tickformatstops)
-        self._set_property("tickformatstopdefaults", arg, tickformatstopdefaults)
-        self._set_property("ticklabelstep", arg, ticklabelstep)
-        self._set_property("ticklen", arg, ticklen)
-        self._set_property("tickmode", arg, tickmode)
-        self._set_property("tickprefix", arg, tickprefix)
-        self._set_property("ticks", arg, ticks)
-        self._set_property("ticksuffix", arg, ticksuffix)
-        self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
-        self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
-        self._set_property("tickwidth", arg, tickwidth)
-        self._set_property("title", arg, title)
-        self._set_property("uirevision", arg, uirevision)
+
+        self._set_property('color', arg, color)
+        self._set_property('dtick', arg, dtick)
+        self._set_property('exponentformat', arg, exponentformat)
+        self._set_property('gridcolor', arg, gridcolor)
+        self._set_property('griddash', arg, griddash)
+        self._set_property('gridwidth', arg, gridwidth)
+        self._set_property('hoverformat', arg, hoverformat)
+        self._set_property('labelalias', arg, labelalias)
+        self._set_property('layer', arg, layer)
+        self._set_property('linecolor', arg, linecolor)
+        self._set_property('linewidth', arg, linewidth)
+        self._set_property('min', arg, min)
+        self._set_property('minexponent', arg, minexponent)
+        self._set_property('nticks', arg, nticks)
+        self._set_property('separatethousands', arg, separatethousands)
+        self._set_property('showexponent', arg, showexponent)
+        self._set_property('showgrid', arg, showgrid)
+        self._set_property('showline', arg, showline)
+        self._set_property('showticklabels', arg, showticklabels)
+        self._set_property('showtickprefix', arg, showtickprefix)
+        self._set_property('showticksuffix', arg, showticksuffix)
+        self._set_property('tick0', arg, tick0)
+        self._set_property('tickangle', arg, tickangle)
+        self._set_property('tickcolor', arg, tickcolor)
+        self._set_property('tickfont', arg, tickfont)
+        self._set_property('tickformat', arg, tickformat)
+        self._set_property('tickformatstops', arg, tickformatstops)
+        self._set_property('tickformatstopdefaults', arg, tickformatstopdefaults)
+        self._set_property('ticklabelstep', arg, ticklabelstep)
+        self._set_property('ticklen', arg, ticklen)
+        self._set_property('tickmode', arg, tickmode)
+        self._set_property('tickprefix', arg, tickprefix)
+        self._set_property('ticks', arg, ticks)
+        self._set_property('ticksuffix', arg, ticksuffix)
+        self._set_property('ticktext', arg, ticktext)
+        self._set_property('ticktextsrc', arg, ticktextsrc)
+        self._set_property('tickvals', arg, tickvals)
+        self._set_property('tickvalssrc', arg, tickvalssrc)
+        self._set_property('tickwidth', arg, tickwidth)
+        self._set_property('title', arg, title)
+        self._set_property('uirevision', arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

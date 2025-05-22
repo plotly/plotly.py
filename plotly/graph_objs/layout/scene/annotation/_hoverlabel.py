@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Hoverlabel(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.scene.annotation"
-    _path_str = "layout.scene.annotation.hoverlabel"
+    _parent_path_str = 'layout.scene.annotation'
+    _path_str = 'layout.scene.annotation.hoverlabel'
     _valid_props = {"bgcolor", "bordercolor", "font"}
 
     @property
@@ -29,11 +33,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["bgcolor"]
+        return self['bgcolor']
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self["bgcolor"] = val
+        self['bgcolor'] = val
 
     @property
     def bordercolor(self):
@@ -53,11 +57,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["bordercolor"]
+        return self['bordercolor']
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self["bordercolor"] = val
+        self['bordercolor'] = val
 
     @property
     def font(self):
@@ -75,11 +79,11 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.annotation.hoverlabel.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     @property
     def _prop_descriptions(self):
@@ -97,8 +101,13 @@ class Hoverlabel(_BaseLayoutHierarchyType):
             global hover font and size, with color from
             `hoverlabel.bordercolor`.
         """
-
-    def __init__(self, arg=None, bgcolor=None, bordercolor=None, font=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            bgcolor=None,
+            bordercolor=None,
+            font=None,
+            **kwargs
+        ):
         """
         Construct a new Hoverlabel object
 
@@ -125,9 +134,9 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         Hoverlabel
         """
-        super().__init__("hoverlabel")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('hoverlabel')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -137,18 +146,18 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.scene.annotation.Hoverlabel
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.annotation.Hoverlabel`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.scene.annotation.Hoverlabel`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("bgcolor", arg, bgcolor)
-        self._set_property("bordercolor", arg, bordercolor)
-        self._set_property("font", arg, font)
+
+        self._set_property('bgcolor', arg, bgcolor)
+        self._set_property('bordercolor', arg, bordercolor)
+        self._set_property('font', arg, font)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

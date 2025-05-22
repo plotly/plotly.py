@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,85 +11,9 @@ import copy as _copy
 
 class Scatter(_BaseTraceType):
 
-    _parent_path_str = ""
-    _path_str = "scatter"
-    _valid_props = {
-        "alignmentgroup",
-        "cliponaxis",
-        "connectgaps",
-        "customdata",
-        "customdatasrc",
-        "dx",
-        "dy",
-        "error_x",
-        "error_y",
-        "fill",
-        "fillcolor",
-        "fillgradient",
-        "fillpattern",
-        "groupnorm",
-        "hoverinfo",
-        "hoverinfosrc",
-        "hoverlabel",
-        "hoveron",
-        "hovertemplate",
-        "hovertemplatesrc",
-        "hovertext",
-        "hovertextsrc",
-        "ids",
-        "idssrc",
-        "legend",
-        "legendgroup",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "line",
-        "marker",
-        "meta",
-        "metasrc",
-        "mode",
-        "name",
-        "offsetgroup",
-        "opacity",
-        "orientation",
-        "selected",
-        "selectedpoints",
-        "showlegend",
-        "stackgaps",
-        "stackgroup",
-        "stream",
-        "text",
-        "textfont",
-        "textposition",
-        "textpositionsrc",
-        "textsrc",
-        "texttemplate",
-        "texttemplatesrc",
-        "type",
-        "uid",
-        "uirevision",
-        "unselected",
-        "visible",
-        "x",
-        "x0",
-        "xaxis",
-        "xcalendar",
-        "xhoverformat",
-        "xperiod",
-        "xperiod0",
-        "xperiodalignment",
-        "xsrc",
-        "y",
-        "y0",
-        "yaxis",
-        "ycalendar",
-        "yhoverformat",
-        "yperiod",
-        "yperiod0",
-        "yperiodalignment",
-        "ysrc",
-        "zorder",
-    }
+    _parent_path_str = ''
+    _path_str = 'scatter'
+    _valid_props = {"alignmentgroup", "cliponaxis", "connectgaps", "customdata", "customdatasrc", "dx", "dy", "error_x", "error_y", "fill", "fillcolor", "fillgradient", "fillpattern", "groupnorm", "hoverinfo", "hoverinfosrc", "hoverlabel", "hoveron", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "marker", "meta", "metasrc", "mode", "name", "offsetgroup", "opacity", "orientation", "selected", "selectedpoints", "showlegend", "stackgaps", "stackgroup", "stream", "text", "textfont", "textposition", "textpositionsrc", "textsrc", "texttemplate", "texttemplatesrc", "type", "uid", "uirevision", "unselected", "visible", "x", "x0", "xaxis", "xcalendar", "xhoverformat", "xperiod", "xperiod0", "xperiodalignment", "xsrc", "y", "y0", "yaxis", "ycalendar", "yhoverformat", "yperiod", "yperiod0", "yperiodalignment", "ysrc", "zorder"}
 
     @property
     def alignmentgroup(self):
@@ -102,11 +30,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["alignmentgroup"]
+        return self['alignmentgroup']
 
     @alignmentgroup.setter
     def alignmentgroup(self, val):
-        self["alignmentgroup"] = val
+        self['alignmentgroup'] = val
 
     @property
     def cliponaxis(self):
@@ -123,11 +51,11 @@ class Scatter(_BaseTraceType):
         -------
         bool
         """
-        return self["cliponaxis"]
+        return self['cliponaxis']
 
     @cliponaxis.setter
     def cliponaxis(self, val):
-        self["cliponaxis"] = val
+        self['cliponaxis'] = val
 
     @property
     def connectgaps(self):
@@ -142,11 +70,11 @@ class Scatter(_BaseTraceType):
         -------
         bool
         """
-        return self["connectgaps"]
+        return self['connectgaps']
 
     @connectgaps.setter
     def connectgaps(self, val):
-        self["connectgaps"] = val
+        self['connectgaps'] = val
 
     @property
     def customdata(self):
@@ -163,11 +91,11 @@ class Scatter(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     @property
     def customdatasrc(self):
@@ -182,11 +110,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     @property
     def dx(self):
@@ -200,11 +128,11 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self["dx"]
+        return self['dx']
 
     @dx.setter
     def dx(self, val):
-        self["dx"] = val
+        self['dx'] = val
 
     @property
     def dy(self):
@@ -218,11 +146,11 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self["dy"]
+        return self['dy']
 
     @dy.setter
     def dy(self, val):
-        self["dy"] = val
+        self['dy'] = val
 
     @property
     def error_x(self):
@@ -237,11 +165,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.ErrorX
         """
-        return self["error_x"]
+        return self['error_x']
 
     @error_x.setter
     def error_x(self, val):
-        self["error_x"] = val
+        self['error_x'] = val
 
     @property
     def error_y(self):
@@ -256,11 +184,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.ErrorY
         """
-        return self["error_y"]
+        return self['error_y']
 
     @error_y.setter
     def error_y(self, val):
-        self["error_y"] = val
+        self['error_y'] = val
 
     @property
     def fill(self):
@@ -294,11 +222,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     @property
     def fillcolor(self):
@@ -320,11 +248,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["fillcolor"]
+        return self['fillcolor']
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self["fillcolor"] = val
+        self['fillcolor'] = val
 
     @property
     def fillgradient(self):
@@ -342,11 +270,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Fillgradient
         """
-        return self["fillgradient"]
+        return self['fillgradient']
 
     @fillgradient.setter
     def fillgradient(self, val):
-        self["fillgradient"] = val
+        self['fillgradient'] = val
 
     @property
     def fillpattern(self):
@@ -363,11 +291,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Fillpattern
         """
-        return self["fillpattern"]
+        return self['fillpattern']
 
     @fillpattern.setter
     def fillpattern(self, val):
-        self["fillpattern"] = val
+        self['fillpattern'] = val
 
     @property
     def groupnorm(self):
@@ -390,11 +318,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["groupnorm"]
+        return self['groupnorm']
 
     @groupnorm.setter
     def groupnorm(self, val):
-        self["groupnorm"] = val
+        self['groupnorm'] = val
 
     @property
     def hoverinfo(self):
@@ -414,11 +342,11 @@ class Scatter(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     @property
     def hoverinfosrc(self):
@@ -433,11 +361,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["hoverinfosrc"]
+        return self['hoverinfosrc']
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
+        self['hoverinfosrc'] = val
 
     @property
     def hoverlabel(self):
@@ -452,11 +380,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     @property
     def hoveron(self):
@@ -475,11 +403,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["hoveron"]
+        return self['hoveron']
 
     @hoveron.setter
     def hoveron(self, val):
-        self["hoveron"] = val
+        self['hoveron'] = val
 
     @property
     def hovertemplate(self):
@@ -517,11 +445,11 @@ class Scatter(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertemplate"]
+        return self['hovertemplate']
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self["hovertemplate"] = val
+        self['hovertemplate'] = val
 
     @property
     def hovertemplatesrc(self):
@@ -536,11 +464,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["hovertemplatesrc"]
+        return self['hovertemplatesrc']
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+        self['hovertemplatesrc'] = val
 
     @property
     def hovertext(self):
@@ -560,11 +488,11 @@ class Scatter(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertext"]
+        return self['hovertext']
 
     @hovertext.setter
     def hovertext(self, val):
-        self["hovertext"] = val
+        self['hovertext'] = val
 
     @property
     def hovertextsrc(self):
@@ -579,11 +507,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["hovertextsrc"]
+        return self['hovertextsrc']
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
+        self['hovertextsrc'] = val
 
     @property
     def ids(self):
@@ -599,11 +527,11 @@ class Scatter(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     @property
     def idssrc(self):
@@ -617,11 +545,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     @property
     def legend(self):
@@ -640,11 +568,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     @property
     def legendgroup(self):
@@ -661,11 +589,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["legendgroup"]
+        return self['legendgroup']
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self["legendgroup"] = val
+        self['legendgroup'] = val
 
     @property
     def legendgrouptitle(self):
@@ -680,11 +608,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     @property
     def legendrank(self):
@@ -705,11 +633,11 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     @property
     def legendwidth(self):
@@ -724,11 +652,11 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     @property
     def line(self):
@@ -743,11 +671,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     @property
     def marker(self):
@@ -762,11 +690,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Marker
         """
-        return self["marker"]
+        return self['marker']
 
     @marker.setter
     def marker(self, val):
-        self["marker"] = val
+        self['marker'] = val
 
     @property
     def meta(self):
@@ -788,11 +716,11 @@ class Scatter(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     @property
     def metasrc(self):
@@ -806,11 +734,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     @property
     def mode(self):
@@ -832,11 +760,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["mode"]
+        return self['mode']
 
     @mode.setter
     def mode(self, val):
-        self["mode"] = val
+        self['mode'] = val
 
     @property
     def name(self):
@@ -852,11 +780,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     @property
     def offsetgroup(self):
@@ -873,11 +801,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["offsetgroup"]
+        return self['offsetgroup']
 
     @offsetgroup.setter
     def offsetgroup(self, val):
-        self["offsetgroup"] = val
+        self['offsetgroup'] = val
 
     @property
     def opacity(self):
@@ -891,11 +819,11 @@ class Scatter(_BaseTraceType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     @property
     def orientation(self):
@@ -916,11 +844,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["orientation"]
+        return self['orientation']
 
     @orientation.setter
     def orientation(self, val):
-        self["orientation"] = val
+        self['orientation'] = val
 
     @property
     def selected(self):
@@ -935,11 +863,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Selected
         """
-        return self["selected"]
+        return self['selected']
 
     @selected.setter
     def selected(self, val):
-        self["selected"] = val
+        self['selected'] = val
 
     @property
     def selectedpoints(self):
@@ -957,11 +885,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["selectedpoints"]
+        return self['selectedpoints']
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self["selectedpoints"] = val
+        self['selectedpoints'] = val
 
     @property
     def showlegend(self):
@@ -976,11 +904,11 @@ class Scatter(_BaseTraceType):
         -------
         bool
         """
-        return self["showlegend"]
+        return self['showlegend']
 
     @showlegend.setter
     def showlegend(self, val):
-        self["showlegend"] = val
+        self['showlegend'] = val
 
     @property
     def stackgaps(self):
@@ -1002,11 +930,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["stackgaps"]
+        return self['stackgaps']
 
     @stackgaps.setter
     def stackgaps(self, val):
-        self["stackgaps"] = val
+        self['stackgaps'] = val
 
     @property
     def stackgroup(self):
@@ -1032,11 +960,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["stackgroup"]
+        return self['stackgroup']
 
     @stackgroup.setter
     def stackgroup(self, val):
-        self["stackgroup"] = val
+        self['stackgroup'] = val
 
     @property
     def stream(self):
@@ -1051,11 +979,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     @property
     def text(self):
@@ -1076,11 +1004,11 @@ class Scatter(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["text"]
+        return self['text']
 
     @text.setter
     def text(self, val):
-        self["text"] = val
+        self['text'] = val
 
     @property
     def textfont(self):
@@ -1097,11 +1025,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     @property
     def textposition(self):
@@ -1120,11 +1048,11 @@ class Scatter(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["textposition"]
+        return self['textposition']
 
     @textposition.setter
     def textposition(self, val):
-        self["textposition"] = val
+        self['textposition'] = val
 
     @property
     def textpositionsrc(self):
@@ -1139,11 +1067,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["textpositionsrc"]
+        return self['textpositionsrc']
 
     @textpositionsrc.setter
     def textpositionsrc(self, val):
-        self["textpositionsrc"] = val
+        self['textpositionsrc'] = val
 
     @property
     def textsrc(self):
@@ -1157,11 +1085,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["textsrc"]
+        return self['textsrc']
 
     @textsrc.setter
     def textsrc(self, val):
-        self["textsrc"] = val
+        self['textsrc'] = val
 
     @property
     def texttemplate(self):
@@ -1188,11 +1116,11 @@ class Scatter(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["texttemplate"]
+        return self['texttemplate']
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self["texttemplate"] = val
+        self['texttemplate'] = val
 
     @property
     def texttemplatesrc(self):
@@ -1207,11 +1135,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["texttemplatesrc"]
+        return self['texttemplatesrc']
 
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
-        self["texttemplatesrc"] = val
+        self['texttemplatesrc'] = val
 
     @property
     def uid(self):
@@ -1227,11 +1155,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     @property
     def uirevision(self):
@@ -1258,11 +1186,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     @property
     def unselected(self):
@@ -1277,11 +1205,11 @@ class Scatter(_BaseTraceType):
         -------
         plotly.graph_objs.scatter.Unselected
         """
-        return self["unselected"]
+        return self['unselected']
 
     @unselected.setter
     def unselected(self, val):
-        self["unselected"] = val
+        self['unselected'] = val
 
     @property
     def visible(self):
@@ -1298,11 +1226,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     @property
     def x(self):
@@ -1316,11 +1244,11 @@ class Scatter(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     @property
     def x0(self):
@@ -1335,11 +1263,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["x0"]
+        return self['x0']
 
     @x0.setter
     def x0(self, val):
-        self["x0"] = val
+        self['x0'] = val
 
     @property
     def xaxis(self):
@@ -1358,11 +1286,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["xaxis"]
+        return self['xaxis']
 
     @xaxis.setter
     def xaxis(self, val):
-        self["xaxis"] = val
+        self['xaxis'] = val
 
     @property
     def xcalendar(self):
@@ -1380,11 +1308,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["xcalendar"]
+        return self['xcalendar']
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self["xcalendar"] = val
+        self['xcalendar'] = val
 
     @property
     def xhoverformat(self):
@@ -1409,11 +1337,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["xhoverformat"]
+        return self['xhoverformat']
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self["xhoverformat"] = val
+        self['xhoverformat'] = val
 
     @property
     def xperiod(self):
@@ -1429,11 +1357,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["xperiod"]
+        return self['xperiod']
 
     @xperiod.setter
     def xperiod(self, val):
-        self["xperiod"] = val
+        self['xperiod'] = val
 
     @property
     def xperiod0(self):
@@ -1450,11 +1378,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["xperiod0"]
+        return self['xperiod0']
 
     @xperiod0.setter
     def xperiod0(self, val):
-        self["xperiod0"] = val
+        self['xperiod0'] = val
 
     @property
     def xperiodalignment(self):
@@ -1470,11 +1398,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["xperiodalignment"]
+        return self['xperiodalignment']
 
     @xperiodalignment.setter
     def xperiodalignment(self, val):
-        self["xperiodalignment"] = val
+        self['xperiodalignment'] = val
 
     @property
     def xsrc(self):
@@ -1488,11 +1416,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["xsrc"]
+        return self['xsrc']
 
     @xsrc.setter
     def xsrc(self, val):
-        self["xsrc"] = val
+        self['xsrc'] = val
 
     @property
     def y(self):
@@ -1506,11 +1434,11 @@ class Scatter(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     @property
     def y0(self):
@@ -1525,11 +1453,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["y0"]
+        return self['y0']
 
     @y0.setter
     def y0(self, val):
-        self["y0"] = val
+        self['y0'] = val
 
     @property
     def yaxis(self):
@@ -1548,11 +1476,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["yaxis"]
+        return self['yaxis']
 
     @yaxis.setter
     def yaxis(self, val):
-        self["yaxis"] = val
+        self['yaxis'] = val
 
     @property
     def ycalendar(self):
@@ -1570,11 +1498,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["ycalendar"]
+        return self['ycalendar']
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self["ycalendar"] = val
+        self['ycalendar'] = val
 
     @property
     def yhoverformat(self):
@@ -1599,11 +1527,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["yhoverformat"]
+        return self['yhoverformat']
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self["yhoverformat"] = val
+        self['yhoverformat'] = val
 
     @property
     def yperiod(self):
@@ -1619,11 +1547,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["yperiod"]
+        return self['yperiod']
 
     @yperiod.setter
     def yperiod(self, val):
-        self["yperiod"] = val
+        self['yperiod'] = val
 
     @property
     def yperiod0(self):
@@ -1640,11 +1568,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["yperiod0"]
+        return self['yperiod0']
 
     @yperiod0.setter
     def yperiod0(self, val):
-        self["yperiod0"] = val
+        self['yperiod0'] = val
 
     @property
     def yperiodalignment(self):
@@ -1660,11 +1588,11 @@ class Scatter(_BaseTraceType):
         -------
         Any
         """
-        return self["yperiodalignment"]
+        return self['yperiodalignment']
 
     @yperiodalignment.setter
     def yperiodalignment(self, val):
-        self["yperiodalignment"] = val
+        self['yperiodalignment'] = val
 
     @property
     def ysrc(self):
@@ -1678,11 +1606,11 @@ class Scatter(_BaseTraceType):
         -------
         str
         """
-        return self["ysrc"]
+        return self['ysrc']
 
     @ysrc.setter
     def ysrc(self, val):
-        self["ysrc"] = val
+        self['ysrc'] = val
 
     @property
     def zorder(self):
@@ -1698,15 +1626,15 @@ class Scatter(_BaseTraceType):
         -------
         int
         """
-        return self["zorder"]
+        return self['zorder']
 
     @zorder.setter
     def zorder(self, val):
-        self["zorder"] = val
+        self['zorder'] = val
 
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     @property
     def _prop_descriptions(self):
@@ -2131,86 +2059,84 @@ class Scatter(_BaseTraceType):
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        alignmentgroup=None,
-        cliponaxis=None,
-        connectgaps=None,
-        customdata=None,
-        customdatasrc=None,
-        dx=None,
-        dy=None,
-        error_x=None,
-        error_y=None,
-        fill=None,
-        fillcolor=None,
-        fillgradient=None,
-        fillpattern=None,
-        groupnorm=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hoveron=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        hovertext=None,
-        hovertextsrc=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        line=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        mode=None,
-        name=None,
-        offsetgroup=None,
-        opacity=None,
-        orientation=None,
-        selected=None,
-        selectedpoints=None,
-        showlegend=None,
-        stackgaps=None,
-        stackgroup=None,
-        stream=None,
-        text=None,
-        textfont=None,
-        textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
-        texttemplate=None,
-        texttemplatesrc=None,
-        uid=None,
-        uirevision=None,
-        unselected=None,
-        visible=None,
-        x=None,
-        x0=None,
-        xaxis=None,
-        xcalendar=None,
-        xhoverformat=None,
-        xperiod=None,
-        xperiod0=None,
-        xperiodalignment=None,
-        xsrc=None,
-        y=None,
-        y0=None,
-        yaxis=None,
-        ycalendar=None,
-        yhoverformat=None,
-        yperiod=None,
-        yperiod0=None,
-        yperiodalignment=None,
-        ysrc=None,
-        zorder=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            alignmentgroup=None,
+            cliponaxis=None,
+            connectgaps=None,
+            customdata=None,
+            customdatasrc=None,
+            dx=None,
+            dy=None,
+            error_x=None,
+            error_y=None,
+            fill=None,
+            fillcolor=None,
+            fillgradient=None,
+            fillpattern=None,
+            groupnorm=None,
+            hoverinfo=None,
+            hoverinfosrc=None,
+            hoverlabel=None,
+            hoveron=None,
+            hovertemplate=None,
+            hovertemplatesrc=None,
+            hovertext=None,
+            hovertextsrc=None,
+            ids=None,
+            idssrc=None,
+            legend=None,
+            legendgroup=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            line=None,
+            marker=None,
+            meta=None,
+            metasrc=None,
+            mode=None,
+            name=None,
+            offsetgroup=None,
+            opacity=None,
+            orientation=None,
+            selected=None,
+            selectedpoints=None,
+            showlegend=None,
+            stackgaps=None,
+            stackgroup=None,
+            stream=None,
+            text=None,
+            textfont=None,
+            textposition=None,
+            textpositionsrc=None,
+            textsrc=None,
+            texttemplate=None,
+            texttemplatesrc=None,
+            uid=None,
+            uirevision=None,
+            unselected=None,
+            visible=None,
+            x=None,
+            x0=None,
+            xaxis=None,
+            xcalendar=None,
+            xhoverformat=None,
+            xperiod=None,
+            xperiod0=None,
+            xperiodalignment=None,
+            xsrc=None,
+            y=None,
+            y0=None,
+            yaxis=None,
+            ycalendar=None,
+            yhoverformat=None,
+            yperiod=None,
+            yperiod0=None,
+            yperiodalignment=None,
+            ysrc=None,
+            zorder=None,
+            **kwargs
+        ):
         """
         Construct a new Scatter object
 
@@ -2650,9 +2576,9 @@ class Scatter(_BaseTraceType):
         -------
         Scatter
         """
-        super().__init__("scatter")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('scatter')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -2662,92 +2588,93 @@ class Scatter(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Scatter
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scatter`"""
-            )
+an instance of :class:`plotly.graph_objs.Scatter`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("alignmentgroup", arg, alignmentgroup)
-        self._set_property("cliponaxis", arg, cliponaxis)
-        self._set_property("connectgaps", arg, connectgaps)
-        self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
-        self._set_property("dx", arg, dx)
-        self._set_property("dy", arg, dy)
-        self._set_property("error_x", arg, error_x)
-        self._set_property("error_y", arg, error_y)
-        self._set_property("fill", arg, fill)
-        self._set_property("fillcolor", arg, fillcolor)
-        self._set_property("fillgradient", arg, fillgradient)
-        self._set_property("fillpattern", arg, fillpattern)
-        self._set_property("groupnorm", arg, groupnorm)
-        self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
-        self._set_property("hoverlabel", arg, hoverlabel)
-        self._set_property("hoveron", arg, hoveron)
-        self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
-        self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
-        self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
-        self._set_property("legend", arg, legend)
-        self._set_property("legendgroup", arg, legendgroup)
-        self._set_property("legendgrouptitle", arg, legendgrouptitle)
-        self._set_property("legendrank", arg, legendrank)
-        self._set_property("legendwidth", arg, legendwidth)
-        self._set_property("line", arg, line)
-        self._set_property("marker", arg, marker)
-        self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
-        self._set_property("mode", arg, mode)
-        self._set_property("name", arg, name)
-        self._set_property("offsetgroup", arg, offsetgroup)
-        self._set_property("opacity", arg, opacity)
-        self._set_property("orientation", arg, orientation)
-        self._set_property("selected", arg, selected)
-        self._set_property("selectedpoints", arg, selectedpoints)
-        self._set_property("showlegend", arg, showlegend)
-        self._set_property("stackgaps", arg, stackgaps)
-        self._set_property("stackgroup", arg, stackgroup)
-        self._set_property("stream", arg, stream)
-        self._set_property("text", arg, text)
-        self._set_property("textfont", arg, textfont)
-        self._set_property("textposition", arg, textposition)
-        self._set_property("textpositionsrc", arg, textpositionsrc)
-        self._set_property("textsrc", arg, textsrc)
-        self._set_property("texttemplate", arg, texttemplate)
-        self._set_property("texttemplatesrc", arg, texttemplatesrc)
-        self._set_property("uid", arg, uid)
-        self._set_property("uirevision", arg, uirevision)
-        self._set_property("unselected", arg, unselected)
-        self._set_property("visible", arg, visible)
-        self._set_property("x", arg, x)
-        self._set_property("x0", arg, x0)
-        self._set_property("xaxis", arg, xaxis)
-        self._set_property("xcalendar", arg, xcalendar)
-        self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xperiod", arg, xperiod)
-        self._set_property("xperiod0", arg, xperiod0)
-        self._set_property("xperiodalignment", arg, xperiodalignment)
-        self._set_property("xsrc", arg, xsrc)
-        self._set_property("y", arg, y)
-        self._set_property("y0", arg, y0)
-        self._set_property("yaxis", arg, yaxis)
-        self._set_property("ycalendar", arg, ycalendar)
-        self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("yperiod", arg, yperiod)
-        self._set_property("yperiod0", arg, yperiod0)
-        self._set_property("yperiodalignment", arg, yperiodalignment)
-        self._set_property("ysrc", arg, ysrc)
-        self._set_property("zorder", arg, zorder)
 
-        self._props["type"] = "scatter"
-        arg.pop("type", None)
+        self._set_property('alignmentgroup', arg, alignmentgroup)
+        self._set_property('cliponaxis', arg, cliponaxis)
+        self._set_property('connectgaps', arg, connectgaps)
+        self._set_property('customdata', arg, customdata)
+        self._set_property('customdatasrc', arg, customdatasrc)
+        self._set_property('dx', arg, dx)
+        self._set_property('dy', arg, dy)
+        self._set_property('error_x', arg, error_x)
+        self._set_property('error_y', arg, error_y)
+        self._set_property('fill', arg, fill)
+        self._set_property('fillcolor', arg, fillcolor)
+        self._set_property('fillgradient', arg, fillgradient)
+        self._set_property('fillpattern', arg, fillpattern)
+        self._set_property('groupnorm', arg, groupnorm)
+        self._set_property('hoverinfo', arg, hoverinfo)
+        self._set_property('hoverinfosrc', arg, hoverinfosrc)
+        self._set_property('hoverlabel', arg, hoverlabel)
+        self._set_property('hoveron', arg, hoveron)
+        self._set_property('hovertemplate', arg, hovertemplate)
+        self._set_property('hovertemplatesrc', arg, hovertemplatesrc)
+        self._set_property('hovertext', arg, hovertext)
+        self._set_property('hovertextsrc', arg, hovertextsrc)
+        self._set_property('ids', arg, ids)
+        self._set_property('idssrc', arg, idssrc)
+        self._set_property('legend', arg, legend)
+        self._set_property('legendgroup', arg, legendgroup)
+        self._set_property('legendgrouptitle', arg, legendgrouptitle)
+        self._set_property('legendrank', arg, legendrank)
+        self._set_property('legendwidth', arg, legendwidth)
+        self._set_property('line', arg, line)
+        self._set_property('marker', arg, marker)
+        self._set_property('meta', arg, meta)
+        self._set_property('metasrc', arg, metasrc)
+        self._set_property('mode', arg, mode)
+        self._set_property('name', arg, name)
+        self._set_property('offsetgroup', arg, offsetgroup)
+        self._set_property('opacity', arg, opacity)
+        self._set_property('orientation', arg, orientation)
+        self._set_property('selected', arg, selected)
+        self._set_property('selectedpoints', arg, selectedpoints)
+        self._set_property('showlegend', arg, showlegend)
+        self._set_property('stackgaps', arg, stackgaps)
+        self._set_property('stackgroup', arg, stackgroup)
+        self._set_property('stream', arg, stream)
+        self._set_property('text', arg, text)
+        self._set_property('textfont', arg, textfont)
+        self._set_property('textposition', arg, textposition)
+        self._set_property('textpositionsrc', arg, textpositionsrc)
+        self._set_property('textsrc', arg, textsrc)
+        self._set_property('texttemplate', arg, texttemplate)
+        self._set_property('texttemplatesrc', arg, texttemplatesrc)
+        self._set_property('uid', arg, uid)
+        self._set_property('uirevision', arg, uirevision)
+        self._set_property('unselected', arg, unselected)
+        self._set_property('visible', arg, visible)
+        self._set_property('x', arg, x)
+        self._set_property('x0', arg, x0)
+        self._set_property('xaxis', arg, xaxis)
+        self._set_property('xcalendar', arg, xcalendar)
+        self._set_property('xhoverformat', arg, xhoverformat)
+        self._set_property('xperiod', arg, xperiod)
+        self._set_property('xperiod0', arg, xperiod0)
+        self._set_property('xperiodalignment', arg, xperiodalignment)
+        self._set_property('xsrc', arg, xsrc)
+        self._set_property('y', arg, y)
+        self._set_property('y0', arg, y0)
+        self._set_property('yaxis', arg, yaxis)
+        self._set_property('ycalendar', arg, ycalendar)
+        self._set_property('yhoverformat', arg, yhoverformat)
+        self._set_property('yperiod', arg, yperiod)
+        self._set_property('yperiod0', arg, yperiod0)
+        self._set_property('yperiodalignment', arg, yperiodalignment)
+        self._set_property('ysrc', arg, ysrc)
+        self._set_property('zorder', arg, zorder)
+
+
+        self._props['type'] = 'scatter'
+        arg.pop('type', None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,37 +11,9 @@ import copy as _copy
 
 class Sankey(_BaseTraceType):
 
-    _parent_path_str = ""
-    _path_str = "sankey"
-    _valid_props = {
-        "arrangement",
-        "customdata",
-        "customdatasrc",
-        "domain",
-        "hoverinfo",
-        "hoverlabel",
-        "ids",
-        "idssrc",
-        "legend",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "link",
-        "meta",
-        "metasrc",
-        "name",
-        "node",
-        "orientation",
-        "selectedpoints",
-        "stream",
-        "textfont",
-        "type",
-        "uid",
-        "uirevision",
-        "valueformat",
-        "valuesuffix",
-        "visible",
-    }
+    _parent_path_str = ''
+    _path_str = 'sankey'
+    _valid_props = {"arrangement", "customdata", "customdatasrc", "domain", "hoverinfo", "hoverlabel", "ids", "idssrc", "legend", "legendgrouptitle", "legendrank", "legendwidth", "link", "meta", "metasrc", "name", "node", "orientation", "selectedpoints", "stream", "textfont", "type", "uid", "uirevision", "valueformat", "valuesuffix", "visible"}
 
     @property
     def arrangement(self):
@@ -58,11 +34,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["arrangement"]
+        return self['arrangement']
 
     @arrangement.setter
     def arrangement(self, val):
-        self["arrangement"] = val
+        self['arrangement'] = val
 
     @property
     def customdata(self):
@@ -79,11 +55,11 @@ class Sankey(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     @property
     def customdatasrc(self):
@@ -98,11 +74,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     @property
     def domain(self):
@@ -117,11 +93,11 @@ class Sankey(_BaseTraceType):
         -------
         plotly.graph_objs.sankey.Domain
         """
-        return self["domain"]
+        return self['domain']
 
     @domain.setter
     def domain(self, val):
-        self["domain"] = val
+        self['domain'] = val
 
     @property
     def hoverinfo(self):
@@ -142,11 +118,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     @property
     def hoverlabel(self):
@@ -161,11 +137,11 @@ class Sankey(_BaseTraceType):
         -------
         plotly.graph_objs.sankey.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     @property
     def ids(self):
@@ -181,11 +157,11 @@ class Sankey(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     @property
     def idssrc(self):
@@ -199,11 +175,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     @property
     def legend(self):
@@ -222,11 +198,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     @property
     def legendgrouptitle(self):
@@ -241,11 +217,11 @@ class Sankey(_BaseTraceType):
         -------
         plotly.graph_objs.sankey.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     @property
     def legendrank(self):
@@ -266,11 +242,11 @@ class Sankey(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     @property
     def legendwidth(self):
@@ -285,11 +261,11 @@ class Sankey(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     @property
     def link(self):
@@ -306,11 +282,11 @@ class Sankey(_BaseTraceType):
         -------
         plotly.graph_objs.sankey.Link
         """
-        return self["link"]
+        return self['link']
 
     @link.setter
     def link(self, val):
-        self["link"] = val
+        self['link'] = val
 
     @property
     def meta(self):
@@ -332,11 +308,11 @@ class Sankey(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     @property
     def metasrc(self):
@@ -350,11 +326,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     @property
     def name(self):
@@ -370,11 +346,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     @property
     def node(self):
@@ -391,11 +367,11 @@ class Sankey(_BaseTraceType):
         -------
         plotly.graph_objs.sankey.Node
         """
-        return self["node"]
+        return self['node']
 
     @node.setter
     def node(self, val):
-        self["node"] = val
+        self['node'] = val
 
     @property
     def orientation(self):
@@ -410,11 +386,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["orientation"]
+        return self['orientation']
 
     @orientation.setter
     def orientation(self, val):
-        self["orientation"] = val
+        self['orientation'] = val
 
     @property
     def selectedpoints(self):
@@ -432,11 +408,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["selectedpoints"]
+        return self['selectedpoints']
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self["selectedpoints"] = val
+        self['selectedpoints'] = val
 
     @property
     def stream(self):
@@ -451,11 +427,11 @@ class Sankey(_BaseTraceType):
         -------
         plotly.graph_objs.sankey.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     @property
     def textfont(self):
@@ -472,11 +448,11 @@ class Sankey(_BaseTraceType):
         -------
         plotly.graph_objs.sankey.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     @property
     def uid(self):
@@ -492,11 +468,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     @property
     def uirevision(self):
@@ -523,11 +499,11 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     @property
     def valueformat(self):
@@ -545,11 +521,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["valueformat"]
+        return self['valueformat']
 
     @valueformat.setter
     def valueformat(self, val):
-        self["valueformat"] = val
+        self['valueformat'] = val
 
     @property
     def valuesuffix(self):
@@ -565,11 +541,11 @@ class Sankey(_BaseTraceType):
         -------
         str
         """
-        return self["valuesuffix"]
+        return self['valuesuffix']
 
     @valuesuffix.setter
     def valuesuffix(self, val):
-        self["valuesuffix"] = val
+        self['valuesuffix'] = val
 
     @property
     def visible(self):
@@ -586,15 +562,15 @@ class Sankey(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     @property
     def _prop_descriptions(self):
@@ -732,38 +708,36 @@ class Sankey(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-
-    def __init__(
-        self,
-        arg=None,
-        arrangement=None,
-        customdata=None,
-        customdatasrc=None,
-        domain=None,
-        hoverinfo=None,
-        hoverlabel=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        link=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        node=None,
-        orientation=None,
-        selectedpoints=None,
-        stream=None,
-        textfont=None,
-        uid=None,
-        uirevision=None,
-        valueformat=None,
-        valuesuffix=None,
-        visible=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            arrangement=None,
+            customdata=None,
+            customdatasrc=None,
+            domain=None,
+            hoverinfo=None,
+            hoverlabel=None,
+            ids=None,
+            idssrc=None,
+            legend=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            link=None,
+            meta=None,
+            metasrc=None,
+            name=None,
+            node=None,
+            orientation=None,
+            selectedpoints=None,
+            stream=None,
+            textfont=None,
+            uid=None,
+            uirevision=None,
+            valueformat=None,
+            valuesuffix=None,
+            visible=None,
+            **kwargs
+        ):
         """
         Construct a new Sankey object
 
@@ -914,9 +888,9 @@ class Sankey(_BaseTraceType):
         -------
         Sankey
         """
-        super().__init__("sankey")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('sankey')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -926,44 +900,45 @@ class Sankey(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Sankey
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Sankey`"""
-            )
+an instance of :class:`plotly.graph_objs.Sankey`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("arrangement", arg, arrangement)
-        self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
-        self._set_property("domain", arg, domain)
-        self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverlabel", arg, hoverlabel)
-        self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
-        self._set_property("legend", arg, legend)
-        self._set_property("legendgrouptitle", arg, legendgrouptitle)
-        self._set_property("legendrank", arg, legendrank)
-        self._set_property("legendwidth", arg, legendwidth)
-        self._set_property("link", arg, link)
-        self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
-        self._set_property("name", arg, name)
-        self._set_property("node", arg, node)
-        self._set_property("orientation", arg, orientation)
-        self._set_property("selectedpoints", arg, selectedpoints)
-        self._set_property("stream", arg, stream)
-        self._set_property("textfont", arg, textfont)
-        self._set_property("uid", arg, uid)
-        self._set_property("uirevision", arg, uirevision)
-        self._set_property("valueformat", arg, valueformat)
-        self._set_property("valuesuffix", arg, valuesuffix)
-        self._set_property("visible", arg, visible)
 
-        self._props["type"] = "sankey"
-        arg.pop("type", None)
+        self._set_property('arrangement', arg, arrangement)
+        self._set_property('customdata', arg, customdata)
+        self._set_property('customdatasrc', arg, customdatasrc)
+        self._set_property('domain', arg, domain)
+        self._set_property('hoverinfo', arg, hoverinfo)
+        self._set_property('hoverlabel', arg, hoverlabel)
+        self._set_property('ids', arg, ids)
+        self._set_property('idssrc', arg, idssrc)
+        self._set_property('legend', arg, legend)
+        self._set_property('legendgrouptitle', arg, legendgrouptitle)
+        self._set_property('legendrank', arg, legendrank)
+        self._set_property('legendwidth', arg, legendwidth)
+        self._set_property('link', arg, link)
+        self._set_property('meta', arg, meta)
+        self._set_property('metasrc', arg, metasrc)
+        self._set_property('name', arg, name)
+        self._set_property('node', arg, node)
+        self._set_property('orientation', arg, orientation)
+        self._set_property('selectedpoints', arg, selectedpoints)
+        self._set_property('stream', arg, stream)
+        self._set_property('textfont', arg, textfont)
+        self._set_property('uid', arg, uid)
+        self._set_property('uirevision', arg, uirevision)
+        self._set_property('valueformat', arg, valueformat)
+        self._set_property('valuesuffix', arg, valuesuffix)
+        self._set_property('visible', arg, visible)
+
+
+        self._props['type'] = 'sankey'
+        arg.pop('type', None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

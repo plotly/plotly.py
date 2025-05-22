@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,74 +11,9 @@ import copy as _copy
 
 class Histogram2d(_BaseTraceType):
 
-    _parent_path_str = ""
-    _path_str = "histogram2d"
-    _valid_props = {
-        "autobinx",
-        "autobiny",
-        "autocolorscale",
-        "bingroup",
-        "coloraxis",
-        "colorbar",
-        "colorscale",
-        "customdata",
-        "customdatasrc",
-        "histfunc",
-        "histnorm",
-        "hoverinfo",
-        "hoverinfosrc",
-        "hoverlabel",
-        "hovertemplate",
-        "hovertemplatesrc",
-        "ids",
-        "idssrc",
-        "legend",
-        "legendgroup",
-        "legendgrouptitle",
-        "legendrank",
-        "legendwidth",
-        "marker",
-        "meta",
-        "metasrc",
-        "name",
-        "nbinsx",
-        "nbinsy",
-        "opacity",
-        "reversescale",
-        "showlegend",
-        "showscale",
-        "stream",
-        "textfont",
-        "texttemplate",
-        "type",
-        "uid",
-        "uirevision",
-        "visible",
-        "x",
-        "xaxis",
-        "xbingroup",
-        "xbins",
-        "xcalendar",
-        "xgap",
-        "xhoverformat",
-        "xsrc",
-        "y",
-        "yaxis",
-        "ybingroup",
-        "ybins",
-        "ycalendar",
-        "ygap",
-        "yhoverformat",
-        "ysrc",
-        "z",
-        "zauto",
-        "zhoverformat",
-        "zmax",
-        "zmid",
-        "zmin",
-        "zsmooth",
-        "zsrc",
-    }
+    _parent_path_str = ''
+    _path_str = 'histogram2d'
+    _valid_props = {"autobinx", "autobiny", "autocolorscale", "bingroup", "coloraxis", "colorbar", "colorscale", "customdata", "customdatasrc", "histfunc", "histnorm", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "ids", "idssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "marker", "meta", "metasrc", "name", "nbinsx", "nbinsy", "opacity", "reversescale", "showlegend", "showscale", "stream", "textfont", "texttemplate", "type", "uid", "uirevision", "visible", "x", "xaxis", "xbingroup", "xbins", "xcalendar", "xgap", "xhoverformat", "xsrc", "y", "yaxis", "ybingroup", "ybins", "ycalendar", "ygap", "yhoverformat", "ysrc", "z", "zauto", "zhoverformat", "zmax", "zmid", "zmin", "zsmooth", "zsrc"}
 
     @property
     def autobinx(self):
@@ -91,11 +30,11 @@ class Histogram2d(_BaseTraceType):
         -------
         bool
         """
-        return self["autobinx"]
+        return self['autobinx']
 
     @autobinx.setter
     def autobinx(self, val):
-        self["autobinx"] = val
+        self['autobinx'] = val
 
     @property
     def autobiny(self):
@@ -112,11 +51,11 @@ class Histogram2d(_BaseTraceType):
         -------
         bool
         """
-        return self["autobiny"]
+        return self['autobiny']
 
     @autobiny.setter
     def autobiny(self, val):
-        self["autobiny"] = val
+        self['autobiny'] = val
 
     @property
     def autocolorscale(self):
@@ -135,11 +74,11 @@ class Histogram2d(_BaseTraceType):
         -------
         bool
         """
-        return self["autocolorscale"]
+        return self['autocolorscale']
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self["autocolorscale"] = val
+        self['autocolorscale'] = val
 
     @property
     def bingroup(self):
@@ -156,11 +95,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["bingroup"]
+        return self['bingroup']
 
     @bingroup.setter
     def bingroup(self, val):
-        self["bingroup"] = val
+        self['bingroup'] = val
 
     @property
     def coloraxis(self):
@@ -181,11 +120,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["coloraxis"]
+        return self['coloraxis']
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self["coloraxis"] = val
+        self['coloraxis'] = val
 
     @property
     def colorbar(self):
@@ -200,11 +139,11 @@ class Histogram2d(_BaseTraceType):
         -------
         plotly.graph_objs.histogram2d.ColorBar
         """
-        return self["colorbar"]
+        return self['colorbar']
 
     @colorbar.setter
     def colorbar(self, val):
-        self["colorbar"] = val
+        self['colorbar'] = val
 
     @property
     def colorscale(self):
@@ -251,11 +190,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["colorscale"]
+        return self['colorscale']
 
     @colorscale.setter
     def colorscale(self, val):
-        self["colorscale"] = val
+        self['colorscale'] = val
 
     @property
     def customdata(self):
@@ -272,11 +211,11 @@ class Histogram2d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["customdata"]
+        return self['customdata']
 
     @customdata.setter
     def customdata(self, val):
-        self["customdata"] = val
+        self['customdata'] = val
 
     @property
     def customdatasrc(self):
@@ -291,11 +230,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["customdatasrc"]
+        return self['customdatasrc']
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self["customdatasrc"] = val
+        self['customdatasrc'] = val
 
     @property
     def histfunc(self):
@@ -315,11 +254,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any
         """
-        return self["histfunc"]
+        return self['histfunc']
 
     @histfunc.setter
     def histfunc(self, val):
-        self["histfunc"] = val
+        self['histfunc'] = val
 
     @property
     def histnorm(self):
@@ -347,11 +286,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any
         """
-        return self["histnorm"]
+        return self['histnorm']
 
     @histnorm.setter
     def histnorm(self, val):
-        self["histnorm"] = val
+        self['histnorm'] = val
 
     @property
     def hoverinfo(self):
@@ -371,11 +310,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["hoverinfo"]
+        return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self["hoverinfo"] = val
+        self['hoverinfo'] = val
 
     @property
     def hoverinfosrc(self):
@@ -390,11 +329,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["hoverinfosrc"]
+        return self['hoverinfosrc']
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
+        self['hoverinfosrc'] = val
 
     @property
     def hoverlabel(self):
@@ -409,11 +348,11 @@ class Histogram2d(_BaseTraceType):
         -------
         plotly.graph_objs.histogram2d.Hoverlabel
         """
-        return self["hoverlabel"]
+        return self['hoverlabel']
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self["hoverlabel"] = val
+        self['hoverlabel'] = val
 
     @property
     def hovertemplate(self):
@@ -452,11 +391,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self["hovertemplate"]
+        return self['hovertemplate']
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self["hovertemplate"] = val
+        self['hovertemplate'] = val
 
     @property
     def hovertemplatesrc(self):
@@ -471,11 +410,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["hovertemplatesrc"]
+        return self['hovertemplatesrc']
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
+        self['hovertemplatesrc'] = val
 
     @property
     def ids(self):
@@ -491,11 +430,11 @@ class Histogram2d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["ids"]
+        return self['ids']
 
     @ids.setter
     def ids(self, val):
-        self["ids"] = val
+        self['ids'] = val
 
     @property
     def idssrc(self):
@@ -509,11 +448,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["idssrc"]
+        return self['idssrc']
 
     @idssrc.setter
     def idssrc(self, val):
-        self["idssrc"] = val
+        self['idssrc'] = val
 
     @property
     def legend(self):
@@ -532,11 +471,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["legend"]
+        return self['legend']
 
     @legend.setter
     def legend(self, val):
-        self["legend"] = val
+        self['legend'] = val
 
     @property
     def legendgroup(self):
@@ -553,11 +492,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["legendgroup"]
+        return self['legendgroup']
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self["legendgroup"] = val
+        self['legendgroup'] = val
 
     @property
     def legendgrouptitle(self):
@@ -572,11 +511,11 @@ class Histogram2d(_BaseTraceType):
         -------
         plotly.graph_objs.histogram2d.Legendgrouptitle
         """
-        return self["legendgrouptitle"]
+        return self['legendgrouptitle']
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self["legendgrouptitle"] = val
+        self['legendgrouptitle'] = val
 
     @property
     def legendrank(self):
@@ -597,11 +536,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendrank"]
+        return self['legendrank']
 
     @legendrank.setter
     def legendrank(self, val):
-        self["legendrank"] = val
+        self['legendrank'] = val
 
     @property
     def legendwidth(self):
@@ -616,11 +555,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int|float
         """
-        return self["legendwidth"]
+        return self['legendwidth']
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self["legendwidth"] = val
+        self['legendwidth'] = val
 
     @property
     def marker(self):
@@ -635,11 +574,11 @@ class Histogram2d(_BaseTraceType):
         -------
         plotly.graph_objs.histogram2d.Marker
         """
-        return self["marker"]
+        return self['marker']
 
     @marker.setter
     def marker(self, val):
-        self["marker"] = val
+        self['marker'] = val
 
     @property
     def meta(self):
@@ -661,11 +600,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self["meta"]
+        return self['meta']
 
     @meta.setter
     def meta(self, val):
-        self["meta"] = val
+        self['meta'] = val
 
     @property
     def metasrc(self):
@@ -679,11 +618,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["metasrc"]
+        return self['metasrc']
 
     @metasrc.setter
     def metasrc(self, val):
-        self["metasrc"] = val
+        self['metasrc'] = val
 
     @property
     def name(self):
@@ -699,11 +638,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     @property
     def nbinsx(self):
@@ -721,11 +660,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int
         """
-        return self["nbinsx"]
+        return self['nbinsx']
 
     @nbinsx.setter
     def nbinsx(self, val):
-        self["nbinsx"] = val
+        self['nbinsx'] = val
 
     @property
     def nbinsy(self):
@@ -743,11 +682,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int
         """
-        return self["nbinsy"]
+        return self['nbinsy']
 
     @nbinsy.setter
     def nbinsy(self, val):
-        self["nbinsy"] = val
+        self['nbinsy'] = val
 
     @property
     def opacity(self):
@@ -761,11 +700,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int|float
         """
-        return self["opacity"]
+        return self['opacity']
 
     @opacity.setter
     def opacity(self, val):
-        self["opacity"] = val
+        self['opacity'] = val
 
     @property
     def reversescale(self):
@@ -781,11 +720,11 @@ class Histogram2d(_BaseTraceType):
         -------
         bool
         """
-        return self["reversescale"]
+        return self['reversescale']
 
     @reversescale.setter
     def reversescale(self, val):
-        self["reversescale"] = val
+        self['reversescale'] = val
 
     @property
     def showlegend(self):
@@ -800,11 +739,11 @@ class Histogram2d(_BaseTraceType):
         -------
         bool
         """
-        return self["showlegend"]
+        return self['showlegend']
 
     @showlegend.setter
     def showlegend(self, val):
-        self["showlegend"] = val
+        self['showlegend'] = val
 
     @property
     def showscale(self):
@@ -819,11 +758,11 @@ class Histogram2d(_BaseTraceType):
         -------
         bool
         """
-        return self["showscale"]
+        return self['showscale']
 
     @showscale.setter
     def showscale(self, val):
-        self["showscale"] = val
+        self['showscale'] = val
 
     @property
     def stream(self):
@@ -838,11 +777,11 @@ class Histogram2d(_BaseTraceType):
         -------
         plotly.graph_objs.histogram2d.Stream
         """
-        return self["stream"]
+        return self['stream']
 
     @stream.setter
     def stream(self, val):
-        self["stream"] = val
+        self['stream'] = val
 
     @property
     def textfont(self):
@@ -859,11 +798,11 @@ class Histogram2d(_BaseTraceType):
         -------
         plotly.graph_objs.histogram2d.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     @property
     def texttemplate(self):
@@ -890,11 +829,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["texttemplate"]
+        return self['texttemplate']
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self["texttemplate"] = val
+        self['texttemplate'] = val
 
     @property
     def uid(self):
@@ -910,11 +849,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["uid"]
+        return self['uid']
 
     @uid.setter
     def uid(self, val):
-        self["uid"] = val
+        self['uid'] = val
 
     @property
     def uirevision(self):
@@ -941,11 +880,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any
         """
-        return self["uirevision"]
+        return self['uirevision']
 
     @uirevision.setter
     def uirevision(self, val):
-        self["uirevision"] = val
+        self['uirevision'] = val
 
     @property
     def visible(self):
@@ -962,11 +901,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     @property
     def x(self):
@@ -980,11 +919,11 @@ class Histogram2d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     @property
     def xaxis(self):
@@ -1003,11 +942,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["xaxis"]
+        return self['xaxis']
 
     @xaxis.setter
     def xaxis(self, val):
-        self["xaxis"] = val
+        self['xaxis'] = val
 
     @property
     def xbingroup(self):
@@ -1026,11 +965,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["xbingroup"]
+        return self['xbingroup']
 
     @xbingroup.setter
     def xbingroup(self, val):
-        self["xbingroup"] = val
+        self['xbingroup'] = val
 
     @property
     def xbins(self):
@@ -1045,11 +984,11 @@ class Histogram2d(_BaseTraceType):
         -------
         plotly.graph_objs.histogram2d.XBins
         """
-        return self["xbins"]
+        return self['xbins']
 
     @xbins.setter
     def xbins(self, val):
-        self["xbins"] = val
+        self['xbins'] = val
 
     @property
     def xcalendar(self):
@@ -1067,11 +1006,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any
         """
-        return self["xcalendar"]
+        return self['xcalendar']
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self["xcalendar"] = val
+        self['xcalendar'] = val
 
     @property
     def xgap(self):
@@ -1085,11 +1024,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int|float
         """
-        return self["xgap"]
+        return self['xgap']
 
     @xgap.setter
     def xgap(self, val):
-        self["xgap"] = val
+        self['xgap'] = val
 
     @property
     def xhoverformat(self):
@@ -1114,11 +1053,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["xhoverformat"]
+        return self['xhoverformat']
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self["xhoverformat"] = val
+        self['xhoverformat'] = val
 
     @property
     def xsrc(self):
@@ -1132,11 +1071,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["xsrc"]
+        return self['xsrc']
 
     @xsrc.setter
     def xsrc(self, val):
-        self["xsrc"] = val
+        self['xsrc'] = val
 
     @property
     def y(self):
@@ -1150,11 +1089,11 @@ class Histogram2d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     @property
     def yaxis(self):
@@ -1173,11 +1112,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["yaxis"]
+        return self['yaxis']
 
     @yaxis.setter
     def yaxis(self, val):
-        self["yaxis"] = val
+        self['yaxis'] = val
 
     @property
     def ybingroup(self):
@@ -1196,11 +1135,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["ybingroup"]
+        return self['ybingroup']
 
     @ybingroup.setter
     def ybingroup(self, val):
-        self["ybingroup"] = val
+        self['ybingroup'] = val
 
     @property
     def ybins(self):
@@ -1215,11 +1154,11 @@ class Histogram2d(_BaseTraceType):
         -------
         plotly.graph_objs.histogram2d.YBins
         """
-        return self["ybins"]
+        return self['ybins']
 
     @ybins.setter
     def ybins(self, val):
-        self["ybins"] = val
+        self['ybins'] = val
 
     @property
     def ycalendar(self):
@@ -1237,11 +1176,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any
         """
-        return self["ycalendar"]
+        return self['ycalendar']
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self["ycalendar"] = val
+        self['ycalendar'] = val
 
     @property
     def ygap(self):
@@ -1255,11 +1194,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int|float
         """
-        return self["ygap"]
+        return self['ygap']
 
     @ygap.setter
     def ygap(self, val):
-        self["ygap"] = val
+        self['ygap'] = val
 
     @property
     def yhoverformat(self):
@@ -1284,11 +1223,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["yhoverformat"]
+        return self['yhoverformat']
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self["yhoverformat"] = val
+        self['yhoverformat'] = val
 
     @property
     def ysrc(self):
@@ -1302,11 +1241,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["ysrc"]
+        return self['ysrc']
 
     @ysrc.setter
     def ysrc(self, val):
-        self["ysrc"] = val
+        self['ysrc'] = val
 
     @property
     def z(self):
@@ -1320,11 +1259,11 @@ class Histogram2d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self["z"]
+        return self['z']
 
     @z.setter
     def z(self, val):
-        self["z"] = val
+        self['z'] = val
 
     @property
     def zauto(self):
@@ -1341,11 +1280,11 @@ class Histogram2d(_BaseTraceType):
         -------
         bool
         """
-        return self["zauto"]
+        return self['zauto']
 
     @zauto.setter
     def zauto(self, val):
-        self["zauto"] = val
+        self['zauto'] = val
 
     @property
     def zhoverformat(self):
@@ -1364,11 +1303,11 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["zhoverformat"]
+        return self['zhoverformat']
 
     @zhoverformat.setter
     def zhoverformat(self, val):
-        self["zhoverformat"] = val
+        self['zhoverformat'] = val
 
     @property
     def zmax(self):
@@ -1383,11 +1322,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int|float
         """
-        return self["zmax"]
+        return self['zmax']
 
     @zmax.setter
     def zmax(self, val):
-        self["zmax"] = val
+        self['zmax'] = val
 
     @property
     def zmid(self):
@@ -1403,11 +1342,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int|float
         """
-        return self["zmid"]
+        return self['zmid']
 
     @zmid.setter
     def zmid(self, val):
-        self["zmid"] = val
+        self['zmid'] = val
 
     @property
     def zmin(self):
@@ -1422,11 +1361,11 @@ class Histogram2d(_BaseTraceType):
         -------
         int|float
         """
-        return self["zmin"]
+        return self['zmin']
 
     @zmin.setter
     def zmin(self, val):
-        self["zmin"] = val
+        self['zmin'] = val
 
     @property
     def zsmooth(self):
@@ -1441,11 +1380,11 @@ class Histogram2d(_BaseTraceType):
         -------
         Any
         """
-        return self["zsmooth"]
+        return self['zsmooth']
 
     @zsmooth.setter
     def zsmooth(self, val):
-        self["zsmooth"] = val
+        self['zsmooth'] = val
 
     @property
     def zsrc(self):
@@ -1459,15 +1398,15 @@ class Histogram2d(_BaseTraceType):
         -------
         str
         """
-        return self["zsrc"]
+        return self['zsrc']
 
     @zsrc.setter
     def zsrc(self, val):
-        self["zsrc"] = val
+        self['zsrc'] = val
 
     @property
     def type(self):
-        return self._props["type"]
+        return self._props['type']
 
     @property
     def _prop_descriptions(self):
@@ -1829,75 +1768,73 @@ class Histogram2d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        autobinx=None,
-        autobiny=None,
-        autocolorscale=None,
-        bingroup=None,
-        coloraxis=None,
-        colorbar=None,
-        colorscale=None,
-        customdata=None,
-        customdatasrc=None,
-        histfunc=None,
-        histnorm=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        hovertemplate=None,
-        hovertemplatesrc=None,
-        ids=None,
-        idssrc=None,
-        legend=None,
-        legendgroup=None,
-        legendgrouptitle=None,
-        legendrank=None,
-        legendwidth=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        nbinsx=None,
-        nbinsy=None,
-        opacity=None,
-        reversescale=None,
-        showlegend=None,
-        showscale=None,
-        stream=None,
-        textfont=None,
-        texttemplate=None,
-        uid=None,
-        uirevision=None,
-        visible=None,
-        x=None,
-        xaxis=None,
-        xbingroup=None,
-        xbins=None,
-        xcalendar=None,
-        xgap=None,
-        xhoverformat=None,
-        xsrc=None,
-        y=None,
-        yaxis=None,
-        ybingroup=None,
-        ybins=None,
-        ycalendar=None,
-        ygap=None,
-        yhoverformat=None,
-        ysrc=None,
-        z=None,
-        zauto=None,
-        zhoverformat=None,
-        zmax=None,
-        zmid=None,
-        zmin=None,
-        zsmooth=None,
-        zsrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            autobinx=None,
+            autobiny=None,
+            autocolorscale=None,
+            bingroup=None,
+            coloraxis=None,
+            colorbar=None,
+            colorscale=None,
+            customdata=None,
+            customdatasrc=None,
+            histfunc=None,
+            histnorm=None,
+            hoverinfo=None,
+            hoverinfosrc=None,
+            hoverlabel=None,
+            hovertemplate=None,
+            hovertemplatesrc=None,
+            ids=None,
+            idssrc=None,
+            legend=None,
+            legendgroup=None,
+            legendgrouptitle=None,
+            legendrank=None,
+            legendwidth=None,
+            marker=None,
+            meta=None,
+            metasrc=None,
+            name=None,
+            nbinsx=None,
+            nbinsy=None,
+            opacity=None,
+            reversescale=None,
+            showlegend=None,
+            showscale=None,
+            stream=None,
+            textfont=None,
+            texttemplate=None,
+            uid=None,
+            uirevision=None,
+            visible=None,
+            x=None,
+            xaxis=None,
+            xbingroup=None,
+            xbins=None,
+            xcalendar=None,
+            xgap=None,
+            xhoverformat=None,
+            xsrc=None,
+            y=None,
+            yaxis=None,
+            ybingroup=None,
+            ybins=None,
+            ycalendar=None,
+            ygap=None,
+            yhoverformat=None,
+            ysrc=None,
+            z=None,
+            zauto=None,
+            zhoverformat=None,
+            zmax=None,
+            zmid=None,
+            zmin=None,
+            zsmooth=None,
+            zsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Histogram2d object
 
@@ -2274,9 +2211,9 @@ class Histogram2d(_BaseTraceType):
         -------
         Histogram2d
         """
-        super().__init__("histogram2d")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('histogram2d')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -2286,81 +2223,82 @@ class Histogram2d(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Histogram2d
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Histogram2d`"""
-            )
+an instance of :class:`plotly.graph_objs.Histogram2d`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("autobinx", arg, autobinx)
-        self._set_property("autobiny", arg, autobiny)
-        self._set_property("autocolorscale", arg, autocolorscale)
-        self._set_property("bingroup", arg, bingroup)
-        self._set_property("coloraxis", arg, coloraxis)
-        self._set_property("colorbar", arg, colorbar)
-        self._set_property("colorscale", arg, colorscale)
-        self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
-        self._set_property("histfunc", arg, histfunc)
-        self._set_property("histnorm", arg, histnorm)
-        self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
-        self._set_property("hoverlabel", arg, hoverlabel)
-        self._set_property("hovertemplate", arg, hovertemplate)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
-        self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
-        self._set_property("legend", arg, legend)
-        self._set_property("legendgroup", arg, legendgroup)
-        self._set_property("legendgrouptitle", arg, legendgrouptitle)
-        self._set_property("legendrank", arg, legendrank)
-        self._set_property("legendwidth", arg, legendwidth)
-        self._set_property("marker", arg, marker)
-        self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
-        self._set_property("name", arg, name)
-        self._set_property("nbinsx", arg, nbinsx)
-        self._set_property("nbinsy", arg, nbinsy)
-        self._set_property("opacity", arg, opacity)
-        self._set_property("reversescale", arg, reversescale)
-        self._set_property("showlegend", arg, showlegend)
-        self._set_property("showscale", arg, showscale)
-        self._set_property("stream", arg, stream)
-        self._set_property("textfont", arg, textfont)
-        self._set_property("texttemplate", arg, texttemplate)
-        self._set_property("uid", arg, uid)
-        self._set_property("uirevision", arg, uirevision)
-        self._set_property("visible", arg, visible)
-        self._set_property("x", arg, x)
-        self._set_property("xaxis", arg, xaxis)
-        self._set_property("xbingroup", arg, xbingroup)
-        self._set_property("xbins", arg, xbins)
-        self._set_property("xcalendar", arg, xcalendar)
-        self._set_property("xgap", arg, xgap)
-        self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xsrc", arg, xsrc)
-        self._set_property("y", arg, y)
-        self._set_property("yaxis", arg, yaxis)
-        self._set_property("ybingroup", arg, ybingroup)
-        self._set_property("ybins", arg, ybins)
-        self._set_property("ycalendar", arg, ycalendar)
-        self._set_property("ygap", arg, ygap)
-        self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("ysrc", arg, ysrc)
-        self._set_property("z", arg, z)
-        self._set_property("zauto", arg, zauto)
-        self._set_property("zhoverformat", arg, zhoverformat)
-        self._set_property("zmax", arg, zmax)
-        self._set_property("zmid", arg, zmid)
-        self._set_property("zmin", arg, zmin)
-        self._set_property("zsmooth", arg, zsmooth)
-        self._set_property("zsrc", arg, zsrc)
 
-        self._props["type"] = "histogram2d"
-        arg.pop("type", None)
+        self._set_property('autobinx', arg, autobinx)
+        self._set_property('autobiny', arg, autobiny)
+        self._set_property('autocolorscale', arg, autocolorscale)
+        self._set_property('bingroup', arg, bingroup)
+        self._set_property('coloraxis', arg, coloraxis)
+        self._set_property('colorbar', arg, colorbar)
+        self._set_property('colorscale', arg, colorscale)
+        self._set_property('customdata', arg, customdata)
+        self._set_property('customdatasrc', arg, customdatasrc)
+        self._set_property('histfunc', arg, histfunc)
+        self._set_property('histnorm', arg, histnorm)
+        self._set_property('hoverinfo', arg, hoverinfo)
+        self._set_property('hoverinfosrc', arg, hoverinfosrc)
+        self._set_property('hoverlabel', arg, hoverlabel)
+        self._set_property('hovertemplate', arg, hovertemplate)
+        self._set_property('hovertemplatesrc', arg, hovertemplatesrc)
+        self._set_property('ids', arg, ids)
+        self._set_property('idssrc', arg, idssrc)
+        self._set_property('legend', arg, legend)
+        self._set_property('legendgroup', arg, legendgroup)
+        self._set_property('legendgrouptitle', arg, legendgrouptitle)
+        self._set_property('legendrank', arg, legendrank)
+        self._set_property('legendwidth', arg, legendwidth)
+        self._set_property('marker', arg, marker)
+        self._set_property('meta', arg, meta)
+        self._set_property('metasrc', arg, metasrc)
+        self._set_property('name', arg, name)
+        self._set_property('nbinsx', arg, nbinsx)
+        self._set_property('nbinsy', arg, nbinsy)
+        self._set_property('opacity', arg, opacity)
+        self._set_property('reversescale', arg, reversescale)
+        self._set_property('showlegend', arg, showlegend)
+        self._set_property('showscale', arg, showscale)
+        self._set_property('stream', arg, stream)
+        self._set_property('textfont', arg, textfont)
+        self._set_property('texttemplate', arg, texttemplate)
+        self._set_property('uid', arg, uid)
+        self._set_property('uirevision', arg, uirevision)
+        self._set_property('visible', arg, visible)
+        self._set_property('x', arg, x)
+        self._set_property('xaxis', arg, xaxis)
+        self._set_property('xbingroup', arg, xbingroup)
+        self._set_property('xbins', arg, xbins)
+        self._set_property('xcalendar', arg, xcalendar)
+        self._set_property('xgap', arg, xgap)
+        self._set_property('xhoverformat', arg, xhoverformat)
+        self._set_property('xsrc', arg, xsrc)
+        self._set_property('y', arg, y)
+        self._set_property('yaxis', arg, yaxis)
+        self._set_property('ybingroup', arg, ybingroup)
+        self._set_property('ybins', arg, ybins)
+        self._set_property('ycalendar', arg, ycalendar)
+        self._set_property('ygap', arg, ygap)
+        self._set_property('yhoverformat', arg, yhoverformat)
+        self._set_property('ysrc', arg, ysrc)
+        self._set_property('z', arg, z)
+        self._set_property('zauto', arg, zauto)
+        self._set_property('zhoverformat', arg, zhoverformat)
+        self._set_property('zmax', arg, zmax)
+        self._set_property('zmid', arg, zmid)
+        self._set_property('zmin', arg, zmin)
+        self._set_property('zsmooth', arg, zsmooth)
+        self._set_property('zsrc', arg, zsrc)
+
+
+        self._props['type'] = 'histogram2d'
+        arg.pop('type', None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

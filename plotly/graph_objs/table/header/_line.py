@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Line(_BaseTraceHierarchyType):
 
-    _parent_path_str = "table.header"
-    _path_str = "table.header.line"
+    _parent_path_str = 'table.header'
+    _path_str = 'table.header.line'
     _valid_props = {"color", "colorsrc", "width", "widthsrc"}
 
     @property
@@ -26,11 +30,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     @property
     def colorsrc(self):
@@ -44,11 +48,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["colorsrc"]
+        return self['colorsrc']
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self["colorsrc"] = val
+        self['colorsrc'] = val
 
     @property
     def width(self):
@@ -61,11 +65,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self["width"]
+        return self['width']
 
     @width.setter
     def width(self, val):
-        self["width"] = val
+        self['width'] = val
 
     @property
     def widthsrc(self):
@@ -79,11 +83,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["widthsrc"]
+        return self['widthsrc']
 
     @widthsrc.setter
     def widthsrc(self, val):
-        self["widthsrc"] = val
+        self['widthsrc'] = val
 
     @property
     def _prop_descriptions(self):
@@ -99,10 +103,14 @@ class Line(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `width`.
         """
-
-    def __init__(
-        self, arg=None, color=None, colorsrc=None, width=None, widthsrc=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            color=None,
+            colorsrc=None,
+            width=None,
+            widthsrc=None,
+            **kwargs
+        ):
         """
         Construct a new Line object
 
@@ -127,9 +135,9 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super().__init__("line")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('line')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -139,19 +147,19 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.table.header.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.table.header.Line`"""
-            )
+an instance of :class:`plotly.graph_objs.table.header.Line`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
-        self._set_property("width", arg, width)
-        self._set_property("widthsrc", arg, widthsrc)
+
+        self._set_property('color', arg, color)
+        self._set_property('colorsrc', arg, colorsrc)
+        self._set_property('width', arg, width)
+        self._set_property('widthsrc', arg, widthsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

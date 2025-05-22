@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Circle(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.mapbox.layer"
-    _path_str = "layout.mapbox.layer.circle"
+    _parent_path_str = 'layout.mapbox.layer'
+    _path_str = 'layout.mapbox.layer.circle'
     _valid_props = {"radius"}
 
     @property
@@ -24,11 +28,11 @@ class Circle(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["radius"]
+        return self['radius']
 
     @radius.setter
     def radius(self, val):
-        self["radius"] = val
+        self['radius'] = val
 
     @property
     def _prop_descriptions(self):
@@ -38,8 +42,11 @@ class Circle(_BaseLayoutHierarchyType):
             radius). Has an effect only when `type` is set to
             "circle".
         """
-
-    def __init__(self, arg=None, radius=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            radius=None,
+            **kwargs
+        ):
         """
         Construct a new Circle object
 
@@ -58,9 +65,9 @@ class Circle(_BaseLayoutHierarchyType):
         -------
         Circle
         """
-        super().__init__("circle")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('circle')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -70,16 +77,16 @@ class Circle(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Circle
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Circle`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Circle`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("radius", arg, radius)
+
+        self._set_property('radius', arg, radius)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
