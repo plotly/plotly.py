@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,28 +11,9 @@ import copy as _copy
 
 class Updatemenu(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout"
-    _path_str = "layout.updatemenu"
-    _valid_props = {
-        "active",
-        "bgcolor",
-        "bordercolor",
-        "borderwidth",
-        "buttondefaults",
-        "buttons",
-        "direction",
-        "font",
-        "name",
-        "pad",
-        "showactive",
-        "templateitemname",
-        "type",
-        "visible",
-        "x",
-        "xanchor",
-        "y",
-        "yanchor",
-    }
+    _parent_path_str = 'layout'
+    _path_str = 'layout.updatemenu'
+    _valid_props = {"active", "bgcolor", "bordercolor", "borderwidth", "buttondefaults", "buttons", "direction", "font", "name", "pad", "showactive", "templateitemname", "type", "visible", "x", "xanchor", "y", "yanchor"}
 
     @property
     def active(self):
@@ -44,11 +29,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self["active"]
+        return self['active']
 
     @active.setter
     def active(self, val):
-        self["active"] = val
+        self['active'] = val
 
     @property
     def bgcolor(self):
@@ -66,11 +51,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["bgcolor"]
+        return self['bgcolor']
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self["bgcolor"] = val
+        self['bgcolor'] = val
 
     @property
     def bordercolor(self):
@@ -88,11 +73,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["bordercolor"]
+        return self['bordercolor']
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self["bordercolor"] = val
+        self['bordercolor'] = val
 
     @property
     def borderwidth(self):
@@ -106,11 +91,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["borderwidth"]
+        return self['borderwidth']
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self["borderwidth"] = val
+        self['borderwidth'] = val
 
     @property
     def buttons(self):
@@ -125,11 +110,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.updatemenu.Button]
         """
-        return self["buttons"]
+        return self['buttons']
 
     @buttons.setter
     def buttons(self, val):
-        self["buttons"] = val
+        self['buttons'] = val
 
     @property
     def buttondefaults(self):
@@ -149,11 +134,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.updatemenu.Button
         """
-        return self["buttondefaults"]
+        return self['buttondefaults']
 
     @buttondefaults.setter
     def buttondefaults(self, val):
-        self["buttondefaults"] = val
+        self['buttondefaults'] = val
 
     @property
     def direction(self):
@@ -171,11 +156,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["direction"]
+        return self['direction']
 
     @direction.setter
     def direction(self, val):
-        self["direction"] = val
+        self['direction'] = val
 
     @property
     def font(self):
@@ -192,11 +177,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.updatemenu.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     @property
     def name(self):
@@ -217,11 +202,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     @property
     def pad(self):
@@ -238,11 +223,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.updatemenu.Pad
         """
-        return self["pad"]
+        return self['pad']
 
     @pad.setter
     def pad(self, val):
-        self["pad"] = val
+        self['pad'] = val
 
     @property
     def showactive(self):
@@ -256,11 +241,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["showactive"]
+        return self['showactive']
 
     @showactive.setter
     def showactive(self, val):
-        self["showactive"] = val
+        self['showactive'] = val
 
     @property
     def templateitemname(self):
@@ -282,11 +267,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["templateitemname"]
+        return self['templateitemname']
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self["templateitemname"] = val
+        self['templateitemname'] = val
 
     @property
     def type(self):
@@ -303,11 +288,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["type"]
+        return self['type']
 
     @type.setter
     def type(self, val):
-        self["type"] = val
+        self['type'] = val
 
     @property
     def visible(self):
@@ -321,11 +306,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     @property
     def x(self):
@@ -340,11 +325,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["x"]
+        return self['x']
 
     @x.setter
     def x(self, val):
-        self["x"] = val
+        self['x'] = val
 
     @property
     def xanchor(self):
@@ -361,11 +346,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["xanchor"]
+        return self['xanchor']
 
     @xanchor.setter
     def xanchor(self, val):
-        self["xanchor"] = val
+        self['xanchor'] = val
 
     @property
     def y(self):
@@ -380,11 +365,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["y"]
+        return self['y']
 
     @y.setter
     def y(self, val):
-        self["y"] = val
+        self['y'] = val
 
     @property
     def yanchor(self):
@@ -401,11 +386,11 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["yanchor"]
+        return self['yanchor']
 
     @yanchor.setter
     def yanchor(self, val):
-        self["yanchor"] = val
+        self['yanchor'] = val
 
     @property
     def _prop_descriptions(self):
@@ -482,30 +467,28 @@ class Updatemenu(_BaseLayoutHierarchyType):
             anchor binds the `y` position to the "top", "middle" or
             "bottom" of the range selector.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        active=None,
-        bgcolor=None,
-        bordercolor=None,
-        borderwidth=None,
-        buttons=None,
-        buttondefaults=None,
-        direction=None,
-        font=None,
-        name=None,
-        pad=None,
-        showactive=None,
-        templateitemname=None,
-        type=None,
-        visible=None,
-        x=None,
-        xanchor=None,
-        y=None,
-        yanchor=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            active=None,
+            bgcolor=None,
+            bordercolor=None,
+            borderwidth=None,
+            buttons=None,
+            buttondefaults=None,
+            direction=None,
+            font=None,
+            name=None,
+            pad=None,
+            showactive=None,
+            templateitemname=None,
+            type=None,
+            visible=None,
+            x=None,
+            xanchor=None,
+            y=None,
+            yanchor=None,
+            **kwargs
+        ):
         """
         Construct a new Updatemenu object
 
@@ -591,9 +574,9 @@ class Updatemenu(_BaseLayoutHierarchyType):
         -------
         Updatemenu
         """
-        super().__init__("updatemenus")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('updatemenus')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -603,33 +586,33 @@ class Updatemenu(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Updatemenu
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Updatemenu`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Updatemenu`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("active", arg, active)
-        self._set_property("bgcolor", arg, bgcolor)
-        self._set_property("bordercolor", arg, bordercolor)
-        self._set_property("borderwidth", arg, borderwidth)
-        self._set_property("buttons", arg, buttons)
-        self._set_property("buttondefaults", arg, buttondefaults)
-        self._set_property("direction", arg, direction)
-        self._set_property("font", arg, font)
-        self._set_property("name", arg, name)
-        self._set_property("pad", arg, pad)
-        self._set_property("showactive", arg, showactive)
-        self._set_property("templateitemname", arg, templateitemname)
-        self._set_property("type", arg, type)
-        self._set_property("visible", arg, visible)
-        self._set_property("x", arg, x)
-        self._set_property("xanchor", arg, xanchor)
-        self._set_property("y", arg, y)
-        self._set_property("yanchor", arg, yanchor)
+
+        self._set_property('active', arg, active)
+        self._set_property('bgcolor', arg, bgcolor)
+        self._set_property('bordercolor', arg, bordercolor)
+        self._set_property('borderwidth', arg, borderwidth)
+        self._set_property('buttons', arg, buttons)
+        self._set_property('buttondefaults', arg, buttondefaults)
+        self._set_property('direction', arg, direction)
+        self._set_property('font', arg, font)
+        self._set_property('name', arg, name)
+        self._set_property('pad', arg, pad)
+        self._set_property('showactive', arg, showactive)
+        self._set_property('templateitemname', arg, templateitemname)
+        self._set_property('type', arg, type)
+        self._set_property('visible', arg, visible)
+        self._set_property('x', arg, x)
+        self._set_property('xanchor', arg, xanchor)
+        self._set_property('y', arg, y)
+        self._set_property('yanchor', arg, yanchor)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

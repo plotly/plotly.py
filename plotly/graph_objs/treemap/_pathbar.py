@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Pathbar(_BaseTraceHierarchyType):
 
-    _parent_path_str = "treemap"
-    _path_str = "treemap.pathbar"
+    _parent_path_str = 'treemap'
+    _path_str = 'treemap.pathbar'
     _valid_props = {"edgeshape", "side", "textfont", "thickness", "visible"}
 
     @property
@@ -25,11 +29,11 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["edgeshape"]
+        return self['edgeshape']
 
     @edgeshape.setter
     def edgeshape(self, val):
-        self["edgeshape"] = val
+        self['edgeshape'] = val
 
     @property
     def side(self):
@@ -45,11 +49,11 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self["side"]
+        return self['side']
 
     @side.setter
     def side(self, val):
-        self["side"] = val
+        self['side'] = val
 
     @property
     def textfont(self):
@@ -66,11 +70,11 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.treemap.pathbar.Textfont
         """
-        return self["textfont"]
+        return self['textfont']
 
     @textfont.setter
     def textfont(self, val):
-        self["textfont"] = val
+        self['textfont'] = val
 
     @property
     def thickness(self):
@@ -86,11 +90,11 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["thickness"]
+        return self['thickness']
 
     @thickness.setter
     def thickness(self, val):
-        self["thickness"] = val
+        self['thickness'] = val
 
     @property
     def visible(self):
@@ -105,11 +109,11 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     @property
     def _prop_descriptions(self):
@@ -130,17 +134,15 @@ class Pathbar(_BaseTraceHierarchyType):
             Determines if the path bar is drawn i.e. outside the
             trace `domain` and with one pixel gap.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        edgeshape=None,
-        side=None,
-        textfont=None,
-        thickness=None,
-        visible=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            edgeshape=None,
+            side=None,
+            textfont=None,
+            thickness=None,
+            visible=None,
+            **kwargs
+        ):
         """
         Construct a new Pathbar object
 
@@ -170,9 +172,9 @@ class Pathbar(_BaseTraceHierarchyType):
         -------
         Pathbar
         """
-        super().__init__("pathbar")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('pathbar')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -182,20 +184,20 @@ class Pathbar(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.treemap.Pathbar
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.Pathbar`"""
-            )
+an instance of :class:`plotly.graph_objs.treemap.Pathbar`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("edgeshape", arg, edgeshape)
-        self._set_property("side", arg, side)
-        self._set_property("textfont", arg, textfont)
-        self._set_property("thickness", arg, thickness)
-        self._set_property("visible", arg, visible)
+
+        self._set_property('edgeshape', arg, edgeshape)
+        self._set_property('side', arg, side)
+        self._set_property('textfont', arg, textfont)
+        self._set_property('thickness', arg, thickness)
+        self._set_property('visible', arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

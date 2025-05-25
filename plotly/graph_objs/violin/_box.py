@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Box(_BaseTraceHierarchyType):
 
-    _parent_path_str = "violin"
-    _path_str = "violin.box"
+    _parent_path_str = 'violin'
+    _path_str = 'violin.box'
     _valid_props = {"fillcolor", "line", "visible", "width"}
 
     @property
@@ -27,11 +31,11 @@ class Box(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["fillcolor"]
+        return self['fillcolor']
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self["fillcolor"] = val
+        self['fillcolor'] = val
 
     @property
     def line(self):
@@ -46,11 +50,11 @@ class Box(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.violin.box.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     @property
     def visible(self):
@@ -65,11 +69,11 @@ class Box(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["visible"]
+        return self['visible']
 
     @visible.setter
     def visible(self, val):
-        self["visible"] = val
+        self['visible'] = val
 
     @property
     def width(self):
@@ -85,11 +89,11 @@ class Box(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["width"]
+        return self['width']
 
     @width.setter
     def width(self, val):
-        self["width"] = val
+        self['width'] = val
 
     @property
     def _prop_descriptions(self):
@@ -107,10 +111,14 @@ class Box(_BaseTraceHierarchyType):
             violins' width. For example, with 1, the inner box
             plots are as wide as the violins.
         """
-
-    def __init__(
-        self, arg=None, fillcolor=None, line=None, visible=None, width=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            fillcolor=None,
+            line=None,
+            visible=None,
+            width=None,
+            **kwargs
+        ):
         """
         Construct a new Box object
 
@@ -136,9 +144,9 @@ class Box(_BaseTraceHierarchyType):
         -------
         Box
         """
-        super().__init__("box")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('box')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -148,19 +156,19 @@ class Box(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.violin.Box
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.violin.Box`"""
-            )
+an instance of :class:`plotly.graph_objs.violin.Box`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("fillcolor", arg, fillcolor)
-        self._set_property("line", arg, line)
-        self._set_property("visible", arg, visible)
-        self._set_property("width", arg, width)
+
+        self._set_property('fillcolor', arg, fillcolor)
+        self._set_property('line', arg, line)
+        self._set_property('visible', arg, visible)
+        self._set_property('width', arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
