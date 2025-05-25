@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Spaceframe(_BaseTraceHierarchyType):
 
-    _parent_path_str = "volume"
-    _path_str = "volume.spaceframe"
+    _parent_path_str = 'volume'
+    _path_str = 'volume.spaceframe'
     _valid_props = {"fill", "show"}
 
     @property
@@ -26,11 +30,11 @@ class Spaceframe(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     @property
     def show(self):
@@ -46,11 +50,11 @@ class Spaceframe(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["show"]
+        return self['show']
 
     @show.setter
     def show(self, val):
-        self["show"] = val
+        self['show'] = val
 
     @property
     def _prop_descriptions(self):
@@ -66,8 +70,12 @@ class Spaceframe(_BaseTraceHierarchyType):
             surfaces are disabled or filled with values less than
             1.
         """
-
-    def __init__(self, arg=None, fill=None, show=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            fill=None,
+            show=None,
+            **kwargs
+        ):
         """
         Construct a new Spaceframe object
 
@@ -92,9 +100,9 @@ class Spaceframe(_BaseTraceHierarchyType):
         -------
         Spaceframe
         """
-        super().__init__("spaceframe")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('spaceframe')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -104,17 +112,17 @@ class Spaceframe(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.volume.Spaceframe
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.volume.Spaceframe`"""
-            )
+an instance of :class:`plotly.graph_objs.volume.Spaceframe`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("fill", arg, fill)
-        self._set_property("show", arg, show)
+
+        self._set_property('fill', arg, fill)
+        self._set_property('show', arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

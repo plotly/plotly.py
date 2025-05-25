@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Bounds(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.map"
-    _path_str = "layout.map.bounds"
+    _parent_path_str = 'layout.map'
+    _path_str = 'layout.map.bounds'
     _valid_props = {"east", "north", "south", "west"}
 
     @property
@@ -24,11 +28,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["east"]
+        return self['east']
 
     @east.setter
     def east(self, val):
-        self["east"] = val
+        self['east'] = val
 
     @property
     def north(self):
@@ -43,11 +47,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["north"]
+        return self['north']
 
     @north.setter
     def north(self, val):
-        self["north"] = val
+        self['north'] = val
 
     @property
     def south(self):
@@ -62,11 +66,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["south"]
+        return self['south']
 
     @south.setter
     def south(self, val):
-        self["south"] = val
+        self['south'] = val
 
     @property
     def west(self):
@@ -81,11 +85,11 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["west"]
+        return self['west']
 
     @west.setter
     def west(self, val):
-        self["west"] = val
+        self['west'] = val
 
     @property
     def _prop_descriptions(self):
@@ -103,10 +107,14 @@ class Bounds(_BaseLayoutHierarchyType):
             Sets the minimum longitude of the map (in degrees East)
             if `east`, `south` and `north` are declared.
         """
-
-    def __init__(
-        self, arg=None, east=None, north=None, south=None, west=None, **kwargs
-    ):
+    def __init__(self,
+            arg=None,
+            east=None,
+            north=None,
+            south=None,
+            west=None,
+            **kwargs
+        ):
         """
         Construct a new Bounds object
 
@@ -133,9 +141,9 @@ class Bounds(_BaseLayoutHierarchyType):
         -------
         Bounds
         """
-        super().__init__("bounds")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('bounds')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -145,19 +153,19 @@ class Bounds(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.Bounds
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.Bounds`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.Bounds`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("east", arg, east)
-        self._set_property("north", arg, north)
-        self._set_property("south", arg, south)
-        self._set_property("west", arg, west)
+
+        self._set_property('east', arg, east)
+        self._set_property('north', arg, north)
+        self._set_property('south', arg, south)
+        self._set_property('west', arg, west)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

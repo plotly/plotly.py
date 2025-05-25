@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,39 +11,31 @@ import copy as _copy
 
 class Rangebreak(_BaseLayoutHierarchyType):
 
-    _parent_path_str = "layout.yaxis"
-    _path_str = "layout.yaxis.rangebreak"
-    _valid_props = {
-        "bounds",
-        "dvalue",
-        "enabled",
-        "name",
-        "pattern",
-        "templateitemname",
-        "values",
-    }
+    _parent_path_str = 'layout.yaxis'
+    _path_str = 'layout.yaxis.rangebreak'
+    _valid_props = {"bounds", "dvalue", "enabled", "name", "pattern", "templateitemname", "values"}
 
     @property
     def bounds(self):
         """
-            Sets the lower and upper bounds of this axis rangebreak. Can be
-            used with `pattern`.
+        Sets the lower and upper bounds of this axis rangebreak. Can be
+        used with `pattern`.
 
-            The 'bounds' property is an info array that may be specified as:
+        The 'bounds' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'bounds[0]' property accepts values of any type
+    (1) The 'bounds[1]' property accepts values of any type
 
-            * a list or tuple of 2 elements where:
-        (0) The 'bounds[0]' property accepts values of any type
-        (1) The 'bounds[1]' property accepts values of any type
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
-        return self["bounds"]
+        return self['bounds']
 
     @bounds.setter
     def bounds(self, val):
-        self["bounds"] = val
+        self['bounds'] = val
 
     @property
     def dvalue(self):
@@ -54,11 +50,11 @@ class Rangebreak(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self["dvalue"]
+        return self['dvalue']
 
     @dvalue.setter
     def dvalue(self, val):
-        self["dvalue"] = val
+        self['dvalue'] = val
 
     @property
     def enabled(self):
@@ -73,11 +69,11 @@ class Rangebreak(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self["enabled"]
+        return self['enabled']
 
     @enabled.setter
     def enabled(self, val):
-        self["enabled"] = val
+        self['enabled'] = val
 
     @property
     def name(self):
@@ -98,11 +94,11 @@ class Rangebreak(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["name"]
+        return self['name']
 
     @name.setter
     def name(self, val):
-        self["name"] = val
+        self['name'] = val
 
     @property
     def pattern(self):
@@ -126,11 +122,11 @@ class Rangebreak(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self["pattern"]
+        return self['pattern']
 
     @pattern.setter
     def pattern(self, val):
-        self["pattern"] = val
+        self['pattern'] = val
 
     @property
     def templateitemname(self):
@@ -152,11 +148,11 @@ class Rangebreak(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self["templateitemname"]
+        return self['templateitemname']
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self["templateitemname"] = val
+        self['templateitemname'] = val
 
     @property
     def values(self):
@@ -173,11 +169,11 @@ class Rangebreak(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self["values"]
+        return self['values']
 
     @values.setter
     def values(self, val):
-        self["values"] = val
+        self['values'] = val
 
     @property
     def _prop_descriptions(self):
@@ -228,19 +224,17 @@ class Rangebreak(_BaseLayoutHierarchyType):
             rangebreaks. An alternative to `bounds`. Use `dvalue`
             to set the size of the values along the axis.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        bounds=None,
-        dvalue=None,
-        enabled=None,
-        name=None,
-        pattern=None,
-        templateitemname=None,
-        values=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            bounds=None,
+            dvalue=None,
+            enabled=None,
+            name=None,
+            pattern=None,
+            templateitemname=None,
+            values=None,
+            **kwargs
+        ):
         """
         Construct a new Rangebreak object
 
@@ -300,9 +294,9 @@ class Rangebreak(_BaseLayoutHierarchyType):
         -------
         Rangebreak
         """
-        super().__init__("rangebreaks")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('rangebreaks')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -312,22 +306,22 @@ class Rangebreak(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.yaxis.Rangebreak
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.yaxis.Rangebreak`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.yaxis.Rangebreak`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("bounds", arg, bounds)
-        self._set_property("dvalue", arg, dvalue)
-        self._set_property("enabled", arg, enabled)
-        self._set_property("name", arg, name)
-        self._set_property("pattern", arg, pattern)
-        self._set_property("templateitemname", arg, templateitemname)
-        self._set_property("values", arg, values)
+
+        self._set_property('bounds', arg, bounds)
+        self._set_property('dvalue', arg, dvalue)
+        self._set_property('enabled', arg, enabled)
+        self._set_property('name', arg, name)
+        self._set_property('pattern', arg, pattern)
+        self._set_property('templateitemname', arg, templateitemname)
+        self._set_property('values', arg, values)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

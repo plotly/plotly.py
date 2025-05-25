@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Textfont(_BaseTraceHierarchyType):
 
-    _parent_path_str = "barpolar.unselected"
-    _path_str = "barpolar.unselected.textfont"
+    _parent_path_str = 'barpolar.unselected'
+    _path_str = 'barpolar.unselected.textfont'
     _valid_props = {"color"}
 
     @property
@@ -28,11 +32,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["color"]
+        return self['color']
 
     @color.setter
     def color(self, val):
-        self["color"] = val
+        self['color'] = val
 
     @property
     def _prop_descriptions(self):
@@ -41,8 +45,11 @@ class Textfont(_BaseTraceHierarchyType):
             Sets the text font color of unselected points, applied
             only when a selection exists.
         """
-
-    def __init__(self, arg=None, color=None, **kwargs):
+    def __init__(self,
+            arg=None,
+            color=None,
+            **kwargs
+        ):
         """
         Construct a new Textfont object
 
@@ -60,9 +67,9 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         Textfont
         """
-        super().__init__("textfont")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('textfont')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -72,16 +79,16 @@ class Textfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.barpolar.unselected.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.barpolar.unselected.Textfont`"""
-            )
+an instance of :class:`plotly.graph_objs.barpolar.unselected.Textfont`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("color", arg, color)
+
+        self._set_property('color', arg, color)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

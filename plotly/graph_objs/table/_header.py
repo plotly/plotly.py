@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,24 +11,9 @@ import copy as _copy
 
 class Header(_BaseTraceHierarchyType):
 
-    _parent_path_str = "table"
-    _path_str = "table.header"
-    _valid_props = {
-        "align",
-        "alignsrc",
-        "fill",
-        "font",
-        "format",
-        "formatsrc",
-        "height",
-        "line",
-        "prefix",
-        "prefixsrc",
-        "suffix",
-        "suffixsrc",
-        "values",
-        "valuessrc",
-    }
+    _parent_path_str = 'table'
+    _path_str = 'table.header'
+    _valid_props = {"align", "alignsrc", "fill", "font", "format", "formatsrc", "height", "line", "prefix", "prefixsrc", "suffix", "suffixsrc", "values", "valuessrc"}
 
     @property
     def align(self):
@@ -43,11 +32,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self["align"]
+        return self['align']
 
     @align.setter
     def align(self, val):
-        self["align"] = val
+        self['align'] = val
 
     @property
     def alignsrc(self):
@@ -61,11 +50,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["alignsrc"]
+        return self['alignsrc']
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self["alignsrc"] = val
+        self['alignsrc'] = val
 
     @property
     def fill(self):
@@ -80,11 +69,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.header.Fill
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     @property
     def font(self):
@@ -99,11 +88,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.header.Font
         """
-        return self["font"]
+        return self['font']
 
     @font.setter
     def font(self, val):
-        self["font"] = val
+        self['font'] = val
 
     @property
     def format(self):
@@ -120,11 +109,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["format"]
+        return self['format']
 
     @format.setter
     def format(self, val):
-        self["format"] = val
+        self['format'] = val
 
     @property
     def formatsrc(self):
@@ -138,11 +127,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["formatsrc"]
+        return self['formatsrc']
 
     @formatsrc.setter
     def formatsrc(self, val):
-        self["formatsrc"] = val
+        self['formatsrc'] = val
 
     @property
     def height(self):
@@ -156,11 +145,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["height"]
+        return self['height']
 
     @height.setter
     def height(self, val):
-        self["height"] = val
+        self['height'] = val
 
     @property
     def line(self):
@@ -175,11 +164,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.header.Line
         """
-        return self["line"]
+        return self['line']
 
     @line.setter
     def line(self, val):
-        self["line"] = val
+        self['line'] = val
 
     @property
     def prefix(self):
@@ -195,11 +184,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self["prefix"]
+        return self['prefix']
 
     @prefix.setter
     def prefix(self, val):
-        self["prefix"] = val
+        self['prefix'] = val
 
     @property
     def prefixsrc(self):
@@ -213,11 +202,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["prefixsrc"]
+        return self['prefixsrc']
 
     @prefixsrc.setter
     def prefixsrc(self, val):
-        self["prefixsrc"] = val
+        self['prefixsrc'] = val
 
     @property
     def suffix(self):
@@ -233,11 +222,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self["suffix"]
+        return self['suffix']
 
     @suffix.setter
     def suffix(self, val):
-        self["suffix"] = val
+        self['suffix'] = val
 
     @property
     def suffixsrc(self):
@@ -251,11 +240,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["suffixsrc"]
+        return self['suffixsrc']
 
     @suffixsrc.setter
     def suffixsrc(self, val):
-        self["suffixsrc"] = val
+        self['suffixsrc'] = val
 
     @property
     def values(self):
@@ -272,11 +261,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["values"]
+        return self['values']
 
     @values.setter
     def values(self, val):
-        self["values"] = val
+        self['values'] = val
 
     @property
     def valuessrc(self):
@@ -290,11 +279,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["valuessrc"]
+        return self['valuessrc']
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self["valuessrc"] = val
+        self['valuessrc'] = val
 
     @property
     def _prop_descriptions(self):
@@ -347,26 +336,24 @@ class Header(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `values`.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        align=None,
-        alignsrc=None,
-        fill=None,
-        font=None,
-        format=None,
-        formatsrc=None,
-        height=None,
-        line=None,
-        prefix=None,
-        prefixsrc=None,
-        suffix=None,
-        suffixsrc=None,
-        values=None,
-        valuessrc=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            align=None,
+            alignsrc=None,
+            fill=None,
+            font=None,
+            format=None,
+            formatsrc=None,
+            height=None,
+            line=None,
+            prefix=None,
+            prefixsrc=None,
+            suffix=None,
+            suffixsrc=None,
+            values=None,
+            valuessrc=None,
+            **kwargs
+        ):
         """
         Construct a new Header object
 
@@ -427,9 +414,9 @@ class Header(_BaseTraceHierarchyType):
         -------
         Header
         """
-        super().__init__("header")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('header')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -439,29 +426,29 @@ class Header(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.table.Header
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.table.Header`"""
-            )
+an instance of :class:`plotly.graph_objs.table.Header`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("align", arg, align)
-        self._set_property("alignsrc", arg, alignsrc)
-        self._set_property("fill", arg, fill)
-        self._set_property("font", arg, font)
-        self._set_property("format", arg, format)
-        self._set_property("formatsrc", arg, formatsrc)
-        self._set_property("height", arg, height)
-        self._set_property("line", arg, line)
-        self._set_property("prefix", arg, prefix)
-        self._set_property("prefixsrc", arg, prefixsrc)
-        self._set_property("suffix", arg, suffix)
-        self._set_property("suffixsrc", arg, suffixsrc)
-        self._set_property("values", arg, values)
-        self._set_property("valuessrc", arg, valuessrc)
+
+        self._set_property('align', arg, align)
+        self._set_property('alignsrc', arg, alignsrc)
+        self._set_property('fill', arg, fill)
+        self._set_property('font', arg, font)
+        self._set_property('format', arg, format)
+        self._set_property('formatsrc', arg, formatsrc)
+        self._set_property('height', arg, height)
+        self._set_property('line', arg, line)
+        self._set_property('prefix', arg, prefix)
+        self._set_property('prefixsrc', arg, prefixsrc)
+        self._set_property('suffix', arg, suffix)
+        self._set_property('suffixsrc', arg, suffixsrc)
+        self._set_property('values', arg, values)
+        self._set_property('valuessrc', arg, valuessrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

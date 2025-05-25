@@ -1,3 +1,7 @@
+
+
+
+
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -7,8 +11,8 @@ import copy as _copy
 
 class Y(_BaseTraceHierarchyType):
 
-    _parent_path_str = "volume.slices"
-    _path_str = "volume.slices.y"
+    _parent_path_str = 'volume.slices'
+    _path_str = 'volume.slices.y'
     _valid_props = {"fill", "locations", "locationssrc", "show"}
 
     @property
@@ -26,11 +30,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self["fill"]
+        return self['fill']
 
     @fill.setter
     def fill(self, val):
-        self["fill"] = val
+        self['fill'] = val
 
     @property
     def locations(self):
@@ -46,11 +50,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self["locations"]
+        return self['locations']
 
     @locations.setter
     def locations(self, val):
-        self["locations"] = val
+        self['locations'] = val
 
     @property
     def locationssrc(self):
@@ -65,11 +69,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self["locationssrc"]
+        return self['locationssrc']
 
     @locationssrc.setter
     def locationssrc(self, val):
-        self["locationssrc"] = val
+        self['locationssrc'] = val
 
     @property
     def show(self):
@@ -84,11 +88,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self["show"]
+        return self['show']
 
     @show.setter
     def show(self, val):
-        self["show"] = val
+        self['show'] = val
 
     @property
     def _prop_descriptions(self):
@@ -110,16 +114,14 @@ class Y(_BaseTraceHierarchyType):
             Determines whether or not slice planes about the y
             dimension are drawn.
         """
-
-    def __init__(
-        self,
-        arg=None,
-        fill=None,
-        locations=None,
-        locationssrc=None,
-        show=None,
-        **kwargs,
-    ):
+    def __init__(self,
+            arg=None,
+            fill=None,
+            locations=None,
+            locationssrc=None,
+            show=None,
+            **kwargs
+        ):
         """
         Construct a new Y object
 
@@ -150,9 +152,9 @@ class Y(_BaseTraceHierarchyType):
         -------
         Y
         """
-        super().__init__("y")
-        if "_parent" in kwargs:
-            self._parent = kwargs["_parent"]
+        super().__init__('y')
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
             return
 
         if arg is None:
@@ -162,19 +164,19 @@ class Y(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.volume.slices.Y
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.volume.slices.Y`"""
-            )
+an instance of :class:`plotly.graph_objs.volume.slices.Y`""")
 
-        self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("_validate", True)
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._validate = kwargs.pop('_validate', True)
+        
 
-        self._set_property("fill", arg, fill)
-        self._set_property("locations", arg, locations)
-        self._set_property("locationssrc", arg, locationssrc)
-        self._set_property("show", arg, show)
+
+        self._set_property('fill', arg, fill)
+        self._set_property('locations', arg, locations)
+        self._set_property('locationssrc', arg, locationssrc)
+        self._set_property('show', arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
