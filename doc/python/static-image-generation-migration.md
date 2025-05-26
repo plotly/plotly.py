@@ -46,7 +46,7 @@ To migrate from either Orca or Kaleido v0, first install the latest Kaleido with
 pip install --upgrade kaleido
 ```
 
-## Chrome 
+## Chrome
 
 Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome as part of the Kaleido package. Kaleido v1 does not include Chrome; instead, it looks for a compatible version of Chrome (or Chromium) already installed on the machine on which it's running.
 
@@ -54,7 +54,7 @@ See the [Chrome section](/python/static-image-export#chrome) on the Static Image
 
 ## Engine Parameter
 
-The `engine` parameter on static image export methods and functions is deprecated in Plotly.py 6.1 and will be removed after September 2025. Once the `engine` parameter is removed, static image generation will use Kaleido v1 if it's installed, or raise an error if it isn't.
+The `engine` parameter on static image export methods and functions is deprecated in Plotly.py 6.2 and will be removed after September 2025. Once the `engine` parameter is removed, static image generation will use Kaleido v1 if it's installed, or raise an error if it isn't.
 
 You'll need to update your code to remove references to `engine`. For example, `fig.to_image(format="png", engine="orca")` or `fig.to_image(format="png", engine="kaleido")` needs to be updated to `fig.to_image(format="png")`. This change applies to: `fig.to_image`, `fig.write_image`, `plotly.io.to_image`, and `plotly.io.write_image`.
 
@@ -69,7 +69,7 @@ Accessing Kaleido defaults and config settings via `plotly.io.kaleido.scope` is 
 ~~~python
 import plotly.io as pio
 pio.defaults.default_format = "jpeg"
-# Instead of: 
+# Instead of:
 # pio.kaleido.scope.default_format = "jpeg"
 ~~~
 
