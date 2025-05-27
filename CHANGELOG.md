@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.1.2] - 2025-05-27
+
+### Fixed
+- Fix type checking and code highlighting for `graph_objects` classes [[#5199](https://github.com/plotly/plotly.py/pull/5199)]
+
+
 ## [6.1.1] - 2025-05-20
 
 ### Fixed
