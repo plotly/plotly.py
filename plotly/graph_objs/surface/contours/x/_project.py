@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Project(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'surface.contours.x'
-    _path_str = 'surface.contours.x.project'
+    _parent_path_str = "surface.contours.x"
+    _path_str = "surface.contours.x.project"
     _valid_props = {"x", "y", "z"}
 
     @property
@@ -30,11 +26,11 @@ class Project(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     @property
     def y(self):
@@ -51,11 +47,11 @@ class Project(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     @property
     def z(self):
@@ -72,11 +68,11 @@ class Project(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     @property
     def _prop_descriptions(self):
@@ -100,13 +96,8 @@ class Project(_BaseTraceHierarchyType):
             If `show` is set to True, the projected lines are shown
             in permanence.
         """
-    def __init__(self,
-            arg=None,
-            x=None,
-            y=None,
-            z=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Project object
 
@@ -139,9 +130,9 @@ class Project(_BaseTraceHierarchyType):
         -------
         Project
         """
-        super().__init__('project')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("project")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -151,18 +142,18 @@ class Project(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.surface.contours.x.Project
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.contours.x.Project`""")
+an instance of :class:`plotly.graph_objs.surface.contours.x.Project`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('x', arg, x)
-        self._set_property('y', arg, y)
-        self._set_property('z', arg, z)
+        self._set_property("x", arg, x)
+        self._set_property("y", arg, y)
+        self._set_property("z", arg, z)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

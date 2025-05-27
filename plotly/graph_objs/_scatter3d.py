@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,66 @@ import copy as _copy
 
 class Scatter3d(_BaseTraceType):
 
-    _parent_path_str = ''
-    _path_str = 'scatter3d'
-    _valid_props = {"connectgaps", "customdata", "customdatasrc", "error_x", "error_y", "error_z", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "line", "marker", "meta", "metasrc", "mode", "name", "opacity", "projection", "scene", "showlegend", "stream", "surfaceaxis", "surfacecolor", "text", "textfont", "textposition", "textpositionsrc", "textsrc", "texttemplate", "texttemplatesrc", "type", "uid", "uirevision", "visible", "x", "xcalendar", "xhoverformat", "xsrc", "y", "ycalendar", "yhoverformat", "ysrc", "z", "zcalendar", "zhoverformat", "zsrc"}
+    _parent_path_str = ""
+    _path_str = "scatter3d"
+    _valid_props = {
+        "connectgaps",
+        "customdata",
+        "customdatasrc",
+        "error_x",
+        "error_y",
+        "error_z",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "line",
+        "marker",
+        "meta",
+        "metasrc",
+        "mode",
+        "name",
+        "opacity",
+        "projection",
+        "scene",
+        "showlegend",
+        "stream",
+        "surfaceaxis",
+        "surfacecolor",
+        "text",
+        "textfont",
+        "textposition",
+        "textpositionsrc",
+        "textsrc",
+        "texttemplate",
+        "texttemplatesrc",
+        "type",
+        "uid",
+        "uirevision",
+        "visible",
+        "x",
+        "xcalendar",
+        "xhoverformat",
+        "xsrc",
+        "y",
+        "ycalendar",
+        "yhoverformat",
+        "ysrc",
+        "z",
+        "zcalendar",
+        "zhoverformat",
+        "zsrc",
+    }
 
     @property
     def connectgaps(self):
@@ -28,11 +81,11 @@ class Scatter3d(_BaseTraceType):
         -------
         bool
         """
-        return self['connectgaps']
+        return self["connectgaps"]
 
     @connectgaps.setter
     def connectgaps(self, val):
-        self['connectgaps'] = val
+        self["connectgaps"] = val
 
     @property
     def customdata(self):
@@ -49,11 +102,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
     @property
     def customdatasrc(self):
@@ -68,11 +121,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
     @property
     def error_x(self):
@@ -87,11 +140,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.ErrorX
         """
-        return self['error_x']
+        return self["error_x"]
 
     @error_x.setter
     def error_x(self, val):
-        self['error_x'] = val
+        self["error_x"] = val
 
     @property
     def error_y(self):
@@ -106,11 +159,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.ErrorY
         """
-        return self['error_y']
+        return self["error_y"]
 
     @error_y.setter
     def error_y(self, val):
-        self['error_y'] = val
+        self["error_y"] = val
 
     @property
     def error_z(self):
@@ -125,11 +178,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.ErrorZ
         """
-        return self['error_z']
+        return self["error_z"]
 
     @error_z.setter
     def error_z(self, val):
-        self['error_z'] = val
+        self["error_z"] = val
 
     @property
     def hoverinfo(self):
@@ -149,11 +202,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
     @property
     def hoverinfosrc(self):
@@ -168,11 +221,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -187,11 +240,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
     @property
     def hovertemplate(self):
@@ -229,11 +282,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
     @property
     def hovertemplatesrc(self):
@@ -248,11 +301,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
     @property
     def hovertext(self):
@@ -272,11 +325,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
     @property
     def hovertextsrc(self):
@@ -291,11 +344,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
     @property
     def ids(self):
@@ -311,11 +364,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
     @property
     def idssrc(self):
@@ -329,11 +382,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -352,11 +405,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
     @property
     def legendgroup(self):
@@ -373,11 +426,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
     @property
     def legendgrouptitle(self):
@@ -392,11 +445,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
     @property
     def legendrank(self):
@@ -417,11 +470,11 @@ class Scatter3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
     @property
     def legendwidth(self):
@@ -436,11 +489,11 @@ class Scatter3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
     @property
     def line(self):
@@ -455,11 +508,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     @property
     def marker(self):
@@ -474,11 +527,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
     @property
     def meta(self):
@@ -500,11 +553,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
     @property
     def metasrc(self):
@@ -518,11 +571,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
     @property
     def mode(self):
@@ -544,11 +597,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self['mode']
+        return self["mode"]
 
     @mode.setter
     def mode(self, val):
-        self['mode'] = val
+        self["mode"] = val
 
     @property
     def name(self):
@@ -564,11 +617,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def opacity(self):
@@ -582,11 +635,11 @@ class Scatter3d(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def projection(self):
@@ -601,11 +654,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.Projection
         """
-        return self['projection']
+        return self["projection"]
 
     @projection.setter
     def projection(self, val):
-        self['projection'] = val
+        self["projection"] = val
 
     @property
     def scene(self):
@@ -624,11 +677,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['scene']
+        return self["scene"]
 
     @scene.setter
     def scene(self, val):
-        self['scene'] = val
+        self["scene"] = val
 
     @property
     def showlegend(self):
@@ -643,11 +696,11 @@ class Scatter3d(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
     @property
     def stream(self):
@@ -662,11 +715,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
     @property
     def surfaceaxis(self):
@@ -683,11 +736,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self['surfaceaxis']
+        return self["surfaceaxis"]
 
     @surfaceaxis.setter
     def surfaceaxis(self, val):
-        self['surfaceaxis'] = val
+        self["surfaceaxis"] = val
 
     @property
     def surfacecolor(self):
@@ -705,11 +758,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['surfacecolor']
+        return self["surfacecolor"]
 
     @surfacecolor.setter
     def surfacecolor(self, val):
-        self['surfacecolor'] = val
+        self["surfacecolor"] = val
 
     @property
     def text(self):
@@ -730,11 +783,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     @property
     def textfont(self):
@@ -751,11 +804,11 @@ class Scatter3d(_BaseTraceType):
         -------
         plotly.graph_objs.scatter3d.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
     @property
     def textposition(self):
@@ -774,11 +827,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['textposition']
+        return self["textposition"]
 
     @textposition.setter
     def textposition(self, val):
-        self['textposition'] = val
+        self["textposition"] = val
 
     @property
     def textpositionsrc(self):
@@ -793,11 +846,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['textpositionsrc']
+        return self["textpositionsrc"]
 
     @textpositionsrc.setter
     def textpositionsrc(self, val):
-        self['textpositionsrc'] = val
+        self["textpositionsrc"] = val
 
     @property
     def textsrc(self):
@@ -811,11 +864,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
     @property
     def texttemplate(self):
@@ -842,11 +895,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['texttemplate']
+        return self["texttemplate"]
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self['texttemplate'] = val
+        self["texttemplate"] = val
 
     @property
     def texttemplatesrc(self):
@@ -861,11 +914,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['texttemplatesrc']
+        return self["texttemplatesrc"]
 
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
-        self['texttemplatesrc'] = val
+        self["texttemplatesrc"] = val
 
     @property
     def uid(self):
@@ -881,11 +934,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
     @property
     def uirevision(self):
@@ -912,11 +965,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def visible(self):
@@ -933,11 +986,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def x(self):
@@ -951,11 +1004,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     @property
     def xcalendar(self):
@@ -973,11 +1026,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self['xcalendar']
+        return self["xcalendar"]
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self['xcalendar'] = val
+        self["xcalendar"] = val
 
     @property
     def xhoverformat(self):
@@ -1002,11 +1055,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
     @property
     def xsrc(self):
@@ -1020,11 +1073,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
     @property
     def y(self):
@@ -1038,11 +1091,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     @property
     def ycalendar(self):
@@ -1060,11 +1113,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self['ycalendar']
+        return self["ycalendar"]
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self['ycalendar'] = val
+        self["ycalendar"] = val
 
     @property
     def yhoverformat(self):
@@ -1089,11 +1142,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
     @property
     def ysrc(self):
@@ -1107,11 +1160,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
     @property
     def z(self):
@@ -1125,11 +1178,11 @@ class Scatter3d(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     @property
     def zcalendar(self):
@@ -1147,11 +1200,11 @@ class Scatter3d(_BaseTraceType):
         -------
         Any
         """
-        return self['zcalendar']
+        return self["zcalendar"]
 
     @zcalendar.setter
     def zcalendar(self, val):
-        self['zcalendar'] = val
+        self["zcalendar"] = val
 
     @property
     def zhoverformat(self):
@@ -1176,11 +1229,11 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['zhoverformat']
+        return self["zhoverformat"]
 
     @zhoverformat.setter
     def zhoverformat(self, val):
-        self['zhoverformat'] = val
+        self["zhoverformat"] = val
 
     @property
     def zsrc(self):
@@ -1194,15 +1247,15 @@ class Scatter3d(_BaseTraceType):
         -------
         str
         """
-        return self['zsrc']
+        return self["zsrc"]
 
     @zsrc.setter
     def zsrc(self, val):
-        self['zsrc'] = val
+        self["zsrc"] = val
 
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
     @property
     def _prop_descriptions(self):
@@ -1494,65 +1547,67 @@ class Scatter3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `z`.
         """
-    def __init__(self,
-            arg=None,
-            connectgaps=None,
-            customdata=None,
-            customdatasrc=None,
-            error_x=None,
-            error_y=None,
-            error_z=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            line=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            mode=None,
-            name=None,
-            opacity=None,
-            projection=None,
-            scene=None,
-            showlegend=None,
-            stream=None,
-            surfaceaxis=None,
-            surfacecolor=None,
-            text=None,
-            textfont=None,
-            textposition=None,
-            textpositionsrc=None,
-            textsrc=None,
-            texttemplate=None,
-            texttemplatesrc=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            x=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            ycalendar=None,
-            yhoverformat=None,
-            ysrc=None,
-            z=None,
-            zcalendar=None,
-            zhoverformat=None,
-            zsrc=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        connectgaps=None,
+        customdata=None,
+        customdatasrc=None,
+        error_x=None,
+        error_y=None,
+        error_z=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        line=None,
+        marker=None,
+        meta=None,
+        metasrc=None,
+        mode=None,
+        name=None,
+        opacity=None,
+        projection=None,
+        scene=None,
+        showlegend=None,
+        stream=None,
+        surfaceaxis=None,
+        surfacecolor=None,
+        text=None,
+        textfont=None,
+        textposition=None,
+        textpositionsrc=None,
+        textsrc=None,
+        texttemplate=None,
+        texttemplatesrc=None,
+        uid=None,
+        uirevision=None,
+        visible=None,
+        x=None,
+        xcalendar=None,
+        xhoverformat=None,
+        xsrc=None,
+        y=None,
+        ycalendar=None,
+        yhoverformat=None,
+        ysrc=None,
+        z=None,
+        zcalendar=None,
+        zhoverformat=None,
+        zsrc=None,
+        **kwargs,
+    ):
         """
         Construct a new Scatter3d object
 
@@ -1859,9 +1914,9 @@ class Scatter3d(_BaseTraceType):
         -------
         Scatter3d
         """
-        super().__init__('scatter3d')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("scatter3d")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -1871,74 +1926,73 @@ class Scatter3d(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Scatter3d
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scatter3d`""")
+an instance of :class:`plotly.graph_objs.Scatter3d`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
+        self._set_property("connectgaps", arg, connectgaps)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("error_x", arg, error_x)
+        self._set_property("error_y", arg, error_y)
+        self._set_property("error_z", arg, error_z)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverinfosrc", arg, hoverinfosrc)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("hovertextsrc", arg, hovertextsrc)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgroup", arg, legendgroup)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("line", arg, line)
+        self._set_property("marker", arg, marker)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("mode", arg, mode)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("projection", arg, projection)
+        self._set_property("scene", arg, scene)
+        self._set_property("showlegend", arg, showlegend)
+        self._set_property("stream", arg, stream)
+        self._set_property("surfaceaxis", arg, surfaceaxis)
+        self._set_property("surfacecolor", arg, surfacecolor)
+        self._set_property("text", arg, text)
+        self._set_property("textfont", arg, textfont)
+        self._set_property("textposition", arg, textposition)
+        self._set_property("textpositionsrc", arg, textpositionsrc)
+        self._set_property("textsrc", arg, textsrc)
+        self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatesrc", arg, texttemplatesrc)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("visible", arg, visible)
+        self._set_property("x", arg, x)
+        self._set_property("xcalendar", arg, xcalendar)
+        self._set_property("xhoverformat", arg, xhoverformat)
+        self._set_property("xsrc", arg, xsrc)
+        self._set_property("y", arg, y)
+        self._set_property("ycalendar", arg, ycalendar)
+        self._set_property("yhoverformat", arg, yhoverformat)
+        self._set_property("ysrc", arg, ysrc)
+        self._set_property("z", arg, z)
+        self._set_property("zcalendar", arg, zcalendar)
+        self._set_property("zhoverformat", arg, zhoverformat)
+        self._set_property("zsrc", arg, zsrc)
 
-        self._set_property('connectgaps', arg, connectgaps)
-        self._set_property('customdata', arg, customdata)
-        self._set_property('customdatasrc', arg, customdatasrc)
-        self._set_property('error_x', arg, error_x)
-        self._set_property('error_y', arg, error_y)
-        self._set_property('error_z', arg, error_z)
-        self._set_property('hoverinfo', arg, hoverinfo)
-        self._set_property('hoverinfosrc', arg, hoverinfosrc)
-        self._set_property('hoverlabel', arg, hoverlabel)
-        self._set_property('hovertemplate', arg, hovertemplate)
-        self._set_property('hovertemplatesrc', arg, hovertemplatesrc)
-        self._set_property('hovertext', arg, hovertext)
-        self._set_property('hovertextsrc', arg, hovertextsrc)
-        self._set_property('ids', arg, ids)
-        self._set_property('idssrc', arg, idssrc)
-        self._set_property('legend', arg, legend)
-        self._set_property('legendgroup', arg, legendgroup)
-        self._set_property('legendgrouptitle', arg, legendgrouptitle)
-        self._set_property('legendrank', arg, legendrank)
-        self._set_property('legendwidth', arg, legendwidth)
-        self._set_property('line', arg, line)
-        self._set_property('marker', arg, marker)
-        self._set_property('meta', arg, meta)
-        self._set_property('metasrc', arg, metasrc)
-        self._set_property('mode', arg, mode)
-        self._set_property('name', arg, name)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('projection', arg, projection)
-        self._set_property('scene', arg, scene)
-        self._set_property('showlegend', arg, showlegend)
-        self._set_property('stream', arg, stream)
-        self._set_property('surfaceaxis', arg, surfaceaxis)
-        self._set_property('surfacecolor', arg, surfacecolor)
-        self._set_property('text', arg, text)
-        self._set_property('textfont', arg, textfont)
-        self._set_property('textposition', arg, textposition)
-        self._set_property('textpositionsrc', arg, textpositionsrc)
-        self._set_property('textsrc', arg, textsrc)
-        self._set_property('texttemplate', arg, texttemplate)
-        self._set_property('texttemplatesrc', arg, texttemplatesrc)
-        self._set_property('uid', arg, uid)
-        self._set_property('uirevision', arg, uirevision)
-        self._set_property('visible', arg, visible)
-        self._set_property('x', arg, x)
-        self._set_property('xcalendar', arg, xcalendar)
-        self._set_property('xhoverformat', arg, xhoverformat)
-        self._set_property('xsrc', arg, xsrc)
-        self._set_property('y', arg, y)
-        self._set_property('ycalendar', arg, ycalendar)
-        self._set_property('yhoverformat', arg, yhoverformat)
-        self._set_property('ysrc', arg, ysrc)
-        self._set_property('z', arg, z)
-        self._set_property('zcalendar', arg, zcalendar)
-        self._set_property('zhoverformat', arg, zhoverformat)
-        self._set_property('zsrc', arg, zsrc)
-
-
-        self._props['type'] = 'scatter3d'
-        arg.pop('type', None)
+        self._props["type"] = "scatter3d"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

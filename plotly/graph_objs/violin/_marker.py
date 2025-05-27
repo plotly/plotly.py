@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,17 @@ import copy as _copy
 
 class Marker(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'violin'
-    _path_str = 'violin.marker'
-    _valid_props = {"angle", "color", "line", "opacity", "outliercolor", "size", "symbol"}
+    _parent_path_str = "violin"
+    _path_str = "violin.marker"
+    _valid_props = {
+        "angle",
+        "color",
+        "line",
+        "opacity",
+        "outliercolor",
+        "size",
+        "symbol",
+    }
 
     @property
     def angle(self):
@@ -29,11 +33,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['angle']
+        return self["angle"]
 
     @angle.setter
     def angle(self, val):
-        self['angle'] = val
+        self["angle"] = val
 
     @property
     def color(self):
@@ -54,11 +58,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def line(self):
@@ -73,11 +77,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.violin.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     @property
     def opacity(self):
@@ -91,11 +95,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def outliercolor(self):
@@ -113,11 +117,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['outliercolor']
+        return self["outliercolor"]
 
     @outliercolor.setter
     def outliercolor(self, val):
-        self['outliercolor'] = val
+        self["outliercolor"] = val
 
     @property
     def size(self):
@@ -131,11 +135,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     @property
     def symbol(self):
@@ -241,11 +245,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['symbol']
+        return self["symbol"]
 
     @symbol.setter
     def symbol(self, val):
-        self['symbol'] = val
+        self["symbol"] = val
 
     @property
     def _prop_descriptions(self):
@@ -274,17 +278,19 @@ class Marker(_BaseTraceHierarchyType):
             300 is equivalent to appending "-open-dot" or "dot-
             open" to a symbol name.
         """
-    def __init__(self,
-            arg=None,
-            angle=None,
-            color=None,
-            line=None,
-            opacity=None,
-            outliercolor=None,
-            size=None,
-            symbol=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        angle=None,
+        color=None,
+        line=None,
+        opacity=None,
+        outliercolor=None,
+        size=None,
+        symbol=None,
+        **kwargs,
+    ):
         """
         Construct a new Marker object
 
@@ -321,9 +327,9 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -333,22 +339,22 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.violin.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.violin.Marker`""")
+an instance of :class:`plotly.graph_objs.violin.Marker`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('angle', arg, angle)
-        self._set_property('color', arg, color)
-        self._set_property('line', arg, line)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('outliercolor', arg, outliercolor)
-        self._set_property('size', arg, size)
-        self._set_property('symbol', arg, symbol)
+        self._set_property("angle", arg, angle)
+        self._set_property("color", arg, color)
+        self._set_property("line", arg, line)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("outliercolor", arg, outliercolor)
+        self._set_property("size", arg, size)
+        self._set_property("symbol", arg, symbol)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

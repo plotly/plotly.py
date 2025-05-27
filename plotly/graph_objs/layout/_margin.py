@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Margin(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.margin'
+    _parent_path_str = "layout"
+    _path_str = "layout.margin"
     _valid_props = {"autoexpand", "b", "l", "pad", "r", "t"}
 
     @property
@@ -29,11 +25,11 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['autoexpand']
+        return self["autoexpand"]
 
     @autoexpand.setter
     def autoexpand(self, val):
-        self['autoexpand'] = val
+        self["autoexpand"] = val
 
     @property
     def b(self):
@@ -47,11 +43,11 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['b']
+        return self["b"]
 
     @b.setter
     def b(self, val):
-        self['b'] = val
+        self["b"] = val
 
     @property
     def l(self):
@@ -65,11 +61,11 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['l']
+        return self["l"]
 
     @l.setter
     def l(self, val):
-        self['l'] = val
+        self["l"] = val
 
     @property
     def pad(self):
@@ -84,11 +80,11 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['pad']
+        return self["pad"]
 
     @pad.setter
     def pad(self, val):
-        self['pad'] = val
+        self["pad"] = val
 
     @property
     def r(self):
@@ -102,11 +98,11 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['r']
+        return self["r"]
 
     @r.setter
     def r(self, val):
-        self['r'] = val
+        self["r"] = val
 
     @property
     def t(self):
@@ -120,11 +116,11 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['t']
+        return self["t"]
 
     @t.setter
     def t(self, val):
-        self['t'] = val
+        self["t"] = val
 
     @property
     def _prop_descriptions(self):
@@ -146,16 +142,18 @@ class Margin(_BaseLayoutHierarchyType):
         t
             Sets the top margin (in px).
         """
-    def __init__(self,
-            arg=None,
-            autoexpand=None,
-            b=None,
-            l=None,
-            pad=None,
-            r=None,
-            t=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        autoexpand=None,
+        b=None,
+        l=None,
+        pad=None,
+        r=None,
+        t=None,
+        **kwargs,
+    ):
         """
         Construct a new Margin object
 
@@ -185,9 +183,9 @@ class Margin(_BaseLayoutHierarchyType):
         -------
         Margin
         """
-        super().__init__('margin')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("margin")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -197,21 +195,21 @@ class Margin(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Margin
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Margin`""")
+an instance of :class:`plotly.graph_objs.layout.Margin`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('autoexpand', arg, autoexpand)
-        self._set_property('b', arg, b)
-        self._set_property('l', arg, l)
-        self._set_property('pad', arg, pad)
-        self._set_property('r', arg, r)
-        self._set_property('t', arg, t)
+        self._set_property("autoexpand", arg, autoexpand)
+        self._set_property("b", arg, b)
+        self._set_property("l", arg, l)
+        self._set_property("pad", arg, pad)
+        self._set_property("r", arg, r)
+        self._set_property("t", arg, t)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

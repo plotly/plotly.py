@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,77 @@ import copy as _copy
 
 class Histogram(_BaseTraceType):
 
-    _parent_path_str = ''
-    _path_str = 'histogram'
-    _valid_props = {"alignmentgroup", "autobinx", "autobiny", "bingroup", "cliponaxis", "constraintext", "cumulative", "customdata", "customdatasrc", "error_x", "error_y", "histfunc", "histnorm", "hoverinfo", "hoverinfosrc", "hoverlabel", "hovertemplate", "hovertemplatesrc", "hovertext", "hovertextsrc", "ids", "idssrc", "insidetextanchor", "insidetextfont", "legend", "legendgroup", "legendgrouptitle", "legendrank", "legendwidth", "marker", "meta", "metasrc", "name", "nbinsx", "nbinsy", "offsetgroup", "opacity", "orientation", "outsidetextfont", "selected", "selectedpoints", "showlegend", "stream", "text", "textangle", "textfont", "textposition", "textsrc", "texttemplate", "type", "uid", "uirevision", "unselected", "visible", "x", "xaxis", "xbins", "xcalendar", "xhoverformat", "xsrc", "y", "yaxis", "ybins", "ycalendar", "yhoverformat", "ysrc", "zorder"}
+    _parent_path_str = ""
+    _path_str = "histogram"
+    _valid_props = {
+        "alignmentgroup",
+        "autobinx",
+        "autobiny",
+        "bingroup",
+        "cliponaxis",
+        "constraintext",
+        "cumulative",
+        "customdata",
+        "customdatasrc",
+        "error_x",
+        "error_y",
+        "histfunc",
+        "histnorm",
+        "hoverinfo",
+        "hoverinfosrc",
+        "hoverlabel",
+        "hovertemplate",
+        "hovertemplatesrc",
+        "hovertext",
+        "hovertextsrc",
+        "ids",
+        "idssrc",
+        "insidetextanchor",
+        "insidetextfont",
+        "legend",
+        "legendgroup",
+        "legendgrouptitle",
+        "legendrank",
+        "legendwidth",
+        "marker",
+        "meta",
+        "metasrc",
+        "name",
+        "nbinsx",
+        "nbinsy",
+        "offsetgroup",
+        "opacity",
+        "orientation",
+        "outsidetextfont",
+        "selected",
+        "selectedpoints",
+        "showlegend",
+        "stream",
+        "text",
+        "textangle",
+        "textfont",
+        "textposition",
+        "textsrc",
+        "texttemplate",
+        "type",
+        "uid",
+        "uirevision",
+        "unselected",
+        "visible",
+        "x",
+        "xaxis",
+        "xbins",
+        "xcalendar",
+        "xhoverformat",
+        "xsrc",
+        "y",
+        "yaxis",
+        "ybins",
+        "ycalendar",
+        "yhoverformat",
+        "ysrc",
+        "zorder",
+    }
 
     @property
     def alignmentgroup(self):
@@ -30,11 +94,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['alignmentgroup']
+        return self["alignmentgroup"]
 
     @alignmentgroup.setter
     def alignmentgroup(self, val):
-        self['alignmentgroup'] = val
+        self["alignmentgroup"] = val
 
     @property
     def autobinx(self):
@@ -51,11 +115,11 @@ class Histogram(_BaseTraceType):
         -------
         bool
         """
-        return self['autobinx']
+        return self["autobinx"]
 
     @autobinx.setter
     def autobinx(self, val):
-        self['autobinx'] = val
+        self["autobinx"] = val
 
     @property
     def autobiny(self):
@@ -72,11 +136,11 @@ class Histogram(_BaseTraceType):
         -------
         bool
         """
-        return self['autobiny']
+        return self["autobiny"]
 
     @autobiny.setter
     def autobiny(self, val):
-        self['autobiny'] = val
+        self["autobiny"] = val
 
     @property
     def bingroup(self):
@@ -97,11 +161,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['bingroup']
+        return self["bingroup"]
 
     @bingroup.setter
     def bingroup(self, val):
-        self['bingroup'] = val
+        self["bingroup"] = val
 
     @property
     def cliponaxis(self):
@@ -118,11 +182,11 @@ class Histogram(_BaseTraceType):
         -------
         bool
         """
-        return self['cliponaxis']
+        return self["cliponaxis"]
 
     @cliponaxis.setter
     def cliponaxis(self, val):
-        self['cliponaxis'] = val
+        self["cliponaxis"] = val
 
     @property
     def constraintext(self):
@@ -138,11 +202,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['constraintext']
+        return self["constraintext"]
 
     @constraintext.setter
     def constraintext(self, val):
-        self['constraintext'] = val
+        self["constraintext"] = val
 
     @property
     def cumulative(self):
@@ -157,11 +221,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Cumulative
         """
-        return self['cumulative']
+        return self["cumulative"]
 
     @cumulative.setter
     def cumulative(self, val):
-        self['cumulative'] = val
+        self["cumulative"] = val
 
     @property
     def customdata(self):
@@ -178,11 +242,11 @@ class Histogram(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['customdata']
+        return self["customdata"]
 
     @customdata.setter
     def customdata(self, val):
-        self['customdata'] = val
+        self["customdata"] = val
 
     @property
     def customdatasrc(self):
@@ -197,11 +261,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['customdatasrc']
+        return self["customdatasrc"]
 
     @customdatasrc.setter
     def customdatasrc(self, val):
-        self['customdatasrc'] = val
+        self["customdatasrc"] = val
 
     @property
     def error_x(self):
@@ -216,11 +280,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.ErrorX
         """
-        return self['error_x']
+        return self["error_x"]
 
     @error_x.setter
     def error_x(self, val):
-        self['error_x'] = val
+        self["error_x"] = val
 
     @property
     def error_y(self):
@@ -235,11 +299,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.ErrorY
         """
-        return self['error_y']
+        return self["error_y"]
 
     @error_y.setter
     def error_y(self, val):
-        self['error_y'] = val
+        self["error_y"] = val
 
     @property
     def histfunc(self):
@@ -259,11 +323,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['histfunc']
+        return self["histfunc"]
 
     @histfunc.setter
     def histfunc(self, val):
-        self['histfunc'] = val
+        self["histfunc"] = val
 
     @property
     def histnorm(self):
@@ -291,11 +355,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['histnorm']
+        return self["histnorm"]
 
     @histnorm.setter
     def histnorm(self, val):
-        self['histnorm'] = val
+        self["histnorm"] = val
 
     @property
     def hoverinfo(self):
@@ -315,11 +379,11 @@ class Histogram(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
     @property
     def hoverinfosrc(self):
@@ -334,11 +398,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['hoverinfosrc']
+        return self["hoverinfosrc"]
 
     @hoverinfosrc.setter
     def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
+        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -353,11 +417,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
     @property
     def hovertemplate(self):
@@ -396,11 +460,11 @@ class Histogram(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
     @property
     def hovertemplatesrc(self):
@@ -415,11 +479,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplatesrc']
+        return self["hovertemplatesrc"]
 
     @hovertemplatesrc.setter
     def hovertemplatesrc(self, val):
-        self['hovertemplatesrc'] = val
+        self["hovertemplatesrc"] = val
 
     @property
     def hovertext(self):
@@ -435,11 +499,11 @@ class Histogram(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
     @property
     def hovertextsrc(self):
@@ -454,11 +518,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['hovertextsrc']
+        return self["hovertextsrc"]
 
     @hovertextsrc.setter
     def hovertextsrc(self, val):
-        self['hovertextsrc'] = val
+        self["hovertextsrc"] = val
 
     @property
     def ids(self):
@@ -474,11 +538,11 @@ class Histogram(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['ids']
+        return self["ids"]
 
     @ids.setter
     def ids(self, val):
-        self['ids'] = val
+        self["ids"] = val
 
     @property
     def idssrc(self):
@@ -492,11 +556,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['idssrc']
+        return self["idssrc"]
 
     @idssrc.setter
     def idssrc(self, val):
-        self['idssrc'] = val
+        self["idssrc"] = val
 
     @property
     def insidetextanchor(self):
@@ -512,11 +576,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['insidetextanchor']
+        return self["insidetextanchor"]
 
     @insidetextanchor.setter
     def insidetextanchor(self, val):
-        self['insidetextanchor'] = val
+        self["insidetextanchor"] = val
 
     @property
     def insidetextfont(self):
@@ -533,11 +597,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Insidetextfont
         """
-        return self['insidetextfont']
+        return self["insidetextfont"]
 
     @insidetextfont.setter
     def insidetextfont(self, val):
-        self['insidetextfont'] = val
+        self["insidetextfont"] = val
 
     @property
     def legend(self):
@@ -556,11 +620,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['legend']
+        return self["legend"]
 
     @legend.setter
     def legend(self, val):
-        self['legend'] = val
+        self["legend"] = val
 
     @property
     def legendgroup(self):
@@ -577,11 +641,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['legendgroup']
+        return self["legendgroup"]
 
     @legendgroup.setter
     def legendgroup(self, val):
-        self['legendgroup'] = val
+        self["legendgroup"] = val
 
     @property
     def legendgrouptitle(self):
@@ -596,11 +660,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
     @property
     def legendrank(self):
@@ -621,11 +685,11 @@ class Histogram(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendrank']
+        return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
-        self['legendrank'] = val
+        self["legendrank"] = val
 
     @property
     def legendwidth(self):
@@ -640,11 +704,11 @@ class Histogram(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
     @property
     def marker(self):
@@ -659,11 +723,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
     @property
     def meta(self):
@@ -685,11 +749,11 @@ class Histogram(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
     @property
     def metasrc(self):
@@ -703,11 +767,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
     @property
     def name(self):
@@ -723,11 +787,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def nbinsx(self):
@@ -745,11 +809,11 @@ class Histogram(_BaseTraceType):
         -------
         int
         """
-        return self['nbinsx']
+        return self["nbinsx"]
 
     @nbinsx.setter
     def nbinsx(self, val):
-        self['nbinsx'] = val
+        self["nbinsx"] = val
 
     @property
     def nbinsy(self):
@@ -767,11 +831,11 @@ class Histogram(_BaseTraceType):
         -------
         int
         """
-        return self['nbinsy']
+        return self["nbinsy"]
 
     @nbinsy.setter
     def nbinsy(self, val):
-        self['nbinsy'] = val
+        self["nbinsy"] = val
 
     @property
     def offsetgroup(self):
@@ -788,11 +852,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['offsetgroup']
+        return self["offsetgroup"]
 
     @offsetgroup.setter
     def offsetgroup(self, val):
-        self['offsetgroup'] = val
+        self["offsetgroup"] = val
 
     @property
     def opacity(self):
@@ -806,11 +870,11 @@ class Histogram(_BaseTraceType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def orientation(self):
@@ -826,11 +890,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['orientation']
+        return self["orientation"]
 
     @orientation.setter
     def orientation(self, val):
-        self['orientation'] = val
+        self["orientation"] = val
 
     @property
     def outsidetextfont(self):
@@ -847,11 +911,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Outsidetextfont
         """
-        return self['outsidetextfont']
+        return self["outsidetextfont"]
 
     @outsidetextfont.setter
     def outsidetextfont(self, val):
-        self['outsidetextfont'] = val
+        self["outsidetextfont"] = val
 
     @property
     def selected(self):
@@ -866,11 +930,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Selected
         """
-        return self['selected']
+        return self["selected"]
 
     @selected.setter
     def selected(self, val):
-        self['selected'] = val
+        self["selected"] = val
 
     @property
     def selectedpoints(self):
@@ -888,11 +952,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['selectedpoints']
+        return self["selectedpoints"]
 
     @selectedpoints.setter
     def selectedpoints(self, val):
-        self['selectedpoints'] = val
+        self["selectedpoints"] = val
 
     @property
     def showlegend(self):
@@ -907,11 +971,11 @@ class Histogram(_BaseTraceType):
         -------
         bool
         """
-        return self['showlegend']
+        return self["showlegend"]
 
     @showlegend.setter
     def showlegend(self, val):
-        self['showlegend'] = val
+        self["showlegend"] = val
 
     @property
     def stream(self):
@@ -926,11 +990,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
     @property
     def text(self):
@@ -949,11 +1013,11 @@ class Histogram(_BaseTraceType):
         -------
         str|numpy.ndarray
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     @property
     def textangle(self):
@@ -972,11 +1036,11 @@ class Histogram(_BaseTraceType):
         -------
         int|float
         """
-        return self['textangle']
+        return self["textangle"]
 
     @textangle.setter
     def textangle(self, val):
-        self['textangle'] = val
+        self["textangle"] = val
 
     @property
     def textfont(self):
@@ -993,11 +1057,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
     @property
     def textposition(self):
@@ -1019,11 +1083,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['textposition']
+        return self["textposition"]
 
     @textposition.setter
     def textposition(self, val):
-        self['textposition'] = val
+        self["textposition"] = val
 
     @property
     def textsrc(self):
@@ -1037,11 +1101,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['textsrc']
+        return self["textsrc"]
 
     @textsrc.setter
     def textsrc(self, val):
-        self['textsrc'] = val
+        self["textsrc"] = val
 
     @property
     def texttemplate(self):
@@ -1069,11 +1133,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['texttemplate']
+        return self["texttemplate"]
 
     @texttemplate.setter
     def texttemplate(self, val):
-        self['texttemplate'] = val
+        self["texttemplate"] = val
 
     @property
     def uid(self):
@@ -1089,11 +1153,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
     @property
     def uirevision(self):
@@ -1120,11 +1184,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def unselected(self):
@@ -1139,11 +1203,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.Unselected
         """
-        return self['unselected']
+        return self["unselected"]
 
     @unselected.setter
     def unselected(self, val):
-        self['unselected'] = val
+        self["unselected"] = val
 
     @property
     def visible(self):
@@ -1160,11 +1224,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def x(self):
@@ -1178,11 +1242,11 @@ class Histogram(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     @property
     def xaxis(self):
@@ -1201,11 +1265,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['xaxis']
+        return self["xaxis"]
 
     @xaxis.setter
     def xaxis(self, val):
-        self['xaxis'] = val
+        self["xaxis"] = val
 
     @property
     def xbins(self):
@@ -1220,11 +1284,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.XBins
         """
-        return self['xbins']
+        return self["xbins"]
 
     @xbins.setter
     def xbins(self, val):
-        self['xbins'] = val
+        self["xbins"] = val
 
     @property
     def xcalendar(self):
@@ -1242,11 +1306,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['xcalendar']
+        return self["xcalendar"]
 
     @xcalendar.setter
     def xcalendar(self, val):
-        self['xcalendar'] = val
+        self["xcalendar"] = val
 
     @property
     def xhoverformat(self):
@@ -1271,11 +1335,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['xhoverformat']
+        return self["xhoverformat"]
 
     @xhoverformat.setter
     def xhoverformat(self, val):
-        self['xhoverformat'] = val
+        self["xhoverformat"] = val
 
     @property
     def xsrc(self):
@@ -1289,11 +1353,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['xsrc']
+        return self["xsrc"]
 
     @xsrc.setter
     def xsrc(self, val):
-        self['xsrc'] = val
+        self["xsrc"] = val
 
     @property
     def y(self):
@@ -1307,11 +1371,11 @@ class Histogram(_BaseTraceType):
         -------
         numpy.ndarray
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     @property
     def yaxis(self):
@@ -1330,11 +1394,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
     @property
     def ybins(self):
@@ -1349,11 +1413,11 @@ class Histogram(_BaseTraceType):
         -------
         plotly.graph_objs.histogram.YBins
         """
-        return self['ybins']
+        return self["ybins"]
 
     @ybins.setter
     def ybins(self, val):
-        self['ybins'] = val
+        self["ybins"] = val
 
     @property
     def ycalendar(self):
@@ -1371,11 +1435,11 @@ class Histogram(_BaseTraceType):
         -------
         Any
         """
-        return self['ycalendar']
+        return self["ycalendar"]
 
     @ycalendar.setter
     def ycalendar(self, val):
-        self['ycalendar'] = val
+        self["ycalendar"] = val
 
     @property
     def yhoverformat(self):
@@ -1400,11 +1464,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['yhoverformat']
+        return self["yhoverformat"]
 
     @yhoverformat.setter
     def yhoverformat(self, val):
-        self['yhoverformat'] = val
+        self["yhoverformat"] = val
 
     @property
     def ysrc(self):
@@ -1418,11 +1482,11 @@ class Histogram(_BaseTraceType):
         -------
         str
         """
-        return self['ysrc']
+        return self["ysrc"]
 
     @ysrc.setter
     def ysrc(self, val):
-        self['ysrc'] = val
+        self["ysrc"] = val
 
     @property
     def zorder(self):
@@ -1438,15 +1502,15 @@ class Histogram(_BaseTraceType):
         -------
         int
         """
-        return self['zorder']
+        return self["zorder"]
 
     @zorder.setter
     def zorder(self, val):
-        self['zorder'] = val
+        self["zorder"] = val
 
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
     @property
     def _prop_descriptions(self):
@@ -1812,76 +1876,78 @@ class Histogram(_BaseTraceType):
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
         """
-    def __init__(self,
-            arg=None,
-            alignmentgroup=None,
-            autobinx=None,
-            autobiny=None,
-            bingroup=None,
-            cliponaxis=None,
-            constraintext=None,
-            cumulative=None,
-            customdata=None,
-            customdatasrc=None,
-            error_x=None,
-            error_y=None,
-            histfunc=None,
-            histnorm=None,
-            hoverinfo=None,
-            hoverinfosrc=None,
-            hoverlabel=None,
-            hovertemplate=None,
-            hovertemplatesrc=None,
-            hovertext=None,
-            hovertextsrc=None,
-            ids=None,
-            idssrc=None,
-            insidetextanchor=None,
-            insidetextfont=None,
-            legend=None,
-            legendgroup=None,
-            legendgrouptitle=None,
-            legendrank=None,
-            legendwidth=None,
-            marker=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            nbinsx=None,
-            nbinsy=None,
-            offsetgroup=None,
-            opacity=None,
-            orientation=None,
-            outsidetextfont=None,
-            selected=None,
-            selectedpoints=None,
-            showlegend=None,
-            stream=None,
-            text=None,
-            textangle=None,
-            textfont=None,
-            textposition=None,
-            textsrc=None,
-            texttemplate=None,
-            uid=None,
-            uirevision=None,
-            unselected=None,
-            visible=None,
-            x=None,
-            xaxis=None,
-            xbins=None,
-            xcalendar=None,
-            xhoverformat=None,
-            xsrc=None,
-            y=None,
-            yaxis=None,
-            ybins=None,
-            ycalendar=None,
-            yhoverformat=None,
-            ysrc=None,
-            zorder=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        alignmentgroup=None,
+        autobinx=None,
+        autobiny=None,
+        bingroup=None,
+        cliponaxis=None,
+        constraintext=None,
+        cumulative=None,
+        customdata=None,
+        customdatasrc=None,
+        error_x=None,
+        error_y=None,
+        histfunc=None,
+        histnorm=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        insidetextanchor=None,
+        insidetextfont=None,
+        legend=None,
+        legendgroup=None,
+        legendgrouptitle=None,
+        legendrank=None,
+        legendwidth=None,
+        marker=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        nbinsx=None,
+        nbinsy=None,
+        offsetgroup=None,
+        opacity=None,
+        orientation=None,
+        outsidetextfont=None,
+        selected=None,
+        selectedpoints=None,
+        showlegend=None,
+        stream=None,
+        text=None,
+        textangle=None,
+        textfont=None,
+        textposition=None,
+        textsrc=None,
+        texttemplate=None,
+        uid=None,
+        uirevision=None,
+        unselected=None,
+        visible=None,
+        x=None,
+        xaxis=None,
+        xbins=None,
+        xcalendar=None,
+        xhoverformat=None,
+        xsrc=None,
+        y=None,
+        yaxis=None,
+        ybins=None,
+        ycalendar=None,
+        yhoverformat=None,
+        ysrc=None,
+        zorder=None,
+        **kwargs,
+    ):
         """
         Construct a new Histogram object
 
@@ -2261,9 +2327,9 @@ class Histogram(_BaseTraceType):
         -------
         Histogram
         """
-        super().__init__('histogram')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("histogram")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -2273,85 +2339,84 @@ class Histogram(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Histogram
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Histogram`""")
+an instance of :class:`plotly.graph_objs.Histogram`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
+        self._set_property("alignmentgroup", arg, alignmentgroup)
+        self._set_property("autobinx", arg, autobinx)
+        self._set_property("autobiny", arg, autobiny)
+        self._set_property("bingroup", arg, bingroup)
+        self._set_property("cliponaxis", arg, cliponaxis)
+        self._set_property("constraintext", arg, constraintext)
+        self._set_property("cumulative", arg, cumulative)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("error_x", arg, error_x)
+        self._set_property("error_y", arg, error_y)
+        self._set_property("histfunc", arg, histfunc)
+        self._set_property("histnorm", arg, histnorm)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoverinfosrc", arg, hoverinfosrc)
+        self._set_property("hoverlabel", arg, hoverlabel)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
+        self._set_property("hovertext", arg, hovertext)
+        self._set_property("hovertextsrc", arg, hovertextsrc)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("insidetextanchor", arg, insidetextanchor)
+        self._set_property("insidetextfont", arg, insidetextfont)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgroup", arg, legendgroup)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("marker", arg, marker)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("nbinsx", arg, nbinsx)
+        self._set_property("nbinsy", arg, nbinsy)
+        self._set_property("offsetgroup", arg, offsetgroup)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("orientation", arg, orientation)
+        self._set_property("outsidetextfont", arg, outsidetextfont)
+        self._set_property("selected", arg, selected)
+        self._set_property("selectedpoints", arg, selectedpoints)
+        self._set_property("showlegend", arg, showlegend)
+        self._set_property("stream", arg, stream)
+        self._set_property("text", arg, text)
+        self._set_property("textangle", arg, textangle)
+        self._set_property("textfont", arg, textfont)
+        self._set_property("textposition", arg, textposition)
+        self._set_property("textsrc", arg, textsrc)
+        self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("unselected", arg, unselected)
+        self._set_property("visible", arg, visible)
+        self._set_property("x", arg, x)
+        self._set_property("xaxis", arg, xaxis)
+        self._set_property("xbins", arg, xbins)
+        self._set_property("xcalendar", arg, xcalendar)
+        self._set_property("xhoverformat", arg, xhoverformat)
+        self._set_property("xsrc", arg, xsrc)
+        self._set_property("y", arg, y)
+        self._set_property("yaxis", arg, yaxis)
+        self._set_property("ybins", arg, ybins)
+        self._set_property("ycalendar", arg, ycalendar)
+        self._set_property("yhoverformat", arg, yhoverformat)
+        self._set_property("ysrc", arg, ysrc)
+        self._set_property("zorder", arg, zorder)
 
-        self._set_property('alignmentgroup', arg, alignmentgroup)
-        self._set_property('autobinx', arg, autobinx)
-        self._set_property('autobiny', arg, autobiny)
-        self._set_property('bingroup', arg, bingroup)
-        self._set_property('cliponaxis', arg, cliponaxis)
-        self._set_property('constraintext', arg, constraintext)
-        self._set_property('cumulative', arg, cumulative)
-        self._set_property('customdata', arg, customdata)
-        self._set_property('customdatasrc', arg, customdatasrc)
-        self._set_property('error_x', arg, error_x)
-        self._set_property('error_y', arg, error_y)
-        self._set_property('histfunc', arg, histfunc)
-        self._set_property('histnorm', arg, histnorm)
-        self._set_property('hoverinfo', arg, hoverinfo)
-        self._set_property('hoverinfosrc', arg, hoverinfosrc)
-        self._set_property('hoverlabel', arg, hoverlabel)
-        self._set_property('hovertemplate', arg, hovertemplate)
-        self._set_property('hovertemplatesrc', arg, hovertemplatesrc)
-        self._set_property('hovertext', arg, hovertext)
-        self._set_property('hovertextsrc', arg, hovertextsrc)
-        self._set_property('ids', arg, ids)
-        self._set_property('idssrc', arg, idssrc)
-        self._set_property('insidetextanchor', arg, insidetextanchor)
-        self._set_property('insidetextfont', arg, insidetextfont)
-        self._set_property('legend', arg, legend)
-        self._set_property('legendgroup', arg, legendgroup)
-        self._set_property('legendgrouptitle', arg, legendgrouptitle)
-        self._set_property('legendrank', arg, legendrank)
-        self._set_property('legendwidth', arg, legendwidth)
-        self._set_property('marker', arg, marker)
-        self._set_property('meta', arg, meta)
-        self._set_property('metasrc', arg, metasrc)
-        self._set_property('name', arg, name)
-        self._set_property('nbinsx', arg, nbinsx)
-        self._set_property('nbinsy', arg, nbinsy)
-        self._set_property('offsetgroup', arg, offsetgroup)
-        self._set_property('opacity', arg, opacity)
-        self._set_property('orientation', arg, orientation)
-        self._set_property('outsidetextfont', arg, outsidetextfont)
-        self._set_property('selected', arg, selected)
-        self._set_property('selectedpoints', arg, selectedpoints)
-        self._set_property('showlegend', arg, showlegend)
-        self._set_property('stream', arg, stream)
-        self._set_property('text', arg, text)
-        self._set_property('textangle', arg, textangle)
-        self._set_property('textfont', arg, textfont)
-        self._set_property('textposition', arg, textposition)
-        self._set_property('textsrc', arg, textsrc)
-        self._set_property('texttemplate', arg, texttemplate)
-        self._set_property('uid', arg, uid)
-        self._set_property('uirevision', arg, uirevision)
-        self._set_property('unselected', arg, unselected)
-        self._set_property('visible', arg, visible)
-        self._set_property('x', arg, x)
-        self._set_property('xaxis', arg, xaxis)
-        self._set_property('xbins', arg, xbins)
-        self._set_property('xcalendar', arg, xcalendar)
-        self._set_property('xhoverformat', arg, xhoverformat)
-        self._set_property('xsrc', arg, xsrc)
-        self._set_property('y', arg, y)
-        self._set_property('yaxis', arg, yaxis)
-        self._set_property('ybins', arg, ybins)
-        self._set_property('ycalendar', arg, ycalendar)
-        self._set_property('yhoverformat', arg, yhoverformat)
-        self._set_property('ysrc', arg, ysrc)
-        self._set_property('zorder', arg, zorder)
-
-
-        self._props['type'] = 'histogram'
-        arg.pop('type', None)
+        self._props["type"] = "histogram"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

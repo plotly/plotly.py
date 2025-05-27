@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Axis(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'splom.dimension'
-    _path_str = 'splom.dimension.axis'
+    _parent_path_str = "splom.dimension"
+    _path_str = "splom.dimension.axis"
     _valid_props = {"matches", "type"}
 
     @property
@@ -29,11 +25,11 @@ class Axis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['matches']
+        return self["matches"]
 
     @matches.setter
     def matches(self, val):
-        self['matches'] = val
+        self["matches"] = val
 
     @property
     def type(self):
@@ -50,11 +46,11 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     @property
     def _prop_descriptions(self):
@@ -69,12 +65,8 @@ class Axis(_BaseTraceHierarchyType):
             y axes. Note that the axis `type` values set in layout
             take precedence over this attribute.
         """
-    def __init__(self,
-            arg=None,
-            matches=None,
-            type=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, matches=None, type=None, **kwargs):
         """
         Construct a new Axis object
 
@@ -98,9 +90,9 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Axis
         """
-        super().__init__('axis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("axis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -110,17 +102,17 @@ class Axis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.splom.dimension.Axis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.dimension.Axis`""")
+an instance of :class:`plotly.graph_objs.splom.dimension.Axis`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('matches', arg, matches)
-        self._set_property('type', arg, type)
+        self._set_property("matches", arg, matches)
+        self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

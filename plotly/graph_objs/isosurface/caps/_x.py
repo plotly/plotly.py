@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class X(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'isosurface.caps'
-    _path_str = 'isosurface.caps.x'
+    _parent_path_str = "isosurface.caps"
+    _path_str = "isosurface.caps.x"
     _valid_props = {"fill", "show"}
 
     @property
@@ -30,11 +26,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     @property
     def show(self):
@@ -51,11 +47,11 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     @property
     def _prop_descriptions(self):
@@ -73,12 +69,8 @@ class X(_BaseTraceHierarchyType):
             ratio less than one would allow the creation of
             openings parallel to the edges.
         """
-    def __init__(self,
-            arg=None,
-            fill=None,
-            show=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, fill=None, show=None, **kwargs):
         """
         Construct a new X object
 
@@ -105,9 +97,9 @@ class X(_BaseTraceHierarchyType):
         -------
         X
         """
-        super().__init__('x')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("x")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -117,17 +109,17 @@ class X(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.isosurface.caps.X
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.caps.X`""")
+an instance of :class:`plotly.graph_objs.isosurface.caps.X`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('fill', arg, fill)
-        self._set_property('show', arg, show)
+        self._set_property("fill", arg, fill)
+        self._set_property("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

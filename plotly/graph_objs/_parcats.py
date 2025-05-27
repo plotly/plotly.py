@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,34 @@ import copy as _copy
 
 class Parcats(_BaseTraceType):
 
-    _parent_path_str = ''
-    _path_str = 'parcats'
-    _valid_props = {"arrangement", "bundlecolors", "counts", "countssrc", "dimensiondefaults", "dimensions", "domain", "hoverinfo", "hoveron", "hovertemplate", "labelfont", "legendgrouptitle", "legendwidth", "line", "meta", "metasrc", "name", "sortpaths", "stream", "tickfont", "type", "uid", "uirevision", "visible"}
+    _parent_path_str = ""
+    _path_str = "parcats"
+    _valid_props = {
+        "arrangement",
+        "bundlecolors",
+        "counts",
+        "countssrc",
+        "dimensiondefaults",
+        "dimensions",
+        "domain",
+        "hoverinfo",
+        "hoveron",
+        "hovertemplate",
+        "labelfont",
+        "legendgrouptitle",
+        "legendwidth",
+        "line",
+        "meta",
+        "metasrc",
+        "name",
+        "sortpaths",
+        "stream",
+        "tickfont",
+        "type",
+        "uid",
+        "uirevision",
+        "visible",
+    }
 
     @property
     def arrangement(self):
@@ -32,11 +53,11 @@ class Parcats(_BaseTraceType):
         -------
         Any
         """
-        return self['arrangement']
+        return self["arrangement"]
 
     @arrangement.setter
     def arrangement(self, val):
-        self['arrangement'] = val
+        self["arrangement"] = val
 
     @property
     def bundlecolors(self):
@@ -51,11 +72,11 @@ class Parcats(_BaseTraceType):
         -------
         bool
         """
-        return self['bundlecolors']
+        return self["bundlecolors"]
 
     @bundlecolors.setter
     def bundlecolors(self, val):
-        self['bundlecolors'] = val
+        self["bundlecolors"] = val
 
     @property
     def counts(self):
@@ -71,11 +92,11 @@ class Parcats(_BaseTraceType):
         -------
         int|float|numpy.ndarray
         """
-        return self['counts']
+        return self["counts"]
 
     @counts.setter
     def counts(self, val):
-        self['counts'] = val
+        self["counts"] = val
 
     @property
     def countssrc(self):
@@ -89,11 +110,11 @@ class Parcats(_BaseTraceType):
         -------
         str
         """
-        return self['countssrc']
+        return self["countssrc"]
 
     @countssrc.setter
     def countssrc(self, val):
-        self['countssrc'] = val
+        self["countssrc"] = val
 
     @property
     def dimensions(self):
@@ -110,11 +131,11 @@ class Parcats(_BaseTraceType):
         -------
         tuple[plotly.graph_objs.parcats.Dimension]
         """
-        return self['dimensions']
+        return self["dimensions"]
 
     @dimensions.setter
     def dimensions(self, val):
-        self['dimensions'] = val
+        self["dimensions"] = val
 
     @property
     def dimensiondefaults(self):
@@ -134,11 +155,11 @@ class Parcats(_BaseTraceType):
         -------
         plotly.graph_objs.parcats.Dimension
         """
-        return self['dimensiondefaults']
+        return self["dimensiondefaults"]
 
     @dimensiondefaults.setter
     def dimensiondefaults(self, val):
-        self['dimensiondefaults'] = val
+        self["dimensiondefaults"] = val
 
     @property
     def domain(self):
@@ -153,11 +174,11 @@ class Parcats(_BaseTraceType):
         -------
         plotly.graph_objs.parcats.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
     @property
     def hoverinfo(self):
@@ -176,11 +197,11 @@ class Parcats(_BaseTraceType):
         -------
         Any
         """
-        return self['hoverinfo']
+        return self["hoverinfo"]
 
     @hoverinfo.setter
     def hoverinfo(self, val):
-        self['hoverinfo'] = val
+        self["hoverinfo"] = val
 
     @property
     def hoveron(self):
@@ -199,11 +220,11 @@ class Parcats(_BaseTraceType):
         -------
         Any
         """
-        return self['hoveron']
+        return self["hoveron"]
 
     @hoveron.setter
     def hoveron(self, val):
-        self['hoveron'] = val
+        self["hoveron"] = val
 
     @property
     def hovertemplate(self):
@@ -246,11 +267,11 @@ class Parcats(_BaseTraceType):
         -------
         str
         """
-        return self['hovertemplate']
+        return self["hovertemplate"]
 
     @hovertemplate.setter
     def hovertemplate(self, val):
-        self['hovertemplate'] = val
+        self["hovertemplate"] = val
 
     @property
     def labelfont(self):
@@ -267,11 +288,11 @@ class Parcats(_BaseTraceType):
         -------
         plotly.graph_objs.parcats.Labelfont
         """
-        return self['labelfont']
+        return self["labelfont"]
 
     @labelfont.setter
     def labelfont(self, val):
-        self['labelfont'] = val
+        self["labelfont"] = val
 
     @property
     def legendgrouptitle(self):
@@ -286,11 +307,11 @@ class Parcats(_BaseTraceType):
         -------
         plotly.graph_objs.parcats.Legendgrouptitle
         """
-        return self['legendgrouptitle']
+        return self["legendgrouptitle"]
 
     @legendgrouptitle.setter
     def legendgrouptitle(self, val):
-        self['legendgrouptitle'] = val
+        self["legendgrouptitle"] = val
 
     @property
     def legendwidth(self):
@@ -305,11 +326,11 @@ class Parcats(_BaseTraceType):
         -------
         int|float
         """
-        return self['legendwidth']
+        return self["legendwidth"]
 
     @legendwidth.setter
     def legendwidth(self, val):
-        self['legendwidth'] = val
+        self["legendwidth"] = val
 
     @property
     def line(self):
@@ -324,11 +345,11 @@ class Parcats(_BaseTraceType):
         -------
         plotly.graph_objs.parcats.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     @property
     def meta(self):
@@ -350,11 +371,11 @@ class Parcats(_BaseTraceType):
         -------
         Any|numpy.ndarray
         """
-        return self['meta']
+        return self["meta"]
 
     @meta.setter
     def meta(self, val):
-        self['meta'] = val
+        self["meta"] = val
 
     @property
     def metasrc(self):
@@ -368,11 +389,11 @@ class Parcats(_BaseTraceType):
         -------
         str
         """
-        return self['metasrc']
+        return self["metasrc"]
 
     @metasrc.setter
     def metasrc(self, val):
-        self['metasrc'] = val
+        self["metasrc"] = val
 
     @property
     def name(self):
@@ -388,11 +409,11 @@ class Parcats(_BaseTraceType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def sortpaths(self):
@@ -409,11 +430,11 @@ class Parcats(_BaseTraceType):
         -------
         Any
         """
-        return self['sortpaths']
+        return self["sortpaths"]
 
     @sortpaths.setter
     def sortpaths(self, val):
-        self['sortpaths'] = val
+        self["sortpaths"] = val
 
     @property
     def stream(self):
@@ -428,11 +449,11 @@ class Parcats(_BaseTraceType):
         -------
         plotly.graph_objs.parcats.Stream
         """
-        return self['stream']
+        return self["stream"]
 
     @stream.setter
     def stream(self, val):
-        self['stream'] = val
+        self["stream"] = val
 
     @property
     def tickfont(self):
@@ -449,11 +470,11 @@ class Parcats(_BaseTraceType):
         -------
         plotly.graph_objs.parcats.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
     @property
     def uid(self):
@@ -469,11 +490,11 @@ class Parcats(_BaseTraceType):
         -------
         str
         """
-        return self['uid']
+        return self["uid"]
 
     @uid.setter
     def uid(self, val):
-        self['uid'] = val
+        self["uid"] = val
 
     @property
     def uirevision(self):
@@ -500,11 +521,11 @@ class Parcats(_BaseTraceType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def visible(self):
@@ -521,15 +542,15 @@ class Parcats(_BaseTraceType):
         -------
         Any
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def type(self):
-        return self._props['type']
+        return self._props["type"]
 
     @property
     def _prop_descriptions(self):
@@ -677,33 +698,35 @@ class Parcats(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
-    def __init__(self,
-            arg=None,
-            arrangement=None,
-            bundlecolors=None,
-            counts=None,
-            countssrc=None,
-            dimensions=None,
-            dimensiondefaults=None,
-            domain=None,
-            hoverinfo=None,
-            hoveron=None,
-            hovertemplate=None,
-            labelfont=None,
-            legendgrouptitle=None,
-            legendwidth=None,
-            line=None,
-            meta=None,
-            metasrc=None,
-            name=None,
-            sortpaths=None,
-            stream=None,
-            tickfont=None,
-            uid=None,
-            uirevision=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        arrangement=None,
+        bundlecolors=None,
+        counts=None,
+        countssrc=None,
+        dimensions=None,
+        dimensiondefaults=None,
+        domain=None,
+        hoverinfo=None,
+        hoveron=None,
+        hovertemplate=None,
+        labelfont=None,
+        legendgrouptitle=None,
+        legendwidth=None,
+        line=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        sortpaths=None,
+        stream=None,
+        tickfont=None,
+        uid=None,
+        uirevision=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Parcats object
 
@@ -862,9 +885,9 @@ class Parcats(_BaseTraceType):
         -------
         Parcats
         """
-        super().__init__('parcats')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("parcats")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -874,42 +897,41 @@ class Parcats(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Parcats
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Parcats`""")
+an instance of :class:`plotly.graph_objs.Parcats`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
+        self._set_property("arrangement", arg, arrangement)
+        self._set_property("bundlecolors", arg, bundlecolors)
+        self._set_property("counts", arg, counts)
+        self._set_property("countssrc", arg, countssrc)
+        self._set_property("dimensions", arg, dimensions)
+        self._set_property("dimensiondefaults", arg, dimensiondefaults)
+        self._set_property("domain", arg, domain)
+        self._set_property("hoverinfo", arg, hoverinfo)
+        self._set_property("hoveron", arg, hoveron)
+        self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("labelfont", arg, labelfont)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("line", arg, line)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("name", arg, name)
+        self._set_property("sortpaths", arg, sortpaths)
+        self._set_property("stream", arg, stream)
+        self._set_property("tickfont", arg, tickfont)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("visible", arg, visible)
 
-        self._set_property('arrangement', arg, arrangement)
-        self._set_property('bundlecolors', arg, bundlecolors)
-        self._set_property('counts', arg, counts)
-        self._set_property('countssrc', arg, countssrc)
-        self._set_property('dimensions', arg, dimensions)
-        self._set_property('dimensiondefaults', arg, dimensiondefaults)
-        self._set_property('domain', arg, domain)
-        self._set_property('hoverinfo', arg, hoverinfo)
-        self._set_property('hoveron', arg, hoveron)
-        self._set_property('hovertemplate', arg, hovertemplate)
-        self._set_property('labelfont', arg, labelfont)
-        self._set_property('legendgrouptitle', arg, legendgrouptitle)
-        self._set_property('legendwidth', arg, legendwidth)
-        self._set_property('line', arg, line)
-        self._set_property('meta', arg, meta)
-        self._set_property('metasrc', arg, metasrc)
-        self._set_property('name', arg, name)
-        self._set_property('sortpaths', arg, sortpaths)
-        self._set_property('stream', arg, stream)
-        self._set_property('tickfont', arg, tickfont)
-        self._set_property('uid', arg, uid)
-        self._set_property('uirevision', arg, uirevision)
-        self._set_property('visible', arg, visible)
-
-
-        self._props['type'] = 'parcats'
-        arg.pop('type', None)
+        self._props["type"] = "parcats"
+        arg.pop("type", None)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

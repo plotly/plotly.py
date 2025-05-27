@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,32 +7,32 @@ import copy as _copy
 
 class Tickformatstop(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'scattergeo.marker.colorbar'
-    _path_str = 'scattergeo.marker.colorbar.tickformatstop'
+    _parent_path_str = "scattergeo.marker.colorbar"
+    _path_str = "scattergeo.marker.colorbar.tickformatstop"
     _valid_props = {"dtickrange", "enabled", "name", "templateitemname", "value"}
 
     @property
     def dtickrange(self):
         """
-        range [*min*, *max*], where "min", "max" - dtick values which
-        describe some zoom level, it is possible to omit "min" or "max"
-        value by passing "null"
+            range [*min*, *max*], where "min", "max" - dtick values which
+            describe some zoom level, it is possible to omit "min" or "max"
+            value by passing "null"
 
-        The 'dtickrange' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'dtickrange[0]' property accepts values of any type
-    (1) The 'dtickrange[1]' property accepts values of any type
+            The 'dtickrange' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'dtickrange[0]' property accepts values of any type
+        (1) The 'dtickrange[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
-        return self['dtickrange']
+        return self["dtickrange"]
 
     @dtickrange.setter
     def dtickrange(self, val):
-        self['dtickrange'] = val
+        self["dtickrange"] = val
 
     @property
     def enabled(self):
@@ -51,11 +47,11 @@ class Tickformatstop(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['enabled']
+        return self["enabled"]
 
     @enabled.setter
     def enabled(self, val):
-        self['enabled'] = val
+        self["enabled"] = val
 
     @property
     def name(self):
@@ -76,11 +72,11 @@ class Tickformatstop(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def templateitemname(self):
@@ -102,11 +98,11 @@ class Tickformatstop(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     @property
     def value(self):
@@ -122,11 +118,11 @@ class Tickformatstop(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
     @property
     def _prop_descriptions(self):
@@ -162,15 +158,17 @@ class Tickformatstop(_BaseTraceHierarchyType):
             string - dtickformat for described zoom level, the same
             as "tickformat"
         """
-    def __init__(self,
-            arg=None,
-            dtickrange=None,
-            enabled=None,
-            name=None,
-            templateitemname=None,
-            value=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        dtickrange=None,
+        enabled=None,
+        name=None,
+        templateitemname=None,
+        value=None,
+        **kwargs,
+    ):
         """
         Construct a new Tickformatstop object
 
@@ -215,9 +213,9 @@ class Tickformatstop(_BaseTraceHierarchyType):
         -------
         Tickformatstop
         """
-        super().__init__('tickformatstops')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("tickformatstops")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -227,20 +225,20 @@ class Tickformatstop(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scattergeo.marker.colorbar.Tickformatstop
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattergeo.marker.colorbar.Tickformatstop`""")
+an instance of :class:`plotly.graph_objs.scattergeo.marker.colorbar.Tickformatstop`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('dtickrange', arg, dtickrange)
-        self._set_property('enabled', arg, enabled)
-        self._set_property('name', arg, name)
-        self._set_property('templateitemname', arg, templateitemname)
-        self._set_property('value', arg, value)
+        self._set_property("dtickrange", arg, dtickrange)
+        self._set_property("enabled", arg, enabled)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("value", arg, value)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,68 @@ import copy as _copy
 
 class Aaxis(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'carpet'
-    _path_str = 'carpet.aaxis'
-    _valid_props = {"arraydtick", "arraytick0", "autorange", "autotypenumbers", "categoryarray", "categoryarraysrc", "categoryorder", "cheatertype", "color", "dtick", "endline", "endlinecolor", "endlinewidth", "exponentformat", "fixedrange", "gridcolor", "griddash", "gridwidth", "labelalias", "labelpadding", "labelprefix", "labelsuffix", "linecolor", "linewidth", "minexponent", "minorgridcolor", "minorgridcount", "minorgriddash", "minorgridwidth", "nticks", "range", "rangemode", "separatethousands", "showexponent", "showgrid", "showline", "showticklabels", "showtickprefix", "showticksuffix", "smoothing", "startline", "startlinecolor", "startlinewidth", "tick0", "tickangle", "tickfont", "tickformat", "tickformatstopdefaults", "tickformatstops", "tickmode", "tickprefix", "ticksuffix", "ticktext", "ticktextsrc", "tickvals", "tickvalssrc", "title", "type"}
+    _parent_path_str = "carpet"
+    _path_str = "carpet.aaxis"
+    _valid_props = {
+        "arraydtick",
+        "arraytick0",
+        "autorange",
+        "autotypenumbers",
+        "categoryarray",
+        "categoryarraysrc",
+        "categoryorder",
+        "cheatertype",
+        "color",
+        "dtick",
+        "endline",
+        "endlinecolor",
+        "endlinewidth",
+        "exponentformat",
+        "fixedrange",
+        "gridcolor",
+        "griddash",
+        "gridwidth",
+        "labelalias",
+        "labelpadding",
+        "labelprefix",
+        "labelsuffix",
+        "linecolor",
+        "linewidth",
+        "minexponent",
+        "minorgridcolor",
+        "minorgridcount",
+        "minorgriddash",
+        "minorgridwidth",
+        "nticks",
+        "range",
+        "rangemode",
+        "separatethousands",
+        "showexponent",
+        "showgrid",
+        "showline",
+        "showticklabels",
+        "showtickprefix",
+        "showticksuffix",
+        "smoothing",
+        "startline",
+        "startlinecolor",
+        "startlinewidth",
+        "tick0",
+        "tickangle",
+        "tickfont",
+        "tickformat",
+        "tickformatstopdefaults",
+        "tickformatstops",
+        "tickmode",
+        "tickprefix",
+        "ticksuffix",
+        "ticktext",
+        "ticktextsrc",
+        "tickvals",
+        "tickvalssrc",
+        "title",
+        "type",
+    }
 
     @property
     def arraydtick(self):
@@ -28,11 +83,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['arraydtick']
+        return self["arraydtick"]
 
     @arraydtick.setter
     def arraydtick(self, val):
-        self['arraydtick'] = val
+        self["arraydtick"] = val
 
     @property
     def arraytick0(self):
@@ -47,11 +102,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['arraytick0']
+        return self["arraytick0"]
 
     @arraytick0.setter
     def arraytick0(self, val):
-        self['arraytick0'] = val
+        self["arraytick0"] = val
 
     @property
     def autorange(self):
@@ -68,11 +123,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['autorange']
+        return self["autorange"]
 
     @autorange.setter
     def autorange(self, val):
-        self['autorange'] = val
+        self["autorange"] = val
 
     @property
     def autotypenumbers(self):
@@ -90,11 +145,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['autotypenumbers']
+        return self["autotypenumbers"]
 
     @autotypenumbers.setter
     def autotypenumbers(self, val):
-        self['autotypenumbers'] = val
+        self["autotypenumbers"] = val
 
     @property
     def categoryarray(self):
@@ -110,11 +165,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['categoryarray']
+        return self["categoryarray"]
 
     @categoryarray.setter
     def categoryarray(self, val):
-        self['categoryarray'] = val
+        self["categoryarray"] = val
 
     @property
     def categoryarraysrc(self):
@@ -129,11 +184,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['categoryarraysrc']
+        return self["categoryarraysrc"]
 
     @categoryarraysrc.setter
     def categoryarraysrc(self, val):
-        self['categoryarraysrc'] = val
+        self["categoryarraysrc"] = val
 
     @property
     def categoryorder(self):
@@ -159,11 +214,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['categoryorder']
+        return self["categoryorder"]
 
     @categoryorder.setter
     def categoryorder(self, val):
-        self['categoryorder'] = val
+        self["categoryorder"] = val
 
     @property
     def cheatertype(self):
@@ -176,11 +231,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['cheatertype']
+        return self["cheatertype"]
 
     @cheatertype.setter
     def cheatertype(self, val):
-        self['cheatertype'] = val
+        self["cheatertype"] = val
 
     @property
     def color(self):
@@ -201,11 +256,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def dtick(self):
@@ -219,11 +274,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
     @property
     def endline(self):
@@ -239,11 +294,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['endline']
+        return self["endline"]
 
     @endline.setter
     def endline(self, val):
-        self['endline'] = val
+        self["endline"] = val
 
     @property
     def endlinecolor(self):
@@ -261,11 +316,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['endlinecolor']
+        return self["endlinecolor"]
 
     @endlinecolor.setter
     def endlinecolor(self, val):
-        self['endlinecolor'] = val
+        self["endlinecolor"] = val
 
     @property
     def endlinewidth(self):
@@ -279,11 +334,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['endlinewidth']
+        return self["endlinewidth"]
 
     @endlinewidth.setter
     def endlinewidth(self, val):
-        self['endlinewidth'] = val
+        self["endlinewidth"] = val
 
     @property
     def exponentformat(self):
@@ -302,11 +357,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['exponentformat']
+        return self["exponentformat"]
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self['exponentformat'] = val
+        self["exponentformat"] = val
 
     @property
     def fixedrange(self):
@@ -321,11 +376,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['fixedrange']
+        return self["fixedrange"]
 
     @fixedrange.setter
     def fixedrange(self, val):
-        self['fixedrange'] = val
+        self["fixedrange"] = val
 
     @property
     def gridcolor(self):
@@ -343,11 +398,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
     @property
     def griddash(self):
@@ -367,11 +422,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['griddash']
+        return self["griddash"]
 
     @griddash.setter
     def griddash(self, val):
-        self['griddash'] = val
+        self["griddash"] = val
 
     @property
     def gridwidth(self):
@@ -385,11 +440,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
     @property
     def labelalias(self):
@@ -410,11 +465,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['labelalias']
+        return self["labelalias"]
 
     @labelalias.setter
     def labelalias(self, val):
-        self['labelalias'] = val
+        self["labelalias"] = val
 
     @property
     def labelpadding(self):
@@ -428,11 +483,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['labelpadding']
+        return self["labelpadding"]
 
     @labelpadding.setter
     def labelpadding(self, val):
-        self['labelpadding'] = val
+        self["labelpadding"] = val
 
     @property
     def labelprefix(self):
@@ -447,11 +502,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['labelprefix']
+        return self["labelprefix"]
 
     @labelprefix.setter
     def labelprefix(self, val):
-        self['labelprefix'] = val
+        self["labelprefix"] = val
 
     @property
     def labelsuffix(self):
@@ -466,11 +521,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['labelsuffix']
+        return self["labelsuffix"]
 
     @labelsuffix.setter
     def labelsuffix(self, val):
-        self['labelsuffix'] = val
+        self["labelsuffix"] = val
 
     @property
     def linecolor(self):
@@ -488,11 +543,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['linecolor']
+        return self["linecolor"]
 
     @linecolor.setter
     def linecolor(self, val):
-        self['linecolor'] = val
+        self["linecolor"] = val
 
     @property
     def linewidth(self):
@@ -506,11 +561,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['linewidth']
+        return self["linewidth"]
 
     @linewidth.setter
     def linewidth(self, val):
-        self['linewidth'] = val
+        self["linewidth"] = val
 
     @property
     def minexponent(self):
@@ -524,11 +579,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['minexponent']
+        return self["minexponent"]
 
     @minexponent.setter
     def minexponent(self, val):
-        self['minexponent'] = val
+        self["minexponent"] = val
 
     @property
     def minorgridcolor(self):
@@ -546,11 +601,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['minorgridcolor']
+        return self["minorgridcolor"]
 
     @minorgridcolor.setter
     def minorgridcolor(self, val):
-        self['minorgridcolor'] = val
+        self["minorgridcolor"] = val
 
     @property
     def minorgridcount(self):
@@ -565,11 +620,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['minorgridcount']
+        return self["minorgridcount"]
 
     @minorgridcount.setter
     def minorgridcount(self, val):
-        self['minorgridcount'] = val
+        self["minorgridcount"] = val
 
     @property
     def minorgriddash(self):
@@ -589,11 +644,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['minorgriddash']
+        return self["minorgriddash"]
 
     @minorgriddash.setter
     def minorgriddash(self, val):
-        self['minorgriddash'] = val
+        self["minorgriddash"] = val
 
     @property
     def minorgridwidth(self):
@@ -607,11 +662,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['minorgridwidth']
+        return self["minorgridwidth"]
 
     @minorgridwidth.setter
     def minorgridwidth(self, val):
-        self['minorgridwidth'] = val
+        self["minorgridwidth"] = val
 
     @property
     def nticks(self):
@@ -629,39 +684,39 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
     @property
     def range(self):
         """
-        Sets the range of this axis. If the axis `type` is "log", then
-        you must take the log of your desired range (e.g. to set the
-        range from 1 to 100, set the range from 0 to 2). If the axis
-        `type` is "date", it should be date strings, like date data,
-        though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is "category", it
-        should be numbers, using the scale where each category is
-        assigned a serial number from zero in the order it appears.
+            Sets the range of this axis. If the axis `type` is "log", then
+            you must take the log of your desired range (e.g. to set the
+            range from 1 to 100, set the range from 0 to 2). If the axis
+            `type` is "date", it should be date strings, like date data,
+            though Date objects and unix milliseconds will be accepted and
+            converted to strings. If the axis `type` is "category", it
+            should be numbers, using the scale where each category is
+            assigned a serial number from zero in the order it appears.
 
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property accepts values of any type
-    (1) The 'range[1]' property accepts values of any type
+            The 'range' property is an info array that may be specified as:
 
-        Returns
-        -------
-        list
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property accepts values of any type
+        (1) The 'range[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     @property
     def rangemode(self):
@@ -679,11 +734,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['rangemode']
+        return self["rangemode"]
 
     @rangemode.setter
     def rangemode(self, val):
-        self['rangemode'] = val
+        self["rangemode"] = val
 
     @property
     def separatethousands(self):
@@ -697,11 +752,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['separatethousands']
+        return self["separatethousands"]
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self['separatethousands'] = val
+        self["separatethousands"] = val
 
     @property
     def showexponent(self):
@@ -719,11 +774,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['showexponent']
+        return self["showexponent"]
 
     @showexponent.setter
     def showexponent(self, val):
-        self['showexponent'] = val
+        self["showexponent"] = val
 
     @property
     def showgrid(self):
@@ -738,11 +793,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
     @property
     def showline(self):
@@ -756,11 +811,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['showline']
+        return self["showline"]
 
     @showline.setter
     def showline(self, val):
-        self['showline'] = val
+        self["showline"] = val
 
     @property
     def showticklabels(self):
@@ -776,11 +831,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
     @property
     def showtickprefix(self):
@@ -798,11 +853,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
     @property
     def showticksuffix(self):
@@ -817,11 +872,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
     @property
     def smoothing(self):
@@ -833,11 +888,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['smoothing']
+        return self["smoothing"]
 
     @smoothing.setter
     def smoothing(self, val):
-        self['smoothing'] = val
+        self["smoothing"] = val
 
     @property
     def startline(self):
@@ -853,11 +908,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['startline']
+        return self["startline"]
 
     @startline.setter
     def startline(self, val):
-        self['startline'] = val
+        self["startline"] = val
 
     @property
     def startlinecolor(self):
@@ -875,11 +930,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['startlinecolor']
+        return self["startlinecolor"]
 
     @startlinecolor.setter
     def startlinecolor(self, val):
-        self['startlinecolor'] = val
+        self["startlinecolor"] = val
 
     @property
     def startlinewidth(self):
@@ -893,11 +948,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['startlinewidth']
+        return self["startlinewidth"]
 
     @startlinewidth.setter
     def startlinewidth(self, val):
-        self['startlinewidth'] = val
+        self["startlinewidth"] = val
 
     @property
     def tick0(self):
@@ -911,11 +966,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
     @property
     def tickangle(self):
@@ -933,11 +988,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
     @property
     def tickfont(self):
@@ -954,11 +1009,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.carpet.aaxis.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
     @property
     def tickformat(self):
@@ -982,11 +1037,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
     @property
     def tickformatstops(self):
@@ -1001,11 +1056,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         tuple[plotly.graph_objs.carpet.aaxis.Tickformatstop]
         """
-        return self['tickformatstops']
+        return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self['tickformatstops'] = val
+        self["tickformatstops"] = val
 
     @property
     def tickformatstopdefaults(self):
@@ -1025,11 +1080,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.carpet.aaxis.Tickformatstop
         """
-        return self['tickformatstopdefaults']
+        return self["tickformatstopdefaults"]
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self['tickformatstopdefaults'] = val
+        self["tickformatstopdefaults"] = val
 
     @property
     def tickmode(self):
@@ -1042,11 +1097,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
     @property
     def tickprefix(self):
@@ -1061,11 +1116,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
     @property
     def ticksuffix(self):
@@ -1080,11 +1135,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
     @property
     def ticktext(self):
@@ -1100,11 +1155,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
     @property
     def ticktextsrc(self):
@@ -1118,11 +1173,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
     @property
     def tickvals(self):
@@ -1137,11 +1192,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
     @property
     def tickvalssrc(self):
@@ -1155,11 +1210,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
     @property
     def title(self):
@@ -1174,11 +1229,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.carpet.aaxis.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
     @property
     def type(self):
@@ -1195,11 +1250,11 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     @property
     def _prop_descriptions(self):
@@ -1421,68 +1476,70 @@ class Aaxis(_BaseTraceHierarchyType):
             determined the axis type by looking into the data of
             the traces that referenced the axis in question.
         """
-    def __init__(self,
-            arg=None,
-            arraydtick=None,
-            arraytick0=None,
-            autorange=None,
-            autotypenumbers=None,
-            categoryarray=None,
-            categoryarraysrc=None,
-            categoryorder=None,
-            cheatertype=None,
-            color=None,
-            dtick=None,
-            endline=None,
-            endlinecolor=None,
-            endlinewidth=None,
-            exponentformat=None,
-            fixedrange=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            labelalias=None,
-            labelpadding=None,
-            labelprefix=None,
-            labelsuffix=None,
-            linecolor=None,
-            linewidth=None,
-            minexponent=None,
-            minorgridcolor=None,
-            minorgridcount=None,
-            minorgriddash=None,
-            minorgridwidth=None,
-            nticks=None,
-            range=None,
-            rangemode=None,
-            separatethousands=None,
-            showexponent=None,
-            showgrid=None,
-            showline=None,
-            showticklabels=None,
-            showtickprefix=None,
-            showticksuffix=None,
-            smoothing=None,
-            startline=None,
-            startlinecolor=None,
-            startlinewidth=None,
-            tick0=None,
-            tickangle=None,
-            tickfont=None,
-            tickformat=None,
-            tickformatstops=None,
-            tickformatstopdefaults=None,
-            tickmode=None,
-            tickprefix=None,
-            ticksuffix=None,
-            ticktext=None,
-            ticktextsrc=None,
-            tickvals=None,
-            tickvalssrc=None,
-            title=None,
-            type=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        arraydtick=None,
+        arraytick0=None,
+        autorange=None,
+        autotypenumbers=None,
+        categoryarray=None,
+        categoryarraysrc=None,
+        categoryorder=None,
+        cheatertype=None,
+        color=None,
+        dtick=None,
+        endline=None,
+        endlinecolor=None,
+        endlinewidth=None,
+        exponentformat=None,
+        fixedrange=None,
+        gridcolor=None,
+        griddash=None,
+        gridwidth=None,
+        labelalias=None,
+        labelpadding=None,
+        labelprefix=None,
+        labelsuffix=None,
+        linecolor=None,
+        linewidth=None,
+        minexponent=None,
+        minorgridcolor=None,
+        minorgridcount=None,
+        minorgriddash=None,
+        minorgridwidth=None,
+        nticks=None,
+        range=None,
+        rangemode=None,
+        separatethousands=None,
+        showexponent=None,
+        showgrid=None,
+        showline=None,
+        showticklabels=None,
+        showtickprefix=None,
+        showticksuffix=None,
+        smoothing=None,
+        startline=None,
+        startlinecolor=None,
+        startlinewidth=None,
+        tick0=None,
+        tickangle=None,
+        tickfont=None,
+        tickformat=None,
+        tickformatstops=None,
+        tickformatstopdefaults=None,
+        tickmode=None,
+        tickprefix=None,
+        ticksuffix=None,
+        ticktext=None,
+        ticktextsrc=None,
+        tickvals=None,
+        tickvalssrc=None,
+        title=None,
+        type=None,
+        **kwargs,
+    ):
         """
         Construct a new Aaxis object
 
@@ -1712,9 +1769,9 @@ class Aaxis(_BaseTraceHierarchyType):
         -------
         Aaxis
         """
-        super().__init__('aaxis')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("aaxis")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -1724,73 +1781,73 @@ class Aaxis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.carpet.Aaxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.carpet.Aaxis`""")
+an instance of :class:`plotly.graph_objs.carpet.Aaxis`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('arraydtick', arg, arraydtick)
-        self._set_property('arraytick0', arg, arraytick0)
-        self._set_property('autorange', arg, autorange)
-        self._set_property('autotypenumbers', arg, autotypenumbers)
-        self._set_property('categoryarray', arg, categoryarray)
-        self._set_property('categoryarraysrc', arg, categoryarraysrc)
-        self._set_property('categoryorder', arg, categoryorder)
-        self._set_property('cheatertype', arg, cheatertype)
-        self._set_property('color', arg, color)
-        self._set_property('dtick', arg, dtick)
-        self._set_property('endline', arg, endline)
-        self._set_property('endlinecolor', arg, endlinecolor)
-        self._set_property('endlinewidth', arg, endlinewidth)
-        self._set_property('exponentformat', arg, exponentformat)
-        self._set_property('fixedrange', arg, fixedrange)
-        self._set_property('gridcolor', arg, gridcolor)
-        self._set_property('griddash', arg, griddash)
-        self._set_property('gridwidth', arg, gridwidth)
-        self._set_property('labelalias', arg, labelalias)
-        self._set_property('labelpadding', arg, labelpadding)
-        self._set_property('labelprefix', arg, labelprefix)
-        self._set_property('labelsuffix', arg, labelsuffix)
-        self._set_property('linecolor', arg, linecolor)
-        self._set_property('linewidth', arg, linewidth)
-        self._set_property('minexponent', arg, minexponent)
-        self._set_property('minorgridcolor', arg, minorgridcolor)
-        self._set_property('minorgridcount', arg, minorgridcount)
-        self._set_property('minorgriddash', arg, minorgriddash)
-        self._set_property('minorgridwidth', arg, minorgridwidth)
-        self._set_property('nticks', arg, nticks)
-        self._set_property('range', arg, range)
-        self._set_property('rangemode', arg, rangemode)
-        self._set_property('separatethousands', arg, separatethousands)
-        self._set_property('showexponent', arg, showexponent)
-        self._set_property('showgrid', arg, showgrid)
-        self._set_property('showline', arg, showline)
-        self._set_property('showticklabels', arg, showticklabels)
-        self._set_property('showtickprefix', arg, showtickprefix)
-        self._set_property('showticksuffix', arg, showticksuffix)
-        self._set_property('smoothing', arg, smoothing)
-        self._set_property('startline', arg, startline)
-        self._set_property('startlinecolor', arg, startlinecolor)
-        self._set_property('startlinewidth', arg, startlinewidth)
-        self._set_property('tick0', arg, tick0)
-        self._set_property('tickangle', arg, tickangle)
-        self._set_property('tickfont', arg, tickfont)
-        self._set_property('tickformat', arg, tickformat)
-        self._set_property('tickformatstops', arg, tickformatstops)
-        self._set_property('tickformatstopdefaults', arg, tickformatstopdefaults)
-        self._set_property('tickmode', arg, tickmode)
-        self._set_property('tickprefix', arg, tickprefix)
-        self._set_property('ticksuffix', arg, ticksuffix)
-        self._set_property('ticktext', arg, ticktext)
-        self._set_property('ticktextsrc', arg, ticktextsrc)
-        self._set_property('tickvals', arg, tickvals)
-        self._set_property('tickvalssrc', arg, tickvalssrc)
-        self._set_property('title', arg, title)
-        self._set_property('type', arg, type)
+        self._set_property("arraydtick", arg, arraydtick)
+        self._set_property("arraytick0", arg, arraytick0)
+        self._set_property("autorange", arg, autorange)
+        self._set_property("autotypenumbers", arg, autotypenumbers)
+        self._set_property("categoryarray", arg, categoryarray)
+        self._set_property("categoryarraysrc", arg, categoryarraysrc)
+        self._set_property("categoryorder", arg, categoryorder)
+        self._set_property("cheatertype", arg, cheatertype)
+        self._set_property("color", arg, color)
+        self._set_property("dtick", arg, dtick)
+        self._set_property("endline", arg, endline)
+        self._set_property("endlinecolor", arg, endlinecolor)
+        self._set_property("endlinewidth", arg, endlinewidth)
+        self._set_property("exponentformat", arg, exponentformat)
+        self._set_property("fixedrange", arg, fixedrange)
+        self._set_property("gridcolor", arg, gridcolor)
+        self._set_property("griddash", arg, griddash)
+        self._set_property("gridwidth", arg, gridwidth)
+        self._set_property("labelalias", arg, labelalias)
+        self._set_property("labelpadding", arg, labelpadding)
+        self._set_property("labelprefix", arg, labelprefix)
+        self._set_property("labelsuffix", arg, labelsuffix)
+        self._set_property("linecolor", arg, linecolor)
+        self._set_property("linewidth", arg, linewidth)
+        self._set_property("minexponent", arg, minexponent)
+        self._set_property("minorgridcolor", arg, minorgridcolor)
+        self._set_property("minorgridcount", arg, minorgridcount)
+        self._set_property("minorgriddash", arg, minorgriddash)
+        self._set_property("minorgridwidth", arg, minorgridwidth)
+        self._set_property("nticks", arg, nticks)
+        self._set_property("range", arg, range)
+        self._set_property("rangemode", arg, rangemode)
+        self._set_property("separatethousands", arg, separatethousands)
+        self._set_property("showexponent", arg, showexponent)
+        self._set_property("showgrid", arg, showgrid)
+        self._set_property("showline", arg, showline)
+        self._set_property("showticklabels", arg, showticklabels)
+        self._set_property("showtickprefix", arg, showtickprefix)
+        self._set_property("showticksuffix", arg, showticksuffix)
+        self._set_property("smoothing", arg, smoothing)
+        self._set_property("startline", arg, startline)
+        self._set_property("startlinecolor", arg, startlinecolor)
+        self._set_property("startlinewidth", arg, startlinewidth)
+        self._set_property("tick0", arg, tick0)
+        self._set_property("tickangle", arg, tickangle)
+        self._set_property("tickfont", arg, tickfont)
+        self._set_property("tickformat", arg, tickformat)
+        self._set_property("tickformatstops", arg, tickformatstops)
+        self._set_property("tickformatstopdefaults", arg, tickformatstopdefaults)
+        self._set_property("tickmode", arg, tickmode)
+        self._set_property("tickprefix", arg, tickprefix)
+        self._set_property("ticksuffix", arg, ticksuffix)
+        self._set_property("ticktext", arg, ticktext)
+        self._set_property("ticktextsrc", arg, ticktextsrc)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("title", arg, title)
+        self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

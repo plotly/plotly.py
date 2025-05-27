@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Newselection(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.newselection'
+    _parent_path_str = "layout"
+    _path_str = "layout.newselection"
     _valid_props = {"line", "mode"}
 
     @property
@@ -28,11 +24,11 @@ class Newselection(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.newselection.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     @property
     def mode(self):
@@ -51,11 +47,11 @@ class Newselection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['mode']
+        return self["mode"]
 
     @mode.setter
     def mode(self, val):
-        self['mode'] = val
+        self["mode"] = val
 
     @property
     def _prop_descriptions(self):
@@ -71,12 +67,8 @@ class Newselection(_BaseLayoutHierarchyType):
             the initial selection, this option allows declaring
             extra outlines of the selection.
         """
-    def __init__(self,
-            arg=None,
-            line=None,
-            mode=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, line=None, mode=None, **kwargs):
         """
         Construct a new Newselection object
 
@@ -101,9 +93,9 @@ class Newselection(_BaseLayoutHierarchyType):
         -------
         Newselection
         """
-        super().__init__('newselection')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("newselection")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -113,17 +105,17 @@ class Newselection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Newselection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Newselection`""")
+an instance of :class:`plotly.graph_objs.layout.Newselection`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('line', arg, line)
-        self._set_property('mode', arg, mode)
+        self._set_property("line", arg, line)
+        self._set_property("mode", arg, mode)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

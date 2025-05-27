@@ -1,5 +1,6 @@
 import sys
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from ._dimension import Dimension
     from ._domain import Domain
@@ -12,10 +13,17 @@ if TYPE_CHECKING:
     from . import line
 else:
     from _plotly_utils.importers import relative_import
+
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        ['.legendgrouptitle', '.line'],
-        ['._dimension.Dimension', '._domain.Domain', '._labelfont.Labelfont', '._legendgrouptitle.Legendgrouptitle', '._line.Line', '._stream.Stream', '._tickfont.Tickfont']
+        [".legendgrouptitle", ".line"],
+        [
+            "._dimension.Dimension",
+            "._domain.Domain",
+            "._labelfont.Labelfont",
+            "._legendgrouptitle.Legendgrouptitle",
+            "._line.Line",
+            "._stream.Stream",
+            "._tickfont.Tickfont",
+        ],
     )
-
-
