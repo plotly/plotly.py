@@ -369,6 +369,12 @@ To downgrade to Kaleido v0, run:
         from kaleido.errors import ChromeNotFoundError
 
         try:
+            kopts = {}
+            if defaults.plotlyjs:
+                kopts["plotlyjs"] = defaults.plotlyjs
+            if defaults.mathjax:
+                kopts["mathjax"] = defaults.mathjax
+
             # TODO: Refactor to make it possible to use a shared Kaleido instance here
             img_bytes = kaleido.calc_fig_sync(
                 fig_dict,
@@ -379,13 +385,7 @@ To downgrade to Kaleido v0, run:
                     scale=scale or defaults.default_scale,
                 ),
                 topojson=defaults.topojson,
-                kopts=(
-                    dict(
-                        mathjax=defaults.mathjax,
-                    )
-                    if defaults.mathjax
-                    else None
-                ),
+                kopts=kopts,
             )
         except ChromeNotFoundError:
             raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
@@ -692,15 +692,14 @@ which can be installed using pip:
     from kaleido.errors import ChromeNotFoundError
 
     try:
+        kopts = {}
+        if defaults.plotlyjs:
+            kopts["plotlyjs"] = defaults.plotlyjs
+        if defaults.mathjax:
+            kopts["mathjax"] = defaults.mathjax
         kaleido.write_fig_from_object_sync(
             kaleido_specs,
-            kopts=(
-                dict(
-                    mathjax=defaults.mathjax,
-                )
-                if defaults.mathjax
-                else None
-            ),
+            kopts=kopts,
         )
     except ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
