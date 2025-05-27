@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Z(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'scatter3d.projection'
-    _path_str = 'scatter3d.projection.z'
+    _parent_path_str = "scatter3d.projection"
+    _path_str = "scatter3d.projection.z"
     _valid_props = {"opacity", "scale", "show"}
 
     @property
@@ -27,11 +23,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def scale(self):
@@ -46,11 +42,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['scale']
+        return self["scale"]
 
     @scale.setter
     def scale(self, val):
-        self['scale'] = val
+        self["scale"] = val
 
     @property
     def show(self):
@@ -64,11 +60,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     @property
     def _prop_descriptions(self):
@@ -82,13 +78,8 @@ class Z(_BaseTraceHierarchyType):
             Sets whether or not projections are shown along the z
             axis.
         """
-    def __init__(self,
-            arg=None,
-            opacity=None,
-            scale=None,
-            show=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, opacity=None, scale=None, show=None, **kwargs):
         """
         Construct a new Z object
 
@@ -111,9 +102,9 @@ class Z(_BaseTraceHierarchyType):
         -------
         Z
         """
-        super().__init__('z')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("z")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -123,18 +114,18 @@ class Z(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scatter3d.projection.Z
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.projection.Z`""")
+an instance of :class:`plotly.graph_objs.scatter3d.projection.Z`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('opacity', arg, opacity)
-        self._set_property('scale', arg, scale)
-        self._set_property('show', arg, show)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("scale", arg, scale)
+        self._set_property("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

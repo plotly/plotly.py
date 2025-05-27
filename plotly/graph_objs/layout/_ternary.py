@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Ternary(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.ternary'
+    _parent_path_str = "layout"
+    _path_str = "layout.ternary"
     _valid_props = {"aaxis", "baxis", "bgcolor", "caxis", "domain", "sum", "uirevision"}
 
     @property
@@ -28,11 +24,11 @@ class Ternary(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.Aaxis
         """
-        return self['aaxis']
+        return self["aaxis"]
 
     @aaxis.setter
     def aaxis(self, val):
-        self['aaxis'] = val
+        self["aaxis"] = val
 
     @property
     def baxis(self):
@@ -47,11 +43,11 @@ class Ternary(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.Baxis
         """
-        return self['baxis']
+        return self["baxis"]
 
     @baxis.setter
     def baxis(self, val):
-        self['baxis'] = val
+        self["baxis"] = val
 
     @property
     def bgcolor(self):
@@ -69,11 +65,11 @@ class Ternary(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     @property
     def caxis(self):
@@ -88,11 +84,11 @@ class Ternary(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.Caxis
         """
-        return self['caxis']
+        return self["caxis"]
 
     @caxis.setter
     def caxis(self, val):
-        self['caxis'] = val
+        self["caxis"] = val
 
     @property
     def domain(self):
@@ -107,11 +103,11 @@ class Ternary(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.ternary.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
     @property
     def sum(self):
@@ -126,11 +122,11 @@ class Ternary(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['sum']
+        return self["sum"]
 
     @sum.setter
     def sum(self, val):
-        self['sum'] = val
+        self["sum"] = val
 
     @property
     def uirevision(self):
@@ -145,11 +141,11 @@ class Ternary(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def _prop_descriptions(self):
@@ -176,17 +172,19 @@ class Ternary(_BaseLayoutHierarchyType):
             `min` and `title`, if not overridden in the individual
             axes. Defaults to `layout.uirevision`.
         """
-    def __init__(self,
-            arg=None,
-            aaxis=None,
-            baxis=None,
-            bgcolor=None,
-            caxis=None,
-            domain=None,
-            sum=None,
-            uirevision=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        aaxis=None,
+        baxis=None,
+        bgcolor=None,
+        caxis=None,
+        domain=None,
+        sum=None,
+        uirevision=None,
+        **kwargs,
+    ):
         """
         Construct a new Ternary object
 
@@ -222,9 +220,9 @@ class Ternary(_BaseLayoutHierarchyType):
         -------
         Ternary
         """
-        super().__init__('ternary')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("ternary")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -234,22 +232,22 @@ class Ternary(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Ternary
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Ternary`""")
+an instance of :class:`plotly.graph_objs.layout.Ternary`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('aaxis', arg, aaxis)
-        self._set_property('baxis', arg, baxis)
-        self._set_property('bgcolor', arg, bgcolor)
-        self._set_property('caxis', arg, caxis)
-        self._set_property('domain', arg, domain)
-        self._set_property('sum', arg, sum)
-        self._set_property('uirevision', arg, uirevision)
+        self._set_property("aaxis", arg, aaxis)
+        self._set_property("baxis", arg, baxis)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("caxis", arg, caxis)
+        self._set_property("domain", arg, domain)
+        self._set_property("sum", arg, sum)
+        self._set_property("uirevision", arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

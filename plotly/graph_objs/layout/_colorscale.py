@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Colorscale(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.colorscale'
+    _parent_path_str = "layout"
+    _path_str = "layout.colorscale"
     _valid_props = {"diverging", "sequential", "sequentialminus"}
 
     @property
@@ -52,11 +48,11 @@ class Colorscale(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['diverging']
+        return self["diverging"]
 
     @diverging.setter
     def diverging(self, val):
-        self['diverging'] = val
+        self["diverging"] = val
 
     @property
     def sequential(self):
@@ -96,11 +92,11 @@ class Colorscale(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['sequential']
+        return self["sequential"]
 
     @sequential.setter
     def sequential(self, val):
-        self['sequential'] = val
+        self["sequential"] = val
 
     @property
     def sequentialminus(self):
@@ -140,11 +136,11 @@ class Colorscale(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['sequentialminus']
+        return self["sequentialminus"]
 
     @sequentialminus.setter
     def sequentialminus(self, val):
-        self['sequentialminus'] = val
+        self["sequentialminus"] = val
 
     @property
     def _prop_descriptions(self):
@@ -162,13 +158,10 @@ class Colorscale(_BaseLayoutHierarchyType):
             values. Note that `autocolorscale` must be true for
             this attribute to work.
         """
-    def __init__(self,
-            arg=None,
-            diverging=None,
-            sequential=None,
-            sequentialminus=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, diverging=None, sequential=None, sequentialminus=None, **kwargs
+    ):
         """
         Construct a new Colorscale object
 
@@ -195,9 +188,9 @@ class Colorscale(_BaseLayoutHierarchyType):
         -------
         Colorscale
         """
-        super().__init__('colorscale')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("colorscale")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -207,18 +200,18 @@ class Colorscale(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Colorscale
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Colorscale`""")
+an instance of :class:`plotly.graph_objs.layout.Colorscale`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('diverging', arg, diverging)
-        self._set_property('sequential', arg, sequential)
-        self._set_property('sequentialminus', arg, sequentialminus)
+        self._set_property("diverging", arg, diverging)
+        self._set_property("sequential", arg, sequential)
+        self._set_property("sequentialminus", arg, sequentialminus)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,17 @@ import copy as _copy
 
 class Dimension(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'splom'
-    _path_str = 'splom.dimension'
-    _valid_props = {"axis", "label", "name", "templateitemname", "values", "valuessrc", "visible"}
+    _parent_path_str = "splom"
+    _path_str = "splom.dimension"
+    _valid_props = {
+        "axis",
+        "label",
+        "name",
+        "templateitemname",
+        "values",
+        "valuessrc",
+        "visible",
+    }
 
     @property
     def axis(self):
@@ -28,11 +32,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.splom.dimension.Axis
         """
-        return self['axis']
+        return self["axis"]
 
     @axis.setter
     def axis(self, val):
-        self['axis'] = val
+        self["axis"] = val
 
     @property
     def label(self):
@@ -47,11 +51,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     @property
     def name(self):
@@ -72,11 +76,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     @property
     def templateitemname(self):
@@ -98,11 +102,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     @property
     def values(self):
@@ -116,11 +120,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
     @property
     def valuessrc(self):
@@ -134,11 +138,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
     @property
     def visible(self):
@@ -154,11 +158,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     @property
     def _prop_descriptions(self):
@@ -198,17 +202,19 @@ class Dimension(_BaseTraceHierarchyType):
             contribute to the default grid generate by this splom
             trace.
         """
-    def __init__(self,
-            arg=None,
-            axis=None,
-            label=None,
-            name=None,
-            templateitemname=None,
-            values=None,
-            valuessrc=None,
-            visible=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        axis=None,
+        label=None,
+        name=None,
+        templateitemname=None,
+        values=None,
+        valuessrc=None,
+        visible=None,
+        **kwargs,
+    ):
         """
         Construct a new Dimension object
 
@@ -257,9 +263,9 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         Dimension
         """
-        super().__init__('dimensions')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("dimensions")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -269,22 +275,22 @@ class Dimension(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.splom.Dimension
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.Dimension`""")
+an instance of :class:`plotly.graph_objs.splom.Dimension`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('axis', arg, axis)
-        self._set_property('label', arg, label)
-        self._set_property('name', arg, name)
-        self._set_property('templateitemname', arg, templateitemname)
-        self._set_property('values', arg, values)
-        self._set_property('valuessrc', arg, valuessrc)
-        self._set_property('visible', arg, visible)
+        self._set_property("axis", arg, axis)
+        self._set_property("label", arg, label)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

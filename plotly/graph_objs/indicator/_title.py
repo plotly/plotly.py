@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Title(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'indicator'
-    _path_str = 'indicator.title'
+    _parent_path_str = "indicator"
+    _path_str = "indicator.title"
     _valid_props = {"align", "font", "text"}
 
     @property
@@ -30,11 +26,11 @@ class Title(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     @property
     def font(self):
@@ -51,11 +47,11 @@ class Title(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.indicator.title.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     @property
     def text(self):
@@ -70,11 +66,11 @@ class Title(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     @property
     def _prop_descriptions(self):
@@ -88,13 +84,8 @@ class Title(_BaseTraceHierarchyType):
         text
             Sets the title of this indicator.
         """
-    def __init__(self,
-            arg=None,
-            align=None,
-            font=None,
-            text=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, align=None, font=None, text=None, **kwargs):
         """
         Construct a new Title object
 
@@ -117,9 +108,9 @@ class Title(_BaseTraceHierarchyType):
         -------
         Title
         """
-        super().__init__('title')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("title")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -129,18 +120,18 @@ class Title(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.indicator.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Title`""")
+an instance of :class:`plotly.graph_objs.indicator.Title`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('align', arg, align)
-        self._set_property('font', arg, font)
-        self._set_property('text', arg, text)
+        self._set_property("align", arg, align)
+        self._set_property("font", arg, font)
+        self._set_property("text", arg, text)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

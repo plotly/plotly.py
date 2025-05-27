@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Fill(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'table.header'
-    _path_str = 'table.header.fill'
+    _parent_path_str = "table.header"
+    _path_str = "table.header.fill"
     _valid_props = {"color", "colorsrc"}
 
     @property
@@ -33,11 +29,11 @@ class Fill(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def colorsrc(self):
@@ -51,11 +47,11 @@ class Fill(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     @property
     def _prop_descriptions(self):
@@ -67,12 +63,8 @@ class Fill(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `color`.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            colorsrc=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
         """
         Construct a new Fill object
 
@@ -93,9 +85,9 @@ class Fill(_BaseTraceHierarchyType):
         -------
         Fill
         """
-        super().__init__('fill')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("fill")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -105,17 +97,17 @@ class Fill(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.table.header.Fill
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.table.header.Fill`""")
+an instance of :class:`plotly.graph_objs.table.header.Fill`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('color', arg, color)
-        self._set_property('colorsrc', arg, colorsrc)
+        self._set_property("color", arg, color)
+        self._set_property("colorsrc", arg, colorsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

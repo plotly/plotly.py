@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Smith(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.smith'
+    _parent_path_str = "layout"
+    _path_str = "layout.smith"
     _valid_props = {"bgcolor", "domain", "imaginaryaxis", "realaxis"}
 
     @property
@@ -31,11 +27,11 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     @property
     def domain(self):
@@ -50,11 +46,11 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.smith.Domain
         """
-        return self['domain']
+        return self["domain"]
 
     @domain.setter
     def domain(self, val):
-        self['domain'] = val
+        self["domain"] = val
 
     @property
     def imaginaryaxis(self):
@@ -69,11 +65,11 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.smith.Imaginaryaxis
         """
-        return self['imaginaryaxis']
+        return self["imaginaryaxis"]
 
     @imaginaryaxis.setter
     def imaginaryaxis(self, val):
-        self['imaginaryaxis'] = val
+        self["imaginaryaxis"] = val
 
     @property
     def realaxis(self):
@@ -88,11 +84,11 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.smith.Realaxis
         """
-        return self['realaxis']
+        return self["realaxis"]
 
     @realaxis.setter
     def realaxis(self, val):
-        self['realaxis'] = val
+        self["realaxis"] = val
 
     @property
     def _prop_descriptions(self):
@@ -109,14 +105,16 @@ class Smith(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objects.layout.smith.Realaxis`
             instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            bgcolor=None,
-            domain=None,
-            imaginaryaxis=None,
-            realaxis=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        bgcolor=None,
+        domain=None,
+        imaginaryaxis=None,
+        realaxis=None,
+        **kwargs,
+    ):
         """
         Construct a new Smith object
 
@@ -141,9 +139,9 @@ class Smith(_BaseLayoutHierarchyType):
         -------
         Smith
         """
-        super().__init__('smith')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("smith")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -153,19 +151,19 @@ class Smith(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Smith
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Smith`""")
+an instance of :class:`plotly.graph_objs.layout.Smith`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('bgcolor', arg, bgcolor)
-        self._set_property('domain', arg, domain)
-        self._set_property('imaginaryaxis', arg, imaginaryaxis)
-        self._set_property('realaxis', arg, realaxis)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("domain", arg, domain)
+        self._set_property("imaginaryaxis", arg, imaginaryaxis)
+        self._set_property("realaxis", arg, realaxis)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

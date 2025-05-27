@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,19 @@ import copy as _copy
 
 class Tickfont(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.ternary.baxis'
-    _path_str = 'layout.ternary.baxis.tickfont'
-    _valid_props = {"color", "family", "lineposition", "shadow", "size", "style", "textcase", "variant", "weight"}
+    _parent_path_str = "layout.ternary.baxis"
+    _path_str = "layout.ternary.baxis.tickfont"
+    _valid_props = {
+        "color",
+        "family",
+        "lineposition",
+        "shadow",
+        "size",
+        "style",
+        "textcase",
+        "variant",
+        "weight",
+    }
 
     @property
     def color(self):
@@ -29,11 +35,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def family(self):
@@ -51,11 +57,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     @property
     def lineposition(self):
@@ -74,11 +80,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['lineposition']
+        return self["lineposition"]
 
     @lineposition.setter
     def lineposition(self, val):
-        self['lineposition'] = val
+        self["lineposition"] = val
 
     @property
     def shadow(self):
@@ -96,11 +102,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['shadow']
+        return self["shadow"]
 
     @shadow.setter
     def shadow(self, val):
-        self['shadow'] = val
+        self["shadow"] = val
 
     @property
     def size(self):
@@ -112,11 +118,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     @property
     def style(self):
@@ -132,11 +138,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['style']
+        return self["style"]
 
     @style.setter
     def style(self, val):
-        self['style'] = val
+        self["style"] = val
 
     @property
     def textcase(self):
@@ -153,11 +159,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['textcase']
+        return self["textcase"]
 
     @textcase.setter
     def textcase(self, val):
-        self['textcase'] = val
+        self["textcase"] = val
 
     @property
     def variant(self):
@@ -173,11 +179,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['variant']
+        return self["variant"]
 
     @variant.setter
     def variant(self, val):
-        self['variant'] = val
+        self["variant"] = val
 
     @property
     def weight(self):
@@ -193,11 +199,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['weight']
+        return self["weight"]
 
     @weight.setter
     def weight(self, val):
-        self['weight'] = val
+        self["weight"] = val
 
     @property
     def _prop_descriptions(self):
@@ -234,19 +240,21 @@ class Tickfont(_BaseLayoutHierarchyType):
         weight
             Sets the weight (or boldness) of the font.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            family=None,
-            lineposition=None,
-            shadow=None,
-            size=None,
-            style=None,
-            textcase=None,
-            variant=None,
-            weight=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        family=None,
+        lineposition=None,
+        shadow=None,
+        size=None,
+        style=None,
+        textcase=None,
+        variant=None,
+        weight=None,
+        **kwargs,
+    ):
         """
         Construct a new Tickfont object
 
@@ -294,9 +302,9 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         Tickfont
         """
-        super().__init__('tickfont')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("tickfont")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -306,24 +314,24 @@ class Tickfont(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.ternary.baxis.Tickfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.ternary.baxis.Tickfont`""")
+an instance of :class:`plotly.graph_objs.layout.ternary.baxis.Tickfont`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('color', arg, color)
-        self._set_property('family', arg, family)
-        self._set_property('lineposition', arg, lineposition)
-        self._set_property('shadow', arg, shadow)
-        self._set_property('size', arg, size)
-        self._set_property('style', arg, style)
-        self._set_property('textcase', arg, textcase)
-        self._set_property('variant', arg, variant)
-        self._set_property('weight', arg, weight)
+        self._set_property("color", arg, color)
+        self._set_property("family", arg, family)
+        self._set_property("lineposition", arg, lineposition)
+        self._set_property("shadow", arg, shadow)
+        self._set_property("size", arg, size)
+        self._set_property("style", arg, style)
+        self._set_property("textcase", arg, textcase)
+        self._set_property("variant", arg, variant)
+        self._set_property("weight", arg, weight)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

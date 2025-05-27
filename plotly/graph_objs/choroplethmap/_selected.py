@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Selected(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'choroplethmap'
-    _path_str = 'choroplethmap.selected'
+    _parent_path_str = "choroplethmap"
+    _path_str = "choroplethmap.selected"
     _valid_props = {"marker"}
 
     @property
@@ -28,11 +24,11 @@ class Selected(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.choroplethmap.selected.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
     @property
     def _prop_descriptions(self):
@@ -41,11 +37,8 @@ class Selected(_BaseTraceHierarchyType):
             :class:`plotly.graph_objects.choroplethmap.selected.Mar
             ker` instance or dict with compatible properties
         """
-    def __init__(self,
-            arg=None,
-            marker=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, marker=None, **kwargs):
         """
         Construct a new Selected object
 
@@ -63,9 +56,9 @@ class Selected(_BaseTraceHierarchyType):
         -------
         Selected
         """
-        super().__init__('selected')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("selected")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -75,16 +68,16 @@ class Selected(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.choroplethmap.Selected
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.choroplethmap.Selected`""")
+an instance of :class:`plotly.graph_objs.choroplethmap.Selected`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('marker', arg, marker)
+        self._set_property("marker", arg, marker)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

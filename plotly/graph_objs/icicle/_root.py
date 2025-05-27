@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Root(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'icicle'
-    _path_str = 'icicle.root'
+    _parent_path_str = "icicle"
+    _path_str = "icicle.root"
     _valid_props = {"color"}
 
     @property
@@ -33,11 +29,11 @@ class Root(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def _prop_descriptions(self):
@@ -47,11 +43,8 @@ class Root(_BaseTraceHierarchyType):
             sunburst/treemap/icicle trace. this has no effect when
             a colorscale is used to set the markers.
         """
-    def __init__(self,
-            arg=None,
-            color=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Root object
 
@@ -69,9 +62,9 @@ class Root(_BaseTraceHierarchyType):
         -------
         Root
         """
-        super().__init__('root')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("root")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -81,16 +74,16 @@ class Root(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.icicle.Root
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.icicle.Root`""")
+an instance of :class:`plotly.graph_objs.icicle.Root`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('color', arg, color)
+        self._set_property("color", arg, color)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

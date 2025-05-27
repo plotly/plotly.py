@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Marker(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'pie'
-    _path_str = 'pie.marker'
+    _parent_path_str = "pie"
+    _path_str = "pie.marker"
     _valid_props = {"colors", "colorssrc", "line", "pattern"}
 
     @property
@@ -28,11 +24,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['colors']
+        return self["colors"]
 
     @colors.setter
     def colors(self, val):
-        self['colors'] = val
+        self["colors"] = val
 
     @property
     def colorssrc(self):
@@ -46,11 +42,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorssrc']
+        return self["colorssrc"]
 
     @colorssrc.setter
     def colorssrc(self, val):
-        self['colorssrc'] = val
+        self["colorssrc"] = val
 
     @property
     def line(self):
@@ -65,11 +61,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.pie.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     @property
     def pattern(self):
@@ -86,11 +82,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.pie.marker.Pattern
         """
-        return self['pattern']
+        return self["pattern"]
 
     @pattern.setter
     def pattern(self, val):
-        self['pattern'] = val
+        self["pattern"] = val
 
     @property
     def _prop_descriptions(self):
@@ -108,14 +104,10 @@ class Marker(_BaseTraceHierarchyType):
         pattern
             Sets the pattern within the marker.
         """
-    def __init__(self,
-            arg=None,
-            colors=None,
-            colorssrc=None,
-            line=None,
-            pattern=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self, arg=None, colors=None, colorssrc=None, line=None, pattern=None, **kwargs
+    ):
         """
         Construct a new Marker object
 
@@ -141,9 +133,9 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super().__init__('marker')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("marker")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -153,19 +145,19 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.pie.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.pie.Marker`""")
+an instance of :class:`plotly.graph_objs.pie.Marker`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('colors', arg, colors)
-        self._set_property('colorssrc', arg, colorssrc)
-        self._set_property('line', arg, line)
-        self._set_property('pattern', arg, pattern)
+        self._set_property("colors", arg, colors)
+        self._set_property("colorssrc", arg, colorssrc)
+        self._set_property("line", arg, line)
+        self._set_property("pattern", arg, pattern)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

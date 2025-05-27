@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Legendgrouptitle(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'contour'
-    _path_str = 'contour.legendgrouptitle'
+    _parent_path_str = "contour"
+    _path_str = "contour.legendgrouptitle"
     _valid_props = {"font", "text"}
 
     @property
@@ -30,11 +26,11 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.contour.legendgrouptitle.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     @property
     def text(self):
@@ -49,11 +45,11 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     @property
     def _prop_descriptions(self):
@@ -63,12 +59,8 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
         text
             Sets the title of the legend group.
         """
-    def __init__(self,
-            arg=None,
-            font=None,
-            text=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, font=None, text=None, **kwargs):
         """
         Construct a new Legendgrouptitle object
 
@@ -87,9 +79,9 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
         -------
         Legendgrouptitle
         """
-        super().__init__('legendgrouptitle')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("legendgrouptitle")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -99,17 +91,17 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.contour.Legendgrouptitle
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.contour.Legendgrouptitle`""")
+an instance of :class:`plotly.graph_objs.contour.Legendgrouptitle`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('font', arg, font)
-        self._set_property('text', arg, text)
+        self._set_property("font", arg, font)
+        self._set_property("text", arg, text)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

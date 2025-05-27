@@ -1,5 +1,6 @@
 import sys
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from ._domain import Domain
     from ._hoverlabel import Hoverlabel
@@ -18,10 +19,21 @@ if TYPE_CHECKING:
     from . import pathbar
 else:
     from _plotly_utils.importers import relative_import
+
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        ['.hoverlabel', '.legendgrouptitle', '.marker', '.pathbar'],
-        ['._domain.Domain', '._hoverlabel.Hoverlabel', '._insidetextfont.Insidetextfont', '._legendgrouptitle.Legendgrouptitle', '._marker.Marker', '._outsidetextfont.Outsidetextfont', '._pathbar.Pathbar', '._root.Root', '._stream.Stream', '._textfont.Textfont', '._tiling.Tiling']
+        [".hoverlabel", ".legendgrouptitle", ".marker", ".pathbar"],
+        [
+            "._domain.Domain",
+            "._hoverlabel.Hoverlabel",
+            "._insidetextfont.Insidetextfont",
+            "._legendgrouptitle.Legendgrouptitle",
+            "._marker.Marker",
+            "._outsidetextfont.Outsidetextfont",
+            "._pathbar.Pathbar",
+            "._root.Root",
+            "._stream.Stream",
+            "._textfont.Textfont",
+            "._tiling.Tiling",
+        ],
     )
-
-

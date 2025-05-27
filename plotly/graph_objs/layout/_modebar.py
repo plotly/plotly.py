@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,19 @@ import copy as _copy
 
 class Modebar(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.modebar'
-    _valid_props = {"activecolor", "add", "addsrc", "bgcolor", "color", "orientation", "remove", "removesrc", "uirevision"}
+    _parent_path_str = "layout"
+    _path_str = "layout.modebar"
+    _valid_props = {
+        "activecolor",
+        "add",
+        "addsrc",
+        "bgcolor",
+        "color",
+        "orientation",
+        "remove",
+        "removesrc",
+        "uirevision",
+    }
 
     @property
     def activecolor(self):
@@ -32,11 +38,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['activecolor']
+        return self["activecolor"]
 
     @activecolor.setter
     def activecolor(self, val):
-        self['activecolor'] = val
+        self["activecolor"] = val
 
     @property
     def add(self):
@@ -58,11 +64,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['add']
+        return self["add"]
 
     @add.setter
     def add(self, val):
-        self['add'] = val
+        self["add"] = val
 
     @property
     def addsrc(self):
@@ -76,11 +82,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['addsrc']
+        return self["addsrc"]
 
     @addsrc.setter
     def addsrc(self, val):
-        self['addsrc'] = val
+        self["addsrc"] = val
 
     @property
     def bgcolor(self):
@@ -98,11 +104,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     @property
     def color(self):
@@ -120,11 +126,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     @property
     def orientation(self):
@@ -139,11 +145,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['orientation']
+        return self["orientation"]
 
     @orientation.setter
     def orientation(self, val):
-        self['orientation'] = val
+        self["orientation"] = val
 
     @property
     def remove(self):
@@ -174,11 +180,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['remove']
+        return self["remove"]
 
     @remove.setter
     def remove(self, val):
-        self['remove'] = val
+        self["remove"] = val
 
     @property
     def removesrc(self):
@@ -192,11 +198,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['removesrc']
+        return self["removesrc"]
 
     @removesrc.setter
     def removesrc(self, val):
-        self['removesrc'] = val
+        self["removesrc"] = val
 
     @property
     def uirevision(self):
@@ -212,11 +218,11 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['uirevision']
+        return self["uirevision"]
 
     @uirevision.setter
     def uirevision(self, val):
-        self['uirevision'] = val
+        self["uirevision"] = val
 
     @property
     def _prop_descriptions(self):
@@ -271,19 +277,21 @@ class Modebar(_BaseLayoutHierarchyType):
             `showspikes` at both the root level and inside
             subplots. Defaults to `layout.uirevision`.
         """
-    def __init__(self,
-            arg=None,
-            activecolor=None,
-            add=None,
-            addsrc=None,
-            bgcolor=None,
-            color=None,
-            orientation=None,
-            remove=None,
-            removesrc=None,
-            uirevision=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        activecolor=None,
+        add=None,
+        addsrc=None,
+        bgcolor=None,
+        color=None,
+        orientation=None,
+        remove=None,
+        removesrc=None,
+        uirevision=None,
+        **kwargs,
+    ):
         """
         Construct a new Modebar object
 
@@ -347,9 +355,9 @@ class Modebar(_BaseLayoutHierarchyType):
         -------
         Modebar
         """
-        super().__init__('modebar')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("modebar")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -359,24 +367,24 @@ class Modebar(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Modebar
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Modebar`""")
+an instance of :class:`plotly.graph_objs.layout.Modebar`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('activecolor', arg, activecolor)
-        self._set_property('add', arg, add)
-        self._set_property('addsrc', arg, addsrc)
-        self._set_property('bgcolor', arg, bgcolor)
-        self._set_property('color', arg, color)
-        self._set_property('orientation', arg, orientation)
-        self._set_property('remove', arg, remove)
-        self._set_property('removesrc', arg, removesrc)
-        self._set_property('uirevision', arg, uirevision)
+        self._set_property("activecolor", arg, activecolor)
+        self._set_property("add", arg, add)
+        self._set_property("addsrc", arg, addsrc)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("color", arg, color)
+        self._set_property("orientation", arg, orientation)
+        self._set_property("remove", arg, remove)
+        self._set_property("removesrc", arg, removesrc)
+        self._set_property("uirevision", arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

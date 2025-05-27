@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Stream(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'scattermap'
-    _path_str = 'scattermap.stream'
+    _parent_path_str = "scattermap"
+    _path_str = "scattermap.stream"
     _valid_props = {"maxpoints", "token"}
 
     @property
@@ -29,11 +25,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['maxpoints']
+        return self["maxpoints"]
 
     @maxpoints.setter
     def maxpoints(self, val):
-        self['maxpoints'] = val
+        self["maxpoints"] = val
 
     @property
     def token(self):
@@ -49,11 +45,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['token']
+        return self["token"]
 
     @token.setter
     def token(self, val):
-        self['token'] = val
+        self["token"] = val
 
     @property
     def _prop_descriptions(self):
@@ -68,12 +64,8 @@ class Stream(_BaseTraceHierarchyType):
             a stream. See https://chart-studio.plotly.com/settings
             for more details.
         """
-    def __init__(self,
-            arg=None,
-            maxpoints=None,
-            token=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, maxpoints=None, token=None, **kwargs):
         """
         Construct a new Stream object
 
@@ -97,9 +89,9 @@ class Stream(_BaseTraceHierarchyType):
         -------
         Stream
         """
-        super().__init__('stream')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("stream")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -109,17 +101,17 @@ class Stream(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.scattermap.Stream
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattermap.Stream`""")
+an instance of :class:`plotly.graph_objs.scattermap.Stream`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('maxpoints', arg, maxpoints)
-        self._set_property('token', arg, token)
+        self._set_property("maxpoints", arg, maxpoints)
+        self._set_property("token", arg, token)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

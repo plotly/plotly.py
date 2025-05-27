@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,16 @@ import copy as _copy
 
 class Autorangeoptions(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.scene.zaxis'
-    _path_str = 'layout.scene.zaxis.autorangeoptions'
-    _valid_props = {"clipmax", "clipmin", "include", "includesrc", "maxallowed", "minallowed"}
+    _parent_path_str = "layout.scene.zaxis"
+    _path_str = "layout.scene.zaxis.autorangeoptions"
+    _valid_props = {
+        "clipmax",
+        "clipmin",
+        "include",
+        "includesrc",
+        "maxallowed",
+        "minallowed",
+    }
 
     @property
     def clipmax(self):
@@ -27,11 +30,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['clipmax']
+        return self["clipmax"]
 
     @clipmax.setter
     def clipmax(self, val):
-        self['clipmax'] = val
+        self["clipmax"] = val
 
     @property
     def clipmin(self):
@@ -45,11 +48,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['clipmin']
+        return self["clipmin"]
 
     @clipmin.setter
     def clipmin(self, val):
-        self['clipmin'] = val
+        self["clipmin"] = val
 
     @property
     def include(self):
@@ -62,11 +65,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['include']
+        return self["include"]
 
     @include.setter
     def include(self, val):
-        self['include'] = val
+        self["include"] = val
 
     @property
     def includesrc(self):
@@ -80,11 +83,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['includesrc']
+        return self["includesrc"]
 
     @includesrc.setter
     def includesrc(self, val):
-        self['includesrc'] = val
+        self["includesrc"] = val
 
     @property
     def maxallowed(self):
@@ -97,11 +100,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['maxallowed']
+        return self["maxallowed"]
 
     @maxallowed.setter
     def maxallowed(self, val):
-        self['maxallowed'] = val
+        self["maxallowed"] = val
 
     @property
     def minallowed(self):
@@ -114,11 +117,11 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['minallowed']
+        return self["minallowed"]
 
     @minallowed.setter
     def minallowed(self, val):
-        self['minallowed'] = val
+        self["minallowed"] = val
 
     @property
     def _prop_descriptions(self):
@@ -141,16 +144,18 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         minallowed
             Use this value exactly as autorange minimum.
         """
-    def __init__(self,
-            arg=None,
-            clipmax=None,
-            clipmin=None,
-            include=None,
-            includesrc=None,
-            maxallowed=None,
-            minallowed=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        clipmax=None,
+        clipmin=None,
+        include=None,
+        includesrc=None,
+        maxallowed=None,
+        minallowed=None,
+        **kwargs,
+    ):
         """
         Construct a new Autorangeoptions object
 
@@ -182,9 +187,9 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         -------
         Autorangeoptions
         """
-        super().__init__('autorangeoptions')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("autorangeoptions")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -194,21 +199,21 @@ class Autorangeoptions(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.scene.zaxis.Autorangeoptions
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.zaxis.Autorangeoptions`""")
+an instance of :class:`plotly.graph_objs.layout.scene.zaxis.Autorangeoptions`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('clipmax', arg, clipmax)
-        self._set_property('clipmin', arg, clipmin)
-        self._set_property('include', arg, include)
-        self._set_property('includesrc', arg, includesrc)
-        self._set_property('maxallowed', arg, maxallowed)
-        self._set_property('minallowed', arg, minallowed)
+        self._set_property("clipmax", arg, clipmax)
+        self._set_property("clipmin", arg, clipmin)
+        self._set_property("include", arg, include)
+        self._set_property("includesrc", arg, includesrc)
+        self._set_property("maxallowed", arg, maxallowed)
+        self._set_property("minallowed", arg, minallowed)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

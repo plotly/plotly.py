@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Pad(_BaseTraceHierarchyType):
 
-    _parent_path_str = 'treemap.marker'
-    _path_str = 'treemap.marker.pad'
+    _parent_path_str = "treemap.marker"
+    _path_str = "treemap.marker.pad"
     _valid_props = {"b", "l", "r", "t"}
 
     @property
@@ -27,11 +23,11 @@ class Pad(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['b']
+        return self["b"]
 
     @b.setter
     def b(self, val):
-        self['b'] = val
+        self["b"] = val
 
     @property
     def l(self):
@@ -45,11 +41,11 @@ class Pad(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['l']
+        return self["l"]
 
     @l.setter
     def l(self, val):
-        self['l'] = val
+        self["l"] = val
 
     @property
     def r(self):
@@ -63,11 +59,11 @@ class Pad(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['r']
+        return self["r"]
 
     @r.setter
     def r(self, val):
-        self['r'] = val
+        self["r"] = val
 
     @property
     def t(self):
@@ -81,11 +77,11 @@ class Pad(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['t']
+        return self["t"]
 
     @t.setter
     def t(self, val):
-        self['t'] = val
+        self["t"] = val
 
     @property
     def _prop_descriptions(self):
@@ -99,14 +95,8 @@ class Pad(_BaseTraceHierarchyType):
         t
             Sets the padding form the top (in px).
         """
-    def __init__(self,
-            arg=None,
-            b=None,
-            l=None,
-            r=None,
-            t=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, b=None, l=None, r=None, t=None, **kwargs):
         """
         Construct a new Pad object
 
@@ -129,9 +119,9 @@ class Pad(_BaseTraceHierarchyType):
         -------
         Pad
         """
-        super().__init__('pad')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("pad")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -141,19 +131,19 @@ class Pad(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.treemap.marker.Pad
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.marker.Pad`""")
+an instance of :class:`plotly.graph_objs.treemap.marker.Pad`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('b', arg, b)
-        self._set_property('l', arg, l)
-        self._set_property('r', arg, r)
-        self._set_property('t', arg, t)
+        self._set_property("b", arg, b)
+        self._set_property("l", arg, l)
+        self._set_property("r", arg, r)
+        self._set_property("t", arg, t)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

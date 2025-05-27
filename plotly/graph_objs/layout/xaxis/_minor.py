@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,9 +7,24 @@ import copy as _copy
 
 class Minor(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout.xaxis'
-    _path_str = 'layout.xaxis.minor'
-    _valid_props = {"dtick", "gridcolor", "griddash", "gridwidth", "nticks", "showgrid", "tick0", "tickcolor", "ticklen", "tickmode", "ticks", "tickvals", "tickvalssrc", "tickwidth"}
+    _parent_path_str = "layout.xaxis"
+    _path_str = "layout.xaxis.minor"
+    _valid_props = {
+        "dtick",
+        "gridcolor",
+        "griddash",
+        "gridwidth",
+        "nticks",
+        "showgrid",
+        "tick0",
+        "tickcolor",
+        "ticklen",
+        "tickmode",
+        "ticks",
+        "tickvals",
+        "tickvalssrc",
+        "tickwidth",
+    }
 
     @property
     def dtick(self):
@@ -45,11 +56,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
     @property
     def gridcolor(self):
@@ -67,11 +78,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
     @property
     def griddash(self):
@@ -91,11 +102,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['griddash']
+        return self["griddash"]
 
     @griddash.setter
     def griddash(self, val):
-        self['griddash'] = val
+        self["griddash"] = val
 
     @property
     def gridwidth(self):
@@ -109,11 +120,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
     @property
     def nticks(self):
@@ -131,11 +142,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
     @property
     def showgrid(self):
@@ -150,11 +161,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
     @property
     def tick0(self):
@@ -175,11 +186,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
     @property
     def tickcolor(self):
@@ -197,11 +208,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
     @property
     def ticklen(self):
@@ -215,11 +226,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
     @property
     def tickmode(self):
@@ -240,11 +251,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
     @property
     def ticks(self):
@@ -261,11 +272,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
     @property
     def tickvals(self):
@@ -280,11 +291,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
     @property
     def tickvalssrc(self):
@@ -298,11 +309,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
     @property
     def tickwidth(self):
@@ -316,11 +327,11 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
     @property
     def _prop_descriptions(self):
@@ -405,24 +416,26 @@ class Minor(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         """
-    def __init__(self,
-            arg=None,
-            dtick=None,
-            gridcolor=None,
-            griddash=None,
-            gridwidth=None,
-            nticks=None,
-            showgrid=None,
-            tick0=None,
-            tickcolor=None,
-            ticklen=None,
-            tickmode=None,
-            ticks=None,
-            tickvals=None,
-            tickvalssrc=None,
-            tickwidth=None,
-            **kwargs
-        ):
+
+    def __init__(
+        self,
+        arg=None,
+        dtick=None,
+        gridcolor=None,
+        griddash=None,
+        gridwidth=None,
+        nticks=None,
+        showgrid=None,
+        tick0=None,
+        tickcolor=None,
+        ticklen=None,
+        tickmode=None,
+        ticks=None,
+        tickvals=None,
+        tickvalssrc=None,
+        tickwidth=None,
+        **kwargs,
+    ):
         """
         Construct a new Minor object
 
@@ -516,9 +529,9 @@ class Minor(_BaseLayoutHierarchyType):
         -------
         Minor
         """
-        super().__init__('minor')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("minor")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -528,29 +541,29 @@ class Minor(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.xaxis.Minor
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.Minor`""")
+an instance of :class:`plotly.graph_objs.layout.xaxis.Minor`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('dtick', arg, dtick)
-        self._set_property('gridcolor', arg, gridcolor)
-        self._set_property('griddash', arg, griddash)
-        self._set_property('gridwidth', arg, gridwidth)
-        self._set_property('nticks', arg, nticks)
-        self._set_property('showgrid', arg, showgrid)
-        self._set_property('tick0', arg, tick0)
-        self._set_property('tickcolor', arg, tickcolor)
-        self._set_property('ticklen', arg, ticklen)
-        self._set_property('tickmode', arg, tickmode)
-        self._set_property('ticks', arg, ticks)
-        self._set_property('tickvals', arg, tickvals)
-        self._set_property('tickvalssrc', arg, tickvalssrc)
-        self._set_property('tickwidth', arg, tickwidth)
+        self._set_property("dtick", arg, dtick)
+        self._set_property("gridcolor", arg, gridcolor)
+        self._set_property("griddash", arg, griddash)
+        self._set_property("gridwidth", arg, gridwidth)
+        self._set_property("nticks", arg, nticks)
+        self._set_property("showgrid", arg, showgrid)
+        self._set_property("tick0", arg, tick0)
+        self._set_property("tickcolor", arg, tickcolor)
+        self._set_property("ticklen", arg, ticklen)
+        self._set_property("tickmode", arg, tickmode)
+        self._set_property("ticks", arg, ticks)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("tickwidth", arg, tickwidth)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

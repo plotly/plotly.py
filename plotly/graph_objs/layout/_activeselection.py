@@ -1,7 +1,3 @@
-
-
-
-
 #                   --- THIS FILE IS AUTO-GENERATED ---
 # Modifications will be overwitten the next time code generation run.
 
@@ -11,8 +7,8 @@ import copy as _copy
 
 class Activeselection(_BaseLayoutHierarchyType):
 
-    _parent_path_str = 'layout'
-    _path_str = 'layout.activeselection'
+    _parent_path_str = "layout"
+    _path_str = "layout.activeselection"
     _valid_props = {"fillcolor", "opacity"}
 
     @property
@@ -31,11 +27,11 @@ class Activeselection(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
     @property
     def opacity(self):
@@ -49,11 +45,11 @@ class Activeselection(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     @property
     def _prop_descriptions(self):
@@ -63,12 +59,8 @@ class Activeselection(_BaseLayoutHierarchyType):
         opacity
             Sets the opacity of the active selection.
         """
-    def __init__(self,
-            arg=None,
-            fillcolor=None,
-            opacity=None,
-            **kwargs
-        ):
+
+    def __init__(self, arg=None, fillcolor=None, opacity=None, **kwargs):
         """
         Construct a new Activeselection object
 
@@ -87,9 +79,9 @@ class Activeselection(_BaseLayoutHierarchyType):
         -------
         Activeselection
         """
-        super().__init__('activeselection')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("activeselection")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 
         if arg is None:
@@ -99,17 +91,17 @@ class Activeselection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Activeselection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Activeselection`""")
+an instance of :class:`plotly.graph_objs.layout.Activeselection`"""
+            )
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
-        
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
 
-
-        self._set_property('fillcolor', arg, fillcolor)
-        self._set_property('opacity', arg, opacity)
+        self._set_property("fillcolor", arg, fillcolor)
+        self._set_property("opacity", arg, opacity)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
