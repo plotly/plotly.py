@@ -62,3 +62,4 @@ doc/check-or-enforce-order.py
 
 tests/percy/*.html
 tests/percy/pandas2/*.html
+test_path.png

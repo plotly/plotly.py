@@ -1,8 +1,7 @@
 from _plotly_utils.importers import relative_import
-import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ._kaleido import (
         to_image,
         write_image,
