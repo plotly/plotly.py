@@ -13,6 +13,7 @@ class _Defaults(object):
         self.default_scale = 1
         self.mathjax = None
         self.topojson = None
+        self.plotlyjs = None
 
 
 defaults = _Defaults()
