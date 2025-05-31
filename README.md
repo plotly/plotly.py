@@ -55,7 +55,7 @@ See the [Python documentation](https://plotly.com/python/) for more examples.
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
-`plotly.py` is [MIT Licensed](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or integrated into [Dash applications](https://dash.plotly.com/).
+`plotly.py` is [MIT Licensed](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt). Plotly graphs can be viewed in Jupyter and marimo notebooks, standalone HTML files, or integrated into [Dash applications](https://dash.plotly.com/).
 
 [Contact us](https://plotly.com/consulting-and-oem/) for consulting, dashboard development, application integration, and feature additions.
 
