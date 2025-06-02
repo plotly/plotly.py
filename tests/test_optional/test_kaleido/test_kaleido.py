@@ -214,8 +214,7 @@ def test_defaults():
                     == "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
                 )
                 assert (
-                    kwargs["kopts"]["plotlyjs"]
-                    == "https://cdn.plot.ly/plotly-3.0.0.js"
+                    kwargs["kopts"]["plotlyjs"] == "https://cdn.plot.ly/plotly-3.0.0.js"
                 )
 
         else:
