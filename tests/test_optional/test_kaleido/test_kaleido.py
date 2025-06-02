@@ -154,15 +154,99 @@ def test_bytesio():
 
 def test_defaults():
     """Test that image output defaults can be set using pio.defaults.*"""
+    test_fig = go.Figure(fig)
+    test_image_bytes = b"mock image data"
+
+    # Check initial defaults
+    assert pio.defaults.default_format == "png"
+    assert pio.defaults.default_width == 700
+    assert pio.defaults.default_height == 500
+    assert pio.defaults.default_scale == 1
+    assert pio.defaults.mathjax is None
+    assert pio.defaults.topojson is None
+    assert pio.defaults.plotlyjs is None
+
     try:
-        assert pio.defaults.default_format == "png"
+        # Set new defaults
         pio.defaults.default_format = "svg"
+        pio.defaults.default_width = 701
+        pio.defaults.default_height = 501
+        pio.defaults.default_scale = 2
+        pio.defaults.mathjax = (
+            "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
+        )
+        pio.defaults.topojson = "path/to/topojson/files/"
+        pio.defaults.plotlyjs = "https://cdn.plot.ly/plotly-3.0.0.js"
+
+        # Check that new defaults are saved
         assert pio.defaults.default_format == "svg"
-        result = pio.to_image(fig, format="svg", validate=False)
-        assert result.startswith(b"<svg")
+        assert pio.defaults.default_width == 701
+        assert pio.defaults.default_height == 501
+        assert pio.defaults.default_scale == 2
+        assert (
+            pio.defaults.mathjax
+            == "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
+        )
+        assert pio.defaults.topojson == "path/to/topojson/files/"
+        assert pio.defaults.plotlyjs == "https://cdn.plot.ly/plotly-3.0.0.js"
+
+        if kaleido_major() > 0:
+            # Check that all the defaults values are passed through to the function call to calc_fig_sync
+            with patch(
+                "plotly.io._kaleido.kaleido.calc_fig_sync",
+                return_value=test_image_bytes,
+            ) as mock_calc_fig:
+                result = pio.to_image(test_fig, validate=False)
+
+                # Verify calc_fig_sync was called with correct args
+                # taken from pio.defaults
+                mock_calc_fig.assert_called_once()
+                args, kwargs = mock_calc_fig.call_args
+                assert args[0] == test_fig.to_dict()
+                assert kwargs["opts"]["format"] == "svg"
+                assert kwargs["opts"]["width"] == 701
+                assert kwargs["opts"]["height"] == 501
+                assert kwargs["opts"]["scale"] == 2
+                assert kwargs["topojson"] == "path/to/topojson/files/"
+                # mathjax and plotlyjs are passed through in kopts
+                assert (
+                    kwargs["kopts"]["mathjax"]
+                    == "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
+                )
+                assert (
+                    kwargs["kopts"]["plotlyjs"]
+                    == "https://cdn.plot.ly/plotly-3.0.0.js"
+                )
+
+        else:
+            # Check that all the default values have been set in pio._kaleido.scope
+            assert pio._kaleido.scope.default_format == "svg"
+            assert pio._kaleido.scope.default_width == 701
+            assert pio._kaleido.scope.default_height == 501
+            assert pio._kaleido.scope.default_scale == 2
+            assert (
+                pio._kaleido.scope.mathjax
+                == "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
+            )
+            assert pio._kaleido.scope.topojson == "path/to/topojson/files/"
+            assert pio._kaleido.scope.plotlyjs == "https://cdn.plot.ly/plotly-3.0.0.js"
+
     finally:
+        # Reset defaults to original values and check that they are restored
         pio.defaults.default_format = "png"
+        pio.defaults.default_width = 700
+        pio.defaults.default_height = 500
+        pio.defaults.default_scale = 1
+        pio.defaults.mathjax = None
+        pio.defaults.topojson = None
+        pio.defaults.plotlyjs = None
         assert pio.defaults.default_format == "png"
+        assert pio.defaults.default_width == 700
+        assert pio.defaults.default_height == 500
+        assert pio.defaults.default_scale == 1
+        assert pio.defaults.mathjax is None
+        assert pio.defaults.topojson is None
+        assert pio.defaults.plotlyjs is None
 
 
 def test_fig_write_image():
