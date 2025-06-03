@@ -119,7 +119,6 @@ top_labels = ['Strongly<br>agree', 'Agree', 'Neutral', 'Disagree',
               'Strongly<br>disagree']
 
 colors = ['DarkBlue', 'MediumBlue', 'cyan', 'mediumpurple', 'thistle']
-#, 'silver'
 x_data = [[21, 30, 21, 16, 12],
           [24, 31, 19, 15, 11],
           [27, 26, 23, 11, 13],
