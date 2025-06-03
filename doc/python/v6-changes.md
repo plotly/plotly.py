@@ -57,9 +57,12 @@ pip install anywidget
 
 Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](https://plotly.com/python/performance/) for more details.
 
+> If you are using Plotly.py 6 or later with Dash Design Kit, you may need to upgrade your Dash Design Kit version. See the [Dash Design Kit Compatibility section on the performance page](/python/performance/#dash-design-kit-compatibility) for more details.
+
+
 ## Dataframe Support
 
-Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support pandas, Polars, and PyArrow. With this change, the [performance](https://plotly.com/python/performance/) of using Polars or PyArrow with Plotly Express is significantly improved. 
+Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support pandas, Polars, and PyArrow. With this change, the [performance](https://plotly.com/python/performance/) of using Polars or PyArrow with Plotly Express is significantly improved.
 
 ## Mapbox Deprecation
 

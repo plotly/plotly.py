@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.3'
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.11.10
   plotly:
     description: How to make horizontal bar charts in Python with Plotly.
     display_as: basic
@@ -260,6 +260,77 @@ fig.update_layout(annotations=annotations)
 fig.show()
 ```
 
+### Diverging Bar (or Butterfly) Chart
+
+Diverging bar charts show counts of positive outcomes or sentiments to the right of zero and counts of negative outcomes to the left of zero, allowing the reader to easily spot areas of excellence and concern.  This example allows the reader of the graph to infer the number of people offering a neutral response because the neutral category, which is left implicit, would make the responses add to 100%.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/refs/heads/master/gss_2002_5_pt_likert.csv')
+
+df.rename(columns={'Unnamed: 0':"Category"}, inplace=True)
+
+#achieve the diverging effect by putting a negative sign on the "disagree" answers 
+for v in ["Disagree","Strongly Disagree"]:
+    df[v]=df[v]*-1
+
+fig = go.Figure()
+# this color palette conveys meaning:  blues for positive, red and orange for negative
+color_by_category={
+    "Strongly Agree":'darkblue',
+    "Agree":'lightblue',
+    "Disagree":'orange',
+    "Strongly Disagree":'red',
+}
+
+
+# We want the legend to be ordered in the same order that the categories appear, left to right --
+# which is different from the order in which we have to add the traces to the figure.
+# since we need to create the "somewhat" traces before the "strongly" traces to display
+# the segments in the desired order
+legend_rank_by_category={
+    "Strongly Disagree":1,
+    "Disagree":2,
+    "Agree":3,
+    "Strongly Agree":4,
+}
+# Add bars for each category
+for col in ["Disagree","Strongly Disagree","Agree","Strongly Agree"]:
+    fig.add_trace(go.Bar(
+        y=df["Category"], 
+        x=df[col], 
+        name=col, 
+        orientation='h',
+        marker=dict(color=color_by_category[col]),
+        legendrank=legend_rank_by_category[col]
+    ))
+
+fig.update_layout(
+   title="Reactions to statements from the 2002 General Social Survey:",
+    yaxis_title = "",
+    barmode='relative',  # Allows bars to diverge from the center
+    plot_bgcolor="white",
+)
+
+fig.update_xaxes(
+        title="Percent of Responses",
+        zeroline=True,  # Ensure there's a zero line for divergence
+        zerolinecolor="black",
+        # use array tick mode to show that the counts to the left of zero are still positive.
+        # this is hard coded; generalize this if you plan to create a function that takes unknown or widely varying data
+        tickmode = 'array',     
+        tickvals = [-50, 0, 50, 100],
+        ticktext = [50, 0, 50, 100]
+)
+
+fig.show()
+
+```
+
+
 ### Bar Chart with Line Plot
 
 ```python
@@ -282,7 +353,7 @@ x = ['Japan', 'United Kingdom', 'Canada', 'Netherlands',
 fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
                     shared_yaxes=False, vertical_spacing=0.001)
 
-fig.append_trace(go.Bar(
+fig.add_trace(go.Bar(
     x=y_saving,
     y=x,
     marker=dict(
@@ -295,7 +366,7 @@ fig.append_trace(go.Bar(
     orientation='h',
 ), 1, 1)
 
-fig.append_trace(go.Scatter(
+fig.add_trace(go.Scatter(
     x=y_net_worth, y=x,
     mode='lines+markers',
     line_color='rgb(128, 0, 128)',
