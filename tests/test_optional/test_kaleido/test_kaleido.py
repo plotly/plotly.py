@@ -230,6 +230,13 @@ def test_defaults():
             assert pio._kaleido.scope.topojson == "path/to/topojson/files/"
             assert pio._kaleido.scope.plotlyjs == "https://cdn.plot.ly/plotly-3.0.0.js"
 
+        # Set topojson default back to None
+        # (otherwise image generation will fail)
+        pio.defaults.topojson = None
+        # Generate image for real and make sure it's an SVG
+        result = test_fig.to_image(format="svg", validate=False)
+        assert result.startswith(b"<svg")
+
     finally:
         # Reset defaults to original values and check that they are restored
         pio.defaults.default_format = "png"
