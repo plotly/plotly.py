@@ -1,4 +1,4 @@
-plotly==6.0.0
+plotly==6.0.1
 jupytext==1.16.4
 jupyter-client<7
 jupyter
