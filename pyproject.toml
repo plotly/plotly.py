@@ -63,6 +63,7 @@ plotly = [
     "package_data/*",
     "package_data/templates/*",
     "package_data/datasets/*",
+    "plotly/validators/_validators.json"
 ]
 
 [tool.black]
@@ -70,8 +71,7 @@ line-length = 88
 target_version = ['py38', 'py39', 'py310', 'py311', 'py312']
 include = '\.pyi?$'
 exclude = '''
-
-(
+/(
       \.eggs         # exclude a few common directories in the
     | \.git          # root of the project
     | \.hg
@@ -85,7 +85,7 @@ exclude = '''
     | js
     | submodules
     | plotly/matplotlylib/mplexporter
-)
+)/
 '''
 
 [tool.jupyter-packaging.builder]
