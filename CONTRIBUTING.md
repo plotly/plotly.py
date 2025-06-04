@@ -1,10 +1,10 @@
 # Contributing
 
-Thank you for your interest in contributing to plotly.py! We are actively looking for
+Thank you for your interest in contributing to Plotly.py! We are actively looking for
 diverse contributors, with diverse background and skills.
 
 This guide starts with a general description of the different ways to contribute
-to plotly.py, then we explain some technical aspects of preparing your
+to Plotly.py, then we explain some technical aspects of preparing your
 contribution.
 
 ## Code of Conduct
@@ -14,7 +14,7 @@ but the general idea is to be nice.
 
 ## What are the different ways to contribute?
 
-There are many ways to contribute to plotly.py. To contribute effectively, it is important to first gain an understanding of the structure of the code and of the repository.
+There are many ways to contribute to Plotly.py. To contribute effectively, it is important to first gain an understanding of the structure of the code and of the repository.
 
 - [the `plotly.graph_objects` module](https://plotly.com/python/graph-objects/) (usually imported as `go`)
   is [generated from the Plotly.js schema](https://plotly.com/python/figure-structure/),
@@ -79,7 +79,7 @@ also contribute to the project by
 
 - helping other users on the [community forum](https://community.plot.ly/).
   Join the list of [nice people](https://community.plot.ly/u) helping other
-  plotly users :-).
+  Plotly users :-).
 
 We also recommend reading the great
 [how to contribute to open source](https://opensource.guide/how-to-contribute/)
@@ -93,7 +93,7 @@ Open an issue! Go to https://github.com/plotly/plotly.py/issues. It's possible t
 
 Check out our Community Forum: https://community.plot.ly/.
 
-## Want to improve the plotly documentation?
+## Want to improve the Plotly documentation?
 
 Thank you! Instructions on how to contribute to the documentation are given [here](doc/README.md). Please also read the next section if you need to setup a development environment.
 
@@ -121,16 +121,16 @@ cd plotly.py
 Note: if you're just getting started with git, there exist great resources to
 learn and become confident about git, like http://try.github.io/.
 
-### Create a virtual environment for plotly development
+### Create a virtual environment for Plotly development
 
-You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.:
+You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for Plotly development, e.g.:
 
 ```bash
 conda create -n plotly-dev python=3.11
 conda activate plotly-dev
 ```
 
-As of May 2024 our dependencies have been tested against Python versions 3.8 to 3.11.
+As of June 2025, Plotly is tested against Python versions 3.8 to 3.13.
 We will support Python 3.12 and higher versions soon.
 
 [conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
@@ -149,7 +149,7 @@ complete installation and avoid gdal-config errors.
 (plotly_dev) $ pip install -r requires-optional.txt
 ```
 
-### Editable install of plotly packages
+### Editable install of Plotly packages
 ```bash
 (plotly_dev) $ pip install -e .
 ```
