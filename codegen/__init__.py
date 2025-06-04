@@ -29,7 +29,7 @@ from codegen.validators import (
 
 # Target Python version for code formatting with Black.
 # Must be one of the values listed in pyproject.toml.
-BLACK_TARGET_VERSIONS = "py38 py39 py310 py311 py312"
+BLACK_TARGET_VERSIONS = "py39 py310 py311 py312"
 
 
 # Import notes
