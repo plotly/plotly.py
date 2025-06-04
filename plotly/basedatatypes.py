@@ -470,10 +470,9 @@ class BaseFigure(object):
         """
         from .validator_cache import ValidatorCache
 
-        DataValidator = ValidatorCache.get_validator("", "data")
-        FramesValidator = ValidatorCache.get_validator("", "frames")
-        LayoutValidator = ValidatorCache.get_validator("", "layout")
-        # from .validators import DataValidator, LayoutValidator, FramesValidator
+        data_validator = ValidatorCache.get_validator("", "data")
+        frames_validator = ValidatorCache.get_validator("", "frames")
+        layout_validator = ValidatorCache.get_validator("", "layout")
 
         super(BaseFigure, self).__init__()
 
@@ -526,8 +525,8 @@ class BaseFigure(object):
         # This is the validator that handles importing sequences of trace
         # objects
         # We make a copy because we are overriding the set_uid attribute
-        # and do not want to alter all other uses of the cached DataValidator
-        self._data_validator = copy(DataValidator)
+        # and do not want to alter all other uses of the cached data_validator
+        self._data_validator = copy(data_validator)
         self._data_validator.set_uid = self._set_trace_uid
 
         # ### Import traces ###
@@ -571,7 +570,7 @@ class BaseFigure(object):
         # ------
         # ### Construct layout validator ###
         # This is the validator that handles importing Layout objects
-        self._layout_validator = LayoutValidator
+        self._layout_validator = layout_validator
 
         # ### Import Layout ###
         self._layout_obj = self._layout_validator.validate_coerce(
@@ -606,7 +605,7 @@ class BaseFigure(object):
         # ### Construct frames validator ###
         # This is the validator that handles importing sequences of frame
         # objects
-        self._frames_validator = FramesValidator
+        self._frames_validator = frames_validator
 
         # ### Import frames ###
         self._frame_objs = self._frames_validator.validate_coerce(

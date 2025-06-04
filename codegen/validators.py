@@ -85,7 +85,6 @@ def write_validator_json(outdir, params: dict):
     filepath = opath.join(outdir, "validators", "_validators.json")
     with open(filepath, "w") as f:
         f.write(json.dumps(params, indent=4))
-        # f.write(str(params))
 
 
 def build_data_validator_params(base_trace_node: TraceNode):
