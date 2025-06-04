@@ -286,7 +286,7 @@ fig.show()
 
 ### Swarm (or Beeswarm) Plots 
 
-Swarm plots show the distribution of values in a column by giving each entry one dot and adjusting the y-value so that dots do not overlap and appear symmetrically around the y=0 line.  They complement histograms, box plots, and violin plots.  This example could be generalized to implement a swarm plot for multiple categories by adjusting the y-coordinate for each category.
+Swarm plots show the distribution of values in a column by giving each entry one dot and adjusting the y-value so that dots do not overlap and appear symmetrically around the y=0 line. They complement histograms, box plots, and violin plots. This example could be generalized to implement a swarm plot for multiple categories by adjusting the y-coordinate for each category.
 
 ```python
 import pandas as pd
