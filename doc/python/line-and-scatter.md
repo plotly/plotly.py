@@ -306,6 +306,7 @@ def negative_1_if_count_is_odd(count):
 
 def swarm(
     X_series,
+    fig_title,
     point_size=16,
     fig_width=800,
     gap_multiplier=1.2,
@@ -372,7 +373,6 @@ def swarm(
         # in px.
         row["y"] = (row["y_slot"]//2) * \
             negative_1_if_count_is_odd(row["y_slot"])*point_size*gap_multiplier
-        print(row["y"])
 
     # if the number of points is even, move y-coordinates down to put an equal 
     # number of entries above and below the axis
@@ -392,6 +392,7 @@ def swarm(
         df,
         x="x",
         y="y",
+        title=fig_title,
     )
     # we want to suppress the y coordinate in the hover value because the 
     # y-coordinate is irrelevant/misleading
@@ -413,9 +414,10 @@ def swarm(
 
 
 df = px.data.iris()  # iris is a pandas DataFrame
-fig = swarm(df["sepal_length"])
-# here's a more interesting test case for collision avoidance:
-#fig = swarm(pd.Series([1, 1.5, 1.78, 1.79, 1.85, 2,
+fig = swarm(df["sepal_length"], "Sepal length distribution from 150 iris samples")
+# The iris data set entries are rounded so there are no collisions.
+# a more interesting test case for collision avoidance is:
+# fig = swarm(pd.Series([1, 1.5, 1.78, 1.79, 1.85, 2,
 #            2, 2, 2, 3, 3, 2.05, 2.1, 2.2, 2.5, 12]))
 fig.show()
 ```
