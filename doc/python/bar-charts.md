@@ -667,7 +667,7 @@ def pictogram_bar(data, title, icon_size, max_icons_per_column=10, units_per_ico
         # we've got all the labeling we need without a legend
         showlegend=False,  
         height=700,
-        # the x-coordinates get scales to fill available space, so adjusting the width is a good way to adjust spacing between columns
+        # the x-coordinates scale to fill available space, so adjusting the width of the image is a good way to adjust spacing between columns
         width=(len(data) * 150 + 50)  
     )
     fig.show()
