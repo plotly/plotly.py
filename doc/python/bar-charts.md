@@ -593,27 +593,37 @@ fig.update_layout(
 
 This bar-style pictogram allows readers to focus on the relative sizes of smaller entities by wrapping the bar for largest entries into multiple columns.  You could make it even more of a pictogram by using fontawesome to replace the square markers we use below with icons like mortar boards for students.
 
-```
+```python
 import plotly.graph_objects as go
 import pandas as pd
-
-def pictogram_bar(data, title, icon_size, max_height=10, units_per_icon=1, column_spacing=.75,icon_spacing=0.005):
+def pictogram_bar(data, title, icon_size, max_icons_per_column=10, units_per_icon=1, unit_description="", inter_group_spacing=.8,icon_vertical_spacing=0.005):
    
     fig = go.Figure()
     x_start = 1
     tick_locations = []
-
+    #loop through each group and create a trace with its icons 
     for i, (category, value) in enumerate(data.items()):
+        # compute the number of icons represent this category
         icon_count = round(value / units_per_icon)
-        num_columns = -(-icon_count // max_height)  # Ceiling division
-
+        # compute the number of columns in which to arrange this category
+        # every category gets at least one column; we use integer division
+        # to compute the number of additional columns
+        num_columns = (icon_count // max_icons_per_column)+1
+        
+        #create lists of coordinates and populate them
         x_coordinates, y_coordinates = [], []
         for col in range(num_columns):
-            column_icons = min(max_height, icon_count - col * max_height)
+            # the number of icons in this column is the lesser of the column height or
+            # the number of icons remaining to place
+            column_icons = min(max_icons_per_column, icon_count - col * max_icons_per_column)
+            
+            # create a list element containing the x-coordinate of this column; 
+            # add column_icons copies of that coordinate to the list of icon x coordinates
+            # normalizing the width of each within group column to 1 simplifies the code
+            # we can adjust the visible space between columns by adjusting the total width below
             x_coordinates.extend([x_start + col] * column_icons)
-            y_coordinates.extend([y + icon_spacing * y for y in range(1, column_icons + 1)])
-
-
+            # create a list of sequentially increasing y-coordinates for icons 
+            y_coordinates.extend([y + icon_vertical_spacing * y for y in range(1, column_icons + 1)])
         # Add scatter plot for the category
         fig.add_trace(go.Scatter(
             x=x_coordinates,
@@ -621,25 +631,24 @@ def pictogram_bar(data, title, icon_size, max_height=10, units_per_icon=1, colum
             mode='markers',
             marker=dict(size=icon_size, symbol="square", color= i),
             name=category,
+            #suppress the x and y coordinates in the hover text, since they are meaningless to readers
             hoverinfo="text",
             text=[f"{category}: {value}" for _ in range(len(x_coordinates))]
         ))
         
-
-        # Add value annotations above the section 
+        # add an annotation above the center of each section showing its value
         fig.add_trace(go.Scatter(
-            x=[x_start + (num_columns - 1) / 2],
-            y=[max_height + 1.2],
+            x=[x_start + (num_columns - 1) / 2],  #center
+            y=[max_icons_per_column + 1.2],
             mode="text",
             text=[f"{value}"],
             textfont=dict(size=14, color="black"),
             showlegend=False
         ))
-
-        # Track tick locations
+        # Track locations where we will put the text for each category
         tick_locations.append(x_start + (num_columns - 1) / 2)
-        x_start += num_columns + column_spacing
-
+        #compute the left edge of the next category
+        x_start += num_columns + inter_group_spacing
     # Update layout
     fig.update_layout(
         title=title,
@@ -651,17 +660,17 @@ def pictogram_bar(data, title, icon_size, max_height=10, units_per_icon=1, colum
             title="Categories"
         ),
         yaxis=dict(
-            title=f"Units (1 icon = {units_per_icon})",
+            title=f"Units (1 icon = {units_per_icon:,g} {unit_description})",
             showgrid=False,
             zeroline=False,
         ),
-        showlegend=False,
-        height=600,
-        width=(len(data) * 200 + 200)  
+        # we've got all the labeling we need without a legend
+        showlegend=False,  
+        height=700,
+        # the x-coordinates get scales to fill available space, so adjusting the width is a good way to adjust spacing between columns
+        width=(len(data) * 150 + 50)  
     )
-
     fig.show()
-
 
 df = pd.DataFrame({
     'School': ["Haverford College", "University of Mary Washington", "Brown University", "Arizona State University"],
@@ -672,8 +681,9 @@ pictogram_bar(
     data={row['School']: row['Enrollment'] for _, row in df.iterrows()},
     title="Undergraduate Enrollment at Participating Schools",
     units_per_icon=1000,
+    unit_description = "students",
     icon_size=27,
-   icon_spacing=0.05
+    icon_vertical_spacing=0.05
 )
 ```
 
