@@ -112,7 +112,7 @@ def build_datatype_py(node):
 class {datatype_class}(_{node.name_base_datatype}):\n"""
     )
 
-    ### Layout subplot properties
+    # Layout subplot properties
     if datatype_class == "Layout":
         subplot_nodes = [
             node
@@ -136,7 +136,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         subplot_dict_str = (
             "{"
             + ", ".join(
-                f"'{subname}': {valname}"
+                f'"{subname}": {valname}'
                 for subname, valname in zip(subplot_names, subplot_validator_names)
             )
             + "}"
@@ -169,14 +169,14 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     )
     # class properties
     buffer.write(
-        f"""
-    _parent_path_str = '{node.parent_path_str}'
-    _path_str = '{node.path_str}'
+        f'''
+    _parent_path_str = "{node.parent_path_str}"
+    _path_str = "{node.path_str}"
     _valid_props = {{"{'", "'.join(valid_props_list)}"}}
-"""
+'''
     )
 
-    ### Property definitions
+    # Property definitions
     for subtype_node in subtype_nodes:
         if subtype_node.is_array_element:
             prop_type = (
@@ -197,7 +197,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         else:
             prop_type = get_typing_type(subtype_node.datatype, subtype_node.is_array_ok)
 
-        #### Get property description ####
+        # Get property description
         raw_description = subtype_node.description
         property_description = "\n".join(
             textwrap.wrap(
@@ -208,12 +208,12 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
             )
         )
 
-        # #### Get validator description ####
+        # Get validator description
         validator = subtype_node.get_validator_instance()
         if validator:
             validator_description = reindent_validator_description(validator, 4)
 
-            #### Combine to form property docstring ####
+            # Combine to form property docstring
             if property_description.strip():
                 property_docstring = f"""{property_description}
 
@@ -223,55 +223,55 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         else:
             property_docstring = property_description
 
-        #### Write get property ####
+        # Write get property
         buffer.write(
-            f"""\
+            f'''\
 
     @property
     def {subtype_node.name_property}(self):
-        \"\"\"
+        """
 {property_docstring}
 
         Returns
         -------
         {prop_type}
-        \"\"\"
-        return self['{subtype_node.name_property}']"""
+        """
+        return self["{subtype_node.name_property}"]'''
         )
 
-        #### Write set property ####
+        # Write set property
         buffer.write(
-            f"""
+            f'''
 
     @{subtype_node.name_property}.setter
     def {subtype_node.name_property}(self, val):
-        self['{subtype_node.name_property}'] = val\n"""
+        self["{subtype_node.name_property}"] = val\n'''
         )
 
-        ### Literals
+        # Literals
     for literal_node in literal_nodes:
         buffer.write(
-            f"""\
+            f'''\
 
     @property
     def {literal_node.name_property}(self):
-        return self._props['{literal_node.name_property}']\n"""
+        return self._props["{literal_node.name_property}"]\n'''
         )
 
-    ### Private properties descriptions
+    # Private properties descriptions
     valid_props = {node.name_property for node in subtype_nodes}
     buffer.write(
-        f"""
+        f'''
     @property
     def _prop_descriptions(self):
-        return \"\"\"\\"""
+        return """\\'''
     )
 
     buffer.write(node.get_constructor_params_docstring(indent=8))
 
     buffer.write(
-        f"""
-        \"\"\""""
+        f'''
+        """'''
     )
 
     mapped_nodes = [n for n in subtype_nodes if n.is_mapped]
@@ -283,7 +283,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     _mapped_properties = {repr(mapped_properties)}"""
         )
 
-    ### Constructor
+    # Constructor
     buffer.write(
         f"""
     def __init__(self"""
@@ -291,7 +291,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
 
     add_constructor_params(buffer, subtype_nodes, prepend_extras=["arg"])
 
-    ### Constructor Docstring
+    # Constructor Docstring
     header = f"Construct a new {datatype_class} object"
     class_name = (
         f"plotly.graph_objs" f"{node.parent_dotpath_str}." f"{node.name_datatype_class}"
@@ -315,9 +315,9 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
 
     buffer.write(
         f"""
-        super().__init__('{node.name_property}')
-        if '_parent' in kwargs:
-            self._parent = kwargs['_parent']
+        super().__init__("{node.name_property}")
+        if "_parent" in kwargs:
+            self._parent = kwargs["_parent"]
             return
 """
     )
@@ -346,8 +346,8 @@ The first argument to the {class_name}
 constructor must be a dict or
 an instance of :class:`{class_name}`\"\"\")
 
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
-        self._validate = kwargs.pop('_validate', True)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+        self._validate = kwargs.pop("_validate", True)
         """
     )
 
@@ -363,15 +363,15 @@ an instance of :class:`{class_name}`\"\"\")
         # we suppress deprecation warnings for this line only.
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=DeprecationWarning)
-            self._set_property('{name_prop}', arg, {name_prop})"""
+            self._set_property("{name_prop}", arg, {name_prop})"""
             )
         else:
             buffer.write(
                 f"""
-        self._set_property('{name_prop}', arg, {name_prop})"""
+        self._set_property("{name_prop}", arg, {name_prop})"""
             )
 
-    ### Literals
+    # Literals
     if literal_nodes:
         buffer.write("\n\n")
         for literal_node in literal_nodes:
@@ -379,8 +379,8 @@ an instance of :class:`{class_name}`\"\"\")
             lit_val = repr(literal_node.node_data)
             buffer.write(
                 f"""
-        self._props['{lit_name}'] = {lit_val}
-        arg.pop('{lit_name}', None)"""
+        self._props["{lit_name}"] = {lit_val}
+        arg.pop("{lit_name}", None)"""
             )
 
     buffer.write(
@@ -478,7 +478,7 @@ def add_constructor_params(
         )"""
     )
     if output_type:
-        buffer.write(f"-> '{output_type}'")
+        buffer.write(f'-> "{output_type}"')
     buffer.write(":")
 
 
