@@ -1,5 +1,6 @@
 requests
-pandas
+pandas<2.3.0;python_version<="3.9"  # pandas 2.3.0 dropped support for 3.9 but did not update 'requires-python', so we pin manually here
+pandas;python_version>"3.9"
 numpy
 xarray
 statsmodels
