@@ -2890,6 +2890,7 @@ Use the {facet_arg} argument to adjust this spacing.""".format(
     except ValueError as e:
         _spacing_error_translator(e, "Horizontal", "facet_col_spacing")
         _spacing_error_translator(e, "Vertical", "facet_row_spacing")
+        raise
 
     # Remove explicit font size of row/col titles so template can take over
     for annot in fig.layout.annotations:

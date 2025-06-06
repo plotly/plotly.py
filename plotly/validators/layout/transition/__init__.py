@@ -1,12 +1,19 @@
 import sys
-from _plotly_utils.importers import relative_import
+from typing import TYPE_CHECKING
 
-__all__, __getattr__, __dir__ = relative_import(
-    __name__,
-    [],
-    [
-        "._ordering.OrderingValidator",
-        "._easing.EasingValidator",
-        "._duration.DurationValidator",
-    ],
-)
+if TYPE_CHECKING:
+    from ._ordering import OrderingValidator
+    from ._easing import EasingValidator
+    from ._duration import DurationValidator
+else:
+    from _plotly_utils.importers import relative_import
+
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._ordering.OrderingValidator",
+            "._easing.EasingValidator",
+            "._duration.DurationValidator",
+        ],
+    )

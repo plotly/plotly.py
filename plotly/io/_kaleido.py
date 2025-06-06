@@ -11,10 +11,11 @@ from plotly.io._utils import validate_coerce_fig_to_dict, broadcast_args_to_dict
 from plotly.io._defaults import defaults
 
 ENGINE_SUPPORT_TIMELINE = "September 2025"
+ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS = False
 
 PLOTLY_GET_CHROME_ERROR_MSG = """
 
-Kaleido requires Google Chrome to be installed. 
+Kaleido requires Google Chrome to be installed.
 
 Either download and install Chrome yourself following Google's instructions for your operating system,
 or install it from your terminal by running:
@@ -23,8 +24,6 @@ or install it from your terminal by running:
 
 """
 
-
-# TODO: Remove --pre flag once Kaleido v1 full release is available
 KALEIDO_DEPRECATION_MSG = f"""
 Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}.
 Please upgrade Kaleido to version 1.0.0 or greater (`pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]'`).
@@ -95,23 +94,25 @@ try:
         from kaleido.scopes.plotly import PlotlyScope
 
         # Show a deprecation warning if the old method of setting defaults is used
-        class PlotlyScopeWithDeprecationWarnings(PlotlyScope):
+        class PlotlyScopeWrapper(PlotlyScope):
             def __setattr__(self, name, value):
                 if name in defaults.__dict__:
-                    warnings.warn(
-                        kaleido_scope_default_warning_func(name),
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
+                    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+                        warnings.warn(
+                            kaleido_scope_default_warning_func(name),
+                            DeprecationWarning,
+                            stacklevel=2,
+                        )
                 super().__setattr__(name, value)
 
             def __getattr__(self, name):
                 if hasattr(defaults, name):
-                    warnings.warn(
-                        kaleido_scope_default_warning_func(name),
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
+                    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+                        warnings.warn(
+                            kaleido_scope_default_warning_func(name),
+                            DeprecationWarning,
+                            stacklevel=2,
+                        )
                 return super().__getattr__(name)
 
         # Ensure the new method of setting defaults is backwards compatible with Kaleido v0
@@ -131,7 +132,7 @@ try:
                         setattr(self._scope, name, value)
                 super().__setattr__(name, value)
 
-        scope = PlotlyScopeWithDeprecationWarnings()
+        scope = PlotlyScopeWrapper()
         defaults = DefaultsBackwardsCompatible(scope)
         # Compute absolute path to the 'plotly/package_data/' directory
         root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
@@ -150,30 +151,32 @@ try:
         import kaleido
 
         # Show a deprecation warning if the old method of setting defaults is used
-        class DefaultsDeprecationWarning:
+        class DefaultsWrapper:
             def __getattr__(self, name):
                 if hasattr(defaults, name):
-                    warnings.warn(
-                        kaleido_scope_default_warning_func(name),
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
+                    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+                        warnings.warn(
+                            kaleido_scope_default_warning_func(name),
+                            DeprecationWarning,
+                            stacklevel=2,
+                        )
                     return getattr(defaults, name)
                 else:
                     raise AttributeError(bad_attribute_error_msg_func(name))
 
             def __setattr__(self, name, value):
                 if hasattr(defaults, name):
-                    warnings.warn(
-                        kaleido_scope_default_warning_func(name),
-                        DeprecationWarning,
-                        stacklevel=2,
-                    )
+                    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+                        warnings.warn(
+                            kaleido_scope_default_warning_func(name),
+                            DeprecationWarning,
+                            stacklevel=2,
+                        )
                     setattr(defaults, name, value)
                 else:
                     raise AttributeError(bad_attribute_error_msg_func(name))
 
-        scope = DefaultsDeprecationWarning()
+        scope = DefaultsWrapper()
 
 except ImportError as e:
     PlotlyScope = None
@@ -243,11 +246,11 @@ def to_image(
             - 'webp'
             - 'svg'
             - 'pdf'
-            - 'eps' (deprecated) (Requires the poppler library to be installed and on the PATH)
+            - 'eps' (Kaleido v0.* only) (Requires the poppler library to be installed and on the PATH)
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_format` if engine is "kaleido"
-            - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_format` or `plotly.io.kaleido.scope.default_format` if engine is "kaleido"
+            - `plotly.io.orca.config.default_format` if engine is "orca"
 
     width: int or None
         The width of the exported image in layout pixels. If the `scale`
@@ -255,8 +258,8 @@ def to_image(
         in physical pixels.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_width` if engine is "kaleido"
-            - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_width` or `plotly.io.kaleido.scope.default_width` if engine is "kaleido"
+            - `plotly.io.orca.config.default_width` if engine is "orca"
 
     height: int or None
         The height of the exported image in layout pixels. If the `scale`
@@ -264,8 +267,8 @@ def to_image(
         in physical pixels.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_height` if engine is "kaleido"
-            - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_height` or `plotly.io.kaleido.scope.default_height` if engine is "kaleido"
+            - `plotly.io.orca.config.default_height` if engine is "orca"
 
     scale: int or float or None
         The scale factor to use when exporting the figure. A scale factor
@@ -274,14 +277,14 @@ def to_image(
         less than 1.0 will decrease the image resolution.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_scale` if engine is "kaleido"
-            - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_scale` or `plotly.io.kaleido.scope.default_scale` if engine is "kaleido"
+            - `plotly.io.orca.config.default_scale` if engine is "orca"
 
     validate: bool
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine (deprecated): str
+    engine: str
         Image export engine to use. This parameter is deprecated and Orca engine support will be
         dropped in the next major Plotly version. Until then, the following values are supported:
           - "kaleido": Use Kaleido for image export
@@ -296,7 +299,10 @@ def to_image(
 
     # Handle engine
     if engine is not None:
-        warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            warnings.warn(
+                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+            )
     else:
         engine = "auto"
 
@@ -317,7 +323,8 @@ def to_image(
                 engine = "kaleido"
 
     if engine == "orca":
-        warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
         # Fall back to legacy orca image export path
         from ._orca import to_image as to_image_orca
 
@@ -362,6 +369,12 @@ To downgrade to Kaleido v0, run:
         from kaleido.errors import ChromeNotFoundError
 
         try:
+            kopts = {}
+            if defaults.plotlyjs:
+                kopts["plotlyjs"] = defaults.plotlyjs
+            if defaults.mathjax:
+                kopts["mathjax"] = defaults.mathjax
+
             # TODO: Refactor to make it possible to use a shared Kaleido instance here
             img_bytes = kaleido.calc_fig_sync(
                 fig_dict,
@@ -372,20 +385,15 @@ To downgrade to Kaleido v0, run:
                     scale=scale or defaults.default_scale,
                 ),
                 topojson=defaults.topojson,
-                kopts=(
-                    dict(
-                        mathjax=defaults.mathjax,
-                    )
-                    if defaults.mathjax
-                    else None
-                ),
+                kopts=kopts,
             )
         except ChromeNotFoundError:
             raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
 
     else:
         # Kaleido v0
-        warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
         img_bytes = scope.transform(
             fig_dict, format=format, width=width, height=height, scale=scale
         )
@@ -424,13 +432,13 @@ def write_image(
           - 'webp'
           - 'svg'
           - 'pdf'
-          - 'eps' (deprecated) (Requires the poppler library to be installed and on the PATH)
+          - 'eps'  (Kaleido v0.* only) (Requires the poppler library to be installed and on the PATH)
 
         If not specified and `file` is a string then this will default to the
         file extension. If not specified and `file` is not a string then this
         will default to:
-            - `plotly.io.defaults.default_format` if engine is "kaleido"
-            - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_format` or `plotly.io.kaleido.scope.default_format` if engine is "kaleido"
+            - `plotly.io.orca.config.default_format` if engine is "orca"
 
     width: int or None
         The width of the exported image in layout pixels. If the `scale`
@@ -438,8 +446,8 @@ def write_image(
         in physical pixels.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_width` if engine is "kaleido"
-            - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_width` or `plotly.io.kaleido.scope.default_width` if engine is "kaleido"
+            - `plotly.io.orca.config.default_width` if engine is "orca"
 
     height: int or None
         The height of the exported image in layout pixels. If the `scale`
@@ -447,8 +455,8 @@ def write_image(
         in physical pixels.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_height` if engine is "kaleido"
-            - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_height` or `plotly.io.kaleido.scope.default_height` if engine is "kaleido"
+            - `plotly.io.orca.config.default_height` if engine is "orca"
 
     scale: int or float or None
         The scale factor to use when exporting the figure. A scale factor
@@ -457,14 +465,14 @@ def write_image(
         less than 1.0 will decrease the image resolution.
 
         If not specified, will default to:
-            - `plotly.io.defaults.default_scale` if engine is "kaleido"
-            - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+            - `plotly.io.defaults.default_scale` or `plotly.io.kaleido.scope.default_scale` if engine is "kaleido"
+            - `plotly.io.orca.config.default_scale` if engine is "orca"
 
     validate: bool
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine (deprecated): str
+    engine: str
         Image export engine to use. This parameter is deprecated and Orca engine support will be
         dropped in the next major Plotly version. Until then, the following values are supported:
           - "kaleido": Use Kaleido for image export
@@ -476,16 +484,19 @@ def write_image(
     None
     """
     # Show Kaleido deprecation warning if needed
-    if (
-        engine in {None, "auto", "kaleido"}
-        and kaleido_available()
-        and kaleido_major() < 1
-    ):
-        warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-    if engine == "orca":
-        warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
-    if engine not in {None, "auto"}:
-        warnings.warn(ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+    if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+        if (
+            engine in {None, "auto", "kaleido"}
+            and kaleido_available()
+            and kaleido_major() < 1
+        ):
+            warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if engine == "orca":
+            warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+        if engine not in {None, "auto"}:
+            warnings.warn(
+                ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+            )
 
     # Try to cast `file` as a pathlib object `path`.
     path = as_path_object(file)
@@ -549,46 +560,71 @@ def write_images(
     Parameters
     ----------
     fig:
-        Iterable of figure objects or dicts representing a figure
+        List of figure objects or dicts representing a figure.
+        Also accepts a single figure or dict representing a figure.
 
-    file: str or writeable
-        Iterables of strings or pathlib.Path objects representing local file paths to write to.
+    file: str, pathlib.Path, or list of (str or pathlib.Path)
+        List of str or pathlib.Path objects representing local file paths to write to.
+        Can also be a single str or pathlib.Path object if fig argument is
+        a single figure or dict representing a figure.
 
-    format: str or None
-        The desired image format. One of
+    format: str, None, or list of (str or None)
+        The image format to use for exported images.
+        Supported formats are:
           - 'png'
           - 'jpg' or 'jpeg'
           - 'webp'
           - 'svg'
           - 'pdf'
 
-        If not specified, this will default to `plotly.io.defaults.default_format`.
+        Use a list to specify formats for each figure or dict in the list
+        provided to the `fig` argument.
+        Specify format as a `str` to apply the same format to all exported images.
+        If not specified, and the corresponding `file` argument has a file extension, then `format` will default to the
+        file extension. Otherwise, will default to `plotly.io.defaults.default_format`
+        or `plotly.io.kaleido.scope.default_format`.
 
-    width: int or None
+    width: int, None, or list of (int or None)
         The width of the exported image in layout pixels. If the `scale`
         property is 1.0, this will also be the width of the exported image
         in physical pixels.
 
-        If not specified, will default to `plotly.io.defaults.default_width`.
+        Use a list to specify widths for each figure or dict in the list
+        provided to the `fig` argument.
+        Specify width as an `int` to apply the same width to all exported images.
+        If not specified, will default to `plotly.io.defaults.default_width`
+        or `plotly.io.kaleido.scope.default_width`.
 
-    height: int or None
+    height: int, None, or list of (int or None)
         The height of the exported image in layout pixels. If the `scale`
         property is 1.0, this will also be the height of the exported image
         in physical pixels.
 
-        If not specified, will default to `plotly.io.defaults.default_height`.
+        Use a list to specify heights for each figure or dict in the list
+        provided to the `fig` argument.
+        Specify height as an `int` to apply the same height to all exported images.
+        If not specified, will default to `plotly.io.defaults.default_height`
+        or `plotly.io.kaleido.scope.default_height`.
 
-    scale: int or float or None
+    scale: int, float, None, or list of (int, float, or None)
         The scale factor to use when exporting the figure. A scale factor
         larger than 1.0 will increase the image resolution with respect
         to the figure's layout pixel dimensions. Whereas as scale factor of
         less than 1.0 will decrease the image resolution.
 
-        If not specified, will default to `plotly.io.defaults.default_scale`.
+        Use a list to specify scale for each figure or dict in the list
+        provided to the `fig` argument.
+        Specify scale as an `int` or `float` to apply the same scale to all exported images.
+        If not specified, will default to `plotly.io.defaults.default_scale`
+        or `plotly.io.kaleido.scope.default_scale`.
 
-    validate: bool
+    validate: bool or list of bool
         True if the figure should be validated before being converted to
         an image, False otherwise.
+
+        Use a list to specify validation setting for each figure in the list
+        provided to the `fig` argument.
+        Specify validate as a boolean to apply the same validation setting to all figures.
 
     Returns
     -------
@@ -656,15 +692,14 @@ which can be installed using pip:
     from kaleido.errors import ChromeNotFoundError
 
     try:
+        kopts = {}
+        if defaults.plotlyjs:
+            kopts["plotlyjs"] = defaults.plotlyjs
+        if defaults.mathjax:
+            kopts["mathjax"] = defaults.mathjax
         kaleido.write_fig_from_object_sync(
             kaleido_specs,
-            kopts=(
-                dict(
-                    mathjax=defaults.mathjax,
-                )
-                if defaults.mathjax
-                else None
-            ),
+            kopts=kopts,
         )
     except ChromeNotFoundError:
         raise RuntimeError(PLOTLY_GET_CHROME_ERROR_MSG)
@@ -727,11 +762,12 @@ which can be installed using pip:
         fig = json.loads(bytes.decode("utf-8"))
     else:
         # Kaleido v0
-        warnings.warn(
-            f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. "
-            + "Please upgrade Kaleido to version 1.0.0 or greater (`pip install 'kaleido>=1.0.0'`).",
-            DeprecationWarning,
-        )
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            warnings.warn(
+                f"Support for Kaleido versions less than 1.0.0 is deprecated and will be removed after {ENGINE_SUPPORT_TIMELINE}. "
+                + "Please upgrade Kaleido to version 1.0.0 or greater (`pip install 'kaleido>=1.0.0'`).",
+                DeprecationWarning,
+            )
         fig = json.loads(scope.transform(fig, format="json").decode("utf-8"))
 
     if as_dict:

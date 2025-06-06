@@ -58,9 +58,9 @@ commands:
             source .venv/bin/activate
             uv pip install .
             uv pip install -r ./test_requirements/requirements_optional.txt
-      
+
       - when:
-          condition: 
+          condition:
             not:
               equal:
                 - <<parameters.pandas_version>>
@@ -347,6 +347,8 @@ jobs:
           name: Install dependencies
           command: |
             cd doc
+            sudo apt-get update
+            sudo apt-get install rename
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
