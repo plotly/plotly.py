@@ -52,20 +52,17 @@ def build_deprecated_datatypes_py():
     """
 
     # Initialize source code buffer
-    # -----------------------------
     buffer = StringIO()
 
     # Write warnings import
-    # ---------------------
     buffer.write("import warnings\n")
 
     # Write warnings filter
-    # ---------------------
     # Use filter to enable DeprecationWarnings on our deprecated classes
     buffer.write(
         r"""
-warnings.filterwarnings('default',
-                        r'plotly\.graph_objs\.\w+ is deprecated',
+warnings.filterwarnings("default",
+                        r"plotly\.graph_objs\.\w+ is deprecated",
                         DeprecationWarning)
 
 
@@ -73,7 +70,6 @@ warnings.filterwarnings('default',
     )
 
     # Write deprecated class definitions
-    # ----------------------------------
     for class_name, opts in DEPRECATED_DATATYPES.items():
         base_class_name = opts["base_type"].__name__
         depr_msg = build_deprecation_message(class_name, **opts)
@@ -93,7 +89,6 @@ class {class_name}({base_class_name}):
         )
 
     # Return source string
-    # --------------------
     return buffer.getvalue()
 
 
@@ -175,12 +170,10 @@ def write_deprecated_datatypes(outdir):
     None
     """
     # Generate source code
-    # --------------------
     datatype_source = build_deprecated_datatypes_py()
     filepath = opath.join(outdir, "graph_objs", "_deprecations.py")
 
     # Write file
-    # ----------
     write_source_py(datatype_source, filepath)
 
 

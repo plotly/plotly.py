@@ -17,7 +17,7 @@ CAVEAT = """
 
 
 # Source code utilities
-# =====================
+
 def write_source_py(py_source, filepath, leading_newlines=0):
     """
     Format Python source code and write to a file, creating parent
@@ -36,14 +36,12 @@ def write_source_py(py_source, filepath, leading_newlines=0):
     """
     if py_source:
         # Make dir if needed
-        # ------------------
         filedir = opath.dirname(filepath)
         # The exist_ok kwarg is only supported with Python 3, but that's ok since
         # codegen is only supported with Python 3 anyway
         os.makedirs(filedir, exist_ok=True)
 
         # Write file
-        # ----------
         py_source = "\n" * leading_newlines + py_source
         with open(filepath, "at") as f:
             f.write(py_source)
@@ -121,11 +119,9 @@ def write_init_py(pkg_root, path_parts, rel_modules=(), rel_classes=(), init_ext
     None
     """
     # Generate source code
-    # --------------------
     init_source = build_from_imports_py(rel_modules, rel_classes, init_extra)
 
     # Write file
-    # ----------
     filepath = opath.join(pkg_root, *path_parts, "__init__.py")
     write_source_py(init_source, filepath)
 
@@ -159,7 +155,7 @@ def format_description(desc):
     ]
 
     for s in other_strings:
-        desc = desc.replace("*%s*" % s, '"%s"' % s)
+        desc = desc.replace(f"*{s}*", f'"{s}"')
 
     # Replace {array} with list
     desc = desc.replace("an {array}", "a list")
@@ -221,7 +217,6 @@ class PlotlyNode:
     """
 
     # Constructor
-    # -----------
     def __init__(self, plotly_schema, node_path=(), parent=None):
         """
         Superclass constructor for all node types
@@ -237,17 +232,15 @@ class PlotlyNode:
             Reference to the node's parent
         """
         # Save params
-        # -----------
         self.plotly_schema = plotly_schema
         self._parent = parent
 
-        # ### Process node path ###
+        # Process node path
         if isinstance(node_path, str):
             node_path = (node_path,)
         self.node_path = node_path
 
         # Compute children
-        # ----------------
         # Note the node_data is a property that must be computed by the
         # subclass based on plotly_schema and node_path
         if isinstance(self.node_data, dict_like):
@@ -271,12 +264,10 @@ class PlotlyNode:
             self._children = []
 
     # Magic methods
-    # -------------
     def __repr__(self):
         return self.path_str
 
     # Abstract methods
-    # ----------------
     @property
     def node_data(self):
         """
@@ -312,7 +303,6 @@ class PlotlyNode:
         raise NotImplementedError
 
     # Names
-    # -----
     @property
     def root_name(self):
         """
@@ -368,11 +358,9 @@ class PlotlyNode:
             return self.plotly_name
 
         # Lowercase leading char
-        # ----------------------
         name1 = self.plotly_name[0].lower() + self.plotly_name[1:]
 
         # Replace capital chars by underscore-lower
-        # -----------------------------------------
         name2 = "".join([("" if not c.isupper() else "_") + c.lower() for c in name1])
 
         return name2
@@ -439,7 +427,6 @@ class PlotlyNode:
         return validator_base
 
     # Validators
-    # ----------
     def get_validator_params(self):
         """
         Get kwargs to pass to the constructor of this node's validator
@@ -528,7 +515,6 @@ class PlotlyNode:
             return validator_class(**params)
 
     # Datatypes
-    # ---------
     @property
     def datatype(self) -> str:
         """
@@ -656,7 +642,6 @@ class PlotlyNode:
         return False
 
     # Node path
-    # ---------
     def tidy_path_part(self, p):
         """
         Return a tidy version of raw path entry. This allows subclasses to
@@ -697,7 +682,6 @@ class PlotlyNode:
         return tuple(res)
 
     # Node path strings
-    # -----------------
     @property
     def path_str(self):
         """
@@ -762,7 +746,6 @@ class PlotlyNode:
         return path_str
 
     # Children
-    # --------
     @property
     def parent(self):
         """
@@ -974,7 +957,6 @@ class PlotlyNode:
         return buffer.getvalue()
 
     # Static helpers
-    # --------------
     @staticmethod
     def get_all_compound_datatype_nodes(plotly_schema, node_class):
         """
@@ -1048,7 +1030,6 @@ class TraceNode(PlotlyNode):
     """
 
     # Constructor
-    # -----------
     def __init__(self, plotly_schema, node_path=(), parent=None):
         super().__init__(plotly_schema, node_path, parent)
 
@@ -1064,7 +1045,6 @@ class TraceNode(PlotlyNode):
         return ""
 
     # Raw data
-    # --------
     @property
     def node_data(self) -> dict:
         if not self.node_path:
@@ -1078,7 +1058,6 @@ class TraceNode(PlotlyNode):
         return node_data
 
     # Description
-    # -----------
     @property
     def description(self) -> str:
         if len(self.node_path) == 0:
@@ -1105,7 +1084,6 @@ class LayoutNode(PlotlyNode):
     """
 
     # Constructor
-    # -----------
     def __init__(self, plotly_schema, node_path=(), parent=None):
         # Get main layout properties
         layout = plotly_schema["layout"]["layoutAttributes"]
@@ -1147,7 +1125,6 @@ class LayoutNode(PlotlyNode):
             return self.node_path[-1]
 
     # Description
-    # -----------
     @property
     def description(self) -> str:
         desc = self.node_data.get("description", "")
@@ -1156,7 +1133,6 @@ class LayoutNode(PlotlyNode):
         return format_description(desc)
 
     # Raw data
-    # --------
     @property
     def node_data(self) -> dict:
         node_data = self.layout_data
@@ -1172,7 +1148,6 @@ class FrameNode(PlotlyNode):
     """
 
     # Constructor
-    # -----------
     def __init__(self, plotly_schema, node_path=(), parent=None):
         super().__init__(plotly_schema, node_path, parent)
 
@@ -1197,7 +1172,6 @@ class FrameNode(PlotlyNode):
         return "frame" if p == "frames_entry" else p
 
     # Description
-    # -----------
     @property
     def description(self) -> str:
         desc = self.node_data.get("description", "")
@@ -1206,7 +1180,6 @@ class FrameNode(PlotlyNode):
         return format_description(desc)
 
     # Raw data
-    # --------
     @property
     def node_data(self) -> dict:
         node_data = self.plotly_schema["frames"]

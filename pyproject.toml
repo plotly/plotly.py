@@ -47,11 +47,38 @@ dependencies = [
 [project.optional-dependencies]
 express = ["numpy"]
 kaleido = ["kaleido==1.0.0rc15"]
-dev = ["black==25.1.0"]
+dev = [
+    # pin precise version of ruff to prevent accidental reformatting in case its defaults are updated
+    "ruff==0.11.12",
+
+    # other dependencies required to test and build
+    "anywidget",
+    "build",
+    "colorcet",
+    "geopandas",
+    "inflect",
+    "jupyter",
+    "kaleido==1.0.0rc15",
+    "numpy",
+    "pandas",
+    "pdfrw",
+    "pillow",
+    "plotly-geo",
+    "polars",
+    "pyarrow",
+    "pyshp",
+    "pytest",
+    "pytz",
+    "requests",
+    "scipy",
+    "scikit-image",
+    "shapely",
+    "statsmodels",
+    "xarray"
+]
 
 [project.scripts]
 plotly_get_chrome = "plotly.io._kaleido:get_chrome"
-
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -64,28 +91,6 @@ plotly = [
     "package_data/templates/*",
     "package_data/datasets/*",
 ]
-
-[tool.black]
-line-length = 88
-target_version = ['py38', 'py39', 'py310', 'py311', 'py312']
-include = '\.pyi?$'
-exclude = '''
-/(
-      \.eggs         # exclude a few common directories in the
-    | \.git          # root of the project
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-    | js
-    | submodules
-    | plotly/matplotlylib/mplexporter
-)/
-'''
 
 [tool.jupyter-packaging.builder]
 factory = "jupyter_packaging.npm_builder"
