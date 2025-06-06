@@ -20,6 +20,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add support for Kaleido>=v1.0.0 for image generation [[#5062](https://github.com/plotly/plotly.py/pull/5062), [#5177](https://github.com/plotly/plotly.py/pull/5177)]
 - Reduce package bundle size by 18-24% via changes to code generation [[#4978](https://github.com/plotly/plotly.py/pull/4978)]
 
+### Added
+- Add SRI (Subresource Integrity) hash support for CDN script tags when using `include_plotlyjs='cdn'`. This enhances security by ensuring browser verification of CDN-served plotly.js files [[#PENDING](https://github.com/plotly/plotly.py/pull/PENDING)]
+
 ### Fixed
 - Fix third-party widget display issues in v6 [[#5102](https://github.com/plotly/plotly.py/pull/5102)]
 - Add handling for case where `jupyterlab` or `notebook` is not installed [[#5104](https://github.com/plotly/plotly.py/pull/5104/files)]
