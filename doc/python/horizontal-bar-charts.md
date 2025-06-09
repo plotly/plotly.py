@@ -118,7 +118,7 @@ import plotly.graph_objects as go
 top_labels = ['Strongly<br>agree', 'Agree', 'Neutral', 'Disagree',
               'Strongly<br>disagree']
 
-colors = ['DarkBlue', 'MediumBlue', 'cyan', 'mediumpurple', 'thistle']
+colors = ['DarkBlue', 'MediumBlue', 'DarkSlateBlue', 'mediumpurple', 'thistle']
 x_data = [[21, 30, 21, 16, 12],
           [24, 31, 19, 15, 11],
           [27, 26, 23, 11, 13],
@@ -197,7 +197,7 @@ for yd, xd in zip(y_data, x_data):
                                     x=space + (xd[i]/2), y=yd,
                                     text=str(xd[i]) + '%',
                                     font=dict(family='Arial', size=14,
-                                              color=f"{'white'*(i<2)}{'black'*(i>=2)}"),
+                                              color='ghostwhite'),
                                     showarrow=False))
             # labeling the Likert scale
             if yd == y_data[-1]:
