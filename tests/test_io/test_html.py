@@ -2,6 +2,7 @@ import sys
 
 import pytest
 import numpy as np
+import re
 
 
 import plotly.graph_objs as go
@@ -59,8 +60,6 @@ def test_cdn_includes_integrity_attribute(fig1):
     assert 'crossorigin="anonymous"' in html_output
 
     # Verify it's in the correct script tag
-    import re
-
     cdn_pattern = re.compile(
         r'<script[^>]*src="'
         + re.escape(plotly_cdn_url())
@@ -75,8 +74,6 @@ def test_cdn_integrity_hash_matches_bundled_content(fig1):
     html_output = pio.to_html(fig1, include_plotlyjs="cdn")
 
     # Extract the integrity hash from the HTML output
-    import re
-
     integrity_pattern = re.compile(r'integrity="(sha256-[A-Za-z0-9+/=]+)"')
     match = integrity_pattern.search(html_output)
     assert match is not None, "Integrity attribute not found"
