@@ -104,9 +104,9 @@ class TemplatesConfig(object):
 
     def _validate(self, value):
         if not self._validator:
-            from plotly.validators.layout import TemplateValidator
+            from plotly.validator_cache import ValidatorCache
 
-            self._validator = TemplateValidator()
+            self._validator = ValidatorCache.get_validator("layout", "template")
 
         return self._validator.validate_coerce(value)
 

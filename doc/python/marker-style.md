@@ -336,9 +336,10 @@ In the following figure, hover over a symbol to see its name or number. Set the 
 
 ```python
 import plotly.graph_objects as go
-from plotly.validators.scatter.marker import SymbolValidator
+from plotly.validator_cache import ValidatorCache
 
-raw_symbols = SymbolValidator().values
+SymbolValidator = ValidatorCache.get_validator("scatter.marker", "symbol")
+raw_symbols = SymbolValidator.values
 namestems = []
 namevariants = []
 symbols = []
