@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Gradient(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatter.marker"
     _path_str = "scatter.marker.gradient"
     _valid_props = {"color", "colorsrc", "type", "typesrc"}
@@ -149,12 +148,10 @@ class Gradient(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter.marker.Gradient
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter.marker.Gradient`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter.marker.Gradient`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

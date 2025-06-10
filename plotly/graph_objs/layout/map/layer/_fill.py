@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Fill(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.map.layer"
     _path_str = "layout.map.layer.fill"
     _valid_props = {"outlinecolor"}
@@ -74,12 +73,10 @@ class Fill(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.layer.Fill
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.layer.Fill`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.layer.Fill`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

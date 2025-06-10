@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Insidetextfont(_BaseTraceHierarchyType):
-
     _parent_path_str = "sunburst"
     _path_str = "sunburst.insidetextfont"
     _valid_props = {
@@ -558,12 +557,10 @@ class Insidetextfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.sunburst.Insidetextfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.sunburst.Insidetextfont`"""
-            )
+an instance of :class:`plotly.graph_objs.sunburst.Insidetextfont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -1,5 +1,3 @@
-import sys
-
 import pytest
 import numpy as np
 
@@ -9,16 +7,6 @@ import plotly.io as pio
 from plotly.io._utils import plotly_cdn_url
 
 
-if sys.version_info >= (3, 3):
-    import unittest.mock as mock
-    from unittest.mock import MagicMock
-else:
-    import mock
-    from mock import MagicMock
-
-
-# fixtures
-# --------
 @pytest.fixture
 def fig1(request):
     return go.Figure(
@@ -31,10 +19,6 @@ def fig1(request):
         ],
         layout={"title": {"text": "Figure title"}},
     )
-
-
-# HTML
-# ----
 
 
 def test_versioned_cdn_included(fig1):

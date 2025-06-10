@@ -1,4 +1,3 @@
-import sys
 from unittest import TestCase
 from plotly.optional_imports import get_module
 
@@ -26,26 +25,19 @@ class OptionalImportsTest(TestCase):
         # Get module that raises an exception on import
         module_str = "tests.test_core.test_optional_imports.exploding_module"
 
-        if sys.version_info >= (3, 4):
-            with self.assertLogs("_plotly_utils.optional_imports", level="ERROR") as cm:
-                module = get_module(module_str)
-
-            # No exception should be raised and None should be returned
-            self.assertIsNone(module)
-
-            # Check logging level and log message
-            expected_start = (
-                "ERROR:_plotly_utils.optional_imports:"
-                "Error importing optional module " + module_str
-            )
-            self.assertEqual(cm.output[0][: len(expected_start)], expected_start)
-
-            # Check that exception message is included after log message
-            expected_end = "Boom!"
-            self.assertEqual(cm.output[0][-len(expected_end) :], expected_end)
-        else:
-            # Don't check logging
+        with self.assertLogs("_plotly_utils.optional_imports", level="ERROR") as cm:
             module = get_module(module_str)
 
-            # No exception should be raised and None should be returned
-            self.assertIsNone(module)
+        # No exception should be raised and None should be returned
+        self.assertIsNone(module)
+
+        # Check logging level and log message
+        expected_start = (
+            "ERROR:_plotly_utils.optional_imports:"
+            "Error importing optional module " + module_str
+        )
+        self.assertEqual(cm.output[0][: len(expected_start)], expected_start)
+
+        # Check that exception message is included after log message
+        expected_end = "Boom!"
+        self.assertEqual(cm.output[0][-len(expected_end) :], expected_end)

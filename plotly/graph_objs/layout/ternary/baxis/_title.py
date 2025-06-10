@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Title(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.ternary.baxis"
     _path_str = "layout.ternary.baxis.title"
     _valid_props = {"font", "text"}
@@ -91,12 +90,10 @@ class Title(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.ternary.baxis.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.ternary.baxis.Title`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.ternary.baxis.Title`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

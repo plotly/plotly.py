@@ -1,3 +1,4 @@
+# ruff: noqa: F401
 import sys
 from typing import TYPE_CHECKING
 

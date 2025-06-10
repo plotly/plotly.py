@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Grouptitlefont(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.legend"
     _path_str = "layout.legend.grouptitlefont"
     _valid_props = {
@@ -315,12 +314,10 @@ class Grouptitlefont(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.legend.Grouptitlefont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.legend.Grouptitlefont`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.legend.Grouptitlefont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

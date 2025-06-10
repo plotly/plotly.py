@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Domain(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.scene"
     _path_str = "layout.scene.domain"
     _valid_props = {"column", "row", "x", "y"}
@@ -155,12 +154,10 @@ class Domain(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.scene.Domain
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.Domain`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.scene.Domain`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

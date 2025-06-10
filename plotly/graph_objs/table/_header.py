@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Header(_BaseTraceHierarchyType):
-
     _parent_path_str = "table"
     _path_str = "table.header"
     _valid_props = {
@@ -439,12 +438,10 @@ class Header(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.table.Header
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.table.Header`"""
-            )
+an instance of :class:`plotly.graph_objs.table.Header`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -1,13 +1,9 @@
-import sys
 from unittest import TestCase
 import pytest
 
 import plotly.graph_objs as go
 
-if sys.version_info >= (3, 3):
-    from unittest.mock import MagicMock
-else:
-    from mock import MagicMock
+from unittest.mock import MagicMock
 
 
 class TestOnChangeCallbacks(TestCase):
@@ -35,12 +31,12 @@ class TestOnChangeCallbacks(TestCase):
         with pytest.raises(ValueError):
             self.figure.frames[0].layout.xaxis.on_change(fn, "range")
 
-    def test_validate_property_path_nested(self):
+    def test_validate_property_path_nested_1(self):
         fn = MagicMock()
         with pytest.raises(ValueError):
             self.figure.layout.xaxis.on_change(fn, "bogus")
 
-    def test_validate_property_path_nested(self):
+    def test_validate_property_path_nested_2(self):
         fn = MagicMock()
         with pytest.raises(ValueError):
             self.figure.layout.on_change(fn, "xaxis.title_font.bogus")
@@ -122,7 +118,6 @@ class TestOnChangeCallbacks(TestCase):
         )
 
     def test_prop_callback_nested_arrays(self):
-
         # Initialize updatemenus and buttons
         self.figure.layout.updatemenus = [{}, {}, {}]
         self.figure.layout.updatemenus[2].buttons = [{}, {}]

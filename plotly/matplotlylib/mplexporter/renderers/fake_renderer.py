@@ -83,6 +83,6 @@ class FullFakeRenderer(FakeRenderer):
         styles,
         mplobj=None,
     ):
-        self.output += "    draw path collection " "with {0} offsets\n".format(
+        self.output += "    draw path collection with {0} offsets\n".format(
             offsets.shape[0]
         )

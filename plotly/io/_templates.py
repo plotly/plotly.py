@@ -25,7 +25,6 @@ class TemplatesConfig(object):
     """
 
     def __init__(self):
-
         # Initialize properties dict
         self._templates = {}
 
@@ -156,7 +155,6 @@ class TemplatesConfig(object):
 
     @default.setter
     def default(self, value):
-
         # Validate value
         # Could be a Template object, the key of a registered template,
         # Or a string containing the names of multiple templates joined on
@@ -171,9 +169,7 @@ Templates configuration
     Default template: {default}
     Available templates:
 {available}
-""".format(
-            default=repr(self.default), available=self._available_templates_str()
-        )
+""".format(default=repr(self.default), available=self._available_templates_str())
 
     def _available_templates_str(self):
         """

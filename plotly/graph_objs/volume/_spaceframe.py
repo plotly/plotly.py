@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Spaceframe(_BaseTraceHierarchyType):
-
     _parent_path_str = "volume"
     _path_str = "volume.spaceframe"
     _valid_props = {"fill", "show"}
@@ -104,12 +103,10 @@ class Spaceframe(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.volume.Spaceframe
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.volume.Spaceframe`"""
-            )
+an instance of :class:`plotly.graph_objs.volume.Spaceframe`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

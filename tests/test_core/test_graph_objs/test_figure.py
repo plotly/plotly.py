@@ -11,14 +11,12 @@ class FigureTest(TestCaseNoTemplate):
         pio.templates.default = None
 
     def test_instantiation(self):
-
         native_figure = {"data": [], "layout": {}, "frames": []}
 
         go.Figure(native_figure)
         go.Figure()
 
     def test_access_top_level(self):
-
         # Figure is special, we define top-level objects that always exist.
 
         self.assertEqual(go.Figure().data, ())
