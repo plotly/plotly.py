@@ -63,7 +63,7 @@ plotly = [
     "package_data/*",
     "package_data/templates/*",
     "package_data/datasets/*",
-    "plotly/validators/_validators.json"
+    "validators/_validators.json",
 ]
 
 [tool.black]
