@@ -39,7 +39,9 @@ plotly_config_script = """\
 <script type="text/javascript">\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
-cdn_script = '<script charset="utf-8" src="{cdn_url}" integrity="{js_hash}" crossorigin="anonymous"></script>'.format(cdn_url=plotly_cdn_url(), js_hash=_generate_sri_hash(get_plotlyjs()))
+cdn_script = '<script charset="utf-8" src="{cdn_url}" integrity="{js_hash}" crossorigin="anonymous"></script>'.format(
+    cdn_url=plotly_cdn_url(), js_hash=_generate_sri_hash(get_plotlyjs())
+)
 
 directory_script = '<script charset="utf-8" src="plotly.min.js"></script>'
 
