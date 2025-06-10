@@ -112,6 +112,8 @@ fig.show()
 
 ### Color Palette for Bar Chart
 
+This bar chart uses a sequential palette to show gradations of responses.  Additional color options for sequential palettes are available at [The Urban Institute](https://urbaninstitute.github.io/graphics-styleguide/#color) and [Colorbrewer](https://colorbrewer2.org/#type=sequential)
+
 ```python
 import plotly.graph_objects as go
 
