@@ -7,15 +7,17 @@ from PIL import Image
 
 
 # Fixtures
-# --------
+
+
 @pytest.fixture()
 def validator():
     return ImageUriValidator("prop", "parent")
 
 
 # Tests
-# -----
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -27,7 +29,7 @@ def test_validator_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
 
 
-# ### Coercion from PIL Image ###
+# Coercion from PIL Image
 def test_validator_coercion_PIL(validator):
     # Single pixel black png (http://png-pixel.com/)
 
@@ -43,7 +45,7 @@ def test_validator_coercion_PIL(validator):
     assert coerce_val == expected_uri
 
 
-# ### Rejection ###
+# Rejection
 @pytest.mark.parametrize("val", [23, set(), []])
 def test_rejection_by_type(val, validator):
     with pytest.raises(ValueError) as validation_failure:

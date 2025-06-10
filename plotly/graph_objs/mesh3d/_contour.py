@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Contour(_BaseTraceHierarchyType):
-
     _parent_path_str = "mesh3d"
     _path_str = "mesh3d.contour"
     _valid_props = {"color", "show", "width"}
@@ -113,12 +112,10 @@ class Contour(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.mesh3d.Contour
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.mesh3d.Contour`"""
-            )
+an instance of :class:`plotly.graph_objs.mesh3d.Contour`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

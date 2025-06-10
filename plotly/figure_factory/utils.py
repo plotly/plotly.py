@@ -1,24 +1,6 @@
 from collections.abc import Sequence
 
 from plotly import exceptions
-from plotly.colors import (
-    DEFAULT_PLOTLY_COLORS,
-    PLOTLY_SCALES,
-    color_parser,
-    colorscale_to_colors,
-    colorscale_to_scale,
-    convert_to_RGB_255,
-    find_intermediate_color,
-    hex_to_rgb,
-    label_rgb,
-    n_colors,
-    unconvert_from_RGB_255,
-    unlabel_rgb,
-    validate_colors,
-    validate_colors_dict,
-    validate_colorscale,
-    validate_scale_values,
-)
 
 
 def is_sequence(obj):
@@ -90,7 +72,7 @@ def validate_equal_length(*args):
     length = len(args[0])
     if any(len(lst) != length for lst in args):
         raise exceptions.PlotlyError(
-            "Oops! Your data lists or ndarrays " "should be the same length."
+            "Oops! Your data lists or ndarrays should be the same length."
         )
 
 
@@ -207,28 +189,28 @@ def annotation_dict_for_label(
     :param (bool) right_side: only applicable if row_col is set to 'row'.
     :param (str) text_color: color of the text.
     """
-    l = (1 - (num_of_lanes - 1) * subplot_spacing) / (num_of_lanes)
+    temp = (1 - (num_of_lanes - 1) * subplot_spacing) / (num_of_lanes)
     if not flipped:
         xanchor = "center"
         yanchor = "middle"
         if row_col == "col":
-            x = (lane - 1) * (l + subplot_spacing) + 0.5 * l
+            x = (lane - 1) * (temp + subplot_spacing) + 0.5 * temp
             y = 1.03
             textangle = 0
         elif row_col == "row":
-            y = (lane - 1) * (l + subplot_spacing) + 0.5 * l
+            y = (lane - 1) * (temp + subplot_spacing) + 0.5 * temp
             x = 1.03
             textangle = 90
     else:
         if row_col == "col":
             xanchor = "center"
             yanchor = "bottom"
-            x = (lane - 1) * (l + subplot_spacing) + 0.5 * l
+            x = (lane - 1) * (temp + subplot_spacing) + 0.5 * temp
             y = 1.0
             textangle = 270
         elif row_col == "row":
             yanchor = "middle"
-            y = (lane - 1) * (l + subplot_spacing) + 0.5 * l
+            y = (lane - 1) * (temp + subplot_spacing) + 0.5 * temp
             if right_side:
                 x = 1.0
                 xanchor = "left"

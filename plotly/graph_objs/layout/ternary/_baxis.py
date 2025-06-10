@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Baxis(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.ternary"
     _path_str = "layout.ternary.baxis"
     _valid_props = {
@@ -1422,12 +1421,10 @@ class Baxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.ternary.Baxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.ternary.Baxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.ternary.Baxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -1,6 +1,4 @@
 import json
-import sys
-import base64
 import threading
 import time
 
@@ -14,12 +12,8 @@ import plotly.io as pio
 from plotly.offline import get_plotlyjs
 from plotly.io._utils import plotly_cdn_url
 
-if sys.version_info >= (3, 3):
-    import unittest.mock as mock
-    from unittest.mock import MagicMock
-else:
-    import mock
-    from mock import MagicMock
+import unittest.mock as mock
+from unittest.mock import MagicMock
 
 
 # fixtures
@@ -181,7 +175,7 @@ def test_notebook_connected_show(fig1, name, connected):
         with mock.patch("IPython.display.display") as mock_display:
             pio.show(fig1)
 
-    # ### Check initialization ###
+    # Check initialization
     # Get display call arguments
     mock_call_args_html = mock_display_html.call_args
     mock_arg1_html = mock_call_args_html[0][0]
@@ -193,7 +187,7 @@ def test_notebook_connected_show(fig1, name, connected):
     else:
         assert_offline(bundle_display_html)
 
-    # ### Check display call ###
+    # Check display call
     # Get display call arguments
     mock_call_args = mock_display.call_args
     mock_arg1 = mock_call_args[0][0]
@@ -392,7 +386,9 @@ def test_missing_webbrowser_module(fig1):
     with mock.patch("builtins.__import__", webbrowser_absent_import):
         # 1: check whether importing webbrowser actually results in an ImportError
         with pytest.raises(ImportError):
-            import webbrowser
+            import webbrowser as wb
+
+            assert wb
 
         # 2: check whether the _repr_html_ can handle it regardless
         fig1._repr_html_()
@@ -402,8 +398,6 @@ def test_missing_webbrowser_methods(fig1):
     """
     Assert that no errors occur if the webbrowser module does not contain some methods
     """
-    import webbrowser
-
     removed_webbrowser_get_method = webbrowser.get
     try:
         del webbrowser.get

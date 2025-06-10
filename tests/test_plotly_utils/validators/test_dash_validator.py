@@ -3,19 +3,18 @@ from _plotly_utils.basevalidators import DashValidator
 
 
 # Constants
-# ---------
 dash_types = ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
 
 
 # Fixtures
-# --------
+
+
 @pytest.fixture()
 def validator():
     return DashValidator("prop", "parent", dash_types)
 
 
 # Acceptance
-# ----------
 @pytest.mark.parametrize("val", dash_types)
 def test_acceptance_dash_types(val, validator):
     # Values should be accepted and returned unchanged
@@ -43,8 +42,9 @@ def test_acceptance_dash_lists(val, validator):
 
 
 # Rejection
-# ---------
-# ### Value Rejection ###
+
+
+# Value Rejection
 @pytest.mark.parametrize("val", ["bogus", "not-a-dash"])
 def test_rejection_by_bad_dash_type(val, validator):
     with pytest.raises(ValueError) as validation_failure:

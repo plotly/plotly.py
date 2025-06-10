@@ -25,8 +25,7 @@ commands:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install .
-            uv pip install -r ./test_requirements/requirements_core.txt
+            uv sync --extra dev_core
       - run:
           name: List installed packages and python version
           command: |
@@ -56,8 +55,7 @@ commands:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install .
-            uv pip install -r ./test_requirements/requirements_optional.txt
+            uv sync --extra dev_optional
 
       - when:
           condition:
@@ -70,8 +68,7 @@ commands:
                 name: Install pandas
                 command: |
                   source .venv/bin/activate
-                  uv pip install pip
-                  python -m pip install pandas==<<parameters.pandas_version>> numpy==<<parameters.numpy_version>>
+                  uv pip install pandas==<<parameters.pandas_version>> numpy==<<parameters.numpy_version>>
 
       - run:
           name: Test core
@@ -125,8 +122,7 @@ commands:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install .
-            uv pip install -r ./test_requirements/requirements_optional.txt
+            uv pip install .[dev_optional]
             # Install Kaleido v0 instead of the v1 specified in requirements_optional.txt
             uv pip uninstall kaleido
             uv pip install kaleido==0.2.1
@@ -151,16 +147,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install black
+          name: Install ruff
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install black==25.1.0
+            uv venv
+            source .venv/bin/activate
+            uv sync --extra dev_core
       - run:
-          name: Check formatting with black
+          name: Check handwritten code with ruff
           command: |
-            . venv/bin/activate
-            black --check . --exclude venv
+            source .venv/bin/activate
+            ruff format .
 
   test_core_py:
     parameters:
@@ -226,22 +222,20 @@ jobs:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install -e .
-            uv pip install -r test_requirements/requirements_optional.txt
+            uv sync --extra dev_optional
 
       - run:
-          name: Build html figures (Pandas 2)
+          name: Build HTML figures (Pandas 2)
           command: |
             source .venv/bin/activate
             python tests/percy/plotly-express.py
       - run:
-          name: Build html figures (Pandas 1) and compare
+          name: Build HTML figures (Pandas 1) and compare
           command: |
             source .venv/bin/activate
             mkdir tests/percy/pandas2
             mv tests/percy/*.html tests/percy/pandas2/
-            uv pip install pip
-            python -m pip install pandas==1.5.3 numpy==1.26.4
+            uv pip install pandas==1.5.3 numpy==1.26.4
             python tests/percy/plotly-express.py
             python tests/percy/compare-pandas.py
             rm -rf tests/percy/pandas2
@@ -273,8 +267,7 @@ jobs:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install -e .
-            uv pip install -r ./test_requirements/requirements_core.txt black inflect jupyterlab
+            uv sync --extra dev_optional
       - run:
           name: Update plotly.js to dev
           command: |
@@ -291,7 +284,7 @@ jobs:
           name: Build source distribution packages
           command: |
             source .venv/bin/activate
-            uv pip install build
+            uv sync --extra dev_build
             python -m build --sdist --wheel -o dist
           when: always
       - store_artifacts:
@@ -312,8 +305,7 @@ jobs:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install build
-            uv pip install jupyter
+            uv sync --extra dev_build
             cd js
             npm ci
             npm run build
@@ -439,6 +431,7 @@ jobs:
       - store_artifacts:
           path: doc/build
           destination: doc/build
+
 workflows:
   code_formatting:
     jobs:
@@ -449,7 +442,6 @@ workflows:
   release_build:
     jobs:
       - full_build
-  
   build:
     jobs:
       - test_core_py:

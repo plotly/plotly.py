@@ -8,7 +8,6 @@ from ...utils import TestCaseNoTemplate
 
 
 class TemplateTest(TestCase):
-
     # Fixtures
     # --------
     def setUp(self):
@@ -103,13 +102,13 @@ class TemplateTest(TestCase):
             },
         )
 
-    def test_invalid_defaults_property_name_constructor(self):
+    def test_invalid_defaults_property_name_constructor_1(self):
         with pytest.raises(ValueError):
             go.Figure(
                 layout={"template": {"layout": {"imagedefaults": {"bogus": 500}}}}
             )
 
-    def test_invalid_defaults_property_value_constructor(self):
+    def test_invalid_defaults_property_value_constructor_1(self):
         with pytest.raises(ValueError):
             go.Figure(
                 layout={
@@ -119,11 +118,11 @@ class TemplateTest(TestCase):
                 }
             )
 
-    def test_invalid_defaults_property_name_constructor(self):
+    def test_invalid_defaults_property_name_constructor_2(self):
         with pytest.raises(ValueError):
             go.Figure(layout={"template": {"layout": {"xaxis": {"bogus": 500}}}})
 
-    def test_invalid_defaults_property_value_constructor(self):
+    def test_invalid_defaults_property_value_constructor_2(self):
         with pytest.raises(ValueError):
             go.Figure(
                 layout={"template": {"layout": {"xaxis": {"range": "str not tuple"}}}}
@@ -404,7 +403,6 @@ class TestToTemplated(TestCaseNoTemplate):
 
 class TestMergeTemplates(TestCase):
     def setUp(self):
-
         self.template1 = go.layout.Template(
             layout={"font": {"size": 20, "family": "Rockwell"}},
             data={

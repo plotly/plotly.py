@@ -43,7 +43,6 @@ class TestFigureProperties(TestCase):
         self.assertEqual(set(self.figure), {"data", "layout", "frames"})
 
     def test_attr_item(self):
-
         # test that equal objects can be retrieved using attr or item
         # syntax
         self.assertEqual(self.figure.data, self.figure["data"])
@@ -51,7 +50,6 @@ class TestFigureProperties(TestCase):
         self.assertEqual(self.figure.frames, self.figure["frames"])
 
     def test_property_assignment_tuple(self):
-
         # Empty
         self.assertIs(self.figure[()], self.figure)
 
@@ -82,19 +80,19 @@ class TestFigureProperties(TestCase):
         self.figure["frames[0].layout.yaxis.title.text"] = "f2"
         self.assertEqual(self.figure["frames.0.layout.yaxis.title.text"], "f2")
 
-    def test_access_invalid_attr(self):
+    def test_access_invalid_attr_1(self):
         with pytest.raises(AttributeError):
             self.figure.bogus
 
-    def test_access_invalid_item(self):
+    def test_access_invalid_item_1(self):
         with pytest.raises(KeyError):
             self.figure["bogus"]
 
-    def test_assign_invalid_attr(self):
+    def test_assign_invalid_attr_2(self):
         with pytest.raises(AttributeError):
             self.figure.bogus = "val"
 
-    def test_access_invalid_item(self):
+    def test_access_invalid_item_2(self):
         with pytest.raises(KeyError):
             self.figure["bogus"] = "val"
 

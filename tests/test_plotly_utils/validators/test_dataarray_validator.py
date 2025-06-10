@@ -5,15 +5,15 @@ import pandas as pd
 
 
 # Fixtures
-# --------
 @pytest.fixture()
 def validator():
     return DataArrayValidator("prop", "parent")
 
 
 # Tests
-# -----
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -42,7 +42,7 @@ def test_validator_acceptance_homogeneous(val, validator):
     assert np.array_equal(validator.present(coerce_val), val)
 
 
-# ### Rejection ###
+# Rejection
 @pytest.mark.parametrize("val", ["Hello", 23, set(), {}])
 def test_rejection(val, validator):
     with pytest.raises(ValueError) as validation_failure:

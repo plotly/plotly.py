@@ -76,9 +76,7 @@ class PlotlyOfflineMPLTestCase(TestCase):
             figure = plotly.tools.mpl_to_plotly(fig).to_dict()
             data = figure["data"]
 
-            layout = figure["layout"]
             data_json = pio.json.to_json_plotly(data)
-            layout_json = pio.json.to_json_plotly(layout)
             html = self._read_html(plotly.offline.plot_mpl(fig))
 
             # blank out uid before comparisons

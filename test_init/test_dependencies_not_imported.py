@@ -4,7 +4,6 @@ from . import version_skip
 
 @version_skip
 def test_dependencies_not_imported():
-
     # Check that creating a figure without using numpy and pandas does not result in
     # the import of numpy and pandas, even if they are installed.
     assert "plotly" not in sys.modules

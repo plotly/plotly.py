@@ -1,13 +1,9 @@
-import sys
 from unittest import TestCase
 import pytest
 
 import plotly.graph_objs as go
 
-if sys.version_info >= (3, 3):
-    from unittest.mock import MagicMock
-else:
-    from mock import MagicMock
+from unittest.mock import MagicMock
 
 
 class TestMoveDeleteTracesMessages(TestCase):
@@ -26,7 +22,6 @@ class TestMoveDeleteTracesMessages(TestCase):
         self.figure._send_deleteTraces_msg = MagicMock()
 
     def test_move_traces_swap(self):
-
         # Swap first and last trace
         traces = self.figure.data
         self.figure.data = [traces[2], traces[1], traces[0]]
@@ -36,7 +31,6 @@ class TestMoveDeleteTracesMessages(TestCase):
         self.assertFalse(self.figure._send_deleteTraces_msg.called)
 
     def test_move_traces_cycle(self):
-
         # Cycle traces forward
         traces = self.figure.data
         self.figure.data = [traces[2], traces[0], traces[1]]
