@@ -542,10 +542,11 @@ elif ipython:
             # orca not found
             pass
 
-    # Check if we're running in ipython terminal
+    # Check if we're running in ipython terminal. Or, if we aren't
+    # running ipython at all.
     ipython_info = ipython.get_ipython()
     shell = ipython_info.__class__.__name__
-    if not default_renderer and (shell == "TerminalInteractiveShell"):
+    if not default_renderer and (shell in ("TerminalInteractiveShell", "NoneType")):
         default_renderer = "browser"
 
     # Check if we're running in a Jupyter notebook or JupyterLab
