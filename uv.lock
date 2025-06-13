@@ -4333,7 +4333,6 @@ dev = [
     { name = "xarray", version = "2025.6.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
 ]
 dev-build = [
-    { name = "anywidget" },
     { name = "build" },
     { name = "jupyter" },
     { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
@@ -4342,7 +4341,6 @@ dev-build = [
     { name = "ruff" },
 ]
 dev-core = [
-    { name = "anywidget" },
     { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "pytest", version = "8.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "requests" },
@@ -4409,7 +4407,7 @@ kaleido = [
 
 [package.metadata]
 requires-dist = [
-    { name = "anywidget", marker = "extra == 'dev-core'" },
+    { name = "anywidget", marker = "extra == 'dev-optional'" },
     { name = "build", marker = "extra == 'dev-build'" },
     { name = "colorcet", marker = "extra == 'dev-optional'" },
     { name = "fiona", marker = "python_full_version < '3.9' and extra == 'dev-optional'", specifier = "<=1.9.6" },

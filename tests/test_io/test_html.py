@@ -68,6 +68,6 @@ def test_cdn_integrity_hash_matches_bundled_content(fig1):
     expected_hash = _generate_sri_hash(plotlyjs_content)
 
     # Verify they match
-    assert (
-        extracted_hash == expected_hash
-    ), f"Hash mismatch: expected {expected_hash}, got {extracted_hash}"
+    assert extracted_hash == expected_hash, (
+        f"Hash mismatch: expected {expected_hash}, got {extracted_hash}"
+    )
