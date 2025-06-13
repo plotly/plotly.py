@@ -42,7 +42,6 @@ dependencies = [
 express = ["numpy"]
 kaleido = ["kaleido==1.0.0rc15"]
 dev_core = [
-    "anywidget",
     "pytest",
     "requests",
     # pin precise version of ruff to prevent accidental reformatting in case its defaults are updated
@@ -56,6 +55,7 @@ dev_build = [
 dev_optional = [
     "plotly[dev_build]",
     "plotly[kaleido]",
+    "anywidget",
     "colorcet",
     # fiona>1.9.6 is not compatible with geopandas<1; geopandas>=1 is not compatible with python 3.8
     "fiona<=1.9.6;python_version<='3.8'",
@@ -101,6 +101,7 @@ plotly = [
     "package_data/*",
     "package_data/templates/*",
     "package_data/datasets/*",
+    "validators/_validators.json"
 ]
 
 [tool.jupyter-packaging.builder]

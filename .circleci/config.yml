@@ -25,6 +25,7 @@ commands:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
+            uv lock --check
             uv sync --extra dev_core
       - run:
           name: List installed packages and python version
@@ -122,7 +123,7 @@ commands:
             curl -LsSf https://astral.sh/uv/install.sh | sh
             uv venv
             source .venv/bin/activate
-            uv pip install .[dev_optional]
+            uv sync --extra dev_optional
             # Install Kaleido v0 instead of the v1 specified in requirements_optional.txt
             uv pip uninstall kaleido
             uv pip install kaleido==0.2.1

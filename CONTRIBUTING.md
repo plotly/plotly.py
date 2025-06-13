@@ -109,10 +109,12 @@ If you are using `uv`,
 you can install all of the packages needed for developing and testing plotly.py with this command:
 
 ```bash
-uv pip install -e '.[dev]'
+uv sync --extra dev
 ```
 
-If you are using `conda` or `virtualenv`, you can install all packages with:
+If you are using `conda` or `virtualenv`,
+or if `uv sync` does not work as you expect,
+you can install all packages with:
 
 ```bash
 pip install -e '.[dev]'
@@ -149,6 +151,11 @@ git checkout -b your-branch
 Once you have made your changes and tested them,
 push your changes to your fork of the plotly.py repository on GitHub
 and create your pull request.
+
+> **Managing `uv.lock`**
+>
+> Please do _not_ commit changes to `uv.lock`
+> unless you have added, removed, or changed dependencies in `pyproject.toml`.
 
 ### Testing
 

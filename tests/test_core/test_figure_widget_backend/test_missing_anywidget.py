@@ -1,10 +1,13 @@
+# ruff: noqa: F401 F403 F405
+
 import pytest
 
 # Use wildcard import to make sure FigureWidget is always included
-from plotly.graph_objects import FigureWidget
+from plotly.graph_objects import *
+from plotly.missing_anywidget import FigureWidget as FigureWidgetMissingAnywidget
 
 try:
-    from plotly.missing_anywidget import FigureWidget as FigureWidgetMissingAnywidget
+    import anywidget as _anywidget
 
     missing_anywidget = False
 except Exception:
