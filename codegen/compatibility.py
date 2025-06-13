@@ -136,7 +136,7 @@ def build_deprecation_message(class_name, base_type, new):
 
     replacemens_str = "\n  - ".join(replacements)
 
-    if isinstance(base_type, list):
+    if base_type is list:
         return f"""\
 plotly.graph_objs.{class_name} is deprecated.
 Please replace it with a list or tuple of instances of the following types

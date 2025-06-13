@@ -85,7 +85,7 @@ def test_rejection_values(val, validator_values):
     with pytest.raises(ValueError) as validation_failure:
         validator_values.validate_coerce(val)
 
-    assert "Invalid value".format() in str(validation_failure.value)
+    assert "Invalid value" in str(validation_failure.value)
     assert "['foo', 'BAR', '']" in str(validation_failure.value)
 
 

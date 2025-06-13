@@ -604,7 +604,7 @@ The topojson property must be a string, but received value of type {typ}.
         """
         return self._props.get(
             "mathjax",
-            ("https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"),
+            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js",
         )
 
     @mathjax.setter

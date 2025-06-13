@@ -239,7 +239,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     def test_including_plotlyjs_path_html(self):
         for include_plotlyjs in [
-            ("https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/plotly.min.js"),
+            "https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/plotly.min.js",
             "subpath/to/plotly.min.js",
             "something.js",
         ]:
@@ -259,7 +259,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     def test_including_plotlyjs_path_div(self):
         for include_plotlyjs in [
-            ("https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/plotly.min.js"),
+            "https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/plotly.min.js",
             "subpath/to/plotly.min.js",
             "something.js",
         ]:

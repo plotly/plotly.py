@@ -80,19 +80,19 @@ class TestFigureProperties(TestCase):
         self.figure["frames[0].layout.yaxis.title.text"] = "f2"
         self.assertEqual(self.figure["frames.0.layout.yaxis.title.text"], "f2")
 
-    def test_access_invalid_attr_1(self):
+    def test_access_invalid_attr(self):
         with pytest.raises(AttributeError):
             self.figure.bogus
 
-    def test_access_invalid_item_1(self):
+    def test_access_invalid_item(self):
         with pytest.raises(KeyError):
             self.figure["bogus"]
 
-    def test_assign_invalid_attr_2(self):
+    def test_assign_invalid_attr(self):
         with pytest.raises(AttributeError):
             self.figure.bogus = "val"
 
-    def test_access_invalid_item_2(self):
+    def test_assign_invalid_item(self):
         with pytest.raises(KeyError):
             self.figure["bogus"] = "val"
 
