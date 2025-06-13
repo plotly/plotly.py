@@ -386,9 +386,7 @@ def test_missing_webbrowser_module(fig1):
     with mock.patch("builtins.__import__", webbrowser_absent_import):
         # 1: check whether importing webbrowser actually results in an ImportError
         with pytest.raises(ImportError):
-            import webbrowser as wb
-
-            assert wb
+            import webbrowser  # noqa: F401
 
         # 2: check whether the _repr_html_ can handle it regardless
         fig1._repr_html_()

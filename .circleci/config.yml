@@ -156,7 +156,7 @@ jobs:
           name: Check handwritten code with ruff
           command: |
             source .venv/bin/activate
-            ruff format .
+            ruff format --check .
 
   test_core_py:
     parameters:
