@@ -1,9 +1,7 @@
 import math
-from unittest import TestCase
 
 import datetime
 import plotly.figure_factory as ff
-import plotly.io as pio
 
 from plotly.exceptions import PlotlyError
 from ...test_optional.optional_utils import NumpyTestUtilsMixin
@@ -13,14 +11,12 @@ from ...utils import TestCaseNoTemplate
 
 class TestQuiver(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_unequal_xy_length(self):
-
         # check: PlotlyError if x and y are not the same length
 
         kwargs = {"x": [1, 2], "y": [1], "u": [1, 2], "v": [1, 2]}
         self.assertRaises(PlotlyError, ff.create_quiver, **kwargs)
 
     def test_wrong_scale(self):
-
         # check: ValueError if scale is <= 0
 
         kwargs = {"x": [1, 2], "y": [1, 2], "u": [1, 2], "v": [1, 2], "scale": -1}
@@ -30,7 +26,6 @@ class TestQuiver(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assertRaises(ValueError, ff.create_quiver, **kwargs)
 
     def test_wrong_arrow_scale(self):
-
         # check: ValueError if arrow_scale is <= 0
 
         kwargs = {"x": [1, 2], "y": [1, 2], "u": [1, 2], "v": [1, 2], "arrow_scale": -1}
@@ -40,7 +35,6 @@ class TestQuiver(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assertRaises(ValueError, ff.create_quiver, **kwargs)
 
     def test_one_arrow(self):
-
         # we should be able to create a single arrow using create_quiver
 
         quiver = ff.create_quiver(x=[1], y=[1], u=[1], v=[1], scale=1)
@@ -59,7 +53,6 @@ class TestQuiver(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(quiver["layout"], expected_quiver["layout"])
 
     def test_more_kwargs(self):
-
         # we should be able to create 2 arrows and change the arrow_scale,
         # angle, and arrow using create_quiver
 
@@ -120,7 +113,6 @@ class TestQuiver(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
 class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_unequal_ohlc_length(self):
-
         # check: PlotlyError if open, high, low, close are not the same length
         # for TraceFactory.create_ohlc and TraceFactory.create_candlestick
 
@@ -153,7 +145,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assertRaises(PlotlyError, ff.create_candlestick, **kwargs)
 
     def test_direction_arg(self):
-
         # check: PlotlyError if direction is not defined as "increasing" or
         # "decreasing" for TraceFactory.create_ohlc and
         # TraceFactory.create_candlestick
@@ -167,13 +158,13 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         }
         self.assertRaisesRegex(
             PlotlyError,
-            "direction must be defined as " "'increasing', 'decreasing', or 'both'",
+            "direction must be defined as 'increasing', 'decreasing', or 'both'",
             ff.create_ohlc,
             **kwargs,
         )
         self.assertRaisesRegex(
             PlotlyError,
-            "direction must be defined as " "'increasing', 'decreasing', or 'both'",
+            "direction must be defined as 'increasing', 'decreasing', or 'both'",
             ff.create_candlestick,
             **kwargs,
         )
@@ -187,19 +178,18 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         }
         self.assertRaisesRegex(
             PlotlyError,
-            "direction must be defined as " "'increasing', 'decreasing', or 'both'",
+            "direction must be defined as 'increasing', 'decreasing', or 'both'",
             ff.create_ohlc,
             **kwargs,
         )
         self.assertRaisesRegex(
             PlotlyError,
-            "direction must be defined as " "'increasing', 'decreasing', or 'both'",
+            "direction must be defined as 'increasing', 'decreasing', or 'both'",
             ff.create_candlestick,
             **kwargs,
         )
 
     def test_high_highest_value(self):
-
         # check: PlotlyError if the "high" value is less than the corresponding
         # open, low, or close value because if the "high" value is not the
         # highest (or equal) then the data may have been entered incorrectly.
@@ -229,7 +219,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         )
 
     def test_low_lowest_value(self):
-
         # check: PlotlyError if the "low" value is greater than the
         # corresponding open, high, or close value because if the "low" value
         # is not the lowest (or equal) then the data may have been entered
@@ -261,7 +250,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         )
 
     def test_one_ohlc(self):
-
         # This should create one "increase" (i.e. close > open) ohlc stick
 
         ohlc = ff.create_ohlc(open=[33.0], high=[33.2], low=[32.7], close=[33.1])
@@ -303,7 +291,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(ohlc["layout"], expected_ohlc["layout"])
 
     def test_one_ohlc_increase(self):
-
         # This should create one "increase" (i.e. close > open) ohlc stick
 
         ohlc_incr = ff.create_ohlc(
@@ -329,7 +316,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(ohlc_incr["layout"], expected_ohlc_incr["layout"])
 
     def test_one_ohlc_decrease(self):
-
         # This should create one "increase" (i.e. close > open) ohlc stick
 
         ohlc_decr = ff.create_ohlc(
@@ -357,7 +343,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
     # TO-DO: put expected fig in a different file and then call to compare
     def test_one_candlestick(self):
-
         # This should create one "increase" (i.e. close > open) candlestick
 
         can_inc = ff.create_candlestick(
@@ -396,7 +381,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(can_inc["layout"], exp_can_inc["layout"])
 
     def test_datetime_ohlc(self):
-
         # Check expected outcome for ohlc chart with datetime xaxis
 
         high_data = [34.20, 34.37, 33.62, 34.25, 35.18, 33.25, 35.37, 34.62]
@@ -621,7 +605,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(ohlc_d["layout"], ex_ohlc_d["layout"])
 
     def test_datetime_candlestick(self):
-
         # Check expected outcome for candlestick chart with datetime xaxis
 
         high_data = [34.20, 34.37, 33.62, 34.25, 35.18, 33.25, 35.37, 34.62]
@@ -778,7 +761,6 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
 class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_unequal_z_text_size(self):
-
         # check: PlotlyError if z and text are not the same dimensions
 
         kwargs = {"z": [[1, 2], [1, 2]], "annotation_text": [[1, 2, 3], [1]]}
@@ -788,21 +770,18 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assertRaises(PlotlyError, ff.create_annotated_heatmap, **kwargs)
 
     def test_incorrect_x_size(self):
-
         # check: PlotlyError if x is the wrong size
 
         kwargs = {"z": [[1, 2], [1, 2]], "x": ["A"]}
         self.assertRaises(PlotlyError, ff.create_annotated_heatmap, **kwargs)
 
     def test_incorrect_y_size(self):
-
         # check: PlotlyError if y is the wrong size
 
         kwargs = {"z": [[1, 2], [1, 2]], "y": [1, 2, 3]}
         self.assertRaises(PlotlyError, ff.create_annotated_heatmap, **kwargs)
 
     def test_simple_annotated_heatmap(self):
-
         # we should be able to create a heatmap with annotated values with a
         # logical text color
 
@@ -901,7 +880,6 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(a_heat["layout"], expected_a_heat["layout"])
 
     def test_annotated_heatmap_kwargs(self):
-
         # we should be able to create an annotated heatmap with x and y axes
         # labels, a defined colorscale, and supplied text.
 
@@ -997,7 +975,6 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(a["layout"], expected_a["layout"])
 
     def test_annotated_heatmap_reversescale(self):
-
         # we should be able to create an annotated heatmap with x and y axes
         # labels, a defined colorscale, and supplied text.
 
@@ -1205,7 +1182,6 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
 class TestTable(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_fontcolor_input(self):
-
         # check: ValueError if fontcolor input is incorrect
 
         kwargs = {
@@ -1221,7 +1197,6 @@ class TestTable(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assertRaises(ValueError, ff.create_table, **kwargs)
 
     def test_simple_table(self):
-
         # we should be able to create a striped table by supplying a text matrix
 
         text = [
@@ -1404,7 +1379,6 @@ class TestTable(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(table["layout"], expected_table["layout"])
 
     def test_table_with_index(self):
-
         # we should be able to create a striped table where the first column
         # matches the coloring of the header
 
@@ -1556,7 +1530,6 @@ class TestTable(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
 class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_validate_gantt(self):
-
         # validate the basic gantt inputs
 
         df = [
@@ -1581,13 +1554,13 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
         df = "foo"
 
-        pattern3 = "You must input either a dataframe or a list of " "dictionaries."
+        pattern3 = "You must input either a dataframe or a list of dictionaries."
 
         self.assertRaisesRegex(PlotlyError, pattern3, ff.create_gantt, df)
 
         df = []
 
-        pattern4 = "Your list is empty. It must contain at least one " "dictionary."
+        pattern4 = "Your list is empty. It must contain at least one dictionary."
 
         self.assertRaisesRegex(PlotlyError, pattern4, ff.create_gantt, df)
 
@@ -1598,7 +1571,6 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assertRaisesRegex(PlotlyError, pattern5, ff.create_gantt, df)
 
     def test_gantt_index(self):
-
         # validate the index used for gantt
 
         df = [
@@ -1646,7 +1618,6 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
         )
 
     def test_gantt_validate_colors(self):
-
         # validate the gantt colors variable
 
         df = [
@@ -1666,9 +1637,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             },
         ]
 
-        pattern = (
-            "Whoops! The elements in your rgb colors tuples cannot " "exceed 255.0."
-        )
+        pattern = "Whoops! The elements in your rgb colors tuples cannot exceed 255.0."
 
         self.assertRaisesRegex(
             PlotlyError,
@@ -1683,7 +1652,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             PlotlyError, ff.create_gantt, df, index_col="Complete", colors="foo"
         )
 
-        pattern2 = "Whoops! The elements in your colors tuples cannot " "exceed 1.0."
+        pattern2 = "Whoops! The elements in your colors tuples cannot exceed 1.0."
 
         self.assertRaisesRegex(
             PlotlyError,
@@ -1760,7 +1729,6 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
         )
 
     def test_gannt_groups_and_descriptions(self):
-
         # check if grouped gantt chart matches with expected output
 
         df = [
@@ -1976,7 +1944,6 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(test_gantt_chart["data"][3], exp_gantt_chart["data"][3])
 
     def test_gantt_all_args(self):
-
         # check if gantt chart matches with expected output
 
         df = [
@@ -2131,7 +2098,6 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
 class Test2D_Density(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_validate_2D_density(self):
-
         # validate that x and y contain only numbers
         x = [1, 2]
         y = ["a", 2]
@@ -2149,7 +2115,6 @@ class Test2D_Density(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assertRaisesRegex(PlotlyError, pattern2, ff.create_2d_density, x2, y2)
 
     def test_2D_density_all_args(self):
-
         # check if 2D_density data matches with expected output
         x = [1, 2]
         y = [2, 4]

@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Font(_BaseTraceHierarchyType):
-
     _parent_path_str = "bar.hoverlabel"
     _path_str = "bar.hoverlabel.font"
     _valid_props = {
@@ -558,12 +557,10 @@ class Font(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.bar.hoverlabel.Font
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.bar.hoverlabel.Font`"""
-            )
+an instance of :class:`plotly.graph_objs.bar.hoverlabel.Font`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

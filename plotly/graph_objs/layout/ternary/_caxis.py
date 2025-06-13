@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Caxis(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.ternary"
     _path_str = "layout.ternary.caxis"
     _valid_props = {
@@ -1422,12 +1421,10 @@ class Caxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.ternary.Caxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.ternary.Caxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.ternary.Caxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

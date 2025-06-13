@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Z(_BaseTraceHierarchyType):
-
     _parent_path_str = "isosurface.slices"
     _path_str = "isosurface.slices.z"
     _valid_props = {"fill", "locations", "locationssrc", "show"}
@@ -162,12 +161,10 @@ class Z(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.isosurface.slices.Z
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.slices.Z`"""
-            )
+an instance of :class:`plotly.graph_objs.isosurface.slices.Z`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

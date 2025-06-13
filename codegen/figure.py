@@ -53,28 +53,23 @@ def build_figure_py(
     """
 
     # Initialize source code buffer
-    # -----------------------------
     buffer = StringIO()
     buffer.write(CAVEAT)
 
     # Get list of trace type nodes
-    # ----------------------------
     trace_nodes = trace_node.child_compound_datatypes
 
-    # Write imports
-    # -------------
-    # ### Import base class ###
+    # Import base class
     buffer.write(f"from plotly.{base_package} import {base_classname}\n")
 
     # Write class definition
-    # ----------------------
     buffer.write(
         f"""
 
 class {fig_classname}({base_classname}):\n"""
     )
 
-    # ### Constructor ###
+    # Constructor
     # Build constructor description strings
     data_description = reindent_validator_description(data_validator, 8)
     layout_description = reindent_validator_description(layout_validator, 8)
@@ -115,13 +110,13 @@ class {fig_classname}({base_classname}):\n"""
 
     def add_wrapper(wrapped_name, full_params, param_list):
         buffer.write(
-            f"""
+            f'''
     def {wrapped_name}(self, {full_params}) -> "{fig_classname}":
-        '''
+        """
         {getattr(BaseFigure, wrapped_name).__doc__}
-        '''
+        """
         return super().{wrapped_name}({param_list})
-    """
+    '''
         )
 
     add_wrapper(
@@ -189,20 +184,19 @@ class {fig_classname}({base_classname}):\n"""
         "rows, cols, **make_subplots_args",
     )
 
-    # ### add_trace methods for each trace type ###
+    # add_trace methods for each trace type
     for trace_node in trace_nodes:
-
         include_secondary_y = bool(
             [d for d in trace_node.child_datatypes if d.name_property == "yaxis"]
         )
 
-        # #### Function signature ####
+        # Function signature
         buffer.write(
             f"""
     def add_{trace_node.plotly_name}(self"""
         )
 
-        # #### Function params####
+        # Function params
         param_extras = ["row", "col"]
         if include_secondary_y:
             param_extras.append("secondary_y")
@@ -213,7 +207,7 @@ class {fig_classname}({base_classname}):\n"""
             output_type=fig_classname,
         )
 
-        # #### Docstring ####
+        # Docstring
         header = f"Add a new {trace_node.name_datatype_class} trace"
 
         doc_extras = [
@@ -259,7 +253,7 @@ class {fig_classname}({base_classname}):\n"""
             return_type=fig_classname,
         )
 
-        # #### Function body ####
+        # Function body
         buffer.write(
             f"""
         from plotly.graph_objs import {trace_node.name_datatype_class}
@@ -291,7 +285,6 @@ class {fig_classname}({base_classname}):\n"""
         )
 
     # update layout subplots
-    # ----------------------
     inflect_eng = inflect.engine()
     for subplot_node in subplot_nodes:
         singular_name = subplot_node.name_property
@@ -319,11 +312,11 @@ class {fig_classname}({base_classname}):\n"""
             secondary_y_docstring = ""
 
         buffer.write(
-            f"""
+            f'''
 
     def select_{plural_name}(
             self, selector=None, row=None, col=None{secondary_y_1}):
-        \"\"\"
+        """
         Select {singular_name} subplot objects from a particular subplot cell
         and/or {singular_name} subplot objects that satisfy custom selection
         criteria.
@@ -351,14 +344,14 @@ class {fig_classname}({base_classname}):\n"""
         generator
             Generator that iterates through all of the {singular_name}
             objects that satisfy all of the specified selection criteria
-        \"\"\"
+        """
 
         return self._select_layout_subplots_by_prefix(
-            '{singular_name}', selector, row, col{secondary_y_2})
+            "{singular_name}", selector, row, col{secondary_y_2})
 
     def for_each_{singular_name}(
-            self, fn, selector=None, row=None, col=None{secondary_y_1}) -> '{fig_classname}':
-        \"\"\"
+            self, fn, selector=None, row=None, col=None{secondary_y_1}) -> "{fig_classname}":
+        """
         Apply a function to all {singular_name} objects that satisfy the
         specified selection criteria
 
@@ -386,7 +379,7 @@ class {fig_classname}({base_classname}):\n"""
         -------
         self
             Returns the {fig_classname} object that the method was called on
-        \"\"\"
+        """
         for obj in self.select_{plural_name}(
                 selector=selector, row=row, col=col{secondary_y_2}):
             fn(obj)
@@ -399,8 +392,8 @@ class {fig_classname}({base_classname}):\n"""
             selector=None,
             overwrite=False,
             row=None, col=None{secondary_y_1},
-            **kwargs) -> '{fig_classname}':
-        \"\"\"
+            **kwargs) -> "{fig_classname}":
+        """
         Perform a property update operation on all {singular_name} objects
         that satisfy the specified selection criteria
 
@@ -438,16 +431,15 @@ class {fig_classname}({base_classname}):\n"""
         -------
         self
             Returns the {fig_classname} object that the method was called on
-        \"\"\"
+        """
         for obj in self.select_{plural_name}(
                 selector=selector, row=row, col=col{secondary_y_2}):
             obj.update(patch, overwrite=overwrite, **kwargs)
 
-        return self"""
+        return self'''
         )
 
     # update annotations/shapes/images
-    # --------------------------------
     for node in layout_array_nodes:
         singular_name = node.plotly_name
         plural_name = node.name_property
@@ -459,11 +451,11 @@ class {fig_classname}({base_classname}):\n"""
             method_prefix = ""
 
         buffer.write(
-            f"""
+            f'''
     def select_{method_prefix}{plural_name}(
         self, selector=None, row=None, col=None, secondary_y=None
     ):
-        \"\"\"
+        """
         Select {plural_name} from a particular subplot cell and/or {plural_name}
         that satisfy custom selection criteria.
 
@@ -503,7 +495,7 @@ class {fig_classname}({base_classname}):\n"""
         generator
             Generator that iterates through all of the {plural_name} that satisfy
             all of the specified selection criteria
-        \"\"\"
+        """
         return self._select_annotations_like(
             "{plural_name}", selector=selector, row=row, col=col, secondary_y=secondary_y
         )
@@ -511,7 +503,7 @@ class {fig_classname}({base_classname}):\n"""
     def for_each_{method_prefix}{singular_name}(
         self, fn, selector=None, row=None, col=None, secondary_y=None
     ):
-        \"\"\"
+        """
         Apply a function to all {plural_name} that satisfy the specified selection
         criteria
 
@@ -552,9 +544,9 @@ class {fig_classname}({base_classname}):\n"""
         -------
         self
             Returns the {fig_classname} object that the method was called on
-        \"\"\"
+        """
         for obj in self._select_annotations_like(
-            prop='{plural_name}',
+            prop="{plural_name}",
             selector=selector,
             row=row,
             col=col,
@@ -572,8 +564,8 @@ class {fig_classname}({base_classname}):\n"""
         col=None,
         secondary_y=None,
         **kwargs
-    ) -> '{fig_classname}':
-        \"\"\"
+    ) -> "{fig_classname}":
+        """
         Perform a property update operation on all {plural_name} that satisfy the
         specified selection criteria
 
@@ -620,9 +612,9 @@ class {fig_classname}({base_classname}):\n"""
         -------
         self
             Returns the {fig_classname} object that the method was called on
-        \"\"\"
+        """
         for obj in self._select_annotations_like(
-            prop='{plural_name}',
+            prop="{plural_name}",
             selector=selector,
             row=row,
             col=col,
@@ -631,7 +623,7 @@ class {fig_classname}({base_classname}):\n"""
             obj.update(patch, **kwargs)
 
         return self
-"""
+'''
         )
         # Add layout array items
         buffer.write(
@@ -677,7 +669,7 @@ class {fig_classname}({base_classname}):\n"""
             return_type=fig_classname,
         )
 
-        # #### Function body ####
+        # Function body
         buffer.write(
             f"""
         from plotly.graph_objs import layout as _layout
@@ -697,8 +689,8 @@ class {fig_classname}({base_classname}):\n"""
         buffer.write(
             f"""
         return self._add_annotation_like(
-            '{singular_name}',
-            '{plural_name}',
+            "{singular_name}",
+            "{plural_name}",
             new_obj,
             row=row,
             col=col,
@@ -708,7 +700,6 @@ class {fig_classname}({base_classname}):\n"""
         )
 
     # Return source string
-    # --------------------
     buffer.write("\n")
     return buffer.getvalue()
 
@@ -750,23 +741,20 @@ def write_figure_classes(
     """
 
     # Validate inputs
-    # ---------------
     if trace_node.node_path:
         raise ValueError(
             f"Expected root trace node.\n"
-            f'Received node with path "{trace_node.path_str}"'
+            f"Received node with path '{trace_node.path_str}'"
         )
 
     # Loop over figure types
-    # ----------------------
     base_figures = [
         ("basewidget", "BaseFigureWidget", "FigureWidget"),
         ("basedatatypes", "BaseFigure", "Figure"),
     ]
 
     for base_package, base_classname, fig_classname in base_figures:
-
-        # ### Build figure source code string ###
+        # Build figure source code string
         figure_source = build_figure_py(
             trace_node,
             base_package,
@@ -779,6 +767,6 @@ def write_figure_classes(
             layout_array_nodes,
         )
 
-        # ### Format and write to file###
+        # Format and write to file
         filepath = opath.join(outdir, "graph_objs", f"_{fig_classname.lower()}.py")
         write_source_py(figure_source, filepath)

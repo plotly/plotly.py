@@ -5,7 +5,8 @@ from ...test_optional.test_utils.test_utils import np_nan, np_inf
 
 
 # Fixtures
-# --------
+
+
 @pytest.fixture()
 def validator():
     return AnyValidator("prop", "parent")
@@ -17,14 +18,15 @@ def validator_aok():
 
 
 # Tests
-# -----
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize("val", [set(), "Hello", 123, np_inf(), np_nan(), {}])
 def test_acceptance(val, validator):
     assert validator.validate_coerce(val) is val
 
 
-# ### Acceptance of arrays ###
+# Acceptance of arrays
 @pytest.mark.parametrize(
     "val",
     [

@@ -1,3 +1,4 @@
+# ruff: noqa: F401
 from ._json import (
     to_json,
     write_json,

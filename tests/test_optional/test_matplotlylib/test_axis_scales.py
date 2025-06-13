@@ -3,7 +3,7 @@ import pytest
 from plotly import optional_imports
 from ...utils import compare_dict, strip_dict_params
 from ...test_optional.optional_utils import run_fig
-from ...test_optional.test_matplotlylib.data.axis_scales import *
+from ...test_optional.test_matplotlylib.data.axis_scales import EVEN_LINEAR_SCALE
 
 matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 

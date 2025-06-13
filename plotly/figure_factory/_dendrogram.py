@@ -250,7 +250,7 @@ class _Dendrogram(object):
                 # it could happen that the old color isn't found (if a custom
                 # colorscale was specified), in this case we set it to an
                 # arbitrary default.
-                default_colors[n] = "rgb(0,116,217)"
+                default_colors[nc] = "rgb(0,116,217)"
 
         return default_colors
 

@@ -4,7 +4,6 @@ import pickle
 
 from plotly.tools import make_subplots
 import plotly.graph_objs as go
-import plotly.io as pio
 
 
 # fixtures

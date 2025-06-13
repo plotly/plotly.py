@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
-
     _parent_path_str = "waterfall.increasing.marker"
     _path_str = "waterfall.increasing.marker.line"
     _valid_props = {"color", "width"}
@@ -91,12 +90,10 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.waterfall.increasing.marker.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.waterfall.increasing.marker.Line`"""
-            )
+an instance of :class:`plotly.graph_objs.waterfall.increasing.marker.Line`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Scatterpolargl(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "scatterpolargl"
     _valid_props = {
@@ -1809,12 +1808,10 @@ class Scatterpolargl(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Scatterpolargl
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scatterpolargl`"""
-            )
+an instance of :class:`plotly.graph_objs.Scatterpolargl`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

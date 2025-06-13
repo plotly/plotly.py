@@ -8,7 +8,8 @@ from ...test_optional.test_utils.test_utils import np_nan, np_inf
 
 
 # Fixtures
-# --------
+
+
 @pytest.fixture
 def validator(request):
     return NumberValidator("prop", "parent")
@@ -35,8 +36,9 @@ def validator_aok():
 
 
 # Array not ok
-# ------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val", [1.0, 0.0, 1, -1234.5678, 54321, np.pi, np_nan(), np_inf(), -np_inf()]
 )
@@ -44,7 +46,7 @@ def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == approx(val, nan_ok=True)
 
 
-# ### Rejection by value ###
+# Rejection by value
 @pytest.mark.parametrize("val", ["hello", (), [], [1, 2, 3], set(), "34"])
 def test_rejection_by_value(val, validator):
     with pytest.raises(ValueError) as validation_failure:
@@ -53,7 +55,7 @@ def test_rejection_by_value(val, validator):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### With min/max ###
+# With min/max
 @pytest.mark.parametrize("val", [0, 0.0, -0.5, 1, 1.0, 2, 2.0, np.pi / 2.0])
 def test_acceptance_min_max(val, validator_min_max):
     assert validator_min_max.validate_coerce(val) == approx(val)
@@ -67,7 +69,7 @@ def test_rejection_min_max(val, validator_min_max):
     assert "in the interval [-1.0, 2.0]" in str(validation_failure.value)
 
 
-# ### With min only ###
+# With min only
 @pytest.mark.parametrize("val", [0, 0.0, -0.5, 99999, np_inf()])
 def test_acceptance_min(val, validator_min):
     assert validator_min.validate_coerce(val) == approx(val)
@@ -81,7 +83,7 @@ def test_rejection_min(val, validator_min):
     assert "in the interval [-1.0, inf]" in str(validation_failure.value)
 
 
-# ### With max only ###
+# With max only
 @pytest.mark.parametrize("val", [0, 0.0, -np_inf(), -123456, np.pi / 2])
 def test_acceptance_max(val, validator_max):
     assert validator_max.validate_coerce(val) == approx(val)
@@ -96,8 +98,9 @@ def test_rejection_max(val, validator_max):
 
 
 # Array ok
-# --------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize("val", [1.0, 0.0, 1, 0.4])
 def test_acceptance_aok_scalars(val, validator_aok):
     assert validator_aok.validate_coerce(val) == val
@@ -110,8 +113,8 @@ def test_acceptance_aok_list(val, validator_aok):
     )
 
 
-# ### Coerce ###
-#     Coerced to general consistent numeric type
+# Coerce
+# Coerced to general consistent numeric type
 @pytest.mark.parametrize(
     "val,expected",
     [
@@ -131,8 +134,7 @@ def test_coercion_aok_list(val, expected, validator_aok):
         assert validator_aok.present(v) == tuple(val)
 
 
-# ### Rejection ###
-#
+# Rejection
 @pytest.mark.parametrize("val", [["a", 4]])
 def test_rejection_aok(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
@@ -141,7 +143,7 @@ def test_rejection_aok(val, validator_aok):
     assert "Invalid element(s)" in str(validation_failure.value)
 
 
-# ### Rejection by element ###
+# Rejection by element
 @pytest.mark.parametrize(
     "val",
     [

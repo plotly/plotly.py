@@ -5,7 +5,6 @@ from ...utils import TestCaseNoTemplate
 
 class FigureTest(TestCaseNoTemplate):
     def test_to_ordered_dict(self):
-
         fig = go.Figure(
             layout={
                 "yaxis": {"range": [1, 2]},

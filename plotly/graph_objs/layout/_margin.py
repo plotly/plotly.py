@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Margin(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.margin"
     _valid_props = {"autoexpand", "b", "l", "pad", "r", "t"}
@@ -195,12 +194,10 @@ class Margin(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Margin
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Margin`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Margin`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

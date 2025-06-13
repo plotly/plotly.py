@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Mesh3d(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "mesh3d"
     _valid_props = {
@@ -2493,12 +2492,10 @@ class Mesh3d(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Mesh3d
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Mesh3d`"""
-            )
+an instance of :class:`plotly.graph_objs.Mesh3d`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

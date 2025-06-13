@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Image(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "image"
     _valid_props = {
@@ -1401,12 +1400,10 @@ class Image(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Image
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Image`"""
-            )
+an instance of :class:`plotly.graph_objs.Image`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

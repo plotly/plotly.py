@@ -7,7 +7,6 @@ A module intended for use with Nose.
 """
 
 from plotly.graph_objs import Scatter
-from plotly.exceptions import PlotlyError
 
 
 def test_trivial():

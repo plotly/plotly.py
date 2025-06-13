@@ -1,6 +1,5 @@
 from unittest import TestCase
 import plotly.graph_objs as go
-import pytest
 
 try:
     go.FigureWidget()

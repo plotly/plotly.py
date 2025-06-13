@@ -570,7 +570,6 @@ def test_histfunc_hoverlabels_bivariate(backend):
 
 
 def test_timeline(constructor):
-
     df = constructor(
         {
             "Task": ["Job A", "Job B", "Job C"],

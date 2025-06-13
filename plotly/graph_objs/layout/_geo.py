@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Geo(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.geo"
     _valid_props = {
@@ -925,12 +924,10 @@ class Geo(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Geo
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Geo`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Geo`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

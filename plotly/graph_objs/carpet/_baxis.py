@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Baxis(_BaseTraceHierarchyType):
-
     _parent_path_str = "carpet"
     _path_str = "carpet.baxis"
     _valid_props = {
@@ -1781,12 +1780,10 @@ class Baxis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.carpet.Baxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.carpet.Baxis`"""
-            )
+an instance of :class:`plotly.graph_objs.carpet.Baxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

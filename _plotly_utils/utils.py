@@ -174,7 +174,6 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         try:
             new_o = _json.loads(encoded_o, parse_constant=self.coerce_to_strict)
         except ValueError:
-
             # invalid separators will fail here. raise a helpful exception
             raise ValueError(
                 "Encoding into strict JSON failed. Did you set the separators "
@@ -469,12 +468,12 @@ def display_string_positions(p, i=None, offset=0, length=1, char="^", trim=True)
     maxaddr = 0
     if i is None:
         for p_ in p:
-            for l in range(length):
-                maxaddr = p_ + offset + l
+            for temp in range(length):
+                maxaddr = p_ + offset + temp
                 s[maxaddr] = char
     else:
-        for l in range(length):
-            maxaddr = p[i] + offset + l
+        for temp in range(length):
+            maxaddr = p[i] + offset + temp
             s[maxaddr] = char
     ret = "".join(s)
     if trim:
@@ -501,8 +500,8 @@ def chomp_empty_strings(strings, c, reverse=False):
     on the right or "" if it is the last string.
     """
 
-    def _rev(l):
-        return [s[::-1] for s in l][::-1]
+    def _rev(vals):
+        return [s[::-1] for s in vals][::-1]
 
     if reverse:
         return _rev(chomp_empty_strings(_rev(strings), c))

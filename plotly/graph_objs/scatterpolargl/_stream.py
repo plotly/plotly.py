@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Stream(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatterpolargl"
     _path_str = "scatterpolargl.stream"
     _valid_props = {"maxpoints", "token"}
@@ -101,12 +100,10 @@ class Stream(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatterpolargl.Stream
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterpolargl.Stream`"""
-            )
+an instance of :class:`plotly.graph_objs.scatterpolargl.Stream`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -124,7 +124,7 @@ Plotly3_r = Plotly3[::-1]
 Turbo_r = Turbo[::-1]
 Viridis_r = Viridis[::-1]
 
-from .plotlyjs import (  # noqa: F401
+from .plotlyjs import (  # noqa: E402 F401
     Blackbody,
     Bluered,
     Electric,
@@ -139,7 +139,7 @@ from .plotlyjs import (  # noqa: F401
     Rainbow_r,
 )
 
-from .colorbrewer import (  # noqa: F401
+from .colorbrewer import (  # noqa: E402 F401
     Blues,
     BuGn,
     BuPu,
@@ -180,7 +180,7 @@ from .colorbrewer import (  # noqa: F401
     YlOrRd_r,
 )
 
-from .cmocean import (  # noqa: F401
+from .cmocean import (  # noqa: E402 F401
     turbid,
     thermal,
     haline,
@@ -209,7 +209,7 @@ from .cmocean import (  # noqa: F401
     tempo_r,
 )
 
-from .carto import (  # noqa: F401
+from .carto import (  # noqa: E402 F401
     Burg,
     Burgyl,
     Redor,

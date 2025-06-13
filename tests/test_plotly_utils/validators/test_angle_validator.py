@@ -6,7 +6,8 @@ import numpy as np
 
 
 # Fixtures
-# --------
+
+
 @pytest.fixture
 def validator(request):
     return AngleValidator("prop", "parent")
@@ -18,14 +19,15 @@ def validator_aok(request):
 
 
 # Tests
-# -----
-# ### Test acceptance ###
+
+
+# Test acceptance
 @pytest.mark.parametrize("val", [0] + list(np.linspace(-180, 179.99)))
 def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
 
 
-# ### Test coercion above 180 ###
+# Test coercion above 180
 @pytest.mark.parametrize(
     "val,expected",
     [(180, -180), (181, -179), (-180.25, 179.75), (540, -180), (-541, 179)],
@@ -34,7 +36,7 @@ def test_coercion(val, expected, validator):
     assert validator.validate_coerce(val) == expected
 
 
-# ### Test rejection ###
+# Test rejection
 @pytest.mark.parametrize("val", ["hello", (), [], [1, 2, 3], set(), "34"])
 def test_rejection(val, validator):
     with pytest.raises(ValueError) as validation_failure:
@@ -43,7 +45,7 @@ def test_rejection(val, validator):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Test acceptance ###
+# Test acceptance
 @pytest.mark.parametrize("val", [[0, 179, -179]])
 def test_aok_acceptance(val, validator_aok):
     assert validator_aok.validate_coerce(val) == val
@@ -51,7 +53,7 @@ def test_aok_acceptance(val, validator_aok):
     assert np.array_equal(validator_aok.validate_coerce(np.array(val)), np.array(val))
 
 
-# ### Test coercion above 180 ###
+# Test coercion above 180
 @pytest.mark.parametrize(
     "val,expected",
     [(180, -180), (181, -179), (-180.25, 179.75), (540, -180), (-541, 179)],
@@ -63,7 +65,7 @@ def test_aok_coercion(val, expected, validator_aok):
     )
 
 
-# ### Test rejection ###
+# Test rejection
 @pytest.mark.parametrize("val", [["hello"], [()], [[]], [set()], ["34"]])
 def test_aok_rejection(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:

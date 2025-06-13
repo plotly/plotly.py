@@ -19,7 +19,6 @@ def return_prop_descriptions(prop_descrip_text):
 
 class FramesTest(TestCase):
     def test_instantiation(self):
-
         native_frames = [
             {},
             {"data": []},

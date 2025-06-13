@@ -39,9 +39,7 @@ def validate_distplot(hist_data, curve_type):
 
     curve_opts = ("kde", "normal")
     if curve_type not in curve_opts:
-        raise exceptions.PlotlyError(
-            "curve_type must be defined as " "'kde' or 'normal'"
-        )
+        raise exceptions.PlotlyError("curve_type must be defined as 'kde' or 'normal'")
 
     if not scipy:
         raise ImportError("FigureFactory.create_distplot requires scipy")
@@ -183,7 +181,6 @@ def create_distplot(
 
     data = []
     if show_hist:
-
         hist = _Distplot(
             hist_data,
             histnorm,
@@ -199,7 +196,6 @@ def create_distplot(
         data.append(hist)
 
     if show_curve:
-
         if curve_type == "normal":
             curve = _Distplot(
                 hist_data,
@@ -228,7 +224,6 @@ def create_distplot(
         data.append(curve)
 
     if show_rug:
-
         rug = _Distplot(
             hist_data,
             histnorm,
@@ -428,7 +423,6 @@ class _Distplot(object):
         """
         rug = [None] * self.trace_number
         for index in range(self.trace_number):
-
             rug[index] = dict(
                 type="scatter",
                 x=self.hist_data[index],

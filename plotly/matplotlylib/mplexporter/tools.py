@@ -32,7 +32,7 @@ def ipynb_vega_init():
     }};
     """
     d3_geo_projection_js_url = "http://d3js.org/d3.geo.projection.v0.min.js"
-    d3_layout_cloud_js_url = "http://wrobstory.github.io/d3-cloud/" "d3.layout.cloud.js"
+    d3_layout_cloud_js_url = "http://wrobstory.github.io/d3-cloud/d3.layout.cloud.js"
     topojson_js_url = "http://d3js.org/topojson.v1.min.js"
     vega_js_url = "http://trifacta.github.com/vega/vega.js"
 

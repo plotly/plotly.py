@@ -4,7 +4,8 @@ import numpy as np
 
 
 # Fixtures
-# --------
+
+
 @pytest.fixture()
 def validator():
     return ColorValidator("prop", "parent")
@@ -28,7 +29,6 @@ def validator_aok_colorscale():
 
 
 # Array not ok, numbers not ok
-# ----------------------------
 @pytest.mark.parametrize(
     "val",
     [
@@ -46,18 +46,18 @@ def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", [set(), 23, 0.5, {}, ["red"], [12]])
-def test_rejection(val, validator):
+def test_rejection_1(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
 
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by value ###
+# Rejection by value
 @pytest.mark.parametrize("val", ["redd", "rgbbb(255, 0, 0)", "hsl(0, 1%0000%, 50%)"])
-def test_rejection(val, validator):
+def test_rejection_2(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
 
@@ -65,8 +65,9 @@ def test_rejection(val, validator):
 
 
 # Array not ok, numbers ok
-# ------------------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -86,18 +87,18 @@ def test_acceptance_colorscale(val, validator_colorscale):
     assert validator_colorscale.validate_coerce(val) == val
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", [set(), {}, ["red"], [12]])
-def test_rejection_colorscale(val, validator_colorscale):
+def test_rejection_colorscale_1(val, validator_colorscale):
     with pytest.raises(ValueError) as validation_failure:
         validator_colorscale.validate_coerce(val)
 
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by value ###
+# Rejection by value
 @pytest.mark.parametrize("val", ["redd", "rgbbb(255, 0, 0)", "hsl(0, 1%0000%, 50%)"])
-def test_rejection_colorscale(val, validator_colorscale):
+def test_rejection_colorscale_2(val, validator_colorscale):
     with pytest.raises(ValueError) as validation_failure:
         validator_colorscale.validate_coerce(val)
 
@@ -105,8 +106,9 @@ def test_rejection_colorscale(val, validator_colorscale):
 
 
 # Array ok, numbers not ok
-# ------------------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -156,7 +158,7 @@ def test_acceptance_aok_2D(val, validator_aok):
         assert coerce_val == val
 
 
-# ### Rejection ###
+# Rejection
 @pytest.mark.parametrize(
     "val",
     [
@@ -197,8 +199,9 @@ def test_rejection_aok_2D(val, validator_aok):
 
 
 # Array ok, numbers ok
-# --------------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -218,7 +221,7 @@ def test_acceptance_aok_colorscale(val, validator_aok_colorscale):
         assert coerce_val == val
 
 
-# ### Rejection ###
+# Rejection
 @pytest.mark.parametrize(
     "val",
     [
@@ -235,7 +238,8 @@ def test_rejection_aok_colorscale(val, validator_aok_colorscale):
 
 
 # Description
-# -----------
+
+
 # Test dynamic description logic
 def test_description(validator):
     desc = validator.description()

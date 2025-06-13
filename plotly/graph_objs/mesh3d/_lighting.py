@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Lighting(_BaseTraceHierarchyType):
-
     _parent_path_str = "mesh3d"
     _path_str = "mesh3d.lighting"
     _valid_props = {
@@ -242,12 +241,10 @@ class Lighting(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.mesh3d.Lighting
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.mesh3d.Lighting`"""
-            )
+an instance of :class:`plotly.graph_objs.mesh3d.Lighting`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

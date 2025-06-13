@@ -60,7 +60,6 @@ def initialize_template(
     colorscale_minus=None,
     colorscale_diverging=None,
 ):
-
     # Initialize template
     # -------------------
     template = go.layout.Template()

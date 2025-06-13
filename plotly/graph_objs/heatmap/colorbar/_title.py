@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Title(_BaseTraceHierarchyType):
-
     _parent_path_str = "heatmap.colorbar"
     _path_str = "heatmap.colorbar.title"
     _valid_props = {"font", "side", "text"}
@@ -122,12 +121,10 @@ class Title(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.heatmap.colorbar.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.heatmap.colorbar.Title`"""
-            )
+an instance of :class:`plotly.graph_objs.heatmap.colorbar.Title`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

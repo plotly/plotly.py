@@ -360,8 +360,7 @@ def validate_colors(colors, colortype="tuple"):
             for value in each_color:
                 if value > 1.0:
                     raise exceptions.PlotlyError(
-                        "Whoops! The elements in your colors tuples "
-                        "cannot exceed 1.0."
+                        "Whoops! The elements in your colors tuples cannot exceed 1.0."
                     )
             colors[j] = each_color
 
@@ -397,8 +396,7 @@ def validate_colors_dict(colors, colortype="tuple"):
             for value in colors[key]:
                 if value > 1.0:
                     raise exceptions.PlotlyError(
-                        "Whoops! The elements in your colors tuples "
-                        "cannot exceed 1.0."
+                        "Whoops! The elements in your colors tuples cannot exceed 1.0."
                     )
 
     if colortype == "rgb":
@@ -539,8 +537,7 @@ def validate_scale_values(scale):
 
     if (scale[0] != 0) or (scale[-1] != 1):
         raise exceptions.PlotlyError(
-            "The first and last number in your scale must be 0.0 and 1.0 "
-            "respectively."
+            "The first and last number in your scale must be 0.0 and 1.0 respectively."
         )
 
     if not all(x < y for x, y in zip(scale, scale[1:])):

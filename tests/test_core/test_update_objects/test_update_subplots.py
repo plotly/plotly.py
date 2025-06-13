@@ -52,7 +52,6 @@ class TestSelectForEachUpdateSubplots(TestCase):
         secondary_y=None,
         test_no_grid=False,
     ):
-
         select_fn = getattr(Figure, "select_" + subplots_name)
         for_each_fn = getattr(Figure, "for_each_" + subplot_type)
 
@@ -349,7 +348,6 @@ class TestSelectForEachUpdateSubplots(TestCase):
         test_no_grid=False,
         **kwargs,
     ):
-
         update_fn = getattr(Figure, "update_" + subplots_name)
 
         if secondary_y is not None:
@@ -358,7 +356,6 @@ class TestSelectForEachUpdateSubplots(TestCase):
             secy_kwargs = {}
 
         def check_update(fig):
-
             # Copy input figure so that we don't modify it
             fig_orig = fig
             fig = copy.deepcopy(fig)

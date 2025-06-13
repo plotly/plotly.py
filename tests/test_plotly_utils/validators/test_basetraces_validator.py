@@ -1,6 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import BaseDataValidator
-from plotly.graph_objs import Scatter, Bar, Box
+from plotly.graph_objs import Scatter, Box
 
 
 # Fixtures

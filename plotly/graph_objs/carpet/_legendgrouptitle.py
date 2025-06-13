@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Legendgrouptitle(_BaseTraceHierarchyType):
-
     _parent_path_str = "carpet"
     _path_str = "carpet.legendgrouptitle"
     _valid_props = {"font", "text"}
@@ -91,12 +90,10 @@ class Legendgrouptitle(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.carpet.Legendgrouptitle
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.carpet.Legendgrouptitle`"""
-            )
+an instance of :class:`plotly.graph_objs.carpet.Legendgrouptitle`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

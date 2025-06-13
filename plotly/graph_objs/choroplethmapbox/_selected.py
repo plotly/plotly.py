@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Selected(_BaseTraceHierarchyType):
-
     _parent_path_str = "choroplethmapbox"
     _path_str = "choroplethmapbox.selected"
     _valid_props = {"marker"}
@@ -68,12 +67,10 @@ class Selected(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.choroplethmapbox.Selected
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.choroplethmapbox.Selected`"""
-            )
+an instance of :class:`plotly.graph_objs.choroplethmapbox.Selected`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

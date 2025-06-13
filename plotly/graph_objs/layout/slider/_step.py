@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Step(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.slider"
     _path_str = "layout.slider.step"
     _valid_props = {
@@ -335,12 +334,10 @@ class Step(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.slider.Step
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.slider.Step`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.slider.Step`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

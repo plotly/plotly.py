@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Font(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.yaxis.title"
     _path_str = "layout.yaxis.title.font"
     _valid_props = {
@@ -314,12 +313,10 @@ class Font(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.yaxis.title.Font
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.yaxis.title.Font`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.yaxis.title.Font`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

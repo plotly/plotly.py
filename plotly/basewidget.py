@@ -90,7 +90,6 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     def __init__(
         self, data=None, layout=None, frames=None, skip_invalid=False, **kwargs
     ):
-
         # Call superclass constructors
         # ----------------------------
         # Note: We rename layout to layout_plotly because to deconflict it
@@ -440,10 +439,8 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         # We only apply the deltas if this message corresponds to the most
         # recent trace edit operation
         if trace_edit_id == self._last_trace_edit_id:
-
             # ### Loop over deltas ###
             for delta in trace_deltas:
-
                 # #### Find existing trace for uid ###
                 trace_uid = delta["uid"]
                 trace_uids = [trace.uid for trace in self.data]
@@ -505,7 +502,6 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
         # We only apply the delta if this message corresponds to the most
         # recent layout edit operation
         if layout_edit_id == self._last_layout_edit_id:
-
             # ### Transform defaults to delta ###
             delta_transform = BaseFigureWidget._transform_data(
                 self._layout_defaults, layout_delta
@@ -696,7 +692,6 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
             points_data["point_indexes"],
             points_data["trace_indexes"],
         ):
-
             trace_dict = trace_points[trace_ind]
             trace_dict["xs"].append(x)
             trace_dict["ys"].append(y)
@@ -875,7 +870,6 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                     and isinstance(delta_val, dict)
                     or BaseFigure._is_dict_list(delta_val)
                 ):
-
                     # ### Recurse ###
                     recur_prop_path = prop_path + (i,)
                     recur_removed = BaseFigureWidget._remove_overlapping_props(
@@ -910,7 +904,6 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
         # Handle dict
         # -----------
         if isinstance(to_data, dict):
-
             # ### Validate from_data ###
             if not isinstance(from_data, dict):
                 raise ValueError(
@@ -922,10 +915,8 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
             # ### Add/modify properties ###
             # Loop over props/vals
             for from_prop, from_val in from_data.items():
-
                 # #### Handle compound vals recursively ####
                 if isinstance(from_val, dict) or BaseFigure._is_dict_list(from_val):
-
                     # ##### Init property value if needed #####
                     if from_prop not in to_data:
                         to_data[from_prop] = {} if isinstance(from_val, dict) else []
@@ -946,7 +937,6 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                     if from_prop not in to_data or not BasePlotlyType._vals_equal(
                         to_data[from_prop], from_val
                     ):
-
                         to_data[from_prop] = from_val
                         relayout_path_prop = relayout_path + (from_prop,)
                         relayout_data[relayout_path_prop] = from_val
@@ -961,7 +951,6 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
         # Handle list
         # -----------
         elif isinstance(to_data, list):
-
             # ### Validate from_data ###
             if not isinstance(from_data, list):
                 raise ValueError(
@@ -973,7 +962,6 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
             # ### Add/modify properties ###
             # Loop over indexes / elements
             for i, from_val in enumerate(from_data):
-
                 # #### Initialize element if needed ####
                 if i >= len(to_data):
                     to_data.append(None)
@@ -983,7 +971,6 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                 if input_val is not None and (
                     isinstance(from_val, dict) or BaseFigure._is_dict_list(from_val)
                 ):
-
                     relayout_data.update(
                         BaseFigureWidget._transform_data(
                             input_val,

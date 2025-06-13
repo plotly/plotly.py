@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Cells(_BaseTraceHierarchyType):
-
     _parent_path_str = "table"
     _path_str = "table.cells"
     _valid_props = {
@@ -439,12 +438,10 @@ class Cells(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.table.Cells
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.table.Cells`"""
-            )
+an instance of :class:`plotly.graph_objs.table.Cells`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

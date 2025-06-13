@@ -1595,10 +1595,10 @@ class TestMakeSubplots(TestCase):
         v_space = 0.0
 
         # 2D
-        fig = tls.make_subplots(100, 1, vertical_spacing=v_space)
+        tls.make_subplots(100, 1, vertical_spacing=v_space)
 
         # 3D
-        fig = tls.make_subplots(
+        tls.make_subplots(
             100,
             1,
             vertical_spacing=v_space,
@@ -1963,7 +1963,7 @@ def test_make_subplots_spacing_error():
             ValueError,
             match=match,
         ):
-            fig = subplots.make_subplots(51, 1, vertical_spacing=0.0201)
+            subplots.make_subplots(51, 1, vertical_spacing=0.0201)
     for match in [
         (
             r"^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
@@ -1975,54 +1975,54 @@ def test_make_subplots_spacing_error():
             ValueError,
             match=match,
         ):
-            fig = subplots.make_subplots(1, 51, horizontal_spacing=0.0201)
+            subplots.make_subplots(1, 51, horizontal_spacing=0.0201)
     # Check it's not raised when it's not beyond the maximum
     try:
-        fig = subplots.make_subplots(51, 1, vertical_spacing=0.0200)
+        subplots.make_subplots(51, 1, vertical_spacing=0.0200)
     except ValueError:
         # This shouldn't happen so we assert False to force failure
         assert False
     try:
-        fig = subplots.make_subplots(1, 51, horizontal_spacing=0.0200)
-    except ValueError:
-        # This shouldn't happen so we assert False to force failure
-        assert False
-    # make sure any value between 0 and 1 works for horizontal_spacing if cols is 1
-    try:
-        fig = subplots.make_subplots(1, 1, horizontal_spacing=0)
-    except ValueError:
-        # This shouldn't happen so we assert False to force failure
-        assert False
-    try:
-        fig = subplots.make_subplots(1, 1, horizontal_spacing=1)
+        subplots.make_subplots(1, 51, horizontal_spacing=0.0200)
     except ValueError:
         # This shouldn't happen so we assert False to force failure
         assert False
     # make sure any value between 0 and 1 works for horizontal_spacing if cols is 1
     try:
-        fig = subplots.make_subplots(1, 1, horizontal_spacing=0)
+        subplots.make_subplots(1, 1, horizontal_spacing=0)
+    except ValueError:
+        # This shouldn't happen so we assert False to force failure
+        assert False
+    try:
+        subplots.make_subplots(1, 1, horizontal_spacing=1)
     except ValueError:
         # This shouldn't happen so we assert False to force failure
         assert False
     # make sure any value between 0 and 1 works for horizontal_spacing if cols is 1
     try:
-        fig = subplots.make_subplots(1, 1, horizontal_spacing=1)
+        subplots.make_subplots(1, 1, horizontal_spacing=0)
+    except ValueError:
+        # This shouldn't happen so we assert False to force failure
+        assert False
+    # make sure any value between 0 and 1 works for horizontal_spacing if cols is 1
+    try:
+        subplots.make_subplots(1, 1, horizontal_spacing=1)
     except ValueError:
         # This shouldn't happen so we assert False to force failure
         assert False
     with pytest.raises(
         ValueError, match=r"^Horizontal spacing must be between 0 and 1\.$"
     ):
-        fig = subplots.make_subplots(1, 1, horizontal_spacing=-0.01)
+        subplots.make_subplots(1, 1, horizontal_spacing=-0.01)
     with pytest.raises(
         ValueError, match=r"^Horizontal spacing must be between 0 and 1\.$"
     ):
-        fig = subplots.make_subplots(1, 1, horizontal_spacing=1.01)
+        subplots.make_subplots(1, 1, horizontal_spacing=1.01)
     with pytest.raises(
         ValueError, match=r"^Vertical spacing must be between 0 and 1\.$"
     ):
-        fig = subplots.make_subplots(1, 1, vertical_spacing=-0.01)
+        subplots.make_subplots(1, 1, vertical_spacing=-0.01)
     with pytest.raises(
         ValueError, match=r"^Vertical spacing must be between 0 and 1\.$"
     ):
-        fig = subplots.make_subplots(1, 1, vertical_spacing=1.01)
+        subplots.make_subplots(1, 1, vertical_spacing=1.01)

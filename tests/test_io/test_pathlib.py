@@ -4,7 +4,6 @@ See also relevant tests in
    tests/test_optional/test_kaleido/test_kaleido.py
 """
 
-from unittest import mock
 import plotly.io as pio
 from io import StringIO
 from pathlib import Path

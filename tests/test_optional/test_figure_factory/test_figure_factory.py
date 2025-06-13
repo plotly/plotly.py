@@ -1,12 +1,10 @@
-from unittest import TestCase
 from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
-import plotly.io as pio
 
 import plotly.figure_factory as ff
 from ...test_optional.optional_utils import NumpyTestUtilsMixin
-from ...test_optional.test_utils.test_utils import np_nan, np_inf
+from ...test_optional.test_utils.test_utils import np_inf
 
 import numpy as np
 from ...utils import TestCaseNoTemplate
@@ -21,7 +19,6 @@ sk_measure = optional_imports.get_module("skimage")
 
 class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_wrong_curve_type(self):
-
         # check: PlotlyError (and specific message) is raised if curve_type is
         # not 'kde' or 'normal'
 
@@ -32,13 +29,12 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         }
         self.assertRaisesRegex(
             PlotlyError,
-            "curve_type must be defined as " "'kde' or 'normal'",
+            "curve_type must be defined as 'kde' or 'normal'",
             ff.create_distplot,
             **kwargs,
         )
 
     def test_wrong_histdata_format(self):
-
         # check: PlotlyError if hist_data is not a list of lists or list of
         # np.ndarrays (if hist_data is entered as just a list the function
         # will fail)
@@ -54,7 +50,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_distplot, **kwargs)
 
     def test_simple_distplot_prob_density(self):
-
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
@@ -108,7 +103,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assert_fig_equal(dp["data"][2], expected_dp_data_rug)
 
     def test_simple_distplot_prob(self):
-
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
@@ -160,7 +154,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assert_fig_equal(dp["data"][2], expected_dp_data_rug)
 
     def test_distplot_more_args_prob_dens(self):
-
         # we should be able to create a distplot with 2 datasets no
         # rugplot, defined bin_size, and added title
 
@@ -284,7 +277,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assert_fig_equal(dp["data"][1], expected_dp_data_hist_2)
 
     def test_distplot_more_args_prob(self):
-
         # we should be able to create a distplot with 2 datasets no
         # rugplot, defined bin_size, and added title
 
@@ -628,7 +620,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 class TestStreamline(TestCaseNoTemplate):
     def test_wrong_arrow_scale(self):
-
         # check for ValueError if arrow_scale is <= 0
 
         kwargs = {
@@ -641,7 +632,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(ValueError, ff.create_streamline, **kwargs)
 
     def test_wrong_density(self):
-
         # check for ValueError if density is <= 0
 
         kwargs = {
@@ -654,7 +644,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(ValueError, ff.create_streamline, **kwargs)
 
     def test_uneven_x(self):
-
         # check for PlotlyError if x is not evenly spaced
 
         kwargs = {
@@ -666,7 +655,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_uneven_y(self):
-
         # check for PlotlyError if y is not evenly spaced
 
         kwargs = {
@@ -678,7 +666,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_unequal_length_xy(self):
-
         # check for PlotlyError if u and v are not the same length
 
         kwargs = {
@@ -690,7 +677,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_unequal_length_uv(self):
-
         # check for PlotlyError if u and v are not the same length
 
         kwargs = {
@@ -702,7 +688,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_simple_streamline(self):
-
         # Need np to check streamline data,
         # this checks that the first 101 x and y values from streamline are
         # what we expect for a simple streamline where:
@@ -1016,7 +1001,6 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assert_fig_equal(dendro["layout"], expected_dendro["layout"])
 
     def test_dendrogram_random_matrix(self):
-
         # create a random uncorrelated matrix
         X = np.random.rand(5, 5)
 
@@ -1259,16 +1243,12 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
         X = np.array([[1, 2, 3, 4], [1, 2, 3, 4], [1, 3, 5, 6], [1, 4, 2, 3]])
         dendro = ff.create_dendrogram(X=X)
 
-        expected_ticktext = ["2", "3", "0", "1"]
-        expected_tickvals = [5, 15, 25, 35]
-
         self.assertEqual(len(dendro.layout.xaxis.ticktext), 4)
         self.assertEqual(len(dendro.layout.xaxis.tickvals), 4)
 
 
 class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_vmin_and_vmax(self):
-
         # check if vmin is greater than or equal to vmax
         u = np.linspace(0, 2, 2)
         v = np.linspace(0, 2, 2)
@@ -1294,7 +1274,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_colormap(self):
-
         # create data for trisurf plot
         u = np.linspace(-np.pi, np.pi, 3)
         v = np.linspace(-np.pi, np.pi, 3)
@@ -1324,9 +1303,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
         # check: if colormap is a list of rgb color strings, make sure the
         # entries of each color are no greater than 255.0
 
-        pattern2 = (
-            "Whoops! The elements in your rgb colors tuples " "cannot exceed 255.0."
-        )
+        pattern2 = "Whoops! The elements in your rgb colors tuples cannot exceed 255.0."
 
         self.assertRaisesRegex(
             PlotlyError,
@@ -1356,7 +1333,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_trisurf_all_args(self):
-
         # check if trisurf plot matches with expected output
         u = np.linspace(-1, 1, 3)
         v = np.linspace(-1, 1, 3)
@@ -1607,7 +1583,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_dataframe_input(self):
-
         # check: dataframe is imported
         df = "foo"
 
@@ -1619,7 +1594,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaisesRegex(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_one_column_dataframe(self):
-
         # check: dataframe has 1 column or less
         df = pd.DataFrame([1, 2, 3])
 
@@ -1631,14 +1605,12 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaisesRegex(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_valid_diag_choice(self):
-
         # make sure that the diagonal param is valid
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6]])
 
         self.assertRaises(PlotlyError, ff.create_scatterplotmatrix, df, diag="foo")
 
     def test_forbidden_params(self):
-
         # check: the forbidden params of 'marker' in **kwargs
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6]])
 
@@ -1656,7 +1628,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_index_choice(self):
-
         # check: index is a column name
         df = pd.DataFrame([[1, 2], [3, 4]], columns=["apple", "pear"])
 
@@ -1670,7 +1641,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_same_data_in_dataframe_columns(self):
-
         # check: either all numbers or strings in each dataframe column
         df = pd.DataFrame([["a", 2], [3, 4]])
 
@@ -1686,7 +1656,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaisesRegex(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_same_data_in_index(self):
-
         # check: either all numbers or strings in index column
         df = pd.DataFrame([["a", 2], [3, 4]], columns=["apple", "pear"])
 
@@ -1706,7 +1675,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_colormap(self):
-
         # check: the colormap argument is in a valid form
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]], columns=["a", "b", "c"])
 
@@ -1720,7 +1688,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
         pattern_rgb = (
-            "Whoops! The elements in your rgb colors tuples cannot " "exceed 255.0."
+            "Whoops! The elements in your rgb colors tuples cannot exceed 255.0."
         )
 
         # check: proper 'rgb' color
@@ -1742,9 +1710,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
             index="c",
         )
 
-        pattern_tuple = (
-            "Whoops! The elements in your colors tuples cannot " "exceed 1.0."
-        )
+        pattern_tuple = "Whoops! The elements in your colors tuples cannot exceed 1.0."
 
         # check: proper color tuple
         self.assertRaisesRegex(
@@ -1766,7 +1732,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_endpts(self):
-
         # check: the endpts is a list or a tuple
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]], columns=["a", "b", "c"])
 
@@ -1808,7 +1773,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_dictionary_colormap(self):
-
         # if colormap is a dictionary, make sure it all the values in the
         # index column are keys in colormap
         df = pd.DataFrame(
@@ -1818,7 +1782,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         colormap = {"happy": "rgb(5, 5, 5)"}
 
         pattern = (
-            "If colormap is a dictionary, all the names in the index " "must be keys."
+            "If colormap is a dictionary, all the names in the index must be keys."
         )
 
         self.assertRaisesRegex(
@@ -1831,7 +1795,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_scatter_plot_matrix(self):
-
         # check if test scatter plot matrix without index or theme matches
         # with the expected output
         df = pd.DataFrame(
@@ -1943,7 +1906,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_scatter_plot_matrix_kwargs(self):
-
         # check if test scatter plot matrix matches with
         # the expected output
         df = pd.DataFrame(
@@ -2024,13 +1986,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 class TestGantt(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_df_dataframe(self):
-
         # validate dataframe has correct column names
         df1 = pd.DataFrame([[2, "Apple"]], columns=["Numbers", "Fruit"])
         self.assertRaises(PlotlyError, ff.create_gantt, df1)
 
     def test_df_dataframe_all_args(self):
-
         # check if gantt chart matches with expected output
 
         df = pd.DataFrame(
@@ -2162,14 +2122,11 @@ class TestGantt(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_colors_validation(self):
-
         # check: colors is in an acceptable form
 
         data = [1, 5, 8]
 
-        pattern = (
-            "Whoops! The elements in your rgb colors tuples cannot " "exceed 255.0."
-        )
+        pattern = "Whoops! The elements in your rgb colors tuples cannot exceed 255.0."
 
         self.assertRaisesRegex(
             PlotlyError, pattern, ff.create_violin, data, colors="rgb(300, 2, 3)"
@@ -2187,7 +2144,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
             colors={"apple": "rgb(300, 2, 3)"},
         )
 
-        pattern2 = "Whoops! The elements in your colors tuples cannot " "exceed 1.0."
+        pattern2 = "Whoops! The elements in your colors tuples cannot exceed 1.0."
 
         self.assertRaisesRegex(
             PlotlyError, pattern2, ff.create_violin, data, colors=(1.1, 1, 1)
@@ -2205,7 +2162,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_violin, data, colors="foo")
 
     def test_data_header(self):
-
         # make sure data_header is entered
 
         data = pd.DataFrame([["apple", 2], ["pear", 4]], columns=["a", "b"])
@@ -2225,7 +2181,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_data_as_list(self):
-
         # check: data is a non empty list of numbers
 
         data = []
@@ -2244,13 +2199,12 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaisesRegex(PlotlyError, pattern2, ff.create_violin, data)
 
     def test_dataframe_input(self):
-
         # check: dataframe is entered if group_header is True
 
         data = [1, 2, 3]
 
         pattern = (
-            "Error. You must use a pandas DataFrame if you are using " "a group header."
+            "Error. You must use a pandas DataFrame if you are using a group header."
         )
 
         self.assertRaisesRegex(
@@ -2258,13 +2212,12 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_colors_dict(self):
-
         # check: if colorscale is True, make sure colors is not a dictionary
 
         data = pd.DataFrame([["apple", 2], ["pear", 4]], columns=["a", "b"])
 
         pattern = (
-            "The colors param cannot be a dictionary if you are " "using a colorscale."
+            "The colors param cannot be a dictionary if you are using a colorscale."
         )
 
         self.assertRaisesRegex(
@@ -2297,14 +2250,12 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_colorscale(self):
-
         # check: if colorscale is enabled, colors is a list with 2+ items
 
         data = pd.DataFrame([["apple", 2], ["pear", 4]], columns=["a", "b"])
 
         pattern = (
-            "colors must be a list with at least 2 colors. A Plotly "
-            "scale is allowed."
+            "colors must be a list with at least 2 colors. A Plotly scale is allowed."
         )
 
         self.assertRaisesRegex(
@@ -2319,7 +2270,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_group_stats(self):
-
         # check: group_stats is a dictionary
 
         data = pd.DataFrame([["apple", 2], ["pear", 4]], columns=["a", "b"])
@@ -2358,7 +2308,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_violin_fig(self):
-
         # check: test violin fig matches expected fig
 
         test_violin = ff.create_violin(data=[1, 2])
@@ -3105,8 +3054,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCaseNoTemplate):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=["a", "b"])
 
         pattern = (
-            "x, y, facet_row, facet_col and color_name must be keys in your "
-            "dataframe."
+            "x, y, facet_row, facet_col and color_name must be keys in your dataframe."
         )
 
         self.assertRaisesRegex(
@@ -3418,8 +3366,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCaseNoTemplate):
         df = [{"titles": "Revenue"}, "foo"]
 
         pattern = (
-            "Every entry of the data argument (list, tuple, etc) must "
-            "be a dictionary."
+            "Every entry of the data argument (list, tuple, etc) must be a dictionary."
         )
         self.assertRaisesRegex(PlotlyError, pattern, ff.create_bullet, df)
 
@@ -4056,7 +4003,6 @@ class TestBullet(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 
 class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
-
     # run tests if required packages are installed
     if shapely and shapefile and gp:
 
@@ -4096,7 +4042,6 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
             )
 
         def test_scope_is_not_list(self):
-
             pattern = "'scope' must be a list/tuple/sequence"
 
             self.assertRaisesRegex(
@@ -4261,9 +4206,9 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             elif isinstance(list1[i], float):
                 np.testing.assert_almost_equal(list1[i], list2[i], decimal=decimal)
             else:
-                assert (
-                    list1[i] == list2[i]
-                ), f"Values at index {i} are not equal: {list1[i]} != {list2[i]}"
+                assert list1[i] == list2[i], (
+                    f"Values at index {i} are not equal: {list1[i]} != {list2[i]}"
+                )
 
     def compare_dict_values(self, dict1, dict2, decimal=7):
         for k, v in dict1.items():
@@ -4274,12 +4219,11 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             elif isinstance(v, float):
                 np.testing.assert_almost_equal(v, dict2[k], decimal=decimal)
             else:
-                assert (
-                    v == dict2[k]
-                ), f"Values for key {k} are not equal: {v} != {dict2[k]}"
+                assert v == dict2[k], (
+                    f"Values for key {k} are not equal: {v} != {dict2[k]}"
+                )
 
     def test_aggregation(self):
-
         lat = [0, 1, 1, 2, 4, 5, 1, 2, 4, 5, 2, 3, 2, 1, 5, 3, 5]
         lon = [1, 2, 3, 3, 0, 4, 5, 0, 5, 3, 1, 5, 4, 0, 1, 2, 5]
         color = np.ones(len(lat))

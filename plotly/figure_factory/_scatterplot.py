@@ -92,7 +92,7 @@ def validate_scatterplotmatrix(df, index, diag, colormap_type, **kwargs):
     """
     if not pd:
         raise ImportError(
-            "FigureFactory.scatterplotmatrix requires " "a pandas DataFrame."
+            "FigureFactory.scatterplotmatrix requires a pandas DataFrame."
         )
 
     # Check if pandas dataframe
@@ -114,7 +114,7 @@ def validate_scatterplotmatrix(df, index, diag, colormap_type, **kwargs):
     # Check that diag parameter is a valid selection
     if diag not in DIAG_CHOICES:
         raise exceptions.PlotlyError(
-            "Make sure diag is set to " "one of {}".format(DIAG_CHOICES)
+            "Make sure diag is set to one of {}".format(DIAG_CHOICES)
         )
 
     # Check that colormap_types is a valid selection

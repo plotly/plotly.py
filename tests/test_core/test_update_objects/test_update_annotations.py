@@ -242,7 +242,6 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_update("shapes", [4], patch=dict(opacity=0), secondary_y=True)
 
     def test_shape_attributes(self):
-
         self.fig.add_shape(fillcolor="blue", opacity=0.3)
         self.fig.update_shapes(fillcolor="red")
 
@@ -351,7 +350,7 @@ def test_no_exclude_empty_subplots():
 
 
 def test_supplied_yref_on_single_plot_subplot():
-    ### test a (1,1) subplot figure object
+    """test a (1,1) subplot figure object"""
     fig = make_subplots(1, 1)
     fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[1, 2, 2, 1]))
     fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[4, 3, 2, 1], yaxis="y2"))
@@ -365,7 +364,7 @@ def test_supplied_yref_on_single_plot_subplot():
 
 
 def test_supplied_yref_on_non_subplot_figure_object():
-    ### test a non-subplot figure object from go.Figure
+    """test a non-subplot figure object from go.Figure"""
     trace1 = go.Scatter(x=[1, 2, 3, 4], y=[1, 2, 2, 1])
     trace2 = go.Scatter(x=[1, 2, 3, 4], y=[4, 3, 2, 1], yaxis="y2")
     data = [trace1, trace2]
@@ -380,19 +379,19 @@ def test_supplied_yref_on_non_subplot_figure_object():
 
 
 def test_supplied_yref_on_multi_plot_subplot():
-    ### test multiple subploted figure object with subplots.make_subplots
+    """test multiple subploted figure object with subplots.make_subplots"""
     fig = make_subplots(
         rows=1,
         cols=2,
         shared_yaxes=False,
         specs=[[{"secondary_y": True}, {"secondary_y": True}]],
     )
-    ### Add traces to the first subplot
+    # Add traces to the first subplot
     fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3]), row=1, col=1)
     fig.add_trace(
         go.Scatter(x=[1, 2, 3], y=[3, 2, 1], yaxis="y2"), row=1, col=1, secondary_y=True
     )
-    ### Add traces to the second subplot
+    # Add traces to the second subplot
     fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3], yaxis="y"), row=1, col=2)
     fig.add_trace(
         go.Scatter(x=[1, 2, 3], y=[1, 1, 2], yaxis="y2"), row=1, col=2, secondary_y=True

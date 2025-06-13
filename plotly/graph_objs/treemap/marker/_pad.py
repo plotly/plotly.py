@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Pad(_BaseTraceHierarchyType):
-
     _parent_path_str = "treemap.marker"
     _path_str = "treemap.marker.pad"
     _valid_props = {"b", "l", "r", "t"}
@@ -131,12 +130,10 @@ class Pad(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.treemap.marker.Pad
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.marker.Pad`"""
-            )
+an instance of :class:`plotly.graph_objs.treemap.marker.Pad`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

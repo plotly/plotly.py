@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Pattern(_BaseTraceHierarchyType):
-
     _parent_path_str = "sunburst.marker"
     _path_str = "sunburst.marker.pattern"
     _valid_props = {
@@ -410,12 +409,10 @@ class Pattern(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.sunburst.marker.Pattern
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.sunburst.marker.Pattern`"""
-            )
+an instance of :class:`plotly.graph_objs.sunburst.marker.Pattern`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

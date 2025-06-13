@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
-
     _parent_path_str = "choropleth.unselected"
     _path_str = "choropleth.unselected.marker"
     _valid_props = {"opacity"}
@@ -68,12 +67,10 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.choropleth.unselected.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.choropleth.unselected.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.choropleth.unselected.Marker`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

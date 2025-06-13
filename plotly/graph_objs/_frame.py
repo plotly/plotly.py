@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Frame(_BaseFrameHierarchyType):
-
     _parent_path_str = ""
     _path_str = "frame"
     _valid_props = {"baseframe", "data", "group", "layout", "name", "traces"}
@@ -203,12 +202,10 @@ class Frame(_BaseFrameHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Frame
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Frame`"""
-            )
+an instance of :class:`plotly.graph_objs.Frame`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -89,7 +89,6 @@ def figure_rst(figure_list, sources_dir):
     if not figure_paths:
         return images_rst
     figure_name = figure_paths[0]
-    ext = os.path.splitext(figure_name)[1]
     figure_path = os.path.join("images", os.path.basename(figure_name))
     images_rst = SINGLE_HTML % figure_path
     return images_rst

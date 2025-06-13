@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Outsidetextfont(_BaseTraceHierarchyType):
-
     _parent_path_str = "treemap"
     _path_str = "treemap.outsidetextfont"
     _valid_props = {
@@ -562,12 +561,10 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.treemap.Outsidetextfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.Outsidetextfont`"""
-            )
+an instance of :class:`plotly.graph_objs.treemap.Outsidetextfont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

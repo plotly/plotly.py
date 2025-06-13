@@ -1,13 +1,9 @@
-import sys
 from unittest import TestCase
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 
-if sys.version_info >= (3, 3):
-    from unittest.mock import MagicMock
-else:
-    from mock import MagicMock
+from unittest.mock import MagicMock
 
 
 class TestAddTracesMessage(TestCase):
@@ -39,7 +35,6 @@ class TestAddTracesMessage(TestCase):
         )
 
     def test_add_traces(self):
-
         # Add two traces
         self.figure.add_traces(
             [
@@ -56,8 +51,6 @@ class TestAddTracesMessage(TestCase):
         self.assertEqual(self.figure.data[-1].line.color, "cyan")
 
         # Check message
-        new_uid1 = self.figure.data[-2].uid
-        new_uid2 = self.figure.data[-1].uid
         self.figure._send_addTraces_msg.assert_called_once_with(
             [
                 {"type": "sankey", "arrangement": "snap"},
