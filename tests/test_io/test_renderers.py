@@ -11,6 +11,7 @@ import plotly.graph_objs as go
 import plotly.io as pio
 from plotly.offline import get_plotlyjs
 from plotly.io._utils import plotly_cdn_url
+from plotly.io._html import _generate_sri_hash
 
 import unittest.mock as mock
 from unittest.mock import MagicMock
@@ -292,12 +293,19 @@ def test_repr_html(renderer):
     # id number of figure
     id_html = str_html.split('document.getElementById("')[1].split('")')[0]
     id_pattern = "cd462b94-79ce-42a2-887f-2650a761a144"
+
+    # Calculate the SRI hash dynamically
+    plotlyjs_content = get_plotlyjs()
+    sri_hash = _generate_sri_hash(plotlyjs_content)
+
     template = (
         '<div>                        <script type="text/javascript">'
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
         '<script charset="utf-8" src="'
         + plotly_cdn_url()
-        + '"></script>                '
+        + '" integrity="'
+        + sri_hash
+        + '" crossorigin="anonymous"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
         'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
         "                window.PLOTLYENV=window.PLOTLYENV || {};"
