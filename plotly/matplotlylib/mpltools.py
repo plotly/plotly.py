@@ -451,9 +451,9 @@ def prep_ticks(ax, index, ax_type, props):
             tick0 = tickvalues[0]
             dticks = [
                 round(tickvalues[i] - tickvalues[i - 1], 12)
-                for i in range(1, len(tickvalues) - 1)
+                for i in range(1, len(tickvalues))
             ]
-            if all([dticks[i] == dticks[i - 1] for i in range(1, len(dticks) - 1)]):
+            if all([dticks[i] == dticks[i - 1] for i in range(1, len(dticks))]):
                 dtick = tickvalues[1] - tickvalues[0]
             else:
                 warnings.warn(
@@ -463,6 +463,8 @@ def prep_ticks(ax, index, ax_type, props):
                 raise TypeError
         except (IndexError, TypeError):
             axis_dict["nticks"] = props["axes"][index]["nticks"]
+            if props["axes"][index]["tickvalues"] is not None:
+                axis_dict["tickvals"] = props["axes"][index]["tickvalues"]
         else:
             axis_dict["tick0"] = tick0
             axis_dict["dtick"] = dtick
@@ -511,6 +513,13 @@ def prep_ticks(ax, index, ax_type, props):
 
     if formatter == "LogFormatterMathtext":
         axis_dict["exponentformat"] = "e"
+    elif formatter == "FuncFormatter" and props["axes"][index]["tickformat"] is not None:
+        to_remove = ["dtick" "tickmode"]
+        for key in to_remove:
+            if key in axis_dict:
+                axis_dict.pop(key)
+        axis_dict["ticktext"] = props["axes"][index]["tickformat"]
+        axis_dict["tickvals"] = props["axes"][index]["tickvalues"]
     return axis_dict
 
 
