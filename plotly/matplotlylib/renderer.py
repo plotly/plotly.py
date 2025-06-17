@@ -371,6 +371,12 @@ class PlotlyRenderer(Renderer):
                 x1 = props["data"][1][0]
                 y1 = props["data"][1][1]
 
+                lines_shape = shape.copy()
+                ignored_props = ["symbol", "size"]
+                for prop in ignored_props:
+                    if prop in lines_shape:
+                        lines_shape.pop(prop)
+
                 legend_shape = go.layout.Shape(
                     type=mode,
                     xref="paper",
@@ -379,7 +385,7 @@ class PlotlyRenderer(Renderer):
                     y0=y + 0.02,
                     x1=x1,
                     y1=y1 + 0.02,
-                    **shape,
+                    **lines_shape,
                 )
             else:
                 self.msg += "not sure how to handle this element\n"
