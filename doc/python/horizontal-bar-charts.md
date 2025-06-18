@@ -91,8 +91,8 @@ fig.add_trace(go.Bar(
     name='SF Zoo',
     orientation='h',
     marker=dict(
-        color='rgba(246, 78, 139, 0.6)',
-        line=dict(color='rgba(246, 78, 139, 1.0)', width=3)
+        color='hotpink',
+        line=dict(color='deeppink', width=3)
     )
 ))
 fig.add_trace(go.Bar(
@@ -101,8 +101,8 @@ fig.add_trace(go.Bar(
     name='LA Zoo',
     orientation='h',
     marker=dict(
-        color='rgba(58, 71, 80, 0.6)',
-        line=dict(color='rgba(58, 71, 80, 1.0)', width=3)
+        color='dimgray',
+        line=dict(color='black', width=3)
     )
 ))
 
@@ -155,16 +155,15 @@ fig.show()
 
 ### Color Palette for Bar Chart
 
+This bar chart uses a sequential palette to show gradations of responses.  Additional color options for sequential palettes are available at [The Urban Institute](https://urbaninstitute.github.io/graphics-styleguide/#color) and [Colorbrewer](https://colorbrewer2.org/#type=sequential)
+
 ```python
 import plotly.graph_objects as go
 
 top_labels = ['Strongly<br>agree', 'Agree', 'Neutral', 'Disagree',
               'Strongly<br>disagree']
 
-colors = ['rgba(38, 24, 74, 0.8)', 'rgba(71, 58, 131, 0.8)',
-          'rgba(122, 120, 168, 0.8)', 'rgba(164, 163, 204, 0.85)',
-          'rgba(190, 192, 213, 1)']
-
+colors = ['DarkBlue', 'MediumBlue', 'DarkSlateBlue', 'mediumpurple', 'thistle']
 x_data = [[21, 30, 21, 16, 12],
           [24, 31, 19, 15, 11],
           [27, 26, 23, 11, 13],
@@ -185,7 +184,7 @@ for i in range(0, len(x_data[0])):
             orientation='h',
             marker=dict(
                 color=colors[i],
-                line=dict(color='rgb(248, 248, 249)', width=1)
+                line=dict(color='ghostwhite', width=1)
             )
         ))
 
@@ -204,8 +203,8 @@ fig.update_layout(
         zeroline=False,
     ),
     barmode='stack',
-    paper_bgcolor='rgb(248, 248, 255)',
-    plot_bgcolor='rgb(248, 248, 255)',
+    paper_bgcolor='lavenderblush',
+    plot_bgcolor='lavenderblush',
     margin=dict(l=120, r=10, t=140, b=80),
     showlegend=False,
 )
@@ -219,14 +218,14 @@ for yd, xd in zip(y_data, x_data):
                             xanchor='right',
                             text=str(yd),
                             font=dict(family='Arial', size=14,
-                                      color='rgb(67, 67, 67)'),
+                                      color='dimgray'),
                             showarrow=False, align='right'))
     # labeling the first percentage of each bar (x_axis)
     annotations.append(dict(xref='x', yref='y',
                             x=xd[0] / 2, y=yd,
                             text=str(xd[0]) + '%',
                             font=dict(family='Arial', size=14,
-                                      color='rgb(248, 248, 255)'),
+                                      color='white'),
                             showarrow=False))
     # labeling the first Likert scale (on the top)
     if yd == y_data[-1]:
@@ -234,7 +233,7 @@ for yd, xd in zip(y_data, x_data):
                                 x=xd[0] / 2, y=1.1,
                                 text=top_labels[0],
                                 font=dict(family='Arial', size=14,
-                                          color='rgb(67, 67, 67)'),
+                                          color='dimgray'),
                                 showarrow=False))
     space = xd[0]
     for i in range(1, len(xd)):
@@ -243,7 +242,7 @@ for yd, xd in zip(y_data, x_data):
                                     x=space + (xd[i]/2), y=yd,
                                     text=str(xd[i]) + '%',
                                     font=dict(family='Arial', size=14,
-                                              color='rgb(248, 248, 255)'),
+                                              color='ghostwhite'),
                                     showarrow=False))
             # labeling the Likert scale
             if yd == y_data[-1]:
@@ -251,7 +250,7 @@ for yd, xd in zip(y_data, x_data):
                                         x=space + (xd[i]/2), y=1.1,
                                         text=top_labels[i],
                                         font=dict(family='Arial', size=14,
-                                                  color='rgb(67, 67, 67)'),
+                                                  color='dimgray'),
                                         showarrow=False))
             space += xd[i]
 
@@ -357,9 +356,9 @@ fig.add_trace(go.Bar(
     x=y_saving,
     y=x,
     marker=dict(
-        color='rgba(50, 171, 96, 0.6)',
+        color='mediumseagreen',
         line=dict(
-            color='rgba(50, 171, 96, 1.0)',
+            color='seagreen',
             width=1),
     ),
     name='Household savings, percentage of household disposable income',
@@ -369,7 +368,7 @@ fig.add_trace(go.Bar(
 fig.add_trace(go.Scatter(
     x=y_net_worth, y=x,
     mode='lines+markers',
-    line_color='rgb(128, 0, 128)',
+    line_color='purple',
     name='Household net worth, Million USD/capita',
 ), 1, 2)
 
@@ -385,7 +384,7 @@ fig.update_layout(
         showgrid=False,
         showline=True,
         showticklabels=False,
-        linecolor='rgba(102, 102, 102, 0.8)',
+        linecolor='gray',
         linewidth=2,
         domain=[0, 0.85],
     ),
@@ -407,8 +406,8 @@ fig.update_layout(
     ),
     legend=dict(x=0.029, y=1.038, font_size=10),
     margin=dict(l=100, r=20, t=70, b=70),
-    paper_bgcolor='rgb(248, 248, 255)',
-    plot_bgcolor='rgb(248, 248, 255)',
+    paper_bgcolor='lavenderblush',
+    plot_bgcolor='lavenderblush',
 )
 
 annotations = []
@@ -423,14 +422,14 @@ for ydn, yd, xd in zip(y_nw, y_s, x):
                             y=xd, x=ydn - 20000,
                             text='{:,}'.format(ydn) + 'M',
                             font=dict(family='Arial', size=12,
-                                      color='rgb(128, 0, 128)'),
+                                      color='purple'),
                             showarrow=False))
     # labeling the bar net worth
     annotations.append(dict(xref='x1', yref='y1',
                             y=xd, x=yd + 3,
                             text=str(yd) + '%',
-                            font=dict(family='Arial', size=12,
-                                      color='rgb(50, 171, 96)'),
+                            font=dict(family='Arial', size=16,
+                                      color='mediumseagreen'),
                             showarrow=False))
 # Source
 annotations.append(dict(xref='paper', yref='paper',
@@ -439,7 +438,7 @@ annotations.append(dict(xref='paper', yref='paper',
                              '(2015), Household savings (indicator), ' +
                              'Household net worth (indicator). doi: ' +
                              '10.1787/cfc6f499-en (Accessed on 05 June 2015)',
-                        font=dict(family='Arial', size=10, color='rgb(150,150,150)'),
+                        font=dict(family='Arial', size=10, color='gray'),
                         showarrow=False))
 
 fig.update_layout(annotations=annotations)
