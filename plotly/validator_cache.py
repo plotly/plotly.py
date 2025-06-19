@@ -29,7 +29,6 @@ class ValidatorCache(object):
 
         key = (parent_path, prop_name)
         if key not in ValidatorCache._cache:
-
             if "." not in parent_path and prop_name == "type":
                 # Special case for .type property of traces
                 validator = LiteralValidator("type", parent_path, parent_path)

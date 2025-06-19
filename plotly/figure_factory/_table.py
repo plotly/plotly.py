@@ -18,7 +18,7 @@ def validate_table(table_text, font_colors):
     font_colors_len_options = [1, 3, len(table_text)]
     if len(font_colors) not in font_colors_len_options:
         raise exceptions.PlotlyError(
-            "Oops, font_colors should be a list " "of length 1, 3 or len(text)"
+            "Oops, font_colors should be a list of length 1, 3 or len(text)"
         )
 
 
@@ -250,7 +250,6 @@ class _Table(object):
         :rtype (list) annotations: list of annotations for each cell of the
             table.
         """
-        table_matrix = _Table.get_table_matrix(self)
         all_font_colors = _Table.get_table_font_color(self)
         annotations = []
         for n, row in enumerate(self.table_text):

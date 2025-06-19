@@ -6,7 +6,8 @@ from ...test_optional.test_utils.test_utils import np_nan
 
 
 # Fixtures
-# --------
+
+
 @pytest.fixture()
 def validator():
     return StringValidator("prop", "parent")
@@ -50,9 +51,10 @@ def validator_no_blanks_aok():
 
 
 # Array not ok
-# ------------
+
+
 # Not strict
-# ### Acceptance ###
+# Acceptance
 @pytest.mark.parametrize(
     "val", ["bar", 234, np_nan(), "HELLO!!!", "world!@#$%^&*()", "", "\u03bc"]
 )
@@ -61,7 +63,7 @@ def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == expected
 
 
-# ### Rejection by value ###
+# Rejection by value
 @pytest.mark.parametrize("val", [(), [], [1, 2, 3], set()])
 def test_rejection(val, validator):
     with pytest.raises(ValueError) as validation_failure:
@@ -71,7 +73,8 @@ def test_rejection(val, validator):
 
 
 # Valid values
-# ------------
+
+
 @pytest.mark.parametrize("val", ["foo", "BAR", ""])
 def test_acceptance_values(val, validator_values):
     assert validator_values.validate_coerce(val) == val
@@ -82,11 +85,11 @@ def test_rejection_values(val, validator_values):
     with pytest.raises(ValueError) as validation_failure:
         validator_values.validate_coerce(val)
 
-    assert "Invalid value".format(val=val) in str(validation_failure.value)
+    assert "Invalid value" in str(validation_failure.value)
     assert "['foo', 'BAR', '']" in str(validation_failure.value)
 
 
-# ### No blanks ###
+# No blanks
 @pytest.mark.parametrize("val", ["bar", "HELLO!!!", "world!@#$%^&*()", "\u03bc"])
 def test_acceptance_no_blanks(val, validator_no_blanks):
     assert validator_no_blanks.validate_coerce(val) == val
@@ -101,14 +104,15 @@ def test_rejection_no_blanks(val, validator_no_blanks):
 
 
 # Strict
-# ------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize("val", ["bar", "HELLO!!!", "world!@#$%^&*()", "", "\u03bc"])
 def test_acceptance_strict(val, validator_strict):
     assert validator_strict.validate_coerce(val) == val
 
 
-# ### Rejection by value ###
+# Rejection by value
 @pytest.mark.parametrize("val", [(), [], [1, 2, 3], set(), np_nan(), np.pi, 23])
 def test_rejection_strict(val, validator_strict):
     with pytest.raises(ValueError) as validation_failure:
@@ -118,8 +122,9 @@ def test_rejection_strict(val, validator_strict):
 
 
 # Array ok
-# --------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize("val", ["foo", "BAR", "", "baz", "\u03bc"])
 def test_acceptance_aok_scalars(val, validator_aok):
     assert validator_aok.validate_coerce(val) == val
@@ -146,7 +151,7 @@ def test_acceptance_aok_list(val, validator_aok):
         assert coerce_val == val
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", [["foo", ()], ["foo", 3, 4], [3, 2, 1]])
 def test_rejection_aok(val, validator_aok_strict):
     with pytest.raises(ValueError) as validation_failure:
@@ -155,7 +160,7 @@ def test_rejection_aok(val, validator_aok_strict):
     assert "Invalid element(s)" in str(validation_failure.value)
 
 
-# ### Rejection by value ###
+# Rejection by value
 @pytest.mark.parametrize(
     "val", [["foo", "bar"], ["3", "4"], ["BAR", "BAR", "hello!"], ["foo", None]]
 )
@@ -166,7 +171,7 @@ def test_rejection_aok_values(val, validator_aok_values):
     assert "Invalid element(s)" in str(validation_failure.value)
 
 
-# ### No blanks ###
+# No blanks
 @pytest.mark.parametrize(
     "val",
     [

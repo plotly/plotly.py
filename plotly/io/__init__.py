@@ -1,3 +1,5 @@
+# ruff: noqa: F401
+
 from _plotly_utils.importers import relative_import
 from typing import TYPE_CHECKING
 

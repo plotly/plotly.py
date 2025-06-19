@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Bounds(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.map"
     _path_str = "layout.map.bounds"
     _valid_props = {"east", "north", "south", "west"}
@@ -145,12 +144,10 @@ class Bounds(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.Bounds
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.Bounds`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.Bounds`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

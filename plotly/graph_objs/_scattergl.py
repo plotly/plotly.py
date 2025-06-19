@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Scattergl(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "scattergl"
     _valid_props = {
@@ -2210,12 +2209,10 @@ class Scattergl(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Scattergl
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scattergl`"""
-            )
+an instance of :class:`plotly.graph_objs.Scattergl`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

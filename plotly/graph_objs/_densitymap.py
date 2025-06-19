@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Densitymap(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "densitymap"
     _valid_props = {
@@ -1661,12 +1660,10 @@ class Densitymap(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Densitymap
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Densitymap`"""
-            )
+an instance of :class:`plotly.graph_objs.Densitymap`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

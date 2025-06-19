@@ -1,7 +1,7 @@
 from unittest import skip
 
 import plotly.graph_objs as go
-from plotly.graph_objs import Data, Figure, Layout, Line, Scatter, scatter, XAxis
+from plotly.graph_objs import Data, Figure, Layout, Line, Scatter, XAxis
 from ...utils import strip_dict_params
 
 from unittest import TestCase

@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Textfont(_BaseTraceHierarchyType):
-
     _parent_path_str = "scattermapbox"
     _path_str = "scattermapbox.textfont"
     _valid_props = {"color", "family", "size", "style", "weight"}
@@ -186,12 +185,10 @@ class Textfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scattermapbox.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattermapbox.Textfont`"""
-            )
+an instance of :class:`plotly.graph_objs.scattermapbox.Textfont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

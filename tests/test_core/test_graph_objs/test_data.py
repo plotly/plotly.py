@@ -6,17 +6,7 @@ A module intended for use with Nose.
 
 """
 
-from unittest import skip
-
-
-from plotly.exceptions import (
-    PlotlyError,
-    PlotlyDictKeyError,
-    PlotlyDictValueError,
-    PlotlyDataTypeError,
-    PlotlyListEntryError,
-)
-from plotly.graph_objs import Annotations, Data, Figure, Layout
+from plotly.graph_objs import Annotations, Data
 
 
 def setup():

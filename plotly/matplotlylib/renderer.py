@@ -199,7 +199,6 @@ class PlotlyRenderer(Renderer):
         self.x_is_mpl_date = False
 
     def draw_bars(self, bars):
-
         # sort bars according to bar containers
         mpl_traces = []
         for container in self.bar_containers:
@@ -300,7 +299,7 @@ class PlotlyRenderer(Renderer):
         )  # TODO ditto
         if len(bar["x"]) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
-            self.plotly_fig.add_trace(bar),
+            (self.plotly_fig.add_trace(bar),)
             if bar_gap is not None:
                 self.plotly_fig["layout"]["bargap"] = bar_gap
         else:
@@ -498,13 +497,13 @@ class PlotlyRenderer(Renderer):
                 marked_line["x"] = mpltools.mpl_dates_to_datestrings(
                     marked_line["x"], formatter
                 )
-            self.plotly_fig.add_trace(marked_line),
+            (self.plotly_fig.add_trace(marked_line),)
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
             # dealing with legend graphical elements
             self.draw_legend_shapes(mode=mode, shape=shape, **props)
         else:
-            self.msg += "    Line didn't have 'data' coordinates, " "not drawing\n"
+            self.msg += "    Line didn't have 'data' coordinates, not drawing\n"
             warnings.warn(
                 "Bummer! Plotly can currently only draw Line2D "
                 "objects from matplotlib that are in 'data' "
@@ -568,7 +567,7 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Drawing path collection as markers\n"
             self.draw_marked_line(**scatter_props)
         else:
-            self.msg += "    Path collection not linked to 'data', " "not drawing\n"
+            self.msg += "    Path collection not linked to 'data', not drawing\n"
             warnings.warn(
                 "Dang! That path collection is out of this "
                 "world. I totally don't know what to do with "
@@ -669,9 +668,7 @@ class PlotlyRenderer(Renderer):
         else:  # just a regular text annotation...
             self.msg += "      Text object is a normal annotation\n"
             if props["coordinates"] != "data":
-                self.msg += (
-                    "        Text object isn't linked to 'data' " "coordinates\n"
-                )
+                self.msg += "        Text object isn't linked to 'data' coordinates\n"
                 x_px, y_px = (
                     props["mplobj"].get_transform().transform(props["position"])
                 )
@@ -681,7 +678,7 @@ class PlotlyRenderer(Renderer):
                 xanchor = props["style"]["halign"]  # no difference here!
                 yanchor = mpltools.convert_va(props["style"]["valign"])
             else:
-                self.msg += "        Text object is linked to 'data' " "coordinates\n"
+                self.msg += "        Text object is linked to 'data' coordinates\n"
                 x, y = props["position"]
                 axis_ct = self.axis_ct
                 xaxis = self.plotly_fig["layout"]["xaxis{0}".format(axis_ct)]
@@ -757,9 +754,7 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "        Attempting to draw a title\n"
         if len(self.mpl_fig.axes) > 1:
-            self.msg += (
-                "          More than one subplot, adding title as " "annotation\n"
-            )
+            self.msg += "          More than one subplot, adding title as annotation\n"
             x_px, y_px = props["mplobj"].get_transform().transform(props["position"])
             x, y = mpltools.display_to_paper(x_px, y_px, self.plotly_fig["layout"])
             annotation = go.layout.Annotation(
@@ -777,9 +772,7 @@ class PlotlyRenderer(Renderer):
             )
             self.plotly_fig["layout"]["annotations"] += (annotation,)
         else:
-            self.msg += (
-                "          Only one subplot found, adding as a " "plotly title\n"
-            )
+            self.msg += "          Only one subplot found, adding as a plotly title\n"
             self.plotly_fig["layout"]["title"] = props["text"]
             title_font = dict(
                 size=props["style"]["fontsize"], color=props["style"]["color"]

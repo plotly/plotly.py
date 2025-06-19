@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Threshold(_BaseTraceHierarchyType):
-
     _parent_path_str = "indicator.gauge"
     _path_str = "indicator.gauge.threshold"
     _valid_props = {"line", "thickness", "value"}
@@ -115,12 +114,10 @@ class Threshold(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.gauge.Threshold
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

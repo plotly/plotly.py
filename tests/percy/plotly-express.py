@@ -9,8 +9,7 @@ import pandas as pd
 # this directory
 dir_name = os.path.join("tests", "percy")
 
-# #### Scatter and Line plots
-
+# Scatter and Line plots
 
 iris = px.data.iris()
 fig = px.scatter(iris, x="sepal_width", y="sepal_length")
@@ -196,8 +195,7 @@ gapminder = px.data.gapminder()
 fig = px.area(gapminder, x="year", y="pop", color="continent", line_group="country")
 fig.write_html(os.path.join(dir_name, "area.html"))
 
-# #### Visualize Distributions
-
+# Visualize Distributions
 
 iris = px.data.iris()
 fig = px.density_contour(iris, x="sepal_width", y="sepal_length")
@@ -286,8 +284,7 @@ fig = px.violin(
 )
 fig.write_html(os.path.join(dir_name, "violin.html"))
 
-# #### Ternary Coordinates
-
+# Ternary Coordinates
 
 election = px.data.election()
 fig = px.scatter_ternary(
@@ -318,8 +315,7 @@ img_rgb = np.array(
 fig = px.imshow(img_rgb)
 fig.write_html(os.path.join(dir_name, "imshow.html"))
 
-# #### 3D Coordinates
-
+# 3D Coordinates
 
 election = px.data.election()
 fig = px.scatter_3d(
@@ -342,8 +338,7 @@ fig = px.line_3d(
 )
 fig.write_html(os.path.join(dir_name, "line_3d.html"))
 
-# #### Polar Coordinates
-
+# Polar Coordinates
 
 wind = px.data.wind()
 fig = px.scatter_polar(
@@ -380,8 +375,7 @@ fig = px.bar_polar(
 )
 fig.write_html(os.path.join(dir_name, "bar_polar.html"))
 
-# #### Maps
-
+# Maps
 
 carshare = px.data.carshare()
 fig = px.scatter_map(
