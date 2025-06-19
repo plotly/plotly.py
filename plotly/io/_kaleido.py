@@ -11,7 +11,7 @@ from plotly.io._utils import validate_coerce_fig_to_dict, broadcast_args_to_dict
 from plotly.io._defaults import defaults
 
 ENGINE_SUPPORT_TIMELINE = "September 2025"
-ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS = False
+ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS = True
 
 PLOTLY_GET_CHROME_ERROR_MSG = """
 
