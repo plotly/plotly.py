@@ -3,7 +3,11 @@ import pytest
 from plotly import optional_imports
 from ...utils import compare_dict, strip_dict_params
 from ...test_optional.optional_utils import run_fig
-from ...test_optional.test_matplotlylib.data.scatter import *
+from ...test_optional.test_matplotlylib.data.scatter import (
+    D,
+    DOUBLE_SCATTER,
+    SIMPLE_SCATTER,
+)
 
 matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 

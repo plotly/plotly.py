@@ -224,7 +224,6 @@ class TestAssignmentCompound(TestCase):
         assert d1 == d2
 
     def test_nested_update_obj(self):
-
         self.scatter.update(
             marker={
                 "colorbar": go.scatter.marker.ColorBar(bgcolor="yellow", thickness=5)
@@ -244,7 +243,6 @@ class TestAssignmentCompound(TestCase):
         assert d1 == d2
 
     def test_nested_update_dict(self):
-
         self.scatter.update(marker={"colorbar": dict(bgcolor="yellow", thickness=5)})
 
         assert isinstance(
@@ -432,7 +430,6 @@ class TestAssignCompoundArray(TestCase):
         assert d1 == d2
 
     def test_assign_double_nested_update_dict(self):
-
         # Initialize empty updatemenus
         self.layout.updatemenus = [{}, {}]
 
@@ -448,7 +445,6 @@ class TestAssignCompoundArray(TestCase):
         assert d1 == d2
 
     def test_assign_double_nested_update_array(self):
-
         # Initialize empty updatemenus
         self.layout.updatemenus = [{}, {}]
 

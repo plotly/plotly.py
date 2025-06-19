@@ -4,7 +4,6 @@ from . import version_skip
 
 @version_skip
 def test_lazy_imports():
-
     # plotly not imported yet
     assert "plotly" not in sys.modules
 

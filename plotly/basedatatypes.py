@@ -36,15 +36,15 @@ def _len_dict_item(item):
     convert to a string before calling len on it.
     """
     try:
-        l = len(item)
+        temp = len(item)
     except TypeError:
         try:
-            l = len("%d" % (item,))
+            temp = len("%d" % (item,))
         except TypeError:
             raise ValueError(
                 "Cannot find string length of an item that is not string-like nor an integer."
             )
-    return l
+    return temp
 
 
 def _str_to_dict_path_full(key_path_str):
@@ -86,6 +86,7 @@ def _str_to_dict_path_full(key_path_str):
             return key.replace("-", "_")
 
         key_path2b = list(map(_make_hyphen_key, key_path2))
+
         # Here we want to split up each non-empty string in the list at
         # underscores and recombine the strings using chomp_empty_strings so
         # that leading, trailing and multiple _ will be preserved
@@ -104,7 +105,7 @@ def _str_to_dict_path_full(key_path_str):
         # the list ("lift" the items out of the sublists)
         key_path2c = list(
             reduce(
-                lambda x, y: x + y if type(y) == type(list()) else x + [y],
+                lambda x, y: x + y if isinstance(y, list) else x + [y],
                 map(_split_and_chomp, key_path2b),
                 [],
             )
@@ -139,7 +140,7 @@ def _remake_path_from_tuple(props):
         return ""
 
     def _add_square_brackets_to_number(n):
-        if type(n) == type(int()):
+        if isinstance(n, int):
             return "[%d]" % (n,)
         return n
 
@@ -385,6 +386,18 @@ def _generator(i):
         yield x
 
 
+def _set_property_provided_value(obj, name, arg, provided):
+    """
+    Initialize a property of this object using the provided value
+    or a value popped from the arguments dictionary. If neither
+    is available, do not set the property.
+    """
+    val = arg.pop(name, None)
+    val = provided if provided is not None else val
+    if val is not None:
+        obj[name] = val
+
+
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
@@ -455,7 +468,11 @@ class BaseFigure(object):
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         """
-        from .validators import DataValidator, LayoutValidator, FramesValidator
+        from .validator_cache import ValidatorCache
+
+        data_validator = ValidatorCache.get_validator("", "data")
+        frames_validator = ValidatorCache.get_validator("", "frames")
+        layout_validator = ValidatorCache.get_validator("", "layout")
 
         super(BaseFigure, self).__init__()
 
@@ -490,7 +507,6 @@ class BaseFigure(object):
         elif isinstance(data, dict) and (
             "data" in data or "layout" in data or "frames" in data
         ):
-
             # Bring over subplot fields
             self._grid_str = data.get("_grid_str", None)
             self._grid_ref = data.get("_grid_ref", None)
@@ -507,7 +523,10 @@ class BaseFigure(object):
         # ### Construct data validator ###
         # This is the validator that handles importing sequences of trace
         # objects
-        self._data_validator = DataValidator(set_uid=self._set_trace_uid)
+        # We make a copy because we are overriding the set_uid attribute
+        # and do not want to alter all other uses of the cached data_validator
+        self._data_validator = copy(data_validator)
+        self._data_validator.set_uid = self._set_trace_uid
 
         # ### Import traces ###
         data = self._data_validator.validate_coerce(
@@ -550,7 +569,7 @@ class BaseFigure(object):
         # ------
         # ### Construct layout validator ###
         # This is the validator that handles importing Layout objects
-        self._layout_validator = LayoutValidator()
+        self._layout_validator = layout_validator
 
         # ### Import Layout ###
         self._layout_obj = self._layout_validator.validate_coerce(
@@ -585,7 +604,7 @@ class BaseFigure(object):
         # ### Construct frames validator ###
         # This is the validator that handles importing sequences of frame
         # objects
-        self._frames_validator = FramesValidator()
+        self._frames_validator = frames_validator
 
         # ### Import frames ###
         self._frame_objs = self._frames_validator.validate_coerce(
@@ -658,7 +677,6 @@ class BaseFigure(object):
         return (self.__class__, (props,))
 
     def __setitem__(self, prop, value):
-
         # Normalize prop
         # --------------
         # Convert into a property tuple
@@ -721,7 +739,6 @@ class BaseFigure(object):
             raise AttributeError(prop)
 
     def __getitem__(self, prop):
-
         # Normalize prop
         # --------------
         # Convert into a property tuple
@@ -833,6 +850,14 @@ class BaseFigure(object):
             pio.show(self)
         else:
             print(repr(self))
+
+    def _set_property(self, name, arg, provided):
+        """
+        Initialize a property of this object using the provided value
+        or a value popped from the arguments dictionary. If neither
+        is available, do not set the property.
+        """
+        _set_property_provided_value(self, name, arg, provided)
 
     def update(self, dict1=None, overwrite=False, **kwargs):
         """
@@ -953,7 +978,6 @@ class BaseFigure(object):
 
     @data.setter
     def data(self, new_data):
-
         # Validate new_data
         # -----------------
         err_header = (
@@ -1047,7 +1071,6 @@ class BaseFigure(object):
 
         # ### Check whether a move is needed ###
         if not all([i1 == i2 for i1, i2 in zip(new_inds, current_inds)]):
-
             # #### Save off index lists for moveTraces message ####
             msg_current_inds = current_inds
             msg_new_inds = new_inds
@@ -1591,6 +1614,7 @@ is of type {subplot_type}.""".format(
                 )
             ):
                 return self
+
             # in case the user specified they wanted an axis to refer to the
             # domain of that axis and not the data, append ' domain' to the
             # computed axis accordingly
@@ -1709,7 +1733,6 @@ is of type {subplot_type}.""".format(
         # Process each key
         # ----------------
         for key_path_str, v in restyle_data.items():
-
             # Track whether any of the new values are cause a change in
             # self._data
             any_vals_changed = False
@@ -1725,20 +1748,16 @@ is of type {subplot_type}.""".format(
                 trace_v = v[i % len(v)] if isinstance(v, list) else v
 
                 if trace_v is not Undefined:
-
                     # Get trace being updated
                     trace_obj = self.data[trace_ind]
 
                     # Validate key_path_str
                     if not BaseFigure._is_key_path_compatible(key_path_str, trace_obj):
-
                         trace_class = trace_obj.__class__.__name__
                         raise ValueError(
                             """
 Invalid property path '{key_path_str}' for trace class {trace_class}
-""".format(
-                                key_path_str=key_path_str, trace_class=trace_class
-                            )
+""".format(key_path_str=key_path_str, trace_class=trace_class)
                         )
 
                     # Apply set operation for this trace and thist value
@@ -1889,7 +1908,6 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Initialize parent dict or list of value to be assigned
         # -----------------------------------------------------
         for kp, key_path_el in enumerate(key_path[:-1]):
-
             # Extend val_parent list if needed
             if isinstance(val_parent, list) and isinstance(key_path_el, int):
                 while len(val_parent) <= key_path_el:
@@ -1984,9 +2002,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         of length {n} (The number of traces being added)
 
         Received: {invalid}
-        """.format(
-            name=name, n=n, invalid=invalid
-        )
+        """.format(name=name, n=n, invalid=invalid)
 
         raise ValueError(rows_err_msg)
 
@@ -2274,9 +2290,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         with plotly.tools.make_subplots.
         """
         if self._grid_str is None:
-            raise Exception(
-                "Use plotly.tools.make_subplots " "to create a subplot grid."
-            )
+            raise Exception("Use plotly.tools.make_subplots to create a subplot grid.")
         print(self._grid_str)
 
     def append_trace(self, trace, row, col):
@@ -2546,7 +2560,6 @@ Please use the add_trace method with the row and col parameters.
 
     @layout.setter
     def layout(self, new_layout):
-
         # Validate new layout
         # -------------------
         new_layout = self._layout_validator.validate_coerce(new_layout)
@@ -2641,15 +2654,11 @@ Please use the add_trace method with the row and col parameters.
         # Process each key
         # ----------------
         for key_path_str, v in relayout_data.items():
-
             if not BaseFigure._is_key_path_compatible(key_path_str, self.layout):
-
                 raise ValueError(
                     """
 Invalid property path '{key_path_str}' for layout
-""".format(
-                        key_path_str=key_path_str
-                    )
+""".format(key_path_str=key_path_str)
                 )
 
             # Apply set operation on the layout dict
@@ -2766,7 +2775,6 @@ Invalid property path '{key_path_str}' for layout
         dispatch_plan = {}
 
         for key_path_str in key_path_strs:
-
             key_path = BaseFigure._str_to_dict_path(key_path_str)
             key_path_so_far = ()
             keys_left = key_path
@@ -2943,7 +2951,6 @@ Invalid property path '{key_path_str}' for layout
     def _perform_plotly_update(
         self, restyle_data=None, relayout_data=None, trace_indexes=None
     ):
-
         # Check for early exist
         # ---------------------
         if not restyle_data and not relayout_data:
@@ -3353,7 +3360,6 @@ Invalid property path '{key_path_str}' for layout
         return result
 
     def to_ordered_dict(self, skip_uid=True):
-
         # Initialize resulting OrderedDict
         # --------------------------------
         result = collections.OrderedDict()
@@ -3718,23 +3724,29 @@ Invalid property path '{key_path_str}' for layout
               - 'webp'
               - 'svg'
               - 'pdf'
-              - 'eps' (Requires the poppler library to be installed)
+              - 'eps' (Kaleido v0.* only) (Requires the poppler library to be installed)
 
-            If not specified, will default to `plotly.io.config.default_format`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_format` or `plotly.io.kaleido.scope.default_format` if engine is "kaleido"
+                - `plotly.io.orca.config.default_format` if engine is "orca"
 
         width: int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_width`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_width` or `plotly.io.kaleido.scope.default_width` if engine is "kaleido"
+                - `plotly.io.orca.config.default_width` if engine is "orca"
 
         height: int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_height`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_height` or `plotly.io.kaleido.scope.default_height` if engine is "kaleido"
+                - `plotly.io.orca.config.default_height` if engine is "orca"
 
         scale: int or float or None
             The scale factor to use when exporting the figure. A scale factor
@@ -3742,17 +3754,20 @@ Invalid property path '{key_path_str}' for layout
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to `plotly.io.config.default_scale`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_scale` or `plotly.io.kaleido.scope.default_scale` if engine is "kaliedo"
+                - `plotly.io.orca.config.default_scale` if engine is "orca"
 
         validate: bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
         engine: str
-            Image export engine to use:
-             - "kaleido": Use Kaleido for image export
-             - "orca": Use Orca for image export
-             - "auto" (default): Use Kaleido if installed, otherwise use orca
+            Image export engine to use. This parameter is deprecated and Orca engine support will be
+            dropped in the next major Plotly version. Until then, the following values are supported:
+            - "kaleido": Use Kaleido for image export
+            - "orca": Use Orca for image export
+            - "auto" (default): Use Kaleido if installed, otherwise use Orca
 
         Returns
         -------
@@ -3760,6 +3775,28 @@ Invalid property path '{key_path_str}' for layout
             The image data
         """
         import plotly.io as pio
+        from plotly.io.kaleido import (
+            kaleido_available,
+            kaleido_major,
+            ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS,
+            KALEIDO_DEPRECATION_MSG,
+            ORCA_DEPRECATION_MSG,
+            ENGINE_PARAM_DEPRECATION_MSG,
+        )
+
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            if (
+                kwargs.get("engine", None) in {None, "auto", "kaleido"}
+                and kaleido_available()
+                and kaleido_major() < 1
+            ):
+                warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            if kwargs.get("engine", None) == "orca":
+                warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            if kwargs.get("engine", None):
+                warnings.warn(
+                    ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+                )
 
         return pio.to_image(self, *args, **kwargs)
 
@@ -3781,25 +3818,31 @@ Invalid property path '{key_path_str}' for layout
               - 'webp'
               - 'svg'
               - 'pdf'
-              - 'eps' (Requires the poppler library to be installed)
+              - 'eps' (Kaleido v0.* only) (Requires the poppler library to be installed)
 
             If not specified and `file` is a string then this will default to the
             file extension. If not specified and `file` is not a string then this
-            will default to `plotly.io.config.default_format`
+            will default to:
+                - `plotly.io.defaults.default_format` or `plotly.io.kaleido.scope.default_format` if engine is "kaleido"
+                - `plotly.io.orca.config.default_format` if engine is "orca"
 
         width: int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_width`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_width` or `plotly.io.kaleido.scope.default_width` if engine is "kaleido"
+                - `plotly.io.orca.config.default_width` if engine is "orca"
 
         height: int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to `plotly.io.config.default_height`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_height` or `plotly.io.kaleido.scope.default_height` if engine is "kaleido"
+                - `plotly.io.orca.config.default_height` if engine is "orca"
 
         scale: int or float or None
             The scale factor to use when exporting the figure. A scale factor
@@ -3807,23 +3850,48 @@ Invalid property path '{key_path_str}' for layout
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to `plotly.io.config.default_scale`
+            If not specified, will default to:
+                - `plotly.io.defaults.default_scale` or `plotly.io.kaleido.scope.default_scale` if engine is "kaleido"
+                - `plotly.io.orca.config.default_scale` if engine is "orca"
 
         validate: bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
         engine: str
-            Image export engine to use:
-             - "kaleido": Use Kaleido for image export
-             - "orca": Use Orca for image export
-             - "auto" (default): Use Kaleido if installed, otherwise use orca
+            Image export engine to use. This parameter is deprecated and Orca engine support will be
+            dropped in the next major Plotly version. Until then, the following values are supported:
+            - "kaleido": Use Kaleido for image export
+            - "orca": Use Orca for image export
+            - "auto" (default): Use Kaleido if installed, otherwise use Orca
+
         Returns
         -------
         None
         """
         import plotly.io as pio
+        from plotly.io.kaleido import (
+            kaleido_available,
+            kaleido_major,
+            ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS,
+            KALEIDO_DEPRECATION_MSG,
+            ORCA_DEPRECATION_MSG,
+            ENGINE_PARAM_DEPRECATION_MSG,
+        )
 
+        if ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS:
+            if (
+                kwargs.get("engine", None) in {None, "auto", "kaleido"}
+                and kaleido_available()
+                and kaleido_major() < 1
+            ):
+                warnings.warn(KALEIDO_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            if kwargs.get("engine", None) == "orca":
+                warnings.warn(ORCA_DEPRECATION_MSG, DeprecationWarning, stacklevel=2)
+            if kwargs.get("engine", None):
+                warnings.warn(
+                    ENGINE_PARAM_DEPRECATION_MSG, DeprecationWarning, stacklevel=2
+                )
         return pio.write_image(self, *args, **kwargs)
 
     # Static helpers
@@ -3862,7 +3930,6 @@ Invalid property path '{key_path_str}' for layout
             # Nothing to do
             return
         elif isinstance(plotly_obj, BasePlotlyType):
-
             # Handle initializing subplot ids
             # -------------------------------
             # This should be valid even if xaxis2 hasn't been initialized:
@@ -3899,7 +3966,6 @@ Invalid property path '{key_path_str}' for layout
                 validator = plotly_obj._get_prop_validator(key)
 
                 if isinstance(validator, CompoundValidator) and isinstance(val, dict):
-
                     # Update compound objects recursively
                     # plotly_obj[key].update(val)
                     BaseFigure._perform_update(plotly_obj[key], val)
@@ -3926,7 +3992,6 @@ Invalid property path '{key_path_str}' for layout
                     plotly_obj[key] = val
 
         elif isinstance(plotly_obj, tuple):
-
             if len(update_obj) == 0:
                 # Nothing to do
                 return
@@ -4328,6 +4393,14 @@ class BasePlotlyType(object):
         from .validator_cache import ValidatorCache
 
         return ValidatorCache.get_validator(self._path_str, prop)
+
+    def _set_property(self, name, arg, provided):
+        """
+        Initialize a property of this object using the provided value
+        or a value popped from the arguments dictionary. If neither
+        is available, do not set the property.
+        """
+        _set_property_provided_value(self, name, arg, provided)
 
     @property
     def _validators(self):
@@ -4836,7 +4909,6 @@ class BasePlotlyType(object):
         # ------------------
         # e.g. ('foo',)
         if len(prop) == 1:
-
             # ### Unwrap scalar tuple ###
             prop = prop[0]
 
@@ -5482,7 +5554,6 @@ class BasePlotlyType(object):
             # ### Compute callback paths that changed ###
             common_paths = changed_paths.intersection(set(prop_path_tuples))
             if common_paths:
-
                 # #### Invoke callback ####
                 callback_args = [self[cb_path] for cb_path in prop_path_tuples]
 
@@ -5545,9 +5616,7 @@ class BasePlotlyType(object):
             msg = """
 {class_name} object is not a descendant of a Figure.
 on_change callbacks are not supported in this case.
-""".format(
-                class_name=class_name
-            )
+""".format(class_name=class_name)
             raise ValueError(msg)
 
         # Validate args not empty

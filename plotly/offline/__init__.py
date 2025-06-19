@@ -1,8 +1,10 @@
+# ruff: noqa: F401
 """
 offline
 ======
 This module provides offline functionality.
 """
+
 from .offline import (
     download_plotlyjs,
     get_plotlyjs_version,

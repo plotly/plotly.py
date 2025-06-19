@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Rangeslider(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout.xaxis"
     _path_str = "layout.xaxis.rangeslider"
     _valid_props = {
@@ -19,8 +19,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
         "yaxis",
     }
 
-    # autorange
-    # ---------
     @property
     def autorange(self):
         """
@@ -41,8 +39,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def autorange(self, val):
         self["autorange"] = val
 
-    # bgcolor
-    # -------
     @property
     def bgcolor(self):
         """
@@ -53,42 +49,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -100,8 +61,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def bgcolor(self, val):
         self["bgcolor"] = val
 
-    # bordercolor
-    # -----------
     @property
     def bordercolor(self):
         """
@@ -112,42 +71,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -159,8 +83,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def bordercolor(self, val):
         self["bordercolor"] = val
 
-    # borderwidth
-    # -----------
     @property
     def borderwidth(self):
         """
@@ -180,8 +102,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def borderwidth(self, val):
         self["borderwidth"] = val
 
-    # range
-    # -----
     @property
     def range(self):
         """
@@ -210,8 +130,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def range(self, val):
         self["range"] = val
 
-    # thickness
-    # ---------
     @property
     def thickness(self):
         """
@@ -231,8 +149,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def thickness(self, val):
         self["thickness"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -252,8 +168,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # yaxis
-    # -----
     @property
     def yaxis(self):
         """
@@ -262,20 +176,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
-
-            Supported dict properties:
-
-                range
-                    Sets the range of this axis for the
-                    rangeslider.
-                rangemode
-                    Determines whether or not the range of this
-                    axis in the rangeslider use the same value than
-                    in the main plot when zooming in/out. If
-                    "auto", the autorange will be used. If "fixed",
-                    the `range` is used. If "match", the current
-                    range of the corresponding y-axis on the main
-                    subplot is used.
 
         Returns
         -------
@@ -287,8 +187,6 @@ class Rangeslider(_BaseLayoutHierarchyType):
     def yaxis(self, val):
         self["yaxis"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -381,14 +279,11 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         Rangeslider
         """
-        super(Rangeslider, self).__init__("rangeslider")
-
+        super().__init__("rangeslider")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -396,57 +291,21 @@ class Rangeslider(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeslider
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("autorange", None)
-        _v = autorange if autorange is not None else _v
-        if _v is not None:
-            self["autorange"] = _v
-        _v = arg.pop("bgcolor", None)
-        _v = bgcolor if bgcolor is not None else _v
-        if _v is not None:
-            self["bgcolor"] = _v
-        _v = arg.pop("bordercolor", None)
-        _v = bordercolor if bordercolor is not None else _v
-        if _v is not None:
-            self["bordercolor"] = _v
-        _v = arg.pop("borderwidth", None)
-        _v = borderwidth if borderwidth is not None else _v
-        if _v is not None:
-            self["borderwidth"] = _v
-        _v = arg.pop("range", None)
-        _v = range if range is not None else _v
-        if _v is not None:
-            self["range"] = _v
-        _v = arg.pop("thickness", None)
-        _v = thickness if thickness is not None else _v
-        if _v is not None:
-            self["thickness"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("yaxis", None)
-        _v = yaxis if yaxis is not None else _v
-        if _v is not None:
-            self["yaxis"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("autorange", arg, autorange)
+        self._set_property("bgcolor", arg, bgcolor)
+        self._set_property("bordercolor", arg, bordercolor)
+        self._set_property("borderwidth", arg, borderwidth)
+        self._set_property("range", arg, range)
+        self._set_property("thickness", arg, thickness)
+        self._set_property("visible", arg, visible)
+        self._set_property("yaxis", arg, yaxis)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
