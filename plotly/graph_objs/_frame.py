@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseFrameHierarchyType as _BaseFrameHierarchyType
 import copy as _copy
 
 
 class Frame(_BaseFrameHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = ""
     _path_str = "frame"
     _valid_props = {"baseframe", "data", "group", "layout", "name", "traces"}
 
-    # baseframe
-    # ---------
     @property
     def baseframe(self):
         """
@@ -34,8 +32,6 @@ class Frame(_BaseFrameHierarchyType):
     def baseframe(self, val):
         self["baseframe"] = val
 
-    # data
-    # ----
     @property
     def data(self):
         """
@@ -52,8 +48,6 @@ class Frame(_BaseFrameHierarchyType):
     def data(self, val):
         self["data"] = val
 
-    # group
-    # -----
     @property
     def group(self):
         """
@@ -74,8 +68,6 @@ class Frame(_BaseFrameHierarchyType):
     def group(self, val):
         self["group"] = val
 
-    # layout
-    # ------
     @property
     def layout(self):
         """
@@ -92,8 +84,6 @@ class Frame(_BaseFrameHierarchyType):
     def layout(self, val):
         self["layout"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -113,8 +103,6 @@ class Frame(_BaseFrameHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # traces
-    # ------
     @property
     def traces(self):
         """
@@ -133,8 +121,6 @@ class Frame(_BaseFrameHierarchyType):
     def traces(self, val):
         self["traces"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -204,14 +190,11 @@ class Frame(_BaseFrameHierarchyType):
         -------
         Frame
         """
-        super(Frame, self).__init__("frames")
-
+        super().__init__("frames")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -219,49 +202,19 @@ class Frame(_BaseFrameHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Frame
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Frame`"""
-            )
+an instance of :class:`plotly.graph_objs.Frame`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("baseframe", None)
-        _v = baseframe if baseframe is not None else _v
-        if _v is not None:
-            self["baseframe"] = _v
-        _v = arg.pop("data", None)
-        _v = data if data is not None else _v
-        if _v is not None:
-            self["data"] = _v
-        _v = arg.pop("group", None)
-        _v = group if group is not None else _v
-        if _v is not None:
-            self["group"] = _v
-        _v = arg.pop("layout", None)
-        _v = layout if layout is not None else _v
-        if _v is not None:
-            self["layout"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("traces", None)
-        _v = traces if traces is not None else _v
-        if _v is not None:
-            self["traces"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("baseframe", arg, baseframe)
+        self._set_property("data", arg, data)
+        self._set_property("group", arg, group)
+        self._set_property("layout", arg, layout)
+        self._set_property("name", arg, name)
+        self._set_property("traces", arg, traces)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

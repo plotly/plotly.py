@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Mapbox(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout"
     _path_str = "layout.mapbox"
     _valid_props = {
@@ -22,8 +22,6 @@ class Mapbox(_BaseLayoutHierarchyType):
         "zoom",
     }
 
-    # accesstoken
-    # -----------
     @property
     def accesstoken(self):
         """
@@ -47,8 +45,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def accesstoken(self, val):
         self["accesstoken"] = val
 
-    # bearing
-    # -------
     @property
     def bearing(self):
         """
@@ -68,8 +64,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def bearing(self, val):
         self["bearing"] = val
 
-    # bounds
-    # ------
     @property
     def bounds(self):
         """
@@ -78,25 +72,6 @@ class Mapbox(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.Bounds`
           - A dict of string/value properties that will be passed
             to the Bounds constructor
-
-            Supported dict properties:
-
-                east
-                    Sets the maximum longitude of the map (in
-                    degrees East) if `west`, `south` and `north`
-                    are declared.
-                north
-                    Sets the maximum latitude of the map (in
-                    degrees North) if `east`, `west` and `south`
-                    are declared.
-                south
-                    Sets the minimum latitude of the map (in
-                    degrees North) if `east`, `west` and `north`
-                    are declared.
-                west
-                    Sets the minimum longitude of the map (in
-                    degrees East) if `east`, `south` and `north`
-                    are declared.
 
         Returns
         -------
@@ -108,8 +83,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def bounds(self, val):
         self["bounds"] = val
 
-    # center
-    # ------
     @property
     def center(self):
         """
@@ -118,15 +91,6 @@ class Mapbox(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
-
-            Supported dict properties:
-
-                lat
-                    Sets the latitude of the center of the map (in
-                    degrees North).
-                lon
-                    Sets the longitude of the center of the map (in
-                    degrees East).
 
         Returns
         -------
@@ -138,8 +102,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def center(self, val):
         self["center"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -148,22 +110,6 @@ class Mapbox(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.mapbox.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-
-            Supported dict properties:
-
-                column
-                    If there is a layout grid, use the domain for
-                    this column in the grid for this mapbox subplot
-                    .
-                row
-                    If there is a layout grid, use the domain for
-                    this row in the grid for this mapbox subplot .
-                x
-                    Sets the horizontal domain of this mapbox
-                    subplot (in plot fraction).
-                y
-                    Sets the vertical domain of this mapbox subplot
-                    (in plot fraction).
 
         Returns
         -------
@@ -175,8 +121,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def domain(self, val):
         self["domain"] = val
 
-    # layers
-    # ------
     @property
     def layers(self):
         """
@@ -185,120 +129,6 @@ class Mapbox(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.mapbox.Layer
           - A list or tuple of dicts of string/value properties that
             will be passed to the Layer constructor
-
-            Supported dict properties:
-
-                below
-                    Determines if the layer will be inserted before
-                    the layer with the specified ID. If omitted or
-                    set to '', the layer will be inserted above
-                    every existing layer.
-                circle
-                    :class:`plotly.graph_objects.layout.mapbox.laye
-                    r.Circle` instance or dict with compatible
-                    properties
-                color
-                    Sets the primary layer color. If `type` is
-                    "circle", color corresponds to the circle color
-                    (mapbox.layer.paint.circle-color) If `type` is
-                    "line", color corresponds to the line color
-                    (mapbox.layer.paint.line-color) If `type` is
-                    "fill", color corresponds to the fill color
-                    (mapbox.layer.paint.fill-color) If `type` is
-                    "symbol", color corresponds to the icon color
-                    (mapbox.layer.paint.icon-color)
-                coordinates
-                    Sets the coordinates array contains [longitude,
-                    latitude] pairs for the image corners listed in
-                    clockwise order: top left, top right, bottom
-                    right, bottom left. Only has an effect for
-                    "image" `sourcetype`.
-                fill
-                    :class:`plotly.graph_objects.layout.mapbox.laye
-                    r.Fill` instance or dict with compatible
-                    properties
-                line
-                    :class:`plotly.graph_objects.layout.mapbox.laye
-                    r.Line` instance or dict with compatible
-                    properties
-                maxzoom
-                    Sets the maximum zoom level
-                    (mapbox.layer.maxzoom). At zoom levels equal to
-                    or greater than the maxzoom, the layer will be
-                    hidden.
-                minzoom
-                    Sets the minimum zoom level
-                    (mapbox.layer.minzoom). At zoom levels less
-                    than the minzoom, the layer will be hidden.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                opacity
-                    Sets the opacity of the layer. If `type` is
-                    "circle", opacity corresponds to the circle
-                    opacity (mapbox.layer.paint.circle-opacity) If
-                    `type` is "line", opacity corresponds to the
-                    line opacity (mapbox.layer.paint.line-opacity)
-                    If `type` is "fill", opacity corresponds to the
-                    fill opacity (mapbox.layer.paint.fill-opacity)
-                    If `type` is "symbol", opacity corresponds to
-                    the icon/text opacity (mapbox.layer.paint.text-
-                    opacity)
-                source
-                    Sets the source data for this layer
-                    (mapbox.layer.source). When `sourcetype` is set
-                    to "geojson", `source` can be a URL to a
-                    GeoJSON or a GeoJSON object. When `sourcetype`
-                    is set to "vector" or "raster", `source` can be
-                    a URL or an array of tile URLs. When
-                    `sourcetype` is set to "image", `source` can be
-                    a URL to an image.
-                sourceattribution
-                    Sets the attribution for this source.
-                sourcelayer
-                    Specifies the layer to use from a vector tile
-                    source (mapbox.layer.source-layer). Required
-                    for "vector" source type that supports multiple
-                    layers.
-                sourcetype
-                    Sets the source type for this layer, that is
-                    the type of the layer data.
-                symbol
-                    :class:`plotly.graph_objects.layout.mapbox.laye
-                    r.Symbol` instance or dict with compatible
-                    properties
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-                type
-                    Sets the layer type, that is the how the layer
-                    data set in `source` will be rendered With
-                    `sourcetype` set to "geojson", the following
-                    values are allowed: "circle", "line", "fill"
-                    and "symbol". but note that "line" and "fill"
-                    are not compatible with Point GeoJSON
-                    geometries. With `sourcetype` set to "vector",
-                    the following values are allowed:  "circle",
-                    "line", "fill" and "symbol". With `sourcetype`
-                    set to "raster" or `*image*`, only the "raster"
-                    value is allowed.
-                visible
-                    Determines whether this layer is displayed
 
         Returns
         -------
@@ -310,8 +140,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def layers(self, val):
         self["layers"] = val
 
-    # layerdefaults
-    # -------------
     @property
     def layerdefaults(self):
         """
@@ -325,8 +153,6 @@ class Mapbox(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Layer constructor
 
-            Supported dict properties:
-
         Returns
         -------
         plotly.graph_objs.layout.mapbox.Layer
@@ -337,8 +163,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def layerdefaults(self, val):
         self["layerdefaults"] = val
 
-    # pitch
-    # -----
     @property
     def pitch(self):
         """
@@ -358,8 +182,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def pitch(self, val):
         self["pitch"] = val
 
-    # style
-    # -----
     @property
     def style(self):
         """
@@ -396,8 +218,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def style(self, val):
         self["style"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -417,8 +237,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # zoom
-    # ----
     @property
     def zoom(self):
         """
@@ -437,8 +255,6 @@ class Mapbox(_BaseLayoutHierarchyType):
     def zoom(self, val):
         self["zoom"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -601,14 +417,11 @@ class Mapbox(_BaseLayoutHierarchyType):
         -------
         Mapbox
         """
-        super(Mapbox, self).__init__("mapbox")
-
+        super().__init__("mapbox")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -616,69 +429,24 @@ class Mapbox(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Mapbox
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Mapbox`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Mapbox`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("accesstoken", None)
-        _v = accesstoken if accesstoken is not None else _v
-        if _v is not None:
-            self["accesstoken"] = _v
-        _v = arg.pop("bearing", None)
-        _v = bearing if bearing is not None else _v
-        if _v is not None:
-            self["bearing"] = _v
-        _v = arg.pop("bounds", None)
-        _v = bounds if bounds is not None else _v
-        if _v is not None:
-            self["bounds"] = _v
-        _v = arg.pop("center", None)
-        _v = center if center is not None else _v
-        if _v is not None:
-            self["center"] = _v
-        _v = arg.pop("domain", None)
-        _v = domain if domain is not None else _v
-        if _v is not None:
-            self["domain"] = _v
-        _v = arg.pop("layers", None)
-        _v = layers if layers is not None else _v
-        if _v is not None:
-            self["layers"] = _v
-        _v = arg.pop("layerdefaults", None)
-        _v = layerdefaults if layerdefaults is not None else _v
-        if _v is not None:
-            self["layerdefaults"] = _v
-        _v = arg.pop("pitch", None)
-        _v = pitch if pitch is not None else _v
-        if _v is not None:
-            self["pitch"] = _v
-        _v = arg.pop("style", None)
-        _v = style if style is not None else _v
-        if _v is not None:
-            self["style"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("zoom", None)
-        _v = zoom if zoom is not None else _v
-        if _v is not None:
-            self["zoom"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("accesstoken", arg, accesstoken)
+        self._set_property("bearing", arg, bearing)
+        self._set_property("bounds", arg, bounds)
+        self._set_property("center", arg, center)
+        self._set_property("domain", arg, domain)
+        self._set_property("layers", arg, layers)
+        self._set_property("layerdefaults", arg, layerdefaults)
+        self._set_property("pitch", arg, pitch)
+        self._set_property("style", arg, style)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("zoom", arg, zoom)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

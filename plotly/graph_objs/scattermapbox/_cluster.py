@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Cluster(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "scattermapbox"
     _path_str = "scattermapbox.cluster"
     _valid_props = {
@@ -21,8 +21,6 @@ class Cluster(_BaseTraceHierarchyType):
         "stepsrc",
     }
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -33,42 +31,7 @@ class Cluster(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
           - A list or array of any of the above
 
         Returns
@@ -81,8 +44,6 @@ class Cluster(_BaseTraceHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -101,8 +62,6 @@ class Cluster(_BaseTraceHierarchyType):
     def colorsrc(self, val):
         self["colorsrc"] = val
 
-    # enabled
-    # -------
     @property
     def enabled(self):
         """
@@ -121,8 +80,6 @@ class Cluster(_BaseTraceHierarchyType):
     def enabled(self, val):
         self["enabled"] = val
 
-    # maxzoom
-    # -------
     @property
     def maxzoom(self):
         """
@@ -142,8 +99,6 @@ class Cluster(_BaseTraceHierarchyType):
     def maxzoom(self, val):
         self["maxzoom"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -163,8 +118,6 @@ class Cluster(_BaseTraceHierarchyType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # opacitysrc
-    # ----------
     @property
     def opacitysrc(self):
         """
@@ -183,8 +136,6 @@ class Cluster(_BaseTraceHierarchyType):
     def opacitysrc(self, val):
         self["opacitysrc"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -204,8 +155,6 @@ class Cluster(_BaseTraceHierarchyType):
     def size(self, val):
         self["size"] = val
 
-    # sizesrc
-    # -------
     @property
     def sizesrc(self):
         """
@@ -224,8 +173,6 @@ class Cluster(_BaseTraceHierarchyType):
     def sizesrc(self, val):
         self["sizesrc"] = val
 
-    # step
-    # ----
     @property
     def step(self):
         """
@@ -249,8 +196,6 @@ class Cluster(_BaseTraceHierarchyType):
     def step(self, val):
         self["step"] = val
 
-    # stepsrc
-    # -------
     @property
     def stepsrc(self):
         """
@@ -269,8 +214,6 @@ class Cluster(_BaseTraceHierarchyType):
     def stepsrc(self, val):
         self["stepsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -365,14 +308,11 @@ class Cluster(_BaseTraceHierarchyType):
         -------
         Cluster
         """
-        super(Cluster, self).__init__("cluster")
-
+        super().__init__("cluster")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -380,65 +320,23 @@ class Cluster(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scattermapbox.Cluster
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattermapbox.Cluster`"""
-            )
+an instance of :class:`plotly.graph_objs.scattermapbox.Cluster`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("colorsrc", None)
-        _v = colorsrc if colorsrc is not None else _v
-        if _v is not None:
-            self["colorsrc"] = _v
-        _v = arg.pop("enabled", None)
-        _v = enabled if enabled is not None else _v
-        if _v is not None:
-            self["enabled"] = _v
-        _v = arg.pop("maxzoom", None)
-        _v = maxzoom if maxzoom is not None else _v
-        if _v is not None:
-            self["maxzoom"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("opacitysrc", None)
-        _v = opacitysrc if opacitysrc is not None else _v
-        if _v is not None:
-            self["opacitysrc"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("sizesrc", None)
-        _v = sizesrc if sizesrc is not None else _v
-        if _v is not None:
-            self["sizesrc"] = _v
-        _v = arg.pop("step", None)
-        _v = step if step is not None else _v
-        if _v is not None:
-            self["step"] = _v
-        _v = arg.pop("stepsrc", None)
-        _v = stepsrc if stepsrc is not None else _v
-        if _v is not None:
-            self["stepsrc"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("color", arg, color)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("enabled", arg, enabled)
+        self._set_property("maxzoom", arg, maxzoom)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("opacitysrc", arg, opacitysrc)
+        self._set_property("size", arg, size)
+        self._set_property("sizesrc", arg, sizesrc)
+        self._set_property("step", arg, step)
+        self._set_property("stepsrc", arg, stepsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

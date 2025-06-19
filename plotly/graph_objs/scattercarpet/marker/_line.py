@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "scattercarpet.marker"
     _path_str = "scattercarpet.marker.line"
     _valid_props = {
@@ -23,8 +23,6 @@ class Line(_BaseTraceHierarchyType):
         "widthsrc",
     }
 
-    # autocolorscale
-    # --------------
     @property
     def autocolorscale(self):
         """
@@ -49,8 +47,6 @@ class Line(_BaseTraceHierarchyType):
     def autocolorscale(self, val):
         self["autocolorscale"] = val
 
-    # cauto
-    # -----
     @property
     def cauto(self):
         """
@@ -74,8 +70,6 @@ class Line(_BaseTraceHierarchyType):
     def cauto(self, val):
         self["cauto"] = val
 
-    # cmax
-    # ----
     @property
     def cmax(self):
         """
@@ -97,8 +91,6 @@ class Line(_BaseTraceHierarchyType):
     def cmax(self, val):
         self["cmax"] = val
 
-    # cmid
-    # ----
     @property
     def cmid(self):
         """
@@ -122,8 +114,6 @@ class Line(_BaseTraceHierarchyType):
     def cmid(self, val):
         self["cmid"] = val
 
-    # cmin
-    # ----
     @property
     def cmin(self):
         """
@@ -145,8 +135,6 @@ class Line(_BaseTraceHierarchyType):
     def cmin(self, val):
         self["cmin"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -160,42 +148,7 @@ class Line(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
           - A number that will be interpreted as a color
             according to scattercarpet.marker.line.colorscale
           - A list or array of any of the above
@@ -210,8 +163,6 @@ class Line(_BaseTraceHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # coloraxis
-    # ---------
     @property
     def coloraxis(self):
         """
@@ -237,8 +188,6 @@ class Line(_BaseTraceHierarchyType):
     def coloraxis(self, val):
         self["coloraxis"] = val
 
-    # colorscale
-    # ----------
     @property
     def colorscale(self):
         """
@@ -292,8 +241,6 @@ class Line(_BaseTraceHierarchyType):
     def colorscale(self, val):
         self["colorscale"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -312,8 +259,6 @@ class Line(_BaseTraceHierarchyType):
     def colorsrc(self, val):
         self["colorsrc"] = val
 
-    # reversescale
-    # ------------
     @property
     def reversescale(self):
         """
@@ -336,8 +281,6 @@ class Line(_BaseTraceHierarchyType):
     def reversescale(self, val):
         self["reversescale"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -357,8 +300,6 @@ class Line(_BaseTraceHierarchyType):
     def width(self, val):
         self["width"] = val
 
-    # widthsrc
-    # --------
     @property
     def widthsrc(self):
         """
@@ -377,8 +318,6 @@ class Line(_BaseTraceHierarchyType):
     def widthsrc(self, val):
         self["widthsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -571,14 +510,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super(Line, self).__init__("line")
-
+        super().__init__("line")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -586,73 +522,25 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scattercarpet.marker.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattercarpet.marker.Line`"""
-            )
+an instance of :class:`plotly.graph_objs.scattercarpet.marker.Line`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("autocolorscale", None)
-        _v = autocolorscale if autocolorscale is not None else _v
-        if _v is not None:
-            self["autocolorscale"] = _v
-        _v = arg.pop("cauto", None)
-        _v = cauto if cauto is not None else _v
-        if _v is not None:
-            self["cauto"] = _v
-        _v = arg.pop("cmax", None)
-        _v = cmax if cmax is not None else _v
-        if _v is not None:
-            self["cmax"] = _v
-        _v = arg.pop("cmid", None)
-        _v = cmid if cmid is not None else _v
-        if _v is not None:
-            self["cmid"] = _v
-        _v = arg.pop("cmin", None)
-        _v = cmin if cmin is not None else _v
-        if _v is not None:
-            self["cmin"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("coloraxis", None)
-        _v = coloraxis if coloraxis is not None else _v
-        if _v is not None:
-            self["coloraxis"] = _v
-        _v = arg.pop("colorscale", None)
-        _v = colorscale if colorscale is not None else _v
-        if _v is not None:
-            self["colorscale"] = _v
-        _v = arg.pop("colorsrc", None)
-        _v = colorsrc if colorsrc is not None else _v
-        if _v is not None:
-            self["colorsrc"] = _v
-        _v = arg.pop("reversescale", None)
-        _v = reversescale if reversescale is not None else _v
-        if _v is not None:
-            self["reversescale"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-        _v = arg.pop("widthsrc", None)
-        _v = widthsrc if widthsrc is not None else _v
-        if _v is not None:
-            self["widthsrc"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("autocolorscale", arg, autocolorscale)
+        self._set_property("cauto", arg, cauto)
+        self._set_property("cmax", arg, cmax)
+        self._set_property("cmid", arg, cmid)
+        self._set_property("cmin", arg, cmin)
+        self._set_property("color", arg, color)
+        self._set_property("coloraxis", arg, coloraxis)
+        self._set_property("colorscale", arg, colorscale)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("reversescale", arg, reversescale)
+        self._set_property("width", arg, width)
+        self._set_property("widthsrc", arg, widthsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -14,8 +14,6 @@ from ...utils import strip_dict_params
 
 import plotly.tools as tls
 
-import copy
-
 
 def test_print_grid_before_make_subplots():
     fig = Figure()

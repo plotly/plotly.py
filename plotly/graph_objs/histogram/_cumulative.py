@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Cumulative(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "histogram"
     _path_str = "histogram.cumulative"
     _valid_props = {"currentbin", "direction", "enabled"}
 
-    # currentbin
-    # ----------
     @property
     def currentbin(self):
         """
@@ -36,8 +34,6 @@ class Cumulative(_BaseTraceHierarchyType):
     def currentbin(self, val):
         self["currentbin"] = val
 
-    # direction
-    # ---------
     @property
     def direction(self):
         """
@@ -60,8 +56,6 @@ class Cumulative(_BaseTraceHierarchyType):
     def direction(self, val):
         self["direction"] = val
 
-    # enabled
-    # -------
     @property
     def enabled(self):
         """
@@ -86,8 +80,6 @@ class Cumulative(_BaseTraceHierarchyType):
     def enabled(self, val):
         self["enabled"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -154,14 +146,11 @@ class Cumulative(_BaseTraceHierarchyType):
         -------
         Cumulative
         """
-        super(Cumulative, self).__init__("cumulative")
-
+        super().__init__("cumulative")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -169,37 +158,16 @@ class Cumulative(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.histogram.Cumulative
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram.Cumulative`"""
-            )
+an instance of :class:`plotly.graph_objs.histogram.Cumulative`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("currentbin", None)
-        _v = currentbin if currentbin is not None else _v
-        if _v is not None:
-            self["currentbin"] = _v
-        _v = arg.pop("direction", None)
-        _v = direction if direction is not None else _v
-        if _v is not None:
-            self["direction"] = _v
-        _v = arg.pop("enabled", None)
-        _v = enabled if enabled is not None else _v
-        if _v is not None:
-            self["enabled"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("currentbin", arg, currentbin)
+        self._set_property("direction", arg, direction)
+        self._set_property("enabled", arg, enabled)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

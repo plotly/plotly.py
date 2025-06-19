@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class X(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "isosurface.caps"
     _path_str = "isosurface.caps.x"
     _valid_props = {"fill", "show"}
 
-    # fill
-    # ----
     @property
     def fill(self):
         """
@@ -33,8 +31,6 @@ class X(_BaseTraceHierarchyType):
     def fill(self, val):
         self["fill"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -56,8 +52,6 @@ class X(_BaseTraceHierarchyType):
     def show(self, val):
         self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -102,14 +96,11 @@ class X(_BaseTraceHierarchyType):
         -------
         X
         """
-        super(X, self).__init__("x")
-
+        super().__init__("x")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -117,33 +108,15 @@ class X(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.isosurface.caps.X
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.caps.X`"""
-            )
+an instance of :class:`plotly.graph_objs.isosurface.caps.X`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("fill", None)
-        _v = fill if fill is not None else _v
-        if _v is not None:
-            self["fill"] = _v
-        _v = arg.pop("show", None)
-        _v = show if show is not None else _v
-        if _v is not None:
-            self["show"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("fill", arg, fill)
+        self._set_property("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

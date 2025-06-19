@@ -1,6 +1,4 @@
 import json
-import sys
-import base64
 import threading
 import time
 
@@ -13,13 +11,10 @@ import plotly.graph_objs as go
 import plotly.io as pio
 from plotly.offline import get_plotlyjs
 from plotly.io._utils import plotly_cdn_url
+from plotly.io._html import _generate_sri_hash
 
-if sys.version_info >= (3, 3):
-    import unittest.mock as mock
-    from unittest.mock import MagicMock
-else:
-    import mock
-    from mock import MagicMock
+import unittest.mock as mock
+from unittest.mock import MagicMock
 
 
 # fixtures
@@ -181,7 +176,7 @@ def test_notebook_connected_show(fig1, name, connected):
         with mock.patch("IPython.display.display") as mock_display:
             pio.show(fig1)
 
-    # ### Check initialization ###
+    # Check initialization
     # Get display call arguments
     mock_call_args_html = mock_display_html.call_args
     mock_arg1_html = mock_call_args_html[0][0]
@@ -193,7 +188,7 @@ def test_notebook_connected_show(fig1, name, connected):
     else:
         assert_offline(bundle_display_html)
 
-    # ### Check display call ###
+    # Check display call
     # Get display call arguments
     mock_call_args = mock_display.call_args
     mock_arg1 = mock_call_args[0][0]
@@ -298,12 +293,19 @@ def test_repr_html(renderer):
     # id number of figure
     id_html = str_html.split('document.getElementById("')[1].split('")')[0]
     id_pattern = "cd462b94-79ce-42a2-887f-2650a761a144"
+
+    # Calculate the SRI hash dynamically
+    plotlyjs_content = get_plotlyjs()
+    sri_hash = _generate_sri_hash(plotlyjs_content)
+
     template = (
         '<div>                        <script type="text/javascript">'
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
         '<script charset="utf-8" src="'
         + plotly_cdn_url()
-        + '"></script>                '
+        + '" integrity="'
+        + sri_hash
+        + '" crossorigin="anonymous"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
         'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
         "                window.PLOTLYENV=window.PLOTLYENV || {};"
@@ -392,7 +394,7 @@ def test_missing_webbrowser_module(fig1):
     with mock.patch("builtins.__import__", webbrowser_absent_import):
         # 1: check whether importing webbrowser actually results in an ImportError
         with pytest.raises(ImportError):
-            import webbrowser
+            import webbrowser  # noqa: F401
 
         # 2: check whether the _repr_html_ can handle it regardless
         fig1._repr_html_()
@@ -402,8 +404,6 @@ def test_missing_webbrowser_methods(fig1):
     """
     Assert that no errors occur if the webbrowser module does not contain some methods
     """
-    import webbrowser
-
     removed_webbrowser_get_method = webbrowser.get
     try:
         del webbrowser.get

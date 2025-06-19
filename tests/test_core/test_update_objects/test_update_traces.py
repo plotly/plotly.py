@@ -115,7 +115,6 @@ class TestSelectForEachUpdateTraces(TestCase):
         secondary_y=None,
         test_no_grid=False,
     ):
-
         # Select traces on figure initialized with make_subplots
         trace_generator = self.fig.select_traces(
             selector=selector, row=row, col=col, secondary_y=secondary_y
