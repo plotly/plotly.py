@@ -1,9 +1,8 @@
 import os.path as opath
-from io import StringIO
 import json
 
 import _plotly_utils.basevalidators
-from codegen.utils import CAVEAT, PlotlyNode, TraceNode, write_source_py
+from codegen.utils import PlotlyNode, TraceNode
 
 
 def get_validator_params(node: PlotlyNode, store: dict):
@@ -73,15 +72,12 @@ def write_validator_json(outdir, params: dict):
     -------
     None
     """
-    import json
 
     # Validate inputs
-    # ---------------
     if not isinstance(params, dict):
         raise ValueError("Expected params to be a dictionary")
 
     # Write file
-    # ----------
     filepath = opath.join(outdir, "validators", "_validators.json")
     with open(filepath, "w") as f:
         f.write(json.dumps(params, indent=4))
@@ -101,7 +97,6 @@ def build_data_validator_params(base_trace_node: TraceNode):
         Mapping from property name to repr-string of property value.
     """
     # Get list of trace nodes
-    # -----------------------
     tracetype_nodes = base_trace_node.child_compound_datatypes
     class_strs_map = dict(
         [(node.name_property, node.name_datatype_class) for node in tracetype_nodes]
@@ -129,11 +124,9 @@ def get_data_validator_instance(base_trace_node: TraceNode):
     """
 
     # Build constructor params
-    # ------------------------
     # We need to eval the values to convert out of the repr-form of the
     # params. e.g. '3' -> 3
     params = build_data_validator_params(base_trace_node)
 
     # Build and return BaseDataValidator instance
-    # -------------------------------------------
     return _plotly_utils.basevalidators.BaseDataValidator(**params)

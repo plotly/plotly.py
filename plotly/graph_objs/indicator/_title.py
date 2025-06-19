@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Title(_BaseTraceHierarchyType):
-
     _parent_path_str = "indicator"
     _path_str = "indicator.title"
     _valid_props = {"align", "font", "text"}
@@ -120,12 +119,10 @@ class Title(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Title`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.Title`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

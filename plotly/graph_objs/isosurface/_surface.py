@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Surface(_BaseTraceHierarchyType):
-
     _parent_path_str = "isosurface"
     _path_str = "isosurface.surface"
     _valid_props = {"count", "fill", "pattern", "show"}
@@ -178,12 +177,10 @@ class Surface(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.isosurface.Surface
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.Surface`"""
-            )
+an instance of :class:`plotly.graph_objs.isosurface.Surface`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

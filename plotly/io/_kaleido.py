@@ -40,19 +40,20 @@ Kaleido will be the only supported engine at that time.
 _KALEIDO_AVAILABLE = None
 _KALEIDO_MAJOR = None
 
-kaleido_scope_default_warning_func = (
-    lambda x: f"""
+
+def kaleido_scope_default_warning_func(x):
+    return f"""
 Use of plotly.io.kaleido.scope.{x} is deprecated and support will be removed after {ENGINE_SUPPORT_TIMELINE}.
 Please use plotly.io.defaults.{x} instead.
 """
-)
-bad_attribute_error_msg_func = (
-    lambda x: f"""
+
+
+def bad_attribute_error_msg_func(x):
+    return f"""
 Attribute plotly.io.defaults.{x} is not valid.
 Also, use of plotly.io.kaleido.scope.* is deprecated and support will be removed after {ENGINE_SUPPORT_TIMELINE}.
 Please use plotly.io.defaults.* instead.
 """
-)
 
 
 def kaleido_available() -> bool:
@@ -64,10 +65,10 @@ def kaleido_available() -> bool:
     if _KALEIDO_AVAILABLE is not None:
         return _KALEIDO_AVAILABLE
     try:
-        import kaleido
+        import kaleido  # noqa: F401
 
         _KALEIDO_AVAILABLE = True
-    except ImportError as e:
+    except ImportError:
         _KALEIDO_AVAILABLE = False
     return _KALEIDO_AVAILABLE
 
@@ -178,7 +179,7 @@ try:
 
         scope = DefaultsWrapper()
 
-except ImportError as e:
+except ImportError:
     PlotlyScope = None
     scope = None
 
@@ -317,7 +318,7 @@ def to_image(
             try:
                 validate_executable()
                 engine = "orca"
-            except:
+            except Exception:
                 # If orca not configured properly, make sure we display the error
                 # message advising the installation of kaleido
                 engine = "kaleido"

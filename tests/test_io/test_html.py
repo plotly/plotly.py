@@ -1,5 +1,3 @@
-import sys
-
 import pytest
 import numpy as np
 import re
@@ -12,16 +10,6 @@ from plotly.offline.offline import get_plotlyjs
 from plotly.io._html import _generate_sri_hash
 
 
-if sys.version_info >= (3, 3):
-    import unittest.mock as mock
-    from unittest.mock import MagicMock
-else:
-    import mock
-    from mock import MagicMock
-
-
-# fixtures
-# --------
 @pytest.fixture
 def fig1(request):
     return go.Figure(
@@ -34,10 +22,6 @@ def fig1(request):
         ],
         layout={"title": {"text": "Figure title"}},
     )
-
-
-# HTML
-# ----
 
 
 def test_versioned_cdn_included(fig1):
@@ -84,6 +68,6 @@ def test_cdn_integrity_hash_matches_bundled_content(fig1):
     expected_hash = _generate_sri_hash(plotlyjs_content)
 
     # Verify they match
-    assert (
-        extracted_hash == expected_hash
-    ), f"Hash mismatch: expected {expected_hash}, got {extracted_hash}"
+    assert extracted_hash == expected_hash, (
+        f"Hash mismatch: expected {expected_hash}, got {extracted_hash}"
+    )

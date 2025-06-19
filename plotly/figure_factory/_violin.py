@@ -235,8 +235,6 @@ def violin_no_colorscale(
         plot_data, plot_xrange = violinplot(
             vals, fillcolor=colors[color_index], rugplot=rugplot
         )
-        layout = graph_objs.Layout()
-
         for item in plot_data:
             fig.append_trace(item, 1, k + 1)
         color_index += 1
@@ -326,8 +324,6 @@ def violin_colorscale(
         plot_data, plot_xrange = violinplot(
             vals, fillcolor="rgb{}".format(intermed_color), rugplot=rugplot
         )
-        layout = graph_objs.Layout()
-
         for item in plot_data:
             fig.append_trace(item, 1, k + 1)
         fig["layout"].update(
@@ -411,8 +407,6 @@ def violin_dict(
     for k, gr in enumerate(group_name):
         vals = np.asarray(gb.get_group(gr)[data_header], float)
         plot_data, plot_xrange = violinplot(vals, fillcolor=colors[gr], rugplot=rugplot)
-        layout = graph_objs.Layout()
-
         for item in plot_data:
             fig.append_trace(item, 1, k + 1)
 
@@ -591,7 +585,7 @@ def create_violin(
 
             if not all(isinstance(element, Number) for element in data):
                 raise exceptions.PlotlyError(
-                    "If data is a list, it must " "contain only numbers."
+                    "If data is a list, it must contain only numbers."
                 )
 
         if pd and isinstance(data, pd.core.frame.DataFrame):
@@ -691,7 +685,7 @@ def create_violin(
 
             if not isinstance(group_stats, dict):
                 raise exceptions.PlotlyError(
-                    "Your group_stats param " "must be a dictionary."
+                    "Your group_stats param must be a dictionary."
                 )
 
             fig = violin_colorscale(

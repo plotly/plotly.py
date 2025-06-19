@@ -4,7 +4,8 @@ import numpy as np
 
 
 # Fixtures
-# --------
+
+
 @pytest.fixture()
 def validator_any2():
     return InfoArrayValidator(
@@ -100,8 +101,9 @@ def validator_number_free_2d():
 
 
 # Any2 Tests
-# ----------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize("val", [[1, "A"], ("hello", "world!"), [1, set()], [-1, 1]])
 def test_validator_acceptance_any2(val, validator_any2):
     coerce_val = validator_any2.validate_coerce(val)
@@ -115,7 +117,7 @@ def test_validator_acceptance_any2_none(validator_any2):
     assert validator_any2.present(coerce_val) is None
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", ["Not a list", 123, set(), {}])
 def test_validator_rejection_any2_type(val, validator_any2):
     with pytest.raises(ValueError) as validation_failure:
@@ -124,7 +126,7 @@ def test_validator_rejection_any2_type(val, validator_any2):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by length ###
+# Rejection by length
 @pytest.mark.parametrize(
     "val", [[0, 1, "A"], ("hello", "world", "!"), [None, {}, []], [-1, 1, 9]]
 )
@@ -136,8 +138,9 @@ def test_validator_rejection_any2_length(val, validator_any2):
 
 
 # Number3 Tests
-# -------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize("val", [[1, 0, 0.5], (0.1, 0.4, 0.99), [1, 1, 0]])
 def test_validator_acceptance_number3(val, validator_number3):
     coerce_val = validator_number3.validate_coerce(val)
@@ -145,7 +148,7 @@ def test_validator_acceptance_number3(val, validator_number3):
     assert validator_number3.present(coerce_val) == tuple(val)
 
 
-# ### Rejection by length ###
+# Rejection by length
 @pytest.mark.parametrize("val", [[1, 0], (0.1, 0.4, 0.99, 0.4), [1]])
 def test_validator_rejection_number3_length(val, validator_number3):
     with pytest.raises(ValueError) as validation_failure:
@@ -154,7 +157,7 @@ def test_validator_rejection_number3_length(val, validator_number3):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by element type ###
+# Rejection by element type
 @pytest.mark.parametrize(
     "val,first_invalid_ind",
     [([1, 0, "0.5"], 2), ((0.1, set(), 0.99), 1), ([[], "2", {}], 0)],
@@ -168,8 +171,8 @@ def test_validator_rejection_number3_element_type(
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by element value ###
-#     Elements must be in [0, 1]
+# Rejection by element value
+# Elements must be in [0, 1]
 @pytest.mark.parametrize(
     "val,first_invalid_ind", [([1, 0, 1.5], 2), ((0.1, -0.4, 0.99), 1), ([-1, 1, 0], 0)]
 )
@@ -183,8 +186,9 @@ def test_validator_rejection_number3_element_value(
 
 
 # Number3 Tests (free_length=True)
-# --------------------------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val", [[1, 0, 0.5], (0.1, 0.99), np.array([0.1, 0.99]), [0], []]
 )
@@ -194,7 +198,7 @@ def test_validator_acceptance_number3_free(val, validator_number3_free):
     assert validator_number3_free.present(coerce_val) == tuple(val)
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", ["Not a list", 123, set(), {}])
 def test_validator_rejection_number3_free_type(val, validator_number3_free):
     with pytest.raises(ValueError) as validation_failure:
@@ -203,7 +207,7 @@ def test_validator_rejection_number3_free_type(val, validator_number3_free):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by length ###
+# Rejection by length
 @pytest.mark.parametrize("val", [(0.1, 0.4, 0.99, 0.4), [1, 0, 0, 0, 0, 0, 0]])
 def test_validator_rejection_number3_free_length(val, validator_number3_free):
     with pytest.raises(ValueError) as validation_failure:
@@ -212,7 +216,7 @@ def test_validator_rejection_number3_free_length(val, validator_number3_free):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by element type ###
+# Rejection by element type
 @pytest.mark.parametrize(
     "val,first_invalid_ind", [([1, 0, "0.5"], 2), ((0.1, set()), 1), ([{}], 0)]
 )
@@ -229,7 +233,7 @@ def test_validator_rejection_number3_free_element_type(
     ) in str(validation_failure.value)
 
 
-# ### Rejection by element value ###
+# Rejection by element value
 @pytest.mark.parametrize(
     "val,first_invalid_ind", [([1, 0, -0.5], 2), ((0.1, 2), 1), ([99], 0)]
 )
@@ -247,8 +251,9 @@ def test_validator_rejection_number3_free_element_value(
 
 
 # Any3 Tests (free_length=True)
-# --------------------------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -272,8 +277,9 @@ def test_validator_acceptance_any3_free(val, validator_any3_free):
 
 
 # Number2 2D
-# ----------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -291,7 +297,7 @@ def test_validator_acceptance_number2_2d(val, validator_number2_2d):
     assert validator_number2_2d.present(coerce_val) == expected
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", ["Not a list", 123, set(), {}])
 def test_validator_rejection_number2_2d_type(val, validator_number2_2d):
     with pytest.raises(ValueError) as validation_failure:
@@ -300,7 +306,7 @@ def test_validator_rejection_number2_2d_type(val, validator_number2_2d):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by element type ###
+# Rejection by element type
 @pytest.mark.parametrize(
     "val,first_invalid_ind",
     [([[1, 0], [0.2, 0.4], "string"], 2), ([[0.1, 0.7], set()], 1), (["bogus"], 0)],
@@ -318,7 +324,7 @@ def test_validator_rejection_number2_2d_element_type(
     ) in str(validation_failure.value)
 
 
-# ### Rejection by element length ###
+# Rejection by element length
 @pytest.mark.parametrize(
     "val,first_invalid_ind",
     [([[1, 0], [0.2, 0.4], [0.2]], 2), ([[0.1, 0.7], [0, 0.1, 0.4]], 1), ([[]], 0)],
@@ -336,7 +342,7 @@ def test_validator_rejection_number2_2d_element_length(
     ) in str(validation_failure.value)
 
 
-# ### Rejection by element value ###
+# Rejection by element value
 @pytest.mark.parametrize(
     "val,invalid_inds",
     [
@@ -361,8 +367,9 @@ def test_validator_rejection_number2_2d_element_value(
 
 
 # Number2 '1-2'
-# -------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize("val", [[], [1, 0], (0.1, 0.99), np.array([0.1, 0.99])])
 def test_validator_acceptance_number2_12d_1d(val, validator_number2_12d):
     coerce_val = validator_number2_12d.validate_coerce(val)
@@ -388,7 +395,7 @@ def test_validator_acceptance_number2_12d_2d(val, validator_number2_12d):
     assert validator_number2_12d.present(coerce_val) == expected
 
 
-# ### Rejection by type / length###
+# Rejection by type / length
 @pytest.mark.parametrize("val", ["Not a list", 123, set(), {}, [0.1, 0.3, 0.2]])
 def test_validator_rejection_number2_12d_type(val, validator_number2_12d):
     with pytest.raises(ValueError) as validation_failure:
@@ -397,7 +404,7 @@ def test_validator_rejection_number2_12d_type(val, validator_number2_12d):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by element type 2D ###
+# Rejection by element type 2D
 @pytest.mark.parametrize(
     "val,first_invalid_ind",
     [([[1, 0], [0.2, 0.4], "string"], 2), ([[0.1, 0.7], set()], 1), (["bogus"], 0)],
@@ -415,7 +422,7 @@ def test_validator_rejection_number2_12d_element_type(
     ) in str(validation_failure.value)
 
 
-# ### Rejection by element length ###
+# Rejection by element length
 @pytest.mark.parametrize(
     "val,first_invalid_ind",
     [([[1, 0], [0.2, 0.4], [0.2]], 2), ([[0.1, 0.7], [0, 0.1, 0.4]], 1), ([[]], 0)],
@@ -433,7 +440,7 @@ def test_validator_rejection_number2_12d_element_length(
     ) in str(validation_failure.value)
 
 
-# ### Rejection by element value ###
+# Rejection by element value
 @pytest.mark.parametrize(
     "val,invalid_inds",
     [
@@ -465,7 +472,8 @@ def test_validator_rejection_number2_12d_element_value(
 
 
 # Number free 1D
-# --------------
+
+
 @pytest.mark.parametrize(
     "val", [[], [1, 0], (0.1, 0.99, 0.4), np.array([0.1, 0.4, 0.5, 0.1, 0.6, 0.99])]
 )
@@ -476,7 +484,7 @@ def test_validator_acceptance_number_free_1d(val, validator_number_free_1d):
     assert validator_number_free_1d.present(coerce_val) == expected
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", ["Not a list", 123, set(), {}])
 def test_validator_rejection_number_free_1d_type(val, validator_number_free_1d):
     with pytest.raises(ValueError) as validation_failure:
@@ -485,7 +493,7 @@ def test_validator_rejection_number_free_1d_type(val, validator_number_free_1d):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by element type ###
+# Rejection by element type
 @pytest.mark.parametrize(
     "val,first_invalid_ind",
     [([1, 0, 0.3, 0.5, "0.5", 0.2], 4), ((0.1, set()), 1), ([{}], 0)],
@@ -503,7 +511,7 @@ def test_validator_rejection_number_free_1d_element_type(
     ) in str(validation_failure.value)
 
 
-# ### Rejection by element value ###
+# Rejection by element value
 @pytest.mark.parametrize(
     "val,first_invalid_ind",
     [([1, 0, 0.3, 0.999, -0.5], 4), ((0.1, 2, 0.8), 1), ([99, 0.3], 0)],
@@ -522,7 +530,8 @@ def test_validator_rejection_number_free_1d_element_value(
 
 
 # Number free 2D
-# --------------
+
+
 @pytest.mark.parametrize(
     "val",
     [
@@ -540,7 +549,7 @@ def test_validator_acceptance_number_free_2d(val, validator_number_free_2d):
     assert validator_number_free_2d.present(coerce_val) == expected
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", ["Not a list", 123, set(), {}])
 def test_validator_rejection_number_free_2d_type(val, validator_number_free_2d):
     with pytest.raises(ValueError) as validation_failure:
@@ -549,7 +558,7 @@ def test_validator_rejection_number_free_2d_type(val, validator_number_free_2d):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by element type ###
+# Rejection by element type
 @pytest.mark.parametrize(
     "val,first_invalid_ind",
     [([[1, 0], [0.2, 0.4], "string"], 2), ([[0.1, 0.7], set()], 1), (["bogus"], 0)],
@@ -567,7 +576,7 @@ def test_validator_rejection_number_free_2d_element_type(
     ) in str(validation_failure.value)
 
 
-# ### Rejection by element value ###
+# Rejection by element value
 @pytest.mark.parametrize(
     "val,invalid_inds",
     [

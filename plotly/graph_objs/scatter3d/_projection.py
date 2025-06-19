@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Projection(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatter3d"
     _path_str = "scatter3d.projection"
     _valid_props = {"x", "y", "z"}
@@ -118,12 +117,10 @@ class Projection(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter3d.Projection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.Projection`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter3d.Projection`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

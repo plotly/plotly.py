@@ -25,7 +25,7 @@ def validate_annotated_heatmap(z, x, y, annotation_text):
         for lst in range(len(z)):
             if len(z[lst]) != len(annotation_text[lst]):
                 raise exceptions.PlotlyError(
-                    "z and text should have the " "same dimensions"
+                    "z and text should have the same dimensions"
                 )
 
     if x:
@@ -173,7 +173,6 @@ class _AnnotatedHeatmap(object):
     def __init__(
         self, z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
     ):
-
         self.z = z
         if x:
             self.x = x
@@ -261,7 +260,6 @@ class _AnnotatedHeatmap(object):
             min_text_color = black
             max_text_color = white
         elif isinstance(self.colorscale, list):
-
             min_col = to_rgb_color_list(self.colorscale[0][1], [255, 255, 255])
             max_col = to_rgb_color_list(self.colorscale[-1][1], [255, 255, 255])
 

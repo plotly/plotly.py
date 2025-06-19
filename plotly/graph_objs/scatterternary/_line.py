@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatterternary"
     _path_str = "scatterternary.line"
     _valid_props = {
@@ -259,12 +258,10 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatterternary.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterternary.Line`"""
-            )
+an instance of :class:`plotly.graph_objs.scatterternary.Line`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

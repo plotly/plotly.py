@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Scattergeo(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "scattergeo"
     _valid_props = {
@@ -1789,12 +1788,10 @@ class Scattergeo(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Scattergeo
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scattergeo`"""
-            )
+an instance of :class:`plotly.graph_objs.Scattergeo`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

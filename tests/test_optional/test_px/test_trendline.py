@@ -195,7 +195,6 @@ def test_ols_trendline_slopes():
     ],
 )
 def test_trendline_on_timeseries(backend, mode, options):
-
     df = nw.from_native(px.data.stocks(return_type=backend))
 
     pd_err_msg = r"Could not convert value of 'x' \('date'\) into a numeric type."

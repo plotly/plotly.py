@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatter3d"
     _path_str = "scatter3d.marker"
     _valid_props = {
@@ -778,12 +777,10 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter3d.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter3d.Marker`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -16,7 +16,6 @@ class TestLayoutSubplots(TestCase):
         pio.templates.default = "plotly"
 
     def test_initial_access_subplots(self):
-
         # It should be possible to access base subplots initially
         self.assertEqual(self.layout.xaxis, go.layout.XAxis())
         self.assertEqual(self.layout.yaxis, go.layout.YAxis())
@@ -34,11 +33,11 @@ class TestLayoutSubplots(TestCase):
         self.assertIs(self.layout.mapbox, self.layout.mapbox1)
         self.assertIs(self.layout.polar, self.layout.polar1)
 
-    def test_initial_access_subplot2(self):
+    def test_initial_access_subplot2_1(self):
         with pytest.raises(AttributeError):
             self.layout.xaxis2
 
-    def test_initial_access_subplot2(self):
+    def test_initial_access_subplot2_2(self):
         with pytest.raises(KeyError):
             self.layout["xaxis2"]
 
@@ -68,7 +67,6 @@ class TestLayoutSubplots(TestCase):
         self.assertIsNone(self.layout.xaxis1.range)
 
     def test_contains(self):
-
         # Initially xaxis and xaxis1 are `in` layout, but xaxis2 and 3 are not
         self.assertTrue("xaxis" in self.layout)
         self.assertTrue("xaxis1" in self.layout)
@@ -177,7 +175,6 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(layout.polar8.sector, (0, 90))
 
     def test_create_subplot_with_update(self):
-
         self.layout.update(
             xaxis1=go.layout.XAxis(title={"text": "xaxis 1"}),
             xaxis2=go.layout.XAxis(title={"text": "xaxis 2"}),
@@ -199,7 +196,6 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(self.layout.polar8.sector, (0, 90))
 
     def test_create_subplot_with_update_dict(self):
-
         self.layout.update(
             {
                 "xaxis1": {"title": {"text": "xaxis 1"}},

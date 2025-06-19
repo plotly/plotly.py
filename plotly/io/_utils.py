@@ -22,9 +22,7 @@ def validate_coerce_fig_to_dict(fig, validate):
         raise ValueError(
             """
 The fig parameter must be a dict or Figure.
-    Received value of type {typ}: {v}""".format(
-                typ=type(fig), v=fig
-            )
+    Received value of type {typ}: {v}""".format(typ=type(fig), v=fig)
         )
     return fig_dict
 
