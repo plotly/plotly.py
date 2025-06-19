@@ -40,7 +40,7 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
-kaleido = ["kaleido==1.0.0rc15"]
+kaleido = ["kaleido>=1.0.0"]
 dev_core = [
     "pytest",
     "requests",
