@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+- Add deprecation warnings when using Kaleido v0 or deprecated image export features [[#5177](https://github.com/plotly/plotly.py/pull/5236)]
+
 ## [6.1.2] - 2025-05-27
 
 ### Fixed
