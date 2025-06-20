@@ -41,7 +41,7 @@ The [`plotly` Python library](/python/) is an interactive, [open-source](/python
 
 Built on top of the Plotly JavaScript library ([plotly.js](https://plotly.com/javascript/)), `plotly` enables Python users to create beautiful interactive web-based visualizations that can be displayed in Jupyter notebooks, saved to standalone HTML files, or served as part of pure Python-built web applications using Dash. The `plotly` Python library is sometimes referred to as "plotly.py" to differentiate it from the JavaScript library.
 
-Thanks to deep integration with our [Kaleido](https://medium.com/plotly/introducing-kaleido-b03c4b7b1d81) image export utility, `plotly` also provides great support for non-web contexts including desktop editors (e.g. QtConsole, Spyder, PyCharm) and static document publishing (e.g. exporting notebooks to PDF with high-quality vector images).
+ Thanks to deep integration with our [Kaleido](https://github.com/plotly/Kaleido) image export utility, `plotly` also provides great support for non-web contexts including desktop editors (e.g. QtConsole, Spyder, PyCharm) and static document publishing (e.g. exporting notebooks to PDF with high-quality vector images).
 
 This Getting Started guide explains how to install `plotly` and related optional pages. Once you've installed, you can use our documentation in three main ways:
 
@@ -193,7 +193,7 @@ The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies a
 using pip...
 
 ```
-$ pip install -U kaleido
+$ pip install --upgrade kaleido
 ```
 
 or conda.
