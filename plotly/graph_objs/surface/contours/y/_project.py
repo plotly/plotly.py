@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Project(_BaseTraceHierarchyType):
-
     _parent_path_str = "surface.contours.y"
     _path_str = "surface.contours.y.project"
     _valid_props = {"x", "y", "z"}
@@ -142,12 +141,10 @@ class Project(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.surface.contours.y.Project
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.contours.y.Project`"""
-            )
+an instance of :class:`plotly.graph_objs.surface.contours.y.Project`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

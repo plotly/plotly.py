@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Title(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.coloraxis.colorbar"
     _path_str = "layout.coloraxis.colorbar.title"
     _valid_props = {"font", "side", "text"}
@@ -122,12 +121,10 @@ class Title(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.coloraxis.colorbar.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.coloraxis.colorbar.Title`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.coloraxis.colorbar.Title`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

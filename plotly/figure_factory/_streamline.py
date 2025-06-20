@@ -25,12 +25,12 @@ def validate_streamline(x, y):
     for index in range(len(x) - 1):
         if ((x[index + 1] - x[index]) - (x[1] - x[0])) > 0.0001:
             raise exceptions.PlotlyError(
-                "x must be a 1 dimensional, " "evenly spaced array"
+                "x must be a 1 dimensional, evenly spaced array"
             )
     for index in range(len(y) - 1):
         if ((y[index + 1] - y[index]) - (y[1] - y[0])) > 0.0001:
             raise exceptions.PlotlyError(
-                "y must be a 1 dimensional, " "evenly spaced array"
+                "y must be a 1 dimensional, evenly spaced array"
             )
 
 
@@ -213,7 +213,9 @@ class _Streamline(object):
             vi = self.value_at(self.v, xi, yi)
             return -ui * dt_ds, -vi * dt_ds
 
-        check = lambda xi, yi: (0 <= xi < len(self.x) - 1 and 0 <= yi < len(self.y) - 1)
+        def check(xi, yi):
+            return (0 <= xi < len(self.x) - 1) and (0 <= yi < len(self.y) - 1)
+
         xb_changes = []
         yb_changes = []
 

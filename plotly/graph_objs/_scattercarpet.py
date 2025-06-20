@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Scattercarpet(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "scattercarpet"
     _valid_props = {
@@ -1762,12 +1761,10 @@ class Scattercarpet(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Scattercarpet
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Scattercarpet`"""
-            )
+an instance of :class:`plotly.graph_objs.Scattercarpet`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

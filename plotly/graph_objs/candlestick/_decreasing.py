@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Decreasing(_BaseTraceHierarchyType):
-
     _parent_path_str = "candlestick"
     _path_str = "candlestick.decreasing"
     _valid_props = {"fillcolor", "line"}
@@ -100,12 +99,10 @@ class Decreasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.candlestick.Decreasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.candlestick.Decreasing`"""
-            )
+an instance of :class:`plotly.graph_objs.candlestick.Decreasing`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

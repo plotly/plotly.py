@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Number(_BaseTraceHierarchyType):
-
     _parent_path_str = "indicator"
     _path_str = "indicator.number"
     _valid_props = {"font", "prefix", "suffix", "valueformat"}
@@ -148,12 +147,10 @@ class Number(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.Number
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Number`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.Number`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

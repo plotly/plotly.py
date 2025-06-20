@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Domain(_BaseTraceHierarchyType):
-
     _parent_path_str = "indicator"
     _path_str = "indicator.domain"
     _valid_props = {"column", "row", "x", "y"}
@@ -155,12 +154,10 @@ class Domain(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.Domain
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Domain`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.Domain`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

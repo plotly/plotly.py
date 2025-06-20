@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Y(_BaseTraceHierarchyType):
-
     _parent_path_str = "isosurface.caps"
     _path_str = "isosurface.caps.y"
     _valid_props = {"fill", "show"}
@@ -109,12 +108,10 @@ class Y(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.isosurface.caps.Y
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.caps.Y`"""
-            )
+an instance of :class:`plotly.graph_objs.isosurface.caps.Y`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -51,7 +51,7 @@ def validate_ohlc(open, high, low, close, direction, **kwargs):
     direction_opts = ("increasing", "decreasing", "both")
     if direction not in direction_opts:
         raise exceptions.PlotlyError(
-            "direction must be defined as " "'increasing', 'decreasing', or " "'both'"
+            "direction must be defined as 'increasing', 'decreasing', or 'both'"
         )
 
 

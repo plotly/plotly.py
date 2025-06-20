@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+- Add deprecation warnings when using Kaleido v0 or deprecated image export features [[#5177](https://github.com/plotly/plotly.py/pull/5236)]
+
+## [6.1.2] - 2025-05-27
+
+### Fixed
+- Fix type checking and code highlighting for `graph_objects` classes [[#5199](https://github.com/plotly/plotly.py/pull/5199)]
+
+
 ## [6.1.1] - 2025-05-20
 
 ### Fixed
@@ -13,6 +23,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Updated
 - Add support for Kaleido>=v1.0.0 for image generation [[#5062](https://github.com/plotly/plotly.py/pull/5062), [#5177](https://github.com/plotly/plotly.py/pull/5177)]
 - Reduce package bundle size by 18-24% via changes to code generation [[#4978](https://github.com/plotly/plotly.py/pull/4978)]
+
+### Added
+- Add SRI (Subresource Integrity) hash support for CDN script tags when using `include_plotlyjs='cdn'`. This enhances security by ensuring browser verification of CDN-served plotly.js files [[#PENDING](https://github.com/plotly/plotly.py/pull/PENDING)]
 
 ### Fixed
 - Fix third-party widget display issues in v6 [[#5102](https://github.com/plotly/plotly.py/pull/5102)]

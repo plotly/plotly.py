@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatterpolargl.selected"
     _path_str = "scatterpolargl.selected.marker"
     _valid_props = {"color", "opacity", "size"}
@@ -113,12 +112,10 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatterpolargl.selected.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterpolargl.selected.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.scatterpolargl.selected.Marker`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

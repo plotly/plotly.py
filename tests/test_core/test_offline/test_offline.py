@@ -6,11 +6,12 @@ test__offline
 import json
 import os
 from unittest import TestCase
-import pytest
 
 import plotly
+from plotly.offline import get_plotlyjs
 import plotly.io as pio
 from plotly.io._utils import plotly_cdn_url
+from plotly.io._html import _generate_sri_hash
 
 packages_root = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(plotly.__file__))))
@@ -37,14 +38,14 @@ plotly_config_script = """\
 <script type="text/javascript">\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
-cdn_script = '<script charset="utf-8" src="{cdn_url}"></script>'.format(
-    cdn_url=plotly_cdn_url()
+cdn_script = '<script charset="utf-8" src="{cdn_url}" integrity="{js_hash}" crossorigin="anonymous"></script>'.format(
+    cdn_url=plotly_cdn_url(), js_hash=_generate_sri_hash(get_plotlyjs())
 )
 
 directory_script = '<script charset="utf-8" src="plotly.min.js"></script>'
 
 
-mathjax_cdn = "https://cdnjs.cloudflare.com" "/ajax/libs/mathjax/2.7.5/MathJax.js"
+mathjax_cdn = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
 
 mathjax_config_str = "?config=TeX-AMS-MML_SVG"
 
@@ -240,14 +241,10 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     def test_including_plotlyjs_path_html(self):
         for include_plotlyjs in [
-            (
-                "https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/"
-                "plotly.min.js"
-            ),
+            "https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/plotly.min.js",
             "subpath/to/plotly.min.js",
             "something.js",
         ]:
-
             html = self._read_html(
                 plotly.offline.plot(
                     fig,
@@ -264,14 +261,10 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     def test_including_plotlyjs_path_div(self):
         for include_plotlyjs in [
-            (
-                "https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/"
-                "plotly.min.js"
-            ),
+            "https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/plotly.min.js",
             "subpath/to/plotly.min.js",
             "something.js",
         ]:
-
             html = plotly.offline.plot(
                 fig, include_plotlyjs=include_plotlyjs, output_type="div"
             )

@@ -612,7 +612,12 @@ docs = dict(
 def make_docstring(fn, override_dict=None, append_dict=None):
     override_dict = {} if override_dict is None else override_dict
     append_dict = {} if append_dict is None else append_dict
-    tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
+    tw = TextWrapper(
+        width=75,
+        initial_indent="    ",
+        subsequent_indent="    ",
+        break_on_hyphens=False,
+    )
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in getfullargspec(fn)[0]:
         if override_dict.get(param):

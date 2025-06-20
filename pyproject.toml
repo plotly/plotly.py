@@ -8,12 +8,6 @@ build-backend = "setuptools.build_meta"
 "Github" = "https://github.com/plotly/plotly.py"
 "Changelog" = "https://github.com/plotly/plotly.py/blob/main/CHANGELOG.md"
 
-[tool.pytest.ini_options]
-markers = [
-    "nodev: mark a test as nodev",
-    "matplotlib: mark a test as matplotlib"
-]
-
 [project]
 name = "plotly"
 authors = [
@@ -38,7 +32,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.1.1"
+version = "6.1.2"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -46,12 +40,56 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
-kaleido = ["kaleido==1.0.0rc13"]
-dev = ["black==25.1.0"]
+kaleido = ["kaleido>=1.0.0"]
+dev_core = [
+    "pytest",
+    "requests",
+    # pin precise version of ruff to prevent accidental reformatting in case its defaults are updated
+    "ruff==0.11.12"
+]
+dev_build = [
+    "plotly[dev_core]",
+    "build",
+    "jupyter"
+]
+dev_optional = [
+    "plotly[dev_build]",
+    "plotly[kaleido]",
+    "anywidget",
+    "colorcet",
+    # fiona>1.9.6 is not compatible with geopandas<1; geopandas>=1 is not compatible with python 3.8
+    "fiona<=1.9.6;python_version<='3.8'",
+    "geopandas",
+    "inflect",
+    "numpy",
+    "orjson",
+    "pandas",
+    "pdfrw",
+    "pillow",
+    "plotly-geo",
+    "polars[timezone]",
+    "pyarrow",
+    "pyshp",
+    "pytz",
+    "scikit-image",
+    "scipy",
+    "shapely",
+    "statsmodels",
+    "vaex;python_version<='3.9'",
+    "xarray"
+]
+dev = [
+    "plotly[dev_optional]"
+]
 
 [project.scripts]
 plotly_get_chrome = "plotly.io._kaleido:get_chrome"
 
+[tool.pytest.ini_options]
+markers = [
+    "nodev: mark a test as nodev",
+    "matplotlib: mark a test as matplotlib"
+]
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -63,30 +101,8 @@ plotly = [
     "package_data/*",
     "package_data/templates/*",
     "package_data/datasets/*",
+    "validators/_validators.json"
 ]
-
-[tool.black]
-line-length = 88
-target_version = ['py38', 'py39', 'py310', 'py311', 'py312']
-include = '\.pyi?$'
-exclude = '''
-
-(
-      \.eggs         # exclude a few common directories in the
-    | \.git          # root of the project
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-    | js
-    | submodules
-    | plotly/matplotlylib/mplexporter
-)
-'''
 
 [tool.jupyter-packaging.builder]
 factory = "jupyter_packaging.npm_builder"

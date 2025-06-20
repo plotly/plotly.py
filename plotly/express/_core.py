@@ -436,9 +436,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         args["y"],
                         non_missing.to_numpy(),  # numpy array
                     )
-                    assert len(y_out) == len(
-                        trace_patch["x"]
-                    ), "missing-data-handling failure in trendline code"
+                    assert len(y_out) == len(trace_patch["x"]), (
+                        "missing-data-handling failure in trendline code"
+                    )
                     trace_patch["y"] = y_out
                     mapping_labels[get_label(args, args["x"])] = "%{x}"
                     mapping_labels[get_label(args, args["y"])] = "%{y} <b>(trend)</b>"
@@ -1247,9 +1247,17 @@ def process_args_into_dataframe(
             if field_name not in array_attrables
             else args.get(field_name)
         )
+
         # argument not specified, continue
-        if argument_list is None or argument_list is [None]:
+        # The original also tested `or argument_list is [None]` but
+        # that clause is always False, so it has been removed.  The
+        # alternative fix would have been to test that `argument_list`
+        # is of length 1 and its sole element is `None`, but that
+        # feels pedantic. All tests pass with the change below; let's
+        # see if the world decides we were wrong.
+        if argument_list is None:
             continue
+
         # Argument name: field_name if the argument is not a list
         # Else we give names like ["hover_data_0, hover_data_1"] etc.
         field_list = (
@@ -1987,10 +1995,10 @@ def process_dataframe_hierarchy(args):
         if discrete_color:
             discrete_aggs.append(args["color"])
             agg_f[args["color"]] = nw.col(args["color"]).max()
-            agg_f[f'{args["color"]}{n_unique_token}'] = (
+            agg_f[f"{args['color']}{n_unique_token}"] = (
                 nw.col(args["color"])
                 .n_unique()
-                .alias(f'{args["color"]}{n_unique_token}')
+                .alias(f"{args['color']}{n_unique_token}")
             )
         else:
             # This first needs to be multiplied by `count_colname`
@@ -2864,9 +2872,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             e.args = (
                 e.args[0]
                 + """
-Use the {facet_arg} argument to adjust this spacing.""".format(
-                    facet_arg=facet_arg
-                ),
+Use the {facet_arg} argument to adjust this spacing.""".format(facet_arg=facet_arg),
             )
             raise e
 

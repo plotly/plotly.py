@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class AngularAxis(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.polar"
     _path_str = "layout.polar.angularaxis"
     _valid_props = {
@@ -1716,12 +1715,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.polar.AngularAxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.polar.AngularAxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.polar.AngularAxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

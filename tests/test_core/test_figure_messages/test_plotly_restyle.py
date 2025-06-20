@@ -1,12 +1,8 @@
-import sys
 from unittest import TestCase
 
 import plotly.graph_objs as go
 
-if sys.version_info >= (3, 3):
-    from unittest.mock import MagicMock
-else:
-    from mock import MagicMock
+from unittest.mock import MagicMock
 
 
 class TestRestyleMessage(TestCase):

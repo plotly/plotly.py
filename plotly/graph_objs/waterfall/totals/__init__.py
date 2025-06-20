@@ -1,6 +1,12 @@
 import sys
-from _plotly_utils.importers import relative_import
+from typing import TYPE_CHECKING
 
-__all__, __getattr__, __dir__ = relative_import(
-    __name__, [".marker"], ["._marker.Marker"]
-)
+if TYPE_CHECKING:
+    from ._marker import Marker
+    from . import marker
+else:
+    from _plotly_utils.importers import relative_import
+
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__, [".marker"], ["._marker.Marker"]
+    )
