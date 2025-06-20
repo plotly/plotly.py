@@ -1,4 +1,4 @@
-plotly==6.0.1
+plotly==6.1.2
 jupytext==1.16.4
 jupyter-client<7
 jupyter
@@ -33,7 +33,7 @@ python-frontmatter
 datashader==0.14.4
 pyarrow
 cufflinks==0.17.3
-kaleido
+kaleido==0.2.1
 umap-learn==0.5.1
 pooch
 wget
