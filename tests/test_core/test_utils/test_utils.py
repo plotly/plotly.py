@@ -18,7 +18,6 @@ class TestJSONEncoder(TestCase):
 
 class TestGetByPath(TestCase):
     def test_get_by_path(self):
-
         # should be able to traverse into a nested dict/list with key array
 
         figure = {"data": [{}, {"marker": {"color": ["red", "blue"]}}]}
@@ -30,7 +29,6 @@ class TestGetByPath(TestCase):
 
 class TestNodeGenerator(TestCase):
     def test_node_generator(self):
-
         # should generate a (node, path) pair for each dict in a dict
 
         node4 = {"h": 5}

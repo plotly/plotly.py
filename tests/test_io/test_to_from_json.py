@@ -197,7 +197,6 @@ def test_read_json_from_pathlib(fig1, fig_type_spec, fig_type):
 )
 def test_read_json_from_file_string(fig1, fig_type_spec, fig_type):
     with tempfile.TemporaryDirectory() as dir_name:
-
         # Write json file
         path = os.path.join(dir_name, "fig1.json")
         with open(path, "w") as f:
@@ -248,7 +247,6 @@ def test_write_json_pathlib(fig1, pretty, remove_uids):
 @pytest.mark.parametrize("remove_uids", [True, False])
 def test_write_json_from_file_string(fig1, pretty, remove_uids):
     with tempfile.TemporaryDirectory() as dir_name:
-
         # Write json
         path = os.path.join(dir_name, "fig1.json")
         pio.write_json(fig1, path, pretty=pretty, remove_uids=remove_uids)

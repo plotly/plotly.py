@@ -22,7 +22,6 @@ _plotly_geo = optional_imports.get_module("_plotly_geo")
 
 
 def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
-
     # URLS
     abs_dir_path = os.path.realpath(_plotly_geo.__file__)
 

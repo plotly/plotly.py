@@ -1,8 +1,9 @@
 import textwrap
 from pprint import PrettyPrinter
 
-from _plotly_utils.utils import *
-from _plotly_utils.data_utils import *
+from _plotly_utils.utils import NotEncodable, PlotlyJSONEncoder, get_module  # noqa: F401
+from _plotly_utils.data_utils import image_array_to_data_uri  # noqa: F401
+
 
 # Pretty printing
 def _list_repr_elided(v, threshold=200, edgeitems=3, indent=0, width=80):

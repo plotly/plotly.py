@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "choroplethmap"
     _path_str = "choroplethmap.marker"
     _valid_props = {"line", "opacity", "opacitysrc"}
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -20,25 +18,6 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.choroplethmap.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
-            Supported dict properties:
-
-                color
-                    Sets the marker.line color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `marker.line.cmin` and `marker.line.cmax` if
-                    set.
-                colorsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `color`.
-                width
-                    Sets the width (in px) of the lines bounding
-                    the marker points.
-                widthsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for `width`.
 
         Returns
         -------
@@ -50,8 +29,6 @@ class Marker(_BaseTraceHierarchyType):
     def line(self, val):
         self["line"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -71,8 +48,6 @@ class Marker(_BaseTraceHierarchyType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # opacitysrc
-    # ----------
     @property
     def opacitysrc(self):
         """
@@ -91,8 +66,6 @@ class Marker(_BaseTraceHierarchyType):
     def opacitysrc(self, val):
         self["opacitysrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -129,14 +102,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__("marker")
-
+        super().__init__("marker")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -144,37 +114,16 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.choroplethmap.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.choroplethmap.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.choroplethmap.Marker`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("opacitysrc", None)
-        _v = opacitysrc if opacitysrc is not None else _v
-        if _v is not None:
-            self["opacitysrc"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("line", arg, line)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("opacitysrc", arg, opacitysrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

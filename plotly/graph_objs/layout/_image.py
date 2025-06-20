@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Image(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout"
     _path_str = "layout.image"
     _valid_props = {
@@ -26,8 +26,6 @@ class Image(_BaseLayoutHierarchyType):
         "yref",
     }
 
-    # layer
-    # -----
     @property
     def layer(self):
         """
@@ -49,8 +47,6 @@ class Image(_BaseLayoutHierarchyType):
     def layer(self, val):
         self["layer"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -76,8 +72,6 @@ class Image(_BaseLayoutHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -96,8 +90,6 @@ class Image(_BaseLayoutHierarchyType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # sizex
-    # -----
     @property
     def sizex(self):
         """
@@ -120,8 +112,6 @@ class Image(_BaseLayoutHierarchyType):
     def sizex(self, val):
         self["sizex"] = val
 
-    # sizey
-    # -----
     @property
     def sizey(self):
         """
@@ -144,8 +134,6 @@ class Image(_BaseLayoutHierarchyType):
     def sizey(self, val):
         self["sizey"] = val
 
-    # sizing
-    # ------
     @property
     def sizing(self):
         """
@@ -165,8 +153,6 @@ class Image(_BaseLayoutHierarchyType):
     def sizing(self, val):
         self["sizing"] = val
 
-    # source
-    # ------
     @property
     def source(self):
         """
@@ -193,8 +179,6 @@ class Image(_BaseLayoutHierarchyType):
     def source(self, val):
         self["source"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -221,8 +205,6 @@ class Image(_BaseLayoutHierarchyType):
     def templateitemname(self, val):
         self["templateitemname"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -241,8 +223,6 @@ class Image(_BaseLayoutHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -262,8 +242,6 @@ class Image(_BaseLayoutHierarchyType):
     def x(self, val):
         self["x"] = val
 
-    # xanchor
-    # -------
     @property
     def xanchor(self):
         """
@@ -283,8 +261,6 @@ class Image(_BaseLayoutHierarchyType):
     def xanchor(self, val):
         self["xanchor"] = val
 
-    # xref
-    # ----
     @property
     def xref(self):
         """
@@ -316,8 +292,6 @@ class Image(_BaseLayoutHierarchyType):
     def xref(self, val):
         self["xref"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -337,8 +311,6 @@ class Image(_BaseLayoutHierarchyType):
     def y(self, val):
         self["y"] = val
 
-    # yanchor
-    # -------
     @property
     def yanchor(self):
         """
@@ -358,8 +330,6 @@ class Image(_BaseLayoutHierarchyType):
     def yanchor(self, val):
         self["yanchor"] = val
 
-    # yref
-    # ----
     @property
     def yref(self):
         """
@@ -391,8 +361,6 @@ class Image(_BaseLayoutHierarchyType):
     def yref(self, val):
         self["yref"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -601,14 +569,11 @@ class Image(_BaseLayoutHierarchyType):
         -------
         Image
         """
-        super(Image, self).__init__("images")
-
+        super().__init__("images")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -616,85 +581,28 @@ class Image(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Image
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Image`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Image`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("layer", None)
-        _v = layer if layer is not None else _v
-        if _v is not None:
-            self["layer"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("sizex", None)
-        _v = sizex if sizex is not None else _v
-        if _v is not None:
-            self["sizex"] = _v
-        _v = arg.pop("sizey", None)
-        _v = sizey if sizey is not None else _v
-        if _v is not None:
-            self["sizey"] = _v
-        _v = arg.pop("sizing", None)
-        _v = sizing if sizing is not None else _v
-        if _v is not None:
-            self["sizing"] = _v
-        _v = arg.pop("source", None)
-        _v = source if source is not None else _v
-        if _v is not None:
-            self["source"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("xanchor", None)
-        _v = xanchor if xanchor is not None else _v
-        if _v is not None:
-            self["xanchor"] = _v
-        _v = arg.pop("xref", None)
-        _v = xref if xref is not None else _v
-        if _v is not None:
-            self["xref"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("yanchor", None)
-        _v = yanchor if yanchor is not None else _v
-        if _v is not None:
-            self["yanchor"] = _v
-        _v = arg.pop("yref", None)
-        _v = yref if yref is not None else _v
-        if _v is not None:
-            self["yref"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("layer", arg, layer)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("sizex", arg, sizex)
+        self._set_property("sizey", arg, sizey)
+        self._set_property("sizing", arg, sizing)
+        self._set_property("source", arg, source)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("visible", arg, visible)
+        self._set_property("x", arg, x)
+        self._set_property("xanchor", arg, xanchor)
+        self._set_property("xref", arg, xref)
+        self._set_property("y", arg, y)
+        self._set_property("yanchor", arg, yanchor)
+        self._set_property("yref", arg, yref)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
