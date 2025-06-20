@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Y(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "scatter3d.projection"
     _path_str = "scatter3d.projection.y"
     _valid_props = {"opacity", "scale", "show"}
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -30,8 +28,6 @@ class Y(_BaseTraceHierarchyType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # scale
-    # -----
     @property
     def scale(self):
         """
@@ -51,8 +47,6 @@ class Y(_BaseTraceHierarchyType):
     def scale(self, val):
         self["scale"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -71,8 +65,6 @@ class Y(_BaseTraceHierarchyType):
     def show(self, val):
         self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -109,14 +101,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         Y
         """
-        super(Y, self).__init__("y")
-
+        super().__init__("y")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -124,37 +113,16 @@ class Y(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter3d.projection.Y
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.projection.Y`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter3d.projection.Y`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("scale", None)
-        _v = scale if scale is not None else _v
-        if _v is not None:
-            self["scale"] = _v
-        _v = arg.pop("show", None)
-        _v = show if show is not None else _v
-        if _v is not None:
-            self["show"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("opacity", arg, opacity)
+        self._set_property("scale", arg, scale)
+        self._set_property("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

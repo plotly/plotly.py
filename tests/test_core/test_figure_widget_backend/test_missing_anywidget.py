@@ -1,3 +1,5 @@
+# ruff: noqa: F401 F403 F405
+
 import pytest
 
 # Use wildcard import to make sure FigureWidget is always included

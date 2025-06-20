@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Z(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "surface.contours"
     _path_str = "surface.contours.z"
     _valid_props = {
@@ -22,8 +22,6 @@ class Z(_BaseTraceHierarchyType):
         "width",
     }
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -34,42 +32,7 @@ class Z(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -81,8 +44,6 @@ class Z(_BaseTraceHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # end
-    # ---
     @property
     def end(self):
         """
@@ -102,8 +63,6 @@ class Z(_BaseTraceHierarchyType):
     def end(self, val):
         self["end"] = val
 
-    # highlight
-    # ---------
     @property
     def highlight(self):
         """
@@ -123,8 +82,6 @@ class Z(_BaseTraceHierarchyType):
     def highlight(self, val):
         self["highlight"] = val
 
-    # highlightcolor
-    # --------------
     @property
     def highlightcolor(self):
         """
@@ -135,42 +92,7 @@ class Z(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -182,8 +104,6 @@ class Z(_BaseTraceHierarchyType):
     def highlightcolor(self, val):
         self["highlightcolor"] = val
 
-    # highlightwidth
-    # --------------
     @property
     def highlightwidth(self):
         """
@@ -202,8 +122,6 @@ class Z(_BaseTraceHierarchyType):
     def highlightwidth(self, val):
         self["highlightwidth"] = val
 
-    # project
-    # -------
     @property
     def project(self):
         """
@@ -212,27 +130,6 @@ class Z(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.surface.contours.z.Project`
           - A dict of string/value properties that will be passed
             to the Project constructor
-
-            Supported dict properties:
-
-                x
-                    Determines whether or not these contour lines
-                    are projected on the x plane. If `highlight` is
-                    set to True (the default), the projected lines
-                    are shown on hover. If `show` is set to True,
-                    the projected lines are shown in permanence.
-                y
-                    Determines whether or not these contour lines
-                    are projected on the y plane. If `highlight` is
-                    set to True (the default), the projected lines
-                    are shown on hover. If `show` is set to True,
-                    the projected lines are shown in permanence.
-                z
-                    Determines whether or not these contour lines
-                    are projected on the z plane. If `highlight` is
-                    set to True (the default), the projected lines
-                    are shown on hover. If `show` is set to True,
-                    the projected lines are shown in permanence.
 
         Returns
         -------
@@ -244,8 +141,6 @@ class Z(_BaseTraceHierarchyType):
     def project(self, val):
         self["project"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -265,8 +160,6 @@ class Z(_BaseTraceHierarchyType):
     def show(self, val):
         self["show"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -285,8 +178,6 @@ class Z(_BaseTraceHierarchyType):
     def size(self, val):
         self["size"] = val
 
-    # start
-    # -----
     @property
     def start(self):
         """
@@ -306,8 +197,6 @@ class Z(_BaseTraceHierarchyType):
     def start(self, val):
         self["start"] = val
 
-    # usecolormap
-    # -----------
     @property
     def usecolormap(self):
         """
@@ -327,8 +216,6 @@ class Z(_BaseTraceHierarchyType):
     def usecolormap(self, val):
         self["usecolormap"] = val
 
-    # width
-    # -----
     @property
     def width(self):
         """
@@ -347,8 +234,6 @@ class Z(_BaseTraceHierarchyType):
     def width(self, val):
         self["width"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -442,14 +327,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         Z
         """
-        super(Z, self).__init__("z")
-
+        super().__init__("z")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -457,69 +339,24 @@ class Z(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.surface.contours.Z
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.contours.Z`"""
-            )
+an instance of :class:`plotly.graph_objs.surface.contours.Z`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("end", None)
-        _v = end if end is not None else _v
-        if _v is not None:
-            self["end"] = _v
-        _v = arg.pop("highlight", None)
-        _v = highlight if highlight is not None else _v
-        if _v is not None:
-            self["highlight"] = _v
-        _v = arg.pop("highlightcolor", None)
-        _v = highlightcolor if highlightcolor is not None else _v
-        if _v is not None:
-            self["highlightcolor"] = _v
-        _v = arg.pop("highlightwidth", None)
-        _v = highlightwidth if highlightwidth is not None else _v
-        if _v is not None:
-            self["highlightwidth"] = _v
-        _v = arg.pop("project", None)
-        _v = project if project is not None else _v
-        if _v is not None:
-            self["project"] = _v
-        _v = arg.pop("show", None)
-        _v = show if show is not None else _v
-        if _v is not None:
-            self["show"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("start", None)
-        _v = start if start is not None else _v
-        if _v is not None:
-            self["start"] = _v
-        _v = arg.pop("usecolormap", None)
-        _v = usecolormap if usecolormap is not None else _v
-        if _v is not None:
-            self["usecolormap"] = _v
-        _v = arg.pop("width", None)
-        _v = width if width is not None else _v
-        if _v is not None:
-            self["width"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("color", arg, color)
+        self._set_property("end", arg, end)
+        self._set_property("highlight", arg, highlight)
+        self._set_property("highlightcolor", arg, highlightcolor)
+        self._set_property("highlightwidth", arg, highlightwidth)
+        self._set_property("project", arg, project)
+        self._set_property("show", arg, show)
+        self._set_property("size", arg, size)
+        self._set_property("start", arg, start)
+        self._set_property("usecolormap", arg, usecolormap)
+        self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

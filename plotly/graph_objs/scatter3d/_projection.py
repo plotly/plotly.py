@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Projection(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "scatter3d"
     _path_str = "scatter3d.projection"
     _valid_props = {"x", "y", "z"}
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -20,17 +18,6 @@ class Projection(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scatter3d.projection.X`
           - A dict of string/value properties that will be passed
             to the X constructor
-
-            Supported dict properties:
-
-                opacity
-                    Sets the projection color.
-                scale
-                    Sets the scale factor determining the size of
-                    the projection marker points.
-                show
-                    Sets whether or not projections are shown along
-                    the x axis.
 
         Returns
         -------
@@ -42,8 +29,6 @@ class Projection(_BaseTraceHierarchyType):
     def x(self, val):
         self["x"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -52,17 +37,6 @@ class Projection(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scatter3d.projection.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
-
-            Supported dict properties:
-
-                opacity
-                    Sets the projection color.
-                scale
-                    Sets the scale factor determining the size of
-                    the projection marker points.
-                show
-                    Sets whether or not projections are shown along
-                    the y axis.
 
         Returns
         -------
@@ -74,8 +48,6 @@ class Projection(_BaseTraceHierarchyType):
     def y(self, val):
         self["y"] = val
 
-    # z
-    # -
     @property
     def z(self):
         """
@@ -84,17 +56,6 @@ class Projection(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.scatter3d.projection.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
-
-            Supported dict properties:
-
-                opacity
-                    Sets the projection color.
-                scale
-                    Sets the scale factor determining the size of
-                    the projection marker points.
-                show
-                    Sets whether or not projections are shown along
-                    the z axis.
 
         Returns
         -------
@@ -106,8 +67,6 @@ class Projection(_BaseTraceHierarchyType):
     def z(self, val):
         self["z"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -146,14 +105,11 @@ class Projection(_BaseTraceHierarchyType):
         -------
         Projection
         """
-        super(Projection, self).__init__("projection")
-
+        super().__init__("projection")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -161,37 +117,16 @@ class Projection(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter3d.Projection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.Projection`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter3d.Projection`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-        _v = arg.pop("z", None)
-        _v = z if z is not None else _v
-        if _v is not None:
-            self["z"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("x", arg, x)
+        self._set_property("y", arg, y)
+        self._set_property("z", arg, z)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "box"
     _path_str = "box.marker"
     _valid_props = {
@@ -18,8 +18,6 @@ class Marker(_BaseTraceHierarchyType):
         "symbol",
     }
 
-    # angle
-    # -----
     @property
     def angle(self):
         """
@@ -40,8 +38,6 @@ class Marker(_BaseTraceHierarchyType):
     def angle(self, val):
         self["angle"] = val
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -55,42 +51,7 @@ class Marker(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -102,8 +63,6 @@ class Marker(_BaseTraceHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -112,25 +71,6 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.box.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
-            Supported dict properties:
-
-                color
-                    Sets the marker.line color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `marker.line.cmin` and `marker.line.cmax` if
-                    set.
-                outliercolor
-                    Sets the border line color of the outlier
-                    sample points. Defaults to marker.color
-                outlierwidth
-                    Sets the border line width (in px) of the
-                    outlier sample points.
-                width
-                    Sets the width (in px) of the lines bounding
-                    the marker points.
 
         Returns
         -------
@@ -142,8 +82,6 @@ class Marker(_BaseTraceHierarchyType):
     def line(self, val):
         self["line"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -162,8 +100,6 @@ class Marker(_BaseTraceHierarchyType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # outliercolor
-    # ------------
     @property
     def outliercolor(self):
         """
@@ -174,42 +110,7 @@ class Marker(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -221,8 +122,6 @@ class Marker(_BaseTraceHierarchyType):
     def outliercolor(self, val):
         self["outliercolor"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -241,8 +140,6 @@ class Marker(_BaseTraceHierarchyType):
     def size(self, val):
         self["size"] = val
 
-    # symbol
-    # ------
     @property
     def symbol(self):
         """
@@ -353,8 +250,6 @@ class Marker(_BaseTraceHierarchyType):
     def symbol(self, val):
         self["symbol"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -431,14 +326,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__("marker")
-
+        super().__init__("marker")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -446,53 +338,20 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.box.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.box.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.box.Marker`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("angle", None)
-        _v = angle if angle is not None else _v
-        if _v is not None:
-            self["angle"] = _v
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("outliercolor", None)
-        _v = outliercolor if outliercolor is not None else _v
-        if _v is not None:
-            self["outliercolor"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("symbol", None)
-        _v = symbol if symbol is not None else _v
-        if _v is not None:
-            self["symbol"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("angle", arg, angle)
+        self._set_property("color", arg, color)
+        self._set_property("line", arg, line)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("outliercolor", arg, outliercolor)
+        self._set_property("size", arg, size)
+        self._set_property("symbol", arg, symbol)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

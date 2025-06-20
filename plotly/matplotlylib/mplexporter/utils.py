@@ -2,6 +2,7 @@
 Utility Routines for Working with Matplotlib Objects
 ====================================================
 """
+
 import itertools
 import io
 import base64
@@ -73,8 +74,7 @@ def get_dasharray(obj):
         dasharray = LINESTYLES.get(ls, "not found")
         if dasharray == "not found":
             warnings.warn(
-                "line style '{0}' not understood: "
-                "defaulting to solid line.".format(ls)
+                "line style '{0}' not understood: defaulting to solid line.".format(ls)
             )
             dasharray = LINESTYLES["solid"]
         return dasharray
@@ -321,7 +321,7 @@ def get_axes_properties(ax):
             scale = axis.get_scale()
 
         if scale not in ["date", "linear", "log"]:
-            raise ValueError("Unknown axis scale: " "{0}".format(axis.get_scale()))
+            raise ValueError("Unknown axis scale: {0}".format(axis.get_scale()))
 
         props[axname + "scale"] = scale
         props[axname + "lim"] = lim

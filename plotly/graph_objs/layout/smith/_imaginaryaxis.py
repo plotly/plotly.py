@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Imaginaryaxis(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout.smith"
     _path_str = "layout.smith.imaginaryaxis"
     _valid_props = {
@@ -36,8 +36,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         "visible",
     }
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -51,42 +49,7 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -98,8 +61,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # gridcolor
-    # ---------
     @property
     def gridcolor(self):
         """
@@ -110,42 +71,7 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -157,8 +83,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def gridcolor(self, val):
         self["gridcolor"] = val
 
-    # griddash
-    # --------
     @property
     def griddash(self):
         """
@@ -183,8 +107,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def griddash(self, val):
         self["griddash"] = val
 
-    # gridwidth
-    # ---------
     @property
     def gridwidth(self):
         """
@@ -203,8 +125,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def gridwidth(self, val):
         self["gridwidth"] = val
 
-    # hoverformat
-    # -----------
     @property
     def hoverformat(self):
         """
@@ -233,8 +153,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def hoverformat(self, val):
         self["hoverformat"] = val
 
-    # labelalias
-    # ----------
     @property
     def labelalias(self):
         """
@@ -260,8 +178,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def labelalias(self, val):
         self["labelalias"] = val
 
-    # layer
-    # -----
     @property
     def layer(self):
         """
@@ -286,8 +202,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def layer(self, val):
         self["layer"] = val
 
-    # linecolor
-    # ---------
     @property
     def linecolor(self):
         """
@@ -298,42 +212,7 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -345,8 +224,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def linecolor(self, val):
         self["linecolor"] = val
 
-    # linewidth
-    # ---------
     @property
     def linewidth(self):
         """
@@ -365,8 +242,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def linewidth(self, val):
         self["linewidth"] = val
 
-    # showgrid
-    # --------
     @property
     def showgrid(self):
         """
@@ -386,8 +261,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def showgrid(self, val):
         self["showgrid"] = val
 
-    # showline
-    # --------
     @property
     def showline(self):
         """
@@ -406,8 +279,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def showline(self, val):
         self["showline"] = val
 
-    # showticklabels
-    # --------------
     @property
     def showticklabels(self):
         """
@@ -426,8 +297,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def showticklabels(self, val):
         self["showticklabels"] = val
 
-    # showtickprefix
-    # --------------
     @property
     def showtickprefix(self):
         """
@@ -450,8 +319,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def showtickprefix(self, val):
         self["showtickprefix"] = val
 
-    # showticksuffix
-    # --------------
     @property
     def showticksuffix(self):
         """
@@ -471,8 +338,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def showticksuffix(self, val):
         self["showticksuffix"] = val
 
-    # tickcolor
-    # ---------
     @property
     def tickcolor(self):
         """
@@ -483,42 +348,7 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -530,8 +360,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def tickcolor(self, val):
         self["tickcolor"] = val
 
-    # tickfont
-    # --------
     @property
     def tickfont(self):
         """
@@ -543,52 +371,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                lineposition
-                    Sets the kind of decoration line(s) with text,
-                    such as an "under", "over" or "through" as well
-                    as combinations e.g. "under+over", etc.
-                shadow
-                    Sets the shape and color of the shadow behind
-                    text. "auto" places minimal shadow and applies
-                    contrast text font color. See
-                    https://developer.mozilla.org/en-
-                    US/docs/Web/CSS/text-shadow for additional
-                    options.
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                textcase
-                    Sets capitalization of text. It can be used to
-                    make text appear in all-uppercase or all-
-                    lowercase, or with each word capitalized.
-                variant
-                    Sets the variant of the font.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.layout.smith.imaginaryaxis.Tickfont
@@ -599,8 +381,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def tickfont(self, val):
         self["tickfont"] = val
 
-    # tickformat
-    # ----------
     @property
     def tickformat(self):
         """
@@ -629,8 +409,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def tickformat(self, val):
         self["tickformat"] = val
 
-    # ticklen
-    # -------
     @property
     def ticklen(self):
         """
@@ -649,8 +427,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def ticklen(self, val):
         self["ticklen"] = val
 
-    # tickprefix
-    # ----------
     @property
     def tickprefix(self):
         """
@@ -670,8 +446,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def tickprefix(self, val):
         self["tickprefix"] = val
 
-    # ticks
-    # -----
     @property
     def ticks(self):
         """
@@ -693,8 +467,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def ticks(self, val):
         self["ticks"] = val
 
-    # ticksuffix
-    # ----------
     @property
     def ticksuffix(self):
         """
@@ -714,8 +486,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def ticksuffix(self, val):
         self["ticksuffix"] = val
 
-    # tickvals
-    # --------
     @property
     def tickvals(self):
         """
@@ -735,8 +505,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def tickvals(self, val):
         self["tickvals"] = val
 
-    # tickvalssrc
-    # -----------
     @property
     def tickvalssrc(self):
         """
@@ -755,8 +523,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def tickvalssrc(self, val):
         self["tickvalssrc"] = val
 
-    # tickwidth
-    # ---------
     @property
     def tickwidth(self):
         """
@@ -775,8 +541,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def tickwidth(self, val):
         self["tickwidth"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -797,8 +561,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -1054,14 +816,11 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         -------
         Imaginaryaxis
         """
-        super(Imaginaryaxis, self).__init__("imaginaryaxis")
-
+        super().__init__("imaginaryaxis")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -1069,125 +828,38 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.smith.Imaginaryaxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.smith.Imaginaryaxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.smith.Imaginaryaxis`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("gridcolor", None)
-        _v = gridcolor if gridcolor is not None else _v
-        if _v is not None:
-            self["gridcolor"] = _v
-        _v = arg.pop("griddash", None)
-        _v = griddash if griddash is not None else _v
-        if _v is not None:
-            self["griddash"] = _v
-        _v = arg.pop("gridwidth", None)
-        _v = gridwidth if gridwidth is not None else _v
-        if _v is not None:
-            self["gridwidth"] = _v
-        _v = arg.pop("hoverformat", None)
-        _v = hoverformat if hoverformat is not None else _v
-        if _v is not None:
-            self["hoverformat"] = _v
-        _v = arg.pop("labelalias", None)
-        _v = labelalias if labelalias is not None else _v
-        if _v is not None:
-            self["labelalias"] = _v
-        _v = arg.pop("layer", None)
-        _v = layer if layer is not None else _v
-        if _v is not None:
-            self["layer"] = _v
-        _v = arg.pop("linecolor", None)
-        _v = linecolor if linecolor is not None else _v
-        if _v is not None:
-            self["linecolor"] = _v
-        _v = arg.pop("linewidth", None)
-        _v = linewidth if linewidth is not None else _v
-        if _v is not None:
-            self["linewidth"] = _v
-        _v = arg.pop("showgrid", None)
-        _v = showgrid if showgrid is not None else _v
-        if _v is not None:
-            self["showgrid"] = _v
-        _v = arg.pop("showline", None)
-        _v = showline if showline is not None else _v
-        if _v is not None:
-            self["showline"] = _v
-        _v = arg.pop("showticklabels", None)
-        _v = showticklabels if showticklabels is not None else _v
-        if _v is not None:
-            self["showticklabels"] = _v
-        _v = arg.pop("showtickprefix", None)
-        _v = showtickprefix if showtickprefix is not None else _v
-        if _v is not None:
-            self["showtickprefix"] = _v
-        _v = arg.pop("showticksuffix", None)
-        _v = showticksuffix if showticksuffix is not None else _v
-        if _v is not None:
-            self["showticksuffix"] = _v
-        _v = arg.pop("tickcolor", None)
-        _v = tickcolor if tickcolor is not None else _v
-        if _v is not None:
-            self["tickcolor"] = _v
-        _v = arg.pop("tickfont", None)
-        _v = tickfont if tickfont is not None else _v
-        if _v is not None:
-            self["tickfont"] = _v
-        _v = arg.pop("tickformat", None)
-        _v = tickformat if tickformat is not None else _v
-        if _v is not None:
-            self["tickformat"] = _v
-        _v = arg.pop("ticklen", None)
-        _v = ticklen if ticklen is not None else _v
-        if _v is not None:
-            self["ticklen"] = _v
-        _v = arg.pop("tickprefix", None)
-        _v = tickprefix if tickprefix is not None else _v
-        if _v is not None:
-            self["tickprefix"] = _v
-        _v = arg.pop("ticks", None)
-        _v = ticks if ticks is not None else _v
-        if _v is not None:
-            self["ticks"] = _v
-        _v = arg.pop("ticksuffix", None)
-        _v = ticksuffix if ticksuffix is not None else _v
-        if _v is not None:
-            self["ticksuffix"] = _v
-        _v = arg.pop("tickvals", None)
-        _v = tickvals if tickvals is not None else _v
-        if _v is not None:
-            self["tickvals"] = _v
-        _v = arg.pop("tickvalssrc", None)
-        _v = tickvalssrc if tickvalssrc is not None else _v
-        if _v is not None:
-            self["tickvalssrc"] = _v
-        _v = arg.pop("tickwidth", None)
-        _v = tickwidth if tickwidth is not None else _v
-        if _v is not None:
-            self["tickwidth"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("color", arg, color)
+        self._set_property("gridcolor", arg, gridcolor)
+        self._set_property("griddash", arg, griddash)
+        self._set_property("gridwidth", arg, gridwidth)
+        self._set_property("hoverformat", arg, hoverformat)
+        self._set_property("labelalias", arg, labelalias)
+        self._set_property("layer", arg, layer)
+        self._set_property("linecolor", arg, linecolor)
+        self._set_property("linewidth", arg, linewidth)
+        self._set_property("showgrid", arg, showgrid)
+        self._set_property("showline", arg, showline)
+        self._set_property("showticklabels", arg, showticklabels)
+        self._set_property("showtickprefix", arg, showtickprefix)
+        self._set_property("showticksuffix", arg, showticksuffix)
+        self._set_property("tickcolor", arg, tickcolor)
+        self._set_property("tickfont", arg, tickfont)
+        self._set_property("tickformat", arg, tickformat)
+        self._set_property("ticklen", arg, ticklen)
+        self._set_property("tickprefix", arg, tickprefix)
+        self._set_property("ticks", arg, ticks)
+        self._set_property("ticksuffix", arg, ticksuffix)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("tickwidth", arg, tickwidth)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

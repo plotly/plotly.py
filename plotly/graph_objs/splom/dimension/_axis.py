@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Axis(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "splom.dimension"
     _path_str = "splom.dimension.axis"
     _valid_props = {"matches", "type"}
 
-    # matches
-    # -------
     @property
     def matches(self):
         """
@@ -32,8 +30,6 @@ class Axis(_BaseTraceHierarchyType):
     def matches(self, val):
         self["matches"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -55,8 +51,6 @@ class Axis(_BaseTraceHierarchyType):
     def type(self, val):
         self["type"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -95,14 +89,11 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Axis
         """
-        super(Axis, self).__init__("axis")
-
+        super().__init__("axis")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -110,33 +101,15 @@ class Axis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.splom.dimension.Axis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.dimension.Axis`"""
-            )
+an instance of :class:`plotly.graph_objs.splom.dimension.Axis`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("matches", None)
-        _v = matches if matches is not None else _v
-        if _v is not None:
-            self["matches"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("matches", arg, matches)
+        self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
