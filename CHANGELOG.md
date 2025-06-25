@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [6.2.0] - 2025-06-20
+## [6.2.0] - 2025-06-25
 
 ### Added
 - Add SRI (Subresource Integrity) hash support for CDN script tags when using `include_plotlyjs='cdn'`. This enhances security by ensuring browser verification of CDN-served plotly.js files [[#5165](https://github.com/plotly/plotly.py/pull/5165)] (with thanks to @ddworken)
