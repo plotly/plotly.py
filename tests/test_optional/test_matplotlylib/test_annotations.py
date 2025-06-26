@@ -9,7 +9,7 @@ if matplotlylib:
 
     from ...utils import compare_dict, strip_dict_params
     from ..optional_utils import run_fig
-    from ..test_matplotlylib.data.annotations import *
+    from ..test_matplotlylib.data.annotations import ANNOTATIONS
 
 
 @pytest.mark.skip

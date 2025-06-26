@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Tickfont(_BaseTraceHierarchyType):
-
     _parent_path_str = "contourcarpet.colorbar"
     _path_str = "contourcarpet.colorbar.tickfont"
     _valid_props = {
@@ -314,12 +313,10 @@ class Tickfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.contourcarpet.colorbar.Tickfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.contourcarpet.colorbar.Tickfont`"""
-            )
+an instance of :class:`plotly.graph_objs.contourcarpet.colorbar.Tickfont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

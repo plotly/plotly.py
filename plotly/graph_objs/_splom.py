@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Splom(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "splom"
     _valid_props = {
@@ -1466,12 +1465,10 @@ class Splom(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Splom
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Splom`"""
-            )
+an instance of :class:`plotly.graph_objs.Splom`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

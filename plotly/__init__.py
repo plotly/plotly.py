@@ -26,7 +26,6 @@ Modules:
 
 """
 
-import sys
 from typing import TYPE_CHECKING
 from _plotly_utils.importers import relative_import
 import importlib.metadata
@@ -35,7 +34,7 @@ import importlib.metadata
 __version__ = importlib.metadata.version("plotly")
 version = __version__
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from plotly import (
         graph_objs,
         tools,

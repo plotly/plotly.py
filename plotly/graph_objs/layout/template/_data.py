@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Data(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.template"
     _path_str = "layout.template.data"
     _valid_props = {
@@ -1375,12 +1374,10 @@ class Data(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.template.Data
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.template.Data`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.template.Data`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

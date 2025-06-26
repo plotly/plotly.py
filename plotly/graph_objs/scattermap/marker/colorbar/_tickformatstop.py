@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Tickformatstop(_BaseTraceHierarchyType):
-
     _parent_path_str = "scattermap.marker.colorbar"
     _path_str = "scattermap.marker.colorbar.tickformatstop"
     _valid_props = {"dtickrange", "enabled", "name", "templateitemname", "value"}
@@ -225,12 +224,10 @@ class Tickformatstop(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scattermap.marker.colorbar.Tickformatstop
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattermap.marker.colorbar.Tickformatstop`"""
-            )
+an instance of :class:`plotly.graph_objs.scattermap.marker.colorbar.Tickformatstop`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

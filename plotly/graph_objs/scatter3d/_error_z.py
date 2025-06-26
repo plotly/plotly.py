@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class ErrorZ(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatter3d"
     _path_str = "scatter3d.error_z"
     _valid_props = {
@@ -455,12 +454,10 @@ class ErrorZ(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter3d.ErrorZ
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.ErrorZ`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter3d.ErrorZ`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
