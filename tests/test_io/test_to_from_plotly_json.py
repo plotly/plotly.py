@@ -109,7 +109,7 @@ def numpy_unicode_array(request):
     params=[
         datetime.datetime(2003, 7, 12, 8, 34, 22),
         datetime.datetime.now(),
-        np.datetime64(datetime.datetime.utcnow()),
+        np.datetime64(datetime.datetime.now(datetime.timezone.utc)),
         pd.Timestamp(datetime.datetime.now()),
         eastern.localize(datetime.datetime(2003, 7, 12, 8, 34, 22)),
         eastern.localize(datetime.datetime.now()),
