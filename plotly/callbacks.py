@@ -5,7 +5,6 @@ class InputDeviceState:
     def __init__(
         self, ctrl=None, alt=None, shift=None, meta=None, button=None, buttons=None, **_
     ):
-
         self._ctrl = ctrl
         self._alt = alt
         self._meta = meta
@@ -122,7 +121,6 @@ InputDeviceState(
 
 class Points:
     def __init__(self, point_inds=[], xs=[], ys=[], trace_name=None, trace_index=None):
-
         self._point_inds = point_inds
         self._xs = xs
         self._ys = ys
@@ -210,9 +208,7 @@ class BoxSelector:
     def __repr__(self):
         return """\
 BoxSelector(xrange={xrange},
-            yrange={yrange})""".format(
-            xrange=self.xrange, yrange=self.yrange
-        )
+            yrange={yrange})""".format(xrange=self.xrange, yrange=self.yrange)
 
     @property
     def type(self):

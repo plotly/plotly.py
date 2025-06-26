@@ -39,7 +39,7 @@ Please replace it with a list or tuple of instances of the following types
 """,
             DeprecationWarning,
         )
-        super(Data, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Annotations(list):
@@ -67,7 +67,7 @@ Please replace it with a list or tuple of instances of the following types
 """,
             DeprecationWarning,
         )
-        super(Annotations, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Frames(list):
@@ -92,7 +92,7 @@ Please replace it with a list or tuple of instances of the following types
 """,
             DeprecationWarning,
         )
-        super(Frames, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class AngularAxis(dict):
@@ -120,7 +120,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(AngularAxis, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Annotation(dict):
@@ -148,7 +148,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Annotation, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class ColorBar(dict):
@@ -179,7 +179,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(ColorBar, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Contours(dict):
@@ -210,7 +210,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Contours, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class ErrorX(dict):
@@ -241,7 +241,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(ErrorX, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class ErrorY(dict):
@@ -272,7 +272,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(ErrorY, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class ErrorZ(dict):
@@ -297,7 +297,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(ErrorZ, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Font(dict):
@@ -328,7 +328,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Font, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Legend(dict):
@@ -353,7 +353,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Legend, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Line(dict):
@@ -384,7 +384,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Line, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Margin(dict):
@@ -409,7 +409,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Margin, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Marker(dict):
@@ -440,7 +440,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Marker, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class RadialAxis(dict):
@@ -468,7 +468,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(RadialAxis, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Scene(dict):
@@ -493,7 +493,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Scene, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Stream(dict):
@@ -521,7 +521,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Stream, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class XAxis(dict):
@@ -549,7 +549,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(XAxis, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class YAxis(dict):
@@ -577,7 +577,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(YAxis, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class ZAxis(dict):
@@ -602,7 +602,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(ZAxis, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class XBins(dict):
@@ -630,7 +630,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(XBins, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class YBins(dict):
@@ -658,7 +658,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(YBins, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Trace(dict):
@@ -695,7 +695,7 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Trace, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Histogram2dcontour(dict):
@@ -720,4 +720,4 @@ Please replace it with one of the following more specific types
 """,
             DeprecationWarning,
         )
-        super(Histogram2dcontour, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)

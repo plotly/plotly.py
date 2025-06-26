@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Rangebreak(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout.xaxis"
     _path_str = "layout.xaxis.rangebreak"
     _valid_props = {
@@ -18,8 +18,6 @@ class Rangebreak(_BaseLayoutHierarchyType):
         "values",
     }
 
-    # bounds
-    # ------
     @property
     def bounds(self):
         """
@@ -42,8 +40,6 @@ class Rangebreak(_BaseLayoutHierarchyType):
     def bounds(self, val):
         self["bounds"] = val
 
-    # dvalue
-    # ------
     @property
     def dvalue(self):
         """
@@ -63,8 +59,6 @@ class Rangebreak(_BaseLayoutHierarchyType):
     def dvalue(self, val):
         self["dvalue"] = val
 
-    # enabled
-    # -------
     @property
     def enabled(self):
         """
@@ -84,8 +78,6 @@ class Rangebreak(_BaseLayoutHierarchyType):
     def enabled(self, val):
         self["enabled"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -111,8 +103,6 @@ class Rangebreak(_BaseLayoutHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # pattern
-    # -------
     @property
     def pattern(self):
         """
@@ -141,8 +131,6 @@ class Rangebreak(_BaseLayoutHierarchyType):
     def pattern(self, val):
         self["pattern"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -169,8 +157,6 @@ class Rangebreak(_BaseLayoutHierarchyType):
     def templateitemname(self, val):
         self["templateitemname"] = val
 
-    # values
-    # ------
     @property
     def values(self):
         """
@@ -192,8 +178,6 @@ class Rangebreak(_BaseLayoutHierarchyType):
     def values(self, val):
         self["values"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -315,14 +299,11 @@ class Rangebreak(_BaseLayoutHierarchyType):
         -------
         Rangebreak
         """
-        super(Rangebreak, self).__init__("rangebreaks")
-
+        super().__init__("rangebreaks")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -330,53 +311,20 @@ class Rangebreak(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangebreak
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.Rangebreak`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.xaxis.Rangebreak`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("bounds", None)
-        _v = bounds if bounds is not None else _v
-        if _v is not None:
-            self["bounds"] = _v
-        _v = arg.pop("dvalue", None)
-        _v = dvalue if dvalue is not None else _v
-        if _v is not None:
-            self["dvalue"] = _v
-        _v = arg.pop("enabled", None)
-        _v = enabled if enabled is not None else _v
-        if _v is not None:
-            self["enabled"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("pattern", None)
-        _v = pattern if pattern is not None else _v
-        if _v is not None:
-            self["pattern"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("values", None)
-        _v = values if values is not None else _v
-        if _v is not None:
-            self["values"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("bounds", arg, bounds)
+        self._set_property("dvalue", arg, dvalue)
+        self._set_property("enabled", arg, enabled)
+        self._set_property("name", arg, name)
+        self._set_property("pattern", arg, pattern)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("values", arg, values)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Symbol(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout.mapbox.layer"
     _path_str = "layout.mapbox.layer.symbol"
     _valid_props = {"icon", "iconsize", "placement", "text", "textfont", "textposition"}
 
-    # icon
-    # ----
     @property
     def icon(self):
         """
@@ -32,8 +30,6 @@ class Symbol(_BaseLayoutHierarchyType):
     def icon(self, val):
         self["icon"] = val
 
-    # iconsize
-    # --------
     @property
     def iconsize(self):
         """
@@ -53,8 +49,6 @@ class Symbol(_BaseLayoutHierarchyType):
     def iconsize(self, val):
         self["iconsize"] = val
 
-    # placement
-    # ---------
     @property
     def placement(self):
         """
@@ -79,8 +73,6 @@ class Symbol(_BaseLayoutHierarchyType):
     def placement(self, val):
         self["placement"] = val
 
-    # text
-    # ----
     @property
     def text(self):
         """
@@ -100,8 +92,6 @@ class Symbol(_BaseLayoutHierarchyType):
     def text(self, val):
         self["text"] = val
 
-    # textfont
-    # --------
     @property
     def textfont(self):
         """
@@ -115,35 +105,6 @@ class Symbol(_BaseLayoutHierarchyType):
           - A dict of string/value properties that will be passed
             to the Textfont constructor
 
-            Supported dict properties:
-
-                color
-
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The Chart Studio Cloud (at
-                    https://chart-studio.plotly.com or on-premise)
-                    generates images on a server, where only a
-                    select number of fonts are installed and
-                    supported. These include "Arial", "Balto",
-                    "Courier New", "Droid Sans", "Droid Serif",
-                    "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                size
-
-                style
-                    Sets whether a font should be styled with a
-                    normal or italic face from its family.
-                weight
-                    Sets the weight (or boldness) of the font.
-
         Returns
         -------
         plotly.graph_objs.layout.mapbox.layer.symbol.Textfont
@@ -154,8 +115,6 @@ class Symbol(_BaseLayoutHierarchyType):
     def textfont(self, val):
         self["textfont"] = val
 
-    # textposition
-    # ------------
     @property
     def textposition(self):
         """
@@ -178,8 +137,6 @@ class Symbol(_BaseLayoutHierarchyType):
     def textposition(self, val):
         self["textposition"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -258,14 +215,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         Symbol
         """
-        super(Symbol, self).__init__("symbol")
-
+        super().__init__("symbol")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -273,49 +227,19 @@ class Symbol(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Symbol
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Symbol`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Symbol`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("icon", None)
-        _v = icon if icon is not None else _v
-        if _v is not None:
-            self["icon"] = _v
-        _v = arg.pop("iconsize", None)
-        _v = iconsize if iconsize is not None else _v
-        if _v is not None:
-            self["iconsize"] = _v
-        _v = arg.pop("placement", None)
-        _v = placement if placement is not None else _v
-        if _v is not None:
-            self["placement"] = _v
-        _v = arg.pop("text", None)
-        _v = text if text is not None else _v
-        if _v is not None:
-            self["text"] = _v
-        _v = arg.pop("textfont", None)
-        _v = textfont if textfont is not None else _v
-        if _v is not None:
-            self["textfont"] = _v
-        _v = arg.pop("textposition", None)
-        _v = textposition if textposition is not None else _v
-        if _v is not None:
-            self["textposition"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("icon", arg, icon)
+        self._set_property("iconsize", arg, iconsize)
+        self._set_property("placement", arg, placement)
+        self._set_property("text", arg, text)
+        self._set_property("textfont", arg, textfont)
+        self._set_property("textposition", arg, textposition)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

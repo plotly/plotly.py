@@ -1,31 +1,39 @@
+"""Utility command runner."""
+
+import argparse
+import logging
+import json
 import os
+import platform
+import requests
+import shutil
+from subprocess import check_call
 import sys
 import time
-import platform
-import json
-import shutil
 
-from subprocess import check_call
-from distutils import log
+from codegen import perform_codegen, lint_code, reformat_code
 
-project_root = os.path.dirname(os.path.abspath(__file__))
-node_root = os.path.join(project_root, "js")
-is_repo = os.path.exists(os.path.join(project_root, ".git"))
-node_modules = os.path.join(node_root, "node_modules")
-targets = [
-    os.path.join(project_root, "plotly", "package_data", "widgetbundle.js"),
+
+LOGGER = logging.getLogger(__name__)
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+NODE_ROOT = os.path.join(PROJECT_ROOT, "js")
+NODE_MODULES = os.path.join(NODE_ROOT, "node_modules")
+WIDGET_TARGETS = [
+    os.path.join(PROJECT_ROOT, "plotly", "package_data", "widgetbundle.js"),
 ]
 
-npm_path = os.pathsep.join(
+NPM_PATH = os.pathsep.join(
     [
-        os.path.join(node_root, "node_modules", ".bin"),
+        os.path.join(NODE_ROOT, "node_modules", ".bin"),
         os.environ.get("PATH", os.defpath),
     ]
 )
 
-# Load plotly.js version from js/package.json
+
 def plotly_js_version():
-    path = os.path.join(project_root, "js", "package.json")
+    """Load plotly.js version from js/package.json."""
+
+    path = os.path.join(PROJECT_ROOT, "js", "package.json")
     with open(path, "rt") as f:
         package_json = json.load(f)
         version = package_json["dependencies"]["plotly.js"]
@@ -34,8 +42,9 @@ def plotly_js_version():
     return version
 
 
-# install package.json dependencies using npm
 def install_js_deps(local):
+    """Install package.json dependencies using npm."""
+
     npmName = "npm"
     if platform.system() == "Windows":
         npmName = "npm.cmd"
@@ -43,27 +52,27 @@ def install_js_deps(local):
     try:
         check_call([npmName, "--version"])
         has_npm = True
-    except:
+    except Exception:
         has_npm = False
 
     skip_npm = os.environ.get("SKIP_NPM", False)
     if skip_npm:
-        log.info("Skipping npm-installation")
+        LOGGER.info("Skipping npm-installation")
         return
 
     if not has_npm:
-        log.error(
+        LOGGER.error(
             "`npm` unavailable.  If you're running this command using sudo, make sure `npm` is available to sudo"
         )
 
     env = os.environ.copy()
-    env["PATH"] = npm_path
+    env["PATH"] = NPM_PATH
 
     if has_npm:
-        log.info("Installing build dependencies with npm.  This may take a while...")
+        LOGGER.info("Installing build dependencies with npm.  This may take a while...")
         check_call(
             [npmName, "install"],
-            cwd=node_root,
+            cwd=NODE_ROOT,
             stdout=sys.stdout,
             stderr=sys.stderr,
         )
@@ -71,87 +80,83 @@ def install_js_deps(local):
             plotly_archive = os.path.join(local, "plotly.js.tgz")
             check_call(
                 [npmName, "install", plotly_archive],
-                cwd=node_root,
+                cwd=NODE_ROOT,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
         check_call(
             [npmName, "run", "build"],
-            cwd=node_root,
+            cwd=NODE_ROOT,
             stdout=sys.stdout,
             stderr=sys.stderr,
         )
-        os.utime(node_modules, None)
+        os.utime(NODE_MODULES, None)
 
-    for t in targets:
-        if not os.path.exists(t):
-            msg = "Missing file: %s" % t
+    for target in WIDGET_TARGETS:
+        if not os.path.exists(target):
+            msg = "Missing file: %s" % target
             raise ValueError(msg)
 
 
-# Generate class hierarchy from Plotly JSON schema
-def run_codegen():
-    if sys.version_info < (3, 8):
-        raise ImportError("Code generation must be executed with Python >= 3.8")
-
-    from codegen import perform_codegen
-
-    perform_codegen()
-
-
 def overwrite_schema_local(uri):
-    path = os.path.join(project_root, "codegen", "resources", "plot-schema.json")
+    """Replace plot-schema.json with local copy."""
+
+    path = os.path.join(PROJECT_ROOT, "codegen", "resources", "plot-schema.json")
     shutil.copyfile(uri, path)
 
 
 def overwrite_schema(url):
-    import requests
+    """Replace plot-schema.json with web copy."""
 
     req = requests.get(url)
     assert req.status_code == 200
-    path = os.path.join(project_root, "codegen", "resources", "plot-schema.json")
+    path = os.path.join(PROJECT_ROOT, "codegen", "resources", "plot-schema.json")
     with open(path, "wb") as f:
         f.write(req.content)
 
 
 def overwrite_bundle_local(uri):
-    path = os.path.join(project_root, "plotly", "package_data", "plotly.min.js")
+    """Replace minified JavaScript bundle.json with local copy."""
+
+    path = os.path.join(PROJECT_ROOT, "plotly", "package_data", "plotly.min.js")
     shutil.copyfile(uri, path)
 
 
 def overwrite_bundle(url):
-    import requests
+    """Replace minified JavaScript bundle.json with web copy."""
 
     req = requests.get(url)
     print("url:", url)
     assert req.status_code == 200
-    path = os.path.join(project_root, "plotly", "package_data", "plotly.min.js")
+    path = os.path.join(PROJECT_ROOT, "plotly", "package_data", "plotly.min.js")
     with open(path, "wb") as f:
         f.write(req.content)
 
 
 def overwrite_plotlyjs_version_file(plotlyjs_version):
-    path = os.path.join(project_root, "plotly", "offline", "_plotlyjs_version.py")
+    """Replace plotly.js version file."""
+
+    path = os.path.join(PROJECT_ROOT, "plotly", "offline", "_plotlyjs_version.py")
     with open(path, "w") as f:
         f.write(
             """\
 # DO NOT EDIT
 # This file is generated by the updatebundle commands.py command
 __plotlyjs_version__ = "{plotlyjs_version}"
-""".format(
-                plotlyjs_version=plotlyjs_version
-            )
+""".format(plotlyjs_version=plotlyjs_version)
         )
 
 
 def request_json(url):
-    import requests
+    """Get JSON data from a URL."""
 
     req = requests.get(url)
     return json.loads(req.content.decode("utf-8"))
 
 
 def get_latest_publish_build_info(repo, branch):
+    """Get build info from Circle CI."""
+
     url = (
         r"https://circleci.com/api/v1.1/project/github/"
         r"{repo}/tree/{branch}?limit=100&filter=completed"
@@ -173,6 +178,8 @@ def get_latest_publish_build_info(repo, branch):
 
 
 def get_bundle_schema_local(local):
+    """Get paths to local build files."""
+
     plotly_archive = os.path.join(local, "plotly.js.tgz")
     plotly_bundle = os.path.join(local, "dist/plotly.min.js")
     plotly_schemas = os.path.join(local, "dist/plot-schema.json")
@@ -180,6 +187,8 @@ def get_bundle_schema_local(local):
 
 
 def get_bundle_schema_urls(build_num):
+    """Get URLs for required files."""
+
     url = (
         "https://circleci.com/api/v1.1/project/github/"
         "plotly/plotly.js/{build_num}/artifacts"
@@ -202,8 +211,9 @@ def get_bundle_schema_urls(build_num):
     return archive["url"], bundle["url"], schema["url"]
 
 
-# Download latest version of the plot-schema JSON file
 def update_schema(plotly_js_version):
+    """Download latest version of the plot-schema JSON file."""
+
     url = (
         "https://raw.githubusercontent.com/plotly/plotly.js/"
         "v%s/dist/plot-schema.json" % plotly_js_version
@@ -211,8 +221,9 @@ def update_schema(plotly_js_version):
     overwrite_schema(url)
 
 
-# Download latest version of the plotly.js bundle
 def update_bundle(plotly_js_version):
+    """Download latest version of the plotly.js bundle."""
+
     url = (
         "https://raw.githubusercontent.com/plotly/plotly.js/"
         "v%s/dist/plotly.min.js" % plotly_js_version
@@ -224,15 +235,17 @@ def update_bundle(plotly_js_version):
     overwrite_plotlyjs_version_file(plotlyjs_version)
 
 
-# Update project to a new version of plotly.js
-def update_plotlyjs(plotly_js_version):
+def update_plotlyjs(plotly_js_version, outdir):
+    """Update project to a new version of plotly.js."""
+
     update_bundle(plotly_js_version)
     update_schema(plotly_js_version)
-    run_codegen()
+    perform_codegen(outdir)
 
 
-# Update the plotly.js schema and bundle from master
+# FIXME: switch to argparse
 def update_schema_bundle_from_master():
+    """Update the plotly.js schema and bundle from master."""
 
     if "--devrepo" in sys.argv:
         devrepo = sys.argv[sys.argv.index("--devrepo") + 1]
@@ -274,7 +287,7 @@ def update_schema_bundle_from_master():
         overwrite_schema_local(schema_uri)
 
     # Update plotly.js url in package.json
-    package_json_path = os.path.join(node_root, "package.json")
+    package_json_path = os.path.join(NODE_ROOT, "package.json")
     with open(package_json_path, "r") as f:
         package_json = json.load(f)
 
@@ -293,15 +306,64 @@ def update_schema_bundle_from_master():
     install_js_deps(local)
 
 
-# Update project to a new development version of plotly.js
-def update_plotlyjs_dev():
+def update_plotlyjs_dev(outdir):
+    """Update project to a new development version of plotly.js."""
+
     update_schema_bundle_from_master()
-    run_codegen()
+    perform_codegen(outdir)
+
+
+def parse_args():
+    """Parse command-line arguments."""
+
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest="cmd", help="Available subcommands")
+
+    p_codegen = subparsers.add_parser("codegen", help="generate code")
+    p_codegen.add_argument(
+        "--noformat", action="store_true", help="prevent reformatting"
+    )
+
+    subparsers.add_parser("lint", help="lint code")
+
+    subparsers.add_parser("format", help="reformat code")
+
+    subparsers.add_parser("updateplotlyjsdev", help="update plotly.js for development")
+
+    subparsers.add_parser("updateplotlyjs", help="update plotly.js")
+
+    return parser.parse_args()
+
+
+def main():
+    """Main driver."""
+
+    project_root = os.path.dirname(os.path.realpath(__file__))
+    outdir = os.path.join(project_root, "plotly")
+
+    args = parse_args()
+
+    if args.cmd == "codegen":
+        perform_codegen(outdir, noformat=args.noformat)
+
+    elif args.cmd == "format":
+        reformat_code(outdir)
+
+    elif args.cmd == "lint":
+        lint_code(outdir)
+
+    elif args.cmd == "updateplotlyjsdev":
+        update_plotlyjs_dev(outdir)
+
+    elif args.cmd == "updateplotlyjs":
+        version = plotly_js_version()
+        print(version)
+        update_plotlyjs(version, outdir)
+
+    else:
+        print(f"unknown command {args.cmd}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
-    if "updateplotlyjsdev" in sys.argv:
-        update_plotlyjs_dev()
-    elif "updateplotlyjs" in sys.argv:
-        print(plotly_js_version())
-        update_plotlyjs(plotly_js_version())
+    main()

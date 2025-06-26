@@ -1,6 +1,43 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
+
+## [6.2.0] - 2025-06-26
+
+### Added
+- Add SRI (Subresource Integrity) hash support for CDN script tags when using `include_plotlyjs='cdn'`. This enhances security by ensuring browser verification of CDN-served plotly.js files [[#5165](https://github.com/plotly/plotly.py/pull/5165)] (with thanks to @ddworken)
+
+### Fixed
+- Allow setting Plotly.js path via `pio.defaults` [[#5207](https://github.com/plotly/plotly.py/pull/5207)]
+
+### Changed
+- Refactor validation code to reduce bundle size [[#5214](https://github.com/plotly/plotly.py/pull/5214)] (with thanks to @bmaranville)
+- Add deprecation warnings when using Kaleido v0 or deprecated image export features [[#5177](https://github.com/plotly/plotly.py/pull/5236)]
+
+## [6.1.2] - 2025-05-27
+
+### Fixed
+- Fix type checking and code highlighting for `graph_objects` classes [[#5199](https://github.com/plotly/plotly.py/pull/5199)]
+
+
+## [6.1.1] - 2025-05-20
+
+### Fixed
+- Prevent swallowing of `ValueError` when creating a figure with subplots [[#3888](https://github.com/plotly/plotly.py/pull/3888)]
+- Fix issue causing `fig.write_image()` to not generate an image [[#5193](https://github.com/plotly/plotly.py/pull/5193)]
+
+## [6.1.0] - 2025-05-15
+
+### Updated
+- Add support for Kaleido>=v1.0.0 for image generation [[#5062](https://github.com/plotly/plotly.py/pull/5062), [#5177](https://github.com/plotly/plotly.py/pull/5177)]
+- Reduce package bundle size by 18-24% via changes to code generation [[#4978](https://github.com/plotly/plotly.py/pull/4978)]
+
+### Fixed
+- Fix third-party widget display issues in v6 [[#5102](https://github.com/plotly/plotly.py/pull/5102)]
+- Add handling for case where `jupyterlab` or `notebook` is not installed [[#5104](https://github.com/plotly/plotly.py/pull/5104/files)]
+- Fix issue causing Plotly.js script to be embedded multiple times in Jupyter notebooks [[#5112](https://github.com/plotly/plotly.py/pull/5112)]
+- Re-add MIME renderer JupyterLab extension with JupyterLab 4 support to reduce file sizes for offline notebooks [[#5096](https://github.com/plotly/plotly.py/pull/5096)]
+- Fix issue preventing plots from rendering in HTML notebook export when using 'vscode+notebook' renderer [[#5154](https://github.com/plotly/plotly.py/pull/5154)]
 
 ## [6.0.1] - 2025-03-14
 

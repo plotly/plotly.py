@@ -68,29 +68,29 @@ def _legend_annotation(color_name):
 def _annotation_dict(
     text, lane, num_of_lanes, SUBPLOT_SPACING, row_col="col", flipped=True
 ):
-    l = (1 - (num_of_lanes - 1) * SUBPLOT_SPACING) / (num_of_lanes)
+    temp = (1 - (num_of_lanes - 1) * SUBPLOT_SPACING) / (num_of_lanes)
     if not flipped:
         xanchor = "center"
         yanchor = "middle"
         if row_col == "col":
-            x = (lane - 1) * (l + SUBPLOT_SPACING) + 0.5 * l
+            x = (lane - 1) * (temp + SUBPLOT_SPACING) + 0.5 * temp
             y = 1.03
             textangle = 0
         elif row_col == "row":
-            y = (lane - 1) * (l + SUBPLOT_SPACING) + 0.5 * l
+            y = (lane - 1) * (temp + SUBPLOT_SPACING) + 0.5 * temp
             x = 1.03
             textangle = 90
     else:
         if row_col == "col":
             xanchor = "center"
             yanchor = "bottom"
-            x = (lane - 1) * (l + SUBPLOT_SPACING) + 0.5 * l
+            x = (lane - 1) * (temp + SUBPLOT_SPACING) + 0.5 * temp
             y = 1.0
             textangle = 270
         elif row_col == "row":
             xanchor = "left"
             yanchor = "middle"
-            y = (lane - 1) * (l + SUBPLOT_SPACING) + 0.5 * l
+            y = (lane - 1) * (temp + SUBPLOT_SPACING) + 0.5 * temp
             x = 1.0
             textangle = 0
 
@@ -201,7 +201,6 @@ def _facet_grid_color_categorical(
     kwargs_trace,
     kwargs_marker,
 ):
-
     fig = make_subplots(
         rows=num_of_rows,
         cols=num_of_cols,
@@ -370,7 +369,6 @@ def _facet_grid_color_numerical(
     kwargs_trace,
     kwargs_marker,
 ):
-
     fig = make_subplots(
         rows=num_of_rows,
         cols=num_of_cols,
@@ -526,7 +524,6 @@ def _facet_grid(
     kwargs_trace,
     kwargs_marker,
 ):
-
     fig = make_subplots(
         rows=num_of_rows,
         cols=num_of_cols,

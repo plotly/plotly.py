@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Colorscale(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "sankey.link"
     _path_str = "sankey.link.colorscale"
     _valid_props = {"cmax", "cmin", "colorscale", "label", "name", "templateitemname"}
 
-    # cmax
-    # ----
     @property
     def cmax(self):
         """
@@ -30,8 +28,6 @@ class Colorscale(_BaseTraceHierarchyType):
     def cmax(self, val):
         self["cmax"] = val
 
-    # cmin
-    # ----
     @property
     def cmin(self):
         """
@@ -50,8 +46,6 @@ class Colorscale(_BaseTraceHierarchyType):
     def cmin(self, val):
         self["cmin"] = val
 
-    # colorscale
-    # ----------
     @property
     def colorscale(self):
         """
@@ -103,8 +97,6 @@ class Colorscale(_BaseTraceHierarchyType):
     def colorscale(self, val):
         self["colorscale"] = val
 
-    # label
-    # -----
     @property
     def label(self):
         """
@@ -125,8 +117,6 @@ class Colorscale(_BaseTraceHierarchyType):
     def label(self, val):
         self["label"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -152,8 +142,6 @@ class Colorscale(_BaseTraceHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -180,8 +168,6 @@ class Colorscale(_BaseTraceHierarchyType):
     def templateitemname(self, val):
         self["templateitemname"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -288,14 +274,11 @@ class Colorscale(_BaseTraceHierarchyType):
         -------
         Colorscale
         """
-        super(Colorscale, self).__init__("colorscales")
-
+        super().__init__("colorscales")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -303,49 +286,19 @@ class Colorscale(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.sankey.link.Colorscale
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.sankey.link.Colorscale`"""
-            )
+an instance of :class:`plotly.graph_objs.sankey.link.Colorscale`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("cmax", None)
-        _v = cmax if cmax is not None else _v
-        if _v is not None:
-            self["cmax"] = _v
-        _v = arg.pop("cmin", None)
-        _v = cmin if cmin is not None else _v
-        if _v is not None:
-            self["cmin"] = _v
-        _v = arg.pop("colorscale", None)
-        _v = colorscale if colorscale is not None else _v
-        if _v is not None:
-            self["colorscale"] = _v
-        _v = arg.pop("label", None)
-        _v = label if label is not None else _v
-        if _v is not None:
-            self["label"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("cmax", arg, cmax)
+        self._set_property("cmin", arg, cmin)
+        self._set_property("colorscale", arg, colorscale)
+        self._set_property("label", arg, label)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -360,9 +360,7 @@ def make_subplots(
         raise ValueError(
             """
 The 'rows' argument to make_subplots must be an int greater than 0.
-    Received value of type {typ}: {val}""".format(
-                typ=type(rows), val=repr(rows)
-            )
+    Received value of type {typ}: {val}""".format(typ=type(rows), val=repr(rows))
         )
 
     #  ### cols ###
@@ -370,9 +368,7 @@ The 'rows' argument to make_subplots must be an int greater than 0.
         raise ValueError(
             """
 The 'cols' argument to make_subplots must be an int greater than 0.
-    Received value of type {typ}: {val}""".format(
-                typ=type(cols), val=repr(cols)
-            )
+    Received value of type {typ}: {val}""".format(typ=type(cols), val=repr(cols))
         )
 
     # ### start_cell ###
@@ -472,9 +468,7 @@ dimensions ({rows} x {cols}).
                     """
 The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
      'secondary_y' is only supported for subplots of type 'xy'
-""".format(
-                        s_typ=spec["type"]
-                    )
+""".format(s_typ=spec["type"])
                 )
 
     # ### insets ###
@@ -486,9 +480,7 @@ The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
         raise ValueError(
             """
 The 'insets' argument to make_subplots must be a list of dictionaries.
-    Received value of type {typ}: {val}""".format(
-                typ=type(insets), val=repr(insets)
-            )
+    Received value of type {typ}: {val}""".format(typ=type(insets), val=repr(insets))
         )
 
     if insets:
@@ -679,11 +671,11 @@ The row_titles argument to make_subplots must be a list or tuple
             # Throw exception if 'colspan' | 'rowspan' is too large for grid
             if c_spanned >= cols:
                 raise Exception(
-                    "Some 'colspan' value is too large for " "this subplot grid."
+                    "Some 'colspan' value is too large for this subplot grid."
                 )
             if r_spanned >= rows:
                 raise Exception(
-                    "Some 'rowspan' value is too large for " "this subplot grid."
+                    "Some 'rowspan' value is too large for this subplot grid."
                 )
 
             # Get x domain using grid and colspan
@@ -1062,9 +1054,11 @@ def _init_subplot_domain(x_domain, y_domain):
 
 
 def _subplot_type_for_trace_type(trace_type):
-    from plotly.validators import DataValidator
+    from plotly.validator_cache import ValidatorCache
 
-    trace_validator = DataValidator()
+    DataValidator = ValidatorCache.get_validator("", "data")
+
+    trace_validator = DataValidator
     if trace_type in trace_validator.class_strs_map:
         # subplot_type is a trace name, find the subplot type for trace
         trace = trace_validator.validate_coerce([{"type": trace_type}])[0]
@@ -1373,13 +1367,9 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
 
 def _set_trace_grid_reference(trace, layout, grid_ref, row, col, secondary_y=False):
     if row <= 0:
-        raise Exception(
-            "Row value is out of range. " "Note: the starting cell is (1, 1)"
-        )
+        raise Exception("Row value is out of range. Note: the starting cell is (1, 1)")
     if col <= 0:
-        raise Exception(
-            "Col value is out of range. " "Note: the starting cell is (1, 1)"
-        )
+        raise Exception("Col value is out of range. Note: the starting cell is (1, 1)")
     try:
         subplot_refs = grid_ref[row - 1][col - 1]
     except IndexError:
@@ -1392,9 +1382,7 @@ def _set_trace_grid_reference(trace, layout, grid_ref, row, col, secondary_y=Fal
     if not subplot_refs:
         raise ValueError(
             """
-No subplot specified at grid position ({row}, {col})""".format(
-                row=row, col=col
-            )
+No subplot specified at grid position ({row}, {col})""".format(row=row, col=col)
         )
 
     if secondary_y:
@@ -1486,9 +1474,7 @@ The col argument to get_subplot must be an integer where 1 <= row <= {cols}
     else:
         raise ValueError(
             """
-Unexpected subplot type with layout_keys of {}""".format(
-                layout_keys
-            )
+Unexpected subplot type with layout_keys of {}""".format(layout_keys)
         )
 
 

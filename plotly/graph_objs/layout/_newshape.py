@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Newshape(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout"
     _path_str = "layout.newshape"
     _valid_props = {
@@ -26,8 +26,6 @@ class Newshape(_BaseLayoutHierarchyType):
         "visible",
     }
 
-    # drawdirection
-    # -------------
     @property
     def drawdirection(self):
         """
@@ -52,8 +50,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def drawdirection(self, val):
         self["drawdirection"] = val
 
-    # fillcolor
-    # ---------
     @property
     def fillcolor(self):
         """
@@ -67,42 +63,7 @@ class Newshape(_BaseLayoutHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -114,8 +75,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def fillcolor(self, val):
         self["fillcolor"] = val
 
-    # fillrule
-    # --------
     @property
     def fillrule(self):
         """
@@ -137,8 +96,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def fillrule(self, val):
         self["fillrule"] = val
 
-    # label
-    # -----
     @property
     def label(self):
         """
@@ -147,76 +104,6 @@ class Newshape(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.newshape.Label`
           - A dict of string/value properties that will be passed
             to the Label constructor
-
-            Supported dict properties:
-
-                font
-                    Sets the new shape label text font.
-                padding
-                    Sets padding (in px) between edge of label and
-                    edge of new shape.
-                text
-                    Sets the text to display with the new shape. It
-                    is also used for legend item if `name` is not
-                    provided.
-                textangle
-                    Sets the angle at which the label text is drawn
-                    with respect to the horizontal. For lines,
-                    angle "auto" is the same angle as the line. For
-                    all other shapes, angle "auto" is horizontal.
-                textposition
-                    Sets the position of the label text relative to
-                    the new shape. Supported values for rectangles,
-                    circles and paths are *top left*, *top center*,
-                    *top right*, *middle left*, *middle center*,
-                    *middle right*, *bottom left*, *bottom center*,
-                    and *bottom right*. Supported values for lines
-                    are "start", "middle", and "end". Default:
-                    *middle center* for rectangles, circles, and
-                    paths; "middle" for lines.
-                texttemplate
-                    Template string used for rendering the new
-                    shape's label. Note that this will override
-                    `text`. Variables are inserted using
-                    %{variable}, for example "x0: %{x0}". Numbers
-                    are formatted using d3-format's syntax
-                    %{variable:d3-format}, for example "Price:
-                    %{x0:$.2f}". See https://github.com/d3/d3-
-                    format/tree/v1.4.5#d3-format for details on the
-                    formatting syntax. Dates are formatted using
-                    d3-time-format's syntax %{variable|d3-time-
-                    format}, for example "Day: %{x0|%m %b %Y}". See
-                    https://github.com/d3/d3-time-
-                    format/tree/v2.2.3#locale_format for details on
-                    the date formatting syntax. A single
-                    multiplication or division operation may be
-                    applied to numeric variables, and combined with
-                    d3 number formatting, for example "Length in
-                    cm: %{x0*2.54}", "%{slope*60:.1f} meters per
-                    second." For log axes, variable values are
-                    given in log units. For date axes, x/y
-                    coordinate variables and center variables use
-                    datetimes, while all other variable values use
-                    values in ms. Finally, the template string has
-                    access to variables `x0`, `x1`, `y0`, `y1`,
-                    `slope`, `dx`, `dy`, `width`, `height`,
-                    `length`, `xcenter` and `ycenter`.
-                xanchor
-                    Sets the label's horizontal position anchor
-                    This anchor binds the specified `textposition`
-                    to the "left", "center" or "right" of the label
-                    text. For example, if `textposition` is set to
-                    *top right* and `xanchor` to "right" then the
-                    right-most portion of the label text lines up
-                    with the right-most edge of the new shape.
-                yanchor
-                    Sets the label's vertical position anchor This
-                    anchor binds the specified `textposition` to
-                    the "top", "middle" or "bottom" of the label
-                    text. For example, if `textposition` is set to
-                    *top right* and `yanchor` to "top" then the
-                    top-most portion of the label text lines up
-                    with the top-most edge of the new shape.
 
         Returns
         -------
@@ -228,8 +115,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def label(self, val):
         self["label"] = val
 
-    # layer
-    # -----
     @property
     def layer(self):
         """
@@ -251,8 +136,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def layer(self, val):
         self["layer"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -276,8 +159,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def legend(self, val):
         self["legend"] = val
 
-    # legendgroup
-    # -----------
     @property
     def legendgroup(self):
         """
@@ -299,8 +180,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def legendgroup(self, val):
         self["legendgroup"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -309,13 +188,6 @@ class Newshape(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.newshape.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
 
         Returns
         -------
@@ -327,8 +199,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -352,8 +222,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def legendrank(self, val):
         self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -372,8 +240,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def legendwidth(self, val):
         self["legendwidth"] = val
 
-    # line
-    # ----
     @property
     def line(self):
         """
@@ -382,20 +248,6 @@ class Newshape(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.newshape.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
-            Supported dict properties:
-
-                color
-                    Sets the line color. By default uses either
-                    dark grey or white to increase contrast with
-                    background color.
-                dash
-                    Sets the dash style of lines. Set to a dash
-                    type string ("solid", "dot", "dash",
-                    "longdash", "dashdot", or "longdashdot") or a
-                    dash length list in px (eg "5px,10px,2px,2px").
-                width
-                    Sets the line width (in px).
 
         Returns
         -------
@@ -407,8 +259,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def line(self, val):
         self["line"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -428,8 +278,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # opacity
-    # -------
     @property
     def opacity(self):
         """
@@ -448,8 +296,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def opacity(self, val):
         self["opacity"] = val
 
-    # showlegend
-    # ----------
     @property
     def showlegend(self):
         """
@@ -468,8 +314,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def showlegend(self, val):
         self["showlegend"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -491,8 +335,6 @@ class Newshape(_BaseLayoutHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -662,14 +504,11 @@ class Newshape(_BaseLayoutHierarchyType):
         -------
         Newshape
         """
-        super(Newshape, self).__init__("newshape")
-
+        super().__init__("newshape")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -677,85 +516,28 @@ class Newshape(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Newshape
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Newshape`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Newshape`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("drawdirection", None)
-        _v = drawdirection if drawdirection is not None else _v
-        if _v is not None:
-            self["drawdirection"] = _v
-        _v = arg.pop("fillcolor", None)
-        _v = fillcolor if fillcolor is not None else _v
-        if _v is not None:
-            self["fillcolor"] = _v
-        _v = arg.pop("fillrule", None)
-        _v = fillrule if fillrule is not None else _v
-        if _v is not None:
-            self["fillrule"] = _v
-        _v = arg.pop("label", None)
-        _v = label if label is not None else _v
-        if _v is not None:
-            self["label"] = _v
-        _v = arg.pop("layer", None)
-        _v = layer if layer is not None else _v
-        if _v is not None:
-            self["layer"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgroup", None)
-        _v = legendgroup if legendgroup is not None else _v
-        if _v is not None:
-            self["legendgroup"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("line", None)
-        _v = line if line is not None else _v
-        if _v is not None:
-            self["line"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("opacity", None)
-        _v = opacity if opacity is not None else _v
-        if _v is not None:
-            self["opacity"] = _v
-        _v = arg.pop("showlegend", None)
-        _v = showlegend if showlegend is not None else _v
-        if _v is not None:
-            self["showlegend"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("drawdirection", arg, drawdirection)
+        self._set_property("fillcolor", arg, fillcolor)
+        self._set_property("fillrule", arg, fillrule)
+        self._set_property("label", arg, label)
+        self._set_property("layer", arg, layer)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgroup", arg, legendgroup)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("line", arg, line)
+        self._set_property("name", arg, name)
+        self._set_property("opacity", arg, opacity)
+        self._set_property("showlegend", arg, showlegend)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

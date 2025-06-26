@@ -5,7 +5,8 @@ from _plotly_utils.basevalidators import EnumeratedValidator
 from ...test_optional.test_utils.test_utils import np_inf
 
 # Fixtures
-# --------
+
+
 @pytest.fixture()
 def validator():
     values = ["first", "second", "third", 4]
@@ -31,20 +32,21 @@ def validator_aok_re():
 
 
 # Array not ok
-# ------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize("val", ["first", "second", "third", 4])
-def test_acceptance(val, validator):
+def test_acceptance_no_array(val, validator):
     # Values should be accepted and returned unchanged
     assert validator.validate_coerce(val) == val
 
 
-# ### Value Rejection ###
+# Value Rejection
 @pytest.mark.parametrize(
     "val",
     [True, 0, 1, 23, np_inf(), set(), ["first", "second"], [True], ["third", 4], [4]],
 )
-def test_rejection_by_value(val, validator):
+def test_rejection_by_value_with_validator(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
 
@@ -52,16 +54,17 @@ def test_rejection_by_value(val, validator):
 
 
 # Array not ok, regular expression
-# --------------------------------
+
+
 @pytest.mark.parametrize("val", ["foo", "bar0", "bar1", "bar234"])
 def test_acceptance(val, validator_re):
     # Values should be accepted and returned unchanged
     assert validator_re.validate_coerce(val) == val
 
 
-# ### Value Rejection ###
+# Value Rejection
 @pytest.mark.parametrize("val", [12, set(), "bar", "BAR0", "FOO"])
-def test_rejection_by_value(val, validator_re):
+def test_rejection_by_value_with_regexp(val, validator_re):
     with pytest.raises(ValueError) as validation_failure:
         validator_re.validate_coerce(val)
 
@@ -69,8 +72,9 @@ def test_rejection_by_value(val, validator_re):
 
 
 # Array ok
-# --------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -85,16 +89,12 @@ def test_rejection_by_value(val, validator_re):
         ["first", "second", "third", 4],
     ],
 )
-def test_acceptance_aok(val, validator_aok):
+def test_acceptance_array_ok(val, validator_aok):
     # Values should be accepted and returned unchanged
-    coerce_val = validator_aok.validate_coerce(val)
-    if isinstance(val, (list, np.ndarray)):
-        assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
-    else:
-        assert coerce_val == val
+    assert val == validator_aok.validate_coerce(val)
 
 
-# ### Rejection by value ###
+# Rejection by value
 @pytest.mark.parametrize("val", [True, 0, 1, 23, np_inf(), set()])
 def test_rejection_by_value_aok(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
@@ -103,11 +103,11 @@ def test_rejection_by_value_aok(val, validator_aok):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Reject by elements ###
+# Reject by elements
 @pytest.mark.parametrize(
     "val", [[True], [0], [1, 23], [np_inf(), set()], ["ffirstt", "second", "third"]]
 )
-def test_rejection_by_element_aok(val, validator_aok):
+def test_rejection_by_element_array_ok(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
 
@@ -115,8 +115,9 @@ def test_rejection_by_element_aok(val, validator_aok):
 
 
 # Array ok, regular expression
-# ----------------------------
-# ### Acceptance ###
+
+
+# Acceptance
 @pytest.mark.parametrize(
     "val",
     [
@@ -131,7 +132,7 @@ def test_rejection_by_element_aok(val, validator_aok):
         np.array(["foo", "bar012", "baz"]),
     ],
 )
-def test_acceptance_aok(val, validator_aok_re):
+def test_acceptance_array_ok_re(val, validator_aok_re):
     # Values should be accepted and returned unchanged
     coerce_val = validator_aok_re.validate_coerce(val)
     if isinstance(val, (np.ndarray, pd.Series)):
@@ -142,9 +143,9 @@ def test_acceptance_aok(val, validator_aok_re):
         assert validator_aok_re.present(coerce_val) == val
 
 
-# ### Reject by elements ###
+# Reject by elements
 @pytest.mark.parametrize("val", [["bar", "bar0"], ["foo", 123]])
-def test_rejection_by_element_aok(val, validator_aok_re):
+def test_rejection_by_element_array_ok_re(val, validator_aok_re):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok_re.validate_coerce(val)
 

@@ -1,12 +1,11 @@
 import matplotlib
 import numpy as np
 import pytest
-from numpy.testing import assert_warns
 from packaging.version import Version
 
 from ..exporter import Exporter
 from ..renderers import FakeRenderer, FullFakeRenderer
-from . import plt
+import matplotlib.pyplot as plt
 
 
 def fake_renderer_output(fig, Renderer):
@@ -256,4 +255,3 @@ def test_legend_dots():
 def test_blended():
     fig, ax = plt.subplots()
     ax.axvline(0)
-    # assert_warns(UserWarning, fake_renderer_output, fig, FakeRenderer)

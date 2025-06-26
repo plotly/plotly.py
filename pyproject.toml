@@ -1,18 +1,12 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=61", "hatch", "jupyter_packaging~=0.10.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
 "HomePage" = "https://plotly.com/python/"
 "Documentation" = "https://plotly.com/python/"
 "Github" = "https://github.com/plotly/plotly.py"
-"Changelog" = "https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md"
-
-[tool.pytest.ini_options]
-markers = [
-    "nodev: mark a test as nodev",
-    "matplotlib: mark a test as matplotlib"
-]
+"Changelog" = "https://github.com/plotly/plotly.py/blob/main/CHANGELOG.md"
 
 [project]
 name = "plotly"
@@ -38,7 +32,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.0.1"
+version = "6.2.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -46,6 +40,56 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
+kaleido = ["kaleido>=1.0.0"]
+dev_core = [
+    "pytest",
+    "requests",
+    # pin precise version of ruff to prevent accidental reformatting in case its defaults are updated
+    "ruff==0.11.12"
+]
+dev_build = [
+    "plotly[dev_core]",
+    "build",
+    "jupyter"
+]
+dev_optional = [
+    "plotly[dev_build]",
+    "plotly[kaleido]",
+    "anywidget",
+    "colorcet",
+    # fiona>1.9.6 is not compatible with geopandas<1; geopandas>=1 is not compatible with python 3.8
+    "fiona<=1.9.6;python_version<='3.8'",
+    "geopandas",
+    "inflect",
+    "numpy",
+    "orjson",
+    "pandas",
+    "pdfrw",
+    "pillow",
+    "plotly-geo",
+    "polars[timezone]",
+    "pyarrow",
+    "pyshp",
+    "pytz",
+    "scikit-image",
+    "scipy",
+    "shapely",
+    "statsmodels",
+    "vaex;python_version<='3.9'",
+    "xarray"
+]
+dev = [
+    "plotly[dev_optional]"
+]
+
+[project.scripts]
+plotly_get_chrome = "plotly.io._kaleido:get_chrome"
+
+[tool.pytest.ini_options]
+markers = [
+    "nodev: mark a test as nodev",
+    "matplotlib: mark a test as matplotlib"
+]
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -57,29 +101,33 @@ plotly = [
     "package_data/*",
     "package_data/templates/*",
     "package_data/datasets/*",
+    "validators/_validators.json"
 ]
 
-[tool.black]
-line-length = 88
-target_version = ['py36', 'py37', 'py38', 'py39']
-include = '\.pyi?$'
-exclude = '''
+[tool.jupyter-packaging.builder]
+factory = "jupyter_packaging.npm_builder"
+auto_data_files = true
 
-(
-  /(
-      \.eggs         # exclude a few common directories in the
-    | \.git          # root of the project
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-    | submodules
-    | plotly/matplotlylib/mplexporter
-  )/
-  | versioneer.py
-)
-'''
+[tool.jupyter-packaging.build-args]
+build_cmd = "build:prod"
+npm = ["jlpm"]
+
+[tool.hatch.build.hooks.jupyter-builder]
+editable-frontend = true
+
+[tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
+build_cmd = "build"
+npm = ["jlpm"]
+source_dir = "js"
+build_dir = "plotly/labextension"
+skip_symlink = true
+
+[tool.setuptools.data-files]
+"share/jupyter/labextensions/jupyterlab-plotly" = [
+  "plotly/labextension/package.json",
+  "js/install.json"
+]
+
+"share/jupyter/labextensions/jupyterlab-plotly/static" = [
+  "plotly/labextension/static/*.js"
+]
