@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Button(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout.updatemenu"
     _path_str = "layout.updatemenu.button"
     _valid_props = {
@@ -19,8 +19,6 @@ class Button(_BaseLayoutHierarchyType):
         "visible",
     }
 
-    # args
-    # ----
     @property
     def args(self):
         """
@@ -44,8 +42,6 @@ class Button(_BaseLayoutHierarchyType):
     def args(self, val):
         self["args"] = val
 
-    # args2
-    # -----
     @property
     def args2(self):
         """
@@ -70,8 +66,6 @@ class Button(_BaseLayoutHierarchyType):
     def args2(self, val):
         self["args2"] = val
 
-    # execute
-    # -------
     @property
     def execute(self):
         """
@@ -96,8 +90,6 @@ class Button(_BaseLayoutHierarchyType):
     def execute(self, val):
         self["execute"] = val
 
-    # label
-    # -----
     @property
     def label(self):
         """
@@ -117,8 +109,6 @@ class Button(_BaseLayoutHierarchyType):
     def label(self, val):
         self["label"] = val
 
-    # method
-    # ------
     @property
     def method(self):
         """
@@ -142,8 +132,6 @@ class Button(_BaseLayoutHierarchyType):
     def method(self, val):
         self["method"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -169,8 +157,6 @@ class Button(_BaseLayoutHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -197,8 +183,6 @@ class Button(_BaseLayoutHierarchyType):
     def templateitemname(self, val):
         self["templateitemname"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -217,8 +201,6 @@ class Button(_BaseLayoutHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -345,14 +327,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Button
         """
-        super(Button, self).__init__("buttons")
-
+        super().__init__("buttons")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -360,57 +339,21 @@ class Button(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.updatemenu.Button
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("args", None)
-        _v = args if args is not None else _v
-        if _v is not None:
-            self["args"] = _v
-        _v = arg.pop("args2", None)
-        _v = args2 if args2 is not None else _v
-        if _v is not None:
-            self["args2"] = _v
-        _v = arg.pop("execute", None)
-        _v = execute if execute is not None else _v
-        if _v is not None:
-            self["execute"] = _v
-        _v = arg.pop("label", None)
-        _v = label if label is not None else _v
-        if _v is not None:
-            self["label"] = _v
-        _v = arg.pop("method", None)
-        _v = method if method is not None else _v
-        if _v is not None:
-            self["method"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("args", arg, args)
+        self._set_property("args2", arg, args2)
+        self._set_property("execute", arg, execute)
+        self._set_property("label", arg, label)
+        self._set_property("method", arg, method)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

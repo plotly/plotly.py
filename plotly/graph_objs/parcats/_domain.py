@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Domain(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "parcats"
     _path_str = "parcats.domain"
     _valid_props = {"column", "row", "x", "y"}
 
-    # column
-    # ------
     @property
     def column(self):
         """
@@ -32,8 +30,6 @@ class Domain(_BaseTraceHierarchyType):
     def column(self, val):
         self["column"] = val
 
-    # row
-    # ---
     @property
     def row(self):
         """
@@ -54,8 +50,6 @@ class Domain(_BaseTraceHierarchyType):
     def row(self, val):
         self["row"] = val
 
-    # x
-    # -
     @property
     def x(self):
         """
@@ -80,8 +74,6 @@ class Domain(_BaseTraceHierarchyType):
     def x(self, val):
         self["x"] = val
 
-    # y
-    # -
     @property
     def y(self):
         """
@@ -106,8 +98,6 @@ class Domain(_BaseTraceHierarchyType):
     def y(self, val):
         self["y"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -152,14 +142,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         Domain
         """
-        super(Domain, self).__init__("domain")
-
+        super().__init__("domain")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -167,41 +154,17 @@ class Domain(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.parcats.Domain
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcats.Domain`"""
-            )
+an instance of :class:`plotly.graph_objs.parcats.Domain`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("column", None)
-        _v = column if column is not None else _v
-        if _v is not None:
-            self["column"] = _v
-        _v = arg.pop("row", None)
-        _v = row if row is not None else _v
-        if _v is not None:
-            self["row"] = _v
-        _v = arg.pop("x", None)
-        _v = x if x is not None else _v
-        if _v is not None:
-            self["x"] = _v
-        _v = arg.pop("y", None)
-        _v = y if y is not None else _v
-        if _v is not None:
-            self["y"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("column", arg, column)
+        self._set_property("row", arg, row)
+        self._set_property("x", arg, x)
+        self._set_property("y", arg, y)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

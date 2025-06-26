@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Tiling(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "icicle"
     _path_str = "icicle.tiling"
     _valid_props = {"flip", "orientation", "pad"}
 
-    # flip
-    # ----
     @property
     def flip(self):
         """
@@ -33,8 +31,6 @@ class Tiling(_BaseTraceHierarchyType):
     def flip(self, val):
         self["flip"] = val
 
-    # orientation
-    # -----------
     @property
     def orientation(self):
         """
@@ -61,8 +57,6 @@ class Tiling(_BaseTraceHierarchyType):
     def orientation(self, val):
         self["orientation"] = val
 
-    # pad
-    # ---
     @property
     def pad(self):
         """
@@ -81,8 +75,6 @@ class Tiling(_BaseTraceHierarchyType):
     def pad(self, val):
         self["pad"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -134,14 +126,11 @@ class Tiling(_BaseTraceHierarchyType):
         -------
         Tiling
         """
-        super(Tiling, self).__init__("tiling")
-
+        super().__init__("tiling")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -149,37 +138,16 @@ class Tiling(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.icicle.Tiling
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.icicle.Tiling`"""
-            )
+an instance of :class:`plotly.graph_objs.icicle.Tiling`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("flip", None)
-        _v = flip if flip is not None else _v
-        if _v is not None:
-            self["flip"] = _v
-        _v = arg.pop("orientation", None)
-        _v = orientation if orientation is not None else _v
-        if _v is not None:
-            self["orientation"] = _v
-        _v = arg.pop("pad", None)
-        _v = pad if pad is not None else _v
-        if _v is not None:
-            self["pad"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("flip", arg, flip)
+        self._set_property("orientation", arg, orientation)
+        self._set_property("pad", arg, pad)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

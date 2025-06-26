@@ -1,8 +1,9 @@
-""" Plotly Offline
-    A module to use Plotly's graphing library with Python
-    without connecting to a public or private plotly enterprise
-    server.
+"""Plotly Offline
+A module to use Plotly's graphing library with Python
+without connecting to a public or private plotly enterprise
+server.
 """
+
 import os
 import warnings
 import pkgutil
@@ -103,7 +104,6 @@ def _build_mathjax_script(url):
 
 
 def _get_jconfig(config=None):
-
     configkeys = (
         "staticPlot",
         "plotlyServerURL",
@@ -151,9 +151,7 @@ def _get_jconfig(config=None):
         if bad_config:
             warnings.warn(
                 """
-Unrecognized config options supplied: {bad_config}""".format(
-                    bad_config=bad_config
-                )
+Unrecognized config options supplied: {bad_config}""".format(bad_config=bad_config)
             )
 
         clean_config = config
@@ -228,8 +226,9 @@ def build_save_image_post_script(
     if image:
         if image not in __IMAGE_FORMATS:
             raise ValueError(
-                "The image parameter must be one of the "
-                "following: {}".format(__IMAGE_FORMATS)
+                "The image parameter must be one of the following: {}".format(
+                    __IMAGE_FORMATS
+                )
             )
 
         script = get_image_download_script(caller)

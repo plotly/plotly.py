@@ -59,7 +59,7 @@ doc/python/.mapbox_token
 doc/.ipynb_checkpoints
 tags
 doc/check-or-enforce-order.py
-plotly/package_data/widgetbundle.js
 
 tests/percy/*.html
 tests/percy/pandas2/*.html
+test_path.png

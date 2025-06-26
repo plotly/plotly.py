@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Dimension(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "parcoords"
     _path_str = "parcoords.dimension"
     _valid_props = {
@@ -25,8 +25,6 @@ class Dimension(_BaseTraceHierarchyType):
         "visible",
     }
 
-    # constraintrange
-    # ---------------
     @property
     def constraintrange(self):
         """
@@ -56,8 +54,6 @@ class Dimension(_BaseTraceHierarchyType):
     def constraintrange(self, val):
         self["constraintrange"] = val
 
-    # label
-    # -----
     @property
     def label(self):
         """
@@ -77,8 +73,6 @@ class Dimension(_BaseTraceHierarchyType):
     def label(self, val):
         self["label"] = val
 
-    # multiselect
-    # -----------
     @property
     def multiselect(self):
         """
@@ -97,8 +91,6 @@ class Dimension(_BaseTraceHierarchyType):
     def multiselect(self, val):
         self["multiselect"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -124,8 +116,6 @@ class Dimension(_BaseTraceHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # range
-    # -----
     @property
     def range(self):
         """
@@ -151,8 +141,6 @@ class Dimension(_BaseTraceHierarchyType):
     def range(self, val):
         self["range"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -179,8 +167,6 @@ class Dimension(_BaseTraceHierarchyType):
     def templateitemname(self, val):
         self["templateitemname"] = val
 
-    # tickformat
-    # ----------
     @property
     def tickformat(self):
         """
@@ -209,8 +195,6 @@ class Dimension(_BaseTraceHierarchyType):
     def tickformat(self, val):
         self["tickformat"] = val
 
-    # ticktext
-    # --------
     @property
     def ticktext(self):
         """
@@ -229,8 +213,6 @@ class Dimension(_BaseTraceHierarchyType):
     def ticktext(self, val):
         self["ticktext"] = val
 
-    # ticktextsrc
-    # -----------
     @property
     def ticktextsrc(self):
         """
@@ -249,8 +231,6 @@ class Dimension(_BaseTraceHierarchyType):
     def ticktextsrc(self, val):
         self["ticktextsrc"] = val
 
-    # tickvals
-    # --------
     @property
     def tickvals(self):
         """
@@ -269,8 +249,6 @@ class Dimension(_BaseTraceHierarchyType):
     def tickvals(self, val):
         self["tickvals"] = val
 
-    # tickvalssrc
-    # -----------
     @property
     def tickvalssrc(self):
         """
@@ -289,8 +267,6 @@ class Dimension(_BaseTraceHierarchyType):
     def tickvalssrc(self, val):
         self["tickvalssrc"] = val
 
-    # values
-    # ------
     @property
     def values(self):
         """
@@ -312,8 +288,6 @@ class Dimension(_BaseTraceHierarchyType):
     def values(self, val):
         self["values"] = val
 
-    # valuessrc
-    # ---------
     @property
     def valuessrc(self):
         """
@@ -332,8 +306,6 @@ class Dimension(_BaseTraceHierarchyType):
     def valuessrc(self, val):
         self["valuessrc"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -353,8 +325,6 @@ class Dimension(_BaseTraceHierarchyType):
     def visible(self, val):
         self["visible"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -538,14 +508,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         Dimension
         """
-        super(Dimension, self).__init__("dimensions")
-
+        super().__init__("dimensions")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -553,81 +520,27 @@ class Dimension(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.parcoords.Dimension
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcoords.Dimension`"""
-            )
+an instance of :class:`plotly.graph_objs.parcoords.Dimension`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("constraintrange", None)
-        _v = constraintrange if constraintrange is not None else _v
-        if _v is not None:
-            self["constraintrange"] = _v
-        _v = arg.pop("label", None)
-        _v = label if label is not None else _v
-        if _v is not None:
-            self["label"] = _v
-        _v = arg.pop("multiselect", None)
-        _v = multiselect if multiselect is not None else _v
-        if _v is not None:
-            self["multiselect"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("range", None)
-        _v = range if range is not None else _v
-        if _v is not None:
-            self["range"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("tickformat", None)
-        _v = tickformat if tickformat is not None else _v
-        if _v is not None:
-            self["tickformat"] = _v
-        _v = arg.pop("ticktext", None)
-        _v = ticktext if ticktext is not None else _v
-        if _v is not None:
-            self["ticktext"] = _v
-        _v = arg.pop("ticktextsrc", None)
-        _v = ticktextsrc if ticktextsrc is not None else _v
-        if _v is not None:
-            self["ticktextsrc"] = _v
-        _v = arg.pop("tickvals", None)
-        _v = tickvals if tickvals is not None else _v
-        if _v is not None:
-            self["tickvals"] = _v
-        _v = arg.pop("tickvalssrc", None)
-        _v = tickvalssrc if tickvalssrc is not None else _v
-        if _v is not None:
-            self["tickvalssrc"] = _v
-        _v = arg.pop("values", None)
-        _v = values if values is not None else _v
-        if _v is not None:
-            self["values"] = _v
-        _v = arg.pop("valuessrc", None)
-        _v = valuessrc if valuessrc is not None else _v
-        if _v is not None:
-            self["valuessrc"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("constraintrange", arg, constraintrange)
+        self._set_property("label", arg, label)
+        self._set_property("multiselect", arg, multiselect)
+        self._set_property("name", arg, name)
+        self._set_property("range", arg, range)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("tickformat", arg, tickformat)
+        self._set_property("ticktext", arg, ticktext)
+        self._set_property("ticktextsrc", arg, ticktextsrc)
+        self._set_property("tickvals", arg, tickvals)
+        self._set_property("tickvalssrc", arg, tickvalssrc)
+        self._set_property("values", arg, values)
+        self._set_property("valuessrc", arg, valuessrc)
+        self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

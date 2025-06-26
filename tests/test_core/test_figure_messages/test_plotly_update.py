@@ -1,13 +1,9 @@
-import sys
 from unittest import TestCase
 
 import plotly.graph_objs as go
 from plotly.basedatatypes import Undefined
 
-if sys.version_info >= (3, 3):
-    from unittest.mock import MagicMock
-else:
-    from mock import MagicMock
+from unittest.mock import MagicMock
 
 
 class TestBatchUpdateMessage(TestCase):
@@ -26,9 +22,7 @@ class TestBatchUpdateMessage(TestCase):
         self.figure._send_update_msg = MagicMock()
 
     def test_batch_update(self):
-
         with self.figure.batch_update():
-
             # Assign trace property
             self.figure.data[0].marker.color = "yellow"
             self.figure.data[1].marker.opacity = 0.9

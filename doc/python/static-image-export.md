@@ -217,6 +217,8 @@ Image(img_bytes)
 
 ## Specify Image Export Engine
 
+> The `engine` parameter, as well as Orca support, is deprecated in Plotly.py 6.2.0 and will be removed after September 2025.
+
 If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 
 Here is an example of specifying `orca` for the image export engine:
@@ -293,11 +295,11 @@ import plotly.io as pio
 pio.defaults.default_height
 ~~~
 
-In earlier versions of Plotly.py, these settings are available on `plotly.io.kaleido.scope`.
+In earlier versions of Plotly.py, these settings are available on `plotly.io.kaleido.scope`. This is deprecated since version 6.2. Use `plotly.io.defaults` instead.
 
 ~~~python
 import plotly.io as pio
-# Example using `plotly.io.kaleido.scope`
+# Example using deprecated `plotly.io.kaleido.scope`
 pio.kaleido.scope.default_format = "jpeg"
 ~~~
 

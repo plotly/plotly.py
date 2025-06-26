@@ -46,7 +46,6 @@ def _py_to_js(v, widget_manager):
             and v.dtype != "int64"
             and v.dtype != "uint64"
         ):
-
             # We have a numpy array the we can directly map to a JavaScript
             # Typed array
             return {"buffer": memoryview(v), "dtype": str(v.dtype), "shape": v.shape}

@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Z(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "volume.slices"
     _path_str = "volume.slices.z"
     _valid_props = {"fill", "locations", "locationssrc", "show"}
 
-    # fill
-    # ----
     @property
     def fill(self):
         """
@@ -33,8 +31,6 @@ class Z(_BaseTraceHierarchyType):
     def fill(self, val):
         self["fill"] = val
 
-    # locations
-    # ---------
     @property
     def locations(self):
         """
@@ -55,8 +51,6 @@ class Z(_BaseTraceHierarchyType):
     def locations(self, val):
         self["locations"] = val
 
-    # locationssrc
-    # ------------
     @property
     def locationssrc(self):
         """
@@ -76,8 +70,6 @@ class Z(_BaseTraceHierarchyType):
     def locationssrc(self, val):
         self["locationssrc"] = val
 
-    # show
-    # ----
     @property
     def show(self):
         """
@@ -97,8 +89,6 @@ class Z(_BaseTraceHierarchyType):
     def show(self, val):
         self["show"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -159,14 +149,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         Z
         """
-        super(Z, self).__init__("z")
-
+        super().__init__("z")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -174,41 +161,17 @@ class Z(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.volume.slices.Z
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.volume.slices.Z`"""
-            )
+an instance of :class:`plotly.graph_objs.volume.slices.Z`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("fill", None)
-        _v = fill if fill is not None else _v
-        if _v is not None:
-            self["fill"] = _v
-        _v = arg.pop("locations", None)
-        _v = locations if locations is not None else _v
-        if _v is not None:
-            self["locations"] = _v
-        _v = arg.pop("locationssrc", None)
-        _v = locationssrc if locationssrc is not None else _v
-        if _v is not None:
-            self["locationssrc"] = _v
-        _v = arg.pop("show", None)
-        _v = show if show is not None else _v
-        if _v is not None:
-            self["show"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("fill", arg, fill)
+        self._set_property("locations", arg, locations)
+        self._set_property("locationssrc", arg, locationssrc)
+        self._set_property("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

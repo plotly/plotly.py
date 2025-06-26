@@ -20,7 +20,7 @@ a link to the plotly.js CHANGELOG.
 
 ### Finalize versions
 
-**Create a branch `git checkout -b release-X.Y.Z` *from the tip of `origin/master`*.**
+**Create a branch `git checkout -b release-X.Y.Z` *from the tip of `origin/main`*.**
 
 Manually update the versions to `X.Y.Z` in the files specified below.
 
@@ -70,7 +70,6 @@ Publishing to PyPI:
 ### Update documentation site
 
 1. Search for the previous version string in the docs and replace it with the new version string, including but not necessarily limited to the following files:
-    - `doc/python/getting-started.md`
     - `doc/apidoc/conf.py`
     - `doc/requirements.txt`
 2. `doc-prod` should already have been merged on a regular basis into `main`, but

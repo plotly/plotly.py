@@ -25,10 +25,9 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from itertools import product
 import os
-import sys
 import pytest
 import json
-from .common import _cmp_partial_dict, _check_figure_layout_objects
+from .common import _cmp_partial_dict
 
 
 @pytest.fixture

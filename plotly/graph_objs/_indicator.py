@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
 
 
 class Indicator(_BaseTraceType):
-
-    # class properties
-    # --------------------
     _parent_path_str = ""
     _path_str = "indicator"
     _valid_props = {
@@ -35,8 +35,6 @@ class Indicator(_BaseTraceType):
         "visible",
     }
 
-    # align
-    # -----
     @property
     def align(self):
         """
@@ -58,8 +56,6 @@ class Indicator(_BaseTraceType):
     def align(self, val):
         self["align"] = val
 
-    # customdata
-    # ----------
     @property
     def customdata(self):
         """
@@ -81,8 +77,6 @@ class Indicator(_BaseTraceType):
     def customdata(self, val):
         self["customdata"] = val
 
-    # customdatasrc
-    # -------------
     @property
     def customdatasrc(self):
         """
@@ -102,8 +96,6 @@ class Indicator(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
-    # delta
-    # -----
     @property
     def delta(self):
         """
@@ -112,37 +104,6 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Delta`
           - A dict of string/value properties that will be passed
             to the Delta constructor
-
-            Supported dict properties:
-
-                decreasing
-                    :class:`plotly.graph_objects.indicator.delta.De
-                    creasing` instance or dict with compatible
-                    properties
-                font
-                    Set the font used to display the delta
-                increasing
-                    :class:`plotly.graph_objects.indicator.delta.In
-                    creasing` instance or dict with compatible
-                    properties
-                position
-                    Sets the position of delta with respect to the
-                    number.
-                prefix
-                    Sets a prefix appearing before the delta.
-                reference
-                    Sets the reference value to compute the delta.
-                    By default, it is set to the current value.
-                relative
-                    Show relative change
-                suffix
-                    Sets a suffix appearing next to the delta.
-                valueformat
-                    Sets the value formatting rule using d3
-                    formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format.
 
         Returns
         -------
@@ -154,8 +115,6 @@ class Indicator(_BaseTraceType):
     def delta(self, val):
         self["delta"] = val
 
-    # domain
-    # ------
     @property
     def domain(self):
         """
@@ -164,22 +123,6 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-
-            Supported dict properties:
-
-                column
-                    If there is a layout grid, use the domain for
-                    this column in the grid for this indicator
-                    trace .
-                row
-                    If there is a layout grid, use the domain for
-                    this row in the grid for this indicator trace .
-                x
-                    Sets the horizontal domain of this indicator
-                    trace (in plot fraction).
-                y
-                    Sets the vertical domain of this indicator
-                    trace (in plot fraction).
 
         Returns
         -------
@@ -191,8 +134,6 @@ class Indicator(_BaseTraceType):
     def domain(self, val):
         self["domain"] = val
 
-    # gauge
-    # -----
     @property
     def gauge(self):
         """
@@ -204,37 +145,6 @@ class Indicator(_BaseTraceType):
           - A dict of string/value properties that will be passed
             to the Gauge constructor
 
-            Supported dict properties:
-
-                axis
-                    :class:`plotly.graph_objects.indicator.gauge.Ax
-                    is` instance or dict with compatible properties
-                bar
-                    Set the appearance of the gauge's value
-                bgcolor
-                    Sets the gauge background color.
-                bordercolor
-                    Sets the color of the border enclosing the
-                    gauge.
-                borderwidth
-                    Sets the width (in px) of the border enclosing
-                    the gauge.
-                shape
-                    Set the shape of the gauge
-                steps
-                    A tuple of :class:`plotly.graph_objects.indicat
-                    or.gauge.Step` instances or dicts with
-                    compatible properties
-                stepdefaults
-                    When used in a template (as layout.template.dat
-                    a.indicator.gauge.stepdefaults), sets the
-                    default property values to use for elements of
-                    indicator.gauge.steps
-                threshold
-                    :class:`plotly.graph_objects.indicator.gauge.Th
-                    reshold` instance or dict with compatible
-                    properties
-
         Returns
         -------
         plotly.graph_objs.indicator.Gauge
@@ -245,8 +155,6 @@ class Indicator(_BaseTraceType):
     def gauge(self, val):
         self["gauge"] = val
 
-    # ids
-    # ---
     @property
     def ids(self):
         """
@@ -267,8 +175,6 @@ class Indicator(_BaseTraceType):
     def ids(self, val):
         self["ids"] = val
 
-    # idssrc
-    # ------
     @property
     def idssrc(self):
         """
@@ -287,8 +193,6 @@ class Indicator(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
-    # legend
-    # ------
     @property
     def legend(self):
         """
@@ -312,8 +216,6 @@ class Indicator(_BaseTraceType):
     def legend(self, val):
         self["legend"] = val
 
-    # legendgrouptitle
-    # ----------------
     @property
     def legendgrouptitle(self):
         """
@@ -322,13 +224,6 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Legendgrouptitle`
           - A dict of string/value properties that will be passed
             to the Legendgrouptitle constructor
-
-            Supported dict properties:
-
-                font
-                    Sets this legend group's title font.
-                text
-                    Sets the title of the legend group.
 
         Returns
         -------
@@ -340,8 +235,6 @@ class Indicator(_BaseTraceType):
     def legendgrouptitle(self, val):
         self["legendgrouptitle"] = val
 
-    # legendrank
-    # ----------
     @property
     def legendrank(self):
         """
@@ -367,8 +260,6 @@ class Indicator(_BaseTraceType):
     def legendrank(self, val):
         self["legendrank"] = val
 
-    # legendwidth
-    # -----------
     @property
     def legendwidth(self):
         """
@@ -388,8 +279,6 @@ class Indicator(_BaseTraceType):
     def legendwidth(self, val):
         self["legendwidth"] = val
 
-    # meta
-    # ----
     @property
     def meta(self):
         """
@@ -416,8 +305,6 @@ class Indicator(_BaseTraceType):
     def meta(self, val):
         self["meta"] = val
 
-    # metasrc
-    # -------
     @property
     def metasrc(self):
         """
@@ -436,8 +323,6 @@ class Indicator(_BaseTraceType):
     def metasrc(self, val):
         self["metasrc"] = val
 
-    # mode
-    # ----
     @property
     def mode(self):
         """
@@ -461,8 +346,6 @@ class Indicator(_BaseTraceType):
     def mode(self, val):
         self["mode"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -483,8 +366,6 @@ class Indicator(_BaseTraceType):
     def name(self, val):
         self["name"] = val
 
-    # number
-    # ------
     @property
     def number(self):
         """
@@ -493,21 +374,6 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Number`
           - A dict of string/value properties that will be passed
             to the Number constructor
-
-            Supported dict properties:
-
-                font
-                    Set the font used to display main number
-                prefix
-                    Sets a prefix appearing before the number.
-                suffix
-                    Sets a suffix appearing next to the number.
-                valueformat
-                    Sets the value formatting rule using d3
-                    formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/tree/v1.4.5#d3-
-                    format.
 
         Returns
         -------
@@ -519,8 +385,6 @@ class Indicator(_BaseTraceType):
     def number(self, val):
         self["number"] = val
 
-    # stream
-    # ------
     @property
     def stream(self):
         """
@@ -529,18 +393,6 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
-            Supported dict properties:
-
-                maxpoints
-                    Sets the maximum number of points to keep on
-                    the plots from an incoming stream. If
-                    `maxpoints` is set to 50, only the newest 50
-                    points will be displayed on the plot.
-                token
-                    The stream id number links a data trace on a
-                    plot with a stream. See https://chart-
-                    studio.plotly.com/settings for more details.
 
         Returns
         -------
@@ -552,8 +404,6 @@ class Indicator(_BaseTraceType):
     def stream(self, val):
         self["stream"] = val
 
-    # title
-    # -----
     @property
     def title(self):
         """
@@ -562,17 +412,6 @@ class Indicator(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.indicator.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-
-            Supported dict properties:
-
-                align
-                    Sets the horizontal alignment of the title. It
-                    defaults to `center` except for bullet charts
-                    for which it defaults to right.
-                font
-                    Set the font used to display the title
-                text
-                    Sets the title of this indicator.
 
         Returns
         -------
@@ -584,8 +423,6 @@ class Indicator(_BaseTraceType):
     def title(self, val):
         self["title"] = val
 
-    # uid
-    # ---
     @property
     def uid(self):
         """
@@ -606,8 +443,6 @@ class Indicator(_BaseTraceType):
     def uid(self, val):
         self["uid"] = val
 
-    # uirevision
-    # ----------
     @property
     def uirevision(self):
         """
@@ -639,8 +474,6 @@ class Indicator(_BaseTraceType):
     def uirevision(self, val):
         self["uirevision"] = val
 
-    # value
-    # -----
     @property
     def value(self):
         """
@@ -659,8 +492,6 @@ class Indicator(_BaseTraceType):
     def value(self, val):
         self["value"] = val
 
-    # visible
-    # -------
     @property
     def visible(self):
         """
@@ -682,14 +513,10 @@ class Indicator(_BaseTraceType):
     def visible(self, val):
         self["visible"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         return self._props["type"]
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -971,14 +798,11 @@ class Indicator(_BaseTraceType):
         -------
         Indicator
         """
-        super(Indicator, self).__init__("indicator")
-
+        super().__init__("indicator")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -986,123 +810,39 @@ class Indicator(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Indicator
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Indicator`"""
-            )
+an instance of :class:`plotly.graph_objs.Indicator`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("align", None)
-        _v = align if align is not None else _v
-        if _v is not None:
-            self["align"] = _v
-        _v = arg.pop("customdata", None)
-        _v = customdata if customdata is not None else _v
-        if _v is not None:
-            self["customdata"] = _v
-        _v = arg.pop("customdatasrc", None)
-        _v = customdatasrc if customdatasrc is not None else _v
-        if _v is not None:
-            self["customdatasrc"] = _v
-        _v = arg.pop("delta", None)
-        _v = delta if delta is not None else _v
-        if _v is not None:
-            self["delta"] = _v
-        _v = arg.pop("domain", None)
-        _v = domain if domain is not None else _v
-        if _v is not None:
-            self["domain"] = _v
-        _v = arg.pop("gauge", None)
-        _v = gauge if gauge is not None else _v
-        if _v is not None:
-            self["gauge"] = _v
-        _v = arg.pop("ids", None)
-        _v = ids if ids is not None else _v
-        if _v is not None:
-            self["ids"] = _v
-        _v = arg.pop("idssrc", None)
-        _v = idssrc if idssrc is not None else _v
-        if _v is not None:
-            self["idssrc"] = _v
-        _v = arg.pop("legend", None)
-        _v = legend if legend is not None else _v
-        if _v is not None:
-            self["legend"] = _v
-        _v = arg.pop("legendgrouptitle", None)
-        _v = legendgrouptitle if legendgrouptitle is not None else _v
-        if _v is not None:
-            self["legendgrouptitle"] = _v
-        _v = arg.pop("legendrank", None)
-        _v = legendrank if legendrank is not None else _v
-        if _v is not None:
-            self["legendrank"] = _v
-        _v = arg.pop("legendwidth", None)
-        _v = legendwidth if legendwidth is not None else _v
-        if _v is not None:
-            self["legendwidth"] = _v
-        _v = arg.pop("meta", None)
-        _v = meta if meta is not None else _v
-        if _v is not None:
-            self["meta"] = _v
-        _v = arg.pop("metasrc", None)
-        _v = metasrc if metasrc is not None else _v
-        if _v is not None:
-            self["metasrc"] = _v
-        _v = arg.pop("mode", None)
-        _v = mode if mode is not None else _v
-        if _v is not None:
-            self["mode"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("number", None)
-        _v = number if number is not None else _v
-        if _v is not None:
-            self["number"] = _v
-        _v = arg.pop("stream", None)
-        _v = stream if stream is not None else _v
-        if _v is not None:
-            self["stream"] = _v
-        _v = arg.pop("title", None)
-        _v = title if title is not None else _v
-        if _v is not None:
-            self["title"] = _v
-        _v = arg.pop("uid", None)
-        _v = uid if uid is not None else _v
-        if _v is not None:
-            self["uid"] = _v
-        _v = arg.pop("uirevision", None)
-        _v = uirevision if uirevision is not None else _v
-        if _v is not None:
-            self["uirevision"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
-        _v = arg.pop("visible", None)
-        _v = visible if visible is not None else _v
-        if _v is not None:
-            self["visible"] = _v
-
-        # Read-only literals
-        # ------------------
+        self._set_property("align", arg, align)
+        self._set_property("customdata", arg, customdata)
+        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("delta", arg, delta)
+        self._set_property("domain", arg, domain)
+        self._set_property("gauge", arg, gauge)
+        self._set_property("ids", arg, ids)
+        self._set_property("idssrc", arg, idssrc)
+        self._set_property("legend", arg, legend)
+        self._set_property("legendgrouptitle", arg, legendgrouptitle)
+        self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendwidth", arg, legendwidth)
+        self._set_property("meta", arg, meta)
+        self._set_property("metasrc", arg, metasrc)
+        self._set_property("mode", arg, mode)
+        self._set_property("name", arg, name)
+        self._set_property("number", arg, number)
+        self._set_property("stream", arg, stream)
+        self._set_property("title", arg, title)
+        self._set_property("uid", arg, uid)
+        self._set_property("uirevision", arg, uirevision)
+        self._set_property("value", arg, value)
+        self._set_property("visible", arg, visible)
 
         self._props["type"] = "indicator"
         arg.pop("type", None)
-
-        # Process unknown kwargs
-        # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

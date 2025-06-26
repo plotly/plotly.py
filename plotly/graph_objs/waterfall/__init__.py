@@ -1,7 +1,7 @@
 import sys
 from typing import TYPE_CHECKING
 
-if sys.version_info < (3, 7) or TYPE_CHECKING:
+if TYPE_CHECKING:
     from ._connector import Connector
     from ._decreasing import Decreasing
     from ._hoverlabel import Hoverlabel
