@@ -365,27 +365,27 @@ fig.add_trace(
     go.Scatter(x=list(df.Date),
                y=list(df.High),
                name="High",
-               line=dict(color="#33CFA5")))
+               line=dict(color="DarkBlue")))
 
 fig.add_trace(
     go.Scatter(x=list(df.Date),
                y=[df.High.mean()] * len(df.index),
                name="High Average",
                visible=False,
-               line=dict(color="#33CFA5", dash="dash")))
+               line=dict(color="DarkBlue", dash="dash")))
 
 fig.add_trace(
     go.Scatter(x=list(df.Date),
                y=list(df.Low),
                name="Low",
-               line=dict(color="#F06A6A")))
+               line=dict(color="Crimson")))
 
 fig.add_trace(
     go.Scatter(x=list(df.Date),
                y=[df.Low.mean()] * len(df.index),
                name="Low Average",
                visible=False,
-               line=dict(color="#F06A6A", dash="dash")))
+               line=dict(color="Crimson", dash="dash")))
 
 # Add Annotations and Buttons
 high_annotations = [dict(x="2016-03-01",
@@ -443,6 +443,105 @@ fig.update_layout(title_text="Yahoo")
 
 fig.show()
 ```
+
+### Graph Selection Dropdowns in Jinja
+
+It is straight forward to create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a dropdown that chooses which div to display. This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration. It produces web pages that are larger than the webpages produced through the built in method which is a consideration for very large figures with hundreds or thousands of data points in traces that appear in multiple selections. This approach requires both a Python program and a Jinja template file.  The documentation on [using Jinja templates with Plotly](https://plotly.com/python/interactive-html-export/#inserting-plotly-output-into-html-using-a-jinja2-template) is relevant background.  
+
+<!-- #region -->
+
+#### Python Code File
+
+```python
+import plotly.express as px
+from jinja2 import Template
+import collections
+# Load the gapminder dataset
+df = px.data.gapminder()
+
+# Create a dictionary with Plotly figures as values
+fig_dict = {}
+
+# we need to fill that dictionary with figures.  this example assumes that each figure has a title and that
+# we want to use the titles as descriptions in the drop down
+# This example happens to fill the dictionary by creating a scatter plot for each continent using the 2007 Gapminder data
+for continent in df['continent'].unique():
+    # Filter data for the current continent 
+    continent_data = df[(df['continent'] == continent) & (df['year'] == 2007)]
+    
+    fig_dict[continent] = px.scatter(continent_data, x='gdpPercap', y='lifeExp', 
+                     title=f'GDP vs Life Expectancy for {continent}',
+                     labels={'gdpPercap': 'GDP per Capita (USD)', 'lifeExp': 'Life Expectancy (Years)'},
+                     hover_name='country',size="pop", size_max=55 
+                     )
+    #Standardizing the axes makes the graphs easier to compare
+    fig_dict[continent].update_xaxes(range=[0,50000])
+    fig_dict[continent].update_yaxes(range=[25,90])
+
+    
+# Create a dictionary, data_for_jinja with two entries:
+# the value for the "dropdown_entries" key is a string containing a series of <option> tags, one tag for each item in the drop down
+# the value for the "divs" key is a string with a series of <div> tags, each containing the content that appears only when the user selects the corresponding item from the dropdown
+# in this example, the content of each div is a figure and descriptive text.  
+data_for_jinja= collections.defaultdict(str)
+text_dict = {}
+for n, figname in enumerate(fig_dict.keys()):
+    text_dict[figname]=f"Here is some custom text about the {figname} figure"  #This is a succinct way to populate text_dict; in practice you'd probably populate it manually elsewhere
+    data_for_jinja["dropdown_entries"]+=f"<option value='{figname}'>{fig_dict[figname].layout.title.text}</option>"
+    #YOU MAY NEED TO UPDATE THE LINK TO THE LATEST PLOTLY.JS
+    fig_html = fig_dict[figname].to_html(full_html=False, config=dict(responsive=False, scrollZoom=False, doubleClick=False), include_plotlyjs = "cdn")
+    initially_hide_divs_other_than_the_first = "style=""display:none;"""*(n>0)   
+    data_for_jinja["divs"]+=f'<div id="{figname}" class="content-div" {initially_hide_divs_other_than_the_first}>{fig_html}{text_dict[figname]}</div>'
+
+# Insert data into the template and write the file to disk
+# You'll need to add the path to your template and to your preferred output location
+input_template_path=r"<path-to-Jinja-template.html>"
+output_html_path=r"<path-to-output-file.html>"
+
+with open(output_html_path, "w", encoding='utf-8') as output_file:
+    with open(input_template_path) as template_file:
+        j2_template = Template(template_file.read())
+        output_file.write(j2_template.render(data_for_jinja))
+```
+
+#### Jinja HTML Template
+
+
+```
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Select an analysis&lt;/h1&gt;
+        &lt;select id="dropdown" class="form-control"&gt;
+    {{ dropdown_entries }}
+        &lt;/select&gt;
+
+
+        {{ divs }}
+
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        document.getElementById('dropdown').addEventListener('change', function() {
+            const divs = document.querySelectorAll('.content-div');
+            divs.forEach(div =&gt; div.style.display = 'none');
+
+            const selectedDiv = document.getElementById(this.value);
+            if (selectedDiv) {
+                selectedDiv.style.display = 'block';
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```
+
+<!-- #endregion -->
 
 #### Reference
 See https://plotly.com/python/reference/layout/updatemenus/ for more information about `updatemenu` dropdowns.

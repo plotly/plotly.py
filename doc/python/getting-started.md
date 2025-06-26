@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.14
+    version: 3.11.10
   plotly:
     description: Getting Started with Plotly for Python.
     has_thumbnail: false
@@ -41,7 +41,7 @@ The [`plotly` Python library](/python/) is an interactive, [open-source](/python
 
 Built on top of the Plotly JavaScript library ([plotly.js](https://plotly.com/javascript/)), `plotly` enables Python users to create beautiful interactive web-based visualizations that can be displayed in Jupyter notebooks, saved to standalone HTML files, or served as part of pure Python-built web applications using Dash. The `plotly` Python library is sometimes referred to as "plotly.py" to differentiate it from the JavaScript library.
 
-Thanks to deep integration with our [Kaleido](https://medium.com/plotly/introducing-kaleido-b03c4b7b1d81) image export utility, `plotly` also provides great support for non-web contexts including desktop editors (e.g. QtConsole, Spyder, PyCharm) and static document publishing (e.g. exporting notebooks to PDF with high-quality vector images).
+Thanks to deep integration with our [Kaleido](https://github.com/plotly/Kaleido) image export utility, `plotly` also provides great support for non-web contexts including desktop editors (e.g. QtConsole, Spyder, PyCharm) and static document publishing (e.g. exporting notebooks to PDF with high-quality vector images).
 
 This Getting Started guide explains how to install `plotly` and related optional pages. Once you've installed, you can use our documentation in three main ways:
 
@@ -64,7 +64,7 @@ $ pip install plotly
 or `conda`:
 
 ```
-$ conda install -c plotly plotly
+$ conda install -c conda-forge plotly
 ```
 
 If you want to use Plotly Express, install its required dependencies with:
@@ -183,9 +183,7 @@ See [_Displaying Figures in Python_](/python/renderers/) for more information on
 ### Static Image Export
 
 plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
-using the either the [`kaleido`](https://github.com/plotly/Kaleido)
-package (recommended, supported as of `plotly` version 4.9) or the [orca](https://github.com/plotly/orca)
-command line utility (legacy as of `plotly` version 4.9).
+using the [`kaleido`](https://github.com/plotly/Kaleido) package. (Support for the legacy [`orca`](https://github.com/plotly/orca) image export utility is deprecated and will be removed after September 2025.)
 
 #### Kaleido
 
@@ -193,7 +191,7 @@ The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies a
 using pip...
 
 ```
-$ pip install -U kaleido
+$ pip install --upgrade kaleido
 ```
 
 or conda.
@@ -201,28 +199,6 @@ or conda.
 ```
 $ conda install -c plotly python-kaleido
 ```
-
-#### Orca
-
-While Kaleido is now the recommended image export approach because it is easier to install
-and more widely compatible, [static image export](https://plotly.com/python/static-image-export/)
-can also be supported
-by the legacy [orca](https://github.com/plotly/orca) command line utility and the
- [`psutil`](https://github.com/giampaolo/psutil) Python package.
-
-These dependencies can both be installed using conda:
-
-```
-conda install -c plotly plotly-orca==1.3.1 psutil
-```
-
-Or, `psutil` can be installed using pip...
-
-```
-pip install psutil
-```
-
-and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
 
 #### Extended Geo Support
 
