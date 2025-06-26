@@ -1,12 +1,8 @@
-import sys
 from unittest import TestCase
 
 import plotly.graph_objs as go
 
-if sys.version_info >= (3, 3):
-    from unittest.mock import MagicMock
-else:
-    from mock import MagicMock
+from unittest.mock import MagicMock
 
 
 class TestBatchAnimateMessage(TestCase):
@@ -25,9 +21,7 @@ class TestBatchAnimateMessage(TestCase):
         self.figure._send_animate_msg = MagicMock()
 
     def test_batch_animate(self):
-
         with self.figure.batch_animate(easing="elastic", duration=1200):
-
             # Assign trace property
             self.figure.data[0].marker.color = "yellow"
             self.figure.data[1].marker.opacity = 0.9

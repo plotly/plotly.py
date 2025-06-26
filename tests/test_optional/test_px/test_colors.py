@@ -28,7 +28,6 @@ def test_reversed_colorscale():
 
 
 def test_r_colorscales():
-
     for colorscale_members in [
         inspect.getmembers(px.colors.sequential),
         inspect.getmembers(px.colors.diverging),

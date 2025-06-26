@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Hoverlabel(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.annotation"
     _path_str = "layout.annotation.hoverlabel"
     _valid_props = {"bgcolor", "bordercolor", "font"}
@@ -137,12 +136,10 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.annotation.Hoverlabel
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.annotation.Hoverlabel`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.annotation.Hoverlabel`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

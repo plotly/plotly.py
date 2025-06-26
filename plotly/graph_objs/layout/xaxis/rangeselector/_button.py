@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Button(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.xaxis.rangeselector"
     _path_str = "layout.xaxis.rangeselector.button"
     _valid_props = {
@@ -300,12 +299,10 @@ class Button(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.xaxis.rangeselector.Button
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

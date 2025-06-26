@@ -165,14 +165,14 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
     from plotly.graph_objs import graph_objs
 
     warnings.warn(
-        "tools.get_subplots is depreciated. " "Please use tools.make_subplots instead."
+        "tools.get_subplots is depreciated. Please use tools.make_subplots instead."
     )
 
     # Throw exception for non-integer rows and columns
     if not isinstance(rows, int) or rows <= 0:
-        raise Exception("Keyword argument 'rows' " "must be an int greater than 0")
+        raise Exception("Keyword argument 'rows' must be an int greater than 0")
     if not isinstance(columns, int) or columns <= 0:
-        raise Exception("Keyword argument 'columns' " "must be an int greater than 0")
+        raise Exception("Keyword argument 'columns' must be an int greater than 0")
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ["horizontal_spacing", "vertical_spacing"]
@@ -500,10 +500,10 @@ def _replace_newline(obj):
             d[key] = _replace_newline(val)
         return d
     elif isinstance(obj, list):
-        l = list()
+        temp = list()
         for index, entry in enumerate(obj):
-            l += [_replace_newline(entry)]
-        return l
+            temp += [_replace_newline(entry)]
+        return temp
     elif isinstance(obj, str):
         s = obj.replace("\n", "<br>")
         if s != obj:
@@ -540,7 +540,6 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
         )
 
     if validate_figure and not validated:
-
         try:
             figure = Figure(**figure).to_dict()
         except exceptions.PlotlyError as err:
@@ -704,7 +703,7 @@ def get_config_plotly_server_url():
             config_dict = json.load(f)
             if not isinstance(config_dict, dict):
                 config_dict = {}
-        except:
+        except Exception:
             # TODO: issue a warning and bubble it up
             config_dict = {}
 

@@ -72,7 +72,6 @@ class NumpyTestUtilsMixin(object):
         self.assertIsInstance(d2, dict, "Second argument is not a dictionary")
 
         for node, path in node_generator(d1):
-
             # first check that this sub-dict is contained in both dicts
             try:
                 comp_node = get_by_path(d2, path)
@@ -108,9 +107,8 @@ class NumpyTestUtilsMixin(object):
                     if np.allclose(val, comp_val):
                         continue
 
-                standard_msg = (
-                    "Value comparison failed at path {}.\n"
-                    "{} != {}".format(self._format_path(val_path), val, comp_val)
+                standard_msg = "Value comparison failed at path {}.\n{} != {}".format(
+                    self._format_path(val_path), val, comp_val
                 )
                 self.fail(self._formatMessage(msg, standard_msg))
 

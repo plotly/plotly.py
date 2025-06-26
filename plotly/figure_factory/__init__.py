@@ -1,3 +1,5 @@
+# ruff: noqa: E402
+
 from plotly import optional_imports
 
 # Require that numpy exists for figure_factory

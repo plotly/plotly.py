@@ -1,12 +1,22 @@
 import uuid
 from pathlib import Path
 import webbrowser
+import hashlib
+import base64
 
 from _plotly_utils.optional_imports import get_module
 from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 
 _json = get_module("json")
+
+
+def _generate_sri_hash(content):
+    """Generate SHA256 hash for SRI (Subresource Integrity)"""
+    if isinstance(content, str):
+        content = content.encode("utf-8")
+    sha256_hash = hashlib.sha256(content).digest()
+    return "sha256-" + base64.b64encode(sha256_hash).decode("utf-8")
 
 
 # Build script to set global PlotlyConfig object. This must execute before
@@ -175,9 +185,7 @@ def to_html(
         # So we need to configure the PLOTLYENV.BASE_URL property
         base_url_line = """
                     window.PLOTLYENV.BASE_URL='{plotly_platform_url}';\
-""".format(
-            plotly_platform_url=config.get("plotlyServerURL", "https://plot.ly")
-        )
+""".format(plotly_platform_url=config.get("plotlyServerURL", "https://plot.ly"))
     else:
         # Figure is not going to include a Chart Studio link or send-to-cloud button,
         # In this case we don't want https://plot.ly to show up anywhere in the HTML
@@ -198,18 +206,14 @@ def to_html(
         for ps in post_script:
             then_post_script += """.then(function(){{
                             {post_script}
-                        }})""".format(
-                post_script=ps.replace("{plot_id}", plotdivid)
-            )
+                        }})""".format(post_script=ps.replace("{plot_id}", plotdivid))
 
     then_addframes = ""
     then_animate = ""
     if jframes:
         then_addframes = """.then(function(){{
                             Plotly.addFrames('{id}', {frames});
-                        }})""".format(
-            id=plotdivid, frames=jframes
-        )
+                        }})""".format(id=plotdivid, frames=jframes)
 
         if auto_play:
             if animation_opts:
@@ -218,9 +222,7 @@ def to_html(
                 animation_opts_arg = ""
             then_animate = """.then(function(){{
                             Plotly.animate('{id}', null{animation_opts});
-                        }})""".format(
-                id=plotdivid, animation_opts=animation_opts_arg
-            )
+                        }})""".format(id=plotdivid, animation_opts=animation_opts_arg)
 
     # Serialize config dict to JSON
     jconfig = _json.dumps(config)
@@ -252,36 +254,36 @@ def to_html(
     load_plotlyjs = ""
 
     if include_plotlyjs == "cdn":
+        # Generate SRI hash from the bundled plotly.js content
+        plotlyjs_content = get_plotlyjs()
+        sri_hash = _generate_sri_hash(plotlyjs_content)
+
         load_plotlyjs = """\
         {win_config}
-        <script charset="utf-8" src="{cdn_url}"></script>\
+        <script charset="utf-8" src="{cdn_url}" integrity="{integrity}" crossorigin="anonymous"></script>\
     """.format(
-            win_config=_window_plotly_config, cdn_url=plotly_cdn_url()
+            win_config=_window_plotly_config,
+            cdn_url=plotly_cdn_url(),
+            integrity=sri_hash,
         )
 
     elif include_plotlyjs == "directory":
         load_plotlyjs = """\
         {win_config}
         <script charset="utf-8" src="plotly.min.js"></script>\
-    """.format(
-            win_config=_window_plotly_config
-        )
+    """.format(win_config=_window_plotly_config)
 
     elif isinstance(include_plotlyjs, str) and include_plotlyjs.endswith(".js"):
         load_plotlyjs = """\
         {win_config}
         <script charset="utf-8" src="{url}"></script>\
-    """.format(
-            win_config=_window_plotly_config, url=include_plotlyjs_orig
-        )
+    """.format(win_config=_window_plotly_config, url=include_plotlyjs_orig)
 
     elif include_plotlyjs:
         load_plotlyjs = """\
         {win_config}
         <script type="text/javascript">{plotlyjs}</script>\
-    """.format(
-            win_config=_window_plotly_config, plotlyjs=get_plotlyjs()
-        )
+    """.format(win_config=_window_plotly_config, plotlyjs=get_plotlyjs())
 
     # ## Handle loading/initializing MathJax ##
     include_mathjax_orig = include_mathjax
@@ -294,15 +296,12 @@ def to_html(
     if include_mathjax == "cdn":
         mathjax_script = (
             mathjax_template.format(
-                url=(
-                    "https://cdnjs.cloudflare.com" "/ajax/libs/mathjax/2.7.5/MathJax.js"
-                )
+                url=("https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js")
             )
             + _mathjax_config
         )
 
     elif isinstance(include_mathjax, str) and include_mathjax.endswith(".js"):
-
         mathjax_script = (
             mathjax_template.format(url=include_mathjax_orig) + _mathjax_config
         )
@@ -315,9 +314,7 @@ Invalid value of type {typ} received as the include_mathjax argument
     Received value: {val}
 
 include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
-    """.format(
-                typ=type(include_mathjax), val=repr(include_mathjax)
-            )
+    """.format(typ=type(include_mathjax), val=repr(include_mathjax))
         )
 
     plotly_html_div = """\
@@ -347,9 +344,7 @@ style="height:{height}; width:{width};"></div>\
 <body>
     {div}
 </body>
-</html>""".format(
-            div=plotly_html_div
-        )
+</html>""".format(div=plotly_html_div)
     else:
         return plotly_html_div
 

@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class X(_BaseTraceHierarchyType):
-
     _parent_path_str = "surface.contours"
     _path_str = "surface.contours.x"
     _valid_props = {
@@ -340,12 +339,10 @@ class X(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.surface.contours.X
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.contours.X`"""
-            )
+an instance of :class:`plotly.graph_objs.surface.contours.X`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Contours(_BaseTraceHierarchyType):
-
     _parent_path_str = "contourcarpet"
     _path_str = "contourcarpet.contours"
     _valid_props = {
@@ -411,12 +410,10 @@ class Contours(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.contourcarpet.Contours
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.contourcarpet.Contours`"""
-            )
+an instance of :class:`plotly.graph_objs.contourcarpet.Contours`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

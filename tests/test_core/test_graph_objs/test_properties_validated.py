@@ -121,7 +121,6 @@ class TestPropertyIterContains(TestCase):
         self.parcoords.name = "Scatter 1"
 
     def test_contains(self):
-
         # Primitive property
         self.assertTrue("name" in self.parcoords)
 
