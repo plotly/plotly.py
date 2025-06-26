@@ -180,7 +180,7 @@ fig.add_trace(go.Scattermap(
     ))
 
 fig.update_layout(
-    title='Nuclear Waste Sites on Campus',
+    title=dict(text='Nuclear Waste Sites on Campus'),
     autosize=True,
     hovermode='closest',
     showlegend=False,
@@ -202,14 +202,6 @@ fig.show()
 ### Set Marker Symbols
 
 You can define the symbol on your map by setting [`symbol`](https://plotly.com/python/reference/scattermap/#scattermap-marker-symbol) attribute.
-
-- basic
-- streets
-- outdoors
-- light
-- dark
-- satellite
-- satellite-streets
 
 ```python
 import plotly.graph_objects as go
@@ -356,6 +348,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_map`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
+See [function reference for `px.scatter_map`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_map) or https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
 
 For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermapbox/.

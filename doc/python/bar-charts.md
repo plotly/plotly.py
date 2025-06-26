@@ -124,7 +124,7 @@ import plotly.express as px
 df = px.data.gapminder().query("continent == 'Oceania'")
 fig = px.bar(df, x='year', y='pop',
              hover_data=['lifeExp', 'gdpPercap'], color='country',
-             labels={'pop':'population of Canada'}, height=400)
+             labels={'pop':'population of Oceania'}, height=400)
 fig.show()
 ```
 
@@ -795,7 +795,7 @@ fig.add_trace(go.Bar(x=years,
                 ))
 
 fig.update_layout(
-    title='US Export of Plastic Scrap',
+    title=dict(text='US Export of Plastic Scrap'),
     xaxis_tickfont_size=14,
     yaxis=dict(
         title=dict(

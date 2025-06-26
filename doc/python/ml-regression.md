@@ -452,9 +452,17 @@ fig.add_shape(
 )
 
 fig.update_layout(
-    xaxis_title='alpha',
-    xaxis_type="log",
-    yaxis_title="Mean Square Error (MSE)"
+    xaxis=dict(
+        title=dict(
+            text='alpha'
+        ),
+        type='log'
+    ),
+    yaxis=dict(
+        title=dict(
+            text='Mean Square Error (MSE)'
+        )
+    ),
 )
 fig.show()
 ```

@@ -3,12 +3,18 @@ version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.4.8
 
+executors:
+  docker-container:
+    parameters:
+      python_version:
+        description: "python version"
+        default: "3.12"
+        type: string
+    docker:
+      - image: cimg/python:<<parameters.python_version>>-browsers
+
 commands:
   test_core:
-    parameters:
-      py:
-        default: "310"
-        type: string
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -16,23 +22,29 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            cd packages/python/plotly
-            python -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_<<parameters.py>>_core.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv lock --check
+            uv sync --extra dev_core
+      - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
       - run:
           name: Test core
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest plotly/tests/test_core
+            source .venv/bin/activate
+            python -m pytest tests/test_core
           no_output_timeout: 20m
 
   test_optional:
     parameters:
-      py:
-        default: "310"
+      pandas_version:
+        type: string
+      numpy_version:
         type: string
     steps:
       - checkout
@@ -41,65 +53,66 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            cd packages/python/plotly
-            python -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
-            cd js
-            npm ci
-            npm run build
-      - run:
-          name: Install plotly-geo
-          command: |
-            cd packages/python/plotly-geo
-            . ../plotly/venv/bin/activate
-            pip install -e .
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv sync --extra dev_optional
+
+      - when:
+          condition:
+            not:
+              equal:
+                - <<parameters.pandas_version>>
+                - ""
+          steps:
+            - run:
+                name: Install pandas
+                command: |
+                  source .venv/bin/activate
+                  uv pip install pandas==<<parameters.pandas_version>> numpy==<<parameters.numpy_version>>
+
       - run:
           name: Test core
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest plotly/tests/test_core
+            source .venv/bin/activate
+            python -m pytest tests/test_core
           no_output_timeout: 20m
+      - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
       - run:
           name: Test optional
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest plotly/tests/test_optional
+            source .venv/bin/activate
+            python -m pytest tests/test_optional
           no_output_timeout: 40m
       - run:
           name: Test utils
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest _plotly_utils/tests/
+            source .venv/bin/activate
+            python -m pytest tests/test_plotly_utils/
           no_output_timeout: 20m
       - run:
           name: Test io
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest plotly/tests/test_io
+            source .venv/bin/activate
+            python -m pytest tests/test_io
           no_output_timeout: 20m
       - run:
-          name: Test dependencdies not imported
+          name: Test dependencies not imported
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest -x test_init/test_dependencies_not_imported.py
+            source .venv/bin/activate
+            python -m pytest -x test_init/test_dependencies_not_imported.py
       - run:
           name: Test lazy imports
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest -x test_init/test_lazy_imports.py
-  test_orca:
-    parameters:
-      py:
-        default: "310"
-        type: string
+            source .venv/bin/activate
+            python -m pytest -x test_init/test_lazy_imports.py
+
+  test_io_kaleido_v0:
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -107,163 +120,90 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            cd packages/python/plotly
-            python -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_<<parameters.py>>_optional.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv sync --extra dev_optional
+            # Install Kaleido v0 instead of the v1 specified in requirements_optional.txt
+            uv pip uninstall kaleido
+            uv pip install kaleido==0.2.1
       - run:
-          name: Install plotly-geo
+          name: List installed packages and python version
           command: |
-            cd packages/python/plotly-geo
-            . ../plotly/venv/bin/activate
-            pip install -e .
+            source .venv/bin/activate
+            uv pip list
+            python --version
       - run:
-          name: Install orca
+          name: Test plotly.io image output with Kaleido v0
           command: |
-            npm install electron@1.8.4
-            npm install orca
-            sudo apt-get update
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
-            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - run:
-          name: Test orca
-          command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            pytest plotly/tests/test_orca
+            source .venv/bin/activate
+            python -m pytest tests/test_optional/test_kaleido
           no_output_timeout: 20m
-      - store_artifacts:
-          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
 
 jobs:
   check-code-formatting:
     docker:
-      - image: cimg/python:3.7
+      - image: cimg/python:3.12
 
     steps:
       - checkout
       - run:
-          name: Install black
+          name: Install ruff
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install black==22.3.0
+            uv venv
+            source .venv/bin/activate
+            uv sync --extra dev_core
       - run:
-          name: Check formatting with black
+          name: Check handwritten code with ruff
           command: |
-            . venv/bin/activate
-            black --check . --exclude venv
+            source .venv/bin/activate
+            ruff format --check .
 
-  # Core
-  python_38_core:
-    docker:
-      - image: cimg/python:3.8-browsers
+  test_core_py:
+    parameters:
+      python_version:
+        default: "3.12"
+        type: string
+    executor:
+      name: docker-container
+      python_version: <<parameters.python_version>>
     steps:
-      - test_core:
-          py: "38"
+      - test_core
 
-  python_39_core:
-    docker:
-      - image: cimg/python:3.9-browsers
-    steps:
-      - test_core:
-          py: "39"
-
-  python_310_core:
-    docker:
-      - image: cimg/python:3.10-browsers
-    steps:
-      - test_core:
-          py: "310"
-
-  python_311_core:
-    docker:
-      - image: cimg/python:3.11-browsers
-    steps:
-      - test_core:
-          py: "311"
-
-  python_312_core:
-    docker:
-      - image: cimg/python:3.12-browsers
-    steps:
-      - test_core:
-          py: "312"
-
-  # Optional
-
-  python_38_optional:
-    docker:
-      - image: cimg/python:3.8-browsers
+  test_optional_py:
+    parameters:
+      python_version:
+        default: "3.12"
+        type: string
+      pandas_version:
+        default: ""
+        type: string
+      numpy_version:
+        default: ""
+        type: string
+    executor:
+      name: docker-container
+      python_version: <<parameters.python_version>>
     steps:
       - test_optional:
-          py: "38"
+          pandas_version: <<parameters.pandas_version>>
+          numpy_version: <<parameters.numpy_version>>
 
-  python_39_optional:
-    docker:
-      - image: cimg/python:3.9-browsers
-    steps:
-      - test_optional:
-          py: "39"
-
-  python_310_optional:
-    docker:
-      - image: cimg/python:3.10-browsers
-    steps:
-      - test_optional:
-          py: "310"
-
-  python_311_optional:
-    docker:
-      - image: cimg/python:3.11-browsers
-    steps:
-      - test_optional:
-          py: "311"
-
-  python_312_optional:
-    docker:
-      - image: cimg/python:3.12-browsers
-    steps:
-      - test_optional:
-          py: "312"
-
-  # Pandas
-
-  python_39_pandas_2_optional:
-    docker:
-      - image: cimg/python:3.9-browsers
-    steps:
-      - test_optional:
-          py: "39_pandas_2"
-
-  # No numpy
-  python_312_no_numpy:
-    docker:
-      - image: cimg/python:3.12-browsers
-    steps:
-      - run:
-          name: Check that numpy is not installed
-          command: |
-            if pip list | grep numpy > /dev/null 2>&1
-            then exit 1
-            else exit 0
-            fi
-      - test_optional:
-          py: "312_no_numpy"
-
-  python_312_np2:
-    docker:
-      - image: cimg/python:3.12-browsers
-    steps:
-      - test_optional:
-          py: "312_np2"
-
+  test_kaleido_v0:
+    parameters:
+      python_version:
+        default: "3.12"
+        type: string
+    executor:
+      name: docker-container
+      python_version: <<parameters.python_version>>
+    steps:  
+      - test_io_kaleido_v0
 
   # Percy
-  python_39_percy:
+  python_311_percy:
     docker:
-      - image: cimg/python:3.9-browsers
+      - image: cimg/python:3.11-browsers
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
@@ -280,62 +220,42 @@ jobs:
       - run:
           name: Install requirements
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip install -e ./packages/python/plotly
-            pip install -e ./packages/python/plotly-geo
-            pip install -r ./packages/python/plotly/test_requirements/requirements_39_pandas_2_optional.txt
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv sync --extra dev_optional
+
       - run:
-          name: Build html figures (Pandas 2)
+          name: Build HTML figures (Pandas 2)
           command: |
-            . venv/bin/activate
-            python test/percy/plotly-express.py
+            source .venv/bin/activate
+            python tests/percy/plotly-express.py
       - run:
-          name: Build html figures (Pandas 1) and compare
+          name: Build HTML figures (Pandas 1) and compare
           command: |
-            . venv/bin/activate
-            mkdir test/percy/pandas2
-            mv test/percy/*.html test/percy/pandas2/
-            # 1.1 is the earliest minor with Py3.9 wheels
-            pip install "pandas==1.1.5"
-            python test/percy/plotly-express.py
-            python test/percy/compare-pandas.py
-            rm -rf test/percy/pandas2
+            source .venv/bin/activate
+            mkdir tests/percy/pandas2
+            mv tests/percy/*.html tests/percy/pandas2/
+            uv pip install pandas==1.5.3 numpy==1.26.4
+            python tests/percy/plotly-express.py
+            python tests/percy/compare-pandas.py
+            rm -rf tests/percy/pandas2
+      - run:
+          name: List installed packages and python version
+          command: |
+            source .venv/bin/activate
+            uv pip list
+            python --version
       - run:
           name: Run percy snapshots
           command: |
             npm i @percy/cli
-            npx percy snapshot -c test/percy/snapshots.yml test/percy/
-            rm test/percy/*.html
-
-  # Chart studio
-  python_38_chart_studio:
-    docker:
-      - image: cimg/python:3.8
-    resource_class: large
-
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            cd packages/python/chart-studio
-            python -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_38.txt
-      - run:
-          name: Tests
-          command: |
-            cd packages/python/chart-studio
-            . venv/bin/activate
-            pytest -x chart_studio/tests/
-          no_output_timeout: 20m
+            npx percy snapshot -c tests/percy/snapshots.yml tests/percy/
+            rm tests/percy/*.html
 
   plotlyjs_dev_build:
     docker:
-      - image: cimg/python:3.8-node
+      - image: cimg/python:3.12-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
@@ -345,120 +265,60 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            cd packages/python/plotly
-            python -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip install -r ./test_requirements/requirements_38_core.txt black inflect
-            pip install jupyterlab
-      - run:
-          name: Update jupyter widget plotly.js version
-          command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            python setup.py updateplotlywidgetversion
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv sync --extra dev_optional
       - run:
           name: Update plotly.js to dev
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            python setup.py updateplotlyjsdev
+            source .venv/bin/activate
+            python commands.py updateplotlyjsdev
       - run:
           name: Test core
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
+            source .venv/bin/activate
             locale
-            pytest -k 'not nodev' plotly/tests/test_core
+            pytest -k 'not nodev' tests/test_core
           no_output_timeout: 20m
-      - run:
-          name: Commit
-          command: |
-            cd packages/python/plotly
-            git config --global user.email "you@example.com"
-            git config --global user.name "Your Name"
-            git add -A
-            git commit -m "Codegen"
-          when: always
       - run:
           name: Build source distribution packages
           command: |
-            cd packages/python/plotly
-            . venv/bin/activate
-            python setup.py sdist
+            source .venv/bin/activate
+            uv sync --extra dev_build
+            python -m build --sdist --wheel -o dist
           when: always
       - store_artifacts:
-          path: packages/python/plotly/dist
+          path: dist/
 
   full_build:
     docker:
-      - image: continuumio/miniconda3:24.3.0-0
+      - image: cimg/python:3.12-node
         environment:
           LANG: en_US.UTF-8
     resource_class: large
 
     steps:
       - checkout
-
-      - run:
-          name: Create conda environment
-          command: |
-            conda config --remove channels defaults
-            conda config --add channels conda-forge
-            conda create -n env --yes python=3.9 conda-build=3.28.4 conda-verify
-            conda install -n env -c conda-forge jupyterlab nodejs=16
-            conda init bash
-            mkdir output
-
-      - run:
-          name: initial NPM Build
-          command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/python/plotly/js
-            npm ci
-            npm run build
-            git status
-
       - run:
           name: PyPI Build
           command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/python/plotly
-            python setup.py sdist bdist_wheel
-            cp -R dist ../../../output/dist
-            git status
-
-      - run:
-          name: Conda Build
-          command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/python/plotly
-            conda build recipe/
-            mv /opt/conda/envs/env/conda-bld/noarch/plotly*.tar.bz2 ../../../output
-            git status
-
-      - run:
-          name: Build Widget javascript bundle
-          command: |
-            eval "$(conda shell.bash hook)"
-            conda activate env
-            cd packages/python/plotly/js
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv sync --extra dev_build
+            cd js
             npm ci
             npm run build
+            cd ..
+            python -m build --sdist --wheel -o dist
+            cp -R dist output
+            git status
 
       - run:
           name: Zip output
           command: |
             tar czf output.tgz output
-
-      - run:
-          name: Git Diff
-          command: |
-            git status
-            git diff
 
       - store_artifacts:
           path: output.tgz
@@ -466,8 +326,6 @@ jobs:
   build-doc:
     resource_class: xlarge
     docker:
-      # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, for example, `3.9-browsers`
       - image: cimg/python:3.9-browsers
 
     steps:
@@ -476,52 +334,29 @@ jobs:
             - "dc:5f:39:48:00:b4:72:34:e1:d2:c4:e1:1f:d1:e2:ce" #plotlydocbot
 
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          key: v2-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-
       - run:
-          name: install dependencies
+          name: Install dependencies
           command: |
             cd doc
-            python -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip wheel
-            pip uninstall -y plotly
-            pip install -r requirements.txt
-            if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
-              pip uninstall -y plotly
-              cd ../packages/python/plotly
-              pip install -e .
-              cd js
-              npm ci
-              npm run build
-              cd ../../../../doc
-            fi
-            cd ..
-      - run:
-          name: Install orca
-          command: |
-            npm install electron@1.8.4
-            npm install orca
             sudo apt-get update
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
-            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
-
-      - save_cache:
-          paths:
-            - ./doc/venv
-            - ./doc/node_modules
-          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}-{{ checksum ".circleci/config.yml" }}
+            sudo apt-get install rename
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            uv venv
+            source .venv/bin/activate
+            uv pip install -r requirements.txt
+            cd ..
+            if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
+              uv pip uninstall plotly
+              uv pip install -e .
+            fi
 
       - run:
           name: make html
           command: |
             cd doc
-            . venv/bin/activate
+            source .venv/bin/activate
             echo ${mapbox_token} > python/.mapbox_token
             make -kj8 || make -kj8
             curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
@@ -570,15 +405,15 @@ jobs:
           name: make doc
           command: |
             cd doc
-            . venv/bin/activate
+            source .venv/bin/activate
             # For the API doc, we need to use the local version of plotly
             # since we are tweaking the source because of
             # graph_objs/graph_objects
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              pip uninstall -y plotly
-              cd ../packages/python/plotly
-              pip install -e .
-              cd ../../../doc
+              uv pip uninstall plotly
+              cd ..
+              uv pip install -e .
+              cd doc
               cd apidoc
               make html
               cd _build/html
@@ -597,6 +432,7 @@ jobs:
       - store_artifacts:
           path: doc/build
           destination: doc/build
+
 workflows:
   code_formatting:
     jobs:
@@ -607,21 +443,37 @@ workflows:
   release_build:
     jobs:
       - full_build
-
   build:
     jobs:
-      - python_38_core
-      - python_39_core
-      - python_310_core
-      - python_311_core
-      - python_312_core
-      - python_38_optional
-      - python_39_optional
-      - python_310_optional
-      - python_311_optional
-      - python_312_optional
-      - python_39_pandas_2_optional
-      - python_39_percy
-      - python_312_no_numpy
-      - python_312_np2
+      - test_core_py:
+          matrix:
+            parameters:
+              python_version:
+                - "3.8"
+                - "3.9"
+                - "3.10"
+                - "3.11"
+                - "3.12"
+                - "3.13"
+      - test_optional_py:
+          matrix:
+            parameters:
+              python_version:
+                - "3.8"
+                - "3.9"
+                - "3.10"
+                - "3.11"
+                - "3.12"
+                - "3.13"
+      - test_optional_py:
+          name: "test_optional_py-3.9_pandas-1.2.4"
+          python_version: "3.9"
+          pandas_version: "1.2.4"
+          numpy_version: "1.26.4"
+      - test_kaleido_v0:
+          matrix:
+            parameters:
+              python_version:
+                - "3.12"
+      - python_311_percy
       - build-doc

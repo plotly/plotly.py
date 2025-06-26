@@ -1,8 +1,52 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [6.0.0rc0] - 2024-11-27
+## Unreleased
+
+- Add deprecation warnings when using Kaleido v0 or deprecated image export features [[#5177](https://github.com/plotly/plotly.py/pull/5236)]
+
+## [6.1.2] - 2025-05-27
+
+### Fixed
+- Fix type checking and code highlighting for `graph_objects` classes [[#5199](https://github.com/plotly/plotly.py/pull/5199)]
+
+
+## [6.1.1] - 2025-05-20
+
+### Fixed
+- Prevent swallowing of `ValueError` when creating a figure with subplots [[#3888](https://github.com/plotly/plotly.py/pull/3888)]
+- Fix issue causing `fig.write_image()` to not generate an image [[#5193](https://github.com/plotly/plotly.py/pull/5193)]
+
+## [6.1.0] - 2025-05-15
+
+### Updated
+- Add support for Kaleido>=v1.0.0 for image generation [[#5062](https://github.com/plotly/plotly.py/pull/5062), [#5177](https://github.com/plotly/plotly.py/pull/5177)]
+- Reduce package bundle size by 18-24% via changes to code generation [[#4978](https://github.com/plotly/plotly.py/pull/4978)]
+
+### Added
+- Add SRI (Subresource Integrity) hash support for CDN script tags when using `include_plotlyjs='cdn'`. This enhances security by ensuring browser verification of CDN-served plotly.js files [[#PENDING](https://github.com/plotly/plotly.py/pull/PENDING)]
+
+### Fixed
+- Fix third-party widget display issues in v6 [[#5102](https://github.com/plotly/plotly.py/pull/5102)]
+- Add handling for case where `jupyterlab` or `notebook` is not installed [[#5104](https://github.com/plotly/plotly.py/pull/5104/files)]
+- Fix issue causing Plotly.js script to be embedded multiple times in Jupyter notebooks [[#5112](https://github.com/plotly/plotly.py/pull/5112)]
+- Re-add MIME renderer JupyterLab extension with JupyterLab 4 support to reduce file sizes for offline notebooks [[#5096](https://github.com/plotly/plotly.py/pull/5096)]
+- Fix issue preventing plots from rendering in HTML notebook export when using 'vscode+notebook' renderer [[#5154](https://github.com/plotly/plotly.py/pull/5154)]
+
+## [6.0.1] - 2025-03-14
+
+### Updated
+- Updated Plotly.js from version 3.0.0 to version 3.0.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#301----2025-02-18) for more information.
+
+
+### Fixed
+- Fix `TypeError` when using `orjson` to serialize `pandas.NA` [[#5040](https://github.com/plotly/plotly.py/pull/5040)].
+- Fix issue where using `category_orders` on `px.pie` raised `ColumnNotFoundError` [[#5000](https://github.com/plotly/plotly.py/pull/5000)].
+- Fix incorrect `DeprecationWarning` shown when creating a `px` chart [[#5080](https://github.com/plotly/plotly.py/pull/5080), [#5086](https://github.com/plotly/plotly.py/pull/5086)]
+
+
+## [6.0.0] - 2025-01-28
 
 ### Added
 - Add `plotly[express]` extra for easily installing Plotly Express dependencies [[#4644](https://github.com/plotly/plotly.py/pull/4644)]
@@ -14,12 +58,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Drop support for Jupyter Notebook version 6 and earlier [[#4822](https://github.com/plotly/plotly.py/pull/4822)]. The minimum supported version is now 7.0.0.
 
 ### Updated
-- Deprecate Mapbox-based traces.[[#4900](https://github.com/plotly/plotly.py/pull/4900)]. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for details on migrating from Mapbox to Maplibre.
-- Update plotly.py to use base64 encoding of typed arrays e.g. numpy in plotly JSON to keep precision intact and improve performance [[#4470](https://github.com/plotly/plotly.py/pull/4470)].
-- Make plotly-express dataframe agnostic via Narwhals [[#4790](https://github.com/plotly/plotly.py/pull/4790)].
-- Update `go.FigureWidget` to use `anywidget` [[#4823](https://github.com/plotly/plotly.py/pull/4823)]
-- Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7) [[#4736](https://github.com/plotly/plotly.py/pull/4763)]
-- Update Plotly.js from version 2.34.2 to version 3.0.0-rc1 See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#300-rc1----2024-11-27) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+- Update Plotly.js from version 2.34.2 to version 3.0.0 See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#300----2025-01-27) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - Make offsetgroup work with barmode "stacked" and "relative" for bar traces [[#7009](https://github.com/plotly/plotly.js/pull/7009)]
   - Drop support for deprecated attributes `titlefont`, `titleposition`, `titleside`, and `titleoffset` [[#7212](https://github.com/plotly/plotly.js/pull/7212)].
   - Drop deprecated pointcloud and heatmapgl traces and gl2d subplots [[#7213](https://github.com/plotly/plotly.js/pull/7213)]
@@ -31,6 +70,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Drop deprecated `zauto`, `zmin` and `zmax` from the surface trace [[#7234](https://github.com/plotly/plotly.js/pull/7234)]
   - Drop deprecated `autotick` attributes from cartesian axes [[#7236](https://github.com/plotly/plotly.js/pull/7236)]
   - Drop `transforms` from the API [[#7240](https://github.com/plotly/plotly.js/pull/7240), [#7254](https://github.com/plotly/plotly.js/pull/7254)]
+- Deprecate Mapbox-based traces.[[#4900](https://github.com/plotly/plotly.py/pull/4900)]. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for details on migrating from Mapbox to Maplibre.
+- Update plotly.py to use base64 encoding of typed arrays e.g. numpy in plotly JSON to keep precision intact and improve performance [[#4470](https://github.com/plotly/plotly.py/pull/4470)].
+- Make plotly-express dataframe agnostic via Narwhals [[#4790](https://github.com/plotly/plotly.py/pull/4790)].
+- Update `go.FigureWidget` to use `anywidget` [[#4823](https://github.com/plotly/plotly.py/pull/4823)]
+- Use modern [native ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) to load plotly.js bundle instead of requirejs which is [no longer under active development](https://github.com/requirejs/r.js/compare/2.3.6...2.3.7) [[#4736](https://github.com/plotly/plotly.py/pull/4763)]
 
 ### Fixed
 - Fix a bug in JupyterLab >= 4 and Jupyter Notebook >= 7 that caused LaTeX to not render in plotly charts [[#4763](https://github.com/plotly/plotly.py/pull/4763)].
@@ -716,7 +760,7 @@ This version includes several performance improvements ([#2368](https://github.c
     - Introduce range breaks on date axes (for example, to remove week-ends) via `layout.xaxis.rangebreaks`
     - Introduce a new unified x (or y) hovermode (`layout.hovermode="x unified"`), in which the hover box shows the information for all traces at a given x (or y) position
     - Add `node.customdata` and `link.customdata` to sankey traces
-- Updated [contributing notes](https://github.com/plotly/plotly.py/blob/master/contributing.md) for more explanations on how to contribute to plotly.py [#2290](https://github.com/plotly/plotly.py/pull/2290). Please give feedback on these notes!
+- Updated [contributing notes](https://github.com/plotly/plotly.py/blob/master/CONTRIBUTING.md) for more explanations on how to contribute to plotly.py [#2290](https://github.com/plotly/plotly.py/pull/2290). Please give feedback on these notes!
 - Updated documentation examples [#2325](https://github.com/plotly/plotly.py/pull/2325), and to show how to color links in Sankey diagrams [#2291](https://github.com/plotly/plotly.py/pull/2291).
 - Special thanks to [@SylwiaOliwia2](https://github.com/SylwiaOliwia2) and [@dangercrow](https://github.com/dangercrow) for improving our documentation!
 
@@ -1738,7 +1782,7 @@ This is a major version with many exciting updates. See the [Introducing plotly.
 - Error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
 
 ### Changed / Deprecated
-Please see the [migration guid](migration-guide.md) for a full list of the changes and deprecations in version 3.0.0
+Please see the [migration guide](MIGRATION_GUIDE.md) for a full list of the changes and deprecations in version 3.0.0
 
 
 

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.15.1
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -114,7 +114,7 @@ fig = make_subplots(rows=2, cols=2,
                     print_grid=False)
 for i in [1,2]:
     for j in [1,2]:
-        fig.append_trace(
+        fig.add_trace(
             go.Mesh3d(
                 x=(60*np.random.randn(N)),
                 y=(25*np.random.randn(N)),
@@ -159,9 +159,22 @@ fig.add_trace(go.Mesh3d(x=(70*np.random.randn(N)),
                   ))
 
 fig.update_layout(scene = dict(
-                    xaxis_title='X AXIS TITLE',
-                    yaxis_title='Y AXIS TITLE',
-                    zaxis_title='Z AXIS TITLE'),
+                      xaxis=dict(
+                          title=dict(
+                              text='X AXIS TITLE'
+                          )
+                      ),
+                      yaxis=dict(
+                          title=dict(
+                              text='Y AXIS TITLE'
+                          )
+                      ),
+                      zaxis=dict(
+                          title=dict(
+                              text='Z AXIS TITLE'
+                          )
+                      ),
+                    ),
                     width=700,
                     margin=dict(r=20, b=10, l=10, t=10))
 

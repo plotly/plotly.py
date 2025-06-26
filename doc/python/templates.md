@@ -83,13 +83,13 @@ z_data = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/a
 fig = go.Figure(
     data=go.Surface(z=z_data.values),
     layout=go.Layout(
-        title="Mt Bruno Elevation",
+        title=dict(text="Mt Bruno Elevation"),
         width=500,
         height=500,
     ))
 
 for template in ["plotly", "plotly_white", "plotly_dark", "ggplot2", "seaborn", "simple_white", "none"]:
-    fig.update_layout(template=template, title="Mt Bruno Elevation: '%s' theme" % template)
+    fig.update_layout(template=template, title=dict(text="Mt Bruno Elevation: '%s' theme" % template))
     fig.show()
 ```
 
@@ -146,7 +146,7 @@ large_rockwell_template = dict(
 )
 
 fig = go.Figure()
-fig.update_layout(title="Figure Title",
+fig.update_layout(title=dict(text="Figure Title"),
                   template=large_rockwell_template)
 fig.show()
 ```

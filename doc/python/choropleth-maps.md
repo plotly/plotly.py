@@ -287,7 +287,11 @@ fig = go.Figure(data=go.Choropleth(
     autocolorscale=False,
     text=df['text'], # hover text
     marker_line_color='white', # line markers between states
-    colorbar_title="Millions USD"
+    colorbar=dict(
+        title=dict(
+            text="Millions USD"
+            )
+    )
 ))
 
 fig.update_layout(

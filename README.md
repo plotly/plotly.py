@@ -39,7 +39,7 @@
 
 ## Quickstart
 
-`pip install plotly==6.0.0rc0`
+`pip install plotly`
 
 ```python
 import plotly.express as px
@@ -55,7 +55,7 @@ See the [Python documentation](https://plotly.com/python/) for more examples.
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
-`plotly.py` is [MIT Licensed](https://github.com/plotly/plotly.py/blob/master/LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or integrated into [Dash applications](https://dash.plotly.com/).
+`plotly.py` is [MIT Licensed](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt). Plotly graphs can be viewed in [Jupyter notebooks](https://jupyter.org), other Python notebook software such as [marimo](https://marimo.io), as standalone HTML files, or integrated into [Dash applications](https://dash.plotly.com/).
 
 [Contact us](https://plotly.com/consulting-and-oem/) for consulting, dashboard development, application integration, and feature additions.
 
@@ -67,9 +67,9 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ---
 
 - [Online Documentation](https://plotly.com/python/)
-- [Contributing to plotly](https://github.com/plotly/plotly.py/blob/master/contributing.md)
-- [Changelog](https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md)
-- [Code of Conduct](https://github.com/plotly/plotly.py/blob/master/CODE_OF_CONDUCT.md)
+- [Contributing to plotly](https://github.com/plotly/plotly.py/blob/main/CONTRIBUTING.md)
+- [Changelog](https://github.com/plotly/plotly.py/blob/main/CHANGELOG.md)
+- [Code of Conduct](https://github.com/plotly/plotly.py/blob/main/CODE_OF_CONDUCT.md)
 - [Community forum](https://community.plotly.com)
 
 ---
@@ -79,13 +79,13 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 plotly.py may be installed using pip
 
 ```
-pip install plotly==6.0.0rc0
+pip install plotly
 ```
 
 or conda.
 
 ```
-conda install -c plotly plotly=6.0.0rc0
+conda install -c conda-forge plotly
 ```
 
 ### Jupyter Widget Support
@@ -141,11 +141,13 @@ or conda
 conda install -c plotly plotly-geo=1.0.0
 ```
 
+`plotly-geo` can be found on Github at https://github.com/plotly/plotly-geo.
+
 ## Copyright and Licenses
 
 Code and documentation copyright 2019 Plotly, Inc.
 
-Code released under the [MIT license](https://github.com/plotly/plotly.py/blob/master/LICENSE.txt).
+Code released under the [MIT license](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt).
 
 Docs released under the [Creative Commons license](https://github.com/plotly/documentation/blob/source/LICENSE).
 
