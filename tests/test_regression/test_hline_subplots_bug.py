@@ -12,15 +12,30 @@ def _apply_line(fig, orientation):
         raise ValueError("orientation must be 'h' or 'v'")
 
 
-@pytest.mark.parametrize("orientation,kwargs", [
-    ("h", dict(line_coord_key="y0", coord=0.5, span_keys=("x0", "x1"), span_vals=(0, 1))),
-    ("v", dict(line_coord_key="x0", coord=0.3, span_keys=("y0", "y1"), span_vals=(0, 1))),
-])
-@pytest.mark.parametrize("constructor", [
-    pytest.param(lambda: go.Figure(), id="plain-figure"),
-    pytest.param(lambda: make_subplots(rows=1, cols=1), id="make_subplots"),
-])
-
+@pytest.mark.parametrize(
+    "orientation,kwargs",
+    [
+        (
+            "h",
+            dict(
+                line_coord_key="y0", coord=0.5, span_keys=("x0", "x1"), span_vals=(0, 1)
+            ),
+        ),
+        (
+            "v",
+            dict(
+                line_coord_key="x0", coord=0.3, span_keys=("y0", "y1"), span_vals=(0, 1)
+            ),
+        ),
+    ],
+)
+@pytest.mark.parametrize(
+    "constructor",
+    [
+        pytest.param(lambda: go.Figure(), id="plain-figure"),
+        pytest.param(lambda: make_subplots(rows=1, cols=1), id="make_subplots"),
+    ],
+)
 def test_add_line_presence(orientation, kwargs, constructor):
     """Both add_hline and add_vline must create a shape, even on empty subplots."""
     fig = constructor()
