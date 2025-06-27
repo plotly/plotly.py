@@ -1,5 +1,4 @@
 import pytest
-import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 def test_add_hline_on_empty_subplots_creates_shape_default():
