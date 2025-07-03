@@ -52,16 +52,16 @@ def validate_gantt(df):
     # validate if df is a list
     if not isinstance(df, list):
         raise exceptions.PlotlyError(
-            "You must input either a dataframe " "or a list of dictionaries."
+            "You must input either a dataframe or a list of dictionaries."
         )
 
     # validate if df is empty
     if len(df) <= 0:
         raise exceptions.PlotlyError(
-            "Your list is empty. It must contain " "at least one dictionary."
+            "Your list is empty. It must contain at least one dictionary."
         )
     if not isinstance(df[0], dict):
-        raise exceptions.PlotlyError("Your list must only " "include dictionaries.")
+        raise exceptions.PlotlyError("Your list must only include dictionaries.")
     return df
 
 

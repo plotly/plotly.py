@@ -4,6 +4,7 @@ Matplotlib Exporter
 This submodule contains tools for crawling a matplotlib figure and exporting
 relevant pieces to a renderer.
 """
+
 import warnings
 import io
 from . import utils
@@ -44,7 +45,7 @@ class Exporter(object):
         # Calling savefig executes the draw() command, putting elements
         # in the correct place.
         if fig.canvas is None:
-            canvas = FigureCanvasAgg(fig)
+            FigureCanvasAgg(fig)
         fig.savefig(io.BytesIO(), format="png", dpi=fig.dpi)
         if self.close_mpl:
             import matplotlib.pyplot as plt

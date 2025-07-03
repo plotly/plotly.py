@@ -1,5 +1,4 @@
 import plotly.graph_objects as go
-from _plotly_utils.exceptions import PlotlyKeyError
 import pytest
 import sys
 
@@ -23,7 +22,7 @@ def test_raises_on_bad_index(some_fig):
     # Check indexing errors can be detected when path used as key to go.Figure
     raised = False
     try:
-        x0 = some_fig["layout.shapes[2].x0"]
+        some_fig["layout.shapes[2].x0"]
     except KeyError as e:
         raised = True
         assert (
@@ -38,12 +37,11 @@ layout.shapes[2].x0
 
 
 def test_raises_on_bad_dot_property(some_fig):
-
     # Check . property lookup errors can be detected when path used as key to
     # go.Figure
     raised = False
     try:
-        x2000 = some_fig["layout.shapes[1].x2000"]
+        some_fig["layout.shapes[1].x2000"]
     except KeyError as e:
         raised = True
         assert (
@@ -58,11 +56,10 @@ layout.shapes[1].x2000
 
 
 def test_raises_on_bad_ancestor_dot_property(some_fig):
-
     # Check . property lookup errors but not on the last part of the path
     raised = False
     try:
-        x2000 = some_fig["layout.shapa[1].x2000"]
+        some_fig["layout.shapa[1].x2000"]
     except KeyError as e:
         raised = True
         assert (
@@ -77,7 +74,6 @@ layout.shapa[1].x2000
 
 
 def test_raises_on_bad_indexed_underscore_property(some_fig):
-
     # The way these tests work is first the error is raised without using
     # underscores to get the Exception we expect, then the string showing the
     # bad property path is removed (because it will not match the string
@@ -164,16 +160,13 @@ line_colr
      ^^^^""",
         )
         assert (
-            (
-                e.args[0].find(
-                    """Bad property path:
+            e.args[0].find(
+                """Bad property path:
 line_colr
      ^^^^"""
-                )
-                and (e.args[0].find("""Did you mean "color"?""") >= 0) >= 0
             )
-            and (e_substr == e_correct_substr)
-        )
+            and (e.args[0].find("""Did you mean "color"?""") >= 0) >= 0
+        ) and (e_substr == e_correct_substr)
     assert raised
 
     raised = False
@@ -181,7 +174,7 @@ line_colr
     # BaseFigure and throws the error for the last good property found in
     # the path
     try:
-        fig2 = go.Figure(layout=dict(title=dict(txt="two")))
+        go.Figure(layout=dict(title=dict(txt="two")))
     except ValueError as e_correct:
         raised = True
         e_correct_substr = error_substr(
@@ -195,7 +188,7 @@ txt
 
     raised = False
     try:
-        fig2 = go.Figure(layout_title_txt="two")
+        go.Figure(layout_title_txt="two")
     except TypeError as e:
         raised = True
         # when the Figure constructor sees the same ValueError above, a
@@ -310,17 +303,14 @@ text_yo
 ^^^^""",
         )
         assert (
-            (
-                e.args[0].find(
-                    """
+            e.args[0].find(
+                """
 Property does not support subscripting:
 text_yo
 ^^^^"""
-                )
-                >= 0
             )
-            and (e_substr == e_correct_substr)
-        )
+            >= 0
+        ) and (e_substr == e_correct_substr)
     assert raised
 
     # Same as previous test but tests deeper path
@@ -353,17 +343,14 @@ textfont_family_yo
          ^^^^^^""",
         )
         assert (
-            (
-                e.args[0].find(
-                    """
+            e.args[0].find(
+                """
 Property does not support subscripting:
 textfont_family_yo
          ^^^^^^"""
-                )
-                >= 0
             )
-            and (e_substr == e_correct_substr)
-        )
+            >= 0
+        ) and (e_substr == e_correct_substr)
     assert raised
 
 
@@ -421,14 +408,14 @@ def test_subscript_error_exception_types(some_fig):
     with pytest.raises(ValueError):
         some_fig.update_layout(width_yo=100)
     with pytest.raises(KeyError):
-        yo = some_fig["layout_width_yo"]
+        some_fig["layout_width_yo"]
 
     some_fig.update_layout(width=100)
     # when width is specified
     with pytest.raises(ValueError):
         some_fig.update_layout(width_yo=100)
     with pytest.raises(KeyError):
-        yo = some_fig["layout_width_yo"]
+        some_fig["layout_width_yo"]
 
 
 def form_error_string(call, exception, subs):

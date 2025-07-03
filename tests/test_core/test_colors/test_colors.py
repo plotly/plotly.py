@@ -1,13 +1,11 @@
 from unittest import TestCase
 
-import plotly.tools as tls
 from plotly.exceptions import PlotlyError
 import plotly.colors as colors
 
 
 class TestColors(TestCase):
     def test_validate_colors(self):
-
         # test string input
         color_string = "foo"
 
@@ -23,9 +21,7 @@ class TestColors(TestCase):
         # test rgb color
         color_string2 = "rgb(265, 0, 0)"
 
-        pattern2 = (
-            "Whoops! The elements in your rgb colors tuples cannot " "exceed 255.0."
-        )
+        pattern2 = "Whoops! The elements in your rgb colors tuples cannot exceed 255.0."
 
         self.assertRaisesRegex(
             PlotlyError, pattern2, colors.validate_colors, color_string2
@@ -34,14 +30,13 @@ class TestColors(TestCase):
         # test tuple color
         color_tuple = (1, 1, 2)
 
-        pattern3 = "Whoops! The elements in your colors tuples cannot " "exceed 1.0."
+        pattern3 = "Whoops! The elements in your colors tuples cannot exceed 1.0."
 
         self.assertRaisesRegex(
             PlotlyError, pattern3, colors.validate_colors, color_tuple
         )
 
     def test_convert_colors_to_same_type(self):
-
         # test colortype
         color_tuple = ["#aaaaaa", "#bbbbbb", "#cccccc"]
         scale = [0, 1]
@@ -54,7 +49,7 @@ class TestColors(TestCase):
         color_tuple = (1, 1, 1)
         colortype = 2
 
-        pattern2 = "You must select either rgb or tuple for your colortype " "variable."
+        pattern2 = "You must select either rgb or tuple for your colortype variable."
 
         self.assertRaisesRegex(
             PlotlyError,
@@ -65,12 +60,11 @@ class TestColors(TestCase):
         )
 
     def test_convert_dict_colors_to_same_type(self):
-
         # test colortype
         color_dict = dict(apple="rgb(1, 1, 1)")
         colortype = 2
 
-        pattern = "You must select either rgb or tuple for your colortype " "variable."
+        pattern = "You must select either rgb or tuple for your colortype variable."
 
         self.assertRaisesRegex(
             PlotlyError,
@@ -81,13 +75,10 @@ class TestColors(TestCase):
         )
 
     def test_validate_scale_values(self):
-
         # test that scale length is at least 2
         scale = [0]
 
-        pattern = (
-            "You must input a list of scale values that has at least " "two values."
-        )
+        pattern = "You must input a list of scale values that has at least two values."
 
         self.assertRaisesRegex(
             PlotlyError, pattern, colors.validate_scale_values, scale
@@ -97,8 +88,7 @@ class TestColors(TestCase):
         scale = [0, 1.1]
 
         pattern = (
-            "The first and last number in your scale must be 0.0 and "
-            "1.0 respectively."
+            "The first and last number in your scale must be 0.0 and 1.0 respectively."
         )
 
         self.assertRaisesRegex(
@@ -118,7 +108,6 @@ class TestColors(TestCase):
         )
 
     def test_make_colorscale(self):
-
         # test minimum colors length
         color_list = [(0, 0, 0)]
 
@@ -137,7 +126,6 @@ class TestColors(TestCase):
         )
 
     def test_get_colorscale(self):
-
         # test for incorrect input type
         pattern = "Name argument have to be a string."
         name = colors.sequential.haline
@@ -176,7 +164,6 @@ class TestColors(TestCase):
         )
 
     def test_sample_colorscale(self):
-
         # test that sampling a colorscale at the defined points returns the same
         defined_colors = colors.sequential.Inferno
         sampled_colors = colors.sample_colorscale(

@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Tickformatstop(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "parcats.line.colorbar"
     _path_str = "parcats.line.colorbar.tickformatstop"
     _valid_props = {"dtickrange", "enabled", "name", "templateitemname", "value"}
 
-    # dtickrange
-    # ----------
     @property
     def dtickrange(self):
         """
@@ -35,8 +33,6 @@ class Tickformatstop(_BaseTraceHierarchyType):
     def dtickrange(self, val):
         self["dtickrange"] = val
 
-    # enabled
-    # -------
     @property
     def enabled(self):
         """
@@ -56,8 +52,6 @@ class Tickformatstop(_BaseTraceHierarchyType):
     def enabled(self, val):
         self["enabled"] = val
 
-    # name
-    # ----
     @property
     def name(self):
         """
@@ -83,8 +77,6 @@ class Tickformatstop(_BaseTraceHierarchyType):
     def name(self, val):
         self["name"] = val
 
-    # templateitemname
-    # ----------------
     @property
     def templateitemname(self):
         """
@@ -111,8 +103,6 @@ class Tickformatstop(_BaseTraceHierarchyType):
     def templateitemname(self, val):
         self["templateitemname"] = val
 
-    # value
-    # -----
     @property
     def value(self):
         """
@@ -133,8 +123,6 @@ class Tickformatstop(_BaseTraceHierarchyType):
     def value(self, val):
         self["value"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -224,14 +212,11 @@ class Tickformatstop(_BaseTraceHierarchyType):
         -------
         Tickformatstop
         """
-        super(Tickformatstop, self).__init__("tickformatstops")
-
+        super().__init__("tickformatstops")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -239,45 +224,18 @@ class Tickformatstop(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.parcats.line.colorbar.Tickformatstop
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcats.line.colorbar.Tickformatstop`"""
-            )
+an instance of :class:`plotly.graph_objs.parcats.line.colorbar.Tickformatstop`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("dtickrange", None)
-        _v = dtickrange if dtickrange is not None else _v
-        if _v is not None:
-            self["dtickrange"] = _v
-        _v = arg.pop("enabled", None)
-        _v = enabled if enabled is not None else _v
-        if _v is not None:
-            self["enabled"] = _v
-        _v = arg.pop("name", None)
-        _v = name if name is not None else _v
-        if _v is not None:
-            self["name"] = _v
-        _v = arg.pop("templateitemname", None)
-        _v = templateitemname if templateitemname is not None else _v
-        if _v is not None:
-            self["templateitemname"] = _v
-        _v = arg.pop("value", None)
-        _v = value if value is not None else _v
-        if _v is not None:
-            self["value"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("dtickrange", arg, dtickrange)
+        self._set_property("enabled", arg, enabled)
+        self._set_property("name", arg, name)
+        self._set_property("templateitemname", arg, templateitemname)
+        self._set_property("value", arg, value)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

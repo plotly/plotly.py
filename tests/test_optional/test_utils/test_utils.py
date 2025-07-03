@@ -2,12 +2,12 @@
 Module to test plotly.utils with optional dependencies.
 
 """
+
 import datetime
 import math
 import decimal
 from datetime import datetime as dt
 from unittest import TestCase
-from time import time
 import pytest
 from packaging.version import Version
 
@@ -101,7 +101,6 @@ ts = pd.Series([1.5, 2.5], index=rng)
 
 class TestJSONEncoder(TestCase):
     def test_encode_as_plotly(self):
-
         # should *fail* when object doesn't have `to_plotly_json` attribute
         objs_without_attr = [1, "one", set(["a", "set"]), {"a": "dict"}, ["a", "list"]]
         for obj in objs_without_attr:
@@ -120,7 +119,6 @@ class TestJSONEncoder(TestCase):
         self.assertEqual(res, expected_res)
 
     def test_encode_as_list(self):
-
         # should *fail* when object doesn't have `tolist` method
         objs_without_attr = [1, "one", set(["a", "set"]), {"a": "dict"}, ["a", "list"]]
         for obj in objs_without_attr:
@@ -139,7 +137,6 @@ class TestJSONEncoder(TestCase):
         self.assertEqual(res, expected_res)
 
     def test_encode_as_pandas(self):
-
         # should *fail* on things that are not specific pandas objects
         not_pandas = ["giraffe", 6, float("nan"), ["a", "list"]]
         for obj in not_pandas:
@@ -152,7 +149,6 @@ class TestJSONEncoder(TestCase):
         self.assertTrue(res is None)
 
     def test_encode_as_numpy(self):
-
         # should *fail* on non-numpy-y things
         not_numpy = ["hippo", 8, float("nan"), {"a": "dict"}]
         for obj in not_numpy:
@@ -192,7 +188,6 @@ class TestJSONEncoder(TestCase):
         self.assertEqual(res, "2013-10-01T00:00:00-04:00")
 
     def test_encode_as_date(self):
-
         # should *fail* without 'utcoffset' and 'isoformat' and '__sub__' attrs
         non_datetimes = ["noon", 56, "00:00:00"]
         for obj in non_datetimes:
@@ -212,7 +207,6 @@ class TestJSONEncoder(TestCase):
         self.assertEqual(res, "2013-10-01 00:00:00.000010")
 
     def test_encode_as_decimal(self):
-
         # should work with decimal values
         res = utils.PlotlyJSONEncoder.encode_as_decimal(decimal.Decimal(1.023452))
 
@@ -368,8 +362,8 @@ class TestJSONEncoder(TestCase):
         )
 
     def test_numpy_masked_json_encoding(self):
-        l = [1, 2, np.ma.core.masked]
-        j1 = _json.dumps(l, cls=utils.PlotlyJSONEncoder)
+        temp = [1, 2, np.ma.core.masked]
+        j1 = _json.dumps(temp, cls=utils.PlotlyJSONEncoder)
         print(j1)
         assert j1 == "[1, 2, null]"
 
@@ -397,8 +391,6 @@ class TestJSONEncoder(TestCase):
         )
 
     def test_pil_image_encoding(self):
-        import _plotly_utils
-
         img_path = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
             "..",
@@ -431,7 +423,6 @@ class TestNumpyIntegerBaseType(TestCase):
     def test_numpy_integer_import(self):
         # should generate a figure with subplots of array and not throw a ValueError
         import numpy as np
-        import plotly.graph_objects as go
         from plotly.subplots import make_subplots
 
         indices_rows = np.array([1], dtype=int)

@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Projection(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout.geo"
     _path_str = "layout.geo.projection"
     _valid_props = {"distance", "parallels", "rotation", "scale", "tilt", "type"}
 
-    # distance
-    # --------
     @property
     def distance(self):
         """
@@ -32,8 +30,6 @@ class Projection(_BaseLayoutHierarchyType):
     def distance(self, val):
         self["distance"] = val
 
-    # parallels
-    # ---------
     @property
     def parallels(self):
         """
@@ -58,8 +54,6 @@ class Projection(_BaseLayoutHierarchyType):
     def parallels(self, val):
         self["parallels"] = val
 
-    # rotation
-    # --------
     @property
     def rotation(self):
         """
@@ -68,19 +62,6 @@ class Projection(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`
           - A dict of string/value properties that will be passed
             to the Rotation constructor
-
-            Supported dict properties:
-
-                lat
-                    Rotates the map along meridians (in degrees
-                    North).
-                lon
-                    Rotates the map along parallels (in degrees
-                    East). Defaults to the center of the
-                    `lonaxis.range` values.
-                roll
-                    Roll the map (in degrees) For example, a roll
-                    of 180 makes the map appear upside down.
 
         Returns
         -------
@@ -92,8 +73,6 @@ class Projection(_BaseLayoutHierarchyType):
     def rotation(self, val):
         self["rotation"] = val
 
-    # scale
-    # -----
     @property
     def scale(self):
         """
@@ -113,8 +92,6 @@ class Projection(_BaseLayoutHierarchyType):
     def scale(self, val):
         self["scale"] = val
 
-    # tilt
-    # ----
     @property
     def tilt(self):
         """
@@ -134,8 +111,6 @@ class Projection(_BaseLayoutHierarchyType):
     def tilt(self, val):
         self["tilt"] = val
 
-    # type
-    # ----
     @property
     def type(self):
         """
@@ -178,8 +153,6 @@ class Projection(_BaseLayoutHierarchyType):
     def type(self, val):
         self["type"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -248,14 +221,11 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Projection
         """
-        super(Projection, self).__init__("projection")
-
+        super().__init__("projection")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -263,49 +233,19 @@ class Projection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.geo.Projection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.Projection`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.geo.Projection`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("distance", None)
-        _v = distance if distance is not None else _v
-        if _v is not None:
-            self["distance"] = _v
-        _v = arg.pop("parallels", None)
-        _v = parallels if parallels is not None else _v
-        if _v is not None:
-            self["parallels"] = _v
-        _v = arg.pop("rotation", None)
-        _v = rotation if rotation is not None else _v
-        if _v is not None:
-            self["rotation"] = _v
-        _v = arg.pop("scale", None)
-        _v = scale if scale is not None else _v
-        if _v is not None:
-            self["scale"] = _v
-        _v = arg.pop("tilt", None)
-        _v = tilt if tilt is not None else _v
-        if _v is not None:
-            self["tilt"] = _v
-        _v = arg.pop("type", None)
-        _v = type if type is not None else _v
-        if _v is not None:
-            self["type"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("distance", arg, distance)
+        self._set_property("parallels", arg, parallels)
+        self._set_property("rotation", arg, rotation)
+        self._set_property("scale", arg, scale)
+        self._set_property("tilt", arg, tilt)
+        self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False
