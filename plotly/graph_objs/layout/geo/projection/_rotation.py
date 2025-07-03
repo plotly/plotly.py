@@ -1,17 +1,15 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
 
 class Rotation(_BaseLayoutHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "layout.geo.projection"
     _path_str = "layout.geo.projection.rotation"
     _valid_props = {"lat", "lon", "roll"}
 
-    # lat
-    # ---
     @property
     def lat(self):
         """
@@ -30,8 +28,6 @@ class Rotation(_BaseLayoutHierarchyType):
     def lat(self, val):
         self["lat"] = val
 
-    # lon
-    # ---
     @property
     def lon(self):
         """
@@ -51,8 +47,6 @@ class Rotation(_BaseLayoutHierarchyType):
     def lon(self, val):
         self["lon"] = val
 
-    # roll
-    # ----
     @property
     def roll(self):
         """
@@ -72,8 +66,6 @@ class Rotation(_BaseLayoutHierarchyType):
     def roll(self, val):
         self["roll"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -110,14 +102,11 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         Rotation
         """
-        super(Rotation, self).__init__("rotation")
-
+        super().__init__("rotation")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -125,37 +114,16 @@ class Rotation(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.geo.projection.Rotation
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("lat", None)
-        _v = lat if lat is not None else _v
-        if _v is not None:
-            self["lat"] = _v
-        _v = arg.pop("lon", None)
-        _v = lon if lon is not None else _v
-        if _v is not None:
-            self["lon"] = _v
-        _v = arg.pop("roll", None)
-        _v = roll if roll is not None else _v
-        if _v is not None:
-            self["roll"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("lat", arg, lat)
+        self._set_property("lon", arg, lon)
+        self._set_property("roll", arg, roll)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

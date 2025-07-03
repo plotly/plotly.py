@@ -1,3 +1,4 @@
+# ruff: noqa: F405
 """For a list of colors available in `plotly.express.colors`, please see
 
 * the `tutorial on discrete color sequences <https://plotly.com/python/discrete-color/#color-sequences-in-plotly-express>`_
@@ -12,7 +13,7 @@ Color scales are available within the following namespaces
 * sequential
 """
 
-from plotly.colors import *
+from plotly.colors import *  # noqa: F403
 
 
 __all__ = [

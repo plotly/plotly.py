@@ -5,8 +5,10 @@ import numpy as np
 import inspect
 import itertools
 
+
 # Fixtures
-# --------
+
+
 @pytest.fixture()
 def validator():
     return ColorscaleValidator("prop", "parent")
@@ -40,8 +42,9 @@ def seqence_colorscale(request):
 
 
 # Tests
-# -----
-# ### Acceptance by name ###
+
+
+# Acceptance by name
 def test_acceptance_named(named_colorscale, validator):
     # Get expected value of named colorscale
     d = len(named_colorscales[named_colorscale]) - 1
@@ -60,7 +63,7 @@ def test_acceptance_named(named_colorscale, validator):
     assert validator.present(expected) == expected_tuples
 
 
-# ### Acceptance by name ###
+# Acceptance by name
 def test_acceptance_sequence(seqence_colorscale, validator):
     # Get expected value of named colorscale
     d = len(seqence_colorscale) - 1
@@ -74,20 +77,20 @@ def test_acceptance_sequence(seqence_colorscale, validator):
     assert validator.present(expected) == expected_tuples
 
 
-# ### Acceptance as array ###
+# Acceptance as array
 @pytest.mark.parametrize(
     "val",
     [
-        ((0, "red"),),
-        ((0.1, "rgb(255,0,0)"), (0.3, "green")),
-        ((0, "purple"), (0.2, "yellow"), (1.0, "rgba(255,0,0,100)")),
+        [[0, "red"]],
+        [[0.1, "rgb(255,0,0)"], [0.3, "green"]],
+        [[0, "purple"], [0.2, "yellow"], [1.0, "rgba(255,0,0,100)"]],
     ],
 )
-def test_acceptance_array(val, validator):
+def test_acceptance_array_1(val, validator):
     assert validator.validate_coerce(val) == val
 
 
-# ### Coercion as array ###
+# Coercion as array
 @pytest.mark.parametrize(
     "val",
     [
@@ -100,7 +103,7 @@ def test_acceptance_array(val, validator):
         ),
     ],
 )
-def test_acceptance_array(val, validator):
+def test_acceptance_array_2(val, validator):
     # Compute expected (tuple of tuples where color is
     # lowercase with no spaces)
     expected = [[e[0], e[1]] for e in val]
@@ -111,7 +114,7 @@ def test_acceptance_array(val, validator):
     assert validator.present(coerce_val) == expected_present
 
 
-# ### Rejection by type ###
+# Rejection by type
 @pytest.mark.parametrize("val", [23, set(), {}, np.pi])
 def test_rejection_type(val, validator):
     with pytest.raises(ValueError) as validation_failure:
@@ -120,7 +123,7 @@ def test_rejection_type(val, validator):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by string value ###
+# Rejection by string value
 @pytest.mark.parametrize("val", ["Invalid", ""])
 def test_rejection_str_value(val, validator):
     with pytest.raises(ValueError) as validation_failure:
@@ -129,7 +132,7 @@ def test_rejection_str_value(val, validator):
     assert "Invalid value" in str(validation_failure.value)
 
 
-# ### Rejection by array ###
+# Rejection by array
 @pytest.mark.parametrize(
     "val",
     [

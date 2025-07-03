@@ -51,21 +51,14 @@ def build_deprecated_datatypes_py():
     str
     """
 
-    # Initialize source code buffer
-    # -----------------------------
     buffer = StringIO()
-
-    # Write warnings import
-    # ---------------------
     buffer.write("import warnings\n")
 
-    # Write warnings filter
-    # ---------------------
     # Use filter to enable DeprecationWarnings on our deprecated classes
     buffer.write(
         r"""
-warnings.filterwarnings('default',
-                        r'plotly\.graph_objs\.\w+ is deprecated',
+warnings.filterwarnings("default",
+                        r"plotly\.graph_objs\.\w+ is deprecated",
                         DeprecationWarning)
 
 
@@ -73,7 +66,6 @@ warnings.filterwarnings('default',
     )
 
     # Write deprecated class definitions
-    # ----------------------------------
     for class_name, opts in DEPRECATED_DATATYPES.items():
         base_class_name = opts["base_type"].__name__
         depr_msg = build_deprecation_message(class_name, **opts)
@@ -89,11 +81,10 @@ class {class_name}({base_class_name}):
         {depr_msg}
         \"\"\"
         warnings.warn(\"\"\"{depr_msg}\"\"\", DeprecationWarning)
-        super({class_name}, self).__init__(*args, **kwargs)\n\n\n"""
+        super().__init__(*args, **kwargs)\n\n\n"""
         )
 
     # Return source string
-    # --------------------
     return buffer.getvalue()
 
 
@@ -129,7 +120,6 @@ def build_deprecation_message(class_name, base_type, new):
     """
     replacements = []
     for repl in new:
-
         if repl == "etc.":
             replacements.append(repl)
         else:
@@ -146,7 +136,7 @@ def build_deprecation_message(class_name, base_type, new):
 
     replacemens_str = "\n  - ".join(replacements)
 
-    if base_type == list:
+    if base_type is list:
         return f"""\
 plotly.graph_objs.{class_name} is deprecated.
 Please replace it with a list or tuple of instances of the following types
@@ -175,12 +165,10 @@ def write_deprecated_datatypes(outdir):
     None
     """
     # Generate source code
-    # --------------------
     datatype_source = build_deprecated_datatypes_py()
     filepath = opath.join(outdir, "graph_objs", "_deprecations.py")
 
     # Write file
-    # ----------
     write_source_py(datatype_source, filepath)
 
 

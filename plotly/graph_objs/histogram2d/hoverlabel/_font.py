@@ -1,11 +1,11 @@
+#                   --- THIS FILE IS AUTO-GENERATED ---
+# Modifications will be overwitten the next time code generation run.
+
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
 
 class Font(_BaseTraceHierarchyType):
-
-    # class properties
-    # --------------------
     _parent_path_str = "histogram2d.hoverlabel"
     _path_str = "histogram2d.hoverlabel.font"
     _valid_props = {
@@ -29,8 +29,6 @@ class Font(_BaseTraceHierarchyType):
         "weightsrc",
     }
 
-    # color
-    # -----
     @property
     def color(self):
         """
@@ -39,42 +37,7 @@ class Font(_BaseTraceHierarchyType):
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
           - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
           - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color:
-                aliceblue, antiquewhite, aqua, aquamarine, azure,
-                beige, bisque, black, blanchedalmond, blue,
-                blueviolet, brown, burlywood, cadetblue,
-                chartreuse, chocolate, coral, cornflowerblue,
-                cornsilk, crimson, cyan, darkblue, darkcyan,
-                darkgoldenrod, darkgray, darkgrey, darkgreen,
-                darkkhaki, darkmagenta, darkolivegreen, darkorange,
-                darkorchid, darkred, darksalmon, darkseagreen,
-                darkslateblue, darkslategray, darkslategrey,
-                darkturquoise, darkviolet, deeppink, deepskyblue,
-                dimgray, dimgrey, dodgerblue, firebrick,
-                floralwhite, forestgreen, fuchsia, gainsboro,
-                ghostwhite, gold, goldenrod, gray, grey, green,
-                greenyellow, honeydew, hotpink, indianred, indigo,
-                ivory, khaki, lavender, lavenderblush, lawngreen,
-                lemonchiffon, lightblue, lightcoral, lightcyan,
-                lightgoldenrodyellow, lightgray, lightgrey,
-                lightgreen, lightpink, lightsalmon, lightseagreen,
-                lightskyblue, lightslategray, lightslategrey,
-                lightsteelblue, lightyellow, lime, limegreen,
-                linen, magenta, maroon, mediumaquamarine,
-                mediumblue, mediumorchid, mediumpurple,
-                mediumseagreen, mediumslateblue, mediumspringgreen,
-                mediumturquoise, mediumvioletred, midnightblue,
-                mintcream, mistyrose, moccasin, navajowhite, navy,
-                oldlace, olive, olivedrab, orange, orangered,
-                orchid, palegoldenrod, palegreen, paleturquoise,
-                palevioletred, papayawhip, peachpuff, peru, pink,
-                plum, powderblue, purple, red, rosybrown,
-                royalblue, rebeccapurple, saddlebrown, salmon,
-                sandybrown, seagreen, seashell, sienna, silver,
-                skyblue, slateblue, slategray, slategrey, snow,
-                springgreen, steelblue, tan, teal, thistle, tomato,
-                turquoise, violet, wheat, white, whitesmoke,
-                yellow, yellowgreen
+          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
           - A list or array of any of the above
 
         Returns
@@ -87,8 +50,6 @@ class Font(_BaseTraceHierarchyType):
     def color(self, val):
         self["color"] = val
 
-    # colorsrc
-    # --------
     @property
     def colorsrc(self):
         """
@@ -107,23 +68,14 @@ class Font(_BaseTraceHierarchyType):
     def colorsrc(self, val):
         self["colorsrc"] = val
 
-    # family
-    # ------
     @property
     def family(self):
         """
         HTML font family - the typeface that will be applied by the web
-        browser. The web browser will only be able to apply a font if
-        it is available on the system which it operates. Provide
-        multiple font families, separated by commas, to indicate the
-        preference in which to apply fonts if they aren't available on
-        the system. The Chart Studio Cloud (at https://chart-
-        studio.plotly.com or on-premise) generates images on a server,
-        where only a select number of fonts are installed and
-        supported. These include "Arial", "Balto", "Courier New",
-        "Droid Sans", "Droid Serif", "Droid Sans Mono", "Gravitas One",
-        "Old Standard TT", "Open Sans", "Overpass", "PT Sans Narrow",
-        "Raleway", "Times New Roman".
+        browser. The web browser can only apply a font if it is
+        available on the system where it runs. Provide multiple font
+        families, separated by commas, to indicate the order in which
+        to apply fonts if they aren't available.
 
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -139,8 +91,6 @@ class Font(_BaseTraceHierarchyType):
     def family(self, val):
         self["family"] = val
 
-    # familysrc
-    # ---------
     @property
     def familysrc(self):
         """
@@ -159,8 +109,6 @@ class Font(_BaseTraceHierarchyType):
     def familysrc(self, val):
         self["familysrc"] = val
 
-    # lineposition
-    # ------------
     @property
     def lineposition(self):
         """
@@ -185,8 +133,6 @@ class Font(_BaseTraceHierarchyType):
     def lineposition(self, val):
         self["lineposition"] = val
 
-    # linepositionsrc
-    # ---------------
     @property
     def linepositionsrc(self):
         """
@@ -206,8 +152,6 @@ class Font(_BaseTraceHierarchyType):
     def linepositionsrc(self, val):
         self["linepositionsrc"] = val
 
-    # shadow
-    # ------
     @property
     def shadow(self):
         """
@@ -231,8 +175,6 @@ class Font(_BaseTraceHierarchyType):
     def shadow(self, val):
         self["shadow"] = val
 
-    # shadowsrc
-    # ---------
     @property
     def shadowsrc(self):
         """
@@ -251,8 +193,6 @@ class Font(_BaseTraceHierarchyType):
     def shadowsrc(self, val):
         self["shadowsrc"] = val
 
-    # size
-    # ----
     @property
     def size(self):
         """
@@ -270,8 +210,6 @@ class Font(_BaseTraceHierarchyType):
     def size(self, val):
         self["size"] = val
 
-    # sizesrc
-    # -------
     @property
     def sizesrc(self):
         """
@@ -290,8 +228,6 @@ class Font(_BaseTraceHierarchyType):
     def sizesrc(self, val):
         self["sizesrc"] = val
 
-    # style
-    # -----
     @property
     def style(self):
         """
@@ -313,8 +249,6 @@ class Font(_BaseTraceHierarchyType):
     def style(self, val):
         self["style"] = val
 
-    # stylesrc
-    # --------
     @property
     def stylesrc(self):
         """
@@ -333,8 +267,6 @@ class Font(_BaseTraceHierarchyType):
     def stylesrc(self, val):
         self["stylesrc"] = val
 
-    # textcase
-    # --------
     @property
     def textcase(self):
         """
@@ -357,8 +289,6 @@ class Font(_BaseTraceHierarchyType):
     def textcase(self, val):
         self["textcase"] = val
 
-    # textcasesrc
-    # -----------
     @property
     def textcasesrc(self):
         """
@@ -377,8 +307,6 @@ class Font(_BaseTraceHierarchyType):
     def textcasesrc(self, val):
         self["textcasesrc"] = val
 
-    # variant
-    # -------
     @property
     def variant(self):
         """
@@ -400,8 +328,6 @@ class Font(_BaseTraceHierarchyType):
     def variant(self, val):
         self["variant"] = val
 
-    # variantsrc
-    # ----------
     @property
     def variantsrc(self):
         """
@@ -420,8 +346,6 @@ class Font(_BaseTraceHierarchyType):
     def variantsrc(self, val):
         self["variantsrc"] = val
 
-    # weight
-    # ------
     @property
     def weight(self):
         """
@@ -443,8 +367,6 @@ class Font(_BaseTraceHierarchyType):
     def weight(self, val):
         self["weight"] = val
 
-    # weightsrc
-    # ---------
     @property
     def weightsrc(self):
         """
@@ -463,8 +385,6 @@ class Font(_BaseTraceHierarchyType):
     def weightsrc(self, val):
         self["weightsrc"] = val
 
-    # Self properties description
-    # ---------------------------
     @property
     def _prop_descriptions(self):
         return """\
@@ -475,18 +395,11 @@ class Font(_BaseTraceHierarchyType):
             `color`.
         family
             HTML font family - the typeface that will be applied by
-            the web browser. The web browser will only be able to
-            apply a font if it is available on the system which it
-            operates. Provide multiple font families, separated by
-            commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The Chart
-            Studio Cloud (at https://chart-studio.plotly.com or on-
-            premise) generates images on a server, where only a
-            select number of fonts are installed and supported.
-            These include "Arial", "Balto", "Courier New", "Droid
-            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
-            One", "Old Standard TT", "Open Sans", "Overpass", "PT
-            Sans Narrow", "Raleway", "Times New Roman".
+            the web browser. The web browser can only apply a font
+            if it is available on the system where it runs. Provide
+            multiple font families, separated by commas, to
+            indicate the order in which to apply fonts if they
+            aren't available.
         familysrc
             Sets the source reference on Chart Studio Cloud for
             `family`.
@@ -576,18 +489,11 @@ class Font(_BaseTraceHierarchyType):
             `color`.
         family
             HTML font family - the typeface that will be applied by
-            the web browser. The web browser will only be able to
-            apply a font if it is available on the system which it
-            operates. Provide multiple font families, separated by
-            commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The Chart
-            Studio Cloud (at https://chart-studio.plotly.com or on-
-            premise) generates images on a server, where only a
-            select number of fonts are installed and supported.
-            These include "Arial", "Balto", "Courier New", "Droid
-            Sans", "Droid Serif", "Droid Sans Mono", "Gravitas
-            One", "Old Standard TT", "Open Sans", "Overpass", "PT
-            Sans Narrow", "Raleway", "Times New Roman".
+            the web browser. The web browser can only apply a font
+            if it is available on the system where it runs. Provide
+            multiple font families, separated by commas, to
+            indicate the order in which to apply fonts if they
+            aren't available.
         familysrc
             Sets the source reference on Chart Studio Cloud for
             `family`.
@@ -639,14 +545,11 @@ class Font(_BaseTraceHierarchyType):
         -------
         Font
         """
-        super(Font, self).__init__("font")
-
+        super().__init__("font")
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]
             return
 
-        # Validate arg
-        # ------------
         if arg is None:
             arg = {}
         elif isinstance(arg, self.__class__):
@@ -654,97 +557,31 @@ class Font(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.histogram2d.hoverlabel.Font
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.histogram2d.hoverlabel.Font`"""
-            )
+an instance of :class:`plotly.graph_objs.histogram2d.hoverlabel.Font`""")
 
-        # Handle skip_invalid
-        # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Populate data dict with properties
-        # ----------------------------------
-        _v = arg.pop("color", None)
-        _v = color if color is not None else _v
-        if _v is not None:
-            self["color"] = _v
-        _v = arg.pop("colorsrc", None)
-        _v = colorsrc if colorsrc is not None else _v
-        if _v is not None:
-            self["colorsrc"] = _v
-        _v = arg.pop("family", None)
-        _v = family if family is not None else _v
-        if _v is not None:
-            self["family"] = _v
-        _v = arg.pop("familysrc", None)
-        _v = familysrc if familysrc is not None else _v
-        if _v is not None:
-            self["familysrc"] = _v
-        _v = arg.pop("lineposition", None)
-        _v = lineposition if lineposition is not None else _v
-        if _v is not None:
-            self["lineposition"] = _v
-        _v = arg.pop("linepositionsrc", None)
-        _v = linepositionsrc if linepositionsrc is not None else _v
-        if _v is not None:
-            self["linepositionsrc"] = _v
-        _v = arg.pop("shadow", None)
-        _v = shadow if shadow is not None else _v
-        if _v is not None:
-            self["shadow"] = _v
-        _v = arg.pop("shadowsrc", None)
-        _v = shadowsrc if shadowsrc is not None else _v
-        if _v is not None:
-            self["shadowsrc"] = _v
-        _v = arg.pop("size", None)
-        _v = size if size is not None else _v
-        if _v is not None:
-            self["size"] = _v
-        _v = arg.pop("sizesrc", None)
-        _v = sizesrc if sizesrc is not None else _v
-        if _v is not None:
-            self["sizesrc"] = _v
-        _v = arg.pop("style", None)
-        _v = style if style is not None else _v
-        if _v is not None:
-            self["style"] = _v
-        _v = arg.pop("stylesrc", None)
-        _v = stylesrc if stylesrc is not None else _v
-        if _v is not None:
-            self["stylesrc"] = _v
-        _v = arg.pop("textcase", None)
-        _v = textcase if textcase is not None else _v
-        if _v is not None:
-            self["textcase"] = _v
-        _v = arg.pop("textcasesrc", None)
-        _v = textcasesrc if textcasesrc is not None else _v
-        if _v is not None:
-            self["textcasesrc"] = _v
-        _v = arg.pop("variant", None)
-        _v = variant if variant is not None else _v
-        if _v is not None:
-            self["variant"] = _v
-        _v = arg.pop("variantsrc", None)
-        _v = variantsrc if variantsrc is not None else _v
-        if _v is not None:
-            self["variantsrc"] = _v
-        _v = arg.pop("weight", None)
-        _v = weight if weight is not None else _v
-        if _v is not None:
-            self["weight"] = _v
-        _v = arg.pop("weightsrc", None)
-        _v = weightsrc if weightsrc is not None else _v
-        if _v is not None:
-            self["weightsrc"] = _v
-
-        # Process unknown kwargs
-        # ----------------------
+        self._set_property("color", arg, color)
+        self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("family", arg, family)
+        self._set_property("familysrc", arg, familysrc)
+        self._set_property("lineposition", arg, lineposition)
+        self._set_property("linepositionsrc", arg, linepositionsrc)
+        self._set_property("shadow", arg, shadow)
+        self._set_property("shadowsrc", arg, shadowsrc)
+        self._set_property("size", arg, size)
+        self._set_property("sizesrc", arg, sizesrc)
+        self._set_property("style", arg, style)
+        self._set_property("stylesrc", arg, stylesrc)
+        self._set_property("textcase", arg, textcase)
+        self._set_property("textcasesrc", arg, textcasesrc)
+        self._set_property("variant", arg, variant)
+        self._set_property("variantsrc", arg, variantsrc)
+        self._set_property("weight", arg, weight)
+        self._set_property("weightsrc", arg, weightsrc)
         self._process_kwargs(**dict(arg, **kwargs))
-
-        # Reset skip_invalid
-        # ------------------
         self._skip_invalid = False

@@ -1,8 +1,8 @@
 import textwrap
 from copy import copy
-
 import os
 from packaging.version import Version
+import warnings
 
 from plotly import optional_imports
 
@@ -32,10 +32,6 @@ ipython = optional_imports.get_module("IPython")
 ipython_display = optional_imports.get_module("IPython.display")
 nbformat = optional_imports.get_module("nbformat")
 
-from plotly import optional_imports
-
-import warnings
-
 
 def display_jupyter_version_warnings():
     parent_process = None
@@ -50,14 +46,14 @@ def display_jupyter_version_warnings():
         return
     elif "jupyter-notebook" in parent_process:
         jupyter_notebook = optional_imports.get_module("notebook")
-        if jupyter_notebook.__version__ < "7":
+        if jupyter_notebook is not None and jupyter_notebook.__version__ < "7":
             # Add warning about upgrading notebook
             warnings.warn(
                 f"Plotly version >= 6 requires Jupyter Notebook >= 7 but you have {jupyter_notebook.__version__} installed.\n To upgrade Jupyter Notebook, please run `pip install notebook --upgrade`."
             )
     elif "jupyter-lab" in parent_process:
         jupyter_lab = optional_imports.get_module("jupyterlab")
-        if jupyter_lab.__version__ < "3":
+        if jupyter_lab is not None and jupyter_lab.__version__ < "3":
             # Add warning about upgrading jupyterlab
             warnings.warn(
                 f"Plotly version >= 6 requires JupyterLab >= 3 but you have {jupyter_lab.__version__} installed. To upgrade JupyterLab, please run `pip install jupyterlab --upgrade`."
@@ -98,9 +94,7 @@ class RenderersConfig(object):
             raise ValueError(
                 """\
 Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
-    Received value with type: {typ}""".format(
-                    typ=type(value)
-                )
+    Received value with type: {typ}""".format(typ=type(value))
             )
 
         self._renderers[key] = value
@@ -247,9 +241,7 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         if invalid:
             raise ValueError(
                 """
-Invalid named renderer(s) received: {}""".format(
-                    str(invalid)
-                )
+Invalid named renderer(s) received: {}""".format(str(invalid))
             )
 
         return renderer_names
@@ -261,9 +253,7 @@ Renderers configuration
     Default renderer: {default}
     Available renderers:
 {available}
-""".format(
-            default=repr(self.default), available=self._available_renderers_str()
-        )
+""".format(default=repr(self.default), available=self._available_renderers_str())
 
     def _available_renderers_str(self):
         """
@@ -400,8 +390,8 @@ def show(fig, renderer=None, validate=True, **kwargs):
         plot is. The default is set in plotly.js.
 
     height: int or float
-        An integer or float that determines the number of pixels wide the
-        plot is. The default is set in plotly.js.
+        An integer or float specifying the height of the plot in pixels.
+        The default is set in plotly.js.
 
     config: dict
         A dict of parameters to configure the figure. The defaults are set
@@ -491,18 +481,16 @@ if env_renderer:
         raise ValueError(
             """
 Invalid named renderer(s) specified in the 'PLOTLY_RENDERER'
-environment variable: {env_renderer}""".format(
-                env_renderer=env_renderer
-            )
+environment variable: {env_renderer}""".format(env_renderer=env_renderer)
         )
 
     default_renderer = env_renderer
-elif ipython and ipython.get_ipython():
+elif ipython:
     # Try to detect environment so that we can enable a useful
     # default renderer
     if not default_renderer:
         try:
-            import google.colab
+            import google.colab  # noqa: F401
 
             default_renderer = "colab"
         except ImportError:
@@ -543,13 +531,21 @@ elif ipython and ipython.get_ipython():
             pass
 
     # Check if we're running in ipython terminal
-    if not default_renderer and (
-        ipython.get_ipython().__class__.__name__ == "TerminalInteractiveShell"
-    ):
+    ipython_info = ipython.get_ipython()
+    shell = ipython_info.__class__.__name__
+    if not default_renderer and (shell == "TerminalInteractiveShell"):
         default_renderer = "browser"
 
+    # Check if we're running in a Jupyter notebook or JupyterLab
+    if (
+        not default_renderer
+        and (shell == "ZMQInteractiveShell")
+        and (type(ipython_info).__module__.startswith("ipykernel."))
+    ):
+        default_renderer = "plotly_mimetype"
+
     # Fallback to renderer combination that will work automatically
-    # in the classic notebook (offline), jupyterlab, nteract, vscode, and
+    # in the jupyter notebook, jupyterlab, nteract, vscode, and
     # nbconvert HTML export.
     if not default_renderer:
         default_renderer = "plotly_mimetype+notebook"

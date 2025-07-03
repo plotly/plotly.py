@@ -150,7 +150,6 @@ class OrcaConfig(object):
     """
 
     def __init__(self):
-
         # Initialize properties dict
         self._props = {}
 
@@ -213,9 +212,7 @@ class OrcaConfig(object):
                 """
 The first argument to update must be a dict, \
 but received value of type {typ}l
-    Received value: {val}""".format(
-                    typ=type(d), val=d
-                )
+    Received value: {val}""".format(typ=type(d), val=d)
             )
 
         updates = copy(d)
@@ -249,18 +246,15 @@ but received value of type {typ}l
         None
         """
         if os.path.exists(self.config_file):
-
             # ### Load file into a string ###
             try:
                 with open(self.config_file, "r") as f:
                     orca_str = f.read()
-            except:
+            except Exception:
                 if warn:
                     warnings.warn(
                         """\
-Unable to read orca configuration file at {path}""".format(
-                            path=self.config_file
-                        )
+Unable to read orca configuration file at {path}""".format(path=self.config_file)
                     )
                 return
 
@@ -271,9 +265,7 @@ Unable to read orca configuration file at {path}""".format(
                 if warn:
                     warnings.warn(
                         """\
-Orca configuration file at {path} is not valid JSON""".format(
-                            path=self.config_file
-                        )
+Orca configuration file at {path} is not valid JSON""".format(path=self.config_file)
                     )
                 return
 
@@ -284,9 +276,7 @@ Orca configuration file at {path} is not valid JSON""".format(
         elif warn:
             warnings.warn(
                 """\
-Orca configuration file at {path} not found""".format(
-                    path=self.config_file
-                )
+Orca configuration file at {path} not found""".format(path=self.config_file)
             )
 
     def save(self):
@@ -307,9 +297,7 @@ Orca configuration file at {path} not found""".format(
         else:
             warnings.warn(
                 """\
-Failed to write orca configuration file at '{path}'""".format(
-                    path=self.config_file
-                )
+Failed to write orca configuration file at '{path}'""".format(path=self.config_file)
             )
 
     @property
@@ -329,7 +317,6 @@ Failed to write orca configuration file at '{path}'""".format(
 
     @server_url.setter
     def server_url(self, val):
-
         if val is None:
             self._props.pop("server_url", None)
             return
@@ -337,9 +324,7 @@ Failed to write orca configuration file at '{path}'""".format(
             raise ValueError(
                 """
 The server_url property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(
-                    typ=type(val), val=val
-                )
+    Received value: {val}""".format(typ=type(val), val=val)
             )
 
         if not val.startswith("http://") and not val.startswith("https://"):
@@ -371,7 +356,6 @@ The server_url property must be a string, but received value of type {typ}.
 
     @port.setter
     def port(self, val):
-
         if val is None:
             self._props.pop("port", None)
             return
@@ -379,9 +363,7 @@ The server_url property must be a string, but received value of type {typ}.
             raise ValueError(
                 """
 The port property must be an integer, but received value of type {typ}.
-    Received value: {val}""".format(
-                    typ=type(val), val=val
-                )
+    Received value: {val}""".format(typ=type(val), val=val)
             )
 
         self._props["port"] = val
@@ -418,7 +400,6 @@ The port property must be an integer, but received value of type {typ}.
 
     @executable.setter
     def executable(self, val):
-
         if val is None:
             self._props.pop("executable", None)
         else:
@@ -426,9 +407,7 @@ The port property must be an integer, but received value of type {typ}.
                 raise ValueError(
                     """
 The executable property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(
-                        typ=type(val), val=val
-                    )
+    Received value: {val}""".format(typ=type(val), val=val)
                 )
             if isinstance(val, str):
                 val = [val]
@@ -462,7 +441,6 @@ The executable property must be a string, but received value of type {typ}.
 
     @timeout.setter
     def timeout(self, val):
-
         if val is None:
             self._props.pop("timeout", None)
         else:
@@ -470,9 +448,7 @@ The executable property must be a string, but received value of type {typ}.
                 raise ValueError(
                     """
 The timeout property must be a number, but received value of type {typ}.
-    Received value: {val}""".format(
-                        typ=type(val), val=val
-                    )
+    Received value: {val}""".format(typ=type(val), val=val)
                 )
             self._props["timeout"] = val
 
@@ -494,7 +470,6 @@ The timeout property must be a number, but received value of type {typ}.
 
     @default_width.setter
     def default_width(self, val):
-
         if val is None:
             self._props.pop("default_width", None)
             return
@@ -502,9 +477,7 @@ The timeout property must be a number, but received value of type {typ}.
             raise ValueError(
                 """
 The default_width property must be an int, but received value of type {typ}.
-    Received value: {val}""".format(
-                    typ=type(val), val=val
-                )
+    Received value: {val}""".format(typ=type(val), val=val)
             )
         self._props["default_width"] = val
 
@@ -523,7 +496,6 @@ The default_width property must be an int, but received value of type {typ}.
 
     @default_height.setter
     def default_height(self, val):
-
         if val is None:
             self._props.pop("default_height", None)
             return
@@ -531,9 +503,7 @@ The default_width property must be an int, but received value of type {typ}.
             raise ValueError(
                 """
 The default_height property must be an int, but received value of type {typ}.
-    Received value: {val}""".format(
-                    typ=type(val), val=val
-                )
+    Received value: {val}""".format(typ=type(val), val=val)
             )
         self._props["default_height"] = val
 
@@ -583,7 +553,6 @@ The default_height property must be an int, but received value of type {typ}.
 
     @default_scale.setter
     def default_scale(self, val):
-
         if val is None:
             self._props.pop("default_scale", None)
             return
@@ -591,9 +560,7 @@ The default_height property must be an int, but received value of type {typ}.
             raise ValueError(
                 """
 The default_scale property must be a number, but received value of type {typ}.
-    Received value: {val}""".format(
-                    typ=type(val), val=val
-                )
+    Received value: {val}""".format(typ=type(val), val=val)
             )
         self._props["default_scale"] = val
 
@@ -612,7 +579,6 @@ The default_scale property must be a number, but received value of type {typ}.
 
     @topojson.setter
     def topojson(self, val):
-
         if val is None:
             self._props.pop("topojson", None)
         else:
@@ -620,9 +586,7 @@ The default_scale property must be a number, but received value of type {typ}.
                 raise ValueError(
                     """
 The topojson property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(
-                        typ=type(val), val=val
-                    )
+    Received value: {val}""".format(typ=type(val), val=val)
                 )
             self._props["topojson"] = val
 
@@ -640,12 +604,11 @@ The topojson property must be a string, but received value of type {typ}.
         """
         return self._props.get(
             "mathjax",
-            ("https://cdnjs.cloudflare.com" "/ajax/libs/mathjax/2.7.5/MathJax.js"),
+            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js",
         )
 
     @mathjax.setter
     def mathjax(self, val):
-
         if val is None:
             self._props.pop("mathjax", None)
         else:
@@ -653,9 +616,7 @@ The topojson property must be a string, but received value of type {typ}.
                 raise ValueError(
                     """
 The mathjax property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(
-                        typ=type(val), val=val
-                    )
+    Received value: {val}""".format(typ=type(val), val=val)
                 )
             self._props["mathjax"] = val
 
@@ -675,7 +636,6 @@ The mathjax property must be a string, but received value of type {typ}.
 
     @mapbox_access_token.setter
     def mapbox_access_token(self, val):
-
         if val is None:
             self._props.pop("mapbox_access_token", None)
         else:
@@ -684,9 +644,7 @@ The mathjax property must be a string, but received value of type {typ}.
                     """
 The mapbox_access_token property must be a string, \
 but received value of type {typ}.
-    Received value: {val}""".format(
-                        typ=type(val), val=val
-                    )
+    Received value: {val}""".format(typ=type(val), val=val)
                 )
             self._props["mapbox_access_token"] = val
 
@@ -1029,7 +987,7 @@ Searched for executable '{executable}' on the following path:
         executable,
     ]
 
-    if config.use_xvfb == True:
+    if config.use_xvfb:
         # Use xvfb
         xvfb_run_executable = which("xvfb-run")
         if not xvfb_run_executable:
@@ -1039,9 +997,7 @@ The plotly.io.orca.config.use_xvfb property is set to True, but the
 xvfb-run executable could not be found on the system path.
 
 Searched for the executable 'xvfb-run' on the following path:
-    {formatted_path}""".format(
-                    formatted_path=formatted_path
-                )
+    {formatted_path}""".format(formatted_path=formatted_path)
             )
 
         executable_list = [xvfb_run_executable] + xvfb_args
@@ -1097,7 +1053,6 @@ Here is the error that was returned by the command
 
         # Check for Linux without X installed.
         if sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
-
             err_msg += """\
 Note: When used on Linux, orca requires an X11 display server, but none was
 detected. Please install Xvfb and configure plotly.py to run orca using Xvfb
@@ -1121,9 +1076,7 @@ for more info on Xvfb
             + """
 The error encountered is that no output was returned by the command
     $ {executable} --help
-""".format(
-                executable=" ".join(executable_list)
-            )
+""".format(executable=" ".join(executable_list))
         )
 
     if "Plotly's image-exporting utilities" not in help_result.decode("utf-8"):
@@ -1134,9 +1087,7 @@ The error encountered is that unexpected output was returned by the command
     $ {executable} --help
 
 {help_result}
-""".format(
-                executable=" ".join(executable_list), help_result=help_result
-            )
+""".format(executable=" ".join(executable_list), help_result=help_result)
         )
 
     # Get orca version
@@ -1178,9 +1129,7 @@ The error encountered is that no version was reported by the orca executable.
 Here is the command that plotly.py ran to request the version:
 
     $ {executable} --version
-""".format(
-                executable=" ".join(executable_list)
-            )
+""".format(executable=" ".join(executable_list))
         )
     else:
         version_result = version_result.decode()
@@ -1236,7 +1185,6 @@ def shutdown_server():
     if orca_state["proc"] is not None:
         with orca_lock:
             if orca_state["proc"] is not None:
-
                 # We use psutil to kill all child processes of the main orca
                 # process. This prevents any zombie processes from being
                 # left over, and it saves us from needing to write
@@ -1246,7 +1194,7 @@ def shutdown_server():
                 for child in parent.children(recursive=True):
                     try:
                         child.terminate()
-                    except:
+                    except Exception:
                         # We tried, move on
                         pass
 
@@ -1255,8 +1203,8 @@ def shutdown_server():
                     orca_state["proc"].terminate()
 
                     # Wait for the process to shutdown
-                    child_status = orca_state["proc"].wait()
-                except:
+                    orca_state["proc"].wait()
+                except Exception:
                     # We tried, move on
                     pass
 
@@ -1329,7 +1277,6 @@ Install using conda:
 
             # Start a new server process if none is active
             if orca_state["proc"] is None:
-
                 # Determine server port
                 if config.port is None:
                     orca_state["port"] = find_open_port()
@@ -1399,7 +1346,7 @@ def request_image_with_retrying(**kwargs):
             hostname="localhost", port=orca_state["port"]
         )
 
-    request_params = {k: v for k, v, in kwargs.items() if v is not None}
+    request_params = {k: v for k, v in kwargs.items() if v is not None}
     json_str = to_json_plotly(request_params)
     response = post(server_url + "/", data=json_str)
 
@@ -1494,7 +1441,7 @@ def to_image(fig, format=None, width=None, height=None, scale=None, validate=Tru
         response = request_image_with_retrying(
             figure=fig_dict, format=format, scale=scale, width=width, height=height
         )
-    except OSError as err:
+    except OSError:
         # Get current status string
         status_str = repr(status)
 
@@ -1504,9 +1451,7 @@ def to_image(fig, format=None, width=None, height=None, scale=None, validate=Tru
 Plotly.py was unable to communicate with the orca server at {server_url}
 
 Please check that the server is running and accessible.
-""".format(
-                    server_url=config.server_url
-                )
+""".format(server_url=config.server_url)
             )
 
         else:
@@ -1523,9 +1468,7 @@ local orca server process, even though the server process seems to be running.
 Please review the process and connection information below:
 
 {info}
-""".format(
-                        info=status_str
-                    )
+""".format(info=status_str)
                 )
             else:
                 # Reset the status so that if the user tries again, we'll try to
@@ -1540,9 +1483,7 @@ Please review the process and connection information below:
 {info}
 plotly.py will attempt to start the local server process again the next time
 an image export operation is performed.
-""".format(
-                        info=status_str
-                    )
+""".format(info=status_str)
                 )
 
     # Check response
@@ -1556,9 +1497,7 @@ an image export operation is performed.
 The image request was rejected by the orca conversion utility
 with the following error:
    {status}: {msg}
-""".format(
-            status=response.status_code, msg=response.content.decode("utf-8")
-        )
+""".format(status=response.status_code, msg=response.content.decode("utf-8"))
 
         # ### Try to be helpful ###
         # Status codes from /src/component/plotly-graph/constants.js in the
@@ -1700,9 +1639,7 @@ For example:
 
     >>> import plotly.io as pio
     >>> pio.write_image(fig, file_path, format='png')
-""".format(
-                    file=file
-                )
+""".format(file=file)
             )
 
     # Request image
@@ -1725,9 +1662,7 @@ For example:
         raise ValueError(
             """
 The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
-""".format(
-                file=file
-            )
+""".format(file=file)
         )
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.

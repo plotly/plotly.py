@@ -3,7 +3,11 @@ import pytest
 from plotly import optional_imports
 from ...utils import compare_dict, strip_dict_params
 from ...test_optional.optional_utils import run_fig
-from ...test_optional.test_matplotlylib.data.lines import *
+from ...test_optional.test_matplotlylib.data.lines import (
+    COMPLICATED_LINE,
+    D,
+    SIMPLE_LINE,
+)
 
 matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 
