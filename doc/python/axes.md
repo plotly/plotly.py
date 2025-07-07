@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.3
+      jupytext_version: 1.17.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.14
+    version: 3.9.0
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -615,6 +615,38 @@ fig = px.line(y=[1, 0])
 
 fig.update_xaxes(zeroline=True, zerolinewidth=2, zerolinecolor='LightPink')
 fig.update_yaxes(zeroline=True, zerolinewidth=2, zerolinecolor='LightPink')
+
+fig.show()
+```
+
+##### Controlling zero line layer
+
+*New in 6.3*
+
+By default, zero lines are displayed below traces. Set `zerolinelayer="above traces"` on an axis to display its zero line above traces:
+
+```python
+import plotly.graph_objects as go
+
+x = ['A', 'B', 'C', 'D', 'A']
+y = [2, 0, 4, -3, 2]
+
+fig = go.Figure(
+    data=[
+        go.Scatter(
+            x=x,
+            y=y,
+            fill='toself',
+            mode='none',
+            fillcolor='lightpink'
+        )
+    ],
+    layout=dict(
+        yaxis=dict(
+            zerolinelayer="above traces"  # Change to "below traces" to see the difference
+        ),
+    )
+)
 
 fig.show()
 ```
