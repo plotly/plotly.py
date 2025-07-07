@@ -273,6 +273,8 @@ The following settings are available.
 
 `mathjax`: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
 
+`plotlyjs`: Location of the Plotly.js bundle to use. Can be a local file path or URL. By default, Kaleido uses the Plotly.js bundle included with Plotly.py.
+
 `topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
 
 `mapbox_access_token`: The default Mapbox access token (Kaleido v0 only). Mapbox traces are deprecated. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for more details.
