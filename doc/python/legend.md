@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.17.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.9.0
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -250,6 +250,46 @@ fig.update_layout(legend=dict(
     xanchor="right",
     x=1
 ))
+
+fig.show()
+```
+
+#### Legend Max Height
+
+*New in 6.3*
+
+By default, a legend can expand to fill up to half of the layout area height for a horizontal legend and the full height for a vertical legend. You can specify the maximum height of a legend with the `maxheight` parameter. In the following plot with many legend items, we set `maxheight` to a ratio of 0.10, giving the plot more space.
+
+```python
+import plotly.express as px
+from plotly import data
+
+df = data.gapminder().query("year==2007 and continent == 'Europe'")
+
+fig = px.scatter(df, 
+                 x="gdpPercap", 
+                 y="lifeExp", 
+                 color="country",
+                 size="pop", 
+                 size_max=45, 
+                 title="Life Expectancy vs. GDP per Capita in 2007 (by Country)",
+                 labels={"gdpPercap": "GDP per Capita"},
+                )
+
+fig.update_layout(
+    xaxis=dict(
+        side="top"
+    ),
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=-0.35,
+        xanchor="center",
+        x=0.5,
+        maxheight=0.1, # Comment maxheight to see legend take up 0.5 of plotting area
+        title_text="Country"
+    ),
+)
 
 fig.show()
 ```
