@@ -73,6 +73,7 @@ dev_optional = [
     "pytz",
     "scikit-image",
     "scipy",
+    "scipy-stubs;python_version>='3.10'",
     "shapely",
     "statsmodels",
     "vaex;python_version<='3.9'",
