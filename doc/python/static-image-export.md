@@ -64,13 +64,6 @@ Plotly also provides a CLI for installing Chrome from the command line.
 
 Run `plotly_get_chrome` to install Chrome.
 
-You can also install Chrome from within Python using `plotly.io.install_chrome()`
-
-```python
-import plotly.io as pio
-
-pio.install_chrome()
-```
 
 See the **Additional Information on Browsers with Kaleido** section below for more details on browser compatibility for Kaleido.
 
