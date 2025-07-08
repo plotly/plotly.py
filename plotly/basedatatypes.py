@@ -3404,8 +3404,8 @@ Invalid property path '{key_path_str}' for layout
             plot is. The default is set in plotly.js.
 
         height: int or float
-            An integer or float that determines the number of pixels wide the
-            plot is. The default is set in plotly.js.
+            An integer or float specifying the height of the plot in pixels.
+            The default is set in plotly.js.
 
         config: dict
             A dict of parameters to configure the figure. The defaults are set
