@@ -50,7 +50,13 @@ dev_core = [
 dev_build = [
     "plotly[dev_core]",
     "build",
-    "jupyter"
+    "jupyter",
+    "markdown-include",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mkdocs-gen-files",
+    "mkdocs-literate-nav"
 ]
 dev_optional = [
     "plotly[dev_build]",
@@ -69,6 +75,7 @@ dev_optional = [
     "plotly-geo",
     "polars[timezone]",
     "pyarrow",
+    "pydoclint",
     "pyshp",
     "pytz",
     "scikit-image",

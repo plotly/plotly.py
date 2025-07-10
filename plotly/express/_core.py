@@ -101,9 +101,9 @@ MAPBOX_TOKEN = None
 def set_mapbox_access_token(token):
     """
     Arguments:
-        token: A Mapbox token to be used in `plotly.express.scatter_mapbox` and \
-        `plotly.express.line_mapbox` figures. See \
-        https://docs.mapbox.com/help/how-mapbox-works/access-tokens/ for more details
+        token (Mapbox token): A Mapbox token to be used in `plotly.express.scatter_mapbox` \
+        and `plotly.express.line_mapbox` figures. See \
+        https://docs.mapbox.com/help/how-mapbox-works/access-tokens/ for more details.
     """
     global MAPBOX_TOKEN
     MAPBOX_TOKEN = token
@@ -115,7 +115,7 @@ def get_trendline_results(fig):
     the `trendline` argument set to `"ols"`).
 
     Arguments:
-        fig: the output of a `plotly.express` charting call
+        fig (figure): the output of a `plotly.express` charting call
     Returns:
         A `pandas.DataFrame` with a column "px_fit_results" containing the `statsmodels`
         results objects, along with columns identifying the subset of the data the

@@ -1,5 +1,4 @@
 from io import StringIO
-from os import path as opath
 
 from codegen.utils import write_source_py
 
@@ -150,15 +149,15 @@ Please replace it with one of the following more specific types
 """
 
 
-def write_deprecated_datatypes(outdir):
+def write_deprecated_datatypes(codedir):
     """
     Build source code for deprecated datatype class definitions and write
     them to a file
 
     Parameters
     ----------
-    outdir :
-        Root outdir in which the graph_objs package should reside
+    codedir :
+        Root directory in which the graph_objs package should reside
 
     Returns
     -------
@@ -166,13 +165,13 @@ def write_deprecated_datatypes(outdir):
     """
     # Generate source code
     datatype_source = build_deprecated_datatypes_py()
-    filepath = opath.join(outdir, "graph_objs", "_deprecations.py")
+    filepath = codedir / "graph_objs" / "_deprecations.py"
 
     # Write file
     write_source_py(datatype_source, filepath)
 
 
-def write_graph_objs_graph_objs(outdir):
+def write_graph_objs_graph_objs(codedir):
     """
     Write the plotly/graph_objs/graph_objs.py file
 
@@ -183,14 +182,14 @@ def write_graph_objs_graph_objs(outdir):
 
     Parameters
     ----------
-    outdir : str
-        Root outdir in which the graph_objs package should reside
+    codedir : str
+        Root directory in which the graph_objs package should reside
 
     Returns
     -------
     None
     """
-    filepath = opath.join(outdir, "graph_objs", "graph_objs.py")
+    filepath = codedir / "graph_objs" / "graph_objs.py"
     with open(filepath, "wt") as f:
         f.write(
             """\

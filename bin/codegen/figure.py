@@ -1,5 +1,4 @@
 from io import StringIO
-from os import path as opath
 
 from codegen.datatypes import (
     reindent_validator_description,
@@ -705,7 +704,7 @@ class {fig_classname}({base_classname}):\n"""
 
 
 def write_figure_classes(
-    outdir,
+    codedir,
     trace_node,
     data_validator,
     layout_validator,
@@ -720,8 +719,8 @@ def write_figure_classes(
 
     Parameters
     ----------
-    outdir : str
-        Root outdir in which the graph_objs package should reside
+    codedir : str
+        Root directory in which the graph_objs package should reside
     trace_node : PlotlyNode
         Root trace node (the node that is the parent of all of the
         individual trace nodes like bar, scatter, etc.)
@@ -768,5 +767,5 @@ def write_figure_classes(
         )
 
         # Format and write to file
-        filepath = opath.join(outdir, "graph_objs", f"_{fig_classname.lower()}.py")
+        filepath = codedir / "graph_objs" / f"_{fig_classname.lower()}.py"
         write_source_py(figure_source, filepath)

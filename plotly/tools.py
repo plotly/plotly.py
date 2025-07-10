@@ -244,8 +244,8 @@ def make_subplots(
     fig = tools.make_subplots(rows=2)
 
     This is the format of your plot grid:
-    [ (1,1) x1,y1 ]
-    [ (2,1) x2,y2 ]
+    \\[ (1,1) x1,y1 \\]
+    \\[ (2,1) x2,y2 \\]
 
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
@@ -257,8 +257,8 @@ def make_subplots(
     fig = tools.make_subplots(rows=2, shared_xaxes=True)
 
     This is the format of your plot grid:
-    [ (1,1) x1,y1 ]
-    [ (2,1) x1,y2 ]
+    \\[ (1,1) x1,y1 \\]
+    \\[ (2,1) x1,y2 \\]
 
 
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
@@ -271,8 +271,8 @@ def make_subplots(
                                      [{'colspan': 2}, None]])
 
     This is the format of your plot grid!
-    [ (1,1) x1,y1 ]  [ (1,2) x2,y2 ]
-    [ (2,1) x3,y3           -      ]
+    \\[ (1,1) x1,y1 ]  [ (1,2) x2,y2 \\]
+    \\[ (2,1) x3,y3           -      \\]
 
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
@@ -283,10 +283,10 @@ def make_subplots(
     fig = tools.make_subplots(insets=[{'cell': (1,1), 'l': 0.7, 'b': 0.3}])
 
     This is the format of your plot grid!
-    [ (1,1) x1,y1 ]
+    \\[ (1,1) x1,y1 \\]
 
     With insets:
-    [ x2,y2 ] over [ (1,1) x1,y1 ]
+    \\[ x2,y2 \\] over \\[ (1,1) x1,y1 \\]
 
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
@@ -296,8 +296,8 @@ def make_subplots(
     fig = tools.make_subplots(rows=2, subplot_titles=('Plot 1','Plot 2'))
 
     This is the format of your plot grid:
-    [ (1,1) x1,y1 ]
-    [ (2,1) x2,y2 ]
+    \\[ (1,1) x1,y1 \\]
+    \\[ (2,1) x2,y2 \\]
 
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
@@ -308,10 +308,10 @@ def make_subplots(
                               subplot_titles=('','Inset'))
 
     This is the format of your plot grid!
-    [ (1,1) x1,y1 ]
+    \\[ (1,1) x1,y1 \\]
 
     With insets:
-    [ x2,y2 ] over [ (1,1) x1,y1 ]
+    \\[ x2,y2 \\] over \\[ (1,1) x1,y1 \\]
 
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
