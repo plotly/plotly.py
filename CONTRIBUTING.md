@@ -8,7 +8,7 @@ then explains the technical aspects of preparing your contribution.
 
 ## Code of Conduct
 
-Please note that all contributos are required to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
+Please note that all contributos are required to abide by our Code of Conduct.
 
 ## Different Ways to Contribute
 
@@ -38,7 +38,7 @@ it is important to understand the structure of the code and the repository.
     These are organized in subdirectories according to what they test:
     see the "Setup" section below for more details.
 
--   Documentation is found in `doc/`, and its structure is described in [its README file](doc/README.md).
+-   Documentation is found in `doc/`, and its structure is described in its README file.
     The documentation is a great place to start contributing,
     since you can add or modify examples without setting up a full environment.
 
