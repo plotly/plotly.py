@@ -298,24 +298,19 @@ def test_fig_to_image():
 def test_get_chrome():
     """Test that plotly.io.get_chrome() can be called."""
 
-    with patch(
-        "plotly.io._kaleido.kaleido.get_chrome_sync",
-        return_value="/mock/path/to/chrome",
-    ) as mock_get_chrome:
-        with patch("builtins.input", return_value="y"):  # Mock user confirmation
-            with patch(
-                "sys.argv", ["plotly_get_chrome", "-y"]
-            ):  # Mock CLI args to skip confirmation
-                if not kaleido_available() or kaleido_major() < 1:
-                    # Test that ValueError is raised when Kaleido requirements aren't met
-                    with pytest.raises(
-                        ValueError,
-                        match="This command requires Kaleido v1.0.0 or greater",
-                    ):
-                        pio.get_chrome()
-                else:
-                    # Test normal operation when Kaleido v1+ is available
-                    pio.get_chrome()
+    if not kaleido_available() or kaleido_major() < 1:
+        # Test that ValueError is raised when Kaleido requirements aren't met
+        with pytest.raises(
+            ValueError, match="This command requires Kaleido v1.0.0 or greater"
+        ):
+            pio.get_chrome()
+    else:
+        # Test normal operation when Kaleido v1+ is available
+        with patch(
+            "plotly.io._kaleido.kaleido.get_chrome_sync",
+            return_value="/mock/path/to/chrome",
+        ) as mock_get_chrome:
+            pio.get_chrome()
 
-                    # Verify that kaleido.get_chrome_sync was called
-                    mock_get_chrome.assert_called_once()
+            # Verify that kaleido.get_chrome_sync was called
+            mock_get_chrome.assert_called_once()
