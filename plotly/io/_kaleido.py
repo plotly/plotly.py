@@ -775,11 +775,13 @@ which can be installed using pip:
         return go.Figure(fig, skip_invalid=True)
 
 
-def get_chrome() -> None:
+def plotly_get_chrome() -> None:
     """
     Install Google Chrome for Kaleido (Required for Plotly image export).
-    This function can be run from the command line using the command `plotly_get_chrome`
-    defined in pyproject.toml
+    This function is a command-line wrapper for `plotly.io.get_chrome()`.
+
+    When running from the command line, use the command `plotly_get_chrome`;
+    when calling from Python code, use `plotly.io.get_chrome()`.
     """
 
     usage = """
@@ -813,7 +815,6 @@ Install it using `pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]
 
     # Handle "--path" flag
     chrome_install_path = None
-    user_specified_path = False
     if "--path" in cli_args:
         path_index = cli_args.index("--path") + 1
         if path_index < len(cli_args):
@@ -821,8 +822,53 @@ Install it using `pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]
             cli_args.remove("--path")
             cli_args.remove(chrome_install_path)
             chrome_install_path = Path(chrome_install_path)
-            user_specified_path = True
+
+    # If any arguments remain, command syntax was incorrect -- print usage and exit
+    if len(cli_args) > 1:
+        print(usage)
+        sys.exit(1)
+
+    if not cli_yes:
+        print(
+            f"""
+Plotly will install a copy of Google Chrome to be used for generating static images of plots.
+Chrome will be installed at: {chrome_install_path}"""
+        )
+        response = input("Do you want to proceed? [y/n] ")
+        if not response or response[0].lower() != "y":
+            print("Cancelled")
+            return
+    print("Installing Chrome for Plotly...")
+    exe_path = get_chrome(chrome_install_path)
+    print("Chrome installed successfully.")
+    print(f"The Chrome executable is now located at: {exe_path}")
+
+
+def get_chrome(path: Union[str, Path, None] = None) -> Path:
+    """
+    Get the path to the Chrome executable for Kaleido.
+    This function is used by the `plotly_get_chrome` command line utility.
+
+    Parameters
+    ----------
+    path: str or Path or None
+        The path to the directory where Chrome should be installed.
+        If None, the default download path will be used.
+    """
+    if not kaleido_available() or kaleido_major() < 1:
+        raise ValueError(
+            """
+This command requires Kaleido v1.0.0 or greater.
+Install it using `pip install 'kaleido>=1.0.0'` or `pip install 'plotly[kaleido]'`."
+"""
+        )
+
+    # Use default download path if no path was specified
+    if path:
+        user_specified_path = True
+        chrome_install_path = Path(path)  # Ensure it's a Path object
     else:
+        user_specified_path = False
         from choreographer.cli.defaults import default_download_path
 
         chrome_install_path = default_download_path
@@ -848,25 +894,7 @@ or omit the --path argument to use the default download path.
 """
             )
 
-    # If any arguments remain, command syntax was incorrect -- print usage and exit
-    if len(cli_args) > 1:
-        print(usage)
-        sys.exit(1)
-
-    if not cli_yes:
-        print(
-            f"""
-Plotly will install a copy of Google Chrome to be used for generating static images of plots.
-Chrome will be installed at: {chrome_install_path}"""
-        )
-        response = input("Do you want to proceed? [y/n] ")
-        if not response or response[0].lower() != "y":
-            print("Cancelled")
-            return
-    print("Installing Chrome for Plotly...")
-    exe_path = kaleido.get_chrome_sync(path=chrome_install_path)
-    print("Chrome installed successfully.")
-    print(f"The Chrome executable is now located at: {exe_path}")
+    return kaleido.get_chrome_sync(path=chrome_install_path)
 
 
 __all__ = ["to_image", "write_image", "scope", "full_figure_for_development"]
