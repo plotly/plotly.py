@@ -33,6 +33,13 @@ def fig1(request):
     )
 
 
+def test_default_renderer():
+    """
+    The default renderer should be 'browser'.
+    """
+    assert pio.renderers.default == "browser"
+
+
 # JSON
 # ----
 def test_json_renderer_mimetype(fig1):
