@@ -1,9 +1,9 @@
 """Utility command runner."""
 
-import argparse
 import logging
 import json
 import os
+from pathlib import Path
 import platform
 import requests
 import shutil
@@ -11,23 +11,27 @@ from subprocess import check_call
 import sys
 import time
 
-from codegen import perform_codegen, lint_code, reformat_code
+from codegen import perform_codegen
 
 
 LOGGER = logging.getLogger(__name__)
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-NODE_ROOT = os.path.join(PROJECT_ROOT, "js")
-NODE_MODULES = os.path.join(NODE_ROOT, "node_modules")
-WIDGET_TARGETS = [
-    os.path.join(PROJECT_ROOT, "plotly", "package_data", "widgetbundle.js"),
-]
-
+PROJECT_ROOT = Path(__file__).parent.parent
+NODE_ROOT = PROJECT_ROOT / "js"
+NODE_MODULES = NODE_ROOT / "node_modules"
+PLOT_SCHEMA = PROJECT_ROOT / "resources" / "plot-schema.json"
+WIDGET_TARGETS = [PROJECT_ROOT / "plotly" / "package_data" / "widgetbundle.js"]
 NPM_PATH = os.pathsep.join(
     [
-        os.path.join(NODE_ROOT, "node_modules", ".bin"),
+        str(NODE_ROOT / "node_modules" / ".bin"),
         os.environ.get("PATH", os.defpath),
     ]
 )
+
+
+def select_code_directory(args):
+    """Select root directory for plotly package."""
+
+    return args.codedir if args.codedir else PROJECT_ROOT / "plotly"
 
 
 def plotly_js_version():
@@ -101,8 +105,7 @@ def install_js_deps(local):
 def overwrite_schema_local(uri):
     """Replace plot-schema.json with local copy."""
 
-    path = os.path.join(PROJECT_ROOT, "codegen", "resources", "plot-schema.json")
-    shutil.copyfile(uri, path)
+    shutil.copyfile(uri, PLOT_SCHEMA)
 
 
 def overwrite_schema(url):
@@ -110,8 +113,7 @@ def overwrite_schema(url):
 
     req = requests.get(url)
     assert req.status_code == 200
-    path = os.path.join(PROJECT_ROOT, "codegen", "resources", "plot-schema.json")
-    with open(path, "wb") as f:
+    with open(PLOT_SCHEMA, "wb") as f:
         f.write(req.content)
 
 
@@ -235,12 +237,12 @@ def update_bundle(plotly_js_version):
     overwrite_plotlyjs_version_file(plotlyjs_version)
 
 
-def update_plotlyjs(plotly_js_version, outdir):
+def update_plotlyjs(plotly_js_version, codedir):
     """Update project to a new version of plotly.js."""
 
     update_bundle(plotly_js_version)
     update_schema(plotly_js_version)
-    perform_codegen(outdir)
+    perform_codegen(codedir)
 
 
 # FIXME: switch to argparse
@@ -306,64 +308,8 @@ def update_schema_bundle_from_master():
     install_js_deps(local)
 
 
-def update_plotlyjs_dev(outdir):
+def update_plotlyjs_dev(codedir):
     """Update project to a new development version of plotly.js."""
 
     update_schema_bundle_from_master()
-    perform_codegen(outdir)
-
-
-def parse_args():
-    """Parse command-line arguments."""
-
-    parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers(dest="cmd", help="Available subcommands")
-
-    p_codegen = subparsers.add_parser("codegen", help="generate code")
-    p_codegen.add_argument(
-        "--noformat", action="store_true", help="prevent reformatting"
-    )
-
-    subparsers.add_parser("lint", help="lint code")
-
-    subparsers.add_parser("format", help="reformat code")
-
-    subparsers.add_parser("updateplotlyjsdev", help="update plotly.js for development")
-
-    subparsers.add_parser("updateplotlyjs", help="update plotly.js")
-
-    return parser.parse_args()
-
-
-def main():
-    """Main driver."""
-
-    project_root = os.path.dirname(os.path.realpath(__file__))
-    outdir = os.path.join(project_root, "plotly")
-
-    args = parse_args()
-
-    if args.cmd == "codegen":
-        perform_codegen(outdir, noformat=args.noformat)
-
-    elif args.cmd == "format":
-        reformat_code(outdir)
-
-    elif args.cmd == "lint":
-        lint_code(outdir)
-
-    elif args.cmd == "updateplotlyjsdev":
-        update_plotlyjs_dev(outdir)
-
-    elif args.cmd == "updateplotlyjs":
-        version = plotly_js_version()
-        print(version)
-        update_plotlyjs(version, outdir)
-
-    else:
-        print(f"unknown command {args.cmd}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+    perform_codegen(codedir)

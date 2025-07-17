@@ -1,11 +1,9 @@
-import os
-import os.path as opath
-import textwrap
 from collections import ChainMap
 from importlib import import_module
 from io import StringIO
-from typing import List
 import re
+import textwrap
+from typing import List
 
 CAVEAT = """
 
@@ -35,10 +33,7 @@ def write_source_py(py_source, filepath, leading_newlines=0):
     """
     if py_source:
         # Make dir if needed
-        filedir = opath.dirname(filepath)
-        # The exist_ok kwarg is only supported with Python 3, but that's ok since
-        # codegen is only supported with Python 3 anyway
-        os.makedirs(filedir, exist_ok=True)
+        filepath.parent.mkdir(exist_ok=True)
 
         # Write file
         py_source = "\n" * leading_newlines + py_source
@@ -121,7 +116,7 @@ def write_init_py(pkg_root, path_parts, rel_modules=(), rel_classes=(), init_ext
     init_source = build_from_imports_py(rel_modules, rel_classes, init_extra)
 
     # Write file
-    filepath = opath.join(pkg_root, *path_parts, "__init__.py")
+    filepath = pkg_root.joinpath(*path_parts) / "__init__.py"
     write_source_py(init_source, filepath)
 
 
@@ -167,6 +162,9 @@ def format_description(desc):
 
     # replace {2D arrays} with 2D lists
     desc = desc.replace("{2D arrays}", "2D lists")
+
+    # replace '][' with ']\[' to avoid confusion with Markdown reference links
+    desc = desc.replace("][", r"]\\[")
 
     return desc
 

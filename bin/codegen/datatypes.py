@@ -1,6 +1,5 @@
-import os.path as opath
-import textwrap
 from io import StringIO
+import textwrap
 
 from codegen.utils import CAVEAT, write_source_py
 
@@ -218,6 +217,9 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
                 property_docstring = f"        {validator_description}"
         else:
             property_docstring = property_description
+
+        # Fix `][`.
+        property_docstring = property_docstring.replace("][", "]\\[")
 
         # Write get property
         buffer.write(
@@ -595,14 +597,6 @@ def write_datatype_py(outdir, node):
     None
     """
 
-    # Build file path
-    # filepath = opath.join(outdir, "graph_objs", *node.parent_path_parts, "__init__.py")
-    filepath = opath.join(
-        outdir, "graph_objs", *node.parent_path_parts, "_" + node.name_undercase + ".py"
-    )
-
-    # Generate source code
+    filepath = (outdir / "graph_objs").joinpath(*node.parent_path_parts) / f"_{node.name_undercase}.py"
     datatype_source = build_datatype_py(node)
-
-    # Write file
     write_source_py(datatype_source, filepath, leading_newlines=2)

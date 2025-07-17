@@ -513,7 +513,7 @@ def create_violin(
     >>> norm_params=[(0, 1.2), (0.7, 1), (-0.5, 1.4), (0.3, 1), (0.8, 0.9)]
 
     >>> for i, letter in enumerate("ABCDE"):
-    ...     y[gr == letter] *=norm_params[i][1]+ norm_params[i][0]
+    ...     y[gr == letter] *= norm_params[i]\\[1]+ norm_params[i]\\[0]
     >>> df = pd.DataFrame(dict(Score=y, Group=gr))
 
     >>> # create violin fig
@@ -540,7 +540,7 @@ def create_violin(
     >>> norm_params=[(0, 1.2), (0.7, 1), (-0.5, 1.4), (0.3, 1), (0.8, 0.9)]
 
     >>> for i, letter in enumerate("ABCDE"):
-    ...     y[gr == letter] *=norm_params[i][1]+ norm_params[i][0]
+    ...     y[gr == letter] *= norm_params[i]\\[1]+ norm_params[i]\\[0]
     >>> df = pd.DataFrame(dict(Score=y, Group=gr))
 
     >>> # define header params

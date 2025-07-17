@@ -13,6 +13,9 @@ tests/test_orca/images/linux/failed/
 
 doc/python/raw.githubusercontent.com/
 
+docs/
+docs_tmp/
+
 # Don't ignore dataset files
 !*.csv.gz
 !*.geojson.gz
