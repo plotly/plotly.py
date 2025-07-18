@@ -84,3 +84,12 @@ def test_multiple_traces_native_legend():
     assert plotly_fig.data[0].mode == "lines"
     assert plotly_fig.data[1].mode == "markers"
     assert plotly_fig.data[2].mode == "lines+markers"
+
+
+def test_plot_bgcolor_defaults_to_white():
+    plt.figure()
+    plt.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(plt.gcf())
+
+    assert plotly_fig.layout.template.layout.plot_bgcolor == "white"
