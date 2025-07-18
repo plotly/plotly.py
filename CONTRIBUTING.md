@@ -125,6 +125,7 @@ If you're testing local changes in Jupyter Lab or Jupyter Notebook, you'll want 
 pip install jupyter
 jupyter labextension develop .
 ```
+If you don't run that command, your figure will not render in the Jupyter Lab/ Jupyter Notebook editors. 
 
 If you're changing any of the code under the `js/` directory, you'll also want to run these commands:
 ```
