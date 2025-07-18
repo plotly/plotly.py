@@ -120,10 +120,17 @@ you can install all packages with:
 pip install -e '.[dev]'
 ```
 
-If you're testing local changes in Jupyter Lab or Jupyter Notebook, you'll want to run:
+If you're testing local changes in Jupyter Lab or Jupyter Notebook, you'll want to run these commands when you're setting up your development environment:
 ```bash
 pip install jupyter
 jupyter labextension develop .
+```
+
+If you're changing any of the code under the `js/` directory, you'll also want to run these commands:
+```
+cd js/
+npm ci
+npm run build
 ```
 
 These commands also create an *editable install* of plotly.py
