@@ -748,7 +748,9 @@ The row_titles argument to make_subplots must be a list or tuple
 
     _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir, False)
     _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir, False)
-    if secondary_y:
+
+    any_secondary_y = any(spec["secondary_y"] for spec_row in specs for spec in spec_row if spec is not None)
+    if any_secondary_y:
         _configure_shared_axes(
             layout, grid_ref, specs, "y", shared_yaxes, row_dir, True
         )
