@@ -114,7 +114,7 @@ class Contours(_BaseTraceHierarchyType):
         Sets the constraint operation. "=" keeps regions equal to
         `value` "<" and "<=" keep regions less than `value` ">" and
         ">=" keep regions greater than `value` "[]", "()", "[)", and
-        "(]" keep regions inside `value[0]` to `value[1]` "][", ")(",
+        "(]" keep regions inside `value[0]` to `value[1]` "]\\[", ")(",
         "](", ")[" keep regions outside `value[0]` to value[1]` Open
         vs. closed intervals make no difference to constraint display,
         but all versions are allowed for consistency with filter
@@ -122,7 +122,7 @@ class Contours(_BaseTraceHierarchyType):
 
         The 'operation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['=', '<', '>=', '>', '<=', '[]', '()', '[)', '(]', '][',
+                ['=', '<', '>=', '>', '<=', '[]', '()', '[)', '(]', ']\[',
                 ')(', '](', ')[']
 
         Returns
@@ -237,11 +237,11 @@ class Contours(_BaseTraceHierarchyType):
         """
         Sets the value or values of the constraint boundary. When
         `operation` is set to one of the comparison values
-        (=,<,>=,>,<=) "value" is expected to be a number. When
+        (`=,<,>=,>,<=`) "value" is expected to be a number. When
         `operation` is set to one of the interval values
-        ([],(),[),(],][,)(,](,)[) "value" is expected to be an array of
-        two numbers where the first is the lower bound and the second
-        is the upper bound.
+        (`[],(),[),(],]\\[,)(,](,)[`) "value" is expected to be an
+        array of two numbers where the first is the lower bound and the
+        second is the upper bound.
 
         The 'value' property accepts values of any type
 
@@ -281,10 +281,11 @@ class Contours(_BaseTraceHierarchyType):
             to `value` "<" and "<=" keep regions less than `value`
             ">" and ">=" keep regions greater than `value` "[]",
             "()", "[)", and "(]" keep regions inside `value[0]` to
-            `value[1]` "][", ")(", "](", ")[" keep regions outside
-            `value[0]` to value[1]` Open vs. closed intervals make
-            no difference to constraint display, but all versions
-            are allowed for consistency with filter transforms.
+            `value[1]` "]\\[", ")(", "](", ")[" keep regions
+            outside `value[0]` to value[1]` Open vs. closed
+            intervals make no difference to constraint display, but
+            all versions are allowed for consistency with filter
+            transforms.
         showlabels
             Determines whether to label the contour lines with
             their values.
@@ -307,11 +308,11 @@ class Contours(_BaseTraceHierarchyType):
         value
             Sets the value or values of the constraint boundary.
             When `operation` is set to one of the comparison values
-            (=,<,>=,>,<=) "value" is expected to be a number. When
-            `operation` is set to one of the interval values
-            ([],(),[),(],][,)(,](,)[) "value" is expected to be an
-            array of two numbers where the first is the lower bound
-            and the second is the upper bound.
+            (`=,<,>=,>,<=`) "value" is expected to be a number.
+            When `operation` is set to one of the interval values
+            (`[],(),[),(],]\\[,)(,](,)[`) "value" is expected to be
+            an array of two numbers where the first is the lower
+            bound and the second is the upper bound.
         """
 
     def __init__(
@@ -362,10 +363,11 @@ class Contours(_BaseTraceHierarchyType):
             to `value` "<" and "<=" keep regions less than `value`
             ">" and ">=" keep regions greater than `value` "[]",
             "()", "[)", and "(]" keep regions inside `value[0]` to
-            `value[1]` "][", ")(", "](", ")[" keep regions outside
-            `value[0]` to value[1]` Open vs. closed intervals make
-            no difference to constraint display, but all versions
-            are allowed for consistency with filter transforms.
+            `value[1]` "]\\[", ")(", "](", ")[" keep regions
+            outside `value[0]` to value[1]` Open vs. closed
+            intervals make no difference to constraint display, but
+            all versions are allowed for consistency with filter
+            transforms.
         showlabels
             Determines whether to label the contour lines with
             their values.
@@ -388,11 +390,11 @@ class Contours(_BaseTraceHierarchyType):
         value
             Sets the value or values of the constraint boundary.
             When `operation` is set to one of the comparison values
-            (=,<,>=,>,<=) "value" is expected to be a number. When
-            `operation` is set to one of the interval values
-            ([],(),[),(],][,)(,](,)[) "value" is expected to be an
-            array of two numbers where the first is the lower bound
-            and the second is the upper bound.
+            (`=,<,>=,>,<=`) "value" is expected to be a number.
+            When `operation` is set to one of the interval values
+            (`[],(),[),(],]\\[,)(,](,)[`) "value" is expected to be
+            an array of two numbers where the first is the lower
+            bound and the second is the upper bound.
 
         Returns
         -------

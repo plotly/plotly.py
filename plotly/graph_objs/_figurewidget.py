@@ -818,7 +818,7 @@ class FigureWidget(BaseFigureWidget):
             are available. Finally, the template string has access
             to variables `value` and `label`. Anything contained in
             tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         hovertemplatesrc
@@ -1338,8 +1338,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1769,8 +1770,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -3070,8 +3072,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -3454,7 +3457,7 @@ class FigureWidget(BaseFigureWidget):
             are available. Finally, the template string has access
             to variable `properties` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         hovertemplatesrc
@@ -3841,7 +3844,7 @@ class FigureWidget(BaseFigureWidget):
             are available. Finally, the template string has access
             to variable `properties` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         hovertemplatesrc
@@ -4249,8 +4252,9 @@ class FigureWidget(BaseFigureWidget):
             are available. Finally, the template string has access
             to variable `norm` Anything contained in tag `<extra>`
             is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -4765,8 +4769,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -5687,8 +5692,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -6070,8 +6076,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -6464,8 +6471,9 @@ class FigureWidget(BaseFigureWidget):
             to variables `percentInitial`, `percentPrevious` and
             `percentTotal`. Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -6969,8 +6977,9 @@ class FigureWidget(BaseFigureWidget):
             to variables `label`, `color`, `value`, `text` and
             `percent`. Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -7399,8 +7408,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -7973,7 +7983,7 @@ class FigureWidget(BaseFigureWidget):
             are available. Finally, the template string has access
             to variable `binNumber` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         hovertemplatesrc
@@ -8516,8 +8526,9 @@ class FigureWidget(BaseFigureWidget):
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -9058,8 +9069,9 @@ class FigureWidget(BaseFigureWidget):
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -9524,8 +9536,9 @@ class FigureWidget(BaseFigureWidget):
             `percentRoot`, `percentEntry` and `percentParent`.
             Anything contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -9901,8 +9914,9 @@ class FigureWidget(BaseFigureWidget):
             to variables `z`, `color` and `colormodel`. Anything
             contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -9965,7 +9979,7 @@ class FigureWidget(BaseFigureWidget):
         source
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
-            subtype>][;base64],<data>"
+            subtype>]\\[;base64],<data>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
@@ -10507,8 +10521,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -11016,8 +11031,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -11843,7 +11859,7 @@ class FigureWidget(BaseFigureWidget):
             `probability`, `category`, `categorycount`,
             `colorcount` and `bandcolorcount`. Anything contained
             in tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         labelfont
@@ -12296,8 +12312,9 @@ class FigureWidget(BaseFigureWidget):
             to variables `label`, `color`, `value`, `percent` and
             `text`. Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -13007,8 +13024,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -13542,8 +13560,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -13996,8 +14015,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -14403,8 +14423,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -14834,8 +14855,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -15309,8 +15331,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -15690,8 +15713,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -16097,8 +16121,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -16516,8 +16541,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -16925,8 +16951,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -17350,8 +17377,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -17719,8 +17747,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -18127,8 +18156,9 @@ class FigureWidget(BaseFigureWidget):
             `tubev`, `tubew`, `norm` and `divergence`. Anything
             contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -18555,8 +18585,9 @@ class FigureWidget(BaseFigureWidget):
             `percentRoot`, `percentEntry` and `percentParent`.
             Anything contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -19004,8 +19035,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -19629,8 +19661,9 @@ class FigureWidget(BaseFigureWidget):
             `percentRoot`, `percentEntry` and `percentParent`.
             Anything contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -20033,8 +20066,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -20585,8 +20619,9 @@ class FigureWidget(BaseFigureWidget):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -21053,8 +21088,9 @@ class FigureWidget(BaseFigureWidget):
             to variables `initial`, `delta` and `final`. Anything
             contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -23145,9 +23181,10 @@ class FigureWidget(BaseFigureWidget):
         text
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
-            (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
-            <span> are also supported.
+            (`<br>`), bold (`<b></b>`), italics (`<i></i>`),
+            hyperlinks (`<a href='...'></a>`). Tags `<em>`,
+            `<sup>`, `<sub>`, `<s>`, `<u>`, and `<span>` are also
+            supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.

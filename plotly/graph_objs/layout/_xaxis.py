@@ -101,6 +101,7 @@ class XAxis(_BaseLayoutHierarchyType):
         "visible",
         "zeroline",
         "zerolinecolor",
+        "zerolinelayer",
         "zerolinewidth",
     }
 
@@ -115,8 +116,8 @@ class XAxis(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['free']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
-                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
+                ['^x([2-9]|[1-9]\[0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9]\[0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -780,8 +781,8 @@ class XAxis(_BaseLayoutHierarchyType):
 
         The 'matches' property is an enumeration that may be specified as:
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
-                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
+                ['^x([2-9]|[1-9]\[0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9]\[0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -924,8 +925,8 @@ class XAxis(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['free']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
-                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
+                ['^x([2-9]|[1-9]\[0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9]\[0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -1034,7 +1035,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def rangemode(self):
         """
         If "normal", the range is computed in relation to the extrema
-        of the input data. If "tozero", the range extends to 0,
+        of the input data. If *tozero*`, the range extends to 0,
         regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data. Applies only to
         linear axes.
@@ -1121,8 +1122,8 @@ class XAxis(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 [False]
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
-                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
+                ['^x([2-9]|[1-9]\[0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9]\[0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -1715,12 +1716,13 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def ticklabelposition(self):
         """
-        Determines where tick labels are drawn with respect to the axis
-        Please note that top or bottom has no effect on x axes or when
-        `ticklabelmode` is set to "period". Similarly left or right has
-        no effect on y axes or when `ticklabelmode` is set to "period".
-        Has no effect on "multicategory" axes or when `tickson` is set
-        to "boundaries". When used on axes linked by `matches` or
+        Determines where tick labels are drawn with respect to the
+        axis. Please note that top or bottom has no effect on x axes or
+        when `ticklabelmode` is set to "period" or when `tickson` is
+        set to "boundaries". Similarly, left or right has no effect on
+        y axes or when `ticklabelmode` is set to "period" or when
+        `tickson` is set to "boundaries". Has no effect on
+        "multicategory" axes. When used on axes linked by `matches` or
         `scaleanchor`, no extra padding for inside labels would be
         added by autorange, so that the scales could match.
 
@@ -2153,6 +2155,30 @@ class XAxis(_BaseLayoutHierarchyType):
         self["zerolinecolor"] = val
 
     @property
+    def zerolinelayer(self):
+        """
+        Sets the layer on which this zeroline is displayed. If *above
+        traces*, this zeroline is displayed above all the subplot's
+        traces If *below traces*, this zeroline is displayed below all
+        the subplot's traces, but above the grid lines. Limitation:
+        "zerolinelayer" currently has no effect if the "zorder"
+        property is set on any trace.
+
+        The 'zerolinelayer' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['above traces', 'below traces']
+
+        Returns
+        -------
+        Any
+        """
+        return self["zerolinelayer"]
+
+    @zerolinelayer.setter
+    def zerolinelayer(self, val):
+        self["zerolinelayer"] = val
+
+    @property
     def zerolinewidth(self):
         """
         Sets the width (in px) of the zero line.
@@ -2414,7 +2440,7 @@ class XAxis(_BaseLayoutHierarchyType):
             layout.xaxis.rangebreaks
         rangemode
             If "normal", the range is computed in relation to the
-            extrema of the input data. If "tozero", the range
+            extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
@@ -2581,12 +2607,13 @@ class XAxis(_BaseLayoutHierarchyType):
             cases the default is *hide past div*.
         ticklabelposition
             Determines where tick labels are drawn with respect to
-            the axis Please note that top or bottom has no effect
-            on x axes or when `ticklabelmode` is set to "period".
-            Similarly left or right has no effect on y axes or when
-            `ticklabelmode` is set to "period". Has no effect on
-            "multicategory" axes or when `tickson` is set to
-            "boundaries". When used on axes linked by `matches` or
+            the axis. Please note that top or bottom has no effect
+            on x axes or when `ticklabelmode` is set to "period" or
+            when `tickson` is set to "boundaries". Similarly, left
+            or right has no effect on y axes or when
+            `ticklabelmode` is set to "period" or when `tickson` is
+            set to "boundaries". Has no effect on "multicategory"
+            axes. When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
         ticklabelshift
@@ -2677,6 +2704,14 @@ class XAxis(_BaseLayoutHierarchyType):
             on top of the grid lines.
         zerolinecolor
             Sets the line color of the zero line.
+        zerolinelayer
+            Sets the layer on which this zeroline is displayed. If
+            *above traces*, this zeroline is displayed above all
+            the subplot's traces If *below traces*, this zeroline
+            is displayed below all the subplot's traces, but above
+            the grid lines. Limitation: "zerolinelayer" currently
+            has no effect if the "zorder" property is set on any
+            trace.
         zerolinewidth
             Sets the width (in px) of the zero line.
         """
@@ -2776,6 +2811,7 @@ class XAxis(_BaseLayoutHierarchyType):
         visible=None,
         zeroline=None,
         zerolinecolor=None,
+        zerolinelayer=None,
         zerolinewidth=None,
         **kwargs,
     ):
@@ -3028,7 +3064,7 @@ class XAxis(_BaseLayoutHierarchyType):
             layout.xaxis.rangebreaks
         rangemode
             If "normal", the range is computed in relation to the
-            extrema of the input data. If "tozero", the range
+            extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
@@ -3195,12 +3231,13 @@ class XAxis(_BaseLayoutHierarchyType):
             cases the default is *hide past div*.
         ticklabelposition
             Determines where tick labels are drawn with respect to
-            the axis Please note that top or bottom has no effect
-            on x axes or when `ticklabelmode` is set to "period".
-            Similarly left or right has no effect on y axes or when
-            `ticklabelmode` is set to "period". Has no effect on
-            "multicategory" axes or when `tickson` is set to
-            "boundaries". When used on axes linked by `matches` or
+            the axis. Please note that top or bottom has no effect
+            on x axes or when `ticklabelmode` is set to "period" or
+            when `tickson` is set to "boundaries". Similarly, left
+            or right has no effect on y axes or when
+            `ticklabelmode` is set to "period" or when `tickson` is
+            set to "boundaries". Has no effect on "multicategory"
+            axes. When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
         ticklabelshift
@@ -3291,6 +3328,14 @@ class XAxis(_BaseLayoutHierarchyType):
             on top of the grid lines.
         zerolinecolor
             Sets the line color of the zero line.
+        zerolinelayer
+            Sets the layer on which this zeroline is displayed. If
+            *above traces*, this zeroline is displayed above all
+            the subplot's traces If *below traces*, this zeroline
+            is displayed below all the subplot's traces, but above
+            the grid lines. Limitation: "zerolinelayer" currently
+            has no effect if the "zorder" property is set on any
+            trace.
         zerolinewidth
             Sets the width (in px) of the zero line.
 
@@ -3410,6 +3455,7 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`""")
         self._set_property("visible", arg, visible)
         self._set_property("zeroline", arg, zeroline)
         self._set_property("zerolinecolor", arg, zerolinecolor)
+        self._set_property("zerolinelayer", arg, zerolinelayer)
         self._set_property("zerolinewidth", arg, zerolinewidth)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

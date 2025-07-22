@@ -259,8 +259,8 @@ class Header(_BaseTraceHierarchyType):
     @property
     def values(self):
         """
-        Header cell values. `values[m][n]` represents the value of the
-        `n`th point in column `m`, therefore the `values[m]` vector
+        Header cell values. `values[m]\\[n]` represents the value of
+        the `n`th point in column `m`, therefore the `values[m]` vector
         length for all columns must be the same (longer vectors will be
         truncated). Each value must be a finite number or a string.
 
@@ -337,8 +337,8 @@ class Header(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `suffix`.
         values
-            Header cell values. `values[m][n]` represents the value
-            of the `n`th point in column `m`, therefore the
+            Header cell values. `values[m]\\[n]` represents the
+            value of the `n`th point in column `m`, therefore the
             `values[m]` vector length for all columns must be the
             same (longer vectors will be truncated). Each value
             must be a finite number or a string.
@@ -413,8 +413,8 @@ class Header(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `suffix`.
         values
-            Header cell values. `values[m][n]` represents the value
-            of the `n`th point in column `m`, therefore the
+            Header cell values. `values[m]\\[n]` represents the
+            value of the `n`th point in column `m`, therefore the
             `values[m]` vector length for all columns must be the
             same (longer vectors will be truncated). Each value
             must be a finite number or a string.
