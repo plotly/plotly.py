@@ -19,7 +19,7 @@
     },
     "dependencies": {
       "lodash-es": "^4.17.21",
-      "plotly.js": "3.0.1",
+      "plotly.js": "3.0.2",
       "@lumino/widgets": "~2.4.0"
     },
     "devDependencies": {
