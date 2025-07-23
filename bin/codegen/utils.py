@@ -163,8 +163,8 @@ def format_description(desc):
     # replace {2D arrays} with 2D lists
     desc = desc.replace("{2D arrays}", "2D lists")
 
-    # replace '][' with ']\[' to avoid confusion with Markdown reference links
-    desc = desc.replace("][", r"]\\[")
+    # FIXME: replace '][' with ']\[' to avoid confusion with Markdown reference links
+    # desc = desc.replace("][", r"]\\[")
 
     return desc
 

@@ -3,6 +3,8 @@
 RUN = uv run
 PACKAGE_DIRS = _plotly_utils plotly
 CODE_DIRS = ${PACKAGE_DIRS} scripts
+EXAMPLE_SRC = doc/python/cone-plot.md doc/python/strip-charts.md
+# EXAMPLE_SRC =  $(wildcard doc/python/*.md)
 
 ## commands: show available commands
 commands:
@@ -20,6 +22,10 @@ docs-lint:
 ## docs-tmp: rebuild documentation saving Markdown in ./tmp
 docs-tmp:
 	MKDOCS_TEMP_DIR=./docs_tmp ${RUN} mkdocs build
+
+## examples: generate Markdown from doc/python
+examples:
+	${RUN} bin/run_markdown.py --outdir pages/examples --inline --verbose ${EXAMPLE_SRC}
 
 ## format: reformat code
 format:
@@ -52,6 +58,8 @@ clean:
 	@rm -rf .pytest_cache
 	@rm -rf .ruff_cache
 	@rm -rf dist
+	@rm -rf docs
+	@rm -rf pages/examples
 
 ## sync: update Python packages
 sync:

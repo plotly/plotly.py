@@ -145,11 +145,11 @@ class Grid(_BaseLayoutHierarchyType):
 
         The 'subplots' property is an info array that may be specified as:
         * a 2D list where:
-          The 'subplots[i]\[j]' property is an enumeration that may be specified as:
+          The 'subplots[i][j]' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9]\[0-9]+)?y([2-9]|[1-9]\[0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?y([2-9]|[1-9][0-9]+)?$']
 
         Returns
         -------
@@ -177,7 +177,7 @@ class Grid(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9]\[0-9]+)?( domain)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -246,7 +246,7 @@ class Grid(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['']
           - A string that matches one of the following regular expressions:
-                ['^y([2-9]|[1-9]\[0-9]+)?( domain)?$']
+                ['^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------

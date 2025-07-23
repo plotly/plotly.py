@@ -218,8 +218,8 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         else:
             property_docstring = property_description
 
-        # Fix `][`.
-        property_docstring = property_docstring.replace("][", "]\\[")
+        # FIXME: replace '][' with ']\[' to avoid confusion with Markdown reference links
+        # property_docstring = property_docstring.replace("][", "]\\[")
 
         # Write get property
         buffer.write(

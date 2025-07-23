@@ -1,0 +1,246 @@
+#!/usr/bin/env python3
+"""
+Process Markdown files with embedded Python code blocks, saving
+the output and images.
+"""
+
+import argparse
+from contextlib import redirect_stdout, redirect_stderr
+import io
+from pathlib import Path
+import plotly.graph_objects as go
+import sys
+import traceback
+
+
+def main():
+    args = _parse_args()
+    for filename in args.input:
+        _do_file(args, Path(filename))
+
+
+def _do_file(args, input_file):
+    """Process a single file."""
+
+    # Validate input file
+    if not input_file.exists():
+        print(f"Error: '{input_file}' not found", file=sys.stderr)
+        sys.exit(1)
+
+    # Determine output file path etc.
+    stem = input_file.stem
+    output_file = args.outdir / f"{input_file.stem}{input_file.suffix}"
+    if input_file.resolve() == output_file.resolve():
+        print(f"Error: output would overwrite input '{input_file}'", file=sys.stderr)
+        sys.exit(1)
+
+    # Read input
+    try:
+        with open(input_file, "r", encoding="utf-8") as f:
+            content = f.read()
+    except Exception as e:
+        print(f"Error reading input file: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    # Parse markdown and extract code blocks
+    _report(args.verbose, f"Processing {input_file}...")
+    code_blocks = _parse_md(content)
+    _report(args.verbose, f"- Found {len(code_blocks)} code blocks")
+
+    # Execute code blocks and collect results
+    execution_results = []
+    figure_counter = 0
+    for i, block in enumerate(code_blocks):
+        _report(args.verbose, f"- Executing block {i + 1}/{len(code_blocks)}")
+        figure_counter, result = _run_code(block["code"], args.outdir, stem, figure_counter)
+        execution_results.append(result)
+        _report(result["error"], f"  - Warning: block {i + 1} had an error")
+        _report(result["images"], f"  - Generated {len(result['images'])} image(s)")
+
+    # Generate and save output
+    content = _generate_markdown(args, content, code_blocks, execution_results, args.outdir)
+    try:
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(content)
+        _report(args.verbose, f"- Output written to {output_file}")
+        _report(any(result["images"] for result in execution_results), f"- Images saved to {args.outdir}")
+    except Exception as e:
+        print(f"Error writing output file: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+def _capture_plotly_show(fig, counter, result, output_dir, stem):
+    """Saves figures instead of displaying them."""
+    # Save PNG
+    png_filename = f"{stem}_{counter}.png"
+    png_path = output_dir / png_filename
+    fig.write_image(png_path, width=800, height=600)
+    result["images"].append(png_filename)
+
+    # Save HTML and get the content for embedding
+    html_filename = f"{stem}_{counter}.html"
+    html_path = output_dir / html_filename
+    fig.write_html(html_path, include_plotlyjs="cdn")
+    html_content = fig.to_html(include_plotlyjs="cdn", div_id=f"plotly-div-{counter}", full_html=False)
+    result["html_files"].append(html_filename)
+    result.setdefault("html_content", []).append(html_content)
+
+
+def _generate_markdown(args, content, code_blocks, execution_results, output_dir):
+    """Generate the output markdown with embedded results."""
+    lines = content.split("\n")
+
+    # Sort code blocks by start line in reverse order for safe insertion
+    sorted_blocks = sorted(
+        enumerate(code_blocks), key=lambda x: x[1]["start_line"], reverse=True
+    )
+
+    # Process each code block and insert results
+    for block_idx, block in sorted_blocks:
+        result = execution_results[block_idx]
+        insert_lines = []
+
+        # Add output if there's stdout
+        if result["stdout"].strip():
+            insert_lines.append("")
+            insert_lines.append("**Output:**")
+            insert_lines.append("```")
+            insert_lines.extend(result["stdout"].rstrip().split("\n"))
+            insert_lines.append("```")
+
+        # Add error if there was one
+        if result["error"]:
+            insert_lines.append("")
+            insert_lines.append("**Error:**")
+            insert_lines.append("```")
+            insert_lines.extend(result["error"].rstrip().split("\n"))
+            insert_lines.append("```")
+
+        # Add stderr if there's content
+        if result["stderr"].strip():
+            insert_lines.append("")
+            insert_lines.append("**Warnings/Messages:**")
+            insert_lines.append("```")
+            insert_lines.extend(result["stderr"].rstrip().split("\n"))
+            insert_lines.append("```")
+
+        # Add images
+        for image in result["images"]:
+            insert_lines.append("")
+            insert_lines.append(f"![Generated Plot](./{image})")
+
+        # Embed HTML content for plotly figures
+        if args.inline:
+            for html_content in result.get("html_content", []):
+                insert_lines.append("")
+                insert_lines.append("**Interactive Plot:**")
+                insert_lines.append("")
+                insert_lines.extend(html_content.split("\n"))
+
+        # Insert the results after the code block
+        if insert_lines:
+            # Insert after the closing ``` of the code block
+            insertion_point = block["end_line"] + 1
+            lines[insertion_point:insertion_point] = insert_lines
+
+    return "\n".join(lines)
+
+
+def _parse_args():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(description="Process Markdown files with code blocks")
+    parser.add_argument("input", nargs="+", help="Input .md file")
+    parser.add_argument("--inline", action="store_true", help="Inline HTML in .md")
+    parser.add_argument("--outdir", type=Path, help="Output directory")
+    parser.add_argument("--verbose", action="store_true", help="Report progress")
+    return parser.parse_args()
+
+
+def _parse_md(content):
+    """Parse Markdown and extract Python code blocks."""
+    lines = content.split("\n")
+    blocks = []
+    current_block = None
+    in_code_block = False
+
+    for i, line in enumerate(lines):
+        # Start of Python code block
+        if line.strip().startswith("```python"):
+            in_code_block = True
+            current_block = {
+                "start_line": i,
+                "end_line": None,
+                "code": [],
+                "type": "python",
+            }
+
+        # End of code block
+        elif line.strip() == "```" and in_code_block:
+            in_code_block = False
+            current_block["end_line"] = i
+            current_block["code"] = "\n".join(current_block["code"])
+            blocks.append(current_block)
+            current_block = None
+
+        # Line inside code block
+        elif in_code_block:
+            current_block["code"].append(line)
+
+    return blocks
+
+
+def _report(condition, message):
+    """Report if condition is true."""
+    if condition:
+        print(message, file=sys.stderr)
+
+
+def _run_code(code, output_dir, stem, figure_counter):
+    """Execute code capturing output and generated files."""
+    # Capture stdout and stderr
+    stdout_buffer = io.StringIO()
+    stderr_buffer = io.StringIO()
+
+    # Track files created during execution
+    if not output_dir.exists():
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+    files_before = set(f.name for f in output_dir.iterdir())
+    result = {"stdout": "", "stderr": "", "error": None, "images": [], "html_files": []}
+    try:
+
+        # Create a namespace for code execution
+        exec_globals = {
+            "__name__": "__main__",
+            "__file__": "<markdown_code>",
+        }
+
+        # Execute the code with output capture
+        with redirect_stdout(stdout_buffer), redirect_stderr(stderr_buffer):
+            # Try to import plotly and patch the show method
+            def patched_show(self, *args, **kwargs):
+                nonlocal figure_counter
+                figure_counter += 1
+                _capture_plotly_show(self, figure_counter, result, output_dir, stem)
+            original_show = go.Figure.show
+            go.Figure.show = patched_show
+            exec(code, exec_globals)
+            go.Figure.show = original_show
+
+    except Exception as e:
+        result["error"] = f"Error executing code: {str(e)}\n{traceback.format_exc()}"
+
+    result["stdout"] = stdout_buffer.getvalue()
+    result["stderr"] = stderr_buffer.getvalue()
+
+    # Check for any additional files created
+    files_after = set(f.name for f in output_dir.iterdir())
+    for f in (files_after - files_before):
+        if f not in result["images"] and f.lower().endswith(".png"):
+            result["images"].append(f)
+
+    return figure_counter, result
+
+
+if __name__ == "__main__":
+    main()

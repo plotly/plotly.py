@@ -15,6 +15,7 @@ doc/python/raw.githubusercontent.com/
 
 docs/
 docs_tmp/
+pages/examples/
 
 # Don't ignore dataset files
 !*.csv.gz

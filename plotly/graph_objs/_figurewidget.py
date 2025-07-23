@@ -9979,7 +9979,7 @@ class FigureWidget(BaseFigureWidget):
         source
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
-            subtype>]\\[;base64],<data>"
+            subtype>][;base64],<data>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties

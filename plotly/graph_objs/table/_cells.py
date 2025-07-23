@@ -259,7 +259,7 @@ class Cells(_BaseTraceHierarchyType):
     @property
     def values(self):
         """
-        Cell values. `values[m]\\[n]` represents the value of the `n`th
+        Cell values. `values[m][n]` represents the value of the `n`th
         point in column `m`, therefore the `values[m]` vector length
         for all columns must be the same (longer vectors will be
         truncated). Each value must be a finite number or a string.
@@ -337,11 +337,11 @@ class Cells(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `suffix`.
         values
-            Cell values. `values[m]\\[n]` represents the value of
-            the `n`th point in column `m`, therefore the
-            `values[m]` vector length for all columns must be the
-            same (longer vectors will be truncated). Each value
-            must be a finite number or a string.
+            Cell values. `values[m][n]` represents the value of the
+            `n`th point in column `m`, therefore the `values[m]`
+            vector length for all columns must be the same (longer
+            vectors will be truncated). Each value must be a finite
+            number or a string.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
             `values`.
@@ -413,11 +413,11 @@ class Cells(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `suffix`.
         values
-            Cell values. `values[m]\\[n]` represents the value of
-            the `n`th point in column `m`, therefore the
-            `values[m]` vector length for all columns must be the
-            same (longer vectors will be truncated). Each value
-            must be a finite number or a string.
+            Cell values. `values[m][n]` represents the value of the
+            `n`th point in column `m`, therefore the `values[m]`
+            vector length for all columns must be the same (longer
+            vectors will be truncated). Each value must be a finite
+            number or a string.
         valuessrc
             Sets the source reference on Chart Studio Cloud for
             `values`.
