@@ -199,7 +199,7 @@ class ErrorZ(_BaseTraceHierarchyType):
     def type(self):
         """
         Determines the rule used to generate the error bars. If
-        "constant", the bar lengths are of a constant value. Set this
+        *constant`, the bar lengths are of a constant value. Set this
         constant in `value`. If "percent", the bar lengths correspond
         to a percentage of underlying data. Set this percentage in
         `value`. If "sqrt", the bar lengths correspond to the square of
@@ -330,7 +330,7 @@ class ErrorZ(_BaseTraceHierarchyType):
 
         type
             Determines the rule used to generate the error bars. If
-            "constant", the bar lengths are of a constant value.
+            *constant`, the bar lengths are of a constant value.
             Set this constant in `value`. If "percent", the bar
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
@@ -413,7 +413,7 @@ class ErrorZ(_BaseTraceHierarchyType):
 
         type
             Determines the rule used to generate the error bars. If
-            "constant", the bar lengths are of a constant value.
+            *constant`, the bar lengths are of a constant value.
             Set this constant in `value`. If "percent", the bar
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
