@@ -5919,7 +5919,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. If *normal*, the range is computed in relation to the extrema of the input data (same behavior as for cartesian axes).",
+      "description": "If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. If *normal*, the range is computed in relation to the extrema of the input data (same behavior as for cartesian axes).",
       "dflt": "tozero",
       "editType": "calc",
       "valType": "enumerated",
@@ -7325,7 +7325,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
       "dflt": "normal",
       "editType": "plot",
       "valType": "enumerated",
@@ -8064,7 +8064,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
       "dflt": "normal",
       "editType": "plot",
       "valType": "enumerated",
@@ -8803,7 +8803,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
       "dflt": "normal",
       "editType": "plot",
       "valType": "enumerated",
@@ -14032,7 +14032,7 @@
      "role": "object"
     },
     "rangemode": {
-     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
      "dflt": "normal",
      "editType": "plot",
      "valType": "enumerated",
@@ -15583,7 +15583,7 @@
      "role": "object"
     },
     "rangemode": {
-     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
      "dflt": "normal",
      "editType": "plot",
      "valType": "enumerated",
@@ -16323,7 +16323,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -16412,7 +16412,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -22654,7 +22654,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data.",
       "dflt": "normal",
       "editType": "calc",
       "valType": "enumerated",
@@ -23325,7 +23325,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data.",
       "dflt": "normal",
       "editType": "calc",
       "valType": "enumerated",
@@ -39770,7 +39770,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -39859,7 +39859,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -58393,7 +58393,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -58482,7 +58482,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -61194,7 +61194,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -61287,7 +61287,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -61376,7 +61376,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -68437,7 +68437,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -68526,7 +68526,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If *constant`, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
