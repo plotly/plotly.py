@@ -16323,7 +16323,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -16412,7 +16412,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -39770,7 +39770,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -39859,7 +39859,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -58393,7 +58393,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -58482,7 +58482,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -61194,7 +61194,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -61287,7 +61287,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -61376,7 +61376,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -68437,7 +68437,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
@@ -68526,7 +68526,7 @@
       "valType": "integer"
      },
      "type": {
-      "description": "Determines the rule used to generate the error bars. If \"constant\", the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
+      "description": "Determines the rule used to generate the error bars. If *constant*, the bar lengths are of a constant value. Set this constant in `value`. If *percent*, the bar lengths correspond to a percentage of underlying data. Set this percentage in `value`. If *sqrt*, the bar lengths correspond to the square of the underlying data. If *data*, the bar lengths are set with data set `array`.",
       "editType": "calc",
       "valType": "enumerated",
       "values": [
