@@ -32,7 +32,7 @@
     "mimeExtension": true,
     "outputDir": "../plotly/labextension",
     "_build": {
-      "load": "static/remoteEntry.80c42f0e7ae12cb1b3f3.js",
+      "load": "static/remoteEntry.fafc1a00b6eac93ead89.js",
       "mimeExtension": "./mimeExtension"
     }
   }
