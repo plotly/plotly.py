@@ -15,7 +15,7 @@ import traceback
 
 def main():
     args = _parse_args()
-    for filename in args.input:
+    for filename in args.inputs:
         _do_file(args, Path(filename))
 
 
@@ -43,27 +43,27 @@ def _do_file(args, input_file):
         sys.exit(1)
 
     # Parse markdown and extract code blocks
-    _report(args.verbose, f"Processing {input_file}...")
+    _report(args.verbose > 0, f"Processing {input_file}...")
     code_blocks = _parse_md(content)
-    _report(args.verbose, f"- Found {len(code_blocks)} code blocks")
+    _report(args.verbose > 1, f"- Found {len(code_blocks)} code blocks")
 
     # Execute code blocks and collect results
     execution_results = []
     figure_counter = 0
     for i, block in enumerate(code_blocks):
-        _report(args.verbose, f"- Executing block {i + 1}/{len(code_blocks)}")
+        _report(args.verbose > 1, f"- Executing block {i + 1}/{len(code_blocks)}")
         figure_counter, result = _run_code(block["code"], args.outdir, stem, figure_counter)
         execution_results.append(result)
-        _report(result["error"], f"  - Warning: block {i + 1} had an error")
-        _report(result["images"], f"  - Generated {len(result['images'])} image(s)")
+        _report(args.verbose > 0 and bool(result["error"]), f"  - Warning: block {i + 1} had an error")
+        _report(args.verbose > 1 and bool(result["images"]), f"  - Generated {len(result['images'])} image(s)")
 
     # Generate and save output
     content = _generate_markdown(args, content, code_blocks, execution_results, args.outdir)
     try:
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(content)
-        _report(args.verbose, f"- Output written to {output_file}")
-        _report(any(result["images"] for result in execution_results), f"- Images saved to {args.outdir}")
+        _report(args.verbose > 1, f"- Output written to {output_file}")
+        _report(args.verbose > 1 and any(result["images"] for result in execution_results), f"- Images saved to {args.outdir}")
     except Exception as e:
         print(f"Error writing output file: {e}", file=sys.stderr)
         sys.exit(1)
@@ -149,10 +149,10 @@ def _generate_markdown(args, content, code_blocks, execution_results, output_dir
 def _parse_args():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(description="Process Markdown files with code blocks")
-    parser.add_argument("input", nargs="+", help="Input .md file")
+    parser.add_argument("inputs", nargs="+", help="Input .md files")
     parser.add_argument("--inline", action="store_true", help="Inline HTML in .md")
     parser.add_argument("--outdir", type=Path, help="Output directory")
-    parser.add_argument("--verbose", action="store_true", help="Report progress")
+    parser.add_argument("--verbose", type=int, default=0, help="Integer verbosity level")
     return parser.parse_args()
 
 
