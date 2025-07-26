@@ -25,6 +25,18 @@
         },
         "superclass": "NumberValidator"
     },
+    "layout.yaxis.zerolinelayer": {
+        "params": {
+            "plotly_name": "zerolinelayer",
+            "parent_name": "layout.yaxis",
+            "edit_type": "plot",
+            "values": [
+                "above traces",
+                "below traces"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
+    },
     "layout.yaxis.zerolinecolor": {
         "params": {
             "plotly_name": "zerolinecolor",
@@ -1634,6 +1646,18 @@
             "edit_type": "ticks"
         },
         "superclass": "NumberValidator"
+    },
+    "layout.xaxis.zerolinelayer": {
+        "params": {
+            "plotly_name": "zerolinelayer",
+            "parent_name": "layout.xaxis",
+            "edit_type": "plot",
+            "values": [
+                "above traces",
+                "below traces"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
     },
     "layout.xaxis.zerolinecolor": {
         "params": {
@@ -17491,6 +17515,15 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "layout.legend.maxheight": {
+        "params": {
+            "plotly_name": "maxheight",
+            "parent_name": "layout.legend",
+            "edit_type": "legend",
+            "min": 0
+        },
+        "superclass": "NumberValidator"
+    },
     "layout.legend.itemwidth": {
         "params": {
             "plotly_name": "itemwidth",
@@ -28108,6 +28141,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "treemap.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "treemap.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "treemap.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "treemap.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "treemap.marker.pattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -34416,6 +34466,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "sunburst.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "sunburst.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "sunburst.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "sunburst.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "sunburst.marker.pattern.fillmode": {
         "params": {
@@ -72520,6 +72587,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "scatter.fillpattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "scatter.fillpattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "scatter.fillpattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "scatter.fillpattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "scatter.fillpattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -75795,6 +75879,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "pie.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "pie.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "pie.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "pie.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "pie.marker.pattern.fillmode": {
         "params": {
@@ -88904,6 +89005,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "icicle.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "icicle.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "icicle.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "icicle.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "icicle.marker.pattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -95869,6 +95987,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "histogram.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "histogram.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "histogram.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "histogram.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "histogram.marker.pattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -100776,6 +100911,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "funnelarea.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "funnelarea.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "funnelarea.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "funnelarea.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "funnelarea.marker.pattern.fillmode": {
         "params": {
@@ -124475,6 +124627,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "barpolar.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "barpolar.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "barpolar.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "barpolar.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "barpolar.marker.pattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -127175,6 +127344,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "bar.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "bar.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "bar.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "bar.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "bar.marker.pattern.fillmode": {
         "params": {

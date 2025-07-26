@@ -15,6 +15,8 @@ class Pattern(_BaseTraceHierarchyType):
         "fgcolorsrc",
         "fgopacity",
         "fillmode",
+        "path",
+        "pathsrc",
         "shape",
         "shapesrc",
         "size",
@@ -149,6 +151,46 @@ class Pattern(_BaseTraceHierarchyType):
     @fillmode.setter
     def fillmode(self, val):
         self["fillmode"] = val
+
+    @property
+    def path(self):
+        """
+        Sets a custom path for pattern fill. Use with no `shape` or
+        `solidity`, provide an SVG path string for the regions of the
+        square from (0,0) to (`size`,`size`) to color.
+
+        The 'path' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self["path"]
+
+    @path.setter
+    def path(self, val):
+        self["path"] = val
+
+    @property
+    def pathsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `path`.
+
+        The 'pathsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["pathsrc"]
+
+    @pathsrc.setter
+    def pathsrc(self, val):
+        self["pathsrc"] = val
 
     @property
     def shape(self):
@@ -294,6 +336,14 @@ class Pattern(_BaseTraceHierarchyType):
         fillmode
             Determines whether `marker.color` should be used as a
             default to `bgcolor` or a `fgcolor`.
+        path
+            Sets a custom path for pattern fill. Use with no
+            `shape` or `solidity`, provide an SVG path string for
+            the regions of the square from (0,0) to (`size`,`size`)
+            to color.
+        pathsrc
+            Sets the source reference on Chart Studio Cloud for
+            `path`.
         shape
             Sets the shape of the pattern fill. By default, no
             pattern is used for filling the area.
@@ -327,6 +377,8 @@ class Pattern(_BaseTraceHierarchyType):
         fgcolorsrc=None,
         fgopacity=None,
         fillmode=None,
+        path=None,
+        pathsrc=None,
         shape=None,
         shapesrc=None,
         size=None,
@@ -370,6 +422,14 @@ class Pattern(_BaseTraceHierarchyType):
         fillmode
             Determines whether `marker.color` should be used as a
             default to `bgcolor` or a `fgcolor`.
+        path
+            Sets a custom path for pattern fill. Use with no
+            `shape` or `solidity`, provide an SVG path string for
+            the regions of the square from (0,0) to (`size`,`size`)
+            to color.
+        pathsrc
+            Sets the source reference on Chart Studio Cloud for
+            `path`.
         shape
             Sets the shape of the pattern fill. By default, no
             pattern is used for filling the area.
@@ -423,6 +483,8 @@ an instance of :class:`plotly.graph_objs.funnelarea.marker.Pattern`""")
         self._set_property("fgcolorsrc", arg, fgcolorsrc)
         self._set_property("fgopacity", arg, fgopacity)
         self._set_property("fillmode", arg, fillmode)
+        self._set_property("path", arg, path)
+        self._set_property("pathsrc", arg, pathsrc)
         self._set_property("shape", arg, shape)
         self._set_property("shapesrc", arg, shapesrc)
         self._set_property("size", arg, size)

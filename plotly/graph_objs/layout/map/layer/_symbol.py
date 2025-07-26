@@ -14,7 +14,7 @@ class Symbol(_BaseLayoutHierarchyType):
     def icon(self):
         """
         Sets the symbol icon image (map.layer.layout.icon-image). Full
-        list: https://www.map.com/maki-icons/
+        list: https://www.mapbox.com/maki-icons/
 
         The 'icon' property is a string and must be specified as:
           - A string
@@ -142,7 +142,7 @@ class Symbol(_BaseLayoutHierarchyType):
         return """\
         icon
             Sets the symbol icon image (map.layer.layout.icon-
-            image). Full list: https://www.map.com/maki-icons/
+            image). Full list: https://www.mapbox.com/maki-icons/
         iconsize
             Sets the symbol icon size (map.layer.layout.icon-size).
             Has an effect only when `type` is set to "symbol".
@@ -187,7 +187,7 @@ class Symbol(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objs.layout.map.layer.Symbol`
         icon
             Sets the symbol icon image (map.layer.layout.icon-
-            image). Full list: https://www.map.com/maki-icons/
+            image). Full list: https://www.mapbox.com/maki-icons/
         iconsize
             Sets the symbol icon size (map.layer.layout.icon-size).
             Has an effect only when `type` is set to "symbol".

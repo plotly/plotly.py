@@ -22,6 +22,7 @@ class Legend(_BaseLayoutHierarchyType):
         "itemdoubleclick",
         "itemsizing",
         "itemwidth",
+        "maxheight",
         "orientation",
         "title",
         "tracegroupgap",
@@ -307,6 +308,31 @@ class Legend(_BaseLayoutHierarchyType):
     @itemwidth.setter
     def itemwidth(self, val):
         self["itemwidth"] = val
+
+    @property
+    def maxheight(self):
+        """
+        Sets the max height (in px) of the legend, or max height ratio
+        (reference height * ratio) if less than one. Default value is:
+        0.5 for horizontal legends; 1 for vertical legends. The minimum
+        allowed height is 30px. For a ratio of 0.5, the legend will
+        take up to 50% of the reference height before displaying a
+        scrollbar. The reference height is the full layout height
+        except for vertically oriented legends with a `yref` of
+        `"paper"`, where the reference height is the plot height.
+
+        The 'maxheight' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["maxheight"]
+
+    @maxheight.setter
+    def maxheight(self, val):
+        self["maxheight"] = val
 
     @property
     def orientation(self):
@@ -636,6 +662,17 @@ class Legend(_BaseLayoutHierarchyType):
         itemwidth
             Sets the width (in px) of the legend item symbols (the
             part other than the title.text).
+        maxheight
+            Sets the max height (in px) of the legend, or max
+            height ratio (reference height * ratio) if less than
+            one. Default value is: 0.5 for horizontal legends; 1
+            for vertical legends. The minimum allowed height is
+            30px. For a ratio of 0.5, the legend will take up to
+            50% of the reference height before displaying a
+            scrollbar. The reference height is the full layout
+            height except for vertically oriented legends with a
+            `yref` of `"paper"`, where the reference height is the
+            plot height.
         orientation
             Sets the orientation of the legend.
         title
@@ -723,6 +760,7 @@ class Legend(_BaseLayoutHierarchyType):
         itemdoubleclick=None,
         itemsizing=None,
         itemwidth=None,
+        maxheight=None,
         orientation=None,
         title=None,
         tracegroupgap=None,
@@ -792,6 +830,17 @@ class Legend(_BaseLayoutHierarchyType):
         itemwidth
             Sets the width (in px) of the legend item symbols (the
             part other than the title.text).
+        maxheight
+            Sets the max height (in px) of the legend, or max
+            height ratio (reference height * ratio) if less than
+            one. Default value is: 0.5 for horizontal legends; 1
+            for vertical legends. The minimum allowed height is
+            30px. For a ratio of 0.5, the legend will take up to
+            50% of the reference height before displaying a
+            scrollbar. The reference height is the full layout
+            height except for vertically oriented legends with a
+            `yref` of `"paper"`, where the reference height is the
+            plot height.
         orientation
             Sets the orientation of the legend.
         title
@@ -899,6 +948,7 @@ an instance of :class:`plotly.graph_objs.layout.Legend`""")
         self._set_property("itemdoubleclick", arg, itemdoubleclick)
         self._set_property("itemsizing", arg, itemsizing)
         self._set_property("itemwidth", arg, itemwidth)
+        self._set_property("maxheight", arg, maxheight)
         self._set_property("orientation", arg, orientation)
         self._set_property("title", arg, title)
         self._set_property("tracegroupgap", arg, tracegroupgap)

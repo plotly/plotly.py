@@ -1,4 +1,3 @@
-import os.path as opath
 import json
 
 import _plotly_utils.basevalidators
@@ -54,7 +53,7 @@ def get_data_validator_params(base_trace_node: TraceNode, store: dict):
     }
 
 
-def write_validator_json(outdir, params: dict):
+def write_validator_json(codedir, params: dict):
     """
     Write out a JSON serialization of the validator arguments
     for all validators (keyed by f"{parent_name}.{plotly_name})
@@ -64,8 +63,8 @@ def write_validator_json(outdir, params: dict):
 
     Parameters
     ----------
-    outdir : str
-        Root outdir in which the validators package should reside
+    codedir : str
+        Root directory in which the validators package should reside
     params : dict
         Dictionary to store the JSON data for the validator
     Returns
@@ -78,7 +77,7 @@ def write_validator_json(outdir, params: dict):
         raise ValueError("Expected params to be a dictionary")
 
     # Write file
-    filepath = opath.join(outdir, "validators", "_validators.json")
+    filepath = codedir / "validators" / "_validators.json"
     with open(filepath, "w") as f:
         f.write(json.dumps(params, indent=4))
 
