@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.17.2
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.12.4
   plotly:
     description: How to set the configuration options of figures using the Plotly
       Python graphing library.
@@ -321,6 +321,42 @@ fig = go.Figure(go.Bar(
 fig.update_layout(xaxis={'type': 'date'})
 
 fig.show(config=config)
+```
+
+### Disabling Buttons for Specific Axes
+
+*New in 6.3*
+
+Disabling the zoom in, zoom out, and autoscale buttons for specific axes is supported on cartesian axes using the `modebardisable` attribute. In the following example, the zoom in and zoom out buttons are disabled on the `xaxis`, meaning these buttons only zoom in and out on the `yaxis`. Disable the autoscale button using `modebardisable='autoscale'`. You can also disable both autoscaling and zoom buttons using `modebardisable='zoominout+autoscale'`.
+
+```python
+import plotly.graph_objects as go
+import plotly.data
+
+df = plotly.data.stocks()
+
+fig = go.Figure(
+    data=[
+        go.Scatter(
+            x=df['date'],
+            y=df['GOOG'],
+            mode='lines+markers',
+            name='Google Stock Price'
+        )
+    ],
+    layout=go.Layout(
+        title='Google Stock Price Over Time with Mode Bar Disabled',
+        xaxis=dict(
+            title='Date',
+            # Try zooming in or out using the modebar buttons. These only apply to the yaxis in this exampe. 
+            modebardisable='zoominout'
+        ),
+        yaxis=dict(
+            title='Stock Price (USD)',
+        )
+    )
+)
+fig.show()
 ```
 
 ### Configuring Figures in Dash Apps
