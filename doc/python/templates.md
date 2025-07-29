@@ -389,6 +389,7 @@ Combining themes is also supported by Plotly Express
 
 ```python
 import plotly.io as pio
+import plotly.graph_objects as go
 import plotly.express as px
 
 pio.templates["draft"] = go.layout.Template(
