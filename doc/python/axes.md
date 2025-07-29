@@ -118,7 +118,7 @@ The PX `labels` argument can also be used without a data frame argument:
 
 ```python
 import plotly.express as px
-fig = px.bar(df, x=["Apples", "Oranges"], y=[10,20], color=["Here", "There"],
+fig = px.bar(x=["Apples", "Oranges"], y=[10,20], color=["Here", "There"],
     labels=dict(x="Fruit", y="Amount", color="Place")
 )
 fig.show()
@@ -460,6 +460,7 @@ Here, `ticklabelstandoff=15` moves the labels 15 pixels further away from the x-
 
 ```python
 import plotly.express as px
+import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
@@ -487,6 +488,7 @@ To draw the label for the minor tick before each major tick, set `ticklabelindex
 
 ```python
 import plotly.express as px
+import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
