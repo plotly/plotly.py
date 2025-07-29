@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.7
+      jupytext_version: 1.17.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.9.7
+    version: 3.12.4
   plotly:
     description: How to make Log plots in Python with Plotly.
     display_as: scientific
@@ -76,6 +76,28 @@ fig = px.scatter(df, x="gdpPercap", y="lifeExp", hover_name="country",
                  log_x=True, range_x=[1,100000], range_y=[0,100])
 
 fig.update_xaxes(minor=dict(ticks="inside", ticklen=6, showgrid=True))
+
+fig.show()
+```
+
+#### Controlling Minor Log Labels
+
+*New in 6.3*
+
+By default, minor log labels use small digits, as shown in the previous example. You can control how minor log labels are displayed using the `minorloglabels` attribute. Set to `"complete"` to show complete digits, or `None` for no labels.
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("year == 2007")
+
+fig = px.scatter(
+    df, x="gdpPercap", 
+    y="lifeExp", 
+    hover_name="country",
+    log_x=True, range_x=[1,100000], range_y=[0,100])
+
+fig.update_xaxes(minor=dict(ticks="inside", ticklen=6, showgrid=True),
+                 minorloglabels="complete")
 
 fig.show()
 ```
