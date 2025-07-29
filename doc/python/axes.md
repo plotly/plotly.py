@@ -619,7 +619,7 @@ fig.update_yaxes(zeroline=True, zerolinewidth=2, zerolinecolor='LightPink')
 fig.show()
 ```
 
-##### Controlling zero line layer
+##### Controlling Zero Line Layer
 
 *New in 6.3*
 
