@@ -3,8 +3,13 @@
 RUN = uv run
 PACKAGE_DIRS = _plotly_utils plotly
 CODE_DIRS = ${PACKAGE_DIRS} scripts
-# EXAMPLE_SRC =  $(wildcard doc/python/*.md)
+
+ifdef MKDOCS_ALL
+EXAMPLE_SRC =  $(wildcard doc/python/*.md)
+else
 EXAMPLE_SRC = doc/python/cone-plot.md doc/python/strip-charts.md
+endif
+
 EXAMPLE_DST = $(patsubst doc/python/%.md,pages/examples/%.md,${EXAMPLE_SRC})
 
 ## commands: show available commands
