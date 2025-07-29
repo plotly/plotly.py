@@ -274,6 +274,7 @@ fig.show()
 ### Displaying an image and the histogram of color values
 
 ```python
+import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from skimage import data
 img = data.chelsea()
