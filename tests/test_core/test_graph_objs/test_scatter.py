@@ -6,7 +6,7 @@ A module intended for use with Nose.
 
 """
 
-from plotly.graph_objs import Scatter
+from plotly.graph_objects import Scatter
 
 
 def test_trivial():

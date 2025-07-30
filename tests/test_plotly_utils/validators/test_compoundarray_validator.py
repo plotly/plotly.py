@@ -1,6 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import CompoundArrayValidator
-from plotly.graph_objs.layout import Image
+from plotly.graph_objs.layout import Image # FIXME
 
 
 # Fixtures
@@ -88,7 +88,7 @@ def test_rejection_value(validator):
 
     assert (
         "Invalid property specified for object of type "
-        "plotly.graph_objs.layout.Image" in str(validation_failure.value)
+        "plotly.graph_objects.layout.Image" in str(validation_failure.value)
     )
 
 

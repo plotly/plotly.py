@@ -1,6 +1,6 @@
 import pytest
 
-from plotly.graph_objs import (
+from plotly.graph_objects import (
     Data,
     Figure,
     Layout,

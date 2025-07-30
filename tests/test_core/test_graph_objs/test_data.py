@@ -6,7 +6,7 @@ A module intended for use with Nose.
 
 """
 
-from plotly.graph_objs import Annotations, Data
+from plotly.graph_objects import Annotations, Data
 
 
 def setup():

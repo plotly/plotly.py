@@ -21,7 +21,7 @@ import base64
 
 from plotly import optional_imports, utils
 import plotly.graph_objects as go
-from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
+from plotly.graph_objects import Scatter, Scatter3d, Figure, Data
 from plotly.utils import get_by_path
 from PIL import Image
 

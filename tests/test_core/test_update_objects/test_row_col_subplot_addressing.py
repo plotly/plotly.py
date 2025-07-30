@@ -1,4 +1,4 @@
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from plotly.basedatatypes import _indexing_combinations
 import pytest

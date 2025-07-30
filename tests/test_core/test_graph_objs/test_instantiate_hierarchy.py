@@ -4,7 +4,7 @@ import importlib
 
 from plotly.basedatatypes import BasePlotlyType, BaseFigure
 
-datatypes_root = "plotly/graph_objs"
+datatypes_root = "plotly/graph_objects"
 datatype_modules = [
     dirpath.replace("/", ".")
     for dirpath, _, _ in os.walk(datatypes_root)
@@ -30,7 +30,7 @@ class HierarchyTest(TestCase):
                     )
                     raise
 
-                if obj.__module__ == "plotly.graph_objs._deprecations":
+                if obj.__module__ == "plotly.graph_objects._deprecations":
                     self.assertTrue(isinstance(v, list) or isinstance(v, dict))
                     obj()
                 elif name in ("Figure", "FigureWidget"):

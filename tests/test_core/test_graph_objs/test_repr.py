@@ -1,5 +1,5 @@
 from unittest import TestCase
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 
 class TestGraphObjRepr(TestCase):

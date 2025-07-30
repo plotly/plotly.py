@@ -3,7 +3,7 @@ from unittest import TestCase
 import pytest
 
 import plotly.io as pio
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from ...utils import TestCaseNoTemplate
 
 
@@ -22,7 +22,7 @@ class TemplateTest(TestCase):
 
         pio.templates.default = "plotly"
 
-    # template graph_objs tests
+    # template graph_objects tests
     # -------------------------
     def test_starts_as_empty(self):
         fig = go.Figure()

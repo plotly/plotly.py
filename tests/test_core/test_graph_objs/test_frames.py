@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from plotly.graph_objs import Bar, Frames, Frame, Layout
+from plotly.graph_objects import Bar, Frames, Frame, Layout
 
 import pytest
 

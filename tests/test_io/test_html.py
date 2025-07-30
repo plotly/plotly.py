@@ -3,7 +3,7 @@ import numpy as np
 import re
 
 
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.io._utils import plotly_cdn_url
 from plotly.offline.offline import get_plotlyjs

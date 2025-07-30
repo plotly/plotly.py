@@ -2,7 +2,7 @@ from unittest import TestCase
 import warnings
 
 import pytest
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 
 OLD_CLASS_NAMES = [

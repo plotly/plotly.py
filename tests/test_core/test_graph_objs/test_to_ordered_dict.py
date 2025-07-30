@@ -1,4 +1,4 @@
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from collections import OrderedDict
 from ...utils import TestCaseNoTemplate
 

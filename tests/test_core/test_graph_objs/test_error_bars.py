@@ -6,7 +6,7 @@ A module intended for use with Nose.
 
 """
 
-from plotly.graph_objs import ErrorX, ErrorY
+from plotly.graph_objects import ErrorX, ErrorY
 
 
 def test_instantiate_error_x():

@@ -22,13 +22,13 @@ html_filename = os.path.join(here, "temp-plot.html")
 
 
 fig = {
-    "data": [plotly.graph_objs.Scatter(x=[1, 2, 3], y=[10, 20, 30])],
-    "layout": plotly.graph_objs.Layout(title="offline plot"),
+    "data": [plotly.graph_objects.Scatter(x=[1, 2, 3], y=[10, 20, 30])],
+    "layout": plotly.graph_objects.Layout(title="offline plot"),
 }
 
 fig_frames = {
-    "data": [plotly.graph_objs.Scatter(x=[1, 2, 3], y=[10, 20, 30])],
-    "layout": plotly.graph_objs.Layout(title="offline plot"),
+    "data": [plotly.graph_objects.Scatter(x=[1, 2, 3], y=[10, 20, 30])],
+    "layout": plotly.graph_objects.Layout(title="offline plot"),
     "frames": [{"layout": {"title": "frame 1"}}],
 }
 

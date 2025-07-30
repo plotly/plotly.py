@@ -1,7 +1,7 @@
 from unittest import TestCase
 import pytest
 
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 import plotly.io as pio
 
 
