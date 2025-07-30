@@ -162,17 +162,26 @@ def _parse_md(content):
     blocks = []
     current_block = None
     in_code_block = False
+    in_region_block = False
 
     for i, line in enumerate(lines):
+        # Check for region start/end markers
+        if "<!-- #region" in line:
+            in_region_block = True
+        elif "<!-- #endregion" in line:
+            in_region_block = False
+            
         # Start of Python code block
-        if line.strip().startswith("```python"):
-            in_code_block = True
-            current_block = {
-                "start_line": i,
-                "end_line": None,
-                "code": [],
-                "type": "python",
-            }
+        elif line.strip().startswith("```python"):
+            # Only process code blocks that are NOT inside region blocks
+            if not in_region_block:
+                in_code_block = True
+                current_block = {
+                    "start_line": i,
+                    "end_line": None,
+                    "code": [],
+                    "type": "python",
+                }
 
         # End of code block
         elif line.strip() == "```" and in_code_block:
