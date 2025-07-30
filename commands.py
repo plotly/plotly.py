@@ -317,12 +317,8 @@ def parse_args():
     p_update_dev.add_argument(
         "--devrepo", default="plotly/plotly.js", help="repository"
     )
-    p_update_dev.add_argument(
-        "--devbranch", default="master", help="branch"
-    )
-    p_update_dev.add_argument(
-        "--local", default=None, help="local path"
-    )
+    p_update_dev.add_argument("--devbranch", default="master", help="branch")
+    p_update_dev.add_argument("--local", default=None, help="local path")
 
     subparsers.add_parser("updateplotlyjs", help="update plotly.js")
 
