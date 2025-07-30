@@ -525,7 +525,7 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def symbol(self):
         """
-        Sets the marker symbol. Full list: https://www.map.com/maki-
+        Sets the marker symbol. Full list: https://www.mapbox.com/maki-
         icons/ Note that the array `marker.color` and `marker.size` are
         only available for "circle" symbols.
 
@@ -676,7 +676,7 @@ class Marker(_BaseTraceHierarchyType):
             `size`.
         symbol
             Sets the marker symbol. Full list:
-            https://www.map.com/maki-icons/ Note that the array
+            https://www.mapbox.com/maki-icons/ Note that the array
             `marker.color` and `marker.size` are only available for
             "circle" symbols.
         symbolsrc
@@ -833,7 +833,7 @@ class Marker(_BaseTraceHierarchyType):
             `size`.
         symbol
             Sets the marker symbol. Full list:
-            https://www.map.com/maki-icons/ Note that the array
+            https://www.mapbox.com/maki-icons/ Note that the array
             `marker.color` and `marker.size` are only available for
             "circle" symbols.
         symbolsrc

@@ -439,7 +439,7 @@ class Histogram2d(_BaseTraceType):
         (the ones that are `arrayOk: true`) are available. Finally, the
         template string has access to variable `z` Anything contained
         in tag `<extra>` is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
+        `<extra>%{fullData.name}</extra>`. To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
@@ -1588,8 +1588,9 @@ class Histogram2d(_BaseTraceType):
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -2029,8 +2030,9 @@ class Histogram2d(_BaseTraceType):
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.

@@ -1,8 +1,6 @@
 import json
 import os
-import os.path as opath
 import shutil
-import subprocess
 import sys
 
 from codegen.datatypes import build_datatype_py, write_datatype_py  # noqa: F401
@@ -87,45 +85,30 @@ an item with matching `templateitemname` and `visible: false`.""",
         items["colorscale"] = items.pop("concentrationscales")
 
 
-def make_paths(outdir):
-    """Make various paths needed for formatting and linting."""
+def make_paths(codedir):
+    """Make various paths needed for code generation."""
 
-    validators_dir = opath.join(outdir, "validators")
-    graph_objs_dir = opath.join(outdir, "graph_objs")
-    graph_objects_path = opath.join(outdir, "graph_objects", "__init__.py")
+    validators_dir = codedir / "validators"
+    graph_objs_dir = codedir / "graph_objs"
+    graph_objects_path = codedir / "graph_objects" / "__init__.py"
     return validators_dir, graph_objs_dir, graph_objects_path
 
 
-def lint_code(outdir):
-    """Check Python code using settings in pyproject.toml."""
-
-    subprocess.call(["ruff", "check", *make_paths(outdir)])
-
-
-def reformat_code(outdir):
-    """Reformat Python code using settings in pyproject.toml."""
-
-    subprocess.call(["ruff", "format", *make_paths(outdir)])
-
-
-def perform_codegen(outdir, noformat=False):
-    """Generate code (and possibly reformat)."""
+def perform_codegen(codedir, noformat=False):
+    """Generate code."""
 
     # Get paths
-    validators_dir, graph_objs_dir, graph_objects_path = make_paths(outdir)
+    validators_dir, graph_objs_dir, graph_objects_path = make_paths(codedir)
 
     # Delete prior codegen output
-    if opath.exists(validators_dir):
+    if validators_dir.exists():
         shutil.rmtree(validators_dir)
-    if opath.exists(graph_objs_dir):
+    if graph_objs_dir.exists():
         shutil.rmtree(graph_objs_dir)
 
     # Load plotly schema
-    project_root = opath.dirname(outdir)
-    plot_schema_path = opath.join(
-        project_root, "codegen", "resources", "plot-schema.json"
-    )
-
+    project_root = codedir.parent
+    plot_schema_path = project_root / "resources" / "plot-schema.json"
     with open(plot_schema_path, "r") as f:
         plotly_schema = json.load(f)
 
@@ -193,18 +176,18 @@ def perform_codegen(outdir, noformat=False):
 
     # Write out the JSON data for the validators
     os.makedirs(validators_dir, exist_ok=True)
-    write_validator_json(outdir, validator_params)
+    write_validator_json(codedir, validator_params)
 
     # Alls
     alls = {}
 
     # Write out datatypes
     for node in all_compound_nodes:
-        write_datatype_py(outdir, node)
+        write_datatype_py(codedir, node)
 
     # Deprecated
     # These are deprecated legacy datatypes like graph_objs.Marker
-    write_deprecated_datatypes(outdir)
+    write_deprecated_datatypes(codedir)
 
     # Write figure class to graph_objs
     data_validator = get_data_validator_instance(base_traces_node)
@@ -212,7 +195,7 @@ def perform_codegen(outdir, noformat=False):
     frame_validator = frame_node.get_validator_instance()
 
     write_figure_classes(
-        outdir,
+        codedir,
         base_traces_node,
         data_validator,
         layout_validator,
@@ -242,7 +225,7 @@ def perform_codegen(outdir, noformat=False):
     # Write plotly/graph_objs/graph_objs.py
     # This is for backward compatibility. It just imports everything from
     # graph_objs/__init__.py
-    write_graph_objs_graph_objs(outdir)
+    write_graph_objs_graph_objs(codedir)
 
     # Add Figure and FigureWidget
     root_datatype_imports = datatype_rel_class_imports[()]
@@ -287,12 +270,13 @@ else:
     # __all__
     for path_parts, class_names in alls.items():
         if path_parts and class_names:
-            filepath = opath.join(outdir, "graph_objs", *path_parts, "__init__.py")
+            filepath = codedir / "graph_objs"
+            filepath = filepath.joinpath(*path_parts) / "__init__.py"
             with open(filepath, "at") as f:
                 f.write(f"\n__all__ = {class_names}")
 
     # Output datatype __init__.py files
-    graph_objs_pkg = opath.join(outdir, "graph_objs")
+    graph_objs_pkg = codedir / "graph_objs"
     for path_parts in datatype_rel_class_imports:
         rel_classes = sorted(datatype_rel_class_imports[path_parts])
         rel_modules = sorted(datatype_rel_module_imports.get(path_parts, []))
@@ -317,17 +301,12 @@ else:
         graph_objects_rel_classes,
         init_extra=optional_figure_widget_import,
     )
-    graph_objects_path = opath.join(outdir, "graph_objects", "__init__.py")
-    os.makedirs(opath.join(outdir, "graph_objects"), exist_ok=True)
+    graph_objects_path = codedir / "graph_objects"
+    graph_objects_path.mkdir(parents=True, exist_ok=True)
+    graph_objects_path /=  "__init__.py"
     with open(graph_objects_path, "wt") as f:
         f.write("# ruff: noqa: F401\n")
         f.write(graph_objects_init_source)
-
-    # Run code formatter on output directories
-    if noformat:
-        print("skipping reformatting")
-    else:
-        reformat_code(outdir)
 
 
 if __name__ == "__main__":

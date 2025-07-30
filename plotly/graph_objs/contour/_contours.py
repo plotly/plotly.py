@@ -238,11 +238,11 @@ class Contours(_BaseTraceHierarchyType):
         """
         Sets the value or values of the constraint boundary. When
         `operation` is set to one of the comparison values
-        (=,<,>=,>,<=) "value" is expected to be a number. When
+        (`=,<,>=,>,<=`) "value" is expected to be a number. When
         `operation` is set to one of the interval values
-        ([],(),[),(],][,)(,](,)[) "value" is expected to be an array of
-        two numbers where the first is the lower bound and the second
-        is the upper bound.
+        (`[],(),[),(],][,)(,](,)[`) "value" is expected to be an array
+        of two numbers where the first is the lower bound and the
+        second is the upper bound.
 
         The 'value' property accepts values of any type
 
@@ -309,11 +309,11 @@ class Contours(_BaseTraceHierarchyType):
         value
             Sets the value or values of the constraint boundary.
             When `operation` is set to one of the comparison values
-            (=,<,>=,>,<=) "value" is expected to be a number. When
-            `operation` is set to one of the interval values
-            ([],(),[),(],][,)(,](,)[) "value" is expected to be an
-            array of two numbers where the first is the lower bound
-            and the second is the upper bound.
+            (`=,<,>=,>,<=`) "value" is expected to be a number.
+            When `operation` is set to one of the interval values
+            (`[],(),[),(],][,)(,](,)[`) "value" is expected to be
+            an array of two numbers where the first is the lower
+            bound and the second is the upper bound.
         """
 
     def __init__(
@@ -391,11 +391,11 @@ class Contours(_BaseTraceHierarchyType):
         value
             Sets the value or values of the constraint boundary.
             When `operation` is set to one of the comparison values
-            (=,<,>=,>,<=) "value" is expected to be a number. When
-            `operation` is set to one of the interval values
-            ([],(),[),(],][,)(,](,)[) "value" is expected to be an
-            array of two numbers where the first is the lower bound
-            and the second is the upper bound.
+            (`=,<,>=,>,<=`) "value" is expected to be a number.
+            When `operation` is set to one of the interval values
+            (`[],(),[),(],][,)(,](,)[`) "value" is expected to be
+            an array of two numbers where the first is the lower
+            bound and the second is the upper bound.
 
         Returns
         -------

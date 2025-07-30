@@ -2320,8 +2320,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         >>> fig = tools.make_subplots(rows=2)
 
         This is the format of your plot grid:
-        [ (1,1) x1,y1 ]
-        [ (2,1) x2,y2 ]
+        \\[ (1,1) x1,y1 \\]
+        \\[ (2,1) x2,y2 \\]
 
         >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
         >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)

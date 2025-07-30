@@ -303,8 +303,8 @@ class Line(_BaseTraceHierarchyType):
         here applies when hovering over lines.Finally, the template
         string has access to variables `count` and `probability`.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
         `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
@@ -480,7 +480,7 @@ class Line(_BaseTraceHierarchyType):
             over lines.Finally, the template string has access to
             variables `count` and `probability`. Anything contained
             in tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         reversescale
@@ -620,7 +620,7 @@ class Line(_BaseTraceHierarchyType):
             over lines.Finally, the template string has access to
             variables `count` and `probability`. Anything contained
             in tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         reversescale
