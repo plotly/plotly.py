@@ -64,12 +64,12 @@ Plotly also provides a CLI for installing Chrome from the command line.
 
 Run `plotly_get_chrome` to install Chrome.
 
-You can also install Chrome from within Python using `plotly.io.install_chrome()`
+You can also install Chrome from Python using `plotly.io.get_chrome()`
 
 ```python
 import plotly.io as pio
 
-pio.install_chrome()
+pio.get_chrome()
 ```
 
 See the **Additional Information on Browsers with Kaleido** section below for more details on browser compatibility for Kaleido.
@@ -272,6 +272,8 @@ The following settings are available.
 `default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", or "pdf". ("eps" support is available with Kaleido v0 only)
 
 `mathjax`: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
+
+`plotlyjs`: Location of the Plotly.js bundle to use. Can be a local file path or URL. By default, Kaleido uses the Plotly.js bundle included with Plotly.py.
 
 `topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
 
