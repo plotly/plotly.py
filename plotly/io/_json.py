@@ -225,7 +225,9 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
 def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=None):
     """
     Convert a figure to JSON and write it to a file or writeable
-    object
+    object.
+
+    Note: A figure converted to JSON with one version of Plotly.py may not be compatible with another version.
 
     Parameters
     ----------
@@ -414,7 +416,9 @@ def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
 def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     """
     Construct a figure from the JSON contents of a local file or readable
-    Python object
+    Python object.
+
+    Note: A figure converted to JSON with one version of Plotly.py may not be compatible with another version.
 
     Parameters
     ----------
