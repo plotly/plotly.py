@@ -789,6 +789,11 @@ This example shows how to add a note about the data source or interpretation at 
 ```python
 import plotly.express as px
 df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
+                 size='petal_length', hover_data=['petal_width'])
+
+
 fig.update_layout(
         title=dict(text="Note: this is the Plotly title element.",
                  # keeping this title string short avoids getting the text cut off in small windows
