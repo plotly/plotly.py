@@ -206,6 +206,7 @@ fig.show()
 The `plotly.subplots.make_subplots()` function produces a graph object figure that is preconfigured with a grid of subplots that traces can be added to. The `add_trace()` function will be discussed more below.
 
 ```python
+import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 fig = make_subplots(rows=1, cols=2)
@@ -260,6 +261,7 @@ fig.show()
 If a figure was created using `plotly.subplots.make_subplots()`, then supplying the `row` and `col` arguments to `add_trace()` can be used to add a trace to a particular subplot.
 
 ```python
+import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 fig = make_subplots(rows=1, cols=2)
@@ -274,6 +276,7 @@ This also works for figures created by Plotly Express using the `facet_row` and 
 
 ```python
 import plotly.express as px
+import plotly.graph_objects as go
 
 df = px.data.iris()
 

@@ -154,6 +154,8 @@ Whereas the previous example used the default `intensitymode='vertex'`, we plot 
 
 ```python
 import plotly.graph_objects as go
+import numpy as np
+
 fig = go.Figure(data=[
     go.Mesh3d(
         # 8 vertices of a cube
