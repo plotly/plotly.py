@@ -5,7 +5,7 @@ import plotly.colors as clrs
 from plotly.figure_factory import utils
 
 import plotly
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 pd = optional_imports.get_module("pandas")
 
@@ -195,8 +195,8 @@ def create_bullet(
     **layout_options,
 ):
     """
-    **deprecated**, use instead the plotly.graph_objects trace
-    :class:`plotly.graph_objects.Indicator`.
+    **deprecated**, use instead the plotly.graph_objs trace
+    :class:`plotly.graph_objs.Indicator`.
 
     :param (pd.DataFrame | list | tuple) data: either a list/tuple of
         dictionaries or a pandas DataFrame.
@@ -230,9 +230,9 @@ def create_bullet(
         plotly.tools.make_subplots. Ranges between 0 and 1.
     :param (dict) scatter_options: describes attributes for the scatter trace
         in each subplot such as name and marker size. Call
-        help(plotly.graph_objs.Scatter) for more information on valid params.
+        help(plotly.graph_objects.Scatter) for more information on valid params.
     :param layout_options: describes attributes for the layout of the figure
-        such as title, height and width. Call help(plotly.graph_objs.Layout)
+        such as title, height and width. Call help(plotly.graph_objects.Layout)
         for more information on valid params.
 
     Example 1: Use a Dictionary

@@ -1,6 +1,6 @@
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 np = optional_imports.get_module("numpy")
 
@@ -156,7 +156,7 @@ def trisurf(
     facecolor = np.asarray(facecolor)
     ii, jj, kk = simplices.T
 
-    triangles = graph_objs.Mesh3d(
+    triangles = graph_objects.Mesh3d(
         x=x, y=y, z=z, facecolor=facecolor, i=ii, j=jj, k=kk, name=""
     )
 
@@ -167,7 +167,7 @@ def trisurf(
         colorscale = clrs.make_colorscale(colormap, scale)
         colorscale = clrs.convert_colorscale_to_rgb(colorscale)
 
-        colorbar = graph_objs.Scatter3d(
+        colorbar = graph_objects.Scatter3d(
             x=x[:1],
             y=y[:1],
             z=z[:1],
@@ -227,12 +227,12 @@ def trisurf(
         )
 
     # define the lines for plotting
-    lines = graph_objs.Scatter3d(
+    lines = graph_objects.Scatter3d(
         x=x_edge,
         y=y_edge,
         z=z_edge,
         mode="lines",
-        line=graph_objs.scatter3d.Line(color=edges_color, width=1.5),
+        line=graph_objects.scatter3d.Line(color=edges_color, width=1.5),
         showlegend=False,
     )
 
@@ -309,7 +309,7 @@ def create_trisurf(
     >>> from scipy.spatial import Delaunay
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u = np.linspace(0, 2*np.pi, 20)
@@ -337,7 +337,7 @@ def create_trisurf(
     >>> from scipy.spatial import Delaunay
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u = np.linspace(0, 2*np.pi, 20)
@@ -365,7 +365,7 @@ def create_trisurf(
     >>> from scipy.spatial import Delaunay
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u = np.linspace(0, 2*np.pi, 24)
@@ -394,7 +394,7 @@ def create_trisurf(
     >>> from scipy.spatial import Delaunay
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u=np.linspace(-np.pi, np.pi, 30)
@@ -432,7 +432,7 @@ def create_trisurf(
     >>> import random
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u=np.linspace(-np.pi, np.pi, 30)
@@ -492,18 +492,18 @@ def create_trisurf(
         gridcolor=gridcolor,
         zerolinecolor=zerolinecolor,
     )
-    layout = graph_objs.Layout(
+    layout = graph_objects.Layout(
         title=title,
         width=width,
         height=height,
-        scene=graph_objs.layout.Scene(
-            xaxis=graph_objs.layout.scene.XAxis(**axis),
-            yaxis=graph_objs.layout.scene.YAxis(**axis),
-            zaxis=graph_objs.layout.scene.ZAxis(**axis),
+        scene=graph_objects.layout.Scene(
+            xaxis=graph_objects.layout.scene.XAxis(**axis),
+            yaxis=graph_objects.layout.scene.YAxis(**axis),
+            zaxis=graph_objects.layout.scene.ZAxis(**axis),
             aspectratio=dict(
                 x=aspectratio["x"], y=aspectratio["y"], z=aspectratio["z"]
             ),
         ),
     )
 
-    return graph_objs.Figure(data=data1, layout=layout)
+    return graph_objects.Figure(data=data1, layout=layout)

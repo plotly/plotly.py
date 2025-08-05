@@ -1,5 +1,5 @@
 import plotly.colors as clrs
-from plotly.graph_objs import graph_objs as go
+from plotly.graph_objects import graph_objects as go
 from plotly import exceptions
 from plotly import optional_imports
 

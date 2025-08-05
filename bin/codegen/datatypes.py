@@ -53,7 +53,7 @@ def get_typing_type(plotly_type, array_ok=False):
 
 def build_datatype_py(node):
     """
-    Build datatype (graph_objs) class source code string for a datatype
+    Build datatype (graph_objects) class source code string for a datatype
     PlotlyNode
 
     Parameters
@@ -73,14 +73,14 @@ def build_datatype_py(node):
     # Handle template traces
     #
     # We want template trace/layout classes like
-    # plotly.graph_objs.layout.template.data.Scatter to map to the
-    # corresponding trace/layout class (e.g. plotly.graph_objs.Scatter).
+    # plotly.graph_objects.layout.template.data.Scatter to map to the
+    # corresponding trace/layout class (e.g. plotly.graph_objects.Scatter).
     # So rather than generate a class definition, we just import the
     # corresponding trace/layout class
     if node.parent_path_str == "layout.template.data":
-        return f"from plotly.graph_objs import {node.name_datatype_class}"
+        return f"from plotly.graph_objects import {node.name_datatype_class}"
     elif node.path_str == "layout.template.layout":
-        return "from plotly.graph_objs import Layout"
+        return "from plotly.graph_objects import Layout"
 
     # Extract node properties
     datatype_class = node.name_datatype_class
@@ -175,13 +175,13 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     for subtype_node in subtype_nodes:
         if subtype_node.is_array_element:
             prop_type = (
-                f"tuple[plotly.graph_objs{node.dotpath_str}."
+                f"tuple[plotly.graph_objects{node.dotpath_str}."
                 + f"{subtype_node.name_datatype_class}]"
             )
 
         elif subtype_node.is_compound:
             prop_type = (
-                f"plotly.graph_objs{node.dotpath_str}."
+                f"plotly.graph_objects{node.dotpath_str}."
                 + f"{subtype_node.name_datatype_class}"
             )
 
@@ -291,7 +291,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     # Constructor Docstring
     header = f"Construct a new {datatype_class} object"
     class_name = (
-        f"plotly.graph_objs{node.parent_dotpath_str}.{node.name_datatype_class}"
+        f"plotly.graph_objects{node.parent_dotpath_str}.{node.name_datatype_class}"
     )
 
     extras = [
@@ -582,12 +582,12 @@ def add_docstring(
 
 def write_datatype_py(outdir, node):
     """
-    Build datatype (graph_objs) class source code and write to a file
+    Build datatype (graph_objects) class source code and write to a file
 
     Parameters
     ----------
     outdir :
-        Root outdir in which the graph_objs package should reside
+        Root outdir in which the graph_objects package should reside
     node :
         The datatype node (node.is_datatype must evaluate to true) for which
         to build the datatype class
@@ -597,6 +597,6 @@ def write_datatype_py(outdir, node):
     None
     """
 
-    filepath = (outdir / "graph_objs").joinpath(*node.parent_path_parts) / f"_{node.name_undercase}.py"
+    filepath = (outdir / "graph_objects").joinpath(*node.parent_path_parts) / f"_{node.name_undercase}.py"
     datatype_source = build_datatype_py(node)
     write_source_py(datatype_source, filepath, leading_newlines=2)

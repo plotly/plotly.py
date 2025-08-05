@@ -255,7 +255,7 @@ class {fig_classname}({base_classname}):\n"""
         # Function body
         buffer.write(
             f"""
-        from plotly.graph_objs import {trace_node.name_datatype_class}
+        from plotly.graph_objects import {trace_node.name_datatype_class}
         new_trace = {trace_node.name_datatype_class}(
         """
         )
@@ -671,7 +671,7 @@ class {fig_classname}({base_classname}):\n"""
         # Function body
         buffer.write(
             f"""
-        from plotly.graph_objs import layout as _layout
+        from plotly.graph_objects import layout as _layout
         new_obj = _layout.{node.name_datatype_class}(arg,
             """
         )
@@ -714,13 +714,13 @@ def write_figure_classes(
 ):
     """
     Construct source code for the Figure and FigureWidget classes and
-    write to graph_objs/_figure.py and graph_objs/_figurewidget.py
+    write to graph_objects/_figure.py and graph_objects/_figurewidget.py
     respectively
 
     Parameters
     ----------
     codedir : str
-        Root directory in which the graph_objs package should reside
+        Root directory in which the graph_objects package should reside
     trace_node : PlotlyNode
         Root trace node (the node that is the parent of all of the
         individual trace nodes like bar, scatter, etc.)
@@ -767,5 +767,5 @@ def write_figure_classes(
         )
 
         # Format and write to file
-        filepath = codedir / "graph_objs" / f"_{fig_classname.lower()}.py"
+        filepath = codedir / "graph_objects" / f"_{fig_classname.lower()}.py"
         write_source_py(figure_source, filepath)

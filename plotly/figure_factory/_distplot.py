@@ -1,6 +1,6 @@
 from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 # Optional imports, may be None for users that only use our core functionality.
 np = optional_imports.get_module("numpy")
@@ -237,7 +237,7 @@ def create_distplot(
         ).make_rug()
 
         data.append(rug)
-        layout = graph_objs.Layout(
+        layout = graph_objects.Layout(
             barmode="overlay",
             hovermode="closest",
             legend=dict(traceorder="reversed"),
@@ -246,7 +246,7 @@ def create_distplot(
             yaxis2=dict(domain=[0, 0.25], anchor="x1", dtick=1, showticklabels=False),
         )
     else:
-        layout = graph_objs.Layout(
+        layout = graph_objects.Layout(
             barmode="overlay",
             hovermode="closest",
             legend=dict(traceorder="reversed"),
@@ -255,7 +255,7 @@ def create_distplot(
         )
 
     data = sum(data, [])
-    return graph_objs.Figure(data=data, layout=layout)
+    return graph_objects.Figure(data=data, layout=layout)
 
 
 class _Distplot(object):

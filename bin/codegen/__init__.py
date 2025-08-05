@@ -6,7 +6,7 @@ import sys
 from codegen.datatypes import build_datatype_py, write_datatype_py  # noqa: F401
 from codegen.compatibility import (
     write_deprecated_datatypes,
-    write_graph_objs_graph_objs,
+    write_graph_objects_graph_objects,
     DEPRECATED_DATATYPES,
 )
 from codegen.figure import write_figure_classes
@@ -60,7 +60,7 @@ This should be a dict with format: `{'layout': layoutTemplate, 'data':
 matching the structure of `figure.layout` and `traceTemplate` is a dict
 matching the structure of the trace with type `trace_type` (e.g. 'scatter').
 Alternatively, this may be specified as an instance of
-plotly.graph_objs.layout.Template.
+plotly.graph_objects.layout.Template.
 
 Trace templates are applied cyclically to
 traces of each type. Container arrays (eg `annotations`) have special
@@ -89,22 +89,22 @@ def make_paths(codedir):
     """Make various paths needed for code generation."""
 
     validators_dir = codedir / "validators"
-    graph_objs_dir = codedir / "graph_objs"
-    graph_objects_path = codedir / "graph_objects" / "__init__.py"
-    return validators_dir, graph_objs_dir, graph_objects_path
+    graph_objects_dir = codedir / "graph_objects"
+    graph_objs_path = codedir / "graph_objs" / "__init__.py"
+    return validators_dir, graph_objects_dir, graph_objs_path
 
 
 def perform_codegen(codedir, noformat=False):
     """Generate code."""
 
     # Get paths
-    validators_dir, graph_objs_dir, graph_objects_path = make_paths(codedir)
+    validators_dir, graph_objects_dir, graph_objs_path = make_paths(codedir)
 
     # Delete prior codegen output
     if validators_dir.exists():
         shutil.rmtree(validators_dir)
-    if graph_objs_dir.exists():
-        shutil.rmtree(graph_objs_dir)
+    if graph_objects_dir.exists():
+        shutil.rmtree(graph_objects_dir)
 
     # Load plotly schema
     project_root = codedir.parent
@@ -186,10 +186,10 @@ def perform_codegen(codedir, noformat=False):
         write_datatype_py(codedir, node)
 
     # Deprecated
-    # These are deprecated legacy datatypes like graph_objs.Marker
+    # These are deprecated legacy datatypes like graph_objects.Marker
     write_deprecated_datatypes(codedir)
 
-    # Write figure class to graph_objs
+    # Write figure class to graph_objects
     data_validator = get_data_validator_instance(base_traces_node)
     layout_validator = layout_node.get_validator_instance()
     frame_validator = frame_node.get_validator_instance()
@@ -222,10 +222,10 @@ def perform_codegen(codedir, noformat=False):
                 f".{node.name_undercase}"
             )
 
-    # Write plotly/graph_objs/graph_objs.py
+    # Write plotly/graph_objects/graph_objects.py
     # This is for backward compatibility. It just imports everything from
-    # graph_objs/__init__.py
-    write_graph_objs_graph_objs(codedir)
+    # graph_objects/__init__.py
+    write_graph_objects_graph_objects(codedir)
 
     # Add Figure and FigureWidget
     root_datatype_imports = datatype_rel_class_imports[()]
@@ -241,7 +241,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
         import ipywidgets as _ipywidgets
         from packaging.version import Version as _Version
         if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
-            from ..graph_objs._figurewidget import FigureWidget
+            from ..graph_objects._figurewidget import FigureWidget
         else:
             raise ImportError()
     except Exception:
@@ -255,7 +255,7 @@ else:
                 import ipywidgets
                 from packaging.version import Version
                 if Version(ipywidgets.__version__) >= Version("7.0.0"):
-                    from ..graph_objs._figurewidget import FigureWidget
+                    from ..graph_objects._figurewidget import FigureWidget
                     return FigureWidget
                 else:
                     raise ImportError()
@@ -270,13 +270,13 @@ else:
     # __all__
     for path_parts, class_names in alls.items():
         if path_parts and class_names:
-            filepath = codedir / "graph_objs"
+            filepath = codedir / "graph_objects"
             filepath = filepath.joinpath(*path_parts) / "__init__.py"
             with open(filepath, "at") as f:
                 f.write(f"\n__all__ = {class_names}")
 
     # Output datatype __init__.py files
-    graph_objs_pkg = codedir / "graph_objs"
+    graph_objects_pkg = codedir / "graph_objects"
     for path_parts in datatype_rel_class_imports:
         rel_classes = sorted(datatype_rel_class_imports[path_parts])
         rel_modules = sorted(datatype_rel_module_imports.get(path_parts, []))
@@ -284,29 +284,29 @@ else:
             init_extra = optional_figure_widget_import
         else:
             init_extra = ""
-        write_init_py(graph_objs_pkg, path_parts, rel_modules, rel_classes, init_extra)
+        write_init_py(graph_objects_pkg, path_parts, rel_modules, rel_classes, init_extra)
 
-    # Output graph_objects.py alias
-    graph_objects_rel_classes = [
-        "..graph_objs." + rel_path.split(".")[-1]
+    # Output graph_objs.py alias
+    graph_objs_rel_classes = [
+        "..graph_objects." + rel_path.split(".")[-1]
         for rel_path in datatype_rel_class_imports[()]
     ]
-    graph_objects_rel_modules = [
-        "..graph_objs." + rel_module.split(".")[-1]
+    graph_objs_rel_modules = [
+        "..graph_objects." + rel_module.split(".")[-1]
         for rel_module in datatype_rel_module_imports[()]
     ]
 
-    graph_objects_init_source = build_from_imports_py(
-        graph_objects_rel_modules,
-        graph_objects_rel_classes,
+    graph_objs_init_source = build_from_imports_py(
+        graph_objs_rel_modules,
+        graph_objs_rel_classes,
         init_extra=optional_figure_widget_import,
     )
-    graph_objects_path = codedir / "graph_objects"
-    graph_objects_path.mkdir(parents=True, exist_ok=True)
-    graph_objects_path /=  "__init__.py"
-    with open(graph_objects_path, "wt") as f:
+    graph_objs_path = codedir / "graph_objs"
+    graph_objs_path.mkdir(parents=True, exist_ok=True)
+    graph_objs_path /=  "__init__.py"
+    with open(graph_objs_path, "wt") as f:
         f.write("# ruff: noqa: F401\n")
-        f.write(graph_objects_init_source)
+        f.write(graph_objs_init_source)
 
 
 if __name__ == "__main__":

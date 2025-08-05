@@ -61,7 +61,7 @@ def make_subplots(
     **kwargs,
 ):
     """
-    Return an instance of plotly.graph_objs.Figure with predefined subplots
+    Return an instance of plotly.graph_objects.Figure with predefined subplots
     configured in 'layout'.
 
     Parameters
@@ -242,7 +242,7 @@ def make_subplots(
 
     >>> # Stack two subplots vertically, and add a scatter trace to each
     >>> from plotly.subplots import make_subplots
-    >>> import plotly.graph_objects as go
+    >>> import plotly.graph_objs as go
     >>> fig = make_subplots(rows=2)
 
     This is the format of your plot grid:
@@ -338,7 +338,7 @@ def make_subplots(
     Figure(...)
     """
 
-    import plotly.graph_objs as go
+    import plotly.graph_objects as go
 
     # Handle backward compatibility
     # -----------------------------

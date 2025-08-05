@@ -4,7 +4,7 @@ from plotly.figure_factory._ohlc import (
     _DEFAULT_DECREASING_COLOR,
     validate_ohlc,
 )
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 
 def make_increasing_candle(open, high, low, close, dates, **kwargs):
@@ -23,7 +23,7 @@ def make_increasing_candle(open, high, low, close, dates, **kwargs):
     :param (list) close: closing values
     :param (list) dates: list of datetime objects. Default: None
     :param kwargs: kwargs to be passed to increasing trace via
-        plotly.graph_objs.Scatter.
+        plotly.graph_objects.Scatter.
 
     :rtype (list) candle_incr_data: list of the box trace for
         increasing candlesticks.
@@ -65,7 +65,7 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
     :param (list) close: closing values
     :param (list) dates: list of datetime objects. Default: None
     :param kwargs: kwargs to be passed to decreasing trace via
-        plotly.graph_objs.Scatter.
+        plotly.graph_objects.Scatter.
 
     :rtype (list) candle_decr_data: list of the box trace for
         decreasing candlesticks.
@@ -97,8 +97,8 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
 
 def create_candlestick(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **deprecated**, use instead the plotly.graph_objects trace
-    :class:`plotly.graph_objects.Candlestick`
+    **deprecated**, use instead the plotly.graph_objs trace
+    :class:`plotly.graph_objs.Candlestick`
 
     :param (list) open: opening values
     :param (list) high: high values
@@ -113,10 +113,10 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
         where the close value is less than or equal to the corresponding
         open value. When the direction is 'both', both increasing and
         decreasing candlesticks are returned. Default: 'both'
-    :param kwargs: kwargs passed through plotly.graph_objs.Scatter.
+    :param kwargs: kwargs passed through plotly.graph_objects.Scatter.
         These kwargs describe other attributes about the ohlc Scatter trace
         such as the color or the legend name. For more information on valid
-        kwargs call help(plotly.graph_objs.Scatter)
+        kwargs call help(plotly.graph_objects.Scatter)
 
     :rtype (dict): returns a representation of candlestick chart figure.
 
@@ -134,7 +134,7 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
     Example 2: Customize the candlestick colors
 
     >>> from plotly.figure_factory import create_candlestick
-    >>> from plotly.graph_objs import Line, Marker
+    >>> from plotly.graph_objects import Line, Marker
     >>> from datetime import datetime
 
     >>> import pandas as pd
@@ -208,8 +208,8 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
         )
         data = candle_incr_data + candle_decr_data
 
-    layout = graph_objs.Layout()
-    return graph_objs.Figure(data=data, layout=layout)
+    layout = graph_objects.Layout()
+    return graph_objects.Figure(data=data, layout=layout)
 
 
 class _Candlestick(object):

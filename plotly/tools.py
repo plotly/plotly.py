@@ -118,7 +118,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
         )
 
 
-### graph_objs related tools ###
+### graph_objects related tools ###
 
 
 def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
@@ -162,7 +162,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
 
     """
     # TODO: protected until #282
-    from plotly.graph_objs import graph_objs
+    from plotly.graph_objects import graph_objects
 
     warnings.warn(
         "tools.get_subplots is depreciated. Please use tools.make_subplots instead."
@@ -190,7 +190,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
     except KeyError:
         vertical_spacing = 0.3 / rows
 
-    fig = dict(layout=graph_objs.Layout())  # will return this at the end
+    fig = dict(layout=graph_objects.Layout())  # will return this at the end
     plot_width = (1 - horizontal_spacing * (columns - 1)) / columns
     plot_height = (1 - vertical_spacing * (rows - 1)) / rows
     plot_num = 0
@@ -224,7 +224,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
             grid_string = grid_line + "\n" + grid_string
         print(grid_string)
 
-    return graph_objs.Figure(fig)  # forces us to validate what we just did...
+    return graph_objects.Figure(fig)  # forces us to validate what we just did...
 
 
 def make_subplots(
@@ -236,7 +236,7 @@ def make_subplots(
     print_grid=None,
     **kwargs,
 ):
-    """Return an instance of plotly.graph_objs.Figure
+    """Return an instance of plotly.graph_objects.Figure
     with the subplots domain set in 'layout'.
 
     Example 1:
@@ -425,7 +425,7 @@ def make_subplots(
     column_width (kwarg, list of numbers)
         Column_width specifications
 
-        - Functions similarly to `column_width` of `plotly.graph_objs.Table`.
+        - Functions similarly to `column_width` of `plotly.graph_objects.Table`.
           Specify a list that contains numbers where the amount of numbers in
           the list is equal to `cols`.
 
@@ -478,13 +478,13 @@ def get_graph_obj(obj, obj_type=None):
 
     OLD FUNCTION: this will *silently* strip out invalid pieces of the object.
     NEW FUNCTION: no striping of invalid pieces anymore - only raises error
-        on unrecognized graph_objs
+        on unrecognized graph_objects
     """
     # TODO: Deprecate or move. #283
-    from plotly.graph_objs import graph_objs
+    from plotly.graph_objects import graph_objects
 
     try:
-        cls = getattr(graph_objs, obj_type)
+        cls = getattr(graph_objects, obj_type)
     except (AttributeError, KeyError):
         raise exceptions.PlotlyError(
             "'{}' is not a recognized graph_obj.".format(obj_type)
@@ -521,7 +521,7 @@ def _replace_newline(obj):
 
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
-    from plotly.graph_objs import Figure
+    from plotly.graph_objects import Figure
     from plotly.basedatatypes import BaseFigure
 
     validated = False
@@ -536,7 +536,7 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
         raise exceptions.PlotlyError(
             "The `figure_or_data` positional "
             "argument must be "
-            "`dict`-like, `list`-like, or an instance of plotly.graph_objs.Figure"
+            "`dict`-like, `list`-like, or an instance of plotly.graph_objects.Figure"
         )
 
     if validate_figure and not validated:
