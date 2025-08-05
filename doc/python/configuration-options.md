@@ -327,7 +327,7 @@ fig.show(config=config)
 
 *New in 6.3*
 
-Disabling the zoom in, zoom out, and autoscale buttons for specific axes is supported on cartesian axes using the `modebardisable` attribute. In the following example, the zoom in and zoom out buttons are disabled on the `xaxis`, meaning these buttons only zoom in and out on the `yaxis`. Disable the autoscale button using `modebardisable='autoscale'`. You can also disable both autoscaling and zoom buttons using `modebardisable='zoominout+autoscale'`.
+Disabling the zoom in, zoom out, and autoscale buttons for specific axes is supported on cartesian axes using the `modebardisable` attribute. In the following example, the zoom in and zoom out buttons are disabled on the `xaxis`, meaning these buttons only zoom in and out on the `yaxis`. Disable the autoscale button using `modebardisable='autoscale'`. You can also disable the zoom and autoscale buttons using `modebardisable='zoominout+autoscale'`.
 
 ```python
 import plotly.graph_objects as go
@@ -348,7 +348,7 @@ fig = go.Figure(
         title='Google Stock Price Over Time with Mode Bar Disabled',
         xaxis=dict(
             title='Date',
-            # Try zooming in or out using the modebar buttons. These only apply to the yaxis in this exampe. 
+            # Try zooming in or out using the modebar buttons. These only apply to the yaxis in this exampe.
             modebardisable='zoominout'
         ),
         yaxis=dict(
