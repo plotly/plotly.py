@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.5
   plotly:
-    description: Introduction to the new Plotly FigureWidget
+    description: Introduction to the Plotly FigureWidget
     display_as: chart_events
     language: python
     layout: base
@@ -33,6 +33,12 @@ jupyter:
     thumbnail: thumbnail/figurewidget-overview.gif
     redirect_from: /python/ipython-widgets/
 ---
+
+The Plotly FigureWidget allows you to add Plotly charts as interactive widgets in Jupyter and other compatible notebooks. To use the FigureWidget, you'll need to install `anywidget`: 
+
+```bash
+pip install anywidget
+```
 
 #### Create a Simple FigureWidget
 Create an empty FigureWidget and then view it.
