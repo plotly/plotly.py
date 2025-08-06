@@ -148,7 +148,7 @@ class PngRenderer(ImageRenderer):
     mime type: 'image/png'
     """
 
-    def __init__(self, width=None, height=None, scale=None, engine="auto"):
+    def __init__(self, width=None, height=None, scale=None, engine=None):
         super(PngRenderer, self).__init__(
             mime_type="image/png",
             b64_encode=True,
@@ -170,7 +170,7 @@ class SvgRenderer(ImageRenderer):
     mime type: 'image/svg+xml'
     """
 
-    def __init__(self, width=None, height=None, scale=None, engine="auto"):
+    def __init__(self, width=None, height=None, scale=None, engine=None):
         super(SvgRenderer, self).__init__(
             mime_type="image/svg+xml",
             b64_encode=False,
@@ -192,7 +192,7 @@ class JpegRenderer(ImageRenderer):
     mime type: 'image/jpeg'
     """
 
-    def __init__(self, width=None, height=None, scale=None, engine="auto"):
+    def __init__(self, width=None, height=None, scale=None, engine=None):
         super(JpegRenderer, self).__init__(
             mime_type="image/jpeg",
             b64_encode=True,
@@ -213,7 +213,7 @@ class PdfRenderer(ImageRenderer):
     mime type: 'application/pdf'
     """
 
-    def __init__(self, width=None, height=None, scale=None, engine="auto"):
+    def __init__(self, width=None, height=None, scale=None, engine=None):
         super(PdfRenderer, self).__init__(
             mime_type="application/pdf",
             b64_encode=True,
