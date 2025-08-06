@@ -57,7 +57,7 @@ In **Plotly.py 6.3 and later**, the base map layer is created from the following
 - [UN data](https://geoportal.un.org/arcgis/sharing/rest/content/items/d7caaff3ef4b4f7c82689b7c4694ad92/data) for country borders, coastlines, and land layers.
 - Natural Earth data for oceans, lakes, rivers, and subunit layers.
 
-In **earlier versions of Plotly.py**, the base map layer is based on Natural Earth data only. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to defacto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
+In **earlier versions of Plotly.py**, the base map layer is based on Natural Earth data only. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to de facto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
 
 Various lines and area fills can be shown or hidden, and their color and line-widths specified. In the [default `plotly` template](/python/templates/), a map frame and physical features such as a coastal outline and filled land areas are shown, at a small-scale 1:110m resolution:
 
