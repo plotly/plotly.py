@@ -51,7 +51,7 @@ Geo maps are outline-based maps. If your figure is created with a `px.scatter_ge
 
 ### Physical Base Maps
 
-Plotly Geo maps have a built-in base map layer composed of "physical" and "cultural" (i.e. administrative border) data.
+Plotly Geo maps have a built-in base map layer composed of *physical* and *cultural* (i.e. administrative border) data.
 
 In **Plotly.py 6.3 and later**, the base map layer is created from the following sources:
 - [UN data](https://geoportal.un.org/arcgis/sharing/rest/content/items/d7caaff3ef4b4f7c82689b7c4694ad92/data) for country borders, coastlines, and land layers.
