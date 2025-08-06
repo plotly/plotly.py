@@ -112,7 +112,7 @@ In addition to physical base map features, a "cultural" base map is included whi
 
 In **Plotly.py 6.3 and later**, this base map is created from [UN data](https://geoportal.un.org/arcgis/sharing/rest/content/items/d7caaff3ef4b4f7c82689b7c4694ad92/data).
 
-In **earlier versions of Plotly.py**, this base map is based on Natural Earth data. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to defacto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
+In **earlier versions of Plotly.py**, this base map is based on Natural Earth data. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to de facto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
 
 **To create a map with your own cultural features** please refer to our [choropleth documentation](/python/choropleth-maps/).
 
