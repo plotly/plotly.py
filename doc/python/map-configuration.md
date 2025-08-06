@@ -54,8 +54,8 @@ Geo maps are outline-based maps. If your figure is created with a `px.scatter_ge
 Plotly Geo maps have a built-in base map layer composed of *physical* and *cultural* (i.e. administrative border) data.
 
 In **Plotly.py 6.3 and later**, the base map layer is created from the following sources:
-- [UN data](https://geoportal.un.org/arcgis/sharing/rest/content/items/d7caaff3ef4b4f7c82689b7c4694ad92/data) for country borders, coastlines, and land layers.
-- Natural Earth data for oceans, lakes, rivers, and subunit layers.
+- [UN data](https://geoportal.un.org/arcgis/sharing/rest/content/items/d7caaff3ef4b4f7c82689b7c4694ad92/data) for country borders, coastlines, land, and oceans layers.
+- Natural Earth data for lakes, rivers, and subunits layers.
 
 In **earlier versions of Plotly.py**, the base map layer is based on Natural Earth data only. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to de facto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
 
