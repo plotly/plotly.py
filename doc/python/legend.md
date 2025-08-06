@@ -258,7 +258,7 @@ fig.show()
 
 *New in 6.3*
 
-By default, a legend can expand to fill up to half of the layout area height for a horizontal legend and the full height for a vertical legend. You can change this by specifying a `maxheight` for the legend. In the following plot with many legend items, we set `maxheight` to a ratio of 0.10, giving the plot more space.
+By default, a legend can expand to fill up to half of the layout area height for a horizontal legend and the full height for a vertical legend. You can change this by specifying a `maxheight` for the legend. `maxheight` is interpreted as a ratio if it is 1 or less, and as an exact pixel value if it is greater than 1. In the following plot with many legend items, we set `maxheight` to a ratio of 0.10, giving the plot more space.
 
 ```python
 import plotly.express as px
