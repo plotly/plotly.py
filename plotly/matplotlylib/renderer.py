@@ -199,10 +199,16 @@ class PlotlyRenderer(Renderer):
             self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
         # set defaults in axes
         xaxis = go.layout.XAxis(
-            anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside"
+            anchor="y{0}".format(self.axis_ct),
+            zeroline=False,
+            ticks="inside",
+            linecolor=_export_color(ax.spines["bottom"].get_edgecolor()),
         )
         yaxis = go.layout.YAxis(
-            anchor="x{0}".format(self.axis_ct), zeroline=False, ticks="inside"
+            anchor="x{0}".format(self.axis_ct),
+            zeroline=False,
+            ticks="inside",
+            linecolor=_export_color(ax.spines["left"].get_edgecolor()),
         )
         # update defaults with things set in mpl
         mpl_xaxis, mpl_yaxis = mpltools.prep_xy_axis(
