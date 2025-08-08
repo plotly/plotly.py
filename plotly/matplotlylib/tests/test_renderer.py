@@ -84,3 +84,13 @@ def test_multiple_traces_native_legend():
     assert plotly_fig.data[0].mode == "lines"
     assert plotly_fig.data[1].mode == "markers"
     assert plotly_fig.data[2].mode == "lines+markers"
+
+
+def test_axis_linecolor_defaults_to_black():
+    fig, ax = plt.subplots()
+    ax.plot([0, 1], [0, 1])
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert plotly_fig.layout.xaxis.linecolor == "black"
+    assert plotly_fig.layout.yaxis.linecolor == "black"
