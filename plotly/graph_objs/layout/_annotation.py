@@ -690,9 +690,10 @@ class Annotation(_BaseLayoutHierarchyType):
     def text(self):
         """
         Sets the text associated with this annotation. Plotly uses a
-        subset of HTML tags to do things like newline (<br>), bold
-        (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>).
-        Tags <em>, <sup>, <sub>, <s>, <u> <span> are also supported.
+        subset of HTML tags to do things like newline (`<br>`), bold
+        (`<b></b>`), italics (`<i></i>`), hyperlinks (`<a
+        href='...'></a>`). Tags `<em>`, `<sup>`, `<sub>`, `<s>`, `<u>`,
+        and `<span>` are also supported.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -1205,9 +1206,10 @@ class Annotation(_BaseLayoutHierarchyType):
         text
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
-            (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
-            <span> are also supported.
+            (`<br>`), bold (`<b></b>`), italics (`<i></i>`),
+            hyperlinks (`<a href='...'></a>`). Tags `<em>`,
+            `<sup>`, `<sub>`, `<s>`, `<u>`, and `<span>` are also
+            supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.
@@ -1542,9 +1544,10 @@ class Annotation(_BaseLayoutHierarchyType):
         text
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
-            (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
-            <span> are also supported.
+            (`<br>`), bold (`<b></b>`), italics (`<i></i>`),
+            hyperlinks (`<a href='...'></a>`). Tags `<em>`,
+            `<sup>`, `<sub>`, `<s>`, `<u>`, and `<span>` are also
+            supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.
