@@ -513,8 +513,10 @@ def prep_ticks(ax, index, ax_type, props):
 
     if formatter == "LogFormatterMathtext":
         axis_dict["exponentformat"] = "e"
-    elif formatter == "FuncFormatter" and props["axes"][index]["tickformat"] is not None:
-        to_remove = ["dtick" "tickmode"]
+    elif (
+        formatter == "FuncFormatter" and props["axes"][index]["tickformat"] is not None
+    ):
+        to_remove = ["dticktickmode"]
         for key in to_remove:
             if key in axis_dict:
                 axis_dict.pop(key)
