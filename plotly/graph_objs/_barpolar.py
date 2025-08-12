@@ -260,7 +260,7 @@ class Barpolar(_BaseTraceType):
         Additionally, every attributes that can be specified per-point
         (the ones that are `arrayOk: true`) are available.  Anything
         contained in tag `<extra>` is displayed in the secondary box,
-        for example "<extra>{fullData.name}</extra>". To hide the
+        for example `<extra>%{fullData.name}</extra>`. To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
@@ -1086,8 +1086,9 @@ class Barpolar(_BaseTraceType):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1368,8 +1369,9 @@ class Barpolar(_BaseTraceType):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
