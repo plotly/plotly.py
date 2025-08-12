@@ -2034,7 +2034,7 @@ class InfoArrayValidator(BaseValidator):
 """.format(el_desc=el_desc)
 
             if self.dimensions in ("1-2", 2):
-                item_validator.plotly_name = "{name}[i][j]".format(
+                item_validator.plotly_name = "{name}\\[i\\]\\[j\\]".format(
                     name=self.plotly_name
                 )
 
