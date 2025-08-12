@@ -254,8 +254,8 @@ class Parcats(_BaseTraceType):
         template string has access to variables `count`, `probability`,
         `category`, `categorycount`, `colorcount` and `bandcolorcount`.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
         `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
@@ -626,7 +626,7 @@ class Parcats(_BaseTraceType):
             `probability`, `category`, `categorycount`,
             `colorcount` and `bandcolorcount`. Anything contained
             in tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         labelfont
@@ -809,7 +809,7 @@ class Parcats(_BaseTraceType):
             `probability`, `category`, `categorycount`,
             `colorcount` and `bandcolorcount`. Anything contained
             in tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         labelfont
