@@ -154,10 +154,16 @@ class PlotlyRenderer(Renderer):
         self.axis_ct += 1
         # set defaults in axes
         xaxis = go.layout.XAxis(
-            anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside", linecolor="black"
+            anchor="y{0}".format(self.axis_ct),
+            zeroline=False,
+            ticks="inside",
+            linecolor="black",
         )
         yaxis = go.layout.YAxis(
-            anchor="x{0}".format(self.axis_ct), zeroline=False, ticks="inside", linecolor="black"
+            anchor="x{0}".format(self.axis_ct),
+            zeroline=False,
+            ticks="inside",
+            linecolor="black",
         )
         # update defaults with things set in mpl
         mpl_xaxis, mpl_yaxis = mpltools.prep_xy_axis(

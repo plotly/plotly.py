@@ -86,6 +86,7 @@ def test_multiple_traces_native_legend():
     assert plotly_fig.data[2].mode == "lines+markers"
 
 
+
 def test_axis_linecolor_defaults_to_black():
     fig, ax = plt.subplots()
     ax.plot([0, 1], [0, 1])
