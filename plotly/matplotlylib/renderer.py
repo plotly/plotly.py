@@ -300,7 +300,7 @@ class PlotlyRenderer(Renderer):
         )  # TODO ditto
         if len(bar["x"]) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
-            (self.plotly_fig.add_trace(bar),)
+            self.plotly_fig.add_trace(bar)
             if bar_gap is not None:
                 self.plotly_fig["layout"]["bargap"] = bar_gap
         else:
@@ -498,7 +498,7 @@ class PlotlyRenderer(Renderer):
                 marked_line["x"] = mpltools.mpl_dates_to_datestrings(
                     marked_line["x"], formatter
                 )
-            (self.plotly_fig.add_trace(marked_line),)
+            self.plotly_fig.add_trace(marked_line)
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
             # dealing with legend graphical elements
