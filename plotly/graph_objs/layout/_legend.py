@@ -22,6 +22,7 @@ class Legend(_BaseLayoutHierarchyType):
         "itemdoubleclick",
         "itemsizing",
         "itemwidth",
+        "maxheight",
         "orientation",
         "title",
         "tracegroupgap",
@@ -309,6 +310,32 @@ class Legend(_BaseLayoutHierarchyType):
         self["itemwidth"] = val
 
     @property
+    def maxheight(self):
+        """
+        Sets the max height (in px) of the legend, or max height ratio
+        (reference height * ratio) if less than or equal to 1. Default
+        value is: 0.5 for horizontal legends; 1 for vertical legends.
+        The minimum allowed height is 30px. For a ratio of 0.5, the
+        legend will take up to 50% of the reference height before
+        displaying a scrollbar. The reference height is the full layout
+        height with the following exception: vertically oriented
+        legends with a `yref` of `"paper", located to the side of the
+        plot. In this case, the reference height is the plot height.
+
+        The 'maxheight' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["maxheight"]
+
+    @maxheight.setter
+    def maxheight(self, val):
+        self["maxheight"] = val
+
+    @property
     def orientation(self):
         """
         Sets the orientation of the legend.
@@ -545,7 +572,7 @@ class Legend(_BaseLayoutHierarchyType):
     @property
     def yanchor(self):
         """
-        Sets the legend's vertical position anchor This anchor binds
+        Sets the legend's vertical position anchor. This anchor binds
         the `y` position to the "top", "middle" or "bottom" of the
         legend. Value "auto" anchors legends at their bottom for `y`
         values less than or equal to 1/3, anchors legends to at their
@@ -636,6 +663,18 @@ class Legend(_BaseLayoutHierarchyType):
         itemwidth
             Sets the width (in px) of the legend item symbols (the
             part other than the title.text).
+        maxheight
+            Sets the max height (in px) of the legend, or max
+            height ratio (reference height * ratio) if less than or
+            equal to 1. Default value is: 0.5 for horizontal
+            legends; 1 for vertical legends. The minimum allowed
+            height is 30px. For a ratio of 0.5, the legend will
+            take up to 50% of the reference height before
+            displaying a scrollbar. The reference height is the
+            full layout height with the following exception:
+            vertically oriented legends with a `yref` of `"paper",
+            located to the side of the plot. In this case, the
+            reference height is the plot height.
         orientation
             Sets the orientation of the legend.
         title
@@ -694,7 +733,7 @@ class Legend(_BaseLayoutHierarchyType):
             if `yref` is "container" and between "-2" and 3 if
             `yref` is "paper".
         yanchor
-            Sets the legend's vertical position anchor This anchor
+            Sets the legend's vertical position anchor. This anchor
             binds the `y` position to the "top", "middle" or
             "bottom" of the legend. Value "auto" anchors legends at
             their bottom for `y` values less than or equal to 1/3,
@@ -723,6 +762,7 @@ class Legend(_BaseLayoutHierarchyType):
         itemdoubleclick=None,
         itemsizing=None,
         itemwidth=None,
+        maxheight=None,
         orientation=None,
         title=None,
         tracegroupgap=None,
@@ -792,6 +832,18 @@ class Legend(_BaseLayoutHierarchyType):
         itemwidth
             Sets the width (in px) of the legend item symbols (the
             part other than the title.text).
+        maxheight
+            Sets the max height (in px) of the legend, or max
+            height ratio (reference height * ratio) if less than or
+            equal to 1. Default value is: 0.5 for horizontal
+            legends; 1 for vertical legends. The minimum allowed
+            height is 30px. For a ratio of 0.5, the legend will
+            take up to 50% of the reference height before
+            displaying a scrollbar. The reference height is the
+            full layout height with the following exception:
+            vertically oriented legends with a `yref` of `"paper",
+            located to the side of the plot. In this case, the
+            reference height is the plot height.
         orientation
             Sets the orientation of the legend.
         title
@@ -850,7 +902,7 @@ class Legend(_BaseLayoutHierarchyType):
             if `yref` is "container" and between "-2" and 3 if
             `yref` is "paper".
         yanchor
-            Sets the legend's vertical position anchor This anchor
+            Sets the legend's vertical position anchor. This anchor
             binds the `y` position to the "top", "middle" or
             "bottom" of the legend. Value "auto" anchors legends at
             their bottom for `y` values less than or equal to 1/3,
@@ -899,6 +951,7 @@ an instance of :class:`plotly.graph_objs.layout.Legend`""")
         self._set_property("itemdoubleclick", arg, itemdoubleclick)
         self._set_property("itemsizing", arg, itemsizing)
         self._set_property("itemwidth", arg, itemwidth)
+        self._set_property("maxheight", arg, maxheight)
         self._set_property("orientation", arg, orientation)
         self._set_property("title", arg, title)
         self._set_property("tracegroupgap", arg, tracegroupgap)
