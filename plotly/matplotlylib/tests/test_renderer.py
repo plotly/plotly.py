@@ -2,6 +2,7 @@ import plotly.tools as tls
 
 from . import plt
 
+
 def test_lines_markers_legend_plot():
     x = [0, 1]
     y = [0, 1]
