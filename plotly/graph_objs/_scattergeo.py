@@ -3,6 +3,7 @@
 
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
+import warnings
 
 
 class Scattergeo(_BaseTraceType):
@@ -1803,6 +1804,15 @@ class Scattergeo(_BaseTraceType):
 The first argument to the plotly.graph_objs.Scattergeo
 constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Scattergeo`""")
+
+        if locationmode == "country names" and kwargs.get("_validate"):
+            warnings.warn(
+                "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
+                "Country names in existing plots may not work in the new version. "
+                "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
+                DeprecationWarning,
+                stacklevel=5,
+            )
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
