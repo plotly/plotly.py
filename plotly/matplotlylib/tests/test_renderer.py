@@ -86,6 +86,7 @@ def test_multiple_traces_native_legend():
     assert plotly_fig.data[2].mode == "lines+markers"
 
 
+
 def test_lines_markers_legend_plot():
     x = [0, 1]
     y = [0, 1]
