@@ -2,16 +2,17 @@ import plotly.tools as tls
 
 from . import plt
 
+
 def test_axis_mirror_with_spines_and_ticks():
     """Test that mirror=True when both spines and ticks are visible on both sides."""
     fig, ax = plt.subplots()
     ax.plot([0, 1], [0, 1])
 
     # Show all spines
-    ax.spines['top'].set_visible(True)
-    ax.spines['bottom'].set_visible(True)
-    ax.spines['left'].set_visible(True)
-    ax.spines['right'].set_visible(True)
+    ax.spines["top"].set_visible(True)
+    ax.spines["bottom"].set_visible(True)
+    ax.spines["left"].set_visible(True)
+    ax.spines["right"].set_visible(True)
 
     # Show ticks on all sides
     ax.tick_params(top=True, bottom=True, left=True, right=True)
@@ -28,8 +29,8 @@ def test_axis_mirror_with_ticks_only():
     ax.plot([0, 1], [0, 1])
 
     # Hide opposite spines
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
 
     # Show ticks on all sides
     ax.tick_params(top=True, bottom=True, left=True, right=True)
@@ -61,13 +62,13 @@ def test_axis_mirror_mixed_configurations():
     ax.plot([0, 1], [0, 1])
 
     # X-axis: spines and ticks on both sides (mirror="ticks")
-    ax.spines['top'].set_visible(True)
-    ax.spines['bottom'].set_visible(True)
+    ax.spines["top"].set_visible(True)
+    ax.spines["bottom"].set_visible(True)
     ax.tick_params(top=True, bottom=True)
 
     # Y-axis: spine only on one side (mirror=False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['left'].set_visible(True)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_visible(True)
     ax.tick_params(left=True, right=True)
 
     plotly_fig = tls.mpl_to_plotly(fig)
