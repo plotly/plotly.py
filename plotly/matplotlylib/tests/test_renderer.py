@@ -44,7 +44,10 @@ def test_legend_disabled_when_no_matplotlib_legend():
 
     # Should not have showlegend explicitly set to True
     # (Plotly's default behavior when no legend elements exist)
-    assert not hasattr(plotly_fig.layout, 'showlegend') or plotly_fig.layout.showlegend != True
+    assert (
+        not hasattr(plotly_fig.layout, "showlegend")
+        or plotly_fig.layout.showlegend != True
+    )
 
 
 def test_legend_disabled_when_matplotlib_legend_not_visible():
@@ -57,15 +60,18 @@ def test_legend_disabled_when_matplotlib_legend_not_visible():
     plotly_fig = tls.mpl_to_plotly(fig)
 
     # Should not enable legend when matplotlib legend is hidden
-    assert not hasattr(plotly_fig.layout, 'showlegend') or plotly_fig.layout.showlegend != True
+    assert (
+        not hasattr(plotly_fig.layout, "showlegend")
+        or plotly_fig.layout.showlegend != True
+    )
 
 
 def test_multiple_traces_native_legend():
     """Test native legend works with multiple traces of different types."""
     fig, ax = plt.subplots()
-    ax.plot([0, 1, 2], [0, 1, 0], '-', label="Line")
-    ax.plot([0, 1, 2], [1, 0, 1], 'o', label="Markers")
-    ax.plot([0, 1, 2], [0.5, 0.5, 0.5], 's-', label="Line+Markers")
+    ax.plot([0, 1, 2], [0, 1, 0], "-", label="Line")
+    ax.plot([0, 1, 2], [1, 0, 1], "o", label="Markers")
+    ax.plot([0, 1, 2], [0.5, 0.5, 0.5], "s-", label="Line+Markers")
     ax.legend()
 
     plotly_fig = tls.mpl_to_plotly(fig)

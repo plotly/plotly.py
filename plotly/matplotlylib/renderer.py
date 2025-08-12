@@ -213,7 +213,9 @@ class PlotlyRenderer(Renderer):
         self._processing_legend = True
         self._legend_visible = props.get("visible", True)
         if self._legend_visible:
-            self.msg += "    Enabling native plotly legend (matplotlib legend is visible)\n"
+            self.msg += (
+                "    Enabling native plotly legend (matplotlib legend is visible)\n"
+            )
             self.plotly_fig["layout"]["showlegend"] = True
         else:
             self.msg += "    Not enabling legend (matplotlib legend is not visible)\n"
@@ -329,7 +331,7 @@ class PlotlyRenderer(Renderer):
         )  # TODO ditto
         if len(bar["x"]) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
-            (self.plotly_fig.add_trace(bar),)
+            self.plotly_fig.add_trace(bar)
             if bar_gap is not None:
                 self.plotly_fig["layout"]["bargap"] = bar_gap
         else:
@@ -450,7 +452,7 @@ class PlotlyRenderer(Renderer):
                 marked_line["x"] = mpltools.mpl_dates_to_datestrings(
                     marked_line["x"], formatter
                 )
-            (self.plotly_fig.add_trace(marked_line),)
+            self.plotly_fig.add_trace(marked_line)
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
             # dealing with legend graphical elements
@@ -621,8 +623,14 @@ class PlotlyRenderer(Renderer):
         else:  # just a regular text annotation...
             self.msg += "      Text object is a normal annotation\n"
             # Skip creating annotations for legend text when using native legend
-            if self._processing_legend and self._legend_visible and props["coordinates"] == "axes":
-                self.msg += "        Skipping legend text annotation (using native legend)\n"
+            if (
+                self._processing_legend
+                and self._legend_visible
+                and props["coordinates"] == "axes"
+            ):
+                self.msg += (
+                    "        Skipping legend text annotation (using native legend)\n"
+                )
                 return
             if props["coordinates"] != "data":
                 self.msg += "        Text object isn't linked to 'data' coordinates\n"
