@@ -2,6 +2,7 @@ import plotly.tools as tls
 
 from . import plt
 
+
 def test_axis_linecolor_defaults_to_black():
     fig, ax = plt.subplots()
     ax.plot([0, 1], [0, 1])

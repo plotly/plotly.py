@@ -153,10 +153,16 @@ class PlotlyRenderer(Renderer):
         self.axis_ct += 1
         # set defaults in axes
         xaxis = go.layout.XAxis(
-            anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside", linecolor="black"
+            anchor="y{0}".format(self.axis_ct),
+            zeroline=False,
+            ticks="inside",
+            linecolor="black",
         )
         yaxis = go.layout.YAxis(
-            anchor="x{0}".format(self.axis_ct), zeroline=False, ticks="inside", linecolor="black"
+            anchor="x{0}".format(self.axis_ct),
+            zeroline=False,
+            ticks="inside",
+            linecolor="black",
         )
         # update defaults with things set in mpl
         mpl_xaxis, mpl_yaxis = mpltools.prep_xy_axis(
@@ -299,7 +305,7 @@ class PlotlyRenderer(Renderer):
         )  # TODO ditto
         if len(bar["x"]) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
-            (self.plotly_fig.add_trace(bar),)
+            self.plotly_fig.add_trace(bar)
             if bar_gap is not None:
                 self.plotly_fig["layout"]["bargap"] = bar_gap
         else:
@@ -497,7 +503,7 @@ class PlotlyRenderer(Renderer):
                 marked_line["x"] = mpltools.mpl_dates_to_datestrings(
                     marked_line["x"], formatter
                 )
-            (self.plotly_fig.add_trace(marked_line),)
+            self.plotly_fig.add_trace(marked_line)
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
             # dealing with legend graphical elements
