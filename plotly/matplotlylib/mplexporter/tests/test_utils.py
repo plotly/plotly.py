@@ -1,6 +1,6 @@
 from numpy.testing import assert_allclose, assert_equal
-from . import plt
 from .. import utils
+import matplotlib.pyplot as plt
 
 
 def test_path_data():
