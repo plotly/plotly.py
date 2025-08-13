@@ -448,6 +448,7 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
+import numpy as np
 
 x_data = ['Carmelo Anthony', 'Dwyane Wade',
           'Deron Williams', 'Brook Lopez',
