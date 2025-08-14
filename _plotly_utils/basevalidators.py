@@ -716,15 +716,15 @@ class NumberValidator(BaseValidator):
 
     def description(self):
         desc = """\
-    The '{plotly_name}' property is a number and may be specified as:""".format(
+        The '{plotly_name}' property is a number and may be specified as:""".format(
             plotly_name=self.plotly_name
         )
 
         if not self.has_min_max:
             desc = (
                 desc
-                + """
-      - An int or float"""
+                + """\n
+        - An int or float"""
             )
 
         else:
@@ -1983,8 +1983,7 @@ class InfoArrayValidator(BaseValidator):
             # ### Case 1 ###
             if self.dimensions in (1, "1-2"):
                 upto = " up to" if self.free_length and self.dimensions == 1 else ""
-                desc += """
-
+                desc += """\n
     * a list or tuple of{upto} {N} elements where:\
 """.format(upto=upto, N=len(self.item_validators))
 
@@ -1992,8 +1991,8 @@ class InfoArrayValidator(BaseValidator):
                     el_desc = item_validator.description().strip()
                     desc = (
                         desc
-                        + """
-({i}) {el_desc}""".format(i=i, el_desc=el_desc)
+                        + """\n
+        ({i}) {el_desc}""".format(i=i, el_desc=el_desc)
                     )
 
             # ### Case 2 ###
@@ -2006,15 +2005,15 @@ class InfoArrayValidator(BaseValidator):
                 for i, item_validator in enumerate(self.item_validators):
                     # Update name for 2d
                     orig_name = item_validator.plotly_name
-                    item_validator.plotly_name = "{name}[i][{i}]".format(
+                    item_validator.plotly_name = "{name}\\[i\\]\\[{i}\\]".format(
                         name=self.plotly_name, i=i
                     )
 
                     el_desc = item_validator.description().strip()
                     desc = (
                         desc
-                        + """
-({i}) {el_desc}""".format(i=i, el_desc=el_desc)
+                        + """\n
+        ({i}) {el_desc}""".format(i=i, el_desc=el_desc)
                     )
                     item_validator.plotly_name = orig_name
         else:
@@ -2039,9 +2038,9 @@ class InfoArrayValidator(BaseValidator):
                 )
 
                 el_desc = item_validator.description().strip()
-                desc += """
-    * a 2D list where:
-      {el_desc}
+                desc += """\n
+    * a 2D list where:\n    
+        {el_desc}
 """.format(el_desc=el_desc)
 
             item_validator.plotly_name = orig_name
