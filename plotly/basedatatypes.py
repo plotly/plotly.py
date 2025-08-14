@@ -348,7 +348,7 @@ col: None, int or 'all'
     Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
     the specified column(s). If both row and col are None, addresses the
     first subplot if subplots exist, or the only plot. By default is "all".
-annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
     it is interpreted as describing an annotation. The annotation is
     placed relative to the shape based on annotation_position (see
     below) unless its x or y value has been specified for the annotation
@@ -451,7 +451,7 @@ class BaseFigure(object):
             If the `data` property is a BaseFigure instance, or a dict that
             contains a 'layout' key, then this property is ignored.
         frames
-            A list or tuple of `plotly.graph_objs.Frame` objects (or dicts
+            A list or tuple of `plotly.graph_objects.Frame` objects (or dicts
             that can be coerced into Frame objects)
 
             If the `data` property is a BaseFigure instance, or a dict that
@@ -880,7 +880,7 @@ class BaseFigure(object):
 
         Examples
         --------
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> fig = go.Figure(data=[{'y': [1, 2, 3]}])
         >>> fig.update(data=[{'y': [4, 5, 6]}]) # doctest: +ELLIPSIS
         Figure(...)
@@ -1664,7 +1664,7 @@ is of type {subplot_type}.""".format(
             example, the following command would be used to update the 'x'
             property of the first trace to the list [1, 2, 3]
 
-            >>> import plotly.graph_objects as go
+            >>> import plotly.graph_objs as go
             >>> fig = go.Figure(go.Scatter(x=[2, 4, 6]))
             >>> fig.plotly_restyle({'x': [[1, 2, 3]]}, 0)
 
@@ -2031,8 +2031,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         ----------
         trace : BaseTraceType or dict
             Either:
-              - An instances of a trace classe from the plotly.graph_objs
-                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - An instances of a trace classe from the plotly.graph_objects
+                package (e.g plotly.graph_objects.Scatter, plotly.graph_objects.Bar)
               - or a dicts where:
 
                   - The 'type' property specifies the trace type (e.g.
@@ -2075,7 +2075,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         --------
 
         >>> from plotly import subplots
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
 
         Add two Scatter traces to a figure
 
@@ -2145,8 +2145,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             A list of trace specifications to be added.
             Trace specifications may be either:
 
-              - Instances of trace classes from the plotly.graph_objs
-                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - Instances of trace classes from the plotly.graph_objects
+                package (e.g plotly.graph_objects.Scatter, plotly.graph_objects.Bar)
               - Dicts where:
 
                   - The 'type' property specifies the trace type (e.g.
@@ -2185,7 +2185,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         --------
 
         >>> from plotly import subplots
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
 
         Add two Scatter traces to a figure
 
@@ -2315,7 +2315,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         --------
 
         >>> from plotly import tools
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> # stack two subplots vertically
         >>> fig = tools.make_subplots(rows=2)
 
@@ -2424,18 +2424,18 @@ Please use the add_trace method with the row and col parameters.
         -------
         subplot
             * None: if subplot is empty
-            * plotly.graph_objs.layout.Scene: if subplot type is 'scene'
-            * plotly.graph_objs.layout.Polar: if subplot type is 'polar'
-            * plotly.graph_objs.layout.Ternary: if subplot type is 'ternary'
-            * plotly.graph_objs.layout.Mapbox: if subplot type is 'ternary'
+            * plotly.graph_objects.layout.Scene: if subplot type is 'scene'
+            * plotly.graph_objects.layout.Polar: if subplot type is 'polar'
+            * plotly.graph_objects.layout.Ternary: if subplot type is 'ternary'
+            * plotly.graph_objects.layout.Mapbox: if subplot type is 'ternary'
             * SubplotDomain namedtuple with `x` and `y` fields:
               if subplot type is 'domain'.
                 - x: length 2 list of the subplot start and stop width
                 - y: length 2 list of the subplot start and stop height
             * SubplotXY namedtuple with `xaxis` and `yaxis` fields:
               if subplot type is 'xy'.
-                - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
-                - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
+                - xaxis: plotly.graph_objects.layout.XAxis instance for subplot
+                - yaxis: plotly.graph_objects.layout.YAxis instance for subplot
         """
         from plotly._subplots import _get_grid_subplot
 
@@ -2554,7 +2554,7 @@ Please use the add_trace method with the row and col parameters.
 
         Returns
         -------
-        plotly.graph_objs.Layout
+        plotly.graph_objects.Layout
         """
         return self["layout"]
 
@@ -2859,7 +2859,7 @@ Invalid property path '{key_path_str}' for layout
 
         Returns
         -------
-        tuple[plotly.graph_objs.Frame]
+        tuple[plotly.graph_objects.Frame]
         """
         return self["frames"]
 
@@ -3020,7 +3020,7 @@ Invalid property path '{key_path_str}' for layout
         For example, suppose we have a figure widget, `fig`, with a single
         trace.
 
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> fig = go.FigureWidget(data=[{'y': [3, 4, 2]}])
 
         If we want to update the xaxis range, the yaxis range, and the
@@ -3176,7 +3176,7 @@ Invalid property path '{key_path_str}' for layout
         --------
         Suppose we have a figure widget, `fig`, with a single trace.
 
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> fig = go.FigureWidget(data=[{'y': [3, 4, 2]}])
 
         1) Animate a change in the xaxis and yaxis ranges using default
@@ -3474,7 +3474,7 @@ Invalid property path '{key_path_str}' for layout
 
         Returns
         -------
-        plotly.graph_objects.Figure or dict
+        plotly.graph_objs.Figure or dict
             The full figure
         """
         import plotly.io as pio
@@ -5126,7 +5126,7 @@ class BasePlotlyType(object):
                     prop_str = "properties"
                     invalid_str = repr(invalid_props)
 
-                module_root = "plotly.graph_objs."
+                module_root = "plotly.graph_objects."
                 if self._parent_path_str:
                     full_obj_name = (
                         module_root
@@ -5597,7 +5597,7 @@ class BasePlotlyType(object):
         Register callback that prints out the range extents of the xaxis and
         yaxis whenever either either of them changes.
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> fig = go.Figure(go.Scatter(x=[1, 2], y=[1, 0]))
         >>> fig.layout.on_change(
         ...   lambda obj, xrange, yrange: print("%s-%s" % (xrange, yrange)),
@@ -6057,7 +6057,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         points in this trace
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6083,7 +6083,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -6119,7 +6119,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         or more points in this trace.
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6145,7 +6145,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -6181,7 +6181,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         points in this trace.
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6207,7 +6207,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -6242,7 +6242,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         points in this trace.
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6268,7 +6268,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points
         >>> points = Points()
 
@@ -6311,7 +6311,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         in this trace using doubleclick.
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6336,7 +6336,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points
         >>> points = Points()
 

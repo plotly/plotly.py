@@ -1,7 +1,7 @@
 import plotly.colors as clrs
 from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 from plotly.validator_cache import ValidatorCache
 
 # Optional imports, may be None for users that only use our core functionality.
@@ -79,10 +79,10 @@ def create_annotated_heatmap(
         depending on the heatmap's colorscale.
     :param (bool) showscale: Display colorscale. Default = False
     :param (bool) reversescale: Reverse colorscale. Default = False
-    :param kwargs: kwargs passed through plotly.graph_objs.Heatmap.
+    :param kwargs: kwargs passed through plotly.graph_objects.Heatmap.
         These kwargs describe other attributes about the annotated Heatmap
         trace such as the colorscale. For more information on valid kwargs
-        call help(plotly.graph_objs.Heatmap)
+        call help(plotly.graph_objects.Heatmap)
 
     Example 1: Simple annotated heatmap with default configuration
 
@@ -144,7 +144,7 @@ def create_annotated_heatmap(
 
     data = [trace]
 
-    return graph_objs.Figure(data=data, layout=layout)
+    return graph_objects.Figure(data=data, layout=layout)
 
 
 def to_rgb_color_list(color_str, default):
@@ -283,7 +283,7 @@ class _AnnotatedHeatmap(object):
 
     def make_annotations(self):
         """
-        Get annotations for each cell of the heatmap with graph_objs.Annotation
+        Get annotations for each cell of the heatmap with graph_objects.Annotation
 
         :rtype (list[dict]) annotations: list of annotations for each cell of
             the heatmap
@@ -294,7 +294,7 @@ class _AnnotatedHeatmap(object):
             for m, val in enumerate(row):
                 font_color = min_text_color if val < self.zmid else max_text_color
                 annotations.append(
-                    graph_objs.layout.Annotation(
+                    graph_objects.layout.Annotation(
                         text=str(self.annotation_text[n][m]),
                         x=self.x[m],
                         y=self.y[n],

@@ -2,7 +2,7 @@ from numbers import Number
 
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 from plotly.subplots import make_subplots
 
 pd = optional_imports.get_module("pandas")
@@ -47,7 +47,7 @@ def make_half_violin(x, y, fillcolor="#1f77b4", linecolor="rgb(0, 0, 0)"):
         for i in range(len(x))
     ]
 
-    return graph_objs.Scatter(
+    return graph_objects.Scatter(
         x=x,
         y=y,
         mode="lines",
@@ -55,7 +55,7 @@ def make_half_violin(x, y, fillcolor="#1f77b4", linecolor="rgb(0, 0, 0)"):
         text=text,
         fill="tonextx",
         fillcolor=fillcolor,
-        line=graph_objs.scatter.Line(width=0.5, color=linecolor, shape="spline"),
+        line=graph_objects.scatter.Line(width=0.5, color=linecolor, shape="spline"),
         hoverinfo="text",
         opacity=0.5,
     )
@@ -65,10 +65,10 @@ def make_violin_rugplot(vals, pdf_max, distance, color="#1f77b4"):
     """
     Returns a rugplot fig for a violin plot.
     """
-    return graph_objs.Scatter(
+    return graph_objects.Scatter(
         y=vals,
         x=[-pdf_max - distance] * len(vals),
-        marker=graph_objs.scatter.Marker(color=color, symbol="line-ew-open"),
+        marker=graph_objects.scatter.Marker(color=color, symbol="line-ew-open"),
         mode="markers",
         name="",
         showlegend=False,
@@ -80,12 +80,12 @@ def make_non_outlier_interval(d1, d2):
     """
     Returns the scatterplot fig of most of a violin plot.
     """
-    return graph_objs.Scatter(
+    return graph_objects.Scatter(
         x=[0, 0],
         y=[d1, d2],
         name="",
         mode="lines",
-        line=graph_objs.scatter.Line(width=1.5, color="rgb(0,0,0)"),
+        line=graph_objects.scatter.Line(width=1.5, color="rgb(0,0,0)"),
     )
 
 
@@ -93,7 +93,7 @@ def make_quartiles(q1, q3):
     """
     Makes the upper and lower quartiles for a violin plot.
     """
-    return graph_objs.Scatter(
+    return graph_objects.Scatter(
         x=[0, 0],
         y=[q1, q3],
         text=[
@@ -101,7 +101,7 @@ def make_quartiles(q1, q3):
             "upper-quartile: " + "{:0.2f}".format(q3),
         ],
         mode="lines",
-        line=graph_objs.scatter.Line(width=4, color="rgb(0,0,0)"),
+        line=graph_objects.scatter.Line(width=4, color="rgb(0,0,0)"),
         hoverinfo="text",
     )
 
@@ -110,7 +110,7 @@ def make_median(q2):
     """
     Formats the 'median' hovertext for a violin plot.
     """
-    return graph_objs.Scatter(
+    return graph_objects.Scatter(
         x=[0],
         y=[q2],
         text=["median: " + "{:0.2f}".format(q2)],
@@ -124,7 +124,7 @@ def make_XAxis(xaxis_title, xaxis_range):
     """
     Makes the x-axis for a violin plot.
     """
-    xaxis = graph_objs.layout.XAxis(
+    xaxis = graph_objects.layout.XAxis(
         title=xaxis_title,
         range=xaxis_range,
         showgrid=False,
@@ -141,7 +141,7 @@ def make_YAxis(yaxis_title):
     """
     Makes the y-axis for a violin plot.
     """
-    yaxis = graph_objs.layout.YAxis(
+    yaxis = graph_objects.layout.YAxis(
         title=yaxis_title,
         showticklabels=True,
         autorange=True,
@@ -330,7 +330,7 @@ def violin_colorscale(
             {"xaxis{}".format(k + 1): make_XAxis(group_name[k], plot_xrange)}
         )
     # add colorbar to plot
-    trace_dummy = graph_objs.Scatter(
+    trace_dummy = graph_objects.Scatter(
         x=[0],
         y=[0],
         mode="markers",
@@ -443,8 +443,8 @@ def create_violin(
     title="Violin and Rug Plot",
 ):
     """
-    **deprecated**, use instead the plotly.graph_objects trace
-    :class:`plotly.graph_objects.Violin`.
+    **deprecated**, use instead the plotly.graph_objs trace
+    :class:`plotly.graph_objs.Violin`.
 
     :param (list|array) data: accepts either a list of numerical values,
         a list of dictionaries all with identical keys and at least one
@@ -482,7 +482,7 @@ def create_violin(
     Example 1: Single Violin Plot
 
     >>> from plotly.figure_factory import create_violin
-    >>> import plotly.graph_objs as graph_objects
+    >>> import plotly.graph_objects as graph_objs
 
     >>> import numpy as np
     >>> from scipy import stats
@@ -499,7 +499,7 @@ def create_violin(
     Example 2: Multiple Violin Plots with Qualitative Coloring
 
     >>> from plotly.figure_factory import create_violin
-    >>> import plotly.graph_objs as graph_objects
+    >>> import plotly.graph_objects as graph_objs
 
     >>> import numpy as np
     >>> import pandas as pd
@@ -526,7 +526,7 @@ def create_violin(
     Example 3: Violin Plots with Colorscale
 
     >>> from plotly.figure_factory import create_violin
-    >>> import plotly.graph_objs as graph_objects
+    >>> import plotly.graph_objects as graph_objs
 
     >>> import numpy as np
     >>> import pandas as pd
@@ -604,10 +604,10 @@ def create_violin(
             data, fillcolor=valid_colors[0], rugplot=rugplot
         )
 
-        layout = graph_objs.Layout(
+        layout = graph_objects.Layout(
             title=title,
             autosize=False,
-            font=graph_objs.layout.Font(size=11),
+            font=graph_objects.layout.Font(size=11),
             height=height,
             showlegend=False,
             width=width,
@@ -617,7 +617,7 @@ def create_violin(
         )
         layout["yaxis"].update(dict(showline=False, showticklabels=False, ticks=""))
 
-        fig = graph_objs.Figure(data=plot_data, layout=layout)
+        fig = graph_objects.Figure(data=plot_data, layout=layout)
 
         return fig
 

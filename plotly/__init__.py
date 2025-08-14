@@ -10,7 +10,7 @@ Subpackages:
 
 - plotly: all functionality that requires access to Plotly's servers
 
-- graph_objs: objects for designing figures and visualizing data
+- graph_objects: objects for designing figures and visualizing data
 
 - matplotlylib: tools to convert matplotlib figures
 
@@ -36,7 +36,7 @@ version = __version__
 
 if TYPE_CHECKING:
     from plotly import (
-        graph_objs,
+        graph_objects,
         tools,
         utils,
         offline,
@@ -47,7 +47,7 @@ if TYPE_CHECKING:
     from plotly.version import __version__
 
     __all__ = [
-        "graph_objs",
+        "graph_objects",
         "tools",
         "utils",
         "offline",
@@ -65,8 +65,8 @@ else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [
-            ".graph_objs",
             ".graph_objects",
+            ".graph_objs",
             ".tools",
             ".utils",
             ".offline",

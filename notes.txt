@@ -1,36 +1,17 @@
+1.  Replace (almost) all imports of `plotly.graph_objs` with `plotly.graph_objects` in `tests/**/*.py`.
+    -   Done.
+2.  Move plotly/graph_objects to ./tmp; rename plotly/graph_objs and plotly/graph_objects; move ./tmp to plotly/graph_objs.
+3.  Replace all instances of `graph_objs` with `graph_objects` in `bin/codegen/*.py`.
+    -   `sed -I .bak -e 's/graph_objs/graph_objects/g' bin/codegen/*.py`
+    -   `rm bin/codegen/*.bak`
+4.  Delete `plotly.graph_objects` and run `make generate` to regenerate.
+5.  Try `python -m pytest tests/test_import.py`.
+
+----------------------------------------
+
 -   Can we get rid of `plotly/api` entirely?
 -   Can we eliminate `plotly/conftest.py` and fix breaking tests?
 -   Why the distinction between `graph_objects` and `graph_objs`?
     -   Historical reasons, but `graph_objs` is widely used.
     -   Generate code into `graph_objects` and have `graph_objs` point at it
         instead of vice versa.
--   Switch focus for now to the main documentation in `./doc`.
-
--   Ran this to create a `.ipynb` file:
-
-```
-jupytext --to ipynb --execute --output pages/strip-charts.ipynb doc/python/strip-charts.md
-```
-
--   Loading the notebook like this, the charts don't show up:
-
-```
-jupyter notebook pages/strip-charts.ipynb
-```
-
--   Had to add this in a cell at the top:
-
-```
-import plotly.io as pio
-pio.renderers.default = "notebook"
-```
-
--   `mkdocs build` produces many (many) lines like this that did *not* appear
-    before `mkdocs-jupyter` was added to `mkdocs.yml`:
-
-```
-[WARNING] Div at /var/folders/w2/l51fjbjd25n9zbwkz9fw9jp00000gn/T/tmpgvlxh1sq line 3 column 1 unclosed at /var/folders/w2/l51fjbjd25n9zbwkz9fw9jp00000gn/T/tmpgvlxh1sq line 6 column 1, closing implicitly.
-```
-
--   But with the `plotly.io` line, the `.ipynb` file is converted to usable HTML.
-    -   Still clearly originated as a notebook, but the chart shows up.

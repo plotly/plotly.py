@@ -2371,26 +2371,26 @@ class CompoundValidator(BaseValidator):
     @staticmethod
     def compute_graph_obj_module_str(data_class_str, parent_name):
         if parent_name == "frame" and data_class_str in ["Data", "Layout"]:
-            # Special case. There are no graph_objs.frame.Data or
-            # graph_objs.frame.Layout classes. These are remapped to
-            # graph_objs.Data and graph_objs.Layout
+            # Special case. There are no graph_objects.frame.Data or
+            # graph_objects.frame.Layout classes. These are remapped to
+            # graph_objects.Data and graph_objects.Layout
 
             parent_parts = parent_name.split(".")
-            module_str = ".".join(["plotly.graph_objs"] + parent_parts[1:])
+            module_str = ".".join(["plotly.graph_objects"] + parent_parts[1:])
         elif parent_name == "layout.template" and data_class_str == "Layout":
             # Remap template's layout to regular layout
-            module_str = "plotly.graph_objs"
+            module_str = "plotly.graph_objects"
         elif "layout.template.data" in parent_name:
             # Remap template's traces to regular traces
             parent_name = parent_name.replace("layout.template.data.", "")
             if parent_name:
-                module_str = "plotly.graph_objs." + parent_name
+                module_str = "plotly.graph_objects." + parent_name
             else:
-                module_str = "plotly.graph_objs"
+                module_str = "plotly.graph_objects"
         elif parent_name:
-            module_str = "plotly.graph_objs." + parent_name
+            module_str = "plotly.graph_objects." + parent_name
         else:
-            module_str = "plotly.graph_objs"
+            module_str = "plotly.graph_objects"
 
         return module_str
 
@@ -2581,7 +2581,7 @@ class BaseDataValidator(BaseValidator):
     def get_trace_class(self, trace_name):
         # Import trace classes
         if trace_name not in self._class_map:
-            trace_module = import_module("plotly.graph_objs")
+            trace_module = import_module("plotly.graph_objects")
             trace_class_name = self.class_strs_map[trace_name]
             self._class_map[trace_name] = getattr(trace_module, trace_class_name)
 
@@ -2592,7 +2592,7 @@ class BaseDataValidator(BaseValidator):
 
         # Import Histogram2dcontour, this is the deprecated name of the
         # Histogram2dContour trace.
-        from plotly.graph_objs import Histogram2dcontour
+        from plotly.graph_objects import Histogram2dcontour
 
         if v is None:
             v = []

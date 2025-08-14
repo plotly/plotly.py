@@ -1,6 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import CompoundValidator
-from plotly.graph_objs.scatter import Marker # FIXME
+from plotly.graph_objects.scatter import Marker
 
 
 # Fixtures

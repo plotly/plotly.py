@@ -430,7 +430,7 @@ def create_hexbin_mapbox(
         toner'`, `'stamen-watercolor'`.
     title : str
         The figure title.
-    template : str or dict or plotly.graph_objects.layout.Template instance
+    template : str or dict or plotly.graph_objs.layout.Template instance
         The figure template name (must be a key in plotly.io.templates) or
         definition.
     width : int (default `None`)
@@ -448,7 +448,7 @@ def create_hexbin_mapbox(
 
     Returns
     -------
-    plotly.graph_objects.Figure
+    plotly.graph_objs.Figure
     """
     args = build_dataframe(args=locals(), constructor=None)
     native_namespace = nw.get_native_namespace(args["data_frame"])

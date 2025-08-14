@@ -11,7 +11,7 @@ from plotly import optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.exceptions import PlotlyError
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 pd.options.mode.chained_assignment = None
 

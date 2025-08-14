@@ -1,6 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import CompoundArrayValidator
-from plotly.graph_objs.layout import Image # FIXME
+from plotly.graph_objects.layout import Image
 
 
 # Fixtures

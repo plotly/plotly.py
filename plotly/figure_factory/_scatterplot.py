@@ -1,7 +1,7 @@
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 from plotly.subplots import make_subplots
 
 pd = optional_imports.get_module("pandas")
@@ -156,18 +156,18 @@ def scatterplot(dataframe, headers, diag, size, height, width, title, **kwargs):
     for listy in dataframe:
         for listx in dataframe:
             if (listx == listy) and (diag == "histogram"):
-                trace = graph_objs.Histogram(x=listx, showlegend=False)
+                trace = graph_objects.Histogram(x=listx, showlegend=False)
             elif (listx == listy) and (diag == "box"):
-                trace = graph_objs.Box(y=listx, name=None, showlegend=False)
+                trace = graph_objects.Box(y=listx, name=None, showlegend=False)
             else:
                 if "marker" in kwargs:
                     kwargs["marker"]["size"] = size
-                    trace = graph_objs.Scatter(
+                    trace = graph_objects.Scatter(
                         x=listx, y=listy, mode="markers", showlegend=False, **kwargs
                     )
                     trace_list.append(trace)
                 else:
-                    trace = graph_objs.Scatter(
+                    trace = graph_objects.Scatter(
                         x=listx,
                         y=listy,
                         mode="markers",
@@ -250,11 +250,11 @@ def scatterplot_dict(
                 # Generate trace with VISIBLE icon
                 if legend_param == 1:
                     if (listx == listy) and (diag == "histogram"):
-                        trace = graph_objs.Histogram(
+                        trace = graph_objects.Histogram(
                             x=new_listx, marker=dict(color=theme[name]), showlegend=True
                         )
                     elif (listx == listy) and (diag == "box"):
-                        trace = graph_objs.Box(
+                        trace = graph_objects.Box(
                             y=new_listx,
                             name=None,
                             marker=dict(color=theme[name]),
@@ -264,7 +264,7 @@ def scatterplot_dict(
                         if "marker" in kwargs:
                             kwargs["marker"]["size"] = size
                             kwargs["marker"]["color"] = theme[name]
-                            trace = graph_objs.Scatter(
+                            trace = graph_objects.Scatter(
                                 x=new_listx,
                                 y=new_listy,
                                 mode="markers",
@@ -273,7 +273,7 @@ def scatterplot_dict(
                                 **kwargs,
                             )
                         else:
-                            trace = graph_objs.Scatter(
+                            trace = graph_objects.Scatter(
                                 x=new_listx,
                                 y=new_listy,
                                 mode="markers",
@@ -285,13 +285,13 @@ def scatterplot_dict(
                 # Generate trace with INVISIBLE icon
                 else:
                     if (listx == listy) and (diag == "histogram"):
-                        trace = graph_objs.Histogram(
+                        trace = graph_objects.Histogram(
                             x=new_listx,
                             marker=dict(color=theme[name]),
                             showlegend=False,
                         )
                     elif (listx == listy) and (diag == "box"):
-                        trace = graph_objs.Box(
+                        trace = graph_objects.Box(
                             y=new_listx,
                             name=None,
                             marker=dict(color=theme[name]),
@@ -301,7 +301,7 @@ def scatterplot_dict(
                         if "marker" in kwargs:
                             kwargs["marker"]["size"] = size
                             kwargs["marker"]["color"] = theme[name]
-                            trace = graph_objs.Scatter(
+                            trace = graph_objects.Scatter(
                                 x=new_listx,
                                 y=new_listy,
                                 mode="markers",
@@ -310,7 +310,7 @@ def scatterplot_dict(
                                 **kwargs,
                             )
                         else:
-                            trace = graph_objs.Scatter(
+                            trace = graph_objects.Scatter(
                                 x=new_listx,
                                 y=new_listy,
                                 mode="markers",
@@ -419,13 +419,13 @@ def scatterplot_theme(
                     # Generate trace with VISIBLE icon
                     if legend_param == 1:
                         if (listx == listy) and (diag == "histogram"):
-                            trace = graph_objs.Histogram(
+                            trace = graph_objects.Histogram(
                                 x=new_listx,
                                 marker=dict(color=theme[c_indx]),
                                 showlegend=True,
                             )
                         elif (listx == listy) and (diag == "box"):
-                            trace = graph_objs.Box(
+                            trace = graph_objects.Box(
                                 y=new_listx,
                                 name=None,
                                 marker=dict(color=theme[c_indx]),
@@ -435,7 +435,7 @@ def scatterplot_theme(
                             if "marker" in kwargs:
                                 kwargs["marker"]["size"] = size
                                 kwargs["marker"]["color"] = theme[c_indx]
-                                trace = graph_objs.Scatter(
+                                trace = graph_objects.Scatter(
                                     x=new_listx,
                                     y=new_listy,
                                     mode="markers",
@@ -444,7 +444,7 @@ def scatterplot_theme(
                                     **kwargs,
                                 )
                             else:
-                                trace = graph_objs.Scatter(
+                                trace = graph_objects.Scatter(
                                     x=new_listx,
                                     y=new_listy,
                                     mode="markers",
@@ -456,13 +456,13 @@ def scatterplot_theme(
                     # Generate trace with INVISIBLE icon
                     else:
                         if (listx == listy) and (diag == "histogram"):
-                            trace = graph_objs.Histogram(
+                            trace = graph_objects.Histogram(
                                 x=new_listx,
                                 marker=dict(color=theme[c_indx]),
                                 showlegend=False,
                             )
                         elif (listx == listy) and (diag == "box"):
-                            trace = graph_objs.Box(
+                            trace = graph_objects.Box(
                                 y=new_listx,
                                 name=None,
                                 marker=dict(color=theme[c_indx]),
@@ -472,7 +472,7 @@ def scatterplot_theme(
                             if "marker" in kwargs:
                                 kwargs["marker"]["size"] = size
                                 kwargs["marker"]["color"] = theme[c_indx]
-                                trace = graph_objs.Scatter(
+                                trace = graph_objects.Scatter(
                                     x=new_listx,
                                     y=new_listy,
                                     mode="markers",
@@ -481,7 +481,7 @@ def scatterplot_theme(
                                     **kwargs,
                                 )
                             else:
-                                trace = graph_objs.Scatter(
+                                trace = graph_objects.Scatter(
                                     x=new_listx,
                                     y=new_listy,
                                     mode="markers",
@@ -576,13 +576,13 @@ def scatterplot_theme(
                         # Generate trace with VISIBLE icon
                         if legend_param == 1:
                             if (listx == listy) and (diag == "histogram"):
-                                trace = graph_objs.Histogram(
+                                trace = graph_objects.Histogram(
                                     x=new_listx,
                                     marker=dict(color=theme[c_indx]),
                                     showlegend=True,
                                 )
                             elif (listx == listy) and (diag == "box"):
-                                trace = graph_objs.Box(
+                                trace = graph_objects.Box(
                                     y=new_listx,
                                     name=None,
                                     marker=dict(color=theme[c_indx]),
@@ -592,7 +592,7 @@ def scatterplot_theme(
                                 if "marker" in kwargs:
                                     kwargs["marker"]["size"] = size
                                     (kwargs["marker"]["color"]) = theme[c_indx]
-                                    trace = graph_objs.Scatter(
+                                    trace = graph_objects.Scatter(
                                         x=new_listx,
                                         y=new_listy,
                                         mode="markers",
@@ -601,7 +601,7 @@ def scatterplot_theme(
                                         **kwargs,
                                     )
                                 else:
-                                    trace = graph_objs.Scatter(
+                                    trace = graph_objects.Scatter(
                                         x=new_listx,
                                         y=new_listy,
                                         mode="markers",
@@ -613,13 +613,13 @@ def scatterplot_theme(
                         # Generate trace with INVISIBLE icon
                         else:
                             if (listx == listy) and (diag == "histogram"):
-                                trace = graph_objs.Histogram(
+                                trace = graph_objects.Histogram(
                                     x=new_listx,
                                     marker=dict(color=theme[c_indx]),
                                     showlegend=False,
                                 )
                             elif (listx == listy) and (diag == "box"):
-                                trace = graph_objs.Box(
+                                trace = graph_objects.Box(
                                     y=new_listx,
                                     name=None,
                                     marker=dict(color=theme[c_indx]),
@@ -629,7 +629,7 @@ def scatterplot_theme(
                                 if "marker" in kwargs:
                                     kwargs["marker"]["size"] = size
                                     (kwargs["marker"]["color"]) = theme[c_indx]
-                                    trace = graph_objs.Scatter(
+                                    trace = graph_objects.Scatter(
                                         x=new_listx,
                                         y=new_listy,
                                         mode="markers",
@@ -638,7 +638,7 @@ def scatterplot_theme(
                                         **kwargs,
                                     )
                                 else:
-                                    trace = graph_objs.Scatter(
+                                    trace = graph_objects.Scatter(
                                         x=new_listx,
                                         y=new_listy,
                                         mode="markers",
@@ -718,11 +718,11 @@ def scatterplot_theme(
                     # Generate trace with VISIBLE icon
                     if legend_param == 1:
                         if (listx == listy) and (diag == "histogram"):
-                            trace = graph_objs.Histogram(
+                            trace = graph_objects.Histogram(
                                 x=listx, marker=dict(color=theme[0]), showlegend=False
                             )
                         elif (listx == listy) and (diag == "box"):
-                            trace = graph_objs.Box(
+                            trace = graph_objects.Box(
                                 y=listx, marker=dict(color=theme[0]), showlegend=False
                             )
                         else:
@@ -731,7 +731,7 @@ def scatterplot_theme(
                                 kwargs["marker"]["color"] = index_vals
                                 kwargs["marker"]["colorscale"] = color
                                 kwargs["marker"]["showscale"] = True
-                                trace = graph_objs.Scatter(
+                                trace = graph_objects.Scatter(
                                     x=listx,
                                     y=listy,
                                     mode="markers",
@@ -739,7 +739,7 @@ def scatterplot_theme(
                                     **kwargs,
                                 )
                             else:
-                                trace = graph_objs.Scatter(
+                                trace = graph_objects.Scatter(
                                     x=listx,
                                     y=listy,
                                     mode="markers",
@@ -755,11 +755,11 @@ def scatterplot_theme(
                     # Generate trace with INVISIBLE icon
                     else:
                         if (listx == listy) and (diag == "histogram"):
-                            trace = graph_objs.Histogram(
+                            trace = graph_objects.Histogram(
                                 x=listx, marker=dict(color=theme[0]), showlegend=False
                             )
                         elif (listx == listy) and (diag == "box"):
-                            trace = graph_objs.Box(
+                            trace = graph_objects.Box(
                                 y=listx, marker=dict(color=theme[0]), showlegend=False
                             )
                         else:
@@ -768,7 +768,7 @@ def scatterplot_theme(
                                 kwargs["marker"]["color"] = index_vals
                                 kwargs["marker"]["colorscale"] = color
                                 kwargs["marker"]["showscale"] = False
-                                trace = graph_objs.Scatter(
+                                trace = graph_objects.Scatter(
                                     x=listx,
                                     y=listy,
                                     mode="markers",
@@ -776,7 +776,7 @@ def scatterplot_theme(
                                     **kwargs,
                                 )
                             else:
-                                trace = graph_objs.Scatter(
+                                trace = graph_objects.Scatter(
                                     x=listx,
                                     y=listy,
                                     mode="markers",
@@ -852,8 +852,8 @@ def create_scatterplotmatrix(
     """
     Returns data for a scatterplot matrix;
     **deprecated**,
-    use instead the plotly.graph_objects trace
-    :class:`plotly.graph_objects.Splom`.
+    use instead the plotly.graph_objs trace
+    :class:`plotly.graph_objs.Splom`.
 
     :param (array) df: array of the data with column headers
     :param (str) index: name of the index column in data array
@@ -892,7 +892,7 @@ def create_scatterplotmatrix(
 
     Example 1: Vanilla Scatterplot Matrix
 
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
     >>> from plotly.figure_factory import create_scatterplotmatrix
 
     >>> import numpy as np
@@ -909,7 +909,7 @@ def create_scatterplotmatrix(
 
     Example 2: Indexing a Column
 
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
     >>> from plotly.figure_factory import create_scatterplotmatrix
 
     >>> import numpy as np
@@ -930,7 +930,7 @@ def create_scatterplotmatrix(
 
     Example 3: Styling the Diagonal Subplots
 
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
     >>> from plotly.figure_factory import create_scatterplotmatrix
 
     >>> import numpy as np
@@ -952,7 +952,7 @@ def create_scatterplotmatrix(
 
     Example 4: Use a Theme to Style the Subplots
 
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
     >>> from plotly.figure_factory import create_scatterplotmatrix
 
     >>> import numpy as np
@@ -971,7 +971,7 @@ def create_scatterplotmatrix(
 
     Example 5: Example 4 with Interval Factoring
 
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
     >>> from plotly.figure_factory import create_scatterplotmatrix
 
     >>> import numpy as np
@@ -993,7 +993,7 @@ def create_scatterplotmatrix(
 
     Example 6: Using the colormap as a Dictionary
 
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
     >>> from plotly.figure_factory import create_scatterplotmatrix
 
     >>> import numpy as np
