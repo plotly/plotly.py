@@ -341,7 +341,7 @@ def test_width_height_priority():
     """Test width/height priority: arguments > layout.width/height > defaults."""
 
     # Test case 1: Arguments override layout
-    fig = create_figure(layout_width=800, layout_height=600)
+    fig = create_figure(width=800, height=600)
     svg_bytes = pio.to_image(fig, format="svg", width=1000, height=900)
     width, height = parse_svg_dimensions(svg_bytes)
     assert width == 1000 and height == 900, (
@@ -349,7 +349,7 @@ def test_width_height_priority():
     )
 
     # Test case 2: Layout dimensions used when no arguments
-    fig = create_figure(layout_width=800, layout_height=600)
+    fig = create_figure(width=800, height=600)
     svg_bytes = pio.to_image(fig, format="svg")
     width, height = parse_svg_dimensions(svg_bytes)
     assert width == 800 and height == 600, (
@@ -357,7 +357,7 @@ def test_width_height_priority():
     )
 
     # Test case 3: Partial override (only width argument)
-    fig = create_figure(layout_width=800, layout_height=600)
+    fig = create_figure(width=800, height=600)
     svg_bytes = pio.to_image(fig, format="svg", width=1200)
     width, height = parse_svg_dimensions(svg_bytes)
     assert width == 1200 and height == 600, (
