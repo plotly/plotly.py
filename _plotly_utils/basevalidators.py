@@ -545,8 +545,8 @@ class EnumeratedValidator(BaseValidator):
 
             desc = (
                 desc
-                + """
-      - One of the following enumeration values:
+                + """\n
+    - One of the following enumeration values:\n
 {enum_vals_str}""".format(enum_vals_str=enum_vals_str)
             )
 
@@ -557,20 +557,21 @@ class EnumeratedValidator(BaseValidator):
                     initial_indent=" " * 12,
                     subsequent_indent=" " * 12,
                     break_on_hyphens=False,
+                    break_long_words=False,
                 )
             )
 
             desc = (
                 desc
-                + """
-      - A string that matches one of the following regular expressions:
+                + """\n
+    - A string that matches one of the following regular expressions:\n
 {enum_regexs_str}""".format(enum_regexs_str=enum_regexs_str)
             )
 
         if self.array_ok:
             desc = (
                 desc
-                + """
+                + """\n
       - A tuple, list, or one-dimensional numpy array of the above"""
             )
 
@@ -2007,7 +2008,7 @@ class InfoArrayValidator(BaseValidator):
                 for i, item_validator in enumerate(self.item_validators):
                     # Update name for 2d
                     orig_name = item_validator.plotly_name
-                    item_validator.plotly_name = "{name}\\[i\\]\\[{i}\\]".format(
+                    item_validator.plotly_name = "{name}\\\\[i\\\\]\\\\[{i}\\\\]".format(
                         name=self.plotly_name, i=i
                     )
 
@@ -2035,7 +2036,7 @@ class InfoArrayValidator(BaseValidator):
 """.format(el_desc=el_desc)
 
             if self.dimensions in ("1-2", 2):
-                item_validator.plotly_name = "{name}\\[i\\]\\[j\\]".format(
+                item_validator.plotly_name = "{name}\\\\[i\\\\]\\\\[j\\\\]".format(
                     name=self.plotly_name
                 )
 
