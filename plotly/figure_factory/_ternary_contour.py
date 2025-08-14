@@ -382,7 +382,7 @@ def _contour_trace(
     ncontours=None,
     colorscale="Electric",
     linecolor="rgb(150,150,150)",
-    interp_mode="llr",
+    interp_mode="ilr",
     coloring=None,
     v_min=0,
     v_max=1,
