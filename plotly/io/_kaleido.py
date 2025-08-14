@@ -376,17 +376,22 @@ To downgrade to Kaleido v0, run:
             if defaults.mathjax:
                 kopts["mathjax"] = defaults.mathjax
 
-
             width = (
                 width
                 or fig_dict.get("layout", {}).get("width")
-                or fig_dict.get("layout", {}).get("template", {}).get("layout", {}).get("width")
+                or fig_dict.get("layout", {})
+                .get("template", {})
+                .get("layout", {})
+                .get("width")
                 or defaults.default_width
             )
             height = (
                 height
                 or fig_dict.get("layout", {}).get("height")
-                or fig_dict.get("layout", {}).get("template", {}).get("layout", {}).get("height")
+                or fig_dict.get("layout", {})
+                .get("template", {})
+                .get("layout", {})
+                .get("height")
                 or defaults.default_height
             )
 
