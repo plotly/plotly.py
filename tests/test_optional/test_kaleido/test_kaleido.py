@@ -321,22 +321,19 @@ def create_figure(width=None, height=None):
     """Create a simple figure with optional layout dimensions."""
     layout = {}
     if width:
-        layout['width'] = width
+        layout["width"] = width
     if height:
-        layout['height'] = height
+        layout["height"] = height
 
-    return go.Figure(
-        data=[go.Scatter(x=[1, 2, 3], y=[1, 2, 3])],
-        layout=layout
-    )
+    return go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[1, 2, 3])], layout=layout)
 
 
 def parse_svg_dimensions(svg_bytes):
     """Parse width and height from SVG bytes."""
-    svg_str = svg_bytes.decode('utf-8')
+    svg_str = svg_bytes.decode("utf-8")
     root = ET.fromstring(svg_str)
-    width = root.get('width')
-    height = root.get('height')
+    width = root.get("width")
+    height = root.get("height")
     return int(width) if width else None, int(height) if height else None
 
 
@@ -345,24 +342,32 @@ def test_width_height_priority():
 
     # Test case 1: Arguments override layout
     fig = create_figure(layout_width=800, layout_height=600)
-    svg_bytes = pio.to_image(fig, format='svg', width=1000, height=900)
+    svg_bytes = pio.to_image(fig, format="svg", width=1000, height=900)
     width, height = parse_svg_dimensions(svg_bytes)
-    assert width == 1000 and height == 900, "Arguments should override layout dimensions"
+    assert width == 1000 and height == 900, (
+        "Arguments should override layout dimensions"
+    )
 
     # Test case 2: Layout dimensions used when no arguments
     fig = create_figure(layout_width=800, layout_height=600)
-    svg_bytes = pio.to_image(fig, format='svg')
+    svg_bytes = pio.to_image(fig, format="svg")
     width, height = parse_svg_dimensions(svg_bytes)
-    assert width == 800 and height == 600, "Layout dimensions should be used when no arguments provided"
+    assert width == 800 and height == 600, (
+        "Layout dimensions should be used when no arguments provided"
+    )
 
     # Test case 3: Partial override (only width argument)
     fig = create_figure(layout_width=800, layout_height=600)
-    svg_bytes = pio.to_image(fig, format='svg', width=1200)
+    svg_bytes = pio.to_image(fig, format="svg", width=1200)
     width, height = parse_svg_dimensions(svg_bytes)
-    assert width == 1200 and height == 600, "Width argument should override layout, height should use layout"
+    assert width == 1200 and height == 600, (
+        "Width argument should override layout, height should use layout"
+    )
 
     # Test case 4: Defaults used when no layout or arguments
     fig = create_figure()
-    svg_bytes = pio.to_image(fig, format='svg')
+    svg_bytes = pio.to_image(fig, format="svg")
     width, height = parse_svg_dimensions(svg_bytes)
-    assert width is not None and height is not None, "Default dimensions should be used when no layout or arguments"
+    assert width is not None and height is not None, (
+        "Default dimensions should be used when no layout or arguments"
+    )
