@@ -523,7 +523,10 @@ class EnumeratedValidator(BaseValidator):
         enum_regexs = []
         for v, regex in zip(self.values, self.val_regexs):
             if regex is not None:
-                enum_regexs.append(regex.pattern)
+                # enum_regexs.append(regex.pattern)
+                enum_pattern = regex.pattern
+                escaped_pattern = enum_pattern.replace("[", r"\[").replace("]", r"\]")
+                enum_regexs.append(escaped_pattern)
             else:
                 enum_vals.append(v)
         desc = """\
