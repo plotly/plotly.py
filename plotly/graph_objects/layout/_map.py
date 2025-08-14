@@ -28,7 +28,8 @@ class Map(_BaseLayoutHierarchyType):
         from North (map.bearing).
 
         The 'bearing' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -146,7 +147,8 @@ class Map(_BaseLayoutHierarchyType):
         perpendicular to the surface of the map) (map.pitch).
 
         The 'pitch' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -215,7 +217,8 @@ class Map(_BaseLayoutHierarchyType):
         Sets the zoom level of the map (map.zoom).
 
         The 'zoom' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

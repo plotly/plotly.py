@@ -450,7 +450,8 @@ class XAxis(_BaseLayoutHierarchyType):
         "multicategory" axes.
 
         The 'dividerwidth' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -465,19 +466,21 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def domain(self):
         """
-            Sets the domain of this axis (in plot fraction).
+        Sets the domain of this axis (in plot fraction).
 
-            The 'domain' property is an info array that may be specified as:
+        The 'domain' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'domain[0]' property is a number and may be specified as:
-              - An int or float in the interval [0, 1]
-        (1) The 'domain[1]' property is a number and may be specified as:
-              - An int or float in the interval [0, 1]
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'domain[0]' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+            (1) The 'domain[1]' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        list
         """
         return self["domain"]
 
@@ -658,20 +661,22 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def insiderange(self):
         """
-            Could be used to set the desired inside range of this axis
-            (excluding the labels) when `ticklabelposition` of the anchored
-            axis has "inside". Not implemented for axes with `type` "log".
-            This would be ignored when `range` is provided.
+        Could be used to set the desired inside range of this axis
+        (excluding the labels) when `ticklabelposition` of the anchored
+        axis has "inside". Not implemented for axes with `type` "log".
+        This would be ignored when `range` is provided.
 
-            The 'insiderange' property is an info array that may be specified as:
+        The 'insiderange' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'insiderange[0]' property accepts values of any type
-        (1) The 'insiderange[1]' property accepts values of any type
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'insiderange[0]' property accepts values of any type
+
+            (1) The 'insiderange[1]' property accepts values of any type
+
+        Returns
+        -------
+        list
         """
         return self["insiderange"]
 
@@ -961,26 +966,28 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-            Sets the range of this axis. If the axis `type` is "log", then
-            you must take the log of your desired range (e.g. to set the
-            range from 1 to 100, set the range from 0 to 2). If the axis
-            `type` is "date", it should be date strings, like date data,
-            though Date objects and unix milliseconds will be accepted and
-            converted to strings. If the axis `type` is "category", it
-            should be numbers, using the scale where each category is
-            assigned a serial number from zero in the order it appears.
-            Leaving either or both elements `null` impacts the default
-            `autorange`.
+        Sets the range of this axis. If the axis `type` is "log", then
+        you must take the log of your desired range (e.g. to set the
+        range from 1 to 100, set the range from 0 to 2). If the axis
+        `type` is "date", it should be date strings, like date data,
+        though Date objects and unix milliseconds will be accepted and
+        converted to strings. If the axis `type` is "category", it
+        should be numbers, using the scale where each category is
+        assigned a serial number from zero in the order it appears.
+        Leaving either or both elements `null` impacts the default
+        `autorange`.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property accepts values of any type
-        (1) The 'range[1]' property accepts values of any type
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'range[0]' property accepts values of any type
+
+            (1) The 'range[1]' property accepts values of any type
+
+        Returns
+        -------
+        list
         """
         return self["range"]
 
@@ -1450,7 +1457,8 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the zero line.
 
         The 'spikethickness' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -2184,7 +2192,8 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the zero line.
 
         The 'zerolinewidth' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

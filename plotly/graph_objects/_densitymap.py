@@ -555,7 +555,8 @@ class Densitymap(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -1005,7 +1006,8 @@ class Densitymap(_BaseTraceType):
         same units as in `z` and if set, `zmin` must be set as well.
 
         The 'zmax' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -1025,7 +1027,8 @@ class Densitymap(_BaseTraceType):
         same units as in `z`. Has no effect when `zauto` is `false`.
 
         The 'zmid' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -1044,7 +1047,8 @@ class Densitymap(_BaseTraceType):
         same units as in `z` and if set, `zmax` must be set as well.
 
         The 'zmin' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

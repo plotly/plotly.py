@@ -67,7 +67,8 @@ class Fillgradient(_BaseTraceHierarchyType):
         respective axis. Ignored if orientation is "radial".
 
         The 'start' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -90,7 +91,8 @@ class Fillgradient(_BaseTraceHierarchyType):
         respective axis. Ignored if orientation is "radial".
 
         The 'stop' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

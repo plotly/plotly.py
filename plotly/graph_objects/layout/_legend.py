@@ -486,7 +486,8 @@ class Legend(_BaseLayoutHierarchyType):
         3 if `xref` is "paper".
 
         The 'x' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -556,7 +557,8 @@ class Legend(_BaseLayoutHierarchyType):
         is "paper".
 
         The 'y' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

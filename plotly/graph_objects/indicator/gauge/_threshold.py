@@ -54,7 +54,8 @@ class Threshold(_BaseTraceHierarchyType):
         Sets a treshold value drawn as a line.
 
         The 'value' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

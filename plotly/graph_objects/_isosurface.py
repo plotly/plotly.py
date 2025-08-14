@@ -142,7 +142,8 @@ class Isosurface(_BaseTraceType):
         same units as `value` and if set, `cmin` must be set as well.
 
         The 'cmax' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -162,7 +163,8 @@ class Isosurface(_BaseTraceType):
         same units as `value`. Has no effect when `cauto` is `false`.
 
         The 'cmid' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -181,7 +183,8 @@ class Isosurface(_BaseTraceType):
         same units as `value` and if set, `cmax` must be set as well.
 
         The 'cmin' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -573,7 +576,8 @@ class Isosurface(_BaseTraceType):
         Sets the maximum boundary for iso-surface plot.
 
         The 'isomax' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -591,7 +595,8 @@ class Isosurface(_BaseTraceType):
         Sets the minimum boundary for iso-surface plot.
 
         The 'isomin' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -679,7 +684,8 @@ class Isosurface(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

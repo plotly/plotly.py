@@ -149,7 +149,8 @@ class Pie(_BaseTraceType):
         Sets the label step. See `label0` for more info.
 
         The 'dlabel' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -460,7 +461,8 @@ class Pie(_BaseTraceType):
         step.
 
         The 'label0' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -588,7 +590,8 @@ class Pie(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

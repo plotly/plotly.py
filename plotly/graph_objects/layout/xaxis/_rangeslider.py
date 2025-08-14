@@ -105,24 +105,26 @@ class Rangeslider(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-            Sets the range of the range slider. If not set, defaults to the
-            full xaxis range. If the axis `type` is "log", then you must
-            take the log of your desired range. If the axis `type` is
-            "date", it should be date strings, like date data, though Date
-            objects and unix milliseconds will be accepted and converted to
-            strings. If the axis `type` is "category", it should be
-            numbers, using the scale where each category is assigned a
-            serial number from zero in the order it appears.
+        Sets the range of the range slider. If not set, defaults to the
+        full xaxis range. If the axis `type` is "log", then you must
+        take the log of your desired range. If the axis `type` is
+        "date", it should be date strings, like date data, though Date
+        objects and unix milliseconds will be accepted and converted to
+        strings. If the axis `type` is "category", it should be
+        numbers, using the scale where each category is assigned a
+        serial number from zero in the order it appears.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property accepts values of any type
-        (1) The 'range[1]' property accepts values of any type
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'range[0]' property accepts values of any type
+
+            (1) The 'range[1]' property accepts values of any type
+
+        Returns
+        -------
+        list
         """
         return self["range"]
 

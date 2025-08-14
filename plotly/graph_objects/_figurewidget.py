@@ -93,7 +93,7 @@ class FigureWidget(BaseFigureWidget):
 
         Examples
         --------
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> fig = go.Figure(data=[{'y': [1, 2, 3]}])
         >>> fig.update(data=[{'y': [4, 5, 6]}]) # doctest: +ELLIPSIS
         Figure(...)
@@ -276,8 +276,8 @@ class FigureWidget(BaseFigureWidget):
         ----------
         trace : BaseTraceType or dict
             Either:
-              - An instances of a trace classe from the plotly.graph_objs
-                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - An instances of a trace classe from the plotly.graph_objects
+                package (e.g plotly.graph_objects.Scatter, plotly.graph_objects.Bar)
               - or a dicts where:
 
                   - The 'type' property specifies the trace type (e.g.
@@ -320,7 +320,7 @@ class FigureWidget(BaseFigureWidget):
         --------
 
         >>> from plotly import subplots
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
 
         Add two Scatter traces to a figure
 
@@ -360,8 +360,8 @@ class FigureWidget(BaseFigureWidget):
             A list of trace specifications to be added.
             Trace specifications may be either:
 
-              - Instances of trace classes from the plotly.graph_objs
-                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - Instances of trace classes from the plotly.graph_objects
+                package (e.g plotly.graph_objects.Scatter, plotly.graph_objects.Bar)
               - Dicts where:
 
                   - The 'type' property specifies the trace type (e.g.
@@ -400,7 +400,7 @@ class FigureWidget(BaseFigureWidget):
         --------
 
         >>> from plotly import subplots
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
 
         Add two Scatter traces to a figure
 
@@ -451,7 +451,7 @@ class FigureWidget(BaseFigureWidget):
             Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+        annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
             it is interpreted as describing an annotation. The annotation is
             placed relative to the shape based on annotation_position (see
             below) unless its x or y value has been specified for the annotation
@@ -503,7 +503,7 @@ class FigureWidget(BaseFigureWidget):
             Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+        annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
             it is interpreted as describing an annotation. The annotation is
             placed relative to the shape based on annotation_position (see
             below) unless its x or y value has been specified for the annotation
@@ -558,7 +558,7 @@ class FigureWidget(BaseFigureWidget):
             Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+        annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
             it is interpreted as describing an annotation. The annotation is
             placed relative to the shape based on annotation_position (see
             below) unless its x or y value has been specified for the annotation
@@ -614,7 +614,7 @@ class FigureWidget(BaseFigureWidget):
             Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+        annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
             it is interpreted as describing an annotation. The annotation is
             placed relative to the shape based on annotation_position (see
             below) unless its x or y value has been specified for the annotation

@@ -33,20 +33,24 @@ class Projection(_BaseLayoutHierarchyType):
     @property
     def parallels(self):
         """
-            For conic projection types only. Sets the parallels (tangent,
-            secant) where the cone intersects the sphere.
+        For conic projection types only. Sets the parallels (tangent,
+        secant) where the cone intersects the sphere.
 
-            The 'parallels' property is an info array that may be specified as:
+        The 'parallels' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'parallels[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'parallels[1]' property is a number and may be specified as:
-              - An int or float
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'parallels[0]' property is a number and may be specified as:
+
+            - An int or float
+
+            (1) The 'parallels[1]' property is a number and may be specified as:
+
+            - An int or float
+
+        Returns
+        -------
+        list
         """
         return self["parallels"]
 
@@ -99,7 +103,8 @@ class Projection(_BaseLayoutHierarchyType):
         perspective projection.
 
         The 'tilt' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

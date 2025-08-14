@@ -149,7 +149,8 @@ class Cells(_BaseTraceHierarchyType):
         The height of cells.
 
         The 'height' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

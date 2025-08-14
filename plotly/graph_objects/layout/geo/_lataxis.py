@@ -24,7 +24,8 @@ class Lataxis(_BaseLayoutHierarchyType):
         Sets the graticule's longitude/latitude tick step.
 
         The 'dtick' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -103,20 +104,24 @@ class Lataxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-            Sets the range of this axis (in degrees), sets the map's
-            clipped coordinates.
+        Sets the range of this axis (in degrees), sets the map's
+        clipped coordinates.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'range[1]' property is a number and may be specified as:
-              - An int or float
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'range[0]' property is a number and may be specified as:
+
+            - An int or float
+
+            (1) The 'range[1]' property is a number and may be specified as:
+
+            - An int or float
+
+        Returns
+        -------
+        list
         """
         return self["range"]
 
@@ -148,7 +153,8 @@ class Lataxis(_BaseLayoutHierarchyType):
         Sets the graticule's starting tick longitude/latitude.
 
         The 'tick0' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

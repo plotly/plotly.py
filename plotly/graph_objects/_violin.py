@@ -517,7 +517,8 @@ class Violin(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -942,19 +943,21 @@ class Violin(_BaseTraceType):
     @property
     def span(self):
         """
-            Sets the span in data space for which the density function will
-            be computed. Has an effect only when `spanmode` is set to
-            "manual".
+        Sets the span in data space for which the density function will
+        be computed. Has an effect only when `spanmode` is set to
+        "manual".
 
-            The 'span' property is an info array that may be specified as:
+        The 'span' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'span[0]' property accepts values of any type
-        (1) The 'span[1]' property accepts values of any type
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'span[0]' property accepts values of any type
+
+            (1) The 'span[1]' property accepts values of any type
+
+        Returns
+        -------
+        list
         """
         return self["span"]
 

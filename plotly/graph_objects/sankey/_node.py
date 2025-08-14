@@ -141,9 +141,12 @@ class Node(_BaseTraceHierarchyType):
         specified.
 
         The 'groups' property is an info array that may be specified as:
+
         * a 2D list where:
-          The 'groups[i][j]' property is a number and may be specified as:
-          - An int or float
+
+            The 'groups\[i\]\[j\]' property is a number and may be specified as:
+
+            - An int or float
 
         Returns
         -------

@@ -51,7 +51,8 @@ class Y(_BaseTraceHierarchyType):
         `contours.start`
 
         The 'end' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -185,7 +186,8 @@ class Y(_BaseTraceHierarchyType):
         `contours.end`
 
         The 'start' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

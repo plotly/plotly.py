@@ -678,7 +678,8 @@ class Histogram(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

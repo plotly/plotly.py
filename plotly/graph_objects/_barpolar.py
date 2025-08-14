@@ -142,7 +142,8 @@ class Barpolar(_BaseTraceType):
         Sets the r coordinate step.
 
         The 'dr' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -162,7 +163,8 @@ class Barpolar(_BaseTraceType):
         coordinates.
 
         The 'dtheta' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -450,7 +452,8 @@ class Barpolar(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -571,7 +574,8 @@ class Barpolar(_BaseTraceType):
         "thetatunit" units).
 
         The 'offset' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns

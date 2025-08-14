@@ -59,22 +59,24 @@ class Domain(_BaseLayoutHierarchyType):
     @property
     def x(self):
         """
-            Sets the horizontal domain of this geo subplot (in plot
-            fraction). Note that geo subplots are constrained by domain. In
-            general, when `projection.scale` is set to 1. a map will fit
-            either its x or y domain, but not both.
+        Sets the horizontal domain of this geo subplot (in plot
+        fraction). Note that geo subplots are constrained by domain. In
+        general, when `projection.scale` is set to 1. a map will fit
+        either its x or y domain, but not both.
 
-            The 'x' property is an info array that may be specified as:
+        The 'x' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'x[0]' property is a number and may be specified as:
-              - An int or float in the interval [0, 1]
-        (1) The 'x[1]' property is a number and may be specified as:
-              - An int or float in the interval [0, 1]
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'x[0]' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+            (1) The 'x[1]' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        list
         """
         return self["x"]
 
@@ -85,22 +87,24 @@ class Domain(_BaseLayoutHierarchyType):
     @property
     def y(self):
         """
-            Sets the vertical domain of this geo subplot (in plot
-            fraction). Note that geo subplots are constrained by domain. In
-            general, when `projection.scale` is set to 1. a map will fit
-            either its x or y domain, but not both.
+        Sets the vertical domain of this geo subplot (in plot
+        fraction). Note that geo subplots are constrained by domain. In
+        general, when `projection.scale` is set to 1. a map will fit
+        either its x or y domain, but not both.
 
-            The 'y' property is an info array that may be specified as:
+        The 'y' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'y[0]' property is a number and may be specified as:
-              - An int or float in the interval [0, 1]
-        (1) The 'y[1]' property is a number and may be specified as:
-              - An int or float in the interval [0, 1]
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'y[0]' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+            (1) The 'y[1]' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        list
         """
         return self["y"]
 

@@ -189,22 +189,26 @@ class Polar(_BaseLayoutHierarchyType):
     @property
     def sector(self):
         """
-            Sets angular span of this polar subplot with two angles (in
-            degrees). Sector are assumed to be spanned in the
-            counterclockwise direction with 0 corresponding to rightmost
-            limit of the polar subplot.
+        Sets angular span of this polar subplot with two angles (in
+        degrees). Sector are assumed to be spanned in the
+        counterclockwise direction with 0 corresponding to rightmost
+        limit of the polar subplot.
 
-            The 'sector' property is an info array that may be specified as:
+        The 'sector' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'sector[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'sector[1]' property is a number and may be specified as:
-              - An int or float
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'sector[0]' property is a number and may be specified as:
+
+            - An int or float
+
+            (1) The 'sector[1]' property is a number and may be specified as:
+
+            - An int or float
+
+        Returns
+        -------
+        list
         """
         return self["sector"]
 

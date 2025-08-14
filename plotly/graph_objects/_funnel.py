@@ -205,7 +205,8 @@ class Funnel(_BaseTraceType):
         Sets the x coordinate step. See `x0` for more info.
 
         The 'dx' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -223,7 +224,8 @@ class Funnel(_BaseTraceType):
         Sets the y coordinate step. See `y0` for more info.
 
         The 'dy' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -558,7 +560,8 @@ class Funnel(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -680,7 +683,8 @@ class Funnel(_BaseTraceType):
         excluded and drawn in "overlay" mode instead.
 
         The 'offset' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

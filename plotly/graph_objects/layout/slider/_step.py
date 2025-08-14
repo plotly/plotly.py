@@ -22,19 +22,22 @@ class Step(_BaseLayoutHierarchyType):
     @property
     def args(self):
         """
-            Sets the arguments values to be passed to the Plotly method set
-            in `method` on slide.
+        Sets the arguments values to be passed to the Plotly method set
+        in `method` on slide.
 
-            The 'args' property is an info array that may be specified as:
+        The 'args' property is an info array that may be specified as:
 
-            * a list or tuple of up to 3 elements where:
-        (0) The 'args[0]' property accepts values of any type
-        (1) The 'args[1]' property accepts values of any type
-        (2) The 'args[2]' property accepts values of any type
+        * a list or tuple of up to 3 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'args[0]' property accepts values of any type
+
+            (1) The 'args[1]' property accepts values of any type
+
+            (2) The 'args[2]' property accepts values of any type
+
+        Returns
+        -------
+        list
         """
         return self["args"]
 

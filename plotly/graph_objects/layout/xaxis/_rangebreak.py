@@ -21,18 +21,20 @@ class Rangebreak(_BaseLayoutHierarchyType):
     @property
     def bounds(self):
         """
-            Sets the lower and upper bounds of this axis rangebreak. Can be
-            used with `pattern`.
+        Sets the lower and upper bounds of this axis rangebreak. Can be
+        used with `pattern`.
 
-            The 'bounds' property is an info array that may be specified as:
+        The 'bounds' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'bounds[0]' property accepts values of any type
-        (1) The 'bounds[1]' property accepts values of any type
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'bounds[0]' property accepts values of any type
+
+            (1) The 'bounds[1]' property accepts values of any type
+
+        Returns
+        -------
+        list
         """
         return self["bounds"]
 

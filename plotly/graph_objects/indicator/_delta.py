@@ -124,7 +124,8 @@ class Delta(_BaseTraceHierarchyType):
         is set to the current value.
 
         The 'reference' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

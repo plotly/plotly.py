@@ -177,7 +177,8 @@ class Annotation(_BaseLayoutHierarchyType):
         pixels).
 
         The 'ax' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -196,7 +197,8 @@ class Annotation(_BaseLayoutHierarchyType):
         pixels).
 
         The 'ay' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -718,7 +720,8 @@ class Annotation(_BaseLayoutHierarchyType):
         right (positive) or left (negative) by this many pixels.
 
         The 'xshift' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -781,7 +784,8 @@ class Annotation(_BaseLayoutHierarchyType):
         (positive) or down (negative) by this many pixels.
 
         The 'yshift' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

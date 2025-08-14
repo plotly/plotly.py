@@ -38,7 +38,8 @@ class Title(_BaseTraceHierarchyType):
         labels, given in pixels.
 
         The 'offset' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

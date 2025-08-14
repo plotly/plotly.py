@@ -16,7 +16,8 @@ class Rotation(_BaseLayoutHierarchyType):
         Rotates the map along meridians (in degrees North).
 
         The 'lat' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -35,7 +36,8 @@ class Rotation(_BaseLayoutHierarchyType):
         the center of the `lonaxis.range` values.
 
         The 'lon' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -54,7 +56,8 @@ class Rotation(_BaseLayoutHierarchyType):
         map appear upside down.
 
         The 'roll' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

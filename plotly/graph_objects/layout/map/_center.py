@@ -16,7 +16,8 @@ class Center(_BaseLayoutHierarchyType):
         Sets the latitude of the center of the map (in degrees North).
 
         The 'lat' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -34,7 +35,8 @@ class Center(_BaseLayoutHierarchyType):
         Sets the longitude of the center of the map (in degrees East).
 
         The 'lon' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

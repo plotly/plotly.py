@@ -248,7 +248,8 @@ class Indicator(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -480,7 +481,8 @@ class Indicator(_BaseTraceType):
         Sets the number to be displayed.
 
         The 'value' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

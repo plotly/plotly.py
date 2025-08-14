@@ -28,25 +28,29 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def constraintrange(self):
         """
-            The domain range to which the filter on the dimension is
-            constrained. Must be an array of `[fromValue, toValue]` with
-            `fromValue <= toValue`, or if `multiselect` is not disabled,
-            you may give an array of arrays, where each inner array is
-            `[fromValue, toValue]`.
+        The domain range to which the filter on the dimension is
+        constrained. Must be an array of `[fromValue, toValue]` with
+        `fromValue <= toValue`, or if `multiselect` is not disabled,
+        you may give an array of arrays, where each inner array is
+        `[fromValue, toValue]`.
 
-            The 'constraintrange' property is an info array that may be specified as:
+        The 'constraintrange' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'constraintrange[0]' property accepts values of any type
-        (1) The 'constraintrange[1]' property accepts values of any type
+        * a list or tuple of 2 elements where:
 
-            * a 2D list where:
-        (0) The 'constraintrange[i][0]' property accepts values of any type
-        (1) The 'constraintrange[i][1]' property accepts values of any type
+            (0) The 'constraintrange[0]' property accepts values of any type
 
-            Returns
-            -------
-            list
+            (1) The 'constraintrange[1]' property accepts values of any type
+
+        * a 2D list where:
+
+            (0) The 'constraintrange\[i\]\[0\]' property accepts values of any type
+
+            (1) The 'constraintrange\[i\]\[1\]' property accepts values of any type
+
+        Returns
+        -------
+        list
         """
         return self["constraintrange"]
 
@@ -119,21 +123,25 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def range(self):
         """
-            The domain range that represents the full, shown axis extent.
-            Defaults to the `values` extent. Must be an array of
-            `[fromValue, toValue]` with finite numbers as elements.
+        The domain range that represents the full, shown axis extent.
+        Defaults to the `values` extent. Must be an array of
+        `[fromValue, toValue]` with finite numbers as elements.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'range[1]' property is a number and may be specified as:
-              - An int or float
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'range[0]' property is a number and may be specified as:
+
+            - An int or float
+
+            (1) The 'range[1]' property is a number and may be specified as:
+
+            - An int or float
+
+        Returns
+        -------
+        list
         """
         return self["range"]
 

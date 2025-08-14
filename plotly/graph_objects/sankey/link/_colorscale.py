@@ -16,7 +16,8 @@ class Colorscale(_BaseTraceHierarchyType):
         Sets the upper bound of the color domain.
 
         The 'cmax' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -34,7 +35,8 @@ class Colorscale(_BaseTraceHierarchyType):
         Sets the lower bound of the color domain.
 
         The 'cmin' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

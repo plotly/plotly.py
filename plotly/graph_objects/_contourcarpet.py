@@ -444,7 +444,8 @@ class Contourcarpet(_BaseTraceType):
         Sets the x coordinate step. See `x0` for more info.
 
         The 'da' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -462,7 +463,8 @@ class Contourcarpet(_BaseTraceType):
         Sets the y coordinate step. See `y0` for more info.
 
         The 'db' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -651,7 +653,8 @@ class Contourcarpet(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -1100,7 +1103,8 @@ class Contourcarpet(_BaseTraceType):
         same units as in `z` and if set, `zmin` must be set as well.
 
         The 'zmax' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -1120,7 +1124,8 @@ class Contourcarpet(_BaseTraceType):
         same units as in `z`. Has no effect when `zauto` is `false`.
 
         The 'zmid' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -1139,7 +1144,8 @@ class Contourcarpet(_BaseTraceType):
         same units as in `z` and if set, `zmax` must be set as well.
 
         The 'zmin' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

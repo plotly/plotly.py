@@ -942,7 +942,8 @@ class ColorBar(_BaseTraceHierarchyType):
         "paper".
 
         The 'x' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -1027,7 +1028,8 @@ class ColorBar(_BaseTraceHierarchyType):
         "paper".
 
         The 'y' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

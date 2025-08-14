@@ -119,7 +119,8 @@ class Image(_BaseTraceType):
         Set the pixel's horizontal size.
 
         The 'dx' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -137,7 +138,8 @@ class Image(_BaseTraceType):
         Set the pixel's vertical size
 
         The 'dy' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -404,7 +406,8 @@ class Image(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -773,29 +776,37 @@ class Image(_BaseTraceType):
     @property
     def zmax(self):
         """
-            Array defining the higher bound for each color component. Note
-            that the default value will depend on the colormodel. For the
-            `rgb` colormodel, it is [255, 255, 255]. For the `rgba`
-            colormodel, it is [255, 255, 255, 1]. For the `rgba256`
-            colormodel, it is [255, 255, 255, 255]. For the `hsl`
-            colormodel, it is [360, 100, 100]. For the `hsla` colormodel,
-            it is [360, 100, 100, 1].
+        Array defining the higher bound for each color component. Note
+        that the default value will depend on the colormodel. For the
+        `rgb` colormodel, it is [255, 255, 255]. For the `rgba`
+        colormodel, it is [255, 255, 255, 1]. For the `rgba256`
+        colormodel, it is [255, 255, 255, 255]. For the `hsl`
+        colormodel, it is [360, 100, 100]. For the `hsla` colormodel,
+        it is [360, 100, 100, 1].
 
-            The 'zmax' property is an info array that may be specified as:
+        The 'zmax' property is an info array that may be specified as:
 
-            * a list or tuple of 4 elements where:
-        (0) The 'zmax[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'zmax[1]' property is a number and may be specified as:
-              - An int or float
-        (2) The 'zmax[2]' property is a number and may be specified as:
-              - An int or float
-        (3) The 'zmax[3]' property is a number and may be specified as:
-              - An int or float
+        * a list or tuple of 4 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'zmax[0]' property is a number and may be specified as:
+
+            - An int or float
+
+            (1) The 'zmax[1]' property is a number and may be specified as:
+
+            - An int or float
+
+            (2) The 'zmax[2]' property is a number and may be specified as:
+
+            - An int or float
+
+            (3) The 'zmax[3]' property is a number and may be specified as:
+
+            - An int or float
+
+        Returns
+        -------
+        list
         """
         return self["zmax"]
 
@@ -806,28 +817,36 @@ class Image(_BaseTraceType):
     @property
     def zmin(self):
         """
-            Array defining the lower bound for each color component. Note
-            that the default value will depend on the colormodel. For the
-            `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel,
-            it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0,
-            0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the
-            `hsla` colormodel, it is [0, 0, 0, 0].
+        Array defining the lower bound for each color component. Note
+        that the default value will depend on the colormodel. For the
+        `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel,
+        it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0,
+        0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the
+        `hsla` colormodel, it is [0, 0, 0, 0].
 
-            The 'zmin' property is an info array that may be specified as:
+        The 'zmin' property is an info array that may be specified as:
 
-            * a list or tuple of 4 elements where:
-        (0) The 'zmin[0]' property is a number and may be specified as:
-              - An int or float
-        (1) The 'zmin[1]' property is a number and may be specified as:
-              - An int or float
-        (2) The 'zmin[2]' property is a number and may be specified as:
-              - An int or float
-        (3) The 'zmin[3]' property is a number and may be specified as:
-              - An int or float
+        * a list or tuple of 4 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'zmin[0]' property is a number and may be specified as:
+
+            - An int or float
+
+            (1) The 'zmin[1]' property is a number and may be specified as:
+
+            - An int or float
+
+            (2) The 'zmin[2]' property is a number and may be specified as:
+
+            - An int or float
+
+            (3) The 'zmin[3]' property is a number and may be specified as:
+
+            - An int or float
+
+        Returns
+        -------
+        list
         """
         return self["zmin"]
 

@@ -144,8 +144,10 @@ class Grid(_BaseLayoutHierarchyType):
         using the `gridcell` attribute.
 
         The 'subplots' property is an info array that may be specified as:
+
         * a 2D list where:
-          The 'subplots[i][j]' property is an enumeration that may be specified as:
+
+            The 'subplots\[i\]\[j\]' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['']
           - A string that matches one of the following regular expressions:

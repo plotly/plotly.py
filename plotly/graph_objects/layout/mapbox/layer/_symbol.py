@@ -37,7 +37,8 @@ class Symbol(_BaseLayoutHierarchyType):
         an effect only when `type` is set to "symbol".
 
         The 'iconsize' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

@@ -215,7 +215,8 @@ class Box(_BaseTraceType):
         q1/median/q3.
 
         The 'dx' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -234,7 +235,8 @@ class Box(_BaseTraceType):
         q1/median/q3.
 
         The 'dy' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -588,7 +590,8 @@ class Box(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

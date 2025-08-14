@@ -210,7 +210,8 @@ class Newshape(_BaseLayoutHierarchyType):
         ranks greater than 1000 to go after all unranked items.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

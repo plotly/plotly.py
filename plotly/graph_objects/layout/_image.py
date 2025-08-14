@@ -100,7 +100,8 @@ class Image(_BaseLayoutHierarchyType):
         axis width.
 
         The 'sizex' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -122,7 +123,8 @@ class Image(_BaseLayoutHierarchyType):
         axis height.
 
         The 'sizey' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

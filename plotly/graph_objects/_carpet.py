@@ -75,7 +75,8 @@ class Carpet(_BaseTraceType):
         step.
 
         The 'a0' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -150,7 +151,8 @@ class Carpet(_BaseTraceType):
         step.
 
         The 'b0' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -227,7 +229,8 @@ class Carpet(_BaseTraceType):
         cheater plot. Only used if `x` is been omitted.
 
         The 'cheaterslope' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -310,7 +313,8 @@ class Carpet(_BaseTraceType):
         Sets the a coordinate step. See `a0` for more info.
 
         The 'da' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -328,7 +332,8 @@ class Carpet(_BaseTraceType):
         Sets the b coordinate step. See `b0` for more info.
 
         The 'db' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -454,7 +459,8 @@ class Carpet(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

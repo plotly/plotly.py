@@ -327,7 +327,8 @@ class Aaxis(_BaseTraceHierarchyType):
         Sets the width (in px) of the end line.
 
         The 'endlinewidth' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -692,24 +693,26 @@ class Aaxis(_BaseTraceHierarchyType):
     @property
     def range(self):
         """
-            Sets the range of this axis. If the axis `type` is "log", then
-            you must take the log of your desired range (e.g. to set the
-            range from 1 to 100, set the range from 0 to 2). If the axis
-            `type` is "date", it should be date strings, like date data,
-            though Date objects and unix milliseconds will be accepted and
-            converted to strings. If the axis `type` is "category", it
-            should be numbers, using the scale where each category is
-            assigned a serial number from zero in the order it appears.
+        Sets the range of this axis. If the axis `type` is "log", then
+        you must take the log of your desired range (e.g. to set the
+        range from 1 to 100, set the range from 0 to 2). If the axis
+        `type` is "date", it should be date strings, like date data,
+        though Date objects and unix milliseconds will be accepted and
+        converted to strings. If the axis `type` is "category", it
+        should be numbers, using the scale where each category is
+        assigned a serial number from zero in the order it appears.
 
-            The 'range' property is an info array that may be specified as:
+        The 'range' property is an info array that may be specified as:
 
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property accepts values of any type
-        (1) The 'range[1]' property accepts values of any type
+        * a list or tuple of 2 elements where:
 
-            Returns
-            -------
-            list
+            (0) The 'range[0]' property accepts values of any type
+
+            (1) The 'range[1]' property accepts values of any type
+
+        Returns
+        -------
+        list
         """
         return self["range"]
 
@@ -941,7 +944,8 @@ class Aaxis(_BaseTraceHierarchyType):
         Sets the width (in px) of the start line.
 
         The 'startlinewidth' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

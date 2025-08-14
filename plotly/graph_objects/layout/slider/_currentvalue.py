@@ -38,7 +38,8 @@ class Currentvalue(_BaseLayoutHierarchyType):
         and the slider.
 
         The 'offset' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

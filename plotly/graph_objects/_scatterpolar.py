@@ -151,7 +151,8 @@ class Scatterpolar(_BaseTraceType):
         Sets the r coordinate step.
 
         The 'dr' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -171,7 +172,8 @@ class Scatterpolar(_BaseTraceType):
         coordinates.
 
         The 'dtheta' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -537,7 +539,8 @@ class Scatterpolar(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

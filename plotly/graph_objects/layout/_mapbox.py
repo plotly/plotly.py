@@ -52,7 +52,8 @@ class Mapbox(_BaseLayoutHierarchyType):
         from North (mapbox.bearing).
 
         The 'bearing' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -170,7 +171,8 @@ class Mapbox(_BaseLayoutHierarchyType):
         perpendicular to the surface of the map) (mapbox.pitch).
 
         The 'pitch' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -243,7 +245,8 @@ class Mapbox(_BaseLayoutHierarchyType):
         Sets the zoom level of the map (mapbox.zoom).
 
         The 'zoom' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

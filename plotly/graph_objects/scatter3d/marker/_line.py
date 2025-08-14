@@ -78,7 +78,8 @@ class Line(_BaseTraceHierarchyType):
         set, `marker.line.cmin` must be set as well.
 
         The 'cmax' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -101,7 +102,8 @@ class Line(_BaseTraceHierarchyType):
         is `false`.
 
         The 'cmid' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -122,7 +124,8 @@ class Line(_BaseTraceHierarchyType):
         set, `marker.line.cmax` must be set as well.
 
         The 'cmin' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

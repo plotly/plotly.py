@@ -14,7 +14,8 @@ class Center(_BaseLayoutHierarchyType):
     def x(self):
         """
         The 'x' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -30,7 +31,8 @@ class Center(_BaseLayoutHierarchyType):
     def y(self):
         """
         The 'y' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -46,7 +48,8 @@ class Center(_BaseLayoutHierarchyType):
     def z(self):
         """
         The 'z' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

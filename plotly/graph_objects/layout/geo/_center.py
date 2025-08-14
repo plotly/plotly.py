@@ -18,7 +18,8 @@ class Center(_BaseLayoutHierarchyType):
         latitude range by default.
 
         The 'lat' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -39,7 +40,8 @@ class Center(_BaseLayoutHierarchyType):
         otherwise.
 
         The 'lon' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

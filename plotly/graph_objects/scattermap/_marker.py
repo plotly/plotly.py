@@ -62,7 +62,8 @@ class Marker(_BaseTraceHierarchyType):
         zero angle.
 
         The 'angle' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
@@ -149,7 +150,8 @@ class Marker(_BaseTraceHierarchyType):
         `marker.cmin` must be set as well.
 
         The 'cmax' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -171,7 +173,8 @@ class Marker(_BaseTraceHierarchyType):
         effect when `marker.cauto` is `false`.
 
         The 'cmid' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -192,7 +195,8 @@ class Marker(_BaseTraceHierarchyType):
         `marker.cmax` must be set as well.
 
         The 'cmin' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -492,7 +496,8 @@ class Marker(_BaseTraceHierarchyType):
         size of marker points. Use with `sizemin` and `sizemode`.
 
         The 'sizeref' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

@@ -17,7 +17,8 @@ class Pad(_BaseLayoutHierarchyType):
         component.
 
         The 'b' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -36,7 +37,8 @@ class Pad(_BaseLayoutHierarchyType):
         component.
 
         The 'l' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -55,7 +57,8 @@ class Pad(_BaseLayoutHierarchyType):
         component.
 
         The 'r' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
@@ -73,7 +76,8 @@ class Pad(_BaseLayoutHierarchyType):
         The amount of padding (in px) along the top of the component.
 
         The 't' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------

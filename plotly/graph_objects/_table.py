@@ -103,7 +103,8 @@ class Table(_BaseTraceType):
         available width in proportion of their specified column widths.
 
         The 'columnwidth' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
@@ -368,7 +369,8 @@ class Table(_BaseTraceType):
         after traces i.e. according to their order in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
-          - An int or float
+
+            - An int or float
 
         Returns
         -------
