@@ -385,8 +385,8 @@ To downgrade to Kaleido v0, run:
             )
             height = (
                 height
-                or fig_dict.get("layout").get("height")
-                or fig_dict.get("layout").get("template", {}).get("layout", {}).get("height")
+                or fig_dict.get("layout", {}).get("height")
+                or fig_dict.get("layout", {}).get("template", {}).get("layout", {}).get("height")
                 or defaults.default_height
             )
 
