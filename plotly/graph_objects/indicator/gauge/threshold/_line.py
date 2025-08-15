@@ -38,7 +38,8 @@ class Line(_BaseTraceHierarchyType):
         Sets the width (in px) of the threshold line.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

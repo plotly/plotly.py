@@ -46,7 +46,8 @@ class Label(_BaseLayoutHierarchyType):
         Sets padding (in px) between edge of label and edge of shape.
 
         The 'padding' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -112,10 +113,12 @@ class Label(_BaseLayoutHierarchyType):
         circles, and paths; "middle" for lines.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right', 'middle left',
-                'middle center', 'middle right', 'bottom left', 'bottom
-                center', 'bottom right', 'start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['top left', 'top center', 'top right', 'middle left', 'middle
+            center', 'middle right', 'bottom left', 'bottom center',
+            'bottom right', 'start', 'middle', 'end']
 
         Returns
         -------
@@ -176,8 +179,10 @@ class Label(_BaseLayoutHierarchyType):
         the shape.
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['auto', 'left', 'center', 'right']
 
         Returns
         -------
@@ -199,8 +204,10 @@ class Label(_BaseLayoutHierarchyType):
         label text lines up with the top-most edge of the shape.
 
         The 'yanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['top', 'middle', 'bottom']
 
         Returns
         -------

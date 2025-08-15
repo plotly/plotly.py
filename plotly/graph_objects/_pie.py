@@ -130,8 +130,10 @@ class Pie(_BaseTraceType):
         another.
 
         The 'direction' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['clockwise', 'counterclockwise']
+
+        - One of the following enumeration values:
+
+            ['clockwise', 'counterclockwise']
 
         Returns
         -------
@@ -150,7 +152,7 @@ class Pie(_BaseTraceType):
 
         The 'dlabel' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -188,7 +190,8 @@ class Pie(_BaseTraceType):
         to make a donut chart.
 
         The 'hole' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -440,8 +443,10 @@ class Pie(_BaseTraceType):
         to the radius of the sector.
 
         The 'insidetextorientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['horizontal', 'radial', 'tangential', 'auto']
+
+        - One of the following enumeration values:
+
+            ['horizontal', 'radial', 'tangential', 'auto']
 
         Returns
         -------
@@ -462,7 +467,7 @@ class Pie(_BaseTraceType):
 
         The 'label0' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -591,7 +596,7 @@ class Pie(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -610,7 +615,8 @@ class Pie(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -711,7 +717,8 @@ class Pie(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -753,8 +760,10 @@ class Pie(_BaseTraceType):
         slices.
 
         The 'pull' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, 1]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -953,9 +962,12 @@ class Pie(_BaseTraceType):
         Specifies the location of the `textinfo`.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['inside', 'outside', 'auto', 'none']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['inside', 'outside', 'auto', 'none']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1171,8 +1183,10 @@ class Pie(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

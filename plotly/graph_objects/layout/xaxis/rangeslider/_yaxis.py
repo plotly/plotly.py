@@ -43,8 +43,10 @@ class YAxis(_BaseLayoutHierarchyType):
         the corresponding y-axis on the main subplot is used.
 
         The 'rangemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'fixed', 'match']
+
+        - One of the following enumeration values:
+
+            ['auto', 'fixed', 'match']
 
         Returns
         -------

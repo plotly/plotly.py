@@ -89,7 +89,8 @@ class Legend(_BaseLayoutHierarchyType):
         Sets the width (in px) of the border enclosing the legend.
 
         The 'borderwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -109,7 +110,8 @@ class Legend(_BaseLayoutHierarchyType):
         to "pixels".
 
         The 'entrywidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -127,8 +129,10 @@ class Legend(_BaseLayoutHierarchyType):
         Determines what entrywidth means.
 
         The 'entrywidthmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['fraction', 'pixels']
+
+        - One of the following enumeration values:
+
+            ['fraction', 'pixels']
 
         Returns
         -------
@@ -171,8 +175,10 @@ class Legend(_BaseLayoutHierarchyType):
         graph.
 
         The 'groupclick' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['toggleitem', 'togglegroup']
+
+        - One of the following enumeration values:
+
+            ['toggleitem', 'togglegroup']
 
         Returns
         -------
@@ -212,7 +218,8 @@ class Legend(_BaseLayoutHierarchyType):
         Sets the indentation (in px) of the legend entries.
 
         The 'indentation' property is a number and may be specified as:
-          - An int or float in the interval [-15, inf]
+
+        - An int or float in the interval [-15, inf]
 
         Returns
         -------
@@ -233,8 +240,10 @@ class Legend(_BaseLayoutHierarchyType):
         False disables legend item click interactions.
 
         The 'itemclick' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['toggle', 'toggleothers', False]
+
+        - One of the following enumeration values:
+
+            ['toggle', 'toggleothers', False]
 
         Returns
         -------
@@ -256,8 +265,10 @@ class Legend(_BaseLayoutHierarchyType):
         interactions.
 
         The 'itemdoubleclick' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['toggle', 'toggleothers', False]
+
+        - One of the following enumeration values:
+
+            ['toggle', 'toggleothers', False]
 
         Returns
         -------
@@ -277,8 +288,10 @@ class Legend(_BaseLayoutHierarchyType):
         independent of the symbol size on the graph.
 
         The 'itemsizing' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['trace', 'constant']
+
+        - One of the following enumeration values:
+
+            ['trace', 'constant']
 
         Returns
         -------
@@ -297,7 +310,8 @@ class Legend(_BaseLayoutHierarchyType):
         other than the title.text).
 
         The 'itemwidth' property is a number and may be specified as:
-          - An int or float in the interval [30, inf]
+
+        - An int or float in the interval [30, inf]
 
         Returns
         -------
@@ -322,7 +336,8 @@ class Legend(_BaseLayoutHierarchyType):
         `"paper"`, where the reference height is the plot height.
 
         The 'maxheight' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -340,8 +355,10 @@ class Legend(_BaseLayoutHierarchyType):
         Sets the orientation of the legend.
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['v', 'h']
+
+        - One of the following enumeration values:
+
+            ['v', 'h']
 
         Returns
         -------
@@ -379,7 +396,8 @@ class Legend(_BaseLayoutHierarchyType):
         groups.
 
         The 'tracegroupgap' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -443,8 +461,10 @@ class Legend(_BaseLayoutHierarchyType):
         their associated text.
 
         The 'valign' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['top', 'middle', 'bottom']
 
         Returns
         -------
@@ -487,7 +507,7 @@ class Legend(_BaseLayoutHierarchyType):
 
         The 'x' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -510,8 +530,10 @@ class Legend(_BaseLayoutHierarchyType):
         legends with respect to their center otherwise.
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['auto', 'left', 'center', 'right']
 
         Returns
         -------
@@ -531,8 +553,10 @@ class Legend(_BaseLayoutHierarchyType):
         plotting area only.
 
         The 'xref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['container', 'paper']
+
+        - One of the following enumeration values:
+
+            ['container', 'paper']
 
         Returns
         -------
@@ -558,7 +582,7 @@ class Legend(_BaseLayoutHierarchyType):
 
         The 'y' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -581,8 +605,10 @@ class Legend(_BaseLayoutHierarchyType):
         legends with respect to their middle otherwise.
 
         The 'yanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['auto', 'top', 'middle', 'bottom']
 
         Returns
         -------
@@ -602,8 +628,10 @@ class Legend(_BaseLayoutHierarchyType):
         plotting area only.
 
         The 'yref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['container', 'paper']
+
+        - One of the following enumeration values:
+
+            ['container', 'paper']
 
         Returns
         -------

@@ -17,7 +17,7 @@ class Colorscale(_BaseTraceHierarchyType):
 
         The 'cmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -36,7 +36,7 @@ class Colorscale(_BaseTraceHierarchyType):
 
         The 'cmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

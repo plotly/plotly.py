@@ -96,7 +96,8 @@ class Rangeselector(_BaseLayoutHierarchyType):
         selector.
 
         The 'borderwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -202,7 +203,8 @@ class Rangeselector(_BaseLayoutHierarchyType):
         selector.
 
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+
+        - An int or float in the interval [-2, 3]
 
         Returns
         -------
@@ -222,8 +224,10 @@ class Rangeselector(_BaseLayoutHierarchyType):
         "right" of the range selector.
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['auto', 'left', 'center', 'right']
 
         Returns
         -------
@@ -242,7 +246,8 @@ class Rangeselector(_BaseLayoutHierarchyType):
         selector.
 
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+
+        - An int or float in the interval [-2, 3]
 
         Returns
         -------
@@ -262,8 +267,10 @@ class Rangeselector(_BaseLayoutHierarchyType):
         the range selector.
 
         The 'yanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['auto', 'top', 'middle', 'bottom']
 
         Returns
         -------

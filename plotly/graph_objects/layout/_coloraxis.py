@@ -73,7 +73,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
 
         The 'cmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -95,7 +95,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
 
         The 'cmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -116,7 +116,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
 
         The 'cmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

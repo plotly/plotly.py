@@ -113,7 +113,8 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the grid lines.
 
         The 'gridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -189,8 +190,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         False to show markers and/or text nodes above this axis.
 
         The 'layer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['above traces', 'below traces']
+
+        - One of the following enumeration values:
+
+            ['above traces', 'below traces']
 
         Returns
         -------
@@ -230,7 +233,8 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the axis line.
 
         The 'linewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -306,8 +310,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         "none", tick prefixes are hidden.
 
         The 'showtickprefix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -325,8 +331,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         Same as `showtickprefix` but for tick suffixes.
 
         The 'showticksuffix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -415,7 +423,8 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         Sets the tick length (in px).
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -454,8 +463,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         drawn outside (inside) the axis lines.
 
         The 'ticks' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', '']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', '']
 
         Returns
         -------
@@ -529,7 +540,8 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

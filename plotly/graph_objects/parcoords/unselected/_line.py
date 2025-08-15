@@ -41,7 +41,8 @@ class Line(_BaseTraceHierarchyType):
         increases. Use 1 to achieve exact `unselected.line.color`.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------

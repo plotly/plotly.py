@@ -80,7 +80,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -103,7 +103,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -124,7 +124,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

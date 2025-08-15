@@ -38,7 +38,8 @@ class Marker(_BaseTraceHierarchyType):
         Sets the marker opacity of selected points.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -56,7 +57,8 @@ class Marker(_BaseTraceHierarchyType):
         Sets the marker size of selected points.
 
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

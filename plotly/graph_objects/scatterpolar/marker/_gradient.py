@@ -58,9 +58,12 @@ class Gradient(_BaseTraceHierarchyType):
         Sets the type of gradient used to fill the markers
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['radial', 'horizontal', 'vertical', 'none']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['radial', 'horizontal', 'vertical', 'none']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

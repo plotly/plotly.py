@@ -56,7 +56,8 @@ class Textfont(_BaseLayoutHierarchyType):
     def size(self):
         """
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [1, inf]
+
+        - An int or float in the interval [1, inf]
 
         Returns
         -------
@@ -75,8 +76,10 @@ class Textfont(_BaseLayoutHierarchyType):
         face from its family.
 
         The 'style' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'italic']
+
+        - One of the following enumeration values:
+
+            ['normal', 'italic']
 
         Returns
         -------

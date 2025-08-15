@@ -56,7 +56,8 @@ class Contour(_BaseTraceHierarchyType):
         Sets the width of the contour lines.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [1, 16]
+
+        - An int or float in the interval [1, 16]
 
         Returns
         -------

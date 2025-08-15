@@ -113,7 +113,8 @@ class Minor(_BaseLayoutHierarchyType):
         Sets the width (in px) of the grid lines.
 
         The 'gridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -219,7 +220,8 @@ class Minor(_BaseLayoutHierarchyType):
         Sets the tick length (in px).
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -243,8 +245,10 @@ class Minor(_BaseLayoutHierarchyType):
         is the default value if `tickvals` is provided).
 
         The 'tickmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'linear', 'array']
+
+        - One of the following enumeration values:
+
+            ['auto', 'linear', 'array']
 
         Returns
         -------
@@ -264,8 +268,10 @@ class Minor(_BaseLayoutHierarchyType):
         drawn outside (inside) the axis lines.
 
         The 'ticks' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', '']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', '']
 
         Returns
         -------
@@ -320,7 +326,8 @@ class Minor(_BaseLayoutHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

@@ -233,8 +233,10 @@ class Parcoords(_BaseTraceType):
         inside margins when `labelposition` is set to "bottom".
 
         The 'labelside' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['top', 'bottom']
 
         Returns
         -------
@@ -302,7 +304,7 @@ class Parcoords(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -321,7 +323,8 @@ class Parcoords(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -555,8 +558,10 @@ class Parcoords(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

@@ -80,8 +80,10 @@ class Scene(_BaseLayoutHierarchyType):
         others, where in that case the results of "cube" are used.
 
         The 'aspectmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'cube', 'data', 'manual']
+
+        - One of the following enumeration values:
+
+            ['auto', 'cube', 'data', 'manual']
 
         Returns
         -------
@@ -178,8 +180,10 @@ class Scene(_BaseLayoutHierarchyType):
         Determines the mode of drag interactions for this scene.
 
         The 'dragmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['orbit', 'turntable', 'zoom', 'pan', False]
+
+        - One of the following enumeration values:
+
+            ['orbit', 'turntable', 'zoom', 'pan', False]
 
         Returns
         -------
@@ -197,8 +201,10 @@ class Scene(_BaseLayoutHierarchyType):
         Determines the mode of hover interactions for this scene.
 
         The 'hovermode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['closest', False]
+
+        - One of the following enumeration values:
+
+            ['closest', False]
 
         Returns
         -------

@@ -25,7 +25,8 @@ class Button(_BaseLayoutHierarchyType):
         `step` to specify the update interval.
 
         The 'count' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -88,9 +89,10 @@ class Button(_BaseLayoutHierarchyType):
         range by.
 
         The 'step' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['month', 'year', 'day', 'hour', 'minute', 'second',
-                'all']
+
+        - One of the following enumeration values:
+
+            ['month', 'year', 'day', 'hour', 'minute', 'second', 'all']
 
         Returns
         -------
@@ -116,8 +118,10 @@ class Button(_BaseLayoutHierarchyType):
         calendar.
 
         The 'stepmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['backward', 'todate']
+
+        - One of the following enumeration values:
+
+            ['backward', 'todate']
 
         Returns
         -------

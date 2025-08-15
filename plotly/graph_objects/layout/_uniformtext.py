@@ -16,7 +16,8 @@ class Uniformtext(_BaseLayoutHierarchyType):
         Sets the minimum text size between traces of the same type.
 
         The 'minsize' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -41,8 +42,10 @@ class Uniformtext(_BaseLayoutHierarchyType):
         used.
 
         The 'mode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [False, 'hide', 'show']
+
+        - One of the following enumeration values:
+
+            [False, 'hide', 'show']
 
         Returns
         -------

@@ -42,7 +42,8 @@ class Slider(_BaseLayoutHierarchyType):
         considered active.
 
         The 'active' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -126,7 +127,8 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the width (in px) of the border enclosing the slider.
 
         The 'borderwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -186,7 +188,8 @@ class Slider(_BaseLayoutHierarchyType):
         the padding on both ends.
 
         The 'len' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -205,8 +208,10 @@ class Slider(_BaseLayoutHierarchyType):
         "fraction" or in *pixels. Use `len` to set the value.
 
         The 'lenmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['fraction', 'pixels']
+
+        - One of the following enumeration values:
+
+            ['fraction', 'pixels']
 
         Returns
         -------
@@ -224,7 +229,8 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the length in pixels of minor step tick marks
 
         The 'minorticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -378,7 +384,8 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the length in pixels of step tick marks
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -396,7 +403,8 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -451,7 +459,8 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the x position (in normalized coordinates) of the slider.
 
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+
+        - An int or float in the interval [-2, 3]
 
         Returns
         -------
@@ -471,8 +480,10 @@ class Slider(_BaseLayoutHierarchyType):
         range selector.
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['auto', 'left', 'center', 'right']
 
         Returns
         -------
@@ -490,7 +501,8 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the y position (in normalized coordinates) of the slider.
 
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [-2, 3]
+
+        - An int or float in the interval [-2, 3]
 
         Returns
         -------
@@ -510,8 +522,10 @@ class Slider(_BaseLayoutHierarchyType):
         range selector.
 
         The 'yanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['auto', 'top', 'middle', 'bottom']
 
         Returns
         -------

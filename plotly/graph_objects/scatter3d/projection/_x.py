@@ -16,7 +16,8 @@ class X(_BaseTraceHierarchyType):
         Sets the projection color.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -35,7 +36,8 @@ class X(_BaseTraceHierarchyType):
         marker points.
 
         The 'scale' property is a number and may be specified as:
-          - An int or float in the interval [0, 10]
+
+        - An int or float in the interval [0, 10]
 
         Returns
         -------

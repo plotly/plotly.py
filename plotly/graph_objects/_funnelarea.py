@@ -64,7 +64,8 @@ class Funnelarea(_BaseTraceType):
         Sets the ratio between height and width
 
         The 'aspectratio' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -82,7 +83,8 @@ class Funnelarea(_BaseTraceType):
         Sets the ratio between bottom length and maximum top length.
 
         The 'baseratio' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -141,7 +143,7 @@ class Funnelarea(_BaseTraceType):
 
         The 'dlabel' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -408,7 +410,7 @@ class Funnelarea(_BaseTraceType):
 
         The 'label0' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -537,7 +539,7 @@ class Funnelarea(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -556,7 +558,8 @@ class Funnelarea(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -657,7 +660,8 @@ class Funnelarea(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -798,9 +802,12 @@ class Funnelarea(_BaseTraceType):
         Specifies the location of the `textinfo`.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['inside', 'none']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['inside', 'none']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1016,8 +1023,10 @@ class Funnelarea(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

@@ -141,7 +141,7 @@ class Scattergl(_BaseTraceType):
 
         The 'dx' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -160,7 +160,7 @@ class Scattergl(_BaseTraceType):
 
         The 'dy' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -234,9 +234,11 @@ class Scattergl(_BaseTraceType):
         be pushed down in the drawing order.
 
         The 'fill' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'tozeroy', 'tozerox', 'tonexty', 'tonextx',
-                'toself', 'tonext']
+
+        - One of the following enumeration values:
+
+            ['none', 'tozeroy', 'tozerox', 'tonexty', 'tonextx', 'toself',
+            'tonext']
 
         Returns
         -------
@@ -553,7 +555,7 @@ class Scattergl(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -572,7 +574,8 @@ class Scattergl(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -713,7 +716,8 @@ class Scattergl(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -857,11 +861,14 @@ class Scattergl(_BaseTraceType):
         (x,y) coordinates.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right', 'middle left',
-                'middle center', 'middle right', 'bottom left', 'bottom
-                center', 'bottom right']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['top left', 'top center', 'top right', 'middle left', 'middle
+            center', 'middle right', 'bottom left', 'bottom center',
+            'bottom right']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1038,8 +1045,10 @@ class Scattergl(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1117,11 +1126,13 @@ class Scattergl(_BaseTraceType):
         Sets the calendar system to use with `x` date data.
 
         The 'xcalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1210,8 +1221,10 @@ class Scattergl(_BaseTraceType):
         alignment of data points on the x axis.
 
         The 'xperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------
@@ -1307,11 +1320,13 @@ class Scattergl(_BaseTraceType):
         Sets the calendar system to use with `y` date data.
 
         The 'ycalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1400,8 +1415,10 @@ class Scattergl(_BaseTraceType):
         alignment of data points on the y axis.
 
         The 'yperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------

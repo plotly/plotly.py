@@ -53,7 +53,7 @@ class Mapbox(_BaseLayoutHierarchyType):
 
         The 'bearing' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -172,7 +172,7 @@ class Mapbox(_BaseLayoutHierarchyType):
 
         The 'pitch' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -246,7 +246,7 @@ class Mapbox(_BaseLayoutHierarchyType):
 
         The 'zoom' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

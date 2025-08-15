@@ -39,7 +39,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
 
         The 'offset' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -116,8 +116,10 @@ class Currentvalue(_BaseLayoutHierarchyType):
         the slider.
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['left', 'center', 'right']
 
         Returns
         -------

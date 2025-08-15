@@ -87,8 +87,10 @@ class Axis(_BaseTraceHierarchyType):
         "B", 1B.
 
         The 'exponentformat' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+
+        - One of the following enumeration values:
+
+            ['none', 'e', 'E', 'power', 'SI', 'B']
 
         Returns
         -------
@@ -132,7 +134,8 @@ class Axis(_BaseTraceHierarchyType):
         has an effect when `tickformat` is "SI" or "B".
 
         The 'minexponent' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -220,8 +223,10 @@ class Axis(_BaseTraceHierarchyType):
         no exponents appear.
 
         The 'showexponent' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -260,8 +265,10 @@ class Axis(_BaseTraceHierarchyType):
         "none", tick prefixes are hidden.
 
         The 'showtickprefix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -279,8 +286,10 @@ class Axis(_BaseTraceHierarchyType):
         Same as `showtickprefix` but for tick suffixes.
 
         The 'showticksuffix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -483,7 +492,8 @@ class Axis(_BaseTraceHierarchyType):
         Sets the tick length (in px).
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -507,8 +517,10 @@ class Axis(_BaseTraceHierarchyType):
         is the default value if `tickvals` is provided).
 
         The 'tickmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'linear', 'array']
+
+        - One of the following enumeration values:
+
+            ['auto', 'linear', 'array']
 
         Returns
         -------
@@ -547,8 +559,10 @@ class Axis(_BaseTraceHierarchyType):
         drawn outside (inside) the axis lines.
 
         The 'ticks' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', '']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', '']
 
         Returns
         -------
@@ -660,7 +674,8 @@ class Axis(_BaseTraceHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

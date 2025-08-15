@@ -17,8 +17,10 @@ class Projection(_BaseLayoutHierarchyType):
         "perspective" or "orthographic". The default is "perspective".
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['perspective', 'orthographic']
+
+        - One of the following enumeration values:
+
+            ['perspective', 'orthographic']
 
         Returns
         -------

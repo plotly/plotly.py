@@ -83,7 +83,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -106,7 +106,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -127,7 +127,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -278,7 +278,8 @@ class Marker(_BaseTraceHierarchyType):
         Sets the maximum rounding of corners (in px).
 
         The 'cornerradius' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -303,8 +304,10 @@ class Marker(_BaseTraceHierarchyType):
         background color.
 
         The 'depthfade' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'reversed']
+
+        - One of the following enumeration values:
+
+            [True, False, 'reversed']
 
         Returns
         -------

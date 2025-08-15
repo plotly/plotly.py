@@ -63,8 +63,9 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'angle' property is a number and may be specified as:
 
-            - An int or float
-          - A tuple, list, or one-dimensional numpy array of the above
+        - An int or float
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -151,7 +152,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -174,7 +175,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -196,7 +197,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -356,8 +357,10 @@ class Marker(_BaseTraceHierarchyType):
         Sets the marker opacity.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, 1]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -434,8 +437,10 @@ class Marker(_BaseTraceHierarchyType):
         Sets the marker size (in px).
 
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, inf]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -455,7 +460,8 @@ class Marker(_BaseTraceHierarchyType):
         points.
 
         The 'sizemin' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -475,8 +481,10 @@ class Marker(_BaseTraceHierarchyType):
         to pixels.
 
         The 'sizemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['diameter', 'area']
+
+        - One of the following enumeration values:
+
+            ['diameter', 'area']
 
         Returns
         -------
@@ -497,7 +505,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'sizeref' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

@@ -123,8 +123,10 @@ class Caxis(_BaseLayoutHierarchyType):
         "B", 1B.
 
         The 'exponentformat' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+
+        - One of the following enumeration values:
+
+            ['none', 'e', 'E', 'power', 'SI', 'B']
 
         Returns
         -------
@@ -188,7 +190,8 @@ class Caxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the grid lines.
 
         The 'gridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -264,8 +267,10 @@ class Caxis(_BaseLayoutHierarchyType):
         False to show markers and/or text nodes above this axis.
 
         The 'layer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['above traces', 'below traces']
+
+        - One of the following enumeration values:
+
+            ['above traces', 'below traces']
 
         Returns
         -------
@@ -305,7 +310,8 @@ class Caxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the axis line.
 
         The 'linewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -325,7 +331,8 @@ class Caxis(_BaseLayoutHierarchyType):
         axes. The full view corresponds to all the minima set to zero.
 
         The 'min' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -344,7 +351,8 @@ class Caxis(_BaseLayoutHierarchyType):
         has an effect when `tickformat` is "SI" or "B".
 
         The 'minexponent' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -405,8 +413,10 @@ class Caxis(_BaseLayoutHierarchyType):
         no exponents appear.
 
         The 'showexponent' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -482,8 +492,10 @@ class Caxis(_BaseLayoutHierarchyType):
         "none", tick prefixes are hidden.
 
         The 'showtickprefix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -501,8 +513,10 @@ class Caxis(_BaseLayoutHierarchyType):
         Same as `showtickprefix` but for tick suffixes.
 
         The 'showticksuffix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -705,7 +719,8 @@ class Caxis(_BaseLayoutHierarchyType):
         Sets the tick length (in px).
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -729,8 +744,10 @@ class Caxis(_BaseLayoutHierarchyType):
         is the default value if `tickvals` is provided).
 
         The 'tickmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'linear', 'array']
+
+        - One of the following enumeration values:
+
+            ['auto', 'linear', 'array']
 
         Returns
         -------
@@ -769,8 +786,10 @@ class Caxis(_BaseLayoutHierarchyType):
         drawn outside (inside) the axis lines.
 
         The 'ticks' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', '']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', '']
 
         Returns
         -------
@@ -882,7 +901,8 @@ class Caxis(_BaseLayoutHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

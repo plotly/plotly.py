@@ -44,9 +44,9 @@ class Dimension(_BaseTraceHierarchyType):
 
         * a 2D list where:
 
-            (0) The 'constraintrange\[i\]\[0\]' property accepts values of any type
+            (0) The 'constraintrange\\[i\\]\\[0\\]' property accepts values of any type
 
-            (1) The 'constraintrange\[i\]\[1\]' property accepts values of any type
+            (1) The 'constraintrange\\[i\\]\\[1\\]' property accepts values of any type
 
         Returns
         -------

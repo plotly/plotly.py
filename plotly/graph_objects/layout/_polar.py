@@ -48,7 +48,8 @@ class Polar(_BaseLayoutHierarchyType):
         difference in bar positions in the data.
 
         The 'bargap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -70,8 +71,10 @@ class Polar(_BaseLayoutHierarchyType):
         bars.
 
         The 'barmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['stack', 'overlay']
+
+        - One of the following enumeration values:
+
+            ['stack', 'overlay']
 
         Returns
         -------
@@ -135,8 +138,10 @@ class Polar(_BaseLayoutHierarchyType):
         that radial axis scale is the same as the data scale).
 
         The 'gridshape' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['circular', 'linear']
+
+        - One of the following enumeration values:
+
+            ['circular', 'linear']
 
         Returns
         -------
@@ -155,7 +160,8 @@ class Polar(_BaseLayoutHierarchyType):
         subplot.
 
         The 'hole' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------

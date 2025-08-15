@@ -99,8 +99,10 @@ class Step(_BaseLayoutHierarchyType):
         JavaScript.
 
         The 'method' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['restyle', 'relayout', 'animate', 'update', 'skip']
+
+        - One of the following enumeration values:
+
+            ['restyle', 'relayout', 'animate', 'update', 'skip']
 
         Returns
         -------

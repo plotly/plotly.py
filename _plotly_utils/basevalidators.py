@@ -523,7 +523,9 @@ class EnumeratedValidator(BaseValidator):
         enum_regexs = []
         for v, regex in zip(self.values, self.val_regexs):
             if regex is not None:
-                enum_regexs.append(regex.pattern)
+                enum_pattern = regex.pattern
+                escaped_pattern = enum_pattern.replace("[", r"\[").replace("]", r"\]")
+                enum_regexs.append(escaped_pattern)
             else:
                 enum_vals.append(v)
         desc = """\
@@ -535,16 +537,16 @@ class EnumeratedValidator(BaseValidator):
             enum_vals_str = "\n".join(
                 textwrap.wrap(
                     repr(enum_vals),
-                    initial_indent=" " * 12,
-                    subsequent_indent=" " * 12,
+                    initial_indent=" " * 8,
+                    subsequent_indent=" " * 8,
                     break_on_hyphens=False,
                 )
             )
 
             desc = (
                 desc
-                + """
-      - One of the following enumeration values:
+                + """\n
+    - One of the following enumeration values:\n
 {enum_vals_str}""".format(enum_vals_str=enum_vals_str)
             )
 
@@ -552,24 +554,25 @@ class EnumeratedValidator(BaseValidator):
             enum_regexs_str = "\n".join(
                 textwrap.wrap(
                     repr(enum_regexs),
-                    initial_indent=" " * 12,
-                    subsequent_indent=" " * 12,
+                    initial_indent=" " * 8,
+                    subsequent_indent=" " * 8,
                     break_on_hyphens=False,
+                    break_long_words=False,
                 )
             )
 
             desc = (
                 desc
-                + """
-      - A string that matches one of the following regular expressions:
+                + """\n
+    - A string that matches one of the following regular expressions:\n
 {enum_regexs_str}""".format(enum_regexs_str=enum_regexs_str)
             )
 
         if self.array_ok:
             desc = (
                 desc
-                + """
-      - A tuple, list, or one-dimensional numpy array of the above"""
+                + """\n
+    - A tuple, list, or one-dimensional numpy array of the above"""
             )
 
         return desc
@@ -724,14 +727,14 @@ class NumberValidator(BaseValidator):
             desc = (
                 desc
                 + """\n
-        - An int or float"""
+    - An int or float"""
             )
 
         else:
             desc = (
                 desc
-                + """
-      - An int or float in the interval [{min_val}, {max_val}]""".format(
+                + """\n
+    - An int or float in the interval [{min_val}, {max_val}]""".format(
                     min_val=self.min_val, max_val=self.max_val
                 )
             )
@@ -739,8 +742,8 @@ class NumberValidator(BaseValidator):
         if self.array_ok:
             desc = (
                 desc
-                + """
-      - A tuple, list, or one-dimensional numpy array of the above"""
+                + """\n
+    - A tuple, list, or one-dimensional numpy array of the above"""
             )
 
         return desc
@@ -1989,10 +1992,12 @@ class InfoArrayValidator(BaseValidator):
 
                 for i, item_validator in enumerate(self.item_validators):
                     el_desc = item_validator.description().strip()
+                    lines = el_desc.splitlines()
+                    el_desc_indented = '\n'.join([lines[0]] + ['    ' + line for line in lines[1:]])
                     desc = (
                         desc
                         + """\n
-        ({i}) {el_desc}""".format(i=i, el_desc=el_desc)
+        ({i}) {el_desc_indented}""".format(i=i, el_desc_indented=el_desc_indented)
                     )
 
             # ### Case 2 ###
@@ -2005,7 +2010,7 @@ class InfoArrayValidator(BaseValidator):
                 for i, item_validator in enumerate(self.item_validators):
                     # Update name for 2d
                     orig_name = item_validator.plotly_name
-                    item_validator.plotly_name = "{name}\\[i\\]\\[{i}\\]".format(
+                    item_validator.plotly_name = "{name}\\\\[i\\\\]\\\\[{i}\\\\]".format(
                         name=self.plotly_name, i=i
                     )
 
@@ -2027,21 +2032,28 @@ class InfoArrayValidator(BaseValidator):
 
                 el_desc = item_validator.description().strip()
 
-                desc += """
-    * a list of elements where:
-      {el_desc}
-""".format(el_desc=el_desc)
+                # Adds an indentation of 4 spaces, especially when el_desc 
+                # is a fully auto-generated docstring with nested lists.
+                lines = el_desc.splitlines()
+                el_desc_indented = '\n'.join([lines[0]] + ['    ' + line for line in lines[1:]])
+
+                desc += """\n
+    * a list of elements where:\n
+        {el_desc_indented}
+""".format(el_desc_indented=el_desc_indented)
 
             if self.dimensions in ("1-2", 2):
-                item_validator.plotly_name = "{name}\\[i\\]\\[j\\]".format(
+                item_validator.plotly_name = "{name}\\\\[i\\\\]\\\\[j\\\\]".format(
                     name=self.plotly_name
                 )
 
                 el_desc = item_validator.description().strip()
+                lines = el_desc.splitlines()
+                el_desc_indented = '\n'.join([lines[0]] + ['    ' + line for line in lines[1:]])
                 desc += """\n
     * a 2D list where:\n    
-        {el_desc}
-""".format(el_desc=el_desc)
+        {el_desc_indented}
+""".format(el_desc_indented=el_desc_indented)
 
             item_validator.plotly_name = orig_name
 

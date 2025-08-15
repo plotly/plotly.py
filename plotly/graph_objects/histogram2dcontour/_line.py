@@ -64,7 +64,8 @@ class Line(_BaseTraceHierarchyType):
         corresponds to no smoothing.
 
         The 'smoothing' property is a number and may be specified as:
-          - An int or float in the interval [0, 1.3]
+
+        - An int or float in the interval [0, 1.3]
 
         Returns
         -------
@@ -82,7 +83,8 @@ class Line(_BaseTraceHierarchyType):
         Sets the contour line width in (in px)
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

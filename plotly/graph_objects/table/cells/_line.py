@@ -54,8 +54,9 @@ class Line(_BaseTraceHierarchyType):
         """
         The 'width' property is a number and may be specified as:
 
-            - An int or float
-          - A tuple, list, or one-dimensional numpy array of the above
+        - An int or float
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

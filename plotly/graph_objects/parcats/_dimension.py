@@ -76,9 +76,11 @@ class Dimension(_BaseTraceHierarchyType):
         `categoryarray`.
 
         The 'categoryorder' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['trace', 'category ascending', 'category descending',
-                'array']
+
+        - One of the following enumeration values:
+
+            ['trace', 'category ascending', 'category descending',
+            'array']
 
         Returns
         -------

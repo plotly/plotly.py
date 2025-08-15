@@ -142,7 +142,8 @@ class Title(_BaseLayoutHierarchyType):
         coordinates from 0 (left) to 1 (right).
 
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -165,8 +166,10 @@ class Title(_BaseLayoutHierarchyType):
         of `x`.
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['auto', 'left', 'center', 'right']
 
         Returns
         -------
@@ -186,8 +189,10 @@ class Title(_BaseLayoutHierarchyType):
         plotting area only.
 
         The 'xref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['container', 'paper']
+
+        - One of the following enumeration values:
+
+            ['container', 'paper']
 
         Returns
         -------
@@ -208,7 +213,8 @@ class Title(_BaseLayoutHierarchyType):
         margin.
 
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -231,8 +237,10 @@ class Title(_BaseLayoutHierarchyType):
         on the value of `y`.
 
         The 'yanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['auto', 'top', 'middle', 'bottom']
 
         Returns
         -------
@@ -252,8 +260,10 @@ class Title(_BaseLayoutHierarchyType):
         plotting area only.
 
         The 'yref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['container', 'paper']
+
+        - One of the following enumeration values:
+
+            ['container', 'paper']
 
         Returns
         -------

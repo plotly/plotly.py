@@ -4741,10 +4741,10 @@ class BasePlotlyType(object):
             property is returned.
 
             If prop is a nested property path string (e.g. 'foo[1].bar'),
-            then a nested property is returned (e.g. obj['foo'][1]['bar'])
+            then a nested property is returned (e.g. obj\\['foo'\\]\\[1\\]\\['bar'\\])
 
             If prop is a path tuple (e.g. ('foo', 1, 'bar')), then a nested
-            property is returned (e.g. obj['foo'][1]['bar']).
+            property is returned (e.g. obj\\['foo'\\]\\[1\\]\\['bar'\\]).
 
         Returns
         -------
@@ -4836,11 +4836,11 @@ class BasePlotlyType(object):
 
             If prop is a property path string (e.g. 'foo[0].bar'),
             then return true if the obejct contains the nested elements for
-            each entry in the path string (e.g. 'bar' in obj['foo'][0])
+            each entry in the path string (e.g. 'bar' in obj\\['foo'\\]\\[0\\])
 
             If prop is a property path tuple (e.g. ('foo', 0, 'bar')),
             then return true if the object contains the nested elements for
-            each entry in the path string (e.g. 'bar' in obj['foo'][0])
+            each entry in the path string (e.g. 'bar' in obj\\['foo'\\]\\[0\\])
 
         Returns
         -------

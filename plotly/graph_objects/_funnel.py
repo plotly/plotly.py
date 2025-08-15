@@ -146,8 +146,10 @@ class Funnel(_BaseTraceType):
         larger than the bar itself.
 
         The 'constraintext' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['inside', 'outside', 'both', 'none']
+
+        - One of the following enumeration values:
+
+            ['inside', 'outside', 'both', 'none']
 
         Returns
         -------
@@ -206,7 +208,7 @@ class Funnel(_BaseTraceType):
 
         The 'dx' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -225,7 +227,7 @@ class Funnel(_BaseTraceType):
 
         The 'dy' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -450,8 +452,10 @@ class Funnel(_BaseTraceType):
         `textposition` "inside" mode.
 
         The 'insidetextanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['end', 'middle', 'start']
+
+        - One of the following enumeration values:
+
+            ['end', 'middle', 'start']
 
         Returns
         -------
@@ -561,7 +565,7 @@ class Funnel(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -580,7 +584,8 @@ class Funnel(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -684,7 +689,7 @@ class Funnel(_BaseTraceType):
 
         The 'offset' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -723,7 +728,8 @@ class Funnel(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -746,8 +752,10 @@ class Funnel(_BaseTraceType):
         "autorange" on the "y-axis" are set to "reversed".
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['v', 'h']
+
+        - One of the following enumeration values:
+
+            ['v', 'h']
 
         Returns
         -------
@@ -945,9 +953,12 @@ class Funnel(_BaseTraceType):
         text appears.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['inside', 'outside', 'auto', 'none']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['inside', 'outside', 'auto', 'none']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1108,8 +1119,10 @@ class Funnel(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1127,7 +1140,8 @@ class Funnel(_BaseTraceType):
         Sets the bar width (in position axis units).
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1276,8 +1290,10 @@ class Funnel(_BaseTraceType):
         alignment of data points on the x axis.
 
         The 'xperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------
@@ -1444,8 +1460,10 @@ class Funnel(_BaseTraceType):
         alignment of data points on the y axis.
 
         The 'yperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------

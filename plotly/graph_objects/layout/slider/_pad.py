@@ -18,7 +18,7 @@ class Pad(_BaseLayoutHierarchyType):
 
         The 'b' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -38,7 +38,7 @@ class Pad(_BaseLayoutHierarchyType):
 
         The 'l' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -58,7 +58,7 @@ class Pad(_BaseLayoutHierarchyType):
 
         The 'r' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -77,7 +77,7 @@ class Pad(_BaseLayoutHierarchyType):
 
         The 't' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

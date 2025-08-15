@@ -71,8 +71,10 @@ class Sunburst(_BaseTraceType):
         leaves.
 
         The 'branchvalues' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['remainder', 'total']
+
+        - One of the following enumeration values:
+
+            ['remainder', 'total']
 
         Returns
         -------
@@ -406,8 +408,10 @@ class Sunburst(_BaseTraceType):
         to the radius of the sector.
 
         The 'insidetextorientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['horizontal', 'radial', 'tangential', 'auto']
+
+        - One of the following enumeration values:
+
+            ['horizontal', 'radial', 'tangential', 'auto']
 
         Returns
         -------
@@ -530,7 +534,7 @@ class Sunburst(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -549,7 +553,8 @@ class Sunburst(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -689,7 +694,8 @@ class Sunburst(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -1076,8 +1082,10 @@ class Sunburst(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

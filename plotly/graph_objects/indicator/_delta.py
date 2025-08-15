@@ -85,8 +85,10 @@ class Delta(_BaseTraceHierarchyType):
         Sets the position of delta with respect to the number.
 
         The 'position' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'bottom', 'left', 'right']
+
+        - One of the following enumeration values:
+
+            ['top', 'bottom', 'left', 'right']
 
         Returns
         -------
@@ -125,7 +127,7 @@ class Delta(_BaseTraceHierarchyType):
 
         The 'reference' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

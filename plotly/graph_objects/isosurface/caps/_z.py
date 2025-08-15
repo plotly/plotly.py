@@ -19,7 +19,8 @@ class Z(_BaseTraceHierarchyType):
         the creation of openings parallel to the edges.
 
         The 'fill' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------

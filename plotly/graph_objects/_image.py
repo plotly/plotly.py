@@ -60,8 +60,10 @@ class Image(_BaseTraceType):
         `rgb`.
 
         The 'colormodel' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['rgb', 'rgba', 'rgba256', 'hsl', 'hsla']
+
+        - One of the following enumeration values:
+
+            ['rgb', 'rgba', 'rgba256', 'hsl', 'hsla']
 
         Returns
         -------
@@ -120,7 +122,7 @@ class Image(_BaseTraceType):
 
         The 'dx' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -139,7 +141,7 @@ class Image(_BaseTraceType):
 
         The 'dy' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -407,7 +409,7 @@ class Image(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -426,7 +428,8 @@ class Image(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -508,7 +511,8 @@ class Image(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -654,8 +658,10 @@ class Image(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -881,8 +887,10 @@ class Image(_BaseTraceType):
         applies for image traces that use the `source` attribute.
 
         The 'zsmooth' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['fast', False]
+
+        - One of the following enumeration values:
+
+            ['fast', False]
 
         Returns
         -------

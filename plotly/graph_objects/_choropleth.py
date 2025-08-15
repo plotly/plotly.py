@@ -561,7 +561,7 @@ class Choropleth(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -580,7 +580,8 @@ class Choropleth(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -602,8 +603,10 @@ class Choropleth(_BaseTraceType):
         GeoJSON linked to the `geojson` attribute.
 
         The 'locationmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['ISO-3', 'USA-states', 'country names', 'geojson-id']
+
+        - One of the following enumeration values:
+
+            ['ISO-3', 'USA-states', 'country names', 'geojson-id']
 
         Returns
         -------
@@ -970,8 +973,10 @@ class Choropleth(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1030,7 +1035,7 @@ class Choropleth(_BaseTraceType):
 
         The 'zmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1051,7 +1056,7 @@ class Choropleth(_BaseTraceType):
 
         The 'zmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1071,7 +1076,7 @@ class Choropleth(_BaseTraceType):
 
         The 'zmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

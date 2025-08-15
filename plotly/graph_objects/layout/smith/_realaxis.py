@@ -115,7 +115,8 @@ class Realaxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the grid lines.
 
         The 'gridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -191,8 +192,10 @@ class Realaxis(_BaseLayoutHierarchyType):
         False to show markers and/or text nodes above this axis.
 
         The 'layer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['above traces', 'below traces']
+
+        - One of the following enumeration values:
+
+            ['above traces', 'below traces']
 
         Returns
         -------
@@ -232,7 +235,8 @@ class Realaxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the axis line.
 
         The 'linewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -308,8 +312,10 @@ class Realaxis(_BaseLayoutHierarchyType):
         "none", tick prefixes are hidden.
 
         The 'showtickprefix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -327,8 +333,10 @@ class Realaxis(_BaseLayoutHierarchyType):
         Same as `showtickprefix` but for tick suffixes.
 
         The 'showticksuffix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -347,8 +355,10 @@ class Realaxis(_BaseLayoutHierarchyType):
         labels appear.
 
         The 'side' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['top', 'bottom']
 
         Returns
         -------
@@ -459,7 +469,8 @@ class Realaxis(_BaseLayoutHierarchyType):
         Sets the tick length (in px).
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -498,8 +509,10 @@ class Realaxis(_BaseLayoutHierarchyType):
         above (below) the axis line.
 
         The 'ticks' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'bottom', '']
+
+        - One of the following enumeration values:
+
+            ['top', 'bottom', '']
 
         Returns
         -------
@@ -572,7 +585,8 @@ class Realaxis(_BaseLayoutHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

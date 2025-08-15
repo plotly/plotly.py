@@ -22,10 +22,12 @@ class Domain(_BaseLayoutHierarchyType):
         * a list or tuple of 2 elements where:
 
             (0) The 'x[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+            - An int or float in the interval [0, 1]
 
             (1) The 'x[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+            - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -49,10 +51,12 @@ class Domain(_BaseLayoutHierarchyType):
         * a list or tuple of 2 elements where:
 
             (0) The 'y[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+            - An int or float in the interval [0, 1]
 
             (1) The 'y[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+            - An int or float in the interval [0, 1]
 
         Returns
         -------

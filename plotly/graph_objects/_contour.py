@@ -310,7 +310,7 @@ class Contour(_BaseTraceType):
 
         The 'dx' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -329,7 +329,7 @@ class Contour(_BaseTraceType):
 
         The 'dy' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -661,7 +661,7 @@ class Contour(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -680,7 +680,8 @@ class Contour(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -803,7 +804,8 @@ class Contour(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -1060,8 +1062,10 @@ class Contour(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1139,11 +1143,13 @@ class Contour(_BaseTraceType):
         Sets the calendar system to use with `x` date data.
 
         The 'xcalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1232,8 +1238,10 @@ class Contour(_BaseTraceType):
         alignment of data points on the x axis.
 
         The 'xperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------
@@ -1272,8 +1280,10 @@ class Contour(_BaseTraceType):
         behavior when `x` is not provided).
 
         The 'xtype' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['array', 'scaled']
+
+        - One of the following enumeration values:
+
+            ['array', 'scaled']
 
         Returns
         -------
@@ -1351,11 +1361,13 @@ class Contour(_BaseTraceType):
         Sets the calendar system to use with `y` date data.
 
         The 'ycalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1444,8 +1456,10 @@ class Contour(_BaseTraceType):
         alignment of data points on the y axis.
 
         The 'yperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------
@@ -1484,8 +1498,10 @@ class Contour(_BaseTraceType):
         behavior when `y` is not provided)
 
         The 'ytype' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['array', 'scaled']
+
+        - One of the following enumeration values:
+
+            ['array', 'scaled']
 
         Returns
         -------
@@ -1567,7 +1583,7 @@ class Contour(_BaseTraceType):
 
         The 'zmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1588,7 +1604,7 @@ class Contour(_BaseTraceType):
 
         The 'zmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1608,7 +1624,7 @@ class Contour(_BaseTraceType):
 
         The 'zmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

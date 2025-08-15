@@ -39,8 +39,10 @@ class Title(_BaseTraceHierarchyType):
         defaults to "right" when `orientation` if "h".
 
         The 'side' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['right', 'top', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['right', 'top', 'bottom']
 
         Returns
         -------

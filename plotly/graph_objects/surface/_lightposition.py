@@ -16,7 +16,8 @@ class Lightposition(_BaseTraceHierarchyType):
         Numeric vector, representing the X coordinate for each vertex.
 
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [-100000, 100000]
+
+        - An int or float in the interval [-100000, 100000]
 
         Returns
         -------
@@ -34,7 +35,8 @@ class Lightposition(_BaseTraceHierarchyType):
         Numeric vector, representing the Y coordinate for each vertex.
 
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [-100000, 100000]
+
+        - An int or float in the interval [-100000, 100000]
 
         Returns
         -------
@@ -52,7 +54,8 @@ class Lightposition(_BaseTraceHierarchyType):
         Numeric vector, representing the Z coordinate for each vertex.
 
         The 'z' property is a number and may be specified as:
-          - An int or float in the interval [-100000, 100000]
+
+        - An int or float in the interval [-100000, 100000]
 
         Returns
         -------

@@ -112,7 +112,8 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the coastline stroke width (in px).
 
         The 'coastlinewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -152,7 +153,8 @@ class Geo(_BaseLayoutHierarchyType):
         Sets line width (in px) of the country boundaries.
 
         The 'countrywidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -201,8 +203,10 @@ class Geo(_BaseLayoutHierarchyType):
         computations, Defaults to False.
 
         The 'fitbounds' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [False, 'locations', 'geojson']
+
+        - One of the following enumeration values:
+
+            [False, 'locations', 'geojson']
 
         Returns
         -------
@@ -242,7 +246,8 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the stroke width (in px) of the frame.
 
         The 'framewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -385,8 +390,10 @@ class Geo(_BaseLayoutHierarchyType):
         1:110,000,000.
 
         The 'resolution' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [110, 50]
+
+        - One of the following enumeration values:
+
+            [110, 50]
 
         Returns
         -------
@@ -426,7 +433,8 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the stroke width (in px) of the rivers.
 
         The 'riverwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -444,9 +452,11 @@ class Geo(_BaseLayoutHierarchyType):
         Set the scope of the map.
 
         The 'scope' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['africa', 'asia', 'europe', 'north america', 'south
-                america', 'usa', 'world']
+
+        - One of the following enumeration values:
+
+            ['africa', 'asia', 'europe', 'north america', 'south america',
+            'usa', 'world']
 
         Returns
         -------
@@ -631,7 +641,8 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the stroke width (in px) of the subunits boundaries.
 
         The 'subunitwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

@@ -16,7 +16,8 @@ class Pad(_BaseTraceHierarchyType):
         Sets the padding form the bottom (in px).
 
         The 'b' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -34,7 +35,8 @@ class Pad(_BaseTraceHierarchyType):
         Sets the padding form the left (in px).
 
         The 'l' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -52,7 +54,8 @@ class Pad(_BaseTraceHierarchyType):
         Sets the padding form the right (in px).
 
         The 'r' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -70,7 +73,8 @@ class Pad(_BaseTraceHierarchyType):
         Sets the padding form the top (in px).
 
         The 't' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

@@ -37,8 +37,10 @@ class Title(_BaseTraceHierarchyType):
         Specifies the location of the `title`.
 
         The 'position' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right']
+
+        - One of the following enumeration values:
+
+            ['top left', 'top center', 'top right']
 
         Returns
         -------

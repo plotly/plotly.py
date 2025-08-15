@@ -102,7 +102,8 @@ class Violin(_BaseTraceType):
         thumb.
 
         The 'bandwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -429,7 +430,8 @@ class Violin(_BaseTraceType):
         the width of the violins.
 
         The 'jitter' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -518,7 +520,7 @@ class Violin(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -537,7 +539,8 @@ class Violin(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -702,7 +705,8 @@ class Violin(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -721,8 +725,10 @@ class Violin(_BaseTraceType):
         distribution is visualized along the vertical (horizontal).
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['v', 'h']
+
+        - One of the following enumeration values:
+
+            ['v', 'h']
 
         Returns
         -------
@@ -744,7 +750,8 @@ class Violin(_BaseTraceType):
         horizontal violins.
 
         The 'pointpos' property is a number and may be specified as:
-          - An int or float in the interval [-2, 2]
+
+        - An int or float in the interval [-2, 2]
 
         Returns
         -------
@@ -769,8 +776,10 @@ class Violin(_BaseTraceType):
         otherwise defaults to "outliers".
 
         The 'points' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'outliers', 'suspectedoutliers', False]
+
+        - One of the following enumeration values:
+
+            ['all', 'outliers', 'suspectedoutliers', False]
 
         Returns
         -------
@@ -799,8 +808,10 @@ class Violin(_BaseTraceType):
         upper half.
 
         The 'quartilemethod' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'exclusive', 'inclusive']
+
+        - One of the following enumeration values:
+
+            ['linear', 'exclusive', 'inclusive']
 
         Returns
         -------
@@ -845,8 +856,10 @@ class Violin(_BaseTraceType):
         points making up each violin.
 
         The 'scalemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['width', 'count']
+
+        - One of the following enumeration values:
+
+            ['width', 'count']
 
         Returns
         -------
@@ -927,8 +940,10 @@ class Violin(_BaseTraceType):
         trace has `side` set to "positive" and the other to "negative".
 
         The 'side' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['both', 'positive', 'negative']
+
+        - One of the following enumeration values:
+
+            ['both', 'positive', 'negative']
 
         Returns
         -------
@@ -977,8 +992,10 @@ class Violin(_BaseTraceType):
         attribute.
 
         The 'spanmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['soft', 'hard', 'manual']
+
+        - One of the following enumeration values:
+
+            ['soft', 'hard', 'manual']
 
         Returns
         -------
@@ -1129,8 +1146,10 @@ class Violin(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1150,7 +1169,8 @@ class Violin(_BaseTraceType):
         positions of other violin traces in the same subplot.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

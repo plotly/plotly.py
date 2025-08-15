@@ -57,8 +57,10 @@ class Annotation(_BaseLayoutHierarchyType):
         set to override the text width.
 
         The 'align' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['left', 'center', 'right']
 
         Returns
         -------
@@ -140,7 +142,8 @@ class Annotation(_BaseLayoutHierarchyType):
         wide as the line.
 
         The 'arrowsize' property is a number and may be specified as:
-          - An int or float in the interval [0.3, inf]
+
+        - An int or float in the interval [0.3, inf]
 
         Returns
         -------
@@ -158,7 +161,8 @@ class Annotation(_BaseLayoutHierarchyType):
         Sets the width (in px) of annotation arrow line.
 
         The 'arrowwidth' property is a number and may be specified as:
-          - An int or float in the interval [0.1, inf]
+
+        - An int or float in the interval [0.1, inf]
 
         Returns
         -------
@@ -178,7 +182,7 @@ class Annotation(_BaseLayoutHierarchyType):
 
         The 'ax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -198,7 +202,7 @@ class Annotation(_BaseLayoutHierarchyType):
 
         The 'ay' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -261,7 +265,8 @@ class Annotation(_BaseLayoutHierarchyType):
         border.
 
         The 'borderpad' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -280,7 +285,8 @@ class Annotation(_BaseLayoutHierarchyType):
         `text`.
 
         The 'borderwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -343,7 +349,8 @@ class Annotation(_BaseLayoutHierarchyType):
         the text set the box height. Taller text will be clipped.
 
         The 'height' property is a number and may be specified as:
-          - An int or float in the interval [1, inf]
+
+        - An int or float in the interval [1, inf]
 
         Returns
         -------
@@ -425,7 +432,8 @@ class Annotation(_BaseLayoutHierarchyType):
         Sets the opacity of the annotation (text + arrow).
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -467,7 +475,8 @@ class Annotation(_BaseLayoutHierarchyType):
         / `yshift` which moves everything by this amount.
 
         The 'standoff' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -506,7 +515,8 @@ class Annotation(_BaseLayoutHierarchyType):
         wide as the line.
 
         The 'startarrowsize' property is a number and may be specified as:
-          - An int or float in the interval [0.3, inf]
+
+        - An int or float in the interval [0.3, inf]
 
         Returns
         -------
@@ -528,7 +538,8 @@ class Annotation(_BaseLayoutHierarchyType):
         `xshift` / `yshift` which moves everything by this amount.
 
         The 'startstandoff' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -618,8 +629,10 @@ class Annotation(_BaseLayoutHierarchyType):
         text height.
 
         The 'valign' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['top', 'middle', 'bottom']
 
         Returns
         -------
@@ -657,7 +670,8 @@ class Annotation(_BaseLayoutHierarchyType):
         is no automatic wrapping; use <br> to start a new line.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [1, inf]
+
+        - An int or float in the interval [1, inf]
 
         Returns
         -------
@@ -700,8 +714,10 @@ class Annotation(_BaseLayoutHierarchyType):
         corresponds to the closest side.
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['auto', 'left', 'center', 'right']
 
         Returns
         -------
@@ -721,7 +737,7 @@ class Annotation(_BaseLayoutHierarchyType):
 
         The 'xshift' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -764,8 +780,10 @@ class Annotation(_BaseLayoutHierarchyType):
         to the closest side.
 
         The 'yanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['auto', 'top', 'middle', 'bottom']
 
         Returns
         -------
@@ -785,7 +803,7 @@ class Annotation(_BaseLayoutHierarchyType):
 
         The 'yshift' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

@@ -42,8 +42,10 @@ class Title(_BaseLayoutHierarchyType):
         for horizontal alignment legend area in both x and y sides.
 
         The 'side' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'left', 'top left', 'top center', 'top right']
+
+        - One of the following enumeration values:
+
+            ['top', 'left', 'top left', 'top center', 'top right']
 
         Returns
         -------

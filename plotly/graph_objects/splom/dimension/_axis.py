@@ -38,8 +38,10 @@ class Axis(_BaseTraceHierarchyType):
         over this attribute.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'log', 'date', 'category']
+
+        - One of the following enumeration values:
+
+            ['linear', 'log', 'date', 'category']
 
         Returns
         -------
