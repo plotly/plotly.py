@@ -110,7 +110,8 @@ class Gauge(_BaseTraceHierarchyType):
         Sets the width (in px) of the border enclosing the gauge.
 
         The 'borderwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -128,8 +129,10 @@ class Gauge(_BaseTraceHierarchyType):
         Set the shape of the gauge
 
         The 'shape' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['angular', 'bullet']
+
+        - One of the following enumeration values:
+
+            ['angular', 'bullet']
 
         Returns
         -------

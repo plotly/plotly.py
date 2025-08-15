@@ -37,8 +37,10 @@ class Newshape(_BaseLayoutHierarchyType):
         "vertical" allows vertical extend.
 
         The 'drawdirection' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['ortho', 'horizontal', 'vertical', 'diagonal']
+
+        - One of the following enumeration values:
+
+            ['ortho', 'horizontal', 'vertical', 'diagonal']
 
         Returns
         -------
@@ -83,8 +85,10 @@ class Newshape(_BaseLayoutHierarchyType):
         US/docs/Web/SVG/Attribute/fill-rule
 
         The 'fillrule' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['evenodd', 'nonzero']
+
+        - One of the following enumeration values:
+
+            ['evenodd', 'nonzero']
 
         Returns
         -------
@@ -123,8 +127,10 @@ class Newshape(_BaseLayoutHierarchyType):
         traces ("above").
 
         The 'layer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['below', 'above', 'between']
+
+        - One of the following enumeration values:
+
+            ['below', 'above', 'between']
 
         Returns
         -------
@@ -211,7 +217,7 @@ class Newshape(_BaseLayoutHierarchyType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -229,7 +235,8 @@ class Newshape(_BaseLayoutHierarchyType):
         Sets the width (in px or fraction) of the legend for new shape.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -285,7 +292,8 @@ class Newshape(_BaseLayoutHierarchyType):
         Sets the opacity of new shapes.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -323,8 +331,10 @@ class Newshape(_BaseLayoutHierarchyType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

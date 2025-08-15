@@ -427,7 +427,7 @@ class Ohlc(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -446,7 +446,8 @@ class Ohlc(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -583,7 +584,8 @@ class Ohlc(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -739,7 +741,8 @@ class Ohlc(_BaseTraceType):
         minimal interval.
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, 0.5]
+
+        - An int or float in the interval [0, 0.5]
 
         Returns
         -------
@@ -810,8 +813,10 @@ class Ohlc(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -871,11 +876,13 @@ class Ohlc(_BaseTraceType):
         Sets the calendar system to use with `x` date data.
 
         The 'xcalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -964,8 +971,10 @@ class Ohlc(_BaseTraceType):
         alignment of data points on the x axis.
 
         The 'xperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------

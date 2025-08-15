@@ -40,7 +40,8 @@ class Link(_BaseTraceHierarchyType):
         be drawn.
 
         The 'arrowlen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -229,8 +230,10 @@ class Link(_BaseTraceHierarchyType):
         still fired.
 
         The 'hoverinfo' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'none', 'skip']
+
+        - One of the following enumeration values:
+
+            ['all', 'none', 'skip']
 
         Returns
         -------

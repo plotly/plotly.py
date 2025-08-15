@@ -83,7 +83,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -106,7 +106,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -128,7 +128,7 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'cmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -307,8 +307,10 @@ class Marker(_BaseTraceHierarchyType):
         Sets the opacity of the bars.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, 1]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

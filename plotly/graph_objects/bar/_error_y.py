@@ -149,7 +149,8 @@ class ErrorY(_BaseTraceHierarchyType):
         Sets the thickness (in px) of the error bars.
 
         The 'thickness' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -207,8 +208,10 @@ class ErrorY(_BaseTraceHierarchyType):
         data set `array`.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['percent', 'constant', 'sqrt', 'data']
+
+        - One of the following enumeration values:
+
+            ['percent', 'constant', 'sqrt', 'data']
 
         Returns
         -------
@@ -228,7 +231,8 @@ class ErrorY(_BaseTraceHierarchyType):
         corresponding to the lengths of the error bars.
 
         The 'value' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -249,7 +253,8 @@ class ErrorY(_BaseTraceHierarchyType):
         (left) direction for vertical (horizontal) bars
 
         The 'valueminus' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -286,7 +291,8 @@ class ErrorY(_BaseTraceHierarchyType):
         error bars.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

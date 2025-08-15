@@ -34,9 +34,12 @@ class Header(_BaseTraceHierarchyType):
         set to override the text width.
 
         The 'align' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'center', 'right']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['left', 'center', 'right']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -150,7 +153,7 @@ class Header(_BaseTraceHierarchyType):
 
         The 'height' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

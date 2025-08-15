@@ -120,7 +120,8 @@ class Fillpattern(_BaseTraceHierarchyType):
         0.5 when `fillmode` is "overlay". Otherwise, defaults to 1.
 
         The 'fgopacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -139,8 +140,10 @@ class Fillpattern(_BaseTraceHierarchyType):
         to `bgcolor` or a `fgcolor`.
 
         The 'fillmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['replace', 'overlay']
+
+        - One of the following enumeration values:
+
+            ['replace', 'overlay']
 
         Returns
         -------
@@ -199,9 +202,12 @@ class Fillpattern(_BaseTraceHierarchyType):
         used for filling the area.
 
         The 'shape' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['', '/', '\\', 'x', '-', '|', '+', '.']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['', '/', '\\', 'x', '-', '|', '+', '.']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -238,8 +244,10 @@ class Fillpattern(_BaseTraceHierarchyType):
         which corresponds to the interval of repetition of the pattern.
 
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, inf]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -278,8 +286,10 @@ class Fillpattern(_BaseTraceHierarchyType):
         shows only the foreground color without pattern.
 
         The 'solidity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, 1]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

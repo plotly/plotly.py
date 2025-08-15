@@ -19,7 +19,7 @@ class Center(_BaseLayoutHierarchyType):
 
         The 'lat' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -41,7 +41,7 @@ class Center(_BaseLayoutHierarchyType):
 
         The 'lon' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

@@ -81,7 +81,7 @@ class Line(_BaseTraceHierarchyType):
 
         The 'cmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -104,7 +104,7 @@ class Line(_BaseTraceHierarchyType):
 
         The 'cmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -126,7 +126,7 @@ class Line(_BaseTraceHierarchyType):
 
         The 'cmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -353,8 +353,10 @@ class Line(_BaseTraceHierarchyType):
         curved splines
 
         The 'shape' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'hspline']
+
+        - One of the following enumeration values:
+
+            ['linear', 'hspline']
 
         Returns
         -------

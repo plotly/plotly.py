@@ -18,7 +18,8 @@ class Projection(_BaseLayoutHierarchyType):
         the sphere’s radius.
 
         The 'distance' property is a number and may be specified as:
-          - An int or float in the interval [1.001, inf]
+
+        - An int or float in the interval [1.001, inf]
 
         Returns
         -------
@@ -84,7 +85,8 @@ class Projection(_BaseLayoutHierarchyType):
         the largest zoom level that fits the map's lon and lat ranges.
 
         The 'scale' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -104,7 +106,7 @@ class Projection(_BaseLayoutHierarchyType):
 
         The 'tilt' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -122,31 +124,31 @@ class Projection(_BaseLayoutHierarchyType):
         Sets the projection type.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['airy', 'aitoff', 'albers', 'albers usa', 'august',
-                'azimuthal equal area', 'azimuthal equidistant', 'baker',
-                'bertin1953', 'boggs', 'bonne', 'bottomley', 'bromley',
-                'collignon', 'conic conformal', 'conic equal area', 'conic
-                equidistant', 'craig', 'craster', 'cylindrical equal
-                area', 'cylindrical stereographic', 'eckert1', 'eckert2',
-                'eckert3', 'eckert4', 'eckert5', 'eckert6', 'eisenlohr',
-                'equal earth', 'equirectangular', 'fahey', 'foucaut',
-                'foucaut sinusoidal', 'ginzburg4', 'ginzburg5',
-                'ginzburg6', 'ginzburg8', 'ginzburg9', 'gnomonic',
-                'gringorten', 'gringorten quincuncial', 'guyou', 'hammer',
-                'hill', 'homolosine', 'hufnagel', 'hyperelliptical',
-                'kavrayskiy7', 'lagrange', 'larrivee', 'laskowski',
-                'loximuthal', 'mercator', 'miller', 'mollweide', 'mt flat
-                polar parabolic', 'mt flat polar quartic', 'mt flat polar
-                sinusoidal', 'natural earth', 'natural earth1', 'natural
-                earth2', 'nell hammer', 'nicolosi', 'orthographic',
-                'patterson', 'peirce quincuncial', 'polyconic',
-                'rectangular polyconic', 'robinson', 'satellite', 'sinu
-                mollweide', 'sinusoidal', 'stereographic', 'times',
-                'transverse mercator', 'van der grinten', 'van der
-                grinten2', 'van der grinten3', 'van der grinten4',
-                'wagner4', 'wagner6', 'wiechel', 'winkel tripel',
-                'winkel3']
+
+        - One of the following enumeration values:
+
+            ['airy', 'aitoff', 'albers', 'albers usa', 'august',
+            'azimuthal equal area', 'azimuthal equidistant', 'baker',
+            'bertin1953', 'boggs', 'bonne', 'bottomley', 'bromley',
+            'collignon', 'conic conformal', 'conic equal area', 'conic
+            equidistant', 'craig', 'craster', 'cylindrical equal area',
+            'cylindrical stereographic', 'eckert1', 'eckert2', 'eckert3',
+            'eckert4', 'eckert5', 'eckert6', 'eisenlohr', 'equal earth',
+            'equirectangular', 'fahey', 'foucaut', 'foucaut sinusoidal',
+            'ginzburg4', 'ginzburg5', 'ginzburg6', 'ginzburg8',
+            'ginzburg9', 'gnomonic', 'gringorten', 'gringorten
+            quincuncial', 'guyou', 'hammer', 'hill', 'homolosine',
+            'hufnagel', 'hyperelliptical', 'kavrayskiy7', 'lagrange',
+            'larrivee', 'laskowski', 'loximuthal', 'mercator', 'miller',
+            'mollweide', 'mt flat polar parabolic', 'mt flat polar
+            quartic', 'mt flat polar sinusoidal', 'natural earth',
+            'natural earth1', 'natural earth2', 'nell hammer', 'nicolosi',
+            'orthographic', 'patterson', 'peirce quincuncial',
+            'polyconic', 'rectangular polyconic', 'robinson', 'satellite',
+            'sinu mollweide', 'sinusoidal', 'stereographic', 'times',
+            'transverse mercator', 'van der grinten', 'van der grinten2',
+            'van der grinten3', 'van der grinten4', 'wagner4', 'wagner6',
+            'wiechel', 'winkel tripel', 'winkel3']
 
         Returns
         -------

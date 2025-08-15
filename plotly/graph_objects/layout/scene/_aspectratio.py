@@ -14,7 +14,8 @@ class Aspectratio(_BaseLayoutHierarchyType):
     def x(self):
         """
         The 'x' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -30,7 +31,8 @@ class Aspectratio(_BaseLayoutHierarchyType):
     def y(self):
         """
         The 'y' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -46,7 +48,8 @@ class Aspectratio(_BaseLayoutHierarchyType):
     def z(self):
         """
         The 'z' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

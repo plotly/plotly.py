@@ -37,8 +37,10 @@ class Node(_BaseTraceHierarchyType):
         horizontal axis.
 
         The 'align' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['justify', 'left', 'right', 'center']
+
+        - One of the following enumeration values:
+
+            ['justify', 'left', 'right', 'center']
 
         Returns
         -------
@@ -144,7 +146,7 @@ class Node(_BaseTraceHierarchyType):
 
         * a 2D list where:
 
-            The 'groups\[i\]\[j\]' property is a number and may be specified as:
+            The 'groups\\[i\\]\\[j\\]' property is a number and may be specified as:
 
             - An int or float
 
@@ -167,8 +169,10 @@ class Node(_BaseTraceHierarchyType):
         still fired.
 
         The 'hoverinfo' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'none', 'skip']
+
+        - One of the following enumeration values:
+
+            ['all', 'none', 'skip']
 
         Returns
         -------
@@ -324,7 +328,8 @@ class Node(_BaseTraceHierarchyType):
         Sets the padding (in px) between the `nodes`.
 
         The 'pad' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -342,7 +347,8 @@ class Node(_BaseTraceHierarchyType):
         Sets the thickness (in px) of the `nodes`.
 
         The 'thickness' property is a number and may be specified as:
-          - An int or float in the interval [1, inf]
+
+        - An int or float in the interval [1, inf]
 
         Returns
         -------

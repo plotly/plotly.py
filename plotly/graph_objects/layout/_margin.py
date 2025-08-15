@@ -36,7 +36,8 @@ class Margin(_BaseLayoutHierarchyType):
         Sets the bottom margin (in px).
 
         The 'b' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -54,7 +55,8 @@ class Margin(_BaseLayoutHierarchyType):
         Sets the left margin (in px).
 
         The 'l' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -73,7 +75,8 @@ class Margin(_BaseLayoutHierarchyType):
         and the axis lines
 
         The 'pad' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -91,7 +94,8 @@ class Margin(_BaseLayoutHierarchyType):
         Sets the right margin (in px).
 
         The 'r' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -109,7 +113,8 @@ class Margin(_BaseLayoutHierarchyType):
         Sets the top margin (in px).
 
         The 't' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

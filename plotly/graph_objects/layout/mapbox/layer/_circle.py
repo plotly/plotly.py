@@ -18,7 +18,7 @@ class Circle(_BaseLayoutHierarchyType):
 
         The 'radius' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

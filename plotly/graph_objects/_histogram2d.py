@@ -307,8 +307,10 @@ class Histogram2d(_BaseTraceType):
         each bin respectively.
 
         The 'histfunc' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['count', 'sum', 'avg', 'min', 'max']
+
+        - One of the following enumeration values:
+
+            ['count', 'sum', 'avg', 'min', 'max']
 
         Returns
         -------
@@ -338,9 +340,11 @@ class Histogram2d(_BaseTraceType):
         (here, the sum of all bin AREAS equals 1).
 
         The 'histnorm' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['', 'percent', 'probability', 'density', 'probability
-                density']
+
+        - One of the following enumeration values:
+
+            ['', 'percent', 'probability', 'density', 'probability
+            density']
 
         Returns
         -------
@@ -591,7 +595,7 @@ class Histogram2d(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -610,7 +614,8 @@ class Histogram2d(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -755,7 +760,8 @@ class Histogram2d(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -955,8 +961,10 @@ class Histogram2d(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1057,11 +1065,13 @@ class Histogram2d(_BaseTraceType):
         Sets the calendar system to use with `x` date data.
 
         The 'xcalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1079,7 +1089,8 @@ class Histogram2d(_BaseTraceType):
         Sets the horizontal gap (in pixels) between bricks.
 
         The 'xgap' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1227,11 +1238,13 @@ class Histogram2d(_BaseTraceType):
         Sets the calendar system to use with `y` date data.
 
         The 'ycalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1249,7 +1262,8 @@ class Histogram2d(_BaseTraceType):
         Sets the vertical gap (in pixels) between bricks.
 
         The 'ygap' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1378,7 +1392,7 @@ class Histogram2d(_BaseTraceType):
 
         The 'zmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1399,7 +1413,7 @@ class Histogram2d(_BaseTraceType):
 
         The 'zmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1419,7 +1433,7 @@ class Histogram2d(_BaseTraceType):
 
         The 'zmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1437,8 +1451,10 @@ class Histogram2d(_BaseTraceType):
         Picks a smoothing algorithm use to smooth `z` data.
 
         The 'zsmooth' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['fast', 'best', False]
+
+        - One of the following enumeration values:
+
+            ['fast', 'best', False]
 
         Returns
         -------

@@ -38,9 +38,11 @@ class Tiling(_BaseTraceHierarchyType):
         https://github.com/d3/d3-hierarchy#treemap-tiling
 
         The 'packing' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['squarify', 'binary', 'dice', 'slice', 'slice-dice',
-                'dice-slice']
+
+        - One of the following enumeration values:
+
+            ['squarify', 'binary', 'dice', 'slice', 'slice-dice',
+            'dice-slice']
 
         Returns
         -------
@@ -58,7 +60,8 @@ class Tiling(_BaseTraceHierarchyType):
         Sets the inner padding (in px).
 
         The 'pad' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -87,7 +90,8 @@ class Tiling(_BaseTraceHierarchyType):
         layouts.
 
         The 'squarifyratio' property is a number and may be specified as:
-          - An int or float in the interval [1, inf]
+
+        - An int or float in the interval [1, inf]
 
         Returns
         -------

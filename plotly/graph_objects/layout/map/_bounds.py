@@ -18,7 +18,7 @@ class Bounds(_BaseLayoutHierarchyType):
 
         The 'east' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -38,7 +38,7 @@ class Bounds(_BaseLayoutHierarchyType):
 
         The 'north' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -58,7 +58,7 @@ class Bounds(_BaseLayoutHierarchyType):
 
         The 'south' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -78,7 +78,7 @@ class Bounds(_BaseLayoutHierarchyType):
 
         The 'west' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

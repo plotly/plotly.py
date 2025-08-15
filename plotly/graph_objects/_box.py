@@ -128,8 +128,10 @@ class Box(_BaseTraceType):
         Defaults to "sd" when `sd` is set Otherwise defaults to False.
 
         The 'boxmean' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, 'sd', False]
+
+        - One of the following enumeration values:
+
+            [True, 'sd', False]
 
         Returns
         -------
@@ -155,8 +157,10 @@ class Box(_BaseTraceType):
         defaults to "outliers".
 
         The 'boxpoints' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'outliers', 'suspectedoutliers', False]
+
+        - One of the following enumeration values:
+
+            ['all', 'outliers', 'suspectedoutliers', False]
 
         Returns
         -------
@@ -216,7 +220,7 @@ class Box(_BaseTraceType):
 
         The 'dx' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -236,7 +240,7 @@ class Box(_BaseTraceType):
 
         The 'dy' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -502,7 +506,8 @@ class Box(_BaseTraceType):
         the width of the box(es).
 
         The 'jitter' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -591,7 +596,7 @@ class Box(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -610,7 +615,8 @@ class Box(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -919,7 +925,8 @@ class Box(_BaseTraceType):
         example, with 0, the notches are as wide as the box(es).
 
         The 'notchwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, 0.5]
+
+        - An int or float in the interval [0, 0.5]
 
         Returns
         -------
@@ -958,7 +965,8 @@ class Box(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -977,8 +985,10 @@ class Box(_BaseTraceType):
         distribution is visualized along the vertical (horizontal).
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['v', 'h']
+
+        - One of the following enumeration values:
+
+            ['v', 'h']
 
         Returns
         -------
@@ -1000,7 +1010,8 @@ class Box(_BaseTraceType):
         horizontal boxes
 
         The 'pointpos' property is a number and may be specified as:
-          - An int or float in the interval [-2, 2]
+
+        - An int or float in the interval [-2, 2]
 
         Returns
         -------
@@ -1103,8 +1114,10 @@ class Box(_BaseTraceType):
         upper half.
 
         The 'quartilemethod' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'exclusive', 'inclusive']
+
+        - One of the following enumeration values:
+
+            ['linear', 'exclusive', 'inclusive']
 
         Returns
         -------
@@ -1146,7 +1159,8 @@ class Box(_BaseTraceType):
         5-stddev
 
         The 'sdmultiple' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1265,8 +1279,10 @@ class Box(_BaseTraceType):
         3-stddev etc
 
         The 'sizemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['quartiles', 'sd']
+
+        - One of the following enumeration values:
+
+            ['quartiles', 'sd']
 
         Returns
         -------
@@ -1458,8 +1474,10 @@ class Box(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1478,7 +1496,8 @@ class Box(_BaseTraceType):
         example, with 1, the whiskers are as wide as the box(es).
 
         The 'whiskerwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -1498,7 +1517,8 @@ class Box(_BaseTraceType):
         positions of other box traces in the same subplot.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1577,11 +1597,13 @@ class Box(_BaseTraceType):
         Sets the calendar system to use with `x` date data.
 
         The 'xcalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1670,8 +1692,10 @@ class Box(_BaseTraceType):
         alignment of data points on the x axis.
 
         The 'xperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------
@@ -1768,11 +1792,13 @@ class Box(_BaseTraceType):
         Sets the calendar system to use with `y` date data.
 
         The 'ycalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1861,8 +1887,10 @@ class Box(_BaseTraceType):
         alignment of data points on the y axis.
 
         The 'yperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------

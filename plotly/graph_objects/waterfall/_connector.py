@@ -35,8 +35,10 @@ class Connector(_BaseTraceHierarchyType):
         Sets the shape of connector lines.
 
         The 'mode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['spanning', 'between']
+
+        - One of the following enumeration values:
+
+            ['spanning', 'between']
 
         Returns
         -------

@@ -18,8 +18,10 @@ class Title(_BaseTraceHierarchyType):
         right.
 
         The 'align' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['left', 'center', 'right']
 
         Returns
         -------

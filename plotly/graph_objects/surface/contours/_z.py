@@ -52,7 +52,7 @@ class Z(_BaseTraceHierarchyType):
 
         The 'end' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -111,7 +111,8 @@ class Z(_BaseTraceHierarchyType):
         Sets the width of the highlighted contour lines.
 
         The 'highlightwidth' property is a number and may be specified as:
-          - An int or float in the interval [1, 16]
+
+        - An int or float in the interval [1, 16]
 
         Returns
         -------
@@ -167,7 +168,8 @@ class Z(_BaseTraceHierarchyType):
         Sets the step between each contour level. Must be positive.
 
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -187,7 +189,7 @@ class Z(_BaseTraceHierarchyType):
 
         The 'start' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -224,7 +226,8 @@ class Z(_BaseTraceHierarchyType):
         Sets the width of the contour lines.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [1, 16]
+
+        - An int or float in the interval [1, 16]
 
         Returns
         -------

@@ -194,7 +194,7 @@ class Scatter(_BaseTraceType):
 
         The 'dx' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -213,7 +213,7 @@ class Scatter(_BaseTraceType):
 
         The 'dy' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -287,9 +287,11 @@ class Scatter(_BaseTraceType):
         be pushed down in the drawing order.
 
         The 'fill' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'tozeroy', 'tozerox', 'tonexty', 'tonextx',
-                'toself', 'tonext']
+
+        - One of the following enumeration values:
+
+            ['none', 'tozeroy', 'tozerox', 'tonexty', 'tonextx', 'toself',
+            'tonext']
 
         Returns
         -------
@@ -384,8 +386,10 @@ class Scatter(_BaseTraceType):
         subplot, each will be normalized within its own set.
 
         The 'groupnorm' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['', 'fraction', 'percent']
+
+        - One of the following enumeration values:
+
+            ['', 'fraction', 'percent']
 
         Returns
         -------
@@ -701,7 +705,7 @@ class Scatter(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -720,7 +724,8 @@ class Scatter(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -887,7 +892,8 @@ class Scatter(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -911,8 +917,10 @@ class Scatter(_BaseTraceType):
         value of `fill`.
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['v', 'h']
+
+        - One of the following enumeration values:
+
+            ['v', 'h']
 
         Returns
         -------
@@ -997,8 +1005,10 @@ class Scatter(_BaseTraceType):
         constant beyond the existing values.
 
         The 'stackgaps' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['infer zero', 'interpolate']
+
+        - One of the following enumeration values:
+
+            ['infer zero', 'interpolate']
 
         Returns
         -------
@@ -1112,11 +1122,14 @@ class Scatter(_BaseTraceType):
         (x,y) coordinates.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right', 'middle left',
-                'middle center', 'middle right', 'bottom left', 'bottom
-                center', 'bottom right']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['top left', 'top center', 'top right', 'middle left', 'middle
+            center', 'middle right', 'bottom left', 'bottom center',
+            'bottom right']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1293,8 +1306,10 @@ class Scatter(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1372,11 +1387,13 @@ class Scatter(_BaseTraceType):
         Sets the calendar system to use with `x` date data.
 
         The 'xcalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1465,8 +1482,10 @@ class Scatter(_BaseTraceType):
         alignment of data points on the x axis.
 
         The 'xperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------
@@ -1562,11 +1581,13 @@ class Scatter(_BaseTraceType):
         Sets the calendar system to use with `y` date data.
 
         The 'ycalendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -1655,8 +1676,10 @@ class Scatter(_BaseTraceType):
         alignment of data points on the y axis.
 
         The 'yperiodalignment' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'middle', 'end']
+
+        - One of the following enumeration values:
+
+            ['start', 'middle', 'end']
 
         Returns
         -------

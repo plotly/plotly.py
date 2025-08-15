@@ -72,8 +72,10 @@ class Icicle(_BaseTraceType):
         leaves.
 
         The 'branchvalues' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['remainder', 'total']
+
+        - One of the following enumeration values:
+
+            ['remainder', 'total']
 
         Returns
         -------
@@ -505,7 +507,7 @@ class Icicle(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -524,7 +526,8 @@ class Icicle(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -664,7 +667,8 @@ class Icicle(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -888,10 +892,12 @@ class Icicle(_BaseTraceType):
         Sets the positions of the `text` elements.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right', 'middle left',
-                'middle center', 'middle right', 'bottom left', 'bottom
-                center', 'bottom right']
+
+        - One of the following enumeration values:
+
+            ['top left', 'top center', 'top right', 'middle left', 'middle
+            center', 'middle right', 'bottom left', 'bottom center',
+            'bottom right']
 
         Returns
         -------
@@ -1089,8 +1095,10 @@ class Icicle(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

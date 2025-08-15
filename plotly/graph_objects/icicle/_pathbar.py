@@ -17,8 +17,10 @@ class Pathbar(_BaseTraceHierarchyType):
         labels.
 
         The 'edgeshape' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['>', '<', '|', '/', '\\']
+
+        - One of the following enumeration values:
+
+            ['>', '<', '|', '/', '\\']
 
         Returns
         -------
@@ -37,8 +39,10 @@ class Pathbar(_BaseTraceHierarchyType):
         should be presented.
 
         The 'side' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['top', 'bottom']
 
         Returns
         -------
@@ -79,7 +83,8 @@ class Pathbar(_BaseTraceHierarchyType):
         each side.
 
         The 'thickness' property is a number and may be specified as:
-          - An int or float in the interval [12, inf]
+
+        - An int or float in the interval [12, inf]
 
         Returns
         -------

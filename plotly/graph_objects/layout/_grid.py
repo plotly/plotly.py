@@ -77,8 +77,10 @@ class Grid(_BaseLayoutHierarchyType):
         iterating rows according to `roworder`.
 
         The 'pattern' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['independent', 'coupled']
+
+        - One of the following enumeration values:
+
+            ['independent', 'coupled']
 
         Returns
         -------
@@ -97,8 +99,10 @@ class Grid(_BaseLayoutHierarchyType):
         always enumerated from left to right.
 
         The 'roworder' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top to bottom', 'bottom to top']
+
+        - One of the following enumeration values:
+
+            ['top to bottom', 'bottom to top']
 
         Returns
         -------
@@ -144,15 +148,18 @@ class Grid(_BaseLayoutHierarchyType):
         using the `gridcell` attribute.
 
         The 'subplots' property is an info array that may be specified as:
-    
+
         * a 2D list where:
-        
-            The 'subplots\[i\]\[j\]' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
+
+            The 'subplots\\[i\\]\\[j\\]' property is an enumeration that may be specified as:
+
+            - One of the following enumeration values:
+
                 ['']
-          - A string that matches one of the following regular expressions:
-                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?y(\\[2-9\\]|\\[1-9\\]\
-                \[0-9\\]+)?$']
+
+            - A string that matches one of the following regular expressions:
+
+                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?$']
 
         Returns
         -------
@@ -175,11 +182,17 @@ class Grid(_BaseLayoutHierarchyType):
         IDs.
 
         The 'xaxes' property is an info array that may be specified as:
+
         * a list of elements where:
-          The 'xaxes[i]' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
+
+            The 'xaxes[i]' property is an enumeration that may be specified as:
+
+            - One of the following enumeration values:
+
                 ['']
-          - A string that matches one of the following regular expressions:
+
+            - A string that matches one of the following regular expressions:
+
                 ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
@@ -200,7 +213,8 @@ class Grid(_BaseLayoutHierarchyType):
         coupled-axes grids and 0.2 for independent grids.
 
         The 'xgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -220,8 +234,10 @@ class Grid(_BaseLayoutHierarchyType):
         each x axis is used in. "top" and "top plot" are similar.
 
         The 'xside' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['bottom', 'bottom plot', 'top plot', 'top']
+
+        - One of the following enumeration values:
+
+            ['bottom', 'bottom plot', 'top plot', 'top']
 
         Returns
         -------
@@ -244,11 +260,17 @@ class Grid(_BaseLayoutHierarchyType):
         IDs.
 
         The 'yaxes' property is an info array that may be specified as:
+
         * a list of elements where:
-          The 'yaxes[i]' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
+
+            The 'yaxes[i]' property is an enumeration that may be specified as:
+
+            - One of the following enumeration values:
+
                 ['']
-          - A string that matches one of the following regular expressions:
+
+            - A string that matches one of the following regular expressions:
+
                 ['^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
@@ -269,7 +291,8 @@ class Grid(_BaseLayoutHierarchyType):
         coupled-axes grids and 0.3 for independent grids.
 
         The 'ygap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -290,8 +313,10 @@ class Grid(_BaseLayoutHierarchyType):
         similar.
 
         The 'yside' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'left plot', 'right plot', 'right']
+
+        - One of the following enumeration values:
+
+            ['left', 'left plot', 'right plot', 'right']
 
         Returns
         -------

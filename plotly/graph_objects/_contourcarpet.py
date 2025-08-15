@@ -130,8 +130,10 @@ class Contourcarpet(_BaseTraceType):
         behavior when `x` is not provided).
 
         The 'atype' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['array', 'scaled']
+
+        - One of the following enumeration values:
+
+            ['array', 'scaled']
 
         Returns
         -------
@@ -251,8 +253,10 @@ class Contourcarpet(_BaseTraceType):
         behavior when `y` is not provided)
 
         The 'btype' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['array', 'scaled']
+
+        - One of the following enumeration values:
+
+            ['array', 'scaled']
 
         Returns
         -------
@@ -445,7 +449,7 @@ class Contourcarpet(_BaseTraceType):
 
         The 'da' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -464,7 +468,7 @@ class Contourcarpet(_BaseTraceType):
 
         The 'db' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -654,7 +658,7 @@ class Contourcarpet(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -673,7 +677,8 @@ class Contourcarpet(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -796,7 +801,8 @@ class Contourcarpet(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -998,8 +1004,10 @@ class Contourcarpet(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -1104,7 +1112,7 @@ class Contourcarpet(_BaseTraceType):
 
         The 'zmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1125,7 +1133,7 @@ class Contourcarpet(_BaseTraceType):
 
         The 'zmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1145,7 +1153,7 @@ class Contourcarpet(_BaseTraceType):
 
         The 'zmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

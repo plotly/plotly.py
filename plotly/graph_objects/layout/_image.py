@@ -34,8 +34,10 @@ class Image(_BaseLayoutHierarchyType):
         the entire plot area.
 
         The 'layer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['below', 'above']
+
+        - One of the following enumeration values:
+
+            ['below', 'above']
 
         Returns
         -------
@@ -78,7 +80,8 @@ class Image(_BaseLayoutHierarchyType):
         Sets the opacity of the image.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -101,7 +104,7 @@ class Image(_BaseLayoutHierarchyType):
 
         The 'sizex' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -124,7 +127,7 @@ class Image(_BaseLayoutHierarchyType):
 
         The 'sizey' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -142,8 +145,10 @@ class Image(_BaseLayoutHierarchyType):
         Specifies which dimension of the image to constrain.
 
         The 'sizing' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['fill', 'contain', 'stretch']
+
+        - One of the following enumeration values:
+
+            ['fill', 'contain', 'stretch']
 
         Returns
         -------
@@ -250,8 +255,10 @@ class Image(_BaseLayoutHierarchyType):
         Sets the anchor for the x position
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['left', 'center', 'right']
 
         Returns
         -------
@@ -279,10 +286,14 @@ class Image(_BaseLayoutHierarchyType):
         left and the right of the domain of the second x axis.
 
         The 'xref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['paper']
-          - A string that matches one of the following regular expressions:
-                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            ['paper']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------
@@ -319,8 +330,10 @@ class Image(_BaseLayoutHierarchyType):
         Sets the anchor for the y position.
 
         The 'yanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['top', 'middle', 'bottom']
 
         Returns
         -------
@@ -348,10 +361,14 @@ class Image(_BaseLayoutHierarchyType):
         bottom and the top of the domain of the second y axis.
 
         The 'yref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['paper']
-          - A string that matches one of the following regular expressions:
-                ['^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            ['paper']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------

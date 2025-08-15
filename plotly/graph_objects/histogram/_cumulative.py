@@ -21,8 +21,10 @@ class Cumulative(_BaseTraceHierarchyType):
         half-bin bias, and "half" removes it.
 
         The 'currentbin' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['include', 'exclude', 'half']
+
+        - One of the following enumeration values:
+
+            ['include', 'exclude', 'half']
 
         Returns
         -------
@@ -43,8 +45,10 @@ class Cumulative(_BaseTraceHierarchyType):
         decreases from left to right.
 
         The 'direction' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['increasing', 'decreasing']
+
+        - One of the following enumeration values:
+
+            ['increasing', 'decreasing']
 
         Returns
         -------

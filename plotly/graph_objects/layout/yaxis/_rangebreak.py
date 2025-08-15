@@ -49,7 +49,8 @@ class Rangebreak(_BaseLayoutHierarchyType):
         milliseconds.
 
         The 'dvalue' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -120,8 +121,10 @@ class Rangebreak(_BaseLayoutHierarchyType):
         5pm to 8am (i.e. skips non-work hours).
 
         The 'pattern' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['day of week', 'hour', '']
+
+        - One of the following enumeration values:
+
+            ['day of week', 'hour', '']
 
         Returns
         -------
@@ -167,8 +170,10 @@ class Rangebreak(_BaseLayoutHierarchyType):
         values along the axis.
 
         The 'values' property is an info array that may be specified as:
+
         * a list of elements where:
-          The 'values[i]' property accepts values of any type
+
+            The 'values[i]' property accepts values of any type
 
         Returns
         -------

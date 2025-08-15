@@ -95,8 +95,10 @@ class Shape(_BaseLayoutHierarchyType):
         US/docs/Web/SVG/Attribute/fill-rule
 
         The 'fillrule' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['evenodd', 'nonzero']
+
+        - One of the following enumeration values:
+
+            ['evenodd', 'nonzero']
 
         Returns
         -------
@@ -135,8 +137,10 @@ class Shape(_BaseLayoutHierarchyType):
         ("above").
 
         The 'layer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['below', 'above', 'between']
+
+        - One of the following enumeration values:
+
+            ['below', 'above', 'between']
 
         Returns
         -------
@@ -225,7 +229,7 @@ class Shape(_BaseLayoutHierarchyType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -244,7 +248,8 @@ class Shape(_BaseLayoutHierarchyType):
         shape.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -306,7 +311,8 @@ class Shape(_BaseLayoutHierarchyType):
         Sets the opacity of the shape.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -413,8 +419,10 @@ class Shape(_BaseLayoutHierarchyType):
         using `path`. with respect to the axes' sizing mode.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['circle', 'rect', 'path', 'line']
+
+        - One of the following enumeration values:
+
+            ['circle', 'rect', 'path', 'line']
 
         Returns
         -------
@@ -434,8 +442,10 @@ class Shape(_BaseLayoutHierarchyType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -474,7 +484,8 @@ class Shape(_BaseLayoutHierarchyType):
         category.
 
         The 'x0shift' property is a number and may be specified as:
-          - An int or float in the interval [-1, 1]
+
+        - An int or float in the interval [-1, 1]
 
         Returns
         -------
@@ -513,7 +524,8 @@ class Shape(_BaseLayoutHierarchyType):
         category.
 
         The 'x1shift' property is a number and may be specified as:
-          - An int or float in the interval [-1, 1]
+
+        - An int or float in the interval [-1, 1]
 
         Returns
         -------
@@ -562,10 +574,14 @@ class Shape(_BaseLayoutHierarchyType):
         right of the domain of the second x axis.
 
         The 'xref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['paper']
-          - A string that matches one of the following regular expressions:
-                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            ['paper']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------
@@ -590,8 +606,10 @@ class Shape(_BaseLayoutHierarchyType):
         maintaining a position relative to data or plot fraction.
 
         The 'xsizemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['scaled', 'pixel']
+
+        - One of the following enumeration values:
+
+            ['scaled', 'pixel']
 
         Returns
         -------
@@ -630,7 +648,8 @@ class Shape(_BaseLayoutHierarchyType):
         category.
 
         The 'y0shift' property is a number and may be specified as:
-          - An int or float in the interval [-1, 1]
+
+        - An int or float in the interval [-1, 1]
 
         Returns
         -------
@@ -669,7 +688,8 @@ class Shape(_BaseLayoutHierarchyType):
         category.
 
         The 'y1shift' property is a number and may be specified as:
-          - An int or float in the interval [-1, 1]
+
+        - An int or float in the interval [-1, 1]
 
         Returns
         -------
@@ -718,10 +738,14 @@ class Shape(_BaseLayoutHierarchyType):
         bottom and the top of the domain of the second y axis.
 
         The 'yref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['paper']
-          - A string that matches one of the following regular expressions:
-                ['^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            ['paper']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------
@@ -746,8 +770,10 @@ class Shape(_BaseLayoutHierarchyType):
         maintaining a position relative to data or plot fraction.
 
         The 'ysizemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['scaled', 'pixel']
+
+        - One of the following enumeration values:
+
+            ['scaled', 'pixel']
 
         Returns
         -------

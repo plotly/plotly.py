@@ -25,7 +25,8 @@ class Lighting(_BaseTraceHierarchyType):
         out the image.
 
         The 'ambient' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -44,7 +45,8 @@ class Lighting(_BaseTraceHierarchyType):
         range of angles.
 
         The 'diffuse' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -63,7 +65,8 @@ class Lighting(_BaseTraceHierarchyType):
         from degenerate geometry.
 
         The 'facenormalsepsilon' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -83,7 +86,8 @@ class Lighting(_BaseTraceHierarchyType):
         of the paper (almost 90 degrees), causing shine.
 
         The 'fresnel' property is a number and may be specified as:
-          - An int or float in the interval [0, 5]
+
+        - An int or float in the interval [0, 5]
 
         Returns
         -------
@@ -102,7 +106,8 @@ class Lighting(_BaseTraceHierarchyType):
         and less contrasty the shine.
 
         The 'roughness' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -121,7 +126,8 @@ class Lighting(_BaseTraceHierarchyType):
         single direction, causing shine.
 
         The 'specular' property is a number and may be specified as:
-          - An int or float in the interval [0, 2]
+
+        - An int or float in the interval [0, 2]
 
         Returns
         -------
@@ -140,7 +146,8 @@ class Lighting(_BaseTraceHierarchyType):
         arising from degenerate geometry.
 
         The 'vertexnormalsepsilon' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------

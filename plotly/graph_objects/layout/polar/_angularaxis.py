@@ -69,8 +69,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         detection. Defaults to layout.autotypenumbers.
 
         The 'autotypenumbers' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['convert types', 'strict']
+
+        - One of the following enumeration values:
+
+            ['convert types', 'strict']
 
         Returns
         -------
@@ -141,14 +143,16 @@ class AngularAxis(_BaseLayoutHierarchyType):
         of all the values.
 
         The 'categoryorder' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['trace', 'category ascending', 'category descending',
-                'array', 'total ascending', 'total descending', 'min
-                ascending', 'min descending', 'max ascending', 'max
-                descending', 'sum ascending', 'sum descending', 'mean
-                ascending', 'mean descending', 'geometric mean ascending',
-                'geometric mean descending', 'median ascending', 'median
-                descending']
+
+        - One of the following enumeration values:
+
+            ['trace', 'category ascending', 'category descending',
+            'array', 'total ascending', 'total descending', 'min
+            ascending', 'min descending', 'max ascending', 'max
+            descending', 'sum ascending', 'sum descending', 'mean
+            ascending', 'mean descending', 'geometric mean ascending',
+            'geometric mean descending', 'median ascending', 'median
+            descending']
 
         Returns
         -------
@@ -191,8 +195,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the direction corresponding to positive angles.
 
         The 'direction' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['counterclockwise', 'clockwise']
+
+        - One of the following enumeration values:
+
+            ['counterclockwise', 'clockwise']
 
         Returns
         -------
@@ -250,8 +256,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "B", 1B.
 
         The 'exponentformat' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+
+        - One of the following enumeration values:
+
+            ['none', 'e', 'E', 'power', 'SI', 'B']
 
         Returns
         -------
@@ -315,7 +323,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the grid lines.
 
         The 'gridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -391,8 +400,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         False to show markers and/or text nodes above this axis.
 
         The 'layer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['above traces', 'below traces']
+
+        - One of the following enumeration values:
+
+            ['above traces', 'below traces']
 
         Returns
         -------
@@ -432,7 +443,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the axis line.
 
         The 'linewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -451,7 +463,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         has an effect when `tickformat` is "SI" or "B".
 
         The 'minexponent' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -492,7 +505,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         `angularaxis.type` is "category".
 
         The 'period' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -556,8 +570,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         no exponents appear.
 
         The 'showexponent' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -633,8 +649,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "none", tick prefixes are hidden.
 
         The 'showtickprefix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -652,8 +670,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Same as `showtickprefix` but for tick suffixes.
 
         The 'showticksuffix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -672,8 +692,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         effect only when `angularaxis.type` is "linear".
 
         The 'thetaunit' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['radians', 'degrees']
+
+        - One of the following enumeration values:
+
+            ['radians', 'degrees']
 
         Returns
         -------
@@ -875,7 +897,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the tick length (in px).
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -899,8 +922,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         is the default value if `tickvals` is provided).
 
         The 'tickmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'linear', 'array']
+
+        - One of the following enumeration values:
+
+            ['auto', 'linear', 'array']
 
         Returns
         -------
@@ -939,8 +964,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         drawn outside (inside) the axis lines.
 
         The 'ticks' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', '']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', '']
 
         Returns
         -------
@@ -1052,7 +1079,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1073,8 +1101,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
         polar axis.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['-', 'linear', 'category']
+
+        - One of the following enumeration values:
+
+            ['-', 'linear', 'category']
 
         Returns
         -------

@@ -38,7 +38,7 @@ class Symbol(_BaseLayoutHierarchyType):
 
         The 'iconsize' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -61,8 +61,10 @@ class Symbol(_BaseLayoutHierarchyType):
         placed on the center of the geometry
 
         The 'placement' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['point', 'line', 'line-center']
+
+        - One of the following enumeration values:
+
+            ['point', 'line', 'line-center']
 
         Returns
         -------
@@ -123,10 +125,12 @@ class Symbol(_BaseLayoutHierarchyType):
         (x,y) coordinates.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right', 'middle left',
-                'middle center', 'middle right', 'bottom left', 'bottom
-                center', 'bottom right']
+
+        - One of the following enumeration values:
+
+            ['top left', 'top center', 'top right', 'middle left', 'middle
+            center', 'middle right', 'bottom left', 'bottom center',
+            'bottom right']
 
         Returns
         -------

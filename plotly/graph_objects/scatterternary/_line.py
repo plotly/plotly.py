@@ -27,8 +27,10 @@ class Line(_BaseTraceHierarchyType):
         markers if `marker.angleref` is set to "previous".
 
         The 'backoff' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, inf]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -112,8 +114,10 @@ class Line(_BaseTraceHierarchyType):
         correspond to step-wise line shapes.
 
         The 'shape' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'spline']
+
+        - One of the following enumeration values:
+
+            ['linear', 'spline']
 
         Returns
         -------
@@ -133,7 +137,8 @@ class Line(_BaseTraceHierarchyType):
         to a "linear" shape).
 
         The 'smoothing' property is a number and may be specified as:
-          - An int or float in the interval [0, 1.3]
+
+        - An int or float in the interval [0, 1.3]
 
         Returns
         -------
@@ -151,7 +156,8 @@ class Line(_BaseTraceHierarchyType):
         Sets the line width (in px).
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

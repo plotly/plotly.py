@@ -73,7 +73,8 @@ class Selection(_BaseLayoutHierarchyType):
         Sets the opacity of the selection.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -140,8 +141,10 @@ class Selection(_BaseLayoutHierarchyType):
         using `path`.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['rect', 'path']
+
+        - One of the following enumeration values:
+
+            ['rect', 'path']
 
         Returns
         -------
@@ -203,10 +206,14 @@ class Selection(_BaseLayoutHierarchyType):
         left and the right of the domain of the second x axis.
 
         The 'xref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['paper']
-          - A string that matches one of the following regular expressions:
-                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            ['paper']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------
@@ -268,10 +275,14 @@ class Selection(_BaseLayoutHierarchyType):
         bottom and the top of the domain of the second y axis.
 
         The 'yref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['paper']
-          - A string that matches one of the following regular expressions:
-                ['^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            ['paper']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------

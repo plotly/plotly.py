@@ -32,8 +32,10 @@ class Contours(_BaseTraceHierarchyType):
         lines. If "none", no coloring is applied on this trace.
 
         The 'coloring' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['fill', 'heatmap', 'lines', 'none']
+
+        - One of the following enumeration values:
+
+            ['fill', 'heatmap', 'lines', 'none']
 
         Returns
         -------
@@ -53,7 +55,7 @@ class Contours(_BaseTraceHierarchyType):
 
         The 'end' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -123,9 +125,11 @@ class Contours(_BaseTraceHierarchyType):
         transforms.
 
         The 'operation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['=', '<', '>=', '>', '<=', '[]', '()', '[)', '(]', '][',
-                ')(', '](', ')[']
+
+        - One of the following enumeration values:
+
+            ['=', '<', '>=', '>', '<=', '[]', '()', '[)', '(]', '][',
+            ')(', '](', ')[']
 
         Returns
         -------
@@ -181,7 +185,8 @@ class Contours(_BaseTraceHierarchyType):
         Sets the step between each contour level. Must be positive.
 
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -201,7 +206,7 @@ class Contours(_BaseTraceHierarchyType):
 
         The 'start' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -222,8 +227,10 @@ class Contours(_BaseTraceHierarchyType):
         specified by the `operation` and `value` parameters.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['levels', 'constraint']
+
+        - One of the following enumeration values:
+
+            ['levels', 'constraint']
 
         Returns
         -------

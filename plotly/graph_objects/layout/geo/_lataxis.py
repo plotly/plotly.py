@@ -25,7 +25,7 @@ class Lataxis(_BaseLayoutHierarchyType):
 
         The 'dtick' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -89,7 +89,8 @@ class Lataxis(_BaseLayoutHierarchyType):
         Sets the graticule's stroke width (in px).
 
         The 'gridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -154,7 +155,7 @@ class Lataxis(_BaseLayoutHierarchyType):
 
         The 'tick0' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

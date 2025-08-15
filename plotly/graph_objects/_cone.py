@@ -81,8 +81,10 @@ class Cone(_BaseTraceType):
         corresponds to 1/4 from the tail to tip.
 
         The 'anchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['tip', 'tail', 'cm', 'center']
+
+        - One of the following enumeration values:
+
+            ['tip', 'tail', 'cm', 'center']
 
         Returns
         -------
@@ -147,7 +149,7 @@ class Cone(_BaseTraceType):
 
         The 'cmax' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -169,7 +171,7 @@ class Cone(_BaseTraceType):
 
         The 'cmid' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -190,7 +192,7 @@ class Cone(_BaseTraceType):
 
         The 'cmin' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -615,7 +617,7 @@ class Cone(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -634,7 +636,8 @@ class Cone(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -759,7 +762,8 @@ class Cone(_BaseTraceType):
         improved in the near future and is subject to change.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -862,8 +866,10 @@ class Cone(_BaseTraceType):
         "raw".
 
         The 'sizemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['scaled', 'absolute', 'raw']
+
+        - One of the following enumeration values:
+
+            ['scaled', 'absolute', 'raw']
 
         Returns
         -------
@@ -891,7 +897,8 @@ class Cone(_BaseTraceType):
         sample's maximum vector norm.
 
         The 'sizeref' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1121,8 +1128,10 @@ class Cone(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

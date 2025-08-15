@@ -110,7 +110,8 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the width (in px) or the border enclosing this color bar.
 
         The 'borderwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -168,8 +169,10 @@ class ColorBar(_BaseTraceHierarchyType):
         "B", 1B.
 
         The 'exponentformat' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+
+        - One of the following enumeration values:
+
+            ['none', 'e', 'E', 'power', 'SI', 'B']
 
         Returns
         -------
@@ -214,7 +217,8 @@ class ColorBar(_BaseTraceHierarchyType):
         length minus the padding on both ends.
 
         The 'len' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -234,8 +238,10 @@ class ColorBar(_BaseTraceHierarchyType):
         "fraction" or in *pixels. Use `len` to set the value.
 
         The 'lenmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['fraction', 'pixels']
+
+        - One of the following enumeration values:
+
+            ['fraction', 'pixels']
 
         Returns
         -------
@@ -254,7 +260,8 @@ class ColorBar(_BaseTraceHierarchyType):
         has an effect when `tickformat` is "SI" or "B".
 
         The 'minexponent' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -294,8 +301,10 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the orientation of the colorbar.
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['h', 'v']
+
+        - One of the following enumeration values:
+
+            ['h', 'v']
 
         Returns
         -------
@@ -335,7 +344,8 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the width (in px) of the axis line.
 
         The 'outlinewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -374,8 +384,10 @@ class ColorBar(_BaseTraceHierarchyType):
         no exponents appear.
 
         The 'showexponent' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -414,8 +426,10 @@ class ColorBar(_BaseTraceHierarchyType):
         "none", tick prefixes are hidden.
 
         The 'showtickprefix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -433,8 +447,10 @@ class ColorBar(_BaseTraceHierarchyType):
         Same as `showtickprefix` but for tick suffixes.
 
         The 'showticksuffix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -453,7 +469,8 @@ class ColorBar(_BaseTraceHierarchyType):
         size of the padding, ticks and labels.
 
         The 'thickness' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -473,8 +490,10 @@ class ColorBar(_BaseTraceHierarchyType):
         "fraction" or in "pixels". Use `thickness` to set the value.
 
         The 'thicknessmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['fraction', 'pixels']
+
+        - One of the following enumeration values:
+
+            ['fraction', 'pixels']
 
         Returns
         -------
@@ -656,8 +675,10 @@ class ColorBar(_BaseTraceHierarchyType):
         default is *hide past div*.
 
         The 'ticklabeloverflow' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['allow', 'hide past div', 'hide past domain']
+
+        - One of the following enumeration values:
+
+            ['allow', 'hide past div', 'hide past domain']
 
         Returns
         -------
@@ -677,10 +698,12 @@ class ColorBar(_BaseTraceHierarchyType):
         and bottom when `orientation` is "v".
 
         The 'ticklabelposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', 'outside top', 'inside top',
-                'outside left', 'inside left', 'outside right', 'inside
-                right', 'outside bottom', 'inside bottom']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', 'outside top', 'inside top', 'outside
+            left', 'inside left', 'outside right', 'inside right',
+            'outside bottom', 'inside bottom']
 
         Returns
         -------
@@ -722,7 +745,8 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the tick length (in px).
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -746,8 +770,10 @@ class ColorBar(_BaseTraceHierarchyType):
         is the default value if `tickvals` is provided).
 
         The 'tickmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'linear', 'array']
+
+        - One of the following enumeration values:
+
+            ['auto', 'linear', 'array']
 
         Returns
         -------
@@ -786,8 +812,10 @@ class ColorBar(_BaseTraceHierarchyType):
         drawn outside (inside) the axis lines.
 
         The 'ticks' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', '']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', '']
 
         Returns
         -------
@@ -899,7 +927,8 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -943,7 +972,7 @@ class ColorBar(_BaseTraceHierarchyType):
 
         The 'x' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -964,8 +993,10 @@ class ColorBar(_BaseTraceHierarchyType):
         "center" when `orientation` is "h".
 
         The 'xanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'center', 'right']
+
+        - One of the following enumeration values:
+
+            ['left', 'center', 'right']
 
         Returns
         -------
@@ -983,7 +1014,8 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the amount of padding (in px) along the x direction.
 
         The 'xpad' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1003,8 +1035,10 @@ class ColorBar(_BaseTraceHierarchyType):
         plotting area only.
 
         The 'xref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['container', 'paper']
+
+        - One of the following enumeration values:
+
+            ['container', 'paper']
 
         Returns
         -------
@@ -1029,7 +1063,7 @@ class ColorBar(_BaseTraceHierarchyType):
 
         The 'y' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1050,8 +1084,10 @@ class ColorBar(_BaseTraceHierarchyType):
         and "bottom" when `orientation` is "h".
 
         The 'yanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['top', 'middle', 'bottom']
 
         Returns
         -------
@@ -1069,7 +1105,8 @@ class ColorBar(_BaseTraceHierarchyType):
         Sets the amount of padding (in px) along the y direction.
 
         The 'ypad' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1089,8 +1126,10 @@ class ColorBar(_BaseTraceHierarchyType):
         plotting area only.
 
         The 'yref' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['container', 'paper']
+
+        - One of the following enumeration values:
+
+            ['container', 'paper']
 
         Returns
         -------

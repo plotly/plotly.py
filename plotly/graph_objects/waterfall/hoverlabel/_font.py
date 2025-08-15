@@ -197,8 +197,10 @@ class Font(_BaseTraceHierarchyType):
     def size(self):
         """
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [1, inf]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [1, inf]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -235,9 +237,12 @@ class Font(_BaseTraceHierarchyType):
         face from its family.
 
         The 'style' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'italic']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['normal', 'italic']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -275,9 +280,12 @@ class Font(_BaseTraceHierarchyType):
         capitalized.
 
         The 'textcase' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'word caps', 'upper', 'lower']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['normal', 'word caps', 'upper', 'lower']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -313,10 +321,13 @@ class Font(_BaseTraceHierarchyType):
         Sets the variant of the font.
 
         The 'variant' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'small-caps', 'all-small-caps',
-                'all-petite-caps', 'petite-caps', 'unicase']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['normal', 'small-caps', 'all-small-caps', 'all-petite-caps',
+            'petite-caps', 'unicase']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

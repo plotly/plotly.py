@@ -152,7 +152,7 @@ class Scatterpolar(_BaseTraceType):
 
         The 'dr' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -173,7 +173,7 @@ class Scatterpolar(_BaseTraceType):
 
         The 'dtheta' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -199,8 +199,10 @@ class Scatterpolar(_BaseTraceType):
         the other.
 
         The 'fill' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'toself', 'tonext']
+
+        - One of the following enumeration values:
+
+            ['none', 'toself', 'tonext']
 
         Returns
         -------
@@ -540,7 +542,7 @@ class Scatterpolar(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -559,7 +561,8 @@ class Scatterpolar(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -705,7 +708,8 @@ class Scatterpolar(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -927,11 +931,14 @@ class Scatterpolar(_BaseTraceType):
         (x,y) coordinates.
 
         The 'textposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right', 'middle left',
-                'middle center', 'middle right', 'bottom left', 'bottom
-                center', 'bottom right']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['top left', 'top center', 'top right', 'middle left', 'middle
+            center', 'middle right', 'bottom left', 'bottom center',
+            'bottom right']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1094,8 +1101,10 @@ class Scatterpolar(_BaseTraceType):
         on "linear" angular axes.
 
         The 'thetaunit' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['radians', 'degrees', 'gradians']
+
+        - One of the following enumeration values:
+
+            ['radians', 'degrees', 'gradians']
 
         Returns
         -------
@@ -1185,8 +1194,10 @@ class Scatterpolar(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

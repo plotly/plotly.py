@@ -44,7 +44,8 @@ class Title(_BaseLayoutHierarchyType):
         title at given standoff distance.
 
         The 'standoff' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

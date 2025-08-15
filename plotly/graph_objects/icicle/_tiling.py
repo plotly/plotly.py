@@ -44,8 +44,10 @@ class Tiling(_BaseTraceHierarchyType):
         `tiling.flip` is "x", the root nodes appear at the right.
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['v', 'h']
+
+        - One of the following enumeration values:
+
+            ['v', 'h']
 
         Returns
         -------
@@ -63,7 +65,8 @@ class Tiling(_BaseTraceHierarchyType):
         Sets the inner padding (in px).
 
         The 'pad' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

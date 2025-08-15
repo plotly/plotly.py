@@ -25,8 +25,10 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         more two or more lines
 
         The 'align' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'right', 'auto']
+
+        - One of the following enumeration values:
+
+            ['left', 'right', 'auto']
 
         Returns
         -------

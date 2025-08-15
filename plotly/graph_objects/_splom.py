@@ -430,7 +430,7 @@ class Splom(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -449,7 +449,8 @@ class Splom(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -550,7 +551,8 @@ class Splom(_BaseTraceType):
         Sets the opacity of the trace.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -798,8 +800,10 @@ class Splom(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------
@@ -822,11 +826,13 @@ class Splom(_BaseTraceType):
         less x-axis and one less y-axis.
 
         The 'xaxes' property is an info array that may be specified as:
+
         * a list of elements where:
-          The 'xaxes[i]' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+
+            The 'xaxes[i]' property is an identifier of a particular
+            subplot, of type 'x', that may be specified as the string 'x'
+            optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -878,11 +884,13 @@ class Splom(_BaseTraceType):
         less x-axis and one less y-axis.
 
         The 'yaxes' property is an info array that may be specified as:
+
         * a list of elements where:
-          The 'yaxes[i]' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+
+            The 'yaxes[i]' property is an identifier of a particular
+            subplot, of type 'y', that may be specified as the string 'y'
+            optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------

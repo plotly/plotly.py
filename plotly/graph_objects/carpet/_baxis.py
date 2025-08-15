@@ -115,8 +115,10 @@ class Baxis(_BaseTraceHierarchyType):
         `range` is provided, then `autorange` is set to False.
 
         The 'autorange' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'reversed']
+
+        - One of the following enumeration values:
+
+            [True, False, 'reversed']
 
         Returns
         -------
@@ -137,8 +139,10 @@ class Baxis(_BaseTraceHierarchyType):
         detection. Defaults to layout.autotypenumbers.
 
         The 'autotypenumbers' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['convert types', 'strict']
+
+        - One of the following enumeration values:
+
+            ['convert types', 'strict']
 
         Returns
         -------
@@ -205,9 +209,11 @@ class Baxis(_BaseTraceHierarchyType):
         `categoryarray`.
 
         The 'categoryorder' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['trace', 'category ascending', 'category descending',
-                'array']
+
+        - One of the following enumeration values:
+
+            ['trace', 'category ascending', 'category descending',
+            'array']
 
         Returns
         -------
@@ -223,8 +229,10 @@ class Baxis(_BaseTraceHierarchyType):
     def cheatertype(self):
         """
         The 'cheatertype' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['index', 'value']
+
+        - One of the following enumeration values:
+
+            ['index', 'value']
 
         Returns
         -------
@@ -267,7 +275,8 @@ class Baxis(_BaseTraceHierarchyType):
         The stride between grid lines along the axis
 
         The 'dtick' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -328,7 +337,7 @@ class Baxis(_BaseTraceHierarchyType):
 
         The 'endlinewidth' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -350,8 +359,10 @@ class Baxis(_BaseTraceHierarchyType):
         "B", 1B.
 
         The 'exponentformat' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+
+        - One of the following enumeration values:
+
+            ['none', 'e', 'E', 'power', 'SI', 'B']
 
         Returns
         -------
@@ -434,7 +445,8 @@ class Baxis(_BaseTraceHierarchyType):
         Sets the width (in px) of the axis line.
 
         The 'gridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -555,7 +567,8 @@ class Baxis(_BaseTraceHierarchyType):
         Sets the width (in px) of the axis line.
 
         The 'linewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -573,7 +586,8 @@ class Baxis(_BaseTraceHierarchyType):
         Hide SI prefix for 10^n if |n| is below this number
 
         The 'minexponent' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -656,7 +670,8 @@ class Baxis(_BaseTraceHierarchyType):
         Sets the width (in px) of the grid lines.
 
         The 'minorgridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -729,8 +744,10 @@ class Baxis(_BaseTraceHierarchyType):
         non-negative, regardless of the input data.
 
         The 'rangemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'tozero', 'nonnegative']
+
+        - One of the following enumeration values:
+
+            ['normal', 'tozero', 'nonnegative']
 
         Returns
         -------
@@ -769,8 +786,10 @@ class Baxis(_BaseTraceHierarchyType):
         no exponents appear.
 
         The 'showexponent' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -826,8 +845,10 @@ class Baxis(_BaseTraceHierarchyType):
         high side, both, or neither side of the axis.
 
         The 'showticklabels' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['start', 'end', 'both', 'none']
+
+        - One of the following enumeration values:
+
+            ['start', 'end', 'both', 'none']
 
         Returns
         -------
@@ -848,8 +869,10 @@ class Baxis(_BaseTraceHierarchyType):
         "none", tick prefixes are hidden.
 
         The 'showtickprefix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -867,8 +890,10 @@ class Baxis(_BaseTraceHierarchyType):
         Same as `showtickprefix` but for tick suffixes.
 
         The 'showticksuffix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -884,7 +909,8 @@ class Baxis(_BaseTraceHierarchyType):
     def smoothing(self):
         """
         The 'smoothing' property is a number and may be specified as:
-          - An int or float in the interval [0, 1.3]
+
+        - An int or float in the interval [0, 1.3]
 
         Returns
         -------
@@ -945,7 +971,7 @@ class Baxis(_BaseTraceHierarchyType):
 
         The 'startlinewidth' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -963,7 +989,8 @@ class Baxis(_BaseTraceHierarchyType):
         The starting index of grid lines along the axis
 
         The 'tick0' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1093,8 +1120,10 @@ class Baxis(_BaseTraceHierarchyType):
     def tickmode(self):
         """
         The 'tickmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'array']
+
+        - One of the following enumeration values:
+
+            ['linear', 'array']
 
         Returns
         -------
@@ -1246,8 +1275,10 @@ class Baxis(_BaseTraceHierarchyType):
         referenced the axis in question.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['-', 'linear', 'date', 'category']
+
+        - One of the following enumeration values:
+
+            ['-', 'linear', 'date', 'category']
 
         Returns
         -------

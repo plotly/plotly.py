@@ -264,8 +264,10 @@ class Layout(_BaseLayoutType):
         overridden for individual axes.
 
         The 'autotypenumbers' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['convert types', 'strict']
+
+        - One of the following enumeration values:
+
+            ['convert types', 'strict']
 
         Returns
         -------
@@ -302,7 +304,8 @@ class Layout(_BaseLayoutType):
         location coordinates.
 
         The 'bargap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -321,7 +324,8 @@ class Layout(_BaseLayoutType):
         location coordinate.
 
         The 'bargroupgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -346,8 +350,10 @@ class Layout(_BaseLayoutType):
         "opacity" to see multiple bars.
 
         The 'barmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['stack', 'group', 'overlay', 'relative']
+
+        - One of the following enumeration values:
+
+            ['stack', 'group', 'overlay', 'relative']
 
         Returns
         -------
@@ -368,8 +374,10 @@ class Layout(_BaseLayoutType):
         multiplied by 100 to show percentages.
 
         The 'barnorm' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['', 'fraction', 'percent']
+
+        - One of the following enumeration values:
+
+            ['', 'fraction', 'percent']
 
         Returns
         -------
@@ -389,7 +397,8 @@ class Layout(_BaseLayoutType):
         set.
 
         The 'boxgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -409,7 +418,8 @@ class Layout(_BaseLayoutType):
         set.
 
         The 'boxgroupgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -432,8 +442,10 @@ class Layout(_BaseLayoutType):
         on traces that have "width" set.
 
         The 'boxmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['group', 'overlay']
+
+        - One of the following enumeration values:
+
+            ['group', 'overlay']
 
         Returns
         -------
@@ -452,11 +464,13 @@ class Layout(_BaseLayoutType):
         displaying dates throughout the plot.
 
         The 'calendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -608,10 +622,12 @@ class Layout(_BaseLayoutType):
         "turntable" apply only to 3D scenes.
 
         The 'dragmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['zoom', 'pan', 'select', 'lasso', 'drawclosedpath',
-                'drawopenpath', 'drawline', 'drawrect', 'drawcircle',
-                'orbit', 'turntable', False]
+
+        - One of the following enumeration values:
+
+            ['zoom', 'pan', 'select', 'lasso', 'drawclosedpath',
+            'drawopenpath', 'drawline', 'drawrect', 'drawcircle', 'orbit',
+            'turntable', False]
 
         Returns
         -------
@@ -817,7 +833,8 @@ class Layout(_BaseLayoutType):
         location coordinates.
 
         The 'funnelgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -836,7 +853,8 @@ class Layout(_BaseLayoutType):
         location coordinate.
 
         The 'funnelgroupgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -859,8 +877,10 @@ class Layout(_BaseLayoutType):
         need to reduce "opacity" to see multiple bars.
 
         The 'funnelmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['stack', 'group', 'overlay']
+
+        - One of the following enumeration values:
+
+            ['stack', 'group', 'overlay']
 
         Returns
         -------
@@ -916,7 +936,8 @@ class Layout(_BaseLayoutType):
         Sets the plot's height (in px).
 
         The 'height' property is a number and may be specified as:
-          - An int or float in the interval [10, inf]
+
+        - An int or float in the interval [10, inf]
 
         Returns
         -------
@@ -1050,8 +1071,10 @@ class Layout(_BaseLayoutType):
         false, hover interactions are disabled.
 
         The 'hovermode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['x', 'y', 'closest', False, 'x unified', 'y unified']
+
+        - One of the following enumeration values:
+
+            ['x', 'y', 'closest', False, 'x unified', 'y unified']
 
         Returns
         -------
@@ -1074,8 +1097,10 @@ class Layout(_BaseLayoutType):
         `hovermode` is set to "x", *x unified*, "y" or *y unified*.
 
         The 'hoversubplots' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['single', 'overlaying', 'axis']
+
+        - One of the following enumeration values:
+
+            ['single', 'overlaying', 'axis']
 
         Returns
         -------
@@ -1276,7 +1301,8 @@ class Layout(_BaseLayoutType):
         px)
 
         The 'minreducedheight' property is a number and may be specified as:
-          - An int or float in the interval [2, inf]
+
+        - An int or float in the interval [2, inf]
 
         Returns
         -------
@@ -1295,7 +1321,8 @@ class Layout(_BaseLayoutType):
         px)
 
         The 'minreducedwidth' property is a number and may be specified as:
-          - An int or float in the interval [2, inf]
+
+        - An int or float in the interval [2, inf]
 
         Returns
         -------
@@ -1458,7 +1485,8 @@ class Layout(_BaseLayoutType):
         adjacent location coordinates. Defaults to `bargap`.
 
         The 'scattergap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -1481,8 +1509,10 @@ class Layout(_BaseLayoutType):
         scatter points.
 
         The 'scattermode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['group', 'overlay']
+
+        - One of the following enumeration values:
+
+            ['group', 'overlay']
 
         Returns
         -------
@@ -1522,8 +1552,10 @@ class Layout(_BaseLayoutType):
         diagonal and "any" sets no limit.
 
         The 'selectdirection' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['h', 'v', 'd', 'any']
+
+        - One of the following enumeration values:
+
+            ['h', 'v', 'd', 'any']
 
         Returns
         -------
@@ -2019,7 +2051,8 @@ class Layout(_BaseLayoutType):
         set.
 
         The 'violingap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -2039,7 +2072,8 @@ class Layout(_BaseLayoutType):
         set.
 
         The 'violingroupgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -2062,8 +2096,10 @@ class Layout(_BaseLayoutType):
         effect on traces that have "width" set.
 
         The 'violinmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['group', 'overlay']
+
+        - One of the following enumeration values:
+
+            ['group', 'overlay']
 
         Returns
         -------
@@ -2082,7 +2118,8 @@ class Layout(_BaseLayoutType):
         location coordinates.
 
         The 'waterfallgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -2101,7 +2138,8 @@ class Layout(_BaseLayoutType):
         location coordinate.
 
         The 'waterfallgroupgap' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -2123,8 +2161,10 @@ class Layout(_BaseLayoutType):
         need to reduce "opacity" to see multiple bars.
 
         The 'waterfallmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['group', 'overlay']
+
+        - One of the following enumeration values:
+
+            ['group', 'overlay']
 
         Returns
         -------
@@ -2142,7 +2182,8 @@ class Layout(_BaseLayoutType):
         Sets the plot's width (in px).
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [10, inf]
+
+        - An int or float in the interval [10, inf]
 
         Returns
         -------

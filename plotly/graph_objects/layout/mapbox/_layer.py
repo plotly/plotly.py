@@ -163,7 +163,8 @@ class Layer(_BaseLayoutHierarchyType):
         hidden.
 
         The 'maxzoom' property is a number and may be specified as:
-          - An int or float in the interval [0, 24]
+
+        - An int or float in the interval [0, 24]
 
         Returns
         -------
@@ -182,7 +183,8 @@ class Layer(_BaseLayoutHierarchyType):
         levels less than the minzoom, the layer will be hidden.
 
         The 'minzoom' property is a number and may be specified as:
-          - An int or float in the interval [0, 24]
+
+        - An int or float in the interval [0, 24]
 
         Returns
         -------
@@ -232,7 +234,8 @@ class Layer(_BaseLayoutHierarchyType):
         (mapbox.layer.paint.text-opacity)
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -313,8 +316,10 @@ class Layer(_BaseLayoutHierarchyType):
         layer data.
 
         The 'sourcetype' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['geojson', 'vector', 'raster', 'image']
+
+        - One of the following enumeration values:
+
+            ['geojson', 'vector', 'raster', 'image']
 
         Returns
         -------
@@ -384,8 +389,10 @@ class Layer(_BaseLayoutHierarchyType):
         `*image*`, only the "raster" value is allowed.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['circle', 'line', 'fill', 'symbol', 'raster']
+
+        - One of the following enumeration values:
+
+            ['circle', 'line', 'fill', 'symbol', 'raster']
 
         Returns
         -------

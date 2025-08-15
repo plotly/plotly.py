@@ -57,8 +57,10 @@ class Line(_BaseTraceHierarchyType):
         Sets the width (in px) of the line enclosing each sector.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, inf]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

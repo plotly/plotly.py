@@ -17,7 +17,8 @@ class Transition(_BaseLayoutHierarchyType):
         zero, updates are synchronous.
 
         The 'duration' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -35,16 +36,17 @@ class Transition(_BaseLayoutHierarchyType):
         The easing function used for the transition
 
         The 'easing' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'quad', 'cubic', 'sin', 'exp', 'circle',
-                'elastic', 'back', 'bounce', 'linear-in', 'quad-in',
-                'cubic-in', 'sin-in', 'exp-in', 'circle-in', 'elastic-in',
-                'back-in', 'bounce-in', 'linear-out', 'quad-out',
-                'cubic-out', 'sin-out', 'exp-out', 'circle-out',
-                'elastic-out', 'back-out', 'bounce-out', 'linear-in-out',
-                'quad-in-out', 'cubic-in-out', 'sin-in-out', 'exp-in-out',
-                'circle-in-out', 'elastic-in-out', 'back-in-out',
-                'bounce-in-out']
+
+        - One of the following enumeration values:
+
+            ['linear', 'quad', 'cubic', 'sin', 'exp', 'circle', 'elastic',
+            'back', 'bounce', 'linear-in', 'quad-in', 'cubic-in',
+            'sin-in', 'exp-in', 'circle-in', 'elastic-in', 'back-in',
+            'bounce-in', 'linear-out', 'quad-out', 'cubic-out', 'sin-out',
+            'exp-out', 'circle-out', 'elastic-out', 'back-out',
+            'bounce-out', 'linear-in-out', 'quad-in-out', 'cubic-in-out',
+            'sin-in-out', 'exp-in-out', 'circle-in-out', 'elastic-in-out',
+            'back-in-out', 'bounce-in-out']
 
         Returns
         -------
@@ -64,8 +66,10 @@ class Transition(_BaseLayoutHierarchyType):
         change.
 
         The 'ordering' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['layout first', 'traces first']
+
+        - One of the following enumeration values:
+
+            ['layout first', 'traces first']
 
         Returns
         -------

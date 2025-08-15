@@ -115,7 +115,8 @@ class Ternary(_BaseLayoutHierarchyType):
         each axis
 
         The 'sum' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

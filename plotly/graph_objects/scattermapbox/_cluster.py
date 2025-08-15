@@ -87,7 +87,8 @@ class Cluster(_BaseTraceHierarchyType):
         than this, points will never be clustered.
 
         The 'maxzoom' property is a number and may be specified as:
-          - An int or float in the interval [0, 24]
+
+        - An int or float in the interval [0, 24]
 
         Returns
         -------
@@ -105,8 +106,10 @@ class Cluster(_BaseTraceHierarchyType):
         Sets the marker opacity.
 
         The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, 1]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -142,8 +145,10 @@ class Cluster(_BaseTraceHierarchyType):
         Sets the size for each cluster step.
 
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, inf]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -183,8 +188,10 @@ class Cluster(_BaseTraceHierarchyType):
         the given value until one less than the next value.
 
         The 'step' property is a number and may be specified as:
-          - An int or float in the interval [-1, inf]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [-1, inf]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

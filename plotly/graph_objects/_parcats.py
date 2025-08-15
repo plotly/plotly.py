@@ -45,8 +45,10 @@ class Parcats(_BaseTraceType):
         dimensions are stationary.
 
         The 'arrangement' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['perpendicular', 'freeform', 'fixed']
+
+        - One of the following enumeration values:
+
+            ['perpendicular', 'freeform', 'fixed']
 
         Returns
         -------
@@ -84,8 +86,10 @@ class Parcats(_BaseTraceType):
         to 1 so that each state represents one observation
 
         The 'counts' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - An int or float in the interval [0, inf]
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -212,8 +216,10 @@ class Parcats(_BaseTraceType):
         categories per dimension.
 
         The 'hoveron' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['category', 'color', 'dimension']
+
+        - One of the following enumeration values:
+
+            ['category', 'color', 'dimension']
 
         Returns
         -------
@@ -319,7 +325,8 @@ class Parcats(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -422,8 +429,10 @@ class Parcats(_BaseTraceType):
         paths based on dimensions categories from right to left.
 
         The 'sortpaths' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['forward', 'backward']
+
+        - One of the following enumeration values:
+
+            ['forward', 'backward']
 
         Returns
         -------
@@ -534,8 +543,10 @@ class Parcats(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

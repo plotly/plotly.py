@@ -29,9 +29,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         more two or more lines
 
         The 'align' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'right', 'auto']
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - One of the following enumeration values:
+
+            ['left', 'right', 'auto']
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

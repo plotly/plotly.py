@@ -50,8 +50,10 @@ class Sankey(_BaseTraceType):
         are stationary.
 
         The 'arrangement' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['snap', 'perpendicular', 'freeform', 'fixed']
+
+        - One of the following enumeration values:
+
+            ['snap', 'perpendicular', 'freeform', 'fixed']
 
         Returns
         -------
@@ -260,7 +262,7 @@ class Sankey(_BaseTraceType):
 
         The 'legendrank' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -279,7 +281,8 @@ class Sankey(_BaseTraceType):
         trace.
 
         The 'legendwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -403,8 +406,10 @@ class Sankey(_BaseTraceType):
         Sets the orientation of the Sankey diagram.
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['v', 'h']
+
+        - One of the following enumeration values:
+
+            ['v', 'h']
 
         Returns
         -------
@@ -579,8 +584,10 @@ class Sankey(_BaseTraceType):
         legend item (provided that the legend itself is visible).
 
         The 'visible' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'legendonly']
+
+        - One of the following enumeration values:
+
+            [True, False, 'legendonly']
 
         Returns
         -------

@@ -38,9 +38,10 @@ class Line(_BaseTraceHierarchyType):
         Sets the style of the lines.
 
         The 'dash' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['dash', 'dashdot', 'dot', 'longdash', 'longdashdot',
-                'solid']
+
+        - One of the following enumeration values:
+
+            ['dash', 'dashdot', 'dot', 'longdash', 'longdashdot', 'solid']
 
         Returns
         -------
@@ -59,8 +60,10 @@ class Line(_BaseTraceHierarchyType):
         line shapes.
 
         The 'shape' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['linear', 'hv', 'vh', 'hvh', 'vhv']
+
+        - One of the following enumeration values:
+
+            ['linear', 'hv', 'vh', 'hvh', 'vhv']
 
         Returns
         -------
@@ -78,7 +81,8 @@ class Line(_BaseTraceHierarchyType):
         Sets the line width (in px).
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

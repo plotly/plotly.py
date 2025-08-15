@@ -113,11 +113,15 @@ class YAxis(_BaseLayoutHierarchyType):
         to "free", this axis' position is determined by `position`.
 
         The 'anchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['free']
-          - A string that matches one of the following regular expressions:
-                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$',
-                '^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            ['free']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$',
+            '^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------
@@ -166,9 +170,11 @@ class YAxis(_BaseLayoutHierarchyType):
         and reverses the axis direction.
 
         The 'autorange' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, False, 'reversed', 'min reversed', 'max reversed',
-                'min', 'max']
+
+        - One of the following enumeration values:
+
+            [True, False, 'reversed', 'min reversed', 'max reversed',
+            'min', 'max']
 
         Returns
         -------
@@ -229,11 +235,13 @@ class YAxis(_BaseLayoutHierarchyType):
         overlap.
 
         The 'autotickangles' property is an info array that may be specified as:
+
         * a list of elements where:
-          The 'autotickangles[i]' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180.
-        Numeric values outside this range are converted to the equivalent value
-        (e.g. 270 is converted to -90).
+
+            The 'autotickangles[i]' property is a angle (in degrees) that may be
+            specified as a number between -180 and 180.
+            Numeric values outside this range are converted to the equivalent value
+            (e.g. 270 is converted to -90).
 
         Returns
         -------
@@ -254,8 +262,10 @@ class YAxis(_BaseLayoutHierarchyType):
         detection. Defaults to layout.autotypenumbers.
 
         The 'autotypenumbers' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['convert types', 'strict']
+
+        - One of the following enumeration values:
+
+            ['convert types', 'strict']
 
         Returns
         -------
@@ -276,11 +286,13 @@ class YAxis(_BaseLayoutHierarchyType):
         global `layout.calendar`
 
         The 'calendar' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['chinese', 'coptic', 'discworld', 'ethiopian',
-                'gregorian', 'hebrew', 'islamic', 'jalali', 'julian',
-                'mayan', 'nanakshahi', 'nepali', 'persian', 'taiwan',
-                'thai', 'ummalqura']
+
+        - One of the following enumeration values:
+
+            ['chinese', 'coptic', 'discworld', 'ethiopian', 'gregorian',
+            'hebrew', 'islamic', 'jalali', 'julian', 'mayan',
+            'nanakshahi', 'nepali', 'persian', 'taiwan', 'thai',
+            'ummalqura']
 
         Returns
         -------
@@ -351,14 +363,16 @@ class YAxis(_BaseLayoutHierarchyType):
         of all the values.
 
         The 'categoryorder' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['trace', 'category ascending', 'category descending',
-                'array', 'total ascending', 'total descending', 'min
-                ascending', 'min descending', 'max ascending', 'max
-                descending', 'sum ascending', 'sum descending', 'mean
-                ascending', 'mean descending', 'geometric mean ascending',
-                'geometric mean descending', 'median ascending', 'median
-                descending']
+
+        - One of the following enumeration values:
+
+            ['trace', 'category ascending', 'category descending',
+            'array', 'total ascending', 'total descending', 'min
+            ascending', 'min descending', 'max ascending', 'max
+            descending', 'sum ascending', 'sum descending', 'mean
+            ascending', 'mean descending', 'geometric mean ascending',
+            'geometric mean descending', 'median ascending', 'median
+            descending']
 
         Returns
         -------
@@ -405,8 +419,10 @@ class YAxis(_BaseLayoutHierarchyType):
         containing image traces, "range" otherwise.
 
         The 'constrain' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['range', 'domain']
+
+        - One of the following enumeration values:
+
+            ['range', 'domain']
 
         Returns
         -------
@@ -429,8 +445,10 @@ class YAxis(_BaseLayoutHierarchyType):
         axes.
 
         The 'constraintoward' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['left', 'center', 'right', 'top', 'middle', 'bottom']
+
+        - One of the following enumeration values:
+
+            ['left', 'center', 'right', 'top', 'middle', 'bottom']
 
         Returns
         -------
@@ -473,7 +491,7 @@ class YAxis(_BaseLayoutHierarchyType):
 
         The 'dividerwidth' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -495,10 +513,12 @@ class YAxis(_BaseLayoutHierarchyType):
         * a list or tuple of 2 elements where:
 
             (0) The 'domain[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+            - An int or float in the interval [0, 1]
 
             (1) The 'domain[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+            - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -556,8 +576,10 @@ class YAxis(_BaseLayoutHierarchyType):
         "B", 1B.
 
         The 'exponentformat' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+
+        - One of the following enumeration values:
+
+            ['none', 'e', 'E', 'power', 'SI', 'B']
 
         Returns
         -------
@@ -640,7 +662,8 @@ class YAxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the grid lines.
 
         The 'gridwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -742,8 +765,10 @@ class YAxis(_BaseLayoutHierarchyType):
         False to show markers and/or text nodes above this axis.
 
         The 'layer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['above traces', 'below traces']
+
+        - One of the following enumeration values:
+
+            ['above traces', 'below traces']
 
         Returns
         -------
@@ -783,7 +808,8 @@ class YAxis(_BaseLayoutHierarchyType):
         Sets the width (in px) of the axis line.
 
         The 'linewidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -807,9 +833,11 @@ class YAxis(_BaseLayoutHierarchyType):
         that matching axes must have the same `type`.
 
         The 'matches' property is an enumeration that may be specified as:
-          - A string that matches one of the following regular expressions:
-                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$',
-                '^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$',
+            '^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------
@@ -862,7 +890,8 @@ class YAxis(_BaseLayoutHierarchyType):
         has an effect when `tickformat` is "SI" or "B".
 
         The 'minexponent' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -904,8 +933,10 @@ class YAxis(_BaseLayoutHierarchyType):
         ticks are mirrored on all shared-axes subplots.
 
         The 'mirror' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [True, 'ticks', False, 'all', 'allticks']
+
+        - One of the following enumeration values:
+
+            [True, 'ticks', False, 'all', 'allticks']
 
         Returns
         -------
@@ -949,11 +980,15 @@ class YAxis(_BaseLayoutHierarchyType):
         domains only the highest-numbered axis will be visible.
 
         The 'overlaying' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['free']
-          - A string that matches one of the following regular expressions:
-                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$',
-                '^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            ['free']
+
+        - A string that matches one of the following regular expressions:
+
+            ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$',
+            '^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------
@@ -973,7 +1008,8 @@ class YAxis(_BaseLayoutHierarchyType):
         to "free".
 
         The 'position' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+
+        - An int or float in the interval [0, 1]
 
         Returns
         -------
@@ -1070,8 +1106,10 @@ class YAxis(_BaseLayoutHierarchyType):
         linear axes.
 
         The 'rangemode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'tozero', 'nonnegative']
+
+        - One of the following enumeration values:
+
+            ['normal', 'tozero', 'nonnegative']
 
         Returns
         -------
@@ -1110,11 +1148,15 @@ class YAxis(_BaseLayoutHierarchyType):
         the constraint).
 
         The 'scaleanchor' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                [False]
-          - A string that matches one of the following regular expressions:
-                ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$',
-                '^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
+
+        - One of the following enumeration values:
+
+            [False]
+
+        - A string that matches one of the following regular expressions:
+
+            ['^x(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$',
+            '^y(\\[2-9\\]|\\[1-9\\]\\[0-9\\]+)?( domain)?$']
 
         Returns
         -------
@@ -1137,7 +1179,8 @@ class YAxis(_BaseLayoutHierarchyType):
         is exaggerated a fixed amount with respect to the horizontal.
 
         The 'scaleratio' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1180,7 +1223,7 @@ class YAxis(_BaseLayoutHierarchyType):
 
         The 'shift' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1221,8 +1264,10 @@ class YAxis(_BaseLayoutHierarchyType):
         no exponents appear.
 
         The 'showexponent' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -1318,8 +1363,10 @@ class YAxis(_BaseLayoutHierarchyType):
         "none", tick prefixes are hidden.
 
         The 'showtickprefix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -1337,8 +1384,10 @@ class YAxis(_BaseLayoutHierarchyType):
         Same as `showtickprefix` but for tick suffixes.
 
         The 'showticksuffix' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['all', 'first', 'last', 'none']
+
+        - One of the following enumeration values:
+
+            ['all', 'first', 'last', 'none']
 
         Returns
         -------
@@ -1357,8 +1406,10 @@ class YAxis(_BaseLayoutHierarchyType):
         ("left") or "top" ("right") of the plotting area.
 
         The 'side' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top', 'bottom', 'left', 'right']
+
+        - One of the following enumeration values:
+
+            ['top', 'bottom', 'left', 'right']
 
         Returns
         -------
@@ -1447,8 +1498,10 @@ class YAxis(_BaseLayoutHierarchyType):
         closest datapoints.
 
         The 'spikesnap' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['data', 'cursor', 'hovered data']
+
+        - One of the following enumeration values:
+
+            ['data', 'cursor', 'hovered data']
 
         Returns
         -------
@@ -1467,7 +1520,7 @@ class YAxis(_BaseLayoutHierarchyType):
 
         The 'spikethickness' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -1694,8 +1747,10 @@ class YAxis(_BaseLayoutHierarchyType):
         the middle of the period between ticks.
 
         The 'ticklabelmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['instant', 'period']
+
+        - One of the following enumeration values:
+
+            ['instant', 'period']
 
         Returns
         -------
@@ -1717,8 +1772,10 @@ class YAxis(_BaseLayoutHierarchyType):
         other cases the default is *hide past div*.
 
         The 'ticklabeloverflow' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['allow', 'hide past div', 'hide past domain']
+
+        - One of the following enumeration values:
+
+            ['allow', 'hide past div', 'hide past domain']
 
         Returns
         -------
@@ -1744,10 +1801,12 @@ class YAxis(_BaseLayoutHierarchyType):
         added by autorange, so that the scales could match.
 
         The 'ticklabelposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', 'outside top', 'inside top',
-                'outside left', 'inside left', 'outside right', 'inside
-                right', 'outside bottom', 'inside bottom']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', 'outside top', 'inside top', 'outside
+            left', 'inside left', 'outside right', 'inside right',
+            'outside bottom', 'inside bottom']
 
         Returns
         -------
@@ -1835,7 +1894,8 @@ class YAxis(_BaseLayoutHierarchyType):
         Sets the tick length (in px).
 
         The 'ticklen' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -1861,8 +1921,10 @@ class YAxis(_BaseLayoutHierarchyType):
         `overlaying` property.
 
         The 'tickmode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['auto', 'linear', 'array', 'sync']
+
+        - One of the following enumeration values:
+
+            ['auto', 'linear', 'array', 'sync']
 
         Returns
         -------
@@ -1901,8 +1963,10 @@ class YAxis(_BaseLayoutHierarchyType):
         drawn outside (inside) the axis lines.
 
         The 'ticks' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['outside', 'inside', '']
+
+        - One of the following enumeration values:
+
+            ['outside', 'inside', '']
 
         Returns
         -------
@@ -1924,8 +1988,10 @@ class YAxis(_BaseLayoutHierarchyType):
         left/bottom of labels.
 
         The 'tickson' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['labels', 'boundaries']
+
+        - One of the following enumeration values:
+
+            ['labels', 'boundaries']
 
         Returns
         -------
@@ -2037,7 +2103,8 @@ class YAxis(_BaseLayoutHierarchyType):
         Sets the tick width (in px).
 
         The 'tickwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -2076,9 +2143,10 @@ class YAxis(_BaseLayoutHierarchyType):
         referenced the axis in question.
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['-', 'linear', 'log', 'date', 'category',
-                'multicategory']
+
+        - One of the following enumeration values:
+
+            ['-', 'linear', 'log', 'date', 'category', 'multicategory']
 
         Returns
         -------
@@ -2182,8 +2250,10 @@ class YAxis(_BaseLayoutHierarchyType):
         property is set on any trace.
 
         The 'zerolinelayer' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['above traces', 'below traces']
+
+        - One of the following enumeration values:
+
+            ['above traces', 'below traces']
 
         Returns
         -------
@@ -2202,7 +2272,7 @@ class YAxis(_BaseLayoutHierarchyType):
 
         The 'zerolinewidth' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

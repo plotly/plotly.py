@@ -39,8 +39,10 @@ class Newselection(_BaseLayoutHierarchyType):
         declaring extra outlines of the selection.
 
         The 'mode' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['immediate', 'gradual']
+
+        - One of the following enumeration values:
+
+            ['immediate', 'gradual']
 
         Returns
         -------

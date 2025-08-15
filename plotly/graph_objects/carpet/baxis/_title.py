@@ -39,7 +39,7 @@ class Title(_BaseTraceHierarchyType):
 
         The 'offset' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------

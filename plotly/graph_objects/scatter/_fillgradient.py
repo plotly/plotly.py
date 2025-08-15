@@ -68,7 +68,7 @@ class Fillgradient(_BaseTraceHierarchyType):
 
         The 'start' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -92,7 +92,7 @@ class Fillgradient(_BaseTraceHierarchyType):
 
         The 'stop' property is a number and may be specified as:
 
-            - An int or float
+        - An int or float
 
         Returns
         -------
@@ -111,8 +111,10 @@ class Fillgradient(_BaseTraceHierarchyType):
         Defaults to "none".
 
         The 'type' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['radial', 'horizontal', 'vertical', 'none']
+
+        - One of the following enumeration values:
+
+            ['radial', 'horizontal', 'vertical', 'none']
 
         Returns
         -------

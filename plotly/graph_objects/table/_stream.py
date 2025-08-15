@@ -18,7 +18,8 @@ class Stream(_BaseTraceHierarchyType):
         50 points will be displayed on the plot.
 
         The 'maxpoints' property is a number and may be specified as:
-          - An int or float in the interval [0, 10000]
+
+        - An int or float in the interval [0, 10000]
 
         Returns
         -------

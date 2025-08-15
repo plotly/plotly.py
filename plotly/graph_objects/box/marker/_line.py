@@ -65,7 +65,8 @@ class Line(_BaseTraceHierarchyType):
         points.
 
         The 'outlierwidth' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------
@@ -83,7 +84,8 @@ class Line(_BaseTraceHierarchyType):
         Sets the width (in px) of the lines bounding the marker points.
 
         The 'width' property is a number and may be specified as:
-          - An int or float in the interval [0, inf]
+
+        - An int or float in the interval [0, inf]
 
         Returns
         -------

@@ -111,7 +111,8 @@ class Outsidetextfont(_BaseTraceHierarchyType):
     def size(self):
         """
         The 'size' property is a number and may be specified as:
-          - An int or float in the interval [1, inf]
+
+        - An int or float in the interval [1, inf]
 
         Returns
         -------
@@ -130,8 +131,10 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         face from its family.
 
         The 'style' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'italic']
+
+        - One of the following enumeration values:
+
+            ['normal', 'italic']
 
         Returns
         -------
@@ -151,8 +154,10 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         capitalized.
 
         The 'textcase' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'word caps', 'upper', 'lower']
+
+        - One of the following enumeration values:
+
+            ['normal', 'word caps', 'upper', 'lower']
 
         Returns
         -------
@@ -170,9 +175,11 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         Sets the variant of the font.
 
         The 'variant' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['normal', 'small-caps', 'all-small-caps',
-                'all-petite-caps', 'petite-caps', 'unicase']
+
+        - One of the following enumeration values:
+
+            ['normal', 'small-caps', 'all-small-caps', 'all-petite-caps',
+            'petite-caps', 'unicase']
 
         Returns
         -------

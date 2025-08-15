@@ -137,8 +137,10 @@ class Modebar(_BaseLayoutHierarchyType):
         Sets the orientation of the modebar.
 
         The 'orientation' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['v', 'h']
+
+        - One of the following enumeration values:
+
+            ['v', 'h']
 
         Returns
         -------
