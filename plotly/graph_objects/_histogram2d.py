@@ -728,7 +728,8 @@ class Histogram2d(_BaseTraceType):
         data. Ignored if `xbins.size` is provided.
 
         The 'nbinsx' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns
@@ -750,7 +751,8 @@ class Histogram2d(_BaseTraceType):
         data. Ignored if `ybins.size` is provided.
 
         The 'nbinsy' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns

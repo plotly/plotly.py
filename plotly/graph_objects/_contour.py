@@ -792,7 +792,8 @@ class Contour(_BaseTraceType):
         `autocontour` is True or if `contours.size` is missing.
 
         The 'ncontours' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
         Returns
@@ -1661,7 +1662,8 @@ class Contour(_BaseTraceType):
         `zorder` appear in front of those with lower `zorder`.
 
         The 'zorder' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
 
         Returns
         -------

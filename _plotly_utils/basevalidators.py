@@ -859,7 +859,7 @@ class IntegerValidator(BaseValidator):
 
     def description(self):
         desc = """\
-    The '{plotly_name}' property is a integer and may be specified as:""".format(
+    The '{plotly_name}' property is a integer and may be specified as:\n""".format(
             plotly_name=self.plotly_name
         )
 
@@ -867,12 +867,12 @@ class IntegerValidator(BaseValidator):
             desc = (
                 desc
                 + """
-      - An int (or float that will be cast to an int)"""
+    - An int (or float that will be cast to an int)"""
             )
         else:
             desc = desc + (
                 """
-      - An int (or float that will be cast to an int)
+    - An int (or float that will be cast to an int)
         in the interval [{min_val}, {max_val}]""".format(
                     min_val=self.min_val, max_val=self.max_val
                 )

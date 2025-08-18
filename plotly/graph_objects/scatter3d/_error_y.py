@@ -184,7 +184,8 @@ class ErrorY(_BaseTraceHierarchyType):
     def traceref(self):
         """
         The 'traceref' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns
@@ -201,7 +202,8 @@ class ErrorY(_BaseTraceHierarchyType):
     def tracerefminus(self):
         """
         The 'tracerefminus' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns

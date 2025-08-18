@@ -20,7 +20,8 @@ class Domain(_BaseLayoutHierarchyType):
         both.
 
         The 'column' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns
@@ -43,7 +44,8 @@ class Domain(_BaseLayoutHierarchyType):
         both.
 
         The 'row' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns

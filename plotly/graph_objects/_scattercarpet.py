@@ -1158,7 +1158,8 @@ class Scattercarpet(_BaseTraceType):
         `zorder` appear in front of those with lower `zorder`.
 
         The 'zorder' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
 
         Returns
         -------

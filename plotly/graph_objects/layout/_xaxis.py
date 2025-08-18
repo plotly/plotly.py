@@ -945,7 +945,8 @@ class XAxis(_BaseLayoutHierarchyType):
         `tickmode` is set to "auto".
 
         The 'nticks' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns
@@ -1715,7 +1716,8 @@ class XAxis(_BaseLayoutHierarchyType):
         there.
 
         The 'ticklabelindex' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
@@ -1835,7 +1837,8 @@ class XAxis(_BaseLayoutHierarchyType):
         positive direction of the axis.
 
         The 'ticklabelshift' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
 
         Returns
         -------
@@ -1861,7 +1864,8 @@ class XAxis(_BaseLayoutHierarchyType):
         ticks can even end up outside and vice versa.
 
         The 'ticklabelstandoff' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
 
         Returns
         -------
@@ -1884,7 +1888,8 @@ class XAxis(_BaseLayoutHierarchyType):
         "log" or "multicategory", or when `tickmode` is "array".
 
         The 'ticklabelstep' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
         Returns

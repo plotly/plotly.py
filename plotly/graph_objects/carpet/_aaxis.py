@@ -75,7 +75,8 @@ class Aaxis(_BaseTraceHierarchyType):
         The stride between grid lines along the axis
 
         The 'arraydtick' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
         Returns
@@ -94,7 +95,8 @@ class Aaxis(_BaseTraceHierarchyType):
         The starting index of grid lines along the axis
 
         The 'arraytick0' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns
@@ -496,7 +498,8 @@ class Aaxis(_BaseTraceHierarchyType):
         Extra padding between label and the axis
 
         The 'labelpadding' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
 
         Returns
         -------
@@ -640,7 +643,8 @@ class Aaxis(_BaseTraceHierarchyType):
         Sets the number of minor grid ticks per major grid tick
 
         The 'minorgridcount' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns
@@ -709,7 +713,8 @@ class Aaxis(_BaseTraceHierarchyType):
         `tickmode` is set to "auto".
 
         The 'nticks' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns

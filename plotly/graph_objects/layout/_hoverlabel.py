@@ -141,7 +141,8 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         `namelength - 3` characters and add an ellipsis.
 
         The 'namelength' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
         Returns

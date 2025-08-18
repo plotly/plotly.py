@@ -34,7 +34,8 @@ class Grid(_BaseLayoutHierarchyType):
         subplots.
 
         The 'columns' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
         Returns
@@ -123,7 +124,8 @@ class Grid(_BaseLayoutHierarchyType):
         to leave a row at the end for non-cartesian subplots.
 
         The 'rows' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
         Returns

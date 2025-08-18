@@ -18,7 +18,8 @@ class Surface(_BaseTraceHierarchyType):
         minimum and maximum surfaces would be drawn.
 
         The 'count' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
         Returns

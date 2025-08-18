@@ -494,7 +494,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         `tickmode` is set to "auto".
 
         The 'nticks' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns
@@ -890,7 +891,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "log" or "multicategory", or when `tickmode` is "array".
 
         The 'ticklabelstep' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
         Returns

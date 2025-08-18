@@ -1022,7 +1022,8 @@ class Layout(_BaseLayoutType):
         like objects in case of conflict.
 
         The 'hoverdistance' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
         Returns
@@ -1788,7 +1789,8 @@ class Layout(_BaseLayoutType):
         will not generate spikelines, such as scatter fills.
 
         The 'spikedistance' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
         Returns

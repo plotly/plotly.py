@@ -99,7 +99,8 @@ class Dimension(_BaseTraceHierarchyType):
         indexed, defaults to dimension index.
 
         The 'displayindex' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
 
         Returns
         -------

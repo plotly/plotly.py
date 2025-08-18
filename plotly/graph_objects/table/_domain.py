@@ -17,7 +17,8 @@ class Domain(_BaseTraceHierarchyType):
         the grid for this table trace .
 
         The 'column' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns
@@ -37,7 +38,8 @@ class Domain(_BaseTraceHierarchyType):
         grid for this table trace .
 
         The 'row' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
         Returns

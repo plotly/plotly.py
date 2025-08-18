@@ -571,7 +571,8 @@ class Treemap(_BaseTraceType):
         `maxdepth` to "-1" to render all the levels in the hierarchy.
 
         The 'maxdepth' property is a integer and may be specified as:
-          - An int (or float that will be cast to an int)
+
+        - An int (or float that will be cast to an int)
 
         Returns
         -------
