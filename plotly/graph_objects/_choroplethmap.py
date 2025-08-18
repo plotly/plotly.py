@@ -92,8 +92,10 @@ class Choroplethmap(_BaseTraceType):
         layer will be inserted above every existing layer.
 
         The 'below' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -248,8 +250,10 @@ class Choroplethmap(_BaseTraceType):
         property, for example "properties.name".
 
         The 'featureidkey' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -372,9 +376,12 @@ class Choroplethmap(_BaseTraceType):
         secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -411,9 +418,12 @@ class Choroplethmap(_BaseTraceType):
         Same as `text`.
 
         The 'hovertext' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -513,8 +523,10 @@ class Choroplethmap(_BaseTraceType):
         legend items.
 
         The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -699,8 +711,10 @@ class Choroplethmap(_BaseTraceType):
         and on hover.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -859,9 +873,12 @@ class Choroplethmap(_BaseTraceType):
         Sets the text elements associated with each location.
 
         The 'text' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -898,8 +915,10 @@ class Choroplethmap(_BaseTraceType):
         constancy between traces during animations and transitions.
 
         The 'uid' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

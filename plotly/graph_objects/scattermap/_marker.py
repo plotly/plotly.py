@@ -543,9 +543,12 @@ class Marker(_BaseTraceHierarchyType):
         only available for "circle" symbols.
 
         The 'symbol' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

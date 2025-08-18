@@ -92,10 +92,14 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         "5px,10px,2px,2px").
 
         The 'griddash' property is an enumeration that may be specified as:
-          - One of the following dash styles:
-                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
-          - A string containing a dash length list in pixels or percentages
-                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        - One of the following dash styles:
+
+            ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+
+        - A string containing a dash length list in pixels or percentages
+
+            (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
 
         Returns
         -------
@@ -141,8 +145,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         "%H~%M~%S.%2f" would display "09~15~23.46"
 
         The 'hoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -404,8 +410,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         "%H~%M~%S.%2f" would display "09~15~23.46"
 
         The 'tickformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -442,8 +450,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         Sets a tick label prefix.
 
         The 'tickprefix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -484,8 +494,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         Sets a tick label suffix.
 
         The 'ticksuffix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

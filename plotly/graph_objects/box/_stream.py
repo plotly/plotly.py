@@ -39,7 +39,8 @@ class Stream(_BaseTraceHierarchyType):
         details.
 
         The 'token' property is a string and must be specified as:
-          - A non-empty string
+
+        - A non-empty string
 
         Returns
         -------

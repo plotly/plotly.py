@@ -183,8 +183,10 @@ class Shape(_BaseLayoutHierarchyType):
         legend items.
 
         The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -292,8 +294,10 @@ class Shape(_BaseLayoutHierarchyType):
         template.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -348,8 +352,10 @@ class Shape(_BaseLayoutHierarchyType):
         purpose: 2015-02-21_13:45:56.789
 
         The 'path' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -392,8 +398,10 @@ class Shape(_BaseLayoutHierarchyType):
         show it with `visible: true`.
 
         The 'templateitemname' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

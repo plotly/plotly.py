@@ -37,8 +37,10 @@ class Layer(_BaseLayoutHierarchyType):
         inserted above every existing layer.
 
         The 'below' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -207,8 +209,10 @@ class Layer(_BaseLayoutHierarchyType):
         template.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -273,8 +277,10 @@ class Layer(_BaseLayoutHierarchyType):
         Sets the attribution for this source.
 
         The 'sourceattribution' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -294,8 +300,10 @@ class Layer(_BaseLayoutHierarchyType):
         that supports multiple layers.
 
         The 'sourcelayer' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -361,8 +369,10 @@ class Layer(_BaseLayoutHierarchyType):
         show it with `visible: true`.
 
         The 'templateitemname' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

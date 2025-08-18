@@ -406,8 +406,10 @@ class Axis(_BaseTraceHierarchyType):
         "%H~%M~%S.%2f" would display "09~15~23.46"
 
         The 'tickformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -538,8 +540,10 @@ class Axis(_BaseTraceHierarchyType):
         Sets a tick label prefix.
 
         The 'tickprefix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -580,8 +584,10 @@ class Axis(_BaseTraceHierarchyType):
         Sets a tick label suffix.
 
         The 'ticksuffix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

@@ -106,8 +106,10 @@ class Box(_BaseTraceType):
         compute their positional range dependently or independently.
 
         The 'alignmentgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -387,9 +389,12 @@ class Box(_BaseTraceType):
         secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -426,9 +431,12 @@ class Box(_BaseTraceType):
         Same as `text`.
 
         The 'hovertext' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -550,8 +558,10 @@ class Box(_BaseTraceType):
         legend items.
 
         The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -837,8 +847,10 @@ class Box(_BaseTraceType):
         horizontal) are missing and the position axis is categorical
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -946,8 +958,10 @@ class Box(_BaseTraceType):
         coordinate will line up.
 
         The 'offsetgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1323,9 +1337,12 @@ class Box(_BaseTraceType):
         `hoverinfo` must contain a "text" flag.
 
         The 'text' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1362,8 +1379,10 @@ class Box(_BaseTraceType):
         constancy between traces during animations and transitions.
 
         The 'uid' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1631,8 +1650,10 @@ class Box(_BaseTraceType):
         are formatted using `xaxis.hoverformat`.
 
         The 'xhoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1826,8 +1847,10 @@ class Box(_BaseTraceType):
         are formatted using `yaxis.hoverformat`.
 
         The 'yhoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

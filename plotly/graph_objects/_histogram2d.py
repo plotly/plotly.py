@@ -148,8 +148,10 @@ class Histogram2d(_BaseTraceType):
         them their x-bins and y-bins match separately.
 
         The 'bingroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -447,9 +449,12 @@ class Histogram2d(_BaseTraceType):
         completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -549,8 +554,10 @@ class Histogram2d(_BaseTraceType):
         legend items.
 
         The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -697,8 +704,10 @@ class Histogram2d(_BaseTraceType):
         and on hover.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -889,8 +898,10 @@ class Histogram2d(_BaseTraceType):
         Finally, the template string has access to variable `z`
 
         The 'texttemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -909,8 +920,10 @@ class Histogram2d(_BaseTraceType):
         constancy between traces during animations and transitions.
 
         The 'uid' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1027,8 +1040,10 @@ class Histogram2d(_BaseTraceType):
         value can be used to set (1D) histogram `bingroup`
 
         The 'xbingroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1118,8 +1133,10 @@ class Histogram2d(_BaseTraceType):
         are formatted using `xaxis.hoverformat`.
 
         The 'xhoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1200,8 +1217,10 @@ class Histogram2d(_BaseTraceType):
         value can be used to set (1D) histogram `bingroup`
 
         The 'ybingroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1291,8 +1310,10 @@ class Histogram2d(_BaseTraceType):
         are formatted using `yaxis.hoverformat`.
 
         The 'yhoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1371,8 +1392,10 @@ class Histogram2d(_BaseTraceType):
         default the values are formatted using generic number format.
 
         The 'zhoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

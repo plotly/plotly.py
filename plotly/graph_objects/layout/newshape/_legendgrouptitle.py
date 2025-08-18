@@ -37,8 +37,10 @@ class Legendgrouptitle(_BaseLayoutHierarchyType):
         Sets the title of the legend group.
 
         The 'text' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

@@ -610,8 +610,10 @@ class ColorBar(_BaseLayoutHierarchyType):
         "%H~%M~%S.%2f" would display "09~15~23.46"
 
         The 'tickformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -791,8 +793,10 @@ class ColorBar(_BaseLayoutHierarchyType):
         Sets a tick label prefix.
 
         The 'tickprefix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -833,8 +837,10 @@ class ColorBar(_BaseLayoutHierarchyType):
         Sets a tick label suffix.
 
         The 'ticksuffix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

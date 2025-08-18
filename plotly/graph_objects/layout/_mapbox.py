@@ -33,7 +33,8 @@ class Mapbox(_BaseLayoutHierarchyType):
         streets ) and/or a layout layer references the Mapbox server.
 
         The 'accesstoken' property is a string and must be specified as:
-          - A non-empty string
+
+        - A non-empty string
 
         Returns
         -------

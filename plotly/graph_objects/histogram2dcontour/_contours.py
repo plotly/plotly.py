@@ -99,8 +99,10 @@ class Contours(_BaseTraceHierarchyType):
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
 
         The 'labelformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

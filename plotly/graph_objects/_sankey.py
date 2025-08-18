@@ -366,8 +366,10 @@ class Sankey(_BaseTraceType):
         and on hover.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -490,8 +492,10 @@ class Sankey(_BaseTraceType):
         constancy between traces during animations and transitions.
 
         The 'uid' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -543,8 +547,10 @@ class Sankey(_BaseTraceType):
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
 
         The 'valueformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -563,8 +569,10 @@ class Sankey(_BaseTraceType):
         space if a separation is necessary from the value.
 
         The 'valuesuffix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

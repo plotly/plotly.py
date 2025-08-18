@@ -212,8 +212,10 @@ class Updatemenu(_BaseLayoutHierarchyType):
         template.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -277,8 +279,10 @@ class Updatemenu(_BaseLayoutHierarchyType):
         show it with `visible: true`.
 
         The 'templateitemname' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

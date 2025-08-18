@@ -50,7 +50,8 @@ class Font(_BaseTraceHierarchyType):
         to apply fonts if they aren't available.
 
         The 'family' property is a string and must be specified as:
-          - A non-empty string
+
+        - A non-empty string
 
         Returns
         -------
@@ -94,8 +95,10 @@ class Font(_BaseTraceHierarchyType):
         for additional options.
 
         The 'shadow' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

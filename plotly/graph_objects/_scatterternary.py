@@ -426,9 +426,12 @@ class Scatterternary(_BaseTraceType):
         secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -469,9 +472,12 @@ class Scatterternary(_BaseTraceType):
         `hoverinfo` must contain a "text" flag.
 
         The 'hovertext' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -571,8 +577,10 @@ class Scatterternary(_BaseTraceType):
         legend items.
 
         The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -764,8 +772,10 @@ class Scatterternary(_BaseTraceType):
         and on hover.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -932,9 +942,12 @@ class Scatterternary(_BaseTraceType):
         elements will be seen in the hover labels.
 
         The 'text' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1049,9 +1062,12 @@ class Scatterternary(_BaseTraceType):
         `c` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -1089,8 +1105,10 @@ class Scatterternary(_BaseTraceType):
         constancy between traces during animations and transitions.
 
         The 'uid' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

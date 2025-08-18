@@ -476,9 +476,12 @@ class Contour(_BaseTraceType):
         secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -615,8 +618,10 @@ class Contour(_BaseTraceType):
         legend items.
 
         The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -763,8 +768,10 @@ class Contour(_BaseTraceType):
         and on hover.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -972,8 +979,10 @@ class Contour(_BaseTraceType):
         `z` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1010,8 +1019,10 @@ class Contour(_BaseTraceType):
         constancy between traces during animations and transitions.
 
         The 'uid' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1177,8 +1188,10 @@ class Contour(_BaseTraceType):
         are formatted using `xaxis.hoverformat`.
 
         The 'xhoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1395,8 +1408,10 @@ class Contour(_BaseTraceType):
         are formatted using `yaxis.hoverformat`.
 
         The 'yhoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -1562,8 +1577,10 @@ class Contour(_BaseTraceType):
         default the values are formatted using generic number format.
 
         The 'zhoverformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

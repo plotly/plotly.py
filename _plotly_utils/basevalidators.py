@@ -21,6 +21,9 @@ def fullmatch(regex, string, flags=0):
         regex_string = regex
     return re.match("(?:" + regex_string + r")\Z", string, flags=flags)
 
+# Constants
+INDENT = 8
+
 
 # Utility functions
 # -----------------
@@ -537,8 +540,8 @@ class EnumeratedValidator(BaseValidator):
             enum_vals_str = "\n".join(
                 textwrap.wrap(
                     repr(enum_vals),
-                    initial_indent=" " * 8,
-                    subsequent_indent=" " * 8,
+                    initial_indent=" " * INDENT,
+                    subsequent_indent=" " * INDENT,
                     break_on_hyphens=False,
                 )
             )
@@ -554,8 +557,8 @@ class EnumeratedValidator(BaseValidator):
             enum_regexs_str = "\n".join(
                 textwrap.wrap(
                     repr(enum_regexs),
-                    initial_indent=" " * 8,
-                    subsequent_indent=" " * 8,
+                    initial_indent=" " * INDENT,
+                    subsequent_indent=" " * INDENT,
                     break_on_hyphens=False,
                     break_long_words=False,
                 )
@@ -1010,44 +1013,44 @@ class StringValidator(BaseValidator):
         if self.no_blank:
             desc = (
                 desc
-                + """
-      - A non-empty string"""
+                + """\n
+    - A non-empty string"""
             )
         elif self.values:
             valid_str = "\n".join(
                 textwrap.wrap(
                     repr(self.values),
-                    initial_indent=" " * 12,
-                    subsequent_indent=" " * 12,
+                    initial_indent=" " * INDENT,
+                    subsequent_indent=" " * INDENT,
                     break_on_hyphens=False,
                 )
             )
 
             desc = (
                 desc
-                + """
-      - One of the following strings:
+                + """\n
+    - One of the following strings:
 {valid_str}""".format(valid_str=valid_str)
             )
         else:
             desc = (
                 desc
-                + """
-      - A string"""
+                + """\n
+    - A string"""
             )
 
         if not self.strict:
             desc = (
                 desc
-                + """
-      - A number that will be converted to a string"""
+                + """\n
+    - A number that will be converted to a string"""
             )
 
         if self.array_ok:
             desc = (
                 desc
-                + """
-      - A tuple, list, or one-dimensional numpy array of the above"""
+                + """\n
+    - A tuple, list, or one-dimensional numpy array of the above"""
             )
 
         return desc
@@ -2284,8 +2287,8 @@ class DashValidator(EnumeratedValidator):
             enum_vals_str = "\n".join(
                 textwrap.wrap(
                     repr(enum_vals),
-                    initial_indent=" " * 12,
-                    subsequent_indent=" " * 12,
+                    initial_indent=" " * INDENT,
+                    subsequent_indent=" " * INDENT,
                     break_on_hyphens=False,
                     width=80,
                 )
@@ -2293,16 +2296,16 @@ class DashValidator(EnumeratedValidator):
 
             desc = (
                 desc
-                + """
-      - One of the following dash styles:
+                + """\n
+    - One of the following dash styles:\n
 {enum_vals_str}""".format(enum_vals_str=enum_vals_str)
             )
 
         desc = (
             desc
-            + """
-      - A string containing a dash length list in pixels or percentages
-            (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+            + """\n
+    - A string containing a dash length list in pixels or percentages\n
+        (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
 """
         )
         return desc

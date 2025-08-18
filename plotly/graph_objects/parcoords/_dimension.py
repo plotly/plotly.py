@@ -64,8 +64,10 @@ class Dimension(_BaseTraceHierarchyType):
         The shown name of the dimension.
 
         The 'label' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -107,8 +109,10 @@ class Dimension(_BaseTraceHierarchyType):
         template.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -162,8 +166,10 @@ class Dimension(_BaseTraceHierarchyType):
         show it with `visible: true`.
 
         The 'templateitemname' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -190,8 +196,10 @@ class Dimension(_BaseTraceHierarchyType):
         "%H~%M~%S.%2f" would display "09~15~23.46"
 
         The 'tickformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

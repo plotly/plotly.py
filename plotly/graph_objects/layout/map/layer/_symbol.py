@@ -17,8 +17,10 @@ class Symbol(_BaseLayoutHierarchyType):
         list: https://www.mapbox.com/maki-icons/
 
         The 'icon' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -82,8 +84,10 @@ class Symbol(_BaseLayoutHierarchyType):
         Sets the symbol text (map.layer.layout.text-field).
 
         The 'text' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

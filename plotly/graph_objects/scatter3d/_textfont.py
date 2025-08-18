@@ -72,8 +72,10 @@ class Textfont(_BaseTraceHierarchyType):
         to apply fonts if they aren't available.
 
         The 'family' property is a string and must be specified as:
-          - A non-empty string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A non-empty string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

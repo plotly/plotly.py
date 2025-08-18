@@ -106,8 +106,10 @@ class Delta(_BaseTraceHierarchyType):
         Sets a prefix appearing before the delta.
 
         The 'prefix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -163,8 +165,10 @@ class Delta(_BaseTraceHierarchyType):
         Sets a suffix appearing next to the delta.
 
         The 'suffix' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -185,8 +189,10 @@ class Delta(_BaseTraceHierarchyType):
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
 
         The 'valueformat' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

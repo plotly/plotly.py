@@ -66,8 +66,10 @@ class Label(_BaseLayoutHierarchyType):
         item if `name` is not provided.
 
         The 'text' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -155,8 +157,10 @@ class Label(_BaseLayoutHierarchyType):
         `ycenter`.
 
         The 'texttemplate' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

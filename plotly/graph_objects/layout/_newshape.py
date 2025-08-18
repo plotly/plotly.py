@@ -173,8 +173,10 @@ class Newshape(_BaseLayoutHierarchyType):
         legend items.
 
         The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -273,8 +275,10 @@ class Newshape(_BaseLayoutHierarchyType):
         Sets new shape name. The name appears as the legend item.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

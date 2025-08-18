@@ -117,8 +117,10 @@ class Dimension(_BaseTraceHierarchyType):
         The shown name of the dimension.
 
         The 'label' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

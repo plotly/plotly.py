@@ -55,9 +55,12 @@ class Modebar(_BaseLayoutHierarchyType):
         "drawclosedpath", "drawcircle", "drawrect", "eraseshape".
 
         The 'add' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
@@ -173,9 +176,12 @@ class Modebar(_BaseLayoutHierarchyType):
         "zoomOutMap", "zoomOutMapbox", "zoomin", "zoomout".
 
         The 'remove' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-          - A tuple, list, or one-dimensional numpy array of the above
+
+        - A string
+
+        - A number that will be converted to a string
+
+        - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------

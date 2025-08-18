@@ -40,7 +40,8 @@ class Textfont(_BaseLayoutHierarchyType):
         to apply fonts if they aren't available.
 
         The 'family' property is a string and must be specified as:
-          - A non-empty string
+
+        - A non-empty string
 
         Returns
         -------

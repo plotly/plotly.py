@@ -388,8 +388,10 @@ class Annotation(_BaseLayoutHierarchyType):
         omitted or blank, no hover label will appear.
 
         The 'hovertext' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -413,8 +415,10 @@ class Annotation(_BaseLayoutHierarchyType):
         template.
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -564,8 +568,10 @@ class Annotation(_BaseLayoutHierarchyType):
         show it with `visible: true`.
 
         The 'templateitemname' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -587,8 +593,10 @@ class Annotation(_BaseLayoutHierarchyType):
         and `<span>` are also supported.
 
         The 'text' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

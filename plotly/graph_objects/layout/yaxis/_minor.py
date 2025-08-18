@@ -92,10 +92,14 @@ class Minor(_BaseLayoutHierarchyType):
         "5px,10px,2px,2px").
 
         The 'griddash' property is an enumeration that may be specified as:
-          - One of the following dash styles:
-                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
-          - A string containing a dash length list in pixels or percentages
-                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        - One of the following dash styles:
+
+            ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+
+        - A string containing a dash length list in pixels or percentages
+
+            (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
 
         Returns
         -------

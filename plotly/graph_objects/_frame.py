@@ -19,8 +19,10 @@ class Frame(_BaseFrameHierarchyType):
         properties in multiple frames.
 
         The 'baseframe' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -55,8 +57,10 @@ class Frame(_BaseFrameHierarchyType):
         belongs, used by animate to select a subset of frames.
 
         The 'group' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
@@ -90,8 +94,10 @@ class Frame(_BaseFrameHierarchyType):
         A label by which to identify the frame
 
         The 'name' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------

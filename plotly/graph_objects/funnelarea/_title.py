@@ -59,8 +59,10 @@ class Title(_BaseTraceHierarchyType):
         displayed.
 
         The 'text' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+
+        - A string
+
+        - A number that will be converted to a string
 
         Returns
         -------
