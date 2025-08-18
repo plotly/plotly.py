@@ -366,6 +366,9 @@ def test_width_height_priority():
     fig = create_figure()
     svg_bytes = pio.to_image(fig, format="svg")
     width, height = parse_svg_dimensions(svg_bytes)
-    assert width is not None and height is not None, (
-        "Default dimensions should be used when no layout or arguments"
+    assert width == pio.defaults.default_width, (
+        "Default width should be used when no layout or argument"
+    )
+    assert height == pio.defaults.default_height, (
+        "Default height should be used when no layout or argument"
     )
