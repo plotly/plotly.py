@@ -16,6 +16,24 @@ import pytest
 
 fig = {"data": [], "layout": {"title": {"text": "figure title"}}}
 
+def create_figure(width=None, height=None):
+    """Create a simple figure with optional layout dimensions."""
+    layout = {}
+    if width:
+        layout["width"] = width
+    if height:
+        layout["height"] = height
+
+    return go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[1, 2, 3])], layout=layout)
+
+def parse_svg_dimensions(svg_bytes):
+    """Parse width and height from SVG bytes."""
+    svg_str = svg_bytes.decode("utf-8")
+    root = ET.fromstring(svg_str)
+    width = root.get("width")
+    height = root.get("height")
+    return int(width) if width else None, int(height) if height else None
+
 
 def check_image(path_or_buffer, size=(700, 500), format="PNG"):
     if format == "PDF":
@@ -315,26 +333,6 @@ def test_get_chrome():
 
             # Verify that kaleido.get_chrome_sync was called
             mock_get_chrome.assert_called_once()
-
-
-def create_figure(width=None, height=None):
-    """Create a simple figure with optional layout dimensions."""
-    layout = {}
-    if width:
-        layout["width"] = width
-    if height:
-        layout["height"] = height
-
-    return go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[1, 2, 3])], layout=layout)
-
-
-def parse_svg_dimensions(svg_bytes):
-    """Parse width and height from SVG bytes."""
-    svg_str = svg_bytes.decode("utf-8")
-    root = ET.fromstring(svg_str)
-    width = root.get("width")
-    height = root.get("height")
-    return int(width) if width else None, int(height) if height else None
 
 
 def test_width_height_priority():
