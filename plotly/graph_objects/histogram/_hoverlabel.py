@@ -69,12 +69,13 @@ class Hoverlabel(_BaseTraceHierarchyType):
         Sets the background color of the hover labels for this trace
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
-          - A list or array of any of the above
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        - A list or array of any of the above
 
         Returns
         -------
@@ -110,12 +111,13 @@ class Hoverlabel(_BaseTraceHierarchyType):
         Sets the border color of the hover labels for this trace.
 
         The 'bordercolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
-          - A list or array of any of the above
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        - A list or array of any of the above
 
         Returns
         -------
@@ -153,9 +155,9 @@ class Hoverlabel(_BaseTraceHierarchyType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.hoverlabel.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.hoverlabel.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------

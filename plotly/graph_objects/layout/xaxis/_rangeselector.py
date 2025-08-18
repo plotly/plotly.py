@@ -29,11 +29,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         Sets the background color of the active range selector button.
 
         The 'activecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -51,11 +52,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         Sets the background color of the range selector buttons.
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -73,11 +75,12 @@ class Rangeselector(_BaseLayoutHierarchyType):
         Sets the color of the border enclosing the range selector.
 
         The 'bordercolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -141,9 +144,9 @@ class Rangeselector(_BaseLayoutHierarchyType):
 
         The 'buttondefaults' property is an instance of Button
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.rangeselector.Button`
-          - A dict of string/value properties that will be passed
-            to the Button constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.rangeselector.Button`
+        - A dict of string/value properties that will be passed to the Button constructor
 
         Returns
         -------
@@ -162,9 +165,9 @@ class Rangeselector(_BaseLayoutHierarchyType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.rangeselector.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.rangeselector.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------

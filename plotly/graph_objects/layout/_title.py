@@ -57,9 +57,9 @@ class Title(_BaseLayoutHierarchyType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.title.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.title.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------
@@ -83,9 +83,9 @@ class Title(_BaseLayoutHierarchyType):
 
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.title.Pad`
-          - A dict of string/value properties that will be passed
-            to the Pad constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.title.Pad`
+        - A dict of string/value properties that will be passed to the Pad constructor
 
         Returns
         -------
@@ -102,9 +102,9 @@ class Title(_BaseLayoutHierarchyType):
         """
         The 'subtitle' property is an instance of Subtitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.title.Subtitle`
-          - A dict of string/value properties that will be passed
-            to the Subtitle constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.title.Subtitle`
+        - A dict of string/value properties that will be passed to the Subtitle constructor
 
         Returns
         -------

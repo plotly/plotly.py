@@ -109,9 +109,9 @@ class Parcoords(_BaseTraceType):
 
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Dimension`
-          - A dict of string/value properties that will be passed
-            to the Dimension constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Dimension`
+        - A dict of string/value properties that will be passed to the Dimension constructor
 
         Returns
         -------
@@ -128,9 +128,9 @@ class Parcoords(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -210,9 +210,9 @@ class Parcoords(_BaseTraceType):
 
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Labelfont`
-          - A dict of string/value properties that will be passed
-            to the Labelfont constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Labelfont`
+        - A dict of string/value properties that will be passed to the Labelfont constructor
 
         Returns
         -------
@@ -276,9 +276,9 @@ class Parcoords(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -341,9 +341,9 @@ class Parcoords(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -428,9 +428,9 @@ class Parcoords(_BaseTraceType):
 
         The 'rangefont' property is an instance of Rangefont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Rangefont`
-          - A dict of string/value properties that will be passed
-            to the Rangefont constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Rangefont`
+        - A dict of string/value properties that will be passed to the Rangefont constructor
 
         Returns
         -------
@@ -447,9 +447,9 @@ class Parcoords(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -468,9 +468,9 @@ class Parcoords(_BaseTraceType):
 
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Tickfont`
-          - A dict of string/value properties that will be passed
-            to the Tickfont constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Tickfont`
+        - A dict of string/value properties that will be passed to the Tickfont constructor
 
         Returns
         -------
@@ -540,9 +540,9 @@ class Parcoords(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcoords.Unselected`
-          - A dict of string/value properties that will be passed
-            to the Unselected constructor
+
+        - An instance of :class:`plotly.graph_objects.parcoords.Unselected`
+        - A dict of string/value properties that will be passed to the Unselected constructor
 
         Returns
         -------

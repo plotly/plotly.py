@@ -34,12 +34,13 @@ class Fillpattern(_BaseTraceHierarchyType):
         background.
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
-          - A list or array of any of the above
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        - A list or array of any of the above
 
         Returns
         -------
@@ -78,12 +79,13 @@ class Fillpattern(_BaseTraceHierarchyType):
         white to increase contrast with the `bgcolor`.
 
         The 'fgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
-          - A list or array of any of the above
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        - A list or array of any of the above
 
         Returns
         -------

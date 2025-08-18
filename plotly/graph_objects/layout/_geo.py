@@ -49,11 +49,12 @@ class Geo(_BaseLayoutHierarchyType):
         Set the background color of the map
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -70,9 +71,9 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.geo.Center`
-          - A dict of string/value properties that will be passed
-            to the Center constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.geo.Center`
+        - A dict of string/value properties that will be passed to the Center constructor
 
         Returns
         -------
@@ -90,11 +91,12 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the coastline color.
 
         The 'coastlinecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -131,11 +133,12 @@ class Geo(_BaseLayoutHierarchyType):
         Sets line color of the country boundaries.
 
         The 'countrycolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -171,9 +174,9 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.geo.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.geo.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -224,11 +227,12 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the color the frame.
 
         The 'framecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -265,11 +269,12 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the color of the lakes.
 
         The 'lakecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -287,11 +292,12 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the land mass color.
 
         The 'landcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -308,9 +314,9 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'lataxis' property is an instance of Lataxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.geo.Lataxis`
-          - A dict of string/value properties that will be passed
-            to the Lataxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.geo.Lataxis`
+        - A dict of string/value properties that will be passed to the Lataxis constructor
 
         Returns
         -------
@@ -327,9 +333,9 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'lonaxis' property is an instance of Lonaxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.geo.Lonaxis`
-          - A dict of string/value properties that will be passed
-            to the Lonaxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.geo.Lonaxis`
+        - A dict of string/value properties that will be passed to the Lonaxis constructor
 
         Returns
         -------
@@ -347,11 +353,12 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the ocean color
 
         The 'oceancolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -368,9 +375,9 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'projection' property is an instance of Projection
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.geo.Projection`
-          - A dict of string/value properties that will be passed
-            to the Projection constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.geo.Projection`
+        - A dict of string/value properties that will be passed to the Projection constructor
 
         Returns
         -------
@@ -411,11 +418,12 @@ class Geo(_BaseLayoutHierarchyType):
         Sets color of the rivers.
 
         The 'rivercolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -619,11 +627,12 @@ class Geo(_BaseLayoutHierarchyType):
         Sets the color of the subunits boundaries.
 
         The 'subunitcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------

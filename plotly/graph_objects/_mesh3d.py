@@ -230,13 +230,13 @@ class Mesh3d(_BaseTraceType):
         Sets the color of the whole mesh
 
         The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
-          - A number that will be interpreted as a color
-            according to mesh3d.colorscale
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        - A number that will be interpreted as a color according to mesh3d.colorscale
 
         Returns
         -------
@@ -278,9 +278,9 @@ class Mesh3d(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.mesh3d.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.mesh3d.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -348,9 +348,9 @@ class Mesh3d(_BaseTraceType):
         """
         The 'contour' property is an instance of Contour
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.mesh3d.Contour`
-          - A dict of string/value properties that will be passed
-            to the Contour constructor
+
+        - An instance of :class:`plotly.graph_objects.mesh3d.Contour`
+        - A dict of string/value properties that will be passed to the Contour constructor
 
         Returns
         -------
@@ -532,9 +532,9 @@ class Mesh3d(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.mesh3d.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.mesh3d.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -926,9 +926,9 @@ class Mesh3d(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.mesh3d.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.mesh3d.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -991,9 +991,9 @@ class Mesh3d(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.mesh3d.Lighting`
-          - A dict of string/value properties that will be passed
-            to the Lighting constructor
+
+        - An instance of :class:`plotly.graph_objects.mesh3d.Lighting`
+        - A dict of string/value properties that will be passed to the Lighting constructor
 
         Returns
         -------
@@ -1010,9 +1010,9 @@ class Mesh3d(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.mesh3d.Lightposition`
-          - A dict of string/value properties that will be passed
-            to the Lightposition constructor
+
+        - An instance of :class:`plotly.graph_objects.mesh3d.Lightposition`
+        - A dict of string/value properties that will be passed to the Lightposition constructor
 
         Returns
         -------
@@ -1200,9 +1200,9 @@ class Mesh3d(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.mesh3d.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.mesh3d.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

@@ -90,9 +90,9 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'cluster' property is an instance of Cluster
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Cluster`
-          - A dict of string/value properties that will be passed
-            to the Cluster constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Cluster`
+        - A dict of string/value properties that will be passed to the Cluster constructor
 
         Returns
         -------
@@ -194,11 +194,12 @@ class Scattermapbox(_BaseTraceType):
         is available.
 
         The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -258,9 +259,9 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -507,9 +508,9 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -572,9 +573,9 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -627,9 +628,9 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -755,9 +756,9 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Selected`
-          - A dict of string/value properties that will be passed
-            to the Selected constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Selected`
+        - A dict of string/value properties that will be passed to the Selected constructor
 
         Returns
         -------
@@ -815,9 +816,9 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -893,9 +894,9 @@ class Scattermapbox(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -1062,9 +1063,9 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattermapbox.Unselected`
-          - A dict of string/value properties that will be passed
-            to the Unselected constructor
+
+        - An instance of :class:`plotly.graph_objects.scattermapbox.Unselected`
+        - A dict of string/value properties that will be passed to the Unselected constructor
 
         Returns
         -------

@@ -320,9 +320,9 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.contourcarpet.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.contourcarpet.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -390,9 +390,9 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'contours' property is an instance of Contours
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.contourcarpet.Contours`
-          - A dict of string/value properties that will be passed
-            to the Contours constructor
+
+        - An instance of :class:`plotly.graph_objects.contourcarpet.Contours`
+        - A dict of string/value properties that will be passed to the Contours constructor
 
         Returns
         -------
@@ -490,13 +490,13 @@ class Contourcarpet(_BaseTraceType):
         marker color, or marker line color, whichever is available.
 
         The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
-          - A number that will be interpreted as a color
-            according to contourcarpet.colorscale
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        - A number that will be interpreted as a color according to contourcarpet.colorscale
 
         Returns
         -------
@@ -634,9 +634,9 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.contourcarpet.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.contourcarpet.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -699,9 +699,9 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.contourcarpet.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.contourcarpet.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -883,9 +883,9 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.contourcarpet.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.contourcarpet.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

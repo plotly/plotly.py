@@ -15,9 +15,9 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattersmith.unselected.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.scattersmith.unselected.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -34,9 +34,9 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scattersmith.unselected.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.scattersmith.unselected.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------

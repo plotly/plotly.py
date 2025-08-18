@@ -61,11 +61,12 @@ class Newshape(_BaseLayoutHierarchyType):
         a new shape could be started over.
 
         The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -105,9 +106,9 @@ class Newshape(_BaseLayoutHierarchyType):
         """
         The 'label' property is an instance of Label
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.newshape.Label`
-          - A dict of string/value properties that will be passed
-            to the Label constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.newshape.Label`
+        - A dict of string/value properties that will be passed to the Label constructor
 
         Returns
         -------
@@ -193,9 +194,9 @@ class Newshape(_BaseLayoutHierarchyType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.newshape.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.newshape.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -255,9 +256,9 @@ class Newshape(_BaseLayoutHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.newshape.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.newshape.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------

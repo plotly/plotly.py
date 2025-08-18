@@ -127,9 +127,9 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         The 'autorangeoptions' property is an instance of Autorangeoptions
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.polar.radialaxis.Autorangeoptions`
-          - A dict of string/value properties that will be passed
-            to the Autorangeoptions constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.polar.radialaxis.Autorangeoptions`
+        - A dict of string/value properties that will be passed to the Autorangeoptions constructor
 
         Returns
         -------
@@ -307,11 +307,12 @@ class RadialAxis(_BaseLayoutHierarchyType):
         pieces can override this.
 
         The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -390,11 +391,12 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Sets the color of the grid lines.
 
         The 'gridcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -540,11 +542,12 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Sets the axis line color.
 
         The 'linecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -925,11 +928,12 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Sets the tick color.
 
         The 'tickcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -948,9 +952,9 @@ class RadialAxis(_BaseLayoutHierarchyType):
 
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.polar.radialaxis.Tickfont`
-          - A dict of string/value properties that will be passed
-            to the Tickfont constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.polar.radialaxis.Tickfont`
+        - A dict of string/value properties that will be passed to the Tickfont constructor
 
         Returns
         -------
@@ -1020,9 +1024,9 @@ class RadialAxis(_BaseLayoutHierarchyType):
 
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.polar.radialaxis.Tickformatstop`
-          - A dict of string/value properties that will be passed
-            to the Tickformatstop constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.polar.radialaxis.Tickformatstop`
+        - A dict of string/value properties that will be passed to the Tickformatstop constructor
 
         Returns
         -------
@@ -1268,9 +1272,9 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.polar.radialaxis.Title`
-          - A dict of string/value properties that will be passed
-            to the Title constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.polar.radialaxis.Title`
+        - A dict of string/value properties that will be passed to the Title constructor
 
         Returns
         -------

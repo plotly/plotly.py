@@ -15,9 +15,9 @@ class Threshold(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.gauge.threshold.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.gauge.threshold.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------

@@ -1317,11 +1317,12 @@ class ColorValidator(BaseValidator):
     def description(self):
         valid_color_description = """\
     The '{plotly_name}' property is a color and may be specified as:
-      - A hex string (e.g. '#ff0000')
-      - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-      - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-      - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-      - A named CSS color: see https://plotly.com/python/css-colors/ for a list""".format(
+
+    - A hex string (e.g. '#ff0000')
+    - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+    - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+    - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+    - A named CSS color: see https://plotly.com/python/css-colors/ for a list""".format(
             plotly_name=self.plotly_name
         )
 
@@ -1329,15 +1330,15 @@ class ColorValidator(BaseValidator):
             valid_color_description = (
                 valid_color_description
                 + """
-      - A number that will be interpreted as a color
-        according to {colorscale_path}""".format(colorscale_path=self.colorscale_path)
-            )
+    - A number that will be interpreted as a color according to {colorscale_path}""".format(
+        colorscale_path=self.colorscale_path)
+        )
 
         if self.array_ok:
             valid_color_description = (
                 valid_color_description
                 + """
-      - A list or array of any of the above"""
+    - A list or array of any of the above"""
             )
 
         return valid_color_description
@@ -2419,10 +2420,9 @@ class CompoundValidator(BaseValidator):
         desc = (
             """\
     The '{plotly_name}' property is an instance of {class_str}
-    that may be specified as:
-      - An instance of :class:`{module_str}.{class_str}`
-      - A dict of string/value properties that will be passed
-        to the {class_str} constructor"""
+    that may be specified as:\n
+    - An instance of :class:`{module_str}.{class_str}`
+    - A dict of string/value properties that will be passed to the {class_str} constructor"""
         ).format(
             plotly_name=self.plotly_name,
             class_str=self.data_class_str,

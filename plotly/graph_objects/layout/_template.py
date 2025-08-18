@@ -16,9 +16,9 @@ class Template(_BaseLayoutHierarchyType):
         """
         The 'data' property is an instance of Data
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.template.Data`
-          - A dict of string/value properties that will be passed
-            to the Data constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.template.Data`
+        - A dict of string/value properties that will be passed to the Data constructor
 
         Returns
         -------
@@ -35,9 +35,9 @@ class Template(_BaseLayoutHierarchyType):
         """
         The 'layout' property is an instance of Layout
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.Layout`
-          - A dict of string/value properties that will be passed
-            to the Layout constructor
+
+        - An instance of :class:`plotly.graph_objects.Layout`
+        - A dict of string/value properties that will be passed to the Layout constructor
 
         Returns
         -------

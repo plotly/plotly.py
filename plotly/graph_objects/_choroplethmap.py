@@ -137,9 +137,9 @@ class Choroplethmap(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.choroplethmap.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.choroplethmap.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -333,9 +333,9 @@ class Choroplethmap(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.choroplethmap.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.choroplethmap.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -543,9 +543,9 @@ class Choroplethmap(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.choroplethmap.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.choroplethmap.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -646,9 +646,9 @@ class Choroplethmap(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.choroplethmap.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.choroplethmap.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -751,9 +751,9 @@ class Choroplethmap(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.choroplethmap.Selected`
-          - A dict of string/value properties that will be passed
-            to the Selected constructor
+
+        - An instance of :class:`plotly.graph_objects.choroplethmap.Selected`
+        - A dict of string/value properties that will be passed to the Selected constructor
 
         Returns
         -------
@@ -830,9 +830,9 @@ class Choroplethmap(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.choroplethmap.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.choroplethmap.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -966,9 +966,9 @@ class Choroplethmap(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.choroplethmap.Unselected`
-          - A dict of string/value properties that will be passed
-            to the Unselected constructor
+
+        - An instance of :class:`plotly.graph_objects.choroplethmap.Unselected`
+        - A dict of string/value properties that will be passed to the Unselected constructor
 
         Returns
         -------

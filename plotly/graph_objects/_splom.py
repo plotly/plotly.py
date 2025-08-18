@@ -97,9 +97,9 @@ class Splom(_BaseTraceType):
         """
         The 'diagonal' property is an instance of Diagonal
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.Diagonal`
-          - A dict of string/value properties that will be passed
-            to the Diagonal constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.Diagonal`
+        - A dict of string/value properties that will be passed to the Diagonal constructor
 
         Returns
         -------
@@ -139,9 +139,9 @@ class Splom(_BaseTraceType):
 
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.Dimension`
-          - A dict of string/value properties that will be passed
-            to the Dimension constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.Dimension`
+        - A dict of string/value properties that will be passed to the Dimension constructor
 
         Returns
         -------
@@ -201,9 +201,9 @@ class Splom(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -410,9 +410,9 @@ class Splom(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -475,9 +475,9 @@ class Splom(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -579,9 +579,9 @@ class Splom(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.Selected`
-          - A dict of string/value properties that will be passed
-            to the Selected constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.Selected`
+        - A dict of string/value properties that will be passed to the Selected constructor
 
         Returns
         -------
@@ -677,9 +677,9 @@ class Splom(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -793,9 +793,9 @@ class Splom(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.Unselected`
-          - A dict of string/value properties that will be passed
-            to the Unselected constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.Unselected`
+        - A dict of string/value properties that will be passed to the Unselected constructor
 
         Returns
         -------

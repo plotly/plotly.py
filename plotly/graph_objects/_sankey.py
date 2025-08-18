@@ -110,9 +110,9 @@ class Sankey(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sankey.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.sankey.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -154,9 +154,9 @@ class Sankey(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sankey.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.sankey.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -234,9 +234,9 @@ class Sankey(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sankey.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.sankey.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -301,9 +301,9 @@ class Sankey(_BaseTraceType):
 
         The 'link' property is an instance of Link
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sankey.Link`
-          - A dict of string/value properties that will be passed
-            to the Link constructor
+
+        - An instance of :class:`plotly.graph_objects.sankey.Link`
+        - A dict of string/value properties that will be passed to the Link constructor
 
         Returns
         -------
@@ -388,9 +388,9 @@ class Sankey(_BaseTraceType):
 
         The 'node' property is an instance of Node
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sankey.Node`
-          - A dict of string/value properties that will be passed
-            to the Node constructor
+
+        - An instance of :class:`plotly.graph_objects.sankey.Node`
+        - A dict of string/value properties that will be passed to the Node constructor
 
         Returns
         -------
@@ -450,9 +450,9 @@ class Sankey(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sankey.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.sankey.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -471,9 +471,9 @@ class Sankey(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sankey.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.sankey.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------

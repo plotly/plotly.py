@@ -215,9 +215,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -285,9 +285,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'contours' property is an instance of Contours
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.Contours`
-          - A dict of string/value properties that will be passed
-            to the Contours constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.Contours`
+        - A dict of string/value properties that will be passed to the Contours constructor
 
         Returns
         -------
@@ -447,9 +447,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -615,9 +615,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -680,9 +680,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -699,9 +699,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -927,9 +927,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -949,9 +949,9 @@ class Histogram2dContour(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -1145,9 +1145,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'xbins' property is an instance of XBins
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.XBins`
-          - A dict of string/value properties that will be passed
-            to the XBins constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.XBins`
+        - A dict of string/value properties that will be passed to the XBins constructor
 
         Returns
         -------
@@ -1303,9 +1303,9 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'ybins' property is an instance of YBins
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2dcontour.YBins`
-          - A dict of string/value properties that will be passed
-            to the YBins constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2dcontour.YBins`
+        - A dict of string/value properties that will be passed to the YBins constructor
 
         Returns
         -------

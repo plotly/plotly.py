@@ -108,9 +108,9 @@ class Symbol(_BaseLayoutHierarchyType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.mapbox.layer.symbol.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.mapbox.layer.symbol.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------

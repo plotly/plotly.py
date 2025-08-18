@@ -23,9 +23,9 @@ class Dimension(_BaseTraceHierarchyType):
         """
         The 'axis' property is an instance of Axis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.dimension.Axis`
-          - A dict of string/value properties that will be passed
-            to the Axis constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.dimension.Axis`
+        - A dict of string/value properties that will be passed to the Axis constructor
 
         Returns
         -------

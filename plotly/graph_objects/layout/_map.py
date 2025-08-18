@@ -46,9 +46,9 @@ class Map(_BaseLayoutHierarchyType):
         """
         The 'bounds' property is an instance of Bounds
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.map.Bounds`
-          - A dict of string/value properties that will be passed
-            to the Bounds constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.map.Bounds`
+        - A dict of string/value properties that will be passed to the Bounds constructor
 
         Returns
         -------
@@ -65,9 +65,9 @@ class Map(_BaseLayoutHierarchyType):
         """
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.map.Center`
-          - A dict of string/value properties that will be passed
-            to the Center constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.map.Center`
+        - A dict of string/value properties that will be passed to the Center constructor
 
         Returns
         -------
@@ -84,9 +84,9 @@ class Map(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.map.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.map.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -126,9 +126,9 @@ class Map(_BaseLayoutHierarchyType):
 
         The 'layerdefaults' property is an instance of Layer
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.map.Layer`
-          - A dict of string/value properties that will be passed
-            to the Layer constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.map.Layer`
+        - A dict of string/value properties that will be passed to the Layer constructor
 
         Returns
         -------

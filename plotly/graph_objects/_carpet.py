@@ -93,9 +93,9 @@ class Carpet(_BaseTraceType):
         """
         The 'aaxis' property is an instance of Aaxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.carpet.Aaxis`
-          - A dict of string/value properties that will be passed
-            to the Aaxis constructor
+
+        - An instance of :class:`plotly.graph_objects.carpet.Aaxis`
+        - A dict of string/value properties that will be passed to the Aaxis constructor
 
         Returns
         -------
@@ -169,9 +169,9 @@ class Carpet(_BaseTraceType):
         """
         The 'baxis' property is an instance of Baxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.carpet.Baxis`
-          - A dict of string/value properties that will be passed
-            to the Baxis constructor
+
+        - An instance of :class:`plotly.graph_objects.carpet.Baxis`
+        - A dict of string/value properties that will be passed to the Baxis constructor
 
         Returns
         -------
@@ -253,11 +253,12 @@ class Carpet(_BaseTraceType):
         pieces can override this.
 
         The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -354,9 +355,9 @@ class Carpet(_BaseTraceType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.carpet.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.carpet.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------
@@ -434,9 +435,9 @@ class Carpet(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.carpet.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.carpet.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -584,9 +585,9 @@ class Carpet(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.carpet.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.carpet.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

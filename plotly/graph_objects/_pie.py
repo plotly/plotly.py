@@ -169,9 +169,9 @@ class Pie(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -251,9 +251,9 @@ class Pie(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -422,9 +422,9 @@ class Pie(_BaseTraceType):
 
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Insidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Insidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Insidetextfont`
+        - A dict of string/value properties that will be passed to the Insidetextfont constructor
 
         Returns
         -------
@@ -576,9 +576,9 @@ class Pie(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -641,9 +641,9 @@ class Pie(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -747,9 +747,9 @@ class Pie(_BaseTraceType):
 
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Outsidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Outsidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Outsidetextfont`
+        - A dict of string/value properties that will be passed to the Outsidetextfont constructor
 
         Returns
         -------
@@ -890,9 +890,9 @@ class Pie(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -933,9 +933,9 @@ class Pie(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -1088,9 +1088,9 @@ class Pie(_BaseTraceType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.pie.Title`
-          - A dict of string/value properties that will be passed
-            to the Title constructor
+
+        - An instance of :class:`plotly.graph_objects.pie.Title`
+        - A dict of string/value properties that will be passed to the Title constructor
 
         Returns
         -------

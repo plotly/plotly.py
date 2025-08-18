@@ -16,11 +16,12 @@ class Smith(_BaseLayoutHierarchyType):
         Set the background color of the subplot
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -37,9 +38,9 @@ class Smith(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.smith.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.smith.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -56,9 +57,9 @@ class Smith(_BaseLayoutHierarchyType):
         """
         The 'imaginaryaxis' property is an instance of Imaginaryaxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.smith.Imaginaryaxis`
-          - A dict of string/value properties that will be passed
-            to the Imaginaryaxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.smith.Imaginaryaxis`
+        - A dict of string/value properties that will be passed to the Imaginaryaxis constructor
 
         Returns
         -------
@@ -75,9 +76,9 @@ class Smith(_BaseLayoutHierarchyType):
         """
         The 'realaxis' property is an instance of Realaxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.smith.Realaxis`
-          - A dict of string/value properties that will be passed
-            to the Realaxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.smith.Realaxis`
+        - A dict of string/value properties that will be passed to the Realaxis constructor
 
         Returns
         -------

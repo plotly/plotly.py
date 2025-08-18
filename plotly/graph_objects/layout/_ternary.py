@@ -15,9 +15,9 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'aaxis' property is an instance of Aaxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.ternary.Aaxis`
-          - A dict of string/value properties that will be passed
-            to the Aaxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.ternary.Aaxis`
+        - A dict of string/value properties that will be passed to the Aaxis constructor
 
         Returns
         -------
@@ -34,9 +34,9 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'baxis' property is an instance of Baxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.ternary.Baxis`
-          - A dict of string/value properties that will be passed
-            to the Baxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.ternary.Baxis`
+        - A dict of string/value properties that will be passed to the Baxis constructor
 
         Returns
         -------
@@ -54,11 +54,12 @@ class Ternary(_BaseLayoutHierarchyType):
         Set the background color of the subplot
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -75,9 +76,9 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'caxis' property is an instance of Caxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.ternary.Caxis`
-          - A dict of string/value properties that will be passed
-            to the Caxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.ternary.Caxis`
+        - A dict of string/value properties that will be passed to the Caxis constructor
 
         Returns
         -------
@@ -94,9 +95,9 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.ternary.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.ternary.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------

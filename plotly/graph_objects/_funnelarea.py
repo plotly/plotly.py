@@ -160,9 +160,9 @@ class Funnelarea(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.funnelarea.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.funnelarea.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -222,9 +222,9 @@ class Funnelarea(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.funnelarea.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.funnelarea.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -393,9 +393,9 @@ class Funnelarea(_BaseTraceType):
 
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.funnelarea.Insidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Insidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.funnelarea.Insidetextfont`
+        - A dict of string/value properties that will be passed to the Insidetextfont constructor
 
         Returns
         -------
@@ -519,9 +519,9 @@ class Funnelarea(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.funnelarea.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.funnelarea.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -584,9 +584,9 @@ class Funnelarea(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.funnelarea.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.funnelarea.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -730,9 +730,9 @@ class Funnelarea(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.funnelarea.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.funnelarea.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -773,9 +773,9 @@ class Funnelarea(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.funnelarea.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.funnelarea.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -928,9 +928,9 @@ class Funnelarea(_BaseTraceType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.funnelarea.Title`
-          - A dict of string/value properties that will be passed
-            to the Title constructor
+
+        - An instance of :class:`plotly.graph_objects.funnelarea.Title`
+        - A dict of string/value properties that will be passed to the Title constructor
 
         Returns
         -------

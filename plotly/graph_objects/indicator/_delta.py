@@ -25,9 +25,9 @@ class Delta(_BaseTraceHierarchyType):
         """
         The 'decreasing' property is an instance of Decreasing
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.delta.Decreasing`
-          - A dict of string/value properties that will be passed
-            to the Decreasing constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.delta.Decreasing`
+        - A dict of string/value properties that will be passed to the Decreasing constructor
 
         Returns
         -------
@@ -46,9 +46,9 @@ class Delta(_BaseTraceHierarchyType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.delta.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.delta.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------
@@ -65,9 +65,9 @@ class Delta(_BaseTraceHierarchyType):
         """
         The 'increasing' property is an instance of Increasing
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.delta.Increasing`
-          - A dict of string/value properties that will be passed
-            to the Increasing constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.delta.Increasing`
+        - A dict of string/value properties that will be passed to the Increasing constructor
 
         Returns
         -------

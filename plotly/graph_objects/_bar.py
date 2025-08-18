@@ -272,9 +272,9 @@ class Bar(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.ErrorX`
-          - A dict of string/value properties that will be passed
-            to the ErrorX constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.ErrorX`
+        - A dict of string/value properties that will be passed to the ErrorX constructor
 
         Returns
         -------
@@ -291,9 +291,9 @@ class Bar(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.ErrorY`
-          - A dict of string/value properties that will be passed
-            to the ErrorY constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.ErrorY`
+        - A dict of string/value properties that will be passed to the ErrorY constructor
 
         Returns
         -------
@@ -353,9 +353,9 @@ class Bar(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -546,9 +546,9 @@ class Bar(_BaseTraceType):
 
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Insidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Insidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Insidetextfont`
+        - A dict of string/value properties that will be passed to the Insidetextfont constructor
 
         Returns
         -------
@@ -611,9 +611,9 @@ class Bar(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -676,9 +676,9 @@ class Bar(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -868,9 +868,9 @@ class Bar(_BaseTraceType):
 
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Outsidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Outsidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Outsidetextfont`
+        - A dict of string/value properties that will be passed to the Outsidetextfont constructor
 
         Returns
         -------
@@ -887,9 +887,9 @@ class Bar(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Selected`
-          - A dict of string/value properties that will be passed
-            to the Selected constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Selected`
+        - A dict of string/value properties that will be passed to the Selected constructor
 
         Returns
         -------
@@ -947,9 +947,9 @@ class Bar(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -1019,9 +1019,9 @@ class Bar(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -1213,9 +1213,9 @@ class Bar(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.bar.Unselected`
-          - A dict of string/value properties that will be passed
-            to the Unselected constructor
+
+        - An instance of :class:`plotly.graph_objects.bar.Unselected`
+        - A dict of string/value properties that will be passed to the Unselected constructor
 
         Returns
         -------

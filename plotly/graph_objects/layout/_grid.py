@@ -52,9 +52,9 @@ class Grid(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.grid.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.grid.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------

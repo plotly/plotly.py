@@ -137,9 +137,9 @@ class Densitymapbox(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.densitymapbox.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.densitymapbox.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -290,9 +290,9 @@ class Densitymapbox(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.densitymapbox.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.densitymapbox.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -539,9 +539,9 @@ class Densitymapbox(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.densitymapbox.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.densitymapbox.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -824,9 +824,9 @@ class Densitymapbox(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.densitymapbox.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.densitymapbox.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

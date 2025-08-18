@@ -26,9 +26,9 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'angularaxis' property is an instance of AngularAxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.polar.AngularAxis`
-          - A dict of string/value properties that will be passed
-            to the AngularAxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.polar.AngularAxis`
+        - A dict of string/value properties that will be passed to the AngularAxis constructor
 
         Returns
         -------
@@ -92,11 +92,12 @@ class Polar(_BaseLayoutHierarchyType):
         Set the background color of the subplot
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -113,9 +114,9 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.polar.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.polar.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -178,9 +179,9 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'radialaxis' property is an instance of RadialAxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.polar.RadialAxis`
-          - A dict of string/value properties that will be passed
-            to the RadialAxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.polar.RadialAxis`
+        - A dict of string/value properties that will be passed to the RadialAxis constructor
 
         Returns
         -------

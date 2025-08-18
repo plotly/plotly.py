@@ -131,9 +131,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.ErrorX`
-          - A dict of string/value properties that will be passed
-            to the ErrorX constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.ErrorX`
+        - A dict of string/value properties that will be passed to the ErrorX constructor
 
         Returns
         -------
@@ -150,9 +150,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.ErrorY`
-          - A dict of string/value properties that will be passed
-            to the ErrorY constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.ErrorY`
+        - A dict of string/value properties that will be passed to the ErrorY constructor
 
         Returns
         -------
@@ -169,9 +169,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'error_z' property is an instance of ErrorZ
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.ErrorZ`
-          - A dict of string/value properties that will be passed
-            to the ErrorZ constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.ErrorZ`
+        - A dict of string/value properties that will be passed to the ErrorZ constructor
 
         Returns
         -------
@@ -231,9 +231,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -444,9 +444,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -509,9 +509,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -528,9 +528,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -658,9 +658,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'projection' property is an instance of Projection
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.Projection`
-          - A dict of string/value properties that will be passed
-            to the Projection constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.Projection`
+        - A dict of string/value properties that will be passed to the Projection constructor
 
         Returns
         -------
@@ -719,9 +719,9 @@ class Scatter3d(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -762,11 +762,12 @@ class Scatter3d(_BaseTraceType):
         Sets the surface fill color.
 
         The 'surfacecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -813,9 +814,9 @@ class Scatter3d(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter3d.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter3d.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------

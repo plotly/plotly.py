@@ -218,9 +218,9 @@ class Histogram(_BaseTraceType):
         """
         The 'cumulative' property is an instance of Cumulative
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Cumulative`
-          - A dict of string/value properties that will be passed
-            to the Cumulative constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Cumulative`
+        - A dict of string/value properties that will be passed to the Cumulative constructor
 
         Returns
         -------
@@ -277,9 +277,9 @@ class Histogram(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.ErrorX`
-          - A dict of string/value properties that will be passed
-            to the ErrorX constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.ErrorX`
+        - A dict of string/value properties that will be passed to the ErrorX constructor
 
         Returns
         -------
@@ -296,9 +296,9 @@ class Histogram(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.ErrorY`
-          - A dict of string/value properties that will be passed
-            to the ErrorY constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.ErrorY`
+        - A dict of string/value properties that will be passed to the ErrorY constructor
 
         Returns
         -------
@@ -418,9 +418,9 @@ class Histogram(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -606,9 +606,9 @@ class Histogram(_BaseTraceType):
 
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Insidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Insidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Insidetextfont`
+        - A dict of string/value properties that will be passed to the Insidetextfont constructor
 
         Returns
         -------
@@ -671,9 +671,9 @@ class Histogram(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -736,9 +736,9 @@ class Histogram(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -931,9 +931,9 @@ class Histogram(_BaseTraceType):
 
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Outsidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Outsidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Outsidetextfont`
+        - A dict of string/value properties that will be passed to the Outsidetextfont constructor
 
         Returns
         -------
@@ -950,9 +950,9 @@ class Histogram(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Selected`
-          - A dict of string/value properties that will be passed
-            to the Selected constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Selected`
+        - A dict of string/value properties that will be passed to the Selected constructor
 
         Returns
         -------
@@ -1010,9 +1010,9 @@ class Histogram(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -1080,9 +1080,9 @@ class Histogram(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -1232,9 +1232,9 @@ class Histogram(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.Unselected`
-          - A dict of string/value properties that will be passed
-            to the Unselected constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.Unselected`
+        - A dict of string/value properties that will be passed to the Unselected constructor
 
         Returns
         -------
@@ -1315,9 +1315,9 @@ class Histogram(_BaseTraceType):
         """
         The 'xbins' property is an instance of XBins
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.XBins`
-          - A dict of string/value properties that will be passed
-            to the XBins constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.XBins`
+        - A dict of string/value properties that will be passed to the XBins constructor
 
         Returns
         -------
@@ -1448,9 +1448,9 @@ class Histogram(_BaseTraceType):
         """
         The 'ybins' property is an instance of YBins
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram.YBins`
-          - A dict of string/value properties that will be passed
-            to the YBins constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram.YBins`
+        - A dict of string/value properties that will be passed to the YBins constructor
 
         Returns
         -------

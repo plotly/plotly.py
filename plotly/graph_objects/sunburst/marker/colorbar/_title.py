@@ -17,9 +17,9 @@ class Title(_BaseTraceHierarchyType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sunburst.marker.colorbar.title.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.sunburst.marker.colorbar.title.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------

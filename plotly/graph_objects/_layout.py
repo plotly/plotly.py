@@ -157,9 +157,9 @@ class Layout(_BaseLayoutType):
         """
         The 'activeselection' property is an instance of Activeselection
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Activeselection`
-          - A dict of string/value properties that will be passed
-            to the Activeselection constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Activeselection`
+        - A dict of string/value properties that will be passed to the Activeselection constructor
 
         Returns
         -------
@@ -176,9 +176,9 @@ class Layout(_BaseLayoutType):
         """
         The 'activeshape' property is an instance of Activeshape
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Activeshape`
-          - A dict of string/value properties that will be passed
-            to the Activeshape constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Activeshape`
+        - A dict of string/value properties that will be passed to the Activeshape constructor
 
         Returns
         -------
@@ -218,9 +218,9 @@ class Layout(_BaseLayoutType):
 
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Annotation`
-          - A dict of string/value properties that will be passed
-            to the Annotation constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Annotation`
+        - A dict of string/value properties that will be passed to the Annotation constructor
 
         Returns
         -------
@@ -520,9 +520,9 @@ class Layout(_BaseLayoutType):
         """
         The 'coloraxis' property is an instance of Coloraxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Coloraxis`
-          - A dict of string/value properties that will be passed
-            to the Coloraxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Coloraxis`
+        - A dict of string/value properties that will be passed to the Coloraxis constructor
 
         Returns
         -------
@@ -539,9 +539,9 @@ class Layout(_BaseLayoutType):
         """
         The 'colorscale' property is an instance of Colorscale
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Colorscale`
-          - A dict of string/value properties that will be passed
-            to the Colorscale constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Colorscale`
+        - A dict of string/value properties that will be passed to the Colorscale constructor
 
         Returns
         -------
@@ -790,9 +790,9 @@ class Layout(_BaseLayoutType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------
@@ -897,9 +897,9 @@ class Layout(_BaseLayoutType):
         """
         The 'geo' property is an instance of Geo
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Geo`
-          - A dict of string/value properties that will be passed
-            to the Geo constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Geo`
+        - A dict of string/value properties that will be passed to the Geo constructor
 
         Returns
         -------
@@ -916,9 +916,9 @@ class Layout(_BaseLayoutType):
         """
         The 'grid' property is an instance of Grid
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Grid`
-          - A dict of string/value properties that will be passed
-            to the Grid constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Grid`
+        - A dict of string/value properties that will be passed to the Grid constructor
 
         Returns
         -------
@@ -1040,9 +1040,9 @@ class Layout(_BaseLayoutType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -1162,9 +1162,9 @@ class Layout(_BaseLayoutType):
 
         The 'imagedefaults' property is an instance of Image
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Image`
-          - A dict of string/value properties that will be passed
-            to the Image constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Image`
+        - A dict of string/value properties that will be passed to the Image constructor
 
         Returns
         -------
@@ -1181,9 +1181,9 @@ class Layout(_BaseLayoutType):
         """
         The 'legend' property is an instance of Legend
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Legend`
-          - A dict of string/value properties that will be passed
-            to the Legend constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Legend`
+        - A dict of string/value properties that will be passed to the Legend constructor
 
         Returns
         -------
@@ -1200,9 +1200,9 @@ class Layout(_BaseLayoutType):
         """
         The 'map' property is an instance of Map
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Map`
-          - A dict of string/value properties that will be passed
-            to the Map constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Map`
+        - A dict of string/value properties that will be passed to the Map constructor
 
         Returns
         -------
@@ -1219,9 +1219,9 @@ class Layout(_BaseLayoutType):
         """
         The 'mapbox' property is an instance of Mapbox
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Mapbox`
-          - A dict of string/value properties that will be passed
-            to the Mapbox constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Mapbox`
+        - A dict of string/value properties that will be passed to the Mapbox constructor
 
         Returns
         -------
@@ -1238,9 +1238,9 @@ class Layout(_BaseLayoutType):
         """
         The 'margin' property is an instance of Margin
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Margin`
-          - A dict of string/value properties that will be passed
-            to the Margin constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Margin`
+        - A dict of string/value properties that will be passed to the Margin constructor
 
         Returns
         -------
@@ -1339,9 +1339,9 @@ class Layout(_BaseLayoutType):
         """
         The 'modebar' property is an instance of Modebar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Modebar`
-          - A dict of string/value properties that will be passed
-            to the Modebar constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Modebar`
+        - A dict of string/value properties that will be passed to the Modebar constructor
 
         Returns
         -------
@@ -1358,9 +1358,9 @@ class Layout(_BaseLayoutType):
         """
         The 'newselection' property is an instance of Newselection
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Newselection`
-          - A dict of string/value properties that will be passed
-            to the Newselection constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Newselection`
+        - A dict of string/value properties that will be passed to the Newselection constructor
 
         Returns
         -------
@@ -1377,9 +1377,9 @@ class Layout(_BaseLayoutType):
         """
         The 'newshape' property is an instance of Newshape
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Newshape`
-          - A dict of string/value properties that will be passed
-            to the Newshape constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Newshape`
+        - A dict of string/value properties that will be passed to the Newshape constructor
 
         Returns
         -------
@@ -1398,11 +1398,12 @@ class Layout(_BaseLayoutType):
         drawn.
 
         The 'paper_bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -1443,11 +1444,12 @@ class Layout(_BaseLayoutType):
         y axes.
 
         The 'plot_bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -1464,9 +1466,9 @@ class Layout(_BaseLayoutType):
         """
         The 'polar' property is an instance of Polar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Polar`
-          - A dict of string/value properties that will be passed
-            to the Polar constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Polar`
+        - A dict of string/value properties that will be passed to the Polar constructor
 
         Returns
         -------
@@ -1529,9 +1531,9 @@ class Layout(_BaseLayoutType):
         """
         The 'scene' property is an instance of Scene
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Scene`
-          - A dict of string/value properties that will be passed
-            to the Scene constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Scene`
+        - A dict of string/value properties that will be passed to the Scene constructor
 
         Returns
         -------
@@ -1613,9 +1615,9 @@ class Layout(_BaseLayoutType):
 
         The 'selectiondefaults' property is an instance of Selection
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Selection`
-          - A dict of string/value properties that will be passed
-            to the Selection constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Selection`
+        - A dict of string/value properties that will be passed to the Selection constructor
 
         Returns
         -------
@@ -1679,9 +1681,9 @@ class Layout(_BaseLayoutType):
 
         The 'shapedefaults' property is an instance of Shape
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Shape`
-          - A dict of string/value properties that will be passed
-            to the Shape constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Shape`
+        - A dict of string/value properties that will be passed to the Shape constructor
 
         Returns
         -------
@@ -1743,9 +1745,9 @@ class Layout(_BaseLayoutType):
 
         The 'sliderdefaults' property is an instance of Slider
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Slider`
-          - A dict of string/value properties that will be passed
-            to the Slider constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Slider`
+        - A dict of string/value properties that will be passed to the Slider constructor
 
         Returns
         -------
@@ -1762,9 +1764,9 @@ class Layout(_BaseLayoutType):
         """
         The 'smith' property is an instance of Smith
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Smith`
-          - A dict of string/value properties that will be passed
-            to the Smith constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Smith`
+        - A dict of string/value properties that will be passed to the Smith constructor
 
         Returns
         -------
@@ -1846,9 +1848,9 @@ class Layout(_BaseLayoutType):
 
         The 'template' property is an instance of Template
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Template`
-          - A dict of string/value properties that will be passed
-            to the Template constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Template`
+        - A dict of string/value properties that will be passed to the Template constructor
           - The name of a registered template where current registered templates
             are stored in the plotly.io.templates configuration object. The names
             of all registered templates can be retrieved with:
@@ -1876,9 +1878,9 @@ class Layout(_BaseLayoutType):
         """
         The 'ternary' property is an instance of Ternary
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Ternary`
-          - A dict of string/value properties that will be passed
-            to the Ternary constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Ternary`
+        - A dict of string/value properties that will be passed to the Ternary constructor
 
         Returns
         -------
@@ -1895,9 +1897,9 @@ class Layout(_BaseLayoutType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Title`
-          - A dict of string/value properties that will be passed
-            to the Title constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Title`
+        - A dict of string/value properties that will be passed to the Title constructor
 
         Returns
         -------
@@ -1916,9 +1918,9 @@ class Layout(_BaseLayoutType):
 
         The 'transition' property is an instance of Transition
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Transition`
-          - A dict of string/value properties that will be passed
-            to the Transition constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Transition`
+        - A dict of string/value properties that will be passed to the Transition constructor
 
         Returns
         -------
@@ -1989,9 +1991,9 @@ class Layout(_BaseLayoutType):
         """
         The 'uniformtext' property is an instance of Uniformtext
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Uniformtext`
-          - A dict of string/value properties that will be passed
-            to the Uniformtext constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Uniformtext`
+        - A dict of string/value properties that will be passed to the Uniformtext constructor
 
         Returns
         -------
@@ -2031,9 +2033,9 @@ class Layout(_BaseLayoutType):
 
         The 'updatemenudefaults' property is an instance of Updatemenu
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.Updatemenu`
-          - A dict of string/value properties that will be passed
-            to the Updatemenu constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.Updatemenu`
+        - A dict of string/value properties that will be passed to the Updatemenu constructor
 
         Returns
         -------
@@ -2202,9 +2204,9 @@ class Layout(_BaseLayoutType):
         """
         The 'xaxis' property is an instance of XAxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.XAxis`
-          - A dict of string/value properties that will be passed
-            to the XAxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.XAxis`
+        - A dict of string/value properties that will be passed to the XAxis constructor
 
         Returns
         -------
@@ -2221,9 +2223,9 @@ class Layout(_BaseLayoutType):
         """
         The 'yaxis' property is an instance of YAxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.YAxis`
-          - A dict of string/value properties that will be passed
-            to the YAxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.YAxis`
+        - A dict of string/value properties that will be passed to the YAxis constructor
 
         Returns
         -------

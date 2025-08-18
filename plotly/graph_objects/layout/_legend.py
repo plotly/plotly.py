@@ -45,11 +45,12 @@ class Legend(_BaseLayoutHierarchyType):
         `layout.paper_bgcolor`.
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -67,11 +68,12 @@ class Legend(_BaseLayoutHierarchyType):
         Sets the color of the border enclosing the legend.
 
         The 'bordercolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -151,9 +153,9 @@ class Legend(_BaseLayoutHierarchyType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.legend.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.legend.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------
@@ -198,9 +200,9 @@ class Legend(_BaseLayoutHierarchyType):
 
         The 'grouptitlefont' property is an instance of Grouptitlefont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.legend.Grouptitlefont`
-          - A dict of string/value properties that will be passed
-            to the Grouptitlefont constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.legend.Grouptitlefont`
+        - A dict of string/value properties that will be passed to the Grouptitlefont constructor
 
         Returns
         -------
@@ -375,9 +377,9 @@ class Legend(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.legend.Title`
-          - A dict of string/value properties that will be passed
-            to the Title constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.legend.Title`
+        - A dict of string/value properties that will be passed to the Title constructor
 
         Returns
         -------

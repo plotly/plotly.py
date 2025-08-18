@@ -150,9 +150,9 @@ class Parcats(_BaseTraceType):
 
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcats.Dimension`
-          - A dict of string/value properties that will be passed
-            to the Dimension constructor
+
+        - An instance of :class:`plotly.graph_objects.parcats.Dimension`
+        - A dict of string/value properties that will be passed to the Dimension constructor
 
         Returns
         -------
@@ -169,9 +169,9 @@ class Parcats(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcats.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.parcats.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -287,9 +287,9 @@ class Parcats(_BaseTraceType):
 
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcats.Labelfont`
-          - A dict of string/value properties that will be passed
-            to the Labelfont constructor
+
+        - An instance of :class:`plotly.graph_objects.parcats.Labelfont`
+        - A dict of string/value properties that will be passed to the Labelfont constructor
 
         Returns
         -------
@@ -306,9 +306,9 @@ class Parcats(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcats.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.parcats.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -345,9 +345,9 @@ class Parcats(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcats.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.parcats.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -453,9 +453,9 @@ class Parcats(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcats.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.parcats.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -474,9 +474,9 @@ class Parcats(_BaseTraceType):
 
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.parcats.Tickfont`
-          - A dict of string/value properties that will be passed
-            to the Tickfont constructor
+
+        - An instance of :class:`plotly.graph_objects.parcats.Tickfont`
+        - A dict of string/value properties that will be passed to the Tickfont constructor
 
         Returns
         -------

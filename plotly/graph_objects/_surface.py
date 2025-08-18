@@ -208,9 +208,9 @@ class Surface(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.surface.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.surface.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -297,9 +297,9 @@ class Surface(_BaseTraceType):
         """
         The 'contours' property is an instance of Contours
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.surface.Contours`
-          - A dict of string/value properties that will be passed
-            to the Contours constructor
+
+        - An instance of :class:`plotly.graph_objects.surface.Contours`
+        - A dict of string/value properties that will be passed to the Contours constructor
 
         Returns
         -------
@@ -419,9 +419,9 @@ class Surface(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.surface.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.surface.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -628,9 +628,9 @@ class Surface(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.surface.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.surface.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -693,9 +693,9 @@ class Surface(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.surface.Lighting`
-          - A dict of string/value properties that will be passed
-            to the Lighting constructor
+
+        - An instance of :class:`plotly.graph_objects.surface.Lighting`
+        - A dict of string/value properties that will be passed to the Lighting constructor
 
         Returns
         -------
@@ -712,9 +712,9 @@ class Surface(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.surface.Lightposition`
-          - A dict of string/value properties that will be passed
-            to the Lightposition constructor
+
+        - An instance of :class:`plotly.graph_objects.surface.Lightposition`
+        - A dict of string/value properties that will be passed to the Lightposition constructor
 
         Returns
         -------
@@ -927,9 +927,9 @@ class Surface(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.surface.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.surface.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

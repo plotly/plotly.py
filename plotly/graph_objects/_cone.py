@@ -234,9 +234,9 @@ class Cone(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.cone.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.cone.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -387,9 +387,9 @@ class Cone(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.cone.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.cone.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -597,9 +597,9 @@ class Cone(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.cone.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.cone.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -662,9 +662,9 @@ class Cone(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.cone.Lighting`
-          - A dict of string/value properties that will be passed
-            to the Lighting constructor
+
+        - An instance of :class:`plotly.graph_objects.cone.Lighting`
+        - A dict of string/value properties that will be passed to the Lighting constructor
 
         Returns
         -------
@@ -681,9 +681,9 @@ class Cone(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.cone.Lightposition`
-          - A dict of string/value properties that will be passed
-            to the Lightposition constructor
+
+        - An instance of :class:`plotly.graph_objects.cone.Lightposition`
+        - A dict of string/value properties that will be passed to the Lightposition constructor
 
         Returns
         -------
@@ -925,9 +925,9 @@ class Cone(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.cone.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.cone.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

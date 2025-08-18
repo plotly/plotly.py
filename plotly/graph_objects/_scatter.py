@@ -232,9 +232,9 @@ class Scatter(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.ErrorX`
-          - A dict of string/value properties that will be passed
-            to the ErrorX constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.ErrorX`
+        - A dict of string/value properties that will be passed to the ErrorX constructor
 
         Returns
         -------
@@ -251,9 +251,9 @@ class Scatter(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.ErrorY`
-          - A dict of string/value properties that will be passed
-            to the ErrorY constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.ErrorY`
+        - A dict of string/value properties that will be passed to the ErrorY constructor
 
         Returns
         -------
@@ -315,11 +315,12 @@ class Scatter(_BaseTraceType):
         label, if any.
 
         The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -339,9 +340,9 @@ class Scatter(_BaseTraceType):
 
         The 'fillgradient' property is an instance of Fillgradient
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Fillgradient`
-          - A dict of string/value properties that will be passed
-            to the Fillgradient constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Fillgradient`
+        - A dict of string/value properties that will be passed to the Fillgradient constructor
 
         Returns
         -------
@@ -360,9 +361,9 @@ class Scatter(_BaseTraceType):
 
         The 'fillpattern' property is an instance of Fillpattern
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Fillpattern`
-          - A dict of string/value properties that will be passed
-            to the Fillpattern constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Fillpattern`
+        - A dict of string/value properties that will be passed to the Fillpattern constructor
 
         Returns
         -------
@@ -451,9 +452,9 @@ class Scatter(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -687,9 +688,9 @@ class Scatter(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -752,9 +753,9 @@ class Scatter(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -771,9 +772,9 @@ class Scatter(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -951,9 +952,9 @@ class Scatter(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Selected`
-          - A dict of string/value properties that will be passed
-            to the Selected constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Selected`
+        - A dict of string/value properties that will be passed to the Selected constructor
 
         Returns
         -------
@@ -1071,9 +1072,9 @@ class Scatter(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -1120,9 +1121,9 @@ class Scatter(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -1308,9 +1309,9 @@ class Scatter(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.scatter.Unselected`
-          - A dict of string/value properties that will be passed
-            to the Unselected constructor
+
+        - An instance of :class:`plotly.graph_objects.scatter.Unselected`
+        - A dict of string/value properties that will be passed to the Unselected constructor
 
         Returns
         -------

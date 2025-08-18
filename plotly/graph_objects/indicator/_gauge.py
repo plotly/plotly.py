@@ -25,9 +25,9 @@ class Gauge(_BaseTraceHierarchyType):
         """
         The 'axis' property is an instance of Axis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.gauge.Axis`
-          - A dict of string/value properties that will be passed
-            to the Axis constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.gauge.Axis`
+        - A dict of string/value properties that will be passed to the Axis constructor
 
         Returns
         -------
@@ -46,9 +46,9 @@ class Gauge(_BaseTraceHierarchyType):
 
         The 'bar' property is an instance of Bar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.gauge.Bar`
-          - A dict of string/value properties that will be passed
-            to the Bar constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.gauge.Bar`
+        - A dict of string/value properties that will be passed to the Bar constructor
 
         Returns
         -------
@@ -66,11 +66,12 @@ class Gauge(_BaseTraceHierarchyType):
         Sets the gauge background color.
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -88,11 +89,12 @@ class Gauge(_BaseTraceHierarchyType):
         Sets the color of the border enclosing the gauge.
 
         The 'bordercolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -173,9 +175,9 @@ class Gauge(_BaseTraceHierarchyType):
 
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.gauge.Step`
-          - A dict of string/value properties that will be passed
-            to the Step constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.gauge.Step`
+        - A dict of string/value properties that will be passed to the Step constructor
 
         Returns
         -------
@@ -192,9 +194,9 @@ class Gauge(_BaseTraceHierarchyType):
         """
         The 'threshold' property is an instance of Threshold
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.gauge.Threshold`
-          - A dict of string/value properties that will be passed
-            to the Threshold constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.gauge.Threshold`
+        - A dict of string/value properties that will be passed to the Threshold constructor
 
         Returns
         -------

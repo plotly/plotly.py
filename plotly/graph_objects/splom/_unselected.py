@@ -15,9 +15,9 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.splom.unselected.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.splom.unselected.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------

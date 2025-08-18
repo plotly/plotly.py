@@ -100,9 +100,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'caps' property is an instance of Caps
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Caps`
-          - A dict of string/value properties that will be passed
-            to the Caps constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Caps`
+        - A dict of string/value properties that will be passed to the Caps constructor
 
         Returns
         -------
@@ -226,9 +226,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -296,9 +296,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'contour' property is an instance of Contour
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Contour`
-          - A dict of string/value properties that will be passed
-            to the Contour constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Contour`
+        - A dict of string/value properties that will be passed to the Contour constructor
 
         Returns
         -------
@@ -418,9 +418,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -665,9 +665,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -730,9 +730,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Lighting`
-          - A dict of string/value properties that will be passed
-            to the Lighting constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Lighting`
+        - A dict of string/value properties that will be passed to the Lighting constructor
 
         Returns
         -------
@@ -749,9 +749,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Lightposition`
-          - A dict of string/value properties that will be passed
-            to the Lightposition constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Lightposition`
+        - A dict of string/value properties that will be passed to the Lightposition constructor
 
         Returns
         -------
@@ -939,9 +939,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'slices' property is an instance of Slices
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Slices`
-          - A dict of string/value properties that will be passed
-            to the Slices constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Slices`
+        - A dict of string/value properties that will be passed to the Slices constructor
 
         Returns
         -------
@@ -958,9 +958,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'spaceframe' property is an instance of Spaceframe
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Spaceframe`
-          - A dict of string/value properties that will be passed
-            to the Spaceframe constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Spaceframe`
+        - A dict of string/value properties that will be passed to the Spaceframe constructor
 
         Returns
         -------
@@ -977,9 +977,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -996,9 +996,9 @@ class Isosurface(_BaseTraceType):
         """
         The 'surface' property is an instance of Surface
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.Surface`
-          - A dict of string/value properties that will be passed
-            to the Surface constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.Surface`
+        - A dict of string/value properties that will be passed to the Surface constructor
 
         Returns
         -------

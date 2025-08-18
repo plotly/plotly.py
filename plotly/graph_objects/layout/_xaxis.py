@@ -191,9 +191,9 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'autorangeoptions' property is an instance of Autorangeoptions
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.Autorangeoptions`
-          - A dict of string/value properties that will be passed
-            to the Autorangeoptions constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.Autorangeoptions`
+        - A dict of string/value properties that will be passed to the Autorangeoptions constructor
 
         Returns
         -------
@@ -371,11 +371,12 @@ class XAxis(_BaseLayoutHierarchyType):
         pieces can override this.
 
         The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -445,11 +446,12 @@ class XAxis(_BaseLayoutHierarchyType):
         "multicategory" axes.
 
         The 'dividercolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -594,11 +596,12 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the color of the grid lines.
 
         The 'gridcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -770,11 +773,12 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the axis line color.
 
         The 'linecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -892,9 +896,9 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'minor' property is an instance of Minor
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.Minor`
-          - A dict of string/value properties that will be passed
-            to the Minor constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.Minor`
+        - A dict of string/value properties that will be passed to the Minor constructor
 
         Returns
         -------
@@ -1066,9 +1070,9 @@ class XAxis(_BaseLayoutHierarchyType):
 
         The 'rangebreakdefaults' property is an instance of Rangebreak
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
-          - A dict of string/value properties that will be passed
-            to the Rangebreak constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
+        - A dict of string/value properties that will be passed to the Rangebreak constructor
 
         Returns
         -------
@@ -1110,9 +1114,9 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'rangeselector' property is an instance of Rangeselector
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.Rangeselector`
-          - A dict of string/value properties that will be passed
-            to the Rangeselector constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.Rangeselector`
+        - A dict of string/value properties that will be passed to the Rangeselector constructor
 
         Returns
         -------
@@ -1129,9 +1133,9 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'rangeslider' property is an instance of Rangeslider
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.Rangeslider`
-          - A dict of string/value properties that will be passed
-            to the Rangeslider constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.Rangeslider`
+        - A dict of string/value properties that will be passed to the Rangeslider constructor
 
         Returns
         -------
@@ -1424,11 +1428,12 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the spike color. If undefined, will use the series color
 
         The 'spikecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -1586,11 +1591,12 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the tick color.
 
         The 'tickcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -1609,9 +1615,9 @@ class XAxis(_BaseLayoutHierarchyType):
 
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.Tickfont`
-          - A dict of string/value properties that will be passed
-            to the Tickfont constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.Tickfont`
+        - A dict of string/value properties that will be passed to the Tickfont constructor
 
         Returns
         -------
@@ -1682,9 +1688,9 @@ class XAxis(_BaseLayoutHierarchyType):
 
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.Tickformatstop`
-          - A dict of string/value properties that will be passed
-            to the Tickformatstop constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.Tickformatstop`
+        - A dict of string/value properties that will be passed to the Tickformatstop constructor
 
         Returns
         -------
@@ -2128,9 +2134,9 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.xaxis.Title`
-          - A dict of string/value properties that will be passed
-            to the Title constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.xaxis.Title`
+        - A dict of string/value properties that will be passed to the Title constructor
 
         Returns
         -------
@@ -2230,11 +2236,12 @@ class XAxis(_BaseLayoutHierarchyType):
         Sets the line color of the zero line.
 
         The 'zerolinecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------

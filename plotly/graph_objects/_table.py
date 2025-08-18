@@ -42,9 +42,9 @@ class Table(_BaseTraceType):
         """
         The 'cells' property is an instance of Cells
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.table.Cells`
-          - A dict of string/value properties that will be passed
-            to the Cells constructor
+
+        - An instance of :class:`plotly.graph_objects.table.Cells`
+        - A dict of string/value properties that will be passed to the Cells constructor
 
         Returns
         -------
@@ -182,9 +182,9 @@ class Table(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.table.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.table.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -201,9 +201,9 @@ class Table(_BaseTraceType):
         """
         The 'header' property is an instance of Header
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.table.Header`
-          - A dict of string/value properties that will be passed
-            to the Header constructor
+
+        - An instance of :class:`plotly.graph_objects.table.Header`
+        - A dict of string/value properties that will be passed to the Header constructor
 
         Returns
         -------
@@ -263,9 +263,9 @@ class Table(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.table.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.table.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -343,9 +343,9 @@ class Table(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.table.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.table.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -474,9 +474,9 @@ class Table(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.table.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.table.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

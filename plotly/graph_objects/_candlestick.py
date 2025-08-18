@@ -142,9 +142,9 @@ class Candlestick(_BaseTraceType):
         """
         The 'decreasing' property is an instance of Decreasing
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.candlestick.Decreasing`
-          - A dict of string/value properties that will be passed
-            to the Decreasing constructor
+
+        - An instance of :class:`plotly.graph_objects.candlestick.Decreasing`
+        - A dict of string/value properties that will be passed to the Decreasing constructor
 
         Returns
         -------
@@ -240,9 +240,9 @@ class Candlestick(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.candlestick.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.candlestick.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -339,9 +339,9 @@ class Candlestick(_BaseTraceType):
         """
         The 'increasing' property is an instance of Increasing
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.candlestick.Increasing`
-          - A dict of string/value properties that will be passed
-            to the Increasing constructor
+
+        - An instance of :class:`plotly.graph_objects.candlestick.Increasing`
+        - A dict of string/value properties that will be passed to the Increasing constructor
 
         Returns
         -------
@@ -404,9 +404,9 @@ class Candlestick(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.candlestick.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.candlestick.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -469,9 +469,9 @@ class Candlestick(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.candlestick.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.candlestick.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -686,9 +686,9 @@ class Candlestick(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.candlestick.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.candlestick.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

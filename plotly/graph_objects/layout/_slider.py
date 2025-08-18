@@ -61,11 +61,12 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the background color of the slider grip while dragging.
 
         The 'activebgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -83,11 +84,12 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the background color of the slider.
 
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -105,11 +107,12 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the color of the border enclosing the slider.
 
         The 'bordercolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -145,9 +148,9 @@ class Slider(_BaseLayoutHierarchyType):
         """
         The 'currentvalue' property is an instance of Currentvalue
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.slider.Currentvalue`
-          - A dict of string/value properties that will be passed
-            to the Currentvalue constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.slider.Currentvalue`
+        - A dict of string/value properties that will be passed to the Currentvalue constructor
 
         Returns
         -------
@@ -166,9 +169,9 @@ class Slider(_BaseLayoutHierarchyType):
 
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.slider.Font`
-          - A dict of string/value properties that will be passed
-            to the Font constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.slider.Font`
+        - A dict of string/value properties that will be passed to the Font constructor
 
         Returns
         -------
@@ -276,9 +279,9 @@ class Slider(_BaseLayoutHierarchyType):
 
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.slider.Pad`
-          - A dict of string/value properties that will be passed
-            to the Pad constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.slider.Pad`
+        - A dict of string/value properties that will be passed to the Pad constructor
 
         Returns
         -------
@@ -318,9 +321,9 @@ class Slider(_BaseLayoutHierarchyType):
 
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.slider.Step`
-          - A dict of string/value properties that will be passed
-            to the Step constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.slider.Step`
+        - A dict of string/value properties that will be passed to the Step constructor
 
         Returns
         -------
@@ -366,11 +369,12 @@ class Slider(_BaseLayoutHierarchyType):
         Sets the color of the border enclosing the slider.
 
         The 'tickcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -425,9 +429,9 @@ class Slider(_BaseLayoutHierarchyType):
         """
         The 'transition' property is an instance of Transition
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.slider.Transition`
-          - A dict of string/value properties that will be passed
-            to the Transition constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.slider.Transition`
+        - A dict of string/value properties that will be passed to the Transition constructor
 
         Returns
         -------

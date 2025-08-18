@@ -193,9 +193,9 @@ class Histogram2d(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2d.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2d.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -406,9 +406,9 @@ class Histogram2d(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2d.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2d.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -574,9 +574,9 @@ class Histogram2d(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2d.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2d.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -639,9 +639,9 @@ class Histogram2d(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2d.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2d.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -845,9 +845,9 @@ class Histogram2d(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2d.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2d.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -866,9 +866,9 @@ class Histogram2d(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2d.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2d.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -1060,9 +1060,9 @@ class Histogram2d(_BaseTraceType):
         """
         The 'xbins' property is an instance of XBins
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2d.XBins`
-          - A dict of string/value properties that will be passed
-            to the XBins constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2d.XBins`
+        - A dict of string/value properties that will be passed to the XBins constructor
 
         Returns
         -------
@@ -1237,9 +1237,9 @@ class Histogram2d(_BaseTraceType):
         """
         The 'ybins' property is an instance of YBins
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.histogram2d.YBins`
-          - A dict of string/value properties that will be passed
-            to the YBins constructor
+
+        - An instance of :class:`plotly.graph_objects.histogram2d.YBins`
+        - A dict of string/value properties that will be passed to the YBins constructor
 
         Returns
         -------

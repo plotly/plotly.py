@@ -19,9 +19,9 @@ class Camera(_BaseLayoutHierarchyType):
 
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.camera.Center`
-          - A dict of string/value properties that will be passed
-            to the Center constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.camera.Center`
+        - A dict of string/value properties that will be passed to the Center constructor
 
         Returns
         -------
@@ -42,9 +42,9 @@ class Camera(_BaseLayoutHierarchyType):
 
         The 'eye' property is an instance of Eye
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.camera.Eye`
-          - A dict of string/value properties that will be passed
-            to the Eye constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.camera.Eye`
+        - A dict of string/value properties that will be passed to the Eye constructor
 
         Returns
         -------
@@ -61,9 +61,9 @@ class Camera(_BaseLayoutHierarchyType):
         """
         The 'projection' property is an instance of Projection
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.camera.Projection`
-          - A dict of string/value properties that will be passed
-            to the Projection constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.camera.Projection`
+        - A dict of string/value properties that will be passed to the Projection constructor
 
         Returns
         -------
@@ -85,9 +85,9 @@ class Camera(_BaseLayoutHierarchyType):
 
         The 'up' property is an instance of Up
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.camera.Up`
-          - A dict of string/value properties that will be passed
-            to the Up constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.camera.Up`
+        - A dict of string/value properties that will be passed to the Up constructor
 
         Returns
         -------

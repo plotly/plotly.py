@@ -76,9 +76,9 @@ class Contours(_BaseTraceHierarchyType):
 
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.contour.contours.Labelfont`
-          - A dict of string/value properties that will be passed
-            to the Labelfont constructor
+
+        - An instance of :class:`plotly.graph_objects.contour.contours.Labelfont`
+        - A dict of string/value properties that will be passed to the Labelfont constructor
 
         Returns
         -------

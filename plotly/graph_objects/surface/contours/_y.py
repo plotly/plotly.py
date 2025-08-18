@@ -28,11 +28,12 @@ class Y(_BaseTraceHierarchyType):
         Sets the color of the contour lines.
 
         The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -89,11 +90,12 @@ class Y(_BaseTraceHierarchyType):
         Sets the color of the highlighted contour lines.
 
         The 'highlightcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -129,9 +131,9 @@ class Y(_BaseTraceHierarchyType):
         """
         The 'project' property is an instance of Project
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.surface.contours.y.Project`
-          - A dict of string/value properties that will be passed
-            to the Project constructor
+
+        - An instance of :class:`plotly.graph_objects.surface.contours.y.Project`
+        - A dict of string/value properties that will be passed to the Project constructor
 
         Returns
         -------

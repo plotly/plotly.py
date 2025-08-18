@@ -153,9 +153,9 @@ class Waterfall(_BaseTraceType):
         """
         The 'connector' property is an instance of Connector
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Connector`
-          - A dict of string/value properties that will be passed
-            to the Connector constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Connector`
+        - A dict of string/value properties that will be passed to the Connector constructor
 
         Returns
         -------
@@ -234,9 +234,9 @@ class Waterfall(_BaseTraceType):
         """
         The 'decreasing' property is an instance of Decreasing
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Decreasing`
-          - A dict of string/value properties that will be passed
-            to the Decreasing constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Decreasing`
+        - A dict of string/value properties that will be passed to the Decreasing constructor
 
         Returns
         -------
@@ -334,9 +334,9 @@ class Waterfall(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -503,9 +503,9 @@ class Waterfall(_BaseTraceType):
         """
         The 'increasing' property is an instance of Increasing
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Increasing`
-          - A dict of string/value properties that will be passed
-            to the Increasing constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Increasing`
+        - A dict of string/value properties that will be passed to the Increasing constructor
 
         Returns
         -------
@@ -546,9 +546,9 @@ class Waterfall(_BaseTraceType):
 
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Insidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Insidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Insidetextfont`
+        - A dict of string/value properties that will be passed to the Insidetextfont constructor
 
         Returns
         -------
@@ -611,9 +611,9 @@ class Waterfall(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -889,9 +889,9 @@ class Waterfall(_BaseTraceType):
 
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Outsidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Outsidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Outsidetextfont`
+        - A dict of string/value properties that will be passed to the Outsidetextfont constructor
 
         Returns
         -------
@@ -949,9 +949,9 @@ class Waterfall(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -1021,9 +1021,9 @@ class Waterfall(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -1185,9 +1185,9 @@ class Waterfall(_BaseTraceType):
         """
         The 'totals' property is an instance of Totals
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.waterfall.Totals`
-          - A dict of string/value properties that will be passed
-            to the Totals constructor
+
+        - An instance of :class:`plotly.graph_objects.waterfall.Totals`
+        - A dict of string/value properties that will be passed to the Totals constructor
 
         Returns
         -------

@@ -209,9 +209,9 @@ class Streamtube(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.streamtube.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.streamtube.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -362,9 +362,9 @@ class Streamtube(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.streamtube.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.streamtube.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -553,9 +553,9 @@ class Streamtube(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.streamtube.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.streamtube.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -618,9 +618,9 @@ class Streamtube(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.streamtube.Lighting`
-          - A dict of string/value properties that will be passed
-            to the Lighting constructor
+
+        - An instance of :class:`plotly.graph_objects.streamtube.Lighting`
+        - A dict of string/value properties that will be passed to the Lighting constructor
 
         Returns
         -------
@@ -637,9 +637,9 @@ class Streamtube(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.streamtube.Lightposition`
-          - A dict of string/value properties that will be passed
-            to the Lightposition constructor
+
+        - An instance of :class:`plotly.graph_objects.streamtube.Lightposition`
+        - A dict of string/value properties that will be passed to the Lightposition constructor
 
         Returns
         -------
@@ -867,9 +867,9 @@ class Streamtube(_BaseTraceType):
         """
         The 'starts' property is an instance of Starts
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.streamtube.Starts`
-          - A dict of string/value properties that will be passed
-            to the Starts constructor
+
+        - An instance of :class:`plotly.graph_objects.streamtube.Starts`
+        - A dict of string/value properties that will be passed to the Starts constructor
 
         Returns
         -------
@@ -886,9 +886,9 @@ class Streamtube(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.streamtube.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.streamtube.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------

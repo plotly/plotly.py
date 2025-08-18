@@ -153,9 +153,9 @@ class Treemap(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -215,9 +215,9 @@ class Treemap(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -387,9 +387,9 @@ class Treemap(_BaseTraceType):
 
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Insidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Insidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Insidetextfont`
+        - A dict of string/value properties that will be passed to the Insidetextfont constructor
 
         Returns
         -------
@@ -465,9 +465,9 @@ class Treemap(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -550,9 +550,9 @@ class Treemap(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -679,9 +679,9 @@ class Treemap(_BaseTraceType):
 
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Outsidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Outsidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Outsidetextfont`
+        - A dict of string/value properties that will be passed to the Outsidetextfont constructor
 
         Returns
         -------
@@ -739,9 +739,9 @@ class Treemap(_BaseTraceType):
         """
         The 'pathbar' property is an instance of Pathbar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Pathbar`
-          - A dict of string/value properties that will be passed
-            to the Pathbar constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Pathbar`
+        - A dict of string/value properties that will be passed to the Pathbar constructor
 
         Returns
         -------
@@ -758,9 +758,9 @@ class Treemap(_BaseTraceType):
         """
         The 'root' property is an instance of Root
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Root`
-          - A dict of string/value properties that will be passed
-            to the Root constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Root`
+        - A dict of string/value properties that will be passed to the Root constructor
 
         Returns
         -------
@@ -796,9 +796,9 @@ class Treemap(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -839,9 +839,9 @@ class Treemap(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -976,9 +976,9 @@ class Treemap(_BaseTraceType):
         """
         The 'tiling' property is an instance of Tiling
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.treemap.Tiling`
-          - A dict of string/value properties that will be passed
-            to the Tiling constructor
+
+        - An instance of :class:`plotly.graph_objects.treemap.Tiling`
+        - A dict of string/value properties that will be passed to the Tiling constructor
 
         Returns
         -------

@@ -15,9 +15,9 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'x' property is an instance of X
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.slices.X`
-          - A dict of string/value properties that will be passed
-            to the X constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.slices.X`
+        - A dict of string/value properties that will be passed to the X constructor
 
         Returns
         -------
@@ -34,9 +34,9 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'y' property is an instance of Y
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.slices.Y`
-          - A dict of string/value properties that will be passed
-            to the Y constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.slices.Y`
+        - A dict of string/value properties that will be passed to the Y constructor
 
         Returns
         -------
@@ -53,9 +53,9 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'z' property is an instance of Z
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.isosurface.slices.Z`
-          - A dict of string/value properties that will be passed
-            to the Z constructor
+
+        - An instance of :class:`plotly.graph_objects.isosurface.slices.Z`
+        - A dict of string/value properties that will be passed to the Z constructor
 
         Returns
         -------

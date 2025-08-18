@@ -166,9 +166,9 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sunburst.marker.ColorBar`
-          - A dict of string/value properties that will be passed
-            to the ColorBar constructor
+
+        - An instance of :class:`plotly.graph_objects.sunburst.marker.ColorBar`
+        - A dict of string/value properties that will be passed to the ColorBar constructor
 
         Returns
         -------
@@ -274,9 +274,9 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sunburst.marker.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.sunburst.marker.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------
@@ -295,9 +295,9 @@ class Marker(_BaseTraceHierarchyType):
 
         The 'pattern' property is an instance of Pattern
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.sunburst.marker.Pattern`
-          - A dict of string/value properties that will be passed
-            to the Pattern constructor
+
+        - An instance of :class:`plotly.graph_objects.sunburst.marker.Pattern`
+        - A dict of string/value properties that will be passed to the Pattern constructor
 
         Returns
         -------

@@ -53,9 +53,9 @@ class Scene(_BaseLayoutHierarchyType):
 
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.Annotation`
-          - A dict of string/value properties that will be passed
-            to the Annotation constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.Annotation`
+        - A dict of string/value properties that will be passed to the Annotation constructor
 
         Returns
         -------
@@ -102,9 +102,9 @@ class Scene(_BaseLayoutHierarchyType):
 
         The 'aspectratio' property is an instance of Aspectratio
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.Aspectratio`
-          - A dict of string/value properties that will be passed
-            to the Aspectratio constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.Aspectratio`
+        - A dict of string/value properties that will be passed to the Aspectratio constructor
 
         Returns
         -------
@@ -120,11 +120,12 @@ class Scene(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+
+        - A hex string (e.g. '#ff0000')
+        - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+        - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+        - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+        - A named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -141,9 +142,9 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'camera' property is an instance of Camera
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.Camera`
-          - A dict of string/value properties that will be passed
-            to the Camera constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.Camera`
+        - A dict of string/value properties that will be passed to the Camera constructor
 
         Returns
         -------
@@ -160,9 +161,9 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -239,9 +240,9 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'xaxis' property is an instance of XAxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.XAxis`
-          - A dict of string/value properties that will be passed
-            to the XAxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.XAxis`
+        - A dict of string/value properties that will be passed to the XAxis constructor
 
         Returns
         -------
@@ -258,9 +259,9 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'yaxis' property is an instance of YAxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.YAxis`
-          - A dict of string/value properties that will be passed
-            to the YAxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.YAxis`
+        - A dict of string/value properties that will be passed to the YAxis constructor
 
         Returns
         -------
@@ -277,9 +278,9 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'zaxis' property is an instance of ZAxis
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.scene.ZAxis`
-          - A dict of string/value properties that will be passed
-            to the ZAxis constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.scene.ZAxis`
+        - A dict of string/value properties that will be passed to the ZAxis constructor
 
         Returns
         -------

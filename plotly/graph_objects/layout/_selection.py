@@ -28,9 +28,9 @@ class Selection(_BaseLayoutHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.layout.selection.Line`
-          - A dict of string/value properties that will be passed
-            to the Line constructor
+
+        - An instance of :class:`plotly.graph_objects.layout.selection.Line`
+        - A dict of string/value properties that will be passed to the Line constructor
 
         Returns
         -------

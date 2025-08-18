@@ -103,9 +103,9 @@ class Indicator(_BaseTraceType):
         """
         The 'delta' property is an instance of Delta
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.Delta`
-          - A dict of string/value properties that will be passed
-            to the Delta constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.Delta`
+        - A dict of string/value properties that will be passed to the Delta constructor
 
         Returns
         -------
@@ -122,9 +122,9 @@ class Indicator(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -143,9 +143,9 @@ class Indicator(_BaseTraceType):
 
         The 'gauge' property is an instance of Gauge
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.Gauge`
-          - A dict of string/value properties that will be passed
-            to the Gauge constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.Gauge`
+        - A dict of string/value properties that will be passed to the Gauge constructor
 
         Returns
         -------
@@ -223,9 +223,9 @@ class Indicator(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -377,9 +377,9 @@ class Indicator(_BaseTraceType):
         """
         The 'number' property is an instance of Number
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.Number`
-          - A dict of string/value properties that will be passed
-            to the Number constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.Number`
+        - A dict of string/value properties that will be passed to the Number constructor
 
         Returns
         -------
@@ -396,9 +396,9 @@ class Indicator(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -415,9 +415,9 @@ class Indicator(_BaseTraceType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.indicator.Title`
-          - A dict of string/value properties that will be passed
-            to the Title constructor
+
+        - An instance of :class:`plotly.graph_objects.indicator.Title`
+        - A dict of string/value properties that will be passed to the Title constructor
 
         Returns
         -------

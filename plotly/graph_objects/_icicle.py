@@ -154,9 +154,9 @@ class Icicle(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Domain`
-          - A dict of string/value properties that will be passed
-            to the Domain constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Domain`
+        - A dict of string/value properties that will be passed to the Domain constructor
 
         Returns
         -------
@@ -216,9 +216,9 @@ class Icicle(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Hoverlabel`
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Hoverlabel`
+        - A dict of string/value properties that will be passed to the Hoverlabel constructor
 
         Returns
         -------
@@ -388,9 +388,9 @@ class Icicle(_BaseTraceType):
 
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Insidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Insidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Insidetextfont`
+        - A dict of string/value properties that will be passed to the Insidetextfont constructor
 
         Returns
         -------
@@ -443,9 +443,9 @@ class Icicle(_BaseTraceType):
         """
         The 'leaf' property is an instance of Leaf
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Leaf`
-          - A dict of string/value properties that will be passed
-            to the Leaf constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Leaf`
+        - A dict of string/value properties that will be passed to the Leaf constructor
 
         Returns
         -------
@@ -485,9 +485,9 @@ class Icicle(_BaseTraceType):
         """
         The 'legendgrouptitle' property is an instance of Legendgrouptitle
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Legendgrouptitle`
-          - A dict of string/value properties that will be passed
-            to the Legendgrouptitle constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Legendgrouptitle`
+        - A dict of string/value properties that will be passed to the Legendgrouptitle constructor
 
         Returns
         -------
@@ -570,9 +570,9 @@ class Icicle(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Marker`
-          - A dict of string/value properties that will be passed
-            to the Marker constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Marker`
+        - A dict of string/value properties that will be passed to the Marker constructor
 
         Returns
         -------
@@ -699,9 +699,9 @@ class Icicle(_BaseTraceType):
 
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Outsidetextfont`
-          - A dict of string/value properties that will be passed
-            to the Outsidetextfont constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Outsidetextfont`
+        - A dict of string/value properties that will be passed to the Outsidetextfont constructor
 
         Returns
         -------
@@ -759,9 +759,9 @@ class Icicle(_BaseTraceType):
         """
         The 'pathbar' property is an instance of Pathbar
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Pathbar`
-          - A dict of string/value properties that will be passed
-            to the Pathbar constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Pathbar`
+        - A dict of string/value properties that will be passed to the Pathbar constructor
 
         Returns
         -------
@@ -778,9 +778,9 @@ class Icicle(_BaseTraceType):
         """
         The 'root' property is an instance of Root
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Root`
-          - A dict of string/value properties that will be passed
-            to the Root constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Root`
+        - A dict of string/value properties that will be passed to the Root constructor
 
         Returns
         -------
@@ -816,9 +816,9 @@ class Icicle(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Stream`
+        - A dict of string/value properties that will be passed to the Stream constructor
 
         Returns
         -------
@@ -859,9 +859,9 @@ class Icicle(_BaseTraceType):
 
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Textfont`
-          - A dict of string/value properties that will be passed
-            to the Textfont constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Textfont`
+        - A dict of string/value properties that will be passed to the Textfont constructor
 
         Returns
         -------
@@ -996,9 +996,9 @@ class Icicle(_BaseTraceType):
         """
         The 'tiling' property is an instance of Tiling
         that may be specified as:
-          - An instance of :class:`plotly.graph_objects.icicle.Tiling`
-          - A dict of string/value properties that will be passed
-            to the Tiling constructor
+
+        - An instance of :class:`plotly.graph_objects.icicle.Tiling`
+        - A dict of string/value properties that will be passed to the Tiling constructor
 
         Returns
         -------
