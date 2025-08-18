@@ -16,6 +16,7 @@ import pytest
 
 fig = {"data": [], "layout": {"title": {"text": "figure title"}}}
 
+
 def create_figure(width=None, height=None):
     """Create a simple figure with optional layout dimensions."""
     layout = {}
@@ -25,6 +26,7 @@ def create_figure(width=None, height=None):
         layout["height"] = height
 
     return go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[1, 2, 3])], layout=layout)
+
 
 def parse_svg_dimensions(svg_bytes):
     """Parse width and height from SVG bytes."""
