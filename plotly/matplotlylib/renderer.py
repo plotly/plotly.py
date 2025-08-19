@@ -299,7 +299,7 @@ class PlotlyRenderer(Renderer):
         )  # TODO ditto
         if len(bar["x"]) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
-            (self.plotly_fig.add_trace(bar),)
+            self.plotly_fig.add_trace(bar)
             if bar_gap is not None:
                 self.plotly_fig["layout"]["bargap"] = bar_gap
         else:
@@ -370,6 +370,12 @@ class PlotlyRenderer(Renderer):
                 x1 = props["data"][1][0]
                 y1 = props["data"][1][1]
 
+                lines_shape = shape.copy()
+                ignored_props = ["symbol", "size"]
+                for prop in ignored_props:
+                    if prop in lines_shape:
+                        lines_shape.pop(prop)
+
                 legend_shape = go.layout.Shape(
                     type=mode,
                     xref="paper",
@@ -378,7 +384,7 @@ class PlotlyRenderer(Renderer):
                     y0=y + 0.02,
                     x1=x1,
                     y1=y1 + 0.02,
-                    **shape,
+                    **lines_shape,
                 )
             else:
                 self.msg += "not sure how to handle this element\n"
@@ -497,7 +503,7 @@ class PlotlyRenderer(Renderer):
                 marked_line["x"] = mpltools.mpl_dates_to_datestrings(
                     marked_line["x"], formatter
                 )
-            (self.plotly_fig.add_trace(marked_line),)
+            self.plotly_fig.add_trace(marked_line)
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
             # dealing with legend graphical elements
