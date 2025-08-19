@@ -871,7 +871,7 @@ class BaseFigure(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
@@ -938,9 +938,9 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        key: str
+        key : str
             Property name
-        dflt
+        dflt:
             The default value to return if key was not found in figure
 
         Returns
@@ -1119,7 +1119,7 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        selector: dict, function, int, str or None (default None)
+        selector : dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1130,12 +1130,12 @@ class BaseFigure(object):
             will be in the selection. If an int N, the Nth trace matching row
             and col will be selected (N can be negative). If a string S, the selector
             is equivalent to dict(type=S).
-        row, col: int or None (default None)
+        row, col : int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             * If True, only select traces associated with the secondary
               y-axis of the subplot.
             * If False, only select traces associated with the primary
@@ -1281,7 +1281,7 @@ class BaseFigure(object):
         ----------
         fn:
             Function that inputs a single trace object.
-        selector: dict, function, int, str or None (default None)
+        selector : dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1292,12 +1292,12 @@ class BaseFigure(object):
             will be in the selection. If an int N, the Nth trace matching row
             and col will be selected (N can be negative). If a string S, the selector
             is equivalent to dict(type=S).
-        row, col: int or None (default None)
+        row, col : int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             * If True, only select traces associated with the secondary
               y-axis of the subplot.
             * If False, only select traces associated with the primary
@@ -1337,10 +1337,10 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        patch: dict or None (default None)
+        patch : dict or None (default None)
             Dictionary of property updates to be applied to all traces that
             satisfy the selection criteria.
-        selector: dict, function, int, str or None (default None)
+        selector : dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1351,12 +1351,12 @@ class BaseFigure(object):
             will be in the selection. If an int N, the Nth trace matching row
             and col will be selected (N can be negative). If a string S, the selector
             is equivalent to dict(type=S).
-        row, col: int or None (default None)
+        row, col : int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             * If True, only select traces associated with the secondary
               y-axis of the subplot.
             * If False, only select traces associated with the primary
@@ -1368,14 +1368,14 @@ class BaseFigure(object):
             created using plotly.subplots.make_subplots. See the docstring
             for the specs argument to make_subplots for more info on
             creating subplots with secondary y-axes.
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
         **kwargs
             Additional property updates to apply to each selected trace. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+            a property is specified in both patch and in \*\*kwargs then the
+            one in \*\*kwargs takes precedence.
 
         Returns
         -------
@@ -1400,7 +1400,7 @@ class BaseFigure(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
@@ -1664,9 +1664,11 @@ is of type {subplot_type}.""".format(
             example, the following command would be used to update the 'x'
             property of the first trace to the list [1, 2, 3]
 
+            ```python
             >>> import plotly.graph_objs as go
             >>> fig = go.Figure(go.Scatter(x=[2, 4, 6]))
             >>> fig.plotly_restyle({'x': [[1, 2, 3]]}, 0)
+            ```
 
         trace_indexes : int or list of int
             Trace index, or list of trace indexes, that the restyle operation
@@ -2030,7 +2032,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         Parameters
         ----------
         trace : BaseTraceType or dict
-            Either:
+            Either:\n
               - An instances of a trace classe from the plotly.graph_objects
                 package (e.g plotly.graph_objects.Scatter, plotly.graph_objects.Bar)
               - or a dicts where:
@@ -2051,10 +2053,10 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`.
             If 'all', addresses all columns in the specified row(s).
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
-            following conditions are satisfied:
+            following conditions are satisfied:\n
               * The figure was created using `plotly.subplots.make_subplots`.
               * The row and col arguments are not None
               * The subplot at the specified row and col has type xy
@@ -2168,11 +2170,11 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             If a single integer is passed, all traces will be added to column number
 
 
-        secondary_ys: None or list[boolean] (default None)
+        secondary_ys : None or list[boolean] (default None)
             List of secondary_y booleans for traces to be added. See the
             docstring for `add_trace` for more info.
 
-        exclude_empty_subplots: boolean
+        exclude_empty_subplots : boolean
             If True, the trace will not be added to subplots that don't already
             have traces.
 
@@ -2306,9 +2308,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         ----------
         trace
             The data trace to be bound
-        row: int
+        row : int
             Subplot row index (see Figure.print_grid)
-        col: int
+        col : int
             Subplot column index (see Figure.print_grid)
 
         Examples
@@ -2409,11 +2411,11 @@ Please use the add_trace method with the row and col parameters.
 
         Parameters
         ----------
-        row: int
+        row : int
             1-based index of subplot row
-        col: int
+        col : int
             1-based index of subplot column
-        secondary_y: bool
+        secondary_y : bool
             If True, select the subplot that consists of the x-axis and the
             secondary y-axis at the specified row/col. Only valid if the
             subplot at row/col is an 2D cartesian subplot that was created
@@ -3134,43 +3136,43 @@ Invalid property path '{key_path_str}' for layout
             If equal to zero, updates are synchronous.
         easing : string
             The easing function used for the transition.
-            One of:
-                - linear
-                - quad
-                - cubic
-                - sin
-                - exp
-                - circle
-                - elastic
-                - back
-                - bounce
-                - linear-in
-                - quad-in
-                - cubic-in
-                - sin-in
-                - exp-in
-                - circle-in
-                - elastic-in
-                - back-in
-                - bounce-in
-                - linear-out
-                - quad-out
-                - cubic-out
-                - sin-out
-                - exp-out
-                - circle-out
-                - elastic-out
-                - back-out
-                - bounce-out
-                - linear-in-out
-                - quad-in-out
-                - cubic-in-out
-                - sin-in-out
-                - exp-in-out
-                - circle-in-out
-                - elastic-in-out
-                - back-in-out
-                - bounce-in-out
+            One of:\n
+            - linear
+            - quad
+            - cubic
+            - sin
+            - exp
+            - circle
+            - elastic
+            - back
+            - bounce
+            - linear-in
+            - quad-in
+            - cubic-in
+            - sin-in
+            - exp-in
+            - circle-in
+            - elastic-in
+            - back-in
+            - bounce-in
+            - linear-out
+            - quad-out
+            - cubic-out
+            - sin-out
+            - exp-out
+            - circle-out
+            - elastic-out
+            - back-out
+            - bounce-out
+            - linear-in-out
+            - quad-in-out
+            - cubic-in-out
+            - sin-in-out
+            - exp-in-out
+            - circle-in-out
+            - elastic-in-out
+            - back-in-out
+            - bounce-in-out
 
         Examples
         --------
@@ -3390,24 +3392,24 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        renderer: str or None (default None)
+        renderer : str or None (default None)
             A string containing the names of one or more registered renderers
             (separated by '+' characters) or None.  If None, then the default
             renderers specified in plotly.io.renderers.default are used.
 
-        validate: bool (default True)
+        validate : bool (default True)
             True if the figure should be validated before being shown,
             False otherwise.
 
-        width: int or float
+        width : int or float
             An integer or float that determines the number of pixels wide the
             plot is. The default is set in plotly.js.
 
-        height: int or float
+        height : int or float
             An integer or float specifying the height of the plot in pixels.
             The default is set in plotly.js.
 
-        config: dict
+        config : dict
             A dict of parameters to configure the figure. The defaults are set
             in plotly.js.
 
@@ -3425,19 +3427,19 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        validate: bool (default True)
+        validate : bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
 
-        pretty: bool (default False)
+        pretty : bool (default False)
             True if JSON representation should be pretty-printed, False if
             representation should be as compact as possible.
 
-        remove_uids: bool (default True)
+        remove_uids : bool (default True)
             True if trace UIDs should be omitted from the JSON representation
 
-        engine: str (default None)
-            The JSON encoding engine to use. One of:
+        engine : str (default None)
+            The JSON encoding engine to use. One of:\n
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
             If not specified, the default encoder is set to the current value of
@@ -3462,13 +3464,10 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        fig:
-            Figure object or dict representing a figure
-
-        warn: bool
+        warn : bool
             If False, suppress warnings about not using this in production.
 
-        as_dict: bool
+        as_dict : bool
             If True, output is a dict with some keys that go.Figure can't parse.
             If False, output is a go.Figure with unparseable keys skipped.
 
@@ -3488,19 +3487,19 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        file: str or writeable
+        file : str or writeable
             A string representing a local file path or a writeable object
             (e.g. an open file descriptor)
 
-        pretty: bool (default False)
+        pretty : bool (default False)
             True if JSON representation should be pretty-printed, False if
             representation should be as compact as possible.
 
-        remove_uids: bool (default True)
+        remove_uids : bool (default True)
             True if trace UIDs should be omitted from the JSON representation
 
-        engine: str (default None)
-            The JSON encoding engine to use. One of:
+        engine : str (default None)
+            The JSON encoding engine to use. One of:\n
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
             If not specified, the default encoder is set to the current value of
@@ -3520,13 +3519,13 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        config: dict or None (default None)
+        config : dict or None (default None)
             Plotly.js figure config options
-        auto_play: bool (default=True)
+        auto_play : bool (default=True)
             Whether to automatically start the animation sequence on page load
             if the figure contains frames. Has no effect if the figure does not
             contain frames.
-        include_plotlyjs: bool or string (default True)
+        include_plotlyjs : bool or string (default True)
             Specifies how the plotly.js library is included/loaded in the output
             div string.
 
@@ -3552,7 +3551,7 @@ Invalid property path '{key_path_str}' for layout
             useful when the resulting div string will be placed inside an HTML
             document that already loads plotly.js. This option is not advised
             when full_html=True as it will result in a non-functional html file.
-        include_mathjax: bool or string (default False)
+        include_mathjax : bool or string (default False)
             Specifies how the MathJax.js library is included in the output html
             div string.  MathJax is required in order to display labels
             with LaTeX typesetting.
@@ -3568,31 +3567,31 @@ Invalid property path '{key_path_str}' for layout
             If a string that ends in '.js', a script tag is included that
             references the specified path. This approach can be used to point the
             resulting HTML div string to an alternative CDN.
-        post_script: str or list or None (default None)
+        post_script : str or list or None (default None)
             JavaScript snippet(s) to be included in the resulting div just after
             plot creation.  The string(s) may include '{plot_id}' placeholders
             that will then be replaced by the `id` of the div element that the
             plotly.js figure is associated with.  One application for this script
             is to install custom plotly.js event handlers.
-        full_html: bool (default True)
+        full_html : bool (default True)
             If True, produce a string containing a complete HTML document
             starting with an <html> tag.  If False, produce a string containing
             a single <div> element.
-        animation_opts: dict or None (default None)
+        animation_opts : dict or None (default None)
             dict of custom animation parameters to be passed to the function
             Plotly.animate in Plotly.js. See
             https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
             for available options. Has no effect if the figure does not contain
             frames, or auto_play is False.
-        default_width, default_height: number or str (default '100%')
+        default_width, default_height : number or str (default '100%')
             The default figure width/height to use if the provided figure does not
             specify its own layout.width/layout.height property.  May be
             specified in pixels as an integer (e.g. 500), or as a css width style
             string (e.g. '500px', '100%').
-        validate: bool (default True)
+        validate : bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
-        div_id: str (default None)
+        div_id : str (default None)
             If provided, this is the value of the id attribute of the div tag. If None, the
             id attribute is a UUID.
 
@@ -3611,16 +3610,16 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        file: str or writeable
+        file : str or writeable
             A string representing a local file path or a writeable object
             (e.g. a pathlib.Path object or an open file descriptor)
-        config: dict or None (default None)
+        config : dict or None (default None)
             Plotly.js figure config options
-        auto_play: bool (default=True)
+        auto_play : bool (default=True)
             Whether to automatically start the animation sequence on page load
             if the figure contains frames. Has no effect if the figure does not
             contain frames.
-        include_plotlyjs: bool or string (default True)
+        include_plotlyjs : bool or string (default True)
             Specifies how the plotly.js library is included/loaded in the output
             div string.
 
@@ -3656,7 +3655,7 @@ Invalid property path '{key_path_str}' for layout
             document that already loads plotly.js.  This option is not advised
             when full_html=True as it will result in a non-functional html file.
 
-        include_mathjax: bool or string (default False)
+        include_mathjax : bool or string (default False)
             Specifies how the MathJax.js library is included in the output html
             div string.  MathJax is required in order to display labels
             with LaTeX typesetting.
@@ -3672,34 +3671,34 @@ Invalid property path '{key_path_str}' for layout
             If a string that ends in '.js', a script tag is included that
             references the specified path. This approach can be used to point the
             resulting HTML div string to an alternative CDN.
-        post_script: str or list or None (default None)
+        post_script : str or list or None (default None)
             JavaScript snippet(s) to be included in the resulting div just after
             plot creation.  The string(s) may include '{plot_id}' placeholders
             that will then be replaced by the `id` of the div element that the
             plotly.js figure is associated with.  One application for this script
             is to install custom plotly.js event handlers.
-        full_html: bool (default True)
+        full_html : bool (default True)
             If True, produce a string containing a complete HTML document
             starting with an <html> tag.  If False, produce a string containing
             a single <div> element.
-        animation_opts: dict or None (default None)
+        animation_opts : dict or None (default None)
             dict of custom animation parameters to be passed to the function
             Plotly.animate in Plotly.js. See
             https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
             for available options. Has no effect if the figure does not contain
             frames, or auto_play is False.
-        default_width, default_height: number or str (default '100%')
+        default_width, default_height : number or str (default '100%')
             The default figure width/height to use if the provided figure does not
             specify its own layout.width/layout.height property.  May be
             specified in pixels as an integer (e.g. 500), or as a css width style
             string (e.g. '500px', '100%').
-        validate: bool (default True)
+        validate : bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
-        auto_open: bool (default True)
+        auto_open : bool (default True)
             If True, open the saved file in a web browser after saving.
             This argument only applies if `full_html` is True.
-        div_id: str (default None)
+        div_id : str (default None)
             If provided, this is the value of the id attribute of the div tag. If None, the
             id attribute is a UUID.
 
@@ -3717,54 +3716,54 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        format: str or None
-            The desired image format. One of
-              - 'png'
-              - 'jpg' or 'jpeg'
-              - 'webp'
-              - 'svg'
-              - 'pdf'
-              - 'eps' (deprecated) (Requires the poppler library to be installed)
+        format : str or None
+            The desired image format. One of:\n
+            - 'png'
+            - 'jpg' or 'jpeg'
+            - 'webp'
+            - 'svg'
+            - 'pdf'
+            - 'eps' (deprecated) (Requires the poppler library to be installed)
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_format` if engine is "kaleido"
-                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_format` if engine is "kaleido"
+            - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
 
-        width: int or None
+        width : int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_width` if engine is "kaleido"
-                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_width` if engine is "kaleido"
+            - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
 
-        height: int or None
+        height : int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_height` if engine is "kaleido"
-                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_height` if engine is "kaleido"
+            - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
 
-        scale: int or float or None
+        scale : int or float or None
             The scale factor to use when exporting the figure. A scale factor
             larger than 1.0 will increase the image resolution with respect
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_scale` if engine is "kaliedo"
-                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_scale` if engine is "kaliedo"
+            - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
-        validate: bool
+        validate : bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine (deprecated): str
+        engine (deprecated) : str
             Image export engine to use. This parameter is deprecated and Orca engine support will be
-            dropped in the next major Plotly version. Until then, the following values are supported:
+            dropped in the next major Plotly version. Until then, the following values are supported:\n
             - "kaleido": Use Kaleido for image export
             - "orca": Use Orca for image export
             - "auto" (default): Use Kaleido if installed, otherwise use Orca
@@ -3807,60 +3806,60 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        file: str or writeable
+        file : str or writeable
             A string representing a local file path or a writeable object
             (e.g. a pathlib.Path object or an open file descriptor)
 
-        format: str or None
-            The desired image format. One of
-              - 'png'
-              - 'jpg' or 'jpeg'
-              - 'webp'
-              - 'svg'
-              - 'pdf'
-              - 'eps' (deprecated) (Requires the poppler library to be installed)
+        format : str or None
+            The desired image format. One of:\n
+            - 'png'
+            - 'jpg' or 'jpeg'
+            - 'webp'
+            - 'svg'
+            - 'pdf'
+            - 'eps' (deprecated) (Requires the poppler library to be installed)
 
             If not specified and `file` is a string then this will default to the
             file extension. If not specified and `file` is not a string then this
-            will default to:
-                - `plotly.io.defaults.default_format` if engine is "kaleido"
-                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+            will default to:\n
+            - `plotly.io.defaults.default_format` if engine is "kaleido"
+            - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
 
-        width: int or None
+        width : int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_width` if engine is "kaleido"
-                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_width` if engine is "kaleido"
+            - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
 
-        height: int or None
+        height : int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_height` if engine is "kaleido"
-                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_height` if engine is "kaleido"
+            - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
 
-        scale: int or float or None
+        scale : int or float or None
             The scale factor to use when exporting the figure. A scale factor
             larger than 1.0 will increase the image resolution with respect
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_scale` if engine is "kaleido"
-                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_scale` if engine is "kaleido"
+            - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
-        validate: bool
+        validate : bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine (deprecated): str
+        engine (deprecated) : str
             Image export engine to use. This parameter is deprecated and Orca engine support will be
-            dropped in the next major Plotly version. Until then, the following values are supported:
+            dropped in the next major Plotly version. Until then, the following values are supported:\n
             - "kaleido": Use Kaleido for image export
             - "orca": Use Orca for image export
             - "auto" (default): Use Kaleido if installed, otherwise use Orca
@@ -4735,7 +4734,7 @@ class BasePlotlyType(object):
 
         Parameters
         ----------
-        prop : str|tuple
+        prop : str or tuple
 
             If prop is the name of a property of this object, then the
             property is returned.
@@ -4830,7 +4829,7 @@ class BasePlotlyType(object):
 
         Parameters
         ----------
-        prop : str|tuple
+        prop : str or tuple
             If prop is a simple string (e.g. 'foo'), then return true of the
             object contains an element named 'foo'
 
@@ -5177,7 +5176,7 @@ class BasePlotlyType(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
@@ -5205,7 +5204,7 @@ class BasePlotlyType(object):
 
         Parameters
         ----------
-        key: str
+        key : str
             Property name
         dflt
             The default value to return if key was not found in object
@@ -5577,12 +5576,11 @@ class BasePlotlyType(object):
             is this object. Second through last parameters are the
             property / subpropery values referenced by args.
         args : list[str|tuple[int|str]]
-            List of property references where each reference may be one of:
-
-              1) A property name string (e.g. 'foo') for direct properties
-              2) A property path string (e.g. 'foo[0].bar') for
+            List of property references where each reference may be one of:\n
+              - A property name string (e.g. 'foo') for direct properties
+              - A property path string (e.g. 'foo[0].bar') for
                  subproperties
-              3) A property path tuple (e.g. ('foo', 0, 'bar')) for
+              - A property path tuple (e.g. ('foo', 0, 'bar')) for
                  subproperties
 
         append : bool
@@ -5668,19 +5666,19 @@ on_change callbacks are not supported in this case.
 
         Parameters
         ----------
-        validate: bool (default True)
+        validate : bool (default True)
             True if the object should be validated before being converted to
             JSON, False otherwise.
 
-        pretty: bool (default False)
+        pretty : bool (default False)
             True if JSON representation should be pretty-printed, False if
             representation should be as compact as possible.
 
-        remove_uids: bool (default True)
+        remove_uids : bool (default True)
             True if trace UIDs should be omitted from the JSON representation
 
-        engine: str (default None)
-            The JSON encoding engine to use. One of:
+        engine : str (default None)
+            The JSON encoding engine to use. One of:\n
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
             If not specified, the default encoder is set to the current value of
