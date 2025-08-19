@@ -90,10 +90,11 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         representation should be as compact as possible.
 
     engine: str (default None)
-        The JSON encoding engine to use. One of:
-          - "json" for an engine based on the built-in Python json module
-          - "orjson" for a faster engine that requires the orjson package
-          - "auto" for the "orjson" engine if available, otherwise "json"
+        The JSON encoding engine to use. One of:\n
+        - "json" for an engine based on the built-in Python json module
+        - "orjson" for a faster engine that requires the orjson package
+        - "auto" for the "orjson" engine if available, otherwise "json"
+
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
 
@@ -193,10 +194,11 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
         True if trace UIDs should be omitted from the JSON representation
 
     engine: str (default None)
-        The JSON encoding engine to use. One of:
-          - "json" for an engine based on the built-in Python json module
-          - "orjson" for a faster engine that requires the orjson package
-          - "auto" for the "orjson" engine if available, otherwise "json"
+        The JSON encoding engine to use. One of:\n
+        - "json" for an engine based on the built-in Python json module
+        - "orjson" for a faster engine that requires the orjson package
+        - "auto" for the "orjson" engine if available, otherwise "json"
+
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
 
@@ -244,10 +246,11 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
         True if trace UIDs should be omitted from the JSON representation
 
     engine: str (default None)
-        The JSON encoding engine to use. One of:
-          - "json" for an engine based on the built-in Python json module
-          - "orjson" for a faster engine that requires the orjson package
-          - "auto" for the "orjson" engine if available, otherwise "json"
+        The JSON encoding engine to use. One of:\n
+        - "json" for an engine based on the built-in Python json module
+        - "orjson" for a faster engine that requires the orjson package
+        - "auto" for the "orjson" engine if available, otherwise "json"
+
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
     Returns
@@ -306,11 +309,11 @@ def from_json_plotly(value, engine=None):
         A JSON string or bytes object
 
     engine: str (default None)
-        The JSON decoding engine to use. One of:
-          - if "json", parse JSON using built in json module
-          - if "orjson", parse using the faster orjson module, requires the orjson
+        The JSON decoding engine to use. One of:\n
+        - if "json", parse JSON using built in json module
+        - if "orjson", parse using the faster orjson module, requires the orjson
             package
-          - if "auto" use orjson module if available, otherwise use the json module
+        - if "auto" use orjson module if available, otherwise use the json module
 
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
@@ -377,11 +380,11 @@ def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
         True if invalid figure properties should be silently ignored.
 
     engine: str (default None)
-        The JSON decoding engine to use. One of:
-          - if "json", parse JSON using built in json module
-          - if "orjson", parse using the faster orjson module, requires the orjson
+        The JSON decoding engine to use. One of:\n
+        - if "json", parse JSON using built in json module
+        - if "orjson", parse using the faster orjson module, requires the orjson
             package
-          - if "auto" use orjson module if available, otherwise use the json module
+        - if "auto" use orjson module if available, otherwise use the json module
 
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
@@ -419,8 +422,8 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     Parameters
     ----------
     file: str or readable
-       A string containing the path to a local file or a read-able Python
-       object (e.g. a pathlib.Path object or an open file descriptor)
+        A string containing the path to a local file or a read-able Python
+        object (e.g. a pathlib.Path object or an open file descriptor)
 
     output_type: type or str (default 'Figure')
         The output figure type or type name.
@@ -431,11 +434,11 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
         True if invalid figure properties should be silently ignored.
 
     engine: str (default None)
-        The JSON decoding engine to use. One of:
-          - if "json", parse JSON using built in json module
-          - if "orjson", parse using the faster orjson module, requires the orjson
+        The JSON decoding engine to use. One of:\n
+        - if "json", parse JSON using built in json module
+        - if "orjson", parse using the faster orjson module, requires the orjson
             package
-          - if "auto" use orjson module if available, otherwise use the json module
+        - if "auto" use orjson module if available, otherwise use the json module
 
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.

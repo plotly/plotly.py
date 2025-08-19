@@ -168,11 +168,11 @@ def imshow(
         The figure height in pixels.
 
     aspect : 'equal', 'auto', or None
-      - 'equal': Ensures an aspect ratio of 1 or pixels (square pixels)
-      - 'auto': The axes is kept fixed and the aspect ratio of pixels is
+        - 'equal': Ensures an aspect ratio of 1 or pixels (square pixels)
+        - 'auto': The axes is kept fixed and the aspect ratio of pixels is
         adjusted so that the data fit in the axes. In general, this will
         result in non-square pixels.
-      - if None, 'equal' is used for numpy arrays and 'auto' for xarrays
+        - if None, 'equal' is used for numpy arrays and 'auto' for xarrays
         (which have typically heterogeneous coordinates)
 
     contrast_rescaling : 'minmax', 'infer', or None
