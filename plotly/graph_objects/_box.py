@@ -288,10 +288,11 @@ class Box(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
+
+        - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
             (e.g. 'x+y')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------
@@ -349,7 +350,8 @@ class Box(_BaseTraceType):
 
         The 'hoveron' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['boxes', 'points'] joined with '+' characters
+
+        - Any combination of ['boxes', 'points'] joined with '+' characters
             (e.g. 'boxes+points')
 
         Returns

@@ -126,8 +126,9 @@ class Parcats(_BaseTraceType):
 
         The 'dimensions' property is a tuple of instances of
         Dimension that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.parcats.Dimension
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.parcats.Dimension
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Dimension constructor
 
         Returns
@@ -192,7 +193,8 @@ class Parcats(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['count', 'probability'] joined with '+' characters
+
+        - Any combination of ['count', 'probability'] joined with '+' characters
             (e.g. 'count+probability')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
 

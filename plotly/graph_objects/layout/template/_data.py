@@ -65,8 +65,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'barpolar' property is a tuple of instances of
         Barpolar that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Barpolar
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Barpolar
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Barpolar constructor
 
         Returns
@@ -84,8 +85,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'bar' property is a tuple of instances of
         Bar that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Bar
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Bar
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Bar constructor
 
         Returns
@@ -103,8 +105,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'box' property is a tuple of instances of
         Box that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Box
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Box
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Box constructor
 
         Returns
@@ -122,8 +125,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'candlestick' property is a tuple of instances of
         Candlestick that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Candlestick
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Candlestick
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Candlestick constructor
 
         Returns
@@ -141,8 +145,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'carpet' property is a tuple of instances of
         Carpet that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Carpet
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Carpet
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Carpet constructor
 
         Returns
@@ -160,8 +165,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'choroplethmapbox' property is a tuple of instances of
         Choroplethmapbox that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Choroplethmapbox
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Choroplethmapbox
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Choroplethmapbox constructor
 
         Returns
@@ -179,8 +185,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'choroplethmap' property is a tuple of instances of
         Choroplethmap that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Choroplethmap
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Choroplethmap
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Choroplethmap constructor
 
         Returns
@@ -198,8 +205,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'choropleth' property is a tuple of instances of
         Choropleth that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Choropleth
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Choropleth
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Choropleth constructor
 
         Returns
@@ -217,8 +225,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'cone' property is a tuple of instances of
         Cone that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Cone
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Cone
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Cone constructor
 
         Returns
@@ -236,8 +245,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'contourcarpet' property is a tuple of instances of
         Contourcarpet that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Contourcarpet
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Contourcarpet
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Contourcarpet constructor
 
         Returns
@@ -255,8 +265,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'contour' property is a tuple of instances of
         Contour that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Contour
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Contour
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Contour constructor
 
         Returns
@@ -274,8 +285,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'densitymapbox' property is a tuple of instances of
         Densitymapbox that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Densitymapbox
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Densitymapbox
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Densitymapbox constructor
 
         Returns
@@ -293,8 +305,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'densitymap' property is a tuple of instances of
         Densitymap that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Densitymap
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Densitymap
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Densitymap constructor
 
         Returns
@@ -312,8 +325,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'funnelarea' property is a tuple of instances of
         Funnelarea that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Funnelarea
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Funnelarea
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Funnelarea constructor
 
         Returns
@@ -331,8 +345,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'funnel' property is a tuple of instances of
         Funnel that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Funnel
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Funnel
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Funnel constructor
 
         Returns
@@ -350,8 +365,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'heatmap' property is a tuple of instances of
         Heatmap that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Heatmap
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Heatmap
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Heatmap constructor
 
         Returns
@@ -369,8 +385,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'histogram2dcontour' property is a tuple of instances of
         Histogram2dContour that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Histogram2dContour
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Histogram2dContour
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram2dContour constructor
 
         Returns
@@ -388,8 +405,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'histogram2d' property is a tuple of instances of
         Histogram2d that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Histogram2d
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Histogram2d
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram2d constructor
 
         Returns
@@ -407,8 +425,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'histogram' property is a tuple of instances of
         Histogram that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Histogram
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Histogram
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Histogram constructor
 
         Returns
@@ -426,8 +445,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'icicle' property is a tuple of instances of
         Icicle that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Icicle
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Icicle
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Icicle constructor
 
         Returns
@@ -445,8 +465,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'image' property is a tuple of instances of
         Image that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Image
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Image
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Image constructor
 
         Returns
@@ -464,8 +485,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'indicator' property is a tuple of instances of
         Indicator that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Indicator
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Indicator
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Indicator constructor
 
         Returns
@@ -483,8 +505,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'isosurface' property is a tuple of instances of
         Isosurface that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Isosurface
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Isosurface
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Isosurface constructor
 
         Returns
@@ -502,8 +525,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'mesh3d' property is a tuple of instances of
         Mesh3d that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Mesh3d
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Mesh3d
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Mesh3d constructor
 
         Returns
@@ -521,8 +545,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'ohlc' property is a tuple of instances of
         Ohlc that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Ohlc
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Ohlc
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Ohlc constructor
 
         Returns
@@ -540,8 +565,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'parcats' property is a tuple of instances of
         Parcats that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Parcats
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Parcats
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Parcats constructor
 
         Returns
@@ -559,8 +585,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'parcoords' property is a tuple of instances of
         Parcoords that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Parcoords
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Parcoords
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Parcoords constructor
 
         Returns
@@ -578,8 +605,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'pie' property is a tuple of instances of
         Pie that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Pie
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Pie
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Pie constructor
 
         Returns
@@ -597,8 +625,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'sankey' property is a tuple of instances of
         Sankey that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Sankey
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Sankey
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Sankey constructor
 
         Returns
@@ -616,8 +645,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scatter3d' property is a tuple of instances of
         Scatter3d that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatter3d
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatter3d
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scatter3d constructor
 
         Returns
@@ -635,8 +665,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scattercarpet' property is a tuple of instances of
         Scattercarpet that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattercarpet
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattercarpet
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scattercarpet constructor
 
         Returns
@@ -654,8 +685,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scattergeo' property is a tuple of instances of
         Scattergeo that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattergeo
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattergeo
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scattergeo constructor
 
         Returns
@@ -673,8 +705,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scattergl' property is a tuple of instances of
         Scattergl that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattergl
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattergl
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scattergl constructor
 
         Returns
@@ -692,8 +725,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scattermapbox' property is a tuple of instances of
         Scattermapbox that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattermapbox
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattermapbox
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scattermapbox constructor
 
         Returns
@@ -711,8 +745,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scattermap' property is a tuple of instances of
         Scattermap that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattermap
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattermap
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scattermap constructor
 
         Returns
@@ -730,8 +765,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scatterpolargl' property is a tuple of instances of
         Scatterpolargl that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatterpolargl
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatterpolargl
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterpolargl constructor
 
         Returns
@@ -749,8 +785,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scatterpolar' property is a tuple of instances of
         Scatterpolar that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatterpolar
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatterpolar
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterpolar constructor
 
         Returns
@@ -768,8 +805,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scatter' property is a tuple of instances of
         Scatter that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatter
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatter
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scatter constructor
 
         Returns
@@ -787,8 +825,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scattersmith' property is a tuple of instances of
         Scattersmith that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattersmith
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scattersmith
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scattersmith constructor
 
         Returns
@@ -806,8 +845,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'scatterternary' property is a tuple of instances of
         Scatterternary that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatterternary
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Scatterternary
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Scatterternary constructor
 
         Returns
@@ -825,8 +865,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'splom' property is a tuple of instances of
         Splom that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Splom
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Splom
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Splom constructor
 
         Returns
@@ -844,8 +885,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'streamtube' property is a tuple of instances of
         Streamtube that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Streamtube
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Streamtube
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Streamtube constructor
 
         Returns
@@ -863,8 +905,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'sunburst' property is a tuple of instances of
         Sunburst that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Sunburst
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Sunburst
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Sunburst constructor
 
         Returns
@@ -882,8 +925,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'surface' property is a tuple of instances of
         Surface that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Surface
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Surface
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Surface constructor
 
         Returns
@@ -901,8 +945,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'table' property is a tuple of instances of
         Table that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Table
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Table
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Table constructor
 
         Returns
@@ -920,8 +965,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'treemap' property is a tuple of instances of
         Treemap that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Treemap
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Treemap
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Treemap constructor
 
         Returns
@@ -939,8 +985,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'violin' property is a tuple of instances of
         Violin that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Violin
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Violin
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Violin constructor
 
         Returns
@@ -958,8 +1005,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'volume' property is a tuple of instances of
         Volume that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Volume
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Volume
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Volume constructor
 
         Returns
@@ -977,8 +1025,9 @@ class Data(_BaseLayoutHierarchyType):
         """
         The 'waterfall' property is a tuple of instances of
         Waterfall that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.template.data.Waterfall
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.template.data.Waterfall
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Waterfall constructor
 
         Returns

@@ -1560,8 +1560,8 @@ class ColorscaleValidator(BaseValidator):
         colorscales_str = "\n".join(
             textwrap.wrap(
                 repr(sorted(list(self.named_colorscales))),
-                initial_indent=" " * 12,
-                subsequent_indent=" " * 13,
+                initial_indent=" " * INDENT,
+                subsequent_indent=" " * INDENT,
                 break_on_hyphens=False,
                 width=80,
             )
@@ -1569,17 +1569,17 @@ class ColorscaleValidator(BaseValidator):
 
         desc = """\
     The '{plotly_name}' property is a colorscale and may be
-    specified as:
-      - A list of colors that will be spaced evenly to create the colorscale.
+    specified as:\n
+    - A list of colors that will be spaced evenly to create the colorscale.
         Many predefined colorscale lists are included in the sequential, diverging,
         and cyclical modules in the plotly.colors package.
-      - A list of 2-element lists where the first element is the
+    - A list of 2-element lists where the first element is the
         normalized color level value (starting at 0 and ending at 1),
         and the second item is a valid color string.
         (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
-      - One of the following named colorscales:
-{colorscales_str}.
-        Appending '_r' to a named colorscale reverses it.
+    - One of the following named colorscales:\n
+{colorscales_str}.\n
+    Appending '_r' to a named colorscale reverses it.
 """.format(plotly_name=self.plotly_name, colorscales_str=colorscales_str)
 
         return desc
@@ -1817,13 +1817,13 @@ class FlaglistValidator(BaseValidator):
         desc = (
             """\
     The '{plotly_name}' property is a flaglist and may be specified
-    as a string containing:"""
+    as a string containing:\n"""
         ).format(plotly_name=self.plotly_name)
 
         # Flags
         desc = desc + (
             """
-      - Any combination of {flags} joined with '+' characters
+    - Any combination of {flags} joined with '+' characters
         (e.g. '{eg_flag}')"""
         ).format(flags=self.flags, eg_flag="+".join(self.flags[:2]))
 
@@ -1838,7 +1838,7 @@ class FlaglistValidator(BaseValidator):
             desc = (
                 desc
                 + """
-      - A list or array of the above"""
+    - A list or array of the above"""
             )
 
         return desc
@@ -2491,9 +2491,9 @@ class CompoundArrayValidator(BaseValidator):
         desc = (
             """\
     The '{plotly_name}' property is a tuple of instances of
-    {class_str} that may be specified as:
-      - A list or tuple of instances of {module_str}.{class_str}
-      - A list or tuple of dicts of string/value properties that
+    {class_str} that may be specified as:\n
+    - A list or tuple of instances of {module_str}.{class_str}
+    - A list or tuple of dicts of string/value properties that
         will be passed to the {class_str} constructor"""
         ).format(
             plotly_name=self.plotly_name,
@@ -2574,17 +2574,17 @@ class BaseDataValidator(BaseValidator):
         desc = (
             """\
     The '{plotly_name}' property is a tuple of trace instances
-    that may be specified as:
-      - A list or tuple of trace instances
+    that may be specified as:\n
+    - A list or tuple of trace instances
         (e.g. [Scatter(...), Bar(...)])
-      - A single trace instance
+    - A single trace instance
         (e.g. Scatter(...), Bar(...), etc.)
-      - A list or tuple of dicts of string/value properties where:
-        - The 'type' property specifies the trace type
+    - A list or tuple of dicts of string/value properties where:
+        - The 'type' property specifies the trace type\n
 {trace_types}
 
-        - All remaining properties are passed to the constructor of
-          the specified trace type
+    - All remaining properties are passed to the constructor of
+        the specified trace type
 
         (e.g. [{{'type': 'scatter', ...}}, {{'type': 'bar, ...}}])"""
         ).format(plotly_name=self.plotly_name, trace_types=trace_types_wrapped)

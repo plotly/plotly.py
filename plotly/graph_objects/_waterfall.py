@@ -295,10 +295,11 @@ class Waterfall(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['name', 'x', 'y', 'text', 'initial', 'delta', 'final'] joined with '+' characters
+
+        - Any combination of ['name', 'x', 'y', 'text', 'initial', 'delta', 'final'] joined with '+' characters
             (e.g. 'name+x')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------
@@ -1044,7 +1045,8 @@ class Waterfall(_BaseTraceType):
 
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['label', 'text', 'initial', 'delta', 'final'] joined with '+' characters
+
+        - Any combination of ['label', 'text', 'initial', 'delta', 'final'] joined with '+' characters
             (e.g. 'label+text')
             OR exactly one of ['none'] (e.g. 'none')
 

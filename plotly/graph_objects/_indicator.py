@@ -337,7 +337,8 @@ class Indicator(_BaseTraceType):
 
         The 'mode' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['number', 'delta', 'gauge'] joined with '+' characters
+
+        - Any combination of ['number', 'delta', 'gauge'] joined with '+' characters
             (e.g. 'number+delta')
 
         Returns

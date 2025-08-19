@@ -141,7 +141,8 @@ class XAxis(_BaseLayoutHierarchyType):
 
         The 'automargin' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['height', 'width', 'left', 'right', 'top', 'bottom'] joined with '+' characters
+
+        - Any combination of ['height', 'width', 'left', 'right', 'top', 'bottom'] joined with '+' characters
             (e.g. 'height+width')
             OR exactly one of [True, False] (e.g. 'False')
 
@@ -1047,8 +1048,9 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'rangebreaks' property is a tuple of instances of
         Rangebreak that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.xaxis.Rangebreak
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.xaxis.Rangebreak
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Rangebreak constructor
 
         Returns
@@ -1485,7 +1487,8 @@ class XAxis(_BaseLayoutHierarchyType):
 
         The 'spikemode' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['toaxis', 'across', 'marker'] joined with '+' characters
+
+        - Any combination of ['toaxis', 'across', 'marker'] joined with '+' characters
             (e.g. 'toaxis+across')
 
         Returns
@@ -1665,8 +1668,9 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'tickformatstops' property is a tuple of instances of
         Tickformatstop that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.xaxis.Tickformatstop
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.xaxis.Tickformatstop
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
 
         Returns

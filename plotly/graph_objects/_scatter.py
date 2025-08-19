@@ -413,10 +413,11 @@ class Scatter(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
+
+        - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
             (e.g. 'x+y')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------
@@ -476,7 +477,8 @@ class Scatter(_BaseTraceType):
 
         The 'hoveron' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['points', 'fills'] joined with '+' characters
+
+        - Any combination of ['points', 'fills'] joined with '+' characters
             (e.g. 'points+fills')
 
         Returns
@@ -842,7 +844,8 @@ class Scatter(_BaseTraceType):
 
         The 'mode' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
+
+        - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
             (e.g. 'lines+markers')
             OR exactly one of ['none'] (e.g. 'none')
 

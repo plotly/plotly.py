@@ -18,7 +18,8 @@ class Tiling(_BaseTraceHierarchyType):
 
         The 'flip' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['x', 'y'] joined with '+' characters
+
+        - Any combination of ['x', 'y'] joined with '+' characters
             (e.g. 'x+y')
 
         Returns

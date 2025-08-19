@@ -185,10 +185,11 @@ class Barpolar(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['r', 'theta', 'text', 'name'] joined with '+' characters
+
+        - Any combination of ['r', 'theta', 'text', 'name'] joined with '+' characters
             (e.g. 'r+theta')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------

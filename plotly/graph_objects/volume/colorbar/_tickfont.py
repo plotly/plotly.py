@@ -73,7 +73,8 @@ class Tickfont(_BaseTraceHierarchyType):
 
         The 'lineposition' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['under', 'over', 'through'] joined with '+' characters
+
+        - Any combination of ['under', 'over', 'through'] joined with '+' characters
             (e.g. 'under+over')
             OR exactly one of ['none'] (e.g. 'none')
 

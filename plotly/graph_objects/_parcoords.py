@@ -85,8 +85,9 @@ class Parcoords(_BaseTraceType):
 
         The 'dimensions' property is a tuple of instances of
         Dimension that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.parcoords.Dimension
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.parcoords.Dimension
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Dimension constructor
 
         Returns

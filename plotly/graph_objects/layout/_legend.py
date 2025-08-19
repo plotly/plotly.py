@@ -424,7 +424,8 @@ class Legend(_BaseLayoutHierarchyType):
 
         The 'traceorder' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['reversed', 'grouped'] joined with '+' characters
+
+        - Any combination of ['reversed', 'grouped'] joined with '+' characters
             (e.g. 'reversed+grouped')
             OR exactly one of ['normal'] (e.g. 'normal')
 

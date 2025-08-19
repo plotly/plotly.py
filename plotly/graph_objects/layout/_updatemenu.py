@@ -120,8 +120,9 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
         The 'buttons' property is a tuple of instances of
         Button that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.updatemenu.Button
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.updatemenu.Button
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Button constructor
 
         Returns

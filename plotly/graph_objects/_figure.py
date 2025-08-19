@@ -16,12 +16,14 @@ class Figure(BaseFigure):
         data
             The 'data' property is a tuple of trace instances
             that may be specified as:
-              - A list or tuple of trace instances
+
+            - A list or tuple of trace instances
                 (e.g. [Scatter(...), Bar(...)])
-              - A single trace instance
+            - A single trace instance
                 (e.g. Scatter(...), Bar(...), etc.)
-              - A list or tuple of dicts of string/value properties where:
+            - A list or tuple of dicts of string/value properties where:
                 - The 'type' property specifies the trace type
+
                     One of: ['bar', 'barpolar', 'box', 'candlestick',
                              'carpet', 'choropleth', 'choroplethmap',
                              'choroplethmapbox', 'cone', 'contour',
@@ -39,8 +41,8 @@ class Figure(BaseFigure):
                              'sunburst', 'surface', 'table', 'treemap',
                              'violin', 'volume', 'waterfall']
 
-                - All remaining properties are passed to the constructor of
-                  the specified trace type
+            - All remaining properties are passed to the constructor of
+                the specified trace type
 
                 (e.g. [{'type': 'scatter', ...}, {'type': 'bar, ...}])
 
@@ -54,8 +56,9 @@ class Figure(BaseFigure):
         frames
             The 'frames' property is a tuple of instances of
             Frame that may be specified as:
-              - A list or tuple of instances of plotly.graph_objects.Frame
-              - A list or tuple of dicts of string/value properties that
+
+            - A list or tuple of instances of plotly.graph_objects.Frame
+            - A list or tuple of dicts of string/value properties that
                 will be passed to the Frame constructor
 
         skip_invalid: bool

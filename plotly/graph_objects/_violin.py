@@ -210,10 +210,11 @@ class Violin(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
+
+        - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
             (e.g. 'x+y')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------
@@ -272,7 +273,8 @@ class Violin(_BaseTraceType):
 
         The 'hoveron' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['violins', 'points', 'kde'] joined with '+' characters
+
+        - Any combination of ['violins', 'points', 'kde'] joined with '+' characters
             (e.g. 'violins+points')
             OR exactly one of ['all'] (e.g. 'all')
 

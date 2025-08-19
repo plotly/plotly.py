@@ -250,10 +250,11 @@ class Funnel(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['name', 'x', 'y', 'text', 'percent initial', 'percent previous', 'percent total'] joined with '+' characters
+
+        - Any combination of ['name', 'x', 'y', 'text', 'percent initial', 'percent previous', 'percent total'] joined with '+' characters
             (e.g. 'name+x')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------
@@ -943,7 +944,8 @@ class Funnel(_BaseTraceType):
 
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['label', 'text', 'percent initial', 'percent previous', 'percent total', 'value'] joined with '+' characters
+
+        - Any combination of ['label', 'text', 'percent initial', 'percent previous', 'percent total', 'value'] joined with '+' characters
             (e.g. 'label+text')
             OR exactly one of ['none'] (e.g. 'none')
 

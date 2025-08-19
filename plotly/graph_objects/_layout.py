@@ -195,8 +195,9 @@ class Layout(_BaseLayoutType):
         """
         The 'annotations' property is a tuple of instances of
         Annotation that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.Annotation
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.Annotation
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Annotation constructor
 
         Returns
@@ -501,7 +502,8 @@ class Layout(_BaseLayoutType):
 
         The 'clickmode' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['event', 'select'] joined with '+' characters
+
+        - Any combination of ['event', 'select'] joined with '+' characters
             (e.g. 'event+select')
             OR exactly one of ['none'] (e.g. 'none')
 
@@ -1140,8 +1142,9 @@ class Layout(_BaseLayoutType):
         """
         The 'images' property is a tuple of instances of
         Image that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.Image
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.Image
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Image constructor
 
         Returns
@@ -1593,8 +1596,9 @@ class Layout(_BaseLayoutType):
         """
         The 'selections' property is a tuple of instances of
         Selection that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.Selection
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.Selection
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Selection constructor
 
         Returns
@@ -1659,8 +1663,9 @@ class Layout(_BaseLayoutType):
         """
         The 'shapes' property is a tuple of instances of
         Shape that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.Shape
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.Shape
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Shape constructor
 
         Returns
@@ -1723,8 +1728,9 @@ class Layout(_BaseLayoutType):
         """
         The 'sliders' property is a tuple of instances of
         Slider that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.Slider
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.Slider
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Slider constructor
 
         Returns
@@ -2012,8 +2018,9 @@ class Layout(_BaseLayoutType):
         """
         The 'updatemenus' property is a tuple of instances of
         Updatemenu that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.Updatemenu
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.Updatemenu
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Updatemenu constructor
 
         Returns

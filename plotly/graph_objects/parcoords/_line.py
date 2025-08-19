@@ -225,30 +225,31 @@ class Line(_BaseTraceHierarchyType):
 
         The 'colorscale' property is a colorscale and may be
         specified as:
-          - A list of colors that will be spaced evenly to create the colorscale.
+
+        - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
-          - A list of 2-element lists where the first element is the
+        - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1),
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
-          - One of the following named colorscales:
-                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
-                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
-                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
-                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
-                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
-                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
-                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
-                 'orrd', 'oryel', 'oxy', 'peach', 'phase', 'picnic', 'pinkyl',
-                 'piyg', 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn',
-                 'puor', 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu',
-                 'rdgy', 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar',
-                 'spectral', 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn',
-                 'tealrose', 'tempo', 'temps', 'thermal', 'tropic', 'turbid',
-                 'turbo', 'twilight', 'viridis', 'ylgn', 'ylgnbu', 'ylorbr',
-                 'ylorrd'].
-            Appending '_r' to a named colorscale reverses it.
+        - One of the following named colorscales:
+
+            ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+            'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg', 'brwnyl',
+            'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl', 'darkmint', 'deep',
+            'delta', 'dense', 'earth', 'edge', 'electric', 'emrld', 'fall',
+            'geyser', 'gnbu', 'gray', 'greens', 'greys', 'haline', 'hot', 'hsv',
+            'ice', 'icefire', 'inferno', 'jet', 'magenta', 'magma', 'matter',
+            'mint', 'mrybm', 'mygbm', 'oranges', 'orrd', 'oryel', 'oxy', 'peach',
+            'phase', 'picnic', 'pinkyl', 'piyg', 'plasma', 'plotly3', 'portland',
+            'prgn', 'pubu', 'pubugn', 'puor', 'purd', 'purp', 'purples', 'purpor',
+            'rainbow', 'rdbu', 'rdgy', 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds',
+            'solar', 'spectral', 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn',
+            'tealrose', 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'turbo',
+            'twilight', 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+
+        Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------

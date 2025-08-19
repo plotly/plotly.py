@@ -248,10 +248,11 @@ class Scattergeo(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['lon', 'lat', 'location', 'text', 'name'] joined with '+' characters
+
+        - Any combination of ['lon', 'lat', 'location', 'text', 'name'] joined with '+' characters
             (e.g. 'lon+lat')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------
@@ -791,7 +792,8 @@ class Scattergeo(_BaseTraceType):
 
         The 'mode' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
+
+        - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
             (e.g. 'lines+markers')
             OR exactly one of ['none'] (e.g. 'none')
 

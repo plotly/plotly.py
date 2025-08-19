@@ -116,8 +116,9 @@ class Splom(_BaseTraceType):
         """
         The 'dimensions' property is a tuple of instances of
         Dimension that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.splom.Dimension
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.splom.Dimension
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Dimension constructor
 
         Returns
@@ -162,10 +163,11 @@ class Splom(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
+
+        - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
             (e.g. 'x+y')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------

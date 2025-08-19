@@ -103,8 +103,9 @@ class Map(_BaseLayoutHierarchyType):
         """
         The 'layers' property is a tuple of instances of
         Layer that may be specified as:
-          - A list or tuple of instances of plotly.graph_objects.layout.map.Layer
-          - A list or tuple of dicts of string/value properties that
+
+        - A list or tuple of instances of plotly.graph_objects.layout.map.Layer
+        - A list or tuple of dicts of string/value properties that
             will be passed to the Layer constructor
 
         Returns

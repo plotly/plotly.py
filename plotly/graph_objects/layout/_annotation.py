@@ -128,7 +128,8 @@ class Annotation(_BaseLayoutHierarchyType):
 
         The 'arrowside' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['end', 'start'] joined with '+' characters
+
+        - Any combination of ['end', 'start'] joined with '+' characters
             (e.g. 'end+start')
             OR exactly one of ['none'] (e.g. 'none')
 

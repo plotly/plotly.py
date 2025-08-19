@@ -212,10 +212,11 @@ class Pie(_BaseTraceType):
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['label', 'text', 'value', 'percent', 'name'] joined with '+' characters
+
+        - Any combination of ['label', 'text', 'value', 'percent', 'name'] joined with '+' characters
             (e.g. 'label+text')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
+        - A list or array of the above
 
         Returns
         -------
@@ -954,7 +955,8 @@ class Pie(_BaseTraceType):
 
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['label', 'text', 'value', 'percent'] joined with '+' characters
+
+        - Any combination of ['label', 'text', 'value', 'percent'] joined with '+' characters
             (e.g. 'label+text')
             OR exactly one of ['none'] (e.g. 'none')
 

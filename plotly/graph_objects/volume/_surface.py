@@ -67,7 +67,8 @@ class Surface(_BaseTraceHierarchyType):
 
         The 'pattern' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['A', 'B', 'C', 'D', 'E'] joined with '+' characters
+
+        - Any combination of ['A', 'B', 'C', 'D', 'E'] joined with '+' characters
             (e.g. 'A+B')
             OR exactly one of ['all', 'odd', 'even'] (e.g. 'even')
 
