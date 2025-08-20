@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 import shutil
 import sys
 
@@ -25,6 +26,11 @@ from codegen.validators import (
     write_validator_json,
     get_data_validator_instance,
 )
+
+
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+PLOT_SCHEMA_RELATIVE = Path("resources") / "plot-schema.json"
+PLOT_SCHEMA = PROJECT_ROOT / PLOT_SCHEMA_RELATIVE
 
 
 # Import notes
@@ -94,7 +100,7 @@ def make_paths(codedir):
     return validators_dir, graph_objects_dir, graph_objs_path
 
 
-def perform_codegen(codedir, noformat=False):
+def perform_codegen(codedir, noformat=False, schema=PLOT_SCHEMA):
     """Generate code."""
 
     # Get paths
@@ -108,8 +114,7 @@ def perform_codegen(codedir, noformat=False):
 
     # Load plotly schema
     project_root = codedir.parent
-    plot_schema_path = project_root / "resources" / "plot-schema.json"
-    with open(plot_schema_path, "r") as f:
+    with open(schema, "r") as f:
         plotly_schema = json.load(f)
 
     # Preprocess Schema
@@ -284,7 +289,9 @@ else:
             init_extra = optional_figure_widget_import
         else:
             init_extra = ""
-        write_init_py(graph_objects_pkg, path_parts, rel_modules, rel_classes, init_extra)
+        write_init_py(
+            graph_objects_pkg, path_parts, rel_modules, rel_classes, init_extra
+        )
 
     # Output graph_objs.py alias
     graph_objs_rel_classes = [
@@ -303,7 +310,7 @@ else:
     )
     graph_objs_path = codedir / "graph_objs"
     graph_objs_path.mkdir(parents=True, exist_ok=True)
-    graph_objs_path /=  "__init__.py"
+    graph_objs_path /= "__init__.py"
     with open(graph_objs_path, "wt") as f:
         f.write("# ruff: noqa: F401\n")
         f.write(graph_objs_init_source)

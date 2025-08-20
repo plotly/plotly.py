@@ -3,7 +3,6 @@
 import logging
 import json
 import os
-from pathlib import Path
 import platform
 import requests
 import shutil
@@ -11,14 +10,15 @@ from subprocess import check_call
 import sys
 import time
 
-from codegen import perform_codegen
-
+from codegen import (
+    perform_codegen,
+    PROJECT_ROOT,
+    PLOT_SCHEMA,
+)
 
 LOGGER = logging.getLogger(__name__)
-PROJECT_ROOT = Path(__file__).parent.parent
 NODE_ROOT = PROJECT_ROOT / "js"
 NODE_MODULES = NODE_ROOT / "node_modules"
-PLOT_SCHEMA = PROJECT_ROOT / "resources" / "plot-schema.json"
 WIDGET_TARGETS = [PROJECT_ROOT / "plotly" / "package_data" / "widgetbundle.js"]
 NPM_PATH = os.pathsep.join(
     [
