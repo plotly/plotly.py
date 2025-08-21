@@ -147,14 +147,14 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         '+' characters. For example, to specify rendering compatible with
         the classic Jupyter Notebook, JupyterLab, and PDF export:
 
-        ```python
+        ```
         >>> import plotly.io as pio
         >>> pio.renderers.default = 'notebook+jupyterlab+pdf'
         ```
 
         The names of available renderers may be retrieved with:
 
-        ```python
+        ```
         >>> import plotly.io as pio
         >>> list(pio.renderers)
         ```
