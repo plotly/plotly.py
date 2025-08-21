@@ -147,13 +147,17 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         '+' characters. For example, to specify rendering compatible with
         the classic Jupyter Notebook, JupyterLab, and PDF export:
 
+        ```python
         >>> import plotly.io as pio
         >>> pio.renderers.default = 'notebook+jupyterlab+pdf'
+        ```
 
         The names of available renderers may be retrieved with:
 
+        ```python
         >>> import plotly.io as pio
         >>> list(pio.renderers)
+        ```
 
         Returns
         -------
@@ -373,27 +377,27 @@ def show(fig, renderer=None, validate=True, **kwargs):
 
     Parameters
     ----------
-    fig: dict of Figure
+    fig : dict of Figure
         The Figure object or figure dict to display
 
-    renderer: str or None (default None)
+    renderer : str or None (default None)
         A string containing the names of one or more registered renderers
         (separated by '+' characters) or None.  If None, then the default
         renderers specified in plotly.io.renderers.default are used.
 
-    validate: bool (default True)
+    validate : bool (default True)
         True if the figure should be validated before being shown,
         False otherwise.
 
-    width: int or float
+    width : int or float
         An integer or float that determines the number of pixels wide the
         plot is. The default is set in plotly.js.
 
-    height: int or float
+    height : int or float
         An integer or float specifying the height of the plot in pixels.
         The default is set in plotly.js.
 
-    config: dict
+    config : dict
         A dict of parameters to configure the figure. The defaults are set
         in plotly.js.
 
