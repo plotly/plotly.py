@@ -563,8 +563,7 @@ def create_ternary_contour(
         superimposed on contours, using the same colorscale.
 
     Examples
-    ========
-
+    --------
     Example 1: ternary contour plot with filled contours
 
     >>> import plotly.figure_factory as ff
