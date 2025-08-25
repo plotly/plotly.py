@@ -640,7 +640,7 @@ class XAxis(_BaseLayoutHierarchyType):
     def rangemode(self):
         """
         If "normal", the range is computed in relation to the extrema
-        of the input data. If *tozero*`, the range extends to 0,
+        of the input data. If "tozero", the range extends to 0,
         regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data. Applies only to
         linear axes.
@@ -1571,7 +1571,7 @@ class XAxis(_BaseLayoutHierarchyType):
             the default `autorange`.
         rangemode
             If "normal", the range is computed in relation to the
-            extrema of the input data. If *tozero*`, the range
+            extrema of the input data. If "tozero", the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
@@ -1938,7 +1938,7 @@ class XAxis(_BaseLayoutHierarchyType):
             the default `autorange`.
         rangemode
             If "normal", the range is computed in relation to the
-            extrema of the input data. If *tozero*`, the range
+            extrema of the input data. If "tozero", the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.

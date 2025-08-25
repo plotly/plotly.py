@@ -690,7 +690,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     @property
     def rangemode(self):
         """
-        If *tozero*`, the range extends to 0, regardless of the input
+        If "tozero", the range extends to 0, regardless of the input
         data If "nonnegative", the range is non-negative, regardless of
         the input data. If "normal", the range is computed in relation
         to the extrema of the input data (same behavior as for
@@ -1522,7 +1522,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
             appears. Leaving either or both elements `null` impacts
             the default `autorange`.
         rangemode
-            If *tozero*`, the range extends to 0, regardless of the
+            If "tozero", the range extends to 0, regardless of the
             input data If "nonnegative", the range is non-negative,
             regardless of the input data. If "normal", the range is
             computed in relation to the extrema of the input data
@@ -1891,7 +1891,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
             appears. Leaving either or both elements `null` impacts
             the default `autorange`.
         rangemode
-            If *tozero*`, the range extends to 0, regardless of the
+            If "tozero", the range extends to 0, regardless of the
             input data If "nonnegative", the range is non-negative,
             regardless of the input data. If "normal", the range is
             computed in relation to the extrema of the input data

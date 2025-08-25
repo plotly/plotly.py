@@ -87,7 +87,7 @@ class Figure(BaseFigure):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
@@ -142,10 +142,10 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        patch: dict or None (default None)
+        patch : dict or None (default None)
             Dictionary of property updates to be applied to all traces that
             satisfy the selection criteria.
-        selector: dict, function, int, str or None (default None)
+        selector : dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -156,12 +156,12 @@ class Figure(BaseFigure):
             will be in the selection. If an int N, the Nth trace matching row
             and col will be selected (N can be negative). If a string S, the selector
             is equivalent to dict(type=S).
-        row, col: int or None (default None)
+        row, col : int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             * If True, only select traces associated with the secondary
               y-axis of the subplot.
             * If False, only select traces associated with the primary
@@ -173,14 +173,14 @@ class Figure(BaseFigure):
             created using plotly.subplots.make_subplots. See the docstring
             for the specs argument to make_subplots for more info on
             creating subplots with secondary y-axes.
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
         **kwargs
             Additional property updates to apply to each selected trace. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+            a property is specified in both patch and in \\*\\*kwargs then the
+            one in \\*\\*kwargs takes precedence.
 
         Returns
         -------
@@ -205,7 +205,7 @@ class Figure(BaseFigure):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
@@ -232,7 +232,7 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single trace object.
-        selector: dict, function, int, str or None (default None)
+        selector : dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -243,12 +243,12 @@ class Figure(BaseFigure):
             will be in the selection. If an int N, the Nth trace matching row
             and col will be selected (N can be negative). If a string S, the selector
             is equivalent to dict(type=S).
-        row, col: int or None (default None)
+        row, col : int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             * If True, only select traces associated with the secondary
               y-axis of the subplot.
             * If False, only select traces associated with the primary
@@ -279,6 +279,7 @@ class Figure(BaseFigure):
         ----------
         trace : BaseTraceType or dict
             Either:
+
               - An instances of a trace classe from the plotly.graph_objects
                 package (e.g plotly.graph_objects.Scatter, plotly.graph_objects.Bar)
               - or a dicts where:
@@ -299,10 +300,11 @@ class Figure(BaseFigure):
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`.
             If 'all', addresses all columns in the specified row(s).
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
             following conditions are satisfied:
+
               * The figure was created using `plotly.subplots.make_subplots`.
               * The row and col arguments are not None
               * The subplot at the specified row and col has type xy
@@ -386,11 +388,11 @@ class Figure(BaseFigure):
             If a single integer is passed, all traces will be added to column number
 
 
-        secondary_ys: None or list[boolean] (default None)
+        secondary_ys : None or list[boolean] (default None)
             List of secondary_y booleans for traces to be added. See the
             docstring for `add_trace` for more info.
 
-        exclude_empty_subplots: boolean
+        exclude_empty_subplots : boolean
             If True, the trace will not be added to subplots that don't already
             have traces.
 
@@ -441,35 +443,35 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        x: float or int
+        x : float or int
             A number representing the x coordinate of the vertical line.
-        exclude_empty_subplots: Boolean
+        exclude_empty_subplots : Boolean
             If True (default) do not place the shape on subplots that have no data
             plotted on them.
-        row: None, int or 'all'
+        row : None, int or 'all'
             Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        col: None, int or 'all'
+        col : None, int or 'all'
             Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
+        annotation : dict or plotly.graph_objs.layout.Annotation. If dict(),
             it is interpreted as describing an annotation. The annotation is
             placed relative to the shape based on annotation_position (see
             below) unless its x or y value has been specified for the annotation
             passed here. xref and yref are always the same as for the added
             shape and cannot be overridden.
-        annotation_position: a string containing optionally ["top", "bottom"]
+        annotation_position : a string containing optionally ["top", "bottom"]
             and ["left", "right"] specifying where the text should be anchored
             to on the line. Example positions are "bottom left", "right top",
             "right", "bottom". If an annotation is added but annotation_position is
             not specified, this defaults to "top right".
-        annotation_*: any parameters to go.layout.Annotation can be passed as
+        annotation_* : any parameters to go.layout.Annotation can be passed as
             keywords by prefixing them with "annotation_". For example, to specify the
             annotation text "example" you can pass annotation_text="example" as a
             keyword argument.
-        **kwargs:
+        **kwargs :
             Any named function parameters that can be passed to 'add_shape',
             except for x0, x1, y0, y1 or type.
         """
@@ -493,35 +495,35 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        y: float or int
+        y : float or int
             A number representing the y coordinate of the horizontal line.
-        exclude_empty_subplots: Boolean
+        exclude_empty_subplots : Boolean
             If True (default) do not place the shape on subplots that have no data
             plotted on them.
-        row: None, int or 'all'
+        row : None, int or 'all'
             Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        col: None, int or 'all'
+        col : None, int or 'all'
             Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
+        annotation : dict or plotly.graph_objs.layout.Annotation. If dict(),
             it is interpreted as describing an annotation. The annotation is
             placed relative to the shape based on annotation_position (see
             below) unless its x or y value has been specified for the annotation
             passed here. xref and yref are always the same as for the added
             shape and cannot be overridden.
-        annotation_position: a string containing optionally ["top", "bottom"]
+        annotation_position : a string containing optionally ["top", "bottom"]
             and ["left", "right"] specifying where the text should be anchored
             to on the line. Example positions are "bottom left", "right top",
             "right", "bottom". If an annotation is added but annotation_position is
             not specified, this defaults to "top right".
-        annotation_*: any parameters to go.layout.Annotation can be passed as
+        annotation_* : any parameters to go.layout.Annotation can be passed as
             keywords by prefixing them with "annotation_". For example, to specify the
             annotation text "example" you can pass annotation_text="example" as a
             keyword argument.
-        **kwargs:
+        **kwargs :
             Any named function parameters that can be passed to 'add_shape',
             except for x0, x1, y0, y1 or type.
         """
@@ -546,38 +548,38 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        x0: float or int
+        x0 : float or int
             A number representing the x coordinate of one side of the rectangle.
-        x1: float or int
+        x1 : float or int
             A number representing the x coordinate of the other side of the rectangle.
-        exclude_empty_subplots: Boolean
+        exclude_empty_subplots : Boolean
             If True (default) do not place the shape on subplots that have no data
             plotted on them.
-        row: None, int or 'all'
+        row : None, int or 'all'
             Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        col: None, int or 'all'
+        col : None, int or 'all'
             Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
+        annotation : dict or plotly.graph_objs.layout.Annotation. If dict(),
             it is interpreted as describing an annotation. The annotation is
             placed relative to the shape based on annotation_position (see
             below) unless its x or y value has been specified for the annotation
             passed here. xref and yref are always the same as for the added
             shape and cannot be overridden.
-        annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+        annotation_position : a string containing optionally ["inside", "outside"], ["top", "bottom"]
             and ["left", "right"] specifying where the text should be anchored
             to on the rectangle. Example positions are "outside top left", "inside
             bottom", "right", "inside left", "inside" ("outside" is not supported). If
             an annotation is added but annotation_position is not specified this
             defaults to "inside top right".
-        annotation_*: any parameters to go.layout.Annotation can be passed as
+        annotation_* : any parameters to go.layout.Annotation can be passed as
             keywords by prefixing them with "annotation_". For example, to specify the
             annotation text "example" you can pass annotation_text="example" as a
             keyword argument.
-        **kwargs:
+        **kwargs :
             Any named function parameters that can be passed to 'add_shape',
             except for x0, x1, y0, y1 or type.
         """
@@ -602,38 +604,38 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        y0: float or int
+        y0 : float or int
             A number representing the y coordinate of one side of the rectangle.
-        y1: float or int
+        y1 : float or int
             A number representing the y coordinate of the other side of the rectangle.
-        exclude_empty_subplots: Boolean
+        exclude_empty_subplots : Boolean
             If True (default) do not place the shape on subplots that have no data
             plotted on them.
-        row: None, int or 'all'
+        row : None, int or 'all'
             Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        col: None, int or 'all'
+        col : None, int or 'all'
             Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
             the specified column(s). If both row and col are None, addresses the
             first subplot if subplots exist, or the only plot. By default is "all".
-        annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
+        annotation : dict or plotly.graph_objs.layout.Annotation. If dict(),
             it is interpreted as describing an annotation. The annotation is
             placed relative to the shape based on annotation_position (see
             below) unless its x or y value has been specified for the annotation
             passed here. xref and yref are always the same as for the added
             shape and cannot be overridden.
-        annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+        annotation_position : a string containing optionally ["inside", "outside"], ["top", "bottom"]
             and ["left", "right"] specifying where the text should be anchored
             to on the rectangle. Example positions are "outside top left", "inside
             bottom", "right", "inside left", "inside" ("outside" is not supported). If
             an annotation is added but annotation_position is not specified this
             defaults to "inside top right".
-        annotation_*: any parameters to go.layout.Annotation can be passed as
+        annotation_* : any parameters to go.layout.Annotation can be passed as
             keywords by prefixing them with "annotation_". For example, to specify the
             annotation text "example" you can pass annotation_text="example" as a
             keyword argument.
-        **kwargs:
+        **kwargs :
             Any named function parameters that can be passed to 'add_shape',
             except for x0, x1, y0, y1 or type.
         """
@@ -9980,7 +9982,7 @@ class Figure(BaseFigure):
         source
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
-            subtype>][;base64],<data>"
+            subtype\\>][;base64\\],<data\\>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties

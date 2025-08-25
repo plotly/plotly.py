@@ -5925,7 +5925,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. If *normal*, the range is computed in relation to the extrema of the input data (same behavior as for cartesian axes).",
+      "description": "If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. If *normal*, the range is computed in relation to the extrema of the input data (same behavior as for cartesian axes).",
       "dflt": "tozero",
       "editType": "calc",
       "valType": "enumerated",
@@ -7331,7 +7331,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
       "dflt": "normal",
       "editType": "plot",
       "valType": "enumerated",
@@ -8070,7 +8070,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
       "dflt": "normal",
       "editType": "plot",
       "valType": "enumerated",
@@ -8809,7 +8809,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
       "dflt": "normal",
       "editType": "plot",
       "valType": "enumerated",
@@ -14038,7 +14038,7 @@
      "role": "object"
     },
     "rangemode": {
-     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
      "dflt": "normal",
      "editType": "plot",
      "valType": "enumerated",
@@ -15599,7 +15599,7 @@
      "role": "object"
     },
     "rangemode": {
-     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
+     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes.",
      "dflt": "normal",
      "editType": "plot",
      "valType": "enumerated",
@@ -22702,7 +22702,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data.",
       "dflt": "normal",
       "editType": "calc",
       "valType": "enumerated",
@@ -23373,7 +23373,7 @@
       "valType": "info_array"
      },
      "rangemode": {
-      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data.",
+      "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data.",
       "dflt": "normal",
       "editType": "calc",
       "valType": "enumerated",
@@ -47720,7 +47720,7 @@
      "valType": "number"
     },
     "source": {
-     "description": "Specifies the data URI of the image to be visualized. The URI consists of \"data:image/[<media subtype>][;base64],<data>\"",
+     "description": "Specifies the data URI of the image to be visualized. The URI consists of \"data:image/[<media subtype\\\\>][;base64\\\\],<data\\\\>\"",
      "editType": "calc",
      "valType": "string"
     },

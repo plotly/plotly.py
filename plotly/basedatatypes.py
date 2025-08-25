@@ -303,7 +303,7 @@ x-dimension.
 
 Parameters
 ----------
-y: float or int
+y : float or int
     A number representing the y coordinate of the horizontal line."""
     elif shape_type == "vline":
         docstr = """
@@ -312,7 +312,7 @@ y-dimension.
 
 Parameters
 ----------
-x: float or int
+x : float or int
     A number representing the x coordinate of the vertical line."""
     elif shape_type == "hrect":
         docstr = """
@@ -321,9 +321,9 @@ x-dimension.
 
 Parameters
 ----------
-y0: float or int
+y0 : float or int
     A number representing the y coordinate of one side of the rectangle.
-y1: float or int
+y1 : float or int
     A number representing the y coordinate of the other side of the rectangle."""
     elif shape_type == "vrect":
         docstr = """
@@ -332,23 +332,23 @@ y-dimension.
 
 Parameters
 ----------
-x0: float or int
+x0 : float or int
     A number representing the x coordinate of one side of the rectangle.
-x1: float or int
+x1 : float or int
     A number representing the x coordinate of the other side of the rectangle."""
     docstr += """
-exclude_empty_subplots: Boolean
+exclude_empty_subplots : Boolean
     If True (default) do not place the shape on subplots that have no data
     plotted on them.
-row: None, int or 'all'
+row : None, int or 'all'
     Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
     the specified column(s). If both row and col are None, addresses the
     first subplot if subplots exist, or the only plot. By default is "all".
-col: None, int or 'all'
+col : None, int or 'all'
     Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
     the specified column(s). If both row and col are None, addresses the
     first subplot if subplots exist, or the only plot. By default is "all".
-annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
+annotation : dict or plotly.graph_objs.layout.Annotation. If dict(),
     it is interpreted as describing an annotation. The annotation is
     placed relative to the shape based on annotation_position (see
     below) unless its x or y value has been specified for the annotation
@@ -356,25 +356,25 @@ annotation: dict or plotly.graph_objs.layout.Annotation. If dict(),
     shape and cannot be overridden."""
     if shape_type in ["hline", "vline"]:
         docstr += """
-annotation_position: a string containing optionally ["top", "bottom"]
+annotation_position : a string containing optionally ["top", "bottom"]
     and ["left", "right"] specifying where the text should be anchored
     to on the line. Example positions are "bottom left", "right top",
     "right", "bottom". If an annotation is added but annotation_position is
     not specified, this defaults to "top right"."""
     elif shape_type in ["hrect", "vrect"]:
         docstr += """
-annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+annotation_position : a string containing optionally ["inside", "outside"], ["top", "bottom"]
     and ["left", "right"] specifying where the text should be anchored
     to on the rectangle. Example positions are "outside top left", "inside
     bottom", "right", "inside left", "inside" ("outside" is not supported). If
     an annotation is added but annotation_position is not specified this
     defaults to "inside top right"."""
     docstr += """
-annotation_*: any parameters to go.layout.Annotation can be passed as
+annotation_* : any parameters to go.layout.Annotation can be passed as
     keywords by prefixing them with "annotation_". For example, to specify the
     annotation text "example" you can pass annotation_text="example" as a
     keyword argument.
-**kwargs:
+**kwargs :
     Any named function parameters that can be passed to 'add_shape',
     except for x0, x1, y0, y1 or type."""
     return docstr
@@ -430,7 +430,7 @@ class BaseFigure(object):
         Parameters
         ----------
         data
-            One of:
+            One of:\n
             - A list or tuple of trace objects (or dicts that can be coerced
             into trace objects)
 
@@ -1374,8 +1374,8 @@ class BaseFigure(object):
             properties that are not specified in the update operation.
         **kwargs
             Additional property updates to apply to each selected trace. If
-            a property is specified in both patch and in \*\*kwargs then the
-            one in \*\*kwargs takes precedence.
+            a property is specified in both patch and in \\\\*\\\\*kwargs then the
+            one in \\\\*\\\\*kwargs takes precedence.
 
         Returns
         -------

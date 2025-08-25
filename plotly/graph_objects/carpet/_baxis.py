@@ -761,7 +761,7 @@ class Baxis(_BaseTraceHierarchyType):
     def rangemode(self):
         """
         If "normal", the range is computed in relation to the extrema
-        of the input data. If *tozero*`, the range extends to 0,
+        of the input data. If "tozero", the range extends to 0,
         regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data.
 
@@ -1446,7 +1446,7 @@ class Baxis(_BaseTraceHierarchyType):
             appears.
         rangemode
             If "normal", the range is computed in relation to the
-            extrema of the input data. If *tozero*`, the range
+            extrema of the input data. If "tozero", the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
             the input data.
@@ -1736,7 +1736,7 @@ class Baxis(_BaseTraceHierarchyType):
             appears.
         rangemode
             If "normal", the range is computed in relation to the
-            extrema of the input data. If *tozero*`, the range
+            extrema of the input data. If "tozero", the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
             the input data.
