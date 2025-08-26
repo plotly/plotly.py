@@ -348,23 +348,23 @@ col : None, int or 'all'
     Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
     the specified column(s). If both row and col are None, addresses the
     first subplot if subplots exist, or the only plot. By default is "all".
-annotation : dict or plotly.graph_objs.layout.Annotation. If dict(),
-    it is interpreted as describing an annotation. The annotation is
+annotation : dict or plotly.graph_objs.layout.Annotation
+    If dict(), it is interpreted as describing an annotation. The annotation is
     placed relative to the shape based on annotation_position (see
     below) unless its x or y value has been specified for the annotation
     passed here. xref and yref are always the same as for the added
     shape and cannot be overridden."""
     if shape_type in ["hline", "vline"]:
         docstr += """
-annotation_position : a string containing optionally ["top", "bottom"]
-    and ["left", "right"] specifying where the text should be anchored
+annotation_position : a string containing optionally ["top", "bottom"] and ["left", "right"] 
+    Specifies where the text should be anchored
     to on the line. Example positions are "bottom left", "right top",
     "right", "bottom". If an annotation is added but annotation_position is
     not specified, this defaults to "top right"."""
     elif shape_type in ["hrect", "vrect"]:
         docstr += """
-annotation_position : a string containing optionally ["inside", "outside"], ["top", "bottom"]
-    and ["left", "right"] specifying where the text should be anchored
+annotation_position : a string containing optionally ["inside", "outside"], ["top", "bottom"] and ["left", "right"] 
+    Specifies where the text should be anchored
     to on the rectangle. Example positions are "outside top left", "inside
     bottom", "right", "inside left", "inside" ("outside" is not supported). If
     an annotation is added but annotation_position is not specified this
@@ -940,7 +940,7 @@ class BaseFigure(object):
         ----------
         key : str
             Property name
-        dflt:
+        dflt :
             The default value to return if key was not found in figure
 
         Returns
@@ -3761,7 +3761,7 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine (deprecated) : str
+        engine : str
             Image export engine to use. This parameter is deprecated and Orca engine support will be
             dropped in the next major Plotly version. Until then, the following values are supported:\n
             - "kaleido": Use Kaleido for image export
@@ -3857,7 +3857,7 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine (deprecated) : str
+        engine : str
             Image export engine to use. This parameter is deprecated and Orca engine support will be
             dropped in the next major Plotly version. Until then, the following values are supported:\n
             - "kaleido": Use Kaleido for image export
@@ -5206,7 +5206,7 @@ class BasePlotlyType(object):
         ----------
         key : str
             Property name
-        dflt
+        dflt :
             The default value to return if key was not found in object
 
         Returns

@@ -285,9 +285,9 @@ def to_image(
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine (deprecated): str
+    engine : str
         Image export engine to use. This parameter is deprecated and Orca engine support will be
-        dropped in the next major Plotly version. Until then, the following values are supported:
+        dropped in the next major Plotly version. Until then, the following values are supported:\n
           - "kaleido": Use Kaleido for image export
           - "orca": Use Orca for image export
           - "auto" (default): Use Kaleido if installed, otherwise use Orca
@@ -473,9 +473,9 @@ def write_image(
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine (deprecated): str
+    engine : str
         Image export engine to use. This parameter is deprecated and Orca engine support will be
-        dropped in the next major Plotly version. Until then, the following values are supported:
+        dropped in the next major Plotly version. Until then, the following values are supported:\n
           - "kaleido": Use Kaleido for image export
           - "orca": Use Orca for image export
           - "auto" (default): Use Kaleido if installed, otherwise use Orca
