@@ -424,7 +424,7 @@ class {fig_classname}({base_classname}):\n"""
         **kwargs
             Additional property updates to apply to each selected
             {singular_name} object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\\\*\\\\*kwargs then the one in \\\\*\\\\*kwargs
             takes precedence.
         Returns
         -------
@@ -604,8 +604,8 @@ class {fig_classname}({base_classname}):\n"""
             creating subplots with secondary y-axes.
         **kwargs
             Additional property updates to apply to each selected {singular_name}. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+            a property is specified in both patch and in \\\\\\\\*\\\\\\\\*kwargs then the
+            one in \\\\\\\\*\\\\\\\\*kwargs takes precedence.
 
         Returns
         -------

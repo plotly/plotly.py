@@ -21601,7 +21601,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             coloraxis object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -21713,7 +21713,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             geo object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -21825,7 +21825,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             legend object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -21937,7 +21937,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             map object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -22049,7 +22049,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             mapbox object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -22161,7 +22161,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             polar object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -22273,7 +22273,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             scene object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -22385,7 +22385,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             smith object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -22497,7 +22497,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             ternary object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -22609,7 +22609,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             xaxis object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -22770,7 +22770,7 @@ class FigureWidget(BaseFigureWidget):
         **kwargs
             Additional property updates to apply to each selected
             yaxis object. If a property is specified in
-            both patch and in **kwargs then the one in **kwargs
+            both patch and in \\*\\*kwargs then the one in \\*\\*kwargs
             takes precedence.
         Returns
         -------
@@ -22929,8 +22929,8 @@ class FigureWidget(BaseFigureWidget):
             creating subplots with secondary y-axes.
         **kwargs
             Additional property updates to apply to each selected annotation. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+            a property is specified in both patch and in \\\\*\\\\*kwargs then the
+            one in \\\\*\\\\*kwargs takes precedence.
 
         Returns
         -------
@@ -23507,8 +23507,8 @@ class FigureWidget(BaseFigureWidget):
             creating subplots with secondary y-axes.
         **kwargs
             Additional property updates to apply to each selected image. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+            a property is specified in both patch and in \\\\*\\\\*kwargs then the
+            one in \\\\*\\\\*kwargs takes precedence.
 
         Returns
         -------
@@ -23834,8 +23834,8 @@ class FigureWidget(BaseFigureWidget):
             creating subplots with secondary y-axes.
         **kwargs
             Additional property updates to apply to each selected selection. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+            a property is specified in both patch and in \\\\*\\\\*kwargs then the
+            one in \\\\*\\\\*kwargs takes precedence.
 
         Returns
         -------
@@ -24138,8 +24138,8 @@ class FigureWidget(BaseFigureWidget):
             creating subplots with secondary y-axes.
         **kwargs
             Additional property updates to apply to each selected shape. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+            a property is specified in both patch and in \\\\*\\\\*kwargs then the
+            one in \\\\*\\\\*kwargs takes precedence.
 
         Returns
         -------
