@@ -35,14 +35,14 @@ jupyter:
 
 ### The Figure Lifecycle
 
-As explained in the [Figure Data Structure documentation](/python/figure-structure/), when building a figure object with Plotly.py, it is not necessary to populate every possible attribute. At render-time, figure objects (whether generated via [Plotly Express](/python/plotly-express/) or [Graph Objects](/python/graph-objects/)) are passed from Plotly.py to [Plotly.js](/javascript/), which is the Javascript library responsible for turning JSON descriptions of figures into graphical representations.
+As explained in the [Figure Data Structure documentation](../figure-structure/), when building a figure object with Plotly.py, it is not necessary to populate every possible attribute. At render-time, figure objects (whether generated via [Plotly Express](../plotly-express/) or [Graph Objects](../graph-objects/)) are passed from Plotly.py to [Plotly.js](/javascript/), which is the Javascript library responsible for turning JSON descriptions of figures into graphical representations.
 
 As part of this rendering process, Plotly.js will determine, based on the attributes that have been set, which other attributes require values in order to draw the figure. Plotly.js will then apply either static or dynamic defaults to all of the remaining required attributes and render the figure. A good example of a static default would be the text font size: if unspecified, the default value is always the same. A good example of a dynamic default would be the range of an axis: if unspecified, the default will be computed based on the range of the data in traces associated with that axis.
 
 
 ### Introspecting Plotly Express Figures
 
-Figure objects created by [Plotly Express](/python/plotly-express/) have a number of attributes automatically set, and these can be introspected using the Python `print()` function, or in JupyterLab, the special `fig.show("json")` renderer, which gives an interactive drilldown interface with search:
+Figure objects created by [Plotly Express](../plotly-express/) have a number of attributes automatically set, and these can be introspected using the Python `print()` function, or in JupyterLab, the special `fig.show("json")` renderer, which gives an interactive drilldown interface with search:
 
 ```python
 import plotly.express as px
@@ -62,9 +62,9 @@ help(fig.data[0].__class__.mode)
 
 _new in 4.10_
 
-The `.full_figure_for_development()` method provides Python-level access to the default values computed by Plotly.js. This method requires [the Kaleido package](/python/static-image-export/), which is easy to install and also used for [static image export](/python/static-image-export/).
+The `.full_figure_for_development()` method provides Python-level access to the default values computed by Plotly.js. This method requires [the Kaleido package](../static-image-export/), which is easy to install and also used for [static image export](../static-image-export/).
 
-By way of example, here is an extremely simple figure created with [Graph Objects](/python/graph-objects/) (although it could have been made with [Plotly Express](/python/plotly-express/) as well just like above) where we have disabled the default template for maximum readability. Note how in this figure the text labels on the markers are clipped, and sit on top of the markers.
+By way of example, here is an extremely simple figure created with [Graph Objects](../graph-objects/) (although it could have been made with [Plotly Express](../plotly-express/) as well just like above) where we have disabled the default template for maximum readability. Note how in this figure the text labels on the markers are clipped, and sit on top of the markers.
 
 ```python
 import plotly.graph_objects as go
@@ -135,9 +135,9 @@ help(go.layout.XAxis.autorange)
 
 ### More about Layout
 
-In the figure we introspected above, we had added [a `scatter` trace](/python/line-and-scatter/), and Plotly.js automatically filled in for us the `xaxis` and `yaxis` values of that trace object to be `x` and `y`, and then also filled out the corresponding `layout.xaxis` and `layout.yaxis` objects for us, complete with their [extensive set of defaults for gridlines, tick labels and so on](/python/axes/).
+In the figure we introspected above, we had added [a `scatter` trace](../line-and-scatter/), and Plotly.js automatically filled in for us the `xaxis` and `yaxis` values of that trace object to be `x` and `y`, and then also filled out the corresponding `layout.xaxis` and `layout.yaxis` objects for us, complete with their [extensive set of defaults for gridlines, tick labels and so on](../axes/).
 
-If we create a figure with [a `scattergeo` trace](/python/scatter-plots-on-maps/) instead, however, Plotly.js will fill in a totally different set of objects in `layout`, corresponding to [a `geo` subplot, with all of its defaults for whether or not to show rivers, lakes, country borders, coastlines etc](https://plotly.com/python/map-configuration/).
+If we create a figure with [a `scattergeo` trace](../scatter-plots-on-maps/) instead, however, Plotly.js will fill in a totally different set of objects in `layout`, corresponding to [a `geo` subplot, with all of its defaults for whether or not to show rivers, lakes, country borders, coastlines etc](https://plotly.com/python/map-configuration/).
 
 ```python
 import plotly.graph_objects as go
@@ -168,7 +168,7 @@ print(full_fig.layout.geo)
 
 ### Reference
 
-You can learn more about [all the available attributes in the plotly figure schema](/python/reference/) (and read about its [high-level structure](/python/figure-structure/)) or about [all the classes and functions in the `plotly` module](/python-api-reference/).
+You can learn more about [all the available attributes in the plotly figure schema](../reference/) (and read about its [high-level structure](../figure-structure/)) or about [all the classes and functions in the `plotly` module](/python-api-reference/).
 
 ```python
 

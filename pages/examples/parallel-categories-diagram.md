@@ -39,7 +39,7 @@ The parallel categories diagram (also known as parallel sets or alluvial diagram
 
 Combinations of category rectangles across dimensions are connected by ribbons, where the height of the ribbon corresponds to the relative frequency of occurrence of the combination of categories in the data set.
 
-For other representations of multivariate data, also see [parallel coordinates](/python/parallel-coordinates-plot/), [radar charts](/python/radar-chart/) and [scatterplot matrix (SPLOM)](/python/splom/). A visually-similar but more generic type of visualization is the [sankey diagrams](/python/sankey-diagram/).
+For other representations of multivariate data, also see [parallel coordinates](../parallel-coordinates-plot/), [radar charts](../radar-chart/) and [scatterplot matrix (SPLOM)](../splom/). A visually-similar but more generic type of visualization is the [sankey diagrams](../sankey-diagram/).
 
 #### Basic Parallel Category Diagram with plotly.express
 

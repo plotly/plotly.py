@@ -65,7 +65,7 @@ There are three common conventions for storing column-oriented data, usually in 
 
 * **long-form data** has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
 * **wide-form data** has one row per value of one of the first variable, and one column per value of the second variable. This is suitable for storing and displaying 2-dimensional data.
-* **mixed-form data** is a hybrid of long-form and wide-form data, with one row per value of one variable, and some columns representing values of another, and some columns representing more variables. See the [wide-form documentation](/python/wide-form/) for examples of how to use Plotly Express to visualize this kind of data.
+* **mixed-form data** is a hybrid of long-form and wide-form data, with one row per value of one variable, and some columns representing values of another, and some columns representing more variables. See the [wide-form documentation](../wide-form/) for examples of how to use Plotly Express to visualize this kind of data.
 
 Every Plotly Express function can operate on long-form data (other than `px.imshow` which operates only on wide-form input), and in addition, the following 2D-Cartesian functions can operate on wide-form and mixed-form data: `px.scatter`, `px.line`, `px.area`, `px.bar`, `px.histogram`, `px.violin`, `px.box`, `px.strip`, `px.funnel`, `px.density_heatmap` and `px.density_contour`.
 
@@ -101,7 +101,7 @@ fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Fo
 fig.show()
 ```
 
-You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively, and this is also reflected in the hoverlabel text. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, or [you can use a data frame with named row- and column-indexes](/python/wide-form/). You can [rename these labels with the `labels` argument](/python/styling-plotly-express/):
+You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively, and this is also reflected in the hoverlabel text. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, or [you can use a data frame with named row- and column-indexes](../wide-form/). You can [rename these labels with the `labels` argument](../styling-plotly-express/):
 
 ```python
 import plotly.express as px
@@ -112,7 +112,7 @@ fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Fo
 fig.show()
 ```
 
-Many more examples of wide-form and messy data input can be found in our [detailed wide-form support documentation](/python/wide-form/).
+Many more examples of wide-form and messy data input can be found in our [detailed wide-form support documentation](../wide-form/).
 
 
 ## Dataframe Input
@@ -130,7 +130,7 @@ PySpark dataframes are also supported and are converted to pandas dataframes int
 #### Additional Dependencies Required
 
 - Plotly Express requires NumPy. You can install it with `pip install numpy` if it's not installed by the dataframe library you are using.
-- To use [trendlines](/python/linear-fits/), you'll also need to have pandas installed.
+- To use [trendlines](../linear-fits/), you'll also need to have pandas installed.
 - To use PySpark dataframes, you'll need to have pandas installed. To use dataframes that support the dataframe interchange protocol, you'll need to have PyArrow installed.
 
 ### Example: Using a Pandas DataFrame with `px.bar`
@@ -217,7 +217,7 @@ fig = px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8])
 fig.show()
 ```
 
-List arguments can also be passed in as a list of lists, which triggers [wide-form data processing](/python/wide-form/), with the downside that the resulting traces will need to be manually renamed via `fig.data[<n>].name = "name"`.
+List arguments can also be passed in as a list of lists, which triggers [wide-form data processing](../wide-form/), with the downside that the resulting traces will need to be manually renamed via `fig.data[<n>].name = "name"`.
 
 ```python
 import plotly.express as px

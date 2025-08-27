@@ -35,9 +35,9 @@ jupyter:
 
 ### Time Series using Axes of type `date`
 
-Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`, `px.bar` etc) or `plotly.graph_objects` charts objects (`go.Scatter`, `go.Bar` etc). For more examples of such charts, see the documentation of [line and scatter plots](https://plotly.com/python/line-and-scatter/) or [bar charts](/python/bar-charts/).
+Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`, `px.bar` etc) or `plotly.graph_objects` charts objects (`go.Scatter`, `go.Bar` etc). For more examples of such charts, see the documentation of [line and scatter plots](https://plotly.com/python/line-and-scatter/) or [bar charts](../bar-charts/).
 
-For financial applications, Plotly can also be used to create [Candlestick charts](/python/candlestick-charts/) and [OHLC charts](/python/ohlc-charts/), which default to date axes.
+For financial applications, Plotly can also be used to create [Candlestick charts](../candlestick-charts/) and [OHLC charts](../ohlc-charts/), which default to date axes.
 
 Plotly auto-sets the axis type to a date format when the corresponding data are either ISO-formatted date strings or if they're a [date pandas column](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) or [datetime NumPy array](https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html).
 
@@ -90,7 +90,7 @@ fig = px.bar(df, x=df.index, y="GOOG")
 fig.show()
 ```
 
-Or this [facetted](/python/facet-plots/) area plot:
+Or this [facetted](../facet-plots/) area plot:
 
 ```python
 import plotly.express as px
@@ -106,7 +106,7 @@ By default, the tick labels (and optional ticks) are associated with a specific 
 
 Date axis tick labels have the special property that any portion after the first instance of `'\n'` in `tickformat` will appear on a second line only once per unique value, as with the year numbers in the example below. To have the year number appear on every tick label, `'<br>'` should be used instead of `'\n'`.
 
-Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](/python/hover-text-and-formatting/) to something narrower like the actual date, as below.
+Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](../hover-text-and-formatting/) to something narrower like the actual date, as below.
 
 ```python
 import plotly.express as px
@@ -190,7 +190,7 @@ fig.show()
 
 ### Summarizing Time-series Data with Histograms
 
-Plotly [histograms](/python/histograms/) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
+Plotly [histograms](../histograms/) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
 
 ```python
 import plotly.express as px

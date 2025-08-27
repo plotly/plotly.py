@@ -35,11 +35,11 @@ jupyter:
 
 ### Overview
 
-Marginal distribution plots are small subplots above or to the right of a main plot, which show the distribution of data along only one dimension. Marginal distribution plot capabilities are built into various Plotly Express functions such as `scatter` and `histogram`. [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+Marginal distribution plots are small subplots above or to the right of a main plot, which show the distribution of data along only one dimension. Marginal distribution plot capabilities are built into various Plotly Express functions such as `scatter` and `histogram`. [Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 ### Scatter Plot Marginals
 
-The `marginal_x` and `marginal_y` arguments accept one of `"histogram"`, `"rug"`, `"box"`, or `"violin"` (see also how to create [histograms](/python/histograms/), [box plots](/python/box-plots/) and [violin plots](/python/violin-plots/) as the main figure). 
+The `marginal_x` and `marginal_y` arguments accept one of `"histogram"`, `"rug"`, `"box"`, or `"violin"` (see also how to create [histograms](../histograms/), [box plots](../box-plots/) and [violin plots](../violin-plots/) as the main figure). 
 
 Marginal plots are linked to the main plot: try zooming or panning on the main plot.
 
@@ -95,7 +95,7 @@ fig.show()
 
 ### Marginal Plots on Histograms
 
-[Histograms](/python/histograms/) are often used to show the distribution of a variable, and they also support marginal plots in Plotly Express, with the `marginal` argument:
+[Histograms](../histograms/) are often used to show the distribution of a variable, and they also support marginal plots in Plotly Express, with the `marginal` argument:
 
 ```python
 import plotly.express as px
@@ -130,7 +130,7 @@ fig.show()
 
 ### Marginal Plots and Facets
 
-Marginal plots can be used in conjunction with [Plotly Express facets](/python/facet-plots/) so long as they go along different directions: 
+Marginal plots can be used in conjunction with [Plotly Express facets](../facet-plots/) so long as they go along different directions: 
 
 ```python
 import plotly.express as px

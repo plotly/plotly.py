@@ -35,9 +35,9 @@ jupyter:
 
 ### Multiple Y Axes and Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
-> *Note*: At this time, Plotly Express does not support multiple Y axes on a single figure. To make such a figure, use the [`make_subplots()`](/python/subplots/) function in conjunction with [graph objects](/python/graph-objects/) as documented below.
+> *Note*: At this time, Plotly Express does not support multiple Y axes on a single figure. To make such a figure, use the [`make_subplots()`](../subplots/) function in conjunction with [graph objects](../graph-objects/) as documented below.
 
 
 #### Two Y Axes
@@ -441,4 +441,4 @@ fig.show()
 ```
 
 #### Reference
-All of the y-axis properties are found here: https://plotly.com/python/reference/layout/yaxis/.  For more information on creating subplots see the [Subplots in Python](/python/subplots/) section.
+All of the y-axis properties are found here: https://plotly.com/python/reference/layout/yaxis/.  For more information on creating subplots see the [Subplots in Python](../subplots/) section.

@@ -38,7 +38,7 @@ jupyter:
 
 Plotly.py 6.1 introduces support for Kaleido v1, which [improves static image generation](https://plotly.com/blog/kaleido-the-next-generation/) for Plotly figures.
 
-While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for [Orca](/python/orca-management/). Support for Orca and earlier versions of Kaleido will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate your Plotly code to Kaleido v1 and outlines the changes in functionality.
+While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for [Orca](../orca-management/). Support for Orca and earlier versions of Kaleido will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate your Plotly code to Kaleido v1 and outlines the changes in functionality.
 
 To migrate from either Orca or Kaleido v0, first install the latest Kaleido with:
 
@@ -50,7 +50,7 @@ pip install --upgrade kaleido
 
 Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome as part of the Kaleido package. Kaleido v1 does not include Chrome; instead, it looks for a compatible version of Chrome (or Chromium) already installed on the machine on which it's running.
 
-See the [Chrome section](/python/static-image-export#chrome) on the Static Image Export page for more details on Chome and Kaleido.
+See the [Chrome section](../static-image-export#chrome) on the Static Image Export page for more details on Chome and Kaleido.
 
 ## Engine Parameter
 
@@ -79,5 +79,5 @@ If you are migrating from Orca, the following config settings do not apply to Ka
 
 ## Multiple Image Export
 
-Plotly.py 6.1 includes a `write_images` function (`plotly.io.write_images`), which we recommend over `write_image` when exporting more than one figure. Calling `write_images` with a list of figures (or dicts representing figures) to export provides better performance than multiple calls with `write_image`. See the [Write Multiple Images](/python/static-image-export#write-multiple-images) section for more details.
+Plotly.py 6.1 includes a `write_images` function (`plotly.io.write_images`), which we recommend over `write_image` when exporting more than one figure. Calling `write_images` with a list of figures (or dicts representing figures) to export provides better performance than multiple calls with `write_image`. See the [Write Multiple Images](../static-image-export#write-multiple-images) section for more details.
 <!-- #endregion -->

@@ -34,7 +34,7 @@ jupyter:
 
 ### Adjusting Height, Width, & Margins with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -69,7 +69,7 @@ IFrame(snippet_url + 'setting-graph-size', width='100%', height=1200)
 
 ### Adjusting Height, Width, & Margins With Graph Objects
 
-[Graph objects](/python/graph-objects/) are the low-level building blocks of figures which you can use instead of Plotly Express for greater control.
+[Graph objects](../graph-objects/) are the low-level building blocks of figures which you can use instead of Plotly Express for greater control.
 
 ```python
 import plotly.graph_objects as go

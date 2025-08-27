@@ -49,7 +49,7 @@ Using Scikit-learn, we first generate synthetic data that form the shape of a mo
 
 In the graph, we display all the negative labels as squares, and positive labels as circles. We differentiate the training and test set by adding a dot to the center of test data.
 
-In this example, we will use [graph objects](/python/graph-objects/), Plotly's low-level API for building figures.
+In this example, we will use [graph objects](../graph-objects/), Plotly's low-level API for building figures.
 
 ```python
 import plotly.graph_objects as go
@@ -97,7 +97,7 @@ fig.show()
 
 Now, we train the kNN model on the same training data displayed in the previous graph. Then, we predict the confidence score of the model for each of the data points in the test set. We will use shapes to denote the true labels, and the color will indicate the confidence of the model for assign that score.
 
-In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures. Notice that `px.scatter` only require 1 function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `y_score` output by our kNN model.
+In this example, we will use [Plotly Express](../plotly-express/), Plotly's high-level API for building figures. Notice that `px.scatter` only require 1 function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `y_score` output by our kNN model.
 
 ```python
 import plotly.express as px
@@ -142,7 +142,7 @@ Instead of predicting the conference for the test set, we can predict the confid
 
 Then, for each of those points, we will use our model to give a confidence score, and plot it with a [contour plot](https://plotly.com/python/contour-plots/).
 
-In this example, we will use [graph objects](/python/graph-objects/), Plotly's low-level API for building figures.
+In this example, we will use [graph objects](../graph-objects/), Plotly's low-level API for building figures.
 
 ```python
 import plotly.graph_objects as go
@@ -285,7 +285,7 @@ IFrame(snippet_url + 'knn-classification', width='100%', height=1200)
 
 It is also possible to visualize the prediction confidence of the model using [heatmaps](https://plotly.com/python/heatmaps/). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
 
-In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
+In this example, we will use [Plotly Express](../plotly-express/), Plotly's high-level API for building figures.
 
 ```python
 import plotly.express as px

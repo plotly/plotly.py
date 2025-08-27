@@ -41,7 +41,7 @@ A scatterplot matrix is a matrix associated to n numerical arrays (data variable
 
 Here we show the Plotly Express function `px.scatter_matrix` to plot the scatter matrix for the columns of the dataframe. By default, all columns are considered.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -101,7 +101,7 @@ fig.show()
 
 ### Scatter matrix (splom) with go.Splom
 
-If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Splom` class from `plotly.graph_objects`](/python/graph-objects/). All its parameters are documented in the reference page https://plotly.com/python/reference/splom/.
+If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Splom` class from `plotly.graph_objects`](../graph-objects/). All its parameters are documented in the reference page https://plotly.com/python/reference/splom/.
 
 The Plotly splom trace implementation for the scatterplot matrix does not require to set $x=Xi$ , and $y=Xj$, for each scatter plot. All arrays, $X_1,X_2,…,X_n$ , are passed once, through a list of dicts called dimensions, i.e. each array/variable represents a dimension.
 
@@ -349,7 +349,7 @@ fig.show()
 
 *New in 5.21*
 
-Set `hoversubplots='axis'` with `hovermode` set to `x`, `x unified`, `y`, or `y unified` for hover effects to appear across a column or row. For more on hover effects, see the [Hover Text and Formatting](/python/hover-text-and-formatting/) page.
+Set `hoversubplots='axis'` with `hovermode` set to `x`, `x unified`, `y`, or `y unified` for hover effects to appear across a column or row. For more on hover effects, see the [Hover Text and Formatting](../hover-text-and-formatting/) page.
 
 ```python
 import plotly.graph_objects as go

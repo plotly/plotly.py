@@ -33,13 +33,13 @@ jupyter:
     thumbnail: thumbnail/radar.gif
 ---
 
-A [Radar Chart](https://en.wikipedia.org/wiki/Radar_chart) (also known as a spider plot or star plot) displays multivariate data in the form of a two-dimensional chart of quantitative variables represented on axes originating from the center. The relative position and angle of the axes is typically uninformative. It is equivalent to a [parallel coordinates plot](/python/parallel-coordinates-plot/) with the axes arranged radially.
+A [Radar Chart](https://en.wikipedia.org/wiki/Radar_chart) (also known as a spider plot or star plot) displays multivariate data in the form of a two-dimensional chart of quantitative variables represented on axes originating from the center. The relative position and angle of the axes is typically uninformative. It is equivalent to a [parallel coordinates plot](../parallel-coordinates-plot/) with the axes arranged radially.
 
-For a Radar Chart, use a [polar chart](/python/polar-chart/) with categorical angular variables, with `px.line_polar`, or with `go.Scatterpolar`. See [more examples of polar charts](/python/polar-chart/).
+For a Radar Chart, use a [polar chart](../polar-chart/) with categorical angular variables, with `px.line_polar`, or with `go.Scatterpolar`. See [more examples of polar charts](../polar-chart/).
 
 #### Radar Chart with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 Use `line_close=True` for closed lines.
 

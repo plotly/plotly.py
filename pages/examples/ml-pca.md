@@ -52,7 +52,7 @@ First, let's plot all the features and see how the `species` in the Iris dataset
 
 In our example, we are plotting all 4 features from the Iris dataset, thus we can see how `sepal_width` is compared against `sepal_length`, then against `petal_width`, and so forth. Keep in mind how some pairs of features can more easily separate different species.
 
-In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
+In this example, we will use [Plotly Express](../plotly-express/), Plotly's high-level API for building figures.
 
 ```python
 import plotly.express as px
@@ -82,7 +82,7 @@ Now, we apply `PCA` the same dataset, and retrieve **all** the components. We us
 
 The importance of explained variance is demonstrated in the example below. The subplot between PC3 and PC4 is clearly unable to separate each class, whereas the subplot between PC1 and PC2 shows a clear separation between each species.
 
-In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
+In this example, we will use [Plotly Express](../plotly-express/), Plotly's high-level API for building figures.
 
 ```python
 import plotly.express as px

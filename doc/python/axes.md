@@ -33,30 +33,30 @@ jupyter:
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explain how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](/python/reference/layout/xaxis/).
+This tutorial explain how to set the properties of [2-dimensional Cartesian axes](../figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](../reference/layout/xaxis/) and [`go.layout.YAxis`](../reference/layout/xaxis/).
 
 Other kinds of subplots and axes are described in other tutorials:
 
-- [3D axes](/python/3d-axes) The axis object is [`go.layout.Scene`](/python/reference/layout/scene/)
-- [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/layout/polar/)
-- [Ternary axes](/python/ternary-plots). The axis object is [`go.layout.Ternary`](/python/reference/layout/ternary/)
-- [Geo axes](/python/map-configuration/). The axis object is [`go.layout.Geo`](/python/reference/layout/geo/)
-- [Map axes](/python/tile-map-layers/). The axis object is [`go.layout.Map`](/python/reference/layout/map/)
-- [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/layout/coloraxis/).
+- [3D axes](../3d-axes) The axis object is [`go.layout.Scene`](../reference/layout/scene/)
+- [Polar axes](../polar-chart/). The axis object is [`go.layout.Polar`](../reference/layout/polar/)
+- [Ternary axes](../ternary-plots). The axis object is [`go.layout.Ternary`](../reference/layout/ternary/)
+- [Geo axes](../map-configuration/). The axis object is [`go.layout.Geo`](../reference/layout/geo/)
+- [Map axes](../tile-map-layers/). The axis object is [`go.layout.Map`](../reference/layout/map/)
+- [Color axes](../colorscales/). The axis object is [`go.layout.Coloraxis`](../reference/layout/coloraxis/).
 
-**See also** the tutorials on [facet plots](/python/facet-plots/), [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
+**See also** the tutorials on [facet plots](../facet-plots/), [subplots](../subplots) and [multiple axes](../multiple-axes/).
 
 ### 2-D Cartesian Axis Types and Auto-Detection
 
 The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
 - `'linear'` as described in this page
-- `'log'` (see the [log plot tutorial](/python/log-plot/))
-- `'date'` (see the [tutorial on timeseries](/python/time-series/))
-- `'category'` (see the [categorical axes tutorial](/python/categorical-axes/))
-- `'multicategory'` (see the [categorical axes tutorial](/python/categorical-axes/))
+- `'log'` (see the [log plot tutorial](../log-plot/))
+- `'date'` (see the [tutorial on timeseries](../time-series/))
+- `'category'` (see the [categorical axes tutorial](../categorical-axes/))
+- `'multicategory'` (see the [categorical axes tutorial](../categorical-axes/))
 
-The axis type is auto-detected by looking at data from the first [trace](/python/figure-structure/) linked to this axis:
+The axis type is auto-detected by looking at data from the first [trace](../figure-structure/) linked to this axis:
 
 * First check for `multicategory`, then `date`, then `category`, else default to `linear` (`log` is never automatically selected)
 * `multicategory` is just a shape test: is the array nested?
@@ -86,14 +86,14 @@ The different groups of Cartesian axes properties are
 - range of the axis
 - domain of the axis
 
-The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](/python/categorical-axes/) and [axes of type `date`](/python/time-series/).
+The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](../categorical-axes/) and [axes of type `date`](../time-series/).
 
 
 #### Set and Style Axes Title Labels
 
 ##### Set axis title text with Plotly Express
 
-Axis titles are automatically set to the column names when [using Plotly Express with a data frame as input](/python/px-arguments/).
+Axis titles are automatically set to the column names when [using Plotly Express with a data frame as input](../px-arguments/).
 
 ```python
 import plotly.express as px
@@ -102,7 +102,7 @@ fig = px.scatter(df, x="total_bill", y="tip", color="sex")
 fig.show()
 ```
 
-Axis titles (and [legend titles](/python/legend/)) can also be overridden using the `labels` argument of Plotly Express functions:
+Axis titles (and [legend titles](../legend/)) can also be overridden using the `labels` argument of Plotly Express functions:
 
 ```python
 import plotly.express as px

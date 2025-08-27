@@ -43,11 +43,11 @@ In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is represe
 Alternatives to histogram plots for visualizing distributions include [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
 
 > If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
-bar, go to the [Bar Chart tutorial](/python/bar-charts/).
+bar, go to the [Bar Chart tutorial](../bar-charts/).
 
 ## Histograms with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 <!-- #endregion -->
 
 ```python
@@ -190,7 +190,7 @@ fig.show()
 ```
 *New in v5.0*
 
-Histograms afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
+Histograms afford the use of [patterns (also known as hatching or texture)](../pattern-hatching-texture/) in addition to color:
 
 ```python
 import plotly.express as px
@@ -227,7 +227,7 @@ fig.show()
 
 ## Histograms with go.Histogram
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](/python/graph-objects/). All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](../graph-objects/). All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.
 
 ### Basic Histogram
 
@@ -450,7 +450,7 @@ fig.show()
 
 ### See also: Bar Charts
 
-If you want to display information about the individual items within each histogram bar, then create a stacked bar chart with hover information as shown below. Note that this is not technically the histogram chart type, but it will have a similar effect as shown below by comparing the output of `px.histogram` and `px.bar`. For more information, see the [tutorial on bar charts](/python/bar-charts/).
+If you want to display information about the individual items within each histogram bar, then create a stacked bar chart with hover information as shown below. Note that this is not technically the histogram chart type, but it will have a similar effect as shown below by comparing the output of `px.histogram` and `px.bar`. For more information, see the [tutorial on bar charts](../bar-charts/).
 
 ```python
 import plotly.express as px

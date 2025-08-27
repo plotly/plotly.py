@@ -47,11 +47,11 @@ e.g. `"Viridis_r"` or `plotly.colors.sequential.Viridis_r`.
 
 The `plotly.colours` module is also available under `plotly.express.colors` so you can refer to it as `px.colors`.
 
-When using continuous color scales, you will often want to [configure various aspects of its range and colorbar](/python/colorscales/).
+When using continuous color scales, you will often want to [configure various aspects of its range and colorbar](../colorscales/).
 
 ### Discrete Color Sequences
 
-Plotly also comes with some built-in [discrete color sequences](/python/discrete-color/) which are _not intended_ to be used with the `color_continuous_scale` argument as they are not designed for interpolation to occur between adjacent colors.
+Plotly also comes with some built-in [discrete color sequences](../discrete-color/) which are _not intended_ to be used with the `color_continuous_scale` argument as they are not designed for interpolation to occur between adjacent colors.
 
 ### Named Built-In Continuous Color Scales
 
@@ -140,7 +140,7 @@ It is intentionally left in for backwards-compatibility reasons.
 A collection of predefined diverging color scales is provided in the `plotly.colors.diverging` module.
 Diverging color scales are appropriate for continuous data that has a natural midpoint
 other otherwise informative special value, such as 0 altitude, or the boiling point
-of a liquid. These scales are intended to be used when [explicitly setting the midpoint of the scale](/python/colorscales/#setting-the-midpoint-of-a-color-range-for-a-diverging-color-scale).
+of a liquid. These scales are intended to be used when [explicitly setting the midpoint of the scale](../colorscales/#setting-the-midpoint-of-a-color-range-for-a-diverging-color-scale).
 
 Here are all the built-in scales in the `plotly.colors.diverging` module:
 

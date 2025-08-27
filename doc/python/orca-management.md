@@ -33,12 +33,12 @@ jupyter:
     thumbnail: thumbnail/orca-management.png
 ---
 
-> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](/python/static-image-export/) for details on using Kaleido for static image generation.
+> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](../static-image-export/) for details on using Kaleido for static image generation.
 
 ### Overview
 This section covers the lower-level details of how plotly.py can use orca to perform static image generation.
 
-Please refer to the [Static Image Export](/python/static-image-export/) section for general information on creating static images from plotly.py figures.
+Please refer to the [Static Image Export](../static-image-export/) section for general information on creating static images from plotly.py figures.
 
 ### What is orca?
 Orca is an [Electron](https://electronjs.org/) application that inputs plotly figure specifications and converts them into static images.  Orca can run as a command-line utility or as a long-running server process. In order to provide the fastest possible image export experience, plotly.py launches orca in server mode, and communicates with it over a local port. See https://github.com/plotly/orca for more information.

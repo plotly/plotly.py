@@ -34,24 +34,24 @@ jupyter:
     thumbnail: thumbnail/heatmap.jpg
 ---
 
-The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](/python/tile-density-heatmaps/).
+The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](../tile-density-heatmaps/).
 
 Plotly supports two different types of colored-tile heatmaps:
 
 1. **Matrix Heatmaps** accept a 2-dimensional matrix or array of data and visualizes it directly. This type of heatmap is the subject of this page.
-2. **Density Heatmaps** accept data as a list and visualizes aggregated quantities like counts or sums of this data. Please refer to the [2D Histogram documentation](/python/2D-Histogram/) for this kind of figure.
+2. **Density Heatmaps** accept data as a list and visualizes aggregated quantities like counts or sums of this data. Please refer to the [2D Histogram documentation](../2D-Histogram/) for this kind of figure.
 
 
 ### Heatmaps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.imshow`, each value of the input array or data frame is represented as a heatmap pixel.
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/). With `px.imshow`, each value of the input array or data frame is represented as a heatmap pixel.
 
 
 <!-- #region -->
-The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as supported [DataFrame objects](/python/px-arguments#supported-dataframes).
+The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as supported [DataFrame objects](../px-arguments#supported-dataframes).
 
 
-> For more examples using `px.imshow`, including examples of faceting and animations, as well as full-color image display, see the [the `imshow` documentation page](/python/imshow).
+> For more examples using `px.imshow`, including examples of faceting and animations, as well as full-color image display, see the [the `imshow` documentation page](../imshow).
 <!-- #endregion -->
 
 ```python
@@ -158,7 +158,7 @@ fig.show()
 
 ### Basic Heatmap with `plotly.graph_objects`
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Heatmap` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Heatmap` class from `plotly.graph_objects`](../graph-objects/).
 
 ```python
 import plotly.graph_objects as go
@@ -290,7 +290,7 @@ fig.show()
 ### Heatmap and datashader
 
 Arrays of rasterized values build by datashader can be visualized using
-plotly's heatmaps, as shown in the [plotly and datashader tutorial](/python/datashader/).
+plotly's heatmaps, as shown in the [plotly and datashader tutorial](../datashader/).
 
 #### Reference
 See [function reference for `px.(imshow)`](https://plotly.com/python-api-reference/generated/plotly.express.imshow) or https://plotly.com/python/reference/heatmap/ for more information and chart attribute options!

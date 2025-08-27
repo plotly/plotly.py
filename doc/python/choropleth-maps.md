@@ -33,13 +33,13 @@ jupyter:
     thumbnail: thumbnail/choropleth.jpg
 ---
 
-A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps**](/python/tile-county-choropleth).
+A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps**](../tile-county-choropleth).
 
 Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth` function or the lower-level `go.Choropleth` graph object.
 
 #### Base Map Configuration
 
-Plotly figures made with [Plotly Express](/python/plotly-express/) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](/python/graph-objects/) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
+Plotly figures made with [Plotly Express](../plotly-express/) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](../graph-objects/) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](../map-configuration/) onto which data is plotted.
 
 ### Introduction: main parameters for choropleth outline maps
 
@@ -56,7 +56,7 @@ The GeoJSON data is passed to the `geojson` argument, and the data is passed int
 
 ### Choropleth Map with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 #### GeoJSON with `feature.id`
 
@@ -84,7 +84,7 @@ df.head()
 
 ### Choropleth map using GeoJSON
 
-**Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](/python/map-configuration/) for more information on scopes.
+**Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](../map-configuration/) for more information on scopes.
 
 ```python
 from urllib.request import urlopen
@@ -126,7 +126,7 @@ print(geojson["features"][0]["properties"])
 
 To use them together, we set `locations` to `district` and `featureidkey` to `"properties.district"`. The `color` is set to the number of votes by the candidate named Bergeron.
 
-**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for more information on projections and bounds.
+**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](../map-configuration/) for more information on projections and bounds.
 
 ```python
 import plotly.express as px
@@ -161,9 +161,9 @@ IFrame(snippet_url + 'choropleth-maps', width='100%', height=1200)
 
 ### Discrete Colors
 
-In addition to [continuous colors](/python/colorscales/), we can [discretely-color](/python/discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
+In addition to [continuous colors](../colorscales/), we can [discretely-color](../discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
 
-**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for more information on projections and bounds.
+**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](../map-configuration/) for more information on projections and bounds.
 
 ```python
 import plotly.express as px
@@ -351,7 +351,7 @@ fig.show()
 
 #### County Choropleth Figure Factory
 
-Plotly also includes a [legacy "figure factory" for creating US county-level choropleth maps](/python/county-choropleth/).
+Plotly also includes a [legacy "figure factory" for creating US county-level choropleth maps](../county-choropleth/).
 
 ```python
 import plotly.figure_factory as ff

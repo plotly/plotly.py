@@ -35,9 +35,9 @@ jupyter:
 
 ### Mixed Subplots and Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
-> *Note*: At this time, Plotly Express does not support creating figures with arbitrary mixed subplots i.e. figures with subplots of different types. Plotly Express only supports [facet plots](/python/facet-plots/) and [marginal distribution subplots](/python/marginal-plots/). To make a figure with mixed subplots, use the [`make_subplots()`](/python/subplots/) function in conjunction with [graph objects](/python/graph-objects/) as documented below.
+> *Note*: At this time, Plotly Express does not support creating figures with arbitrary mixed subplots i.e. figures with subplots of different types. Plotly Express only supports [facet plots](../facet-plots/) and [marginal distribution subplots](../marginal-plots/). To make a figure with mixed subplots, use the [`make_subplots()`](../subplots/) function in conjunction with [graph objects](../graph-objects/) as documented below.
 
 
 #### Mixed Subplot

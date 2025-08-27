@@ -37,7 +37,7 @@ Sunburst plots visualize hierarchical data spanning outwards radially from root 
 
 ### Basic Sunburst Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 With `px.sunburst`, each row of the DataFrame is represented as a sector of the sunburst.
 
@@ -105,7 +105,7 @@ fig.show()
 
 ### Using an explicit mapping for discrete colors
 
-For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+For more information about discrete colors, see the [dedicated page](../discrete-color).
 
 ```python
 import plotly.express as px
@@ -138,7 +138,7 @@ fig.show()
 
 ### Basic Sunburst Plot with go.Sunburst
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Sunburst` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Sunburst` class from `plotly.graph_objects`](../graph-objects/).
 
 Main arguments:
 
@@ -304,7 +304,7 @@ fig.show()
 
 *New in 5.15*
 
-Sunburst charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a different pattern to each level of the hierarchy. We also specify the `solidity` of the pattern.
+Sunburst charts support [patterns](../pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a different pattern to each level of the hierarchy. We also specify the `solidity` of the pattern.
 
 ```python
 import plotly.graph_objects as go

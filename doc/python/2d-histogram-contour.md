@@ -36,11 +36,11 @@ jupyter:
 
 ## 2D Histogram Contours or Density Contours
 
-A 2D histogram contour plot, also known as a density contour plot, is a 2-dimensional generalization of a [histogram](/python/histograms/) which resembles a [contour plot](/python/contour-plots/) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the value to be used to compute contours. This kind of visualization (and the related [2D histogram, or density heatmap](/python/2d-histogram/)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](/python/line-and-scatter/) would result in points overlapping each other and hiding patterns.
+A 2D histogram contour plot, also known as a density contour plot, is a 2-dimensional generalization of a [histogram](../histograms/) which resembles a [contour plot](../contour-plots/) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the value to be used to compute contours. This kind of visualization (and the related [2D histogram, or density heatmap](../2d-histogram/)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](../line-and-scatter/) would result in points overlapping each other and hiding patterns.
 
 ## Density Contours with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The Plotly Express function `density_contour()` can be used to produce density contours.
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/). The Plotly Express function `density_contour()` can be used to produce density contours.
 
 ```python
 import plotly.express as px
@@ -50,7 +50,7 @@ fig = px.density_contour(df, x="total_bill", y="tip")
 fig.show()
 ```
 
-Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](/python/histograms/). Other allowable values are `violin`, `box` and `rug`.
+Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](../histograms/). Other allowable values are `violin`, `box` and `rug`.
 
 ```python
 import plotly.express as px
@@ -60,7 +60,7 @@ fig = px.density_contour(df, x="total_bill", y="tip", marginal_x="histogram", ma
 fig.show()
 ```
 
-Density contours can also be [faceted](/python/facet-plots/) and [discretely colored](/python/discrete-color/):
+Density contours can also be [faceted](../facet-plots/) and [discretely colored](../discrete-color/):
 
 ```python
 import plotly.express as px
@@ -70,7 +70,7 @@ fig = px.density_contour(df, x="total_bill", y="tip", facet_col="sex", color="sm
 fig.show()
 ```
 
-Plotly Express density contours can be [continuously-colored](/python/colorscales/) and labeled:
+Plotly Express density contours can be [continuously-colored](../colorscales/) and labeled:
 
 ```python
 import plotly.express as px
@@ -95,7 +95,7 @@ fig.show()
 
 ### 2D Histograms with Graph Objects
 
-To build this kind of figure with [graph objects](/python/graph-objects/) without using Plotly Express, we can use the `go.Histogram2d` class.
+To build this kind of figure with [graph objects](../graph-objects/) without using Plotly Express, we can use the `go.Histogram2d` class.
 
 #### Basic 2D Histogram Contour
 

@@ -190,7 +190,7 @@ fig.show()
 
 ### Hovertemplate and customdata of Sankey diagrams
 
-Links and nodes have their own hovertemplate, in which link- or node-specific attributes can be displayed. To add more data to links and nodes, it is possible to use the `customdata` attribute of `link` and `nodes`, as in the following example. For more information about hovertemplate and customdata, please see the [tutorial on hover text](/python/hover-text-and-formatting/).
+Links and nodes have their own hovertemplate, in which link- or node-specific attributes can be displayed. To add more data to links and nodes, it is possible to use the `customdata` attribute of `link` and `nodes`, as in the following example. For more information about hovertemplate and customdata, please see the [tutorial on hover text](../hover-text-and-formatting/).
 
 ```python
 import plotly.graph_objects as go

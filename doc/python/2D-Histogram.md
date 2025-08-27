@@ -38,11 +38,11 @@ jupyter:
 
 ## 2D Histograms or Density Heatmaps
 
-A 2D histogram, also known as a density heatmap, is the 2-dimensional generalization of a [histogram](/python/histograms/) which resembles a [heatmap](/python/heatmaps/) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the color of the tile representing the bin. This kind of visualization (and the related [2D histogram contour, or density contour](https://plotly.com/python/2d-histogram-contour/)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](/python/line-and-scatter/) would result in points overlapping each other and hiding patterns. For data sets of more than a few thousand points, a better approach than the ones listed here would be to [use Plotly with Datashader](/python/datashader/) to precompute the aggregations before displaying the data with Plotly.
+A 2D histogram, also known as a density heatmap, is the 2-dimensional generalization of a [histogram](../histograms/) which resembles a [heatmap](../heatmaps/) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the color of the tile representing the bin. This kind of visualization (and the related [2D histogram contour, or density contour](https://plotly.com/python/2d-histogram-contour/)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](../line-and-scatter/) would result in points overlapping each other and hiding patterns. For data sets of more than a few thousand points, a better approach than the ones listed here would be to [use Plotly with Datashader](../datashader/) to precompute the aggregations before displaying the data with Plotly.
 
 ## Density Heatmaps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The Plotly Express function `density_heatmap()` can be used to produce density heatmaps.
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/). The Plotly Express function `density_heatmap()` can be used to produce density heatmaps.
 
 ```python
 import plotly.express as px
@@ -52,7 +52,7 @@ fig = px.density_heatmap(df, x="total_bill", y="tip")
 fig.show()
 ```
 
-The number of bins can be controlled with `nbinsx` and `nbinsy` and the [color scale](/python/colorscales/) with `color_continuous_scale`.
+The number of bins can be controlled with `nbinsx` and `nbinsy` and the [color scale](../colorscales/) with `color_continuous_scale`.
 
 ```python
 import plotly.express as px
@@ -62,7 +62,7 @@ fig = px.density_heatmap(df, x="total_bill", y="tip", nbinsx=20, nbinsy=20, colo
 fig.show()
 ```
 
-Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](/python/histograms/). Other allowable values are `violin`, `box` and `rug`.
+Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](../histograms/). Other allowable values are `violin`, `box` and `rug`.
 
 ```python
 import plotly.express as px
@@ -72,7 +72,7 @@ fig = px.density_heatmap(df, x="total_bill", y="tip", marginal_x="histogram", ma
 fig.show()
 ```
 
-Density heatmaps can also be [faceted](/python/facet-plots/):
+Density heatmaps can also be [faceted](../facet-plots/):
 
 ```python
 import plotly.express as px
@@ -110,7 +110,7 @@ fig.show()
 
 ### 2D Histograms with Graph Objects
 
-To build this kind of figure using [graph objects](/python/graph-objects/) without using Plotly Express, we can use the `go.Histogram2d` class.
+To build this kind of figure using [graph objects](../graph-objects/) without using Plotly Express, we can use the `go.Histogram2d` class.
 
 
 ### 2D Histogram of a Bivariate Normal Distribution ###

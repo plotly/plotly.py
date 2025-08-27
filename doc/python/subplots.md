@@ -37,9 +37,9 @@ jupyter:
 
 ### Subplots and Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
-Plotly Express does not support arbitrary subplot capabilities, instead it supports [faceting by a given data dimension](/python/facet-plots/), and it also supports [marginal charts to display distribution information](/python/marginal-plots/).
+Plotly Express does not support arbitrary subplot capabilities, instead it supports [faceting by a given data dimension](../facet-plots/), and it also supports [marginal charts to display distribution information](../marginal-plots/).
 
 This page documents the usage of the lower-level `plotly.subplots` module and the `make_subplots` function it exposes to construct figures with arbitrary subplots. **Plotly Express faceting uses `make_subplots` internally** so adding traces to Plotly Express facets works just as documented here, with `fig.add_trace(..., row=<R>, col=<C>)`.
 

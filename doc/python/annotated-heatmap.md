@@ -38,7 +38,7 @@ jupyter:
 
 *New in v5.5*
 
-As of version 5.5.0 of `plotly`, the **recommended way to [display annotated heatmaps is to use `px.imshow()`](/python/heatmaps/)** rather than the now-deprecated `create_annotated_heatmap` figure factory documented below for historical reasons.
+As of version 5.5.0 of `plotly`, the **recommended way to [display annotated heatmaps is to use `px.imshow()`](../heatmaps/)** rather than the now-deprecated `create_annotated_heatmap` figure factory documented below for historical reasons.
 
 
 #### Basic Annotated Heatmap for z-annotations
@@ -62,7 +62,7 @@ fig.show()
 
 ### Deprecated Figure Factory
 
-The remaining examples show how to create Annotated Heatmaps with the deprecated `create_annotated_heatmap` [figure factory](/python/figure-factories/).
+The remaining examples show how to create Annotated Heatmaps with the deprecated `create_annotated_heatmap` [figure factory](../figure-factories/).
 
 
 #### Simple Annotated Heatmap

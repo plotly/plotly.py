@@ -192,7 +192,7 @@ fig.add_scatter(y=[4, 5, 6], mode="markers", name="forth")
 fig.show()
 ```
 
-Note that because we built the template with a list of 3 scatter trace [graph objects](/python/graph-objects/) (one each for the diamond, square, and circle symbols), the forth scatter trace in the figure cycles around and takes on the defaults specified in the first template trace (The diamond symbol).
+Note that because we built the template with a list of 3 scatter trace [graph objects](../graph-objects/) (one each for the diamond, square, and circle symbols), the forth scatter trace in the figure cycles around and takes on the defaults specified in the first template trace (The diamond symbol).
 
 #### Theming object tuple properties
 

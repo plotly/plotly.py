@@ -35,11 +35,11 @@ jupyter:
 
 ### Strip Charts with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 The `px.strip()` function will make strip charts using underlying `box` traces with the box hidden.
 
-See also [box plots](/python/box-plots/) and [violin plots](/python/violin/).
+See also [box plots](../box-plots/) and [violin plots](../violin/).
 
 ```python
 import plotly.express as px
@@ -49,7 +49,7 @@ fig = px.strip(df, x="total_bill", y="day")
 fig.show()
 ```
 
-Strip charts support [faceting](/python/facet-plots/) and [discrete color](/python/discrete-color/):
+Strip charts support [faceting](../facet-plots/) and [discrete color](../discrete-color/):
 
 ```python
 import plotly.express as px

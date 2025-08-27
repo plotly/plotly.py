@@ -35,7 +35,7 @@ jupyter:
     thumbnail: thumbnail/table.gif
 ---
 
-Tables can be created using a [`table` trace type](/python/table/), or by using a [figure factory](/python/figure-factories/) as detailed in this page.
+Tables can be created using a [`table` trace type](../table/), or by using a [figure factory](../figure-factories/) as detailed in this page.
 
 #### Simple Table
 

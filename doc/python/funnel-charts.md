@@ -30,7 +30,7 @@ Funnel charts are often used to represent data in different stages of a business
 
 ### Basic Funnel Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 With `px.funnel`, each row of the DataFrame is represented as a stage of the funnel.
 
@@ -60,7 +60,7 @@ fig.show()
 
 ### Basic Funnel Chart with graph_objects trace go.Funnel
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnel` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnel` class from `plotly.graph_objects`](../graph-objects/).
 
 ```python
 from plotly import graph_objects as go
@@ -138,7 +138,7 @@ fig.show()
 
 ### Basic Area Funnel Plot with go.Funnelarea
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnelarea` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnelarea` class from `plotly.graph_objects`](../graph-objects/).
 
 ```python
 from plotly import graph_objects as go
@@ -204,7 +204,7 @@ fig.show()
 
 *New in 5.15*
 
-Funnel area charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a pattern to the second stage of the funnel.
+Funnel area charts support [patterns](../pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a pattern to the second stage of the funnel.
 
 ```python
 from plotly import graph_objects as go

@@ -35,7 +35,7 @@ jupyter:
     thumbnail: thumbnail/static-image-export.png
 ---
 
-This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](/python/interactive-html-export/)
+This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](../interactive-html-export/)
 
 <!-- #region -->
 ## Install Dependencies
@@ -52,7 +52,7 @@ or with conda:
 $ conda install -c conda-forge python-kaleido
 ```
 
-It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](/python/orca-management/) page for more details.
+It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](../orca-management/) page for more details.
 
 ### Chrome
 

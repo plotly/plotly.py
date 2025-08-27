@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/error-cont.jpg
 ---
 
-Continuous error bands are a graphical representation of error or uncertainty as a shaded region around a main trace, rather than as discrete whisker-like error bars. They can be implemented in a manner similar to [filled area plots](/python/filled-area-plots/) using `scatter` traces with the `fill` attribute.
+Continuous error bands are a graphical representation of error or uncertainty as a shaded region around a main trace, rather than as discrete whisker-like error bars. They can be implemented in a manner similar to [filled area plots](../filled-area-plots/) using `scatter` traces with the `fill` attribute.
 
 #### Filling within a single trace
 

@@ -36,7 +36,7 @@ jupyter:
 
 #### Animated figures with Plotly Express
 
-Several [Plotly Express](/python/plotly-express/)  functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
+Several [Plotly Express](../plotly-express/)  functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
 
 Here is an example of an animated scatter plot created with Plotly Express. Note that you should always fix the `x_range` and `y_range` to ensure that your data remains visible throughout the animation.
 
@@ -94,7 +94,7 @@ fig.show()
 
 #### Animated figures with Graph Objects
 
-The remainder of this section describes the low-level [graph objects](/python/graph-objects/) API for constructing animated figures manually.
+The remainder of this section describes the low-level [graph objects](../graph-objects/) API for constructing animated figures manually.
 
 #### Frames
 

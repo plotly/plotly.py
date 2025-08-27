@@ -37,7 +37,7 @@ jupyter:
 
 ### Overview
 
-The [`plotly` Python library](/python/) is an interactive, [open-source](/python/is-plotly-free) plotting library that supports over 40 unique chart types covering a wide range of statistical, financial, geographic, scientific, and 3-dimensional use-cases.
+The [`plotly` Python library](../) is an interactive, [open-source](../is-plotly-free) plotting library that supports over 40 unique chart types covering a wide range of statistical, financial, geographic, scientific, and 3-dimensional use-cases.
 
 Built on top of the Plotly JavaScript library ([plotly.js](https://plotly.com/javascript/)), `plotly` enables Python users to create beautiful interactive web-based visualizations that can be displayed in Jupyter notebooks, saved to standalone HTML files, or served as part of pure Python-built web applications using Dash. The `plotly` Python library is sometimes referred to as "plotly.py" to differentiate it from the JavaScript library.
 
@@ -45,9 +45,9 @@ Thanks to deep integration with our [Kaleido](https://github.com/plotly/Kaleido)
 
 This Getting Started guide explains how to install `plotly` and related optional pages. Once you've installed, you can use our documentation in three main ways:
 
-1. You jump right in to **examples** of how to make [basic charts](/python/basic-charts/), [statistical charts](/python/statistical-charts/), [scientific charts](/python/scientific-charts/), [financial charts](/python/financial-charts/), [maps](/python/maps/), and [3-dimensional charts](/python/3d-charts/).
-2. If you prefer to learn about the **fundamentals** of the library first, you can read about [the structure of figures](/python/figure-structure/), [how to create and update figures](/python/creating-and-updating-figures/), [how to display figures](/python/renderers/), [how to theme figures with templates](/python/templates/), [how to export figures to various formats](/python/static-image-export/) and about [Plotly Express, the high-level API](/python/plotly-express/) for doing all of the above.
-3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference) or the [Figure Reference](/python/reference)
+1. You jump right in to **examples** of how to make [basic charts](../basic-charts/), [statistical charts](../statistical-charts/), [scientific charts](../scientific-charts/), [financial charts](../financial-charts/), [maps](../maps/), and [3-dimensional charts](../3d-charts/).
+2. If you prefer to learn about the **fundamentals** of the library first, you can read about [the structure of figures](../figure-structure/), [how to create and update figures](../creating-and-updating-figures/), [how to display figures](../renderers/), [how to theme figures with templates](../templates/), [how to export figures to various formats](../static-image-export/) and about [Plotly Express, the high-level API](../plotly-express/) for doing all of the above.
+3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference) or the [Figure Reference](../reference)
 
 For information on using Python to build web applications containing plotly figures, see the [_Dash User Guide_](https://dash.plotly.com/).
 
@@ -73,7 +73,7 @@ If you want to use Plotly Express, install its required dependencies with:
 pip install plotly[express]
 ```
 
-You'll also need to install a [supported dataframe library](/python/px-arguments#supported-dataFrame-types).
+You'll also need to install a [supported dataframe library](../px-arguments#supported-dataFrame-types).
 
 ### Plotly charts in Dash
 
@@ -131,9 +131,9 @@ fig_widget = go.FigureWidget(fig)
 fig_widget
 ```
 
-See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
+See [_Displaying Figures in Python_](../renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](../figurewidget/) for more information on using `FigureWidget`.
 
-See the [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple Python environments inside Jupyter.
+See the [Troubleshooting guide](../troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple Python environments inside Jupyter.
 
 
 #### Jupyter Notebook Support
@@ -177,7 +177,7 @@ fig_widget = go.FigureWidget(fig)
 fig_widget
 ```
 
-See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
+See [_Displaying Figures in Python_](../renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](../figurewidget/) for more information on using `FigureWidget`.
 
 
 ### Static Image Export
@@ -216,15 +216,15 @@ or conda.
 $ conda install -c plotly plotly-geo=1.0.0
 ```
 
-See [_USA County Choropleth Maps in Python_](/python/county-choropleth/) for more information on the county choropleth figure factory.
+See [_USA County Choropleth Maps in Python_](../county-choropleth/) for more information on the county choropleth figure factory.
 
 ### Where to next?
 
 Once you've installed, you can use our documentation in three main ways:
 
-1. You jump right in to **examples** of how to make [basic charts](/python/basic-charts/), [statistical charts](/python/statistical-charts/), [scientific charts](/python/scientific-charts/), [financial charts](/python/financial-charts/), [maps](/python/maps/), and [3-dimensional charts](/python/3d-charts/).
-2. If you prefer to learn about the **fundamentals** of the library first, you can read about [the structure of figures](/python/figure-structure/), [how to create and update figures](/python/creating-and-updating-figures/), [how to display figures](/python/renderers/), [how to theme figures with templates](/python/templates/), [how to export figures to various formats](/python/static-image-export/) and about [Plotly Express, the high-level API](/python/plotly-express/) for doing all of the above.
-3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference) or the [Figure Reference](/python/reference)
+1. You jump right in to **examples** of how to make [basic charts](../basic-charts/), [statistical charts](../statistical-charts/), [scientific charts](../scientific-charts/), [financial charts](../financial-charts/), [maps](../maps/), and [3-dimensional charts](../3d-charts/).
+2. If you prefer to learn about the **fundamentals** of the library first, you can read about [the structure of figures](../figure-structure/), [how to create and update figures](../creating-and-updating-figures/), [how to display figures](../renderers/), [how to theme figures with templates](../templates/), [how to export figures to various formats](../static-image-export/) and about [Plotly Express, the high-level API](../plotly-express/) for doing all of the above.
+3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference) or the [Figure Reference](../reference)
 
 For information on using Python to build web applications containing plotly figures, see the [_Dash User Guide_](https://dash.plotly.com/).
 

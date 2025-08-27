@@ -48,7 +48,7 @@ If your figure is created with a `px.scatter_map`, `px_scatter_mapbox`, `px.line
 
 Geo maps are outline-based maps. If your figure is created with a `px.scatter_geo`, `px.line_geo` or `px.choropleth` function or otherwise contains one or more traces of type `go.Scattergeo` or `go.Choropleth`, the `layout.geo` object in your figure contains configuration information for the map itself.
 
-> This page documents tile-based maps, and the [Geo map documentation](/python/map-configuration/) describes how to configure outline-based maps.
+> This page documents tile-based maps, and the [Geo map documentation](../map-configuration/) describes how to configure outline-based maps.
 
 ## Tile Map Renderers
 

@@ -33,11 +33,11 @@ jupyter:
     thumbnail: thumbnail/log.jpg
 ---
 
-This page shows examples of how to configure [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots) to follow a logarithmic rather than linear progression. [Configuring gridlines, ticks, tick labels and axis titles](/python/axes/) on logarithmic axes is done the same was as with [linear axes](/python/axes/).
+This page shows examples of how to configure [2-dimensional Cartesian axes](../figure-structure/#2d-cartesian-trace-types-and-subplots) to follow a logarithmic rather than linear progression. [Configuring gridlines, ticks, tick labels and axis titles](../axes/) on logarithmic axes is done the same was as with [linear axes](../axes/).
 
 ### Logarithmic Axes with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 All of Plotly Express' 2-D Cartesian functions include the `log_x` and `log_y` keyword arguments, which can be set to `True` to set the corresponding axis to a logarithmic scale:
 
@@ -142,7 +142,7 @@ fig.show()
 
 ### Logarithmic Axes with Graph Objects
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Figure` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Figure` class from `plotly.graph_objects`](../graph-objects/).
 
 ```python
 import plotly.graph_objects as go

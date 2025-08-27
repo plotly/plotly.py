@@ -37,7 +37,7 @@ This example shows how to fill the area enclosed by traces.
 
 ## Filled area plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
 
 `px.area` creates a stacked area plot. Each filled area corresponds to one value of the column given by the `line_group` parameter.
 
@@ -69,7 +69,7 @@ IFrame(snippet_url + 'filled-area-plots', width='100%', height=1200)
 
 *New in v5.7*
 
-Area charts afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
+Area charts afford the use of [patterns (also known as hatching or texture)](../pattern-hatching-texture/) in addition to color:
 
 ```python
 import plotly.express as px
