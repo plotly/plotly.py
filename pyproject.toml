@@ -56,7 +56,8 @@ dev_build = [
     "mkdocs-material",
     "mkdocstrings[python]",
     "mkdocs-gen-files",
-    "mkdocs-literate-nav"
+    "mkdocs-literate-nav",
+    "pyyaml"
 ]
 dev_optional = [
     "plotly[dev_build]",

@@ -35,6 +35,10 @@ examples-force:
 	touch ${EXAMPLES_SRC}
 	make examples
 
+## examples-toc: generate YAML table of contents for examples
+examples-toc:
+	@python bin/build_example_toc.py ${EXAMPLE_SRC}
+
 ## format: reformat code
 format:
 	${RUN} ruff format ${CODE_DIRS}
