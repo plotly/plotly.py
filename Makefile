@@ -3,13 +3,7 @@
 RUN = uv run
 PACKAGE_DIRS = _plotly_utils plotly
 CODE_DIRS = ${PACKAGE_DIRS} scripts
-
-ifdef MKDOCS_ALL
 EXAMPLE_SRC =  $(wildcard doc/python/*.md)
-else
-EXAMPLE_SRC = doc/python/cone-plot.md doc/python/strip-charts.md
-endif
-
 EXAMPLE_DST = $(patsubst doc/python/%.md,pages/examples/%.md,${EXAMPLE_SRC})
 
 ## commands: show available commands
@@ -29,15 +23,17 @@ docs-lint:
 docs-tmp:
 	MKDOCS_TEMP_DIR=./docs_tmp ${RUN} mkdocs build
 
-## examples-batch: generate Markdown for all doc/python
-examples-batch:
-	${RUN} bin/run_markdown.py --outdir pages/examples --inline --verbose 1 ${EXAMPLE_SRC}
-
 ## examples: generate Markdown for individual doc/python
 examples: ${EXAMPLE_DST}
 
 pages/examples/%.md: doc/python/%.md
+	@mkdir -p pages/examples
 	${RUN} bin/run_markdown.py --outdir pages/examples --inline --verbose 2 $<
+
+## examples-force: force complete rebuild of examples
+examples-force:
+	touch ${EXAMPLES_SRC}
+	make examples
 
 ## format: reformat code
 format:

@@ -15,7 +15,6 @@ doc/python/raw.githubusercontent.com/
 
 docs/
 docs_tmp/
-pages/examples/
 
 # Don't ignore dataset files
 !*.csv.gz
@@ -63,6 +62,8 @@ doc/python/.mapbox_token
 doc/.ipynb_checkpoints
 tags
 doc/check-or-enforce-order.py
+files.figshare.com
+*.zip
 
 tests/percy/*.html
 tests/percy/pandas2/*.html
