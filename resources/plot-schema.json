@@ -362,7 +362,7 @@
   },
   "topojsonURL": {
    "description": "Set the URL to topojson used in geo charts. By default, the topojson files are fetched from cdn.plot.ly. For example, set this option to: <path-to-plotly.js>/dist/topojson/ to render geographical feature using the topojson files that ship with the plotly.js module.",
-   "dflt": "https://cdn.plot.ly/",
+   "dflt": "https://cdn.plot.ly/un/",
    "noBlank": true,
    "valType": "string"
   },
@@ -2545,9 +2545,11 @@
      "valType": "enumerated",
      "values": [
       "africa",
+      "antarctica",
       "asia",
       "europe",
       "north america",
+      "oceania",
       "south america",
       "usa",
       "world"
@@ -3019,7 +3021,13 @@
      "min": -1,
      "valType": "integer"
     },
-    "role": "object"
+    "role": "object",
+    "showarrow": {
+     "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+     "dflt": true,
+     "editType": "none",
+     "valType": "boolean"
+    }
    },
    "hovermode": {
     "description": "Determines the mode of hover interactions. If *closest*, a single hoverlabel will appear for the *closest* point within the `hoverdistance`. If *x* (or *y*), multiple hoverlabels will appear for multiple points at the *closest* x- (or y-) coordinate within the `hoverdistance`, with the caveat that no more than one hoverlabel will appear per trace. If *x unified* (or *y unified*), a single hoverlabel will appear multiple points at the closest x- (or y-) coordinate within the `hoverdistance` with the caveat that no more than one hoverlabel will appear per trace. In this mode, spikelines are enabled by default perpendicular to the specified axis. If false, hover interactions are disabled.",
@@ -3443,7 +3451,7 @@
      "valType": "number"
     },
     "maxheight": {
-     "description": "Sets the max height (in px) of the legend, or max height ratio (reference height * ratio) if less than one. Default value is: 0.5 for horizontal legends; 1 for vertical legends. The minimum allowed height is 30px. For a ratio of 0.5, the legend will take up to 50% of the reference height before displaying a scrollbar. The reference height is the full layout height except for vertically oriented legends with a `yref` of `\"paper\"`, where the reference height is the plot height.",
+     "description": "Sets the max height (in px) of the legend, or max height ratio (reference height * ratio) if less than or equal to 1. Default value is: 0.5 for horizontal legends; 1 for vertical legends. The minimum allowed height is 30px. For a ratio of 0.5, the legend will take up to 50% of the reference height before displaying a scrollbar. The reference height is the full layout height with the following exception: vertically oriented legends with a `yref` of `\"paper\", located to the side of the plot. In this case, the reference height is the plot height.",
      "editType": "legend",
      "min": 0,
      "valType": "number"
@@ -3644,7 +3652,7 @@
      "valType": "number"
     },
     "yanchor": {
-     "description": "Sets the legend's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the legend. Value *auto* anchors legends at their bottom for `y` values less than or equal to 1/3, anchors legends to at their top for `y` values greater than or equal to 2/3 and anchors legends with respect to their middle otherwise.",
+     "description": "Sets the legend's vertical position anchor. This anchor binds the `y` position to the *top*, *middle* or *bottom* of the legend. Value *auto* anchors legends at their bottom for `y` values less than or equal to 1/3, anchors legends to at their top for `y` values greater than or equal to 2/3 and anchors legends with respect to their middle otherwise.",
      "editType": "legend",
      "valType": "enumerated",
      "values": [
@@ -4000,7 +4008,7 @@
         "valType": "string"
        },
        "type": {
-        "description": "Sets the layer type, that is the how the layer data set in `source` will be rendered With `sourcetype` set to *geojson*, the following values are allowed: *circle*, *line*, *fill* and *symbol*. but note that *line* and *fill* are not compatible with Point GeoJSON geometries. With `sourcetype` set to *vector*, the following values are allowed:  *circle*, *line*, *fill* and *symbol*. With `sourcetype` set to *raster* or `*image*`, only the *raster* value is allowed.",
+        "description": "Sets the layer type, that is the how the layer data set in `source` will be rendered With `sourcetype` set to *geojson*, the following values are allowed: *circle*, *line*, *fill* and *symbol*. but note that *line* and *fill* are not compatible with Point GeoJSON geometries. With `sourcetype` set to *vector*, the following values are allowed:  *circle*, *line*, *fill* and *symbol*. With `sourcetype` set to *raster* or *image*, only the *raster* value is allowed.",
         "dflt": "circle",
         "editType": "plot",
         "valType": "enumerated",
@@ -4406,7 +4414,7 @@
         "valType": "string"
        },
        "type": {
-        "description": "Sets the layer type, that is the how the layer data set in `source` will be rendered With `sourcetype` set to *geojson*, the following values are allowed: *circle*, *line*, *fill* and *symbol*. but note that *line* and *fill* are not compatible with Point GeoJSON geometries. With `sourcetype` set to *vector*, the following values are allowed:  *circle*, *line*, *fill* and *symbol*. With `sourcetype` set to *raster* or `*image*`, only the *raster* value is allowed.",
+        "description": "Sets the layer type, that is the how the layer data set in `source` will be rendered With `sourcetype` set to *geojson*, the following values are allowed: *circle*, *line*, *fill* and *symbol*. but note that *line* and *fill* are not compatible with Point GeoJSON geometries. With `sourcetype` set to *vector*, the following values are allowed:  *circle*, *line*, *fill* and *symbol*. With `sourcetype` set to *raster* or *image*, only the *raster* value is allowed.",
         "dflt": "circle",
         "editType": "plot",
         "valType": "enumerated",
@@ -5195,6 +5203,17 @@
       "min": 0,
       "valType": "number"
      },
+     "minorloglabels": {
+      "description": "Determines how minor log labels are displayed. If *small digits*, small digits i.e. 2 or 5 are displayed. If *complete*, complete digits are displayed. If *none*, no labels are displayed.",
+      "dflt": "small digits",
+      "editType": "plot",
+      "valType": "enumerated",
+      "values": [
+       "small digits",
+       "complete",
+       "none"
+      ]
+     },
      "nticks": {
       "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
       "dflt": 0,
@@ -5891,6 +5910,17 @@
       "editType": "plot",
       "min": 0,
       "valType": "number"
+     },
+     "minorloglabels": {
+      "description": "Determines how minor log labels are displayed. If *small digits*, small digits i.e. 2 or 5 are displayed. If *complete*, complete digits are displayed. If *none*, no labels are displayed.",
+      "dflt": "small digits",
+      "editType": "plot",
+      "valType": "enumerated",
+      "values": [
+       "small digits",
+       "complete",
+       "none"
+      ]
      },
      "nticks": {
       "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
@@ -13905,6 +13935,17 @@
       "valType": "number"
      }
     },
+    "minorloglabels": {
+     "description": "Determines how minor log labels are displayed. If *small digits*, small digits i.e. 2 or 5 are displayed. If *complete*, complete digits are displayed. If *none*, no labels are displayed.",
+     "dflt": "small digits",
+     "editType": "calc",
+     "valType": "enumerated",
+     "values": [
+      "small digits",
+      "complete",
+      "none"
+     ]
+    },
     "mirror": {
      "description": "Determines if the axis lines or/and ticks are mirrored to the opposite side of the plotting area. If *true*, the axis lines are mirrored. If *ticks*, the axis lines and ticks are mirrored. If *false*, mirroring is disable. If *all*, axis lines are mirrored on all shared-axes subplots. If *allticks*, axis lines and ticks are mirrored on all shared-axes subplots.",
      "dflt": false,
@@ -13917,6 +13958,19 @@
       "all",
       "allticks"
      ]
+    },
+    "modebardisable": {
+     "description": "Disables certain modebar buttons for this axis. *autoscale* disables the autoscale buttons, *zoominout* disables the zoom-in and zoom-out buttons.",
+     "dflt": "none",
+     "editType": "modebar",
+     "extras": [
+      "none"
+     ],
+     "flags": [
+      "autoscale",
+      "zoominout"
+     ],
+     "valType": "flaglist"
     },
     "nticks": {
      "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
@@ -14949,6 +15003,16 @@
      "editType": "none",
      "valType": "any"
     },
+    "unifiedhovertitle": {
+     "editType": "none",
+     "role": "object",
+     "text": {
+      "description": "Template string used for rendering the title that appear on x or y unified hover box. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-format/tree/v1.4.5#d3-format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-time-format/tree/v2.2.3#locale_format for details on the date formatting syntax.",
+      "dflt": "",
+      "editType": "none",
+      "valType": "string"
+     }
+    },
     "visible": {
      "description": "A single toggle to hide the axis while preserving interaction like dragging. Default is true when a cheater plot is present on the axis, otherwise false",
      "editType": "plot",
@@ -15466,6 +15530,17 @@
       "valType": "number"
      }
     },
+    "minorloglabels": {
+     "description": "Determines how minor log labels are displayed. If *small digits*, small digits i.e. 2 or 5 are displayed. If *complete*, complete digits are displayed. If *none*, no labels are displayed.",
+     "dflt": "small digits",
+     "editType": "calc",
+     "valType": "enumerated",
+     "values": [
+      "small digits",
+      "complete",
+      "none"
+     ]
+    },
     "mirror": {
      "description": "Determines if the axis lines or/and ticks are mirrored to the opposite side of the plotting area. If *true*, the axis lines are mirrored. If *ticks*, the axis lines and ticks are mirrored. If *false*, mirroring is disable. If *all*, axis lines are mirrored on all shared-axes subplots. If *allticks*, axis lines and ticks are mirrored on all shared-axes subplots.",
      "dflt": false,
@@ -15478,6 +15553,19 @@
       "all",
       "allticks"
      ]
+    },
+    "modebardisable": {
+     "description": "Disables certain modebar buttons for this axis. *autoscale* disables the autoscale buttons, *zoominout* disables the zoom-in and zoom-out buttons.",
+     "dflt": "none",
+     "editType": "modebar",
+     "extras": [
+      "none"
+     ],
+     "flags": [
+      "autoscale",
+      "zoominout"
+     ],
+     "valType": "flaglist"
     },
     "nticks": {
      "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
@@ -16193,6 +16281,16 @@
      "editType": "none",
      "valType": "any"
     },
+    "unifiedhovertitle": {
+     "editType": "none",
+     "role": "object",
+     "text": {
+      "description": "Template string used for rendering the title that appear on x or y unified hover box. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-format/tree/v1.4.5#d3-format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-time-format/tree/v2.2.3#locale_format for details on the date formatting syntax.",
+      "dflt": "",
+      "editType": "none",
+      "valType": "string"
+     }
+    },
     "visible": {
      "description": "A single toggle to hide the axis while preserving interaction like dragging. Default is true when a cheater plot is present on the axis, otherwise false",
      "editType": "plot",
@@ -16695,7 +16793,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -18894,7 +18998,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -20476,7 +20586,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoveron": {
      "description": "Do the hover effects highlight individual boxes  or sample points or both?",
@@ -22014,6 +22130,12 @@
       "valType": "string"
      },
      "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     },
      "split": {
       "description": "Show hover information (open, close, high, low) in separate labels.",
       "dflt": false,
@@ -25049,7 +25171,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -25209,7 +25337,7 @@
      "valType": "number"
     },
     "locationmode": {
-     "description": "Determines the set of locations used to match entries in `locations` to regions on the map. Values *ISO-3*, *USA-states*, *country names* correspond to features on the base map and value *geojson-id* corresponds to features from a custom GeoJSON linked to the `geojson` attribute.",
+     "description": "The library used by the *country names* `locationmode` option is changing in an upcoming version. Country names in existing plots may not work in the new version. Determines the set of locations used to match entries in `locations` to regions on the map. Values *ISO-3*, *USA-states*, *country names* correspond to features on the base map and value *geojson-id* corresponds to features from a custom GeoJSON linked to the `geojson` attribute.",
      "dflt": "ISO-3",
      "editType": "calc",
      "valType": "enumerated",
@@ -26330,7 +26458,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -27607,7 +27741,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -28917,7 +29057,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -30478,7 +30624,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoverongaps": {
      "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the `z` data have hover labels associated with them.",
@@ -33301,7 +33453,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -34516,7 +34674,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -35181,7 +35345,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -37209,7 +37379,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -39040,7 +39216,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoverongaps": {
      "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the `z` data have hover labels associated with them.",
@@ -40201,7 +40383,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -42842,7 +43030,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -44532,7 +44726,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -45458,7 +45658,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -47544,7 +47750,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -50070,7 +50282,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -51611,7 +51829,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -52439,6 +52663,12 @@
       "valType": "string"
      },
      "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     },
      "split": {
       "description": "Show hover information (open, close, high, low) in separate labels.",
       "dflt": false,
@@ -53058,7 +53288,7 @@
      ]
     },
     "hovertemplate": {
-     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\" as well as %{xother}, {%_xother}, {%_xother_}, {%xother_}. When showing info for several points, *xother* will be added to those with different x positions from the first point. An underscore before or after *(x|y)other* will add a space on that side, only when this field is shown. Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-format/tree/v1.4.5#d3-format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-time-format/tree/v2.2.3#locale_format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plotly.com/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  This value here applies when hovering over dimensions. Note that `*categorycount`, *colorcount* and *bandcolorcount* are only available when `hoveron` contains the *color* flagFinally, the template string has access to variables `count`, `probability`, `category`, `categorycount`, `colorcount` and `bandcolorcount`. Anything contained in tag `<extra>` is displayed in the secondary box, for example `<extra>%{fullData.name}</extra>`. To hide the secondary box completely, use an empty tag `<extra></extra>`.",
+     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\" as well as %{xother}, {%_xother}, {%_xother_}, {%xother_}. When showing info for several points, *xother* will be added to those with different x positions from the first point. An underscore before or after *(x|y)other* will add a space on that side, only when this field is shown. Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-format/tree/v1.4.5#d3-format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-time-format/tree/v2.2.3#locale_format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plotly.com/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  This value here applies when hovering over dimensions. Note that *categorycount*, *colorcount* and *bandcolorcount* are only available when `hoveron` contains the *color* flag. Finally, the template string has access to variables `count`, `probability`, `category`, `categorycount`, `colorcount` and `bandcolorcount`. Anything contained in tag `<extra>` is displayed in the secondary box, for example `<extra>%{fullData.name}</extra>`. To hide the secondary box completely, use an empty tag `<extra></extra>`.",
      "dflt": "",
      "editType": "plot",
      "valType": "string"
@@ -55894,7 +56124,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -57324,7 +57560,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "calc",
+      "valType": "boolean"
+     }
     },
     "ids": {
      "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
@@ -57758,7 +58000,13 @@
        "editType": "none",
        "valType": "string"
       },
-      "role": "object"
+      "role": "object",
+      "showarrow": {
+       "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+       "dflt": true,
+       "editType": "calc",
+       "valType": "boolean"
+      }
      },
      "hovertemplate": {
       "arrayOk": true,
@@ -58123,7 +58371,13 @@
        "editType": "none",
        "valType": "string"
       },
-      "role": "object"
+      "role": "object",
+      "showarrow": {
+       "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+       "dflt": true,
+       "editType": "calc",
+       "valType": "boolean"
+      }
      },
      "hovertemplate": {
       "arrayOk": true,
@@ -58998,7 +59252,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoveron": {
      "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*.",
@@ -61736,7 +61996,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -64180,7 +64446,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoveron": {
      "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*.",
@@ -66464,7 +66736,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -66664,7 +66942,7 @@
      }
     },
     "locationmode": {
-     "description": "Determines the set of locations used to match entries in `locations` to regions on the map. Values *ISO-3*, *USA-states*, *country names* correspond to features on the base map and value *geojson-id* corresponds to features from a custom GeoJSON linked to the `geojson` attribute.",
+     "description": "The library used by the *country names* `locationmode` option is changing in an upcoming version. Country names in existing plots may not work in the new version. Determines the set of locations used to match entries in `locations` to regions on the map. Values *ISO-3*, *USA-states*, *country names* correspond to features on the base map and value *geojson-id* corresponds to features from a custom GeoJSON linked to the `geojson` attribute.",
      "dflt": "ISO-3",
      "editType": "calc",
      "valType": "enumerated",
@@ -68906,7 +69184,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -71229,7 +71513,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -72766,7 +73056,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -74248,7 +74544,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoveron": {
      "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*.",
@@ -76558,7 +76860,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -78702,7 +79010,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoveron": {
      "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*.",
@@ -81011,7 +81325,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoveron": {
      "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*.",
@@ -83321,7 +83641,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -85917,7 +86243,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -86728,7 +87060,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -89527,7 +89865,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -90842,7 +91186,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "ids": {
      "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
@@ -91358,7 +91708,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -93519,7 +93875,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hoveron": {
      "description": "Do the hover effects highlight individual violins or sample points or the kernel density estimate or any combination of them?",
@@ -95633,7 +95995,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,
@@ -96584,7 +96952,13 @@
       "editType": "none",
       "valType": "string"
      },
-     "role": "object"
+     "role": "object",
+     "showarrow": {
+      "description": "Sets whether or not to show the hover label arrow/triangle pointing to the data point.",
+      "dflt": true,
+      "editType": "none",
+      "valType": "boolean"
+     }
     },
     "hovertemplate": {
      "arrayOk": true,

@@ -463,8 +463,8 @@ class Geo(_BaseLayoutHierarchyType):
 
         - One of the following enumeration values:
 
-            ['africa', 'asia', 'europe', 'north america', 'south america',
-            'usa', 'world']
+            ['africa', 'antarctica', 'asia', 'europe', 'north america',
+            'oceania', 'south america', 'usa', 'world']
 
         Returns
         -------

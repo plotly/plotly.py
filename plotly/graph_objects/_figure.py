@@ -3121,12 +3121,15 @@ class Figure(BaseFigure):
             Sets the width (in px or fraction) of the legend for
             this trace.
         locationmode
-            Determines the set of locations used to match entries
-            in `locations` to regions on the map. Values "ISO-3",
-            "USA-states", *country names* correspond to features on
-            the base map and value "geojson-id" corresponds to
-            features from a custom GeoJSON linked to the `geojson`
-            attribute.
+            The library used by the *country names* `locationmode`
+            option is changing in an upcoming version. Country
+            names in existing plots may not work in the new
+            version. Determines the set of locations used to match
+            entries in `locations` to regions on the map. Values
+            "ISO-3", "USA-states", *country names* correspond to
+            features on the base map and value "geojson-id"
+            corresponds to features from a custom GeoJSON linked to
+            the `geojson` attribute.
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
@@ -11855,9 +11858,9 @@ class Figure(BaseFigure):
             data. Additionally, every attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  This value here applies when hovering
-            over dimensions. Note that `*categorycount`,
+            over dimensions. Note that "categorycount",
             "colorcount" and "bandcolorcount" are only available
-            when `hoveron` contains the "color" flagFinally, the
+            when `hoveron` contains the "color" flag. Finally, the
             template string has access to variables `count`,
             `probability`, `category`, `categorycount`,
             `colorcount` and `bandcolorcount`. Anything contained
@@ -14485,12 +14488,15 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.scattergeo.Line` instance
             or dict with compatible properties
         locationmode
-            Determines the set of locations used to match entries
-            in `locations` to regions on the map. Values "ISO-3",
-            "USA-states", *country names* correspond to features on
-            the base map and value "geojson-id" corresponds to
-            features from a custom GeoJSON linked to the `geojson`
-            attribute.
+            The library used by the *country names* `locationmode`
+            option is changing in an upcoming version. Country
+            names in existing plots may not work in the new
+            version. Determines the set of locations used to match
+            entries in `locations` to regions on the map. Values
+            "ISO-3", "USA-states", *country names* correspond to
+            features on the base map and value "geojson-id"
+            corresponds to features from a custom GeoJSON linked to
+            the `geojson` attribute.
         locations
             Sets the coordinates via location IDs or names.
             Coordinates correspond to the centroid of each location

@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+## [6.3.0] - 2025-08-12
+
+### Updated
+- Updated Plotly.js from version 3.0.1 to version 3.1.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5318](https://github.com/plotly/plotly.py/pull/5318)]
+
+### Added
+- Exposed `plotly.io.get_chrome()` as a function which can be called from within a Python script. [[#5282](https://github.com/plotly/plotly.py/pull/5282)]
+
+### Fixed
+- Resolved issue causing extraneous engine deprecation warnings [[#5287](https://github.com/plotly/plotly.py/pull/5287)], with thanks to @jdbeel for the contribution!
+
 ## [6.2.0] - 2025-06-26
 
 ### Added

@@ -246,27 +246,10 @@ def update_plotlyjs(plotly_js_version, codedir):
 
 
 # FIXME: switch to argparse
-def update_schema_bundle_from_master():
+def update_schema_bundle_from_master(args):
     """Update the plotly.js schema and bundle from master."""
-
-    if "--devrepo" in sys.argv:
-        devrepo = sys.argv[sys.argv.index("--devrepo") + 1]
-    else:
-        devrepo = "plotly/plotly.js"
-
-    if "--devbranch" in sys.argv:
-        devbranch = sys.argv[sys.argv.index("--devbranch") + 1]
-    else:
-        devbranch = "master"
-
-    if "--local" in sys.argv:
-        local = sys.argv[sys.argv.index("--local") + 1]
-    else:
-        local = None
-
-    if local is None:
-        build_info = get_latest_publish_build_info(devrepo, devbranch)
-
+    if args.local is None:
+        build_info = get_latest_publish_build_info(args.devrepo, args.devbranch)
         archive_url, bundle_url, schema_url = get_bundle_schema_urls(
             build_info["build_num"]
         )
@@ -277,14 +260,14 @@ def update_schema_bundle_from_master():
         # Update schema in package data
         overwrite_schema(schema_url)
     else:
-        # this info could be more informative but
-        # it doesn't seem as useful in a local context
-        # and requires dependencies and programming.
+        # this info could be more informative but it doesn't seem as
+        # useful in a local context and requires dependencies and
+        # programming.
         build_info = {"vcs_revision": "local", "committer_date": str(time.time())}
-        devrepo = local
-        devbranch = ""
+        args.devrepo = args.local
+        args.devbranch = ""
 
-        archive_uri, bundle_uri, schema_uri = get_bundle_schema_local(local)
+        archive_uri, bundle_uri, schema_uri = get_bundle_schema_local(args.local)
         overwrite_bundle_local(bundle_uri)
         overwrite_schema_local(schema_uri)
 
@@ -295,7 +278,7 @@ def update_schema_bundle_from_master():
 
     # Replace version with bundle url
     package_json["dependencies"]["plotly.js"] = (
-        archive_url if local is None else archive_uri
+        archive_url if args.local is None else archive_uri
     )
     with open(package_json_path, "w") as f:
         json.dump(package_json, f, indent=2)
@@ -303,13 +286,76 @@ def update_schema_bundle_from_master():
     # update plotly.js version in _plotlyjs_version
     rev = build_info["vcs_revision"]
     date = str(build_info["committer_date"])
-    version = "_".join([devrepo, devbranch, date[:10], rev[:8]])
+    version = "_".join([args.devrepo, args.devbranch, date[:10], rev[:8]])
     overwrite_plotlyjs_version_file(version)
-    install_js_deps(local)
+    install_js_deps(args.local)
 
 
-def update_plotlyjs_dev(codedir):
+def update_plotlyjs_dev(args, outdir):
     """Update project to a new development version of plotly.js."""
 
-    update_schema_bundle_from_master()
-    perform_codegen(codedir)
+    update_schema_bundle_from_master(args)
+    perform_codegen(outdir)
+
+
+def parse_args():
+    """Parse command-line arguments."""
+
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest="cmd", help="Available subcommands")
+
+    p_codegen = subparsers.add_parser("codegen", help="generate code")
+    p_codegen.add_argument(
+        "--noformat", action="store_true", help="prevent reformatting"
+    )
+
+    subparsers.add_parser("lint", help="lint code")
+
+    subparsers.add_parser("format", help="reformat code")
+
+    p_update_dev = subparsers.add_parser(
+        "updateplotlyjsdev", help="update plotly.js for development"
+    )
+    p_update_dev.add_argument(
+        "--devrepo", default="plotly/plotly.js", help="repository"
+    )
+    p_update_dev.add_argument("--devbranch", default="master", help="branch")
+    p_update_dev.add_argument("--local", default=None, help="local path")
+
+    subparsers.add_parser("updateplotlyjs", help="update plotly.js")
+
+    return parser.parse_args()
+
+
+def main():
+    """Main driver."""
+
+    project_root = os.path.dirname(os.path.realpath(__file__))
+    outdir = os.path.join(project_root, "plotly")
+
+    args = parse_args()
+
+    if args.cmd == "codegen":
+        perform_codegen(outdir, noformat=args.noformat)
+
+    elif args.cmd == "format":
+        reformat_code(outdir)
+
+    elif args.cmd == "lint":
+        lint_code(outdir)
+
+    elif args.cmd == "updateplotlyjsdev":
+        update_plotlyjs_dev(args, outdir)
+
+    elif args.cmd == "updateplotlyjs":
+        version = plotly_js_version()
+        print(version)
+        update_plotlyjs(version, outdir)
+
+    else:
+        print(f"unknown command {args.cmd}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

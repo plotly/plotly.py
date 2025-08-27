@@ -26,6 +26,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "linecolor",
         "linewidth",
         "minexponent",
+        "minorloglabels",
         "nticks",
         "period",
         "rotation",
@@ -484,6 +485,30 @@ class AngularAxis(_BaseLayoutHierarchyType):
     @minexponent.setter
     def minexponent(self, val):
         self["minexponent"] = val
+
+    @property
+    def minorloglabels(self):
+        """
+        Determines how minor log labels are displayed. If *small
+        digits*, small digits i.e. 2 or 5 are displayed. If "complete",
+        complete digits are displayed. If "none", no labels are
+        displayed.
+
+        The 'minorloglabels' property is an enumeration that may be specified as:
+
+        - One of the following enumeration values:
+
+            ['small digits', 'complete', 'none']
+
+        Returns
+        -------
+        Any
+        """
+        return self["minorloglabels"]
+
+    @minorloglabels.setter
+    def minorloglabels(self, val):
+        self["minorloglabels"] = val
 
     @property
     def nticks(self):
@@ -1292,6 +1317,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
             "B".
+        minorloglabels
+            Determines how minor log labels are displayed. If
+            *small digits*, small digits i.e. 2 or 5 are displayed.
+            If "complete", complete digits are displayed. If
+            "none", no labels are displayed.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -1451,6 +1481,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         linecolor=None,
         linewidth=None,
         minexponent=None,
+        minorloglabels=None,
         nticks=None,
         period=None,
         rotation=None,
@@ -1610,6 +1641,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
             "B".
+        minorloglabels
+            Determines how minor log labels are displayed. If
+            *small digits*, small digits i.e. 2 or 5 are displayed.
+            If "complete", complete digits are displayed. If
+            "none", no labels are displayed.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -1789,6 +1825,7 @@ an instance of :class:`plotly.graph_objects.layout.polar.AngularAxis`""")
         self._set_property("linecolor", arg, linecolor)
         self._set_property("linewidth", arg, linewidth)
         self._set_property("minexponent", arg, minexponent)
+        self._set_property("minorloglabels", arg, minorloglabels)
         self._set_property("nticks", arg, nticks)
         self._set_property("period", arg, period)
         self._set_property("rotation", arg, rotation)

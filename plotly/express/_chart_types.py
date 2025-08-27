@@ -4409,6 +4409,16 @@ def choropleth(
     -------
     plotly.graph_objects.Figure
     """
+
+    if locationmode == "country names":
+        warn(
+            "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
+            "Country names in existing plots may not work in the new version. "
+            "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
     return make_figure(
         args=locals(),
         constructor=go.Choropleth,
@@ -4648,6 +4658,16 @@ def scatter_geo(
     -------
     plotly.graph_objects.Figure
     """
+
+    if locationmode == "country names":
+        warn(
+            "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
+            "Country names in existing plots may not work in the new version. "
+            "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
     return make_figure(
         args=locals(),
         constructor=go.Scattergeo,
