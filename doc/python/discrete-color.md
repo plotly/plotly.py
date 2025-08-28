@@ -38,18 +38,18 @@ jupyter:
 
 ### Discrete vs Continuous Color
 
-In the same way as the X or Y position of a mark in cartesian coordinates can be used to represent continuous values (i.e. amounts or moments in time) or categories (i.e. labels), color can be used to represent continuous or discrete data. This page is about using color to represent **categorical** data using discrete colors, but Plotly can also [represent continuous values with color](../colorscales/).
+In the same way as the X or Y position of a mark in cartesian coordinates can be used to represent continuous values (i.e. amounts or moments in time) or categories (i.e. labels), color can be used to represent continuous or discrete data. This page is about using color to represent **categorical** data using discrete colors, but Plotly can also [represent continuous values with color](colorscales.md).
 
 ### Discrete Color Concepts
 
 This document explains the following discrete-color-related concepts:
 
-- **color sequences** are lists of colors to be mapped onto discrete data values. No interpolation occurs when using color sequences, unlike with [continuous color scales](../colorscales/), and each color is used as-is. Color sequence defaults depend on the `layout.colorway` attribute of the active [template](../templates/), and can be explicitly specified using the `color_discrete_sequence` argument for many [Plotly Express](../plotly-express/) functions.
-- **legends** are visible representations of the mapping between colors and data values. Legend markers also change shape when used with various kinds of traces, such as symbols or lines for scatter-like traces. [Legends are configurable](../legend/) under the `layout.legend` attribute. Legends are the discrete equivalent of [continuous color bars](../colorscales/)
+- **color sequences** are lists of colors to be mapped onto discrete data values. No interpolation occurs when using color sequences, unlike with [continuous color scales](colorscales.md), and each color is used as-is. Color sequence defaults depend on the `layout.colorway` attribute of the active [template](templates.md), and can be explicitly specified using the `color_discrete_sequence` argument for many [Plotly Express](plotly-express.md) functions.
+- **legends** are visible representations of the mapping between colors and data values. Legend markers also change shape when used with various kinds of traces, such as symbols or lines for scatter-like traces. [Legends are configurable](legend.md) under the `layout.legend` attribute. Legends are the discrete equivalent of [continuous color bars](colorscales.md)
 
 ### Discrete Color with Plotly Express
 
-Most Plotly Express functions accept a `color` argument which automatically assigns data values to discrete colors **if the data is non-numeric**. If the data is numeric, the color will automatically be considered [continuous](../colorscales/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
+Most Plotly Express functions accept a `color` argument which automatically assigns data values to discrete colors **if the data is non-numeric**. If the data is numeric, the color will automatically be considered [continuous](colorscales.md). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
 
 For example, in the `tips` dataset, the `smoker` column contains strings:
 
@@ -117,7 +117,7 @@ IFrame(snippet_url + 'discrete-color', width='100%', height=1200)
 
 ### Color Sequences in Plotly Express
 
-By default, Plotly Express will use the color sequence from the active [template](../templates/)'s `layout.colorway` attribute, and the default active template is `plotly` which uses the `plotly` color sequence. You can choose any of the following built-in qualitative color sequences from the `px.colors.qualitative` module, however, or define your own.
+By default, Plotly Express will use the color sequence from the active [template](templates.md)'s `layout.colorway` attribute, and the default active template is `plotly` which uses the `plotly` color sequence. You can choose any of the following built-in qualitative color sequences from the `px.colors.qualitative` module, however, or define your own.
 
 ```python
 import plotly.express as px
@@ -205,7 +205,7 @@ fig.show()
 
 ### Controlling Discrete Color Order
 
-Plotly Express lets you specify an ordering over categorical variables with `category_orders`, which will apply to colors and legends as well as symbols, [axes](../axes/) and [facets](../facet-plots/). This can be used with either `color_discrete_sequence` or `color_discrete_map`.
+Plotly Express lets you specify an ordering over categorical variables with `category_orders`, which will apply to colors and legends as well as symbols, [axes](axes.md) and [facets](facet-plots.md). This can be used with either `color_discrete_sequence` or `color_discrete_map`.
 
 ```python
 import plotly.express as px
@@ -238,7 +238,7 @@ fig.show()
 
 ### Using Sequential Scales as Discrete Sequences
 
-In most cases, discrete/qualitative/categorical data values have no meaningful natural ordering, such as in the continents example used above. In some cases, however, there is a meaningful order, and in this case it can be helpful and appealing to use part of a continuous scale as a discrete sequence, as in the following [wind rose chart](../wind-rose-charts/):
+In most cases, discrete/qualitative/categorical data values have no meaningful natural ordering, such as in the continents example used above. In some cases, however, there is a meaningful order, and in this case it can be helpful and appealing to use part of a continuous scale as a discrete sequence, as in the following [wind rose chart](wind-rose-charts.md):
 
 ```python
 import plotly.express as px
@@ -250,7 +250,7 @@ fig = px.bar_polar(df, r="frequency", theta="direction", color="strength",
 fig.show()
 ```
 
-This works because just like in `px.colors.qualitative`, all [built-in continuous color scales](../builtin-colorscales/) are stored as lists of CSS colors:
+This works because just like in `px.colors.qualitative`, all [built-in continuous color scales](builtin-colorscales.md) are stored as lists of CSS colors:
 
 ```python
 import plotly.express as px

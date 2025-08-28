@@ -38,7 +38,7 @@ jupyter:
 
 ### Linear fit trendlines with Plotly Express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 Plotly Express allows you to add [Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares) regression trendline to scatterplots with the `trendline` argument. In order to do so, you will need to [install `statsmodels` and its dependencies](https://www.statsmodels.org/stable/install.html). Hovering over the trendline will show the equation of the line and its R-squared value.
 

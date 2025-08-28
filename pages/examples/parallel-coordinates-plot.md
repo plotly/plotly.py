@@ -37,7 +37,7 @@ jupyter:
 
 ## Parallel Coordinates plot with Plotly Express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/). In a parallel coordinates plot with `px.parallel_coordinates`, each row of the DataFrame is represented by a polyline mark which traverses a set of parallel axes, one for each of the dimensions. For other representations of multivariate data, also see [parallel categories](../parallel-categories-diagram/), [radar charts](../radar-chart/) and [scatterplot matrix (SPLOM)](../splom/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). In a parallel coordinates plot with `px.parallel_coordinates`, each row of the DataFrame is represented by a polyline mark which traverses a set of parallel axes, one for each of the dimensions. For other representations of multivariate data, also see [parallel categories](parallel-categories-diagram.md), [radar charts](radar-chart.md) and [scatterplot matrix (SPLOM)](splom.md).
 
 ```python
 import plotly.express as px

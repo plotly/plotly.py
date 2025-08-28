@@ -34,19 +34,19 @@ jupyter:
 ---
 
 
-This page shows examples of how to configure [2-dimensional Cartesian axes](../figure-structure/#2d-cartesian-trace-types-and-subplots) to visualize categorical (i.e. qualitative, nominal or ordinal data as opposed to continuous numerical data). Such axes are a natural fit for bar charts, waterfall charts, funnel charts, heatmaps, violin charts and box plots, but can also be used with scatter plots and line charts. [Configuring gridlines, ticks, tick labels and axis titles](../axes/) on logarithmic axes is done the same was as with [linear axes](../axes/).
+This page shows examples of how to configure [2-dimensional Cartesian axes](figure-structure.md#2d-cartesian-trace-types-and-subplots) to visualize categorical (i.e. qualitative, nominal or ordinal data as opposed to continuous numerical data). Such axes are a natural fit for bar charts, waterfall charts, funnel charts, heatmaps, violin charts and box plots, but can also be used with scatter plots and line charts. [Configuring gridlines, ticks, tick labels and axis titles](axes.md) on logarithmic axes is done the same was as with [linear axes](axes.md).
 
 ### 2-D Cartesian Axis Type and Auto-Detection
 
 The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
-- `'linear'` (see the [linear axes tutorial](../axes/))
-- `'log'` (see the [log plot tutorial](../log-plot/))
-- `'date'` (see the [tutorial on timeseries](../time-series/))
+- `'linear'` (see the [linear axes tutorial](axes.md))
+- `'log'` (see the [log plot tutorial](log-plot.md))
+- `'date'` (see the [tutorial on timeseries](time-series.md))
 - `'category'` see below
 - `'multicategory'` see below
 
-The axis type is auto-detected by looking at data from the first [trace](../figure-structure/) linked to this axis:
+The axis type is auto-detected by looking at data from the first [trace](figure-structure.md) linked to this axis:
 
 * First check for `multicategory`, then `date`, then `category`, else default to `linear` (`log` is never automatically selected)
 * `multicategory` is just a shape test: is the array nested?
@@ -127,9 +127,9 @@ fig.show()
 
 ### Controlling the Category Order with Plotly Express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-By default, Plotly Express lays out categorical data in the order in which it appears in the underlying data. Every 2-d cartesian Plotly Express function also includes a `category_orders` keyword argument which can be used to control the order in which categorical axes are drawn, but beyond that can also control [the order in which discrete colors appear in the legend](../discrete-color/), and [the order in which facets are laid out](../facet-plots/).
+By default, Plotly Express lays out categorical data in the order in which it appears in the underlying data. Every 2-d cartesian Plotly Express function also includes a `category_orders` keyword argument which can be used to control the order in which categorical axes are drawn, but beyond that can also control [the order in which discrete colors appear in the legend](discrete-color.md), and [the order in which facets are laid out](facet-plots.md).
 
 ```python
 import plotly.express as px
@@ -260,7 +260,7 @@ fig.show()
 
 A two-level categorical axis (also known as grouped or hierarchical categories, or sub-categories) can be created by specifying a trace's `x` or `y` property as a 2-dimensional lists. The first sublist represents the outer categorical value while the second sublist represents the inner categorical value. This is only possible with `plotly.graph_objects` at the moment, and not Plotly Express.
 
-Passing in a two-dimensional list as the `x` or `y` value of a trace causes [the `type` of the corresponding axis](../axes/) to be set to `multicategory`.
+Passing in a two-dimensional list as the `x` or `y` value of a trace causes [the `type` of the corresponding axis](axes.md) to be set to `multicategory`.
 
 Here is an example that creates a figure with 2 `bar` traces with a 2-level categorical x-axis.
 

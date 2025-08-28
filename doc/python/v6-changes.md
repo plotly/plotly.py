@@ -57,7 +57,7 @@ pip install anywidget
 
 Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](https://plotly.com/python/performance/) for more details.
 
-> If you are using Plotly.py 6 or later with Dash Design Kit, you may need to upgrade your Dash Design Kit version. See the [Dash Design Kit Compatibility section on the performance page](../performance/#dash-design-kit-compatibility) for more details.
+> If you are using Plotly.py 6 or later with Dash Design Kit, you may need to upgrade your Dash Design Kit version. See the [Dash Design Kit Compatibility section on the performance page](performance.md#dash-design-kit-compatibility) for more details.
 
 
 ## Dataframe Support
@@ -109,12 +109,12 @@ The following traces have been removed.
 
 ### `heatmapgl`
 
-The `heatmapgl` trace has been removed. Use [`heatmap`](../heatmaps/) instead.
+The `heatmapgl` trace has been removed. Use [`heatmap`](heatmaps.md) instead.
 
 
 ### `pointcloud`
 
-The `pointcloud` trace has been removed. Use [`scattergl`](../reference/scattergl/).
+The `pointcloud` trace has been removed. Use [`scattergl`](/reference/scattergl.md).
 
 <!-- #endregion -->
 

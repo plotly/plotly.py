@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/mapbox-choropleth.png
 ---
 
-A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **tile-map** choropleth maps, but you can also build [**outline** choropleth maps](../choropleth-maps).
+A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **tile-map** choropleth maps, but you can also build [**outline** choropleth maps](choropleth-maps.md).
 
 Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth_map` function or the lower-level `go.Choroplethmap` graph object.
 
@@ -75,7 +75,7 @@ df.head()
 
 ### Choropleth map using plotly.express and carto base map
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 With `px.choropleth_map`, each row of the DataFrame is represented as a region of the choropleth.
 
@@ -154,7 +154,7 @@ fig.show()
 
 ### Discrete Colors
 
-In addition to [continuous colors](../colorscales/), we can [discretely-color](../discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
+In addition to [continuous colors](colorscales.md), we can [discretely-color](discrete-color.md) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
 
 ```python
 import plotly.express as px
@@ -195,7 +195,7 @@ fig.show()
 
 ### Choropleth map using plotly.graph_objects and carto base map
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Choroplethmap` class from `plotly.graph_objects`](../graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Choroplethmap` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 from urllib.request import urlopen
@@ -224,7 +224,7 @@ fig.show()
 
 The earlier examples using `px.choropleth_map` and `go.Choroplethmap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to create tile-based choropleth maps. There are also choropleth traces that use [Mapbox](https://docs.mapbox.com): `px.choropleth_mapbox` and `go.Choroplethmapbox`
 
-To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](../mapbox-layers/) documentation for more information.
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](mapbox-layers.md) documentation for more information.
 
 Here's an exmaple of using the Mapbox Light base map, which requires a free token.
 

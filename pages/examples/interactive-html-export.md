@@ -36,7 +36,7 @@ jupyter:
 
 ### Interactive vs Static Export
 
-Plotly figures are interactive when viewed in a web browser: you can hover over data points, pan and zoom axes, and show and hide traces by clicking or double-clicking on the legend. You can export figures either to [static image file formats like PNG, JPEG, SVG or PDF](../static-image-export/) or you can export them to HTML files which can be opened in a browser. This page explains how to do the latter.
+Plotly figures are interactive when viewed in a web browser: you can hover over data points, pan and zoom axes, and show and hide traces by clicking or double-clicking on the legend. You can export figures either to [static image file formats like PNG, JPEG, SVG or PDF](static-image-export.md) or you can export them to HTML files which can be opened in a browser. This page explains how to do the latter.
 
 <!-- #region -->
 ### Saving to an HTML file

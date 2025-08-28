@@ -37,9 +37,9 @@ jupyter:
     v4upgrade: true
 ---
 
-The `plotly` Python package exists to create, manipulate and [render](../renderers/) graphical figures (i.e. charts, plots, maps and diagrams) represented by [data structures also referred to as figures](../figure-structure/). The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
+The `plotly` Python package exists to create, manipulate and [render](renderers.md) graphical figures (i.e. charts, plots, maps and diagrams) represented by [data structures also referred to as figures](figure-structure.md). The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
 
-> Note: the recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](../plotly-express/), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the structure of the data structure that these objects represent for users who wish to understand more about how to customize them, or assemble them from other `plotly.graph_objects` components.
+> Note: the recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](plotly-express.md), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the structure of the data structure that these objects represent for users who wish to understand more about how to customize them, or assemble them from other `plotly.graph_objects` components.
 
 ### Figures As Dictionaries
 
@@ -61,14 +61,14 @@ pio.show(fig)
 
 ### Figures as Graph Objects
 
-The [`plotly.graph_objects` module provides an automatically-generated hierarchy of classes](https://plotly.com/python-api-reference/plotly.graph_objects.html) called ["graph objects"](../graph-objects/) that may be used to represent figures, with a top-level class `plotly.graph_objects.Figure`.
+The [`plotly.graph_objects` module provides an automatically-generated hierarchy of classes](https://plotly.com/python-api-reference/plotly.graph_objects.html) called ["graph objects"](graph-objects.md) that may be used to represent figures, with a top-level class `plotly.graph_objects.Figure`.
 
-> Note that the *recommended alternative* to working with Python dictionaries is to [create entire figures at once using Plotly Express](../plotly-express/) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page, wherever possible, rather than to assemble figures bottom-up from underlying graph objects. See ["When to use Graph Objects"](../graph-objects/).
+> Note that the *recommended alternative* to working with Python dictionaries is to [create entire figures at once using Plotly Express](plotly-express.md) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page, wherever possible, rather than to assemble figures bottom-up from underlying graph objects. See ["When to use Graph Objects"](graph-objects.md).
 
 Graph objects have several benefits compared to plain Python dictionaries.
 
 1. Graph objects provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a graph object, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain Python dictionaries and lists to build your figures.
-2. Graph objects contain descriptions of each valid property as Python docstrings, with a [full API reference available](https://plotly.com/python-api-reference/). You can use these docstrings in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](../reference/index/).
+2. Graph objects contain descriptions of each valid property as Python docstrings, with a [full API reference available](https://plotly.com/python-api-reference/). You can use these docstrings in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](/reference/).
 3. Properties of graph objects can be accessed using both dictionary-style key lookup (e.g. `fig["layout"]`) or class-style property access (e.g. `fig.layout`).
 4. Graph objects support higher-level convenience functions for making updates to already constructed figures (`.update_layout()`, `.add_trace()` etc) as described below.
 5. Graph object constructors and update methods accept "magic underscores" (e.g. `go.Figure(layout_title_text="The Title")` rather than `dict(layout=dict(title=dict(text="The Title")))`) for more compact code, as described below.
@@ -148,7 +148,7 @@ IFrame(snippet_url + 'figure-structure', width='100%', height=1200)
 
 This section summarizes several ways to create new graph object figures with the `plotly.py` graphing library.
 
-> The *recommended way* to create figures and populate them is to use [Plotly Express](../plotly-express/) but this page documents various other options for completeness
+> The *recommended way* to create figures and populate them is to use [Plotly Express](plotly-express.md) but this page documents various other options for completeness
 
 
 #### Plotly Express
@@ -186,7 +186,7 @@ fig.show()
 
 #### Figure Factories
 
-[Figure factories](../figure-factories) (included in `plotly.py` in the `plotly.figure_factory` module) are functions that produce graph object figures, often to satisfy the needs of specialized domains. Here's an example of using the `create_quiver()` figure factory to construct a graph object figure that displays a 2D quiver plot.
+[Figure factories](figure-factories.md) (included in `plotly.py` in the `plotly.figure_factory` module) are functions that produce graph object figures, often to satisfy the needs of specialized domains. Here's an example of using the `create_quiver()` figure factory to construct a graph object figure that displays a 2D quiver plot.
 
 ```python
 import numpy as np
@@ -618,9 +618,9 @@ There are also `for_each_xaxis()` and `for_each_yaxis()` methods that are analog
 
 Figures created with the plotly.py graphing library also support:
 
-  - the `update_layout_images()` method in order to [update background layout images](../images/),
-  - `update_annotations()` in order to [update annotations](../text-and-annotations/#multiple-annotations),
-  - and `update_shapes()` in order to [update shapes](../shapes/).
+  - the `update_layout_images()` method in order to [update background layout images](images.md),
+  - `update_annotations()` in order to [update annotations](text-and-annotations.md#multiple-annotations),
+  - and `update_shapes()` in order to [update shapes](shapes.md).
 
 #### Chaining Figure Operations
 

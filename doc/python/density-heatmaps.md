@@ -36,7 +36,7 @@ jupyter:
 
 ### Density map with `plotly.express`
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 With `px.density_map`, each row of the DataFrame is represented as a point smoothed with a given radius of influence.
 
@@ -53,7 +53,7 @@ fig.show()
 
 ### Density map with `plotly.graph_objects`
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Densitymap` class from `plotly.graph_objects`](../graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Densitymap` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 import pandas as pd
@@ -74,7 +74,7 @@ fig.show()
 
 The earlier examples using `px.density_map` and `go.Densitymap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24. These trace types are now the recommended way to make tile-based density heatmaps. There are also traces that use [Mapbox](https://docs.mapbox.com): `density_mapbox` and `go.Densitymapbox`.
 
-To use these trace types, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](../mapbox-layers/) documentation for more information.
+To use these trace types, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](mapbox-layers.md) documentation for more information.
 
 Here's one of the earlier examples rewritten to use `px.density_mapbox`.
 

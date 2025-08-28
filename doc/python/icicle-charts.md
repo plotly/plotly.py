@@ -39,7 +39,7 @@ Icicle charts visualize hierarchical data using rectangular sectors that cascade
 
 ### Basic Icicle Plot with plotly.express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 With `px.icicle`, each item in the `character` list is represented as a rectangular sector of the icicle.
 
@@ -155,7 +155,7 @@ fig.show()
 
 ### Basic Icicle Plot with go.Icicle
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Icicle` class from `plotly.graph_objects`](../graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Icicle` class from `plotly.graph_objects`](graph-objects.md).
 
 Main arguments:
 
@@ -423,7 +423,7 @@ fig.show()
 
 *New in 5.15*
 
-Icicle charts support [patterns](../pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to all chart sections. We also configure the `size` and `solidity` of the pattern.
+Icicle charts support [patterns](pattern-hatching-texture.md) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to all chart sections. We also configure the `size` and `solidity` of the pattern.
 
 ```python
 import plotly.graph_objects as go

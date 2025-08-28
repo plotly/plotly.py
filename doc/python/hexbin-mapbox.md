@@ -35,9 +35,9 @@ jupyter:
 
 #### Simple Count Hexbin
 
-This page details the use of a [figure factory](../figure-factories/). For more examples with Choropleth maps, see [this page](../choropleth-maps/).
+This page details the use of a [figure factory](figure-factories.md). For more examples with Choropleth maps, see [this page](choropleth-maps.md).
 
-In order to use mapbox styles that require a mapbox token, set the token with `plotly.express`. You can also use styles that do not require a mapbox token. See more information on [this page](../mapbox-layers/).
+In order to use mapbox styles that require a mapbox token, set the token with `plotly.express`. You can also use styles that do not require a mapbox token. See more information on [this page](mapbox-layers.md).
 
 ```python
 import plotly.figure_factory as ff

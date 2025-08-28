@@ -36,7 +36,7 @@ jupyter:
 
 ### Automatic Labelling with Plotly Express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 When using Plotly Express, your axes and legend are automatically labelled, and it's easy to override the automation for a customized figure using the `labels` keyword argument. The title of your figure is up to you though!
 
@@ -124,7 +124,7 @@ IFrame(snippet_url + 'figure-labels', width='100%', height=1200)
 
 ### Manual Labelling with Graph Objects
 
-When using [graph objects](../graph-objects/) rather than [Plotly Express](../plotly-express/), you will need to explicitly label traces and axes:
+When using [graph objects](graph-objects.md) rather than [Plotly Express](plotly-express.md), you will need to explicitly label traces and axes:
 
 ```python
 import plotly.graph_objects as go
@@ -241,7 +241,7 @@ fig = go.Figure(
 fig.show()
 ```
 
-The configuration of the legend is discussed in detail in the [Legends](../legend/) page.
+The configuration of the legend is discussed in detail in the [Legends](legend.md) page.
 
 ### Align Plot Title
 The following example shows how to align the plot title in [layout.title](https://plotly.com/python/reference/layout/#layout-title). `x` sets the x position with respect to `xref` from "0" (left) to "1" (right), and `y` sets the y position with respect to `yref` from "0" (bottom) to "1" (top). Moreover, you can define `xanchor` to `left`,`right`, or `center` for setting the title's horizontal alignment with respect to its x position, and/or `yanchor` to `top`, `bottom`, or `middle` for setting the title's vertical alignment with respect to its y position.

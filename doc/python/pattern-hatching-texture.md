@@ -36,7 +36,7 @@ jupyter:
 
 *New in 5.0, with support for pie, sunburst, icicle, funnelarea, and treemap charts in 5.15*
 
-[Bar charts](../bar-charts/), [histograms](../histograms/), [polar bar charts](../wind-rose-charts/), [area charts](../filled-area-plots/), [pie charts](../pie-charts), [sunburst charts](../sunburst-charts), [funnelarea charts](../funnel-charts), [icicle charts](../icicle-charts/), and [treemap charts](../treemaps), have large markers or areas which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
+[Bar charts](bar-charts.md), [histograms](histograms.md), [polar bar charts](wind-rose-charts.md), [area charts](filled-area-plots.md), [pie charts](pie-charts.md), [sunburst charts](sunburst-charts.md), [funnelarea charts](funnel-charts.md), [icicle charts](icicle-charts.md), and [treemap charts](treemaps.md), have large markers or areas which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:
 
 * to double-encode variables (i.e. using both color and pattern) to improve accessibility for visually-impaired end-users
 * to encode an additional variable beyond just using color
@@ -75,7 +75,7 @@ fig.show()
 
 ### Controlling Pattern Assignment
 
-In the charts above, the first value of the variable assigned `pattern_shape` gets the empty pattern, but this (and indeed every pattern-to-variable assignment) can be controlled using `pattern_shape_sequence` and `pattern_shape_map`, analogously to the way [discrete colors](../discrete-color/) can be mapped using Plotly Express.
+In the charts above, the first value of the variable assigned `pattern_shape` gets the empty pattern, but this (and indeed every pattern-to-variable assignment) can be controlled using `pattern_shape_sequence` and `pattern_shape_map`, analogously to the way [discrete colors](discrete-color.md) can be mapped using Plotly Express.
 
 Here we use `pattern_shape_sequence` to replace the defaults and include a pattern-shape for the first variable:
 
@@ -136,7 +136,7 @@ fig.show()
 
 ### Patterns using Graph Objects
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Bar` class from `plotly.graph_objects`](../graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Bar` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 import plotly.graph_objects as go

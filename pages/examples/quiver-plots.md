@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/quiver-plot.jpg
 ---
 
-Quiver plots can be made using a [figure factory](../figure-factories/) as detailed in this page.
+Quiver plots can be made using a [figure factory](figure-factories.md) as detailed in this page.
 
 #### Basic Quiver Plot
 
@@ -95,7 +95,7 @@ fig.show()
 
 #### See also
 
-[Cone plot](../cone-plot) for the 3D equivalent of quiver plots.
+[Cone plot](cone-plot.md) for the 3D equivalent of quiver plots.
 
 #### Reference
 

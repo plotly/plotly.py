@@ -37,7 +37,7 @@ jupyter:
 
 ### Basic Treemap with plotly.express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 With `px.treemap`, each row of the DataFrame is represented as a sector of the treemap.
 
@@ -144,7 +144,7 @@ fig.show()
 
 ### Using an explicit mapping for discrete colors
 
-For more information about discrete colors, see the [dedicated page](../discrete-color).
+For more information about discrete colors, see the [dedicated page](discrete-color.md).
 
 ```python
 import plotly.express as px
@@ -235,7 +235,7 @@ fig.show()
 
 ### Basic Treemap with go.Treemap
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Treemap` class from `plotly.graph_objects`](../graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Treemap` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 import plotly.graph_objects as go
@@ -565,7 +565,7 @@ fig.show()
 
 *New in 5.15*
 
-Treemap charts support [patterns](../pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to the root node.
+Treemap charts support [patterns](pattern-hatching-texture.md) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to the root node.
 
 ```python
 import plotly.graph_objects as go

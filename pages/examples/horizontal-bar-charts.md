@@ -37,7 +37,7 @@ See more examples of bar charts (including vertical bar charts) and styling opti
 
 ### Horizontal Bar Chart with Plotly Express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/). For a horizontal bar char, use the `px.bar` function with `orientation='h'`.
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). For a horizontal bar char, use the `px.bar` function with `orientation='h'`.
 
 #### Basic Horizontal Bar Chart with Plotly Express
 
@@ -78,7 +78,7 @@ fig.show()
 
 ### Horizontal Bar Chart with go.Bar
 
-You can also use [the more generic `go.Bar` class from `plotly.graph_objects`](../graph-objects/). All the options of `go.Bar` are documented in the reference https://plotly.com/python/reference/bar/
+You can also use [the more generic `go.Bar` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Bar` are documented in the reference https://plotly.com/python/reference/bar/
 
 #### Basic Horizontal Bar Chart
 

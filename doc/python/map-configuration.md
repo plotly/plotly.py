@@ -45,7 +45,7 @@ If your figure is created with a `px.scatter_map`, `px.scatter_mapbox`, `px.line
 
 Geo maps are outline-based maps. If your figure is created with a `px.scatter_geo`, `px.line_geo` or `px.choropleth` function or otherwise contains one or more traces of type `go.Scattergeo` or `go.Choropleth`, the `layout.geo` object in your figure contains configuration information for the map itself.
 
-> This page documents **Geo outline-based maps**, and the [Tile Map Layers documentation](../tile-map-layers/) describes how to configure tile-based maps.
+> This page documents **Geo outline-based maps**, and the [Tile Map Layers documentation](tile-map-layers.md) describes how to configure tile-based maps.
 
 **Note:** Plotly Express cannot create empty figures, so the examples below mostly create an "empty" map using `fig = go.Figure(go.Scattergeo())`. That said, every configuration option here is equally applicable to non-empty maps created with the Plotly Express `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions.
 
@@ -59,7 +59,7 @@ In **Plotly.py 6.3 and later**, the base map layer is created from the following
 
 In **earlier versions of Plotly.py**, the base map layer is based on Natural Earth data only. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to de facto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
 
-Various lines and area fills can be shown or hidden, and their color and line-widths specified. In the [default `plotly` template](../templates/), a map frame and physical features such as a coastal outline and filled land areas are shown, at a small-scale 1:110m resolution:
+Various lines and area fills can be shown or hidden, and their color and line-widths specified. In the [default `plotly` template](templates.md), a map frame and physical features such as a coastal outline and filled land areas are shown, at a small-scale 1:110m resolution:
 
 ```python
 import plotly.graph_objects as go
@@ -89,7 +89,7 @@ fig.show()
 
 ### Disabling Base Maps
 
-In certain cases, such as large scale [choropleth maps](../choropleth-maps/), the default physical map can be distracting. In this case the `layout.geo.visible` attribute can be set to `False` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
+In certain cases, such as large scale [choropleth maps](choropleth-maps.md), the default physical map can be distracting. In this case the `layout.geo.visible` attribute can be set to `False` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
 
 ```python
 import plotly.graph_objects as go
@@ -114,7 +114,7 @@ In **Plotly.py 6.3 and later**, this base map is created from [UN data](https://
 
 In **earlier versions of Plotly.py**, this base map is based on Natural Earth data only. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to defacto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
 
-**To create a map with your own cultural features** please refer to our [choropleth documentation](../choropleth-maps/).
+**To create a map with your own cultural features** please refer to our [choropleth documentation](choropleth-maps.md).
 
 Here is a map with only cultural features enabled and styled, at a 1:50m resolution, which includes only country boundaries. See below for country sub-unit cultural base map features:
 
@@ -171,7 +171,7 @@ fig.show()
 
 ### Automatic Zooming or Bounds Fitting
 
-The `layout.geo.fitbounds` attribute can be set to `locations` to automatically set the center and latitude and longitude range according to the data being plotted. See the [choropleth maps](../choropleth-maps/) documentation for more information.
+The `layout.geo.fitbounds` attribute can be set to `locations` to automatically set the center and latitude and longitude range according to the data being plotted. See the [choropleth maps](choropleth-maps.md) documentation for more information.
 
 ```python
 import plotly.express as px
@@ -218,7 +218,7 @@ fig.show()
 
 ### Graticules (Latitude and Longitude Grid Lines)
 
-A graticule can be drawn using `layout.geo.lataxis.showgrid` and `layout.geo.lonaxis.showgrid` with options similar to [2d cartesian ticks](../axes/).
+A graticule can be drawn using `layout.geo.lataxis.showgrid` and `layout.geo.lonaxis.showgrid` with options similar to [2d cartesian ticks](axes.md).
 
 ```python
 import plotly.graph_objects as go

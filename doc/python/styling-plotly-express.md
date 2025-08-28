@@ -37,15 +37,15 @@ jupyter:
 
 ### Styling Figures made with Plotly Express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/). Every Plotly Express function returns [a `plotly.graph_objects.Figure` object](../graph-objects/) whose `data` and `layout` has been pre-populated according to the provided arguments.
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md). Every Plotly Express function returns [a `plotly.graph_objects.Figure` object](graph-objects.md) whose `data` and `layout` has been pre-populated according to the provided arguments.
 
 > You can style and customize figures made with Plotly Express _in all the same ways_ as you can style figures made more manually by explicitly assembling `graph_objects` into a figure.
 
 More specifically, here are the 4 ways you can style and customize figures made with Plotly Express:
 
 1. Control common parameters like width & height, titles, labeling and colors using built-in Plotly Express function arguments
-2. Updating the figure attributes using [update methods or by directly setting attributes](../creating-and-updating-figures/)
-3. Using Plotly's [theming/templating mechanism](../templates/) via the `template` argument to every Plotly Express function
+2. Updating the figure attributes using [update methods or by directly setting attributes](creating-and-updating-figures.md)
+3. Using Plotly's [theming/templating mechanism](templates.md) via the `template` argument to every Plotly Express function
 4. Setting default values for common parameters using `px.defaults`
 
 ### Built-in Plotly Express Styling Arguments
@@ -54,11 +54,11 @@ Many common styling options can be set directly in the `px` function call. Every
 
 - `title` to set the figure title
 - `width` and `height` to set the figure dimensions
-- `template` to [set many styling parameters at once](../templates/) (see below for more details)
+- `template` to [set many styling parameters at once](templates.md) (see below for more details)
 - `labels` to override the default axis and legend labels behaviour, which is to use the data frame column name if available, and otherwise to use the label name itself like "x", "y", "color" etc. `labels` accepts a `dict` whose keys are the label to rename and whose values are the desired labels. These labels appear in axis labels, legend and color bar titles, and in hover labels.
 - `category_orders` to override the default category ordering behaviour, which is to use the order in which the data appears in the input. `category_orders` accepts a `dict` whose keys are the column name to reorder and whose values are a `list` of values in the desired order. These orderings apply everywhere categories appear: in legends, on axes, in bar stacks, in the order of facets, in the order of animation frames etc.
 - `hover_data` and `hover_name` to control which attributes appear in the hover label and how they are formatted.
-- [Various color-related attributes](../colorscales/) such as `color_continuous_scale`, `color_range`, `color_discrete_sequence` and/or `color_discrete_map` set the colors used in the figure. `color_discrete_map` accepts a dict whose keys are values mapped to `color` and whose values are the desired CSS colors.
+- [Various color-related attributes](colorscales.md) such as `color_continuous_scale`, `color_range`, `color_discrete_sequence` and/or `color_discrete_map` set the colors used in the figure. `color_discrete_map` accepts a dict whose keys are values mapped to `color` and whose values are the desired CSS colors.
 
 To illustrate each of these, here is a simple, default figure made with Plotly Express. Note the default orderings for the x-axis categories and the usage of lowercase & snake_case data frame columns for axis labelling.
 
@@ -93,7 +93,7 @@ fig.show()
 
 ### Updating or Modifying Figures made with Plotly Express
 
-If none of the built-in Plotly Express arguments allow you to customize the figure the way you need to, you can use [the `update_*` and `add_*` methods](../creating-and-updating-figures/) on [the `plotly.graph_objects.Figure` object](../graph-objects/) returned by the PX function to make any further modifications to the figure. This approach is the one used throughout the Plotly.py documentation to [customize axes](../axes/), control [legends](../legend/) and [colorbars](../colorscales/), add [shapes](../shapes/) and [annotations](../text-and-annotations/) etc.
+If none of the built-in Plotly Express arguments allow you to customize the figure the way you need to, you can use [the `update_*` and `add_*` methods](creating-and-updating-figures.md) on [the `plotly.graph_objects.Figure` object](graph-objects.md) returned by the PX function to make any further modifications to the figure. This approach is the one used throughout the Plotly.py documentation to [customize axes](axes.md), control [legends](legend.md) and [colorbars](colorscales.md), add [shapes](shapes.md) and [annotations](text-and-annotations.md) etc.
 
 Here is the same figure as above, with some additional customizations to the axes and legend via `.update_yaxes()`, and `.update_layout()`, as well as some annotations added via `.add_shape()` and `.add_annotation()`.
 
@@ -134,7 +134,7 @@ fig.show()
 
 ### How Plotly Express Works with Templates
 
-Plotly has a [theming system based on templates](../templates/) and figures created with Plotly Express interact smoothly with this system:
+Plotly has a [theming system based on templates](templates.md) and figures created with Plotly Express interact smoothly with this system:
 
 - Plotly Express methods will use the default template if one is set in `plotly.io` (by default, this is set to `plotly`) or in `plotly.express.defaults` (see below)
 - The template in use can always be overridden via the `template` argument to every PX function

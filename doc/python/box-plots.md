@@ -44,7 +44,7 @@ Alternatives to box plots for visualizing distributions include [histograms](htt
 
 ## Box Plot with `plotly.express`
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 In a box plot created by `px.box`, the distribution of the column given as `y` argument is represented.
 <!-- #endregion -->
@@ -155,7 +155,7 @@ fig.show()
 
 ## Box plot with go.Box
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Box` class from `plotly.graph_objects`](../graph-objects/). All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/box/.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Box` class from `plotly.graph_objects`](graph-objects.md). All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/box/.
 
 ### Basic Box Plot
 
@@ -510,7 +510,7 @@ fig.show()
 
 ### Box Plot With Only Points
 
-A [strip chart](../strip-charts/) is like a box plot with points showing, and no box:
+A [strip chart](strip-charts.md) is like a box plot with points showing, and no box:
 
 ```python
 import plotly.express as px

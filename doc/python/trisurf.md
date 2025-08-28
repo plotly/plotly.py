@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/trisurf.jpg
 ---
 
-Trisurf plots can be made using a [figure factory](../figure-factories/) as detailed in this page.
+Trisurf plots can be made using a [figure factory](figure-factories.md) as detailed in this page.
 
 #### Torus
 

@@ -44,7 +44,7 @@ Plotly Express natively supports various dataframe libraries, including pandas, 
 
 In versions of Plotly.py prior to version 6, Plotly Express functions accepted non-pandas dataframes as input but used the [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/) or converted those dataframes to pandas internally.
 
-See [the Plotly Express Arguments page](../px-arguments) for full details on supported dataframe libraries.
+See [the Plotly Express Arguments page](px-arguments.md) for full details on supported dataframe libraries.
 
 ## NumPy and NumPy Convertible Arrays for Improved Performance
 
@@ -175,7 +175,7 @@ In a Jupyter notebook environment that supports magic commands, you can load it 
 
 In the examples below we show that it is possible to represent up to around a million points with WebGL-enabled traces.
 For larger datasets, or for a clearer visualization of the density of points,
-it is also possible to use [datashader](../datashader/).
+it is also possible to use [datashader](datashader.md).
 
 ### WebGL with Plotly Express
 
@@ -208,7 +208,7 @@ fig.show()
 
 #### WebGL with 1,000,000 points with Graph Objects
 
-If Plotly Express does not provide a good starting point for creating a chart, you can use [the more generic `go.Scattergl` class from `plotly.graph_objects`](../graph-objects/).
+If Plotly Express does not provide a good starting point for creating a chart, you can use [the more generic `go.Scattergl` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 import plotly.graph_objects as go
@@ -243,7 +243,7 @@ Use [Datashader](https://datashader.org/) to reduce the size of a dataset passed
 
 ### Passing Datashader Rasters as a Tile Map Image Layer
 
-The following example shows the spatial distribution of taxi rides in New York City, which are concentrated on major avenues. For more details about tile-based maps, see [the tile map layers tutorial](../tile-map-layers).
+The following example shows the spatial distribution of taxi rides in New York City, which are concentrated on major avenues. For more details about tile-based maps, see [the tile map layers tutorial](tile-map-layers.md).
 
 ```python
 import pandas as pd
@@ -312,4 +312,4 @@ fig.update_layout(coloraxis_colorbar=dict(title='Count', tickprefix='1.e'))
 fig.show()
 ```
 
-Instead of using Datashader, it would theoretically be possible to create a [2d histogram](../2d-histogram-contour/) with Plotly, but this is not recommended because you would need to load the whole dataset of around 5M rows in the browser for plotly.js to compute the heatmap.
+Instead of using Datashader, it would theoretically be possible to create a [2d histogram](2d-histogram-contour.md) with Plotly, but this is not recommended because you would need to load the whole dataset of around 5M rows in the browser for plotly.js to compute the heatmap.

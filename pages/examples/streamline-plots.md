@@ -35,7 +35,7 @@ jupyter:
 
 A Streamline plot is a representation based on a 2-D vector field interpreted as a velocity field, consisting of closed curves tangent to the velocity field. In the case of a stationary velocity field, streamlines coincide with trajectories (see also the [Wikipedia page on streamlines, streaklines and pathlines](https://en.wikipedia.org/wiki/Streamlines,_streaklines,_and_pathlines)).
 
-For the streamline [figure factory](../figure-factories/), one needs to provide
+For the streamline [figure factory](figure-factories.md), one needs to provide
 - uniformly spaced ranges of `x` and `y` values (1D)
 - 2-D velocity values `u` and `v` defined on the cross-product (`np.meshgrid(x, y)`) of `x` and `y`.
 
@@ -43,7 +43,7 @@ Velocity values are interpolated when determining the streamlines. Streamlines a
 
 #### Basic Streamline Plot
 
-Streamline plots can be made with a [figure factory](../figure-factories/) as detailed in this page.
+Streamline plots can be made with a [figure factory](figure-factories.md) as detailed in this page.
 
 ```python
 import plotly.figure_factory as ff
@@ -113,9 +113,9 @@ fig.show()
 
 #### See also
 
-For a 3D version of streamlines, use the trace `go.Streamtube` documented [here](../streamtube-plot/).
+For a 3D version of streamlines, use the trace `go.Streamtube` documented [here](streamtube-plot.md).
 
-For representing the 2-D vector field as arrows, see the [quiver plot tutorial](../quiver-plots/).
+For representing the 2-D vector field as arrows, see the [quiver plot tutorial](quiver-plots.md).
 
 
 #### Reference

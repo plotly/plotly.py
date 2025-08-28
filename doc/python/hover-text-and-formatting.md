@@ -154,7 +154,7 @@ IFrame(snippet_url + 'hover-text-and-formatting', width='100%', height=1200)
 
 #### Selecting a hovermode in a figure created with `plotly.graph_objects`
 
-The hovermode is a property of the figure layout, so you can select a hovermode no matter how you created the figure, either with `plotly.express` or with `plotly.graph_objects`. Below is an example with a figure created with `plotly.graph_objects`. If you're not familiar with the structure of plotly figures, you can read [the tutorial on creating and updating plotly figures](../creating-and-updating-figures/).
+The hovermode is a property of the figure layout, so you can select a hovermode no matter how you created the figure, either with `plotly.express` or with `plotly.graph_objects`. Below is an example with a figure created with `plotly.graph_objects`. If you're not familiar with the structure of plotly figures, you can read [the tutorial on creating and updating plotly figures](creating-and-updating-figures.md).
 
 ```python
 import plotly.graph_objects as go

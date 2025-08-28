@@ -46,7 +46,7 @@ Alternatives to violin plots for visualizing distributions include [histograms](
 
 ### Basic Violin Plot with Plotly Express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 <!-- #endregion -->
 
 ```python
@@ -93,7 +93,7 @@ fig.show()
 
 ## Violin Plot with go.Violin
 
-If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](../graph-objects/). All the options of `go.Violin` are documented in the reference https://plotly.com/python/reference/violin/
+If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Violin` are documented in the reference https://plotly.com/python/reference/violin/
 
 #### Basic Violin Plot
 
@@ -265,7 +265,7 @@ fig.show()
 
 ### Violin Plot With Only Points
 
-A [strip chart](../strip-charts/) is like a violin plot with points showing, and no violin:
+A [strip chart](strip-charts.md) is like a violin plot with points showing, and no violin:
 
 ```python
 import plotly.express as px

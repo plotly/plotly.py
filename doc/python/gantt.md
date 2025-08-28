@@ -39,11 +39,11 @@ A [Gantt chart](https://en.wikipedia.org/wiki/Gantt_chart) is a type of bar char
 
 ### Gantt Charts and Timelines with plotly.express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/). With `px.timeline` (*introduced in version 4.9*) each data point is represented as a horizontal bar with a start and end point specified as dates. 
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). With `px.timeline` (*introduced in version 4.9*) each data point is represented as a horizontal bar with a start and end point specified as dates. 
 
-The `px.timeline` function by default sets the X-axis to be of `type=date`, so it can be configured like any [time-series chart](../time-series/).
+The `px.timeline` function by default sets the X-axis to be of `type=date`, so it can be configured like any [time-series chart](time-series.md).
 
-Plotly Express also supports a [general-purpose `px.bar` function for bar charts](../bar-charts/).
+Plotly Express also supports a [general-purpose `px.bar` function for bar charts](bar-charts.md).
 
 ```python
 import plotly.express as px
@@ -60,7 +60,7 @@ fig.update_yaxes(autorange="reversed") # otherwise tasks are listed from the bot
 fig.show()
 ```
 
-`px.timeline` supports [discrete color](../discrete-color/) as above, or [continuous color](../colorscales/) as follows.
+`px.timeline` supports [discrete color](discrete-color.md) as above, or [continuous color](colorscales.md) as follows.
 
 ```python
 import plotly.express as px
@@ -112,7 +112,7 @@ fig.show()
 
 #### Deprecated Figure Factory
 
-Prior to the introduction of `plotly.express.timeline()` in version 4.9, the recommended way to make Gantt charts was to use the now-deprecated `create_gantt()` [figure factory](../figure-factories/), as follows:
+Prior to the introduction of `plotly.express.timeline()` in version 4.9, the recommended way to make Gantt charts was to use the now-deprecated `create_gantt()` [figure factory](figure-factories.md), as follows:
 
 ```python
 import plotly.figure_factory as ff
@@ -129,7 +129,7 @@ fig.show()
 #### Group Tasks Together
 
 
-The following example shows how to use the now-deprecated `create_gantt()` [figure factory](../figure-factories/) to color tasks by a numeric variable.
+The following example shows how to use the now-deprecated `create_gantt()` [figure factory](figure-factories.md) to color tasks by a numeric variable.
 <!-- #endregion -->
 
 ```python
@@ -155,7 +155,7 @@ fig.show()
 
 #### Color by Numeric Variable
 
-The following example shows how to use the now-deprecated `create_gantt()` [figure factory](../figure-factories/) to color tasks by a numeric variable.
+The following example shows how to use the now-deprecated `create_gantt()` [figure factory](figure-factories.md) to color tasks by a numeric variable.
 
 ```python
 import plotly.figure_factory as ff

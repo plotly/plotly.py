@@ -39,7 +39,7 @@ jupyter:
 Horizontal and vertical lines and rectangles that span an entire
 plot can be added via the `add_hline`, `add_vline`, `add_hrect`, and `add_vrect`
 methods of `plotly.graph_objects.Figure`. Shapes added with these methods are
-added as [layout shapes](../shapes) (as shown when doing `print(fig)`, for
+added as [layout shapes](shapes.md) (as shown when doing `print(fig)`, for
 example). These shapes are fixed to the endpoints of one axis, regardless of the
 range of the plot, and fixed to data coordinates on the other axis. The
 following shows some possibilities, try panning and zooming the resulting figure
@@ -125,7 +125,7 @@ fig.show()
 
 #### Adding to Multiple Facets / Subplots
 
-The same line or box can be added to multiple [subplots](../subplots/) or [facets](../facet-plots/) by setting the `row` and/or `col` to `"all"`. The default `row` and `col` values are `"all"`.
+The same line or box can be added to multiple [subplots](subplots.md) or [facets](facet-plots.md) by setting the `row` and/or `col` to `"all"`. The default `row` and `col` values are `"all"`.
 ```python
 import plotly.express as px
 
@@ -143,7 +143,7 @@ fig.show()
 
 *New in 5.14*
 
-[Text labels on shapes](../shapes/#addingtextlabelstoshapes), introduced in version 5.14, is now the recommended way to add text to shapes. The above examples using `add_hline`, `add_vrect`, `add_hrect`, and `add_vline` that add annotations can be rewritten to use `label`.
+[Text labels on shapes](shapes.md#addingtextlabelstoshapes), introduced in version 5.14, is now the recommended way to add text to shapes. The above examples using `add_hline`, `add_vrect`, `add_hrect`, and `add_vline` that add annotations can be rewritten to use `label`.
 
 ```python
 import plotly.express as px
@@ -176,11 +176,11 @@ fig.show()
 
 ```
 
-With [text labels on shapes](../shapes/#adding-text-labels-to-shapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user. 
+With [text labels on shapes](shapes.md#adding-text-labels-to-shapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user. 
 
 
 ### Reference
 
-More details are available about [layout shapes](../shapes/) and [annotations](../text-and-annotations). 
+More details are available about [layout shapes](shapes.md) and [annotations](text-and-annotations.md).
 
 Reference documentation is also available for [`add_hline`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_hline#plotly.graph_objects.Figure.add_hline), [`add_vline`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_vline#plotly.graph_objects.Figure.add_vline), [`add_hrect`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_hrect#plotly.graph_objects.Figure.add_hrect), [`add_vrect`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_vrect#plotly.graph_objects.Figure.add_vrect).

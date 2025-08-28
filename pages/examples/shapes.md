@@ -39,13 +39,13 @@ As a general rule, there are two ways to add shapes (lines or polygons) to figur
 1. Trace types in the `scatter` family (e.g. `scatter`, `scatter3d`, `scattergeo` etc) can be drawn with `mode="lines"` and optionally support a `fill="self"` attribute, and so can be used to draw open or closed shapes on figures.
 2. Standalone lines, ellipses and rectangles can be added to figures using `fig.add_shape()`, and they can be positioned absolutely within the figure, or they can be positioned relative to the axes of 2d cartesian subplots i.e. in data coordinates.
 
-*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](../horizontal-vertical-shapes/) that are fixed to data coordinates in one axis and absolutely positioned in another.
+*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 The differences between these two approaches are that:
 * Traces can optionally support hover labels and can appear in legends.
 * Shapes can be positioned absolutely or relative to data coordinates in 2d cartesian subplots only.
 * Traces cannot be positioned absolutely but can be positioned relative to date coordinates in any subplot type.
-* Traces also support [optional text](../text-and-annotations/), although there is a [textual equivalent to shapes in text annotations](../text-and-annotations/).
+* Traces also support [optional text](text-and-annotations.md), although there is a [textual equivalent to shapes in text annotations](text-and-annotations.md).
 
 
 
@@ -330,7 +330,7 @@ fig.show()
 
 #### Highlighting Time Series Regions with Rectangle Shapes
 
-*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](../horizontal-vertical-shapes/) that are fixed to data coordinates in one axis and absolutely positioned in another.
+*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 
 ```python
@@ -764,9 +764,9 @@ fig.show()
 
 _introduced in plotly 4.7_
 
-You can create layout shapes programmatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](../configuration-options#add-optional-shapedrawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
+You can create layout shapes programmatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](configuration-options.md#add-optional-shapedrawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
 
-This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](../imshow) or [layout images](../images).
+This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](imshow.md) or [layout images](images.md).
 
 Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can
 - drag and resize it for lines, rectangles and circles/ellipses

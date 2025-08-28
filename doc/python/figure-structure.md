@@ -35,9 +35,9 @@ jupyter:
 
 ### Overview
 
-The `plotly` Python package exists to [create, manipulate](../creating-and-updating-figures/) and [render](../renderers/) graphical figures (i.e. charts, plots, maps and diagrams) represented by data structures also referred to as figures. The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
+The `plotly` Python package exists to [create, manipulate](creating-and-updating-figures.md) and [render](renderers.md) graphical figures (i.e. charts, plots, maps and diagrams) represented by data structures also referred to as figures. The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
 
-> Note: the recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](../plotly-express/), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the architecture of the data structure that these objects represent, for users who wish to understand more about how to customize them, or assemble them from [other `plotly.graph_objects` components](../graph-objects/).
+> Note: the recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](plotly-express.md), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the architecture of the data structure that these objects represent, for users who wish to understand more about how to customize them, or assemble them from [other `plotly.graph_objects` components](graph-objects.md).
 
 Viewing the underlying data structure for any `plotly.graph_objects.Figure` object, including those returned by Plotly Express, can be done via `print(fig)` or, in JupyterLab, with the special `fig.show("json")` renderer. Figures also support `fig.to_dict()` and `fig.to_json()` methods. `print()`ing the figure will result in the often-verbose `layout.template` key being represented as ellipses `'...'` for brevity.
 
@@ -68,22 +68,22 @@ IFrame(snippet_url + 'figure-structure', width='100%', height=1200)
 
 ### Figures as Trees of Attributes
 
-Plotly.js supports inputs adhering to a well-defined schema, whose overall architecture is explained in this page and which is exhaustively documented in the [Figure Reference](../reference/index/) (which is itself generated from a [machine-readable JSON representation of the schema](https://raw.githubusercontent.com/plotly/plotly.js/master/dist/plot-schema.json)). Figures are represented as trees with named nodes called "attributes". The root node of the tree has three top-level attributes: `data`, `layout` and `frames` (see below).
+Plotly.js supports inputs adhering to a well-defined schema, whose overall architecture is explained in this page and which is exhaustively documented in the [Figure Reference](reference/index.md) (which is itself generated from a [machine-readable JSON representation of the schema](https://raw.githubusercontent.com/plotly/plotly.js/master/dist/plot-schema.json)). Figures are represented as trees with named nodes called "attributes". The root node of the tree has three top-level attributes: `data`, `layout` and `frames` (see below).
 
-Attributes are referred to in text and in the [Figure Reference](../reference/index/) by their full "path" i.e. the dot-delimited concatenation of their parents. For example `"layout.width"` refers to the attribute whose key is `"width"` inside a dict which is the value associated with a key `"layout"` at the root of the figure. If one of the parents is a list rather than a dict, a set of brackets is inserted in the path when referring to the attribute in the abstract, e.g. `"layout.annotations[].text"`. Finally, as explained below, the top-level "data" attribute defines a list of typed objects called "traces" with the schema dependent upon the type, and these attributes' paths are listed in the [Figure Reference](../reference/index/) as `"data[type=scatter].name"`.
+Attributes are referred to in text and in the [Figure Reference](reference/index.md) by their full "path" i.e. the dot-delimited concatenation of their parents. For example `"layout.width"` refers to the attribute whose key is `"width"` inside a dict which is the value associated with a key `"layout"` at the root of the figure. If one of the parents is a list rather than a dict, a set of brackets is inserted in the path when referring to the attribute in the abstract, e.g. `"layout.annotations[].text"`. Finally, as explained below, the top-level "data" attribute defines a list of typed objects called "traces" with the schema dependent upon the type, and these attributes' paths are listed in the [Figure Reference](reference/index.md) as `"data[type=scatter].name"`.
 
-The [`plotly.graph_objects` module contains an automatically-generated hierarchy of  Python classes](../graph-objects/) which represent non-leaf attributes in the figure schema and provide a Pythonic API for them. When [manipulating a `plotly.graph_objects.Figure` object](../creating-and-updating-figures/), attributes can be set either directly using Python object attributes e.g. `fig.layout.title.font.family="Open Sans"` or using [update methods and "magic underscores"](../creating-and-updating-figures/#magic-underscore-notation) e.g. `fig.update_layout(title_font_family="Open Sans")`
+The [`plotly.graph_objects` module contains an automatically-generated hierarchy of  Python classes](graph-objects.md) which represent non-leaf attributes in the figure schema and provide a Pythonic API for them. When [manipulating a `plotly.graph_objects.Figure` object](creating-and-updating-figures.md), attributes can be set either directly using Python object attributes e.g. `fig.layout.title.font.family="Open Sans"` or using [update methods and "magic underscores"](../creating-and-updating-figures/#magic-underscore-notation) e.g. `fig.update_layout(title_font_family="Open Sans")`
 
-When building a figure, it is *not necessary to populate every attribute* of every object. At render-time, [the JavaScript layer will compute default values](../figure-introspection/) for each required unspecified attribute, depending upon the ones that are specified, as documented in the [Figure Reference](../reference/index/). An example of this would be `layout.xaxis.range`, which may be specified explicitly, but if not will be computed based on the range of `x` values for every trace linked to that axis. The JavaScript layer will ignore unknown attributes or malformed values, although the `plotly.graph_objects` module provides Python-side validation for attribute values. Note also that if [the `layout.template` key is present (as it is by default)](../templates/) then default values will be drawn first from the contents of the template and only if missing from there will the JavaScript layer infer further defaults. The built-in template can be disabled by setting `layout.template="none"`.
+When building a figure, it is *not necessary to populate every attribute* of every object. At render-time, [the JavaScript layer will compute default values](figure-introspection.md) for each required unspecified attribute, depending upon the ones that are specified, as documented in the [Figure Reference](reference/index.md). An example of this would be `layout.xaxis.range`, which may be specified explicitly, but if not will be computed based on the range of `x` values for every trace linked to that axis. The JavaScript layer will ignore unknown attributes or malformed values, although the `plotly.graph_objects` module provides Python-side validation for attribute values. Note also that if [the `layout.template` key is present (as it is by default)](templates.md) then default values will be drawn first from the contents of the template and only if missing from there will the JavaScript layer infer further defaults. The built-in template can be disabled by setting `layout.template="none"`.
 
 ### The Top-Level `data` Attribute
 
 The first of the three top-level attributes of a figure is `data`, whose value must be a list of dicts referred to as "traces".
 
-* Each trace has one of more than 40 possible types (see below for a list organized by subplot type, including e.g. [`scatter`](../line-and-scatter/), [`bar`](../bar-charts/), [`pie`](../pie-charts/), [`surface`](../3d-surface-plots/), [`choropleth`](../choropleth-maps/) etc), and represents a set of related graphical marks in a figure. Each trace must have a `type` attribute which defines the other allowable attributes.
-* Each trace is drawn on a single [subplot](../subplots/) whose type must be compatible with the trace's type, or is its own subplot (see below).
-* Traces may have a single [legend](../legend/) entry, with the exception of pie and funnelarea traces (see below).
-* Certain trace types support [continuous color, with an associated colorbar](../colorscales/), which can be controlled by attributes either within the trace, or within the layout when using the [coloraxis attribute](../colorscales/).
+* Each trace has one of more than 40 possible types (see below for a list organized by subplot type, including e.g. [`scatter`](line-and-scatter.md), [`bar`](bar-charts.md), [`pie`](pie-charts.md), [`surface`](3d-surface-plots.md), [`choropleth`](choropleth-maps.md) etc), and represents a set of related graphical marks in a figure. Each trace must have a `type` attribute which defines the other allowable attributes.
+* Each trace is drawn on a single [subplot](subplots.md) whose type must be compatible with the trace's type, or is its own subplot (see below).
+* Traces may have a single [legend](legend.md) entry, with the exception of pie and funnelarea traces (see below).
+* Certain trace types support [continuous color, with an associated colorbar](colorscales.md), which can be controlled by attributes either within the trace, or within the layout when using the [coloraxis attribute](colorscales.md).
 
 
 ### The Top-Level `layout` Attribute
@@ -91,28 +91,28 @@ The first of the three top-level attributes of a figure is `data`, whose value m
 The second of the three top-level attributes of a figure is `layout`, whose value is referred to in text as "the layout" and must be a dict, containing attributes that control positioning and configuration of non-data-related parts of the figure such as:
 
   * Dimensions and margins, which define the bounds of "paper coordinates" (see below)
-  * Figure-wide defaults: [templates](../templates/), [fonts](../figure-labels/), colors, hover-label and modebar defaults
-  * [Title](../figure-labels/) and [legend](../legend/) (positionable in container and/or paper coordinates)
-  * [Color axes and associated color bars](../colorscales/) (positionable in paper coordinates)
+  * Figure-wide defaults: [templates](templates.md), [fonts](figure-labels.md), colors, hover-label and modebar defaults
+  * [Title](figure-labels.md) and [legend](legend.md) (positionable in container and/or paper coordinates)
+  * [Color axes and associated color bars](colorscales.md) (positionable in paper coordinates)
   * Subplots of various types on which can be drawn multiple traces and which are positioned in paper coordinates:
     * `xaxis`, `yaxis`, `xaxis2`, `yaxis3` etc: X and Y cartesian axes, the intersections of which are cartesian subplots
     * `scene`, `scene2`, `scene3` etc: 3d scene subplots
     * `ternary`, `ternary2`, `ternary3`, `polar`, `polar2`, `polar3`, `geo`, `geo2`, `geo3`, `map`, `map2`, `map3`, `smith`, `smith2` etc: ternary, polar, geo, map or smith subplots
   * Non-data marks which can be positioned in paper coordinates, or in data coordinates linked to 2d cartesian subplots:
-    * `annotations`: [textual annotations with or without arrows](../text-and-annotations/)
-    * `shapes`: [lines, rectangles, ellipses or open or closed paths](../shapes/)
-    * `images`: [background or decorative images](../images/)
+    * `annotations`: [textual annotations with or without arrows](text-and-annotations.md)
+    * `shapes`: [lines, rectangles, ellipses or open or closed paths](shapes.md)
+    * `images`: [background or decorative images](images.md)
   * Controls which can be positioned in paper coordinates and which can trigger Plotly.js functions when interacted with by a user:
-    * `updatemenus`: [single buttons, toggles](../custom-buttons/) and [dropdown menus](../dropdowns/)
-    * `sliders`: [slider controls](../sliders/)
+    * `updatemenus`: [single buttons, toggles](custom-buttons.md) and [dropdown menus](dropdowns.md)
+    * `sliders`: [slider controls](sliders.md)
 
 ### The Top-Level `frames` Attribute
 
-The third of the three top-level attributes of a figure is `frames`, whose value must be a list of dicts that define sequential frames in an [animated plot](../animations/). Each frame contains its own data attribute as well as other parameters. Animations are usually triggered and controlled via controls defined in layout.sliders and/or layout.updatemenus
+The third of the three top-level attributes of a figure is `frames`, whose value must be a list of dicts that define sequential frames in an [animated plot](animations.md). Each frame contains its own data attribute as well as other parameters. Animations are usually triggered and controlled via controls defined in layout.sliders and/or layout.updatemenus
 
 ### The `config` Object
 
-At [render-time](../renderers/), it is also possible to control certain figure behaviors which are not considered part of the figure proper i.e. the behavior of the "modebar" and how the figure relates to mouse actions like scrolling etc. The object that contains these options is called the [`config`, and has its own documentation page](../configuration-options/). It is exposed in Python as the `config` keyword argument of the `.show()` method on `plotly.graph_objects.Figure` objects.
+At [render-time](renderers.md), it is also possible to control certain figure behaviors which are not considered part of the figure proper i.e. the behavior of the "modebar" and how the figure relates to mouse actions like scrolling etc. The object that contains these options is called the [`config`, and has its own documentation page](configuration-options.md). It is exposed in Python as the `config` keyword argument of the `.show()` method on `plotly.graph_objects.Figure` objects.
 
 ### Positioning With Paper, Container Coordinates, or Axis Domain Coordinates
 
@@ -139,60 +139,60 @@ and position of the axis named `y2`.
 
 ### 2D Cartesian Trace Types and Subplots
 
-The most commonly-used kind of subplot is a [two-dimensional Cartesian subplot](../axes/). Traces compatible with these subplots support `xaxis` and `yaxis` attributes whose values must refer to corresponding objects in the layout portion of the figure. For example, if `xaxis="x"`, and `yaxis="y"` (which is the default) then this trace is drawn on the subplot at the intersection of the axes configured under `layout.xaxis` and `layout.yaxis`, but if `xaxis="x2"` and `yaxis="y3"` then the trace is drawn at the intersection of the axes configured under `layout.xaxis2` and `layout.yaxis3`. Note that attributes such as `layout.xaxis` and `layout.xaxis2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of different types can be drawn on the same subplot.
+The most commonly-used kind of subplot is a [two-dimensional Cartesian subplot](axes.md). Traces compatible with these subplots support `xaxis` and `yaxis` attributes whose values must refer to corresponding objects in the layout portion of the figure. For example, if `xaxis="x"`, and `yaxis="y"` (which is the default) then this trace is drawn on the subplot at the intersection of the axes configured under `layout.xaxis` and `layout.yaxis`, but if `xaxis="x2"` and `yaxis="y3"` then the trace is drawn at the intersection of the axes configured under `layout.xaxis2` and `layout.yaxis3`. Note that attributes such as `layout.xaxis` and `layout.xaxis2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of different types can be drawn on the same subplot.
 
-X- and Y-axes support the `type` attribute, which enables them to represent [continuous values (`type="linear"`, `type="log"`)](../axes/), [temporal values (`type="date"`)](../time-series/) or [categorical values (`type="category"`, `type="multicategory`)](../bar-charts/). Axes can also be overlaid on top of one another to create [dual-axis or multiple-axis charts](../multiple-axes/). 2-d cartesian subplots lend themselves very well to creating ["small multiples" figures, also known as facet or trellis plots](../facet-plots/).
+X- and Y-axes support the `type` attribute, which enables them to represent [continuous values (`type="linear"`, `type="log"`)](axes.md), [temporal values (`type="date"`)](time-series.md) or [categorical values (`type="category"`, `type="multicategory`)](bar-charts.md). Axes can also be overlaid on top of one another to create [dual-axis or multiple-axis charts](multiple-axes.md). 2-d cartesian subplots lend themselves very well to creating ["small multiples" figures, also known as facet or trellis plots](facet-plots.md).
 
 The following trace types are compatible with 2d-cartesian subplots via the `xaxis` and `yaxis` attributes:
 
-* scatter-like trace types: [`scatter`](../line-and-scatter/) and [`scattergl`](../webgl-vs-svg/), which can be used to draw [scatter plots](../line-and-scatter/), [line plots and curves](../line-charts/), [time-series plots](../time-series/), [bubble charts](../bubble-charts/), [dot plots](../dot-plots/) and [filled areas](../filled-area-plots/) and also support [error bars](../error-bars/)
-* [`bar`](../bar-charts/), [`funnel`](../funnel-charts/), [`waterfall`](../waterfall-charts/): bar-like trace types which can also be used to draw [timelines and Gantt charts](../gantt/)
-* [`histogram`](../histograms/): an *aggregating* bar-like trace type
-* [`box`](../box-plots/) and [`violin`](../box-plots/): 1-dimensional distribution-like trace types
-* [`histogram2d`](../2D-Histogram/) and [`histogram2dcontour`](../2d-histogram-contour/): 2-dimensional distribution-like density trace types
-* [`image`](../imshow/), [`heatmap`](../heatmaps/) and [`contour`](../contour-plots/): matrix trace types
-* [`ohlc`](../ohlc-charts/) and [`candlestick`](../candlestick-charts/): stock-like trace types
-* [`carpet`](../carpet-plot/): a special trace type for building [carpet plots](../carpet-plot/), in that other traces can use as subplots (see below)
-* [`splom`](../splom/): multi-dimensional scatter plots which implicitly refer to many 2-d cartesian subplots at once.
+* scatter-like trace types: [`scatter`](line-and-scatter.md) and [`scattergl`](webgl-vs-svg.md), which can be used to draw [scatter plots](line-and-scatter.md), [line plots and curves](line-charts.md), [time-series plots](time-series.md), [bubble charts](bubble-charts.md), [dot plots](dot-plots.md) and [filled areas](filled-area-plots.md) and also support [error bars](error-bars.md)
+* [`bar`](bar-charts.md), [`funnel`](funnel-charts.md), [`waterfall`](waterfall-charts.md): bar-like trace types which can also be used to draw [timelines and Gantt charts](gantt.md)
+* [`histogram`](histograms.md): an *aggregating* bar-like trace type
+* [`box`](box-plots.md) and [`violin`](box-plots.md): 1-dimensional distribution-like trace types
+* [`histogram2d`](2D-Histogram.md) and [`histogram2dcontour`](2d-histogram-contour.md): 2-dimensional distribution-like density trace types
+* [`image`](imshow.md), [`heatmap`](heatmaps.md) and [`contour`](contour-plots.md): matrix trace types
+* [`ohlc`](ohlc-charts.md) and [`candlestick`](candlestick-charts.md): stock-like trace types
+* [`carpet`](carpet-plot.md): a special trace type for building [carpet plots](carpet-plot.md), in that other traces can use as subplots (see below)
+* [`splom`](splom.md): multi-dimensional scatter plots which implicitly refer to many 2-d cartesian subplots at once.
 
 ### 3D, Polar, Ternary and Smith Trace Types and Subplots
 
-Beyond 2D cartesian subplots, figures can include [three-dimensional cartesian subplots](../3d-charts/), [polar subplots](../polar-chart/), [ternary subplots](../ternary-plots/) and [smith subplots](../smith-charts/). The following trace types support attributes named `scene`, `polar`, `smith` or `ternary`, whose values must refer to corresponding objects in the layout portion of the figure i.e. `ternary="ternary2"` etc. Note that attributes such as `layout.scene` and `layout.ternary2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
+Beyond 2D cartesian subplots, figures can include [three-dimensional cartesian subplots](3d-charts.md), [polar subplots](polar-chart.md), [ternary subplots](ternary-plots.md) and [smith subplots](smith-charts.md). The following trace types support attributes named `scene`, `polar`, `smith` or `ternary`, whose values must refer to corresponding objects in the layout portion of the figure i.e. `ternary="ternary2"` etc. Note that attributes such as `layout.scene` and `layout.ternary2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
-The following trace types are compatible with 3D subplots via the `scene` attribute, which contains special [camera controls](../3d-camera-controls/):
+The following trace types are compatible with 3D subplots via the `scene` attribute, which contains special [camera controls](3d-camera-controls.md):
 
-* [`scatter3d`](../3d-scatter-plots/), which can be used to draw [individual markers](../3d-scatter-plots/), [3d bubble charts](../3d-bubble-charts/) and [lines and curves](../3d-line-plots/)
-* [`surface`](../3d-surface-plots/) and [`mesh`](../3d-mesh/): 3d surface trace types
-* [`cone`](../cone-plot/) and [`streamtube`](../streamtube-plot/): 3d vector field trace types
-* [`volume`](../3d-volume-plots/) and [`isosurface`](../3d-isosurface-plots/): 3d volume trace types
+* [`scatter3d`](3d-scatter-plots.md), which can be used to draw [individual markers](3d-scatter-plots.md), [3d bubble charts](3d-bubble-charts.md) and [lines and curves](3d-line-plots.md)
+* [`surface`](3d-surface-plots.md) and [`mesh`](3d-mesh.md): 3d surface trace types
+* [`cone`](cone-plot.md) and [`streamtube`](streamtube-plot.md): 3d vector field trace types
+* [`volume`](3d-volume-plots.md) and [`isosurface`](3d-isosurface-plots.md): 3d volume trace types
 
 The following trace types are compatible with polar subplots via the `polar` attribute:
 
-* scatter-like trace types: [`scatterpolar` and `scatterpolargl`](../polar-chart/), which can be used to draw individual markers, [curves and filled areas (i.e. radar or spider charts)](../radar-chart/)
-* [`barpolar`](../wind-rose-charts/): useful for [wind roses](../wind-rose-charts/) and other polar bar charts
+* scatter-like trace types: [`scatterpolar` and `scatterpolargl`](polar-chart.md), which can be used to draw individual markers, [curves and filled areas (i.e. radar or spider charts)](radar-chart.md)
+* [`barpolar`](wind-rose-charts.md): useful for [wind roses](wind-rose-charts.md) and other polar bar charts
 
 The following trace types are compatible with ternary subplots via the `ternary` attribute:
 
-* [`scatterternary`](../ternary-plots/), which can be used to draw individual markers, [curves and filled areas](../ternary-contour/)
+* [`scatterternary`](ternary-plots.md), which can be used to draw individual markers, [curves and filled areas](ternary-contour.md)
 
 The following trace types are compatible with smith subplots via the `smith` attribute:
 
-* [`scattersmith`](../smith-charts/), which can be used to draw individual markers, curves and filled areas
+* [`scattersmith`](smith-charts.md), which can be used to draw individual markers, curves and filled areas
 
 ### Map Trace Types and Subplots
 
-Figures can include two different types of map subplots: [geo subplots for outline maps](../map-configuration/) and [tile-based maps](../tile-map-layers/). The following trace types support attributes named `geo` or `map`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.map` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
+Figures can include two different types of map subplots: [geo subplots for outline maps](map-configuration.md) and [tile-based maps](tile-map-layers.md). The following trace types support attributes named `geo` or `map`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.map` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
 The following trace types are compatible with geo subplots via the `geo` attribute:
 
-* [`scattergeo`](../scatter-plots-on-maps/), which can be used to draw [individual markers](../scatter-plots-on-maps/), [line and curves](../lines-on-maps/) and filled areas on outline maps
-* [`choropleth`](../choropleth-maps/): [colored polygons](../choropleth-maps/) on outline maps
+* [`scattergeo`](scatter-plots-on-maps.md), which can be used to draw [individual markers](scatter-plots-on-maps.md), [line and curves](lines-on-maps.md) and filled areas on outline maps
+* [`choropleth`](choropleth-maps.md): [colored polygons](choropleth-maps.md) on outline maps
 
 The following trace types are compatible with tile map subplots via the `map` attribute:
 
-* [`scattermap`](../tile-scatter-maps/), which can be used to draw [individual markers](../tile-scatter-maps/), [lines and curves](../lines-on-tile-maps/) and [filled areas](../filled-area-tile-maps/) on tile maps
-* [`choroplethmap`](../tile-county-choropleth/): colored polygons on tile maps
-* [`densitymap`](../tile-density-heatmaps/): density heatmaps on tile maps
+* [`scattermap`](tile-scatter-maps.md), which can be used to draw [individual markers](tile-scatter-maps.md), [lines and curves](lines-on-tile-maps.md) and [filled areas](filled-area-tile-maps.md) on tile maps
+* [`choroplethmap`](tile-county-choropleth.md): colored polygons on tile maps
+* [`densitymap`](tile-density-heatmaps.md): density heatmaps on tile maps
 
 ### Traces Which Are Their Own Subplots
 
@@ -200,29 +200,29 @@ Certain trace types cannot share subplots, and hence have no attribute to map to
 
 The following trace types are their own subplots and support a domain attribute:
 
-* [`pie`](../pie-charts/) and [`funnelarea`](../waterfall-charts/): one-level part-to-whole relationships with legend items
-* [`sunburst`](../sunburst-charts/) and [`treemap`](../treemaps/): hierarchical multi-level part-to-whole relationships
-* [`parcoords`](../parallel-coordinates-plot/) and [`parcats`](../parallel-categories-diagram/): continuous and categorical multidimensional figures with [parallel coordinates](../parallel-coordinates-plot/) and [parallel sets](../parallel-categories-diagram/)
-* [`sankey`](../sankey-diagram/): [flow diagrams](../sankey-diagram/)
-* [`table`](../table/): [text-based tables](../table/)
-* [`indicator`](../indicator/): big numbers, [gauges](../gauge-charts/), and [bullet charts](../bullet-charts/)
+* [`pie`](pie-charts.md) and [`funnelarea`](waterfall-charts.md): one-level part-to-whole relationships with legend items
+* [`sunburst`](sunburst-charts.md) and [`treemap`](treemaps.md): hierarchical multi-level part-to-whole relationships
+* [`parcoords`](parallel-coordinates-plot.md) and [`parcats`](parallel-categories-diagram.md): continuous and categorical multidimensional figures with [parallel coordinates](parallel-coordinates-plot.md) and [parallel sets](parallel-categories-diagram.md)
+* [`sankey`](sankey-diagram.md): [flow diagrams](sankey-diagram.md)
+* [`table`](table.md): [text-based tables](table.md)
+* [`indicator`](indicator.md): big numbers, [gauges](gauge-charts.md), and [bullet charts](bullet-charts.md)
 
 ### Carpet Trace Types and Subplots
 
-Certain trace types use [traces of type `carpet` as a subplot](../carpet-plot/). These support a `carpet` attribute whose value must match the value of the `carpet` attribute of the `carpet` trace they are to be drawn on. Multiple compatible traces can be placed on the same `carpet` trace.
+Certain trace types use [traces of type `carpet` as a subplot](carpet-plot.md). These support a `carpet` attribute whose value must match the value of the `carpet` attribute of the `carpet` trace they are to be drawn on. Multiple compatible traces can be placed on the same `carpet` trace.
 
 The following trace types are compatible with `carpet` trace subplots via the `carpet` attribute:
 
-* [`scattercarpet`](../carpet-scatter/), which can be used to draw individual markers, curves and filled areas
-* [`contourcarpet`](../carpet-plot/)
+* [`scattercarpet`](carpet-scatter.md), which can be used to draw individual markers, curves and filled areas
+* [`contourcarpet`](carpet-plot.md)
 
 ### Trace Types, Legends and Color Bars
 
-Traces of most types can be optionally associated with a single legend item in the [legend](../legend/). Whether or not a given trace appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items also support the `legendgroup` attribute, and all traces with the same legend group are treated the same way during click/double-click interactions.
+Traces of most types can be optionally associated with a single legend item in the [legend](legend.md). Whether or not a given trace appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items also support the `legendgroup` attribute, and all traces with the same legend group are treated the same way during click/double-click interactions.
 
-The fact that legend items are linked to traces means that when using [discrete color](../discrete-color/), a figure must have one trace per color in order to get a meaningful legend. [Plotly Express has robust support for discrete color](../discrete-color/) to make this easy.
+The fact that legend items are linked to traces means that when using [discrete color](discrete-color.md), a figure must have one trace per color in order to get a meaningful legend. [Plotly Express has robust support for discrete color](discrete-color.md) to make this easy.
 
-Traces which support [continuous color](../colorscales/) can also be associated with color axes in the layout via the `coloraxis` attribute. Multiple traces can be linked to the same color axis. Color axes have a legend-like component called color bars. Alternatively, color axes can be configured within the trace itself.
+Traces which support [continuous color](colorscales.md) can also be associated with color axes in the layout via the `coloraxis` attribute. Multiple traces can be linked to the same color axis. Color axes have a legend-like component called color bars. Alternatively, color axes can be configured within the trace itself.
 
 ```python
 

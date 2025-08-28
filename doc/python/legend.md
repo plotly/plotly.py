@@ -35,18 +35,18 @@ jupyter:
 
 ### Trace Types, Legends and Color Bars
 
-[Traces](../figure-structure) of most types and shapes can be optionally associated with a single legend item in the [legend](../legend/). Whether or not a given trace or shape appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items and shapes also support the `legendgroup` attribute, and all traces and shapes with the same legend group are treated the same way during click/double-click interactions.
+[Traces](figure-structure.md) of most types and shapes can be optionally associated with a single legend item in the [legend](legend.md). Whether or not a given trace or shape appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items and shapes also support the `legendgroup` attribute, and all traces and shapes with the same legend group are treated the same way during click/double-click interactions.
 
-The fact that legend items are linked to traces means that when using [discrete color](../discrete-color/), a figure must have one trace per color in order to get a meaningful legend. [Plotly Express has robust support for discrete color](../discrete-color/) to make this easy.
+The fact that legend items are linked to traces means that when using [discrete color](discrete-color.md), a figure must have one trace per color in order to get a meaningful legend. [Plotly Express has robust support for discrete color](discrete-color.md) to make this easy.
 
-Traces which support [continuous color](../colorscales/) can also be associated with color axes in the layout via the `coloraxis` attribute. Multiple traces can be linked to the same color axis. Color axes have a legend-like component called color bars. Alternatively, color axes can be configured within the trace itself.
+Traces which support [continuous color](colorscales.md) can also be associated with color axes in the layout via the `coloraxis` attribute. Multiple traces can be linked to the same color axis. Color axes have a legend-like component called color bars. Alternatively, color axes can be configured within the trace itself.
 
 
 ### Legends with Plotly Express
 
-[Plotly Express](../plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](../px-arguments/) and produces [easy-to-style figures](../styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-Plotly Express functions will create one [trace](../figure-structure) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' `legendgroup` and `showlegend` attributed are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. The legend title is automatically set, and can be overrided with the `labels` keyword argument:
+Plotly Express functions will create one [trace](figure-structure.md) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' `legendgroup` and `showlegend` attributed are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. The legend title is automatically set, and can be overrided with the `labels` keyword argument:
 
 ```python
 import plotly.express as px
@@ -59,7 +59,7 @@ fig.show()
 
 ### Legend Order
 
-By default, Plotly Express lays out legend items in the order in which values appear in the underlying data. Every Plotly Express function also includes a `category_orders` keyword argument which can be used to control [the order in which categorical axes are drawn](../categorical-axes/), but beyond that can also control the order in which legend items appear, and [the order in which facets are laid out](../facet-plots/).
+By default, Plotly Express lays out legend items in the order in which values appear in the underlying data. Every Plotly Express function also includes a `category_orders` keyword argument which can be used to control [the order in which categorical axes are drawn](categorical-axes.md), but beyond that can also control the order in which legend items appear, and [the order in which facets are laid out](facet-plots.md).
 
 ```python
 import plotly.express as px
@@ -84,7 +84,7 @@ fig.update_layout(legend_traceorder="reversed")
 fig.show()
 ```
 
-When using [`plotly.graph_objects`](../graph-objects/) rather than Plotly Express, legend items will appear in the order that traces appear in the `data`:
+When using [`plotly.graph_objects`](graph-objects.md) rather than Plotly Express, legend items will appear in the order that traces appear in the `data`:
 
 ```python
 import plotly.graph_objects as go
@@ -171,7 +171,7 @@ fig.show()
 
 ### Legend Positioning
 
-Legends have an anchor point, which can be set to a point within the legend using `layout.legend.xanchor` and `layout.legend.yanchor`. The coordinate of the anchor can be positioned with `layout.legend.x` and `layout.legend.y` in [paper coordinates](../figure-structure/). Note that the plot margins will grow so as to accommodate the legend. The legend may also be placed within the plotting area.
+Legends have an anchor point, which can be set to a point within the legend using `layout.legend.xanchor` and `layout.legend.yanchor`. The coordinate of the anchor can be positioned with `layout.legend.x` and `layout.legend.y` in [paper coordinates](figure-structure.md). Note that the plot margins will grow so as to accommodate the legend. The legend may also be placed within the plotting area.
 
 ```python
 import plotly.express as px
@@ -328,7 +328,7 @@ fig.show()
 
 ### Legends with Graph Objects
 
-When creating figures using [graph objects](../graph-objects/) without using [Plotly Express](../plotly-express/), legends must be manually configured using some of the options below.
+When creating figures using [graph objects](graph-objects.md) without using [Plotly Express](plotly-express.md), legends must be manually configured using some of the options below.
 
 
 #### Legend Item Names

@@ -42,7 +42,7 @@ The differences between these two approaches are that:
 * Traces can optionally support hover labels and can appear in legends.
 * Text annotations can be positioned absolutely or relative to data coordinates in 2d/3d cartesian subplots only.
 * Traces cannot be positioned absolutely but can be positioned relative to data coordinates in any subplot type.
-* Traces also be used to [draw shapes](../shapes/), although there is a [shape equivalent to text annotations](../shapes/).
+* Traces also be used to [draw shapes](shapes.md), although there is a [shape equivalent to text annotations](shapes.md).
 
 
 ### Text on scatter plots with Plotly Express
@@ -136,7 +136,7 @@ IFrame(snippet_url + 'text-and-annotations', width='100%', height=1200)
 
 ### Controlling Text Size with `uniformtext`
 
-For the [pie](../pie-charts), [bar](../bar-charts)-like, [sunburst](../sunburst-charts) and [treemap](../treemaps) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+For the [pie](pie-charts.md), [bar](bar-charts.md)-like, [sunburst](sunburst-charts.md) and [treemap](treemaps.md) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
 
 Here is a bar chart with the default behavior which will scale down text to fit.
@@ -197,7 +197,7 @@ fig.show()
 
 ### Controlling Maximum Text Size
 
-The `textfont_size` parameter of the the [pie](../pie-charts), [bar](../bar-charts)-like, [sunburst](../sunburst-charts) and [treemap](../treemaps) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
+The `textfont_size` parameter of the the [pie](pie-charts.md), [bar](bar-charts.md)-like, [sunburst](sunburst-charts.md) and [treemap](treemaps.md) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
 
 ```python
 import plotly.express as px
@@ -829,7 +829,7 @@ fig.show()
 
 ### Positioning Text Annotations Absolutely
 
-By default, text annotations have `xref` and `yref` set to `"x"` and `"y"`, respectively, meaning that their x/y coordinates are with respect to the axes of the plot. This means that panning the plot will cause the annotations to move. Setting `xref` and/or `yref` to `"paper"` will cause the `x` and `y` attributes to be interpreted in [paper coordinates](../figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates).
+By default, text annotations have `xref` and `yref` set to `"x"` and `"y"`, respectively, meaning that their x/y coordinates are with respect to the axes of the plot. This means that panning the plot will cause the annotations to move. Setting `xref` and/or `yref` to `"paper"` will cause the `x` and `y` attributes to be interpreted in [paper coordinates](figure-structure.md#positioning-with-paper-container-coordinates-or-axis-domain-coordinates).
 
 Try panning or zooming in the following figure:
 

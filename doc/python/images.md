@@ -35,7 +35,7 @@ jupyter:
 
 #### Add a Background Image
 
-In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](../imshow).
+In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](imshow.md).
 
 A background image can be added to the layout of a figure with
 `fig.add_layout_image` or by setting the `images` parameter of `go.Layout`. The
@@ -313,9 +313,9 @@ It can be useful to add shapes to a layout image, for highlighting an object, dr
 
 In order to enable shape drawing, you need to
 - define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
-- add [modebar buttons](../configuration-options#add-optional-shapedrawing-buttons-to-modebar) corresponding to the drawing tools you wish to use.
+- add [modebar buttons](configuration-options.md#add-optional-shapedrawing-buttons-to-modebar) corresponding to the drawing tools you wish to use.
 
-The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](../shapes#drawing-shapes-on-cartesian-plots).
+The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](shapes.md#drawing-shapes-on-cartesian-plots).
 
 Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 
