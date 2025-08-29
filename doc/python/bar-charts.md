@@ -68,6 +68,10 @@ fig.show()
 ```
 
 ```python
+import plotly.express as px
+
+long_df = px.data.medals_long()
+
 long_df
 ```
 
@@ -84,6 +88,10 @@ fig.show()
 ```
 
 ```python
+import plotly.express as px
+
+wide_df = px.data.medals_wide()
+
 wide_df
 ```
 

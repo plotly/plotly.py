@@ -491,7 +491,7 @@ y = df['petal_width']
 # Define and fit the grid
 model = DecisionTreeRegressor()
 param_grid = {
-    'criterion': ['mse', 'friedman_mse', 'mae'],
+    'criterion': ['squared_error', 'friedman_mse', 'absolute_error'],
     'max_depth': range(2, 5)
 }
 grid = GridSearchCV(model, param_grid, cv=N_FOLD)

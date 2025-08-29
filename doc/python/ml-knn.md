@@ -264,6 +264,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
 
 mesh_size = .02
 margin = 1
