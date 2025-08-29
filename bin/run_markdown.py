@@ -15,11 +15,14 @@ import traceback
 
 def main():
     args = _parse_args()
-    for filename in args.inputs:
-        _do_file(args, Path(filename))
+    if args.block is None:
+        for filename in args.inputs:
+            _do_file(args, Path(filename))
+    else:
+        _do_file(args, Path(args.inputs[0]), block_number=args.block)
 
 
-def _do_file(args, input_file):
+def _do_file(args, input_file, block_number=None):
     """Process a single file."""
 
     # Validate input file
@@ -48,14 +51,9 @@ def _do_file(args, input_file):
     _report(args.verbose > 1, f"- Found {len(code_blocks)} code blocks")
 
     # Execute code blocks and collect results
-    execution_results = []
-    figure_counter = 0
-    for i, block in enumerate(code_blocks):
-        _report(args.verbose > 1, f"- Executing block {i + 1}/{len(code_blocks)}")
-        figure_counter, result = _run_code(block["code"], args.outdir, stem, figure_counter)
-        execution_results.append(result)
-        _report(args.verbose > 0 and bool(result["error"]), f"  - Warning: block {i + 1} had an error")
-        _report(args.verbose > 1 and bool(result["images"]), f"  - Generated {len(result['images'])} image(s)")
+    execution_results = _run_all_blocks(args, code_blocks, stem, block_number)
+    if block_number is not None:
+        return
 
     # Generate and save output
     content = _generate_markdown(args, content, code_blocks, execution_results, args.outdir)
@@ -150,6 +148,7 @@ def _parse_args():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(description="Process Markdown files with code blocks")
     parser.add_argument("inputs", nargs="+", help="Input .md files")
+    parser.add_argument("--block", type=int, help="Single block to run")
     parser.add_argument("--inline", action="store_true", help="Inline HTML in .md")
     parser.add_argument("--outdir", type=Path, help="Output directory")
     parser.add_argument("--verbose", type=int, default=0, help="Integer verbosity level")
@@ -204,7 +203,28 @@ def _report(condition, message):
         print(message, file=sys.stderr)
 
 
-def _run_code(code, output_dir, stem, figure_counter):
+def _run_all_blocks(args, code_blocks, stem=None, block_number=None):
+    """Run blocks found in a file."""
+    execution_results = []
+    figure_counter = 0
+    for i, block in enumerate(code_blocks):
+        if block_number is None:
+            _report(args.verbose > 1, f"- Executing block {i}/{len(code_blocks)}")
+            figure_counter, result = _run_code(block["code"], args.outdir, figure_counter, stem)
+            execution_results.append(result)
+            _report(args.verbose > 0 and bool(result["error"]), f"  - Warning: block {i} had an error")
+            _report(args.verbose > 1 and bool(result["images"]), f"  - Generated {len(result['images'])} image(s)")
+        elif block_number == i:
+            print(f"block number {block_number}")
+            figure_counter, result = _run_code(block["code"], args.outdir, figure_counter, stem)
+            print("--- standard output")
+            print(result["stdout"])
+            print("--- standard error")
+            print(result["stderr"])
+    return execution_results
+
+
+def _run_code(code, output_dir, figure_counter, stem):
     """Execute code capturing output and generated files."""
     # Capture stdout and stderr
     stdout_buffer = io.StringIO()
@@ -230,7 +250,8 @@ def _run_code(code, output_dir, stem, figure_counter):
             def patched_show(self, *args, **kwargs):
                 nonlocal figure_counter
                 figure_counter += 1
-                _capture_plotly_show(self, figure_counter, result, output_dir, stem)
+                if stem is not None:
+                    _capture_plotly_show(self, figure_counter, result, output_dir, stem)
             original_show = go.Figure.show
             go.Figure.show = patched_show
             exec(code, exec_globals)
