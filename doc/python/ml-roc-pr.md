@@ -260,12 +260,12 @@ df.loc[samples.index, 'species'] = samples.values
 # Define the inputs and outputs
 X = df.drop(columns=['species', 'species_id'])
 y = df['species']
-y_onehot = pd.get_dummies(y, columns=model.classes_)
 
 # Fit the model
 model = LogisticRegression(max_iter=200)
 model.fit(X, y)
 y_scores = model.predict_proba(X)
+y_onehot = pd.get_dummies(y, columns=model.classes_)
 
 # Create an empty figure, and iteratively add new lines
 # every time we compute a new class
