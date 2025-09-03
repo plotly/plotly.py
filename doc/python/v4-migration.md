@@ -157,6 +157,8 @@ fig.show()
 
 ```python
 # Restore default theme
+import plotly.io as pio
+
 pio.templates.default = "plotly"
 ```
 

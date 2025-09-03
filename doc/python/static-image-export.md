@@ -204,6 +204,11 @@ Here's the bytes object displayed using `IPython.display.Image`:
 
 ```python
 from IPython.display import Image
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+img_bytes = fig.to_image(format="png")
+
 Image(img_bytes)
 ```
 
@@ -211,6 +216,11 @@ Image(img_bytes)
 In addition to the image format, the `to_image` and `write_image` functions provide arguments to specify the image `width` and `height` in logical pixels. They also provide a `scale` parameter that can be used to increase (`scale` > 1) or decrease (`scale` < 1) the physical resolution of the resulting image.
 
 ```python
+from IPython.display import Image
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+
 img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
 Image(img_bytes)
 ```

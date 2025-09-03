@@ -239,6 +239,7 @@ These two modes can be used for single- and multichannel data. The default value
 
 ```python
 import plotly.express as px
+import numpy as np
 img = np.arange(100, dtype=np.uint8).reshape((10, 10))
 fig = px.imshow(img, contrast_rescaling='infer')
 fig.show()

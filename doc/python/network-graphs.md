@@ -57,8 +57,13 @@ G = nx.random_geometric_graph(200, 0.125)
 Add edges as disconnected lines in a single trace and nodes as a scatter trace
 
 ```python
+import plotly.graph_objects as go
+import networkx as nx
+
+G = nx.random_geometric_graph(200, 0.125)
 edge_x = []
 edge_y = []
+
 for edge in G.edges():
     x0, y0 = G.nodes[edge[0]]['pos']
     x1, y1 = G.nodes[edge[1]]['pos']
@@ -115,8 +120,12 @@ Another option would be to size points by the number of connections
 i.e. ```node_trace.marker.size = node_adjacencies```
 
 ```python
+import networkx as nx
+
+G = nx.random_geometric_graph(200, 0.125)
 node_adjacencies = []
 node_text = []
+
 for node, adjacencies in enumerate(G.adjacency()):
     node_adjacencies.append(len(adjacencies[1]))
     node_text.append('# of connections: '+str(len(adjacencies[1])))

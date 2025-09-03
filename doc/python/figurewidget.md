@@ -56,14 +56,26 @@ f
 Add traces or update the layout and then watch the output above update in real time.
 
 ```python
-f.add_scatter(y=[2, 1, 4, 3]);
+import plotly.graph_objects as go
+f = go.FigureWidget()
+
+f.add_scatter(y=[2, 1, 4, 3])
 ```
 
 ```python
-f.add_bar(y=[1, 4, 3, 2]);
+import plotly.graph_objects as go
+f = go.FigureWidget()
+f.add_scatter(y=[2, 1, 4, 3])
+
+f.add_bar(y=[1, 4, 3, 2])
 ```
 
 ```python
+import plotly.graph_objects as go
+f = go.FigureWidget()
+f.add_scatter(y=[2, 1, 4, 3])
+f.add_bar(y=[1, 4, 3, 2])
+
 f.layout.title = 'Hello FigureWidget'
 ```
 
@@ -73,18 +85,42 @@ f.layout.title = 'Hello FigureWidget'
 #### Update the Data and the Layout
 
 ```python
+import plotly.graph_objects as go
+f = go.FigureWidget()
+f.add_scatter(y=[2, 1, 4, 3])
+f.add_bar(y=[1, 4, 3, 2])
+f.layout.title = 'Hello FigureWidget'
+
 # update scatter data
 scatter = f.data[0]
 scatter.y = [3, 1, 4, 3]
 ```
 
 ```python
+import plotly.graph_objects as go
+f = go.FigureWidget()
+f.add_scatter(y=[2, 1, 4, 3])
+f.add_bar(y=[1, 4, 3, 2])
+f.layout.title = 'Hello FigureWidget'
+scatter = f.data[0]
+scatter.y = [3, 1, 4, 3]
+
 # update bar data
 bar = f.data[1]
 bar.y = [5, 3, 2, 8]
 ```
 
 ```python
+import plotly.graph_objects as go
+f = go.FigureWidget()
+f.add_scatter(y=[2, 1, 4, 3])
+f.add_bar(y=[1, 4, 3, 2])
+f.layout.title = 'Hello FigureWidget'
+scatter = f.data[0]
+scatter.y = [3, 1, 4, 3]
+bar = f.data[1]
+bar.y = [5, 3, 2, 8]
+
 f.layout.title.text = 'This is a new title'
 ```
 
@@ -114,5 +150,7 @@ f2
 See [these Jupyter notebooks](https://github.com/jonmmease/plotly_ipywidget_notebooks) for even more FigureWidget examples.
 
 ```python
+import plotly.graph_objects as go
+
 help(go.FigureWidget)
 ```

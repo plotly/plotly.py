@@ -55,6 +55,8 @@ df.head()
 By default `px.data` functions return a pandas `DataFrame` object, but you can specify an alternative dataframe type using `return_type`. `pandas`, `polars`, `pyarrow`, `modin`, and `cuDF` are supported return types.
 
 ```python
+import plotly.express as px
+
 df = px.data.iris(return_type='polars')
 df.head()
 ```

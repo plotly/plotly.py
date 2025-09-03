@@ -26,7 +26,7 @@ extra_css:
 
 nav:
 - Home: index.md
-- API Reference: reference/
+- Getting Started: examples/getting-started.md
 - 3d_charts: 
   - 3D Axes: examples/3d-axes.md
   - 3D Scatter Plots: examples/3d-scatter-plots.md
@@ -91,7 +91,7 @@ nav:
   - Sliders: examples/sliders.md
   - Dropdown Menus: examples/dropdowns.md
   - Range Slider and Selector: examples/range-slider.md
-- file_settings: 
+- fundamentals: 
   - The Figure Data Structure: examples/figure-structure.md
   - Creating and Updating Figures: examples/creating-and-updating-figures.md
   - Displaying Figures: examples/renderers.md
@@ -166,7 +166,7 @@ nav:
   - Contour Plots: examples/contour-plots.md
   - Heatmaps: examples/heatmaps.md
   - Imshow: examples/imshow.md
-  - tTernary Plots: examples/ternary-plots.md
+  - Ternary Plots: examples/ternary-plots.md
   - Log Plots: examples/log-plot.md
   - Dendrograms: examples/dendrogram.md
   - Annotated Heatmaps: examples/annotated-heatmap.md
@@ -200,6 +200,7 @@ nav:
   - Strip Charts: examples/strip-charts.md
   - Continuous Error Bands: examples/continuous-error-bars.md
   - Empirical Cumulative Distribution Plots: examples/ecdf-plots.md
+- API Reference: reference/
 - Project:
   - license.md
   - conduct.md

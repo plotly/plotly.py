@@ -70,6 +70,10 @@ print(clean_data({'L1': ['.03 0.5 0.47','0.4 0.5 0.1']}))
 
 ```python
 import plotly.graph_objects as go
+import pandas as pd
+
+scatter_raw_data = pd.read_json('https://raw.githubusercontent.com/plotly/datasets/master/scatter_data.json')
+scatter_data =  scatter_raw_data['Data']
 
 a_list = []
 b_list = []
@@ -113,8 +117,9 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
+import pandas as pd
 
-
+contour_raw_data = pd.read_json('https://raw.githubusercontent.com/plotly/datasets/master/contour_data.json')
 contour_dict = contour_raw_data['Data']
 
 # Defining a colormap:
