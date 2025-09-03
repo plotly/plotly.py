@@ -327,7 +327,7 @@ def _calculations(
 ):
     # 0-pad FIPS code to ensure exactly 5 digits
     padded_f = str(f).zfill(5)
-    if fips_polygon_map[f].type == "Polygon":
+    if fips_polygon_map[f].geom_type == "Polygon":
         x = fips_polygon_map[f].simplify(simplify_county).exterior.xy[0].tolist()
         y = fips_polygon_map[f].simplify(simplify_county).exterior.xy[1].tolist()
 
@@ -354,7 +354,7 @@ def _calculations(
 
         x_traces[level] = x_traces[level] + x + [np.nan]
         y_traces[level] = y_traces[level] + y + [np.nan]
-    elif fips_polygon_map[f].type == "MultiPolygon":
+    elif fips_polygon_map[f].geom_type == "MultiPolygon":
         x = [
             poly.simplify(simplify_county).exterior.xy[0].tolist()
             for poly in fips_polygon_map[f].geoms
@@ -771,7 +771,7 @@ $ conda install -c plotly plotly-geo
         for index, f in enumerate(fips):
             level = values[index]
             try:
-                fips_polygon_map[f].type
+                fips_polygon_map[f].geom_type
 
                 (
                     x_traces,
@@ -805,7 +805,7 @@ $ conda install -c plotly plotly-geo
             level = LEVELS[j]
 
             try:
-                fips_polygon_map[f].type
+                fips_polygon_map[f].geom_type
 
                 (
                     x_traces,
@@ -844,12 +844,12 @@ $ conda install -c plotly plotly-geo
     x_states = []
     y_states = []
     for index, row in df_state.iterrows():
-        if df_state["geometry"][index].type == "Polygon":
+        if df_state["geometry"][index].geom_type == "Polygon":
             x = row.geometry.simplify(simplify_state).exterior.xy[0].tolist()
             y = row.geometry.simplify(simplify_state).exterior.xy[1].tolist()
             x_states = x_states + x
             y_states = y_states + y
-        elif df_state["geometry"][index].type == "MultiPolygon":
+        elif df_state["geometry"][index].geom_type == "MultiPolygon":
             x = [
                 poly.simplify(simplify_state).exterior.xy[0].tolist()
                 for poly in df_state["geometry"][index].geoms
