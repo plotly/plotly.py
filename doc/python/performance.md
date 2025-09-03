@@ -266,7 +266,7 @@ import datashader.transfer_functions as tf
 import io
 import base64
 
-# Get PIL Image and convert it into a JSON Serializable format
+# Get PIL Image and convert it into a unicode string (for JSON serializability)
 img = tf.shade(agg, cmap=fire)[::-1].to_pil()
 buffer = io.BytesIO()
 img.save(buffer, format='PNG')
