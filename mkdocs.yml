@@ -52,7 +52,7 @@ nav:
   - kNN Classification: examples/ml-knn.md
   - ROC and PR Curves: examples/ml-roc-pr.md
   - PCA Visualization: examples/ml-pca.md
-  - AI/ML Apps with Dash: examples/ml_apps.md
+  - AI/ML Apps with Dash: https://plotly.com/building-machine-learning-web-apps-in-python/
   - t-SNE and UMAP projections: examples/ml-tsne-umap-projections.md
 - animations:
   - Intro to Animations: examples/animations.md
@@ -96,7 +96,7 @@ nav:
   - Creating and Updating Figures: examples/creating-and-updating-figures.md
   - Displaying Figures: examples/renderers.md
   - Plotly Express: examples/plotly-express.md
-  - Analytical Apps with Dash: examples/dash.md
+  - Analytical Apps with Dash: https://dash.plotly.com/
   - Static Image Export: examples/static-image-export.md
   - Theming and templates: examples/templates.md
   - Changes in Version 6: examples/v6-changes.md
