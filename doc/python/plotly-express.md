@@ -42,14 +42,13 @@ Plotly Express provides [more than 30 functions for creating different types of 
 
 Here is a talk from the [SciPy 2021 conference](https://www.scipy2021.scipy.org/) that gives a good introduction to Plotly Express and [Dash](https://dash.plotly.com/):
 
-```html hide_code=true
 <div align="center">
 <iframe width="560" height="315"
 src="https://www.youtube.com/embed/FpCgG85g2Hw"
 title="Data Visualization as The First and Last Mile of Data Science: Plotly Express and Dash | SciPy 2021"
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-```
+
 
 Plotly Express currently includes the following functions:
 
@@ -386,7 +385,13 @@ fig.show()
 ```python
 import plotly.express as px
 from skimage import io
-img = io.imread('https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/240px-Crab_Nebula.jpg')
+from io import BytesIO
+import requests
+
+url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/240px-Crab_Nebula.jpg'
+headers = {"User-Agent": "Mozilla/5.0"}
+response = requests.get(url, headers=headers)
+img = io.imread(BytesIO(response.content))
 fig = px.imshow(img)
 fig.show()
 ```
