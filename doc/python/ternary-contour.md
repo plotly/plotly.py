@@ -128,9 +128,6 @@ fig.show()
 Two modes are available in order to interpolate between data points: interpolation in Cartesian space (`interp_mode='cartesian'`) or interpolation using the [isometric log-ratio transformation](https://link.springer.com/article/10.1023/A:1023818214614) (see also [preprint](https://www.researchgate.net/profile/Leon_Parent2/post/What_is_the_best_approach_for_diagnosing_nutrient_disorders_and_formulating_fertilizer_recommendations/attachment/59d62a69c49f478072e9cf3f/AS%3A272541220835360%401441990298625/download/Egozcue+et+al+2003.pdf)),  `interp_mode='ilr'`. The `ilr` transformation preserves metrics in the [simplex](https://en.wikipedia.org/wiki/Simplex) but is not defined on its edges.
 
 ```python
-import numpy as np
-import plotly.figure_factory as ff
-
 a, b = np.mgrid[0:1:20j, 0:1:20j]
 mask = a + b <= 1
 a, b = a[mask], b[mask]
@@ -141,9 +138,6 @@ fig.show()
 ```
 
 ```python
-import numpy as np
-import plotly.figure_factory as ff
-
 a, b = np.mgrid[0:1:20j, 0:1:20j]
 mask = a + b <= 1
 a, b = a[mask], b[mask]

@@ -206,11 +206,15 @@ def _report(condition, message):
 def _run_all_blocks(args, code_blocks, stem=None, block_number=None):
     """Run blocks found in a file."""
     execution_results = []
+    env = {
+            "__name__": "__main__",
+            "__file__": "<markdown_code>",
+        }
     figure_counter = 0
     for i, block in enumerate(code_blocks):
         if block_number is None:
             _report(args.verbose > 1, f"- Executing block {i}/{len(code_blocks)}")
-            figure_counter, result = _run_code(block["code"], args.outdir, figure_counter, stem)
+            figure_counter, result = _run_code(block["code"], args.outdir, figure_counter, stem, env)
             execution_results.append(result)
             _report(args.verbose > 0 and bool(result["error"]), f"  - Warning: block {i} had an error")
             _report(args.verbose > 1 and bool(result["images"]), f"  - Generated {len(result['images'])} image(s)")
@@ -224,7 +228,7 @@ def _run_all_blocks(args, code_blocks, stem=None, block_number=None):
     return execution_results
 
 
-def _run_code(code, output_dir, figure_counter, stem):
+def _run_code(code, output_dir, figure_counter, stem, exec_globals):
     """Execute code capturing output and generated files."""
     # Capture stdout and stderr
     stdout_buffer = io.StringIO()
@@ -239,10 +243,10 @@ def _run_code(code, output_dir, figure_counter, stem):
     try:
 
         # Create a namespace for code execution
-        exec_globals = {
-            "__name__": "__main__",
-            "__file__": "<markdown_code>",
-        }
+        # exec_globals = {
+        #     "__name__": "__main__",
+        #     "__file__": "<markdown_code>",
+        # }
 
         # Execute the code with output capture
         with redirect_stdout(stdout_buffer), redirect_stderr(stderr_buffer):

@@ -117,7 +117,6 @@ print(full_fig.data[0])
 We see that this is an instance of `go.Scatter` (as expected, given the input) and that it has an attribute we've maybe never heard of called `cliponaxis` which by default seems to be set to `True` in this case. Let's find out more about this attribute using the built-in Python `help()` function
 
 ```python
-import plotly.graph_objects as go
 help(go.Scatter.cliponaxis)
 ```
 
@@ -131,7 +130,6 @@ fig.show()
 We can use this technique (of making a figure, and querying Plotly.js for the "full" version of that figure, and then exploring the attributes that are automatically set for us) to learn more about the range of possibilities that the figure schema makes available. We can drill down into `layout` attributes also:
 
 ```python
-import plotly.graph_objects as go
 help(go.layout.XAxis.autorange)
 ```
 

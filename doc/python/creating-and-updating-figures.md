@@ -372,10 +372,6 @@ fig.show()
 Note that the following `update_layout()` operations are equivalent:
 
 ```python
-import plotly.graph_objects as go
-
-fig = go.Figure(data=go.Bar(x=[1, 2, 3], y=[1, 3, 2]))
-
 fig.update_layout(title_text="update_layout() Syntax Example",
                   title_font_size=30)
 
