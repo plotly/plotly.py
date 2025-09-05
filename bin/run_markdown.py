@@ -11,6 +11,7 @@ from pathlib import Path
 import plotly.graph_objects as go
 import sys
 import traceback
+from PIL import Image
 
 
 def main():
@@ -83,6 +84,12 @@ def _capture_plotly_show(fig, counter, result, output_dir, stem):
     result["html_files"].append(html_filename)
     result.setdefault("html_content", []).append(html_content)
 
+def _capture_Image_show(img, counter, result, output_dir, stem):
+    """Saves Images instead of displaying them."""
+    png_filename = f"{stem}_image_{counter}.png"
+    png_path = output_dir / png_filename
+    img.save(png_path, "PNG")
+    result["images"].append(png_filename)
 
 def _generate_markdown(args, content, code_blocks, execution_results, output_dir):
     """Generate the output markdown with embedded results."""
@@ -211,6 +218,7 @@ def _run_all_blocks(args, code_blocks, stem=None, block_number=None):
             "__file__": "<markdown_code>",
         }
     figure_counter = 0
+    # img_counter = 0
     for i, block in enumerate(code_blocks):
         if block_number is None:
             _report(args.verbose > 1, f"- Executing block {i}/{len(code_blocks)}")
@@ -256,10 +264,18 @@ def _run_code(code, output_dir, figure_counter, stem, exec_globals):
                 figure_counter += 1
                 if stem is not None:
                     _capture_plotly_show(self, figure_counter, result, output_dir, stem)
+            def patched_img_show(self, *args, **kwargs):
+                nonlocal figure_counter
+                figure_counter += 1
+                if stem is not None:
+                    _capture_Image_show(self, figure_counter, result, output_dir, stem)
             original_show = go.Figure.show
+            original_img_show = Image.Image.show
+            Image.Image.show = patched_img_show
             go.Figure.show = patched_show
             exec(code, exec_globals)
             go.Figure.show = original_show
+            Image.Image.show = original_img_show
 
     except Exception as e:
         result["error"] = f"Error executing code: {str(e)}\n{traceback.format_exc()}"
