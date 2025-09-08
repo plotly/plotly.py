@@ -226,7 +226,7 @@ fig.show()
 
 ### Hiding or Customizing the Plotly Express Color Bar
 
-Plotly Express binds all traces to [`layout.coloraxis`](/reference/layout/coloraxis.md), rather than using trace-specific color axes. This means that the color bar can configured there, for example it can be hidden:
+Plotly Express binds all traces to [`layout.coloraxis`](../reference/plotly/graph_objects/layout/_coloraxis.md), rather than using trace-specific color axes. This means that the color bar can configured there, for example it can be hidden:
 
 ```python
 import plotly.express as px

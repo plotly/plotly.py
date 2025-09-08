@@ -33,16 +33,16 @@ jupyter:
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explain how to set the properties of [2-dimensional Cartesian axes](figure-structure.md#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/reference/layout/xaxis.md) and [`go.layout.YAxis`](/reference/layout/xaxis.md).
+This tutorial explain how to set the properties of [2-dimensional Cartesian axes](figure-structure.md#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](../reference/plotly/graph_objects/layout/_xaxis.md) and [`go.layout.YAxis`](../reference/plotly/graph_objects/layout/_yaxis.md).
 
 Other kinds of subplots and axes are described in other tutorials:
 
-- [3D axes](3d-axes.md) The axis object is [`go.layout.Scene`](/reference/layout/scene.md)
-- [Polar axes](polar-chart.md). The axis object is [`go.layout.Polar`](/reference/layout/polar.md)
-- [Ternary axes](ternary-plots.md). The axis object is [`go.layout.Ternary`](/reference/layout/ternary.md)
-- [Geo axes](map-configuration.md). The axis object is [`go.layout.Geo`](/reference/layout/geo.md)
-- [Map axes](tile-map-layers.md). The axis object is [`go.layout.Map`](/reference/layout/map.md)
-- [Color axes](colorscales.md). The axis object is [`go.layout.Coloraxis`](/reference/layout/coloraxis.md).
+- [3D axes](3d-axes.md) The axis object is [`go.layout.Scene`](../reference/plotly/graph_objects/layout/_scene.md)
+- [Polar axes](polar-chart.md). The axis object is [`go.layout.Polar`](../reference/plotly/graph_objects/layout/_polar.md)
+- [Ternary axes](ternary-plots.md). The axis object is [`go.layout.Ternary`](../reference/plotly/graph_objects/layout/_ternary.md)
+- [Geo axes](map-configuration.md). The axis object is [`go.layout.Geo`](../reference/plotly/graph_objects/layout/_geo.md)
+- [Map axes](tile-map-layers.md). The axis object is [`go.layout.Map`](../reference/plotly/graph_objects/layout/_map.md)
+- [Color axes](colorscales.md). The axis object is [`go.layout.Coloraxis`](../reference/plotly/graph_objects/layout/_coloraxis.md).
 
 **See also** the tutorials on [facet plots](facet-plots.md), [subplots](subplots.md) and [multiple axes](multiple-axes.md).
 
