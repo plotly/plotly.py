@@ -110,7 +110,7 @@ Just like t-SNE, [UMAP](https://umap-learn.readthedocs.io/en/latest/index.html) 
 In the example below, we see how easy it is to use UMAP as a drop-in replacement for scikit-learn's `manifold.TSNE`.
 
 ```python
-from umap.umap_ import UMAP
+from umap import UMAP
 import plotly.express as px
 
 df = px.data.iris()
@@ -146,7 +146,7 @@ Although there's over 1000 data points, and many more dimensions than the previo
 ```python
 import plotly.express as px
 from sklearn.datasets import load_digits
-from umap.umap_ import UMAP
+from umap import UMAP
 
 digits = load_digits()
 
