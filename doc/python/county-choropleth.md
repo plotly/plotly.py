@@ -47,9 +47,9 @@ Ensure you have the correct versions of the following modules:
 
 ```
 plotly-geo==1.0.0
-geopandas==1.1.1
-pyshp==2.3.1
-shapely==2.1.1
+geopandas==0.8.1
+pyshp==2.1.2
+shapely==1.7.1
 ```
 
 If you are using Windows, follow this post to properly install geopandas and dependencies: http://geoffboeing.com/2014/09/using-geopandas-windows/. If you are using Anaconda, do not use PIP to install the packages above. Instead use conda to install them:

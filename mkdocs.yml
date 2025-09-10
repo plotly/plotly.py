@@ -100,7 +100,6 @@ nav:
   - Static Image Export: examples/static-image-export.md
   - Theming and templates: examples/templates.md
   - Changes in Version 6: examples/v6-changes.md
-  - Orca Management: examples/orca-management.md
   - Configuration: examples/configuration-options.md
   - Setting Graph Size: examples/setting-graph-size.md
   - Formatting Ticks: examples/tick-formatting.md
