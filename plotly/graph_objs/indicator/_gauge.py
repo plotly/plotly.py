@@ -207,7 +207,7 @@ class Gauge(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         axis
-            :class:`plotly.graph_objects.indicator.gauge.Axis`
+            :class:`plotly.graph_objs.indicator.gauge.Axis`
             instance or dict with compatible properties
         bar
             Set the appearance of the gauge's value
@@ -222,7 +222,7 @@ class Gauge(_BaseTraceHierarchyType):
             Set the shape of the gauge
         steps
             A tuple of
-            :class:`plotly.graph_objects.indicator.gauge.Step`
+            :class:`plotly.graph_objs.indicator.gauge.Step`
             instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
@@ -230,7 +230,7 @@ class Gauge(_BaseTraceHierarchyType):
             sets the default property values to use for elements of
             indicator.gauge.steps
         threshold
-            :class:`plotly.graph_objects.indicator.gauge.Threshold`
+            :class:`plotly.graph_objs.indicator.gauge.Threshold`
             instance or dict with compatible properties
         """
 
@@ -260,7 +260,7 @@ class Gauge(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.indicator.Gauge`
         axis
-            :class:`plotly.graph_objects.indicator.gauge.Axis`
+            :class:`plotly.graph_objs.indicator.gauge.Axis`
             instance or dict with compatible properties
         bar
             Set the appearance of the gauge's value
@@ -275,7 +275,7 @@ class Gauge(_BaseTraceHierarchyType):
             Set the shape of the gauge
         steps
             A tuple of
-            :class:`plotly.graph_objects.indicator.gauge.Step`
+            :class:`plotly.graph_objs.indicator.gauge.Step`
             instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
@@ -283,7 +283,7 @@ class Gauge(_BaseTraceHierarchyType):
             sets the default property values to use for elements of
             indicator.gauge.steps
         threshold
-            :class:`plotly.graph_objects.indicator.gauge.Threshold`
+            :class:`plotly.graph_objs.indicator.gauge.Threshold`
             instance or dict with compatible properties
 
         Returns

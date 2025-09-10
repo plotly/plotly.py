@@ -540,7 +540,7 @@ class Slider(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             slider.
         currentvalue
-            :class:`plotly.graph_objects.layout.slider.Currentvalue
+            :class:`plotly.graph_objs.layout.slider.Currentvalue
             ` instance or dict with compatible properties
         font
             Sets the font of the slider step labels.
@@ -568,7 +568,7 @@ class Slider(_BaseLayoutHierarchyType):
             side.
         steps
             A tuple of
-            :class:`plotly.graph_objects.layout.slider.Step`
+            :class:`plotly.graph_objs.layout.slider.Step`
             instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
@@ -592,7 +592,7 @@ class Slider(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         transition
-            :class:`plotly.graph_objects.layout.slider.Transition`
+            :class:`plotly.graph_objs.layout.slider.Transition`
             instance or dict with compatible properties
         visible
             Determines whether or not the slider is visible.
@@ -663,7 +663,7 @@ class Slider(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             slider.
         currentvalue
-            :class:`plotly.graph_objects.layout.slider.Currentvalue
+            :class:`plotly.graph_objs.layout.slider.Currentvalue
             ` instance or dict with compatible properties
         font
             Sets the font of the slider step labels.
@@ -691,7 +691,7 @@ class Slider(_BaseLayoutHierarchyType):
             side.
         steps
             A tuple of
-            :class:`plotly.graph_objects.layout.slider.Step`
+            :class:`plotly.graph_objs.layout.slider.Step`
             instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
@@ -715,7 +715,7 @@ class Slider(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         transition
-            :class:`plotly.graph_objects.layout.slider.Transition`
+            :class:`plotly.graph_objs.layout.slider.Transition`
             instance or dict with compatible properties
         visible
             Determines whether or not the slider is visible.

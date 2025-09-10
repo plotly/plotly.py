@@ -812,7 +812,7 @@ class Carpet(_BaseTraceType):
             coordinates. Use with `da` where `a0` is the starting
             coordinate and `da` the step.
         aaxis
-            :class:`plotly.graph_objects.carpet.Aaxis` instance or
+            :class:`plotly.graph_objs.carpet.Aaxis` instance or
             dict with compatible properties
         asrc
             Sets the source reference on Chart Studio Cloud for
@@ -825,7 +825,7 @@ class Carpet(_BaseTraceType):
             coordinates. Use with `db` where `b0` is the starting
             coordinate and `db` the step.
         baxis
-            :class:`plotly.graph_objects.carpet.Baxis` instance or
+            :class:`plotly.graph_objs.carpet.Baxis` instance or
             dict with compatible properties
         bsrc
             Sets the source reference on Chart Studio Cloud for
@@ -872,7 +872,7 @@ class Carpet(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.carpet.Legendgrouptitle`
+            :class:`plotly.graph_objs.carpet.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -910,7 +910,7 @@ class Carpet(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         stream
-            :class:`plotly.graph_objects.carpet.Stream` instance or
+            :class:`plotly.graph_objs.carpet.Stream` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -1033,7 +1033,7 @@ class Carpet(_BaseTraceType):
             coordinates. Use with `da` where `a0` is the starting
             coordinate and `da` the step.
         aaxis
-            :class:`plotly.graph_objects.carpet.Aaxis` instance or
+            :class:`plotly.graph_objs.carpet.Aaxis` instance or
             dict with compatible properties
         asrc
             Sets the source reference on Chart Studio Cloud for
@@ -1046,7 +1046,7 @@ class Carpet(_BaseTraceType):
             coordinates. Use with `db` where `b0` is the starting
             coordinate and `db` the step.
         baxis
-            :class:`plotly.graph_objects.carpet.Baxis` instance or
+            :class:`plotly.graph_objs.carpet.Baxis` instance or
             dict with compatible properties
         bsrc
             Sets the source reference on Chart Studio Cloud for
@@ -1093,7 +1093,7 @@ class Carpet(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.carpet.Legendgrouptitle`
+            :class:`plotly.graph_objs.carpet.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1131,7 +1131,7 @@ class Carpet(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         stream
-            :class:`plotly.graph_objects.carpet.Stream` instance or
+            :class:`plotly.graph_objs.carpet.Stream` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object

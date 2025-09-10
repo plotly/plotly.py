@@ -70,7 +70,7 @@ class Connector(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            :class:`plotly.graph_objects.waterfall.connector.Line`
+            :class:`plotly.graph_objs.waterfall.connector.Line`
             instance or dict with compatible properties
         mode
             Sets the shape of connector lines.
@@ -89,7 +89,7 @@ class Connector(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.waterfall.Connector`
         line
-            :class:`plotly.graph_objects.waterfall.connector.Line`
+            :class:`plotly.graph_objs.waterfall.connector.Line`
             instance or dict with compatible properties
         mode
             Sets the shape of connector lines.

@@ -1239,7 +1239,7 @@ class Scatterternary(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatterternary.Hoverlabel`
+            :class:`plotly.graph_objs.scatterternary.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -1307,7 +1307,7 @@ class Scatterternary(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatterternary.Legendgroup
+            :class:`plotly.graph_objs.scatterternary.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1324,10 +1324,10 @@ class Scatterternary(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatterternary.Line`
+            :class:`plotly.graph_objs.scatterternary.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatterternary.Marker`
+            :class:`plotly.graph_objs.scatterternary.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1358,7 +1358,7 @@ class Scatterternary(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scatterternary.Selected`
+            :class:`plotly.graph_objs.scatterternary.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1371,7 +1371,7 @@ class Scatterternary(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatterternary.Stream`
+            :class:`plotly.graph_objs.scatterternary.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1447,7 +1447,7 @@ class Scatterternary(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatterternary.Unselected`
+            :class:`plotly.graph_objs.scatterternary.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1593,7 +1593,7 @@ class Scatterternary(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatterternary.Hoverlabel`
+            :class:`plotly.graph_objs.scatterternary.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -1661,7 +1661,7 @@ class Scatterternary(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatterternary.Legendgroup
+            :class:`plotly.graph_objs.scatterternary.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1678,10 +1678,10 @@ class Scatterternary(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatterternary.Line`
+            :class:`plotly.graph_objs.scatterternary.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatterternary.Marker`
+            :class:`plotly.graph_objs.scatterternary.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1712,7 +1712,7 @@ class Scatterternary(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scatterternary.Selected`
+            :class:`plotly.graph_objs.scatterternary.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1725,7 +1725,7 @@ class Scatterternary(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatterternary.Stream`
+            :class:`plotly.graph_objs.scatterternary.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1801,7 +1801,7 @@ class Scatterternary(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatterternary.Unselected`
+            :class:`plotly.graph_objs.scatterternary.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

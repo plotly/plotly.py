@@ -1102,7 +1102,7 @@ class Densitymap(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.densitymap.ColorBar`
+            :class:`plotly.graph_objs.densitymap.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1133,7 +1133,7 @@ class Densitymap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.densitymap.Hoverlabel`
+            :class:`plotly.graph_objs.densitymap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1200,7 +1200,7 @@ class Densitymap(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.densitymap.Legendgrouptitl
+            :class:`plotly.graph_objs.densitymap.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1260,7 +1260,7 @@ class Densitymap(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.densitymap.Stream`
+            :class:`plotly.graph_objs.densitymap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1417,7 +1417,7 @@ class Densitymap(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.densitymap.ColorBar`
+            :class:`plotly.graph_objs.densitymap.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1448,7 +1448,7 @@ class Densitymap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.densitymap.Hoverlabel`
+            :class:`plotly.graph_objs.densitymap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1515,7 +1515,7 @@ class Densitymap(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.densitymap.Legendgrouptitl
+            :class:`plotly.graph_objs.densitymap.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1575,7 +1575,7 @@ class Densitymap(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.densitymap.Stream`
+            :class:`plotly.graph_objs.densitymap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates

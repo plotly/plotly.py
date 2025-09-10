@@ -1345,7 +1345,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.polar.an
+            A tuple of :class:`plotly.graph_objs.layout.polar.an
             gularaxis.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults
@@ -1669,7 +1669,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.polar.an
+            A tuple of :class:`plotly.graph_objs.layout.polar.an
             gularaxis.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults

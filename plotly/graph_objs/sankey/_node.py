@@ -454,7 +454,7 @@ class Node(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            :class:`plotly.graph_objects.sankey.node.Hoverlabel`
+            :class:`plotly.graph_objs.sankey.node.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -497,7 +497,7 @@ class Node(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `label`.
         line
-            :class:`plotly.graph_objects.sankey.node.Line` instance
+            :class:`plotly.graph_objs.sankey.node.Line` instance
             or dict with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
@@ -577,7 +577,7 @@ class Node(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            :class:`plotly.graph_objects.sankey.node.Hoverlabel`
+            :class:`plotly.graph_objs.sankey.node.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -620,7 +620,7 @@ class Node(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `label`.
         line
-            :class:`plotly.graph_objects.sankey.node.Line` instance
+            :class:`plotly.graph_objs.sankey.node.Line` instance
             or dict with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.

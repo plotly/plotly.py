@@ -1220,7 +1220,7 @@ class Scatterpolargl(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatterpolargl.Hoverlabel`
+            :class:`plotly.graph_objs.scatterpolargl.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1282,7 +1282,7 @@ class Scatterpolargl(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatterpolargl.Legendgroup
+            :class:`plotly.graph_objs.scatterpolargl.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1299,10 +1299,10 @@ class Scatterpolargl(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatterpolargl.Line`
+            :class:`plotly.graph_objs.scatterpolargl.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatterpolargl.Marker`
+            :class:`plotly.graph_objs.scatterpolargl.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1342,7 +1342,7 @@ class Scatterpolargl(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `r`.
         selected
-            :class:`plotly.graph_objects.scatterpolargl.Selected`
+            :class:`plotly.graph_objs.scatterpolargl.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1355,7 +1355,7 @@ class Scatterpolargl(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatterpolargl.Stream`
+            :class:`plotly.graph_objs.scatterpolargl.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1436,7 +1436,7 @@ class Scatterpolargl(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatterpolargl.Unselected`
+            :class:`plotly.graph_objs.scatterpolargl.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1570,7 +1570,7 @@ class Scatterpolargl(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatterpolargl.Hoverlabel`
+            :class:`plotly.graph_objs.scatterpolargl.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1632,7 +1632,7 @@ class Scatterpolargl(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatterpolargl.Legendgroup
+            :class:`plotly.graph_objs.scatterpolargl.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1649,10 +1649,10 @@ class Scatterpolargl(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatterpolargl.Line`
+            :class:`plotly.graph_objs.scatterpolargl.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatterpolargl.Marker`
+            :class:`plotly.graph_objs.scatterpolargl.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1692,7 +1692,7 @@ class Scatterpolargl(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `r`.
         selected
-            :class:`plotly.graph_objects.scatterpolargl.Selected`
+            :class:`plotly.graph_objs.scatterpolargl.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1705,7 +1705,7 @@ class Scatterpolargl(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatterpolargl.Stream`
+            :class:`plotly.graph_objs.scatterpolargl.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1786,7 +1786,7 @@ class Scatterpolargl(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatterpolargl.Unselected`
+            :class:`plotly.graph_objs.scatterpolargl.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

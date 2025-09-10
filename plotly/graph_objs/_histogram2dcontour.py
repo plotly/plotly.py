@@ -1538,7 +1538,7 @@ class Histogram2dContour(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.histogram2dcontour.ColorBa
+            :class:`plotly.graph_objs.histogram2dcontour.ColorBa
             r` instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1553,7 +1553,7 @@ class Histogram2dContour(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
-            :class:`plotly.graph_objects.histogram2dcontour.Contour
+            :class:`plotly.graph_objs.histogram2dcontour.Contour
             s` instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1597,7 +1597,7 @@ class Histogram2dContour(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram2dcontour.Hoverla
+            :class:`plotly.graph_objs.histogram2dcontour.Hoverla
             bel` instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1650,7 +1650,7 @@ class Histogram2dContour(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram2dcontour.Legendg
+            :class:`plotly.graph_objs.histogram2dcontour.Legendg
             rouptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1667,10 +1667,10 @@ class Histogram2dContour(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.histogram2dcontour.Line`
+            :class:`plotly.graph_objs.histogram2dcontour.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.histogram2dcontour.Marker`
+            :class:`plotly.graph_objs.histogram2dcontour.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1722,7 +1722,7 @@ class Histogram2dContour(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.histogram2dcontour.Stream`
+            :class:`plotly.graph_objs.histogram2dcontour.Stream`
             instance or dict with compatible properties
         textfont
             For this trace it only has an effect if `coloring` is
@@ -1787,7 +1787,7 @@ class Histogram2dContour(_BaseTraceType):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            :class:`plotly.graph_objects.histogram2dcontour.XBins`
+            :class:`plotly.graph_objs.histogram2dcontour.XBins`
             instance or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1822,7 +1822,7 @@ class Histogram2dContour(_BaseTraceType):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            :class:`plotly.graph_objects.histogram2dcontour.YBins`
+            :class:`plotly.graph_objs.histogram2dcontour.YBins`
             instance or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -1995,7 +1995,7 @@ class Histogram2dContour(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.histogram2dcontour.ColorBa
+            :class:`plotly.graph_objs.histogram2dcontour.ColorBa
             r` instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -2010,7 +2010,7 @@ class Histogram2dContour(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
-            :class:`plotly.graph_objects.histogram2dcontour.Contour
+            :class:`plotly.graph_objs.histogram2dcontour.Contour
             s` instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -2054,7 +2054,7 @@ class Histogram2dContour(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram2dcontour.Hoverla
+            :class:`plotly.graph_objs.histogram2dcontour.Hoverla
             bel` instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -2107,7 +2107,7 @@ class Histogram2dContour(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram2dcontour.Legendg
+            :class:`plotly.graph_objs.histogram2dcontour.Legendg
             rouptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2124,10 +2124,10 @@ class Histogram2dContour(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.histogram2dcontour.Line`
+            :class:`plotly.graph_objs.histogram2dcontour.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.histogram2dcontour.Marker`
+            :class:`plotly.graph_objs.histogram2dcontour.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2179,7 +2179,7 @@ class Histogram2dContour(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.histogram2dcontour.Stream`
+            :class:`plotly.graph_objs.histogram2dcontour.Stream`
             instance or dict with compatible properties
         textfont
             For this trace it only has an effect if `coloring` is
@@ -2244,7 +2244,7 @@ class Histogram2dContour(_BaseTraceType):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            :class:`plotly.graph_objects.histogram2dcontour.XBins`
+            :class:`plotly.graph_objs.histogram2dcontour.XBins`
             instance or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -2279,7 +2279,7 @@ class Histogram2dContour(_BaseTraceType):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            :class:`plotly.graph_objects.histogram2dcontour.YBins`
+            :class:`plotly.graph_objs.histogram2dcontour.YBins`
             instance or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.

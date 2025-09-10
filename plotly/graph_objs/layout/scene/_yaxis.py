@@ -1377,7 +1377,7 @@ class YAxis(_BaseLayoutHierarchyType):
             a reversed axis. Using "reversed" applies autorange on
             both ends and reverses the axis direction.
         autorangeoptions
-            :class:`plotly.graph_objects.layout.scene.yaxis.Autoran
+            :class:`plotly.graph_objs.layout.scene.yaxis.Autoran
             geoptions` instance or dict with compatible properties
         autotypenumbers
             Using "strict" a numeric string in trace data is not
@@ -1593,7 +1593,7 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.scene.ya
+            A tuple of :class:`plotly.graph_objs.layout.scene.ya
             xis.Tickformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -1637,7 +1637,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.scene.yaxis.Title`
+            :class:`plotly.graph_objs.layout.scene.yaxis.Title`
             instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
@@ -1744,7 +1744,7 @@ class YAxis(_BaseLayoutHierarchyType):
             a reversed axis. Using "reversed" applies autorange on
             both ends and reverses the axis direction.
         autorangeoptions
-            :class:`plotly.graph_objects.layout.scene.yaxis.Autoran
+            :class:`plotly.graph_objs.layout.scene.yaxis.Autoran
             geoptions` instance or dict with compatible properties
         autotypenumbers
             Using "strict" a numeric string in trace data is not
@@ -1960,7 +1960,7 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.scene.ya
+            A tuple of :class:`plotly.graph_objs.layout.scene.ya
             xis.Tickformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -2004,7 +2004,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.scene.yaxis.Title`
+            :class:`plotly.graph_objs.layout.scene.yaxis.Title`
             instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to

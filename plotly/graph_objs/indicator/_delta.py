@@ -199,12 +199,12 @@ class Delta(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         decreasing
-            :class:`plotly.graph_objects.indicator.delta.Decreasing
+            :class:`plotly.graph_objs.indicator.delta.Decreasing
             ` instance or dict with compatible properties
         font
             Set the font used to display the delta
         increasing
-            :class:`plotly.graph_objects.indicator.delta.Increasing
+            :class:`plotly.graph_objs.indicator.delta.Increasing
             ` instance or dict with compatible properties
         position
             Sets the position of delta with respect to the number.
@@ -248,12 +248,12 @@ class Delta(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.indicator.Delta`
         decreasing
-            :class:`plotly.graph_objects.indicator.delta.Decreasing
+            :class:`plotly.graph_objs.indicator.delta.Decreasing
             ` instance or dict with compatible properties
         font
             Set the font used to display the delta
         increasing
-            :class:`plotly.graph_objects.indicator.delta.Increasing
+            :class:`plotly.graph_objs.indicator.delta.Increasing
             ` instance or dict with compatible properties
         position
             Sets the position of delta with respect to the number.

@@ -264,7 +264,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
             have the same units as corresponding trace color
             array(s) and if set, `cmax` must be set as well.
         colorbar
-            :class:`plotly.graph_objects.layout.coloraxis.ColorBar`
+            :class:`plotly.graph_objs.layout.coloraxis.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -337,7 +337,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
             have the same units as corresponding trace color
             array(s) and if set, `cmax` must be set as well.
         colorbar
-            :class:`plotly.graph_objects.layout.coloraxis.ColorBar`
+            :class:`plotly.graph_objs.layout.coloraxis.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array

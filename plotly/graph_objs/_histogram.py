@@ -1549,7 +1549,7 @@ class Histogram(_BaseTraceType):
             Constrain the size of text inside or outside a bar to
             be no larger than the bar itself.
         cumulative
-            :class:`plotly.graph_objects.histogram.Cumulative`
+            :class:`plotly.graph_objs.histogram.Cumulative`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1560,10 +1560,10 @@ class Histogram(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         error_x
-            :class:`plotly.graph_objects.histogram.ErrorX` instance
+            :class:`plotly.graph_objs.histogram.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.histogram.ErrorY` instance
+            :class:`plotly.graph_objs.histogram.ErrorY` instance
             or dict with compatible properties
         histfunc
             Specifies the binning function used for this histogram
@@ -1599,7 +1599,7 @@ class Histogram(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram.Hoverlabel`
+            :class:`plotly.graph_objs.histogram.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1662,7 +1662,7 @@ class Histogram(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram.Legendgrouptitle
+            :class:`plotly.graph_objs.histogram.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1679,7 +1679,7 @@ class Histogram(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.histogram.Marker` instance
+            :class:`plotly.graph_objs.histogram.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1725,7 +1725,7 @@ class Histogram(_BaseTraceType):
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         selected
-            :class:`plotly.graph_objects.histogram.Selected`
+            :class:`plotly.graph_objs.histogram.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1738,7 +1738,7 @@ class Histogram(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.histogram.Stream` instance
+            :class:`plotly.graph_objs.histogram.Stream` instance
             or dict with compatible properties
         text
             Sets hover text elements associated with each bar. If a
@@ -1806,7 +1806,7 @@ class Histogram(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.histogram.Unselected`
+            :class:`plotly.graph_objs.histogram.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1821,7 +1821,7 @@ class Histogram(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
-            :class:`plotly.graph_objects.histogram.XBins` instance
+            :class:`plotly.graph_objs.histogram.XBins` instance
             or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1849,7 +1849,7 @@ class Histogram(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
-            :class:`plotly.graph_objects.histogram.YBins` instance
+            :class:`plotly.graph_objs.histogram.YBins` instance
             or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -1996,7 +1996,7 @@ class Histogram(_BaseTraceType):
             Constrain the size of text inside or outside a bar to
             be no larger than the bar itself.
         cumulative
-            :class:`plotly.graph_objects.histogram.Cumulative`
+            :class:`plotly.graph_objs.histogram.Cumulative`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -2007,10 +2007,10 @@ class Histogram(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         error_x
-            :class:`plotly.graph_objects.histogram.ErrorX` instance
+            :class:`plotly.graph_objs.histogram.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.histogram.ErrorY` instance
+            :class:`plotly.graph_objs.histogram.ErrorY` instance
             or dict with compatible properties
         histfunc
             Specifies the binning function used for this histogram
@@ -2046,7 +2046,7 @@ class Histogram(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram.Hoverlabel`
+            :class:`plotly.graph_objs.histogram.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -2109,7 +2109,7 @@ class Histogram(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram.Legendgrouptitle
+            :class:`plotly.graph_objs.histogram.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2126,7 +2126,7 @@ class Histogram(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.histogram.Marker` instance
+            :class:`plotly.graph_objs.histogram.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2172,7 +2172,7 @@ class Histogram(_BaseTraceType):
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         selected
-            :class:`plotly.graph_objects.histogram.Selected`
+            :class:`plotly.graph_objs.histogram.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -2185,7 +2185,7 @@ class Histogram(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.histogram.Stream` instance
+            :class:`plotly.graph_objs.histogram.Stream` instance
             or dict with compatible properties
         text
             Sets hover text elements associated with each bar. If a
@@ -2253,7 +2253,7 @@ class Histogram(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.histogram.Unselected`
+            :class:`plotly.graph_objs.histogram.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -2268,7 +2268,7 @@ class Histogram(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
-            :class:`plotly.graph_objects.histogram.XBins` instance
+            :class:`plotly.graph_objs.histogram.XBins` instance
             or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -2296,7 +2296,7 @@ class Histogram(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
-            :class:`plotly.graph_objects.histogram.YBins` instance
+            :class:`plotly.graph_objs.histogram.YBins` instance
             or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.

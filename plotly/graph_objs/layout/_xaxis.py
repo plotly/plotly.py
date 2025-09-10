@@ -2287,7 +2287,7 @@ class XAxis(_BaseLayoutHierarchyType):
             a reversed axis. Using "reversed" applies autorange on
             both ends and reverses the axis direction.
         autorangeoptions
-            :class:`plotly.graph_objects.layout.xaxis.Autorangeopti
+            :class:`plotly.graph_objs.layout.xaxis.Autorangeopti
             ons` instance or dict with compatible properties
         autotickangles
             When `tickangle` is set to "auto", it will be set to
@@ -2457,7 +2457,7 @@ class XAxis(_BaseLayoutHierarchyType):
             This only has an effect when `tickformat` is "SI" or
             "B".
         minor
-            :class:`plotly.graph_objects.layout.xaxis.Minor`
+            :class:`plotly.graph_objs.layout.xaxis.Minor`
             instance or dict with compatible properties
         minorloglabels
             Determines how minor log labels are displayed. If
@@ -2507,7 +2507,7 @@ class XAxis(_BaseLayoutHierarchyType):
             the default `autorange`.
         rangebreaks
             A tuple of
-            :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
+            :class:`plotly.graph_objs.layout.xaxis.Rangebreak`
             instances or dicts with compatible properties
         rangebreakdefaults
             When used in a template (as
@@ -2521,10 +2521,10 @@ class XAxis(_BaseLayoutHierarchyType):
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
         rangeselector
-            :class:`plotly.graph_objects.layout.xaxis.Rangeselector
+            :class:`plotly.graph_objs.layout.xaxis.Rangeselector
             ` instance or dict with compatible properties
         rangeslider
-            :class:`plotly.graph_objects.layout.xaxis.Rangeslider`
+            :class:`plotly.graph_objs.layout.xaxis.Rangeslider`
             instance or dict with compatible properties
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
@@ -2647,7 +2647,7 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.xaxis.Ti
+            A tuple of :class:`plotly.graph_objs.layout.xaxis.Ti
             ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -2760,7 +2760,7 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.xaxis.Title`
+            :class:`plotly.graph_objs.layout.xaxis.Title`
             instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
@@ -2771,7 +2771,7 @@ class XAxis(_BaseLayoutHierarchyType):
             `range`, `autorange`, and `title` if in `editable:
             true` configuration. Defaults to `layout.uirevision`.
         unifiedhovertitle
-            :class:`plotly.graph_objects.layout.xaxis.Unifiedhovert
+            :class:`plotly.graph_objs.layout.xaxis.Unifiedhovert
             itle` instance or dict with compatible properties
         visible
             A single toggle to hide the axis while preserving
@@ -2926,7 +2926,7 @@ class XAxis(_BaseLayoutHierarchyType):
             a reversed axis. Using "reversed" applies autorange on
             both ends and reverses the axis direction.
         autorangeoptions
-            :class:`plotly.graph_objects.layout.xaxis.Autorangeopti
+            :class:`plotly.graph_objs.layout.xaxis.Autorangeopti
             ons` instance or dict with compatible properties
         autotickangles
             When `tickangle` is set to "auto", it will be set to
@@ -3096,7 +3096,7 @@ class XAxis(_BaseLayoutHierarchyType):
             This only has an effect when `tickformat` is "SI" or
             "B".
         minor
-            :class:`plotly.graph_objects.layout.xaxis.Minor`
+            :class:`plotly.graph_objs.layout.xaxis.Minor`
             instance or dict with compatible properties
         minorloglabels
             Determines how minor log labels are displayed. If
@@ -3146,7 +3146,7 @@ class XAxis(_BaseLayoutHierarchyType):
             the default `autorange`.
         rangebreaks
             A tuple of
-            :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
+            :class:`plotly.graph_objs.layout.xaxis.Rangebreak`
             instances or dicts with compatible properties
         rangebreakdefaults
             When used in a template (as
@@ -3160,10 +3160,10 @@ class XAxis(_BaseLayoutHierarchyType):
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
         rangeselector
-            :class:`plotly.graph_objects.layout.xaxis.Rangeselector
+            :class:`plotly.graph_objs.layout.xaxis.Rangeselector
             ` instance or dict with compatible properties
         rangeslider
-            :class:`plotly.graph_objects.layout.xaxis.Rangeslider`
+            :class:`plotly.graph_objs.layout.xaxis.Rangeslider`
             instance or dict with compatible properties
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
@@ -3286,7 +3286,7 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.xaxis.Ti
+            A tuple of :class:`plotly.graph_objs.layout.xaxis.Ti
             ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -3399,7 +3399,7 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.xaxis.Title`
+            :class:`plotly.graph_objs.layout.xaxis.Title`
             instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
@@ -3410,7 +3410,7 @@ class XAxis(_BaseLayoutHierarchyType):
             `range`, `autorange`, and `title` if in `editable:
             true` configuration. Defaults to `layout.uirevision`.
         unifiedhovertitle
-            :class:`plotly.graph_objects.layout.xaxis.Unifiedhovert
+            :class:`plotly.graph_objs.layout.xaxis.Unifiedhovert
             itle` instance or dict with compatible properties
         visible
             A single toggle to hide the axis while preserving

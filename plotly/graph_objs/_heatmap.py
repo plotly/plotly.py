@@ -1619,7 +1619,7 @@ class Heatmap(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.heatmap.ColorBar` instance
+            :class:`plotly.graph_objs.heatmap.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1659,7 +1659,7 @@ class Heatmap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.heatmap.Hoverlabel`
+            :class:`plotly.graph_objs.heatmap.Hoverlabel`
             instance or dict with compatible properties
         hoverongaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -1720,7 +1720,7 @@ class Heatmap(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.heatmap.Legendgrouptitle`
+            :class:`plotly.graph_objs.heatmap.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1768,7 +1768,7 @@ class Heatmap(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.heatmap.Stream` instance
+            :class:`plotly.graph_objs.heatmap.Stream` instance
             or dict with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -2084,7 +2084,7 @@ class Heatmap(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.heatmap.ColorBar` instance
+            :class:`plotly.graph_objs.heatmap.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -2124,7 +2124,7 @@ class Heatmap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.heatmap.Hoverlabel`
+            :class:`plotly.graph_objs.heatmap.Hoverlabel`
             instance or dict with compatible properties
         hoverongaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -2185,7 +2185,7 @@ class Heatmap(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.heatmap.Legendgrouptitle`
+            :class:`plotly.graph_objs.heatmap.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2233,7 +2233,7 @@ class Heatmap(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.heatmap.Stream` instance
+            :class:`plotly.graph_objs.heatmap.Stream` instance
             or dict with compatible properties
         text
             Sets the text elements associated with each z value.

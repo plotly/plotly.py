@@ -290,7 +290,7 @@ class Scene(_BaseLayoutHierarchyType):
         return """\
         annotations
             A tuple of
-            :class:`plotly.graph_objects.layout.scene.Annotation`
+            :class:`plotly.graph_objs.layout.scene.Annotation`
             instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
@@ -313,10 +313,10 @@ class Scene(_BaseLayoutHierarchyType):
         bgcolor
 
         camera
-            :class:`plotly.graph_objects.layout.scene.Camera`
+            :class:`plotly.graph_objs.layout.scene.Camera`
             instance or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.layout.scene.Domain`
+            :class:`plotly.graph_objs.layout.scene.Domain`
             instance or dict with compatible properties
         dragmode
             Determines the mode of drag interactions for this
@@ -328,13 +328,13 @@ class Scene(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in camera
             attributes. Defaults to `layout.uirevision`.
         xaxis
-            :class:`plotly.graph_objects.layout.scene.XAxis`
+            :class:`plotly.graph_objs.layout.scene.XAxis`
             instance or dict with compatible properties
         yaxis
-            :class:`plotly.graph_objects.layout.scene.YAxis`
+            :class:`plotly.graph_objs.layout.scene.YAxis`
             instance or dict with compatible properties
         zaxis
-            :class:`plotly.graph_objects.layout.scene.ZAxis`
+            :class:`plotly.graph_objs.layout.scene.ZAxis`
             instance or dict with compatible properties
         """
 
@@ -366,7 +366,7 @@ class Scene(_BaseLayoutHierarchyType):
             an instance of :class:`plotly.graph_objs.layout.Scene`
         annotations
             A tuple of
-            :class:`plotly.graph_objects.layout.scene.Annotation`
+            :class:`plotly.graph_objs.layout.scene.Annotation`
             instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
@@ -389,10 +389,10 @@ class Scene(_BaseLayoutHierarchyType):
         bgcolor
 
         camera
-            :class:`plotly.graph_objects.layout.scene.Camera`
+            :class:`plotly.graph_objs.layout.scene.Camera`
             instance or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.layout.scene.Domain`
+            :class:`plotly.graph_objs.layout.scene.Domain`
             instance or dict with compatible properties
         dragmode
             Determines the mode of drag interactions for this
@@ -404,13 +404,13 @@ class Scene(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in camera
             attributes. Defaults to `layout.uirevision`.
         xaxis
-            :class:`plotly.graph_objects.layout.scene.XAxis`
+            :class:`plotly.graph_objs.layout.scene.XAxis`
             instance or dict with compatible properties
         yaxis
-            :class:`plotly.graph_objects.layout.scene.YAxis`
+            :class:`plotly.graph_objs.layout.scene.YAxis`
             instance or dict with compatible properties
         zaxis
-            :class:`plotly.graph_objects.layout.scene.ZAxis`
+            :class:`plotly.graph_objs.layout.scene.ZAxis`
             instance or dict with compatible properties
 
         Returns

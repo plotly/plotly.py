@@ -1271,13 +1271,13 @@ class Scatter3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         error_x
-            :class:`plotly.graph_objects.scatter3d.ErrorX` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scatter3d.ErrorY` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorY` instance
             or dict with compatible properties
         error_z
-            :class:`plotly.graph_objects.scatter3d.ErrorZ` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorZ` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1288,7 +1288,7 @@ class Scatter3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatter3d.Hoverlabel`
+            :class:`plotly.graph_objs.scatter3d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1350,7 +1350,7 @@ class Scatter3d(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatter3d.Legendgrouptitle
+            :class:`plotly.graph_objs.scatter3d.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1367,10 +1367,10 @@ class Scatter3d(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatter3d.Line` instance
+            :class:`plotly.graph_objs.scatter3d.Line` instance
             or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatter3d.Marker` instance
+            :class:`plotly.graph_objs.scatter3d.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1401,7 +1401,7 @@ class Scatter3d(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         projection
-            :class:`plotly.graph_objects.scatter3d.Projection`
+            :class:`plotly.graph_objs.scatter3d.Projection`
             instance or dict with compatible properties
         scene
             Sets a reference between this trace's 3D coordinate
@@ -1413,7 +1413,7 @@ class Scatter3d(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatter3d.Stream` instance
+            :class:`plotly.graph_objs.scatter3d.Stream` instance
             or dict with compatible properties
         surfaceaxis
             If "-1", the scatter points are not fill with a surface
@@ -1635,13 +1635,13 @@ class Scatter3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         error_x
-            :class:`plotly.graph_objects.scatter3d.ErrorX` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scatter3d.ErrorY` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorY` instance
             or dict with compatible properties
         error_z
-            :class:`plotly.graph_objects.scatter3d.ErrorZ` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorZ` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1652,7 +1652,7 @@ class Scatter3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatter3d.Hoverlabel`
+            :class:`plotly.graph_objs.scatter3d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1714,7 +1714,7 @@ class Scatter3d(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatter3d.Legendgrouptitle
+            :class:`plotly.graph_objs.scatter3d.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1731,10 +1731,10 @@ class Scatter3d(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatter3d.Line` instance
+            :class:`plotly.graph_objs.scatter3d.Line` instance
             or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatter3d.Marker` instance
+            :class:`plotly.graph_objs.scatter3d.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1765,7 +1765,7 @@ class Scatter3d(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         projection
-            :class:`plotly.graph_objects.scatter3d.Projection`
+            :class:`plotly.graph_objs.scatter3d.Projection`
             instance or dict with compatible properties
         scene
             Sets a reference between this trace's 3D coordinate
@@ -1777,7 +1777,7 @@ class Scatter3d(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatter3d.Stream` instance
+            :class:`plotly.graph_objs.scatter3d.Stream` instance
             or dict with compatible properties
         surfaceaxis
             If "-1", the scatter points are not fill with a surface

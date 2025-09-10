@@ -33,7 +33,7 @@ class Totals(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :class:`plotly.graph_objects.waterfall.totals.Marker`
+            :class:`plotly.graph_objs.waterfall.totals.Marker`
             instance or dict with compatible properties
         """
 
@@ -48,7 +48,7 @@ class Totals(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.waterfall.Totals`
         marker
-            :class:`plotly.graph_objects.waterfall.totals.Marker`
+            :class:`plotly.graph_objs.waterfall.totals.Marker`
             instance or dict with compatible properties
 
         Returns

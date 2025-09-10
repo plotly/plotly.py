@@ -1376,7 +1376,7 @@ class Surface(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.surface.ColorBar` instance
+            :class:`plotly.graph_objs.surface.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1394,7 +1394,7 @@ class Surface(_BaseTraceType):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
         contours
-            :class:`plotly.graph_objects.surface.Contours` instance
+            :class:`plotly.graph_objs.surface.Contours` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1418,7 +1418,7 @@ class Surface(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.surface.Hoverlabel`
+            :class:`plotly.graph_objs.surface.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1475,7 +1475,7 @@ class Surface(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.surface.Legendgrouptitle`
+            :class:`plotly.graph_objs.surface.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1492,10 +1492,10 @@ class Surface(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.surface.Lighting` instance
+            :class:`plotly.graph_objs.surface.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.surface.Lightposition`
+            :class:`plotly.graph_objs.surface.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1552,7 +1552,7 @@ class Surface(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.surface.Stream` instance
+            :class:`plotly.graph_objs.surface.Stream` instance
             or dict with compatible properties
         surfacecolor
             Sets the surface color values, used for setting a color
@@ -1771,7 +1771,7 @@ class Surface(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.surface.ColorBar` instance
+            :class:`plotly.graph_objs.surface.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1789,7 +1789,7 @@ class Surface(_BaseTraceType):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
         contours
-            :class:`plotly.graph_objects.surface.Contours` instance
+            :class:`plotly.graph_objs.surface.Contours` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1813,7 +1813,7 @@ class Surface(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.surface.Hoverlabel`
+            :class:`plotly.graph_objs.surface.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1870,7 +1870,7 @@ class Surface(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.surface.Legendgrouptitle`
+            :class:`plotly.graph_objs.surface.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1887,10 +1887,10 @@ class Surface(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.surface.Lighting` instance
+            :class:`plotly.graph_objs.surface.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.surface.Lightposition`
+            :class:`plotly.graph_objs.surface.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1947,7 +1947,7 @@ class Surface(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.surface.Stream` instance
+            :class:`plotly.graph_objs.surface.Stream` instance
             or dict with compatible properties
         surfacecolor
             Sets the surface color values, used for setting a color

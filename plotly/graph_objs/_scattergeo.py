@@ -1214,7 +1214,7 @@ class Scattergeo(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattergeo.Hoverlabel`
+            :class:`plotly.graph_objs.scattergeo.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1281,7 +1281,7 @@ class Scattergeo(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattergeo.Legendgrouptitl
+            :class:`plotly.graph_objs.scattergeo.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1298,7 +1298,7 @@ class Scattergeo(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattergeo.Line` instance
+            :class:`plotly.graph_objs.scattergeo.Line` instance
             or dict with compatible properties
         locationmode
             The library used by the *country names* `locationmode`
@@ -1323,7 +1323,7 @@ class Scattergeo(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattergeo.Marker`
+            :class:`plotly.graph_objs.scattergeo.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1354,7 +1354,7 @@ class Scattergeo(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattergeo.Selected`
+            :class:`plotly.graph_objs.scattergeo.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1367,7 +1367,7 @@ class Scattergeo(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattergeo.Stream`
+            :class:`plotly.graph_objs.scattergeo.Stream`
             instance or dict with compatible properties
         text
             Sets text elements associated with each (lon,lat) pair
@@ -1432,7 +1432,7 @@ class Scattergeo(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattergeo.Unselected`
+            :class:`plotly.graph_objs.scattergeo.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1558,7 +1558,7 @@ class Scattergeo(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattergeo.Hoverlabel`
+            :class:`plotly.graph_objs.scattergeo.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1625,7 +1625,7 @@ class Scattergeo(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattergeo.Legendgrouptitl
+            :class:`plotly.graph_objs.scattergeo.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1642,7 +1642,7 @@ class Scattergeo(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattergeo.Line` instance
+            :class:`plotly.graph_objs.scattergeo.Line` instance
             or dict with compatible properties
         locationmode
             The library used by the *country names* `locationmode`
@@ -1667,7 +1667,7 @@ class Scattergeo(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattergeo.Marker`
+            :class:`plotly.graph_objs.scattergeo.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1698,7 +1698,7 @@ class Scattergeo(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattergeo.Selected`
+            :class:`plotly.graph_objs.scattergeo.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1711,7 +1711,7 @@ class Scattergeo(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattergeo.Stream`
+            :class:`plotly.graph_objs.scattergeo.Stream`
             instance or dict with compatible properties
         text
             Sets text elements associated with each (lon,lat) pair
@@ -1776,7 +1776,7 @@ class Scattergeo(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattergeo.Unselected`
+            :class:`plotly.graph_objs.scattergeo.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

@@ -56,7 +56,7 @@ class Newselection(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            :class:`plotly.graph_objects.layout.newselection.Line`
+            :class:`plotly.graph_objs.layout.newselection.Line`
             instance or dict with compatible properties
         mode
             Describes how a new selection is created. If
@@ -78,7 +78,7 @@ class Newselection(_BaseLayoutHierarchyType):
             an instance of
             :class:`plotly.graph_objs.layout.Newselection`
         line
-            :class:`plotly.graph_objects.layout.newselection.Line`
+            :class:`plotly.graph_objs.layout.newselection.Line`
             instance or dict with compatible properties
         mode
             Describes how a new selection is created. If

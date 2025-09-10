@@ -61,7 +61,7 @@ class Decreasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            :class:`plotly.graph_objects.candlestick.decreasing.Lin
+            :class:`plotly.graph_objs.candlestick.decreasing.Lin
             e` instance or dict with compatible properties
         """
 
@@ -80,7 +80,7 @@ class Decreasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            :class:`plotly.graph_objects.candlestick.decreasing.Lin
+            :class:`plotly.graph_objs.candlestick.decreasing.Lin
             e` instance or dict with compatible properties
 
         Returns

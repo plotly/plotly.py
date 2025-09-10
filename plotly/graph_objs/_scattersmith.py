@@ -1145,7 +1145,7 @@ class Scattersmith(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattersmith.Hoverlabel`
+            :class:`plotly.graph_objs.scattersmith.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -1220,7 +1220,7 @@ class Scattersmith(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattersmith.Legendgroupti
+            :class:`plotly.graph_objs.scattersmith.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1237,10 +1237,10 @@ class Scattersmith(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattersmith.Line`
+            :class:`plotly.graph_objs.scattersmith.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scattersmith.Marker`
+            :class:`plotly.graph_objs.scattersmith.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1278,7 +1278,7 @@ class Scattersmith(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `real`.
         selected
-            :class:`plotly.graph_objects.scattersmith.Selected`
+            :class:`plotly.graph_objs.scattersmith.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1291,7 +1291,7 @@ class Scattersmith(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattersmith.Stream`
+            :class:`plotly.graph_objs.scattersmith.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1360,7 +1360,7 @@ class Scattersmith(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattersmith.Unselected`
+            :class:`plotly.graph_objs.scattersmith.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1479,7 +1479,7 @@ class Scattersmith(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattersmith.Hoverlabel`
+            :class:`plotly.graph_objs.scattersmith.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -1554,7 +1554,7 @@ class Scattersmith(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattersmith.Legendgroupti
+            :class:`plotly.graph_objs.scattersmith.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1571,10 +1571,10 @@ class Scattersmith(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattersmith.Line`
+            :class:`plotly.graph_objs.scattersmith.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scattersmith.Marker`
+            :class:`plotly.graph_objs.scattersmith.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1612,7 +1612,7 @@ class Scattersmith(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `real`.
         selected
-            :class:`plotly.graph_objects.scattersmith.Selected`
+            :class:`plotly.graph_objs.scattersmith.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1625,7 +1625,7 @@ class Scattersmith(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattersmith.Stream`
+            :class:`plotly.graph_objs.scattersmith.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1694,7 +1694,7 @@ class Scattersmith(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattersmith.Unselected`
+            :class:`plotly.graph_objs.scattersmith.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

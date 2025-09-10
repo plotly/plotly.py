@@ -775,10 +775,10 @@ class FigureWidget(BaseFigureWidget):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            :class:`plotly.graph_objects.bar.ErrorX` instance or
+            :class:`plotly.graph_objs.bar.ErrorX` instance or
             dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.bar.ErrorY` instance or
+            :class:`plotly.graph_objs.bar.ErrorY` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -789,7 +789,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.bar.Hoverlabel` instance
+            :class:`plotly.graph_objs.bar.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -857,7 +857,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.bar.Legendgrouptitle`
+            :class:`plotly.graph_objs.bar.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -874,7 +874,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.bar.Marker` instance or
+            :class:`plotly.graph_objs.bar.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -916,7 +916,7 @@ class FigureWidget(BaseFigureWidget):
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         selected
-            :class:`plotly.graph_objects.bar.Selected` instance or
+            :class:`plotly.graph_objs.bar.Selected` instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -929,7 +929,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.bar.Stream` instance or
+            :class:`plotly.graph_objs.bar.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -1006,7 +1006,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.bar.Unselected` instance
+            :class:`plotly.graph_objs.bar.Unselected` instance
             or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1310,7 +1310,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.barpolar.Hoverlabel`
+            :class:`plotly.graph_objs.barpolar.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1367,7 +1367,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.barpolar.Legendgrouptitle`
+            :class:`plotly.graph_objs.barpolar.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1384,7 +1384,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.barpolar.Marker` instance
+            :class:`plotly.graph_objs.barpolar.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1423,7 +1423,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `r`.
         selected
-            :class:`plotly.graph_objects.barpolar.Selected`
+            :class:`plotly.graph_objs.barpolar.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1436,7 +1436,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.barpolar.Stream` instance
+            :class:`plotly.graph_objs.barpolar.Stream` instance
             or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1486,7 +1486,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.barpolar.Unselected`
+            :class:`plotly.graph_objs.barpolar.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1739,7 +1739,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.box.Hoverlabel` instance
+            :class:`plotly.graph_objs.box.Hoverlabel` instance
             or dict with compatible properties
         hoveron
             Do the hover effects highlight individual boxes  or
@@ -1804,7 +1804,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.box.Legendgrouptitle`
+            :class:`plotly.graph_objs.box.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1821,7 +1821,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.box.Line` instance or dict
+            :class:`plotly.graph_objs.box.Line` instance or dict
             with compatible properties
         lowerfence
             Sets the lower fence values. There should be as many
@@ -1834,7 +1834,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `lowerfence`.
         marker
-            :class:`plotly.graph_objects.box.Marker` instance or
+            :class:`plotly.graph_objs.box.Marker` instance or
             dict with compatible properties
         mean
             Sets the mean values. There should be as many items as
@@ -1955,7 +1955,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `sd`.
         selected
-            :class:`plotly.graph_objects.box.Selected` instance or
+            :class:`plotly.graph_objs.box.Selected` instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1978,7 +1978,7 @@ class FigureWidget(BaseFigureWidget):
             sdmultiple (default 1) to scale the box size So it
             could be drawn 1-stddev, 3-stddev etc
         stream
-            :class:`plotly.graph_objects.box.Stream` instance or
+            :class:`plotly.graph_objs.box.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each sample
@@ -2013,7 +2013,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.box.Unselected` instance
+            :class:`plotly.graph_objs.box.Unselected` instance
             or dict with compatible properties
         upperfence
             Sets the upper fence values. There should be as many
@@ -2338,7 +2338,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.candlestick.Decreasing`
+            :class:`plotly.graph_objs.candlestick.Decreasing`
             instance or dict with compatible properties
         high
             Sets the high values.
@@ -2354,7 +2354,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.candlestick.Hoverlabel`
+            :class:`plotly.graph_objs.candlestick.Hoverlabel`
             instance or dict with compatible properties
         hovertext
             Same as `text`.
@@ -2369,7 +2369,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.candlestick.Increasing`
+            :class:`plotly.graph_objs.candlestick.Increasing`
             instance or dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -2382,7 +2382,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.candlestick.Legendgrouptit
+            :class:`plotly.graph_objs.candlestick.Legendgrouptit
             le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2399,7 +2399,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.candlestick.Line` instance
+            :class:`plotly.graph_objs.candlestick.Line` instance
             or dict with compatible properties
         low
             Sets the low values.
@@ -2443,7 +2443,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.candlestick.Stream`
+            :class:`plotly.graph_objs.candlestick.Stream`
             instance or dict with compatible properties
         text
             Sets hover text elements associated with each sample
@@ -2693,7 +2693,7 @@ class FigureWidget(BaseFigureWidget):
             coordinates. Use with `da` where `a0` is the starting
             coordinate and `da` the step.
         aaxis
-            :class:`plotly.graph_objects.carpet.Aaxis` instance or
+            :class:`plotly.graph_objs.carpet.Aaxis` instance or
             dict with compatible properties
         asrc
             Sets the source reference on Chart Studio Cloud for
@@ -2706,7 +2706,7 @@ class FigureWidget(BaseFigureWidget):
             coordinates. Use with `db` where `b0` is the starting
             coordinate and `db` the step.
         baxis
-            :class:`plotly.graph_objects.carpet.Baxis` instance or
+            :class:`plotly.graph_objs.carpet.Baxis` instance or
             dict with compatible properties
         bsrc
             Sets the source reference on Chart Studio Cloud for
@@ -2753,7 +2753,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.carpet.Legendgrouptitle`
+            :class:`plotly.graph_objs.carpet.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2791,7 +2791,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         stream
-            :class:`plotly.graph_objects.carpet.Stream` instance or
+            :class:`plotly.graph_objs.carpet.Stream` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -2995,7 +2995,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.choropleth.ColorBar`
+            :class:`plotly.graph_objs.choropleth.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -3044,7 +3044,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.choropleth.Hoverlabel`
+            :class:`plotly.graph_objs.choropleth.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -3101,7 +3101,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.choropleth.Legendgrouptitl
+            :class:`plotly.graph_objs.choropleth.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -3134,7 +3134,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `locations`.
         marker
-            :class:`plotly.graph_objects.choropleth.Marker`
+            :class:`plotly.graph_objs.choropleth.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -3160,7 +3160,7 @@ class FigureWidget(BaseFigureWidget):
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
         selected
-            :class:`plotly.graph_objects.choropleth.Selected`
+            :class:`plotly.graph_objs.choropleth.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -3176,7 +3176,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.choropleth.Stream`
+            :class:`plotly.graph_objs.choropleth.Stream`
             instance or dict with compatible properties
         text
             Sets the text elements associated with each location.
@@ -3206,7 +3206,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.choropleth.Unselected`
+            :class:`plotly.graph_objs.choropleth.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -3390,7 +3390,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.choroplethmap.ColorBar`
+            :class:`plotly.graph_objs.choroplethmap.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -3431,7 +3431,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.choroplethmap.Hoverlabel`
+            :class:`plotly.graph_objs.choroplethmap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -3489,7 +3489,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.choroplethmap.Legendgroupt
+            :class:`plotly.graph_objs.choroplethmap.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -3512,7 +3512,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `locations`.
         marker
-            :class:`plotly.graph_objects.choroplethmap.Marker`
+            :class:`plotly.graph_objs.choroplethmap.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -3538,7 +3538,7 @@ class FigureWidget(BaseFigureWidget):
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
         selected
-            :class:`plotly.graph_objects.choroplethmap.Selected`
+            :class:`plotly.graph_objs.choroplethmap.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -3554,7 +3554,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.choroplethmap.Stream`
+            :class:`plotly.graph_objs.choroplethmap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -3589,7 +3589,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.choroplethmap.Unselected`
+            :class:`plotly.graph_objs.choroplethmap.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -3777,7 +3777,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.choroplethmapbox.ColorBar`
+            :class:`plotly.graph_objs.choroplethmapbox.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -3818,7 +3818,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.choroplethmapbox.Hoverlabe
+            :class:`plotly.graph_objs.choroplethmapbox.Hoverlabe
             l` instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -3876,7 +3876,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.choroplethmapbox.Legendgro
+            :class:`plotly.graph_objs.choroplethmapbox.Legendgro
             uptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -3899,7 +3899,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `locations`.
         marker
-            :class:`plotly.graph_objects.choroplethmapbox.Marker`
+            :class:`plotly.graph_objs.choroplethmapbox.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -3925,7 +3925,7 @@ class FigureWidget(BaseFigureWidget):
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
         selected
-            :class:`plotly.graph_objects.choroplethmapbox.Selected`
+            :class:`plotly.graph_objs.choroplethmapbox.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -3941,7 +3941,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.choroplethmapbox.Stream`
+            :class:`plotly.graph_objs.choroplethmapbox.Stream`
             instance or dict with compatible properties
         subplot
             mapbox subplots and traces are deprecated! Please
@@ -3981,7 +3981,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.choroplethmapbox.Unselecte
+            :class:`plotly.graph_objs.choroplethmapbox.Unselecte
             d` instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -4195,7 +4195,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.cone.ColorBar` instance or
+            :class:`plotly.graph_objs.cone.ColorBar` instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -4226,7 +4226,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.cone.Hoverlabel` instance
+            :class:`plotly.graph_objs.cone.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -4284,7 +4284,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.cone.Legendgrouptitle`
+            :class:`plotly.graph_objs.cone.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -4301,10 +4301,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.cone.Lighting` instance or
+            :class:`plotly.graph_objs.cone.Lighting` instance or
             dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.cone.Lightposition`
+            :class:`plotly.graph_objs.cone.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -4369,7 +4369,7 @@ class FigureWidget(BaseFigureWidget):
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
-            :class:`plotly.graph_objects.cone.Stream` instance or
+            :class:`plotly.graph_objs.cone.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with the cones. If
@@ -4692,7 +4692,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.contour.ColorBar` instance
+            :class:`plotly.graph_objs.contour.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -4712,7 +4712,7 @@ class FigureWidget(BaseFigureWidget):
             to true if `z` is a one dimensional array otherwise it
             is defaulted to false.
         contours
-            :class:`plotly.graph_objects.contour.Contours` instance
+            :class:`plotly.graph_objs.contour.Contours` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -4740,7 +4740,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.contour.Hoverlabel`
+            :class:`plotly.graph_objs.contour.Hoverlabel`
             instance or dict with compatible properties
         hoverongaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -4801,7 +4801,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.contour.Legendgrouptitle`
+            :class:`plotly.graph_objs.contour.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -4818,7 +4818,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.contour.Line` instance or
+            :class:`plotly.graph_objs.contour.Line` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -4858,7 +4858,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.contour.Stream` instance
+            :class:`plotly.graph_objs.contour.Stream` instance
             or dict with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -5279,7 +5279,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.contourcarpet.ColorBar`
+            :class:`plotly.graph_objs.contourcarpet.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -5294,7 +5294,7 @@ class FigureWidget(BaseFigureWidget):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
-            :class:`plotly.graph_objects.contourcarpet.Contours`
+            :class:`plotly.graph_objs.contourcarpet.Contours`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -5336,7 +5336,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.contourcarpet.Legendgroupt
+            :class:`plotly.graph_objs.contourcarpet.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -5353,7 +5353,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.contourcarpet.Line`
+            :class:`plotly.graph_objs.contourcarpet.Line`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -5393,7 +5393,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.contourcarpet.Stream`
+            :class:`plotly.graph_objs.contourcarpet.Stream`
             instance or dict with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -5636,7 +5636,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.densitymap.ColorBar`
+            :class:`plotly.graph_objs.densitymap.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -5667,7 +5667,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.densitymap.Hoverlabel`
+            :class:`plotly.graph_objs.densitymap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -5734,7 +5734,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.densitymap.Legendgrouptitl
+            :class:`plotly.graph_objs.densitymap.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -5794,7 +5794,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.densitymap.Stream`
+            :class:`plotly.graph_objs.densitymap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -6020,7 +6020,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.densitymapbox.ColorBar`
+            :class:`plotly.graph_objs.densitymapbox.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -6051,7 +6051,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.densitymapbox.Hoverlabel`
+            :class:`plotly.graph_objs.densitymapbox.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -6118,7 +6118,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.densitymapbox.Legendgroupt
+            :class:`plotly.graph_objs.densitymapbox.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -6178,7 +6178,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.densitymapbox.Stream`
+            :class:`plotly.graph_objs.densitymapbox.Stream`
             instance or dict with compatible properties
         subplot
             mapbox subplots and traces are deprecated! Please
@@ -6418,7 +6418,7 @@ class FigureWidget(BaseFigureWidget):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            :class:`plotly.graph_objects.funnel.Connector` instance
+            :class:`plotly.graph_objs.funnel.Connector` instance
             or dict with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
@@ -6444,7 +6444,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.funnel.Hoverlabel`
+            :class:`plotly.graph_objs.funnel.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -6513,7 +6513,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.funnel.Legendgrouptitle`
+            :class:`plotly.graph_objs.funnel.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -6530,7 +6530,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.funnel.Marker` instance or
+            :class:`plotly.graph_objs.funnel.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -6583,7 +6583,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.funnel.Stream` instance or
+            :class:`plotly.graph_objs.funnel.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -6939,7 +6939,7 @@ class FigureWidget(BaseFigureWidget):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            :class:`plotly.graph_objects.funnelarea.Domain`
+            :class:`plotly.graph_objs.funnelarea.Domain`
             instance or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -6950,7 +6950,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.funnelarea.Hoverlabel`
+            :class:`plotly.graph_objs.funnelarea.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -7029,7 +7029,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.funnelarea.Legendgrouptitl
+            :class:`plotly.graph_objs.funnelarea.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -7046,7 +7046,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.funnelarea.Marker`
+            :class:`plotly.graph_objs.funnelarea.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -7078,7 +7078,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.funnelarea.Stream`
+            :class:`plotly.graph_objs.funnelarea.Stream`
             instance or dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -7120,7 +7120,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         title
-            :class:`plotly.graph_objects.funnelarea.Title` instance
+            :class:`plotly.graph_objs.funnelarea.Title` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -7339,7 +7339,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.heatmap.ColorBar` instance
+            :class:`plotly.graph_objs.heatmap.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -7379,7 +7379,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.heatmap.Hoverlabel`
+            :class:`plotly.graph_objs.heatmap.Hoverlabel`
             instance or dict with compatible properties
         hoverongaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -7440,7 +7440,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.heatmap.Legendgrouptitle`
+            :class:`plotly.graph_objs.heatmap.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -7488,7 +7488,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.heatmap.Stream` instance
+            :class:`plotly.graph_objs.heatmap.Stream` instance
             or dict with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -7907,7 +7907,7 @@ class FigureWidget(BaseFigureWidget):
             Constrain the size of text inside or outside a bar to
             be no larger than the bar itself.
         cumulative
-            :class:`plotly.graph_objects.histogram.Cumulative`
+            :class:`plotly.graph_objs.histogram.Cumulative`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -7918,10 +7918,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         error_x
-            :class:`plotly.graph_objects.histogram.ErrorX` instance
+            :class:`plotly.graph_objs.histogram.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.histogram.ErrorY` instance
+            :class:`plotly.graph_objs.histogram.ErrorY` instance
             or dict with compatible properties
         histfunc
             Specifies the binning function used for this histogram
@@ -7957,7 +7957,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram.Hoverlabel`
+            :class:`plotly.graph_objs.histogram.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -8020,7 +8020,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram.Legendgrouptitle
+            :class:`plotly.graph_objs.histogram.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -8037,7 +8037,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.histogram.Marker` instance
+            :class:`plotly.graph_objs.histogram.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -8083,7 +8083,7 @@ class FigureWidget(BaseFigureWidget):
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         selected
-            :class:`plotly.graph_objects.histogram.Selected`
+            :class:`plotly.graph_objs.histogram.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -8096,7 +8096,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.histogram.Stream` instance
+            :class:`plotly.graph_objs.histogram.Stream` instance
             or dict with compatible properties
         text
             Sets hover text elements associated with each bar. If a
@@ -8164,7 +8164,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.histogram.Unselected`
+            :class:`plotly.graph_objs.histogram.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -8179,7 +8179,7 @@ class FigureWidget(BaseFigureWidget):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
-            :class:`plotly.graph_objects.histogram.XBins` instance
+            :class:`plotly.graph_objs.histogram.XBins` instance
             or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -8207,7 +8207,7 @@ class FigureWidget(BaseFigureWidget):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
-            :class:`plotly.graph_objects.histogram.YBins` instance
+            :class:`plotly.graph_objs.histogram.YBins` instance
             or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -8444,7 +8444,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.histogram2d.ColorBar`
+            :class:`plotly.graph_objs.histogram2d.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -8500,7 +8500,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram2d.Hoverlabel`
+            :class:`plotly.graph_objs.histogram2d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -8553,7 +8553,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram2d.Legendgrouptit
+            :class:`plotly.graph_objs.histogram2d.Legendgrouptit
             le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -8570,7 +8570,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.histogram2d.Marker`
+            :class:`plotly.graph_objs.histogram2d.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -8616,7 +8616,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.histogram2d.Stream`
+            :class:`plotly.graph_objs.histogram2d.Stream`
             instance or dict with compatible properties
         textfont
             Sets the text font.
@@ -8679,7 +8679,7 @@ class FigureWidget(BaseFigureWidget):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            :class:`plotly.graph_objects.histogram2d.XBins`
+            :class:`plotly.graph_objs.histogram2d.XBins`
             instance or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -8716,7 +8716,7 @@ class FigureWidget(BaseFigureWidget):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            :class:`plotly.graph_objects.histogram2d.YBins`
+            :class:`plotly.graph_objs.histogram2d.YBins`
             instance or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -8984,7 +8984,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.histogram2dcontour.ColorBa
+            :class:`plotly.graph_objs.histogram2dcontour.ColorBa
             r` instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -8999,7 +8999,7 @@ class FigureWidget(BaseFigureWidget):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
-            :class:`plotly.graph_objects.histogram2dcontour.Contour
+            :class:`plotly.graph_objs.histogram2dcontour.Contour
             s` instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -9043,7 +9043,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram2dcontour.Hoverla
+            :class:`plotly.graph_objs.histogram2dcontour.Hoverla
             bel` instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -9096,7 +9096,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram2dcontour.Legendg
+            :class:`plotly.graph_objs.histogram2dcontour.Legendg
             rouptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -9113,10 +9113,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.histogram2dcontour.Line`
+            :class:`plotly.graph_objs.histogram2dcontour.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.histogram2dcontour.Marker`
+            :class:`plotly.graph_objs.histogram2dcontour.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -9168,7 +9168,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.histogram2dcontour.Stream`
+            :class:`plotly.graph_objs.histogram2dcontour.Stream`
             instance or dict with compatible properties
         textfont
             For this trace it only has an effect if `coloring` is
@@ -9233,7 +9233,7 @@ class FigureWidget(BaseFigureWidget):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            :class:`plotly.graph_objects.histogram2dcontour.XBins`
+            :class:`plotly.graph_objs.histogram2dcontour.XBins`
             instance or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -9268,7 +9268,7 @@ class FigureWidget(BaseFigureWidget):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            :class:`plotly.graph_objects.histogram2dcontour.YBins`
+            :class:`plotly.graph_objs.histogram2dcontour.YBins`
             instance or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -9497,7 +9497,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.icicle.Domain` instance or
+            :class:`plotly.graph_objs.icicle.Domain` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -9508,7 +9508,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.icicle.Hoverlabel`
+            :class:`plotly.graph_objs.icicle.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -9570,7 +9570,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `labels`.
         leaf
-            :class:`plotly.graph_objects.icicle.Leaf` instance or
+            :class:`plotly.graph_objs.icicle.Leaf` instance or
             dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -9579,7 +9579,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.icicle.Legendgrouptitle`
+            :class:`plotly.graph_objs.icicle.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -9602,7 +9602,7 @@ class FigureWidget(BaseFigureWidget):
             filled in, otherwise plotly attempts to find a matching
             item in `labels`.
         marker
-            :class:`plotly.graph_objects.icicle.Marker` instance or
+            :class:`plotly.graph_objs.icicle.Marker` instance or
             dict with compatible properties
         maxdepth
             Sets the number of rendered sectors from any given
@@ -9647,16 +9647,16 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `parents`.
         pathbar
-            :class:`plotly.graph_objects.icicle.Pathbar` instance
+            :class:`plotly.graph_objs.icicle.Pathbar` instance
             or dict with compatible properties
         root
-            :class:`plotly.graph_objects.icicle.Root` instance or
+            :class:`plotly.graph_objs.icicle.Root` instance or
             dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.icicle.Stream` instance or
+            :class:`plotly.graph_objs.icicle.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -9696,7 +9696,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         tiling
-            :class:`plotly.graph_objects.icicle.Tiling` instance or
+            :class:`plotly.graph_objs.icicle.Tiling` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -9887,7 +9887,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.image.Hoverlabel` instance
+            :class:`plotly.graph_objs.image.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -9942,7 +9942,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.image.Legendgrouptitle`
+            :class:`plotly.graph_objs.image.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -9984,7 +9984,7 @@ class FigureWidget(BaseFigureWidget):
             The URI consists of "data:image/[<media
             subtype>][;base64],<data>"
         stream
-            :class:`plotly.graph_objects.image.Stream` instance or
+            :class:`plotly.graph_objs.image.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -10199,10 +10199,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         delta
-            :class:`plotly.graph_objects.indicator.Delta` instance
+            :class:`plotly.graph_objs.indicator.Delta` instance
             or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.indicator.Domain` instance
+            :class:`plotly.graph_objs.indicator.Domain` instance
             or dict with compatible properties
         gauge
             The gauge of the Indicator plot.
@@ -10220,7 +10220,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.indicator.Legendgrouptitle
+            :class:`plotly.graph_objs.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -10262,13 +10262,13 @@ class FigureWidget(BaseFigureWidget):
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         number
-            :class:`plotly.graph_objects.indicator.Number` instance
+            :class:`plotly.graph_objs.indicator.Number` instance
             or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.indicator.Stream` instance
+            :class:`plotly.graph_objs.indicator.Stream` instance
             or dict with compatible properties
         title
-            :class:`plotly.graph_objects.indicator.Title` instance
+            :class:`plotly.graph_objs.indicator.Title` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -10430,7 +10430,7 @@ class FigureWidget(BaseFigureWidget):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            :class:`plotly.graph_objects.isosurface.Caps` instance
+            :class:`plotly.graph_objs.isosurface.Caps` instance
             or dict with compatible properties
         cauto
             Determines whether or not the color domain is computed
@@ -10458,7 +10458,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.isosurface.ColorBar`
+            :class:`plotly.graph_objs.isosurface.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -10473,7 +10473,7 @@ class FigureWidget(BaseFigureWidget):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.isosurface.Contour`
+            :class:`plotly.graph_objs.isosurface.Contour`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -10496,7 +10496,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.isosurface.Hoverlabel`
+            :class:`plotly.graph_objs.isosurface.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -10557,7 +10557,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.isosurface.Legendgrouptitl
+            :class:`plotly.graph_objs.isosurface.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -10574,10 +10574,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.isosurface.Lighting`
+            :class:`plotly.graph_objs.isosurface.Lighting`
             instance or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.isosurface.Lightposition`
+            :class:`plotly.graph_objs.isosurface.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -10623,16 +10623,16 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            :class:`plotly.graph_objects.isosurface.Slices`
+            :class:`plotly.graph_objs.isosurface.Slices`
             instance or dict with compatible properties
         spaceframe
-            :class:`plotly.graph_objects.isosurface.Spaceframe`
+            :class:`plotly.graph_objs.isosurface.Spaceframe`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.isosurface.Stream`
+            :class:`plotly.graph_objs.isosurface.Stream`
             instance or dict with compatible properties
         surface
-            :class:`plotly.graph_objects.isosurface.Surface`
+            :class:`plotly.graph_objs.isosurface.Surface`
             instance or dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
@@ -10956,7 +10956,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.mesh3d.ColorBar` instance
+            :class:`plotly.graph_objs.mesh3d.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -10971,7 +10971,7 @@ class FigureWidget(BaseFigureWidget):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.mesh3d.Contour` instance
+            :class:`plotly.graph_objs.mesh3d.Contour` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -11006,7 +11006,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.mesh3d.Hoverlabel`
+            :class:`plotly.graph_objs.mesh3d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -11108,7 +11108,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.mesh3d.Legendgrouptitle`
+            :class:`plotly.graph_objs.mesh3d.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -11125,10 +11125,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.mesh3d.Lighting` instance
+            :class:`plotly.graph_objs.mesh3d.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.mesh3d.Lightposition`
+            :class:`plotly.graph_objs.mesh3d.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -11174,7 +11174,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.mesh3d.Stream` instance or
+            :class:`plotly.graph_objs.mesh3d.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
@@ -11462,7 +11462,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.ohlc.Decreasing` instance
+            :class:`plotly.graph_objs.ohlc.Decreasing` instance
             or dict with compatible properties
         high
             Sets the high values.
@@ -11478,7 +11478,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.ohlc.Hoverlabel` instance
+            :class:`plotly.graph_objs.ohlc.Hoverlabel` instance
             or dict with compatible properties
         hovertext
             Same as `text`.
@@ -11493,7 +11493,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.ohlc.Increasing` instance
+            :class:`plotly.graph_objs.ohlc.Increasing` instance
             or dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -11506,7 +11506,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
+            :class:`plotly.graph_objs.ohlc.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -11523,7 +11523,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.ohlc.Line` instance or
+            :class:`plotly.graph_objs.ohlc.Line` instance or
             dict with compatible properties
         low
             Sets the low values.
@@ -11567,7 +11567,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.ohlc.Stream` instance or
+            :class:`plotly.graph_objs.ohlc.Stream` instance or
             dict with compatible properties
         text
             Sets hover text elements associated with each sample
@@ -11816,7 +11816,7 @@ class FigureWidget(BaseFigureWidget):
             the default property values to use for elements of
             parcats.dimensions
         domain
-            :class:`plotly.graph_objects.parcats.Domain` instance
+            :class:`plotly.graph_objs.parcats.Domain` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -11868,13 +11868,13 @@ class FigureWidget(BaseFigureWidget):
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
-            :class:`plotly.graph_objects.parcats.Legendgrouptitle`
+            :class:`plotly.graph_objs.parcats.Legendgrouptitle`
             instance or dict with compatible properties
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.parcats.Line` instance or
+            :class:`plotly.graph_objs.parcats.Line` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -11901,7 +11901,7 @@ class FigureWidget(BaseFigureWidget):
             If `backward`, sort paths based on dimensions
             categories from right to left.
         stream
-            :class:`plotly.graph_objects.parcats.Stream` instance
+            :class:`plotly.graph_objs.parcats.Stream` instance
             or dict with compatible properties
         tickfont
             Sets the font for the `category` labels.
@@ -12034,7 +12034,7 @@ class FigureWidget(BaseFigureWidget):
             the default property values to use for elements of
             parcoords.dimensions
         domain
-            :class:`plotly.graph_objects.parcoords.Domain` instance
+            :class:`plotly.graph_objs.parcoords.Domain` instance
             or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -12064,7 +12064,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.parcoords.Legendgrouptitle
+            :class:`plotly.graph_objs.parcoords.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -12081,7 +12081,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.parcoords.Line` instance
+            :class:`plotly.graph_objs.parcoords.Line` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -12105,7 +12105,7 @@ class FigureWidget(BaseFigureWidget):
         rangefont
             Sets the font for the `dimension` range values.
         stream
-            :class:`plotly.graph_objects.parcoords.Stream` instance
+            :class:`plotly.graph_objs.parcoords.Stream` instance
             or dict with compatible properties
         tickfont
             Sets the font for the `dimension` tick values.
@@ -12132,7 +12132,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.parcoords.Unselected`
+            :class:`plotly.graph_objs.parcoords.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -12271,7 +12271,7 @@ class FigureWidget(BaseFigureWidget):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            :class:`plotly.graph_objects.pie.Domain` instance or
+            :class:`plotly.graph_objs.pie.Domain` instance or
             dict with compatible properties
         hole
             Sets the fraction of the radius to cut out of the pie.
@@ -12285,7 +12285,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.pie.Hoverlabel` instance
+            :class:`plotly.graph_objs.pie.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -12374,7 +12374,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.pie.Legendgrouptitle`
+            :class:`plotly.graph_objs.pie.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -12391,7 +12391,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.pie.Marker` instance or
+            :class:`plotly.graph_objs.pie.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -12440,7 +12440,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.pie.Stream` instance or
+            :class:`plotly.graph_objs.pie.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -12482,7 +12482,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         title
-            :class:`plotly.graph_objects.pie.Title` instance or
+            :class:`plotly.graph_objs.pie.Title` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -12651,7 +12651,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.sankey.Domain` instance or
+            :class:`plotly.graph_objs.sankey.Domain` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -12661,7 +12661,7 @@ class FigureWidget(BaseFigureWidget):
             superseded by `node.hoverinfo` and `node.hoverinfo` for
             nodes and links respectively.
         hoverlabel
-            :class:`plotly.graph_objects.sankey.Hoverlabel`
+            :class:`plotly.graph_objs.sankey.Hoverlabel`
             instance or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -12677,7 +12677,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.sankey.Legendgrouptitle`
+            :class:`plotly.graph_objs.sankey.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -12726,7 +12726,7 @@ class FigureWidget(BaseFigureWidget):
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
         stream
-            :class:`plotly.graph_objects.sankey.Stream` instance or
+            :class:`plotly.graph_objs.sankey.Stream` instance or
             dict with compatible properties
         textfont
             Sets the font for node labels
@@ -12934,10 +12934,10 @@ class FigureWidget(BaseFigureWidget):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            :class:`plotly.graph_objects.scatter.ErrorX` instance
+            :class:`plotly.graph_objs.scatter.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scatter.ErrorY` instance
+            :class:`plotly.graph_objs.scatter.ErrorY` instance
             or dict with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
@@ -12993,7 +12993,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatter.Hoverlabel`
+            :class:`plotly.graph_objs.scatter.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -13061,7 +13061,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatter.Legendgrouptitle`
+            :class:`plotly.graph_objs.scatter.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -13078,10 +13078,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatter.Line` instance or
+            :class:`plotly.graph_objs.scatter.Line` instance or
             dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatter.Marker` instance
+            :class:`plotly.graph_objs.scatter.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -13125,7 +13125,7 @@ class FigureWidget(BaseFigureWidget):
             subsequent traces are added. Also affects the default
             value of `fill`.
         selected
-            :class:`plotly.graph_objects.scatter.Selected` instance
+            :class:`plotly.graph_objs.scatter.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -13162,7 +13162,7 @@ class FigureWidget(BaseFigureWidget):
             fill-linked traces are not already consecutive, the
             later ones will be pushed down in the drawing order.
         stream
-            :class:`plotly.graph_objects.scatter.Stream` instance
+            :class:`plotly.graph_objs.scatter.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -13225,7 +13225,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatter.Unselected`
+            :class:`plotly.graph_objs.scatter.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -13518,13 +13518,13 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         error_x
-            :class:`plotly.graph_objects.scatter3d.ErrorX` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scatter3d.ErrorY` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorY` instance
             or dict with compatible properties
         error_z
-            :class:`plotly.graph_objects.scatter3d.ErrorZ` instance
+            :class:`plotly.graph_objs.scatter3d.ErrorZ` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -13535,7 +13535,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatter3d.Hoverlabel`
+            :class:`plotly.graph_objs.scatter3d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -13597,7 +13597,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatter3d.Legendgrouptitle
+            :class:`plotly.graph_objs.scatter3d.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -13614,10 +13614,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatter3d.Line` instance
+            :class:`plotly.graph_objs.scatter3d.Line` instance
             or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatter3d.Marker` instance
+            :class:`plotly.graph_objs.scatter3d.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -13648,7 +13648,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         projection
-            :class:`plotly.graph_objects.scatter3d.Projection`
+            :class:`plotly.graph_objs.scatter3d.Projection`
             instance or dict with compatible properties
         scene
             Sets a reference between this trace's 3D coordinate
@@ -13660,7 +13660,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatter3d.Stream` instance
+            :class:`plotly.graph_objs.scatter3d.Stream` instance
             or dict with compatible properties
         surfaceaxis
             If "-1", the scatter points are not fill with a surface
@@ -13984,7 +13984,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattercarpet.Hoverlabel`
+            :class:`plotly.graph_objs.scattercarpet.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -14051,7 +14051,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattercarpet.Legendgroupt
+            :class:`plotly.graph_objs.scattercarpet.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -14068,10 +14068,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattercarpet.Line`
+            :class:`plotly.graph_objs.scattercarpet.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scattercarpet.Marker`
+            :class:`plotly.graph_objs.scattercarpet.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -14102,7 +14102,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattercarpet.Selected`
+            :class:`plotly.graph_objs.scattercarpet.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -14115,7 +14115,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattercarpet.Stream`
+            :class:`plotly.graph_objs.scattercarpet.Stream`
             instance or dict with compatible properties
         text
             Sets text elements associated with each (a,b) point. If
@@ -14179,7 +14179,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattercarpet.Unselected`
+            :class:`plotly.graph_objs.scattercarpet.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -14398,7 +14398,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattergeo.Hoverlabel`
+            :class:`plotly.graph_objs.scattergeo.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -14465,7 +14465,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattergeo.Legendgrouptitl
+            :class:`plotly.graph_objs.scattergeo.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -14482,7 +14482,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattergeo.Line` instance
+            :class:`plotly.graph_objs.scattergeo.Line` instance
             or dict with compatible properties
         locationmode
             The library used by the *country names* `locationmode`
@@ -14507,7 +14507,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattergeo.Marker`
+            :class:`plotly.graph_objs.scattergeo.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -14538,7 +14538,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattergeo.Selected`
+            :class:`plotly.graph_objs.scattergeo.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -14551,7 +14551,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattergeo.Stream`
+            :class:`plotly.graph_objs.scattergeo.Stream`
             instance or dict with compatible properties
         text
             Sets text elements associated with each (lon,lat) pair
@@ -14616,7 +14616,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattergeo.Unselected`
+            :class:`plotly.graph_objs.scattergeo.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -14792,10 +14792,10 @@ class FigureWidget(BaseFigureWidget):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            :class:`plotly.graph_objects.scattergl.ErrorX` instance
+            :class:`plotly.graph_objs.scattergl.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scattergl.ErrorY` instance
+            :class:`plotly.graph_objs.scattergl.ErrorY` instance
             or dict with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
@@ -14833,7 +14833,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattergl.Hoverlabel`
+            :class:`plotly.graph_objs.scattergl.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -14895,7 +14895,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattergl.Legendgrouptitle
+            :class:`plotly.graph_objs.scattergl.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -14912,10 +14912,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattergl.Line` instance
+            :class:`plotly.graph_objs.scattergl.Line` instance
             or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scattergl.Marker` instance
+            :class:`plotly.graph_objs.scattergl.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -14941,7 +14941,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattergl.Selected`
+            :class:`plotly.graph_objs.scattergl.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -14954,7 +14954,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattergl.Stream` instance
+            :class:`plotly.graph_objs.scattergl.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -15017,7 +15017,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattergl.Unselected`
+            :class:`plotly.graph_objs.scattergl.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -15278,7 +15278,7 @@ class FigureWidget(BaseFigureWidget):
             base layers. To place the scattermap layers above every
             other layer, set `below` to "''".
         cluster
-            :class:`plotly.graph_objects.scattermap.Cluster`
+            :class:`plotly.graph_objs.scattermap.Cluster`
             instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -15309,7 +15309,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattermap.Hoverlabel`
+            :class:`plotly.graph_objs.scattermap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -15376,7 +15376,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattermap.Legendgrouptitl
+            :class:`plotly.graph_objs.scattermap.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -15393,7 +15393,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattermap.Line` instance
+            :class:`plotly.graph_objs.scattermap.Line` instance
             or dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
@@ -15401,7 +15401,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattermap.Marker`
+            :class:`plotly.graph_objs.scattermap.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -15430,7 +15430,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattermap.Selected`
+            :class:`plotly.graph_objs.scattermap.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -15443,7 +15443,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattermap.Stream`
+            :class:`plotly.graph_objs.scattermap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -15511,7 +15511,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattermap.Unselected`
+            :class:`plotly.graph_objs.scattermap.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -15660,7 +15660,7 @@ class FigureWidget(BaseFigureWidget):
             the base layers. To place the scattermapbox layers
             above every other layer, set `below` to "''".
         cluster
-            :class:`plotly.graph_objects.scattermapbox.Cluster`
+            :class:`plotly.graph_objs.scattermapbox.Cluster`
             instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -15691,7 +15691,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattermapbox.Hoverlabel`
+            :class:`plotly.graph_objs.scattermapbox.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -15758,7 +15758,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattermapbox.Legendgroupt
+            :class:`plotly.graph_objs.scattermapbox.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -15775,7 +15775,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattermapbox.Line`
+            :class:`plotly.graph_objs.scattermapbox.Line`
             instance or dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
@@ -15783,7 +15783,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattermapbox.Marker`
+            :class:`plotly.graph_objs.scattermapbox.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -15812,7 +15812,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattermapbox.Selected`
+            :class:`plotly.graph_objs.scattermapbox.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -15825,7 +15825,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattermapbox.Stream`
+            :class:`plotly.graph_objs.scattermapbox.Stream`
             instance or dict with compatible properties
         subplot
             mapbox subplots and traces are deprecated! Please
@@ -15898,7 +15898,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattermapbox.Unselected`
+            :class:`plotly.graph_objs.scattermapbox.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -16093,7 +16093,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatterpolar.Hoverlabel`
+            :class:`plotly.graph_objs.scatterpolar.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -16161,7 +16161,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatterpolar.Legendgroupti
+            :class:`plotly.graph_objs.scatterpolar.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -16178,10 +16178,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatterpolar.Line`
+            :class:`plotly.graph_objs.scatterpolar.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatterpolar.Marker`
+            :class:`plotly.graph_objs.scatterpolar.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -16221,7 +16221,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `r`.
         selected
-            :class:`plotly.graph_objects.scatterpolar.Selected`
+            :class:`plotly.graph_objs.scatterpolar.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -16234,7 +16234,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatterpolar.Stream`
+            :class:`plotly.graph_objs.scatterpolar.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -16315,7 +16315,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatterpolar.Unselected`
+            :class:`plotly.graph_objs.scatterpolar.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -16519,7 +16519,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatterpolargl.Hoverlabel`
+            :class:`plotly.graph_objs.scatterpolargl.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -16581,7 +16581,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatterpolargl.Legendgroup
+            :class:`plotly.graph_objs.scatterpolargl.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -16598,10 +16598,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatterpolargl.Line`
+            :class:`plotly.graph_objs.scatterpolargl.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatterpolargl.Marker`
+            :class:`plotly.graph_objs.scatterpolargl.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -16641,7 +16641,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `r`.
         selected
-            :class:`plotly.graph_objects.scatterpolargl.Selected`
+            :class:`plotly.graph_objs.scatterpolargl.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -16654,7 +16654,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatterpolargl.Stream`
+            :class:`plotly.graph_objs.scatterpolargl.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -16735,7 +16735,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatterpolargl.Unselected`
+            :class:`plotly.graph_objs.scatterpolargl.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -16923,7 +16923,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattersmith.Hoverlabel`
+            :class:`plotly.graph_objs.scattersmith.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -16998,7 +16998,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattersmith.Legendgroupti
+            :class:`plotly.graph_objs.scattersmith.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -17015,10 +17015,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattersmith.Line`
+            :class:`plotly.graph_objs.scattersmith.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scattersmith.Marker`
+            :class:`plotly.graph_objs.scattersmith.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -17056,7 +17056,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `real`.
         selected
-            :class:`plotly.graph_objects.scattersmith.Selected`
+            :class:`plotly.graph_objs.scattersmith.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -17069,7 +17069,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattersmith.Stream`
+            :class:`plotly.graph_objs.scattersmith.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -17138,7 +17138,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattersmith.Unselected`
+            :class:`plotly.graph_objs.scattersmith.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -17349,7 +17349,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatterternary.Hoverlabel`
+            :class:`plotly.graph_objs.scatterternary.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -17417,7 +17417,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatterternary.Legendgroup
+            :class:`plotly.graph_objs.scatterternary.Legendgroup
             title` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -17434,10 +17434,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatterternary.Line`
+            :class:`plotly.graph_objs.scatterternary.Line`
             instance or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatterternary.Marker`
+            :class:`plotly.graph_objs.scatterternary.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -17468,7 +17468,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scatterternary.Selected`
+            :class:`plotly.graph_objs.scatterternary.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -17481,7 +17481,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scatterternary.Stream`
+            :class:`plotly.graph_objs.scatterternary.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -17557,7 +17557,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatterternary.Unselected`
+            :class:`plotly.graph_objs.scatterternary.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -17705,11 +17705,11 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         diagonal
-            :class:`plotly.graph_objects.splom.Diagonal` instance
+            :class:`plotly.graph_objs.splom.Diagonal` instance
             or dict with compatible properties
         dimensions
             A tuple of
-            :class:`plotly.graph_objects.splom.Dimension` instances
+            :class:`plotly.graph_objs.splom.Dimension` instances
             or dicts with compatible properties
         dimensiondefaults
             When used in a template (as
@@ -17725,7 +17725,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.splom.Hoverlabel` instance
+            :class:`plotly.graph_objs.splom.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -17782,7 +17782,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.splom.Legendgrouptitle`
+            :class:`plotly.graph_objs.splom.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -17799,7 +17799,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.splom.Marker` instance or
+            :class:`plotly.graph_objs.splom.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -17823,7 +17823,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.splom.Selected` instance
+            :class:`plotly.graph_objs.splom.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -17842,7 +17842,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not subplots on the upper half
             from the diagonal are displayed.
         stream
-            :class:`plotly.graph_objects.splom.Stream` instance or
+            :class:`plotly.graph_objs.splom.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair to
@@ -17876,7 +17876,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.splom.Unselected` instance
+            :class:`plotly.graph_objs.splom.Unselected` instance
             or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -18100,7 +18100,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.streamtube.ColorBar`
+            :class:`plotly.graph_objs.streamtube.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -18131,7 +18131,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.streamtube.Hoverlabel`
+            :class:`plotly.graph_objs.streamtube.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -18188,7 +18188,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.streamtube.Legendgrouptitl
+            :class:`plotly.graph_objs.streamtube.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -18205,10 +18205,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.streamtube.Lighting`
+            :class:`plotly.graph_objs.streamtube.Lighting`
             instance or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.streamtube.Lightposition`
+            :class:`plotly.graph_objs.streamtube.Lightposition`
             instance or dict with compatible properties
         maxdisplayed
             The maximum number of displayed segments in a
@@ -18261,10 +18261,10 @@ class FigureWidget(BaseFigureWidget):
             1, which avoids two max divergence tubes from touching
             at adjacent starting positions.
         starts
-            :class:`plotly.graph_objects.streamtube.Starts`
+            :class:`plotly.graph_objs.streamtube.Starts`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.streamtube.Stream`
+            :class:`plotly.graph_objs.streamtube.Stream`
             instance or dict with compatible properties
         text
             Sets a text element associated with this trace. If
@@ -18549,7 +18549,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.sunburst.Domain` instance
+            :class:`plotly.graph_objs.sunburst.Domain` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -18560,7 +18560,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.sunburst.Hoverlabel`
+            :class:`plotly.graph_objs.sunburst.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -18632,7 +18632,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `labels`.
         leaf
-            :class:`plotly.graph_objects.sunburst.Leaf` instance or
+            :class:`plotly.graph_objs.sunburst.Leaf` instance or
             dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -18641,7 +18641,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.sunburst.Legendgrouptitle`
+            :class:`plotly.graph_objs.sunburst.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -18664,7 +18664,7 @@ class FigureWidget(BaseFigureWidget):
             filled in, otherwise plotly attempts to find a matching
             item in `labels`.
         marker
-            :class:`plotly.graph_objects.sunburst.Marker` instance
+            :class:`plotly.graph_objs.sunburst.Marker` instance
             or dict with compatible properties
         maxdepth
             Sets the number of rendered sectors from any given
@@ -18709,7 +18709,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `parents`.
         root
-            :class:`plotly.graph_objects.sunburst.Root` instance or
+            :class:`plotly.graph_objs.sunburst.Root` instance or
             dict with compatible properties
         rotation
             Rotates the whole diagram counterclockwise by some
@@ -18718,7 +18718,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.sunburst.Stream` instance
+            :class:`plotly.graph_objs.sunburst.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -18971,7 +18971,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.surface.ColorBar` instance
+            :class:`plotly.graph_objs.surface.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -18989,7 +18989,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
         contours
-            :class:`plotly.graph_objects.surface.Contours` instance
+            :class:`plotly.graph_objs.surface.Contours` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -19013,7 +19013,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.surface.Hoverlabel`
+            :class:`plotly.graph_objs.surface.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -19070,7 +19070,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.surface.Legendgrouptitle`
+            :class:`plotly.graph_objs.surface.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -19087,10 +19087,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.surface.Lighting` instance
+            :class:`plotly.graph_objs.surface.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.surface.Lightposition`
+            :class:`plotly.graph_objs.surface.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -19147,7 +19147,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.surface.Stream` instance
+            :class:`plotly.graph_objs.surface.Stream` instance
             or dict with compatible properties
         surfacecolor
             Sets the surface color values, used for setting a color
@@ -19373,7 +19373,7 @@ class FigureWidget(BaseFigureWidget):
         Parameters
         ----------
         cells
-            :class:`plotly.graph_objects.table.Cells` instance or
+            :class:`plotly.graph_objs.table.Cells` instance or
             dict with compatible properties
         columnorder
             Specifies the rendered order of the data columns; for
@@ -19399,10 +19399,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.table.Domain` instance or
+            :class:`plotly.graph_objs.table.Domain` instance or
             dict with compatible properties
         header
-            :class:`plotly.graph_objects.table.Header` instance or
+            :class:`plotly.graph_objs.table.Header` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -19413,7 +19413,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.table.Hoverlabel` instance
+            :class:`plotly.graph_objs.table.Hoverlabel` instance
             or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -19429,7 +19429,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.table.Legendgrouptitle`
+            :class:`plotly.graph_objs.table.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -19465,7 +19465,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         stream
-            :class:`plotly.graph_objects.table.Stream` instance or
+            :class:`plotly.graph_objs.table.Stream` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -19625,7 +19625,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.treemap.Domain` instance
+            :class:`plotly.graph_objs.treemap.Domain` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -19636,7 +19636,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.treemap.Hoverlabel`
+            :class:`plotly.graph_objs.treemap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -19704,7 +19704,7 @@ class FigureWidget(BaseFigureWidget):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.treemap.Legendgrouptitle`
+            :class:`plotly.graph_objs.treemap.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -19727,7 +19727,7 @@ class FigureWidget(BaseFigureWidget):
             filled in, otherwise plotly attempts to find a matching
             item in `labels`.
         marker
-            :class:`plotly.graph_objects.treemap.Marker` instance
+            :class:`plotly.graph_objs.treemap.Marker` instance
             or dict with compatible properties
         maxdepth
             Sets the number of rendered sectors from any given
@@ -19772,16 +19772,16 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `parents`.
         pathbar
-            :class:`plotly.graph_objects.treemap.Pathbar` instance
+            :class:`plotly.graph_objs.treemap.Pathbar` instance
             or dict with compatible properties
         root
-            :class:`plotly.graph_objects.treemap.Root` instance or
+            :class:`plotly.graph_objs.treemap.Root` instance or
             dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.treemap.Stream` instance
+            :class:`plotly.graph_objs.treemap.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -19821,7 +19821,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         tiling
-            :class:`plotly.graph_objects.treemap.Tiling` instance
+            :class:`plotly.graph_objs.treemap.Tiling` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -20017,7 +20017,7 @@ class FigureWidget(BaseFigureWidget):
             estimate. By default, the bandwidth is determined by
             Silverman's rule of thumb.
         box
-            :class:`plotly.graph_objects.violin.Box` instance or
+            :class:`plotly.graph_objs.violin.Box` instance or
             dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -20040,7 +20040,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.violin.Hoverlabel`
+            :class:`plotly.graph_objs.violin.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual violins or
@@ -20106,7 +20106,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.violin.Legendgrouptitle`
+            :class:`plotly.graph_objs.violin.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -20123,13 +20123,13 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.violin.Line` instance or
+            :class:`plotly.graph_objs.violin.Line` instance or
             dict with compatible properties
         marker
-            :class:`plotly.graph_objects.violin.Marker` instance or
+            :class:`plotly.graph_objs.violin.Marker` instance or
             dict with compatible properties
         meanline
-            :class:`plotly.graph_objects.violin.Meanline` instance
+            :class:`plotly.graph_objs.violin.Meanline` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -20211,7 +20211,7 @@ class FigureWidget(BaseFigureWidget):
             (max) width "count" means the violins are scaled by the
             number of sample points making up each violin.
         selected
-            :class:`plotly.graph_objects.violin.Selected` instance
+            :class:`plotly.graph_objs.violin.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -20243,7 +20243,7 @@ class FigureWidget(BaseFigureWidget):
             settings, use mode "manual" and fill in the `span`
             attribute.
         stream
-            :class:`plotly.graph_objects.violin.Stream` instance or
+            :class:`plotly.graph_objs.violin.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each sample
@@ -20278,7 +20278,7 @@ class FigureWidget(BaseFigureWidget):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.violin.Unselected`
+            :class:`plotly.graph_objs.violin.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -20531,7 +20531,7 @@ class FigureWidget(BaseFigureWidget):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            :class:`plotly.graph_objects.volume.Caps` instance or
+            :class:`plotly.graph_objs.volume.Caps` instance or
             dict with compatible properties
         cauto
             Determines whether or not the color domain is computed
@@ -20559,7 +20559,7 @@ class FigureWidget(BaseFigureWidget):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.volume.ColorBar` instance
+            :class:`plotly.graph_objs.volume.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -20574,7 +20574,7 @@ class FigureWidget(BaseFigureWidget):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.volume.Contour` instance
+            :class:`plotly.graph_objs.volume.Contour` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -20597,7 +20597,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.volume.Hoverlabel`
+            :class:`plotly.graph_objs.volume.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -20658,7 +20658,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.volume.Legendgrouptitle`
+            :class:`plotly.graph_objs.volume.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -20675,10 +20675,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.volume.Lighting` instance
+            :class:`plotly.graph_objs.volume.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.volume.Lightposition`
+            :class:`plotly.graph_objs.volume.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -20735,16 +20735,16 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            :class:`plotly.graph_objects.volume.Slices` instance or
+            :class:`plotly.graph_objs.volume.Slices` instance or
             dict with compatible properties
         spaceframe
-            :class:`plotly.graph_objects.volume.Spaceframe`
+            :class:`plotly.graph_objs.volume.Spaceframe`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.volume.Stream` instance or
+            :class:`plotly.graph_objs.volume.Stream` instance or
             dict with compatible properties
         surface
-            :class:`plotly.graph_objects.volume.Surface` instance
+            :class:`plotly.graph_objs.volume.Surface` instance
             or dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
@@ -21035,7 +21035,7 @@ class FigureWidget(BaseFigureWidget):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            :class:`plotly.graph_objects.waterfall.Connector`
+            :class:`plotly.graph_objs.waterfall.Connector`
             instance or dict with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
@@ -21049,7 +21049,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.waterfall.Decreasing`
+            :class:`plotly.graph_objs.waterfall.Decreasing`
             instance or dict with compatible properties
         dx
             Sets the x coordinate step. See `x0` for more info.
@@ -21064,7 +21064,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.waterfall.Hoverlabel`
+            :class:`plotly.graph_objs.waterfall.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -21118,7 +21118,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.waterfall.Increasing`
+            :class:`plotly.graph_objs.waterfall.Increasing`
             instance or dict with compatible properties
         insidetextanchor
             Determines if texts are kept at center or start/end
@@ -21136,7 +21136,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.waterfall.Legendgrouptitle
+            :class:`plotly.graph_objs.waterfall.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -21211,7 +21211,7 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.waterfall.Stream` instance
+            :class:`plotly.graph_objs.waterfall.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -21270,7 +21270,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         totals
-            :class:`plotly.graph_objects.waterfall.Totals` instance
+            :class:`plotly.graph_objs.waterfall.Totals` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -23133,7 +23133,7 @@ class FigureWidget(BaseFigureWidget):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            :class:`plotly.graph_objects.layout.annotation.Hoverlab
+            :class:`plotly.graph_objs.layout.annotation.Hoverlab
             el` instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
@@ -23884,7 +23884,7 @@ class FigureWidget(BaseFigureWidget):
             instance of Selection or dict with compatible
             properties
         line
-            :class:`plotly.graph_objects.layout.selection.Line`
+            :class:`plotly.graph_objs.layout.selection.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the
@@ -24220,7 +24220,7 @@ class FigureWidget(BaseFigureWidget):
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
         label
-            :class:`plotly.graph_objects.layout.shape.Label`
+            :class:`plotly.graph_objs.layout.shape.Label`
             instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below gridlines
@@ -24237,7 +24237,7 @@ class FigureWidget(BaseFigureWidget):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.layout.shape.Legendgroupti
+            :class:`plotly.graph_objs.layout.shape.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this shape. Items and groups
@@ -24254,7 +24254,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the width (in px or fraction) of the legend for
             this shape.
         line
-            :class:`plotly.graph_objects.layout.shape.Line`
+            :class:`plotly.graph_objs.layout.shape.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the

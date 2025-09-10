@@ -287,7 +287,7 @@ class Selection(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            :class:`plotly.graph_objects.layout.selection.Line`
+            :class:`plotly.graph_objs.layout.selection.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the
@@ -384,7 +384,7 @@ class Selection(_BaseLayoutHierarchyType):
             an instance of
             :class:`plotly.graph_objs.layout.Selection`
         line
-            :class:`plotly.graph_objects.layout.selection.Line`
+            :class:`plotly.graph_objs.layout.selection.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the

@@ -1249,7 +1249,7 @@ class Contourcarpet(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.contourcarpet.ColorBar`
+            :class:`plotly.graph_objs.contourcarpet.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1264,7 +1264,7 @@ class Contourcarpet(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
-            :class:`plotly.graph_objects.contourcarpet.Contours`
+            :class:`plotly.graph_objs.contourcarpet.Contours`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1306,7 +1306,7 @@ class Contourcarpet(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.contourcarpet.Legendgroupt
+            :class:`plotly.graph_objs.contourcarpet.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1323,7 +1323,7 @@ class Contourcarpet(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.contourcarpet.Line`
+            :class:`plotly.graph_objs.contourcarpet.Line`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1363,7 +1363,7 @@ class Contourcarpet(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.contourcarpet.Stream`
+            :class:`plotly.graph_objs.contourcarpet.Stream`
             instance or dict with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -1563,7 +1563,7 @@ class Contourcarpet(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.contourcarpet.ColorBar`
+            :class:`plotly.graph_objs.contourcarpet.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1578,7 +1578,7 @@ class Contourcarpet(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contours
-            :class:`plotly.graph_objects.contourcarpet.Contours`
+            :class:`plotly.graph_objs.contourcarpet.Contours`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1620,7 +1620,7 @@ class Contourcarpet(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.contourcarpet.Legendgroupt
+            :class:`plotly.graph_objs.contourcarpet.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1637,7 +1637,7 @@ class Contourcarpet(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.contourcarpet.Line`
+            :class:`plotly.graph_objs.contourcarpet.Line`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1677,7 +1677,7 @@ class Contourcarpet(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.contourcarpet.Stream`
+            :class:`plotly.graph_objs.contourcarpet.Stream`
             instance or dict with compatible properties
         text
             Sets the text elements associated with each z value.

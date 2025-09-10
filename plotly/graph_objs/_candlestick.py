@@ -1087,7 +1087,7 @@ class Candlestick(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.candlestick.Decreasing`
+            :class:`plotly.graph_objs.candlestick.Decreasing`
             instance or dict with compatible properties
         high
             Sets the high values.
@@ -1103,7 +1103,7 @@ class Candlestick(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.candlestick.Hoverlabel`
+            :class:`plotly.graph_objs.candlestick.Hoverlabel`
             instance or dict with compatible properties
         hovertext
             Same as `text`.
@@ -1118,7 +1118,7 @@ class Candlestick(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.candlestick.Increasing`
+            :class:`plotly.graph_objs.candlestick.Increasing`
             instance or dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -1131,7 +1131,7 @@ class Candlestick(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.candlestick.Legendgrouptit
+            :class:`plotly.graph_objs.candlestick.Legendgrouptit
             le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1148,7 +1148,7 @@ class Candlestick(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.candlestick.Line` instance
+            :class:`plotly.graph_objs.candlestick.Line` instance
             or dict with compatible properties
         low
             Sets the low values.
@@ -1192,7 +1192,7 @@ class Candlestick(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.candlestick.Stream`
+            :class:`plotly.graph_objs.candlestick.Stream`
             instance or dict with compatible properties
         text
             Sets hover text elements associated with each sample
@@ -1385,7 +1385,7 @@ class Candlestick(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.candlestick.Decreasing`
+            :class:`plotly.graph_objs.candlestick.Decreasing`
             instance or dict with compatible properties
         high
             Sets the high values.
@@ -1401,7 +1401,7 @@ class Candlestick(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.candlestick.Hoverlabel`
+            :class:`plotly.graph_objs.candlestick.Hoverlabel`
             instance or dict with compatible properties
         hovertext
             Same as `text`.
@@ -1416,7 +1416,7 @@ class Candlestick(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.candlestick.Increasing`
+            :class:`plotly.graph_objs.candlestick.Increasing`
             instance or dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -1429,7 +1429,7 @@ class Candlestick(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.candlestick.Legendgrouptit
+            :class:`plotly.graph_objs.candlestick.Legendgrouptit
             le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1446,7 +1446,7 @@ class Candlestick(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.candlestick.Line` instance
+            :class:`plotly.graph_objs.candlestick.Line` instance
             or dict with compatible properties
         low
             Sets the low values.
@@ -1490,7 +1490,7 @@ class Candlestick(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.candlestick.Stream`
+            :class:`plotly.graph_objs.candlestick.Stream`
             instance or dict with compatible properties
         text
             Sets hover text elements associated with each sample

@@ -1673,7 +1673,7 @@ class Mesh3d(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.mesh3d.ColorBar` instance
+            :class:`plotly.graph_objs.mesh3d.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1688,7 +1688,7 @@ class Mesh3d(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.mesh3d.Contour` instance
+            :class:`plotly.graph_objs.mesh3d.Contour` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1723,7 +1723,7 @@ class Mesh3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.mesh3d.Hoverlabel`
+            :class:`plotly.graph_objs.mesh3d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1825,7 +1825,7 @@ class Mesh3d(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.mesh3d.Legendgrouptitle`
+            :class:`plotly.graph_objs.mesh3d.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1842,10 +1842,10 @@ class Mesh3d(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.mesh3d.Lighting` instance
+            :class:`plotly.graph_objs.mesh3d.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.mesh3d.Lightposition`
+            :class:`plotly.graph_objs.mesh3d.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1891,7 +1891,7 @@ class Mesh3d(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.mesh3d.Stream` instance or
+            :class:`plotly.graph_objs.mesh3d.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
@@ -2147,7 +2147,7 @@ class Mesh3d(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.mesh3d.ColorBar` instance
+            :class:`plotly.graph_objs.mesh3d.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -2162,7 +2162,7 @@ class Mesh3d(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.mesh3d.Contour` instance
+            :class:`plotly.graph_objs.mesh3d.Contour` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -2197,7 +2197,7 @@ class Mesh3d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.mesh3d.Hoverlabel`
+            :class:`plotly.graph_objs.mesh3d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -2299,7 +2299,7 @@ class Mesh3d(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.mesh3d.Legendgrouptitle`
+            :class:`plotly.graph_objs.mesh3d.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2316,10 +2316,10 @@ class Mesh3d(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.mesh3d.Lighting` instance
+            :class:`plotly.graph_objs.mesh3d.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.mesh3d.Lightposition`
+            :class:`plotly.graph_objs.mesh3d.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2365,7 +2365,7 @@ class Mesh3d(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.mesh3d.Stream` instance or
+            :class:`plotly.graph_objs.mesh3d.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with the vertices. If

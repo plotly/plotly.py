@@ -1231,7 +1231,7 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.bar.marker.colo
+            A tuple of :class:`plotly.graph_objs.bar.marker.colo
             rbar.Tickformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -1294,7 +1294,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.bar.marker.colorbar.Title`
+            :class:`plotly.graph_objs.bar.marker.colorbar.Title`
             instance or dict with compatible properties
         x
             Sets the x position with respect to `xref` of the color
@@ -1534,7 +1534,7 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.bar.marker.colo
+            A tuple of :class:`plotly.graph_objs.bar.marker.colo
             rbar.Tickformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -1597,7 +1597,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.bar.marker.colorbar.Title`
+            :class:`plotly.graph_objs.bar.marker.colorbar.Title`
             instance or dict with compatible properties
         x
             Sets the x position with respect to `xref` of the color

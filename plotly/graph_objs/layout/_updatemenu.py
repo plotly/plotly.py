@@ -421,7 +421,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
             update menu.
         buttons
             A tuple of
-            :class:`plotly.graph_objects.layout.updatemenu.Button`
+            :class:`plotly.graph_objs.layout.updatemenu.Button`
             instances or dicts with compatible properties
         buttondefaults
             When used in a template (as
@@ -526,7 +526,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
             update menu.
         buttons
             A tuple of
-            :class:`plotly.graph_objects.layout.updatemenu.Button`
+            :class:`plotly.graph_objs.layout.updatemenu.Button`
             instances or dicts with compatible properties
         buttondefaults
             When used in a template (as

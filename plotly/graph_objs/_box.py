@@ -1965,7 +1965,7 @@ class Box(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.box.Hoverlabel` instance
+            :class:`plotly.graph_objs.box.Hoverlabel` instance
             or dict with compatible properties
         hoveron
             Do the hover effects highlight individual boxes  or
@@ -2030,7 +2030,7 @@ class Box(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.box.Legendgrouptitle`
+            :class:`plotly.graph_objs.box.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2047,7 +2047,7 @@ class Box(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.box.Line` instance or dict
+            :class:`plotly.graph_objs.box.Line` instance or dict
             with compatible properties
         lowerfence
             Sets the lower fence values. There should be as many
@@ -2060,7 +2060,7 @@ class Box(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `lowerfence`.
         marker
-            :class:`plotly.graph_objects.box.Marker` instance or
+            :class:`plotly.graph_objs.box.Marker` instance or
             dict with compatible properties
         mean
             Sets the mean values. There should be as many items as
@@ -2181,7 +2181,7 @@ class Box(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `sd`.
         selected
-            :class:`plotly.graph_objects.box.Selected` instance or
+            :class:`plotly.graph_objs.box.Selected` instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -2204,7 +2204,7 @@ class Box(_BaseTraceType):
             sdmultiple (default 1) to scale the box size So it
             could be drawn 1-stddev, 3-stddev etc
         stream
-            :class:`plotly.graph_objects.box.Stream` instance or
+            :class:`plotly.graph_objs.box.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each sample
@@ -2239,7 +2239,7 @@ class Box(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.box.Unselected` instance
+            :class:`plotly.graph_objs.box.Unselected` instance
             or dict with compatible properties
         upperfence
             Sets the upper fence values. There should be as many
@@ -2537,7 +2537,7 @@ class Box(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.box.Hoverlabel` instance
+            :class:`plotly.graph_objs.box.Hoverlabel` instance
             or dict with compatible properties
         hoveron
             Do the hover effects highlight individual boxes  or
@@ -2602,7 +2602,7 @@ class Box(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.box.Legendgrouptitle`
+            :class:`plotly.graph_objs.box.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2619,7 +2619,7 @@ class Box(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.box.Line` instance or dict
+            :class:`plotly.graph_objs.box.Line` instance or dict
             with compatible properties
         lowerfence
             Sets the lower fence values. There should be as many
@@ -2632,7 +2632,7 @@ class Box(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `lowerfence`.
         marker
-            :class:`plotly.graph_objects.box.Marker` instance or
+            :class:`plotly.graph_objs.box.Marker` instance or
             dict with compatible properties
         mean
             Sets the mean values. There should be as many items as
@@ -2753,7 +2753,7 @@ class Box(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `sd`.
         selected
-            :class:`plotly.graph_objects.box.Selected` instance or
+            :class:`plotly.graph_objs.box.Selected` instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -2776,7 +2776,7 @@ class Box(_BaseTraceType):
             sdmultiple (default 1) to scale the box size So it
             could be drawn 1-stddev, 3-stddev etc
         stream
-            :class:`plotly.graph_objects.box.Stream` instance or
+            :class:`plotly.graph_objs.box.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each sample
@@ -2811,7 +2811,7 @@ class Box(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.box.Unselected` instance
+            :class:`plotly.graph_objs.box.Unselected` instance
             or dict with compatible properties
         upperfence
             Sets the upper fence values. There should be as many

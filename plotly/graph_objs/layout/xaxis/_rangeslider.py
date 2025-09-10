@@ -218,7 +218,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
             visible. If visible, perpendicular axes will be set to
             `fixedrange`
         yaxis
-            :class:`plotly.graph_objects.layout.xaxis.rangeslider.Y
+            :class:`plotly.graph_objs.layout.xaxis.rangeslider.Y
             Axis` instance or dict with compatible properties
         """
 
@@ -272,7 +272,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
             visible. If visible, perpendicular axes will be set to
             `fixedrange`
         yaxis
-            :class:`plotly.graph_objects.layout.xaxis.rangeslider.Y
+            :class:`plotly.graph_objs.layout.xaxis.rangeslider.Y
             Axis` instance or dict with compatible properties
 
         Returns

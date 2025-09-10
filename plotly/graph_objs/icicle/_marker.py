@@ -390,7 +390,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.icicle.marker.ColorBar`
+            :class:`plotly.graph_objs.icicle.marker.ColorBar`
             instance or dict with compatible properties
         colors
             Sets the color of each sector of this trace. If not
@@ -414,7 +414,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `colors`.
         line
-            :class:`plotly.graph_objects.icicle.marker.Line`
+            :class:`plotly.graph_objs.icicle.marker.Line`
             instance or dict with compatible properties
         pattern
             Sets the pattern within the marker.
@@ -497,7 +497,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.icicle.marker.ColorBar`
+            :class:`plotly.graph_objs.icicle.marker.ColorBar`
             instance or dict with compatible properties
         colors
             Sets the color of each sector of this trace. If not
@@ -521,7 +521,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `colors`.
         line
-            :class:`plotly.graph_objects.icicle.marker.Line`
+            :class:`plotly.graph_objs.icicle.marker.Line`
             instance or dict with compatible properties
         pattern
             Sets the pattern within the marker.

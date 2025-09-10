@@ -1412,7 +1412,7 @@ class Violin(_BaseTraceType):
             estimate. By default, the bandwidth is determined by
             Silverman's rule of thumb.
         box
-            :class:`plotly.graph_objects.violin.Box` instance or
+            :class:`plotly.graph_objs.violin.Box` instance or
             dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1435,7 +1435,7 @@ class Violin(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.violin.Hoverlabel`
+            :class:`plotly.graph_objs.violin.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual violins or
@@ -1501,7 +1501,7 @@ class Violin(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.violin.Legendgrouptitle`
+            :class:`plotly.graph_objs.violin.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1518,13 +1518,13 @@ class Violin(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.violin.Line` instance or
+            :class:`plotly.graph_objs.violin.Line` instance or
             dict with compatible properties
         marker
-            :class:`plotly.graph_objects.violin.Marker` instance or
+            :class:`plotly.graph_objs.violin.Marker` instance or
             dict with compatible properties
         meanline
-            :class:`plotly.graph_objects.violin.Meanline` instance
+            :class:`plotly.graph_objs.violin.Meanline` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1606,7 +1606,7 @@ class Violin(_BaseTraceType):
             (max) width "count" means the violins are scaled by the
             number of sample points making up each violin.
         selected
-            :class:`plotly.graph_objects.violin.Selected` instance
+            :class:`plotly.graph_objs.violin.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1638,7 +1638,7 @@ class Violin(_BaseTraceType):
             settings, use mode "manual" and fill in the `span`
             attribute.
         stream
-            :class:`plotly.graph_objects.violin.Stream` instance or
+            :class:`plotly.graph_objs.violin.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each sample
@@ -1673,7 +1673,7 @@ class Violin(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.violin.Unselected`
+            :class:`plotly.graph_objs.violin.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1839,7 +1839,7 @@ class Violin(_BaseTraceType):
             estimate. By default, the bandwidth is determined by
             Silverman's rule of thumb.
         box
-            :class:`plotly.graph_objects.violin.Box` instance or
+            :class:`plotly.graph_objs.violin.Box` instance or
             dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1862,7 +1862,7 @@ class Violin(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.violin.Hoverlabel`
+            :class:`plotly.graph_objs.violin.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual violins or
@@ -1928,7 +1928,7 @@ class Violin(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.violin.Legendgrouptitle`
+            :class:`plotly.graph_objs.violin.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1945,13 +1945,13 @@ class Violin(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.violin.Line` instance or
+            :class:`plotly.graph_objs.violin.Line` instance or
             dict with compatible properties
         marker
-            :class:`plotly.graph_objects.violin.Marker` instance or
+            :class:`plotly.graph_objs.violin.Marker` instance or
             dict with compatible properties
         meanline
-            :class:`plotly.graph_objects.violin.Meanline` instance
+            :class:`plotly.graph_objs.violin.Meanline` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2033,7 +2033,7 @@ class Violin(_BaseTraceType):
             (max) width "count" means the violins are scaled by the
             number of sample points making up each violin.
         selected
-            :class:`plotly.graph_objects.violin.Selected` instance
+            :class:`plotly.graph_objs.violin.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -2065,7 +2065,7 @@ class Violin(_BaseTraceType):
             settings, use mode "manual" and fill in the `span`
             attribute.
         stream
-            :class:`plotly.graph_objects.violin.Stream` instance or
+            :class:`plotly.graph_objs.violin.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each sample
@@ -2100,7 +2100,7 @@ class Violin(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.violin.Unselected`
+            :class:`plotly.graph_objs.violin.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

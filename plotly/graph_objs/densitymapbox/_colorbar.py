@@ -1232,7 +1232,7 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.densitymapbox.c
+            A tuple of :class:`plotly.graph_objs.densitymapbox.c
             olorbar.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults
@@ -1295,7 +1295,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.densitymapbox.colorbar.Tit
+            :class:`plotly.graph_objs.densitymapbox.colorbar.Tit
             le` instance or dict with compatible properties
         x
             Sets the x position with respect to `xref` of the color
@@ -1535,7 +1535,7 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.densitymapbox.c
+            A tuple of :class:`plotly.graph_objs.densitymapbox.c
             olorbar.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults
@@ -1598,7 +1598,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.densitymapbox.colorbar.Tit
+            :class:`plotly.graph_objs.densitymapbox.colorbar.Tit
             le` instance or dict with compatible properties
         x
             Sets the x position with respect to `xref` of the color

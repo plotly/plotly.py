@@ -926,7 +926,7 @@ class Image(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.image.Hoverlabel` instance
+            :class:`plotly.graph_objs.image.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -981,7 +981,7 @@ class Image(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.image.Legendgrouptitle`
+            :class:`plotly.graph_objs.image.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1023,7 +1023,7 @@ class Image(_BaseTraceType):
             The URI consists of "data:image/[<media
             subtype>][;base64],<data>"
         stream
-            :class:`plotly.graph_objects.image.Stream` instance or
+            :class:`plotly.graph_objs.image.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -1199,7 +1199,7 @@ class Image(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.image.Hoverlabel` instance
+            :class:`plotly.graph_objs.image.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1254,7 +1254,7 @@ class Image(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.image.Legendgrouptitle`
+            :class:`plotly.graph_objs.image.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1296,7 +1296,7 @@ class Image(_BaseTraceType):
             The URI consists of "data:image/[<media
             subtype>][;base64],<data>"
         stream
-            :class:`plotly.graph_objects.image.Stream` instance or
+            :class:`plotly.graph_objs.image.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with each z value.

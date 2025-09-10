@@ -71,13 +71,13 @@ class Projection(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            :class:`plotly.graph_objects.scatter3d.projection.X`
+            :class:`plotly.graph_objs.scatter3d.projection.X`
             instance or dict with compatible properties
         y
-            :class:`plotly.graph_objects.scatter3d.projection.Y`
+            :class:`plotly.graph_objs.scatter3d.projection.Y`
             instance or dict with compatible properties
         z
-            :class:`plotly.graph_objects.scatter3d.projection.Z`
+            :class:`plotly.graph_objs.scatter3d.projection.Z`
             instance or dict with compatible properties
         """
 
@@ -92,13 +92,13 @@ class Projection(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.scatter3d.Projection`
         x
-            :class:`plotly.graph_objects.scatter3d.projection.X`
+            :class:`plotly.graph_objs.scatter3d.projection.X`
             instance or dict with compatible properties
         y
-            :class:`plotly.graph_objects.scatter3d.projection.Y`
+            :class:`plotly.graph_objs.scatter3d.projection.Y`
             instance or dict with compatible properties
         z
-            :class:`plotly.graph_objects.scatter3d.projection.Z`
+            :class:`plotly.graph_objs.scatter3d.projection.Z`
             instance or dict with compatible properties
 
         Returns

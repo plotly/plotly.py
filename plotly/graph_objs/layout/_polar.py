@@ -235,7 +235,7 @@ class Polar(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         angularaxis
-            :class:`plotly.graph_objects.layout.polar.AngularAxis`
+            :class:`plotly.graph_objs.layout.polar.AngularAxis`
             instance or dict with compatible properties
         bargap
             Sets the gap between bars of adjacent location
@@ -251,7 +251,7 @@ class Polar(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the subplot
         domain
-            :class:`plotly.graph_objects.layout.polar.Domain`
+            :class:`plotly.graph_objs.layout.polar.Domain`
             instance or dict with compatible properties
         gridshape
             Determines if the radial axis grid lines and angular
@@ -265,7 +265,7 @@ class Polar(_BaseLayoutHierarchyType):
             Sets the fraction of the radius to cut out of the polar
             subplot.
         radialaxis
-            :class:`plotly.graph_objects.layout.polar.RadialAxis`
+            :class:`plotly.graph_objs.layout.polar.RadialAxis`
             instance or dict with compatible properties
         sector
             Sets angular span of this polar subplot with two angles
@@ -302,7 +302,7 @@ class Polar(_BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.layout.Polar`
         angularaxis
-            :class:`plotly.graph_objects.layout.polar.AngularAxis`
+            :class:`plotly.graph_objs.layout.polar.AngularAxis`
             instance or dict with compatible properties
         bargap
             Sets the gap between bars of adjacent location
@@ -318,7 +318,7 @@ class Polar(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the subplot
         domain
-            :class:`plotly.graph_objects.layout.polar.Domain`
+            :class:`plotly.graph_objs.layout.polar.Domain`
             instance or dict with compatible properties
         gridshape
             Determines if the radial axis grid lines and angular
@@ -332,7 +332,7 @@ class Polar(_BaseLayoutHierarchyType):
             Sets the fraction of the radius to cut out of the polar
             subplot.
         radialaxis
-            :class:`plotly.graph_objects.layout.polar.RadialAxis`
+            :class:`plotly.graph_objs.layout.polar.RadialAxis`
             instance or dict with compatible properties
         sector
             Sets angular span of this polar subplot with two angles

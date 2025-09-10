@@ -1449,7 +1449,7 @@ class Cone(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.cone.ColorBar` instance or
+            :class:`plotly.graph_objs.cone.ColorBar` instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1480,7 +1480,7 @@ class Cone(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.cone.Hoverlabel` instance
+            :class:`plotly.graph_objs.cone.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1538,7 +1538,7 @@ class Cone(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.cone.Legendgrouptitle`
+            :class:`plotly.graph_objs.cone.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1555,10 +1555,10 @@ class Cone(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.cone.Lighting` instance or
+            :class:`plotly.graph_objs.cone.Lighting` instance or
             dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.cone.Lightposition`
+            :class:`plotly.graph_objs.cone.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1623,7 +1623,7 @@ class Cone(_BaseTraceType):
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
-            :class:`plotly.graph_objects.cone.Stream` instance or
+            :class:`plotly.graph_objs.cone.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with the cones. If
@@ -1868,7 +1868,7 @@ class Cone(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.cone.ColorBar` instance or
+            :class:`plotly.graph_objs.cone.ColorBar` instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1899,7 +1899,7 @@ class Cone(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.cone.Hoverlabel` instance
+            :class:`plotly.graph_objs.cone.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1957,7 +1957,7 @@ class Cone(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.cone.Legendgrouptitle`
+            :class:`plotly.graph_objs.cone.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1974,10 +1974,10 @@ class Cone(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.cone.Lighting` instance or
+            :class:`plotly.graph_objs.cone.Lighting` instance or
             dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.cone.Lightposition`
+            :class:`plotly.graph_objs.cone.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2042,7 +2042,7 @@ class Cone(_BaseTraceType):
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
-            :class:`plotly.graph_objects.cone.Stream` instance or
+            :class:`plotly.graph_objs.cone.Stream` instance or
             dict with compatible properties
         text
             Sets the text elements associated with the cones. If

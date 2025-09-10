@@ -33,7 +33,7 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :class:`plotly.graph_objects.choroplethmapbox.unselecte
+            :class:`plotly.graph_objs.choroplethmapbox.unselecte
             d.Marker` instance or dict with compatible properties
         """
 
@@ -48,7 +48,7 @@ class Unselected(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.choroplethmapbox.Unselected`
         marker
-            :class:`plotly.graph_objects.choroplethmapbox.unselecte
+            :class:`plotly.graph_objs.choroplethmapbox.unselecte
             d.Marker` instance or dict with compatible properties
 
         Returns

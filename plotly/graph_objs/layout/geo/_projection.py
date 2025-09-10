@@ -164,7 +164,7 @@ class Projection(_BaseLayoutHierarchyType):
             For conic projection types only. Sets the parallels
             (tangent, secant) where the cone intersects the sphere.
         rotation
-            :class:`plotly.graph_objects.layout.geo.projection.Rota
+            :class:`plotly.graph_objs.layout.geo.projection.Rota
             tion` instance or dict with compatible properties
         scale
             Zooms in or out on the map view. A scale of 1
@@ -205,7 +205,7 @@ class Projection(_BaseLayoutHierarchyType):
             For conic projection types only. Sets the parallels
             (tangent, secant) where the cone intersects the sphere.
         rotation
-            :class:`plotly.graph_objects.layout.geo.projection.Rota
+            :class:`plotly.graph_objs.layout.geo.projection.Rota
             tion` instance or dict with compatible properties
         scale
             Zooms in or out on the map view. A scale of 1

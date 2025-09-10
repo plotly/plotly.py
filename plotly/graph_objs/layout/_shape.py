@@ -775,7 +775,7 @@ class Shape(_BaseLayoutHierarchyType):
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
         label
-            :class:`plotly.graph_objects.layout.shape.Label`
+            :class:`plotly.graph_objs.layout.shape.Label`
             instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below gridlines
@@ -792,7 +792,7 @@ class Shape(_BaseLayoutHierarchyType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.layout.shape.Legendgroupti
+            :class:`plotly.graph_objs.layout.shape.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this shape. Items and groups
@@ -809,7 +809,7 @@ class Shape(_BaseLayoutHierarchyType):
             Sets the width (in px or fraction) of the legend for
             this shape.
         line
-            :class:`plotly.graph_objects.layout.shape.Line`
+            :class:`plotly.graph_objs.layout.shape.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the
@@ -1031,7 +1031,7 @@ class Shape(_BaseLayoutHierarchyType):
             https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
         label
-            :class:`plotly.graph_objects.layout.shape.Label`
+            :class:`plotly.graph_objs.layout.shape.Label`
             instance or dict with compatible properties
         layer
             Specifies whether shapes are drawn below gridlines
@@ -1048,7 +1048,7 @@ class Shape(_BaseLayoutHierarchyType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.layout.shape.Legendgroupti
+            :class:`plotly.graph_objs.layout.shape.Legendgroupti
             tle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this shape. Items and groups
@@ -1065,7 +1065,7 @@ class Shape(_BaseLayoutHierarchyType):
             Sets the width (in px or fraction) of the legend for
             this shape.
         line
-            :class:`plotly.graph_objects.layout.shape.Line`
+            :class:`plotly.graph_objs.layout.shape.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the

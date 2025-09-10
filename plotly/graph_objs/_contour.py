@@ -1679,7 +1679,7 @@ class Contour(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.contour.ColorBar` instance
+            :class:`plotly.graph_objs.contour.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1699,7 +1699,7 @@ class Contour(_BaseTraceType):
             to true if `z` is a one dimensional array otherwise it
             is defaulted to false.
         contours
-            :class:`plotly.graph_objects.contour.Contours` instance
+            :class:`plotly.graph_objs.contour.Contours` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1727,7 +1727,7 @@ class Contour(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.contour.Hoverlabel`
+            :class:`plotly.graph_objs.contour.Hoverlabel`
             instance or dict with compatible properties
         hoverongaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -1788,7 +1788,7 @@ class Contour(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.contour.Legendgrouptitle`
+            :class:`plotly.graph_objs.contour.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1805,7 +1805,7 @@ class Contour(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.contour.Line` instance or
+            :class:`plotly.graph_objs.contour.Line` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1845,7 +1845,7 @@ class Contour(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.contour.Stream` instance
+            :class:`plotly.graph_objs.contour.Stream` instance
             or dict with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -2154,7 +2154,7 @@ class Contour(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.contour.ColorBar` instance
+            :class:`plotly.graph_objs.contour.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -2174,7 +2174,7 @@ class Contour(_BaseTraceType):
             to true if `z` is a one dimensional array otherwise it
             is defaulted to false.
         contours
-            :class:`plotly.graph_objects.contour.Contours` instance
+            :class:`plotly.graph_objs.contour.Contours` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -2202,7 +2202,7 @@ class Contour(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.contour.Hoverlabel`
+            :class:`plotly.graph_objs.contour.Hoverlabel`
             instance or dict with compatible properties
         hoverongaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -2263,7 +2263,7 @@ class Contour(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.contour.Legendgrouptitle`
+            :class:`plotly.graph_objs.contour.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2280,7 +2280,7 @@ class Contour(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.contour.Line` instance or
+            :class:`plotly.graph_objs.contour.Line` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2320,7 +2320,7 @@ class Contour(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.contour.Stream` instance
+            :class:`plotly.graph_objs.contour.Stream` instance
             or dict with compatible properties
         text
             Sets the text elements associated with each z value.

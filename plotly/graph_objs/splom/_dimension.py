@@ -167,7 +167,7 @@ class Dimension(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         axis
-            :class:`plotly.graph_objects.splom.dimension.Axis`
+            :class:`plotly.graph_objs.splom.dimension.Axis`
             instance or dict with compatible properties
         label
             Sets the label corresponding to this splom dimension.
@@ -224,7 +224,7 @@ class Dimension(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.splom.Dimension`
         axis
-            :class:`plotly.graph_objects.splom.dimension.Axis`
+            :class:`plotly.graph_objs.splom.dimension.Axis`
             instance or dict with compatible properties
         label
             Sets the label corresponding to this splom dimension.

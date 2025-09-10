@@ -1058,7 +1058,7 @@ class Barpolar(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.barpolar.Hoverlabel`
+            :class:`plotly.graph_objs.barpolar.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1115,7 +1115,7 @@ class Barpolar(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.barpolar.Legendgrouptitle`
+            :class:`plotly.graph_objs.barpolar.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1132,7 +1132,7 @@ class Barpolar(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.barpolar.Marker` instance
+            :class:`plotly.graph_objs.barpolar.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1171,7 +1171,7 @@ class Barpolar(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `r`.
         selected
-            :class:`plotly.graph_objects.barpolar.Selected`
+            :class:`plotly.graph_objs.barpolar.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1184,7 +1184,7 @@ class Barpolar(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.barpolar.Stream` instance
+            :class:`plotly.graph_objs.barpolar.Stream` instance
             or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1234,7 +1234,7 @@ class Barpolar(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.barpolar.Unselected`
+            :class:`plotly.graph_objs.barpolar.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1341,7 +1341,7 @@ class Barpolar(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.barpolar.Hoverlabel`
+            :class:`plotly.graph_objs.barpolar.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1398,7 +1398,7 @@ class Barpolar(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.barpolar.Legendgrouptitle`
+            :class:`plotly.graph_objs.barpolar.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1415,7 +1415,7 @@ class Barpolar(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.barpolar.Marker` instance
+            :class:`plotly.graph_objs.barpolar.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1454,7 +1454,7 @@ class Barpolar(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `r`.
         selected
-            :class:`plotly.graph_objects.barpolar.Selected`
+            :class:`plotly.graph_objs.barpolar.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1467,7 +1467,7 @@ class Barpolar(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.barpolar.Stream` instance
+            :class:`plotly.graph_objs.barpolar.Stream` instance
             or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1517,7 +1517,7 @@ class Barpolar(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.barpolar.Unselected`
+            :class:`plotly.graph_objs.barpolar.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

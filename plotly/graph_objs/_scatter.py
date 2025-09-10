@@ -1737,10 +1737,10 @@ class Scatter(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            :class:`plotly.graph_objects.scatter.ErrorX` instance
+            :class:`plotly.graph_objs.scatter.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scatter.ErrorY` instance
+            :class:`plotly.graph_objs.scatter.ErrorY` instance
             or dict with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
@@ -1796,7 +1796,7 @@ class Scatter(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatter.Hoverlabel`
+            :class:`plotly.graph_objs.scatter.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -1864,7 +1864,7 @@ class Scatter(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatter.Legendgrouptitle`
+            :class:`plotly.graph_objs.scatter.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1881,10 +1881,10 @@ class Scatter(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatter.Line` instance or
+            :class:`plotly.graph_objs.scatter.Line` instance or
             dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatter.Marker` instance
+            :class:`plotly.graph_objs.scatter.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1928,7 +1928,7 @@ class Scatter(_BaseTraceType):
             subsequent traces are added. Also affects the default
             value of `fill`.
         selected
-            :class:`plotly.graph_objects.scatter.Selected` instance
+            :class:`plotly.graph_objs.scatter.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1965,7 +1965,7 @@ class Scatter(_BaseTraceType):
             fill-linked traces are not already consecutive, the
             later ones will be pushed down in the drawing order.
         stream
-            :class:`plotly.graph_objects.scatter.Stream` instance
+            :class:`plotly.graph_objs.scatter.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -2028,7 +2028,7 @@ class Scatter(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatter.Unselected`
+            :class:`plotly.graph_objs.scatter.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -2253,10 +2253,10 @@ class Scatter(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            :class:`plotly.graph_objects.scatter.ErrorX` instance
+            :class:`plotly.graph_objs.scatter.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scatter.ErrorY` instance
+            :class:`plotly.graph_objs.scatter.ErrorY` instance
             or dict with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
@@ -2312,7 +2312,7 @@ class Scatter(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scatter.Hoverlabel`
+            :class:`plotly.graph_objs.scatter.Hoverlabel`
             instance or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
@@ -2380,7 +2380,7 @@ class Scatter(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scatter.Legendgrouptitle`
+            :class:`plotly.graph_objs.scatter.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2397,10 +2397,10 @@ class Scatter(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scatter.Line` instance or
+            :class:`plotly.graph_objs.scatter.Line` instance or
             dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scatter.Marker` instance
+            :class:`plotly.graph_objs.scatter.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2444,7 +2444,7 @@ class Scatter(_BaseTraceType):
             subsequent traces are added. Also affects the default
             value of `fill`.
         selected
-            :class:`plotly.graph_objects.scatter.Selected` instance
+            :class:`plotly.graph_objs.scatter.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -2481,7 +2481,7 @@ class Scatter(_BaseTraceType):
             fill-linked traces are not already consecutive, the
             later ones will be pushed down in the drawing order.
         stream
-            :class:`plotly.graph_objects.scatter.Stream` instance
+            :class:`plotly.graph_objs.scatter.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -2544,7 +2544,7 @@ class Scatter(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scatter.Unselected`
+            :class:`plotly.graph_objs.scatter.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

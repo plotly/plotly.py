@@ -308,10 +308,10 @@ class Cells(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `align`.
         fill
-            :class:`plotly.graph_objects.table.cells.Fill` instance
+            :class:`plotly.graph_objs.table.cells.Fill` instance
             or dict with compatible properties
         font
-            :class:`plotly.graph_objects.table.cells.Font` instance
+            :class:`plotly.graph_objs.table.cells.Font` instance
             or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
@@ -324,7 +324,7 @@ class Cells(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            :class:`plotly.graph_objects.table.cells.Line` instance
+            :class:`plotly.graph_objs.table.cells.Line` instance
             or dict with compatible properties
         prefix
             Prefix for cell values.
@@ -384,10 +384,10 @@ class Cells(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `align`.
         fill
-            :class:`plotly.graph_objects.table.cells.Fill` instance
+            :class:`plotly.graph_objs.table.cells.Fill` instance
             or dict with compatible properties
         font
-            :class:`plotly.graph_objects.table.cells.Font` instance
+            :class:`plotly.graph_objs.table.cells.Font` instance
             or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
@@ -400,7 +400,7 @@ class Cells(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            :class:`plotly.graph_objects.table.cells.Line` instance
+            :class:`plotly.graph_objs.table.cells.Line` instance
             or dict with compatible properties
         prefix
             Prefix for cell values.

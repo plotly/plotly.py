@@ -96,7 +96,7 @@ class Box(_BaseTraceHierarchyType):
         fillcolor
             Sets the inner box plot fill color.
         line
-            :class:`plotly.graph_objects.violin.box.Line` instance
+            :class:`plotly.graph_objs.violin.box.Line` instance
             or dict with compatible properties
         visible
             Determines if an miniature box plot is drawn inside the
@@ -121,7 +121,7 @@ class Box(_BaseTraceHierarchyType):
         fillcolor
             Sets the inner box plot fill color.
         line
-            :class:`plotly.graph_objects.violin.box.Line` instance
+            :class:`plotly.graph_objs.violin.box.Line` instance
             or dict with compatible properties
         visible
             Determines if an miniature box plot is drawn inside the

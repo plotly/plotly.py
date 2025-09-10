@@ -33,7 +33,7 @@ class Decreasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :class:`plotly.graph_objects.waterfall.decreasing.Marke
+            :class:`plotly.graph_objs.waterfall.decreasing.Marke
             r` instance or dict with compatible properties
         """
 
@@ -48,7 +48,7 @@ class Decreasing(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.waterfall.Decreasing`
         marker
-            :class:`plotly.graph_objects.waterfall.decreasing.Marke
+            :class:`plotly.graph_objs.waterfall.decreasing.Marke
             r` instance or dict with compatible properties
 
         Returns

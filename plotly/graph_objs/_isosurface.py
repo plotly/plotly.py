@@ -1373,7 +1373,7 @@ class Isosurface(_BaseTraceType):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            :class:`plotly.graph_objects.isosurface.Caps` instance
+            :class:`plotly.graph_objs.isosurface.Caps` instance
             or dict with compatible properties
         cauto
             Determines whether or not the color domain is computed
@@ -1401,7 +1401,7 @@ class Isosurface(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.isosurface.ColorBar`
+            :class:`plotly.graph_objs.isosurface.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1416,7 +1416,7 @@ class Isosurface(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.isosurface.Contour`
+            :class:`plotly.graph_objs.isosurface.Contour`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1439,7 +1439,7 @@ class Isosurface(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.isosurface.Hoverlabel`
+            :class:`plotly.graph_objs.isosurface.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1500,7 +1500,7 @@ class Isosurface(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.isosurface.Legendgrouptitl
+            :class:`plotly.graph_objs.isosurface.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1517,10 +1517,10 @@ class Isosurface(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.isosurface.Lighting`
+            :class:`plotly.graph_objs.isosurface.Lighting`
             instance or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.isosurface.Lightposition`
+            :class:`plotly.graph_objs.isosurface.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1566,16 +1566,16 @@ class Isosurface(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            :class:`plotly.graph_objects.isosurface.Slices`
+            :class:`plotly.graph_objs.isosurface.Slices`
             instance or dict with compatible properties
         spaceframe
-            :class:`plotly.graph_objects.isosurface.Spaceframe`
+            :class:`plotly.graph_objs.isosurface.Spaceframe`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.isosurface.Stream`
+            :class:`plotly.graph_objs.isosurface.Stream`
             instance or dict with compatible properties
         surface
-            :class:`plotly.graph_objects.isosurface.Surface`
+            :class:`plotly.graph_objs.isosurface.Surface`
             instance or dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
@@ -1767,7 +1767,7 @@ class Isosurface(_BaseTraceType):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            :class:`plotly.graph_objects.isosurface.Caps` instance
+            :class:`plotly.graph_objs.isosurface.Caps` instance
             or dict with compatible properties
         cauto
             Determines whether or not the color domain is computed
@@ -1795,7 +1795,7 @@ class Isosurface(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.isosurface.ColorBar`
+            :class:`plotly.graph_objs.isosurface.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1810,7 +1810,7 @@ class Isosurface(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.isosurface.Contour`
+            :class:`plotly.graph_objs.isosurface.Contour`
             instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1833,7 +1833,7 @@ class Isosurface(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.isosurface.Hoverlabel`
+            :class:`plotly.graph_objs.isosurface.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1894,7 +1894,7 @@ class Isosurface(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.isosurface.Legendgrouptitl
+            :class:`plotly.graph_objs.isosurface.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1911,10 +1911,10 @@ class Isosurface(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.isosurface.Lighting`
+            :class:`plotly.graph_objs.isosurface.Lighting`
             instance or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.isosurface.Lightposition`
+            :class:`plotly.graph_objs.isosurface.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1960,16 +1960,16 @@ class Isosurface(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            :class:`plotly.graph_objects.isosurface.Slices`
+            :class:`plotly.graph_objs.isosurface.Slices`
             instance or dict with compatible properties
         spaceframe
-            :class:`plotly.graph_objects.isosurface.Spaceframe`
+            :class:`plotly.graph_objs.isosurface.Spaceframe`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.isosurface.Stream`
+            :class:`plotly.graph_objs.isosurface.Stream`
             instance or dict with compatible properties
         surface
-            :class:`plotly.graph_objects.isosurface.Surface`
+            :class:`plotly.graph_objs.isosurface.Surface`
             instance or dict with compatible properties
         text
             Sets the text elements associated with the vertices. If

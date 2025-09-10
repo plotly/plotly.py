@@ -685,7 +685,7 @@ class Geo(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the map
         center
-            :class:`plotly.graph_objects.layout.geo.Center`
+            :class:`plotly.graph_objs.layout.geo.Center`
             instance or dict with compatible properties
         coastlinecolor
             Sets the coastline color.
@@ -696,7 +696,7 @@ class Geo(_BaseLayoutHierarchyType):
         countrywidth
             Sets line width (in px) of the country boundaries.
         domain
-            :class:`plotly.graph_objects.layout.geo.Domain`
+            :class:`plotly.graph_objs.layout.geo.Domain`
             instance or dict with compatible properties
         fitbounds
             Determines if this subplot's view settings are auto-
@@ -723,15 +723,15 @@ class Geo(_BaseLayoutHierarchyType):
         landcolor
             Sets the land mass color.
         lataxis
-            :class:`plotly.graph_objects.layout.geo.Lataxis`
+            :class:`plotly.graph_objs.layout.geo.Lataxis`
             instance or dict with compatible properties
         lonaxis
-            :class:`plotly.graph_objects.layout.geo.Lonaxis`
+            :class:`plotly.graph_objs.layout.geo.Lonaxis`
             instance or dict with compatible properties
         oceancolor
             Sets the ocean color
         projection
-            :class:`plotly.graph_objects.layout.geo.Projection`
+            :class:`plotly.graph_objs.layout.geo.Projection`
             instance or dict with compatible properties
         resolution
             Sets the resolution of the base layers. The values have
@@ -821,7 +821,7 @@ class Geo(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the map
         center
-            :class:`plotly.graph_objects.layout.geo.Center`
+            :class:`plotly.graph_objs.layout.geo.Center`
             instance or dict with compatible properties
         coastlinecolor
             Sets the coastline color.
@@ -832,7 +832,7 @@ class Geo(_BaseLayoutHierarchyType):
         countrywidth
             Sets line width (in px) of the country boundaries.
         domain
-            :class:`plotly.graph_objects.layout.geo.Domain`
+            :class:`plotly.graph_objs.layout.geo.Domain`
             instance or dict with compatible properties
         fitbounds
             Determines if this subplot's view settings are auto-
@@ -859,15 +859,15 @@ class Geo(_BaseLayoutHierarchyType):
         landcolor
             Sets the land mass color.
         lataxis
-            :class:`plotly.graph_objects.layout.geo.Lataxis`
+            :class:`plotly.graph_objs.layout.geo.Lataxis`
             instance or dict with compatible properties
         lonaxis
-            :class:`plotly.graph_objects.layout.geo.Lonaxis`
+            :class:`plotly.graph_objs.layout.geo.Lonaxis`
             instance or dict with compatible properties
         oceancolor
             Sets the ocean color
         projection
-            :class:`plotly.graph_objects.layout.geo.Projection`
+            :class:`plotly.graph_objs.layout.geo.Projection`
             instance or dict with compatible properties
         resolution
             Sets the resolution of the base layers. The values have

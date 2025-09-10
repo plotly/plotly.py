@@ -76,7 +76,7 @@ class Bar(_BaseTraceHierarchyType):
         color
             Sets the background color of the arc.
         line
-            :class:`plotly.graph_objects.indicator.gauge.bar.Line`
+            :class:`plotly.graph_objs.indicator.gauge.bar.Line`
             instance or dict with compatible properties
         thickness
             Sets the thickness of the bar as a fraction of the
@@ -98,7 +98,7 @@ class Bar(_BaseTraceHierarchyType):
         color
             Sets the background color of the arc.
         line
-            :class:`plotly.graph_objects.indicator.gauge.bar.Line`
+            :class:`plotly.graph_objs.indicator.gauge.bar.Line`
             instance or dict with compatible properties
         thickness
             Sets the thickness of the bar as a fraction of the

@@ -1390,7 +1390,7 @@ class Streamtube(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.streamtube.ColorBar`
+            :class:`plotly.graph_objs.streamtube.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1421,7 +1421,7 @@ class Streamtube(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.streamtube.Hoverlabel`
+            :class:`plotly.graph_objs.streamtube.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1478,7 +1478,7 @@ class Streamtube(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.streamtube.Legendgrouptitl
+            :class:`plotly.graph_objs.streamtube.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1495,10 +1495,10 @@ class Streamtube(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.streamtube.Lighting`
+            :class:`plotly.graph_objs.streamtube.Lighting`
             instance or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.streamtube.Lightposition`
+            :class:`plotly.graph_objs.streamtube.Lightposition`
             instance or dict with compatible properties
         maxdisplayed
             The maximum number of displayed segments in a
@@ -1551,10 +1551,10 @@ class Streamtube(_BaseTraceType):
             1, which avoids two max divergence tubes from touching
             at adjacent starting positions.
         starts
-            :class:`plotly.graph_objects.streamtube.Starts`
+            :class:`plotly.graph_objs.streamtube.Starts`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.streamtube.Stream`
+            :class:`plotly.graph_objs.streamtube.Stream`
             instance or dict with compatible properties
         text
             Sets a text element associated with this trace. If
@@ -1792,7 +1792,7 @@ class Streamtube(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.streamtube.ColorBar`
+            :class:`plotly.graph_objs.streamtube.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1823,7 +1823,7 @@ class Streamtube(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.streamtube.Hoverlabel`
+            :class:`plotly.graph_objs.streamtube.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1880,7 +1880,7 @@ class Streamtube(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.streamtube.Legendgrouptitl
+            :class:`plotly.graph_objs.streamtube.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1897,10 +1897,10 @@ class Streamtube(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.streamtube.Lighting`
+            :class:`plotly.graph_objs.streamtube.Lighting`
             instance or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.streamtube.Lightposition`
+            :class:`plotly.graph_objs.streamtube.Lightposition`
             instance or dict with compatible properties
         maxdisplayed
             The maximum number of displayed segments in a
@@ -1953,10 +1953,10 @@ class Streamtube(_BaseTraceType):
             1, which avoids two max divergence tubes from touching
             at adjacent starting positions.
         starts
-            :class:`plotly.graph_objects.streamtube.Starts`
+            :class:`plotly.graph_objs.streamtube.Starts`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.streamtube.Stream`
+            :class:`plotly.graph_objs.streamtube.Stream`
             instance or dict with compatible properties
         text
             Sets a text element associated with this trace. If

@@ -423,7 +423,7 @@ class Layer(_BaseLayoutHierarchyType):
             layer with the specified ID. If omitted or set to '',
             the layer will be inserted above every existing layer.
         circle
-            :class:`plotly.graph_objects.layout.mapbox.layer.Circle
+            :class:`plotly.graph_objs.layout.mapbox.layer.Circle
             ` instance or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
@@ -442,10 +442,10 @@ class Layer(_BaseLayoutHierarchyType):
             bottom left. Only has an effect for "image"
             `sourcetype`.
         fill
-            :class:`plotly.graph_objects.layout.mapbox.layer.Fill`
+            :class:`plotly.graph_objs.layout.mapbox.layer.Fill`
             instance or dict with compatible properties
         line
-            :class:`plotly.graph_objects.layout.mapbox.layer.Line`
+            :class:`plotly.graph_objs.layout.mapbox.layer.Line`
             instance or dict with compatible properties
         maxzoom
             Sets the maximum zoom level (mapbox.layer.maxzoom). At
@@ -492,7 +492,7 @@ class Layer(_BaseLayoutHierarchyType):
             Sets the source type for this layer, that is the type
             of the layer data.
         symbol
-            :class:`plotly.graph_objects.layout.mapbox.layer.Symbol
+            :class:`plotly.graph_objs.layout.mapbox.layer.Symbol
             ` instance or dict with compatible properties
         templateitemname
             Used to refer to a named item in this array in the
@@ -555,7 +555,7 @@ class Layer(_BaseLayoutHierarchyType):
             layer with the specified ID. If omitted or set to '',
             the layer will be inserted above every existing layer.
         circle
-            :class:`plotly.graph_objects.layout.mapbox.layer.Circle
+            :class:`plotly.graph_objs.layout.mapbox.layer.Circle
             ` instance or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
@@ -574,10 +574,10 @@ class Layer(_BaseLayoutHierarchyType):
             bottom left. Only has an effect for "image"
             `sourcetype`.
         fill
-            :class:`plotly.graph_objects.layout.mapbox.layer.Fill`
+            :class:`plotly.graph_objs.layout.mapbox.layer.Fill`
             instance or dict with compatible properties
         line
-            :class:`plotly.graph_objects.layout.mapbox.layer.Line`
+            :class:`plotly.graph_objs.layout.mapbox.layer.Line`
             instance or dict with compatible properties
         maxzoom
             Sets the maximum zoom level (mapbox.layer.maxzoom). At
@@ -624,7 +624,7 @@ class Layer(_BaseLayoutHierarchyType):
             Sets the source type for this layer, that is the type
             of the layer data.
         symbol
-            :class:`plotly.graph_objects.layout.mapbox.layer.Symbol
+            :class:`plotly.graph_objs.layout.mapbox.layer.Symbol
             ` instance or dict with compatible properties
         templateitemname
             Used to refer to a named item in this array in the

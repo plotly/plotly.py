@@ -33,7 +33,7 @@ class Decreasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            :class:`plotly.graph_objects.ohlc.decreasing.Line`
+            :class:`plotly.graph_objs.ohlc.decreasing.Line`
             instance or dict with compatible properties
         """
 
@@ -48,7 +48,7 @@ class Decreasing(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.ohlc.Decreasing`
         line
-            :class:`plotly.graph_objects.ohlc.decreasing.Line`
+            :class:`plotly.graph_objs.ohlc.decreasing.Line`
             instance or dict with compatible properties
 
         Returns

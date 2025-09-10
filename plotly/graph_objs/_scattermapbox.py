@@ -1084,7 +1084,7 @@ class Scattermapbox(_BaseTraceType):
             the base layers. To place the scattermapbox layers
             above every other layer, set `below` to "''".
         cluster
-            :class:`plotly.graph_objects.scattermapbox.Cluster`
+            :class:`plotly.graph_objs.scattermapbox.Cluster`
             instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -1115,7 +1115,7 @@ class Scattermapbox(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattermapbox.Hoverlabel`
+            :class:`plotly.graph_objs.scattermapbox.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1182,7 +1182,7 @@ class Scattermapbox(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattermapbox.Legendgroupt
+            :class:`plotly.graph_objs.scattermapbox.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1199,7 +1199,7 @@ class Scattermapbox(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattermapbox.Line`
+            :class:`plotly.graph_objs.scattermapbox.Line`
             instance or dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
@@ -1207,7 +1207,7 @@ class Scattermapbox(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattermapbox.Marker`
+            :class:`plotly.graph_objs.scattermapbox.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1236,7 +1236,7 @@ class Scattermapbox(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattermapbox.Selected`
+            :class:`plotly.graph_objs.scattermapbox.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1249,7 +1249,7 @@ class Scattermapbox(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattermapbox.Stream`
+            :class:`plotly.graph_objs.scattermapbox.Stream`
             instance or dict with compatible properties
         subplot
             mapbox subplots and traces are deprecated! Please
@@ -1322,7 +1322,7 @@ class Scattermapbox(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattermapbox.Unselected`
+            :class:`plotly.graph_objs.scattermapbox.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1406,7 +1406,7 @@ class Scattermapbox(_BaseTraceType):
             the base layers. To place the scattermapbox layers
             above every other layer, set `below` to "''".
         cluster
-            :class:`plotly.graph_objects.scattermapbox.Cluster`
+            :class:`plotly.graph_objs.scattermapbox.Cluster`
             instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -1437,7 +1437,7 @@ class Scattermapbox(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattermapbox.Hoverlabel`
+            :class:`plotly.graph_objs.scattermapbox.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1504,7 +1504,7 @@ class Scattermapbox(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattermapbox.Legendgroupt
+            :class:`plotly.graph_objs.scattermapbox.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1521,7 +1521,7 @@ class Scattermapbox(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattermapbox.Line`
+            :class:`plotly.graph_objs.scattermapbox.Line`
             instance or dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
@@ -1529,7 +1529,7 @@ class Scattermapbox(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattermapbox.Marker`
+            :class:`plotly.graph_objs.scattermapbox.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1558,7 +1558,7 @@ class Scattermapbox(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattermapbox.Selected`
+            :class:`plotly.graph_objs.scattermapbox.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1571,7 +1571,7 @@ class Scattermapbox(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattermapbox.Stream`
+            :class:`plotly.graph_objs.scattermapbox.Stream`
             instance or dict with compatible properties
         subplot
             mapbox subplots and traces are deprecated! Please
@@ -1644,7 +1644,7 @@ class Scattermapbox(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattermapbox.Unselected`
+            :class:`plotly.graph_objs.scattermapbox.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

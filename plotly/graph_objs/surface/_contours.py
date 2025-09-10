@@ -71,13 +71,13 @@ class Contours(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            :class:`plotly.graph_objects.surface.contours.X`
+            :class:`plotly.graph_objs.surface.contours.X`
             instance or dict with compatible properties
         y
-            :class:`plotly.graph_objects.surface.contours.Y`
+            :class:`plotly.graph_objs.surface.contours.Y`
             instance or dict with compatible properties
         z
-            :class:`plotly.graph_objects.surface.contours.Z`
+            :class:`plotly.graph_objs.surface.contours.Z`
             instance or dict with compatible properties
         """
 
@@ -92,13 +92,13 @@ class Contours(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.surface.Contours`
         x
-            :class:`plotly.graph_objects.surface.contours.X`
+            :class:`plotly.graph_objs.surface.contours.X`
             instance or dict with compatible properties
         y
-            :class:`plotly.graph_objects.surface.contours.Y`
+            :class:`plotly.graph_objs.surface.contours.Y`
             instance or dict with compatible properties
         z
-            :class:`plotly.graph_objects.surface.contours.Z`
+            :class:`plotly.graph_objs.surface.contours.Z`
             instance or dict with compatible properties
 
         Returns

@@ -250,7 +250,7 @@ class Z(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            :class:`plotly.graph_objects.surface.contours.z.Project
+            :class:`plotly.graph_objs.surface.contours.z.Project
             ` instance or dict with compatible properties
         show
             Determines whether or not contour lines about the z
@@ -306,7 +306,7 @@ class Z(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            :class:`plotly.graph_objects.surface.contours.z.Project
+            :class:`plotly.graph_objs.surface.contours.z.Project
             ` instance or dict with compatible properties
         show
             Determines whether or not contour lines about the z

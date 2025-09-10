@@ -53,10 +53,10 @@ class Template(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         data
-            :class:`plotly.graph_objects.layout.template.Data`
+            :class:`plotly.graph_objs.layout.template.Data`
             instance or dict with compatible properties
         layout
-            :class:`plotly.graph_objects.Layout` instance or dict
+            :class:`plotly.graph_objs.Layout` instance or dict
             with compatible properties
         """
 
@@ -91,10 +91,10 @@ class Template(_BaseLayoutHierarchyType):
             an instance of
             :class:`plotly.graph_objs.layout.Template`
         data
-            :class:`plotly.graph_objects.layout.template.Data`
+            :class:`plotly.graph_objs.layout.template.Data`
             instance or dict with compatible properties
         layout
-            :class:`plotly.graph_objects.Layout` instance or dict
+            :class:`plotly.graph_objs.Layout` instance or dict
             with compatible properties
 
         Returns

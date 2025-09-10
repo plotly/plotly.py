@@ -1205,7 +1205,7 @@ class Pie(_BaseTraceType):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            :class:`plotly.graph_objects.pie.Domain` instance or
+            :class:`plotly.graph_objs.pie.Domain` instance or
             dict with compatible properties
         hole
             Sets the fraction of the radius to cut out of the pie.
@@ -1219,7 +1219,7 @@ class Pie(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.pie.Hoverlabel` instance
+            :class:`plotly.graph_objs.pie.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1308,7 +1308,7 @@ class Pie(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.pie.Legendgrouptitle`
+            :class:`plotly.graph_objs.pie.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1325,7 +1325,7 @@ class Pie(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.pie.Marker` instance or
+            :class:`plotly.graph_objs.pie.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1374,7 +1374,7 @@ class Pie(_BaseTraceType):
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.pie.Stream` instance or
+            :class:`plotly.graph_objs.pie.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -1416,7 +1416,7 @@ class Pie(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         title
-            :class:`plotly.graph_objects.pie.Title` instance or
+            :class:`plotly.graph_objs.pie.Title` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -1540,7 +1540,7 @@ class Pie(_BaseTraceType):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            :class:`plotly.graph_objects.pie.Domain` instance or
+            :class:`plotly.graph_objs.pie.Domain` instance or
             dict with compatible properties
         hole
             Sets the fraction of the radius to cut out of the pie.
@@ -1554,7 +1554,7 @@ class Pie(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.pie.Hoverlabel` instance
+            :class:`plotly.graph_objs.pie.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1643,7 +1643,7 @@ class Pie(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.pie.Legendgrouptitle`
+            :class:`plotly.graph_objs.pie.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1660,7 +1660,7 @@ class Pie(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.pie.Marker` instance or
+            :class:`plotly.graph_objs.pie.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1709,7 +1709,7 @@ class Pie(_BaseTraceType):
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.pie.Stream` instance or
+            :class:`plotly.graph_objs.pie.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -1751,7 +1751,7 @@ class Pie(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         title
-            :class:`plotly.graph_objects.pie.Title` instance or
+            :class:`plotly.graph_objs.pie.Title` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object

@@ -1123,7 +1123,7 @@ class Choroplethmap(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.choroplethmap.ColorBar`
+            :class:`plotly.graph_objs.choroplethmap.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1164,7 +1164,7 @@ class Choroplethmap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.choroplethmap.Hoverlabel`
+            :class:`plotly.graph_objs.choroplethmap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1222,7 +1222,7 @@ class Choroplethmap(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.choroplethmap.Legendgroupt
+            :class:`plotly.graph_objs.choroplethmap.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1245,7 +1245,7 @@ class Choroplethmap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `locations`.
         marker
-            :class:`plotly.graph_objects.choroplethmap.Marker`
+            :class:`plotly.graph_objs.choroplethmap.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1271,7 +1271,7 @@ class Choroplethmap(_BaseTraceType):
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
         selected
-            :class:`plotly.graph_objects.choroplethmap.Selected`
+            :class:`plotly.graph_objs.choroplethmap.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1287,7 +1287,7 @@ class Choroplethmap(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.choroplethmap.Stream`
+            :class:`plotly.graph_objs.choroplethmap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1322,7 +1322,7 @@ class Choroplethmap(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.choroplethmap.Unselected`
+            :class:`plotly.graph_objs.choroplethmap.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1440,7 +1440,7 @@ class Choroplethmap(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.choroplethmap.ColorBar`
+            :class:`plotly.graph_objs.choroplethmap.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1481,7 +1481,7 @@ class Choroplethmap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.choroplethmap.Hoverlabel`
+            :class:`plotly.graph_objs.choroplethmap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1539,7 +1539,7 @@ class Choroplethmap(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.choroplethmap.Legendgroupt
+            :class:`plotly.graph_objs.choroplethmap.Legendgroupt
             itle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1562,7 +1562,7 @@ class Choroplethmap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `locations`.
         marker
-            :class:`plotly.graph_objects.choroplethmap.Marker`
+            :class:`plotly.graph_objs.choroplethmap.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1588,7 +1588,7 @@ class Choroplethmap(_BaseTraceType):
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
         selected
-            :class:`plotly.graph_objects.choroplethmap.Selected`
+            :class:`plotly.graph_objs.choroplethmap.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1604,7 +1604,7 @@ class Choroplethmap(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.choroplethmap.Stream`
+            :class:`plotly.graph_objs.choroplethmap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1639,7 +1639,7 @@ class Choroplethmap(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.choroplethmap.Unselected`
+            :class:`plotly.graph_objs.choroplethmap.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

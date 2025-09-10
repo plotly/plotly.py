@@ -71,13 +71,13 @@ class Caps(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            :class:`plotly.graph_objects.isosurface.caps.X`
+            :class:`plotly.graph_objs.isosurface.caps.X`
             instance or dict with compatible properties
         y
-            :class:`plotly.graph_objects.isosurface.caps.Y`
+            :class:`plotly.graph_objs.isosurface.caps.Y`
             instance or dict with compatible properties
         z
-            :class:`plotly.graph_objects.isosurface.caps.Z`
+            :class:`plotly.graph_objs.isosurface.caps.Z`
             instance or dict with compatible properties
         """
 
@@ -92,13 +92,13 @@ class Caps(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.isosurface.Caps`
         x
-            :class:`plotly.graph_objects.isosurface.caps.X`
+            :class:`plotly.graph_objs.isosurface.caps.X`
             instance or dict with compatible properties
         y
-            :class:`plotly.graph_objects.isosurface.caps.Y`
+            :class:`plotly.graph_objs.isosurface.caps.Y`
             instance or dict with compatible properties
         z
-            :class:`plotly.graph_objects.isosurface.caps.Z`
+            :class:`plotly.graph_objs.isosurface.caps.Z`
             instance or dict with compatible properties
 
         Returns

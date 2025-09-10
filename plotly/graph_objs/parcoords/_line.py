@@ -366,7 +366,7 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.parcoords.line.ColorBar`
+            :class:`plotly.graph_objs.parcoords.line.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -470,7 +470,7 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.parcoords.line.ColorBar`
+            :class:`plotly.graph_objs.parcoords.line.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in

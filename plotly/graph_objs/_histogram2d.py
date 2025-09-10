@@ -1503,7 +1503,7 @@ class Histogram2d(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.histogram2d.ColorBar`
+            :class:`plotly.graph_objs.histogram2d.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1559,7 +1559,7 @@ class Histogram2d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram2d.Hoverlabel`
+            :class:`plotly.graph_objs.histogram2d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1612,7 +1612,7 @@ class Histogram2d(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram2d.Legendgrouptit
+            :class:`plotly.graph_objs.histogram2d.Legendgrouptit
             le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1629,7 +1629,7 @@ class Histogram2d(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.histogram2d.Marker`
+            :class:`plotly.graph_objs.histogram2d.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1675,7 +1675,7 @@ class Histogram2d(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.histogram2d.Stream`
+            :class:`plotly.graph_objs.histogram2d.Stream`
             instance or dict with compatible properties
         textfont
             Sets the text font.
@@ -1738,7 +1738,7 @@ class Histogram2d(_BaseTraceType):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            :class:`plotly.graph_objects.histogram2d.XBins`
+            :class:`plotly.graph_objs.histogram2d.XBins`
             instance or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1775,7 +1775,7 @@ class Histogram2d(_BaseTraceType):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            :class:`plotly.graph_objects.histogram2d.YBins`
+            :class:`plotly.graph_objs.histogram2d.YBins`
             instance or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -1945,7 +1945,7 @@ class Histogram2d(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.histogram2d.ColorBar`
+            :class:`plotly.graph_objs.histogram2d.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -2001,7 +2001,7 @@ class Histogram2d(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.histogram2d.Hoverlabel`
+            :class:`plotly.graph_objs.histogram2d.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -2054,7 +2054,7 @@ class Histogram2d(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.histogram2d.Legendgrouptit
+            :class:`plotly.graph_objs.histogram2d.Legendgrouptit
             le` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2071,7 +2071,7 @@ class Histogram2d(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.histogram2d.Marker`
+            :class:`plotly.graph_objs.histogram2d.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2117,7 +2117,7 @@ class Histogram2d(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            :class:`plotly.graph_objects.histogram2d.Stream`
+            :class:`plotly.graph_objs.histogram2d.Stream`
             instance or dict with compatible properties
         textfont
             Sets the text font.
@@ -2180,7 +2180,7 @@ class Histogram2d(_BaseTraceType):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            :class:`plotly.graph_objects.histogram2d.XBins`
+            :class:`plotly.graph_objs.histogram2d.XBins`
             instance or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -2217,7 +2217,7 @@ class Histogram2d(_BaseTraceType):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            :class:`plotly.graph_objects.histogram2d.YBins`
+            :class:`plotly.graph_objs.histogram2d.YBins`
             instance or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.

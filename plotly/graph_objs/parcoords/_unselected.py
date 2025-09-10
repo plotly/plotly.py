@@ -33,7 +33,7 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            :class:`plotly.graph_objects.parcoords.unselected.Line`
+            :class:`plotly.graph_objs.parcoords.unselected.Line`
             instance or dict with compatible properties
         """
 
@@ -48,7 +48,7 @@ class Unselected(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.parcoords.Unselected`
         line
-            :class:`plotly.graph_objects.parcoords.unselected.Line`
+            :class:`plotly.graph_objs.parcoords.unselected.Line`
             instance or dict with compatible properties
 
         Returns

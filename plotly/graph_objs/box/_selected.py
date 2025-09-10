@@ -33,7 +33,7 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :class:`plotly.graph_objects.box.selected.Marker`
+            :class:`plotly.graph_objs.box.selected.Marker`
             instance or dict with compatible properties
         """
 
@@ -47,7 +47,7 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.box.Selected`
         marker
-            :class:`plotly.graph_objects.box.selected.Marker`
+            :class:`plotly.graph_objs.box.selected.Marker`
             instance or dict with compatible properties
 
         Returns

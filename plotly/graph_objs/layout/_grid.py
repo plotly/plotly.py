@@ -311,7 +311,7 @@ class Grid(_BaseLayoutHierarchyType):
             to have a different length, if you want to leave a row
             at the end for non-cartesian subplots.
         domain
-            :class:`plotly.graph_objects.layout.grid.Domain`
+            :class:`plotly.graph_objs.layout.grid.Domain`
             instance or dict with compatible properties
         pattern
             If no `subplots`, `xaxes`, or `yaxes` are given but we
@@ -408,7 +408,7 @@ class Grid(_BaseLayoutHierarchyType):
             to have a different length, if you want to leave a row
             at the end for non-cartesian subplots.
         domain
-            :class:`plotly.graph_objects.layout.grid.Domain`
+            :class:`plotly.graph_objs.layout.grid.Domain`
             instance or dict with compatible properties
         pattern
             If no `subplots`, `xaxes`, or `yaxes` are given but we

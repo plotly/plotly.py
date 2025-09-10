@@ -622,7 +622,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.scattermapbox.marker.Color
+            :class:`plotly.graph_objs.scattermapbox.marker.Color
             Bar` instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -779,7 +779,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.scattermapbox.marker.Color
+            :class:`plotly.graph_objs.scattermapbox.marker.Color
             Bar` instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in

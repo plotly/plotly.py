@@ -262,7 +262,7 @@ class Marker(_BaseTraceHierarchyType):
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
         line
-            :class:`plotly.graph_objects.violin.marker.Line`
+            :class:`plotly.graph_objs.violin.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the marker opacity.
@@ -307,7 +307,7 @@ class Marker(_BaseTraceHierarchyType):
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
         line
-            :class:`plotly.graph_objects.violin.marker.Line`
+            :class:`plotly.graph_objs.violin.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the marker opacity.

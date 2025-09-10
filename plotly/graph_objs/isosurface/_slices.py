@@ -71,13 +71,13 @@ class Slices(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            :class:`plotly.graph_objects.isosurface.slices.X`
+            :class:`plotly.graph_objs.isosurface.slices.X`
             instance or dict with compatible properties
         y
-            :class:`plotly.graph_objects.isosurface.slices.Y`
+            :class:`plotly.graph_objs.isosurface.slices.Y`
             instance or dict with compatible properties
         z
-            :class:`plotly.graph_objects.isosurface.slices.Z`
+            :class:`plotly.graph_objs.isosurface.slices.Z`
             instance or dict with compatible properties
         """
 
@@ -92,13 +92,13 @@ class Slices(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.isosurface.Slices`
         x
-            :class:`plotly.graph_objects.isosurface.slices.X`
+            :class:`plotly.graph_objs.isosurface.slices.X`
             instance or dict with compatible properties
         y
-            :class:`plotly.graph_objects.isosurface.slices.Y`
+            :class:`plotly.graph_objs.isosurface.slices.Y`
             instance or dict with compatible properties
         z
-            :class:`plotly.graph_objects.isosurface.slices.Z`
+            :class:`plotly.graph_objs.isosurface.slices.Z`
             instance or dict with compatible properties
 
         Returns

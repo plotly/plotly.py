@@ -1087,7 +1087,7 @@ class Ohlc(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.ohlc.Decreasing` instance
+            :class:`plotly.graph_objs.ohlc.Decreasing` instance
             or dict with compatible properties
         high
             Sets the high values.
@@ -1103,7 +1103,7 @@ class Ohlc(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.ohlc.Hoverlabel` instance
+            :class:`plotly.graph_objs.ohlc.Hoverlabel` instance
             or dict with compatible properties
         hovertext
             Same as `text`.
@@ -1118,7 +1118,7 @@ class Ohlc(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.ohlc.Increasing` instance
+            :class:`plotly.graph_objs.ohlc.Increasing` instance
             or dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -1131,7 +1131,7 @@ class Ohlc(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
+            :class:`plotly.graph_objs.ohlc.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1148,7 +1148,7 @@ class Ohlc(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.ohlc.Line` instance or
+            :class:`plotly.graph_objs.ohlc.Line` instance or
             dict with compatible properties
         low
             Sets the low values.
@@ -1192,7 +1192,7 @@ class Ohlc(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.ohlc.Stream` instance or
+            :class:`plotly.graph_objs.ohlc.Stream` instance or
             dict with compatible properties
         text
             Sets hover text elements associated with each sample
@@ -1384,7 +1384,7 @@ class Ohlc(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.ohlc.Decreasing` instance
+            :class:`plotly.graph_objs.ohlc.Decreasing` instance
             or dict with compatible properties
         high
             Sets the high values.
@@ -1400,7 +1400,7 @@ class Ohlc(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.ohlc.Hoverlabel` instance
+            :class:`plotly.graph_objs.ohlc.Hoverlabel` instance
             or dict with compatible properties
         hovertext
             Same as `text`.
@@ -1415,7 +1415,7 @@ class Ohlc(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.ohlc.Increasing` instance
+            :class:`plotly.graph_objs.ohlc.Increasing` instance
             or dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -1428,7 +1428,7 @@ class Ohlc(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.ohlc.Legendgrouptitle`
+            :class:`plotly.graph_objs.ohlc.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1445,7 +1445,7 @@ class Ohlc(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.ohlc.Line` instance or
+            :class:`plotly.graph_objs.ohlc.Line` instance or
             dict with compatible properties
         low
             Sets the low values.
@@ -1489,7 +1489,7 @@ class Ohlc(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.ohlc.Stream` instance or
+            :class:`plotly.graph_objs.ohlc.Stream` instance or
             dict with compatible properties
         text
             Sets hover text elements associated with each sample

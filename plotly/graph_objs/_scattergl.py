@@ -1451,10 +1451,10 @@ class Scattergl(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            :class:`plotly.graph_objects.scattergl.ErrorX` instance
+            :class:`plotly.graph_objs.scattergl.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scattergl.ErrorY` instance
+            :class:`plotly.graph_objs.scattergl.ErrorY` instance
             or dict with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
@@ -1492,7 +1492,7 @@ class Scattergl(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattergl.Hoverlabel`
+            :class:`plotly.graph_objs.scattergl.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1554,7 +1554,7 @@ class Scattergl(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattergl.Legendgrouptitle
+            :class:`plotly.graph_objs.scattergl.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1571,10 +1571,10 @@ class Scattergl(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattergl.Line` instance
+            :class:`plotly.graph_objs.scattergl.Line` instance
             or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scattergl.Marker` instance
+            :class:`plotly.graph_objs.scattergl.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1600,7 +1600,7 @@ class Scattergl(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattergl.Selected`
+            :class:`plotly.graph_objs.scattergl.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1613,7 +1613,7 @@ class Scattergl(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattergl.Stream` instance
+            :class:`plotly.graph_objs.scattergl.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -1676,7 +1676,7 @@ class Scattergl(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattergl.Unselected`
+            :class:`plotly.graph_objs.scattergl.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1872,10 +1872,10 @@ class Scattergl(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            :class:`plotly.graph_objects.scattergl.ErrorX` instance
+            :class:`plotly.graph_objs.scattergl.ErrorX` instance
             or dict with compatible properties
         error_y
-            :class:`plotly.graph_objects.scattergl.ErrorY` instance
+            :class:`plotly.graph_objs.scattergl.ErrorY` instance
             or dict with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
@@ -1913,7 +1913,7 @@ class Scattergl(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattergl.Hoverlabel`
+            :class:`plotly.graph_objs.scattergl.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1975,7 +1975,7 @@ class Scattergl(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattergl.Legendgrouptitle
+            :class:`plotly.graph_objs.scattergl.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1992,10 +1992,10 @@ class Scattergl(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattergl.Line` instance
+            :class:`plotly.graph_objs.scattergl.Line` instance
             or dict with compatible properties
         marker
-            :class:`plotly.graph_objects.scattergl.Marker` instance
+            :class:`plotly.graph_objs.scattergl.Marker` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2021,7 +2021,7 @@ class Scattergl(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattergl.Selected`
+            :class:`plotly.graph_objs.scattergl.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -2034,7 +2034,7 @@ class Scattergl(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattergl.Stream` instance
+            :class:`plotly.graph_objs.scattergl.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -2097,7 +2097,7 @@ class Scattergl(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattergl.Unselected`
+            :class:`plotly.graph_objs.scattergl.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

@@ -591,7 +591,7 @@ class Parcoords(_BaseTraceType):
             the default property values to use for elements of
             parcoords.dimensions
         domain
-            :class:`plotly.graph_objects.parcoords.Domain` instance
+            :class:`plotly.graph_objs.parcoords.Domain` instance
             or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -621,7 +621,7 @@ class Parcoords(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.parcoords.Legendgrouptitle
+            :class:`plotly.graph_objs.parcoords.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -638,7 +638,7 @@ class Parcoords(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.parcoords.Line` instance
+            :class:`plotly.graph_objs.parcoords.Line` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -662,7 +662,7 @@ class Parcoords(_BaseTraceType):
         rangefont
             Sets the font for the `dimension` range values.
         stream
-            :class:`plotly.graph_objects.parcoords.Stream` instance
+            :class:`plotly.graph_objs.parcoords.Stream` instance
             or dict with compatible properties
         tickfont
             Sets the font for the `dimension` tick values.
@@ -689,7 +689,7 @@ class Parcoords(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.parcoords.Unselected`
+            :class:`plotly.graph_objs.parcoords.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -757,7 +757,7 @@ class Parcoords(_BaseTraceType):
             the default property values to use for elements of
             parcoords.dimensions
         domain
-            :class:`plotly.graph_objects.parcoords.Domain` instance
+            :class:`plotly.graph_objs.parcoords.Domain` instance
             or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -787,7 +787,7 @@ class Parcoords(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.parcoords.Legendgrouptitle
+            :class:`plotly.graph_objs.parcoords.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -804,7 +804,7 @@ class Parcoords(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.parcoords.Line` instance
+            :class:`plotly.graph_objs.parcoords.Line` instance
             or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -828,7 +828,7 @@ class Parcoords(_BaseTraceType):
         rangefont
             Sets the font for the `dimension` range values.
         stream
-            :class:`plotly.graph_objects.parcoords.Stream` instance
+            :class:`plotly.graph_objs.parcoords.Stream` instance
             or dict with compatible properties
         tickfont
             Sets the font for the `dimension` tick values.
@@ -855,7 +855,7 @@ class Parcoords(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.parcoords.Unselected`
+            :class:`plotly.graph_objs.parcoords.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

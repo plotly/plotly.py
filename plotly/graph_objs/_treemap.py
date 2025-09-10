@@ -1108,7 +1108,7 @@ class Treemap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.treemap.Domain` instance
+            :class:`plotly.graph_objs.treemap.Domain` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1119,7 +1119,7 @@ class Treemap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.treemap.Hoverlabel`
+            :class:`plotly.graph_objs.treemap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1187,7 +1187,7 @@ class Treemap(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.treemap.Legendgrouptitle`
+            :class:`plotly.graph_objs.treemap.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1210,7 +1210,7 @@ class Treemap(_BaseTraceType):
             filled in, otherwise plotly attempts to find a matching
             item in `labels`.
         marker
-            :class:`plotly.graph_objects.treemap.Marker` instance
+            :class:`plotly.graph_objs.treemap.Marker` instance
             or dict with compatible properties
         maxdepth
             Sets the number of rendered sectors from any given
@@ -1255,16 +1255,16 @@ class Treemap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `parents`.
         pathbar
-            :class:`plotly.graph_objects.treemap.Pathbar` instance
+            :class:`plotly.graph_objs.treemap.Pathbar` instance
             or dict with compatible properties
         root
-            :class:`plotly.graph_objects.treemap.Root` instance or
+            :class:`plotly.graph_objs.treemap.Root` instance or
             dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.treemap.Stream` instance
+            :class:`plotly.graph_objs.treemap.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -1304,7 +1304,7 @@ class Treemap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         tiling
-            :class:`plotly.graph_objects.treemap.Tiling` instance
+            :class:`plotly.graph_objs.treemap.Tiling` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -1428,7 +1428,7 @@ class Treemap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.treemap.Domain` instance
+            :class:`plotly.graph_objs.treemap.Domain` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1439,7 +1439,7 @@ class Treemap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.treemap.Hoverlabel`
+            :class:`plotly.graph_objs.treemap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1507,7 +1507,7 @@ class Treemap(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.treemap.Legendgrouptitle`
+            :class:`plotly.graph_objs.treemap.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1530,7 +1530,7 @@ class Treemap(_BaseTraceType):
             filled in, otherwise plotly attempts to find a matching
             item in `labels`.
         marker
-            :class:`plotly.graph_objects.treemap.Marker` instance
+            :class:`plotly.graph_objs.treemap.Marker` instance
             or dict with compatible properties
         maxdepth
             Sets the number of rendered sectors from any given
@@ -1575,16 +1575,16 @@ class Treemap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `parents`.
         pathbar
-            :class:`plotly.graph_objects.treemap.Pathbar` instance
+            :class:`plotly.graph_objs.treemap.Pathbar` instance
             or dict with compatible properties
         root
-            :class:`plotly.graph_objects.treemap.Root` instance or
+            :class:`plotly.graph_objs.treemap.Root` instance or
             dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.treemap.Stream` instance
+            :class:`plotly.graph_objs.treemap.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -1624,7 +1624,7 @@ class Treemap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         tiling
-            :class:`plotly.graph_objects.treemap.Tiling` instance
+            :class:`plotly.graph_objs.treemap.Tiling` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object

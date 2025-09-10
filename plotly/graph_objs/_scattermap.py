@@ -1078,7 +1078,7 @@ class Scattermap(_BaseTraceType):
             base layers. To place the scattermap layers above every
             other layer, set `below` to "''".
         cluster
-            :class:`plotly.graph_objects.scattermap.Cluster`
+            :class:`plotly.graph_objs.scattermap.Cluster`
             instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -1109,7 +1109,7 @@ class Scattermap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattermap.Hoverlabel`
+            :class:`plotly.graph_objs.scattermap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1176,7 +1176,7 @@ class Scattermap(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattermap.Legendgrouptitl
+            :class:`plotly.graph_objs.scattermap.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1193,7 +1193,7 @@ class Scattermap(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattermap.Line` instance
+            :class:`plotly.graph_objs.scattermap.Line` instance
             or dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
@@ -1201,7 +1201,7 @@ class Scattermap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattermap.Marker`
+            :class:`plotly.graph_objs.scattermap.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1230,7 +1230,7 @@ class Scattermap(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattermap.Selected`
+            :class:`plotly.graph_objs.scattermap.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1243,7 +1243,7 @@ class Scattermap(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattermap.Stream`
+            :class:`plotly.graph_objs.scattermap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1311,7 +1311,7 @@ class Scattermap(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattermap.Unselected`
+            :class:`plotly.graph_objs.scattermap.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1391,7 +1391,7 @@ class Scattermap(_BaseTraceType):
             base layers. To place the scattermap layers above every
             other layer, set `below` to "''".
         cluster
-            :class:`plotly.graph_objects.scattermap.Cluster`
+            :class:`plotly.graph_objs.scattermap.Cluster`
             instance or dict with compatible properties
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
@@ -1422,7 +1422,7 @@ class Scattermap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.scattermap.Hoverlabel`
+            :class:`plotly.graph_objs.scattermap.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1489,7 +1489,7 @@ class Scattermap(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.scattermap.Legendgrouptitl
+            :class:`plotly.graph_objs.scattermap.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1506,7 +1506,7 @@ class Scattermap(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.scattermap.Line` instance
+            :class:`plotly.graph_objs.scattermap.Line` instance
             or dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
@@ -1514,7 +1514,7 @@ class Scattermap(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `lon`.
         marker
-            :class:`plotly.graph_objects.scattermap.Marker`
+            :class:`plotly.graph_objs.scattermap.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1543,7 +1543,7 @@ class Scattermap(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.scattermap.Selected`
+            :class:`plotly.graph_objs.scattermap.Selected`
             instance or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1556,7 +1556,7 @@ class Scattermap(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.scattermap.Stream`
+            :class:`plotly.graph_objs.scattermap.Stream`
             instance or dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -1624,7 +1624,7 @@ class Scattermap(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.scattermap.Unselected`
+            :class:`plotly.graph_objs.scattermap.Unselected`
             instance or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

@@ -150,18 +150,18 @@ class Ternary(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         aaxis
-            :class:`plotly.graph_objects.layout.ternary.Aaxis`
+            :class:`plotly.graph_objs.layout.ternary.Aaxis`
             instance or dict with compatible properties
         baxis
-            :class:`plotly.graph_objects.layout.ternary.Baxis`
+            :class:`plotly.graph_objs.layout.ternary.Baxis`
             instance or dict with compatible properties
         bgcolor
             Set the background color of the subplot
         caxis
-            :class:`plotly.graph_objects.layout.ternary.Caxis`
+            :class:`plotly.graph_objs.layout.ternary.Caxis`
             instance or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.layout.ternary.Domain`
+            :class:`plotly.graph_objs.layout.ternary.Domain`
             instance or dict with compatible properties
         sum
             The number each triplet should sum to, and the maximum
@@ -194,18 +194,18 @@ class Ternary(_BaseLayoutHierarchyType):
             an instance of
             :class:`plotly.graph_objs.layout.Ternary`
         aaxis
-            :class:`plotly.graph_objects.layout.ternary.Aaxis`
+            :class:`plotly.graph_objs.layout.ternary.Aaxis`
             instance or dict with compatible properties
         baxis
-            :class:`plotly.graph_objects.layout.ternary.Baxis`
+            :class:`plotly.graph_objs.layout.ternary.Baxis`
             instance or dict with compatible properties
         bgcolor
             Set the background color of the subplot
         caxis
-            :class:`plotly.graph_objects.layout.ternary.Caxis`
+            :class:`plotly.graph_objs.layout.ternary.Caxis`
             instance or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.layout.ternary.Domain`
+            :class:`plotly.graph_objs.layout.ternary.Domain`
             instance or dict with compatible properties
         sum
             The number each triplet should sum to, and the maximum

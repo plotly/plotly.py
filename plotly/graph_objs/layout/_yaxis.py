@@ -2295,7 +2295,7 @@ class YAxis(_BaseLayoutHierarchyType):
             a reversed axis. Using "reversed" applies autorange on
             both ends and reverses the axis direction.
         autorangeoptions
-            :class:`plotly.graph_objects.layout.yaxis.Autorangeopti
+            :class:`plotly.graph_objs.layout.yaxis.Autorangeopti
             ons` instance or dict with compatible properties
         autoshift
             Automatically reposition the axis to avoid overlap with
@@ -2472,7 +2472,7 @@ class YAxis(_BaseLayoutHierarchyType):
             This only has an effect when `tickformat` is "SI" or
             "B".
         minor
-            :class:`plotly.graph_objects.layout.yaxis.Minor`
+            :class:`plotly.graph_objs.layout.yaxis.Minor`
             instance or dict with compatible properties
         minorloglabels
             Determines how minor log labels are displayed. If
@@ -2522,7 +2522,7 @@ class YAxis(_BaseLayoutHierarchyType):
             the default `autorange`.
         rangebreaks
             A tuple of
-            :class:`plotly.graph_objects.layout.yaxis.Rangebreak`
+            :class:`plotly.graph_objs.layout.yaxis.Rangebreak`
             instances or dicts with compatible properties
         rangebreakdefaults
             When used in a template (as
@@ -2665,7 +2665,7 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.yaxis.Ti
+            A tuple of :class:`plotly.graph_objs.layout.yaxis.Ti
             ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -2778,7 +2778,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.yaxis.Title`
+            :class:`plotly.graph_objs.layout.yaxis.Title`
             instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
@@ -2789,7 +2789,7 @@ class YAxis(_BaseLayoutHierarchyType):
             `range`, `autorange`, and `title` if in `editable:
             true` configuration. Defaults to `layout.uirevision`.
         unifiedhovertitle
-            :class:`plotly.graph_objects.layout.yaxis.Unifiedhovert
+            :class:`plotly.graph_objs.layout.yaxis.Unifiedhovert
             itle` instance or dict with compatible properties
         visible
             A single toggle to hide the axis while preserving
@@ -2944,7 +2944,7 @@ class YAxis(_BaseLayoutHierarchyType):
             a reversed axis. Using "reversed" applies autorange on
             both ends and reverses the axis direction.
         autorangeoptions
-            :class:`plotly.graph_objects.layout.yaxis.Autorangeopti
+            :class:`plotly.graph_objs.layout.yaxis.Autorangeopti
             ons` instance or dict with compatible properties
         autoshift
             Automatically reposition the axis to avoid overlap with
@@ -3121,7 +3121,7 @@ class YAxis(_BaseLayoutHierarchyType):
             This only has an effect when `tickformat` is "SI" or
             "B".
         minor
-            :class:`plotly.graph_objects.layout.yaxis.Minor`
+            :class:`plotly.graph_objs.layout.yaxis.Minor`
             instance or dict with compatible properties
         minorloglabels
             Determines how minor log labels are displayed. If
@@ -3171,7 +3171,7 @@ class YAxis(_BaseLayoutHierarchyType):
             the default `autorange`.
         rangebreaks
             A tuple of
-            :class:`plotly.graph_objects.layout.yaxis.Rangebreak`
+            :class:`plotly.graph_objs.layout.yaxis.Rangebreak`
             instances or dicts with compatible properties
         rangebreakdefaults
             When used in a template (as
@@ -3314,7 +3314,7 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.yaxis.Ti
+            A tuple of :class:`plotly.graph_objs.layout.yaxis.Ti
             ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -3427,7 +3427,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.yaxis.Title`
+            :class:`plotly.graph_objs.layout.yaxis.Title`
             instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
@@ -3438,7 +3438,7 @@ class YAxis(_BaseLayoutHierarchyType):
             `range`, `autorange`, and `title` if in `editable:
             true` configuration. Defaults to `layout.uirevision`.
         unifiedhovertitle
-            :class:`plotly.graph_objects.layout.yaxis.Unifiedhovert
+            :class:`plotly.graph_objs.layout.yaxis.Unifiedhovert
             itle` instance or dict with compatible properties
         visible
             A single toggle to hide the axis while preserving

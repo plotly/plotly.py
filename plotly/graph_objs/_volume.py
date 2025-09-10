@@ -1399,7 +1399,7 @@ class Volume(_BaseTraceType):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            :class:`plotly.graph_objects.volume.Caps` instance or
+            :class:`plotly.graph_objs.volume.Caps` instance or
             dict with compatible properties
         cauto
             Determines whether or not the color domain is computed
@@ -1427,7 +1427,7 @@ class Volume(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.volume.ColorBar` instance
+            :class:`plotly.graph_objs.volume.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1442,7 +1442,7 @@ class Volume(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.volume.Contour` instance
+            :class:`plotly.graph_objs.volume.Contour` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1465,7 +1465,7 @@ class Volume(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.volume.Hoverlabel`
+            :class:`plotly.graph_objs.volume.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1526,7 +1526,7 @@ class Volume(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.volume.Legendgrouptitle`
+            :class:`plotly.graph_objs.volume.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1543,10 +1543,10 @@ class Volume(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.volume.Lighting` instance
+            :class:`plotly.graph_objs.volume.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.volume.Lightposition`
+            :class:`plotly.graph_objs.volume.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1603,16 +1603,16 @@ class Volume(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            :class:`plotly.graph_objects.volume.Slices` instance or
+            :class:`plotly.graph_objs.volume.Slices` instance or
             dict with compatible properties
         spaceframe
-            :class:`plotly.graph_objects.volume.Spaceframe`
+            :class:`plotly.graph_objs.volume.Spaceframe`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.volume.Stream` instance or
+            :class:`plotly.graph_objs.volume.Stream` instance or
             dict with compatible properties
         surface
-            :class:`plotly.graph_objects.volume.Surface` instance
+            :class:`plotly.graph_objs.volume.Surface` instance
             or dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
@@ -1805,7 +1805,7 @@ class Volume(_BaseTraceType):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            :class:`plotly.graph_objects.volume.Caps` instance or
+            :class:`plotly.graph_objs.volume.Caps` instance or
             dict with compatible properties
         cauto
             Determines whether or not the color domain is computed
@@ -1833,7 +1833,7 @@ class Volume(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.volume.ColorBar` instance
+            :class:`plotly.graph_objs.volume.ColorBar` instance
             or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -1848,7 +1848,7 @@ class Volume(_BaseTraceType):
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
-            :class:`plotly.graph_objects.volume.Contour` instance
+            :class:`plotly.graph_objs.volume.Contour` instance
             or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -1871,7 +1871,7 @@ class Volume(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.volume.Hoverlabel`
+            :class:`plotly.graph_objs.volume.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1932,7 +1932,7 @@ class Volume(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.volume.Legendgrouptitle`
+            :class:`plotly.graph_objs.volume.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1949,10 +1949,10 @@ class Volume(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         lighting
-            :class:`plotly.graph_objects.volume.Lighting` instance
+            :class:`plotly.graph_objs.volume.Lighting` instance
             or dict with compatible properties
         lightposition
-            :class:`plotly.graph_objects.volume.Lightposition`
+            :class:`plotly.graph_objs.volume.Lightposition`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2009,16 +2009,16 @@ class Volume(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            :class:`plotly.graph_objects.volume.Slices` instance or
+            :class:`plotly.graph_objs.volume.Slices` instance or
             dict with compatible properties
         spaceframe
-            :class:`plotly.graph_objects.volume.Spaceframe`
+            :class:`plotly.graph_objs.volume.Spaceframe`
             instance or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.volume.Stream` instance or
+            :class:`plotly.graph_objs.volume.Stream` instance or
             dict with compatible properties
         surface
-            :class:`plotly.graph_objects.volume.Surface` instance
+            :class:`plotly.graph_objs.volume.Surface` instance
             or dict with compatible properties
         text
             Sets the text elements associated with the vertices. If

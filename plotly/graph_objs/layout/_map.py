@@ -234,17 +234,17 @@ class Map(_BaseLayoutHierarchyType):
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (map.bearing).
         bounds
-            :class:`plotly.graph_objects.layout.map.Bounds`
+            :class:`plotly.graph_objs.layout.map.Bounds`
             instance or dict with compatible properties
         center
-            :class:`plotly.graph_objects.layout.map.Center`
+            :class:`plotly.graph_objs.layout.map.Center`
             instance or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.layout.map.Domain`
+            :class:`plotly.graph_objs.layout.map.Domain`
             instance or dict with compatible properties
         layers
             A tuple of
-            :class:`plotly.graph_objects.layout.map.Layer`
+            :class:`plotly.graph_objs.layout.map.Layer`
             instances or dicts with compatible properties
         layerdefaults
             When used in a template (as
@@ -308,17 +308,17 @@ class Map(_BaseLayoutHierarchyType):
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (map.bearing).
         bounds
-            :class:`plotly.graph_objects.layout.map.Bounds`
+            :class:`plotly.graph_objs.layout.map.Bounds`
             instance or dict with compatible properties
         center
-            :class:`plotly.graph_objects.layout.map.Center`
+            :class:`plotly.graph_objs.layout.map.Center`
             instance or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.layout.map.Domain`
+            :class:`plotly.graph_objs.layout.map.Domain`
             instance or dict with compatible properties
         layers
             A tuple of
-            :class:`plotly.graph_objects.layout.map.Layer`
+            :class:`plotly.graph_objs.layout.map.Layer`
             instances or dicts with compatible properties
         layerdefaults
             When used in a template (as

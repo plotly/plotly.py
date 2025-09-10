@@ -112,7 +112,7 @@ class Camera(_BaseLayoutHierarchyType):
             This vector determines the view point about the origin
             of this scene.
         projection
-            :class:`plotly.graph_objects.layout.scene.camera.Projec
+            :class:`plotly.graph_objs.layout.scene.camera.Projec
             tion` instance or dict with compatible properties
         up
             Sets the (x,y,z) components of the 'up' camera vector.
@@ -143,7 +143,7 @@ class Camera(_BaseLayoutHierarchyType):
             This vector determines the view point about the origin
             of this scene.
         projection
-            :class:`plotly.graph_objects.layout.scene.camera.Projec
+            :class:`plotly.graph_objs.layout.scene.camera.Projec
             tion` instance or dict with compatible properties
         up
             Sets the (x,y,z) components of the 'up' camera vector.

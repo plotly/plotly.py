@@ -678,7 +678,7 @@ class Legend(_BaseLayoutHierarchyType):
         orientation
             Sets the orientation of the legend.
         title
-            :class:`plotly.graph_objects.layout.legend.Title`
+            :class:`plotly.graph_objs.layout.legend.Title`
             instance or dict with compatible properties
         tracegroupgap
             Sets the amount of vertical space (in px) between
@@ -847,7 +847,7 @@ class Legend(_BaseLayoutHierarchyType):
         orientation
             Sets the orientation of the legend.
         title
-            :class:`plotly.graph_objects.layout.legend.Title`
+            :class:`plotly.graph_objs.layout.legend.Title`
             instance or dict with compatible properties
         tracegroupgap
             Sets the amount of vertical space (in px) between

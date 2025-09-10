@@ -52,10 +52,10 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :class:`plotly.graph_objects.histogram.selected.Marker`
+            :class:`plotly.graph_objs.histogram.selected.Marker`
             instance or dict with compatible properties
         textfont
-            :class:`plotly.graph_objects.histogram.selected.Textfon
+            :class:`plotly.graph_objs.histogram.selected.Textfon
             t` instance or dict with compatible properties
         """
 
@@ -70,10 +70,10 @@ class Selected(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.histogram.Selected`
         marker
-            :class:`plotly.graph_objects.histogram.selected.Marker`
+            :class:`plotly.graph_objs.histogram.selected.Marker`
             instance or dict with compatible properties
         textfont
-            :class:`plotly.graph_objects.histogram.selected.Textfon
+            :class:`plotly.graph_objs.histogram.selected.Textfon
             t` instance or dict with compatible properties
 
         Returns

@@ -792,7 +792,7 @@ class Axis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.indicator.gauge
+            A tuple of :class:`plotly.graph_objs.indicator.gauge
             .axis.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults
@@ -994,7 +994,7 @@ class Axis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.indicator.gauge
+            A tuple of :class:`plotly.graph_objs.indicator.gauge
             .axis.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults

@@ -98,7 +98,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `colors`.
         line
-            :class:`plotly.graph_objects.funnelarea.marker.Line`
+            :class:`plotly.graph_objs.funnelarea.marker.Line`
             instance or dict with compatible properties
         pattern
             Sets the pattern within the marker.
@@ -124,7 +124,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `colors`.
         line
-            :class:`plotly.graph_objects.funnelarea.marker.Line`
+            :class:`plotly.graph_objs.funnelarea.marker.Line`
             instance or dict with compatible properties
         pattern
             Sets the pattern within the marker.

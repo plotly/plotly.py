@@ -470,7 +470,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.histogram.marker.ColorBar`
+            :class:`plotly.graph_objs.histogram.marker.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -496,7 +496,7 @@ class Marker(_BaseTraceHierarchyType):
             stack or relative barmode, the first trace to set
             cornerradius is used for the whole stack.
         line
-            :class:`plotly.graph_objects.histogram.marker.Line`
+            :class:`plotly.graph_objs.histogram.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the opacity of the bars.
@@ -595,7 +595,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.histogram.marker.ColorBar`
+            :class:`plotly.graph_objs.histogram.marker.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -621,7 +621,7 @@ class Marker(_BaseTraceHierarchyType):
             stack or relative barmode, the first trace to set
             cornerradius is used for the whole stack.
         line
-            :class:`plotly.graph_objects.histogram.marker.Line`
+            :class:`plotly.graph_objs.histogram.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the opacity of the bars.

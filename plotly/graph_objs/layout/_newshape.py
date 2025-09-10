@@ -357,7 +357,7 @@ class Newshape(_BaseLayoutHierarchyType):
             visit https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
         label
-            :class:`plotly.graph_objects.layout.newshape.Label`
+            :class:`plotly.graph_objs.layout.newshape.Label`
             instance or dict with compatible properties
         layer
             Specifies whether new shapes are drawn below gridlines
@@ -374,7 +374,7 @@ class Newshape(_BaseLayoutHierarchyType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.layout.newshape.Legendgrou
+            :class:`plotly.graph_objs.layout.newshape.Legendgrou
             ptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for new shape. Items and groups
@@ -388,7 +388,7 @@ class Newshape(_BaseLayoutHierarchyType):
             Sets the width (in px or fraction) of the legend for
             new shape.
         line
-            :class:`plotly.graph_objects.layout.newshape.Line`
+            :class:`plotly.graph_objs.layout.newshape.Line`
             instance or dict with compatible properties
         name
             Sets new shape name. The name appears as the legend
@@ -453,7 +453,7 @@ class Newshape(_BaseLayoutHierarchyType):
             visit https://developer.mozilla.org/en-
             US/docs/Web/SVG/Attribute/fill-rule
         label
-            :class:`plotly.graph_objects.layout.newshape.Label`
+            :class:`plotly.graph_objs.layout.newshape.Label`
             instance or dict with compatible properties
         layer
             Specifies whether new shapes are drawn below gridlines
@@ -470,7 +470,7 @@ class Newshape(_BaseLayoutHierarchyType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.layout.newshape.Legendgrou
+            :class:`plotly.graph_objs.layout.newshape.Legendgrou
             ptitle` instance or dict with compatible properties
         legendrank
             Sets the legend rank for new shape. Items and groups
@@ -484,7 +484,7 @@ class Newshape(_BaseLayoutHierarchyType):
             Sets the width (in px or fraction) of the legend for
             new shape.
         line
-            :class:`plotly.graph_objects.layout.newshape.Line`
+            :class:`plotly.graph_objs.layout.newshape.Line`
             instance or dict with compatible properties
         name
             Sets new shape name. The name appears as the legend

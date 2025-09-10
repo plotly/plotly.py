@@ -57,7 +57,7 @@ class Marker(_BaseTraceHierarchyType):
         color
             Sets the marker color of all decreasing values.
         line
-            :class:`plotly.graph_objects.waterfall.decreasing.marke
+            :class:`plotly.graph_objs.waterfall.decreasing.marke
             r.Line` instance or dict with compatible properties
         """
 
@@ -74,7 +74,7 @@ class Marker(_BaseTraceHierarchyType):
         color
             Sets the marker color of all decreasing values.
         line
-            :class:`plotly.graph_objects.waterfall.decreasing.marke
+            :class:`plotly.graph_objs.waterfall.decreasing.marke
             r.Line` instance or dict with compatible properties
 
         Returns

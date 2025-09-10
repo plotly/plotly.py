@@ -71,13 +71,13 @@ class Caps(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            :class:`plotly.graph_objects.volume.caps.X` instance or
+            :class:`plotly.graph_objs.volume.caps.X` instance or
             dict with compatible properties
         y
-            :class:`plotly.graph_objects.volume.caps.Y` instance or
+            :class:`plotly.graph_objs.volume.caps.Y` instance or
             dict with compatible properties
         z
-            :class:`plotly.graph_objects.volume.caps.Z` instance or
+            :class:`plotly.graph_objs.volume.caps.Z` instance or
             dict with compatible properties
         """
 
@@ -91,13 +91,13 @@ class Caps(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.volume.Caps`
         x
-            :class:`plotly.graph_objects.volume.caps.X` instance or
+            :class:`plotly.graph_objs.volume.caps.X` instance or
             dict with compatible properties
         y
-            :class:`plotly.graph_objects.volume.caps.Y` instance or
+            :class:`plotly.graph_objs.volume.caps.Y` instance or
             dict with compatible properties
         z
-            :class:`plotly.graph_objects.volume.caps.Z` instance or
+            :class:`plotly.graph_objs.volume.caps.Z` instance or
             dict with compatible properties
 
         Returns

@@ -2196,14 +2196,14 @@ class Layout(_BaseLayoutType):
     def _prop_descriptions(self):
         return """\
         activeselection
-            :class:`plotly.graph_objects.layout.Activeselection`
+            :class:`plotly.graph_objs.layout.Activeselection`
             instance or dict with compatible properties
         activeshape
-            :class:`plotly.graph_objects.layout.Activeshape`
+            :class:`plotly.graph_objs.layout.Activeshape`
             instance or dict with compatible properties
         annotations
             A tuple of
-            :class:`plotly.graph_objects.layout.Annotation`
+            :class:`plotly.graph_objs.layout.Annotation`
             instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
@@ -2285,10 +2285,10 @@ class Layout(_BaseLayoutType):
             well. When the "event" flag is missing, `plotly_click`
             and `plotly_selected` events are not fired.
         coloraxis
-            :class:`plotly.graph_objects.layout.Coloraxis` instance
+            :class:`plotly.graph_objs.layout.Coloraxis` instance
             or dict with compatible properties
         colorscale
-            :class:`plotly.graph_objects.layout.Colorscale`
+            :class:`plotly.graph_objs.layout.Colorscale`
             instance or dict with compatible properties
         colorway
             Sets the default trace colors.
@@ -2383,10 +2383,10 @@ class Layout(_BaseLayoutType):
             over one another, you might need to reduce "opacity" to
             see multiple bars.
         geo
-            :class:`plotly.graph_objects.layout.Geo` instance or
+            :class:`plotly.graph_objs.layout.Geo` instance or
             dict with compatible properties
         grid
-            :class:`plotly.graph_objects.layout.Grid` instance or
+            :class:`plotly.graph_objs.layout.Grid` instance or
             dict with compatible properties
         height
             Sets the plot's height (in px).
@@ -2415,7 +2415,7 @@ class Layout(_BaseLayoutType):
             these objects will not supersede hover on point-like
             objects in case of conflict.
         hoverlabel
-            :class:`plotly.graph_objects.layout.Hoverlabel`
+            :class:`plotly.graph_objs.layout.Hoverlabel`
             instance or dict with compatible properties
         hovermode
             Determines the mode of hover interactions. If
@@ -2446,23 +2446,23 @@ class Layout(_BaseLayoutType):
             new list here it can still be extended with lighter and
             darker colors, see `extendiciclecolors`.
         images
-            A tuple of :class:`plotly.graph_objects.layout.Image`
+            A tuple of :class:`plotly.graph_objs.layout.Image`
             instances or dicts with compatible properties
         imagedefaults
             When used in a template (as
             layout.template.layout.imagedefaults), sets the default
             property values to use for elements of layout.images
         legend
-            :class:`plotly.graph_objects.layout.Legend` instance or
+            :class:`plotly.graph_objs.layout.Legend` instance or
             dict with compatible properties
         map
-            :class:`plotly.graph_objects.layout.Map` instance or
+            :class:`plotly.graph_objs.layout.Map` instance or
             dict with compatible properties
         mapbox
-            :class:`plotly.graph_objects.layout.Mapbox` instance or
+            :class:`plotly.graph_objs.layout.Mapbox` instance or
             dict with compatible properties
         margin
-            :class:`plotly.graph_objects.layout.Margin` instance or
+            :class:`plotly.graph_objs.layout.Margin` instance or
             dict with compatible properties
         meta
             Assigns extra meta information that can be used in
@@ -2485,13 +2485,13 @@ class Layout(_BaseLayoutType):
             Minimum width of the plot with margin.automargin
             applied (in px)
         modebar
-            :class:`plotly.graph_objects.layout.Modebar` instance
+            :class:`plotly.graph_objs.layout.Modebar` instance
             or dict with compatible properties
         newselection
-            :class:`plotly.graph_objects.layout.Newselection`
+            :class:`plotly.graph_objs.layout.Newselection`
             instance or dict with compatible properties
         newshape
-            :class:`plotly.graph_objects.layout.Newshape` instance
+            :class:`plotly.graph_objs.layout.Newshape` instance
             or dict with compatible properties
         paper_bgcolor
             Sets the background color of the paper where the graph
@@ -2505,7 +2505,7 @@ class Layout(_BaseLayoutType):
             Sets the background color of the plotting area in-
             between x and y axes.
         polar
-            :class:`plotly.graph_objects.layout.Polar` instance or
+            :class:`plotly.graph_objs.layout.Polar` instance or
             dict with compatible properties
         scattergap
             Sets the gap (in plot fraction) between scatter points
@@ -2519,7 +2519,7 @@ class Layout(_BaseLayoutType):
             might need to reduce "opacity" to see multiple scatter
             points.
         scene
-            :class:`plotly.graph_objects.layout.Scene` instance or
+            :class:`plotly.graph_objs.layout.Scene` instance or
             dict with compatible properties
         selectdirection
             When `dragmode` is set to "select", this limits the
@@ -2532,7 +2532,7 @@ class Layout(_BaseLayoutType):
             points from all traces.
         selections
             A tuple of
-            :class:`plotly.graph_objects.layout.Selection`
+            :class:`plotly.graph_objs.layout.Selection`
             instances or dicts with compatible properties
         selectiondefaults
             When used in a template (as
@@ -2545,7 +2545,7 @@ class Layout(_BaseLayoutType):
             thousands. In English locales, dflt is ".," but other
             locales may alter this default.
         shapes
-            A tuple of :class:`plotly.graph_objects.layout.Shape`
+            A tuple of :class:`plotly.graph_objs.layout.Shape`
             instances or dicts with compatible properties
         shapedefaults
             When used in a template (as
@@ -2558,7 +2558,7 @@ class Layout(_BaseLayoutType):
             legend. b) One pie trace is shown in the legend. c) One
             trace is explicitly given with `showlegend: true`.
         sliders
-            A tuple of :class:`plotly.graph_objects.layout.Slider`
+            A tuple of :class:`plotly.graph_objs.layout.Slider`
             instances or dicts with compatible properties
         sliderdefaults
             When used in a template (as
@@ -2566,7 +2566,7 @@ class Layout(_BaseLayoutType):
             default property values to use for elements of
             layout.sliders
         smith
-            :class:`plotly.graph_objects.layout.Smith` instance or
+            :class:`plotly.graph_objs.layout.Smith` instance or
             dict with compatible properties
         spikedistance
             Sets the default distance (in pixels) to look for data
@@ -2604,10 +2604,10 @@ class Layout(_BaseLayoutType):
             an item with matching `templateitemname` and `visible:
             false`.
         ternary
-            :class:`plotly.graph_objects.layout.Ternary` instance
+            :class:`plotly.graph_objs.layout.Ternary` instance
             or dict with compatible properties
         title
-            :class:`plotly.graph_objects.layout.Title` instance or
+            :class:`plotly.graph_objs.layout.Title` instance or
             dict with compatible properties
         transition
             Sets transition options used during Plotly.react
@@ -2637,11 +2637,11 @@ class Layout(_BaseLayoutType):
             and the y axis range will reset but the x axis range
             will retain any user-driven zoom.
         uniformtext
-            :class:`plotly.graph_objects.layout.Uniformtext`
+            :class:`plotly.graph_objs.layout.Uniformtext`
             instance or dict with compatible properties
         updatemenus
             A tuple of
-            :class:`plotly.graph_objects.layout.Updatemenu`
+            :class:`plotly.graph_objs.layout.Updatemenu`
             instances or dicts with compatible properties
         updatemenudefaults
             When used in a template (as
@@ -2680,10 +2680,10 @@ class Layout(_BaseLayoutType):
         width
             Sets the plot's width (in px).
         xaxis
-            :class:`plotly.graph_objects.layout.XAxis` instance or
+            :class:`plotly.graph_objs.layout.XAxis` instance or
             dict with compatible properties
         yaxis
-            :class:`plotly.graph_objects.layout.YAxis` instance or
+            :class:`plotly.graph_objs.layout.YAxis` instance or
             dict with compatible properties
         """
 
@@ -2796,14 +2796,14 @@ class Layout(_BaseLayoutType):
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.Layout`
         activeselection
-            :class:`plotly.graph_objects.layout.Activeselection`
+            :class:`plotly.graph_objs.layout.Activeselection`
             instance or dict with compatible properties
         activeshape
-            :class:`plotly.graph_objects.layout.Activeshape`
+            :class:`plotly.graph_objs.layout.Activeshape`
             instance or dict with compatible properties
         annotations
             A tuple of
-            :class:`plotly.graph_objects.layout.Annotation`
+            :class:`plotly.graph_objs.layout.Annotation`
             instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
@@ -2885,10 +2885,10 @@ class Layout(_BaseLayoutType):
             well. When the "event" flag is missing, `plotly_click`
             and `plotly_selected` events are not fired.
         coloraxis
-            :class:`plotly.graph_objects.layout.Coloraxis` instance
+            :class:`plotly.graph_objs.layout.Coloraxis` instance
             or dict with compatible properties
         colorscale
-            :class:`plotly.graph_objects.layout.Colorscale`
+            :class:`plotly.graph_objs.layout.Colorscale`
             instance or dict with compatible properties
         colorway
             Sets the default trace colors.
@@ -2983,10 +2983,10 @@ class Layout(_BaseLayoutType):
             over one another, you might need to reduce "opacity" to
             see multiple bars.
         geo
-            :class:`plotly.graph_objects.layout.Geo` instance or
+            :class:`plotly.graph_objs.layout.Geo` instance or
             dict with compatible properties
         grid
-            :class:`plotly.graph_objects.layout.Grid` instance or
+            :class:`plotly.graph_objs.layout.Grid` instance or
             dict with compatible properties
         height
             Sets the plot's height (in px).
@@ -3015,7 +3015,7 @@ class Layout(_BaseLayoutType):
             these objects will not supersede hover on point-like
             objects in case of conflict.
         hoverlabel
-            :class:`plotly.graph_objects.layout.Hoverlabel`
+            :class:`plotly.graph_objs.layout.Hoverlabel`
             instance or dict with compatible properties
         hovermode
             Determines the mode of hover interactions. If
@@ -3046,23 +3046,23 @@ class Layout(_BaseLayoutType):
             new list here it can still be extended with lighter and
             darker colors, see `extendiciclecolors`.
         images
-            A tuple of :class:`plotly.graph_objects.layout.Image`
+            A tuple of :class:`plotly.graph_objs.layout.Image`
             instances or dicts with compatible properties
         imagedefaults
             When used in a template (as
             layout.template.layout.imagedefaults), sets the default
             property values to use for elements of layout.images
         legend
-            :class:`plotly.graph_objects.layout.Legend` instance or
+            :class:`plotly.graph_objs.layout.Legend` instance or
             dict with compatible properties
         map
-            :class:`plotly.graph_objects.layout.Map` instance or
+            :class:`plotly.graph_objs.layout.Map` instance or
             dict with compatible properties
         mapbox
-            :class:`plotly.graph_objects.layout.Mapbox` instance or
+            :class:`plotly.graph_objs.layout.Mapbox` instance or
             dict with compatible properties
         margin
-            :class:`plotly.graph_objects.layout.Margin` instance or
+            :class:`plotly.graph_objs.layout.Margin` instance or
             dict with compatible properties
         meta
             Assigns extra meta information that can be used in
@@ -3085,13 +3085,13 @@ class Layout(_BaseLayoutType):
             Minimum width of the plot with margin.automargin
             applied (in px)
         modebar
-            :class:`plotly.graph_objects.layout.Modebar` instance
+            :class:`plotly.graph_objs.layout.Modebar` instance
             or dict with compatible properties
         newselection
-            :class:`plotly.graph_objects.layout.Newselection`
+            :class:`plotly.graph_objs.layout.Newselection`
             instance or dict with compatible properties
         newshape
-            :class:`plotly.graph_objects.layout.Newshape` instance
+            :class:`plotly.graph_objs.layout.Newshape` instance
             or dict with compatible properties
         paper_bgcolor
             Sets the background color of the paper where the graph
@@ -3105,7 +3105,7 @@ class Layout(_BaseLayoutType):
             Sets the background color of the plotting area in-
             between x and y axes.
         polar
-            :class:`plotly.graph_objects.layout.Polar` instance or
+            :class:`plotly.graph_objs.layout.Polar` instance or
             dict with compatible properties
         scattergap
             Sets the gap (in plot fraction) between scatter points
@@ -3119,7 +3119,7 @@ class Layout(_BaseLayoutType):
             might need to reduce "opacity" to see multiple scatter
             points.
         scene
-            :class:`plotly.graph_objects.layout.Scene` instance or
+            :class:`plotly.graph_objs.layout.Scene` instance or
             dict with compatible properties
         selectdirection
             When `dragmode` is set to "select", this limits the
@@ -3132,7 +3132,7 @@ class Layout(_BaseLayoutType):
             points from all traces.
         selections
             A tuple of
-            :class:`plotly.graph_objects.layout.Selection`
+            :class:`plotly.graph_objs.layout.Selection`
             instances or dicts with compatible properties
         selectiondefaults
             When used in a template (as
@@ -3145,7 +3145,7 @@ class Layout(_BaseLayoutType):
             thousands. In English locales, dflt is ".," but other
             locales may alter this default.
         shapes
-            A tuple of :class:`plotly.graph_objects.layout.Shape`
+            A tuple of :class:`plotly.graph_objs.layout.Shape`
             instances or dicts with compatible properties
         shapedefaults
             When used in a template (as
@@ -3158,7 +3158,7 @@ class Layout(_BaseLayoutType):
             legend. b) One pie trace is shown in the legend. c) One
             trace is explicitly given with `showlegend: true`.
         sliders
-            A tuple of :class:`plotly.graph_objects.layout.Slider`
+            A tuple of :class:`plotly.graph_objs.layout.Slider`
             instances or dicts with compatible properties
         sliderdefaults
             When used in a template (as
@@ -3166,7 +3166,7 @@ class Layout(_BaseLayoutType):
             default property values to use for elements of
             layout.sliders
         smith
-            :class:`plotly.graph_objects.layout.Smith` instance or
+            :class:`plotly.graph_objs.layout.Smith` instance or
             dict with compatible properties
         spikedistance
             Sets the default distance (in pixels) to look for data
@@ -3204,10 +3204,10 @@ class Layout(_BaseLayoutType):
             an item with matching `templateitemname` and `visible:
             false`.
         ternary
-            :class:`plotly.graph_objects.layout.Ternary` instance
+            :class:`plotly.graph_objs.layout.Ternary` instance
             or dict with compatible properties
         title
-            :class:`plotly.graph_objects.layout.Title` instance or
+            :class:`plotly.graph_objs.layout.Title` instance or
             dict with compatible properties
         transition
             Sets transition options used during Plotly.react
@@ -3237,11 +3237,11 @@ class Layout(_BaseLayoutType):
             and the y axis range will reset but the x axis range
             will retain any user-driven zoom.
         uniformtext
-            :class:`plotly.graph_objects.layout.Uniformtext`
+            :class:`plotly.graph_objs.layout.Uniformtext`
             instance or dict with compatible properties
         updatemenus
             A tuple of
-            :class:`plotly.graph_objects.layout.Updatemenu`
+            :class:`plotly.graph_objs.layout.Updatemenu`
             instances or dicts with compatible properties
         updatemenudefaults
             When used in a template (as
@@ -3280,10 +3280,10 @@ class Layout(_BaseLayoutType):
         width
             Sets the plot's width (in px).
         xaxis
-            :class:`plotly.graph_objects.layout.XAxis` instance or
+            :class:`plotly.graph_objs.layout.XAxis` instance or
             dict with compatible properties
         yaxis
-            :class:`plotly.graph_objects.layout.YAxis` instance or
+            :class:`plotly.graph_objs.layout.YAxis` instance or
             dict with compatible properties
 
         Returns

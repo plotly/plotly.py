@@ -270,17 +270,17 @@ class Mapbox(_BaseLayoutHierarchyType):
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
         bounds
-            :class:`plotly.graph_objects.layout.mapbox.Bounds`
+            :class:`plotly.graph_objs.layout.mapbox.Bounds`
             instance or dict with compatible properties
         center
-            :class:`plotly.graph_objects.layout.mapbox.Center`
+            :class:`plotly.graph_objs.layout.mapbox.Center`
             instance or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.layout.mapbox.Domain`
+            :class:`plotly.graph_objs.layout.mapbox.Domain`
             instance or dict with compatible properties
         layers
             A tuple of
-            :class:`plotly.graph_objects.layout.mapbox.Layer`
+            :class:`plotly.graph_objs.layout.mapbox.Layer`
             instances or dicts with compatible properties
         layerdefaults
             When used in a template (as
@@ -360,17 +360,17 @@ class Mapbox(_BaseLayoutHierarchyType):
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
         bounds
-            :class:`plotly.graph_objects.layout.mapbox.Bounds`
+            :class:`plotly.graph_objs.layout.mapbox.Bounds`
             instance or dict with compatible properties
         center
-            :class:`plotly.graph_objects.layout.mapbox.Center`
+            :class:`plotly.graph_objs.layout.mapbox.Center`
             instance or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.layout.mapbox.Domain`
+            :class:`plotly.graph_objs.layout.mapbox.Domain`
             instance or dict with compatible properties
         layers
             A tuple of
-            :class:`plotly.graph_objects.layout.mapbox.Layer`
+            :class:`plotly.graph_objs.layout.mapbox.Layer`
             instances or dicts with compatible properties
         layerdefaults
             When used in a template (as

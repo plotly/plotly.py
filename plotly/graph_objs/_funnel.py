@@ -1509,7 +1509,7 @@ class Funnel(_BaseTraceType):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            :class:`plotly.graph_objects.funnel.Connector` instance
+            :class:`plotly.graph_objs.funnel.Connector` instance
             or dict with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
@@ -1535,7 +1535,7 @@ class Funnel(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.funnel.Hoverlabel`
+            :class:`plotly.graph_objs.funnel.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1604,7 +1604,7 @@ class Funnel(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.funnel.Legendgrouptitle`
+            :class:`plotly.graph_objs.funnel.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1621,7 +1621,7 @@ class Funnel(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.funnel.Marker` instance or
+            :class:`plotly.graph_objs.funnel.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1674,7 +1674,7 @@ class Funnel(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.funnel.Stream` instance or
+            :class:`plotly.graph_objs.funnel.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -1952,7 +1952,7 @@ class Funnel(_BaseTraceType):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            :class:`plotly.graph_objects.funnel.Connector` instance
+            :class:`plotly.graph_objs.funnel.Connector` instance
             or dict with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
@@ -1978,7 +1978,7 @@ class Funnel(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.funnel.Hoverlabel`
+            :class:`plotly.graph_objs.funnel.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -2047,7 +2047,7 @@ class Funnel(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.funnel.Legendgrouptitle`
+            :class:`plotly.graph_objs.funnel.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2064,7 +2064,7 @@ class Funnel(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.funnel.Marker` instance or
+            :class:`plotly.graph_objs.funnel.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -2117,7 +2117,7 @@ class Funnel(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.funnel.Stream` instance or
+            :class:`plotly.graph_objs.funnel.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If

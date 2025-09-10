@@ -59,7 +59,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker color of all intermediate sums and
             total values.
         line
-            :class:`plotly.graph_objects.waterfall.totals.marker.Li
+            :class:`plotly.graph_objs.waterfall.totals.marker.Li
             ne` instance or dict with compatible properties
         """
 
@@ -77,7 +77,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker color of all intermediate sums and
             total values.
         line
-            :class:`plotly.graph_objects.waterfall.totals.marker.Li
+            :class:`plotly.graph_objs.waterfall.totals.marker.Li
             ne` instance or dict with compatible properties
 
         Returns

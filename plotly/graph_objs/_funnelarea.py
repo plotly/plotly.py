@@ -1049,7 +1049,7 @@ class Funnelarea(_BaseTraceType):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            :class:`plotly.graph_objects.funnelarea.Domain`
+            :class:`plotly.graph_objs.funnelarea.Domain`
             instance or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1060,7 +1060,7 @@ class Funnelarea(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.funnelarea.Hoverlabel`
+            :class:`plotly.graph_objs.funnelarea.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1139,7 +1139,7 @@ class Funnelarea(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.funnelarea.Legendgrouptitl
+            :class:`plotly.graph_objs.funnelarea.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1156,7 +1156,7 @@ class Funnelarea(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.funnelarea.Marker`
+            :class:`plotly.graph_objs.funnelarea.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1188,7 +1188,7 @@ class Funnelarea(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.funnelarea.Stream`
+            :class:`plotly.graph_objs.funnelarea.Stream`
             instance or dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -1230,7 +1230,7 @@ class Funnelarea(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         title
-            :class:`plotly.graph_objects.funnelarea.Title` instance
+            :class:`plotly.graph_objs.funnelarea.Title` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -1348,7 +1348,7 @@ class Funnelarea(_BaseTraceType):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            :class:`plotly.graph_objects.funnelarea.Domain`
+            :class:`plotly.graph_objs.funnelarea.Domain`
             instance or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1359,7 +1359,7 @@ class Funnelarea(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.funnelarea.Hoverlabel`
+            :class:`plotly.graph_objs.funnelarea.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1438,7 +1438,7 @@ class Funnelarea(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.funnelarea.Legendgrouptitl
+            :class:`plotly.graph_objs.funnelarea.Legendgrouptitl
             e` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1455,7 +1455,7 @@ class Funnelarea(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.funnelarea.Marker`
+            :class:`plotly.graph_objs.funnelarea.Marker`
             instance or dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1487,7 +1487,7 @@ class Funnelarea(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.funnelarea.Stream`
+            :class:`plotly.graph_objs.funnelarea.Stream`
             instance or dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -1529,7 +1529,7 @@ class Funnelarea(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         title
-            :class:`plotly.graph_objects.funnelarea.Title` instance
+            :class:`plotly.graph_objs.funnelarea.Title` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object

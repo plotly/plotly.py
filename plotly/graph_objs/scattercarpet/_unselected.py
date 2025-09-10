@@ -52,10 +52,10 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :class:`plotly.graph_objects.scattercarpet.unselected.M
+            :class:`plotly.graph_objs.scattercarpet.unselected.M
             arker` instance or dict with compatible properties
         textfont
-            :class:`plotly.graph_objects.scattercarpet.unselected.T
+            :class:`plotly.graph_objs.scattercarpet.unselected.T
             extfont` instance or dict with compatible properties
         """
 
@@ -70,10 +70,10 @@ class Unselected(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.scattercarpet.Unselected`
         marker
-            :class:`plotly.graph_objects.scattercarpet.unselected.M
+            :class:`plotly.graph_objs.scattercarpet.unselected.M
             arker` instance or dict with compatible properties
         textfont
-            :class:`plotly.graph_objects.scattercarpet.unselected.T
+            :class:`plotly.graph_objs.scattercarpet.unselected.T
             extfont` instance or dict with compatible properties
 
         Returns

@@ -71,13 +71,13 @@ class Slices(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            :class:`plotly.graph_objects.volume.slices.X` instance
+            :class:`plotly.graph_objs.volume.slices.X` instance
             or dict with compatible properties
         y
-            :class:`plotly.graph_objects.volume.slices.Y` instance
+            :class:`plotly.graph_objs.volume.slices.Y` instance
             or dict with compatible properties
         z
-            :class:`plotly.graph_objects.volume.slices.Z` instance
+            :class:`plotly.graph_objs.volume.slices.Z` instance
             or dict with compatible properties
         """
 
@@ -91,13 +91,13 @@ class Slices(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.volume.Slices`
         x
-            :class:`plotly.graph_objects.volume.slices.X` instance
+            :class:`plotly.graph_objs.volume.slices.X` instance
             or dict with compatible properties
         y
-            :class:`plotly.graph_objects.volume.slices.Y` instance
+            :class:`plotly.graph_objs.volume.slices.Y` instance
             or dict with compatible properties
         z
-            :class:`plotly.graph_objects.volume.slices.Z` instance
+            :class:`plotly.graph_objs.volume.slices.Z` instance
             or dict with compatible properties
 
         Returns

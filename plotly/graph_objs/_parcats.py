@@ -580,7 +580,7 @@ class Parcats(_BaseTraceType):
             the default property values to use for elements of
             parcats.dimensions
         domain
-            :class:`plotly.graph_objects.parcats.Domain` instance
+            :class:`plotly.graph_objs.parcats.Domain` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -632,13 +632,13 @@ class Parcats(_BaseTraceType):
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
-            :class:`plotly.graph_objects.parcats.Legendgrouptitle`
+            :class:`plotly.graph_objs.parcats.Legendgrouptitle`
             instance or dict with compatible properties
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.parcats.Line` instance or
+            :class:`plotly.graph_objs.parcats.Line` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -665,7 +665,7 @@ class Parcats(_BaseTraceType):
             If `backward`, sort paths based on dimensions
             categories from right to left.
         stream
-            :class:`plotly.graph_objects.parcats.Stream` instance
+            :class:`plotly.graph_objs.parcats.Stream` instance
             or dict with compatible properties
         tickfont
             Sets the font for the `category` labels.
@@ -763,7 +763,7 @@ class Parcats(_BaseTraceType):
             the default property values to use for elements of
             parcats.dimensions
         domain
-            :class:`plotly.graph_objects.parcats.Domain` instance
+            :class:`plotly.graph_objs.parcats.Domain` instance
             or dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -815,13 +815,13 @@ class Parcats(_BaseTraceType):
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
-            :class:`plotly.graph_objects.parcats.Legendgrouptitle`
+            :class:`plotly.graph_objs.parcats.Legendgrouptitle`
             instance or dict with compatible properties
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
         line
-            :class:`plotly.graph_objects.parcats.Line` instance or
+            :class:`plotly.graph_objs.parcats.Line` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -848,7 +848,7 @@ class Parcats(_BaseTraceType):
             If `backward`, sort paths based on dimensions
             categories from right to left.
         stream
-            :class:`plotly.graph_objects.parcats.Stream` instance
+            :class:`plotly.graph_objs.parcats.Stream` instance
             or dict with compatible properties
         tickfont
             Sets the font for the `category` labels.

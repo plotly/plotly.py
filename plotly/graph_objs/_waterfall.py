@@ -1648,7 +1648,7 @@ class Waterfall(_BaseTraceType):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            :class:`plotly.graph_objects.waterfall.Connector`
+            :class:`plotly.graph_objs.waterfall.Connector`
             instance or dict with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
@@ -1662,7 +1662,7 @@ class Waterfall(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.waterfall.Decreasing`
+            :class:`plotly.graph_objs.waterfall.Decreasing`
             instance or dict with compatible properties
         dx
             Sets the x coordinate step. See `x0` for more info.
@@ -1677,7 +1677,7 @@ class Waterfall(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.waterfall.Hoverlabel`
+            :class:`plotly.graph_objs.waterfall.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1731,7 +1731,7 @@ class Waterfall(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.waterfall.Increasing`
+            :class:`plotly.graph_objs.waterfall.Increasing`
             instance or dict with compatible properties
         insidetextanchor
             Determines if texts are kept at center or start/end
@@ -1749,7 +1749,7 @@ class Waterfall(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.waterfall.Legendgrouptitle
+            :class:`plotly.graph_objs.waterfall.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1824,7 +1824,7 @@ class Waterfall(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.waterfall.Stream` instance
+            :class:`plotly.graph_objs.waterfall.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -1883,7 +1883,7 @@ class Waterfall(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         totals
-            :class:`plotly.graph_objects.waterfall.Totals` instance
+            :class:`plotly.graph_objs.waterfall.Totals` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -2117,7 +2117,7 @@ class Waterfall(_BaseTraceType):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            :class:`plotly.graph_objects.waterfall.Connector`
+            :class:`plotly.graph_objs.waterfall.Connector`
             instance or dict with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
@@ -2131,7 +2131,7 @@ class Waterfall(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         decreasing
-            :class:`plotly.graph_objects.waterfall.Decreasing`
+            :class:`plotly.graph_objs.waterfall.Decreasing`
             instance or dict with compatible properties
         dx
             Sets the x coordinate step. See `x0` for more info.
@@ -2146,7 +2146,7 @@ class Waterfall(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.waterfall.Hoverlabel`
+            :class:`plotly.graph_objs.waterfall.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -2200,7 +2200,7 @@ class Waterfall(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `ids`.
         increasing
-            :class:`plotly.graph_objects.waterfall.Increasing`
+            :class:`plotly.graph_objs.waterfall.Increasing`
             instance or dict with compatible properties
         insidetextanchor
             Determines if texts are kept at center or start/end
@@ -2218,7 +2218,7 @@ class Waterfall(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.waterfall.Legendgrouptitle
+            :class:`plotly.graph_objs.waterfall.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -2293,7 +2293,7 @@ class Waterfall(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            :class:`plotly.graph_objects.waterfall.Stream` instance
+            :class:`plotly.graph_objs.waterfall.Stream` instance
             or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -2352,7 +2352,7 @@ class Waterfall(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         totals
-            :class:`plotly.graph_objects.waterfall.Totals` instance
+            :class:`plotly.graph_objs.waterfall.Totals` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object

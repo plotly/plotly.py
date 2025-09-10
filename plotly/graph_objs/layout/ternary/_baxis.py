@@ -1083,7 +1083,7 @@ class Baxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.ternary.
+            A tuple of :class:`plotly.graph_objs.layout.ternary.
             baxis.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults
@@ -1135,7 +1135,7 @@ class Baxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.ternary.baxis.Title
+            :class:`plotly.graph_objs.layout.ternary.baxis.Title
             ` instance or dict with compatible properties
         uirevision
             Controls persistence of user-driven changes in axis
@@ -1346,7 +1346,7 @@ class Baxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.ternary.
+            A tuple of :class:`plotly.graph_objs.layout.ternary.
             baxis.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults
@@ -1398,7 +1398,7 @@ class Baxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.ternary.baxis.Title
+            :class:`plotly.graph_objs.layout.ternary.baxis.Title
             ` instance or dict with compatible properties
         uirevision
             Controls persistence of user-driven changes in axis

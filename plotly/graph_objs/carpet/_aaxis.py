@@ -1439,7 +1439,7 @@ class Aaxis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.carpet.aaxis.Ti
+            A tuple of :class:`plotly.graph_objs.carpet.aaxis.Ti
             ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -1468,7 +1468,7 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `tickvals`.
         title
-            :class:`plotly.graph_objects.carpet.aaxis.Title`
+            :class:`plotly.graph_objs.carpet.aaxis.Title`
             instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
@@ -1728,7 +1728,7 @@ class Aaxis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.carpet.aaxis.Ti
+            A tuple of :class:`plotly.graph_objs.carpet.aaxis.Ti
             ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
@@ -1757,7 +1757,7 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `tickvals`.
         title
-            :class:`plotly.graph_objects.carpet.aaxis.Title`
+            :class:`plotly.graph_objs.carpet.aaxis.Title`
             instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to

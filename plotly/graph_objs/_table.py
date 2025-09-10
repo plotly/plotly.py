@@ -562,7 +562,7 @@ class Table(_BaseTraceType):
     def _prop_descriptions(self):
         return """\
         cells
-            :class:`plotly.graph_objects.table.Cells` instance or
+            :class:`plotly.graph_objs.table.Cells` instance or
             dict with compatible properties
         columnorder
             Specifies the rendered order of the data columns; for
@@ -588,10 +588,10 @@ class Table(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.table.Domain` instance or
+            :class:`plotly.graph_objs.table.Domain` instance or
             dict with compatible properties
         header
-            :class:`plotly.graph_objects.table.Header` instance or
+            :class:`plotly.graph_objs.table.Header` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -602,7 +602,7 @@ class Table(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.table.Hoverlabel` instance
+            :class:`plotly.graph_objs.table.Hoverlabel` instance
             or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -618,7 +618,7 @@ class Table(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.table.Legendgrouptitle`
+            :class:`plotly.graph_objs.table.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -654,7 +654,7 @@ class Table(_BaseTraceType):
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         stream
-            :class:`plotly.graph_objects.table.Stream` instance or
+            :class:`plotly.graph_objs.table.Stream` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -730,7 +730,7 @@ class Table(_BaseTraceType):
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.Table`
         cells
-            :class:`plotly.graph_objects.table.Cells` instance or
+            :class:`plotly.graph_objs.table.Cells` instance or
             dict with compatible properties
         columnorder
             Specifies the rendered order of the data columns; for
@@ -756,10 +756,10 @@ class Table(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.table.Domain` instance or
+            :class:`plotly.graph_objs.table.Domain` instance or
             dict with compatible properties
         header
-            :class:`plotly.graph_objects.table.Header` instance or
+            :class:`plotly.graph_objs.table.Header` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -770,7 +770,7 @@ class Table(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.table.Hoverlabel` instance
+            :class:`plotly.graph_objs.table.Hoverlabel` instance
             or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -786,7 +786,7 @@ class Table(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.table.Legendgrouptitle`
+            :class:`plotly.graph_objs.table.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -822,7 +822,7 @@ class Table(_BaseTraceType):
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         stream
-            :class:`plotly.graph_objects.table.Stream` instance or
+            :class:`plotly.graph_objs.table.Stream` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object

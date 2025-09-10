@@ -70,7 +70,7 @@ class Threshold(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            :class:`plotly.graph_objects.indicator.gauge.threshold.
+            :class:`plotly.graph_objs.indicator.gauge.threshold.
             Line` instance or dict with compatible properties
         thickness
             Sets the thickness of the threshold line as a fraction
@@ -90,7 +90,7 @@ class Threshold(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.indicator.gauge.Threshold`
         line
-            :class:`plotly.graph_objects.indicator.gauge.threshold.
+            :class:`plotly.graph_objs.indicator.gauge.threshold.
             Line` instance or dict with compatible properties
         thickness
             Sets the thickness of the threshold line as a fraction

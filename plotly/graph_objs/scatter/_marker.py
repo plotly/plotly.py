@@ -814,7 +814,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.scatter.marker.ColorBar`
+            :class:`plotly.graph_objs.scatter.marker.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -834,10 +834,10 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `color`.
         gradient
-            :class:`plotly.graph_objects.scatter.marker.Gradient`
+            :class:`plotly.graph_objs.scatter.marker.Gradient`
             instance or dict with compatible properties
         line
-            :class:`plotly.graph_objects.scatter.marker.Line`
+            :class:`plotly.graph_objs.scatter.marker.Line`
             instance or dict with compatible properties
         maxdisplayed
             Sets a maximum number of points to be drawn on the
@@ -994,7 +994,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.scatter.marker.ColorBar`
+            :class:`plotly.graph_objs.scatter.marker.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1014,10 +1014,10 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `color`.
         gradient
-            :class:`plotly.graph_objects.scatter.marker.Gradient`
+            :class:`plotly.graph_objs.scatter.marker.Gradient`
             instance or dict with compatible properties
         line
-            :class:`plotly.graph_objects.scatter.marker.Line`
+            :class:`plotly.graph_objs.scatter.marker.Line`
             instance or dict with compatible properties
         maxdisplayed
             Sets a maximum number of points to be drawn on the

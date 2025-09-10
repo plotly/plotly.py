@@ -61,7 +61,7 @@ class Increasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            :class:`plotly.graph_objects.candlestick.increasing.Lin
+            :class:`plotly.graph_objs.candlestick.increasing.Lin
             e` instance or dict with compatible properties
         """
 
@@ -80,7 +80,7 @@ class Increasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            :class:`plotly.graph_objects.candlestick.increasing.Lin
+            :class:`plotly.graph_objs.candlestick.increasing.Lin
             e` instance or dict with compatible properties
 
         Returns

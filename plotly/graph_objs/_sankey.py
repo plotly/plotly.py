@@ -615,7 +615,7 @@ class Sankey(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.sankey.Domain` instance or
+            :class:`plotly.graph_objs.sankey.Domain` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -625,7 +625,7 @@ class Sankey(_BaseTraceType):
             superseded by `node.hoverinfo` and `node.hoverinfo` for
             nodes and links respectively.
         hoverlabel
-            :class:`plotly.graph_objects.sankey.Hoverlabel`
+            :class:`plotly.graph_objs.sankey.Hoverlabel`
             instance or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -641,7 +641,7 @@ class Sankey(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.sankey.Legendgrouptitle`
+            :class:`plotly.graph_objs.sankey.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -690,7 +690,7 @@ class Sankey(_BaseTraceType):
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
         stream
-            :class:`plotly.graph_objects.sankey.Stream` instance or
+            :class:`plotly.graph_objs.sankey.Stream` instance or
             dict with compatible properties
         textfont
             Sets the font for node labels
@@ -793,7 +793,7 @@ class Sankey(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.sankey.Domain` instance or
+            :class:`plotly.graph_objs.sankey.Domain` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -803,7 +803,7 @@ class Sankey(_BaseTraceType):
             superseded by `node.hoverinfo` and `node.hoverinfo` for
             nodes and links respectively.
         hoverlabel
-            :class:`plotly.graph_objects.sankey.Hoverlabel`
+            :class:`plotly.graph_objs.sankey.Hoverlabel`
             instance or dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -819,7 +819,7 @@ class Sankey(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.sankey.Legendgrouptitle`
+            :class:`plotly.graph_objs.sankey.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -868,7 +868,7 @@ class Sankey(_BaseTraceType):
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
         stream
-            :class:`plotly.graph_objects.sankey.Stream` instance or
+            :class:`plotly.graph_objs.sankey.Stream` instance or
             dict with compatible properties
         textfont
             Sets the font for node labels

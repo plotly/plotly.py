@@ -292,7 +292,7 @@ class Title(_BaseLayoutHierarchyType):
             automatically. Padding is muted if the respective
             anchor value is "middle*/*center".
         subtitle
-            :class:`plotly.graph_objects.layout.title.Subtitle`
+            :class:`plotly.graph_objs.layout.title.Subtitle`
             instance or dict with compatible properties
         text
             Sets the plot's title.
@@ -376,7 +376,7 @@ class Title(_BaseLayoutHierarchyType):
             automatically. Padding is muted if the respective
             anchor value is "middle*/*center".
         subtitle
-            :class:`plotly.graph_objects.layout.title.Subtitle`
+            :class:`plotly.graph_objs.layout.title.Subtitle`
             instance or dict with compatible properties
         text
             Sets the plot's title.

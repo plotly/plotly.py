@@ -150,7 +150,7 @@ class Step(_BaseTraceHierarchyType):
         color
             Sets the background color of the arc.
         line
-            :class:`plotly.graph_objects.indicator.gauge.step.Line`
+            :class:`plotly.graph_objs.indicator.gauge.step.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the
@@ -201,7 +201,7 @@ class Step(_BaseTraceHierarchyType):
         color
             Sets the background color of the arc.
         line
-            :class:`plotly.graph_objects.indicator.gauge.step.Line`
+            :class:`plotly.graph_objs.indicator.gauge.step.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the

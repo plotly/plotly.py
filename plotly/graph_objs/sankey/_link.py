@@ -502,7 +502,7 @@ class Link(_BaseTraceHierarchyType):
             grey link will be used.
         colorscales
             A tuple of
-            :class:`plotly.graph_objects.sankey.link.Colorscale`
+            :class:`plotly.graph_objs.sankey.link.Colorscale`
             instances or dicts with compatible properties
         colorscaledefaults
             When used in a template (as
@@ -532,7 +532,7 @@ class Link(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            :class:`plotly.graph_objects.sankey.link.Hoverlabel`
+            :class:`plotly.graph_objs.sankey.link.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -574,7 +574,7 @@ class Link(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `label`.
         line
-            :class:`plotly.graph_objects.sankey.link.Line` instance
+            :class:`plotly.graph_objs.sankey.link.Line` instance
             or dict with compatible properties
         source
             An integer number `[0..nodes.length - 1]` that
@@ -642,7 +642,7 @@ class Link(_BaseTraceHierarchyType):
             grey link will be used.
         colorscales
             A tuple of
-            :class:`plotly.graph_objects.sankey.link.Colorscale`
+            :class:`plotly.graph_objs.sankey.link.Colorscale`
             instances or dicts with compatible properties
         colorscaledefaults
             When used in a template (as
@@ -672,7 +672,7 @@ class Link(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            :class:`plotly.graph_objects.sankey.link.Hoverlabel`
+            :class:`plotly.graph_objs.sankey.link.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -714,7 +714,7 @@ class Link(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `label`.
         line
-            :class:`plotly.graph_objects.sankey.link.Line` instance
+            :class:`plotly.graph_objs.sankey.link.Line` instance
             or dict with compatible properties
         source
             An integer number `[0..nodes.length - 1]` that

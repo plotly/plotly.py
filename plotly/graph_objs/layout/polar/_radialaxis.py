@@ -1340,7 +1340,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
             a reversed axis. Using "reversed" applies autorange on
             both ends and reverses the axis direction.
         autorangeoptions
-            :class:`plotly.graph_objects.layout.polar.radialaxis.Au
+            :class:`plotly.graph_objs.layout.polar.radialaxis.Au
             torangeoptions` instance or dict with compatible
             properties
         autotickangles
@@ -1556,7 +1556,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.polar.ra
+            A tuple of :class:`plotly.graph_objs.layout.polar.ra
             dialaxis.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults
@@ -1608,7 +1608,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.polar.radialaxis.Ti
+            :class:`plotly.graph_objs.layout.polar.radialaxis.Ti
             tle` instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
@@ -1715,7 +1715,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
             a reversed axis. Using "reversed" applies autorange on
             both ends and reverses the axis direction.
         autorangeoptions
-            :class:`plotly.graph_objects.layout.polar.radialaxis.Au
+            :class:`plotly.graph_objs.layout.polar.radialaxis.Au
             torangeoptions` instance or dict with compatible
             properties
         autotickangles
@@ -1931,7 +1931,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.polar.ra
+            A tuple of :class:`plotly.graph_objs.layout.polar.ra
             dialaxis.Tickformatstop` instances or dicts with
             compatible properties
         tickformatstopdefaults
@@ -1983,7 +1983,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :class:`plotly.graph_objects.layout.polar.radialaxis.Ti
+            :class:`plotly.graph_objs.layout.polar.radialaxis.Ti
             tle` instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to

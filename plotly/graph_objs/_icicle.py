@@ -1128,7 +1128,7 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.icicle.Domain` instance or
+            :class:`plotly.graph_objs.icicle.Domain` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1139,7 +1139,7 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.icicle.Hoverlabel`
+            :class:`plotly.graph_objs.icicle.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1201,7 +1201,7 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `labels`.
         leaf
-            :class:`plotly.graph_objects.icicle.Leaf` instance or
+            :class:`plotly.graph_objs.icicle.Leaf` instance or
             dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -1210,7 +1210,7 @@ class Icicle(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.icicle.Legendgrouptitle`
+            :class:`plotly.graph_objs.icicle.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1233,7 +1233,7 @@ class Icicle(_BaseTraceType):
             filled in, otherwise plotly attempts to find a matching
             item in `labels`.
         marker
-            :class:`plotly.graph_objects.icicle.Marker` instance or
+            :class:`plotly.graph_objs.icicle.Marker` instance or
             dict with compatible properties
         maxdepth
             Sets the number of rendered sectors from any given
@@ -1278,16 +1278,16 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `parents`.
         pathbar
-            :class:`plotly.graph_objects.icicle.Pathbar` instance
+            :class:`plotly.graph_objs.icicle.Pathbar` instance
             or dict with compatible properties
         root
-            :class:`plotly.graph_objects.icicle.Root` instance or
+            :class:`plotly.graph_objs.icicle.Root` instance or
             dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.icicle.Stream` instance or
+            :class:`plotly.graph_objs.icicle.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -1327,7 +1327,7 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         tiling
-            :class:`plotly.graph_objects.icicle.Tiling` instance or
+            :class:`plotly.graph_objs.icicle.Tiling` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -1451,7 +1451,7 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         domain
-            :class:`plotly.graph_objects.icicle.Domain` instance or
+            :class:`plotly.graph_objs.icicle.Domain` instance or
             dict with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1462,7 +1462,7 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.icicle.Hoverlabel`
+            :class:`plotly.graph_objs.icicle.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1524,7 +1524,7 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `labels`.
         leaf
-            :class:`plotly.graph_objects.icicle.Leaf` instance or
+            :class:`plotly.graph_objs.icicle.Leaf` instance or
             dict with compatible properties
         legend
             Sets the reference to a legend to show this trace in.
@@ -1533,7 +1533,7 @@ class Icicle(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.icicle.Legendgrouptitle`
+            :class:`plotly.graph_objs.icicle.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1556,7 +1556,7 @@ class Icicle(_BaseTraceType):
             filled in, otherwise plotly attempts to find a matching
             item in `labels`.
         marker
-            :class:`plotly.graph_objects.icicle.Marker` instance or
+            :class:`plotly.graph_objs.icicle.Marker` instance or
             dict with compatible properties
         maxdepth
             Sets the number of rendered sectors from any given
@@ -1601,16 +1601,16 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `parents`.
         pathbar
-            :class:`plotly.graph_objects.icicle.Pathbar` instance
+            :class:`plotly.graph_objs.icicle.Pathbar` instance
             or dict with compatible properties
         root
-            :class:`plotly.graph_objects.icicle.Root` instance or
+            :class:`plotly.graph_objs.icicle.Root` instance or
             dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            :class:`plotly.graph_objects.icicle.Stream` instance or
+            :class:`plotly.graph_objs.icicle.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -1650,7 +1650,7 @@ class Icicle(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
         tiling
-            :class:`plotly.graph_objects.icicle.Tiling` instance or
+            :class:`plotly.graph_objs.icicle.Tiling` instance or
             dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object

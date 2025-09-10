@@ -75,7 +75,7 @@ class Connector(_BaseTraceHierarchyType):
         fillcolor
             Sets the fill color.
         line
-            :class:`plotly.graph_objects.funnel.connector.Line`
+            :class:`plotly.graph_objs.funnel.connector.Line`
             instance or dict with compatible properties
         visible
             Determines if connector regions and lines are drawn.
@@ -94,7 +94,7 @@ class Connector(_BaseTraceHierarchyType):
         fillcolor
             Sets the fill color.
         line
-            :class:`plotly.graph_objects.funnel.connector.Line`
+            :class:`plotly.graph_objs.funnel.connector.Line`
             instance or dict with compatible properties
         visible
             Determines if connector regions and lines are drawn.

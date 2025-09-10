@@ -70,7 +70,7 @@ class Marker(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            :class:`plotly.graph_objects.choroplethmap.marker.Line`
+            :class:`plotly.graph_objs.choroplethmap.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the opacity of the locations.
@@ -90,7 +90,7 @@ class Marker(_BaseTraceHierarchyType):
             an instance of
             :class:`plotly.graph_objs.choroplethmap.Marker`
         line
-            :class:`plotly.graph_objects.choroplethmap.marker.Line`
+            :class:`plotly.graph_objs.choroplethmap.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the opacity of the locations.

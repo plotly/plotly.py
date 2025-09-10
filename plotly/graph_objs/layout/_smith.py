@@ -95,13 +95,13 @@ class Smith(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the subplot
         domain
-            :class:`plotly.graph_objects.layout.smith.Domain`
+            :class:`plotly.graph_objs.layout.smith.Domain`
             instance or dict with compatible properties
         imaginaryaxis
-            :class:`plotly.graph_objects.layout.smith.Imaginaryaxis
+            :class:`plotly.graph_objs.layout.smith.Imaginaryaxis
             ` instance or dict with compatible properties
         realaxis
-            :class:`plotly.graph_objects.layout.smith.Realaxis`
+            :class:`plotly.graph_objs.layout.smith.Realaxis`
             instance or dict with compatible properties
         """
 
@@ -125,13 +125,13 @@ class Smith(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the subplot
         domain
-            :class:`plotly.graph_objects.layout.smith.Domain`
+            :class:`plotly.graph_objs.layout.smith.Domain`
             instance or dict with compatible properties
         imaginaryaxis
-            :class:`plotly.graph_objects.layout.smith.Imaginaryaxis
+            :class:`plotly.graph_objs.layout.smith.Imaginaryaxis
             ` instance or dict with compatible properties
         realaxis
-            :class:`plotly.graph_objects.layout.smith.Realaxis`
+            :class:`plotly.graph_objs.layout.smith.Realaxis`
             instance or dict with compatible properties
 
         Returns

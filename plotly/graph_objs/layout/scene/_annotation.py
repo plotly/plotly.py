@@ -863,7 +863,7 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            :class:`plotly.graph_objects.layout.scene.annotation.Ho
+            :class:`plotly.graph_objs.layout.scene.annotation.Ho
             verlabel` instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
@@ -1073,7 +1073,7 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            :class:`plotly.graph_objects.layout.scene.annotation.Ho
+            :class:`plotly.graph_objs.layout.scene.annotation.Ho
             verlabel` instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.

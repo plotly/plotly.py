@@ -534,10 +534,10 @@ class Indicator(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         delta
-            :class:`plotly.graph_objects.indicator.Delta` instance
+            :class:`plotly.graph_objs.indicator.Delta` instance
             or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.indicator.Domain` instance
+            :class:`plotly.graph_objs.indicator.Domain` instance
             or dict with compatible properties
         gauge
             The gauge of the Indicator plot.
@@ -555,7 +555,7 @@ class Indicator(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.indicator.Legendgrouptitle
+            :class:`plotly.graph_objs.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -597,13 +597,13 @@ class Indicator(_BaseTraceType):
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         number
-            :class:`plotly.graph_objects.indicator.Number` instance
+            :class:`plotly.graph_objs.indicator.Number` instance
             or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.indicator.Stream` instance
+            :class:`plotly.graph_objs.indicator.Stream` instance
             or dict with compatible properties
         title
-            :class:`plotly.graph_objects.indicator.Title` instance
+            :class:`plotly.graph_objs.indicator.Title` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -693,10 +693,10 @@ class Indicator(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         delta
-            :class:`plotly.graph_objects.indicator.Delta` instance
+            :class:`plotly.graph_objs.indicator.Delta` instance
             or dict with compatible properties
         domain
-            :class:`plotly.graph_objects.indicator.Domain` instance
+            :class:`plotly.graph_objs.indicator.Domain` instance
             or dict with compatible properties
         gauge
             The gauge of the Indicator plot.
@@ -714,7 +714,7 @@ class Indicator(_BaseTraceType):
             the layout, under `layout.legend`, `layout.legend2`,
             etc.
         legendgrouptitle
-            :class:`plotly.graph_objects.indicator.Legendgrouptitle
+            :class:`plotly.graph_objs.indicator.Legendgrouptitle
             ` instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -756,13 +756,13 @@ class Indicator(_BaseTraceType):
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         number
-            :class:`plotly.graph_objects.indicator.Number` instance
+            :class:`plotly.graph_objs.indicator.Number` instance
             or dict with compatible properties
         stream
-            :class:`plotly.graph_objects.indicator.Stream` instance
+            :class:`plotly.graph_objs.indicator.Stream` instance
             or dict with compatible properties
         title
-            :class:`plotly.graph_objects.indicator.Title` instance
+            :class:`plotly.graph_objs.indicator.Title` instance
             or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object

@@ -938,11 +938,11 @@ class Splom(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         diagonal
-            :class:`plotly.graph_objects.splom.Diagonal` instance
+            :class:`plotly.graph_objs.splom.Diagonal` instance
             or dict with compatible properties
         dimensions
             A tuple of
-            :class:`plotly.graph_objects.splom.Dimension` instances
+            :class:`plotly.graph_objs.splom.Dimension` instances
             or dicts with compatible properties
         dimensiondefaults
             When used in a template (as
@@ -958,7 +958,7 @@ class Splom(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.splom.Hoverlabel` instance
+            :class:`plotly.graph_objs.splom.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1015,7 +1015,7 @@ class Splom(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.splom.Legendgrouptitle`
+            :class:`plotly.graph_objs.splom.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1032,7 +1032,7 @@ class Splom(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.splom.Marker` instance or
+            :class:`plotly.graph_objs.splom.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1056,7 +1056,7 @@ class Splom(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.splom.Selected` instance
+            :class:`plotly.graph_objs.splom.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1075,7 +1075,7 @@ class Splom(_BaseTraceType):
             Determines whether or not subplots on the upper half
             from the diagonal are displayed.
         stream
-            :class:`plotly.graph_objects.splom.Stream` instance or
+            :class:`plotly.graph_objs.splom.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair to
@@ -1109,7 +1109,7 @@ class Splom(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.splom.Unselected` instance
+            :class:`plotly.graph_objs.splom.Unselected` instance
             or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -1230,11 +1230,11 @@ class Splom(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `customdata`.
         diagonal
-            :class:`plotly.graph_objects.splom.Diagonal` instance
+            :class:`plotly.graph_objs.splom.Diagonal` instance
             or dict with compatible properties
         dimensions
             A tuple of
-            :class:`plotly.graph_objects.splom.Dimension` instances
+            :class:`plotly.graph_objs.splom.Dimension` instances
             or dicts with compatible properties
         dimensiondefaults
             When used in a template (as
@@ -1250,7 +1250,7 @@ class Splom(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `hoverinfo`.
         hoverlabel
-            :class:`plotly.graph_objects.splom.Hoverlabel` instance
+            :class:`plotly.graph_objs.splom.Hoverlabel` instance
             or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1307,7 +1307,7 @@ class Splom(_BaseTraceType):
             part of the same legend group hide/show at the same
             time when toggling legend items.
         legendgrouptitle
-            :class:`plotly.graph_objects.splom.Legendgrouptitle`
+            :class:`plotly.graph_objs.splom.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
             Sets the legend rank for this trace. Items and groups
@@ -1324,7 +1324,7 @@ class Splom(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         marker
-            :class:`plotly.graph_objects.splom.Marker` instance or
+            :class:`plotly.graph_objs.splom.Marker` instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -1348,7 +1348,7 @@ class Splom(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            :class:`plotly.graph_objects.splom.Selected` instance
+            :class:`plotly.graph_objs.splom.Selected` instance
             or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -1367,7 +1367,7 @@ class Splom(_BaseTraceType):
             Determines whether or not subplots on the upper half
             from the diagonal are displayed.
         stream
-            :class:`plotly.graph_objects.splom.Stream` instance or
+            :class:`plotly.graph_objs.splom.Stream` instance or
             dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair to
@@ -1401,7 +1401,7 @@ class Splom(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            :class:`plotly.graph_objects.splom.Unselected` instance
+            :class:`plotly.graph_objs.splom.Unselected` instance
             or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If

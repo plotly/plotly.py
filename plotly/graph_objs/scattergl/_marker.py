@@ -705,7 +705,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.scattergl.marker.ColorBar`
+            :class:`plotly.graph_objs.scattergl.marker.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -725,7 +725,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `color`.
         line
-            :class:`plotly.graph_objects.scattergl.marker.Line`
+            :class:`plotly.graph_objs.scattergl.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the marker opacity.
@@ -861,7 +861,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :class:`plotly.graph_objects.scattergl.marker.ColorBar`
+            :class:`plotly.graph_objs.scattergl.marker.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -881,7 +881,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the source reference on Chart Studio Cloud for
             `color`.
         line
-            :class:`plotly.graph_objects.scattergl.marker.Line`
+            :class:`plotly.graph_objs.scattergl.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the marker opacity.
