@@ -463,7 +463,7 @@ class Scatterternary(_BaseTraceType):
         Sets hover text elements associated with each (a,b,c) point. If
         a single string, the same string appears over all the data
         points. If an array of strings, the items are mapped in order
-        to the the data points in (a,b,c). To be seen, trace
+        of the data points in (a,b,c). To be seen, trace
         `hoverinfo` must contain a "text" flag.
 
         The 'hovertext' property is a string and must be specified as:
@@ -921,7 +921,7 @@ class Scatterternary(_BaseTraceType):
         Sets text elements associated with each (a,b,c) point. If a
         single string, the same string appears over all the data
         points. If an array of strings, the items are mapped in order
-        to the the data points in (a,b,c). If trace `hoverinfo`
+        of the data points in (a,b,c). If trace `hoverinfo`
         contains a "text" flag and "hovertext" is not set, these
         elements will be seen in the hover labels.
 
@@ -1283,7 +1283,7 @@ class Scatterternary(_BaseTraceType):
             Sets hover text elements associated with each (a,b,c)
             point. If a single string, the same string appears over
             all the data points. If an array of strings, the items
-            are mapped in order to the the data points in (a,b,c).
+            are mapped in order of the data points in (a,b,c).
             To be seen, trace `hoverinfo` must contain a "text"
             flag.
         hovertextsrc
@@ -1389,7 +1389,7 @@ class Scatterternary(_BaseTraceType):
             Sets text elements associated with each (a,b,c) point.
             If a single string, the same string appears over all
             the data points. If an array of strings, the items are
-            mapped in order to the the data points in (a,b,c). If
+            mapped in order of the data points in (a,b,c). If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
@@ -1637,7 +1637,7 @@ class Scatterternary(_BaseTraceType):
             Sets hover text elements associated with each (a,b,c)
             point. If a single string, the same string appears over
             all the data points. If an array of strings, the items
-            are mapped in order to the the data points in (a,b,c).
+            are mapped in order of the data points in (a,b,c).
             To be seen, trace `hoverinfo` must contain a "text"
             flag.
         hovertextsrc
@@ -1743,7 +1743,7 @@ class Scatterternary(_BaseTraceType):
             Sets text elements associated with each (a,b,c) point.
             If a single string, the same string appears over all
             the data points. If an array of strings, the items are
-            mapped in order to the the data points in (a,b,c). If
+            mapped in order of the data points in (a,b,c). If
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.

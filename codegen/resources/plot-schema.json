@@ -47008,7 +47008,7 @@
      "editType": "calc",
      "role": "object",
      "side": {
-      "description": "Determines on which side of the the treemap the `pathbar` should be presented.",
+      "description": "Determines on which side of the treemap the `pathbar` should be presented.",
       "dflt": "top",
       "editType": "plot",
       "valType": "enumerated",
@@ -64477,7 +64477,7 @@
     },
     "hovertext": {
      "arrayOk": true,
-     "description": "Sets hover text elements associated with each (a,b) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order to the the data points in (a,b). To be seen, trace `hoverinfo` must contain a *text* flag.",
+     "description": "Sets hover text elements associated with each (a,b) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order of the data points in (a,b). To be seen, trace `hoverinfo` must contain a *text* flag.",
      "dflt": "",
      "editType": "style",
      "valType": "string"
@@ -66186,7 +66186,7 @@
     },
     "text": {
      "arrayOk": true,
-     "description": "Sets text elements associated with each (a,b) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order to the the data points in (a,b). If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
+     "description": "Sets text elements associated with each (a,b) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order of the data points in (a,b). If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
      "dflt": "",
      "editType": "calc",
      "valType": "string"
@@ -81356,7 +81356,7 @@
     },
     "hovertext": {
      "arrayOk": true,
-     "description": "Sets hover text elements associated with each (a,b,c) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order to the the data points in (a,b,c). To be seen, trace `hoverinfo` must contain a *text* flag.",
+     "description": "Sets hover text elements associated with each (a,b,c) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order of the data points in (a,b,c). To be seen, trace `hoverinfo` must contain a *text* flag.",
      "dflt": "",
      "editType": "style",
      "valType": "string"
@@ -83078,7 +83078,7 @@
     },
     "text": {
      "arrayOk": true,
-     "description": "Sets text elements associated with each (a,b,c) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order to the the data points in (a,b,c). If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
+     "description": "Sets text elements associated with each (a,b,c) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order of the data points in (a,b,c). If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
      "dflt": "",
      "editType": "calc",
      "valType": "string"
@@ -93092,7 +93092,7 @@
      "editType": "calc",
      "role": "object",
      "side": {
-      "description": "Determines on which side of the the treemap the `pathbar` should be presented.",
+      "description": "Determines on which side of the treemap the `pathbar` should be presented.",
       "dflt": "top",
       "editType": "plot",
       "valType": "enumerated",
