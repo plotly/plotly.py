@@ -1,6 +1,13 @@
 site_name: "Plotly.py Docs"
+site_url: 'https://plotly.com/python/'
 docs_dir: pages
 site_dir: docs
+
+validation:
+  absolute_links: relative_to_docs
+  anchors: info
+  unrecognized_links: info
+  not_found: info
 
 plugins:
   - search
@@ -214,5 +221,8 @@ markdown_extensions:
     base_path: docs
 - footnotes
 
-exclude_docs: >
+exclude_docs: |
   *~
+  examples/dash.md
+  examples/ml_apps.md
+  examples/orca-management.md
