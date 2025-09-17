@@ -228,7 +228,6 @@ theme:
     - content.code.copy
     - content.code.annotate
   logo: https://docs.plotly.com/assets/plotly_logo_square.png
-  repo_url: https://github.com/plotly/plotly.py
 markdown_extensions:
 - def_list
 - markdown_include.include:
