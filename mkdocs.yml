@@ -34,7 +34,7 @@ extra_css:
 nav:
 - Home: index.md
 - Getting Started: examples/getting-started.md
-- 3d_charts: 
+- 3D Charts: 
   - 3D Axes: examples/3d-axes.md
   - 3D Scatter Plots: examples/3d-scatter-plots.md
   - 3D Surface Plots: examples/3d-surface-plots.md
@@ -48,22 +48,22 @@ nav:
   - 3D Volume Plots: examples/3d-volume.md
   - 3D Cone Plots: examples/cone-plot.md
   - 3D Streamtube Plots: examples/streamtube-plot.md
-- advanced_opt: 
+- Advanced Options: 
   - Plot CSV Data: examples/plot-data-from-csv.md
   - Random Walk: examples/random-walk.md
   - Peak Finding: examples/peak-finding.md
   - Smoothing: examples/smoothing.md
   - LaTeX: examples/LaTeX.md
-- ai_ml:
+- AI & ML:
   - ML Regression: examples/ml-regression.md
   - kNN Classification: examples/ml-knn.md
   - ROC and PR Curves: examples/ml-roc-pr.md
   - PCA Visualization: examples/ml-pca.md
   - AI/ML Apps with Dash: https://plotly.com/building-machine-learning-web-apps-in-python/
   - t-SNE and UMAP projections: examples/ml-tsne-umap-projections.md
-- animations:
+- Animations:
   - Intro to Animations: examples/animations.md
-- basic:
+- Basic:
   - Scatter Plots: examples/line-and-scatter.md
   - Line Charts: examples/line-charts.md
   - Bar Charts: examples/bar-charts.md
@@ -83,22 +83,22 @@ nav:
   - Icicle Charts: examples/icicle-charts.md
   - Patterns, Hatching, Texture: examples/pattern-hatching-texture.md
   - Dumbbell Plots: examples/dumbbell-plots.md
-- bio:
+- Bio:
   - Alignment Chart: examples/bio-alignment-chart.md
   - Clustergram: examples/bio-clustergram.md
   - Manhattan Plot: examples/bio-manhattanplot.md
   - Volcano Plot: examples/bio-volcano-plot.md
-- chart_events:
+- Chart Events:
   - Plotly FigureWidget Overview: examples/figurewidget.md
   - Jupyter Lab with FigureWidget: examples/jupyter-lab-tools.md
   - Interactive Data Analysis with FigureWidget ipywidgets: examples/figurewidget-app.md
   - Click Events: examples/click-events.md
-- controls: 
+- Controls: 
   - Custom Buttons: examples/custom-buttons.md
   - Sliders: examples/sliders.md
   - Dropdown Menus: examples/dropdowns.md
   - Range Slider and Selector: examples/range-slider.md
-- fundamentals: 
+- Fundamentals: 
   - The Figure Data Structure: examples/figure-structure.md
   - Creating and Updating Figures: examples/creating-and-updating-figures.md
   - Displaying Figures: examples/renderers.md
@@ -139,7 +139,7 @@ nav:
   - Version 4 Migration Guide: examples/v4-migration.md
   - Static Image Generation Changes in Plotly.py 6.1: examples/static-image-generation-migration.md
   - Supported CSS Colors: examples/supported-colors.md
-- financial: 
+- Financial: 
   - Time Series and Date Axes: examples/time-series.md
   - Candlestick Charts: examples/candlestick-charts.md
   - Waterfall Charts: examples/waterfall-charts.md
@@ -148,7 +148,7 @@ nav:
   - Indicators: examples/indicator.md
   - Gauge Charts: examples/gauge-charts.md
   - Bullet Charts: examples/bullet-charts.md
-- maps: 
+- Maps: 
   - MapLibre Migration: examples/migrate-to-maplibre.md
   - Tile Choropleth Maps: examples/tile-county-choropleth.md
   - Lines on Tile Maps: examples/lines-on-tile-maps.md
@@ -163,12 +163,12 @@ nav:
   - Scatter Plots on Maps: examples/scatter-plots-on-maps.md
   - Map Configuration and Styling on Geo Maps: examples/map-configuration.md
   - Hexbin Mapbox: examples/hexbin-mapbox.md
-- multiple_axes: 
+- Multiple Axes: 
   - Mixed Subplots: examples/mixed-subplots.md
   - Map Subplots: examples/map-subplots-and-small-multiples.md
   - Table and Chart Subplots: examples/table-subplots.md
   - Figure Factory Subplots: examples/figure-factory-subplots.md
-- scientific: 
+- Scientific: 
   - Contour Plots: examples/contour-plots.md
   - Heatmaps: examples/heatmaps.md
   - Imshow: examples/imshow.md
@@ -189,7 +189,7 @@ nav:
   - Ternary contours: examples/ternary-contour.md
   - Wind Rose and Polar Bar Charts: examples/wind-rose-charts.md
   - Smith Charts: examples/smith-charts.md
-- statistical: 
+- Statistical: 
   - Error Bars: examples/error-bars.md
   - Box Plots: examples/box-plots.md
   - Histograms: examples/histograms.md
