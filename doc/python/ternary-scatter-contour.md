@@ -114,7 +114,6 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-
 contour_dict = contour_raw_data['Data']
 
 # Defining a colormap:

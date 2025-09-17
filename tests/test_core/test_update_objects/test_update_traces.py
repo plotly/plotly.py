@@ -3,7 +3,7 @@ import inspect
 import copy
 import pytest
 
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from functools import reduce
 

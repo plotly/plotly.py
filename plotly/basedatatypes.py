@@ -303,7 +303,7 @@ x-dimension.
 
 Parameters
 ----------
-y: float or int
+y : float or int
     A number representing the y coordinate of the horizontal line."""
     elif shape_type == "vline":
         docstr = """
@@ -312,7 +312,7 @@ y-dimension.
 
 Parameters
 ----------
-x: float or int
+x : float or int
     A number representing the x coordinate of the vertical line."""
     elif shape_type == "hrect":
         docstr = """
@@ -321,9 +321,9 @@ x-dimension.
 
 Parameters
 ----------
-y0: float or int
+y0 : float or int
     A number representing the y coordinate of one side of the rectangle.
-y1: float or int
+y1 : float or int
     A number representing the y coordinate of the other side of the rectangle."""
     elif shape_type == "vrect":
         docstr = """
@@ -332,49 +332,49 @@ y-dimension.
 
 Parameters
 ----------
-x0: float or int
+x0 : float or int
     A number representing the x coordinate of one side of the rectangle.
-x1: float or int
+x1 : float or int
     A number representing the x coordinate of the other side of the rectangle."""
     docstr += """
-exclude_empty_subplots: Boolean
+exclude_empty_subplots : Boolean
     If True (default) do not place the shape on subplots that have no data
     plotted on them.
-row: None, int or 'all'
+row : None, int or 'all'
     Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
     the specified column(s). If both row and col are None, addresses the
     first subplot if subplots exist, or the only plot. By default is "all".
-col: None, int or 'all'
+col : None, int or 'all'
     Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
     the specified column(s). If both row and col are None, addresses the
     first subplot if subplots exist, or the only plot. By default is "all".
-annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
-    it is interpreted as describing an annotation. The annotation is
+annotation : dict or plotly.graph_objs.layout.Annotation
+    If dict(), it is interpreted as describing an annotation. The annotation is
     placed relative to the shape based on annotation_position (see
     below) unless its x or y value has been specified for the annotation
     passed here. xref and yref are always the same as for the added
     shape and cannot be overridden."""
     if shape_type in ["hline", "vline"]:
         docstr += """
-annotation_position: a string containing optionally ["top", "bottom"]
-    and ["left", "right"] specifying where the text should be anchored
+annotation_position : a string containing optionally ["top", "bottom"] and ["left", "right"] 
+    Specifies where the text should be anchored
     to on the line. Example positions are "bottom left", "right top",
     "right", "bottom". If an annotation is added but annotation_position is
     not specified, this defaults to "top right"."""
     elif shape_type in ["hrect", "vrect"]:
         docstr += """
-annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
-    and ["left", "right"] specifying where the text should be anchored
+annotation_position : a string containing optionally ["inside", "outside"], ["top", "bottom"] and ["left", "right"] 
+    Specifies where the text should be anchored
     to on the rectangle. Example positions are "outside top left", "inside
     bottom", "right", "inside left", "inside" ("outside" is not supported). If
     an annotation is added but annotation_position is not specified this
     defaults to "inside top right"."""
     docstr += """
-annotation_*: any parameters to go.layout.Annotation can be passed as
+annotation_* : any parameters to go.layout.Annotation can be passed as
     keywords by prefixing them with "annotation_". For example, to specify the
     annotation text "example" you can pass annotation_text="example" as a
     keyword argument.
-**kwargs:
+**kwargs :
     Any named function parameters that can be passed to 'add_shape',
     except for x0, x1, y0, y1 or type."""
     return docstr
@@ -430,7 +430,7 @@ class BaseFigure(object):
         Parameters
         ----------
         data
-            One of:
+            One of:\n
             - A list or tuple of trace objects (or dicts that can be coerced
             into trace objects)
 
@@ -451,7 +451,7 @@ class BaseFigure(object):
             If the `data` property is a BaseFigure instance, or a dict that
             contains a 'layout' key, then this property is ignored.
         frames
-            A list or tuple of `plotly.graph_objs.Frame` objects (or dicts
+            A list or tuple of `plotly.graph_objects.Frame` objects (or dicts
             that can be coerced into Frame objects)
 
             If the `data` property is a BaseFigure instance, or a dict that
@@ -871,7 +871,7 @@ class BaseFigure(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
@@ -880,7 +880,7 @@ class BaseFigure(object):
 
         Examples
         --------
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> fig = go.Figure(data=[{'y': [1, 2, 3]}])
         >>> fig.update(data=[{'y': [4, 5, 6]}]) # doctest: +ELLIPSIS
         Figure(...)
@@ -938,9 +938,9 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        key: str
+        key : str
             Property name
-        dflt
+        dflt :
             The default value to return if key was not found in figure
 
         Returns
@@ -1119,7 +1119,7 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        selector: dict, function, int, str or None (default None)
+        selector : dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1130,12 +1130,12 @@ class BaseFigure(object):
             will be in the selection. If an int N, the Nth trace matching row
             and col will be selected (N can be negative). If a string S, the selector
             is equivalent to dict(type=S).
-        row, col: int or None (default None)
+        row, col : int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             * If True, only select traces associated with the secondary
               y-axis of the subplot.
             * If False, only select traces associated with the primary
@@ -1281,7 +1281,7 @@ class BaseFigure(object):
         ----------
         fn:
             Function that inputs a single trace object.
-        selector: dict, function, int, str or None (default None)
+        selector : dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1292,12 +1292,12 @@ class BaseFigure(object):
             will be in the selection. If an int N, the Nth trace matching row
             and col will be selected (N can be negative). If a string S, the selector
             is equivalent to dict(type=S).
-        row, col: int or None (default None)
+        row, col : int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             * If True, only select traces associated with the secondary
               y-axis of the subplot.
             * If False, only select traces associated with the primary
@@ -1337,10 +1337,10 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        patch: dict or None (default None)
+        patch : dict or None (default None)
             Dictionary of property updates to be applied to all traces that
             satisfy the selection criteria.
-        selector: dict, function, int, str or None (default None)
+        selector : dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1351,12 +1351,12 @@ class BaseFigure(object):
             will be in the selection. If an int N, the Nth trace matching row
             and col will be selected (N can be negative). If a string S, the selector
             is equivalent to dict(type=S).
-        row, col: int or None (default None)
+        row, col : int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             * If True, only select traces associated with the secondary
               y-axis of the subplot.
             * If False, only select traces associated with the primary
@@ -1368,14 +1368,14 @@ class BaseFigure(object):
             created using plotly.subplots.make_subplots. See the docstring
             for the specs argument to make_subplots for more info on
             creating subplots with secondary y-axes.
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
         **kwargs
             Additional property updates to apply to each selected trace. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+            a property is specified in both patch and in \\\\*\\\\*kwargs then the
+            one in \\\\*\\\\*kwargs takes precedence.
 
         Returns
         -------
@@ -1400,7 +1400,7 @@ class BaseFigure(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
@@ -1664,9 +1664,11 @@ is of type {subplot_type}.""".format(
             example, the following command would be used to update the 'x'
             property of the first trace to the list [1, 2, 3]
 
-            >>> import plotly.graph_objects as go
+            ```python
+            >>> import plotly.graph_objs as go
             >>> fig = go.Figure(go.Scatter(x=[2, 4, 6]))
             >>> fig.plotly_restyle({'x': [[1, 2, 3]]}, 0)
+            ```
 
         trace_indexes : int or list of int
             Trace index, or list of trace indexes, that the restyle operation
@@ -2030,9 +2032,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         Parameters
         ----------
         trace : BaseTraceType or dict
-            Either:
-              - An instances of a trace classe from the plotly.graph_objs
-                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+            Either:\n
+              - An instances of a trace classe from the plotly.graph_objects
+                package (e.g plotly.graph_objects.Scatter, plotly.graph_objects.Bar)
               - or a dicts where:
 
                   - The 'type' property specifies the trace type (e.g.
@@ -2051,10 +2053,10 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`.
             If 'all', addresses all columns in the specified row(s).
-        secondary_y: boolean or None (default None)
+        secondary_y : boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
-            following conditions are satisfied:
+            following conditions are satisfied:\n
               * The figure was created using `plotly.subplots.make_subplots`.
               * The row and col arguments are not None
               * The subplot at the specified row and col has type xy
@@ -2075,7 +2077,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         --------
 
         >>> from plotly import subplots
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
 
         Add two Scatter traces to a figure
 
@@ -2145,8 +2147,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             A list of trace specifications to be added.
             Trace specifications may be either:
 
-              - Instances of trace classes from the plotly.graph_objs
-                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - Instances of trace classes from the plotly.graph_objects
+                package (e.g plotly.graph_objects.Scatter, plotly.graph_objects.Bar)
               - Dicts where:
 
                   - The 'type' property specifies the trace type (e.g.
@@ -2168,11 +2170,11 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             If a single integer is passed, all traces will be added to column number
 
 
-        secondary_ys: None or list[boolean] (default None)
+        secondary_ys : None or list[boolean] (default None)
             List of secondary_y booleans for traces to be added. See the
             docstring for `add_trace` for more info.
 
-        exclude_empty_subplots: boolean
+        exclude_empty_subplots : boolean
             If True, the trace will not be added to subplots that don't already
             have traces.
 
@@ -2185,7 +2187,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         --------
 
         >>> from plotly import subplots
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
 
         Add two Scatter traces to a figure
 
@@ -2306,22 +2308,22 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         ----------
         trace
             The data trace to be bound
-        row: int
+        row : int
             Subplot row index (see Figure.print_grid)
-        col: int
+        col : int
             Subplot column index (see Figure.print_grid)
 
         Examples
         --------
 
         >>> from plotly import tools
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> # stack two subplots vertically
         >>> fig = tools.make_subplots(rows=2)
 
         This is the format of your plot grid:
-        [ (1,1) x1,y1 ]
-        [ (2,1) x2,y2 ]
+        \\[ (1,1) x1,y1 \\]
+        \\[ (2,1) x2,y2 \\]
 
         >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
         >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
@@ -2409,11 +2411,11 @@ Please use the add_trace method with the row and col parameters.
 
         Parameters
         ----------
-        row: int
+        row : int
             1-based index of subplot row
-        col: int
+        col : int
             1-based index of subplot column
-        secondary_y: bool
+        secondary_y : bool
             If True, select the subplot that consists of the x-axis and the
             secondary y-axis at the specified row/col. Only valid if the
             subplot at row/col is an 2D cartesian subplot that was created
@@ -2424,18 +2426,18 @@ Please use the add_trace method with the row and col parameters.
         -------
         subplot
             * None: if subplot is empty
-            * plotly.graph_objs.layout.Scene: if subplot type is 'scene'
-            * plotly.graph_objs.layout.Polar: if subplot type is 'polar'
-            * plotly.graph_objs.layout.Ternary: if subplot type is 'ternary'
-            * plotly.graph_objs.layout.Mapbox: if subplot type is 'ternary'
+            * plotly.graph_objects.layout.Scene: if subplot type is 'scene'
+            * plotly.graph_objects.layout.Polar: if subplot type is 'polar'
+            * plotly.graph_objects.layout.Ternary: if subplot type is 'ternary'
+            * plotly.graph_objects.layout.Mapbox: if subplot type is 'ternary'
             * SubplotDomain namedtuple with `x` and `y` fields:
               if subplot type is 'domain'.
                 - x: length 2 list of the subplot start and stop width
                 - y: length 2 list of the subplot start and stop height
             * SubplotXY namedtuple with `xaxis` and `yaxis` fields:
               if subplot type is 'xy'.
-                - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
-                - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
+                - xaxis: plotly.graph_objects.layout.XAxis instance for subplot
+                - yaxis: plotly.graph_objects.layout.YAxis instance for subplot
         """
         from plotly._subplots import _get_grid_subplot
 
@@ -2554,7 +2556,7 @@ Please use the add_trace method with the row and col parameters.
 
         Returns
         -------
-        plotly.graph_objs.Layout
+        plotly.graph_objects.Layout
         """
         return self["layout"]
 
@@ -2859,7 +2861,7 @@ Invalid property path '{key_path_str}' for layout
 
         Returns
         -------
-        tuple[plotly.graph_objs.Frame]
+        tuple[plotly.graph_objects.Frame]
         """
         return self["frames"]
 
@@ -3020,7 +3022,7 @@ Invalid property path '{key_path_str}' for layout
         For example, suppose we have a figure widget, `fig`, with a single
         trace.
 
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> fig = go.FigureWidget(data=[{'y': [3, 4, 2]}])
 
         If we want to update the xaxis range, the yaxis range, and the
@@ -3134,49 +3136,49 @@ Invalid property path '{key_path_str}' for layout
             If equal to zero, updates are synchronous.
         easing : string
             The easing function used for the transition.
-            One of:
-                - linear
-                - quad
-                - cubic
-                - sin
-                - exp
-                - circle
-                - elastic
-                - back
-                - bounce
-                - linear-in
-                - quad-in
-                - cubic-in
-                - sin-in
-                - exp-in
-                - circle-in
-                - elastic-in
-                - back-in
-                - bounce-in
-                - linear-out
-                - quad-out
-                - cubic-out
-                - sin-out
-                - exp-out
-                - circle-out
-                - elastic-out
-                - back-out
-                - bounce-out
-                - linear-in-out
-                - quad-in-out
-                - cubic-in-out
-                - sin-in-out
-                - exp-in-out
-                - circle-in-out
-                - elastic-in-out
-                - back-in-out
-                - bounce-in-out
+            One of:\n
+            - linear
+            - quad
+            - cubic
+            - sin
+            - exp
+            - circle
+            - elastic
+            - back
+            - bounce
+            - linear-in
+            - quad-in
+            - cubic-in
+            - sin-in
+            - exp-in
+            - circle-in
+            - elastic-in
+            - back-in
+            - bounce-in
+            - linear-out
+            - quad-out
+            - cubic-out
+            - sin-out
+            - exp-out
+            - circle-out
+            - elastic-out
+            - back-out
+            - bounce-out
+            - linear-in-out
+            - quad-in-out
+            - cubic-in-out
+            - sin-in-out
+            - exp-in-out
+            - circle-in-out
+            - elastic-in-out
+            - back-in-out
+            - bounce-in-out
 
         Examples
         --------
         Suppose we have a figure widget, `fig`, with a single trace.
 
-        >>> import plotly.graph_objs as go
+        >>> import plotly.graph_objects as go
         >>> fig = go.FigureWidget(data=[{'y': [3, 4, 2]}])
 
         1) Animate a change in the xaxis and yaxis ranges using default
@@ -3390,24 +3392,24 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        renderer: str or None (default None)
+        renderer : str or None (default None)
             A string containing the names of one or more registered renderers
             (separated by '+' characters) or None.  If None, then the default
             renderers specified in plotly.io.renderers.default are used.
 
-        validate: bool (default True)
+        validate : bool (default True)
             True if the figure should be validated before being shown,
             False otherwise.
 
-        width: int or float
+        width : int or float
             An integer or float that determines the number of pixels wide the
             plot is. The default is set in plotly.js.
 
-        height: int or float
+        height : int or float
             An integer or float specifying the height of the plot in pixels.
             The default is set in plotly.js.
 
-        config: dict
+        config : dict
             A dict of parameters to configure the figure. The defaults are set
             in plotly.js.
 
@@ -3425,19 +3427,19 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        validate: bool (default True)
+        validate : bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
 
-        pretty: bool (default False)
+        pretty : bool (default False)
             True if JSON representation should be pretty-printed, False if
             representation should be as compact as possible.
 
-        remove_uids: bool (default True)
+        remove_uids : bool (default True)
             True if trace UIDs should be omitted from the JSON representation
 
-        engine: str (default None)
-            The JSON encoding engine to use. One of:
+        engine : str (default None)
+            The JSON encoding engine to use. One of:\n
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
             If not specified, the default encoder is set to the current value of
@@ -3462,19 +3464,16 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        fig:
-            Figure object or dict representing a figure
-
-        warn: bool
+        warn : bool
             If False, suppress warnings about not using this in production.
 
-        as_dict: bool
+        as_dict : bool
             If True, output is a dict with some keys that go.Figure can't parse.
             If False, output is a go.Figure with unparseable keys skipped.
 
         Returns
         -------
-        plotly.graph_objects.Figure or dict
+        plotly.graph_objs.Figure or dict
             The full figure
         """
         import plotly.io as pio
@@ -3488,19 +3487,19 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        file: str or writeable
+        file : str or writeable
             A string representing a local file path or a writeable object
             (e.g. an open file descriptor)
 
-        pretty: bool (default False)
+        pretty : bool (default False)
             True if JSON representation should be pretty-printed, False if
             representation should be as compact as possible.
 
-        remove_uids: bool (default True)
+        remove_uids : bool (default True)
             True if trace UIDs should be omitted from the JSON representation
 
-        engine: str (default None)
-            The JSON encoding engine to use. One of:
+        engine : str (default None)
+            The JSON encoding engine to use. One of:\n
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
             If not specified, the default encoder is set to the current value of
@@ -3520,13 +3519,13 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        config: dict or None (default None)
+        config : dict or None (default None)
             Plotly.js figure config options
-        auto_play: bool (default=True)
+        auto_play : bool (default=True)
             Whether to automatically start the animation sequence on page load
             if the figure contains frames. Has no effect if the figure does not
             contain frames.
-        include_plotlyjs: bool or string (default True)
+        include_plotlyjs : bool or string (default True)
             Specifies how the plotly.js library is included/loaded in the output
             div string.
 
@@ -3552,7 +3551,7 @@ Invalid property path '{key_path_str}' for layout
             useful when the resulting div string will be placed inside an HTML
             document that already loads plotly.js. This option is not advised
             when full_html=True as it will result in a non-functional html file.
-        include_mathjax: bool or string (default False)
+        include_mathjax : bool or string (default False)
             Specifies how the MathJax.js library is included in the output html
             div string.  MathJax is required in order to display labels
             with LaTeX typesetting.
@@ -3568,31 +3567,31 @@ Invalid property path '{key_path_str}' for layout
             If a string that ends in '.js', a script tag is included that
             references the specified path. This approach can be used to point the
             resulting HTML div string to an alternative CDN.
-        post_script: str or list or None (default None)
+        post_script : str or list or None (default None)
             JavaScript snippet(s) to be included in the resulting div just after
             plot creation.  The string(s) may include '{plot_id}' placeholders
             that will then be replaced by the `id` of the div element that the
             plotly.js figure is associated with.  One application for this script
             is to install custom plotly.js event handlers.
-        full_html: bool (default True)
+        full_html : bool (default True)
             If True, produce a string containing a complete HTML document
             starting with an <html> tag.  If False, produce a string containing
             a single <div> element.
-        animation_opts: dict or None (default None)
+        animation_opts : dict or None (default None)
             dict of custom animation parameters to be passed to the function
             Plotly.animate in Plotly.js. See
             https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
             for available options. Has no effect if the figure does not contain
             frames, or auto_play is False.
-        default_width, default_height: number or str (default '100%')
+        default_width, default_height : number or str (default '100%')
             The default figure width/height to use if the provided figure does not
             specify its own layout.width/layout.height property.  May be
             specified in pixels as an integer (e.g. 500), or as a css width style
             string (e.g. '500px', '100%').
-        validate: bool (default True)
+        validate : bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
-        div_id: str (default None)
+        div_id : str (default None)
             If provided, this is the value of the id attribute of the div tag. If None, the
             id attribute is a UUID.
 
@@ -3611,16 +3610,16 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        file: str or writeable
+        file : str or writeable
             A string representing a local file path or a writeable object
             (e.g. a pathlib.Path object or an open file descriptor)
-        config: dict or None (default None)
+        config : dict or None (default None)
             Plotly.js figure config options
-        auto_play: bool (default=True)
+        auto_play : bool (default=True)
             Whether to automatically start the animation sequence on page load
             if the figure contains frames. Has no effect if the figure does not
             contain frames.
-        include_plotlyjs: bool or string (default True)
+        include_plotlyjs : bool or string (default True)
             Specifies how the plotly.js library is included/loaded in the output
             div string.
 
@@ -3656,7 +3655,7 @@ Invalid property path '{key_path_str}' for layout
             document that already loads plotly.js.  This option is not advised
             when full_html=True as it will result in a non-functional html file.
 
-        include_mathjax: bool or string (default False)
+        include_mathjax : bool or string (default False)
             Specifies how the MathJax.js library is included in the output html
             div string.  MathJax is required in order to display labels
             with LaTeX typesetting.
@@ -3672,34 +3671,34 @@ Invalid property path '{key_path_str}' for layout
             If a string that ends in '.js', a script tag is included that
             references the specified path. This approach can be used to point the
             resulting HTML div string to an alternative CDN.
-        post_script: str or list or None (default None)
+        post_script : str or list or None (default None)
             JavaScript snippet(s) to be included in the resulting div just after
             plot creation.  The string(s) may include '{plot_id}' placeholders
             that will then be replaced by the `id` of the div element that the
             plotly.js figure is associated with.  One application for this script
             is to install custom plotly.js event handlers.
-        full_html: bool (default True)
+        full_html : bool (default True)
             If True, produce a string containing a complete HTML document
             starting with an <html> tag.  If False, produce a string containing
             a single <div> element.
-        animation_opts: dict or None (default None)
+        animation_opts : dict or None (default None)
             dict of custom animation parameters to be passed to the function
             Plotly.animate in Plotly.js. See
             https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
             for available options. Has no effect if the figure does not contain
             frames, or auto_play is False.
-        default_width, default_height: number or str (default '100%')
+        default_width, default_height : number or str (default '100%')
             The default figure width/height to use if the provided figure does not
             specify its own layout.width/layout.height property.  May be
             specified in pixels as an integer (e.g. 500), or as a css width style
             string (e.g. '500px', '100%').
-        validate: bool (default True)
+        validate : bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
-        auto_open: bool (default True)
+        auto_open : bool (default True)
             If True, open the saved file in a web browser after saving.
             This argument only applies if `full_html` is True.
-        div_id: str (default None)
+        div_id : str (default None)
             If provided, this is the value of the id attribute of the div tag. If None, the
             id attribute is a UUID.
 
@@ -3717,54 +3716,54 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        format: str or None
-            The desired image format. One of
-              - 'png'
-              - 'jpg' or 'jpeg'
-              - 'webp'
-              - 'svg'
-              - 'pdf'
-              - 'eps' (deprecated) (Requires the poppler library to be installed)
+        format : str or None
+            The desired image format. One of:\n
+            - 'png'
+            - 'jpg' or 'jpeg'
+            - 'webp'
+            - 'svg'
+            - 'pdf'
+            - 'eps' (deprecated) (Requires the poppler library to be installed)
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_format` if engine is "kaleido"
-                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_format` if engine is "kaleido"
+            - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
 
-        width: int or None
+        width : int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_width` if engine is "kaleido"
-                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_width` if engine is "kaleido"
+            - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
 
-        height: int or None
+        height : int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_height` if engine is "kaleido"
-                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_height` if engine is "kaleido"
+            - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
 
-        scale: int or float or None
+        scale : int or float or None
             The scale factor to use when exporting the figure. A scale factor
             larger than 1.0 will increase the image resolution with respect
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_scale` if engine is "kaliedo"
-                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_scale` if engine is "kaliedo"
+            - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
-        validate: bool
+        validate : bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine (deprecated): str
+        engine : str
             Image export engine to use. This parameter is deprecated and Orca engine support will be
-            dropped in the next major Plotly version. Until then, the following values are supported:
+            dropped in the next major Plotly version. Until then, the following values are supported:\n
             - "kaleido": Use Kaleido for image export
             - "orca": Use Orca for image export
             - "auto" (default): Use Kaleido if installed, otherwise use Orca
@@ -3807,60 +3806,60 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        file: str or writeable
+        file : str or writeable
             A string representing a local file path or a writeable object
             (e.g. a pathlib.Path object or an open file descriptor)
 
-        format: str or None
-            The desired image format. One of
-              - 'png'
-              - 'jpg' or 'jpeg'
-              - 'webp'
-              - 'svg'
-              - 'pdf'
-              - 'eps' (deprecated) (Requires the poppler library to be installed)
+        format : str or None
+            The desired image format. One of:\n
+            - 'png'
+            - 'jpg' or 'jpeg'
+            - 'webp'
+            - 'svg'
+            - 'pdf'
+            - 'eps' (deprecated) (Requires the poppler library to be installed)
 
             If not specified and `file` is a string then this will default to the
             file extension. If not specified and `file` is not a string then this
-            will default to:
-                - `plotly.io.defaults.default_format` if engine is "kaleido"
-                - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
+            will default to:\n
+            - `plotly.io.defaults.default_format` if engine is "kaleido"
+            - `plotly.io.orca.config.default_format` if engine is "orca" (deprecated)
 
-        width: int or None
+        width : int or None
             The width of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the width of the exported image
             in physical pixels.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_width` if engine is "kaleido"
-                - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_width` if engine is "kaleido"
+            - `plotly.io.orca.config.default_width` if engine is "orca" (deprecated)
 
-        height: int or None
+        height : int or None
             The height of the exported image in layout pixels. If the `scale`
             property is 1.0, this will also be the height of the exported image
             in physical pixels.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_height` if engine is "kaleido"
-                - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_height` if engine is "kaleido"
+            - `plotly.io.orca.config.default_height` if engine is "orca" (deprecated)
 
-        scale: int or float or None
+        scale : int or float or None
             The scale factor to use when exporting the figure. A scale factor
             larger than 1.0 will increase the image resolution with respect
             to the figure's layout pixel dimensions. Whereas as scale factor of
             less than 1.0 will decrease the image resolution.
 
-            If not specified, will default to:
-                - `plotly.io.defaults.default_scale` if engine is "kaleido"
-                - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
+            If not specified, will default to:\n
+            - `plotly.io.defaults.default_scale` if engine is "kaleido"
+            - `plotly.io.orca.config.default_scale` if engine is "orca" (deprecated)
 
-        validate: bool
+        validate : bool
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
-        engine (deprecated): str
+        engine : str
             Image export engine to use. This parameter is deprecated and Orca engine support will be
-            dropped in the next major Plotly version. Until then, the following values are supported:
+            dropped in the next major Plotly version. Until then, the following values are supported:\n
             - "kaleido": Use Kaleido for image export
             - "orca": Use Orca for image export
             - "auto" (default): Use Kaleido if installed, otherwise use Orca
@@ -4735,16 +4734,16 @@ class BasePlotlyType(object):
 
         Parameters
         ----------
-        prop : str|tuple
+        prop : str or tuple
 
             If prop is the name of a property of this object, then the
             property is returned.
 
             If prop is a nested property path string (e.g. 'foo[1].bar'),
-            then a nested property is returned (e.g. obj['foo'][1]['bar'])
+            then a nested property is returned (e.g. obj\\['foo'\\]\\[1\\]\\['bar'\\])
 
             If prop is a path tuple (e.g. ('foo', 1, 'bar')), then a nested
-            property is returned (e.g. obj['foo'][1]['bar']).
+            property is returned (e.g. obj\\['foo'\\]\\[1\\]\\['bar'\\]).
 
         Returns
         -------
@@ -4830,17 +4829,17 @@ class BasePlotlyType(object):
 
         Parameters
         ----------
-        prop : str|tuple
+        prop : str or tuple
             If prop is a simple string (e.g. 'foo'), then return true of the
             object contains an element named 'foo'
 
             If prop is a property path string (e.g. 'foo[0].bar'),
             then return true if the obejct contains the nested elements for
-            each entry in the path string (e.g. 'bar' in obj['foo'][0])
+            each entry in the path string (e.g. 'bar' in obj\\['foo'\\]\\[0\\])
 
             If prop is a property path tuple (e.g. ('foo', 0, 'bar')),
             then return true if the object contains the nested elements for
-            each entry in the path string (e.g. 'bar' in obj['foo'][0])
+            each entry in the path string (e.g. 'bar' in obj\\['foo'\\]\\[0\\])
 
         Returns
         -------
@@ -5126,7 +5125,7 @@ class BasePlotlyType(object):
                     prop_str = "properties"
                     invalid_str = repr(invalid_props)
 
-                module_root = "plotly.graph_objs."
+                module_root = "plotly.graph_objects."
                 if self._parent_path_str:
                     full_obj_name = (
                         module_root
@@ -5177,7 +5176,7 @@ class BasePlotlyType(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        overwrite: bool
+        overwrite : bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
             properties that are not specified in the update operation.
@@ -5205,9 +5204,9 @@ class BasePlotlyType(object):
 
         Parameters
         ----------
-        key: str
+        key : str
             Property name
-        dflt
+        dflt :
             The default value to return if key was not found in object
 
         Returns
@@ -5577,12 +5576,11 @@ class BasePlotlyType(object):
             is this object. Second through last parameters are the
             property / subpropery values referenced by args.
         args : list[str|tuple[int|str]]
-            List of property references where each reference may be one of:
-
-              1) A property name string (e.g. 'foo') for direct properties
-              2) A property path string (e.g. 'foo[0].bar') for
+            List of property references where each reference may be one of:\n
+              - A property name string (e.g. 'foo') for direct properties
+              - A property path string (e.g. 'foo[0].bar') for
                  subproperties
-              3) A property path tuple (e.g. ('foo', 0, 'bar')) for
+              - A property path tuple (e.g. ('foo', 0, 'bar')) for
                  subproperties
 
         append : bool
@@ -5597,7 +5595,7 @@ class BasePlotlyType(object):
         Register callback that prints out the range extents of the xaxis and
         yaxis whenever either either of them changes.
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> fig = go.Figure(go.Scatter(x=[1, 2], y=[1, 0]))
         >>> fig.layout.on_change(
         ...   lambda obj, xrange, yrange: print("%s-%s" % (xrange, yrange)),
@@ -5668,19 +5666,19 @@ on_change callbacks are not supported in this case.
 
         Parameters
         ----------
-        validate: bool (default True)
+        validate : bool (default True)
             True if the object should be validated before being converted to
             JSON, False otherwise.
 
-        pretty: bool (default False)
+        pretty : bool (default False)
             True if JSON representation should be pretty-printed, False if
             representation should be as compact as possible.
 
-        remove_uids: bool (default True)
+        remove_uids : bool (default True)
             True if trace UIDs should be omitted from the JSON representation
 
-        engine: str (default None)
-            The JSON encoding engine to use. One of:
+        engine : str (default None)
+            The JSON encoding engine to use. One of:\n
               - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
             If not specified, the default encoder is set to the current value of
@@ -6057,7 +6055,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         points in this trace
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6083,7 +6081,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -6119,7 +6117,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         or more points in this trace.
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6145,7 +6143,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -6181,7 +6179,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         points in this trace.
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6207,7 +6205,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -6242,7 +6240,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         points in this trace.
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6268,7 +6266,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points
         >>> points = Points()
 
@@ -6311,7 +6309,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         in this trace using doubleclick.
 
         Note: Callbacks will only be triggered when the trace belongs to a
-        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        instance of plotly.graph_objects.FigureWidget and it is displayed in an
         ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
@@ -6336,7 +6334,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
-        >>> import plotly.graph_objects as go
+        >>> import plotly.graph_objs as go
         >>> from plotly.callbacks import Points
         >>> points = Points()
 

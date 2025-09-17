@@ -37,8 +37,8 @@ jupyter:
 
 Install igraph with `pip install igraph`.
 
-```python
-!pip install igraph
+```
+$ pip install igraph
 ```
 
 ```python

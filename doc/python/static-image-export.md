@@ -35,7 +35,7 @@ jupyter:
     thumbnail: thumbnail/static-image-export.png
 ---
 
-This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](/python/interactive-html-export/)
+This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](interactive-html-export.md)
 
 <!-- #region -->
 ## Install Dependencies
@@ -52,7 +52,7 @@ or with conda:
 $ conda install -c conda-forge python-kaleido
 ```
 
-It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](/python/orca-management/) page for more details.
+It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](orca-management.md) page for more details.
 
 ### Chrome
 
@@ -200,11 +200,13 @@ fig = px.bar(data_canada, x='year', y='pop')
 img_bytes = fig.to_image(format="png")
 ```
 
-Here's the bytes object displayed using `IPython.display.Image`:
+Here's the bytes object displayed using `Image.show()`:
 
 ```python
-from IPython.display import Image
-Image(img_bytes)
+from PIL import Image
+from io import BytesIO
+img = Image.open(BytesIO(img_bytes))
+img.show()
 ```
 
 ## Specify Image Dimensions and Scale
@@ -212,7 +214,8 @@ In addition to the image format, the `to_image` and `write_image` functions prov
 
 ```python
 img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
-Image(img_bytes)
+img = Image.open(BytesIO(img_bytes))
+img.show()
 ```
 
 ## Specify Image Export Engine

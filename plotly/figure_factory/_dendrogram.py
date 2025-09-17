@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from plotly import exceptions, optional_imports
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 # Optional imports, may be None for users that only use our core functionality.
 np = optional_imports.get_module("numpy")
@@ -102,7 +102,7 @@ def create_dendrogram(
         color_threshold=color_threshold,
     )
 
-    return graph_objs.Figure(data=dendrogram.data, layout=dendrogram.layout)
+    return graph_objects.Figure(data=dendrogram.data, layout=dendrogram.layout)
 
 
 class _Dendrogram(object):

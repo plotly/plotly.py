@@ -1,7 +1,7 @@
 import math
 
 from plotly import exceptions
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 from plotly.figure_factory import utils
 
 
@@ -23,9 +23,9 @@ def create_quiver(
     :param (positive float) scaleratio: the ratio between the scale of the y-axis
         and the scale of the x-axis (scale_y / scale_x). Default = None, the
         scale ratio is not fixed.
-    :param kwargs: kwargs passed through plotly.graph_objs.Scatter
+    :param kwargs: kwargs passed through plotly.graph_objects.Scatter
         for more information on valid kwargs call
-        help(plotly.graph_objs.Scatter)
+        help(plotly.graph_objects.Scatter)
 
     :rtype (dict): returns a representation of quiver figure.
 
@@ -106,20 +106,20 @@ def create_quiver(
     barb_x, barb_y = quiver_obj.get_barbs()
     arrow_x, arrow_y = quiver_obj.get_quiver_arrows()
 
-    quiver_plot = graph_objs.Scatter(
+    quiver_plot = graph_objects.Scatter(
         x=barb_x + arrow_x, y=barb_y + arrow_y, mode="lines", **kwargs
     )
 
     data = [quiver_plot]
 
     if scaleratio is None:
-        layout = graph_objs.Layout(hovermode="closest")
+        layout = graph_objects.Layout(hovermode="closest")
     else:
-        layout = graph_objs.Layout(
+        layout = graph_objects.Layout(
             hovermode="closest", yaxis=dict(scaleratio=scaleratio, scaleanchor="x")
         )
 
-    return graph_objs.Figure(data=data, layout=layout)
+    return graph_objects.Figure(data=data, layout=layout)
 
 
 class _Quiver(object):

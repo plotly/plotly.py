@@ -52,7 +52,7 @@ We will be using the [Linear Regression][lr], which is a simple model that fit a
 
 ### Ordinary Least Square (OLS) with `plotly.express`
 
-This example shows [how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS)](/python/linear-fits/) for predicting the tips waiters will receive based on the value of the total bill.
+This example shows [how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS)](linear-fits.md) for predicting the tips waiters will receive based on the value of the total bill.
 
 [lr]: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
 
@@ -491,7 +491,7 @@ y = df['petal_width']
 # Define and fit the grid
 model = DecisionTreeRegressor()
 param_grid = {
-    'criterion': ['mse', 'friedman_mse', 'mae'],
+    'criterion': ['squared_error', 'friedman_mse', 'absolute_error'],
     'max_depth': range(2, 5)
 }
 grid = GridSearchCV(model, param_grid, cv=N_FOLD)

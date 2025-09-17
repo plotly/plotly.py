@@ -3,7 +3,7 @@ from numbers import Number
 import plotly.exceptions
 
 import plotly.colors as clrs
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 
 def make_linear_colorscale(colors):
@@ -112,14 +112,14 @@ def create_2d_density(
     hist_color = clrs.validate_colors(hist_color, "rgb")
     point_color = clrs.validate_colors(point_color, "rgb")
 
-    trace1 = graph_objs.Scatter(
+    trace1 = graph_objects.Scatter(
         x=x,
         y=y,
         mode="markers",
         name="points",
         marker=dict(color=point_color[0], size=point_size, opacity=0.4),
     )
-    trace2 = graph_objs.Histogram2dContour(
+    trace2 = graph_objects.Histogram2dContour(
         x=x,
         y=y,
         name="density",
@@ -128,15 +128,15 @@ def create_2d_density(
         reversescale=True,
         showscale=False,
     )
-    trace3 = graph_objs.Histogram(
+    trace3 = graph_objects.Histogram(
         x=x, name="x density", marker=dict(color=hist_color[0]), yaxis="y2"
     )
-    trace4 = graph_objs.Histogram(
+    trace4 = graph_objects.Histogram(
         y=y, name="y density", marker=dict(color=hist_color[0]), xaxis="x2"
     )
     data = [trace1, trace2, trace3, trace4]
 
-    layout = graph_objs.Layout(
+    layout = graph_objects.Layout(
         showlegend=False,
         autosize=False,
         title=title,
@@ -151,5 +151,5 @@ def create_2d_density(
         yaxis2=dict(domain=[0.85, 1], showgrid=False, zeroline=False),
     )
 
-    fig = graph_objs.Figure(data=data, layout=layout)
+    fig = graph_objects.Figure(data=data, layout=layout)
     return fig

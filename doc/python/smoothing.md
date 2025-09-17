@@ -132,6 +132,16 @@ TMA_i = \frac{SMA_i + ... + SMA_{i+n}}{n}
 $$
 
 ```python
+import plotly.graph_objects as go
+import numpy as np
+
+np.random.seed(1)
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+noise = 2 * np.random.random(len(x)) - 1 # uniformly distributed between -1 and 1
+y_noise = y + noise
+
 def smoothTriangle(data, degree):
     triangle=np.concatenate((np.arange(degree + 1), np.arange(degree)[::-1])) # up then down
     smoothed=[]

@@ -1,5 +1,5 @@
 from plotly import exceptions, optional_imports
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 pd = optional_imports.get_module("pandas")
 
@@ -36,8 +36,8 @@ def create_table(
     """
     Function that creates data tables.
 
-    See also the plotly.graph_objects trace
-    :class:`plotly.graph_objects.Table`
+    See also the plotly.graph_objs trace
+    :class:`plotly.graph_objs.Table`
 
     :param (pandas.Dataframe | list[list]) text: data for table.
     :param (str|list[list]) colorscale: Colorscale for table where the
@@ -53,10 +53,10 @@ def create_table(
     :param (bool) index: Create (header-colored) index column index from
         Pandas dataframe or list[0] for each list in text. Default=False.
     :param (string) index_title: Title for index column. Default=''.
-    :param kwargs: kwargs passed through plotly.graph_objs.Heatmap.
+    :param kwargs: kwargs passed through plotly.graph_objects.Heatmap.
         These kwargs describe other attributes about the annotated Heatmap
         trace such as the colorscale. For more information on valid kwargs
-        call help(plotly.graph_objs.Heatmap)
+        call help(plotly.graph_objects.Heatmap)
 
     Example 1: Simple Plotly Table
 
@@ -161,7 +161,7 @@ def create_table(
             showticklabels=False,
         ),
     )
-    return graph_objs.Figure(data=data, layout=layout)
+    return graph_objects.Figure(data=data, layout=layout)
 
 
 class _Table(object):
@@ -265,7 +265,7 @@ class _Table(object):
                     self.font_colors[0] if self.index and m == 0 else all_font_colors[n]
                 )
                 annotations.append(
-                    graph_objs.layout.Annotation(
+                    graph_objects.layout.Annotation(
                         text=format_text,
                         x=self.x[m] - self.annotation_offset,
                         y=self.y[n],

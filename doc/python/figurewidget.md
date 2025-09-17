@@ -56,11 +56,11 @@ f
 Add traces or update the layout and then watch the output above update in real time.
 
 ```python
-f.add_scatter(y=[2, 1, 4, 3]);
+f.add_scatter(y=[2, 1, 4, 3])
 ```
 
 ```python
-f.add_bar(y=[1, 4, 3, 2]);
+f.add_bar(y=[1, 4, 3, 2])
 ```
 
 ```python

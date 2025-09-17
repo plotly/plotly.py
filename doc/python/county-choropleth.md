@@ -37,7 +37,7 @@ jupyter:
 ### Deprecation warning
 
 
-This page describes a [legacy "figure factory" method](/python/figure-factories/) for creating map-like figures using [self-filled scatter traces](/python/shapes). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](/python/choropleth-maps/) or the alternative [tile-based choropleth maps](/python/tile-county-choropleth).
+This page describes a [legacy "figure factory" method](figure-factories.md) for creating map-like figures using [self-filled scatter traces](shapes.md). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](choropleth-maps.md) or the alternative [tile-based choropleth maps](tile-county-choropleth.md).
 
 
 #### Required Packages
@@ -45,11 +45,11 @@ This page describes a [legacy "figure factory" method](/python/figure-factories/
 
 Run the following commands to install the correct versions of the following modules:
 
-```python
-!pip install plotly-geo==1.0.0
-!pip install geopandas==0.8.1
-!pip install pyshp==2.1.2
-!pip install shapely==1.7.1
+```
+$ pip install plotly-geo==1.0.0
+$ pip install geopandas==1.1.1
+$ pip install pyshp==2.3.1
+$ pip install shapely==2.1.1
 ```
 
 If you are using Windows, follow this post to properly install geopandas and dependencies: http://geoffboeing.com/2014/09/using-geopandas-windows/. If you are using Anaconda, do not use PIP to install the packages above. Instead use conda to install them:

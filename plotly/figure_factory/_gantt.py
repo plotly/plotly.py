@@ -5,7 +5,7 @@ import copy
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
-import plotly.graph_objects as go
+import plotly.graph_objs as go
 
 pd = optional_imports.get_module("pandas")
 

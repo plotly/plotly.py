@@ -26,7 +26,7 @@ if missing_anywidget:
 else:
 
     def test_import_figurewidget_with_anywidget():
-        from plotly.graph_objs._figurewidget import (
+        from plotly.graph_objects._figurewidget import (
             FigureWidget as FigureWidgetWithAnywidget,
         )
 

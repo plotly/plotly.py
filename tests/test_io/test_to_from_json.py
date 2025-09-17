@@ -1,4 +1,4 @@
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 import plotly.io as pio
 import pytest
 import plotly

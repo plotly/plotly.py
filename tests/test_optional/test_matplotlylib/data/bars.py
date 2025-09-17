@@ -1,4 +1,4 @@
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 D = dict(
     left=[0, 1, 2, 3, 4, 5],

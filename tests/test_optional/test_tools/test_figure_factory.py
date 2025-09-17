@@ -5,7 +5,7 @@ import plotly.figure_factory as ff
 
 from plotly.exceptions import PlotlyError
 from ...test_optional.optional_utils import NumpyTestUtilsMixin
-from plotly.graph_objs import graph_objs
+from plotly import graph_objects as go
 from ...utils import TestCaseNoTemplate
 
 
@@ -63,7 +63,7 @@ class TestQuiver(TestCaseNoTemplate, NumpyTestUtilsMixin):
             v=[math.sin(1), math.sin(2)],
             arrow_scale=0.4,
             angle=math.pi / 6,
-            line=graph_objs.scatter.Line(color="purple", width=3),
+            line=go.scatter.Line(color="purple", width=3),
         )
         expected_quiver = {
             "data": [
@@ -1081,7 +1081,7 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
             sub_z, colorscale="Greens", showscale=True, reversescale=True
         )
 
-        expected = graph_objs.Figure(
+        expected = go.Figure(
             {
                 "data": [
                     {
@@ -1777,7 +1777,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             group_tasks=True,
         )
 
-        exp_gantt_chart = graph_objs.Figure(
+        exp_gantt_chart = go.Figure(
             **{
                 "layout": {
                     "showlegend": True,
@@ -1974,7 +1974,7 @@ class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
             width=500,
         )
 
-        exp_gantt_chart = graph_objs.Figure(
+        exp_gantt_chart = go.Figure(
             **{
                 "data": [
                     {
