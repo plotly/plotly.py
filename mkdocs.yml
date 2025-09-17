@@ -1,4 +1,4 @@
-site_name: "Plotly.py Docs"
+site_name: "Plotly.py"
 site_url: 'https://plotly.com/python/'
 docs_dir: pages
 site_dir: docs
@@ -30,182 +30,189 @@ plugins:
 
 extra_css:
   - css/plotly-styles.css
+  - https://docs.plotly.com/css/plotly-style.css
 
 nav:
 - Home: index.md
-- Getting Started: examples/getting-started.md
-- Fundamentals: 
-  - The Figure Data Structure: examples/figure-structure.md
-  - Creating and Updating Figures: examples/creating-and-updating-figures.md
-  - Displaying Figures: examples/renderers.md
-  - Plotly Express: examples/plotly-express.md
-  - Analytical Apps with Dash: https://dash.plotly.com/
-  - Static Image Export: examples/static-image-export.md
-  - Theming and templates: examples/templates.md
-  - Changes in Version 6: examples/v6-changes.md
-  - Configuration: examples/configuration-options.md
-  - Setting Graph Size: examples/setting-graph-size.md
-  - Formatting Ticks: examples/tick-formatting.md
-  - Setting the Font, Title, Legend Entries, and Axis Titles: examples/figure-labels.md
-  - Axes: examples/axes.md
-  - Legends: examples/legend.md
-  - Multiple Axes: examples/multiple-axes.md
-  - Subplots: examples/subplots.md
-  - Multiple Chart Types: examples/graphing-multiple-chart-types.md
-  - Plotly Express Arguments: examples/px-arguments.md
-  - Styling Markers: examples/marker-style.md
-  - Continuous Color Scales and Color Bars: examples/colorscales.md
-  - Text and Annotations: examples/text-and-annotations.md
-  - Hover Text and Formatting: examples/hover-text-and-formatting.md
-  - Images: examples/images.md
-  - Shapes: examples/shapes.md
-  - IPython vs Python: examples/ipython-vs-python.md
-  - Troubleshooting: examples/troubleshooting.md
-  - Built-in Continuous Color Scales: examples/builtin-colorscales.md
-  - Discrete Colors: examples/discrete-color.md
-  - Styling Plotly Express Figures: examples/styling-plotly-express.md
-  - Interactive HTML Export: examples/interactive-html-export.md
-  - Pandas Plotting Backend: examples/pandas-backend.md
-  - Figure Factories: examples/figure-factories.md
-  - Plotly Express Wide-Form Support: examples/wide-form.md
-  - Graph Objects: examples/graph-objects.md
-  - Introspecting Figures: examples/figure-introspection.md
-  - Horizontal and Vertical Lines and Rectangles: examples/horizontal-vertical-shapes.md
-  - Selections: examples/selections.md
-  - Version 4 Migration Guide: examples/v4-migration.md
-  - Static Image Generation Changes in Plotly.py 6.1: examples/static-image-generation-migration.md
-  - Supported CSS Colors: examples/supported-colors.md
-- Basic Charts:
-  - Scatter Plots: examples/line-and-scatter.md
-  - Line Charts: examples/line-charts.md
-  - Bar Charts: examples/bar-charts.md
-  - Pie Charts: examples/pie-charts.md
-  - Bubble Charts: examples/bubble-charts.md
-  - Dot Plots: examples/dot-plots.md
-  - Filled Area Plots: examples/filled-area-plots.md
-  - Horizontal Bar Charts: examples/horizontal-bar-charts.md
-  - Gantt Charts: examples/gantt.md
-  - Sunburst Charts: examples/sunburst-charts.md
-  - Tables: examples/table.md
-  - Sankey Diagram: examples/sankey-diagram.md
-  - Treemap Charts: examples/treemaps.md
-  - High Performance Visualization: examples/performance.md
-  - Figure Factory Tables: examples/figure-factory-table.md
-  - Categorical Axes: examples/categorical-axes.md
-  - Icicle Charts: examples/icicle-charts.md
-  - Patterns, Hatching, Texture: examples/pattern-hatching-texture.md
-  - Dumbbell Plots: examples/dumbbell-plots.md
-- Statistical Charts: 
-  - Error Bars: examples/error-bars.md
-  - Box Plots: examples/box-plots.md
-  - Histograms: examples/histograms.md
-  - Distplots: examples/distplot.md
-  - 2D Histograms: examples/2D-Histogram.md
-  - Scatterplot Matrix: examples/splom.md
-  - Facet and Trellis Plots: examples/facet-plots.md
-  - Parallel Categories Diagram: examples/parallel-categories-diagram.md
-  - Tree-plots: examples/tree-plots.md
-  - Violin Plots: examples/violin.md
-  - 2D Histogram Contour: examples/2d-histogram-contour.md
-  - Linear and Non-Linear Trendlines: examples/linear-fits.md
-  - Marginal Distribution Plots: examples/marginal-plots.md
-  - Strip Charts: examples/strip-charts.md
-  - Continuous Error Bands: examples/continuous-error-bars.md
-  - Empirical Cumulative Distribution Plots: examples/ecdf-plots.md
-- Scientific Charts: 
-  - Contour Plots: examples/contour-plots.md
-  - Heatmaps: examples/heatmaps.md
-  - Imshow: examples/imshow.md
-  - Ternary Plots: examples/ternary-plots.md
-  - Log Plots: examples/log-plot.md
-  - Dendrograms: examples/dendrogram.md
-  - Annotated Heatmaps: examples/annotated-heatmap.md
-  - Ternary Overlay: examples/ternary-scatter-contour.md
-  - Parallel Coordinates Plot: examples/parallel-coordinates-plot.md
-  - Quiver Plots: examples/quiver-plots.md
-  - Streamline Plots: examples/streamline-plots.md
-  - Network Graphs: examples/network-graphs.md
-  - Carpet Plots: examples/carpet-plot.md
-  - Carpet Contour Plot: examples/carpet-contour.md
-  - Carpet Scatter Plot: examples/carpet-scatter.md
-  - Polar Charts: examples/polar-chart.md
-  - Radar Charts: examples/radar-chart.md
-  - Ternary contours: examples/ternary-contour.md
-  - Wind Rose and Polar Bar Charts: examples/wind-rose-charts.md
-  - Smith Charts: examples/smith-charts.md
-- Financial Charts: 
-  - Time Series and Date Axes: examples/time-series.md
-  - Candlestick Charts: examples/candlestick-charts.md
-  - Waterfall Charts: examples/waterfall-charts.md
-  - Funnel Chart: examples/funnel-charts.md
-  - OHLC Charts: examples/ohlc-charts.md
-  - Indicators: examples/indicator.md
-  - Gauge Charts: examples/gauge-charts.md
-  - Bullet Charts: examples/bullet-charts.md
-- Maps: 
-  - MapLibre Migration: examples/migrate-to-maplibre.md
-  - Tile Choropleth Maps: examples/tile-county-choropleth.md
-  - Lines on Tile Maps: examples/lines-on-tile-maps.md
-  - Filled Area on Tile Maps: examples/filled-area-tile-maps.md
-  - Bubble Maps: examples/bubble-maps.md
-  - Density Heatmap: examples/density-heatmaps.md
-  - Lines on Maps: examples/lines-on-maps.md
-  - Choropleth Maps: examples/choropleth-maps.md
-  - Tile Map Layers: examples/tile-map-layers.md
-  - Scatter Plots on Tile Maps: examples/tile-scatter-maps.md
-  - USA County Choropleth Maps: examples/county-choropleth.md
-  - Scatter Plots on Maps: examples/scatter-plots-on-maps.md
-  - Map Configuration and Styling on Geo Maps: examples/map-configuration.md
-  - Hexbin Mapbox: examples/hexbin-mapbox.md
-- AI & ML:
-  - ML Regression: examples/ml-regression.md
-  - kNN Classification: examples/ml-knn.md
-  - ROC and PR Curves: examples/ml-roc-pr.md
-  - PCA Visualization: examples/ml-pca.md
-  - AI/ML Apps with Dash: https://plotly.com/building-machine-learning-web-apps-in-python/
-  - t-SNE and UMAP projections: examples/ml-tsne-umap-projections.md
-- Visualizing Biological Data:
-  - Volcano Plot: examples/bio-volcano-plot.md
-  - Manhattan Plot: examples/bio-manhattanplot.md
-  - Clustergram: examples/bio-clustergram.md
-  - Alignment Chart: examples/bio-alignment-chart.md
-- 3D Charts: 
-  - 3D Axes: examples/3d-axes.md
-  - 3D Scatter Plots: examples/3d-scatter-plots.md
-  - 3D Surface Plots: examples/3d-surface-plots.md
-  - 3D Subplots: examples/3d-subplots.md
-  - 3D Camera Controls: examples/3d-camera-controls.md
-  - 3D Bubble Charts: examples/3d-bubble-charts.md
-  - 3D Line Plots: examples/3d-line-plots.md
-  - Trisurf Plots: examples/trisurf.md
-  - 3D Mesh Plots: examples/3d-mesh.md
-  - 3D Isosurface Plots: examples/3d-isosurface-plots.md
-  - 3D Volume Plots: examples/3d-volume.md
-  - 3D Cone Plots: examples/cone-plot.md
-  - 3D Streamtube Plots: examples/streamtube-plot.md
-- Multiple Axes: 
-  - Mixed Subplots: examples/mixed-subplots.md
-  - Map Subplots: examples/map-subplots-and-small-multiples.md
-  - Table and Chart Subplots: examples/table-subplots.md
-  - Figure Factory Subplots: examples/figure-factory-subplots.md
-- Chart Events:
-  - Plotly FigureWidget Overview: examples/figurewidget.md
-  - Jupyter Lab with FigureWidget: examples/jupyter-lab-tools.md
-  - Interactive Data Analysis with FigureWidget ipywidgets: examples/figurewidget-app.md
-  - Click Events: examples/click-events.md
-- Animations:
-  - Intro to Animations: examples/animations.md
-- Advanced Options: 
-  - Plot CSV Data: examples/plot-data-from-csv.md
-  - Random Walk: examples/random-walk.md
-  - Peak Finding: examples/peak-finding.md
-  - Smoothing: examples/smoothing.md
-  - LaTeX: examples/LaTeX.md
-- Controls: 
-  - Custom Buttons: examples/custom-buttons.md
-  - Sliders: examples/sliders.md
-  - Dropdown Menus: examples/dropdowns.md
-  - Range Slider and Selector: examples/range-slider.md
+- Quick Reference:
+  - Getting Started: examples/getting-started.md
+  - Is Plotly Free?: is-plotly-free.md
+  - Changelog: https://github.com/plotly/plotly.py/releases
+  - Plotly Community Forum: https://community.plotly.com
+  - Dash: https://dash.plotly.com
+- Examples:
+  - Fundamentals:
+    - The Figure Data Structure: examples/figure-structure.md
+    - Creating and Updating Figures: examples/creating-and-updating-figures.md
+    - Displaying Figures: examples/renderers.md
+    - Plotly Express: examples/plotly-express.md
+    - Analytical Apps with Dash: https://dash.plotly.com/
+    - Static Image Export: examples/static-image-export.md
+    - Theming and templates: examples/templates.md
+    - Changes in Version 6: examples/v6-changes.md
+    - Configuration: examples/configuration-options.md
+    - Setting Graph Size: examples/setting-graph-size.md
+    - Formatting Ticks: examples/tick-formatting.md
+    - Setting the Font, Title, Legend Entries, and Axis Titles: examples/figure-labels.md
+    - Axes: examples/axes.md
+    - Legends: examples/legend.md
+    - Multiple Axes: examples/multiple-axes.md
+    - Subplots: examples/subplots.md
+    - Multiple Chart Types: examples/graphing-multiple-chart-types.md
+    - Plotly Express Arguments: examples/px-arguments.md
+    - Styling Markers: examples/marker-style.md
+    - Continuous Color Scales and Color Bars: examples/colorscales.md
+    - Text and Annotations: examples/text-and-annotations.md
+    - Hover Text and Formatting: examples/hover-text-and-formatting.md
+    - Images: examples/images.md
+    - Shapes: examples/shapes.md
+    - IPython vs Python: examples/ipython-vs-python.md
+    - Troubleshooting: examples/troubleshooting.md
+    - Built-in Continuous Color Scales: examples/builtin-colorscales.md
+    - Discrete Colors: examples/discrete-color.md
+    - Styling Plotly Express Figures: examples/styling-plotly-express.md
+    - Interactive HTML Export: examples/interactive-html-export.md
+    - Pandas Plotting Backend: examples/pandas-backend.md
+    - Figure Factories: examples/figure-factories.md
+    - Plotly Express Wide-Form Support: examples/wide-form.md
+    - Graph Objects: examples/graph-objects.md
+    - Introspecting Figures: examples/figure-introspection.md
+    - Horizontal and Vertical Lines and Rectangles: examples/horizontal-vertical-shapes.md
+    - Selections: examples/selections.md
+    - Version 4 Migration Guide: examples/v4-migration.md
+    - Static Image Generation Changes in Plotly.py 6.1: examples/static-image-generation-migration.md
+    - Supported CSS Colors: examples/supported-colors.md
+  - Basic Charts:
+    - Scatter Plots: examples/line-and-scatter.md
+    - Line Charts: examples/line-charts.md
+    - Bar Charts: examples/bar-charts.md
+    - Pie Charts: examples/pie-charts.md
+    - Bubble Charts: examples/bubble-charts.md
+    - Dot Plots: examples/dot-plots.md
+    - Filled Area Plots: examples/filled-area-plots.md
+    - Horizontal Bar Charts: examples/horizontal-bar-charts.md
+    - Gantt Charts: examples/gantt.md
+    - Sunburst Charts: examples/sunburst-charts.md
+    - Tables: examples/table.md
+    - Sankey Diagram: examples/sankey-diagram.md
+    - Treemap Charts: examples/treemaps.md
+    - High Performance Visualization: examples/performance.md
+    - Figure Factory Tables: examples/figure-factory-table.md
+    - Categorical Axes: examples/categorical-axes.md
+    - Icicle Charts: examples/icicle-charts.md
+    - Patterns, Hatching, Texture: examples/pattern-hatching-texture.md
+    - Dumbbell Plots: examples/dumbbell-plots.md
+  - Statistical Charts:
+    - Error Bars: examples/error-bars.md
+    - Box Plots: examples/box-plots.md
+    - Histograms: examples/histograms.md
+    - Distplots: examples/distplot.md
+    - 2D Histograms: examples/2D-Histogram.md
+    - Scatterplot Matrix: examples/splom.md
+    - Facet and Trellis Plots: examples/facet-plots.md
+    - Parallel Categories Diagram: examples/parallel-categories-diagram.md
+    - Tree-plots: examples/tree-plots.md
+    - Violin Plots: examples/violin.md
+    - 2D Histogram Contour: examples/2d-histogram-contour.md
+    - Linear and Non-Linear Trendlines: examples/linear-fits.md
+    - Marginal Distribution Plots: examples/marginal-plots.md
+    - Strip Charts: examples/strip-charts.md
+    - Continuous Error Bands: examples/continuous-error-bars.md
+    - Empirical Cumulative Distribution Plots: examples/ecdf-plots.md
+  - Scientific Charts:
+    - Contour Plots: examples/contour-plots.md
+    - Heatmaps: examples/heatmaps.md
+    - Imshow: examples/imshow.md
+    - Ternary Plots: examples/ternary-plots.md
+    - Log Plots: examples/log-plot.md
+    - Dendrograms: examples/dendrogram.md
+    - Annotated Heatmaps: examples/annotated-heatmap.md
+    - Ternary Overlay: examples/ternary-scatter-contour.md
+    - Parallel Coordinates Plot: examples/parallel-coordinates-plot.md
+    - Quiver Plots: examples/quiver-plots.md
+    - Streamline Plots: examples/streamline-plots.md
+    - Network Graphs: examples/network-graphs.md
+    - Carpet Plots: examples/carpet-plot.md
+    - Carpet Contour Plot: examples/carpet-contour.md
+    - Carpet Scatter Plot: examples/carpet-scatter.md
+    - Polar Charts: examples/polar-chart.md
+    - Radar Charts: examples/radar-chart.md
+    - Ternary contours: examples/ternary-contour.md
+    - Wind Rose and Polar Bar Charts: examples/wind-rose-charts.md
+    - Smith Charts: examples/smith-charts.md
+  - Financial Charts:
+    - Time Series and Date Axes: examples/time-series.md
+    - Candlestick Charts: examples/candlestick-charts.md
+    - Waterfall Charts: examples/waterfall-charts.md
+    - Funnel Chart: examples/funnel-charts.md
+    - OHLC Charts: examples/ohlc-charts.md
+    - Indicators: examples/indicator.md
+    - Gauge Charts: examples/gauge-charts.md
+    - Bullet Charts: examples/bullet-charts.md
+  - Maps:
+    - MapLibre Migration: examples/migrate-to-maplibre.md
+    - Tile Choropleth Maps: examples/tile-county-choropleth.md
+    - Lines on Tile Maps: examples/lines-on-tile-maps.md
+    - Filled Area on Tile Maps: examples/filled-area-tile-maps.md
+    - Bubble Maps: examples/bubble-maps.md
+    - Density Heatmap: examples/density-heatmaps.md
+    - Lines on Maps: examples/lines-on-maps.md
+    - Choropleth Maps: examples/choropleth-maps.md
+    - Tile Map Layers: examples/tile-map-layers.md
+    - Scatter Plots on Tile Maps: examples/tile-scatter-maps.md
+    - USA County Choropleth Maps: examples/county-choropleth.md
+    - Scatter Plots on Maps: examples/scatter-plots-on-maps.md
+    - Map Configuration and Styling on Geo Maps: examples/map-configuration.md
+    - Hexbin Mapbox: examples/hexbin-mapbox.md
+  - AI & ML:
+    - ML Regression: examples/ml-regression.md
+    - kNN Classification: examples/ml-knn.md
+    - ROC and PR Curves: examples/ml-roc-pr.md
+    - PCA Visualization: examples/ml-pca.md
+    - AI/ML Apps with Dash: https://plotly.com/building-machine-learning-web-apps-in-python/
+    - t-SNE and UMAP projections: examples/ml-tsne-umap-projections.md
+  - Visualizing Biological Data:
+    - Volcano Plot: examples/bio-volcano-plot.md
+    - Manhattan Plot: examples/bio-manhattanplot.md
+    - Clustergram: examples/bio-clustergram.md
+    - Alignment Chart: examples/bio-alignment-chart.md
+  - 3D Charts:
+    - 3D Axes: examples/3d-axes.md
+    - 3D Scatter Plots: examples/3d-scatter-plots.md
+    - 3D Surface Plots: examples/3d-surface-plots.md
+    - 3D Subplots: examples/3d-subplots.md
+    - 3D Camera Controls: examples/3d-camera-controls.md
+    - 3D Bubble Charts: examples/3d-bubble-charts.md
+    - 3D Line Plots: examples/3d-line-plots.md
+    - Trisurf Plots: examples/trisurf.md
+    - 3D Mesh Plots: examples/3d-mesh.md
+    - 3D Isosurface Plots: examples/3d-isosurface-plots.md
+    - 3D Volume Plots: examples/3d-volume.md
+    - 3D Cone Plots: examples/cone-plot.md
+    - 3D Streamtube Plots: examples/streamtube-plot.md
+  - Subplots:
+    - Mixed Subplots: examples/mixed-subplots.md
+    - Map Subplots: examples/map-subplots-and-small-multiples.md
+    - Table and Chart Subplots: examples/table-subplots.md
+    - Figure Factory Subplots: examples/figure-factory-subplots.md
+  - Jupyter Widgets Interaction:
+    - Plotly FigureWidget Overview: examples/figurewidget.md
+    - Jupyter Lab with FigureWidget: examples/jupyter-lab-tools.md
+    - Interactive Data Analysis with FigureWidget ipywidgets: examples/figurewidget-app.md
+    - Click Events: examples/click-events.md
+  - Animations:
+    - Intro to Animations: examples/animations.md
+  - Controls:
+    - Custom Buttons: examples/custom-buttons.md
+    - Sliders: examples/sliders.md
+    - Dropdown Menus: examples/dropdowns.md
+    - Range Slider and Selector: examples/range-slider.md
+  - Advanced:
+    - Plot CSV Data: examples/plot-data-from-csv.md
+    - Random Walk: examples/random-walk.md
+    - Peak Finding: examples/peak-finding.md
+    - Smoothing: examples/smoothing.md
+    - LaTeX: examples/LaTeX.md
 - API Reference: reference/
 - Project:
   - license.md
@@ -214,7 +221,14 @@ nav:
 
 theme:
   name: "material"
-
+  font:
+  text: Inter
+  features:
+    - navigation.sections
+    - content.code.copy
+    - content.code.annotate
+  logo: https://docs.plotly.com/assets/plotly_logo_square.png
+  repo_url: https://github.com/plotly/plotly.py
 markdown_extensions:
 - def_list
 - markdown_include.include:
