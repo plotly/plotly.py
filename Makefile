@@ -5,6 +5,7 @@ PACKAGE_DIRS = _plotly_utils plotly
 CODE_DIRS = ${PACKAGE_DIRS} scripts
 EXAMPLE_SRC =  $(wildcard doc/python/*.md)
 EXAMPLE_DST = $(patsubst doc/python/%.md,pages/examples/%.md,${EXAMPLE_SRC})
+MKDOCS_TEMP_DIR = ./docs_tmp
 
 ## commands: show available commands
 commands:
@@ -21,7 +22,8 @@ docs-lint:
 
 ## docs-tmp: rebuild documentation saving Markdown in ./tmp
 docs-tmp:
-	MKDOCS_TEMP_DIR=./docs_tmp ${RUN} mkdocs build
+	@rm -rf ${MKDOCS_TEMP_DIR}
+	MKDOCS_TEMP_DIR=${MKDOCS_TEMP_DIR} ${RUN} mkdocs build
 
 ## examples: generate Markdown for individual doc/python
 examples: ${EXAMPLE_DST}
