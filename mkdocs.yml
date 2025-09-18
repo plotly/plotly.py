@@ -228,6 +228,25 @@ theme:
     - content.code.copy
     - content.code.annotate
   logo: https://docs.plotly.com/assets/plotly_logo_square.png
+  palette:
+    # Auto (follows system)
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
 markdown_extensions:
 - def_list
 - markdown_include.include:
