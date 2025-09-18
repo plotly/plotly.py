@@ -35,12 +35,21 @@ class GraphObjectsInspector:
         self.packages: Dict[str, Any] = {}
         self.module_paths: Dict[str, str] = {}
         
+        # Hardcoded exclusions - classes/modules to skip during documentation generation
+        self.excluded_classes = [
+            # Exclude the deprecated lowercase version since we have the proper cased version
+            "plotly.graph_objects.Histogram2dcontour",
+        ]
+        self.excluded_modules = [
+            # Add any modules to exclude here if needed
+        ]
+        
     def is_class(self, obj) -> bool:
         """Check if an object is a class."""
         return inspect.isclass(obj) and not obj.__name__.startswith('_')
     
-    def is_deprecated_class(self, full_class_name: str, class_obj: Any) -> bool:
-        """Check if a class is deprecated by testing for deprecation warnings."""
+    def get_deprecation_info(self, full_class_name: str, class_obj: Any) -> tuple[bool, str]:
+        """Check if a class is deprecated and get the actual deprecation message."""
         import warnings
         
         try:
@@ -53,12 +62,17 @@ class GraphObjectsInspector:
                 # Check if any warnings contain "deprecat"
                 for warning in w:
                     if 'deprecat' in str(warning.message).lower():
-                        return True
-                return False
+                        return True, str(warning.message)
+                return False, ""
         except Exception:
             # If we can't instantiate it, assume it's not deprecated
             # (it might just require parameters or have other issues)
-            return False
+            return False, ""
+    
+    def is_deprecated_class(self, full_class_name: str, class_obj: Any) -> bool:
+        """Check if a class is deprecated by testing for deprecation warnings."""
+        is_deprecated, _ = self.get_deprecation_info(full_class_name, class_obj)
+        return is_deprecated
     
     def is_package(self, obj) -> bool:
         """Check if an object is a package/module."""
@@ -97,6 +111,12 @@ class GraphObjectsInspector:
                         public_full_name = module_name.replace("plotly.graph_objs", "plotly.graph_objects") + f".{attr_name}"
                     else:
                         public_full_name = f"{module_name}.{attr_name}"
+                    
+                    # Skip excluded classes
+                    if public_full_name in self.excluded_classes:
+                        print(f"  Skipping excluded class: {public_full_name}")
+                        continue
+                        
                     self.classes[public_full_name] = attr
                     print(f"  Found class: {public_full_name}")
                     
@@ -107,6 +127,12 @@ class GraphObjectsInspector:
                         public_package_name = full_name
                         if full_name.startswith("plotly.graph_objs"):
                             public_package_name = full_name.replace("plotly.graph_objs", "plotly.graph_objects")
+                        
+                        # Skip excluded modules
+                        if public_package_name in self.excluded_modules:
+                            print(f"  Skipping excluded module: {public_package_name}")
+                            continue
+                            
                         self.packages[public_package_name] = attr
                         self.module_paths[public_package_name] = self.get_module_path(attr)
                         print(f"  Found package: {public_package_name}")
@@ -183,11 +209,15 @@ class DocumentationGenerator:
         content = f"# {class_name}\n\n"
         
         # Check if this is a deprecated class
-        if self.inspector.is_deprecated_class(class_name, class_obj):
-            content += f"**⚠️ DEPRECATED**: This class is deprecated and may not be available for import.\n\n"
-            content += f"Please refer to the specific implementation in the appropriate submodule.\n\n"
-            # Don't use ::: syntax for deprecated classes as they can't be imported
-            content += f"## Deprecated Class: {class_name}\n\n"
+        is_deprecated, deprecation_message = self.inspector.get_deprecation_info(class_name, class_obj)
+        if is_deprecated:
+            content += f"!!! info \"Deprecated\"\n"
+            # Use the actual deprecation message, properly indented
+            for line in deprecation_message.split('\n'):
+                content += f"    {line}\n"
+            content += "\n"
+            # Still generate the reference documentation for deprecated classes
+            content += f"::: {class_name}\n"
         else:
             content += f"::: {class_name}\n"
         
@@ -245,29 +275,31 @@ class DocumentationGenerator:
         if package_obj.__doc__:
             content += f"{package_obj.__doc__}\n\n"
         
-        # Add classes section
+        # Add classes section with individual headings for TOC
         if package_classes:
             content += "## Classes\n\n"
             for class_name in sorted(package_classes):
                 class_display_name = class_name.split('.')[-1]
                 class_file_name = f"{class_display_name}.md"
-                content += f"- [{class_display_name}]({class_file_name})\n"
+                # Add individual class as H3 heading for TOC
+                content += f"### [{class_display_name}]({class_file_name})\n\n"
             content += "\n"
         
-        # Add subpackages section
+        # Add submodules section
         if package_subpackages:
-            content += "## Packages\n\n"
+            content += "## Submodules\n\n"
             for subpackage_name in sorted(package_subpackages):
                 subpackage_display_name = subpackage_name.split('.')[-1]
                 # Always link to local stub within the -package folder to avoid relative path issues
                 subpackage_folder_name = f"{subpackage_display_name}-package"
                 link = f"{subpackage_folder_name}/index.md"
-                content += f"- [{subpackage_display_name}]({link})\n"
+                # Add individual submodule as H3 heading for TOC
+                content += f"### [{subpackage_display_name}]({link})\n\n"
         content += "\n"
     
-        # If no classes or packages, add a note
+        # If no classes or submodules, add a note
         if not package_classes and not package_subpackages:
-            content += "This package contains no public classes or subpackages.\n"
+            content += "This module contains no public classes or submodules.\n"
         
         # Write file
         with open(file_path, 'w') as f:
@@ -307,32 +339,42 @@ class DocumentationGenerator:
         content = "# plotly.graph_objects\n\n"
         content += "The main package containing all Plotly graph objects, traces, and layout components.\n\n"
         
-        if top_level_classes:
+        # Separate classes into current and deprecated
+        current_classes = []
+        deprecated_classes = []
+        
+        for short_name, full_name in top_level_classes:
+            class_obj = self.inspector.classes[full_name]
+            if self.inspector.is_deprecated_class(full_name, class_obj):
+                deprecated_classes.append((short_name, full_name))
+            else:
+                current_classes.append((short_name, full_name))
+        
+        # Add current classes section
+        if current_classes:
             content += "## Classes\n\n"
-            for short_name, full_name in top_level_classes:
-                # Check if deprecated - get the class object
-                class_obj = self.inspector.classes[full_name]
-                if self.inspector.is_deprecated_class(full_name, class_obj):
-                    content += f"- [{short_name}]({short_name}.md) ⚠️ *Deprecated*\n"
-                else:
-                    content += f"- [{short_name}]({short_name}.md)\n"
+            for short_name, full_name in current_classes:
+                # Add individual class as H3 heading for TOC
+                content += f"### [{short_name}]({short_name}.md)\n\n"
             content += "\n"
         
         if top_level_packages:
-            content += "## Packages\n\n"
+            content += "## Modules\n\n"
             for short_name, full_name in top_level_packages:
                 package_folder_name = f"{short_name}-package"
-                content += f"- [{short_name}]({package_folder_name}/index.md)\n"
+                # Add individual module as H3 heading for TOC
+                content += f"### [{short_name}]({package_folder_name}/index.md)\n\n"
             content += "\n"
         
-        # Check if any deprecated classes exist by testing a known deprecated class
-        try:
-            angular_axis_obj = self.inspector.classes.get("plotly.graph_objects.AngularAxis")
-            if angular_axis_obj and self.inspector.is_deprecated_class("plotly.graph_objects.AngularAxis", angular_axis_obj):
-                content += "## Notes\n\n"
-                content += "⚠️ **Deprecated Classes**: Some classes marked as deprecated are legacy classes that have been replaced with more specific implementations in submodules. Please refer to the specific implementation in the appropriate submodule for current usage.\n"
-        except Exception:
-            pass  # Skip notes section if we can't check deprecation
+        # Add deprecated classes section at the end
+        if deprecated_classes:
+            content += "## Deprecated Classes\n\n"
+            content += "!!! info \"Deprecated Classes\"\n"
+            content += "    These classes are deprecated and may not be available for import. Please refer to the specific implementation in the appropriate submodule for current usage.\n\n"
+            for short_name, full_name in deprecated_classes:
+                # Add individual deprecated class as H3 heading for TOC with clean (Deprecated) format
+                content += f"### [{short_name}]({short_name}.md) (Deprecated)\n\n"
+            content += "\n"
         
         # Write the file
         file_path.write_text(content)
