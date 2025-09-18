@@ -1,0 +1,4 @@
+mkdocs-material
+mkdocstrings[python]
+mkdocs-autorefs
+plotly==6.3.0
