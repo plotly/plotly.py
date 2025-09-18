@@ -136,13 +136,26 @@ class DocumentationGenerator:
         """Generate a documentation page for a class."""
         # Convert module path to file path
         # e.g., "plotly.graph_objs.Bar" -> "Bar.md"
-        # e.g., "plotly.graph_objs.bar.Marker" -> "bar/Marker.md"
+        # e.g., "plotly.graph_objs.bar.Marker" -> "bar-package/Marker.md"
+        # e.g., "plotly.graph_objs.bar.hoverlabel.Font" -> "bar/hoverlabel-package/Font.md"
         
         parts = class_name.split('.')
         if len(parts) > 2:  # plotly.graph_objs.something
             # Remove "plotly.graph_objs" prefix
             relative_parts = parts[2:]
-            file_path = self.output_dir / Path(*relative_parts[:-1]) / f"{parts[-1]}.md"
+            if len(relative_parts) == 1:
+                # Top-level class: plotly.graph_objs.Bar -> Bar.md
+                file_path = self.output_dir / f"{parts[-1]}.md"
+            else:
+                # Classes inside packages
+                parent_parts = relative_parts[:-1]
+                if len(parent_parts) == 1:
+                    # e.g., plotly.graph_objs.bar.Marker -> bar-package/Marker.md
+                    parent_dir = self.output_dir / f"{parent_parts[0]}-package"
+                else:
+                    # e.g., plotly.graph_objs.bar.hoverlabel.Font -> bar/hoverlabel-package/Font.md
+                    parent_dir = self.output_dir / Path(*parent_parts[:-1]) / f"{parent_parts[-1]}-package"
+                file_path = parent_dir / f"{parts[-1]}.md"
         else:
             file_path = self.output_dir / f"{parts[-1]}.md"
         
@@ -171,6 +184,9 @@ class DocumentationGenerator:
             f.write(content)
         
         self.generated_files.add(file_path)
+        
+        # (No legacy stub generation for class pages)
+        
         return file_path
     
     def generate_package_index(self, package_name: str, package_obj: Any) -> Path:
@@ -179,7 +195,14 @@ class DocumentationGenerator:
         parts = package_name.split('.')
         if len(parts) > 2:  # plotly.graph_objs.something
             relative_parts = parts[2:]
-            file_path = self.output_dir / Path(*relative_parts) / "index.md"
+            # Add -package suffix to avoid conflicts with class names
+            package_name_with_suffix = f"{relative_parts[-1]}-package"
+            if len(relative_parts) > 1:
+                # For nested packages, replace the last part with the suffixed version
+                file_path = self.output_dir / Path(*relative_parts[:-1]) / package_name_with_suffix / "index.md"
+            else:
+                # For top-level packages
+                file_path = self.output_dir / package_name_with_suffix / "index.md"
         else:
             # This is the main plotly.graph_objs package
             file_path = self.output_dir / "index.md"
@@ -219,7 +242,10 @@ class DocumentationGenerator:
             content += "## Packages\n\n"
             for subpackage_name in sorted(package_subpackages):
                 subpackage_display_name = subpackage_name.split('.')[-1]
-                content += f"- [{subpackage_display_name}]({subpackage_display_name}/index.md)\n"
+                # Always link to local stub within the -package folder to avoid relative path issues
+                subpackage_folder_name = f"{subpackage_display_name}-package"
+                link = f"{subpackage_folder_name}/index.md"
+                content += f"- [{subpackage_display_name}]({link})\n"
         content += "\n"
     
         # If no classes or packages, add a note
@@ -277,7 +303,8 @@ class DocumentationGenerator:
         if top_level_packages:
             content += "## Packages\n\n"
             for short_name, full_name in top_level_packages:
-                content += f"- [{short_name}]({short_name}/index.md)\n"
+                package_folder_name = f"{short_name}-package"
+                content += f"- [{short_name}]({package_folder_name}/index.md)\n"
             content += "\n"
         
         if self.inspector.is_deprecated_class("AngularAxis"):  # Check if any deprecated classes exist
