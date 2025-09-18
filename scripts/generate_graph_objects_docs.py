@@ -153,8 +153,9 @@ class DocumentationGenerator:
                     # e.g., plotly.graph_objs.bar.Marker -> bar-package/Marker.md
                     parent_dir = self.output_dir / f"{parent_parts[0]}-package"
                 else:
-                    # e.g., plotly.graph_objs.bar.hoverlabel.Font -> bar/hoverlabel-package/Font.md
-                    parent_dir = self.output_dir / Path(*parent_parts[:-1]) / f"{parent_parts[-1]}-package"
+                    # e.g., plotly.graph_objs.bar.hoverlabel.Font -> bar-package/hoverlabel-package/Font.md
+                    parent_dirs_with_suffix = [part + '-package' for part in parent_parts[:-1]]
+                    parent_dir = self.output_dir / Path(*parent_dirs_with_suffix) / f"{parent_parts[-1]}-package"
                 file_path = parent_dir / f"{parts[-1]}.md"
         else:
             file_path = self.output_dir / f"{parts[-1]}.md"
@@ -198,8 +199,9 @@ class DocumentationGenerator:
             # Add -package suffix to avoid conflicts with class names
             package_name_with_suffix = f"{relative_parts[-1]}-package"
             if len(relative_parts) > 1:
-                # For nested packages, replace the last part with the suffixed version
-                file_path = self.output_dir / Path(*relative_parts[:-1]) / package_name_with_suffix / "index.md"
+                # For nested packages, all parent directories should also have -package suffix
+                parent_parts = [part + '-package' for part in relative_parts[:-1]]
+                file_path = self.output_dir / Path(*parent_parts) / package_name_with_suffix / "index.md"
             else:
                 # For top-level packages
                 file_path = self.output_dir / package_name_with_suffix / "index.md"
