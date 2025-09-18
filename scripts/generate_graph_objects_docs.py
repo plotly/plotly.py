@@ -39,18 +39,26 @@ class GraphObjectsInspector:
         """Check if an object is a class."""
         return inspect.isclass(obj) and not obj.__name__.startswith('_')
     
-    def is_deprecated_class(self, class_name: str) -> bool:
-        """Check if a class is deprecated and should be handled specially."""
-        # Only mark classes as deprecated if they are actually deprecated at the top level
-        # These classes show deprecation warnings when instantiated
-        deprecated_classes = {
-            'AngularAxis', 'Annotation', 'Annotations', 'Choroplethmapbox', 'ColorBar', 
-            'Contours', 'Data', 'Densitymapbox', 'ErrorX', 'ErrorY', 'ErrorZ', 'Font', 
-            'Frames', 'Histogram2dcontour', 'Legend', 'Line', 'Margin', 'Marker', 
-            'RadialAxis', 'Scattermapbox', 'Scene', 'Stream', 'Trace', 'XAxis', 'XBins', 
-            'YAxis', 'YBins', 'ZAxis'
-        }
-        return class_name in deprecated_classes
+    def is_deprecated_class(self, full_class_name: str, class_obj: Any) -> bool:
+        """Check if a class is deprecated by testing for deprecation warnings."""
+        import warnings
+        
+        try:
+            # Capture warnings when instantiating the class
+            with warnings.catch_warnings(record=True) as w:
+                warnings.simplefilter("always")
+                # Try to instantiate the class (this triggers deprecation warnings)
+                class_obj()
+                
+                # Check if any warnings contain "deprecat"
+                for warning in w:
+                    if 'deprecat' in str(warning.message).lower():
+                        return True
+                return False
+        except Exception:
+            # If we can't instantiate it, assume it's not deprecated
+            # (it might just require parameters or have other issues)
+            return False
     
     def is_package(self, obj) -> bool:
         """Check if an object is a package/module."""
@@ -167,8 +175,7 @@ class DocumentationGenerator:
         content = f"# {class_name}\n\n"
         
         # Check if this is a deprecated class
-        class_short_name = parts[-1]
-        if self.inspector.is_deprecated_class(class_short_name):
+        if self.inspector.is_deprecated_class(class_name, class_obj):
             content += f"**⚠️ DEPRECATED**: This class is deprecated and may not be available for import.\n\n"
             content += f"Please refer to the specific implementation in the appropriate submodule.\n\n"
             # Don't use ::: syntax for deprecated classes as they can't be imported
@@ -295,8 +302,9 @@ class DocumentationGenerator:
         if top_level_classes:
             content += "## Classes\n\n"
             for short_name, full_name in top_level_classes:
-                # Check if deprecated
-                if self.inspector.is_deprecated_class(short_name):
+                # Check if deprecated - get the class object
+                class_obj = self.inspector.classes[full_name]
+                if self.inspector.is_deprecated_class(full_name, class_obj):
                     content += f"- [{short_name}]({short_name}.md) ⚠️ *Deprecated*\n"
                 else:
                     content += f"- [{short_name}]({short_name}.md)\n"
@@ -309,9 +317,14 @@ class DocumentationGenerator:
                 content += f"- [{short_name}]({package_folder_name}/index.md)\n"
             content += "\n"
         
-        if self.inspector.is_deprecated_class("AngularAxis"):  # Check if any deprecated classes exist
-            content += "## Notes\n\n"
-            content += "⚠️ **Deprecated Classes**: Some classes marked as deprecated are legacy classes that have been replaced with more specific implementations in submodules. Please refer to the specific implementation in the appropriate submodule for current usage.\n"
+        # Check if any deprecated classes exist by testing a known deprecated class
+        try:
+            angular_axis_obj = self.inspector.classes.get("plotly.graph_objs.AngularAxis")
+            if angular_axis_obj and self.inspector.is_deprecated_class("plotly.graph_objs.AngularAxis", angular_axis_obj):
+                content += "## Notes\n\n"
+                content += "⚠️ **Deprecated Classes**: Some classes marked as deprecated are legacy classes that have been replaced with more specific implementations in submodules. Please refer to the specific implementation in the appropriate submodule for current usage.\n"
+        except Exception:
+            pass  # Skip notes section if we can't check deprecation
         
         # Write the file
         file_path.write_text(content)
