@@ -20,15 +20,15 @@ import importlib.util
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
-    import plotly.graph_objs as graph_objs
+    import plotly.graph_objects as graph_objs
 except ImportError as e:
-    print(f"Error importing plotly.graph_objs: {e}")
+    print(f"Error importing plotly.graph_objects: {e}")
     print("Make sure you're running this script from the plotly.py repository root")
     sys.exit(1)
 
 
 class GraphObjectsInspector:
-    """Inspects plotly.graph_objs to discover all classes and packages."""
+    """Inspects plotly.graph_objects to discover all classes and packages."""
     
     def __init__(self):
         self.classes: Dict[str, Any] = {}
@@ -88,35 +88,43 @@ class GraphObjectsInspector:
                 
             try:
                 attr = getattr(module, attr_name)
-                full_name = f"{module_name}.{attr_name}" if prefix else f"plotly.graph_objs.{attr_name}"
+                full_name = f"{module_name}.{attr_name}" if prefix else f"plotly.graph_objects.{attr_name}"
                 
                 if self.is_class(attr):
                     # Use the public API path instead of internal module path
-                    public_full_name = f"{module_name}.{attr_name}"
+                    # Convert graph_objs to graph_objects in the module path
+                    if module_name.startswith("plotly.graph_objs"):
+                        public_full_name = module_name.replace("plotly.graph_objs", "plotly.graph_objects") + f".{attr_name}"
+                    else:
+                        public_full_name = f"{module_name}.{attr_name}"
                     self.classes[public_full_name] = attr
                     print(f"  Found class: {public_full_name}")
                     
                 elif self.is_package(attr):
                     # Check if it's actually a submodule of the current module
                     if hasattr(attr, '__file__') and attr.__file__:
-                        self.packages[full_name] = attr
-                        self.module_paths[full_name] = self.get_module_path(attr)
-                        print(f"  Found package: {full_name}")
+                        # Convert graph_objs to graph_objects in package names too
+                        public_package_name = full_name
+                        if full_name.startswith("plotly.graph_objs"):
+                            public_package_name = full_name.replace("plotly.graph_objs", "plotly.graph_objects")
+                        self.packages[public_package_name] = attr
+                        self.module_paths[public_package_name] = self.get_module_path(attr)
+                        print(f"  Found package: {public_package_name}")
                         
                         # Recursively inspect the package
-                        self.inspect_module(attr, full_name)
+                        self.inspect_module(attr, public_package_name)
                         
             except Exception as e:
                 print(f"  Error inspecting {attr_name}: {e}")
                 continue
     
     def discover_structure(self) -> None:
-        """Discover the complete structure of plotly.graph_objs."""
-        print("Discovering plotly.graph_objs structure...")
+        """Discover the complete structure of plotly.graph_objects."""
+        print("Discovering plotly.graph_objects structure...")
         
-        # Add the main plotly.graph_objs module as a package
-        self.packages["plotly.graph_objs"] = graph_objs
-        self.module_paths["plotly.graph_objs"] = self.get_module_path(graph_objs)
+        # Add the main plotly.graph_objects module as a package
+        self.packages["plotly.graph_objects"] = graph_objs
+        self.module_paths["plotly.graph_objects"] = self.get_module_path(graph_objs)
         
         self.inspect_module(graph_objs)
         print(f"\nDiscovery complete:")
@@ -143,25 +151,25 @@ class DocumentationGenerator:
     def generate_class_page(self, class_name: str, class_obj: Any) -> Path:
         """Generate a documentation page for a class."""
         # Convert module path to file path
-        # e.g., "plotly.graph_objs.Bar" -> "Bar.md"
-        # e.g., "plotly.graph_objs.bar.Marker" -> "bar-package/Marker.md"
-        # e.g., "plotly.graph_objs.bar.hoverlabel.Font" -> "bar/hoverlabel-package/Font.md"
+        # e.g., "plotly.graph_objects.Bar" -> "Bar.md"
+        # e.g., "plotly.graph_objects.bar.Marker" -> "bar-package/Marker.md"
+        # e.g., "plotly.graph_objects.bar.hoverlabel.Font" -> "bar/hoverlabel-package/Font.md"
         
         parts = class_name.split('.')
-        if len(parts) > 2:  # plotly.graph_objs.something
-            # Remove "plotly.graph_objs" prefix
+        if len(parts) > 2:  # plotly.graph_objects.something
+            # Remove "plotly.graph_objects" prefix
             relative_parts = parts[2:]
             if len(relative_parts) == 1:
-                # Top-level class: plotly.graph_objs.Bar -> Bar.md
+                # Top-level class: plotly.graph_objects.Bar -> Bar.md
                 file_path = self.output_dir / f"{parts[-1]}.md"
             else:
                 # Classes inside packages
                 parent_parts = relative_parts[:-1]
                 if len(parent_parts) == 1:
-                    # e.g., plotly.graph_objs.bar.Marker -> bar-package/Marker.md
+                    # e.g., plotly.graph_objects.bar.Marker -> bar-package/Marker.md
                     parent_dir = self.output_dir / f"{parent_parts[0]}-package"
                 else:
-                    # e.g., plotly.graph_objs.bar.hoverlabel.Font -> bar-package/hoverlabel-package/Font.md
+                    # e.g., plotly.graph_objects.bar.hoverlabel.Font -> bar-package/hoverlabel-package/Font.md
                     parent_dirs_with_suffix = [part + '-package' for part in parent_parts[:-1]]
                     parent_dir = self.output_dir / Path(*parent_dirs_with_suffix) / f"{parent_parts[-1]}-package"
                 file_path = parent_dir / f"{parts[-1]}.md"
@@ -201,7 +209,7 @@ class DocumentationGenerator:
         """Generate an index page for a package."""
         # Convert module path to file path
         parts = package_name.split('.')
-        if len(parts) > 2:  # plotly.graph_objs.something
+        if len(parts) > 2:  # plotly.graph_objects.something
             relative_parts = parts[2:]
             # Add -package suffix to avoid conflicts with class names
             package_name_with_suffix = f"{relative_parts[-1]}-package"
@@ -213,7 +221,7 @@ class DocumentationGenerator:
                 # For top-level packages
                 file_path = self.output_dir / package_name_with_suffix / "index.md"
         else:
-            # This is the main plotly.graph_objs package
+            # This is the main plotly.graph_objects package
             file_path = self.output_dir / "index.md"
         
         # Create directory if needed
@@ -269,34 +277,34 @@ class DocumentationGenerator:
         return file_path
     
     def generate_main_index(self) -> Path:
-        """Generate the main index page for plotly.graph_objs with both classes and packages."""
+        """Generate the main index page for plotly.graph_objects with both classes and packages."""
         file_path = self.output_dir / "index.md"
         
-        # Get top-level classes (those directly in plotly.graph_objs)
+        # Get top-level classes (those directly in plotly.graph_objects)
         top_level_classes = []
         for class_name, class_obj in self.inspector.classes.items():
-            if class_name.startswith("plotly.graph_objs.") and class_name.count(".") == 2:
-                # This is a top-level class like plotly.graph_objs.Bar
+            if class_name.startswith("plotly.graph_objects.") and class_name.count(".") == 2:
+                # This is a top-level class like plotly.graph_objects.Bar
                 short_name = class_name.split(".")[-1]
                 top_level_classes.append((short_name, class_name))
         
-        # Get top-level packages (those directly in plotly.graph_objs)
+        # Get top-level packages (those directly in plotly.graph_objects)
         top_level_packages = []
         for package_name, package_obj in self.inspector.packages.items():
-            if package_name.startswith("plotly.graph_objs.") and package_name.count(".") == 2:
-                # This is a top-level package like plotly.graph_objs.bar
+            if package_name.startswith("plotly.graph_objects.") and package_name.count(".") == 2:
+                # This is a top-level package like plotly.graph_objects.bar
                 short_name = package_name.split(".")[-1]
                 top_level_packages.append((short_name, package_name))
-            elif not package_name.startswith("plotly.graph_objs.") and "." not in package_name:
+            elif not package_name.startswith("plotly.graph_objects.") and "." not in package_name:
                 # This is a top-level package like "bar" (without the full path)
-                top_level_packages.append((package_name, f"plotly.graph_objs.{package_name}"))
+                top_level_packages.append((package_name, f"plotly.graph_objects.{package_name}"))
         
         # Sort both lists
         top_level_classes.sort(key=lambda x: x[0])
         top_level_packages.sort(key=lambda x: x[0])
         
         # Generate content
-        content = "# plotly.graph_objs\n\n"
+        content = "# plotly.graph_objects\n\n"
         content += "The main package containing all Plotly graph objects, traces, and layout components.\n\n"
         
         if top_level_classes:
@@ -319,8 +327,8 @@ class DocumentationGenerator:
         
         # Check if any deprecated classes exist by testing a known deprecated class
         try:
-            angular_axis_obj = self.inspector.classes.get("plotly.graph_objs.AngularAxis")
-            if angular_axis_obj and self.inspector.is_deprecated_class("plotly.graph_objs.AngularAxis", angular_axis_obj):
+            angular_axis_obj = self.inspector.classes.get("plotly.graph_objects.AngularAxis")
+            if angular_axis_obj and self.inspector.is_deprecated_class("plotly.graph_objects.AngularAxis", angular_axis_obj):
                 content += "## Notes\n\n"
                 content += "⚠️ **Deprecated Classes**: Some classes marked as deprecated are legacy classes that have been replaced with more specific implementations in submodules. Please refer to the specific implementation in the appropriate submodule for current usage.\n"
         except Exception:
@@ -354,7 +362,7 @@ class DocumentationGenerator:
         print("\nGenerating package index pages...")
         
         # First, generate index pages for all packages except the main one
-        main_package_name = "plotly.graph_objs"
+        main_package_name = "plotly.graph_objects"
         for package_name, package_obj in self.inspector.packages.items():
             if package_name != main_package_name:  # Skip the main package for now
                 try:
@@ -363,7 +371,7 @@ class DocumentationGenerator:
                 except Exception as e:
                     print(f"  Error generating {package_name}: {e}")
         
-        # Finally, generate the main index for plotly.graph_objs (this should be last)
+        # Finally, generate the main index for plotly.graph_objects (this should be last)
         try:
             file_path = self.generate_main_index()
             print(f"  Generated: {file_path.relative_to(self.output_dir)}")
