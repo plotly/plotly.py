@@ -1,0 +1,54 @@
+site_name: Plotly.py Graphing Library
+site_url: https://plotly.com/python
+site_description: Plotly's Python graphing library makes interactive, publication-quality graphs.
+
+repo_name: plotly/plotly.py
+repo_url: https://github.com/plotly/plotly.py
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  logo: assets/images/logo.svg
+  palette:
+    primary: custom
+    accent: custom
+  features:
+  - navigation.top
+  - navigation.path
+
+extra_css:
+  - assets/stylesheets/plotly-style.css
+
+hooks:
+  - scripts/generate_graph_objects_docs.py
+
+plugins:
+
+- search
+- mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        paths: [plotly]
+        options:
+          preload_modules:
+            - _plotly_utils
+          heading_level: 3
+          show_bases: false
+          show_symbol_type_heading: true
+          docstring_style: numpy
+          merge_init_into_class: true
+          filters: ["!^_"]
+
+nav:
+
+ - API Reference:
+    - plotly.express: reference/plotly_express/index.md
+    - plotly.graph_objects: reference/graph_objects/index.md
+    - plotly.io: reference/plotly_io.md
+    - plotly.data: reference/plotly_data.md
+    - plotly.colors: reference/plotly_colors.md
+    - plotly.subplots: reference/plotly_subplots.md
+    - plotly.figure_factory: reference/plotly_figure_factory.md
+
+ - Community Forum: http://community.plotly.com/
