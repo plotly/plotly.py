@@ -164,7 +164,7 @@ class DocumentationGenerator:
         file_path.parent.mkdir(parents=True, exist_ok=True)
         
         # Generate content
-        content = f"# {parts[-1]}\n\n"
+        content = f"# {class_name}\n\n"
         
         # Check if this is a deprecated class
         class_short_name = parts[-1]
