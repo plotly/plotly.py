@@ -341,3 +341,5 @@ exclude_docs: |
   examples/dash.md
   examples/ml_apps.md
   examples/orca-management.md
+  reference/graph_objects/*-package/*
+  !reference/graph_objects/*-package/index.md

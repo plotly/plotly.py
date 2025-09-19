@@ -107,8 +107,6 @@ def generate_class_page(class_name, class_obj, output_dir):
     if class_obj.__doc__:
         content += f"\n{class_obj.__doc__}\n"
 
-    # with mkdocs_gen_files.open(str(file_path), "w") as f:
-    #     f.write(content)
     file_path.write_text(content)
     return file_path
 
@@ -153,8 +151,6 @@ def generate_package_index(package_name, classes, packages, output_dir):
     if not package_classes and not subpackages:
         content += "This module contains no public classes or submodules.\n"
     
-    # with mkdocs_gen_files.open(str(file_path), "w") as f:
-    #     f.write(content)
     file_path.write_text(content)
     return file_path
 
@@ -230,8 +226,6 @@ plotly.graph_objects contains the building blocks of plotly Figure: traces (Scat
             content += f"### [{short_name}]({short_name}-package/index.md)\n\n"
         content += "\n"
     
-    # with mkdocs_gen_files.open(str(output_dir / "index.md"), "w") as f:
-    #     f.write(content)
     (output_dir / "index.md").write_text(content)
 
 
@@ -248,11 +242,6 @@ def main():
     if args.clean and output_dir.exists():
         import shutil
         shutil.rmtree(output_dir)
-
-# output_dir = Path('docs/reference/graph_objects')
-
-# if output_dir.exists():
-#     shutil.rmtree(output_dir)
     
     output_dir.mkdir(parents=True, exist_ok=True)
 
