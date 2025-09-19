@@ -51,84 +51,67 @@ nav:
  - API Reference:
     - plotly.graph_objects:
       - Overview: reference/graph_objects/index.md
-      - Classes:
-        - AngularAxis: reference/graph_objects/AngularAxis.md
-        - Annotation: reference/graph_objects/Annotation.md
-        - Annotations: reference/graph_objects/Annotations.md
-        - Bar: reference/graph_objects/Bar.md
-        - Barpolar: reference/graph_objects/Barpolar.md
-        - Box: reference/graph_objects/Box.md
-        - Candlestick: reference/graph_objects/Candlestick.md
-        - Carpet: reference/graph_objects/Carpet.md
-        - Choropleth: reference/graph_objects/Choropleth.md
-        - Choroplethmap: reference/graph_objects/Choroplethmap.md
-        - Choroplethmapbox: reference/graph_objects/Choroplethmapbox.md
-        - ColorBar: reference/graph_objects/ColorBar.md
-        - Cone: reference/graph_objects/Cone.md
-        - Contour: reference/graph_objects/Contour.md
-        - Contourcarpet: reference/graph_objects/Contourcarpet.md
-        - Contours: reference/graph_objects/Contours.md
-        - Data: reference/graph_objects/Data.md
-        - Densitymap: reference/graph_objects/Densitymap.md
-        - Densitymapbox: reference/graph_objects/Densitymapbox.md
-        - ErrorX: reference/graph_objects/ErrorX.md
-        - ErrorY: reference/graph_objects/ErrorY.md
-        - ErrorZ: reference/graph_objects/ErrorZ.md
+      - Core Objects:
         - Figure: reference/graph_objects/Figure.md
-        - FigureWidget: reference/graph_objects/FigureWidget.md
-        - Font: reference/graph_objects/Font.md
-        - Frame: reference/graph_objects/Frame.md
-        - Frames: reference/graph_objects/Frames.md
-        - Funnel: reference/graph_objects/Funnel.md
-        - Funnelarea: reference/graph_objects/Funnelarea.md
+        - Layout: reference/graph_objects/Layout.md
+      - Simple Traces:
+        - Bar: reference/graph_objects/Bar.md
+        - Contour: reference/graph_objects/Contour.md
         - Heatmap: reference/graph_objects/Heatmap.md
+        - Image: reference/graph_objects/Image.md
+        - Pie: reference/graph_objects/Pie.md
+        - Scatter: reference/graph_objects/Scatter.md
+        - Scattergl: reference/graph_objects/Scattergl.md
+        - Table: reference/graph_objects/Table.md
+      - Distribution Traces:
+        - Box: reference/graph_objects/Box.md
         - Histogram: reference/graph_objects/Histogram.md
         - Histogram2d: reference/graph_objects/Histogram2d.md
         - Histogram2dContour: reference/graph_objects/Histogram2dContour.md
-        - Icicle: reference/graph_objects/Icicle.md
-        - Image: reference/graph_objects/Image.md
+        - Violin: reference/graph_objects/Violin.md
+      - Finance Traces:
+        - Candlestick: reference/graph_objects/Candlestick.md
+        - Funnel: reference/graph_objects/Funnel.md
+        - Funnelarea: reference/graph_objects/Funnelarea.md
         - Indicator: reference/graph_objects/Indicator.md
-        - Isosurface: reference/graph_objects/Isosurface.md
-        - Layout: reference/graph_objects/Layout.md
-        - Legend: reference/graph_objects/Legend.md
-        - Line: reference/graph_objects/Line.md
-        - Margin: reference/graph_objects/Margin.md
-        - Marker: reference/graph_objects/Marker.md
-        - Mesh3d: reference/graph_objects/Mesh3d.md
         - Ohlc: reference/graph_objects/Ohlc.md
-        - Parcats: reference/graph_objects/Parcats.md
-        - Parcoords: reference/graph_objects/Parcoords.md
-        - Pie: reference/graph_objects/Pie.md
-        - RadialAxis: reference/graph_objects/RadialAxis.md
-        - Sankey: reference/graph_objects/Sankey.md
-        - Scatter: reference/graph_objects/Scatter.md
+        - Waterfall: reference/graph_objects/Waterfall.md
+      - 3D Traces:
+        - Cone: reference/graph_objects/Cone.md
+        - Isosurface: reference/graph_objects/Isosurface.md
+        - Mesh3d: reference/graph_objects/Mesh3d.md
         - Scatter3d: reference/graph_objects/Scatter3d.md
-        - Scattercarpet: reference/graph_objects/Scattercarpet.md
+        - Streamtube: reference/graph_objects/Streamtube.md
+        - Surface: reference/graph_objects/Surface.md
+        - Volume: reference/graph_objects/Volume.md
+      - Map Traces:
+        - Choropleth: reference/graph_objects/Choropleth.md
+        - Choroplethmap: reference/graph_objects/Choroplethmap.md
+        - Choroplethmapbox: reference/graph_objects/Choroplethmapbox.md
+        - Densitymap: reference/graph_objects/Densitymap.md
+        - Densitymapbox: reference/graph_objects/Densitymapbox.md
         - Scattergeo: reference/graph_objects/Scattergeo.md
-        - Scattergl: reference/graph_objects/Scattergl.md
         - Scattermap: reference/graph_objects/Scattermap.md
         - Scattermapbox: reference/graph_objects/Scattermapbox.md
+      - Specialized Traces:
+        - Barpolar: reference/graph_objects/Barpolar.md
+        - Carpet: reference/graph_objects/Carpet.md
+        - Contourcarpet: reference/graph_objects/Contourcarpet.md
+        - Icicle: reference/graph_objects/Icicle.md
+        - Parcats: reference/graph_objects/Parcats.md
+        - Parcoords: reference/graph_objects/Parcoords.md
+        - Sankey: reference/graph_objects/Sankey.md
+        - Scattercarpet: reference/graph_objects/Scattercarpet.md
         - Scatterpolar: reference/graph_objects/Scatterpolar.md
         - Scatterpolargl: reference/graph_objects/Scatterpolargl.md
         - Scattersmith: reference/graph_objects/Scattersmith.md
         - Scatterternary: reference/graph_objects/Scatterternary.md
-        - Scene: reference/graph_objects/Scene.md
         - Splom: reference/graph_objects/Splom.md
-        - Stream: reference/graph_objects/Stream.md
-        - Streamtube: reference/graph_objects/Streamtube.md
         - Sunburst: reference/graph_objects/Sunburst.md
-        - Surface: reference/graph_objects/Surface.md
-        - Table: reference/graph_objects/Table.md
-        - Trace: reference/graph_objects/Trace.md
         - Treemap: reference/graph_objects/Treemap.md
-        - Violin: reference/graph_objects/Violin.md
-        - Volume: reference/graph_objects/Volume.md
-        - Waterfall: reference/graph_objects/Waterfall.md
-        - XAxis: reference/graph_objects/XAxis.md
-        - XBins: reference/graph_objects/XBins.md
-        - YAxis: reference/graph_objects/YAxis.md
-        - YBins: reference/graph_objects/YBins.md
-        - ZAxis: reference/graph_objects/ZAxis.md
+      - Other Classes:
+        - FigureWidget: reference/graph_objects/FigureWidget.md
+        - Frame: reference/graph_objects/Frame.md
       - Modules:
         - bar: reference/graph_objects/bar-package/index.md
         - barpolar: reference/graph_objects/barpolar-package/index.md
