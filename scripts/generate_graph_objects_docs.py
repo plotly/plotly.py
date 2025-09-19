@@ -14,8 +14,35 @@ def get_all_classes_and_packages():
     classes = {}
     packages = {}
     
-    # Excluded classes (deprecated lowercase version of Histogram2dContour)
-    excluded_classes = {"plotly.graph_objects.Histogram2dcontour"}
+    # Excluded classes - deprecated classes from _deprecations.py (except mapbox ones)
+    excluded_classes = {
+        "plotly.graph_objects.Histogram2dcontour",  # original exclusion
+        # Deprecated classes from _deprecations.py (excluding mapbox-related ones)
+        "plotly.graph_objects.Data",
+        "plotly.graph_objects.Annotations", 
+        "plotly.graph_objects.Frames",
+        "plotly.graph_objects.AngularAxis",
+        "plotly.graph_objects.Annotation",
+        "plotly.graph_objects.ColorBar",
+        "plotly.graph_objects.Contours",
+        "plotly.graph_objects.ErrorX",
+        "plotly.graph_objects.ErrorY", 
+        "plotly.graph_objects.ErrorZ",
+        "plotly.graph_objects.Font",
+        "plotly.graph_objects.Legend",
+        "plotly.graph_objects.Line",
+        "plotly.graph_objects.Margin",
+        "plotly.graph_objects.Marker",
+        "plotly.graph_objects.RadialAxis",
+        "plotly.graph_objects.Scene",
+        "plotly.graph_objects.Stream",
+        "plotly.graph_objects.XAxis",
+        "plotly.graph_objects.YAxis",
+        "plotly.graph_objects.ZAxis",
+        "plotly.graph_objects.XBins",
+        "plotly.graph_objects.YBins",
+        "plotly.graph_objects.Trace",
+    }
     
     def inspect_module(module, prefix=""):
         for name in dir(module):
@@ -155,9 +182,6 @@ def generate_main_index(classes, packages, output_dir):
     uncategorized = []
     
     for short_name, full_name in top_level:
-        is_deprecated, _ = get_deprecation_info(classes[full_name])
-        if is_deprecated:
-            continue
         found = False
         for cat, cat_classes in categories.items():
             if short_name in cat_classes:
