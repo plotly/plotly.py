@@ -238,6 +238,7 @@ fig.show()
 ### Automatic contrast rescaling in `px.imshow`
 
 When `zmin` and `zmax` are not specified, the `contrast_rescaling` arguments determines how `zmin` and `zmax` are computed. For `contrast_rescaling='minmax'`, the extrema of the data range are used. For `contrast_rescaling='infer'`, a heuristic based on the data type is used:
+
 - for integer data types, `zmin` and `zmax` correspond to the extreme values of the data type, for example 0 and 255 for `uint8`, 0 and 65535 for `uint16`, etc.
 - for float numbers, the maximum value of the data is computed, and zmax is 1 if the max is smaller than 1, 255 if the max is smaller than 255, etc. (with higher thresholds 2**16 - 1 and 2**32 -1).
 

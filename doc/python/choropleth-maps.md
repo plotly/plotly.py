@@ -211,6 +211,7 @@ Plotly comes with two built-in geometries which do not require an external GeoJS
 2. Countries
 
 In **Plotly.py 6.3 and later**, the built-in countries geometry is created from the following sources:
+
 - [UN data](https://geoportal.un.org/arcgis/sharing/rest/content/items/d7caaff3ef4b4f7c82689b7c4694ad92/data) for country borders, coastlines, land, and ocean layers.
 - Natural Earth data for lakes, rivers, and subunits layers.
 

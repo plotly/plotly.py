@@ -37,12 +37,14 @@ jupyter:
 ## Migrating from Mapbox traces to MapLibre traces
 
 With the release of Plotly.py v5.24.0, we are introducing a new set of trace types for maps with tile underlays, including from Plotly Express:
+
 - `px.scatter_map`
 - `px.line_map`
 - `px.choropleth_map`
 - `px.density_map`
 
 as well as Plotly Graph Objects:
+
 - `go.Choroplethmap`
 - `go.Scattermap`
 - `go.Densitymap`

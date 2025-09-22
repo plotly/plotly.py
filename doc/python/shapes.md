@@ -590,10 +590,12 @@ When drawing shapes where `xref` or `yref` reference axes of type category or mu
 In the following example, the `x0` and `x1` values for both shapes reference category values on the x-axis.
 
 In this example, the first shape:
+
 - Shifts `x0` half way between the center of category "Germany" and the center of the previous category by setting `x0shift=-0.5`
 - Shifts `x1`half way between the center of category "Germany" and the center of the next category by setting `x1shift=0.5`
 
 The second shape:
+
 - Shifts `x0` back to the center of the previous category by setting `x0shift=-1`
 - Shifts `x1`forward to the center of the next category by setting `x1shift=1`
 

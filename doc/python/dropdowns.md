@@ -35,6 +35,7 @@ jupyter:
 
 #### Methods
 The [updatemenu method](https://plotly.com/python/reference/layout/updatemenus/#layout-updatemenus-buttons-method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
+
 - `"restyle"`: modify data or data attributes
 - `"relayout"`: modify layout attributes
 - `"update"`: modify data **and** layout attributes
