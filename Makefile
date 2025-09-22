@@ -32,7 +32,7 @@ pages/examples/%.md: doc/python/%.md
 
 ## examples-force: force complete rebuild of examples
 examples-force:
-	touch ${EXAMPLES_SRC}
+	touch ${EXAMPLE_SRC}
 	make examples
 
 ## examples-toc: generate YAML table of contents for examples
