@@ -1,5 +1,7 @@
 site_name: "Plotly.py"
 site_url: 'https://plotly.com/python/'
+repo_url: https://github.com/plotly/plotly.py
+repo_name: plotly/plotly.py
 docs_dir: pages
 site_dir: docs
 
