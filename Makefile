@@ -48,6 +48,10 @@ generate:
 	${RUN} bin/generate_code.py --codedir plotly
 	${RUN} ruff format plotly
 
+## generate reference markdown files
+reference:
+	${RUN} bin/generate_graph_objects_docs.py
+
 ## lint: check the code
 lint:
 	${RUN} ruff check ${CODE_DIRS}

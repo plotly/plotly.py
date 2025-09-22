@@ -11,11 +11,12 @@ validation:
 
 plugins:
   - search
-  - gen-files:
-      scripts:
-        - bin/generate_reference_pages.py
-  - literate-nav:
-      nav_file: SUMMARY.md
+  # - gen-files:
+  #     scripts:
+  #       - bin/generate_graph_objects_docs.py
+        # - bin/generate_reference_pages.py
+  # - literate-nav:
+  #     nav_file: SUMMARY.md
   - mkdocstrings:
       handlers:
         python:
@@ -213,7 +214,121 @@ nav:
     - Peak Finding: examples/peak-finding.md
     - Smoothing: examples/smoothing.md
     - LaTeX: examples/LaTeX.md
-- API Reference: reference/
+- API Reference:
+    - plotly.graph_objects:
+      - Overview: reference/graph_objects/index.md
+      - Core Objects:
+        - Figure: reference/graph_objects/Figure.md
+        - Layout: reference/graph_objects/Layout.md
+      - Simple Traces:
+        - Bar: reference/graph_objects/Bar.md
+        - Contour: reference/graph_objects/Contour.md
+        - Heatmap: reference/graph_objects/Heatmap.md
+        - Image: reference/graph_objects/Image.md
+        - Pie: reference/graph_objects/Pie.md
+        - Scatter: reference/graph_objects/Scatter.md
+        - Scattergl: reference/graph_objects/Scattergl.md
+        - Table: reference/graph_objects/Table.md
+      - Distribution Traces:
+        - Box: reference/graph_objects/Box.md
+        - Histogram: reference/graph_objects/Histogram.md
+        - Histogram2d: reference/graph_objects/Histogram2d.md
+        - Histogram2dContour: reference/graph_objects/Histogram2dContour.md
+        - Violin: reference/graph_objects/Violin.md
+      - Finance Traces:
+        - Candlestick: reference/graph_objects/Candlestick.md
+        - Funnel: reference/graph_objects/Funnel.md
+        - Funnelarea: reference/graph_objects/Funnelarea.md
+        - Indicator: reference/graph_objects/Indicator.md
+        - Ohlc: reference/graph_objects/Ohlc.md
+        - Waterfall: reference/graph_objects/Waterfall.md
+      - 3D Traces:
+        - Cone: reference/graph_objects/Cone.md
+        - Isosurface: reference/graph_objects/Isosurface.md
+        - Mesh3d: reference/graph_objects/Mesh3d.md
+        - Scatter3d: reference/graph_objects/Scatter3d.md
+        - Streamtube: reference/graph_objects/Streamtube.md
+        - Surface: reference/graph_objects/Surface.md
+        - Volume: reference/graph_objects/Volume.md
+      - Map Traces:
+        - Choropleth: reference/graph_objects/Choropleth.md
+        - Choroplethmap: reference/graph_objects/Choroplethmap.md
+        - Choroplethmapbox: reference/graph_objects/Choroplethmapbox.md
+        - Densitymap: reference/graph_objects/Densitymap.md
+        - Densitymapbox: reference/graph_objects/Densitymapbox.md
+        - Scattergeo: reference/graph_objects/Scattergeo.md
+        - Scattermap: reference/graph_objects/Scattermap.md
+        - Scattermapbox: reference/graph_objects/Scattermapbox.md
+      - Specialized Traces:
+        - Barpolar: reference/graph_objects/Barpolar.md
+        - Carpet: reference/graph_objects/Carpet.md
+        - Contourcarpet: reference/graph_objects/Contourcarpet.md
+        - Icicle: reference/graph_objects/Icicle.md
+        - Parcats: reference/graph_objects/Parcats.md
+        - Parcoords: reference/graph_objects/Parcoords.md
+        - Sankey: reference/graph_objects/Sankey.md
+        - Scattercarpet: reference/graph_objects/Scattercarpet.md
+        - Scatterpolar: reference/graph_objects/Scatterpolar.md
+        - Scatterpolargl: reference/graph_objects/Scatterpolargl.md
+        - Scattersmith: reference/graph_objects/Scattersmith.md
+        - Scatterternary: reference/graph_objects/Scatterternary.md
+        - Splom: reference/graph_objects/Splom.md
+        - Sunburst: reference/graph_objects/Sunburst.md
+        - Treemap: reference/graph_objects/Treemap.md
+      - Other Classes:
+        - FigureWidget: reference/graph_objects/FigureWidget.md
+        - Frame: reference/graph_objects/Frame.md
+      - Modules:
+        - bar: reference/graph_objects/bar-package/index.md
+        - barpolar: reference/graph_objects/barpolar-package/index.md
+        - box: reference/graph_objects/box-package/index.md
+        - candlestick: reference/graph_objects/candlestick-package/index.md
+        - carpet: reference/graph_objects/carpet-package/index.md
+        - choropleth: reference/graph_objects/choropleth-package/index.md
+        - choroplethmap: reference/graph_objects/choroplethmap-package/index.md
+        - choroplethmapbox: reference/graph_objects/choroplethmapbox-package/index.md
+        - cone: reference/graph_objects/cone-package/index.md
+        - contour: reference/graph_objects/contour-package/index.md
+        - contourcarpet: reference/graph_objects/contourcarpet-package/index.md
+        - densitymap: reference/graph_objects/densitymap-package/index.md
+        - densitymapbox: reference/graph_objects/densitymapbox-package/index.md
+        - funnel: reference/graph_objects/funnel-package/index.md
+        - funnelarea: reference/graph_objects/funnelarea-package/index.md
+        - heatmap: reference/graph_objects/heatmap-package/index.md
+        - histogram: reference/graph_objects/histogram-package/index.md
+        - histogram2d: reference/graph_objects/histogram2d-package/index.md
+        - histogram2dcontour: reference/graph_objects/histogram2dcontour-package/index.md
+        - icicle: reference/graph_objects/icicle-package/index.md
+        - image: reference/graph_objects/image-package/index.md
+        - indicator: reference/graph_objects/indicator-package/index.md
+        - isosurface: reference/graph_objects/isosurface-package/index.md
+        - layout: reference/graph_objects/layout-package/index.md
+        - mesh3d: reference/graph_objects/mesh3d-package/index.md
+        - ohlc: reference/graph_objects/ohlc-package/index.md
+        - parcats: reference/graph_objects/parcats-package/index.md
+        - parcoords: reference/graph_objects/parcoords-package/index.md
+        - pie: reference/graph_objects/pie-package/index.md
+        - sankey: reference/graph_objects/sankey-package/index.md
+        - scatter: reference/graph_objects/scatter-package/index.md
+        - scatter3d: reference/graph_objects/scatter3d-package/index.md
+        - scattercarpet: reference/graph_objects/scattercarpet-package/index.md
+        - scattergeo: reference/graph_objects/scattergeo-package/index.md
+        - scattergl: reference/graph_objects/scattergl-package/index.md
+        - scattermap: reference/graph_objects/scattermap-package/index.md
+        - scattermapbox: reference/graph_objects/scattermapbox-package/index.md
+        - scatterpolar: reference/graph_objects/scatterpolar-package/index.md
+        - scatterpolargl: reference/graph_objects/scatterpolargl-package/index.md
+        - scattersmith: reference/graph_objects/scattersmith-package/index.md
+        - scatterternary: reference/graph_objects/scatterternary-package/index.md
+        - splom: reference/graph_objects/splom-package/index.md
+        - streamtube: reference/graph_objects/streamtube-package/index.md
+        - sunburst: reference/graph_objects/sunburst-package/index.md
+        - surface: reference/graph_objects/surface-package/index.md
+        - table: reference/graph_objects/table-package/index.md
+        - treemap: reference/graph_objects/treemap-package/index.md
+        - violin: reference/graph_objects/violin-package/index.md
+        - volume: reference/graph_objects/volume-package/index.md
+        - waterfall: reference/graph_objects/waterfall-package/index.md
 - Project:
   - license.md
   - conduct.md
@@ -258,3 +373,5 @@ exclude_docs: |
   examples/dash.md
   examples/ml_apps.md
   examples/orca-management.md
+  reference/graph_objects/*-package/*
+  !reference/graph_objects/*-package/index.md
