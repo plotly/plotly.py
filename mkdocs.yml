@@ -336,6 +336,7 @@ nav:
 
 theme:
   name: "material"
+  custom_dir: "pages/overrides"
   font:
   text: Inter
   features:
