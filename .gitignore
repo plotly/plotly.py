@@ -2,6 +2,7 @@
 0.html
 iframe_figures/
 tests/test_orca/images/linux/failed/
+*mesh_dataset.txt
 
 *.egg-info
 
