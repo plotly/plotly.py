@@ -334,6 +334,9 @@ nav:
   - conduct.md
   - contributing.md
 
+not_in_nav: |
+  reference/graph_objects/*-package/*
+
 theme:
   name: "material"
   font:
@@ -380,5 +383,3 @@ exclude_docs: |
   examples/dash.md
   examples/ml_apps.md
   examples/orca-management.md
-  reference/graph_objects/*-package/*
-  !reference/graph_objects/*-package/index.md
