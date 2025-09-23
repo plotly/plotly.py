@@ -19074,7 +19074,7 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |
  |  widget_types = <ipywidgets.widgets.widget.WidgetRegistry object>
  |
- |  widgets = {'274f980dd9f14a78b0925a61e9ad7d47': FigureWidget({
+ |  widgets = {'a60d0a080a3041ed8def3b848e08c0a5': FigureWidget({
  |      'dat...
  |
  |  ----------------------------------------------------------------------
