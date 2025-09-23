@@ -114,7 +114,7 @@ The `heatmapgl` trace has been removed. Use [`heatmap`](heatmaps.md) instead.
 
 ### `pointcloud`
 
-The `pointcloud` trace has been removed. Use [`scattergl`](/reference/scattergl.md).
+The `pointcloud` trace has been removed. Use [`scattergl`](/reference/graph_objects/Scattergl.md).
 
 <!-- #endregion -->
 
