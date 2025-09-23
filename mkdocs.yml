@@ -30,6 +30,10 @@ plugins:
             show_root_heading: true
             show_root_toc_entry: true
             merge_init_into_class: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            show_signature_annotations: true
+            separate_signature: true
 
 extra_css:
   - css/plotly-styles.css
