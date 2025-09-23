@@ -58,7 +58,7 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/gvwilson/plotly.py/bin/run_markdown.py", line 236, in _run_code
+  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 245, in _run_code
     exec(code, exec_globals)
   File "<string>", line 4, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
@@ -85,7 +85,7 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/gvwilson/plotly.py/bin/run_markdown.py", line 236, in _run_code
+  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 245, in _run_code
     exec(code, exec_globals)
   File "<string>", line 4, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
@@ -114,7 +114,7 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/gvwilson/plotly.py/bin/run_markdown.py", line 236, in _run_code
+  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 245, in _run_code
     exec(code, exec_globals)
   File "<string>", line 4, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
@@ -142,7 +142,7 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/gvwilson/plotly.py/bin/run_markdown.py", line 236, in _run_code
+  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 245, in _run_code
     exec(code, exec_globals)
   File "<string>", line 5, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
@@ -170,7 +170,7 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/gvwilson/plotly.py/bin/run_markdown.py", line 236, in _run_code
+  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 245, in _run_code
     exec(code, exec_globals)
   File "<string>", line 5, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
@@ -216,7 +216,7 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/gvwilson/plotly.py/bin/run_markdown.py", line 236, in _run_code
+  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 245, in _run_code
     exec(code, exec_globals)
   File "<string>", line 5, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'

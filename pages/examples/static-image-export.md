@@ -200,21 +200,13 @@ fig = px.bar(data_canada, x='year', y='pop')
 img_bytes = fig.to_image(format="png")
 ```
 
-Here's the bytes object displayed using `IPython.display.Image`:
+Here's the bytes object displayed using `Image.show()`:
 
 ```python
-from IPython.display import Image
-Image(img_bytes)
-```
-
-**Error:**
-```
-Error executing code: name 'img_bytes' is not defined
-Traceback (most recent call last):
-  File "/Users/gvwilson/plotly.py/bin/run_markdown.py", line 236, in _run_code
-    exec(code, exec_globals)
-  File "<string>", line 2, in <module>
-NameError: name 'img_bytes' is not defined
+from PIL import Image
+from io import BytesIO
+img = Image.open(BytesIO(img_bytes))
+img.show()
 ```
 
 ## Specify Image Dimensions and Scale
@@ -222,17 +214,8 @@ In addition to the image format, the `to_image` and `write_image` functions prov
 
 ```python
 img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
-Image(img_bytes)
-```
-
-**Error:**
-```
-Error executing code: name 'fig' is not defined
-Traceback (most recent call last):
-  File "/Users/gvwilson/plotly.py/bin/run_markdown.py", line 236, in _run_code
-    exec(code, exec_globals)
-  File "<string>", line 1, in <module>
-NameError: name 'fig' is not defined
+img = Image.open(BytesIO(img_bytes))
+img.show()
 ```
 
 ## Specify Image Export Engine

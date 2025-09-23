@@ -91,45 +91,45 @@ Help on method on_click in module plotly.basedatatypes:
 on_click(callback, append=False) method of plotly.graph_objects._scatter.Scatter instance
     Register function to be called when the user clicks on one or more
     points in this trace.
-    
+
     Note: Callbacks will only be triggered when the trace belongs to a
     instance of plotly.graph_objects.FigureWidget and it is displayed in an
     ipywidget context. Callbacks will not be triggered on figures
     that are displayed using plot/iplot.
-    
+
     Parameters
     ----------
     callback
         Callable function that accepts 3 arguments
-    
+
         - this trace
         - plotly.callbacks.Points object
         - plotly.callbacks.InputDeviceState object
-    
+
     append : bool
         If False (the default), this callback replaces any previously
         defined on_click callbacks for this trace. If True,
         this callback is appended to the list of any previously defined
         callbacks.
-    
+
     Returns
     -------
     None
-    
+
     Examples
     --------
-    
+
     >>> import plotly.graph_objs as go
     >>> from plotly.callbacks import Points, InputDeviceState
     >>> points, state = Points(), InputDeviceState()
-    
+
     >>> def click_fn(trace, points, state):
     ...     inds = points.point_inds
     ...     # Do something
-    
+
     >>> trace = go.Scatter(x=[1, 2], y=[3, 0])
     >>> trace.on_click(click_fn)
-    
+
     Note: The creation of the `points` and `state` objects is optional,
     it's simply a convenience to help the text editor perform completion
     on the arguments inside `click_fn`

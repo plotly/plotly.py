@@ -131,7 +131,7 @@ Help on function write_html in module plotly.basedatatypes:
 
 write_html(self, *args, **kwargs)
     Write a figure to an HTML file representation
-    
+
     Parameters
     ----------
     file : str or writeable
@@ -146,17 +146,17 @@ write_html(self, *args, **kwargs)
     include_plotlyjs : bool or string (default True)
         Specifies how the plotly.js library is included/loaded in the output
         div string.
-    
+
         If True, a script tag containing the plotly.js source code (~3MB)
         is included in the output.  HTML files generated with this option are
         fully self-contained and can be used offline.
-    
+
         If 'cdn', a script tag that references the plotly.js CDN is included
         in the output. HTML files generated with this option are about 3MB
         smaller than those generated with include_plotlyjs=True, but they
         require an active internet connection in order to load the plotly.js
         library.
-    
+
         If 'directory', a script tag is included that references an external
         plotly.min.js bundle that is assumed to reside in the same
         directory as the HTML file. If `file` is a string to a local file
@@ -169,29 +169,29 @@ write_html(self, *args, **kwargs)
         useful when many figures will be saved as HTML files in the same
         directory because the plotly.js source code will be included only
         once per output directory, rather than once per output file.
-    
+
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point
         the resulting HTML file to an alternative CDN or local bundle.
-    
+
         If False, no script tag referencing plotly.js is included. This is
         useful when the resulting div string will be placed inside an HTML
         document that already loads plotly.js.  This option is not advised
         when full_html=True as it will result in a non-functional html file.
-    
+
     include_mathjax : bool or string (default False)
         Specifies how the MathJax.js library is included in the output html
         div string.  MathJax is required in order to display labels
         with LaTeX typesetting.
-    
+
         If False, no script tag referencing MathJax.js will be included in the
         output.
-    
+
         If 'cdn', a script tag that references a MathJax CDN location will be
         included in the output.  HTML div strings generated with this option
         will be able to display LaTeX typesetting as long as internet access
         is available.
-    
+
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point the
         resulting HTML div string to an alternative CDN.
@@ -225,7 +225,7 @@ write_html(self, *args, **kwargs)
     div_id : str (default None)
         If provided, this is the value of the id attribute of the div tag. If None, the
         id attribute is a UUID.
-    
+
     Returns
     -------
     None
