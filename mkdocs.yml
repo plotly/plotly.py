@@ -1,5 +1,7 @@
 site_name: "Plotly.py"
 site_url: 'https://plotly.com/python/'
+repo_url: https://github.com/plotly/plotly.py
+repo_name: plotly/plotly.py
 docs_dir: pages
 site_dir: docs
 
@@ -334,8 +336,12 @@ nav:
   - conduct.md
   - contributing.md
 
+not_in_nav: |
+  reference/graph_objects/*-package/*
+
 theme:
   name: "material"
+  custom_dir: "pages/overrides"
   font:
   text: Inter
   features:
@@ -380,5 +386,3 @@ exclude_docs: |
   dash.md
   ml_apps.md
   orca-management.md
-  reference/graph_objects/*-package/*
-  !reference/graph_objects/*-package/index.md
