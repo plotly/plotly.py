@@ -4,7 +4,7 @@ RUN = uv run
 PACKAGE_DIRS = _plotly_utils plotly
 CODE_DIRS = ${PACKAGE_DIRS} scripts
 EXAMPLE_SRC =  $(wildcard doc/python/*.md)
-EXAMPLE_DST = $(patsubst doc/python/%.md,pages/examples/%.md,${EXAMPLE_SRC})
+EXAMPLE_DST = $(patsubst doc/python/%.md,pages/%.md,${EXAMPLE_SRC})
 
 ## commands: show available commands
 commands:
@@ -26,9 +26,9 @@ docs-tmp:
 ## examples: generate Markdown for individual doc/python
 examples: ${EXAMPLE_DST}
 
-pages/examples/%.md: doc/python/%.md
+pages/%.md: doc/python/%.md
 	@mkdir -p pages/examples
-	${RUN} bin/run_markdown.py --outdir pages/examples --inline --verbose 2 $<
+	${RUN} bin/run_markdown.py --outdir pages --htmldir pages/examples --inline --verbose 2 $<
 
 ## examples-force: force complete rebuild of examples
 examples-force:

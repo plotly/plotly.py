@@ -33,6 +33,7 @@ def _do_file(args, input_file, block_number=None):
     # Determine output file path etc.
     stem = input_file.stem
     output_file = args.outdir / f"{input_file.stem}{input_file.suffix}"
+    
     if input_file.resolve() == output_file.resolve():
         print(f"Error: output would overwrite input '{input_file}'", file=sys.stderr)
         sys.exit(1)
@@ -135,7 +136,8 @@ def _parse_args():
     parser.add_argument("inputs", nargs="+", help="Input .md files")
     parser.add_argument("--block", type=int, help="Single block to run")
     parser.add_argument("--inline", action="store_true", help="Inline HTML in .md")
-    parser.add_argument("--outdir", type=Path, help="Output directory")
+    parser.add_argument("--outdir", type=Path, help="Output directory for MD files")
+    parser.add_argument("--htmldir", type=Path, help="Output directory for HTML files")
     parser.add_argument("--verbose", type=int, default=0, help="Integer verbosity level")
     return parser.parse_args()
 
@@ -199,12 +201,12 @@ def _run_all_blocks(args, code_blocks, stem=None, block_number=None):
     for i, block in enumerate(code_blocks):
         if block_number is None:
             _report(args.verbose > 1, f"- Executing block {i}/{len(code_blocks)}")
-            figure_counter, result = _run_code(block["code"], args.outdir, figure_counter, stem, env)
+            figure_counter, result = _run_code(block["code"], args.htmldir, figure_counter, stem, env)
             execution_results.append(result)
             _report(args.verbose > 0 and bool(result["error"]), f"  - Warning: block {i} had an error")
         elif block_number == i:
             print(f"block number {block_number}")
-            figure_counter, result = _run_code(block["code"], args.outdir, figure_counter, stem)
+            figure_counter, result = _run_code(block["code"], args.htmldir, figure_counter, stem)
             print("--- standard output")
             print(result["stdout"])
             print("--- standard error")
