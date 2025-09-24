@@ -30,6 +30,9 @@ plugins:
             show_root_heading: true
             show_root_toc_entry: true
             merge_init_into_class: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            separate_signature: true
 
 extra_css:
   - css/plotly-styles.css
@@ -217,6 +220,10 @@ nav:
     - Smoothing: smoothing.md
     - LaTeX: LaTeX.md
 - API Reference:
+    - plotly.colors: reference/colors.md
+    - plotly.data: reference/data.md
+    - plotly.express: reference/plotly-express.md
+    - plotly.figure_factory: reference/figure-factory.md
     - plotly.graph_objects:
       - Overview: reference/graph_objects/index.md
       - Core Objects:
@@ -331,6 +338,8 @@ nav:
         - violin: reference/graph_objects/violin-package/index.md
         - volume: reference/graph_objects/volume-package/index.md
         - waterfall: reference/graph_objects/waterfall-package/index.md
+    - plotly.io: reference/io.md
+    - plotly.subplots: reference/subplots.md
 - Project:
   - license.md
   - conduct.md
