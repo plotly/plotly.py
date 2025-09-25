@@ -153,7 +153,7 @@ This section summarizes several ways to create new graph object figures with the
 
 #### Plotly Express
 
-[Plotly Express](https://plot.ly/python/plotly-express/) (included as the `plotly.express` module) is a high-level data visualization API that produces fully-populated graph object figures in single function-calls.
+[Plotly Express](plotly-express.md) (included as the `plotly.express` module) is a high-level data visualization API that produces fully-populated graph object figures in single function-calls.
 
 ```python
 import plotly.express as px

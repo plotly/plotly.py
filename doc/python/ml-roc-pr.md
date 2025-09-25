@@ -307,6 +307,7 @@ fig.show()
 ## References
 
 Learn more about `px`, `px.area`, `px.hist`:
-* https://plot.ly/python/histograms/
-* https://plot.ly/python/filled-area-plots/
-* https://plot.ly/python/line-charts/
+
+* [https://plotly.com/python/histograms/](histograms.md)
+* [https://plotly.com/python/filled-area-plots/](filled-area-plots.md)
+* [https://plotly.com/python/line-charts/](line-charts.md)

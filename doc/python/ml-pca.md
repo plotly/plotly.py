@@ -48,7 +48,7 @@ The dimensionality reduction technique we will be using is called the [Principal
 
 ### Visualize all the original dimensions
 
-First, let's plot all the features and see how the `species` in the Iris dataset are grouped. In a [Scatter Plot Matrix (splom)](https://plot.ly/python/splom/), each subplot displays a feature against another, so if we have $N$ features we have a $N \times N$ matrix.
+First, let's plot all the features and see how the `species` in the Iris dataset are grouped. In a [Scatter Plot Matrix (splom)](splom.md), each subplot displays a feature against another, so if we have $N$ features we have a $N \times N$ matrix.
 
 In our example, we are plotting all 4 features from the Iris dataset, thus we can see how `sepal_width` is compared against `sepal_length`, then against `petal_width`, and so forth. Keep in mind how some pairs of features can more easily separate different species.
 
@@ -265,11 +265,13 @@ fig.show()
 ## References
 
 Learn more about `px`, `px.scatter_3d`, and `px.scatter_matrix` here:
-* https://plot.ly/python/plotly-express/
-* https://plot.ly/python/3d-scatter-plots/
-* https://plot.ly/python/splom/
+
+* [https://plotly.com/python/plotly-express/](plotly-express.md)
+* [https://plotly.com/python/3d-scatter-plots/](3d-scatter-plots.md)
+* [https://plotly.com/python/splom/](splom.md)
 
 The following resources offer an in-depth overview of PCA and explained variance:
+
 * https://en.wikipedia.org/wiki/Explained_variation
 * https://scikit-learn.org/stable/modules/decomposition.html#pca
 * https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579

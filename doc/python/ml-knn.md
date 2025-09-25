@@ -36,7 +36,7 @@ jupyter:
 
 ## Basic binary classification with kNN
 
-This section gets us started with displaying basic binary classification using 2D data. We first show how to display training versus testing data using [various marker styles](https://plot.ly/python/marker-style/), then demonstrate how to evaluate our classifier's performance on the **test split** using a continuous color gradient to indicate the model's predicted score.
+This section gets us started with displaying basic binary classification using 2D data. We first show how to display training versus testing data using [various marker styles](marker-style.md), then demonstrate how to evaluate our classifier's performance on the **test split** using a continuous color gradient to indicate the model's predicted score.
 
 We will use [Scikit-learn](https://scikit-learn.org/) for training our model and for loading and splitting data. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
 
@@ -332,11 +332,13 @@ fig.show()
 ### Reference
 
 Learn more about `px`, `go.Contour`, and `go.Heatmap` here:
-* https://plot.ly/python/plotly-express/
-* https://plot.ly/python/heatmaps/
-* https://plot.ly/python/contour-plots/
+
+* [https://plotly.com/python/plotly-express/](plotly-express.md)
+* [https://plotly.com/python/heatmaps/](heatmaps.md)
+* [https://plotly.com/python/contour-plots/](contour-plots.md)
 
 This tutorial was inspired by amazing examples from the official scikit-learn docs:
+
 * https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html
 * https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
 * https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
