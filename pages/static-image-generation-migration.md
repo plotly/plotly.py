@@ -73,7 +73,7 @@ pio.defaults.default_format = "jpeg"
 # pio.kaleido.scope.default_format = "jpeg"
 ~~~
 
-The `mapbox_access_token` config setting is not available on `plotly.io.defaults` because Mapbox maps are deprecated and will be removed in a future version of Plotly.py. See [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) for more details.
+The `mapbox_access_token` config setting is not available on `plotly.io.defaults` because Mapbox maps are deprecated and will be removed in a future version of Plotly.py. See [MapLibre Migration](mapbox-to-maplibre.md) for more details.
 
 If you are migrating from Orca, the following config settings do not apply to Kaleido: `server_url`, `port`, `timeout`, and `use_xvfb`, but other settings, such as `default_format`, can be accessed via `plotly.io.defaults`.
 

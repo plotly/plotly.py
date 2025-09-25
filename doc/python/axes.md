@@ -190,7 +190,7 @@ fig.show()
 
 ### Set axis title position
 
-This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
+This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](setting-graph-size.md#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
 
 ```python
 import plotly.graph_objects as go
@@ -430,7 +430,7 @@ fig.show()
 
 _new in 5.8_
 
-You can position and style minor ticks on a Cartesian axis using the `minor` attribute. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
+You can position and style minor ticks on a Cartesian axis using the `minor` attribute. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.minor) for full details on the accepted keys in this dict.
 
 In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the inside: `ticks="inside"`. On the x-axis we've specified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the x-axis minor ticks using `showgrid`.
 
@@ -1025,4 +1025,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/xaxis/ and https://plotly.com/python/reference/layout/yaxis/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/layout/xaxis/](reference/graph_objects/layout-package/XAxis.md) and [https://plotly.com/python/reference/layout/yaxis/](reference/graph_objects/layout-package/YAxis.md) for more information and chart attribute options!

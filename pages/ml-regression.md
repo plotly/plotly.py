@@ -34,7 +34,7 @@ jupyter:
 ---
 
 <!-- #region -->
-This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like [Linear Regression](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html), and progressively move towards models like [Decision Tree][tree] and [Polynomial Features][poly]. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, [surface plots](https://plotly.com/python/3d-surface-plots/) for 3D data, and enhanced prediction error analysis with [Plotly Express](https://plotly.com/python/plotly-express/).
+This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like [Linear Regression](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html), and progressively move towards models like [Decision Tree][tree] and [Polynomial Features][poly]. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, [surface plots](3d-surface-plots.md) for 3D data, and enhanced prediction error analysis with [Plotly Express](plotly-express.md).
 
 We will use [Scikit-learn](https://scikit-learn.org/) to split and preprocess our data and train various regression models. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
 
@@ -147,7 +147,7 @@ fig.show()
 
 In addition to linear regression, it's possible to fit the same data using [k-Nearest Neighbors][knn]. When you perform a prediction on a new sample, this model either takes the weighted or un-weighted average of the neighbors. In order to see the difference between those two averaging options, we train a kNN model with both of those parameters, and we plot them in the same way as the previous graph.
 
-Notice how we can combine scatter points with lines using Plotly.py. You can learn more about [multiple chart types](https://plotly.com/python/graphing-multiple-chart-types/).
+Notice how we can combine scatter points with lines using Plotly.py. You can learn more about [multiple chart types](graphing-multiple-chart-types.md).
 
 [knn]: https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
 
@@ -281,7 +281,7 @@ X does not have valid feature names, but SVR was fitted with feature names
 
 Visualizing regression with one or two variables is straightforward, since we can respectively plot them with scatter plots and 3D scatter plots. Moreover, if you have more than 2 features, you will need to find alternative ways to visualize your data.
 
-One way is to use [bar charts](https://plotly.com/python/bar-charts/). In our example, each bar indicates the coefficients of our linear regression model for each input feature. Our model was trained on the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris).
+One way is to use [bar charts](bar-charts.md). In our example, each bar indicates the coefficients of our linear regression model for each input feature. Our model was trained on the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris).
 
 ```python
 import pandas as pd

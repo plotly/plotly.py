@@ -389,4 +389,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(choropleth)`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth) or https://plotly.com/python/reference/choropleth/ for more information and chart attribute options!
+See [function reference for `px.(choropleth)`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth) or [https://plotly.com/python/reference/choropleth/](reference/graph_objects/Choropleth.md) for more information and chart attribute options!

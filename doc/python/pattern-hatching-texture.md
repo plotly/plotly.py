@@ -201,4 +201,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/bar/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/bar/](reference/graph_objects/Bar.md) for more information and chart attribute options!

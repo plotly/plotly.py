@@ -211,4 +211,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/subplots/ for more information on working with subplots. See https://plotly.com/python/reference/ for more information regarding chart attributes!
+See [https://plotly.com/python/subplots/](subplots.md) for more information on working with subplots. See https://plotly.com/python/reference/ for more information regarding chart attributes!

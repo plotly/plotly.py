@@ -42,9 +42,9 @@ In general, there are five different approaches you can take in order to display
 
  1. Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
  2. Using [Dash](https://dash.plot.ly) in a web app context
- 3. Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
- 4. By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
- 5. By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
+ 3. Using a [`FigureWidget` rather than a `Figure`](figurewidget.md) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
+ 4. By [exporting to an HTML file](interactive-html-export.md) and loading that file in a browser immediately or later
+ 5. By [rendering the figure to a static image file using Kaleido](static-image-export.md) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
 
 Each of the first three approaches is discussed below.
 
@@ -260,14 +260,14 @@ IFrame(snippet_url + 'renderers', width='100%', height=1200)
 ## Displaying Figures Using `ipywidgets`
 Plotly figures can be displayed in [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) contexts using `plotly.graph_objects.FigureWidget` objects.  `FigureWidget` is a figure graph object (just like `plotly.graph_objects.Figure`), so you can add traces to it and update it just like a regular `Figure`.  But `FigureWidget` is also an `ipywidgets` object, which means that you can display it alongside other `ipywidgets` to build user interfaces right in the notebook.
 
-See the [Plotly FigureWidget Overview](https://plot.ly/python/figurewidget/) for more information on integrating `plotly.py` figures with `ipywidgets`.
+See the [Plotly FigureWidget Overview](figurewidget.md) for more information on integrating `plotly.py` figures with `ipywidgets`.
 
 It is important to note that `FigureWidget` does not use the renderers framework discussed above, so you should not use the `plotly.io.show` function on `FigureWidget` objects.
 
 
 ## Performance
 
-No matter the approach chosen to display a figure, [the figure data structure](https://plotly.com/python/figure-structure/) is first (automatically, internally) serialized into a JSON string before being transferred from the Python context to the browser (or [to an HTML file first](https://plotly.com/python/interactive-html-export/) or [to Kaleido for static image export](https://plotly.com/python/static-image-export/)).
+No matter the approach chosen to display a figure, [the figure data structure](figure-structure.md) is first (automatically, internally) serialized into a JSON string before being transferred from the Python context to the browser (or [to an HTML file first](interactive-html-export.md) or [to Kaleido for static image export](static-image-export.md)).
 
 *New in v5.0*
 

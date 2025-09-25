@@ -51,7 +51,7 @@ The differences between these two approaches are that:
 
 ### Shape-drawing with Scatter traces
 
-There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](reference/graph_objects/layout-package/Shape.md#plotly.graph_objects.layout.Shape.type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](polar-chart.md#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
 
 ```python
 import plotly.graph_objects as go
@@ -60,7 +60,7 @@ fig = go.Figure(go.Scatter(x=[0,1,2,0], y=[0,2,0,0], fill="toself"))
 fig.show()
 ```
 
-You can have more shapes either by adding [more traces](https://plotly.com/python/filled-area-plots/) or interrupting the series with `None`.
+You can have more shapes either by adding [more traces](filled-area-plots.md) or interrupting the series with `None`.
 
 ```python
 import plotly.graph_objects as go
@@ -1242,4 +1242,4 @@ fig.show()
 ```
 
 ### Reference
-See https://plotly.com/python/reference/layout/shapes/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/layout/shapes/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.shapes) for more information and chart attribute options!

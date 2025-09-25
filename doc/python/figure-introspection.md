@@ -137,7 +137,7 @@ help(go.layout.XAxis.autorange)
 
 In the figure we introspected above, we had added [a `scatter` trace](line-and-scatter.md), and Plotly.js automatically filled in for us the `xaxis` and `yaxis` values of that trace object to be `x` and `y`, and then also filled out the corresponding `layout.xaxis` and `layout.yaxis` objects for us, complete with their [extensive set of defaults for gridlines, tick labels and so on](axes.md).
 
-If we create a figure with [a `scattergeo` trace](scatter-plots-on-maps.md) instead, however, Plotly.js will fill in a totally different set of objects in `layout`, corresponding to [a `geo` subplot, with all of its defaults for whether or not to show rivers, lakes, country borders, coastlines etc](https://plotly.com/python/map-configuration/).
+If we create a figure with [a `scattergeo` trace](scatter-plots-on-maps.md) instead, however, Plotly.js will fill in a totally different set of objects in `layout`, corresponding to [a `geo` subplot, with all of its defaults for whether or not to show rivers, lakes, country borders, coastlines etc](map-configuration.md).
 
 ```python
 import plotly.graph_objects as go

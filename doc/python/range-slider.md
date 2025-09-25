@@ -362,4 +362,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeselector <br>and https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeslider <br>for more information and attribute options!
+See [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeselector](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeselector) <br>and [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeslider](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeslider) <br>for more information and attribute options!

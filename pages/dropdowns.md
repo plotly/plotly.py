@@ -34,7 +34,7 @@ jupyter:
 ---
 
 #### Methods
-The [updatemenu method](https://plotly.com/python/reference/layout/updatemenus/#layout-updatemenus-buttons-method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
+The [updatemenu method](reference/graph_objects/layout-package/updatemenu-package/Button.md#plotly.graph_objects.layout.updatemenu.Button.method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
 
 - `"restyle"`: modify data or data attributes
 - `"relayout"`: modify layout attributes
@@ -455,7 +455,7 @@ fig.show()
 
 ### Graph Selection Dropdowns in Jinja
 
-It is straight forward to create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a dropdown that chooses which div to display. This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration. It produces web pages that are larger than the webpages produced through the built in method which is a consideration for very large figures with hundreds or thousands of data points in traces that appear in multiple selections. This approach requires both a Python program and a Jinja template file.  The documentation on [using Jinja templates with Plotly](https://plotly.com/python/interactive-html-export/#inserting-plotly-output-into-html-using-a-jinja2-template) is relevant background.  
+It is straight forward to create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a dropdown that chooses which div to display. This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration. It produces web pages that are larger than the webpages produced through the built in method which is a consideration for very large figures with hundreds or thousands of data points in traces that appear in multiple selections. This approach requires both a Python program and a Jinja template file.  The documentation on [using Jinja templates with Plotly](interactive-html-export.md#inserting-plotly-output-into-html-using-a-jinja2-template) is relevant background.  
 
 <!-- #region -->
 
@@ -553,4 +553,4 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
 <!-- #endregion -->
 
 #### Reference
-See https://plotly.com/python/reference/layout/updatemenus/ for more information about `updatemenu` dropdowns.
+See [https://plotly.com/python/reference/layout/updatemenus/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information about `updatemenu` dropdowns.

@@ -36,7 +36,7 @@ jupyter:
 
 #### Imports
 
-The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html), [SciPy](https://www.scipy.org/) and [Plotly](https://plotly.com/python/getting-started/).
+The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html), [SciPy](https://www.scipy.org/) and [Plotly](getting-started.md).
 
 ```python
 import plotly.graph_objects as go

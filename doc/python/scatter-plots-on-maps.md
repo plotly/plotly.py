@@ -238,4 +238,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter_geo)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo) or https://plotly.com/python/reference/scattergeo/ and https://plotly.com/python/reference/layout/geo/ for more information and chart attribute options!
+See [function reference for `px.(scatter_geo)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo) or [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) and [https://plotly.com/python/reference/layout/geo/](reference/graph_objects/layout-package/Geo.md) for more information and chart attribute options!

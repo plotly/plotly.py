@@ -35,7 +35,7 @@ jupyter:
 
 ### Error Bars with Plotly Express
 
-[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). For functions representing 2D data points such as [`px.scatter`](https://plotly.com/python/line-and-scatter/), [`px.line`](https://plotly.com/python/line-charts/), [`px.bar`](https://plotly.com/python/bar-charts/) etc., error bars are given as a column name which is the value of the `error_x` (for the error on x position) and `error_y` (for the error on y position).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). For functions representing 2D data points such as [`px.scatter`](line-and-scatter.md), [`px.line`](line-charts.md), [`px.bar`](bar-charts.md) etc., error bars are given as a column name which is the value of the `error_x` (for the error on x position) and `error_y` (for the error on y position).
 
 ```python
 import plotly.express as px
@@ -202,4 +202,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/scatter/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/scatter/](reference/graph_objects/Scatter.md) for more information and chart attribute options!

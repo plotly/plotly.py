@@ -45,7 +45,7 @@ We will train a [k-Nearest Neighbors (kNN)](https://scikit-learn.org/stable/modu
 
 ### Display training and test splits
 
-Using Scikit-learn, we first generate synthetic data that form the shape of a moon. We then split it into a training and testing set. Finally, we display the ground truth labels using [a scatter plot](https://plotly.com/python/line-and-scatter/).
+Using Scikit-learn, we first generate synthetic data that form the shape of a moon. We then split it into a training and testing set. Finally, we display the ground truth labels using [a scatter plot](line-and-scatter.md).
 
 In the graph, we display all the negative labels as squares, and positive labels as circles. We differentiate the training and test set by adding a dot to the center of test data.
 
@@ -85,7 +85,7 @@ fig.update_traces(
 fig.show()
 ```
 
-### Visualize predictions on test split with [`plotly.express`](https://plotly.com/python/plotly-express/)
+### Visualize predictions on test split with [`plotly.express`](plotly-express.md)
 
 
 Now, we train the kNN model on the same training data displayed in the previous graph. Then, we predict the confidence score of the model for each of the data points in the test set. We will use shapes to denote the true labels, and the color will indicate the confidence of the model for assign that score.
@@ -126,7 +126,7 @@ Just like the previous example, we will first train our kNN model on the trainin
 
 Instead of predicting the conference for the test set, we can predict the confidence map for the entire area that wraps around the dimensions of our dataset. To do this, we use [`np.meshgrid`](https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html) to create a grid, where the distance between each point is denoted by the `mesh_size` variable.
 
-Then, for each of those points, we will use our model to give a confidence score, and plot it with a [contour plot](https://plotly.com/python/contour-plots/).
+Then, for each of those points, we will use our model to give a confidence score, and plot it with a [contour plot](contour-plots.md).
 
 In this example, we will use [graph objects](graph-objects.md), Plotly's low-level API for building figures.
 
@@ -253,9 +253,9 @@ IFrame(snippet_url + 'knn-classification', width='100%', height=1200)
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
-## Multi-class prediction confidence with [`go.Heatmap`](https://plotly.com/python/heatmaps/)
+## Multi-class prediction confidence with [`go.Heatmap`](heatmaps.md)
 
-It is also possible to visualize the prediction confidence of the model using [heatmaps](https://plotly.com/python/heatmaps/). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
+It is also possible to visualize the prediction confidence of the model using [heatmaps](heatmaps.md). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
 
 In this example, we will use [Plotly Express](plotly-express.md), Plotly's high-level API for building figures.
 

@@ -103,7 +103,7 @@ fig.show()
 ### Lines on maps using `Scattermap` traces
 
 This example uses `go.Scattermap` and sets
-the [mode](https://plotly.com/python/reference/scattermapbox/#scattermap-mode) attribute to a combination of markers and line.
+the [mode](reference/graph_objects/Scattermapbox.md#plotly.graph_objects.Scattermapbox.mode) attribute to a combination of markers and line.
 
 ```python
 import plotly.graph_objects as go
@@ -141,7 +141,7 @@ The earlier examples using `px.line_map` and `go.Scattermap` use [Maplibre](http
 
 To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](mapbox-layers.md) documentation for more information.
 
-To draw a line on your map, you either can use [`px.line_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox.html) in Plotly Express, or [`Scattermapbox`](https://plotly.com/python/reference/scattermapbox/) traces. Below we show you how to draw a line on Mapbox using Plotly Express.
+To draw a line on your map, you either can use [`px.line_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox.html) in Plotly Express, or [`Scattermapbox`](reference/graph_objects/Scattermapbox.md) traces. Below we show you how to draw a line on Mapbox using Plotly Express.
 
 Here's an example of using `Scattermapbox`.
 
@@ -187,7 +187,7 @@ fig.show()
 #### Reference
 
 See [function reference for `px.line_map`](https://plotly.com/python-api-reference/generated/plotly.express.line_map) or
-https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
+[https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for more information about the attributes available.
 
 For Mapbox-based tile maps, see [function reference for `px.line_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox) or
-https://plotly.com/python/reference/scattermapbox/.
+[https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).

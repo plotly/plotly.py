@@ -39,7 +39,7 @@ A [Sankey diagram](https://en.wikipedia.org/wiki/Sankey_diagram) is a flow diagr
 
 
 ### Basic Sankey Diagram
-Sankey diagrams visualize the contributions to a flow by defining [source](https://plotly.com/python/reference/sankey/#sankey-link-source) to represent the source node, [target](https://plotly.com/python/reference/sankey/#sankey-link-target) for the target node, [value](https://plotly.com/python/reference/sankey/#sankey-link-value) to set the flow volume, and [label](https://plotly.com/python/reference/sankey/#sankey-node-label) that shows the node name.
+Sankey diagrams visualize the contributions to a flow by defining [source](reference/graph_objects/sankey-package/Link.md#plotly.graph_objects.sankey.Link.source) to represent the source node, [target](reference/graph_objects/sankey-package/Link.md#plotly.graph_objects.sankey.Link.target) for the target node, [value](reference/graph_objects/sankey-package/Link.md#plotly.graph_objects.sankey.Link.value) to set the flow volume, and [label](reference/graph_objects/sankey-package/Node.md#plotly.graph_objects.sankey.Node.label) that shows the node name.
 
 ```python
 import plotly.graph_objects as go
@@ -134,7 +134,7 @@ IFrame(snippet_url + 'sankey-diagram', width='100%', height=1200)
 
 
 ### Style Sankey Diagram
-This example also uses [hovermode](https://plotly.com/python/reference/layout/#layout-hovermode) to enable multiple tooltips.
+This example also uses [hovermode](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.hovermode) to enable multiple tooltips.
 
 ```python
 import plotly.graph_objects as go
@@ -240,7 +240,7 @@ fig.show()
 
 ### Define Node Position
 
-The following example sets [node.x](https://plotly.com/python/reference/sankey/#sankey-node-x) and `node.y` to place nodes in the specified locations, except in the `snap arrangement` (default behaviour when `node.x` and `node.y` are not defined) to avoid overlapping of the nodes, therefore, an automatic snapping of elements will be set to define the padding between nodes via [nodepad](https://plotly.com/python/reference/sankey/#sankey-node-pad). The other possible arrangements are:<font color='blue'> 1)</font> perpendicular <font color='blue'>2)</font> freeform <font color='blue'>3)</font> fixed
+The following example sets [node.x](reference/graph_objects/sankey-package/Node.md#plotly.graph_objects.sankey.Node.x) and `node.y` to place nodes in the specified locations, except in the `snap arrangement` (default behaviour when `node.x` and `node.y` are not defined) to avoid overlapping of the nodes, therefore, an automatic snapping of elements will be set to define the padding between nodes via [nodepad](reference/graph_objects/sankey-package/Node.md#plotly.graph_objects.sankey.Node.pad). The other possible arrangements are:<font color='blue'> 1)</font> perpendicular <font color='blue'>2)</font> freeform <font color='blue'>3)</font> fixed
 
 ```python
 import plotly.graph_objects as go
@@ -346,4 +346,4 @@ fig.show()
 
 ### Reference
 
-See [https://plotly.com/python/reference/sankey](https://plotly.com/python/reference/sankey/) for more information and options!
+See [https://plotly.com/python/reference/sankey](reference/graph_objects/Sankey.md) for more information and options!

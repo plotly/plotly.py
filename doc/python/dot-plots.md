@@ -35,7 +35,7 @@ jupyter:
 
 #### Basic Dot Plot
 
-Dot plots (also known as [Cleveland dot plots](<https://en.wikipedia.org/wiki/Dot_plot_(statistics)>)) are [scatter plots](https://plotly.com/python/line-and-scatter/) with one categorical axis and one continuous axis. They can be used to show changes between two (or more) points in time or between two (or more) conditions. Compared to a [bar chart](bar-charts.md), dot plots can be less cluttered and allow for an easier comparison between conditions.
+Dot plots (also known as [Cleveland dot plots](<https://en.wikipedia.org/wiki/Dot_plot_(statistics)>)) are [scatter plots](line-and-scatter.md) with one categorical axis and one continuous axis. They can be used to show changes between two (or more) points in time or between two (or more) conditions. Compared to a [bar chart](bar-charts.md), dot plots can be less cluttered and allow for an easier comparison between conditions.
 
 For the same data, we show below how to create a dot plot using either `px.scatter` or `go.Scatter`.
 
@@ -179,4 +179,4 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/scatter/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/scatter/](reference/graph_objects/Scatter.md) for more information and chart attribute options!

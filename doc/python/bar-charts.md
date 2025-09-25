@@ -54,9 +54,9 @@ fig.show()
 Long-form data has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
 
 To learn more about how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions such as `px.bar`, see the [Plotly Express Wide-Form Support in Python
-documentation](https://plotly.com/python/wide-form/).
+documentation](wide-form.md).
 
-For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/).
+For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](px-arguments.md).
 
 ```python
 import plotly.express as px
@@ -114,7 +114,7 @@ IFrame(snippet_url + 'bar-charts', width='100%', height=1200)
 
 ### Colored Bars
 
-The bar plot can be customized using keyword arguments, for example to use [continuous color](https://plotly.com/python/colorscales/), as below, or [discrete color](discrete-color.md), as above.
+The bar plot can be customized using keyword arguments, for example to use [continuous color](colorscales.md), as below, or [discrete color](discrete-color.md), as above.
 
 ```python
 import plotly.express as px
@@ -828,7 +828,7 @@ fig.show()
 
 ### Bar Chart with Sorted or Ordered Categories
 
-Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
+Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
 
 This example orders the bar chart alphabetically with `categoryorder: 'category ascending'`
 
@@ -874,7 +874,7 @@ fig.show()
 
 ### Horizontal Bar Charts
 
-See examples of horizontal bar charts [here](https://plotly.com/python/horizontal-bar-charts/).
+See examples of horizontal bar charts [here](horizontal-bar-charts.md).
 
 ### Bar Charts With Multicategory Axis Type
 
@@ -898,4 +898,4 @@ fig.show()
 
 ### Reference
 
-See [function reference for `px.bar()`](https://plotly.com/python-api-reference/generated/plotly.express.bar) or https://plotly.com/python/reference/bar/ for more information and chart attribute options!
+See [function reference for `px.bar()`](https://plotly.com/python-api-reference/generated/plotly.express.bar) or [https://plotly.com/python/reference/bar/](reference/graph_objects/Bar.md) for more information and chart attribute options!

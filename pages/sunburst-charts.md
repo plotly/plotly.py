@@ -249,7 +249,7 @@ fig.show()
 
 ### Large Number of Slices
 
-This example uses a [plotly grid attribute](https://plotly.com/python/reference/layout/#layout-grid) for the subplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/sunburst/#sunburst-domain) attribute.
+This example uses a [plotly grid attribute](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.grid) for the subplots. Reference the row and column destination using the [domain](reference/graph_objects/Sunburst.md#plotly.graph_objects.Sunburst.domain) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -468,4 +468,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.sunburst()`](https://plotly.com/python-api-reference/generated/plotly.express.sunburst) or https://plotly.com/python/reference/sunburst/ for more information and chart attribute options!
+See [function reference for `px.sunburst()`](https://plotly.com/python-api-reference/generated/plotly.express.sunburst) or [https://plotly.com/python/reference/sunburst/](reference/graph_objects/Sunburst.md) for more information and chart attribute options!

@@ -141,7 +141,7 @@ fig.show()
 
 ### Map Projections
 
-Geo maps are drawn according to a given map [projection](https://en.wikipedia.org/wiki/Map_projection) that flattens the Earth's roughly-spherical surface into a 2-dimensional space. In the following examples, we show the `'orthographic'` and `'natural earth'` projections, two of the many projection types available. For a full list of available projection types, see the [layout.geo reference documentation](https://plotly.com/python/reference/layout/geo/#layout-geo-projection-type).
+Geo maps are drawn according to a given map [projection](https://en.wikipedia.org/wiki/Map_projection) that flattens the Earth's roughly-spherical surface into a 2-dimensional space. In the following examples, we show the `'orthographic'` and `'natural earth'` projections, two of the many projection types available. For a full list of available projection types, see the [layout.geo reference documentation](reference/graph_objects/layout-package/geo-package/Projection.md#plotly.graph_objects.layout.geo.Projection.type).
 
 ```python
 import plotly.graph_objects as go
@@ -254,4 +254,4 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/layout/geo/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/layout/geo/](reference/graph_objects/layout-package/Geo.md) for more information and chart attribute options!

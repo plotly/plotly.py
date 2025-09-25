@@ -186,7 +186,7 @@ See [_Displaying Figures in Python_](renderers.md) for more information on the r
 
 ### Static Image Export
 
-plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
+plotly.py supports [static image export](static-image-export.md),
 using the [`kaleido`](https://github.com/plotly/Kaleido) package. (Support for the legacy [`orca`](https://github.com/plotly/orca) image export utility is deprecated and will be removed after September 2025.)
 
 #### Kaleido

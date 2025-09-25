@@ -57,7 +57,7 @@ fig.show()
 ```
 
 ### Multi Category Waterfall Chart
-This example uses the [waterfallgroupgap attribute](https://plotly.com/python/reference/layout/#layout-waterfallgroupgap), which sets a gap between bars.
+This example uses the [waterfallgroupgap attribute](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.waterfallgroupgap), which sets a gap between bars.
 
 ```python
 import plotly.graph_objects as go
@@ -88,7 +88,7 @@ fig.show()
 ```
 
 ### Setting Marker Size and Color
-This example uses [decreasing](https://plotly.com/python/reference/waterfall/#waterfall-decreasing), [increasing](https://plotly.com/python/reference/waterfall/#waterfall-increasing), and [totals](https://plotly.com/python/reference/waterfall/#waterfall-totals) attributes to customize the bars.
+This example uses [decreasing](reference/graph_objects/Waterfall.md#plotly.graph_objects.Waterfall.decreasing), [increasing](reference/graph_objects/Waterfall.md#plotly.graph_objects.Waterfall.increasing), and [totals](reference/graph_objects/Waterfall.md#plotly.graph_objects.Waterfall.totals) attributes to customize the bars.
 
 ```python
 import plotly.graph_objects as go
@@ -129,4 +129,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/waterfall/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/waterfall/](reference/graph_objects/Waterfall.md) for more information and chart attribute options!

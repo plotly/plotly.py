@@ -441,4 +441,4 @@ fig.show()
 ```
 
 #### Reference
-All of the y-axis properties are found here: https://plotly.com/python/reference/layout/yaxis/.  For more information on creating subplots see the [Subplots in Python](subplots.md) section.
+All of the y-axis properties are found here: [https://plotly.com/python/reference/layout/yaxis/](reference/graph_objects/layout-package/YAxis.md).  For more information on creating subplots see the [Subplots in Python](subplots.md) section.

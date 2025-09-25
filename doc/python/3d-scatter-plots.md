@@ -37,7 +37,7 @@ jupyter:
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-Like the [2D scatter plot](https://plotly.com/python/line-and-scatter/) `px.scatter`, the 3D function `px.scatter_3d` plots individual data in three-dimensional space.
+Like the [2D scatter plot](line-and-scatter.md) `px.scatter`, the 3D function `px.scatter_3d` plots individual data in three-dimensional space.
 
 ```python
 import plotly.express as px
@@ -95,7 +95,7 @@ IFrame(snippet_url + '3d-scatter-plots', width='100%', height=1200)
 #### Basic 3D Scatter Plot
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Scatter3D` class from `plotly.graph_objects`](graph-objects.md).
-Like the [2D scatter plot](https://plotly.com/python/line-and-scatter/) `go.Scatter`, `go.Scatter3d` plots individual data in three-dimensional space.
+Like the [2D scatter plot](line-and-scatter.md) `go.Scatter`, `go.Scatter3d` plots individual data in three-dimensional space.
 
 ```python
 import plotly.graph_objects as go
@@ -140,4 +140,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_3d()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_3d) or https://plotly.com/python/reference/scatter3d/ for more information and chart attribute options!
+See [function reference for `px.scatter_3d()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_3d) or [https://plotly.com/python/reference/scatter3d/](reference/graph_objects/Scatter3d.md) for more information and chart attribute options!

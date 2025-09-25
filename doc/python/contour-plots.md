@@ -342,4 +342,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/contour/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/contour/](reference/graph_objects/Contour.md) for more information and chart attribute options!

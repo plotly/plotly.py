@@ -68,7 +68,7 @@ fig.show()
 
 Every cartesian trace type is compatible with categorical axes, not just `bar`.
 
-Scatter plots where one axis is categorical are often known as [dot plots](https://plotly.com/python/dot-plots/).
+Scatter plots where one axis is categorical are often known as [dot plots](dot-plots.md).
 
 ```python
 import plotly.express as px
@@ -117,7 +117,7 @@ fig.show()
 
 Whether using Plotly Express or not, categories can be sorted alphabetically or by value using the `categoryorder` attribute:
 
-Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
+Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
 
 This example orders the categories **alphabetically** with `categoryorder: 'category ascending'`
 
@@ -219,4 +219,4 @@ fig.show()
 ```
 ### Reference
 
-See https://plotly.com/python/reference/layout/xaxis/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/layout/xaxis/](reference/graph_objects/layout-package/XAxis.md) for more information and chart attribute options!

@@ -226,4 +226,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/scatter3d/ and https://plotly.com/python/reference/scatter/#scatter-marker-sizeref <br>for more information and chart attribute options!
+See [https://plotly.com/python/reference/scatter3d/](reference/graph_objects/Scatter3d.md) and [https://plotly.com/python/reference/scatter/#scatter-marker-sizeref](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizeref) <br>for more information and chart attribute options!

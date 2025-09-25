@@ -298,4 +298,4 @@ widgets.VBox([color_toggle, fig])
 
 #### Reference
 
-See [function reference for `px.parallel_categories()`](https://plotly.com/python-api-reference/generated/plotly.express.parallel_categories) or [reference page](https://plotly.com/python/reference/parcats/) for more information and chart attribute options!
+See [function reference for `px.parallel_categories()`](https://plotly.com/python-api-reference/generated/plotly.express.parallel_categories) or [reference page](reference/graph_objects/Parcats.md) for more information and chart attribute options!

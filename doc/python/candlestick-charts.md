@@ -165,4 +165,4 @@ fig.show()
 ```
 
 #### Reference
-For more information on candlestick attributes, see: https://plotly.com/python/reference/candlestick/
+For more information on candlestick attributes, see: [https://plotly.com/python/reference/candlestick/](reference/graph_objects/Candlestick.md)

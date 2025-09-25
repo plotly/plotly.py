@@ -100,7 +100,7 @@ fig.show()
 
 ### Automatically Adjust Margins
 
-Set [automargin](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-automargin) to `True` and Plotly will automatically increase the margin size to prevent ticklabels from being cut off or overlapping with axis titles.
+Set [automargin](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.automargin) to `True` and Plotly will automatically increase the margin size to prevent ticklabels from being cut off or overlapping with axis titles.
 
 ```python
 import plotly.graph_objects as go
@@ -216,4 +216,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/layout/](reference/graph_objects/Layout.md) for more information and chart attribute options!

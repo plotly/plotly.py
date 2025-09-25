@@ -39,9 +39,9 @@ jupyter:
 <!-- #region -->
 ## Violin Plot with Plotly Express
 
-A [violin plot](https://en.wikipedia.org/wiki/Violin_plot) is a statistical representation of numerical data. It is similar to a [box plot](https://plotly.com/python/box-plots/), with the addition of a rotated [kernel density](https://en.wikipedia.org/wiki/Kernel_density_estimation) plot on each side.
+A [violin plot](https://en.wikipedia.org/wiki/Violin_plot) is a statistical representation of numerical data. It is similar to a [box plot](box-plots.md), with the addition of a rotated [kernel density](https://en.wikipedia.org/wiki/Kernel_density_estimation) plot on each side.
 
-Alternatives to violin plots for visualizing distributions include [histograms](https://plotly.com/python/histograms/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+Alternatives to violin plots for visualizing distributions include [histograms](histograms.md), [box plots](box-plots.md), [ECDF plots](ecdf-plots.md) and [strip charts](strip-charts.md).
 
 
 ### Basic Violin Plot with Plotly Express
@@ -93,7 +93,7 @@ fig.show()
 
 ## Violin Plot with go.Violin
 
-If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Violin` are documented in the reference https://plotly.com/python/reference/violin/
+If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Violin` are documented in the reference [https://plotly.com/python/reference/violin/](reference/graph_objects/Violin.md)
 
 #### Basic Violin Plot
 
@@ -298,4 +298,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.violin()`](https://plotly.com/python-api-reference/generated/plotly.express.violin) or https://plotly.com/python/reference/violin/ for more information and chart attribute options!
+See [function reference for `px.violin()`](https://plotly.com/python-api-reference/generated/plotly.express.violin) or [https://plotly.com/python/reference/violin/](reference/graph_objects/Violin.md) for more information and chart attribute options!

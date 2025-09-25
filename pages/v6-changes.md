@@ -47,7 +47,7 @@ pip install notebook --upgrade
 
 ## Change to anywidget for go.FigureWidget
 
-[go.FigureWidget](https://plotly.com/python/figurewidget/) now uses [anywidget](https://anywidget.dev/). Install `anywidget` with:
+[go.FigureWidget](figurewidget.md) now uses [anywidget](https://anywidget.dev/). Install `anywidget` with:
 
 ```python
 pip install anywidget
@@ -55,18 +55,18 @@ pip install anywidget
 
 ## Processing NumPy and NumPy-Convertible Arrays
 
-Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](https://plotly.com/python/performance/) for more details.
+Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](performance.md) for more details.
 
 > If you are using Plotly.py 6 or later with Dash Design Kit, you may need to upgrade your Dash Design Kit version. See the [Dash Design Kit Compatibility section on the performance page](performance.md#dash-design-kit-compatibility) for more details.
 
 
 ## Dataframe Support
 
-Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support pandas, Polars, and PyArrow. With this change, the [performance](https://plotly.com/python/performance/) of using Polars or PyArrow with Plotly Express is significantly improved.
+Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to natively support pandas, Polars, and PyArrow. With this change, the [performance](performance.md) of using Polars or PyArrow with Plotly Express is significantly improved.
 
 ## Mapbox Deprecation
 
-Mapbox-based traces are deprecated and will be removed in a future version of Plotly.py. Use [Maplibre-based](https://plotly.com/python/mapbox-to-maplibre/) traces instead.
+Mapbox-based traces are deprecated and will be removed in a future version of Plotly.py. Use [Maplibre-based](mapbox-to-maplibre.md) traces instead.
 
 ## Removed Attributes
 

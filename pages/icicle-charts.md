@@ -35,7 +35,7 @@ jupyter:
 
 *New in v5.0*
 
-Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst charts](https://plotly.com/python/sunburst-charts/) and [Treemaps](https://plotly.com/python/treemaps/) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
+Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst charts](sunburst-charts.md) and [Treemaps](treemaps.md) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
 
 ### Basic Icicle Plot with plotly.express
 
@@ -127,7 +127,7 @@ fig.show()
 
 ### Using an explicit mapping for discrete colors
 
-For more information about discrete colors, see the [dedicated page](https://plotly.com/python/discrete-color/).
+For more information about discrete colors, see the [dedicated page](discrete-color.md).
 
 ```python
 import plotly.express as px
@@ -267,7 +267,7 @@ fig.show()
 
 ### Large Number of Slices
 
-This example uses a [plotly grid attribute](https://plotly.com/python/reference/layout/#layout-grid) for the subplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/icicle/#icicle-domain) attribute.
+This example uses a [plotly grid attribute](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.grid) for the subplots. Reference the row and column destination using the [domain](reference/graph_objects/Icicle.md#plotly.graph_objects.Icicle.domain) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -610,4 +610,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.icicle()`](https://plotly.com/python-api-reference/generated/plotly.express.icicle) or https://plotly.com/python/reference/icicle/ for more information and chart attribute options!
+See [function reference for `px.icicle()`](https://plotly.com/python-api-reference/generated/plotly.express.icicle) or [https://plotly.com/python/reference/icicle/](reference/graph_objects/Icicle.md) for more information and chart attribute options!

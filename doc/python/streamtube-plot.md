@@ -130,4 +130,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/streamtube/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/streamtube/](reference/graph_objects/Streamtube.md) for more information and chart attribute options!

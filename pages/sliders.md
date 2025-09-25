@@ -114,4 +114,4 @@ fig.show()
                         })                };            </script>        </div>
 
 #### Reference
-Check out https://plotly.com/python/reference/layout/updatemenus/ for more information!
+Check out [https://plotly.com/python/reference/layout/updatemenus/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information!

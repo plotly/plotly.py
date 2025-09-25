@@ -37,7 +37,7 @@ jupyter:
 
 [Empirical cumulative distribution function plots](https://en.wikipedia.org/wiki/Empirical_distribution_function) are a way to visualize the distribution of a variable, and Plotly Express has a built-in function, `px.ecdf()` to generate such plots. [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-Alternatives to ECDF plots for visualizing distributions include [histograms](https://plotly.com/python/histograms/), [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+Alternatives to ECDF plots for visualizing distributions include [histograms](histograms.md), [violin plots](violin.md), [box plots](box-plots.md) and [strip charts](strip-charts.md).
 
 ### Simple ECDF Plots
 
@@ -50,7 +50,7 @@ fig = px.ecdf(df, x="total_bill")
 fig.show()
 ```
 
-Providing multiple columns leverage's Plotly Express' [wide-form data support](https://plotly.com/python/wide-form/) to show multiple variables on the same plot.
+Providing multiple columns leverage's Plotly Express' [wide-form data support](wide-form.md) to show multiple variables on the same plot.
 
 ```python
 import plotly.express as px
@@ -150,7 +150,7 @@ fig.show()
 
 ### Marginal Plots
 
-ECDF plots also support [marginal plots](https://plotly.com/python/marginal-plots/)
+ECDF plots also support [marginal plots](marginal-plots.md)
 
 ```python
 import plotly.express as px
@@ -168,7 +168,7 @@ fig.show()
 
 ### Facets
 
-ECDF Plots also support [faceting](https://plotly.com/python/facet-plots/)
+ECDF Plots also support [faceting](facet-plots.md)
 
 ```python
 import plotly.express as px

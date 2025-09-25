@@ -82,4 +82,4 @@ fig.show()
 #### Reference
 
 
-See https://plotly.com/python/subplots/ for more information regarding subplots!
+See [https://plotly.com/python/subplots/](subplots.md) for more information regarding subplots!

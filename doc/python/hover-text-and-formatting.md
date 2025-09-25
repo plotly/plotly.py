@@ -269,12 +269,12 @@ fig.show()
 
 ### Customizing hover text with a hovertemplate
 
-To customize the tooltip on your graph you can use the [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) attribute of `graph_objects` traces, which is a template string used for rendering the information that appear on hoverbox.
+To customize the tooltip on your graph you can use the [hovertemplate](reference/graph_objects/Pie.md#plotly.graph_objects.Pie.hovertemplate) attribute of `graph_objects` traces, which is a template string used for rendering the information that appear on hoverbox.
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hovertemplate, it is not reserved for the trace name.
 
-Note that a hovertemplate customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate) customizes the text that appears on your chart. <br>
+Note that a hovertemplate customizes the tooltip text, while a [texttemplate](reference/graph_objects/Pie.md#plotly.graph_objects.Pie.texttemplate) customizes the text that appears on your chart. <br>
 
-Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plotly.com/python/reference/layout/#layout-hoverlabel-align).
+Set the horizontal alignment of the text within tooltip with [hoverlabel.align](reference/graph_objects/layout-package/Hoverlabel.md#plotly.graph_objects.layout.Hoverlabel.align).
 
 ```python
 import plotly.graph_objects as go
@@ -390,7 +390,7 @@ fig.show()
 
 *New in v5.0*
 
-When [displaying periodic data](https://plotly.com/python/time-series/#displaying-period-data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hovermodes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
+When [displaying periodic data](time-series.md#displaying-period-data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hovermodes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
 
 ```python
 import plotly.graph_objects as go

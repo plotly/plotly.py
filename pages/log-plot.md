@@ -68,7 +68,7 @@ fig.show()
 
 _new in 5.8_
 
-You can position and style minor ticks using `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
+You can position and style minor ticks using `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.minor) for full details on the accepted keys in this dict.
 
 In this example we set the tick length with `ticklen`, add the ticks on the inside with `ticks="inside"`, and turn grid lines on with `howgrid=True`.
 
@@ -160,4 +160,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter) or https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-type for more information and chart attribute options!
+See [function reference for `px.(scatter)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter) or [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-type](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.type) for more information and chart attribute options!

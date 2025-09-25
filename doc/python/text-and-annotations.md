@@ -443,7 +443,7 @@ fig = go.Figure(
 fig.show()
 ```
 
-[scattergl](https://plotly.com/python/reference/scattergl) traces do not support all numeric font weights. When you specify a numeric font weight on `scattergl`, weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
+[scattergl](reference/graph_objects/Scattergl.md) traces do not support all numeric font weights. When you specify a numeric font weight on `scattergl`, weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
 
 
 ## Text Case
@@ -850,9 +850,9 @@ fig.show()
 
 ### Customize Displayed Text with a Text Template
 
-To show an arbitrary text in your chart you can use [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate), which is a template string used for rendering the information, and will override [textinfo](https://plotly.com/python/reference/treemap/#treemap-textinfo).
+To show an arbitrary text in your chart you can use [texttemplate](reference/graph_objects/Pie.md#plotly.graph_objects.Pie.texttemplate), which is a template string used for rendering the information, and will override [textinfo](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.textinfo).
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format).
-`texttemplate` customizes the text that appears on your plot vs. [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) that customizes the tooltip text.
+`texttemplate` customizes the text that appears on your plot vs. [hovertemplate](reference/graph_objects/Pie.md#plotly.graph_objects.Pie.hovertemplate) that customizes the tooltip text.
 
 ```python
 import plotly.graph_objects as go
@@ -868,7 +868,7 @@ fig.show()
 
 ### Customize Text Template
 
-The following example uses [textfont](https://plotly.com/python/reference/scatterternary/#scatterternary-textfont) to customize the added text.
+The following example uses [textfont](reference/graph_objects/Scatterternary.md#plotly.graph_objects.Scatterternary.textfont) to customize the added text.
 
 ```python
 import plotly.graph_objects as go
@@ -889,8 +889,8 @@ fig.show()
 
 ### Set Date in Text Template
 
-The following example shows how to show date by setting [axis.type](https://plotly.com/python/reference/layout/yaxis/#layout-yaxis-type) in [funnel charts](https://plotly.com/python/funnel-charts/).
-As you can see [textinfo](https://plotly.com/python/reference/funnel/#funnel-textinfo) and [texttemplate](https://plotly.com/python/reference/funnel/#funnel-texttemplate) have the same functionality when you want to determine 'just' the trace information on the graph.
+The following example shows how to show date by setting [axis.type](reference/graph_objects/layout-package/YAxis.md#plotly.graph_objects.layout.YAxis.type) in [funnel charts](funnel-charts.md).
+As you can see [textinfo](reference/graph_objects/Funnel.md#plotly.graph_objects.Funnel.textinfo) and [texttemplate](reference/graph_objects/Funnel.md#plotly.graph_objects.Funnel.texttemplate) have the same functionality when you want to determine 'just' the trace information on the graph.
 
 ```python
 from plotly import graph_objects as go
@@ -920,4 +920,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/annotations/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/layout/annotations/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.annotations) for more information and chart attribute options!

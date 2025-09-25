@@ -36,9 +36,9 @@ jupyter:
 
 There are three different ways to show a filled area on a tile-based map:
 
-- Using a [Scattermap](https://plotly.com/python/reference/scattermap/) trace and setting the `fill` attribute to 'toself'
-- Using a map layout (i.e. by minimally using an empty [Scattermap](https://plotly.com/python/reference/scattermap/) trace) and adding a GeoJSON layer
-- Using the [Choroplethmap](https://plotly.com/python/tile-county-choropleth/) trace type
+- Using a [Scattermap](reference/graph_objects/Scattermap.md) trace and setting the `fill` attribute to 'toself'
+- Using a map layout (i.e. by minimally using an empty [Scattermap](reference/graph_objects/Scattermap.md) trace) and adding a GeoJSON layer
+- Using the [Choroplethmap](tile-county-choropleth.md) trace type
 
 ## Filled `Scattermap` Trace
 
@@ -65,7 +65,7 @@ fig.show()
 
 ### Multiple Filled Areas with a `Scattermap` trace
 
-The following example shows how to use `None` in your data to draw multiple filled areas. Such gaps in trace data are unconnected by default, but this can be controlled via the [connectgaps](https://plotly.com/python/reference/scattermap/#scattermap-connectgaps) attribute.
+The following example shows how to use `None` in your data to draw multiple filled areas. Such gaps in trace data are unconnected by default, but this can be controlled via the [connectgaps](reference/graph_objects/Scattermap.md#plotly.graph_objects.Scattermap.connectgaps) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -166,4 +166,4 @@ fig.show()
 
 #### Reference
 
-See  https://plotly.com/python/reference/scattermap/ for available attribute options, or for `go.Scattermapbox`, see https://plotly.com/python/reference/scattermapbox/.
+See  [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for available attribute options, or for `go.Scattermapbox`, see [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).

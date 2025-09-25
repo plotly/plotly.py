@@ -72,7 +72,7 @@ fig = px.line_polar(df, r="frequency", theta="direction", color="strength", line
 fig.show()
 ```
 
-See also the [wind rose page](https://plotly.com/python/wind-rose-charts/) for more wind rose visualizations in polar coordinates.
+See also the [wind rose page](wind-rose-charts.md) for more wind rose visualizations in polar coordinates.
 
 You can plot less than a whole circle with the `range_theta` argument, and also control the `start_angle` and `direction`:
 
@@ -85,7 +85,7 @@ fig.show()
 
 ## Polar Scatter Plot with go.Scatterpolar
 
-If Plotly Express does not provide a good starting point, you can use [the more generic `go.Scatterpolar` class from `plotly.graph_objects`](graph-objects.md). All the options are documented in the [reference page](https://plotly.com/python/reference/scatterpolar/).
+If Plotly Express does not provide a good starting point, you can use [the more generic `go.Scatterpolar` class from `plotly.graph_objects`](graph-objects.md). All the options are documented in the [reference page](reference/graph_objects/Scatterpolar.md).
 
 #### Basic Polar Chart
 
@@ -438,4 +438,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter_polar)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_polar) or [function reference for `px.(line_polar)`](https://plotly.com/python-api-reference/generated/plotly.express.line_polar) or https://plotly.com/python/reference/scatterpolar/ for more information and chart attribute options!
+See [function reference for `px.(scatter_polar)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_polar) or [function reference for `px.(line_polar)`](https://plotly.com/python-api-reference/generated/plotly.express.line_polar) or [https://plotly.com/python/reference/scatterpolar/](reference/graph_objects/Scatterpolar.md) for more information and chart attribute options!

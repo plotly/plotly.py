@@ -329,4 +329,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(line_geo)`](https://plotly.com/python-api-reference/generated/plotly.express.line_geo) or https://plotly.com/python/reference/scattergeo/ for more information and chart attribute options!
+See [function reference for `px.(line_geo)`](https://plotly.com/python-api-reference/generated/plotly.express.line_geo) or [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) for more information and chart attribute options!

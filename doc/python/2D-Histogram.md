@@ -38,7 +38,7 @@ jupyter:
 
 ## 2D Histograms or Density Heatmaps
 
-A 2D histogram, also known as a density heatmap, is the 2-dimensional generalization of a [histogram](histograms.md) which resembles a [heatmap](heatmaps.md) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the color of the tile representing the bin. This kind of visualization (and the related [2D histogram contour, or density contour](https://plotly.com/python/2d-histogram-contour/)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](line-and-scatter.md) would result in points overlapping each other and hiding patterns. For data sets of more than a few thousand points, a better approach than the ones listed here would be to [use Plotly with Datashader](datashader.md) to precompute the aggregations before displaying the data with Plotly.
+A 2D histogram, also known as a density heatmap, is the 2-dimensional generalization of a [histogram](histograms.md) which resembles a [heatmap](heatmaps.md) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the color of the tile representing the bin. This kind of visualization (and the related [2D histogram contour, or density contour](2d-histogram-contour.md)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](line-and-scatter.md) would result in points overlapping each other and hiding patterns. For data sets of more than a few thousand points, a better approach than the ones listed here would be to [use Plotly with Datashader](datashader.md) to precompute the aggregations before displaying the data with Plotly.
 
 ## Density Heatmaps with Plotly Express
 
@@ -151,7 +151,7 @@ fig = go.Figure(go.Histogram2d(x=x, y=y, histnorm='probability',
 fig.show()
 ```
 ### Sharing bin settings between 2D Histograms
-This example shows how to use [bingroup](https://plotly.com/python/reference/histogram/#histogram-bingroup) attribute to have a compatible bin settings for both histograms. To define `start`, `end` and `size` value of x-axis and y-axis separately, set [ybins](https://plotly.com/python/reference/histogram2dcontour/#histogram2dcontour-ybins) and `xbins`.
+This example shows how to use [bingroup](reference/graph_objects/Histogram.md#histogram-bingroup) attribute to have a compatible bin settings for both histograms. To define `start`, `end` and `size` value of x-axis and y-axis separately, set [ybins](reference/graph_objects/Histogram2dContour.md#histogram2dcontour-ybins) and `xbins`.
 
 ```python
 import plotly.graph_objects as go
@@ -269,4 +269,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/histogram2d/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/histogram2d/](reference/graph_objects/Histogram2d.md) for more information and chart attribute options!

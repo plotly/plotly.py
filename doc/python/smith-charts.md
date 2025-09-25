@@ -91,7 +91,7 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/scattersmith/ and https://plotly.com/python/reference/layout/smith/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/scattersmith/](reference/graph_objects/Scattersmith.md) and [https://plotly.com/python/reference/layout/smith/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.smith) for more information and chart attribute options!
 
 ```python
 

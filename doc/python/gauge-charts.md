@@ -41,7 +41,7 @@ A radial gauge chart has a circular arc, which displays a single value to estima
   The bar shows the target value, and the shading represents the progress toward that goal. Gauge charts, known as
   speedometer charts as well. This chart type is usually used to illustrate key business indicators.
 
-  The example below displays a basic gauge chart with default attributes. For more information about different added attributes check [indicator](https://plotly.com/python/indicator/) tutorial.
+  The example below displays a basic gauge chart with default attributes. For more information about different added attributes check [indicator](indicator.md) tutorial.
 
 ```python
 import plotly.graph_objects as go
@@ -78,7 +78,7 @@ fig.show()
 ```
 
 #### Custom Gauge Chart
-The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](https://plotly.com/python/reference/indicator/).
+The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](reference/graph_objects/Indicator.md).
 
 ```python
 import plotly.graph_objects as go
@@ -110,4 +110,4 @@ fig.show()
 
 
 #### Reference
-See https://plotly.com/python/reference/indicator/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/indicator/](reference/graph_objects/Indicator.md) for more information and chart attribute options!

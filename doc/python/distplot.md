@@ -35,7 +35,7 @@ jupyter:
 
 ## Combined statistical representations with px.histogram
 
-Several representations of statistical distributions are available in plotly, such as [histograms](https://plotly.com/python/histograms/), [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/) (see [the complete list here](https://plotly.com/python/statistical-charts/)). It is also possible to combine several representations in the same plot.
+Several representations of statistical distributions are available in plotly, such as [histograms](histograms.md), [violin plots](violin.md), [box plots](box-plots.md) (see [the complete list here](https://plotly.com/python/statistical-charts/)). It is also possible to combine several representations in the same plot.
 
 For example, the `plotly.express` function `px.histogram` can add a subplot with a different statistical representation than the histogram, given by the parameter `marginal`. [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 

@@ -201,7 +201,7 @@ fig.show()
 
 ### Set Marker Symbols
 
-You can define the symbol on your map by setting [`symbol`](https://plotly.com/python/reference/scattermap/#scattermap-marker-symbol) attribute.
+You can define the symbol on your map by setting [`symbol`](reference/graph_objects/scattermap-package/Marker.md#plotly.graph_objects.scattermap.Marker.symbol) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -348,6 +348,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_map`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_map) or https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
+See [function reference for `px.scatter_map`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_map) or [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for more information about the attributes available.
 
-For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermapbox/.
+For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).

@@ -35,7 +35,7 @@ jupyter:
 
 This page presents various ways to visualize two popular dimensionality reduction techniques, namely the [t-distributed stochastic neighbor embedding](https://lvdmaaten.github.io/tsne/) (t-SNE) and [Uniform Manifold Approximation and Projection](https://umap-learn.readthedocs.io/en/latest/index.html) (UMAP). They are needed whenever you want to visualize data with more than two or three features (i.e. dimensions).
 
-We first show how to visualize data with more than three features using the [scatter plot matrix](https://medium.com/plotly/what-is-a-splom-chart-make-scatterplot-matrices-in-python-8dc4998921c3), then we apply dimensionality reduction techniques to get 2D/3D representation of our data, and visualize the results with [scatter plots](https://plotly.com/python/line-and-scatter/) and [3D scatter plots](https://plotly.com/python/3d-scatter-plots/).
+We first show how to visualize data with more than three features using the [scatter plot matrix](https://medium.com/plotly/what-is-a-splom-chart-make-scatterplot-matrices-in-python-8dc4998921c3), then we apply dimensionality reduction techniques to get 2D/3D representation of our data, and visualize the results with [scatter plots](line-and-scatter.md) and [3D scatter plots](3d-scatter-plots.md).
 
 
 ## Basic t-SNE projections
@@ -47,7 +47,7 @@ Compared to a method like Principal Component Analysis (PCA), it takes significa
 
 ### Visualizing high-dimensional data with `px.scatter_matrix`
 
-First, let's try to visualize every feature of the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris), and color everything by the species. We will use the Scatter Plot Matrix ([splom](https://plotly.com/python/splom/)), which lets us plot each feature against everything else, which is convenient when your dataset has more than 3 dimensions.
+First, let's try to visualize every feature of the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris), and color everything by the species. We will use the Scatter Plot Matrix ([splom](splom.md)), which lets us plot each feature against everything else, which is convenient when your dataset has more than 3 dimensions.
 
 ```python
 import plotly.express as px
@@ -166,12 +166,14 @@ fig.show()
 ## Reference
 
 Plotly figures:
-* https://plotly.com/python/line-and-scatter/
-* https://plotly.com/python/3d-scatter-plots/
-* https://plotly.com/python/splom/
+
+* [https://plotly.com/python/line-and-scatter/](line-and-scatter.md)
+* [https://plotly.com/python/3d-scatter-plots/](3d-scatter-plots.md)
+* [https://plotly.com/python/splom/](splom.md)
 
 
 Details about algorithms:
+
 * UMAP library: https://umap-learn.readthedocs.io/en/latest/
 * t-SNE User guide: https://scikit-learn.org/stable/modules/manifold.html#t-sne
 * t-SNE paper: https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf

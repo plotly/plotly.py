@@ -40,7 +40,7 @@ jupyter:
 In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in Plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...) which can be used to visualize data on categorical and date axes as well as linear axes.
 
 
-Alternatives to histogram plots for visualizing distributions include [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+Alternatives to histogram plots for visualizing distributions include [violin plots](violin.md), [box plots](box-plots.md), [ECDF plots](ecdf-plots.md) and [strip charts](strip-charts.md).
 
 > If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
 bar, go to the [Bar Chart tutorial](bar-charts.md).
@@ -202,7 +202,7 @@ fig.show()
 
 #### Visualizing the distribution
 
-With the `marginal` keyword, a [marginal](https://plotly.com/python/marginal-plots/) is drawn alongside the histogram, visualizing the distribution. See [the distplot page](https://plotly.com/python/distplot/) for more examples of combined statistical representations.
+With the `marginal` keyword, a [marginal](marginal-plots.md) is drawn alongside the histogram, visualizing the distribution. See [the distplot page](distplot.md) for more examples of combined statistical representations.
 
 ```python
 import plotly.express as px
@@ -227,7 +227,7 @@ fig.show()
 
 ## Histograms with go.Histogram
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](graph-objects.md). All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](graph-objects.md). All of the available histogram options are described in the histogram section of the reference page: [https://plotly.com/python/reference#histogram](reference/graph_objects/Histogram.md).
 
 ### Basic Histogram
 
@@ -402,7 +402,7 @@ fig.show()
 
 ### Custom Binning
 
-For custom binning along x-axis, use the attribute [`nbinsx`](https://plotly.com/python/reference/histogram/#histogram-nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](https://plotly.com/python/reference/histogram/#histogram-xbins) along with `autobinx = False`.
+For custom binning along x-axis, use the attribute [`nbinsx`](reference/graph_objects/Histogram.md#plotly.graph_objects.Histogram.nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](reference/graph_objects/Histogram.md#plotly.graph_objects.Histogram.xbins) along with `autobinx = False`.
 
 ```python
 import plotly.graph_objects as go
@@ -465,7 +465,7 @@ fig2.show()
 
 ### Share bins between histograms
 
-In this example both histograms have a compatible bin settings using [bingroup](https://plotly.com/python/reference/histogram/#histogram-bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plotly.com/python/2D-Histogram/) trace can share the same `bingroup`.
+In this example both histograms have a compatible bin settings using [bingroup](reference/graph_objects/Histogram.md#plotly.graph_objects.Histogram.bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](2D-Histogram.md) trace can share the same `bingroup`.
 
 ```python
 import plotly.graph_objects as go
@@ -488,7 +488,7 @@ fig.show()
 
 ### Sort Histogram by Category Order
 
-Histogram bars can also be sorted based on the ordering logic of the categorical values using the [categoryorder](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-categoryorder) attribute of the x-axis. Sorting of histogram bars using `categoryorder` also works with multiple traces on the same x-axis. In the following examples, the histogram bars are sorted based on the total numerical values.
+Histogram bars can also be sorted based on the ordering logic of the categorical values using the [categoryorder](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.categoryorder) attribute of the x-axis. Sorting of histogram bars using `categoryorder` also works with multiple traces on the same x-axis. In the following examples, the histogram bars are sorted based on the total numerical values.
 
 ```python
 import plotly.express as px
@@ -508,4 +508,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.histogram()`](https://plotly.com/python-api-reference/generated/plotly.express.histogram) or https://plotly.com/python/reference/histogram/ for more information and chart attribute options!
+See [function reference for `px.histogram()`](https://plotly.com/python-api-reference/generated/plotly.express.histogram) or [https://plotly.com/python/reference/histogram/](reference/graph_objects/Histogram.md) for more information and chart attribute options!

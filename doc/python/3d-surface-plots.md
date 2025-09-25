@@ -77,7 +77,7 @@ fig.show()
 #### Surface Plot With Contours
 
 
-Display and customize contour data for each axis using the `contours` attribute ([reference](https://plotly.com/python/reference/surface/#surface-contours)).
+Display and customize contour data for each axis using the `contours` attribute ([reference](reference/graph_objects/Surface.md#plotly.graph_objects.Surface.contours)).
 
 ```python
 import plotly.graph_objects as go
@@ -99,7 +99,7 @@ fig.update_layout(title=dict(text='Mt Bruno Elevation'), autosize=False,
 fig.show()
 ```
 #### Configure Surface Contour Levels
-This example shows how to slice the surface graph on the desired position for each of x, y and z axis. [contours.x.start](https://plotly.com/python/reference/surface/#surface-contours-x-start) sets the starting contour level value, `end` sets the end of it, and `size` sets the step between each contour level.
+This example shows how to slice the surface graph on the desired position for each of x, y and z axis. [contours.x.start](reference/graph_objects/surface-package/contours-package/X.md#plotly.graph_objects.surface.contours.X.start) sets the starting contour level value, `end` sets the end of it, and `size` sets the step between each contour level.
 
 ```python
 import plotly.graph_objects as go
@@ -196,4 +196,4 @@ fig.show()
 #### Reference
 
 
-See https://plotly.com/python/reference/surface/ for more information!
+See [https://plotly.com/python/reference/surface/](reference/graph_objects/Surface.md) for more information!

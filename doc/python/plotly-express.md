@@ -52,7 +52,7 @@ frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media
 
 Plotly Express currently includes the following functions:
 
-* **Basics**: [`scatter`](line-and-scatter.md), [`line`](line-charts.md), [`area`](filled-area-plots.md), [`bar`](bar-charts.md), [`funnel`](funnel-charts.md), [`timeline`](https://plotly.com/python/gantt/)
+* **Basics**: [`scatter`](line-and-scatter.md), [`line`](line-charts.md), [`area`](filled-area-plots.md), [`bar`](bar-charts.md), [`funnel`](funnel-charts.md), [`timeline`](gantt.md)
 * **Part-of-Whole**: [`pie`](pie-charts.md), [`sunburst`](sunburst-charts.md), [`treemap`](treemaps.md), [`icicle`](icicle-charts.md), [`funnel_area`](funnel-charts.md)
 * **1D Distributions**: [`histogram`](histograms.md), [`box`](box-plots.md), [`violin`](violin.md), [`strip`](strip-charts.md), [`ecdf`](ecdf-plots.md)
 * **2D Distributions**: [`density_heatmap`](2D-Histogram.md), [`density_contour`](2d-histogram-contour.md)
@@ -68,11 +68,11 @@ Plotly Express currently includes the following functions:
 
 The Plotly Express API in general offers the following features:
 
-* **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](https://plotly.com/python-api-reference/plotly.express.html), plus [built-in demo datasets under `px.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data) and [built-in color scales and sequences under `px.color`](https://plotly.com/python-api-reference/generated/plotly.colors.html#module-plotly.colors). Every PX function returns a `plotly.graph_objects.Figure` object, so you can edit it using all the same methods like [`update_layout` and `add_trace`](https://plotly.com/python/creating-and-updating-figures/#updating-figures).
+* **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](https://plotly.com/python-api-reference/plotly.express.html), plus [built-in demo datasets under `px.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data) and [built-in color scales and sequences under `px.color`](https://plotly.com/python-api-reference/generated/plotly.colors.html#module-plotly.colors). Every PX function returns a `plotly.graph_objects.Figure` object, so you can edit it using all the same methods like [`update_layout` and `add_trace`](creating-and-updating-figures.md#updating-figures).
 * **Sensible, Overridable Defaults**: PX functions will infer sensible defaults wherever possible, and will always let you override them.
 * **Flexible Input Formats**: PX functions [accept input in a variety of formats](px-arguments.md), from `list`s and `dict`s to [long-form or wide-form `DataFrame`s](wide-form.md) to [`numpy` arrays and `xarrays`](imshow.md) to [GeoPandas `GeoDataFrames`](maps.md).
-* **Automatic Trace and Layout configuration**: PX functions will create one [trace](figure-structure.md) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' [`legendgroup` and `showlegend` attributes](https://plotly.com/python/legend.md) are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. Traces are automatically linked to a correctly-configured [subplot of the appropriate type](figure-structure.md).
-* **Automatic Figure Labelling**: PX functions [label axes, legends and colorbars](https://plotly.com/python/figure-labels/) based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](styling-plotly-express.md).
+* **Automatic Trace and Layout configuration**: PX functions will create one [trace](figure-structure.md) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' [`legendgroup` and `showlegend` attributes](legend.md) are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. Traces are automatically linked to a correctly-configured [subplot of the appropriate type](figure-structure.md).
+* **Automatic Figure Labelling**: PX functions [label axes, legends and colorbars](figure-labels.md) based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](styling-plotly-express.md).
 * **Automatic Hover Labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](hover-text-and-formatting.md).
 * **Styling Control**: PX functions [read styling information from the default figure template](styling-plotly-express.md), and support commonly-needed [cosmetic controls like `category_orders` and `color_discrete_map`](styling-plotly-express.md) to precisely control categorical variables.
 * **Uniform Color Handling**: PX functions automatically switch between [continuous](colorscales.md) and [categorical color](discrete-color.md) based on the input type.
@@ -81,7 +81,7 @@ The Plotly Express API in general offers the following features:
 * **A Pandas backend**: the 2D-cartesian plotting functions are available as [a Pandas plotting backend](pandas-backend.md) so you can call them via `df.plot()`.
 * **Trendlines**: `px.scatter` supports [built-in trendlines with accessible model output](linear-fits.md).
 * **Animations**: many PX functions support [simple animation support via the `animation_frame` and `animation_group` arguments](animations.md).
-* **Automatic WebGL switching**: for sufficiently large scatter plots, PX will automatically [use WebGL for hardware-accelerated rendering](https://plotly.com/python/webgl-vs-svg/).
+* **Automatic WebGL switching**: for sufficiently large scatter plots, PX will automatically [use WebGL for hardware-accelerated rendering](webgl-vs-svg.md).
 
 
 ### Plotly Express in Dash
@@ -112,7 +112,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
 fig.show()
 ```
 
-**Read more about [trendlines](linear-fits.md) and [templates](templates.md) and [marginal distribution plots](https://plotly.com/python/marginal-plots/).**
+**Read more about [trendlines](linear-fits.md) and [templates](templates.md) and [marginal distribution plots](marginal-plots.md).**
 
 ```python
 import plotly.express as px
@@ -330,7 +330,7 @@ fig = px.violin(df, y="tip", x="smoker", color="sex", box=True, points="all", ho
 fig.show()
 ```
 
-**Read more about [Empirical Cumulative Distribution Function (ECDF) charts](https://plotly.com/python/ecdf-plots/).**
+**Read more about [Empirical Cumulative Distribution Function (ECDF) charts](ecdf-plots.md).**
 
 ```python
 import plotly.express as px
@@ -339,7 +339,7 @@ fig = px.ecdf(df, x="total_bill", color="sex")
 fig.show()
 ```
 
-**Read more about [strip charts](https://plotly.com/python/strip-charts/).**
+**Read more about [strip charts](strip-charts.md).**
 
 ```python
 import plotly.express as px
@@ -459,7 +459,7 @@ fig = px.scatter_polar(df, r="frequency", theta="direction", color="strength", s
 fig.show()
 ```
 
-**Read more about [radar charts](https://plotly.com/python/radar-chart/).**
+**Read more about [radar charts](radar-chart.md).**
 
 ```python
 import plotly.express as px

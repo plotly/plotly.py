@@ -40,7 +40,7 @@ jupyter:
 A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of the distribution of a variable through its quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plotly.com/python/statistical-charts/).
 
 
-Alternatives to box plots for visualizing distributions include [histograms](https://plotly.com/python/histograms/), [violin plots](https://plotly.com/python/violin/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+Alternatives to box plots for visualizing distributions include [histograms](histograms.md), [violin plots](violin.md), [ECDF plots](ecdf-plots.md) and [strip charts](strip-charts.md).
 
 ## Box Plot with `plotly.express`
 
@@ -167,7 +167,7 @@ fig.show()
 
 ## Box plot with go.Box
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Box` class from `plotly.graph_objects`](graph-objects.md). All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/box/.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Box` class from `plotly.graph_objects`](graph-objects.md). All available options for `go.Box` are described in the reference page [https://plotly.com/python/reference/box/](reference/graph_objects/Box.md).
 
 ### Basic Box Plot
 
@@ -559,4 +559,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.box()`](https://plotly.com/python-api-reference/generated/plotly.express.box) or https://plotly.com/python/reference/box/ for more information and chart attribute options!
+See [function reference for `px.box()`](https://plotly.com/python-api-reference/generated/plotly.express.box) or [https://plotly.com/python/reference/box/](reference/graph_objects/Box.md) for more information and chart attribute options!

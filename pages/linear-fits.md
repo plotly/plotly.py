@@ -111,7 +111,7 @@ fig.show()
 
 _new in v5.2_
 
-OLS trendlines can be fit with log transformations to both X or Y data using the `trendline_options` argument, independently of whether or not the plot has [logarithmic axes](https://plotly.com/python/log-plot/).
+OLS trendlines can be fit with log transformations to both X or Y data using the `trendline_options` argument, independently of whether or not the plot has [logarithmic axes](log-plot.md).
 
 ```python
 import plotly.express as px

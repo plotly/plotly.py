@@ -131,7 +131,7 @@ fig.show()
 
 *introduced in plotly 4.12*
 
-The `.add_trace()` method can be used to add a copy of the same trace to each facet, for example an overall linear regression line as below. The `legendgroup`/`showlegend` pattern below is recommended to avoid having a separate legend item for each copy of the trace. Note that as of v5.2.1, there is [a built-in option to add an overall trendline to all facets](https://plotly.com/python/linear-fits/) that uses this technique under the hood.
+The `.add_trace()` method can be used to add a copy of the same trace to each facet, for example an overall linear regression line as below. The `legendgroup`/`showlegend` pattern below is recommended to avoid having a separate legend item for each copy of the trace. Note that as of v5.2.1, there is [a built-in option to add an overall trendline to all facets](linear-fits.md) that uses this technique under the hood.
 
 ```python
 import plotly.express as px
@@ -182,7 +182,7 @@ fig.show()
 
 ### Customizing Subplot Figure Titles
 
-Since subplot figure titles are [annotations](https://plotly.com/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them, for example to remove the equal-sign (`=`).
+Since subplot figure titles are [annotations](text-and-annotations.md#simple-annotation), you can use the `for_each_annotation` function to customize them, for example to remove the equal-sign (`=`).
 
 In the following example, we pass a lambda function to `for_each_annotation` in order to change the figure subplot titles from `smoker=No` and `smoker=Yes` to just `No` and `Yes`.
 

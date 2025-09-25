@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/treemap.png
 ---
 
-[Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. The input data format is the same as for [Sunburst Charts](https://plotly.com/python/sunburst-charts/) and [Icicle Charts](https://plotly.com/python/icicle-charts/): the hierarchy is defined by [labels](https://plotly.com/python/reference/treemap/#treemap-labels) (`names` for `px.treemap`) and [parents](https://plotly.com/python/reference/treemap/#treemap-parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.
+[Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. The input data format is the same as for [Sunburst Charts](sunburst-charts.md) and [Icicle Charts](icicle-charts.md): the hierarchy is defined by [labels](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.labels) (`names` for `px.treemap`) and [parents](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.
 
 ### Basic Treemap with plotly.express
 
@@ -183,10 +183,10 @@ fig.show()
 
 This example uses the following attributes:
 
-1.  [values](https://plotly.com/python/reference/treemap/#treemap-values): sets the values associated with each of the sectors.
-2.  [textinfo](https://plotly.com/python/reference/treemap/#treemap-textinfo): determines which trace information appear on the graph that can be 'text', 'value', 'current path', 'percent root', 'percent entry', and 'percent parent', or any combination of them.
-3.  [pathbar](https://plotly.com/python/reference/treemap/#treemap-pathbar): a main extra feature of treemap to display the current path of the visible portion of the hierarchical map. It may also be useful for zooming out of the graph.
-4.  [branchvalues](https://plotly.com/python/reference/treemap/#treemap-branchvalues): determines how the items in `values` are summed. When set to "total", items in `values` are taken to be value of all its descendants. In the example below Eve = 65, which is equal to 14 + 12 + 10 + 2 + 6 + 6 + 1 + 4.
+1.  [values](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.values): sets the values associated with each of the sectors.
+2.  [textinfo](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.textinfo): determines which trace information appear on the graph that can be 'text', 'value', 'current path', 'percent root', 'percent entry', and 'percent parent', or any combination of them.
+3.  [pathbar](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.pathbar): a main extra feature of treemap to display the current path of the visible portion of the hierarchical map. It may also be useful for zooming out of the graph.
+4.  [branchvalues](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.branchvalues): determines how the items in `values` are summed. When set to "total", items in `values` are taken to be value of all its descendants. In the example below Eve = 65, which is equal to 14 + 12 + 10 + 2 + 6 + 6 + 1 + 4.
     When set to "remainder", items in `values` corresponding to the root and the branches sectors are taken to be the extra part not part of the sum of the values at their leaves.
 
 ```python
@@ -228,7 +228,9 @@ fig.show()
 
 There are three different ways to change the color of the sectors in Treemap:
 
-1.  [marker.colors](https://plotly.com/python/reference/treemap/#treemap-marker-colors), 2) [colorway](https://plotly.com/python/reference/treemap/#treemap-colorway), 3) [colorscale](https://plotly.com/python/reference/treemap/#treemap-colorscale). The following examples show how to use each of them.
+1.  [marker.colors](reference/graph_objects/treemap-package/Marker.md#plotly.graph_objects.treemap.Marker.colors), 
+2. [colorway](https://plotly.com/python/reference/treemap/#treemap-colorway), 
+3. [colorscale](https://plotly.com/python/reference/treemap/#treemap-colorscale). The following examples show how to use each of them.
 
 ```python
 import plotly.graph_objects as go
@@ -374,7 +376,7 @@ fig.show()
 
 ### Nested Layers in Treemap
 
-The following example uses hierarchical data that includes layers and grouping. Treemap and [Sunburst](https://plotly.com/python/sunburst-charts/) charts reveal insights into the data, and the format of your hierarchical data. [maxdepth](https://plotly.com/python/reference/treemap/#treemap-maxdepth) attribute sets the number of rendered sectors from the given level.
+The following example uses hierarchical data that includes layers and grouping. Treemap and [Sunburst](sunburst-charts.md) charts reveal insights into the data, and the format of your hierarchical data. [maxdepth](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.maxdepth) attribute sets the number of rendered sectors from the given level.
 
 ```python
 import plotly.graph_objects as go
@@ -448,4 +450,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.treemap()`](https://plotly.com/python-api-reference/generated/plotly.express.treemap) or https://plotly.com/python/reference/treemap/ for more information and chart attribute options!
+See [function reference for `px.treemap()`](https://plotly.com/python-api-reference/generated/plotly.express.treemap) or [https://plotly.com/python/reference/treemap/](reference/graph_objects/Treemap.md) for more information and chart attribute options!

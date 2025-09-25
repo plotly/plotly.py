@@ -259,4 +259,4 @@ fig.show()
 
 #### Reference
 
-For more info on Plotly heatmaps, see: https://plotly.com/python/reference/heatmap/.<br> For more info on using colorscales with Plotly see: https://plotly.com/python/heatmap-and-contour-colorscales/ <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_annotated_heatmap.html#plotly.figure_factory.create_annotated_heatmap)
+For more info on Plotly heatmaps, see: [https://plotly.com/python/reference/heatmap/](reference/graph_objects/Heatmap.md).<br> For more info on using colorscales with Plotly see: [https://plotly.com/python/heatmap-and-contour-colorscales/](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_annotated_heatmap.html#plotly.figure_factory.create_annotated_heatmap)
