@@ -61,4 +61,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.strip()`](https://plotly.com/python-api-reference/generated/plotly.express.strip) for more information and chart attribute options!
+See [function reference for `px.strip()`](reference/plotly-express.md#plotly.express.strip) for more information and chart attribute options!

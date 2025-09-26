@@ -128,4 +128,4 @@ fig.show()
 
 #### Reference
 
-For more info on `ff.create_trisurf()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_trisurf.html)
+For more info on `ff.create_trisurf()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_trisurf)

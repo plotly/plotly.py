@@ -508,4 +508,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.histogram()`](https://plotly.com/python-api-reference/generated/plotly.express.histogram) or [https://plotly.com/python/reference/histogram/](reference/graph_objects/Histogram.md) for more information and chart attribute options!
+See [function reference for `px.histogram()`](reference/plotly-express.md#plotly.express.histogram) or [https://plotly.com/python/reference/histogram/](reference/graph_objects/Histogram.md) for more information and chart attribute options!

@@ -95,4 +95,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(bar_polar)`](https://plotly.com/python-api-reference/generated/plotly.express.bar_polar) or [https://plotly.com/python/reference/barpolar/](reference/graph_objects/Barpolar.md) for more information and chart attribute options!
+See [function reference for `px.(bar_polar)`](reference/plotly-express.md#plotly.express.bar_polar) or [https://plotly.com/python/reference/barpolar/](reference/graph_objects/Barpolar.md) for more information and chart attribute options!

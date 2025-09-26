@@ -148,4 +148,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter) or [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-type](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.type) for more information and chart attribute options!
+See [function reference for `px.(scatter)`](reference/plotly-express.md#plotly.express.scatter) or [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-type](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.type) for more information and chart attribute options!

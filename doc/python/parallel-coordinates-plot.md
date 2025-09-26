@@ -206,4 +206,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(parallel_coordinates)`](https://plotly.com/python-api-reference/generated/plotly.express.parallel_coordinates) or [https://plotly.com/python/reference/parcoords/](reference/graph_objects/Parcoords.md) for more information and chart attribute options!
+See [function reference for `px.(parallel_coordinates)`](reference/plotly-express.md#plotly.express.parallel_coordinates) or [https://plotly.com/python/reference/parcoords/](reference/graph_objects/Parcoords.md) for more information and chart attribute options!

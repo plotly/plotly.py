@@ -244,4 +244,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(funnel)`](https://plotly.com/python-api-reference/generated/plotly.express.funnel) or [https://plotly.com/python/reference/funnel/](reference/graph_objects/Funnel.md) and [https://plotly.com/python/reference/funnelarea/](reference/graph_objects/Funnelarea.md) for more information and chart attribute options!
+See [function reference for `px.(funnel)`](reference/plotly-express.md#plotly.express.funnel) or [https://plotly.com/python/reference/funnel/](reference/graph_objects/Funnel.md) and [https://plotly.com/python/reference/funnelarea/](reference/graph_objects/Funnelarea.md) for more information and chart attribute options!

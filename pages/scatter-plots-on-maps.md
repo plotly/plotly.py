@@ -92,10 +92,10 @@ fig.show()
 ```
 Error executing code: The geopandas.dataset has been deprecated and was removed in GeoPandas 1.0. You can get the original 'naturalearth_cities' data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
 Traceback (most recent call last):
-  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 247, in _run_code
     exec(code, exec_globals)
   File "<string>", line 4, in <module>
-  File "/Users/liamconnors/Documents/plotly.py/.venv/lib/python3.12/site-packages/geopandas/datasets/__init__.py", line 18, in get_path
+  File "/Users/daelenia/Desktop/plotly/plotly.py/.venv/lib/python3.12/site-packages/geopandas/datasets/__init__.py", line 18, in get_path
     raise AttributeError(error_msg)
 AttributeError: The geopandas.dataset has been deprecated and was removed in GeoPandas 1.0. You can get the original 'naturalearth_cities' data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
 ```
@@ -260,4 +260,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter_geo)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo) or [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) and [https://plotly.com/python/reference/layout/geo/](reference/graph_objects/layout-package/Geo.md) for more information and chart attribute options!
+See [function reference for `px.(scatter_geo)`](reference/plotly-express.md#plotly.express.scatter_geo) or [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) and [https://plotly.com/python/reference/layout/geo/](reference/graph_objects/layout-package/Geo.md) for more information and chart attribute options!

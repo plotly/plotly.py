@@ -171,4 +171,4 @@ fig.show()
 #### Reference
 
 
-For more info on `ff.create_gantt()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_gantt.html)
+For more info on `ff.create_gantt()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_gantt)

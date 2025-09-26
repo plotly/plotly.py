@@ -252,6 +252,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.choropleth_map`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_map) or [https://plotly.com/python/reference/choroplethmap/](reference/graph_objects/Choroplethmap.md) for more information about the attributes available.
+See [function reference for `px.choropleth_map`](reference/plotly-express.md#plotly.express.choropleth_map) or [https://plotly.com/python/reference/choroplethmap/](reference/graph_objects/Choroplethmap.md) for more information about the attributes available.
 
-For (deprecated) Mapbox-based tile maps, see [function reference for `px.choropleth_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_mapbox) or [https://plotly.com/python/reference/choroplethmapbox/](reference/graph_objects/Choroplethmapbox.md).
+For (deprecated) Mapbox-based tile maps, see [function reference for `px.choropleth_mapbox`](reference/plotly-express.md#plotly.express.choropleth_mapbox) or [https://plotly.com/python/reference/choroplethmapbox/](reference/graph_objects/Choroplethmapbox.md).

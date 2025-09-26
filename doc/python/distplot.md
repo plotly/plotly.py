@@ -304,4 +304,4 @@ fig.show()
 #### Reference
 
 
-For more info on `ff.create_distplot()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_distplot.html)
+For more info on `ff.create_distplot()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_distplot)

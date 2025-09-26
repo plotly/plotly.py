@@ -348,6 +348,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_map`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_map) or [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for more information about the attributes available.
+See [function reference for `px.scatter_map`](reference/plotly-express.md#plotly.express.scatter_map) or [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for more information about the attributes available.
 
-For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).
+For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](reference/plotly-express.md#plotly.express.scatter_mapbox) or [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).

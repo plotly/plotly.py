@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/sunburst.gif
 ---
 
-Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. Similar to [Icicle charts](https://plotly.com/python/icicle-charts/) and [Treemaps](https://plotly.com/python/treemaps/), the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. The root starts from the center and children are added to the outer rings.
+Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. Similar to [Icicle charts](icicle-charts.md) and [Treemaps](treemaps.md), the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. The root starts from the center and children are added to the outer rings.
 
 ### Basic Sunburst Plot with plotly.express
 
@@ -468,4 +468,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.sunburst()`](https://plotly.com/python-api-reference/generated/plotly.express.sunburst) or [https://plotly.com/python/reference/sunburst/](reference/graph_objects/Sunburst.md) for more information and chart attribute options!
+See [function reference for `px.sunburst()`](reference/plotly-express.md#plotly.express.sunburst) or [https://plotly.com/python/reference/sunburst/](reference/graph_objects/Sunburst.md) for more information and chart attribute options!

@@ -58,7 +58,7 @@ fig.show()
 
 #### Style Diagram
 
-In this example `dimensions` represents a list of stings or the columns of data frame, and `labels` is a dictionary with string keys (column name) and string values ('desired label to be displayed'). See [Plotly express reference page](https://plotly.com/python-api-reference/generated/plotly.express.parallel_categories) for more information.
+In this example `dimensions` represents a list of stings or the columns of data frame, and `labels` is a dictionary with string keys (column name) and string values ('desired label to be displayed'). See [Plotly express reference page](reference/plotly-express.md#plotly.express.parallel_categories) for more information.
 
 ```python
 import plotly.express as px
@@ -288,4 +288,4 @@ widgets.VBox([color_toggle, fig])
 
 #### Reference
 
-See [function reference for `px.parallel_categories()`](https://plotly.com/python-api-reference/generated/plotly.express.parallel_categories) or [reference page](reference/graph_objects/Parcats.md) for more information and chart attribute options!
+See [function reference for `px.parallel_categories()`](reference/plotly-express.md#plotly.express.parallel_categories) or [reference page](reference/graph_objects/Parcats.md) for more information and chart attribute options!

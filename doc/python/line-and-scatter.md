@@ -654,4 +654,4 @@ fig.show()
 
 ### Reference
 
-See [function reference for `px.scatter()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter) or [https://plotly.com/python/reference/scatter/](reference/graph_objects/Scatter.md) or [https://plotly.com/python/reference/scattergl/](reference/graph_objects/Scattergl.md) for more information and chart attribute options!
+See [function reference for `px.scatter()`](reference/plotly-express.md#plotly.express.scatter) or [https://plotly.com/python/reference/scatter/](reference/graph_objects/Scatter.md) or [https://plotly.com/python/reference/scattergl/](reference/graph_objects/Scattergl.md) for more information and chart attribute options!

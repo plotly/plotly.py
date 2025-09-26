@@ -140,4 +140,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_3d()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_3d) or [https://plotly.com/python/reference/scatter3d/](reference/graph_objects/Scatter3d.md) for more information and chart attribute options!
+See [function reference for `px.scatter_3d()`](reference/plotly-express.md#plotly.express.scatter_3d) or [https://plotly.com/python/reference/scatter3d/](reference/graph_objects/Scatter3d.md) for more information and chart attribute options!

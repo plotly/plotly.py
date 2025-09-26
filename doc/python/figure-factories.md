@@ -56,5 +56,5 @@ Deprecated "legacy" Figure Factories include:
 
 #### Reference
 
-For more information about the contents of `plotly.figure_factory`, including deprecated methods, please refer to our [API Reference documentation](https://plotly.com/python-api-reference/plotly.figure_factory.html).
+For more information about the contents of `plotly.figure_factory`, including deprecated methods, please refer to our [API Reference documentation](reference/figure-factory.md).
 

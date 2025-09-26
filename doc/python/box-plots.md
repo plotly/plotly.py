@@ -521,4 +521,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.box()`](https://plotly.com/python-api-reference/generated/plotly.express.box) or [https://plotly.com/python/reference/box/](reference/graph_objects/Box.md) for more information and chart attribute options!
+See [function reference for `px.box()`](reference/plotly-express.md#plotly.express.box) or [https://plotly.com/python/reference/box/](reference/graph_objects/Box.md) for more information and chart attribute options!

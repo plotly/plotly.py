@@ -298,4 +298,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.violin()`](https://plotly.com/python-api-reference/generated/plotly.express.violin) or [https://plotly.com/python/reference/violin/](reference/graph_objects/Violin.md) for more information and chart attribute options!
+See [function reference for `px.violin()`](reference/plotly-express.md#plotly.express.violin) or [https://plotly.com/python/reference/violin/](reference/graph_objects/Violin.md) for more information and chart attribute options!

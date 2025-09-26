@@ -61,7 +61,7 @@ pio.show(fig)
 
 ### Figures as Graph Objects
 
-The [`plotly.graph_objects` module provides an automatically-generated hierarchy of classes](https://plotly.com/python-api-reference/plotly.graph_objects.html) called ["graph objects"](graph-objects.md) that may be used to represent figures, with a top-level class `plotly.graph_objects.Figure`.
+The [`plotly.graph_objects` module provides an automatically-generated hierarchy of classes](reference/graph_objects/index.md) called ["graph objects"](graph-objects.md) that may be used to represent figures, with a top-level class `plotly.graph_objects.Figure`.
 
 > Note that the *recommended alternative* to working with Python dictionaries is to [create entire figures at once using Plotly Express](plotly-express.md) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page, wherever possible, rather than to assemble figures bottom-up from underlying graph objects. See ["When to use Graph Objects"](graph-objects.md).
 
@@ -72,7 +72,7 @@ Graph objects have several benefits compared to plain Python dictionaries.
 3. Properties of graph objects can be accessed using both dictionary-style key lookup (e.g. `fig["layout"]`) or class-style property access (e.g. `fig.layout`).
 4. Graph objects support higher-level convenience functions for making updates to already constructed figures (`.update_layout()`, `.add_trace()` etc) as described below.
 5. Graph object constructors and update methods accept "magic underscores" (e.g. `go.Figure(layout_title_text="The Title")` rather than `dict(layout=dict(title=dict(text="The Title")))`) for more compact code, as described below.
-6. Graph objects support attached rendering (`.show()`) and exporting functions (`.write_image()`) that automatically invoke the appropriate functions from [the `plotly.io` module](https://plotly.com/python-api-reference/plotly.io.html).
+6. Graph objects support attached rendering (`.show()`) and exporting functions (`.write_image()`) that automatically invoke the appropriate functions from [the `plotly.io` module](reference/io.md).
 
 
 Below you can find an example of one way that the figure in the example above could be specified using a graph object instead of a dictionary.
