@@ -58,13 +58,13 @@ We also encourage you to join the [Plotly Community Forum](http://community.plot
 `plotly` may be installed using `pip`:
 
 ```
-$ pip install plotly
+pip install plotly
 ```
 
 or `conda`:
 
 ```
-$ conda install -c conda-forge plotly
+conda install -c conda-forge plotly
 ```
 
 If you want to use Plotly Express, install its required dependencies with:
@@ -97,19 +97,19 @@ IFrame(snippet_url + 'getting-started', width='100%', height=1200)
 To use `plotly` in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `anywidget` packages in the same environment as you installed `plotly`, using `pip`:
 
 ```
-$ pip install jupyterlab anywidget
+pip install jupyterlab anywidget
 ```
 
 or `conda`:
 
 ```
-$ conda install jupyterlab anywidget
+conda install jupyterlab anywidget
 ```
 
 Launch JupyterLab with:
 
 ```
-$ jupyter lab
+jupyter lab
 ```
 
 and display plotly figures inline:
@@ -154,7 +154,7 @@ conda install "notebook>=7.0" "anywidget>=0.9.13"
 These packages contain everything you need to run a Jupyter notebook...
 
 ```
-$ jupyter notebook
+jupyter notebook
 ```
 
 and display plotly figures inline using the notebook renderer...
@@ -191,13 +191,13 @@ The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies a
 using pip...
 
 ```
-$ pip install --upgrade kaleido
+pip install --upgrade kaleido
 ```
 
 or conda.
 
 ```
-$ conda install -c plotly python-kaleido
+conda install -c plotly python-kaleido
 ```
 
 #### Extended Geo Support
@@ -207,13 +207,13 @@ choropleth figure factory is one such example. These shape files are distributed
 separate `plotly-geo` package. This package can be installed using pip...
 
 ```
-$ pip install plotly-geo==1.0.0
+pip install plotly-geo==1.0.0
 ```
 
 or conda.
 
 ```
-$ conda install -c plotly plotly-geo=1.0.0
+conda install -c plotly plotly-geo=1.0.0
 ```
 
 See [_USA County Choropleth Maps in Python_](/python/county-choropleth/) for more information on the county choropleth figure factory.
