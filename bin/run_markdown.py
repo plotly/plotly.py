@@ -52,7 +52,7 @@ def _do_file(args, input_file, block_number=None):
     _report(args.verbose > 1, f"- Found {len(code_blocks)} code blocks")
 
     # Execute code blocks and collect results
-    execution_results = _run_all_blocks(args, code_blocks, stem, block_number)
+    execution_results = _run_all_blocks(args, input_file, code_blocks, stem, block_number)
     if block_number is not None:
         return
 
@@ -190,7 +190,7 @@ def _report(condition, message):
         print(message, file=sys.stderr)
 
 
-def _run_all_blocks(args, code_blocks, stem=None, block_number=None):
+def _run_all_blocks(args, input_file, code_blocks, stem=None, block_number=None):
     """Run blocks found in a file."""
     execution_results = []
     env = {
@@ -203,7 +203,7 @@ def _run_all_blocks(args, code_blocks, stem=None, block_number=None):
             _report(args.verbose > 1, f"- Executing block {i}/{len(code_blocks)}")
             figure_counter, result = _run_code(block["code"], args.htmldir, figure_counter, stem, env)
             execution_results.append(result)
-            _report(args.verbose > 0 and bool(result["error"]), f"  - Warning: block {i} had an error")
+            _report(args.verbose > 0 and bool(result["error"]), f"  - Warning: block {i} had an error in {input_file}")
         elif block_number == i:
             print(f"block number {block_number}")
             figure_counter, result = _run_code(block["code"], args.htmldir, figure_counter, stem)

@@ -28,12 +28,12 @@ examples: ${EXAMPLE_DST}
 
 pages/%.md: doc/python/%.md
 	@mkdir -p pages/examples
-	${RUN} bin/run_markdown.py --outdir pages --htmldir pages/examples --inline --verbose 2 $<
+	@${RUN} bin/run_markdown.py --outdir pages --htmldir pages/examples --inline --verbose 1 $<
 
 ## examples-force: force complete rebuild of examples
 examples-force:
-	touch ${EXAMPLE_SRC}
-	make examples
+	@touch ${EXAMPLE_SRC}
+	@make examples
 
 ## examples-toc: generate YAML table of contents for examples
 examples-toc:
