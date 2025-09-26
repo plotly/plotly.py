@@ -263,16 +263,8 @@ coordinates = [[coords_lon[0], coords_lat[0]],
 
 from colorcet import fire
 import datashader.transfer_functions as tf
-import io
-import base64
 
-# Get PIL Image and convert it into a unicode string (for JSON serializability)
 img = tf.shade(agg, cmap=fire)[::-1].to_pil()
-buffer = io.BytesIO()
-img.save(buffer, format='PNG')
-raw_data = buffer.getvalue()
-img_base64 = base64.b64encode(raw_data).decode('utf-8')
-url = f"data:image/png;base64,{img_base64}"
 
 import plotly.express as px
 # Trick to create rapidly a figure with map axes
@@ -280,7 +272,7 @@ fig = px.scatter_map(dff[:1], lat='Lat', lon='Lon', zoom=12)
 # Add the datashader image as a tile map layer image
 fig.update_layout(
     map_style="carto-darkmatter",
-    map_layers=[{"sourcetype": "image", "source": url, "coordinates": coordinates}],
+    map_layers=[{"sourcetype": "image", "source": img, "coordinates": coordinates}],
 )
 fig.show()
 ```
