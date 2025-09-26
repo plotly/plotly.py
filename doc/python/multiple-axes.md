@@ -1,38 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.0
-  plotly:
-    description: How to make a graph with multiple axes (dual y-axis plots, plots
-      with secondary axes) in python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Multiple Axes
-    order: 16
-    permalink: python/multiple-axes/
-    thumbnail: thumbnail/multiple-axes.jpg
+description: How to make a graph with multiple axes (dual y-axis plots, plots with
+  secondary axes) in python.
 ---
-
 ### Multiple Y Axes and Plotly Express
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).

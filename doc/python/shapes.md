@@ -1,38 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.14
-  plotly:
-    description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
-      and path.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Shapes
-    order: 25
-    permalink: python/shapes/
-    thumbnail: thumbnail/shape.jpg
+description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
+  and path.
 ---
-
 ### Adding Lines and Polygons to Figures
 
 As a general rule, there are two ways to add shapes (lines or polygons) to figures:

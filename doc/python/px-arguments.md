@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: Input data arguments accepted by Plotly Express functions
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Plotly Express Arguments
-    order: 19
-    page_type: u-guide
-    permalink: python/px-arguments/
-    thumbnail: thumbnail/plotly-express.png
+description: Input data arguments accepted by Plotly Express functions
 ---
-
 Plotly Express (`px`) is the high-level interface to Plotly and provides functions for generating charts. `px` functions support data provided in a number of different formats (long, wide, and mixed) and as different types of objects, including pandas and Polars dataframes.
 
 ## Data for the Examples

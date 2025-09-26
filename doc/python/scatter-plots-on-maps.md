@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make scatter plots on maps in Python. Scatter plots on maps
-      highlight geographic areas and can be colored by value.
-    display_as: maps
-    language: python
-    layout: base
-    name: Scatter Plots on Maps
-    order: 12
-    page_type: u-guide
-    permalink: python/scatter-plots-on-maps/
-    thumbnail: thumbnail/scatter-plot-on-maps.jpg
+description: How to make scatter plots on maps in Python. Scatter plots on maps highlight
+  geographic areas and can be colored by value.
 ---
-
 #### Base Map Configuration
 
 Plotly figures made with [Plotly Express](plotly-express.md) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](graph-objects.md) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](map-configuration.md) onto which data is plotted.

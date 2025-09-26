@@ -1,38 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make tri-surf plots in Python with Plotly. Trisurfs are formed
-      by replacing the boundaries of a compact surface by touching triangles.
-    display_as: 3d_charts
-    language: python
-    layout: base
-    name: Trisurf Plots
-    order: 8
-    permalink: python/trisurf/
-    thumbnail: thumbnail/trisurf.jpg
+description: How to make tri-surf plots in Python with Plotly. Trisurfs are formed
+  by replacing the boundaries of a compact surface by touching triangles.
 ---
-
 Trisurf plots can be made using a [figure factory](figure-factories.md) as detailed in this page.
 
 #### Torus

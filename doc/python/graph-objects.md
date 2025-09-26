@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: Python classes that represent parts of a figure.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Graph Objects
-    order: 35
-    page_type: u-guide
-    permalink: python/graph-objects/
-    thumbnail: thumbnail/horizontal-bar.jpg
+description: Python classes that represent parts of a figure.
 ---
-
 ### What Are Graph Objects?
 
 The figures created, manipulated and rendered by the plotly Python library are [represented by tree-like data structures](figure-structure.md) which are automatically serialized to JSON for rendering by the Plotly.js JavaScript library. These trees are composed of named nodes called "attributes", with their structure defined by the Plotly.js figure schema, which is available in [machine-readable form](https://raw.githubusercontent.com/plotly/plotly.js/master/dist/plot-schema.json). **The `plotly.graph_objects` module (typically imported as `go`) contains an [automatically-generated hierarchy of Python classes](https://plotly.com/python-api-reference/plotly.graph_objects.html#graph-objects) which represent non-leaf nodes in this figure schema. The term "graph objects" refers to instances of these classes.  **

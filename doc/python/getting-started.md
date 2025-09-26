@@ -1,40 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: Getting Started with Plotly for Python.
-    has_thumbnail: false
-    language: python
-    layout: base
-    name: Getting Started with Plotly
-    page_type: u-guide
-    permalink: python/getting-started/
-    redirect_from:
-    - python/getting_started/
-    - /python/pytables/
+description: Getting Started with Plotly for Python.
+redirect_from:
+- python/getting_started/
+- /python/pytables/
 ---
-
-
 ### Overview
 
 The [`plotly` Python library](index.md) is an interactive, [open-source](is-plotly-free.md) plotting library that supports over 40 unique chart types covering a wide range of statistical, financial, geographic, scientific, and 3-dimensional use-cases.

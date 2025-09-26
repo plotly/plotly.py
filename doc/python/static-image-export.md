@@ -1,40 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.13.3
-  plotly:
-    description: Plotly allows you to save static images of your plots. Save the image
-      to your local computer, or embed it inside your Jupyter notebooks as a static
-      image.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Static Image Export
-    order: 6
-    page_type: u-guide
-    permalink: python/static-image-export/
-    thumbnail: thumbnail/static-image-export.png
+description: Plotly allows you to save static images of your plots. Save the image
+  to your local computer, or embed it inside your Jupyter notebooks as a static image.
 ---
-
 This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](interactive-html-export.md)
 
 <!-- #region -->

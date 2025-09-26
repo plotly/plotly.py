@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to draw a line on tile-based maps in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Lines on Tile Maps
-    order: 3
-    page_type: example_index
-    permalink: python/lines-on-tile-maps/
-    redirect_from: python/lines-on-mapbox/
-    thumbnail: thumbnail/line_mapbox.jpg
+description: How to draw a line on tile-based maps in Python with Plotly.
+redirect_from: python/lines-on-mapbox/
 ---
-
 ### Lines on tile maps using Plotly Express
 
 To draw a line on a map, you either can use `px.line_map` in Plotly Express, or `go.Scattermap` in Plotly Graph Objects. Here's an example of drawing a line on a tile-based map using Plotly Express.

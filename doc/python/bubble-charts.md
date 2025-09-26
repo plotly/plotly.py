@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make bubble charts in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Bubble Charts
-    order: 5
-    page_type: u-guide
-    permalink: python/bubble-charts/
-    redirect_from: python/bubble-charts-tutorial/
-    thumbnail: thumbnail/bubble.jpg
+description: How to make bubble charts in Python with Plotly.
+redirect_from: python/bubble-charts-tutorial/
 ---
-
 ## Bubble chart with plotly.express
 
 A [bubble chart](https://en.wikipedia.org/wiki/Bubble_chart) is a scatter plot in which a third dimension of the data is shown through the size of markers. For other types of scatter plot, see the [scatter plot documentation](line-and-scatter.md).

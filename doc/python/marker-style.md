@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to style markers in Python with Plotly.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Styling Markers
-    order: 20
-    permalink: python/marker-style/
-    thumbnail: thumbnail/marker-style.gif
+description: How to style markers in Python with Plotly.
 ---
-
 ### Add Marker Border
 
 In order to make markers look more distinct, you can add a border to the markers. This can be achieved by adding the line property to the marker object.

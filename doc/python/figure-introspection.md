@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to dig into and learn more about the figure data structure.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Introspecting Figures
-    order: 36
-    page_type: u-guide
-    permalink: python/figure-introspection/
-    thumbnail: thumbnail/violin.jpg
+description: How to dig into and learn more about the figure data structure.
 ---
-
 ### The Figure Lifecycle
 
 As explained in the [Figure Data Structure documentation](figure-structure.md), when building a figure object with Plotly.py, it is not necessary to populate every possible attribute. At render-time, figure objects (whether generated via [Plotly Express](plotly-express.md) or [Graph Objects](graph-objects.md)) are passed from Plotly.py to [Plotly.js](https://plotly.com/javascript/), which is the Javascript library responsible for turning JSON descriptions of figures into graphical representations.

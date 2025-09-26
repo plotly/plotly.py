@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to make 3D Isosurface Plots in Python with Plotly.
-    display_as: 3d_charts
-    language: python
-    layout: base
-    name: 3D Isosurface Plots
-    order: 10
-    page_type: u-guide
-    permalink: python/3d-isosurface-plots/
-    redirect_from: python/isosurfaces-with-marching-cubes/
-    thumbnail: thumbnail/isosurface.jpg
+description: How to make 3D Isosurface Plots in Python with Plotly.
+redirect_from: python/isosurfaces-with-marching-cubes/
 ---
-
 With ``go.Isosurface``, you can plot [isosurface contours](https://en.wikipedia.org/wiki/Isosurface) of a scalar field ``value``, which is defined on ``x``, ``y`` and ``z`` coordinates.
 
 #### Basic Isosurface

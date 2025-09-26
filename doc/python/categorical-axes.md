@@ -1,39 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to use categorical axes in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Categorical Axes
-    order: 16
-    page_type: example_index
-    permalink: python/categorical-axes/
-    thumbnail: thumbnail/bar.jpg
+description: How to use categorical axes in Python with Plotly.
 ---
-
-
 This page shows examples of how to configure [2-dimensional Cartesian axes](figure-structure.md#2d-cartesian-trace-types-and-subplots) to visualize categorical (i.e. qualitative, nominal or ordinal data as opposed to continuous numerical data). Such axes are a natural fit for bar charts, waterfall charts, funnel charts, heatmaps, violin charts and box plots, but can also be used with scatter plots and line charts. [Configuring gridlines, ticks, tick labels and axis titles](axes.md) on logarithmic axes is done the same was as with [linear axes](axes.md).
 
 ### 2-D Cartesian Axis Type and Auto-Detection

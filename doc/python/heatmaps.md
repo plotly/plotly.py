@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make Heatmaps in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Heatmaps
-    order: 2
-    page_type: example_index
-    permalink: python/heatmaps/
-    redirect_from: python/heatmap/
-    thumbnail: thumbnail/heatmap.jpg
+description: How to make Heatmaps in Python with Plotly.
+redirect_from: python/heatmap/
 ---
-
 The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](tile-density-heatmaps.md).
 
 Plotly supports two different types of colored-tile heatmaps:

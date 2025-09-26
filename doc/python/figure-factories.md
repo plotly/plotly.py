@@ -1,38 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.4
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.11
-  plotly:
-    description: Figure Factories are dedicated functions for creating very specific
-      types of plots.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Figure Factories
-    order: 33
-    permalink: python/figure-factories/
-    thumbnail: thumbnail/streamline.jpg
+description: Figure Factories are dedicated functions for creating very specific types
+  of plots.
 ---
-
 #### `plotly.figure_factory`
 
 The `plotly.figure_factory` module contains dedicated functions for creating very specific types of plots that were at the time of their creation difficult to create with [graph objects](graph-objects.md) and prior to the existence of [Plotly Express](plotly-express.md). As new functionality gets added to [Plotly.js](https://plotly.com/javascript/) and to Plotly Express, certain Figure Factories become unnecessary and are therefore deprecated as "legacy", but remain in the module for backwards-compatibility reasons.
@@ -57,4 +26,3 @@ Deprecated "legacy" Figure Factories include:
 #### Reference
 
 For more information about the contents of `plotly.figure_factory`, including deprecated methods, please refer to our [API Reference documentation](https://plotly.com/python-api-reference/plotly.figure_factory.html).
-

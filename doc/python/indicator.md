@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to make gauge charts in Python with Plotly.
-    display_as: financial
-    language: python
-    layout: base
-    name: Indicators
-    order: 6
-    page_type: u-guide
-    permalink: python/indicator/
-    thumbnail: thumbnail/indicator.jpg
+description: How to make gauge charts in Python with Plotly.
 ---
-
 #### Overview
 In this tutorial we introduce a new trace named "Indicator". The purpose of "indicator" is to visualize a single value specified by the "value" attribute.
   Three distinct visual elements are available to represent that value: number, delta and gauge. Any combination of them can be specified via the "mode" attribute.

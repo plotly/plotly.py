@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.0
-  plotly:
-    description: How to create dumbbell plots in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Dumbbell Plots
-    order: 19
-    page_type: example_index
-    permalink: python/dumbbell-plots/
-    thumbnail: thumbnail/dumbbell-plot.jpg
+description: How to create dumbbell plots in Python with Plotly.
 ---
-
 ## Basic Dumbbell Plot
 
 

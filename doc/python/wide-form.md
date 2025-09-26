@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.7
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.4
-  plotly:
-    description: Plotly Express' 2D-Cartesian functions accept data in long-, wide-,
-      and mixed-form.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Plotly Express Wide-Form Support
-    order: 34
-    page_type: u-guide
-    permalink: python/wide-form/
-    thumbnail: thumbnail/plotly-express.png
+description: Plotly Express' 2D-Cartesian functions accept data in long-, wide-, and
+  mixed-form.
 ---
-
 ### Plotly Express works with Column-oriented, Matrix or Geographic Data
 
 Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a `DataFrame` (in either "long" or "wide" format, see below). These functions use Pandas internally to process the data, but also accept other types of DataFrames as arguments. See the [Plotly Express arguments page](px-arguments.md) for more details.

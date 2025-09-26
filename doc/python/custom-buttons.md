@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to add custom buttons to update Plotly chart attributes in Python.
-    display_as: controls
-    language: python
-    layout: base
-    name: Custom Buttons
-    order: 1
-    page_type: example_index
-    permalink: python/custom-buttons/
-    thumbnail: thumbnail/custom-buttons.jpg
+description: How to add custom buttons to update Plotly chart attributes in Python.
 ---
-
 #### Methods
 The [updatemenu method](reference/graph_objects/layout-package/updatemenu-package/Button.md#plotly.graph_objects.layout.updatemenu.Button.method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
 

@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: How to make horizontal bar charts in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Horizontal Bar Charts
-    order: 8
-    page_type: u-guide
-    permalink: python/horizontal-bar-charts/
-    thumbnail: thumbnail/horizontal-bar.jpg
+description: How to make horizontal bar charts in Python with Plotly.
 ---
-
 See more examples of bar charts (including vertical bar charts) and styling options [here](bar-charts.md).
 
 ### Horizontal Bar Chart with Plotly Express

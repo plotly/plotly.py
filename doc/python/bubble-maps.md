@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make bubble maps in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Bubble Maps
-    order: 5
-    page_type: example_index
-    permalink: python/bubble-maps/
-    thumbnail: thumbnail/bubble-map.jpg
+description: How to make bubble maps in Python with Plotly.
 ---
-
 #### Base Map Configuration
 
 Plotly figures made with [Plotly Express](plotly-express.md) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](graph-objects.md) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](map-configuration.md) onto which data is plotted.

@@ -1,39 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to use patterns (also known as hatching or texture) with bar
-      charts.
-    display_as: basic
-    language: python
-    layout: base
-    name: Patterns, Hatching, Texture
-    order: 18
-    page_type: u-guide
-    permalink: python/pattern-hatching-texture/
-    thumbnail: thumbnail/pattern.png
+description: How to use patterns (also known as hatching or texture) with bar charts.
 ---
-
 *New in 5.0, with support for pie, sunburst, icicle, funnelarea, and treemap charts in 5.15*
 
 [Bar charts](bar-charts.md), [histograms](histograms.md), [polar bar charts](wind-rose-charts.md), [area charts](filled-area-plots.md), [pie charts](pie-charts.md), [sunburst charts](sunburst-charts.md), [funnelarea charts](funnel-charts.md), [icicle charts](icicle-charts.md), and [treemap charts](treemaps.md), have large markers or areas which support not only a fill color, but also an optional **pattern** (also known as "hatching" or "texture"). This can be used for a variety of reasons:

@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make dot plots in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Dot Plots
-    order: 6
-    page_type: u-guide
-    permalink: python/dot-plots/
-    thumbnail: thumbnail/dot-plot.jpg
+description: How to make dot plots in Python with Plotly.
 ---
-
 #### Basic Dot Plot
 
 Dot plots (also known as [Cleveland dot plots](<https://en.wikipedia.org/wiki/Dot_plot_(statistics)>)) are [scatter plots](line-and-scatter.md) with one categorical axis and one continuous axis. They can be used to show changes between two (or more) points in time or between two (or more) conditions. Compared to a [bar chart](bar-charts.md), dot plots can be less cluttered and allow for an easier comparison between conditions.

@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: How to make Contour plots in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Contour Plots
-    order: 1
-    page_type: example_index
-    permalink: python/contour-plots/
-    thumbnail: thumbnail/contour.jpg
+description: How to make Contour plots in Python with Plotly.
 ---
-
 ### Basic Contour Plot
 
 A 2D contour plot shows the [contour lines](https://en.wikipedia.org/wiki/Contour_line) of a 2D numerical array `z`, i.e. interpolated lines of isovalues of `z`.

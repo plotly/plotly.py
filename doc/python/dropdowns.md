@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.0
-  plotly:
-    description: How to add dropdowns to update Plotly chart attributes in Python.
-    display_as: controls
-    language: python
-    layout: base
-    name: Dropdown Menus
-    order: 2
-    page_type: example_index
-    permalink: python/dropdowns/
-    thumbnail: thumbnail/dropdown.jpg
+description: How to add dropdowns to update Plotly chart attributes in Python.
 ---
-
 #### Methods
 The [updatemenu method](reference/graph_objects/layout-package/updatemenu-package/Button.md#plotly.graph_objects.layout.updatemenu.Button.method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
 
