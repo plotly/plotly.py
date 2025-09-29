@@ -128,6 +128,8 @@ node_trace.text = node_text
 #### Create Network Graph
 
 ```python
+import plotly.graph_objects as go
+
 fig = go.Figure(data=[edge_trace, node_trace],
              layout=go.Layout(
                 title=dict(

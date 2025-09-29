@@ -208,14 +208,15 @@ fig.show()
 Plotly comes with two built-in geometries which do not require an external GeoJSON file:
 
 1. USA States
-2. Countries as defined in the Natural Earth dataset.
+2. Countries
 
-**Note and disclaimer:** cultural (as opposed to physical) features are by definition subject to change, debate and dispute. Plotly includes data from Natural Earth "as-is" and defers to the [Natural Earth policy regarding disputed borders](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/) which read:
+In **Plotly.py 6.3 and later**, the built-in countries geometry is created from the following sources:
+- [UN data](https://geoportal.un.org/arcgis/sharing/rest/content/items/d7caaff3ef4b4f7c82689b7c4694ad92/data) for country borders, coastlines, land, and ocean layers.
+- Natural Earth data for lakes, rivers, and subunits layers.
 
-> Natural Earth Vector draws boundaries of countries according to defacto status. We show who actually controls the situation on the ground.
+In **earlier versions of Plotly.py**, the built-in countries geometry is based on Natural Earth data only. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to de facto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
 
 To use the built-in countries geometry, provide `locations` as [three-letter ISO country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
-
 
 ```python
 import plotly.express as px
