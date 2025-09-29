@@ -46,6 +46,7 @@ The examples on this page use datasets available in the `data` package in `px`. 
 To access the `iris` dataset, we call its function and assign it to a variable:
 
 ```python
+import plotly.express as px
 df = px.data.iris()
 df.head()
 ```

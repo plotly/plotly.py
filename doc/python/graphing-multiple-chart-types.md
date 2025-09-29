@@ -173,7 +173,7 @@ import plotly.graph_objects as go
 
 # Load data
 import json
-import urllib
+import urllib.request
 
 response = urllib.request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/steepest.json")
