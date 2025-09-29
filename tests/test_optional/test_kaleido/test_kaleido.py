@@ -4,6 +4,7 @@ from io import BytesIO, StringIO
 from pathlib import Path
 import tempfile
 from unittest.mock import patch
+import xml.etree.ElementTree as ET
 
 from pdfrw import PdfReader
 from PIL import Image
@@ -14,6 +15,26 @@ import pytest
 
 
 fig = {"data": [], "layout": {"title": {"text": "figure title"}}}
+
+
+def create_figure(width=None, height=None):
+    """Create a simple figure with optional layout dimensions."""
+    layout = {}
+    if width:
+        layout["width"] = width
+    if height:
+        layout["height"] = height
+
+    return go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[1, 2, 3])], layout=layout)
+
+
+def parse_svg_dimensions(svg_bytes):
+    """Parse width and height from SVG bytes."""
+    svg_str = svg_bytes.decode("utf-8")
+    root = ET.fromstring(svg_str)
+    width = root.get("width")
+    height = root.get("height")
+    return int(width) if width else None, int(height) if height else None
 
 
 def check_image(path_or_buffer, size=(700, 500), format="PNG"):
@@ -293,3 +314,63 @@ def test_fig_to_image():
         mock_calc_fig.assert_called_once()
         args, _ = mock_calc_fig.call_args
         assert args[0] == test_fig.to_dict()
+
+
+def test_get_chrome():
+    """Test that plotly.io.get_chrome() can be called."""
+
+    if not kaleido_available() or kaleido_major() < 1:
+        # Test that ValueError is raised when Kaleido requirements aren't met
+        with pytest.raises(
+            ValueError, match="This command requires Kaleido v1.0.0 or greater"
+        ):
+            pio.get_chrome()
+    else:
+        # Test normal operation when Kaleido v1+ is available
+        with patch(
+            "plotly.io._kaleido.kaleido.get_chrome_sync",
+            return_value="/mock/path/to/chrome",
+        ) as mock_get_chrome:
+            pio.get_chrome()
+
+            # Verify that kaleido.get_chrome_sync was called
+            mock_get_chrome.assert_called_once()
+
+
+def test_width_height_priority():
+    """Test width/height priority: arguments > layout.width/height > defaults."""
+
+    # Test case 1: Arguments override layout
+    fig = create_figure(width=800, height=600)
+    svg_bytes = pio.to_image(fig, format="svg", width=1000, height=900)
+    width, height = parse_svg_dimensions(svg_bytes)
+    assert width == 1000 and height == 900, (
+        "Arguments should override layout dimensions"
+    )
+
+    # Test case 2: Layout dimensions used when no arguments
+    fig = create_figure(width=800, height=600)
+    svg_bytes = pio.to_image(fig, format="svg")
+    width, height = parse_svg_dimensions(svg_bytes)
+    assert width == 800 and height == 600, (
+        "Layout dimensions should be used when no arguments provided"
+    )
+
+    # Test case 3: Partial override (only width argument)
+    fig = create_figure(width=800, height=600)
+    svg_bytes = pio.to_image(fig, format="svg", width=1200)
+    width, height = parse_svg_dimensions(svg_bytes)
+    assert width == 1200 and height == 600, (
+        "Width argument should override layout, height should use layout"
+    )
+
+    # Test case 4: Defaults used when no layout or arguments
+    fig = create_figure()
+    svg_bytes = pio.to_image(fig, format="svg")
+    width, height = parse_svg_dimensions(svg_bytes)
+    assert width == pio.defaults.default_width, (
+        "Default width should be used when no layout or argument"
+    )
+    assert height == pio.defaults.default_height, (
+        "Default height should be used when no layout or argument"
+    )

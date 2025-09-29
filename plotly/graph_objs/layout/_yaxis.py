@@ -43,7 +43,9 @@ class YAxis(_BaseLayoutHierarchyType):
         "minallowed",
         "minexponent",
         "minor",
+        "minorloglabels",
         "mirror",
+        "modebardisable",
         "nticks",
         "overlaying",
         "position",
@@ -98,9 +100,11 @@ class YAxis(_BaseLayoutHierarchyType):
         "title",
         "type",
         "uirevision",
+        "unifiedhovertitle",
         "visible",
         "zeroline",
         "zerolinecolor",
+        "zerolinelayer",
         "zerolinewidth",
     }
 
@@ -888,6 +892,28 @@ class YAxis(_BaseLayoutHierarchyType):
         self["minor"] = val
 
     @property
+    def minorloglabels(self):
+        """
+        Determines how minor log labels are displayed. If *small
+        digits*, small digits i.e. 2 or 5 are displayed. If "complete",
+        complete digits are displayed. If "none", no labels are
+        displayed.
+
+        The 'minorloglabels' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['small digits', 'complete', 'none']
+
+        Returns
+        -------
+        Any
+        """
+        return self["minorloglabels"]
+
+    @minorloglabels.setter
+    def minorloglabels(self, val):
+        self["minorloglabels"] = val
+
+    @property
     def mirror(self):
         """
         Determines if the axis lines or/and ticks are mirrored to the
@@ -910,6 +936,29 @@ class YAxis(_BaseLayoutHierarchyType):
     @mirror.setter
     def mirror(self, val):
         self["mirror"] = val
+
+    @property
+    def modebardisable(self):
+        """
+        Disables certain modebar buttons for this axis. "autoscale"
+        disables the autoscale buttons, "zoominout" disables the zoom-
+        in and zoom-out buttons.
+
+        The 'modebardisable' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['autoscale', 'zoominout'] joined with '+' characters
+            (e.g. 'autoscale+zoominout')
+            OR exactly one of ['none'] (e.g. 'none')
+
+        Returns
+        -------
+        Any
+        """
+        return self["modebardisable"]
+
+    @modebardisable.setter
+    def modebardisable(self, val):
+        self["modebardisable"] = val
 
     @property
     def nticks(self):
@@ -1723,12 +1772,13 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def ticklabelposition(self):
         """
-        Determines where tick labels are drawn with respect to the axis
-        Please note that top or bottom has no effect on x axes or when
-        `ticklabelmode` is set to "period". Similarly left or right has
-        no effect on y axes or when `ticklabelmode` is set to "period".
-        Has no effect on "multicategory" axes or when `tickson` is set
-        to "boundaries". When used on axes linked by `matches` or
+        Determines where tick labels are drawn with respect to the
+        axis. Please note that top or bottom has no effect on x axes or
+        when `ticklabelmode` is set to "period" or when `tickson` is
+        set to "boundaries". Similarly, left or right has no effect on
+        y axes or when `ticklabelmode` is set to "period" or when
+        `tickson` is set to "boundaries". Has no effect on
+        "multicategory" axes. When used on axes linked by `matches` or
         `scaleanchor`, no extra padding for inside labels would be
         added by autorange, so that the scales could match.
 
@@ -2099,6 +2149,25 @@ class YAxis(_BaseLayoutHierarchyType):
         self["uirevision"] = val
 
     @property
+    def unifiedhovertitle(self):
+        """
+        The 'unifiedhovertitle' property is an instance of Unifiedhovertitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.Unifiedhovertitle`
+          - A dict of string/value properties that will be passed
+            to the Unifiedhovertitle constructor
+
+        Returns
+        -------
+        plotly.graph_objs.layout.yaxis.Unifiedhovertitle
+        """
+        return self["unifiedhovertitle"]
+
+    @unifiedhovertitle.setter
+    def unifiedhovertitle(self, val):
+        self["unifiedhovertitle"] = val
+
+    @property
     def visible(self):
         """
         A single toggle to hide the axis while preserving interaction
@@ -2159,6 +2228,30 @@ class YAxis(_BaseLayoutHierarchyType):
     @zerolinecolor.setter
     def zerolinecolor(self, val):
         self["zerolinecolor"] = val
+
+    @property
+    def zerolinelayer(self):
+        """
+        Sets the layer on which this zeroline is displayed. If *above
+        traces*, this zeroline is displayed above all the subplot's
+        traces If *below traces*, this zeroline is displayed below all
+        the subplot's traces, but above the grid lines. Limitation:
+        "zerolinelayer" currently has no effect if the "zorder"
+        property is set on any trace.
+
+        The 'zerolinelayer' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['above traces', 'below traces']
+
+        Returns
+        -------
+        Any
+        """
+        return self["zerolinelayer"]
+
+    @zerolinelayer.setter
+    def zerolinelayer(self, val):
+        self["zerolinelayer"] = val
 
     @property
     def zerolinewidth(self):
@@ -2381,6 +2474,11 @@ class YAxis(_BaseLayoutHierarchyType):
         minor
             :class:`plotly.graph_objects.layout.yaxis.Minor`
             instance or dict with compatible properties
+        minorloglabels
+            Determines how minor log labels are displayed. If
+            *small digits*, small digits i.e. 2 or 5 are displayed.
+            If "complete", complete digits are displayed. If
+            "none", no labels are displayed.
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -2389,6 +2487,10 @@ class YAxis(_BaseLayoutHierarchyType):
             "all", axis lines are mirrored on all shared-axes
             subplots. If "allticks", axis lines and ticks are
             mirrored on all shared-axes subplots.
+        modebardisable
+            Disables certain modebar buttons for this axis.
+            "autoscale" disables the autoscale buttons, "zoominout"
+            disables the zoom-in and zoom-out buttons.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -2599,12 +2701,13 @@ class YAxis(_BaseLayoutHierarchyType):
             cases the default is *hide past div*.
         ticklabelposition
             Determines where tick labels are drawn with respect to
-            the axis Please note that top or bottom has no effect
-            on x axes or when `ticklabelmode` is set to "period".
-            Similarly left or right has no effect on y axes or when
-            `ticklabelmode` is set to "period". Has no effect on
-            "multicategory" axes or when `tickson` is set to
-            "boundaries". When used on axes linked by `matches` or
+            the axis. Please note that top or bottom has no effect
+            on x axes or when `ticklabelmode` is set to "period" or
+            when `tickson` is set to "boundaries". Similarly, left
+            or right has no effect on y axes or when
+            `ticklabelmode` is set to "period" or when `tickson` is
+            set to "boundaries". Has no effect on "multicategory"
+            axes. When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
         ticklabelshift
@@ -2685,6 +2788,9 @@ class YAxis(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in axis
             `range`, `autorange`, and `title` if in `editable:
             true` configuration. Defaults to `layout.uirevision`.
+        unifiedhovertitle
+            :class:`plotly.graph_objects.layout.yaxis.Unifiedhovert
+            itle` instance or dict with compatible properties
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -2695,6 +2801,14 @@ class YAxis(_BaseLayoutHierarchyType):
             on top of the grid lines.
         zerolinecolor
             Sets the line color of the zero line.
+        zerolinelayer
+            Sets the layer on which this zeroline is displayed. If
+            *above traces*, this zeroline is displayed above all
+            the subplot's traces If *below traces*, this zeroline
+            is displayed below all the subplot's traces, but above
+            the grid lines. Limitation: "zerolinelayer" currently
+            has no effect if the "zorder" property is set on any
+            trace.
         zerolinewidth
             Sets the width (in px) of the zero line.
         """
@@ -2736,7 +2850,9 @@ class YAxis(_BaseLayoutHierarchyType):
         minallowed=None,
         minexponent=None,
         minor=None,
+        minorloglabels=None,
         mirror=None,
+        modebardisable=None,
         nticks=None,
         overlaying=None,
         position=None,
@@ -2791,9 +2907,11 @@ class YAxis(_BaseLayoutHierarchyType):
         title=None,
         type=None,
         uirevision=None,
+        unifiedhovertitle=None,
         visible=None,
         zeroline=None,
         zerolinecolor=None,
+        zerolinelayer=None,
         zerolinewidth=None,
         **kwargs,
     ):
@@ -3005,6 +3123,11 @@ class YAxis(_BaseLayoutHierarchyType):
         minor
             :class:`plotly.graph_objects.layout.yaxis.Minor`
             instance or dict with compatible properties
+        minorloglabels
+            Determines how minor log labels are displayed. If
+            *small digits*, small digits i.e. 2 or 5 are displayed.
+            If "complete", complete digits are displayed. If
+            "none", no labels are displayed.
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -3013,6 +3136,10 @@ class YAxis(_BaseLayoutHierarchyType):
             "all", axis lines are mirrored on all shared-axes
             subplots. If "allticks", axis lines and ticks are
             mirrored on all shared-axes subplots.
+        modebardisable
+            Disables certain modebar buttons for this axis.
+            "autoscale" disables the autoscale buttons, "zoominout"
+            disables the zoom-in and zoom-out buttons.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -3223,12 +3350,13 @@ class YAxis(_BaseLayoutHierarchyType):
             cases the default is *hide past div*.
         ticklabelposition
             Determines where tick labels are drawn with respect to
-            the axis Please note that top or bottom has no effect
-            on x axes or when `ticklabelmode` is set to "period".
-            Similarly left or right has no effect on y axes or when
-            `ticklabelmode` is set to "period". Has no effect on
-            "multicategory" axes or when `tickson` is set to
-            "boundaries". When used on axes linked by `matches` or
+            the axis. Please note that top or bottom has no effect
+            on x axes or when `ticklabelmode` is set to "period" or
+            when `tickson` is set to "boundaries". Similarly, left
+            or right has no effect on y axes or when
+            `ticklabelmode` is set to "period" or when `tickson` is
+            set to "boundaries". Has no effect on "multicategory"
+            axes. When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
         ticklabelshift
@@ -3309,6 +3437,9 @@ class YAxis(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in axis
             `range`, `autorange`, and `title` if in `editable:
             true` configuration. Defaults to `layout.uirevision`.
+        unifiedhovertitle
+            :class:`plotly.graph_objects.layout.yaxis.Unifiedhovert
+            itle` instance or dict with compatible properties
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -3319,6 +3450,14 @@ class YAxis(_BaseLayoutHierarchyType):
             on top of the grid lines.
         zerolinecolor
             Sets the line color of the zero line.
+        zerolinelayer
+            Sets the layer on which this zeroline is displayed. If
+            *above traces*, this zeroline is displayed above all
+            the subplot's traces If *below traces*, this zeroline
+            is displayed below all the subplot's traces, but above
+            the grid lines. Limitation: "zerolinelayer" currently
+            has no effect if the "zorder" property is set on any
+            trace.
         zerolinewidth
             Sets the width (in px) of the zero line.
 
@@ -3380,7 +3519,9 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`""")
         self._set_property("minallowed", arg, minallowed)
         self._set_property("minexponent", arg, minexponent)
         self._set_property("minor", arg, minor)
+        self._set_property("minorloglabels", arg, minorloglabels)
         self._set_property("mirror", arg, mirror)
+        self._set_property("modebardisable", arg, modebardisable)
         self._set_property("nticks", arg, nticks)
         self._set_property("overlaying", arg, overlaying)
         self._set_property("position", arg, position)
@@ -3435,9 +3576,11 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`""")
         self._set_property("title", arg, title)
         self._set_property("type", arg, type)
         self._set_property("uirevision", arg, uirevision)
+        self._set_property("unifiedhovertitle", arg, unifiedhovertitle)
         self._set_property("visible", arg, visible)
         self._set_property("zeroline", arg, zeroline)
         self._set_property("zerolinecolor", arg, zerolinecolor)
+        self._set_property("zerolinelayer", arg, zerolinelayer)
         self._set_property("zerolinewidth", arg, zerolinewidth)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False
