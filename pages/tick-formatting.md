@@ -104,7 +104,7 @@ IFrame(snippet_url + 'tick-formatting', width='100%', height=1200)
 #### Using Tickformat Attribute
 
 
-For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
+For more formatting types, see: <https://github.com/d3/d3-format/blob/master/README.md#locale_format>
 
 ```python
 import plotly.graph_objects as go
@@ -124,7 +124,7 @@ fig.show()
 #### Using Tickformat Attribute - Date/Time
 
 
-For more date/time formatting types, see: https://github.com/d3/d3-time-format/blob/master/README.md
+For more date/time formatting types, see: <https://github.com/d3/d3-time-format/blob/master/README.md>
 
 ```python
 import plotly.graph_objects as go

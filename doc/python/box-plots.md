@@ -140,7 +140,7 @@ fig.show()
 
 #### Styled box plot
 
-For the interpretation of the notches, see https://en.wikipedia.org/wiki/Box_plot#Variations.
+For the interpretation of the notches, see <https://en.wikipedia.org/wiki/Box_plot#Variations>.
 
 ```python
 import plotly.express as px

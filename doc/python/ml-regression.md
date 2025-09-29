@@ -546,6 +546,7 @@ fig_box.show()
 ### Reference
 
 Learn more about the `px` figures used in this tutorial:
+
 * Plotly Express: [https://plotly.com/python/plotly-express/](plotly-express.md)
 * Vertical Lines: [https://plotly.com/python/shapes/](shapes.md)
 * Heatmaps: [https://plotly.com/python/heatmaps/](heatmaps.md)
@@ -554,13 +555,15 @@ Learn more about the `px` figures used in this tutorial:
 * Surface Plots: [https://plotly.com/python/3d-surface-plots/](3d-surface-plots.md)
 
 Learn more about the Machine Learning models used in this tutorial:
-* https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html
+
+* <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html>
 
 Other tutorials that inspired this notebook:
-* https://seaborn.pydata.org/examples/residplot.html
-* https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html
-* http://www.scikit-yb.org/zh/latest/api/regressor/peplot.html
+
+* <https://seaborn.pydata.org/examples/residplot.html>
+* <https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html>
+* <http://www.scikit-yb.org/zh/latest/api/regressor/peplot.html>

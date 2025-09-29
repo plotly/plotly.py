@@ -360,6 +360,6 @@ Learn more about `px`, `go.Contour`, and `go.Heatmap` here:
 
 This tutorial was inspired by amazing examples from the official scikit-learn docs:
 
-* https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html
-* https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
-* https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
+* <https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html>
+* <https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html>
+* <https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html>
