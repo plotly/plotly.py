@@ -379,6 +379,7 @@ theme:
 
 markdown_extensions:
 - def_list
+- attr_list
 - markdown_include.include:
     base_path: docs
 - footnotes
@@ -388,7 +389,11 @@ markdown_extensions:
     pygments_lang_class: true
 - pymdownx.inlinehilite
 - pymdownx.snippets
-- pymdownx.superfences
+- pymdownx.superfences:
+    custom_fences:
+      - name: python
+        class: dash-block
+        format: !!python/name:custom_formatters.python_formatter
 
 exclude_docs: |
   *~

@@ -27,4 +27,7 @@
     --plotly-primary-alpha-20: rgba(110, 86, 207, 0.2);
   }
   
+  pre[hide_code="true"] {
+    display: none;
+}
   

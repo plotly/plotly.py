@@ -59,7 +59,7 @@ If you are encountering problems using `plotly` with [Dash](https://dash.plotly.
 This is an example of a `plotly` graph correctly rendering inside `dash`:
 <!-- #endregion -->
 
-```python hide_code=true
+```python {hide_code=true}
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'renderers', width='100%', height=1200)

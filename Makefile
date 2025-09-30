@@ -13,7 +13,7 @@ commands:
 ## docs: rebuild documentation
 .PHONY: docs
 docs:
-	${RUN} mkdocs build
+	${RUN} PYTHONPATH=. mkdocs build
 
 ## docs-lint: check documentation
 docs-lint:
@@ -21,7 +21,7 @@ docs-lint:
 
 ## docs-tmp: rebuild documentation saving Markdown in ./tmp
 docs-tmp:
-	MKDOCS_TEMP_DIR=./docs_tmp ${RUN} mkdocs build
+	MKDOCS_TEMP_DIR=./docs_tmp ${RUN} PYTHONPATH=. mkdocs build
 
 ## examples: generate Markdown for individual doc/python
 examples: ${EXAMPLE_DST}
