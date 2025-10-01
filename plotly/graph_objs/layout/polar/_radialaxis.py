@@ -32,6 +32,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         "maxallowed",
         "minallowed",
         "minexponent",
+        "minorloglabels",
         "nticks",
         "range",
         "rangemode",
@@ -605,6 +606,28 @@ class RadialAxis(_BaseLayoutHierarchyType):
     @minexponent.setter
     def minexponent(self, val):
         self["minexponent"] = val
+
+    @property
+    def minorloglabels(self):
+        """
+        Determines how minor log labels are displayed. If *small
+        digits*, small digits i.e. 2 or 5 are displayed. If "complete",
+        complete digits are displayed. If "none", no labels are
+        displayed.
+
+        The 'minorloglabels' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['small digits', 'complete', 'none']
+
+        Returns
+        -------
+        Any
+        """
+        return self["minorloglabels"]
+
+    @minorloglabels.setter
+    def minorloglabels(self, val):
+        self["minorloglabels"] = val
 
     @property
     def nticks(self):
@@ -1447,6 +1470,11 @@ class RadialAxis(_BaseLayoutHierarchyType):
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
             "B".
+        minorloglabels
+            Determines how minor log labels are displayed. If
+            *small digits*, small digits i.e. 2 or 5 are displayed.
+            If "complete", complete digits are displayed. If
+            "none", no labels are displayed.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -1623,6 +1651,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         maxallowed=None,
         minallowed=None,
         minexponent=None,
+        minorloglabels=None,
         nticks=None,
         range=None,
         rangemode=None,
@@ -1816,6 +1845,11 @@ class RadialAxis(_BaseLayoutHierarchyType):
             Hide SI prefix for 10^n if |n| is below this number.
             This only has an effect when `tickformat` is "SI" or
             "B".
+        minorloglabels
+            Determines how minor log labels are displayed. If
+            *small digits*, small digits i.e. 2 or 5 are displayed.
+            If "complete", complete digits are displayed. If
+            "none", no labels are displayed.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -2012,6 +2046,7 @@ an instance of :class:`plotly.graph_objs.layout.polar.RadialAxis`""")
         self._set_property("maxallowed", arg, maxallowed)
         self._set_property("minallowed", arg, minallowed)
         self._set_property("minexponent", arg, minexponent)
+        self._set_property("minorloglabels", arg, minorloglabels)
         self._set_property("nticks", arg, nticks)
         self._set_property("range", arg, range)
         self._set_property("rangemode", arg, rangemode)
