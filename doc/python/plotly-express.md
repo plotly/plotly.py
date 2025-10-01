@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.7
+      jupytext_version: 1.17.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.4
+    version: 3.12.0
   plotly:
     description: Plotly Express is a terse, consistent, high-level API for creating
       figures.
@@ -386,7 +386,7 @@ fig.show()
 ```python
 import plotly.express as px
 from skimage import io
-img = io.imread('https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/240px-Crab_Nebula.jpg')
+img = io.imread('https://user-images.githubusercontent.com/72614349/179115668-2630e3e4-3a9f-4c88-9494-3412e606450a.jpg')
 fig = px.imshow(img)
 fig.show()
 ```
