@@ -168,8 +168,16 @@ class PlotlyRenderer(Renderer):
         top_spine = mpltools.get_spine_visible(ax, "top")
         left_spine = mpltools.get_spine_visible(ax, "left")
         right_spine = mpltools.get_spine_visible(ax, "right")
-        xaxis["mirror"] = mpltools.get_axis_mirror(bottom_spine, top_spine)
-        yaxis["mirror"] = mpltools.get_axis_mirror(left_spine, right_spine)
+        bottom_tick_markers = ax.xaxis.get_tick_params()["bottom"]
+        top_tick_markers = ax.xaxis.get_tick_params()["top"]
+        left_tick_markers = ax.yaxis.get_tick_params()["left"]
+        right_tick_markers = ax.yaxis.get_tick_params()["right"]
+        xaxis["mirror"] = mpltools.get_axis_mirror(
+            bottom_spine, top_spine, bottom_tick_markers, top_tick_markers
+        )
+        yaxis["mirror"] = mpltools.get_axis_mirror(
+            left_spine, right_spine, left_tick_markers, right_tick_markers
+        )
         xaxis["showline"] = bottom_spine
         yaxis["showline"] = top_spine
 
@@ -299,7 +307,7 @@ class PlotlyRenderer(Renderer):
         )  # TODO ditto
         if len(bar["x"]) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
-            (self.plotly_fig.add_trace(bar),)
+            self.plotly_fig.add_trace(bar)
             if bar_gap is not None:
                 self.plotly_fig["layout"]["bargap"] = bar_gap
         else:
@@ -497,7 +505,7 @@ class PlotlyRenderer(Renderer):
                 marked_line["x"] = mpltools.mpl_dates_to_datestrings(
                     marked_line["x"], formatter
                 )
-            (self.plotly_fig.add_trace(marked_line),)
+            self.plotly_fig.add_trace(marked_line)
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
             # dealing with legend graphical elements
