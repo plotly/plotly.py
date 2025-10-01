@@ -29,6 +29,7 @@ jobs:
         cd js
         npm ci
         npm run build
+        npm ls
     - name: Check JupyterLab build artifacts
       run: |
         # 1. Hash contents of all static files, sort by content hash
