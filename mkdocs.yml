@@ -389,11 +389,7 @@ markdown_extensions:
     pygments_lang_class: true
 - pymdownx.inlinehilite
 - pymdownx.snippets
-- pymdownx.superfences:
-    custom_fences:
-      - name: python
-        class: dash-block
-        format: !!python/name:custom_formatters.python_formatter
+- pymdownx.superfences
 
 exclude_docs: |
   *~
