@@ -324,6 +324,7 @@ def make_parser():
 
     return parser
 
+
 def parse_args(parser: argparse.ArgumentParser):
     """Parse command line arguments."""
     return parser.parse_args()
@@ -354,7 +355,7 @@ def main():
         version = plotly_js_version()
         print(version)
         update_plotlyjs(version, outdir)
-    
+
     elif args.cmd is None:
         parser.print_help()
         sys.exit(1)
