@@ -296,8 +296,8 @@ def update_plotlyjs_dev(args, outdir):
     perform_codegen(outdir)
 
 
-def parse_args():
-    """Parse command-line arguments."""
+def make_parser():
+    """Make argument parser."""
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="cmd", help="Available subcommands")
@@ -322,6 +322,11 @@ def parse_args():
 
     subparsers.add_parser("updateplotlyjs", help="update plotly.js")
 
+    return parser
+
+
+def parse_args(parser: argparse.ArgumentParser):
+    """Parse command line arguments."""
     return parser.parse_args()
 
 
@@ -331,7 +336,8 @@ def main():
     project_root = os.path.dirname(os.path.realpath(__file__))
     outdir = os.path.join(project_root, "plotly")
 
-    args = parse_args()
+    parser = make_parser()
+    args = parse_args(parser)
 
     if args.cmd == "codegen":
         perform_codegen(outdir, noformat=args.noformat)
@@ -349,6 +355,10 @@ def main():
         version = plotly_js_version()
         print(version)
         update_plotlyjs(version, outdir)
+
+    elif args.cmd is None:
+        parser.print_help()
+        sys.exit(1)
 
     else:
         print(f"unknown command {args.cmd}", file=sys.stderr)

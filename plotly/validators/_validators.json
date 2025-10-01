@@ -25,6 +25,18 @@
         },
         "superclass": "NumberValidator"
     },
+    "layout.yaxis.zerolinelayer": {
+        "params": {
+            "plotly_name": "zerolinelayer",
+            "parent_name": "layout.yaxis",
+            "edit_type": "plot",
+            "values": [
+                "above traces",
+                "below traces"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
+    },
     "layout.yaxis.zerolinecolor": {
         "params": {
             "plotly_name": "zerolinecolor",
@@ -48,6 +60,23 @@
             "edit_type": "plot"
         },
         "superclass": "BooleanValidator"
+    },
+    "layout.yaxis.unifiedhovertitle": {
+        "params": {
+            "plotly_name": "unifiedhovertitle",
+            "parent_name": "layout.yaxis",
+            "data_class_str": "Unifiedhovertitle",
+            "data_docs": "\n"
+        },
+        "superclass": "CompoundValidator"
+    },
+    "layout.yaxis.unifiedhovertitle.text": {
+        "params": {
+            "plotly_name": "text",
+            "parent_name": "layout.yaxis.unifiedhovertitle",
+            "edit_type": "none"
+        },
+        "superclass": "StringValidator"
     },
     "layout.yaxis.uirevision": {
         "params": {
@@ -989,6 +1018,21 @@
         },
         "superclass": "IntegerValidator"
     },
+    "layout.yaxis.modebardisable": {
+        "params": {
+            "plotly_name": "modebardisable",
+            "parent_name": "layout.yaxis",
+            "edit_type": "modebar",
+            "extras": [
+                "none"
+            ],
+            "flags": [
+                "autoscale",
+                "zoominout"
+            ]
+        },
+        "superclass": "FlaglistValidator"
+    },
     "layout.yaxis.mirror": {
         "params": {
             "plotly_name": "mirror",
@@ -1000,6 +1044,19 @@
                 false,
                 "all",
                 "allticks"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
+    },
+    "layout.yaxis.minorloglabels": {
+        "params": {
+            "plotly_name": "minorloglabels",
+            "parent_name": "layout.yaxis",
+            "edit_type": "calc",
+            "values": [
+                "small digits",
+                "complete",
+                "none"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -1635,6 +1692,18 @@
         },
         "superclass": "NumberValidator"
     },
+    "layout.xaxis.zerolinelayer": {
+        "params": {
+            "plotly_name": "zerolinelayer",
+            "parent_name": "layout.xaxis",
+            "edit_type": "plot",
+            "values": [
+                "above traces",
+                "below traces"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
+    },
     "layout.xaxis.zerolinecolor": {
         "params": {
             "plotly_name": "zerolinecolor",
@@ -1658,6 +1727,23 @@
             "edit_type": "plot"
         },
         "superclass": "BooleanValidator"
+    },
+    "layout.xaxis.unifiedhovertitle": {
+        "params": {
+            "plotly_name": "unifiedhovertitle",
+            "parent_name": "layout.xaxis",
+            "data_class_str": "Unifiedhovertitle",
+            "data_docs": "\n"
+        },
+        "superclass": "CompoundValidator"
+    },
+    "layout.xaxis.unifiedhovertitle.text": {
+        "params": {
+            "plotly_name": "text",
+            "parent_name": "layout.xaxis.unifiedhovertitle",
+            "edit_type": "none"
+        },
+        "superclass": "StringValidator"
     },
     "layout.xaxis.uirevision": {
         "params": {
@@ -3021,6 +3107,21 @@
         },
         "superclass": "IntegerValidator"
     },
+    "layout.xaxis.modebardisable": {
+        "params": {
+            "plotly_name": "modebardisable",
+            "parent_name": "layout.xaxis",
+            "edit_type": "modebar",
+            "extras": [
+                "none"
+            ],
+            "flags": [
+                "autoscale",
+                "zoominout"
+            ]
+        },
+        "superclass": "FlaglistValidator"
+    },
     "layout.xaxis.mirror": {
         "params": {
             "plotly_name": "mirror",
@@ -3032,6 +3133,19 @@
                 false,
                 "all",
                 "allticks"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
+    },
+    "layout.xaxis.minorloglabels": {
+        "params": {
+            "plotly_name": "minorloglabels",
+            "parent_name": "layout.xaxis",
+            "edit_type": "calc",
+            "values": [
+                "small digits",
+                "complete",
+                "none"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -14205,6 +14319,19 @@
         },
         "superclass": "IntegerValidator"
     },
+    "layout.polar.radialaxis.minorloglabels": {
+        "params": {
+            "plotly_name": "minorloglabels",
+            "parent_name": "layout.polar.radialaxis",
+            "edit_type": "plot",
+            "values": [
+                "small digits",
+                "complete",
+                "none"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
+    },
     "layout.polar.radialaxis.minexponent": {
         "params": {
             "plotly_name": "minexponent",
@@ -15125,6 +15252,19 @@
             "min": 0
         },
         "superclass": "IntegerValidator"
+    },
+    "layout.polar.angularaxis.minorloglabels": {
+        "params": {
+            "plotly_name": "minorloglabels",
+            "parent_name": "layout.polar.angularaxis",
+            "edit_type": "plot",
+            "values": [
+                "small digits",
+                "complete",
+                "none"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
     },
     "layout.polar.angularaxis.minexponent": {
         "params": {
@@ -17491,6 +17631,15 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "layout.legend.maxheight": {
+        "params": {
+            "plotly_name": "maxheight",
+            "parent_name": "layout.legend",
+            "edit_type": "legend",
+            "min": 0
+        },
+        "superclass": "NumberValidator"
+    },
     "layout.legend.itemwidth": {
         "params": {
             "plotly_name": "itemwidth",
@@ -18049,6 +18198,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "layout.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "layout.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "layout.hoverlabel.namelength": {
         "params": {
@@ -18679,9 +18836,11 @@
             "edit_type": "plot",
             "values": [
                 "africa",
+                "antarctica",
                 "asia",
                 "europe",
                 "north america",
+                "oceania",
                 "south america",
                 "usa",
                 "world"
@@ -22659,6 +22818,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "waterfall.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "waterfall.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "waterfall.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -23994,6 +24161,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "volume.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "volume.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "volume.hoverlabel.namelengthsrc": {
         "params": {
@@ -26669,6 +26844,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "violin.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "violin.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "violin.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -28107,6 +28290,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "treemap.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "treemap.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "treemap.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "treemap.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "treemap.marker.pattern.fillmode": {
         "params": {
@@ -29602,6 +29802,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "treemap.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "treemap.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "treemap.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -30291,6 +30499,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "table.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "table.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "table.hoverlabel.namelengthsrc": {
         "params": {
@@ -32103,6 +32319,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "surface.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "surface.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "surface.hoverlabel.namelengthsrc": {
         "params": {
@@ -34417,6 +34641,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "sunburst.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "sunburst.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "sunburst.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "sunburst.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "sunburst.marker.pattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -35877,6 +36118,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "sunburst.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "sunburst.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "sunburst.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -36987,6 +37236,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "streamtube.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "streamtube.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "streamtube.hoverlabel.namelengthsrc": {
         "params": {
@@ -40314,6 +40571,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "splom.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "splom.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "splom.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -43311,6 +43576,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "scatterternary.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scatterternary.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "scatterternary.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -46302,6 +46575,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "scattersmith.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scattersmith.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "scattersmith.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -49061,6 +49342,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "scatterpolargl.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scatterpolargl.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "scatterpolargl.hoverlabel.namelengthsrc": {
         "params": {
@@ -52045,6 +52334,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "scatterpolar.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scatterpolar.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "scatterpolar.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -54066,6 +54363,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "scattermapbox.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scattermapbox.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "scattermapbox.hoverlabel.namelengthsrc": {
         "params": {
@@ -56170,6 +56475,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "scattermap.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scattermap.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "scattermap.hoverlabel.namelengthsrc": {
         "params": {
@@ -59165,6 +59478,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "scattergl.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scattergl.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "scattergl.hoverlabel.namelengthsrc": {
         "params": {
@@ -62356,6 +62677,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "scattergeo.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scattergeo.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "scattergeo.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -65299,6 +65628,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "scattercarpet.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scattercarpet.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "scattercarpet.hoverlabel.namelengthsrc": {
         "params": {
@@ -68577,6 +68914,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "scatter3d.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scatter3d.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "scatter3d.hoverlabel.namelengthsrc": {
         "params": {
@@ -72134,6 +72479,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "scatter.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "scatter.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "scatter.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -72519,6 +72872,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "scatter.fillpattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "scatter.fillpattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "scatter.fillpattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "scatter.fillpattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "scatter.fillpattern.fillmode": {
         "params": {
@@ -73347,6 +73717,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "sankey.node.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "sankey.node.hoverlabel",
+            "edit_type": "calc"
+        },
+        "superclass": "BooleanValidator"
+    },
     "sankey.node.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -73863,6 +74241,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "sankey.link.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "sankey.link.hoverlabel",
+            "edit_type": "calc"
+        },
+        "superclass": "BooleanValidator"
     },
     "sankey.link.hoverlabel.namelengthsrc": {
         "params": {
@@ -74459,6 +74845,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "sankey.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "sankey.hoverlabel",
+            "edit_type": "calc"
+        },
+        "superclass": "BooleanValidator"
     },
     "sankey.hoverlabel.namelengthsrc": {
         "params": {
@@ -75796,6 +76190,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "pie.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "pie.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "pie.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "pie.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "pie.marker.pattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -76372,6 +76783,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "pie.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "pie.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "pie.hoverlabel.namelengthsrc": {
         "params": {
@@ -80877,6 +81296,14 @@
         },
         "superclass": "BooleanValidator"
     },
+    "ohlc.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "ohlc.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "ohlc.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -82013,6 +82440,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "mesh3d.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "mesh3d.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "mesh3d.hoverlabel.namelengthsrc": {
         "params": {
@@ -84117,6 +84552,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "isosurface.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "isosurface.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "isosurface.hoverlabel.namelengthsrc": {
         "params": {
@@ -87532,6 +87975,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "image.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "image.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "image.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -88903,6 +89354,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "icicle.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "icicle.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "icicle.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "icicle.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "icicle.marker.pattern.fillmode": {
         "params": {
@@ -90350,6 +90818,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "icicle.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "icicle.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "icicle.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -91590,6 +92066,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "histogram2dcontour.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "histogram2dcontour.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "histogram2dcontour.hoverlabel.namelengthsrc": {
         "params": {
@@ -93837,6 +94321,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "histogram2d.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "histogram2d.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "histogram2d.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -95869,6 +96361,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "histogram.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "histogram.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "histogram.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "histogram.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "histogram.marker.pattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -97317,6 +97826,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "histogram.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "histogram.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "histogram.hoverlabel.namelengthsrc": {
         "params": {
@@ -98889,6 +99406,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "heatmap.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "heatmap.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "heatmap.hoverlabel.namelengthsrc": {
         "params": {
@@ -100777,6 +101302,23 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "funnelarea.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "funnelarea.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "funnelarea.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "funnelarea.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
+    },
     "funnelarea.marker.pattern.fillmode": {
         "params": {
             "plotly_name": "fillmode",
@@ -101339,6 +101881,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "funnelarea.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "funnelarea.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "funnelarea.hoverlabel.namelengthsrc": {
         "params": {
@@ -104029,6 +104579,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "funnel.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "funnel.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "funnel.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -104943,6 +105501,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "densitymapbox.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "densitymapbox.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "densitymapbox.hoverlabel.namelengthsrc": {
         "params": {
@@ -106581,6 +107147,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "densitymap.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "densitymap.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "densitymap.hoverlabel.namelengthsrc": {
         "params": {
@@ -110325,6 +110899,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "contour.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "contour.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "contour.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -112421,6 +113003,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "cone.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "cone.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "cone.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -114201,6 +114791,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "choroplethmapbox.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "choroplethmapbox.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "choroplethmapbox.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -115945,6 +116543,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "choroplethmap.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "choroplethmap.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "choroplethmap.hoverlabel.namelengthsrc": {
         "params": {
@@ -117695,6 +118301,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "choropleth.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "choropleth.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "choropleth.hoverlabel.namelengthsrc": {
         "params": {
@@ -121731,6 +122345,14 @@
         },
         "superclass": "BooleanValidator"
     },
+    "candlestick.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "candlestick.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "candlestick.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -123656,6 +124278,14 @@
         },
         "superclass": "CompoundValidator"
     },
+    "box.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "box.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "box.hoverlabel.namelengthsrc": {
         "params": {
             "plotly_name": "namelengthsrc",
@@ -124474,6 +125104,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "barpolar.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "barpolar.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "barpolar.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "barpolar.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "barpolar.marker.pattern.fillmode": {
         "params": {
@@ -125786,6 +126433,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "barpolar.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "barpolar.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "barpolar.hoverlabel.namelengthsrc": {
         "params": {
@@ -127175,6 +127830,23 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "bar.marker.pattern.pathsrc": {
+        "params": {
+            "plotly_name": "pathsrc",
+            "parent_name": "bar.marker.pattern",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "bar.marker.pattern.path": {
+        "params": {
+            "plotly_name": "path",
+            "parent_name": "bar.marker.pattern",
+            "array_ok": true,
+            "edit_type": "style"
+        },
+        "superclass": "StringValidator"
     },
     "bar.marker.pattern.fillmode": {
         "params": {
@@ -128707,6 +129379,14 @@
             "data_docs": "\n"
         },
         "superclass": "CompoundValidator"
+    },
+    "bar.hoverlabel.showarrow": {
+        "params": {
+            "plotly_name": "showarrow",
+            "parent_name": "bar.hoverlabel",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "bar.hoverlabel.namelengthsrc": {
         "params": {

@@ -447,7 +447,7 @@ class Histogram(_BaseTraceType):
         (the ones that are `arrayOk: true`) are available. Finally, the
         template string has access to variable `binNumber` Anything
         contained in tag `<extra>` is displayed in the secondary box,
-        for example "<extra>{fullData.name}</extra>". To hide the
+        for example `<extra>%{fullData.name}</extra>`. To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
@@ -1628,7 +1628,7 @@ class Histogram(_BaseTraceType):
             are available. Finally, the template string has access
             to variable `binNumber` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         hovertemplatesrc
@@ -2075,7 +2075,7 @@ class Histogram(_BaseTraceType):
             are available. Finally, the template string has access
             to variable `binNumber` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
         hovertemplatesrc

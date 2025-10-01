@@ -138,6 +138,8 @@ import plotly.graph_objects as go
 import pandas as pd
 from datetime import datetime
 
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
 hovertext=[]
 for i in range(len(df['AAPL.Open'])):
     hovertext.append('Open: '+str(df['AAPL.Open'][i])+'<br>Close: '+str(df['AAPL.Close'][i]))
