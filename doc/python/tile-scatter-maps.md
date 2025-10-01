@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.3
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.0
+    version: 3.9.16
   plotly:
     description: How to make scatter plots on tile maps in Python.
     display_as: maps
@@ -219,6 +219,34 @@ fig.update_layout(
 
 fig.show()
 ```
+
+#### Supported Symbols
+
+Plotly uses [Maki v2.1.0](https://app.unpkg.com/maki@2.1.0/files/icons) for symbols and supports the following values for `symbol`:
+
+"aerialway", "airfield", "airport", "alcohol-shop", "america-football", 
+"amusement-park", "aquarium", "art-gallery", "attraction", "bakery",
+"bank", "bar", "baseball", "basketball", "beer", "bicycle", "bicycle-share",
+"blood-bank", "buddhism", "building", "bus", "cafe", "campsite", "car",
+"castle", "cemetery", "central-building", "cinema", "circle", "circle-stroked",
+"clothing-store", "college", "commercial", "cricket", "cross", "dam",
+"danger", "dentist", "doctor", "dog-park", "drinking-water", "embassy",
+"entrance", "farm", "fast-food", "ferry", "fire-station", "fuel", "gaming",
+"garden", "garden-center", "gift", "golf", "grocery", "hairdresser",
+"harbor", "heart", "heliport", "hospital", "ice-cream", "industry",
+"information", "karaoke", "landmark", "laundry", "library", "lighthouse",
+"lodging", "marker", "monument", "mountain", "museum", "music", "park",
+"parking", "parking-garage", "pharmacy", "picnic-site", "pitch",
+"place-of-worship", "playground", "police", "post", "prison", "rail",
+"rail-light", "rail-metro", "ranger-station", "religious-christian",
+"religious-jewish", "religious-muslim", "residential-community",
+"restaurant", "roadblock", "rocket", "school", "shelter", "shop",
+"skiing", "soccer", "square", "square-stroked", "stadium", "star",
+"star-stroked", "suitcase", "sushi", "swimming", "teahouse", "telephone",
+"tennis", "theatre", "toilet", "town-hall", "triangle", "triangle-stroked",
+"veterinary", "volcano", "warehouse", "waste-basket", "water", "wetland",
+"wheelchair", "zoo"
+
 
 #### Add Clusters
 
