@@ -61,20 +61,21 @@ You can insert Plotly output and text related to your data into HTML templates u
 
 <!-- #region -->
 
-```
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;   &lt;!--It is necessary to use the UTF-8 encoding with plotly graphics to get e.g. negative signs to render correctly --&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-&lt;/head&gt;
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />   <!--It is necessary to use the UTF-8 encoding 
+with plotly graphics to get e.g. negative signs to render correctly -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-&lt;body&gt;
-&lt;h1&gt;Here's a Plotly graph!&lt;/h1&gt;
+<body>
+<h1>Here's a Plotly graph!</h1>
 {{ fig }}
-&lt;p&gt;And here's some text after the graph.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<p>And here's some text after the graph.</p>
+</body>
+</html>
 ```
 
 
