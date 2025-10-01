@@ -117,8 +117,8 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
 
 def create_candlestick(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **Deprecated**, use instead the plotly.graph_objs trace
-    :class:`plotly.graph_objs.Candlestick`
+    **Deprecated**, use instead the plotly.graph_objects trace
+    [`plotly.graph_objects.Candlestick`](/reference/graph_objects/Candlestick.md)
 
     Parameters
     ----------

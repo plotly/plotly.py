@@ -324,7 +324,8 @@ def create_trisurf(
     
     Returns
     -------
-    fig: of a triangulated surface plot
+    fig : 
+        Of a triangulated surface plot
 
     Examples
     --------

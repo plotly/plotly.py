@@ -818,7 +818,7 @@ def create_gantt(
 ):
     """
     **Deprecated**, use instead
-    :func:`plotly.express.timeline`.
+    [`plotly.express.timeline`](/reference/plotly-express.md#plotly.express.timeline).
 
     Parameters
     ----------
@@ -865,7 +865,8 @@ def create_gantt(
 
     Returns
     -------
-    fig: for a gantt chart
+    fig: 
+        Of a gantt chart
 
     Examples
     --------

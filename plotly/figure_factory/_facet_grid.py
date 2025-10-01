@@ -741,7 +741,7 @@ def create_facet_grid(
         Draws grey boxes behind the facet titles.
     ggplot2 : bool 
         Draws the facet grid in the style of `ggplot2`. See
-        http://ggplot2.tidyverse.org/reference/facet_grid.html for reference.
+        <http://ggplot2.tidyverse.org/reference/facet_grid.html> for reference.
         Default = False
     binsize : int 
         Groups all data into bins of a given length.
@@ -750,7 +750,8 @@ def create_facet_grid(
 
     Returns
     -------
-    fig: for facet grid
+    fig: 
+        Of a facet grid
     
     Examples
     --------

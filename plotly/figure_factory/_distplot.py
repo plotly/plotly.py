@@ -59,8 +59,8 @@ def create_distplot(
 ):
     """
     Function that creates a distplot similar to seaborn.distplot;
-    **this function is deprecated**, use instead :mod:`plotly.express`
-    functions, for example
+    **this function is deprecated**, use instead [`plotly.express`](/reference/plotly-express.md)
+    functions, for example:
 
     ```
     >>> import plotly.express as px

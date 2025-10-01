@@ -30,7 +30,7 @@ def create_2d_density(
     width=600,
 ):
     """
-    **Deprecated**, use instead :func:`plotly.express.density_heatmap`.
+    **Deprecated**, use instead [`plotly.express.density_heatmap`](/reference/plotly-express.md#plotly.express.density_heatmap).
 
     Parameters
     ----------

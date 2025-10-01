@@ -5690,7 +5690,7 @@ def scatter_mapbox(
     warn(
         "*scatter_mapbox* is deprecated!"
         + " Use *scatter_map* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/.",
         stacklevel=2,
         category=DeprecationWarning,
     )
@@ -5727,7 +5727,7 @@ def choropleth_mapbox(
 ) -> go.Figure:
     """
     *choropleth_mapbox* is deprecated! Use *choropleth_map* instead.
-    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
+    Learn more at: https://plotly.com/python/mapbox-to-maplibre/.
     In a Mapbox choropleth map, each row of `data_frame` is represented by a
     colored region on a Mapbox map.
 
@@ -5895,7 +5895,7 @@ def density_mapbox(
 ) -> go.Figure:
     """
     *density_mapbox* is deprecated! Use *density_map* instead.
-    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
+    Learn more at: https://plotly.com/python/mapbox-to-maplibre/.
     In a Mapbox density map, each row of `data_frame` contributes to the intensity of
     the color of the region around the corresponding point on the map
 
@@ -6169,7 +6169,7 @@ def line_mapbox(
     warn(
         "*line_mapbox* is deprecated!"
         + " Use *line_map* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/.",
         stacklevel=2,
         category=DeprecationWarning,
     )

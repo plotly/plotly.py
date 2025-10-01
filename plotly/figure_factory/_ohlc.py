@@ -132,8 +132,8 @@ def make_decreasing_ohlc(open, high, low, close, dates, **kwargs):
 
 def create_ohlc(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **Deprecated**, use instead the plotly.graph_objs trace
-    :class:`plotly.graph_objs.Ohlc`
+    **Deprecated**, use instead the plotly.graph_objects trace
+    [`plotly.graph_objects.Ohlc`](/reference/graph_objects/Ohlc.md)
 
     Parameters
     ----------
@@ -164,7 +164,8 @@ def create_ohlc(open, high, low, close, dates=None, direction="both", **kwargs):
     
     Returns
     -------
-    dict: a representation of an ohlc chart figure.
+    dict 
+        A representation of an ohlc chart figure.
 
     Examples
     --------

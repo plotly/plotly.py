@@ -443,8 +443,8 @@ def create_violin(
     title="Violin and Rug Plot",
 ):
     """
-    **Deprecated**, use instead the plotly.graph_objs trace
-    :class:`plotly.graph_objs.Violin`.
+    **Deprecated**, use instead the plotly.graph_objects trace
+    [`plotly.graph_objects.Violin`](/reference/graph_objects/Violin.md).
 
     Parameters
     ----------

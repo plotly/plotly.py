@@ -57,7 +57,7 @@ def create_annotated_heatmap(
     **kwargs,
 ):
     """
-    **Deprecated**, use instead :func:`plotly.express.imshow`.
+    **Deprecated**, use instead [`plotly.express.imshow`](/reference/plotly-express.md#plotly.express.imshow).
 
     Function that creates annotated heatmaps.
 

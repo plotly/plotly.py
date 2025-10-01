@@ -851,8 +851,8 @@ def create_scatterplotmatrix(
 ):
     """
     **Deprecated**,
-    use instead the plotly.graph_objs trace
-    :class:`plotly.graph_objs.Splom`.
+    use instead the plotly.graph_objects trace
+    [`plotly.graph_objects.Splom`](/reference/graph_objects/Splom.md).
 
     Parameters
     ----------
@@ -904,7 +904,8 @@ def create_scatterplotmatrix(
 
     Returns
     -------
-    fig : data for a scatterplot matrix
+    fig:
+        Data for a scatterplot matrix
 
     Examples
     --------

@@ -24,7 +24,7 @@ def create_dendrogram(
     Function that returns a dendrogram Plotly figure object. This is a thin
     wrapper around scipy.cluster.hierarchy.dendrogram.
 
-    See also https://dash.plot.ly/dash-bio/clustergram.
+    See also <https://dash.plotly.com/dash-bio/clustergram>.
 
     Parameters
     ----------

@@ -67,7 +67,8 @@ def create_streamline(
 
     Returns
     -------
-    dict: a representation of streamline figure.
+    dict
+        A representation of streamline figure.
 
     Examples
     --------

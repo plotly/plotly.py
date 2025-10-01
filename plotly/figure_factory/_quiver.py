@@ -40,7 +40,8 @@ def create_quiver(
 
     Returns
     -------
-    dict: a representation of quiver figure.
+    dict 
+        A representation of quiver figure.
 
     Examples
     --------

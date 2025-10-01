@@ -195,8 +195,8 @@ def create_bullet(
     **layout_options,
 ):
     """
-    **Deprecated**, use instead the plotly.graph_objs trace
-    :class:`plotly.graph_objs.Indicator`.
+    **Deprecated**, use instead the plotly.graph_objects trace
+    [`plotly.graph_objects.Indicator`](/reference/graph_objects/Indicator.md).
 
     Parameters
     ----------

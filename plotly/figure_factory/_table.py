@@ -36,8 +36,8 @@ def create_table(
     """
     Function that creates data tables.
 
-    See also the plotly.graph_objs trace
-    :class:`plotly.graph_objs.Table`
+    See also the plotly.graph_objects trace
+    [`plotly.graph_objects.Table`](/reference/graph_objects/Table.md)
 
     Parameters
     ----------
