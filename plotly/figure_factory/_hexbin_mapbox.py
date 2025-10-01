@@ -1,6 +1,6 @@
 from plotly.express._core import build_dataframe
 from plotly.express._doc import make_docstring
-from plotly.express._chart_types import choropleth_mapbox, scatter_mapbox
+from plotly.express._chart_types import choropleth_map, scatter_map
 import narwhals.stable.v1 as nw
 import numpy as np
 
@@ -446,7 +446,7 @@ def create_hexbin_mapbox(
     if range_color is None:
         range_color = [agg_data_frame["color"].min(), agg_data_frame["color"].max()]
 
-    fig = choropleth_mapbox(
+    fig = choropleth_map(
         data_frame=agg_data_frame.to_native(),
         geojson=geojson,
         locations="locations",
@@ -462,7 +462,7 @@ def create_hexbin_mapbox(
         opacity=opacity,
         zoom=zoom,
         center=center,
-        mapbox_style=mapbox_style,
+        map_style=mapbox_style,
         title=title,
         template=template,
         width=width,
@@ -470,7 +470,7 @@ def create_hexbin_mapbox(
     )
 
     if show_original_data:
-        original_fig = scatter_mapbox(
+        original_fig = scatter_map(
             data_frame=(
                 args["data_frame"].sort(
                     by=args["animation_frame"], descending=False, nulls_last=True
