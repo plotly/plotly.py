@@ -15,6 +15,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         "font",
         "grouptitlefont",
         "namelength",
+        "showarrow",
     }
 
     @property
@@ -151,6 +152,25 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         self["namelength"] = val
 
     @property
+    def showarrow(self):
+        """
+        Sets whether or not to show the hover label arrow/triangle
+        pointing to the data point.
+
+        The 'showarrow' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showarrow"]
+
+    @showarrow.setter
+    def showarrow(self, val):
+        self["showarrow"] = val
+
+    @property
     def _prop_descriptions(self):
         return """\
         align
@@ -175,6 +195,9 @@ class Hoverlabel(_BaseLayoutHierarchyType):
             the whole name if it is less than that many characters,
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
+        showarrow
+            Sets whether or not to show the hover label
+            arrow/triangle pointing to the data point.
         """
 
     def __init__(
@@ -186,6 +209,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         font=None,
         grouptitlefont=None,
         namelength=None,
+        showarrow=None,
         **kwargs,
     ):
         """
@@ -219,6 +243,9 @@ class Hoverlabel(_BaseLayoutHierarchyType):
             the whole name if it is less than that many characters,
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
+        showarrow
+            Sets whether or not to show the hover label
+            arrow/triangle pointing to the data point.
 
         Returns
         -------
@@ -250,5 +277,6 @@ an instance of :class:`plotly.graph_objs.layout.Hoverlabel`""")
         self._set_property("font", arg, font)
         self._set_property("grouptitlefont", arg, grouptitlefont)
         self._set_property("namelength", arg, namelength)
+        self._set_property("showarrow", arg, showarrow)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

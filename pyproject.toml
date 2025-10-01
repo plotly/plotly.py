@@ -32,7 +32,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.2.0"
+version = "6.3.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -83,7 +83,7 @@ dev = [
 ]
 
 [project.scripts]
-plotly_get_chrome = "plotly.io._kaleido:get_chrome"
+plotly_get_chrome = "plotly.io._kaleido:plotly_get_chrome"
 
 [tool.pytest.ini_options]
 markers = [
