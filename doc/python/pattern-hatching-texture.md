@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.6
+      jupytext_version: 1.17.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.9.0
   plotly:
     description: How to use patterns (also known as hatching or texture) with bar
       charts.
@@ -146,6 +146,55 @@ fig = go.Figure()
 fig.add_trace(go.Bar(x=["a","b"], y=[1,2], marker_pattern_shape="."))
 fig.add_trace(go.Bar(x=["a","b"], y=[3,1], marker_pattern_shape="x"))
 fig.add_trace(go.Bar(x=["a","b"], y=[2,3], marker_pattern_shape="+"))
+
+fig.show()
+```
+
+### Patterns Using SVG Paths
+
+*New in 6.3*
+
+You can make custom patterns for graphs by using an SVG path. Set `marker.pattern.path` to the SVG path to use:
+
+```python
+import plotly.graph_objects as go
+import plotly.data
+
+df = plotly.data.gapminder().query("year == 2007 and continent == 'Europe'").copy()
+df['gdp'] = df['gdpPercap'] * df['pop']
+df = df.sort_values('gdp', ascending=False).head(4)
+
+fig = go.Figure(
+    data=[go.Bar(
+        x=df['country'],
+        y=df['gdp'],
+        marker=dict(
+            color=["lightsteelblue", "mistyrose", "palegreen", "thistle"],
+            pattern=dict(
+                path=[
+                    "M0,0H4V4H0Z",
+                    "M0,0H6V6Z",
+                    "M0,0V4H4Z",
+                    "M0,0C0,2,4,2,4,4C4,6,0,6,0,8H2C2,6,6,6,6,4C6,2,2,2,2,0Z"
+                ],
+                fgcolor=["midnightblue", "crimson", "seagreen", "indigo"],
+                bgcolor=["mintcream", "lavenderblush", "azure", "honeydew"],
+                size=20,
+                solidity=0.7
+            )
+        ),
+        name="GDP (2007)"
+    )],
+    layout=dict(
+        title="Top 4 European Countries by GDP (Gapminder 2007) with Custom SVG Path Patterns",
+        xaxis_title="Country",
+        yaxis_title="GDP (USD)",
+        yaxis_tickformat="$.2s",
+        width=800,
+        height=500,
+        bargap=0.3
+    )
+)
 
 fig.show()
 ```

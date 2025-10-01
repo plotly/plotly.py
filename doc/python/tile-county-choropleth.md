@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.10.0
   plotly:
-    description: How to make a choropleth map of US counties in Python with Plotly.
+    description: How to make tile choropleth maps in Python with Plotly.
     display_as: maps
     language: python
     layout: base
@@ -254,4 +254,4 @@ fig.show()
 
 See [function reference for `px.choropleth_map`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_map) or https://plotly.com/python/reference/choroplethmap/ for more information about the attributes available.
 
-For Mapbox-based tile maps, see [function reference for `px.choropleth_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_mapbox) or https://plotly.com/python/reference/choroplethmapbox/.
+For (deprecated) Mapbox-based tile maps, see [function reference for `px.choropleth_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_mapbox) or https://plotly.com/python/reference/choroplethmapbox/.

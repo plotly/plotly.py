@@ -237,7 +237,7 @@ class Image(_BaseTraceType):
         template string has access to variables `z`, `color` and
         `colormodel`. Anything contained in tag `<extra>` is displayed
         in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
+        `<extra>%{fullData.name}</extra>`. To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
@@ -521,7 +521,8 @@ class Image(_BaseTraceType):
     def source(self):
         """
         Specifies the data URI of the image to be visualized. The URI
-        consists of "data:image/[<media subtype>][;base64],<data>"
+        consists of "data:image/[<media
+        subtype\\>][;base64\\],<data\\>"
 
         The 'source' property is a string and must be specified as:
           - A string
@@ -956,8 +957,9 @@ class Image(_BaseTraceType):
             to variables `z`, `color` and `colormodel`. Anything
             contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1020,7 +1022,7 @@ class Image(_BaseTraceType):
         source
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
-            subtype>][;base64],<data>"
+            subtype\\>][;base64\\],<data\\>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
@@ -1228,8 +1230,9 @@ class Image(_BaseTraceType):
             to variables `z`, `color` and `colormodel`. Anything
             contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1292,7 +1295,7 @@ class Image(_BaseTraceType):
         source
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
-            subtype>][;base64],<data>"
+            subtype\\>][;base64\\],<data\\>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties

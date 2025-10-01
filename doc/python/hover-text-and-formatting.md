@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.17.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.12.4
   plotly:
     description: How to use hover text and formatting in Python with Plotly.
     display_as: file_settings
@@ -81,6 +81,57 @@ fig.update_traces(mode="markers+lines", hovertemplate=None)
 fig.update_layout(hovermode="x unified")
 
 fig.show()
+```
+
+#### Customize Title in Unified Hovermode
+
+*New in 6.3*
+
+Customize the title shown in unified hovermode, by specifing `unifiedhovertitle.text`.
+
+The unified hover title is a template string that supports using variables from the data. Numbers are formatted using d3-format's syntax `%{variable:d3-format}`, for `example \"Price: %{y:$.2f}\"`. Dates are formatted using d3-time-format's syntax `%{variable|d3-time-format}`, for example `\"Day: %{2019-01-01|%A}\"`.
+
+The following example uses `'x unified'` hover and specifies a unified hover title that shows the full weekday, month, day, and year.
+
+```python
+import plotly.graph_objects as go
+import plotly.express as px
+
+df = px.data.stocks()
+
+fig = go.Figure(
+    data=[
+        go.Scatter(
+            x=df['date'],
+            y=df['GOOG'],
+            mode='lines',
+            name='Google'
+        ),
+        go.Scatter(
+            x=df['date'],
+            y=df['AAPL'],
+            mode='lines',
+            name='Apple'
+        )
+    ],
+    layout=go.Layout(
+        title_text="Stock Prices with Custom Unified Hover Title",
+        hovermode='x unified',
+        xaxis=dict(
+            title_text='Date',
+            unifiedhovertitle=dict(
+                text='<b>%{x|%A, %B %d, %Y}</b>'
+            )
+        ),
+        yaxis=dict(
+            title_text='Price (USD)',
+            tickprefix='$'
+        )
+    )
+)
+
+fig.show()
+
 ```
 
 #### Control hovermode with Dash

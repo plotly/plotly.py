@@ -3,6 +3,7 @@
 
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
+import warnings
 
 
 class Choropleth(_BaseTraceType):
@@ -370,7 +371,7 @@ class Choropleth(_BaseTraceType):
         Additionally, every attributes that can be specified per-point
         (the ones that are `arrayOk: true`) are available.  Anything
         contained in tag `<extra>` is displayed in the secondary box,
-        for example "<extra>{fullData.name}</extra>". To hide the
+        for example `<extra>%{fullData.name}</extra>`. To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
@@ -594,11 +595,14 @@ class Choropleth(_BaseTraceType):
     @property
     def locationmode(self):
         """
-        Determines the set of locations used to match entries in
-        `locations` to regions on the map. Values "ISO-3", "USA-
-        states", *country names* correspond to features on the base map
-        and value "geojson-id" corresponds to features from a custom
-        GeoJSON linked to the `geojson` attribute.
+        The library used by the *country names* `locationmode` option
+        is changing in an upcoming version. Country names in existing
+        plots may not work in the new version. Determines the set of
+        locations used to match entries in `locations` to regions on
+        the map. Values "ISO-3", "USA-states", *country names*
+        correspond to features on the base map and value "geojson-id"
+        corresponds to features from a custom GeoJSON linked to the
+        `geojson` attribute.
 
         The 'locationmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1196,8 +1200,9 @@ class Choropleth(_BaseTraceType):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1241,12 +1246,15 @@ class Choropleth(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         locationmode
-            Determines the set of locations used to match entries
-            in `locations` to regions on the map. Values "ISO-3",
-            "USA-states", *country names* correspond to features on
-            the base map and value "geojson-id" corresponds to
-            features from a custom GeoJSON linked to the `geojson`
-            attribute.
+            The library used by the *country names* `locationmode`
+            option is changing in an upcoming version. Country
+            names in existing plots may not work in the new
+            version. Determines the set of locations used to match
+            entries in `locations` to regions on the map. Values
+            "ISO-3", "USA-states", *country names* correspond to
+            features on the base map and value "geojson-id"
+            corresponds to features from a custom GeoJSON linked to
+            the `geojson` attribute.
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
@@ -1515,8 +1523,9 @@ class Choropleth(_BaseTraceType):
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1560,12 +1569,15 @@ class Choropleth(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         locationmode
-            Determines the set of locations used to match entries
-            in `locations` to regions on the map. Values "ISO-3",
-            "USA-states", *country names* correspond to features on
-            the base map and value "geojson-id" corresponds to
-            features from a custom GeoJSON linked to the `geojson`
-            attribute.
+            The library used by the *country names* `locationmode`
+            option is changing in an upcoming version. Country
+            names in existing plots may not work in the new
+            version. Determines the set of locations used to match
+            entries in `locations` to regions on the map. Values
+            "ISO-3", "USA-states", *country names* correspond to
+            features on the base map and value "geojson-id"
+            corresponds to features from a custom GeoJSON linked to
+            the `geojson` attribute.
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
@@ -1696,6 +1708,15 @@ class Choropleth(_BaseTraceType):
 The first argument to the plotly.graph_objs.Choropleth
 constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Choropleth`""")
+
+        if locationmode == "country names" and kwargs.get("_validate"):
+            warnings.warn(
+                "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
+                "Country names in existing plots may not work in the new version. "
+                "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
+                DeprecationWarning,
+                stacklevel=5,
+            )
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
