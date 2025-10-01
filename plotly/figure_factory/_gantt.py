@@ -817,18 +817,20 @@ def create_gantt(
     show_hover_fill=True,
 ):
     """
-    **deprecated**, use instead
+    **Deprecated**, use instead
     :func:`plotly.express.timeline`.
 
-    Returns figure for a gantt chart
-
-    :param (array|list) df: input data for gantt chart. Must be either a
+    Parameters
+    ----------
+    df : array or list 
+        Input data for gantt chart. Must be either a
         a dataframe or a list. If dataframe, the columns must include
         'Task', 'Start' and 'Finish'. Other columns can be included and
         used for indexing. If a list, its elements must be dictionaries
         with the same required column headers: 'Task', 'Start' and
         'Finish'.
-    :param (str|list|dict|tuple) colors: either a plotly scale name, an
+    colors : str or list or dict or tuple 
+        Either a plotly scale name, an
         rgb or hex color, a color tuple or a list of colors. An rgb color
         is of the form 'rgb(x, y, z)' where x, y, z belong to the interval
         [0, 255] and a color tuple is a tuple of the form (a, b, c) where
@@ -836,21 +838,37 @@ def create_gantt(
         contain the valid color types aforementioned as its members.
         If a dictionary, all values of the indexing column must be keys in
         colors.
-    :param (str|float) index_col: the column header (if df is a data
+    index_col : str or float 
+        The column header (if df is a data
         frame) that will function as the indexing column. If df is a list,
         index_col must be one of the keys in all the items of df.
-    :param (bool) show_colorbar: determines if colorbar will be visible.
+    show_colorbar : bool 
+        Determines if colorbar will be visible.
         Only applies if values in the index column are numeric.
-    :param (bool) show_hover_fill: enables/disables the hovertext for the
+    show_hover_fill : bool 
+        Enables/disables the hovertext for the
         filled area of the chart.
-    :param (bool) reverse_colors: reverses the order of selected colors
-    :param (str) title: the title of the chart
-    :param (float) bar_width: the width of the horizontal bars in the plot
-    :param (bool) showgrid_x: show/hide the x-axis grid
-    :param (bool) showgrid_y: show/hide the y-axis grid
-    :param (float) height: the height of the chart
-    :param (float) width: the width of the chart
+    reverse_colors : bool 
+        Reverses the order of selected colors
+    title : str
+        The title of the chart
+    bar_width : float 
+        The width of the horizontal bars in the plot
+    showgrid_x : bool 
+        Show/hide the x-axis grid
+    showgrid_y : bool 
+        Show/hide the y-axis grid
+    height : float 
+        The height of the chart
+    width : float 
+        The width of the chart
 
+    Returns
+    -------
+    fig: for a gantt chart
+
+    Examples
+    --------
     Example 1: Simple Gantt Chart
 
     >>> from plotly.figure_factory import create_gantt

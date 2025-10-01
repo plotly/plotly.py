@@ -132,15 +132,23 @@ def make_decreasing_ohlc(open, high, low, close, dates, **kwargs):
 
 def create_ohlc(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **deprecated**, use instead the plotly.graph_objs trace
+    **Deprecated**, use instead the plotly.graph_objs trace
     :class:`plotly.graph_objs.Ohlc`
 
-    :param (list) open: opening values
-    :param (list) high: high values
-    :param (list) low: low values
-    :param (list) close: closing
-    :param (list) dates: list of datetime objects. Default: None
-    :param (string) direction: direction can be 'increasing', 'decreasing',
+    Parameters
+    ----------
+    open : list 
+        Opening values
+    high : list 
+        High values
+    low : list 
+        Low values
+    close : list 
+        Closing values
+    dates : list 
+        List of datetime objects. Default: None
+    direction : str 
+        Direction can be 'increasing', 'decreasing',
         or 'both'. When the direction is 'increasing', the returned figure
         consists of all units where the close value is greater than the
         corresponding open value, and when the direction is 'decreasing',
@@ -148,13 +156,18 @@ def create_ohlc(open, high, low, close, dates=None, direction="both", **kwargs):
         less than or equal to the corresponding open value. When the
         direction is 'both', both increasing and decreasing units are
         returned. Default: 'both'
-    :param kwargs: kwargs passed through plotly.graph_objects.Scatter.
+    **kwargs: 
+        kwargs passed through plotly.graph_objects.Scatter.
         These kwargs describe other attributes about the ohlc Scatter trace
         such as the color or the legend name. For more information on valid
         kwargs call help(plotly.graph_objects.Scatter)
+    
+    Returns
+    -------
+    dict: a representation of an ohlc chart figure.
 
-    :rtype (dict): returns a representation of an ohlc chart figure.
-
+    Examples
+    --------
     Example 1: Simple OHLC chart from a Pandas DataFrame
 
     >>> from plotly.figure_factory import create_ohlc

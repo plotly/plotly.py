@@ -17,16 +17,26 @@ def make_increasing_candle(open, high, low, close, dates, **kwargs):
     when direction is set to 'increasing' or 'decreasing' in
     FigureFactory.create_candlestick()
 
-    :param (list) open: opening values
-    :param (list) high: high values
-    :param (list) low: low values
-    :param (list) close: closing values
-    :param (list) dates: list of datetime objects. Default: None
-    :param kwargs: kwargs to be passed to increasing trace via
+    Parameters
+    ----------
+    open : list
+        Opening values
+    high : list
+        High values
+    low : list
+        Low values
+    close : list
+        Closing values
+    dates : list 
+        List of datetime objects. Default: None
+    **kwargs :
+        kwargs to be passed to increasing trace via
         plotly.graph_objects.Scatter.
 
-    :rtype (list) candle_incr_data: list of the box trace for
-        increasing candlesticks.
+    Returns
+    -------
+    candle_incr_data : list
+        List of the box trace for increasing candlesticks.
     """
     increase_x, increase_y = _Candlestick(
         open, high, low, close, dates, **kwargs
@@ -59,16 +69,26 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
     """
     Makes boxplot trace for decreasing candlesticks
 
-    :param (list) open: opening values
-    :param (list) high: high values
-    :param (list) low: low values
-    :param (list) close: closing values
-    :param (list) dates: list of datetime objects. Default: None
-    :param kwargs: kwargs to be passed to decreasing trace via
+    Parameters
+    ----------
+    open : list
+        Opening values
+    high : list
+        High values
+    low : list
+        Low values
+    close : list
+        Closing values
+    dates : list 
+        List of datetime objects. Default: None
+    **kwargs :
+        kwargs to be passed to decreasing trace via
         plotly.graph_objects.Scatter.
 
-    :rtype (list) candle_decr_data: list of the box trace for
-        decreasing candlesticks.
+    Returns
+    -------
+    candle_decr_data : list 
+        List of the box trace for decreasing candlesticks.
     """
 
     decrease_x, decrease_y = _Candlestick(
@@ -97,15 +117,23 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
 
 def create_candlestick(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **deprecated**, use instead the plotly.graph_objs trace
+    **Deprecated**, use instead the plotly.graph_objs trace
     :class:`plotly.graph_objs.Candlestick`
 
-    :param (list) open: opening values
-    :param (list) high: high values
-    :param (list) low: low values
-    :param (list) close: closing values
-    :param (list) dates: list of datetime objects. Default: None
-    :param (string) direction: direction can be 'increasing', 'decreasing',
+    Parameters
+    ----------
+    open : list
+        Opening values
+    high : list
+        High values
+    low : list
+        Low values
+    close : list
+        Closing values
+    dates : list 
+        List of datetime objects. Default: None
+    direction : str
+        Direction can be 'increasing', 'decreasing',
         or 'both'. When the direction is 'increasing', the returned figure
         consists of all candlesticks where the close value is greater than
         the corresponding open value, and when the direction is
@@ -113,13 +141,18 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
         where the close value is less than or equal to the corresponding
         open value. When the direction is 'both', both increasing and
         decreasing candlesticks are returned. Default: 'both'
-    :param kwargs: kwargs passed through plotly.graph_objects.Scatter.
+    **kwargs : 
+        kwargs passed through plotly.graph_objects.Scatter.
         These kwargs describe other attributes about the ohlc Scatter trace
         such as the color or the legend name. For more information on valid
         kwargs call help(plotly.graph_objects.Scatter)
 
-    :rtype (dict): returns a representation of candlestick chart figure.
+    Returns
+    -------
+    dict: a representation of candlestick chart figure.
 
+    Examples
+    --------
     Example 1: Simple candlestick chart from a Pandas DataFrame
 
     >>> from plotly.figure_factory import create_candlestick

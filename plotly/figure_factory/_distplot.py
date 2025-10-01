@@ -62,11 +62,13 @@ def create_distplot(
     **this function is deprecated**, use instead :mod:`plotly.express`
     functions, for example
 
+    ```
     >>> import plotly.express as px
     >>> tips = px.data.tips()
     >>> fig = px.histogram(tips, x="total_bill", y="tip", color="sex", marginal="rug",
     ...                    hover_data=tips.columns)
     >>> fig.show()
+    ```
 
 
     The distplot can be composed of all or any combination of the following
@@ -74,21 +76,37 @@ def create_distplot(
     or (b) normal curve, and (3) rug plot. Additionally, multiple distplots
     (from multiple datasets) can be created in the same plot.
 
-    :param (list[list]) hist_data: Use list of lists to plot multiple data
-        sets on the same plot.
-    :param (list[str]) group_labels: Names for each data set.
-    :param (list[float]|float) bin_size: Size of histogram bins.
+    Parameters
+    ----------
+    hist_data : list[list]
+        Use list of lists to plot multiple data sets on the same plot.
+    group_labels : list[str]
+        Names for each data set.
+    bin_size : list[float] or float 
+        Size of histogram bins.
         Default = 1.
-    :param (str) curve_type: 'kde' or 'normal'. Default = 'kde'
-    :param (str) histnorm: 'probability density' or 'probability'
+    curve_type : str 
+        'kde' or 'normal'. Default = 'kde'
+    histnorm : str 
+        'probability density' or 'probability'
         Default = 'probability density'
-    :param (bool) show_hist: Add histogram to distplot? Default = True
-    :param (bool) show_curve: Add curve to distplot? Default = True
-    :param (bool) show_rug: Add rug to distplot? Default = True
-    :param (list[str]) colors: Colors for traces.
-    :param (list[list]) rug_text: Hovertext values for rug_plot,
-    :return (dict): Representation of a distplot figure.
+    show_hist : bool 
+        Add histogram to distplot? Default = True
+    show_curve : bool
+        Add curve to distplot? Default = True
+    show_rug : bool 
+        Add rug to distplot? Default = True
+    colors : list[str] 
+        Colors for traces.
+    rug_text : list[list] 
+        Hovertext values for rug_plot,
 
+    Returns
+    -------
+    dict: Representation of a distplot figure.
+
+    Examples
+    --------
     Example 1: Simple distplot of 1 data set
 
     >>> from plotly.figure_factory import create_distplot

@@ -850,24 +850,34 @@ def create_scatterplotmatrix(
     **kwargs,
 ):
     """
-    Returns data for a scatterplot matrix;
-    **deprecated**,
+    **Deprecated**,
     use instead the plotly.graph_objs trace
     :class:`plotly.graph_objs.Splom`.
 
-    :param (array) df: array of the data with column headers
-    :param (str) index: name of the index column in data array
-    :param (list|tuple) endpts: takes an increasing sequece of numbers
+    Parameters
+    ----------
+    df : array 
+        Array of the data with column headers
+    index : str 
+        Name of the index column in data array
+    endpts : list or tuple 
+        Takes an increasing sequece of numbers
         that defines intervals on the real line. They are used to group
         the entries in an index of numbers into their corresponding
         interval and therefore can be treated as categorical data
-    :param (str) diag: sets the chart type for the main diagonal plots.
+    diag : str 
+        Sets the chart type for the main diagonal plots.
         The options are 'scatter', 'histogram' and 'box'.
-    :param (int|float) height: sets the height of the chart
-    :param (int|float) width: sets the width of the chart
-    :param (float) size: sets the marker size (in px)
-    :param (str) title: the title label of the scatterplot matrix
-    :param (str|tuple|list|dict) colormap: either a plotly scale name,
+    height : int or float
+        Sets the height of the chart
+    width : int or float 
+        Sets the width of the chart
+    size : float 
+        Sets the marker size (in px)
+    title : str t
+        The title label of the scatterplot matrix
+    colormap : str or tuple or list or dict 
+        Either a plotly scale name,
         an rgb or hex color, a color tuple, a list of colors or a
         dictionary. An rgb color is of the form 'rgb(x, y, z)' where
         x, y and z belong to the interval [0, 255] and a color tuple is a
@@ -877,7 +887,8 @@ def create_scatterplotmatrix(
         If colormap is a dictionary, all the string entries in
         the index column must be a key in colormap. In this case, the
         colormap_type is forced to 'cat' or categorical
-    :param (str) colormap_type: determines how colormap is interpreted.
+    colormap_type : str    
+        Determines how colormap is interpreted.
         Valid choices are 'seq' (sequential) and 'cat' (categorical). If
         'seq' is selected, only the first two colors in colormap will be
         considered (when colormap is a list) and the index values will be
@@ -886,10 +897,17 @@ def create_scatterplotmatrix(
         If 'cat' is selected, a color from colormap will be assigned to
         each category from index, including the intervals if endpts is
         being used
-    :param (dict) **kwargs: a dictionary of scatterplot arguments
+    **kwargs : 
+        a dictionary of scatterplot arguments
         The only forbidden parameters are 'size', 'color' and
         'colorscale' in 'marker'
 
+    Returns
+    -------
+    fig : data for a scatterplot matrix
+
+    Examples
+    --------
     Example 1: Vanilla Scatterplot Matrix
 
     >>> from plotly.graph_objects import graph_objects

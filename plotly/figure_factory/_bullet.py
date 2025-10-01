@@ -195,45 +195,62 @@ def create_bullet(
     **layout_options,
 ):
     """
-    **deprecated**, use instead the plotly.graph_objs trace
+    **Deprecated**, use instead the plotly.graph_objs trace
     :class:`plotly.graph_objs.Indicator`.
 
-    :param (pd.DataFrame | list | tuple) data: either a list/tuple of
-        dictionaries or a pandas DataFrame.
-    :param (str) markers: the column name or dictionary key for the markers in
+    Parameters
+    ----------
+    data : pd.DataFrame or list or tuple
+        Either a list/tuple of dictionaries or a pandas DataFrame.
+    markers : str
+        The column name or dictionary key for the markers in
         each subplot.
-    :param (str) measures: the column name or dictionary key for the measure
+    measures : str
+        The column name or dictionary key for the measure
         bars in each subplot. This bar usually represents the quantitative
         measure of performance, usually a list of two values [a, b] and are
         the blue bars in the foreground of each subplot by default.
-    :param (str) ranges: the column name or dictionary key for the qualitative
+    ranges : str
+        The column name or dictionary key for the qualitative
         ranges of performance, usually a 3-item list [bad, okay, good]. They
         correspond to the grey bars in the background of each chart.
-    :param (str) subtitles: the column name or dictionary key for the subtitle
+    subtitles : str
+        The column name or dictionary key for the subtitle
         of each subplot chart. The subplots are displayed right underneath
         each title.
-    :param (str) titles: the column name or dictionary key for the main label
+    titles: str
+        The column name or dictionary key for the main label
         of each subplot chart.
-    :param (bool) orientation: if 'h', the bars are placed horizontally as
+    orientation : bool
+        If 'h', the bars are placed horizontally as
         rows. If 'v' the bars are placed vertically in the chart.
-    :param (list) range_colors: a tuple of two colors between which all
+    range_colors : list
+        A tuple of two colors between which all
         the rectangles for the range are drawn. These rectangles are meant to
         be qualitative indicators against which the marker and measure bars
         are compared.
         Default=('rgb(200, 200, 200)', 'rgb(245, 245, 245)')
-    :param (list) measure_colors: a tuple of two colors which is used to color
+    measure_colors : list
+        A tuple of two colors which is used to color
         the thin quantitative bars in the bullet chart.
         Default=('rgb(31, 119, 180)', 'rgb(176, 196, 221)')
-    :param (float) horizontal_spacing: see the 'horizontal_spacing' param in
+    horizontal_spacing : float
+        See the 'horizontal_spacing' param in
         plotly.tools.make_subplots. Ranges between 0 and 1.
-    :param (float) vertical_spacing: see the 'vertical_spacing' param in
+    vertical_spacing : float
+        See the 'vertical_spacing' param in
         plotly.tools.make_subplots. Ranges between 0 and 1.
-    :param (dict) scatter_options: describes attributes for the scatter trace
+    scatter_options : dict
+        Describes attributes for the scatter trace
         in each subplot such as name and marker size. Call
         help(plotly.graph_objects.Scatter) for more information on valid params.
-    :param layout_options: describes attributes for the layout of the figure
+    layout_options :
+        Describes attributes for the layout of the figure
         such as title, height and width. Call help(plotly.graph_objects.Layout)
         for more information on valid params.
+
+    Examples
+    --------    
 
     Example 1: Use a Dictionary
 
