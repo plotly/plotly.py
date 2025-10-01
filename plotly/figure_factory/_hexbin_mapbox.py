@@ -521,6 +521,6 @@ create_hexbin_mapbox.__doc__ = make_docstring(
             "bool",
             "Whether to show the original data on top of the hexbin aggregation.",
         ],
-        original_data_marker=["dict", "Scattermapbox marker options."],
+        original_data_marker=["dict", "Scattermap marker options."],
     ),
 )
