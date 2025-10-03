@@ -57,6 +57,7 @@ dev_build = [
     "mkdocstrings[python]",
     "mkdocs-gen-files",
     "mkdocs-literate-nav",
+    "mkdocs-redirects",
     "pyyaml"
 ]
 dev_optional = [
