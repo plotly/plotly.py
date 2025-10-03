@@ -32,13 +32,17 @@ a link to the Plotly.js CHANGELOG.
     - update version and release date
 - Run `uv lock` to update the version number in the `uv.lock` file (do not update manually)
 - Commit and push your changes to the release branch:
-    - `git add -u` 
-    - `git commit -m "version changes for vX.Y.Z"`
-    - `git push`
+    ```sh
+    $ git add -u
+    $ git commit -m "version changes for vX.Y.Z"
+    $ git push
+    ```
 - Create a GitHub pull request from `release-X.Y.Z` to `main` and wait for CI to be green
 - On the release branch, create and push a tag for the release:
-   - `git tag vX.Y.Z`
-   - `git push origin vX.Y.Z`
+    ```sh
+    $ git tag vX.Y.Z
+    $ git push origin vX.Y.Z
+    ```
 
 ### Manual QA in Jupyter
 
