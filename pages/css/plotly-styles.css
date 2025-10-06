@@ -34,3 +34,24 @@
 .maplibregl-control-container {
   display: none;
 }
+
+.md-nav--primary {
+    position: relative; 
+    display: flex; 
+    flex-direction: column;
+}
+
+.nav-bottom-image{
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background: var(--md-default-bg-color);
+    padding: 30px 25px 0px 25px;
+    height: 12.1rem;
+}
+
+.nav-bottom-image img{
+    height: auto !important;
+    width: 100%;
+    object-fit: contain;
+}
