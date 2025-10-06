@@ -1,33 +1,4 @@
-/* Plotly Custom Colors */
-
-/* Define the custom primary color scheme */
-[data-md-color-primary="custom"] {
-    --md-primary-fg-color: #6E56CF;
-    --md-primary-fg-color--light: #8B72D9;
-    --md-primary-fg-color--dark: #5A47B8;
-    --md-primary-bg-color: #FFFFFF;
-    --md-primary-bg-color--light: #F8F7FD;
-  }
-  
-  /* Define the custom accent color scheme */
-  [data-md-color-accent="custom"] {
-    --md-accent-fg-color: #6E56CF;
-    --md-accent-fg-color--transparent: rgba(110, 86, 207, 0.1);
-    --md-accent-bg-color: #FFFFFF;
-    --md-accent-bg-color--light: #F8F7FD;
-  }
-  
-  /* Additional custom properties for consistency */
-  :root {
-    --md-primary-fg-color: orange;
-    --plotly-primary: #6E56CF;
-    --plotly-primary-light: #8B72D9;
-    --plotly-primary-dark: #5A47B8;
-    --plotly-primary-alpha-10: rgba(110, 86, 207, 0.1);
-    --plotly-primary-alpha-20: rgba(110, 86, 207, 0.2);
-  }
-  
-  pre[hide_code="true"] {
+pre[hide_code="true"] {
     display: none;
 }
   
@@ -54,4 +25,8 @@
     height: auto !important;
     width: 100%;
     object-fit: contain;
+}
+
+.nav-bottom-image a::after {
+  content: none !important;
 }
