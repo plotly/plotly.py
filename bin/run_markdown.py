@@ -9,6 +9,7 @@ from contextlib import redirect_stdout, redirect_stderr
 import io
 from pathlib import Path
 import plotly.graph_objects as go
+import re
 import sys
 import traceback
 
@@ -66,14 +67,17 @@ def _do_file(args, input_file, block_number=None):
         print(f"Error writing output file: {e}", file=sys.stderr)
         sys.exit(1)
 
+def _contains_latex(code):
+    """Check if code likely contains LaTeX expressions."""
+    return "cdn" if '$' in code and re.search(r'\$[^$]+\$', code) else False
 
-def _capture_plotly_show(fig, counter, result, output_dir, stem):
+def _capture_plotly_show(fig, counter, result, output_dir, stem, mathjax_option):
     """Saves HTML figures."""
     # Save HTML and get the content for embedding
     html_filename = f"{stem}_{counter}.html"
     html_path = output_dir / html_filename
-    fig.write_html(html_path, include_plotlyjs="cdn")
-    html_content = fig.to_html(include_plotlyjs="cdn", div_id=f"plotly-div-{counter}", full_html=False)
+    fig.write_html(html_path, include_plotlyjs="cdn", include_mathjax=mathjax_option)
+    html_content = fig.to_html(include_plotlyjs="cdn", include_mathjax=mathjax_option, div_id=f"plotly-div-{counter}", full_html=False)
     result["html_files"].append(html_filename)
     result.setdefault("html_content", []).append(html_content)
 
@@ -216,6 +220,8 @@ def _run_all_blocks(args, input_file, code_blocks, stem=None, block_number=None)
 
 def _run_code(code, output_dir, figure_counter, stem, exec_globals):
     """Execute code capturing output and generated files."""
+    mathjax_option = _contains_latex(code)
+    
     # Capture stdout and stderr
     stdout_buffer = io.StringIO()
     stderr_buffer = io.StringIO()
@@ -241,7 +247,7 @@ def _run_code(code, output_dir, figure_counter, stem, exec_globals):
                 nonlocal figure_counter
                 figure_counter += 1
                 if stem is not None:
-                    _capture_plotly_show(self, figure_counter, result, output_dir, stem)
+                    _capture_plotly_show(self, figure_counter, result, output_dir, stem, mathjax_option)
             original_show = go.Figure.show
             go.Figure.show = patched_show
             exec(code, exec_globals)
