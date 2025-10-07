@@ -33,12 +33,12 @@ jupyter:
     thumbnail: thumbnail/ff-subplots.jpg
 ---
 
-#### Plotly's Figure Factory Module
+### Plotly's Figure Factory Module
 
 Plotly's Python API contains a [figure factory module](figure-factories.md) which includes many wrapper functions that create unique chart types that are not yet included in [plotly.js](https://github.com/plotly/plotly.js), Plotly's open-source graphing library. The figure factory functions create a full figure, so some Plotly features, such as subplotting, should be implemented slightly differently with these charts.
 
 
-#### Vertical Figure Factory Charts
+### Vertical Figure Factory Charts
 First create the figures that you'd like to appear in the subplot:
 
 ```python
@@ -98,7 +98,7 @@ fig.layout.update(fig2.layout)
 fig.show()
 ```
 
-#### Horizontal Table and Chart
+### Horizontal Table and Chart
 
 ```python
 import plotly.graph_objects as go
@@ -150,7 +150,7 @@ fig.layout.update({'title': '2016 Hockey Stats'})
 fig.show()
 ```
 
-#### Vertical Table and Chart
+### Vertical Table and Chart
 
 ```python
 import plotly.graph_objects as go
@@ -210,5 +210,5 @@ fig.layout.update({'height':800})
 fig.show()
 ```
 
-#### Reference
+### Reference
 See [https://plotly.com/python/subplots/](subplots.md) for more information on working with subplots. See https://plotly.com/python/reference/ for more information regarding chart attributes!

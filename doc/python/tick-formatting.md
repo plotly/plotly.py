@@ -32,7 +32,7 @@ jupyter:
     thumbnail: thumbnail/tick-formatting.gif
 ---
 
-#### Tickmode - Linear
+### Tickmode - Linear
 
 
 If `"linear"`, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick`
@@ -56,7 +56,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Tickmode - Array
+### Tickmode - Array
 
 
 If `"array"`, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`.
@@ -80,7 +80,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Dynamic tickmode in Dash
+## Dynamic tickmode in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
@@ -97,7 +97,7 @@ IFrame(snippet_url + 'tick-formatting', width='100%', height=1200)
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
-#### Using Tickformat Attribute
+### Using Tickformat Attribute
 
 
 For more formatting types, see: <https://github.com/d3/d3-format/blob/master/README.md#locale_format>
@@ -115,7 +115,7 @@ fig.update_layout(yaxis_tickformat = '%')
 fig.show()
 ```
 
-#### Using Tickformat Attribute - Date/Time
+### Using Tickformat Attribute - Date/Time
 
 
 For more date/time formatting types, see: <https://github.com/d3/d3-time-format/blob/master/README.md>
@@ -140,7 +140,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Using Exponentformat Attribute
+### Using Exponentformat Attribute
 
 ```python
 import plotly.graph_objects as go
@@ -160,7 +160,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Tickformatstops to customize for different zoom levels
+### Tickformatstops to customize for different zoom levels
 
 ```python
 import plotly.graph_objects as go
@@ -190,7 +190,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Placing ticks and gridlines between categories
+### Placing ticks and gridlines between categories
 
 ```python
 import plotly.graph_objects as go
@@ -210,5 +210,5 @@ fig.update_xaxes(
 fig.show()
 ```
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/layout/xaxis/](reference/graph_objects/layout-package/XAxis.md) for more information and chart attribute options!

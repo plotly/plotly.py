@@ -33,7 +33,7 @@ jupyter:
     v4upgrade: true
 ---
 
-#### Add a Background Image
+### Add a Background Image
 
 In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](imshow.md).
 
@@ -74,7 +74,7 @@ fig.update_layout(template="plotly_white")
 fig.show()
 ```
 
-#### Add a Logo
+### Add a Logo
 See more examples of [adding logos to charts](https://plotly.com/python/logos/)!
 
 ```python
@@ -145,7 +145,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Label Spectroscopy Data by Adding Multiple Images
+### Label Spectroscopy Data by Adding Multiple Images
 
 ```python
 import plotly.graph_objects as go
@@ -241,7 +241,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Zoom on Static Images
+### Zoom on Static Images
 
 ```python
 import plotly.graph_objects as go
@@ -305,7 +305,7 @@ fig.update_layout(
 fig.show(config={'doubleClick': 'reset'})
 ```
 
-### Annotating layout image with shapes
+## Annotating layout image with shapes
 
 _introduced in plotly 4.7_
 
@@ -360,7 +360,7 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 ```
 
 
-### Images Placed Relative to Axes
+## Images Placed Relative to Axes
 
 Using `xref='x domain'` or `yref='y domain'`, images can be placed relative to
 axes. As an example, the following shows how to put an image in the top corner
@@ -396,5 +396,5 @@ for col, src in enumerate(sources):
 fig.show()
 ```
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/layout/images/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.images) for more information and chart attribute options!

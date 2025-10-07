@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/table_subplots.jpg
 ---
 
-#### Import CSV Data
+### Import CSV Data
 
 ```python
 import plotly.graph_objects as go
@@ -102,6 +102,6 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/table/](reference/graph_objects/Table.md) for more information regarding chart attributes! <br>
 For examples of Plotly Tables, see: [https://plotly.com/python/table/](table.md)

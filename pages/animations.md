@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/animations.gif
 ---
 
-#### Animated figures with Plotly Express
+### Animated figures with Plotly Express
 
 Several [Plotly Express](plotly-express.md)  functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
 
@@ -48,7 +48,7 @@ px.scatter(df, x="gdpPercap", y="lifeExp", animation_frame="year", animation_gro
            log_x=True, size_max=55, range_x=[100,100000], range_y=[25,90])
 ```
 
-#### Animated figures in Dash
+### Animated figures in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
@@ -61,7 +61,7 @@ snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-
 IFrame(snippet_url + 'animations', width='100%', height=1200)
 ```
 
-#### Animated Bar Charts with Plotly Express
+### Animated Bar Charts with Plotly Express
 
 Note that you should always fix the `y_range` to ensure that your data remains visible throughout the animation.
 
@@ -81,23 +81,23 @@ fig.show()
                             Plotly.animate('plotly-div-1', null);
                         })                };            </script>        </div>
 
-### Current Animation Limitations and Caveats
+## Current Animation Limitations and Caveats
 
 * Animations are designed to work well when each row of input is present across all animation frames, and when categorical values mapped to symbol, color and facet are constant across frames. Animations *may be misleading or inconsistent* if these constraints are not met.
 * Although Plotly Express supports animation for many chart and map types, smooth inter-frame transitions are today *only* possible for `scatter` and `bar`
 * Plotly Express will *not* automatically compute the union of all x/y/color ranges, so these must be specified manually to avoid scale jumps across frames
 
-#### Animated figures with Graph Objects
+### Animated figures with Graph Objects
 
 The remainder of this section describes the low-level [graph objects](graph-objects.md) API for constructing animated figures manually.
 
-#### Frames
+### Frames
 
 Along with `data` and `layout`, `frames` can be added as a key in a figure object. The `frames` key points to a list of figures, each of which will be cycled through when animation is triggered.
 
 <!-- #region -->
 
-#### Adding Control Buttons to Animations
+### Adding Control Buttons to Animations
 
 You can add play and pause buttons to control your animated charts by adding an `updatemenus` array to the `layout` of your `figure`. More information on style and placement of the buttons is available in Plotly's [`updatemenus` reference](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus).
 <br>
@@ -112,7 +112,7 @@ The buttons are defined as follows:
 
 <!-- #endregion -->
 
-#### Defining Button Arguments
+### Defining Button Arguments
 
 - `None`: Setting `"args"` to undefined (i.e. `"args": [None]`) will create a simple play button that will animate all frames.
 - string: Animate all frames with group `"<some string>"`. This is a way of scoping the animations in case you would prefer to animate without explicitly enumerating all frames.
@@ -122,7 +122,7 @@ The buttons are defined as follows:
 - <b>Please Note:</b> We <b>do not</b> recommend using: `[ ]`. This syntax may cause confusion because it looks indistinguishable from a "pause button", but nested properties have logic that treats empty arrays as entirely removable, so it will function as a play button.<br><br>
   Refer to the examples below to see the buttons in action!
 
-#### Simple Play Button
+### Simple Play Button
 
 ```python
 import plotly.graph_objects as go
@@ -154,7 +154,7 @@ fig.show()
                             Plotly.animate('plotly-div-2', null);
                         })                };            </script>        </div>
 
-#### Moving Point on a Curve
+### Moving Point on a Curve
 
 ```python
 import plotly.graph_objects as go
@@ -211,7 +211,7 @@ fig.show()
                             Plotly.animate('plotly-div-3', null);
                         })                };            </script>        </div>
 
-#### Moving Frenet Frame Along a Planar Curve
+### Moving Frenet Frame Along a Planar Curve
 
 ```python
 import plotly.graph_objects as go
@@ -283,7 +283,7 @@ fig.show()
                             Plotly.animate('plotly-div-4', null);
                         })                };            </script>        </div>
 
-#### Using a Slider and Buttons
+### Using a Slider and Buttons
 
 The following example uses the well known [Gapminder dataset](https://www.gapminder.org/tag/gdp-per-capita/) to exemplify animation capabilities. This bubble chart animation shows the change in 'GDP per Capita' against the 'Life Expectancy' of several countries from the year 1952 to 2007, colored by their respective continent and sized by population.
 
@@ -432,11 +432,11 @@ fig.show()
                             Plotly.animate('plotly-div-5', null);
                         })                };            </script>        </div>
 
-#### Important Notes
+### Important Notes
 
 - Defining `redraw`: Setting `redraw: false` is an optimization for scatter plots so that animate just makes changes without redrawing the whole plot. For other plot types, such as contour plots, every frame <b>must</b> be a total plot redraw, i.e. `redraw: true`.
 
-#### Reference
+### Reference
 
 For additional information and attributes for creating bubble charts in Plotly see: [https://plotly.com/python/bubble-charts/](bubble-charts.md).
 For more documentation on creating animations with Plotly, see https://plotly.com/python/#animations.

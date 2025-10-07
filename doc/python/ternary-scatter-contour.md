@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/ternary-scatter-contour.jpg
 ---
 
-#### Load and Process Data Files
+### Load and Process Data Files
 
 ```python
 import json
@@ -66,7 +66,7 @@ def clean_data(data_in):
 print(clean_data({'L1': ['.03 0.5 0.47','0.4 0.5 0.1']}))
 ```
 
-#### Create Ternary Scatter Plot:
+### Create Ternary Scatter Plot:
 
 ```python
 import plotly.graph_objects as go
@@ -109,7 +109,7 @@ fig.update_layout({
 fig.show()
 ```
 
-#### Create Ternary Contour Plot:
+### Create Ternary Contour Plot:
 
 ```python
 import plotly.graph_objects as go

@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/treeplot.jpg
 ---
 
-#### Set Up Tree with [igraph](http://igraph.org/python/)
+### Set Up Tree with [igraph](http://igraph.org/python/)
 
 Install igraph with the following version:
 
@@ -68,7 +68,7 @@ for edge in E:
 labels = v_label
 ```
 
-#### Create Plotly Traces
+### Create Plotly Traces
 
 ```python
 import plotly.graph_objects as go
@@ -94,7 +94,7 @@ fig.add_trace(go.Scatter(x=Xn,
                   ))
 ```
 
-#### Create Text Inside the Circle via Annotations
+### Create Text Inside the Circle via Annotations
 
 ```python
 def make_annotations(pos, text, font_size=10, font_color='rgb(250,250,250)'):
@@ -114,7 +114,7 @@ def make_annotations(pos, text, font_size=10, font_color='rgb(250,250,250)'):
     return annotations
 ```
 
-#### Add Axis Specifications and Create the Layout
+### Add Axis Specifications and Create the Layout
 
 ```python
 axis = dict(showline=False, # hide axis line, grid, ticklabels and  title
@@ -136,5 +136,5 @@ fig.update_layout(title= 'Tree with Reingold-Tilford Layout',
 fig.show()
 ```
 
-#### Reference
+### Reference
 See https://plotly.com/python/reference/ for more information and chart attribute options and http://igraph.org/python/ for more information about the igraph package!

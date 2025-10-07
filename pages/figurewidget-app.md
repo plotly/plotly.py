@@ -34,7 +34,7 @@ jupyter:
     redirect_from: /python/slider-widget/
 ---
 
-#### NYC Flights Database
+### NYC Flights Database
 
 ```python
 import datetime
@@ -158,7 +158,7 @@ widgets.VBox([container,
 <img src = 'https://cloud.githubusercontent.com/assets/12302455/16637308/4e476280-43ac-11e6-9fd3-ada2c9506ee1.gif' >
 
 
-#### Reference
+### Reference
 
 ```python
 help(go.FigureWidget)
@@ -18935,10 +18935,10 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |  Data descriptors inherited from plotly.basedatatypes.BaseFigure:
  |
  |  __dict__
- |      dictionary for instance variables
+ |      dictionary for instance variables (if defined)
  |
  |  __weakref__
- |      list of weak references to the object
+ |      list of weak references to the object (if defined)
  |
  |  data
  |      The `data` property is a tuple of the figure's trace objects
@@ -18962,7 +18962,7 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |  ----------------------------------------------------------------------
  |  Class methods inherited from anywidget.widget.AnyWidget:
  |
- |  __init_subclass__(**kwargs: 'dict') -> 'None'
+ |  __init_subclass__(**kwargs: 'dict') -> 'None' from traitlets.traitlets.MetaHasTraits
  |      Coerces _esm and _css to FileContents if they are files.
  |
  |  ----------------------------------------------------------------------
@@ -19075,9 +19075,9 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |  ----------------------------------------------------------------------
  |  Class methods inherited from ipywidgets.widgets.widget.Widget:
  |
- |  close_all()
+ |  close_all() from traitlets.traitlets.MetaHasTraits
  |
- |  handle_control_comm_opened(comm, msg)
+ |  handle_control_comm_opened(comm, msg) from traitlets.traitlets.MetaHasTraits
  |      Class method, called when the comm-open message on the
  |      "jupyter.widget.control" comm channel is received
  |
@@ -19121,7 +19121,7 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |
  |  widget_types = <ipywidgets.widgets.widget.WidgetRegistry object>
  |
- |  widgets = {'01d292938c734788ace944eaa037c469': Layout(), '0b144a10a372...
+ |  widgets = {'06e15ba5185f47a0b2aecb029783ff3a': HBox(children=(Checkbox...
  |
  |  ----------------------------------------------------------------------
  |  Data descriptors inherited from ipywidgets.widgets.widget.LoggingHasTraits:
@@ -19300,23 +19300,23 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |  ----------------------------------------------------------------------
  |  Class methods inherited from traitlets.traitlets.HasTraits:
  |
- |  class_own_trait_events(name: 'str') -> 'dict[str, EventHandler]'
+ |  class_own_trait_events(name: 'str') -> 'dict[str, EventHandler]' from traitlets.traitlets.MetaHasTraits
  |      Get a dict of all event handlers defined on this class, not a parent.
  |
  |      Works like ``event_handlers``, except for excluding traits from parents.
  |
- |  class_own_traits(**metadata: 't.Any') -> 'dict[str, TraitType[t.Any, t.Any]]'
+ |  class_own_traits(**metadata: 't.Any') -> 'dict[str, TraitType[t.Any, t.Any]]' from traitlets.traitlets.MetaHasTraits
  |      Get a dict of all the traitlets defined on this class, not a parent.
  |
  |      Works like `class_traits`, except for excluding traits from parents.
  |
- |  class_trait_names(**metadata: 't.Any') -> 'list[str]'
+ |  class_trait_names(**metadata: 't.Any') -> 'list[str]' from traitlets.traitlets.MetaHasTraits
  |      Get a list of all the names of this class' traits.
  |
  |      This method is just like the :meth:`trait_names` method,
  |      but is unbound.
  |
- |  class_traits(**metadata: 't.Any') -> 'dict[str, TraitType[t.Any, t.Any]]'
+ |  class_traits(**metadata: 't.Any') -> 'dict[str, TraitType[t.Any, t.Any]]' from traitlets.traitlets.MetaHasTraits
  |      Get a ``dict`` of all the traits of this class.  The dictionary
  |      is keyed on the name and the values are the TraitType objects.
  |
@@ -19332,7 +19332,7 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |      the output.  If a metadata key doesn't exist, None will be passed
  |      to the function.
  |
- |  trait_events(name: 'str | None' = None) -> 'dict[str, EventHandler]'
+ |  trait_events(name: 'str | None' = None) -> 'dict[str, EventHandler]' from traitlets.traitlets.MetaHasTraits
  |      Get a ``dict`` of all the event handlers of this class.
  |
  |      Parameters

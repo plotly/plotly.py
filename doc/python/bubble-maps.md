@@ -33,11 +33,11 @@ jupyter:
     thumbnail: thumbnail/bubble-map.jpg
 ---
 
-#### Base Map Configuration
+### Base Map Configuration
 
 Plotly figures made with [Plotly Express](plotly-express.md) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](graph-objects.md) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](map-configuration.md) onto which data is plotted.
 
-### Bubble map with Plotly Express
+## Bubble map with Plotly Express
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). With `px.scatter_geo`, each line of the dataframe is represented as a marker point. The column set as the `size` argument gives the size of markers.
 
@@ -50,7 +50,7 @@ fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
 fig.show()
 ```
 
-### Bubble Map with animation
+## Bubble Map with animation
 
 ```python
 import plotly.express as px
@@ -62,9 +62,9 @@ fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
 fig.show()
 ```
 
-### Bubble Map with go.Scattergeo
+## Bubble Map with go.Scattergeo
 
-#### United States Bubble Map
+### United States Bubble Map
 
 Note about `sizeref`:
 
@@ -121,7 +121,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Ebola Cases in West Africa
+### Ebola Cases in West Africa
 
 ```python
 import plotly.graph_objects as go
@@ -206,6 +206,6 @@ HDX</a>'),
 fig.show()
 ```
 
-#### Reference
+### Reference
 
 See [function reference for `px.(scatter_geo)`](reference/plotly-express.md#plotly.express.scatter_geo) or [https://plotly.com/python/reference/choropleth/](reference/graph_objects/Choropleth.md) and [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) for more information and chart attribute options!

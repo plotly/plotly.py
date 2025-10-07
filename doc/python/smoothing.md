@@ -34,7 +34,7 @@ jupyter:
     thumbnail: /images/static-image
 ---
 
-#### Imports
+### Imports
 
 The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html), [SciPy](https://www.scipy.org/) and [Plotly](getting-started.md).
 
@@ -48,7 +48,7 @@ import scipy
 from scipy import signal
 ```
 
-#### Savitzky-Golay Filter
+### Savitzky-Golay Filter
 
 `Smoothing` is a technique that is used to eliminate noise from a dataset. There are many algorithms and methods to accomplish this but all have the same general purpose of 'roughing out the edges' or 'smoothing' some data.
 
@@ -111,7 +111,7 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-#### Triangular Moving Average
+### Triangular Moving Average
 
 Another method for smoothing is a moving average. There are various forms of this, but the idea is to take a window of points in your dataset, compute an average of the points, then shift the window over by one point and repeat. This will generate a bunch of points which will result in the `smoothed` data.
 

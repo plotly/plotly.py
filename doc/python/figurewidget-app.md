@@ -34,7 +34,7 @@ jupyter:
     redirect_from: /python/slider-widget/
 ---
 
-#### NYC Flights Database
+### NYC Flights Database
 
 ```python
 import datetime
@@ -158,7 +158,7 @@ widgets.VBox([container,
 <img src = 'https://cloud.githubusercontent.com/assets/12302455/16637308/4e476280-43ac-11e6-9fd3-ada2c9506ee1.gif' >
 
 
-#### Reference
+### Reference
 
 ```python
 help(go.FigureWidget)

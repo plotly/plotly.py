@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/bullet.png
 ---
 
-#### Basic Bullet Charts
+### Basic Bullet Charts
 Stephen Few's Bullet Chart was invented to replace dashboard [gauges](gauge-charts.md) and meters, combining both types of charts into simple bar charts with qualitative bars (steps), quantitative bar (bar) and performance line (threshold); all into one simple layout.
   Steps typically are broken into several values, which are defined with an array. The bar represent the actual value that a particular variable reached, and the threshold usually indicate a goal point relative to the value achieved by the bar. See [indicator page](indicator.md) for more detail.
 
@@ -52,7 +52,7 @@ fig.update_layout(height = 250)
 fig.show()
 ```
 
-#### Add Steps, and Threshold
+### Add Steps, and Threshold
 Below is the same example using "steps" attribute, which is shown as shading, and "threshold" to determine boundaries that visually alert you if the value cross a defined threshold.
 
 ```python
@@ -77,7 +77,7 @@ fig.update_layout(height = 250)
 fig.show()
 ```
 
-#### Custom Bullet
+### Custom Bullet
 The following example shows how to customize your charts. For more information about all possible options check our [reference page](reference/graph_objects/Indicator.md).
 
 ```python
@@ -103,7 +103,7 @@ fig.update_layout(height = 250)
 fig.show()
 ```
 
-#### Multi Bullet
+### Multi Bullet
 Bullet charts can be stacked for comparing several values at once as illustrated below:
 
 ```python
@@ -166,7 +166,7 @@ fig.update_layout(height = 400 , margin = {'t':0, 'b':0, 'l':0})
 fig.show()
 ```
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/indicator/](reference/graph_objects/Indicator.md) for more information and chart attribute options!
 
 ```python

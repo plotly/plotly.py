@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/3d-surface.jpg
 ---
 
-#### Topographical 3D Surface Plot
+### Topographical 3D Surface Plot
 
 ```python
 import plotly.graph_objects as go
@@ -53,7 +53,7 @@ fig.update_layout(title=dict(text='Mt Bruno Elevation'), autosize=False,
 fig.show()
 ```
 
-### Passing x and y data to 3D Surface Plot
+## Passing x and y data to 3D Surface Plot
 
 If you do not specify `x` and `y` coordinates, integer indices are used for the `x` and `y` axis. You can also pass `x` and `y` values to `go.Surface`.
 
@@ -74,7 +74,7 @@ fig.show()
 ```
 
 
-#### Surface Plot With Contours
+### Surface Plot With Contours
 
 
 Display and customize contour data for each axis using the `contours` attribute ([reference](reference/graph_objects/Surface.md#plotly.graph_objects.Surface.contours)).
@@ -98,7 +98,7 @@ fig.update_layout(title=dict(text='Mt Bruno Elevation'), autosize=False,
 
 fig.show()
 ```
-#### Configure Surface Contour Levels
+### Configure Surface Contour Levels
 This example shows how to slice the surface graph on the desired position for each of x, y and z axis. [contours.x.start](reference/graph_objects/surface-package/contours-package/X.md#plotly.graph_objects.surface.contours.X.start) sets the starting contour level value, `end` sets the end of it, and `size` sets the step between each contour level.
 
 ```python
@@ -127,7 +127,7 @@ fig.update_layout(
         })
 fig.show()
 ```
-#### Multiple 3D Surface Plots
+### Multiple 3D Surface Plots
 
 ```python
 import plotly.graph_objects as go
@@ -164,7 +164,7 @@ fig = go.Figure(data=[
 fig.show()
 ```
 
-### Setting the Surface Color
+## Setting the Surface Color
 
 You can use the `surfacecolor` attribute to define the color of the surface of your figure. In this example, the surface color represents the distance from the origin, rather than the default, which is the `z` value.
 
@@ -193,7 +193,7 @@ fig.update_layout(title_text="Ring cyclide")
 fig.show()
 ```
 
-#### Reference
+### Reference
 
 
 See [https://plotly.com/python/reference/surface/](reference/graph_objects/Surface.md) for more information!

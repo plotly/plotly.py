@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/parcats.jpg
 ---
 
-#### Parallel Categories Diagram
+### Parallel Categories Diagram
 
 The parallel categories diagram (also known as parallel sets or alluvial diagram) is a visualization of multi-dimensional categorical data sets. Each variable in the data set is represented by a column of rectangles, where each rectangle corresponds to a discrete value taken on by that variable. The relative heights of the rectangles reflect the relative frequency of occurrence of the corresponding value.
 
@@ -41,7 +41,7 @@ Combinations of category rectangles across dimensions are connected by ribbons, 
 
 For other representations of multivariate data, also see [parallel coordinates](parallel-coordinates-plot.md), [radar charts](radar-chart.md) and [scatterplot matrix (SPLOM)](splom.md). A visually-similar but more generic type of visualization is the [sankey diagrams](sankey-diagram.md).
 
-#### Basic Parallel Category Diagram with plotly.express
+### Basic Parallel Category Diagram with plotly.express
 
 This example visualizes the restaurant bills of a sample of 244 people. Hovering over a category rectangle (sex, smoker, etc) displays a tooltip with the number of people with that single trait. Hovering over a ribbon in the diagram displays a tooltip with the number of people with a particular combination of the five traits connected by the ribbon.
 
@@ -56,7 +56,7 @@ fig = px.parallel_categories(df)
 fig.show()
 ```
 
-#### Style Diagram
+### Style Diagram
 
 In this example `dimensions` represents a list of stings or the columns of data frame, and `labels` is a dictionary with string keys (column name) and string values ('desired label to be displayed'). See [Plotly express reference page](reference/plotly-express.md#plotly.express.parallel_categories) for more information.
 
@@ -70,7 +70,7 @@ fig = px.parallel_categories(df, dimensions=['sex', 'smoker', 'day'],
 fig.show()
 ```
 
-### Basic Parallel Categories Diagram with `graph_objects`
+## Basic Parallel Categories Diagram with `graph_objects`
 
 This example illustrates the hair color, eye color, and sex of a sample of 8 people. The dimension labels can be dragged horizontally to reorder the dimensions and the category rectangles can be dragged vertically to reorder the categories within a dimension.
 
@@ -90,7 +90,7 @@ fig = go.Figure(go.Parcats(
 fig.show()
 ```
 
-#### Basic Parallel Categories Diagram with Counts
+### Basic Parallel Categories Diagram with Counts
 
 If the frequency of occurrence for each combination of attributes is known in advance, this can be specified using the `counts` property
 
@@ -112,7 +112,7 @@ fig = go.Figure(go.Parcats(
 fig.show()
 ```
 
-#### Multi-Color Parallel Categories Diagram
+### Multi-Color Parallel Categories Diagram
 
 The color of the ribbons can be specified with the `line.color` property. Similar to other trace types, this property may be set to an array of numbers, which are then mapped to colors according to the the colorscale specified in the `line.colorscale` property.
 
@@ -155,7 +155,7 @@ fig = go.Figure(data = [go.Parcats(dimensions=[class_dim, gender_dim, survival_d
 fig.show()
 ```
 
-#### Parallel Categories Linked Brushing
+### Parallel Categories Linked Brushing
 
 This example demonstrates how the `on_selection` and `on_click` callbacks can be used to implement linked brushing between 3 categorical dimensions displayed with a `parcats` trace and 2 continuous dimensions displayed with a `scatter` trace.
 
@@ -215,7 +215,7 @@ fig
 
 ![Single-color brushing](https://user-images.githubusercontent.com/15064365/48087050-4a3eae80-e1cc-11e8-94c9-c0ffcedd3aa9.gif)
 
-#### Parallel Categories with Multi-Color Linked Brushing
+### Parallel Categories with Multi-Color Linked Brushing
 
 This example extends the previous example to support brushing with multiple colors. The toggle buttons above may be used to select the active color, and this color will be applied when points are selected in the `scatter` trace and when categories or ribbons are clicked in the `parcats` trace.
 
@@ -286,6 +286,6 @@ widgets.VBox([color_toggle, fig])
 
 ![Multi-color brushing](https://user-images.githubusercontent.com/15064365/48087055-4e6acc00-e1cc-11e8-8f0c-c8316eb4def2.gif)
 
-#### Reference
+### Reference
 
 See [function reference for `px.parallel_categories()`](reference/plotly-express.md#plotly.express.parallel_categories) or [reference page](reference/graph_objects/Parcats.md) for more information and chart attribute options!

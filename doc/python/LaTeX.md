@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/latex.jpg
 ---
 
-#### LaTeX Typesetting
+### LaTeX Typesetting
 
 Figure titles, axis labels and annotations all accept LaTeX directives for rendering mathematical formulas and notation, when the entire label is surrounded by dollar signs `$...$`. This rendering is handled by the [MathJax library](https://www.npmjs.com/package/mathjax?activeTab=versions), which must be loaded in the environment where figures are being rendered. MathJax is included by default in Jupyter-like environments. When embedding Plotly figures in other contexts it may be required to ensure that MathJax is separately loaded, for example via a `<script>` tag pointing to a content-delivery network (CDN). Versions 2 and 3 are supported.
 

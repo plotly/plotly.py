@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/streamline.jpg
 ---
 
-#### `plotly.figure_factory`
+### `plotly.figure_factory`
 
 The `plotly.figure_factory` module contains dedicated functions for creating very specific types of plots that were at the time of their creation difficult to create with [graph objects](graph-objects.md) and prior to the existence of [Plotly Express](plotly-express.md). As new functionality gets added to [Plotly.js](https://plotly.com/javascript/) and to Plotly Express, certain Figure Factories become unnecessary and are therefore deprecated as "legacy", but remain in the module for backwards-compatibility reasons.
 
@@ -54,7 +54,7 @@ Deprecated "legacy" Figure Factories include:
   * [Distplots](distplot.md), mostly deprecated by [`px.histogram`](histograms.md) except for KDE plots, which `px.histogram` doesn't support yet
   * [Gantt Charts](gantt.md), deprecated by [`px.timeline`](gantt.md)
 
-#### Reference
+### Reference
 
 For more information about the contents of `plotly.figure_factory`, including deprecated methods, please refer to our [API Reference documentation](reference/figure-factory.md).
 

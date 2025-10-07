@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/dropdown.jpg
 ---
 
-#### Methods
+### Methods
 The [updatemenu method](reference/graph_objects/layout-package/updatemenu-package/Button.md#plotly.graph_objects.layout.updatemenu.Button.method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
 
 - `"restyle"`: modify data or data attributes
@@ -342,7 +342,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Update Dropdown
+## Update Dropdown
 
 The `"update"` method should be used when modifying the data and layout sections of the graph.<br>
 This example demonstrates how to update which traces are displayed while simultaneously updating layout attributes such as the chart title and annotations.
@@ -445,13 +445,13 @@ fig.update_layout(title_text="Yahoo")
 fig.show()
 ```
 
-### Graph Selection Dropdowns in Jinja
+## Graph Selection Dropdowns in Jinja
 
 It is straight forward to create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a dropdown that chooses which div to display. This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration. It produces web pages that are larger than the webpages produced through the built in method which is a consideration for very large figures with hundreds or thousands of data points in traces that appear in multiple selections. This approach requires both a Python program and a Jinja template file.  The documentation on [using Jinja templates with Plotly](interactive-html-export.md#inserting-plotly-output-into-html-using-a-jinja2-template) is relevant background.  
 
 <!-- #region -->
 
-#### Python Code File
+### Python Code File
 
 ```python
 import plotly.express as px
@@ -505,7 +505,7 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
         output_file.write(j2_template.render(data_for_jinja))
 ```
 
-#### Jinja HTML Template
+### Jinja HTML Template
 
 
 ```
@@ -544,5 +544,5 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
 
 <!-- #endregion -->
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/layout/updatemenus/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information about `updatemenu` dropdowns.
