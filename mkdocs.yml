@@ -68,6 +68,7 @@ nav:
     - Static Image Export: static-image-export.md
     - Theming and templates: templates.md
     - Changes in Version 6: v6-changes.md
+    - Orca Management: orca-management.md
     - Configuration: configuration-options.md
     - Setting Graph Size: setting-graph-size.md
     - Formatting Ticks: tick-formatting.md
@@ -411,4 +412,3 @@ exclude_docs: |
   *~
   dash.md
   ml_apps.md
-  orca-management.md
