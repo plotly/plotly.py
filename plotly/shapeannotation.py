@@ -20,7 +20,7 @@ def _mean(x):
     return x[0]
 
 
-def _mean_datetime(x: list[datetime]) -> datetime:
+def _mean_datetime(x):
     """Return midpoint of a sequence of datetime objects (assumes homogenous)."""
 
     timestamps = [v.timestamp() for v in x]  # convert to POSIX timestamps
