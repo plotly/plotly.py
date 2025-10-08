@@ -90,7 +90,7 @@ IFrame(snippet_url + 'horizontal-vertical-shapes', width='100%', height=1200)
 
 #### Adding Text Annotations
 
-[Text annotations](../text-and-annotations) can optionally be added to an autoshape
+[Text annotations](text-and-annotations.md) can optionally be added to an autoshape
 using the `annotation_text` keyword argument, and positioned using the `annotation_position` argument:
 
 ```python

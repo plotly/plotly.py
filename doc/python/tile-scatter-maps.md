@@ -298,7 +298,7 @@ fig.show()
 
 The earlier examples using `px.scatter_map` and `go.Scattermap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to create scatter plots on tile-based maps. There are also traces that use [Mapbox](https://docs.mapbox.com): `px.scatter_mapbox` and `go.Scattermapbox`
 
-To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](mapbox-layers.md) documentation for more information.
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
 Here's the first example rewritten to use `px.scatter_mapbox`.
 

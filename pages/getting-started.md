@@ -45,7 +45,7 @@ Thanks to deep integration with our [Kaleido](https://github.com/plotly/Kaleido)
 
 This Getting Started guide explains how to install `plotly` and related optional pages. Once you've installed, you can use our documentation in three main ways:
 
-1. You jump right in to **examples** of how to make [basic charts](/python/basic-charts/), [statistical charts](/python/statistical-charts/), [scientific charts](/python/scientific-charts/), [financial charts](/python/financial-charts/), [maps](/python/maps/), and [3-dimensional charts](/python/3d-charts/).
+1. You jump right in to **examples** of how to make [basic charts](basic-charts.md), [statistical charts](/python/statistical-charts/), [scientific charts](/python/scientific-charts/), [financial charts](/python/financial-charts/), [maps](/python/maps/), and [3-dimensional charts](/python/3d-charts/).
 2. If you prefer to learn about the **fundamentals** of the library first, you can read about [the structure of figures](figure-structure.md), [how to create and update figures](creating-and-updating-figures.md), [how to display figures](renderers.md), [how to theme figures with templates](templates.md), [how to export figures to various formats](static-image-export.md) and about [Plotly Express, the high-level API](plotly-express.md) for doing all of the above.
 3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference/) or the [Figure Reference](/reference/).
 
