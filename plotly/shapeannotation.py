@@ -1,10 +1,32 @@
 # some functions defined here to avoid numpy import
 
+from datetime import datetime
+from numbers import Number
+
 
 def _mean(x):
     if len(x) == 0:
         raise ValueError("x must have positive length")
-    return float(sum(x)) / len(x)
+
+    # Numeric sequence: default behaviour
+    if all(isinstance(v, Number) for v in x):
+        return float(sum(x)) / len(x)
+
+    # Datetime sequence: delegate to _mean_datetime
+    if all(isinstance(v, datetime) for v in x):
+        return _mean_datetime(x)
+
+    # Fallback for non-numeric and non-datetime types: return first element
+    return x[0]
+
+
+def _mean_datetime(x: list[datetime]) -> datetime:
+    """Return midpoint of a sequence of datetime objects (assumes homogenous)."""
+
+    timestamps = [v.timestamp() for v in x]  # convert to POSIX timestamps
+    avg = sum(timestamps) / len(timestamps)
+    tzinfo = x[0].tzinfo  # extract timezone info from first element
+    return datetime.fromtimestamp(avg, tz=tzinfo)
 
 
 def _argmin(x):
@@ -212,6 +234,7 @@ def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
     annotation_position = None
     if "annotation_position" in kwargs.keys():
         annotation_position = kwargs["annotation_position"]
+    shape_dict = {}
     if shape_type.endswith("line"):
         shape_dict = annotation_params_for_line(
             shape_type, shape_args, annotation_position
@@ -220,6 +243,8 @@ def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
         shape_dict = annotation_params_for_rect(
             shape_type, shape_args, annotation_position
         )
+    else:  # pragma: no cover (defensive)
+        raise ValueError("Unsupported shape_type '%s'" % shape_type)
     for k in shape_dict.keys():
         # only set property derived from annotation_position if it hasn't already been set
         # see above: this would be better as a go.layout.Annotation then the key
