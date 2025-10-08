@@ -234,7 +234,6 @@ def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
     annotation_position = None
     if "annotation_position" in kwargs.keys():
         annotation_position = kwargs["annotation_position"]
-    shape_dict = {}
     if shape_type.endswith("line"):
         shape_dict = annotation_params_for_line(
             shape_type, shape_args, annotation_position
@@ -243,8 +242,6 @@ def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
         shape_dict = annotation_params_for_rect(
             shape_type, shape_args, annotation_position
         )
-    else:  # pragma: no cover (defensive)
-        raise ValueError("Unsupported shape_type '%s'" % shape_type)
     for k in shape_dict.keys():
         # only set property derived from annotation_position if it hasn't already been set
         # see above: this would be better as a go.layout.Annotation then the key
