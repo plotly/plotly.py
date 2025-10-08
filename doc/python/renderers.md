@@ -38,13 +38,14 @@ jupyter:
 
 Plotly's Python graphing library, `plotly.py`, gives you a wide range of options for how and where to display your figures.
 
-In general, there are five different approaches you can take in order to display `plotly` figures:
+In general, there are six different approaches you can take in order to display `plotly` figures:
 
  1. Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
  2. Using [Dash](https://dash.plot.ly) in a web app context
- 3. Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
- 4. By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
- 5. By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
+ 3. Using [Plotly Studio](https://plotly.com/studio) to generate charts using natural language
+ 4. Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
+ 5. By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
+ 6. By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
 
 Each of the first three approaches is discussed below.
 
