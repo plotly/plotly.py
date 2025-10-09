@@ -242,9 +242,9 @@ HTML('<div style="text-align: center;"><iframe src="https://www.youtube.com/embe
 
 ### Displaying figures in Dash
 
-[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+[Dash](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/?utm_medium=graphing_libraries&utm_content=python_renderers) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
