@@ -77,7 +77,7 @@ fig
 
 **In many contexts, an appropriate renderer will be chosen automatically and you will not need to perform any additional configuration.** These contexts include the classic [Jupyter Notebook](https://jupyter.org/), [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), [Visual Studio Code notebooks](https://code.visualstudio.com/docs/python/jupyter-support), [Google Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb), [Kaggle](https://www.kaggle.com/kernels) notebooks, [Azure](https://notebooks.azure.com/) notebooks, and the [Python interactive shell](https://www.python.org/shell/).
 
-Additional contexts are supported by choosing a compatible renderer including the [IPython console](https://docs.spyder-ide.org/ipythonconsole.html), [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and more.
+Additional contexts are supported by choosing a compatible renderer including [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and more.
 
 Next, we will show how to configure the default renderer.  After that, we will describe all of the built-in renderers and discuss why you might choose to use each one.
 
@@ -85,7 +85,7 @@ Next, we will show how to configure the default renderer.  After that, we will d
 
 
 #### Setting The Default Renderer
-The current and available renderers are configured using the `plotly.io.renderers` configuration object.  Display this object to see the current default renderer and the list of all available renderers.
+The current and available renderers are configured using the `plotly.io.renderers` configuration object. Display this object to see the current default renderer and the list of all available renderers.
 
 ```python
 import plotly.io as pio
@@ -94,12 +94,12 @@ pio.renderers
 
 The default renderer that you see when you display `pio.renderers` might be different than what is shown here.  This is because `plotly.py` attempts to autodetect an appropriate renderer at startup.  You can change the default renderer by assigning the name of an available renderer to the `pio.renderers.default` property.  For example, to switch to the `'browser'` renderer, which opens figures in a tab of the default web browser, you would run the following.
 
-> Note: Default renderers persist for the duration of a single session, but they do not persist across sessions. If you are working in an `IPython` kernel, this means that default renderers will persist for the life of the kernel, but they will not persist across kernel restarts.
-
 ```python
 import plotly.io as pio
 pio.renderers.default = "browser"
 ```
+
+> Note: Default renderers persist for the duration of a single session. For example, if you set a default renderer in an `IPython` kernel, that default won't persist across kernel restarts.
 
 It is also possible to set the default renderer using a system environment variable.  At startup, `plotly.py` checks for the existence of an environment variable named `PLOTLY_RENDERER`.  If this environment variable is set to the name of an available renderer, this renderer is set as the default.
 
