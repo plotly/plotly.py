@@ -237,7 +237,7 @@ Use [Plotly Studio](https://plotly.com/studio) to build data apps with Plotly fi
 
 ```python hide_code=true
 from IPython.display import HTML
-HTML('<div style="text-align: center;"><iframe src="https://www.youtube.com/embed/ZGWMv7PQn-U?si=sRuSNPZWD1AzZsCf&mute=1&rel=0" width="80%" height="600" frameborder="0" allowfullscreen></iframe></div>')
+HTML('<div style="text-align: center;"><iframe src="https://www.youtube.com/embed/ZGWMv7PQn-U?si=sRuSNPZWD1AzZsCf&mute=1&rel=0" width="90%" height="600" frameborder="0" allowfullscreen></iframe></div>')
 ```
 
 ### Displaying figures in Dash
