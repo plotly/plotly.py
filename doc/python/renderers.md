@@ -75,7 +75,7 @@ fig
 
 > To be precise, figures will display themselves using the current default renderer when the two following conditions are true. First, the last expression in a cell must evaluate to a figure. Second, `plotly.py` must be running from within an `IPython` kernel.
 
-**In many contexts, an appropriate renderer will be chosen automatically and you will not need to perform any additional configuration.** These contexts include the classic [Jupyter Notebook](https://jupyter.org/), [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), [Visual Studio Code notebooks](https://code.visualstudio.com/docs/python/jupyter-support), [Google Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb), [Kaggle](https://www.kaggle.com/kernels) notebooks, [Azure](https://notebooks.azure.com/) notebooks, and the [Python interactive shell](https://www.python.org/shell/).
+**In many contexts, an appropriate renderer will be chosen automatically and you will not need to perform any additional configuration.** These contexts include the classic [Jupyter Notebook](https://jupyter.org/), [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), [Visual Studio Code notebooks](https://code.visualstudio.com/docs/python/jupyter-support), [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb), [Kaggle](https://www.kaggle.com/kernels) notebooks, [Azure](https://notebooks.azure.com/) notebooks, and the [Python interactive shell](https://www.python.org/shell/).
 
 Additional contexts are supported by choosing a compatible renderer including [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and more.
 
@@ -104,7 +104,7 @@ pio.renderers.default = "browser"
 It is also possible to set the default renderer using a system environment variable.  At startup, `plotly.py` checks for the existence of an environment variable named `PLOTLY_RENDERER`.  If this environment variable is set to the name of an available renderer, this renderer is set as the default.
 
 #### Overriding The Default Renderer
-It is also possible to override the default renderer temporarily by passing the name of an available renderer as the `renderer` keyword argument to the `show()` method.  Here is an example of displaying a figure using the `svg` renderer (described below) without changing the default renderer.
+You can override the default renderer temporarily by passing the name of an available renderer as the `renderer` keyword argument to a figure's `show()` method. For example, to use the `svg` renderer (described later) without changing the default renderer, set `renderer="svg"`:
 
 ```python
 import plotly.graph_objects as go
@@ -134,7 +134,7 @@ This renderer is the same as `notebook` renderer, except the plotly.js JavaScrip
 This renderer is a good choice for notebooks that will be shared with [nbviewer](https://nbviewer.jupyter.org/) since users must have an active internet connection to access nbviewer in the first place.
 
 ###### `kaggle` and `azure`
-These are aliases for `notebook_connected` because this renderer is a good choice for use with [Kaggle kernels](https://www.kaggle.com/docs/notebooks) and [Azure Notebooks](https://notebooks.azure.com/).
+These are aliases for `notebook_connected` because this renderer is a good choice for use with [Kaggle Notebooks](https://www.kaggle.com/docs/notebooks) and [Azure Notebooks](https://notebooks.azure.com/).
 
 ###### `colab`
 This is a custom renderer for use with [Google Colab](https://colab.research.google.com).
@@ -152,7 +152,7 @@ These renderers are the same as the `browser` renderer, but they force the use o
 ###### `iframe` and `iframe_connected`
 These renderers write figures out as standalone HTML files and then display [`iframe`](https://www.w3schools.com/html/html_iframe.asp) elements that reference these HTML files. The `iframe` renderer will include the plotly.js JavaScript bundle in each HTML file that is written, while the `iframe_connected` renderer includes only a reference to an online CDN location from which to load plotly.js.  Consequently, the `iframe_connected` renderer outputs files that are smaller than the `iframe` renderer, but it requires an internet connection while the `iframe` renderer can operate offline.
 
-This renderer may be useful when working with notebooks than contain lots of large figures.  When using the `notebook` or `notebook_connected` renderer, all of the data for all of the figures in a notebook are stored inline in the notebook itself. If this would result in a prohibitively large notebook size, an `iframe` or `iframe_connected` renderer could be used instead. With the `iframe` renderers, the figure data are stored in the individual HTML files rather than in the notebook itself, resulting in a smaller notebook size.
+This renderer may be useful when working with notebooks that contain lots of large figures.  When using the `notebook` or `notebook_connected` renderer, all of the data for all of the figures in a notebook are stored inline in the notebook itself. If this would result in a prohibitively large notebook size, an `iframe` or `iframe_connected` renderer could be used instead. With the `iframe` renderers, the figure data are stored in the individual HTML files rather than in the notebook itself, resulting in a smaller notebook size.
 
 > Implementation Note: The HTML files written by the `iframe` renderers are stored in a subdirectory named `iframe_figures`.  The HTML files are given names based on the execution number of the notebook cell that produced the figure. This means that each time a notebook kernel is restarted, any prior HTML files will be overwritten.  This also means that you should not store multiple notebooks using an `iframe` renderer in the same directory, because this could result in figures from one notebook overwriting figures from another notebook.
 
@@ -230,6 +230,10 @@ fig = go.Figure(
 )
 fig.show(renderer="png", width=800, height=300)
 ```
+
+### Displaying figures in Plotly Studio
+
+Use [Plotly Studio](https://plotly.com/studio) to build data apps with Plotly figures using natural language and AI. Describe the charts you want to Plotly Studio, which generates them within a [Dash](https://plotly.com/dash/) app that you can publish to [Plotly Cloud](https://plotly.com/cloud/) or [Dash Enterprise](https://plotly.com/dash/).
 
 ### Displaying figures in Dash
 
