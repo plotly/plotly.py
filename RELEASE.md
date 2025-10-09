@@ -3,7 +3,7 @@
 
 ## Release process - full release of `plotly` package
 
-This is the release process for releasing Plotly.py version `X.Y.Z`, including changelogs, GitHub release and forum announcement.
+This is the release process for releasing plotly.py version `X.Y.Z`, including changelogs, GitHub release and forum announcement.
 
 ### Finalize changelog
 
@@ -13,10 +13,10 @@ Make sure the changelog includes the version being published at the top, along
 with the expected publication date.
 
 Use the `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security`
-labels for all changes to Plotly.py.  If the version of Plotly.js has
+labels for all changes to plotly.py.  If the version of plotly.js has
 been updated, include this as the first `Updated` entry. Call out any
 notable changes as sub-bullets (new trace types in particular), and provide
-a link to the Plotly.js CHANGELOG.
+a link to the plotly.js CHANGELOG.
 
 ### Update version numbers
 
@@ -64,7 +64,7 @@ that `go.Figure()` and `go.FigureWidget()` work as expected.
 Notes:
 - **Start by creating a brand new notebook each time** so that there is no caching of previous results
 - **Do not run the Jupyter commands from the root `plotly.py/` directory on your machine** because Jupyter may be confused 
-by metadata from previous Plotly.py builds 
+by metadata from previous plotly.py builds
 
 Code for testing `go.Figure()`:
 ```python
@@ -110,7 +110,7 @@ Publishing to PyPI:
 ```
 
 You will be prompted to enter an API token; this can be generated in your PyPI account settings. 
-Your account must have permissions to publish to the Plotly project on PyPI.
+Your account must have permissions to publish to the `plotly` project on PyPI.
 
 ### Update documentation site
 
@@ -121,9 +121,9 @@ Your account must have permissions to publish to the Plotly project on PyPI.
 start by doing it first if not. Then merge `main` into `doc-prod` to deploy the doc related
 to features in the release.
 3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
-    1. bump the version of Plotly.py in  `_data/pyversion.json`
-    2. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up.
-      - If Plotly.js contains any new traces or trace or layout attributes, you'll get a warning `“missing key in attributes: <attribute-name>`. To resolve, add the attribute to the relevant section in `/_data/orderings.json` in the position you want it to appear in the reference docs.
+    1. bump the version of plotly.py in  `_data/pyversion.json`
+    2. bump the version of plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up.
+      - If plotly.js contains any new traces or trace or layout attributes, you'll get a warning `“missing key in attributes: <attribute-name>`. To resolve, add the attribute to the relevant section in `/_data/orderings.json` in the position you want it to appear in the reference docs.
     3. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
     4. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
     5. Commit and push the changes to `master` in that repo
