@@ -6,9 +6,9 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.17.2
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.8.8
+    version: 3.12.0
   plotly:
     description: Displaying Figures using Plotly's Python graphing library
     display_as: file_settings
@@ -234,6 +234,11 @@ fig.show(renderer="png", width=800, height=300)
 ### Displaying figures in Plotly Studio
 
 Use [Plotly Studio](https://plotly.com/studio) to build data apps with Plotly figures using natural language and AI. Describe the charts you want to Plotly Studio, which generates them within a [Dash](https://plotly.com/dash/) app that you can publish to [Plotly Cloud](https://plotly.com/cloud/) or [Dash Enterprise](https://plotly.com/dash/).
+
+```python hide_code=true
+from IPython.display import IFrame
+IFrame('https://www.youtube.com/embed/ZGWMv7PQn-U?si=sRuSNPZWD1AzZsCf', width='100%', height=600)
+```
 
 ### Displaying figures in Dash
 
