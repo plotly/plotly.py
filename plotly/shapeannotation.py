@@ -1,10 +1,32 @@
 # some functions defined here to avoid numpy import
 
+from datetime import datetime
+from numbers import Number
+
 
 def _mean(x):
     if len(x) == 0:
         raise ValueError("x must have positive length")
-    return float(sum(x)) / len(x)
+
+    # Numeric sequence: default behaviour
+    if all(isinstance(v, Number) for v in x):
+        return float(sum(x)) / len(x)
+
+    # Datetime sequence: delegate to _mean_datetime
+    if all(isinstance(v, datetime) for v in x):
+        return _mean_datetime(x)
+
+    # Fallback for non-numeric and non-datetime types: return first element
+    return x[0]
+
+
+def _mean_datetime(x):
+    """Return midpoint of a sequence of datetime objects (assumes homogenous)."""
+
+    timestamps = [v.timestamp() for v in x]  # convert to POSIX timestamps
+    avg = sum(timestamps) / len(timestamps)
+    tzinfo = x[0].tzinfo  # extract timezone info from first element
+    return datetime.fromtimestamp(avg, tz=tzinfo)
 
 
 def _argmin(x):
