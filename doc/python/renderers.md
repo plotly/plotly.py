@@ -236,8 +236,8 @@ fig.show(renderer="png", width=800, height=300)
 Use [Plotly Studio](https://plotly.com/studio) to build data apps with Plotly figures using natural language and AI. Describe the charts you want to Plotly Studio, which generates them within a [Dash](https://plotly.com/dash/) app that you can publish to [Plotly Cloud](https://plotly.com/cloud/) or [Dash Enterprise](https://plotly.com/dash/).
 
 ```python hide_code=true
-from IPython.display import IFrame
-IFrame('https://www.youtube.com/embed/ZGWMv7PQn-U?si=sRuSNPZWD1AzZsCf&mute=1', width='100%', height=600)
+from IPython.display import HTML
+HTML('<div style="text-align: center;"><iframe src="https://www.youtube.com/embed/ZGWMv7PQn-U?si=sRuSNPZWD1AzZsCf&mute=1&rel=0" width="80%" height="600" frameborder="0" allowfullscreen></iframe></div>')
 ```
 
 ### Displaying figures in Dash
