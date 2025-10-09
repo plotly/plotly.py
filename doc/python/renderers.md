@@ -40,14 +40,14 @@ Plotly's Python graphing library, `plotly.py`, gives you a wide range of options
 
 In general, there are six different approaches you can take in order to display `plotly` figures:
 
- 1. Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
- 2. Using [Dash](https://dash.plot.ly) in a web app context
- 3. Using [Plotly Studio](https://plotly.com/studio) to generate charts using natural language
- 4. Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
- 5. By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
- 6. By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
+ - Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
+ - Using [Plotly Studio](https://plotly.com/studio) to generate charts using natural language
+ - Using [Dash](https://dash.plot.ly) in a web app context
+ - Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
+ - By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
+ - By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
 
-Each of the first three approaches is discussed below.
+Each of the first four approaches is discussed below.
 
 ### Displaying Figures Using The `renderers` Framework
 
@@ -122,16 +122,16 @@ In this section, we will describe the built-in renderers so that you can choose 
 Interactive renderers display figures using the plotly.js JavaScript library and are fully interactive, supporting pan, zoom, hover tooltips, etc.
 
 ###### `notebook`
-This renderer is intended for use in the classic [Jupyter Notebook](https://jupyter.org/install.html) (not JupyterLab).  The full plotly.js JavaScript library bundle is added to the notebook the first time a figure is rendered, so this renderer will work without an Internet connection.
+This renderer is intended for use in the classic [Jupyter Notebook](https://jupyter.org/install.html) (not JupyterLab).  The full plotly.js JavaScript library bundle is added to the notebook the first time a figure is rendered, so this renderer will work without an internet connection.
 
-This renderer is a good choice for notebooks that will be exported to HTML files (Either using [nbconvert](https://nbconvert.readthedocs.io/en/latest/) or the "Download as HTML" menu action) because the exported HTML files will work without an Internet connection.
+This renderer is a good choice for notebooks that will be exported to HTML files (Either using [nbconvert](https://nbconvert.readthedocs.io/en/latest/) or the "Download as HTML" menu action) because the exported HTML files will work without an internet connection.
 
-> Note: Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an Internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
+> Note: Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
 
 ###### `notebook_connected`
-This renderer is the same as `notebook` renderer, except the plotly.js JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an Internet connection is required in order to display figures that are rendered this way.
+This renderer is the same as `notebook` renderer, except the plotly.js JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an internet connection is required in order to display figures that are rendered this way.
 
-This renderer is a good choice for notebooks that will be shared with [nbviewer](https://nbviewer.jupyter.org/) since users must have an active Internet connection to access nbviewer in the first place.
+This renderer is a good choice for notebooks that will be shared with [nbviewer](https://nbviewer.jupyter.org/) since users must have an active internet connection to access nbviewer in the first place.
 
 ###### `kaggle` and `azure`
 These are aliases for `notebook_connected` because this renderer is a good choice for use with [Kaggle kernels](https://www.kaggle.com/docs/notebooks) and [Azure Notebooks](https://notebooks.azure.com/).
@@ -150,7 +150,7 @@ This renderer will open a figure in a browser tab using the default web browser.
 These renderers are the same as the `browser` renderer, but they force the use of a particular browser.
 
 ###### `iframe` and `iframe_connected`
-These renderers write figures out as standalone HTML files and then display [`iframe`](https://www.w3schools.com/html/html_iframe.asp) elements that reference these HTML files. The `iframe` renderer will include the plotly.js JavaScript bundle in each HTML file that is written, while the `iframe_connected` renderer includes only a reference to an online CDN location from which to load plotly.js.  Consequently, the `iframe_connected` renderer outputs files that are smaller than the `iframe` renderer, but it requires an Internet connection while the `iframe` renderer can operate offline.
+These renderers write figures out as standalone HTML files and then display [`iframe`](https://www.w3schools.com/html/html_iframe.asp) elements that reference these HTML files. The `iframe` renderer will include the plotly.js JavaScript bundle in each HTML file that is written, while the `iframe_connected` renderer includes only a reference to an online CDN location from which to load plotly.js.  Consequently, the `iframe_connected` renderer outputs files that are smaller than the `iframe` renderer, but it requires an internet connection while the `iframe` renderer can operate offline.
 
 This renderer may be useful when working with notebooks than contain lots of large figures.  When using the `notebook` or `notebook_connected` renderer, all of the data for all of the figures in a notebook are stored inline in the notebook itself. If this would result in a prohibitively large notebook size, an `iframe` or `iframe_connected` renderer could be used instead. With the `iframe` renderers, the figure data are stored in the individual HTML files rather than in the notebook itself, resulting in a smaller notebook size.
 
@@ -165,7 +165,7 @@ The `plotly_mimetype` renderer creates a specification of the figure (called a M
 These are aliases for `plotly_mimetype` since this renderer is a good choice when working in JupyterLab, nteract, and the Visual Studio Code notebook interface. Note that in VSCode Notebooks, the version of Plotly.js that is used to render is provided by the [vscode-python extension](https://code.visualstudio.com/docs/languages/python) and often trails the latest version by several weeks, so the latest features of `plotly` may not be available in VSCode right away. The situation is similar for Nteract.
 
 ##### Static Image Renderers
-A set of renderers is provided for displaying figures as static images. See the [Static Image Export](https://plot.ly/python/static-image-export/) page for more information on getting set up.
+A set of renderers is provided for displaying figures as static images. See the [Static Image Export](https://plotly.com/python/static-image-export/) page for more information on getting set up.
 
 ###### `png`, `jpeg`, and `svg`
 These renderers display figures as static `.png`, `.jpeg`, and `.svg` files, respectively.  These renderers are useful for user interfaces that do not support inline HTML output, but do support inline static images.  Examples include the [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and the PyCharm [notebook interface](https://www.jetbrains.com/help/pycharm/jupyter-notebook-support.html).
@@ -188,7 +188,7 @@ This renderer displays figures as static PDF files. This is especially useful fo
 In editors that support it (JupyterLab, nteract, and the Visual Studio Code notebook interface), this renderer displays the JSON representation of a figure in a collapsible interactive tree structure.  This can be very useful for examining the structure of complex figures.
 
 ##### Multiple Renderers
-You can specify that multiple renderers should be used by joining their names on `"+"` characters.  This is useful when writing code that needs to support multiple contexts.  For example, if a notebook specifies a default renderer string of  `"notebook+plotly_mimetype+pdf"`then this notebook would be able to run in the classic Jupyter Notebook, in JupyterLab, and it would support being exported to PDF using `nbconvert`.
+You can specify that multiple renderers should be used by joining their names on `"+"` characters.  This is useful when writing code that needs to support multiple contexts.  For example, if a notebook specifies a default renderer string of  `"notebook+plotly_mimetype+pdf"` then this notebook would be able to run in the classic Jupyter Notebook, in JupyterLab, and it would support being exported to PDF using `nbconvert`.
 
 #### Customizing Built-In Renderers
 Most built-in renderers have configuration options to customize their behavior.  To view a description of a renderer, including its configuration options, access the renderer object using dictionary-style key lookup on the `plotly.io.renderers` configuration object and then display it.  Here is an example of accessing and displaying the `png` renderer.
