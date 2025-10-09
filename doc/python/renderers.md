@@ -41,7 +41,7 @@ Plotly's Python graphing library, `plotly.py`, gives you a wide range of options
 In general, there are six different approaches you can take in order to display `plotly` figures:
 
  - Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
- - Using [Plotly Studio](https://plotly.com/studio) to generate charts using natural language
+ - Using [Plotly Studio](https://plotly.com/studio?utm_medium=graphing_libraries&utm_content=python_renderers) to generate charts using natural language
  - Using [Dash](https://dash.plot.ly) in a web app context
  - Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
  - By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
@@ -233,7 +233,7 @@ fig.show(renderer="png", width=800, height=300)
 
 ### Displaying figures in Plotly Studio
 
-Use [Plotly Studio](https://plotly.com/studio) to build data apps with Plotly figures using natural language and AI. Describe the charts you want to Plotly Studio, which generates them within a [Dash](https://plotly.com/dash/) app that you can publish to [Plotly Cloud](https://plotly.com/cloud/) or [Dash Enterprise](https://plotly.com/dash/).
+Use [Plotly Studio](https://plotly.com/studio?utm_medium=graphing_libraries&utm_content=python_renderers) to build data apps with Plotly figures using natural language and AI. Describe the charts you want to Plotly Studio, which generates them within a [Dash](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers) app that you can publish to [Plotly Cloud](https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers) or [Dash Enterprise](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers).
 
 ```python hide_code=true
 from IPython.display import HTML
