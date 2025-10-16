@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: Visualize regression in scikit-learn with Plotly.
-    display_as: ai_ml
-    language: python
-    layout: base
-    name: ML Regression
-    order: 1
-    page_type: u-guide
-    permalink: python/ml-regression/
-    thumbnail: thumbnail/ml-regression.png
+description: Visualize regression in scikit-learn with Plotly.
 ---
-
 <!-- #region -->
 This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like [Linear Regression](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html), and progressively move towards models like [Decision Tree][tree] and [Polynomial Features][poly]. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, [surface plots](3d-surface-plots.md) for 3D data, and enhanced prediction error analysis with [Plotly Express](plotly-express.md).
 

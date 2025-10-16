@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: The structure of a figure - data, traces and layout explained.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: The Figure Data Structure
-    order: 1
-    page_type: u-guide
-    permalink: python/figure-structure/
-    thumbnail: thumbnail/violin.jpg
+description: The structure of a figure - data, traces and layout explained.
 ---
-
 ### Overview
 
 The `plotly` Python package exists to [create, manipulate](creating-and-updating-figures.md) and [render](renderers.md) graphical figures (i.e. charts, plots, maps and diagrams) represented by data structures also referred to as figures. The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.

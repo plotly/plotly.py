@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.12.4
-  plotly:
-    description: How to set the configuration options of figures using the Plotly
-      Python graphing library.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Configuration
-    order: 10
-    page_type: u-guide
-    permalink: python/configuration-options/
-    thumbnail: thumbnail/modebar-icons.png
+description: How to set the configuration options of figures using the Plotly Python
+  graphing library.
 ---
-
 ## Configuration Options
 
 The `.show()` method that you use to display your figures also accepts a `config` parameter.

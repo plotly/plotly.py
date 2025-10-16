@@ -1,36 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to make interactive tree-plot in Python with Plotly. An examples
-      of a tree-plot in Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Tree-plots
-    order: 9
-    permalink: python/tree-plots/
-    thumbnail: thumbnail/treeplot.jpg
+description: How to make interactive tree-plot in Python with Plotly. An examples
+  of a tree-plot in Plotly.
 ---
 
 ### Set Up Tree with [igraph](http://igraph.org/python/)

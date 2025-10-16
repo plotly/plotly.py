@@ -1,36 +1,5 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to add LaTeX to python graphs.
-    display_as: advanced_opt
-    language: python
-    layout: base
-    name: LaTeX
-    order: 5
-    page_type: example_index
-    permalink: python/LaTeX/
-    thumbnail: thumbnail/latex.jpg
+description: How to add LaTeX to python graphs.
 ---
 
 ### LaTeX Typesetting

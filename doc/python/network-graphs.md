@@ -1,42 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make Network Graphs in Python with Plotly. One examples of
-      a network graph with NetworkX
-    display_as: scientific
-    language: python
-    layout: base
-    name: Network Graphs
-    order: 12
-    page_type: u-guide
-    permalink: python/network-graphs/
-    redirect_from:
-    - ipython-notebooks/networks/
-    - ipython-notebooks/network-graphs/
-    thumbnail: thumbnail/net.jpg
+description: How to make Network Graphs in Python with Plotly. One examples of a network
+  graph with NetworkX
+redirect_from:
+- ipython-notebooks/networks/
+- ipython-notebooks/network-graphs/
 ---
-
 In this example we show how to visualize a network graph created using `networkx`.
 
 Install the Python library `networkx` with `pip install networkx`.

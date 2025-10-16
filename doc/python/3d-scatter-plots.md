@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make 3D scatter plots in Python with Plotly.
-    display_as: 3d_charts
-    language: python
-    layout: base
-    name: 3D Scatter Plots
-    order: 2
-    page_type: example_index
-    permalink: python/3d-scatter-plots/
-    thumbnail: thumbnail/3d-scatter.jpg
+description: How to make 3D scatter plots in Python with Plotly.
 ---
-
 ## 3D scatter plot with Plotly Express
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).

@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.4
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.11
-  plotly:
-    description: How to make Annotated Heatmaps in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Annotated Heatmaps
-    order: 7
-    page_type: u-guide
-    permalink: python/annotated-heatmap/
-    redirect_from: python/annotated_heatmap/
-    thumbnail: thumbnail/ann_heat.jpg
+description: How to make Annotated Heatmaps in Python with Plotly.
+redirect_from: python/annotated_heatmap/
 ---
-
 ### Annotated Heatmaps with Plotly Express
 
 *New in v5.5*

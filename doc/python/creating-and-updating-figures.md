@@ -1,42 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: Creating and Updating Figures with Plotly's Python graphing library
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Creating and Updating Figures
-    order: 2
-    page_type: example_index
-    permalink: python/creating-and-updating-figures/
-    redirect_from:
-    - python/user-guide/
-    - python/user-g/
-    thumbnail: thumbnail/creating-and-updating-figures.png
-    v4upgrade: true
+description: Creating and Updating Figures with Plotly's Python graphing library
+redirect_from:
+- python/user-guide/
+- python/user-g/
 ---
-
 The `plotly` Python package exists to create, manipulate and [render](renderers.md) graphical figures (i.e. charts, plots, maps and diagrams) represented by [data structures also referred to as figures](figure-structure.md). The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
 
 > Note: the recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](plotly-express.md), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the structure of the data structure that these objects represent for users who wish to understand more about how to customize them, or assemble them from other `plotly.graph_objects` components.

@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: Migration guide for upgrading from version 3 to version 4
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Version 4 Migration Guide
-    order: 39
-    page_type: example_index
-    permalink: python/v4-migration/
-    thumbnail: thumbnail/v4-migration.png
+description: Migration guide for upgrading from version 3 to version 4
 ---
-
 ### Upgrading to Version 4
 
 Upgrading to version 4 of `plotly` is a matter of following the instructions in the [Getting Started](getting-started.md) guide and reinstalling the packages, subject to the notices below.

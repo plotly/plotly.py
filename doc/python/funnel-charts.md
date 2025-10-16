@@ -1,29 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: plotly
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  plotly:
-    description: How to make funnel-chart plots in Python with Plotly.
-    display_as: financial
-    language: python
-    layout: base
-    name: Funnel Chart
-    order: 4
-    page_type: example_index
-    permalink: python/funnel-charts/
-    redirect_from: python/funnel-chart/
-    thumbnail: thumbnail/funnel.jpg
+description: How to make funnel-chart plots in Python with Plotly.
+redirect_from: python/funnel-chart/
 ---
-
 ### Introduction
 
 Funnel charts are often used to represent data in different stages of a business process. It’s an important mechanism in Business Intelligence to identify potential problem areas of a process. For example, it’s used to observe the revenue or loss in a sales process for each stage, and displays values that are decreasing progressively. Each stage is illustrated as a percentage of the total of all values.

@@ -1,38 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to configure and style the legend in Plotly with Python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Legends
-    order: 15
-    permalink: python/legend/
-    redirect_from: python/horizontal-legend/
-    thumbnail: thumbnail/legends.gif
+description: How to configure and style the legend in Plotly with Python.
+redirect_from: python/horizontal-legend/
 ---
-
 ### Trace Types, Legends and Color Bars
 
 [Traces](figure-structure.md) of most types and shapes can be optionally associated with a single legend item in the [legend](legend.md). Whether or not a given trace or shape appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items and shapes also support the `legendgroup` attribute, and all traces and shapes with the same legend group are treated the same way during click/double-click interactions.

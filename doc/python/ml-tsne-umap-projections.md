@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: Visualize scikit-learn's t-SNE and UMAP in Python with Plotly.
-    display_as: ai_ml
-    language: python
-    layout: base
-    name: t-SNE and UMAP projections
-    order: 6
-    page_type: u-guide
-    permalink: python/t-sne-and-umap-projections/
-    thumbnail: thumbnail/tsne-umap-projections.png
+description: Visualize scikit-learn's t-SNE and UMAP in Python with Plotly.
 ---
-
 This page presents various ways to visualize two popular dimensionality reduction techniques, namely the [t-distributed stochastic neighbor embedding](https://lvdmaaten.github.io/tsne/) (t-SNE) and [Uniform Manifold Approximation and Projection](https://umap-learn.readthedocs.io/en/latest/index.html) (UMAP). They are needed whenever you want to visualize data with more than two or three features (i.e. dimensions).
 
 We first show how to visualize data with more than three features using the [scatter plot matrix](https://medium.com/plotly/what-is-a-splom-chart-make-scatterplot-matrices-in-python-8dc4998921c3), then we apply dimensionality reduction techniques to get 2D/3D representation of our data, and visualize the results with [scatter plots](line-and-scatter.md) and [3D scatter plots](3d-scatter-plots.md).

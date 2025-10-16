@@ -1,41 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: A reference for the built-in named continuous (sequential, diverging
-      and cyclical) color scales in Plotly.
-    display_as: file_settings
-    has_thumbnail: true
-    ipynb: ~notebook_demo/187
-    language: python
-    layout: base
-    name: Built-in Continuous Color Scales
-    order: 28
-    permalink: python/builtin-colorscales/
-    thumbnail: thumbnail/heatmap_colorscale.jpg
-    v4upgrade: true
+description: A reference for the built-in named continuous (sequential, diverging
+  and cyclical) color scales in Plotly.
 ---
-
 ### Using Built-In Continuous Color Scales
 
 Many Plotly Express functions accept a `color_continuous_scale` argument and many trace

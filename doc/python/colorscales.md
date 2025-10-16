@@ -1,42 +1,8 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.8
-  plotly:
-    description: How to set, create and control continuous color scales and color
-      bars in scatter, bar, map and heatmap figures.
-    display_as: file_settings
-    has_thumbnail: true
-    ipynb: ~notebook_demo/187
-    language: python
-    layout: base
-    name: Continuous Color Scales and Color Bars
-    order: 21
-    permalink: python/colorscales/
-    redirect_from: python/logarithmic-color-scale/
-    thumbnail: thumbnail/heatmap_colorscale.jpg
-    v4upgrade: true
+description: How to set, create and control continuous color scales and color bars
+  in scatter, bar, map and heatmap figures.
+redirect_from: python/logarithmic-color-scale/
 ---
-
 ### Continuous vs Discrete Color
 
 In the same way as the X or Y position of a mark in cartesian coordinates can be used to represent continuous values (i.e. amounts or moments in time) or categories (i.e. labels), color can be used to represent continuous or categorical data. This page is about using color to represent **continuous** data, but Plotly can also [represent categorical values with color](discrete-color.md).

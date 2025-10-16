@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make a density heatmap in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Density Heatmap
-    order: 6
-    page_type: u-guide
-    permalink: python/density-heatmaps/
-    redirect_from: python/mapbox-density-heatmaps/
-    thumbnail: thumbnail/mapbox-density.png
+description: How to make a density heatmap in Python with Plotly.
+redirect_from: python/mapbox-density-heatmaps/
 ---
-
 ### Density map with `plotly.express`
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).

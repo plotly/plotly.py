@@ -1,39 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: Learn how to use Python to make a Random Walk
-    display_as: advanced_opt
-    has_thumbnail: false
-    language: python
-    layout: base
-    name: Random Walk
-    order: 2
-    page_type: example_index
-    permalink: python/random-walk/
-    thumbnail: /images/static-image
+description: Learn how to use Python to make a Random Walk
 ---
-
 A [random walk](https://en.wikipedia.org/wiki/Random_walk) can be thought of as a random process in which a token or a marker is randomly moved around some space, that is, a space with a metric used to compute distance. It is more commonly conceptualized in one dimension ($\mathbb{Z}$), two dimensions ($\mathbb{Z}^2$) or three dimensions ($\mathbb{Z}^3$) in Cartesian space, where $\mathbb{Z}$ represents the set of integers. In the visualizations below, we will be using [scatter plots](line-and-scatter.md) as well as a colorscale to denote the time sequence of the walk.
 
 #### Random Walk in 1D

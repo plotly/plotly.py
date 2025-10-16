@@ -1,38 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.12.4
-  plotly:
-    description: How to make Log plots in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Log Plots
-    order: 5
-    permalink: python/log-plot/
-    redirect_from: python/log-plots/
-    thumbnail: thumbnail/log.jpg
+description: How to make Log plots in Python with Plotly.
+redirect_from: python/log-plots/
 ---
-
 This page shows examples of how to configure [2-dimensional Cartesian axes](figure-structure.md#2d-cartesian-trace-types-and-subplots) to follow a logarithmic rather than linear progression. [Configuring gridlines, ticks, tick labels and axis titles](axes.md) on logarithmic axes is done the same was as with [linear axes](axes.md).
 
 ### Logarithmic Axes with Plotly Express

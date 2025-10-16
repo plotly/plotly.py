@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.2
-  plotly:
-    description: Now you can implement range sliders and selectors in your Plotly
-      graphs purely with python!
-    display_as: controls
-    language: python
-    layout: base
-    name: Range Slider and Selector
-    order: 3
-    page_type: example_index
-    permalink: python/range-slider/
-    thumbnail: thumbnail/sliders.jpg
+description: Now you can implement range sliders and selectors in your Plotly graphs
+  purely with python!
 ---
 
 ### Basic Range Slider and Range Selectors

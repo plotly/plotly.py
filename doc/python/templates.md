@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: Theming and templates with plotly with Python
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Theming and templates
-    order: 7
-    page_type: u-guide
-    permalink: python/templates/
-    thumbnail: thumbnail/theming-and-templates.png
+description: Theming and templates with plotly with Python
 ---
-
 ### Theming and templates
 
 The Plotly Python library comes pre-loaded with several themes that you can get started using right away, and it also provides support for creating and registering your own themes.

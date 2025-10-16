@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.12.4
-  plotly:
-    description: How to use hover text and formatting in Python with Plotly.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Hover Text and Formatting
-    order: 23
-    permalink: python/hover-text-and-formatting/
-    thumbnail: thumbnail/hover-text.png
+description: How to use hover text and formatting in Python with Plotly.
 ---
-
 ### Hover Labels
 
 One of the most deceptively-powerful features of interactive visualization using Plotly is the ability for the user to reveal more information about a data point by moving their mouse cursor over the point and having a hover label appear.

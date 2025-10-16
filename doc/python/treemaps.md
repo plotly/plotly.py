@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make Treemap Charts with Plotly
-    display_as: basic
-    language: python
-    layout: base
-    name: Treemap Charts
-    order: 13
-    page_type: u-guide
-    permalink: python/treemaps/
-    thumbnail: thumbnail/treemap.png
+description: How to make Treemap Charts with Plotly
 ---
-
 [Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. The input data format is the same as for [Sunburst Charts](sunburst-charts.md) and [Icicle Charts](icicle-charts.md): the hierarchy is defined by [labels](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.labels) (`names` for `px.treemap`) and [parents](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.
 
 ### Basic Treemap with plotly.express

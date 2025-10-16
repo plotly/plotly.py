@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.0
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.8
-  plotly:
-    description: How to add error-bars to charts in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Error Bars
-    order: 1
-    page_type: example_index
-    permalink: python/error-bars/
-    thumbnail: thumbnail/error-bar.jpg
+description: How to add error-bars to charts in Python with Plotly.
 ---
-
 ### Error Bars with Plotly Express
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). For functions representing 2D data points such as [`px.scatter`](line-and-scatter.md), [`px.line`](line-charts.md), [`px.bar`](bar-charts.md) etc., error bars are given as a column name which is the value of the `error_x` (for the error on x position) and `error_y` (for the error on y position).

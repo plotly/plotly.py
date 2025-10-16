@@ -1,35 +1,5 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.5
-  plotly:
-    description: Discussion of key differences between IPython and Python
-    display_as: file_settings
-    language: python
-    layout: base
-    name: IPython vs Python
-    order: 26
-    permalink: python/ipython-vs-python/
-    thumbnail: thumbnail/venn.jpg
+description: Discussion of key differences between IPython and Python
 ---
 
 ### What is the difference between IPython and Python?

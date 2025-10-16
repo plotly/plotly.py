@@ -1,38 +1,6 @@
 ---
-jupyter:
-  celltoolbar: Tags
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.0
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.7
-  plotly:
-    display_as: bio
-    language: python
-    layout: base
-    name: Volcano Plot
-    order: 1
-    page_type: u-guide
-    permalink: python/volcano-plot/
-    thumbnail: thumbnail/volcano_plot.png
+description: volcano plots
 ---
-
 ## VolcanoPlot
 Volcano Plot interactively identifies clinically meaningful markers in genomic experiments, i.e., markers that are statistically significant and have an effect size greater than some threshold. Specifically, volcano plots depict the negative log-base-10 p-values plotted against their effect size.
 

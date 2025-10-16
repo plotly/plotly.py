@@ -1,41 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: Recommendations for increased speed, improved interactivity, and
-      the ability to plot even more data!
-    display_as: basic
-    language: python
-    layout: base
-    name: High Performance Visualization
-    order: 14
-    permalink: python/performance/
-    redirect_from:
-    - python/webgl-vs-svg/
-    - python/datashader/
-    thumbnail: thumbnail/webgl.jpg
+description: Recommendations for increased speed, improved interactivity, and the
+  ability to plot even more data!
+redirect_from:
+- python/webgl-vs-svg/
+- python/datashader/
 ---
-
 ## DataFrame Types
 
 *New in Plotly.py version 6*

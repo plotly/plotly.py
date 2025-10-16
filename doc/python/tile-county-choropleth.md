@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make tile choropleth maps in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Tile Choropleth Maps
-    order: 2
-    page_type: example_index
-    permalink: python/tile-county-choropleth/
-    redirect_from: python/mapbox-county-choropleth/
-    thumbnail: thumbnail/mapbox-choropleth.png
+description: How to make tile choropleth maps in Python with Plotly.
+redirect_from: python/mapbox-county-choropleth/
 ---
-
 A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **tile-map** choropleth maps, but you can also build [**outline** choropleth maps](choropleth-maps.md).
 
 Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth_map` function or the lower-level `go.Choroplethmap` graph object.

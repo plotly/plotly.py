@@ -1,40 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make scatterplot matrices or sploms natively in Python with
-      Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Scatterplot Matrix
-    order: 6
-    page_type: u-guide
-    permalink: python/splom/
-    redirect_from: python/scatterplot-matrix/
-    thumbnail: thumbnail/splom_image.jpg
+description: How to make scatterplot matrices or sploms natively in Python with Plotly.
+redirect_from: python/scatterplot-matrix/
 ---
-
 ### Scatter matrix with Plotly Express
 
 A scatterplot matrix is a matrix associated to n numerical arrays (data variables), $X_1,X_2,…,X_n$ , of the same length. The cell (i,j) of such a matrix displays the scatter plot of the variable Xi versus Xj.

@@ -1,38 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to adjust axes properties in Python - axes titles, styling and
-      coloring axes and grid lines, ticks, tick labels and more.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Axes
-    order: 14
-    permalink: python/axes/
-    thumbnail: thumbnail/axes.png
+description: How to adjust axes properties in Python - axes titles, styling and coloring
+  axes and grid lines, ticks, tick labels and more.
 ---
-
 This tutorial explain how to set the properties of [2-dimensional Cartesian axes](figure-structure.md#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/reference/graph_objects/layout-package/XAxis.md) and [`go.layout.YAxis`](/reference/graph_objects/layout-package/YAxis.md).
 
 Other kinds of subplots and axes are described in other tutorials:

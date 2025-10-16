@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.8
-  plotly:
-    description: How to make 2D Histogram Contour plots in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: 2D Histogram Contour
-    order: 11
-    page_type: u-guide
-    permalink: python/2d-histogram-contour/
-    redirect_from: python/2d-density-plots/
-    thumbnail: thumbnail/hist2dcontour.png
+description: How to make 2D Histogram Contour plots in Python with Plotly.
+redirect_from: python/2d-density-plots/
 ---
-
 ## 2D Histogram Contours or Density Contours
 
 A 2D histogram contour plot, also known as a density contour plot, is a 2-dimensional generalization of a [histogram](histograms.md) which resembles a [contour plot](contour-plots.md) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the value to be used to compute contours. This kind of visualization (and the related [2D histogram, or density heatmap](2D-Histogram.md)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](line-and-scatter.md) would result in points overlapping each other and hiding patterns.

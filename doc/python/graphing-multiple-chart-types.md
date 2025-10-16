@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to design figures with multiple chart types in python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Multiple Chart Types
-    order: 18
-    page_type: u-guide
-    permalink: python/graphing-multiple-chart-types/
-    thumbnail: thumbnail/multiple-chart-type.jpg
+description: How to design figures with multiple chart types in python.
 ---
-
 ### Chart Types versus Trace Types
 
 Plotly's [figure data structure](figure-structure.md) supports defining [subplots](subplots.md) of [various types](mixed-subplots.md) (e.g. [cartesian](axes.md), [polar](polar-chart.md), [3-dimensional](/python/3d-charts/), [maps](/python/maps/) etc) with attached traces of [various compatible types](figure-structure.md) (e.g. scatter, bar, choropleth, surface etc). This means that **Plotly figures are not constrained to representing a fixed set of "chart types"** such as scatter plots only or bar charts only or line charts only: any subplot can contain multiple traces of different types.
