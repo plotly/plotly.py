@@ -236,56 +236,56 @@ nav:
         - Image: reference/graph_objects/Image.md
         - Pie: reference/graph_objects/Pie.md
         - Scatter: reference/graph_objects/Scatter.md
-        - Scattergl: reference/graph_objects/Scattergl.md
+        - Scatter GL: reference/graph_objects/Scattergl.md
         - Table: reference/graph_objects/Table.md
       - Distribution Traces:
         - Box: reference/graph_objects/Box.md
         - Histogram: reference/graph_objects/Histogram.md
-        - Histogram2d: reference/graph_objects/Histogram2d.md
-        - Histogram2dContour: reference/graph_objects/Histogram2dContour.md
+        - Histogram 2D: reference/graph_objects/Histogram2d.md
+        - Histogram 2D Contour: reference/graph_objects/Histogram2dContour.md
         - Violin: reference/graph_objects/Violin.md
       - Finance Traces:
         - Candlestick: reference/graph_objects/Candlestick.md
         - Funnel: reference/graph_objects/Funnel.md
-        - Funnelarea: reference/graph_objects/Funnelarea.md
+        - Funnel Area: reference/graph_objects/Funnelarea.md
         - Indicator: reference/graph_objects/Indicator.md
-        - Ohlc: reference/graph_objects/Ohlc.md
+        - OHLC: reference/graph_objects/Ohlc.md
         - Waterfall: reference/graph_objects/Waterfall.md
       - 3D Traces:
         - Cone: reference/graph_objects/Cone.md
         - Isosurface: reference/graph_objects/Isosurface.md
-        - Mesh3d: reference/graph_objects/Mesh3d.md
-        - Scatter3d: reference/graph_objects/Scatter3d.md
+        - Mesh 3D: reference/graph_objects/Mesh3d.md
+        - Scatter 3D: reference/graph_objects/Scatter3d.md
         - Streamtube: reference/graph_objects/Streamtube.md
         - Surface: reference/graph_objects/Surface.md
         - Volume: reference/graph_objects/Volume.md
       - Map Traces:
         - Choropleth: reference/graph_objects/Choropleth.md
-        - Choroplethmap: reference/graph_objects/Choroplethmap.md
-        - Choroplethmapbox: reference/graph_objects/Choroplethmapbox.md
-        - Densitymap: reference/graph_objects/Densitymap.md
-        - Densitymapbox: reference/graph_objects/Densitymapbox.md
-        - Scattergeo: reference/graph_objects/Scattergeo.md
-        - Scattermap: reference/graph_objects/Scattermap.md
-        - Scattermapbox: reference/graph_objects/Scattermapbox.md
+        - Choropleth Map: reference/graph_objects/Choroplethmap.md
+        - Choropleth Mapbox: reference/graph_objects/Choroplethmapbox.md
+        - Density Map: reference/graph_objects/Densitymap.md
+        - Density Mapbox: reference/graph_objects/Densitymapbox.md
+        - Scatter Geo: reference/graph_objects/Scattergeo.md
+        - Scatter Map: reference/graph_objects/Scattermap.md
+        - Scatter Mapbox: reference/graph_objects/Scattermapbox.md
       - Specialized Traces:
         - Barpolar: reference/graph_objects/Barpolar.md
         - Carpet: reference/graph_objects/Carpet.md
-        - Contourcarpet: reference/graph_objects/Contourcarpet.md
+        - Contour Carpet: reference/graph_objects/Contourcarpet.md
         - Icicle: reference/graph_objects/Icicle.md
-        - Parcats: reference/graph_objects/Parcats.md
-        - Parcoords: reference/graph_objects/Parcoords.md
+        - Parallel Categories: reference/graph_objects/Parcats.md
+        - Parallel Coordinates: reference/graph_objects/Parcoords.md
         - Sankey: reference/graph_objects/Sankey.md
-        - Scattercarpet: reference/graph_objects/Scattercarpet.md
-        - Scatterpolar: reference/graph_objects/Scatterpolar.md
-        - Scatterpolargl: reference/graph_objects/Scatterpolargl.md
-        - Scattersmith: reference/graph_objects/Scattersmith.md
-        - Scatterternary: reference/graph_objects/Scatterternary.md
-        - Splom: reference/graph_objects/Splom.md
+        - Scatter Carpet: reference/graph_objects/Scattercarpet.md
+        - Scatter Polar: reference/graph_objects/Scatterpolar.md
+        - Scatter Polar GL: reference/graph_objects/Scatterpolargl.md
+        - Scatter Smith: reference/graph_objects/Scattersmith.md
+        - Scatter Ternary: reference/graph_objects/Scatterternary.md
+        - SPLOM: reference/graph_objects/Splom.md
         - Sunburst: reference/graph_objects/Sunburst.md
         - Treemap: reference/graph_objects/Treemap.md
       - Other Classes:
-        - FigureWidget: reference/graph_objects/FigureWidget.md
+        - Figure Widget: reference/graph_objects/FigureWidget.md
         - Frame: reference/graph_objects/Frame.md
       - Modules:
         - bar: reference/graph_objects/bar-package/index.md
