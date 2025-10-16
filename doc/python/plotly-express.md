@@ -91,11 +91,15 @@ The Plotly Express API in general offers the following features:
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
-```python {hide_code=true}
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'plotly-express', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/plotly-express" width="100%" height="1200" style="border:none;"></iframe>
 
 ### Gallery
 

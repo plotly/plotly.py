@@ -508,38 +508,38 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
 ### Jinja HTML Template
 
 
-```
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="container"&gt;
-        &lt;h1&gt;Select an analysis&lt;/h1&gt;
-        &lt;select id="dropdown" class="form-control"&gt;
+</head>
+<body>
+    <div class="container">
+        <h1>Select an analysis</h1>
+        <select id="dropdown" class="form-control">
     {{ dropdown_entries }}
-        &lt;/select&gt;
+        </select>
 
 
         {{ divs }}
 
-    &lt;/div&gt;
+    </div>
 
-    &lt;script&gt;
-        document.getElementById('dropdown').addEventListener('change', function() {
+    <script>
+        document.getElementById('dropdown').addEventListener('change', function(){
             const divs = document.querySelectorAll('.content-div');
-            divs.forEach(div =&gt; div.style.display = 'none');
+            divs.forEach(div => div.style.display = 'none');
 
             const selectedDiv = document.getElementById(this.value);
             if (selectedDiv) {
                 selectedDiv.style.display = 'block';
             }
         });
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+    </script>
+</body>
+</html>
 ```
 
 <!-- #endregion -->

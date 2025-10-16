@@ -55,7 +55,8 @@ fig.show()
 
 These colors are supported in Plotly.py when a property accepts a [named CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color).
 
-```python {hide_code=true}
+<pre hide_code="true">
+```python
 import plotly.graph_objects as go
 import pandas as pd
 
@@ -140,3 +141,4 @@ fig.update_layout(
 
 fig.show()
 ```
+</pre>

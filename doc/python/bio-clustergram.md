@@ -103,8 +103,12 @@ fig.show()
 
 ## Clustergram with Dash
 
-```python {hide_code=true}
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-clustergram', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/bio-clustergram" width="100%" height="1200" style="border:none;"></iframe>
