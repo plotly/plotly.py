@@ -11,24 +11,40 @@ def create_quiver(
     """
     Returns data for a quiver plot.
 
-    :param (list|ndarray) x: x coordinates of the arrow locations
-    :param (list|ndarray) y: y coordinates of the arrow locations
-    :param (list|ndarray) u: x components of the arrow vectors
-    :param (list|ndarray) v: y components of the arrow vectors
-    :param (float in [0,1]) scale: scales size of the arrows(ideally to
+    Parameters
+    ----------
+    x : list or ndarray 
+        x coordinates of the arrow locations
+    y : list or ndarray 
+        y coordinates of the arrow locations
+    u : list or ndarray 
+        x components of the arrow vectors
+    v : list or ndarray 
+        y components of the arrow vectors
+    scale : float in [0,1] 
+        Scales size of the arrows(ideally to
         avoid overlap). Default = .1
-    :param (float in [0,1]) arrow_scale: value multiplied to length of barb
+    arrow_scale : float in [0,1] 
+        Value multiplied to length of barb
         to get length of arrowhead. Default = .3
-    :param (angle in radians) angle: angle of arrowhead. Default = pi/9
-    :param (positive float) scaleratio: the ratio between the scale of the y-axis
+    angle : radians 
+        Angle of arrowhead. Default = pi/9
+    scaleratio : positive float 
+        The ratio between the scale of the y-axis
         and the scale of the x-axis (scale_y / scale_x). Default = None, the
         scale ratio is not fixed.
-    :param kwargs: kwargs passed through plotly.graph_objects.Scatter
+    **kwargs: 
+        kwargs passed through plotly.graph_objects.Scatter
         for more information on valid kwargs call
         help(plotly.graph_objects.Scatter)
 
-    :rtype (dict): returns a representation of quiver figure.
+    Returns
+    -------
+    dict 
+        A representation of quiver figure.
 
+    Examples
+    --------
     Example 1: Trivial Quiver
 
     >>> from plotly.figure_factory import create_quiver

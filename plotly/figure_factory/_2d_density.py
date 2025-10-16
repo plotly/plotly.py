@@ -30,25 +30,37 @@ def create_2d_density(
     width=600,
 ):
     """
-    **deprecated**, use instead
-    :func:`plotly.express.density_heatmap`.
+    **Deprecated**, use instead [`plotly.express.density_heatmap`](/reference/plotly-express.md#plotly.express.density_heatmap).
 
-    :param (list|array) x: x-axis data for plot generation
-    :param (list|array) y: y-axis data for plot generation
-    :param (str|tuple|list) colorscale: either a plotly scale name, an rgb
+    Parameters
+    ----------
+    x : list or array
+        x-axis data for plot generation.
+    y : list or array
+        y-axis data for plot generation.
+    colorscale : str or tuple or list
+        Either a plotly scale name, an rgb
         or hex color, a color tuple or a list or tuple of colors. An rgb
         color is of the form 'rgb(x, y, z)' where x, y, z belong to the
         interval [0, 255] and a color tuple is a tuple of the form
         (a, b, c) where a, b and c belong to [0, 1]. If colormap is a
         list, it must contain the valid color types aforementioned as its
         members.
-    :param (int) ncontours: the number of 2D contours to draw on the plot
-    :param (str) hist_color: the color of the plotted histograms
-    :param (str) point_color: the color of the scatter points
-    :param (str) point_size: the color of the scatter points
-    :param (str) title: set the title for the plot
-    :param (float) height: the height of the chart
-    :param (float) width: the width of the chart
+    ncontours : int
+        The number of 2D contours to draw on the plot.
+    hist_color : str
+        The color of the plotted histograms.
+    point_color : str
+        The color of the scatter points.
+    point_size : str
+        The size of the scatter points.
+    title : str
+        Set the title for the plot.
+    height : float
+        The height of the chart.
+    width : float
+        The width of the chart.
+
 
     Examples
     --------

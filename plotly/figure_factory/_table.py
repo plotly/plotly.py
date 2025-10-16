@@ -36,28 +36,39 @@ def create_table(
     """
     Function that creates data tables.
 
-    See also the plotly.graph_objs trace
-    :class:`plotly.graph_objs.Table`
+    See also the plotly.graph_objects trace
+    [`plotly.graph_objects.Table`](/reference/graph_objects/Table.md)
 
-    :param (pandas.Dataframe | list[list]) text: data for table.
-    :param (str|list[list]) colorscale: Colorscale for table where the
+    Parameters
+    ----------
+    text : pandas.Dataframe or list[list]
+        Data for table.
+    colorscale : str or list[list]
+        Colorscale for table where the
         color at value 0 is the header color, .5 is the first table color
         and 1 is the second table color. (Set .5 and 1 to avoid the striped
         table effect). Default=[[0, '#66b2ff'], [.5, '#d9d9d9'],
         [1, '#ffffff']]
-    :param (list) font_colors: Color for fonts in table. Can be a single
+    font_colors : list 
+        Color for fonts in table. Can be a single
         color, three colors, or a color for each row in the table.
         Default=['#000000'] (black text for the entire table)
-    :param (int) height_constant: Constant multiplied by # of rows to
+    height_constant : int 
+        Constant multiplied by # of rows to
         create table height. Default=30.
-    :param (bool) index: Create (header-colored) index column index from
+    index : bool 
+        Create (header-colored) index column index from
         Pandas dataframe or list[0] for each list in text. Default=False.
-    :param (string) index_title: Title for index column. Default=''.
-    :param kwargs: kwargs passed through plotly.graph_objects.Heatmap.
+    index_title : str 
+        Title for index column. Default=''.
+    **kwargs: 
+        kwargs passed through plotly.graph_objects.Heatmap.
         These kwargs describe other attributes about the annotated Heatmap
         trace such as the colorscale. For more information on valid kwargs
         call help(plotly.graph_objects.Heatmap)
 
+    Examples
+    --------
     Example 1: Simple Plotly Table
 
     >>> from plotly.figure_factory import create_table
