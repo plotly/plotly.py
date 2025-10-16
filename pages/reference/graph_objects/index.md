@@ -29,7 +29,7 @@ plotly.graph_objects contains the building blocks of plotly Figure: traces (Scat
 
 ### [Scatter](Scatter.md)
 
-### [Scattergl](Scattergl.md)
+### [Scatter GL](Scattergl.md)
 
 ### [Table](Table.md)
 
@@ -40,9 +40,9 @@ plotly.graph_objects contains the building blocks of plotly Figure: traces (Scat
 
 ### [Histogram](Histogram.md)
 
-### [Histogram2d](Histogram2d.md)
+### [Histogram 2D](Histogram2d.md)
 
-### [Histogram2dContour](Histogram2dContour.md)
+### [Histogram 2D Contour](Histogram2dContour.md)
 
 ### [Violin](Violin.md)
 
@@ -53,11 +53,11 @@ plotly.graph_objects contains the building blocks of plotly Figure: traces (Scat
 
 ### [Funnel](Funnel.md)
 
-### [Funnelarea](Funnelarea.md)
+### [Funnel Area](Funnelarea.md)
 
 ### [Indicator](Indicator.md)
 
-### [Ohlc](Ohlc.md)
+### [OHLC](Ohlc.md)
 
 ### [Waterfall](Waterfall.md)
 
@@ -68,9 +68,9 @@ plotly.graph_objects contains the building blocks of plotly Figure: traces (Scat
 
 ### [Isosurface](Isosurface.md)
 
-### [Mesh3d](Mesh3d.md)
+### [Mesh 3D](Mesh3d.md)
 
-### [Scatter3d](Scatter3d.md)
+### [Scatter 3D](Scatter3d.md)
 
 ### [Streamtube](Streamtube.md)
 
@@ -83,48 +83,48 @@ plotly.graph_objects contains the building blocks of plotly Figure: traces (Scat
 
 ### [Choropleth](Choropleth.md)
 
-### [Choroplethmap](Choroplethmap.md)
+### [Choropleth Map](Choroplethmap.md)
 
-### [Choroplethmapbox](Choroplethmapbox.md)
+### [Choropleth Mapbox](Choroplethmapbox.md)
 
-### [Densitymap](Densitymap.md)
+### [Density Map](Densitymap.md)
 
-### [Densitymapbox](Densitymapbox.md)
+### [Density Mapbox](Densitymapbox.md)
 
-### [Scattergeo](Scattergeo.md)
+### [Scatter Geo](Scattergeo.md)
 
-### [Scattermap](Scattermap.md)
+### [Scatter Map](Scattermap.md)
 
-### [Scattermapbox](Scattermapbox.md)
+### [Scatter Mapbox](Scattermapbox.md)
 
 
 ## Specialized Traces
 
-### [Barpolar](Barpolar.md)
+### [Bar Polar](Barpolar.md)
 
 ### [Carpet](Carpet.md)
 
-### [Contourcarpet](Contourcarpet.md)
+### [Contour Carpet](Contourcarpet.md)
 
 ### [Icicle](Icicle.md)
 
-### [Parcats](Parcats.md)
+### [Parallel Categories](Parcats.md)
 
-### [Parcoords](Parcoords.md)
+### [Parallel Coordinates](Parcoords.md)
 
 ### [Sankey](Sankey.md)
 
-### [Scattercarpet](Scattercarpet.md)
+### [Scatter Carpet](Scattercarpet.md)
 
-### [Scatterpolar](Scatterpolar.md)
+### [Scatter Polar](Scatterpolar.md)
 
-### [Scatterpolargl](Scatterpolargl.md)
+### [Scatter Polar GL](Scatterpolargl.md)
 
-### [Scattersmith](Scattersmith.md)
+### [Scatter Smith](Scattersmith.md)
 
-### [Scatterternary](Scatterternary.md)
+### [Scatter Ternary](Scatterternary.md)
 
-### [Splom](Splom.md)
+### [SPLOM](Splom.md)
 
 ### [Sunburst](Sunburst.md)
 
@@ -133,7 +133,7 @@ plotly.graph_objects contains the building blocks of plotly Figure: traces (Scat
 
 ## Other Classes
 
-### [FigureWidget](FigureWidget.md)
+### [Figure Widget](FigureWidget.md)
 
 ### [Frame](Frame.md)
 
