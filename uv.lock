@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.8"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -4397,6 +4397,7 @@ dev-optional = [
     { name = "xarray", version = "2025.6.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
 ]
 express = [
+    { name = "nbformat" },
     { name = "numpy", version = "1.24.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "numpy", version = "2.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.10.*'" },
@@ -4417,6 +4418,7 @@ requires-dist = [
     { name = "jupyter", marker = "extra == 'dev-build'" },
     { name = "kaleido", marker = "extra == 'kaleido'", specifier = ">=1.0.0" },
     { name = "narwhals", specifier = ">=1.15.1" },
+    { name = "nbformat", marker = "extra == 'express'", specifier = ">=4.2.0" },
     { name = "numpy", marker = "extra == 'dev-optional'" },
     { name = "numpy", marker = "extra == 'express'" },
     { name = "orjson", marker = "extra == 'dev-optional'" },
