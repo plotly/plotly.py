@@ -39,7 +39,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-express = ["numpy"]
+express = [
+    "numpy",
+    "nbformat>=4.2.0"
+]
 kaleido = ["kaleido>=1.0.0"]
 dev_core = [
     "pytest",
