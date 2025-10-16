@@ -1,7 +1,8 @@
 ---
 description: Learn how to find peaks and valleys on datasets in Python
 ---
-#### Imports
+
+### Imports
 
 The tutorial below imports [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html), and [SciPy](https://www.scipy.org/).
 
@@ -10,7 +11,7 @@ import pandas as pd
 from scipy.signal import find_peaks
 ```
 
-#### Import Data
+### Import Data
 
 To start detecting peaks, we will import some data on milk production by month:
 
@@ -29,7 +30,7 @@ fig = go.Figure(data=go.Scatter(
 fig.show()
 ```
 
-#### Peak Detection
+### Peak Detection
 
 We need to find the x-axis indices for the peaks in order to determine where the peaks are located.
 
@@ -65,7 +66,7 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-#### Only Highest Peaks
+### Only Highest Peaks
 
 We can attempt to set our threshold so that we identify as many of the _highest peaks_ that we can.
 

@@ -1,7 +1,8 @@
 ---
 description: 3D Subplots in Plotly
 ---
-#### 3D Surface Subplots
+
+### 3D Surface Subplots
 
 ```python
 import plotly.graph_objects as go
@@ -47,7 +48,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Reference
+### Reference
 
 
 See [https://plotly.com/python/subplots/](subplots.md) for more information regarding subplots!

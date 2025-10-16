@@ -4,7 +4,8 @@ redirect_from:
 - python/gauge-chart/
 - python/gauge-meter/
 ---
-#### Basic Gauge
+
+### Basic Gauge
 A radial gauge chart has a circular arc, which displays a single value to estimate progress toward a goal.
   The bar shows the target value, and the shading represents the progress toward that goal. Gauge charts, known as
   speedometer charts as well. This chart type is usually used to illustrate key business indicators.
@@ -23,7 +24,7 @@ fig = go.Figure(go.Indicator(
 fig.show()
 ```
 
-#### Add Steps, Threshold, and Delta
+### Add Steps, Threshold, and Delta
 The following examples include "steps" attribute shown as shading inside the radial arc, "delta" which is the
   difference of the value and goal (reference - value), and "threshold" to determine boundaries that visually alert you if the value cross a defined threshold.
 
@@ -45,7 +46,7 @@ fig = go.Figure(go.Indicator(
 fig.show()
 ```
 
-#### Custom Gauge Chart
+### Custom Gauge Chart
 The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](reference/graph_objects/Indicator.md).
 
 ```python
@@ -77,5 +78,5 @@ fig.show()
 ```
 
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/indicator/](reference/graph_objects/Indicator.md) for more information and chart attribute options!

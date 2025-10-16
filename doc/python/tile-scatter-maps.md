@@ -266,7 +266,7 @@ fig.show()
 
 The earlier examples using `px.scatter_map` and `go.Scattermap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to create scatter plots on tile-based maps. There are also traces that use [Mapbox](https://docs.mapbox.com): `px.scatter_mapbox` and `go.Scattermapbox`
 
-To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](mapbox-layers.md) documentation for more information.
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
 Here's the first example rewritten to use `px.scatter_mapbox`.
 
@@ -316,6 +316,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_map`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_map) or [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for more information about the attributes available.
+See [function reference for `px.scatter_map`](reference/plotly-express.md#plotly.express.scatter_map) or [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for more information about the attributes available.
 
-For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).
+For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](reference/plotly-express.md#plotly.express.scatter_mapbox) or [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).

@@ -142,8 +142,8 @@ Plotly figures:
 
 Details about algorithms:
 
-* UMAP library: https://umap-learn.readthedocs.io/en/latest/
-* t-SNE User guide: https://scikit-learn.org/stable/modules/manifold.html#t-sne
-* t-SNE paper: https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf
-* MNIST: http://yann.lecun.com/exdb/mnist/
+* UMAP library: <https://umap-learn.readthedocs.io/en/latest/>
+* t-SNE User guide: <https://scikit-learn.org/stable/modules/manifold.html#t-sne>
+* t-SNE paper: <https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf>
+* MNIST: <http://yann.lecun.com/exdb/mnist/>
 <!-- #endregion -->

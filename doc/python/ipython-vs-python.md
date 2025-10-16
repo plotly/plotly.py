@@ -1,7 +1,8 @@
 ---
 description: Discussion of key differences between IPython and Python
 ---
-#### What is the difference between IPython and Python?
+
+### What is the difference between IPython and Python?
 While these two names are quite similar, they refer to entirely different things.<br>
 <br>
 [**Python**](https://www.python.org/) is a general-purpose programming language. It was created in the late 1980s by Guido van Rossum. It is now one of the most popular languages in the world. It is routinely used by system administrators and web developers. Also, many scientists are using Python thanks to libraries such as NumPy, SciPy, pandas, and matplotlib. The ease of use of Python and its dynamic nature make it a very productive language.<br>
@@ -17,7 +18,7 @@ In other words, IPython is a powerful *interface* to the Python language. But it
 A script contains a list of commands to execute in order. It runs from start to finish and display some output. On the contrary, with IPython, you generally write one command at a time and you get the results instantly. This is a completely different way of working with Python. When analyzing data or running computational models, you need this sort of interactivity to explore them efficiently.
 
 
-#### Jupyter Notebook
+### Jupyter Notebook
 
 
 In 2011, IPython introduced a new tool named the **Notebook**. Inspired by scientific programs like Mathematica or Sage, the Notebook offers a modern and powerful web interface to Python.

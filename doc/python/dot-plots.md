@@ -1,7 +1,8 @@
 ---
 description: How to make dot plots in Python with Plotly.
 ---
-#### Basic Dot Plot
+
+### Basic Dot Plot
 
 Dot plots (also known as [Cleveland dot plots](<https://en.wikipedia.org/wiki/Dot_plot_(statistics)>)) are [scatter plots](line-and-scatter.md) with one categorical axis and one continuous axis. They can be used to show changes between two (or more) points in time or between two (or more) conditions. Compared to a [bar chart](bar-charts.md), dot plots can be less cluttered and allow for an easier comparison between conditions.
 
@@ -85,7 +86,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Styled Categorical Dot Plot
+### Styled Categorical Dot Plot
 
 ```python
 import plotly.graph_objects as go
@@ -145,6 +146,6 @@ fig.update_layout(
 fig.show()
 ```
 
-### Reference
+## Reference
 
 See [https://plotly.com/python/reference/scatter/](reference/graph_objects/Scatter.md) for more information and chart attribute options!

@@ -33,11 +33,11 @@ jupyter:
     thumbnail: thumbnail/hexbin_mapbox.jpg
 ---
 
-#### Simple Count Hexbin
+### Simple Count Hexbin
 
 This page details the use of a [figure factory](figure-factories.md). For more examples with Choropleth maps, see [this page](choropleth-maps.md).
 
-In order to use mapbox styles that require a mapbox token, set the token with `plotly.express`. You can also use styles that do not require a mapbox token. See more information on [this page](mapbox-layers.md).
+In order to use mapbox styles that require a mapbox token, set the token with `plotly.express`. You can also use styles that do not require a mapbox token. See more information on [this page](/python/mapbox-layers/).
 
 ```python
 import plotly.figure_factory as ff
@@ -58,13 +58,13 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 4, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 ```
 
-#### Count Hexbin with Minimum Count and Opacity
+### Count Hexbin with Minimum Count and Opacity
 
 ```python
 import plotly.figure_factory as ff
@@ -85,13 +85,13 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 4, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 ```
 
-#### Display the Underlying Data
+### Display the Underlying Data
 
 ```python
 import plotly.figure_factory as ff
@@ -114,13 +114,13 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 4, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 ```
 
-#### Compute the Mean Value per Hexbin
+### Compute the Mean Value per Hexbin
 
 ```python
 import plotly.figure_factory as ff
@@ -142,13 +142,13 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 5, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 ```
 
-#### Compute the Sum Value per Hexbin
+### Compute the Sum Value per Hexbin
 
 ```python
 import plotly.figure_factory as ff
@@ -170,13 +170,13 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 5, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 ```
 
-#### Hexbin with Animation
+### Hexbin with Animation
 
 ```python
 import plotly.figure_factory as ff
@@ -216,12 +216,12 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/liamconnors/Documents/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 5, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 ```
 
-#### Reference
+### Reference
 
 For more info on Plotly maps, see: https://plotly.com/python/maps.<br> For more info on using colorscales with Plotly see: [https://plotly.com/python/heatmap-and-contour-colorscales/](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_hexbin_mapbox.html#plotly.figure_factory.create_hexbin_mapbox)

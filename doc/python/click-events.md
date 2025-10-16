@@ -1,7 +1,8 @@
 ---
 description: Click Events With FigureWidget
 ---
-#### Update Points Using a Click Callback
+
+### Update Points Using a Click Callback
 
 ```python
 import plotly.graph_objects as go
@@ -41,7 +42,7 @@ f
 <img src='https://raw.githubusercontent.com/michaelbabyn/plot_data/master/figurewidget-click-event.gif'>
 
 
-#### Reference
+### Reference
 
 
 See [these Jupyter notebooks](https://github.com/jonmmease/plotly_ipywidget_notebooks) for even more FigureWidget examples.

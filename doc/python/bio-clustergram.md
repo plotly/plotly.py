@@ -11,13 +11,14 @@ import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
-dash_bio.Clustergram(
+fig = dash_bio.Clustergram(
     data=df,
     column_labels=list(df.columns.values),
     row_labels=list(df.index),
     height=800,
     width=700
 )
+fig.show()
 ```
 
 ## Dendrogram Cluster Colors/Line Widths
@@ -31,7 +32,7 @@ import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
-dash_bio.Clustergram(
+fig = dash_bio.Clustergram(
     data=df,
     column_labels=list(df.columns.values),
     row_labels=list(df.index),
@@ -44,6 +45,7 @@ dash_bio.Clustergram(
     },
     line_width=2
 )
+fig.show()
 ```
 
 ## Relative Dendrogram Size
@@ -57,7 +59,7 @@ import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/Dash_Bio/Chromosomal/clustergram_brain_cancer.csv')
 
-dash_bio.Clustergram(
+fig = dash_bio.Clustergram(
     data=df,
     column_labels=list(df.columns.values),
     row_labels=list(df.index),
@@ -65,12 +67,17 @@ dash_bio.Clustergram(
     width=700,
     display_ratio=[0.1, 0.7]
 )
+fig.show()
 ```
 
 ## Clustergram with Dash
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-clustergram', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/bio-clustergram" width="100%" height="1200" style="border:none;"></iframe>

@@ -6,7 +6,7 @@ description: Plotly Express' 2D-Cartesian functions accept data in long-, wide-,
 
 Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a `DataFrame` (in either "long" or "wide" format, see below). These functions use Pandas internally to process the data, but also accept other types of DataFrames as arguments. See the [Plotly Express arguments page](px-arguments.md) for more details.
 
-[`px.imshow` operates on matrix-like data](imshow.md) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions, but you can also check out our [detailed column-input-format documentation](px-arguments.md).
+[`px.imshow` operates on matrix-like data](imshow.md) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](/python/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions, but you can also check out our [detailed column-input-format documentation](px-arguments.md).
 
 ### Plotly Express works with Long-, Wide-, and Mixed-Form Data
 

@@ -1,7 +1,8 @@
 ---
 description: How to make a dendrogram in Python with Plotly.
 ---
-#### Basic Dendrogram
+
+### Basic Dendrogram
 
 A [dendrogram](https://en.wikipedia.org/wiki/Dendrogram) is a diagram representing a tree. The [figure factory](figure-factories.md) called `create_dendrogram` performs [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) on data and represents the resulting tree. Values on the tree depth axis correspond to distances between clusters.
 
@@ -18,7 +19,7 @@ fig.update_layout(width=800, height=500)
 fig.show()
 ```
 
-#### Set Color Threshold
+### Set Color Threshold
 
 ```python
 import plotly.figure_factory as ff
@@ -31,7 +32,7 @@ fig.update_layout(width=800, height=500)
 fig.show()
 ```
 
-#### Set Orientation and Add Labels
+### Set Orientation and Add Labels
 
 ```python
 import plotly.figure_factory as ff
@@ -45,7 +46,7 @@ fig.update_layout(width=800, height=800)
 fig.show()
 ```
 
-#### Plot a Dendrogram with a Heatmap
+### Plot a Dendrogram with a Heatmap
 
 See also the [Dash Bio demo](https://dash-bio.plotly.host/dash-clustergram/).
 
@@ -144,6 +145,6 @@ fig.update_layout(yaxis2={'domain':[.825, .975],
 fig.show()
 ```
 
-### Reference
+## Reference
 
-For more info on `ff.create_dendrogram()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_dendrogram.html)
+For more info on `ff.create_dendrogram()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_dendrogram)

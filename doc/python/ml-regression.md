@@ -66,11 +66,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'ml-regression', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/ml-regression" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -514,6 +518,7 @@ fig_box.show()
 ### Reference
 
 Learn more about the `px` figures used in this tutorial:
+
 * Plotly Express: [https://plotly.com/python/plotly-express/](plotly-express.md)
 * Vertical Lines: [https://plotly.com/python/shapes/](shapes.md)
 * Heatmaps: [https://plotly.com/python/heatmaps/](heatmaps.md)
@@ -522,13 +527,15 @@ Learn more about the `px` figures used in this tutorial:
 * Surface Plots: [https://plotly.com/python/3d-surface-plots/](3d-surface-plots.md)
 
 Learn more about the Machine Learning models used in this tutorial:
-* https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html
+
+* <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html>
 
 Other tutorials that inspired this notebook:
-* https://seaborn.pydata.org/examples/residplot.html
-* https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html
-* http://www.scikit-yb.org/zh/latest/api/regressor/peplot.html
+
+* <https://seaborn.pydata.org/examples/residplot.html>
+* <https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html>
+* <http://www.scikit-yb.org/zh/latest/api/regressor/peplot.html>

@@ -57,9 +57,9 @@ The accepted values for `layout.map.style` are one of:
 - "streets"
 - "white-bg" - an empty white canvas which results in no external HTTP requests
 
-- A custom style URL. For example: https://tiles.stadiamaps.com/styles/stamen_watercolor.json?api_key=YOUR-API-KEY
+- A custom style URL. For example: <https://tiles.stadiamaps.com/styles/stamen_watercolor.json?api_key=YOUR-API-KEY>
 
-- A Map Style object as defined at https://maplibre.org/maplibre-style-spec/
+- A Map Style object as defined at <https://maplibre.org/maplibre-style-spec/>
 
 
 #### OpenStreetMap tiles
@@ -218,7 +218,7 @@ The accepted values for `layout.mapbox.style` are one of:
 - `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yield maps composed of _vector_ tiles from the Mapbox service, and _do_ require a Mapbox Access Token or an on-premise Mapbox installation.
 - `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yield maps composed of _raster_ tiles from the [Stadia Maps service](https://www.stadiamaps.com), and require a Stadia Maps account and token.
 - A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation.
-- A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/
+- A Mapbox Style object as defined at <https://docs.mapbox.com/mapbox-gl-js/style-spec/>
 
 #### OpenStreetMap tiles: no token needed
 

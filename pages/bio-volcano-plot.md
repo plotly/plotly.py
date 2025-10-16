@@ -69,8 +69,12 @@ dash_bio.VolcanoPlot(
 
 ## VolcanoPlot with Dash
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bio-volcano', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/bio-volcano" width="100%" height="1200" style="border:none;"></iframe>

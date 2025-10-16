@@ -29,20 +29,21 @@ You can insert Plotly output and text related to your data into HTML templates u
 
 <!-- #region -->
 
-```
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;   &lt;!--It is necessary to use the UTF-8 encoding with plotly graphics to get e.g. negative signs to render correctly --&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-&lt;/head&gt;
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />   <!--It is necessary to use the UTF-8 encoding 
+with plotly graphics to get e.g. negative signs to render correctly -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-&lt;body&gt;
-&lt;h1&gt;Here's a Plotly graph!&lt;/h1&gt;
+<body>
+<h1>Here's a Plotly graph!</h1>
 {{ fig }}
-&lt;p&gt;And here's some text after the graph.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<p>And here's some text after the graph.</p>
+</body>
+</html>
 ```
 
 
@@ -75,11 +76,15 @@ with open(output_html_path, "w", encoding="utf-8") as output_file:
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'interactive-html-export', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/interactive-html-export" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>

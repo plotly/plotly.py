@@ -42,7 +42,7 @@ fig.show()
 
 The earlier examples using `px.density_map` and `go.Densitymap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24. These trace types are now the recommended way to make tile-based density heatmaps. There are also traces that use [Mapbox](https://docs.mapbox.com): `density_mapbox` and `go.Densitymapbox`.
 
-To use these trace types, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](mapbox-layers.md) documentation for more information.
+To use these trace types, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
 Here's one of the earlier examples rewritten to use `px.density_mapbox`.
 
@@ -84,6 +84,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(density_map)`](https://plotly.com/python-api-reference/generated/plotly.express.density_mapbox) or [https://plotly.com/python/reference/densitymap/](reference/graph_objects/Densitymap.md) for available attribute options.
+See [function reference for `px.(density_map)`](reference/plotly-express.md#plotly.express.density_map) or [https://plotly.com/python/reference/densitymap/](reference/graph_objects/Densitymap.md) for available attribute options.
 
-For Mapbox-based maps, see [function reference for `px.(density_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.density_mapbox) or [https://plotly.com/python/reference/densitymapbox/](reference/graph_objects/Densitymapbox.md).
+For Mapbox-based maps, see [function reference for `px.(density_mapbox)`](reference/plotly-express.md#plotly.express.density_mapbox) or [https://plotly.com/python/reference/densitymapbox/](reference/graph_objects/Densitymapbox.md).

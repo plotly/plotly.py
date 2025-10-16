@@ -305,4 +305,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_matrix()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_matrix) or [https://plotly.com/python/reference/splom/](reference/graph_objects/Splom.md) for more information and chart attribute options!
+See [function reference for `px.scatter_matrix()`](reference/plotly-express.md#plotly.express.scatter_matrix) or [https://plotly.com/python/reference/splom/](reference/graph_objects/Splom.md) for more information and chart attribute options!

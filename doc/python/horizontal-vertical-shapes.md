@@ -43,11 +43,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'horizontal-vertical-shapes', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/horizontal-vertical-shapes" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -55,7 +59,7 @@ IFrame(snippet_url + 'horizontal-vertical-shapes', width='100%', height=1200)
 
 #### Adding Text Annotations
 
-[Text annotations](../text-and-annotations) can optionally be added to an autoshape
+[Text annotations](text-and-annotations.md) can optionally be added to an autoshape
 using the `annotation_text` keyword argument, and positioned using the `annotation_position` argument:
 
 ```python
@@ -152,4 +156,4 @@ With [text labels on shapes](shapes.md#adding-text-labels-to-shapes), you can al
 
 More details are available about [layout shapes](shapes.md) and [annotations](text-and-annotations.md).
 
-Reference documentation is also available for [`add_hline`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_hline#plotly.graph_objects.Figure.add_hline), [`add_vline`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_vline#plotly.graph_objects.Figure.add_vline), [`add_hrect`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_hrect#plotly.graph_objects.Figure.add_hrect), [`add_vrect`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_vrect#plotly.graph_objects.Figure.add_vrect).
+Reference documentation is also available for [`add_hline`](reference/graph_objects/Figure.md#plotly.graph_objects.Figure.add_hline), [`add_vline`](reference/graph_objects/Figure.md#plotly.graph_objects.Figure.add_vline), [`add_hrect`](reference/graph_objects/Figure.md#plotly.graph_objects.Figure.add_hrect), [`add_vrect`](reference/graph_objects/Figure.md#plotly.graph_objects.Figure.add_vrect).

@@ -24,26 +24,39 @@ def create_dendrogram(
     Function that returns a dendrogram Plotly figure object. This is a thin
     wrapper around scipy.cluster.hierarchy.dendrogram.
 
-    See also https://dash.plot.ly/dash-bio/clustergram.
+    See also <https://dash.plotly.com/dash-bio/clustergram>.
 
-    :param (ndarray) X: Matrix of observations as array of arrays
-    :param (str) orientation: 'top', 'right', 'bottom', or 'left'
-    :param (list) labels: List of axis category labels(observation labels)
-    :param (list) colorscale: Optional colorscale for the dendrogram tree.
-                              Requires 8 colors to be specified, the 7th of
-                              which is ignored.  With scipy>=1.5.0, the 2nd, 3rd
-                              and 6th are used twice as often as the others.
-                              Given a shorter list, the missing values are
-                              replaced with defaults and with a longer list the
-                              extra values are ignored.
-    :param (function) distfun: Function to compute the pairwise distance from
-                               the observations
-    :param (function) linkagefun: Function to compute the linkage matrix from
-                               the pairwise distances
-    :param (list[list]) hovertext: List of hovertext for constituent traces of dendrogram
-                               clusters
-    :param (double) color_threshold: Value at which the separation of clusters will be made
+    Parameters
+    ----------
+    X : ndarray
+        Matrix of observations as array of arrays.
+    orientation : str
+        'top', 'right', 'bottom', or 'left'
+    labels : list
+        List of axis category labels(observation labels).
+    colorscale : list
+        Optional colorscale for the dendrogram tree.
+        Requires 8 colors to be specified, the 7th of
+        which is ignored.  With scipy>=1.5.0, the 2nd, 3rd
+        and 6th are used twice as often as the others.
+        Given a shorter list, the missing values are
+        replaced with defaults and with a longer list the
+        extra values are ignored.
+    distfun : function
+        Function to compute the pairwise distance from
+        the observations.
+    linkagefun : function
+        Function to compute the linkage matrix from
+        the pairwise distances.
+    hovertext : list[list]
+        List of hovertext for constituent traces of dendrogram
+        clusters.
+    color_threshold : double 
+        Value at which the separation of clusters will be made.
 
+
+    Examples
+    ---------
     Example 1: Simple bottom oriented dendrogram
 
     >>> from plotly.figure_factory import create_dendrogram

@@ -2,11 +2,11 @@
 description: How to make scatter plots on maps in Python. Scatter plots on maps highlight
   geographic areas and can be colored by value.
 ---
-#### Base Map Configuration
+### Base Map Configuration
 
 Plotly figures made with [Plotly Express](plotly-express.md) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](graph-objects.md) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](map-configuration.md) onto which data is plotted.
 
-### Geographical Scatter Plot with px.scatter_geo
+## Geographical Scatter Plot with px.scatter_geo
 
 Here we show the [Plotly Express](plotly-express.md) function `px.scatter_geo` for a geographical scatter plot. The `size` argument is used to set the size of markers from a given column of the DataFrame.
 
@@ -21,7 +21,7 @@ fig = px.scatter_geo(df, locations="iso_alpha",
 fig.show()
 ```
 
-#### Customize geographical scatter plot
+### Customize geographical scatter plot
 
 ```python
 import plotly.express as px
@@ -34,7 +34,7 @@ fig = px.scatter_geo(df, locations="iso_alpha",
 fig.show()
 ```
 
-### Basic Example with GeoPandas
+## Basic Example with GeoPandas
 
 `px.scatter_geo` can work well with [GeoPandas](https://geopandas.org/) dataframes whose `geometry` is of type `Point`.
 
@@ -52,11 +52,11 @@ fig = px.scatter_geo(geo_df,
 fig.show()
 ```
 
-### U.S. Airports Map
+## U.S. Airports Map
 
 Here we show how to use `go.Scattergeo` from `plotly.graph_objects`.
 
-#### Simple U.S. Airports Map
+### Simple U.S. Airports Map
 
 ```python
 import plotly.graph_objects as go
@@ -81,7 +81,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Styled U.S. Airports Map
+### Styled U.S. Airports Map
 
 ```python
 import plotly.graph_objects as go
@@ -135,7 +135,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### North American Precipitation Map
+## North American Precipitation Map
 
 ```python
 import plotly.graph_objects as go
@@ -204,6 +204,6 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Reference
+### Reference
 
-See [function reference for `px.(scatter_geo)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo) or [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) and [https://plotly.com/python/reference/layout/geo/](reference/graph_objects/layout-package/Geo.md) for more information and chart attribute options!
+See [function reference for `px.(scatter_geo)`](reference/plotly-express.md#plotly.express.scatter_geo) or [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) and [https://plotly.com/python/reference/layout/geo/](reference/graph_objects/layout-package/Geo.md) for more information and chart attribute options!

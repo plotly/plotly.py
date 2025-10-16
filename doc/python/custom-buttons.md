@@ -1,7 +1,8 @@
 ---
 description: How to add custom buttons to update Plotly chart attributes in Python.
 ---
-#### Methods
+
+### Methods
 The [updatemenu method](reference/graph_objects/layout-package/updatemenu-package/Button.md#plotly.graph_objects.layout.updatemenu.Button.method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
 
 - `"restyle"`: modify **data** or data attributes
@@ -10,7 +11,7 @@ The [updatemenu method](reference/graph_objects/layout-package/updatemenu-packag
 - `"animate"`: start or pause an [animation](https://plotly.com/python/#animations)
 
 
-#### Restyle Button
+### Restyle Button
 The `"restyle"` method should be used when modifying the data and data attributes of the graph.<br>
 **Update One Data Attribute**<br>
 This example demonstrates how to update a single data attribute: chart `type` with the `"restyle"` method.
@@ -214,7 +215,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Relayout Button
+### Relayout Button
 The `"relayout"` method should be used when modifying the layout attributes of the graph.<br>
 **Update One Layout Attribute**<br>
 This example demonstrates how to update a layout attribute: chart `type` with the `"relayout"` method.
@@ -315,7 +316,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Update Button
+### Update Button
 The `"update"` method should be used when modifying the data and layout sections of the graph.<br>
 This example demonstrates how to update which traces are displayed while simultaneously updating layout attributes such as the chart title and annotations.
 
@@ -432,9 +433,9 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Animate Button
+### Animate Button
 Refer to our animation docs: https://plotly.com/python/#animations for examples on how to use the `animate` method with Plotly buttons.
 
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/layout/updatemenus/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information about `updatemenu` buttons.

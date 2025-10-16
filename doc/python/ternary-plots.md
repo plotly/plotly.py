@@ -93,4 +93,4 @@ fig.show()
 ```
 
 #### Reference
-See [function reference for `px.(scatter_ternary)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_ternary) or [https://plotly.com/python/reference/scatterternary/](reference/graph_objects/Scatterternary.md) for more information and chart attribute options!
+See [function reference for `px.(scatter_ternary)`](reference/plotly-express.md#plotly.express.scatter_ternary) or [https://plotly.com/python/reference/scatterternary/](reference/graph_objects/Scatterternary.md) for more information and chart attribute options!

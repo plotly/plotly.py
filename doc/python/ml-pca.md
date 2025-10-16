@@ -240,8 +240,8 @@ Learn more about `px`, `px.scatter_3d`, and `px.scatter_matrix` here:
 
 The following resources offer an in-depth overview of PCA and explained variance:
 
-* https://en.wikipedia.org/wiki/Explained_variation
-* https://scikit-learn.org/stable/modules/decomposition.html#pca
-* https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579
-* https://stats.stackexchange.com/questions/143905/loadings-vs-eigenvectors-in-pca-when-to-use-one-or-another
-* https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained
+* <https://en.wikipedia.org/wiki/Explained_variation>
+* <https://scikit-learn.org/stable/modules/decomposition.html#pca>
+* <https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579>
+* <https://stats.stackexchange.com/questions/143905/loadings-vs-eigenvectors-in-pca-when-to-use-one-or-another>
+* <https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained>

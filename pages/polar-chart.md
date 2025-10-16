@@ -462,4 +462,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter_polar)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_polar) or [function reference for `px.(line_polar)`](https://plotly.com/python-api-reference/generated/plotly.express.line_polar) or [https://plotly.com/python/reference/scatterpolar/](reference/graph_objects/Scatterpolar.md) for more information and chart attribute options!
+See [function reference for `px.(scatter_polar)`](reference/plotly-express.md#plotly.express.scatter_polar) or [function reference for `px.(line_polar)`](reference/plotly-express.md#plotly.express.line_polar) or [https://plotly.com/python/reference/scatterpolar/](reference/graph_objects/Scatterpolar.md) for more information and chart attribute options!

@@ -298,4 +298,4 @@ fig.show()
 
 #### Reference
 
-For more info on `ff.create_table()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_table.html)
+For more info on `ff.create_table()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_table)

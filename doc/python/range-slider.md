@@ -2,7 +2,8 @@
 description: Now you can implement range sliders and selectors in your Plotly graphs
   purely with python!
 ---
-#### Basic Range Slider and Range Selectors
+
+### Basic Range Slider and Range Selectors
 
 ```python
 import plotly.graph_objects as go
@@ -59,7 +60,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Range Slider with Vertically Stacked Subplots
+### Range Slider with Vertically Stacked Subplots
 
 ```python
 import plotly.graph_objects as go
@@ -329,5 +330,5 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeselector](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeselector) <br>and [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeslider](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeslider) <br>for more information and attribute options!

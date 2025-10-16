@@ -251,11 +251,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'knn-classification', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/knn-classification" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -360,6 +364,6 @@ Learn more about `px`, `go.Contour`, and `go.Heatmap` here:
 
 This tutorial was inspired by amazing examples from the official scikit-learn docs:
 
-* https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html
-* https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
-* https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
+* <https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html>
+* <https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html>
+* <https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html>

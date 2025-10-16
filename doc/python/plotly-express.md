@@ -5,7 +5,7 @@ description: Plotly Express is a terse, consistent, high-level API for creating 
 
 The `plotly.express` module (usually imported as `px`) contains functions that can create entire figures at once, and is referred to as Plotly Express or PX. Plotly Express is a built-in part of the `plotly` library, and is the recommended starting point for creating most common figures. Every Plotly Express function uses [graph objects](graph-objects.md) internally and returns a `plotly.graph_objects.Figure` instance. Throughout the `plotly` documentation, you will find the Plotly Express way of building figures at the top of any applicable page, followed by a section on how to use graph objects to build similar figures. Any figure created in a single function call with Plotly Express could be created using graph objects alone, but with between 5 and 100 times more code.
 
-Plotly Express provides [more than 30 functions for creating different types of figures](https://plotly.com/python-api-reference/plotly.express.html). The API for these functions was carefully designed to be as consistent and easy to learn as possible, making it easy to switch from a scatter plot to a bar chart to a histogram to a sunburst chart throughout a data exploration session. *Scroll down for a gallery of Plotly Express plots, each made in a single function call.*
+Plotly Express provides [more than 30 functions for creating different types of figures](reference/plotly-express.md). The API for these functions was carefully designed to be as consistent and easy to learn as possible, making it easy to switch from a scatter plot to a bar chart to a histogram to a sunburst chart throughout a data exploration session. *Scroll down for a gallery of Plotly Express plots, each made in a single function call.*
 
 Here is a talk from the [SciPy 2021 conference](https://www.scipy2021.scipy.org/) that gives a good introduction to Plotly Express and [Dash](https://dash.plotly.com/):
 
@@ -35,9 +35,9 @@ Plotly Express currently includes the following functions:
 
 The Plotly Express API in general offers the following features:
 
-* **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](https://plotly.com/python-api-reference/plotly.express.html), plus [built-in demo datasets under `px.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data) and [built-in color scales and sequences under `px.color`](https://plotly.com/python-api-reference/generated/plotly.colors.html#module-plotly.colors). Every PX function returns a `plotly.graph_objects.Figure` object, so you can edit it using all the same methods like [`update_layout` and `add_trace`](creating-and-updating-figures.md#updating-figures).
+* **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](reference/plotly-express.md), plus [built-in demo datasets under `px.data`](reference/data.md) and [built-in color scales and sequences under `px.color`](reference/colors.md). Every PX function returns a `plotly.graph_objects.Figure` object, so you can edit it using all the same methods like [`update_layout` and `add_trace`](creating-and-updating-figures.md#updating-figures).
 * **Sensible, Overridable Defaults**: PX functions will infer sensible defaults wherever possible, and will always let you override them.
-* **Flexible Input Formats**: PX functions [accept input in a variety of formats](px-arguments.md), from `list`s and `dict`s to [long-form or wide-form `DataFrame`s](wide-form.md) to [`numpy` arrays and `xarrays`](imshow.md) to [GeoPandas `GeoDataFrames`](maps.md).
+* **Flexible Input Formats**: PX functions [accept input in a variety of formats](px-arguments.md), from `list`s and `dict`s to [long-form or wide-form `DataFrame`s](wide-form.md) to [`numpy` arrays and `xarrays`](imshow.md) to [GeoPandas `GeoDataFrames`](/python/maps/).
 * **Automatic Trace and Layout configuration**: PX functions will create one [trace](figure-structure.md) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' [`legendgroup` and `showlegend` attributes](legend.md) are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. Traces are automatically linked to a correctly-configured [subplot of the appropriate type](figure-structure.md).
 * **Automatic Figure Labelling**: PX functions [label axes, legends and colorbars](figure-labels.md) based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](styling-plotly-express.md).
 * **Automatic Hover Labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](hover-text-and-formatting.md).
@@ -58,11 +58,15 @@ The Plotly Express API in general offers the following features:
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'plotly-express', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/plotly-express" width="100%" height="1200" style="border:none;"></iframe>
 
 ### Gallery
 

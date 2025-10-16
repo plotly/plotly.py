@@ -1,7 +1,8 @@
 ---
 description: How to make gauge charts in Python with Plotly.
 ---
-#### Overview
+
+### Overview
 In this tutorial we introduce a new trace named "Indicator". The purpose of "indicator" is to visualize a single value specified by the "value" attribute.
   Three distinct visual elements are available to represent that value: number, delta and gauge. Any combination of them can be specified via the "mode" attribute.
   Top-level attributes are:
@@ -73,7 +74,7 @@ fig.update_layout(
                          }})
 ```
 
-#### A Single Angular Gauge Chart
+### A Single Angular Gauge Chart
 
 ```python
 import plotly.graph_objects as go
@@ -88,7 +89,7 @@ fig = go.Figure(go.Indicator(
 fig.show()
 ```
 
-##### Bullet Gauge
+#### Bullet Gauge
 The equivalent of above "angular gauge":
 
 ```python
@@ -105,7 +106,7 @@ fig = go.Figure(go.Indicator(
 fig.show()
 ```
 
-#### Showing Information above Your Chart
+### Showing Information above Your Chart
 Another interesting feature is that indicator trace sits above the other traces (even the 3d ones). This way, it can be easily used as an overlay as demonstrated below
 
 ```python
@@ -124,7 +125,7 @@ fig.add_trace(go.Scatter(
 fig.update_layout(xaxis = {'range': [0, 62]})
 fig.show()
 ```
-#### Data Cards / Big Numbers
+### Data Cards / Big Numbers
 Data card helps to display more contextual information about the data. Sometimes one number is all you want to see in a report, such as total sales, annual revenue, etc. This example shows how to visualize these big numbers:
 
 ```python
@@ -142,7 +143,7 @@ fig.update_layout(paper_bgcolor = "lightgray")
 fig.show()
 ```
 
-#### It's possible to display several numbers
+### It's possible to display several numbers
 
 ```python
 import plotly.graph_objects as go
@@ -171,7 +172,7 @@ fig.add_trace(go.Indicator(
 fig.show()
 ```
 
-#### Adding a Prefix and Suffix
+### Adding a Prefix and Suffix
 
 
 On both a `number` and a `delta`, you can add a string to appear before the value using `prefix`. You can add a string to appear after the value using `suffix`. In the following example, we add '$' as a `prefix` and 'm' as `suffix` for both the `number` and `delta`. 
@@ -196,9 +197,6 @@ fig.update_layout(xaxis = {'range': [0, 62]})
 fig.show()
 ```
 
-#### Reference
+### Reference
 See [https://plotly.com/python/reference/indicator/](reference/graph_objects/Indicator.md) for more information and chart attribute options!
 
-```python
-
-```

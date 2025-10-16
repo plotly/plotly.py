@@ -86,4 +86,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(line_3d)`](https://plotly.com/python-api-reference/generated/plotly.express.line_3d) or [https://plotly.com/python/reference/scatter3d/#scatter3d-marker-line](reference/graph_objects/scatter3d-package/Marker.md#plotly.graph_objects.scatter3d.Marker.line) for more information and chart attribute options!
+See [function reference for `px.(line_3d)`](reference/plotly-express.md#plotly.express.line_3d) or [https://plotly.com/python/reference/scatter3d/#scatter3d-marker-line](reference/graph_objects/scatter3d-package/Marker.md#plotly.graph_objects.scatter3d.Marker.line) for more information and chart attribute options!
