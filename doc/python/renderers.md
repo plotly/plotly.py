@@ -188,7 +188,7 @@ This renderer displays figures as static PDF files. This is especially useful fo
 In editors that support it (JupyterLab, nteract, and the Visual Studio Code notebook interface), this renderer displays the JSON representation of a figure in a collapsible interactive tree structure.  This can be very useful for examining the structure of complex figures.
 
 ##### Multiple Renderers
-You can specify that multiple renderers should be used by joining their names on `"+"` characters.  This is useful when writing code that needs to support multiple contexts.  For example, if a notebook specifies a default renderer string of  `"notebook+plotly_mimetype+pdf"` then this notebook would be able to run in the classic Jupyter Notebook, in JupyterLab, and it would support being exported to PDF using `nbconvert`.
+You can specify that multiple renderers should be used by joining their names on `"+"` characters. This is useful when writing code that needs to support multiple contexts. For example, if a notebook specifies a default renderer string of  `"notebook+plotly_mimetype+pdf"`, then this notebook would be able to run in the classic Jupyter Notebook as well as in JupyterLab, and it would support being exported to PDF using `nbconvert`.
 
 #### Customizing Built-In Renderers
 Most built-in renderers have configuration options to customize their behavior.  To view a description of a renderer, including its configuration options, access the renderer object using dictionary-style key lookup on the `plotly.io.renderers` configuration object and then display it.  Here is an example of accessing and displaying the `png` renderer.
