@@ -13,19 +13,19 @@ validation:
 
 plugins:
   - search
-  - redirects:
-      redirect_maps:
-        'plotly-fundamentals.md': 'figure-structure.md'
-        'basic-charts.md': 'line-and-scatter.md'
-        'statistical-charts.md': 'error-bars.md'
-        'scientific-charts.md': 'contour-plots.md'
-        'financial-charts.md': 'time-series.md'
-        'maps.md': 'migrate-to-maplibre.md'
-        'ai-ml.md': 'ml-regression.md'
-        'bio.md': 'bio-volcano-plot.md'
-        '3d-charts.md': '3d-axes.md'
-        'subplot-charts.md': 'mixed-subplots.md'
-        'mapbox-layers.md': 'tile-map-layers.md'
+  # - redirects:
+  #     redirect_maps:
+  #       'plotly-fundamentals.md': 'figure-structure.md'
+  #       'basic-charts.md': 'line-and-scatter.md'
+  #       'statistical-charts.md': 'error-bars.md'
+  #       'scientific-charts.md': 'contour-plots.md'
+  #       'financial-charts.md': 'time-series.md'
+  #       'maps.md': 'migrate-to-maplibre.md'
+  #       'ai-ml.md': 'ml-regression.md'
+  #       'bio.md': 'bio-volcano-plot.md'
+  #       '3d-charts.md': '3d-axes.md'
+  #       'subplot-charts.md': 'mixed-subplots.md'
+  #       'mapbox-layers.md': 'tile-map-layers.md'
   # - gen-files:
   #     scripts:
   #       - bin/generate_graph_objects_docs.py
@@ -61,6 +61,7 @@ nav:
   - Dash: https://dash.plotly.com
 - Examples:
   - Fundamentals:
+    - Overview: plotly-fundamentals.md
     - The Figure Data Structure: figure-structure.md
     - Creating and Updating Figures: creating-and-updating-figures.md
     - Displaying Figures: renderers.md
@@ -103,6 +104,7 @@ nav:
     - Static Image Generation Changes in Plotly.py 6.1: static-image-generation-migration.md
     - Supported CSS Colors: supported-colors.md
   - Basic Charts:
+    - Overview: basic-charts.md
     - Scatter Plots: line-and-scatter.md
     - Line Charts: line-charts.md
     - Bar Charts: bar-charts.md
@@ -123,6 +125,7 @@ nav:
     - Patterns, Hatching, Texture: pattern-hatching-texture.md
     - Dumbbell Plots: dumbbell-plots.md
   - Statistical Charts:
+    - Overview: statistical-charts.md
     - Error Bars: error-bars.md
     - Box Plots: box-plots.md
     - Histograms: histograms.md
@@ -140,6 +143,7 @@ nav:
     - Continuous Error Bands: continuous-error-bars.md
     - Empirical Cumulative Distribution Plots: ecdf-plots.md
   - Scientific Charts:
+    - Overview: scientific-charts.md
     - Contour Plots: contour-plots.md
     - Heatmaps: heatmaps.md
     - Imshow: imshow.md
@@ -161,6 +165,7 @@ nav:
     - Wind Rose and Polar Bar Charts: wind-rose-charts.md
     - Smith Charts: smith-charts.md
   - Financial Charts:
+    - Overview: financial-charts.md
     - Time Series and Date Axes: time-series.md
     - Candlestick Charts: candlestick-charts.md
     - Waterfall Charts: waterfall-charts.md
@@ -170,6 +175,7 @@ nav:
     - Gauge Charts: gauge-charts.md
     - Bullet Charts: bullet-charts.md
   - Maps:
+    - Overview: maps.md
     - MapLibre Migration: migrate-to-maplibre.md
     - Tile Choropleth Maps: tile-county-choropleth.md
     - Lines on Tile Maps: lines-on-tile-maps.md
@@ -185,6 +191,7 @@ nav:
     - Map Configuration and Styling on Geo Maps: map-configuration.md
     - Hexbin Mapbox: hexbin-mapbox.md
   - AI & ML:
+    - Overview: ai-ml.md
     - ML Regression: ml-regression.md
     - kNN Classification: ml-knn.md
     - ROC and PR Curves: ml-roc-pr.md
@@ -192,11 +199,13 @@ nav:
     - AI/ML Apps with Dash: https://plotly.com/building-machine-learning-web-apps-in-python/
     - t-SNE and UMAP projections: ml-tsne-umap-projections.md
   - Visualizing Biological Data:
+    - Overview: bio.md
     - Volcano Plot: bio-volcano-plot.md
     - Manhattan Plot: bio-manhattanplot.md
     - Clustergram: bio-clustergram.md
     - Alignment Chart: bio-alignment-chart.md
   - 3D Charts:
+    - Overview: 3d-charts.md
     - 3D Axes: 3d-axes.md
     - 3D Scatter Plots: 3d-scatter-plots.md
     - 3D Surface Plots: 3d-surface-plots.md
@@ -211,23 +220,28 @@ nav:
     - 3D Cone Plots: cone-plot.md
     - 3D Streamtube Plots: streamtube-plot.md
   - Subplots:
+    - Overview: subplot-charts.md
     - Mixed Subplots: mixed-subplots.md
     - Map Subplots: map-subplots-and-small-multiples.md
     - Table and Chart Subplots: table-subplots.md
     - Figure Factory Subplots: figure-factory-subplots.md
   - Jupyter Widgets Interaction:
+    - Overview: chart-events.md
     - Plotly FigureWidget Overview: figurewidget.md
     - Jupyter Lab with FigureWidget: jupyter-lab-tools.md
     - Interactive Data Analysis with FigureWidget ipywidgets: figurewidget-app.md
     - Click Events: click-events.md
   - Animations:
+    - Overview: plotly-animations.md
     - Intro to Animations: animations.md
   - Controls:
+    - Overview: controls.md
     - Custom Buttons: custom-buttons.md
     - Sliders: sliders.md
     - Dropdown Menus: dropdowns.md
     - Range Slider and Selector: range-slider.md
-  - Advanced:
+  - Advanced Options:
+    - Overview: advanced-opt.md
     - Plot CSV Data: plot-data-from-csv.md
     - Random Walk: random-walk.md
     - Peak Finding: peak-finding.md
@@ -404,6 +418,7 @@ markdown_extensions:
 - pymdownx.inlinehilite
 - pymdownx.snippets
 - pymdownx.superfences
+- md_in_html
 
 exclude_docs: |
   *~
