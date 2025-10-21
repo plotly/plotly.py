@@ -13,8 +13,9 @@ validation:
 
 plugins:
   - search
-  # - redirects:
-  #     redirect_maps:
+  - redirects:
+      redirect_maps:
+          'mapbox-layers.md': 'tile-map-layers.md'
   #       'plotly-fundamentals.md': 'figure-structure.md'
   #       'basic-charts.md': 'line-and-scatter.md'
   #       'statistical-charts.md': 'error-bars.md'

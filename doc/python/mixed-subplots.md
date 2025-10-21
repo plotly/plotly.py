@@ -91,4 +91,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/ for more information and chart attribute options!
+See [https://plotly.com/python/reference/](/reference/graph_objects/index.md) for more information and chart attribute options!

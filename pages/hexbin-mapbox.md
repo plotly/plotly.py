@@ -1,36 +1,5 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make a map with Hexagonal Binning of data in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Hexbin Mapbox
-    order: 14
-    page_type: u-guide
-    permalink: python/hexbin-mapbox/
-    thumbnail: thumbnail/hexbin_mapbox.jpg
+description: How to make a map with Hexagonal Binning of data in Python with Plotly.
 ---
 
 ### Simple Count Hexbin
@@ -224,4 +193,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 
 ### Reference
 
-For more info on Plotly maps, see: https://plotly.com/python/maps.<br> For more info on using colorscales with Plotly see: [https://plotly.com/python/heatmap-and-contour-colorscales/](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_hexbin_mapbox.html#plotly.figure_factory.create_hexbin_mapbox)
+For more info on Plotly maps, see: [https://plotly.com/python/maps/](maps.md).<br> For more info on using colorscales with Plotly see: [https://plotly.com/python/heatmap-and-contour-colorscales/](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_hexbin_mapbox.html#plotly.figure_factory.create_hexbin_mapbox)

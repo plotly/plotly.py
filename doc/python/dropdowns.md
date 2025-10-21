@@ -8,7 +8,7 @@ The [updatemenu method](reference/graph_objects/layout-package/updatemenu-packag
 - `"restyle"`: modify data or data attributes
 - `"relayout"`: modify layout attributes
 - `"update"`: modify data **and** layout attributes
-- `"animate"`: start or pause an [animation](https://plotly.com/python/#animations)
+- `"animate"`: start or pause an [animation](plotly-animations.md)
 
 
 ## Restyle Dropdown

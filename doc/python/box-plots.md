@@ -5,7 +5,7 @@ redirect_from:
 - /python/basic_statistics/
 ---
 <!-- #region -->
-A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of the distribution of a variable through its quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plotly.com/python/statistical-charts/).
+A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of the distribution of a variable through its quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](statistical-charts.md).
 
 
 Alternatives to box plots for visualizing distributions include [histograms](histograms.md), [violin plots](violin.md), [ECDF plots](ecdf-plots.md) and [strip charts](strip-charts.md).

@@ -1,43 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make Box Plots in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Box Plots
-    order: 2
-    page_type: example_index
-    permalink: python/box-plots/
-    redirect_from:
-    - /python/box/
-    - /python/basic_statistics/
-    thumbnail: thumbnail/box.jpg
+description: How to make Box Plots in Python with Plotly.
+redirect_from:
+- /python/box/
+- /python/basic_statistics/
 ---
-
 <!-- #region -->
-A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of the distribution of a variable through its quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plotly.com/python/statistical-charts/).
+A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of the distribution of a variable through its quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](statistical-charts.md).
 
 
 Alternatives to box plots for visualizing distributions include [histograms](histograms.md), [violin plots](violin.md), [ECDF plots](ecdf-plots.md) and [strip charts](strip-charts.md).

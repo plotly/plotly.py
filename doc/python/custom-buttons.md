@@ -8,7 +8,7 @@ The [updatemenu method](reference/graph_objects/layout-package/updatemenu-packag
 - `"restyle"`: modify **data** or data attributes
 - `"relayout"`: modify **layout** attributes
 - `"update"`: modify **data and layout** attributes; combination of `"restyle"` and `"relayout"`
-- `"animate"`: start or pause an [animation](https://plotly.com/python/#animations)
+- `"animate"`: start or pause an [animation](plotly-animations.md)
 
 
 ### Restyle Button
@@ -434,7 +434,7 @@ fig.show()
 ```
 
 ### Animate Button
-Refer to our animation docs: https://plotly.com/python/#animations for examples on how to use the `animate` method with Plotly buttons.
+Refer to our animation docs: [https://plotly.com/python/#animations](plotly-animations.md) for examples on how to use the `animate` method with Plotly buttons.
 
 
 ### Reference

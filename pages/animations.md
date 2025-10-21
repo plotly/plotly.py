@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.6
-  plotly:
-    description: An introduction to creating animations with Plotly in Python.
-    display_as: animations
-    language: python
-    layout: base
-    name: Intro to Animations
-    order: 1
-    page_type: example_index
-    permalink: python/animations/
-    redirect_from: python/visualizing-mri-volume-slices/
-    thumbnail: thumbnail/animations.gif
+description: An introduction to creating animations with Plotly in Python.
+redirect_from: python/visualizing-mri-volume-slices/
 ---
 
 ### Animated figures with Plotly Express
@@ -443,4 +412,4 @@ fig.show()
 ### Reference
 
 For additional information and attributes for creating bubble charts in Plotly see: [https://plotly.com/python/bubble-charts/](bubble-charts.md).
-For more documentation on creating animations with Plotly, see https://plotly.com/python/#animations.
+For more documentation on creating animations with Plotly, see [https://plotly.com/python/#animations](plotly-animations.md).

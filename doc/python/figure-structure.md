@@ -129,7 +129,7 @@ The following trace types are compatible with 2d-cartesian subplots via the `xax
 
 ### 3D, Polar, Ternary and Smith Trace Types and Subplots
 
-Beyond 2D cartesian subplots, figures can include [three-dimensional cartesian subplots](/python/3d-charts/), [polar subplots](polar-chart.md), [ternary subplots](ternary-plots.md) and [smith subplots](smith-charts.md). The following trace types support attributes named `scene`, `polar`, `smith` or `ternary`, whose values must refer to corresponding objects in the layout portion of the figure i.e. `ternary="ternary2"` etc. Note that attributes such as `layout.scene` and `layout.ternary2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
+Beyond 2D cartesian subplots, figures can include [three-dimensional cartesian subplots](3d-charts.md), [polar subplots](polar-chart.md), [ternary subplots](ternary-plots.md) and [smith subplots](smith-charts.md). The following trace types support attributes named `scene`, `polar`, `smith` or `ternary`, whose values must refer to corresponding objects in the layout portion of the figure i.e. `ternary="ternary2"` etc. Note that attributes such as `layout.scene` and `layout.ternary2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
 The following trace types are compatible with 3D subplots via the `scene` attribute, which contains special [camera controls](3d-camera-controls.md):
 

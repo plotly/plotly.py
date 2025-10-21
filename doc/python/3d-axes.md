@@ -7,7 +7,7 @@ description: How to format axes of 3d plots in Python with Plotly.
 attributes such as `xaxis`, `yaxis` and `zaxis` parameters, in order to
 set the range, title, ticks, color etc. of the axes.
 
-For creating 3D charts, see [this page](https://plotly.com/python/3d-charts/).
+For creating 3D charts, see [this page](3d-charts.md).
 
 Set `range` on an axis to manually configure a range for that axis. If you don't set `range`, it's automatically calculated. In this example, we set a `range` on `xaxis`, `yaxis`, and `zaxis`.
 
