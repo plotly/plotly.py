@@ -962,7 +962,7 @@ To suppress this warning, set warn=False
 
 ### Reference
 
-You can learn more about [all the available attributes in the plotly figure schema](/reference/) (and read about its [high-level structure](figure-structure.md)) or about [all the classes and functions in the `plotly` module](/python-api-reference/).
+You can learn more about [all the available attributes in the plotly figure schema](/reference/graph_objects/index.md) (and read about its [high-level structure](figure-structure.md)) or about [all the classes and functions in the `plotly` module](/python-api-reference/).
 
 ```python
 

@@ -56,7 +56,10 @@
 <br>
 {{ super() }}
 
-{% if not page.url.startswith('reference/') %}
+{% if not page.url.startswith('reference/') and 
+not page.url.endswith(('basic-charts/', 'plotly-fundamentals/', 'statistical-charts/',
+'scientific-charts/', 'financial-charts/', 'maps/', 'ai-ml/', 'bio/', '3d-charts/', 'subplot-charts/',
+'chart-events/', 'plotly-animations/', 'advanced-opt/', 'controls/')) %}
     <h2>What About Dash?</h2>
     <p><a href="https://dash.plotly.com/">Dash</a> is an open-source framework for building analytical applications,
         with no Javascript required, and it is tightly integrated with the Plotly graphing library.</p>

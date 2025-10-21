@@ -23,7 +23,7 @@
     **Smoothing**
 
 
--   [![](https://images.plot.ly/plotly-documentation/thumbnail/venn.jpg)](examples/LaTeX.md)
+-   [![](https://images.plot.ly/plotly-documentation/thumbnail/venn.jpg)](LaTeX.md)
 
     **LaTeX**
 

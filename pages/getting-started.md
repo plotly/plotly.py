@@ -16,7 +16,7 @@ This Getting Started guide explains how to install `plotly` and related optional
 
 1. You jump right in to **examples** of how to make [basic charts](basic-charts.md), [statistical charts](statistical-charts.md), [scientific charts](scientific-charts.md), [financial charts](financial-charts.md), [maps](maps.md), and [3-dimensional charts](3d-charts.md).
 2. If you prefer to learn about the **fundamentals** of the library first, you can read about [the structure of figures](figure-structure.md), [how to create and update figures](creating-and-updating-figures.md), [how to display figures](renderers.md), [how to theme figures with templates](templates.md), [how to export figures to various formats](static-image-export.md) and about [Plotly Express, the high-level API](plotly-express.md) for doing all of the above.
-3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference/) or the [Figure Reference](/reference/).
+3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference/) or the [Figure Reference](/reference/graph_objects/index.md).
 
 For information on using Python to build web applications containing plotly figures, see the [_Dash User Guide_](https://dash.plotly.com/).
 
@@ -201,7 +201,7 @@ Once you've installed, you can use our documentation in three main ways:
 
 1. You jump right in to **examples** of how to make [basic charts](basic-charts.md), [statistical charts](statistical-charts.md), [scientific charts](scientific-charts.md), [financial charts](financial-charts.md), [maps](maps.md), and [3-dimensional charts](3d-charts.md).
 2. If you prefer to learn about the **fundamentals** of the library first, you can read about [the structure of figures](figure-structure.md), [how to create and update figures](creating-and-updating-figures.md), [how to display figures](renderers.md), [how to theme figures with templates](templates.md), [how to export figures to various formats](static-image-export.md) and about [Plotly Express, the high-level API](plotly-express.md) for doing all of the above.
-3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference/) or the [Figure Reference](/reference/).
+3. You can check out our exhaustive **reference** guides: the [Python API reference](/python-api-reference/) or the [Figure Reference](/reference/graph_objects/index.md).
 
 For information on using Python to build web applications containing plotly figures, see the [_Dash User Guide_](https://dash.plotly.com/).
 
