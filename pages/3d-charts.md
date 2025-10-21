@@ -67,3 +67,11 @@
     **3D Streamtube Plots**
 
 </div>
+
+## 3D Charts in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/3d-scatter-plots" width="100%" height="1200" style="border:none;"></iframe>
