@@ -3,7 +3,7 @@
 
 ## Release process - full release of `plotly` package
 
-This is the release process for releasing `plotly.py` version `X.Y.Z`, including changelogs, Github release and forum announcement.
+This is the release process for releasing plotly.py version `X.Y.Z`, including changelogs, GitHub release and forum announcement.
 
 ### Finalize changelog
 
@@ -18,41 +18,90 @@ been updated, include this as the first `Updated` entry. Call out any
 notable changes as sub-bullets (new trace types in particular), and provide
 a link to the plotly.js CHANGELOG.
 
-### Finalize versions
+### Update version numbers
 
-**Create a branch `git checkout -b release-X.Y.Z` *from the tip of `origin/main`*.**
+**Create a release branch `git checkout -b release-X.Y.Z` _from the tip of `origin/main`_.**
 
-Manually update the versions to `X.Y.Z` in the files specified below.
+- Manually update the versions to `X.Y.Z` in the files specified below:
+  - `pyproject.toml`
+    - update version
+  - `CHANGELOG.md`
+    - update version and release date
+    - finalize changelog entries according to instructions above
+  - `CITATION.cff`
+    - update version and release date
+- Run `uv lock` to update the version number in the `uv.lock` file (do not update manually)
+- Commit and push your changes to the release branch:
+    ```sh
+    $ git add -u
+    $ git commit -m "version changes for vX.Y.Z"
+    $ git push
+    ```
+- Create a GitHub pull request from `release-X.Y.Z` to `main` and wait for CI to be green
+- On the release branch, create and push a tag for the release:
+    ```sh
+    $ git tag vX.Y.Z
+    $ git push origin vX.Y.Z
+    ```
 
- - `pyproject.toml`
-   + update version
- - `CHANGELOG.md`
-   + update the release date
- - Commit your changes on the branch:
-   + `git commit -a -m "version changes for vX.Y.Z"`
- - Create a tag for Github release
-   + `git tag vX.Y.Z`
-   + `git push --atomic origin release-X.Y.Z vX.Y.Z`
- - Create a Github pull request from `release-X.Y.Z` to `main` and wait for CI to be green
+### Manual QA in Jupyter
 
-### Download and QA CI Artifacts
+We don't currently have automated tests for Jupyter, so we do this QA step manually.
 
-The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` which you should download and decompress, which will give you a directory called `output`. The filenames contained within will contain version numbers.
+The `full_build` job in the `release_build` workflow in CircleCI produces a tarball of artifacts `output.tgz` 
+which you should download and decompress, which will give you a directory called `output`. The filenames within 
+will contain version numbers; make sure the version numbers are correct.
 
-To locally install the PyPI dist, make sure you have an environment with JupyterLab installed (maybe one created with `conda create -n condatest python=3.10 jupyter anywidget pandas`):
+Set up an environment with Jupyter, AnyWidget, and Pandas installed (`pip install jupyter anywidget pandas`). Then:
 
-- `tar xzf output.tgz`
+- unzip downloaded `output.tgz`
 - `pip uninstall plotly`
-- `conda uninstall plotly` (just in case!)
-- `pip install path/to/output/dist/plotly-X.Y.X-py3-none-any.whl`
+- `pip install path/to/output/dist/plotly-X.Y.Z-py3-none-any.whl`
 
-You'll want to check, in both Lab and Notebook, **in a brand new notebook in each** so that there is no caching of previous results, that `go.Figure()` and `go.FigureWidget()` work without error.
+You'll want to check, in both JupyterLab (launch with `jupyter lab`) and Jupyter Notebook (launch with `jupyter notebook`), 
+that `go.Figure()` and `go.FigureWidget()` work as expected. 
 
-### Publishing
+Notes:
+- **Start by creating a brand new notebook each time** so that there is no caching of previous results
+- **Do not run the Jupyter commands from the root `plotly.py/` directory on your machine** because Jupyter may be confused 
+by metadata from previous plotly.py builds
 
-Once you're satisfied that things render in Lab and Notebook in Widget and regular mode,
-you can publish the artifacts. **You will need special credentials from Plotly leadership to do this.**.
+Code for testing `go.Figure()`:
+```python
+import plotly
+import plotly.graph_objects as go
 
+print(plotly.__version__)  # Make sure version is correct
+fig = go.Figure(data=go.Scatter(x=[1, 2, 3, 4], y=[1, 3, 2, 4]))
+fig.show()  # Figure should render in notebook
+```
+
+Code for testing `go.FigureWidget()`:
+```python
+import plotly
+import plotly.graph_objects as go
+
+print(plotly.__version__)  # Make sure version is correct
+fig = go.Figure(data=go.Scatter(x=[1, 2, 3, 4], y=[1, 3, 2, 4]))
+figure_widget = go.FigureWidget(fig)
+figure_widget  # Figure should render in notebook
+```
+
+Once these are verified working, you can move on to publishing the release.
+
+### Merge the release PR and make a GitHub release
+
+- Merge the pull request you created above into `main`
+- Go to https://github.com/plotly/plotly.py/releases and "Draft a new release"
+- Enter the `vX.Y.Z` tag you created already above and make "Release title" the same string as the tag.
+- Copy the changelog section for this version into "Describe this release"
+- Upload the build artifacts downloaded in the previous step (`.tar` and `.whl`)
+
+### Publishing to PyPI
+
+The final step is to publish the release to PyPI. **You will need special permissions from Plotly leadership to do this.**.
+
+You must install first install [Twine](https://pypi.org/project/twine/) (`pip install twine`) if not already installed.
 
 Publishing to PyPI:
 ```bash
@@ -60,12 +109,8 @@ Publishing to PyPI:
 (plotly_dev) $ twine upload plotly-X.Y.Z*
 ```
 
-### Merge the PR and make a Release
-
-1. Merge the pull request you created above into `main`
-2. Go to https://github.com/plotly/plotly.py/releases and "Draft a new release"
-3. Enter the `vX.Y.Z` tag you created already above and make "Release title" the same string as the tag.
-4. Copy the changelog section for this version as the "Describe this release"
+You will be prompted to enter an API token; this can be generated in your PyPI account settings. 
+Your account must have permissions to publish to the `plotly` project on PyPI.
 
 ### Update documentation site
 
@@ -76,18 +121,18 @@ Publishing to PyPI:
 start by doing it first if not. Then merge `main` into `doc-prod` to deploy the doc related
 to features in the release.
 3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
-    1. bump the version of Plotly.py in  `_data/pyversion.json`
-    2. bump the version of Plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up.
-      - If Plotly.js contains any new traces or trace or layout attributes, you'll get a warning `“missing key in attributes: <attribute-name>`. To resolve, add the attribute to the relevant section in `/_data/orderings.json` in the position you want it to appear in the reference docs.
+    1. bump the version of plotly.py in  `_data/pyversion.json`
+    2. bump the version of plotly.js with `cd _data && python get_plotschema.py <PLOTLY.JS VERSION>` fixing any errors that come up.
+      - If plotly.js contains any new traces or trace or layout attributes, you'll get a warning `“missing key in attributes: <attribute-name>`. To resolve, add the attribute to the relevant section in `/_data/orderings.json` in the position you want it to appear in the reference docs.
     3. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
     4. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
     5. Commit and push the changes to `master` in that repo
 
 ### Notify Stakeholders
 
-* Post an announcement to the Plotly Python forum, with links to the README installation instructions and to the CHANGELOG.
+* Post an announcement to the [Plotly Python forum](https://community.plotly.com/c/plotly-python/5), with links to the README installation instructions and to the CHANGELOG.
 * Update the previous announcement to point to this one
-* Update the Github Release entry and CHANGELOG entry to have the nice title and a link to the announcement
+* Update the GitHub Release entry and CHANGELOG entry to have the nice title and a link to the announcement
 * Follow up on issues resolved in this release or forum posts with better answers as of this release
 
 ## Release process - Release *Candidate* of `plotly` package

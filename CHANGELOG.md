@@ -4,10 +4,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [6.3.1] - 2025-10-02
+
+### Updated
+- Update Plotly.js from version 3.1.0 to version 3.1.1. See the Plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5357)]. Notable changes include:
+  - Fix issue preventing Scattergl plots with text elements from rendering [[plotly.js#7563](https://github.com/plotly/plotly.js/pull/7563)]
+- Use native legends when converting from matplotlib [[#5312](https://github.com/plotly/plotly.py/pull/5312)], with thanks to @robertoffmoura to the contribution!
+- Allow `shared_yaxes` to work with secondary axes [[#5180](https://github.com/plotly/plotly.py/pull/5180)], with thanks to @gmjw for the contribution!
+
+### Fixed
+- Fix issue where width/height in plot layout were not respected during Kaleido image export [[#5325](https://github.com/plotly/plotly.py/pull/5325)]
+- Fix typo in default argument to `_ternary_contour.py` [[#5315](https://github.com/plotly/plotly.py/pull/5315)], with thanks to @Lexachoc for the contribution!
+- Fix incorrect `fig.show()` behavior when `ipython` is installed [[#5258](https://github.com/plotly/plotly.py/pull/5258)]
+
 ## [6.3.0] - 2025-08-12
 
 ### Updated
-- Updated Plotly.js from version 3.0.1 to version 3.1.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5318](https://github.com/plotly/plotly.py/pull/5318)]
+- Updated Plotly.js from version 3.0.1 to version 3.1.0. See the Plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5318](https://github.com/plotly/plotly.py/pull/5318)]
 
 ### Added
 - Exposed `plotly.io.get_chrome()` as a function which can be called from within a Python script. [[#5282](https://github.com/plotly/plotly.py/pull/5282)]
