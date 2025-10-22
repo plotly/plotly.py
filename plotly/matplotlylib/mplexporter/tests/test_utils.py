@@ -1,5 +1,6 @@
+import matplotlib.pyplot as plt
 from numpy.testing import assert_allclose, assert_equal
-from . import plt
+
 from .. import utils
 
 

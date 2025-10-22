@@ -1,6 +1,5 @@
+import matplotlib.pyplot as plt
 import plotly.tools as tls
-
-from . import plt
 
 
 def test_native_legend_enabled_when_matplotlib_legend_present():
