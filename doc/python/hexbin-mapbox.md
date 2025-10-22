@@ -46,7 +46,7 @@ import plotly.express as px
 px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.9, labels={"color": "Point Count"},
 )
@@ -63,7 +63,7 @@ import plotly.express as px
 px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.5, labels={"color": "Point Count"},
     min_count=1,
@@ -80,7 +80,7 @@ import plotly.express as px
 px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.5, labels={"color": "Point Count"},
     min_count=1, color_continuous_scale="Viridis",
@@ -100,7 +100,7 @@ import numpy as np
 px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.9, labels={"color": "Average Peak Hour"},
     color="peak_hour", agg_func=np.mean, color_continuous_scale="Icefire", range_color=[0,23]
@@ -118,7 +118,7 @@ import numpy as np
 px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.9, labels={"color": "Summed Car.Hours"},
     color="car_hours", agg_func=np.sum, color_continuous_scale="Magma"
@@ -150,7 +150,7 @@ frame = np.concatenate([
     np.ones(N, int) * i for i in range(n_frames)
 ])
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     lat=lat, lon=lon, nx_hexagon=15, animation_frame=frame,
     color_continuous_scale="Cividis", labels={"color": "Point Count", "frame": "Period"},
     opacity=0.5, min_count=1,

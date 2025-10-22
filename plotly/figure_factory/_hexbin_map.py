@@ -3,6 +3,7 @@ from plotly.express._doc import make_docstring
 from plotly.express._chart_types import choropleth_map, scatter_map
 import narwhals.stable.v1 as nw
 import numpy as np
+import warnings
 
 
 def _project_latlon_to_wgs84(lat, lon):
@@ -322,7 +323,7 @@ def _hexagons_to_geojson(hexagons_lats, hexagons_lons, ids=None):
     return dict(type="FeatureCollection", features=features)
 
 
-def create_hexbin_mapbox(
+def create_hexbin_map(
     data_frame=None,
     lat=None,
     lon=None,
@@ -339,7 +340,7 @@ def create_hexbin_mapbox(
     opacity=None,
     zoom=None,
     center=None,
-    mapbox_style=None,
+    map_style=None,
     title=None,
     template=None,
     width=None,
@@ -462,7 +463,7 @@ def create_hexbin_mapbox(
         opacity=opacity,
         zoom=zoom,
         center=center,
-        map_style=mapbox_style,
+        map_style=map_style,
         title=title,
         template=template,
         width=width,
@@ -502,8 +503,8 @@ def create_hexbin_mapbox(
     return fig
 
 
-create_hexbin_mapbox.__doc__ = make_docstring(
-    create_hexbin_mapbox,
+create_hexbin_map.__doc__ = make_docstring(
+    create_hexbin_map,
     override_dict=dict(
         nx_hexagon=["int", "Number of hexagons (horizontally) to be created"],
         agg_func=[
@@ -524,3 +525,16 @@ create_hexbin_mapbox.__doc__ = make_docstring(
         original_data_marker=["dict", "Scattermap marker options."],
     ),
 )
+
+def create_hexbin_mapbox(*args, **kwargs):
+    warnings.warn(
+        "create_hexbin_mapbox() is deprecated and will be removed in the next major version. "
+        + "Please use create_hexbin_map() instead. "
+        + "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
+        stacklevel=2,
+        category=DeprecationWarning,
+    )
+    if "mapbox_style" in kwargs:
+        kwargs["map_style"] = kwargs.pop("mapbox_style")
+
+    return create_hexbin_map(*args, **kwargs)   
