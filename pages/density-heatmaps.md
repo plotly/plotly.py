@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make a density heatmap in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Density Heatmap
-    order: 6
-    page_type: u-guide
-    permalink: python/density-heatmaps/
-    redirect_from: python/mapbox-density-heatmaps/
-    thumbnail: thumbnail/mapbox-density.png
+description: How to make a density heatmap in Python with Plotly.
+redirect_from: python/mapbox-density-heatmaps/
 ---
-
 ### Density map with `plotly.express`
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
@@ -120,6 +88,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(density_map)`](reference/plotly-express.md#plotly.express.density_map) or [https://plotly.com/python/reference/densitymap/](reference/graph_objects/Densitymap.md) for available attribute options.
+See [function reference for `px.(density_map)`](reference/plotly-express.md#plotly.express.density_map) or the [full reference for `go.Densitymap`](reference/graph_objects/Densitymap.md) for available attribute options.
 
-For Mapbox-based maps, see [function reference for `px.(density_mapbox)`](reference/plotly-express.md#plotly.express.density_mapbox) or [https://plotly.com/python/reference/densitymapbox/](reference/graph_objects/Densitymapbox.md).
+For Mapbox-based maps, see [function reference for `px.(density_mapbox)`](reference/plotly-express.md#plotly.express.density_mapbox) or the [full reference for `go.Densitymapbox`](reference/graph_objects/Densitymapbox.md).

@@ -381,4 +381,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.sunburst()`](reference/plotly-express.md#plotly.express.sunburst) or [https://plotly.com/python/reference/sunburst/](reference/graph_objects/Sunburst.md) for more information and chart attribute options!
+See [function reference for `px.sunburst()`](reference/plotly-express.md#plotly.express.sunburst) or the [full reference for `go.Sunburst`](reference/graph_objects/Sunburst.md) for more information and chart attribute options!

@@ -97,4 +97,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(line_polar)`](reference/plotly-express.md#plotly.express.line_polar) or [https://plotly.com/python/reference/scatterpolar/](reference/graph_objects/Scatterpolar.md) for more information and chart attribute options!
+See [function reference for `px.(line_polar)`](reference/plotly-express.md#plotly.express.line_polar) or the [full reference for `go.Scatterpolar`](reference/graph_objects/Scatterpolar.md) for more information and chart attribute options!

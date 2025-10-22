@@ -1,40 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make scatterplot matrices or sploms natively in Python with
-      Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Scatterplot Matrix
-    order: 6
-    page_type: u-guide
-    permalink: python/splom/
-    redirect_from: python/scatterplot-matrix/
-    thumbnail: thumbnail/splom_image.jpg
+description: How to make scatterplot matrices or sploms natively in Python with Plotly.
+redirect_from: python/scatterplot-matrix/
 ---
-
 ### Scatter matrix with Plotly Express
 
 A scatterplot matrix is a matrix associated to n numerical arrays (data variables), $X_1,X_2,…,X_n$ , of the same length. The cell (i,j) of such a matrix displays the scatter plot of the variable Xi versus Xj.
@@ -86,7 +53,7 @@ fig.show()
 
 ### Scatter matrix (splom) with go.Splom
 
-If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Splom` class from `plotly.graph_objects`](graph-objects.md). All its parameters are documented in the reference page [https://plotly.com/python/reference/splom/](reference/graph_objects/Splom.md).
+If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Splom` class from `plotly.graph_objects`](graph-objects.md). All its parameters are documented in the [reference page](reference/graph_objects/Splom.md).
 
 The Plotly splom trace implementation for the scatterplot matrix does not require to set $x=Xi$ , and $y=Xj$, for each scatter plot. All arrays, $X_1,X_2,…,X_n$ , are passed once, through a list of dicts called dimensions, i.e. each array/variable represents a dimension.
 
@@ -356,4 +323,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_matrix()`](reference/plotly-express.md#plotly.express.scatter_matrix) or [https://plotly.com/python/reference/splom/](reference/graph_objects/Splom.md) for more information and chart attribute options!
+See [function reference for `px.scatter_matrix()`](reference/plotly-express.md#plotly.express.scatter_matrix) or the [ full reference for `go.Splom`](reference/graph_objects/Splom.md) for more information and chart attribute options!

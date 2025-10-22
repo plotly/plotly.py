@@ -127,7 +127,7 @@ fig.show()
 
 ## Box plot with go.Box
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Box` class from `plotly.graph_objects`](graph-objects.md). All available options for `go.Box` are described in the reference page [https://plotly.com/python/reference/box/](reference/graph_objects/Box.md).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Box` class from `plotly.graph_objects`](graph-objects.md). All available options for `go.Box` are described in the [reference page for `go.Box`](reference/graph_objects/Box.md).
 
 ### Basic Box Plot
 
@@ -493,4 +493,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.box()`](reference/plotly-express.md#plotly.express.box) or [https://plotly.com/python/reference/box/](reference/graph_objects/Box.md) for more information and chart attribute options!
+See [function reference for `px.box()`](reference/plotly-express.md#plotly.express.box) or the [full reference for Box](reference/graph_objects/Box.md) for more information and chart attribute options!

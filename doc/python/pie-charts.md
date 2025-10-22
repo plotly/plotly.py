@@ -321,4 +321,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.pie()`](reference/plotly-express.md#plotly.express.pie) or [https://plotly.com/python/reference/pie/](reference/graph_objects/Pie.md) for more information and chart attribute options!
+See [function reference for `px.pie()`](reference/plotly-express.md#plotly.express.pie) or the [full reference for `go.Pie`](reference/graph_objects/Pie.md) for more information and chart attribute options!

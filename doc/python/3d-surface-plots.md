@@ -165,4 +165,4 @@ fig.show()
 ### Reference
 
 
-See [https://plotly.com/python/reference/surface/](reference/graph_objects/Surface.md) for more information!
+See the [full reference for `go.Surface`](reference/graph_objects/Surface.md) for more information!

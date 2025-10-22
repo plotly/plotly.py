@@ -280,6 +280,6 @@ fig.show()
 
 Learn more about `px`, `px.area`, `px.hist`:
 
-* [https://plotly.com/python/histograms/](histograms.md)
-* [https://plotly.com/python/filled-area-plots/](filled-area-plots.md)
-* [https://plotly.com/python/line-charts/](line-charts.md)
+* [Histograms](histograms.md)
+* [Filled Area Plots](filled-area-plots.md)
+* [Line Charts](line-charts.md)

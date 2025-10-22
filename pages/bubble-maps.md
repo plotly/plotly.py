@@ -1,36 +1,5 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make bubble maps in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Bubble Maps
-    order: 5
-    page_type: example_index
-    permalink: python/bubble-maps/
-    thumbnail: thumbnail/bubble-map.jpg
+description: How to make bubble maps in Python with Plotly.
 ---
 
 ### Base Map Configuration
@@ -82,7 +51,7 @@ To scale the bubble size, use the attribute sizeref. We recommend using the foll
 
 Note that setting `sizeref` to a value greater than $1$, decreases the rendered marker sizes, while setting `sizeref` to less than $1$, increases the rendered marker sizes.
 
-See [https://plotly.com/python/reference/scatter/#scatter-marker-sizeref](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizeref) for more information. Additionally, we recommend setting the sizemode attribute: [https://plotly.com/python/reference/scatter/#scatter-marker-sizemode](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizemode) to area.
+See [full reference for `go.scatter.Marker.sizeref`](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizeref) for more information. Additionally, we recommend setting the sizemode attribute [here](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizemode) to area.
 
 ```python
 import plotly.graph_objects as go
@@ -220,4 +189,4 @@ fig.show()
 
 ### Reference
 
-See [function reference for `px.(scatter_geo)`](reference/plotly-express.md#plotly.express.scatter_geo) or [https://plotly.com/python/reference/choropleth/](reference/graph_objects/Choropleth.md) and [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) for more information and chart attribute options!
+See [function reference for `px.(scatter_geo)`](reference/plotly-express.md#plotly.express.scatter_geo) or [full reference for Choropleth](reference/graph_objects/Choropleth.md) and [Scattergeo](reference/graph_objects/Scattergeo.md) for more information and chart attribute options!

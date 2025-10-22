@@ -511,4 +511,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.icicle()`](reference/plotly-express.md#plotly.express.icicle) or [https://plotly.com/python/reference/icicle/](reference/graph_objects/Icicle.md) for more information and chart attribute options!
+See [function reference for `px.icicle()`](reference/plotly-express.md#plotly.express.icicle) or the [full reference for `go.Icicle`]](reference/graph_objects/Icicle.md) for more information and chart attribute options!

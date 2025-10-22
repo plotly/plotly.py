@@ -253,4 +253,4 @@ fig.show()
 
 ### Reference
 
-See [https://plotly.com/python/reference/contourcarpet/](reference/graph_objects/Contourcarpet.md) for more information and chart attribute options!
+See the [full reference for `go.Carpet Contours`](reference/graph_objects/Contourcarpet.md) for more information and chart attribute options!

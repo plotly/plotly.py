@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: Visualize Principle Component Analysis (PCA) of your high-dimensional
-      data in Python with Plotly.
-    display_as: ai_ml
-    language: python
-    layout: base
-    name: PCA Visualization
-    order: 4
-    page_type: u-guide
-    permalink: python/pca-visualization/
-    thumbnail: thumbnail/ml-pca.png
+description: Visualize Principle Component Analysis (PCA) of your high-dimensional
+  data in Python with Plotly.
 ---
-
 This page first shows how to visualize higher dimension data using various Plotly figures combined with dimensionality reduction (aka projection). Then, we dive into the specific details of our projection algorithm.
 
 We will use [Scikit-learn](https://scikit-learn.org/) to load one of the datasets, and apply dimensionality reduction. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
@@ -278,9 +246,9 @@ fig.show()
 
 Learn more about `px`, `px.scatter_3d`, and `px.scatter_matrix` here:
 
-* [https://plotly.com/python/plotly-express/](plotly-express.md)
-* [https://plotly.com/python/3d-scatter-plots/](3d-scatter-plots.md)
-* [https://plotly.com/python/splom/](splom.md)
+* [Plotly express](plotly-express.md)
+* [3D Scatter Plots](3d-scatter-plots.md)
+* [Splom](splom.md)
 
 The following resources offer an in-depth overview of PCA and explained variance:
 

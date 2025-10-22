@@ -135,9 +135,9 @@ fig.show()
 
 Plotly figures:
 
-* [https://plotly.com/python/line-and-scatter/](line-and-scatter.md)
-* [https://plotly.com/python/3d-scatter-plots/](3d-scatter-plots.md)
-* [https://plotly.com/python/splom/](splom.md)
+* [Line and Scatter](line-and-scatter.md)
+* [3D Scatter Plots](3d-scatter-plots.md)
+* [Splom](splom.md)
 
 
 Details about algorithms:

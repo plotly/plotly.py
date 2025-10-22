@@ -155,4 +155,4 @@ To add points and lines see [Carpet Scatter Plots](carpet-scatter.md) or to add 
 
 ### Reference
 
-See [https://plotly.com/python/reference/carpet/](reference/graph_objects/Carpet.md) for more information and chart attribute options!
+See the [full reference for `go.Carpet`](reference/graph_objects/Carpet.md) for more information and chart attribute options!

@@ -290,4 +290,4 @@ fig.show()
 
 ### Reference
 
-See [https://plotly.com/python/reference/sankey](reference/graph_objects/Sankey.md) for more information and options!
+See the [full reference for `go.Sankey`](reference/graph_objects/Sankey.md) for more information and options!

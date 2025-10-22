@@ -493,4 +493,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.line()`](reference/plotly-express.md#plotly.express.line) or [https://plotly.com/python/reference/scatter/](reference/graph_objects/Scatter.md) for more information and chart attribute options!
+See [function reference for `px.line()`](reference/plotly-express.md#plotly.express.line) or the [full reference for `go.Scatter`](reference/graph_objects/Scatter.md) for more information and chart attribute options!

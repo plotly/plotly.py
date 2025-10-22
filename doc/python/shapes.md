@@ -1215,4 +1215,4 @@ fig.show()
 ```
 
 ### Reference
-See [https://plotly.com/python/reference/layout/shapes/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.shapes) for more information and chart attribute options!
+See the [full reference for `go.Layout.shapes`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.shapes) for more information and chart attribute options!

@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make scatter plots on tile maps in Python.
-    display_as: maps
-    language: python
-    layout: base
-    name: Scatter Plots on Tile Maps
-    order: 10
-    page_type: u-guide
-    permalink: python/tile-scatter-maps/
-    redirect_from: python/scattermapbox/
-    thumbnail: thumbnail/scatter-mapbox.jpg
+description: How to make scatter plots on tile maps in Python.
+redirect_from: python/scattermapbox/
 ---
-
 ### Basic example with Plotly Express
 
 Here we show the [Plotly Express](plotly-express.md) function `px.scatter_map` for a scatter plot on a tile map.
@@ -72,7 +40,7 @@ fig.show()
 ```
 Error executing code: The geopandas.dataset has been deprecated and was removed in GeoPandas 1.0. You can get the original 'naturalearth_cities' data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
 Traceback (most recent call last):
-  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 4, in <module>
   File "/Users/daelenia/Desktop/plotly/plotly.py/.venv/lib/python3.12/site-packages/geopandas/datasets/__init__.py", line 18, in get_path
@@ -344,7 +312,7 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 2, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
@@ -388,7 +356,7 @@ fig.show()
 ```
 Error executing code: [Errno 2] No such file or directory: '.mapbox_token'
 Traceback (most recent call last):
-  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 247, in _run_code
+  File "/Users/daelenia/Desktop/plotly/plotly.py/bin/run_markdown.py", line 253, in _run_code
     exec(code, exec_globals)
   File "<string>", line 3, in <module>
 FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
@@ -396,6 +364,6 @@ FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 
 #### Reference
 
-See [function reference for `px.scatter_map`](reference/plotly-express.md#plotly.express.scatter_map) or [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for more information about the attributes available.
+See [function reference for `px.scatter_map`](reference/plotly-express.md#plotly.express.scatter_map) or the [full reference for `go.Scattermap`](reference/graph_objects/Scattermap.md) for more information about the attributes available.
 
-For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](reference/plotly-express.md#plotly.express.scatter_mapbox) or [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).
+For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](reference/plotly-express.md#plotly.express.scatter_mapbox) or the [full reference for `go.Scattermapbox`](reference/graph_objects/Scattermapbox.md).

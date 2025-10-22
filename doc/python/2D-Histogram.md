@@ -237,4 +237,4 @@ fig.show()
 ```
 
 #### Reference
-See [https://plotly.com/python/reference/histogram2d/](reference/graph_objects/Histogram2d.md) for more information and chart attribute options!
+See the [full reference for `go.Histogram2d`](reference/graph_objects/Histogram2d.md) for more information and chart attribute options!

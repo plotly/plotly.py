@@ -168,4 +168,4 @@ fig.show()
 
 #### Reference
 
-See [https://plotly.com/python/reference/bar/](reference/graph_objects/Bar.md) for more information and chart attribute options!
+See the [full reference for `go.Bar`](reference/graph_objects/Bar.md) for more information and chart attribute options!

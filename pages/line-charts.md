@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make line charts in Python with Plotly. Examples on creating
-      and styling line charts in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Line Charts
-    order: 2
-    page_type: example_index
-    permalink: python/line-charts/
-    thumbnail: thumbnail/line-plot.jpg
+description: How to make line charts in Python with Plotly. Examples on creating and
+  styling line charts in Python with Plotly.
 ---
-
 ### Line Plots with plotly.express
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
@@ -557,4 +525,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.line()`](reference/plotly-express.md#plotly.express.line) or [https://plotly.com/python/reference/scatter/](reference/graph_objects/Scatter.md) for more information and chart attribute options!
+See [function reference for `px.line()`](reference/plotly-express.md#plotly.express.line) or the [full reference for `go.Scatter`](reference/graph_objects/Scatter.md) for more information and chart attribute options!

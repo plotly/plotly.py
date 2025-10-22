@@ -251,6 +251,6 @@ fig.show()
 
 #### Reference
 
-See [https://plotly.com/python/reference/scatter/#scatter-line](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.line)
-and [https://plotly.com/python/reference/scatter/#scatter-fill](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.fill)
+See the [full reference for `go.Scatter.line`](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.line)
+and the [full reference for `go.Scatter.fill`](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.fill)
 for more information and attribute options!

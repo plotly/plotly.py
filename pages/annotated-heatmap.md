@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.4
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.11
-  plotly:
-    description: How to make Annotated Heatmaps in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Annotated Heatmaps
-    order: 7
-    page_type: u-guide
-    permalink: python/annotated-heatmap/
-    redirect_from: python/annotated_heatmap/
-    thumbnail: thumbnail/ann_heat.jpg
+description: How to make Annotated Heatmaps in Python with Plotly.
+redirect_from: python/annotated_heatmap/
 ---
-
 ### Annotated Heatmaps with Plotly Express
 
 *New in v5.5*
@@ -275,4 +243,4 @@ fig.show()
 
 #### Reference
 
-For more info on Plotly heatmaps, see: [https://plotly.com/python/reference/heatmap/](reference/graph_objects/Heatmap.md).<br> For more info on using colorscales with Plotly see: [https://plotly.com/python/heatmap-and-contour-colorscales/](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_annotated_heatmap)
+For more info on Plotly heatmaps, see the [full reference for `go.Heatmap`](reference/graph_objects/Heatmap.md).<br> For more info on using colorscales with Plotly see the [full page](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_annotated_heatmap)

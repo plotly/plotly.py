@@ -381,5 +381,5 @@ fig.show()
 
 ### Reference
 
-For additional information and attributes for creating bubble charts in Plotly see: [https://plotly.com/python/bubble-charts/](bubble-charts.md).
-For more documentation on creating animations with Plotly, see [https://plotly.com/python/#animations](plotly-animations.md).
+For additional information and attributes for creating bubble charts in Plotly see the [full page](bubble-charts.md).
+For more documentation on creating animations with Plotly, see [here](plotly-animations.md).

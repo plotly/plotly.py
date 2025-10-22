@@ -200,4 +200,4 @@ fig.show()
 
 ### Reference
 
-See [https://plotly.com/python/reference/layout/geo/](reference/graph_objects/layout-package/Geo.md) for more information and chart attribute options!
+See the [full reference for `go.layout.Geo`](reference/graph_objects/layout-package/Geo.md) for more information and chart attribute options!

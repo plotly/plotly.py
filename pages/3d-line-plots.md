@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.3
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to make 3D Line Plots
-    display_as: 3d_charts
-    language: python
-    layout: base
-    name: 3D Line Plots
-    order: 7
-    page_type: u-guide
-    permalink: python/3d-line-plots/
-    thumbnail: thumbnail/3d-line.jpg
+description: How to make 3D Line Plots
 ---
-
 ### 3D Line plot with Plotly Express
 
 ```python
@@ -124,4 +92,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(line_3d)`](reference/plotly-express.md#plotly.express.line_3d) or [https://plotly.com/python/reference/scatter3d/#scatter3d-marker-line](reference/graph_objects/scatter3d-package/Marker.md#plotly.graph_objects.scatter3d.Marker.line) for more information and chart attribute options!
+See [function reference for `px.(line_3d)`](reference/plotly-express.md#plotly.express.line_3d) or [`go.scatter3d.Marker.line`](reference/graph_objects/scatter3d-package/Marker.md#plotly.graph_objects.scatter3d.Marker.line) for more information and chart attribute options!

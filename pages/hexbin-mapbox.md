@@ -193,4 +193,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '.mapbox_token'
 
 ### Reference
 
-For more info on Plotly maps, see: [https://plotly.com/python/maps/](maps.md).<br> For more info on using colorscales with Plotly see: [https://plotly.com/python/heatmap-and-contour-colorscales/](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](/reference/figure-factory.md#plotly.figure_factory.create_hexbin_mapbox)
+For more info on Plotly maps, see [examples of maps](maps.md).<br> For more info on using colorscales with Plotly see the [colorscales page](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](/reference/figure-factory.md#plotly.figure_factory.create_hexbin_mapbox)

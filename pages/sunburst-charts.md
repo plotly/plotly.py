@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make Sunburst Charts.
-    display_as: basic
-    language: python
-    layout: base
-    name: Sunburst Charts
-    order: 10
-    page_type: u-guide
-    permalink: python/sunburst-charts/
-    thumbnail: thumbnail/sunburst.gif
+description: How to make Sunburst Charts.
 ---
-
 Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. Similar to [Icicle charts](icicle-charts.md) and [Treemaps](treemaps.md), the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. The root starts from the center and children are added to the outer rings.
 
 ### Basic Sunburst Plot with plotly.express
@@ -468,4 +436,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.sunburst()`](reference/plotly-express.md#plotly.express.sunburst) or [https://plotly.com/python/reference/sunburst/](reference/graph_objects/Sunburst.md) for more information and chart attribute options!
+See [function reference for `px.sunburst()`](reference/plotly-express.md#plotly.express.sunburst) or the [full reference for `go.Sunburst`](reference/graph_objects/Sunburst.md) for more information and chart attribute options!

@@ -807,4 +807,4 @@ fig.show()
 
 #### Reference
 
-See [https://plotly.com/python/reference/layout/#layout-legend](/reference/graph_objects/Layout.md#plotly.graph_objects.Layout.legend) for more information!
+See the [full reference for `go.Layout.legend`](/reference/graph_objects/Layout.md#plotly.graph_objects.Layout.legend) for more information!

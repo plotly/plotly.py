@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: How to make Bar Charts in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Bar Charts
-    order: 3
-    page_type: example_index
-    permalink: python/bar-charts/
-    thumbnail: thumbnail/bar.jpg
+description: How to make Bar Charts in Python with Plotly.
 ---
-
 ### Bar chart with Plotly Express
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
@@ -972,4 +940,4 @@ fig.show()
 
 ### Reference
 
-See [function reference for `px.bar()`](reference/plotly-express.md#plotly.express.bar) or [https://plotly.com/python/reference/bar/](reference/graph_objects/Bar.md) for more information and chart attribute options!
+See [function reference for `px.bar()`](reference/plotly-express.md#plotly.express.bar) or the [full reference for `go.Bar`](reference/graph_objects/Bar.md) for more information and chart attribute options!

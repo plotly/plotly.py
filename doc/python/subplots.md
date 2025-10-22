@@ -591,8 +591,8 @@ fig = make_subplots(2, 3, horizontal_spacing=0.1)
 ```
 
 #### Reference
-All of the x-axis properties are found here: [https://plotly.com/python/reference/layout/xaxis/](reference/graph_objects/layout-package/XAxis.md)
-All of the y-axis properties are found here: [https://plotly.com/python/reference/layout/yaxis/](reference/graph_objects/layout-package/YAxis.md)
+All of the x-axis properties are found [here](reference/graph_objects/layout-package/XAxis.md)
+All of the y-axis properties are found [here](reference/graph_objects/layout-package/YAxis.md)
 
 ```python
 from plotly.subplots import make_subplots

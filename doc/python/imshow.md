@@ -453,4 +453,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(imshow)`](reference/plotly-express.md#plotly.express.imshow) or [https://plotly.com/python/reference/image/](reference/graph_objects/Image.md) for more information and chart attribute options!
+See [function reference for `px.(imshow)`](reference/plotly-express.md#plotly.express.imshow) or the [full reference for `go.Image`](reference/graph_objects/Image.md) for more information and chart attribute options!

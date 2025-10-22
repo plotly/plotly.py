@@ -61,7 +61,7 @@ fig.show()
 
 ## Violin Plot with go.Violin
 
-If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Violin` are documented in the reference [https://plotly.com/python/reference/violin/](reference/graph_objects/Violin.md)
+If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Violin` are documented in the reference [for `go.Violin`](reference/graph_objects/Violin.md)
 
 #### Basic Violin Plot
 
@@ -266,4 +266,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.violin()`](reference/plotly-express.md#plotly.express.violin) or [https://plotly.com/python/reference/violin/](reference/graph_objects/Violin.md) for more information and chart attribute options!
+See [function reference for `px.violin()`](reference/plotly-express.md#plotly.express.violin) or the [full reference for `go.Violin`](reference/graph_objects/Violin.md) for more information and chart attribute options!

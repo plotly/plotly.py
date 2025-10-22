@@ -136,4 +136,4 @@ fig.show()
 ```
 
 #### Reference
-For more information on candlestick attributes, see: [https://plotly.com/python/reference/candlestick/](reference/graph_objects/Candlestick.md)
+For more information on candlestick attributes, see the [full reference for `go.Candlestick`](reference/graph_objects/Candlestick.md)

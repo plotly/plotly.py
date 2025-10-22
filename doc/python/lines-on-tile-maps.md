@@ -136,7 +136,7 @@ fig.show()
 #### Reference
 
 See [function reference for `px.line_map`](reference/plotly-express.md#plotly.express.line_map) or
-[https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for more information about the attributes available.
+the [full reference for `go.Scattermap`](reference/graph_objects/Scattermap.md) for more information about the attributes available.
 
 For Mapbox-based tile maps, see [function reference for `px.line_mapbox`](reference/plotly-express.md#plotly.express.line_mapbox) or
-[https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).
+the [full reference for `go.Scattermapbox`](reference/graph_objects/Scattermapbox.md).

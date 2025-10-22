@@ -72,5 +72,5 @@ fig.show()
 ```
 
 ### Reference
-See [https://plotly.com/python/reference/table/](reference/graph_objects/Table.md) for more information regarding chart attributes! <br>
-For examples of Plotly Tables, see: [https://plotly.com/python/table/](table.md)
+See the [full reference for `go.Table`](reference/graph_objects/Table.md) for more information regarding chart attributes! <br>
+For examples of Plotly Tables, see the full page [here](table.md)

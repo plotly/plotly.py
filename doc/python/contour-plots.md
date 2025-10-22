@@ -310,4 +310,4 @@ fig.show()
 ```
 
 #### Reference
-See [https://plotly.com/python/reference/contour/](reference/graph_objects/Contour.md) for more information and chart attribute options!
+See the [full reference for `go.Contour`](reference/graph_objects/Contour.md) for more information and chart attribute options!

@@ -305,9 +305,9 @@ fig.show()
 
 Learn more about `px`, `go.Contour`, and `go.Heatmap` here:
 
-* [https://plotly.com/python/plotly-express/](plotly-express.md)
-* [https://plotly.com/python/heatmaps/](heatmaps.md)
-* [https://plotly.com/python/contour-plots/](contour-plots.md)
+* [Plotly Express](plotly-express.md)
+* [Heatmaps](heatmaps.md)
+* [Contour Plots](contour-plots.md)
 
 This tutorial was inspired by amazing examples from the official scikit-learn docs:
 

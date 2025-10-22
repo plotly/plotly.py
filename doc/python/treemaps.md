@@ -418,4 +418,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.treemap()`](reference/plotly-express.md#plotly.express.treemap) or [https://plotly.com/python/reference/treemap/](reference/graph_objects/Treemap.md) for more information and chart attribute options!
+See [function reference for `px.treemap()`](reference/plotly-express.md#plotly.express.treemap) or the [full reference for `go.Treemap`](reference/graph_objects/Treemap.md) for more information and chart attribute options!

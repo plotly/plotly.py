@@ -142,4 +142,4 @@ IFrame(snippet_url + 'network-graphs', width='100%', height=1200)
 
 
 #### Reference
-See [https://plotly.com/python/reference/scatter/](reference/graph_objects/Scatter.md) for more information and chart attribute options!
+See the [full reference for `go.Scatter`](reference/graph_objects/Scatter.md) for more information and chart attribute options!

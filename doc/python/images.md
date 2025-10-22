@@ -366,4 +366,4 @@ fig.show()
 ```
 
 ### Reference
-See [https://plotly.com/python/reference/layout/images/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.images) for more information and chart attribute options!
+See the [full reference for `go.layout.images`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.images) for more information and chart attribute options!

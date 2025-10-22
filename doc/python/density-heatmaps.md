@@ -84,6 +84,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(density_map)`](reference/plotly-express.md#plotly.express.density_map) or [https://plotly.com/python/reference/densitymap/](reference/graph_objects/Densitymap.md) for available attribute options.
+See [function reference for `px.(density_map)`](reference/plotly-express.md#plotly.express.density_map) or the [full reference for `go.Densitymap`](reference/graph_objects/Densitymap.md) for available attribute options.
 
-For Mapbox-based maps, see [function reference for `px.(density_mapbox)`](reference/plotly-express.md#plotly.express.density_mapbox) or [https://plotly.com/python/reference/densitymapbox/](reference/graph_objects/Densitymapbox.md).
+For Mapbox-based maps, see [function reference for `px.(density_mapbox)`](reference/plotly-express.md#plotly.express.density_mapbox) or the [full reference for `go.Densitymapbox`](reference/graph_objects/Densitymapbox.md).

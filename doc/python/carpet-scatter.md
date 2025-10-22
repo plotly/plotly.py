@@ -152,4 +152,4 @@ fig.show()
 ### Reference
 
 
-See [https://plotly.com/python/reference/scattercarpet/](reference/graph_objects/Scattercarpet.md) for more information and chart attribute options!
+See the [full reference for `go.Carpet Scatter`](reference/graph_objects/Scattercarpet.md) for more information and chart attribute options!
