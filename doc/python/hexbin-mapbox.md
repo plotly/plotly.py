@@ -37,16 +37,13 @@ jupyter:
 
 This page details the use of a [figure factory](/python/figure-factories/). For more examples with Choropleth maps, see [this page](/python/choropleth-maps/).
 
-In order to use mapbox styles that require a mapbox token, set the token with `plotly.express`. You can also use styles that do not require a mapbox token. See more information on [this page](/python/mapbox-layers/).
-
 ```python
 import plotly.figure_factory as ff
 import plotly.express as px
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.9, labels={"color": "Point Count"},
 )
@@ -60,10 +57,9 @@ fig.show()
 import plotly.figure_factory as ff
 import plotly.express as px
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.5, labels={"color": "Point Count"},
     min_count=1,
@@ -77,10 +73,9 @@ fig.show()
 import plotly.figure_factory as ff
 import plotly.express as px
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.5, labels={"color": "Point Count"},
     min_count=1, color_continuous_scale="Viridis",
@@ -97,10 +92,9 @@ import plotly.figure_factory as ff
 import plotly.express as px
 import numpy as np
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.9, labels={"color": "Average Peak Hour"},
     color="peak_hour", agg_func=np.mean, color_continuous_scale="Icefire", range_color=[0,23]
@@ -115,10 +109,9 @@ import plotly.figure_factory as ff
 import plotly.express as px
 import numpy as np
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
     nx_hexagon=10, opacity=0.9, labels={"color": "Summed Car.Hours"},
     color="car_hours", agg_func=np.sum, color_continuous_scale="Magma"
@@ -133,7 +126,6 @@ import plotly.figure_factory as ff
 import plotly.express as px
 import numpy as np
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 np.random.seed(0)
 
 N = 500
@@ -150,7 +142,7 @@ frame = np.concatenate([
     np.ones(N, int) * i for i in range(n_frames)
 ])
 
-fig = ff.create_hexbin_mapbox(
+fig = ff.create_hexbin_map(
     lat=lat, lon=lon, nx_hexagon=15, animation_frame=frame,
     color_continuous_scale="Cividis", labels={"color": "Point Count", "frame": "Period"},
     opacity=0.5, min_count=1,
