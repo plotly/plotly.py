@@ -30,7 +30,9 @@ def _getBoundsZoomLevel(lon_min, lon_max, lat_min, lat_max, mapDim):
     Source: https://stackoverflow.com/questions/6048975/google-maps-v3-how-to-calculate-the-zoom-level-for-a-given-bounds
     """
 
-    scale = 2  # adjustment to reflect MapBox base tiles are 512x512 vs. Google's 256x256
+    scale = (
+        2  # adjustment to reflect MapBox base tiles are 512x512 vs. Google's 256x256
+    )
     WORLD_DIM = {"height": 256 * scale, "width": 256 * scale}
     ZOOM_MAX = 18
 
@@ -293,11 +295,7 @@ def _compute_wgs84_hexbin(
             {"x1": centers[:, 0], "x2": centers[:, 1]},
             native_namespace=native_namespace,
         )
-        .select(
-            hexagons_ids=nw.concat_str(
-                [nw.col("x1"), nw.col("x2")], separator=","
-            )
-        )
+        .select(hexagons_ids=nw.concat_str([nw.col("x1"), nw.col("x2")], separator=","))
         .get_column("hexagons_ids")
     )
 
@@ -425,9 +423,7 @@ def create_hexbin_map(
             lon=df.get_column(args["lon"]).to_numpy(),
             lat_range=lat_range,
             lon_range=lon_range,
-            color=df.get_column(args["color"]).to_numpy()
-            if args["color"]
-            else None,
+            color=df.get_column(args["color"]).to_numpy() if args["color"] else None,
             nx=nx_hexagon,
             agg_func=agg_func,
             min_count=min_count,
@@ -444,9 +440,9 @@ def create_hexbin_map(
             )
         )
 
-    agg_data_frame = nw.concat(
-        agg_data_frame_list, how="vertical"
-    ).with_columns(color=nw.col("color").cast(nw.Int64))
+    agg_data_frame = nw.concat(agg_data_frame_list, how="vertical").with_columns(
+        color=nw.col("color").cast(nw.Int64)
+    )
 
     if range_color is None:
         range_color = [
@@ -460,9 +456,7 @@ def create_hexbin_map(
         locations="locations",
         color="color",
         hover_data={"color": True, "locations": False, "frame": False},
-        animation_frame=(
-            "frame" if args["animation_frame"] is not None else None
-        ),
+        animation_frame=("frame" if args["animation_frame"] is not None else None),
         color_discrete_sequence=color_discrete_sequence,
         color_discrete_map=color_discrete_map,
         labels=labels,
