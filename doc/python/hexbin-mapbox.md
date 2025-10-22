@@ -37,13 +37,10 @@ jupyter:
 
 This page details the use of a [figure factory](/python/figure-factories/). For more examples with Choropleth maps, see [this page](/python/choropleth-maps/).
 
-In order to use mapbox styles that require a mapbox token, set the token with `plotly.express`. You can also use styles that do not require a mapbox token. See more information on [this page](/python/mapbox-layers/).
-
 ```python
 import plotly.figure_factory as ff
 import plotly.express as px
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
 fig = ff.create_hexbin_map(
@@ -60,7 +57,6 @@ fig.show()
 import plotly.figure_factory as ff
 import plotly.express as px
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
 fig = ff.create_hexbin_map(
@@ -77,7 +73,6 @@ fig.show()
 import plotly.figure_factory as ff
 import plotly.express as px
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
 fig = ff.create_hexbin_map(
@@ -97,7 +92,6 @@ import plotly.figure_factory as ff
 import plotly.express as px
 import numpy as np
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
 fig = ff.create_hexbin_map(
@@ -115,7 +109,6 @@ import plotly.figure_factory as ff
 import plotly.express as px
 import numpy as np
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 
 fig = ff.create_hexbin_map(
@@ -133,7 +126,6 @@ import plotly.figure_factory as ff
 import plotly.express as px
 import numpy as np
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 np.random.seed(0)
 
 N = 500
