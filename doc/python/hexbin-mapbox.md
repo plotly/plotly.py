@@ -6,7 +6,7 @@ description: How to make a map with Hexagonal Binning of data in Python with Plo
 
 This page details the use of a [figure factory](figure-factories.md). For more examples with Choropleth maps, see [this page](choropleth-maps.md).
 
-In order to use mapbox styles that require a mapbox token, set the token with `plotly.express`. You can also use styles that do not require a mapbox token. See more information on [this page](/python/mapbox-layers/).
+In order to use mapbox styles that require a mapbox token, set the token with `plotly.express`. You can also use styles that do not require a mapbox token. See more information on [this page](../mapbox-layers/).
 
 ```python
 import plotly.figure_factory as ff
@@ -133,4 +133,4 @@ fig.show()
 
 ### Reference
 
-For more info on Plotly maps, see: [https://plotly.com/python/maps/](maps.md).<br> For more info on using colorscales with Plotly see: [https://plotly.com/python/heatmap-and-contour-colorscales/](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_hexbin_mapbox.html#plotly.figure_factory.create_hexbin_mapbox)
+For more info on Plotly maps, see: [https://plotly.com/python/maps/](maps.md).<br> For more info on using colorscales with Plotly see: [https://plotly.com/python/heatmap-and-contour-colorscales/](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](/reference/figure-factory.md#plotly.figure_factory.create_hexbin_mapbox)

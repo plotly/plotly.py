@@ -16,6 +16,8 @@ plugins:
   - redirects:
       redirect_maps:
           'mapbox-layers.md': 'tile-map-layers.md'
+          'datashader.md': 'performance.md'
+          'webgl-vs-svg.md': 'performance.md'
   #       'plotly-fundamentals.md': 'figure-structure.md'
   #       'basic-charts.md': 'line-and-scatter.md'
   #       'statistical-charts.md': 'error-bars.md'
@@ -249,6 +251,7 @@ nav:
     - Smoothing: smoothing.md
     - LaTeX: LaTeX.md
 - API Reference:
+    - Module Overview: python-api-reference.md
     - plotly.colors: reference/colors.md
     - plotly.data: reference/data.md
     - plotly.express: reference/plotly-express.md

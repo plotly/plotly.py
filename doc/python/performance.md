@@ -144,7 +144,7 @@ In a Jupyter notebook environment that supports magic commands, you can load it 
 
 In the examples below we show that it is possible to represent up to around a million points with WebGL-enabled traces.
 For larger datasets, or for a clearer visualization of the density of points,
-it is also possible to use [datashader](datashader.md).
+it is also possible to use [datashader](../datashader/).
 
 ### WebGL with Plotly Express
 

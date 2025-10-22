@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to create colormaped representations of USA counties by FIPS
-      values in Python.
-    display_as: maps
-    language: python
-    layout: base
-    name: USA County Choropleth Maps
-    order: 11
-    page_type: u-guide
-    permalink: python/county-choropleth/
-    thumbnail: thumbnail/county-choropleth-usa-greybkgd.jpg
+description: How to create colormaped representations of USA counties by FIPS values
+  in Python.
 ---
-
 ### Deprecation warning
 
 
@@ -297,4 +265,4 @@ Also see tile county choropleths made in Python: [https://plotly.com/python/tile
 
 ### Reference
 
-For more info on `ff.create_choropleth()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_choropleth.html)
+For more info on `ff.create_choropleth()`, see the [full function reference](/reference/figure-factory.md#plotly.figure_factory.create_choropleth)

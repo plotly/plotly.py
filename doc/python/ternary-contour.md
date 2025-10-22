@@ -118,4 +118,4 @@ fig.show()
 
 #### Reference
 
-For more info on `ff.create_ternary_contour()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_ternary_contour.html)
+For more info on `ff.create_ternary_contour()`, see the [full function reference](/reference/figure-factory.md#plotly.figure_factory.create_ternary_contour)

@@ -263,7 +263,7 @@ fig.show()
 ### imshow and datashader
 
 Arrays of rasterized values build by datashader can be visualized using
-imshow. See the [plotly and datashader tutorial](datashader.md) for
+imshow. See the [plotly and datashader tutorial](../datashader/) for
 examples on how to use plotly and datashader.
 
 

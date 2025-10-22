@@ -48,7 +48,7 @@ The Plotly Express API in general offers the following features:
 * **A Pandas backend**: the 2D-cartesian plotting functions are available as [a Pandas plotting backend](pandas-backend.md) so you can call them via `df.plot()`.
 * **Trendlines**: `px.scatter` supports [built-in trendlines with accessible model output](linear-fits.md).
 * **Animations**: many PX functions support [simple animation support via the `animation_frame` and `animation_group` arguments](animations.md).
-* **Automatic WebGL switching**: for sufficiently large scatter plots, PX will automatically [use WebGL for hardware-accelerated rendering](webgl-vs-svg.md).
+* **Automatic WebGL switching**: for sufficiently large scatter plots, PX will automatically [use WebGL for hardware-accelerated rendering](../webgl-vs-svg/).
 
 
 ### Plotly Express in Dash

@@ -117,7 +117,7 @@ X- and Y-axes support the `type` attribute, which enables them to represent [con
 
 The following trace types are compatible with 2d-cartesian subplots via the `xaxis` and `yaxis` attributes:
 
-* scatter-like trace types: [`scatter`](line-and-scatter.md) and [`scattergl`](webgl-vs-svg.md), which can be used to draw [scatter plots](line-and-scatter.md), [line plots and curves](line-charts.md), [time-series plots](time-series.md), [bubble charts](bubble-charts.md), [dot plots](dot-plots.md) and [filled areas](filled-area-plots.md) and also support [error bars](error-bars.md)
+* scatter-like trace types: [`scatter`](line-and-scatter.md) and [`scattergl`](../webgl-vs-svg/), which can be used to draw [scatter plots](line-and-scatter.md), [line plots and curves](line-charts.md), [time-series plots](time-series.md), [bubble charts](bubble-charts.md), [dot plots](dot-plots.md) and [filled areas](filled-area-plots.md) and also support [error bars](error-bars.md)
 * [`bar`](bar-charts.md), [`funnel`](funnel-charts.md), [`waterfall`](waterfall-charts.md): bar-like trace types which can also be used to draw [timelines and Gantt charts](gantt.md)
 * [`histogram`](histograms.md): an *aggregating* bar-like trace type
 * [`box`](box-plots.md) and [`violin`](box-plots.md): 1-dimensional distribution-like trace types
@@ -136,7 +136,7 @@ The following trace types are compatible with 3D subplots via the `scene` attrib
 * [`scatter3d`](3d-scatter-plots.md), which can be used to draw [individual markers](3d-scatter-plots.md), [3d bubble charts](3d-bubble-charts.md) and [lines and curves](3d-line-plots.md)
 * [`surface`](3d-surface-plots.md) and [`mesh`](3d-mesh.md): 3d surface trace types
 * [`cone`](cone-plot.md) and [`streamtube`](streamtube-plot.md): 3d vector field trace types
-* [`volume`](3d-volume-plots.md) and [`isosurface`](3d-isosurface-plots.md): 3d volume trace types
+* [`volume`](3d-volume.md) and [`isosurface`](3d-isosurface-plots.md): 3d volume trace types
 
 The following trace types are compatible with polar subplots via the `polar` attribute:
 

@@ -101,7 +101,7 @@ fig.show()
 
 The earlier examples using `px.line_map` and `go.Scattermap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to draw lines on tile-based maps. There are also traces that use [Mapbox](https://docs.mapbox.com): `px.line_mapbox` and `go.Scattermapbox`
 
-To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](../mapbox-layers/) documentation for more information.
 
 To draw a line on your map, you either can use [`px.line_mapbox`](reference/plotly-express.md#plotly.express.line_mapbox) in Plotly Express, or [`Scattermapbox`](reference/graph_objects/Scattermapbox.md) traces. Below we show you how to draw a line on Mapbox using Plotly Express.
 

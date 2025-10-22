@@ -59,7 +59,7 @@
 {% if not page.url.startswith('reference/') and 
 not page.url.endswith(('basic-charts/', 'plotly-fundamentals/', 'statistical-charts/',
 'scientific-charts/', 'financial-charts/', 'maps/', 'ai-ml/', 'bio/', '3d-charts/', 'subplot-charts/',
-'chart-events/', 'plotly-animations/', 'advanced-opt/', 'controls/')) %}
+'chart-events/', 'plotly-animations/', 'advanced-opt/', 'controls/', 'python-api-reference/')) %}
     <h2>What About Dash?</h2>
     <p><a href="https://dash.plotly.com/">Dash</a> is an open-source framework for building analytical applications,
         with no Javascript required, and it is tightly integrated with the Plotly graphing library.</p>
@@ -83,7 +83,8 @@ app.layout = html.Div([
 app.run(debug=True, use_reloader=False)  # Turn off reloader if inside Jupyter</code></pre>
 {% endif %}
 
-{% if not page.url.startswith('reference/') %}
+{% if not page.url.startswith('reference/') and 
+not page.url.endswith(('python-api-reference/')) %}
 <p><a class="bottom-dash-img"
              href="https://dash.plotly.com/tutorial?utm_medium=graphing_libraries&utm_content=python_footer&_gl=1*3jyro3*_gcl_au*MTU5NjgzODk0NC4xNzU2OTk2NTI5*_ga*MTI3ODM0MzI1Mi4xNzQ3NzUxOTA5*_ga_6G7EE0JNSC*czE3NTg1NzAzMDgkbzI2JGcxJHQxNzU4NTcwOTg1JGo1MSRsMCRoMA.."><img
                  src="https://plotly.github.io/documentation/all_static/images/plotly-studio.png" alt="Dash your way to interactive web apps"
