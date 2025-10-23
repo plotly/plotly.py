@@ -2,7 +2,7 @@
 
 <div class="grid cards" markdown>
 
--   [![](https://images.plot.ly/plotly-documentation/thumbnail/mapbox-layers.png)](migrate-to-maplibre.md)
+-   [![](https://images.plot.ly/plotly-documentation/thumbnail/mapbox-layers.png)](mapbox-to-maplibre.md)
 
     **MapLibre Migration**
 
