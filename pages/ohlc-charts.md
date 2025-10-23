@@ -25,7 +25,7 @@ jupyter:
 
 The [OHLC](https://en.wikipedia.org/wiki/Open-high-low-close_chart) chart (for open, high, low and close) is a style of financial chart describing open, high, low and close values for a given `x` coordinate (most likely time). The tip of the lines represent the `low` and `high` values and the horizontal segments represent the `open` and `close` values. Sample points where the close value is higher (lower) then the open value are called increasing (decreasing). By default, increasing items are drawn in green whereas decreasing are drawn in red.
 
-See also [Candlestick Charts](candlestick-charts.md) and [other financial charts](https://plotly.com/python/#financial-charts).
+See also [Candlestick Charts](candlestick-charts.md) and [other financial charts](financial-charts.md).
 
 #### Simple OHLC Chart with Pandas
 

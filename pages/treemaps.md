@@ -264,8 +264,8 @@ fig.show()
 There are three different ways to change the color of the sectors in Treemap:
 
 1.  [marker.colors](reference/graph_objects/treemap-package/Marker.md#plotly.graph_objects.treemap.Marker.colors), 
-2. [colorway](https://plotly.com/python/reference/treemap/#treemap-colorway), 
-3. [colorscale](https://plotly.com/python/reference/treemap/#treemap-colorscale). The following examples show how to use each of them.
+2. [colorway](/reference/graph_objects/Treemap.md#treemap-colorway), 
+3. [colorscale](/reference/graph_objects/Treemap.md#treemap-colorscale). The following examples show how to use each of them.
 
 ```python
 import plotly.graph_objects as go

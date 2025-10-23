@@ -18,17 +18,7 @@ plugins:
           'mapbox-layers.md': 'tile-map-layers.md'
           'datashader.md': 'performance.md'
           'webgl-vs-svg.md': 'performance.md'
-  #       'plotly-fundamentals.md': 'figure-structure.md'
-  #       'basic-charts.md': 'line-and-scatter.md'
-  #       'statistical-charts.md': 'error-bars.md'
-  #       'scientific-charts.md': 'contour-plots.md'
-  #       'financial-charts.md': 'time-series.md'
-  #       'maps.md': 'migrate-to-maplibre.md'
-  #       'ai-ml.md': 'ml-regression.md'
-  #       'bio.md': 'bio-volcano-plot.md'
-  #       '3d-charts.md': '3d-axes.md'
-  #       'subplot-charts.md': 'mixed-subplots.md'
-  #       'mapbox-layers.md': 'tile-map-layers.md'
+          'filled_area_on_mapbox.md' : 'filled-area-tile-maps.md'
   # - gen-files:
   #     scripts:
   #       - bin/generate_graph_objects_docs.py
