@@ -335,3 +335,28 @@ article {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Dark mode styling */
+
+[data-md-color-scheme="slate"] .--footer-column h6 {
+    color: #a0aaba !important;
+}
+
+
+[data-md-color-scheme="slate"] .--footer-column ul a {
+    color: #a0aaba;
+}
+
+[data-md-color-scheme="slate"] .--footer-meta a {
+    color: #a0aaba;
+}
+
+[data-md-color-scheme="slate"] .--copyright {
+    color: #a0aaba;
+}
+
+[data-md-color-scheme="slate"] .subscribe-text {
+    color: #a0aaba;
+}
+
+
