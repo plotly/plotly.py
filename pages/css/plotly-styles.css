@@ -327,3 +327,11 @@ article {
         color: white !important;
     }
 }
+
+/* Page styling */
+
+.mapbox-img img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

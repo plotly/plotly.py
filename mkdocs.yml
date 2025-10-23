@@ -179,7 +179,7 @@ nav:
     - Bullet Charts: bullet-charts.md
   - Maps:
     - Overview: maps.md
-    - MapLibre Migration: migrate-to-maplibre.md
+    - MapLibre Migration: mapbox-to-maplibre.md
     - Tile Choropleth Maps: tile-county-choropleth.md
     - Lines on Tile Maps: lines-on-tile-maps.md
     - Filled Area on Tile Maps: filled-area-tile-maps.md
