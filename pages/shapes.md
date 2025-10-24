@@ -39,7 +39,7 @@ As a general rule, there are two ways to add shapes (lines or polygons) to figur
 1. Trace types in the `scatter` family (e.g. `scatter`, `scatter3d`, `scattergeo` etc) can be drawn with `mode="lines"` and optionally support a `fill="self"` attribute, and so can be used to draw open or closed shapes on figures.
 2. Standalone lines, ellipses and rectangles can be added to figures using `fig.add_shape()`, and they can be positioned absolutely within the figure, or they can be positioned relative to the axes of 2d cartesian subplots i.e. in data coordinates.
 
-*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
+**Note:** there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 The differences between these two approaches are that:
 
@@ -300,7 +300,7 @@ fig.show()
 
 #### Highlighting Time Series Regions with Rectangle Shapes
 
-*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
+**Note** there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 
 ```python

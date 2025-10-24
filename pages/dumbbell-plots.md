@@ -118,7 +118,9 @@ fig.show()
 
 ## Dumbbell Plot with Arrow Markers
 
-*Note: The `arrow`, `angleref`, and `standoff` properties used on the `marker` in this example are new in 5.11*
+!!! note
+
+    The `arrow`, `angleref`, and `standoff` properties used on the `marker` in this example are new in 5.11
 
 In this example, we add arrow markers to the plot. The first trace adds the lines connecting the data points and arrow markers.
 The second trace adds circle markers. On the first trace, we use `standoff=8` to position the arrow marker back from the data point.

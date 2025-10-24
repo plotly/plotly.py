@@ -372,7 +372,9 @@ fig.show()
 
 If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
-*Note: animated transitions are currently not implemented when `uniformtext` is used.*
+!!! note
+
+    Animated transitions are currently not implemented when `uniformtext` is used.
 
 ```python
 import plotly.graph_objects as go
