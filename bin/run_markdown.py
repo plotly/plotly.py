@@ -9,6 +9,7 @@ from contextlib import redirect_stdout, redirect_stderr
 import io
 from pathlib import Path
 import plotly.graph_objects as go
+import plotly.io as pio
 import re
 import sys
 import traceback
@@ -74,6 +75,15 @@ def _contains_latex(code):
 def _capture_plotly_show(fig, counter, result, output_dir, stem, mathjax_option):
     """Saves HTML figures."""
     # Save HTML and get the content for embedding
+    html_filename = f"{stem}_{counter}.html"
+    html_path = output_dir / html_filename
+    fig.write_html(html_path, include_plotlyjs="cdn", include_mathjax=mathjax_option)
+    html_content = fig.to_html(include_plotlyjs="cdn", include_mathjax=mathjax_option, div_id=f"plotly-div-{counter}", full_html=False)
+    result["html_files"].append(html_filename)
+    result.setdefault("html_content", []).append(html_content)
+
+def _capture_pio_show(fig, counter, result, output_dir, stem, mathjax_option):
+    fig = go.Figure(fig)
     html_filename = f"{stem}_{counter}.html"
     html_path = output_dir / html_filename
     fig.write_html(html_path, include_plotlyjs="cdn", include_mathjax=mathjax_option)
@@ -248,9 +258,21 @@ def _run_code(code, output_dir, figure_counter, stem, exec_globals):
                 figure_counter += 1
                 if stem is not None:
                     _capture_plotly_show(self, figure_counter, result, output_dir, stem, mathjax_option)
+            
+            def patched_pio_show(self, *args, **kwargs):
+                nonlocal figure_counter
+                figure_counter += 1
+                if stem is not None:
+                    _capture_pio_show(self, figure_counter, result, output_dir, stem, mathjax_option)
+
+            original_pio_show = pio.show  
+            pio.show = patched_pio_show
             original_show = go.Figure.show
             go.Figure.show = patched_show
+
             exec(code, exec_globals)
+
+            pio.show = original_pio_show
             go.Figure.show = original_show
 
     except Exception as e:
