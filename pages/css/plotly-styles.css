@@ -384,3 +384,8 @@ article {
 .edit-btn a span {
     margin-left: 10px;
 }
+
+.edit-btn .icon {
+    display: flex;
+    align-items: center;
+}
