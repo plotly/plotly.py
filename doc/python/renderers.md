@@ -48,7 +48,9 @@ Additional contexts are supported by choosing a compatible renderer including th
 
 Next, we will show how to configure the default renderer.  After that, we will describe all of the built-in renderers and discuss why you might choose to use each one.
 
-> Note: The `renderers` framework is a generalization of the `plotly.offline.iplot` and `plotly.offline.plot` functions that were the recommended way to display figures prior to `plotly.py` version 4.  These functions have been reimplemented using the `renderers` framework and are still supported for backward compatibility, but they will not be discussed here.
+!!! note
+
+    The `renderers` framework is a generalization of the `plotly.offline.iplot` and `plotly.offline.plot` functions that were the recommended way to display figures prior to `plotly.py` version 4.  These functions have been reimplemented using the `renderers` framework and are still supported for backward compatibility, but they will not be discussed here.
 
 
 #### Setting The Default Renderer
@@ -61,7 +63,9 @@ pio.renderers
 
 The default renderer that you see when you display `pio.renderers` might be different than what is shown here.  This is because `plotly.py` attempts to autodetect an appropriate renderer at startup.  You can change the default renderer by assigning the name of an available renderer to the `pio.renderers.default` property.  For example, to switch to the `'browser'` renderer, which opens figures in a tab of the default web browser, you would run the following.
 
-> Note: Default renderers persist for the duration of a single session, but they do not persist across sessions. If you are working in an `IPython` kernel, this means that default renderers will persist for the life of the kernel, but they will not persist across kernel restarts.
+!!! note
+
+    Default renderers persist for the duration of a single session, but they do not persist across sessions. If you are working in an `IPython` kernel, this means that default renderers will persist for the life of the kernel, but they will not persist across kernel restarts.
 
 ```python
 import plotly.io as pio
@@ -93,7 +97,9 @@ This renderer is intended for use in the classic [Jupyter Notebook](https://jupy
 
 This renderer is a good choice for notebooks that will be exported to HTML files (Either using [nbconvert](https://nbconvert.readthedocs.io/en/latest/) or the "Download as HTML" menu action) because the exported HTML files will work without an Internet connection.
 
-> Note: Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an Internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
+!!! note
+
+    Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an Internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
 
 ###### `notebook_connected`
 This renderer is the same as `notebook` renderer, except the plotly.js JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an Internet connection is required in order to display figures that are rendered this way.

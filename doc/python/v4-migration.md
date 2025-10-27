@@ -180,7 +180,9 @@ When the `print_grid` argument to `make_subplots` is set to `True`, a text repre
 #### New `row_heights` argument to replace `row_width`
 The legacy argument for specifying the relative height of subplot rows was called `row_width`. A new `row_heights` argument has been introduced for this purpose.
 
-> Note: Although it is not mentioned in the docstring for `plotly.subplots.make_subplots`, the legacy `row_width` argument, with the legacy behavior, is still available in version 4.
+!!! note
+
+    Although it is not mentioned in the docstring for `plotly.subplots.make_subplots`, the legacy `row_width` argument, with the legacy behavior, is still available in version 4.
 
 In addition to having a more consistent name, values specified to the new `row_heights` argument properly honor the `start_cell` argument.  With the legacy `row_width` argument, the list of heights was always interpreted from the bottom row to the top row, even if `start_cell=="top-left"`. With the new `row_heights` argument, the list of heights is interpreted from top to bottom if `start_cell=="top-left"` and from bottom to top if `start_cell=="bottom-left"`.
 

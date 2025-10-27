@@ -37,7 +37,9 @@ jupyter:
 
 The Plotly Python library comes pre-loaded with several themes that you can get started using right away, and it also provides support for creating and registering your own themes.
 
-> Note on terminology: Theming generally refers to the process of defining default styles for visual elements. Themes in plotly are implemented using objects called templates. Templates are slightly more general than traditional themes because in addition to defining default styles, templates can pre-populate a figure with visual elements like annotations, shapes, images, and more. In the documentation we will refer to the overall process of defining default styles as theming, and when in comes to the plotly API we will talk about how themes are implemented using templates.
+!!! note
+
+    On terminology: Theming generally refers to the process of defining default styles for visual elements. Themes in plotly are implemented using objects called templates. Templates are slightly more general than traditional themes because in addition to defining default styles, templates can pre-populate a figure with visual elements like annotations, shapes, images, and more. In the documentation we will refer to the overall process of defining default styles as theming, and when in comes to the plotly API we will talk about how themes are implemented using templates.
 
 ### Using built-in themes
 
@@ -127,7 +129,9 @@ If a theme is not provided to a Plotly Express function or to a graph object fig
 
 Here is an example of changing to default theme to `"plotly_white"` and then constructing a scatter plot with Plotly Express without providing a template.
 
-> Note: Default themes persist for the duration of a single session, but they do not persist across sessions. If you are working in an IPython kernel, this means that default themes will persist for the life of the kernel, but they will not persist across kernel restarts.
+!!! note
+
+    Default themes persist for the duration of a single session, but they do not persist across sessions. If you are working in an IPython kernel, this means that default themes will persist for the life of the kernel, but they will not persist across kernel restarts.
 
 ```python
 import plotly.io as pio
@@ -183,7 +187,9 @@ fig.show()
 <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
         <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>                <div id="plotly-div-16" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("plotly-div-16")) {                    Plotly.newPlot(                        "plotly-div-16",                        [],                        {"template":{"data":{"scatter":[{"type":"scatter"}]},"layout":{"title":{"font":{"family":"Rockwell","size":24}}}},"title":{"text":"Figure Title"}},                        {"responsive": true}                    )                };            </script>        </div>
 
-> Note: this example uses magic underscore notation to write `go.Layout(title=dict(font=dict(...)))` as `go.Layout(title_font=dict(...))`
+!!! note
+
+    This example uses magic underscore notation to write `go.Layout(title=dict(font=dict(...)))` as `go.Layout(title_font=dict(...))`
 
 #### The template data property
 
@@ -365,7 +371,9 @@ fig.show()
 <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
         <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>                <div id="plotly-div-22" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("plotly-div-22")) {                    Plotly.newPlot(                        "plotly-div-22",                        [],                        {"template":{"layout":{"annotations":[{"font":{"color":"black","size":100},"name":"draft watermark","opacity":0.1,"showarrow":false,"text":"DRAFT","textangle":-30,"x":0.5,"xref":"paper","y":0.5,"yref":"paper"}]}}},                        {"responsive": true}                    )                };            </script>        </div>
 
-> Note: this example uses magic underscore notation to write `go.layout.Template(layout=dict(annotations=[...]))` as ``go.layout.Template(layout_annotations=[...])`
+!!! note
+
+    This example uses magic underscore notation to write `go.layout.Template(layout=dict(annotations=[...]))` as ``go.layout.Template(layout_annotations=[...])`
 
 It is also possible to set your own custom template as the default so that you do not need to pass it by name when constructing graph object figures or calling Plotly Express functions.
 
@@ -513,7 +521,9 @@ pio.templates.default = "draft"
 ...
 ```
 
-> Note: In order for the import to succeed, the `my_themes.py` file must be on Python's module search path. See https://docs.python.org/3/tutorial/modules.html#the-module-search-path for more information.
+!!! note
+
+    In order for the import to succeed, the `my_themes.py` file must be on Python's module search path. See https://docs.python.org/3/tutorial/modules.html#the-module-search-path for more information.
 
 <!-- #endregion -->
 
