@@ -360,3 +360,17 @@ article {
 }
 
 
+/* Table styling */
+.md-typeset table {
+  table-layout: fixed;   
+  width: 100%;           
+}
+
+/* Allow wrapping inside table cells */
+.md-typeset td,
+.md-typeset th {
+  white-space: normal;   
+  word-break: break-word; 
+  overflow-wrap: anywhere;
+}
+
