@@ -224,6 +224,5 @@ The fact that legend items are linked to traces means that when using [discrete 
 
 Traces which support [continuous color](colorscales.md) can also be associated with color axes in the layout via the `coloraxis` attribute. Multiple traces can be linked to the same color axis. Color axes have a legend-like component called color bars. Alternatively, color axes can be configured within the trace itself.
 
-```python
 
-```
+

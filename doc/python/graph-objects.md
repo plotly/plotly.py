@@ -74,6 +74,5 @@ fig.update_yaxes(title_text="Number Eaten")
 fig.show()
 ```
 
-```python
 
-```
+

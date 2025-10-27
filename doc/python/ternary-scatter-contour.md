@@ -118,6 +118,5 @@ fig.update_layout(title = 'Ternary Contour Plot')
 fig.show()
 ```
 
-```python
 
-```
+

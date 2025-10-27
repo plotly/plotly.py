@@ -138,6 +138,5 @@ fig.show()
 ### Reference
 See [https://plotly.com/python/reference/indicator/](reference/graph_objects/Indicator.md) for more information and chart attribute options!
 
-```python
 
-```
+
