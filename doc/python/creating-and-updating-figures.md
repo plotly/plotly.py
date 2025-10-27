@@ -123,7 +123,9 @@ IFrame(snippet_url + 'figure-structure', width='100%', height=1200)
 
 This section summarizes several ways to create new graph object figures with the `plotly.py` graphing library.
 
-> The *recommended way* to create figures and populate them is to use [Plotly Express](plotly-express.md) but this page documents various other options for completeness
+!!! note
+
+    The *recommended way* to create figures and populate them is to use [Plotly Express](plotly-express.md) but this page documents various other options for completeness
 
 
 #### Plotly Express

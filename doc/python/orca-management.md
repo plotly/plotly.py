@@ -2,7 +2,9 @@
 description: This section covers the low-level details of how plotly.py uses orca
   to perform static image generation.
 ---
-> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](static-image-export.md) for details on using Kaleido for static image generation.
+!!! note
+
+    Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](static-image-export.md) for details on using Kaleido for static image generation.
 
 ### Overview
 This section covers the lower-level details of how plotly.py can use orca to perform static image generation.

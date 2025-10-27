@@ -16,7 +16,9 @@ If your figure is created with a `px.scatter_map`, `px_scatter_mapbox`, `px.line
 
 Geo maps are outline-based maps. If your figure is created with a `px.scatter_geo`, `px.line_geo` or `px.choropleth` function or otherwise contains one or more traces of type `go.Scattergeo` or `go.Choropleth`, the `layout.geo` object in your figure contains configuration information for the map itself.
 
-> This page documents tile-based maps, and the [Geo map documentation](map-configuration.md) describes how to configure outline-based maps.
+!!! note
+
+    This page documents tile-based maps, and the [Geo map documentation](map-configuration.md) describes how to configure outline-based maps.
 
 ## Tile Map Renderers
 
@@ -84,7 +86,9 @@ fig.show()
 
 If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set `layout.map.style` to `"white-bg"` and to use `layout.map.layers` with `below` to specify a custom base map.
 
-> If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
+!!! note
+
+    If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
 
 #### Base Tiles from the USGS: no token needed
 
@@ -190,7 +194,9 @@ fig.show()
 <!-- #region -->
 ### Mapbox
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
+!!! note
+
+    Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 #### How Layers Work in Mapbox Tile Maps
 
@@ -242,7 +248,9 @@ fig.show()
 
 If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set `layout.mapbox.style` to `"white-bg"` and to use `layout.mapbox.layers` with `below` to specify a custom base map.
 
-> If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
+!!! note
+
+    If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
 
 #### Base Tiles from the USGS: no token needed
 

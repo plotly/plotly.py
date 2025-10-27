@@ -73,7 +73,9 @@ fig.show()
 
 If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values.
 
-**Note**: for best results, ensure that the first `path` element is a single root node. In the examples below we are creating a dummy column containing identical values for each row to achieve this.
+!!! note
+
+    For best results, ensure that the first `path` element is a single root node. In the examples below we are creating a dummy column containing identical values for each row to achieve this.
 
 ```python
 import plotly.express as px

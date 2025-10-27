@@ -187,7 +187,9 @@ img.show()
 
 ## Specify Image Export Engine
 
-> The `engine` parameter, as well as Orca support, is deprecated in Plotly.py 6.2.0 and will be removed after September 2025.
+!!! note
+
+    The `engine` parameter, as well as Orca support, is deprecated in Plotly.py 6.2.0 and will be removed after September 2025.
 
 If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 

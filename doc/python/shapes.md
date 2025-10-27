@@ -255,7 +255,9 @@ fig.show()
 
 #### Highlighting Time Series Regions with Rectangle Shapes
 
-**Note** there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
+!!! note
+
+    There are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 
 ```python

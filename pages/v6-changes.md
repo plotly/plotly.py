@@ -57,7 +57,9 @@ pip install anywidget
 
 Plotly.py now takes advantage of recent changes in how Plotly.js handles typed arrays for improved performance. See the [performance page](performance.md) for more details.
 
-> If you are using Plotly.py 6 or later with Dash Design Kit, you may need to upgrade your Dash Design Kit version. See the [Dash Design Kit Compatibility section on the performance page](performance.md#dash-design-kit-compatibility) for more details.
+!!! note
+
+    If you are using Plotly.py 6 or later with Dash Design Kit, you may need to upgrade your Dash Design Kit version. See the [Dash Design Kit Compatibility section on the performance page](performance.md#dash-design-kit-compatibility) for more details.
 
 
 ## Dataframe Support

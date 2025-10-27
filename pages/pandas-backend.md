@@ -67,7 +67,9 @@ fig.show()
 
 ### A Note on API Compatibility
 
-> The Plotly plotting backend for Pandas is *not intended* to be a drop-in replacement for the default; it does not implement all or even most of the same keyword arguments, such as `subplots=True` etc.
+!!! note
+
+    The Plotly plotting backend for Pandas is *not intended* to be a drop-in replacement for the default; it does not implement all or even most of the same keyword arguments, such as `subplots=True` etc.
 
 The Plotly plotting backend for Pandas is a more convenient way to invoke certain [Plotly Express](plotly-express.md) functions by chaining a `.plot()` call without having to import Plotly Express directly. Plotly Express, as of version 4.8 with [wide-form data support](wide-form.md) in addition to its robust long-form data support, implements behaviour for the `x` and `y` keywords that are very similar to the `matplotlib` backend.
 

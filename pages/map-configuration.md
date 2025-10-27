@@ -45,7 +45,9 @@ If your figure is created with a `px.scatter_map`, `px.scatter_mapbox`, `px.line
 
 Geo maps are outline-based maps. If your figure is created with a `px.scatter_geo`, `px.line_geo` or `px.choropleth` function or otherwise contains one or more traces of type `go.Scattergeo` or `go.Choropleth`, the `layout.geo` object in your figure contains configuration information for the map itself.
 
-> This page documents **Geo outline-based maps**, and the [Tile Map Layers documentation](tile-map-layers.md) describes how to configure tile-based maps.
+!!! note
+
+    This page documents **Geo outline-based maps**, and the [Tile Map Layers documentation](tile-map-layers.md) describes how to configure tile-based maps.
 
 **Note:** Plotly Express cannot create empty figures, so the examples below mostly create an "empty" map using `fig = go.Figure(go.Scattergeo())`. That said, every configuration option here is equally applicable to non-empty maps created with the Plotly Express `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions.
 

@@ -42,7 +42,9 @@ In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is represe
 
 Alternatives to histogram plots for visualizing distributions include [violin plots](violin.md), [box plots](box-plots.md), [ECDF plots](ecdf-plots.md) and [strip charts](strip-charts.md).
 
-> If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
+!!! note
+
+    If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
 bar, go to the [Bar Chart tutorial](bar-charts.md).
 
 ## Histograms with Plotly Express

@@ -15,7 +15,9 @@ Making choropleth maps requires two main types of input:
 
 The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `color` argument of `px.choropleth_map` (`z` if using `graph_objects`), in the same order as the IDs are passed into the `location` argument.
 
-**Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
+!!! note
+
+    The `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
 
 #### GeoJSON with `feature.id`
 
@@ -192,7 +194,9 @@ fig.show()
 
 ### Mapbox Maps
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
+!!! note
+
+    Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 The earlier examples using `px.choropleth_map` and `go.Choroplethmap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to create tile-based choropleth maps. There are also choropleth traces that use [Mapbox](https://docs.mapbox.com): `px.choropleth_mapbox` and `go.Choroplethmapbox`
 

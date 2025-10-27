@@ -51,7 +51,9 @@ Plotly supports two different types of colored-tile heatmaps:
 The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as supported [DataFrame objects](px-arguments.md#supported-dataframes).
 
 
-> For more examples using `px.imshow`, including examples of faceting and animations, as well as full-color image display, see the [the `imshow` documentation page](imshow.md).
+!!! note
+
+    For more examples using `px.imshow`, including examples of faceting and animations, as well as full-color image display, see the [the `imshow` documentation page](imshow.md).
 <!-- #endregion -->
 
 ```python

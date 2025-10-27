@@ -62,7 +62,9 @@ fig.show()
 
 It is also possible to have multiple bars on the same horizontal line, say by resource:
 
-*Note*: When setting `color` to the same value as `y`, `autorange` should not be set to `reverse`, so as to list the value of the Y axis in the same order as the legend entries.
+!!! note
+
+    When setting `color` to the same value as `y`, `autorange` should not be set to `reverse`, so as to list the value of the Y axis in the same order as the legend entries.
 
 ```python
 import plotly.express as px

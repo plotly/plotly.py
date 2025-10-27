@@ -17,7 +17,9 @@ $ conda uninstall plotly
 $ pip uninstall plotly
 ```
 
-> Problems can also arise if you have a file named `plotly.py` in the same directory as the code you are executing.
+!!! note
+
+    Problems can also arise if you have a file named `plotly.py` in the same directory as the code you are executing.
 
 ### Dash Problems
 
@@ -48,7 +50,9 @@ The situation is similar for environments like Nteract and Streamlit: in these e
 
 ### Orca Problems
 
-> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](static-image-export.md) for details on using Kaleido for static image generation.
+!!! note
+
+    Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](static-image-export.md) for details on using Kaleido for static image generation.
 
 If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
 
