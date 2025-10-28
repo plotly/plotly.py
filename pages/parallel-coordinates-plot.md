@@ -1,40 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernel_info:
-    name: python2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to make parallel coordinates plots in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Parallel Coordinates Plot
-    order: 9
-    page_type: u-guide
-    permalink: python/parallel-coordinates-plot/
-    thumbnail: thumbnail/parcoords.jpg
+description: How to make parallel coordinates plots in Python with Plotly.
 ---
-
 ## Parallel Coordinates plot with Plotly Express
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). In a parallel coordinates plot with `px.parallel_coordinates`, each row of the DataFrame is represented by a polyline mark which traverses a set of parallel axes, one for each of the dimensions. For other representations of multivariate data, also see [parallel categories](parallel-categories-diagram.md), [radar charts](radar-chart.md) and [scatterplot matrix (SPLOM)](splom.md).
@@ -218,4 +184,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(parallel_coordinates)`](reference/plotly-express.md#plotly.express.parallel_coordinates) or [https://plotly.com/python/reference/parcoords/](reference/graph_objects/Parcoords.md) for more information and chart attribute options!
+See [function reference for `px.(parallel_coordinates)`](reference/plotly-express.md#plotly.express.parallel_coordinates) or the [full reference for `go.Parcoords`](reference/graph_objects/Parcoords.md) for more information and chart attribute options!

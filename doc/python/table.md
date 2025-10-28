@@ -209,4 +209,4 @@ fig.show()
 ```
 
 #### Reference
-For more information on tables and table attributes see: [https://plotly.com/python/reference/table/](reference/graph_objects/Table.md).
+For more information on tables and table attributes see: the [full reference for `go.Table`](reference/graph_objects/Table.md).

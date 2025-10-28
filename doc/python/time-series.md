@@ -311,7 +311,7 @@ fig.show()
 
 ### Time Series With Range Slider
 
-A range slider is a small subplot-like area below a plot which allows users to pan and zoom the X-axis while maintaining an overview of the chart. Check out the reference for more options: [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeslider](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeslider)
+A range slider is a small subplot-like area below a plot which allows users to pan and zoom the X-axis while maintaining an overview of the chart. Check out the reference for more options: the [full reference for `go.layout.XAxis.rangeslider`](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeslider)
 
 ```python
 import plotly.express as px
@@ -327,7 +327,7 @@ fig.show()
 
 ### Time Series with Range Selector Buttons
 
-Range selector buttons are special controls that work well with time series and range sliders, and allow users to easily set the range of the x-axis. Check out the reference for more options: [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeselector](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeselector)
+Range selector buttons are special controls that work well with time series and range sliders, and allow users to easily set the range of the x-axis. Check out the [reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeselector) for more options.
 
 ```python
 import plotly.express as px
@@ -354,7 +354,7 @@ fig.show()
 
 ### Customizing Tick Label Formatting by Zoom Level
 
-The `tickformatstops` attribute can be used to customize the formatting of tick labels depending on the zoom level. Try zooming in to the chart below and see how the tick label formatting changes. Check out the reference for more options: [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-tickformatstops](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.tickformatstops)
+The `tickformatstops` attribute can be used to customize the formatting of tick labels depending on the zoom level. Try zooming in to the chart below and see how the tick label formatting changes. Check out the [reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.tickformatstops) for more options.
 
 ```python
 import plotly.graph_objects as go
@@ -386,7 +386,7 @@ fig.show()
 
 ### Hiding Weekends and Holidays
 
-The `rangebreaks` attribute available on x- and y-axes of type `date` can be used to hide certain time-periods. In the example below, we show two plots: one in default mode to show gaps in the data, and one where we hide weekends and holidays to show an uninterrupted trading history. Note the smaller gaps between the grid lines for December 21 and January 4, where holidays were removed. Check out the reference for more options: [https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangebreaks](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangebreaks)
+The `rangebreaks` attribute available on x- and y-axes of type `date` can be used to hide certain time-periods. In the example below, we show two plots: one in default mode to show gaps in the data, and one where we hide weekends and holidays to show an uninterrupted trading history. Note the smaller gaps between the grid lines for December 21 and January 4, where holidays were removed. Check out the [reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangebreaks) for more options.
 
 !!! note
 

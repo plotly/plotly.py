@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make an area on tile-based maps in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Filled Area on Tile Maps
-    order: 4
-    page_type: example_index
-    permalink: python/filled-area-tile-maps/
-    redirect_from: python/filled-area-on-mapbox/
-    thumbnail: thumbnail/area.jpg
+description: How to make an area on tile-based maps in Python with Plotly.
+redirect_from: python/filled-area-on-mapbox/
 ---
-
 There are three different ways to show a filled area on a tile-based map:
 
 - Using a [Scattermap](reference/graph_objects/Scattermap.md) trace and setting the `fill` attribute to 'toself'
@@ -174,4 +142,4 @@ fig.show()
 
 #### Reference
 
-See  [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for available attribute options, or for `go.Scattermapbox`, see [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).
+See the [full reference for `go.Scattermap`](reference/graph_objects/Scattermap.md) for available attribute options, or for `go.Scattermapbox`, see the full reference [here](reference/graph_objects/Scattermapbox.md).

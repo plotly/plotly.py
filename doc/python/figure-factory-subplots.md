@@ -180,4 +180,4 @@ fig.show()
 ```
 
 ### Reference
-See [https://plotly.com/python/subplots/](subplots.md) for more information on working with subplots. See [https://plotly.com/python/reference/](/reference/graph_objects/index.md) for more information regarding chart attributes!
+See the [subplots page](subplots.md) for more information on working with subplots. See the [full `plotly graph objects` reference](/reference/graph_objects/index.md) for more information regarding chart attributes!

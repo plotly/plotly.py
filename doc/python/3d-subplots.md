@@ -51,4 +51,4 @@ fig.show()
 ### Reference
 
 
-See [https://plotly.com/python/subplots/](subplots.md) for more information regarding subplots!
+See the [subplots page](subplots.md) for more information regarding subplots!

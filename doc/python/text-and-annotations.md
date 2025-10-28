@@ -894,4 +894,4 @@ fig.show()
 
 #### Reference
 
-See [https://plotly.com/python/reference/layout/annotations/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.annotations) for more information and chart attribute options!
+See the [full reference for `go.Layout.annotations`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.annotations) for more information and chart attribute options!

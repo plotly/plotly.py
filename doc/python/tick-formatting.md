@@ -185,4 +185,4 @@ fig.show()
 ```
 
 ### Reference
-See [https://plotly.com/python/reference/layout/xaxis/](reference/graph_objects/layout-package/XAxis.md) for more information and chart attribute options!
+See the [full reference for `go.layout.XAxis`](reference/graph_objects/layout-package/XAxis.md) for more information and chart attribute options!

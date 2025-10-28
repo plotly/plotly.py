@@ -98,4 +98,4 @@ fig.show()
 ```
 
 #### Reference
-See [https://plotly.com/python/reference/streamtube/](reference/graph_objects/Streamtube.md) for more information and chart attribute options!
+See the [full reference for `go.Streamtube`](reference/graph_objects/Streamtube.md) for more information and chart attribute options!

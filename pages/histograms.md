@@ -1,41 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: How to make Histograms in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Histograms
-    order: 3
-    page_type: example_index
-    permalink: python/histograms/
-    redirect_from:
-    - /python/histogram-tutorial/
-    - /python/histogram/
-    thumbnail: thumbnail/histogram.jpg
+description: How to make Histograms in Python with Plotly.
+redirect_from:
+- /python/histogram-tutorial/
+- /python/histogram/
 ---
-
 <!-- #region -->
 In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in Plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...) which can be used to visualize data on categorical and date axes as well as linear axes.
 
@@ -261,7 +229,7 @@ fig.show()
 
 ## Histograms with go.Histogram
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](graph-objects.md). All of the available histogram options are described in the histogram section of the reference page: [https://plotly.com/python/reference#histogram](reference/graph_objects/Histogram.md).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](graph-objects.md). All of the available histogram options are described in the [histogram section of the reference page](reference/graph_objects/Histogram.md).
 
 ### Basic Histogram
 
@@ -572,4 +540,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.histogram()`](reference/plotly-express.md#plotly.express.histogram) or [https://plotly.com/python/reference/histogram/](reference/graph_objects/Histogram.md) for more information and chart attribute options!
+See [function reference for `px.histogram()`](reference/plotly-express.md#plotly.express.histogram) or the [histogram page](reference/graph_objects/Histogram.md) for more information and chart attribute options!

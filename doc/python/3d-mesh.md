@@ -154,4 +154,4 @@ fig.show()
 ```
 
 ## Reference
-See [https://plotly.com/python/reference/mesh3d/](reference/graph_objects/Mesh3d.md) for more information and chart attribute options!
+See the [full reference for `go.Mesh3d`](reference/graph_objects/Mesh3d.md) for more information and chart attribute options!

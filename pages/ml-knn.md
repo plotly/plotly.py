@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification
-      in Python with Plotly.
-    display_as: ai_ml
-    language: python
-    layout: base
-    name: kNN Classification
-    order: 2
-    page_type: u-guide
-    permalink: python/knn-classification/
-    thumbnail: thumbnail/knn-classification.png
+description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification in
+  Python with Plotly.
 ---
-
 ## Basic binary classification with kNN
 
 This section gets us started with displaying basic binary classification using 2D data. We first show how to display training versus testing data using [various marker styles](marker-style.md), then demonstrate how to evaluate our classifier's performance on the **test split** using a continuous color gradient to indicate the model's predicted score.
@@ -358,9 +326,9 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 
 Learn more about `px`, `go.Contour`, and `go.Heatmap` here:
 
-* [https://plotly.com/python/plotly-express/](plotly-express.md)
-* [https://plotly.com/python/heatmaps/](heatmaps.md)
-* [https://plotly.com/python/contour-plots/](contour-plots.md)
+* [Plotly Express](plotly-express.md)
+* [Heatmaps](heatmaps.md)
+* [Contour Plots](contour-plots.md)
 
 This tutorial was inspired by amazing examples from the official scikit-learn docs:
 

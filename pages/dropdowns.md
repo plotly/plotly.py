@@ -522,4 +522,4 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
 <!-- #endregion -->
 
 ### Reference
-See [https://plotly.com/python/reference/layout/updatemenus/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information about `updatemenu` dropdowns.
+See the [full reference for `go.layout.updatemenus`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information about `updatemenu` dropdowns.

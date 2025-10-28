@@ -277,4 +277,4 @@ fig.show()
 ```
 
 #### Reference
-See [https://plotly.com/python/reference/layout/](reference/graph_objects/Layout.md) for more information!
+See the [full reference for `go.Layout`](reference/graph_objects/Layout.md) for more information!

@@ -297,4 +297,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(line_geo)`](reference/plotly-express.md#plotly.express.line_geo) or [https://plotly.com/python/reference/scattergeo/](reference/graph_objects/Scattergeo.md) for more information and chart attribute options!
+See [function reference for `px.(line_geo)`](reference/plotly-express.md#plotly.express.line_geo) or the [full reference for `go.Scattergeo`](reference/graph_objects/Scattergeo.md) for more information and chart attribute options!

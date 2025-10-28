@@ -217,4 +217,4 @@ fig.show()
 ```
 
 #### Reference
-See [https://plotly.com/python/reference/histogram2dcontour/](reference/graph_objects/Histogram2dContour.md) for more information and chart attribute options!
+See the [full reference for `go.Histogram2dContour`](reference/graph_objects/Histogram2dContour.md) for more information and chart attribute options!

@@ -332,4 +332,4 @@ fig.show()
 
 #### Reference
 
-See [https://plotly.com/python/reference/layout/map/](reference/graph_objects/layout-package/Map.md) for more information and options on Maplibre-based tile maps and [https://plotly.com/python/reference/layout/mapbox/](reference/graph_objects/layout-package/Mapbox.md) for Mapbox-based tile maps.
+See the [full reference for `go.layout.Map`](reference/graph_objects/layout-package/Map.md) for more information and options on Maplibre-based tile maps and ['go.layout.Mapbox'](reference/graph_objects/layout-package/Mapbox.md) for Mapbox-based tile maps.

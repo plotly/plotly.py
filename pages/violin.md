@@ -1,41 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to make violin plots in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Violin Plots
-    order: 10
-    page_type: u-guide
-    permalink: python/violin/
-    redirect_from:
-    - /python/violin-plot/
-    - /python/violin-plots/
-    thumbnail: thumbnail/violin.jpg
+description: How to make violin plots in Python with Plotly.
+redirect_from:
+- /python/violin-plot/
+- /python/violin-plots/
 ---
-
 <!-- #region -->
 ## Violin Plot with Plotly Express
 
@@ -101,7 +69,7 @@ fig.show()
 
 ## Violin Plot with go.Violin
 
-If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Violin` are documented in the reference [https://plotly.com/python/reference/violin/](reference/graph_objects/Violin.md)
+If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Violin` are documented in the reference [for `go.Violin`](reference/graph_objects/Violin.md)
 
 #### Basic Violin Plot
 
@@ -322,4 +290,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.violin()`](reference/plotly-express.md#plotly.express.violin) or [https://plotly.com/python/reference/violin/](reference/graph_objects/Violin.md) for more information and chart attribute options!
+See [function reference for `px.violin()`](reference/plotly-express.md#plotly.express.violin) or the [full reference for `go.Violin`](reference/graph_objects/Violin.md) for more information and chart attribute options!

@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: Interpret the results of your classification using Receiver Operating
-      Characteristics (ROC) and Precision-Recall (PR) Curves in Python with Plotly.
-    display_as: ai_ml
-    language: python
-    layout: base
-    name: ROC and PR Curves
-    order: 3
-    page_type: u-guide
-    permalink: python/roc-and-pr-curves/
-    thumbnail: thumbnail/ml-roc-pr.png
+description: Interpret the results of your classification using Receiver Operating
+  Characteristics (ROC) and Precision-Recall (PR) Curves in Python with Plotly.
 ---
-
 ## Preliminary plots
 
 Before diving into the receiver operating characteristic (ROC) curve, we will look at two plots that will give some context to the thresholds mechanism behind the ROC and PR curves.
@@ -324,6 +292,6 @@ fig.show()
 
 Learn more about `px`, `px.area`, `px.hist`:
 
-* [https://plotly.com/python/histograms/](histograms.md)
-* [https://plotly.com/python/filled-area-plots/](filled-area-plots.md)
-* [https://plotly.com/python/line-charts/](line-charts.md)
+* [Histograms](histograms.md)
+* [Filled Area Plots](filled-area-plots.md)
+* [Line Charts](line-charts.md)

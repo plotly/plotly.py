@@ -249,7 +249,7 @@ fig.layout.template = None
 fig.show()
 ```
 
-Also see tile county choropleths made in Python: [https://plotly.com/python/tile-county-choropleth/](tile-county-choropleth.md)
+Also see [tile county choropleths made in Python](tile-county-choropleth.md)
 
 ### Reference
 

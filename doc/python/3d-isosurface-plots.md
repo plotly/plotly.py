@@ -203,4 +203,4 @@ fig.show()
 ```
 
 #### Reference
-See [https://plotly.com/python/reference/isosurface/](reference/graph_objects/Isosurface.md) for more information and chart attribute options!
+See the [full reference for `go.Isosurface`](reference/graph_objects/Isosurface.md) for more information and chart attribute options!

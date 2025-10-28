@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make Icicle Charts.
-    display_as: basic
-    language: python
-    layout: base
-    name: Icicle Charts
-    order: 17
-    page_type: u-guide
-    permalink: python/icicle-charts/
-    thumbnail: thumbnail/icicle.png
+description: How to make Icicle Charts.
 ---
-
 *New in v5.0*
 
 Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst charts](sunburst-charts.md) and [Treemaps](treemaps.md) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
@@ -612,4 +580,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.icicle()`](reference/plotly-express.md#plotly.express.icicle) or [https://plotly.com/python/reference/icicle/](reference/graph_objects/Icicle.md) for more information and chart attribute options!
+See [function reference for `px.icicle()`](reference/plotly-express.md#plotly.express.icicle) or the [full reference for `go.Icicle`]](reference/graph_objects/Icicle.md) for more information and chart attribute options!

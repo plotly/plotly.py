@@ -97,4 +97,4 @@ fig.show()
 ```
 
 #### Reference
-See [https://plotly.com/python/reference/waterfall/](reference/graph_objects/Waterfall.md) for more information and chart attribute options!
+See the [full reference for `go.Waterfall`](reference/graph_objects/Waterfall.md) for more information and chart attribute options!

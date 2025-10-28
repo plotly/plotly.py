@@ -234,9 +234,9 @@ fig.show()
 
 Learn more about `px`, `px.scatter_3d`, and `px.scatter_matrix` here:
 
-* [https://plotly.com/python/plotly-express/](plotly-express.md)
-* [https://plotly.com/python/3d-scatter-plots/](3d-scatter-plots.md)
-* [https://plotly.com/python/splom/](splom.md)
+* [Plotly express](plotly-express.md)
+* [3D Scatter Plots](3d-scatter-plots.md)
+* [Splom](splom.md)
 
 The following resources offer an in-depth overview of PCA and explained variance:
 

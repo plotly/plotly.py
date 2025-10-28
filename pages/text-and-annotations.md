@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.14
-  plotly:
-    description: How to add text labels and annotations to plots in python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Text and Annotations
-    order: 22
-    permalink: python/text-and-annotations/
-    thumbnail: thumbnail/text-and-annotations.png
+description: How to add text labels and annotations to plots in python.
 ---
-
 ### Adding Text to Figures
 
 As a general rule, there are two ways to add text labels to figures:
@@ -975,4 +944,4 @@ fig.show()
 
 #### Reference
 
-See [https://plotly.com/python/reference/layout/annotations/](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.annotations) for more information and chart attribute options!
+See the [full reference for `go.Layout.annotations`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.annotations) for more information and chart attribute options!

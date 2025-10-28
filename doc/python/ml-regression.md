@@ -519,12 +519,12 @@ fig_box.show()
 
 Learn more about the `px` figures used in this tutorial:
 
-* Plotly Express: [https://plotly.com/python/plotly-express/](plotly-express.md)
-* Vertical Lines: [https://plotly.com/python/shapes/](shapes.md)
-* Heatmaps: [https://plotly.com/python/heatmaps/](heatmaps.md)
-* Box Plots: [https://plotly.com/python/box-plots/](box-plots.md)
-* 3D Scatter: [https://plotly.com/python/3d-scatter-plots/](3d-scatter-plots.md)
-* Surface Plots: [https://plotly.com/python/3d-surface-plots/](3d-surface-plots.md)
+* [Plotly Express](plotly-express.md)
+* [Vertical Lines](shapes.md)
+* [Heatmaps](heatmaps.md)
+* [Box Plots](box-plots.md)
+* [3D Scatter](3d-scatter-plots.md)
+* [Surface Plots](3d-surface-plots.md)
 
 Learn more about the Machine Learning models used in this tutorial:
 

@@ -136,4 +136,4 @@ fig.show()
 ```
 
 #### Reference
-For more information on candlestick attributes, see: [https://plotly.com/python/reference/ohlc/](reference/graph_objects/Ohlc.md)
+For more information on candlestick attributes, see the [full reference for `go.Ohlc`](reference/graph_objects/Ohlc.md)

@@ -259,4 +259,4 @@ fig.show()
 #### Reference
 
 
-See [https://plotly.com/python/reference/layout/scene/#layout-scene-camera](reference/graph_objects/layout-package/scene-package/Camera.md) for more information and chart attribute options!
+See the [full reference for `go.layout.scene.Camera`](reference/graph_objects/layout-package/scene-package/Camera.md) for more information and chart attribute options!

@@ -136,4 +136,4 @@ fig.show()
 
 #### Reference
 
-See  [https://plotly.com/python/reference/scattermap/](reference/graph_objects/Scattermap.md) for available attribute options, or for `go.Scattermapbox`, see [https://plotly.com/python/reference/scattermapbox/](reference/graph_objects/Scattermapbox.md).
+See the [full reference for `go.Scattermap`](reference/graph_objects/Scattermap.md) for available attribute options, or for `go.Scattermapbox`, see the full reference [here](reference/graph_objects/Scattermapbox.md).

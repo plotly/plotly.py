@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.3
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to Control the Camera in your 3D Charts in Python with Plotly.
-    display_as: 3d_charts
-    language: python
-    layout: base
-    name: 3D Camera Controls
-    order: 5
-    permalink: python/3d-camera-controls/
-    thumbnail: thumbnail/3d-camera-controls.jpg
+description: How to Control the Camera in your 3D Charts in Python with Plotly.
 ---
-
 ### How camera controls work
 
 The camera position and direction is determined by three vectors: *up*, *center*, *eye*. Their coordinates refer to the 3-d domain, i.e., `(0, 0, 0)` is always the center of the domain, no matter data values.
@@ -308,4 +277,4 @@ fig.show()
 #### Reference
 
 
-See [https://plotly.com/python/reference/layout/scene/#layout-scene-camera](reference/graph_objects/layout-package/scene-package/Camera.md) for more information and chart attribute options!
+See the [full reference for `go.layout.scene.Camera`](reference/graph_objects/layout-package/scene-package/Camera.md) for more information and chart attribute options!

@@ -998,4 +998,4 @@ fig.show()
 
 #### Reference
 
-See [https://plotly.com/python/reference/layout/xaxis/](reference/graph_objects/layout-package/XAxis.md) and [https://plotly.com/python/reference/layout/yaxis/](reference/graph_objects/layout-package/YAxis.md) for more information and chart attribute options!
+See [full reference for `go.layout.xaxis`](reference/graph_objects/layout-package/XAxis.md) and [go.layout.yaxis`](reference/graph_objects/layout-package/YAxis.md) for more information and chart attribute options!

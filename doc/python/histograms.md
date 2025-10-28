@@ -201,7 +201,7 @@ fig.show()
 
 ## Histograms with go.Histogram
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](graph-objects.md). All of the available histogram options are described in the histogram section of the reference page: [https://plotly.com/python/reference#histogram](reference/graph_objects/Histogram.md).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](graph-objects.md). All of the available histogram options are described in the [histogram section of the reference page](reference/graph_objects/Histogram.md).
 
 ### Basic Histogram
 
@@ -482,4 +482,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.histogram()`](reference/plotly-express.md#plotly.express.histogram) or [https://plotly.com/python/reference/histogram/](reference/graph_objects/Histogram.md) for more information and chart attribute options!
+See [function reference for `px.histogram()`](reference/plotly-express.md#plotly.express.histogram) or the [histogram page](reference/graph_objects/Histogram.md) for more information and chart attribute options!

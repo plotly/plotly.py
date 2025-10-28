@@ -206,7 +206,7 @@ fig.add_trace(
 fig.show()
 ```
 
-See [https://plotly.com/python/reference/scattergl/](reference/graph_objects/Scattergl.md) for more information and chart attribute options!
+See the [full reference for `go.Scattergl`](reference/graph_objects/Scattergl.md) for more information and chart attribute options!
 
 ## Datashader
 

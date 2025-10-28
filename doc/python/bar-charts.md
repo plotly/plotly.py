@@ -874,4 +874,4 @@ fig.show()
 
 ### Reference
 
-See [function reference for `px.bar()`](reference/plotly-express.md#plotly.express.bar) or [https://plotly.com/python/reference/bar/](reference/graph_objects/Bar.md) for more information and chart attribute options!
+See [function reference for `px.bar()`](reference/plotly-express.md#plotly.express.bar) or the [full reference for `go.Bar`](reference/graph_objects/Bar.md) for more information and chart attribute options!

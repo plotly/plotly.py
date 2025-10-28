@@ -213,4 +213,4 @@ fig.show()
 ```
 
 #### Reference
-See [https://plotly.com/python/reference/](/reference/graph_objects/index.md) for more information and attribute options!
+See the [full `plotly graph objects` reference](/reference/graph_objects/index.md) for more information and attribute options!

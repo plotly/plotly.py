@@ -107,4 +107,4 @@ fig.show()
 ```
 
 ### Reference
-See [https://plotly.com/python/reference/](/reference/graph_objects/index.md) for more information and chart attribute options and http://igraph.org/python/ for more information about the igraph package!
+See the [full graph objectsreference](/reference/graph_objects/index.md) for more information and chart attribute options and http://igraph.org/python/ for more information about the igraph package!

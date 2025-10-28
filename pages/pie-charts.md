@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make Pie Charts.
-    display_as: basic
-    language: python
-    layout: base
-    name: Pie Charts
-    order: 4
-    page_type: example_index
-    permalink: python/pie-charts/
-    thumbnail: thumbnail/pie-chart.jpg
+description: How to make Pie Charts.
 ---
-
 A pie chart is a circular statistical chart, which is divided into sectors to illustrate numerical proportion.
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
@@ -385,4 +353,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.pie()`](reference/plotly-express.md#plotly.express.pie) or [https://plotly.com/python/reference/pie/](reference/graph_objects/Pie.md) for more information and chart attribute options!
+See [function reference for `px.pie()`](reference/plotly-express.md#plotly.express.pie) or the [full reference for `go.Pie`](reference/graph_objects/Pie.md) for more information and chart attribute options!
