@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.4
+      jupytext_version: 1.17.3
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.11.10
+    version: 3.9.0
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -91,7 +91,7 @@ wide_df
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -589,7 +589,7 @@ fig.update_layout(
 )
 ```
 
-### Using a scatterplot to wrap long bars into multiple columns 
+### Using a scatterplot to wrap long bars into multiple columns
 
 This bar-style pictogram allows readers to focus on the relative sizes of smaller entities by wrapping the bar for largest entries into multiple columns.  You could make it even more of a pictogram by using fontawesome to replace the square markers we use below with icons like mortar boards for students.
 
@@ -597,25 +597,25 @@ This bar-style pictogram allows readers to focus on the relative sizes of smalle
 import plotly.graph_objects as go
 import pandas as pd
 def pictogram_bar(data, title, icon_size, max_icons_per_column=10, units_per_icon=1, unit_description="", inter_group_spacing=.8,icon_vertical_spacing=0.005):
-   
+
     fig = go.Figure()
     x_start = 1
     tick_locations = []
-    #loop through each group and create a trace with its icons 
+    #loop through each group and create a trace with its icons
     for i, (category, value) in enumerate(data.items()):
         # compute the number of icons to use to represent this category.  Depending on your use case, you might replace round with floor or ceiling.
         icon_count = round(value / units_per_icon)
         # compute the number of columns in which to arrange the icons for this category
         # using a double negative sign to convert a floor(division) operation into a ceiling(division) operation
         num_columns = -(-icon_count // max_icons_per_column)
-        
+
         #create and populate lists of icon coordinates
         x_coordinates, y_coordinates = [], []
         for col in range(num_columns):
             # the number of icons in this column is the lesser of the column height or
             # the number of icons remaining to place
             column_icons = min(max_icons_per_column, icon_count - col * max_icons_per_column)
-            
+
             # Create a one item list containing the x-coordinate of this column.
             # Then add column_icons copies of that coordinate to the list of icon x coordinates using list multiplication.
             # Normalizing the width of each within-category column to 1 simplifies the code.
@@ -634,7 +634,7 @@ def pictogram_bar(data, title, icon_size, max_icons_per_column=10, units_per_ico
             hoverinfo="text",
             text=[f"{category}: {value}" for _ in range(len(x_coordinates))]
         ))
-        
+
         # Add an annotation above the center of each category showing its value
         fig.add_trace(go.Scatter(
             x=[x_start + (num_columns - 1) / 2],  # Compute the location of the center
@@ -661,7 +661,7 @@ def pictogram_bar(data, title, icon_size, max_icons_per_column=10, units_per_ico
         ),
         yaxis=dict(
             title=f"Each icon represents {units_per_icon:,g} {unit_description}",
-            # The y-axis goes above the top icon to make room for the annotations.  
+            # The y-axis goes above the top icon to make room for the annotations.
             # We set tick values so the axis labeling does not go above the top icon.
             # If you choose a value of max_icons_per_column that is not a multiple of 5, consider changing this.
             tickvals=list(range(0,max_icons_per_column+1,5)),
@@ -669,10 +669,10 @@ def pictogram_bar(data, title, icon_size, max_icons_per_column=10, units_per_ico
             zeroline=False,
         ),
         # We have already got all the labeling we need so we suppress the legend.
-        showlegend=False,  
+        showlegend=False,
         height=700,
         # The x-coordinates scale to fill available space, so adjusting the width of the image is a good way to adjust spacing between columns.
-        width=(len(data) * 150 + 50)  
+        width=(len(data) * 150 + 50)
     )
     fig.show()
 
