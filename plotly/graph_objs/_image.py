@@ -521,7 +521,8 @@ class Image(_BaseTraceType):
     def source(self):
         """
         Specifies the data URI of the image to be visualized. The URI
-        consists of "data:image/[<media subtype>][;base64],<data>"
+        consists of "data:image/[<media
+        subtype\\>][;base64\\],<data\\>"
 
         The 'source' property is a string and must be specified as:
           - A string
@@ -1021,7 +1022,7 @@ class Image(_BaseTraceType):
         source
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
-            subtype>][;base64],<data>"
+            subtype\\>][;base64\\],<data\\>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
@@ -1294,7 +1295,7 @@ class Image(_BaseTraceType):
         source
             Specifies the data URI of the image to be visualized.
             The URI consists of "data:image/[<media
-            subtype>][;base64],<data>"
+            subtype\\>][;base64\\],<data\\>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
