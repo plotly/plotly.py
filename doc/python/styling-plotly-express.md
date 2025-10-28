@@ -6,7 +6,9 @@ description: Figures made with Plotly Express can be customized in all the same 
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md). Every Plotly Express function returns [a `plotly.graph_objects.Figure` object](graph-objects.md) whose `data` and `layout` has been pre-populated according to the provided arguments.
 
-> You can style and customize figures made with Plotly Express _in all the same ways_ as you can style figures made more manually by explicitly assembling `graph_objects` into a figure.
+!!! note
+
+    You can style and customize figures made with Plotly Express _in all the same ways_ as you can style figures made more manually by explicitly assembling `graph_objects` into a figure.
 
 More specifically, here are the 4 ways you can style and customize figures made with Plotly Express:
 

@@ -327,3 +327,65 @@ article {
         color: white !important;
     }
 }
+
+/* Page styling */
+
+.mapbox-img img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Dark mode styling */
+
+[data-md-color-scheme="slate"] .--footer-column h6 {
+    color: #a0aaba !important;
+}
+
+
+[data-md-color-scheme="slate"] .--footer-column ul a {
+    color: #a0aaba;
+}
+
+[data-md-color-scheme="slate"] .--footer-meta a {
+    color: #a0aaba;
+}
+
+[data-md-color-scheme="slate"] .--copyright {
+    color: #a0aaba;
+}
+
+[data-md-color-scheme="slate"] .subscribe-text {
+    color: #a0aaba;
+}
+
+
+/* Table styling */
+.md-typeset table {
+  table-layout: fixed;   
+  width: 100%;           
+}
+
+/* Allow wrapping inside table cells */
+.md-typeset td,
+.md-typeset th {
+  white-space: normal;   
+  word-break: break-word; 
+  overflow-wrap: anywhere;
+}
+
+/* Edit button styling */
+
+.edit-btn a{
+    display: flex;
+    justify-content: right;
+}
+
+.edit-btn a span {
+    margin-left: 10px;
+}
+
+.edit-btn .icon {
+    display: flex;
+    align-items: center;
+}

@@ -8,9 +8,10 @@ As a general rule, there are two ways to add shapes (lines or polygons) to figur
 1. Trace types in the `scatter` family (e.g. `scatter`, `scatter3d`, `scattergeo` etc) can be drawn with `mode="lines"` and optionally support a `fill="self"` attribute, and so can be used to draw open or closed shapes on figures.
 2. Standalone lines, ellipses and rectangles can be added to figures using `fig.add_shape()`, and they can be positioned absolutely within the figure, or they can be positioned relative to the axes of 2d cartesian subplots i.e. in data coordinates.
 
-*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
+**Note:** there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 The differences between these two approaches are that:
+
 * Traces can optionally support hover labels and can appear in legends.
 * Shapes can be positioned absolutely or relative to data coordinates in 2d cartesian subplots only.
 * Traces cannot be positioned absolutely but can be positioned relative to date coordinates in any subplot type.
@@ -20,7 +21,7 @@ The differences between these two approaches are that:
 
 ### Shape-drawing with Scatter traces
 
-There are two ways to draw filled shapes: scatter traces and [layout.shapes](reference/graph_objects/layout-package/Shape.md#plotly.graph_objects.layout.Shape.type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](polar-chart.md#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](reference/graph_objects/layout-package/Shape.md#plotly.graph_objects.layout.Shape.type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](polar-chart.md#categorical-polar-chart), scattergeo, [scattermapbox](../filled_area_on_mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
 
 ```python
 import plotly.graph_objects as go
@@ -254,7 +255,9 @@ fig.show()
 
 #### Highlighting Time Series Regions with Rectangle Shapes
 
-*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
+!!! note
+
+    There are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 
 ```python

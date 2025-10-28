@@ -37,7 +37,7 @@ jupyter:
 <!-- #region -->
 ### Version Problems
 
-In order to follow the examples in this documentation site, you should have the latest version of `plotly` installed (5.x), as detailed in the [Getting Started](getting-started.md) guide. This documentation (under https://plotly.com/python) is compatible with `plotly` version 4.x but *not* with version 3.x, for which the documentation is available under https://plotly.com/python/v3. In general you must also have the correct version of the underlying Plotly.js rendering engine installed, and the way to do that depends on the environment in which you are rendering figures: Dash, Jupyter Lab or Classic Notebook, VSCode etc. Read on for details about troubleshooting `plotly` in these environments.
+In order to follow the examples in this documentation site, you should have the latest version of `plotly` installed (5.x), as detailed in the [Getting Started](getting-started.md) guide. This documentation (under [https://plotly.com/python](index.md)) is compatible with `plotly` version 4.x but *not* with version 3.x, for which the documentation is available under https://plotly.com/python/v3. In general you must also have the correct version of the underlying Plotly.js rendering engine installed, and the way to do that depends on the environment in which you are rendering figures: Dash, Jupyter Lab or Classic Notebook, VSCode etc. Read on for details about troubleshooting `plotly` in these environments.
 
 ### Import Problems
 
@@ -50,7 +50,9 @@ $ conda uninstall plotly
 $ pip uninstall plotly
 ```
 
-> Problems can also arise if you have a file named `plotly.py` in the same directory as the code you are executing.
+!!! note
+
+    Problems can also arise if you have a file named `plotly.py` in the same directory as the code you are executing.
 
 ### Dash Problems
 
@@ -81,7 +83,9 @@ The situation is similar for environments like Nteract and Streamlit: in these e
 
 ### Orca Problems
 
-> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](static-image-export.md) for details on using Kaleido for static image generation.
+!!! note
+
+    Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](static-image-export.md) for details on using Kaleido for static image generation.
 
 If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
 

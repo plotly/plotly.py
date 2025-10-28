@@ -61,3 +61,5 @@ fig.show()
 #### Reference
 See the [full reference for `go.Scattersmith`](reference/graph_objects/Scattersmith.md) and [`go.Layout.smith`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.smith) for more information and chart attribute options!
 
+
+

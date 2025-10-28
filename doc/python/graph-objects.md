@@ -7,7 +7,9 @@ The figures created, manipulated and rendered by the plotly Python library are [
 
 The primary classes defined in the `plotly.graph_objects` module are [`Figure`](reference/graph_objects/Figure.md) and an [`ipywidgets`-compatible variant called `FigureWidget`](figurewidget.md), which both represent entire figures. Instances of these classes have many convenience methods for Pythonically [manipulating their attributes](creating-and-updating-figures.md) (e.g. `.update_layout()` or `.add_trace()`, which all accept ["magic underscore" notation](creating-and-updating-figures.md#magic-underscore-notation)) as well as [rendering them](renderers.md) (e.g. `.show()`) and [exporting them to various formats](static-image-export.md) (e.g. `.to_json()` or `.write_image()` or `.write_html()`).
 
-> Note: the functions in [Plotly Express](plotly-express.md), which is the recommended entry-point into the `plotly` library, are all built on top of graph objects, and all return instances of `plotly.graph_objects.Figure`.
+!!! note
+
+    The functions in [Plotly Express](plotly-express.md), which is the recommended entry-point into the `plotly` library, are all built on top of graph objects, and all return instances of `plotly.graph_objects.Figure`.
 
 Every non-leaf attribute of a figure is represented by an instance of a class in the `plotly.graph_objects` hierarchy. For example, a figure `fig` can have an attribute `layout.margin`, which contains attributes `t`, `l`, `b` and `r` which are leaves of the tree: they have no children. The field at `fig.layout` is an object of class [`plotly.graph_objects.Layout`](reference/graph_objects/Layout.md) and `fig.layout.margin` is an object of class `plotly.graph_objects.layout.Margin` which represents the `margin` node, and it has fields `t`, `l`, `b` and `r`, containing the values of the respective leaf-nodes. Note that specifying all of these values can be done without creating intermediate objects using ["magic underscore" notation](creating-and-updating-figures.md#magic-underscore-notation): `go.Figure(layout_margin=dict(t=10, b=10, r=10, l=10))`.
 
@@ -72,6 +74,5 @@ fig.update_yaxes(title_text="Number Eaten")
 fig.show()
 ```
 
-```python
 
-```
+

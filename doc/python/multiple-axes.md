@@ -6,7 +6,9 @@ description: How to make a graph with multiple axes (dual y-axis plots, plots wi
 
 [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-> *Note*: At this time, Plotly Express does not support multiple Y axes on a single figure. To make such a figure, use the [`make_subplots()`](subplots.md) function in conjunction with [graph objects](graph-objects.md) as documented below.
+!!! note
+
+    At this time, Plotly Express does not support multiple Y axes on a single figure. To make such a figure, use the [`make_subplots()`](subplots.md) function in conjunction with [graph objects](graph-objects.md) as documented below.
 
 
 #### Two Y Axes

@@ -18,17 +18,7 @@ plugins:
           'mapbox-layers.md': 'tile-map-layers.md'
           'datashader.md': 'performance.md'
           'webgl-vs-svg.md': 'performance.md'
-  #       'plotly-fundamentals.md': 'figure-structure.md'
-  #       'basic-charts.md': 'line-and-scatter.md'
-  #       'statistical-charts.md': 'error-bars.md'
-  #       'scientific-charts.md': 'contour-plots.md'
-  #       'financial-charts.md': 'time-series.md'
-  #       'maps.md': 'migrate-to-maplibre.md'
-  #       'ai-ml.md': 'ml-regression.md'
-  #       'bio.md': 'bio-volcano-plot.md'
-  #       '3d-charts.md': '3d-axes.md'
-  #       'subplot-charts.md': 'mixed-subplots.md'
-  #       'mapbox-layers.md': 'tile-map-layers.md'
+          'filled_area_on_mapbox.md' : 'filled-area-tile-maps.md'
   # - gen-files:
   #     scripts:
   #       - bin/generate_graph_objects_docs.py
@@ -53,6 +43,10 @@ plugins:
 extra_css:
   - css/plotly-styles.css
   - https://docs.plotly.com/css/plotly-style.css
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
 - Home: index.md
@@ -179,7 +173,7 @@ nav:
     - Bullet Charts: bullet-charts.md
   - Maps:
     - Overview: maps.md
-    - MapLibre Migration: migrate-to-maplibre.md
+    - MapLibre Migration: mapbox-to-maplibre.md
     - Tile Choropleth Maps: tile-county-choropleth.md
     - Lines on Tile Maps: lines-on-tile-maps.md
     - Filled Area on Tile Maps: filled-area-tile-maps.md
@@ -412,6 +406,7 @@ theme:
 markdown_extensions:
 - def_list
 - attr_list
+- admonition
 - markdown_include.include:
     base_path: docs
 - footnotes
@@ -421,8 +416,11 @@ markdown_extensions:
     pygments_lang_class: true
 - pymdownx.inlinehilite
 - pymdownx.snippets
+- pymdownx.details
 - pymdownx.superfences
 - md_in_html
+- pymdownx.arithmatex:
+      generic: true
 
 exclude_docs: |
   *~

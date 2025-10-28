@@ -8,6 +8,7 @@ As a general rule, there are two ways to add text labels to figures:
 2. Standalone text annotations can be added to figures using `fig.add_annotation()`, with or without arrows, and they can be positioned absolutely within the figure, or they can be positioned relative to the axes of 2d or 3d cartesian subplots i.e. in data coordinates.
 
 The differences between these two approaches are that:
+
 * Traces can optionally support hover labels and can appear in legends.
 * Text annotations can be positioned absolutely or relative to data coordinates in 2d/3d cartesian subplots only.
 * Traces cannot be positioned absolutely but can be positioned relative to data coordinates in any subplot type.

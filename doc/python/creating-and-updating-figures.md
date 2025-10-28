@@ -6,7 +6,9 @@ redirect_from:
 ---
 The `plotly` Python package exists to create, manipulate and [render](renderers.md) graphical figures (i.e. charts, plots, maps and diagrams) represented by [data structures also referred to as figures](figure-structure.md). The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
 
-> Note: the recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](plotly-express.md), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the structure of the data structure that these objects represent for users who wish to understand more about how to customize them, or assemble them from other `plotly.graph_objects` components.
+!!! note
+
+    The recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](plotly-express.md), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the structure of the data structure that these objects represent for users who wish to understand more about how to customize them, or assemble them from other `plotly.graph_objects` components.
 
 ### Figures As Dictionaries
 
@@ -30,7 +32,9 @@ pio.show(fig)
 
 The [`plotly.graph_objects` module provides an automatically-generated hierarchy of classes](reference/graph_objects/index.md) called ["graph objects"](graph-objects.md) that may be used to represent figures, with a top-level class `plotly.graph_objects.Figure`.
 
-> Note that the *recommended alternative* to working with Python dictionaries is to [create entire figures at once using Plotly Express](plotly-express.md) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page, wherever possible, rather than to assemble figures bottom-up from underlying graph objects. See ["When to use Graph Objects"](graph-objects.md).
+!!! note
+
+    The *recommended alternative* to working with Python dictionaries is to [create entire figures at once using Plotly Express](plotly-express.md) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page, wherever possible, rather than to assemble figures bottom-up from underlying graph objects. See ["When to use Graph Objects"](graph-objects.md).
 
 Graph objects have several benefits compared to plain Python dictionaries.
 
@@ -119,7 +123,9 @@ IFrame(snippet_url + 'figure-structure', width='100%', height=1200)
 
 This section summarizes several ways to create new graph object figures with the `plotly.py` graphing library.
 
-> The *recommended way* to create figures and populate them is to use [Plotly Express](plotly-express.md) but this page documents various other options for completeness
+!!! note
+
+    The *recommended way* to create figures and populate them is to use [Plotly Express](plotly-express.md) but this page documents various other options for completeness
 
 
 #### Plotly Express
@@ -321,7 +327,9 @@ fig.show()
 
 Magic underscore notation is supported throughout the graph objects API, and it can often significantly simplify operations involving deeply nested properties.
 
-> Note: When you see keyword arguments with underscores passed to a graph object constructor or method, it is almost always safe to assume that it is an application of magic underscore notation. We have to say "almost always" rather than "always" because there are a few property names in the plotly schema that contain underscores: error_x, error_y, error_z, copy_xstyle, copy_ystyle, copy_zstyle, paper_bgcolor, and plot_bgcolor. These were added back in the early days of the library (2012-2013) before we standardized on banning underscores from property names.
+!!! note
+
+    When you see keyword arguments with underscores passed to a graph object constructor or method, it is almost always safe to assume that it is an application of magic underscore notation. We have to say "almost always" rather than "always" because there are a few property names in the plotly schema that contain underscores: error_x, error_y, error_z, copy_xstyle, copy_ystyle, copy_zstyle, paper_bgcolor, and plot_bgcolor. These were added back in the early days of the library (2012-2013) before we standardized on banning underscores from property names.
 
 #### Updating Figure Layouts
 

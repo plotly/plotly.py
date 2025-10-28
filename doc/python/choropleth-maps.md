@@ -20,7 +20,9 @@ Making choropleth maps requires two main types of input:
 
 The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `color` argument of `px.choropleth` (`z` if using `graph_objects`), in the same order as the IDs are passed into the `location` argument.
 
-**Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
+!!! note
+
+    The `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
 
 ### Choropleth Map with plotly.express
 
@@ -52,7 +54,9 @@ df.head()
 
 ### Choropleth map using GeoJSON
 
-**Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](map-configuration.md) for more information on scopes.
+!!! note
+
+    In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](map-configuration.md) for more information on scopes.
 
 ```python
 from urllib.request import urlopen
@@ -94,7 +98,9 @@ print(geojson["features"][0]["properties"])
 
 To use them together, we set `locations` to `district` and `featureidkey` to `"properties.district"`. The `color` is set to the number of votes by the candidate named Bergeron.
 
-**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](map-configuration.md) for more information on projections and bounds.
+!!! note
+
+    In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](map-configuration.md) for more information on projections and bounds.
 
 ```python
 import plotly.express as px
@@ -135,7 +141,9 @@ IFrame(snippet_url + 'choropleth-maps', width='100%', height=1200)
 
 In addition to [continuous colors](colorscales.md), we can [discretely-color](discrete-color.md) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
 
-**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](map-configuration.md) for more information on projections and bounds.
+!!! note
+
+    In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](map-configuration.md) for more information on projections and bounds.
 
 ```python
 import plotly.express as px

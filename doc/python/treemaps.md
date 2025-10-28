@@ -37,7 +37,9 @@ fig.show()
 
 If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values.
 
-**Note**: for best results, ensure that the first `path` element is a single root node. In the examples below we are creating a dummy column containing identical values for each row to achieve this.
+!!! note
+
+    For best results, ensure that the first `path` element is a single root node. In the examples below we are creating a dummy column containing identical values for each row to achieve this.
 
 ```python
 import plotly.express as px
@@ -197,8 +199,8 @@ fig.show()
 There are three different ways to change the color of the sectors in Treemap:
 
 1.  [marker.colors](reference/graph_objects/treemap-package/Marker.md#plotly.graph_objects.treemap.Marker.colors), 
-2. [colorway](https://plotly.com/python/reference/treemap/#treemap-colorway), 
-3. [colorscale](https://plotly.com/python/reference/treemap/#treemap-colorscale). The following examples show how to use each of them.
+2. [colorway](/reference/graph_objects/Treemap.md#treemap-colorway), 
+3. [colorscale](/reference/graph_objects/Treemap.md#treemap-colorscale). The following examples show how to use each of them.
 
 ```python
 import plotly.graph_objects as go
@@ -372,7 +374,9 @@ fig.show()
 
 If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
-*Note: animated transitions are currently not implemented when `uniformtext` is used.*
+!!! note
+
+    Animated transitions are currently not implemented when `uniformtext` is used.
 
 ```python
 import plotly.graph_objects as go

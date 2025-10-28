@@ -138,6 +138,5 @@ fig.show()
 ### Reference
 See the [full reference for `go.Indicator`](reference/graph_objects/Indicator.md) for more information and chart attribute options!
 
-```python
 
-```
+

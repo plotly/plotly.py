@@ -57,7 +57,9 @@ print(fig)
 
 Now let's look at the "full" figure after Plotly.js has computed the default values for every necessary attribute.
 
-> Heads-up: the full figure is quite long and intimidating, and this page is meant to help demystify things so **please read on**!
+!!! note
+
+    Heads-up: the full figure is quite long and intimidating, and this page is meant to help demystify things so **please read on**!
 
 Please also note that the `.full_figure_for_development()` function is really meant for interactive learning and debugging, rather than production use, hence its name and the warning it produces by default, which you can see below, and which can be suppressed with `warn=False`.
 

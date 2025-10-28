@@ -388,7 +388,9 @@ fig.show()
 
 The `rangebreaks` attribute available on x- and y-axes of type `date` can be used to hide certain time-periods. In the example below, we show two plots: one in default mode to show gaps in the data, and one where we hide weekends and holidays to show an uninterrupted trading history. Note the smaller gaps between the grid lines for December 21 and January 4, where holidays were removed. Check out the [reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangebreaks) for more options.
 
-> Note: a known limitation of this feature is that it does not support `scattergl` traces. When using this feature on plots with more than a few hundred data points with `px.scatter` or `px.line` or `px.area`, you may need to pass in `render_mode="svg"` to ensure that the underlying trace type is `scatter` and not `scattergl`.
+!!! note
+
+    A known limitation of this feature is that it does not support `scattergl` traces. When using this feature on plots with more than a few hundred data points with `px.scatter` or `px.line` or `px.area`, you may need to pass in `render_mode="svg"` to ensure that the underlying trace type is `scatter` and not `scattergl`.
 
 ```python
 import plotly.express as px

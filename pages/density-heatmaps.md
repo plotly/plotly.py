@@ -42,7 +42,9 @@ fig.show()
 <!-- #region -->
 ### Mapbox Maps
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
+!!! note
+
+    Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 The earlier examples using `px.density_map` and `go.Densitymap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24. These trace types are now the recommended way to make tile-based density heatmaps. There are also traces that use [Mapbox](https://docs.mapbox.com): `density_mapbox` and `go.Densitymapbox`.
 

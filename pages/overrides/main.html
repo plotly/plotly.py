@@ -19,8 +19,8 @@
         </div>
 
         <div class="nav-bottom-image">
-            <a href="https://plotly.com/webinars/data-apps-publishing-playbook/?utm_medium=graphing_libraries&utm_campaign=plotly_publishing_playbook&utm_content=sidebar" target="_blank">
-                <img src="https://images.prismic.io/plotly-marketing-website-2/aNMW2J5xUNkB1CWg_PlotlyPublishingPlaybook.jpg?auto=format,compress" alt="plotly-studio-banner" type="image/avif">
+            <a href="https://plotly.com/webinars/state-of-vibe-analytics/?utm_medium=graphing_libraries&utm_campaign=state_of_vibe_analytics_webinar&utm_content=sidebar" target="_blank">
+                <img src="https://images.prismic.io/plotly-marketing-website-2/aPu8T7pReVYa3qCu_TheStateofVibeAnalytics_Square.jpg?auto=format,compress" alt="plotly-studio-banner" type="image/avif">
             </a>
         </div>
       </div>
@@ -48,6 +48,36 @@
 {% endblock %}
 
 {% block content %}
+
+
+{% if page.file.src_path != "index.md" and not page.url.startswith('reference/') and 
+not page.url.endswith(('basic-charts/', 'plotly-fundamentals/', 'statistical-charts/',
+'scientific-charts/', 'financial-charts/', 'maps/', 'ai-ml/', 'bio/', '3d-charts/', 'subplot-charts/',
+'chart-events/', 'plotly-animations/', 'advanced-opt/', 'controls/', 'python-api-reference/', 'license/', 'conduct/', 'contributing/')) %}
+{% set filename = page.file.src_path.split('/')[-1] %}
+<div class="edit-btn">
+  <a href="https://github.com/daexs/plotly.py/edit/mkdocs-conversion/pages/{{ filename }}" id="edit-link">
+    <div class="icon">
+      <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+        <path fill="#000000" 
+        d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,
+        7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,
+        15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,
+        15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,
+        11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,
+        10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.19,6.57 13.71,
+        5.55 12.78,5.16C12.35,5 11.9,4.96 11.5,5.07L9.8,3.38L10.59,
+        2.6C11.37,1.81 12.63,1.81 13.41,2.6L21.4,10.59C22.19,
+        11.37 22.19,12.63 21.4,13.41L13.41,21.4C12.63,22.19 11.37,
+        22.19 10.59,21.4L2.6,13.41C1.81,12.63 1.81,11.37 2.6,10.59Z">
+        </path>
+      </svg>
+    </div>
+    <span>Suggest an edit to this page</span>
+  </a>
+</div>
+{% endif %}
+
 <blockquote>
     <p><strong>Plotly Studio:</strong> Transform any dataset into an interactive data application in minutes with AI. <a
             href="https://plotly.com/studio/">Try

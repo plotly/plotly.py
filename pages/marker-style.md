@@ -315,7 +315,9 @@ Each basic symbol is also represented by a number. Adding 100 to that number is 
 
 In the following figure, hover over a symbol to see its name or number. Set the `marker_symbol` attribute equal to that name or number to change the marker symbol in your figure.
 
-> The `arrow-wide` and `arrow` marker symbols are new in 5.11
+!!! note
+
+    The `arrow-wide` and `arrow` marker symbols are new in 5.11
 
 ```python
 import plotly.graph_objects as go

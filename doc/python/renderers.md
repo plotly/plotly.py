@@ -40,7 +40,9 @@ fig = go.Figure(
 fig
 ```
 
-> To be precise, figures will display themselves using the current default renderer when the two following conditions are true. First, the last expression in a cell must evaluate to a figure. Second, `plotly.py` must be running from within an `IPython` kernel.
+!!! note
+
+    To be precise, figures will display themselves using the current default renderer when the two following conditions are true. First, the last expression in a cell must evaluate to a figure. Second, `plotly.py` must be running from within an `IPython` kernel.
 
 **In many contexts, an appropriate renderer will be chosen automatically and you will not need to perform any additional configuration.** These contexts include the classic [Jupyter Notebook](https://jupyter.org/), [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), [Visual Studio Code notebooks](https://code.visualstudio.com/docs/python/jupyter-support), [Google Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb), [Kaggle](https://www.kaggle.com/kernels) notebooks, [Azure](https://notebooks.azure.com/) notebooks, and the [Python interactive shell](https://www.python.org/shell/).
 
@@ -48,7 +50,9 @@ Additional contexts are supported by choosing a compatible renderer including th
 
 Next, we will show how to configure the default renderer.  After that, we will describe all of the built-in renderers and discuss why you might choose to use each one.
 
-> Note: The `renderers` framework is a generalization of the `plotly.offline.iplot` and `plotly.offline.plot` functions that were the recommended way to display figures prior to `plotly.py` version 4.  These functions have been reimplemented using the `renderers` framework and are still supported for backward compatibility, but they will not be discussed here.
+!!! note
+
+    The `renderers` framework is a generalization of the `plotly.offline.iplot` and `plotly.offline.plot` functions that were the recommended way to display figures prior to `plotly.py` version 4.  These functions have been reimplemented using the `renderers` framework and are still supported for backward compatibility, but they will not be discussed here.
 
 
 #### Setting The Default Renderer
@@ -61,7 +65,9 @@ pio.renderers
 
 The default renderer that you see when you display `pio.renderers` might be different than what is shown here.  This is because `plotly.py` attempts to autodetect an appropriate renderer at startup.  You can change the default renderer by assigning the name of an available renderer to the `pio.renderers.default` property.  For example, to switch to the `'browser'` renderer, which opens figures in a tab of the default web browser, you would run the following.
 
-> Note: Default renderers persist for the duration of a single session, but they do not persist across sessions. If you are working in an `IPython` kernel, this means that default renderers will persist for the life of the kernel, but they will not persist across kernel restarts.
+!!! note
+
+    Default renderers persist for the duration of a single session, but they do not persist across sessions. If you are working in an `IPython` kernel, this means that default renderers will persist for the life of the kernel, but they will not persist across kernel restarts.
 
 ```python
 import plotly.io as pio
@@ -93,7 +99,9 @@ This renderer is intended for use in the classic [Jupyter Notebook](https://jupy
 
 This renderer is a good choice for notebooks that will be exported to HTML files (Either using [nbconvert](https://nbconvert.readthedocs.io/en/latest/) or the "Download as HTML" menu action) because the exported HTML files will work without an Internet connection.
 
-> Note: Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an Internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
+!!! note
+
+    Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an Internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
 
 ###### `notebook_connected`
 This renderer is the same as `notebook` renderer, except the plotly.js JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an Internet connection is required in order to display figures that are rendered this way.
@@ -109,9 +117,13 @@ This is a custom renderer for use with [Google Colab](https://colab.research.goo
 ###### `browser`
 This renderer will open a figure in a browser tab using the default web browser.  This renderer can only be used when the Python kernel is running locally on the same machine as the web browser, so it is not compatible with Jupyter Hub or online notebook services.
 
-> Implementation Note 1: In this context, the "default browser" is the browser that is chosen by the Python [`webbrowser`](https://docs.python.org/3.7/library/webbrowser.html) module.
+!!! note
 
-> Implementation Note 2: The `browser` renderer works by setting up a single use local webserver on a local port. Since the webserver is shut down as soon as the figure is served to the browser, the figure will not be restored if the browser is refreshed.
+    Implementation Note 1: In this context, the "default browser" is the browser that is chosen by the Python [`webbrowser`](https://docs.python.org/3.7/library/webbrowser.html) module.
+
+!!! note
+
+    Implementation Note 2: The `browser` renderer works by setting up a single use local webserver on a local port. Since the webserver is shut down as soon as the figure is served to the browser, the figure will not be restored if the browser is refreshed.
 
 ###### `firefox`, `chrome`, and `chromium`
 These renderers are the same as the `browser` renderer, but they force the use of a particular browser.
@@ -121,7 +133,9 @@ These renderers write figures out as standalone HTML files and then display [`if
 
 This renderer may be useful when working with notebooks than contain lots of large figures.  When using the `notebook` or `notebook_connected` renderer, all of the data for all of the figures in a notebook are stored inline in the notebook itself. If this would result in a prohibitively large notebook size, an `iframe` or `iframe_connected` renderer could be used instead. With the `iframe` renderers, the figure data are stored in the individual HTML files rather than in the notebook itself, resulting in a smaller notebook size.
 
-> Implementation Note: The HTML files written by the `iframe` renderers are stored in a subdirectory named `iframe_figures`.  The HTML files are given names based on the execution number of the notebook cell that produced the figure. This means that each time a notebook kernel is restarted, any prior HTML files will be overwritten.  This also means that you should not store multiple notebooks using an `iframe` renderer in the same directory, because this could result in figures from one notebook overwriting figures from another notebook.
+!!! note
+
+    Implementation Note: The HTML files written by the `iframe` renderers are stored in a subdirectory named `iframe_figures`.  The HTML files are given names based on the execution number of the notebook cell that produced the figure. This means that each time a notebook kernel is restarted, any prior HTML files will be overwritten.  This also means that you should not store multiple notebooks using an `iframe` renderer in the same directory, because this could result in figures from one notebook overwriting figures from another notebook.
 
 
 ###### `plotly_mimetype`

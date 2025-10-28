@@ -55,7 +55,9 @@ fig.show()
 #### Custom Text and X & Y Labels
 set `annotation_text` to a matrix with the same dimensions as `z`
 
-> WARNING: this legacy figure factory requires the `y` array to be provided in reverse order, and will map the `z_text` to the `z` values in reverse order. **The use of the `px.imshow()` version below is highly recommended**
+!!! warning
+
+    This legacy figure factory requires the `y` array to be provided in reverse order, and will map the `z_text` to the `z` values in reverse order. **The use of the `px.imshow()` version below is highly recommended**
 
 ```python
 import plotly.figure_factory as ff

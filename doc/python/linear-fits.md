@@ -189,6 +189,5 @@ fig.update_traces(showlegend=True) #trendlines have showlegend=False by default
 fig.show()
 ```
 
-```python
 
-```
+
