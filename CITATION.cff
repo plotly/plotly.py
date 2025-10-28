@@ -9,8 +9,8 @@ authors:
 - family-names: "Parmer"
   given-names: "Chris"
 title: "An interactive, open-source, and browser-based graphing library for Python"
-version: 6.3.0
+version: 6.3.1
 doi: 10.5281/zenodo.14503524
-date-released: 2025-08-12
+date-released: 2025-10-02
 url: "https://github.com/plotly/plotly.py"
 

@@ -6,15 +6,16 @@ redirect_from: python/offline/
 
 Plotly's Python graphing library, `plotly.py`, gives you a wide range of options for how and where to display your figures.
 
-In general, there are five different approaches you can take in order to display `plotly` figures:
+In general, there are six different approaches you can take in order to display `plotly` figures:
 
- 1. Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
- 2. Using [Dash](https://dash.plot.ly) in a web app context
- 3. Using a [`FigureWidget` rather than a `Figure`](figurewidget.md) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
- 4. By [exporting to an HTML file](interactive-html-export.md) and loading that file in a browser immediately or later
- 5. By [rendering the figure to a static image file using Kaleido](static-image-export.md) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
+ - Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
+ - Using [Plotly Studio](https://plotly.com/studio?utm_medium=graphing_libraries&utm_content=python_renderers) to generate charts using natural language
+ - Using [Dash](https://dash.plot.ly) in a web app context
+ - Using a [`FigureWidget` rather than a `Figure`](figurewidget.md) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
+ - By [exporting to an HTML file](interactive-html-export.md) and loading that file in a browser immediately or later
+ - By [rendering the figure to a static image file using Kaleido](static-image-export.md) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
 
-Each of the first three approaches is discussed below.
+Each of the first four approaches is discussed below.
 
 ### Displaying Figures Using The `renderers` Framework
 
@@ -44,9 +45,9 @@ fig
 
     To be precise, figures will display themselves using the current default renderer when the two following conditions are true. First, the last expression in a cell must evaluate to a figure. Second, `plotly.py` must be running from within an `IPython` kernel.
 
-**In many contexts, an appropriate renderer will be chosen automatically and you will not need to perform any additional configuration.** These contexts include the classic [Jupyter Notebook](https://jupyter.org/), [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), [Visual Studio Code notebooks](https://code.visualstudio.com/docs/python/jupyter-support), [Google Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb), [Kaggle](https://www.kaggle.com/kernels) notebooks, [Azure](https://notebooks.azure.com/) notebooks, and the [Python interactive shell](https://www.python.org/shell/).
+**In many contexts, an appropriate renderer will be chosen automatically and you will not need to perform any additional configuration.** These contexts include the classic [Jupyter Notebook](https://jupyter.org/), [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), [Visual Studio Code notebooks](https://code.visualstudio.com/docs/python/jupyter-support), [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb), [Kaggle](https://www.kaggle.com/kernels) notebooks, [Azure](https://notebooks.azure.com/) notebooks, and the [Python interactive shell](https://www.python.org/shell/).
 
-Additional contexts are supported by choosing a compatible renderer including the [IPython console](https://docs.spyder-ide.org/ipythonconsole.html), [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and more.
+Additional contexts are supported by choosing a compatible renderer including [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and more.
 
 Next, we will show how to configure the default renderer.  After that, we will describe all of the built-in renderers and discuss why you might choose to use each one.
 
@@ -56,7 +57,7 @@ Next, we will show how to configure the default renderer.  After that, we will d
 
 
 #### Setting The Default Renderer
-The current and available renderers are configured using the `plotly.io.renderers` configuration object.  Display this object to see the current default renderer and the list of all available renderers.
+The current and available renderers are configured using the `plotly.io.renderers` configuration object. Display this object to see the current default renderer and the list of all available renderers.
 
 ```python
 import plotly.io as pio
@@ -74,10 +75,12 @@ import plotly.io as pio
 pio.renderers.default = "browser"
 ```
 
+> Note: Default renderers persist for the duration of a single session. For example, if you set a default renderer in an `IPython` kernel, that default won't persist across kernel restarts.
+
 It is also possible to set the default renderer using a system environment variable.  At startup, `plotly.py` checks for the existence of an environment variable named `PLOTLY_RENDERER`.  If this environment variable is set to the name of an available renderer, this renderer is set as the default.
 
 #### Overriding The Default Renderer
-It is also possible to override the default renderer temporarily by passing the name of an available renderer as the `renderer` keyword argument to the `show()` method.  Here is an example of displaying a figure using the `svg` renderer (described below) without changing the default renderer.
+You can override the default renderer temporarily by passing the name of an available renderer as the `renderer` keyword argument to a figure's `show()` method. For example, to use the `svg` renderer (described later) without changing the default renderer, set `renderer="svg"`:
 
 ```python
 import plotly.graph_objects as go
@@ -95,21 +98,21 @@ In this section, we will describe the built-in renderers so that you can choose 
 Interactive renderers display figures using the plotly.js JavaScript library and are fully interactive, supporting pan, zoom, hover tooltips, etc.
 
 ###### `notebook`
-This renderer is intended for use in the classic [Jupyter Notebook](https://jupyter.org/install.html) (not JupyterLab).  The full plotly.js JavaScript library bundle is added to the notebook the first time a figure is rendered, so this renderer will work without an Internet connection.
+This renderer is intended for use in the classic [Jupyter Notebook](https://jupyter.org/install.html) (not JupyterLab). The full plotly.js JavaScript library bundle is added to the notebook the first time a figure is rendered, so this renderer will work without an internet connection.
 
-This renderer is a good choice for notebooks that will be exported to HTML files (Either using [nbconvert](https://nbconvert.readthedocs.io/en/latest/) or the "Download as HTML" menu action) because the exported HTML files will work without an Internet connection.
+This renderer is a good choice for notebooks that will be exported to HTML files (Either using [nbconvert](https://nbconvert.readthedocs.io/en/latest/) or the "Download as HTML" menu action) because the exported HTML files will work without an internet connection.
 
 !!! note
 
-    Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an Internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
+    Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
 
 ###### `notebook_connected`
-This renderer is the same as `notebook` renderer, except the plotly.js JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an Internet connection is required in order to display figures that are rendered this way.
+This renderer is the same as `notebook` renderer, except the plotly.js JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an internet connection is required in order to display figures that are rendered this way.
 
-This renderer is a good choice for notebooks that will be shared with [nbviewer](https://nbviewer.jupyter.org/) since users must have an active Internet connection to access nbviewer in the first place.
+This renderer is a good choice for notebooks that will be shared with [nbviewer](https://nbviewer.jupyter.org/) since users must have an active internet connection to access nbviewer in the first place.
 
 ###### `kaggle` and `azure`
-These are aliases for `notebook_connected` because this renderer is a good choice for use with [Kaggle kernels](https://www.kaggle.com/docs/notebooks) and [Azure Notebooks](https://notebooks.azure.com/).
+These are aliases for `notebook_connected` because this renderer is a good choice for use with [Kaggle Notebooks](https://www.kaggle.com/docs/notebooks) and [Azure Notebooks](https://notebooks.azure.com/).
 
 ###### `colab`
 This is a custom renderer for use with [Google Colab](https://colab.research.google.com).
@@ -169,7 +172,7 @@ This renderer displays figures as static PDF files. This is especially useful fo
 In editors that support it (JupyterLab, nteract, and the Visual Studio Code notebook interface), this renderer displays the JSON representation of a figure in a collapsible interactive tree structure.  This can be very useful for examining the structure of complex figures.
 
 ##### Multiple Renderers
-You can specify that multiple renderers should be used by joining their names on `"+"` characters.  This is useful when writing code that needs to support multiple contexts.  For example, if a notebook specifies a default renderer string of  `"notebook+plotly_mimetype+pdf"`then this notebook would be able to run in the classic Jupyter Notebook, in JupyterLab, and it would support being exported to PDF using `nbconvert`.
+You can specify that multiple renderers should be used by joining their names on `"+"` characters. This is useful when writing code that needs to support multiple contexts. For example, if a notebook specifies a default renderer string of  `"notebook+plotly_mimetype+pdf"`, then this notebook would be able to run in the classic Jupyter Notebook as well as in JupyterLab, and it would support being exported to PDF using `nbconvert`.
 
 #### Customizing Built-In Renderers
 Most built-in renderers have configuration options to customize their behavior.  To view a description of a renderer, including its configuration options, access the renderer object using dictionary-style key lookup on the `plotly.io.renderers` configuration object and then display it.  Here is an example of accessing and displaying the `png` renderer.
@@ -212,11 +215,20 @@ fig = go.Figure(
 fig.show(renderer="png", width=800, height=300)
 ```
 
+### Displaying figures in Plotly Studio
+
+Use [Plotly Studio](https://plotly.com/studio?utm_medium=graphing_libraries&utm_content=python_renderers) to build data apps with Plotly figures using natural language and AI. Describe the charts you want to Plotly Studio, which generates them within a [Dash](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers) app that you can publish to [Plotly Cloud](https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers) or [Dash Enterprise](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers).
+
+```python hide_code=true
+from IPython.display import HTML
+HTML('<div style="text-align: center;"><iframe src="https://www.youtube.com/embed/ZGWMv7PQn-U?si=sRuSNPZWD1AzZsCf&mute=1&rel=0" width="100%" height="600" frameborder="0" allowfullscreen></iframe></div>')
+```
+
 ### Displaying figures in Dash
 
-[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+[Dash](https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/?utm_medium=graphing_libraries&utm_content=python_renderers) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers">Plotly Cloud</a>.**
 
 
 <pre hide_code="true">

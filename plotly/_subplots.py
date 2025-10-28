@@ -746,8 +746,19 @@ The row_titles argument to make_subplots must be a list or tuple
             )
             grid_ref[r][c] = subplot_refs
 
-    _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir)
-    _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir)
+    _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir, False)
+    _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir, False)
+
+    any_secondary_y = any(
+        spec["secondary_y"]
+        for spec_row in specs
+        for spec in spec_row
+        if spec is not None
+    )
+    if any_secondary_y:
+        _configure_shared_axes(
+            layout, grid_ref, specs, "y", shared_yaxes, row_dir, True
+        )
 
     # Build inset reference
     # ---------------------
@@ -879,7 +890,9 @@ The row_titles argument to make_subplots must be a list or tuple
     return figure
 
 
-def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
+def _configure_shared_axes(
+    layout, grid_ref, specs, x_or_y, shared, row_dir, secondary_y
+):
     rows = len(grid_ref)
     cols = len(grid_ref[0])
 
@@ -889,6 +902,13 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         rows_iter = range(rows - 1, -1, -1)
     else:
         rows_iter = range(rows)
+
+    if secondary_y:
+        cols_iter = range(cols - 1, -1, -1)
+        axis_index = 1
+    else:
+        cols_iter = range(cols)
+        axis_index = 0
 
     def update_axis_matches(first_axis_id, subplot_ref, spec, remove_label):
         if subplot_ref is None:
@@ -913,13 +933,15 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         return first_axis_id
 
     if shared == "columns" or (x_or_y == "x" and shared is True):
-        for c in range(cols):
+        for c in cols_iter:
             first_axis_id = None
             ok_to_remove_label = x_or_y == "x"
             for r in rows_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
                     first_axis_id, subplot_ref, spec, ok_to_remove_label
@@ -929,10 +951,12 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         for r in rows_iter:
             first_axis_id = None
             ok_to_remove_label = x_or_y == "y"
-            for c in range(cols):
+            for c in cols_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
                     first_axis_id, subplot_ref, spec, ok_to_remove_label
@@ -940,15 +964,17 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
 
     elif shared == "all":
         first_axis_id = None
-        for c in range(cols):
-            for ri, r in enumerate(rows_iter):
+        for ri, r in enumerate(rows_iter):
+            for c in cols_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
 
                 if x_or_y == "y":
-                    ok_to_remove_label = c > 0
+                    ok_to_remove_label = c < cols - 1 if secondary_y else c > 0
                 else:
                     ok_to_remove_label = ri > 0 if row_dir > 0 else r < rows - 1
 

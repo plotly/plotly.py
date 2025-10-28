@@ -4228,7 +4228,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         lon = [1, 2, 3, 3, 0, 4, 5, 0, 5, 3, 1, 5, 4, 0, 1, 2, 5]
         color = np.ones(len(lat))
 
-        fig1 = ff.create_hexbin_mapbox(lat=lat, lon=lon, nx_hexagon=1)
+        fig1 = ff.create_hexbin_map(lat=lat, lon=lon, nx_hexagon=1)
 
         actual_geojson = {
             "type": "FeatureCollection",
@@ -4331,7 +4331,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.compare_dict_values(fig1.data[0].geojson, actual_geojson)
         assert np.array_equal(fig1.data[0].z, actual_agg)
 
-        fig2 = ff.create_hexbin_mapbox(
+        fig2 = ff.create_hexbin_map(
             lat=lat,
             lon=lon,
             nx_hexagon=1,
@@ -4341,7 +4341,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         assert np.array_equal(fig2.data[0].z, np.ones(5))
 
-        fig3 = ff.create_hexbin_mapbox(
+        fig3 = ff.create_hexbin_map(
             lat=np.random.randn(1000),
             lon=np.random.randn(1000),
             nx_hexagon=20,
@@ -4364,8 +4364,8 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             columns=["Latitude", "Longitude", "Metric", "Frame"],
         )
 
-        fig1 = ff.create_hexbin_mapbox(lat=lat, lon=lon, nx_hexagon=nx_hexagon)
-        fig2 = ff.create_hexbin_mapbox(
+        fig1 = ff.create_hexbin_map(lat=lat, lon=lon, nx_hexagon=nx_hexagon)
+        fig2 = ff.create_hexbin_map(
             data_frame=df, lat="Latitude", lon="Longitude", nx_hexagon=nx_hexagon
         )
 
@@ -4375,7 +4375,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             fig1.to_plotly_json()["data"][0], fig2.to_plotly_json()["data"][0]
         )
 
-        fig3 = ff.create_hexbin_mapbox(
+        fig3 = ff.create_hexbin_map(
             lat=lat,
             lon=lon,
             nx_hexagon=nx_hexagon,
@@ -4383,14 +4383,14 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             agg_func=np.sum,
             min_count=0,
         )
-        fig4 = ff.create_hexbin_mapbox(
+        fig4 = ff.create_hexbin_map(
             lat=lat,
             lon=lon,
             nx_hexagon=nx_hexagon,
             color=color,
             agg_func=np.sum,
         )
-        fig5 = ff.create_hexbin_mapbox(
+        fig5 = ff.create_hexbin_map(
             data_frame=df,
             lat="Latitude",
             lon="Longitude",
@@ -4406,7 +4406,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             fig4.to_plotly_json()["data"][0], fig5.to_plotly_json()["data"][0]
         )
 
-        fig6 = ff.create_hexbin_mapbox(
+        fig6 = ff.create_hexbin_map(
             data_frame=df,
             lat="Latitude",
             lon="Longitude",
@@ -4416,7 +4416,7 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             animation_frame="Frame",
         )
 
-        fig7 = ff.create_hexbin_mapbox(
+        fig7 = ff.create_hexbin_map(
             lat=lat,
             lon=lon,
             nx_hexagon=nx_hexagon,

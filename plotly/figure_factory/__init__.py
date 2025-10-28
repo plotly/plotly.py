@@ -29,11 +29,17 @@ from plotly.figure_factory._violin import create_violin
 
 if optional_imports.get_module("pandas") is not None:
     from plotly.figure_factory._county_choropleth import create_choropleth
-    from plotly.figure_factory._hexbin_mapbox import create_hexbin_mapbox
+    from plotly.figure_factory._hexbin_map import (
+        create_hexbin_map,
+        create_hexbin_mapbox,
+    )
 else:
 
     def create_choropleth(*args, **kwargs):
         raise ImportError("Please install pandas to use `create_choropleth`")
+
+    def create_hexbin_map(*args, **kwargs):
+        raise ImportError("Please install pandas to use `create_hexbin_map`")
 
     def create_hexbin_mapbox(*args, **kwargs):
         raise ImportError("Please install pandas to use `create_hexbin_mapbox`")
@@ -57,6 +63,7 @@ __all__ = [
     "create_distplot",
     "create_facet_grid",
     "create_gantt",
+    "create_hexbin_map",
     "create_hexbin_mapbox",
     "create_ohlc",
     "create_quiver",

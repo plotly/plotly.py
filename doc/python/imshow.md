@@ -26,13 +26,7 @@ In order to create a numerical array to be passed to `px.imshow`, you can use a 
 ```python
 import plotly.express as px
 from skimage import io
-from io import BytesIO
-import requests
-
-url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/240px-Crab_Nebula.jpg'
-headers = {"User-Agent": "Mozilla/5.0"}
-response = requests.get(url, headers=headers)
-img = io.imread(BytesIO(response.content))
+img = io.imread('https://user-images.githubusercontent.com/72614349/179115668-2630e3e4-3a9f-4c88-9494-3412e606450a.jpg')
 fig = px.imshow(img)
 fig.show()
 ```

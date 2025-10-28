@@ -5601,7 +5601,7 @@ wheels = [
 
 [[package]]
 name = "plotly"
-version = "6.3.0"
+version = "6.3.1"
 source = { editable = "." }
 dependencies = [
     { name = "narwhals", version = "1.42.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
