@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Updated
+
+- Include `nbformat` as a dependency for `plotly[express]`. [[#5380](https://github.com/plotly/plotly.py/pull/5380)]
+
 ## [6.3.1] - 2025-10-02
 
 ### Updated
