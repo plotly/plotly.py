@@ -32,12 +32,12 @@ def validate_gantt(df):
     """
     if pd and isinstance(df, pd.core.frame.DataFrame):
         # validate that df has all the required keys
-        missing_keys = [key for key in REQUIRED_GANTT_KEYS if key not in df]
-        if missing_keys:
-            raise exceptions.PlotlyError(
-                "The columns in your dataframe must include the "
-                "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
-            )
+        for key in REQUIRED_GANTT_KEYS:
+            if key not in df:
+                raise exceptions.PlotlyError(
+                    "The columns in your dataframe must include the "
+                    "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
+                )
 
         # Pre-fetch columns as DataFrames Series to minimize iloc lookups
         # This turns each key into a reference to the Series, for quick access
