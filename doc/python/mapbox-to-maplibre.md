@@ -34,13 +34,13 @@ Note that Mapbox API keys are no longer required for Plotly-provided styles, but
 
 ### Style changes
 Built-in styles in map traces are free styles from [Carto](https://carto.com) and [ESRI](https://www.esri.com/en-us/home). Several names are re-used from the previous Mapbox styles.
-<p align="center">
+<p class="mapbox-img" style="text-align: center;">
   <img src="https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/baselines/map_predefined-styles1.png" alt="Style comparison part 1" width="45%" />
   <img src="https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/baselines/map_predefined-styles2.png" alt="Style comparison part 2" width="45%" />
 </p>
 
 Compare to the previous Mapbox styles:
-<p align="center">
+<p class="mapbox-img" style="text-align: center;">
   <img src="https://raw.githubusercontent.com/plotly/graphing-library-docs/master/all_static/images/mapbox_1.png" alt="Style comparison part 1" width="45%" />
   <img src="https://raw.githubusercontent.com/plotly/graphing-library-docs/master/all_static/images/mapbox_2.png" alt="Style comparison part 2" width="45%" />
 </p>

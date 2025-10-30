@@ -1,36 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.3
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to make a quiver plot in Python. A quiver plot displays velocity
-      vectors a arrows.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Quiver Plots
-    order: 10
-    permalink: python/quiver-plots/
-    thumbnail: thumbnail/quiver-plot.jpg
+description: How to make a quiver plot in Python. A quiver plot displays velocity
+  vectors a arrows.
 ---
 
 Quiver plots can be made using a [figure factory](figure-factories.md) as detailed in this page.

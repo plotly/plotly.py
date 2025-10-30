@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.5
-  plotly:
-    description: Introduction to the Plotly FigureWidget
-    display_as: chart_events
-    language: python
-    layout: base
-    name: Plotly FigureWidget Overview
-    order: 1
-    page_type: example_index
-    permalink: python/figurewidget/
-    thumbnail: thumbnail/figurewidget-overview.gif
-    redirect_from: /python/ipython-widgets/
+description: Introduction to the Plotly FigureWidget
+redirect_from: /python/ipython-widgets/
 ---
-
 The Plotly FigureWidget allows you to add Plotly charts as interactive widgets in Jupyter and other compatible notebooks. To use the FigureWidget, you'll need to install `anywidget`: 
 
 ```bash
@@ -18888,10 +18856,10 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |  Data descriptors inherited from plotly.basedatatypes.BaseFigure:
  |
  |  __dict__
- |      dictionary for instance variables
+ |      dictionary for instance variables (if defined)
  |
  |  __weakref__
- |      list of weak references to the object
+ |      list of weak references to the object (if defined)
  |
  |  data
  |      The `data` property is a tuple of the figure's trace objects
@@ -18915,7 +18883,7 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |  ----------------------------------------------------------------------
  |  Class methods inherited from anywidget.widget.AnyWidget:
  |
- |  __init_subclass__(**kwargs: 'dict') -> 'None'
+ |  __init_subclass__(**kwargs: 'dict') -> 'None' from traitlets.traitlets.MetaHasTraits
  |      Coerces _esm and _css to FileContents if they are files.
  |
  |  ----------------------------------------------------------------------
@@ -19028,9 +18996,9 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |  ----------------------------------------------------------------------
  |  Class methods inherited from ipywidgets.widgets.widget.Widget:
  |
- |  close_all()
+ |  close_all() from traitlets.traitlets.MetaHasTraits
  |
- |  handle_control_comm_opened(comm, msg)
+ |  handle_control_comm_opened(comm, msg) from traitlets.traitlets.MetaHasTraits
  |      Class method, called when the comm-open message on the
  |      "jupyter.widget.control" comm channel is received
  |
@@ -19074,7 +19042,7 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |
  |  widget_types = <ipywidgets.widgets.widget.WidgetRegistry object>
  |
- |  widgets = {'a60d0a080a3041ed8def3b848e08c0a5': FigureWidget({
+ |  widgets = {'4f206056633d487891db3608dd08bd22': FigureWidget({
  |      'dat...
  |
  |  ----------------------------------------------------------------------
@@ -19254,23 +19222,23 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |  ----------------------------------------------------------------------
  |  Class methods inherited from traitlets.traitlets.HasTraits:
  |
- |  class_own_trait_events(name: 'str') -> 'dict[str, EventHandler]'
+ |  class_own_trait_events(name: 'str') -> 'dict[str, EventHandler]' from traitlets.traitlets.MetaHasTraits
  |      Get a dict of all event handlers defined on this class, not a parent.
  |
  |      Works like ``event_handlers``, except for excluding traits from parents.
  |
- |  class_own_traits(**metadata: 't.Any') -> 'dict[str, TraitType[t.Any, t.Any]]'
+ |  class_own_traits(**metadata: 't.Any') -> 'dict[str, TraitType[t.Any, t.Any]]' from traitlets.traitlets.MetaHasTraits
  |      Get a dict of all the traitlets defined on this class, not a parent.
  |
  |      Works like `class_traits`, except for excluding traits from parents.
  |
- |  class_trait_names(**metadata: 't.Any') -> 'list[str]'
+ |  class_trait_names(**metadata: 't.Any') -> 'list[str]' from traitlets.traitlets.MetaHasTraits
  |      Get a list of all the names of this class' traits.
  |
  |      This method is just like the :meth:`trait_names` method,
  |      but is unbound.
  |
- |  class_traits(**metadata: 't.Any') -> 'dict[str, TraitType[t.Any, t.Any]]'
+ |  class_traits(**metadata: 't.Any') -> 'dict[str, TraitType[t.Any, t.Any]]' from traitlets.traitlets.MetaHasTraits
  |      Get a ``dict`` of all the traits of this class.  The dictionary
  |      is keyed on the name and the values are the TraitType objects.
  |
@@ -19286,7 +19254,7 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |      the output.  If a metadata key doesn't exist, None will be passed
  |      to the function.
  |
- |  trait_events(name: 'str | None' = None) -> 'dict[str, EventHandler]'
+ |  trait_events(name: 'str | None' = None) -> 'dict[str, EventHandler]' from traitlets.traitlets.MetaHasTraits
  |      Get a ``dict`` of all the event handlers of this class.
  |
  |      Parameters

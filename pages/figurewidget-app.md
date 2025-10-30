@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.5
-  plotly:
-    description: Interactive Data Analysis with Plotly
-    display_as: chart_events
-    language: python
-    layout: base
-    name: Interactive Data Analysis with FigureWidget ipywidgets
-    order: 3
-    page_type: example_index
-    permalink: python/figurewidget-app/
-    thumbnail: thumbnail/multi-widget.jpg
-    redirect_from: /python/slider-widget/
+description: Interactive Data Analysis with Plotly
+redirect_from: /python/slider-widget/
 ---
 
 ### NYC Flights Database
@@ -19121,7 +19090,7 @@ class FigureWidget(plotly.basewidget.BaseFigureWidget)
  |
  |  widget_types = <ipywidgets.widgets.widget.WidgetRegistry object>
  |
- |  widgets = {'06e15ba5185f47a0b2aecb029783ff3a': HBox(children=(Checkbox...
+ |  widgets = {'003cb12de39e44429f047e74a29c62c3': Layout(), '116b3adc5437...
  |
  |  ----------------------------------------------------------------------
  |  Data descriptors inherited from ipywidgets.widgets.widget.LoggingHasTraits:

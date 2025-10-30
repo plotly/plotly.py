@@ -1,5 +1,5 @@
 ---
-description: alginment chart
+description: How to make Alignment Charts in Python with Plotly.
 ---
 ## Alignment Viewer
 

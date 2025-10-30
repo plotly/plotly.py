@@ -1,5 +1,44 @@
 {% extends "base.html" %}
 
+
+{% block extrahead %}
+
+  {% set title = "in Python" %}
+  {% set description = config.site_description %}
+  {% if page and page.meta.description %}
+    {% set description = page.meta.description %}
+  {% endif %}
+  {% if page and page.meta and page.meta.title %}
+    {% set title = page.meta.title ~ " " ~ title %}
+  {% elif page and page.title and not page.is_homepage %}
+    {% set title = page.title | striptags ~ " " ~ title %}
+  {% endif %}
+
+  <!-- SEO Tags - title, meta_description -->
+  <title>{{title}}</title>
+  <!-- <meta name="description" content={{description}}>  -->
+
+  <!-- Bing tags -->
+      <meta name="msvalidate.01" content="D319859A832F9F1D15A7646E2A42150A" />
+  <!-- Facebook tags -->
+      <meta property="og:title" content="{{title}}"/>
+      <meta property="og:type" content="website"/>
+      <meta property="og:image" content="{% if page.imageurl %}{{page.imageurl}}{% else %}{% if page.thumbnail%}{{site.imgurl}}{{page.thumbnail}}{%else%}https://help.plot.ly/images/twitter-default.png{% endif %}{% endif %}">
+      <meta property="og:description" content="{{description}}"/>
+      <meta property="og:url" />
+      <meta property="fb:admins" content="1123751525"/>
+      <meta property="fb:admins" content="22418"/>
+
+  <!-- twitter tags -->
+      <meta name="twitter:card" content="photo" />
+      <meta name="twitter:title" content="{{title}}"/>
+      <meta name="twitter:url" content="{% if page.permalink %}https://plotly.com/{{page.permalink}}{% endif %}"/>
+      <meta name="twitter:description" content="{{description}}"/>
+      <meta name="twitter:image" content="{% if page.imageurl %}{{page.imageurl}}{% else %}{% if page.thumbnail%}{{site.imgurl}}{{page.thumbnail}}{%else%}https://help.plot.ly/images/twitter-default.png{% endif %}{% endif %}">
+      <meta name="twitter:site" content="@plotlygraphs"/>
+
+{% endblock %}
+
 {% block site_nav %}
 
   <!-- Main navigation -->

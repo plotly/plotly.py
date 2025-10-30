@@ -197,10 +197,10 @@ nav:
     - t-SNE and UMAP projections: ml-tsne-umap-projections.md
   - Visualizing Biological Data:
     - Overview: bio.md
-    - Volcano Plot: bio-volcano-plot.md
-    - Manhattan Plot: bio-manhattanplot.md
-    - Clustergram: bio-clustergram.md
-    - Alignment Chart: bio-alignment-chart.md
+    - Volcano Plot: volcano-plot.md
+    - Manhattan Plot: manhattan-plot.md
+    - Clustergram: clustergram.md
+    - Alignment Chart: alignment-chart.md
   - 3D Charts:
     - Overview: 3d-charts.md
     - 3D Axes: 3d-axes.md

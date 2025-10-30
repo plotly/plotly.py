@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: Migrating from Mapbox traces to MapLibre traces.
-    display_as: maps
-    language: python
-    layout: base
-    name: MapLibre Migration
-    order: 1
-    page_type: u-guide
-    permalink: python/mapbox-to-maplibre/
-    redirect_from: python/maplibre-migration/
-    thumbnail: thumbnail/mapbox-layers.png
+description: Migrating from Mapbox traces to MapLibre traces.
+redirect_from: python/maplibre-migration/
 ---
-
 ## Migrating from Mapbox traces to MapLibre traces
 
 With the release of Plotly.py v5.24.0, we are introducing a new set of trace types for maps with tile underlays, including from Plotly Express:
