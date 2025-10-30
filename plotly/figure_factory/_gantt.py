@@ -39,8 +39,6 @@ def validate_gantt(df):
                     "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
                 )
 
-        # Pre-fetch columns as DataFrames Series to minimize iloc lookups
-        # This turns each key into a reference to the Series, for quick access
         columns = {key: df[key].values for key in df}
         num_of_rows = len(df.index)
         chart = []
