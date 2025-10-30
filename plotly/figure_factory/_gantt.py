@@ -32,19 +32,22 @@ def validate_gantt(df):
     """
     if pd and isinstance(df, pd.core.frame.DataFrame):
         # validate that df has all the required keys
-        for key in REQUIRED_GANTT_KEYS:
-            if key not in df:
-                raise exceptions.PlotlyError(
-                    "The columns in your dataframe must include the "
-                    "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
-                )
+        missing_keys = [key for key in REQUIRED_GANTT_KEYS if key not in df]
+        if missing_keys:
+            raise exceptions.PlotlyError(
+                "The columns in your dataframe must include the "
+                "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
+            )
 
+        # Pre-fetch columns as DataFrames Series to minimize iloc lookups
+        # This turns each key into a reference to the Series, for quick access
+        columns = {key: df[key].values for key in df}
         num_of_rows = len(df.index)
         chart = []
+        # Using only keys present in the DataFrame columns
+        keys = list(df.columns)
         for index in range(num_of_rows):
-            task_dict = {}
-            for key in df:
-                task_dict[key] = df.iloc[index][key]
+            task_dict = {key: columns[key][index] for key in keys}
             chart.append(task_dict)
 
         return chart
