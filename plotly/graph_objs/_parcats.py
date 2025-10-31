@@ -19,6 +19,7 @@ class Parcats(_BaseTraceType):
         "hoverinfo",
         "hoveron",
         "hovertemplate",
+        "hovertemplatefallback",
         "labelfont",
         "legendgrouptitle",
         "legendwidth",
@@ -243,15 +244,16 @@ class Parcats(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  This value
-        here applies when hovering over dimensions. Note that
-        "categorycount", "colorcount" and "bandcolorcount" are only
-        available when `hoveron` contains the "color" flag. Finally,
-        the template string has access to variables `count`,
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variables `count`,
         `probability`, `category`, `categorycount`, `colorcount` and
         `bandcolorcount`. Anything contained in tag `<extra>` is
         displayed in the secondary box, for example
@@ -271,6 +273,25 @@ class Parcats(_BaseTraceType):
     @hovertemplate.setter
     def hovertemplate(self, val):
         self["hovertemplate"] = val
+
+    @property
+    def hovertemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'hovertemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["hovertemplatefallback"]
+
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def labelfont(self):
@@ -612,23 +633,30 @@ class Parcats(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over dimensions. Note that "categorycount",
-            "colorcount" and "bandcolorcount" are only available
-            when `hoveron` contains the "color" flag. Finally, the
-            template string has access to variables `count`,
-            `probability`, `category`, `categorycount`,
-            `colorcount` and `bandcolorcount`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `count`, `probability`, `category`,
+            `categorycount`, `colorcount` and `bandcolorcount`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -711,6 +739,7 @@ class Parcats(_BaseTraceType):
         hoverinfo=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         labelfont=None,
         legendgrouptitle=None,
         legendwidth=None,
@@ -795,23 +824,30 @@ class Parcats(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over dimensions. Note that "categorycount",
-            "colorcount" and "bandcolorcount" are only available
-            when `hoveron` contains the "color" flag. Finally, the
-            template string has access to variables `count`,
-            `probability`, `category`, `categorycount`,
-            `colorcount` and `bandcolorcount`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `count`, `probability`, `category`,
+            `categorycount`, `colorcount` and `bandcolorcount`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -914,6 +950,7 @@ an instance of :class:`plotly.graph_objs.Parcats`""")
         self._set_property("hoverinfo", arg, hoverinfo)
         self._set_property("hoveron", arg, hoveron)
         self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("labelfont", arg, labelfont)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendwidth", arg, legendwidth)

@@ -1369,7 +1369,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -3458,7 +3459,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -5531,7 +5533,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -6224,7 +6227,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -6909,7 +6913,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -9400,6 +9405,14 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "layout.shape.label.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "layout.shape.label",
+            "edit_type": "arraydraw"
+        },
+        "superclass": "AnyValidator"
+    },
     "layout.shape.label.texttemplate": {
         "params": {
             "plotly_name": "texttemplate",
@@ -10583,7 +10596,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -11559,7 +11573,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -12535,7 +12550,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -14452,7 +14468,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -15364,7 +15381,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -15785,6 +15803,14 @@
             ]
         },
         "superclass": "EnumeratedValidator"
+    },
+    "layout.newshape.label.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "layout.newshape.label",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "layout.newshape.label.texttemplate": {
         "params": {
@@ -20497,7 +20523,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -21724,6 +21751,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "waterfall.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "waterfall",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
+    },
     "waterfall.texttemplate": {
         "params": {
             "plotly_name": "texttemplate",
@@ -22799,6 +22834,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "waterfall.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "waterfall",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "waterfall.hovertemplate": {
         "params": {
@@ -24144,6 +24187,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "volume.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "volume",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
+    },
     "volume.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -25299,7 +25350,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -26810,6 +26862,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "violin.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "violin",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
+    },
     "violin.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -27371,6 +27431,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "treemap.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "treemap",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "treemap.texttemplate": {
         "params": {
@@ -29261,7 +29329,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -29783,6 +29852,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "treemap.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "treemap",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "treemap.hovertemplate": {
         "params": {
@@ -32302,6 +32379,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "surface.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "surface",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
+    },
     "surface.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -33820,7 +33905,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -33982,6 +34068,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "sunburst.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "sunburst",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "sunburst.texttemplate": {
         "params": {
@@ -35544,7 +35638,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -36099,6 +36194,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "sunburst.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "sunburst",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "sunburst.hovertemplate": {
         "params": {
@@ -37219,6 +37322,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "streamtube.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "streamtube",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
+    },
     "streamtube.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -38336,7 +38447,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -40218,7 +40330,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -40552,6 +40665,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "splom.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "splom",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "splom.hovertemplate": {
         "params": {
@@ -41116,6 +41237,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatterternary.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scatterternary",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "scatterternary.texttemplate": {
         "params": {
@@ -43117,7 +43246,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -43545,6 +43675,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatterternary.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scatterternary",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "scatterternary.hovertemplate": {
         "params": {
@@ -44092,6 +44230,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattersmith.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scattersmith",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "scattersmith.texttemplate": {
         "params": {
@@ -46100,7 +46246,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -46544,6 +46691,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattersmith.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scattersmith",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "scattersmith.hovertemplate": {
         "params": {
@@ -47079,6 +47234,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatterpolargl.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scatterpolargl",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "scatterpolargl.texttemplate": {
         "params": {
@@ -48948,7 +49111,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -49324,6 +49488,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatterpolargl.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scatterpolargl",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "scatterpolargl.hovertemplate": {
         "params": {
@@ -49859,6 +50031,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatterpolar.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scatterpolar",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "scatterpolar.texttemplate": {
         "params": {
@@ -51875,7 +52055,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -52303,6 +52484,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatterpolar.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scatterpolar",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "scatterpolar.hovertemplate": {
         "params": {
@@ -52800,6 +52989,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattermapbox.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scattermapbox",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scattermapbox.texttemplate": {
         "params": {
@@ -53945,7 +54142,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -54345,6 +54543,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattermapbox.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scattermapbox",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scattermapbox.hovertemplate": {
         "params": {
@@ -54912,6 +55118,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattermap.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scattermap",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scattermap.texttemplate": {
         "params": {
@@ -56057,7 +56271,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -56457,6 +56672,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattermap.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scattermap",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scattermap.hovertemplate": {
         "params": {
@@ -57233,6 +57456,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattergl.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scattergl",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scattergl.texttemplate": {
         "params": {
@@ -59069,7 +59300,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -59460,6 +59692,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattergl.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scattergl",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "scattergl.hovertemplate": {
         "params": {
@@ -60233,6 +60473,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattergeo.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scattergeo",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scattergeo.texttemplate": {
         "params": {
@@ -62207,7 +62455,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -62658,6 +62907,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattergeo.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scattergeo",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scattergeo.hovertemplate": {
         "params": {
@@ -63187,6 +63444,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattercarpet.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scattercarpet",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "scattercarpet.texttemplate": {
         "params": {
@@ -65170,7 +65435,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -65598,6 +65864,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scattercarpet.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scattercarpet",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "scattercarpet.hovertemplate": {
         "params": {
@@ -66216,6 +66490,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatter3d.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scatter3d",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scatter3d.texttemplate": {
         "params": {
@@ -67641,7 +67923,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -68579,7 +68862,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -68896,6 +69180,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatter3d.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scatter3d",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scatter3d.hovertemplate": {
         "params": {
@@ -69974,6 +70266,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatter.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "scatter",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "scatter.texttemplate": {
         "params": {
@@ -72002,7 +72302,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -72448,6 +72749,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "scatter.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "scatter",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "scatter.hovertemplate": {
         "params": {
@@ -73699,6 +74008,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "sankey.node.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "sankey.node",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
+    },
     "sankey.node.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -74223,6 +74540,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "sankey.link.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "sankey.link",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "sankey.link.hovertemplate": {
         "params": {
@@ -75534,6 +75859,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "pie.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "pie",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
+    },
     "pie.texttemplate": {
         "params": {
             "plotly_name": "texttemplate",
@@ -76765,6 +77098,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "pie.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "pie",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "pie.hovertemplate": {
         "params": {
@@ -78380,7 +78721,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -79297,6 +79639,14 @@
         },
         "superclass": "BooleanValidator"
     },
+    "parcats.line.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "parcats.line",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
+    },
     "parcats.line.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -80083,7 +80433,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -80450,6 +80801,14 @@
             "edit_type": "calc"
         },
         "superclass": "ColorValidator"
+    },
+    "parcats.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "parcats",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "parcats.hovertemplate": {
         "params": {
@@ -82423,6 +82782,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "mesh3d.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "mesh3d",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
+    },
     "mesh3d.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -83607,7 +83974,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -84534,6 +84902,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "isosurface.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "isosurface",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "isosurface.hovertemplate": {
         "params": {
@@ -85690,7 +86066,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -87165,7 +87542,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -87957,6 +88335,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "image.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "image",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
+    },
     "image.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -88435,6 +88821,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "icicle.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "icicle",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "icicle.texttemplate": {
         "params": {
@@ -90258,7 +90652,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -90799,6 +91194,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "icicle.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "icicle",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "icicle.hovertemplate": {
         "params": {
@@ -91542,6 +91945,14 @@
         },
         "superclass": "StringValidator"
     },
+    "histogram2dcontour.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "histogram2dcontour",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
+    },
     "histogram2dcontour.texttemplate": {
         "params": {
             "plotly_name": "texttemplate",
@@ -92048,6 +92459,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "histogram2dcontour.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "histogram2dcontour",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "histogram2dcontour.hovertemplate": {
         "params": {
@@ -93431,7 +93850,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -93856,6 +94276,14 @@
             "edit_type": "plot"
         },
         "superclass": "StringValidator"
+    },
+    "histogram2d.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "histogram2d",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "histogram2d.texttemplate": {
         "params": {
@@ -94302,6 +94730,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "histogram2d.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "histogram2d",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "histogram2d.hovertemplate": {
         "params": {
@@ -95445,7 +95881,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -95811,6 +96248,14 @@
             "edit_type": "plot"
         },
         "superclass": "StringValidator"
+    },
+    "histogram.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "histogram",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "histogram.texttemplate": {
         "params": {
@@ -97362,7 +97807,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -97808,6 +98254,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "histogram.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "histogram",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "histogram.hovertemplate": {
         "params": {
@@ -98946,6 +99400,14 @@
         },
         "superclass": "BooleanValidator"
     },
+    "heatmap.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "heatmap",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
+    },
     "heatmap.texttemplate": {
         "params": {
             "plotly_name": "texttemplate",
@@ -99380,6 +99842,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "heatmap.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "heatmap",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "heatmap.hovertemplate": {
         "params": {
@@ -100531,7 +101001,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -100879,6 +101350,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "funnelarea.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "funnelarea",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "funnelarea.texttemplate": {
         "params": {
@@ -101864,6 +102343,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "funnelarea.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "funnelarea",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
+    },
     "funnelarea.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -102507,6 +102994,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "funnel.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "funnel",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "funnel.texttemplate": {
         "params": {
@@ -104033,7 +104528,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -104560,6 +105056,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "funnel.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "funnel",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "funnel.hovertemplate": {
         "params": {
@@ -105483,6 +105987,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "densitymapbox.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "densitymapbox",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "densitymapbox.hovertemplate": {
         "params": {
@@ -106596,7 +107108,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -107129,6 +107642,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "densitymap.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "densitymap",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "densitymap.hovertemplate": {
         "params": {
@@ -108242,7 +108763,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -109858,7 +110380,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -110377,6 +110900,14 @@
         },
         "superclass": "BooleanValidator"
     },
+    "contour.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "contour",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
+    },
     "contour.texttemplate": {
         "params": {
             "plotly_name": "texttemplate",
@@ -110872,6 +111403,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "contour.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "contour",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "contour.hovertemplate": {
         "params": {
@@ -112272,7 +112811,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -112984,6 +113524,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "cone.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "cone",
+            "edit_type": "calc"
+        },
+        "superclass": "AnyValidator"
     },
     "cone.hovertemplate": {
         "params": {
@@ -114101,7 +114649,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -114772,6 +115321,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "choroplethmapbox.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "choroplethmapbox",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "choroplethmapbox.hovertemplate": {
         "params": {
@@ -115900,7 +116457,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -116525,6 +117083,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "choroplethmap.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "choroplethmap",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "choroplethmap.hovertemplate": {
         "params": {
@@ -117653,7 +118219,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -118283,6 +118850,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "choropleth.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "choropleth",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "choropleth.hovertemplate": {
         "params": {
@@ -119420,7 +119995,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -120736,7 +121312,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -121630,7 +122207,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -124248,6 +124826,14 @@
         },
         "superclass": "SrcValidator"
     },
+    "box.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "box",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
+    },
     "box.hovertemplate": {
         "params": {
             "plotly_name": "hovertemplate",
@@ -126098,7 +126684,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -126415,6 +127002,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "barpolar.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "barpolar",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "barpolar.hovertemplate": {
         "params": {
@@ -127111,6 +127706,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "bar.texttemplatefallback": {
+        "params": {
+            "plotly_name": "texttemplatefallback",
+            "parent_name": "bar",
+            "edit_type": "plot"
+        },
+        "superclass": "AnyValidator"
     },
     "bar.texttemplate": {
         "params": {
@@ -128833,7 +129436,8 @@
                 "E",
                 "power",
                 "SI",
-                "B"
+                "B",
+                "SI extended"
             ]
         },
         "superclass": "EnumeratedValidator"
@@ -129361,6 +129965,14 @@
             "edit_type": "none"
         },
         "superclass": "SrcValidator"
+    },
+    "bar.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "bar",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
     },
     "bar.hovertemplate": {
         "params": {
