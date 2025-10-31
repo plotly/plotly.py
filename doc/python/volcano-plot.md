@@ -12,9 +12,11 @@ import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/volcano_data1.csv')
 
-dash_bio.VolcanoPlot(
+fig = dash_bio.VolcanoPlot(
     dataframe=df,
 )
+
+fig.show()
 ```
 
 ## Point Sizes And Line Widths
@@ -28,12 +30,14 @@ import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/volcano_data1.csv')
 
-dash_bio.VolcanoPlot(
+fig = dash_bio.VolcanoPlot(
     dataframe=df,
     point_size=10,
     effect_size_line_width=4,
     genomewideline_width=2
 )
+
+fig.show()
 ```
 
 ## VolcanoPlot with Dash

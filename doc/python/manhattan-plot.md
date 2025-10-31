@@ -12,9 +12,11 @@ import dash_bio
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
 
 
-dash_bio.ManhattanPlot(
+fig = dash_bio.ManhattanPlot(
     dataframe=df,
 )
+
+fig.show()
 ```
 
 ## Highlighted points color, and colors of the suggestive line and the genome-wide line
@@ -27,12 +29,14 @@ import dash_bio
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-bio-docs-files/master/manhattan_data.csv')
 
-dash_bio.ManhattanPlot(
+fig = dash_bio.ManhattanPlot(
     dataframe=df,
     highlight_color='#00FFAA',
     suggestiveline_color='#AA00AA',
     genomewideline_color='#AA5500'
 )
+
+fig.show()
 ```
 
 ## ManhattanPlot with Dash
