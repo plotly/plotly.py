@@ -1,7 +1,8 @@
 ---
 description: How to make Volcano Plots in Python with Plotly.
 ---
-## VolcanoPlot
+
+## Volcano Plot
 Volcano Plot interactively identifies clinically meaningful markers in genomic experiments, i.e., markers that are statistically significant and have an effect size greater than some threshold. Specifically, volcano plots depict the negative log-base-10 p-values plotted against their effect size.
 
 ```python
