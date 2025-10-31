@@ -26,6 +26,7 @@ class Contour(_BaseTraceType):
         "hoverlabel",
         "hoverongaps",
         "hovertemplate",
+        "hovertemplatefallback",
         "hovertemplatesrc",
         "hovertext",
         "hovertextsrc",
@@ -50,6 +51,7 @@ class Contour(_BaseTraceType):
         "textfont",
         "textsrc",
         "texttemplate",
+        "texttemplatefallback",
         "transpose",
         "type",
         "uid",
@@ -464,14 +466,19 @@ class Contour(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example `<extra>%{fullData.name}</extra>`. To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -487,6 +494,25 @@ class Contour(_BaseTraceType):
     @hovertemplate.setter
     def hovertemplate(self, val):
         self["hovertemplate"] = val
+
+    @property
+    def hovertemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'hovertemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["hovertemplatefallback"]
+
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertemplatesrc(self):
@@ -952,7 +978,7 @@ class Contour(_BaseTraceType):
         """
         For this trace it only has an effect if `coloring` is set to
         "heatmap". Template string used for rendering the information
-        text that appear on points. Note that this will override
+        text that appears on points. Note that this will override
         `textinfo`. Variables are inserted using %{variable}, for
         example "y: %{y}". Numbers are formatted using d3-format's
         syntax %{variable:d3-format}, for example "Price: %{y:$.2f}".
@@ -961,10 +987,14 @@ class Contour(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. Every attributes that can be specified per-
-        point (the ones that are `arrayOk: true`) are available.
-        Finally, the template string has access to variables `x`, `y`,
-        `z` and `text`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. All attributes that can be
+        specified per-point (the ones that are `arrayOk: true`) are
+        available. Finally, the template string has access to variables
+        `x`, `y`, `z` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -979,6 +1009,25 @@ class Contour(_BaseTraceType):
     @texttemplate.setter
     def texttemplate(self, val):
         self["texttemplate"] = val
+
+    @property
+    def texttemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'texttemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["texttemplatefallback"]
+
+    @texttemplatefallback.setter
+    def texttemplatefallback(self, val):
+        self["texttemplatefallback"] = val
 
     @property
     def transpose(self):
@@ -1751,17 +1800,27 @@ class Contour(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1858,7 +1917,7 @@ class Contour(_BaseTraceType):
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
-            the information text that appear on points. Note that
+            the information text that appears on points. Note that
             this will override `textinfo`. Variables are inserted
             using %{variable}, for example "y: %{y}". Numbers are
             formatted using d3-format's syntax
@@ -1869,10 +1928,20 @@ class Contour(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         transpose
             Transposes the z data.
         uid
@@ -2060,6 +2129,7 @@ class Contour(_BaseTraceType):
         hoverlabel=None,
         hoverongaps=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -2084,6 +2154,7 @@ class Contour(_BaseTraceType):
         textfont=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         transpose=None,
         uid=None,
         uirevision=None,
@@ -2226,17 +2297,27 @@ class Contour(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -2333,7 +2414,7 @@ class Contour(_BaseTraceType):
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
-            the information text that appear on points. Note that
+            the information text that appears on points. Note that
             this will override `textinfo`. Variables are inserted
             using %{variable}, for example "y: %{y}". Numbers are
             formatted using d3-format's syntax
@@ -2344,10 +2425,20 @@ class Contour(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         transpose
             Transposes the z data.
         uid
@@ -2555,6 +2646,7 @@ an instance of :class:`plotly.graph_objs.Contour`""")
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hoverongaps", arg, hoverongaps)
         self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
         self._set_property("hovertextsrc", arg, hovertextsrc)
@@ -2579,6 +2671,7 @@ an instance of :class:`plotly.graph_objs.Contour`""")
         self._set_property("textfont", arg, textfont)
         self._set_property("textsrc", arg, textsrc)
         self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatefallback", arg, texttemplatefallback)
         self._set_property("transpose", arg, transpose)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)

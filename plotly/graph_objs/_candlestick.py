@@ -806,7 +806,7 @@ class Candlestick(_BaseTraceType):
     @property
     def whiskerwidth(self):
         """
-        Sets the width of the whiskers relative to the box' width. For
+        Sets the width of the whiskers relative to the box width. For
         example, with 1, the whiskers are as wide as the box(es).
 
         The 'whiskerwidth' property is a number and may be specified as:
@@ -1230,7 +1230,7 @@ class Candlestick(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
-            Sets the width of the whiskers relative to the box'
+            Sets the width of the whiskers relative to the box
             width. For example, with 1, the whiskers are as wide as
             the box(es).
         x
@@ -1528,7 +1528,7 @@ class Candlestick(_BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
-            Sets the width of the whiskers relative to the box'
+            Sets the width of the whiskers relative to the box
             width. For example, with 1, the whiskers are as wide as
             the box(es).
         x
