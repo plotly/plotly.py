@@ -1,41 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: How to make a dendrogram in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Dendrograms
-    order: 6
-    page_type: u-guide
-    permalink: python/dendrogram/
-    thumbnail: thumbnail/dendrogram.jpg
+description: How to make a dendrogram in Python with Plotly.
 ---
 
-#### Basic Dendrogram
+### Basic Dendrogram
 
-A [dendrogram](https://en.wikipedia.org/wiki/Dendrogram) is a diagram representing a tree. The [figure factory](/python/figure-factories/) called `create_dendrogram` performs [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) on data and represents the resulting tree. Values on the tree depth axis correspond to distances between clusters.
+A [dendrogram](https://en.wikipedia.org/wiki/Dendrogram) is a diagram representing a tree. The [figure factory](figure-factories.md) called `create_dendrogram` performs [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) on data and represents the resulting tree. Values on the tree depth axis correspond to distances between clusters.
 
 Dendrogram plots are commonly used in computational biology to show the clustering of genes or samples, sometimes in the margin of heatmaps.
 
@@ -50,7 +19,7 @@ fig.update_layout(width=800, height=500)
 fig.show()
 ```
 
-#### Set Color Threshold
+### Set Color Threshold
 
 ```python
 import plotly.figure_factory as ff
@@ -63,7 +32,7 @@ fig.update_layout(width=800, height=500)
 fig.show()
 ```
 
-#### Set Orientation and Add Labels
+### Set Orientation and Add Labels
 
 ```python
 import plotly.figure_factory as ff
@@ -77,7 +46,7 @@ fig.update_layout(width=800, height=800)
 fig.show()
 ```
 
-#### Plot a Dendrogram with a Heatmap
+### Plot a Dendrogram with a Heatmap
 
 See also the [Dash Bio demo](https://dash-bio.plotly.host/dash-clustergram/).
 
@@ -176,6 +145,6 @@ fig.update_layout(yaxis2={'domain':[.825, .975],
 fig.show()
 ```
 
-### Reference
+## Reference
 
-For more info on `ff.create_dendrogram()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_dendrogram.html)
+For more info on `ff.create_dendrogram()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_dendrogram)

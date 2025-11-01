@@ -1,43 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: Plotly Express can be used as a Pandas .plot() backend.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Pandas Plotting Backend
-    order: 32
-    permalink: python/pandas-backend/
-    redirect_from: python/cufflinks/
-    thumbnail: thumbnail/plotly-express.png
+description: Plotly Express can be used as a Pandas .plot() backend.
+redirect_from: python/cufflinks/
 ---
-
 ### Introduction
 
-The popular [Pandas](https://pandas.pydata.org/) data analysis and manipulation tool provides [plotting functions on its `DataFrame` and `Series` objects](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html), which have historically produced `matplotlib` plots. Since version 0.25, Pandas has provided a mechanism to use different backends, and as of version 4.8 of `plotly`, you can now use a [Plotly Express-powered](/python/plotly-express/) backend for Pandas plotting. This means you can now produce interactive plots directly from a data frame, without even needing to import Plotly.
+The popular [Pandas](https://pandas.pydata.org/) data analysis and manipulation tool provides [plotting functions on its `DataFrame` and `Series` objects](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html), which have historically produced `matplotlib` plots. Since version 0.25, Pandas has provided a mechanism to use different backends, and as of version 4.8 of `plotly`, you can now use a [Plotly Express-powered](plotly-express.md) backend for Pandas plotting. This means you can now produce interactive plots directly from a data frame, without even needing to import Plotly.
 
-To activate this backend, you will need to [have Plotly installed](/python/getting-started/), and then just need to set `pd.options.plotting.backend` to `"plotly"` and call `.plot()` to get a `plotly.graph_objects.Figure` object back, just like if you had called Plotly Express directly:
+To activate this backend, you will need to [have Plotly installed](getting-started.md), and then just need to set `pd.options.plotting.backend` to `"plotly"` and call `.plot()` to get a `plotly.graph_objects.Figure` object back, just like if you had called Plotly Express directly:
 
 ```python
 import pandas as pd
@@ -48,7 +17,7 @@ fig = df.plot()
 fig.show()
 ```
 
-This functionality wraps [Plotly Express](/python/plotly-express/) and so you can use any of the [styling options available to Plotly Express methods](/python/styling-plotly-express/). Since what you get back is a regular `Figure` object, you can use any of the update mechanisms supported by these objects to apply [templates](/python/templates/) or further customize [axes](/python/axes/), [colors](/python/colorscales/), [legends](/python/legend/), [fonts](/python/figure-labels/), [hover labels](/python/hover-text-and-formatting/) etc. [Faceting](/python/facet-plots/) is also supported.
+This functionality wraps [Plotly Express](plotly-express.md) and so you can use any of the [styling options available to Plotly Express methods](styling-plotly-express.md). Since what you get back is a regular `Figure` object, you can use any of the update mechanisms supported by these objects to apply [templates](templates.md) or further customize [axes](axes.md), [colors](colorscales.md), [legends](legend.md), [fonts](figure-labels.md), [hover labels](hover-text-and-formatting.md) etc. [Faceting](facet-plots.md) is also supported.
 
 ```python
 import pandas as pd
@@ -63,9 +32,11 @@ fig.show()
 
 ### A Note on API Compatibility
 
-> The Plotly plotting backend for Pandas is *not intended* to be a drop-in replacement for the default; it does not implement all or even most of the same keyword arguments, such as `subplots=True` etc.
+!!! note
 
-The Plotly plotting backend for Pandas is a more convenient way to invoke certain [Plotly Express](/python/plotly-express/) functions by chaining a `.plot()` call without having to import Plotly Express directly. Plotly Express, as of version 4.8 with [wide-form data support](/python/wide-form/) in addition to its robust long-form data support, implements behaviour for the `x` and `y` keywords that are very similar to the `matplotlib` backend.
+    The Plotly plotting backend for Pandas is *not intended* to be a drop-in replacement for the default; it does not implement all or even most of the same keyword arguments, such as `subplots=True` etc.
+
+The Plotly plotting backend for Pandas is a more convenient way to invoke certain [Plotly Express](plotly-express.md) functions by chaining a `.plot()` call without having to import Plotly Express directly. Plotly Express, as of version 4.8 with [wide-form data support](wide-form.md) in addition to its robust long-form data support, implements behaviour for the `x` and `y` keywords that are very similar to the `matplotlib` backend.
 
 In practice, this means that the following two ways of making a chart are identical and support the same additional arguments, because they call the same underlying code:
 
@@ -84,7 +55,7 @@ fig2 = px.bar(df)
 fig2.show()
 ```
 
-To achieve a similar effect to `subplots=True`, for example, the [Plotly Express `facet_row` and `facet_col` options](/python/facet-plots/) can be used, the same was as they work when directly calling [Plotly Express with wide-form data](/python/wide-form/):
+To achieve a similar effect to `subplots=True`, for example, the [Plotly Express `facet_row` and `facet_col` options](facet-plots.md) can be used, the same was as they work when directly calling [Plotly Express with wide-form data](wide-form.md):
 
 ```python
 import pandas as pd

@@ -1,43 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to plot date and time in python.
-    display_as: financial
-    language: python
-    layout: base
-    name: Time Series and Date Axes
-    order: 1
-    page_type: example_index
-    permalink: python/time-series/
-    thumbnail: thumbnail/time-series.jpg
+description: How to plot date and time in python.
 ---
-
 ### Time Series using Axes of type `date`
 
-Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`, `px.bar` etc) or `plotly.graph_objects` charts objects (`go.Scatter`, `go.Bar` etc). For more examples of such charts, see the documentation of [line and scatter plots](https://plotly.com/python/line-and-scatter/) or [bar charts](/python/bar-charts/).
+Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`, `px.bar` etc) or `plotly.graph_objects` charts objects (`go.Scatter`, `go.Bar` etc). For more examples of such charts, see the documentation of [line and scatter plots](line-and-scatter.md) or [bar charts](bar-charts.md).
 
-For financial applications, Plotly can also be used to create [Candlestick charts](/python/candlestick-charts/) and [OHLC charts](/python/ohlc-charts/), which default to date axes.
+For financial applications, Plotly can also be used to create [Candlestick charts](candlestick-charts.md) and [OHLC charts](ohlc-charts.md), which default to date axes.
 
 Plotly auto-sets the axis type to a date format when the corresponding data are either ISO-formatted date strings or if they're a [date pandas column](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) or [datetime NumPy array](https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html).
 
@@ -68,11 +36,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'time-series', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/time-series" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -90,7 +62,7 @@ fig = px.bar(df, x=df.index, y="GOOG")
 fig.show()
 ```
 
-Or this [facetted](/python/facet-plots/) area plot:
+Or this [facetted](facet-plots.md) area plot:
 
 ```python
 import plotly.express as px
@@ -106,7 +78,7 @@ By default, the tick labels (and optional ticks) are associated with a specific 
 
 Date axis tick labels have the special property that any portion after the first instance of `'\n'` in `tickformat` will appear on a second line only once per unique value, as with the year numbers in the example below. To have the year number appear on every tick label, `'<br>'` should be used instead of `'\n'`.
 
-Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](/python/hover-text-and-formatting/) to something narrower like the actual date, as below.
+Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](hover-text-and-formatting.md) to something narrower like the actual date, as below.
 
 ```python
 import plotly.express as px
@@ -143,7 +115,7 @@ fig.show()
 
 _new in 5.8_
 
-You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
+You can add minor ticks to an axis with `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.minor) for full details on the accepted keys in this dict.
 
 In this example, we've added minor ticks to the inside of the x-axis and turned on minor grid lines.
 
@@ -190,7 +162,7 @@ fig.show()
 
 ### Summarizing Time-series Data with Histograms
 
-Plotly [histograms](/python/histograms/) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
+Plotly [histograms](histograms.md) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
 
 ```python
 import plotly.express as px
@@ -260,7 +232,7 @@ fig.show()
 
 *New in v5.0*
 
-When displaying periodic data with mixed-sized periods (i.e. quarterly and monthly) in conjunction with [`x` or `x unified` hovermodes and using `hovertemplate`](https://plotly.com/python/hover-text-and-formatting/), the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
+When displaying periodic data with mixed-sized periods (i.e. quarterly and monthly) in conjunction with [`x` or `x unified` hovermodes and using `hovertemplate`](hover-text-and-formatting.md), the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
 
 ```python
 import plotly.graph_objects as go
@@ -339,7 +311,7 @@ fig.show()
 
 ### Time Series With Range Slider
 
-A range slider is a small subplot-like area below a plot which allows users to pan and zoom the X-axis while maintaining an overview of the chart. Check out the reference for more options: https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeslider
+A range slider is a small subplot-like area below a plot which allows users to pan and zoom the X-axis while maintaining an overview of the chart. Check out the reference for more options: the [full reference for `go.layout.XAxis.rangeslider`](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeslider)
 
 ```python
 import plotly.express as px
@@ -355,7 +327,7 @@ fig.show()
 
 ### Time Series with Range Selector Buttons
 
-Range selector buttons are special controls that work well with time series and range sliders, and allow users to easily set the range of the x-axis. Check out the reference for more options: https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeselector
+Range selector buttons are special controls that work well with time series and range sliders, and allow users to easily set the range of the x-axis. Check out the [reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeselector) for more options.
 
 ```python
 import plotly.express as px
@@ -382,7 +354,7 @@ fig.show()
 
 ### Customizing Tick Label Formatting by Zoom Level
 
-The `tickformatstops` attribute can be used to customize the formatting of tick labels depending on the zoom level. Try zooming in to the chart below and see how the tick label formatting changes. Check out the reference for more options: https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-tickformatstops
+The `tickformatstops` attribute can be used to customize the formatting of tick labels depending on the zoom level. Try zooming in to the chart below and see how the tick label formatting changes. Check out the [reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.tickformatstops) for more options.
 
 ```python
 import plotly.graph_objects as go
@@ -414,9 +386,11 @@ fig.show()
 
 ### Hiding Weekends and Holidays
 
-The `rangebreaks` attribute available on x- and y-axes of type `date` can be used to hide certain time-periods. In the example below, we show two plots: one in default mode to show gaps in the data, and one where we hide weekends and holidays to show an uninterrupted trading history. Note the smaller gaps between the grid lines for December 21 and January 4, where holidays were removed. Check out the reference for more options: https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangebreaks
+The `rangebreaks` attribute available on x- and y-axes of type `date` can be used to hide certain time-periods. In the example below, we show two plots: one in default mode to show gaps in the data, and one where we hide weekends and holidays to show an uninterrupted trading history. Note the smaller gaps between the grid lines for December 21 and January 4, where holidays were removed. Check out the [reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangebreaks) for more options.
 
-> Note: a known limitation of this feature is that it does not support `scattergl` traces. When using this feature on plots with more than a few hundred data points with `px.scatter` or `px.line` or `px.area`, you may need to pass in `render_mode="svg"` to ensure that the underlying trace type is `scatter` and not `scattergl`.
+!!! note
+
+    A known limitation of this feature is that it does not support `scattergl` traces. When using this feature on plots with more than a few hundred data points with `px.scatter` or `px.line` or `px.area`, you may need to pass in `render_mode="svg"` to ensure that the underlying trace type is `scatter` and not `scattergl`.
 
 ```python
 import plotly.express as px

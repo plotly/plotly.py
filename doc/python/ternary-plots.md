@@ -1,45 +1,13 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: How to make Ternary plots in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Ternary Plots
-    order: 4
-    page_type: example_index
-    permalink: python/ternary-plots/
-    thumbnail: thumbnail/v4-migration.png
+description: How to make Ternary plots in Python with Plotly.
 ---
-
 ## Ternary Plots
 
 A ternary plot depicts the ratios of three variables as positions in an equilateral triangle.
 
 ## Ternary scatter plot with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 Here we use `px.scatter_ternary` to visualize the three-way split between the three major candidates in a municipal election.
 
@@ -125,4 +93,4 @@ fig.show()
 ```
 
 #### Reference
-See [function reference for `px.(scatter_ternary)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_ternary) or https://plotly.com/python/reference/scatterternary/ for more information and chart attribute options!
+See [function reference for `px.(scatter_ternary)`](reference/plotly-express.md#plotly.express.scatter_ternary) or the [full reference for `go.Scatterternary`](reference/graph_objects/Scatterternary.md) for more information and chart attribute options!

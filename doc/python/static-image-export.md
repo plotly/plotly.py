@@ -1,41 +1,8 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.13.3
-  plotly:
-    description: Plotly allows you to save static images of your plots. Save the image
-      to your local computer, or embed it inside your Jupyter notebooks as a static
-      image.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Static Image Export
-    order: 6
-    page_type: u-guide
-    permalink: python/static-image-export/
-    thumbnail: thumbnail/static-image-export.png
+description: Plotly allows you to save static images of your plots. Save the image
+  to your local computer, or embed it inside your Jupyter notebooks as a static image.
 ---
-
-This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](/python/interactive-html-export/)
+This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](interactive-html-export.md)
 
 <!-- #region -->
 ## Install Dependencies
@@ -52,7 +19,7 @@ or with conda:
 $ conda install -c conda-forge python-kaleido
 ```
 
-It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](/python/orca-management/) page for more details.
+It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](orca-management.md) page for more details.
 
 ### Chrome
 
@@ -200,11 +167,13 @@ fig = px.bar(data_canada, x='year', y='pop')
 img_bytes = fig.to_image(format="png")
 ```
 
-Here's the bytes object displayed using `IPython.display.Image`:
+Here's the bytes object displayed using `Image.show()`:
 
 ```python
-from IPython.display import Image
-Image(img_bytes)
+from PIL import Image
+from io import BytesIO
+img = Image.open(BytesIO(img_bytes))
+img.show()
 ```
 
 ## Specify Image Dimensions and Scale
@@ -212,12 +181,15 @@ In addition to the image format, the `to_image` and `write_image` functions prov
 
 ```python
 img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
-Image(img_bytes)
+img = Image.open(BytesIO(img_bytes))
+img.show()
 ```
 
 ## Specify Image Export Engine
 
-> The `engine` parameter, as well as Orca support, is deprecated in Plotly.py 6.2.0 and will be removed after September 2025.
+!!! note
+
+    The `engine` parameter, as well as Orca support, is deprecated in Plotly.py 6.2.0 and will be removed after September 2025.
 
 If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 
@@ -277,7 +249,7 @@ The following settings are available.
 
 `topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
 
-`mapbox_access_token`: The default Mapbox access token (Kaleido v0 only). Mapbox traces are deprecated. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for more details.
+`mapbox_access_token`: The default Mapbox access token (Kaleido v0 only). Mapbox traces are deprecated. See the [MapLibre Migration](mapbox-to-maplibre.md) page for more details.
 
 ### Set Defaults
 

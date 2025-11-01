@@ -1,36 +1,14 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: plotly
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  plotly:
-    description: How to make funnel-chart plots in Python with Plotly.
-    display_as: financial
-    language: python
-    layout: base
-    name: Funnel Chart
-    order: 4
-    page_type: example_index
-    permalink: python/funnel-charts/
-    redirect_from: python/funnel-chart/
-    thumbnail: thumbnail/funnel.jpg
+description: How to make funnel-chart plots in Python with Plotly.
+redirect_from: python/funnel-chart/
 ---
-
 ### Introduction
 
 Funnel charts are often used to represent data in different stages of a business process. It’s an important mechanism in Business Intelligence to identify potential problem areas of a process. For example, it’s used to observe the revenue or loss in a sales process for each stage, and displays values that are decreasing progressively. Each stage is illustrated as a percentage of the total of all values.
 
 ### Basic Funnel Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 With `px.funnel`, each row of the DataFrame is represented as a stage of the funnel.
 
@@ -60,7 +38,7 @@ fig.show()
 
 ### Basic Funnel Chart with graph_objects trace go.Funnel
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnel` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnel` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 from plotly import graph_objects as go
@@ -74,7 +52,7 @@ fig.show()
 
 ### Setting Marker Size and Color
 
-This example uses [textposition](https://plotly.com/python/reference/scatter/#scatter-textposition) and [textinfo](https://plotly.com/python/reference/funnel/#funnel-textinfo) to determine information appears on the graph, and shows how to customize the bars.
+This example uses [textposition](reference/graph_objects/Funnel.md#plotly.graph_objects.Funnel.textposition) and [textinfo](reference/graph_objects/Funnel.md#plotly.graph_objects.Funnel.textinfo) to determine information appears on the graph, and shows how to customize the bars.
 
 ```python
 from plotly import graph_objects as go
@@ -138,7 +116,7 @@ fig.show()
 
 ### Basic Area Funnel Plot with go.Funnelarea
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnelarea` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnelarea` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 from plotly import graph_objects as go
@@ -204,7 +182,7 @@ fig.show()
 
 *New in 5.15*
 
-Funnel area charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a pattern to the second stage of the funnel.
+Funnel area charts support [patterns](pattern-hatching-texture.md) (also known as hatching or texture) in addition to color. In this example, we add a pattern to the second stage of the funnel.
 
 ```python
 from plotly import graph_objects as go
@@ -224,4 +202,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(funnel)`](https://plotly.com/python-api-reference/generated/plotly.express.funnel) or https://plotly.com/python/reference/funnel/ and https://plotly.com/python/reference/funnelarea/ for more information and chart attribute options!
+See [function reference for `px.(funnel)`](reference/plotly-express.md#plotly.express.funnel) or the [full reference for `go.Funnel`](reference/graph_objects/Funnel.md) and [`go.Funnelarea`](reference/graph_objects/Funnelarea.md) for more information and chart attribute options!

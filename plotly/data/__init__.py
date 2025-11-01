@@ -21,7 +21,7 @@ def gapminder(
     """
     Each row represents a country on a given year.
 
-    https://www.gapminder.org/data/
+    <https://www.gapminder.org/data/>
 
     Parameters
     ----------
@@ -88,7 +88,7 @@ def tips(pretty_names=False, return_type="pandas"):
     """
     Each row represents a restaurant bill.
 
-    https://vincentarelbundock.github.io/Rdatasets/doc/reshape2/tips.html
+    <https://vincentarelbundock.github.io/Rdatasets/doc/reshape2/tips.html>
 
     Parameters
     ----------
@@ -125,7 +125,7 @@ def iris(return_type="pandas"):
     """
     Each row represents a flower.
 
-    https://en.wikipedia.org/wiki/Iris_flower_data_set
+    <https://en.wikipedia.org/wiki/Iris_flower_data_set>
 
     Parameters
     ----------

@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make tile-based maps in Python with various base layers.
-    display_as: maps
-    language: python
-    layout: base
-    name: Tile Map Layers
-    order: 9
-    page_type: u-guide
-    permalink: python/tile-map-layers/
-    redirect_from: python/mapbox-layers/
-    thumbnail: thumbnail/mapbox-layers.png
+description: How to make tile-based maps in Python with various base layers.
+redirect_from: python/mapbox-layers/
 ---
-
 <!-- #region -->
 
 ## Tile Maps vs Outline Maps
@@ -48,7 +16,9 @@ If your figure is created with a `px.scatter_map`, `px_scatter_mapbox`, `px.line
 
 Geo maps are outline-based maps. If your figure is created with a `px.scatter_geo`, `px.line_geo` or `px.choropleth` function or otherwise contains one or more traces of type `go.Scattergeo` or `go.Choropleth`, the `layout.geo` object in your figure contains configuration information for the map itself.
 
-> This page documents tile-based maps, and the [Geo map documentation](/python/map-configuration/) describes how to configure outline-based maps.
+!!! note
+
+    This page documents tile-based maps, and the [Geo map documentation](map-configuration.md) describes how to configure outline-based maps.
 
 ## Tile Map Renderers
 
@@ -89,9 +59,9 @@ The accepted values for `layout.map.style` are one of:
 - "streets"
 - "white-bg" - an empty white canvas which results in no external HTTP requests
 
-- A custom style URL. For example: https://tiles.stadiamaps.com/styles/stamen_watercolor.json?api_key=YOUR-API-KEY
+- A custom style URL. For example: <https://tiles.stadiamaps.com/styles/stamen_watercolor.json?api_key=YOUR-API-KEY>
 
-- A Map Style object as defined at https://maplibre.org/maplibre-style-spec/
+- A Map Style object as defined at <https://maplibre.org/maplibre-style-spec/>
 
 
 #### OpenStreetMap tiles
@@ -116,7 +86,9 @@ fig.show()
 
 If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set `layout.map.style` to `"white-bg"` and to use `layout.map.layers` with `below` to specify a custom base map.
 
-> If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
+!!! note
+
+    If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
 
 #### Base Tiles from the USGS: no token needed
 
@@ -222,7 +194,9 @@ fig.show()
 <!-- #region -->
 ### Mapbox
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
+!!! note
+
+    Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 #### How Layers Work in Mapbox Tile Maps
 
@@ -250,7 +224,7 @@ The accepted values for `layout.mapbox.style` are one of:
 - `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yield maps composed of _vector_ tiles from the Mapbox service, and _do_ require a Mapbox Access Token or an on-premise Mapbox installation.
 - `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yield maps composed of _raster_ tiles from the [Stadia Maps service](https://www.stadiamaps.com), and require a Stadia Maps account and token.
 - A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation.
-- A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/
+- A Mapbox Style object as defined at <https://docs.mapbox.com/mapbox-gl-js/style-spec/>
 
 #### OpenStreetMap tiles: no token needed
 
@@ -274,7 +248,9 @@ fig.show()
 
 If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set `layout.mapbox.style` to `"white-bg"` and to use `layout.mapbox.layers` with `below` to specify a custom base map.
 
-> If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
+!!! note
+
+    If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
 
 #### Base Tiles from the USGS: no token needed
 
@@ -356,4 +332,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/map/ for more information and options on Maplibre-based tile maps and https://plotly.com/python/reference/layout/mapbox/ for Mapbox-based tile maps.
+See the [full reference for `go.layout.Map`](reference/graph_objects/layout-package/Map.md) for more information and options on Maplibre-based tile maps and ['go.layout.Mapbox'](reference/graph_objects/layout-package/Mapbox.md) for Mapbox-based tile maps.

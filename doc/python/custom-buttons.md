@@ -1,47 +1,17 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to add custom buttons to update Plotly chart attributes in Python.
-    display_as: controls
-    language: python
-    layout: base
-    name: Custom Buttons
-    order: 1
-    page_type: example_index
-    permalink: python/custom-buttons/
-    thumbnail: thumbnail/custom-buttons.jpg
+description: How to add custom buttons to update Plotly chart attributes in Python.
 ---
 
-#### Methods
-The [updatemenu method](https://plot.ly/python/reference/layout/updatemenus/#layout-updatemenus-items-updatemenu-buttons-items-button-method) determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
+### Methods
+The [updatemenu method](reference/graph_objects/layout-package/updatemenu-package/Button.md#plotly.graph_objects.layout.updatemenu.Button.method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
+
 - `"restyle"`: modify **data** or data attributes
 - `"relayout"`: modify **layout** attributes
 - `"update"`: modify **data and layout** attributes; combination of `"restyle"` and `"relayout"`
-- `"animate"`: start or pause an [animation](https://plot.ly/python/#animations))
+- `"animate"`: start or pause an [animation](plotly-animations.md)
 
 
-#### Restyle Button
+### Restyle Button
 The `"restyle"` method should be used when modifying the data and data attributes of the graph.<br>
 **Update One Data Attribute**<br>
 This example demonstrates how to update a single data attribute: chart `type` with the `"restyle"` method.
@@ -245,7 +215,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Relayout Button
+### Relayout Button
 The `"relayout"` method should be used when modifying the layout attributes of the graph.<br>
 **Update One Layout Attribute**<br>
 This example demonstrates how to update a layout attribute: chart `type` with the `"relayout"` method.
@@ -346,7 +316,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Update Button
+### Update Button
 The `"update"` method should be used when modifying the data and layout sections of the graph.<br>
 This example demonstrates how to update which traces are displayed while simultaneously updating layout attributes such as the chart title and annotations.
 
@@ -463,9 +433,9 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Animate Button
-Refer to our animation docs: https://plotly.com/python/#animations for examples on how to use the `animate` method with Plotly buttons.
+### Animate Button
+Refer to our [animation docs](plotly-animations.md) for examples on how to use the `animate` method with Plotly buttons.
 
 
-#### Reference
-See https://plotly.com/python/reference/layout/updatemenus/ for more information about `updatemenu` buttons.
+### Reference
+See the [full reference for `go.layout.updatemenus`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information about `updatemenu` buttons.

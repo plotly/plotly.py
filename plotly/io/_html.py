@@ -114,7 +114,7 @@ def to_html(
     animation_opts: dict or None (default None)
         dict of custom animation parameters to be passed to the function
         Plotly.animate in Plotly.js. See
-        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        <https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js>
         for available options. Has no effect if the figure does not contain
         frames, or auto_play is False.
     default_width, default_height: number or str (default '100%')
@@ -446,7 +446,7 @@ def write_html(
     animation_opts: dict or None (default None)
         dict of custom animation parameters to be passed to the function
         Plotly.animate in Plotly.js. See
-        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        <https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js>
         for available options. Has no effect if the figure does not contain
         frames, or auto_play is False.
     default_width, default_height: number or str (default '100%')

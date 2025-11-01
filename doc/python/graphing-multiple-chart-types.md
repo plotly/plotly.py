@@ -1,50 +1,18 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to design figures with multiple chart types in python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Multiple Chart Types
-    order: 18
-    page_type: u-guide
-    permalink: python/graphing-multiple-chart-types/
-    thumbnail: thumbnail/multiple-chart-type.jpg
+description: How to design figures with multiple chart types in python.
 ---
-
 ### Chart Types versus Trace Types
 
-Plotly's [figure data structure](/python/figure-structure/) supports defining [subplots](/python/subplots/) of [various types](/python/mixed-subplots/) (e.g. [cartesian](/python/axes/), [polar](/python/polar-chart/), [3-dimensional](/python/3d-charts/), [maps](/python/maps/) etc) with attached traces of [various compatible types](/python/figure-structure/) (e.g. scatter, bar, choropleth, surface etc). This means that **Plotly figures are not constrained to representing a fixed set of "chart types"** such as scatter plots only or bar charts only or line charts only: any subplot can contain multiple traces of different types.
+Plotly's [figure data structure](figure-structure.md) supports defining [subplots](subplots.md) of [various types](mixed-subplots.md) (e.g. [cartesian](axes.md), [polar](polar-chart.md), [3-dimensional](3d-charts.md), [maps](maps.md) etc) with attached traces of [various compatible types](figure-structure.md) (e.g. scatter, bar, choropleth, surface etc). This means that **Plotly figures are not constrained to representing a fixed set of "chart types"** such as scatter plots only or bar charts only or line charts only: any subplot can contain multiple traces of different types.
 
 
 ### Multiple Trace Types with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-Plotly Express exposes a number of functions such as `px.scatter()` and `px.choropleth()` which generally speaking only contain traces of the same type, with exceptions made for [trendlines](/python/linear-fits/) and [marginal distribution plots](/python/marginal-plots/).
+Plotly Express exposes a number of functions such as `px.scatter()` and `px.choropleth()` which generally speaking only contain traces of the same type, with exceptions made for [trendlines](linear-fits.md) and [marginal distribution plots](marginal-plots.md).
 
-Figures produced with Plotly Express functions support the `add_trace()` method documented below, just like figures created with [graph objects](/python/graph-objects/) so it is easy to start with a Plotly Express figure containing only traces of a given type, and add traces of another type.
+Figures produced with Plotly Express functions support the `add_trace()` method documented below, just like figures created with [graph objects](graph-objects.md) so it is easy to start with a Plotly Express figure containing only traces of a given type, and add traces of another type.
 
 ```python
 import plotly.express as px
@@ -173,7 +141,7 @@ import plotly.graph_objects as go
 
 # Load data
 import json
-import urllib
+import urllib.request
 
 response = urllib.request.urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/steepest.json")
@@ -245,4 +213,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/ for more information and attribute options!
+See the [full `plotly graph objects` reference](/reference/graph_objects/index.md) for more information and attribute options!

@@ -1,44 +1,13 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: Subplots with Plotly Figure Factory Charts
-    display_as: multiple_axes
-    language: python
-    layout: base
-    name: Figure Factory Subplots
-    order: 4
-    page_type: example_index
-    permalink: python/figure-factory-subplots/
-    thumbnail: thumbnail/ff-subplots.jpg
+description: Subplots with Plotly Figure Factory Charts
 ---
 
-#### Plotly's Figure Factory Module
+### Plotly's Figure Factory Module
 
-Plotly's Python API contains a [figure factory module](/python/figure-factories/) which includes many wrapper functions that create unique chart types that are not yet included in [plotly.js](https://github.com/plotly/plotly.js), Plotly's open-source graphing library. The figure factory functions create a full figure, so some Plotly features, such as subplotting, should be implemented slightly differently with these charts.
+Plotly's Python API contains a [figure factory module](figure-factories.md) which includes many wrapper functions that create unique chart types that are not yet included in [plotly.js](https://github.com/plotly/plotly.js), Plotly's open-source graphing library. The figure factory functions create a full figure, so some Plotly features, such as subplotting, should be implemented slightly differently with these charts.
 
 
-#### Vertical Figure Factory Charts
+### Vertical Figure Factory Charts
 First create the figures that you'd like to appear in the subplot:
 
 ```python
@@ -98,7 +67,7 @@ fig.layout.update(fig2.layout)
 fig.show()
 ```
 
-#### Horizontal Table and Chart
+### Horizontal Table and Chart
 
 ```python
 import plotly.graph_objects as go
@@ -150,7 +119,7 @@ fig.layout.update({'title': '2016 Hockey Stats'})
 fig.show()
 ```
 
-#### Vertical Table and Chart
+### Vertical Table and Chart
 
 ```python
 import plotly.graph_objects as go
@@ -210,5 +179,5 @@ fig.layout.update({'height':800})
 fig.show()
 ```
 
-#### Reference
-See https://plotly.com/python/subplots/ for more information on working with subplots. See https://plotly.com/python/reference/ for more information regarding chart attributes!
+### Reference
+See the [subplots page](subplots.md) for more information on working with subplots. See the [full `plotly graph objects` reference](/reference/graph_objects/index.md) for more information regarding chart attributes!

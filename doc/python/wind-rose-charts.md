@@ -1,44 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: How to graph wind rose charts in python. Wind Rose charts display
-      wind speed and direction of a given location.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Wind Rose and Polar Bar Charts
-    order: 19
-    page_type: u-guide
-    permalink: python/wind-rose-charts/
-    thumbnail: thumbnail/wind-rose.jpg
+description: How to graph wind rose charts in python. Wind Rose charts display wind
+  speed and direction of a given location.
 ---
-
 ### Wind Rose Chart with Plotly Express
 
 A [wind rose chart](https://en.wikipedia.org/wiki/Wind_rose) (also known as a polar bar chart) is a graphical tool used to visualize how wind speed and direction are typically distributed at a given location. You can use the `px.bar_polar` function from Plotly Express as below, otherwise use `go.Barpolar` as explained in the next section.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 ```python
 import plotly.express as px
@@ -91,4 +59,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(bar_polar)`](https://plotly.com/python-api-reference/generated/plotly.express.bar_polar) or https://plotly.com/python/reference/barpolar/ for more information and chart attribute options!
+See [function reference for `px.(bar_polar)`](reference/plotly-express.md#plotly.express.bar_polar) or the [full reference for `go.Barpolar`](reference/graph_objects/Barpolar.md) for more information and chart attribute options!

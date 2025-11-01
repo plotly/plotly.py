@@ -1,41 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: Migration guide for upgrading from version 3 to version 4
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Version 4 Migration Guide
-    order: 39
-    page_type: example_index
-    permalink: python/v4-migration/
-    thumbnail: thumbnail/v4-migration.png
+description: Migration guide for upgrading from version 3 to version 4
 ---
-
 ### Upgrading to Version 4
 
-Upgrading to version 4 of `plotly` is a matter of following the instructions in the [Getting Started](/python/getting-started/) guide and reinstalling the packages, subject to the notices below.
+Upgrading to version 4 of `plotly` is a matter of following the instructions in the [Getting Started](getting-started.md) guide and reinstalling the packages, subject to the notices below.
 
 ### Getting Help
 
@@ -81,7 +49,7 @@ Similarly,
 <!-- #region -->
 ### Offline features (`plotly.offline`) replaced by Renderers framework & HTML export
 
-Version 4 introduces a new renderers framework that is a generalization of version 3's `plotly.offline.init_notebook_mode` and `plotly.offline.iplot` functions for displaying figures.  *This is a non-breaking change*: the `plotly.offline.iplot` function is still available and has been reimplemented on top of the renderers framework, so no changes are required when porting to version 4.  Going forward, we recommend using the renderers framework directly. See [Displaying plotly figures](/python/renderers) for more information.
+Version 4 introduces a new renderers framework that is a generalization of version 3's `plotly.offline.init_notebook_mode` and `plotly.offline.iplot` functions for displaying figures.  *This is a non-breaking change*: the `plotly.offline.iplot` function is still available and has been reimplemented on top of the renderers framework, so no changes are required when porting to version 4.  Going forward, we recommend using the renderers framework directly. See [Displaying plotly figures](renderers.md) for more information.
 
 
 In version 3, the `plotly.offline.plot` function was used to export figures to HTML files.  In version 4, this function has been reimplemented on top of the new `to_html` and `write_html` functions from the `plotly.io` module.  These functions have a slightly more consistent API (see docstrings for details), and going forward we recommend using them directly when performing HTML export. When working with a graph object figure, these functions are also available as the `.to_html` and `.write_html` figure methods.
@@ -160,7 +128,7 @@ fig.show()
 pio.templates.default = "plotly"
 ```
 
-See [Theming and templates](/python/templates) for more information on theming in plotly.py version 4.
+See [Theming and templates](templates.md) for more information on theming in plotly.py version 4.
 
 ### Add trace return value
 In version 3, the `add_trace` graph object figure method returned a reference to the newly created trace. This was also the case for the `add_{trace_type}` methods (e.g. `add_scatter`, `add_bar`, etc.).  In version 4, these methods return a reference to the calling figure.  This change was made to support method chaining of figure operations. For example
@@ -212,7 +180,9 @@ When the `print_grid` argument to `make_subplots` is set to `True`, a text repre
 #### New `row_heights` argument to replace `row_width`
 The legacy argument for specifying the relative height of subplot rows was called `row_width`. A new `row_heights` argument has been introduced for this purpose.
 
-> Note: Although it is not mentioned in the docstring for `plotly.subplots.make_subplots`, the legacy `row_width` argument, with the legacy behavior, is still available in version 4.
+!!! note
+
+    Although it is not mentioned in the docstring for `plotly.subplots.make_subplots`, the legacy `row_width` argument, with the legacy behavior, is still available in version 4.
 
 In addition to having a more consistent name, values specified to the new `row_heights` argument properly honor the `start_cell` argument.  With the legacy `row_width` argument, the list of heights was always interpreted from the bottom row to the top row, even if `start_cell=="top-left"`. With the new `row_heights` argument, the list of heights is interpreted from top to bottom if `start_cell=="top-left"` and from bottom to top if `start_cell=="bottom-left"`.
 
@@ -286,7 +256,7 @@ pio.orca.config.use_xvfb = False
 The `fileopt` argument to `chart_studio.plotly.plot` has been removed, so in-place modifications to previously published figures are no longer supported.
 
 #### Legacy online `GraphWidget`
-The legacy online-only `GraphWidget` class has been removed.  Please use the `plotly.graph_objects.FigureWidget` class instead. See the [Figure Widget Overview](/python/figurewidget/) for more information.
+The legacy online-only `GraphWidget` class has been removed.  Please use the `plotly.graph_objects.FigureWidget` class instead. See the [Figure Widget Overview](figurewidget.md) for more information.
 
 ### Recommended style updates
 

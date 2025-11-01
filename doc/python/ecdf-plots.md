@@ -1,43 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to add empirical cumulative distribution function (ECDF) plots.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Empirical Cumulative Distribution Plots
-    order: 16
-    page_type: u-guide
-    permalink: python/ecdf-plots/
-    thumbnail: thumbnail/figure-labels.png
+description: How to add empirical cumulative distribution function (ECDF) plots.
 ---
-
 ### Overview
 
-[Empirical cumulative distribution function plots](https://en.wikipedia.org/wiki/Empirical_distribution_function) are a way to visualize the distribution of a variable, and Plotly Express has a built-in function, `px.ecdf()` to generate such plots. [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Empirical cumulative distribution function plots](https://en.wikipedia.org/wiki/Empirical_distribution_function) are a way to visualize the distribution of a variable, and Plotly Express has a built-in function, `px.ecdf()` to generate such plots. [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-Alternatives to ECDF plots for visualizing distributions include [histograms](https://plotly.com/python/histograms/), [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+Alternatives to ECDF plots for visualizing distributions include [histograms](histograms.md), [violin plots](violin.md), [box plots](box-plots.md) and [strip charts](strip-charts.md).
 
 ### Simple ECDF Plots
 
@@ -50,7 +18,7 @@ fig = px.ecdf(df, x="total_bill")
 fig.show()
 ```
 
-Providing multiple columns leverage's Plotly Express' [wide-form data support](https://plotly.com/python/wide-form/) to show multiple variables on the same plot.
+Providing multiple columns leverage's Plotly Express' [wide-form data support](wide-form.md) to show multiple variables on the same plot.
 
 ```python
 import plotly.express as px
@@ -150,7 +118,7 @@ fig.show()
 
 ### Marginal Plots
 
-ECDF plots also support [marginal plots](https://plotly.com/python/marginal-plots/)
+ECDF plots also support [marginal plots](marginal-plots.md)
 
 ```python
 import plotly.express as px
@@ -168,7 +136,7 @@ fig.show()
 
 ### Facets
 
-ECDF Plots also support [faceting](https://plotly.com/python/facet-plots/)
+ECDF Plots also support [faceting](facet-plots.md)
 
 ```python
 import plotly.express as px
@@ -177,6 +145,5 @@ fig = px.ecdf(df, x="total_bill", color="sex", facet_row="time", facet_col="day"
 fig.show()
 ```
 
-```python
 
-```
+

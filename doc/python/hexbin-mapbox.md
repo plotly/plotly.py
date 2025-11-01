@@ -1,41 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make a map with Hexagonal Binning of data in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Hexbin Mapbox
-    order: 14
-    page_type: u-guide
-    permalink: python/hexbin-mapbox/
-    thumbnail: thumbnail/hexbin_mapbox.jpg
+description: How to make a map with Hexagonal Binning of data in Python with Plotly.
 ---
 
-#### Simple Count Hexbin
+### Simple Count Hexbin
 
-This page details the use of a [figure factory](/python/figure-factories/). For more examples with Choropleth maps, see [this page](/python/choropleth-maps/).
+This page details the use of a [figure factory](figure-factories.md). For more examples with Choropleth maps, see [this page](choropleth-maps.md).
 
 ```python
 import plotly.figure_factory as ff
@@ -51,7 +20,7 @@ fig.update_layout(margin=dict(b=0, t=0, l=0, r=0))
 fig.show()
 ```
 
-#### Count Hexbin with Minimum Count and Opacity
+### Count Hexbin with Minimum Count and Opacity
 
 ```python
 import plotly.figure_factory as ff
@@ -67,7 +36,7 @@ fig = ff.create_hexbin_map(
 fig.show()
 ```
 
-#### Display the Underlying Data
+### Display the Underlying Data
 
 ```python
 import plotly.figure_factory as ff
@@ -85,7 +54,7 @@ fig = ff.create_hexbin_map(
 fig.show()
 ```
 
-#### Compute the Mean Value per Hexbin
+### Compute the Mean Value per Hexbin
 
 ```python
 import plotly.figure_factory as ff
@@ -102,7 +71,7 @@ fig = ff.create_hexbin_map(
 fig.show()
 ```
 
-#### Compute the Sum Value per Hexbin
+### Compute the Sum Value per Hexbin
 
 ```python
 import plotly.figure_factory as ff
@@ -119,7 +88,7 @@ fig = ff.create_hexbin_map(
 fig.show()
 ```
 
-#### Hexbin with Animation
+### Hexbin with Animation
 
 ```python
 import plotly.figure_factory as ff
@@ -154,6 +123,6 @@ fig.layout.updatemenus[0].pad.t=40
 fig.show()
 ```
 
-#### Reference
+### Reference
 
-For more info on Plotly maps, see: https://plotly.com/python/maps.<br> For more info on using colorscales with Plotly see: https://plotly.com/python/heatmap-and-contour-colorscales/ <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_hexbin_mapbox.html#plotly.figure_factory.create_hexbin_mapbox)
+For more info on Plotly maps, see [examples of maps](maps.md).<br> For more info on using colorscales with Plotly see the [colorscales page](colorscales.md) <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](/reference/figure-factory.md#plotly.figure_factory.create_hexbin_mapbox)

@@ -9,7 +9,7 @@ with the matplotlylib package.
 
 import warnings
 
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
 

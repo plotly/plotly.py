@@ -1,41 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to make a streamline plot in Python. A streamline plot displays
-      vector field data.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Streamline Plots
-    order: 11
-    permalink: python/streamline-plots/
-    thumbnail: thumbnail/streamline.jpg
+description: How to make a streamline plot in Python. A streamline plot displays vector
+  field data.
 ---
-
 A Streamline plot is a representation based on a 2-D vector field interpreted as a velocity field, consisting of closed curves tangent to the velocity field. In the case of a stationary velocity field, streamlines coincide with trajectories (see also the [Wikipedia page on streamlines, streaklines and pathlines](https://en.wikipedia.org/wiki/Streamlines,_streaklines,_and_pathlines)).
 
-For the streamline [figure factory](/python/figure-factories/), one needs to provide
+For the streamline [figure factory](figure-factories.md), one needs to provide
 - uniformly spaced ranges of `x` and `y` values (1D)
 - 2-D velocity values `u` and `v` defined on the cross-product (`np.meshgrid(x, y)`) of `x` and `y`.
 
@@ -43,7 +12,7 @@ Velocity values are interpolated when determining the streamlines. Streamlines a
 
 #### Basic Streamline Plot
 
-Streamline plots can be made with a [figure factory](/python/figure-factories/) as detailed in this page.
+Streamline plots can be made with a [figure factory](figure-factories.md) as detailed in this page.
 
 ```python
 import plotly.figure_factory as ff
@@ -99,11 +68,11 @@ fig.show()
 
 #### See also
 
-For a 3D version of streamlines, use the trace `go.Streamtube` documented [here](/python/streamtube-plot/).
+For a 3D version of streamlines, use the trace `go.Streamtube` documented [here](streamtube-plot.md).
 
-For representing the 2-D vector field as arrows, see the [quiver plot tutorial](/python/quiver-plots/).
+For representing the 2-D vector field as arrows, see the [quiver plot tutorial](quiver-plots.md).
 
 
 #### Reference
 
-For more info on `ff.create_streamline()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_streamline.html)
+For more info on `ff.create_streamline()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_streamline)

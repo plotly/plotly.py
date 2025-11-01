@@ -1,42 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: Learn how to perform smoothing using various methods in Python.
-    display_as: advanced_opt
-    has_thumbnail: false
-    language: python
-    layout: base
-    name: Smoothing
-    order: 4
-    page_type: example_index
-    permalink: python/smoothing/
-    thumbnail: /images/static-image
+description: Learn how to perform smoothing using various methods in Python.
 ---
 
-#### Imports
+### Imports
 
-The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html), [SciPy](https://www.scipy.org/) and [Plotly](https://plotly.com/python/getting-started/).
+The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html), [SciPy](https://www.scipy.org/) and [Plotly](getting-started.md).
 
 ```python
 import plotly.graph_objects as go
@@ -48,7 +16,7 @@ import scipy
 from scipy import signal
 ```
 
-#### Savitzky-Golay Filter
+### Savitzky-Golay Filter
 
 `Smoothing` is a technique that is used to eliminate noise from a dataset. There are many algorithms and methods to accomplish this but all have the same general purpose of 'roughing out the edges' or 'smoothing' some data.
 
@@ -111,7 +79,7 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-#### Triangular Moving Average
+### Triangular Moving Average
 
 Another method for smoothing is a moving average. There are various forms of this, but the idea is to take a window of points in your dataset, compute an average of the points, then shift the window over by one point and repeat. This will generate a bunch of points which will result in the `smoothed` data.
 
@@ -132,6 +100,16 @@ TMA_i = \frac{SMA_i + ... + SMA_{i+n}}{n}
 $$
 
 ```python
+import plotly.graph_objects as go
+import numpy as np
+
+np.random.seed(1)
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+noise = 2 * np.random.random(len(x)) - 1 # uniformly distributed between -1 and 1
+y_noise = y + noise
+
 def smoothTriangle(data, degree):
     triangle=np.concatenate((np.arange(degree + 1), np.arange(degree)[::-1])) # up then down
     smoothed=[]

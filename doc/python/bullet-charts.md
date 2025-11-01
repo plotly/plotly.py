@@ -1,41 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to make bullet charts in Python with Plotly.
-    display_as: financial
-    language: python
-    layout: base
-    name: Bullet Charts
-    order: 8
-    page_type: u-guide
-    permalink: python/bullet-charts/
-    thumbnail: thumbnail/bullet.png
+description: How to make bullet charts in Python with Plotly.
 ---
 
-#### Basic Bullet Charts
-Stephen Few's Bullet Chart was invented to replace dashboard [gauges](https://plotly.com/python/gauge-charts/) and meters, combining both types of charts into simple bar charts with qualitative bars (steps), quantitative bar (bar) and performance line (threshold); all into one simple layout.
-  Steps typically are broken into several values, which are defined with an array. The bar represent the actual value that a particular variable reached, and the threshold usually indicate a goal point relative to the value achieved by the bar. See [indicator page](https://plotly.com/python/gauge-charts/) for more detail.
+### Basic Bullet Charts
+Stephen Few's Bullet Chart was invented to replace dashboard [gauges](gauge-charts.md) and meters, combining both types of charts into simple bar charts with qualitative bars (steps), quantitative bar (bar) and performance line (threshold); all into one simple layout.
+  Steps typically are broken into several values, which are defined with an array. The bar represent the actual value that a particular variable reached, and the threshold usually indicate a goal point relative to the value achieved by the bar. See [indicator page](indicator.md) for more detail.
 
 ```python
 import plotly.graph_objects as go
@@ -52,7 +21,7 @@ fig.update_layout(height = 250)
 fig.show()
 ```
 
-#### Add Steps, and Threshold
+### Add Steps, and Threshold
 Below is the same example using "steps" attribute, which is shown as shading, and "threshold" to determine boundaries that visually alert you if the value cross a defined threshold.
 
 ```python
@@ -77,8 +46,8 @@ fig.update_layout(height = 250)
 fig.show()
 ```
 
-#### Custom Bullet
-The following example shows how to customize your charts. For more information about all possible options check our [reference page](https://plotly.com/python/reference/indicator/).
+### Custom Bullet
+The following example shows how to customize your charts. For more information about all possible options check our [reference page](reference/graph_objects/Indicator.md).
 
 ```python
 import plotly.graph_objects as go
@@ -103,7 +72,7 @@ fig.update_layout(height = 250)
 fig.show()
 ```
 
-#### Multi Bullet
+### Multi Bullet
 Bullet charts can be stacked for comparing several values at once as illustrated below:
 
 ```python
@@ -166,9 +135,8 @@ fig.update_layout(height = 400 , margin = {'t':0, 'b':0, 'l':0})
 fig.show()
 ```
 
-#### Reference
-See https://plotly.com/python/reference/indicator/ for more information and chart attribute options!
+### Reference
+See the [full reference for `go.Indicator`](reference/graph_objects/Indicator.md) for more information and chart attribute options!
 
-```python
 
-```
+

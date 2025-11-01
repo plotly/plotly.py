@@ -796,8 +796,8 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
             always
         """
         msg = """
-Frames are not supported by the plotly.graph_objs.FigureWidget class.
-Note: Frames are supported by the plotly.graph_objs.Figure class"""
+Frames are not supported by the plotly.graph_objects.FigureWidget class.
+Note: Frames are supported by the plotly.graph_objects.Figure class"""
         raise ValueError(msg)
 
     # Static Helpers

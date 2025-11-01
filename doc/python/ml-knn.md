@@ -1,42 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification
-      in Python with Plotly.
-    display_as: ai_ml
-    language: python
-    layout: base
-    name: kNN Classification
-    order: 2
-    page_type: u-guide
-    permalink: python/knn-classification/
-    thumbnail: thumbnail/knn-classification.png
+description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification in
+  Python with Plotly.
 ---
-
 ## Basic binary classification with kNN
 
-This section gets us started with displaying basic binary classification using 2D data. We first show how to display training versus testing data using [various marker styles](https://plot.ly/python/marker-style/), then demonstrate how to evaluate our classifier's performance on the **test split** using a continuous color gradient to indicate the model's predicted score.
+This section gets us started with displaying basic binary classification using 2D data. We first show how to display training versus testing data using [various marker styles](marker-style.md), then demonstrate how to evaluate our classifier's performance on the **test split** using a continuous color gradient to indicate the model's predicted score.
 
 We will use [Scikit-learn](https://scikit-learn.org/) for training our model and for loading and splitting data. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
 
@@ -45,11 +13,11 @@ We will train a [k-Nearest Neighbors (kNN)](https://scikit-learn.org/stable/modu
 
 ### Display training and test splits
 
-Using Scikit-learn, we first generate synthetic data that form the shape of a moon. We then split it into a training and testing set. Finally, we display the ground truth labels using [a scatter plot](https://plotly.com/python/line-and-scatter/).
+Using Scikit-learn, we first generate synthetic data that form the shape of a moon. We then split it into a training and testing set. Finally, we display the ground truth labels using [a scatter plot](line-and-scatter.md).
 
 In the graph, we display all the negative labels as squares, and positive labels as circles. We differentiate the training and test set by adding a dot to the center of test data.
 
-In this example, we will use [graph objects](/python/graph-objects/), Plotly's low-level API for building figures.
+In this example, we will use [graph objects](graph-objects.md), Plotly's low-level API for building figures.
 
 ```python
 import plotly.graph_objects as go
@@ -85,12 +53,12 @@ fig.update_traces(
 fig.show()
 ```
 
-### Visualize predictions on test split with [`plotly.express`](https://plotly.com/python/plotly-express/)
+### Visualize predictions on test split with [`plotly.express`](plotly-express.md)
 
 
 Now, we train the kNN model on the same training data displayed in the previous graph. Then, we predict the confidence score of the model for each of the data points in the test set. We will use shapes to denote the true labels, and the color will indicate the confidence of the model for assign that score.
 
-In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures. Notice that `px.scatter` only require 1 function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `y_score` output by our kNN model.
+In this example, we will use [Plotly Express](plotly-express.md), Plotly's high-level API for building figures. Notice that `px.scatter` only require 1 function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `y_score` output by our kNN model.
 
 ```python
 import plotly.express as px
@@ -126,9 +94,9 @@ Just like the previous example, we will first train our kNN model on the trainin
 
 Instead of predicting the conference for the test set, we can predict the confidence map for the entire area that wraps around the dimensions of our dataset. To do this, we use [`np.meshgrid`](https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html) to create a grid, where the distance between each point is denoted by the `mesh_size` variable.
 
-Then, for each of those points, we will use our model to give a confidence score, and plot it with a [contour plot](https://plotly.com/python/contour-plots/).
+Then, for each of those points, we will use our model to give a confidence score, and plot it with a [contour plot](contour-plots.md).
 
-In this example, we will use [graph objects](/python/graph-objects/), Plotly's low-level API for building figures.
+In this example, we will use [graph objects](graph-objects.md), Plotly's low-level API for building figures.
 
 ```python
 import plotly.graph_objects as go
@@ -243,27 +211,32 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'knn-classification', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/knn-classification" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
-## Multi-class prediction confidence with [`go.Heatmap`](https://plotly.com/python/heatmaps/)
+## Multi-class prediction confidence with [`go.Heatmap`](heatmaps.md)
 
-It is also possible to visualize the prediction confidence of the model using [heatmaps](https://plotly.com/python/heatmaps/). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
+It is also possible to visualize the prediction confidence of the model using [heatmaps](heatmaps.md). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
 
-In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
+In this example, we will use [Plotly Express](plotly-express.md), Plotly's high-level API for building figures.
 
 ```python
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
 
 mesh_size = .02
 margin = 1
@@ -331,11 +304,13 @@ fig.show()
 ### Reference
 
 Learn more about `px`, `go.Contour`, and `go.Heatmap` here:
-* https://plot.ly/python/plotly-express/
-* https://plot.ly/python/heatmaps/
-* https://plot.ly/python/contour-plots/
+
+* [Plotly Express](plotly-express.md)
+* [Heatmaps](heatmaps.md)
+* [Contour Plots](contour-plots.md)
 
 This tutorial was inspired by amazing examples from the official scikit-learn docs:
-* https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html
-* https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
-* https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
+
+* <https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html>
+* <https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html>
+* <https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html>

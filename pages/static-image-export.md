@@ -1,0 +1,310 @@
+---
+description: Plotly allows you to save static images of your plots. Save the image
+  to your local computer, or embed it inside your Jupyter notebooks as a static image.
+---
+This page demonstrates how to export interactive Plotly figures to static image formats like PNG, JPEG, SVG, and PDF. If you want to export Plotly figures to HTML to retain interactivity, see the [Interactive HTML Export page](interactive-html-export.md)
+
+<!-- #region -->
+## Install Dependencies
+
+### Kaleido
+
+Static image generation requires [Kaleido](https://github.com/plotly/Kaleido).
+Install Kaleido with pip:
+```
+$ pip install --upgrade kaleido
+```
+or with conda:
+```
+$ conda install -c conda-forge python-kaleido
+```
+
+It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](orca-management.md) page for more details.
+
+### Chrome
+
+Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome as part of the Kaleido package. Kaleido v1 does not include Chrome; instead, it looks for a compatible version of Chrome (or Chromium) already installed on the machine on which it's running.
+
+If you don't have Chrome installed, you can install it directly from Google following the instructions for your operating system.
+
+Plotly also provides a CLI for installing Chrome from the command line.
+
+Run `plotly_get_chrome` to install Chrome.
+
+You can also install Chrome from Python using `plotly.io.get_chrome()`
+
+```python
+import plotly.io as pio
+
+pio.get_chrome()
+```
+
+See the **Additional Information on Browsers with Kaleido** section below for more details on browser compatibility for Kaleido.
+
+<!-- #endregion -->
+
+## Write Image to a File
+
+Plotly figures have a `write_image` method to write a figure to a file. `write_image` supports PNG, JPEG, WebP, SVG, and PDF formats.
+
+To export a figure using `write_image`, call `write_image` on the figure, and pass as an argument the filename where you want to save the figure. The file format is inferred from the extension:
+
+
+### Raster Formats
+
+**PNG**
+~~~python
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+fig.write_image("fig1.png")
+~~~
+
+**JPEG**
+
+~~~python
+...
+fig.write_image("images/fig1.jpeg")
+~~~
+
+**WebP**
+
+~~~python
+...
+fig.write_image("images/fig1.webp")
+~~~
+
+### Vector Formats
+
+**SVG**
+~~~python
+...
+fig.write_image("images/fig1.svg")
+~~~
+
+**PDF**
+
+~~~python
+...
+fig.write_image("images/fig1.pdf")
+~~~
+
+---
+
+**EPS** (Kaleido<1.0.0)
+
+Kaleido versions earlier than 1.0.0 also support **EPS** (requires the poppler library). If using Kaleido v1 or later, we recommend PDF or SVG format.
+
+~~~python
+...
+fig.write_image("images/fig1.eps")
+~~~
+
+
+**Note:** Figures containing WebGL traces (i.e. of type `scattergl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
+
+
+### Specify a Format
+
+In the earlier example, Plotly inferred the image format from the extension of the filename. You can also specify the format explicitly using the `format` parameter.
+
+~~~python
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+fig.write_image("fig1", format="png")
+~~~
+
+
+<!-- #region -->
+### Write Multiple Images
+
+*Kaleido v1 and later*
+
+`plotly.io` provides a `write_images` function for writing multiple figures to images. Using `write_images` is faster than calling `fig.write_image` multiple times.
+
+`write_images` takes a list of figure objects or dicts representing figures as its first argument, `fig`. The second argument `file` is a list of paths to export to. These paths can be specified as `str`s or [`pathlib.Path` objects](https://docs.python.org/3/library/pathlib.html).
+
+~~~python
+import plotly.graph_objects as go
+import plotly.express as px
+import plotly.io as pio
+
+
+fig1 = go.Figure(
+    data=go.Scatter(x=[1, 2, 3], y=[4, 5, 6], mode='lines+markers'),
+    layout=go.Layout(title='Line Chart')
+)
+
+fig2 = go.Figure(
+    data=go.Bar(x=['A', 'B', 'C'], y=[10, 5, 15]),
+    layout=go.Layout(title='Bar Chart')
+)
+
+fig3 = px.pie(
+    values=[30, 20, 10, 40],
+    names=['A', 'B', 'C', 'D'],
+    title='Pie Chart'
+)
+
+pio.write_images(
+    fig=[fig1, fig2, fig3],
+    file=['export_images/line_chart.png', 'export_images/bar_chart.png', 'export_images/pie_chart.png']
+)
+~~~
+
+<!-- #endregion -->
+
+## Get Image as Bytes
+
+As well as exporting to a file, Plotly figures also support conversion to a bytes object.
+To convert a figure to a **PNG** bytes object, call the figure's `to_image` method with a `format`
+
+```python
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+img_bytes = fig.to_image(format="png")
+```
+
+Here's the bytes object displayed using `Image.show()`:
+
+```python
+from PIL import Image
+from io import BytesIO
+img = Image.open(BytesIO(img_bytes))
+img.show()
+```
+<div id="image-div-1"><img src="../imgs/static-image-export_image_1.png" alt="Image 1" style="max-width: 100%; height: auto;"></div>
+
+## Specify Image Dimensions and Scale
+In addition to the image format, the `to_image` and `write_image` functions provide arguments to specify the image `width` and `height` in logical pixels. They also provide a `scale` parameter that can be used to increase (`scale` > 1) or decrease (`scale` < 1) the physical resolution of the resulting image.
+
+```python
+img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
+img = Image.open(BytesIO(img_bytes))
+img.show()
+```
+<div id="image-div-2"><img src="../imgs/static-image-export_image_2.png" alt="Image 2" style="max-width: 100%; height: auto;"></div>
+
+## Specify Image Export Engine
+
+!!! note
+
+    The `engine` parameter, as well as Orca support, is deprecated in Plotly.py 6.2.0 and will be removed after September 2025.
+
+If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
+
+Here is an example of specifying `orca` for the image export engine:
+~~~python
+fig.to_image(format="png", engine="orca")
+~~~
+
+And, here is an example of specifying that Kaleido should be used:
+~~~python
+fig.to_image(format="png", engine="kaleido")
+~~~
+
+
+<!-- #region -->
+## plotly.io Functions
+
+Previous examples on this page access `write_image` and `to_image` as methods on Plotly Figure objects. This functionality is also available via the `plotly.io` subpackage.
+
+The following example uses the `write_image` function from  `plotly.io`. The function takes the figure or a `dict` representing a figure (as shown in the example) as its first argument.
+
+
+~~~python
+import plotly.io as pio
+
+
+fig = dict({
+    "data": [{"type": "bar",
+              "x": [1, 2, 3],
+              "y": [1, 3, 2]}],
+    "layout": {"title": {"text": "A Figure Specified By Python Dictionary"}}
+})
+
+pio.write_image(fig, "fig.png")
+~~~
+<!-- #endregion -->
+
+## Image Export Settings (Kaleido)
+
+As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can also set a single default to be used throughout the duration of the program.
+
+### Available Settings
+
+The following settings are available.
+
+`default_width`: The default pixel width to use on image export.
+
+`default_height`: The default pixel height to use on image export.
+
+`default_scale`: The default image scale factor applied on image export.
+
+`default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", or "pdf". ("eps" support is available with Kaleido v0 only)
+
+`mathjax`: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
+
+`plotlyjs`: Location of the Plotly.js bundle to use. Can be a local file path or URL. By default, Kaleido uses the Plotly.js bundle included with Plotly.py.
+
+`topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
+
+`mapbox_access_token`: The default Mapbox access token (Kaleido v0 only). Mapbox traces are deprecated. See the [MapLibre Migration](mapbox-to-maplibre.md) page for more details.
+
+### Set Defaults
+
+Since Plotly.py 6.1, settings are available on `plotly.io.defaults`
+
+To set the `default_format` to "jpeg":
+
+~~~python
+import plotly.io as pio
+pio.defaults.default_format = "jpeg"
+~~~
+
+You can also access current defaults. To see the default value for height:
+
+~~~python
+import plotly.io as pio
+pio.defaults.default_height
+~~~
+
+In earlier versions of Plotly.py, these settings are available on `plotly.io.kaleido.scope`. This is deprecated since version 6.2. Use `plotly.io.defaults` instead.
+
+~~~python
+import plotly.io as pio
+# Example using deprecated `plotly.io.kaleido.scope`
+pio.kaleido.scope.default_format = "jpeg"
+~~~
+
+### Additional Information on Browsers with Kaleido
+
+When exporting images from Plotly.py, Kaleido will attempt to find a version of [Chrome](https://www.google.com/chrome/index.html) or [Chromium](https://www.chromium.org/getting-involved/download-chromium/) that it can use for the export. It checks in the operating system's PATH for executables with the following names: "chromium", "chromium-browser",  "chrome", "Chrome", "google-chrome" "google-chrome-stable", "Chrome.app", "Google Chrome", "Google Chrome.app", and "Google Chrome for Testing".
+
+Kaleido will also check the following locations:
+
+**Windows**
+
+- r"c:\Program Files\Google\Chrome\Application\chrome.exe"
+- f"c:\\Users\\{os.environ.get('USER', 'default')}\\AppData\\"
+- "Local\\Google\\Chrome\\Application\\chrome.exe"
+
+**Linux"**
+
+- "/usr/bin/google-chrome-stable"
+- "/usr/bin/google-chrome"
+- "/usr/bin/chrome"
+
+**Mac OS**
+
+- "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+---
+
+Most recent versions of Chrome or Chromium should work with Kaleido. Other Chromium-based browsers may also work, though Kaleido won't discover them automatically. You can set a browser to use by setting the path to search using an environment variable called `BROWSER_PATH`. For example:
+
+```
+BROWSER_PATH=/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge
+```

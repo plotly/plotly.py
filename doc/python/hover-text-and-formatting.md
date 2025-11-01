@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.12.4
-  plotly:
-    description: How to use hover text and formatting in Python with Plotly.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Hover Text and Formatting
-    order: 23
-    permalink: python/hover-text-and-formatting/
-    thumbnail: thumbnail/hover-text.png
+description: How to use hover text and formatting in Python with Plotly.
 ---
-
 ### Hover Labels
 
 One of the most deceptively-powerful features of interactive visualization using Plotly is the ability for the user to reveal more information about a data point by moving their mouse cursor over the point and having a hover label appear.
@@ -142,11 +111,15 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 
 Change the hovermode below and try hovering over the points:
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'hover-text-and-formatting', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/hover-text-and-formatting" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -154,7 +127,7 @@ IFrame(snippet_url + 'hover-text-and-formatting', width='100%', height=1200)
 
 #### Selecting a hovermode in a figure created with `plotly.graph_objects`
 
-The hovermode is a property of the figure layout, so you can select a hovermode no matter how you created the figure, either with `plotly.express` or with `plotly.graph_objects`. Below is an example with a figure created with `plotly.graph_objects`. If you're not familiar with the structure of plotly figures, you can read [the tutorial on creating and updating plotly figures](/python/creating-and-updating-figures/).
+The hovermode is a property of the figure layout, so you can select a hovermode no matter how you created the figure, either with `plotly.express` or with `plotly.graph_objects`. Below is an example with a figure created with `plotly.graph_objects`. If you're not familiar with the structure of plotly figures, you can read [the tutorial on creating and updating plotly figures](creating-and-updating-figures.md).
 
 ```python
 import plotly.graph_objects as go
@@ -269,12 +242,12 @@ fig.show()
 
 ### Customizing hover text with a hovertemplate
 
-To customize the tooltip on your graph you can use the [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) attribute of `graph_objects` traces, which is a template string used for rendering the information that appear on hoverbox.
+To customize the tooltip on your graph you can use the [hovertemplate](reference/graph_objects/Pie.md#plotly.graph_objects.Pie.hovertemplate) attribute of `graph_objects` traces, which is a template string used for rendering the information that appear on hoverbox.
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hovertemplate, it is not reserved for the trace name.
 
-Note that a hovertemplate customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate) customizes the text that appears on your chart. <br>
+Note that a hovertemplate customizes the tooltip text, while a [texttemplate](reference/graph_objects/Pie.md#plotly.graph_objects.Pie.texttemplate) customizes the text that appears on your chart. <br>
 
-Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plotly.com/python/reference/layout/#layout-hoverlabel-align).
+Set the horizontal alignment of the text within tooltip with [hoverlabel.align](reference/graph_objects/layout-package/Hoverlabel.md#plotly.graph_objects.layout.Hoverlabel.align).
 
 ```python
 import plotly.graph_objects as go
@@ -390,7 +363,7 @@ fig.show()
 
 *New in v5.0*
 
-When [displaying periodic data](https://plotly.com/python/time-series/#displaying-period-data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hovermodes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
+When [displaying periodic data](time-series.md#displaying-period-data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hovermodes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
 
 ```python
 import plotly.graph_objects as go
@@ -598,4 +571,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/ for more information and chart attribute options!
+See the [full `plotly graph objects` reference](/reference/graph_objects/index.md) for more information and chart attribute options!

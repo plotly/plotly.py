@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make 3D Mesh Plots
-    display_as: 3d_charts
-    language: python
-    layout: base
-    name: 3D Mesh Plots
-    order: 9
-    page_type: u-guide
-    permalink: python/3d-mesh/
-    thumbnail: thumbnail/3d-mesh.jpg
+description: How to make 3D Mesh Plots
 ---
-
 ### Simple 3D Mesh example ###
 
 `go.Mesh3d` draws a 3D set of triangles with vertices given by `x`, `y` and `z`. If only coordinates are given, an algorithm such as [Delaunay triangulation](https://en.wikipedia.org/wiki/Delaunay_triangulation) is used to draw the triangles. Otherwise the triangles can be given using the `i`, `j` and `k` parameters (see examples below).
@@ -42,7 +10,7 @@ import plotly.graph_objects as go
 import numpy as np
 
 # Download data set from plotly repo
-pts = np.loadtxt(np.DataSource().open('https://raw.githubusercontent.com/plotly/datasets/master/mesh_dataset.txt'))
+pts = np.loadtxt(np.lib.npyio.DataSource().open('https://raw.githubusercontent.com/plotly/datasets/master/mesh_dataset.txt'))
 x, y, z = pts.T
 
 fig = go.Figure(data=[go.Mesh3d(x=x, y=y, z=z, color='lightpink', opacity=0.50)])
@@ -58,7 +26,7 @@ The `alphahull` parameter sets the shape of the mesh. If the value is -1 (defaul
 import plotly.graph_objects as go
 import numpy as np
 
-pts = np.loadtxt(np.DataSource().open('https://raw.githubusercontent.com/plotly/datasets/master/mesh_dataset.txt'))
+pts = np.loadtxt(np.lib.npyio.DataSource().open('https://raw.githubusercontent.com/plotly/datasets/master/mesh_dataset.txt'))
 x, y, z = pts.T
 
 fig = go.Figure(data=[go.Mesh3d(x=x, y=y, z=z,
@@ -75,11 +43,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + '3d-mesh', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/3d-mesh" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -182,4 +154,4 @@ fig.show()
 ```
 
 ## Reference
-See https://plotly.com/python/reference/mesh3d/ for more information and chart attribute options!
+See the [full reference for `go.Mesh3d`](reference/graph_objects/Mesh3d.md) for more information and chart attribute options!

@@ -1,45 +1,14 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make bubble maps in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Bubble Maps
-    order: 5
-    page_type: example_index
-    permalink: python/bubble-maps/
-    thumbnail: thumbnail/bubble-map.jpg
+description: How to make bubble maps in Python with Plotly.
 ---
 
-#### Base Map Configuration
+### Base Map Configuration
 
-Plotly figures made with [Plotly Express](/python/plotly-express/) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](/python/graph-objects/) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
+Plotly figures made with [Plotly Express](plotly-express.md) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](graph-objects.md) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](map-configuration.md) onto which data is plotted.
 
-### Bubble map with Plotly Express
+## Bubble map with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.scatter_geo`, each line of the dataframe is represented as a marker point. The column set as the `size` argument gives the size of markers.
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). With `px.scatter_geo`, each line of the dataframe is represented as a marker point. The column set as the `size` argument gives the size of markers.
 
 ```python
 import plotly.express as px
@@ -50,7 +19,7 @@ fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
 fig.show()
 ```
 
-### Bubble Map with animation
+## Bubble Map with animation
 
 ```python
 import plotly.express as px
@@ -62,9 +31,9 @@ fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
 fig.show()
 ```
 
-### Bubble Map with go.Scattergeo
+## Bubble Map with go.Scattergeo
 
-#### United States Bubble Map
+### United States Bubble Map
 
 Note about `sizeref`:
 
@@ -74,7 +43,7 @@ To scale the bubble size, use the attribute sizeref. We recommend using the foll
 
 Note that setting `sizeref` to a value greater than $1$, decreases the rendered marker sizes, while setting `sizeref` to less than $1$, increases the rendered marker sizes.
 
-See https://plotly.com/python/reference/scatter/#scatter-marker-sizeref for more information. Additionally, we recommend setting the sizemode attribute: https://plotly.com/python/reference/scatter/#scatter-marker-sizemode to area.
+See [full reference for `go.scatter.Marker.sizeref`](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizeref) for more information. Additionally, we recommend setting the sizemode attribute [here](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizemode) to area.
 
 ```python
 import plotly.graph_objects as go
@@ -121,7 +90,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Ebola Cases in West Africa
+### Ebola Cases in West Africa
 
 ```python
 import plotly.graph_objects as go
@@ -206,6 +175,6 @@ HDX</a>'),
 fig.show()
 ```
 
-#### Reference
+### Reference
 
-See [function reference for `px.(scatter_geo)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo) or https://plotly.com/python/reference/choropleth/ and https://plotly.com/python/reference/scattergeo/ for more information and chart attribute options!
+See [function reference for `px.(scatter_geo)`](reference/plotly-express.md#plotly.express.scatter_geo) or [full reference for Choropleth](reference/graph_objects/Choropleth.md) and [Scattergeo](reference/graph_objects/Scattergeo.md) for more information and chart attribute options!

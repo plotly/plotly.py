@@ -1,43 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to make Bar Charts in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Bar Charts
-    order: 3
-    page_type: example_index
-    permalink: python/bar-charts/
-    thumbnail: thumbnail/bar.jpg
+description: How to make Bar Charts in Python with Plotly.
 ---
-
 ### Bar chart with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-With `px.bar`, **each row of the DataFrame is represented as a rectangular mark**. To aggregate multiple data points into the same rectangular mark, please refer to the [histogram documentation](/python/histograms).
+With `px.bar`, **each row of the DataFrame is represented as a rectangular mark**. To aggregate multiple data points into the same rectangular mark, please refer to the [histogram documentation](histograms.md).
 
 In the example below, there is only a single row of data per year, so a single bar is displayed per year.
 
@@ -54,9 +22,9 @@ fig.show()
 Long-form data has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
 
 To learn more about how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions such as `px.bar`, see the [Plotly Express Wide-Form Support in Python
-documentation](https://plotly.com/python/wide-form/).
+documentation](wide-form.md).
 
-For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/).
+For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](px-arguments.md).
 
 ```python
 import plotly.express as px
@@ -68,6 +36,10 @@ fig.show()
 ```
 
 ```python
+import plotly.express as px
+
+long_df = px.data.medals_long()
+
 long_df
 ```
 
@@ -84,6 +56,10 @@ fig.show()
 ```
 
 ```python
+import plotly.express as px
+
+wide_df = px.data.medals_wide()
+
 wide_df
 ```
 
@@ -94,11 +70,15 @@ wide_df
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'bar-charts', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/bar-charts" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -106,7 +86,7 @@ IFrame(snippet_url + 'bar-charts', width='100%', height=1200)
 
 ### Colored Bars
 
-The bar plot can be customized using keyword arguments, for example to use [continuous color](https://plotly.com/python/colorscales/), as below, or [discrete color](/python/discrete-color/), as above.
+The bar plot can be customized using keyword arguments, for example to use [continuous color](colorscales.md), as below, or [discrete color](discrete-color.md), as above.
 
 ```python
 import plotly.express as px
@@ -152,9 +132,11 @@ fig.show()
 
 ### Aggregating into Single Colored Bars
 
-As noted above `px.bar()` will result in **one rectangle drawn per row of input**. This can sometimes result in a striped look as in the examples above. To combine these rectangles into one per color per position, you can use `px.histogram()`, which has [its own detailed documentation page](/python/histogram).
+As noted above `px.bar()` will result in **one rectangle drawn per row of input**. This can sometimes result in a striped look as in the examples above. To combine these rectangles into one per color per position, you can use `px.histogram()`, which has [its own detailed documentation page](histograms.md).
 
-> `px.bar` and `px.histogram` are designed  to be nearly interchangeable in their call signatures, so as to be able to switch between aggregated and disaggregated bar representations.
+!!! note
+
+    `px.bar` and `px.histogram` are designed  to be nearly interchangeable in their call signatures, so as to be able to switch between aggregated and disaggregated bar representations.
 
 ```python
 import plotly.express as px
@@ -167,7 +149,9 @@ fig.show()
 
 `px.histogram()` will aggregate `y` values by summing them by default, but the `histfunc` argument can be used to set this to `avg` to create what is sometimes called a "barplot" which summarizes the central tendency of a dataset, rather than visually representing the totality of the dataset.
 
-> Warning: when using `histfunc`s other than `"sum"` or `"count"` it can be very misleading to use a `barmode` other than `"group"`, as stacked bars in effect represent the sum of the bar heights, and summing averages is rarely a reasonable thing to visualize.
+!!! warning
+
+    When using `histfunc`s other than `"sum"` or `"count"` it can be very misleading to use a `barmode` other than `"group"`, as stacked bars in effect represent the sum of the bar heights, and summing averages is rarely a reasonable thing to visualize.
 
 ```python
 import plotly.express as px
@@ -216,7 +200,7 @@ fig = px.bar(df, y='pop', x='country', text_auto='.2s',
 fig.show()
 ```
 
-Here is the same data with less variation in text formatting. Note that `textfont_size` will set the *maximum* size. The `layout.uniformtext` attribute can be used to guarantee that all text labels are the same size. See the [documentation on text and annotations](/python/text-and-annotations/) for details.
+Here is the same data with less variation in text formatting. Note that `textfont_size` will set the *maximum* size. The `layout.uniformtext` attribute can be used to guarantee that all text labels are the same size. See the [documentation on text and annotations](text-and-annotations.md) for details.
 
 The `cliponaxis` attribute is set to `False` in the example below to ensure that the outside text on the tallest bar is allowed to render outside of the plotting area.
 
@@ -235,7 +219,7 @@ fig.show()
 *New in v5.0*
 
 
-Bar charts afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
+Bar charts afford the use of [patterns (also known as hatching or texture)](pattern-hatching-texture.md) in addition to color:
 
 ```python
 import plotly.express as px
@@ -262,7 +246,7 @@ fig.show()
 
 #### Basic Bar Charts with plotly.graph_objects
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Bar` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Bar` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 import plotly.graph_objects as go
@@ -820,7 +804,7 @@ fig.show()
 
 ### Bar Chart with Sorted or Ordered Categories
 
-Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
+Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
 
 This example orders the bar chart alphabetically with `categoryorder: 'category ascending'`
 
@@ -866,7 +850,7 @@ fig.show()
 
 ### Horizontal Bar Charts
 
-See examples of horizontal bar charts [here](https://plotly.com/python/horizontal-bar-charts/).
+See examples of horizontal bar charts [here](horizontal-bar-charts.md).
 
 ### Bar Charts With Multicategory Axis Type
 
@@ -890,4 +874,4 @@ fig.show()
 
 ### Reference
 
-See [function reference for `px.bar()`](https://plotly.com/python-api-reference/generated/plotly.express.bar) or https://plotly.com/python/reference/bar/ for more information and chart attribute options!
+See [function reference for `px.bar()`](reference/plotly-express.md#plotly.express.bar) or the [full reference for `go.Bar`](reference/graph_objects/Bar.md) for more information and chart attribute options!

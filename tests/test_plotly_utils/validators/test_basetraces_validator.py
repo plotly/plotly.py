@@ -1,6 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import BaseDataValidator
-from plotly.graph_objs import Scatter, Box
+from plotly.graph_objects import Scatter, Box
 
 
 # Fixtures
@@ -104,7 +104,7 @@ def test_rejection_element_attr(validator):
 
     assert (
         "Invalid property specified for object of type "
-        + "plotly.graph_objs.Scatter: 'bogus'"
+        + "plotly.graph_objects.Scatter: 'bogus'"
         in str(validation_failure.value)
     )
 

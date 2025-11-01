@@ -608,7 +608,6 @@ docs = dict(
     ],
 )
 
-
 def make_docstring(fn, override_dict=None, append_dict=None):
     override_dict = {} if override_dict is None else override_dict
     append_dict = {} if append_dict is None else append_dict

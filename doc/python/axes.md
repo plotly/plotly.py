@@ -1,62 +1,31 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to adjust axes properties in Python - axes titles, styling and
-      coloring axes and grid lines, ticks, tick labels and more.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Axes
-    order: 14
-    permalink: python/axes/
-    thumbnail: thumbnail/axes.png
+description: How to adjust axes properties in Python - axes titles, styling and coloring
+  axes and grid lines, ticks, tick labels and more.
 ---
-
-This tutorial explain how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](/python/reference/layout/xaxis/).
+This tutorial explain how to set the properties of [2-dimensional Cartesian axes](figure-structure.md#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/reference/graph_objects/layout-package/XAxis.md) and [`go.layout.YAxis`](/reference/graph_objects/layout-package/YAxis.md).
 
 Other kinds of subplots and axes are described in other tutorials:
 
-- [3D axes](/python/3d-axes) The axis object is [`go.layout.Scene`](/python/reference/layout/scene/)
-- [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/layout/polar/)
-- [Ternary axes](/python/ternary-plots). The axis object is [`go.layout.Ternary`](/python/reference/layout/ternary/)
-- [Geo axes](/python/map-configuration/). The axis object is [`go.layout.Geo`](/python/reference/layout/geo/)
-- [Map axes](/python/tile-map-layers/). The axis object is [`go.layout.Map`](/python/reference/layout/map/)
-- [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/layout/coloraxis/).
+- [3D axes](3d-axes.md) The axis object is [`go.layout.Scene`](/reference/graph_objects/layout-package/Scene.md)
+- [Polar axes](polar-chart.md). The axis object is [`go.layout.Polar`](/reference/graph_objects/layout-package/Polar.md)
+- [Ternary axes](ternary-plots.md). The axis object is [`go.layout.Ternary`](/reference/graph_objects/layout-package/Ternary.md)
+- [Geo axes](map-configuration.md). The axis object is [`go.layout.Geo`](/reference/graph_objects/layout-package/Geo.md)
+- [Map axes](tile-map-layers.md). The axis object is [`go.layout.Map`](/reference/graph_objects/layout-package/Map.md)
+- [Color axes](colorscales.md). The axis object is [`go.layout.Coloraxis`](/reference/graph_objects/layout-package/Coloraxis.md).
 
-**See also** the tutorials on [facet plots](/python/facet-plots/), [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
+**See also** the tutorials on [facet plots](facet-plots.md), [subplots](subplots.md) and [multiple axes](multiple-axes.md).
 
 ### 2-D Cartesian Axis Types and Auto-Detection
 
 The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
 - `'linear'` as described in this page
-- `'log'` (see the [log plot tutorial](/python/log-plot/))
-- `'date'` (see the [tutorial on timeseries](/python/time-series/))
-- `'category'` (see the [categorical axes tutorial](/python/categorical-axes/))
-- `'multicategory'` (see the [categorical axes tutorial](/python/categorical-axes/))
+- `'log'` (see the [log plot tutorial](log-plot.md))
+- `'date'` (see the [tutorial on timeseries](time-series.md))
+- `'category'` (see the [categorical axes tutorial](categorical-axes.md))
+- `'multicategory'` (see the [categorical axes tutorial](categorical-axes.md))
 
-The axis type is auto-detected by looking at data from the first [trace](/python/figure-structure/) linked to this axis:
+The axis type is auto-detected by looking at data from the first [trace](figure-structure.md) linked to this axis:
 
 * First check for `multicategory`, then `date`, then `category`, else default to `linear` (`log` is never automatically selected)
 * `multicategory` is just a shape test: is the array nested?
@@ -86,14 +55,14 @@ The different groups of Cartesian axes properties are
 - range of the axis
 - domain of the axis
 
-The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](/python/categorical-axes/) and [axes of type `date`](/python/time-series/).
+The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](categorical-axes.md) and [axes of type `date`](time-series.md).
 
 
 #### Set and Style Axes Title Labels
 
 ##### Set axis title text with Plotly Express
 
-Axis titles are automatically set to the column names when [using Plotly Express with a data frame as input](/python/px-arguments/).
+Axis titles are automatically set to the column names when [using Plotly Express with a data frame as input](px-arguments.md).
 
 ```python
 import plotly.express as px
@@ -102,7 +71,7 @@ fig = px.scatter(df, x="total_bill", y="tip", color="sex")
 fig.show()
 ```
 
-Axis titles (and [legend titles](/python/legend/)) can also be overridden using the `labels` argument of Plotly Express functions:
+Axis titles (and [legend titles](legend.md)) can also be overridden using the `labels` argument of Plotly Express functions:
 
 ```python
 import plotly.express as px
@@ -131,11 +100,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'axes', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/axes" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -190,7 +163,7 @@ fig.show()
 
 ### Set axis title position
 
-This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
+This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](setting-graph-size.md#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
 
 ```python
 import plotly.graph_objects as go
@@ -430,7 +403,7 @@ fig.show()
 
 _new in 5.8_
 
-You can position and style minor ticks on a Cartesian axis using the `minor` attribute. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
+You can position and style minor ticks on a Cartesian axis using the `minor` attribute. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.minor) for full details on the accepted keys in this dict.
 
 In the following example, we add minor ticks to the x-axis and then to the y-axis. For the y-axis we add ticks on the inside: `ticks="inside"`. On the x-axis we've specified some additional properties to style the minor ticks, setting the length of the ticks with `ticklen` and the color with `tickcolor`. We've also turned on grid lines for the x-axis minor ticks using `showgrid`.
 
@@ -1025,4 +998,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/xaxis/ and https://plotly.com/python/reference/layout/yaxis/ for more information and chart attribute options!
+See [full reference for `go.layout.xaxis`](reference/graph_objects/layout-package/XAxis.md) and [go.layout.yaxis`](reference/graph_objects/layout-package/YAxis.md) for more information and chart attribute options!

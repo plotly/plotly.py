@@ -1,7 +1,7 @@
 from typing import List
 
 import plotly
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from plotly.offline import get_plotlyjs_version
 
 
@@ -13,7 +13,7 @@ def validate_coerce_fig_to_dict(fig, validate):
     elif isinstance(fig, dict):
         if validate:
             # This will raise an exception if fig is not a valid plotly figure
-            fig_dict = plotly.graph_objs.Figure(fig).to_plotly_json()
+            fig_dict = plotly.graph_objects.Figure(fig).to_plotly_json()
         else:
             fig_dict = fig
     elif hasattr(fig, "to_plotly_json"):
