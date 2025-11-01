@@ -13,6 +13,7 @@ import plotly.io as pio
 import re
 import sys
 import traceback
+from PIL import Image
 
 
 def main():
@@ -88,6 +89,38 @@ def _capture_pio_show(fig, counter, result, output_dir, stem, mathjax_option):
     html_path = output_dir / html_filename
     fig.write_html(html_path, include_plotlyjs="cdn", include_mathjax=mathjax_option)
     html_content = fig.to_html(include_plotlyjs="cdn", include_mathjax=mathjax_option, div_id=f"plotly-div-{counter}", full_html=False)
+    result["html_files"].append(html_filename)
+    result.setdefault("html_content", []).append(html_content)
+
+def _capture_Image_show(img, counter, result, output_dir, stem):
+    """Saves Images instead of displaying them."""
+    images_dir = output_dir.parent / "imgs"
+    if not images_dir.exists():
+        images_dir.mkdir(parents=True, exist_ok=True)
+
+    png_filename = f"{stem}_image_{counter}.png"
+    png_path = images_dir / png_filename
+    img.save(png_path, "PNG")
+    
+    # Create HTML file with image reference
+    html_filename = f"{stem}_image_{counter}.html"
+    html_path = output_dir / html_filename
+    
+    full_html = f"""<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body>
+    <img src="../imgs/{png_filename}" alt="Image {counter}" style="max-width: 100%; height: auto;">
+</body>
+</html>"""
+    
+    with open(html_path, 'w') as f:
+        f.write(full_html)
+    
+    # Generate embeddable HTML content 
+    html_content = f'<div id="image-div-{counter}"><img src="../imgs/{png_filename}" alt="Image {counter}" style="max-width: 100%; height: auto;"></div>'
+    
+    # Update result dictionary
     result["html_files"].append(html_filename)
     result.setdefault("html_content", []).append(html_content)
 
@@ -265,15 +298,24 @@ def _run_code(code, output_dir, figure_counter, stem, exec_globals):
                 if stem is not None:
                     _capture_pio_show(self, figure_counter, result, output_dir, stem, mathjax_option)
 
+            def patched_img_show(self, *args, **kwargs):
+                nonlocal figure_counter
+                figure_counter += 1
+                if stem is not None:
+                    _capture_Image_show(self, figure_counter, result, output_dir, stem)
+
             original_pio_show = pio.show  
             pio.show = patched_pio_show
             original_show = go.Figure.show
             go.Figure.show = patched_show
+            original_img_show = Image.Image.show
+            Image.Image.show = patched_img_show
 
             exec(code, exec_globals)
 
             pio.show = original_pio_show
             go.Figure.show = original_show
+            Image.Image.show = original_img_show
 
     except Exception as e:
         result["error"] = f"Error executing code: {str(e)}\n{traceback.format_exc()}"

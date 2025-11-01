@@ -175,6 +175,7 @@ from io import BytesIO
 img = Image.open(BytesIO(img_bytes))
 img.show()
 ```
+<div id="image-div-1"><img src="../imgs/static-image-export_image_1.png" alt="Image 1" style="max-width: 100%; height: auto;"></div>
 
 ## Specify Image Dimensions and Scale
 In addition to the image format, the `to_image` and `write_image` functions provide arguments to specify the image `width` and `height` in logical pixels. They also provide a `scale` parameter that can be used to increase (`scale` > 1) or decrease (`scale` < 1) the physical resolution of the resulting image.
@@ -184,6 +185,7 @@ img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
 img = Image.open(BytesIO(img_bytes))
 img.show()
 ```
+<div id="image-div-2"><img src="../imgs/static-image-export_image_2.png" alt="Image 2" style="max-width: 100%; height: auto;"></div>
 
 ## Specify Image Export Engine
 
