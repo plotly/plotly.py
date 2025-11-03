@@ -15,6 +15,7 @@ class Label(_BaseLayoutHierarchyType):
         "textangle",
         "textposition",
         "texttemplate",
+        "texttemplatefallback",
         "xanchor",
         "yanchor",
     }
@@ -150,7 +151,11 @@ class Label(_BaseLayoutHierarchyType):
         all other variable values use values in ms. Finally, the
         template string has access to variables `x0`, `x1`, `y0`, `y1`,
         `slope`, `dx`, `dy`, `width`, `height`, `length`, `xcenter` and
-        `ycenter`.
+        `ycenter`. Variables that can't be found will be replaced with
+        the specifier. For example, a template of "data: %{x}, %{y}"
+        will result in a value of "data: 1, %{y}" if x is 1 and y is
+        missing. Variables with an undefined value will be replaced
+        with the fallback value.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -165,6 +170,25 @@ class Label(_BaseLayoutHierarchyType):
     @texttemplate.setter
     def texttemplate(self, val):
         self["texttemplate"] = val
+
+    @property
+    def texttemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'texttemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["texttemplatefallback"]
+
+    @texttemplatefallback.setter
+    def texttemplatefallback(self, val):
+        self["texttemplatefallback"] = val
 
     @property
     def xanchor(self):
@@ -261,7 +285,17 @@ class Label(_BaseLayoutHierarchyType):
             variable values use values in ms. Finally, the template
             string has access to variables `x0`, `x1`, `y0`, `y1`,
             `slope`, `dx`, `dy`, `width`, `height`, `length`,
-            `xcenter` and `ycenter`.
+            `xcenter` and `ycenter`. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         xanchor
             Sets the label's horizontal position anchor This anchor
             binds the specified `textposition` to the "left",
@@ -287,6 +321,7 @@ class Label(_BaseLayoutHierarchyType):
         textangle=None,
         textposition=None,
         texttemplate=None,
+        texttemplatefallback=None,
         xanchor=None,
         yanchor=None,
         **kwargs,
@@ -345,7 +380,17 @@ class Label(_BaseLayoutHierarchyType):
             variable values use values in ms. Finally, the template
             string has access to variables `x0`, `x1`, `y0`, `y1`,
             `slope`, `dx`, `dy`, `width`, `height`, `length`,
-            `xcenter` and `ycenter`.
+            `xcenter` and `ycenter`. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         xanchor
             Sets the label's horizontal position anchor This anchor
             binds the specified `textposition` to the "left",
@@ -391,6 +436,7 @@ an instance of :class:`plotly.graph_objs.layout.newshape.Label`""")
         self._set_property("textangle", arg, textangle)
         self._set_property("textposition", arg, textposition)
         self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatefallback", arg, texttemplatefallback)
         self._set_property("xanchor", arg, xanchor)
         self._set_property("yanchor", arg, yanchor)
         self._process_kwargs(**dict(arg, **kwargs))
