@@ -50,15 +50,7 @@ dev_core = [
 dev_build = [
     "plotly[dev_core]",
     "build",
-    "jupyter",
-    "markdown-include",
-    "mkdocs",
-    "mkdocs-material",
-    "mkdocstrings[python]",
-    "mkdocs-gen-files",
-    "mkdocs-literate-nav",
-    "mkdocs-redirects",
-    "pyyaml"
+    "jupyter"
 ]
 dev_optional = [
     "plotly[dev_build]",
@@ -97,6 +89,38 @@ dev_optional = [
 ]
 dev = [
     "plotly[dev_optional]"
+]
+
+docs = [
+    "markdown-include",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mkdocs-gen-files",
+    "mkdocs-literate-nav",
+    "mkdocs-redirects",
+    "pyyaml",
+    "plotly[dev_build]",
+    "plotly[kaleido]",
+    "anywidget",
+    "dash_bio",
+    "datashader",
+    "geopandas",
+    "igraph",
+    "numpy",
+    "pillow",
+    "plotly-geo",
+    "polars[timezone]",
+    "pooch",
+    "pyarrow",
+    "pyshp",
+    "scikit-image",
+    "scikit-learn",
+    "scipy",
+    "shapely",
+    "statsmodels",
+    "umap",
+    "wget",
 ]
 
 [project.scripts]
