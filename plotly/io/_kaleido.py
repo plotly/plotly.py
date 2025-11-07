@@ -376,13 +376,31 @@ To downgrade to Kaleido v0, run:
             if defaults.mathjax:
                 kopts["mathjax"] = defaults.mathjax
 
-            # TODO: Refactor to make it possible to use a shared Kaleido instance here
+            width = (
+                width
+                or fig_dict.get("layout", {}).get("width")
+                or fig_dict.get("layout", {})
+                .get("template", {})
+                .get("layout", {})
+                .get("width")
+                or defaults.default_width
+            )
+            height = (
+                height
+                or fig_dict.get("layout", {}).get("height")
+                or fig_dict.get("layout", {})
+                .get("template", {})
+                .get("layout", {})
+                .get("height")
+                or defaults.default_height
+            )
+
             img_bytes = kaleido.calc_fig_sync(
                 fig_dict,
                 opts=dict(
                     format=format or defaults.default_format,
-                    width=width or defaults.default_width,
-                    height=height or defaults.default_height,
+                    width=width,
+                    height=height,
                     scale=scale or defaults.default_scale,
                 ),
                 topojson=defaults.topojson,
