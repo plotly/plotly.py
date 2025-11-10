@@ -50,7 +50,7 @@ generate:
 
 ## generate reference markdown files
 reference:
-	${RUN} bin/generate_graph_objects_docs.py
+	${RUN} --extra docs bin/generate_graph_objects_docs.py
 
 ## lint: check the code
 lint:
