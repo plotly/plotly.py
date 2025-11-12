@@ -29,7 +29,7 @@ def to_non_numpy_type(np, v):
     Python datetimes only support microsecond precision. So we cast
     datetime64[ns] to datetime64[us] to ensure it remains a datetime.
 
-    Should only be used in contexts where we already know `np` is defined
+    Should only be used in contexts where we already know `np` is defined.
     """
     if hasattr(v, "dtype") and v.dtype == np.dtype("datetime64[ns]"):
         return v.astype("datetime64[us]").item()
