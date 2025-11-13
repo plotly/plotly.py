@@ -39,12 +39,13 @@ def validate_gantt(df):
                     "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
                 )
 
+        columns = {key: df[key].values for key in df}
         num_of_rows = len(df.index)
         chart = []
+        # Using only keys present in the DataFrame columns
+        keys = list(df.columns)
         for index in range(num_of_rows):
-            task_dict = {}
-            for key in df:
-                task_dict[key] = df.iloc[index][key]
+            task_dict = {key: columns[key][index] for key in keys}
             chart.append(task_dict)
 
         return chart
