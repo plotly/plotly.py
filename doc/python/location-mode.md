@@ -459,7 +459,7 @@ fig = px.choropleth(
 fig.show()
 ```
 
-> How Plotly matches 'country names' will change in a future version. Matching will become stricter and some country names may no longer match. We recommend using `locationmode='ISO-3'` with three-letter codes for consistent behavior across versions.
+> How Plotly matches 'country names' will change in a future version. Matching will become stricter and some country names may no longer match. We recommend using `locationmode='ISO-3'` with ISO codes for `locations` to ensure consistent behavior across versions.
 
 ```python
 import plotly.express as px
