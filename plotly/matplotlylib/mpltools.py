@@ -511,6 +511,13 @@ def prep_ticks(ax, index, ax_type, props):
 
     if formatter == "LogFormatterMathtext":
         axis_dict["exponentformat"] = "e"
+
+    ticktext = [tick.label1.get_text() for tick in axis.majorTicks]
+    if ticktext and "DateFormatter" not in formatter:
+        axis_dict["tickmode"] = "array"
+        axis_dict["tickvals"] = [tick.get_loc() for tick in axis.majorTicks]
+        axis_dict["ticktext"] = ticktext
+
     return axis_dict
 
 
