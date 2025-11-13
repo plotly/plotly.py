@@ -107,6 +107,7 @@ docs = [
     "datashader",
     "geopandas",
     "igraph",
+    "inflect",
     "numpy",
     "pillow",
     "plotly-geo",

@@ -3,7 +3,7 @@ site_url: 'https://plotly.com/python/'
 repo_url: https://github.com/plotly/plotly.py
 repo_name: plotly/plotly.py
 docs_dir: pages
-site_dir: docs
+site_dir: build
 
 validation:
   absolute_links: relative_to_docs
@@ -384,6 +384,7 @@ theme:
     - content.code.copy
     - content.code.annotate
   logo: https://docs.plotly.com/assets/plotly_logo_square.png
+  favicon: https://dash.plotly.com/assets/favicon.ico
   palette:
     # Auto (follows system)
     - media: "(prefers-color-scheme)"

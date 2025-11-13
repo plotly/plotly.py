@@ -4,7 +4,7 @@ RUN = uv run
 PACKAGE_DIRS = _plotly_utils plotly
 CODE_DIRS = ${PACKAGE_DIRS} scripts
 EXAMPLE_SRC =  $(wildcard doc/python/*.md)
-EXAMPLE_DST = $(patsubst doc/python/%.md,pages/%.md,${EXAMPLE_SRC})
+EXAMPLE_DST = $(patsubst doc/python/%.md,docs/pages/%.md,${EXAMPLE_SRC})
 
 ## commands: show available commands
 commands:
@@ -27,8 +27,8 @@ docs-tmp:
 examples: ${EXAMPLE_DST}
 
 pages/%.md: doc/python/%.md
-	@mkdir -p pages/examples
-	@${RUN} bin/run_markdown.py --outdir pages --htmldir pages/examples --inline --verbose 1 $<
+	@mkdir -p docs/pages/examples
+	@${RUN} ../bin/run_markdown.py --outdir pages --htmldir pages/examples --inline --verbose 1 $<
 
 ## examples-force: force complete rebuild of examples
 examples-force:
@@ -37,7 +37,7 @@ examples-force:
 
 ## examples-toc: generate YAML table of contents for examples
 examples-toc:
-	@python bin/build_example_toc.py ${EXAMPLE_SRC}
+	@python ../bin/build_example_toc.py ${EXAMPLE_SRC}
 
 ## format: reformat code
 format:
@@ -45,12 +45,12 @@ format:
 
 ## generate: generate code
 generate:
-	${RUN} bin/generate_code.py --codedir plotly
+	${RUN} ../bin/generate_code.py --codedir ../plotly
 	${RUN} ruff format plotly
 
 ## generate reference markdown files
 reference:
-	${RUN} --extra docs bin/generate_graph_objects_docs.py
+	${RUN} --extra docs ../bin/generate_graph_objects_docs.py
 
 ## lint: check the code
 lint:
@@ -62,7 +62,7 @@ test:
 
 ## updatejs: update JavaScript bundle
 updatejs:
-	${RUN} bin/updatejs.py --codedir plotly
+	${RUN} ../bin/updatejs.py --codedir plotly
 
 ## --: --
 
@@ -74,8 +74,8 @@ clean:
 	@rm -rf .pytest_cache
 	@rm -rf .ruff_cache
 	@rm -rf dist
-	@rm -rf docs
-	@rm -rf pages/examples
+	@rm -rf docs/build
+	@rm -rf docs/pages/examples
 
 ## sync: update Python packages
 sync:
