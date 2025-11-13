@@ -32,7 +32,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.3.1"
+version = "6.4.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -40,7 +40,7 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
-kaleido = ["kaleido>=1.0.0"]
+kaleido = ["kaleido>=1.1.0"]
 dev_core = [
     "pytest",
     "requests",
@@ -57,13 +57,9 @@ dev_optional = [
     "plotly[kaleido]",
     "anywidget",
     "colorcet",
-    "dash_bio",
-    "datashader",
     # fiona>1.9.6 is not compatible with geopandas<1; geopandas>=1 is not compatible with python 3.8
     "fiona<=1.9.6;python_version<='3.8'",
     "geopandas",
-    "google",
-    "igraph",
     "inflect",
     "numpy",
     "orjson",
@@ -72,19 +68,14 @@ dev_optional = [
     "pillow",
     "plotly-geo",
     "polars[timezone]",
-    "pooch",
     "pyarrow",
-    "pydoclint",
     "pyshp",
     "pytz",
     "scikit-image",
-    "scikit-learn",
     "scipy",
     "shapely",
     "statsmodels",
-    "umap",
     "vaex;python_version<='3.9'",
-    "wget",
     "xarray"
 ]
 dev = [
