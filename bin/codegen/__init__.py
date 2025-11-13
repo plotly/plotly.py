@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import shutil
 import sys
+import subprocess
 
 from codegen.datatypes import build_datatype_py, write_datatype_py  # noqa: F401
 from codegen.compatibility import (
@@ -98,6 +99,11 @@ def make_paths(codedir):
     graph_objects_dir = codedir / "graph_objects"
     graph_objs_path = codedir / "graph_objs" / "__init__.py"
     return validators_dir, graph_objects_dir, graph_objs_path
+
+
+def reformat_code(outdir):
+    """Reformat Python code using settings in pyproject.toml."""
+    subprocess.call(["ruff", "format", *make_paths(outdir)])
 
 
 def perform_codegen(codedir, noformat=False, schema=PLOT_SCHEMA):
@@ -314,6 +320,12 @@ else:
     with open(graph_objs_path, "wt") as f:
         f.write("# ruff: noqa: F401\n")
         f.write(graph_objs_init_source)
+
+    # Run code formatter on output directories
+    if noformat:
+        print("skipping reformatting")
+    else:
+        reformat_code(outdir)
 
 
 if __name__ == "__main__":
