@@ -95,7 +95,6 @@ docs = [
     "plotly[kaleido]",
     "anywidget",
     "dash_bio",
-    "datashader",
     "geopandas",
     "igraph",
     "inflect",
