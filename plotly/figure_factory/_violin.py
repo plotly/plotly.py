@@ -448,16 +448,16 @@ def create_violin(
 
     Parameters
     ----------
-    data : list or array 
+    data : list or array
         Accepts either a list of numerical values,
         a list of dictionaries all with identical keys and at least one
         column of numeric values, or a pandas dataframe with at least one
         column of numbers.
-    data_header : str 
+    data_header : str
         The header of the data column to be used
         from an inputted pandas dataframe. Not applicable if 'data' is
         a list of numeric values.
-    group_header : str 
+    group_header : str
         Applicable if grouping data by a variable.
         'group_header' must be set to the name of the grouping variable.
     colors : str or tuple or list or dict
@@ -468,26 +468,26 @@ def create_violin(
         tuple of the form (a, b, c) where a, b and c belong to [0, 1].
         If colors is a list, it must contain valid color types as its
         members.
-    use_colorscale : bool 
+    use_colorscale : bool
         Only applicable if grouping by another
         variable. Will implement a colorscale based on the first 2 colors
         of param colors. This means colors must be a list with at least 2
         colors in it (Plotly colorscales are accepted since they map to a
         list of two rgb colors). Default = False
-    group_stats : dict 
+    group_stats : dict
         A dictionary where each key is a unique
         value from the group_header column in data. Each value must be a
         number and will be used to color the violin plots if a colorscale
         is being used.
-    rugplot : bool 
+    rugplot : bool
         Determines if a rugplot is draw on violin plot.
         Default = True
-    sort : bool 
+    sort : bool
         Determines if violins are sorted
         alphabetically (True) or by input order (False). Default = False
-    height : float 
+    height : float
         The height of the violin plot.
-    width: float 
+    width: float
         The width of the violin plot.
     title : str
         The title of the violin plot.

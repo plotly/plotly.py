@@ -267,64 +267,64 @@ def create_trisurf(
 
     Parameters
     ----------
-    x : array 
+    x : array
         Data values of x in a 1D array
     y : array
         Data values of y in a 1D array
-    z : array 
+    z : array
         Data values of z in a 1D array
-    simplices : array 
+    simplices : array
         An array of shape (ntri, 3) where ntri is
         the number of triangles in the triangularization. Each row of the
         array contains the indicies of the verticies of each triangle
-    colormap : str or tuple or list 
+    colormap : str or tuple or list
         Either a plotly scale name, an rgb
         or hex color, a color tuple or a list of colors. An rgb color is
         of the form 'rgb(x, y, z)' where x, y, z belong to the interval
         [0, 255] and a color tuple is a tuple of the form (a, b, c) where
         a, b and c belong to [0, 1]. If colormap is a list, it must
         contain the valid color types aforementioned as its members
-    show_colorbar : bool 
+    show_colorbar : bool
         Determines if colorbar is visible
-    scale : list or array 
+    scale : list or array
         Sets the scale values to be used if a non-
         linearly interpolated colormap is desired. If left as None, a
         linear interpolation between the colors will be excecuted
-    color_func : function or list 
+    color_func : function or list
         The parameter that determines the
         coloring of the surface. Takes either a function with 3 arguments
         x, y, z or a list/array of color values the same length as
         simplices. If None, coloring will only depend on the z axis
-    title : str 
+    title : str
         Title of the plot
-    plot_edges : bool 
+    plot_edges : bool
         Determines if the triangles on the trisurf
         are visible
-    showbackground : bool 
+    showbackground : bool
         Makes background in plot visible
-    backgroundcolor : str 
+    backgroundcolor : str
         Color of background. Takes a string of
         the form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
     gridcolor : str
         Color of the gridlines besides the axes. Takes
         a string of the form 'rgb(x,y,z)' x,y,z are between 0 and 255
         inclusive
-    zerolinecolor : str 
+    zerolinecolor : str
         Color of the axes. Takes a string of the
         form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
-    edges_color : str 
+    edges_color : str
         Color of the edges, if plot_edges is True
-    height : int or float 
+    height : int or float
         The height of the plot (in pixels)
-    width : int or float 
+    width : int or float
         The width of the plot (in pixels)
-    aspectratio : dict 
+    aspectratio : dict
         A dictionary of the aspect ratio values for
         the x, y and z axes. 'x', 'y' and 'z' take (int|float) values
-    
+
     Returns
     -------
-    fig : 
+    fig :
         Of a triangulated surface plot
 
     Examples
