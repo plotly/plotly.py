@@ -74,10 +74,6 @@ fig.show()
 
 The following ISO codes are supported when `locationmode='ISO-3'`:
 
-
-<div style="display: flex; gap: 20px;">
-<div style="flex: 1;">
-
 | Name | ISO Code |
 |------|----------|
 | Afghanistan | AFG |
@@ -209,12 +205,6 @@ The following ISO codes are supported when `locationmode='ISO-3'`:
 | Kazakhstan | KAZ |
 | Kenya | KEN |
 | Kingdom of the Netherlands | NLD |
-
-</div>
-<div style="flex: 1;">
-
-| Name | ISO Code |
-|------|----------|
 | Kiribati | KIR |
 | Kuwait | KWT |
 | Kyrgyzstan | KGZ |
@@ -345,9 +335,6 @@ The following ISO codes are supported when `locationmode='ISO-3'`:
 | Zambia | ZMB |
 | Zimbabwe | ZWE |
 
-</div>
-</div>
-
 
 ## locationmode='USA-states'
 
@@ -371,10 +358,6 @@ fig.show()
 
 The following state codes are supported when `locationmode='USA-states'`:
 
-
-<div style="display: flex; gap: 20px;">
-<div style="flex: 1;">
-
 | State | Code |
 |-------|------|
 | Alabama | AL |
@@ -385,6 +368,7 @@ The following state codes are supported when `locationmode='USA-states'`:
 | Colorado | CO |
 | Connecticut | CT |
 | Delaware | DE |
+| District of Columbia | DC |
 | Florida | FL |
 | Georgia | GA |
 | Hawaii | HI |
@@ -394,12 +378,6 @@ The following state codes are supported when `locationmode='USA-states'`:
 | Iowa | IA |
 | Kansas | KS |
 | Kentucky | KY |
-
-</div>
-<div style="flex: 1;">
-
-| State | Code |
-|-------|------|
 | Louisiana | LA |
 | Maine | ME |
 | Maryland | MD |
@@ -417,12 +395,6 @@ The following state codes are supported when `locationmode='USA-states'`:
 | New York | NY |
 | North Carolina | NC |
 | North Dakota | ND |
-
-</div>
-<div style="flex: 1;">
-
-| State | Code |
-|-------|------|
 | Ohio | OH |
 | Oklahoma | OK |
 | Oregon | OR |
@@ -439,10 +411,6 @@ The following state codes are supported when `locationmode='USA-states'`:
 | West Virginia | WV |
 | Wisconsin | WI |
 | Wyoming | WY |
-| District of Columbia | DC |
-
-</div>
-</div>
 
 
 ## locationmode='country names'
