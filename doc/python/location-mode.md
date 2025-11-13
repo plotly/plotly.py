@@ -74,7 +74,7 @@ fig.show()
 
 The following ISO codes are supported when `locationmode='ISO-3'`:
 
-<table style="text-align: left;">
+<table style="text-align: left; margin-left: 0; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align: left;">Name</th>
@@ -366,7 +366,7 @@ fig.show()
 
 The following state codes are supported when `locationmode='USA-states'`:
 
-<table style="text-align: left;">
+<table style="text-align: left; margin-left: 0; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align: left;">State</th>
