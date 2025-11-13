@@ -45,7 +45,7 @@ format:
 ## generate: generate code
 generate:
 	${RUN} ../bin/generate_code.py --codedir ../plotly
-	${RUN} ruff format plotly
+	${RUN} ruff format ../plotly
 
 ## generate reference markdown files
 reference:

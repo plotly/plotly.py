@@ -14,12 +14,7 @@ The easiest way to do this is to follow the `Edit this page on GitHub` link at t
 
 **You don't have to worry about breaking the site when you submit a pull request!** This is because your change will not be merged to production immediately. A Plotly team member will first perform a code review on your pull request in order to ensure that it definitely increases the health of Plotly's graphing libraries codebase.
 
-## Mkdocs Setup
-
-Before proceeding, make sure you are working in the `docs` directory. This is where all of the files needed
-to build the site using Mkdocs are.
-
-### Create a Virtual Environment
+## Create a Virtual Environment
 
 Create a *virtual environment* for the project so that packages you install won't affect other projects you are working on.
 We recommend using [`uv`](https://docs.astral.sh/uv/) for this:
@@ -35,7 +30,8 @@ or [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
 to create and manage your virtual environment;
 see those tools' documentation for more information.
 
-### Install Packages
+
+## Install Packages
 
 All dependencies are listed in `pyproject.toml` under `docs`. These include Mkdocs extensions used for features such as redirects as well as dependencies needed to properly run the examples in `doc/python/`.
 
@@ -52,6 +48,11 @@ you can install all packages with:
 ```bash
 pip install -e '.[docs]'
 ```
+
+## Mkdocs Setup
+
+Before proceeding, make sure you are working in the `docs` directory. This is where all of the files needed
+to build the site using Mkdocs are.
 
 ### File Structure
 
