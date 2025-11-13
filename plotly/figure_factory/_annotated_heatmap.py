@@ -72,8 +72,8 @@ def create_annotated_heatmap(
     y : list
         y axis labels.
     annotation_text : list[list] or ndarray
-        Text strings for annotations. Should have the same dimensions 
-        as the z matrix. If no text is added, the values of the z matrix 
+        Text strings for annotations. Should have the same dimensions
+        as the z matrix. If no text is added, the values of the z matrix
         are annotated. Default = z matrix values.
     colorscale : list or str
         Heatmap colorscale.

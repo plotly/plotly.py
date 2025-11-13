@@ -856,27 +856,27 @@ def create_scatterplotmatrix(
 
     Parameters
     ----------
-    df : array 
+    df : array
         Array of the data with column headers
-    index : str 
+    index : str
         Name of the index column in data array
-    endpts : list or tuple 
+    endpts : list or tuple
         Takes an increasing sequece of numbers
         that defines intervals on the real line. They are used to group
         the entries in an index of numbers into their corresponding
         interval and therefore can be treated as categorical data
-    diag : str 
+    diag : str
         Sets the chart type for the main diagonal plots.
         The options are 'scatter', 'histogram' and 'box'.
     height : int or float
         Sets the height of the chart
-    width : int or float 
+    width : int or float
         Sets the width of the chart
-    size : float 
+    size : float
         Sets the marker size (in px)
     title : str t
         The title label of the scatterplot matrix
-    colormap : str or tuple or list or dict 
+    colormap : str or tuple or list or dict
         Either a plotly scale name,
         an rgb or hex color, a color tuple, a list of colors or a
         dictionary. An rgb color is of the form 'rgb(x, y, z)' where
@@ -887,7 +887,7 @@ def create_scatterplotmatrix(
         If colormap is a dictionary, all the string entries in
         the index column must be a key in colormap. In this case, the
         colormap_type is forced to 'cat' or categorical
-    colormap_type : str    
+    colormap_type : str
         Determines how colormap is interpreted.
         Valid choices are 'seq' (sequential) and 'cat' (categorical). If
         'seq' is selected, only the first two colors in colormap will be
@@ -897,7 +897,7 @@ def create_scatterplotmatrix(
         If 'cat' is selected, a color from colormap will be assigned to
         each category from index, including the intervals if endpts is
         being used
-    **kwargs : 
+    **kwargs :
         a dictionary of scatterplot arguments
         The only forbidden parameters are 'size', 'color' and
         'colorscale' in 'marker'

@@ -822,14 +822,14 @@ def create_gantt(
 
     Parameters
     ----------
-    df : array or list 
+    df : array or list
         Input data for gantt chart. Must be either a
         a dataframe or a list. If dataframe, the columns must include
         'Task', 'Start' and 'Finish'. Other columns can be included and
         used for indexing. If a list, its elements must be dictionaries
         with the same required column headers: 'Task', 'Start' and
         'Finish'.
-    colors : str or list or dict or tuple 
+    colors : str or list or dict or tuple
         Either a plotly scale name, an
         rgb or hex color, a color tuple or a list of colors. An rgb color
         is of the form 'rgb(x, y, z)' where x, y, z belong to the interval
@@ -838,34 +838,34 @@ def create_gantt(
         contain the valid color types aforementioned as its members.
         If a dictionary, all values of the indexing column must be keys in
         colors.
-    index_col : str or float 
+    index_col : str or float
         The column header (if df is a data
         frame) that will function as the indexing column. If df is a list,
         index_col must be one of the keys in all the items of df.
-    show_colorbar : bool 
+    show_colorbar : bool
         Determines if colorbar will be visible.
         Only applies if values in the index column are numeric.
-    show_hover_fill : bool 
+    show_hover_fill : bool
         Enables/disables the hovertext for the
         filled area of the chart.
-    reverse_colors : bool 
+    reverse_colors : bool
         Reverses the order of selected colors
     title : str
         The title of the chart
-    bar_width : float 
+    bar_width : float
         The width of the horizontal bars in the plot
-    showgrid_x : bool 
+    showgrid_x : bool
         Show/hide the x-axis grid
-    showgrid_y : bool 
+    showgrid_y : bool
         Show/hide the y-axis grid
-    height : float 
+    height : float
         The height of the chart
-    width : float 
+    width : float
         The width of the chart
 
     Returns
     -------
-    fig: 
+    fig:
         Of a gantt chart
 
     Examples

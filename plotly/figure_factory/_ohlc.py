@@ -137,17 +137,17 @@ def create_ohlc(open, high, low, close, dates=None, direction="both", **kwargs):
 
     Parameters
     ----------
-    open : list 
+    open : list
         Opening values
-    high : list 
+    high : list
         High values
-    low : list 
+    low : list
         Low values
-    close : list 
+    close : list
         Closing values
-    dates : list 
+    dates : list
         List of datetime objects. Default: None
-    direction : str 
+    direction : str
         Direction can be 'increasing', 'decreasing',
         or 'both'. When the direction is 'increasing', the returned figure
         consists of all units where the close value is greater than the
@@ -156,15 +156,15 @@ def create_ohlc(open, high, low, close, dates=None, direction="both", **kwargs):
         less than or equal to the corresponding open value. When the
         direction is 'both', both increasing and decreasing units are
         returned. Default: 'both'
-    **kwargs: 
+    **kwargs:
         kwargs passed through plotly.graph_objects.Scatter.
         These kwargs describe other attributes about the ohlc Scatter trace
         such as the color or the legend name. For more information on valid
         kwargs call help(plotly.graph_objects.Scatter)
-    
+
     Returns
     -------
-    dict 
+    dict
         A representation of an ohlc chart figure.
 
     Examples

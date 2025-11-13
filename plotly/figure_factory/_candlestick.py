@@ -27,7 +27,7 @@ def make_increasing_candle(open, high, low, close, dates, **kwargs):
         Low values
     close : list
         Closing values
-    dates : list 
+    dates : list
         List of datetime objects. Default: None
     **kwargs :
         kwargs to be passed to increasing trace via
@@ -79,7 +79,7 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
         Low values
     close : list
         Closing values
-    dates : list 
+    dates : list
         List of datetime objects. Default: None
     **kwargs :
         kwargs to be passed to decreasing trace via
@@ -87,7 +87,7 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
 
     Returns
     -------
-    candle_decr_data : list 
+    candle_decr_data : list
         List of the box trace for decreasing candlesticks.
     """
 
@@ -130,7 +130,7 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
         Low values
     close : list
         Closing values
-    dates : list 
+    dates : list
         List of datetime objects. Default: None
     direction : str
         Direction can be 'increasing', 'decreasing',
@@ -141,7 +141,7 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
         where the close value is less than or equal to the corresponding
         open value. When the direction is 'both', both increasing and
         decreasing candlesticks are returned. Default: 'both'
-    **kwargs : 
+    **kwargs :
         kwargs passed through plotly.graph_objects.Scatter.
         These kwargs describe other attributes about the ohlc Scatter trace
         such as the color or the legend name. For more information on valid

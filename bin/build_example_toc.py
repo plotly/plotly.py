@@ -28,7 +28,7 @@ def main():
     for key, values in sorted(sections.items()):
         values.sort(key=lambda x: float(x[0]))
         print(f"- {key}")
-        for (order, data, src) in values:
+        for order, data, src in values:
             print(f'  - {src}: "{data["name"]}"')
 
 

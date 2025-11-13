@@ -49,19 +49,19 @@ def create_table(
         and 1 is the second table color. (Set .5 and 1 to avoid the striped
         table effect). Default=[[0, '#66b2ff'], [.5, '#d9d9d9'],
         [1, '#ffffff']]
-    font_colors : list 
+    font_colors : list
         Color for fonts in table. Can be a single
         color, three colors, or a color for each row in the table.
         Default=['#000000'] (black text for the entire table)
-    height_constant : int 
+    height_constant : int
         Constant multiplied by # of rows to
         create table height. Default=30.
-    index : bool 
+    index : bool
         Create (header-colored) index column index from
         Pandas dataframe or list[0] for each list in text. Default=False.
-    index_title : str 
+    index_title : str
         Title for index column. Default=''.
-    **kwargs: 
+    **kwargs:
         kwargs passed through plotly.graph_objects.Heatmap.
         These kwargs describe other attributes about the annotated Heatmap
         trace such as the colorscale. For more information on valid kwargs

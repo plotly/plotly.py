@@ -36,7 +36,7 @@ def _do_file(args, input_file, block_number=None):
     # Determine output file path etc.
     stem = input_file.stem
     output_file = args.outdir / f"{input_file.stem}{input_file.suffix}"
-    
+
     if input_file.resolve() == output_file.resolve():
         print(f"Error: output would overwrite input '{input_file}'", file=sys.stderr)
         sys.exit(1)
@@ -55,12 +55,16 @@ def _do_file(args, input_file, block_number=None):
     _report(args.verbose > 1, f"- Found {len(code_blocks)} code blocks")
 
     # Execute code blocks and collect results
-    execution_results = _run_all_blocks(args, input_file, code_blocks, stem, block_number)
+    execution_results = _run_all_blocks(
+        args, input_file, code_blocks, stem, block_number
+    )
     if block_number is not None:
         return
 
     # Generate and save output
-    content = _generate_markdown(args, content, code_blocks, execution_results, args.outdir)
+    content = _generate_markdown(
+        args, content, code_blocks, execution_results, args.outdir
+    )
     try:
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(content)
@@ -69,9 +73,11 @@ def _do_file(args, input_file, block_number=None):
         print(f"Error writing output file: {e}", file=sys.stderr)
         sys.exit(1)
 
+
 def _contains_latex(code):
     """Check if code likely contains LaTeX expressions."""
-    return "cdn" if '$' in code and re.search(r'\$[^$]+\$', code) else False
+    return "cdn" if "$" in code and re.search(r"\$[^$]+\$", code) else False
+
 
 def _capture_plotly_show(fig, counter, result, output_dir, stem, mathjax_option):
     """Saves HTML figures."""
@@ -79,18 +85,30 @@ def _capture_plotly_show(fig, counter, result, output_dir, stem, mathjax_option)
     html_filename = f"{stem}_{counter}.html"
     html_path = output_dir / html_filename
     fig.write_html(html_path, include_plotlyjs="cdn", include_mathjax=mathjax_option)
-    html_content = fig.to_html(include_plotlyjs="cdn", include_mathjax=mathjax_option, div_id=f"plotly-div-{counter}", full_html=False)
+    html_content = fig.to_html(
+        include_plotlyjs="cdn",
+        include_mathjax=mathjax_option,
+        div_id=f"plotly-div-{counter}",
+        full_html=False,
+    )
     result["html_files"].append(html_filename)
     result.setdefault("html_content", []).append(html_content)
+
 
 def _capture_pio_show(fig, counter, result, output_dir, stem, mathjax_option):
     fig = go.Figure(fig)
     html_filename = f"{stem}_{counter}.html"
     html_path = output_dir / html_filename
     fig.write_html(html_path, include_plotlyjs="cdn", include_mathjax=mathjax_option)
-    html_content = fig.to_html(include_plotlyjs="cdn", include_mathjax=mathjax_option, div_id=f"plotly-div-{counter}", full_html=False)
+    html_content = fig.to_html(
+        include_plotlyjs="cdn",
+        include_mathjax=mathjax_option,
+        div_id=f"plotly-div-{counter}",
+        full_html=False,
+    )
     result["html_files"].append(html_filename)
     result.setdefault("html_content", []).append(html_content)
+
 
 def _capture_Image_show(img, counter, result, output_dir, stem):
     """Saves Images instead of displaying them."""
@@ -101,11 +119,11 @@ def _capture_Image_show(img, counter, result, output_dir, stem):
     png_filename = f"{stem}_image_{counter}.png"
     png_path = images_dir / png_filename
     img.save(png_path, "PNG")
-    
+
     # Create HTML file with image reference
     html_filename = f"{stem}_image_{counter}.html"
     html_path = output_dir / html_filename
-    
+
     full_html = f"""<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
@@ -113,13 +131,13 @@ def _capture_Image_show(img, counter, result, output_dir, stem):
     <img src="../imgs/{png_filename}" alt="Image {counter}" style="max-width: 100%; height: auto;">
 </body>
 </html>"""
-    
-    with open(html_path, 'w') as f:
+
+    with open(html_path, "w") as f:
         f.write(full_html)
-    
-    # Generate embeddable HTML content 
+
+    # Generate embeddable HTML content
     html_content = f'<div id="image-div-{counter}"><img src="../imgs/{png_filename}" alt="Image {counter}" style="max-width: 100%; height: auto;"></div>'
-    
+
     # Update result dictionary
     result["html_files"].append(html_filename)
     result.setdefault("html_content", []).append(html_content)
@@ -179,13 +197,17 @@ def _generate_markdown(args, content, code_blocks, execution_results, output_dir
 
 def _parse_args():
     """Parse command-line arguments."""
-    parser = argparse.ArgumentParser(description="Process Markdown files with code blocks")
+    parser = argparse.ArgumentParser(
+        description="Process Markdown files with code blocks"
+    )
     parser.add_argument("inputs", nargs="+", help="Input .md files")
     parser.add_argument("--block", type=int, help="Single block to run")
     parser.add_argument("--inline", action="store_true", help="Inline HTML in .md")
     parser.add_argument("--outdir", type=Path, help="Output directory for MD files")
     parser.add_argument("--htmldir", type=Path, help="Output directory for HTML files")
-    parser.add_argument("--verbose", type=int, default=0, help="Integer verbosity level")
+    parser.add_argument(
+        "--verbose", type=int, default=0, help="Integer verbosity level"
+    )
     return parser.parse_args()
 
 
@@ -203,7 +225,7 @@ def _parse_md(content):
             in_region_block = True
         elif "<!-- #endregion" in line:
             in_region_block = False
-            
+
         # Start of Python code block
         elif line.strip().startswith("```python"):
             # Only process code blocks that are NOT inside region blocks
@@ -241,19 +263,26 @@ def _run_all_blocks(args, input_file, code_blocks, stem=None, block_number=None)
     """Run blocks found in a file."""
     execution_results = []
     env = {
-            "__name__": "__main__",
-            "__file__": "<markdown_code>",
-        }
+        "__name__": "__main__",
+        "__file__": "<markdown_code>",
+    }
     figure_counter = 0
     for i, block in enumerate(code_blocks):
         if block_number is None:
             _report(args.verbose > 1, f"- Executing block {i}/{len(code_blocks)}")
-            figure_counter, result = _run_code(block["code"], args.htmldir, figure_counter, stem, env)
+            figure_counter, result = _run_code(
+                block["code"], args.htmldir, figure_counter, stem, env
+            )
             execution_results.append(result)
-            _report(args.verbose > 0 and bool(result["error"]), f"  - Warning: block {i} had an error in {input_file}")
+            _report(
+                args.verbose > 0 and bool(result["error"]),
+                f"  - Warning: block {i} had an error in {input_file}",
+            )
         elif block_number == i:
             print(f"block number {block_number}")
-            figure_counter, result = _run_code(block["code"], args.htmldir, figure_counter, stem)
+            figure_counter, result = _run_code(
+                block["code"], args.htmldir, figure_counter, stem
+            )
             print("--- standard output")
             print(result["stdout"])
             print("--- standard error")
@@ -264,7 +293,7 @@ def _run_all_blocks(args, input_file, code_blocks, stem=None, block_number=None)
 def _run_code(code, output_dir, figure_counter, stem, exec_globals):
     """Execute code capturing output and generated files."""
     mathjax_option = _contains_latex(code)
-    
+
     # Capture stdout and stderr
     stdout_buffer = io.StringIO()
     stderr_buffer = io.StringIO()
@@ -276,7 +305,6 @@ def _run_code(code, output_dir, figure_counter, stem, exec_globals):
     files_before = set(f.name for f in output_dir.iterdir())
     result = {"stdout": "", "stderr": "", "error": None, "html_files": []}
     try:
-
         # Create a namespace for code execution
         # exec_globals = {
         #     "__name__": "__main__",
@@ -290,13 +318,17 @@ def _run_code(code, output_dir, figure_counter, stem, exec_globals):
                 nonlocal figure_counter
                 figure_counter += 1
                 if stem is not None:
-                    _capture_plotly_show(self, figure_counter, result, output_dir, stem, mathjax_option)
-            
+                    _capture_plotly_show(
+                        self, figure_counter, result, output_dir, stem, mathjax_option
+                    )
+
             def patched_pio_show(self, *args, **kwargs):
                 nonlocal figure_counter
                 figure_counter += 1
                 if stem is not None:
-                    _capture_pio_show(self, figure_counter, result, output_dir, stem, mathjax_option)
+                    _capture_pio_show(
+                        self, figure_counter, result, output_dir, stem, mathjax_option
+                    )
 
             def patched_img_show(self, *args, **kwargs):
                 nonlocal figure_counter
@@ -304,7 +336,7 @@ def _run_code(code, output_dir, figure_counter, stem, exec_globals):
                 if stem is not None:
                     _capture_Image_show(self, figure_counter, result, output_dir, stem)
 
-            original_pio_show = pio.show  
+            original_pio_show = pio.show
             pio.show = patched_pio_show
             original_show = go.Figure.show
             go.Figure.show = patched_show

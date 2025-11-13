@@ -51,7 +51,7 @@ def create_dendrogram(
     hovertext : list[list]
         List of hovertext for constituent traces of dendrogram
         clusters.
-    color_threshold : double 
+    color_threshold : double
         Value at which the separation of clusters will be made.
 
 

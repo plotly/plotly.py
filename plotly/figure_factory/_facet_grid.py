@@ -684,75 +684,75 @@ def create_facet_grid(
 
     Parameters
     ----------
-    df : pd.DataFrame 
+    df : pd.DataFrame
         The dataframe of columns for the facet grid.
-    x : str 
+    x : str
         The name of the dataframe column for the x axis data.
-    y : str 
+    y : str
         The name of the dataframe column for the y axis data.
-    facet_row : str 
+    facet_row : str
         The name of the dataframe column that is used to
         facet the grid into row panels.
-    facet_col : str 
+    facet_col : str
         The name of the dataframe column that is used to
         facet the grid into column panels.
-    color_name : str 
+    color_name : str
         The name of your dataframe column that will
         function as the colormap variable.
-    colormap : str or list or dict 
+    colormap : str or list or dict
         The param that determines how the
         color_name column colors the data. If the dataframe contains numeric
         data, then a dictionary of colors will group the data categorically
         while a Plotly Colorscale name or a custom colorscale will treat it
         numerically. To learn more about colors and types of colormap, run
         `help(plotly.colors)`.
-    color_is_cat : bool 
+    color_is_cat : bool
         Determines whether a numerical column for the
         colormap will be treated as categorical (True) or sequential (False).
         Default = False.
-    facet_row_labels : str or dict 
+    facet_row_labels : str or dict
         Set to either 'name' or a dictionary
         of all the unique values in the faceting row mapped to some text to
         show up in the label annotations. If None, labeling works like usual.
-    facet_col_labels : str or dict 
+    facet_col_labels : str or dict
         Set to either 'name' or a dictionary
         of all the values in the faceting row mapped to some text to show up
         in the label annotations. If None, labeling works like usual.
-    height : int 
+    height : int
         The height of the facet grid figure.
-    width : int 
+    width : int
         The width of the facet grid figure.
-    trace_type : str 
+    trace_type : str
         Decides the type of plot to appear in the
         facet grid. The options are 'scatter', 'scattergl', 'histogram',
         'bar', and 'box'.
         Default = 'scatter'.
-    scales : str 
+    scales : str
         Determines if axes have fixed ranges or not. Valid
         settings are 'fixed' (all axes fixed), 'free_x' (x axis free only),
         'free_y' (y axis free only) or 'free' (both axes free).
-    dtick_x : float 
+    dtick_x : float
         Determines the distance between each tick on the
         x-axis. Default is None which means dtick_x is set automatically.
-    dtick_y : float 
+    dtick_y : float
         Determines the distance between each tick on the
         y-axis. Default is None which means dtick_y is set automatically.
-    show_boxes : bool 
+    show_boxes : bool
         Draws grey boxes behind the facet titles.
-    ggplot2 : bool 
+    ggplot2 : bool
         Draws the facet grid in the style of `ggplot2`. See
         <http://ggplot2.tidyverse.org/reference/facet_grid.html> for reference.
         Default = False
-    binsize : int 
+    binsize : int
         Groups all data into bins of a given length.
-    **kwargs : dict 
+    **kwargs : dict
         A dictionary of scatterplot arguments.
 
     Returns
     -------
-    fig: 
+    fig:
         Of a facet grid
-    
+
     Examples
     --------
     Examples 1: One Way Faceting

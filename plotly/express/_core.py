@@ -118,9 +118,9 @@ def get_trendline_results(fig):
 
     Parameters
     ----------
-    fig : Figure 
+    fig : Figure
         The output of a `plotly.express` charting call
-    
+
     Returns
     -------
     `pandas.DataFrame`

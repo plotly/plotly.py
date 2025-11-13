@@ -427,15 +427,15 @@ def convert_colors_to_same_type(
 
     Parameters
     ----------
-    colors : str or tuple or list 
+    colors : str or tuple or list
         Either a plotly scale name, an rgb or hex
         color, a color tuple or a list/tuple of colors
-    scale : list 
+    scale : list
         See docs for validate_scale_values()
 
     Returns
     -------
-    A tuple of (colors_list, scale) 
+    A tuple of (colors_list, scale)
         If scale is None in the function call,
         then scale will remain None in the returned tuple
     """
@@ -535,7 +535,7 @@ def validate_scale_values(scale):
 
     Parameters
     ----------
-    scale : list 
+    scale : list
         A strictly increasing list of floats that begins
         with 0 and ends with 1. Its usage derives from a colorscale which is
         a list of two-lists (a list with two elements) of the form
@@ -587,7 +587,7 @@ def make_colorscale(colors, scale=None):
 
     Parameters
     ----------
-    colors : list 
+    colors : list
         A list of single colors
     """
     colorscale = []
@@ -670,7 +670,7 @@ def convert_to_RGB_255(colors):
 
     Parameters
     ----------
-    rgb_components : list 
+    rgb_components : list
         Grabs the three R, G and B values to be
         returned as computed in the function
     """
@@ -773,7 +773,7 @@ def hex_to_rgb(value):
 
     Parameters
     ----------
-    value : str 
+    value : str
         Hex color string
 
     Returns

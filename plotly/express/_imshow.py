@@ -215,7 +215,7 @@ def imshow(
 
     Returns
     -------
-    fig : plotly.graph_objects.Figure 
+    fig : plotly.graph_objects.Figure
         Contains the displayed image
 
     See also

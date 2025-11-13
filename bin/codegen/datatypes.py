@@ -623,6 +623,8 @@ def write_datatype_py(outdir, node):
     None
     """
 
-    filepath = (outdir / "graph_objects").joinpath(*node.parent_path_parts) / f"_{node.name_undercase}.py"
+    filepath = (outdir / "graph_objects").joinpath(
+        *node.parent_path_parts
+    ) / f"_{node.name_undercase}.py"
     datatype_source = build_datatype_py(node)
     write_source_py(datatype_source, filepath, leading_newlines=2)

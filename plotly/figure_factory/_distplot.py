@@ -82,23 +82,23 @@ def create_distplot(
         Use list of lists to plot multiple data sets on the same plot.
     group_labels : list[str]
         Names for each data set.
-    bin_size : list[float] or float 
+    bin_size : list[float] or float
         Size of histogram bins.
         Default = 1.
-    curve_type : str 
+    curve_type : str
         'kde' or 'normal'. Default = 'kde'
-    histnorm : str 
+    histnorm : str
         'probability density' or 'probability'
         Default = 'probability density'
-    show_hist : bool 
+    show_hist : bool
         Add histogram to distplot? Default = True
     show_curve : bool
         Add curve to distplot? Default = True
-    show_rug : bool 
+    show_rug : bool
         Add rug to distplot? Default = True
-    colors : list[str] 
+    colors : list[str]
         Colors for traces.
-    rug_text : list[list] 
+    rug_text : list[list]
         Hovertext values for rug_plot,
 
     Returns

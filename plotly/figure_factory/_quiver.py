@@ -13,34 +13,34 @@ def create_quiver(
 
     Parameters
     ----------
-    x : list or ndarray 
+    x : list or ndarray
         x coordinates of the arrow locations
-    y : list or ndarray 
+    y : list or ndarray
         y coordinates of the arrow locations
-    u : list or ndarray 
+    u : list or ndarray
         x components of the arrow vectors
-    v : list or ndarray 
+    v : list or ndarray
         y components of the arrow vectors
-    scale : float in [0,1] 
+    scale : float in [0,1]
         Scales size of the arrows(ideally to
         avoid overlap). Default = .1
-    arrow_scale : float in [0,1] 
+    arrow_scale : float in [0,1]
         Value multiplied to length of barb
         to get length of arrowhead. Default = .3
-    angle : radians 
+    angle : radians
         Angle of arrowhead. Default = pi/9
-    scaleratio : positive float 
+    scaleratio : positive float
         The ratio between the scale of the y-axis
         and the scale of the x-axis (scale_y / scale_x). Default = None, the
         scale ratio is not fixed.
-    **kwargs: 
+    **kwargs:
         kwargs passed through plotly.graph_objects.Scatter
         for more information on valid kwargs call
         help(plotly.graph_objects.Scatter)
 
     Returns
     -------
-    dict 
+    dict
         A representation of quiver figure.
 
     Examples

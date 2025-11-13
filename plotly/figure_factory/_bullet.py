@@ -250,7 +250,7 @@ def create_bullet(
         for more information on valid params.
 
     Examples
-    --------    
+    --------
 
     Example 1: Use a Dictionary
 

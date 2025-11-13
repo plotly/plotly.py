@@ -42,25 +42,25 @@ def create_streamline(
 
     Parameters
     ----------
-    x : list or ndarray 
+    x : list or ndarray
         1 dimensional, evenly spaced list or array
-    y : list or ndarray 
+    y : list or ndarray
         1 dimensional, evenly spaced list or array
     u : ndarray
         2 dimensional array
-    v : ndarray 
+    v : ndarray
         2 dimensional array
-    density : float or int 
+    density : float or int
         Controls the density of streamlines in
         plot. This is multiplied by 30 to scale similiarly to other
         available streamline functions such as matplotlib.
         Default = 1
-    angle : radians 
+    angle : radians
         Angle of arrowhead. Default = pi/9
-    arrow_scale : float in [0,1] 
+    arrow_scale : float in [0,1]
         Value to scale length of arrowhead
         Default = .09
-    **kwargs: 
+    **kwargs:
         kwargs passed through plotly.graph_objects.Scatter
         for more information on valid kwargs call
         help(plotly.graph_objects.Scatter)

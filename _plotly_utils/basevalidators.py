@@ -21,6 +21,7 @@ def fullmatch(regex, string, flags=0):
         regex_string = regex
     return re.match("(?:" + regex_string + r")\Z", string, flags=flags)
 
+
 # Constants
 INDENT = 8
 
@@ -1331,8 +1332,9 @@ class ColorValidator(BaseValidator):
                 valid_color_description
                 + """
     - A number that will be interpreted as a color according to {colorscale_path}""".format(
-        colorscale_path=self.colorscale_path)
-        )
+                    colorscale_path=self.colorscale_path
+                )
+            )
 
         if self.array_ok:
             valid_color_description = (
@@ -1997,7 +1999,9 @@ class InfoArrayValidator(BaseValidator):
                 for i, item_validator in enumerate(self.item_validators):
                     el_desc = item_validator.description().strip()
                     lines = el_desc.splitlines()
-                    el_desc_indented = '\n'.join([lines[0]] + ['    ' + line for line in lines[1:]])
+                    el_desc_indented = "\n".join(
+                        [lines[0]] + ["    " + line for line in lines[1:]]
+                    )
                     desc = (
                         desc
                         + """\n
@@ -2014,8 +2018,10 @@ class InfoArrayValidator(BaseValidator):
                 for i, item_validator in enumerate(self.item_validators):
                     # Update name for 2d
                     orig_name = item_validator.plotly_name
-                    item_validator.plotly_name = "{name}\\\\[i\\\\]\\\\[{i}\\\\]".format(
-                        name=self.plotly_name, i=i
+                    item_validator.plotly_name = (
+                        "{name}\\\\[i\\\\]\\\\[{i}\\\\]".format(
+                            name=self.plotly_name, i=i
+                        )
                     )
 
                     el_desc = item_validator.description().strip()
@@ -2036,10 +2042,12 @@ class InfoArrayValidator(BaseValidator):
 
                 el_desc = item_validator.description().strip()
 
-                # Adds an indentation of 4 spaces, especially when el_desc 
+                # Adds an indentation of 4 spaces, especially when el_desc
                 # is a fully auto-generated docstring with nested lists.
                 lines = el_desc.splitlines()
-                el_desc_indented = '\n'.join([lines[0]] + ['    ' + line for line in lines[1:]])
+                el_desc_indented = "\n".join(
+                    [lines[0]] + ["    " + line for line in lines[1:]]
+                )
 
                 desc += """\n
     * a list of elements where:\n
@@ -2053,7 +2061,9 @@ class InfoArrayValidator(BaseValidator):
 
                 el_desc = item_validator.description().strip()
                 lines = el_desc.splitlines()
-                el_desc_indented = '\n'.join([lines[0]] + ['    ' + line for line in lines[1:]])
+                el_desc_indented = "\n".join(
+                    [lines[0]] + ["    " + line for line in lines[1:]]
+                )
                 desc += """\n
     * a 2D list where:\n    
         {el_desc_indented}
