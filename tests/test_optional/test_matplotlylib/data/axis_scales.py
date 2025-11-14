@@ -1,4 +1,4 @@
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 D = dict(x=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], y=[10, 3, 100, 6, 45, 4, 80, 45, 3, 59])
 

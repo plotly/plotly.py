@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to add annotated horizontal and vertical lines in Python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Horizontal and Vertical Lines and Rectangles
-    order: 37
-    permalink: python/horizontal-vertical-shapes/
-    thumbnail: thumbnail/shape.jpg
+description: How to add annotated horizontal and vertical lines in Python.
 ---
-
 ### Horizontal and Vertical Lines and Rectangles
 
 *introduced in plotly 4.12*
@@ -39,7 +8,7 @@ jupyter:
 Horizontal and vertical lines and rectangles that span an entire
 plot can be added via the `add_hline`, `add_vline`, `add_hrect`, and `add_vrect`
 methods of `plotly.graph_objects.Figure`. Shapes added with these methods are
-added as [layout shapes](/python/shapes) (as shown when doing `print(fig)`, for
+added as [layout shapes](shapes.md) (as shown when doing `print(fig)`, for
 example). These shapes are fixed to the endpoints of one axis, regardless of the
 range of the plot, and fixed to data coordinates on the other axis. The
 following shows some possibilities, try panning and zooming the resulting figure
@@ -74,11 +43,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'horizontal-vertical-shapes', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/horizontal-vertical-shapes" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -86,7 +59,7 @@ IFrame(snippet_url + 'horizontal-vertical-shapes', width='100%', height=1200)
 
 #### Adding Text Annotations
 
-[Text annotations](/python/text-and-annotations) can optionally be added to an autoshape
+[Text annotations](text-and-annotations.md) can optionally be added to an autoshape
 using the `annotation_text` keyword argument, and positioned using the `annotation_position` argument:
 
 ```python
@@ -125,7 +98,7 @@ fig.show()
 
 #### Adding to Multiple Facets / Subplots
 
-The same line or box can be added to multiple [subplots](/python/subplots/) or [facets](/python/facet-plots/) by setting the `row` and/or `col` to `"all"`. The default `row` and `col` values are `"all"`.
+The same line or box can be added to multiple [subplots](subplots.md) or [facets](facet-plots.md) by setting the `row` and/or `col` to `"all"`. The default `row` and `col` values are `"all"`.
 ```python
 import plotly.express as px
 
@@ -143,7 +116,7 @@ fig.show()
 
 *New in 5.14*
 
-[Text labels on shapes](/python/shapes/#addingtextlabelstoshapes), introduced in version 5.14, is now the recommended way to add text to shapes. The above examples using `add_hline`, `add_vrect`, `add_hrect`, and `add_vline` that add annotations can be rewritten to use `label`.
+[Text labels on shapes](shapes.md#addingtextlabelstoshapes), introduced in version 5.14, is now the recommended way to add text to shapes. The above examples using `add_hline`, `add_vrect`, `add_hrect`, and `add_vline` that add annotations can be rewritten to use `label`.
 
 ```python
 import plotly.express as px
@@ -176,11 +149,11 @@ fig.show()
 
 ```
 
-With [text labels on shapes](/python/shapes/#adding-text-labels-to-shapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user.
+With [text labels on shapes](shapes.md#adding-text-labels-to-shapes), you can also add text labels to shapes other than lines and rectangles, and the labels can be added automatically to shapes drawn by the user. 
 
 
 ### Reference
 
-More details are available about [layout shapes](/python/shapes/) and [annotations](/python/text-and-annotations).
+More details are available about [layout shapes](shapes.md) and [annotations](text-and-annotations.md).
 
-Reference documentation is also available for [`add_hline`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_hline#plotly.graph_objects.Figure.add_hline), [`add_vline`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_vline#plotly.graph_objects.Figure.add_vline), [`add_hrect`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_hrect#plotly.graph_objects.Figure.add_hrect), [`add_vrect`](https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html?highlight=add_vrect#plotly.graph_objects.Figure.add_vrect).
+Reference documentation is also available for [`add_hline`](reference/graph_objects/Figure.md#plotly.graph_objects.Figure.add_hline), [`add_vline`](reference/graph_objects/Figure.md#plotly.graph_objects.Figure.add_vline), [`add_hrect`](reference/graph_objects/Figure.md#plotly.graph_objects.Figure.add_hrect), [`add_vrect`](reference/graph_objects/Figure.md#plotly.graph_objects.Figure.add_vrect).

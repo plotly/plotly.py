@@ -1,44 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.7
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.4
-  plotly:
-    description: Plotly Express' 2D-Cartesian functions accept data in long-, wide-,
-      and mixed-form.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Plotly Express Wide-Form Support
-    order: 34
-    page_type: u-guide
-    permalink: python/wide-form/
-    thumbnail: thumbnail/plotly-express.png
+description: Plotly Express' 2D-Cartesian functions accept data in long-, wide-, and
+  mixed-form.
 ---
-
 ### Plotly Express works with Column-oriented, Matrix or Geographic Data
 
-Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a `DataFrame` (in either "long" or "wide" format, see below). These functions use Pandas internally to process the data, but also accept other types of DataFrames as arguments. See the [Plotly Express arguments page](/python/px-arguments/) for more details.
+Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a `DataFrame` (in either "long" or "wide" format, see below). These functions use Pandas internally to process the data, but also accept other types of DataFrames as arguments. See the [Plotly Express arguments page](px-arguments.md) for more details.
 
-[`px.imshow` operates on matrix-like data](/python/imshow/) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](/python/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions, but you can also check out our [detailed column-input-format documentation](/python/px-arguments/).
+[`px.imshow` operates on matrix-like data](imshow.md) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](maps.md) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions, but you can also check out our [detailed column-input-format documentation](px-arguments.md).
 
 ### Plotly Express works with Long-, Wide-, and Mixed-Form Data
 
@@ -88,7 +56,7 @@ fig.show()
 
 ### Labeling axes, legends and hover text
 
-You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively, and this is also reflected in the hoverlabel text. This is because Plotly Express performed an [internal Pandas `melt()` operation](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) to convert the wide-form data into long-form for plotting, and used the Pandas convention for assign column names to the intermediate long-form data. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, (or see below regarding using a data frame with named row- and column-indexes). You can [rename these labels with the `labels` argument](/python/styling-plotly-express/):
+You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively, and this is also reflected in the hoverlabel text. This is because Plotly Express performed an [internal Pandas `melt()` operation](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) to convert the wide-form data into long-form for plotting, and used the Pandas convention for assign column names to the intermediate long-form data. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, (or see below regarding using a data frame with named row- and column-indexes). You can [rename these labels with the `labels` argument](styling-plotly-express.md):
 
 ```python
 import plotly.express as px
@@ -99,7 +67,7 @@ fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Fo
 fig.show()
 ```
 
-Plotly Express figures created using wide-form data can be [styled just like any other Plotly Express figure](/python/styling-plotly-express/):
+Plotly Express figures created using wide-form data can be [styled just like any other Plotly Express figure](styling-plotly-express.md):
 
 ```python
 import plotly.express as px
@@ -190,7 +158,7 @@ mixed_df = px.data.experiment(indexed=True)
 mixed_df.head()
 ```
 
-We can visualize just the wide-form portion of the data frame easily with a [violin chart](/python/violin/). As a special note, we'll assign the index, which is the participant ID, to the `hover_data`, so that hovering over outlier points will identify their row.
+We can visualize just the wide-form portion of the data frame easily with a [violin chart](violin.md). As a special note, we'll assign the index, which is the participant ID, to the `hover_data`, so that hovering over outlier points will identify their row.
 
 ```python
 import plotly.express as px
@@ -214,7 +182,7 @@ fig = px.violin(mixed_df, y=["experiment_1", "experiment_2", "experiment_3"],
 fig.show()
 ```
 
-In the plots above, the column names provided to `y` are internally mapped to long-form column called `variable`, as is apparent in the x-axis labels. We can reassign `variable` to another argument as well, in this case we'll assign it to `facet_col` and reassign `group` to the `x` axis. We'll switch to a [box plot](/python/box-plots/) for variety.
+In the plots above, the column names provided to `y` are internally mapped to long-form column called `variable`, as is apparent in the x-axis labels. We can reassign `variable` to another argument as well, in this case we'll assign it to `facet_col` and reassign `group` to the `x` axis. We'll switch to a [box plot](box-plots.md) for variety.
 
 ```python
 import plotly.express as px
@@ -236,7 +204,7 @@ fig = px.scatter(mixed_df, x="experiment_1", y="experiment_2",
 fig.show()
 ```
 
-In fact, we can even visualize the results of every experiment against every other, using a [scatterplot matrix](/python/splom/):
+In fact, we can even visualize the results of every experiment against every other, using a [scatterplot matrix](splom.md):
 
 ```python
 import plotly.express as px

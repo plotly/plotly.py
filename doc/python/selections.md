@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to use selections in Python. Examples of adding and styling selections.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Selections
-    order: 38
-    permalink: python/selections/
-    thumbnail: thumbnail/ml_apps.png
+description: How to use selections in Python. Examples of adding and styling selections.
 ---
-
 ## Adding Selections to Cartesian Subplots
 
 *New in 5.10*
@@ -309,4 +278,3 @@ fig.update_layout(
 
 fig.show()
 ```
-

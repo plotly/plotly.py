@@ -1,270 +1,269 @@
-# ruff: noqa: F401
 import sys
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..graph_objs import Waterfall
-    from ..graph_objs import Volume
-    from ..graph_objs import Violin
-    from ..graph_objs import Treemap
-    from ..graph_objs import Table
-    from ..graph_objs import Surface
-    from ..graph_objs import Sunburst
-    from ..graph_objs import Streamtube
-    from ..graph_objs import Splom
-    from ..graph_objs import Scatterternary
-    from ..graph_objs import Scattersmith
-    from ..graph_objs import Scatterpolargl
-    from ..graph_objs import Scatterpolar
-    from ..graph_objs import Scattermapbox
-    from ..graph_objs import Scattermap
-    from ..graph_objs import Scattergl
-    from ..graph_objs import Scattergeo
-    from ..graph_objs import Scattercarpet
-    from ..graph_objs import Scatter3d
-    from ..graph_objs import Scatter
-    from ..graph_objs import Sankey
-    from ..graph_objs import Pie
-    from ..graph_objs import Parcoords
-    from ..graph_objs import Parcats
-    from ..graph_objs import Ohlc
-    from ..graph_objs import Mesh3d
-    from ..graph_objs import Isosurface
-    from ..graph_objs import Indicator
-    from ..graph_objs import Image
-    from ..graph_objs import Icicle
-    from ..graph_objs import Histogram2dContour
-    from ..graph_objs import Histogram2d
-    from ..graph_objs import Histogram
-    from ..graph_objs import Heatmap
-    from ..graph_objs import Funnelarea
-    from ..graph_objs import Funnel
-    from ..graph_objs import Densitymapbox
-    from ..graph_objs import Densitymap
-    from ..graph_objs import Contourcarpet
-    from ..graph_objs import Contour
-    from ..graph_objs import Cone
-    from ..graph_objs import Choroplethmapbox
-    from ..graph_objs import Choroplethmap
-    from ..graph_objs import Choropleth
-    from ..graph_objs import Carpet
-    from ..graph_objs import Candlestick
-    from ..graph_objs import Box
-    from ..graph_objs import Barpolar
-    from ..graph_objs import Bar
-    from ..graph_objs import Layout
-    from ..graph_objs import Frame
-    from ..graph_objs import Figure
-    from ..graph_objs import Data
-    from ..graph_objs import Annotations
-    from ..graph_objs import Frames
-    from ..graph_objs import AngularAxis
-    from ..graph_objs import Annotation
-    from ..graph_objs import ColorBar
-    from ..graph_objs import Contours
-    from ..graph_objs import ErrorX
-    from ..graph_objs import ErrorY
-    from ..graph_objs import ErrorZ
-    from ..graph_objs import Font
-    from ..graph_objs import Legend
-    from ..graph_objs import Line
-    from ..graph_objs import Margin
-    from ..graph_objs import Marker
-    from ..graph_objs import RadialAxis
-    from ..graph_objs import Scene
-    from ..graph_objs import Stream
-    from ..graph_objs import XAxis
-    from ..graph_objs import YAxis
-    from ..graph_objs import ZAxis
-    from ..graph_objs import XBins
-    from ..graph_objs import YBins
-    from ..graph_objs import Trace
-    from ..graph_objs import Histogram2dcontour
-    from ..graph_objs import waterfall
-    from ..graph_objs import volume
-    from ..graph_objs import violin
-    from ..graph_objs import treemap
-    from ..graph_objs import table
-    from ..graph_objs import surface
-    from ..graph_objs import sunburst
-    from ..graph_objs import streamtube
-    from ..graph_objs import splom
-    from ..graph_objs import scatterternary
-    from ..graph_objs import scattersmith
-    from ..graph_objs import scatterpolargl
-    from ..graph_objs import scatterpolar
-    from ..graph_objs import scattermapbox
-    from ..graph_objs import scattermap
-    from ..graph_objs import scattergl
-    from ..graph_objs import scattergeo
-    from ..graph_objs import scattercarpet
-    from ..graph_objs import scatter3d
-    from ..graph_objs import scatter
-    from ..graph_objs import sankey
-    from ..graph_objs import pie
-    from ..graph_objs import parcoords
-    from ..graph_objs import parcats
-    from ..graph_objs import ohlc
-    from ..graph_objs import mesh3d
-    from ..graph_objs import isosurface
-    from ..graph_objs import indicator
-    from ..graph_objs import image
-    from ..graph_objs import icicle
-    from ..graph_objs import histogram2dcontour
-    from ..graph_objs import histogram2d
-    from ..graph_objs import histogram
-    from ..graph_objs import heatmap
-    from ..graph_objs import funnelarea
-    from ..graph_objs import funnel
-    from ..graph_objs import densitymapbox
-    from ..graph_objs import densitymap
-    from ..graph_objs import contourcarpet
-    from ..graph_objs import contour
-    from ..graph_objs import cone
-    from ..graph_objs import choroplethmapbox
-    from ..graph_objs import choroplethmap
-    from ..graph_objs import choropleth
-    from ..graph_objs import carpet
-    from ..graph_objs import candlestick
-    from ..graph_objs import box
-    from ..graph_objs import barpolar
-    from ..graph_objs import bar
-    from ..graph_objs import layout
+    from ._bar import Bar
+    from ._barpolar import Barpolar
+    from ._box import Box
+    from ._candlestick import Candlestick
+    from ._carpet import Carpet
+    from ._choropleth import Choropleth
+    from ._choroplethmap import Choroplethmap
+    from ._choroplethmapbox import Choroplethmapbox
+    from ._cone import Cone
+    from ._contour import Contour
+    from ._contourcarpet import Contourcarpet
+    from ._densitymap import Densitymap
+    from ._densitymapbox import Densitymapbox
+    from ._deprecations import AngularAxis
+    from ._deprecations import Annotation
+    from ._deprecations import Annotations
+    from ._deprecations import ColorBar
+    from ._deprecations import Contours
+    from ._deprecations import Data
+    from ._deprecations import ErrorX
+    from ._deprecations import ErrorY
+    from ._deprecations import ErrorZ
+    from ._deprecations import Font
+    from ._deprecations import Frames
+    from ._deprecations import Histogram2dcontour
+    from ._deprecations import Legend
+    from ._deprecations import Line
+    from ._deprecations import Margin
+    from ._deprecations import Marker
+    from ._deprecations import RadialAxis
+    from ._deprecations import Scene
+    from ._deprecations import Stream
+    from ._deprecations import Trace
+    from ._deprecations import XAxis
+    from ._deprecations import XBins
+    from ._deprecations import YAxis
+    from ._deprecations import YBins
+    from ._deprecations import ZAxis
+    from ._figure import Figure
+    from ._frame import Frame
+    from ._funnel import Funnel
+    from ._funnelarea import Funnelarea
+    from ._heatmap import Heatmap
+    from ._histogram import Histogram
+    from ._histogram2d import Histogram2d
+    from ._histogram2dcontour import Histogram2dContour
+    from ._icicle import Icicle
+    from ._image import Image
+    from ._indicator import Indicator
+    from ._isosurface import Isosurface
+    from ._layout import Layout
+    from ._mesh3d import Mesh3d
+    from ._ohlc import Ohlc
+    from ._parcats import Parcats
+    from ._parcoords import Parcoords
+    from ._pie import Pie
+    from ._sankey import Sankey
+    from ._scatter import Scatter
+    from ._scatter3d import Scatter3d
+    from ._scattercarpet import Scattercarpet
+    from ._scattergeo import Scattergeo
+    from ._scattergl import Scattergl
+    from ._scattermap import Scattermap
+    from ._scattermapbox import Scattermapbox
+    from ._scatterpolar import Scatterpolar
+    from ._scatterpolargl import Scatterpolargl
+    from ._scattersmith import Scattersmith
+    from ._scatterternary import Scatterternary
+    from ._splom import Splom
+    from ._streamtube import Streamtube
+    from ._sunburst import Sunburst
+    from ._surface import Surface
+    from ._table import Table
+    from ._treemap import Treemap
+    from ._violin import Violin
+    from ._volume import Volume
+    from ._waterfall import Waterfall
+    from . import bar
+    from . import barpolar
+    from . import box
+    from . import candlestick
+    from . import carpet
+    from . import choropleth
+    from . import choroplethmap
+    from . import choroplethmapbox
+    from . import cone
+    from . import contour
+    from . import contourcarpet
+    from . import densitymap
+    from . import densitymapbox
+    from . import funnel
+    from . import funnelarea
+    from . import heatmap
+    from . import histogram
+    from . import histogram2d
+    from . import histogram2dcontour
+    from . import icicle
+    from . import image
+    from . import indicator
+    from . import isosurface
+    from . import layout
+    from . import mesh3d
+    from . import ohlc
+    from . import parcats
+    from . import parcoords
+    from . import pie
+    from . import sankey
+    from . import scatter
+    from . import scatter3d
+    from . import scattercarpet
+    from . import scattergeo
+    from . import scattergl
+    from . import scattermap
+    from . import scattermapbox
+    from . import scatterpolar
+    from . import scatterpolargl
+    from . import scattersmith
+    from . import scatterternary
+    from . import splom
+    from . import streamtube
+    from . import sunburst
+    from . import surface
+    from . import table
+    from . import treemap
+    from . import violin
+    from . import volume
+    from . import waterfall
 else:
     from _plotly_utils.importers import relative_import
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [
-            "..graph_objs.waterfall",
-            "..graph_objs.volume",
-            "..graph_objs.violin",
-            "..graph_objs.treemap",
-            "..graph_objs.table",
-            "..graph_objs.surface",
-            "..graph_objs.sunburst",
-            "..graph_objs.streamtube",
-            "..graph_objs.splom",
-            "..graph_objs.scatterternary",
-            "..graph_objs.scattersmith",
-            "..graph_objs.scatterpolargl",
-            "..graph_objs.scatterpolar",
-            "..graph_objs.scattermapbox",
-            "..graph_objs.scattermap",
-            "..graph_objs.scattergl",
-            "..graph_objs.scattergeo",
-            "..graph_objs.scattercarpet",
-            "..graph_objs.scatter3d",
-            "..graph_objs.scatter",
-            "..graph_objs.sankey",
-            "..graph_objs.pie",
-            "..graph_objs.parcoords",
-            "..graph_objs.parcats",
-            "..graph_objs.ohlc",
-            "..graph_objs.mesh3d",
-            "..graph_objs.isosurface",
-            "..graph_objs.indicator",
-            "..graph_objs.image",
-            "..graph_objs.icicle",
-            "..graph_objs.histogram2dcontour",
-            "..graph_objs.histogram2d",
-            "..graph_objs.histogram",
-            "..graph_objs.heatmap",
-            "..graph_objs.funnelarea",
-            "..graph_objs.funnel",
-            "..graph_objs.densitymapbox",
-            "..graph_objs.densitymap",
-            "..graph_objs.contourcarpet",
-            "..graph_objs.contour",
-            "..graph_objs.cone",
-            "..graph_objs.choroplethmapbox",
-            "..graph_objs.choroplethmap",
-            "..graph_objs.choropleth",
-            "..graph_objs.carpet",
-            "..graph_objs.candlestick",
-            "..graph_objs.box",
-            "..graph_objs.barpolar",
-            "..graph_objs.bar",
-            "..graph_objs.layout",
+            ".bar",
+            ".barpolar",
+            ".box",
+            ".candlestick",
+            ".carpet",
+            ".choropleth",
+            ".choroplethmap",
+            ".choroplethmapbox",
+            ".cone",
+            ".contour",
+            ".contourcarpet",
+            ".densitymap",
+            ".densitymapbox",
+            ".funnel",
+            ".funnelarea",
+            ".heatmap",
+            ".histogram",
+            ".histogram2d",
+            ".histogram2dcontour",
+            ".icicle",
+            ".image",
+            ".indicator",
+            ".isosurface",
+            ".layout",
+            ".mesh3d",
+            ".ohlc",
+            ".parcats",
+            ".parcoords",
+            ".pie",
+            ".sankey",
+            ".scatter",
+            ".scatter3d",
+            ".scattercarpet",
+            ".scattergeo",
+            ".scattergl",
+            ".scattermap",
+            ".scattermapbox",
+            ".scatterpolar",
+            ".scatterpolargl",
+            ".scattersmith",
+            ".scatterternary",
+            ".splom",
+            ".streamtube",
+            ".sunburst",
+            ".surface",
+            ".table",
+            ".treemap",
+            ".violin",
+            ".volume",
+            ".waterfall",
         ],
         [
-            "..graph_objs.Waterfall",
-            "..graph_objs.Volume",
-            "..graph_objs.Violin",
-            "..graph_objs.Treemap",
-            "..graph_objs.Table",
-            "..graph_objs.Surface",
-            "..graph_objs.Sunburst",
-            "..graph_objs.Streamtube",
-            "..graph_objs.Splom",
-            "..graph_objs.Scatterternary",
-            "..graph_objs.Scattersmith",
-            "..graph_objs.Scatterpolargl",
-            "..graph_objs.Scatterpolar",
-            "..graph_objs.Scattermapbox",
-            "..graph_objs.Scattermap",
-            "..graph_objs.Scattergl",
-            "..graph_objs.Scattergeo",
-            "..graph_objs.Scattercarpet",
-            "..graph_objs.Scatter3d",
-            "..graph_objs.Scatter",
-            "..graph_objs.Sankey",
-            "..graph_objs.Pie",
-            "..graph_objs.Parcoords",
-            "..graph_objs.Parcats",
-            "..graph_objs.Ohlc",
-            "..graph_objs.Mesh3d",
-            "..graph_objs.Isosurface",
-            "..graph_objs.Indicator",
-            "..graph_objs.Image",
-            "..graph_objs.Icicle",
-            "..graph_objs.Histogram2dContour",
-            "..graph_objs.Histogram2d",
-            "..graph_objs.Histogram",
-            "..graph_objs.Heatmap",
-            "..graph_objs.Funnelarea",
-            "..graph_objs.Funnel",
-            "..graph_objs.Densitymapbox",
-            "..graph_objs.Densitymap",
-            "..graph_objs.Contourcarpet",
-            "..graph_objs.Contour",
-            "..graph_objs.Cone",
-            "..graph_objs.Choroplethmapbox",
-            "..graph_objs.Choroplethmap",
-            "..graph_objs.Choropleth",
-            "..graph_objs.Carpet",
-            "..graph_objs.Candlestick",
-            "..graph_objs.Box",
-            "..graph_objs.Barpolar",
-            "..graph_objs.Bar",
-            "..graph_objs.Layout",
-            "..graph_objs.Frame",
-            "..graph_objs.Figure",
-            "..graph_objs.Data",
-            "..graph_objs.Annotations",
-            "..graph_objs.Frames",
-            "..graph_objs.AngularAxis",
-            "..graph_objs.Annotation",
-            "..graph_objs.ColorBar",
-            "..graph_objs.Contours",
-            "..graph_objs.ErrorX",
-            "..graph_objs.ErrorY",
-            "..graph_objs.ErrorZ",
-            "..graph_objs.Font",
-            "..graph_objs.Legend",
-            "..graph_objs.Line",
-            "..graph_objs.Margin",
-            "..graph_objs.Marker",
-            "..graph_objs.RadialAxis",
-            "..graph_objs.Scene",
-            "..graph_objs.Stream",
-            "..graph_objs.XAxis",
-            "..graph_objs.YAxis",
-            "..graph_objs.ZAxis",
-            "..graph_objs.XBins",
-            "..graph_objs.YBins",
-            "..graph_objs.Trace",
-            "..graph_objs.Histogram2dcontour",
+            "._bar.Bar",
+            "._barpolar.Barpolar",
+            "._box.Box",
+            "._candlestick.Candlestick",
+            "._carpet.Carpet",
+            "._choropleth.Choropleth",
+            "._choroplethmap.Choroplethmap",
+            "._choroplethmapbox.Choroplethmapbox",
+            "._cone.Cone",
+            "._contour.Contour",
+            "._contourcarpet.Contourcarpet",
+            "._densitymap.Densitymap",
+            "._densitymapbox.Densitymapbox",
+            "._deprecations.AngularAxis",
+            "._deprecations.Annotation",
+            "._deprecations.Annotations",
+            "._deprecations.ColorBar",
+            "._deprecations.Contours",
+            "._deprecations.Data",
+            "._deprecations.ErrorX",
+            "._deprecations.ErrorY",
+            "._deprecations.ErrorZ",
+            "._deprecations.Font",
+            "._deprecations.Frames",
+            "._deprecations.Histogram2dcontour",
+            "._deprecations.Legend",
+            "._deprecations.Line",
+            "._deprecations.Margin",
+            "._deprecations.Marker",
+            "._deprecations.RadialAxis",
+            "._deprecations.Scene",
+            "._deprecations.Stream",
+            "._deprecations.Trace",
+            "._deprecations.XAxis",
+            "._deprecations.XBins",
+            "._deprecations.YAxis",
+            "._deprecations.YBins",
+            "._deprecations.ZAxis",
+            "._figure.Figure",
+            "._frame.Frame",
+            "._funnel.Funnel",
+            "._funnelarea.Funnelarea",
+            "._heatmap.Heatmap",
+            "._histogram.Histogram",
+            "._histogram2d.Histogram2d",
+            "._histogram2dcontour.Histogram2dContour",
+            "._icicle.Icicle",
+            "._image.Image",
+            "._indicator.Indicator",
+            "._isosurface.Isosurface",
+            "._layout.Layout",
+            "._mesh3d.Mesh3d",
+            "._ohlc.Ohlc",
+            "._parcats.Parcats",
+            "._parcoords.Parcoords",
+            "._pie.Pie",
+            "._sankey.Sankey",
+            "._scatter.Scatter",
+            "._scatter3d.Scatter3d",
+            "._scattercarpet.Scattercarpet",
+            "._scattergeo.Scattergeo",
+            "._scattergl.Scattergl",
+            "._scattermap.Scattermap",
+            "._scattermapbox.Scattermapbox",
+            "._scatterpolar.Scatterpolar",
+            "._scatterpolargl.Scatterpolargl",
+            "._scattersmith.Scattersmith",
+            "._scatterternary.Scatterternary",
+            "._splom.Splom",
+            "._streamtube.Streamtube",
+            "._sunburst.Sunburst",
+            "._surface.Surface",
+            "._table.Table",
+            "._treemap.Treemap",
+            "._violin.Violin",
+            "._volume.Volume",
+            "._waterfall.Waterfall",
         ],
     )
 
@@ -275,7 +274,7 @@ if sys.version_info < (3, 7) or TYPE_CHECKING:
         from packaging.version import Version as _Version
 
         if _Version(_ipywidgets.__version__) >= _Version("7.0.0"):
-            from ..graph_objs._figurewidget import FigureWidget
+            from ..graph_objects._figurewidget import FigureWidget
         else:
             raise ImportError()
     except Exception:
@@ -291,7 +290,7 @@ else:
                 from packaging.version import Version
 
                 if Version(ipywidgets.__version__) >= Version("7.0.0"):
-                    from ..graph_objs._figurewidget import FigureWidget
+                    from ..graph_objects._figurewidget import FigureWidget
 
                     return FigureWidget
                 else:

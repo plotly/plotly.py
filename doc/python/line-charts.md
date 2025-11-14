@@ -1,44 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make line charts in Python with Plotly. Examples on creating
-      and styling line charts in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Line Charts
-    order: 2
-    page_type: example_index
-    permalink: python/line-charts/
-    thumbnail: thumbnail/line-plot.jpg
+description: How to make line charts in Python with Plotly. Examples on creating and
+  styling line charts in Python with Plotly.
 ---
-
 ### Line Plots with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
 
-For more examples of line plots, see the [line and scatter notebook](https://plotly.com/python/line-and-scatter/).
+For more examples of line plots, see the [line and scatter notebook](line-and-scatter.md).
 
 ```python
 import plotly.express as px
@@ -64,12 +32,15 @@ fig.show()
 
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
-
-```python hide_code=true tags=[]
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'line-charts', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/line-charts" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -122,7 +93,7 @@ fig = px.line(df, x='year', y='lifeExp', color='country', markers=True)
 fig.show()
 ```
 
-The `symbol` argument can be used to map a data field to the marker symbol. A [wide variety of symbols](https://plotly.com/python/marker-style/) are available.
+The `symbol` argument can be used to map a data field to the marker symbol. A [wide variety of symbols](marker-style.md) are available.
 
 ```python
 import plotly.express as px
@@ -133,7 +104,7 @@ fig.show()
 
 ### Line plots on Date axes
 
-Line plots can be made on using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or date axes. Line plots on date axes are often called [time-series charts](https://plotly.com/python/time-series/).
+Line plots can be made on using any type of cartesian axis, including [linear](axes.md), [logarithmic](log-plot.md), [categorical](categorical-axes.md) or date axes. Line plots on date axes are often called [time-series charts](time-series.md).
 
 Plotly auto-sets the axis type to a date format when the corresponding data are either ISO-formatted date strings or if they're a [date pandas column](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) or [datetime NumPy array](https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html).
 
@@ -174,7 +145,7 @@ fig.show(config=dict(displayModeBar=False))
 
 ### Line Plot with go.Scatter
 
-If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/scatter/).
+If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](graph-objects.md). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](reference/graph_objects/Scatter.md).
 
 #### Simple Line Plot
 
@@ -275,7 +246,7 @@ fig.show()
 
 #### Connect Data Gaps
 
-[connectgaps](https://plotly.com/python/reference/scatter/#scatter-connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](https://plotly.com/python/filled-area-tile-maps/#multiple-filled-areas-with-a-scattermap-trace), we showed how to take benefit of this feature and illustrate multiple areas on a tile map.
+[connectgaps](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](filled-area-tile-maps.md#multiple-filled-areas-with-a-scattermap-trace), we showed how to take benefit of this feature and illustrate multiple areas on a tile map.
 
 ```python
 import plotly.graph_objects as go
@@ -522,4 +493,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.line()`](https://plotly.com/python-api-reference/generated/plotly.express.line) or https://plotly.com/python/reference/scatter/ for more information and chart attribute options!
+See [function reference for `px.line()`](reference/plotly-express.md#plotly.express.line) or the [full reference for `go.Scatter`](reference/graph_objects/Scatter.md) for more information and chart attribute options!

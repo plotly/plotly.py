@@ -1,5 +1,5 @@
 from plotly import optional_imports
-from plotly.graph_objs import graph_objs as go
+from plotly import graph_objects as go
 from plotly.exceptions import PlotlyError
 
 import plotly.figure_factory as ff

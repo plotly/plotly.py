@@ -1,40 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.2
-  plotly:
-    description: Now you can implement range sliders and selectors in your Plotly
-      graphs purely with python!
-    display_as: controls
-    language: python
-    layout: base
-    name: Range Slider and Selector
-    order: 3
-    page_type: example_index
-    permalink: python/range-slider/
-    thumbnail: thumbnail/sliders.jpg
+description: Now you can implement range sliders and selectors in your Plotly graphs
+  purely with python!
 ---
 
-#### Basic Range Slider and Range Selectors
+### Basic Range Slider and Range Selectors
 
 ```python
 import plotly.graph_objects as go
@@ -91,7 +60,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Range Slider with Vertically Stacked Subplots
+### Range Slider with Vertically Stacked Subplots
 
 ```python
 import plotly.graph_objects as go
@@ -361,5 +330,5 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Reference
-See https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeselector <br>and https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeslider <br>for more information and attribute options!
+### Reference
+See the [full reference for `go.layout.XAxis.rangeselector`](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeselector) <br>and [`go.layout.XAxis.rangeslider`](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.rangeslider) <br>for more information and attribute options!

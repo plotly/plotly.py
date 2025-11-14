@@ -1,4 +1,4 @@
-import plotly.graph_objects as go
+import plotly.graph_objs as go
 from . import _subplots as _sub
 from ._subplots import SubplotXY, SubplotDomain, SubplotRef  # noqa: F401
 
@@ -25,7 +25,7 @@ def make_subplots(
     **kwargs,
 ) -> go.Figure:
     """
-    Return an instance of plotly.graph_objs.Figure with predefined subplots
+    Return an instance of plotly.graph_objects.Figure with predefined subplots
     configured in 'layout'.
 
     Parameters
@@ -105,7 +105,7 @@ def make_subplots(
 
         - Use None for a blank a subplot cell (or to move past a col/row span).
 
-        - Note that specs[0][0] has the specs of the 'start_cell' subplot.
+        - Note that `specs[0][0\\] has the specs of the 'start_cell' subplot.
 
         - Each item in 'specs' is a dictionary.
             The available keys are:
@@ -206,12 +206,12 @@ def make_subplots(
 
     >>> # Stack two subplots vertically, and add a scatter trace to each
     >>> from plotly.subplots import make_subplots
-    >>> import plotly.graph_objects as go
+    >>> import plotly.graph_objs as go
     >>> fig = make_subplots(rows=2)
 
     This is the format of your plot grid:
-    [ (1,1) xaxis1,yaxis1 ]
-    [ (2,1) xaxis2,yaxis2 ]
+    \\[ (1,1) xaxis1,yaxis1 \\]
+    \\[ (2,1) xaxis2,yaxis2 \\]
 
     >>> fig.add_scatter(y=[2, 1, 3], row=1, col=1) # doctest: +ELLIPSIS
     Figure(...)
@@ -226,8 +226,8 @@ def make_subplots(
     >>> fig = make_subplots(rows=2, shared_xaxes=True)
 
     This is the format of your plot grid:
-    [ (1,1) xaxis1,yaxis1 ]
-    [ (2,1) xaxis2,yaxis2 ]
+    \\[ (1,1) xaxis1,yaxis1 \\]
+    \\[ (2,1) xaxis2,yaxis2 \\]
 
     >>> fig.add_scatter(y=[2, 1, 3], row=1, col=1) # doctest: +ELLIPSIS
     Figure(...)
@@ -242,8 +242,8 @@ def make_subplots(
     ...                     [{'colspan': 2}, None]])
 
     This is the format of your plot grid:
-    [ (1,1) xaxis1,yaxis1 ]  [ (1,2) xaxis2,yaxis2 ]
-    [ (2,1) xaxis3,yaxis3           -              ]
+    \\[ (1,1) xaxis1,yaxis1 ]  [ (1,2) xaxis2,yaxis2 \\]
+    \\[ (2,1) xaxis3,yaxis3           -              \\]
 
     >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1) # doctest: +ELLIPSIS
     Figure(...)
@@ -258,10 +258,10 @@ def make_subplots(
     >>> fig = make_subplots(insets=[{'cell': (1,1), 'l': 0.7, 'b': 0.3}])
 
     This is the format of your plot grid:
-    [ (1,1) xaxis1,yaxis1 ]
+    \\[ (1,1) xaxis1,yaxis1 \\]
 
     With insets:
-    [ xaxis2,yaxis2 ] over [ (1,1) xaxis1,yaxis1 ]
+    \\[ xaxis2,yaxis2 \\] over \\[ (1,1) xaxis1,yaxis1 \\]
 
     >>> fig.add_scatter(x=[1,2,3], y=[2,1,1]) # doctest: +ELLIPSIS
     Figure(...)
@@ -274,8 +274,8 @@ def make_subplots(
     >>> fig = make_subplots(rows=2, subplot_titles=('Plot 1','Plot 2'))
 
     This is the format of your plot grid:
-    [ (1,1) x1,y1 ]
-    [ (2,1) x2,y2 ]
+    \\[ (1,1) x1,y1 \\]
+    \\[ (2,1) x2,y2 \\]
 
     >>> fig.add_scatter(x=[1,2,3], y=[2,1,2], row=1, col=1) # doctest: +ELLIPSIS
     Figure(...)

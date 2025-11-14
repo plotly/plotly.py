@@ -1,57 +1,27 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.14
-  plotly:
-    description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
-      and path.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Shapes
-    order: 25
-    permalink: python/shapes/
-    thumbnail: thumbnail/shape.jpg
+description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
+  and path.
 ---
-
 ### Adding Lines and Polygons to Figures
 
 As a general rule, there are two ways to add shapes (lines or polygons) to figures:
 1. Trace types in the `scatter` family (e.g. `scatter`, `scatter3d`, `scattergeo` etc) can be drawn with `mode="lines"` and optionally support a `fill="self"` attribute, and so can be used to draw open or closed shapes on figures.
 2. Standalone lines, ellipses and rectangles can be added to figures using `fig.add_shape()`, and they can be positioned absolutely within the figure, or they can be positioned relative to the axes of 2d cartesian subplots i.e. in data coordinates.
 
-*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](/python/horizontal-vertical-shapes/) that are fixed to data coordinates in one axis and absolutely positioned in another.
+**Note:** there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 The differences between these two approaches are that:
+
 * Traces can optionally support hover labels and can appear in legends.
 * Shapes can be positioned absolutely or relative to data coordinates in 2d cartesian subplots only.
 * Traces cannot be positioned absolutely but can be positioned relative to date coordinates in any subplot type.
-* Traces also support [optional text](/python/text-and-annotations/), although there is a [textual equivalent to shapes in text annotations](/python/text-and-annotations/).
+* Traces also support [optional text](text-and-annotations.md), although there is a [textual equivalent to shapes in text annotations](text-and-annotations.md).
 
 
 
 ### Shape-drawing with Scatter traces
 
-There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](reference/graph_objects/layout-package/Shape.md#plotly.graph_objects.layout.Shape.type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](polar-chart.md#categorical-polar-chart), scattergeo, [scattermapbox](../filled_area_on_mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the end of the sequence to have a closed shape.
 
 ```python
 import plotly.graph_objects as go
@@ -60,7 +30,7 @@ fig = go.Figure(go.Scatter(x=[0,1,2,0], y=[0,2,0,0], fill="toself"))
 fig.show()
 ```
 
-You can have more shapes either by adding [more traces](https://plotly.com/python/filled-area-plots/) or interrupting the series with `None`.
+You can have more shapes either by adding [more traces](filled-area-plots.md) or interrupting the series with `None`.
 
 ```python
 import plotly.graph_objects as go
@@ -76,11 +46,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'shapes', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/shapes" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -281,7 +255,9 @@ fig.show()
 
 #### Highlighting Time Series Regions with Rectangle Shapes
 
-*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](/python/horizontal-vertical-shapes/) that are fixed to data coordinates in one axis and absolutely positioned in another.
+!!! note
+
+    There are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](horizontal-vertical-shapes.md) that are fixed to data coordinates in one axis and absolutely positioned in another.
 
 
 ```python
@@ -590,10 +566,12 @@ When drawing shapes where `xref` or `yref` reference axes of type category or mu
 In the following example, the `x0` and `x1` values for both shapes reference category values on the x-axis.
 
 In this example, the first shape:
+
 - Shifts `x0` half way between the center of category "Germany" and the center of the previous category by setting `x0shift=-0.5`
 - Shifts `x1`half way between the center of category "Germany" and the center of the next category by setting `x1shift=0.5`
 
 The second shape:
+
 - Shifts `x0` back to the center of the previous category by setting `x0shift=-1`
 - Shifts `x1`forward to the center of the next category by setting `x1shift=1`
 
@@ -659,9 +637,9 @@ fig.show()
 
 _introduced in plotly 4.7_
 
-You can create layout shapes programmatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](/python/configuration-options#add-optional-shapedrawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
+You can create layout shapes programmatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](configuration-options.md#add-optional-shapedrawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
 
-This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](/python/imshow) or [layout images](/python/images).
+This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](imshow.md) or [layout images](images.md).
 
 Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can
 - drag and resize it for lines, rectangles and circles/ellipses
@@ -1240,4 +1218,4 @@ fig.show()
 ```
 
 ### Reference
-See https://plotly.com/python/reference/layout/shapes/ for more information and chart attribute options!
+See the [full reference for `go.Layout.shapes`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.shapes) for more information and chart attribute options!

@@ -1,45 +1,13 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.4
-  plotly:
-    description: How to format axes of 3d plots in Python with Plotly.
-    display_as: 3d_charts
-    language: python
-    layout: base
-    name: 3D Axes
-    order: 1
-    page_type: example_index
-    permalink: python/3d-axes/
-    thumbnail: thumbnail/3d-axes.png
+description: How to format axes of 3d plots in Python with Plotly.
 ---
-
 ### Range of axes
 
 3D figures have an attribute in `layout` called `scene`, which contains
 attributes such as `xaxis`, `yaxis` and `zaxis` parameters, in order to
 set the range, title, ticks, color etc. of the axes.
 
-For creating 3D charts, see [this page](https://plotly.com/python/3d-charts/).
+For creating 3D charts, see [this page](3d-charts.md).
 
 Set `range` on an axis to manually configure a range for that axis. If you don't set `range`, it's automatically calculated. In this example, we set a `range` on `xaxis`, `yaxis`, and `zaxis`.
 

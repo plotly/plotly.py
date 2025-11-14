@@ -1,43 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: How to make horizontal bar charts in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Horizontal Bar Charts
-    order: 8
-    page_type: u-guide
-    permalink: python/horizontal-bar-charts/
-    thumbnail: thumbnail/horizontal-bar.jpg
+description: How to make horizontal bar charts in Python with Plotly.
 ---
-
-See more examples of bar charts (including vertical bar charts) and styling options [here](https://plotly.com/python/bar-charts/).
+See more examples of bar charts (including vertical bar charts) and styling options [here](bar-charts.md).
 
 ### Horizontal Bar Chart with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). For a horizontal bar char, use the `px.bar` function with `orientation='h'`.
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). For a horizontal bar char, use the `px.bar` function with `orientation='h'`.
 
 #### Basic Horizontal Bar Chart with Plotly Express
 
@@ -64,7 +32,7 @@ fig.show()
 
 ### Horizontal Bar Chart with go.Bar
 
-You can also use [the more generic `go.Bar` class from `plotly.graph_objects`](/python/graph-objects/). All the options of `go.Bar` are documented in the reference https://plotly.com/python/reference/bar/
+You can also use [the more generic `go.Bar` class from `plotly.graph_objects`](graph-objects.md). All the options of `go.Bar` are documented in the [reference](reference/graph_objects/Bar.md)
 
 #### Basic Horizontal Bar Chart
 
@@ -447,4 +415,4 @@ fig.show()
 
 ### Reference
 
-See more examples of bar charts and styling options [here](https://plotly.com/python/bar-charts/).<br> See https://plotly.com/python/reference/bar/ for more information and chart attribute options!
+See more examples of bar charts and styling options [here](bar-charts.md).<br> See the [full reference for `go.Bar`](reference/graph_objects/Bar.md) for more information and chart attribute options!

@@ -1,43 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernel_info:
-    name: python2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.8
-  plotly:
-    description: How to make carpet contour plots in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Carpet Contour Plot
-    order: 14
-    page_type: u-guide
-    permalink: python/carpet-contour/
-    thumbnail: thumbnail/contourcarpet.jpg
+description: How to make carpet contour plots in Python with Plotly.
 ---
-
 ### Basic Carpet Plot
 
-Set the `x` and `y` coordinates, using `x` and `y` attributes. If `x` coordinate values are omitted a cheater plot will be created. To save parameter values use `a` and `b` attributes. To make changes to the axes, use `aaxis` or `baxis` attributes. For a more detailed list of axes attributes refer to [python reference](https://plotly.com/python/reference/carpet/#carpet-aaxis).
+Set the `x` and `y` coordinates, using `x` and `y` attributes. If `x` coordinate values are omitted a cheater plot will be created. To save parameter values use `a` and `b` attributes. To make changes to the axes, use `aaxis` or `baxis` attributes. For a more detailed list of axes attributes refer to [python reference](reference/graph_objects/Carpet.md#plotly.graph_objects.Carpet.aaxis).
 
 ```python
 import plotly.graph_objects as go
@@ -287,4 +253,4 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/contourcarpet/ for more information and chart attribute options!
+See the [full reference for `go.Carpet Contours`](reference/graph_objects/Contourcarpet.md) for more information and chart attribute options!

@@ -22,6 +22,10 @@ def fullmatch(regex, string, flags=0):
     return re.match("(?:" + regex_string + r")\Z", string, flags=flags)
 
 
+# Constants
+INDENT = 8
+
+
 # Utility functions
 # -----------------
 def to_scalar_or_list(v):
@@ -523,7 +527,9 @@ class EnumeratedValidator(BaseValidator):
         enum_regexs = []
         for v, regex in zip(self.values, self.val_regexs):
             if regex is not None:
-                enum_regexs.append(regex.pattern)
+                enum_pattern = regex.pattern
+                escaped_pattern = enum_pattern.replace("[", r"\[").replace("]", r"\]")
+                enum_regexs.append(escaped_pattern)
             else:
                 enum_vals.append(v)
         desc = """\
@@ -535,16 +541,16 @@ class EnumeratedValidator(BaseValidator):
             enum_vals_str = "\n".join(
                 textwrap.wrap(
                     repr(enum_vals),
-                    initial_indent=" " * 12,
-                    subsequent_indent=" " * 12,
+                    initial_indent=" " * INDENT,
+                    subsequent_indent=" " * INDENT,
                     break_on_hyphens=False,
                 )
             )
 
             desc = (
                 desc
-                + """
-      - One of the following enumeration values:
+                + """\n
+    - One of the following enumeration values:\n
 {enum_vals_str}""".format(enum_vals_str=enum_vals_str)
             )
 
@@ -552,24 +558,25 @@ class EnumeratedValidator(BaseValidator):
             enum_regexs_str = "\n".join(
                 textwrap.wrap(
                     repr(enum_regexs),
-                    initial_indent=" " * 12,
-                    subsequent_indent=" " * 12,
+                    initial_indent=" " * INDENT,
+                    subsequent_indent=" " * INDENT,
                     break_on_hyphens=False,
+                    break_long_words=False,
                 )
             )
 
             desc = (
                 desc
-                + """
-      - A string that matches one of the following regular expressions:
+                + """\n
+    - A string that matches one of the following regular expressions:\n
 {enum_regexs_str}""".format(enum_regexs_str=enum_regexs_str)
             )
 
         if self.array_ok:
             desc = (
                 desc
-                + """
-      - A tuple, list, or one-dimensional numpy array of the above"""
+                + """\n
+    - A tuple, list, or one-dimensional numpy array of the above"""
             )
 
         return desc
@@ -716,22 +723,22 @@ class NumberValidator(BaseValidator):
 
     def description(self):
         desc = """\
-    The '{plotly_name}' property is a number and may be specified as:""".format(
+        The '{plotly_name}' property is a number and may be specified as:""".format(
             plotly_name=self.plotly_name
         )
 
         if not self.has_min_max:
             desc = (
                 desc
-                + """
-      - An int or float"""
+                + """\n
+    - An int or float"""
             )
 
         else:
             desc = (
                 desc
-                + """
-      - An int or float in the interval [{min_val}, {max_val}]""".format(
+                + """\n
+    - An int or float in the interval [{min_val}, {max_val}]""".format(
                     min_val=self.min_val, max_val=self.max_val
                 )
             )
@@ -739,8 +746,8 @@ class NumberValidator(BaseValidator):
         if self.array_ok:
             desc = (
                 desc
-                + """
-      - A tuple, list, or one-dimensional numpy array of the above"""
+                + """\n
+    - A tuple, list, or one-dimensional numpy array of the above"""
             )
 
         return desc
@@ -853,7 +860,7 @@ class IntegerValidator(BaseValidator):
 
     def description(self):
         desc = """\
-    The '{plotly_name}' property is a integer and may be specified as:""".format(
+    The '{plotly_name}' property is a integer and may be specified as:\n""".format(
             plotly_name=self.plotly_name
         )
 
@@ -861,12 +868,12 @@ class IntegerValidator(BaseValidator):
             desc = (
                 desc
                 + """
-      - An int (or float that will be cast to an int)"""
+    - An int (or float that will be cast to an int)"""
             )
         else:
             desc = desc + (
                 """
-      - An int (or float that will be cast to an int)
+    - An int (or float that will be cast to an int)
         in the interval [{min_val}, {max_val}]""".format(
                     min_val=self.min_val, max_val=self.max_val
                 )
@@ -1007,44 +1014,44 @@ class StringValidator(BaseValidator):
         if self.no_blank:
             desc = (
                 desc
-                + """
-      - A non-empty string"""
+                + """\n
+    - A non-empty string"""
             )
         elif self.values:
             valid_str = "\n".join(
                 textwrap.wrap(
                     repr(self.values),
-                    initial_indent=" " * 12,
-                    subsequent_indent=" " * 12,
+                    initial_indent=" " * INDENT,
+                    subsequent_indent=" " * INDENT,
                     break_on_hyphens=False,
                 )
             )
 
             desc = (
                 desc
-                + """
-      - One of the following strings:
+                + """\n
+    - One of the following strings:
 {valid_str}""".format(valid_str=valid_str)
             )
         else:
             desc = (
                 desc
-                + """
-      - A string"""
+                + """\n
+    - A string"""
             )
 
         if not self.strict:
             desc = (
                 desc
-                + """
-      - A number that will be converted to a string"""
+                + """\n
+    - A number that will be converted to a string"""
             )
 
         if self.array_ok:
             desc = (
                 desc
-                + """
-      - A tuple, list, or one-dimensional numpy array of the above"""
+                + """\n
+    - A tuple, list, or one-dimensional numpy array of the above"""
             )
 
         return desc
@@ -1311,11 +1318,12 @@ class ColorValidator(BaseValidator):
     def description(self):
         valid_color_description = """\
     The '{plotly_name}' property is a color and may be specified as:
-      - A hex string (e.g. '#ff0000')
-      - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-      - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-      - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-      - A named CSS color: see https://plotly.com/python/css-colors/ for a list""".format(
+
+    - A hex string (e.g. '#ff0000')
+    - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+    - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+    - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+    - A named CSS color: see https://plotly.com/python/css-colors/ for a list""".format(
             plotly_name=self.plotly_name
         )
 
@@ -1323,15 +1331,16 @@ class ColorValidator(BaseValidator):
             valid_color_description = (
                 valid_color_description
                 + """
-      - A number that will be interpreted as a color
-        according to {colorscale_path}""".format(colorscale_path=self.colorscale_path)
+    - A number that will be interpreted as a color according to {colorscale_path}""".format(
+                    colorscale_path=self.colorscale_path
+                )
             )
 
         if self.array_ok:
             valid_color_description = (
                 valid_color_description
                 + """
-      - A list or array of any of the above"""
+    - A list or array of any of the above"""
             )
 
         return valid_color_description
@@ -1553,8 +1562,8 @@ class ColorscaleValidator(BaseValidator):
         colorscales_str = "\n".join(
             textwrap.wrap(
                 repr(sorted(list(self.named_colorscales))),
-                initial_indent=" " * 12,
-                subsequent_indent=" " * 13,
+                initial_indent=" " * INDENT,
+                subsequent_indent=" " * INDENT,
                 break_on_hyphens=False,
                 width=80,
             )
@@ -1562,17 +1571,17 @@ class ColorscaleValidator(BaseValidator):
 
         desc = """\
     The '{plotly_name}' property is a colorscale and may be
-    specified as:
-      - A list of colors that will be spaced evenly to create the colorscale.
+    specified as:\n
+    - A list of colors that will be spaced evenly to create the colorscale.
         Many predefined colorscale lists are included in the sequential, diverging,
         and cyclical modules in the plotly.colors package.
-      - A list of 2-element lists where the first element is the
+    - A list of 2-element lists where the first element is the
         normalized color level value (starting at 0 and ending at 1),
         and the second item is a valid color string.
         (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
-      - One of the following named colorscales:
-{colorscales_str}.
-        Appending '_r' to a named colorscale reverses it.
+    - One of the following named colorscales:\n
+{colorscales_str}.\n
+    Appending '_r' to a named colorscale reverses it.
 """.format(plotly_name=self.plotly_name, colorscales_str=colorscales_str)
 
         return desc
@@ -1810,13 +1819,13 @@ class FlaglistValidator(BaseValidator):
         desc = (
             """\
     The '{plotly_name}' property is a flaglist and may be specified
-    as a string containing:"""
+    as a string containing:\n"""
         ).format(plotly_name=self.plotly_name)
 
         # Flags
         desc = desc + (
             """
-      - Any combination of {flags} joined with '+' characters
+    - Any combination of {flags} joined with '+' characters
         (e.g. '{eg_flag}')"""
         ).format(flags=self.flags, eg_flag="+".join(self.flags[:2]))
 
@@ -1831,7 +1840,7 @@ class FlaglistValidator(BaseValidator):
             desc = (
                 desc
                 + """
-      - A list or array of the above"""
+    - A list or array of the above"""
             )
 
         return desc
@@ -1983,17 +1992,20 @@ class InfoArrayValidator(BaseValidator):
             # ### Case 1 ###
             if self.dimensions in (1, "1-2"):
                 upto = " up to" if self.free_length and self.dimensions == 1 else ""
-                desc += """
-
+                desc += """\n
     * a list or tuple of{upto} {N} elements where:\
 """.format(upto=upto, N=len(self.item_validators))
 
                 for i, item_validator in enumerate(self.item_validators):
                     el_desc = item_validator.description().strip()
+                    lines = el_desc.splitlines()
+                    el_desc_indented = "\n".join(
+                        [lines[0]] + ["    " + line for line in lines[1:]]
+                    )
                     desc = (
                         desc
-                        + """
-({i}) {el_desc}""".format(i=i, el_desc=el_desc)
+                        + """\n
+        ({i}) {el_desc_indented}""".format(i=i, el_desc_indented=el_desc_indented)
                     )
 
             # ### Case 2 ###
@@ -2006,15 +2018,17 @@ class InfoArrayValidator(BaseValidator):
                 for i, item_validator in enumerate(self.item_validators):
                     # Update name for 2d
                     orig_name = item_validator.plotly_name
-                    item_validator.plotly_name = "{name}[i][{i}]".format(
-                        name=self.plotly_name, i=i
+                    item_validator.plotly_name = (
+                        "{name}\\\\[i\\\\]\\\\[{i}\\\\]".format(
+                            name=self.plotly_name, i=i
+                        )
                     )
 
                     el_desc = item_validator.description().strip()
                     desc = (
                         desc
-                        + """
-({i}) {el_desc}""".format(i=i, el_desc=el_desc)
+                        + """\n
+        ({i}) {el_desc}""".format(i=i, el_desc=el_desc)
                     )
                     item_validator.plotly_name = orig_name
         else:
@@ -2028,21 +2042,32 @@ class InfoArrayValidator(BaseValidator):
 
                 el_desc = item_validator.description().strip()
 
-                desc += """
-    * a list of elements where:
-      {el_desc}
-""".format(el_desc=el_desc)
+                # Adds an indentation of 4 spaces, especially when el_desc
+                # is a fully auto-generated docstring with nested lists.
+                lines = el_desc.splitlines()
+                el_desc_indented = "\n".join(
+                    [lines[0]] + ["    " + line for line in lines[1:]]
+                )
+
+                desc += """\n
+    * a list of elements where:\n
+        {el_desc_indented}
+""".format(el_desc_indented=el_desc_indented)
 
             if self.dimensions in ("1-2", 2):
-                item_validator.plotly_name = "{name}[i][j]".format(
+                item_validator.plotly_name = "{name}\\\\[i\\\\]\\\\[j\\\\]".format(
                     name=self.plotly_name
                 )
 
                 el_desc = item_validator.description().strip()
-                desc += """
-    * a 2D list where:
-      {el_desc}
-""".format(el_desc=el_desc)
+                lines = el_desc.splitlines()
+                el_desc_indented = "\n".join(
+                    [lines[0]] + ["    " + line for line in lines[1:]]
+                )
+                desc += """\n
+    * a 2D list where:\n    
+        {el_desc_indented}
+""".format(el_desc_indented=el_desc_indented)
 
             item_validator.plotly_name = orig_name
 
@@ -2273,8 +2298,8 @@ class DashValidator(EnumeratedValidator):
             enum_vals_str = "\n".join(
                 textwrap.wrap(
                     repr(enum_vals),
-                    initial_indent=" " * 12,
-                    subsequent_indent=" " * 12,
+                    initial_indent=" " * INDENT,
+                    subsequent_indent=" " * INDENT,
                     break_on_hyphens=False,
                     width=80,
                 )
@@ -2282,16 +2307,16 @@ class DashValidator(EnumeratedValidator):
 
             desc = (
                 desc
-                + """
-      - One of the following dash styles:
+                + """\n
+    - One of the following dash styles:\n
 {enum_vals_str}""".format(enum_vals_str=enum_vals_str)
             )
 
         desc = (
             desc
-            + """
-      - A string containing a dash length list in pixels or percentages
-            (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+            + """\n
+    - A string containing a dash length list in pixels or percentages\n
+        (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
 """
         )
         return desc
@@ -2370,26 +2395,26 @@ class CompoundValidator(BaseValidator):
     @staticmethod
     def compute_graph_obj_module_str(data_class_str, parent_name):
         if parent_name == "frame" and data_class_str in ["Data", "Layout"]:
-            # Special case. There are no graph_objs.frame.Data or
-            # graph_objs.frame.Layout classes. These are remapped to
-            # graph_objs.Data and graph_objs.Layout
+            # Special case. There are no graph_objects.frame.Data or
+            # graph_objects.frame.Layout classes. These are remapped to
+            # graph_objects.Data and graph_objects.Layout
 
             parent_parts = parent_name.split(".")
-            module_str = ".".join(["plotly.graph_objs"] + parent_parts[1:])
+            module_str = ".".join(["plotly.graph_objects"] + parent_parts[1:])
         elif parent_name == "layout.template" and data_class_str == "Layout":
             # Remap template's layout to regular layout
-            module_str = "plotly.graph_objs"
+            module_str = "plotly.graph_objects"
         elif "layout.template.data" in parent_name:
             # Remap template's traces to regular traces
             parent_name = parent_name.replace("layout.template.data.", "")
             if parent_name:
-                module_str = "plotly.graph_objs." + parent_name
+                module_str = "plotly.graph_objects." + parent_name
             else:
-                module_str = "plotly.graph_objs"
+                module_str = "plotly.graph_objects"
         elif parent_name:
-            module_str = "plotly.graph_objs." + parent_name
+            module_str = "plotly.graph_objects." + parent_name
         else:
-            module_str = "plotly.graph_objs"
+            module_str = "plotly.graph_objects"
 
         return module_str
 
@@ -2405,10 +2430,9 @@ class CompoundValidator(BaseValidator):
         desc = (
             """\
     The '{plotly_name}' property is an instance of {class_str}
-    that may be specified as:
-      - An instance of :class:`{module_str}.{class_str}`
-      - A dict of string/value properties that will be passed
-        to the {class_str} constructor"""
+    that may be specified as:\n
+    - An instance of :class:`{module_str}.{class_str}`
+    - A dict of string/value properties that will be passed to the {class_str} constructor"""
         ).format(
             plotly_name=self.plotly_name,
             class_str=self.data_class_str,
@@ -2477,9 +2501,9 @@ class CompoundArrayValidator(BaseValidator):
         desc = (
             """\
     The '{plotly_name}' property is a tuple of instances of
-    {class_str} that may be specified as:
-      - A list or tuple of instances of {module_str}.{class_str}
-      - A list or tuple of dicts of string/value properties that
+    {class_str} that may be specified as:\n
+    - A list or tuple of instances of {module_str}.{class_str}
+    - A list or tuple of dicts of string/value properties that
         will be passed to the {class_str} constructor"""
         ).format(
             plotly_name=self.plotly_name,
@@ -2560,17 +2584,17 @@ class BaseDataValidator(BaseValidator):
         desc = (
             """\
     The '{plotly_name}' property is a tuple of trace instances
-    that may be specified as:
-      - A list or tuple of trace instances
+    that may be specified as:\n
+    - A list or tuple of trace instances
         (e.g. [Scatter(...), Bar(...)])
-      - A single trace instance
+    - A single trace instance
         (e.g. Scatter(...), Bar(...), etc.)
-      - A list or tuple of dicts of string/value properties where:
-        - The 'type' property specifies the trace type
+    - A list or tuple of dicts of string/value properties where:
+        - The 'type' property specifies the trace type\n
 {trace_types}
 
-        - All remaining properties are passed to the constructor of
-          the specified trace type
+    - All remaining properties are passed to the constructor of
+        the specified trace type
 
         (e.g. [{{'type': 'scatter', ...}}, {{'type': 'bar, ...}}])"""
         ).format(plotly_name=self.plotly_name, trace_types=trace_types_wrapped)
@@ -2580,7 +2604,7 @@ class BaseDataValidator(BaseValidator):
     def get_trace_class(self, trace_name):
         # Import trace classes
         if trace_name not in self._class_map:
-            trace_module = import_module("plotly.graph_objs")
+            trace_module = import_module("plotly.graph_objects")
             trace_class_name = self.class_strs_map[trace_name]
             self._class_map[trace_name] = getattr(trace_module, trace_class_name)
 
@@ -2591,7 +2615,7 @@ class BaseDataValidator(BaseValidator):
 
         # Import Histogram2dcontour, this is the deprecated name of the
         # Histogram2dContour trace.
-        from plotly.graph_objs import Histogram2dcontour
+        from plotly.graph_objects import Histogram2dcontour
 
         if v is None:
             v = []

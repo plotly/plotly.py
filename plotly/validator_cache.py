@@ -35,7 +35,7 @@ class ValidatorCache(object):
             else:
                 lookup_name = None
                 if parent_path == "layout":
-                    from .graph_objects import Layout
+                    from .graph_objs import Layout
 
                     match = Layout._subplotid_prop_re.match(prop_name)
                     if match:

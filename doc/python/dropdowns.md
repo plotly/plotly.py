@@ -1,44 +1,14 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.0
-  plotly:
-    description: How to add dropdowns to update Plotly chart attributes in Python.
-    display_as: controls
-    language: python
-    layout: base
-    name: Dropdown Menus
-    order: 2
-    page_type: example_index
-    permalink: python/dropdowns/
-    thumbnail: thumbnail/dropdown.jpg
+description: How to add dropdowns to update Plotly chart attributes in Python.
 ---
 
-#### Methods
-The [updatemenu method](https://plotly.com/python/reference/layout/updatemenus/#layout-updatemenus-buttons-method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
+### Methods
+The [updatemenu method](reference/graph_objects/layout-package/updatemenu-package/Button.md#plotly.graph_objects.layout.updatemenu.Button.method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
+
 - `"restyle"`: modify data or data attributes
 - `"relayout"`: modify layout attributes
 - `"update"`: modify data **and** layout attributes
-- `"animate"`: start or pause an [animation](https://plotly.com/python/#animations)
+- `"animate"`: start or pause an [animation](plotly-animations.md)
 
 
 ## Restyle Dropdown
@@ -341,7 +311,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Update Dropdown
+## Update Dropdown
 
 The `"update"` method should be used when modifying the data and layout sections of the graph.<br>
 This example demonstrates how to update which traces are displayed while simultaneously updating layout attributes such as the chart title and annotations.
@@ -444,13 +414,13 @@ fig.update_layout(title_text="Yahoo")
 fig.show()
 ```
 
-### Graph Selection Dropdowns in Jinja
+## Graph Selection Dropdowns in Jinja
 
-It is straight forward to create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a dropdown that chooses which div to display. This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration. It produces web pages that are larger than the webpages produced through the built in method which is a consideration for very large figures with hundreds or thousands of data points in traces that appear in multiple selections. This approach requires both a Python program and a Jinja template file.  The documentation on [using Jinja templates with Plotly](https://plotly.com/python/interactive-html-export/#inserting-plotly-output-into-html-using-a-jinja2-template) is relevant background.  
+It is straight forward to create each potential view as a separate graph and then use Jinja to insert each potential view into a div on a JavaScript enabled webpage with a dropdown that chooses which div to display. This approach produces code that requires little customization or updating as you e.g. add, drop, or reorder views or traces, so it is particularly compelling for prototyping and rapid iteration. It produces web pages that are larger than the webpages produced through the built in method which is a consideration for very large figures with hundreds or thousands of data points in traces that appear in multiple selections. This approach requires both a Python program and a Jinja template file.  The documentation on [using Jinja templates with Plotly](interactive-html-export.md#inserting-plotly-output-into-html-using-a-jinja2-template) is relevant background.  
 
 <!-- #region -->
 
-#### Python Code File
+### Python Code File
 
 ```python
 import plotly.express as px
@@ -504,44 +474,44 @@ with open(output_html_path, "w", encoding='utf-8') as output_file:
         output_file.write(j2_template.render(data_for_jinja))
 ```
 
-#### Jinja HTML Template
+### Jinja HTML Template
 
 
-```
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="container"&gt;
-        &lt;h1&gt;Select an analysis&lt;/h1&gt;
-        &lt;select id="dropdown" class="form-control"&gt;
+</head>
+<body>
+    <div class="container">
+        <h1>Select an analysis</h1>
+        <select id="dropdown" class="form-control">
     {{ dropdown_entries }}
-        &lt;/select&gt;
+        </select>
 
 
         {{ divs }}
 
-    &lt;/div&gt;
+    </div>
 
-    &lt;script&gt;
-        document.getElementById('dropdown').addEventListener('change', function() {
+    <script>
+        document.getElementById('dropdown').addEventListener('change', function(){
             const divs = document.querySelectorAll('.content-div');
-            divs.forEach(div =&gt; div.style.display = 'none');
+            divs.forEach(div => div.style.display = 'none');
 
             const selectedDiv = document.getElementById(this.value);
             if (selectedDiv) {
                 selectedDiv.style.display = 'block';
             }
         });
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+    </script>
+</body>
+</html>
 ```
 
 <!-- #endregion -->
 
-#### Reference
-See https://plotly.com/python/reference/layout/updatemenus/ for more information about `updatemenu` dropdowns.
+### Reference
+See the [full reference for `go.layout.updatemenus`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information about `updatemenu` dropdowns.

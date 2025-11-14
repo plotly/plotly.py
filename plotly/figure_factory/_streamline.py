@@ -2,7 +2,7 @@ import math
 
 from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 np = optional_imports.get_module("numpy")
 
@@ -40,27 +40,42 @@ def create_streamline(
     """
     Returns data for a streamline plot.
 
-    :param (list|ndarray) x: 1 dimensional, evenly spaced list or array
-    :param (list|ndarray) y: 1 dimensional, evenly spaced list or array
-    :param (ndarray) u: 2 dimensional array
-    :param (ndarray) v: 2 dimensional array
-    :param (float|int) density: controls the density of streamlines in
+    Parameters
+    ----------
+    x : list or ndarray
+        1 dimensional, evenly spaced list or array
+    y : list or ndarray
+        1 dimensional, evenly spaced list or array
+    u : ndarray
+        2 dimensional array
+    v : ndarray
+        2 dimensional array
+    density : float or int
+        Controls the density of streamlines in
         plot. This is multiplied by 30 to scale similiarly to other
         available streamline functions such as matplotlib.
         Default = 1
-    :param (angle in radians) angle: angle of arrowhead. Default = pi/9
-    :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
+    angle : radians
+        Angle of arrowhead. Default = pi/9
+    arrow_scale : float in [0,1]
+        Value to scale length of arrowhead
         Default = .09
-    :param kwargs: kwargs passed through plotly.graph_objs.Scatter
+    **kwargs:
+        kwargs passed through plotly.graph_objects.Scatter
         for more information on valid kwargs call
-        help(plotly.graph_objs.Scatter)
+        help(plotly.graph_objects.Scatter)
 
-    :rtype (dict): returns a representation of streamline figure.
+    Returns
+    -------
+    dict
+        A representation of streamline figure.
 
+    Examples
+    --------
     Example 1: Plot simple streamline and increase arrow size
 
     >>> from plotly.figure_factory import create_streamline
-    >>> import plotly.graph_objects as go
+    >>> import plotly.graph_objs as go
     >>> import numpy as np
     >>> import math
 
@@ -119,14 +134,14 @@ def create_streamline(
         x, y, u, v, density, angle, arrow_scale
     ).get_streamline_arrows()
 
-    streamline = graph_objs.Scatter(
+    streamline = graph_objects.Scatter(
         x=streamline_x + arrow_x, y=streamline_y + arrow_y, mode="lines", **kwargs
     )
 
     data = [streamline]
-    layout = graph_objs.Layout(hovermode="closest")
+    layout = graph_objects.Layout(hovermode="closest")
 
-    return graph_objs.Figure(data=data, layout=layout)
+    return graph_objects.Figure(data=data, layout=layout)
 
 
 class _Streamline(object):

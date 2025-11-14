@@ -1,6 +1,6 @@
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 np = optional_imports.get_module("numpy")
 
@@ -156,7 +156,7 @@ def trisurf(
     facecolor = np.asarray(facecolor)
     ii, jj, kk = simplices.T
 
-    triangles = graph_objs.Mesh3d(
+    triangles = graph_objects.Mesh3d(
         x=x, y=y, z=z, facecolor=facecolor, i=ii, j=jj, k=kk, name=""
     )
 
@@ -167,7 +167,7 @@ def trisurf(
         colorscale = clrs.make_colorscale(colormap, scale)
         colorscale = clrs.convert_colorscale_to_rgb(colorscale)
 
-        colorbar = graph_objs.Scatter3d(
+        colorbar = graph_objects.Scatter3d(
             x=x[:1],
             y=y[:1],
             z=z[:1],
@@ -227,12 +227,12 @@ def trisurf(
         )
 
     # define the lines for plotting
-    lines = graph_objs.Scatter3d(
+    lines = graph_objects.Scatter3d(
         x=x_edge,
         y=y_edge,
         z=z_edge,
         mode="lines",
-        line=graph_objs.scatter3d.Line(color=edges_color, width=1.5),
+        line=graph_objects.scatter3d.Line(color=edges_color, width=1.5),
         showlegend=False,
     )
 
@@ -265,43 +265,70 @@ def create_trisurf(
     """
     Returns figure for a triangulated surface plot
 
-    :param (array) x: data values of x in a 1D array
-    :param (array) y: data values of y in a 1D array
-    :param (array) z: data values of z in a 1D array
-    :param (array) simplices: an array of shape (ntri, 3) where ntri is
+    Parameters
+    ----------
+    x : array
+        Data values of x in a 1D array
+    y : array
+        Data values of y in a 1D array
+    z : array
+        Data values of z in a 1D array
+    simplices : array
+        An array of shape (ntri, 3) where ntri is
         the number of triangles in the triangularization. Each row of the
         array contains the indicies of the verticies of each triangle
-    :param (str|tuple|list) colormap: either a plotly scale name, an rgb
+    colormap : str or tuple or list
+        Either a plotly scale name, an rgb
         or hex color, a color tuple or a list of colors. An rgb color is
         of the form 'rgb(x, y, z)' where x, y, z belong to the interval
         [0, 255] and a color tuple is a tuple of the form (a, b, c) where
         a, b and c belong to [0, 1]. If colormap is a list, it must
         contain the valid color types aforementioned as its members
-    :param (bool) show_colorbar: determines if colorbar is visible
-    :param (list|array) scale: sets the scale values to be used if a non-
+    show_colorbar : bool
+        Determines if colorbar is visible
+    scale : list or array
+        Sets the scale values to be used if a non-
         linearly interpolated colormap is desired. If left as None, a
         linear interpolation between the colors will be excecuted
-    :param (function|list) color_func: The parameter that determines the
+    color_func : function or list
+        The parameter that determines the
         coloring of the surface. Takes either a function with 3 arguments
         x, y, z or a list/array of color values the same length as
         simplices. If None, coloring will only depend on the z axis
-    :param (str) title: title of the plot
-    :param (bool) plot_edges: determines if the triangles on the trisurf
+    title : str
+        Title of the plot
+    plot_edges : bool
+        Determines if the triangles on the trisurf
         are visible
-    :param (bool) showbackground: makes background in plot visible
-    :param (str) backgroundcolor: color of background. Takes a string of
+    showbackground : bool
+        Makes background in plot visible
+    backgroundcolor : str
+        Color of background. Takes a string of
         the form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
-    :param (str) gridcolor: color of the gridlines besides the axes. Takes
+    gridcolor : str
+        Color of the gridlines besides the axes. Takes
         a string of the form 'rgb(x,y,z)' x,y,z are between 0 and 255
         inclusive
-    :param (str) zerolinecolor: color of the axes. Takes a string of the
+    zerolinecolor : str
+        Color of the axes. Takes a string of the
         form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
-    :param (str) edges_color: color of the edges, if plot_edges is True
-    :param (int|float) height: the height of the plot (in pixels)
-    :param (int|float) width: the width of the plot (in pixels)
-    :param (dict) aspectratio: a dictionary of the aspect ratio values for
+    edges_color : str
+        Color of the edges, if plot_edges is True
+    height : int or float
+        The height of the plot (in pixels)
+    width : int or float
+        The width of the plot (in pixels)
+    aspectratio : dict
+        A dictionary of the aspect ratio values for
         the x, y and z axes. 'x', 'y' and 'z' take (int|float) values
 
+    Returns
+    -------
+    fig :
+        Of a triangulated surface plot
+
+    Examples
+    --------
     Example 1: Sphere
 
     >>> # Necessary Imports for Trisurf
@@ -309,7 +336,7 @@ def create_trisurf(
     >>> from scipy.spatial import Delaunay
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u = np.linspace(0, 2*np.pi, 20)
@@ -337,7 +364,7 @@ def create_trisurf(
     >>> from scipy.spatial import Delaunay
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u = np.linspace(0, 2*np.pi, 20)
@@ -365,7 +392,7 @@ def create_trisurf(
     >>> from scipy.spatial import Delaunay
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u = np.linspace(0, 2*np.pi, 24)
@@ -394,7 +421,7 @@ def create_trisurf(
     >>> from scipy.spatial import Delaunay
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u=np.linspace(-np.pi, np.pi, 30)
@@ -432,7 +459,7 @@ def create_trisurf(
     >>> import random
 
     >>> from plotly.figure_factory import create_trisurf
-    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.graph_objects import graph_objects
 
     >>> # Make data for plot
     >>> u=np.linspace(-np.pi, np.pi, 30)
@@ -492,18 +519,18 @@ def create_trisurf(
         gridcolor=gridcolor,
         zerolinecolor=zerolinecolor,
     )
-    layout = graph_objs.Layout(
+    layout = graph_objects.Layout(
         title=title,
         width=width,
         height=height,
-        scene=graph_objs.layout.Scene(
-            xaxis=graph_objs.layout.scene.XAxis(**axis),
-            yaxis=graph_objs.layout.scene.YAxis(**axis),
-            zaxis=graph_objs.layout.scene.ZAxis(**axis),
+        scene=graph_objects.layout.Scene(
+            xaxis=graph_objects.layout.scene.XAxis(**axis),
+            yaxis=graph_objects.layout.scene.YAxis(**axis),
+            zaxis=graph_objects.layout.scene.ZAxis(**axis),
             aspectratio=dict(
                 x=aspectratio["x"], y=aspectratio["y"], z=aspectratio["z"]
             ),
         ),
     )
 
-    return graph_objs.Figure(data=data1, layout=layout)
+    return graph_objects.Figure(data=data1, layout=layout)

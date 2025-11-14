@@ -1,45 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernel_info:
-    name: python2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make Sankey Diagrams in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Sankey Diagram
-    order: 12
-    page_type: u-guide
-    permalink: python/sankey-diagram/
-    thumbnail: thumbnail/sankey.jpg
+description: How to make Sankey Diagrams in Python with Plotly.
 ---
-
 A [Sankey diagram](https://en.wikipedia.org/wiki/Sankey_diagram) is a flow diagram, in which the width of arrows is proportional to the flow quantity.
 
 
 ### Basic Sankey Diagram
-Sankey diagrams visualize the contributions to a flow by defining [source](https://plotly.com/python/reference/sankey/#sankey-link-source) to represent the source node, [target](https://plotly.com/python/reference/sankey/#sankey-link-target) for the target node, [value](https://plotly.com/python/reference/sankey/#sankey-link-value) to set the flow volume, and [label](https://plotly.com/python/reference/sankey/#sankey-node-label) that shows the node name.
+Sankey diagrams visualize the contributions to a flow by defining [source](reference/graph_objects/sankey-package/Link.md#plotly.graph_objects.sankey.Link.source) to represent the source node, [target](reference/graph_objects/sankey-package/Link.md#plotly.graph_objects.sankey.Link.target) for the target node, [value](reference/graph_objects/sankey-package/Link.md#plotly.graph_objects.sankey.Link.value) to set the flow volume, and [label](reference/graph_objects/sankey-package/Node.md#plotly.graph_objects.sankey.Node.label) that shows the node name.
 
 ```python
 import plotly.graph_objects as go
@@ -66,7 +32,7 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
-import urllib, json
+import urllib.request, json
 
 url = 'https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/sankey_energy.json'
 response = urllib.request.urlopen(url)
@@ -111,18 +77,22 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'sankey-diagram', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/sankey-diagram" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
 ### Style Sankey Diagram
-This example also uses [hovermode](https://plotly.com/python/reference/layout/#layout-hovermode) to enable multiple tooltips.
+This example also uses [hovermode](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.hovermode) to enable multiple tooltips.
 
 ```python
 import plotly.graph_objects as go
@@ -190,7 +160,7 @@ fig.show()
 
 ### Hovertemplate and customdata of Sankey diagrams
 
-Links and nodes have their own hovertemplate, in which link- or node-specific attributes can be displayed. To add more data to links and nodes, it is possible to use the `customdata` attribute of `link` and `nodes`, as in the following example. For more information about hovertemplate and customdata, please see the [tutorial on hover text](/python/hover-text-and-formatting/).
+Links and nodes have their own hovertemplate, in which link- or node-specific attributes can be displayed. To add more data to links and nodes, it is possible to use the `customdata` attribute of `link` and `nodes`, as in the following example. For more information about hovertemplate and customdata, please see the [tutorial on hover text](hover-text-and-formatting.md).
 
 ```python
 import plotly.graph_objects as go
@@ -222,7 +192,7 @@ fig.show()
 
 ### Define Node Position
 
-The following example sets [node.x](https://plotly.com/python/reference/sankey/#sankey-node-x) and `node.y` to place nodes in the specified locations, except in the `snap arrangement` (default behaviour when `node.x` and `node.y` are not defined) to avoid overlapping of the nodes, therefore, an automatic snapping of elements will be set to define the padding between nodes via [nodepad](https://plotly.com/python/reference/sankey/#sankey-node-pad). The other possible arrangements are:<font color='blue'> 1)</font> perpendicular <font color='blue'>2)</font> freeform <font color='blue'>3)</font> fixed
+The following example sets [node.x](reference/graph_objects/sankey-package/Node.md#plotly.graph_objects.sankey.Node.x) and `node.y` to place nodes in the specified locations, except in the `snap arrangement` (default behaviour when `node.x` and `node.y` are not defined) to avoid overlapping of the nodes, therefore, an automatic snapping of elements will be set to define the padding between nodes via [nodepad](reference/graph_objects/sankey-package/Node.md#plotly.graph_objects.sankey.Node.pad). The other possible arrangements are:<font color='blue'> 1)</font> perpendicular <font color='blue'>2)</font> freeform <font color='blue'>3)</font> fixed
 
 ```python
 import plotly.graph_objects as go
@@ -320,4 +290,4 @@ fig.show()
 
 ### Reference
 
-See [https://plotly.com/python/reference/sankey](https://plotly.com/python/reference/sankey/) for more information and options!
+See the [full reference for `go.Sankey`](reference/graph_objects/Sankey.md) for more information and options!

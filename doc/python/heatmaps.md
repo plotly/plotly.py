@@ -1,57 +1,27 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make Heatmaps in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Heatmaps
-    order: 2
-    page_type: example_index
-    permalink: python/heatmaps/
-    redirect_from: python/heatmap/
-    thumbnail: thumbnail/heatmap.jpg
+description: How to make Heatmaps in Python with Plotly.
+redirect_from: python/heatmap/
 ---
-
-The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](/python/tile-density-heatmaps/).
+The term "heatmap" usually refers to a Cartesian plot with data visualized as colored rectangular tiles, which is the subject of this page. It is also sometimes used to refer to [actual maps with density data displayed as color intensity](tile-density-heatmaps.md).
 
 Plotly supports two different types of colored-tile heatmaps:
 
 1. **Matrix Heatmaps** accept a 2-dimensional matrix or array of data and visualizes it directly. This type of heatmap is the subject of this page.
-2. **Density Heatmaps** accept data as a list and visualizes aggregated quantities like counts or sums of this data. Please refer to the [2D Histogram documentation](/python/2D-Histogram/) for this kind of figure.
+2. **Density Heatmaps** accept data as a list and visualizes aggregated quantities like counts or sums of this data. Please refer to the [2D Histogram documentation](2D-Histogram.md) for this kind of figure.
 
 
 ### Heatmaps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.imshow`, each value of the input array or data frame is represented as a heatmap pixel.
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). With `px.imshow`, each value of the input array or data frame is represented as a heatmap pixel.
 
 
 <!-- #region -->
-The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as supported [DataFrame objects](/python/px-arguments#supported-dataframes).
+The `px.imshow()` function can be used to display heatmaps (as well as full-color images, as its name suggests). It accepts both array-like objects like lists of lists and `numpy` or `xarray` arrays, as well as supported [DataFrame objects](px-arguments.md#supported-dataframes).
 
 
-> For more examples using `px.imshow`, including examples of faceting and animations, as well as full-color image display, see the [the `imshow` documentation page](/python/imshow).
+!!! note
+
+    For more examples using `px.imshow`, including examples of faceting and animations, as well as full-color image display, see the [the `imshow` documentation page](imshow.md).
 <!-- #endregion -->
 
 ```python
@@ -100,11 +70,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'heatmaps', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/heatmaps" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -158,7 +132,7 @@ fig.show()
 
 ### Basic Heatmap with `plotly.graph_objects`
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Heatmap` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Heatmap` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 import plotly.graph_objects as go
@@ -172,7 +146,7 @@ fig.show()
 
 ### Heatmap with Categorical Axis Labels
 
-In this example we also show how to ignore [hovertext](https://plotly.com/python/hover-text-and-formatting/) when we have missing values in the data by setting the [hoverongaps](https://plotly.com/python/reference/heatmap/#heatmap-hoverongaps) to False.
+In this example we also show how to ignore [hovertext](hover-text-and-formatting.md) when we have missing values in the data by setting the [hoverongaps](reference/graph_objects/Heatmap.md#plotly.graph_objects.Heatmap.hoverongaps) to False.
 
 ```python
 import plotly.graph_objects as go
@@ -290,7 +264,7 @@ fig.show()
 ### Heatmap and datashader
 
 Arrays of rasterized values build by datashader can be visualized using
-plotly's heatmaps, as shown in the [plotly and datashader tutorial](/python/datashader/).
+plotly's heatmaps, as shown in the [plotly and datashader tutorial](../datashader/).
 
 #### Reference
-See [function reference for `px.(imshow)`](https://plotly.com/python-api-reference/generated/plotly.express.imshow) or https://plotly.com/python/reference/heatmap/ for more information and chart attribute options!
+See [function reference for `px.(imshow)`](reference/plotly-express.md#plotly.express.imshow) or the [full reference for `go.Heatmap`](reference/graph_objects/Heatmap.md) for more information and chart attribute options!

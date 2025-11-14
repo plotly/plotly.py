@@ -1,5 +1,5 @@
 from plotly import exceptions, optional_imports
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 pd = optional_imports.get_module("pandas")
 
@@ -37,27 +37,38 @@ def create_table(
     Function that creates data tables.
 
     See also the plotly.graph_objects trace
-    :class:`plotly.graph_objects.Table`
+    [`plotly.graph_objects.Table`](/reference/graph_objects/Table.md)
 
-    :param (pandas.Dataframe | list[list]) text: data for table.
-    :param (str|list[list]) colorscale: Colorscale for table where the
+    Parameters
+    ----------
+    text : pandas.Dataframe or list[list]
+        Data for table.
+    colorscale : str or list[list]
+        Colorscale for table where the
         color at value 0 is the header color, .5 is the first table color
         and 1 is the second table color. (Set .5 and 1 to avoid the striped
         table effect). Default=[[0, '#66b2ff'], [.5, '#d9d9d9'],
         [1, '#ffffff']]
-    :param (list) font_colors: Color for fonts in table. Can be a single
+    font_colors : list
+        Color for fonts in table. Can be a single
         color, three colors, or a color for each row in the table.
         Default=['#000000'] (black text for the entire table)
-    :param (int) height_constant: Constant multiplied by # of rows to
+    height_constant : int
+        Constant multiplied by # of rows to
         create table height. Default=30.
-    :param (bool) index: Create (header-colored) index column index from
+    index : bool
+        Create (header-colored) index column index from
         Pandas dataframe or list[0] for each list in text. Default=False.
-    :param (string) index_title: Title for index column. Default=''.
-    :param kwargs: kwargs passed through plotly.graph_objs.Heatmap.
+    index_title : str
+        Title for index column. Default=''.
+    **kwargs:
+        kwargs passed through plotly.graph_objects.Heatmap.
         These kwargs describe other attributes about the annotated Heatmap
         trace such as the colorscale. For more information on valid kwargs
-        call help(plotly.graph_objs.Heatmap)
+        call help(plotly.graph_objects.Heatmap)
 
+    Examples
+    --------
     Example 1: Simple Plotly Table
 
     >>> from plotly.figure_factory import create_table
@@ -161,7 +172,7 @@ def create_table(
             showticklabels=False,
         ),
     )
-    return graph_objs.Figure(data=data, layout=layout)
+    return graph_objects.Figure(data=data, layout=layout)
 
 
 class _Table(object):
@@ -265,7 +276,7 @@ class _Table(object):
                     self.font_colors[0] if self.index and m == 0 else all_font_colors[n]
                 )
                 annotations.append(
-                    graph_objs.layout.Annotation(
+                    graph_objects.layout.Annotation(
                         text=format_text,
                         x=self.x[m] - self.annotation_offset,
                         y=self.y[n],

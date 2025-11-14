@@ -3,7 +3,7 @@ from numbers import Number
 import plotly.exceptions
 
 import plotly.colors as clrs
-from plotly.graph_objs import graph_objs
+from plotly.graph_objects import graph_objects
 
 
 def make_linear_colorscale(colors):
@@ -30,25 +30,37 @@ def create_2d_density(
     width=600,
 ):
     """
-    **deprecated**, use instead
-    :func:`plotly.express.density_heatmap`.
+    **Deprecated**, use instead [`plotly.express.density_heatmap`](/reference/plotly-express.md#plotly.express.density_heatmap).
 
-    :param (list|array) x: x-axis data for plot generation
-    :param (list|array) y: y-axis data for plot generation
-    :param (str|tuple|list) colorscale: either a plotly scale name, an rgb
+    Parameters
+    ----------
+    x : list or array
+        x-axis data for plot generation.
+    y : list or array
+        y-axis data for plot generation.
+    colorscale : str or tuple or list
+        Either a plotly scale name, an rgb
         or hex color, a color tuple or a list or tuple of colors. An rgb
         color is of the form 'rgb(x, y, z)' where x, y, z belong to the
         interval [0, 255] and a color tuple is a tuple of the form
         (a, b, c) where a, b and c belong to [0, 1]. If colormap is a
         list, it must contain the valid color types aforementioned as its
         members.
-    :param (int) ncontours: the number of 2D contours to draw on the plot
-    :param (str) hist_color: the color of the plotted histograms
-    :param (str) point_color: the color of the scatter points
-    :param (str) point_size: the color of the scatter points
-    :param (str) title: set the title for the plot
-    :param (float) height: the height of the chart
-    :param (float) width: the width of the chart
+    ncontours : int
+        The number of 2D contours to draw on the plot.
+    hist_color : str
+        The color of the plotted histograms.
+    point_color : str
+        The color of the scatter points.
+    point_size : str
+        The size of the scatter points.
+    title : str
+        Set the title for the plot.
+    height : float
+        The height of the chart.
+    width : float
+        The width of the chart.
+
 
     Examples
     --------
@@ -112,14 +124,14 @@ def create_2d_density(
     hist_color = clrs.validate_colors(hist_color, "rgb")
     point_color = clrs.validate_colors(point_color, "rgb")
 
-    trace1 = graph_objs.Scatter(
+    trace1 = graph_objects.Scatter(
         x=x,
         y=y,
         mode="markers",
         name="points",
         marker=dict(color=point_color[0], size=point_size, opacity=0.4),
     )
-    trace2 = graph_objs.Histogram2dContour(
+    trace2 = graph_objects.Histogram2dContour(
         x=x,
         y=y,
         name="density",
@@ -128,15 +140,15 @@ def create_2d_density(
         reversescale=True,
         showscale=False,
     )
-    trace3 = graph_objs.Histogram(
+    trace3 = graph_objects.Histogram(
         x=x, name="x density", marker=dict(color=hist_color[0]), yaxis="y2"
     )
-    trace4 = graph_objs.Histogram(
+    trace4 = graph_objects.Histogram(
         y=y, name="y density", marker=dict(color=hist_color[0]), xaxis="x2"
     )
     data = [trace1, trace2, trace3, trace4]
 
-    layout = graph_objs.Layout(
+    layout = graph_objects.Layout(
         showlegend=False,
         autosize=False,
         title=title,
@@ -151,5 +163,5 @@ def create_2d_density(
         yaxis2=dict(domain=[0.85, 1], showgrid=False, zeroline=False),
     )
 
-    fig = graph_objs.Figure(data=data, layout=layout)
+    fig = graph_objects.Figure(data=data, layout=layout)
     return fig

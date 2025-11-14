@@ -1,42 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make scatter plots in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Scatter Plots
-    order: 1
-    page_type: example_index
-    permalink: python/line-and-scatter/
-    redirect_from: python/line-and-scatter-plots-tutorial/
-    thumbnail: thumbnail/line-and-scatter.jpg
+description: How to make scatter plots in Python with Plotly.
+redirect_from: python/line-and-scatter-plots-tutorial/
 ---
-
 ## Scatter plots with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 With `px.scatter`, each data point is represented as a marker point, whose location is given by the `x` and `y` columns.
 
@@ -57,7 +25,7 @@ fig.show()
 
 #### Setting size and color with column names
 
-Scatter plots with variable-sized circular markers are often known as [bubble charts](https://plotly.com/python/bubble-charts/). Note that `color` and `size` data are added to hover information. You can add other columns to hover data with the `hover_data` argument of `px.scatter`.
+Scatter plots with variable-sized circular markers are often known as [bubble charts](bubble-charts.md). Note that `color` and `size` data are added to hover information. You can add other columns to hover data with the `hover_data` argument of `px.scatter`.
 
 ```python
 import plotly.express as px
@@ -67,7 +35,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
 fig.show()
 ```
 
-Color can be [continuous](https://plotly.com/python/colorscales/) as follows, or [discrete/categorical](https://plotly.com/python/discrete-color/) as above.
+Color can be [continuous](colorscales.md) as follows, or [discrete/categorical](discrete-color.md) as above.
 
 ```python
 import plotly.express as px
@@ -76,7 +44,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color='petal_length')
 fig.show()
 ```
 
-The `symbol` argument can be mapped to a column as well. A [wide variety of symbols](https://plotly.com/python/marker-style/) are available.
+The `symbol` argument can be mapped to a column as well. A [wide variety of symbols](marker-style.md) are available.
 
 ```python
 import plotly.express as px
@@ -92,11 +60,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'line-and-scatter', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/line-and-scatter" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -104,9 +76,9 @@ IFrame(snippet_url + 'line-and-scatter', width='100%', height=1200)
 
 ### Scatter plots and Categorical Axes
 
-Scatter plots can be made using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or [date](https://plotly.com/python/time-series/) axes.
+Scatter plots can be made using any type of cartesian axis, including [linear](axes.md), [logarithmic](log-plot.md), [categorical](categorical-axes.md) or [date](time-series.md) axes.
 
-Scatter plots where one axis is categorical are often known as [dot plots](https://plotly.com/python/dot-plots/).
+Scatter plots where one axis is categorical are often known as [dot plots](dot-plots.md).
 
 ```python
 import plotly.express as px
@@ -152,7 +124,7 @@ fig.show()
 
 ### Error Bars
 
-Scatter plots support [error bars](https://plotly.com/python/error-bars/).
+Scatter plots support [error bars](error-bars.md).
 
 ```python
 import plotly.express as px
@@ -165,7 +137,7 @@ fig.show()
 
 ### Marginal Distribution Plots
 
-Scatter plots support [marginal distribution plots](https://plotly.com/python/marginal-plots/)
+Scatter plots support [marginal distribution plots](marginal-plots.md)
 
 ```python
 import plotly.express as px
@@ -176,7 +148,7 @@ fig.show()
 
 ### Facetting
 
-Scatter plots support [faceting](https://plotly.com/python/facet-plots/).
+Scatter plots support [faceting](facet-plots.md).
 
 ```python
 import plotly.express as px
@@ -187,7 +159,7 @@ fig.show()
 
 ### Linear Regression and Other Trendlines
 
-Scatter plots support [linear and non-linear trendlines](https://plotly.com/python/linear-fits/).
+Scatter plots support [linear and non-linear trendlines](linear-fits.md).
 
 ```python
 import plotly.express as px
@@ -225,7 +197,7 @@ fig = px.line(df, x='year', y='lifeExp', color='country', markers=True)
 fig.show()
 ```
 
-The `symbol` argument can be used to map a data field to the marker symbol. A [wide variety of symbols](https://plotly.com/python/marker-style/) are available.
+The `symbol` argument can be used to map a data field to the marker symbol. A [wide variety of symbols](marker-style.md) are available.
 
 ```python
 import plotly.express as px
@@ -236,7 +208,7 @@ fig.show()
 
 ### Line plots on Date axes
 
-Line plots can be made on using any type of cartesian axis, including [linear](https://plotly.com/python/axes/), [logarithmic](https://plotly.com/python/log-plot/), [categorical](https://plotly.com/python/categorical-axes/) or date axes. Line plots on date axes are often called [time-series charts](https://plotly.com/python/time-series/).
+Line plots can be made on using any type of cartesian axis, including [linear](axes.md), [logarithmic](log-plot.md), [categorical](categorical-axes.md) or date axes. Line plots on date axes are often called [time-series charts](time-series.md).
 
 Plotly auto-sets the axis type to a date format when the corresponding data are either ISO-formatted date strings or if they're a [date pandas column](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) or [datetime NumPy array](https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html).
 
@@ -286,7 +258,7 @@ fig.show()
 
 ### Swarm (or Beeswarm) Plots
 
-Swarm plots show the distribution of values in a column by giving each entry one dot and adjusting the y-value so that dots do not overlap and appear symmetrically around the y=0 line. They complement [histograms](https://plotly.com/python/histograms/), [box plots](https://plotly.com/python/box-plots/), and [violin plots](https://plotly.com/python/violin/). This example could be generalized to implement a swarm plot for multiple categories by adjusting the y-coordinate for each category.
+Swarm plots show the distribution of values in a column by giving each entry one dot and adjusting the y-value so that dots do not overlap and appear symmetrically around the y=0 line. They complement [histograms](histograms.md), [box plots](box-plots.md), and [violin plots](violin.md). This example could be generalized to implement a swarm plot for multiple categories by adjusting the y-coordinate for each category.
 
 ```python
 import pandas as pd
@@ -424,7 +396,7 @@ fig.show()
 
 ## Scatter and line plots with go.Scatter
 
-If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/scatter/).
+If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](graph-objects.md). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](reference/graph_objects/Scatter.md).
 
 #### Simple Scatter Plot
 
@@ -443,7 +415,7 @@ fig.show()
 
 #### Line and Scatter Plots
 
-Use `mode` argument to choose between markers, lines, or a combination of both. For more options about line plots, see also the [line charts notebook](https://plotly.com/python/line-charts/) and the [filled area plots notebook](https://plotly.com/python/filled-area-plots/).
+Use `mode` argument to choose between markers, lines, or a combination of both. For more options about line plots, see also the [line charts notebook](line-charts.md) and the [filled area plots notebook](filled-area-plots.md).
 
 ```python
 import plotly.graph_objects as go
@@ -476,7 +448,7 @@ fig.show()
 
 #### Bubble Scatter Plots
 
-In [bubble charts](https://en.wikipedia.org/wiki/Bubble_chart), a third dimension of the data is shown through the size of markers. For more examples, see the [bubble chart notebook](https://plotly.com/python/bubble-charts/)
+In [bubble charts](https://en.wikipedia.org/wiki/Bubble_chart), a third dimension of the data is shown through the size of markers. For more examples, see the [bubble chart notebook](bubble-charts.md)
 
 ```python
 import plotly.graph_objects as go
@@ -654,4 +626,4 @@ fig.show()
 
 ### Reference
 
-See [function reference for `px.scatter()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter) or https://plotly.com/python/reference/scatter/ or https://plotly.com/python/reference/scattergl/ for more information and chart attribute options!
+See [function reference for `px.scatter()`](reference/plotly-express.md#plotly.express.scatter) or the [full reference for `go.Scatter`](reference/graph_objects/Scatter.md) or [`go.Scattergl`](reference/graph_objects/Scattergl.md) for more information and chart attribute options!

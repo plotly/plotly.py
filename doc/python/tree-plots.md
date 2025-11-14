@@ -1,44 +1,14 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to make interactive tree-plot in Python with Plotly. An examples
-      of a tree-plot in Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Tree-plots
-    order: 9
-    permalink: python/tree-plots/
-    thumbnail: thumbnail/treeplot.jpg
+description: How to make interactive tree-plot in Python with Plotly. An examples
+  of a tree-plot in Plotly.
 ---
 
-#### Set Up Tree with [igraph](http://igraph.org/python/)
+### Set Up Tree with [igraph](http://igraph.org/python/)
 
-Install igraph with `pip install igraph`.
+Install igraph with the following version:
 
-```python
-!pip install igraph
+```
+igraph==0.11.9
 ```
 
 ```python
@@ -68,7 +38,7 @@ for edge in E:
 labels = v_label
 ```
 
-#### Create Plotly Traces
+### Create Plotly Traces
 
 ```python
 import plotly.graph_objects as go
@@ -94,7 +64,7 @@ fig.add_trace(go.Scatter(x=Xn,
                   ))
 ```
 
-#### Create Text Inside the Circle via Annotations
+### Create Text Inside the Circle via Annotations
 
 ```python
 def make_annotations(pos, text, font_size=10, font_color='rgb(250,250,250)'):
@@ -114,7 +84,7 @@ def make_annotations(pos, text, font_size=10, font_color='rgb(250,250,250)'):
     return annotations
 ```
 
-#### Add Axis Specifications and Create the Layout
+### Add Axis Specifications and Create the Layout
 
 ```python
 axis = dict(showline=False, # hide axis line, grid, ticklabels and  title
@@ -136,5 +106,5 @@ fig.update_layout(title= 'Tree with Reingold-Tilford Layout',
 fig.show()
 ```
 
-#### Reference
-See https://plotly.com/python/reference/ for more information and chart attribute options and http://igraph.org/python/ for more information about the igraph package!
+### Reference
+See the [full graph objectsreference](/reference/graph_objects/index.md) for more information and chart attribute options and http://igraph.org/python/ for more information about the igraph package!

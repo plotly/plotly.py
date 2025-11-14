@@ -1,44 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.12.0
-  plotly:
-    description: How to display image data in Python with Plotly.
-    display_as: scientific
-    has_thumbnail: true
-    ipynb: ~notebook_demo/34
-    language: python
-    layout: base
-    name: Imshow
-    order: 3
-    page_type: example_index
-    permalink: python/imshow/
-    thumbnail: thumbnail/imshow.jpg
-    v4upgrade: true
+description: How to display image data in Python with Plotly.
 ---
-
 This tutorial shows how to display and explore image data. If you would like
 instead a logo or static image, use `go.layout.Image` as explained
-[here](/python/images).
+[here](images.md).
 
 ### Displaying RGB image data with px.imshow
 
@@ -76,7 +41,7 @@ fig.show()
 
 ### Display single-channel 2D data as a heatmap
 
-For a 2D image, `px.imshow` uses a colorscale to map scalar data to colors. The default colorscale is the one of the active template (see [the tutorial on templates](/python/templates/)).
+For a 2D image, `px.imshow` uses a colorscale to map scalar data to colors. The default colorscale is the one of the active template (see [the tutorial on templates](templates.md)).
 
 ```python
 import plotly.express as px
@@ -88,7 +53,7 @@ fig.show()
 
 ### Choose the colorscale to display a single-channel image
 
-You can customize the [continuous color scale](/python/colorscales/) just like with any other Plotly Express function. However, `color_continuous_scale` is ignored when using `binary_string=True`, since the image is always represented as grayscale (and no colorbar is displayed).
+You can customize the [continuous color scale](colorscales.md) just like with any other Plotly Express function. However, `color_continuous_scale` is ignored when using `binary_string=True`, since the image is always represented as grayscale (and no colorbar is displayed).
 
 ```python
 import plotly.express as px
@@ -110,7 +75,7 @@ fig.show()
 
 ### Hiding the colorbar and axis labels
 
-See the [continuous color](/python/colorscales/) and [cartesian axes](/python/axes/) pages for more details.
+See the [continuous color](colorscales.md) and [cartesian axes](axes.md) pages for more details.
 
 ```python
 import plotly.express as px
@@ -167,9 +132,9 @@ fig.show()
 
 ### Display multichannel image data with go.Image
 
-It is also possible to use the `go.Image` trace from the low-level `graph_objects` API in order to display image data. Note that `go.Image` only accepts multichannel images. For single-channel images, use [`go.Heatmap`](/python/heatmaps).
+It is also possible to use the `go.Image` trace from the low-level `graph_objects` API in order to display image data. Note that `go.Image` only accepts multichannel images. For single-channel images, use [`go.Heatmap`](heatmaps.md).
 
-Note that the `go.Image` trace is different from the `go.layout.Image` class, which can be used for [adding background images or logos to figures](/python/images).
+Note that the `go.Image` trace is different from the `go.layout.Image` class, which can be used for [adding background images or logos to figures](images.md).
 
 ```python
 import plotly.graph_objects as go
@@ -232,6 +197,7 @@ fig.show()
 ### Automatic contrast rescaling in `px.imshow`
 
 When `zmin` and `zmax` are not specified, the `contrast_rescaling` arguments determines how `zmin` and `zmax` are computed. For `contrast_rescaling='minmax'`, the extrema of the data range are used. For `contrast_rescaling='infer'`, a heuristic based on the data type is used:
+
 - for integer data types, `zmin` and `zmax` correspond to the extreme values of the data type, for example 0 and 255 for `uint8`, 0 and 65535 for `uint16`, etc.
 - for float numbers, the maximum value of the data is computed, and zmax is 1 if the max is smaller than 1, 255 if the max is smaller than 255, etc. (with higher thresholds 2**16 - 1 and 2**32 -1).
 
@@ -291,7 +257,7 @@ fig.show()
 ### imshow and datashader
 
 Arrays of rasterized values build by datashader can be visualized using
-imshow. See the [plotly and datashader tutorial](/python/datashader/) for
+imshow. See the [plotly and datashader tutorial](../datashader/) for
 examples on how to use plotly and datashader.
 
 
@@ -305,7 +271,7 @@ In order to enable shape drawing, you need to
 - define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
 - add modebar buttons corresponding to the drawing tools you wish to use.
 
-The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#drawing-shapes-on-cartesian-plots).
+The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](shapes.md#drawing-shapes-on-cartesian-plots).
 
 Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 
@@ -408,7 +374,7 @@ For three-dimensional image datasets, obtained for example by MRI or CT in medic
 
 It is recommended to use `binary_string=True` for facetted plots of images in order to keep a small figure size and a short rendering time.
 
-See the [tutorial on facet plots](/python/facet-plots/) for more information on creating and styling facet plots.
+See the [tutorial on facet plots](facet-plots.md) for more information on creating and styling facet plots.
 
 ```python
 import plotly.express as px
@@ -481,4 +447,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(imshow)`](https://plotly.com/python-api-reference/generated/plotly.express.imshow) or https://plotly.com/python/reference/image/ for more information and chart attribute options!
+See [function reference for `px.(imshow)`](reference/plotly-express.md#plotly.express.imshow) or the [full reference for `go.Image`](reference/graph_objects/Image.md) for more information and chart attribute options!

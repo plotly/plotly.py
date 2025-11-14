@@ -1,39 +1,8 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.5
-  plotly:
-    description: Click Events With FigureWidget
-    display_as: chart_events
-    language: python
-    layout: base
-    name: Click Events
-    order: 4
-    page_type: example_index
-    permalink: python/click-events/
-    thumbnail: thumbnail/figurewidget-click-events.gif
+description: Click Events With FigureWidget
 ---
 
-#### Update Points Using a Click Callback
+### Update Points Using a Click Callback
 
 ```python
 import plotly.graph_objects as go
@@ -73,7 +42,7 @@ f
 <img src='https://raw.githubusercontent.com/michaelbabyn/plot_data/master/figurewidget-click-event.gif'>
 
 
-#### Reference
+### Reference
 
 
 See [these Jupyter notebooks](https://github.com/jonmmease/plotly_ipywidget_notebooks) for even more FigureWidget examples.

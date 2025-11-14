@@ -1,40 +1,9 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: How to make a scatter plot overlaid on ternary contour in Python
-      with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Ternary Overlay
-    order: 8
-    page_type: u-guide
-    permalink: python/ternary-scatter-contour/
-    thumbnail: thumbnail/ternary-scatter-contour.jpg
+description: How to make a scatter plot overlaid on ternary contour in Python with
+  Plotly.
 ---
 
-#### Load and Process Data Files
+### Load and Process Data Files
 
 ```python
 import json
@@ -66,7 +35,7 @@ def clean_data(data_in):
 print(clean_data({'L1': ['.03 0.5 0.47','0.4 0.5 0.1']}))
 ```
 
-#### Create Ternary Scatter Plot:
+### Create Ternary Scatter Plot:
 
 ```python
 import plotly.graph_objects as go
@@ -109,11 +78,10 @@ fig.update_layout({
 fig.show()
 ```
 
-#### Create Ternary Contour Plot:
+### Create Ternary Contour Plot:
 
 ```python
 import plotly.graph_objects as go
-
 
 contour_dict = contour_raw_data['Data']
 
@@ -150,6 +118,5 @@ fig.update_layout(title = 'Ternary Contour Plot')
 fig.show()
 ```
 
-```python
 
-```
+

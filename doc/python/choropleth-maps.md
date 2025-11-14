@@ -1,45 +1,13 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make choropleth maps in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Choropleth Maps
-    order: 8
-    page_type: u-guide
-    permalink: python/choropleth-maps/
-    thumbnail: thumbnail/choropleth.jpg
+description: How to make choropleth maps in Python with Plotly.
 ---
-
-A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps**](/python/tile-county-choropleth).
+A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps**](tile-county-choropleth.md).
 
 Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth` function or the lower-level `go.Choropleth` graph object.
 
 #### Base Map Configuration
 
-Plotly figures made with [Plotly Express](/python/plotly-express/) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](/python/graph-objects/) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
+Plotly figures made with [Plotly Express](plotly-express.md) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](graph-objects.md) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](map-configuration.md) onto which data is plotted.
 
 ### Introduction: main parameters for choropleth outline maps
 
@@ -52,11 +20,13 @@ Making choropleth maps requires two main types of input:
 
 The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `color` argument of `px.choropleth` (`z` if using `graph_objects`), in the same order as the IDs are passed into the `location` argument.
 
-**Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
+!!! note
+
+    The `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
 
 ### Choropleth Map with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 #### GeoJSON with `feature.id`
 
@@ -84,7 +54,9 @@ df.head()
 
 ### Choropleth map using GeoJSON
 
-**Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](/python/map-configuration/) for more information on scopes.
+!!! note
+
+    In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](map-configuration.md) for more information on scopes.
 
 ```python
 from urllib.request import urlopen
@@ -126,7 +98,9 @@ print(geojson["features"][0]["properties"])
 
 To use them together, we set `locations` to `district` and `featureidkey` to `"properties.district"`. The `color` is set to the number of votes by the candidate named Bergeron.
 
-**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for more information on projections and bounds.
+!!! note
+
+    In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](map-configuration.md) for more information on projections and bounds.
 
 ```python
 import plotly.express as px
@@ -149,11 +123,15 @@ fig.show()
 
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'choropleth-maps', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/choropleth-maps" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -161,9 +139,11 @@ IFrame(snippet_url + 'choropleth-maps', width='100%', height=1200)
 
 ### Discrete Colors
 
-In addition to [continuous colors](/python/colorscales/), we can [discretely-color](/python/discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
+In addition to [continuous colors](colorscales.md), we can [discretely-color](discrete-color.md) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
 
-**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for more information on projections and bounds.
+!!! note
+
+    In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](map-configuration.md) for more information on projections and bounds.
 
 ```python
 import plotly.express as px
@@ -211,6 +191,7 @@ Plotly comes with two built-in geometries which do not require an external GeoJS
 2. Countries
 
 In **Plotly.py 6.3 and later**, the built-in countries geometry is created from the following sources:
+
 - [UN data](https://geoportal.un.org/arcgis/sharing/rest/content/items/d7caaff3ef4b4f7c82689b7c4694ad92/data) for country borders, coastlines, land, and ocean layers.
 - Natural Earth data for lakes, rivers, and subunits layers.
 
@@ -351,7 +332,7 @@ fig.show()
 
 #### County Choropleth Figure Factory
 
-Plotly also includes a [legacy "figure factory" for creating US county-level choropleth maps](/python/county-choropleth/).
+Plotly also includes a [legacy "figure factory" for creating US county-level choropleth maps](county-choropleth.md).
 
 ```python
 import plotly.figure_factory as ff
@@ -388,4 +369,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(choropleth)`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth) or https://plotly.com/python/reference/choropleth/ for more information and chart attribute options!
+See [function reference for `px.(choropleth)`](reference/plotly-express.md#plotly.express.choropleth) or the [full reference for `go.Choropleth`](reference/graph_objects/Choropleth.md) for more information and chart attribute options!

@@ -1,43 +1,13 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: Theming and templates with plotly with Python
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Theming and templates
-    order: 7
-    page_type: u-guide
-    permalink: python/templates/
-    thumbnail: thumbnail/theming-and-templates.png
+description: Theming and templates with plotly with Python
 ---
-
 ### Theming and templates
 
 The Plotly Python library comes pre-loaded with several themes that you can get started using right away, and it also provides support for creating and registering your own themes.
 
-> Note on terminology: Theming generally refers to the process of defining default styles for visual elements. Themes in plotly are implemented using objects called templates. Templates are slightly more general than traditional themes because in addition to defining default styles, templates can pre-populate a figure with visual elements like annotations, shapes, images, and more. In the documentation we will refer to the overall process of defining default styles as theming, and when in comes to the plotly API we will talk about how themes are implemented using templates.
+!!! note
+
+    On terminology: Theming generally refers to the process of defining default styles for visual elements. Themes in plotly are implemented using objects called templates. Templates are slightly more general than traditional themes because in addition to defining default styles, templates can pre-populate a figure with visual elements like annotations, shapes, images, and more. In the documentation we will refer to the overall process of defining default styles as theming, and when in comes to the plotly API we will talk about how themes are implemented using templates.
 
 ### Using built-in themes
 
@@ -99,7 +69,9 @@ If a theme is not provided to a Plotly Express function or to a graph object fig
 
 Here is an example of changing to default theme to `"plotly_white"` and then constructing a scatter plot with Plotly Express without providing a template.
 
-> Note: Default themes persist for the duration of a single session, but they do not persist across sessions. If you are working in an IPython kernel, this means that default themes will persist for the life of the kernel, but they will not persist across kernel restarts.
+!!! note
+
+    Default themes persist for the duration of a single session, but they do not persist across sessions. If you are working in an IPython kernel, this means that default themes will persist for the life of the kernel, but they will not persist across kernel restarts.
 
 ```python
 import plotly.io as pio
@@ -151,7 +123,9 @@ fig.update_layout(title=dict(text="Figure Title"),
 fig.show()
 ```
 
-> Note: this example uses magic underscore notation to write `go.Layout(title=dict(font=dict(...)))` as `go.Layout(title_font=dict(...))`
+!!! note
+
+    This example uses magic underscore notation to write `go.Layout(title=dict(font=dict(...)))` as `go.Layout(title_font=dict(...))`
 
 #### The template data property
 
@@ -192,7 +166,7 @@ fig.add_scatter(y=[4, 5, 6], mode="markers", name="forth")
 fig.show()
 ```
 
-Note that because we built the template with a list of 3 scatter trace [graph objects](/python/graph-objects/) (one each for the diamond, square, and circle symbols), the forth scatter trace in the figure cycles around and takes on the defaults specified in the first template trace (The diamond symbol).
+Note that because we built the template with a list of 3 scatter trace [graph objects](graph-objects.md) (one each for the diamond, square, and circle symbols), the forth scatter trace in the figure cycles around and takes on the defaults specified in the first template trace (The diamond symbol).
 
 #### Theming object tuple properties
 
@@ -321,7 +295,9 @@ fig.update_layout(template="draft")
 fig.show()
 ```
 
-> Note: this example uses magic underscore notation to write `go.layout.Template(layout=dict(annotations=[...]))` as ``go.layout.Template(layout_annotations=[...])`
+!!! note
+
+    This example uses magic underscore notation to write `go.layout.Template(layout=dict(annotations=[...]))` as ``go.layout.Template(layout_annotations=[...])`
 
 It is also possible to set your own custom template as the default so that you do not need to pass it by name when constructing graph object figures or calling Plotly Express functions.
 
@@ -463,7 +439,9 @@ pio.templates.default = "draft"
 ...
 ```
 
-> Note: In order for the import to succeed, the `my_themes.py` file must be on Python's module search path. See https://docs.python.org/3/tutorial/modules.html#the-module-search-path for more information.
+!!! note
+
+    In order for the import to succeed, the `my_themes.py` file must be on Python's module search path. See https://docs.python.org/3/tutorial/modules.html#the-module-search-path for more information.
 
 <!-- #endregion -->
 

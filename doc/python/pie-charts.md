@@ -1,46 +1,14 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make Pie Charts.
-    display_as: basic
-    language: python
-    layout: base
-    name: Pie Charts
-    order: 4
-    page_type: example_index
-    permalink: python/pie-charts/
-    thumbnail: thumbnail/pie-chart.jpg
+description: How to make Pie Charts.
 ---
-
 A pie chart is a circular statistical chart, which is divided into sectors to illustrate numerical proportion.
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
-[Sunburst tutorial](/python/sunburst-charts/).
+[Sunburst tutorial](sunburst-charts.md).
 
 ### Pie chart with plotly express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 In `px.pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `names`.
 
@@ -70,11 +38,15 @@ fig.show()
 
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'pie-charts', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/pie-charts" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -91,7 +63,7 @@ fig.show()
 
 ### Using an explicit mapping for discrete colors
 
-For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+For more information about discrete colors, see the [dedicated page](discrete-color.md).
 
 ```python
 import plotly.express as px
@@ -120,12 +92,12 @@ fig.show()
 
 ### Basic Pie Chart with go.Pie
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Pie` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Pie` class from `plotly.graph_objects`](graph-objects.md).
 
 In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`.
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
-[Sunburst tutorial](/python/sunburst-charts/).
+[Sunburst tutorial](sunburst-charts.md).
 
 ```python
 import plotly.graph_objects as go
@@ -306,7 +278,7 @@ fig.show()
 
 *New in 5.15*
 
-Pie charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color.
+Pie charts support [patterns](pattern-hatching-texture.md) (also known as hatching or texture) in addition to color.
 
 ```python
 import plotly.graph_objects as go
@@ -331,7 +303,7 @@ fig.show()
 
 ### See Also: Sunburst charts
 
-For multilevel pie charts representing hierarchical data, you can use the `Sunburst` chart. A simple example is given below, for more information see the [tutorial on Sunburst charts](/python/sunburst-charts/).
+For multilevel pie charts representing hierarchical data, you can use the `Sunburst` chart. A simple example is given below, for more information see the [tutorial on Sunburst charts](sunburst-charts.md).
 
 ```python
 import plotly.graph_objects as go
@@ -349,4 +321,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.pie()`](https://plotly.com/python-api-reference/generated/plotly.express.pie) or https://plotly.com/python/reference/pie/ for more information and chart attribute options!
+See [function reference for `px.pie()`](reference/plotly-express.md#plotly.express.pie) or the [full reference for `go.Pie`](reference/graph_objects/Pie.md) for more information and chart attribute options!
