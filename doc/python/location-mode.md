@@ -46,7 +46,7 @@ The following map types in `plotly.express` and `plotly.graph_objects` support t
 - `go.Choropleth` - choropleth trace for coloring regions
 - `go.Scattergeo` - geographic scatter/line trace for markers and lines
 
-The `locations` parameter accepts region identifiers (such as `['CA', 'TX', 'NY']`, a pandas Series, or array-like), and the `locationmode` parameter controls how those identifiers are interpreted:
+The `locations` parameter accepts region identifiers and the `locationmode` parameter controls how those identifiers are interpreted:
 
 - `'ISO-3'` - three-letter ISO country codes (for example, `'USA'`, `'CAN'`, `'GBR'`)
 - `'USA-states'` - two-letter US state abbreviations (for example, `'CA'`, `'TX'`, `'NY'`)
