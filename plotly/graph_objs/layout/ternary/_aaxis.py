@@ -120,11 +120,16 @@ class Aaxis(_BaseLayoutHierarchyType):
         example, consider the number 1,000,000,000. If "none", it
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
-        "B", 1B.
+        "B", 1B. "SI" uses prefixes from "femto" f (10^-15) to "tera" T
+        (10^12). *SI extended* covers instead the full SI range from
+        "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or *SI
+        extended* is used and the exponent is beyond the above ranges,
+        the formatting rule will automatically be switched to the power
+        notation.
 
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+                ['none', 'e', 'E', 'power', 'SI', 'B', 'SI extended']
 
         Returns
         -------
@@ -969,7 +974,13 @@ class Aaxis(_BaseLayoutHierarchyType):
             For example, consider the number 1,000,000,000. If
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
-            script). If "SI", 1G. If "B", 1B.
+            script). If "SI", 1G. If "B", 1B. "SI" uses prefixes
+            from "femto" f (10^-15) to "tera" T (10^12). *SI
+            extended* covers instead the full SI range from
+            "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or
+            *SI extended* is used and the exponent is beyond the
+            above ranges, the formatting rule will automatically be
+            switched to the power notation.
         gridcolor
             Sets the color of the grid lines.
         griddash
@@ -1232,7 +1243,13 @@ class Aaxis(_BaseLayoutHierarchyType):
             For example, consider the number 1,000,000,000. If
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
-            script). If "SI", 1G. If "B", 1B.
+            script). If "SI", 1G. If "B", 1B. "SI" uses prefixes
+            from "femto" f (10^-15) to "tera" T (10^12). *SI
+            extended* covers instead the full SI range from
+            "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or
+            *SI extended* is used and the exponent is beyond the
+            above ranges, the formatting rule will automatically be
+            switched to the power notation.
         gridcolor
             Sets the color of the grid lines.
         griddash

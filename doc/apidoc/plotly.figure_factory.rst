@@ -18,7 +18,7 @@
    create_distplot
    create_facet_grid
    create_gantt
-   create_hexbin_mapbox
+   create_hexbin_map
    create_ohlc
    create_quiver
    create_scatterplotmatrix
