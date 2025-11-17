@@ -4223,6 +4223,8 @@ Invalid property path '{key_path_str}' for layout
         annotation=None,
         **kwargs,
     ):
+        # NEW (Step 2): translate legacy annotation_* → label (non-destructive; warns if used)
+        kwargs = _coerce_shape_label_from_legacy_annotation_kwargs(kwargs)
         self._process_multiple_axis_spanning_shapes(
             dict(type="line", x0=x, x1=x, y0=0, y1=1),
             row,
