@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 - Update plotly.js from version 3.2.0 to version 3.3.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.3.0) for more information. [[#5421](https://github.com/plotly/plotly.py/pull/5421)]. Notable changes include:
-- - Add `hovertemplate` for `candlestick` and `ohlc` traces [[#7619](https://github.com/plotly/plotly.js/pull/7619)]
+  - Add `hovertemplate` for `candlestick` and `ohlc` traces [[#7619](https://github.com/plotly/plotly.js/pull/7619)]
 
 ### Fixed
 - Fix bug where numpy datetime contained in Python list was converted to integer [[#5415](https://github.com/plotly/plotly.py/pull/5415)]
