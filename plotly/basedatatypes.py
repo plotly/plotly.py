@@ -379,6 +379,80 @@ annotation_*: any parameters to go.layout.Annotation can be passed as
     except for x0, x1, y0, y1 or type."""
     return docstr
 
+#  helper to centralize translation of legacy annotation_* kwargs into a shape.label dict and emit a deprecation warning
+def _coerce_shape_label_from_legacy_annotation_kwargs(kwargs):
+    """
+    Translate legacy add_*line/add_*rect annotation_* kwargs into a shape.label dict.
+
+    Behavior:
+      - Pop any annotation_* keys from kwargs.
+      - Merge them into kwargs["label"] WITHOUT overwriting explicit user-provided
+        label fields.
+      - Emit a FutureWarning if any legacy keys were used.
+
+    Args:
+        kwargs (dict): keyword arguments passed to add_vline/add_hline/... methods.
+
+    Returns:
+        dict: The same kwargs object, modified in place and also returned.
+    """
+    import warnings
+
+    legacy_used = False
+    label = kwargs.get("label") or {}
+
+    # 1) Text
+    if "annotation_text" in kwargs:
+        legacy_used = True
+        label.setdefault("text", kwargs.pop("annotation_text"))
+
+    # 2) Font (expects a dict like {"family":..., "size":..., "color":...})
+    if "annotation_font" in kwargs:
+        legacy_used = True
+        label.setdefault("font", kwargs.pop("annotation_font"))
+
+    # 3) Background/border around the text
+    if "annotation_bgcolor" in kwargs:
+        legacy_used = True
+        label.setdefault("bgcolor", kwargs.pop("annotation_bgcolor"))
+    if "annotation_bordercolor" in kwargs:
+        legacy_used = True
+        label.setdefault("bordercolor", kwargs.pop("annotation_bordercolor"))
+
+    # 4) Angle
+    if "annotation_textangle" in kwargs:
+        legacy_used = True
+        label.setdefault("textangle", kwargs.pop("annotation_textangle"))
+
+    # 5) Position hint from the old API.
+    # NOTE: We store this temporarily as "position" and will translate it
+    # to concrete fields (textposition/xanchor/yanchor) in Step 3 when we
+    # know the shape type (line vs rect) and orientation (v vs h).
+    if "annotation_position" in kwargs:
+        legacy_used = True
+        pos = kwargs.pop("annotation_position")
+        label.setdefault("position", pos)
+
+    # Merge collected label fields back into kwargs["label"] non-destructively
+    if label:
+        if "label" in kwargs and isinstance(kwargs["label"], dict):
+            merged = kwargs["label"].copy()
+            for k, v in label.items():
+                merged.setdefault(k, v)
+            kwargs["label"] = merged
+        else:
+            kwargs["label"] = label
+
+    if legacy_used:
+        warnings.warn(
+            "annotation_* kwargs are deprecated; use label={...} to leverage Plotly.js shape labels.",
+            FutureWarning,
+        )
+
+    return kwargs
+
+
+
 
 def _generator(i):
     """ "cast" an iterator to a generator"""
