@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: Visualize Principle Component Analysis (PCA) of your high-dimensional
-      data in Python with Plotly.
-    display_as: ai_ml
-    language: python
-    layout: base
-    name: PCA Visualization
-    order: 4
-    page_type: u-guide
-    permalink: python/pca-visualization/
-    thumbnail: thumbnail/ml-pca.png
+description: Visualize Principle Component Analysis (PCA) of your high-dimensional
+  data in Python with Plotly.
 ---
-
 This page first shows how to visualize higher dimension data using various Plotly figures combined with dimensionality reduction (aka projection). Then, we dive into the specific details of our projection algorithm.
 
 We will use [Scikit-learn](https://scikit-learn.org/) to load one of the datasets, and apply dimensionality reduction. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
@@ -48,11 +16,11 @@ The dimensionality reduction technique we will be using is called the [Principal
 
 ### Visualize all the original dimensions
 
-First, let's plot all the features and see how the `species` in the Iris dataset are grouped. In a [Scatter Plot Matrix (splom)](https://plot.ly/python/splom/), each subplot displays a feature against another, so if we have $N$ features we have a $N \times N$ matrix.
+First, let's plot all the features and see how the `species` in the Iris dataset are grouped. In a [Scatter Plot Matrix (splom)](splom.md), each subplot displays a feature against another, so if we have $N$ features we have a $N \times N$ matrix.
 
 In our example, we are plotting all 4 features from the Iris dataset, thus we can see how `sepal_width` is compared against `sepal_length`, then against `petal_width`, and so forth. Keep in mind how some pairs of features can more easily separate different species.
 
-In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
+In this example, we will use [Plotly Express](plotly-express.md), Plotly's high-level API for building figures.
 
 ```python
 import plotly.express as px
@@ -75,7 +43,7 @@ Now, we apply `PCA` the same dataset, and retrieve **all** the components. We us
 
 The importance of explained variance is demonstrated in the example below. The subplot between PC3 and PC4 is clearly unable to separate each class, whereas the subplot between PC1 and PC2 shows a clear separation between each species.
 
-In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
+In this example, we will use [Plotly Express](plotly-express.md), Plotly's high-level API for building figures.
 
 ```python
 import plotly.express as px
@@ -222,6 +190,7 @@ For more details about the linear algebra behind eigenvectors and loadings, see 
 
 ```python
 import plotly.express as px
+import numpy as np
 from sklearn.decomposition import PCA
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
@@ -264,13 +233,15 @@ fig.show()
 ## References
 
 Learn more about `px`, `px.scatter_3d`, and `px.scatter_matrix` here:
-* https://plot.ly/python/plotly-express/
-* https://plot.ly/python/3d-scatter-plots/
-* https://plot.ly/python/splom/
+
+* [Plotly express](plotly-express.md)
+* [3D Scatter Plots](3d-scatter-plots.md)
+* [Splom](splom.md)
 
 The following resources offer an in-depth overview of PCA and explained variance:
-* https://en.wikipedia.org/wiki/Explained_variation
-* https://scikit-learn.org/stable/modules/decomposition.html#pca
-* https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579
-* https://stats.stackexchange.com/questions/143905/loadings-vs-eigenvectors-in-pca-when-to-use-one-or-another
-* https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained
+
+* <https://en.wikipedia.org/wiki/Explained_variation>
+* <https://scikit-learn.org/stable/modules/decomposition.html#pca>
+* <https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579>
+* <https://stats.stackexchange.com/questions/143905/loadings-vs-eigenvectors-in-pca-when-to-use-one-or-another>
+* <https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained>

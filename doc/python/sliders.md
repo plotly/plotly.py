@@ -1,38 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.2
-  plotly:
-    description: How to add slider controls to your plots in Python with Plotly.
-    display_as: controls
-    language: python
-    layout: base
-    name: Sliders
-    order: 1.5
-    page_type: example_index
-    permalink: python/sliders/
-    thumbnail: thumbnail/slider2017.gif
+description: How to add slider controls to your plots in Python with Plotly.
 ---
-
 ### Simple Slider Control
 Sliders can be used in Plotly to change the data displayed or style of a plot.
 
@@ -82,7 +50,8 @@ fig.show()
 ```
 
 #### Methods
-The method determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to update the chart. Plotly can use several [updatemenu](https://plot.ly/python/reference/layout/updatemenus/#layout-updatemenus-items-updatemenu-buttons-items-button-method) methods to add the slider:
+The method determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to update the chart. Plotly can use several [updatemenu](reference/graph_objects/layout-package/updatemenu-package/Button.md#plotly.graph_objects.layout.updatemenu.Button.method) methods to add the slider:
+
 - `"update"`: modify **data and layout** attributes (as above)
 - `"restyle"`: modify **data** attributes
 - `"relayout"`: modify **layout** attributes
@@ -105,4 +74,4 @@ fig.show()
 ```
 
 #### Reference
-Check out https://plotly.com/python/reference/layout/updatemenus/ for more information!
+Check out the [full reference for `go.layout.updatemenus`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.updatemenus) for more information!

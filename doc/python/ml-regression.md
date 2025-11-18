@@ -1,40 +1,8 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: Visualize regression in scikit-learn with Plotly.
-    display_as: ai_ml
-    language: python
-    layout: base
-    name: ML Regression
-    order: 1
-    page_type: u-guide
-    permalink: python/ml-regression/
-    thumbnail: thumbnail/ml-regression.png
+description: Visualize regression in scikit-learn with Plotly.
 ---
-
 <!-- #region -->
-This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like [Linear Regression](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html), and progressively move towards models like [Decision Tree][tree] and [Polynomial Features][poly]. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, [surface plots](https://plotly.com/python/3d-surface-plots/) for 3D data, and enhanced prediction error analysis with [Plotly Express](https://plotly.com/python/plotly-express/).
+This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like [Linear Regression](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html), and progressively move towards models like [Decision Tree][tree] and [Polynomial Features][poly]. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, [surface plots](3d-surface-plots.md) for 3D data, and enhanced prediction error analysis with [Plotly Express](plotly-express.md).
 
 We will use [Scikit-learn](https://scikit-learn.org/) to split and preprocess our data and train various regression models. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
 
@@ -52,7 +20,7 @@ We will be using the [Linear Regression][lr], which is a simple model that fit a
 
 ### Ordinary Least Square (OLS) with `plotly.express`
 
-This example shows [how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS)](/python/linear-fits/) for predicting the tips waiters will receive based on the value of the total bill.
+This example shows [how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS)](linear-fits.md) for predicting the tips waiters will receive based on the value of the total bill.
 
 [lr]: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
 
@@ -98,11 +66,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'ml-regression', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/ml-regression" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -141,7 +113,7 @@ fig.show()
 
 In addition to linear regression, it's possible to fit the same data using [k-Nearest Neighbors][knn]. When you perform a prediction on a new sample, this model either takes the weighted or un-weighted average of the neighbors. In order to see the difference between those two averaging options, we train a kNN model with both of those parameters, and we plot them in the same way as the previous graph.
 
-Notice how we can combine scatter points with lines using Plotly.py. You can learn more about [multiple chart types](https://plotly.com/python/graphing-multiple-chart-types/).
+Notice how we can combine scatter points with lines using Plotly.py. You can learn more about [multiple chart types](graphing-multiple-chart-types.md).
 
 [knn]: https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
 
@@ -262,7 +234,7 @@ fig.show()
 
 Visualizing regression with one or two variables is straightforward, since we can respectively plot them with scatter plots and 3D scatter plots. Moreover, if you have more than 2 features, you will need to find alternative ways to visualize your data.
 
-One way is to use [bar charts](https://plotly.com/python/bar-charts/). In our example, each bar indicates the coefficients of our linear regression model for each input feature. Our model was trained on the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris).
+One way is to use [bar charts](bar-charts.md). In our example, each bar indicates the coefficients of our linear regression model for each input feature. Our model was trained on the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris).
 
 ```python
 import pandas as pd
@@ -491,7 +463,7 @@ y = df['petal_width']
 # Define and fit the grid
 model = DecisionTreeRegressor()
 param_grid = {
-    'criterion': ['mse', 'friedman_mse', 'mae'],
+    'criterion': ['squared_error', 'friedman_mse', 'absolute_error'],
     'max_depth': range(2, 5)
 }
 grid = GridSearchCV(model, param_grid, cv=N_FOLD)
@@ -546,21 +518,24 @@ fig_box.show()
 ### Reference
 
 Learn more about the `px` figures used in this tutorial:
-* Plotly Express: https://plot.ly/python/plotly-express/
-* Vertical Lines: https://plot.ly/python/shapes/
-* Heatmaps: https://plot.ly/python/heatmaps/
-* Box Plots: https://plot.ly/python/box-plots/
-* 3D Scatter: https://plot.ly/python/3d-scatter-plots/
-* Surface Plots: https://plot.ly/python/3d-surface-plots/
+
+* [Plotly Express](plotly-express.md)
+* [Vertical Lines](shapes.md)
+* [Heatmaps](heatmaps.md)
+* [Box Plots](box-plots.md)
+* [3D Scatter](3d-scatter-plots.md)
+* [Surface Plots](3d-surface-plots.md)
 
 Learn more about the Machine Learning models used in this tutorial:
-* https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html
-* https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html
+
+* <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html>
+* <https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html>
 
 Other tutorials that inspired this notebook:
-* https://seaborn.pydata.org/examples/residplot.html
-* https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html
-* http://www.scikit-yb.org/zh/latest/api/regressor/peplot.html
+
+* <https://seaborn.pydata.org/examples/residplot.html>
+* <https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html>
+* <http://www.scikit-yb.org/zh/latest/api/regressor/peplot.html>

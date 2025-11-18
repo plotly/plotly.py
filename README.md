@@ -76,13 +76,13 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 ## Installation
 
-plotly.py may be installed using pip
+plotly.py may be installed using pip:
 
 ```
 pip install plotly
 ```
 
-or conda.
+or conda:
 
 ```
 conda install -c conda-forge plotly
@@ -90,8 +90,7 @@ conda install -c conda-forge plotly
 
 ### Jupyter Widget Support
 
-For use as a Jupyter widget, install `jupyter` and `anywidget`
-packages using `pip`:
+For use as a Jupyter widget, install the `jupyter` and `anywidget` packages using `pip`:
 
 ```
 pip install jupyter anywidget
@@ -112,14 +111,14 @@ command line utility (legacy as of `plotly` version 4.9).
 
 #### Kaleido
 
-The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies and can be installed
-using pip
+The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies
+and can be installed using pip:
 
 ```
 pip install -U kaleido
 ```
 
-or conda
+or conda:
 
 ```
 conda install -c conda-forge python-kaleido
@@ -129,13 +128,13 @@ conda install -c conda-forge python-kaleido
 
 Some plotly.py features rely on fairly large geographic shape files. The county
 choropleth figure factory is one such example. These shape files are distributed as a
-separate `plotly-geo` package. This package can be installed using pip...
+separate `plotly-geo` package. This package can be installed using pip:
 
 ```
 pip install plotly-geo==1.0.0
 ```
 
-or conda
+or conda:
 
 ```
 conda install -c plotly plotly-geo=1.0.0
@@ -145,7 +144,7 @@ conda install -c plotly plotly-geo=1.0.0
 
 ## Copyright and Licenses
 
-Code and documentation copyright 2019 Plotly, Inc.
+Code and documentation copyright Plotly, Inc.
 
 Code released under the [MIT license](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt).
 

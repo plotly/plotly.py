@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: Add continuous error bands to charts in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Continuous Error Bands
-    order: 15
-    page_type: u-guide
-    permalink: python/continuous-error-bars/
-    thumbnail: thumbnail/error-cont.jpg
+description: Add continuous error bands to charts in Python with Plotly.
 ---
-
-Continuous error bands are a graphical representation of error or uncertainty as a shaded region around a main trace, rather than as discrete whisker-like error bars. They can be implemented in a manner similar to [filled area plots](/python/filled-area-plots/) using `scatter` traces with the `fill` attribute.
+Continuous error bands are a graphical representation of error or uncertainty as a shaded region around a main trace, rather than as discrete whisker-like error bars. They can be implemented in a manner similar to [filled area plots](filled-area-plots.md) using `scatter` traces with the `fill` attribute.
 
 #### Filling within a single trace
 

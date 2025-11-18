@@ -1,42 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.14
-  plotly:
-    description: How to set the global font, title, legend-entries, and axis-titles
-      in python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Setting the Font, Title, Legend Entries, and Axis Titles
-    order: 13
-    permalink: python/figure-labels/
-    redirect_from: python/font/
-    thumbnail: thumbnail/figure-labels.png
+description: How to set the global font, title, legend-entries, and axis-titles in
+  python.
+redirect_from: python/font/
 ---
-
 ### Automatic Labelling with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 When using Plotly Express, your axes and legend are automatically labelled, and it's easy to override the automation for a customized figure using the `labels` keyword argument. The title of your figure is up to you though!
 
@@ -112,11 +81,15 @@ fig.show()
 
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'figure-labels', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/figure-labels" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -124,7 +97,7 @@ IFrame(snippet_url + 'figure-labels', width='100%', height=1200)
 
 ### Manual Labelling with Graph Objects
 
-When using [graph objects](/python/graph-objects/) rather than [Plotly Express](/python/plotly-express/), you will need to explicitly label traces and axes:
+When using [graph objects](graph-objects.md) rather than [Plotly Express](plotly-express.md), you will need to explicitly label traces and axes:
 
 ```python
 import plotly.graph_objects as go
@@ -241,10 +214,10 @@ fig = go.Figure(
 fig.show()
 ```
 
-The configuration of the legend is discussed in detail in the [Legends](/python/legend/) page.
+The configuration of the legend is discussed in detail in the [Legends](legend.md) page.
 
 ### Align Plot Title
-The following example shows how to align the plot title in [layout.title](https://plotly.com/python/reference/layout/#layout-title). `x` sets the x position with respect to `xref` from "0" (left) to "1" (right), and `y` sets the y position with respect to `yref` from "0" (bottom) to "1" (top). Moreover, you can define `xanchor` to `left`,`right`, or `center` for setting the title's horizontal alignment with respect to its x position, and/or `yanchor` to `top`, `bottom`, or `middle` for setting the title's vertical alignment with respect to its y position.
+The following example shows how to align the plot title in [layout.title](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.title). `x` sets the x position with respect to `xref` from "0" (left) to "1" (right), and `y` sets the y position with respect to `yref` from "0" (bottom) to "1" (top). Moreover, you can define `xanchor` to `left`,`right`, or `center` for setting the title's horizontal alignment with respect to its x position, and/or `yanchor` to `top`, `bottom`, or `middle` for setting the title's vertical alignment with respect to its y position.
 
 ```python
 import plotly.graph_objects as go
@@ -304,4 +277,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/layout/ for more information!
+See the [full reference for `go.Layout`](reference/graph_objects/Layout.md) for more information!

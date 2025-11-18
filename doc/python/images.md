@@ -1,41 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.0
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to add images to charts as background images or logos.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Images
-    order: 24
-    permalink: python/images/
-    thumbnail: thumbnail/images.png
-    v4upgrade: true
+description: How to add images to charts as background images or logos.
 ---
 
-#### Add a Background Image
+### Add a Background Image
 
-In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](/python/imshow).
+In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](imshow.md).
 
 A background image can be added to the layout of a figure with
 `fig.add_layout_image` or by setting the `images` parameter of `go.Layout`. The
@@ -74,7 +43,7 @@ fig.update_layout(template="plotly_white")
 fig.show()
 ```
 
-#### Add a Logo
+### Add a Logo
 See more examples of [adding logos to charts](https://plotly.com/python/logos/)!
 
 ```python
@@ -145,7 +114,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Label Spectroscopy Data by Adding Multiple Images
+### Label Spectroscopy Data by Adding Multiple Images
 
 ```python
 import plotly.graph_objects as go
@@ -241,7 +210,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Zoom on Static Images
+### Zoom on Static Images
 
 ```python
 import plotly.graph_objects as go
@@ -305,7 +274,7 @@ fig.update_layout(
 fig.show(config={'doubleClick': 'reset'})
 ```
 
-### Annotating layout image with shapes
+## Annotating layout image with shapes
 
 _introduced in plotly 4.7_
 
@@ -313,9 +282,9 @@ It can be useful to add shapes to a layout image, for highlighting an object, dr
 
 In order to enable shape drawing, you need to
 - define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
-- add [modebar buttons](/python/configuration-options#add-optional-shapedrawing-buttons-to-modebar) corresponding to the drawing tools you wish to use.
+- add [modebar buttons](configuration-options.md#add-optional-shapedrawing-buttons-to-modebar) corresponding to the drawing tools you wish to use.
 
-The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#drawing-shapes-on-cartesian-plots).
+The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](shapes.md#drawing-shapes-on-cartesian-plots).
 
 Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 
@@ -360,7 +329,7 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 ```
 
 
-### Images Placed Relative to Axes
+## Images Placed Relative to Axes
 
 Using `xref='x domain'` or `yref='y domain'`, images can be placed relative to
 axes. As an example, the following shows how to put an image in the top corner
@@ -396,5 +365,5 @@ for col, src in enumerate(sources):
 fig.show()
 ```
 
-#### Reference
-See https://plotly.com/python/reference/layout/images/ for more information and chart attribute options!
+### Reference
+See the [full reference for `go.layout.images`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.images) for more information and chart attribute options!

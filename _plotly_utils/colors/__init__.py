@@ -425,11 +425,18 @@ def convert_colors_to_same_type(
     be coverted to the selected colortype. If colors is None, then there is an
     option to return portion of the DEFAULT_PLOTLY_COLORS
 
-    :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
+    Parameters
+    ----------
+    colors : str or tuple or list
+        Either a plotly scale name, an rgb or hex
         color, a color tuple or a list/tuple of colors
-    :param (list) scale: see docs for validate_scale_values()
+    scale : list
+        See docs for validate_scale_values()
 
-    :rtype (tuple) (colors_list, scale) if scale is None in the function call,
+    Returns
+    -------
+    A tuple of (colors_list, scale)
+        If scale is None in the function call,
         then scale will remain None in the returned tuple
     """
     colors_list = []
@@ -495,7 +502,10 @@ def convert_dict_colors_to_same_type(colors_dict, colortype="rgb"):
     """
     Converts a colors in a dictionary of colors to the specified color type
 
-    :param (dict) colors_dict: a dictionary whose values are single colors
+    Parameters
+    ----------
+    colors_dict : dict
+        A dictionary whose values are single colors
     """
     for key in colors_dict:
         if "#" in colors_dict[key]:
@@ -523,7 +533,10 @@ def validate_scale_values(scale):
     """
     Validates scale values from a colorscale
 
-    :param (list) scale: a strictly increasing list of floats that begins
+    Parameters
+    ----------
+    scale : list
+        A strictly increasing list of floats that begins
         with 0 and ends with 1. Its usage derives from a colorscale which is
         a list of two-lists (a list with two elements) of the form
         [value, color] which are used to determine how interpolation weighting
@@ -570,9 +583,12 @@ def make_colorscale(colors, scale=None):
     interpolated colorscale will be generated. If 'scale' is a specificed
     list, it must be the same legnth as colors and must contain all floats
     For documentation regarding to the form of the output, see
-    https://plot.ly/python/reference/#mesh3d-colorscale
+    [https://plotly.com/python/reference/#mesh3d-colorscale](/reference/graph_objects/Mesh3d.md#plotly.graph_objects.Mesh3d.colorscale)
 
-    :param (list) colors: a list of single colors
+    Parameters
+    ----------
+    colors : list
+        A list of single colors
     """
     colorscale = []
 
@@ -652,7 +668,10 @@ def convert_to_RGB_255(colors):
     to just x. This is the way rounding works in Python 3 and in current
     statistical analysis to avoid rounding bias
 
-    :param (list) rgb_components: grabs the three R, G and B values to be
+    Parameters
+    ----------
+    rgb_components : list
+        Grabs the three R, G and B values to be
         returned as computed in the function
     """
     rgb_components = []
@@ -752,9 +771,15 @@ def hex_to_rgb(value):
     """
     Calculates rgb values from a hex color code.
 
-    :param (string) value: Hex color string
+    Parameters
+    ----------
+    value : str
+        Hex color string
 
-    :rtype (tuple) (r_value, g_value, b_value): tuple of rgb values
+    Returns
+    -------
+    A tuple of (r_value, g_value, b_value)
+        Tuple of rgb values
     """
     value = value.lstrip("#")
     hex_total_length = len(value)

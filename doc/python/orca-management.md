@@ -1,44 +1,15 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: This section covers the low-level details of how plotly.py uses orca
-      to perform static image generation.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Orca Management
-    order: 9
-    permalink: python/orca-management/
-    thumbnail: thumbnail/orca-management.png
+description: This section covers the low-level details of how plotly.py uses orca
+  to perform static image generation.
 ---
+!!! note
 
-> Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](/python/static-image-export/) for details on using Kaleido for static image generation.
+    Orca support in Plotly.py is deprecated and will be removed after September 2025. See the [Static Image Export page](static-image-export.md) for details on using Kaleido for static image generation.
 
 ### Overview
 This section covers the lower-level details of how plotly.py can use orca to perform static image generation.
 
-Please refer to the [Static Image Export](/python/static-image-export/) section for general information on creating static images from plotly.py figures.
+Please refer to the [Static Image Export](static-image-export.md) section for general information on creating static images from plotly.py figures.
 
 ### What is orca?
 Orca is an [Electron](https://electronjs.org/) application that inputs plotly figure specifications and converts them into static images.  Orca can run as a command-line utility or as a long-running server process. In order to provide the fastest possible image export experience, plotly.py launches orca in server mode, and communicates with it over a local port. See https://github.com/plotly/orca for more information.

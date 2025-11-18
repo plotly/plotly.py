@@ -1,53 +1,23 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: How to make Histograms in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Histograms
-    order: 3
-    page_type: example_index
-    permalink: python/histograms/
-    redirect_from:
-    - /python/histogram-tutorial/
-    - /python/histogram/
-    thumbnail: thumbnail/histogram.jpg
+description: How to make Histograms in Python with Plotly.
+redirect_from:
+- /python/histogram-tutorial/
+- /python/histogram/
 ---
-
 <!-- #region -->
 In statistics, a [histogram](https://en.wikipedia.org/wiki/Histogram) is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. More generally, in Plotly a histogram is an aggregated bar chart, with several possible aggregation functions (e.g. sum, average, count...) which can be used to visualize data on categorical and date axes as well as linear axes.
 
 
-Alternatives to histogram plots for visualizing distributions include [violin plots](https://plotly.com/python/violin/), [box plots](https://plotly.com/python/box-plots/), [ECDF plots](https://plotly.com/python/ecdf-plots/) and [strip charts](https://plotly.com/python/strip-charts/).
+Alternatives to histogram plots for visualizing distributions include [violin plots](violin.md), [box plots](box-plots.md), [ECDF plots](ecdf-plots.md) and [strip charts](strip-charts.md).
 
-> If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
-bar, go to the [Bar Chart tutorial](/python/bar-charts/).
+!!! note
+
+    If you're looking instead for bar charts, i.e. representing *raw, unaggregated* data with rectangular
+bar, go to the [Bar Chart tutorial](bar-charts.md).
 
 ## Histograms with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 <!-- #endregion -->
 
 ```python
@@ -107,11 +77,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'histograms', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/histograms" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -190,7 +164,7 @@ fig.show()
 ```
 *New in v5.0*
 
-Histograms afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
+Histograms afford the use of [patterns (also known as hatching or texture)](pattern-hatching-texture.md) in addition to color:
 
 ```python
 import plotly.express as px
@@ -202,7 +176,7 @@ fig.show()
 
 #### Visualizing the distribution
 
-With the `marginal` keyword, a [marginal](https://plotly.com/python/marginal-plots/) is drawn alongside the histogram, visualizing the distribution. See [the distplot page](https://plotly.com/python/distplot/) for more examples of combined statistical representations.
+With the `marginal` keyword, a [marginal](marginal-plots.md) is drawn alongside the histogram, visualizing the distribution. See [the distplot page](distplot.md) for more examples of combined statistical representations.
 
 ```python
 import plotly.express as px
@@ -227,7 +201,7 @@ fig.show()
 
 ## Histograms with go.Histogram
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](/python/graph-objects/). All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](graph-objects.md). All of the available histogram options are described in the [histogram section of the reference page](reference/graph_objects/Histogram.md).
 
 ### Basic Histogram
 
@@ -402,7 +376,7 @@ fig.show()
 
 ### Custom Binning
 
-For custom binning along x-axis, use the attribute [`nbinsx`](https://plotly.com/python/reference/histogram/#histogram-nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](https://plotly.com/python/reference/histogram/#histogram-xbins) along with `autobinx = False`.
+For custom binning along x-axis, use the attribute [`nbinsx`](reference/graph_objects/Histogram.md#plotly.graph_objects.Histogram.nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](reference/graph_objects/Histogram.md#plotly.graph_objects.Histogram.xbins) along with `autobinx = False`.
 
 ```python
 import plotly.graph_objects as go
@@ -450,7 +424,7 @@ fig.show()
 
 ### See also: Bar Charts
 
-If you want to display information about the individual items within each histogram bar, then create a stacked bar chart with hover information as shown below. Note that this is not technically the histogram chart type, but it will have a similar effect as shown below by comparing the output of `px.histogram` and `px.bar`. For more information, see the [tutorial on bar charts](/python/bar-charts/).
+If you want to display information about the individual items within each histogram bar, then create a stacked bar chart with hover information as shown below. Note that this is not technically the histogram chart type, but it will have a similar effect as shown below by comparing the output of `px.histogram` and `px.bar`. For more information, see the [tutorial on bar charts](bar-charts.md).
 
 ```python
 import plotly.express as px
@@ -465,7 +439,7 @@ fig2.show()
 
 ### Share bins between histograms
 
-In this example both histograms have a compatible bin settings using [bingroup](https://plotly.com/python/reference/histogram/#histogram-bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plotly.com/python/2D-Histogram/) trace can share the same `bingroup`.
+In this example both histograms have a compatible bin settings using [bingroup](reference/graph_objects/Histogram.md#plotly.graph_objects.Histogram.bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](2D-Histogram.md) trace can share the same `bingroup`.
 
 ```python
 import plotly.graph_objects as go
@@ -488,7 +462,7 @@ fig.show()
 
 ### Sort Histogram by Category Order
 
-Histogram bars can also be sorted based on the ordering logic of the categorical values using the [categoryorder](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-categoryorder) attribute of the x-axis. Sorting of histogram bars using `categoryorder` also works with multiple traces on the same x-axis. In the following examples, the histogram bars are sorted based on the total numerical values.
+Histogram bars can also be sorted based on the ordering logic of the categorical values using the [categoryorder](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.categoryorder) attribute of the x-axis. Sorting of histogram bars using `categoryorder` also works with multiple traces on the same x-axis. In the following examples, the histogram bars are sorted based on the total numerical values.
 
 ```python
 import plotly.express as px
@@ -508,4 +482,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.histogram()`](https://plotly.com/python-api-reference/generated/plotly.express.histogram) or https://plotly.com/python/reference/histogram/ for more information and chart attribute options!
+See [function reference for `px.histogram()`](reference/plotly-express.md#plotly.express.histogram) or the [histogram page](reference/graph_objects/Histogram.md) for more information and chart attribute options!

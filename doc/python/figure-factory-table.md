@@ -1,41 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make tables in Python with Plotly's Figure Factory.
-    display_as: basic
-    language: python
-    layout: base
-    name: Figure Factory Tables
-    order: 15
-    permalink: python/figure-factory-table/
-    redirect_from:
-    - python/figure-factory/table/
-    - python/v3/figure-factory/table/
-    thumbnail: thumbnail/table.gif
+description: How to make tables in Python with Plotly's Figure Factory.
+redirect_from:
+- python/figure-factory/table/
+- python/v3/figure-factory/table/
 ---
-
-Tables can be created using a [`table` trace type](/python/table/), or by using a [figure factory](/python/figure-factories/) as detailed in this page.
+Tables can be created using a [`table` trace type](table.md), or by using a [figure factory](figure-factories.md) as detailed in this page.
 
 #### Simple Table
 
@@ -278,4 +247,4 @@ fig.show()
 
 #### Reference
 
-For more info on `ff.create_table()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_table.html)
+For more info on `ff.create_table()`, see the [full function reference](reference/figure-factory.md#plotly.figure_factory.create_table)

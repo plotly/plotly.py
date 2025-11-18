@@ -1,43 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make Sunburst Charts.
-    display_as: basic
-    language: python
-    layout: base
-    name: Sunburst Charts
-    order: 10
-    page_type: u-guide
-    permalink: python/sunburst-charts/
-    thumbnail: thumbnail/sunburst.gif
+description: How to make Sunburst Charts.
 ---
-
-Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. Similar to [Icicle charts](https://plotly.com/python/icicle-charts/) and [Treemaps](https://plotly.com/python/treemaps/), the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. The root starts from the center and children are added to the outer rings.
+Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. Similar to [Icicle charts](icicle-charts.md) and [Treemaps](treemaps.md), the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. The root starts from the center and children are added to the outer rings.
 
 ### Basic Sunburst Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 With `px.sunburst`, each row of the DataFrame is represented as a sector of the sunburst.
 
@@ -105,7 +73,7 @@ fig.show()
 
 ### Using an explicit mapping for discrete colors
 
-For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+For more information about discrete colors, see the [dedicated page](discrete-color.md).
 
 ```python
 import plotly.express as px
@@ -138,7 +106,7 @@ fig.show()
 
 ### Basic Sunburst Plot with go.Sunburst
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Sunburst` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Sunburst` class from `plotly.graph_objects`](graph-objects.md).
 
 Main arguments:
 
@@ -214,7 +182,7 @@ fig.show()
 
 ### Large Number of Slices
 
-This example uses a [plotly grid attribute](https://plotly.com/python/reference/layout/#layout-grid) for the subplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/sunburst/#sunburst-domain) attribute.
+This example uses a [plotly grid attribute](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.grid) for the subplots. Reference the row and column destination using the [domain](reference/graph_objects/Sunburst.md#plotly.graph_objects.Sunburst.domain) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -284,7 +252,9 @@ fig.show()
 
 If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
-*Note: animated transitions are currently not implemented when `uniformtext` is used.*
+!!! note
+
+    Animated transitions are currently not implemented when `uniformtext` is used.
 
 ```python
 import plotly.graph_objects as go
@@ -304,7 +274,7 @@ fig.show()
 
 *New in 5.15*
 
-Sunburst charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we add a different pattern to each level of the hierarchy. We also specify the `solidity` of the pattern.
+Sunburst charts support [patterns](pattern-hatching-texture.md) (also known as hatching or texture) in addition to color. In this example, we add a different pattern to each level of the hierarchy. We also specify the `solidity` of the pattern.
 
 ```python
 import plotly.graph_objects as go
@@ -413,4 +383,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.sunburst()`](https://plotly.com/python-api-reference/generated/plotly.express.sunburst) or https://plotly.com/python/reference/sunburst/ for more information and chart attribute options!
+See [function reference for `px.sunburst()`](reference/plotly-express.md#plotly.express.sunburst) or the [full reference for `go.Sunburst`](reference/graph_objects/Sunburst.md) for more information and chart attribute options!

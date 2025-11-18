@@ -1,45 +1,13 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.6
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make Icicle Charts.
-    display_as: basic
-    language: python
-    layout: base
-    name: Icicle Charts
-    order: 17
-    page_type: u-guide
-    permalink: python/icicle-charts/
-    thumbnail: thumbnail/icicle.png
+description: How to make Icicle Charts.
 ---
-
 *New in v5.0*
 
-Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst charts](https://plotly.com/python/sunburst-charts/) and [Treemaps](https://plotly.com/python/treemaps/) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
+Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst charts](sunburst-charts.md) and [Treemaps](treemaps.md) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
 
 ### Basic Icicle Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 With `px.icicle`, each item in the `character` list is represented as a rectangular sector of the icicle.
 
@@ -117,7 +85,7 @@ fig.show()
 
 ### Using an explicit mapping for discrete colors
 
-For more information about discrete colors, see the [dedicated page](https://plotly.com/python/discrete-color/).
+For more information about discrete colors, see the [dedicated page](discrete-color.md).
 
 ```python
 import plotly.express as px
@@ -155,7 +123,7 @@ fig.show()
 
 ### Basic Icicle Plot with go.Icicle
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Icicle` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Icicle` class from `plotly.graph_objects`](graph-objects.md).
 
 Main arguments:
 
@@ -232,7 +200,7 @@ fig.show()
 
 ### Large Number of Slices
 
-This example uses a [plotly grid attribute](https://plotly.com/python/reference/layout/#layout-grid) for the subplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/icicle/#icicle-domain) attribute.
+This example uses a [plotly grid attribute](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.grid) for the subplots. Reference the row and column destination using the [domain](reference/graph_objects/Icicle.md#plotly.graph_objects.Icicle.domain) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -259,7 +227,9 @@ fig.show()
 
 If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
-*Note: animated transitions are currently not implemented when `uniformtext` is used.*
+!!! note
+
+    Animated transitions are currently not implemented when `uniformtext` is used.
 
 ```python
 import plotly.graph_objects as go
@@ -423,7 +393,7 @@ fig.show()
 
 *New in 5.15*
 
-Icicle charts support [patterns](/python/pattern-hatching-texture/) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to all chart sections. We also configure the `size` and `solidity` of the pattern.
+Icicle charts support [patterns](pattern-hatching-texture.md) (also known as hatching or texture) in addition to color. In this example, we apply a pattern to all chart sections. We also configure the `size` and `solidity` of the pattern.
 
 ```python
 import plotly.graph_objects as go
@@ -543,4 +513,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.icicle()`](https://plotly.com/python-api-reference/generated/plotly.express.icicle) or https://plotly.com/python/reference/icicle/ for more information and chart attribute options!
+See [function reference for `px.icicle()`](reference/plotly-express.md#plotly.express.icicle) or the [full reference for `go.Icicle`]](reference/graph_objects/Icicle.md) for more information and chart attribute options!

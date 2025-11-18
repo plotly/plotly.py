@@ -1,37 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.14
-  plotly:
-    description: How to add text labels and annotations to plots in python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Text and Annotations
-    order: 22
-    permalink: python/text-and-annotations/
-    thumbnail: thumbnail/text-and-annotations.png
+description: How to add text labels and annotations to plots in python.
 ---
-
 ### Adding Text to Figures
 
 As a general rule, there are two ways to add text labels to figures:
@@ -39,10 +8,11 @@ As a general rule, there are two ways to add text labels to figures:
 2. Standalone text annotations can be added to figures using `fig.add_annotation()`, with or without arrows, and they can be positioned absolutely within the figure, or they can be positioned relative to the axes of 2d or 3d cartesian subplots i.e. in data coordinates.
 
 The differences between these two approaches are that:
+
 * Traces can optionally support hover labels and can appear in legends.
 * Text annotations can be positioned absolutely or relative to data coordinates in 2d/3d cartesian subplots only.
 * Traces cannot be positioned absolutely but can be positioned relative to data coordinates in any subplot type.
-* Traces also be used to [draw shapes](/python/shapes/), although there is a [shape equivalent to text annotations](/python/shapes/).
+* Traces also be used to [draw shapes](shapes.md), although there is a [shape equivalent to text annotations](shapes.md).
 
 
 ### Text on scatter plots with Plotly Express
@@ -110,11 +80,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'text-and-annotations', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/text-and-annotations" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -122,7 +96,7 @@ IFrame(snippet_url + 'text-and-annotations', width='100%', height=1200)
 
 ### Controlling Text Size with `uniformtext`
 
-For the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemaps) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+For the [pie](pie-charts.md), [bar](bar-charts.md)-like, [sunburst](sunburst-charts.md) and [treemap](treemaps.md) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
 
 Here is a bar chart with the default behavior which will scale down text to fit.
@@ -162,7 +136,7 @@ fig.show()
 
 ### Controlling Maximum Text Size
 
-The `textfont_size` parameter of the the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemaps) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
+The `textfont_size` parameter of the the [pie](pie-charts.md), [bar](bar-charts.md)-like, [sunburst](sunburst-charts.md) and [treemap](treemaps.md) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
 
 ```python
 import plotly.express as px
@@ -443,7 +417,7 @@ fig = go.Figure(
 fig.show()
 ```
 
-[scattergl](https://plotly.com/python/reference/scattergl) traces do not support all numeric font weights. When you specify a numeric font weight on `scattergl`, weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
+[scattergl](reference/graph_objects/Scattergl.md) traces do not support all numeric font weights. When you specify a numeric font weight on `scattergl`, weights up to 500 are mapped to the keyword font weight "normal", while weights above 500 are mapped to "bold".
 
 
 ## Text Case
@@ -703,7 +677,7 @@ fig.show()
 
 ### Positioning Text Annotations Absolutely
 
-By default, text annotations have `xref` and `yref` set to `"x"` and `"y"`, respectively, meaning that their x/y coordinates are with respect to the axes of the plot. This means that panning the plot will cause the annotations to move. Setting `xref` and/or `yref` to `"paper"` will cause the `x` and `y` attributes to be interpreted in [paper coordinates](/python/figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates).
+By default, text annotations have `xref` and `yref` set to `"x"` and `"y"`, respectively, meaning that their x/y coordinates are with respect to the axes of the plot. This means that panning the plot will cause the annotations to move. Setting `xref` and/or `yref` to `"paper"` will cause the `x` and `y` attributes to be interpreted in [paper coordinates](figure-structure.md#positioning-with-paper-container-coordinates-or-axis-domain-coordinates).
 
 Try panning or zooming in the following figure:
 
@@ -850,9 +824,9 @@ fig.show()
 
 ### Customize Displayed Text with a Text Template
 
-To show an arbitrary text in your chart you can use [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate), which is a template string used for rendering the information, and will override [textinfo](https://plotly.com/python/reference/treemap/#treemap-textinfo).
+To show an arbitrary text in your chart you can use [texttemplate](reference/graph_objects/Pie.md#plotly.graph_objects.Pie.texttemplate), which is a template string used for rendering the information, and will override [textinfo](reference/graph_objects/Treemap.md#plotly.graph_objects.Treemap.textinfo).
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format).
-`texttemplate` customizes the text that appears on your plot vs. [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) that customizes the tooltip text.
+`texttemplate` customizes the text that appears on your plot vs. [hovertemplate](reference/graph_objects/Pie.md#plotly.graph_objects.Pie.hovertemplate) that customizes the tooltip text.
 
 ```python
 import plotly.graph_objects as go
@@ -868,7 +842,7 @@ fig.show()
 
 ### Customize Text Template
 
-The following example uses [textfont](https://plotly.com/python/reference/scatterternary/#scatterternary-textfont) to customize the added text.
+The following example uses [textfont](reference/graph_objects/Scatterternary.md#plotly.graph_objects.Scatterternary.textfont) to customize the added text.
 
 ```python
 import plotly.graph_objects as go
@@ -889,8 +863,8 @@ fig.show()
 
 ### Set Date in Text Template
 
-The following example shows how to show date by setting [axis.type](https://plotly.com/python/reference/layout/yaxis/#layout-yaxis-type) in [funnel charts](https://plotly.com/python/funnel-charts/).
-As you can see [textinfo](https://plotly.com/python/reference/funnel/#funnel-textinfo) and [texttemplate](https://plotly.com/python/reference/funnel/#funnel-texttemplate) have the same functionality when you want to determine 'just' the trace information on the graph.
+The following example shows how to show date by setting [axis.type](reference/graph_objects/layout-package/YAxis.md#plotly.graph_objects.layout.YAxis.type) in [funnel charts](funnel-charts.md).
+As you can see [textinfo](reference/graph_objects/Funnel.md#plotly.graph_objects.Funnel.textinfo) and [texttemplate](reference/graph_objects/Funnel.md#plotly.graph_objects.Funnel.texttemplate) have the same functionality when you want to determine 'just' the trace information on the graph.
 
 ```python
 from plotly import graph_objects as go
@@ -920,4 +894,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/annotations/ for more information and chart attribute options!
+See the [full reference for `go.Layout.annotations`](reference/graph_objects/Layout.md#plotly.graph_objects.Layout.annotations) for more information and chart attribute options!

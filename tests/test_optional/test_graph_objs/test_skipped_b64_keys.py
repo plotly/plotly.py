@@ -2,7 +2,7 @@ import json
 from unittest import TestCase
 import numpy as np
 from ...test_optional.optional_utils import NumpyTestUtilsMixin
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 
 class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):

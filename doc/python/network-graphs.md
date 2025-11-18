@@ -1,42 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.8
-  plotly:
-    description: How to make Network Graphs in Python with Plotly. One examples of
-      a network graph with NetworkX
-    display_as: scientific
-    language: python
-    layout: base
-    name: Network Graphs
-    order: 12
-    page_type: u-guide
-    permalink: python/network-graphs/
-    redirect_from:
-    - ipython-notebooks/networks/
-    - ipython-notebooks/network-graphs/
-    thumbnail: thumbnail/net.jpg
+description: How to make Network Graphs in Python with Plotly. One examples of a network
+  graph with NetworkX
+redirect_from:
+- ipython-notebooks/networks/
+- ipython-notebooks/network-graphs/
 ---
-
 In this example we show how to visualize a network graph created using `networkx`.
 
 Install the Python library `networkx` with `pip install networkx`.
@@ -120,7 +88,6 @@ node_text = []
 for node, adjacencies in enumerate(G.adjacency()):
     node_adjacencies.append(len(adjacencies[1]))
     node_text.append('# of connections: '+str(len(adjacencies[1])))
-
 node_trace.marker.color = node_adjacencies
 node_trace.text = node_text
 ```
@@ -160,15 +127,19 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'network-graphs', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/network-graphs" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
 #### Reference
-See https://plotly.com/python/reference/scatter/ for more information and chart attribute options!
+See the [full reference for `go.Scatter`](reference/graph_objects/Scatter.md) for more information and chart attribute options!

@@ -351,6 +351,106 @@ def create_hexbin_map(
 ):
     """
     Returns a figure aggregating scattered points into connected hexagons
+
+    Parameters
+    ----------
+    data_frame : DataFrame or array-like or dict
+        This argument needs to be passed for column names (and not keyword
+        names) to be used. Array-like and dict are transformed internally to a
+        pandas DataFrame. Optional: if missing, a DataFrame gets constructed
+        under the hood using the other arguments.
+    lat : str or int or Series or array-like
+        Either a name of a column in `data_frame`, or a pandas Series or
+        array_like object. Values from this column or array_like are used to
+        position marks according to latitude on a map.
+    lon : str or int or Series or array-like
+        Either a name of a column in `data_frame`, or a pandas Series or
+        array_like object. Values from this column or array_like are used to
+        position marks according to longitude on a map.
+    color : str or int or Series or array-like
+        Either a name of a column in `data_frame`, or a pandas Series or
+        array_like object. Values from this column or array_like are used to
+        assign color to marks.
+    nx_hexagon : int
+        Number of hexagons (horizontally) to be created
+    agg_func : function
+        Numpy array aggregator, it must take as input a 1D array and output a
+        scalar value.
+    animation_frame : str or int or Series or array-like
+        Either a name of a column in `data_frame`, or a pandas Series or
+        array_like object. Values from this column or array_like are used to
+        assign marks to animation frames.
+    color_discrete_sequence : list of str
+        Strings should define valid CSS-colors. When `color` is set and the
+        values in the corresponding column are not numeric, values in that
+        column are assigned colors by cycling through `color_discrete_sequence`
+        in the order described in `category_orders`, unless the value of
+        `color` is a key in `color_discrete_map`. Various useful color
+        sequences are available in the `plotly.express.colors` submodules,
+        specifically `plotly.express.colors.qualitative`.
+    color_discrete_map : dict with str keys and str values (default `{}`)
+        String values should define valid CSS-colors Used to override
+        `color_discrete_sequence` to assign a specific colors to marks
+        corresponding with specific values. Keys in `color_discrete_map` should
+        be values in the column denoted by `color`. Alternatively, if the
+        values of `color` are valid colors, the string `'identity'` may be
+        passed to cause them to be used directly.
+    labels : dict with str keys and str values (default `{}`)
+        By default, column names are used in the figure for axis titles, legend
+        entries and hovers. This parameter allows this to be overridden. The
+        keys of this dict should correspond to column names, and the values
+        should correspond to the desired label to be displayed.
+    color_continuous_scale : list of str
+        Strings should define valid CSS-colors This list is used to build a
+        continuous color scale when the column denoted by `color` contains
+        numeric data. Various useful color scales are available in the
+        `plotly.express.colors` submodules, specifically
+        `plotly.express.colors.sequential`, `plotly.express.colors.diverging`
+        and `plotly.express.colors.cyclical`.
+    range_color : list of two numbers
+        If provided, overrides auto-scaling on the continuous color scale.
+    color_continuous_midpoint : number (default `None`)
+        If set, computes the bounds of the continuous color scale to have the
+        desired midpoint. Setting this value is recommended when using
+        `plotly.express.colors.diverging` color scales as the inputs to
+        `color_continuous_scale`.
+    opacity : float
+        Value between 0 and 1. Sets the opacity for markers.
+    zoom : int (default `8`)
+        Between 0 and 20. Sets map zoom level.
+    center : dict
+        Dict keys are `'lat'` and `'lon'` Sets the center point of the map.
+    mapbox_style : str (default `'basic'`, needs Mapbox API token)
+        Identifier of base map style, some of which require a Mapbox or Stadia
+        Maps API token to be set using
+        `plotly.express.set_mapbox_access_token()`. Allowed values which do not
+        require a token are `'open-street-map'`, `'white-bg'`, `'carto-
+        positron'`, `'carto-darkmatter'`. Allowed values which require a Mapbox
+        API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`,
+        `'dark'`, `'satellite'`, `'satellite-streets'`. Allowed values which
+        require a Stadia Maps API token are `'stamen-terrain'`, `'stamen-
+        toner'`, `'stamen-watercolor'`.
+    title : str
+        The figure title.
+    template : str or dict or plotly.graph_objs.layout.Template instance
+        The figure template name (must be a key in plotly.io.templates) or
+        definition.
+    width : int (default `None`)
+        The figure width in pixels.
+    height : int (default `None`)
+        The figure height in pixels.
+    min_count : int
+        Minimum number of points in a hexagon for it to be displayed. If None
+        and color is not set, display all hexagons. If None and color is set,
+        only display hexagons that contain points.
+    show_original_data : bool
+        Whether to show the original data on top of the hexbin aggregation.
+    original_data_marker : dict
+        Scattermapbox marker options.
+
+    Returns
+    -------
+    plotly.graph_objs.Figure
     """
     args = build_dataframe(args=locals(), constructor=None)
     native_namespace = nw.get_native_namespace(args["data_frame"])

@@ -32,7 +32,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.3.1"
+version = "6.4.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -40,7 +40,7 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
-kaleido = ["kaleido>=1.0.0"]
+kaleido = ["kaleido>=1.1.0"]
 dev_core = [
     "pytest",
     "requests",
@@ -80,6 +80,38 @@ dev_optional = [
 ]
 dev = [
     "plotly[dev_optional]"
+]
+
+docs = [
+    "markdown-include",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mkdocs-gen-files",
+    "mkdocs-literate-nav",
+    "mkdocs-redirects",
+    "pyyaml",
+    "plotly[dev_build]",
+    "plotly[kaleido]",
+    "anywidget",
+    "dash_bio",
+    "geopandas",
+    "igraph",
+    "inflect",
+    "numpy",
+    "pillow",
+    "plotly-geo",
+    "polars[timezone]",
+    "pooch",
+    "pyarrow",
+    "pyshp",
+    "scikit-image",
+    "scikit-learn",
+    "scipy",
+    "shapely",
+    "statsmodels",
+    "umap",
+    "wget",
 ]
 
 [project.scripts]

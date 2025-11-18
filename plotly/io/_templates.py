@@ -70,7 +70,7 @@ class TemplatesConfig(object):
         for template_name in template_names:
             template = self._templates[template_name]
             if template is Lazy:
-                from plotly.graph_objs.layout import Template
+                from plotly.graph_objects.layout import Template
 
                 if template_name == "none":
                     # "none" is a special built-in named template that applied no defaults
@@ -218,7 +218,7 @@ Templates configuration
         if args:
             return reduce(self._merge_2_templates, args)
         else:
-            from plotly.graph_objs.layout import Template
+            from plotly.graph_objects.layout import Template
 
             return Template()
 
@@ -362,7 +362,7 @@ def to_templated(fig, skip=("title", "text")):
     --------
     Imports
 
-    >>> import plotly.graph_objs as go
+    >>> import plotly.graph_objects as go
     >>> import plotly.io as pio
 
     Construct a figure with large courier text
@@ -430,7 +430,7 @@ def to_templated(fig, skip=("title", "text")):
 
     # process fig
     from plotly.basedatatypes import BaseFigure
-    from plotly.graph_objs import Figure
+    from plotly.graph_objects import Figure
 
     if not isinstance(fig, BaseFigure):
         fig = Figure(fig)

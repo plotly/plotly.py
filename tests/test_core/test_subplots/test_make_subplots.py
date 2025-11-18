@@ -1,6 +1,6 @@
 from unittest import TestCase
 import pytest
-from plotly.graph_objs import (
+from plotly.graph_objects import (
     Annotation,
     Annotations,
     Data,

@@ -1,52 +1,21 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to configure and style the legend in Plotly with Python.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Legends
-    order: 15
-    permalink: python/legend/
-    redirect_from: python/horizontal-legend/
-    thumbnail: thumbnail/legends.gif
+description: How to configure and style the legend in Plotly with Python.
+redirect_from: python/horizontal-legend/
 ---
-
 ### Trace Types, Legends and Color Bars
 
-[Traces](/python/figure-structure) of most types and shapes can be optionally associated with a single legend item in the [legend](/python/legend/). Whether or not a given trace or shape appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items and shapes also support the `legendgroup` attribute, and all traces and shapes with the same legend group are treated the same way during click/double-click interactions.
+[Traces](figure-structure.md) of most types and shapes can be optionally associated with a single legend item in the [legend](legend.md). Whether or not a given trace or shape appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items and shapes also support the `legendgroup` attribute, and all traces and shapes with the same legend group are treated the same way during click/double-click interactions.
 
-The fact that legend items are linked to traces means that when using [discrete color](/python/discrete-color/), a figure must have one trace per color in order to get a meaningful legend. [Plotly Express has robust support for discrete color](/python/discrete-color/) to make this easy.
+The fact that legend items are linked to traces means that when using [discrete color](discrete-color.md), a figure must have one trace per color in order to get a meaningful legend. [Plotly Express has robust support for discrete color](discrete-color.md) to make this easy.
 
-Traces which support [continuous color](/python/colorscales/) can also be associated with color axes in the layout via the `coloraxis` attribute. Multiple traces can be linked to the same color axis. Color axes have a legend-like component called color bars. Alternatively, color axes can be configured within the trace itself.
+Traces which support [continuous color](colorscales.md) can also be associated with color axes in the layout via the `coloraxis` attribute. Multiple traces can be linked to the same color axis. Color axes have a legend-like component called color bars. Alternatively, color axes can be configured within the trace itself.
 
 
 ### Legends with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
-Plotly Express functions will create one [trace](/python/figure-structure) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' `legendgroup` and `showlegend` attributed are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. The legend title is automatically set, and can be overrided with the `labels` keyword argument:
+Plotly Express functions will create one [trace](figure-structure.md) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' `legendgroup` and `showlegend` attributed are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. The legend title is automatically set, and can be overrided with the `labels` keyword argument:
 
 ```python
 import plotly.express as px
@@ -59,7 +28,7 @@ fig.show()
 
 ### Legend Order
 
-By default, Plotly Express lays out legend items in the order in which values appear in the underlying data. Every Plotly Express function also includes a `category_orders` keyword argument which can be used to control [the order in which categorical axes are drawn](/python/categorical-axes/), but beyond that can also control the order in which legend items appear, and [the order in which facets are laid out](/python/facet-plots/).
+By default, Plotly Express lays out legend items in the order in which values appear in the underlying data. Every Plotly Express function also includes a `category_orders` keyword argument which can be used to control [the order in which categorical axes are drawn](categorical-axes.md), but beyond that can also control the order in which legend items appear, and [the order in which facets are laid out](facet-plots.md).
 
 ```python
 import plotly.express as px
@@ -84,7 +53,7 @@ fig.update_layout(legend_traceorder="reversed")
 fig.show()
 ```
 
-When using [`plotly.graph_objects`](/python/graph-objects/) rather than Plotly Express, legend items will appear in the order that traces appear in the `data`:
+When using [`plotly.graph_objects`](graph-objects.md) rather than Plotly Express, legend items will appear in the order that traces appear in the `data`:
 
 ```python
 import plotly.graph_objects as go
@@ -171,7 +140,7 @@ fig.show()
 
 ### Legend Positioning
 
-Legends have an anchor point, which can be set to a point within the legend using `layout.legend.xanchor` and `layout.legend.yanchor`. The coordinate of the anchor can be positioned with `layout.legend.x` and `layout.legend.y` in [paper coordinates](/python/figure-structure/). Note that the plot margins will grow so as to accommodate the legend. The legend may also be placed within the plotting area.
+Legends have an anchor point, which can be set to a point within the legend using `layout.legend.xanchor` and `layout.legend.yanchor`. The coordinate of the anchor can be positioned with `layout.legend.x` and `layout.legend.y` in [paper coordinates](figure-structure.md). Note that the plot margins will grow so as to accommodate the legend. The legend may also be placed within the plotting area.
 
 ```python
 import plotly.express as px
@@ -197,11 +166,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'legend', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/legend" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -328,7 +301,7 @@ fig.show()
 
 ### Legends with Graph Objects
 
-When creating figures using [graph objects](/python/graph-objects/) without using [Plotly Express](/python/plotly-express/), legends must be manually configured using some of the options below.
+When creating figures using [graph objects](graph-objects.md) without using [Plotly Express](plotly-express.md), legends must be manually configured using some of the options below.
 
 
 #### Legend Item Names
@@ -459,7 +432,7 @@ fig.show()
 
 #### Size of Legend Items
 
-In this example [itemsizing](https://plotly.com/python/reference/layout/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
+In this example [itemsizing](reference/graph_objects/layout-package/Legend.md#plotly.graph_objects.layout.Legend.itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
 
 ```python
 import plotly.graph_objects as go
@@ -834,4 +807,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/#layout-legend for more information!
+See the [full reference for `go.Layout.legend`](/reference/graph_objects/Layout.md#plotly.graph_objects.Layout.legend) for more information!

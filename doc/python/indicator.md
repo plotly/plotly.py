@@ -1,39 +1,8 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.0
-  plotly:
-    description: How to make gauge charts in Python with Plotly.
-    display_as: financial
-    language: python
-    layout: base
-    name: Indicators
-    order: 6
-    page_type: u-guide
-    permalink: python/indicator/
-    thumbnail: thumbnail/indicator.jpg
+description: How to make gauge charts in Python with Plotly.
 ---
 
-#### Overview
+### Overview
 In this tutorial we introduce a new trace named "Indicator". The purpose of "indicator" is to visualize a single value specified by the "value" attribute.
   Three distinct visual elements are available to represent that value: number, delta and gauge. Any combination of them can be specified via the "mode" attribute.
   Top-level attributes are:
@@ -65,7 +34,7 @@ In this tutorial we introduce a new trace named "Indicator". The purpose of "ind
       <li> suffix: a string to appear after the delta
     </ol>
     Finally, we can have a simple title for the indicator via `title` with 'text' attribute which is a string, and 'align' which can be set to left, center, and right.
-    There are two gauge types: [angular](https://plotly.com/python/gauge-charts/) and [bullet](https://plotly.com/python/bullet-charts/). Here is a combination of both shapes (angular, bullet), and different modes (gauge, delta, and value):
+    There are two gauge types: [angular](gauge-charts.md) and [bullet](bullet-charts.md). Here is a combination of both shapes (angular, bullet), and different modes (gauge, delta, and value):
 
 ```python
 import plotly.graph_objects as go
@@ -105,7 +74,7 @@ fig.update_layout(
                          }})
 ```
 
-#### A Single Angular Gauge Chart
+### A Single Angular Gauge Chart
 
 ```python
 import plotly.graph_objects as go
@@ -120,7 +89,7 @@ fig = go.Figure(go.Indicator(
 fig.show()
 ```
 
-##### Bullet Gauge
+#### Bullet Gauge
 The equivalent of above "angular gauge":
 
 ```python
@@ -137,7 +106,7 @@ fig = go.Figure(go.Indicator(
 fig.show()
 ```
 
-#### Showing Information above Your Chart
+### Showing Information above Your Chart
 Another interesting feature is that indicator trace sits above the other traces (even the 3d ones). This way, it can be easily used as an overlay as demonstrated below
 
 ```python
@@ -156,7 +125,7 @@ fig.add_trace(go.Scatter(
 fig.update_layout(xaxis = {'range': [0, 62]})
 fig.show()
 ```
-#### Data Cards / Big Numbers
+### Data Cards / Big Numbers
 Data card helps to display more contextual information about the data. Sometimes one number is all you want to see in a report, such as total sales, annual revenue, etc. This example shows how to visualize these big numbers:
 
 ```python
@@ -174,7 +143,7 @@ fig.update_layout(paper_bgcolor = "lightgray")
 fig.show()
 ```
 
-#### It's possible to display several numbers
+### It's possible to display several numbers
 
 ```python
 import plotly.graph_objects as go
@@ -203,7 +172,7 @@ fig.add_trace(go.Indicator(
 fig.show()
 ```
 
-#### Adding a Prefix and Suffix
+### Adding a Prefix and Suffix
 
 
 On both a `number` and a `delta`, you can add a string to appear before the value using `prefix`. You can add a string to appear after the value using `suffix`. In the following example, we add '$' as a `prefix` and 'm' as `suffix` for both the `number` and `delta`. 
@@ -228,9 +197,6 @@ fig.update_layout(xaxis = {'range': [0, 62]})
 fig.show()
 ```
 
-#### Reference
-See https://plotly.com/python/reference/indicator/ for more information and chart attribute options!
+### Reference
+See the [full reference for `go.Indicator`](reference/graph_objects/Indicator.md) for more information and chart attribute options!
 
-```python
-
-```

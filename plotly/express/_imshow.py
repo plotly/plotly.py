@@ -87,7 +87,7 @@ def imshow(
     Parameters
     ----------
 
-    img: array-like image, or xarray
+    img : array-like image, or xarray
         The image data. Supported array shapes are
 
         - (M, N): an image with scalar data. The data is visualized
@@ -115,28 +115,28 @@ def imshow(
         names are used for axis titles, and long name for the colorbar title
         (unless overridden in ``labels``). Possible keys are: x, y, and color.
 
-    x, y: list-like, optional
+    x, y : list-like, optional
         x and y are used to label the axes of single-channel heatmap visualizations and
         their lengths must match the lengths of the second and first dimensions of the
         img argument. They are auto-populated if the input is an xarray.
 
-    animation_frame: int or str, optional (default None)
+    animation_frame : int or str, optional (default None)
         axis number along which the image array is sliced to create an animation plot.
         If `img` is an xarray, `animation_frame` can be the name of one the dimensions.
 
-    facet_col: int or str, optional (default None)
+    facet_col : int or str, optional (default None)
         axis number along which the image array is sliced to create a facetted plot.
         If `img` is an xarray, `facet_col` can be the name of one the dimensions.
 
-    facet_col_wrap: int
+    facet_col_wrap : int
         Maximum number of facet columns. Wraps the column variable at this width,
         so that the column facets span multiple rows.
         Ignored if `facet_col` is None.
 
-    facet_col_spacing: float between 0 and 1
+    facet_col_spacing : float between 0 and 1
         Spacing between facet columns, in paper units. Default is 0.02.
 
-    facet_row_spacing: float between 0 and 1
+    facet_row_spacing : float between 0 and 1
         Spacing between facet rows created when ``facet_col_wrap`` is used, in
         paper units. Default is 0.0.7.
 
@@ -164,24 +164,24 @@ def imshow(
     width : number
         The figure width in pixels.
 
-    height: number
+    height : number
         The figure height in pixels.
 
-    aspect: 'equal', 'auto', or None
-      - 'equal': Ensures an aspect ratio of 1 or pixels (square pixels)
-      - 'auto': The axes is kept fixed and the aspect ratio of pixels is
+    aspect : 'equal', 'auto', or None
+        - 'equal': Ensures an aspect ratio of 1 or pixels (square pixels)
+        - 'auto': The axes is kept fixed and the aspect ratio of pixels is
         adjusted so that the data fit in the axes. In general, this will
         result in non-square pixels.
-      - if None, 'equal' is used for numpy arrays and 'auto' for xarrays
+        - if None, 'equal' is used for numpy arrays and 'auto' for xarrays
         (which have typically heterogeneous coordinates)
 
-    contrast_rescaling: 'minmax', 'infer', or None
+    contrast_rescaling : 'minmax', 'infer', or None
         how to determine data values corresponding to the bounds of the color
         range, when zmin or zmax are not passed. If `minmax`, the min and max
         values of the image are used. If `infer`, a heuristic based on the image
         data type is used.
 
-    binary_string: bool, default None
+    binary_string : bool, default None
         if True, the image data are first rescaled and encoded as uint8 and
         then passed to plotly.js as a b64 PNG string. If False, data are passed
         unchanged as a numerical array. Setting to True may lead to performance
@@ -191,12 +191,12 @@ def imshow(
         represented as grayscale and with no colorbar if use_binary_string is
         True.
 
-    binary_backend: str, 'auto' (default), 'pil' or 'pypng'
+    binary_backend : str, 'auto' (default), 'pil' or 'pypng'
         Third-party package for the transformation of numpy arrays to
         png b64 strings. If 'auto', Pillow is used if installed,  otherwise
         pypng.
 
-    binary_compression_level: int, between 0 and 9 (default 4)
+    binary_compression_level : int, between 0 and 9 (default 4)
         png compression level to be passed to the backend when transforming an
         array to a png b64 string. Increasing `binary_compression` decreases the
         size of the png string, but the compression step takes more time. For most
@@ -204,18 +204,19 @@ def imshow(
         test `len(fig.data[0].source)` and to time the execution of `imshow` to
         tune the level of compression. 0 means no compression (not recommended).
 
-    binary_format: str, 'png' (default) or 'jpg'
+    binary_format : str, 'png' (default) or 'jpg'
         compression format used to generate b64 string. 'png' is recommended
         since it uses lossless compression, but 'jpg' (lossy) compression can
         result if smaller binary strings for natural images.
 
-    text_auto: bool or str (default `False`)
+    text_auto : bool or str (default `False`)
         If `True` or a string, single-channel `img` values will be displayed as text.
         A string like `'.2f'` will be interpreted as a `texttemplate` numeric formatting directive.
 
     Returns
     -------
-    fig : graph_objects.Figure containing the displayed image
+    fig : plotly.graph_objects.Figure
+        Contains the displayed image
 
     See also
     --------

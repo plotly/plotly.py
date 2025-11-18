@@ -223,7 +223,7 @@ For example:
 
 
 def to_image(
-    fig: Union[dict, plotly.graph_objects.Figure],
+    fig: Union[dict, plotly.graph_objs.Figure],
     format: Union[str, None] = None,
     width: Union[int, None] = None,
     height: Union[int, None] = None,
@@ -285,9 +285,9 @@ def to_image(
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine (deprecated): str
+    engine : str
         Image export engine to use. This parameter is deprecated and Orca engine support will be
-        dropped in the next major Plotly version. Until then, the following values are supported:
+        dropped in the next major Plotly version. Until then, the following values are supported:\n
           - "kaleido": Use Kaleido for image export
           - "orca": Use Orca for image export
           - "auto" (default): Use Kaleido if installed, otherwise use Orca
@@ -421,7 +421,7 @@ To downgrade to Kaleido v0, run:
 
 
 def write_image(
-    fig: Union[dict, plotly.graph_objects.Figure],
+    fig: Union[dict, plotly.graph_objs.Figure],
     file: Union[str, Path],
     format: Union[str, None] = None,
     scale: Union[int, float, None] = None,
@@ -491,9 +491,9 @@ def write_image(
         True if the figure should be validated before being converted to
         an image, False otherwise.
 
-    engine (deprecated): str
+    engine : str
         Image export engine to use. This parameter is deprecated and Orca engine support will be
-        dropped in the next major Plotly version. Until then, the following values are supported:
+        dropped in the next major Plotly version. Until then, the following values are supported:\n
           - "kaleido": Use Kaleido for image export
           - "orca": Use Orca for image export
           - "auto" (default): Use Kaleido if installed, otherwise use Orca
@@ -557,8 +557,8 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
 
 def write_images(
     fig: Union[
-        List[Union[dict, plotly.graph_objects.Figure]],
-        Union[dict, plotly.graph_objects.Figure],
+        List[Union[dict, plotly.graph_objs.Figure]],
+        Union[dict, plotly.graph_objs.Figure],
     ],
     file: Union[List[Union[str, Path]], Union[str, Path]],
     format: Union[List[Union[str, None]], Union[str, None]] = None,
@@ -721,10 +721,10 @@ which can be installed using pip:
 
 
 def full_figure_for_development(
-    fig: Union[dict, plotly.graph_objects.Figure],
+    fig: Union[dict, plotly.graph_objs.Figure],
     warn: bool = True,
     as_dict: bool = False,
-) -> Union[plotly.graph_objects.Figure, dict]:
+) -> Union[plotly.graph_objs.Figure, dict]:
     """
     Compute default values for all attributes not specified in the input figure and
     returns the output as a "full" figure. This function calls Plotly.js via Kaleido
@@ -746,7 +746,7 @@ def full_figure_for_development(
 
     Returns
     -------
-    plotly.graph_objects.Figure or dict
+    plotly.graph_objs.Figure or dict
         The full figure
     """
 
@@ -788,7 +788,7 @@ which can be installed using pip:
     if as_dict:
         return fig
     else:
-        import plotly.graph_objects as go
+        import plotly.graph_objs as go
 
         return go.Figure(fig, skip_invalid=True)
 

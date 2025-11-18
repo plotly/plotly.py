@@ -1,40 +1,6 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernel_info:
-    name: python3
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.8
-  plotly:
-    description: How to make carpet plots in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Carpet Plots
-    order: 13
-    page_type: u-guide
-    permalink: python/carpet-plot/
-    thumbnail: thumbnail/carpet.jpg
+description: How to make carpet plots in Python with Plotly.
 ---
-
 <!-- #region -->
 ### Set X and Y Coordinates
 
@@ -184,9 +150,9 @@ fig.show()
 
 ### Add Points and Contours
 
-To add points and lines see [Carpet Scatter Plots](https://plotly.com/python/carpet-scatter) or to add contours see [Carpet Contour Plots](https://plotly.com/python/carpet-contour)
+To add points and lines see [Carpet Scatter Plots](carpet-scatter.md) or to add contours see [Carpet Contour Plots](carpet-contour.md)
 
 
 ### Reference
 
-See https://plotly.com/python/reference/carpet/ for more information and chart attribute options!
+See the [full reference for `go.Carpet`](reference/graph_objects/Carpet.md) for more information and chart attribute options!

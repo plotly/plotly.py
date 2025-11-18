@@ -1,48 +1,16 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.4
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.8.11
-  plotly:
-    description: How to make 2D Histograms in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: 2D Histograms
-    order: 5
-    page_type: u-guide
-    permalink: python/2D-Histogram/
-    redirect_from:
-    - python/2d-histogram/
-    - python/2d-histograms/
-    thumbnail: thumbnail/histogram2d.jpg
+description: How to make 2D Histograms in Python with Plotly.
+redirect_from:
+- python/2d-histogram/
+- python/2d-histograms/
 ---
-
 ## 2D Histograms or Density Heatmaps
 
-A 2D histogram, also known as a density heatmap, is the 2-dimensional generalization of a [histogram](/python/histograms/) which resembles a [heatmap](/python/heatmaps/) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the color of the tile representing the bin. This kind of visualization (and the related [2D histogram contour, or density contour](https://plotly.com/python/2d-histogram-contour/)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](/python/line-and-scatter/) would result in points overlapping each other and hiding patterns. For data sets of more than a few thousand points, a better approach than the ones listed here would be to [use Plotly with Datashader](/python/datashader/) to precompute the aggregations before displaying the data with Plotly.
+A 2D histogram, also known as a density heatmap, is the 2-dimensional generalization of a [histogram](histograms.md) which resembles a [heatmap](heatmaps.md) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the color of the tile representing the bin. This kind of visualization (and the related [2D histogram contour, or density contour](2d-histogram-contour.md)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](line-and-scatter.md) would result in points overlapping each other and hiding patterns. For data sets of more than a few thousand points, a better approach than the ones listed here would be to [use Plotly with Datashader](../datashader/) to precompute the aggregations before displaying the data with Plotly.
 
 ## Density Heatmaps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The Plotly Express function `density_heatmap()` can be used to produce density heatmaps.
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). The Plotly Express function `density_heatmap()` can be used to produce density heatmaps.
 
 ```python
 import plotly.express as px
@@ -52,7 +20,7 @@ fig = px.density_heatmap(df, x="total_bill", y="tip")
 fig.show()
 ```
 
-The number of bins can be controlled with `nbinsx` and `nbinsy` and the [color scale](/python/colorscales/) with `color_continuous_scale`.
+The number of bins can be controlled with `nbinsx` and `nbinsy` and the [color scale](colorscales.md) with `color_continuous_scale`.
 
 ```python
 import plotly.express as px
@@ -62,7 +30,7 @@ fig = px.density_heatmap(df, x="total_bill", y="tip", nbinsx=20, nbinsy=20, colo
 fig.show()
 ```
 
-Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](/python/histograms/). Other allowable values are `violin`, `box` and `rug`.
+Marginal plots can be added to visualize the 1-dimensional distributions of the two variables. Here we use a marginal [`histogram`](histograms.md). Other allowable values are `violin`, `box` and `rug`.
 
 ```python
 import plotly.express as px
@@ -72,7 +40,7 @@ fig = px.density_heatmap(df, x="total_bill", y="tip", marginal_x="histogram", ma
 fig.show()
 ```
 
-Density heatmaps can also be [faceted](/python/facet-plots/):
+Density heatmaps can also be [faceted](facet-plots.md):
 
 ```python
 import plotly.express as px
@@ -110,7 +78,7 @@ fig.show()
 
 ### 2D Histograms with Graph Objects
 
-To build this kind of figure using [graph objects](/python/graph-objects/) without using Plotly Express, we can use the `go.Histogram2d` class.
+To build this kind of figure using [graph objects](graph-objects.md) without using Plotly Express, we can use the `go.Histogram2d` class.
 
 
 ### 2D Histogram of a Bivariate Normal Distribution ###
@@ -151,7 +119,7 @@ fig = go.Figure(go.Histogram2d(x=x, y=y, histnorm='probability',
 fig.show()
 ```
 ### Sharing bin settings between 2D Histograms
-This example shows how to use [bingroup](https://plotly.com/python/reference/histogram/#histogram-bingroup) attribute to have a compatible bin settings for both histograms. To define `start`, `end` and `size` value of x-axis and y-axis separately, set [ybins](https://plotly.com/python/reference/histogram2dcontour/#histogram2dcontour-ybins) and `xbins`.
+This example shows how to use [bingroup](reference/graph_objects/Histogram.md#histogram-bingroup) attribute to have a compatible bin settings for both histograms. To define `start`, `end` and `size` value of x-axis and y-axis separately, set [ybins](reference/graph_objects/Histogram2dContour.md#histogram2dcontour-ybins) and `xbins`.
 
 ```python
 import plotly.graph_objects as go
@@ -269,4 +237,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/histogram2d/ for more information and chart attribute options!
+See the [full reference for `go.Histogram2d`](reference/graph_objects/Histogram2d.md) for more information and chart attribute options!

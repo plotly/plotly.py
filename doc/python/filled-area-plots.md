@@ -1,43 +1,11 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.11
-  plotly:
-    description: How to make filled area plots in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Filled Area Plots
-    order: 7
-    page_type: u-guide
-    permalink: python/filled-area-plots/
-    thumbnail: thumbnail/area.jpg
+description: How to make filled area plots in Python with Plotly.
 ---
-
 This example shows how to fill the area enclosed by traces.
 
 ## Filled area plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 `px.area` creates a stacked area plot. Each filled area corresponds to one value of the column given by the `line_group` parameter.
 
@@ -55,11 +23,15 @@ fig.show()
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'filled-area-plots', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/filled-area-plots" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -69,7 +41,7 @@ IFrame(snippet_url + 'filled-area-plots', width='100%', height=1200)
 
 *New in v5.7*
 
-Area charts afford the use of [patterns (also known as hatching or texture)](/python/pattern-hatching-texture/) in addition to color:
+Area charts afford the use of [patterns (also known as hatching or texture)](pattern-hatching-texture.md) in addition to color:
 
 ```python
 import plotly.express as px
@@ -133,7 +105,7 @@ fig.show()
 
 *New in 5.20*
 
-Scatter traces with a fill support a `fillgradient`, which is a `dict` of options that defines the gradient. Use `fillgradient.colorscale` to define the [colorscale](https://plotly.com/python/colorscales) for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`).
+Scatter traces with a fill support a `fillgradient`, which is a `dict` of options that defines the gradient. Use `fillgradient.colorscale` to define the [colorscale](colorscales.md) for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`). 
 
 In the following example, we've defined a `horizontal` `fillgradient` with a colorscale of three colors.
 
@@ -279,6 +251,6 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/scatter/#scatter-line
-and https://plotly.com/python/reference/scatter/#scatter-fill
+See the [full reference for `go.Scatter.line`](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.line)
+and the [full reference for `go.Scatter.fill`](reference/graph_objects/Scatter.md#plotly.graph_objects.Scatter.fill)
 for more information and attribute options!

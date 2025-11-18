@@ -1,41 +1,10 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.10
-  plotly:
-    description: Recommendations for increased speed, improved interactivity, and
-      the ability to plot even more data!
-    display_as: basic
-    language: python
-    layout: base
-    name: High Performance Visualization
-    order: 14
-    permalink: python/performance/
-    redirect_from:
-    - python/webgl-vs-svg/
-    - python/datashader/
-    thumbnail: thumbnail/webgl.jpg
+description: Recommendations for increased speed, improved interactivity, and the
+  ability to plot even more data!
+redirect_from:
+- python/webgl-vs-svg/
+- python/datashader/
 ---
-
 ## DataFrame Types
 
 *New in Plotly.py version 6*
@@ -44,7 +13,7 @@ Plotly Express natively supports various dataframe libraries, including pandas, 
 
 In versions of Plotly.py prior to version 6, Plotly Express functions accepted non-pandas dataframes as input but used the [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/) or converted those dataframes to pandas internally.
 
-See [the Plotly Express Arguments page](/python/px-arguments) for full details on supported dataframe libraries.
+See [the Plotly Express Arguments page](px-arguments.md) for full details on supported dataframe libraries.
 
 ## NumPy and NumPy Convertible Arrays for Improved Performance
 
@@ -175,13 +144,15 @@ In a Jupyter notebook environment that supports magic commands, you can load it 
 
 In the examples below we show that it is possible to represent up to around a million points with WebGL-enabled traces.
 For larger datasets, or for a clearer visualization of the density of points,
-it is also possible to use [datashader](/python/datashader/).
+it is also possible to use [datashader](../datashader/).
 
 ### WebGL with Plotly Express
 
 The `render_mode` argument to supported Plotly Express functions (e.g. `scatter` and `scatter_polar`) can be used to enable WebGL rendering.
 
-> **Note** The default `render_mode` is `"auto"`, in which case Plotly Express will automatically set `render_mode="webgl"` if the input data is more than 1,000 rows long. In this case, WebGl can be disabled by setting `render_mode=svg`.
+!!! note
+
+    The default `render_mode` is `"auto"`, in which case Plotly Express will automatically set `render_mode="webgl"` if the input data is more than 1,000 rows long. In this case, WebGl can be disabled by setting `render_mode=svg`.
 
 Here is an example that creates a 100,000 point scatter plot using Plotly Express with WebGL rendering explicitly enabled.
 
@@ -208,7 +179,7 @@ fig.show()
 
 #### WebGL with 1,000,000 points with Graph Objects
 
-If Plotly Express does not provide a good starting point for creating a chart, you can use [the more generic `go.Scattergl` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point for creating a chart, you can use [the more generic `go.Scattergl` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 import plotly.graph_objects as go
@@ -235,7 +206,7 @@ fig.add_trace(
 fig.show()
 ```
 
-See https://plotly.com/python/reference/scattergl/ for more information and chart attribute options!
+See the [full reference for `go.Scattergl`](reference/graph_objects/Scattergl.md) for more information and chart attribute options!
 
 ## Datashader
 
@@ -243,7 +214,7 @@ Use [Datashader](https://datashader.org/) to reduce the size of a dataset passed
 
 ### Passing Datashader Rasters as a Tile Map Image Layer
 
-The following example shows the spatial distribution of taxi rides in New York City, which are concentrated on major avenues. For more details about tile-based maps, see [the tile map layers tutorial](/python/tile-map-layers).
+The following example shows the spatial distribution of taxi rides in New York City, which are concentrated on major avenues. For more details about tile-based maps, see [the tile map layers tutorial](tile-map-layers.md).
 
 ```python
 import pandas as pd
@@ -263,6 +234,7 @@ coordinates = [[coords_lon[0], coords_lat[0]],
 
 from colorcet import fire
 import datashader.transfer_functions as tf
+
 img = tf.shade(agg, cmap=fire)[::-1].to_pil()
 
 import plotly.express as px
@@ -312,4 +284,4 @@ fig.update_layout(coloraxis_colorbar=dict(title='Count', tickprefix='1.e'))
 fig.show()
 ```
 
-Instead of using Datashader, it would theoretically be possible to create a [2d histogram](/python/2d-histogram-contour/) with Plotly, but this is not recommended because you would need to load the whole dataset of around 5M rows in the browser for plotly.js to compute the heatmap.
+Instead of using Datashader, it would theoretically be possible to create a [2d histogram](2d-histogram-contour.md) with Plotly, but this is not recommended because you would need to load the whole dataset of around 5M rows in the browser for plotly.js to compute the heatmap.

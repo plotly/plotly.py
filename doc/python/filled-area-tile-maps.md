@@ -1,44 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.3
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.10.0
-  plotly:
-    description: How to make an area on tile-based maps in Python with Plotly.
-    display_as: maps
-    language: python
-    layout: base
-    name: Filled Area on Tile Maps
-    order: 4
-    page_type: example_index
-    permalink: python/filled-area-tile-maps/
-    redirect_from: python/filled-area-on-mapbox/
-    thumbnail: thumbnail/area.jpg
+description: How to make an area on tile-based maps in Python with Plotly.
+redirect_from: python/filled-area-on-mapbox/
 ---
-
 There are three different ways to show a filled area on a tile-based map:
 
-- Using a [Scattermap](https://plotly.com/python/reference/scattermap/) trace and setting the `fill` attribute to 'toself'
-- Using a map layout (i.e. by minimally using an empty [Scattermap](https://plotly.com/python/reference/scattermap/) trace) and adding a GeoJSON layer
-- Using the [Choroplethmap](https://plotly.com/python/tile-county-choropleth/) trace type
+- Using a [Scattermap](reference/graph_objects/Scattermap.md) trace and setting the `fill` attribute to 'toself'
+- Using a map layout (i.e. by minimally using an empty [Scattermap](reference/graph_objects/Scattermap.md) trace) and adding a GeoJSON layer
+- Using the [Choroplethmap](tile-county-choropleth.md) trace type
 
 ## Filled `Scattermap` Trace
 
@@ -65,7 +33,7 @@ fig.show()
 
 ### Multiple Filled Areas with a `Scattermap` trace
 
-The following example shows how to use `None` in your data to draw multiple filled areas. Such gaps in trace data are unconnected by default, but this can be controlled via the [connectgaps](https://plotly.com/python/reference/scattermap/#scattermap-connectgaps) attribute.
+The following example shows how to use `None` in your data to draw multiple filled areas. Such gaps in trace data are unconnected by default, but this can be controlled via the [connectgaps](reference/graph_objects/Scattermap.md#plotly.graph_objects.Scattermap.connectgaps) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -137,11 +105,13 @@ fig.show()
 <!-- #region -->
 ### Mapbox Maps
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
+!!! note
+
+    Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 The earlier examples using `go.Scattermap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. This trace was introduced in Plotly.py 5.24 and is now the recommended way to draw filled areas on tile-based maps. There is also a trace that uses [Mapbox](https://docs.mapbox.com), called `go.Scattermapbox`.
 
-To use the `Scattermapbox` trace type, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
+To use the `Scattermapbox` trace type, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](../mapbox-layers/) documentation for more information.
 
 Here's one of the earlier examples rewritten to use `Scattermapbox`.
 
@@ -166,4 +136,4 @@ fig.show()
 
 #### Reference
 
-See  https://plotly.com/python/reference/scattermap/ for available attribute options, or for `go.Scattermapbox`, see https://plotly.com/python/reference/scattermapbox/.
+See the [full reference for `go.Scattermap`](reference/graph_objects/Scattermap.md) for available attribute options, or for `go.Scattermapbox`, see the full reference [here](reference/graph_objects/Scattermapbox.md).

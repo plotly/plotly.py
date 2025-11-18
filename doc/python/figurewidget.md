@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.5
-  plotly:
-    description: Introduction to the Plotly FigureWidget
-    display_as: chart_events
-    language: python
-    layout: base
-    name: Plotly FigureWidget Overview
-    order: 1
-    page_type: example_index
-    permalink: python/figurewidget/
-    thumbnail: thumbnail/figurewidget-overview.gif
-    redirect_from: /python/ipython-widgets/
+description: Introduction to the Plotly FigureWidget
+redirect_from: /python/ipython-widgets/
 ---
-
 The Plotly FigureWidget allows you to add Plotly charts as interactive widgets in Jupyter and other compatible notebooks. To use the FigureWidget, you'll need to install `anywidget`: 
 
 ```bash
@@ -56,11 +24,11 @@ f
 Add traces or update the layout and then watch the output above update in real time.
 
 ```python
-f.add_scatter(y=[2, 1, 4, 3]);
+f.add_scatter(y=[2, 1, 4, 3])
 ```
 
 ```python
-f.add_bar(y=[1, 4, 3, 2]);
+f.add_bar(y=[1, 4, 3, 2])
 ```
 
 ```python

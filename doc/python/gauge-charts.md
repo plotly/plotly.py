@@ -1,47 +1,16 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: How to make gauge meter charts in Python with Plotly.
-    display_as: financial
-    language: python
-    layout: base
-    name: Gauge Charts
-    order: 7
-    page_type: u-guide
-    permalink: python/gauge-charts/
-    redirect_from:
-    - python/gauge-chart/
-    - python/gauge-meter/
-    thumbnail: thumbnail/gauge.jpg
+description: How to make gauge meter charts in Python with Plotly.
+redirect_from:
+- python/gauge-chart/
+- python/gauge-meter/
 ---
 
-#### Basic Gauge
+### Basic Gauge
 A radial gauge chart has a circular arc, which displays a single value to estimate progress toward a goal.
   The bar shows the target value, and the shading represents the progress toward that goal. Gauge charts, known as
   speedometer charts as well. This chart type is usually used to illustrate key business indicators.
 
-  The example below displays a basic gauge chart with default attributes. For more information about different added attributes check [indicator](https://plotly.com/python/indicator/) tutorial.
+  The example below displays a basic gauge chart with default attributes. For more information about different added attributes check [indicator](indicator.md) tutorial.
 
 ```python
 import plotly.graph_objects as go
@@ -55,7 +24,7 @@ fig = go.Figure(go.Indicator(
 fig.show()
 ```
 
-#### Add Steps, Threshold, and Delta
+### Add Steps, Threshold, and Delta
 The following examples include "steps" attribute shown as shading inside the radial arc, "delta" which is the
   difference of the value and goal (reference - value), and "threshold" to determine boundaries that visually alert you if the value cross a defined threshold.
 
@@ -77,8 +46,8 @@ fig = go.Figure(go.Indicator(
 fig.show()
 ```
 
-#### Custom Gauge Chart
-The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](https://plotly.com/python/reference/indicator/).
+### Custom Gauge Chart
+The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](reference/graph_objects/Indicator.md).
 
 ```python
 import plotly.graph_objects as go
@@ -109,5 +78,5 @@ fig.show()
 ```
 
 
-#### Reference
-See https://plotly.com/python/reference/indicator/ for more information and chart attribute options!
+### Reference
+See the [full reference for `go.Indicator`](reference/graph_objects/Indicator.md) for more information and chart attribute options!

@@ -1,44 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.4
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.9.16
-  plotly:
-    description: How to make scatter plots on tile maps in Python.
-    display_as: maps
-    language: python
-    layout: base
-    name: Scatter Plots on Tile Maps
-    order: 10
-    page_type: u-guide
-    permalink: python/tile-scatter-maps/
-    redirect_from: python/scattermapbox/
-    thumbnail: thumbnail/scatter-mapbox.jpg
+description: How to make scatter plots on tile maps in Python.
+redirect_from: python/scattermapbox/
 ---
-
 ### Basic example with Plotly Express
 
-Here we show the [Plotly Express](/python/plotly-express/) function `px.scatter_map` for a scatter plot on a tile map.
+Here we show the [Plotly Express](plotly-express.md) function `px.scatter_map` for a scatter plot on a tile map.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 ```python
 import plotly.express as px
@@ -201,7 +169,7 @@ fig.show()
 
 ### Set Marker Symbols
 
-You can define the symbol on your map by setting [`symbol`](https://plotly.com/python/reference/scattermap/#scattermap-marker-symbol) attribute.
+You can define the symbol on your map by setting [`symbol`](reference/graph_objects/scattermap-package/Marker.md#plotly.graph_objects.scattermap.Marker.symbol) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -322,11 +290,13 @@ fig.show()
 
 ## Mapbox Maps
 
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
+!!! note
+
+    Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
 
 The earlier examples using `px.scatter_map` and `go.Scattermap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. These traces were introduced in Plotly.py 5.24 and are now the recommended way to create scatter plots on tile-based maps. There are also traces that use [Mapbox](https://docs.mapbox.com): `px.scatter_mapbox` and `go.Scattermapbox`
 
-To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](../mapbox-layers/) documentation for more information.
 
 Here's the first example rewritten to use `px.scatter_mapbox`.
 
@@ -376,6 +346,6 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.scatter_map`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_map) or https://plotly.com/python/reference/scattermap/ for more information about the attributes available.
+See [function reference for `px.scatter_map`](reference/plotly-express.md#plotly.express.scatter_map) or the [full reference for `go.Scattermap`](reference/graph_objects/Scattermap.md) for more information about the attributes available.
 
-For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermapbox/.
+For Mapbox-based tile maps, see [function reference for `px.scatter_mapbox`](reference/plotly-express.md#plotly.express.scatter_mapbox) or the [full reference for `go.Scattermapbox`](reference/graph_objects/Scattermapbox.md).

@@ -40,7 +40,7 @@ class TestDateTimes(TestCase):
         fig, ax = plt.subplots()
         ax.plot_date(mpl_dates, y)
 
-        # convert this figure to plotly's graph_objs
+        # convert this figure to plotly's graph_objects
         pfig = tls.mpl_to_plotly(fig)
 
         print(date_strings)

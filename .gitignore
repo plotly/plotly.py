@@ -2,6 +2,7 @@
 0.html
 iframe_figures/
 tests/test_orca/images/linux/failed/
+*mesh_dataset.txt
 
 *.egg-info
 
@@ -12,6 +13,9 @@ tests/test_orca/images/linux/failed/
 *~
 
 doc/python/raw.githubusercontent.com/
+
+docs/build/
+docs_tmp/
 
 # Don't ignore dataset files
 !*.csv.gz
@@ -59,6 +63,8 @@ doc/python/.mapbox_token
 doc/.ipynb_checkpoints
 tags
 doc/check-or-enforce-order.py
+files.figshare.com
+*.zip
 
 tests/percy/*.html
 tests/percy/pandas2/*.html

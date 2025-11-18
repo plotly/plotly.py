@@ -1,47 +1,15 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make Facet and Trellis Plots in Python with Plotly.
-    display_as: statistical
-    language: python
-    layout: base
-    name: Facet and Trellis Plots
-    order: 7
-    page_type: u-guide
-    permalink: python/facet-plots/
-    redirect_from:
-    - python/trellis-plots/
-    - python/facet-trellis/
-    thumbnail: thumbnail/facet-trellis-thumbnail.jpg
+description: How to make Facet and Trellis Plots in Python with Plotly.
+redirect_from:
+- python/trellis-plots/
+- python/facet-trellis/
 ---
-
 ### Facet and Trellis Plots
 
 Facet plots, also known as trellis plots or small multiples, are figures made up of multiple subplots which have the same set of axes, where each subplot shows a subset of the data. While it is straightforward to use `plotly`'s
-[subplot capabilities](/python/subplots/) to make such figures, it's far easier to use the built-in `facet_row` and `facet_col` arguments in the various Plotly Express functions.
+[subplot capabilities](subplots.md) to make such figures, it's far easier to use the built-in `facet_row` and `facet_col` arguments in the various Plotly Express functions.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 ### Scatter Plot Column Facets
 
@@ -54,7 +22,7 @@ fig.show()
 
 ### Bar Chart Row Facets
 
-There is a more presentation-ready horizontal, faceted bar chart in the [horizontal bar documentation](/python/horizontal-bar-charts/#Small-multiple-horizontal-bar-charts-show-each-component's-size-more-clearly-than-a-stacked-bar)
+There is a more presentation-ready horizontal, faceted bar chart in the [horizontal bar documentation](horizontal-bar-charts.md#Small-multiple-horizontal-bar-charts-show-each-component's-size-more-clearly-than-a-stacked-bar)
 
 ```python
 import plotly.express as px
@@ -109,7 +77,7 @@ fig.show()
 
 *introduced in plotly 4.12*
 
-It is possible to add [labelled horizontal and vertical lines and rectangles](/python/horizontal-vertical-shapes/) to facet plots using `.add_hline()`, `.add_vline()`, `.add_hrect()` or `.add_vrect()`. The default `row` and `col` values are `"all"` but this can be overridden, as with the rectangle below, which only appears in the first column.
+It is possible to add [labelled horizontal and vertical lines and rectangles](horizontal-vertical-shapes.md) to facet plots using `.add_hline()`, `.add_vline()`, `.add_hrect()` or `.add_vrect()`. The default `row` and `col` values are `"all"` but this can be overridden, as with the rectangle below, which only appears in the first column.
 
 ```python
 import plotly.express as px
@@ -131,7 +99,7 @@ fig.show()
 
 *introduced in plotly 4.12*
 
-The `.add_trace()` method can be used to add a copy of the same trace to each facet, for example an overall linear regression line as below. The `legendgroup`/`showlegend` pattern below is recommended to avoid having a separate legend item for each copy of the trace. Note that as of v5.2.1, there is [a built-in option to add an overall trendline to all facets](https://plotly.com/python/linear-fits/) that uses this technique under the hood.
+The `.add_trace()` method can be used to add a copy of the same trace to each facet, for example an overall linear regression line as below. The `legendgroup`/`showlegend` pattern below is recommended to avoid having a separate legend item for each copy of the trace. Note that as of v5.2.1, there is [a built-in option to add an overall trendline to all facets](linear-fits.md) that uses this technique under the hood.
 
 ```python
 import plotly.express as px
@@ -182,7 +150,7 @@ fig.show()
 
 ### Customizing Subplot Figure Titles
 
-Since subplot figure titles are [annotations](https://plotly.com/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them, for example to remove the equal-sign (`=`).
+Since subplot figure titles are [annotations](text-and-annotations.md#simple-annotation), you can use the `for_each_annotation` function to customize them, for example to remove the equal-sign (`=`).
 
 In the following example, we pass a lambda function to `for_each_annotation` in order to change the figure subplot titles from `smoker=No` and `smoker=Yes` to just `No` and `Yes`.
 
@@ -196,7 +164,7 @@ fig.show()
 
 ### Controlling Facet Ordering
 
-By default, Plotly Express lays out categorical data in the order in which it appears in the underlying data. Every 2-d cartesian Plotly Express function also includes a `category_orders` keyword argument which can be used to control [the order in which categorical axes are drawn](/python/categorical-axes/), but beyond that can also control [the order in which discrete colors appear in the legend](/python/discrete-color/), and the order in which facets are laid out.
+By default, Plotly Express lays out categorical data in the order in which it appears in the underlying data. Every 2-d cartesian Plotly Express function also includes a `category_orders` keyword argument which can be used to control [the order in which categorical axes are drawn](categorical-axes.md), but beyond that can also control [the order in which discrete colors appear in the legend](discrete-color.md), and the order in which facets are laid out.
 
 ```python
 import plotly.express as px

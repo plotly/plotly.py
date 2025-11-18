@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.12.4
-  plotly:
-    description: How to set the configuration options of figures using the Plotly
-      Python graphing library.
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Configuration
-    order: 10
-    page_type: u-guide
-    permalink: python/configuration-options/
-    thumbnail: thumbnail/modebar-icons.png
+description: How to set the configuration options of figures using the Plotly Python
+  graphing library.
 ---
-
 ## Configuration Options
 
 The `.show()` method that you use to display your figures also accepts a `config` parameter.
@@ -42,7 +10,7 @@ You can set the configuration options for your figure by passing a dictionary to
 
 If you don't set an option's value, it will be automatically be set to the default value for that option.
 
-For the complete list of configuration options and their defaults see: https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
+For the complete list of configuration options and their defaults see: <https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js>
 
 ### Enabling Scroll Zoom
 
@@ -65,7 +33,7 @@ fig.show(config=config)
 
 ### Turning Off Responsiveness
 
-By default, figures you create with the `plotly.py` package are [responsive](https://en.wikipedia.org/wiki/Responsive_web_design). Responsive figures automatically change their height and width when the size of the window they are displayed in changes. This is true for figures which are displayed in web browsers on desktops and mobile, Jupyter Notebooks, and other [rendering](https://plot.ly/python/renderers/) environments.
+By default, figures you create with the `plotly.py` package are [responsive](https://en.wikipedia.org/wiki/Responsive_web_design). Responsive figures automatically change their height and width when the size of the window they are displayed in changes. This is true for figures which are displayed in web browsers on desktops and mobile, Jupyter Notebooks, and other [rendering](renderers.md) environments.
 
 Try resizing your browser window to see this behavior in effect on this page.
 
@@ -252,7 +220,7 @@ fig.show()
 
 *New in v4.7*
 
-Some modebar buttons of Cartesian plots are optional and have to be added explicitly, using the `modeBarButtonsToAdd` config attribute. These buttons are used for drawing or erasing shapes. See [the tutorial on shapes and shape drawing](/python/shapes#drawing-shapes-with-a-mouse-on-cartesian-plots) for more details.
+Some modebar buttons of Cartesian plots are optional and have to be added explicitly, using the `modeBarButtonsToAdd` config attribute. These buttons are used for drawing or erasing shapes. See [the tutorial on shapes and shape drawing](shapes.md#drawing-shapes-with-a-mouse-on-cartesian-plots) for more details.
 
 ```python
 import plotly.express as px
@@ -365,4 +333,4 @@ The same configuration dictionary that you pass to the `config` parameter of the
 
 #### Reference
 
-See config options at https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
+See config options at <https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js>

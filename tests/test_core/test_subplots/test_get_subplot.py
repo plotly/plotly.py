@@ -1,7 +1,7 @@
 from unittest import TestCase
-from plotly.graph_objs import Figure
+from plotly.graph_objects import Figure
 from plotly import subplots
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from plotly.subplots import SubplotXY, SubplotDomain
 
 

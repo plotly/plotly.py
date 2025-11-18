@@ -8,7 +8,7 @@ then explains the technical aspects of preparing your contribution.
 
 ## Code of Conduct
 
-Please note that all contributos are required to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
+Please note that all contributos are required to abide by our Code of Conduct.
 
 ## Different Ways to Contribute
 
@@ -19,7 +19,7 @@ it is important to understand the structure of the code and the repository.
 -   The [`plotly.graph_objects`](https://plotly.com/python/graph-objects/) module (usually imported as `go`)
     is [generated from the plotly.js schema](https://plotly.com/python/figure-structure/),
     so changes to be made in this package need to be contributed to [plotly.js](https://github.com/plotly/plotly.js)
-    or to the code generation system in `./codegen/`.
+    or to the code generation system in `./bin/codegen/`.
     Code generation creates traces and layout classes that have a direct correspondence to their JavaScript counterparts,
     while higher-level methods that work on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`)
     are defined in `plotly/basedatatypes.py`.
@@ -38,16 +38,17 @@ it is important to understand the structure of the code and the repository.
     These are organized in subdirectories according to what they test:
     see the "Setup" section below for more details.
 
--   Documentation is found in `doc/`, and its structure is described in [its README file](doc/README.md).
+-   Documentation is found in `doc/`, and its structure is described in its README file.
     The documentation is a great place to start contributing,
     since you can add or modify examples without setting up a full environment.
 
-Code and documentation are not the only way to contribute:
-you can also help by:
+Code and documentation are not the only way to contribute.
+You can also help by:
 
 -   Reporting bugs at <https://github.com/plotly/plotly.py/issues>.
     Please take a moment to see if your problem has already been reported, and if so, add a comment to the existing issue;
-    we will try to prioritize those that affect the most people.
+    we will try to prioritize those that affect the most people
+    and that are accompanied by small, runnable examples.
 
 -   Submitting feature requests (also at <https://github.com/plotly/plotly.py/issues>).
     Again, please add a comment to an existing issue if the feature you want has already been requested.
@@ -233,11 +234,11 @@ Once you have done that,
 run the `updateplotlyjs` command:
 
 ```bash
-python commands.py updateplotlyjs
+python bin/updatejs.py
 ```
 
 This downloads new versions of `plot-schema.json` and `plotly.min.js` from the `plotly/plotly.js` GitHub repository
-and places them in `plotly/package_data`.
+and places them in `resources` and `plotly/package_data` respectively.
 It then regenerates all of the `graph_objs` classes based on the new schema.
 
 ### Using a Development Branch of Plotly.js
@@ -246,7 +247,8 @@ If your development branch is in [the plotly.js repository](https://github.com/p
 you can update to development versions of `plotly.js` with this command:
 
 ```bash
-python commands.py updateplotlyjsdev --devrepo reponame --devbranch branchname
+# FIXME commands.py didn't provide --devrepo or --devbranch
+python bin/updatejs.py --dev --devrepo reponame --devbranch branchname
 ```
 
 This fetches the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`.
@@ -269,5 +271,6 @@ You can then run the following command
 *in your local plotly.py repository*:
 
 ```bash
-python commands.py updateplotlyjsdev --local /path/to/your/plotly.js/
+# FIXME: commands.py didn't provide --local
+python bin/updatejs.py --dev --local /path/to/your/plotly.js/
 ```

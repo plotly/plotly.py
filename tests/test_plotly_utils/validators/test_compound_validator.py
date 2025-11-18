@@ -1,6 +1,6 @@
 import pytest
 from _plotly_utils.basevalidators import CompoundValidator
-from plotly.graph_objs.scatter import Marker
+from plotly.graph_objects.scatter import Marker
 
 
 # Fixtures
@@ -56,7 +56,7 @@ def test_rejection_value(validator):
 
     assert (
         "Invalid property specified for object of type "
-        "plotly.graph_objs.scatter.Marker: 'bogus'" in str(validation_failure.value)
+        "plotly.graph_objects.scatter.Marker: 'bogus'" in str(validation_failure.value)
     )
 
 

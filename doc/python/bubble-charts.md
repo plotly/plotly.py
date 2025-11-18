@@ -1,44 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.7
-  plotly:
-    description: How to make bubble charts in Python with Plotly.
-    display_as: basic
-    language: python
-    layout: base
-    name: Bubble Charts
-    order: 5
-    page_type: u-guide
-    permalink: python/bubble-charts/
-    redirect_from: python/bubble-charts-tutorial/
-    thumbnail: thumbnail/bubble.jpg
+description: How to make bubble charts in Python with Plotly.
+redirect_from: python/bubble-charts-tutorial/
 ---
-
 ## Bubble chart with plotly.express
 
-A [bubble chart](https://en.wikipedia.org/wiki/Bubble_chart) is a scatter plot in which a third dimension of the data is shown through the size of markers. For other types of scatter plot, see the [scatter plot documentation](https://plotly.com/python/line-and-scatter/).
+A [bubble chart](https://en.wikipedia.org/wiki/Bubble_chart) is a scatter plot in which a third dimension of the data is shown through the size of markers. For other types of scatter plot, see the [scatter plot documentation](line-and-scatter.md).
 
-We first show a bubble chart example using Plotly Express. [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The size of markers is set from the dataframe column given as the `size` parameter.
+We first show a bubble chart example using Plotly Express. [Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md). The size of markers is set from the dataframe column given as the `size` parameter.
 
 ```python
 import plotly.express as px
@@ -52,7 +20,7 @@ fig.show()
 
 ## Bubble Chart with plotly.graph_objects
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/), and define the size of markers to create a bubble chart. All of the available options are described in the scatter section of the reference page: https://plotly.com/python/reference#scatter.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](graph-objects.md), and define the size of markers to create a bubble chart. All of the available options are described in the [full reference for `go.Scatter`](reference/graph_objects/Scatter.md).
 
 ### Simple Bubble Chart
 
@@ -91,8 +59,8 @@ fig.show()
 
 To scale the bubble size, use the attribute `sizeref`. We recommend using the following formula to calculate a `sizeref` value:<br>
 `sizeref = 2. * max(array of size values) / (desired maximum marker size ** 2)`<br>
-Note that setting 'sizeref' to a value greater than 1, decreases the rendered marker sizes, while setting 'sizeref' to less than 1, increases the rendered marker sizes. See https://plotly.com/python/reference/scatter/#scatter-marker-sizeref for more information.
-Additionally, we recommend setting the sizemode attribute: https://plotly.com/python/reference/scatter/#scatter-marker-sizemode to area.
+Note that setting 'sizeref' to a value greater than 1, decreases the rendered marker sizes, while setting 'sizeref' to less than 1, increases the rendered marker sizes. See the [full reference for `scatter.Marker.sizeref`](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizeref) for more information.
+Additionally, we recommend setting the sizemode attribute [here](reference/graph_objects/scatter-package/Marker.md#plotly.graph_objects.scatter.Marker.sizemode) to area.
 
 ```python
 import plotly.graph_objects as go
@@ -222,4 +190,4 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/scatter/ for more information and chart attribute options!
+See the [full reference for Scatter](reference/graph_objects/Scatter.md) for more information and chart attribute options!

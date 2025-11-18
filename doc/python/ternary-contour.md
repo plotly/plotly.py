@@ -1,44 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.6.7
-  plotly:
-    description: How to make Ternary Contour Plots in Python with plotly
-    display_as: scientific
-    language: python
-    layout: base
-    name: Ternary contours
-    order: 18
-    page_type: u-guide
-    permalink: python/ternary-contour/
-    thumbnail: thumbnail/ternary-contour.jpg
+description: How to make Ternary Contour Plots in Python with plotly
 ---
-
 ## Ternary contour plots
 
 
 A ternary contour plots represents isovalue lines of a quantity defined inside a [ternary diagram](https://en.wikipedia.org/wiki/Ternary_plot), i.e. as a function of three variables which sum is constant. Coordinates of the ternary plot often correspond to concentrations of three species, and the quantity represented as contours is some property (e.g., physical, chemical, thermodynamical) varying with the composition.
 
-For ternary contour plots, use the [figure factory](/python/figure-factories/) called ``create_ternary_contour``. The figure factory interpolates between given data points in order to compute the contours.
+For ternary contour plots, use the [figure factory](figure-factories.md) called ``create_ternary_contour``. The figure factory interpolates between given data points in order to compute the contours.
 
 Below we represent an example from metallurgy, where the mixing enthalpy is represented as a contour plot for aluminum-copper-yttrium (Al-Cu-Y) alloys.
 
@@ -150,4 +118,4 @@ fig.show()
 
 #### Reference
 
-For more info on `ff.create_ternary_contour()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_ternary_contour.html)
+For more info on `ff.create_ternary_contour()`, see the [full function reference](/reference/figure-factory.md#plotly.figure_factory.create_ternary_contour)

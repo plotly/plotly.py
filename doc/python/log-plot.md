@@ -1,43 +1,12 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.12.4
-  plotly:
-    description: How to make Log plots in Python with Plotly.
-    display_as: scientific
-    language: python
-    layout: base
-    name: Log Plots
-    order: 5
-    permalink: python/log-plot/
-    redirect_from: python/log-plots/
-    thumbnail: thumbnail/log.jpg
+description: How to make Log plots in Python with Plotly.
+redirect_from: python/log-plots/
 ---
-
-This page shows examples of how to configure [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots) to follow a logarithmic rather than linear progression. [Configuring gridlines, ticks, tick labels and axis titles](/python/axes/) on logarithmic axes is done the same was as with [linear axes](/python/axes/).
+This page shows examples of how to configure [2-dimensional Cartesian axes](figure-structure.md#2d-cartesian-trace-types-and-subplots) to follow a logarithmic rather than linear progression. [Configuring gridlines, ticks, tick labels and axis titles](axes.md) on logarithmic axes is done the same was as with [linear axes](axes.md).
 
 ### Logarithmic Axes with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](plotly-express.md) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](px-arguments.md) and produces [easy-to-style figures](styling-plotly-express.md).
 
 All of Plotly Express' 2-D Cartesian functions include the `log_x` and `log_y` keyword arguments, which can be set to `True` to set the corresponding axis to a logarithmic scale:
 
@@ -64,7 +33,7 @@ fig.show()
 
 _new in 5.8_
 
-You can position and style minor ticks using `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-minor) for full details on the accepted keys in this dict.
+You can position and style minor ticks using `minor`. This takes a `dict` of properties to apply to minor ticks. See the [figure reference](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.minor) for full details on the accepted keys in this dict.
 
 In this example we set the tick length with `ticklen`, add the ticks on the inside with `ticks="inside"`, and turn grid lines on with `howgrid=True`.
 
@@ -114,7 +83,7 @@ fig.show()
 
 ### Logarithmic Axes with Graph Objects
 
-If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Figure` class from `plotly.graph_objects`](/python/graph-objects/).
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Figure` class from `plotly.graph_objects`](graph-objects.md).
 
 ```python
 import plotly.graph_objects as go
@@ -148,4 +117,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter) or https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-type for more information and chart attribute options!
+See [function reference for `px.(scatter)`](reference/plotly-express.md#plotly.express.scatter) or [`go.layout.XAxis.type`](reference/graph_objects/layout-package/XAxis.md#plotly.graph_objects.layout.XAxis.type) for more information and chart attribute options!

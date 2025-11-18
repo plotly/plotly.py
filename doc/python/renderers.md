@@ -1,39 +1,7 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.17.2
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.12.0
-  plotly:
-    description: Displaying Figures using Plotly's Python graphing library
-    display_as: file_settings
-    language: python
-    layout: base
-    name: Displaying Figures
-    order: 3
-    page_type: example_index
-    permalink: python/renderers/
-    redirect_from: python/offline/
-    thumbnail: thumbnail/displaying-figures.png
+description: Displaying Figures using Plotly's Python graphing library
+redirect_from: python/offline/
 ---
-
 # Displaying Figures
 
 Plotly's Python graphing library, `plotly.py`, gives you a wide range of options for how and where to display your figures.
@@ -43,9 +11,9 @@ In general, there are six different approaches you can take in order to display 
  - Using the `renderers` framework in the context of a script or notebook (the main topic of this page)
  - Using [Plotly Studio](https://plotly.com/studio?utm_medium=graphing_libraries&utm_content=python_renderers) to generate charts using natural language
  - Using [Dash](https://dash.plot.ly) in a web app context
- - Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
- - By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
- - By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
+ - Using a [`FigureWidget` rather than a `Figure`](figurewidget.md) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
+ - By [exporting to an HTML file](interactive-html-export.md) and loading that file in a browser immediately or later
+ - By [rendering the figure to a static image file using Kaleido](static-image-export.md) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
 
 Each of the first four approaches is discussed below.
 
@@ -73,7 +41,9 @@ fig = go.Figure(
 fig
 ```
 
-> To be precise, figures will display themselves using the current default renderer when the two following conditions are true. First, the last expression in a cell must evaluate to a figure. Second, `plotly.py` must be running from within an `IPython` kernel.
+!!! note
+
+    To be precise, figures will display themselves using the current default renderer when the two following conditions are true. First, the last expression in a cell must evaluate to a figure. Second, `plotly.py` must be running from within an `IPython` kernel.
 
 **In many contexts, an appropriate renderer will be chosen automatically and you will not need to perform any additional configuration.** These contexts include the classic [Jupyter Notebook](https://jupyter.org/), [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), [Visual Studio Code notebooks](https://code.visualstudio.com/docs/python/jupyter-support), [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb), [Kaggle](https://www.kaggle.com/kernels) notebooks, [Azure](https://notebooks.azure.com/) notebooks, and the [Python interactive shell](https://www.python.org/shell/).
 
@@ -81,7 +51,9 @@ Additional contexts are supported by choosing a compatible renderer including [Q
 
 Next, we will show how to configure the default renderer.  After that, we will describe all of the built-in renderers and discuss why you might choose to use each one.
 
-> Note: The `renderers` framework is a generalization of the `plotly.offline.iplot` and `plotly.offline.plot` functions that were the recommended way to display figures prior to `plotly.py` version 4.  These functions have been reimplemented using the `renderers` framework and are still supported for backward compatibility, but they will not be discussed here.
+!!! note
+
+    The `renderers` framework is a generalization of the `plotly.offline.iplot` and `plotly.offline.plot` functions that were the recommended way to display figures prior to `plotly.py` version 4.  These functions have been reimplemented using the `renderers` framework and are still supported for backward compatibility, but they will not be discussed here.
 
 
 #### Setting The Default Renderer
@@ -93,6 +65,10 @@ pio.renderers
 ```
 
 The default renderer that you see when you display `pio.renderers` might be different than what is shown here.  This is because `plotly.py` attempts to autodetect an appropriate renderer at startup.  You can change the default renderer by assigning the name of an available renderer to the `pio.renderers.default` property.  For example, to switch to the `'browser'` renderer, which opens figures in a tab of the default web browser, you would run the following.
+
+!!! note
+
+    Default renderers persist for the duration of a single session, but they do not persist across sessions. If you are working in an `IPython` kernel, this means that default renderers will persist for the life of the kernel, but they will not persist across kernel restarts.
 
 ```python
 import plotly.io as pio
@@ -126,7 +102,9 @@ This renderer is intended for use in the classic [Jupyter Notebook](https://jupy
 
 This renderer is a good choice for notebooks that will be exported to HTML files (Either using [nbconvert](https://nbconvert.readthedocs.io/en/latest/) or the "Download as HTML" menu action) because the exported HTML files will work without an internet connection.
 
-> Note: Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
+!!! note
+
+    Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
 
 ###### `notebook_connected`
 This renderer is the same as `notebook` renderer, except the plotly.js JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an internet connection is required in order to display figures that are rendered this way.
@@ -142,19 +120,25 @@ This is a custom renderer for use with [Google Colab](https://colab.research.goo
 ###### `browser`
 This renderer will open a figure in a browser tab using the default web browser.  This renderer can only be used when the Python kernel is running locally on the same machine as the web browser, so it is not compatible with Jupyter Hub or online notebook services.
 
-> Implementation Note 1: In this context, the "default browser" is the browser that is chosen by the Python [`webbrowser`](https://docs.python.org/3.7/library/webbrowser.html) module.
+!!! note
 
-> Implementation Note 2: The `browser` renderer works by setting up a single use local webserver on a local port. Since the webserver is shut down as soon as the figure is served to the browser, the figure will not be restored if the browser is refreshed.
+    Implementation Note 1: In this context, the "default browser" is the browser that is chosen by the Python [`webbrowser`](https://docs.python.org/3.7/library/webbrowser.html) module.
+
+!!! note
+
+    Implementation Note 2: The `browser` renderer works by setting up a single use local webserver on a local port. Since the webserver is shut down as soon as the figure is served to the browser, the figure will not be restored if the browser is refreshed.
 
 ###### `firefox`, `chrome`, and `chromium`
 These renderers are the same as the `browser` renderer, but they force the use of a particular browser.
 
 ###### `iframe` and `iframe_connected`
-These renderers write figures out as standalone HTML files and then display [`iframe`](https://www.w3schools.com/html/html_iframe.asp) elements that reference these HTML files. The `iframe` renderer will include the plotly.js JavaScript bundle in each HTML file that is written, while the `iframe_connected` renderer includes only a reference to an online CDN location from which to load plotly.js.  Consequently, the `iframe_connected` renderer outputs files that are smaller than the `iframe` renderer, but it requires an internet connection while the `iframe` renderer can operate offline.
+These renderers write figures out as standalone HTML files and then display [`iframe`](https://www.w3schools.com/html/html_iframe.asp) elements that reference these HTML files. The `iframe` renderer will include the plotly.js JavaScript bundle in each HTML file that is written, while the `iframe_connected` renderer includes only a reference to an online CDN location from which to load plotly.js.  Consequently, the `iframe_connected` renderer outputs files that are smaller than the `iframe` renderer, but it requires an Internet connection while the `iframe` renderer can operate offline.
 
-This renderer may be useful when working with notebooks that contain lots of large figures.  When using the `notebook` or `notebook_connected` renderer, all of the data for all of the figures in a notebook are stored inline in the notebook itself. If this would result in a prohibitively large notebook size, an `iframe` or `iframe_connected` renderer could be used instead. With the `iframe` renderers, the figure data are stored in the individual HTML files rather than in the notebook itself, resulting in a smaller notebook size.
+This renderer may be useful when working with notebooks than contain lots of large figures.  When using the `notebook` or `notebook_connected` renderer, all of the data for all of the figures in a notebook are stored inline in the notebook itself. If this would result in a prohibitively large notebook size, an `iframe` or `iframe_connected` renderer could be used instead. With the `iframe` renderers, the figure data are stored in the individual HTML files rather than in the notebook itself, resulting in a smaller notebook size.
 
-> Implementation Note: The HTML files written by the `iframe` renderers are stored in a subdirectory named `iframe_figures`.  The HTML files are given names based on the execution number of the notebook cell that produced the figure. This means that each time a notebook kernel is restarted, any prior HTML files will be overwritten.  This also means that you should not store multiple notebooks using an `iframe` renderer in the same directory, because this could result in figures from one notebook overwriting figures from another notebook.
+!!! note
+
+    Implementation Note: The HTML files written by the `iframe` renderers are stored in a subdirectory named `iframe_figures`.  The HTML files are given names based on the execution number of the notebook cell that produced the figure. This means that each time a notebook kernel is restarted, any prior HTML files will be overwritten.  This also means that you should not store multiple notebooks using an `iframe` renderer in the same directory, because this could result in figures from one notebook overwriting figures from another notebook.
 
 
 ###### `plotly_mimetype`
@@ -165,7 +149,7 @@ The `plotly_mimetype` renderer creates a specification of the figure (called a M
 These are aliases for `plotly_mimetype` since this renderer is a good choice when working in JupyterLab, nteract, and the Visual Studio Code notebook interface. Note that in VSCode Notebooks, the version of Plotly.js that is used to render is provided by the [vscode-python extension](https://code.visualstudio.com/docs/languages/python) and often trails the latest version by several weeks, so the latest features of `plotly` may not be available in VSCode right away. The situation is similar for Nteract.
 
 ##### Static Image Renderers
-A set of renderers is provided for displaying figures as static images. See the [Static Image Export](https://plotly.com/python/static-image-export/) page for more information on getting set up.
+A set of renderers is provided for displaying figures as static images. See the [Static Image Export](static-image-export.md) page for more information on getting set up.
 
 ###### `png`, `jpeg`, and `svg`
 These renderers display figures as static `.png`, `.jpeg`, and `.svg` files, respectively.  These renderers are useful for user interfaces that do not support inline HTML output, but do support inline static images.  Examples include the [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and the PyCharm [notebook interface](https://www.jetbrains.com/help/pycharm/jupyter-notebook-support.html).
@@ -247,11 +231,15 @@ HTML('<div style="text-align: center;"><iframe src="https://www.youtube.com/embe
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/?utm_medium=graphing_libraries&utm_content=python_renderers) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/?utm_medium=graphing_libraries&utm_content=python_renderers">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/?utm_medium=graphing_libraries&utm_content=python_renderers">Plotly Cloud</a>.**
 
 
-```python hide_code=true
+<pre hide_code="true">
+```python
 from IPython.display import IFrame
 snippet_url = 'https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/'
 IFrame(snippet_url + 'renderers', width='100%', height=1200)
 ```
+</pre>
+
+<iframe src="https://python-docs-dash-snippets.herokuapp.com/python-docs-dash-snippets/renderers" width="100%" height="1200" style="border:none;"></iframe>
 
 <div style="font-size: 0.9em;"><div style="width: calc(100% - 30px); box-shadow: none; border: thin solid rgb(229, 229, 229);"><div style="padding: 5px;"><div><p><strong>Sign up for Dash Club</strong> → Free cheat sheets plus updates from Chris Parmer and Adam Schroeder delivered to your inbox every two months. Includes tips and tricks, community apps, and deep dives into the Dash architecture.
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
@@ -260,17 +248,17 @@ IFrame(snippet_url + 'renderers', width='100%', height=1200)
 ## Displaying Figures Using `ipywidgets`
 Plotly figures can be displayed in [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) contexts using `plotly.graph_objects.FigureWidget` objects.  `FigureWidget` is a figure graph object (just like `plotly.graph_objects.Figure`), so you can add traces to it and update it just like a regular `Figure`.  But `FigureWidget` is also an `ipywidgets` object, which means that you can display it alongside other `ipywidgets` to build user interfaces right in the notebook.
 
-See the [Plotly FigureWidget Overview](https://plot.ly/python/figurewidget/) for more information on integrating `plotly.py` figures with `ipywidgets`.
+See the [Plotly FigureWidget Overview](figurewidget.md) for more information on integrating `plotly.py` figures with `ipywidgets`.
 
 It is important to note that `FigureWidget` does not use the renderers framework discussed above, so you should not use the `plotly.io.show` function on `FigureWidget` objects.
 
 
 ## Performance
 
-No matter the approach chosen to display a figure, [the figure data structure](https://plotly.com/python/figure-structure/) is first (automatically, internally) serialized into a JSON string before being transferred from the Python context to the browser (or [to an HTML file first](https://plotly.com/python/interactive-html-export/) or [to Kaleido for static image export](https://plotly.com/python/static-image-export/)).
+No matter the approach chosen to display a figure, [the figure data structure](figure-structure.md) is first (automatically, internally) serialized into a JSON string before being transferred from the Python context to the browser (or [to an HTML file first](interactive-html-export.md) or [to Kaleido for static image export](static-image-export.md)).
 
 *New in v5.0*
 
 The default JSON serialization mechanism can be slow for figures with many data points or with large `numpy` arrays or data frames. **If [the `orjson` package](https://github.com/ijl/orjson) is installed**, `plotly` will use that instead of the built-in `json` package, which can lead to **5-10x** speedups for large figures.
 
-Once a figure is serialized to JSON, it must be rendered by a browser, either immediately in the user's browser, at some later point if the figure is exported to HTML, or immediately in Kaleido's internal headless browser for static image export. Rendering time is generally proportional to the total number of data points in the figure, the number of traces and the number of subplots. In situations where rendering performance is slow, we recommend considering [the use of `plotly` WebGL traces](/python/webgl-vs-svg/) to exploit GPU-accelerated rendering in the browser, or [using the Datashader library to do Python-side rendering](/python/datashader/) before using `px.imshow()` to render the figure.
+Once a figure is serialized to JSON, it must be rendered by a browser, either immediately in the user's browser, at some later point if the figure is exported to HTML, or immediately in Kaleido's internal headless browser for static image export. Rendering time is generally proportional to the total number of data points in the figure, the number of traces and the number of subplots. In situations where rendering performance is slow, we recommend considering [the use of `plotly` WebGL traces](../webgl-vs-svg/) to exploit GPU-accelerated rendering in the browser, or [using the Datashader library to do Python-side rendering](../datashader/) before using `px.imshow()` to render the figure.

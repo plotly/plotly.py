@@ -1,8 +1,8 @@
 import copy
 from unittest import TestCase
 
-import plotly.graph_objs as go
-from plotly.graph_objs import Figure
+import plotly.graph_objects as go
+from plotly.graph_objects import Figure
 from plotly.subplots import make_subplots
 
 

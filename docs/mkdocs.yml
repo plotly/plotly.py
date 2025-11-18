@@ -1,0 +1,430 @@
+site_name: "Plotly.py"
+site_url: 'https://plotly.com/python/'
+repo_url: https://github.com/plotly/plotly.py
+repo_name: plotly/plotly.py
+docs_dir: pages
+site_dir: build
+
+validation:
+  absolute_links: relative_to_docs
+  anchors: info
+  unrecognized_links: info
+  not_found: info
+
+plugins:
+  - search
+  - redirects:
+      redirect_maps:
+          'mapbox-layers.md': 'tile-map-layers.md'
+          'datashader.md': 'performance.md'
+          'webgl-vs-svg.md': 'performance.md'
+          'filled_area_on_mapbox.md' : 'filled-area-tile-maps.md'
+  # - gen-files:
+  #     scripts:
+  #       - bin/generate_graph_objects_docs.py
+        # - bin/generate_reference_pages.py
+  # - literate-nav:
+  #     nav_file: SUMMARY.md
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            preload_modules:
+              - _plotly_utils
+            docstring_style: numpy
+            show_source: false
+            show_root_heading: true
+            show_root_toc_entry: true
+            merge_init_into_class: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            separate_signature: true
+
+extra_css:
+  - css/plotly-styles.css
+  - https://docs.plotly.com/css/plotly-style.css
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+- Home: index.md
+- Quick Reference:
+  - Getting Started: getting-started.md
+  - Is Plotly Free?: is-plotly-free.md
+  - Changelog: https://github.com/plotly/plotly.py/releases
+  - Plotly Community Forum: https://community.plotly.com
+  - Dash: https://dash.plotly.com
+- Examples:
+  - Fundamentals:
+    - Overview: plotly-fundamentals.md
+    - The Figure Data Structure: figure-structure.md
+    - Creating and Updating Figures: creating-and-updating-figures.md
+    - Displaying Figures: renderers.md
+    - Plotly Express: plotly-express.md
+    - Analytical Apps with Dash: https://dash.plotly.com/
+    - Static Image Export: static-image-export.md
+    - Theming and templates: templates.md
+    - Changes in Version 6: v6-changes.md
+    - Orca Management: orca-management.md
+    - Configuration: configuration-options.md
+    - Setting Graph Size: setting-graph-size.md
+    - Formatting Ticks: tick-formatting.md
+    - Setting the Font, Title, Legend Entries, and Axis Titles: figure-labels.md
+    - Axes: axes.md
+    - Legends: legend.md
+    - Multiple Axes: multiple-axes.md
+    - Subplots: subplots.md
+    - Multiple Chart Types: graphing-multiple-chart-types.md
+    - Plotly Express Arguments: px-arguments.md
+    - Styling Markers: marker-style.md
+    - Continuous Color Scales and Color Bars: colorscales.md
+    - Text and Annotations: text-and-annotations.md
+    - Hover Text and Formatting: hover-text-and-formatting.md
+    - Images: images.md
+    - Shapes: shapes.md
+    - IPython vs Python: ipython-vs-python.md
+    - Troubleshooting: troubleshooting.md
+    - Built-in Continuous Color Scales: builtin-colorscales.md
+    - Discrete Colors: discrete-color.md
+    - Styling Plotly Express Figures: styling-plotly-express.md
+    - Interactive HTML Export: interactive-html-export.md
+    - Pandas Plotting Backend: pandas-backend.md
+    - Figure Factories: figure-factories.md
+    - Plotly Express Wide-Form Support: wide-form.md
+    - Graph Objects: graph-objects.md
+    - Introspecting Figures: figure-introspection.md
+    - Horizontal and Vertical Lines and Rectangles: horizontal-vertical-shapes.md
+    - Selections: selections.md
+    - Version 4 Migration Guide: v4-migration.md
+    - Static Image Generation Changes in Plotly.py 6.1: static-image-generation-migration.md
+    - Supported CSS Colors: supported-colors.md
+  - Basic Charts:
+    - Overview: basic-charts.md
+    - Scatter Plots: line-and-scatter.md
+    - Line Charts: line-charts.md
+    - Bar Charts: bar-charts.md
+    - Pie Charts: pie-charts.md
+    - Bubble Charts: bubble-charts.md
+    - Dot Plots: dot-plots.md
+    - Filled Area Plots: filled-area-plots.md
+    - Horizontal Bar Charts: horizontal-bar-charts.md
+    - Gantt Charts: gantt.md
+    - Sunburst Charts: sunburst-charts.md
+    - Tables: table.md
+    - Sankey Diagram: sankey-diagram.md
+    - Treemap Charts: treemaps.md
+    - High Performance Visualization: performance.md
+    - Figure Factory Tables: figure-factory-table.md
+    - Categorical Axes: categorical-axes.md
+    - Icicle Charts: icicle-charts.md
+    - Patterns, Hatching, Texture: pattern-hatching-texture.md
+    - Dumbbell Plots: dumbbell-plots.md
+  - Statistical Charts:
+    - Overview: statistical-charts.md
+    - Error Bars: error-bars.md
+    - Box Plots: box-plots.md
+    - Histograms: histograms.md
+    - Distplots: distplot.md
+    - 2D Histograms: 2D-Histogram.md
+    - Scatterplot Matrix: splom.md
+    - Facet and Trellis Plots: facet-plots.md
+    - Parallel Categories Diagram: parallel-categories-diagram.md
+    - Tree-plots: tree-plots.md
+    - Violin Plots: violin.md
+    - 2D Histogram Contour: 2d-histogram-contour.md
+    - Linear and Non-Linear Trendlines: linear-fits.md
+    - Marginal Distribution Plots: marginal-plots.md
+    - Strip Charts: strip-charts.md
+    - Continuous Error Bands: continuous-error-bars.md
+    - Empirical Cumulative Distribution Plots: ecdf-plots.md
+  - Scientific Charts:
+    - Overview: scientific-charts.md
+    - Contour Plots: contour-plots.md
+    - Heatmaps: heatmaps.md
+    - Imshow: imshow.md
+    - Ternary Plots: ternary-plots.md
+    - Log Plots: log-plot.md
+    - Dendrograms: dendrogram.md
+    - Annotated Heatmaps: annotated-heatmap.md
+    - Ternary Overlay: ternary-scatter-contour.md
+    - Parallel Coordinates Plot: parallel-coordinates-plot.md
+    - Quiver Plots: quiver-plots.md
+    - Streamline Plots: streamline-plots.md
+    - Network Graphs: network-graphs.md
+    - Carpet Plots: carpet-plot.md
+    - Carpet Contour Plot: carpet-contour.md
+    - Carpet Scatter Plot: carpet-scatter.md
+    - Polar Charts: polar-chart.md
+    - Radar Charts: radar-chart.md
+    - Ternary contours: ternary-contour.md
+    - Wind Rose and Polar Bar Charts: wind-rose-charts.md
+    - Smith Charts: smith-charts.md
+  - Financial Charts:
+    - Overview: financial-charts.md
+    - Time Series and Date Axes: time-series.md
+    - Candlestick Charts: candlestick-charts.md
+    - Waterfall Charts: waterfall-charts.md
+    - Funnel Chart: funnel-charts.md
+    - OHLC Charts: ohlc-charts.md
+    - Indicators: indicator.md
+    - Gauge Charts: gauge-charts.md
+    - Bullet Charts: bullet-charts.md
+  - Maps:
+    - Overview: maps.md
+    - MapLibre Migration: mapbox-to-maplibre.md
+    - Tile Choropleth Maps: tile-county-choropleth.md
+    - Lines on Tile Maps: lines-on-tile-maps.md
+    - Filled Area on Tile Maps: filled-area-tile-maps.md
+    - Bubble Maps: bubble-maps.md
+    - Density Heatmap: density-heatmaps.md
+    - Lines on Maps: lines-on-maps.md
+    - Choropleth Maps: choropleth-maps.md
+    - Tile Map Layers: tile-map-layers.md
+    - Scatter Plots on Tile Maps: tile-scatter-maps.md
+    - USA County Choropleth Maps: county-choropleth.md
+    - Scatter Plots on Maps: scatter-plots-on-maps.md
+    - Map Configuration and Styling on Geo Maps: map-configuration.md
+    - Hexbin Mapbox: hexbin-mapbox.md
+  - AI & ML:
+    - Overview: ai-ml.md
+    - ML Regression: ml-regression.md
+    - kNN Classification: ml-knn.md
+    - ROC and PR Curves: ml-roc-pr.md
+    - PCA Visualization: ml-pca.md
+    - AI/ML Apps with Dash: https://plotly.com/building-machine-learning-web-apps-in-python/
+    - t-SNE and UMAP projections: ml-tsne-umap-projections.md
+  - Visualizing Biological Data:
+    - Overview: bio.md
+    - Volcano Plot: volcano-plot.md
+    - Manhattan Plot: manhattan-plot.md
+    - Clustergram: clustergram.md
+    - Alignment Chart: alignment-chart.md
+  - 3D Charts:
+    - Overview: 3d-charts.md
+    - 3D Axes: 3d-axes.md
+    - 3D Scatter Plots: 3d-scatter-plots.md
+    - 3D Surface Plots: 3d-surface-plots.md
+    - 3D Subplots: 3d-subplots.md
+    - 3D Camera Controls: 3d-camera-controls.md
+    - 3D Bubble Charts: 3d-bubble-charts.md
+    - 3D Line Plots: 3d-line-plots.md
+    - Trisurf Plots: trisurf.md
+    - 3D Mesh Plots: 3d-mesh.md
+    - 3D Isosurface Plots: 3d-isosurface-plots.md
+    - 3D Volume Plots: 3d-volume.md
+    - 3D Cone Plots: cone-plot.md
+    - 3D Streamtube Plots: streamtube-plot.md
+  - Subplots:
+    - Overview: subplot-charts.md
+    - Mixed Subplots: mixed-subplots.md
+    - Map Subplots: map-subplots-and-small-multiples.md
+    - Table and Chart Subplots: table-subplots.md
+    - Figure Factory Subplots: figure-factory-subplots.md
+  - Jupyter Widgets Interaction:
+    - Overview: chart-events.md
+    - Plotly FigureWidget Overview: figurewidget.md
+    - Jupyter Lab with FigureWidget: jupyter-lab-tools.md
+    - Interactive Data Analysis with FigureWidget ipywidgets: figurewidget-app.md
+    - Click Events: click-events.md
+  - Animations:
+    - Overview: plotly-animations.md
+    - Intro to Animations: animations.md
+  - Controls:
+    - Overview: controls.md
+    - Custom Buttons: custom-buttons.md
+    - Sliders: sliders.md
+    - Dropdown Menus: dropdowns.md
+    - Range Slider and Selector: range-slider.md
+  - Advanced Options:
+    - Overview: advanced-opt.md
+    - Plot CSV Data: plot-data-from-csv.md
+    - Random Walk: random-walk.md
+    - Peak Finding: peak-finding.md
+    - Smoothing: smoothing.md
+    - LaTeX: LaTeX.md
+- API Reference:
+    - Module Overview: python-api-reference.md
+    - plotly.colors: reference/colors.md
+    - plotly.data: reference/data.md
+    - plotly.express: reference/plotly-express.md
+    - plotly.figure_factory: reference/figure-factory.md
+    - plotly.graph_objects:
+      - Overview: reference/graph_objects/index.md
+      - Core Objects:
+        - Figure: reference/graph_objects/Figure.md
+        - Layout: reference/graph_objects/Layout.md
+      - Simple Traces:
+        - Bar: reference/graph_objects/Bar.md
+        - Contour: reference/graph_objects/Contour.md
+        - Heatmap: reference/graph_objects/Heatmap.md
+        - Image: reference/graph_objects/Image.md
+        - Pie: reference/graph_objects/Pie.md
+        - Scatter: reference/graph_objects/Scatter.md
+        - Scatter GL: reference/graph_objects/Scattergl.md
+        - Table: reference/graph_objects/Table.md
+      - Distribution Traces:
+        - Box: reference/graph_objects/Box.md
+        - Histogram: reference/graph_objects/Histogram.md
+        - Histogram 2D: reference/graph_objects/Histogram2d.md
+        - Histogram 2D Contour: reference/graph_objects/Histogram2dContour.md
+        - Violin: reference/graph_objects/Violin.md
+      - Finance Traces:
+        - Candlestick: reference/graph_objects/Candlestick.md
+        - Funnel: reference/graph_objects/Funnel.md
+        - Funnel Area: reference/graph_objects/Funnelarea.md
+        - Indicator: reference/graph_objects/Indicator.md
+        - OHLC: reference/graph_objects/Ohlc.md
+        - Waterfall: reference/graph_objects/Waterfall.md
+      - 3D Traces:
+        - Cone: reference/graph_objects/Cone.md
+        - Isosurface: reference/graph_objects/Isosurface.md
+        - Mesh 3D: reference/graph_objects/Mesh3d.md
+        - Scatter 3D: reference/graph_objects/Scatter3d.md
+        - Streamtube: reference/graph_objects/Streamtube.md
+        - Surface: reference/graph_objects/Surface.md
+        - Volume: reference/graph_objects/Volume.md
+      - Map Traces:
+        - Choropleth: reference/graph_objects/Choropleth.md
+        - Choropleth Map: reference/graph_objects/Choroplethmap.md
+        - Choropleth Mapbox: reference/graph_objects/Choroplethmapbox.md
+        - Density Map: reference/graph_objects/Densitymap.md
+        - Density Mapbox: reference/graph_objects/Densitymapbox.md
+        - Scatter Geo: reference/graph_objects/Scattergeo.md
+        - Scatter Map: reference/graph_objects/Scattermap.md
+        - Scatter Mapbox: reference/graph_objects/Scattermapbox.md
+      - Specialized Traces:
+        - Barpolar: reference/graph_objects/Barpolar.md
+        - Carpet: reference/graph_objects/Carpet.md
+        - Contour Carpet: reference/graph_objects/Contourcarpet.md
+        - Icicle: reference/graph_objects/Icicle.md
+        - Parallel Categories: reference/graph_objects/Parcats.md
+        - Parallel Coordinates: reference/graph_objects/Parcoords.md
+        - Sankey: reference/graph_objects/Sankey.md
+        - Scatter Carpet: reference/graph_objects/Scattercarpet.md
+        - Scatter Polar: reference/graph_objects/Scatterpolar.md
+        - Scatter Polar GL: reference/graph_objects/Scatterpolargl.md
+        - Scatter Smith: reference/graph_objects/Scattersmith.md
+        - Scatter Ternary: reference/graph_objects/Scatterternary.md
+        - SPLOM: reference/graph_objects/Splom.md
+        - Sunburst: reference/graph_objects/Sunburst.md
+        - Treemap: reference/graph_objects/Treemap.md
+      - Other Classes:
+        - Figure Widget: reference/graph_objects/FigureWidget.md
+        - Frame: reference/graph_objects/Frame.md
+      - Modules:
+        - bar: reference/graph_objects/bar-package/index.md
+        - barpolar: reference/graph_objects/barpolar-package/index.md
+        - box: reference/graph_objects/box-package/index.md
+        - candlestick: reference/graph_objects/candlestick-package/index.md
+        - carpet: reference/graph_objects/carpet-package/index.md
+        - choropleth: reference/graph_objects/choropleth-package/index.md
+        - choroplethmap: reference/graph_objects/choroplethmap-package/index.md
+        - choroplethmapbox: reference/graph_objects/choroplethmapbox-package/index.md
+        - cone: reference/graph_objects/cone-package/index.md
+        - contour: reference/graph_objects/contour-package/index.md
+        - contourcarpet: reference/graph_objects/contourcarpet-package/index.md
+        - densitymap: reference/graph_objects/densitymap-package/index.md
+        - densitymapbox: reference/graph_objects/densitymapbox-package/index.md
+        - funnel: reference/graph_objects/funnel-package/index.md
+        - funnelarea: reference/graph_objects/funnelarea-package/index.md
+        - heatmap: reference/graph_objects/heatmap-package/index.md
+        - histogram: reference/graph_objects/histogram-package/index.md
+        - histogram2d: reference/graph_objects/histogram2d-package/index.md
+        - histogram2dcontour: reference/graph_objects/histogram2dcontour-package/index.md
+        - icicle: reference/graph_objects/icicle-package/index.md
+        - image: reference/graph_objects/image-package/index.md
+        - indicator: reference/graph_objects/indicator-package/index.md
+        - isosurface: reference/graph_objects/isosurface-package/index.md
+        - layout: reference/graph_objects/layout-package/index.md
+        - mesh3d: reference/graph_objects/mesh3d-package/index.md
+        - ohlc: reference/graph_objects/ohlc-package/index.md
+        - parcats: reference/graph_objects/parcats-package/index.md
+        - parcoords: reference/graph_objects/parcoords-package/index.md
+        - pie: reference/graph_objects/pie-package/index.md
+        - sankey: reference/graph_objects/sankey-package/index.md
+        - scatter: reference/graph_objects/scatter-package/index.md
+        - scatter3d: reference/graph_objects/scatter3d-package/index.md
+        - scattercarpet: reference/graph_objects/scattercarpet-package/index.md
+        - scattergeo: reference/graph_objects/scattergeo-package/index.md
+        - scattergl: reference/graph_objects/scattergl-package/index.md
+        - scattermap: reference/graph_objects/scattermap-package/index.md
+        - scattermapbox: reference/graph_objects/scattermapbox-package/index.md
+        - scatterpolar: reference/graph_objects/scatterpolar-package/index.md
+        - scatterpolargl: reference/graph_objects/scatterpolargl-package/index.md
+        - scattersmith: reference/graph_objects/scattersmith-package/index.md
+        - scatterternary: reference/graph_objects/scatterternary-package/index.md
+        - splom: reference/graph_objects/splom-package/index.md
+        - streamtube: reference/graph_objects/streamtube-package/index.md
+        - sunburst: reference/graph_objects/sunburst-package/index.md
+        - surface: reference/graph_objects/surface-package/index.md
+        - table: reference/graph_objects/table-package/index.md
+        - treemap: reference/graph_objects/treemap-package/index.md
+        - violin: reference/graph_objects/violin-package/index.md
+        - volume: reference/graph_objects/volume-package/index.md
+        - waterfall: reference/graph_objects/waterfall-package/index.md
+    - plotly.io: reference/io.md
+    - plotly.subplots: reference/subplots.md
+- Project:
+  - license.md
+  - conduct.md
+  - plotly-contributing.md
+
+not_in_nav: |
+  reference/graph_objects/*-package/*
+
+theme:
+  name: "material"
+  custom_dir: "pages/overrides"
+  font:
+  text: Inter
+  features:
+    - navigation.sections
+    - content.code.copy
+    - content.code.annotate
+  logo: https://docs.plotly.com/assets/plotly_logo_square.png
+  favicon: https://dash.plotly.com/assets/favicon.ico
+  palette:
+    # Auto (follows system)
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+markdown_extensions:
+- def_list
+- attr_list
+- admonition
+- markdown_include.include:
+    base_path: docs
+- footnotes
+- pymdownx.highlight:
+    anchor_linenums: true
+    line_spans: __span
+    pygments_lang_class: true
+- pymdownx.inlinehilite
+- pymdownx.snippets
+- pymdownx.details
+- pymdownx.superfences
+- md_in_html
+- pymdownx.arithmatex:
+      generic: true
+
+exclude_docs: |
+  *~
+  dash.md
+  ml_apps.md
+  contributing.md

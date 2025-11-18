@@ -7,7 +7,7 @@ import requests
 import numpy as np
 import webbrowser
 
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.offline import get_plotlyjs
 from plotly.io._utils import plotly_cdn_url

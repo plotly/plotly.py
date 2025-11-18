@@ -1,39 +1,8 @@
 ---
-jupyter:
-  jupytext:
-    notebook_metadata_filter: all
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  plotly:
-    description: 3D Subplots in Plotly
-    display_as: 3d_charts
-    language: python
-    layout: base
-    name: 3D Subplots
-    order: 4
-    page_type: example_index
-    permalink: python/3d-subplots/
-    thumbnail: thumbnail/3d-subplots.jpg
+description: 3D Subplots in Plotly
 ---
 
-#### 3D Surface Subplots
+### 3D Surface Subplots
 
 ```python
 import plotly.graph_objects as go
@@ -79,7 +48,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Reference
+### Reference
 
 
-See https://plotly.com/python/subplots/ for more information regarding subplots!
+See the [subplots page](subplots.md) for more information regarding subplots!

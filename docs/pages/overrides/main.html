@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+
+{% block extrahead %}
+
+  {% set title = "in Python" %}
+  {% set description = config.site_description %}
+  {% if page and page.meta.description %}
+    {% set description = page.meta.description %}
+  {% endif %}
+  {% if page and page.meta and page.meta.title %}
+    {% set title = page.meta.title ~ " " ~ title %}
+  {% elif page and page.title and not page.is_homepage %}
+    {% set title = page.title | striptags ~ " " ~ title %}
+  {% endif %}
+
+  <!-- SEO Tags - title, meta_description -->
+  <title>{{title}}</title>
+  <!-- <meta name="description" content={{description}}>  -->
+
+  <!-- Bing tags -->
+      <meta name="msvalidate.01" content="D319859A832F9F1D15A7646E2A42150A" />
+  <!-- Facebook tags -->
+      <meta property="og:title" content="{{title}}"/>
+      <meta property="og:type" content="website"/>
+      <meta property="og:image" content="{% if page.imageurl %}{{page.imageurl}}{% else %}{% if page.thumbnail%}{{site.imgurl}}{{page.thumbnail}}{%else%}https://help.plot.ly/images/twitter-default.png{% endif %}{% endif %}">
+      <meta property="og:description" content="{{description}}"/>
+      <meta property="og:url" />
+      <meta property="fb:admins" content="1123751525"/>
+      <meta property="fb:admins" content="22418"/>
+
+  <!-- twitter tags -->
+      <meta name="twitter:card" content="photo" />
+      <meta name="twitter:title" content="{{title}}"/>
+      <meta name="twitter:url" content="{% if page.permalink %}https://plotly.com/{{page.permalink}}{% endif %}"/>
+      <meta name="twitter:description" content="{{description}}"/>
+      <meta name="twitter:image" content="{% if page.imageurl %}{{page.imageurl}}{% else %}{% if page.thumbnail%}{{site.imgurl}}{{page.thumbnail}}{%else%}https://help.plot.ly/images/twitter-default.png{% endif %}{% endif %}">
+      <meta name="twitter:site" content="@plotlygraphs"/>
+
+{% endblock %}
+
+{% block site_nav %}
+
+  <!-- Main navigation -->
+  {% if nav %}
+    {% if page and page.meta and page.meta.hide %}
+      {% set hidden = "hidden" if "navigation" in page.meta.hide %}
+    {% endif %}
+    <div
+      class="md-sidebar md-sidebar--primary"
+      data-md-component="sidebar"
+      data-md-type="navigation"
+      {{ hidden }}
+    >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          {% include "partials/nav.html" %}
+        </div>
+
+        <div class="nav-bottom-image">
+            <a href="https://plotly.com/webinars/state-of-vibe-analytics/?utm_medium=graphing_libraries&utm_campaign=state_of_vibe_analytics_webinar&utm_content=sidebar" target="_blank">
+                <img src="https://images.prismic.io/plotly-marketing-website-2/aPu8T7pReVYa3qCu_TheStateofVibeAnalytics_Square.jpg?auto=format,compress" alt="plotly-studio-banner" type="image/avif">
+            </a>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Table of contents -->
+  {% if not "toc.integrate" in features %}
+    {% if page and page.meta and page.meta.hide %}
+      {% set hidden = "hidden" if "toc" in page.meta.hide %}
+    {% endif %}
+    <div
+      class="md-sidebar md-sidebar--secondary"
+      data-md-component="sidebar"
+      data-md-type="toc"
+      {{ hidden }}
+    >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          {% include "partials/toc.html" %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+{% if page.file.src_path != "index.md" and not page.url.startswith('reference/') and 
+not page.url.endswith(('basic-charts/', 'plotly-fundamentals/', 'statistical-charts/',
+'scientific-charts/', 'financial-charts/', 'maps/', 'ai-ml/', 'bio/', '3d-charts/', 'subplot-charts/',
+'chart-events/', 'plotly-animations/', 'advanced-opt/', 'controls/', 'python-api-reference/', 'license/', 'conduct/', 'contributing/')) %}
+{% set filename = page.file.src_path.split('/')[-1] %}
+<div class="edit-btn">
+  <a href="https://github.com/daexs/plotly.py/edit/mkdocs-conversion/pages/{{ filename }}" id="edit-link">
+    <div class="icon">
+      <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+        <path fill="#000000" 
+        d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,
+        7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,
+        15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,
+        15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,
+        11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,
+        10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.19,6.57 13.71,
+        5.55 12.78,5.16C12.35,5 11.9,4.96 11.5,5.07L9.8,3.38L10.59,
+        2.6C11.37,1.81 12.63,1.81 13.41,2.6L21.4,10.59C22.19,
+        11.37 22.19,12.63 21.4,13.41L13.41,21.4C12.63,22.19 11.37,
+        22.19 10.59,21.4L2.6,13.41C1.81,12.63 1.81,11.37 2.6,10.59Z">
+        </path>
+      </svg>
+    </div>
+    <span>Suggest an edit to this page</span>
+  </a>
+</div>
+{% endif %}
+
+<blockquote>
+    <p><strong>Plotly Studio:</strong> Transform any dataset into an interactive data application in minutes with AI. <a
+            href="https://plotly.com/studio/">Try
+            Plotly Studio now</a>.</p>
+</blockquote>
+<br>
+{{ super() }}
+
+{% if not page.url.startswith('reference/') and 
+not page.url.endswith(('basic-charts/', 'plotly-fundamentals/', 'statistical-charts/',
+'scientific-charts/', 'financial-charts/', 'maps/', 'ai-ml/', 'bio/', '3d-charts/', 'subplot-charts/',
+'chart-events/', 'plotly-animations/', 'advanced-opt/', 'controls/', 'python-api-reference/', 'license/', 'plotly-contributing/', 'conduct/')) %}
+    <h2>What About Dash?</h2>
+    <p><a href="https://dash.plotly.com/">Dash</a> is an open-source framework for building analytical applications,
+        with no Javascript required, and it is tightly integrated with the Plotly graphing library.</p>
+    <p>Learn about how to install Dash at <a
+            href="https://dash.plotly.com/tutorial?utm_medium=graphing_libraries&utm_content=python_footer&_gl=1*3jyro3*_gcl_au*MTU5NjgzODk0NC4xNzU2OTk2NTI5*_ga*MTI3ODM0MzI1Mi4xNzQ3NzUxOTA5*_ga_6G7EE0JNSC*czE3NTg1NzAzMDgkbzI2JGcxJHQxNzU4NTcwOTg1JGo1MSRsMCRoMA..">https://dash.plotly.com/installation</a>.
+    </p>
+     <p>Everywhere in this page that you see <code>fig.show()</code>, you can display the same figure in a Dash application by passing
+         it to the figure argument of the <code><a href="https://dash.plotly.com/dash-core-components/graph">Graph</a></code> component from the built-in <code>dash_core_components</code> package like this:</p>
+    <pre><code>import plotly.graph_objects as go # or plotly.express as px
+fig = go.Figure() # or any Plotly Express function e.g. px.bar(...)
+# fig.add_trace( ... )
+# fig.update_layout( ... )
+
+from dash import Dash, dcc, html
+
+app = Dash()
+app.layout = html.Div([
+    dcc.Graph(figure=fig)
+])
+
+app.run(debug=True, use_reloader=False)  # Turn off reloader if inside Jupyter</code></pre>
+{% endif %}
+
+{% if not page.url.startswith('reference/') and 
+not page.url.endswith(('python-api-reference/', 'license/', 'plotly-contributing/', 'conduct/')) %}
+<p><a class="bottom-dash-img"
+             href="https://dash.plotly.com/tutorial?utm_medium=graphing_libraries&utm_content=python_footer&_gl=1*3jyro3*_gcl_au*MTU5NjgzODk0NC4xNzU2OTk2NTI5*_ga*MTI3ODM0MzI1Mi4xNzQ3NzUxOTA5*_ga_6G7EE0JNSC*czE3NTg1NzAzMDgkbzI2JGcxJHQxNzU4NTcwOTg1JGo1MSRsMCRoMA.."><img
+                 src="https://plotly.github.io/documentation/all_static/images/plotly-studio.png" alt="Dash your way to interactive web apps"
+                 style="max-width: 100%; height: auto;"></a></p>
+{% endif %}
+
+{% endblock %}
