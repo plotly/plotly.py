@@ -342,9 +342,8 @@ article {
     color: #a0aaba !important;
 }
 
-
-[data-md-color-scheme="slate"] .--footer-column ul a {
-    color: #a0aaba;
+[data-md-color-scheme="slate"] .--footer-column ul a:not(.subscribe-button) {
+    color: #a0aaba !important;
 }
 
 [data-md-color-scheme="slate"] .--footer-meta a {
