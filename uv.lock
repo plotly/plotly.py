@@ -4277,7 +4277,7 @@ wheels = [
 
 [[package]]
 name = "plotly"
-version = "6.4.0"
+version = "6.5.0"
 source = { editable = "." }
 dependencies = [
     { name = "narwhals" },
