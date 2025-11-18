@@ -1,4 +1,4 @@
-plotly==6.3.0
+plotly==6.5.0
 anywidget
 cufflinks==0.17.3
 dash-bio
