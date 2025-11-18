@@ -727,15 +727,15 @@ wheels = [
 
 [[package]]
 name = "choreographer"
-version = "1.0.8"
+version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "logistro" },
     { name = "simplejson" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/60/ce/2532248d08c8fa01c857d9cfff2ddc9b4d3630dfac60081fffb32127f3fa/choreographer-1.0.8.tar.gz", hash = "sha256:bfda253cb61527489fc9d09314507a4692704014c658b737fc7662749235e397", size = 40412, upload-time = "2025-05-22T16:50:07.99Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c0/3a/1188b57af6d96a6dad9418a10d00e20109d3ac64db0545205222b53306ee/choreographer-1.2.0.tar.gz", hash = "sha256:c94eaf6eb3dbc81d68e1476139e69e9e072f4e90fcae1990e5c988d15079d346", size = 45001, upload-time = "2025-10-23T00:32:57.11Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b2/6e/f99172bff3c1885c4df02ea6999494883e9578bd88e14530aa8de6d9dde8/choreographer-1.0.8-py3-none-any.whl", hash = "sha256:8d47a33559158ef31cf60383fee9a352203d9970f69edb6e478558fc9f9ebd78", size = 51223, upload-time = "2025-05-22T16:50:06.61Z" },
+    { url = "https://files.pythonhosted.org/packages/54/b9/c3693aa56c0da6acd66b553837b16a770b4feaf0df9bafc203ab2e42eeb9/choreographer-1.2.0-py3-none-any.whl", hash = "sha256:00892baf912fc08b169488a56a9000d61c221d7a024eb4726dc623bc2e2f1b07", size = 56361, upload-time = "2025-10-23T00:32:55.694Z" },
 ]
 
 [[package]]
@@ -2554,7 +2554,7 @@ wheels = [
 
 [[package]]
 name = "kaleido"
-version = "1.0.0"
+version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "choreographer" },
@@ -2562,10 +2562,11 @@ dependencies = [
     { name = "orjson", version = "3.10.15", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "orjson", version = "3.10.18", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "packaging" },
+    { name = "pytest-timeout" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/15/dc/fd2d955884f45f852152d44f5ecf79de3cb58da0f995b6f6f9acfc80dd94/kaleido-1.0.0.tar.gz", hash = "sha256:502d8ba64737924efaf5e94c2736745bcc7c926e6cc535838be36c0fc06330bd", size = 49400, upload-time = "2025-06-19T15:50:39.357Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/49/0c/3624462629aeb9f5bb043583848ce300b4315e8249b393c494c84149b953/kaleido-1.1.0.tar.gz", hash = "sha256:5747703a56d4c034efa69abea4a9c2bfe8ef516ba848e0ec485c65b3b0ab52b6", size = 62044, upload-time = "2025-09-10T19:31:13.925Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/28/0e/853df00cac4823eaa8f35114d0d0ad1e2ec6b8243ce4acf5f8ac5235c517/kaleido-1.0.0-py3-none-any.whl", hash = "sha256:a7e8bd95648378d2746f6c86084d419d15f95b1ec7bb0ec810289b7feb25b18d", size = 51479, upload-time = "2025-06-19T15:50:37.884Z" },
+    { url = "https://files.pythonhosted.org/packages/5a/bf/10b009e3b96a803f25af126951bc167402354d765006a94d11ba46a2f667/kaleido-1.1.0-py3-none-any.whl", hash = "sha256:839ed2357b89dd2f93c478960f41c401fe4038d404ae33e2fdbde028c18d7430", size = 66347, upload-time = "2025-09-10T19:31:12.869Z" },
 ]
 
 [[package]]
@@ -2780,11 +2781,11 @@ wheels = [
 
 [[package]]
 name = "logistro"
-version = "1.1.0"
+version = "2.0.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/27/c1/aa8bc9e07e4b4bd9a3bc05804c483ba3f334c94dcd54995da856103a204d/logistro-1.1.0.tar.gz", hash = "sha256:ad51f0efa2bc705bea7c266e8a759cf539457cf7108202a5eec77bdf6300d774", size = 8269, upload-time = "2025-04-26T20:14:11.012Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/08/90/bfd7a6fab22bdfafe48ed3c4831713cb77b4779d18ade5e248d5dbc0ca22/logistro-2.0.1.tar.gz", hash = "sha256:8446affc82bab2577eb02bfcbcae196ae03129287557287b6a070f70c1985047", size = 8398, upload-time = "2025-11-01T02:41:18.81Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/bc/df/e51691ab004d74fa25b751527d041ad1b4d84ee86cbcb8630ab0d7d5188e/logistro-1.1.0-py3-none-any.whl", hash = "sha256:4f88541fe7f3c545561b754d86121abd9c6d4d8b312381046a78dcd794fddc7c", size = 7894, upload-time = "2025-04-26T20:14:09.363Z" },
+    { url = "https://files.pythonhosted.org/packages/54/20/6aa79ba3570bddd1bf7e951c6123f806751e58e8cce736bad77b2cf348d7/logistro-2.0.1-py3-none-any.whl", hash = "sha256:06ffa127b9fb4ac8b1972ae6b2a9d7fde57598bf5939cd708f43ec5bba2d31eb", size = 8555, upload-time = "2025-11-01T02:41:17.587Z" },
 ]
 
 [[package]]
@@ -4276,7 +4277,7 @@ wheels = [
 
 [[package]]
 name = "plotly"
-version = "6.3.1"
+version = "6.5.0"
 source = { editable = "." }
 dependencies = [
     { name = "narwhals" },
@@ -4415,7 +4416,7 @@ requires-dist = [
     { name = "geopandas", marker = "extra == 'dev-optional'" },
     { name = "inflect", marker = "extra == 'dev-optional'" },
     { name = "jupyter", marker = "extra == 'dev-build'" },
-    { name = "kaleido", marker = "extra == 'kaleido'", specifier = ">=1.0.0" },
+    { name = "kaleido", marker = "extra == 'kaleido'", specifier = ">=1.1.0" },
     { name = "narwhals", specifier = ">=1.15.1" },
     { name = "numpy", marker = "extra == 'dev-optional'" },
     { name = "numpy", marker = "extra == 'express'" },
@@ -5469,6 +5470,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/fb/aa/405082ce2749be5398045152251ac69c0f3578c7077efc53431303af97ce/pytest-8.4.0.tar.gz", hash = "sha256:14d920b48472ea0dbf68e45b96cd1ffda4705f33307dcc86c676c1b5104838a6", size = 1515232, upload-time = "2025-06-02T17:36:30.03Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2f/de/afa024cbe022b1b318a3d224125aa24939e99b4ff6f22e0ba639a2eaee47/pytest-8.4.0-py3-none-any.whl", hash = "sha256:f40f825768ad76c0977cbacdf1fd37c6f7a468e460ea6a0636078f8972d4517e", size = 363797, upload-time = "2025-06-02T17:36:27.859Z" },
+]
+
+[[package]]
+name = "pytest-timeout"
+version = "2.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
+    { name = "pytest", version = "8.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ac/82/4c9ecabab13363e72d880f2fb504c5f750433b2b6f16e99f4ec21ada284c/pytest_timeout-2.4.0.tar.gz", hash = "sha256:7e68e90b01f9eff71332b25001f85c75495fc4e3a836701876183c4bcfd0540a", size = 17973, upload-time = "2025-05-05T19:44:34.99Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fa/b6/3127540ecdf1464a00e5a01ee60a1b09175f6913f0644ac748494d9c4b21/pytest_timeout-2.4.0-py3-none-any.whl", hash = "sha256:c42667e5cdadb151aeb5b26d114aff6bdf5a907f176a007a30b940d3d865b5c2", size = 14382, upload-time = "2025-05-05T19:44:33.502Z" },
 ]
 
 [[package]]

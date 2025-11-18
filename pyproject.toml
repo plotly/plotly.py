@@ -32,7 +32,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.3.1"
+version = "6.5.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -40,7 +40,7 @@ dependencies = [
 
 [project.optional-dependencies]
 express = ["numpy"]
-kaleido = ["kaleido>=1.0.0"]
+kaleido = ["kaleido>=1.1.0"]
 dev_core = [
     "pytest",
     "requests",

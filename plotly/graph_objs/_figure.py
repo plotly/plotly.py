@@ -665,6 +665,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -698,6 +699,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -807,11 +809,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `value` and `label`. Anything contained in
@@ -819,6 +826,11 @@ class Figure(BaseFigure):
             example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -963,7 +975,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -974,10 +986,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `value` and `label`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1154,6 +1176,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -1187,6 +1210,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -1229,6 +1253,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -1328,17 +1353,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1524,6 +1559,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -1580,6 +1616,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -1740,7 +1777,7 @@ class Figure(BaseFigure):
             :class:`plotly.graph_objects.box.Hoverlabel` instance
             or dict with compatible properties
         hoveron
-            Do the hover effects highlight individual boxes  or
+            Do the hover effects highlight individual boxes or
             sample points or both?
         hovertemplate
             Template string used for rendering the information that
@@ -1760,17 +1797,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1892,7 +1939,7 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `notchspan`.
         notchwidth
-            Sets the width of the notches relative to the box'
+            Sets the width of the notches relative to the box
             width. For example, with 0, the notches are as wide as
             the box(es).
         offsetgroup
@@ -2029,7 +2076,7 @@ class Figure(BaseFigure):
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
-            Sets the width of the whiskers relative to the box'
+            Sets the width of the whiskers relative to the box
             width. For example, with 1, the whiskers are as wide as
             the box(es).
         width
@@ -2175,6 +2222,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -2264,6 +2312,9 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatefallback=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -2354,6 +2405,50 @@ class Figure(BaseFigure):
         hoverlabel
             :class:`plotly.graph_objects.candlestick.Hoverlabel`
             instance or dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}" as well as %{xother}, {%_xother},
+            {%_xother_}, {%xother_}. When showing info for several
+            points, "xother" will be added to those with different
+            x positions from the first point. An underscore before
+            or after "(x|y)other" will add a space on that side,
+            only when this field is shown. Numbers are formatted
+            using d3-format's syntax %{variable:d3-format}, for
+            example "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plotly.com/javascript/plotlyjs-events/#event-
+            data. Additionally, all attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. Finally, the template string has access
+            to variables `open`, `high`, `low` and `close`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
+        hovertemplatesrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
@@ -2479,7 +2574,7 @@ class Figure(BaseFigure):
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
-            Sets the width of the whiskers relative to the box'
+            Sets the width of the whiskers relative to the box
             width. For example, with 1, the whiskers are as wide as
             the box(es).
         x
@@ -2585,6 +2680,9 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -2930,6 +3028,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -3062,17 +3161,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -3265,6 +3374,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -3319,6 +3429,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -3449,11 +3560,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `properties` Anything contained in tag
@@ -3461,6 +3577,11 @@ class Figure(BaseFigure):
             example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -3648,6 +3769,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -3702,6 +3824,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -3836,11 +3959,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `properties` Anything contained in tag
@@ -3848,6 +3976,11 @@ class Figure(BaseFigure):
             example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -4040,6 +4173,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -4096,6 +4230,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -4244,11 +4379,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `norm` Anything contained in tag `<extra>`
@@ -4256,6 +4396,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -4527,6 +4672,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -4596,6 +4742,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoverongaps=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -4620,6 +4767,7 @@ class Figure(BaseFigure):
         textfont=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         transpose=None,
         uid=None,
         uirevision=None,
@@ -4762,17 +4910,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -4869,7 +5027,7 @@ class Figure(BaseFigure):
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
-            the information text that appear on points. Note that
+            the information text that appears on points. Note that
             this will override `textinfo`. Variables are inserted
             using %{variable}, for example "y: %{y}". Numbers are
             formatted using d3-format's syntax
@@ -4880,10 +5038,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         transpose
             Transposes the z data.
         uid
@@ -5094,6 +5262,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoverongaps=hoverongaps,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -5118,6 +5287,7 @@ class Figure(BaseFigure):
             textfont=textfont,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             transpose=transpose,
             uid=uid,
             uirevision=uirevision,
@@ -5564,6 +5734,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -5685,17 +5856,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -5891,6 +6072,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -5944,6 +6126,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -6069,17 +6252,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -6280,6 +6473,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -6334,6 +6528,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -6366,6 +6561,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -6462,11 +6658,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `percentInitial`, `percentPrevious` and
@@ -6475,6 +6676,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -6621,7 +6827,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -6632,11 +6838,21 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `percentInitial`, `percentPrevious`,
             `percentTotal`, `label` and `value`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -6800,6 +7016,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -6832,6 +7049,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -6870,6 +7088,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -6899,6 +7118,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         title=None,
         uid=None,
@@ -6968,11 +7188,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `text` and
@@ -6981,6 +7206,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -7098,7 +7328,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -7109,11 +7339,21 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `text` and
             `percent`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -7181,6 +7421,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -7210,6 +7451,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             title=title,
             uid=uid,
@@ -7237,6 +7479,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoverongaps=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -7259,6 +7502,7 @@ class Figure(BaseFigure):
         textfont=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         transpose=None,
         uid=None,
         uirevision=None,
@@ -7401,17 +7645,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -7497,7 +7751,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -7508,10 +7762,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         transpose
             Transposes the z data.
         uid
@@ -7725,6 +7989,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoverongaps=hoverongaps,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -7747,6 +8012,7 @@ class Figure(BaseFigure):
             textfont=textfont,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             transpose=transpose,
             uid=uid,
             uirevision=uirevision,
@@ -7805,6 +8071,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -7837,6 +8104,7 @@ class Figure(BaseFigure):
         textposition=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -7975,11 +8243,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `binNumber` Anything contained in tag
@@ -7987,6 +8260,11 @@ class Figure(BaseFigure):
             example `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -8124,7 +8402,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -8135,10 +8413,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label` and `value`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8275,6 +8563,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -8307,6 +8596,7 @@ class Figure(BaseFigure):
             textposition=textposition,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -8345,6 +8635,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
@@ -8366,6 +8657,7 @@ class Figure(BaseFigure):
         stream=None,
         textfont=None,
         texttemplate=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -8518,11 +8810,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
@@ -8530,6 +8827,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -8620,7 +8922,7 @@ class Figure(BaseFigure):
             Sets the text font.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -8631,10 +8933,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z`
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -8810,6 +9122,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
@@ -8831,6 +9144,7 @@ class Figure(BaseFigure):
             stream=stream,
             textfont=textfont,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -8881,6 +9195,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
@@ -8904,6 +9219,7 @@ class Figure(BaseFigure):
         stream=None,
         textfont=None,
         texttemplate=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -9061,11 +9377,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
@@ -9073,6 +9394,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -9174,7 +9500,7 @@ class Figure(BaseFigure):
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
-            the information text that appear on points. Note that
+            the information text that appears on points. Note that
             this will override `textinfo`. Variables are inserted
             using %{variable}, for example "y: %{y}". Numbers are
             formatted using d3-format's syntax
@@ -9185,10 +9511,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `x`, `y`, `z` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -9360,6 +9696,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
@@ -9383,6 +9720,7 @@ class Figure(BaseFigure):
             stream=stream,
             textfont=textfont,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             uid=uid,
             uirevision=uirevision,
             visible=visible,
@@ -9422,6 +9760,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -9455,6 +9794,7 @@ class Figure(BaseFigure):
         textposition=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         tiling=None,
         uid=None,
@@ -9526,11 +9866,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
@@ -9540,6 +9885,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -9673,7 +10023,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -9684,12 +10034,22 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
             `percentRoot`, `percentEntry`, `percentParent`, `label`
             and `value`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -9757,6 +10117,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -9790,6 +10151,7 @@ class Figure(BaseFigure):
             textposition=textposition,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             tiling=tiling,
             uid=uid,
@@ -9812,6 +10174,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -9905,11 +10268,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `z`, `color` and `colormodel`. Anything
@@ -9918,6 +10286,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -10108,6 +10481,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -10361,6 +10735,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -10514,17 +10889,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -10767,6 +11152,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -10837,6 +11223,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -11024,17 +11411,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -11323,6 +11720,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -11388,6 +11786,9 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatefallback=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -11478,6 +11879,50 @@ class Figure(BaseFigure):
         hoverlabel
             :class:`plotly.graph_objects.ohlc.Hoverlabel` instance
             or dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}" as well as %{xother}, {%_xother},
+            {%_xother_}, {%xother_}. When showing info for several
+            points, "xother" will be added to those with different
+            x positions from the first point. An underscore before
+            or after "(x|y)other" will add a space on that side,
+            only when this field is shown. Numbers are formatted
+            using d3-format's syntax %{variable:d3-format}, for
+            example "Price: %{y:$.2f}".
+            https://github.com/d3/d3-format/tree/v1.4.5#d3-format
+            for details on the formatting syntax. Dates are
+            formatted using d3-time-format's syntax
+            %{variable|d3-time-format}, for example "Day:
+            %{2019-01-01|%A}". https://github.com/d3/d3-time-
+            format/tree/v2.2.3#locale_format for details on the
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plotly.com/javascript/plotlyjs-events/#event-
+            data. Additionally, all attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. Finally, the template string has access
+            to variables `open`, `high`, `low` and `close`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
+        hovertemplatesrc
+            Sets the source reference on Chart Studio Cloud for
+            `hovertemplate`.
         hovertext
             Same as `text`.
         hovertextsrc
@@ -11708,6 +12153,9 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -11763,6 +12211,7 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         labelfont=None,
         legendgrouptitle=None,
         legendwidth=None,
@@ -11846,23 +12295,30 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over dimensions. Note that "categorycount",
-            "colorcount" and "bandcolorcount" are only available
-            when `hoveron` contains the "color" flag. Finally, the
-            template string has access to variables `count`,
-            `probability`, `category`, `categorycount`,
-            `colorcount` and `bandcolorcount`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example `<extra>%{fullData.name}</extra>`. To hide the
+            are available.  Finally, the template string has access
+            to variables `count`, `probability`, `category`,
+            `categorycount`, `colorcount` and `bandcolorcount`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         labelfont
             Sets the font for the `dimension` labels.
         legendgrouptitle
@@ -11958,6 +12414,7 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             labelfont=labelfont,
             legendgrouptitle=legendgrouptitle,
             legendwidth=legendwidth,
@@ -12197,6 +12654,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -12232,6 +12690,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         title=None,
         uid=None,
@@ -12303,11 +12762,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `percent` and
@@ -12316,6 +12780,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -12460,7 +12929,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -12471,11 +12940,21 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `percent` and
             `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -12544,6 +13023,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -12579,6 +13059,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             title=title,
             uid=uid,
@@ -12833,6 +13314,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -12864,6 +13346,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -13017,17 +13500,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -13183,7 +13676,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -13194,9 +13687,19 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -13372,6 +13875,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -13403,6 +13907,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -13443,6 +13948,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -13472,6 +13978,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -13553,17 +14060,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -13687,7 +14204,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -13698,9 +14215,19 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -13819,6 +14346,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -13848,6 +14376,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -13885,6 +14414,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -13912,6 +14442,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -14008,17 +14539,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -14136,7 +14677,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -14147,10 +14688,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `a`, `b` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -14242,6 +14793,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -14269,6 +14821,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -14295,6 +14848,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -14329,6 +14883,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -14416,17 +14971,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -14573,7 +15138,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -14584,10 +15149,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `lat`, `lon`, `location` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -14651,6 +15226,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -14685,6 +15261,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -14709,6 +15286,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -14736,6 +15314,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -14851,17 +15430,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -14975,7 +15564,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -14986,9 +15575,19 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15153,6 +15752,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -15180,6 +15780,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -15220,6 +15821,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -15251,6 +15853,7 @@ class Figure(BaseFigure):
         textposition=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -15327,17 +15930,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -15468,7 +16081,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -15479,10 +16092,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `lat`, `lon` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15545,6 +16168,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -15576,6 +16200,7 @@ class Figure(BaseFigure):
             textposition=textposition,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -15598,6 +16223,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -15629,6 +16255,7 @@ class Figure(BaseFigure):
         textposition=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -15709,17 +16336,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -15855,7 +16492,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -15866,10 +16503,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `lat`, `lon` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -15932,6 +16579,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -15963,6 +16611,7 @@ class Figure(BaseFigure):
             textposition=textposition,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -15987,6 +16636,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -16018,6 +16668,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         theta=None,
         theta0=None,
@@ -16117,17 +16768,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -16260,7 +16921,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -16271,10 +16932,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `r`, `theta` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16351,6 +17022,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -16382,6 +17054,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             theta=theta,
             theta0=theta0,
@@ -16408,6 +17081,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -16439,6 +17113,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         theta=None,
         theta0=None,
@@ -16537,17 +17212,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -16680,7 +17365,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -16691,10 +17376,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `r`, `theta` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -16769,6 +17464,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -16800,6 +17496,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             theta=theta,
             theta0=theta0,
@@ -16826,6 +17523,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -16858,6 +17556,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -16947,17 +17646,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -17095,7 +17804,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -17106,10 +17815,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `real`, `imag` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -17172,6 +17891,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -17204,6 +17924,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -17232,6 +17953,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -17261,6 +17983,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -17373,17 +18096,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -17514,7 +18247,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -17525,10 +18258,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `a`, `b`, `c` and `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -17597,6 +18340,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -17626,6 +18370,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -17646,6 +18391,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -17743,17 +18489,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -17950,6 +18706,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -18001,6 +18758,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         ids=None,
@@ -18149,11 +18907,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `tubex`, `tubey`, `tubez`, `tubeu`,
@@ -18163,6 +18926,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -18415,6 +19183,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             ids=ids,
@@ -18475,6 +19244,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -18508,6 +19278,7 @@ class Figure(BaseFigure):
         textinfo=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         uid=None,
         uirevision=None,
@@ -18578,11 +19349,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
@@ -18592,6 +19368,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -18733,7 +19514,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -18744,12 +19525,22 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
             `percentRoot`, `percentEntry`, `percentParent`, `label`
             and `value`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -18814,6 +19605,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -18847,6 +19639,7 @@ class Figure(BaseFigure):
             textinfo=textinfo,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             uid=uid,
             uirevision=uirevision,
@@ -18876,6 +19669,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -19031,17 +19825,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -19283,6 +20087,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -19550,6 +20355,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -19582,6 +20388,7 @@ class Figure(BaseFigure):
         textposition=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         tiling=None,
         uid=None,
@@ -19654,11 +20461,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
@@ -19668,6 +20480,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -19798,7 +20615,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -19809,12 +20626,22 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `currentPath`, `root`, `entry`,
             `percentRoot`, `percentEntry`, `percentParent`, `label`
             and `value`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -19882,6 +20709,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -19914,6 +20742,7 @@ class Figure(BaseFigure):
             textposition=textposition,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             tiling=tiling,
             uid=uid,
@@ -19938,6 +20767,7 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -20062,17 +20892,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -20388,6 +21228,7 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hoveron=hoveron,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -20461,6 +21302,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -20615,17 +21457,27 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -20879,6 +21731,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -20943,6 +21796,7 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -20978,6 +21832,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         totals=None,
         uid=None,
@@ -21082,11 +21937,16 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `initial`, `delta` and `final`. Anything
@@ -21095,6 +21955,11 @@ class Figure(BaseFigure):
             `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -21249,7 +22114,7 @@ class Figure(BaseFigure):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -21260,10 +22125,20 @@ class Figure(BaseFigure):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `initial`, `delta`, `final` and `label`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -21435,6 +22310,7 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
+            hovertemplatefallback=hovertemplatefallback,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
@@ -21470,6 +22346,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             texttemplate=texttemplate,
+            texttemplatefallback=texttemplatefallback,
             texttemplatesrc=texttemplatesrc,
             totals=totals,
             uid=uid,

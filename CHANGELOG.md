@@ -4,6 +4,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [6.5.0] - 2025-11-17
+
+### Updated
+- Update plotly.js from version 3.2.0 to version 3.3.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.3.0) for more information. [[#5421](https://github.com/plotly/plotly.py/pull/5421)]. Notable changes include:
+  - Add `hovertemplate` for `candlestick` and `ohlc` traces [[#7619](https://github.com/plotly/plotly.js/pull/7619)]
+
+### Fixed
+- Fix bug where numpy datetime contained in Python list was converted to integer [[#5415](https://github.com/plotly/plotly.py/pull/5415)]
+
+## [6.4.0] - 2025-11-02
+
+### Updated
+- Update plotly.js from version 3.1.1 to version 3.2.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5388)]. Notable changes include:
+  - Add `hovertemplatefallback` and `texttemplatefallback` attributes [[#7577](https://github.com/plotly/plotly.js/pull/7577)]
+  - Add "SI extended" formatting rule for tick exponents on axis labels, allowing values to be displayed with extended SI prefixes (e.g., femto, pico, atto) [[#7249](https://github.com/plotly/plotly.js/pull/7249)]
+
+### Deprecated
+- Deprecate `create_hexbin_mapbox` in favor of `create_hexbin_map`, update related function calls [[5358](https://github.com/plotly/plotly.py/pull/5358)], with thanks to @ajlien for the contribution!
+
 ## [6.3.1] - 2025-10-02
 
 ### Updated
