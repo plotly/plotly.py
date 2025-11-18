@@ -81638,6 +81638,31 @@
         },
         "superclass": "StringValidator"
     },
+    "ohlc.hovertemplatesrc": {
+        "params": {
+            "plotly_name": "hovertemplatesrc",
+            "parent_name": "ohlc",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "ohlc.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "ohlc",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
+    },
+    "ohlc.hovertemplate": {
+        "params": {
+            "plotly_name": "hovertemplate",
+            "parent_name": "ohlc",
+            "array_ok": true,
+            "edit_type": "none"
+        },
+        "superclass": "StringValidator"
+    },
     "ohlc.hoverlabel": {
         "params": {
             "plotly_name": "hoverlabel",
@@ -122903,6 +122928,31 @@
             "parent_name": "candlestick",
             "array_ok": true,
             "edit_type": "calc"
+        },
+        "superclass": "StringValidator"
+    },
+    "candlestick.hovertemplatesrc": {
+        "params": {
+            "plotly_name": "hovertemplatesrc",
+            "parent_name": "candlestick",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "candlestick.hovertemplatefallback": {
+        "params": {
+            "plotly_name": "hovertemplatefallback",
+            "parent_name": "candlestick",
+            "edit_type": "none"
+        },
+        "superclass": "AnyValidator"
+    },
+    "candlestick.hovertemplate": {
+        "params": {
+            "plotly_name": "hovertemplate",
+            "parent_name": "candlestick",
+            "array_ok": true,
+            "edit_type": "none"
         },
         "superclass": "StringValidator"
     },

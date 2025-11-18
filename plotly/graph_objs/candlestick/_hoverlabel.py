@@ -233,7 +233,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
     def split(self):
         """
         Show hover information (open, close, high, low) in separate
-        labels.
+        labels, rather than a single unified label. Default: False.
+        When set to True, `hovertemplate` is ignored.
 
         The 'split' property must be specified as a bool
         (either True, or False)
@@ -288,7 +289,9 @@ class Hoverlabel(_BaseTraceHierarchyType):
             arrow/triangle pointing to the data point.
         split
             Show hover information (open, close, high, low) in
-            separate labels.
+            separate labels, rather than a single unified label.
+            Default: False. When set to True, `hovertemplate` is
+            ignored.
         """
 
     def __init__(
@@ -353,7 +356,9 @@ class Hoverlabel(_BaseTraceHierarchyType):
             arrow/triangle pointing to the data point.
         split
             Show hover information (open, close, high, low) in
-            separate labels.
+            separate labels, rather than a single unified label.
+            Default: False. When set to True, `hovertemplate` is
+            ignored.
 
         Returns
         -------
