@@ -22,7 +22,6 @@ def test_valid_list_of_dicts():
     assert all(isinstance(x, dict) for x in result)
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_valid_dataframe():
     df = pd.DataFrame(
         [
@@ -48,7 +47,6 @@ def test_valid_list_with_extra_keys():
     assert all("Resource" in row for row in result)
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_valid_dataframe_with_extra_keys():
     df = pd.DataFrame(
         [
@@ -83,7 +81,6 @@ def test_missing_required_key_in_list():
     assert result is input_data
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_missing_required_key_in_dataframe():
     df = pd.DataFrame(
         [
@@ -104,7 +101,6 @@ def test_input_is_not_list_or_dataframe():
         validate_gantt("Not a list or DataFrame")
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_dataframe_with_no_rows():
     df = pd.DataFrame(columns=["Task", "Start", "Finish"])
     result = validate_gantt(df)
@@ -112,7 +108,6 @@ def test_dataframe_with_no_rows():
     assert result == []
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_dataframe_with_extra_rows_and_missing_keys():
     df = pd.DataFrame(
         [
@@ -131,7 +126,6 @@ def test_list_with_dict_missing_all_keys():
     assert result is input_data
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_dataframe_with_only_required_keys():
     df = pd.DataFrame(
         [
@@ -160,7 +154,6 @@ def test_large_list_of_dicts():
     assert len(result) == 1000
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_large_dataframe():
     df = pd.DataFrame(
         [
@@ -178,7 +171,6 @@ def test_large_dataframe():
     assert set(result[0].keys()) == set(df.columns)
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_large_dataframe_missing_key():
     df = pd.DataFrame(
         [
@@ -241,7 +233,6 @@ def test_determinism_multiple_calls_list():
     assert out2 is input_data
 
 
-@pytest.mark.skipif(pd is None, reason="pandas is not available")
 def test_dataframe_column_order_and_index():
     df = pd.DataFrame(
         [
