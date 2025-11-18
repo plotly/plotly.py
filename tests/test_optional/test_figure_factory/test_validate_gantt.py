@@ -5,6 +5,7 @@ from plotly.figure_factory._gantt import validate_gantt
 
 pd = optional_imports.get_module("pandas")
 
+
 @pytest.mark.parametrize("input_type", ["list", "dataframe"])
 def test_valid_with_extra_keys(input_type):
     """Test that extra keys beyond required ones are preserved."""
@@ -27,7 +28,6 @@ def test_valid_with_extra_keys(input_type):
     assert set(result[0].keys()) == set(["Task", "Start", "Finish", "Resource"])
     assert result[0]["Task"] == "A"
     assert result[1]["Finish"] == "2020-01-04"
-
 
 
 def test_missing_required_key_in_dataframe():
@@ -64,7 +64,6 @@ def test_list_with_dict_missing_all_keys():
     assert result is input_data
 
 
-
 def test_large_list_with_non_dict_first_element():
     input_data = [
         "Not a dict",
@@ -79,7 +78,6 @@ def test_large_list_with_non_dict_first_element():
     ]
     with pytest.raises(exceptions.PlotlyError):
         validate_gantt(input_data)
-
 
 
 def test_dataframe_column_order_and_index():
