@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 ### Updated
-- Speed up `validate_gantt` function by 58x via optimized DataFrame iteration by codeflash [[#5386](https://github.com/plotly/plotly.py/pull/5386)]
+- Speed up `validate_gantt` function [[#5386](https://github.com/plotly/plotly.py/pull/5386)], with thanks to @misrasaurabh1 for the contribution!
 
 ## [6.5.0] - 2025-11-17
 
