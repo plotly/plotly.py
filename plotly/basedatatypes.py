@@ -379,6 +379,83 @@ annotation_*: any parameters to go.layout.Annotation can be passed as
     except for x0, x1, y0, y1 or type."""
     return docstr
 
+#  helper to centralize translation of legacy annotation_* kwargs into a shape.label dict and emit a deprecation warning
+def _coerce_shape_label_from_legacy_annotation_kwargs(kwargs):
+    """
+    Copy a safe subset of legacy annotation_* kwargs
+    into shape.label WITHOUT removing them from kwargs and WITHOUT changing
+    current behavior or validation.
+
+    Copies (non-destructive):
+      - annotation_text      -> label.text
+      - annotation_font      -> label.font
+      - annotation_textangle -> label.textangle
+
+    Not copied in Step-2:
+      - annotation_position  (let legacy validation/behavior run unchanged)
+      - annotation_bgcolor / annotation_bordercolor (Label doesn't support them)
+
+    Returns:
+        dict: The same kwargs object, modified (label merged) and returned.
+    """
+    import warnings
+
+    # Don't mutate caller's label unless needed
+    label = kwargs.get("label")
+    label_out = label.copy() if isinstance(label, dict) else {}
+
+    legacy_used = False
+
+    v = kwargs.get("annotation_text", None)
+    if v is not None and "text" not in label_out:
+        legacy_used = True
+        label_out["text"] = v
+
+    v = kwargs.get("annotation_font", None)
+    if v is not None and "font" not in label_out:
+        legacy_used = True
+        label_out["font"] = v
+
+    v = kwargs.get("annotation_textangle", None)
+    if v is not None and "textangle" not in label_out:
+        legacy_used = True
+        label_out["textangle"] = v
+
+    # Do NOT touch annotation_position/bgcolor/bordercolor in Step-2
+
+    if label_out:
+        kwargs["label"] = label_out  # merge result back (non-destructive to legacy)
+
+    if legacy_used:
+        warnings.warn(
+            "annotation_* kwargs are deprecated; use label={...} to leverage Plotly.js shape labels.",
+            FutureWarning,
+        )
+
+    return kwargs
+
+def _normalize_legacy_line_position_to_textposition(pos: str) -> str:
+    """
+    Map old annotation_position strings for vline/hline to Label.textposition.
+    For lines, Plotly.js supports only: "start" | "middle" | "end".
+    - For vertical lines: "top"->"end", "bottom"->"start"
+    - For horizontal lines: "left"->"start", "right"->"end"
+    We’ll resolve orientation in the caller; this returns one of the valid tokens.
+    Raises ValueError for unknown positions.
+    """
+    if pos is None:
+        return "middle"
+    p = pos.strip().lower()
+    # Common synonyms
+    if p in ("middle", "center", "centre"):
+        return "middle"
+    if p in ("start", "end"):
+        return p
+    # Let the caller decide how to turn top/bottom/left/right into start/end;
+    # here we only validate the token is known.
+    if any(tok in p for tok in ("top", "bottom", "left", "right")):
+        return "middle"  # caller will override to start/end as needed
+    raise ValueError(f'Invalid annotation position "{pos}"')
 
 def _generator(i):
     """ "cast" an iterator to a generator"""
@@ -4081,32 +4158,94 @@ Invalid property path '{key_path_str}' for layout
             col = None
         n_shapes_before = len(self.layout["shapes"])
         n_annotations_before = len(self.layout["annotations"])
-        # shapes are always added at the end of the tuple of shapes, so we see
-        # how long the tuple is before the call and after the call, and adjust
-        # the new shapes that were added at the end
-        # extract annotation prefixed kwargs
-        # annotation with extra parameters based on the annotation_position
-        # argument and other annotation_ prefixed kwargs
-        shape_kwargs, annotation_kwargs = shapeannotation.split_dict_by_key_prefix(
-            kwargs, "annotation_"
-        )
-        augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
-            annotation, shape_type, shape_args, annotation_kwargs
-        )
-        self.add_shape(
-            row=row,
-            col=col,
-            exclude_empty_subplots=exclude_empty_subplots,
-            **_combine_dicts([shape_args, shape_kwargs]),
-        )
-        if augmented_annotation is not None:
-            self.add_annotation(
-                augmented_annotation,
+        
+        if shape_type == "vline":
+            # Always use a single labeled shape for vlines.
+
+            # Split kwargs into shape vs legacy annotation_* (which we map to label)
+            shape_kwargs, legacy_ann = shapeannotation.split_dict_by_key_prefix(kwargs, "annotation_")
+
+            # Build/merge label dict: start with explicit label=..., then copy safe legacy fields
+            label_dict = (kwargs.get("label") or {}).copy()
+            # Reuse Step-2 shim behavior (safe fields only)
+            if "text" not in label_dict and "text" in (kwargs.get("label") or {}):
+                pass  # (explicit label provided)
+            else:
+                if "annotation_text" in legacy_ann and "text" not in label_dict:
+                    label_dict["text"] = legacy_ann["annotation_text"]
+                if "annotation_font" in legacy_ann and "font" not in label_dict:
+                    label_dict["font"] = legacy_ann["annotation_font"]
+                if "annotation_textangle" in legacy_ann and "textangle" not in label_dict:
+                    label_dict["textangle"] = legacy_ann["annotation_textangle"]
+
+            # Position mapping (legacy → label.textposition for LINES)
+            # Legacy tests used "top/bottom/left/right". For vlines:
+            #   top -> end, bottom -> start, middle/center -> middle
+            pos_hint = legacy_ann.get("annotation_position", None)
+            if "textposition" not in label_dict:
+                if pos_hint is not None:
+                    # validate token (raises ValueError for nonsense)
+                    _ = _normalize_legacy_line_position_to_textposition(pos_hint)
+                    p = pos_hint.strip().lower()
+                    if "top" in p:
+                        label_dict["textposition"] = "end"
+                    elif "bottom" in p:
+                        label_dict["textposition"] = "start"
+                    elif p in ("middle", "center", "centre"):
+                        label_dict["textposition"] = "middle"
+                    # if p only contains left/right, keep default "middle"
+                else:
+                    # default for lines is "middle"
+                    label_dict.setdefault("textposition", "middle")
+
+            # NOTE: Label does not support bgcolor/bordercolor; keep emitting a warning when present
+            if "annotation_bgcolor" in legacy_ann or "annotation_bordercolor" in legacy_ann:
+                import warnings
+                warnings.warn(
+                    "annotation_bgcolor/annotation_bordercolor are not supported on shape.label "
+                    "and will be ignored; use label.font/color or a background shape instead.",
+                    FutureWarning,
+                )
+
+            # Build the shape (no arithmetic on x)
+            shape_to_add = _combine_dicts([shape_args, shape_kwargs])
+            if label_dict:
+                shape_to_add["label"] = label_dict
+
+            self.add_shape(
                 row=row,
                 col=col,
                 exclude_empty_subplots=exclude_empty_subplots,
-                yref=shape_kwargs.get("yref", "y"),
+                **shape_to_add,
             )
+        else:
+
+            # shapes are always added at the end of the tuple of shapes, so we see
+            # how long the tuple is before the call and after the call, and adjust
+            # the new shapes that were added at the end
+            # extract annotation prefixed kwargs
+            # annotation with extra parameters based on the annotation_position
+            # argument and other annotation_ prefixed kwargs
+            shape_kwargs, annotation_kwargs = shapeannotation.split_dict_by_key_prefix(
+                kwargs, "annotation_"
+            )
+            augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
+                annotation, shape_type, shape_args, annotation_kwargs
+            )
+            self.add_shape(
+                row=row,
+                col=col,
+                exclude_empty_subplots=exclude_empty_subplots,
+                **_combine_dicts([shape_args, shape_kwargs]),
+            )
+            if augmented_annotation is not None:
+                self.add_annotation(
+                    augmented_annotation,
+                    row=row,
+                    col=col,
+                    exclude_empty_subplots=exclude_empty_subplots,
+                    yref=shape_kwargs.get("yref", "y"),
+                )
         # update xref and yref for the new shapes and annotations
         for layout_obj, n_layout_objs_before in zip(
             ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
@@ -4149,6 +4288,8 @@ Invalid property path '{key_path_str}' for layout
         annotation=None,
         **kwargs,
     ):
+        # NEW (Step 2): translate legacy annotation_* → label (non-destructive; warns if used)
+        kwargs = _coerce_shape_label_from_legacy_annotation_kwargs(kwargs)
         self._process_multiple_axis_spanning_shapes(
             dict(type="line", x0=x, x1=x, y0=0, y1=1),
             row,

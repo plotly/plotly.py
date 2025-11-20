@@ -63,3 +63,10 @@ doc/check-or-enforce-order.py
 tests/percy/*.html
 tests/percy/pandas2/*.html
 test_path.png
+
+# Ignore generated Plotly.js assets
+package.json
+static/remoteEntry.*.js
+remoteEntry.*.js
+plotly/labextension/package.json
+plotly/labextension/static/remoteEntry.3a317cf6fef461b227b4.js
