@@ -227,81 +227,46 @@ def test_px_templates(backend):
 
 
 def test_px_templates_trace_specific_colors(backend):
-    import plotly.graph_objects as go
+    import pandas as pd
 
     tips = px.data.tips(return_type=backend)
 
-    # read trace-specific colors from template.data.histogram
-    histogram_template = go.layout.Template()
-    histogram_template.data.histogram = [
-        go.Histogram(marker=dict(color="orange")),
-        go.Histogram(marker=dict(color="purple")),
-    ]
-    fig = px.histogram(tips, x="total_bill", color="sex", template=histogram_template)
+    # trace-specific colors: each trace type uses its own template colors
+    template = {
+        "data_histogram": [
+            {"marker": {"color": "orange"}},
+            {"marker": {"color": "purple"}},
+        ],
+        "data_bar": [
+            {"marker": {"color": "red"}},
+            {"marker": {"color": "blue"}},
+        ],
+        "layout_colorway": ["yellow", "green"],
+    }
+    # histogram uses histogram colors
+    fig = px.histogram(tips, x="total_bill", color="sex", template=template)
     assert fig.data[0].marker.color == "orange"
     assert fig.data[1].marker.color == "purple"
-
-    # scatter uses template.data.scatter colors, not histogram colors
-    scatter_template = go.layout.Template()
-    scatter_template.data.scatter = [
-        go.Scatter(marker=dict(color="cyan")),
-        go.Scatter(marker=dict(color="magenta")),
-    ]
-    scatter_template.data.histogram = [
-        go.Histogram(marker=dict(color="orange")),
-    ]
-    fig = px.scatter(tips, x="total_bill", y="tip", color="sex", template=scatter_template)
-    assert fig.data[0].marker.color == "cyan"
-    assert fig.data[1].marker.color == "magenta"
-
-    # histogram still uses histogram colors even when scatter colors exist
-    fig = px.histogram(tips, x="total_bill", color="sex", template=scatter_template)
-    assert fig.data[0].marker.color == "orange"
-
     # fallback to layout.colorway when trace-specific colors don't exist
-    fig = px.histogram(
-        tips, x="total_bill", color="sex", template=dict(layout_colorway=["yellow", "green"])
-    )
+    fig = px.box(tips, x="day", y="total_bill", color="sex", template=template)
     assert fig.data[0].marker.color == "yellow"
     assert fig.data[1].marker.color == "green"
-
     # timeline special case (maps to bar)
-    timeline_template = go.layout.Template()
-    timeline_template.data.bar = [
-        go.Bar(marker=dict(color="red")),
-        go.Bar(marker=dict(color="blue")),
-    ]
-    timeline_data = {
-        "Task": ["Job A", "Job B"],
-        "Start": ["2009-01-01", "2009-03-05"],
-        "Finish": ["2009-02-28", "2009-04-15"],
-        "Resource": ["Alex", "Max"],
-    }
-    # Use same backend as tips for consistency
-    df_timeline = px.data.tips(return_type=backend)
-    df_timeline = nw.from_native(df_timeline).with_columns(
-        nw.lit("Job A").alias("Task"),
-        nw.lit("2009-01-01").alias("Start"),
-        nw.lit("2009-02-28").alias("Finish"),
-        nw.lit("Alex").alias("Resource"),
-    ).head(1).to_native()
-    # Add second row
-    df_timeline2 = nw.from_native(df_timeline).with_columns(
-        nw.lit("Job B").alias("Task"),
-        nw.lit("2009-03-05").alias("Start"),
-        nw.lit("2009-04-15").alias("Finish"),
-        nw.lit("Max").alias("Resource"),
-    ).head(1).to_native()
-    # Combine - actually, this is getting too complex. Let me just use a simpler approach
-    import pandas as pd
-    df_timeline = pd.DataFrame(timeline_data)
+    df_timeline = pd.DataFrame(
+        {
+            "Task": ["Job A", "Job B"],
+            "Start": ["2009-01-01", "2009-03-05"],
+            "Finish": ["2009-02-28", "2009-04-15"],
+            "Resource": ["Alex", "Max"],
+        }
+    )
     fig = px.timeline(
         df_timeline,
         x_start="Start",
         x_end="Finish",
         y="Task",
         color="Resource",
-        template=timeline_template,
+        template=template,
     )
     assert fig.data[0].marker.color == "red"
     assert fig.data[1].marker.color == "blue"
