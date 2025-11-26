@@ -1037,6 +1037,9 @@ def apply_default_cascade(args, constructor=None):
         if args["color_continuous_scale"] is None:
             args["color_continuous_scale"] = sequential.Viridis
 
+    # if color_discrete_sequence not set explicitly or in px.defaults,
+    # see if we can defer to template. Try trace-specific colors first,
+    # then layout.colorway, then set reasonable defaults
     if "color_discrete_sequence" in args:
         if args["color_discrete_sequence"] is None and constructor is not None:
             if constructor == "timeline":
@@ -1044,21 +1047,26 @@ def apply_default_cascade(args, constructor=None):
             else:
                 trace_type = constructor().type
             if trace_data_list := getattr(args["template"].data, trace_type, None):
-                collected_colors = [
+                # try marker.color first
+                args["color_discrete_sequence"] = [
                     trace_data.marker.color
                     for trace_data in trace_data_list
                     if hasattr(trace_data, "marker")
                 ]
-                if not collected_colors:
-                    collected_colors = [
+                # fallback to line.color if marker.color not available
+                if not args["color_discrete_sequence"] or not any(args["color_discrete_sequence"]):
+                    args["color_discrete_sequence"] = [
                         trace_data.line.color
                         for trace_data in trace_data_list
                         if hasattr(trace_data, "line")
                     ]
-                if collected_colors:
-                    args["color_discrete_sequence"] = collected_colors
+                # if no trace-specific colors found, reset to None to allow fallback
+                if not args["color_discrete_sequence"] or not any(args["color_discrete_sequence"]):
+                    args["color_discrete_sequence"] = None
+        # fallback to layout.colorway if trace-specific colors not available
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
+        # final fallback to default qualitative palette
         if args["color_discrete_sequence"] is None:
             args["color_discrete_sequence"] = qualitative.D3
 
