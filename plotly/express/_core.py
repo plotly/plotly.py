@@ -1003,7 +1003,7 @@ def one_group(x):
     return ""
 
 
-def apply_default_cascade(args):
+def apply_default_cascade(args, constructor=None):
     # first we apply px.defaults to unspecified args
 
     for param in defaults.__slots__:
@@ -1038,6 +1038,25 @@ def apply_default_cascade(args):
             args["color_continuous_scale"] = sequential.Viridis
 
     if "color_discrete_sequence" in args:
+        if args["color_discrete_sequence"] is None and constructor is not None:
+            if constructor == "timeline":
+                trace_type = "bar"
+            else:
+                trace_type = constructor().type
+            if trace_data_list := getattr(args["template"].data, trace_type, None):
+                collected_colors = [
+                    trace_data.marker.color
+                    for trace_data in trace_data_list
+                    if hasattr(trace_data, "marker")
+                ]
+                if not collected_colors:
+                    collected_colors = [
+                        trace_data.line.color
+                        for trace_data in trace_data_list
+                        if hasattr(trace_data, "line")
+                    ]
+                if collected_colors:
+                    args["color_discrete_sequence"] = collected_colors
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
         if args["color_discrete_sequence"] is None:
@@ -2486,7 +2505,7 @@ def get_groups_and_orders(args, grouper):
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
-    apply_default_cascade(args)
+    apply_default_cascade(args, constructor=constructor)
 
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
