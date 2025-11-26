@@ -1047,19 +1047,11 @@ def apply_default_cascade(args, constructor=None):
             else:
                 trace_type = constructor().type
             if trace_data_list := getattr(args["template"].data, trace_type, None):
-                # try marker.color first
                 args["color_discrete_sequence"] = [
                     trace_data.marker.color
                     for trace_data in trace_data_list
                     if hasattr(trace_data, "marker")
                 ]
-                # fallback to line.color if marker.color not available
-                if not args["color_discrete_sequence"] or not any(args["color_discrete_sequence"]):
-                    args["color_discrete_sequence"] = [
-                        trace_data.line.color
-                        for trace_data in trace_data_list
-                        if hasattr(trace_data, "line")
-                    ]
                 # if no trace-specific colors found, reset to None to allow fallback
                 if not args["color_discrete_sequence"] or not any(args["color_discrete_sequence"]):
                     args["color_discrete_sequence"] = None
