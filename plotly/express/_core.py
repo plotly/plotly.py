@@ -1051,8 +1051,11 @@ def apply_default_cascade(args, constructor=None):
                     trace_data.marker.color
                     for trace_data in trace_data_list
                     if hasattr(trace_data, "marker")
+                    and hasattr(trace_data.marker, "color")
                 ]
-                if not args["color_discrete_sequence"] or not any(args["color_discrete_sequence"]):
+                if not args["color_discrete_sequence"] or not any(
+                    args["color_discrete_sequence"]
+                ):
                     args["color_discrete_sequence"] = None
         # fallback to layout.colorway if trace-specific colors not available
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
