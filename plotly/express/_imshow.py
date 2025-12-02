@@ -233,6 +233,12 @@ def imshow(
     axes labels and ticks.
     """
     args = locals()
+    # Track if color_continuous_scale was explicitly provided by user
+    # (before apply_default_cascade fills it from template/defaults)
+    user_provided_colorscale = (
+        "color_continuous_scale" in args
+        and args["color_continuous_scale"] is not None
+    )
     apply_default_cascade(args)
     labels = labels.copy()
     nslices_facet = 1
@@ -419,7 +425,7 @@ def imshow(
             layout["xaxis"] = dict(scaleanchor="y", constrain="domain")
             layout["yaxis"]["constrain"] = "domain"
         colorscale_validator = ColorscaleValidator("colorscale", "imshow")
-        layout["coloraxis1"] = dict(
+        coloraxis_dict = dict(
             colorscale=colorscale_validator.validate_coerce(
                 args["color_continuous_scale"]
             ),
@@ -427,6 +433,11 @@ def imshow(
             cmin=zmin,
             cmax=zmax,
         )
+        # Set autocolorscale=False if user explicitly provided colorscale. Otherwise a template
+        # that sets autocolorscale=True would override the user provided colorscale.
+        if user_provided_colorscale:
+            coloraxis_dict["autocolorscale"] = False
+        layout["coloraxis1"] = coloraxis_dict
         if labels["color"]:
             layout["coloraxis1"]["colorbar"] = dict(title_text=labels["color"])
 

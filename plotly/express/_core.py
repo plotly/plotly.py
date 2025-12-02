@@ -2486,6 +2486,12 @@ def get_groups_and_orders(args, grouper):
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
+    # Track if color_continuous_scale was explicitly provided by user
+    # (before apply_default_cascade fills it from template/defaults)
+    user_provided_colorscale = (
+        "color_continuous_scale" in args
+        and args["color_continuous_scale"] is not None
+    )
     apply_default_cascade(args)
 
     args = build_dataframe(args, constructor)
@@ -2704,7 +2710,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
-        layout_patch["coloraxis1"] = dict(
+        coloraxis_dict = dict(
             colorscale=colorscale_validator.validate_coerce(
                 args["color_continuous_scale"]
             ),
@@ -2715,6 +2721,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 title_text=get_decorated_label(args, args[colorvar], colorvar)
             ),
         )
+        # Set autocolorscale=False if user explicitly provided colorscale. Otherwise a template
+        # that sets autocolorscale=True would override the user provided colorscale.
+        if user_provided_colorscale:
+            coloraxis_dict["autocolorscale"] = False
+        layout_patch["coloraxis1"] = coloraxis_dict
     for v in ["height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
