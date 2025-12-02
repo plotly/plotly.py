@@ -4218,6 +4218,22 @@ Invalid property path '{key_path_str}' for layout
                 exclude_empty_subplots=exclude_empty_subplots,
                 **shape_to_add,
             )
+            # Run legacy annotation logic
+            augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
+                annotation,
+                shape_type,
+                shape_args,
+                legacy_ann,  # now defined
+            )
+
+            if augmented_annotation is not None:
+                self.add_annotation(
+                    augmented_annotation,
+                    row=row,
+                    col=col,
+                    exclude_empty_subplots=exclude_empty_subplots,
+                    yref=shape_kwargs.get("yref", "y"),
+                )
         else:
 
             # shapes are always added at the end of the tuple of shapes, so we see
