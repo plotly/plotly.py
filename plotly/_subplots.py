@@ -58,6 +58,7 @@ def make_subplots(
     x_title=None,
     y_title=None,
     figure=None,
+    font=None,
     **kwargs,
 ):
     """
@@ -234,6 +235,9 @@ def make_subplots(
         If a go.Figure instance, the axes will be added to the
         layout of this figure and this figure will be returned. If the figure
         already contains axes, they will be overwritten.
+
+    font: dict (default None)
+        Font used by any title of the subplots.
 
     Examples
     --------
@@ -814,7 +818,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
     # Add subplot titles
     plot_title_annotations = _build_subplot_title_annotations(
-        subplot_titles, list_of_domains
+        subplot_titles, list_of_domains, font=font
     )
 
     layout["annotations"] = plot_title_annotations
@@ -835,7 +839,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
-            column_titles, domains_list
+            column_titles, domains_list, font=font
         )
 
         layout["annotations"] += tuple(column_title_annotations)
@@ -849,7 +853,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
-            row_titles, domains_list, title_edge="right"
+            row_titles, domains_list, title_edge="right", font=font
         )
 
         layout["annotations"] += tuple(column_title_annotations)
@@ -859,7 +863,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
-            [x_title], domains_list, title_edge="bottom", offset=30
+            [x_title], domains_list, title_edge="bottom", offset=30, font=font
         )
 
         layout["annotations"] += tuple(column_title_annotations)
@@ -869,7 +873,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
         # Add subplot titles
         column_title_annotations = _build_subplot_title_annotations(
-            [y_title], domains_list, title_edge="left", offset=40
+            [y_title], domains_list, title_edge="left", offset=40, font=font
         )
 
         layout["annotations"] += tuple(column_title_annotations)
@@ -1163,7 +1167,7 @@ def _get_cartesian_label(x_or_y, r, c, cnt):
 
 
 def _build_subplot_title_annotations(
-    subplot_titles, list_of_domains, title_edge="top", offset=0
+    subplot_titles, list_of_domains, title_edge="top", offset=0, font=None
 ):
     # If shared_axes is False (default) use list_of_domains
     # This is used for insets and irregular layouts
@@ -1172,6 +1176,10 @@ def _build_subplot_title_annotations(
     y_dom = list_of_domains[1::2]
     subtitle_pos_x = []
     subtitle_pos_y = []
+
+    # If no font size is provided, use this fallback
+    if font is None:
+        font = dict(size=16)
 
     if title_edge == "top":
         text_angle = 0
@@ -1236,7 +1244,7 @@ def _build_subplot_title_annotations(
                 "yref": "paper",
                 "text": subplot_titles[index],
                 "showarrow": False,
-                "font": dict(size=16),
+                "font": font,
                 "xanchor": xanchor,
                 "yanchor": yanchor,
             }
