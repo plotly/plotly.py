@@ -233,15 +233,19 @@ def test_px_templates_trace_specific_colors(backend):
 
     # trace-specific colors: each trace type uses its own template colors
     template = {
-        "data_histogram": [
-            {"marker": {"color": "orange"}},
-            {"marker": {"color": "purple"}},
-        ],
-        "data_bar": [
-            {"marker": {"color": "red"}},
-            {"marker": {"color": "blue"}},
-        ],
-        "layout_colorway": ["yellow", "green"],
+        "data": {
+            "histogram": [
+                {"marker": {"color": "orange"}},
+                {"marker": {"color": "purple"}},
+            ],
+            "bar": [
+                {"marker": {"color": "red"}},
+                {"marker": {"color": "blue"}},
+            ],
+        },
+        "layout": {
+            "colorway": ["yellow", "green"],
+        },
     }
     # histogram uses histogram colors
     fig = px.histogram(tips, x="total_bill", color="sex", template=template)
