@@ -1053,9 +1053,9 @@ def apply_default_cascade(args, constructor):
                     if hasattr(trace_data, "marker")
                     and hasattr(trace_data.marker, "color")
                 ]
-                # If template contains at least one color for this trace type, assign to color_discrete_sequence  
-                if any(trace_specific_colors):  
-                    args["color_discrete_sequence"] = trace_specific_colors  
+                # If template contains at least one color for this trace type, assign to color_discrete_sequence
+                if any(trace_specific_colors):
+                    args["color_discrete_sequence"] = trace_specific_colors
         # fallback to layout.colorway if trace-specific colors not available
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway

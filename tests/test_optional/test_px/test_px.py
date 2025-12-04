@@ -1,6 +1,7 @@
 from itertools import permutations
 import warnings
 
+import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 import narwhals.stable.v1 as nw
@@ -227,8 +228,6 @@ def test_px_templates(backend):
 
 
 def test_px_templates_trace_specific_colors(backend):
-    import pandas as pd
-
     tips = px.data.tips(return_type=backend)
 
     # trace-specific colors: each trace type uses its own template colors
