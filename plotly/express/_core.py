@@ -1003,7 +1003,7 @@ def one_group(x):
     return ""
 
 
-def apply_default_cascade(args, constructor=None):
+def apply_default_cascade(args, constructor):
     # first we apply px.defaults to unspecified args
 
     for param in defaults.__slots__:
@@ -1047,12 +1047,16 @@ def apply_default_cascade(args, constructor=None):
             else:
                 trace_type = constructor().type
             if trace_data_list := getattr(args["template"].data, trace_type, None):
-                args["color_discrete_sequence"] = [
+                trace_specific_colors = [
                     trace_data.marker.color
                     for trace_data in trace_data_list
                     if hasattr(trace_data, "marker")
                     and hasattr(trace_data.marker, "color")
                 ]
+                # If template contains at least one color for this trace type, assign to color_discrete_sequence  
+                if any(trace_specific_colors):  
+                    args["color_discrete_sequence"] = trace_specific_colors  
+
                 if not args["color_discrete_sequence"] or not any(
                     args["color_discrete_sequence"]
                 ):
