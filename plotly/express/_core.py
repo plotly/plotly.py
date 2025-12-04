@@ -1056,11 +1056,6 @@ def apply_default_cascade(args, constructor):
                 # If template contains at least one color for this trace type, assign to color_discrete_sequence  
                 if any(trace_specific_colors):  
                     args["color_discrete_sequence"] = trace_specific_colors  
-
-                if not args["color_discrete_sequence"] or not any(
-                    args["color_discrete_sequence"]
-                ):
-                    args["color_discrete_sequence"] = None
         # fallback to layout.colorway if trace-specific colors not available
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
