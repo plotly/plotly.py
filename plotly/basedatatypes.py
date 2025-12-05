@@ -4282,6 +4282,7 @@ Invalid property path '{key_path_str}' for layout
                     yref=shape_kwargs.get("yref", "y"),
                 )
 
+            )
         else:
 
             # shapes are always added at the end of the tuple of shapes, so we see
