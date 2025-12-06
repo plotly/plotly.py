@@ -272,7 +272,9 @@ def imshow(
         nslices_animation = img.shape[animation_frame]
         animation_slices = range(nslices_animation)
     slice_dimensions = (
-        (facet_col is not None) + (facet_row is not None) + (animation_frame is not None)
+        (facet_col is not None)
+        + (facet_row is not None)
+        + (animation_frame is not None)
     )  # 0, 1, 2, or 3
     facet_col_label = None
     facet_row_label = None
