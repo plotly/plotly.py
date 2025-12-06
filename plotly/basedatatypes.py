@@ -4281,8 +4281,56 @@ Invalid property path '{key_path_str}' for layout
                     exclude_empty_subplots=exclude_empty_subplots,
                     yref=shape_kwargs.get("yref", "y"),
                 )
+        
+        elif shape_type == "hrect":
+            # Split kwargs into shape vs legacy annotation_* (which we map to label)
+            shape_kwargs, legacy_ann = shapeannotation.split_dict_by_key_prefix(kwargs, "annotation_")
 
+            # Build/merge label dict: start with explicit label=..., then copy safe legacy fields
+            label_dict = (kwargs.get("label") or {}).copy()
+            if "annotation_text" in legacy_ann and "text" not in label_dict:
+                label_dict["text"] = legacy_ann["annotation_text"]
+            if "annotation_font" in legacy_ann and "font" not in label_dict:
+                label_dict["font"] = legacy_ann["annotation_font"]
+            if "annotation_textangle" in legacy_ann and "textangle" not in label_dict:
+                label_dict["textangle"] = legacy_ann["annotation_textangle"]
+
+            # NOTE: Label does not support bgcolor/bordercolor; warn when present
+            if "annotation_bgcolor" in legacy_ann or "annotation_bordercolor" in legacy_ann:
+                import warnings
+                warnings.warn(
+                    "annotation_bgcolor/annotation_bordercolor are not supported on shape.label "
+                    "and will be ignored; use label.font/color or a background shape instead.",
+                    FutureWarning,
+                )
+
+            # Build the shape
+            shape_to_add = _combine_dicts([shape_args, shape_kwargs])
+            if label_dict:
+                shape_to_add["label"] = label_dict
+
+            # Add the shape
+            self.add_shape(
+                row=row,
+                col=col,
+                exclude_empty_subplots=exclude_empty_subplots,
+                **shape_to_add,
             )
+
+            # Run legacy annotation logic only if an explicit annotation object was provided
+            augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
+                annotation, shape_type, shape_args, legacy_ann
+            )
+            if augmented_annotation is not None:
+                self.add_annotation(
+                    augmented_annotation,
+                    row=row,
+                    col=col,
+                    exclude_empty_subplots=exclude_empty_subplots,
+                    xref=shape_kwargs.get("xref", "x"),
+                )
+
+        
         else:
 
             # shapes are always added at the end of the tuple of shapes, so we see
@@ -4432,6 +4480,9 @@ Invalid property path '{key_path_str}' for layout
         annotation=None,
         **kwargs,
     ):
+        # NEW (Step 2): translate legacy annotation_* → label (non-destructive; warns if used)
+        kwargs = _coerce_shape_label_from_legacy_annotation_kwargs(kwargs)
+
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
             row,
