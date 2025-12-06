@@ -450,3 +450,89 @@ def test_animation_and_facet(binary_string):
     nslices = img.shape[0]
     assert len(fig.frames) == nslices
     assert len(fig.data) == img.shape[1]
+
+
+@pytest.mark.parametrize("facet_row", [0, 1, 2, -1])
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_facet_row(facet_row, binary_string):
+    img = np.random.randint(255, size=(10, 9, 8))
+    fig = px.imshow(
+        img,
+        facet_row=facet_row,
+        binary_string=binary_string,
+    )
+    nslices = img.shape[facet_row]
+    nrows = nslices
+    ncols = 1
+    nmax = ncols * nrows
+    assert "yaxis%d" % nmax in fig.layout
+    assert "yaxis%d" % (nmax + 1) not in fig.layout
+    assert len(fig.data) == nslices
+
+
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_facet_row_and_col(binary_string):
+    img = np.random.randint(255, size=(4, 3, 9, 8))
+    fig = px.imshow(
+        img,
+        facet_row=0,
+        facet_col=1,
+        binary_string=binary_string,
+    )
+    nrows = img.shape[0]
+    ncols = img.shape[1]
+    nmax = ncols * nrows
+    assert "yaxis%d" % nmax in fig.layout
+    assert "yaxis%d" % (nmax + 1) not in fig.layout
+    assert len(fig.data) == nrows * ncols
+
+
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_animation_facet_row_and_col(binary_string):
+    img = np.random.randint(255, size=(5, 4, 3, 9, 8)).astype(np.uint8)
+    fig = px.imshow(
+        img,
+        animation_frame=0,
+        facet_row=1,
+        facet_col=2,
+        binary_string=binary_string,
+    )
+    nslices_animation = img.shape[0]
+    nrows = img.shape[1]
+    ncols = img.shape[2]
+    assert len(fig.frames) == nslices_animation
+    assert len(fig.data) == nrows * ncols
+
+
+def test_imshow_xarray_facet_row():
+    img = np.random.random((3, 4, 5))
+    da = xr.DataArray(
+        img, dims=["row_dim", "dim_1", "dim_2"], coords={"row_dim": ["A", "B", "C"]}
+    )
+    fig = px.imshow(da, facet_row="row_dim")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_2"
+    assert fig.layout.yaxis.title.text == "dim_1"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
+    assert len(fig.data) == 3
+    # Check row labels are present
+    annotations = [a.text for a in fig.layout.annotations]
+    assert any("row_dim=A" in a for a in annotations)
+
+
+def test_imshow_xarray_facet_row_and_col():
+    img = np.random.random((3, 4, 5, 6))
+    da = xr.DataArray(
+        img,
+        dims=["row_dim", "col_dim", "dim_y", "dim_x"],
+        coords={"row_dim": ["R1", "R2", "R3"], "col_dim": ["C1", "C2", "C3", "C4"]},
+    )
+    fig = px.imshow(da, facet_row="row_dim", facet_col="col_dim")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_x"
+    assert fig.layout.yaxis.title.text == "dim_y"
+    assert len(fig.data) == 3 * 4
+    # Check labels are present
+    annotations = [a.text for a in fig.layout.annotations]
+    assert any("row_dim=R1" in a for a in annotations)
+    assert any("col_dim=C1" in a for a in annotations)
