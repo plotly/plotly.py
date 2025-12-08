@@ -15,7 +15,7 @@ def _swatches(module_names, module_contents, template=None):
     from plotly.express._core import apply_default_cascade
 
     args = dict(template=template)
-    apply_default_cascade(args)
+    apply_default_cascade(args, constructor=None)
 
     sequences = [
         (k, v)
@@ -66,7 +66,7 @@ def _swatches_continuous(module_names, module_contents, template=None):
     from plotly.express._core import apply_default_cascade
 
     args = dict(template=template)
-    apply_default_cascade(args)
+    apply_default_cascade(args, constructor=None)
 
     sequences = [
         (k, v)
@@ -122,7 +122,7 @@ def _swatches_cyclical(module_names, module_contents, template=None):
     from plotly.express._core import apply_default_cascade
 
     args = dict(template=template)
-    apply_default_cascade(args)
+    apply_default_cascade(args, constructor=None)
 
     rows = 2
     cols = 4
