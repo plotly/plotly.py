@@ -34,11 +34,11 @@ jupyter:
 ---
 
 #### Methods
-The [updatemenu method](https://plot.ly/python/reference/layout/updatemenus/#layout-updatemenus-items-updatemenu-buttons-items-button-method) determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
+The [updatemenu method](https://plotly.com/python/reference/layout/updatemenus/#layout-updatemenus-items-updatemenu-buttons-items-button-method) determines which [plotly.js function](https://plotly.com/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
 - `"restyle"`: modify **data** or data attributes
 - `"relayout"`: modify **layout** attributes
 - `"update"`: modify **data and layout** attributes; combination of `"restyle"` and `"relayout"`
-- `"animate"`: start or pause an [animation](https://plot.ly/python/#animations))
+- `"animate"`: start or pause an [animation](https://plotly.com/python/#animations))
 
 
 #### Restyle Button
