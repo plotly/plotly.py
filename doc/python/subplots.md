@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.11.10
   plotly:
-    description: How to make subplots in with Plotly's Python graphing library. Examples
+    description: How to make subplots with Plotly's Python graphing library. Examples
       of stacked, custom-sized, gridded, and annotated subplots.
     display_as: file_settings
     language: python
