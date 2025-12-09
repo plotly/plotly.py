@@ -146,7 +146,7 @@ fig.update_scenes(
     aspectmode="manual"
 )
 
-# Add drowdowns
+# Add dropdowns
 # button_layer_1_height = 1.08
 button_layer_1_height = 1.12
 button_layer_2_height = 1.065

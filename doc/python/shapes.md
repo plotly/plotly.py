@@ -44,7 +44,7 @@ As a general rule, there are two ways to add shapes (lines or polygons) to figur
 The differences between these two approaches are that:
 * Traces can optionally support hover labels and can appear in legends.
 * Shapes can be positioned absolutely or relative to data coordinates in 2d cartesian subplots only.
-* Traces cannot be positioned absolutely but can be positioned relative to date coordinates in any subplot type.
+* Traces cannot be positioned absolutely but can be positioned relative to data coordinates in any subplot type.
 * Traces also support [optional text](/python/text-and-annotations/), although there is a [textual equivalent to shapes in text annotations](/python/text-and-annotations/).
 
 

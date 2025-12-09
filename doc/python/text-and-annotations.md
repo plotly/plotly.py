@@ -621,7 +621,7 @@ fig.add_trace(go.Scattergeo(
     name="",
     text=["Montreal", "Toronto", "Vancouver", "Calgary", "Edmonton", "Ottawa",
           "Halifax",
-          "Victoria", "Winnepeg", "Regina"],
+          "Victoria", "Winnipeg", "Regina"],
     textfont={
         "color": ["MidnightBlue", "IndianRed", "MediumPurple", "Gold", "Crimson",
                   "LightSeaGreen",

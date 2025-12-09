@@ -653,7 +653,7 @@ def pictogram_bar(data, title, icon_size, max_icons_per_column=10, units_per_ico
         title=title,
         xaxis=dict(
             tickvals=tick_locations,
-            # Label ecah category
+            # Label each category
             ticktext=list(data.keys()),
             tickangle=-45,
             showgrid=False,
