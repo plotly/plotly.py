@@ -74,7 +74,22 @@ fig.show()
 import plotly.express as px
 import geopandas as gpd
 
-geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+# Handle both old and new GeoPandas versions without requiring network access
+try:
+    # Try the old method (GeoPandas < 1.0)
+    geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+except (AttributeError, ValueError):
+    # Use the new method (GeoPandas >= 1.0)
+    try:
+        import geodatasets
+        geo_df = gpd.read_file(geodatasets.get_path('naturalearth.cities'))
+    except ImportError:
+        # Fallback: build a tiny in-memory GeoDataFrame (no internet or extra deps)
+        from shapely.geometry import Point
+        geo_df = gpd.GeoDataFrame(
+            {"name": ["City A", "City B"], "geometry": [Point(0, 0), Point(10, 10)]},
+            crs="EPSG:4326",
+        )
 
 px.set_mapbox_access_token(open(".mapbox_token").read())
 fig = px.scatter_geo(geo_df,
