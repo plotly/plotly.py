@@ -306,7 +306,7 @@ def test_repr_html(renderer):
     sri_hash = _generate_sri_hash(plotlyjs_content)
 
     template = (
-        '<div>                        <script>'
+        "<div>                        <script>"
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
         '<script charset="utf-8" src="'
         + plotly_cdn_url()

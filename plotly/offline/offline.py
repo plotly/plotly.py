@@ -89,7 +89,7 @@ def get_plotlyjs():
 
 def _build_resize_script(plotdivid, plotly_root="Plotly"):
     resize_script = (
-        '<script>'
+        "<script>"
         'window.addEventListener("resize", function(){{'
         'if (document.getElementById("{id}")) {{'
         '{plotly_root}.Plots.resize(document.getElementById("{id}"));'
