@@ -76166,10 +76166,19 @@
         },
         "superclass": "BooleanValidator"
     },
+    "pie.showlegendsrc": {
+        "params": {
+            "plotly_name": "showlegendsrc",
+            "parent_name": "pie",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
     "pie.showlegend": {
         "params": {
             "plotly_name": "showlegend",
             "parent_name": "pie",
+            "array_ok": true,
             "edit_type": "style"
         },
         "superclass": "BooleanValidator"
@@ -76665,6 +76674,14 @@
         },
         "superclass": "NumberValidator"
     },
+    "pie.legendsrc": {
+        "params": {
+            "plotly_name": "legendsrc",
+            "parent_name": "pie",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
     "pie.legendrank": {
         "params": {
             "plotly_name": "legendrank",
@@ -76818,6 +76835,7 @@
         "params": {
             "plotly_name": "legend",
             "parent_name": "pie",
+            "array_ok": true,
             "dflt": "legend",
             "edit_type": "style"
         },
