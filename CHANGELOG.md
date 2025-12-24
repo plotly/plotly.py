@@ -4,11 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [6.5.1] - 2025-11-17
+
 ### Fixed
-- Fix issue where Plotly Express ignored trace-specific color sequences defined in templates via `template.data.<trace_type>` [[#5437](https://github.com/plotly/plotly.py/pull/5437)]
+- Fix issue where Plotly Express ignored trace-specific color sequences defined in templates via `template.data.<trace_type>` [[#5437](https://github.com/plotly/plotly.py/pull/5437)], with thanks to @antonymilne for the contribution!
 
 ### Updated
 - Speed up `validate_gantt` function [[#5386](https://github.com/plotly/plotly.py/pull/5386)], with thanks to @misrasaurabh1 for the contribution!
+- Update plotly.js from version 3.3.0 to version 3.3.1. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.3.1) for more information. [[#5456](https://github.com/plotly/plotly.py/pull/5456)]. Notable changes include:
+  - Add support for arrays for the pie properties `showlegend` and `legend`, so that these can be configured per slice. [[#7580](https://github.com/plotly/plotly.js/pull/7580)]
 
 ## [6.5.0] - 2025-11-17
 
