@@ -47,13 +47,6 @@ fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
 fig.show()
 ```
 
-**Try building a scatter plot.** Use the following interactive app, hosted on [Plotly Cloud](https://plotly.com/cloud/), to see how the code updates based on your selections.
-
-```python hide_code=true
-from IPython.display import IFrame
-IFrame(src='https://scatter-plot-python.plotly.app/', width='100%', height=800)
-```
-
 ```python
 # x and y given as DataFrame columns
 import plotly.express as px
@@ -90,6 +83,13 @@ import plotly.express as px
 df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", symbol="species")
 fig.show()
+```
+
+**Try building a scatter plot.** Use the following interactive app, hosted on [Plotly Cloud](https://plotly.com/cloud/), to see how the code updates based on your selections.
+
+```python hide_code=true
+from IPython.display import IFrame
+IFrame(src='https://scatter-plot-python.plotly.app/', width='100%', height=800)
 ```
 
 ## Scatter plots in Dash
