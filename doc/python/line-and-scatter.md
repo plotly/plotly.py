@@ -47,7 +47,7 @@ fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
 fig.show()
 ```
 
-> Try the live scatter plot below to see how the code updates based on your selections.
+**Try it yourself!** Use the interactive scatter plot app below, hosted on [Plotly Cloud](https://plotly.com/cloud/), to see how the code updates based on your selections.
 
 ```python hide_code=true
 from IPython.display import IFrame
