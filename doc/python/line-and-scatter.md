@@ -47,6 +47,13 @@ fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
 fig.show()
 ```
 
+> Try the live scatter plot below to see how the code updates based on your selections.
+
+```python hide_code=true
+from IPython.display import IFrame
+IFrame(src='https://scatter-plot-python.plotly.app/', width='100%', height=800)
+```
+
 ```python
 # x and y given as DataFrame columns
 import plotly.express as px
