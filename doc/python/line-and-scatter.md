@@ -85,7 +85,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", symbol=
 fig.show()
 ```
 
-**Try building a scatter plot.** Use the following interactive app, hosted on [Plotly Cloud](https://plotly.com/cloud/), to see how the code updates based on your selections.
+Try the live scatter plot below to see how the code updates based on your selections. Built with [Plotly Studio](http://plotly.com/downloads/?utm_source=graphing_libraries&utm_medium=documentation&utm_campaign=studio_cloud_community&utm_content=demo_scatter_plot_builder).
 
 ```python hide_code=true
 from IPython.display import IFrame
