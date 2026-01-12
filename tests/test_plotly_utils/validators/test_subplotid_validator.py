@@ -10,15 +10,18 @@ from ...test_optional.test_utils.test_utils import np_nan, np_inf
 def validator():
     return SubplotidValidator("prop", "parent", dflt="geo")
 
+
 @pytest.fixture()
 def validator_aok():
     return SubplotidValidator("prop", "parent", dflt="legend", array_ok=True)
+
 
 # Tests
 
 # Array not ok (default)
 
 # Acceptance
+
 
 @pytest.mark.parametrize("val", ["geo"] + ["geo%d" % i for i in range(2, 10)])
 def test_acceptance(val, validator):
@@ -49,11 +52,15 @@ def test_rejection_value(val, validator):
 
     assert "Invalid value" in str(validation_failure.value)
 
+
 # Array ok
 
 # Acceptance
 
-@pytest.mark.parametrize("val", ["legend2", ["legend", "legend2"], ("legend1", "legend2")])
+
+@pytest.mark.parametrize(
+    "val", ["legend2", ["legend", "legend2"], ("legend1", "legend2")]
+)
 def test_acceptance_aok(val, validator_aok):
     v = validator_aok.validate_coerce(val)
     if isinstance(val, tuple):
@@ -80,7 +87,7 @@ def test_rejection_type_aok(val, validator_aok):
         "bogus",  # Must begin with 'geo'
         "legend0",  # If followed by a number the number must be > 1,
         ["", "legend"],
-        ("bogus", "legend2")
+        ("bogus", "legend2"),
     ],
 )
 def test_rejection_value_aok(val, validator_aok):
