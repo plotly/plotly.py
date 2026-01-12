@@ -54,7 +54,7 @@ def test_rejection_value(val, validator):
 # Acceptance
 
 @pytest.mark.parametrize("val", ["legend2", ["legend", "legend2"], ("legend1", "legend2")])
-def test_acceptance(val, validator_aok):
+def test_acceptance_aok(val, validator_aok):
     v = validator_aok.validate_coerce(val)
     if isinstance(val, tuple):
         assert val == tuple(v)
@@ -64,7 +64,7 @@ def test_acceptance(val, validator_aok):
 
 # Rejection by type
 @pytest.mark.parametrize("val", [23, [2, 3], {}, set(), np_inf(), np_nan()])
-def test_rejection_type(val, validator_aok):
+def test_rejection_type_aok(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
 
@@ -83,7 +83,7 @@ def test_rejection_type(val, validator_aok):
         ("bogus", "legend2")
     ],
 )
-def test_rejection_value(val, validator_aok):
+def test_rejection_value_aok(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
 
