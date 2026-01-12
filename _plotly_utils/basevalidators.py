@@ -1740,7 +1740,7 @@ class SubplotidValidator(BaseValidator):
     }
     """
 
-    def __init__(self, plotly_name, parent_name, dflt=None, regex=None, **kwargs):
+    def __init__(self, plotly_name, parent_name, dflt=None, regex=None, array_ok=False, **kwargs):
         if dflt is None and regex is None:
             raise ValueError("One or both of regex and deflt must be specified")
 
@@ -1755,6 +1755,7 @@ class SubplotidValidator(BaseValidator):
             self.base = re.match(r"/\^(\w+)", regex).group(1)
 
         self.regex = self.base + r"(\d*)"
+        self.array_ok = array_ok
 
     def description(self):
         desc = """\
@@ -1763,31 +1764,49 @@ class SubplotidValidator(BaseValidator):
     optionally followed by an integer >= 1
     (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)
         """.format(plotly_name=self.plotly_name, base=self.base)
+
+        desc = """\
+    The '{plotly_name}' property is an identifier of a particular
+    subplot, of type '{base}', that may be specified as:
+      - the string '{base}'
+    optionally followed by an integer >= 1
+    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)""".format(plotly_name=self.plotly_name, base=self.base)
+        if self.array_ok:
+            desc += """
+      - A tuple or list of the above"""
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            pass
-        elif not isinstance(v, str):
-            self.raise_invalid_val(v)
-        else:
-            # match = re.fullmatch(self.regex, v)
-            match = fullmatch(self.regex, v)
+        def coerce(value, invalid_els):
+            if not isinstance(value, str):
+                invalid_els.append(value)
+                return value
+            match = fullmatch(self.regex, value)
             if not match:
-                is_valid = False
+                invalid_els.append(value)
+                return value
             else:
                 digit_str = match.group(1)
                 if len(digit_str) > 0 and int(digit_str) == 0:
-                    is_valid = False
+                    invalid_els.append(value)
+                    return value
                 elif len(digit_str) > 0 and int(digit_str) == 1:
-                    # Remove 1 suffix (e.g. x1 -> x)
-                    v = self.base
-                    is_valid = True
+                    return self.base
                 else:
-                    is_valid = True
+                    return value
 
-            if not is_valid:
-                self.raise_invalid_val(v)
+        if v is None:
+            pass
+        elif self.array_ok and is_simple_array(v):
+            invalid_els = []
+            v = [e for e in v if coerce(e, invalid_els)]
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els[:10])
+        else:
+            invalid_els = []
+            v = coerce(v, invalid_els)
+        if invalid_els:
+            self.raise_invalid_val(self.base)
         return v
 
 
