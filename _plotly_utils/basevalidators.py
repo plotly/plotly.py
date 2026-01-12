@@ -1740,7 +1740,9 @@ class SubplotidValidator(BaseValidator):
     }
     """
 
-    def __init__(self, plotly_name, parent_name, dflt=None, regex=None, array_ok=False, **kwargs):
+    def __init__(
+        self, plotly_name, parent_name, dflt=None, regex=None, array_ok=False, **kwargs
+    ):
         if dflt is None and regex is None:
             raise ValueError("One or both of regex and deflt must be specified")
 
@@ -1770,7 +1772,9 @@ class SubplotidValidator(BaseValidator):
     subplot, of type '{base}', that may be specified as:
       - the string '{base}'
     optionally followed by an integer >= 1
-    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)""".format(plotly_name=self.plotly_name, base=self.base)
+    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)""".format(
+            plotly_name=self.plotly_name, base=self.base
+        )
         if self.array_ok:
             desc += """
       - A tuple or list of the above"""
