@@ -1735,6 +1735,7 @@ class SubplotidValidator(BaseValidator):
             "dflt"
         ],
         "otherOpts": [
+            "arrayOk",
             "regex"
         ]
     }
@@ -1762,17 +1763,9 @@ class SubplotidValidator(BaseValidator):
     def description(self):
         desc = """\
     The '{plotly_name}' property is an identifier of a particular
-    subplot, of type '{base}', that may be specified as the string '{base}'
-    optionally followed by an integer >= 1
-    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)
-        """.format(plotly_name=self.plotly_name, base=self.base)
-
-        desc = """\
-    The '{plotly_name}' property is an identifier of a particular
     subplot, of type '{base}', that may be specified as:
-      - the string '{base}'
-    optionally followed by an integer >= 1
-    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)""".format(
+      - the string '{base}' optionally followed by an integer >= 1
+        (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)""".format(
             plotly_name=self.plotly_name, base=self.base
         )
         if self.array_ok:
