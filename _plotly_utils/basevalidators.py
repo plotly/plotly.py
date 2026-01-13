@@ -1774,37 +1774,39 @@ class SubplotidValidator(BaseValidator):
         return desc
 
     def validate_coerce(self, v):
-        def coerce(value, invalid_els):
+        def coerce(value):
             if not isinstance(value, str):
-                invalid_els.append(value)
-                return value
+                return value, False
             match = fullmatch(self.regex, value)
             if not match:
-                invalid_els.append(value)
-                return value
+                return value, False
             else:
                 digit_str = match.group(1)
                 if len(digit_str) > 0 and int(digit_str) == 0:
-                    invalid_els.append(value)
-                    return value
+                    return value, False
                 elif len(digit_str) > 0 and int(digit_str) == 1:
-                    return self.base
+                    return self.base, True
                 else:
-                    return value
+                    return value, True
 
         if v is None:
             pass
         elif self.array_ok and is_simple_array(v):
+            values = []
             invalid_els = []
-            v = [e for e in v if coerce(e, invalid_els)]
-            if invalid_els:
+            for e in v:
+                coerced_e, success = coerce(e)
+                values.append(coerced_e)
+                if not success:
+                    invalid_els.append(coerced_e)
+            if len(invalid_els) > 0:
                 self.raise_invalid_elements(invalid_els[:10])
+            return values
         else:
-            invalid_els = []
-            v = coerce(v, invalid_els)
-        if invalid_els:
-            self.raise_invalid_val(self.base)
-        return v
+            v, success = coerce(v)
+            if not success:
+                self.raise_invalid_val(self.base)
+            return v
 
 
 class FlaglistValidator(BaseValidator):
