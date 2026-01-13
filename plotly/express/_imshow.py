@@ -238,7 +238,7 @@ def imshow(
     user_provided_colorscale = (
         "color_continuous_scale" in args and args["color_continuous_scale"] is not None
     )
-    apply_default_cascade(args)
+    apply_default_cascade(args, constructor=None)
     labels = labels.copy()
     nslices_facet = 1
     if facet_col is not None:
