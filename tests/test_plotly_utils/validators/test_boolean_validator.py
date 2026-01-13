@@ -42,10 +42,7 @@ def test_rejection(val, validator):
 @pytest.mark.parametrize("val", [(True, False), [True, False]])
 def test_acceptance_aok(val, validator_aok):
     v = validator_aok.validate_coerce(val)
-    if isinstance(val, list):
-        assert val == v
-    else:
-        assert val == tuple(v)
+    assert list(val) == v
 
 
 # Rejection
