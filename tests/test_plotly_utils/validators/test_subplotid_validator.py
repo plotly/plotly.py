@@ -28,6 +28,12 @@ def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
 
 
+# Coercion from {base}1 to {base}
+def test_coerce(validator):
+    v = validator.validate_coerce("geo1")
+    assert ("geo") == v
+
+
 # Rejection by type
 @pytest.mark.parametrize("val", [23, [], {}, set(), np_inf(), np_nan()])
 def test_rejection_type(val, validator):
@@ -59,7 +65,8 @@ def test_rejection_value(val, validator):
 
 
 @pytest.mark.parametrize(
-    "val", ["legend2", ["legend", "legend2"], ("legend1", "legend2")]
+    "val",
+    ["legend2", ["legend", "legend2"], ["legend", "legend2"]],
 )
 def test_acceptance_aok(val, validator_aok):
     v = validator_aok.validate_coerce(val)
@@ -67,6 +74,12 @@ def test_acceptance_aok(val, validator_aok):
         assert val == tuple(v)
     else:
         assert val == v
+
+
+# Coercion from {base}1 to {base}
+def test_coerce_aok(validator_aok):
+    v = validator_aok.validate_coerce(("legend1", "legend2"))
+    assert ("legend", "legend2") == tuple(v)
 
 
 # Rejection by type
