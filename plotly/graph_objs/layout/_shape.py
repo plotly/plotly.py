@@ -50,8 +50,8 @@ class Shape(_BaseLayoutHierarchyType):
         not. Has no effect when the older editable shapes mode is
         enabled via `config.editable` or `config.edits.shapePosition`.
 
-        The 'editable' property must be specified as a bool
-        (either True, or False)
+        The 'editable' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -157,9 +157,9 @@ class Shape(_BaseLayoutHierarchyType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -359,8 +359,8 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Determines whether or not this shape is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

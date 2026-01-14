@@ -382,9 +382,9 @@ class Image(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -717,9 +717,9 @@ class Image(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -762,9 +762,9 @@ class Image(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------

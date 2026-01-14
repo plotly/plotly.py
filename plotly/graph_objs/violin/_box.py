@@ -57,8 +57,8 @@ class Box(_BaseTraceHierarchyType):
         Determines if an miniature box plot is drawn inside the
         violins.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

@@ -26,8 +26,8 @@ class Rangeslider(_BaseLayoutHierarchyType):
         relation to the input data. If `range` is provided, then
         `autorange` is set to False.
 
-        The 'autorange' property must be specified as a bool
-        (either True, or False)
+        The 'autorange' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -155,8 +155,8 @@ class Rangeslider(_BaseLayoutHierarchyType):
         Determines whether or not the range slider will be visible. If
         visible, perpendicular axes will be set to `fixedrange`
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
