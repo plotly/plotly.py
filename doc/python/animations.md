@@ -339,27 +339,6 @@ sliders_dict = {
     "steps": []
 }
 
-# make data
-year = 1952
-for continent in continents:
-    dataset_by_year = dataset[dataset["year"] == year]
-    dataset_by_year_and_cont = dataset_by_year[
-        dataset_by_year["continent"] == continent]
-
-    data_dict = {
-        "x": list(dataset_by_year_and_cont["lifeExp"]),
-        "y": list(dataset_by_year_and_cont["gdpPercap"]),
-        "mode": "markers",
-        "text": list(dataset_by_year_and_cont["country"]),
-        "marker": {
-            "sizemode": "area",
-            "sizeref": 200000,
-            "size": list(dataset_by_year_and_cont["pop"])
-        },
-        "name": continent
-    }
-    fig_dict["data"].append(data_dict)
-
 # make frames
 for year in years:
     frame = {"data": [], "name": str(year)}
@@ -395,6 +374,9 @@ for year in years:
 
 
 fig_dict["layout"]["sliders"] = [sliders_dict]
+
+# make data
+fig_dict["data"] = fig_dict["frames"][0]['data']
 
 fig = go.Figure(fig_dict)
 
