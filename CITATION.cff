@@ -11,5 +11,5 @@ authors:
 title: "An interactive, open-source, and browser-based graphing library for Python"
 version: 6.5.2
 doi: 10.5281/zenodo.14503524
-date-released: 2025-11-17
+date-released: 2026-01-14
 url: "https://github.com/plotly/plotly.py"

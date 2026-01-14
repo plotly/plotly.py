@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix issue where pie trace `legend`, `showlegend` attributes don't accept array values [[#5464](https://github.com/plotly/plotly.py/pull/5464) and [#5465](https://github.com/plotly/plotly.py/pull/5465)], with thanks to @my-tien for the contribution!
 
-## [6.5.1] - 2025-11-17
+## [6.5.1] - 2026-01-07
 
 ### Fixed
 - Fix issue where Plotly Express ignored trace-specific color sequences defined in templates via `template.data.<trace_type>` [[#5437](https://github.com/plotly/plotly.py/pull/5437)], with thanks to @antonymilne for the contribution!
