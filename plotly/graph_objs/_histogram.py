@@ -109,8 +109,8 @@ class Histogram(_BaseTraceType):
         `autobinx: true` or `false` and will update `xbins` accordingly
         before deleting `autobinx` from the trace.
 
-        The 'autobinx' property must be specified as a bool
-        (either True, or False)
+        The 'autobinx' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -130,8 +130,8 @@ class Histogram(_BaseTraceType):
         `autobiny: true` or `false` and will update `ybins` accordingly
         before deleting `autobiny` from the trace.
 
-        The 'autobiny' property must be specified as a bool
-        (either True, or False)
+        The 'autobiny' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -176,8 +176,8 @@ class Histogram(_BaseTraceType):
         make sure to set `xaxis.layer` and `yaxis.layer` to *below
         traces*.
 
-        The 'cliponaxis' property must be specified as a bool
-        (either True, or False)
+        The 'cliponaxis' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -637,9 +637,9 @@ class Histogram(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -989,8 +989,8 @@ class Histogram(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1305,9 +1305,9 @@ class Histogram(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -1434,9 +1434,9 @@ class Histogram(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------

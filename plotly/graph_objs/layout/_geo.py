@@ -463,8 +463,8 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets whether or not the coastlines are drawn.
 
-        The 'showcoastlines' property must be specified as a bool
-        (either True, or False)
+        The 'showcoastlines' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -481,8 +481,8 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets whether or not country boundaries are drawn.
 
-        The 'showcountries' property must be specified as a bool
-        (either True, or False)
+        The 'showcountries' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -499,8 +499,8 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets whether or not a frame is drawn around the map.
 
-        The 'showframe' property must be specified as a bool
-        (either True, or False)
+        The 'showframe' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -517,8 +517,8 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets whether or not lakes are drawn.
 
-        The 'showlakes' property must be specified as a bool
-        (either True, or False)
+        The 'showlakes' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -535,8 +535,8 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets whether or not land masses are filled in color.
 
-        The 'showland' property must be specified as a bool
-        (either True, or False)
+        The 'showland' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -553,8 +553,8 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets whether or not oceans are filled in color.
 
-        The 'showocean' property must be specified as a bool
-        (either True, or False)
+        The 'showocean' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -571,8 +571,8 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets whether or not rivers are drawn.
 
-        The 'showrivers' property must be specified as a bool
-        (either True, or False)
+        The 'showrivers' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -590,8 +590,8 @@ class Geo(_BaseLayoutHierarchyType):
         Sets whether or not boundaries of subunits within countries
         (e.g. states, provinces) are drawn.
 
-        The 'showsubunits' property must be specified as a bool
-        (either True, or False)
+        The 'showsubunits' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -666,8 +666,8 @@ class Geo(_BaseLayoutHierarchyType):
         """
         Sets the default visibility of the base layers.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
