@@ -215,8 +215,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         Sets whether or not to show the hover label arrow/triangle
         pointing to the data point.
 
-        The 'showarrow' property must be specified as a bool
-        (either True, or False)
+        The 'showarrow' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

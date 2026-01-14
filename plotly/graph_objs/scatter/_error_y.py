@@ -130,8 +130,8 @@ class ErrorY(_BaseTraceHierarchyType):
         in both direction (top/bottom for vertical bars, left/right for
         horizontal bars.
 
-        The 'symmetric' property must be specified as a bool
-        (either True, or False)
+        The 'symmetric' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -266,8 +266,8 @@ class ErrorY(_BaseTraceHierarchyType):
         """
         Determines whether or not this set of error bars is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

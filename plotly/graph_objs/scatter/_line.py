@@ -134,8 +134,8 @@ class Line(_BaseTraceHierarchyType):
         that the number of points along the resulting SVG path is
         unaffected.
 
-        The 'simplify' property must be specified as a bool
-        (either True, or False)
+        The 'simplify' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

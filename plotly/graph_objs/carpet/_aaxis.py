@@ -286,8 +286,8 @@ class Aaxis(_BaseTraceHierarchyType):
         value of this axis. If True, the end line is drawn on top of
         the grid lines.
 
-        The 'endline' property must be specified as a bool
-        (either True, or False)
+        The 'endline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -368,8 +368,8 @@ class Aaxis(_BaseTraceHierarchyType):
         Determines whether or not this axis is zoom-able. If true, then
         zoom is disabled.
 
-        The 'fixedrange' property must be specified as a bool
-        (either True, or False)
+        The 'fixedrange' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -744,8 +744,8 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -785,8 +785,8 @@ class Aaxis(_BaseTraceHierarchyType):
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -803,8 +803,8 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Determines whether or not a line bounding this axis is drawn.
 
-        The 'showline' property must be specified as a bool
-        (either True, or False)
+        The 'showline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -900,8 +900,8 @@ class Aaxis(_BaseTraceHierarchyType):
         value of this axis. If True, the start line is drawn on top of
         the grid lines.
 
-        The 'startline' property must be specified as a bool
-        (either True, or False)
+        The 'startline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
