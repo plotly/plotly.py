@@ -17,8 +17,8 @@ class Axis(_BaseTraceHierarchyType):
         dimension match. Equivalent to setting the `matches` axis
         attribute in the layout with the correct axis id.
 
-        The 'matches' property must be specified as a bool
-        (either True, or False)
+        The 'matches' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

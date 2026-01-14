@@ -39,8 +39,8 @@ class Z(_BaseTraceHierarchyType):
         the other hand Applying a `fill` ratio less than one would
         allow the creation of openings parallel to the edges.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

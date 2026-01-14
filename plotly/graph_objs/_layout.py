@@ -241,8 +241,8 @@ class Layout(_BaseLayoutType):
         layout width or height is always initialized on the first call
         to plot.
 
-        The 'autosize' property must be specified as a bool
-        (either True, or False)
+        The 'autosize' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -654,8 +654,8 @@ class Layout(_BaseLayoutType):
         Colors provided in the trace, using `marker.colors`, are never
         extended.
 
-        The 'extendfunnelareacolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendfunnelareacolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -679,8 +679,8 @@ class Layout(_BaseLayoutType):
         provided in the trace, using `marker.colors`, are never
         extended.
 
-        The 'extendiciclecolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendiciclecolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -703,8 +703,8 @@ class Layout(_BaseLayoutType):
         but you can set `false` to disable. Colors provided in the
         trace, using `marker.colors`, are never extended.
 
-        The 'extendpiecolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendpiecolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -728,8 +728,8 @@ class Layout(_BaseLayoutType):
         Colors provided in the trace, using `marker.colors`, are never
         extended.
 
-        The 'extendsunburstcolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendsunburstcolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -753,8 +753,8 @@ class Layout(_BaseLayoutType):
         Colors provided in the trace, using `marker.colors`, are never
         extended.
 
-        The 'extendtreemapcolors' property must be specified as a bool
-        (either True, or False)
+        The 'extendtreemapcolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -976,8 +976,8 @@ class Layout(_BaseLayoutType):
         graphs from the Chart Studio Cloud (at https://chart-
         studio.plotly.com or on-premise).
 
-        The 'hidesources' property must be specified as a bool
-        (either True, or False)
+        The 'hidesources' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1668,8 +1668,8 @@ class Layout(_BaseLayoutType):
         trace is shown in the legend. c) One trace is explicitly given
         with `showlegend: true`.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

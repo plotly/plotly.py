@@ -300,8 +300,8 @@ class Annotation(_BaseLayoutHierarchyType):
         provided. If you use the event `plotly_clickannotation` without
         `hovertext` you must explicitly enable `captureevents`.
 
-        The 'captureevents' property must be specified as a bool
-        (either True, or False)
+        The 'captureevents' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -442,8 +442,8 @@ class Annotation(_BaseLayoutHierarchyType):
         arrow. If True, `text` is placed near the arrow's tail. If
         False, `text` lines up with the `x` and `y` provided.
 
-        The 'showarrow' property must be specified as a bool
-        (either True, or False)
+        The 'showarrow' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -634,8 +634,8 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         Determines whether or not this annotation is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
