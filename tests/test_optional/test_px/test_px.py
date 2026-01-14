@@ -1,6 +1,7 @@
 from itertools import permutations
 import warnings
 
+import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 import narwhals.stable.v1 as nw
@@ -224,6 +225,54 @@ def test_px_templates(backend):
         # reset defaults to prevent all other tests from failing if this one does
         px.defaults.reset()
         pio.templates.default = "plotly"
+
+
+def test_px_templates_trace_specific_colors(backend):
+    tips = px.data.tips(return_type=backend)
+
+    # trace-specific colors: each trace type uses its own template colors
+    template = {
+        "data": {
+            "histogram": [
+                {"marker": {"color": "orange"}},
+                {"marker": {"color": "purple"}},
+            ],
+            "bar": [
+                {"marker": {"color": "red"}},
+                {"marker": {"color": "blue"}},
+            ],
+        },
+        "layout": {
+            "colorway": ["yellow", "green"],
+        },
+    }
+    # histogram uses histogram colors
+    fig = px.histogram(tips, x="total_bill", color="sex", template=template)
+    assert fig.data[0].marker.color == "orange"
+    assert fig.data[1].marker.color == "purple"
+    # fallback to layout.colorway when trace-specific colors don't exist
+    fig = px.box(tips, x="day", y="total_bill", color="sex", template=template)
+    assert fig.data[0].marker.color == "yellow"
+    assert fig.data[1].marker.color == "green"
+    # timeline special case (maps to bar)
+    df_timeline = pd.DataFrame(
+        {
+            "Task": ["Job A", "Job B"],
+            "Start": ["2009-01-01", "2009-03-05"],
+            "Finish": ["2009-02-28", "2009-04-15"],
+            "Resource": ["Alex", "Max"],
+        }
+    )
+    fig = px.timeline(
+        df_timeline,
+        x_start="Start",
+        x_end="Finish",
+        y="Task",
+        color="Resource",
+        template=template,
+    )
+    assert fig.data[0].marker.color == "red"
+    assert fig.data[1].marker.color == "blue"
 
 
 def test_px_defaults():
