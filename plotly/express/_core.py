@@ -1003,7 +1003,7 @@ def one_group(x):
     return ""
 
 
-def apply_default_cascade(args):
+def apply_default_cascade(args, constructor):
     # first we apply px.defaults to unspecified args
 
     for param in defaults.__slots__:
@@ -1037,9 +1037,29 @@ def apply_default_cascade(args):
         if args["color_continuous_scale"] is None:
             args["color_continuous_scale"] = sequential.Viridis
 
+    # if color_discrete_sequence not set explicitly or in px.defaults,
+    # see if we can defer to template. Try trace-specific colors first,
+    # then layout.colorway, then set reasonable defaults
     if "color_discrete_sequence" in args:
+        if args["color_discrete_sequence"] is None and constructor is not None:
+            if constructor == "timeline":
+                trace_type = "bar"
+            else:
+                trace_type = constructor().type
+            if trace_data_list := getattr(args["template"].data, trace_type, None):
+                trace_specific_colors = [
+                    trace_data.marker.color
+                    for trace_data in trace_data_list
+                    if hasattr(trace_data, "marker")
+                    and hasattr(trace_data.marker, "color")
+                ]
+                # If template contains at least one color for this trace type, assign to color_discrete_sequence
+                if any(trace_specific_colors):
+                    args["color_discrete_sequence"] = trace_specific_colors
+        # fallback to layout.colorway if trace-specific colors not available
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
+        # final fallback to default qualitative palette
         if args["color_discrete_sequence"] is None:
             args["color_discrete_sequence"] = qualitative.D3
 
@@ -2486,7 +2506,7 @@ def get_groups_and_orders(args, grouper):
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
-    apply_default_cascade(args)
+    apply_default_cascade(args, constructor=constructor)
 
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
