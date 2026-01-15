@@ -290,7 +290,9 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
         raise ValueError(
             """
 The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
-""".format(file=file)
+""".format(
+                file=file
+            )
         )
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.
@@ -333,7 +335,9 @@ def from_json_plotly(value, engine=None):
         raise ValueError(
             """
 from_json_plotly requires a string or bytes argument but received value of type {typ}
-    Received value: {value}""".format(typ=type(value), value=value)
+    Received value: {value}""".format(
+                typ=type(value), value=value
+            )
         )
 
     # Determine json engine

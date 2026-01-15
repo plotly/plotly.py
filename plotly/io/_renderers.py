@@ -94,7 +94,9 @@ class RenderersConfig(object):
             raise ValueError(
                 """\
 Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
-    Received value with type: {typ}""".format(typ=type(value))
+    Received value with type: {typ}""".format(
+                    typ=type(value)
+                )
             )
 
         self._renderers[key] = value
@@ -241,7 +243,9 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         if invalid:
             raise ValueError(
                 """
-Invalid named renderer(s) received: {}""".format(str(invalid))
+Invalid named renderer(s) received: {}""".format(
+                    str(invalid)
+                )
             )
 
         return renderer_names
@@ -253,7 +257,9 @@ Renderers configuration
     Default renderer: {default}
     Available renderers:
 {available}
-""".format(default=repr(self.default), available=self._available_renderers_str())
+""".format(
+            default=repr(self.default), available=self._available_renderers_str()
+        )
 
     def _available_renderers_str(self):
         """
@@ -481,7 +487,9 @@ if env_renderer:
         raise ValueError(
             """
 Invalid named renderer(s) specified in the 'PLOTLY_RENDERER'
-environment variable: {env_renderer}""".format(env_renderer=env_renderer)
+environment variable: {env_renderer}""".format(
+                env_renderer=env_renderer
+            )
         )
 
     default_renderer = env_renderer

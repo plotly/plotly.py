@@ -151,7 +151,9 @@ def _get_jconfig(config=None):
         if bad_config:
             warnings.warn(
                 """
-Unrecognized config options supplied: {bad_config}""".format(bad_config=bad_config)
+Unrecognized config options supplied: {bad_config}""".format(
+                    bad_config=bad_config
+                )
             )
 
         clean_config = config

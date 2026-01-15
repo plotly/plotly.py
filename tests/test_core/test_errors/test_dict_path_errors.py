@@ -160,13 +160,16 @@ line_colr
      ^^^^""",
         )
         assert (
-            e.args[0].find(
-                """Bad property path:
+            (
+                e.args[0].find(
+                    """Bad property path:
 line_colr
      ^^^^"""
+                )
+                and (e.args[0].find("""Did you mean "color"?""") >= 0) >= 0
             )
-            and (e.args[0].find("""Did you mean "color"?""") >= 0) >= 0
-        ) and (e_substr == e_correct_substr)
+            and (e_substr == e_correct_substr)
+        )
     assert raised
 
     raised = False
@@ -303,14 +306,17 @@ text_yo
 ^^^^""",
         )
         assert (
-            e.args[0].find(
-                """
+            (
+                e.args[0].find(
+                    """
 Property does not support subscripting:
 text_yo
 ^^^^"""
+                )
+                >= 0
             )
-            >= 0
-        ) and (e_substr == e_correct_substr)
+            and (e_substr == e_correct_substr)
+        )
     assert raised
 
     # Same as previous test but tests deeper path
@@ -343,14 +349,17 @@ textfont_family_yo
          ^^^^^^""",
         )
         assert (
-            e.args[0].find(
-                """
+            (
+                e.args[0].find(
+                    """
 Property does not support subscripting:
 textfont_family_yo
          ^^^^^^"""
+                )
+                >= 0
             )
-            >= 0
-        ) and (e_substr == e_correct_substr)
+            and (e_substr == e_correct_substr)
+        )
     assert raised
 
 

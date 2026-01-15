@@ -208,7 +208,9 @@ class BoxSelector:
     def __repr__(self):
         return """\
 BoxSelector(xrange={xrange},
-            yrange={yrange})""".format(xrange=self.xrange, yrange=self.yrange)
+            yrange={yrange})""".format(
+            xrange=self.xrange, yrange=self.yrange
+        )
 
     @property
     def type(self):

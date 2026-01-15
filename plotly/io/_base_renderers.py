@@ -561,7 +561,9 @@ class IFrameRenderer(MimetypeRenderer):
     frameborder="0"
     allowfullscreen
 ></iframe>
-""".format(width=iframe_width, height=iframe_height, src=self.build_url(filename))
+""".format(
+            width=iframe_width, height=iframe_height, src=self.build_url(filename)
+        )
 
         return {"text/html": iframe_html}
 

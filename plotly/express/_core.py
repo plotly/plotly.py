@@ -436,9 +436,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         args["y"],
                         non_missing.to_numpy(),  # numpy array
                     )
-                    assert len(y_out) == len(trace_patch["x"]), (
-                        "missing-data-handling failure in trendline code"
-                    )
+                    assert len(y_out) == len(
+                        trace_patch["x"]
+                    ), "missing-data-handling failure in trendline code"
                     trace_patch["y"] = y_out
                     mapping_labels[get_label(args, args["x"])] = "%{x}"
                     mapping_labels[get_label(args, args["y"])] = "%{y} <b>(trend)</b>"
@@ -2892,7 +2892,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             e.args = (
                 e.args[0]
                 + """
-Use the {facet_arg} argument to adjust this spacing.""".format(facet_arg=facet_arg),
+Use the {facet_arg} argument to adjust this spacing.""".format(
+                    facet_arg=facet_arg
+                ),
             )
             raise e
 

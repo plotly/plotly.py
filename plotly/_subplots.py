@@ -360,7 +360,9 @@ def make_subplots(
         raise ValueError(
             """
 The 'rows' argument to make_subplots must be an int greater than 0.
-    Received value of type {typ}: {val}""".format(typ=type(rows), val=repr(rows))
+    Received value of type {typ}: {val}""".format(
+                typ=type(rows), val=repr(rows)
+            )
         )
 
     #  ### cols ###
@@ -368,7 +370,9 @@ The 'rows' argument to make_subplots must be an int greater than 0.
         raise ValueError(
             """
 The 'cols' argument to make_subplots must be an int greater than 0.
-    Received value of type {typ}: {val}""".format(typ=type(cols), val=repr(cols))
+    Received value of type {typ}: {val}""".format(
+                typ=type(cols), val=repr(cols)
+            )
         )
 
     # ### start_cell ###
@@ -468,7 +472,9 @@ dimensions ({rows} x {cols}).
                     """
 The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
      'secondary_y' is only supported for subplots of type 'xy'
-""".format(s_typ=spec["type"])
+""".format(
+                        s_typ=spec["type"]
+                    )
                 )
 
     # ### insets ###
@@ -480,7 +486,9 @@ The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
         raise ValueError(
             """
 The 'insets' argument to make_subplots must be a list of dictionaries.
-    Received value of type {typ}: {val}""".format(typ=type(insets), val=repr(insets))
+    Received value of type {typ}: {val}""".format(
+                typ=type(insets), val=repr(insets)
+            )
         )
 
     if insets:
@@ -1408,7 +1416,9 @@ def _set_trace_grid_reference(trace, layout, grid_ref, row, col, secondary_y=Fal
     if not subplot_refs:
         raise ValueError(
             """
-No subplot specified at grid position ({row}, {col})""".format(row=row, col=col)
+No subplot specified at grid position ({row}, {col})""".format(
+                row=row, col=col
+            )
         )
 
     if secondary_y:
@@ -1500,7 +1510,9 @@ The col argument to get_subplot must be an integer where 1 <= row <= {cols}
     else:
         raise ValueError(
             """
-Unexpected subplot type with layout_keys of {}""".format(layout_keys)
+Unexpected subplot type with layout_keys of {}""".format(
+                layout_keys
+            )
         )
 
 

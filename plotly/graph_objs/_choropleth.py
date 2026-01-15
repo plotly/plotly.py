@@ -1750,10 +1750,12 @@ class Choropleth(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.Choropleth
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Choropleth`""")
+an instance of :class:`plotly.graph_objs.Choropleth`"""
+            )
 
         if locationmode == "country names" and kwargs.get("_validate"):
             warnings.warn(
