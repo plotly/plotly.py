@@ -29,9 +29,9 @@ def calc_stats(data):
     x = np.asarray(data, float)
     vals_min = np.min(x)
     vals_max = np.max(x)
-    q2 = np.percentile(x, 50)
     q1 = np.percentile(x, 25)
     q3 = np.percentile(x, 75)
+    q2 = np.percentile(x, 50)
     iqr = q3 - q1
     whisker_dist = 1.5 * iqr
 
