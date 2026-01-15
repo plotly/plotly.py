@@ -101,10 +101,12 @@ class Axis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.splom.dimension.Axis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.dimension.Axis`""")
+an instance of :class:`plotly.graph_objs.splom.dimension.Axis`"""
+            )
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

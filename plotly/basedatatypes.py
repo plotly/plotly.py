@@ -1757,7 +1757,9 @@ is of type {subplot_type}.""".format(
                         raise ValueError(
                             """
 Invalid property path '{key_path_str}' for trace class {trace_class}
-""".format(key_path_str=key_path_str, trace_class=trace_class)
+""".format(
+                                key_path_str=key_path_str, trace_class=trace_class
+                            )
                         )
 
                     # Apply set operation for this trace and thist value
@@ -2002,7 +2004,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         of length {n} (The number of traces being added)
 
         Received: {invalid}
-        """.format(name=name, n=n, invalid=invalid)
+        """.format(
+            name=name, n=n, invalid=invalid
+        )
 
         raise ValueError(rows_err_msg)
 
@@ -2658,7 +2662,9 @@ Please use the add_trace method with the row and col parameters.
                 raise ValueError(
                     """
 Invalid property path '{key_path_str}' for layout
-""".format(key_path_str=key_path_str)
+""".format(
+                        key_path_str=key_path_str
+                    )
                 )
 
             # Apply set operation on the layout dict
@@ -5616,7 +5622,9 @@ class BasePlotlyType(object):
             msg = """
 {class_name} object is not a descendant of a Figure.
 on_change callbacks are not supported in this case.
-""".format(class_name=class_name)
+""".format(
+                class_name=class_name
+            )
             raise ValueError(msg)
 
         # Validate args not empty

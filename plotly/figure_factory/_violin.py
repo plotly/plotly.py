@@ -10,6 +10,18 @@ np = optional_imports.get_module("numpy")
 scipy_stats = optional_imports.get_module("scipy.stats")
 
 
+def _percentile(x, q):
+    """
+    Safe percentile function for NumPy >= 2.4 and older versions. Created a basic safe wrapper.
+    """
+    try:
+        # NumPy >= 2.4 (New Version)
+        return np.percentile(x, q, method="linear")
+    except TypeError:
+        # NumPy < 2.4 (Old Version)
+        return np.percentile(x, q, interpolation="linear")
+
+
 def calc_stats(data):
     """
     Calculate statistics for use in violin plot.
@@ -17,9 +29,9 @@ def calc_stats(data):
     x = np.asarray(data, float)
     vals_min = np.min(x)
     vals_max = np.max(x)
-    q2 = np.percentile(x, 50, interpolation="linear")
-    q1 = np.percentile(x, 25, interpolation="lower")
-    q3 = np.percentile(x, 75, interpolation="higher")
+    q2 = np.percentile(x, 50)
+    q1 = np.percentile(x, 25)
+    q3 = np.percentile(x, 75)
     iqr = q3 - q1
     whisker_dist = 1.5 * iqr
 

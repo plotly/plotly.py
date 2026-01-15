@@ -212,7 +212,9 @@ class OrcaConfig(object):
                 """
 The first argument to update must be a dict, \
 but received value of type {typ}l
-    Received value: {val}""".format(typ=type(d), val=d)
+    Received value: {val}""".format(
+                    typ=type(d), val=d
+                )
             )
 
         updates = copy(d)
@@ -254,7 +256,9 @@ but received value of type {typ}l
                 if warn:
                     warnings.warn(
                         """\
-Unable to read orca configuration file at {path}""".format(path=self.config_file)
+Unable to read orca configuration file at {path}""".format(
+                            path=self.config_file
+                        )
                     )
                 return
 
@@ -265,7 +269,9 @@ Unable to read orca configuration file at {path}""".format(path=self.config_file
                 if warn:
                     warnings.warn(
                         """\
-Orca configuration file at {path} is not valid JSON""".format(path=self.config_file)
+Orca configuration file at {path} is not valid JSON""".format(
+                            path=self.config_file
+                        )
                     )
                 return
 
@@ -276,7 +282,9 @@ Orca configuration file at {path} is not valid JSON""".format(path=self.config_f
         elif warn:
             warnings.warn(
                 """\
-Orca configuration file at {path} not found""".format(path=self.config_file)
+Orca configuration file at {path} not found""".format(
+                    path=self.config_file
+                )
             )
 
     def save(self):
@@ -297,7 +305,9 @@ Orca configuration file at {path} not found""".format(path=self.config_file)
         else:
             warnings.warn(
                 """\
-Failed to write orca configuration file at '{path}'""".format(path=self.config_file)
+Failed to write orca configuration file at '{path}'""".format(
+                    path=self.config_file
+                )
             )
 
     @property
@@ -324,7 +334,9 @@ Failed to write orca configuration file at '{path}'""".format(path=self.config_f
             raise ValueError(
                 """
 The server_url property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                    typ=type(val), val=val
+                )
             )
 
         if not val.startswith("http://") and not val.startswith("https://"):
@@ -363,7 +375,9 @@ The server_url property must be a string, but received value of type {typ}.
             raise ValueError(
                 """
 The port property must be an integer, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                    typ=type(val), val=val
+                )
             )
 
         self._props["port"] = val
@@ -407,7 +421,9 @@ The port property must be an integer, but received value of type {typ}.
                 raise ValueError(
                     """
 The executable property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                        typ=type(val), val=val
+                    )
                 )
             if isinstance(val, str):
                 val = [val]
@@ -448,7 +464,9 @@ The executable property must be a string, but received value of type {typ}.
                 raise ValueError(
                     """
 The timeout property must be a number, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                        typ=type(val), val=val
+                    )
                 )
             self._props["timeout"] = val
 
@@ -477,7 +495,9 @@ The timeout property must be a number, but received value of type {typ}.
             raise ValueError(
                 """
 The default_width property must be an int, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                    typ=type(val), val=val
+                )
             )
         self._props["default_width"] = val
 
@@ -503,7 +523,9 @@ The default_width property must be an int, but received value of type {typ}.
             raise ValueError(
                 """
 The default_height property must be an int, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                    typ=type(val), val=val
+                )
             )
         self._props["default_height"] = val
 
@@ -560,7 +582,9 @@ The default_height property must be an int, but received value of type {typ}.
             raise ValueError(
                 """
 The default_scale property must be a number, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                    typ=type(val), val=val
+                )
             )
         self._props["default_scale"] = val
 
@@ -586,7 +610,9 @@ The default_scale property must be a number, but received value of type {typ}.
                 raise ValueError(
                     """
 The topojson property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                        typ=type(val), val=val
+                    )
                 )
             self._props["topojson"] = val
 
@@ -616,7 +642,9 @@ The topojson property must be a string, but received value of type {typ}.
                 raise ValueError(
                     """
 The mathjax property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                        typ=type(val), val=val
+                    )
                 )
             self._props["mathjax"] = val
 
@@ -644,7 +672,9 @@ The mathjax property must be a string, but received value of type {typ}.
                     """
 The mapbox_access_token property must be a string, \
 but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
+    Received value: {val}""".format(
+                        typ=type(val), val=val
+                    )
                 )
             self._props["mapbox_access_token"] = val
 
@@ -997,7 +1027,9 @@ The plotly.io.orca.config.use_xvfb property is set to True, but the
 xvfb-run executable could not be found on the system path.
 
 Searched for the executable 'xvfb-run' on the following path:
-    {formatted_path}""".format(formatted_path=formatted_path)
+    {formatted_path}""".format(
+                    formatted_path=formatted_path
+                )
             )
 
         executable_list = [xvfb_run_executable] + xvfb_args
@@ -1076,7 +1108,9 @@ for more info on Xvfb
             + """
 The error encountered is that no output was returned by the command
     $ {executable} --help
-""".format(executable=" ".join(executable_list))
+""".format(
+                executable=" ".join(executable_list)
+            )
         )
 
     if "Plotly's image-exporting utilities" not in help_result.decode("utf-8"):
@@ -1087,7 +1121,9 @@ The error encountered is that unexpected output was returned by the command
     $ {executable} --help
 
 {help_result}
-""".format(executable=" ".join(executable_list), help_result=help_result)
+""".format(
+                executable=" ".join(executable_list), help_result=help_result
+            )
         )
 
     # Get orca version
@@ -1129,7 +1165,9 @@ The error encountered is that no version was reported by the orca executable.
 Here is the command that plotly.py ran to request the version:
 
     $ {executable} --version
-""".format(executable=" ".join(executable_list))
+""".format(
+                executable=" ".join(executable_list)
+            )
         )
     else:
         version_result = version_result.decode()
@@ -1451,7 +1489,9 @@ def to_image(fig, format=None, width=None, height=None, scale=None, validate=Tru
 Plotly.py was unable to communicate with the orca server at {server_url}
 
 Please check that the server is running and accessible.
-""".format(server_url=config.server_url)
+""".format(
+                    server_url=config.server_url
+                )
             )
 
         else:
@@ -1468,7 +1508,9 @@ local orca server process, even though the server process seems to be running.
 Please review the process and connection information below:
 
 {info}
-""".format(info=status_str)
+""".format(
+                        info=status_str
+                    )
                 )
             else:
                 # Reset the status so that if the user tries again, we'll try to
@@ -1483,7 +1525,9 @@ Please review the process and connection information below:
 {info}
 plotly.py will attempt to start the local server process again the next time
 an image export operation is performed.
-""".format(info=status_str)
+""".format(
+                        info=status_str
+                    )
                 )
 
     # Check response
@@ -1497,7 +1541,9 @@ an image export operation is performed.
 The image request was rejected by the orca conversion utility
 with the following error:
    {status}: {msg}
-""".format(status=response.status_code, msg=response.content.decode("utf-8"))
+""".format(
+            status=response.status_code, msg=response.content.decode("utf-8")
+        )
 
         # ### Try to be helpful ###
         # Status codes from /src/component/plotly-graph/constants.js in the
@@ -1639,7 +1685,9 @@ For example:
 
     >>> import plotly.io as pio
     >>> pio.write_image(fig, file_path, format='png')
-""".format(file=file)
+""".format(
+                    file=file
+                )
             )
 
     # Request image
@@ -1662,7 +1710,9 @@ For example:
         raise ValueError(
             """
 The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
-""".format(file=file)
+""".format(
+                file=file
+            )
         )
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.

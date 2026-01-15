@@ -4206,9 +4206,9 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             elif isinstance(list1[i], float):
                 np.testing.assert_almost_equal(list1[i], list2[i], decimal=decimal)
             else:
-                assert list1[i] == list2[i], (
-                    f"Values at index {i} are not equal: {list1[i]} != {list2[i]}"
-                )
+                assert (
+                    list1[i] == list2[i]
+                ), f"Values at index {i} are not equal: {list1[i]} != {list2[i]}"
 
     def compare_dict_values(self, dict1, dict2, decimal=7):
         for k, v in dict1.items():
@@ -4219,9 +4219,9 @@ class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
             elif isinstance(v, float):
                 np.testing.assert_almost_equal(v, dict2[k], decimal=decimal)
             else:
-                assert v == dict2[k], (
-                    f"Values for key {k} are not equal: {v} != {dict2[k]}"
-                )
+                assert (
+                    v == dict2[k]
+                ), f"Values for key {k} are not equal: {v} != {dict2[k]}"
 
     def test_aggregation(self):
         lat = [0, 1, 1, 2, 4, 5, 1, 2, 4, 5, 2, 3, 2, 1, 5, 3, 5]

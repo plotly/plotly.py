@@ -377,8 +377,7 @@ class PlotlyNode:
 
         return self.plotly_name + (
             "s"
-            if self.is_array_element
-            and
+            if self.is_array_element and
             # Don't add 's' to layout.template.data.scatter etc.
             not (
                 self.parent

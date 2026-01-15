@@ -104,10 +104,12 @@ class Newselection(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError("""\
+            raise ValueError(
+                """\
 The first argument to the plotly.graph_objs.layout.Newselection
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Newselection`""")
+an instance of :class:`plotly.graph_objs.layout.Newselection`"""
+            )
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

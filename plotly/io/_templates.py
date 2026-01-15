@@ -169,7 +169,9 @@ Templates configuration
     Default template: {default}
     Available templates:
 {available}
-""".format(default=repr(self.default), available=self._available_templates_str())
+""".format(
+            default=repr(self.default), available=self._available_templates_str()
+        )
 
     def _available_templates_str(self):
         """
