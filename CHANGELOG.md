@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix issue where plotly was changing the global warnings format [[#5472](https://github.com/plotly/plotly.py/issues/5472)]
+
 ## [6.5.2] - 2026-01-14
 
 ### Fixed
