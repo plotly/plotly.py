@@ -22,12 +22,12 @@ def _generate_sri_hash(content):
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
 _window_plotly_config = """\
-<script type="text/javascript">\
+<script>\
 window.PlotlyConfig = {MathJaxConfig: 'local'};\
 </script>"""
 
 _mathjax_config = """\
-<script type="text/javascript">\
+<script>\
 if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
 </script>"""
 
@@ -282,7 +282,7 @@ def to_html(
     elif include_plotlyjs:
         load_plotlyjs = """\
         {win_config}
-        <script type="text/javascript">{plotlyjs}</script>\
+        <script>{plotlyjs}</script>\
     """.format(win_config=_window_plotly_config, plotlyjs=get_plotlyjs())
 
     # ## Handle loading/initializing MathJax ##
@@ -323,10 +323,10 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
         {load_plotlyjs}\
             <div id="{id}" class="plotly-graph-div" \
 style="height:{height}; width:{width};"></div>\
-            <script type="text/javascript">\
-                window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
-                {script};\
-            </script>\
+            <script>
+                window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}
+                {script};
+            </script>
         </div>""".format(
         mathjax_script=mathjax_script,
         load_plotlyjs=load_plotlyjs,
