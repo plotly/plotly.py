@@ -74,7 +74,13 @@ fig.show()
 import plotly.express as px
 import geopandas as gpd
 
-geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+# For geopandas >= 1.0, use geodatasets package
+# For older versions, use gpd.datasets
+try:
+    import geodatasets
+    geo_df = gpd.read_file(geodatasets.get_path("naturalearth.cities"))
+except (ImportError, AttributeError):
+    geo_df = gpd.read_file(gpd.datasets.get_path("naturalearth_cities"))
 
 px.set_mapbox_access_token(open(".mapbox_token").read())
 fig = px.scatter_geo(geo_df,
