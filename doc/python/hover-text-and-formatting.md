@@ -38,7 +38,7 @@ One of the most deceptively-powerful features of interactive visualization using
 
 There are three hover modes available in Plotly. The default setting is `layout.hovermode='closest'`, wherein a single hover label appears for the point directly underneath the cursor.
 
-#### Hovermode `closest` (default mode)
+#### Hover mode `closest` (default mode)
 
 ```python
 import plotly.express as px
@@ -51,7 +51,7 @@ fig.update_traces(mode="markers+lines")
 fig.show()
 ```
 
-#### Hovermode `x` or `y`
+#### Hover mode `x` or `y`
 
 If `layout.hovermode='x'` (or `'y'`), a single hover label appears per trace, for points at the same `x` (or `y`) value as the cursor. If multiple points in a given trace exist at the same coordinate, only one will get a hover label. In the line plot below we have forced markers to appear, to make it clearer what can be hovered over, and we have disabled the built-in Plotly Express `hovertemplate` by setting it to `None`, resulting in a more compact hover label per point:
 
@@ -67,7 +67,7 @@ fig.update_layout(hovermode="x")
 fig.show()
 ```
 
-#### Unified hovermode
+#### Unified hover mode
 
 If `layout.hovermode='x unified'` (or `'y unified'`), a single hover label appear, describing one point per trace, for points at the same `x` (or `y`) value as the cursor.  If multiple points in a given trace exist at the same coordinate, only one will get an entry in the hover label. In the line plot below we have forced markers to appear, to make it clearer what can be hovered over, and we have disabled the built-in Plotly Express `hovertemplate` by setting it to `None`, resulting in a more compact entry per point in the hover label:
 
@@ -83,11 +83,11 @@ fig.update_layout(hovermode="x unified")
 fig.show()
 ```
 
-#### Customize Title in Unified Hovermode
+#### Customize Title in Unified Hover Mode
 
 *New in 6.3*
 
-Customize the title shown in unified hovermode, by specifing `unifiedhovertitle.text`.
+Customize the title shown in unified hover mode, by specifing `unifiedhovertitle.text`.
 
 The unified hover title is a template string that supports using variables from the data. Numbers are formatted using d3-format's syntax `%{variable:d3-format}`, for `example \"Price: %{y:$.2f}\"`. Dates are formatted using d3-time-format's syntax `%{variable|d3-time-format}`, for example `\"Day: %{2019-01-01|%A}\"`.
 
@@ -134,13 +134,13 @@ fig.show()
 
 ```
 
-#### Control hovermode with Dash
+#### Control Hover Mode with Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
 Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
-Change the hovermode below and try hovering over the points:
+Change the hover mode below and try hovering over the points:
 
 ```python hide_code=true
 from IPython.display import IFrame
@@ -152,9 +152,9 @@ IFrame(snippet_url + 'hover-text-and-formatting', width='100%', height=1200)
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
-#### Selecting a hovermode in a figure created with `plotly.graph_objects`
+#### Selecting a hover mode in a figure created with `plotly.graph_objects`
 
-The hovermode is a property of the figure layout, so you can select a hovermode no matter how you created the figure, either with `plotly.express` or with `plotly.graph_objects`. Below is an example with a figure created with `plotly.graph_objects`. If you're not familiar with the structure of plotly figures, you can read [the tutorial on creating and updating plotly figures](/python/creating-and-updating-figures/).
+The hover mode is a property of the figure layout, so you can select a hover mode no matter how you created the figure, either with `plotly.express` or with `plotly.graph_objects`. Below is an example with a figure created with `plotly.graph_objects`. If you're not familiar with the structure of plotly figures, you can read [the tutorial on creating and updating plotly figures](/python/creating-and-updating-figures/).
 
 ```python
 import plotly.graph_objects as go
@@ -267,12 +267,12 @@ fig.update_layout(height=300)
 fig.show()
 ```
 
-### Customizing hover text with a hovertemplate
+### Customizing hover text with a hover template
 
 To customize the tooltip on your graph you can use the [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) attribute of `graph_objects` traces, which is a template string used for rendering the information that appear on hoverbox.
-This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hovertemplate, it is not reserved for the trace name.
+This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hover template, it is not reserved for the trace name.
 
-Note that a hovertemplate customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate) customizes the text that appears on your chart. <br>
+Note that a hover template customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate) customizes the text that appears on your chart. <br>
 
 Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plotly.com/python/reference/layout/#layout-hoverlabel-align).
 
@@ -297,7 +297,7 @@ fig.add_trace(go.Scatter(
 
 fig.update_layout(
     hoverlabel_align = 'right',
-    title = "Set hover text with hovertemplate")
+    title = "Set hover text with hover template")
 
 fig.show()
 ```
@@ -316,9 +316,9 @@ fig = go.Figure(go.Pie(
 fig.show()
 ```
 
-### Modifying the hovertemplate of a plotly express figure
+### Modifying the hover template of a plotly express figure
 
-`plotly.express` automatically sets the hovertemplate but you can modify it using the `update_traces` method of the generated figure. It helps to print the hovertemplate generated by `plotly.express` in order to be able to modify it. One can also revert to the default hover information of traces by setting the hovertemplate to `None`.
+`plotly.express` automatically sets the hover template but you can modify it using the `update_traces` method of the generated figure. It helps to print the hover template generated by `plotly.express` in order to be able to modify it. One can also revert to the default hover information of traces by setting the hover template to `None`.
 
 ```python
 import plotly.express as px
@@ -327,14 +327,14 @@ df_2007 = px.data.gapminder().query("year==2007")
 
 fig = px.scatter(df_2007, x="gdpPercap", y="lifeExp", log_x=True, color='continent'
                 )
-print("plotly express hovertemplate:", fig.data[0].hovertemplate)
+print("plotly express hover template:", fig.data[0].hovertemplate)
 fig.update_traces(hovertemplate='GDP: %{x} <br>Life Expectancy: %{y}') #
 fig.update_traces(hovertemplate=None, selector={'name':'Europe'}) # revert to default hover
-print("user_defined hovertemplate:", fig.data[0].hovertemplate)
+print("user defined hover template:", fig.data[0].hovertemplate)
 fig.show()
 ```
 
-### Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate
+### Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hover template
 
 This example adds custom fields to a Plotly Express figure using the `custom_data` parameter and then adds a hover template that applies d3 formats to each element of the `customdata[n]` array and uses HTML to customize the fonts and spacing.
 
@@ -357,13 +357,13 @@ fig=px.scatter(df,
                y='Life Expectancy (years)',
                color='continent',
                size=np.sqrt(df['pop']),
-               # Specifying data to make available to the hovertemplate
+               # Specifying data to make available to the hover template
                # The px custom_data parameter has an underscore, while the analogous graph objects customdata parameter has no underscore.
                # The px custom_data parameter is a list of column names in the data frame, while the graph objects customdata parameter expects a data frame or a numpy array.
                custom_data=['country', 'continent', 'pop'],
 )
 
-# Plotly express does not have a hovertemplate parameter in the graph creation function, so we apply the template with update_traces
+# Plotly express does not have a hover template parameter in the graph creation function, so we apply the template with update_traces
 fig.update_traces(
     hovertemplate =
                 "<b>%{customdata[0]}</b><br>" +
@@ -390,7 +390,7 @@ fig.show()
 
 *New in v5.0*
 
-When [displaying periodic data](https://plotly.com/python/time-series/#displaying-period-data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hovermodes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
+When [displaying periodic data](https://plotly.com/python/time-series/#displaying-period-data) with mixed-sized periods (i.e. quarterly and monthly) in conjunction with `x` or `x unified` hover modes and using `hovertemplate`, the `xhoverformat` attribute can be used to control how each period's X value is displayed, and the special `%{xother}` hover-template directive can be used to control how the X value is displayed for points that do not share the exact X coordinate with the point that is being hovered on. `%{xother}` will return an empty string when the X value is the one being hovered on, otherwise it will return `(%{x})`. The special `%{_xother}`, `%{xother_}` and `%{_xother_}` variations will display with spaces before, after or around the parentheses, respectively.
 
 ```python
 import plotly.graph_objects as go
@@ -422,7 +422,7 @@ fig.show()
 
 ### Advanced Hover Template
 
-This produces the same graphic as in "Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hovertemplate" above, but does so with the `customdata` and `text` parameters of `graph_objects`.  It shows how to specify columns from a dataframe to include in the `customdata` array using the `df[["col_i", "col_j"]]` subsetting notation.  It then references those variables using e.g. `%{customdata[0]}` in the hovertemplate.  It includes comments about major differences between the parameters used by `graph_objects` and `plotly.express`.
+This produces the same graphic as in "Specifying the formatting and labeling of custom fields in a Plotly Express figure using a hover template" above, but does so with the `customdata` and `text` parameters of `graph_objects`.  It shows how to specify columns from a dataframe to include in the `customdata` array using the `df[["col_i", "col_j"]]` subsetting notation.  It then references those variables using e.g. `%{customdata[0]}` in the hover template.  It includes comments about major differences between the parameters used by `graph_objects` and `plotly.express`.
 
 ```python
 import plotly.graph_objects as go
@@ -458,7 +458,7 @@ for continent_name, df in continent_data.items():
             # The next three parameters specify the hover text
             # Text supports just one customized field per trace
             # and is implemented here with text=df['continent'],
-            # Custom data supports multiple fields through numeric indices in the hovertemplate
+            # Custom data supports multiple fields through numeric indices in the hover template
             # In we weren't using the text parameter in our example,
             # we could instead add continent as a third customdata field.
             customdata=df[['country','pop']],
@@ -486,7 +486,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Adding other data to the hover with customdata and a hovertemplate
+### Adding other data to the hover with customdata and a hover template
 
 `go` traces have a `customdata` argument in which you can add an array, which outer dimensions should have the same dimensions as the plotted data. You can then use `customdata` inside a `hovertemplate` to display the value of customdata.
 
