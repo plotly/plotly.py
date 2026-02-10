@@ -43,6 +43,6 @@ sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.5
 squarify
 statsmodels==0.14.2
-umap-learn==0.5.11
+umap-learn==0.5.9
 wget
 xarray==2022.9.0
