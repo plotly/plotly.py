@@ -222,6 +222,7 @@ For more details about the linear algebra behind eigenvectors and loadings, see 
 
 ```python
 import plotly.express as px
+import numpy as np
 from sklearn.decomposition import PCA
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
