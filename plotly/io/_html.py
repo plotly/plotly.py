@@ -260,7 +260,62 @@ def to_html(
 
         load_plotlyjs = """\
         {win_config}
+        <script type="text/javascript">\
+window.__PLOTLY_PY_REQUIREJS_BACKUP__ = window.__PLOTLY_PY_REQUIREJS_BACKUP__ || [];\
+window.__PLOTLY_PY_REQUIREJS_BACKUP__.push({{\
+    has_define: typeof window.define === "function",\
+    has_define_amd: typeof window.define === "function" && Object.prototype.hasOwnProperty.call(window.define, "amd"),\
+    define_amd: typeof window.define === "function" ? window.define.amd : undefined,\
+    has_module: Object.prototype.hasOwnProperty.call(window, "module"),\
+    module: window.module,\
+    has_exports: Object.prototype.hasOwnProperty.call(window, "exports"),\
+    exports: window.exports\
+}});\
+/*\
+nbviewer loads RequireJS; plotly.js may register as an anonymous AMD module, triggering\
+\"Mismatched anonymous define()\" and leaving `Plotly` undefined. Temporarily disable\
+AMD/CommonJS detection while loading plotly.js from the CDN.\
+*/\
+if (typeof window.define === \"function\" && window.define.amd) {{\
+    window.define.amd = undefined;\
+}}\
+if (typeof window.module === \"object\" && window.module && window.module.exports) {{\
+    window.module = undefined;\
+}}\
+if (typeof window.exports === \"object\") {{\
+    window.exports = undefined;\
+}}\
+        </script>
         <script charset="utf-8" src="{cdn_url}" integrity="{integrity}" crossorigin="anonymous"></script>\
+        <script type="text/javascript">\
+(function() {{\
+    var backups = window.__PLOTLY_PY_REQUIREJS_BACKUP__;\
+    if (!backups || !backups.length) {{\
+        return;\
+    }}\
+    var b = backups.pop();\
+    if (b.has_define) {{\
+        if (b.has_define_amd) {{\
+            window.define.amd = b.define_amd;\
+        }} else {{\
+            try {{ delete window.define.amd; }} catch (e) {{ window.define.amd = undefined; }}\
+        }}\
+    }}\
+    if (b.has_module) {{\
+        window.module = b.module;\
+    }} else {{\
+        try {{ delete window.module; }} catch (e) {{ window.module = undefined; }}\
+    }}\
+    if (b.has_exports) {{\
+        window.exports = b.exports;\
+    }} else {{\
+        try {{ delete window.exports; }} catch (e) {{ window.exports = undefined; }}\
+    }}\
+    if (!backups.length) {{\
+        try {{ delete window.__PLOTLY_PY_REQUIREJS_BACKUP__; }} catch (e) {{ window.__PLOTLY_PY_REQUIREJS_BACKUP__ = undefined; }}\
+    }}\
+}})();\
+        </script>\
     """.format(
             win_config=_window_plotly_config,
             cdn_url=plotly_cdn_url(),

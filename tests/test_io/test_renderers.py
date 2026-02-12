@@ -147,6 +147,13 @@ def assert_offline(html):
     assert get_plotlyjs() in html
 
 
+def assert_requirejs_workaround(html):
+    # nbviewer runs RequireJS; ensure we include the guard that prevents plotly.js
+    # from registering as an anonymous AMD module (which would leave `Plotly`
+    # undefined in the output).
+    assert "__PLOTLY_PY_REQUIREJS_BACKUP__" in html
+
+
 def test_colab_renderer_show(fig1):
     pio.renderers.default = "colab"
 
@@ -164,6 +171,7 @@ def test_colab_renderer_show(fig1):
     html = mock_arg1["text/html"]
     assert_full_html(html)
     assert_html_renderer_connected(html)
+    assert_requirejs_workaround(html)
 
     # check kwargs
     mock_kwargs = mock_call_args[1]
@@ -191,7 +199,8 @@ def test_notebook_connected_show(fig1, name, connected):
     # Check init display contents
     bundle_display_html = mock_arg1_html
     if connected:
-        assert_html_renderer_connected(bundle_display_html)
+        assert "window.PlotlyConfig" in bundle_display_html
+        assert get_plotlyjs() not in bundle_display_html
     else:
         assert_offline(bundle_display_html)
 
@@ -206,6 +215,9 @@ def test_notebook_connected_show(fig1, name, connected):
     # Check html display contents
     bundle_html = mock_arg1["text/html"]
     assert_not_full_html(bundle_html)
+    if connected:
+        assert_html_renderer_connected(bundle_html)
+        assert_requirejs_workaround(bundle_html)
 
     # check kwargs
     mock_kwargs = mock_call_args[1]
@@ -305,22 +317,60 @@ def test_repr_html(renderer):
     plotlyjs_content = get_plotlyjs()
     sri_hash = _generate_sri_hash(plotlyjs_content)
 
+    requirejs_workaround_pre = (
+        '<script type="text/javascript">window.__PLOTLY_PY_REQUIREJS_BACKUP__ = '
+        "window.__PLOTLY_PY_REQUIREJS_BACKUP__ || [];"
+        "window.__PLOTLY_PY_REQUIREJS_BACKUP__.push({    has_define: typeof "
+        'window.define === "function",    has_define_amd: typeof window.define === '
+        '"function" && Object.prototype.hasOwnProperty.call(window.define, "amd"),    '
+        'define_amd: typeof window.define === "function" ? window.define.amd : '
+        "undefined,    has_module: Object.prototype.hasOwnProperty.call(window, "
+        '"module"),    module: window.module,    has_exports: '
+        'Object.prototype.hasOwnProperty.call(window, "exports"),    exports: '
+        'window.exports});/*nbviewer loads RequireJS; plotly.js may register as an '
+        'anonymous AMD module, triggering"Mismatched anonymous define()" and leaving '
+        "`Plotly` undefined. Temporarily disableAMD/CommonJS detection while loading "
+        'plotly.js from the CDN.*/if (typeof window.define === "function" && '
+        "window.define.amd) {    window.define.amd = undefined;}if (typeof "
+        'window.module === "object" && window.module && window.module.exports) {    '
+        "window.module = undefined;}if (typeof window.exports === \"object\") {    "
+        "window.exports = undefined;}        </script>\n        "
+    )
+
+    requirejs_workaround_post = (
+        '<script type="text/javascript">(function() {    var backups = '
+        "window.__PLOTLY_PY_REQUIREJS_BACKUP__;    if (!backups || !backups.length) "
+        "{        return;    }    var b = backups.pop();    if (b.has_define) {        "
+        "if (b.has_define_amd) {            window.define.amd = b.define_amd;        } "
+        "else {            try { delete window.define.amd; } catch (e) { "
+        "window.define.amd = undefined; }        }    }    if (b.has_module) {        "
+        "window.module = b.module;    } else {        try { delete window.module; } "
+        "catch (e) { window.module = undefined; }    }    if (b.has_exports) {        "
+        "window.exports = b.exports;    } else {        try { delete window.exports; } "
+        "catch (e) { window.exports = undefined; }    }    if (!backups.length) {        "
+        "try { delete window.__PLOTLY_PY_REQUIREJS_BACKUP__; } catch (e) { "
+        "window.__PLOTLY_PY_REQUIREJS_BACKUP__ = undefined; }    }})();        </script>"
+    )
+
     template = (
         '<div>                        <script type="text/javascript">'
-        "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
-        '<script charset="utf-8" src="'
+        + "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
+        + requirejs_workaround_pre
+        + '<script charset="utf-8" src="'
         + plotly_cdn_url()
         + '" integrity="'
         + sri_hash
-        + '" crossorigin="anonymous"></script>                '
-        '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
-        'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
-        "                window.PLOTLYENV=window.PLOTLYENV || {};"
-        '                                if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
-        ' {                    Plotly.newPlot(                        "cd462b94-79ce-42a2-887f-2650a761a144",'
-        '                        [],                        {"template":{}},'
-        '                        {"responsive": true}                    )                };'
-        "            </script>        </div>"
+        + '" crossorigin="anonymous"></script>        '
+        + requirejs_workaround_post
+        + "                "
+        + '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
+        + 'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
+        + "                window.PLOTLYENV=window.PLOTLYENV || {};"
+        + '                                if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
+        + ' {                    Plotly.newPlot(                        "cd462b94-79ce-42a2-887f-2650a761a144",'
+        + '                        [],                        {"template":{}},'
+        + '                        {"responsive": true}                    )                };'
+        + "            </script>        </div>"
     )
     if "text/html" in bundle:
         str_bundle = bundle["text/html"]
