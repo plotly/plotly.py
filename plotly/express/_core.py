@@ -2310,7 +2310,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
                 layout_patch[mode] = "group"
 
     if (
-        constructor == go.Histogram2d
+        constructor in [go.Histogram2d, go.Histogram2dContour]
         and args["z"] is not None
         and args["histfunc"] is None
     ):
