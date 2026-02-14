@@ -17,10 +17,10 @@ def calc_stats(data):
     x = np.asarray(data, float)
     vals_min = np.min(x)
     vals_max = np.max(x)
-    
+
     # NumPy 2.0+ renamed 'interpolation' parameter to 'method'
     # https://numpy.org/doc/stable/release/2.0.0-notes.html#percentile-and-quantile-methods
-    numpy_version = tuple(map(int, np.__version__.split('.')[:2]))
+    numpy_version = tuple(map(int, np.__version__.split(".")[:2]))
     if numpy_version >= (2, 0):
         q2 = np.percentile(x, 50, method="linear")
         q1 = np.percentile(x, 25, method="lower")
