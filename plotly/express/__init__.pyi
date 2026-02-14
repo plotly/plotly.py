@@ -2,7 +2,6 @@
 
 from typing import Any, Literal, Sequence, Mapping, Optional, Union
 import pandas as pd
-import numpy as np
 import plotly.graph_objs as go
 
 # Type aliases for common parameter types
@@ -66,7 +65,6 @@ def scatter(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def line(
     data_frame: DataFrameLike = None,
     x: ColumnRef = None,
@@ -112,7 +110,6 @@ def line(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def bar(
     data_frame: DataFrameLike = None,
     x: ColumnRef = None,
@@ -158,7 +155,6 @@ def bar(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def histogram(
     data_frame: DataFrameLike = None,
     x: ColumnRef = None,
@@ -185,7 +181,9 @@ def histogram(
     orientation: Optional[Literal["v", "h"]] = None,
     barmode: Literal["relative", "overlay", "group"] = "relative",
     barnorm: Optional[Literal["", "fraction", "percent"]] = None,
-    histnorm: Optional[Literal["", "percent", "probability", "density", "probability density"]] = None,
+    histnorm: Optional[
+        Literal["", "percent", "probability", "density", "probability density"]
+    ] = None,
     log_x: bool = False,
     log_y: bool = False,
     range_x: RangeLike = None,
@@ -200,7 +198,6 @@ def histogram(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def box(
     data_frame: DataFrameLike = None,
     x: ColumnRef = None,
@@ -234,7 +231,6 @@ def box(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def violin(
     data_frame: DataFrameLike = None,
     x: ColumnRef = None,
@@ -268,7 +264,6 @@ def violin(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def area(
     data_frame: DataFrameLike = None,
     x: ColumnRef = None,
@@ -310,7 +305,6 @@ def area(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def pie(
     data_frame: DataFrameLike = None,
     names: ColumnRef = None,
@@ -382,7 +376,6 @@ def scatter_3d(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def line_3d(
     data_frame: DataFrameLike = None,
     x: ColumnRef = None,
@@ -433,7 +426,9 @@ def scatter_geo(
     lat: ColumnRef = None,
     lon: ColumnRef = None,
     locations: ColumnRef = None,
-    locationmode: Optional[Literal["ISO-3", "USA-states", "country names", "geojson-id"]] = None,
+    locationmode: Optional[
+        Literal["ISO-3", "USA-states", "country names", "geojson-id"]
+    ] = None,
     color: ColumnRef = None,
     text: ColumnRef = None,
     facet_row: ColumnRef = None,
@@ -460,7 +455,11 @@ def scatter_geo(
     size_max: Optional[float] = None,
     opacity: Optional[float] = None,
     projection: Optional[str] = None,
-    scope: Optional[Literal["world", "usa", "europe", "asia", "africa", "north america", "south america"]] = None,
+    scope: Optional[
+        Literal[
+            "world", "usa", "europe", "asia", "africa", "north america", "south america"
+        ]
+    ] = None,
     center: MappingLike = None,
     title: Optional[str] = None,
     subtitle: Optional[str] = None,
@@ -468,13 +467,14 @@ def scatter_geo(
     width: Optional[int] = None,
     height: Optional[int] = None,
 ) -> go.Figure: ...
-
 def line_geo(
     data_frame: DataFrameLike = None,
     lat: ColumnRef = None,
     lon: ColumnRef = None,
     locations: ColumnRef = None,
-    locationmode: Optional[Literal["ISO-3", "USA-states", "country names", "geojson-id"]] = None,
+    locationmode: Optional[
+        Literal["ISO-3", "USA-states", "country names", "geojson-id"]
+    ] = None,
     color: ColumnRef = None,
     line_dash: ColumnRef = None,
     text: ColumnRef = None,
@@ -500,7 +500,11 @@ def line_geo(
     symbol_map: MappingLike = None,
     markers: bool = False,
     projection: Optional[str] = None,
-    scope: Optional[Literal["world", "usa", "europe", "asia", "africa", "north america", "south america"]] = None,
+    scope: Optional[
+        Literal[
+            "world", "usa", "europe", "asia", "africa", "north america", "south america"
+        ]
+    ] = None,
     center: MappingLike = None,
     title: Optional[str] = None,
     subtitle: Optional[str] = None,
@@ -512,13 +516,14 @@ def line_geo(
 # Utility functions
 
 def set_mapbox_access_token(token: str) -> None: ...
-
 def get_trendline_results(fig: go.Figure) -> Optional[pd.DataFrame]: ...
 
 # Special input classes
 class IdentityMap: ...
+
 class Constant:
     def __init__(self, value: Any) -> None: ...
+
 class Range:
     def __init__(self, start: float, stop: float, step: float = 1.0) -> None: ...
 
