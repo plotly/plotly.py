@@ -24,7 +24,6 @@ def warning_on_one_line(msg, category, filename, lineno, file=None, line=None):
 # use warnings.warn_explicit() or format within specific warning calls.
 
 
-
 class PlotlyRenderer(Renderer):
     """A renderer class inheriting from base for rendering mpl plots in plotly.
 

@@ -65,7 +65,6 @@ def warning_on_one_line(message, category, filename, lineno, file=None, line=Non
 # use warnings.warn_explicit() or format within specific warning calls.
 
 
-
 ### mpl-related tools ###
 def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     """Convert a matplotlib figure to plotly dictionary and send.
