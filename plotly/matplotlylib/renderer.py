@@ -19,7 +19,10 @@ def warning_on_one_line(msg, category, filename, lineno, file=None, line=None):
     return "%s:%s: %s:\n\n%s\n\n" % (filename, lineno, category.__name__, msg)
 
 
-warnings.formatwarning = warning_on_one_line
+# Note: We no longer globally modify warnings.formatwarning to avoid polluting
+# the user's warning system. If custom warning formatting is needed internally,
+# use warnings.warn_explicit() or format within specific warning calls.
+
 
 
 class PlotlyRenderer(Renderer):

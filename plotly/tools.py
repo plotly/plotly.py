@@ -60,7 +60,10 @@ def warning_on_one_line(message, category, filename, lineno, file=None, line=Non
     return "%s:%s: %s:\n\n%s\n\n" % (filename, lineno, category.__name__, message)
 
 
-warnings.formatwarning = warning_on_one_line
+# Note: We no longer globally modify warnings.formatwarning to avoid polluting
+# the user's warning system. If custom warning formatting is needed internally,
+# use warnings.warn_explicit() or format within specific warning calls.
+
 
 
 ### mpl-related tools ###
