@@ -327,13 +327,13 @@ def test_repr_html(renderer):
         "undefined,    has_module: Object.prototype.hasOwnProperty.call(window, "
         '"module"),    module: window.module,    has_exports: '
         'Object.prototype.hasOwnProperty.call(window, "exports"),    exports: '
-        'window.exports});/*nbviewer loads RequireJS; plotly.js may register as an '
+        "window.exports});/*nbviewer loads RequireJS; plotly.js may register as an "
         'anonymous AMD module, triggering"Mismatched anonymous define()" and leaving '
         "`Plotly` undefined. Temporarily disableAMD/CommonJS detection while loading "
         'plotly.js from the CDN.*/if (typeof window.define === "function" && '
         "window.define.amd) {    window.define.amd = undefined;}if (typeof "
         'window.module === "object" && window.module && window.module.exports) {    '
-        "window.module = undefined;}if (typeof window.exports === \"object\") {    "
+        'window.module = undefined;}if (typeof window.exports === "object") {    '
         "window.exports = undefined;}        </script>\n        "
     )
 
