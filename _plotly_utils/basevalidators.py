@@ -632,24 +632,35 @@ class BooleanValidator(BaseValidator):
         "description": "A boolean (true/false) value.",
         "requiredOpts": [],
         "otherOpts": [
+            "arrayOk",
             "dflt"
         ]
     },
     """
 
-    def __init__(self, plotly_name, parent_name, **kwargs):
+    def __init__(self, plotly_name, parent_name, array_ok=False, **kwargs):
         super(BooleanValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
         )
+        self.array_ok = array_ok
 
     def description(self):
-        return """\
-    The '{plotly_name}' property must be specified as a bool
-    (either True, or False)""".format(plotly_name=self.plotly_name)
+        desc = """\
+    The '{plotly_name}' property is a boolean and must be specified as:
+      - A boolean value: True or False""".format(plotly_name=self.plotly_name)
+        if self.array_ok:
+            desc += """
+      - A tuple or list of the above"""
+        return desc
 
     def validate_coerce(self, v):
         if is_none_or_typed_array_spec(v):
             pass
+        elif self.array_ok and is_simple_array(v):
+            invalid_els = [e for e in v if not isinstance(e, bool)]
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els[:10])
+            v = to_scalar_or_list(v)
         elif not isinstance(v, bool):
             self.raise_invalid_val(v)
 
@@ -1735,12 +1746,15 @@ class SubplotidValidator(BaseValidator):
             "dflt"
         ],
         "otherOpts": [
+            "arrayOk",
             "regex"
         ]
     }
     """
 
-    def __init__(self, plotly_name, parent_name, dflt=None, regex=None, **kwargs):
+    def __init__(
+        self, plotly_name, parent_name, dflt=None, regex=None, array_ok=False, **kwargs
+    ):
         if dflt is None and regex is None:
             raise ValueError("One or both of regex and deflt must be specified")
 
@@ -1755,40 +1769,55 @@ class SubplotidValidator(BaseValidator):
             self.base = re.match(r"/\^(\w+)", regex).group(1)
 
         self.regex = self.base + r"(\d*)"
+        self.array_ok = array_ok
 
     def description(self):
         desc = """\
     The '{plotly_name}' property is an identifier of a particular
-    subplot, of type '{base}', that may be specified as the string '{base}'
-    optionally followed by an integer >= 1
-    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)
-        """.format(plotly_name=self.plotly_name, base=self.base)
+    subplot, of type '{base}', that may be specified as:
+      - the string '{base}' optionally followed by an integer >= 1
+        (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)""".format(
+            plotly_name=self.plotly_name, base=self.base
+        )
+        if self.array_ok:
+            desc += """
+      - A tuple or list of the above"""
         return desc
 
     def validate_coerce(self, v):
-        if v is None:
-            pass
-        elif not isinstance(v, str):
-            self.raise_invalid_val(v)
-        else:
-            # match = re.fullmatch(self.regex, v)
-            match = fullmatch(self.regex, v)
+        def coerce(value):
+            if not isinstance(value, str):
+                return value, False
+            match = fullmatch(self.regex, value)
             if not match:
-                is_valid = False
+                return value, False
             else:
                 digit_str = match.group(1)
                 if len(digit_str) > 0 and int(digit_str) == 0:
-                    is_valid = False
+                    return value, False
                 elif len(digit_str) > 0 and int(digit_str) == 1:
-                    # Remove 1 suffix (e.g. x1 -> x)
-                    v = self.base
-                    is_valid = True
+                    return self.base, True
                 else:
-                    is_valid = True
+                    return value, True
 
-            if not is_valid:
-                self.raise_invalid_val(v)
-        return v
+        if v is None:
+            pass
+        elif self.array_ok and is_simple_array(v):
+            values = []
+            invalid_els = []
+            for e in v:
+                coerced_e, success = coerce(e)
+                values.append(coerced_e)
+                if not success:
+                    invalid_els.append(coerced_e)
+            if len(invalid_els) > 0:
+                self.raise_invalid_elements(invalid_els[:10])
+            return values
+        else:
+            v, success = coerce(v)
+            if not success:
+                self.raise_invalid_val(self.base)
+            return v
 
 
 class FlaglistValidator(BaseValidator):

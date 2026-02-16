@@ -17,8 +17,8 @@ class Margin(_BaseLayoutHierarchyType):
         updatemenus, sliders, axis rangeselector and rangeslider are
         allowed to push the margins by defaults.
 
-        The 'autoexpand' property must be specified as a bool
-        (either True, or False)
+        The 'autoexpand' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

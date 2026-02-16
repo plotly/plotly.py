@@ -150,8 +150,8 @@ class Dimension(_BaseTraceHierarchyType):
         Note that even visible false dimension contribute to the
         default grid generate by this splom trace.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

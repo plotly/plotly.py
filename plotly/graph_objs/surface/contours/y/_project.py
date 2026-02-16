@@ -18,8 +18,8 @@ class Project(_BaseTraceHierarchyType):
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
 
-        The 'x' property must be specified as a bool
-        (either True, or False)
+        The 'x' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -39,8 +39,8 @@ class Project(_BaseTraceHierarchyType):
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
 
-        The 'y' property must be specified as a bool
-        (either True, or False)
+        The 'y' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -60,8 +60,8 @@ class Project(_BaseTraceHierarchyType):
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
 
-        The 'z' property must be specified as a bool
-        (either True, or False)
+        The 'z' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

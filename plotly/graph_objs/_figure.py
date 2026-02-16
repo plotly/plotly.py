@@ -12669,6 +12669,7 @@ class Figure(BaseFigure):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendsrc=None,
         legendwidth=None,
         marker=None,
         meta=None,
@@ -12681,6 +12682,7 @@ class Figure(BaseFigure):
         rotation=None,
         scalegroup=None,
         showlegend=None,
+        showlegendsrc=None,
         sort=None,
         stream=None,
         text=None,
@@ -12831,11 +12833,13 @@ class Figure(BaseFigure):
             Sets the source reference on Chart Studio Cloud for
             `labels`.
         legend
-            Sets the reference to a legend to show this trace in.
-            References to these legends are "legend", "legend2",
-            "legend3", etc. Settings for these legends are set in
-            the layout, under `layout.legend`, `layout.legend2`,
-            etc.
+            Sets the reference to a legend to show the pie slices
+            in. Can be an array if `values` is set. In that case,
+            each entry specifies the legend reference for one
+            slice. References to these legends are "legend",
+            "legend2", "legend3", etc. Settings for these legends
+            are set in the layout, under `layout.legend`,
+            `layout.legend2`, etc.
         legendgroup
             Sets the legend group for this trace. Traces and shapes
             part of the same legend group hide/show at the same
@@ -12854,6 +12858,9 @@ class Figure(BaseFigure):
             unranked or equal rank items shapes would be displayed
             after traces i.e. according to their order in data and
             layout.
+        legendsrc
+            Sets the source reference on Chart Studio Cloud for
+            `legend`.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -12901,8 +12908,13 @@ class Figure(BaseFigure):
             non-empty group id here shared by every trace in the
             same group.
         showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
+            Determines whether or not items corresponding to the
+            pie slices are shown in the legend. Can be an array if
+            `values` is set. In that case, each entry specifies
+            appearance in the legend for one slice.
+        showlegendsrc
+            Sets the source reference on Chart Studio Cloud for
+            `showlegend`.
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
@@ -13038,6 +13050,7 @@ class Figure(BaseFigure):
             legendgroup=legendgroup,
             legendgrouptitle=legendgrouptitle,
             legendrank=legendrank,
+            legendsrc=legendsrc,
             legendwidth=legendwidth,
             marker=marker,
             meta=meta,
@@ -13050,6 +13063,7 @@ class Figure(BaseFigure):
             rotation=rotation,
             scalegroup=scalegroup,
             showlegend=showlegend,
+            showlegendsrc=showlegendsrc,
             sort=sort,
             stream=stream,
             text=text,
