@@ -233,7 +233,7 @@ def imshow(
     axes labels and ticks.
     """
     args = locals()
-    apply_default_cascade(args)
+    apply_default_cascade(args, constructor=None)
     labels = labels.copy()
     nslices_facet = 1
     if facet_col is not None:

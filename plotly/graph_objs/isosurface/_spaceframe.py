@@ -39,8 +39,8 @@ class Spaceframe(_BaseTraceHierarchyType):
         iso-values. Often useful when either caps or surfaces are
         disabled or filled with values less than 1.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
