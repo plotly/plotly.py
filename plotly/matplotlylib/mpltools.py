@@ -265,15 +265,12 @@ def get_axes_bounds(fig):
     return (x_min, x_max), (y_min, y_max)
 
 
-def get_axis_mirror(main_spine, mirror_spine):
-    if main_spine and mirror_spine:
+def get_axis_mirror(main_spine, mirror_spine, main_tick_markers, mirror_tick_markers):
+    if main_spine and mirror_spine and main_tick_markers and mirror_tick_markers:
         return "ticks"
-    elif main_spine and not mirror_spine:
-        return False
-    elif not main_spine and mirror_spine:
-        return False  # can't handle this case yet!
-    else:
-        return False  # nuttin'!
+    if main_spine and mirror_spine:
+        return True
+    return False
 
 
 def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
