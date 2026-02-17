@@ -32,6 +32,7 @@ requests
 scikit-image==0.20.0
 scikit-learn
 scipy==1.9.1
+setuptools<=81
 shapely==2.0.5
 sphinx==3.5.4
 sphinx_bootstrap_theme
@@ -43,6 +44,6 @@ sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.5
 squarify
 statsmodels==0.14.2
-umap-learn==0.5.1
+umap-learn==0.5.7
 wget
 xarray==2022.9.0
