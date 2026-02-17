@@ -281,7 +281,7 @@ import plotly.graph_objects as go
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", facet_col="species",
-                 title="Adding Traces To Subplots Witin A Plotly Express Figure")
+                 title="Adding Traces To Subplots Within A Plotly Express Figure")
 
 reference_line = go.Scatter(x=[2, 4],
                             y=[4, 8],
@@ -624,7 +624,7 @@ Figures created with the plotly.py graphing library also support:
 
 #### Chaining Figure Operations
 
-All of the figure update operations described above are methods that return a reference to the figure being modified. This makes it possible the chain multiple figure modification operations together into a single expression.
+All of the figure update operations described above are methods that return a reference to the figure being modified. This makes it possible to chain multiple figure modification operations together into a single expression.
 
 Here is an example of a chained expression that creates:
 
