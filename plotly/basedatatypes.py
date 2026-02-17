@@ -29,6 +29,20 @@ from . import _subplots
 Undefined = object()
 
 
+def _emit_recommendations(obj, context):
+    """
+    Emit recommendation warnings when recommendations mode is enabled.
+    context is one of "figure", "trace", "layout".
+    Lazy import to avoid circular imports.
+    """
+    try:
+        from plotly.recommendations import run_recommendations
+
+        run_recommendations(obj, context)
+    except Exception:
+        pass
+
+
 def _len_dict_item(item):
     """
     Because a parsed dict path is a tuple containings strings or integers, to
@@ -663,6 +677,9 @@ class BaseFigure(object):
                     % (err.args[0],),
                 )
                 raise type_err
+
+        # Recommendations mode: optional warnings when enabled
+        _emit_recommendations(self, "figure")
 
     # Magic Methods
     # -------------
@@ -2278,6 +2295,10 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         # Update messages
         self._send_addTraces_msg(new_traces_data)
+
+        # Recommendations mode: run trace checkers on newly added traces
+        for trace in data:
+            _emit_recommendations(trace, "trace")
 
         return self
 
@@ -4380,6 +4401,12 @@ class BasePlotlyType(object):
 
         # ### Backing property for backward compatible _validator property ##
         self.__validators = None
+
+        # Recommendations mode: optional warnings for top-level graph objects
+        if isinstance(self, BaseTraceType):
+            _emit_recommendations(self, "trace")
+        elif isinstance(self, BaseLayoutType):
+            _emit_recommendations(self, "layout")
 
     # @property
     # def _validate(self):
