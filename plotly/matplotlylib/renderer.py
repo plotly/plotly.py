@@ -79,6 +79,7 @@ class PlotlyRenderer(Renderer):
             autosize=False,
             hovermode="closest",
         )
+        self.plotly_fig["layout"].template.layout.plot_bgcolor = "white"
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
         margin = go.layout.Margin(
             l=int(self.mpl_x_bounds[0] * self.plotly_fig["layout"]["width"]),
