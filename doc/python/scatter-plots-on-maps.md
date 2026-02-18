@@ -70,17 +70,31 @@ fig.show()
 
 `px.scatter_geo` can work well with [GeoPandas](https://geopandas.org/) dataframes whose `geometry` is of type `Point`.
 
+**Note**: In geopandas 1.0+, the built-in datasets have been moved to the separate [geodatasets](https://geodatasets.readthedocs.io/) package.
+
 ```python
 import plotly.express as px
 import geopandas as gpd
 
-geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+# For geopandas >= 1.0, use the geodatasets package
+try:
+    from geodatasets import get_path
+    geo_df = gpd.read_file(get_path('naturalearth.land'))
+except ImportError:
+    # Fallback for older geopandas versions (< 1.0)
+    geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
+# Filter to get a subset of points for visualization
+# For this example, we'll use country capitals or major cities
+geo_df = geo_df.head(10)  # Take first 10 features
+
+# Calculate centroids to get point geometry
+geo_df['geometry'] = geo_df.geometry.centroid
+
 fig = px.scatter_geo(geo_df,
                     lat=geo_df.geometry.y,
                     lon=geo_df.geometry.x,
-                    hover_name="name")
+                    hover_name="name" if "name" in geo_df.columns else None)
 fig.show()
 ```
 
