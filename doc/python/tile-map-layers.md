@@ -42,7 +42,7 @@ Plotly supports two different kinds of maps:
 
 - **[Tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map)**
 
-If your figure is created with a `px.scatter_map`, `px_scatter_mapbox`, `px.line_map`, `px.line_mapbox`, `px.choropleth_map`, `px.choropleth_mapbox`, `px.density_map`, or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermap`, `go.Scattermapbox`, `go.Choroplethmap`, `go.Choroplethmapbox`, `go.Densitymap`, or `go.Densitymapbox`, the `layout.map` or `layout.mapbox` object in your figure contains configuration information for the map itself.
+If your figure is created with a `px.scatter_map`, `px.scatter_mapbox`, `px.line_map`, `px.line_mapbox`, `px.choropleth_map`, `px.choropleth_mapbox`, `px.density_map`, or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermap`, `go.Scattermapbox`, `go.Choroplethmap`, `go.Choroplethmapbox`, `go.Densitymap`, or `go.Densitymapbox`, the `layout.map` or `layout.mapbox` object in your figure contains configuration information for the map itself.
 
 - **Outline-based maps**
 
@@ -228,7 +228,7 @@ fig.show()
 
 Mapbox tile maps are composed of various layers, of three different types:
 
-1. `layout.mapbox.style` defines is the lowest layers, also known as your "base map"
+1. `layout.mapbox.style` defines the lowest layers, also known as your "base map"
 2. The various traces in `data` are by default rendered above the base map (although this can be controlled via the `below` attribute).
 3. `layout.mapbox.layers` is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).
 
