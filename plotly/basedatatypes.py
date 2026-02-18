@@ -478,6 +478,34 @@ class BaseFigure(object):
 
         # Initialize validation
         self._validate = kwargs.pop("_validate", True)
+        self._as_dict_mode = kwargs.pop("_as_dict", False)
+
+        if self._as_dict_mode:
+            # Fast path: minimal init for to_dict()/show()/to_json() to work.
+            self._grid_str = None
+            self._grid_ref = None
+
+            # Handle Figure-like dict input
+            if isinstance(data, dict) and (
+                "data" in data or "layout" in data or "frames" in data
+            ):
+                layout_plotly = data.get("layout", layout_plotly)
+                frames = data.get("frames", frames)
+                data = data.get("data", None)
+
+            # Store data directly - no validate_coerce, no deepcopy
+            self._data = list(data) if data else []
+            self._data_objs = ()
+            self._data_defaults = [{} for _ in self._data]
+
+            # Store layout directly
+            self._layout = layout_plotly if isinstance(layout_plotly, dict) else {}
+            self._layout_defaults = {}
+
+            # Frames
+            self._frame_objs = ()
+
+            return  # Skip everything else
 
         # Assign layout_plotly to layout
         # ------------------------------
@@ -974,6 +1002,8 @@ class BaseFigure(object):
         -------
         tuple[BaseTraceType]
         """
+        if getattr(self, "_as_dict_mode", False):
+            return tuple(self._data)
         return self["data"]
 
     @data.setter
@@ -1412,6 +1442,27 @@ class BaseFigure(object):
         BaseFigure
             The Figure object that the update_layout method was called on
         """
+        if getattr(self, "_as_dict_mode", False):
+
+            def _recursive_update(d, u):
+                for k, v in u.items():
+                    if isinstance(v, dict) and k in d and isinstance(d[k], dict):
+                        _recursive_update(d[k], v)
+                    else:
+                        d[k] = v
+
+            if overwrite:
+                if dict1:
+                    self._layout.update(dict1)
+                if kwargs:
+                    self._layout.update(kwargs)
+            else:
+                if dict1:
+                    _recursive_update(self._layout, dict1)
+                if kwargs:
+                    _recursive_update(self._layout, kwargs)
+            return self
+
         self.layout.update(dict1, overwrite=overwrite, **kwargs)
         return self
 
@@ -1522,6 +1573,18 @@ class BaseFigure(object):
         secondary_y=None,
         exclude_empty_subplots=False,
     ):
+        if getattr(self, "_as_dict_mode", False):
+            if hasattr(new_obj, "to_plotly_json"):
+                obj_dict = new_obj.to_plotly_json()
+            elif isinstance(new_obj, dict):
+                obj_dict = new_obj
+            else:
+                obj_dict = {}
+            if prop_plural not in self._layout:
+                self._layout[prop_plural] = []
+            self._layout[prop_plural].append(obj_dict)
+            return self
+
         # Make sure we have both row and col or neither
         if row is not None and col is None:
             raise ValueError(
@@ -2203,6 +2266,13 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         Figure(...)
         """
 
+        if getattr(self, "_as_dict_mode", False):
+            if not isinstance(data, (list, tuple)):
+                data = [data]
+            self._data.extend(data)
+            self._data_defaults.extend([{} for _ in data])
+            return self
+
         # Validate traces
         data = self._data_validator.validate_coerce(data)
 
@@ -2556,6 +2626,8 @@ Please use the add_trace method with the row and col parameters.
         -------
         plotly.graph_objs.Layout
         """
+        if getattr(self, "_as_dict_mode", False):
+            return self._layout
         return self["layout"]
 
     @layout.setter
@@ -4066,6 +4138,36 @@ Invalid property path '{key_path_str}' for layout
         Add a shape or multiple shapes and call _make_axis_spanning_layout_object on
         all the new shapes.
         """
+        if getattr(self, "_as_dict_mode", False):
+            shape_kwargs, annotation_kwargs = shapeannotation.split_dict_by_key_prefix(
+                kwargs, "annotation_"
+            )
+            shape_dict = {**shape_args, **shape_kwargs}
+            if "xref" not in shape_dict:
+                shape_dict["xref"] = "x"
+            if "yref" not in shape_dict:
+                shape_dict["yref"] = "y"
+            if shape_type in ["vline", "vrect"]:
+                shape_dict["yref"] = shape_dict["yref"] + " domain"
+            elif shape_type in ["hline", "hrect"]:
+                shape_dict["xref"] = shape_dict["xref"] + " domain"
+            if "shapes" not in self._layout:
+                self._layout["shapes"] = []
+            self._layout["shapes"].append(shape_dict)
+            augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
+                annotation, shape_type, shape_args, annotation_kwargs
+            )
+            if augmented_annotation is not None:
+                annotation_dict = (
+                    augmented_annotation
+                    if isinstance(augmented_annotation, dict)
+                    else {}
+                )
+                if "annotations" not in self._layout:
+                    self._layout["annotations"] = []
+                self._layout["annotations"].append(annotation_dict)
+            return
+
         if shape_type in ["vline", "vrect"]:
             direction = "vertical"
         elif shape_type in ["hline", "hrect"]:
@@ -4324,6 +4426,13 @@ class BasePlotlyType(object):
     _path_str = ""
     _valid_props = set()
 
+    def __new__(cls, *args, **kwargs):
+        if kwargs.pop("_as_dict", False):
+            kwargs.pop("skip_invalid", None)
+            kwargs.pop("_validate", None)
+            return kwargs
+        return super(BasePlotlyType, cls).__new__(cls)
+
     def __init__(self, plotly_name, **kwargs):
         """
         Construct a new BasePlotlyType
@@ -4335,6 +4444,9 @@ class BasePlotlyType(object):
         kwargs : dict
             Invalid props/values to raise on
         """
+        # Remove _as_dict if it was passed (handled by __new__)
+        kwargs.pop("_as_dict", None)
+
         # ### _skip_invalid ##
         # If True, then invalid properties should be skipped, if False then
         # invalid properties will result in an exception
@@ -4439,6 +4551,7 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
+        kwargs.pop("_as_dict", None)
         for k, v in kwargs.items():
             err = _check_path_in_prop_tree(self, k, error_cast=ValueError)
             if err is None:
@@ -6014,6 +6127,14 @@ class BaseTraceType(BaseTraceHierarchyType):
     Specific trace type classes (Scatter, Bar, etc.) are code generated as
     subclasses of this class.
     """
+
+    def __new__(cls, *args, **kwargs):
+        if kwargs.pop("_as_dict", False):
+            kwargs.pop("skip_invalid", None)
+            kwargs.pop("_validate", None)
+            kwargs["type"] = cls._path_str
+            return kwargs
+        return super(BaseTraceType, cls).__new__(cls)
 
     def __init__(self, plotly_name, **kwargs):
         super(BaseTraceHierarchyType, self).__init__(plotly_name, **kwargs)
