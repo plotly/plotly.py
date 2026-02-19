@@ -116,7 +116,26 @@ Set `dash` on `marker.line` to control the dash pattern of marker borders. Suppo
 ```python
 import plotly.graph_objects as go
 
-styles = ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot", "12px,6px"]
+fig = go.Figure(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[2, 4, 3, 5, 4],
+    mode="markers",
+    marker=dict(
+        size=25,
+        color="white",
+        line=dict(width=2, color="blue", dash="dot")
+    )
+))
+
+fig.show()
+```
+
+You can also pass an array of dash styles to set different styles per marker:
+
+```python
+import plotly.graph_objects as go
+
+styles = ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
 
 fig = go.Figure(go.Scatter(
     x=list(range(len(styles))),
