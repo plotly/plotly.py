@@ -65,8 +65,8 @@ class Rangebreak(_BaseLayoutHierarchyType):
         Determines whether this axis rangebreak is enabled or disabled.
         Please note that `rangebreaks` only work for "date" axis type.
 
-        The 'enabled' property must be specified as a bool
-        (either True, or False)
+        The 'enabled' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

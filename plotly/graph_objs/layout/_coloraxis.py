@@ -30,8 +30,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -51,8 +51,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         array(s)) or the bounds set in `cmin` and `cmax` Defaults to
         `false` when `cmin` and `cmax` are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -202,8 +202,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -221,8 +221,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

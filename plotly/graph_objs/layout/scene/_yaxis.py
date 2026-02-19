@@ -645,8 +645,8 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -663,8 +663,8 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         Sets whether or not this axis is labeled
 
-        The 'showaxeslabels' property must be specified as a bool
-        (either True, or False)
+        The 'showaxeslabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -681,8 +681,8 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         Sets whether or not this axis' wall has a background color.
 
-        The 'showbackground' property must be specified as a bool
-        (either True, or False)
+        The 'showbackground' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -722,8 +722,8 @@ class YAxis(_BaseLayoutHierarchyType):
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -740,8 +740,8 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not a line bounding this axis is drawn.
 
-        The 'showline' property must be specified as a bool
-        (either True, or False)
+        The 'showline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -759,8 +759,8 @@ class YAxis(_BaseLayoutHierarchyType):
         Sets whether or not spikes starting from data points to this
         axis' wall are shown on hover.
 
-        The 'showspikes' property must be specified as a bool
-        (either True, or False)
+        The 'showspikes' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -777,8 +777,8 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the tick labels are drawn.
 
-        The 'showticklabels' property must be specified as a bool
-        (either True, or False)
+        The 'showticklabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -859,8 +859,8 @@ class YAxis(_BaseLayoutHierarchyType):
         Sets whether or not spikes extending from the projection data
         points to this axis' wall boundaries are shown on hover.
 
-        The 'spikesides' property must be specified as a bool
-        (either True, or False)
+        The 'spikesides' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1293,8 +1293,8 @@ class YAxis(_BaseLayoutHierarchyType):
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1313,8 +1313,8 @@ class YAxis(_BaseLayoutHierarchyType):
         of this axis. If True, the zero line is drawn on top of the
         grid lines.
 
-        The 'zeroline' property must be specified as a bool
-        (either True, or False)
+        The 'zeroline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

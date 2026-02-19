@@ -182,8 +182,8 @@ class Rangeselector(_BaseLayoutHierarchyType):
         that range selectors are only available for x axes of `type`
         set to or auto-typed to "date".
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

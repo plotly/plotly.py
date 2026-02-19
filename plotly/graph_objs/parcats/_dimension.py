@@ -212,8 +212,8 @@ class Dimension(_BaseTraceHierarchyType):
         Shows the dimension when set to `true` (the default). Hides the
         dimension for `false`.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
