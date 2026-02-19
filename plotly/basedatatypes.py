@@ -386,6 +386,55 @@ def _generator(i):
         yield x
 
 
+def _recursive_update(d, u):
+    """Recursively update dict d with values from dict u."""
+    for k, v in u.items():
+        if isinstance(v, dict) and k in d and isinstance(d[k], dict):
+            _recursive_update(d[k], v)
+        else:
+            d[k] = v
+
+
+class _RawDictProxy:
+    """Wraps a raw dict to make .update() compatible with graph object semantics.
+
+    The generated update_* methods in _figure.py call obj.update(patch,
+    overwrite=overwrite, **kwargs) on selected objects.  Plain dicts don't
+    accept 'overwrite', so this proxy intercepts .update() and delegates
+    to _recursive_update or dict.update as appropriate.
+    """
+
+    __slots__ = ("_d",)
+
+    def __init__(self, d):
+        self._d = d
+
+    def __getitem__(self, key):
+        return self._d[key]
+
+    def __setitem__(self, key, value):
+        self._d[key] = value
+
+    def __contains__(self, key):
+        return key in self._d
+
+    def get(self, key, default=None):
+        return self._d.get(key, default)
+
+    def update(self, patch=None, overwrite=False, **kwargs):
+        updates = {**(patch or {}), **kwargs}
+        if overwrite:
+            self._d.update(updates)
+        else:
+            _recursive_update(self._d, updates)
+
+    def __repr__(self):
+        return repr(self._d)
+
+    def to_plotly_json(self):
+        return self._d
+
+
 def _set_property_provided_value(obj, name, arg, provided):
     """
     Initialize a property of this object using the provided value
@@ -462,6 +511,14 @@ class BaseFigure(object):
             skipped silently. If False (default) invalid properties in the
             figure specification will result in a ValueError
 
+        raw: bool
+            If True, the figure is constructed in "raw mode". In this mode,
+            no validation is performed, and data/layout are stored as
+            plain dictionaries rather than Plotly graph objects. This
+            significantly improves construction performance for large figures
+            but disables property validation and some convenience features.
+            Defaults to plotly.config.raw (False by default).
+
         Raises
         ------
         ValueError
@@ -469,6 +526,7 @@ class BaseFigure(object):
             is invalid AND skip_invalid is False
         """
         from .validator_cache import ValidatorCache
+        from plotly import config
 
         data_validator = ValidatorCache.get_validator("", "data")
         frames_validator = ValidatorCache.get_validator("", "frames")
@@ -478,9 +536,9 @@ class BaseFigure(object):
 
         # Initialize validation
         self._validate = kwargs.pop("_validate", True)
-        self._as_dict_mode = kwargs.pop("_as_dict", False)
+        self._raw = kwargs.pop("raw", config.raw)
 
-        if self._as_dict_mode:
+        if self._raw:
             # Fast path: minimal init for to_dict()/show()/to_json() to work.
             self._grid_str = None
             self._grid_ref = None
@@ -504,6 +562,11 @@ class BaseFigure(object):
 
             # Frames
             self._frame_objs = ()
+
+            # Batch mode (needed by BaseFigure.update / batch_update)
+            self._in_batch_mode = False
+            self._batch_trace_edits = OrderedDict()
+            self._batch_layout_edits = OrderedDict()
 
             return  # Skip everything else
 
@@ -934,6 +997,25 @@ class BaseFigure(object):
         BaseFigure
             Updated figure
         """
+        if getattr(self, "_raw", False):
+            for d in [dict1, kwargs]:
+                if d:
+                    for k, v in d.items():
+                        if k == "data":
+                            if overwrite:
+                                self._data = list(v) if v else []
+                            else:
+                                self._data.extend(v if isinstance(v, list) else [v])
+                            self._data_defaults = [{} for _ in self._data]
+                        elif k == "layout":
+                            if overwrite:
+                                self._layout = v if isinstance(v, dict) else {}
+                            else:
+                                _recursive_update(self._layout, v)
+                        elif k == "frames":
+                            pass  # Frames not supported in raw mode
+            return self
+
         with self.batch_update():
             for d in [dict1, kwargs]:
                 if d:
@@ -1002,7 +1084,7 @@ class BaseFigure(object):
         -------
         tuple[BaseTraceType]
         """
-        if getattr(self, "_as_dict_mode", False):
+        if getattr(self, "_raw", False):
             return tuple(self._data)
         return self["data"]
 
@@ -1147,6 +1229,8 @@ class BaseFigure(object):
         Select traces from a particular subplot cell and/or traces
         that satisfy custom selection criteria.
 
+        In raw mode, row/col/secondary_y filtering is skipped.
+
         Parameters
         ----------
         selector: dict, function, int, str or None (default None)
@@ -1225,6 +1309,11 @@ class BaseFigure(object):
         )
 
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
+        if getattr(self, "_raw", False):
+            return _generator(
+                t for t in self._data if self._selector_matches(t, selector)
+            )
+
         from plotly._subplots import _get_subplot_ref_for_trace
 
         # functions for filtering
@@ -1412,6 +1501,16 @@ class BaseFigure(object):
         self
             Returns the Figure object that the method was called on
         """
+        if getattr(self, "_raw", False):
+            updates = {**(patch or {}), **kwargs}
+            for trace in self._data:
+                if self._selector_matches(trace, selector):
+                    if overwrite:
+                        trace.update(updates)
+                    else:
+                        _recursive_update(trace, updates)
+            return self
+
         for trace in self.select_traces(
             selector=selector, row=row, col=col, secondary_y=secondary_y
         ):
@@ -1442,15 +1541,7 @@ class BaseFigure(object):
         BaseFigure
             The Figure object that the update_layout method was called on
         """
-        if getattr(self, "_as_dict_mode", False):
-
-            def _recursive_update(d, u):
-                for k, v in u.items():
-                    if isinstance(v, dict) and k in d and isinstance(d[k], dict):
-                        _recursive_update(d[k], v)
-                    else:
-                        d[k] = v
-
+        if getattr(self, "_raw", False):
             if overwrite:
                 if dict1:
                     self._layout.update(dict1)
@@ -1472,6 +1563,16 @@ class BaseFigure(object):
         """
         Helper called by code generated select_* methods
         """
+        if getattr(self, "_raw", False):
+            # In raw mode, iterate layout keys matching the prefix.
+            # row/col/secondary_y filtering is skipped (no grid_ref).
+            layout = self._layout
+            objs = [
+                _RawDictProxy(layout[k])
+                for k in _natural_sort_strings(list(layout))
+                if k.startswith(prefix) and isinstance(layout[k], dict)
+            ]
+            return _generator(self._filter_by_selector(objs, [], selector))
 
         if row is not None or col is not None or secondary_y is not None:
             # Build mapping from container keys ('xaxis2', 'scene4', etc.)
@@ -1523,6 +1624,12 @@ class BaseFigure(object):
         Helper to select annotation-like elements from a layout object array.
         Compatible with layout.annotations, layout.shapes, and layout.images
         """
+        if getattr(self, "_raw", False):
+            objs = self._layout.get(prop, [])
+            return _generator(
+                _RawDictProxy(o) for o in objs if self._selector_matches(o, selector)
+            )
+
         xref_to_col = {}
         yref_to_row = {}
         yref_to_secondary_y = {}
@@ -1573,7 +1680,7 @@ class BaseFigure(object):
         secondary_y=None,
         exclude_empty_subplots=False,
     ):
-        if getattr(self, "_as_dict_mode", False):
+        if getattr(self, "_raw", False):
             if hasattr(new_obj, "to_plotly_json"):
                 obj_dict = new_obj.to_plotly_json()
             elif isinstance(new_obj, dict):
@@ -2266,7 +2373,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         Figure(...)
         """
 
-        if getattr(self, "_as_dict_mode", False):
+        if getattr(self, "_raw", False):
             if not isinstance(data, (list, tuple)):
                 data = [data]
             self._data.extend(data)
@@ -2626,7 +2733,7 @@ Please use the add_trace method with the row and col parameters.
         -------
         plotly.graph_objs.Layout
         """
-        if getattr(self, "_as_dict_mode", False):
+        if getattr(self, "_raw", False):
             return self._layout
         return self["layout"]
 
@@ -4138,7 +4245,7 @@ Invalid property path '{key_path_str}' for layout
         Add a shape or multiple shapes and call _make_axis_spanning_layout_object on
         all the new shapes.
         """
-        if getattr(self, "_as_dict_mode", False):
+        if getattr(self, "_raw", False):
             shape_kwargs, annotation_kwargs = shapeannotation.split_dict_by_key_prefix(
                 kwargs, "annotation_"
             )
@@ -4427,7 +4534,7 @@ class BasePlotlyType(object):
     _valid_props = set()
 
     def __new__(cls, *args, **kwargs):
-        if kwargs.pop("_as_dict", False):
+        if kwargs.pop("raw", False):
             kwargs.pop("skip_invalid", None)
             kwargs.pop("_validate", None)
             return kwargs
@@ -4444,8 +4551,8 @@ class BasePlotlyType(object):
         kwargs : dict
             Invalid props/values to raise on
         """
-        # Remove _as_dict if it was passed (handled by __new__)
-        kwargs.pop("_as_dict", None)
+        # Remove raw if it was passed (handled by __new__)
+        kwargs.pop("raw", None)
 
         # ### _skip_invalid ##
         # If True, then invalid properties should be skipped, if False then
@@ -4551,7 +4658,7 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
-        kwargs.pop("_as_dict", None)
+        kwargs.pop("raw", None)
         for k, v in kwargs.items():
             err = _check_path_in_prop_tree(self, k, error_cast=ValueError)
             if err is None:
@@ -6129,7 +6236,22 @@ class BaseTraceType(BaseTraceHierarchyType):
     """
 
     def __new__(cls, *args, **kwargs):
-        if kwargs.pop("_as_dict", False):
+        """
+        Construct a new trace object.
+
+        Parameters
+        ----------
+        *args :
+            Positional arguments for standard trace construction.
+        raw : bool
+            If True, returns a plain dictionary instead of a trace object.
+            This is for performance optimization. Defaults to plotly.config.raw.
+        **kwargs :
+            Keyword arguments for trace properties.
+        """
+        from plotly import config
+
+        if kwargs.pop("raw", config.raw):
             kwargs.pop("skip_invalid", None)
             kwargs.pop("_validate", None)
             kwargs["type"] = cls._path_str

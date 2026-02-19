@@ -43,6 +43,7 @@ if TYPE_CHECKING:
         colors,
         io,
         data,
+        config,
     )
     from plotly.version import __version__
 
@@ -54,6 +55,7 @@ if TYPE_CHECKING:
         "colors",
         "io",
         "data",
+        "config",
         "__version__",
     ]
 
@@ -73,6 +75,7 @@ else:
             ".colors",
             ".io",
             ".data",
+            ".config",
         ],
         [".version.__version__"],
     )
