@@ -1,10 +1,52 @@
 # some functions defined here to avoid numpy import
 
+import datetime
+
+
+def _is_date_string(val):
+    """Check if a value is a date/datetime string."""
+    if not isinstance(val, str):
+        return False
+    try:
+        datetime.datetime.fromisoformat(val.replace("Z", "+00:00"))
+        return True
+    except (ValueError, AttributeError):
+        return False
+
+
+def _datetime_str_to_ms(val):
+    """Convert a datetime string to milliseconds since epoch."""
+    dt = datetime.datetime.fromisoformat(val.replace("Z", "+00:00"))
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=datetime.timezone.utc)
+    return dt.timestamp() * 1000
+
+
+def _ms_to_datetime_str(ms):
+    """Convert milliseconds since epoch back to a datetime string."""
+    dt = datetime.datetime.fromtimestamp(ms / 1000, tz=datetime.timezone.utc)
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
+
 
 def _mean(x):
     if len(x) == 0:
         raise ValueError("x must have positive length")
-    return float(sum(x)) / len(x)
+    try:
+        return float(sum(x)) / len(x)
+    except TypeError:
+        # Handle non-numeric types like datetime strings or datetime objects
+        if all(_is_date_string(v) for v in x):
+            ms_values = [_datetime_str_to_ms(v) for v in x]
+            mean_ms = sum(ms_values) / len(ms_values)
+            return _ms_to_datetime_str(mean_ms)
+        # Handle datetime.datetime, pd.Timestamp, or similar objects
+        if all(hasattr(v, "timestamp") for v in x):
+            ts_values = [v.timestamp() * 1000 for v in x]
+            mean_ms = sum(ts_values) / len(ts_values)
+            return datetime.datetime.fromtimestamp(
+                mean_ms / 1000, tz=datetime.timezone.utc
+            ).isoformat()
+        raise
 
 
 def _argmin(x):
