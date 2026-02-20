@@ -5,10 +5,10 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.3'
+      jupytext_version: 1.16.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
   language_info:
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.10.0
   plotly:
     description: How to make scatter plots on maps in Python. Scatter plots on maps
       highlight geographic areas and can be colored by value.
@@ -73,10 +73,10 @@ fig.show()
 ```python
 import plotly.express as px
 import geopandas as gpd
+from geodatasets import get_url
 
-geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+geo_df = gpd.read_file(get_url("naturalearth.cities"))
 
-px.set_mapbox_access_token(open(".mapbox_token").read())
 fig = px.scatter_geo(geo_df,
                     lat=geo_df.geometry.y,
                     lon=geo_df.geometry.x,
