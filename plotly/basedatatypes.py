@@ -4093,6 +4093,8 @@ Invalid property path '{key_path_str}' for layout
         augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
             annotation, shape_type, shape_args, annotation_kwargs
         )
+        if exclude_empty_subplots and len(self.data) == 0:
+            exclude_empty_subplots = False
         self.add_shape(
             row=row,
             col=col,
