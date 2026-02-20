@@ -429,7 +429,7 @@ def write_image(
     height: Union[int, None] = None,
     validate: bool = True,
     # Deprecated
-    engine: Union[str, None] = "auto",
+    engine: Union[str, None] = None,
 ):
     """
     Convert a figure to a static image and write it to a file or writeable
