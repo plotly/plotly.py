@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.3
+      jupytext_version: 1.19.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.14
+    version: 3.14.3
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -487,6 +487,65 @@ fig.update_layout(
              x0=5, y0=12, x1=10, y1=18)])
 fig.show()
 ```
+
+#### Shapes Spanning Subplots
+
+*New in 6.6*
+
+You can create shapes that span multiple subplots by passing an array of axis references to `xref` and `yref`. Each element in the array specifies which axis the corresponding coordinate refers to. For example, in the following code, with `xref=["x", "x2"]`, `x0` refers to the `x` axis and `x1` refers to the `x2` axis.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+fig = make_subplots(rows=1, cols=2)
+
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[4, 5, 6], mode="markers", marker=dict(size=10)), row=1, col=1)
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[6, 5, 4], mode="markers", marker=dict(size=10)), row=1, col=2)
+
+fig.add_shape(
+  type="rect",
+  xref=["x", "x2"],  # x0 uses the x-axis from subplot 1 ("x"), while x1 uses the x-axis from subplot 2 ("x2")
+  yref=["y", "y2"],  # y0 uses the y-axis from subplot 1 ("y"), while y1 uses the y-axis from subplot 2 ("y2")
+  x0=2, y0=4.5,
+  x1=3, y1=5.5,
+  fillcolor="rgba(255, 0, 0, 0.2)",
+  line=dict(color="red", width=2),
+)
+
+fig.show()
+```
+
+For `path` shapes, the array must have one entry for each coordinate in the path string. Each coordinate in the path maps to the corresponding element in the `xref`/`yref` array, in order.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+fig = make_subplots(rows=1, cols=2)
+
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3], mode="markers"), row=1, col=1)
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[3, 2, 1], mode="markers"), row=1, col=2)
+
+# Chevron shape spanning both subplots
+# Path coordinates map to axis refs in order:
+#   M 2.5 1.5  -> xref[0]=x,  yref[0]=y   (start in subplot 1)
+#   L 1.5 2    -> xref[1]=x2, yref[1]=y2  (tip in subplot 2)
+#   L 2.5 2.5  -> xref[2]=x,  yref[2]=y   (end in subplot 1)
+
+fig.add_shape(
+    type="path",
+    path="M 2.5 1.5 L 1.5 2 L 2.5 2.5",
+    xref=["x", "x2", "x"],
+    yref=["y", "y2", "y"],
+    line=dict(color="purple", width=3),
+)
+
+fig.show()
+```
+
+**Note:** When using arrays with `xref` and `yref`, `xsizemode="pixel"` and `ysizemode="pixel"` are not supported.
+
 
 #### Adding the Same Shapes to Multiple Subplots
 The same shape can be added to multiple facets by using the `'all'`

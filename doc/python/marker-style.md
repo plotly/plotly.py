@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.6
+      jupytext_version: 1.19.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.14.3
   plotly:
     description: How to style markers in Python with Plotly.
     display_as: file_settings
@@ -107,6 +107,49 @@ fig.show()
 
 Fully opaque, the default setting, is useful for non-overlapping markers. When many points overlap it can be hard to observe density.
 
+### Dashed Marker Borders
+
+*New in 6.6*
+
+Set `dash` on `marker.line` to control the dash pattern of marker borders. Supported values are: `'solid'` (default), `'dot'`, `'dash'`, `'longdash'`, `'dashdot'`, `'longdashdot'`, or a custom dash length list in px (for example, `'12px,6px'`).
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[2, 4, 3, 5, 4],
+    mode="markers",
+    marker=dict(
+        size=25,
+        color="white",
+        line=dict(width=2, color="blue", dash="dot")
+    )
+))
+
+fig.show()
+```
+
+You can also pass an array of dash styles to set different styles per marker:
+
+```python
+import plotly.graph_objects as go
+
+styles = ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
+
+fig = go.Figure(go.Scatter(
+    x=list(range(len(styles))),
+    y=[0] * len(styles),
+    mode="markers+text",
+    text=styles,
+    textposition="bottom center",
+    marker=dict(size=30, color="white", line=dict(color="blue", width=2, dash=styles))
+))
+
+fig.show()
+```
+
+The `marker.line.dash` attribute is available on `go.Scatter`, `go.Scatterpolar`, `go.Scattergeo`, `go.Scatterternary`, `go.Scattercarpet`, and `go.Scattersmith` traces.
 
 ### Control Marker Border with Dash
 
