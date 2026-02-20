@@ -99,6 +99,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Re-add MIME renderer JupyterLab extension with JupyterLab 4 support to reduce file sizes for offline notebooks [[#5096](https://github.com/plotly/plotly.py/pull/5096)]
 - Fix issue preventing plots from rendering in HTML notebook export when using 'vscode+notebook' renderer [[#5154](https://github.com/plotly/plotly.py/pull/5154)]
 
+### Added
+- Added `xaxis_title` and `yaxis_title` parameters to `add_trace()` method for more concise subplot creation
+
 ## [6.0.1] - 2025-03-14
 
 ### Updated
