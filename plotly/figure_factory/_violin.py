@@ -17,9 +17,18 @@ def calc_stats(data):
     x = np.asarray(data, float)
     vals_min = np.min(x)
     vals_max = np.max(x)
-    q2 = np.percentile(x, 50, interpolation="linear")
-    q1 = np.percentile(x, 25, interpolation="lower")
-    q3 = np.percentile(x, 75, interpolation="higher")
+
+    # NumPy 2.0+ renamed 'interpolation' parameter to 'method'
+    # https://numpy.org/doc/stable/release/2.0.0-notes.html#percentile-and-quantile-methods
+    numpy_version = tuple(map(int, np.__version__.split(".")[:2]))
+    if numpy_version >= (2, 0):
+        q2 = np.percentile(x, 50, method="linear")
+        q1 = np.percentile(x, 25, method="lower")
+        q3 = np.percentile(x, 75, method="higher")
+    else:
+        q2 = np.percentile(x, 50, interpolation="linear")
+        q1 = np.percentile(x, 25, interpolation="lower")
+        q3 = np.percentile(x, 75, interpolation="higher")
     iqr = q3 - q1
     whisker_dist = 1.5 * iqr
 
