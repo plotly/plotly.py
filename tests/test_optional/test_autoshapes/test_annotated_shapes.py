@@ -51,6 +51,28 @@ def multi_plot_fixture():
     return fig
 
 
+from datetime import datetime, timedelta
+
+
+def test_add_shape_with_dates():
+    start_date = datetime(2025, 1, 1)
+    end_date = datetime(2025, 10, 10)
+    dates = []
+    current_date = start_date
+    while current_date <= end_date:
+        dates.append(current_date.strftime("%Y-%m-%d"))
+        current_date += timedelta(weeks=4)
+    print(dates)
+    fig = go.Figure(
+        data=[go.Scatter(x=[x for x in range(1, 20, 2)], y=dates)],
+        layout=go.Layout(
+            title=go.layout.Title(text="A Figure Specified By A Graph Object")
+        ),
+    )
+    fig.add_vline(x="2025-06-24", annotation_text="test")
+    assert len(fig.layout.annotations) == 1
+
+
 # Make sure adding a shape without specifying an annotation doesn't add any annotations
 def test_add_shape_no_annotation(multi_plot_fixture):
     multi_plot_fixture.add_hline(y=2, row="all", col="all")
