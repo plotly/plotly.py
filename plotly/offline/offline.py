@@ -70,7 +70,7 @@ def get_plotlyjs():
     >>> html = '''
     ... <html>
     ...     <head>
-    ...         <script type="text/javascript">{plotlyjs}</script>
+    ...         <script>{plotlyjs}</script>
     ...     </head>
     ...     <body>
     ...        {div1}
@@ -89,7 +89,7 @@ def get_plotlyjs():
 
 def _build_resize_script(plotdivid, plotly_root="Plotly"):
     resize_script = (
-        '<script type="text/javascript">'
+        "<script>"
         'window.addEventListener("resize", function(){{'
         'if (document.getElementById("{id}")) {{'
         '{plotly_root}.Plots.resize(document.getElementById("{id}"));'
@@ -177,12 +177,12 @@ Unrecognized config options supplied: {bad_config}""".format(bad_config=bad_conf
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
 _window_plotly_config = """\
-<script type="text/javascript">\
+<script>\
 window.PlotlyConfig = {MathJaxConfig: 'local'};\
 </script>"""
 
 _mathjax_config = """\
-<script type="text/javascript">\
+<script>\
 if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
 </script>"""
 
