@@ -116,7 +116,7 @@ fig = px.scatter(df, x="gdpPercap", y="lifeExp", log_x=True,
 fig.show()
 ```
 
-### Locally WEighted Scatterplot Smoothing (LOWESS)
+### Locally Weighted Scatterplot Smoothing (LOWESS)
 
 Plotly Express also supports non-linear [LOWESS](https://en.wikipedia.org/wiki/Local_regression) trendlines. In order use this feature, you will need to [install `statsmodels` and its dependencies](https://www.statsmodels.org/stable/install.html).
 
