@@ -37,7 +37,7 @@ See more examples of bar charts (including vertical bar charts) and styling opti
 
 ### Horizontal Bar Chart with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). For a horizontal bar char, use the `px.bar` function with `orientation='h'`.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). For a horizontal bar chart, use the `px.bar` function with `orientation='h'`.
 
 #### Basic Horizontal Bar Chart with Plotly Express
 
