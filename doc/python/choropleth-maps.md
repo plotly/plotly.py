@@ -258,7 +258,7 @@ fig = go.Figure(data=go.Choropleth(
 
 fig.update_layout(
     title_text = '2011 US Agriculture Exports by State',
-    geo_scope='usa', # limite map scope to USA
+    geo_scope='usa', # limit map scope to USA
 )
 
 fig.show()

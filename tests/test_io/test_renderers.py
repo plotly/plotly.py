@@ -306,7 +306,7 @@ def test_repr_html(renderer):
     sri_hash = _generate_sri_hash(plotlyjs_content)
 
     template = (
-        '<div>                        <script type="text/javascript">'
+        "<div>                        <script>"
         "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
         '<script charset="utf-8" src="'
         + plotly_cdn_url()
@@ -314,7 +314,7 @@ def test_repr_html(renderer):
         + sri_hash
         + '" crossorigin="anonymous"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
-        'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
+        'style="height:100%; width:100%;"></div>            <script>'
         "                window.PLOTLYENV=window.PLOTLYENV || {};"
         '                                if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
         ' {                    Plotly.newPlot(                        "cd462b94-79ce-42a2-887f-2650a761a144",'
