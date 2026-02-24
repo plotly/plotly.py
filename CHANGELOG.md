@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix pytest 9 compatibility: use `collection_path` instead of deprecated `path` argument in `pytest_ignore_collect` hook
+- Fix NumPy 2.0 compatibility: use `method` instead of deprecated `interpolation` in `np.percentile` and `np.isin` instead of `np.in1d`
+
 ## [6.5.2] - 2026-01-14
 
 ### Fixed
