@@ -1,7 +1,8 @@
 import os
+from pathlib import Path
 
 
-def pytest_ignore_collect(path):
+def pytest_ignore_collect(collection_path: Path):
     # Ignored files, most of them are raising a chart studio error
     ignored_paths = [
         "exploding_module.py",
@@ -16,9 +17,10 @@ def pytest_ignore_collect(path):
         "presentation_objs.py",
         "session.py",
     ]
+    path_str = str(collection_path)
     if (
-        os.path.basename(str(path)) in ignored_paths
-        or "plotly/plotly/plotly/__init__.py" in str(path)
-        or "plotly/api/utils.py" in str(path)
+        collection_path.name in ignored_paths
+        or "plotly/plotly/plotly/__init__.py" in path_str
+        or "plotly/api/utils.py" in path_str
     ):
         return True
