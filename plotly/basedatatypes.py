@@ -35,10 +35,11 @@ def _emit_recommendations(obj, context):
     context is one of "figure", "trace", "layout".
     Lazy import to avoid circular imports.
     """
+    from plotly.recommendations import run_recommendations, RecommendationError
     try:
-        from plotly.recommendations import run_recommendations
-
         run_recommendations(obj, context)
+    except RecommendationError:
+        raise
     except Exception:
         pass
 
@@ -5223,6 +5224,12 @@ class BasePlotlyType(object):
         else:
             BaseFigure._perform_update(self, dict1, overwrite=overwrite)
             BaseFigure._perform_update(self, kwargs, overwrite=overwrite)
+
+        # Recommendations mode: run after update so Express (trace.update(patch)) is covered
+        if isinstance(self, BaseTraceType):
+            _emit_recommendations(self, "trace")
+        elif isinstance(self, BaseLayoutType):
+            _emit_recommendations(self, "layout")
 
         return self
 

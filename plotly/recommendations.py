@@ -7,6 +7,10 @@ Enable/disable globally:
   - Environment: set PLOTLY_RECOMMENDATIONS=1 (or "true", "yes") to enable.
   - In code: plotly.recommendations.config.enabled = True
 
+Mode: plotly.recommendations.config.mode can be "warn" (default) or "error".
+  - "warn": emit a UserWarning when a recommendation is violated.
+  - "error": raise RecommendationError when a recommendation is violated.
+
 Example:
     import plotly.recommendations
     import plotly.graph_objects as go
@@ -21,24 +25,39 @@ import inspect
 import os
 import warnings
 
+_VALID_MODES = ("warn", "error")
+
+
 # -----------------------------------------------------------------------------
-# Global enable/disable
+# Exception and config
 # -----------------------------------------------------------------------------
+
+
+class RecommendationError(ValueError):
+    """Raised when a recommendation is violated and config.mode is 'error'."""
+
 
 def _env_enabled():
     v = os.environ.get("PLOTLY_RECOMMENDATIONS", "").strip().lower()
     return v in ("1", "true", "yes", "on")
 
 
+def _env_mode():
+    v = os.environ.get("PLOTLY_RECOMMENDATIONS_MODE", "").strip().lower()
+    return v if v in _VALID_MODES else "warn"
+
+
+
 class _RecommendationsConfig:
     """
     Global config for recommendations mode.
     When enabled, recommendation checkers run after Figure/trace/Layout
-    construction and may emit warnings.
+    construction. Use config.mode to choose "warn" (emit warnings) or "error" (raise).
     """
 
     def __init__(self):
         self._enabled = _env_enabled()
+        self._mode = _env_mode()
 
     @property
     def enabled(self):
@@ -47,6 +66,19 @@ class _RecommendationsConfig:
     @enabled.setter
     def enabled(self, value):
         self._enabled = bool(value)
+
+    @property
+    def mode(self):
+        return self._mode
+
+    @mode.setter
+    def mode(self, value):
+        if value not in _VALID_MODES:
+            raise ValueError(
+                "config.mode must be one of %s, got %r" % (_VALID_MODES, value)
+            )
+        self._mode = value
+
 
 # Singleton used by the rest of the package
 config = _RecommendationsConfig()
@@ -133,7 +165,7 @@ def max_length(input_list, max_length):
     Check if input_list has length >= max_length (e.g. recommended to keep shorter).
     Returns a string describing the issue, or None if no issue was found.
     """
-    if input_list is not None and hasattr(input_list, "__len__") and len(input_list) >= max_length:
+    if input_list is not None and hasattr(input_list, "__len__") and len(input_list) > max_length:
         return f"has length {len(input_list)} (recommended <= {max_length})."
     return None
 
@@ -185,12 +217,13 @@ def run_recommendations(obj, context):
             for value_tuple in zip(*value_lists):
                 issue = checker(*value_tuple)
                 if issue:
+                    msg = f"{path_def}: {issue}"
+                    if config.mode == "error":
+                        raise RecommendationError(msg)
                     stacklevel = stacklevel or _get_stacklevel()
-                    warnings.warn(
-                        f"{path_def}: {issue}",
-                        UserWarning,
-                        stacklevel=stacklevel,
-                    )
+                    warnings.warn(msg, UserWarning, stacklevel=stacklevel)
+        except RecommendationError:
+            raise
         except Exception:
             pass
 
