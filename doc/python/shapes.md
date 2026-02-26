@@ -488,7 +488,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Shapes Spanning Subplots
+#### Subplot-Spanning Shapes
 
 *New in 6.6*
 
