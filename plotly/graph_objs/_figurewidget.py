@@ -25076,6 +25076,7 @@ class FigureWidget(BaseFigureWidget):
         x1shift=None,
         xanchor=None,
         xref=None,
+        xrefsrc=None,
         xsizemode=None,
         y0=None,
         y0shift=None,
@@ -25083,6 +25084,7 @@ class FigureWidget(BaseFigureWidget):
         y1shift=None,
         yanchor=None,
         yref=None,
+        yrefsrc=None,
         ysizemode=None,
         row=None,
         col=None,
@@ -25247,7 +25249,15 @@ class FigureWidget(BaseFigureWidget):
             domain of that axis: e.g., *x2 domain* refers to the
             domain of the second x  axis and a x position of 0.5
             refers to the point between the left and the right of
-            the domain of the second x axis.
+            the domain of the second x axis. If an array of axis
+            IDs is provided, each `x` value will refer to the
+            corresponding axis, e.g., ['x', 'x2'] for a rectangle,
+            line, or circle means `x0` uses the `x` axis and `x1`
+            uses the `x2` axis. Path shapes using an array should
+            have one entry for each x coordinate in the string.
+        xrefsrc
+            Sets the source reference on Chart Studio Cloud for
+            `xref`.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -25257,7 +25267,9 @@ class FigureWidget(BaseFigureWidget):
             data or plot fraction but `x0`, `x1` and x coordinates
             within `path` are pixels relative to `xanchor`. This
             way, the shape can have a fixed width while maintaining
-            a position relative to data or plot fraction.
+            a position relative to data or plot fraction. Note:
+            `xsizemode` "pixel" is not supported when `xref` is an
+            array.
         y0
             Sets the shape's starting y position. See `type` and
             `ysizemode` for more info.
@@ -25294,7 +25306,15 @@ class FigureWidget(BaseFigureWidget):
             domain of that axis: e.g., *y2 domain* refers to the
             domain of the second y  axis and a y position of 0.5
             refers to the point between the bottom and the top of
-            the domain of the second y axis.
+            the domain of the second y axis. If an array of axis
+            IDs is provided, each `y` value will refer to the
+            corresponding axis, e.g., ['y', 'y2'] for a rectangle,
+            line, or circle means `y0` uses the `y` axis and `y1`
+            uses the `y2` axis. Path shapes using an array should
+            have one entry for each y coordinate in the string.
+        yrefsrc
+            Sets the source reference on Chart Studio Cloud for
+            `yref`.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
@@ -25305,7 +25325,8 @@ class FigureWidget(BaseFigureWidget):
             within `path` are pixels relative to `yanchor`. This
             way, the shape can have a fixed height while
             maintaining a position relative to data or plot
-            fraction.
+            fraction. Note: `ysizemode` "pixel" is not supported
+            when `yref` is an array.
         row
             Subplot row for shape. If 'all', addresses all rows in
             the specified column(s).
@@ -25350,6 +25371,7 @@ class FigureWidget(BaseFigureWidget):
             x1shift=x1shift,
             xanchor=xanchor,
             xref=xref,
+            xrefsrc=xrefsrc,
             xsizemode=xsizemode,
             y0=y0,
             y0shift=y0shift,
@@ -25357,6 +25379,7 @@ class FigureWidget(BaseFigureWidget):
             y1shift=y1shift,
             yanchor=yanchor,
             yref=yref,
+            yrefsrc=yrefsrc,
             ysizemode=ysizemode,
             **kwargs,
         )
