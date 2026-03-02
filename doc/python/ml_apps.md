@@ -29,7 +29,8 @@ jupyter:
     name: AI/ML Apps with Dash
     order: 5
     page_type: example_index
-    permalink: https://plotly.com/building-machine-learning-web-apps-in-python/
+    permalink: python/ml-apps/
+    redirect_to: https://plotly.com/building-machine-learning-web-apps-in-python/
     sitemap: false
     thumbnail: thumbnail/ml_apps.png
 ---

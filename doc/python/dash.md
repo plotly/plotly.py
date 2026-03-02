@@ -29,7 +29,8 @@ jupyter:
     name: Analytical Apps with Dash
     order: 5
     page_type: example_index
-    permalink: https://dash.plotly.com/
+    permalink: python/dash/
+    redirect_to: https://dash.plotly.com/
     sitemap: false
     thumbnail: thumbnail/dash_apps.png
 ---
