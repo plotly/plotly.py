@@ -26,4 +26,4 @@ Closes #(issue number)
 
 ## Guidelines
 
-- [ ] I have reviewed the [pull request guidelines](https://github.com/plotly/plotly.py/blob/main/CONTRIBUTING.md#opening-a-pull-request) and confirmed that this PR follows them.
+- [ ] I have reviewed the [pull request guidelines](https://github.com/plotly/plotly.py/blob/main/CONTRIBUTING.md#opening-a-pull-request) and the [Code of Conduct](https://github.com/plotly/plotly.py/blob/main/CODE_OF_CONDUCT.md) and confirm that this PR follows them.
