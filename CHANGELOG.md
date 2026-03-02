@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [6.6.0] - 2026-03-02
+
+### Fixed
+- Remove unneeded `type="text/javascript"` attribute from `<style>` tag [[#5454](https://github.com/plotly/plotly.py/pull/5454)], with thanks to @hannob for the contribution!
+- Remove global warning format side effect [[#5481](https://github.com/plotly/plotly.py/pull/5481)], with thanks to @emmanuel-ferdman for the contribution!
+- Fix spurious engine deprecation warning in write_image [[#5517](https://github.com/plotly/plotly.py/pull/5517)], with thanks to @mosh3eb for the contribution!
+
 ### Updated
 - Update plotly.js from version 3.3.1 to version 3.4.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.4.0) for more information. [[#5527](https://github.com/plotly/plotly.py/pull/5527)]. Notable changes include:
   - Add support for clicking legend titles to toggle visibility of all traces in legend [[#7698](https://github.com/plotly/plotly.js/pull/7698)]
