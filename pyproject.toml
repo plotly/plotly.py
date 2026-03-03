@@ -64,6 +64,7 @@ dev_optional = [
     "numpy",
     "orjson",
     "pandas",
+    "pandas>=3.0.0;python_version>='3.11'",
     "pdfrw",
     "pillow",
     "plotly-geo",
