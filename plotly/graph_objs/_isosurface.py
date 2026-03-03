@@ -83,8 +83,8 @@ class Isosurface(_BaseTraceType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -123,8 +123,8 @@ class Isosurface(_BaseTraceType):
         `cmin` and `cmax` Defaults to `false` when `cmin` and `cmax`
         are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -205,9 +205,9 @@ class Isosurface(_BaseTraceType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -355,8 +355,8 @@ class Isosurface(_BaseTraceType):
         meshes, creating meshes with an angular, low-poly look via flat
         reflections.
 
-        The 'flatshading' property must be specified as a bool
-        (either True, or False)
+        The 'flatshading' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -637,9 +637,9 @@ class Isosurface(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -867,8 +867,8 @@ class Isosurface(_BaseTraceType):
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -889,9 +889,9 @@ class Isosurface(_BaseTraceType):
         coordinates refer to `layout.scene2`, and so on.
 
         The 'scene' property is an identifier of a particular
-        subplot, of type 'scene', that may be specified as the string 'scene'
-        optionally followed by an integer >= 1
-        (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
+        subplot, of type 'scene', that may be specified as:
+          - the string 'scene' optionally followed by an integer >= 1
+            (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
 
         Returns
         -------
@@ -909,8 +909,8 @@ class Isosurface(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -928,8 +928,8 @@ class Isosurface(_BaseTraceType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

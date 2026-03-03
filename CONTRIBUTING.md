@@ -137,7 +137,7 @@ npm run build
 These commands also create an *editable install* of plotly.py
 so that you can test your changes iteratively without having to rebuild the plotly.py package explicitly;
 for more information please see
-[the `pip` documentation on editable installs](https://pip.pypa.io/en/stable/reference/pip_install/#install-editable)
+[the `pip` documentation on editable installs](https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs)
 Please note that the single quotes are needed to escape the `[]` characters.
 
 ### Formatting

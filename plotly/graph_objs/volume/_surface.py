@@ -84,8 +84,8 @@ class Surface(_BaseTraceHierarchyType):
         """
         Hides/displays surfaces between minimum and maximum iso-values.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

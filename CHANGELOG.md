@@ -4,6 +4,35 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [6.6.0] - 2026-03-02
+
+### Fixed
+- Remove unneeded `type="text/javascript"` attribute from `<style>` tag [[#5454](https://github.com/plotly/plotly.py/pull/5454)], with thanks to @hannob for the contribution!
+- Remove global warning format side effect [[#5481](https://github.com/plotly/plotly.py/pull/5481)], with thanks to @emmanuel-ferdman for the contribution!
+- Fix spurious engine deprecation warning in write_image [[#5517](https://github.com/plotly/plotly.py/pull/5517)], with thanks to @mosh3eb for the contribution!
+
+### Updated
+- Update plotly.js from version 3.3.1 to version 3.4.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.4.0) for more information. [[#5527](https://github.com/plotly/plotly.py/pull/5527)]. Notable changes include:
+  - Add support for clicking legend titles to toggle visibility of all traces in legend [[#7698](https://github.com/plotly/plotly.js/pull/7698)]
+  - Add support for shapes to reference multiple axes [[#7666](https://github.com/plotly/plotly.js/pull/7666)]
+  - Add support for dashed marker lines in scatter plots [[#7673](https://github.com/plotly/plotly.js/pull/7673)]
+  - Increase axis autorange when bar charts have outside text labels, to avoid labels being clipped [[#7675](https://github.com/plotly/plotly.js/pull/7675)]
+
+## [6.5.2] - 2026-01-14
+
+### Fixed
+- Fix issue where pie trace `legend`, `showlegend` attributes don't accept array values [[#5464](https://github.com/plotly/plotly.py/pull/5464) and [#5465](https://github.com/plotly/plotly.py/pull/5465)], with thanks to @my-tien for the contribution!
+
+## [6.5.1] - 2026-01-07
+
+### Fixed
+- Fix issue where Plotly Express ignored trace-specific color sequences defined in templates via `template.data.<trace_type>` [[#5437](https://github.com/plotly/plotly.py/pull/5437)], with thanks to @antonymilne for the contribution!
+
+### Updated
+- Speed up `validate_gantt` function [[#5386](https://github.com/plotly/plotly.py/pull/5386)], with thanks to @misrasaurabh1 for the contribution!
+- Update plotly.js from version 3.3.0 to version 3.3.1. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.3.1) for more information. [[#5456](https://github.com/plotly/plotly.py/pull/5456)]. Notable changes include:
+  - Add support for arrays for the pie properties `showlegend` and `legend`, so that these can be configured per slice. [[#7580](https://github.com/plotly/plotly.js/pull/7580)]
+
 ## [6.5.0] - 2025-11-17
 
 ### Updated

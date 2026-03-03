@@ -141,8 +141,8 @@ class Contours(_BaseTraceHierarchyType):
         Determines whether to label the contour lines with their
         values.
 
-        The 'showlabels' property must be specified as a bool
-        (either True, or False)
+        The 'showlabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -160,8 +160,8 @@ class Contours(_BaseTraceHierarchyType):
         Determines whether or not the contour lines are drawn. Has an
         effect only if `contours.coloring` is set to "fill".
 
-        The 'showlines' property must be specified as a bool
-        (either True, or False)
+        The 'showlines' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
