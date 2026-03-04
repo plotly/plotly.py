@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61", "hatch", "jupyter_packaging~=0.10.0", "wheel"]
+requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
