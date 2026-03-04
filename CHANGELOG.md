@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add `raw=True` parameter to graph object constructors and `go.Figure` for high-performance figure construction, bypassing validation and object creation. Includes fast paths for `update_traces`, `for_each_trace`, `select_traces`, `update_annotations`, `update_shapes`, and other `update_*` methods [[#5514](https://github.com/plotly/plotly.py/issues/5514)].
+  Benchmarks show significant speedups:
+  - Trace creation: ~26x faster
+  - Figure creation: ~52x faster
+  - `add_traces`: ~36x faster
+  - `add_vline`/`add_hline`: ~90,000x faster
 ## [6.6.0] - 2026-03-02
 
 ### Fixed
