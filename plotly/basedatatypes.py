@@ -1627,7 +1627,7 @@ is of type {subplot_type}.""".format(
             xref, yref = map(lambda t: _add_domain(*t), zip(["x", "y"], [xref, yref]))
             new_obj.update(xref=xref, yref=yref)
 
-        self.layout[prop_plural] += (new_obj,)
+        self.layout._append_array_prop(prop_plural, new_obj)
         # The 'new_obj.xref' and 'new_obj.yref' parameters need to be reset otherwise it
         # will appear as if user supplied yref params when looping through subplots and
         # will force annotation to be on the axis of the last drawn annotation
@@ -3290,12 +3290,19 @@ Invalid property path '{key_path_str}' for layout
 
     # Exports
     # -------
-    def to_dict(self):
+    def to_dict(self, encode_base64=True):
         """
         Convert figure to a dictionary
 
         Note: the dictionary includes the properties explicitly set by the
         user, it does not include default values of unspecified properties
+
+        Parameters
+        ----------
+        encode_base64: bool (default True)
+            If True, large numerical arrays will be converted to a binary
+            base64 encoding (bdata). If False, these arrays will remain
+            as numpy arrays or lists.
 
         Returns
         -------
@@ -3319,22 +3326,30 @@ Invalid property path '{key_path_str}' for layout
             res["frames"] = frames
 
         # Add base64 conversion before sending to the front-end
-        convert_to_base64(res)
+        if encode_base64:
+            convert_to_base64(res)
 
         return res
 
-    def to_plotly_json(self):
+    def to_plotly_json(self, encode_base64=True):
         """
         Convert figure to a JSON representation as a Python dict
 
         Note: May include some JSON-invalid data types, use the `PlotlyJSONEncoder` util
         or the `to_json` method to encode to a string.
 
+        Parameters
+        ----------
+        encode_base64: bool (default True)
+            If True, large numerical arrays will be converted to a binary
+            base64 encoding (bdata). If False, these arrays will remain
+            as numpy arrays or lists.
+
         Returns
         -------
         dict
         """
-        return self.to_dict()
+        return self.to_dict(encode_base64=encode_base64)
 
     @staticmethod
     def _to_ordered_dict(d, skip_uid=False):
@@ -4124,21 +4139,13 @@ Invalid property path '{key_path_str}' for layout
                     self.layout[layout_obj][-1].update(xref="x")
                 if self.layout[layout_obj][-1].yref is None:
                     self.layout[layout_obj][-1].update(yref="y")
-            new_layout_objs = tuple(
-                filter(
-                    lambda x: x is not None,
-                    [
-                        self._make_axis_spanning_layout_object(
-                            direction,
-                            self.layout[layout_obj][n],
-                        )
-                        for n in range(n_layout_objs_before, n_layout_objs_after)
-                    ],
+
+            # Update the new objects in-place to append " domain" to xref/yref
+            for n in range(n_layout_objs_before, n_layout_objs_after):
+                self._make_axis_spanning_layout_object(
+                    direction,
+                    self.layout[layout_obj][n],
                 )
-            )
-            self.layout[layout_obj] = (
-                self.layout[layout_obj][:n_layout_objs_before] + new_layout_objs
-            )
 
     def add_vline(
         self,
@@ -5379,6 +5386,54 @@ class BasePlotlyType(object):
         # ----------------------
         self._compound_props[prop] = val
         return val
+
+    def _append_array_prop(self, prop, new_element):
+        """
+        Append a single element to a compound array property without
+        re-validating all existing elements.
+
+        This provides O(1) appends instead of O(N) re-validation that
+        occurs with _set_array_prop when called via ``+=``.
+
+        Parameters
+        ----------
+        prop : str
+            Name of a compound array property (e.g. 'annotations')
+        new_element : BasePlotlyType
+            The already-constructed element to append. Must be an instance
+            of the appropriate data class for this property.
+        """
+        # Get or initialize the existing compound array
+        curr_val = self._compound_array_props.get(prop, ())
+        if curr_val is None:
+            curr_val = ()
+        elif isinstance(curr_val, list):
+            curr_val = tuple(curr_val)
+
+        # Create a copy of the new element (same pattern as
+        # CompoundArrayValidator.validate_coerce) so the caller can
+        # safely modify/reset the original without affecting the stored copy.
+        element_copy = type(new_element)(new_element)
+
+        # Make a deep copy of new element's props for _props storage
+        new_dict = deepcopy(element_copy._props) if element_copy._props else {}
+
+        # Update _props dict
+        if not self._in_batch_mode:
+            self._init_props()
+            if prop not in self._props:
+                self._props[prop] = []
+            self._props[prop].append(new_dict)
+
+        # Send update notification
+        self._send_prop_set(prop, self._props.get(prop))
+
+        # Reparent the copy
+        element_copy._orphan_props.clear()
+        element_copy._parent = self
+
+        # Append to _compound_array_props
+        self._compound_array_props[prop] = curr_val + (element_copy,)
 
     def _set_array_prop(self, prop, val):
         """
