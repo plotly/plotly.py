@@ -1,0 +1,26 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - migrate-to-gh-actions
+  pull_request:
+    branches:
+      - migrate-to-gh-actions
+
+jobs:
+  check-code-formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --extra dev_core
+
+      - name: Check code formatting with ruff
+        run: uv run ruff format --check .
