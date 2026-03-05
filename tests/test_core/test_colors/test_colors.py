@@ -140,7 +140,7 @@ class TestColors(TestCase):
         # test non-capitalised access
         self.assertEqual(
             colors.make_colorscale(colors.sequential.haline),
-            colors.get_colorscale("viridis"),  # Wrong colorscale - intentional failure
+            colors.get_colorscale("haline"),
         )
         # test capitalised access
         self.assertEqual(
