@@ -287,6 +287,29 @@ fig.update_layout(scene_camera=camera, title=name)
 fig.show()
 ```
 
+### Orthographic Projection
+
+By default, 3D plots use perspective projection where objects farther from the camera appear smaller. You can switch to orthographic projection, where objects maintain their size regardless of distance. This is useful for technical and engineering visualizations where preserving relative dimensions is important.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+z_data = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/api_docs/mt_bruno_elevation.csv')
+
+fig = go.Figure(data=go.Surface(z=z_data, showscale=False))
+fig.update_layout(
+    scene_camera=dict(
+        projection=dict(type="orthographic"),
+        eye=dict(x=1.25, y=1.25, z=1.25)
+    ),
+    title=dict(text="Mt Bruno Elevation (Orthographic Projection)"),
+    width=500, height=500,
+    margin=dict(t=40, r=0, l=20, b=20)
+)
+fig.show()
+```
+
 #### Reference
 
 

@@ -235,6 +235,21 @@ fig.add_trace(go.Bar(x=[1, 2, 3], y=[1, 3, 2]))
 fig.show()
 ```
 
+The `append_trace()` method can be used to add traces to subplots created with `make_subplots()`. Note that `append_trace()` is deprecated in favor of `add_trace()`, which supports the same `row` and `col` parameters and also returns the figure for method chaining.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+fig = make_subplots(rows=1, cols=2)
+
+fig.append_trace(go.Scatter(x=[1, 2, 3], y=[4, 2, 3], name="Trace 1"), row=1, col=1)
+fig.append_trace(go.Bar(x=[1, 2, 3], y=[2, 3, 1], name="Trace 2"), row=1, col=2)
+
+fig.update_layout(title_text="Using append_trace() with Subplots")
+fig.show()
+```
+
 You can also add traces to a figure produced by a figure factory or Plotly Express.
 
 ```python
