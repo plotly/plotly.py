@@ -307,7 +307,7 @@ def test_sunburst_treemap_with_path_color(constructor):
     fig = px.sunburst(
         df.to_native(), path=path, color="sectors", color_discrete_map=cmap
     )
-    assert np.all(np.in1d(fig.data[0].marker.colors, list(cmap.values())))
+    assert np.all(np.isin(fig.data[0].marker.colors, list(cmap.values())))
 
     # Numerical column in path
     df = (
