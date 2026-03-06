@@ -44,12 +44,13 @@ jobs:
           MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
         run: |
           cd doc
+          source .venv/bin/activate
           echo "${MAPBOX_TOKEN}" > python/.mapbox_token
-          uv run make -kj8 || uv run make -kj8
+          make -kj8 || make -kj8
           curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
           curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/check-or-enforce-order.py > check-or-enforce-order.py
-          uv run python front-matter-ci.py build/html
-          uv run python check-or-enforce-order.py build/html
+          python front-matter-ci.py build/html
+          python check-or-enforce-order.py build/html
 
       - name: Upload docs artifact
         uses: actions/upload-artifact@v4
