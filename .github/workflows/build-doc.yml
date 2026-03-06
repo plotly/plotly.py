@@ -27,6 +27,11 @@ jobs:
           cd doc
           uv venv
           uv pip install -r requirements.txt
+
+      - name: Install plotly in editable mode
+        if: github.ref_name != 'doc-prod'
+        run: |
+          cd doc
           uv pip install -e ..
 
       - name: List installed packages
