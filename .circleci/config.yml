@@ -428,12 +428,15 @@ jobs:
               cd ../..
             fi
 
+      - run:
+          name: tar apidoc artifact
+          command: tar -czf doc/apidoc/apidoc.tgz -C doc/apidoc/_build html
       - store_artifacts:
           path: doc/build/html
           destination: doc-html
       - store_artifacts:
-          path: doc/apidoc/_build/html
-          destination: apidoc
+          path: doc/apidoc/apidoc.tgz
+          destination: apidoc.tgz
 
 workflows:
   code_formatting:
