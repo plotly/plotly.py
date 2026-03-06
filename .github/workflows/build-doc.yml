@@ -1,0 +1,35 @@
+name: Build Documentation
+
+on:
+  push:
+    branches:
+      - migrate-to-gh-actions
+  pull_request:
+    branches:
+      - migrate-to-gh-actions
+
+jobs:
+  build-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.9"
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install rename
+
+      - name: Install doc dependencies
+        run: |
+          cd doc
+          uv venv
+          uv pip install -r requirements.txt
+          uv pip install -e ..
+
+      - name: List installed packages
+        run: |
+          cd doc
+          uv pip list
