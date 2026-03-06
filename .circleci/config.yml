@@ -432,8 +432,8 @@ jobs:
           name: tar apidoc artifact
           command: tar -czf doc/apidoc/apidoc.tgz -C doc/apidoc/_build html
       - store_artifacts:
-          path: doc/build/html
-          destination: doc-html
+          path: doc/build/html.tgz
+          destination: doc-html.tgz
       - store_artifacts:
           path: doc/apidoc/apidoc.tgz
           destination: apidoc.tgz
