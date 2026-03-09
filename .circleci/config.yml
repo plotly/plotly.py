@@ -384,6 +384,7 @@ jobs:
               cd ../..
             fi
             tar -zcf build/html.tgz build/html
+            tar -zcf build/ipynb.tgz build/ipynb
             rm -rf build/html build/ipynb
             cd ..
 
@@ -434,6 +435,9 @@ jobs:
       - store_artifacts:
           path: doc/build/html.tgz
           destination: doc-html.tgz
+      - store_artifacts:
+          path: doc/build/ipynb.tgz
+          destination: ipynb.tgz
       - store_artifacts:
           path: doc/apidoc/apidoc.tgz
           destination: apidoc.tgz
