@@ -588,7 +588,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
             and attr_name == "z"
         ):
             # ensure that stuff like "count" gets into the hoverlabel
-            mapping_labels[attr_label] = "%%{%s}" % attr_name
+            if attr_label is not None:
+                mapping_labels[attr_label] = "%%{%s}" % attr_name
     if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
         # Modify mapping_labels according to hover_data keys
         # if hover_data is a dict
