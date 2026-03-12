@@ -653,7 +653,7 @@ def pictogram_bar(data, title, icon_size, max_icons_per_column=10, units_per_ico
         title=title,
         xaxis=dict(
             tickvals=tick_locations,
-            # Label ecah category
+            # Label each category
             ticktext=list(data.keys()),
             tickangle=-45,
             showgrid=False,
@@ -772,7 +772,7 @@ fig.show()
 
 ### Colored and Styled Bar Chart
 
-In this example several parameters of the layout as customized, hence it is convenient to use directly the `go.Layout(...)` constructor instead of calling `fig.update`.
+In this example several parameters of the layout are customized, hence it is convenient to use directly the `go.Layout(...)` constructor instead of calling `fig.update`.
 
 ```python
 import plotly.graph_objects as go

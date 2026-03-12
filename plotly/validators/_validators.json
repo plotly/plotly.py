@@ -8952,10 +8952,19 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "layout.shape.yrefsrc": {
+        "params": {
+            "plotly_name": "yrefsrc",
+            "parent_name": "layout.shape",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
     "layout.shape.yref": {
         "params": {
             "plotly_name": "yref",
             "parent_name": "layout.shape",
+            "array_ok": true,
             "edit_type": "calc",
             "values": [
                 "paper",
@@ -9020,10 +9029,19 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "layout.shape.xrefsrc": {
+        "params": {
+            "plotly_name": "xrefsrc",
+            "parent_name": "layout.shape",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
     "layout.shape.xref": {
         "params": {
             "plotly_name": "xref",
             "parent_name": "layout.shape",
+            "array_ok": true,
             "edit_type": "calc",
             "values": [
                 "paper",
@@ -17496,6 +17514,32 @@
             "min": 0
         },
         "superclass": "NumberValidator"
+    },
+    "layout.legend.titledoubleclick": {
+        "params": {
+            "plotly_name": "titledoubleclick",
+            "parent_name": "layout.legend",
+            "edit_type": "legend",
+            "values": [
+                "toggle",
+                "toggleothers",
+                false
+            ]
+        },
+        "superclass": "EnumeratedValidator"
+    },
+    "layout.legend.titleclick": {
+        "params": {
+            "plotly_name": "titleclick",
+            "parent_name": "layout.legend",
+            "edit_type": "legend",
+            "values": [
+                "toggle",
+                "toggleothers",
+                false
+            ]
+        },
+        "superclass": "EnumeratedValidator"
     },
     "layout.legend.title": {
         "params": {
@@ -42331,6 +42375,31 @@
         },
         "superclass": "BooleanValidator"
     },
+    "scatterternary.marker.line.dashsrc": {
+        "params": {
+            "plotly_name": "dashsrc",
+            "parent_name": "scatterternary.marker.line",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "scatterternary.marker.line.dash": {
+        "params": {
+            "plotly_name": "dash",
+            "parent_name": "scatterternary.marker.line",
+            "array_ok": true,
+            "edit_type": "style",
+            "values": [
+                "solid",
+                "dot",
+                "dash",
+                "longdash",
+                "dashdot",
+                "longdashdot"
+            ]
+        },
+        "superclass": "DashValidator"
+    },
     "scatterternary.marker.line.colorsrc": {
         "params": {
             "plotly_name": "colorsrc",
@@ -45330,6 +45399,31 @@
             "edit_type": "plot"
         },
         "superclass": "BooleanValidator"
+    },
+    "scattersmith.marker.line.dashsrc": {
+        "params": {
+            "plotly_name": "dashsrc",
+            "parent_name": "scattersmith.marker.line",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "scattersmith.marker.line.dash": {
+        "params": {
+            "plotly_name": "dash",
+            "parent_name": "scattersmith.marker.line",
+            "array_ok": true,
+            "edit_type": "style",
+            "values": [
+                "solid",
+                "dot",
+                "dash",
+                "longdash",
+                "dashdot",
+                "longdashdot"
+            ]
+        },
+        "superclass": "DashValidator"
     },
     "scattersmith.marker.line.colorsrc": {
         "params": {
@@ -51139,6 +51233,31 @@
             "edit_type": "plot"
         },
         "superclass": "BooleanValidator"
+    },
+    "scatterpolar.marker.line.dashsrc": {
+        "params": {
+            "plotly_name": "dashsrc",
+            "parent_name": "scatterpolar.marker.line",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "scatterpolar.marker.line.dash": {
+        "params": {
+            "plotly_name": "dash",
+            "parent_name": "scatterpolar.marker.line",
+            "array_ok": true,
+            "edit_type": "style",
+            "values": [
+                "solid",
+                "dot",
+                "dash",
+                "longdash",
+                "dashdot",
+                "longdashdot"
+            ]
+        },
+        "superclass": "DashValidator"
     },
     "scatterpolar.marker.line.colorsrc": {
         "params": {
@@ -61540,6 +61659,31 @@
         },
         "superclass": "BooleanValidator"
     },
+    "scattergeo.marker.line.dashsrc": {
+        "params": {
+            "plotly_name": "dashsrc",
+            "parent_name": "scattergeo.marker.line",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "scattergeo.marker.line.dash": {
+        "params": {
+            "plotly_name": "dash",
+            "parent_name": "scattergeo.marker.line",
+            "array_ok": true,
+            "edit_type": "calc",
+            "values": [
+                "solid",
+                "dot",
+                "dash",
+                "longdash",
+                "dashdot",
+                "longdashdot"
+            ]
+        },
+        "superclass": "DashValidator"
+    },
     "scattergeo.marker.line.colorsrc": {
         "params": {
             "plotly_name": "colorsrc",
@@ -64519,6 +64663,31 @@
             "edit_type": "plot"
         },
         "superclass": "BooleanValidator"
+    },
+    "scattercarpet.marker.line.dashsrc": {
+        "params": {
+            "plotly_name": "dashsrc",
+            "parent_name": "scattercarpet.marker.line",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "scattercarpet.marker.line.dash": {
+        "params": {
+            "plotly_name": "dash",
+            "parent_name": "scattercarpet.marker.line",
+            "array_ok": true,
+            "edit_type": "style",
+            "values": [
+                "solid",
+                "dot",
+                "dash",
+                "longdash",
+                "dashdot",
+                "longdashdot"
+            ]
+        },
+        "superclass": "DashValidator"
     },
     "scattercarpet.marker.line.colorsrc": {
         "params": {
@@ -71385,6 +71554,31 @@
             "edit_type": "plot"
         },
         "superclass": "BooleanValidator"
+    },
+    "scatter.marker.line.dashsrc": {
+        "params": {
+            "plotly_name": "dashsrc",
+            "parent_name": "scatter.marker.line",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
+    "scatter.marker.line.dash": {
+        "params": {
+            "plotly_name": "dash",
+            "parent_name": "scatter.marker.line",
+            "array_ok": true,
+            "edit_type": "style",
+            "values": [
+                "solid",
+                "dot",
+                "dash",
+                "longdash",
+                "dashdot",
+                "longdashdot"
+            ]
+        },
+        "superclass": "DashValidator"
     },
     "scatter.marker.line.colorsrc": {
         "params": {
