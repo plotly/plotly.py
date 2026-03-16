@@ -25,6 +25,8 @@ a link to the plotly.js CHANGELOG.
 - Manually update the versions to `X.Y.Z` in the files specified below:
   - `pyproject.toml`
     - update version
+  - `js/package.json`
+    - update version (`"version"` key at top of file)
   - `CHANGELOG.md`
     - update version and release date
     - finalize changelog entries according to instructions above
