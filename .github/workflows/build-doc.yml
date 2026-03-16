@@ -61,12 +61,6 @@ jobs:
           name: doc-html
           path: doc/build/html/
 
-      - name: Upload notebooks artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: doc-ipynb
-          path: doc/build/ipynb/
-
       - name: Build API docs
         if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
         run: |
@@ -79,13 +73,6 @@ jobs:
           uv pip install -e ..
           cd apidoc
           make html
-
-      - name: Upload API docs artifact
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
-        uses: actions/upload-artifact@v4
-        with:
-          name: apidoc-build
-          path: doc/apidoc/_build/html/
 
       # Deploy steps — currently using test branches for validation
       # TODO: Change branch trigger to 'doc-prod' and deploy branches to 'built', 'built_ipynb', 'gh-pages'
