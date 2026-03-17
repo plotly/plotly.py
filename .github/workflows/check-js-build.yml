@@ -30,7 +30,7 @@ jobs:
 
     - name: Copy current files to a temporary directory
       run: |
-        cp -R plotly/labextension/ plotly/labextension-tmp/
+        mv plotly/labextension/ plotly/labextension-tmp/
 
     - name: Install dependencies and build
       run: |
@@ -40,6 +40,7 @@ jobs:
         uv pip install jupyterlab
         cd js
         npm ci
+        jupyter labextension build --show-config-json .
         npm run build
         npm ls
     - name: Check JupyterLab build artifacts
