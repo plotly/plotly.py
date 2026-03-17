@@ -30,6 +30,7 @@
   },
   "jupyterlab": {
     "mimeExtension": true,
+    "webpackConfig": "./webpack.config.js",
     "outputDir": "../plotly/labextension",
     "_build": {
       "load": "static/remoteEntry.6213e23b3bdd99ae0b34.js",
