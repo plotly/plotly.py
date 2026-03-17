@@ -88,7 +88,6 @@ f2.layout.title = 'Age and Diabetes Factors'
 f2
 ```
 
-
 ![Simple Subplots](example_images/subplot_methods.png)
 
 ## Breaking Changes
