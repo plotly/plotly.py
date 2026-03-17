@@ -39,7 +39,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-express = ["numpy"]
+express = ["numpy>=1.22"]
 kaleido = ["kaleido>=1.1.0"]
 dev_core = [
     "pytest",
@@ -54,6 +54,7 @@ dev_build = [
 ]
 dev_optional = [
     "plotly[dev_build]",
+    "plotly[express]",
     "plotly[kaleido]",
     "anywidget",
     "colorcet",
@@ -61,7 +62,6 @@ dev_optional = [
     "fiona<=1.9.6;python_version<='3.8'",
     "geopandas",
     "inflect",
-    "numpy",
     "orjson",
     "pandas",
     "pdfrw",
