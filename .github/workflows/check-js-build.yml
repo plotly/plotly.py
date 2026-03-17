@@ -25,7 +25,7 @@ jobs:
         curl -LsSf https://astral.sh/uv/install.sh | sh
         uv venv
         source .venv/bin/activate
-        uv pip install jupyter
+        uv pip install jupyterlab
         cd js
         npm ci
         npm run build
