@@ -3,10 +3,8 @@ name: Build Documentation
 on:
   push:
     branches:
-      - migrate-to-gh-actions
+      - doc-prod
   pull_request:
-    branches:
-      - migrate-to-gh-actions
 
 jobs:
   build-doc:
@@ -62,10 +60,8 @@ jobs:
           name: doc-html
           path: doc/build/html/
 
-      # Deploy steps — currently using test branches for validation
-      # TODO: Change branch trigger to 'doc-prod' and deploy branches to 'built', 'built_ipynb', 'gh-pages'
       - name: Create GitHub App token
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         uses: actions/create-github-app-token@v2
         id: app-token
         with:
@@ -74,17 +70,17 @@ jobs:
           owner: ${{ github.repository_owner }}
           repositories: plotly.py-docs,graphing-library-docs
 
-      - name: Checkout plotly.py-docs (built-test)
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+      - name: Checkout plotly.py-docs (built)
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         uses: actions/checkout@v6
         with:
           repository: plotly/plotly.py-docs
-          ref: built-test
+          ref: built
           token: ${{ steps.app-token.outputs.token }}
           path: plotly.py-docs-html
 
       - name: Deploy HTML docs
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         run: |
           git config --global user.name plotlydocbot
           git config --global user.email accounts@plot.ly
@@ -95,17 +91,17 @@ jobs:
           git commit -m "build of https://github.com/plotly/plotly.py/commit/${{ github.sha }}" || echo "No changes to commit"
           git push --force
 
-      - name: Checkout plotly.py-docs (built_ipynb-test)
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+      - name: Checkout plotly.py-docs (built_ipynb)
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         uses: actions/checkout@v6
         with:
           repository: plotly/plotly.py-docs
-          ref: built_ipynb-test
+          ref: built_ipynb
           token: ${{ steps.app-token.outputs.token }}
           path: plotly.py-docs-ipynb
 
       - name: Deploy notebooks
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         run: |
           rm -rf plotly.py-docs-ipynb/*
           cp -r doc/build/ipynb/* plotly.py-docs-ipynb/
@@ -115,23 +111,23 @@ jobs:
           git push --force
 
       - name: Checkout graphing-library-docs
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         uses: actions/checkout@v6
         with:
           repository: plotly/graphing-library-docs
-          ref: test-trigger
+          ref: master
           token: ${{ steps.app-token.outputs.token }}
           path: graphing-library-docs
 
       - name: Trigger downstream doc build
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         run: |
           cd graphing-library-docs
           git commit --allow-empty -m "deploying https://github.com/plotly/plotly.py/commit/${{ github.sha }}"
           git push
 
       - name: Build API docs
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         run: |
           cd doc
           source .venv/bin/activate
@@ -143,17 +139,17 @@ jobs:
           cd apidoc
           make html
 
-      - name: Checkout plotly.py-docs (gh-pages-test)
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+      - name: Checkout plotly.py-docs (gh-pages)
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         uses: actions/checkout@v6
         with:
           repository: plotly/plotly.py-docs
-          ref: gh-pages-test
+          ref: gh-pages
           token: ${{ steps.app-token.outputs.token }}
           path: plotly.py-docs-api
 
       - name: Deploy API docs
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
         run: |
           rm -rf plotly.py-docs-api/*
           cp -r doc/apidoc/_build/html/* plotly.py-docs-api/
