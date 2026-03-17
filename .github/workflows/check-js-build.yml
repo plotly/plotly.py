@@ -2,7 +2,7 @@ on: push
 
 jobs:
   check-js-build:
-    name: Check JS build artifacts
+    name: Check JS version number and build artifacts
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -10,7 +10,19 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.x"
-        
+
+    - name: Check that version number for JS project matches version number for Python project
+      run: |
+        PYPROJECT_PATH="pyproject.toml"
+        PKGJSON_PATH="js/package.json"
+        PYPROJECT_VERSION=$(awk -F'"' '/^version/ {print $2; exit}' $PYPROJECT_PATH)
+        JSPROJECT_VERSION=$(cat $PKGJSON_PATH | jq -r '.version')
+        if [ "$PYPROJECT_VERSION" != "$JSPROJECT_VERSION" ]; then
+          echo "❌ Version number $JSPROJECT_VERSION in $PKGJSON_PATH does not match version number $PYPROJECT_VERSION in $PYPROJECT_PATH"
+          exit 1
+        else
+          echo "✅ Version number $JSPROJECT_VERSION in $PKGJSON_PATH matches version number $PYPROJECT_VERSION in $PYPROJECT_PATH"
+        fi
     - name: Install Node
       uses: actions/setup-node@v2
       with:
