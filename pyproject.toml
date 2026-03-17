@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61", "hatch", "jupyter_packaging~=0.10.0", "wheel"]
+requires = ["setuptools>=71"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
@@ -32,7 +32,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license = {file="LICENSE.txt"}
-version = "6.5.2"
+version = "6.6.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
