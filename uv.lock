@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.8"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -4418,8 +4418,7 @@ requires-dist = [
     { name = "jupyter", marker = "extra == 'dev-build'" },
     { name = "kaleido", marker = "extra == 'kaleido'", specifier = ">=1.1.0" },
     { name = "narwhals", specifier = ">=1.15.1" },
-    { name = "numpy", marker = "extra == 'dev-optional'" },
-    { name = "numpy", marker = "extra == 'express'" },
+    { name = "numpy", marker = "extra == 'express'", specifier = ">=1.22" },
     { name = "orjson", marker = "extra == 'dev-optional'" },
     { name = "packaging" },
     { name = "pandas", marker = "extra == 'dev-optional'" },
@@ -4428,6 +4427,7 @@ requires-dist = [
     { name = "plotly", extras = ["dev-build"], marker = "extra == 'dev-optional'" },
     { name = "plotly", extras = ["dev-core"], marker = "extra == 'dev-build'" },
     { name = "plotly", extras = ["dev-optional"], marker = "extra == 'dev'" },
+    { name = "plotly", extras = ["express"], marker = "extra == 'dev-optional'" },
     { name = "plotly", extras = ["kaleido"], marker = "extra == 'dev-optional'" },
     { name = "plotly-geo", marker = "extra == 'dev-optional'" },
     { name = "polars", extras = ["timezone"], marker = "extra == 'dev-optional'" },
