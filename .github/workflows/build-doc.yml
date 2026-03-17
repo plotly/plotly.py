@@ -34,6 +34,7 @@ jobs:
         run: |
           cd doc
           source .venv/bin/activate
+          uv pip uninstall plotly
           uv pip install -e ..
 
       - name: List installed packages
@@ -60,19 +61,6 @@ jobs:
         with:
           name: doc-html
           path: doc/build/html/
-
-      - name: Build API docs
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
-        run: |
-          cd doc
-          source .venv/bin/activate
-          # For the API doc, we need to use the local version of plotly
-          # since we are tweaking the source because of
-          # graph_objs/graph_objects
-          uv pip uninstall plotly
-          uv pip install -e ..
-          cd apidoc
-          make html
 
       # Deploy steps — currently using test branches for validation
       # TODO: Change branch trigger to 'doc-prod' and deploy branches to 'built', 'built_ipynb', 'gh-pages'
@@ -126,6 +114,35 @@ jobs:
           git commit -m "build of https://github.com/plotly/plotly.py/commit/${{ github.sha }}" || echo "No changes to commit"
           git push --force
 
+      - name: Checkout graphing-library-docs
+        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        uses: actions/checkout@v6
+        with:
+          repository: plotly/graphing-library-docs
+          ref: test-trigger
+          token: ${{ steps.app-token.outputs.token }}
+          path: graphing-library-docs
+
+      - name: Trigger downstream doc build
+        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        run: |
+          cd graphing-library-docs
+          git commit --allow-empty -m "deploying https://github.com/plotly/plotly.py/commit/${{ github.sha }}"
+          git push
+
+      - name: Build API docs
+        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
+        run: |
+          cd doc
+          source .venv/bin/activate
+          # For the API doc, we need to use the local version of plotly
+          # since we are tweaking the source because of
+          # graph_objs/graph_objects
+          uv pip uninstall plotly
+          uv pip install -e ..
+          cd apidoc
+          make html
+
       - name: Checkout plotly.py-docs (gh-pages-test)
         if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
         uses: actions/checkout@v6
@@ -145,19 +162,3 @@ jobs:
           git add .
           git commit -m "build of https://github.com/plotly/plotly.py/commit/${{ github.sha }}" || echo "No changes to commit"
           git push --force
-
-      - name: Checkout graphing-library-docs
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
-        uses: actions/checkout@v6
-        with:
-          repository: plotly/graphing-library-docs
-          ref: test-trigger
-          token: ${{ steps.app-token.outputs.token }}
-          path: graphing-library-docs
-
-      - name: Trigger downstream doc build
-        if: github.ref_name == 'migrate-to-gh-actions' && github.event_name == 'push'
-        run: |
-          cd graphing-library-docs
-          git commit --allow-empty -m "deploying https://github.com/plotly/plotly.py/commit/${{ github.sha }}"
-          git push
