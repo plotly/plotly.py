@@ -80,4 +80,5 @@ If you are migrating from Orca, the following config settings do not apply to Ka
 ## Multiple Image Export
 
 Plotly.py 6.1 includes a `write_images` function (`plotly.io.write_images`), which we recommend over `write_image` when exporting more than one figure. Calling `write_images` with a list of figures (or dicts representing figures) to export provides better performance than multiple calls with `write_image`. See the [Write Multiple Images](/python/static-image-export#write-multiple-images) section for more details.
+
 <!-- #endregion -->
