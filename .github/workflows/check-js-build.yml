@@ -40,7 +40,6 @@ jobs:
         uv pip install jupyterlab
         cd js
         npm ci
-        jupyter labextension build --show-config-json .
         npm run build
         npm ls
     - name: Check JupyterLab build artifacts
