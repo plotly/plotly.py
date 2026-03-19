@@ -18,6 +18,7 @@ maintainers = [
     { name="Emily Kellison-Linn", email="emily@plot.ly" }
 ]
 description = "An open-source interactive data visualization library for Python"
+readme = "README.md"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Programming Language :: Python :: 3.8",
