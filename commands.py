@@ -5,8 +5,10 @@ import logging
 import json
 import os
 import platform
+import re
 import requests
 import shutil
+import subprocess
 from subprocess import check_call
 import sys
 import time
@@ -296,6 +298,102 @@ def update_plotlyjs_dev(args, outdir):
     perform_codegen(outdir)
 
 
+def bump_version_pyproject_toml(new_version):
+    """Bump the version in pyproject.toml to new_version"""
+
+    pyproject_toml_path = "pyproject.toml"
+    pattern = r'(^\s*version\s*=\s*")([\w.]+)"(\s*$)'
+    with open(pyproject_toml_path, "r") as f:
+        content = f.read()
+    new_content = re.sub(
+        pattern,
+        rf'\g<1>{new_version}"\g<3>',
+        content,
+        count=1,  # replace only the first match
+        flags=re.MULTILINE,
+    )
+    with open(pyproject_toml_path, "w") as f:
+        f.write(new_content)
+    
+    # Run `uv lock` to update the version number in the `uv.lock` file (do not update manually)
+    subprocess.run(["uv", "lock"], check=True)
+
+    print(f"Updated version in {pyproject_toml_path} to {new_version}, and updated uv lockfile")
+
+
+def bump_version_package_json(new_version):
+    """Bump the version in package.json to new_version"""
+    js_dir = "js"
+    subprocess.run(
+        ["npm", "version", new_version, "--no-git-tag-version", "--allow-same-version"],
+        cwd=js_dir,
+        check=True,
+    )
+    print(
+        f"Updated version in {js_dir}/package.json and {js_dir}/package-lock.json to {new_version}"
+    )
+
+
+def bump_version_citation_cff(new_version, new_date):
+    """Bump the version in CITATION.cff to new_version and date-released to new_date"""
+    citation_cff_path = "CITATION.cff"
+    pattern_version = r'(^\s*version\s*:\s*)([\w.]+)(\s*$)'
+    pattern_date = r'(^\s*date-released\s*:\s*)([0-9\-]+)(\s*$)'
+
+    with open(citation_cff_path, "r") as f:
+        content = f.read()
+    new_content = re.sub(
+        pattern_version,
+        rf'\g<1>{new_version}\g<3>',
+        content,
+        count=1,  # replace only the first match
+        flags=re.MULTILINE,
+    )
+    new_content = re.sub(
+        pattern_date,
+        rf'\g<1>{new_date}\g<3>',
+        new_content,
+        count=1,  # replace only the first match
+        flags=re.MULTILINE,
+    )
+    with open(citation_cff_path, "w") as f:
+        f.write(new_content)
+    print(
+        f"Updated version in {citation_cff_path} to {new_version} and date-released to {new_date}"
+    )
+
+def bump_version_changelog_md(new_version, new_date):
+    """Bump the version in CHANGELOG.md to new_version and date to new_date"""
+    changelog_md_path = "CHANGELOG.md"
+    pattern = r'(^\s*##\s*Unreleased\s*$)'
+    new_header = f"\n\n## [{new_version}] - {new_date}\n"
+    with open(changelog_md_path, "r") as f:
+        content = f.read()
+    new_content = re.sub(
+        pattern,
+        rf'\g<1>{new_header}',
+        content,
+        count=1,  # replace only the first match
+        flags=re.MULTILINE,
+    )
+    with open(changelog_md_path, "w") as f:
+        f.write(new_content)
+    print(f"Updated version in {changelog_md_path} to {new_version}")
+
+
+def bump_version(args):
+    """Bump the version of plotly.py everywhere it needs to be updated."""
+    new_version = args.version
+    new_date = time.strftime("%Y-%m-%d")
+
+    # bump_version_citation_cff(new_version, new_date)
+    # bump_version_changelog_md(new_version, new_date)
+    # bump_version_package_json(new_version)
+    # Do this one last since it's the most visible,
+    # so that if one of the above commands fails it will be easier to notice
+    bump_version_pyproject_toml(new_version)
+
+
 def make_parser():
     """Make argument parser."""
 
@@ -321,6 +419,10 @@ def make_parser():
     p_update_dev.add_argument("--local", default=None, help="local path")
 
     subparsers.add_parser("updateplotlyjs", help="update plotly.js")
+
+    p_bump_version = subparsers.add_parser("bumpversion", help="bump plotly.py version")
+    # Add a positional argument for the version
+    p_bump_version.add_argument("version", help="version number")
 
     return parser
 
@@ -355,6 +457,9 @@ def main():
         version = plotly_js_version()
         print(version)
         update_plotlyjs(version, outdir)
+
+    elif args.cmd == "bumpversion":
+        bump_version(args)
 
     elif args.cmd is None:
         parser.print_help()
