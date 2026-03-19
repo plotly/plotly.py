@@ -449,7 +449,7 @@ def plot(
         Use 'file' if you want to save and view a single graph at a time
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
-        other graphs or HTML markup, like a HTML report or an website.
+        other graphs or HTML markup, like an HTML report or a website.
     include_plotlyjs (True | False | 'cdn' | 'directory' | path - default=True)
         Specifies how the plotly.js library is included in the output html
         file or div string.
@@ -654,7 +654,7 @@ def plot_mpl(
         Use 'file' if you want to save and view a single graph at a time
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
-        other graphs or HTML markup, like a HTML report or an website.
+        other graphs or HTML markup, like an HTML report or a website.
     include_plotlyjs (default=True) -- If True, include the plotly.js
         source code in the output file or string.
         Set as False if your HTML file already contains a copy of the plotly.js
@@ -687,7 +687,7 @@ def plot_mpl(
     plt.plot(x, y, "o")
 
     plot_mpl(fig)
-    # If you want to to download an image of the figure as well
+    # If you want to download an image of the figure as well
     plot_mpl(fig, image='png')
     ```
     """

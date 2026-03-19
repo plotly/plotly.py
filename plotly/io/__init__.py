@@ -64,7 +64,7 @@ else:
         ],
     )
 
-    # Set default template (for < 3.7 this is done in ploty/__init__.py)
+    # Set default template (for < 3.7 this is done in plotly/__init__.py)
     from plotly.io import templates
 
     templates._default = "plotly"
