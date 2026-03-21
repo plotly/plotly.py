@@ -255,8 +255,11 @@ def imshow(
             facet_row = img.dims.index(facet_row)
         nslices_facet_row = img.shape[facet_row]
         facet_row_slices = range(nslices_facet_row)
-    # facet_col_wrap is ignored when facet_row is set
-    if facet_row is not None or facet_col_wrap is None:
+    # ignore facet_col_wrap when facet_row is set
+    if facet_row is not None:
+        facet_col_wrap = None
+
+    if facet_col_wrap is None:
         ncols = nslices_facet_col
         nrows = nslices_facet_row
     else:
