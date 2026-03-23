@@ -3288,6 +3288,117 @@ Invalid property path '{key_path_str}' for layout
         if relayout_changes:
             self._dispatch_layout_change_callbacks(relayout_changes)
 
+    @staticmethod
+    def _traces_share_endpoint(trace_curr, trace_next):
+        if trace_curr.get("type", "scatter") not in {"scatter", "scattergl"}:
+            return False
+        if trace_next.get("type", "scatter") not in {"scatter", "scattergl"}:
+            return False
+        x_curr = trace_curr.get("x")
+        x_next = trace_next.get("x")
+        # x may be None, a base64-encoded dict, or a non-sequence type
+        if x_curr is None or x_next is None:
+            return False
+        if isinstance(x_curr, dict) or isinstance(x_next, dict):
+            return False
+        try:
+            return (
+                len(x_curr) >= 2
+                and len(x_next) >= 1
+                and str(x_curr[-1]) == str(x_next[0])
+            )
+        except (KeyError, TypeError, IndexError):
+            return False
+
+    @staticmethod
+    def _build_hover_companion(trace, x, y, customdata_index):
+        companion = {
+            **{key: trace[key] for key in ("name", "hovertemplate", "line") if key in trace},
+            "type": trace.get("type", "scatter"),
+            "mode": trace.get("mode", "lines"),
+            "showlegend": False,
+            "x": [x],
+            "y": [y],
+        }
+        customdata = trace.get("customdata")
+        if customdata is not None and hasattr(customdata, "__getitem__"):
+            try:
+                companion["customdata"] = [customdata[customdata_index]]
+            except (IndexError, KeyError):
+                pass
+        return companion
+
+    @staticmethod
+    def _fix_segmented_hover(data):
+        """
+        Resolve duplicate hover entries produced by segmented line charts.
+
+        When adjacent scatter traces share an endpoint (last x of trace[i]
+        equals first x of trace[i+1]), "x unified" hover shows two entries
+        at that x. For every such chain, each drawing trace is replaced by:
+
+        * a visual-only copy with ``hoverinfo="skip"`` (keeps the line), and
+        * one single-point companion per data point carrying the hover data.
+
+        A one-point ``"lines"`` trace is invisible (plotly.js needs ≥2 points
+        to render a line) but still participates in unified hover with the
+        original mode and line style, so the tooltip appearance is unchanged.
+        Each trace covers its points up to but not including its last (shared)
+        endpoint, which is instead covered by the following trace as its own
+        ``x[0]``.  The last trace in the chain covers all its points.
+
+        Parameters
+        ----------
+        data : list of dict
+            Trace property dicts (already deep-copied from ``self._data``).
+
+        Returns
+        -------
+        list of dict
+            Possibly expanded list with companion hover traces inserted.
+        """
+        # Detect adjacent scatter traces sharing an endpoint
+        # --------------------------------------------------
+        num_traces = len(data)
+        in_chain = [False] * num_traces
+        for idx, (trace_curr, trace_next) in enumerate(zip(data, data[1:])):
+            if BaseFigure._traces_share_endpoint(trace_curr, trace_next):
+                in_chain[idx] = in_chain[idx + 1] = True
+
+        if not any(in_chain):
+            return data
+
+        # Build expanded trace list with hover companions
+        # -----------------------------------------------
+        expanded_data = []
+        for is_chained, group in itertools.groupby(zip(in_chain, data), key=lambda pair: pair[0]):
+            traces = [trace for _, trace in group]
+            if not is_chained:
+                expanded_data.extend(traces)
+                continue
+
+            for chain_idx, trace in enumerate(traces):
+                # Visual-only trace: keeps the line, hidden from hover
+                drawing = {**trace, "hoverinfo": "skip"}
+                drawing.pop("hovertemplate", None)
+                drawing.pop("hovertext", None)
+                expanded_data.append(drawing)
+
+                # One single-point companion per data point.
+                y = trace.get("y")
+                if y is None:
+                    continue
+                is_last = chain_idx == len(traces) - 1
+                end = len(trace["x"]) if is_last else len(trace["x"]) - 1
+                for pt_idx in range(end):
+                    expanded_data.append(
+                        BaseFigure._build_hover_companion(
+                            trace, trace["x"][pt_idx], y[pt_idx], pt_idx
+                        )
+                    )
+
+        return expanded_data
+
     # Exports
     # -------
     def to_dict(self):
@@ -3303,7 +3414,7 @@ Invalid property path '{key_path_str}' for layout
         """
         # Handle data
         # -----------
-        data = deepcopy(self._data)
+        data = BaseFigure._fix_segmented_hover(deepcopy(self._data))
 
         # Handle layout
         # -------------

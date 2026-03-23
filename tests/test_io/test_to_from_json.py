@@ -271,3 +271,37 @@ def test_to_dict_empty_np_array_int64():
     )
     # to_dict() should not raise an exception
     fig.to_dict()
+
+
+def test_to_dict_segmented_hover_non_sharing_traces_unchanged():
+    fig = go.Figure(
+        [go.Scatter(x=[1, 5], y=[10, 50]), go.Scatter(x=[6, 10], y=[60, 100])]
+    )
+    assert len(fig.to_dict()["data"]) == 2
+
+
+def test_to_dict_segmented_hover_chain_expansion():
+    # drawing_A + comp[x=1] + drawing_B + comp[x=5] + comp[x=10] = 5
+    fig = go.Figure(
+        [go.Scatter(x=[1, 5], y=[10, 50]), go.Scatter(x=[5, 10], y=[50, 100])]
+    )
+    data = fig.to_dict()["data"]
+    drawings = [t for t in data if t.get("hoverinfo") == "skip"]
+    companions = [t for t in data if t.get("hoverinfo") != "skip"]
+    assert len(data) == 5
+    assert all("hovertemplate" not in t for t in drawings)
+    assert [t["x"][0] for t in companions] == [1, 5, 10]
+    assert all(len(t["x"]) == 1 and t["showlegend"] is False for t in companions)
+
+
+def test_to_dict_segmented_hover_shared_endpoint_uses_next_trace_customdata():
+    # Companion for x=5 must carry B's customdata[0] ("cd_b0"), not A's ("cd_a1").
+    fig = go.Figure(
+        [
+            go.Scatter(x=[1, 5], y=[10, 50], customdata=["cd_a0", "cd_a1"]),
+            go.Scatter(x=[5, 10], y=[50, 100], customdata=["cd_b0", "cd_b1"]),
+        ]
+    )
+    companions = [t for t in fig.to_dict()["data"] if t.get("hoverinfo") != "skip"]
+    comp_x5 = companions[1]
+    assert comp_x5["x"] == [5] and comp_x5["customdata"] == ["cd_b0"]
