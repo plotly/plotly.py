@@ -326,6 +326,36 @@ def test_default_annotation_positions(multi_plot_fixture):
     ):
         ret &= _cmp_partial_dict(sh, d)
     assert ret
+    
+def test_legacy_annotation_text_also_sets_shape_label(single_plot_fixture):
+    single_plot_fixture.add_vline(x=2, annotation_text="B")
+
+    assert len(single_plot_fixture.layout.shapes) == 1
+    assert len(single_plot_fixture.layout.annotations) == 1
+
+    shape = single_plot_fixture.layout.shapes[0]
+    annotation = single_plot_fixture.layout.annotations[0]
+
+    assert shape.label.text == "B"
+    assert annotation.text == "B"
+
+
+def test_explicit_label_takes_precedence_over_legacy_annotation_text(single_plot_fixture):
+    single_plot_fixture.add_hrect(
+        y0=3,
+        y1=4,
+        annotation_text="legacy",
+        label=dict(text="label"),
+    )
+
+    assert len(single_plot_fixture.layout.shapes) == 1
+    assert len(single_plot_fixture.layout.annotations) == 1
+
+    shape = single_plot_fixture.layout.shapes[0]
+    annotation = single_plot_fixture.layout.annotations[0]
+
+    assert shape.label.text == "label"
+    assert annotation.text == "legacy"
 
 
 def draw_all_annotation_positions(testing=False):
