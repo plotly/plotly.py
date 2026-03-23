@@ -326,7 +326,8 @@ def test_default_annotation_positions(multi_plot_fixture):
     ):
         ret &= _cmp_partial_dict(sh, d)
     assert ret
-    
+
+
 def test_legacy_annotation_text_also_sets_shape_label(single_plot_fixture):
     single_plot_fixture.add_vline(x=2, annotation_text="B")
 
@@ -340,7 +341,9 @@ def test_legacy_annotation_text_also_sets_shape_label(single_plot_fixture):
     assert annotation.text == "B"
 
 
-def test_explicit_label_takes_precedence_over_legacy_annotation_text(single_plot_fixture):
+def test_explicit_label_takes_precedence_over_legacy_annotation_text(
+    single_plot_fixture,
+):
     single_plot_fixture.add_hrect(
         y0=3,
         y1=4,
