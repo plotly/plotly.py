@@ -379,6 +379,7 @@ annotation_*: any parameters to go.layout.Annotation can be passed as
     except for x0, x1, y0, y1 or type."""
     return docstr
 
+
 #  helper to centralize translation of legacy annotation_* kwargs into a shape.label dict and emit a deprecation warning
 def _coerce_shape_label_from_legacy_annotation_kwargs(kwargs):
     """
@@ -434,6 +435,7 @@ def _coerce_shape_label_from_legacy_annotation_kwargs(kwargs):
 
     return kwargs
 
+
 def _normalize_legacy_line_position_to_textposition(pos: str) -> str:
     """
     Map old annotation_position strings for vline/hline to Label.textposition.
@@ -456,6 +458,7 @@ def _normalize_legacy_line_position_to_textposition(pos: str) -> str:
     if any(tok in p for tok in ("top", "bottom", "left", "right")):
         return "middle"  # caller will override to start/end as needed
     raise ValueError(f'Invalid annotation position "{pos}"')
+
 
 def _generator(i):
     """ "cast" an iterator to a generator"""
@@ -4158,14 +4161,16 @@ Invalid property path '{key_path_str}' for layout
             col = None
         n_shapes_before = len(self.layout["shapes"])
         n_annotations_before = len(self.layout["annotations"])
-        
+
         if shape_type == "vline":
             # vline: create a labeled shape and (for now) also keep a legacy annotation
             # so existing behavior and tests continue to work. Once label is approved,
             # we can remove the annotation path.
 
             # Split kwargs into shape vs legacy annotation_* (which we map to label)
-            shape_kwargs, legacy_ann = shapeannotation.split_dict_by_key_prefix(kwargs, "annotation_")
+            shape_kwargs, legacy_ann = shapeannotation.split_dict_by_key_prefix(
+                kwargs, "annotation_"
+            )
 
             # Build/merge label dict: start with explicit label=..., then copy safe legacy fields
             label_dict = (kwargs.get("label") or {}).copy()
@@ -4177,7 +4182,10 @@ Invalid property path '{key_path_str}' for layout
                     label_dict["text"] = legacy_ann["annotation_text"]
                 if "annotation_font" in legacy_ann and "font" not in label_dict:
                     label_dict["font"] = legacy_ann["annotation_font"]
-                if "annotation_textangle" in legacy_ann and "textangle" not in label_dict:
+                if (
+                    "annotation_textangle" in legacy_ann
+                    and "textangle" not in label_dict
+                ):
                     label_dict["textangle"] = legacy_ann["annotation_textangle"]
 
             # Position mapping (legacy → label.textposition for LINES)
@@ -4201,8 +4209,12 @@ Invalid property path '{key_path_str}' for layout
                     label_dict.setdefault("textposition", "middle")
 
             # NOTE: Label does not support bgcolor/bordercolor; keep emitting a warning when present
-            if "annotation_bgcolor" in legacy_ann or "annotation_bordercolor" in legacy_ann:
+            if (
+                "annotation_bgcolor" in legacy_ann
+                or "annotation_bordercolor" in legacy_ann
+            ):
                 import warnings
+
                 warnings.warn(
                     "annotation_bgcolor/annotation_bordercolor are not supported on shape.label "
                     "and will be ignored; use label.font/color or a background shape instead.",
@@ -4279,8 +4291,12 @@ Invalid property path '{key_path_str}' for layout
                     label_dict.setdefault("textposition", "middle")
 
             # NOTE: Label does not support bgcolor/bordercolor; warn when present
-            if "annotation_bgcolor" in legacy_ann or "annotation_bordercolor" in legacy_ann:
+            if (
+                "annotation_bgcolor" in legacy_ann
+                or "annotation_bordercolor" in legacy_ann
+            ):
                 import warnings
+
                 warnings.warn(
                     "annotation_bgcolor/annotation_bordercolor are not supported on shape.label "
                     "and will be ignored; use label.font/color or a background shape instead.",
@@ -4379,8 +4395,12 @@ Invalid property path '{key_path_str}' for layout
                 # else: leave default
 
             # NOTE: Label does not support bgcolor/bordercolor; keep emitting a warning when present
-            if "annotation_bgcolor" in legacy_ann or "annotation_bordercolor" in legacy_ann:
+            if (
+                "annotation_bgcolor" in legacy_ann
+                or "annotation_bordercolor" in legacy_ann
+            ):
                 import warnings
+
                 warnings.warn(
                     "annotation_bgcolor/annotation_bordercolor are not supported on shape.label "
                     "and will be ignored; use label.font/color or a background shape instead.",
@@ -4463,8 +4483,12 @@ Invalid property path '{key_path_str}' for layout
                     label_dict["textposition"] = "middle right"
 
             # NOTE: Label does not support bgcolor/bordercolor; warn when present
-            if "annotation_bgcolor" in legacy_ann or "annotation_bordercolor" in legacy_ann:
+            if (
+                "annotation_bgcolor" in legacy_ann
+                or "annotation_bordercolor" in legacy_ann
+            ):
                 import warnings
+
                 warnings.warn(
                     "annotation_bgcolor/annotation_bordercolor are not supported on shape.label "
                     "and will be ignored; use label.font/color or a background shape instead.",
@@ -4582,14 +4606,14 @@ Invalid property path '{key_path_str}' for layout
     add_vline.__doc__ = _axis_spanning_shapes_docstr("vline")
 
     def add_hline(
-    self,
-    y,
-    row="all",
-    col="all",
-    exclude_empty_subplots=True,
-    annotation=None,
-    **kwargs,
-):
+        self,
+        y,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ):
         # Translate legacy annotation_* → label (non-destructive; warns if used)
         kwargs = _coerce_shape_label_from_legacy_annotation_kwargs(kwargs)
 
@@ -4613,15 +4637,15 @@ Invalid property path '{key_path_str}' for layout
     add_hline.__doc__ = _axis_spanning_shapes_docstr("hline")
 
     def add_vrect(
-    self,
-    x0,
-    x1,
-    row="all",
-    col="all",
-    exclude_empty_subplots=True,
-    annotation=None,
-    **kwargs,
-   ):
+        self,
+        x0,
+        x1,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ):
         # Translate legacy annotation_* → label (non-destructive; warns if used)
         kwargs = _coerce_shape_label_from_legacy_annotation_kwargs(kwargs)
 
@@ -4637,7 +4661,6 @@ Invalid property path '{key_path_str}' for layout
         return self
 
     add_vrect.__doc__ = _axis_spanning_shapes_docstr("vrect")
-
 
     def add_hrect(
         self,
