@@ -11,10 +11,24 @@ from PIL import Image
 import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.io.kaleido import kaleido_available, kaleido_major
+from plotly.io._kaleido import _fix_sankey_isolated_nodes
 import pytest
 
 
 fig = {"data": [], "layout": {"title": {"text": "figure title"}}}
+
+
+def _make_sankey_fig(labels, x, y, sources, targets, values, arrangement="fixed"):
+    return {
+        "data": [
+            {
+                "type": "sankey",
+                "arrangement": arrangement,
+                "node": {"label": labels, "x": x, "y": y},
+                "link": {"source": sources, "target": targets, "value": values},
+            }
+        ]
+    }
 
 
 def create_figure(width=None, height=None):
@@ -374,3 +388,90 @@ def test_width_height_priority():
     assert height == pio.defaults.default_height, (
         "Default height should be used when no layout or argument"
     )
+
+
+def test_fix_sankey_isolated_nodes_reorders_correctly():
+    """Isolated node between connected nodes is moved to the end."""
+    fig = _make_sankey_fig(
+        labels=["left_a", "isolated", "right_a"],
+        x=[0.1, 0.1, 0.9],
+        y=[0.5, 0.8, 0.5],
+        sources=[0],
+        targets=[2],
+        values=[1.0],
+    )
+
+    result = _fix_sankey_isolated_nodes(fig)
+    node = result["data"][0]["node"]
+    link = result["data"][0]["link"]
+
+    # Isolated node moved to last position; connected nodes keep relative order
+    assert node["label"] == ["left_a", "right_a", "isolated"]
+    assert node["x"] == [0.1, 0.9, 0.1]
+    assert node["y"] == [0.5, 0.5, 0.8]
+
+    # Source/target indices updated to reflect the new order
+    assert link["source"] == [0]  # left_a: 0 → 0 (unchanged)
+    assert link["target"] == [1]  # right_a: 2 → 1
+
+
+def test_fix_sankey_no_isolated_nodes_unchanged():
+    """Figure with all nodes connected must not be modified."""
+    fig = _make_sankey_fig(
+        labels=["a", "b", "c"],
+        x=[0.1, 0.5, 0.9],
+        y=[0.5, 0.5, 0.5],
+        sources=[0, 1],
+        targets=[1, 2],
+        values=[1.0, 1.0],
+    )
+    original_labels = fig["data"][0]["node"]["label"][:]
+    original_x = fig["data"][0]["node"]["x"][:]
+
+    result = _fix_sankey_isolated_nodes(fig)
+    node = result["data"][0]["node"]
+
+    assert node["label"] == original_labels
+    assert node["x"] == original_x
+
+
+def test_fix_sankey_out_of_bounds_targets_kept():
+    """Out-of-bounds targets are preserved as-is and do not cause errors."""
+    fig = _make_sankey_fig(
+        labels=["isolated", "a", "b"],
+        x=[0.5, 0.1, 0.9],
+        y=[0.8, 0.5, 0.5],
+        sources=[1],
+        targets=[5],  # out of bounds: n_nodes == 3
+        values=[1.0],
+    )
+
+    result = _fix_sankey_isolated_nodes(fig)
+    node = result["data"][0]["node"]
+    link = result["data"][0]["link"]
+
+    # node 1 (a) is the only connected node; isolated and b move to end
+    assert node["label"] == ["a", "isolated", "b"]
+    assert node["x"] == [0.1, 0.5, 0.9]
+    assert node["y"] == [0.5, 0.8, 0.5]
+
+    # Source index updated; out-of-bounds target kept unchanged
+    assert link["source"] == [0]  # a: 1 → 0
+    assert link["target"] == [5]  # out-of-bounds: preserved as-is
+
+
+def test_fix_sankey_non_fixed_arrangement_unchanged():
+    """Traces with arrangement != 'fixed' must not be modified."""
+    fig = _make_sankey_fig(
+        labels=["a", "isolated", "b"],
+        x=[0.1, 0.1, 0.9],
+        y=[0.5, 0.8, 0.5],
+        sources=[0],
+        targets=[2],
+        values=[1.0],
+        arrangement="snap",
+    )
+    original_label = fig["data"][0]["node"]["label"][:]
+
+    result = _fix_sankey_isolated_nodes(fig)
+    assert result["data"][0]["node"]["label"] == original_label
