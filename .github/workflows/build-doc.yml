@@ -35,11 +35,6 @@ jobs:
           uv pip uninstall plotly
           uv pip install -e ..
 
-      - name: List installed packages
-        run: |
-          cd doc
-          source .venv/bin/activate
-          uv pip list
 
       - name: Build HTML docs
         env:
