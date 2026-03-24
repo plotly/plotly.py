@@ -307,3 +307,18 @@ You can then run the following command
 ```bash
 python commands.py updateplotlyjsdev --local /path/to/your/plotly.js/
 ```
+
+## Documentation for `commands.py`
+
+`commands.py` serves as an entry point for utilities to help with plotly.py development.
+
+Usage: `python commands.py <subcommand> <args>`
+
+| Subcommand | Purpose |
+|------------|---------|
+| `codegen [--noformat]` | Regenerate Python files according to `plot-schema.json`.`--noformat` skips formatter step. |
+| `lint` | Lint all Python code in `plotly/`. |
+| `format` | Format all Python code in `plotly/`. |
+| `updateplotlyjs` | Update `plotly.min.js` and `plot-schema.json` to match the `plotly.js` version specified in `js/package.json`. Then, run codegen to regenerate the Python files. |
+| `updateplotlyjsdev [--devrepo REPONAME --devbranch BRANCHNAME] \| [--local PATH]` | Update `plot-schema.json` and `plotly.min.js` to match the version in the provided plotly.js repo name and branch name, OR local path. Then, run codegen to regenerate the Python files. |
+| `bumpversion X.Y.Z` | Update the plotly.py version number to X.Y.Z across all files where it needs to be updated. |
