@@ -55,7 +55,7 @@ jobs:
           python check-or-enforce-order.py build/html
 
       - name: Upload HTML docs artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: doc-html
           path: doc/build/html/
