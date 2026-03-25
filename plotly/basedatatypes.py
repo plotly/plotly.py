@@ -3991,6 +3991,35 @@ Invalid property path '{key_path_str}' for layout
                     # Assign non-compound value
                     plotly_obj[key] = val
 
+            # Handle partial autorange for axis range with None elements
+            # -----------------------------------------------------------
+            # When 'range' is set with None elements on an axis object that
+            # has 'autorange', set autorange to the appropriate value so
+            # that plotly.js partial autoranging works correctly.
+            # Without this, plotly.js impliedEdits sets autorange=false when
+            # range is specified, preventing partial autorange behavior.
+            if (
+                "range" in update_obj
+                and "autorange" in plotly_obj._valid_props
+            ):
+                if "autorange" in update_obj:
+                    # User explicitly provided autorange in the same update.
+                    # Re-apply it to ensure it takes precedence over any
+                    # implicit autorange set by the __setitem__ handler
+                    # for 'range'.
+                    plotly_obj["autorange"] = update_obj["autorange"]
+                else:
+                    range_val = update_obj["range"]
+                    if isinstance(range_val, (list, tuple)) and len(range_val) == 2:
+                        has_null_lower = range_val[0] is None
+                        has_null_upper = range_val[1] is None
+                        if has_null_lower and has_null_upper:
+                            plotly_obj["autorange"] = True
+                        elif has_null_lower:
+                            plotly_obj["autorange"] = "min"
+                        elif has_null_upper:
+                            plotly_obj["autorange"] = "max"
+
         elif isinstance(plotly_obj, tuple):
             if len(update_obj) == 0:
                 # Nothing to do
@@ -4930,6 +4959,26 @@ class BasePlotlyType(object):
                 # ### Handle simple property ###
                 else:
                     self._set_prop(prop, value)
+
+                # Handle partial autorange when 'range' is set directly
+                # with None elements on an axis object.
+                # When range contains a None (null) element, plotly.js
+                # should use partial autoranging, but its impliedEdits
+                # mechanism sets autorange=false when range is specified.
+                # We counteract this by explicitly setting autorange.
+                if prop == "range" and "autorange" in self._valid_props:
+                    if (
+                        isinstance(value, (list, tuple))
+                        and len(value) == 2
+                    ):
+                        has_null_lower = value[0] is None
+                        has_null_upper = value[1] is None
+                        if has_null_lower and has_null_upper:
+                            self._set_prop("autorange", True)
+                        elif has_null_lower:
+                            self._set_prop("autorange", "min")
+                        elif has_null_upper:
+                            self._set_prop("autorange", "max")
             else:
                 # Make sure properties dict is initialized
                 self._init_props()

@@ -599,3 +599,69 @@ class TestSelectForEachUpdateSubplots(TestCase):
             fig.layout.xaxis.to_plotly_json(),
             {"title": {"font": {"family": "Courier"}}},
         )
+
+
+class TestPartialAutorange(TestCase):
+    """Tests for automatic autorange setting when range contains None.
+
+    When a user sets range=[value, None] or range=[None, value], plotly.js
+    should use partial autoranging. However, plotly.js impliedEdits sets
+    autorange=false when range is specified. We counteract this by
+    explicitly setting autorange to the appropriate value.
+
+    See: https://github.com/plotly/plotly.py/issues/5536
+    """
+
+    def test_range_upper_none_sets_autorange_max(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.update_yaxes(range=[0, None])
+        self.assertEqual(fig.layout.yaxis.autorange, "max")
+
+    def test_range_lower_none_sets_autorange_min(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.update_yaxes(range=[None, 5])
+        self.assertEqual(fig.layout.yaxis.autorange, "min")
+
+    def test_range_both_none_sets_autorange_true(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.update_yaxes(range=[None, None])
+        self.assertEqual(fig.layout.yaxis.autorange, True)
+
+    def test_range_no_none_does_not_set_autorange(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.update_yaxes(range=[0, 10])
+        self.assertIsNone(fig.layout.yaxis.autorange)
+
+    def test_xaxis_range_with_none(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.update_xaxes(range=[None, 5])
+        self.assertEqual(fig.layout.xaxis.autorange, "min")
+
+    def test_explicit_autorange_overrides_implicit(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.update_yaxes(range=[0, None], autorange="max reversed")
+        self.assertEqual(fig.layout.yaxis.autorange, "max reversed")
+
+    def test_explicit_autorange_dict_order_preserved(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.update_yaxes(**{"autorange": "max reversed", "range": [0, None]})
+        self.assertEqual(fig.layout.yaxis.autorange, "max reversed")
+
+    def test_direct_property_assignment(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.layout.yaxis.range = [0, None]
+        self.assertEqual(fig.layout.yaxis.autorange, "max")
+
+    def test_update_layout_yaxis_range(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(y=[0, 6]))
+        fig.update_layout(yaxis_range=[None, 5])
+        self.assertEqual(fig.layout.yaxis.autorange, "min")
