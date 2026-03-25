@@ -2,7 +2,7 @@ on: push
 
 jobs:
   check-js-build:
-    name: Check JS build artifacts
+    name: Check JS version number and build artifacts
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -10,53 +10,52 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.x"
-        
+
+    - name: Check that version number for JS project matches version number for Python project
+      run: |
+        PYPROJECT_PATH="pyproject.toml"
+        PKGJSON_PATH="js/package.json"
+        PYPROJECT_VERSION=$(awk -F'"' '/^version/ {print $2; exit}' $PYPROJECT_PATH)
+        JSPROJECT_VERSION=$(cat $PKGJSON_PATH | jq -r '.version')
+        if [ "$PYPROJECT_VERSION" != "$JSPROJECT_VERSION" ]; then
+          echo "❌ Version number $JSPROJECT_VERSION in $PKGJSON_PATH does not match version number $PYPROJECT_VERSION in $PYPROJECT_PATH"
+          exit 1
+        else
+          echo "✅ Version number $JSPROJECT_VERSION in $PKGJSON_PATH matches version number $PYPROJECT_VERSION in $PYPROJECT_PATH"
+        fi
     - name: Install Node
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: '22'
 
     - name: Copy current files to a temporary directory
       run: |
-        cp -R plotly/labextension/ plotly/labextension-tmp/
+        mv plotly/labextension/ plotly/labextension-tmp/
 
     - name: Install dependencies and build
       run: |
         curl -LsSf https://astral.sh/uv/install.sh | sh
         uv venv
         source .venv/bin/activate
-        uv pip install jupyter
+        uv pip install jupyterlab
         cd js
         npm ci
         npm run build
         npm ls
     - name: Check JupyterLab build artifacts
       run: |
-        # 1. Hash contents of all static files, sort by content hash
-        find plotly/labextension/static -type f -exec sha256sum {} \; | awk '{print $1}' | sort > new_hashes.txt
-        find plotly/labextension-tmp/static -type f -exec sha256sum {} \; | awk '{print $1}' | sort > old_hashes.txt
+        # Compare the plotly/labextension and plotly/labextension-tmp directories
+        diff -r --brief plotly/labextension/ plotly/labextension-tmp/ > labextension_diff.txt
 
-        # 2. Compare the sorted content hashes
-        diff old_hashes.txt new_hashes.txt > content_diff.txt
-
-        # Remove the "load" line from both package.json files before comparing
-        grep -v '"load": "static/' plotly/labextension/package.json > pkg1.json
-        grep -v '"load": "static/' plotly/labextension-tmp/package.json > pkg2.json
-
-        # Compare stripped versions
-        diff pkg1.json pkg2.json > package_json_diff.txt
-
-        # 5. Final check
-        if [ -s content_diff.txt ] || [ -s package_json_diff.txt ]; then
+        # Check for differences
+        if [ -s labextension_diff.txt ]; then
         echo "❌ Build artifacts differ:"
         echo "--- Unexpected diffs ---"
-        cat content_diff.txt
-        echo "--- Unexpected package.json diffs ---"
-        cat package_json_diff.txt
+        cat labextension_diff.txt
         echo "Please replace the 'plotly/labextension' directory with the artifacts of this CI run."
         exit 1
         else
-        echo "✅ Build artifacts match expected output (ignoring known 'load' hash in package.json)."
+        echo "✅ Build artifacts match expected output"
         fi
 
     - name: Store the build artifacts from plotly/labextension
