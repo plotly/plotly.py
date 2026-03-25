@@ -178,7 +178,7 @@ When creating your pull request, please follow the guidelines below.
 ### Code pull request
 
 - *Make sure you have reviewed the full [contributing notes (this file)](https://github.com/plotly/plotly.py/blob/main/CONTRIBUTING.md) and understand the structure of the package.*
-- If your PR modifies code of `plotly.graph_objects`, the modifications should be made to the the code generator, *not* the generated files.
+- If your PR modifies code of `plotly.graph_objects`, the modifications should be made to the code generator, *not* the generated files.
 - You have added tests or modified existing tests, as needed.
 - For a new feature, you have added documentation examples (please see the doc checklist as well).
 - You have added a CHANGELOG entry if changing anything substantial.

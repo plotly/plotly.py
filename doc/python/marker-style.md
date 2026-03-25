@@ -309,7 +309,7 @@ fig.show()
 
 To maximise visibility of each point, set the color as an `rgba` string that includes an alpha value of 0.5.
 
-This example sets the marker color to `'rgba(135, 206, 250, 0.5)'`. The rgb values of 135, 206, and 250 are from the definition of the `LightSkyBlue` named CSS color that is is used in the previous examples (See https://www.color-hex.com/color/87cefa). The marker line will remain opaque.
+This example sets the marker color to `'rgba(135, 206, 250, 0.5)'`. The rgb values of 135, 206, and 250 are from the definition of the `LightSkyBlue` named CSS color that is used in the previous examples (See https://www.color-hex.com/color/87cefa). The marker line will remain opaque.
 
 ```python
 import plotly.graph_objects as go
