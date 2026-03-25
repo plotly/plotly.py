@@ -1447,10 +1447,12 @@ class BaseFigure(object):
 
         layout_keys_filters = [
             lambda k: k.startswith(prefix) and self.layout[k] is not None,
-            lambda k: row is None
-            or container_to_row_col.get(k, (None, None, None))[0] == row,
-            lambda k: col is None
-            or container_to_row_col.get(k, (None, None, None))[1] == col,
+            lambda k: (
+                row is None or container_to_row_col.get(k, (None, None, None))[0] == row
+            ),
+            lambda k: (
+                col is None or container_to_row_col.get(k, (None, None, None))[1] == col
+            ),
             lambda k: (
                 secondary_y is None
                 or container_to_row_col.get(k, (None, None, None))[2] == secondary_y
@@ -3998,10 +4000,7 @@ Invalid property path '{key_path_str}' for layout
             # that plotly.js partial autoranging works correctly.
             # Without this, plotly.js impliedEdits sets autorange=false when
             # range is specified, preventing partial autorange behavior.
-            if (
-                "range" in update_obj
-                and "autorange" in plotly_obj._valid_props
-            ):
+            if "range" in update_obj and "autorange" in plotly_obj._valid_props:
                 if "autorange" in update_obj:
                     # User explicitly provided autorange in the same update.
                     # Re-apply it to ensure it takes precedence over any
@@ -4967,10 +4966,7 @@ class BasePlotlyType(object):
                 # mechanism sets autorange=false when range is specified.
                 # We counteract this by explicitly setting autorange.
                 if prop == "range" and "autorange" in self._valid_props:
-                    if (
-                        isinstance(value, (list, tuple))
-                        and len(value) == 2
-                    ):
+                    if isinstance(value, (list, tuple)) and len(value) == 2:
                         has_null_lower = value[0] is None
                         has_null_upper = value[1] is None
                         if has_null_lower and has_null_upper:
