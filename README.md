@@ -1,5 +1,6 @@
 # plotly.py
 
+
 <table>
     <tr>
         <td>Latest Release</td>
