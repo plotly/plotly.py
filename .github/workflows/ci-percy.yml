@@ -1,0 +1,58 @@
+name: CI Percy
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  python-311-percy:
+    name: python_311_percy
+    runs-on: ubuntu-latest
+    env:
+      PERCY_ENABLED: "True"
+      PERCY_PROJECT: plotly/plotly.py
+      PERCY_TOKEN: ${{ secrets.PERCY_PYTHON_TOKEN_V0 }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+      - name: Set up Chromedriver
+        uses: nanasess/setup-chromedriver@v2
+      - name: Install requirements
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_optional
+      - name: Build HTML figures (Pandas 2)
+        run: |
+          source .venv/bin/activate
+          python tests/percy/plotly-express.py
+      - name: Build HTML figures (Pandas 1) and compare
+        run: |
+          source .venv/bin/activate
+          mkdir tests/percy/pandas2
+          mv tests/percy/*.html tests/percy/pandas2/
+          uv pip install pandas==1.5.3 numpy==1.26.4
+          python tests/percy/plotly-express.py
+          python tests/percy/compare-pandas.py
+          rm -rf tests/percy/pandas2
+      - name: List installed packages and python version
+        run: |
+          source .venv/bin/activate
+          uv pip list
+          python --version
+      - name: Run percy snapshots
+        run: |
+          npm i @percy/cli
+          npx percy snapshot -c tests/percy/snapshots.yml tests/percy/
+          rm tests/percy/*.html

@@ -1,0 +1,81 @@
+name: CI Builds
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  plotlyjs-dev-build:
+    name: plotlyjs_dev_build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_optional
+      - name: Update plotly.js to dev
+        run: |
+          source .venv/bin/activate
+          python commands.py updateplotlyjsdev
+      - name: Test core (excluding nodev)
+        run: |
+          source .venv/bin/activate
+          pytest -k 'not nodev' tests/test_core
+      - name: Build source distribution packages
+        run: |
+          source .venv/bin/activate
+          uv sync --extra dev_build
+          python -m build --sdist --wheel -o dist
+      - name: Upload dist artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: plotlyjs-dev-build-dist
+          path: dist/
+          if-no-files-found: error
+
+  full-build:
+    name: full_build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: PyPI Build
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_build
+          cd js
+          npm ci
+          npm run build
+          cd ..
+          python -m build --sdist --wheel -o dist
+          cp -R dist output
+          git status
+      - name: Zip output
+        run: |
+          tar czf output.tgz output
+      - name: Upload output artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-build-output
+          path: output.tgz
+          if-no-files-found: error

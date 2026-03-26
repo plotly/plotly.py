@@ -1,0 +1,174 @@
+name: CI Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-core:
+    name: test_core_py (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          install-chromedriver: true
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          source .venv/bin/activate
+          uv lock --check
+          uv sync --extra dev_core
+      - name: List installed packages and python version
+        run: |
+          source .venv/bin/activate
+          uv pip list
+          python --version
+      - name: Test core
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_core
+
+  test-optional:
+    name: test_optional_py (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          install-chromedriver: true
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_optional
+      - name: Test core
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_core
+      - name: List installed packages and python version
+        run: |
+          source .venv/bin/activate
+          uv pip list
+          python --version
+      - name: Test optional
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_optional
+      - name: Test utils
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_plotly_utils/
+      - name: Test io
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_io
+      - name: Test dependencies not imported
+        run: |
+          source .venv/bin/activate
+          python -m pytest -x test_init/test_dependencies_not_imported.py
+      - name: Test lazy imports
+        run: |
+          source .venv/bin/activate
+          python -m pytest -x test_init/test_lazy_imports.py
+
+  test-optional-legacy-pandas:
+    name: test_optional_py-3.9_pandas-1.2.4
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          install-chromedriver: true
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_optional
+          uv pip install pandas==1.2.4 numpy==1.26.4
+      - name: Test core
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_core
+      - name: List installed packages and python version
+        run: |
+          source .venv/bin/activate
+          uv pip list
+          python --version
+      - name: Test optional
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_optional
+      - name: Test utils
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_plotly_utils/
+      - name: Test io
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_io
+      - name: Test dependencies not imported
+        run: |
+          source .venv/bin/activate
+          python -m pytest -x test_init/test_dependencies_not_imported.py
+      - name: Test lazy imports
+        run: |
+          source .venv/bin/activate
+          python -m pytest -x test_init/test_lazy_imports.py
+
+  test-kaleido-v0:
+    name: test_kaleido_v0 (3.12)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          install-chromedriver: true
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_optional
+          uv pip uninstall kaleido
+          uv pip install kaleido==0.2.1
+      - name: List installed packages and python version
+        run: |
+          source .venv/bin/activate
+          uv pip list
+          python --version
+      - name: Test plotly.io image output with Kaleido v0
+        run: |
+          source .venv/bin/activate
+          python -m pytest tests/test_optional/test_kaleido

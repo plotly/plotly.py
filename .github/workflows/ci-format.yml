@@ -1,0 +1,26 @@
+name: CI Formatting
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check-code-formatting:
+    name: check-code-formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_core
+      - name: Check handwritten code with ruff
+        run: |
+          source .venv/bin/activate
+          ruff format --check .
