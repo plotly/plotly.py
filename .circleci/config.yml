@@ -150,6 +150,7 @@ jobs:
       - run:
           name: Install ruff
           command: |
+            exit 1
             uv venv
             source .venv/bin/activate
             uv sync --extra dev_core
