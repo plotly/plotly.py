@@ -3,6 +3,7 @@ name: CI Formatting
 on:
   push:
   pull_request:
+    types: [opened, reopened]
 
 jobs:
   check-code-formatting:

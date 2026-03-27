@@ -3,6 +3,7 @@ name: CI Tests
 on:
   push:
   pull_request:
+    types: [opened, reopened]
 
 jobs:
   test-core:
@@ -18,10 +19,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v2.1.1
-        with:
-          install-chromedriver: true
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -56,6 +53,9 @@ jobs:
         uses: browser-actions/setup-chrome@v2.1.1
         with:
           install-chromedriver: true
+      - name: Check whether we can access Chrome from Python
+        run: |
+          python -c "import webbrowser; webbrowser.get()"
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
