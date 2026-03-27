@@ -56,11 +56,16 @@ jobs:
           install-chromedriver: true
       - name: Print installed Chrome and Chromedriver paths and versions
         run: |
-          echo "Chrome path: ${{ steps.setup-chrome.outputs.chrome-path }}"
-          echo "Chrome version: ${{ steps.setup-chrome.outputs.chrome-path }} --version"
-          echo "Chromedriver path: ${{ steps.setup-chrome.outputs.chromedriver-path }}"
-          echo "Chromedriver version: ${{ steps.setup-chrome.outputs.chromedriver-path }} --version"
+          CHROME_PATH="${{ steps.setup-chrome.outputs.chrome-path }}"
+          CHROMEDRIVER_PATH="${{ steps.setup-chrome.outputs.chromedriver-path }}"
+          echo "Chrome path: $CHROME_PATH"
+          echo "Chrome version: $($CHROME_PATH --version)"
+          echo "Chromedriver path: $CHROMEDRIVER_PATH"
+          echo "Chromedriver version: $($CHROMEDRIVER_PATH --version)"
           echo "chrome --version: $(chrome --version)"
+      - name: Set BROWSER env var
+        run: |
+          echo "BROWSER=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
       - name: Print Python webbrowser standard browser list
         run: |
           python -c "import webbrowser; webbrowser.register_standard_browsers(); print(webbrowser._tryorder)"
@@ -113,9 +118,28 @@ jobs:
         with:
           python-version: "3.9"
       - name: Set up Chrome
+        id: setup-chrome
         uses: browser-actions/setup-chrome@v2.1.1
         with:
           install-chromedriver: true
+      - name: Print installed Chrome and Chromedriver paths and versions
+        run: |
+          CHROME_PATH="${{ steps.setup-chrome.outputs.chrome-path }}"
+          CHROMEDRIVER_PATH="${{ steps.setup-chrome.outputs.chromedriver-path }}"
+          echo "Chrome path: $CHROME_PATH"
+          echo "Chrome version: $($CHROME_PATH --version)"
+          echo "Chromedriver path: $CHROMEDRIVER_PATH"
+          echo "Chromedriver version: $($CHROMEDRIVER_PATH --version)"
+          echo "chrome --version: $(chrome --version)"
+      - name: Set BROWSER env var
+        run: |
+          echo "BROWSER=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+      - name: Print Python webbrowser standard browser list
+        run: |
+          python -c "import webbrowser; webbrowser.register_standard_browsers(); print(webbrowser._tryorder)"
+      - name: Check whether we can access Chrome from Python
+        run: |
+          python -c "import webbrowser; webbrowser.get()"
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
