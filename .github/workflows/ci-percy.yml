@@ -24,9 +24,9 @@ jobs:
         with:
           node-version: "22"
       - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
-      - name: Set up Chromedriver
-        uses: nanasess/setup-chromedriver@v2
+        uses: browser-actions/setup-chrome@v2.1.1
+        with:
+          install-chromedriver: true
       - name: Install requirements
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh

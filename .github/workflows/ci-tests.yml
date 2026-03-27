@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
+        uses: browser-actions/setup-chrome@v2.1.1
         with:
           install-chromedriver: true
       - name: Install dependencies
@@ -53,7 +53,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
+        uses: browser-actions/setup-chrome@v2.1.1
         with:
           install-chromedriver: true
       - name: Install dependencies
@@ -102,7 +102,7 @@ jobs:
         with:
           python-version: "3.9"
       - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
+        uses: browser-actions/setup-chrome@v2.1.1
         with:
           install-chromedriver: true
       - name: Install dependencies
@@ -152,7 +152,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
+        uses: browser-actions/setup-chrome@v2.1.1
         with:
           install-chromedriver: true
       - name: Install dependencies
