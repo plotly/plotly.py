@@ -90,7 +90,7 @@ fig.show()
 
 ### Reversed and Complementary CDF plots
 
-By default, the Y value represents the fraction of the data that is *at or below* the value on on the X axis. Setting `ecdfmode` to `"reversed"` reverses this, with the Y axis representing the fraction of the data *at or above* the X value. Setting `ecdfmode` to `"complementary"` plots `1-ECDF`, meaning that the Y values represent the fraction of the data *above* the X value.
+By default, the Y value represents the fraction of the data that is *at or below* the value on the X axis. Setting `ecdfmode` to `"reversed"` reverses this, with the Y axis representing the fraction of the data *at or above* the X value. Setting `ecdfmode` to `"complementary"` plots `1-ECDF`, meaning that the Y values represent the fraction of the data *above* the X value.
 
 In `standard` mode (the default), the right-most point is at 1 (or the total count/sum, depending on `ecdfnorm`) and the right-most point is above 0.
 

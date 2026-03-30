@@ -7,10 +7,11 @@ This is the release process for releasing plotly.py version `X.Y.Z`, including c
 
 ### Finalize changelog
 
-Review the contents of `CHANGELOG.md`. We try to follow
+Review the contents of `CHANGELOG.md` under the **Unreleased** header. We try to follow
 the [keepachangelog](https://keepachangelog.com/en/1.0.0/) guidelines.
-Make sure the changelog includes the version being published at the top, along
-with the expected publication date.
+
+**Note: You don't need to update the header itself with the new version number,
+as that will be done automatically as part of the next step.**
 
 Use the `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security`
 labels for all changes to plotly.py.  If the version of plotly.js has
@@ -22,16 +23,24 @@ a link to the plotly.js CHANGELOG.
 
 **Create a release branch `git checkout -b release-X.Y.Z` _from the tip of `origin/main`_.**
 
-- Manually update the versions to `X.Y.Z` in the files specified below:
+- Ensure that you have `npm` and `uv` installed in your environment
+
+- Run the command `python commands.py bumpversion X.Y.Z`, which will update the version to X.Y.Z in the following places
   - `pyproject.toml`
-    - update version
-  - `CHANGELOG.md`
-    - update version and release date
-    - finalize changelog entries according to instructions above
+  - `uv.lock`
+  - `js/package.json`
+  - `js/package-lock.json`
+  - `CHANGELOG.md` (Adds a new header for X.Y.Z above the unreleased items)
   - `CITATION.cff`
-    - update version and release date
-- Run `uv lock` to update the version number in the `uv.lock` file (do not update manually)
-- Commit and push your changes to the release branch:
+
+- Run `git diff` and ensure the above files were all updated correctly.
+  - Note: The current date is used as the release date in `CHANGELOG.md` and `CITATION.cff`. If you want to use a different date, edit these files manually afterward.
+  - If the bumpversion command failed for any reason, you can update the versions yourself by doing the following:
+    - Manually update the version number (and release date, as needed) in `pyproject.toml`, `CHANGELOG.md` and `CITATION.cff`
+    - Run `npm version X.Y.Z` to update `js/package.json` and `js/package-lock.json`
+    - Run `uv lock` to update `uv.lock`
+
+- Commit and push the changed files to the release branch:
     ```sh
     $ git add -u
     $ git commit -m "version changes for vX.Y.Z"

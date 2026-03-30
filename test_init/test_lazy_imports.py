@@ -12,7 +12,7 @@ def test_lazy_imports():
 
     assert "plotly" in sys.modules
 
-    # Check that submodules are not auto-imported, but can be be accessed using
+    # Check that submodules are not auto-imported, but can be accessed using
     # attribute syntax
     submodules = ["graph_objs", "io"]
     for m in submodules:

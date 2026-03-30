@@ -419,10 +419,10 @@ def convert_colors_to_same_type(
 
     Takes a single color or an iterable of colors, as well as a list of scale
     values, and outputs a 2-pair of the list of color(s) converted all to an
-    rgb or tuple color type, aswell as the scale as the second element. If
+    rgb or tuple color type, as well as the scale as the second element. If
     colors is a Plotly Scale name, then 'scale' will be forced to the scale
     from the respective colorscale and the colors in that colorscale will also
-    be coverted to the selected colortype. If colors is None, then there is an
+    be converted to the selected colortype. If colors is None, then there is an
     option to return portion of the DEFAULT_PLOTLY_COLORS
 
     :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
@@ -567,8 +567,8 @@ def make_colorscale(colors, scale=None):
 
     Takes a list of colors and scales and constructs a colorscale based
     on the colors in sequential order. If 'scale' is left empty, a linear-
-    interpolated colorscale will be generated. If 'scale' is a specificed
-    list, it must be the same legnth as colors and must contain all floats
+    interpolated colorscale will be generated. If 'scale' is a specified
+    list, it must be the same length as colors and must contain all floats
     For documentation regarding to the form of the output, see
     https://plot.ly/python/reference/#mesh3d-colorscale
 
