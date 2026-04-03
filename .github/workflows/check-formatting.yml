@@ -1,4 +1,4 @@
-name: CI Formatting
+name: Check code formatting
 
 on:
   push:

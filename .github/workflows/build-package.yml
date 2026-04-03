@@ -1,4 +1,4 @@
-name: CI Builds
+name: Build (Prod version and dev plotly.js version)
 
 on:
   push:
