@@ -229,7 +229,7 @@ fig = px.choropleth(df, locations="iso_alpha",
 fig.show()
 ```
 
-To use the USA States geometry, set `locationmode='USA-states'` and provide `locations` as [two-letter state abbreviations](/python/outline-map-locations/#supported-us-state-codes):
+To use the USA States geometry, set `locationmode='USA-states'` and provide `locations` as [two-letter state abbreviations](/python/outline-map-locations/#supported-us-state-codes) or [full state names](/python/outline-map-locations/#locationmode='USA-states'):
 
 ```python
 import plotly.express as px
