@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.17.2
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.12.4
+    version: 3.9.19
   plotly:
     description: How to set the configuration options of figures using the Plotly
       Python graphing library.
@@ -357,6 +357,19 @@ fig = go.Figure(
     )
 )
 fig.show()
+```
+
+### Hiding Notifications 
+
+*New in 6.7*
+
+By default, Plotly displays a notification in the top-right corner of the plot for actions such as downloading the plot. Set `displayNotifier` to `False` to hide these notifications.
+
+```python
+import plotly.express as px
+
+fig = px.scatter(x=[1, 2, 3], y=[1, 3, 2])
+fig.show(config={"displayNotifier": False})
 ```
 
 ### Configuring Figures in Dash Apps

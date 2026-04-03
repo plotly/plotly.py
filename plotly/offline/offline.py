@@ -140,6 +140,7 @@ def _get_jconfig(config=None):
         "locale",
         "locales",
         "doubleClickDelay",
+        "displayNotifier",
     )
 
     if config and isinstance(config, dict):
