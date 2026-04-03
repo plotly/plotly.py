@@ -9,16 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         persist-credentials: false
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: "3.x"
     
     - name: Install Node
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v6
       with:
         node-version: '22'
 
@@ -41,7 +41,7 @@ jobs:
     - name: Build a binary wheel and a source tarball
       run: python3 -m build
     - name: Store the distribution packages
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: python-package-distributions
         path: dist/
@@ -61,7 +61,7 @@ jobs:
 
     steps:
     - name: Download all the dists
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: python-package-distributions
         path: dist/

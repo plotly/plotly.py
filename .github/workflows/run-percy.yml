@@ -15,13 +15,13 @@ jobs:
       PERCY_PROJECT: plotly/plotly.py
       PERCY_TOKEN: ${{ secrets.PERCY_PYTHON_TOKEN_V0 }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "22"
       - name: Set up Chrome
