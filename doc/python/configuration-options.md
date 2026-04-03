@@ -363,13 +363,16 @@ fig.show()
 
 *New in 6.7*
 
-By default, Plotly displays a notification in the top-right corner of the plot for actions such as downloading the plot. Set `displayNotifier` to `False` to hide these notifications.
+Plotly displays a notification in the top-right corner of the plot when downloading the plot as an image, when first clicking a legend item, and when zooming in. Set `displayNotifier` to `False` to hide these notifications.
 
 ```python
 import plotly.express as px
 
-fig = px.scatter(x=[1, 2, 3], y=[1, 3, 2])
-fig.show(config={"displayNotifier": False})
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+
+config = {"displayNotifier": True}
+fig.show(config=config)
 ```
 
 ### Configuring Figures in Dash Apps
