@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.17.2
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.0
+    version: 3.9.19
   plotly:
     description: How to specify country codes, names, and US states for outline-based
       maps
@@ -358,6 +358,24 @@ fig = px.choropleth(
     scope='usa',
     color_continuous_scale='Reds',
     title='USA States Choropleth'
+)
+fig.show()
+```
+
+*New in 6.7*
+
+You can also use full state names in `locations` when `locationmode='USA-states'`:
+
+```python
+import plotly.express as px
+
+fig = px.choropleth(
+    locations=['California', 'Texas', 'New York', 'Florida', 'Illinois'],
+    locationmode='USA-states',
+    color=[95, 88, 92, 85, 78],
+    scope='usa',
+    color_continuous_scale='Reds',
+    title='USA States Choropleth with State Names'
 )
 fig.show()
 ```
