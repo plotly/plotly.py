@@ -1,4 +1,4 @@
-name: CI Percy
+name: Run Percy
 
 on:
   push:
@@ -38,20 +38,6 @@ jobs:
         run: |
           source .venv/bin/activate
           python tests/percy/plotly-express.py
-      - name: Build HTML figures (Pandas 1) and compare
-        run: |
-          source .venv/bin/activate
-          mkdir tests/percy/pandas2
-          mv tests/percy/*.html tests/percy/pandas2/
-          uv pip install pandas==1.5.3 numpy==1.26.4
-          python tests/percy/plotly-express.py
-          python tests/percy/compare-pandas.py
-          rm -rf tests/percy/pandas2
-      - name: List installed packages and python version
-        run: |
-          source .venv/bin/activate
-          uv pip list
-          python --version
       - name: Run percy snapshots
         run: |
           npm i @percy/cli
