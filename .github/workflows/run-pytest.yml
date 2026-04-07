@@ -26,10 +26,6 @@ jobs:
           source .venv/bin/activate
           uv lock --check
           uv sync --extra dev_core
-      - name: List installed packages and python version
-        run: |
-          source .venv/bin/activate
-          uv pip list
           python --version
       - name: Test core
         run: |
@@ -49,44 +45,19 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Set up Chrome
-        id: setup-chrome
-        uses: browser-actions/setup-chrome@v2.1.1
-        with:
-          install-chromedriver: true
-      - name: Print installed Chrome and Chromedriver paths and versions
-        run: |
-          CHROME_PATH="${{ steps.setup-chrome.outputs.chrome-path }}"
-          CHROMEDRIVER_PATH="${{ steps.setup-chrome.outputs.chromedriver-path }}"
-          echo "Chrome path: $CHROME_PATH"
-          echo "Chrome version: $($CHROME_PATH --version)"
-          echo "Chromedriver path: $CHROMEDRIVER_PATH"
-          echo "Chromedriver version: $($CHROMEDRIVER_PATH --version)"
-          echo "chrome --version: $(chrome --version)"
-      - name: Set BROWSER env var
-        run: |
-          echo "BROWSER=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
-      - name: Print Python webbrowser standard browser list
-        run: |
-          python -c "import webbrowser; webbrowser.register_standard_browsers(); print(webbrowser._tryorder)"
-      - name: Check whether we can access Chrome from Python
-        run: |
-          python -c "import webbrowser; webbrowser.get()"
+      - name: Set up Chrome for Pytest
+        uses: ./.github/actions/setup-chrome-for-pytest
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
           uv venv
           source .venv/bin/activate
           uv sync --extra dev_optional
+          python --version
       - name: Test core
         run: |
           source .venv/bin/activate
           python -m pytest tests/test_core
-      - name: List installed packages and python version
-        run: |
-          source .venv/bin/activate
-          uv pip list
-          python --version
       - name: Test optional
         run: |
           source .venv/bin/activate
@@ -117,29 +88,8 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.9"
-      - name: Set up Chrome
-        id: setup-chrome
-        uses: browser-actions/setup-chrome@v2.1.1
-        with:
-          install-chromedriver: true
-      - name: Print installed Chrome and Chromedriver paths and versions
-        run: |
-          CHROME_PATH="${{ steps.setup-chrome.outputs.chrome-path }}"
-          CHROMEDRIVER_PATH="${{ steps.setup-chrome.outputs.chromedriver-path }}"
-          echo "Chrome path: $CHROME_PATH"
-          echo "Chrome version: $($CHROME_PATH --version)"
-          echo "Chromedriver path: $CHROMEDRIVER_PATH"
-          echo "Chromedriver version: $($CHROMEDRIVER_PATH --version)"
-          echo "chrome --version: $(chrome --version)"
-      - name: Set BROWSER env var
-        run: |
-          echo "BROWSER=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
-      - name: Print Python webbrowser standard browser list
-        run: |
-          python -c "import webbrowser; webbrowser.register_standard_browsers(); print(webbrowser._tryorder)"
-      - name: Check whether we can access Chrome from Python
-        run: |
-          python -c "import webbrowser; webbrowser.get()"
+      - name: Set up Chrome for browser tests
+        uses: ./.github/actions/setup-chrome-for-pytest
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -151,11 +101,6 @@ jobs:
         run: |
           source .venv/bin/activate
           python -m pytest tests/test_core
-      - name: List installed packages and python version
-        run: |
-          source .venv/bin/activate
-          uv pip list
-          python --version
       - name: Test optional
         run: |
           source .venv/bin/activate
@@ -198,10 +143,6 @@ jobs:
           uv sync --extra dev_optional
           uv pip uninstall kaleido
           uv pip install kaleido==0.2.1
-      - name: List installed packages and python version
-        run: |
-          source .venv/bin/activate
-          uv pip list
           python --version
       - name: Test plotly.io image output with Kaleido v0
         run: |
