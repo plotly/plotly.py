@@ -8,7 +8,7 @@ on:
 
 jobs:
   python-311-percy:
-    name: python_311_percy
+    name: Run Percy
     runs-on: ubuntu-latest
     env:
       PERCY_ENABLED: "True"

@@ -1,11 +1,11 @@
-name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
+name: Test release
 
 on:
   workflow_dispatch
 
 jobs:
   build:
-    name: Build distribution 📦
+    name: Full prod build
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +47,7 @@ jobs:
         path: dist/
 
   publish-to-testpypi:
-    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    name: Publish to TestPyPI
     needs:
     - build
     runs-on: ubuntu-latest

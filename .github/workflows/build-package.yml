@@ -1,4 +1,4 @@
-name: Build (Prod version and dev plotly.js version)
+name: Build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   plotlyjs-dev-build:
-    name: plotlyjs_dev_build
+    name: plotly.js dev build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -46,7 +46,7 @@ jobs:
           if-no-files-found: error
 
   full-build:
-    name: full_build
+    name: Full prod build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

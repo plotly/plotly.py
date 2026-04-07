@@ -1,4 +1,4 @@
-name: Run Pytest test suites
+name: Test
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   test-core:
-    name: test_core_py (${{ matrix.python-version }})
+    name: Core tests (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -37,7 +37,7 @@ jobs:
           python -m pytest tests/test_core
 
   test-optional:
-    name: test_optional_py (${{ matrix.python-version }})
+    name: Optional tests (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -109,7 +109,7 @@ jobs:
           python -m pytest -x test_init/test_lazy_imports.py
 
   test-optional-legacy-pandas:
-    name: test_optional_py-3.9_pandas-1.2.4
+    name: Optional tests, Pandas 1 (Python 3.9, Pandas 1.2.4)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -178,7 +178,7 @@ jobs:
           python -m pytest -x test_init/test_lazy_imports.py
 
   test-kaleido-v0:
-    name: test_kaleido_v0 (3.12)
+    name: Optional tests (Kaleido only), Kaleido v0 (Python 3.12, Kaleido v0.2.1)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
