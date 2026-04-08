@@ -1,0 +1,155 @@
+name: Build Documentation
+
+on:
+  push:
+    branches:
+      - doc-prod
+  pull_request:
+
+jobs:
+  build-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.9"
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install rename
+
+      - name: Install doc dependencies
+        run: |
+          cd doc
+          uv venv
+          source .venv/bin/activate
+          uv pip install -r requirements.txt
+
+      - name: Install plotly in editable mode
+        if: github.ref_name != 'doc-prod'
+        run: |
+          cd doc
+          source .venv/bin/activate
+          uv pip uninstall plotly
+          uv pip install -e ..
+
+
+      - name: Build HTML docs
+        env:
+          MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+        run: |
+          cd doc
+          source .venv/bin/activate
+          echo "${MAPBOX_TOKEN}" > python/.mapbox_token
+          make -kj8 || make -kj8
+          curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
+          curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/check-or-enforce-order.py > check-or-enforce-order.py
+          python front-matter-ci.py build/html
+          python check-or-enforce-order.py build/html
+
+      - name: Upload HTML docs artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: doc-html
+          path: doc/build/html/
+
+      - name: Create GitHub App token
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.GRAPHING_LIBRARIES_CI_GHAPP_ID }}
+          private-key: ${{ secrets.GRAPHING_LIBRARIES_CI_GHAPP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: plotly.py-docs,graphing-library-docs
+
+      - name: Checkout plotly.py-docs (built)
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        uses: actions/checkout@v6
+        with:
+          repository: plotly/plotly.py-docs
+          ref: built
+          token: ${{ steps.app-token.outputs.token }}
+          path: plotly.py-docs-html
+
+      - name: Deploy HTML docs
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        run: |
+          git config --global user.name plotlydocbot
+          git config --global user.email accounts@plot.ly
+          rm -rf plotly.py-docs-html/*
+          cp -r doc/build/html/* plotly.py-docs-html/
+          cd plotly.py-docs-html
+          git add .
+          git commit -m "build of https://github.com/plotly/plotly.py/commit/${{ github.sha }}" || echo "No changes to commit"
+          git push --force
+
+      - name: Checkout plotly.py-docs (built_ipynb)
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        uses: actions/checkout@v6
+        with:
+          repository: plotly/plotly.py-docs
+          ref: built_ipynb
+          token: ${{ steps.app-token.outputs.token }}
+          path: plotly.py-docs-ipynb
+
+      - name: Deploy notebooks
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        run: |
+          rm -rf plotly.py-docs-ipynb/*
+          cp -r doc/build/ipynb/* plotly.py-docs-ipynb/
+          cd plotly.py-docs-ipynb
+          git add .
+          git commit -m "build of https://github.com/plotly/plotly.py/commit/${{ github.sha }}" || echo "No changes to commit"
+          git push --force
+
+      - name: Checkout graphing-library-docs
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        uses: actions/checkout@v6
+        with:
+          repository: plotly/graphing-library-docs
+          ref: master
+          token: ${{ steps.app-token.outputs.token }}
+          path: graphing-library-docs
+
+      - name: Trigger downstream doc build
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        run: |
+          cd graphing-library-docs
+          git commit --allow-empty -m "deploying https://github.com/plotly/plotly.py/commit/${{ github.sha }}"
+          git push
+
+      - name: Build API docs
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        run: |
+          cd doc
+          source .venv/bin/activate
+          # For the API doc, we need to use the local version of plotly
+          # since we are tweaking the source because of
+          # graph_objs/graph_objects
+          uv pip uninstall plotly
+          uv pip install -e ..
+          cd apidoc
+          make html
+
+      - name: Checkout plotly.py-docs (gh-pages)
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        uses: actions/checkout@v6
+        with:
+          repository: plotly/plotly.py-docs
+          ref: gh-pages
+          token: ${{ steps.app-token.outputs.token }}
+          path: plotly.py-docs-api
+
+      - name: Deploy API docs
+        if: github.ref_name == 'doc-prod' && github.event_name == 'push'
+        run: |
+          rm -rf plotly.py-docs-api/*
+          cp -r doc/apidoc/_build/html/* plotly.py-docs-api/
+          touch plotly.py-docs-api/.nojekyll
+          cd plotly.py-docs-api
+          git add .
+          git commit -m "build of https://github.com/plotly/plotly.py/commit/${{ github.sha }}" || echo "No changes to commit"
+          git push --force
