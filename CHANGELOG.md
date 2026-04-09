@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add `facet_row` support to `px.imshow` for creating subplots along an additional dimension [[#5445](https://github.com/plotly/plotly.py/pull/5445)]
 
 ### Fixed
+- Fix wrong x/y positions in Sankey diagrams with isolated nodes when using `arrangement='fixed'` [[#5381](https://github.com/plotly/plotly.py/issues/5381)]
 - Update `numpy.percentile` syntax to stop using deprecated alias [[5483](https://github.com/plotly/plotly.py/pull/5483)], with thanks to @Mr-Neutr0n for the contribution!
   - `numpy` with a version less than 1.22 is no longer supported.
 

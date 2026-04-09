@@ -11,6 +11,96 @@ from plotly.io._utils import validate_coerce_fig_to_dict, broadcast_args_to_dict
 from plotly.io._defaults import defaults
 
 ENGINE_SUPPORT_TIMELINE = "September 2025"
+
+
+def _fix_sankey_isolated_nodes(fig_dict: dict) -> dict:
+    """
+    Work around a Plotly.js bug affecting Sankey diagrams with arrangement='fixed'.
+
+    Two related issues cause x/y positions to be misapplied:
+
+    1. *Isolated nodes*: Plotly.js excludes nodes with no valid links from its
+       internal ``b.nodes`` array, then applies ``i.node.x[p]`` to ``b.nodes[p]``
+       assuming a 1:1 index correspondence. Isolated nodes before connected nodes
+       shift this correspondence, misapplying positions to the wrong nodes.
+    2. *Phantom nodes*: out-of-bounds source/target indices cause Plotly.js to
+       compute ``_ = max(sources+targets) + 1``, inflating ``b.nodes`` with
+       unlabelled entries that further break the index alignment.
+
+    Parameters
+    ----------
+    fig_dict : dict
+        Plotly figure dictionary. Modified in place.
+
+    Returns
+    -------
+    dict
+        The modified figure dictionary.
+    """
+
+    for trace in fig_dict.get("data", []):
+        if trace.get("type") != "sankey":
+            continue
+        if trace.get("arrangement") != "fixed":
+            continue
+
+        node = trace.get("node", {})
+        x_positions = node.get("x")
+        y_positions = node.get("y")
+
+        if not x_positions or not y_positions:
+            continue
+
+        n_nodes = len(x_positions)
+        if len(y_positions) != n_nodes:
+            continue
+
+        link = trace.get("link", {})
+        sources = link.get("source", [])
+        targets = link.get("target", [])
+        values = link.get("value", [])
+
+        # Find connected nodes (appear in at least one valid link with value > 0).
+        # This mirrors the Plotly.js condition: C>0 && IWe(M,_) && IWe(g,_)
+        connected = set()
+        for s, t, v in zip(sources, targets, values):
+            try:
+                v_float = float(v)
+            except (TypeError, ValueError):
+                continue
+            if v_float > 0:
+                if isinstance(s, (int, float)) and 0 <= int(s) < n_nodes:
+                    connected.add(int(s))
+                if isinstance(t, (int, float)) and 0 <= int(t) < n_nodes:
+                    connected.add(int(t))
+
+        # If all nodes are connected (or no isolated nodes), nothing to fix
+        isolated = [i for i in range(n_nodes) if i not in connected]
+        if not isolated:
+            continue
+
+        # New order: connected nodes first (preserving original order), isolated last
+        connected_ordered = [i for i in range(n_nodes) if i in connected]
+        new_order = connected_ordered + isolated
+        old_to_new = {old: new for new, old in enumerate(new_order)}
+
+        # Reorder per-node arrays to match the new order
+        per_node_keys = [
+            "label", "x", "y", "color", "customdata",
+            "hovertemplate", "hovertemplatefallback", "hoverinfo",
+        ]
+        for key in per_node_keys:
+            arr = node.get(key)
+            if isinstance(arr, list) and len(arr) == n_nodes:
+                node[key] = [arr[i] for i in new_order]
+
+        # Update source/target references to use new indices
+        link["source"] = [old_to_new.get(int(s), int(s)) for s in sources]
+        link["target"] = [old_to_new.get(int(t), int(t)) for t in targets]
+
+    return fig_dict
+
+
 ENABLE_KALEIDO_V0_DEPRECATION_WARNINGS = True
 
 PLOTLY_GET_CHROME_ERROR_MSG = """
@@ -353,6 +443,7 @@ which can be installed using pip:
 
     # Convert figure to dict (and validate if requested)
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
+    fig_dict = _fix_sankey_isolated_nodes(fig_dict)
 
     # Request image bytes
     if kaleido_major() > 0:
