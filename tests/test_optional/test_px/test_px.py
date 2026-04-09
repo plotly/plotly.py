@@ -361,6 +361,12 @@ def test_category_order_with_category_as_x(backend):
         assert set(trace["x"]) == {"Thur", "Fri", "Sat", "Sun"}
 
 
+def test_facet_with_empty_df():
+    # https://github.com/plotly/plotly.py/issues/3984
+    # Should not throw an error
+    px.bar(pd.DataFrame(columns=["A", "B", "X"]), x="A", y="X", facet_col="B")
+
+
 def test_permissive_defaults():
     msg = "'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
