@@ -8,12 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [6.7.0] - 2026-04-09
 
 ### Added
-- Add `facet_row` support to `px.imshow` for creating subplots along an additional dimension [[#5445](https://github.com/plotly/plotly.py/pull/5445)], with thanks to 
+- Add `facet_row` support to `px.imshow` for creating subplots along an additional dimension [[#5445](https://github.com/plotly/plotly.py/pull/5445)], with thanks to @FBumann for the contribution!
 
 ### Fixed
 - Update `numpy.percentile` syntax to stop using deprecated alias [[#5483](https://github.com/plotly/plotly.py/pull/5483)], with thanks to @Mr-Neutr0n for the contribution!
   - `numpy` with a version less than 1.22 is no longer supported.
-- Handle empty `px.histogram` by skipping `None` label in hover template [[#5535](https://github.com/plotly/plotly.py/pull/5535)]
+- Handle empty `px.histogram` by skipping `None` label in hover template [[#5535](https://github.com/plotly/plotly.py/pull/5535)], with thanks to @tysoncung for the contribution!
 
 ### Updated
 - Update plotly.js from version 3.4.0 to version 3.5.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.5.0) for more information. [[#5565](https://github.com/plotly/plotly.py/pull/5565)]. Notable changes include:
