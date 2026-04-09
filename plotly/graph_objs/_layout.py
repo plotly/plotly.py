@@ -70,6 +70,7 @@ class Layout(_BaseLayoutType):
         "boxgroupgap",
         "boxmode",
         "calendar",
+        "clickanywhere",
         "clickmode",
         "coloraxis",
         "colorscale",
@@ -94,6 +95,7 @@ class Layout(_BaseLayoutType):
         "hiddenlabels",
         "hiddenlabelssrc",
         "hidesources",
+        "hoveranywhere",
         "hoverdistance",
         "hoverlabel",
         "hovermode",
@@ -467,6 +469,28 @@ class Layout(_BaseLayoutType):
     @calendar.setter
     def calendar(self, val):
         self["calendar"] = val
+
+    @property
+    def clickanywhere(self):
+        """
+        If true, `plotly_click` events will fire for any click position
+        within the plot area, not just over traces. When clicking where
+        there is no trace data, the event will have an empty `points`
+        array but will include `xvals` and `yvals` with click
+        coordinates in data space.
+
+        The 'clickanywhere' property is a boolean and must be specified as:
+          - A boolean value: True or False
+
+        Returns
+        -------
+        bool
+        """
+        return self["clickanywhere"]
+
+    @clickanywhere.setter
+    def clickanywhere(self, val):
+        self["clickanywhere"] = val
 
     @property
     def clickmode(self):
@@ -990,6 +1014,28 @@ class Layout(_BaseLayoutType):
         self["hidesources"] = val
 
     @property
+    def hoveranywhere(self):
+        """
+        If true, `plotly_hover` events will fire for any cursor
+        position within the plot area, not just over traces. When the
+        cursor is not over a trace, the event will have an empty
+        `points` array but will include `xvals` and `yvals` with cursor
+        coordinates in data space.
+
+        The 'hoveranywhere' property is a boolean and must be specified as:
+          - A boolean value: True or False
+
+        Returns
+        -------
+        bool
+        """
+        return self["hoveranywhere"]
+
+    @hoveranywhere.setter
+    def hoveranywhere(self, val):
+        self["hoveranywhere"] = val
+
+    @property
     def hoverdistance(self):
         """
         Sets the default distance (in pixels) to look for data to add
@@ -1000,7 +1046,7 @@ class Layout(_BaseLayoutType):
         outside, but these objects will not supersede hover on point-
         like objects in case of conflict.
 
-        The 'hoverdistance' property is a integer and may be specified as:
+        The 'hoverdistance' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
@@ -1751,7 +1797,7 @@ class Layout(_BaseLayoutType):
         like objects. In addition, some objects can be hovered on but
         will not generate spikelines, such as scatter fills.
 
-        The 'spikedistance' property is a integer and may be specified as:
+        The 'spikedistance' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
@@ -2268,6 +2314,13 @@ class Layout(_BaseLayoutType):
         calendar
             Sets the default calendar system to use for
             interpreting and displaying dates throughout the plot.
+        clickanywhere
+            If true, `plotly_click` events will fire for any click
+            position within the plot area, not just over traces.
+            When clicking where there is no trace data, the event
+            will have an empty `points` array but will include
+            `xvals` and `yvals` with click coordinates in data
+            space.
         clickmode
             Determines the mode of single click interactions.
             "event" is the default value and emits the
@@ -2405,6 +2458,12 @@ class Layout(_BaseLayoutType):
             been generated via forked graphs from the Chart Studio
             Cloud (at https://chart-studio.plotly.com or on-
             premise).
+        hoveranywhere
+            If true, `plotly_hover` events will fire for any cursor
+            position within the plot area, not just over traces.
+            When the cursor is not over a trace, the event will
+            have an empty `points` array but will include `xvals`
+            and `yvals` with cursor coordinates in data space.
         hoverdistance
             Sets the default distance (in pixels) to look for data
             to add hover labels (-1 means no cutoff, 0 means no
@@ -2705,6 +2764,7 @@ class Layout(_BaseLayoutType):
         boxgroupgap=None,
         boxmode=None,
         calendar=None,
+        clickanywhere=None,
         clickmode=None,
         coloraxis=None,
         colorscale=None,
@@ -2729,6 +2789,7 @@ class Layout(_BaseLayoutType):
         hiddenlabels=None,
         hiddenlabelssrc=None,
         hidesources=None,
+        hoveranywhere=None,
         hoverdistance=None,
         hoverlabel=None,
         hovermode=None,
@@ -2868,6 +2929,13 @@ class Layout(_BaseLayoutType):
         calendar
             Sets the default calendar system to use for
             interpreting and displaying dates throughout the plot.
+        clickanywhere
+            If true, `plotly_click` events will fire for any click
+            position within the plot area, not just over traces.
+            When clicking where there is no trace data, the event
+            will have an empty `points` array but will include
+            `xvals` and `yvals` with click coordinates in data
+            space.
         clickmode
             Determines the mode of single click interactions.
             "event" is the default value and emits the
@@ -3005,6 +3073,12 @@ class Layout(_BaseLayoutType):
             been generated via forked graphs from the Chart Studio
             Cloud (at https://chart-studio.plotly.com or on-
             premise).
+        hoveranywhere
+            If true, `plotly_hover` events will fire for any cursor
+            position within the plot area, not just over traces.
+            When the cursor is not over a trace, the event will
+            have an empty `points` array but will include `xvals`
+            and `yvals` with cursor coordinates in data space.
         hoverdistance
             Sets the default distance (in pixels) to look for data
             to add hover labels (-1 means no cutoff, 0 means no
@@ -3311,6 +3385,7 @@ class Layout(_BaseLayoutType):
             "boxgroupgap",
             "boxmode",
             "calendar",
+            "clickanywhere",
             "clickmode",
             "coloraxis",
             "colorscale",
@@ -3335,6 +3410,7 @@ class Layout(_BaseLayoutType):
             "hiddenlabels",
             "hiddenlabelssrc",
             "hidesources",
+            "hoveranywhere",
             "hoverdistance",
             "hoverlabel",
             "hovermode",
@@ -3423,6 +3499,7 @@ an instance of :class:`plotly.graph_objs.Layout`""")
         self._set_property("boxgroupgap", arg, boxgroupgap)
         self._set_property("boxmode", arg, boxmode)
         self._set_property("calendar", arg, calendar)
+        self._set_property("clickanywhere", arg, clickanywhere)
         self._set_property("clickmode", arg, clickmode)
         self._set_property("coloraxis", arg, coloraxis)
         self._set_property("colorscale", arg, colorscale)
@@ -3447,6 +3524,7 @@ an instance of :class:`plotly.graph_objs.Layout`""")
         self._set_property("hiddenlabels", arg, hiddenlabels)
         self._set_property("hiddenlabelssrc", arg, hiddenlabelssrc)
         self._set_property("hidesources", arg, hidesources)
+        self._set_property("hoveranywhere", arg, hoveranywhere)
         self._set_property("hoverdistance", arg, hoverdistance)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovermode", arg, hovermode)

@@ -826,7 +826,7 @@ class Histogram(_BaseTraceType):
         such that the histogram best visualizes the distribution of the
         data. Ignored if `xbins.size` is provided.
 
-        The 'nbinsx' property is a integer and may be specified as:
+        The 'nbinsx' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -848,7 +848,7 @@ class Histogram(_BaseTraceType):
         such that the histogram best visualizes the distribution of the
         data. Ignored if `ybins.size` is provided.
 
-        The 'nbinsy' property is a integer and may be specified as:
+        The 'nbinsy' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -1543,7 +1543,7 @@ class Histogram(_BaseTraceType):
         other SVG traces on the same subplot. SVG traces with higher
         `zorder` appear in front of those with lower `zorder`.
 
-        The 'zorder' property is a integer and may be specified as:
+        The 'zorder' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns

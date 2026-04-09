@@ -18556,6 +18556,14 @@
         },
         "superclass": "IntegerValidator"
     },
+    "layout.hoveranywhere": {
+        "params": {
+            "plotly_name": "hoveranywhere",
+            "parent_name": "layout",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
+    },
     "layout.hidesources": {
         "params": {
             "plotly_name": "hidesources",
@@ -20672,6 +20680,14 @@
             ]
         },
         "superclass": "FlaglistValidator"
+    },
+    "layout.clickanywhere": {
+        "params": {
+            "plotly_name": "clickanywhere",
+            "parent_name": "layout",
+            "edit_type": "none"
+        },
+        "superclass": "BooleanValidator"
     },
     "layout.calendar": {
         "params": {
