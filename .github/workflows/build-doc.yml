@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install uv
+      - name: Set up uv
         uses: astral-sh/setup-uv@v7
         with:
           python-version: "3.9"

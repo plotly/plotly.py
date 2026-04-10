@@ -28,9 +28,10 @@ jobs:
         uses: browser-actions/setup-chrome@v2.1.1
         with:
           install-chromedriver: true
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
       - name: Install requirements
         run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
           uv venv
           source .venv/bin/activate
           uv sync --extra dev_optional

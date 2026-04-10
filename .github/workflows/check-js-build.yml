@@ -29,13 +29,15 @@ jobs:
       with:
         node-version: '22'
 
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v7
+
     - name: Copy current files to a temporary directory
       run: |
         mv plotly/labextension/ plotly/labextension-tmp/
 
     - name: Install dependencies and build
       run: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
         uv venv
         source .venv/bin/activate
         uv pip install jupyterlab

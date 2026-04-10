@@ -19,9 +19,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: "22"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
       - name: Install dependencies
         run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
           uv venv
           source .venv/bin/activate
           uv sync --extra dev_optional
@@ -58,9 +59,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: "22"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
       - name: PyPI Build
         run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
           uv venv
           source .venv/bin/activate
           uv sync --extra dev_build
