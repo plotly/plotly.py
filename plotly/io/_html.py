@@ -340,7 +340,7 @@ style="height:{height}; width:{width};"></div>\
     if full_html:
         return """\
 <html>
-<head><meta charset="utf-8" /></head>
+<head><meta charset="utf-8" /><meta name="referrer" content="no-referrer-when-downgrade" /></head>
 <body>
     {div}
 </body>
