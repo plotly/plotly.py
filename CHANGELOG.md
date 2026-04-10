@@ -4,12 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## [6.7.0] - 2026-04-09
+
 ### Added
-- Add `facet_row` support to `px.imshow` for creating subplots along an additional dimension [[#5445](https://github.com/plotly/plotly.py/pull/5445)]
+- Add `facet_row` support to `px.imshow` for creating subplots along an additional dimension [[#5445](https://github.com/plotly/plotly.py/pull/5445)], with thanks to @FBumann for the contribution!
 
 ### Fixed
-- Update `numpy.percentile` syntax to stop using deprecated alias [[5483](https://github.com/plotly/plotly.py/pull/5483)], with thanks to @Mr-Neutr0n for the contribution!
+- Update `numpy.percentile` syntax to stop using deprecated alias [[#5483](https://github.com/plotly/plotly.py/pull/5483)], with thanks to @Mr-Neutr0n for the contribution!
   - `numpy` with a version less than 1.22 is no longer supported.
+- Handle empty `px.histogram` by skipping `None` label in hover template [[#5535](https://github.com/plotly/plotly.py/pull/5535)], with thanks to @tysoncung for the contribution!
+
+### Updated
+- Update plotly.js from version 3.4.0 to version 3.5.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.5.0) for more information. [[#5565](https://github.com/plotly/plotly.py/pull/5565)]. Notable changes include:
+  - Add `hoveranywhere` and `clickanywhere` layout attributes to enable emitting hover and click events anywhere in the plot area, not just over traces [[#7707](https://github.com/plotly/plotly.js/pull/7707)]
+  - Add `displayNotifier` configuration property to set the display of notifier in the top right area of the viewport [[#7730](https://github.com/plotly/plotly.js/pull/7730)]
+  - Update USA location lookup for `scattergeo` and `choropleth` traces to use both location names and abbreviations [[#7731](https://github.com/plotly/plotly.js/pull/7731)]
 
 ## [6.6.0] - 2026-03-02
 

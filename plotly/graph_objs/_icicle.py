@@ -605,7 +605,7 @@ class Icicle(_BaseTraceType):
         Sets the number of rendered sectors from any given `level`. Set
         `maxdepth` to "-1" to render all the levels in the hierarchy.
 
-        The 'maxdepth' property is a integer and may be specified as:
+        The 'maxdepth' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns

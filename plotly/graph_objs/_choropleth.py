@@ -627,7 +627,9 @@ class Choropleth(_BaseTraceType):
         the map. Values "ISO-3", "USA-states", *country names*
         correspond to features on the base map and value "geojson-id"
         corresponds to features from a custom GeoJSON linked to the
-        `geojson` attribute.
+        `geojson` attribute. "USA-states" accepts both two-letter
+        abbreviations (e.g. "CA") and full state names (e.g.
+        "California").
 
         The 'locationmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1289,7 +1291,9 @@ class Choropleth(_BaseTraceType):
             "ISO-3", "USA-states", *country names* correspond to
             features on the base map and value "geojson-id"
             corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute.
+            the `geojson` attribute. "USA-states" accepts both two-
+            letter abbreviations (e.g. "CA") and full state names
+            (e.g. "California").
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
@@ -1623,7 +1627,9 @@ class Choropleth(_BaseTraceType):
             "ISO-3", "USA-states", *country names* correspond to
             features on the base map and value "geojson-id"
             corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute.
+            the `geojson` attribute. "USA-states" accepts both two-
+            letter abbreviations (e.g. "CA") and full state names
+            (e.g. "California").
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
