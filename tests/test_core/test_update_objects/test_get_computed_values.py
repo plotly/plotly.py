@@ -1,4 +1,3 @@
-import sys
 from unittest.mock import MagicMock
 import importlib.metadata
 
@@ -29,11 +28,11 @@ class TestGetComputedValues(TestCase):
         computed = fig.get_computed_values(include=["axis_ranges"])
 
         # Verify results
-        expected = {
-            "axis_ranges": {"xaxis": [0.8, 3.2], "yaxis": [8.0, 32.0]}
-        }
+        expected = {"axis_ranges": {"xaxis": [0.8, 3.2], "yaxis": [8.0, 32.0]}}
         self.assertEqual(computed, expected)
-        fig.full_figure_for_development.assert_called_once_with(warn=False, as_dict=True)
+        fig.full_figure_for_development.assert_called_once_with(
+            warn=False, as_dict=True
+        )
 
     def test_get_computed_axis_ranges_multi_axis(self):
         # Create a figure with multiple axes
@@ -85,7 +84,8 @@ class TestGetComputedValues(TestCase):
 
         # Test unsupported key and deterministic error message
         with self.assertRaisesRegex(
-            ValueError, r"Unsupported key 'invalid'.*Supported keys are: \['axis_ranges'\]"
+            ValueError,
+            r"Unsupported key 'invalid'.*Supported keys are: \['axis_ranges'\]",
         ):
             fig.get_computed_values(include=["invalid"])
 
@@ -103,7 +103,5 @@ class TestGetComputedValues(TestCase):
 
         computed = fig.get_computed_values(include=["axis_ranges"])
 
-        expected = {
-            "axis_ranges": {"xaxis2": [1, 2]}
-        }
+        expected = {"axis_ranges": {"xaxis2": [1, 2]}}
         self.assertEqual(computed, expected)
