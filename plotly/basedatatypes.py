@@ -3481,6 +3481,83 @@ Invalid property path '{key_path_str}' for layout
 
         return pio.full_figure_for_development(self, warn, as_dict)
 
+    def get_computed_values(self, include=None):
+        """
+        Retrieve values calculated or derived by Plotly.js during plotting.
+
+        This method provides a lightweight interface to access information that is
+        not explicitly defined in the source figure but is computed by the
+        rendering engine (e.g., autoranged axis limits).
+
+        Note: This initial implementation relies on full_figure_for_development()
+        (via Kaleido) to extract computed values. While the returned object is
+        standard and lightweight, the underlying process triggers a full background
+        render.
+
+        Parameters
+        ----------
+        include: list or tuple of str
+            The calculated values to retrieve. Supported keys include:
+              - 'axis_ranges': The final [min, max] range for each axis.
+            If None, defaults to ['axis_ranges'].
+
+        Returns
+        -------
+        dict
+            A dictionary containing the requested computed values.
+
+        Examples
+        --------
+        >>> import plotly.graph_objects as go
+        >>> fig = go.Figure(go.Scatter(x=[1, 2, 3], y=[10, 20, 30]))
+        >>> fig.get_computed_values(include=['axis_ranges'])
+        {'axis_ranges': {'xaxis': [0.8, 3.2], 'yaxis': [8.0, 32.0]}}
+        """
+        # Validate input
+        # --------------
+        if include is None:
+            include = ["axis_ranges"]
+
+        if not isinstance(include, (list, tuple)):
+            raise ValueError(
+                "The 'include' parameter must be a list or tuple of strings."
+            )
+
+        # Early exit for empty include
+        if not include:
+            return {}
+
+        supported_keys = ["axis_ranges"]
+        for key in include:
+            if key not in supported_keys:
+                raise ValueError(
+                    f"Unsupported key '{key}' in 'include' parameter. "
+                    f"Supported keys are: {supported_keys}"
+                )
+
+        # Retrieve full figure state
+        # --------------------------
+        # We use as_dict=True for efficient traversal of the layout
+        full_fig_dict = self.full_figure_for_development(warn=False, as_dict=True)
+        full_layout = full_fig_dict.get("layout", {})
+
+        result = {}
+
+        # Extract axis ranges
+        # -------------------
+        if "axis_ranges" in include:
+            axis_ranges = {}
+            for key, val in full_layout.items():
+                if key.startswith(("xaxis", "yaxis")):
+                    # Safety checks for axis object and range property
+                    if isinstance(val, dict) and "range" in val:
+                        # Explicit conversion to list for JSON serialization consistency
+                        axis_ranges[key] = list(val["range"])
+
+            result["axis_ranges"] = axis_ranges
+
+        return result
+
     def write_json(self, *args, **kwargs):
         """
         Convert a figure to JSON and write it to a file or writeable
