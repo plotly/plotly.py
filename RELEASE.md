@@ -30,6 +30,7 @@ a link to the plotly.js CHANGELOG.
   - `uv.lock`
   - `js/package.json`
   - `js/package-lock.json`
+  - `plotly/labextension/*`
   - `CHANGELOG.md` (Adds a new header for X.Y.Z above the unreleased items)
   - `CITATION.cff`
 
@@ -37,8 +38,9 @@ a link to the plotly.js CHANGELOG.
   - Note: The current date is used as the release date in `CHANGELOG.md` and `CITATION.cff`. If you want to use a different date, edit these files manually afterward.
   - If the bumpversion command failed for any reason, you can update the versions yourself by doing the following:
     - Manually update the version number (and release date, as needed) in `pyproject.toml`, `CHANGELOG.md` and `CITATION.cff`
-    - Run `npm version X.Y.Z` to update `js/package.json` and `js/package-lock.json`
     - Run `uv lock` to update `uv.lock`
+    - From the `js/` dir, run `npm version X.Y.Z` to update `js/package.json` and `js/package-lock.json`
+    - From the `js/` dir, run `npm run build:labextension` to regenerate the files in `plotly/labextension/`
 
 - Commit and push the changed files to the release branch:
     ```sh
