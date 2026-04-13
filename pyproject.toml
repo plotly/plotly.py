@@ -83,6 +83,9 @@ dev = [
     "plotly[dev_optional]"
 ]
 
+[tool.uv]
+exclude-newer = "72 hours"
+
 [project.scripts]
 plotly_get_chrome = "plotly.io._kaleido:plotly_get_chrome"
 
