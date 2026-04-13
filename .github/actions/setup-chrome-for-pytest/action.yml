@@ -5,7 +5,7 @@ runs:
   steps:
     - name: Set up Chrome
       id: setup-chrome
-      uses: browser-actions/setup-chrome@v2.1.1
+      uses: browser-actions/setup-chrome@4f8e94349a351df0f048634f25fec36c3c91eded  # v2.1.1
       with:
         install-chromedriver: true
     - name: Set BROWSER env var
