@@ -3,7 +3,7 @@ name: Run Percy
 on:
   push:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize]
   workflow_dispatch:
 
 jobs:
