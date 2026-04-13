@@ -2,6 +2,8 @@ name: Check Python code formatting
 
 on:
   push:
+    branches:
+      - main
   pull_request:
     types: [opened, reopened, synchronize]
 
