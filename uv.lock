@@ -12,6 +12,10 @@ resolution-markers = [
     "python_full_version <= '3.8' and sys_platform != 'win32'",
 ]
 
+[options]
+exclude-newer = "2026-04-04T19:20:31.457583Z"
+exclude-newer-span = "PT72H"
+
 [[package]]
 name = "annotated-types"
 version = "0.7.0"
@@ -4192,7 +4196,7 @@ wheels = [
 
 [[package]]
 name = "plotly"
-version = "6.6.0"
+version = "6.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "narwhals" },

@@ -328,7 +328,7 @@ def bump_version_pyproject_toml(new_version):
     subprocess.run(["uv", "lock"], check=True)
 
     print(
-        f"Updated version in {pyproject_toml_path} to {new_version},",
+        f"SUCCESS: Updated version in {pyproject_toml_path} to {new_version},",
         "and updated uv lockfile",
     )
     return True
@@ -346,8 +346,20 @@ def bump_version_package_json(new_version):
         check=True,
     )
     print(
-        f"Updated version in {js_dir}/package.json and {js_dir}/package-lock.json to {new_version}"
+        f"SUCCESS: Updated version in {js_dir}/package.json and {js_dir}/package-lock.json to {new_version}"
     )
+
+    # After modifying files in js/, we need to rebuild the JupyterLab extension
+    print("Rebuilding JupyterLab extension (this may take a few seconds)...")
+    subprocess.run(
+        ["npm", "run", "build:labextension"],
+        cwd=js_dir,
+        check=True,
+        stdout=subprocess.DEVNULL,  # Suppress stdout and stderr to avoid terminal clutter
+        stderr=subprocess.DEVNULL,
+    )
+    print(f"SUCCESS: Updated JupyterLab extension files in plotly/labextension")
+
     return True
 
 
@@ -392,7 +404,7 @@ def bump_version_citation_cff(new_version, new_date):
     with open(citation_cff_path, "w") as f:
         f.write(new_content)
     print(
-        f"Updated version in {citation_cff_path} to {new_version}",
+        f"SUCCESS: Updated version in {citation_cff_path} to {new_version}",
         f"and date-released to {new_date}",
     )
     return True
@@ -414,7 +426,7 @@ def bump_version_changelog_md(new_version, new_date):
     already_exists_pattern = rf"(^\s*##\s*\[ *{re.escape(new_version)} *\])"
     if re.search(already_exists_pattern, content, flags=re.MULTILINE):
         print(
-            f"Header for version {new_version} already exists ",
+            f"Header for version {new_version} already exists",
             f"in {changelog_md_path}.",
         )
         return True

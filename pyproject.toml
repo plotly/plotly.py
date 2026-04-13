@@ -33,7 +33,7 @@ classifiers = [
 requires-python = ">=3.8"
 license = "MIT"
 license-files = ["LICENSE.txt"]
-version = "6.6.0"
+version = "6.7.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -82,6 +82,9 @@ dev_optional = [
 dev = [
     "plotly[dev_optional]"
 ]
+
+[tool.uv]
+exclude-newer = "72 hours"
 
 [project.scripts]
 plotly_get_chrome = "plotly.io._kaleido:plotly_get_chrome"
