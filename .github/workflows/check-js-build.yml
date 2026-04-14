@@ -1,4 +1,13 @@
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened]
+    paths:
+      - 'js/**'
+      - 'plotly/labextension/**'
+
 name: Check JS build
 
 jobs:
