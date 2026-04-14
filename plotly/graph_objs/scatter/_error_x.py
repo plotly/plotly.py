@@ -127,8 +127,8 @@ class ErrorX(_BaseTraceHierarchyType):
     @property
     def copy_ystyle(self):
         """
-        The 'copy_ystyle' property must be specified as a bool
-        (either True, or False)
+        The 'copy_ystyle' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -147,8 +147,8 @@ class ErrorX(_BaseTraceHierarchyType):
         in both direction (top/bottom for vertical bars, left/right for
         horizontal bars.
 
-        The 'symmetric' property must be specified as a bool
-        (either True, or False)
+        The 'symmetric' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -181,7 +181,7 @@ class ErrorX(_BaseTraceHierarchyType):
     @property
     def traceref(self):
         """
-        The 'traceref' property is a integer and may be specified as:
+        The 'traceref' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -198,7 +198,7 @@ class ErrorX(_BaseTraceHierarchyType):
     @property
     def tracerefminus(self):
         """
-        The 'tracerefminus' property is a integer and may be specified as:
+        The 'tracerefminus' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -283,8 +283,8 @@ class ErrorX(_BaseTraceHierarchyType):
         """
         Determines whether or not this set of error bars is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

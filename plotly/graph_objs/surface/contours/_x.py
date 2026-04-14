@@ -69,8 +69,8 @@ class X(_BaseTraceHierarchyType):
         Determines whether or not contour lines about the x dimension
         are highlighted on hover.
 
-        The 'highlight' property must be specified as a bool
-        (either True, or False)
+        The 'highlight' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -147,8 +147,8 @@ class X(_BaseTraceHierarchyType):
         Determines whether or not contour lines about the x dimension
         are drawn.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -203,8 +203,8 @@ class X(_BaseTraceHierarchyType):
         An alternate to "color". Determines whether or not the contour
         lines are colored using the trace "colorscale".
 
-        The 'usecolormap' property must be specified as a bool
-        (either True, or False)
+        The 'usecolormap' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

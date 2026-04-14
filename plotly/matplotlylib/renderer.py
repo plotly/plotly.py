@@ -14,14 +14,6 @@ from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
 
 
-# Warning format
-def warning_on_one_line(msg, category, filename, lineno, file=None, line=None):
-    return "%s:%s: %s:\n\n%s\n\n" % (filename, lineno, category.__name__, msg)
-
-
-warnings.formatwarning = warning_on_one_line
-
-
 class PlotlyRenderer(Renderer):
     """A renderer class inheriting from base for rendering mpl plots in plotly.
 
@@ -538,7 +530,7 @@ class PlotlyRenderer(Renderer):
         place in functions from mpltools.py.
 
         props.keys() -- [
-        'data',         (a list of verticies for the path)
+        'data',         (a list of vertices for the path)
         'coordinates',  ('data', 'axes', 'figure', or 'display')
         'pathcodes',    (code for the path, structure: ['M', 'L', 'Z', etc.])
         'style',        (style dict, see below)

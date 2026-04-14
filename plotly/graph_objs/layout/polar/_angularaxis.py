@@ -499,7 +499,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -562,8 +562,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -603,8 +603,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -621,8 +621,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not a line bounding this axis is drawn.
 
-        The 'showline' property must be specified as a bool
-        (either True, or False)
+        The 'showline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -639,8 +639,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the tick labels are drawn.
 
-        The 'showticklabels' property must be specified as a bool
-        (either True, or False)
+        The 'showticklabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -883,7 +883,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         which labels are shown. Not implemented for axes with `type`
         "log" or "multicategory", or when `tickmode` is "array".
 
-        The 'ticklabelstep' property is a integer and may be specified as:
+        The 'ticklabelstep' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -1139,8 +1139,8 @@ class AngularAxis(_BaseLayoutHierarchyType):
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

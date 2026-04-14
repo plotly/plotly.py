@@ -52,8 +52,8 @@ class X(_BaseTraceHierarchyType):
         """
         Sets whether or not projections are shown along the x axis.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

@@ -279,7 +279,7 @@ class ColorBar(_BaseTraceHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -357,8 +357,8 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -397,8 +397,8 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Determines whether or not the tick labels are drawn.
 
-        The 'showticklabels' property must be specified as a bool
-        (either True, or False)
+        The 'showticklabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -706,7 +706,7 @@ class ColorBar(_BaseTraceHierarchyType):
         which labels are shown. Not implemented for axes with `type`
         "log" or "multicategory", or when `tickmode` is "array".
 
-        The 'ticklabelstep' property is a integer and may be specified as:
+        The 'ticklabelstep' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 

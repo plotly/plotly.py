@@ -1,0 +1,27 @@
+name: Set up Chrome for pytest
+description: Install Chrome/Chromedriver, set BROWSER, and verify the setup
+runs:
+  using: composite
+  steps:
+    - name: Set up Chrome
+      id: setup-chrome
+      uses: browser-actions/setup-chrome@4f8e94349a351df0f048634f25fec36c3c91eded  # v2.1.1
+      with:
+        install-chromedriver: true
+    - name: Set BROWSER env var
+      shell: bash
+      run: |
+        echo "BROWSER=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+    - name: Check Chrome setup
+      shell: bash
+      run: |
+        CHROME_PATH="${{ steps.setup-chrome.outputs.chrome-path }}"
+        CHROMEDRIVER_PATH="${{ steps.setup-chrome.outputs.chromedriver-path }}"
+        echo "Chrome path: $CHROME_PATH"
+        echo "Chrome version: $($CHROME_PATH --version)"
+        echo "Chromedriver path: $CHROMEDRIVER_PATH"
+        echo "Chromedriver version: $($CHROMEDRIVER_PATH --version)"
+        echo "chrome --version: $(chrome --version)"
+        echo "BROWSER = $BROWSER"
+        python -c "import webbrowser; webbrowser.register_standard_browsers(); print(webbrowser._tryorder)"
+        python -c "import webbrowser; webbrowser.get()"

@@ -67,8 +67,8 @@ class Cumulative(_BaseTraceHierarchyType):
         the number of data points, and "probability" and *probability
         density* both rise to the number of sample points.
 
-        The 'enabled' property must be specified as a bool
-        (either True, or False)
+        The 'enabled' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

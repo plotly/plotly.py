@@ -72,8 +72,8 @@ class Scattergeo(_BaseTraceType):
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
 
-        The 'connectgaps' property must be specified as a bool
-        (either True, or False)
+        The 'connectgaps' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -201,9 +201,9 @@ class Scattergeo(_BaseTraceType):
         geospatial coordinates refer to `layout.geo2`, and so on.
 
         The 'geo' property is an identifier of a particular
-        subplot, of type 'geo', that may be specified as the string 'geo'
-        optionally followed by an integer >= 1
-        (e.g. 'geo', 'geo1', 'geo2', 'geo3', etc.)
+        subplot, of type 'geo', that may be specified as:
+          - the string 'geo' optionally followed by an integer >= 1
+            (e.g. 'geo', 'geo1', 'geo2', 'geo3', etc.)
 
         Returns
         -------
@@ -511,9 +511,9 @@ class Scattergeo(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -638,7 +638,9 @@ class Scattergeo(_BaseTraceType):
         the map. Values "ISO-3", "USA-states", *country names*
         correspond to features on the base map and value "geojson-id"
         corresponds to features from a custom GeoJSON linked to the
-        `geojson` attribute.
+        `geojson` attribute. "USA-states" accepts both two-letter
+        abbreviations (e.g. "CA") and full state names (e.g.
+        "California").
 
         The 'locationmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -903,8 +905,8 @@ class Scattergeo(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1368,7 +1370,9 @@ class Scattergeo(_BaseTraceType):
             "ISO-3", "USA-states", *country names* correspond to
             features on the base map and value "geojson-id"
             corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute.
+            the `geojson` attribute. "USA-states" accepts both two-
+            letter abbreviations (e.g. "CA") and full state names
+            (e.g. "California").
         locations
             Sets the coordinates via location IDs or names.
             Coordinates correspond to the centroid of each location
@@ -1734,7 +1738,9 @@ class Scattergeo(_BaseTraceType):
             "ISO-3", "USA-states", *country names* correspond to
             features on the base map and value "geojson-id"
             corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute.
+            the `geojson` attribute. "USA-states" accepts both two-
+            letter abbreviations (e.g. "CA") and full state names
+            (e.g. "California").
         locations
             Sets the coordinates via location IDs or names.
             Coordinates correspond to the centroid of each location

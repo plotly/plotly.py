@@ -53,8 +53,8 @@ class Step(_BaseLayoutHierarchyType):
         binding to the state of the plot through the specification of
         `method` and `args`.
 
-        The 'execute' property must be specified as a bool
-        (either True, or False)
+        The 'execute' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -185,8 +185,8 @@ class Step(_BaseLayoutHierarchyType):
         """
         Determines whether or not this step is included in the slider.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
