@@ -5,6 +5,7 @@ on:
     branches:
       - doc-prod
   pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
   build-doc:
