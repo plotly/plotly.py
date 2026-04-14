@@ -619,3 +619,13 @@ def test_timeline_cols_already_temporal(constructor, datetime_columns):
     assert len(fig.data) == 3
     assert fig.layout.xaxis.type == "date"
     assert fig.layout.xaxis.title.text is None
+
+
+def test_empty_histogram():
+    """Empty px.histogram() should not raise, matching scatter/bar/pie behavior.
+
+    Regression test for https://github.com/plotly/plotly.py/issues/5534
+    """
+    fig = px.histogram()
+    assert len(fig.data) == 1
+    assert fig.data[0].type == "histogram"

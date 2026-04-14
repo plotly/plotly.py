@@ -162,7 +162,7 @@ fig.show()
 
 ### Controlling Maximum Text Size
 
-The `textfont_size` parameter of the the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemaps) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
+The `textfont_size` parameter of the [pie](/python/pie-charts), [bar](/python/bar-charts)-like, [sunburst](/python/sunburst-charts) and [treemap](/python/treemaps) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
 
 ```python
 import plotly.express as px
