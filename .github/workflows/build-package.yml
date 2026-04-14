@@ -2,8 +2,10 @@ name: Build
 
 on:
   push:
+    branches:
+      - main
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize]
 
 jobs:
   plotlyjs-dev-build:
