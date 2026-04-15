@@ -5,9 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 ### Added
-- Add `get_computed_values()` method to `BaseFigure` for programmatically accessing values calculated by Plotly.js (starting with computed axis ranges) [[#5552](https://github.com/plotly/plotly.py/issues/5552)]
-### Fixed
-- Update tests to be compatible with numpy 2.4 [[#5522](https://github.com/plotly/plotly.py/pull/5522)], with thanks to @thunze for the contribution!
+- Add `get_computed_values()` method to `BaseFigure` for programmatically accessing values calculated by Plotly.js, supporting `axis_ranges` and `axis_types` retrieval via a single-pass layout traversal [[#5552](https://github.com/plotly/plotly.py/issues/5552)]
 
 
 ## [6.7.0] - 2026-04-09

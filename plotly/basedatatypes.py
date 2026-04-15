@@ -3489,7 +3489,7 @@ Invalid property path '{key_path_str}' for layout
 
         This method provides a lightweight interface to access information that is
         not explicitly defined in the source figure but is computed by the
-        rendering engine (e.g., autoranged axis limits).
+        rendering engine (e.g., autoranged axis limits, detected axis types).
 
         Note: This initial implementation relies on full_figure_for_development()
         (via Kaleido) to extract computed values. While the returned object is
@@ -3501,6 +3501,8 @@ Invalid property path '{key_path_str}' for layout
         include: list or tuple of str
             The calculated values to retrieve. Supported keys include:
               - 'axis_ranges': The final [min, max] range for each axis.
+              - 'axis_types': The detected type for each axis (e.g. 'linear',
+                'log', 'date', 'category').
             If None, defaults to ['axis_ranges'].
 
         Returns
@@ -3514,6 +3516,10 @@ Invalid property path '{key_path_str}' for layout
         >>> fig = go.Figure(go.Scatter(x=[1, 2, 3], y=[10, 20, 30]))
         >>> fig.get_computed_values(include=['axis_ranges'])
         {'axis_ranges': {'xaxis': [0.8, 3.2], 'yaxis': [8.0, 32.0]}}
+
+        >>> fig.get_computed_values(include=['axis_ranges', 'axis_types'])
+        {'axis_ranges': {'xaxis': [0.8, 3.2], 'yaxis': [8.0, 32.0]},
+         'axis_types': {'xaxis': 'linear', 'yaxis': 'linear'}}
         """
         # Validate input
         # --------------
@@ -3529,7 +3535,7 @@ Invalid property path '{key_path_str}' for layout
         if not include:
             return {}
 
-        supported_keys = ["axis_ranges"]
+        supported_keys = ["axis_ranges", "axis_types"]
         for key in include:
             if key not in supported_keys:
                 raise ValueError(
@@ -3543,20 +3549,22 @@ Invalid property path '{key_path_str}' for layout
         full_fig_dict = self.full_figure_for_development(warn=False, as_dict=True)
         full_layout = full_fig_dict.get("layout", {})
 
+        # Initialize result buckets for each requested key
         result = {}
-
-        # Extract axis ranges
-        # -------------------
         if "axis_ranges" in include:
-            axis_ranges = {}
-            for key, val in full_layout.items():
-                if key.startswith(("xaxis", "yaxis")):
-                    # Safety checks for axis object and range property
-                    if isinstance(val, dict) and "range" in val:
-                        # Explicit conversion to list for JSON serialization consistency
-                        axis_ranges[key] = list(val["range"])
+            result["axis_ranges"] = {}
+        if "axis_types" in include:
+            result["axis_types"] = {}
 
-            result["axis_ranges"] = axis_ranges
+        # Single-pass traversal: extract all requested properties in one iteration
+        # -------------------------------------------------------------------------
+        for key, val in full_layout.items():
+            if key.startswith(("xaxis", "yaxis")) and isinstance(val, dict):
+                if "axis_ranges" in include and "range" in val:
+                    # Explicit conversion to list for JSON serialization consistency
+                    result["axis_ranges"][key] = list(val["range"])
+                if "axis_types" in include and "type" in val:
+                    result["axis_types"][key] = val["type"]
 
         return result
 
