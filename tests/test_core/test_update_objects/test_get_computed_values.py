@@ -85,7 +85,7 @@ class TestGetComputedValues(TestCase):
         # Test unsupported key and deterministic error message
         with self.assertRaisesRegex(
             ValueError,
-            r"Unsupported key 'invalid'.*Supported keys are: \['axis_ranges'\]",
+            r"Unsupported key 'invalid'.*Supported keys are: \['axis_ranges', 'axis_types'\]",
         ):
             fig.get_computed_values(include=["invalid"])
 
@@ -105,3 +105,48 @@ class TestGetComputedValues(TestCase):
 
         expected = {"axis_ranges": {"xaxis2": [1, 2]}}
         self.assertEqual(computed, expected)
+
+    def test_get_computed_axis_types(self):
+        # Verify standalone extraction of axis types
+        fig = go.Figure()
+        mock_full_fig = {
+            "layout": {
+                "xaxis": {"range": [0, 10], "type": "linear"},
+                "yaxis": {"range": [0, 100], "type": "log"},
+                "xaxis2": {"type": "date"},
+            }
+        }
+        fig.full_figure_for_development = MagicMock(return_value=mock_full_fig)
+
+        computed = fig.get_computed_values(include=["axis_types"])
+
+        expected = {"axis_types": {"xaxis": "linear", "yaxis": "log", "xaxis2": "date"}}
+        self.assertEqual(computed, expected)
+        # axis_ranges should not be present when not requested
+        self.assertNotIn("axis_ranges", computed)
+
+    def test_get_computed_values_combined(self):
+        # Verify that requesting multiple keys returns all of them correctly
+        fig = go.Figure()
+        mock_full_fig = {
+            "layout": {
+                "xaxis": {"range": [0, 1], "type": "linear"},
+                "yaxis": {"range": [0, 10], "type": "log"},
+                # axis with no range — should appear in axis_types but not axis_ranges
+                "xaxis2": {"type": "date"},
+            }
+        }
+        fig.full_figure_for_development = MagicMock(return_value=mock_full_fig)
+
+        computed = fig.get_computed_values(include=["axis_ranges", "axis_types"])
+
+        self.assertEqual(
+            computed["axis_ranges"],
+            {"xaxis": [0, 1], "yaxis": [0, 10]},
+        )
+        self.assertEqual(
+            computed["axis_types"],
+            {"xaxis": "linear", "yaxis": "log", "xaxis2": "date"},
+        )
+        # Verify single call to the rendering engine despite two keys
+        fig.full_figure_for_development.assert_called_once()
