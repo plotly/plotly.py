@@ -241,9 +241,7 @@ def imshow(
     args = locals()
     # Track if color_continuous_scale was explicitly provided by user
     # (before apply_default_cascade fills it from template/defaults)
-    user_provided_colorscale = (
-        "color_continuous_scale" in args and args["color_continuous_scale"] is not None
-    )
+    user_provided_colorscale = args.get("color_continuous_scale") is not None
     apply_default_cascade(args, constructor=None)
     labels = labels.copy()
     nslices_facet_col = 1

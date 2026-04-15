@@ -2509,9 +2509,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     layout_patch = layout_patch or {}
     # Track if color_continuous_scale was explicitly provided by user
     # (before apply_default_cascade fills it from template/defaults)
-    user_provided_colorscale = (
-        "color_continuous_scale" in args and args["color_continuous_scale"] is not None
-    )
+    user_provided_colorscale = args.get("color_continuous_scale") is not None
     apply_default_cascade(args, constructor=constructor)
 
     args = build_dataframe(args, constructor)
