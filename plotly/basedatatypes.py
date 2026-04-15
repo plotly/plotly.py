@@ -1447,12 +1447,10 @@ class BaseFigure(object):
 
         layout_keys_filters = [
             lambda k: k.startswith(prefix) and self.layout[k] is not None,
-            lambda k: (
-                row is None or container_to_row_col.get(k, (None, None, None))[0] == row
-            ),
-            lambda k: (
-                col is None or container_to_row_col.get(k, (None, None, None))[1] == col
-            ),
+                        lambda k: row is None
+            or container_to_row_col.get(k, (None, None, None))[0] == row,
+            lambda k: col is None
+            or container_to_row_col.get(k, (None, None, None))[1] == col,
             lambda k: (
                 secondary_y is None
                 or container_to_row_col.get(k, (None, None, None))[2] == secondary_y
