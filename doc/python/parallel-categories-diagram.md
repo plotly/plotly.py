@@ -114,7 +114,7 @@ fig.show()
 
 #### Multi-Color Parallel Categories Diagram
 
-The color of the ribbons can be specified with the `line.color` property. Similar to other trace types, this property may be set to an array of numbers, which are then mapped to colors according to the the colorscale specified in the `line.colorscale` property.
+The color of the ribbons can be specified with the `line.color` property. Similar to other trace types, this property may be set to an array of numbers, which are then mapped to colors according to the colorscale specified in the `line.colorscale` property.
 
 Here is an example of visualizing the survival rate of passengers in the titanic dataset, where the ribbons are colored based on survival outcome.
 

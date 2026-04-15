@@ -74,7 +74,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         The stride between grid lines along the axis
 
-        The 'arraydtick' property is a integer and may be specified as:
+        The 'arraydtick' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -93,7 +93,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         The starting index of grid lines along the axis
 
-        The 'arraytick0' property is a integer and may be specified as:
+        The 'arraytick0' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -475,7 +475,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Extra padding between label and the axis
 
-        The 'labelpadding' property is a integer and may be specified as:
+        The 'labelpadding' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -611,7 +611,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         Sets the number of minor grid ticks per major grid tick
 
-        The 'minorgridcount' property is a integer and may be specified as:
+        The 'minorgridcount' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -675,7 +675,7 @@ class Baxis(_BaseTraceHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 

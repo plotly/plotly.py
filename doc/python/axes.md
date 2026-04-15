@@ -693,7 +693,7 @@ fig.show()
 
 *New in 5.17*
 
-You can also set just a lower or upper bound manually and have autorange applied to the other bound by setting it to `None`. In the following example, we set a an upper bound of 4.5 on the x axes, while specifying `None` for the lower bound, meaning it will use autorange. On the y axes, we set the lower bound, and use `None` for the upper bound, meaning that uses autorange.
+You can also set just a lower or upper bound manually and have autorange applied to the other bound by setting it to `None`. In the following example, we set an upper bound of 4.5 on the x axes, while specifying `None` for the lower bound, meaning it will use autorange. On the y axes, we set the lower bound, and use `None` for the upper bound, meaning that uses autorange.
 
 ```python
 import plotly.express as px
