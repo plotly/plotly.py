@@ -1165,156 +1165,158 @@ class ColorValidator(BaseValidator):
     re_rgb_etc = re.compile(r"(rgb|hsl|hsv)a?\([\d.]+%?(,[\d.]+%?){2,3}\)")
     re_ddk = re.compile(r"var\(\-\-.*\)")
 
-    named_colors = [
-        "aliceblue",
-        "antiquewhite",
-        "aqua",
-        "aquamarine",
-        "azure",
-        "beige",
-        "bisque",
-        "black",
-        "blanchedalmond",
-        "blue",
-        "blueviolet",
-        "brown",
-        "burlywood",
-        "cadetblue",
-        "chartreuse",
-        "chocolate",
-        "coral",
-        "cornflowerblue",
-        "cornsilk",
-        "crimson",
-        "cyan",
-        "darkblue",
-        "darkcyan",
-        "darkgoldenrod",
-        "darkgray",
-        "darkgrey",
-        "darkgreen",
-        "darkkhaki",
-        "darkmagenta",
-        "darkolivegreen",
-        "darkorange",
-        "darkorchid",
-        "darkred",
-        "darksalmon",
-        "darkseagreen",
-        "darkslateblue",
-        "darkslategray",
-        "darkslategrey",
-        "darkturquoise",
-        "darkviolet",
-        "deeppink",
-        "deepskyblue",
-        "dimgray",
-        "dimgrey",
-        "dodgerblue",
-        "firebrick",
-        "floralwhite",
-        "forestgreen",
-        "fuchsia",
-        "gainsboro",
-        "ghostwhite",
-        "gold",
-        "goldenrod",
-        "gray",
-        "grey",
-        "green",
-        "greenyellow",
-        "honeydew",
-        "hotpink",
-        "indianred",
-        "indigo",
-        "ivory",
-        "khaki",
-        "lavender",
-        "lavenderblush",
-        "lawngreen",
-        "lemonchiffon",
-        "lightblue",
-        "lightcoral",
-        "lightcyan",
-        "lightgoldenrodyellow",
-        "lightgray",
-        "lightgrey",
-        "lightgreen",
-        "lightpink",
-        "lightsalmon",
-        "lightseagreen",
-        "lightskyblue",
-        "lightslategray",
-        "lightslategrey",
-        "lightsteelblue",
-        "lightyellow",
-        "lime",
-        "limegreen",
-        "linen",
-        "magenta",
-        "maroon",
-        "mediumaquamarine",
-        "mediumblue",
-        "mediumorchid",
-        "mediumpurple",
-        "mediumseagreen",
-        "mediumslateblue",
-        "mediumspringgreen",
-        "mediumturquoise",
-        "mediumvioletred",
-        "midnightblue",
-        "mintcream",
-        "mistyrose",
-        "moccasin",
-        "navajowhite",
-        "navy",
-        "oldlace",
-        "olive",
-        "olivedrab",
-        "orange",
-        "orangered",
-        "orchid",
-        "palegoldenrod",
-        "palegreen",
-        "paleturquoise",
-        "palevioletred",
-        "papayawhip",
-        "peachpuff",
-        "peru",
-        "pink",
-        "plum",
-        "powderblue",
-        "purple",
-        "red",
-        "rosybrown",
-        "royalblue",
-        "rebeccapurple",
-        "saddlebrown",
-        "salmon",
-        "sandybrown",
-        "seagreen",
-        "seashell",
-        "sienna",
-        "silver",
-        "skyblue",
-        "slateblue",
-        "slategray",
-        "slategrey",
-        "snow",
-        "springgreen",
-        "steelblue",
-        "tan",
-        "teal",
-        "thistle",
-        "tomato",
-        "turquoise",
-        "violet",
-        "wheat",
-        "white",
-        "whitesmoke",
-        "yellow",
-        "yellowgreen",
-    ]
+    named_colors = frozenset(
+        [
+            "aliceblue",
+            "antiquewhite",
+            "aqua",
+            "aquamarine",
+            "azure",
+            "beige",
+            "bisque",
+            "black",
+            "blanchedalmond",
+            "blue",
+            "blueviolet",
+            "brown",
+            "burlywood",
+            "cadetblue",
+            "chartreuse",
+            "chocolate",
+            "coral",
+            "cornflowerblue",
+            "cornsilk",
+            "crimson",
+            "cyan",
+            "darkblue",
+            "darkcyan",
+            "darkgoldenrod",
+            "darkgray",
+            "darkgrey",
+            "darkgreen",
+            "darkkhaki",
+            "darkmagenta",
+            "darkolivegreen",
+            "darkorange",
+            "darkorchid",
+            "darkred",
+            "darksalmon",
+            "darkseagreen",
+            "darkslateblue",
+            "darkslategray",
+            "darkslategrey",
+            "darkturquoise",
+            "darkviolet",
+            "deeppink",
+            "deepskyblue",
+            "dimgray",
+            "dimgrey",
+            "dodgerblue",
+            "firebrick",
+            "floralwhite",
+            "forestgreen",
+            "fuchsia",
+            "gainsboro",
+            "ghostwhite",
+            "gold",
+            "goldenrod",
+            "gray",
+            "grey",
+            "green",
+            "greenyellow",
+            "honeydew",
+            "hotpink",
+            "indianred",
+            "indigo",
+            "ivory",
+            "khaki",
+            "lavender",
+            "lavenderblush",
+            "lawngreen",
+            "lemonchiffon",
+            "lightblue",
+            "lightcoral",
+            "lightcyan",
+            "lightgoldenrodyellow",
+            "lightgray",
+            "lightgrey",
+            "lightgreen",
+            "lightpink",
+            "lightsalmon",
+            "lightseagreen",
+            "lightskyblue",
+            "lightslategray",
+            "lightslategrey",
+            "lightsteelblue",
+            "lightyellow",
+            "lime",
+            "limegreen",
+            "linen",
+            "magenta",
+            "maroon",
+            "mediumaquamarine",
+            "mediumblue",
+            "mediumorchid",
+            "mediumpurple",
+            "mediumseagreen",
+            "mediumslateblue",
+            "mediumspringgreen",
+            "mediumturquoise",
+            "mediumvioletred",
+            "midnightblue",
+            "mintcream",
+            "mistyrose",
+            "moccasin",
+            "navajowhite",
+            "navy",
+            "oldlace",
+            "olive",
+            "olivedrab",
+            "orange",
+            "orangered",
+            "orchid",
+            "palegoldenrod",
+            "palegreen",
+            "paleturquoise",
+            "palevioletred",
+            "papayawhip",
+            "peachpuff",
+            "peru",
+            "pink",
+            "plum",
+            "powderblue",
+            "purple",
+            "red",
+            "rosybrown",
+            "royalblue",
+            "rebeccapurple",
+            "saddlebrown",
+            "salmon",
+            "sandybrown",
+            "seagreen",
+            "seashell",
+            "sienna",
+            "silver",
+            "skyblue",
+            "slateblue",
+            "slategray",
+            "slategrey",
+            "snow",
+            "springgreen",
+            "steelblue",
+            "tan",
+            "teal",
+            "thistle",
+            "tomato",
+            "turquoise",
+            "violet",
+            "wheat",
+            "white",
+            "whitesmoke",
+            "yellow",
+            "yellowgreen",
+        ]
+    )
 
     def __init__(
         self, plotly_name, parent_name, array_ok=False, colorscale_path=None, **kwargs
@@ -1371,22 +1373,47 @@ class ColorValidator(BaseValidator):
                 # All good
                 pass
             else:
-                validated_v = [self.validate_coerce(e, should_raise=False) for e in v]
-
-                invalid_els = self.find_invalid_els(v, validated_v)
+                # For 1-D numpy arrays, elements are scalars — call
+                # perform_validate_coerce directly to skip the per-element
+                # array-type dispatch in validate_coerce.
+                allow_number = self.numbers_allowed()
+                pvc = ColorValidator.perform_validate_coerce
+                validated_v = []
+                invalid_els = []
+                if v.ndim == 1:
+                    for e in v:
+                        ve = pvc(e, allow_number=allow_number)
+                        validated_v.append(ve)
+                        if ve is None:
+                            invalid_els.append(e)
+                else:
+                    for e in v:
+                        ve = self.validate_coerce(e, should_raise=False)
+                        validated_v.append(ve)
+                        self.find_invalid_els(e, ve, invalid_els)
 
                 if invalid_els and should_raise:
                     self.raise_invalid_elements(invalid_els)
 
                 # ### Check that elements have valid colors types ###
-                elif self.numbers_allowed() or invalid_els:
+                elif allow_number or invalid_els:
                     v = copy_to_readonly_numpy_array(validated_v, kind="O")
                 else:
                     v = copy_to_readonly_numpy_array(validated_v, kind="U")
         elif self.array_ok and is_simple_array(v):
-            validated_v = [self.validate_coerce(e, should_raise=False) for e in v]
-
-            invalid_els = self.find_invalid_els(v, validated_v)
+            allow_number = self.numbers_allowed()
+            pvc = ColorValidator.perform_validate_coerce
+            validated_v = []
+            invalid_els = []
+            for e in v:
+                if is_array(e):
+                    ve = self.validate_coerce(e, should_raise=False)
+                    self.find_invalid_els(e, ve, invalid_els)
+                else:
+                    ve = pvc(e, allow_number=allow_number)
+                    if ve is None:
+                        invalid_els.append(e)
+                validated_v.append(ve)
 
             if invalid_els and should_raise:
                 self.raise_invalid_elements(invalid_els)
@@ -1402,7 +1429,7 @@ class ColorValidator(BaseValidator):
 
         return v
 
-    def find_invalid_els(self, orig, validated, invalid_els=None):
+    def find_invalid_els(self, orig, validated, invalid_els):
         """
         Helper method to find invalid elements in orig array.
         Elements are invalid if their corresponding element in
@@ -1410,17 +1437,12 @@ class ColorValidator(BaseValidator):
 
         This method handles deeply nested list structures
         """
-        if invalid_els is None:
-            invalid_els = []
-
         for orig_el, validated_el in zip(orig, validated):
             if is_array(orig_el):
                 self.find_invalid_els(orig_el, validated_el, invalid_els)
             else:
                 if validated_el is None:
                     invalid_els.append(orig_el)
-
-        return invalid_els
 
     def vc_scalar(self, v):
         """Helper to validate/coerce a scalar color"""
@@ -1457,22 +1479,19 @@ class ColorValidator(BaseValidator):
             # Remove spaces so regexes don't need to bother with them.
             v_normalized = v.replace(" ", "").lower()
 
-            # if ColorValidator.re_hex.fullmatch(v_normalized):
-            if fullmatch(ColorValidator.re_hex, v_normalized):
+            if ColorValidator.re_hex.fullmatch(v_normalized):
                 # valid hex color (e.g. #f34ab3)
                 return v
-            elif fullmatch(ColorValidator.re_rgb_etc, v_normalized):
-                # elif ColorValidator.re_rgb_etc.fullmatch(v_normalized):
+            elif ColorValidator.re_rgb_etc.fullmatch(v_normalized):
                 # Valid rgb(a), hsl(a), hsv(a) color
                 # (e.g. rgba(10, 234, 200, 50%)
                 return v
-            elif fullmatch(ColorValidator.re_ddk, v_normalized):
-                # Valid var(--*) DDK theme variable, inspired by CSS syntax
-                # (e.g. var(--accent) )
-                # DDK will crawl & eval var(-- colors for Graph theming
-                return v
             elif v_normalized in ColorValidator.named_colors:
                 # Valid named color (e.g. 'coral')
+                # Checked before ddk regex since named colors are far more common
+                return v
+            elif ColorValidator.re_ddk.fullmatch(v_normalized):
+                # Valid var(--*) DDK theme variable
                 return v
             else:
                 # Not a valid color
