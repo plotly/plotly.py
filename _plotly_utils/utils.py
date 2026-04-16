@@ -126,7 +126,8 @@ def _convert_to_base64(obj, np):
                 _convert_to_base64(value, np)
     elif isinstance(obj, (list, tuple)):
         for value in obj:
-            _convert_to_base64(value, np)
+            if isinstance(value, (dict, list, tuple)):
+                _convert_to_base64(value, np)
 
 
 def cumsum(x):
