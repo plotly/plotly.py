@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Violin(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "violin"
     _valid_props = {
@@ -21,6 +20,7 @@ class Violin(_BaseTraceType):
         "hoverlabel",
         "hoveron",
         "hovertemplate",
+        "hovertemplatefallback",
         "hovertemplatesrc",
         "hovertext",
         "hovertextsrc",
@@ -301,14 +301,19 @@ class Violin(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  Anything
-        contained in tag `<extra>` is displayed in the secondary box,
-        for example "<extra>{fullData.name}</extra>". To hide the
-        secondary box completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -324,6 +329,25 @@ class Violin(_BaseTraceType):
     @hovertemplate.setter
     def hovertemplate(self, val):
         self["hovertemplate"] = val
+
+    @property
+    def hovertemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'hovertemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["hovertemplatefallback"]
+
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertemplatesrc(self):
@@ -451,9 +475,9 @@ class Violin(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -905,8 +929,8 @@ class Violin(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1207,9 +1231,9 @@ class Violin(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -1315,9 +1339,9 @@ class Violin(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -1383,7 +1407,7 @@ class Violin(_BaseTraceType):
         other SVG traces on the same subplot. SVG traces with higher
         `zorder` appear in front of those with lower `zorder`.
 
-        The 'zorder' property is a integer and may be specified as:
+        The 'zorder' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1460,16 +1484,27 @@ class Violin(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1762,6 +1797,7 @@ class Violin(_BaseTraceType):
         hoverlabel=None,
         hoveron=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -1886,16 +1922,27 @@ class Violin(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -2189,12 +2236,10 @@ class Violin(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Violin
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Violin`"""
-            )
+an instance of :class:`plotly.graph_objs.Violin`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
@@ -2210,6 +2255,7 @@ an instance of :class:`plotly.graph_objs.Violin`"""
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hoveron", arg, hoveron)
         self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
         self._set_property("hovertextsrc", arg, hovertextsrc)

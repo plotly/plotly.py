@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Dimension(_BaseTraceHierarchyType):
-
     _parent_path_str = "parcoords"
     _path_str = "parcoords.dimension"
     _valid_props = {
@@ -79,8 +78,8 @@ class Dimension(_BaseTraceHierarchyType):
         """
         Do we allow multiple selection ranges or just a single range?
 
-        The 'multiselect' property must be specified as a bool
-        (either True, or False)
+        The 'multiselect' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -313,8 +312,8 @@ class Dimension(_BaseTraceHierarchyType):
         Shows the dimension when set to `true` (the default). Hides the
         dimension for `false`.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -521,12 +520,10 @@ class Dimension(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.parcoords.Dimension
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcoords.Dimension`"""
-            )
+an instance of :class:`plotly.graph_objs.parcoords.Dimension`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

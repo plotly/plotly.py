@@ -436,9 +436,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         args["y"],
                         non_missing.to_numpy(),  # numpy array
                     )
-                    assert len(y_out) == len(
-                        trace_patch["x"]
-                    ), "missing-data-handling failure in trendline code"
+                    assert len(y_out) == len(trace_patch["x"]), (
+                        "missing-data-handling failure in trendline code"
+                    )
                     trace_patch["y"] = y_out
                     mapping_labels[get_label(args, args["x"])] = "%{x}"
                     mapping_labels[get_label(args, args["y"])] = "%{y} <b>(trend)</b>"
@@ -588,7 +588,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
             and attr_name == "z"
         ):
             # ensure that stuff like "count" gets into the hoverlabel
-            mapping_labels[attr_label] = "%%{%s}" % attr_name
+            if attr_label is not None:
+                mapping_labels[attr_label] = "%%{%s}" % attr_name
     if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
         # Modify mapping_labels according to hover_data keys
         # if hover_data is a dict
@@ -1003,7 +1004,7 @@ def one_group(x):
     return ""
 
 
-def apply_default_cascade(args):
+def apply_default_cascade(args, constructor):
     # first we apply px.defaults to unspecified args
 
     for param in defaults.__slots__:
@@ -1037,9 +1038,29 @@ def apply_default_cascade(args):
         if args["color_continuous_scale"] is None:
             args["color_continuous_scale"] = sequential.Viridis
 
+    # if color_discrete_sequence not set explicitly or in px.defaults,
+    # see if we can defer to template. Try trace-specific colors first,
+    # then layout.colorway, then set reasonable defaults
     if "color_discrete_sequence" in args:
+        if args["color_discrete_sequence"] is None and constructor is not None:
+            if constructor == "timeline":
+                trace_type = "bar"
+            else:
+                trace_type = constructor().type
+            if trace_data_list := getattr(args["template"].data, trace_type, None):
+                trace_specific_colors = [
+                    trace_data.marker.color
+                    for trace_data in trace_data_list
+                    if hasattr(trace_data, "marker")
+                    and hasattr(trace_data.marker, "color")
+                ]
+                # If template contains at least one color for this trace type, assign to color_discrete_sequence
+                if any(trace_specific_colors):
+                    args["color_discrete_sequence"] = trace_specific_colors
+        # fallback to layout.colorway if trace-specific colors not available
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
+        # final fallback to default qualitative palette
         if args["color_discrete_sequence"] is None:
             args["color_discrete_sequence"] = qualitative.D3
 
@@ -1247,9 +1268,17 @@ def process_args_into_dataframe(
             if field_name not in array_attrables
             else args.get(field_name)
         )
+
         # argument not specified, continue
-        if argument_list is None or argument_list is [None]:
+        # The original also tested `or argument_list is [None]` but
+        # that clause is always False, so it has been removed.  The
+        # alternative fix would have been to test that `argument_list`
+        # is of length 1 and its sole element is `None`, but that
+        # feels pedantic. All tests pass with the change below; let's
+        # see if the world decides we were wrong.
+        if argument_list is None:
             continue
+
         # Argument name: field_name if the argument is not a list
         # Else we give names like ["hover_data_0, hover_data_1"] etc.
         field_list = (
@@ -1987,10 +2016,10 @@ def process_dataframe_hierarchy(args):
         if discrete_color:
             discrete_aggs.append(args["color"])
             agg_f[args["color"]] = nw.col(args["color"]).max()
-            agg_f[f'{args["color"]}{n_unique_token}'] = (
+            agg_f[f"{args['color']}{n_unique_token}"] = (
                 nw.col(args["color"])
                 .n_unique()
-                .alias(f'{args["color"]}{n_unique_token}')
+                .alias(f"{args['color']}{n_unique_token}")
             )
         else:
             # This first needs to be multiplied by `count_colname`
@@ -2478,7 +2507,10 @@ def get_groups_and_orders(args, grouper):
 def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     trace_patch = trace_patch or {}
     layout_patch = layout_patch or {}
-    apply_default_cascade(args)
+    # Track if color_continuous_scale was explicitly provided by user
+    # (before apply_default_cascade fills it from template/defaults)
+    user_provided_colorscale = args.get("color_continuous_scale") is not None
+    apply_default_cascade(args, constructor=constructor)
 
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst, go.Icicle] and args["path"] is not None:
@@ -2696,7 +2728,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
-        layout_patch["coloraxis1"] = dict(
+        coloraxis_dict = dict(
             colorscale=colorscale_validator.validate_coerce(
                 args["color_continuous_scale"]
             ),
@@ -2707,6 +2739,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 title_text=get_decorated_label(args, args[colorvar], colorvar)
             ),
         )
+        # Set autocolorscale=False if user explicitly provided colorscale. Otherwise a template
+        # that sets autocolorscale=True would override the user provided colorscale.
+        if user_provided_colorscale:
+            coloraxis_dict["autocolorscale"] = False
+        layout_patch["coloraxis1"] = coloraxis_dict
     for v in ["height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
@@ -2864,9 +2901,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             e.args = (
                 e.args[0]
                 + """
-Use the {facet_arg} argument to adjust this spacing.""".format(
-                    facet_arg=facet_arg
-                ),
+Use the {facet_arg} argument to adjust this spacing.""".format(facet_arg=facet_arg),
             )
             raise e
 

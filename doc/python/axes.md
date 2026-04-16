@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.3
+      jupytext_version: 1.17.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.14
+    version: 3.9.0
   plotly:
     description: How to adjust axes properties in Python - axes titles, styling and
       coloring axes and grid lines, ticks, tick labels and more.
@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explain how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](/python/reference/layout/xaxis/).
+This tutorial explains how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](/python/reference/layout/yaxis/).
 
 Other kinds of subplots and axes are described in other tutorials:
 
@@ -118,7 +118,7 @@ The PX `labels` argument can also be used without a data frame argument:
 
 ```python
 import plotly.express as px
-fig = px.bar(df, x=["Apples", "Oranges"], y=[10,20], color=["Here", "There"],
+fig = px.bar(x=["Apples", "Oranges"], y=[10,20], color=["Here", "There"],
     labels=dict(x="Fruit", y="Amount", color="Place")
 )
 fig.show()
@@ -128,7 +128,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -460,6 +460,7 @@ Here, `ticklabelstandoff=15` moves the labels 15 pixels further away from the x-
 
 ```python
 import plotly.express as px
+import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
@@ -487,6 +488,7 @@ To draw the label for the minor tick before each major tick, set `ticklabelindex
 
 ```python
 import plotly.express as px
+import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
@@ -619,6 +621,38 @@ fig.update_yaxes(zeroline=True, zerolinewidth=2, zerolinecolor='LightPink')
 fig.show()
 ```
 
+##### Controlling Zero Line Layer
+
+*New in 6.3*
+
+By default, zero lines are displayed below traces. Set `zerolinelayer="above traces"` on an axis to display its zero line above traces:
+
+```python
+import plotly.graph_objects as go
+
+x = ['A', 'B', 'C', 'D', 'A']
+y = [2, 0, 4, -3, 2]
+
+fig = go.Figure(
+    data=[
+        go.Scatter(
+            x=x,
+            y=y,
+            fill='toself',
+            mode='none',
+            fillcolor='lightpink'
+        )
+    ],
+    layout=dict(
+        yaxis=dict(
+            zerolinelayer="above traces"  # Change to "below traces" to see the difference
+        ),
+    )
+)
+
+fig.show()
+```
+
 #### Setting the Range of Axes Manually
 
 The visible x and y axis range can be configured manually by setting the `range` axis property to a list of two values, the lower and upper bound.
@@ -659,7 +693,7 @@ fig.show()
 
 *New in 5.17*
 
-You can also set just a lower or upper bound manually and have autorange applied to the other bound by setting it to `None`. In the following example, we set a an upper bound of 4.5 on the x axes, while specifying `None` for the lower bound, meaning it will use autorange. On the y axes, we set the lower bound, and use `None` for the upper bound, meaning that uses autorange.
+You can also set just a lower or upper bound manually and have autorange applied to the other bound by setting it to `None`. In the following example, we set an upper bound of 4.5 on the x axes, while specifying `None` for the lower bound, meaning it will use autorange. On the y axes, we set the lower bound, and use `None` for the upper bound, meaning that uses autorange.
 
 ```python
 import plotly.express as px

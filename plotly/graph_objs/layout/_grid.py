@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Grid(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.grid"
     _valid_props = {
@@ -34,7 +33,7 @@ class Grid(_BaseLayoutHierarchyType):
         if you want to leave a row at the end for non-cartesian
         subplots.
 
-        The 'columns' property is a integer and may be specified as:
+        The 'columns' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -119,7 +118,7 @@ class Grid(_BaseLayoutHierarchyType):
         But it's also possible to have a different length, if you want
         to leave a row at the end for non-cartesian subplots.
 
-        The 'rows' property is a integer and may be specified as:
+        The 'rows' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -488,12 +487,10 @@ class Grid(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Grid
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Grid`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Grid`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Pathbar(_BaseTraceHierarchyType):
-
     _parent_path_str = "treemap"
     _path_str = "treemap.pathbar"
     _valid_props = {"edgeshape", "side", "textfont", "thickness", "visible"}
@@ -98,8 +97,8 @@ class Pathbar(_BaseTraceHierarchyType):
         Determines if the path bar is drawn i.e. outside the trace
         `domain` and with one pixel gap.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -182,12 +181,10 @@ class Pathbar(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.treemap.Pathbar
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.treemap.Pathbar`"""
-            )
+an instance of :class:`plotly.graph_objs.treemap.Pathbar`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

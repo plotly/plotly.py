@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Hoverlabel(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.hoverlabel"
     _valid_props = {
@@ -16,6 +15,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         "font",
         "grouptitlefont",
         "namelength",
+        "showarrow",
     }
 
     @property
@@ -137,7 +137,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         that many characters, but if it is longer, will truncate to
         `namelength - 3` characters and add an ellipsis.
 
-        The 'namelength' property is a integer and may be specified as:
+        The 'namelength' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
@@ -150,6 +150,25 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     @namelength.setter
     def namelength(self, val):
         self["namelength"] = val
+
+    @property
+    def showarrow(self):
+        """
+        Sets whether or not to show the hover label arrow/triangle
+        pointing to the data point.
+
+        The 'showarrow' property is a boolean and must be specified as:
+          - A boolean value: True or False
+
+        Returns
+        -------
+        bool
+        """
+        return self["showarrow"]
+
+    @showarrow.setter
+    def showarrow(self, val):
+        self["showarrow"] = val
 
     @property
     def _prop_descriptions(self):
@@ -176,6 +195,9 @@ class Hoverlabel(_BaseLayoutHierarchyType):
             the whole name if it is less than that many characters,
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
+        showarrow
+            Sets whether or not to show the hover label
+            arrow/triangle pointing to the data point.
         """
 
     def __init__(
@@ -187,6 +209,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         font=None,
         grouptitlefont=None,
         namelength=None,
+        showarrow=None,
         **kwargs,
     ):
         """
@@ -220,6 +243,9 @@ class Hoverlabel(_BaseLayoutHierarchyType):
             the whole name if it is less than that many characters,
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
+        showarrow
+            Sets whether or not to show the hover label
+            arrow/triangle pointing to the data point.
 
         Returns
         -------
@@ -237,12 +263,10 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Hoverlabel
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Hoverlabel`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Hoverlabel`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
@@ -253,5 +277,6 @@ an instance of :class:`plotly.graph_objs.layout.Hoverlabel`"""
         self._set_property("font", arg, font)
         self._set_property("grouptitlefont", arg, grouptitlefont)
         self._set_property("namelength", arg, namelength)
+        self._set_property("showarrow", arg, showarrow)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

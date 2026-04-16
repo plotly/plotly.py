@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Textfont(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatter3d"
     _path_str = "scatter3d.textfont"
     _valid_props = {
@@ -221,7 +220,7 @@ class Textfont(_BaseTraceHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is a integer and may be specified as:
+        The 'weight' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 1000]
             OR exactly one of ['normal', 'bold'] (e.g. 'bold')
@@ -377,12 +376,10 @@ class Textfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter3d.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.Textfont`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter3d.Textfont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

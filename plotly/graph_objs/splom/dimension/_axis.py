@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Axis(_BaseTraceHierarchyType):
-
     _parent_path_str = "splom.dimension"
     _path_str = "splom.dimension.axis"
     _valid_props = {"matches", "type"}
@@ -18,8 +17,8 @@ class Axis(_BaseTraceHierarchyType):
         dimension match. Equivalent to setting the `matches` axis
         attribute in the layout with the correct axis id.
 
-        The 'matches' property must be specified as a bool
-        (either True, or False)
+        The 'matches' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -102,12 +101,10 @@ class Axis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.splom.dimension.Axis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.dimension.Axis`"""
-            )
+an instance of :class:`plotly.graph_objs.splom.dimension.Axis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

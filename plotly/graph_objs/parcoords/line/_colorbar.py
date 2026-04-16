@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class ColorBar(_BaseTraceHierarchyType):
-
     _parent_path_str = "parcoords.line"
     _path_str = "parcoords.line.colorbar"
     _valid_props = {
@@ -166,11 +165,16 @@ class ColorBar(_BaseTraceHierarchyType):
         example, consider the number 1,000,000,000. If "none", it
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
-        "B", 1B.
+        "B", 1B. "SI" uses prefixes from "femto" f (10^-15) to "tera" T
+        (10^12). *SI extended* covers instead the full SI range from
+        "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or *SI
+        extended* is used and the exponent is beyond the above ranges,
+        the formatting rule will automatically be switched to the power
+        notation.
 
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+                ['none', 'e', 'E', 'power', 'SI', 'B', 'SI extended']
 
         Returns
         -------
@@ -275,7 +279,7 @@ class ColorBar(_BaseTraceHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -353,8 +357,8 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -393,8 +397,8 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Determines whether or not the tick labels are drawn.
 
-        The 'showticklabels' property must be specified as a bool
-        (either True, or False)
+        The 'showticklabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -703,7 +707,7 @@ class ColorBar(_BaseTraceHierarchyType):
         which labels are shown. Not implemented for axes with `type`
         "log" or "multicategory", or when `tickmode` is "array".
 
-        The 'ticklabelstep' property is a integer and may be specified as:
+        The 'ticklabelstep' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -1140,7 +1144,13 @@ class ColorBar(_BaseTraceHierarchyType):
             For example, consider the number 1,000,000,000. If
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
-            script). If "SI", 1G. If "B", 1B.
+            script). If "SI", 1G. If "B", 1B. "SI" uses prefixes
+            from "femto" f (10^-15) to "tera" T (10^12). *SI
+            extended* covers instead the full SI range from
+            "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or
+            *SI extended* is used and the exponent is beyond the
+            above ranges, the formatting rule will automatically be
+            switched to the power notation.
         labelalias
             Replacement text for specific tick or hover labels. For
             example using {US: 'USA', CA: 'Canada'} changes US to
@@ -1443,7 +1453,13 @@ class ColorBar(_BaseTraceHierarchyType):
             For example, consider the number 1,000,000,000. If
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
-            script). If "SI", 1G. If "B", 1B.
+            script). If "SI", 1G. If "B", 1B. "SI" uses prefixes
+            from "femto" f (10^-15) to "tera" T (10^12). *SI
+            extended* covers instead the full SI range from
+            "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or
+            *SI extended* is used and the exponent is beyond the
+            above ranges, the formatting rule will automatically be
+            switched to the power notation.
         labelalias
             Replacement text for specific tick or hover labels. For
             example using {US: 'USA', CA: 'Canada'} changes US to
@@ -1662,12 +1678,10 @@ class ColorBar(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.parcoords.line.ColorBar
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcoords.line.ColorBar`"""
-            )
+an instance of :class:`plotly.graph_objs.parcoords.line.ColorBar`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

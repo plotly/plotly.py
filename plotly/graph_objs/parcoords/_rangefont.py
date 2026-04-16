@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Rangefont(_BaseTraceHierarchyType):
-
     _parent_path_str = "parcoords"
     _path_str = "parcoords.rangefont"
     _valid_props = {
@@ -190,7 +189,7 @@ class Rangefont(_BaseTraceHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is a integer and may be specified as:
+        The 'weight' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 1000]
             OR exactly one of ['normal', 'bold'] (e.g. 'bold')
@@ -314,12 +313,10 @@ class Rangefont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.parcoords.Rangefont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcoords.Rangefont`"""
-            )
+an instance of :class:`plotly.graph_objs.parcoords.Rangefont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

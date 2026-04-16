@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Textfont(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.mapbox.layer.symbol"
     _path_str = "layout.mapbox.layer.symbol.textfont"
     _valid_props = {"color", "family", "size", "style", "weight"}
@@ -94,7 +93,7 @@ class Textfont(_BaseLayoutHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is a integer and may be specified as:
+        The 'weight' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 1000]
             OR exactly one of ['normal', 'bold'] (e.g. 'bold')
@@ -186,12 +185,10 @@ class Textfont(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.symbol.Textfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.mapbox.layer.symbol.Textfont`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.symbol.Textfont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

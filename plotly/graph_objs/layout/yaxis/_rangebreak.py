@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Rangebreak(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.yaxis"
     _path_str = "layout.yaxis.rangebreak"
     _valid_props = {
@@ -66,8 +65,8 @@ class Rangebreak(_BaseLayoutHierarchyType):
         Determines whether this axis rangebreak is enabled or disabled.
         Please note that `rangebreaks` only work for "date" axis type.
 
-        The 'enabled' property must be specified as a bool
-        (either True, or False)
+        The 'enabled' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -312,12 +311,10 @@ class Rangebreak(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.yaxis.Rangebreak
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.yaxis.Rangebreak`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.yaxis.Rangebreak`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

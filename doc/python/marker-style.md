@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.6
+      jupytext_version: 1.19.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.14.3
   plotly:
     description: How to style markers in Python with Plotly.
     display_as: file_settings
@@ -107,12 +107,55 @@ fig.show()
 
 Fully opaque, the default setting, is useful for non-overlapping markers. When many points overlap it can be hard to observe density.
 
+### Dashed Marker Borders
+
+*New in 6.6*
+
+Set `dash` on `marker.line` to control the dash pattern of marker borders. Supported values are: `'solid'` (default), `'dot'`, `'dash'`, `'longdash'`, `'dashdot'`, `'longdashdot'`, or a custom dash length list in px (for example, `'12px,6px'`).
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[2, 4, 3, 5, 4],
+    mode="markers",
+    marker=dict(
+        size=25,
+        color="white",
+        line=dict(width=2, color="blue", dash="dot")
+    )
+))
+
+fig.show()
+```
+
+You can also pass an array of dash styles to set different styles per marker:
+
+```python
+import plotly.graph_objects as go
+
+styles = ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
+
+fig = go.Figure(go.Scatter(
+    x=list(range(len(styles))),
+    y=[0] * len(styles),
+    mode="markers+text",
+    text=styles,
+    textposition="bottom center",
+    marker=dict(size=30, color="white", line=dict(color="blue", width=2, dash=styles))
+))
+
+fig.show()
+```
+
+The `marker.line.dash` attribute is available on `go.Scatter`, `go.Scatterpolar`, `go.Scattergeo`, `go.Scatterternary`, `go.Scattercarpet`, and `go.Scattersmith` traces.
 
 ### Control Marker Border with Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 ```python hide_code=true
 from IPython.display import IFrame
@@ -266,7 +309,7 @@ fig.show()
 
 To maximise visibility of each point, set the color as an `rgba` string that includes an alpha value of 0.5.
 
-This example sets the marker color to `'rgba(135, 206, 250, 0.5)'`. The rgb values of 135, 206, and 250 are from the definition of the `LightSkyBlue` named CSS color that is is used in the previous examples (See https://www.color-hex.com/color/87cefa). The marker line will remain opaque.
+This example sets the marker color to `'rgba(135, 206, 250, 0.5)'`. The rgb values of 135, 206, and 250 are from the definition of the `LightSkyBlue` named CSS color that is used in the previous examples (See https://www.color-hex.com/color/87cefa). The marker line will remain opaque.
 
 ```python
 import plotly.graph_objects as go
@@ -336,9 +379,10 @@ In the following figure, hover over a symbol to see its name or number. Set the 
 
 ```python
 import plotly.graph_objects as go
-from plotly.validators.scatter.marker import SymbolValidator
+from plotly.validator_cache import ValidatorCache
 
-raw_symbols = SymbolValidator().values
+SymbolValidator = ValidatorCache.get_validator("scatter.marker", "symbol")
+raw_symbols = SymbolValidator.values
 namestems = []
 namevariants = []
 symbols = []

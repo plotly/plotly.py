@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Carpet(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "carpet"
     _valid_props = {
@@ -409,9 +408,9 @@ class Carpet(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -688,9 +687,9 @@ class Carpet(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -747,9 +746,9 @@ class Carpet(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -786,7 +785,7 @@ class Carpet(_BaseTraceType):
         other SVG traces on the same subplot. SVG traces with higher
         `zorder` appear in front of those with lower `zorder`.
 
-        The 'zorder' property is a integer and may be specified as:
+        The 'zorder' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1206,12 +1205,10 @@ class Carpet(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Carpet
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Carpet`"""
-            )
+an instance of :class:`plotly.graph_objs.Carpet`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

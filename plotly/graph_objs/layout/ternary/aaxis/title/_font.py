@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Font(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.ternary.aaxis.title"
     _path_str = "layout.ternary.aaxis.title.font"
     _valid_props = {
@@ -190,7 +189,7 @@ class Font(_BaseLayoutHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is a integer and may be specified as:
+        The 'weight' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 1000]
             OR exactly one of ['normal', 'bold'] (e.g. 'bold')
@@ -314,12 +313,10 @@ class Font(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.ternary.aaxis.title.Font
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.ternary.aaxis.title.Font`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.ternary.aaxis.title.Font`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

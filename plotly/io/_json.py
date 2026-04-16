@@ -25,8 +25,9 @@ class JsonConfig(object):
     def default_engine(self, val):
         if val not in JsonConfig._valid_engines:
             raise ValueError(
-                "Supported JSON engines include {valid}\n"
-                "    Received {val}".format(valid=JsonConfig._valid_engines, val=val)
+                "Supported JSON engines include {valid}\n    Received {val}".format(
+                    valid=JsonConfig._valid_engines, val=val
+                )
             )
 
         if val == "orjson":
@@ -224,7 +225,9 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
 def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=None):
     """
     Convert a figure to JSON and write it to a file or writeable
-    object
+    object.
+
+    Note: A figure converted to JSON with one version of Plotly.py may not be compatible with another version.
 
     Parameters
     ----------
@@ -287,9 +290,7 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
         raise ValueError(
             """
 The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
-""".format(
-                file=file
-            )
+""".format(file=file)
         )
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.
@@ -332,9 +333,7 @@ def from_json_plotly(value, engine=None):
         raise ValueError(
             """
 from_json_plotly requires a string or bytes argument but received value of type {typ}
-    Received value: {value}""".format(
-                typ=type(value), value=value
-            )
+    Received value: {value}""".format(typ=type(value), value=value)
         )
 
     # Determine json engine
@@ -417,7 +416,9 @@ def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
 def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     """
     Construct a figure from the JSON contents of a local file or readable
-    Python object
+    Python object.
+
+    Note: A figure converted to JSON with one version of Plotly.py may not be compatible with another version.
 
     Parameters
     ----------
@@ -449,9 +450,6 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     """
 
     # Try to cast `file` as a pathlib object `path`.
-    # -------------------------
-    # ----------------------------------------------
-    file_is_str = isinstance(file, str)
     if isinstance(file, str):
         # Use the standard Path constructor to make a pathlib object.
         path = Path(file)

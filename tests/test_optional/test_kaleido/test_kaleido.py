@@ -4,6 +4,7 @@ from io import BytesIO, StringIO
 from pathlib import Path
 import tempfile
 from unittest.mock import patch
+import xml.etree.ElementTree as ET
 
 from pdfrw import PdfReader
 from PIL import Image
@@ -14,6 +15,26 @@ import pytest
 
 
 fig = {"data": [], "layout": {"title": {"text": "figure title"}}}
+
+
+def create_figure(width=None, height=None):
+    """Create a simple figure with optional layout dimensions."""
+    layout = {}
+    if width:
+        layout["width"] = width
+    if height:
+        layout["height"] = height
+
+    return go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[1, 2, 3])], layout=layout)
+
+
+def parse_svg_dimensions(svg_bytes):
+    """Parse width and height from SVG bytes."""
+    svg_str = svg_bytes.decode("utf-8")
+    root = ET.fromstring(svg_str)
+    width = root.get("width")
+    height = root.get("height")
+    return int(width) if width else None, int(height) if height else None
 
 
 def check_image(path_or_buffer, size=(700, 500), format="PNG"):
@@ -154,15 +175,105 @@ def test_bytesio():
 
 def test_defaults():
     """Test that image output defaults can be set using pio.defaults.*"""
+    test_fig = go.Figure(fig)
+    test_image_bytes = b"mock image data"
+
+    # Check initial defaults
+    assert pio.defaults.default_format == "png"
+    assert pio.defaults.default_width == 700
+    assert pio.defaults.default_height == 500
+    assert pio.defaults.default_scale == 1
+    assert pio.defaults.mathjax is None
+    assert pio.defaults.topojson is None
+    assert pio.defaults.plotlyjs is None
+
     try:
-        assert pio.defaults.default_format == "png"
+        # Set new defaults
         pio.defaults.default_format = "svg"
+        pio.defaults.default_width = 701
+        pio.defaults.default_height = 501
+        pio.defaults.default_scale = 2
+        pio.defaults.mathjax = (
+            "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
+        )
+        pio.defaults.topojson = "path/to/topojson/files/"
+        pio.defaults.plotlyjs = "https://cdn.plot.ly/plotly-3.0.0.js"
+
+        # Check that new defaults are saved
         assert pio.defaults.default_format == "svg"
-        result = pio.to_image(fig, format="svg", validate=False)
+        assert pio.defaults.default_width == 701
+        assert pio.defaults.default_height == 501
+        assert pio.defaults.default_scale == 2
+        assert (
+            pio.defaults.mathjax
+            == "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
+        )
+        assert pio.defaults.topojson == "path/to/topojson/files/"
+        assert pio.defaults.plotlyjs == "https://cdn.plot.ly/plotly-3.0.0.js"
+
+        if kaleido_major() > 0:
+            # Check that all the defaults values are passed through to the function call to calc_fig_sync
+            with patch(
+                "plotly.io._kaleido.kaleido.calc_fig_sync",
+                return_value=test_image_bytes,
+            ) as mock_calc_fig:
+                result = pio.to_image(test_fig, validate=False)
+
+                # Verify calc_fig_sync was called with correct args
+                # taken from pio.defaults
+                mock_calc_fig.assert_called_once()
+                args, kwargs = mock_calc_fig.call_args
+                assert args[0] == test_fig.to_dict()
+                assert kwargs["opts"]["format"] == "svg"
+                assert kwargs["opts"]["width"] == 701
+                assert kwargs["opts"]["height"] == 501
+                assert kwargs["opts"]["scale"] == 2
+                assert kwargs["topojson"] == "path/to/topojson/files/"
+                # mathjax and plotlyjs are passed through in kopts
+                assert (
+                    kwargs["kopts"]["mathjax"]
+                    == "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
+                )
+                assert (
+                    kwargs["kopts"]["plotlyjs"] == "https://cdn.plot.ly/plotly-3.0.0.js"
+                )
+
+        else:
+            # Check that all the default values have been set in pio._kaleido.scope
+            assert pio._kaleido.scope.default_format == "svg"
+            assert pio._kaleido.scope.default_width == 701
+            assert pio._kaleido.scope.default_height == 501
+            assert pio._kaleido.scope.default_scale == 2
+            assert (
+                pio._kaleido.scope.mathjax
+                == "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js"
+            )
+            assert pio._kaleido.scope.topojson == "path/to/topojson/files/"
+            assert pio._kaleido.scope.plotlyjs == "https://cdn.plot.ly/plotly-3.0.0.js"
+
+        # Set topojson default back to None
+        # (otherwise image generation will fail)
+        pio.defaults.topojson = None
+        # Generate image for real and make sure it's an SVG
+        result = test_fig.to_image(format="svg", validate=False)
         assert result.startswith(b"<svg")
+
     finally:
+        # Reset defaults to original values and check that they are restored
         pio.defaults.default_format = "png"
+        pio.defaults.default_width = 700
+        pio.defaults.default_height = 500
+        pio.defaults.default_scale = 1
+        pio.defaults.mathjax = None
+        pio.defaults.topojson = None
+        pio.defaults.plotlyjs = None
         assert pio.defaults.default_format == "png"
+        assert pio.defaults.default_width == 700
+        assert pio.defaults.default_height == 500
+        assert pio.defaults.default_scale == 1
+        assert pio.defaults.mathjax is None
+        assert pio.defaults.topojson is None
+        assert pio.defaults.plotlyjs is None
 
 
 def test_fig_write_image():
@@ -203,3 +314,63 @@ def test_fig_to_image():
         mock_calc_fig.assert_called_once()
         args, _ = mock_calc_fig.call_args
         assert args[0] == test_fig.to_dict()
+
+
+def test_get_chrome():
+    """Test that plotly.io.get_chrome() can be called."""
+
+    if not kaleido_available() or kaleido_major() < 1:
+        # Test that ValueError is raised when Kaleido requirements aren't met
+        with pytest.raises(
+            ValueError, match="This command requires Kaleido v1.0.0 or greater"
+        ):
+            pio.get_chrome()
+    else:
+        # Test normal operation when Kaleido v1+ is available
+        with patch(
+            "plotly.io._kaleido.kaleido.get_chrome_sync",
+            return_value="/mock/path/to/chrome",
+        ) as mock_get_chrome:
+            pio.get_chrome()
+
+            # Verify that kaleido.get_chrome_sync was called
+            mock_get_chrome.assert_called_once()
+
+
+def test_width_height_priority():
+    """Test width/height priority: arguments > layout.width/height > defaults."""
+
+    # Test case 1: Arguments override layout
+    fig = create_figure(width=800, height=600)
+    svg_bytes = pio.to_image(fig, format="svg", width=1000, height=900)
+    width, height = parse_svg_dimensions(svg_bytes)
+    assert width == 1000 and height == 900, (
+        "Arguments should override layout dimensions"
+    )
+
+    # Test case 2: Layout dimensions used when no arguments
+    fig = create_figure(width=800, height=600)
+    svg_bytes = pio.to_image(fig, format="svg")
+    width, height = parse_svg_dimensions(svg_bytes)
+    assert width == 800 and height == 600, (
+        "Layout dimensions should be used when no arguments provided"
+    )
+
+    # Test case 3: Partial override (only width argument)
+    fig = create_figure(width=800, height=600)
+    svg_bytes = pio.to_image(fig, format="svg", width=1200)
+    width, height = parse_svg_dimensions(svg_bytes)
+    assert width == 1200 and height == 600, (
+        "Width argument should override layout, height should use layout"
+    )
+
+    # Test case 4: Defaults used when no layout or arguments
+    fig = create_figure()
+    svg_bytes = pio.to_image(fig, format="svg")
+    width, height = parse_svg_dimensions(svg_bytes)
+    assert width == pio.defaults.default_width, (
+        "Default width should be used when no layout or argument"
+    )
+    assert height == pio.defaults.default_height, (
+        "Default height should be used when no layout or argument"
+    )

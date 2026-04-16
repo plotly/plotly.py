@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Connector(_BaseTraceHierarchyType):
-
     _parent_path_str = "funnel"
     _path_str = "funnel.connector"
     _valid_props = {"fillcolor", "line", "visible"}
@@ -57,8 +56,8 @@ class Connector(_BaseTraceHierarchyType):
         """
         Determines if connector regions and lines are drawn.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -116,12 +115,10 @@ class Connector(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.funnel.Connector
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.funnel.Connector`"""
-            )
+an instance of :class:`plotly.graph_objs.funnel.Connector`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

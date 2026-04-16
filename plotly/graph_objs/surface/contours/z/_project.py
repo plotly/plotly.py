@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Project(_BaseTraceHierarchyType):
-
     _parent_path_str = "surface.contours.z"
     _path_str = "surface.contours.z.project"
     _valid_props = {"x", "y", "z"}
@@ -19,8 +18,8 @@ class Project(_BaseTraceHierarchyType):
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
 
-        The 'x' property must be specified as a bool
-        (either True, or False)
+        The 'x' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -40,8 +39,8 @@ class Project(_BaseTraceHierarchyType):
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
 
-        The 'y' property must be specified as a bool
-        (either True, or False)
+        The 'y' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -61,8 +60,8 @@ class Project(_BaseTraceHierarchyType):
         projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
 
-        The 'z' property must be specified as a bool
-        (either True, or False)
+        The 'z' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -142,12 +141,10 @@ class Project(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.surface.contours.z.Project
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.contours.z.Project`"""
-            )
+an instance of :class:`plotly.graph_objs.surface.contours.z.Project`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

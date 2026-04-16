@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Updatemenu(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.updatemenu"
     _valid_props = {
@@ -36,7 +35,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         Determines which button (by index starting from 0) is
         considered active.
 
-        The 'active' property is a integer and may be specified as:
+        The 'active' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
@@ -249,8 +248,8 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
         Highlights active dropdown item or active button if true.
 
-        The 'showactive' property must be specified as a bool
-        (either True, or False)
+        The 'showactive' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -314,8 +313,8 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
         Determines whether or not the update menu is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -603,12 +602,10 @@ class Updatemenu(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Updatemenu
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Updatemenu`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Updatemenu`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

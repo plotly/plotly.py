@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Indicator(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "indicator"
     _valid_props = {
@@ -203,9 +202,9 @@ class Indicator(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -811,12 +810,10 @@ class Indicator(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Indicator
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Indicator`"""
-            )
+an instance of :class:`plotly.graph_objs.Indicator`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

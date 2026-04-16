@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class ErrorY(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatter"
     _path_str = "scatter.error_y"
     _valid_props = {
@@ -131,8 +130,8 @@ class ErrorY(_BaseTraceHierarchyType):
         in both direction (top/bottom for vertical bars, left/right for
         horizontal bars.
 
-        The 'symmetric' property must be specified as a bool
-        (either True, or False)
+        The 'symmetric' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -165,7 +164,7 @@ class ErrorY(_BaseTraceHierarchyType):
     @property
     def traceref(self):
         """
-        The 'traceref' property is a integer and may be specified as:
+        The 'traceref' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -182,7 +181,7 @@ class ErrorY(_BaseTraceHierarchyType):
     @property
     def tracerefminus(self):
         """
-        The 'tracerefminus' property is a integer and may be specified as:
+        The 'tracerefminus' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -267,8 +266,8 @@ class ErrorY(_BaseTraceHierarchyType):
         """
         Determines whether or not this set of error bars is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -455,12 +454,10 @@ class ErrorY(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter.ErrorY
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter.ErrorY`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter.ErrorY`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

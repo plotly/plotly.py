@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Lataxis(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.geo"
     _path_str = "layout.geo.lataxis"
     _valid_props = {
@@ -130,8 +129,8 @@ class Lataxis(_BaseLayoutHierarchyType):
         """
         Sets whether or not graticule are shown on the map.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -240,12 +239,10 @@ class Lataxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.geo.Lataxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.geo.Lataxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.geo.Lataxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

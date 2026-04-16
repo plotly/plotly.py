@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatter3d.marker"
     _path_str = "scatter3d.marker.line"
     _valid_props = {
@@ -34,8 +33,8 @@ class Line(_BaseTraceHierarchyType):
         default palette will be chosen according to whether numbers in
         the `color` array are all positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -57,8 +56,8 @@ class Line(_BaseTraceHierarchyType):
         array. Defaults to `false` when `marker.line.cmin` and
         `marker.line.cmax` are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -174,9 +173,9 @@ class Line(_BaseTraceHierarchyType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -268,8 +267,8 @@ class Line(_BaseTraceHierarchyType):
         array and `marker.line.cmax` will correspond to the first
         color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -496,12 +495,10 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter3d.marker.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter3d.marker.Line`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter3d.marker.Line`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

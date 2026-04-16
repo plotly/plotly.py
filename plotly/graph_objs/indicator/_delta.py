@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Delta(_BaseTraceHierarchyType):
-
     _parent_path_str = "indicator"
     _path_str = "indicator.delta"
     _valid_props = {
@@ -142,8 +141,8 @@ class Delta(_BaseTraceHierarchyType):
         """
         Show relative change
 
-        The 'relative' property must be specified as a bool
-        (either True, or False)
+        The 'relative' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -289,12 +288,10 @@ class Delta(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.Delta
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.Delta`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.Delta`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

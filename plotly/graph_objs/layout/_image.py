@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Image(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.image"
     _valid_props = {
@@ -211,8 +210,8 @@ class Image(_BaseLayoutHierarchyType):
         """
         Determines whether or not this image is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -582,12 +581,10 @@ class Image(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Image
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Image`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Image`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

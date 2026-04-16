@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Symbol(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.map.layer"
     _path_str = "layout.map.layer.symbol"
     _valid_props = {"icon", "iconsize", "placement", "text", "textfont", "textposition"}
@@ -15,7 +14,7 @@ class Symbol(_BaseLayoutHierarchyType):
     def icon(self):
         """
         Sets the symbol icon image (map.layer.layout.icon-image). Full
-        list: https://www.map.com/maki-icons/
+        list: https://www.mapbox.com/maki-icons/
 
         The 'icon' property is a string and must be specified as:
           - A string
@@ -143,7 +142,7 @@ class Symbol(_BaseLayoutHierarchyType):
         return """\
         icon
             Sets the symbol icon image (map.layer.layout.icon-
-            image). Full list: https://www.map.com/maki-icons/
+            image). Full list: https://www.mapbox.com/maki-icons/
         iconsize
             Sets the symbol icon size (map.layer.layout.icon-size).
             Has an effect only when `type` is set to "symbol".
@@ -188,7 +187,7 @@ class Symbol(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objs.layout.map.layer.Symbol`
         icon
             Sets the symbol icon image (map.layer.layout.icon-
-            image). Full list: https://www.map.com/maki-icons/
+            image). Full list: https://www.mapbox.com/maki-icons/
         iconsize
             Sets the symbol icon size (map.layer.layout.icon-size).
             Has an effect only when `type` is set to "symbol".
@@ -226,12 +225,10 @@ class Symbol(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.layer.Symbol
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.layer.Symbol`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.layer.Symbol`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

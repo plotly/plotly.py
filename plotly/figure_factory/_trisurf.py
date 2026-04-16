@@ -94,7 +94,7 @@ def trisurf(
     """
     # numpy import check
     if not np:
-        raise ImportError("FigureFactory._trisurf() requires " "numpy imported.")
+        raise ImportError("FigureFactory._trisurf() requires numpy imported.")
     points3D = np.vstack((x, y, z)).T
     simplices = np.atleast_2d(simplices)
 
@@ -196,7 +196,7 @@ def trisurf(
     if any(is_none):
         if not all(is_none):
             raise ValueError(
-                "If any (x_edge, y_edge, z_edge) is None, " "all must be None"
+                "If any (x_edge, y_edge, z_edge) is None, all must be None"
             )
         else:
             x_edge = []
@@ -223,7 +223,7 @@ def trisurf(
 
     if not (len(x_edge) == len(y_edge) == len(z_edge)):
         raise exceptions.PlotlyError(
-            "The lengths of x_edge, y_edge and " "z_edge are not the same."
+            "The lengths of x_edge, y_edge and z_edge are not the same."
         )
 
     # define the lines for plotting
@@ -270,7 +270,7 @@ def create_trisurf(
     :param (array) z: data values of z in a 1D array
     :param (array) simplices: an array of shape (ntri, 3) where ntri is
         the number of triangles in the triangularization. Each row of the
-        array contains the indicies of the verticies of each triangle
+        array contains the indices of the vertices of each triangle
     :param (str|tuple|list) colormap: either a plotly scale name, an rgb
         or hex color, a color tuple or a list of colors. An rgb color is
         of the form 'rgb(x, y, z)' where x, y, z belong to the interval

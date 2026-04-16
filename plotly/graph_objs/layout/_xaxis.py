@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class XAxis(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.xaxis"
     _valid_props = {
@@ -43,7 +42,9 @@ class XAxis(_BaseLayoutHierarchyType):
         "minallowed",
         "minexponent",
         "minor",
+        "minorloglabels",
         "mirror",
+        "modebardisable",
         "nticks",
         "overlaying",
         "position",
@@ -99,9 +100,11 @@ class XAxis(_BaseLayoutHierarchyType):
         "title",
         "type",
         "uirevision",
+        "unifiedhovertitle",
         "visible",
         "zeroline",
         "zerolinecolor",
+        "zerolinelayer",
         "zerolinewidth",
     }
 
@@ -528,11 +531,16 @@ class XAxis(_BaseLayoutHierarchyType):
         example, consider the number 1,000,000,000. If "none", it
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
-        "B", 1B.
+        "B", 1B. "SI" uses prefixes from "femto" f (10^-15) to "tera" T
+        (10^12). *SI extended* covers instead the full SI range from
+        "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or *SI
+        extended* is used and the exponent is beyond the above ranges,
+        the formatting rule will automatically be switched to the power
+        notation.
 
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+                ['none', 'e', 'E', 'power', 'SI', 'B', 'SI extended']
 
         Returns
         -------
@@ -550,8 +558,8 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether or not this axis is zoom-able. If true, then
         zoom is disabled.
 
-        The 'fixedrange' property must be specified as a bool
-        (either True, or False)
+        The 'fixedrange' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -867,6 +875,28 @@ class XAxis(_BaseLayoutHierarchyType):
         self["minor"] = val
 
     @property
+    def minorloglabels(self):
+        """
+        Determines how minor log labels are displayed. If *small
+        digits*, small digits i.e. 2 or 5 are displayed. If "complete",
+        complete digits are displayed. If "none", no labels are
+        displayed.
+
+        The 'minorloglabels' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['small digits', 'complete', 'none']
+
+        Returns
+        -------
+        Any
+        """
+        return self["minorloglabels"]
+
+    @minorloglabels.setter
+    def minorloglabels(self, val):
+        self["minorloglabels"] = val
+
+    @property
     def mirror(self):
         """
         Determines if the axis lines or/and ticks are mirrored to the
@@ -891,6 +921,29 @@ class XAxis(_BaseLayoutHierarchyType):
         self["mirror"] = val
 
     @property
+    def modebardisable(self):
+        """
+        Disables certain modebar buttons for this axis. "autoscale"
+        disables the autoscale buttons, "zoominout" disables the zoom-
+        in and zoom-out buttons.
+
+        The 'modebardisable' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['autoscale', 'zoominout'] joined with '+' characters
+            (e.g. 'autoscale+zoominout')
+            OR exactly one of ['none'] (e.g. 'none')
+
+        Returns
+        -------
+        Any
+        """
+        return self["modebardisable"]
+
+    @modebardisable.setter
+    def modebardisable(self, val):
+        self["modebardisable"] = val
+
+    @property
     def nticks(self):
         """
         Specifies the maximum number of ticks for the particular axis.
@@ -898,7 +951,7 @@ class XAxis(_BaseLayoutHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -1163,8 +1216,8 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1183,8 +1236,8 @@ class XAxis(_BaseLayoutHierarchyType):
         category levels of this axis. Only has an effect on
         "multicategory" axes.
 
-        The 'showdividers' property must be specified as a bool
-        (either True, or False)
+        The 'showdividers' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1224,8 +1277,8 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1242,8 +1295,8 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not a line bounding this axis is drawn.
 
-        The 'showline' property must be specified as a bool
-        (either True, or False)
+        The 'showline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1262,8 +1315,8 @@ class XAxis(_BaseLayoutHierarchyType):
         this axis. Note: This only takes affect when hovermode =
         closest
 
-        The 'showspikes' property must be specified as a bool
-        (either True, or False)
+        The 'showspikes' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1280,8 +1333,8 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the tick labels are drawn.
 
-        The 'showticklabels' property must be specified as a bool
-        (either True, or False)
+        The 'showticklabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1635,7 +1688,7 @@ class XAxis(_BaseLayoutHierarchyType):
         ends with each major tick instead of the period that begins
         there.
 
-        The 'ticklabelindex' property is a integer and may be specified as:
+        The 'ticklabelindex' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
           - A tuple, list, or one-dimensional numpy array of the above
 
@@ -1716,12 +1769,13 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def ticklabelposition(self):
         """
-        Determines where tick labels are drawn with respect to the axis
-        Please note that top or bottom has no effect on x axes or when
-        `ticklabelmode` is set to "period". Similarly left or right has
-        no effect on y axes or when `ticklabelmode` is set to "period".
-        Has no effect on "multicategory" axes or when `tickson` is set
-        to "boundaries". When used on axes linked by `matches` or
+        Determines where tick labels are drawn with respect to the
+        axis. Please note that top or bottom has no effect on x axes or
+        when `ticklabelmode` is set to "period" or when `tickson` is
+        set to "boundaries". Similarly, left or right has no effect on
+        y axes or when `ticklabelmode` is set to "period" or when
+        `tickson` is set to "boundaries". Has no effect on
+        "multicategory" axes. When used on axes linked by `matches` or
         `scaleanchor`, no extra padding for inside labels would be
         added by autorange, so that the scales could match.
 
@@ -1748,7 +1802,7 @@ class XAxis(_BaseLayoutHierarchyType):
         parallel to the axis. Positive values move the labels in the
         positive direction of the axis.
 
-        The 'ticklabelshift' property is a integer and may be specified as:
+        The 'ticklabelshift' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1774,7 +1828,7 @@ class XAxis(_BaseLayoutHierarchyType):
         the outside. If the negative value is large enough, inside
         ticks can even end up outside and vice versa.
 
-        The 'ticklabelstandoff' property is a integer and may be specified as:
+        The 'ticklabelstandoff' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1797,7 +1851,7 @@ class XAxis(_BaseLayoutHierarchyType):
         which labels are shown. Not implemented for axes with `type`
         "log" or "multicategory", or when `tickmode` is "array".
 
-        The 'ticklabelstep' property is a integer and may be specified as:
+        The 'ticklabelstep' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -2092,14 +2146,33 @@ class XAxis(_BaseLayoutHierarchyType):
         self["uirevision"] = val
 
     @property
+    def unifiedhovertitle(self):
+        """
+        The 'unifiedhovertitle' property is an instance of Unifiedhovertitle
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Unifiedhovertitle`
+          - A dict of string/value properties that will be passed
+            to the Unifiedhovertitle constructor
+
+        Returns
+        -------
+        plotly.graph_objs.layout.xaxis.Unifiedhovertitle
+        """
+        return self["unifiedhovertitle"]
+
+    @unifiedhovertitle.setter
+    def unifiedhovertitle(self, val):
+        self["unifiedhovertitle"] = val
+
+    @property
     def visible(self):
         """
         A single toggle to hide the axis while preserving interaction
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -2118,8 +2191,8 @@ class XAxis(_BaseLayoutHierarchyType):
         of this axis. If True, the zero line is drawn on top of the
         grid lines.
 
-        The 'zeroline' property must be specified as a bool
-        (either True, or False)
+        The 'zeroline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -2152,6 +2225,30 @@ class XAxis(_BaseLayoutHierarchyType):
     @zerolinecolor.setter
     def zerolinecolor(self, val):
         self["zerolinecolor"] = val
+
+    @property
+    def zerolinelayer(self):
+        """
+        Sets the layer on which this zeroline is displayed. If *above
+        traces*, this zeroline is displayed above all the subplot's
+        traces If *below traces*, this zeroline is displayed below all
+        the subplot's traces, but above the grid lines. Limitation:
+        "zerolinelayer" currently has no effect if the "zorder"
+        property is set on any trace.
+
+        The 'zerolinelayer' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['above traces', 'below traces']
+
+        Returns
+        -------
+        Any
+        """
+        return self["zerolinelayer"]
+
+    @zerolinelayer.setter
+    def zerolinelayer(self, val):
+        self["zerolinelayer"] = val
 
     @property
     def zerolinewidth(self):
@@ -2293,7 +2390,13 @@ class XAxis(_BaseLayoutHierarchyType):
             For example, consider the number 1,000,000,000. If
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
-            script). If "SI", 1G. If "B", 1B.
+            script). If "SI", 1G. If "B", 1B. "SI" uses prefixes
+            from "femto" f (10^-15) to "tera" T (10^12). *SI
+            extended* covers instead the full SI range from
+            "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or
+            *SI extended* is used and the exponent is beyond the
+            above ranges, the formatting rule will automatically be
+            switched to the power notation.
         fixedrange
             Determines whether or not this axis is zoom-able. If
             true, then zoom is disabled.
@@ -2367,6 +2470,11 @@ class XAxis(_BaseLayoutHierarchyType):
         minor
             :class:`plotly.graph_objects.layout.xaxis.Minor`
             instance or dict with compatible properties
+        minorloglabels
+            Determines how minor log labels are displayed. If
+            *small digits*, small digits i.e. 2 or 5 are displayed.
+            If "complete", complete digits are displayed. If
+            "none", no labels are displayed.
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -2375,6 +2483,10 @@ class XAxis(_BaseLayoutHierarchyType):
             "all", axis lines are mirrored on all shared-axes
             subplots. If "allticks", axis lines and ticks are
             mirrored on all shared-axes subplots.
+        modebardisable
+            Disables certain modebar buttons for this axis.
+            "autoscale" disables the autoscale buttons, "zoominout"
+            disables the zoom-in and zoom-out buttons.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -2582,12 +2694,13 @@ class XAxis(_BaseLayoutHierarchyType):
             cases the default is *hide past div*.
         ticklabelposition
             Determines where tick labels are drawn with respect to
-            the axis Please note that top or bottom has no effect
-            on x axes or when `ticklabelmode` is set to "period".
-            Similarly left or right has no effect on y axes or when
-            `ticklabelmode` is set to "period". Has no effect on
-            "multicategory" axes or when `tickson` is set to
-            "boundaries". When used on axes linked by `matches` or
+            the axis. Please note that top or bottom has no effect
+            on x axes or when `ticklabelmode` is set to "period" or
+            when `tickson` is set to "boundaries". Similarly, left
+            or right has no effect on y axes or when
+            `ticklabelmode` is set to "period" or when `tickson` is
+            set to "boundaries". Has no effect on "multicategory"
+            axes. When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
         ticklabelshift
@@ -2668,6 +2781,9 @@ class XAxis(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in axis
             `range`, `autorange`, and `title` if in `editable:
             true` configuration. Defaults to `layout.uirevision`.
+        unifiedhovertitle
+            :class:`plotly.graph_objects.layout.xaxis.Unifiedhovert
+            itle` instance or dict with compatible properties
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -2678,6 +2794,14 @@ class XAxis(_BaseLayoutHierarchyType):
             on top of the grid lines.
         zerolinecolor
             Sets the line color of the zero line.
+        zerolinelayer
+            Sets the layer on which this zeroline is displayed. If
+            *above traces*, this zeroline is displayed above all
+            the subplot's traces If *below traces*, this zeroline
+            is displayed below all the subplot's traces, but above
+            the grid lines. Limitation: "zerolinelayer" currently
+            has no effect if the "zorder" property is set on any
+            trace.
         zerolinewidth
             Sets the width (in px) of the zero line.
         """
@@ -2718,7 +2842,9 @@ class XAxis(_BaseLayoutHierarchyType):
         minallowed=None,
         minexponent=None,
         minor=None,
+        minorloglabels=None,
         mirror=None,
+        modebardisable=None,
         nticks=None,
         overlaying=None,
         position=None,
@@ -2774,9 +2900,11 @@ class XAxis(_BaseLayoutHierarchyType):
         title=None,
         type=None,
         uirevision=None,
+        unifiedhovertitle=None,
         visible=None,
         zeroline=None,
         zerolinecolor=None,
+        zerolinelayer=None,
         zerolinewidth=None,
         **kwargs,
     ):
@@ -2907,7 +3035,13 @@ class XAxis(_BaseLayoutHierarchyType):
             For example, consider the number 1,000,000,000. If
             "none", it appears as 1,000,000,000. If "e", 1e+9. If
             "E", 1E+9. If "power", 1x10^9 (with 9 in a super
-            script). If "SI", 1G. If "B", 1B.
+            script). If "SI", 1G. If "B", 1B. "SI" uses prefixes
+            from "femto" f (10^-15) to "tera" T (10^12). *SI
+            extended* covers instead the full SI range from
+            "quecto" q (10^-30) to "quetta" Q (10^30). If "SI" or
+            *SI extended* is used and the exponent is beyond the
+            above ranges, the formatting rule will automatically be
+            switched to the power notation.
         fixedrange
             Determines whether or not this axis is zoom-able. If
             true, then zoom is disabled.
@@ -2981,6 +3115,11 @@ class XAxis(_BaseLayoutHierarchyType):
         minor
             :class:`plotly.graph_objects.layout.xaxis.Minor`
             instance or dict with compatible properties
+        minorloglabels
+            Determines how minor log labels are displayed. If
+            *small digits*, small digits i.e. 2 or 5 are displayed.
+            If "complete", complete digits are displayed. If
+            "none", no labels are displayed.
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -2989,6 +3128,10 @@ class XAxis(_BaseLayoutHierarchyType):
             "all", axis lines are mirrored on all shared-axes
             subplots. If "allticks", axis lines and ticks are
             mirrored on all shared-axes subplots.
+        modebardisable
+            Disables certain modebar buttons for this axis.
+            "autoscale" disables the autoscale buttons, "zoominout"
+            disables the zoom-in and zoom-out buttons.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -3196,12 +3339,13 @@ class XAxis(_BaseLayoutHierarchyType):
             cases the default is *hide past div*.
         ticklabelposition
             Determines where tick labels are drawn with respect to
-            the axis Please note that top or bottom has no effect
-            on x axes or when `ticklabelmode` is set to "period".
-            Similarly left or right has no effect on y axes or when
-            `ticklabelmode` is set to "period". Has no effect on
-            "multicategory" axes or when `tickson` is set to
-            "boundaries". When used on axes linked by `matches` or
+            the axis. Please note that top or bottom has no effect
+            on x axes or when `ticklabelmode` is set to "period" or
+            when `tickson` is set to "boundaries". Similarly, left
+            or right has no effect on y axes or when
+            `ticklabelmode` is set to "period" or when `tickson` is
+            set to "boundaries". Has no effect on "multicategory"
+            axes. When used on axes linked by `matches` or
             `scaleanchor`, no extra padding for inside labels would
             be added by autorange, so that the scales could match.
         ticklabelshift
@@ -3282,6 +3426,9 @@ class XAxis(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in axis
             `range`, `autorange`, and `title` if in `editable:
             true` configuration. Defaults to `layout.uirevision`.
+        unifiedhovertitle
+            :class:`plotly.graph_objects.layout.xaxis.Unifiedhovert
+            itle` instance or dict with compatible properties
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -3292,6 +3439,14 @@ class XAxis(_BaseLayoutHierarchyType):
             on top of the grid lines.
         zerolinecolor
             Sets the line color of the zero line.
+        zerolinelayer
+            Sets the layer on which this zeroline is displayed. If
+            *above traces*, this zeroline is displayed above all
+            the subplot's traces If *below traces*, this zeroline
+            is displayed below all the subplot's traces, but above
+            the grid lines. Limitation: "zerolinelayer" currently
+            has no effect if the "zorder" property is set on any
+            trace.
         zerolinewidth
             Sets the width (in px) of the zero line.
 
@@ -3311,12 +3466,10 @@ class XAxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.XAxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.XAxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.XAxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
@@ -3354,7 +3507,9 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         self._set_property("minallowed", arg, minallowed)
         self._set_property("minexponent", arg, minexponent)
         self._set_property("minor", arg, minor)
+        self._set_property("minorloglabels", arg, minorloglabels)
         self._set_property("mirror", arg, mirror)
+        self._set_property("modebardisable", arg, modebardisable)
         self._set_property("nticks", arg, nticks)
         self._set_property("overlaying", arg, overlaying)
         self._set_property("position", arg, position)
@@ -3410,9 +3565,11 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         self._set_property("title", arg, title)
         self._set_property("type", arg, type)
         self._set_property("uirevision", arg, uirevision)
+        self._set_property("unifiedhovertitle", arg, unifiedhovertitle)
         self._set_property("visible", arg, visible)
         self._set_property("zeroline", arg, zeroline)
         self._set_property("zerolinecolor", arg, zerolinecolor)
+        self._set_property("zerolinelayer", arg, zerolinelayer)
         self._set_property("zerolinewidth", arg, zerolinewidth)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from ._tickfont import Tickfont
     from ._tickformatstop import Tickformatstop
     from ._title import Title
+    from ._unifiedhovertitle import Unifiedhovertitle
     from . import rangeselector
     from . import rangeslider
     from . import title
@@ -28,5 +29,6 @@ else:
             "._tickfont.Tickfont",
             "._tickformatstop.Tickformatstop",
             "._title.Title",
+            "._unifiedhovertitle.Unifiedhovertitle",
         ],
     )

@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Cluster(_BaseTraceHierarchyType):
-
     _parent_path_str = "scattermap"
     _path_str = "scattermap.cluster"
     _valid_props = {
@@ -68,8 +67,8 @@ class Cluster(_BaseTraceHierarchyType):
         """
         Determines whether clustering is enabled or disabled.
 
-        The 'enabled' property must be specified as a bool
-        (either True, or False)
+        The 'enabled' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -321,12 +320,10 @@ class Cluster(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scattermap.Cluster
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scattermap.Cluster`"""
-            )
+an instance of :class:`plotly.graph_objs.scattermap.Cluster`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

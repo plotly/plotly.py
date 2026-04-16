@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Layer(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.map"
     _path_str = "layout.map.layer"
     _valid_props = {
@@ -380,7 +379,7 @@ class Layer(_BaseLayoutHierarchyType):
         with Point GeoJSON geometries. With `sourcetype` set to
         "vector", the following values are allowed:  "circle", "line",
         "fill" and "symbol". With `sourcetype` set to "raster" or
-        `*image*`, only the "raster" value is allowed.
+        "image", only the "raster" value is allowed.
 
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -401,8 +400,8 @@ class Layer(_BaseLayoutHierarchyType):
         """
         Determines whether this layer is displayed
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -511,7 +510,7 @@ class Layer(_BaseLayoutHierarchyType):
             geometries. With `sourcetype` set to "vector", the
             following values are allowed:  "circle", "line", "fill"
             and "symbol". With `sourcetype` set to "raster" or
-            `*image*`, only the "raster" value is allowed.
+            "image", only the "raster" value is allowed.
         visible
             Determines whether this layer is displayed
         """
@@ -642,7 +641,7 @@ class Layer(_BaseLayoutHierarchyType):
             geometries. With `sourcetype` set to "vector", the
             following values are allowed:  "circle", "line", "fill"
             and "symbol". With `sourcetype` set to "raster" or
-            `*image*`, only the "raster" value is allowed.
+            "image", only the "raster" value is allowed.
         visible
             Determines whether this layer is displayed
 
@@ -662,12 +661,10 @@ class Layer(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.map.Layer
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.map.Layer`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.map.Layer`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

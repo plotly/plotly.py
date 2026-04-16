@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Title(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.title"
     _valid_props = {
@@ -38,8 +37,8 @@ class Title(_BaseLayoutHierarchyType):
         allowed y values. Invalid values will be reset to the default
         1.
 
-        The 'automargin' property must be specified as a bool
-        (either True, or False)
+        The 'automargin' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -428,12 +427,10 @@ class Title(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Title
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Title`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Title`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

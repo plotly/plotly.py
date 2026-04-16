@@ -151,7 +151,7 @@ Light24_r = Light24[::-1]
 Plotly_r = Plotly[::-1]
 T10_r = T10[::-1]
 
-from .colorbrewer import (  # noqa: F401
+from .colorbrewer import (  # noqa: E402 F401
     Set1,
     Pastel1,
     Dark2,
@@ -165,7 +165,7 @@ from .colorbrewer import (  # noqa: F401
     Pastel2_r,
     Set3_r,
 )
-from .carto import (  # noqa: F401
+from .carto import (  # noqa: E402 F401
     Antique,
     Bold,
     Pastel,

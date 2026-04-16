@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Coloraxis(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.coloraxis"
     _valid_props = {
@@ -31,8 +30,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -52,8 +51,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         array(s)) or the bounds set in `cmin` and `cmax` Defaults to
         `false` when `cmin` and `cmax` are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -203,8 +202,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -222,8 +221,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -376,12 +375,10 @@ class Coloraxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Coloraxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Coloraxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Coloraxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

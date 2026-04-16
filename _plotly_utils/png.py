@@ -269,7 +269,7 @@ def check_palette(palette):
         for x in t:
             if int(x) != x or not (0 <= x <= 255):
                 raise ProtocolError(
-                    "palette entry %d: " "values must be integer: 0 <= x <= 255" % i
+                    "palette entry %d: values must be integer: 0 <= x <= 255" % i
                 )
     return p
 
@@ -350,7 +350,7 @@ class ChunkError(FormatError):
 
 
 class Default:
-    """The default for the greyscale paramter."""
+    """The default for the greyscale parameter."""
 
 
 class Writer:
@@ -842,7 +842,7 @@ class Writer:
         """
 
         if self.interlace:
-            if type(pixels) != array:
+            if not isarray(pixels):
                 # Coerce to array type
                 fmt = "BH"[self.bitdepth > 8]
                 pixels = array(fmt, pixels)

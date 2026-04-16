@@ -1,3 +1,5 @@
+# ruff: noqa: F401
+
 from _plotly_utils.importers import relative_import
 from typing import TYPE_CHECKING
 
@@ -15,7 +17,7 @@ if TYPE_CHECKING:
     from ._html import to_html, write_html
     from ._renderers import renderers, show
     from . import base_renderers
-    from ._kaleido import defaults
+    from ._kaleido import defaults, get_chrome
 
     __all__ = [
         "to_image",
@@ -36,6 +38,7 @@ if TYPE_CHECKING:
         "base_renderers",
         "full_figure_for_development",
         "defaults",
+        "get_chrome",
     ]
 else:
     __all__, __getattr__, __dir__ = relative_import(
@@ -57,10 +60,11 @@ else:
             "._renderers.renderers",
             "._renderers.show",
             "._kaleido.defaults",
+            "._kaleido.get_chrome",
         ],
     )
 
-    # Set default template (for < 3.7 this is done in ploty/__init__.py)
+    # Set default template (for < 3.7 this is done in plotly/__init__.py)
     from plotly.io import templates
 
     templates._default = "plotly"

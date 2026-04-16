@@ -2,7 +2,7 @@ import plotly.colors as clrs
 from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
-from plotly.validators.heatmap import ColorscaleValidator
+from plotly.validator_cache import ValidatorCache
 
 # Optional imports, may be None for users that only use our core functionality.
 np = optional_imports.get_module("numpy")
@@ -25,7 +25,7 @@ def validate_annotated_heatmap(z, x, y, annotation_text):
         for lst in range(len(z)):
             if len(z[lst]) != len(annotation_text[lst]):
                 raise exceptions.PlotlyError(
-                    "z and text should have the " "same dimensions"
+                    "z and text should have the same dimensions"
                 )
 
     if x:
@@ -102,7 +102,7 @@ def create_annotated_heatmap(
     validate_annotated_heatmap(z, x, y, annotation_text)
 
     # validate colorscale
-    colorscale_validator = ColorscaleValidator()
+    colorscale_validator = ValidatorCache.get_validator("heatmap", "colorscale")
     colorscale = colorscale_validator.validate_coerce(colorscale)
 
     annotations = _AnnotatedHeatmap(
@@ -173,7 +173,6 @@ class _AnnotatedHeatmap(object):
     def __init__(
         self, z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
     ):
-
         self.z = z
         if x:
             self.x = x
@@ -261,7 +260,6 @@ class _AnnotatedHeatmap(object):
             min_text_color = black
             max_text_color = white
         elif isinstance(self.colorscale, list):
-
             min_col = to_rgb_color_list(self.colorscale[0][1], [255, 255, 255])
             max_col = to_rgb_color_list(self.colorscale[-1][1], [255, 255, 255])
 

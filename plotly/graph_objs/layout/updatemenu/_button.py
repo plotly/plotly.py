@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Button(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.updatemenu"
     _path_str = "layout.updatemenu.button"
     _valid_props = {
@@ -78,8 +77,8 @@ class Button(_BaseLayoutHierarchyType):
         automatically binding to the state of the plot through the
         specification of `method` and `args`.
 
-        The 'execute' property must be specified as a bool
-        (either True, or False)
+        The 'execute' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -189,8 +188,8 @@ class Button(_BaseLayoutHierarchyType):
         """
         Determines whether or not this button is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -340,12 +339,10 @@ class Button(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.updatemenu.Button
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

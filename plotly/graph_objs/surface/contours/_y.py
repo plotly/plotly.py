@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Y(_BaseTraceHierarchyType):
-
     _parent_path_str = "surface.contours"
     _path_str = "surface.contours.y"
     _valid_props = {
@@ -70,8 +69,8 @@ class Y(_BaseTraceHierarchyType):
         Determines whether or not contour lines about the y dimension
         are highlighted on hover.
 
-        The 'highlight' property must be specified as a bool
-        (either True, or False)
+        The 'highlight' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -148,8 +147,8 @@ class Y(_BaseTraceHierarchyType):
         Determines whether or not contour lines about the y dimension
         are drawn.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -204,8 +203,8 @@ class Y(_BaseTraceHierarchyType):
         An alternate to "color". Determines whether or not the contour
         lines are colored using the trace "colorscale".
 
-        The 'usecolormap' property must be specified as a bool
-        (either True, or False)
+        The 'usecolormap' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -340,12 +339,10 @@ class Y(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.surface.contours.Y
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.surface.contours.Y`"""
-            )
+an instance of :class:`plotly.graph_objs.surface.contours.Y`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

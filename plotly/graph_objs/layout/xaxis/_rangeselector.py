@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Rangeselector(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.xaxis"
     _path_str = "layout.xaxis.rangeselector"
     _valid_props = {
@@ -183,8 +182,8 @@ class Rangeselector(_BaseLayoutHierarchyType):
         that range selectors are only available for x axes of `type`
         set to or auto-typed to "date".
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -404,12 +403,10 @@ class Rangeselector(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeselector
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

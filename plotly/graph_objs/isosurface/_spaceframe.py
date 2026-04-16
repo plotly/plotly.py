@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Spaceframe(_BaseTraceHierarchyType):
-
     _parent_path_str = "isosurface"
     _path_str = "isosurface.spaceframe"
     _valid_props = {"fill", "show"}
@@ -40,8 +39,8 @@ class Spaceframe(_BaseTraceHierarchyType):
         iso-values. Often useful when either caps or surfaces are
         disabled or filled with values less than 1.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -109,12 +108,10 @@ class Spaceframe(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.isosurface.Spaceframe
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.Spaceframe`"""
-            )
+an instance of :class:`plotly.graph_objs.isosurface.Spaceframe`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

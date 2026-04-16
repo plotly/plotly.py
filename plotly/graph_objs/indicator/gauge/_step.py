@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Step(_BaseTraceHierarchyType):
-
     _parent_path_str = "indicator.gauge"
     _path_str = "indicator.gauge.step"
     _valid_props = {"color", "line", "name", "range", "templateitemname", "thickness"}
@@ -245,12 +244,10 @@ class Step(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.gauge.Step
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.gauge.Step`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.gauge.Step`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

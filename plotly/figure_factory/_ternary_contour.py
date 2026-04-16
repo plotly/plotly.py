@@ -3,10 +3,10 @@ from plotly.graph_objs import graph_objs as go
 from plotly import exceptions
 from plotly import optional_imports
 
+from skimage import measure
+
 np = optional_imports.get_module("numpy")
 scipy_interp = optional_imports.get_module("scipy.interpolate")
-
-from skimage import measure
 
 # -------------------------- Layout ------------------------------
 
@@ -164,7 +164,7 @@ def _prepare_barycentric_coord(b_coords):
     b_coords = np.asarray(b_coords)
     if b_coords.shape[0] not in (2, 3):
         raise ValueError(
-            "A point should have  2 (a, b) or 3 (a, b, c)" "barycentric coordinates"
+            "A point should have  2 (a, b) or 3 (a, b, c)barycentric coordinates"
         )
     if (
         (len(b_coords) == 3)
@@ -219,11 +219,6 @@ def _compute_grid(coordinates, values, interp_mode="ilr"):
     grid_z = scipy_interp.griddata(
         coord_points[:2].T, values, (grid_x, grid_y), method="cubic"
     )
-    grid_z_other = scipy_interp.griddata(
-        coord_points[:2].T, values, (grid_x, grid_y), method="nearest"
-    )
-    # mask_nan = np.isnan(grid_z)
-    # grid_z[mask_nan] = grid_z_other[mask_nan]
     return grid_z, gr_x, gr_y
 
 
@@ -387,7 +382,7 @@ def _contour_trace(
     ncontours=None,
     colorscale="Electric",
     linecolor="rgb(150,150,150)",
-    interp_mode="llr",
+    interp_mode="ilr",
     coloring=None,
     v_min=0,
     v_max=1,
@@ -439,7 +434,7 @@ def _contour_trace(
     else:
         colors = [linecolor] * ncontours
 
-        # Retrieve all contours
+    # Retrieve all contours
     all_contours, all_values, all_areas, all_colors = _extract_contours(
         z, values, colors
     )

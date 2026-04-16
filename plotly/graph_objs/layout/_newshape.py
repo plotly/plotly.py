@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Newshape(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.newshape"
     _valid_props = {
@@ -146,9 +145,9 @@ class Newshape(_BaseLayoutHierarchyType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -302,8 +301,8 @@ class Newshape(_BaseLayoutHierarchyType):
         """
         Determines whether or not new shape is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -517,12 +516,10 @@ class Newshape(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Newshape
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Newshape`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Newshape`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

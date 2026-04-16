@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Marker(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatterpolar"
     _path_str = "scatterpolar.marker"
     _valid_props = {
@@ -111,8 +110,8 @@ class Marker(_BaseTraceHierarchyType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -134,8 +133,8 @@ class Marker(_BaseTraceHierarchyType):
         to `false` when `marker.cmin` and `marker.cmax` are set by the
         user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -250,9 +249,9 @@ class Marker(_BaseTraceHierarchyType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -455,8 +454,8 @@ class Marker(_BaseTraceHierarchyType):
         `marker.cmin` will correspond to the last color in the array
         and `marker.cmax` will correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -475,8 +474,8 @@ class Marker(_BaseTraceHierarchyType):
         trace. Has an effect only if in `marker.color` is set to a
         numerical array.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1090,12 +1089,10 @@ class Marker(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatterpolar.Marker
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatterpolar.Marker`"""
-            )
+an instance of :class:`plotly.graph_objs.scatterpolar.Marker`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

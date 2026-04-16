@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Tickfont(_BaseTraceHierarchyType):
-
     _parent_path_str = "isosurface.colorbar"
     _path_str = "isosurface.colorbar.tickfont"
     _valid_props = {
@@ -190,7 +189,7 @@ class Tickfont(_BaseTraceHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is a integer and may be specified as:
+        The 'weight' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 1000]
             OR exactly one of ['normal', 'bold'] (e.g. 'bold')
@@ -314,12 +313,10 @@ class Tickfont(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.isosurface.colorbar.Tickfont
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.colorbar.Tickfont`"""
-            )
+an instance of :class:`plotly.graph_objs.isosurface.colorbar.Tickfont`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

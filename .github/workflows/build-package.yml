@@ -1,0 +1,86 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  plotlyjs-dev-build:
+    name: plotly.js dev build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: Set up Node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f  # v6.3.0
+        with:
+          node-version: "22"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57  # v8.0.0
+      - name: Install dependencies
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_optional
+      - name: Update plotly.js to dev
+        run: |
+          source .venv/bin/activate
+          python commands.py updateplotlyjsdev
+      - name: Test core (excluding nodev)
+        run: |
+          source .venv/bin/activate
+          pytest -k 'not nodev' tests/test_core
+      - name: Build source distribution packages
+        run: |
+          source .venv/bin/activate
+          uv sync --extra dev_build
+          python -m build --sdist --wheel -o dist
+      - name: Upload dist artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: plotlyjs-dev-build-dist
+          path: dist/
+          if-no-files-found: error
+
+  full-build:
+    name: Full prod build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: Set up Node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f  # v6.3.0
+        with:
+          node-version: "22"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57  # v8.0.0
+      - name: PyPI Build
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv sync --extra dev_build
+          cd js
+          npm ci
+          npm run build
+          cd ..
+          python -m build --sdist --wheel -o dist
+          cp -R dist output
+          git status
+      - name: Zip output
+        run: |
+          tar czf output.tgz output
+      - name: Upload output artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: full-build-output
+          path: output.tgz
+          if-no-files-found: error

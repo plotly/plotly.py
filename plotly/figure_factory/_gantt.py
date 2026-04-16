@@ -39,12 +39,13 @@ def validate_gantt(df):
                     "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
                 )
 
+        columns = {key: df[key].values for key in df}
         num_of_rows = len(df.index)
         chart = []
+        # Using only keys present in the DataFrame columns
+        keys = list(df.columns)
         for index in range(num_of_rows):
-            task_dict = {}
-            for key in df:
-                task_dict[key] = df.iloc[index][key]
+            task_dict = {key: columns[key][index] for key in keys}
             chart.append(task_dict)
 
         return chart
@@ -52,16 +53,16 @@ def validate_gantt(df):
     # validate if df is a list
     if not isinstance(df, list):
         raise exceptions.PlotlyError(
-            "You must input either a dataframe " "or a list of dictionaries."
+            "You must input either a dataframe or a list of dictionaries."
         )
 
     # validate if df is empty
     if len(df) <= 0:
         raise exceptions.PlotlyError(
-            "Your list is empty. It must contain " "at least one dictionary."
+            "Your list is empty. It must contain at least one dictionary."
         )
     if not isinstance(df[0], dict):
-        raise exceptions.PlotlyError("Your list must only " "include dictionaries.")
+        raise exceptions.PlotlyError("Your list must only include dictionaries.")
     return df
 
 

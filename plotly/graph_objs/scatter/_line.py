@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
-
     _parent_path_str = "scatter"
     _path_str = "scatter.line"
     _valid_props = {
@@ -135,8 +134,8 @@ class Line(_BaseTraceHierarchyType):
         that the number of points along the resulting SVG path is
         unaffected.
 
-        The 'simplify' property must be specified as a bool
-        (either True, or False)
+        The 'simplify' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -291,12 +290,10 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.scatter.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.scatter.Line`"""
-            )
+an instance of :class:`plotly.graph_objs.scatter.Line`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

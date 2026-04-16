@@ -2,6 +2,115 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+### Fixed
+- Fix issue where user-specified `color_continuous_scale` was ignored when template had `autocolorscale=True` [[#5439](https://github.com/plotly/plotly.py/pull/5439)], with thanks to @antonymilne for the contribution!
+- Update tests to be compatible with numpy 2.4 [[#5522](https://github.com/plotly/plotly.py/pull/5522)], with thanks to @thunze for the contribution!
+
+### Updated
+- The `__eq__` method for  `graph_objects` classes now returns `NotImplemented` to give the other operand an opportunity to handle the comparison [[#5547](https://github.com/plotly/plotly.py/pull/5547)], with thanks to @RazerM for the contribution!
+
+## [6.7.0] - 2026-04-09
+
+### Added
+- Add `facet_row` support to `px.imshow` for creating subplots along an additional dimension [[#5445](https://github.com/plotly/plotly.py/pull/5445)], with thanks to @FBumann for the contribution!
+
+### Fixed
+- Update `numpy.percentile` syntax to stop using deprecated alias [[#5483](https://github.com/plotly/plotly.py/pull/5483)], with thanks to @Mr-Neutr0n for the contribution!
+  - `numpy` with a version less than 1.22 is no longer supported.
+- Handle empty `px.histogram` by skipping `None` label in hover template [[#5535](https://github.com/plotly/plotly.py/pull/5535)], with thanks to @tysoncung for the contribution!
+
+### Updated
+- Update plotly.js from version 3.4.0 to version 3.5.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.5.0) for more information. [[#5565](https://github.com/plotly/plotly.py/pull/5565)]. Notable changes include:
+  - Add `hoveranywhere` and `clickanywhere` layout attributes to enable emitting hover and click events anywhere in the plot area, not just over traces [[#7707](https://github.com/plotly/plotly.js/pull/7707)]
+  - Add `displayNotifier` configuration property to set the display of notifier in the top right area of the viewport [[#7730](https://github.com/plotly/plotly.js/pull/7730)]
+  - Update USA location lookup for `scattergeo` and `choropleth` traces to use both location names and abbreviations [[#7731](https://github.com/plotly/plotly.js/pull/7731)]
+
+## [6.6.0] - 2026-03-02
+
+### Fixed
+- Remove unneeded `type="text/javascript"` attribute from `<style>` tag [[#5454](https://github.com/plotly/plotly.py/pull/5454)], with thanks to @hannob for the contribution!
+- Remove global warning format side effect [[#5481](https://github.com/plotly/plotly.py/pull/5481)], with thanks to @emmanuel-ferdman for the contribution!
+- Fix spurious engine deprecation warning in write_image [[#5517](https://github.com/plotly/plotly.py/pull/5517)], with thanks to @mosh3eb for the contribution!
+
+### Updated
+- Update plotly.js from version 3.3.1 to version 3.4.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.4.0) for more information. [[#5527](https://github.com/plotly/plotly.py/pull/5527)]. Notable changes include:
+  - Add support for clicking legend titles to toggle visibility of all traces in legend [[#7698](https://github.com/plotly/plotly.js/pull/7698)]
+  - Add support for shapes to reference multiple axes [[#7666](https://github.com/plotly/plotly.js/pull/7666)]
+  - Add support for dashed marker lines in scatter plots [[#7673](https://github.com/plotly/plotly.js/pull/7673)]
+  - Increase axis autorange when bar charts have outside text labels, to avoid labels being clipped [[#7675](https://github.com/plotly/plotly.js/pull/7675)]
+
+## [6.5.2] - 2026-01-14
+
+### Fixed
+- Fix issue where pie trace `legend`, `showlegend` attributes don't accept array values [[#5464](https://github.com/plotly/plotly.py/pull/5464) and [#5465](https://github.com/plotly/plotly.py/pull/5465)], with thanks to @my-tien for the contribution!
+
+## [6.5.1] - 2026-01-07
+
+### Fixed
+- Fix issue where Plotly Express ignored trace-specific color sequences defined in templates via `template.data.<trace_type>` [[#5437](https://github.com/plotly/plotly.py/pull/5437)], with thanks to @antonymilne for the contribution!
+
+### Updated
+- Speed up `validate_gantt` function [[#5386](https://github.com/plotly/plotly.py/pull/5386)], with thanks to @misrasaurabh1 for the contribution!
+- Update plotly.js from version 3.3.0 to version 3.3.1. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.3.1) for more information. [[#5456](https://github.com/plotly/plotly.py/pull/5456)]. Notable changes include:
+  - Add support for arrays for the pie properties `showlegend` and `legend`, so that these can be configured per slice. [[#7580](https://github.com/plotly/plotly.js/pull/7580)]
+
+## [6.5.0] - 2025-11-17
+
+### Updated
+- Update plotly.js from version 3.2.0 to version 3.3.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.3.0) for more information. [[#5421](https://github.com/plotly/plotly.py/pull/5421)]. Notable changes include:
+  - Add `hovertemplate` for `candlestick` and `ohlc` traces [[#7619](https://github.com/plotly/plotly.js/pull/7619)]
+
+### Fixed
+- Fix bug where numpy datetime contained in Python list was converted to integer [[#5415](https://github.com/plotly/plotly.py/pull/5415)]
+
+## [6.4.0] - 2025-11-02
+
+### Updated
+- Update plotly.js from version 3.1.1 to version 3.2.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5388)]. Notable changes include:
+  - Add `hovertemplatefallback` and `texttemplatefallback` attributes [[#7577](https://github.com/plotly/plotly.js/pull/7577)]
+  - Add "SI extended" formatting rule for tick exponents on axis labels, allowing values to be displayed with extended SI prefixes (e.g., femto, pico, atto) [[#7249](https://github.com/plotly/plotly.js/pull/7249)]
+
+### Deprecated
+- Deprecate `create_hexbin_mapbox` in favor of `create_hexbin_map`, update related function calls [[5358](https://github.com/plotly/plotly.py/pull/5358)], with thanks to @ajlien for the contribution!
+
+## [6.3.1] - 2025-10-02
+
+### Updated
+- Update Plotly.js from version 3.1.0 to version 3.1.1. See the Plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5357](https://github.com/plotly/plotly.py/pull/5357)]. Notable changes include:
+  - Fix issue preventing Scattergl plots with text elements from rendering [[plotly.js#7563](https://github.com/plotly/plotly.js/pull/7563)]
+- Use native legends when converting from matplotlib [[#5312](https://github.com/plotly/plotly.py/pull/5312)], with thanks to @robertoffmoura to the contribution!
+- Allow `shared_yaxes` to work with secondary axes [[#5180](https://github.com/plotly/plotly.py/pull/5180)], with thanks to @gmjw for the contribution!
+
+### Fixed
+- Fix issue where width/height in plot layout were not respected during Kaleido image export [[#5325](https://github.com/plotly/plotly.py/pull/5325)]
+- Fix typo in default argument to `_ternary_contour.py` [[#5315](https://github.com/plotly/plotly.py/pull/5315)], with thanks to @Lexachoc for the contribution!
+- Fix incorrect `fig.show()` behavior when `ipython` is installed [[#5258](https://github.com/plotly/plotly.py/pull/5258)]
+
+## [6.3.0] - 2025-08-12
+
+### Updated
+- Updated Plotly.js from version 3.0.1 to version 3.1.0. See the Plotly.js [release notes](https://github.com/plotly/plotly.js/releases) for more information. [[#5318](https://github.com/plotly/plotly.py/pull/5318)]
+
+### Added
+- Exposed `plotly.io.get_chrome()` as a function which can be called from within a Python script. [[#5282](https://github.com/plotly/plotly.py/pull/5282)]
+
+### Fixed
+- Resolved issue causing extraneous engine deprecation warnings [[#5287](https://github.com/plotly/plotly.py/pull/5287)], with thanks to @jdbeel for the contribution!
+
+## [6.2.0] - 2025-06-26
+
+### Added
+- Add SRI (Subresource Integrity) hash support for CDN script tags when using `include_plotlyjs='cdn'`. This enhances security by ensuring browser verification of CDN-served plotly.js files [[#5165](https://github.com/plotly/plotly.py/pull/5165)] (with thanks to @ddworken)
+
+### Fixed
+- Allow setting Plotly.js path via `pio.defaults` [[#5207](https://github.com/plotly/plotly.py/pull/5207)]
+
+### Changed
+- Refactor validation code to reduce bundle size [[#5214](https://github.com/plotly/plotly.py/pull/5214)] (with thanks to @bmaranville)
+- Add deprecation warnings when using Kaleido v0 or deprecated image export features [[#5177](https://github.com/plotly/plotly.py/pull/5236)]
+
 ## [6.1.2] - 2025-05-27
 
 ### Fixed
@@ -708,7 +817,7 @@ Items in this section may be considered backwards-incompatible changes for the p
     - if either `x` or `y` (but not both) may now be provided as a list of column references into `data_frame` or columns of data, in which case the imputed data frame will be treated as "wide" data and `melt()`ed internally before applying the usual mapping rules, with function-specific defaults.
     - if neither `x` nor `y` is provided but `data_frame` is, the data frame will be treated as "wide" with defaults depending on the value of `orientation` (and `orientation` has accordingly been added to `scatter`, `line`, `density_heatmap`, and `density_contour` for this purpose). Previously this would have resulted in an empty figure.
     - if both `x` and `y` are provided to `histogram`, and if `x`, `y` and `z` are provided to `density_heatmap` or `density_contour`, then `histfunc` now defaults to `sum` so as to avoid ignoring the provided data, and to cause `histogram` and `bar` to behave more similarly.
-    - `violinmode`, `boxmode` and `stripmode` now default to `overlay` if `x` (`y`) in in `v` (`h`) orientation is also mapped to `color`, to avoid strange spacing issues with the previous default of `group` in all cases.
+    - `violinmode`, `boxmode` and `stripmode` now default to `overlay` if `x` (`y`) in `v` (`h`) orientation is also mapped to `color`, to avoid strange spacing issues with the previous default of `group` in all cases.
 - The Plotly Express arguments `color_discrete_map`, `symbol_map` and `line_dash_map` now accept the string `"identity"` which causes the corresponding input data to be used as-is rather than mapped into `color_discrete_sequence`, `symbol_sequence` or `line_dash_sequence`, respectively. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
 - Plotly Express now accepts `px.Constant` or `px.Range` objects in the place of column references so as to express constant or increasing integer values. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
 

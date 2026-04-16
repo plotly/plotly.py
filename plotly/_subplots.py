@@ -360,9 +360,7 @@ def make_subplots(
         raise ValueError(
             """
 The 'rows' argument to make_subplots must be an int greater than 0.
-    Received value of type {typ}: {val}""".format(
-                typ=type(rows), val=repr(rows)
-            )
+    Received value of type {typ}: {val}""".format(typ=type(rows), val=repr(rows))
         )
 
     #  ### cols ###
@@ -370,9 +368,7 @@ The 'rows' argument to make_subplots must be an int greater than 0.
         raise ValueError(
             """
 The 'cols' argument to make_subplots must be an int greater than 0.
-    Received value of type {typ}: {val}""".format(
-                typ=type(cols), val=repr(cols)
-            )
+    Received value of type {typ}: {val}""".format(typ=type(cols), val=repr(cols))
         )
 
     # ### start_cell ###
@@ -472,9 +468,7 @@ dimensions ({rows} x {cols}).
                     """
 The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
      'secondary_y' is only supported for subplots of type 'xy'
-""".format(
-                        s_typ=spec["type"]
-                    )
+""".format(s_typ=spec["type"])
                 )
 
     # ### insets ###
@@ -486,9 +480,7 @@ The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
         raise ValueError(
             """
 The 'insets' argument to make_subplots must be a list of dictionaries.
-    Received value of type {typ}: {val}""".format(
-                typ=type(insets), val=repr(insets)
-            )
+    Received value of type {typ}: {val}""".format(typ=type(insets), val=repr(insets))
         )
 
     if insets:
@@ -679,11 +671,11 @@ The row_titles argument to make_subplots must be a list or tuple
             # Throw exception if 'colspan' | 'rowspan' is too large for grid
             if c_spanned >= cols:
                 raise Exception(
-                    "Some 'colspan' value is too large for " "this subplot grid."
+                    "Some 'colspan' value is too large for this subplot grid."
                 )
             if r_spanned >= rows:
                 raise Exception(
-                    "Some 'rowspan' value is too large for " "this subplot grid."
+                    "Some 'rowspan' value is too large for this subplot grid."
                 )
 
             # Get x domain using grid and colspan
@@ -754,8 +746,19 @@ The row_titles argument to make_subplots must be a list or tuple
             )
             grid_ref[r][c] = subplot_refs
 
-    _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir)
-    _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir)
+    _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir, False)
+    _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir, False)
+
+    any_secondary_y = any(
+        spec["secondary_y"]
+        for spec_row in specs
+        for spec in spec_row
+        if spec is not None
+    )
+    if any_secondary_y:
+        _configure_shared_axes(
+            layout, grid_ref, specs, "y", shared_yaxes, row_dir, True
+        )
 
     # Build inset reference
     # ---------------------
@@ -887,7 +890,9 @@ The row_titles argument to make_subplots must be a list or tuple
     return figure
 
 
-def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
+def _configure_shared_axes(
+    layout, grid_ref, specs, x_or_y, shared, row_dir, secondary_y
+):
     rows = len(grid_ref)
     cols = len(grid_ref[0])
 
@@ -897,6 +902,13 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         rows_iter = range(rows - 1, -1, -1)
     else:
         rows_iter = range(rows)
+
+    if secondary_y:
+        cols_iter = range(cols - 1, -1, -1)
+        axis_index = 1
+    else:
+        cols_iter = range(cols)
+        axis_index = 0
 
     def update_axis_matches(first_axis_id, subplot_ref, spec, remove_label):
         if subplot_ref is None:
@@ -921,13 +933,15 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         return first_axis_id
 
     if shared == "columns" or (x_or_y == "x" and shared is True):
-        for c in range(cols):
+        for c in cols_iter:
             first_axis_id = None
             ok_to_remove_label = x_or_y == "x"
             for r in rows_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
                     first_axis_id, subplot_ref, spec, ok_to_remove_label
@@ -937,10 +951,12 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         for r in rows_iter:
             first_axis_id = None
             ok_to_remove_label = x_or_y == "y"
-            for c in range(cols):
+            for c in cols_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
                     first_axis_id, subplot_ref, spec, ok_to_remove_label
@@ -948,15 +964,17 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
 
     elif shared == "all":
         first_axis_id = None
-        for c in range(cols):
-            for ri, r in enumerate(rows_iter):
+        for ri, r in enumerate(rows_iter):
+            for c in cols_iter:
                 if not grid_ref[r][c]:
                     continue
-                subplot_ref = grid_ref[r][c][0]
+                if axis_index >= len(grid_ref[r][c]):
+                    continue
+                subplot_ref = grid_ref[r][c][axis_index]
                 spec = specs[r][c]
 
                 if x_or_y == "y":
-                    ok_to_remove_label = c > 0
+                    ok_to_remove_label = c < cols - 1 if secondary_y else c > 0
                 else:
                     ok_to_remove_label = ri > 0 if row_dir > 0 else r < rows - 1
 
@@ -1062,9 +1080,11 @@ def _init_subplot_domain(x_domain, y_domain):
 
 
 def _subplot_type_for_trace_type(trace_type):
-    from plotly.validators import DataValidator
+    from plotly.validator_cache import ValidatorCache
 
-    trace_validator = DataValidator()
+    DataValidator = ValidatorCache.get_validator("", "data")
+
+    trace_validator = DataValidator
     if trace_type in trace_validator.class_strs_map:
         # subplot_type is a trace name, find the subplot type for trace
         trace = trace_validator.validate_coerce([{"type": trace_type}])[0]
@@ -1373,13 +1393,9 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
 
 def _set_trace_grid_reference(trace, layout, grid_ref, row, col, secondary_y=False):
     if row <= 0:
-        raise Exception(
-            "Row value is out of range. " "Note: the starting cell is (1, 1)"
-        )
+        raise Exception("Row value is out of range. Note: the starting cell is (1, 1)")
     if col <= 0:
-        raise Exception(
-            "Col value is out of range. " "Note: the starting cell is (1, 1)"
-        )
+        raise Exception("Col value is out of range. Note: the starting cell is (1, 1)")
     try:
         subplot_refs = grid_ref[row - 1][col - 1]
     except IndexError:
@@ -1392,9 +1408,7 @@ def _set_trace_grid_reference(trace, layout, grid_ref, row, col, secondary_y=Fal
     if not subplot_refs:
         raise ValueError(
             """
-No subplot specified at grid position ({row}, {col})""".format(
-                row=row, col=col
-            )
+No subplot specified at grid position ({row}, {col})""".format(row=row, col=col)
         )
 
     if secondary_y:
@@ -1486,9 +1500,7 @@ The col argument to get_subplot must be an integer where 1 <= row <= {cols}
     else:
         raise ValueError(
             """
-Unexpected subplot type with layout_keys of {}""".format(
-                layout_keys
-            )
+Unexpected subplot type with layout_keys of {}""".format(layout_keys)
         )
 
 

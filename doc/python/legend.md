@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.1
+      jupytext_version: 1.19.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.10.11
+    version: 3.14.3
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -194,7 +194,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -250,6 +250,46 @@ fig.update_layout(legend=dict(
     xanchor="right",
     x=1
 ))
+
+fig.show()
+```
+
+#### Legend Max Height
+
+*New in 6.3*
+
+By default, a legend can expand to fill up to half of the layout area height for a horizontal legend and the full height for a vertical legend. You can change this by specifying a `maxheight` for the legend. `maxheight` is interpreted as a ratio if it is 1 or less, and as an exact pixel value if it is greater than 1. In the following plot with many legend items, we set `maxheight` to a ratio of 0.10, giving the plot more space.
+
+```python
+import plotly.express as px
+from plotly import data
+
+df = data.gapminder().query("year==2007 and continent == 'Europe'")
+
+fig = px.scatter(df,
+                 x="gdpPercap",
+                 y="lifeExp",
+                 color="country",
+                 size="pop",
+                 size_max=45,
+                 title="Life Expectancy vs. GDP per Capita in 2007 (by Country)",
+                 labels={"gdpPercap": "GDP per Capita"},
+                )
+
+fig.update_layout(
+    xaxis=dict(
+        side="top"
+    ),
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=-0.35,
+        xanchor="center",
+        x=0.5,
+        maxheight=0.1, # Comment maxheight to see legend take up 0.5 of plotting area
+        title_text="Country"
+    ),
+)
 
 fig.show()
 ```
@@ -791,6 +831,63 @@ fig = go.Figure(
 fig.show()
 
 ```
+
+### Legend Title Click Behavior
+
+*New in 6.6*
+
+When a figure has multiple legends:
+
+- Single-clicking a legend title toggles the visibility of all items in that legend
+- Double-clicking a legend title toggles the visibility of all items in other legends
+
+This default behavior can be changed for a legend by setting `titleclick` and `titledoubleclick`, which accept:
+- `"toggle"`: toggles the visibility of items in the clicked legend
+- `"toggleothers"`: toggles the visibility of items in other legends
+- `False`: disables click behavior
+
+For example, to swap the behaviors:
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    data=[
+        go.Scatter(x=[1, 2, 3], y=[1, 2, 3], name="Trace 1"),
+        go.Scatter(x=[1, 2, 3], y=[2, 3, 4], name="Trace 2"),
+        go.Scatter(x=[1, 2, 3], y=[3, 4, 5], name="Trace 3", legend="legend2"),
+        go.Scatter(x=[1, 2, 3], y=[4, 5, 6], name="Trace 4", legend="legend2"),
+    ],
+    layout=dict(
+        legend=dict(
+            title=dict(text="First Legend"),
+            titleclick="toggleothers",
+            titledoubleclick="toggle",
+        ),
+        legend2=dict(
+            title=dict(text="Second Legend"),
+            titleclick="toggleothers",
+            titledoubleclick="toggle",
+            y=0.5,
+        ),
+    ),
+)
+
+fig.show()
+```
+
+<!-- #region -->
+To disable title click behavior, set `titleclick` and `titledoubleclick` to `False`:
+
+```python
+fig.update_layout(
+    legend=dict(titleclick=False, titledoubleclick=False),
+    legend2=dict(titleclick=False, titledoubleclick=False),
+)
+```
+
+> **Note:** Legend title click interactions are not supported for legends containing pie or pie-like traces.
+<!-- #endregion -->
 
 #### Reference
 

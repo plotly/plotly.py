@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Diagonal(_BaseTraceHierarchyType):
-
     _parent_path_str = "splom"
     _path_str = "splom.diagonal"
     _valid_props = {"visible"}
@@ -17,8 +16,8 @@ class Diagonal(_BaseTraceHierarchyType):
         Determines whether or not subplots on the diagonal are
         displayed.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -68,12 +67,10 @@ class Diagonal(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.splom.Diagonal
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.splom.Diagonal`"""
-            )
+an instance of :class:`plotly.graph_objs.splom.Diagonal`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

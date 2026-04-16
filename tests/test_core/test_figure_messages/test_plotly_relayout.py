@@ -1,12 +1,8 @@
-import sys
 from unittest import TestCase
 
 import plotly.graph_objs as go
 
-if sys.version_info >= (3, 3):
-    from unittest.mock import MagicMock
-else:
-    from mock import MagicMock
+from unittest.mock import MagicMock
 
 
 class TestRelayoutMessage(TestCase):
@@ -42,7 +38,6 @@ class TestRelayoutMessage(TestCase):
         )
 
     def test_property_assignment_nested_array(self):
-
         # Initialize images
         self.figure.layout.updatemenus = [
             {},
@@ -131,7 +126,6 @@ class TestRelayoutMessage(TestCase):
         )
 
     def test_plotly_relayout_nested_array(self):
-
         # Initialize images
         self.figure.layout.updatemenus = [
             {},

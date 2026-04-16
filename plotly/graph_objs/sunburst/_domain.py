@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Domain(_BaseTraceHierarchyType):
-
     _parent_path_str = "sunburst"
     _path_str = "sunburst.domain"
     _valid_props = {"column", "row", "x", "y"}
@@ -17,7 +16,7 @@ class Domain(_BaseTraceHierarchyType):
         If there is a layout grid, use the domain for this column in
         the grid for this sunburst trace .
 
-        The 'column' property is a integer and may be specified as:
+        The 'column' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -37,7 +36,7 @@ class Domain(_BaseTraceHierarchyType):
         If there is a layout grid, use the domain for this row in the
         grid for this sunburst trace .
 
-        The 'row' property is a integer and may be specified as:
+        The 'row' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -155,12 +154,10 @@ class Domain(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.sunburst.Domain
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.sunburst.Domain`"""
-            )
+an instance of :class:`plotly.graph_objs.sunburst.Domain`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

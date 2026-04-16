@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Imaginaryaxis(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.smith"
     _path_str = "layout.smith.imaginaryaxis"
     _valid_props = {
@@ -249,8 +248,8 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -267,8 +266,8 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not a line bounding this axis is drawn.
 
-        The 'showline' property must be specified as a bool
-        (either True, or False)
+        The 'showline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -285,8 +284,8 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the tick labels are drawn.
 
-        The 'showticklabels' property must be specified as a bool
-        (either True, or False)
+        The 'showticklabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -549,8 +548,8 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -829,12 +828,10 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.smith.Imaginaryaxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.smith.Imaginaryaxis`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.smith.Imaginaryaxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

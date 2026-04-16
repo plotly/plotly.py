@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Surface(_BaseTraceHierarchyType):
-
     _parent_path_str = "isosurface"
     _path_str = "isosurface.surface"
     _valid_props = {"count", "fill", "pattern", "show"}
@@ -18,7 +17,7 @@ class Surface(_BaseTraceHierarchyType):
         iso-values. By default this value is 2 meaning that only
         minimum and maximum surfaces would be drawn.
 
-        The 'count' property is a integer and may be specified as:
+        The 'count' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -85,8 +84,8 @@ class Surface(_BaseTraceHierarchyType):
         """
         Hides/displays surfaces between minimum and maximum iso-values.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -178,12 +177,10 @@ class Surface(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.isosurface.Surface
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.isosurface.Surface`"""
-            )
+an instance of :class:`plotly.graph_objs.isosurface.Surface`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

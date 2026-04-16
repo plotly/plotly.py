@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Legend(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout"
     _path_str = "layout.legend"
     _valid_props = {
@@ -23,8 +22,11 @@ class Legend(_BaseLayoutHierarchyType):
         "itemdoubleclick",
         "itemsizing",
         "itemwidth",
+        "maxheight",
         "orientation",
         "title",
+        "titleclick",
+        "titledoubleclick",
         "tracegroupgap",
         "traceorder",
         "uirevision",
@@ -310,6 +312,32 @@ class Legend(_BaseLayoutHierarchyType):
         self["itemwidth"] = val
 
     @property
+    def maxheight(self):
+        """
+        Sets the max height (in px) of the legend, or max height ratio
+        (reference height * ratio) if less than or equal to 1. Default
+        value is: 0.5 for horizontal legends; 1 for vertical legends.
+        The minimum allowed height is 30px. For a ratio of 0.5, the
+        legend will take up to 50% of the reference height before
+        displaying a scrollbar. The reference height is the full layout
+        height with the following exception: vertically oriented
+        legends with a `yref` of `"paper", located to the side of the
+        plot. In this case, the reference height is the plot height.
+
+        The 'maxheight' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["maxheight"]
+
+    @maxheight.setter
+    def maxheight(self, val):
+        self["maxheight"] = val
+
+    @property
     def orientation(self):
         """
         Sets the orientation of the legend.
@@ -346,6 +374,55 @@ class Legend(_BaseLayoutHierarchyType):
     @title.setter
     def title(self, val):
         self["title"] = val
+
+    @property
+    def titleclick(self):
+        """
+        Determines the behavior on legend title click. "toggle" toggles
+        the visibility of all items in the legend. "toggleothers"
+        toggles the visibility of all other legends. False disables
+        legend title click interactions. Defaults to "toggle" when
+        there are multiple legends, False otherwise. Not supported for
+        legends containing pie and pie-like traces.
+
+        The 'titleclick' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['toggle', 'toggleothers', False]
+
+        Returns
+        -------
+        Any
+        """
+        return self["titleclick"]
+
+    @titleclick.setter
+    def titleclick(self, val):
+        self["titleclick"] = val
+
+    @property
+    def titledoubleclick(self):
+        """
+        Determines the behavior on legend title double-click. "toggle"
+        toggles the visibility of all items in the legend.
+        "toggleothers" toggles the visibility of all other legends.
+        False disables legend title double-click interactions. Defaults
+        to "toggleothers" when there are multiple legends, False
+        otherwise. Not supported for legends containing pie and pie-
+        like traces.
+
+        The 'titledoubleclick' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['toggle', 'toggleothers', False]
+
+        Returns
+        -------
+        Any
+        """
+        return self["titledoubleclick"]
+
+    @titledoubleclick.setter
+    def titledoubleclick(self, val):
+        self["titledoubleclick"] = val
 
     @property
     def tracegroupgap(self):
@@ -436,8 +513,8 @@ class Legend(_BaseLayoutHierarchyType):
         """
         Determines whether or not this legend is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -546,7 +623,7 @@ class Legend(_BaseLayoutHierarchyType):
     @property
     def yanchor(self):
         """
-        Sets the legend's vertical position anchor This anchor binds
+        Sets the legend's vertical position anchor. This anchor binds
         the `y` position to the "top", "middle" or "bottom" of the
         legend. Value "auto" anchors legends at their bottom for `y`
         values less than or equal to 1/3, anchors legends to at their
@@ -637,11 +714,39 @@ class Legend(_BaseLayoutHierarchyType):
         itemwidth
             Sets the width (in px) of the legend item symbols (the
             part other than the title.text).
+        maxheight
+            Sets the max height (in px) of the legend, or max
+            height ratio (reference height * ratio) if less than or
+            equal to 1. Default value is: 0.5 for horizontal
+            legends; 1 for vertical legends. The minimum allowed
+            height is 30px. For a ratio of 0.5, the legend will
+            take up to 50% of the reference height before
+            displaying a scrollbar. The reference height is the
+            full layout height with the following exception:
+            vertically oriented legends with a `yref` of `"paper",
+            located to the side of the plot. In this case, the
+            reference height is the plot height.
         orientation
             Sets the orientation of the legend.
         title
             :class:`plotly.graph_objects.layout.legend.Title`
             instance or dict with compatible properties
+        titleclick
+            Determines the behavior on legend title click. "toggle"
+            toggles the visibility of all items in the legend.
+            "toggleothers" toggles the visibility of all other
+            legends. False disables legend title click
+            interactions. Defaults to "toggle" when there are
+            multiple legends, False otherwise. Not supported for
+            legends containing pie and pie-like traces.
+        titledoubleclick
+            Determines the behavior on legend title double-click.
+            "toggle" toggles the visibility of all items in the
+            legend. "toggleothers" toggles the visibility of all
+            other legends. False disables legend title double-click
+            interactions. Defaults to "toggleothers" when there are
+            multiple legends, False otherwise. Not supported for
+            legends containing pie and pie-like traces.
         tracegroupgap
             Sets the amount of vertical space (in px) between
             legend groups.
@@ -695,7 +800,7 @@ class Legend(_BaseLayoutHierarchyType):
             if `yref` is "container" and between "-2" and 3 if
             `yref` is "paper".
         yanchor
-            Sets the legend's vertical position anchor This anchor
+            Sets the legend's vertical position anchor. This anchor
             binds the `y` position to the "top", "middle" or
             "bottom" of the legend. Value "auto" anchors legends at
             their bottom for `y` values less than or equal to 1/3,
@@ -724,8 +829,11 @@ class Legend(_BaseLayoutHierarchyType):
         itemdoubleclick=None,
         itemsizing=None,
         itemwidth=None,
+        maxheight=None,
         orientation=None,
         title=None,
+        titleclick=None,
+        titledoubleclick=None,
         tracegroupgap=None,
         traceorder=None,
         uirevision=None,
@@ -793,11 +901,39 @@ class Legend(_BaseLayoutHierarchyType):
         itemwidth
             Sets the width (in px) of the legend item symbols (the
             part other than the title.text).
+        maxheight
+            Sets the max height (in px) of the legend, or max
+            height ratio (reference height * ratio) if less than or
+            equal to 1. Default value is: 0.5 for horizontal
+            legends; 1 for vertical legends. The minimum allowed
+            height is 30px. For a ratio of 0.5, the legend will
+            take up to 50% of the reference height before
+            displaying a scrollbar. The reference height is the
+            full layout height with the following exception:
+            vertically oriented legends with a `yref` of `"paper",
+            located to the side of the plot. In this case, the
+            reference height is the plot height.
         orientation
             Sets the orientation of the legend.
         title
             :class:`plotly.graph_objects.layout.legend.Title`
             instance or dict with compatible properties
+        titleclick
+            Determines the behavior on legend title click. "toggle"
+            toggles the visibility of all items in the legend.
+            "toggleothers" toggles the visibility of all other
+            legends. False disables legend title click
+            interactions. Defaults to "toggle" when there are
+            multiple legends, False otherwise. Not supported for
+            legends containing pie and pie-like traces.
+        titledoubleclick
+            Determines the behavior on legend title double-click.
+            "toggle" toggles the visibility of all items in the
+            legend. "toggleothers" toggles the visibility of all
+            other legends. False disables legend title double-click
+            interactions. Defaults to "toggleothers" when there are
+            multiple legends, False otherwise. Not supported for
+            legends containing pie and pie-like traces.
         tracegroupgap
             Sets the amount of vertical space (in px) between
             legend groups.
@@ -851,7 +987,7 @@ class Legend(_BaseLayoutHierarchyType):
             if `yref` is "container" and between "-2" and 3 if
             `yref` is "paper".
         yanchor
-            Sets the legend's vertical position anchor This anchor
+            Sets the legend's vertical position anchor. This anchor
             binds the `y` position to the "top", "middle" or
             "bottom" of the legend. Value "auto" anchors legends at
             their bottom for `y` values less than or equal to 1/3,
@@ -879,12 +1015,10 @@ class Legend(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.Legend
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.Legend`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.Legend`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
@@ -902,8 +1036,11 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         self._set_property("itemdoubleclick", arg, itemdoubleclick)
         self._set_property("itemsizing", arg, itemsizing)
         self._set_property("itemwidth", arg, itemwidth)
+        self._set_property("maxheight", arg, maxheight)
         self._set_property("orientation", arg, orientation)
         self._set_property("title", arg, title)
+        self._set_property("titleclick", arg, titleclick)
+        self._set_property("titledoubleclick", arg, titledoubleclick)
         self._set_property("tracegroupgap", arg, tracegroupgap)
         self._set_property("traceorder", arg, traceorder)
         self._set_property("uirevision", arg, uirevision)

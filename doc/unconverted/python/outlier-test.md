@@ -56,7 +56,7 @@ table = FF.create_table(df)
 py.iplot(table, filename='wind-data-sample')
 ```
 
-In any set of data, an `outlier` is a a datum point that is not consistent with the other data points. If the data sampled from a particular distribution then with high probability, an outlier would not belong to that distribution. There are various tests used for testing if a particular point is an outlier, and this is done with the same null-hypothesis testing used in Normality Tests.
+In any set of data, an `outlier` is a datum point that is not consistent with the other data points. If the data sampled from a particular distribution then with high probability, an outlier would not belong to that distribution. There are various tests used for testing if a particular point is an outlier, and this is done with the same null-hypothesis testing used in Normality Tests.
 
 
 #### Q Test

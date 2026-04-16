@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Annotation(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.scene"
     _path_str = "layout.scene.annotation"
     _valid_props = {
@@ -98,7 +97,7 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         Sets the end annotation arrow head style.
 
-        The 'arrowhead' property is a integer and may be specified as:
+        The 'arrowhead' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 8]
 
@@ -301,8 +300,8 @@ class Annotation(_BaseLayoutHierarchyType):
         provided. If you use the event `plotly_clickannotation` without
         `hovertext` you must explicitly enable `captureevents`.
 
-        The 'captureevents' property must be specified as a bool
-        (either True, or False)
+        The 'captureevents' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -443,8 +442,8 @@ class Annotation(_BaseLayoutHierarchyType):
         arrow. If True, `text` is placed near the arrow's tail. If
         False, `text` lines up with the `x` and `y` provided.
 
-        The 'showarrow' property must be specified as a bool
-        (either True, or False)
+        The 'showarrow' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -483,7 +482,7 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         Sets the start annotation arrow head style.
 
-        The 'startarrowhead' property is a integer and may be specified as:
+        The 'startarrowhead' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 8]
 
@@ -569,9 +568,10 @@ class Annotation(_BaseLayoutHierarchyType):
     def text(self):
         """
         Sets the text associated with this annotation. Plotly uses a
-        subset of HTML tags to do things like newline (<br>), bold
-        (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>).
-        Tags <em>, <sup>, <sub>, <s>, <u> <span> are also supported.
+        subset of HTML tags to do things like newline (`<br>`), bold
+        (`<b></b>`), italics (`<i></i>`), hyperlinks (`<a
+        href='...'></a>`). Tags `<em>`, `<sup>`, `<sub>`, `<s>`, `<u>`,
+        and `<span>` are also supported.
 
         The 'text' property is a string and must be specified as:
           - A string
@@ -634,8 +634,8 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         Determines whether or not this annotation is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -917,9 +917,10 @@ class Annotation(_BaseLayoutHierarchyType):
         text
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
-            (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
-            <span> are also supported.
+            (`<br>`), bold (`<b></b>`), italics (`<i></i>`),
+            hyperlinks (`<a href='...'></a>`). Tags `<em>`,
+            `<sup>`, `<sub>`, `<s>`, `<u>`, and `<span>` are also
+            supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.
@@ -1126,9 +1127,10 @@ class Annotation(_BaseLayoutHierarchyType):
         text
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
-            (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
-            (<a href='...'></a>). Tags <em>, <sup>, <sub>, <s>, <u>
-            <span> are also supported.
+            (`<br>`), bold (`<b></b>`), italics (`<i></i>`),
+            hyperlinks (`<a href='...'></a>`). Tags `<em>`,
+            `<sup>`, `<sub>`, `<s>`, `<u>`, and `<span>` are also
+            supported.
         textangle
             Sets the angle at which the `text` is drawn with
             respect to the horizontal.
@@ -1195,12 +1197,10 @@ class Annotation(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.scene.Annotation
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.scene.Annotation`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.scene.Annotation`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Hoverlabel(_BaseTraceHierarchyType):
-
     _parent_path_str = "candlestick"
     _path_str = "candlestick.hoverlabel"
     _valid_props = {
@@ -19,6 +18,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         "font",
         "namelength",
         "namelengthsrc",
+        "showarrow",
         "split",
     }
 
@@ -176,7 +176,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         that many characters, but if it is longer, will truncate to
         `namelength - 3` characters and add an ellipsis.
 
-        The 'namelength' property is a integer and may be specified as:
+        The 'namelength' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -211,13 +211,33 @@ class Hoverlabel(_BaseTraceHierarchyType):
         self["namelengthsrc"] = val
 
     @property
+    def showarrow(self):
+        """
+        Sets whether or not to show the hover label arrow/triangle
+        pointing to the data point.
+
+        The 'showarrow' property is a boolean and must be specified as:
+          - A boolean value: True or False
+
+        Returns
+        -------
+        bool
+        """
+        return self["showarrow"]
+
+    @showarrow.setter
+    def showarrow(self, val):
+        self["showarrow"] = val
+
+    @property
     def split(self):
         """
         Show hover information (open, close, high, low) in separate
-        labels.
+        labels, rather than a single unified label. Default: False.
+        When set to True, `hovertemplate` is ignored.
 
-        The 'split' property must be specified as a bool
-        (either True, or False)
+        The 'split' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -264,9 +284,14 @@ class Hoverlabel(_BaseTraceHierarchyType):
         namelengthsrc
             Sets the source reference on Chart Studio Cloud for
             `namelength`.
+        showarrow
+            Sets whether or not to show the hover label
+            arrow/triangle pointing to the data point.
         split
             Show hover information (open, close, high, low) in
-            separate labels.
+            separate labels, rather than a single unified label.
+            Default: False. When set to True, `hovertemplate` is
+            ignored.
         """
 
     def __init__(
@@ -281,6 +306,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
+        showarrow=None,
         split=None,
         **kwargs,
     ):
@@ -325,9 +351,14 @@ class Hoverlabel(_BaseTraceHierarchyType):
         namelengthsrc
             Sets the source reference on Chart Studio Cloud for
             `namelength`.
+        showarrow
+            Sets whether or not to show the hover label
+            arrow/triangle pointing to the data point.
         split
             Show hover information (open, close, high, low) in
-            separate labels.
+            separate labels, rather than a single unified label.
+            Default: False. When set to True, `hovertemplate` is
+            ignored.
 
         Returns
         -------
@@ -345,12 +376,10 @@ class Hoverlabel(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.candlestick.Hoverlabel
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.candlestick.Hoverlabel`"""
-            )
+an instance of :class:`plotly.graph_objs.candlestick.Hoverlabel`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
@@ -364,6 +393,7 @@ an instance of :class:`plotly.graph_objs.candlestick.Hoverlabel`"""
         self._set_property("font", arg, font)
         self._set_property("namelength", arg, namelength)
         self._set_property("namelengthsrc", arg, namelengthsrc)
+        self._set_property("showarrow", arg, showarrow)
         self._set_property("split", arg, split)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

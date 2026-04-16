@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Rangeslider(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.xaxis"
     _path_str = "layout.xaxis.rangeslider"
     _valid_props = {
@@ -27,8 +26,8 @@ class Rangeslider(_BaseLayoutHierarchyType):
         relation to the input data. If `range` is provided, then
         `autorange` is set to False.
 
-        The 'autorange' property must be specified as a bool
-        (either True, or False)
+        The 'autorange' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -89,7 +88,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
         """
         Sets the border width of the range slider.
 
-        The 'borderwidth' property is a integer and may be specified as:
+        The 'borderwidth' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -156,8 +155,8 @@ class Rangeslider(_BaseLayoutHierarchyType):
         Determines whether or not the range slider will be visible. If
         visible, perpendicular axes will be set to `fixedrange`
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -292,12 +291,10 @@ class Rangeslider(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeslider
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

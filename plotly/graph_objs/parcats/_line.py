@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Line(_BaseTraceHierarchyType):
-
     _parent_path_str = "parcats"
     _path_str = "parcats.line"
     _valid_props = {
@@ -21,6 +20,7 @@ class Line(_BaseTraceHierarchyType):
         "colorscale",
         "colorsrc",
         "hovertemplate",
+        "hovertemplatefallback",
         "reversescale",
         "shape",
         "showscale",
@@ -37,8 +37,8 @@ class Line(_BaseTraceHierarchyType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -59,8 +59,8 @@ class Line(_BaseTraceHierarchyType):
         `line.color` is set to a numerical array. Defaults to `false`
         when `line.cmin` and `line.cmax` are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -175,9 +175,9 @@ class Line(_BaseTraceHierarchyType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -296,17 +296,20 @@ class Line(_BaseTraceHierarchyType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available.  This value
-        here applies when hovering over lines.Finally, the template
-        string has access to variables `count` and `probability`.
-        Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
-        `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variables `count`
+        and `probability`. Anything contained in tag `<extra>` is
+        displayed in the secondary box, for example
+        `<extra>%{fullData.name}</extra>`. To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -323,6 +326,25 @@ class Line(_BaseTraceHierarchyType):
         self["hovertemplate"] = val
 
     @property
+    def hovertemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'hovertemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["hovertemplatefallback"]
+
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
+
+    @property
     def reversescale(self):
         """
         Reverses the color mapping if true. Has an effect only if in
@@ -330,8 +352,8 @@ class Line(_BaseTraceHierarchyType):
         will correspond to the last color in the array and `line.cmax`
         will correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -371,8 +393,8 @@ class Line(_BaseTraceHierarchyType):
         trace. Has an effect only if in `line.color` is set to a
         numerical array.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -471,19 +493,29 @@ class Line(_BaseTraceHierarchyType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over lines.Finally, the template string has access to
-            variables `count` and `probability`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            are available.  Finally, the template string has access
+            to variables `count` and `probability`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color` is set to a numerical array. If
@@ -514,6 +546,7 @@ class Line(_BaseTraceHierarchyType):
         colorscale=None,
         colorsrc=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         reversescale=None,
         shape=None,
         showscale=None,
@@ -611,19 +644,29 @@ class Line(_BaseTraceHierarchyType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
-            are available.  This value here applies when hovering
-            over lines.Finally, the template string has access to
-            variables `count` and `probability`. Anything contained
-            in tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>". To hide the
+            are available.  Finally, the template string has access
+            to variables `count` and `probability`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            `<extra>%{fullData.name}</extra>`. To hide the
             secondary box completely, use an empty tag
             `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color` is set to a numerical array. If
@@ -655,12 +698,10 @@ class Line(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.parcats.Line
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.parcats.Line`"""
-            )
+an instance of :class:`plotly.graph_objs.parcats.Line`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
@@ -676,6 +717,7 @@ an instance of :class:`plotly.graph_objs.parcats.Line`"""
         self._set_property("colorscale", arg, colorscale)
         self._set_property("colorsrc", arg, colorsrc)
         self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("shape", arg, shape)
         self._set_property("showscale", arg, showscale)

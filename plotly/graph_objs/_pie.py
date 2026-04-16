@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Pie(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "pie"
     _valid_props = {
@@ -21,6 +20,7 @@ class Pie(_BaseTraceType):
         "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
+        "hovertemplatefallback",
         "hovertemplatesrc",
         "hovertext",
         "hovertextsrc",
@@ -35,6 +35,7 @@ class Pie(_BaseTraceType):
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendsrc",
         "legendwidth",
         "marker",
         "meta",
@@ -47,6 +48,7 @@ class Pie(_BaseTraceType):
         "rotation",
         "scalegroup",
         "showlegend",
+        "showlegendsrc",
         "sort",
         "stream",
         "text",
@@ -56,6 +58,7 @@ class Pie(_BaseTraceType):
         "textpositionsrc",
         "textsrc",
         "texttemplate",
+        "texttemplatefallback",
         "texttemplatesrc",
         "title",
         "type",
@@ -71,8 +74,8 @@ class Pie(_BaseTraceType):
         """
         Determines whether outside text labels can push the margins.
 
-        The 'automargin' property must be specified as a bool
-        (either True, or False)
+        The 'automargin' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -280,15 +283,19 @@ class Pie(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. Finally, the
-        template string has access to variables `label`, `color`,
-        `value`, `percent` and `text`. Anything contained in tag
-        `<extra>` is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variables `label`,
+        `color`, `value`, `percent` and `text`. Anything contained in
+        tag `<extra>` is displayed in the secondary box, for example
+        `<extra>%{fullData.name}</extra>`. To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
@@ -305,6 +312,25 @@ class Pie(_BaseTraceType):
     @hovertemplate.setter
     def hovertemplate(self, val):
         self["hovertemplate"] = val
+
+    @property
+    def hovertemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'hovertemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["hovertemplatefallback"]
+
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertemplatesrc(self):
@@ -516,19 +542,22 @@ class Pie(_BaseTraceType):
     @property
     def legend(self):
         """
-        Sets the reference to a legend to show this trace in.
-        References to these legends are "legend", "legend2", "legend3",
-        etc. Settings for these legends are set in the layout, under
-        `layout.legend`, `layout.legend2`, etc.
+        Sets the reference to a legend to show the pie slices in. Can
+        be an array if `values` is set. In that case, each entry
+        specifies the legend reference for one slice. References to
+        these legends are "legend", "legend2", "legend3", etc. Settings
+        for these legends are set in the layout, under `layout.legend`,
+        `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+          - A tuple or list of the above
 
         Returns
         -------
-        str
+        str|numpy.ndarray
         """
         return self["legend"]
 
@@ -600,6 +629,24 @@ class Pie(_BaseTraceType):
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    @property
+    def legendsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `legend`.
+
+        The 'legendsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["legendsrc"]
+
+    @legendsrc.setter
+    def legendsrc(self, val):
+        self["legendsrc"] = val
 
     @property
     def legendwidth(self):
@@ -827,15 +874,18 @@ class Pie(_BaseTraceType):
     @property
     def showlegend(self):
         """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
+        Determines whether or not items corresponding to the pie slices
+        are shown in the legend. Can be an array if `values` is set. In
+        that case, each entry specifies appearance in the legend for
+        one slice.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
+          - A tuple or list of the above
 
         Returns
         -------
-        bool
+        bool|numpy.ndarray
         """
         return self["showlegend"]
 
@@ -844,13 +894,32 @@ class Pie(_BaseTraceType):
         self["showlegend"] = val
 
     @property
+    def showlegendsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for
+        `showlegend`.
+
+        The 'showlegendsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["showlegendsrc"]
+
+    @showlegendsrc.setter
+    def showlegendsrc(self, val):
+        self["showlegendsrc"] = val
+
+    @property
     def sort(self):
         """
         Determines whether or not the sectors are reordered from
         largest to smallest.
 
-        The 'sort' property must be specified as a bool
-        (either True, or False)
+        The 'sort' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1006,7 +1075,7 @@ class Pie(_BaseTraceType):
     def texttemplate(self):
         """
         Template string used for rendering the information text that
-        appear on points. Note that this will override `textinfo`.
+        appears on points. Note that this will override `textinfo`.
         Variables are inserted using %{variable}, for example "y:
         %{y}". Numbers are formatted using d3-format's syntax
         %{variable:d3-format}, for example "Price: %{y:$.2f}".
@@ -1015,10 +1084,14 @@ class Pie(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. Every attributes that can be specified per-
-        point (the ones that are `arrayOk: true`) are available.
-        Finally, the template string has access to variables `label`,
-        `color`, `value`, `percent` and `text`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. All attributes that can be
+        specified per-point (the ones that are `arrayOk: true`) are
+        available. Finally, the template string has access to variables
+        `label`, `color`, `value`, `percent` and `text`.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -1034,6 +1107,25 @@ class Pie(_BaseTraceType):
     @texttemplate.setter
     def texttemplate(self, val):
         self["texttemplate"] = val
+
+    @property
+    def texttemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'texttemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["texttemplatefallback"]
+
+    @texttemplatefallback.setter
+    def texttemplatefallback(self, val):
+        self["texttemplatefallback"] = val
 
     @property
     def texttemplatesrc(self):
@@ -1240,18 +1332,29 @@ class Pie(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `percent` and
             `text`. Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1298,11 +1401,13 @@ class Pie(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `labels`.
         legend
-            Sets the reference to a legend to show this trace in.
-            References to these legends are "legend", "legend2",
-            "legend3", etc. Settings for these legends are set in
-            the layout, under `layout.legend`, `layout.legend2`,
-            etc.
+            Sets the reference to a legend to show the pie slices
+            in. Can be an array if `values` is set. In that case,
+            each entry specifies the legend reference for one
+            slice. References to these legends are "legend",
+            "legend2", "legend3", etc. Settings for these legends
+            are set in the layout, under `layout.legend`,
+            `layout.legend2`, etc.
         legendgroup
             Sets the legend group for this trace. Traces and shapes
             part of the same legend group hide/show at the same
@@ -1321,6 +1426,9 @@ class Pie(_BaseTraceType):
             unranked or equal rank items shapes would be displayed
             after traces i.e. according to their order in data and
             layout.
+        legendsrc
+            Sets the source reference on Chart Studio Cloud for
+            `legend`.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1368,8 +1476,13 @@ class Pie(_BaseTraceType):
             non-empty group id here shared by every trace in the
             same group.
         showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
+            Determines whether or not items corresponding to the
+            pie slices are shown in the legend. Can be an array if
+            `values` is set. In that case, each entry specifies
+            appearance in the legend for one slice.
+        showlegendsrc
+            Sets the source reference on Chart Studio Cloud for
+            `showlegend`.
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
@@ -1396,7 +1509,7 @@ class Pie(_BaseTraceType):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -1407,11 +1520,21 @@ class Pie(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `percent` and
             `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1467,6 +1590,7 @@ class Pie(_BaseTraceType):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
@@ -1481,6 +1605,7 @@ class Pie(_BaseTraceType):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendsrc=None,
         legendwidth=None,
         marker=None,
         meta=None,
@@ -1493,6 +1618,7 @@ class Pie(_BaseTraceType):
         rotation=None,
         scalegroup=None,
         showlegend=None,
+        showlegendsrc=None,
         sort=None,
         stream=None,
         text=None,
@@ -1502,6 +1628,7 @@ class Pie(_BaseTraceType):
         textpositionsrc=None,
         textsrc=None,
         texttemplate=None,
+        texttemplatefallback=None,
         texttemplatesrc=None,
         title=None,
         uid=None,
@@ -1574,18 +1701,29 @@ class Pie(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `percent` and
             `text`. Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1632,11 +1770,13 @@ class Pie(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             `labels`.
         legend
-            Sets the reference to a legend to show this trace in.
-            References to these legends are "legend", "legend2",
-            "legend3", etc. Settings for these legends are set in
-            the layout, under `layout.legend`, `layout.legend2`,
-            etc.
+            Sets the reference to a legend to show the pie slices
+            in. Can be an array if `values` is set. In that case,
+            each entry specifies the legend reference for one
+            slice. References to these legends are "legend",
+            "legend2", "legend3", etc. Settings for these legends
+            are set in the layout, under `layout.legend`,
+            `layout.legend2`, etc.
         legendgroup
             Sets the legend group for this trace. Traces and shapes
             part of the same legend group hide/show at the same
@@ -1655,6 +1795,9 @@ class Pie(_BaseTraceType):
             unranked or equal rank items shapes would be displayed
             after traces i.e. according to their order in data and
             layout.
+        legendsrc
+            Sets the source reference on Chart Studio Cloud for
+            `legend`.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1702,8 +1845,13 @@ class Pie(_BaseTraceType):
             non-empty group id here shared by every trace in the
             same group.
         showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
+            Determines whether or not items corresponding to the
+            pie slices are shown in the legend. Can be an array if
+            `values` is set. In that case, each entry specifies
+            appearance in the legend for one slice.
+        showlegendsrc
+            Sets the source reference on Chart Studio Cloud for
+            `showlegend`.
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
@@ -1730,7 +1878,7 @@ class Pie(_BaseTraceType):
             `text`.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -1741,11 +1889,21 @@ class Pie(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variables `label`, `color`, `value`, `percent` and
             `text`.
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `texttemplate`.
@@ -1802,12 +1960,10 @@ class Pie(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Pie
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Pie`"""
-            )
+an instance of :class:`plotly.graph_objs.Pie`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
@@ -1823,6 +1979,7 @@ an instance of :class:`plotly.graph_objs.Pie`"""
         self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
         self._set_property("hovertextsrc", arg, hovertextsrc)
@@ -1837,6 +1994,7 @@ an instance of :class:`plotly.graph_objs.Pie`"""
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendsrc", arg, legendsrc)
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("marker", arg, marker)
         self._set_property("meta", arg, meta)
@@ -1849,6 +2007,7 @@ an instance of :class:`plotly.graph_objs.Pie`"""
         self._set_property("rotation", arg, rotation)
         self._set_property("scalegroup", arg, scalegroup)
         self._set_property("showlegend", arg, showlegend)
+        self._set_property("showlegendsrc", arg, showlegendsrc)
         self._set_property("sort", arg, sort)
         self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
@@ -1858,6 +2017,7 @@ an instance of :class:`plotly.graph_objs.Pie`"""
         self._set_property("textpositionsrc", arg, textpositionsrc)
         self._set_property("textsrc", arg, textsrc)
         self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatefallback", arg, texttemplatefallback)
         self._set_property("texttemplatesrc", arg, texttemplatesrc)
         self._set_property("title", arg, title)
         self._set_property("uid", arg, uid)

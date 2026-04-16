@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Decreasing(_BaseTraceHierarchyType):
-
     _parent_path_str = "indicator.delta"
     _path_str = "indicator.delta.decreasing"
     _valid_props = {"color", "symbol"}
@@ -92,12 +91,10 @@ class Decreasing(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.indicator.delta.Decreasing
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`"""
-            )
+an instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

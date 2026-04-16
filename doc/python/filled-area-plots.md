@@ -52,7 +52,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -133,9 +133,9 @@ fig.show()
 
 *New in 5.20*
 
-Scatter traces with a fill support a `fillgradient`, which is a `dict` of options that defines the gradient. Use `fillgradient.colorscale` to define the [colorscale](https://plotly.com/python/colorscales) for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`). 
+Scatter traces with a fill support a `fillgradient`, which is a `dict` of options that defines the gradient. Use `fillgradient.colorscale` to define the [colorscale](https://plotly.com/python/colorscales) for the gradient and choose a `type` to define the orientation of the gradient (`'horizontal'`, `'vertical'` or `'radial'`).
 
-In the following example, we've defined a `horizontal` `fillgradient` with a colorscale of three colors. 
+In the following example, we've defined a `horizontal` `fillgradient` with a colorscale of three colors.
 
 ```python
 import plotly.graph_objects as go

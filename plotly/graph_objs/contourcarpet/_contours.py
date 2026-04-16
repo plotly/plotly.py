@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Contours(_BaseTraceHierarchyType):
-
     _parent_path_str = "contourcarpet"
     _path_str = "contourcarpet.contours"
     _valid_props = {
@@ -142,8 +141,8 @@ class Contours(_BaseTraceHierarchyType):
         Determines whether to label the contour lines with their
         values.
 
-        The 'showlabels' property must be specified as a bool
-        (either True, or False)
+        The 'showlabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -161,8 +160,8 @@ class Contours(_BaseTraceHierarchyType):
         Determines whether or not the contour lines are drawn. Has an
         effect only if `contours.coloring` is set to "fill".
 
-        The 'showlines' property must be specified as a bool
-        (either True, or False)
+        The 'showlines' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -238,11 +237,11 @@ class Contours(_BaseTraceHierarchyType):
         """
         Sets the value or values of the constraint boundary. When
         `operation` is set to one of the comparison values
-        (=,<,>=,>,<=) "value" is expected to be a number. When
+        (`=,<,>=,>,<=`) "value" is expected to be a number. When
         `operation` is set to one of the interval values
-        ([],(),[),(],][,)(,](,)[) "value" is expected to be an array of
-        two numbers where the first is the lower bound and the second
-        is the upper bound.
+        (`[],(),[),(],][,)(,](,)[`) "value" is expected to be an array
+        of two numbers where the first is the lower bound and the
+        second is the upper bound.
 
         The 'value' property accepts values of any type
 
@@ -308,11 +307,11 @@ class Contours(_BaseTraceHierarchyType):
         value
             Sets the value or values of the constraint boundary.
             When `operation` is set to one of the comparison values
-            (=,<,>=,>,<=) "value" is expected to be a number. When
-            `operation` is set to one of the interval values
-            ([],(),[),(],][,)(,](,)[) "value" is expected to be an
-            array of two numbers where the first is the lower bound
-            and the second is the upper bound.
+            (`=,<,>=,>,<=`) "value" is expected to be a number.
+            When `operation` is set to one of the interval values
+            (`[],(),[),(],][,)(,](,)[`) "value" is expected to be
+            an array of two numbers where the first is the lower
+            bound and the second is the upper bound.
         """
 
     def __init__(
@@ -389,11 +388,11 @@ class Contours(_BaseTraceHierarchyType):
         value
             Sets the value or values of the constraint boundary.
             When `operation` is set to one of the comparison values
-            (=,<,>=,>,<=) "value" is expected to be a number. When
-            `operation` is set to one of the interval values
-            ([],(),[),(],][,)(,](,)[) "value" is expected to be an
-            array of two numbers where the first is the lower bound
-            and the second is the upper bound.
+            (`=,<,>=,>,<=`) "value" is expected to be a number.
+            When `operation` is set to one of the interval values
+            (`[],(),[),(],][,)(,](,)[`) "value" is expected to be
+            an array of two numbers where the first is the lower
+            bound and the second is the upper bound.
 
         Returns
         -------
@@ -411,12 +410,10 @@ class Contours(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.contourcarpet.Contours
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.contourcarpet.Contours`"""
-            )
+an instance of :class:`plotly.graph_objs.contourcarpet.Contours`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

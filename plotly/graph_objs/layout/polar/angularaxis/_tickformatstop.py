@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Tickformatstop(_BaseLayoutHierarchyType):
-
     _parent_path_str = "layout.polar.angularaxis"
     _path_str = "layout.polar.angularaxis.tickformatstop"
     _valid_props = {"dtickrange", "enabled", "name", "templateitemname", "value"}
@@ -40,8 +39,8 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         Determines whether or not this stop is used. If `false`, this
         stop is ignored even within its `dtickrange`.
 
-        The 'enabled' property must be specified as a bool
-        (either True, or False)
+        The 'enabled' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -225,12 +224,10 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.layout.polar.angularaxis.Tickformatstop
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.layout.polar.angularaxis.Tickformatstop`"""
-            )
+an instance of :class:`plotly.graph_objs.layout.polar.angularaxis.Tickformatstop`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

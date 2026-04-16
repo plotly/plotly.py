@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Font(_BaseTraceHierarchyType):
-
     _parent_path_str = "table.header"
     _path_str = "table.header.font"
     _valid_props = {
@@ -352,7 +351,7 @@ class Font(_BaseTraceHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is a integer and may be specified as:
+        The 'weight' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 1000]
             OR exactly one of ['normal', 'bold'] (e.g. 'bold')
@@ -556,12 +555,10 @@ class Font(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.table.header.Font
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.table.header.Font`"""
-            )
+an instance of :class:`plotly.graph_objs.table.header.Font`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

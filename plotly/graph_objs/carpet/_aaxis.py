@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Aaxis(_BaseTraceHierarchyType):
-
     _parent_path_str = "carpet"
     _path_str = "carpet.aaxis"
     _valid_props = {
@@ -75,7 +74,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         The stride between grid lines along the axis
 
-        The 'arraydtick' property is a integer and may be specified as:
+        The 'arraydtick' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -94,7 +93,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         The starting index of grid lines along the axis
 
-        The 'arraytick0' property is a integer and may be specified as:
+        The 'arraytick0' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -287,8 +286,8 @@ class Aaxis(_BaseTraceHierarchyType):
         value of this axis. If True, the end line is drawn on top of
         the grid lines.
 
-        The 'endline' property must be specified as a bool
-        (either True, or False)
+        The 'endline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -351,7 +350,7 @@ class Aaxis(_BaseTraceHierarchyType):
 
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['none', 'e', 'E', 'power', 'SI', 'B']
+                ['none', 'e', 'E', 'power', 'SI', 'B', 'SI extended']
 
         Returns
         -------
@@ -369,8 +368,8 @@ class Aaxis(_BaseTraceHierarchyType):
         Determines whether or not this axis is zoom-able. If true, then
         zoom is disabled.
 
-        The 'fixedrange' property must be specified as a bool
-        (either True, or False)
+        The 'fixedrange' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -476,7 +475,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Extra padding between label and the axis
 
-        The 'labelpadding' property is a integer and may be specified as:
+        The 'labelpadding' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -612,7 +611,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Sets the number of minor grid ticks per major grid tick
 
-        The 'minorgridcount' property is a integer and may be specified as:
+        The 'minorgridcount' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -676,7 +675,7 @@ class Aaxis(_BaseTraceHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -745,8 +744,8 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -786,8 +785,8 @@ class Aaxis(_BaseTraceHierarchyType):
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -804,8 +803,8 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Determines whether or not a line bounding this axis is drawn.
 
-        The 'showline' property must be specified as a bool
-        (either True, or False)
+        The 'showline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -901,8 +900,8 @@ class Aaxis(_BaseTraceHierarchyType):
         value of this axis. If True, the start line is drawn on top of
         the grid lines.
 
-        The 'startline' property must be specified as a bool
-        (either True, or False)
+        The 'startline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1781,12 +1780,10 @@ class Aaxis(_BaseTraceHierarchyType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.carpet.Aaxis
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.carpet.Aaxis`"""
-            )
+an instance of :class:`plotly.graph_objs.carpet.Aaxis`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

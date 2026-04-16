@@ -6,7 +6,6 @@ import copy as _copy
 
 
 class Histogram2d(_BaseTraceType):
-
     _parent_path_str = ""
     _path_str = "histogram2d"
     _valid_props = {
@@ -25,6 +24,7 @@ class Histogram2d(_BaseTraceType):
         "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
+        "hovertemplatefallback",
         "hovertemplatesrc",
         "ids",
         "idssrc",
@@ -46,6 +46,7 @@ class Histogram2d(_BaseTraceType):
         "stream",
         "textfont",
         "texttemplate",
+        "texttemplatefallback",
         "type",
         "uid",
         "uirevision",
@@ -84,8 +85,8 @@ class Histogram2d(_BaseTraceType):
         `autobinx: true` or `false` and will update `xbins` accordingly
         before deleting `autobinx` from the trace.
 
-        The 'autobinx' property must be specified as a bool
-        (either True, or False)
+        The 'autobinx' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -105,8 +106,8 @@ class Histogram2d(_BaseTraceType):
         `autobiny: true` or `false` and will update `ybins` accordingly
         before deleting `autobiny` from the trace.
 
-        The 'autobiny' property must be specified as a bool
-        (either True, or False)
+        The 'autobiny' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -128,8 +129,8 @@ class Histogram2d(_BaseTraceType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -173,9 +174,9 @@ class Histogram2d(_BaseTraceType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -433,15 +434,20 @@ class Histogram2d(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. The variables available in `hovertemplate`
-        are the ones emitted as event data described at this link
-        https://plotly.com/javascript/plotlyjs-events/#event-data.
-        Additionally, every attributes that can be specified per-point
-        (the ones that are `arrayOk: true`) are available. Finally, the
-        template string has access to variable `z` Anything contained
-        in tag `<extra>` is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>". To hide the secondary box
-        completely, use an empty tag `<extra></extra>`.
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. The variables available in
+        `hovertemplate` are the ones emitted as event data described at
+        this link https://plotly.com/javascript/plotlyjs-events/#event-
+        data. Additionally, all attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Finally, the template string has access to variable `z`
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example `<extra>%{fullData.name}</extra>`.
+        To hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
 
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -457,6 +463,25 @@ class Histogram2d(_BaseTraceType):
     @hovertemplate.setter
     def hovertemplate(self, val):
         self["hovertemplate"] = val
+
+    @property
+    def hovertemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'hovertemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["hovertemplatefallback"]
+
+    @hovertemplatefallback.setter
+    def hovertemplatefallback(self, val):
+        self["hovertemplatefallback"] = val
 
     @property
     def hovertemplatesrc(self):
@@ -524,9 +549,9 @@ class Histogram2d(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -713,7 +738,7 @@ class Histogram2d(_BaseTraceType):
         such that the histogram best visualizes the distribution of the
         data. Ignored if `xbins.size` is provided.
 
-        The 'nbinsx' property is a integer and may be specified as:
+        The 'nbinsx' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -735,7 +760,7 @@ class Histogram2d(_BaseTraceType):
         such that the histogram best visualizes the distribution of the
         data. Ignored if `ybins.size` is provided.
 
-        The 'nbinsy' property is a integer and may be specified as:
+        The 'nbinsy' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -774,8 +799,8 @@ class Histogram2d(_BaseTraceType):
         correspond to the last color in the array and `zmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -793,8 +818,8 @@ class Histogram2d(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -812,8 +837,8 @@ class Histogram2d(_BaseTraceType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -869,7 +894,7 @@ class Histogram2d(_BaseTraceType):
     def texttemplate(self):
         """
         Template string used for rendering the information text that
-        appear on points. Note that this will override `textinfo`.
+        appears on points. Note that this will override `textinfo`.
         Variables are inserted using %{variable}, for example "y:
         %{y}". Numbers are formatted using d3-format's syntax
         %{variable:d3-format}, for example "Price: %{y:$.2f}".
@@ -878,9 +903,14 @@ class Histogram2d(_BaseTraceType):
         d3-time-format's syntax %{variable|d3-time-format}, for example
         "Day: %{2019-01-01|%A}". https://github.com/d3/d3-time-
         format/tree/v2.2.3#locale_format for details on the date
-        formatting syntax. Every attributes that can be specified per-
-        point (the ones that are `arrayOk: true`) are available.
-        Finally, the template string has access to variable `z`
+        formatting syntax. Variables that can't be found will be
+        replaced with the specifier. For example, a template of "data:
+        %{x}, %{y}" will result in a value of "data: 1, %{y}" if x is 1
+        and y is missing. Variables with an undefined value will be
+        replaced with the fallback value. All attributes that can be
+        specified per-point (the ones that are `arrayOk: true`) are
+        available. Finally, the template string has access to variable
+        `z`
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -895,6 +925,25 @@ class Histogram2d(_BaseTraceType):
     @texttemplate.setter
     def texttemplate(self, val):
         self["texttemplate"] = val
+
+    @property
+    def texttemplatefallback(self):
+        """
+        Fallback string that's displayed when a variable referenced in
+        a template is missing. If the boolean value 'false' is passed
+        in, the specifier with the missing variable will be displayed.
+
+        The 'texttemplatefallback' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["texttemplatefallback"]
+
+    @texttemplatefallback.setter
+    def texttemplatefallback(self, val):
+        self["texttemplatefallback"] = val
 
     @property
     def uid(self):
@@ -995,9 +1044,9 @@ class Histogram2d(_BaseTraceType):
         `layout.xaxis2`, and so on.
 
         The 'xaxis' property is an identifier of a particular
-        subplot, of type 'x', that may be specified as the string 'x'
-        optionally followed by an integer >= 1
-        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+        subplot, of type 'x', that may be specified as:
+          - the string 'x' optionally followed by an integer >= 1
+            (e.g. 'x', 'x1', 'x2', 'x3', etc.)
 
         Returns
         -------
@@ -1165,9 +1214,9 @@ class Histogram2d(_BaseTraceType):
         `layout.yaxis2`, and so on.
 
         The 'yaxis' property is an identifier of a particular
-        subplot, of type 'y', that may be specified as the string 'y'
-        optionally followed by an integer >= 1
-        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+        subplot, of type 'y', that may be specified as:
+          - the string 'y' optionally followed by an integer >= 1
+            (e.g. 'y', 'y1', 'y2', 'y3', etc.)
 
         Returns
         -------
@@ -1334,8 +1383,8 @@ class Histogram2d(_BaseTraceType):
         `zmin` and `zmax` Defaults to `false` when `zmin` and `zmax`
         are set by the user.
 
-        The 'zauto' property must be specified as a bool
-        (either True, or False)
+        The 'zauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1580,17 +1629,28 @@ class Histogram2d(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -1681,7 +1741,7 @@ class Histogram2d(_BaseTraceType):
             Sets the text font.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -1692,10 +1752,20 @@ class Histogram2d(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z`
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1848,6 +1918,7 @@ class Histogram2d(_BaseTraceType):
         hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
+        hovertemplatefallback=None,
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
@@ -1869,6 +1940,7 @@ class Histogram2d(_BaseTraceType):
         stream=None,
         textfont=None,
         texttemplate=None,
+        texttemplatefallback=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -2021,17 +2093,28 @@ class Histogram2d(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. The variables available in
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. The variables available in
             `hovertemplate` are the ones emitted as event data
             described at this link
             https://plotly.com/javascript/plotlyjs-events/#event-
-            data. Additionally, every attributes that can be
+            data. Additionally, all attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z` Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>". To hide the secondary
-            box completely, use an empty tag `<extra></extra>`.
+            `<extra>%{fullData.name}</extra>`. To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         hovertemplatesrc
             Sets the source reference on Chart Studio Cloud for
             `hovertemplate`.
@@ -2122,7 +2205,7 @@ class Histogram2d(_BaseTraceType):
             Sets the text font.
         texttemplate
             Template string used for rendering the information text
-            that appear on points. Note that this will override
+            that appears on points. Note that this will override
             `textinfo`. Variables are inserted using %{variable},
             for example "y: %{y}". Numbers are formatted using
             d3-format's syntax %{variable:d3-format}, for example
@@ -2133,10 +2216,20 @@ class Histogram2d(_BaseTraceType):
             %{variable|d3-time-format}, for example "Day:
             %{2019-01-01|%A}". https://github.com/d3/d3-time-
             format/tree/v2.2.3#locale_format for details on the
-            date formatting syntax. Every attributes that can be
+            date formatting syntax. Variables that can't be found
+            will be replaced with the specifier. For example, a
+            template of "data: %{x}, %{y}" will result in a value
+            of "data: 1, %{y}" if x is 1 and y is missing.
+            Variables with an undefined value will be replaced with
+            the fallback value. All attributes that can be
             specified per-point (the ones that are `arrayOk: true`)
             are available. Finally, the template string has access
             to variable `z`
+        texttemplatefallback
+            Fallback string that's displayed when a variable
+            referenced in a template is missing. If the boolean
+            value 'false' is passed in, the specifier with the
+            missing variable will be displayed.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2286,12 +2379,10 @@ class Histogram2d(_BaseTraceType):
         elif isinstance(arg, dict):
             arg = _copy.copy(arg)
         else:
-            raise ValueError(
-                """\
+            raise ValueError("""\
 The first argument to the plotly.graph_objs.Histogram2d
 constructor must be a dict or
-an instance of :class:`plotly.graph_objs.Histogram2d`"""
-            )
+an instance of :class:`plotly.graph_objs.Histogram2d`""")
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
@@ -2311,6 +2402,7 @@ an instance of :class:`plotly.graph_objs.Histogram2d`"""
         self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
+        self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
         self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("ids", arg, ids)
         self._set_property("idssrc", arg, idssrc)
@@ -2332,6 +2424,7 @@ an instance of :class:`plotly.graph_objs.Histogram2d`"""
         self._set_property("stream", arg, stream)
         self._set_property("textfont", arg, textfont)
         self._set_property("texttemplate", arg, texttemplate)
+        self._set_property("texttemplatefallback", arg, texttemplatefallback)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("visible", arg, visible)

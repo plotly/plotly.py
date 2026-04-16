@@ -70,7 +70,7 @@ def get_plotlyjs():
     >>> html = '''
     ... <html>
     ...     <head>
-    ...         <script type="text/javascript">{plotlyjs}</script>
+    ...         <script>{plotlyjs}</script>
     ...     </head>
     ...     <body>
     ...        {div1}
@@ -89,7 +89,7 @@ def get_plotlyjs():
 
 def _build_resize_script(plotdivid, plotly_root="Plotly"):
     resize_script = (
-        '<script type="text/javascript">'
+        "<script>"
         'window.addEventListener("resize", function(){{'
         'if (document.getElementById("{id}")) {{'
         '{plotly_root}.Plots.resize(document.getElementById("{id}"));'
@@ -104,7 +104,6 @@ def _build_mathjax_script(url):
 
 
 def _get_jconfig(config=None):
-
     configkeys = (
         "staticPlot",
         "plotlyServerURL",
@@ -152,9 +151,7 @@ def _get_jconfig(config=None):
         if bad_config:
             warnings.warn(
                 """
-Unrecognized config options supplied: {bad_config}""".format(
-                    bad_config=bad_config
-                )
+Unrecognized config options supplied: {bad_config}""".format(bad_config=bad_config)
             )
 
         clean_config = config
@@ -180,12 +177,12 @@ Unrecognized config options supplied: {bad_config}""".format(
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
 _window_plotly_config = """\
-<script type="text/javascript">\
+<script>\
 window.PlotlyConfig = {MathJaxConfig: 'local'};\
 </script>"""
 
 _mathjax_config = """\
-<script type="text/javascript">\
+<script>\
 if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
 </script>"""
 
@@ -229,8 +226,9 @@ def build_save_image_post_script(
     if image:
         if image not in __IMAGE_FORMATS:
             raise ValueError(
-                "The image parameter must be one of the "
-                "following: {}".format(__IMAGE_FORMATS)
+                "The image parameter must be one of the following: {}".format(
+                    __IMAGE_FORMATS
+                )
             )
 
         script = get_image_download_script(caller)
@@ -451,7 +449,7 @@ def plot(
         Use 'file' if you want to save and view a single graph at a time
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
-        other graphs or HTML markup, like a HTML report or an website.
+        other graphs or HTML markup, like an HTML report or a website.
     include_plotlyjs (True | False | 'cdn' | 'directory' | path - default=True)
         Specifies how the plotly.js library is included in the output html
         file or div string.
@@ -656,7 +654,7 @@ def plot_mpl(
         Use 'file' if you want to save and view a single graph at a time
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
-        other graphs or HTML markup, like a HTML report or an website.
+        other graphs or HTML markup, like an HTML report or a website.
     include_plotlyjs (default=True) -- If True, include the plotly.js
         source code in the output file or string.
         Set as False if your HTML file already contains a copy of the plotly.js
@@ -689,7 +687,7 @@ def plot_mpl(
     plt.plot(x, y, "o")
 
     plot_mpl(fig)
-    # If you want to to download an image of the figure as well
+    # If you want to download an image of the figure as well
     plot_mpl(fig, image='png')
     ```
     """
