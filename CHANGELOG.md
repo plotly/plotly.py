@@ -11,7 +11,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Performance
 - Optimize `ColorValidator` array validation: up to 3x faster on numpy arrays, 2x on lists, 14x on scalars [[#5576](https://github.com/plotly/plotly.py/pull/5576)]
-- Optimize `to_dict()` serialization path: eliminate redundant array copies and narwhals overhead in base64 conversion, ~40% faster for data-heavy figures [[#5576](https://github.com/plotly/plotly.py/pull/5576)]
 
 ### Updated
 - The `__eq__` method for  `graph_objects` classes now returns `NotImplemented` to give the other operand an opportunity to handle the comparison [[#5547](https://github.com/plotly/plotly.py/pull/5547)], with thanks to @RazerM for the contribution!
