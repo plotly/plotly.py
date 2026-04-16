@@ -1384,8 +1384,7 @@ class ColorValidator(BaseValidator):
                     for e in v:
                         ve = self.validate_coerce(e, should_raise=False)
                         validated_v.append(ve)
-                        if ve is None:
-                            invalid_els.append(e)
+                        self.find_invalid_els(e, ve, invalid_els)
 
                 if invalid_els and should_raise:
                     self.raise_invalid_elements(invalid_els)
@@ -1424,7 +1423,7 @@ class ColorValidator(BaseValidator):
 
         return v
 
-    def find_invalid_els(self, orig, validated, invalid_els=None):
+    def find_invalid_els(self, orig, validated, invalid_els):
         """
         Helper method to find invalid elements in orig array.
         Elements are invalid if their corresponding element in
@@ -1432,17 +1431,12 @@ class ColorValidator(BaseValidator):
 
         This method handles deeply nested list structures
         """
-        if invalid_els is None:
-            invalid_els = []
-
         for orig_el, validated_el in zip(orig, validated):
             if is_array(orig_el):
                 self.find_invalid_els(orig_el, validated_el, invalid_els)
             else:
                 if validated_el is None:
                     invalid_els.append(orig_el)
-
-        return invalid_els
 
     def vc_scalar(self, v):
         """Helper to validate/coerce a scalar color"""
