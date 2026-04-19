@@ -8,8 +8,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add `get_computed_values()` method to `BaseFigure` for programmatically accessing values calculated by Plotly.js, supporting `axis_ranges` and `axis_types` retrieval via a single-pass layout traversal [[#5552](https://github.com/plotly/plotly.py/issues/5552)]
 
 ### Fixed
+- Fix issue where user-specified `color_continuous_scale` was ignored when template had `autocolorscale=True` [[#5439](https://github.com/plotly/plotly.py/pull/5439)], with thanks to @antonymilne for the contribution!
 - Update tests to be compatible with numpy 2.4 [[#5522](https://github.com/plotly/plotly.py/pull/5522)], with thanks to @thunze for the contribution!
 
+### Updated
+- The `__eq__` method for  `graph_objects` classes now returns `NotImplemented` to give the other operand an opportunity to handle the comparison [[#5547](https://github.com/plotly/plotly.py/pull/5547)], with thanks to @RazerM for the contribution!
 
 ## [6.7.0] - 2026-04-09
 
