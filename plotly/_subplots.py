@@ -926,6 +926,7 @@ def _configure_shared_axes(
             else:
                 axis_name = subplot_ref.layout_keys[layout_key_ind]
                 axis_to_match = layout[axis_name]
+                subplot_ref.trace_kwargs[axis_name] = first_axis_id # Changes the reference axis in the set up to the initial axis (the axis to match)
                 axis_to_match.matches = first_axis_id
                 if remove_label:
                     axis_to_match.showticklabels = False
@@ -981,6 +982,7 @@ def _configure_shared_axes(
                 first_axis_id = update_axis_matches(
                     first_axis_id, subplot_ref, spec, ok_to_remove_label
                 )
+    
 
 
 def _init_subplot_xy(layout, secondary_y, x_domain, y_domain, max_subplot_ids=None):
