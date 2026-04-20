@@ -8,12 +8,12 @@ then explains the technical aspects of preparing your contribution.
 
 ## Code of Conduct
 
-Please note that all contributos are required to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
+Please note that all contributors are required to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Different Ways to Contribute
 
 There are many ways to contribute to plotly.py.
-To do any effectively,
+To do so effectively,
 it is important to understand the structure of the code and the repository.
 
 -   The [`plotly.graph_objects`](https://plotly.com/python/graph-objects/) module (usually imported as `go`)
