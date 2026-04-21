@@ -488,13 +488,10 @@ environment variable: {env_renderer}""".format(env_renderer=env_renderer)
 elif ipython and ipython.get_ipython():
     # Try to detect environment so that we can enable a useful
     # default renderer
-    if not default_renderer:
-        try:
-            import google.colab  # noqa: F401
 
-            default_renderer = "colab"
-        except ImportError:
-            pass
+    # Check if we're running in a Colab web notebook
+    if not default_renderer and "COLAB_NOTEBOOK_ID" in os.environ:
+        default_renderer = "colab"
 
     # Check if we're running in a Kaggle notebook
     if not default_renderer and os.path.exists("/kaggle/input"):

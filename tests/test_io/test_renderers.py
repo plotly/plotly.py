@@ -1,4 +1,5 @@
 import json
+import os
 import threading
 import time
 
@@ -418,3 +419,75 @@ def test_missing_webbrowser_methods(fig1):
     finally:
         # restore everything after this test
         webbrowser.get = removed_webbrowser_get_method
+
+
+def test_colab_renderer_when_env_var_is_set():
+    """
+    When COLAB_NOTEBOOK_ID is present the default renderer should be 'colab'.
+    """
+    import importlib
+    import plotly.io._renderers as _renderers_mod
+    from plotly import optional_imports
+
+    fake_ipython = MagicMock()
+    original_get_module = optional_imports.get_module
+
+    def patched_get_module(name, *args, **kwargs):
+        if name in ("IPython", "IPython.display"):
+            return fake_ipython
+        return original_get_module(name, *args, **kwargs)
+
+    original_default = pio.renderers.default
+    try:
+        with mock.patch.dict(os.environ, {"COLAB_NOTEBOOK_ID": "fake-id"}, clear=True):
+            with mock.patch.object(
+                optional_imports, "get_module", side_effect=patched_get_module
+            ):
+                importlib.reload(_renderers_mod)
+                assert _renderers_mod.renderers.default == "colab"
+    finally:
+        importlib.reload(_renderers_mod)
+        pio.renderers.default = original_default
+
+
+def test_colab_renderer_when_env_var_is_absent():
+    """
+    Without COLAB_NOTEBOOK_ID the default renderer must not be 'colab',
+    even when ``google.colab`` is importable.
+
+    Regression test for https://github.com/plotly/plotly.py/pull/5473.
+    """
+    import sys
+    import types
+    import importlib
+    import plotly.io._renderers as _renderers_mod
+    from plotly import optional_imports
+
+    fake_ipython = MagicMock()
+    original_get_module = optional_imports.get_module
+
+    def patched_get_module(name, *args, **kwargs):
+        if name in ("IPython", "IPython.display"):
+            return fake_ipython
+        return original_get_module(name, *args, **kwargs)
+
+    # Make google.colab importable so the old ``import google.colab``
+    # approach would have chosen the colab renderer here.
+    fake_google = types.ModuleType("google")
+    fake_google_colab = types.ModuleType("google.colab")
+
+    original_default = pio.renderers.default
+    try:
+        with mock.patch.dict(os.environ, {}, clear=True):
+            with mock.patch.dict(
+                sys.modules,
+                {"google": fake_google, "google.colab": fake_google_colab},
+            ):
+                with mock.patch.object(
+                    optional_imports, "get_module", side_effect=patched_get_module
+                ):
+                    importlib.reload(_renderers_mod)
+                    assert _renderers_mod.renderers.default != "colab"
+    finally:
+        importlib.reload(_renderers_mod)
+        pio.renderers.default = original_default
