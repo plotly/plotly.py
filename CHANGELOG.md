@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Use presence of `COLAB_NOTEBOOK_ID` env var to enable Colab renderer instead of testing import of `google.colab` [[#5473](https://github.com/plotly/plotly.py/pull/5473)], with thanks to @kevineger for the contribution!
 - Update tests to be compatible with numpy 2.4 [[#5522](https://github.com/plotly/plotly.py/pull/5522)], with thanks to @thunze for the contribution!
 
+### Performance
+- Optimize `to_dict()` serialization path: eliminate redundant array copies and narwhals overhead in base64 conversion, ~40% faster for data-heavy figures [[#5577](https://github.com/plotly/plotly.py/pull/5577)]
+
 ### Updated
 - The `__eq__` method for  `graph_objects` classes now returns `NotImplemented` to give the other operand an opportunity to handle the comparison [[#5547](https://github.com/plotly/plotly.py/pull/5547)], with thanks to @RazerM for the contribution!
 

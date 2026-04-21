@@ -41,12 +41,18 @@ def to_typed_array_spec(v):
     Convert numpy array to plotly.js typed array spec
     If not possible return the original value
     """
-    v = copy_to_readonly_numpy_array(v)
-
-    # Skip b64 encoding if numpy is not installed,
-    # or if v is not a numpy array, or if v is empty
     np = get_module("numpy", should_load=False)
-    if not np or not isinstance(v, np.ndarray) or v.size == 0:
+    if not np:
+        return v
+
+    # Convert non-numpy homogeneous types to numpy if needed
+    if not isinstance(v, np.ndarray):
+        try:
+            v = np.asarray(v)
+        except (ValueError, TypeError):
+            return v
+
+    if v.size == 0:
         return v
 
     dtype = str(v.dtype)
@@ -92,26 +98,36 @@ def to_typed_array_spec(v):
     return v
 
 
+_skipped_keys = frozenset({"geojson", "layer", "layers", "range"})
+
+
 def is_skipped_key(key):
     """
     Return whether the key is skipped for conversion to the typed array spec
     """
-    skipped_keys = ["geojson", "layer", "layers", "range"]
-    return any(skipped_key == key for skipped_key in skipped_keys)
+    return key in _skipped_keys
 
 
 def convert_to_base64(obj):
+    np = get_module("numpy", should_load=False)
+    _convert_to_base64(obj, np)
+
+
+def _convert_to_base64(obj, np):
     if isinstance(obj, dict):
         for key, value in obj.items():
-            if is_skipped_key(key):
+            if key in _skipped_keys:
                 continue
-            elif is_homogeneous_array(value):
+            elif np is not None and isinstance(value, np.ndarray):
                 obj[key] = to_typed_array_spec(value)
-            else:
-                convert_to_base64(value)
-    elif isinstance(obj, list) or isinstance(obj, tuple):
+            elif isinstance(value, dict):
+                _convert_to_base64(value, np)
+            elif isinstance(value, (list, tuple)):
+                _convert_to_base64(value, np)
+    elif isinstance(obj, (list, tuple)):
         for value in obj:
-            convert_to_base64(value)
+            if isinstance(value, (dict, list, tuple)):
+                _convert_to_base64(value, np)
 
 
 def cumsum(x):
