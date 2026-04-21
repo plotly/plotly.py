@@ -1,13 +1,23 @@
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened]
+    paths:
+      - 'js/**'
+      - 'plotly/labextension/**'
+
+name: Check JS build
 
 jobs:
   check-js-build:
     name: Check JS version number and build artifacts
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
       with:
         python-version: "3.x"
 
@@ -24,9 +34,12 @@ jobs:
           echo "✅ Version number $JSPROJECT_VERSION in $PKGJSON_PATH matches version number $PYPROJECT_VERSION in $PYPROJECT_PATH"
         fi
     - name: Install Node
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f  # v6.3.0
       with:
         node-version: '22'
+
+    - name: Set up uv
+      uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57  # v8.0.0
 
     - name: Copy current files to a temporary directory
       run: |
@@ -34,7 +47,6 @@ jobs:
 
     - name: Install dependencies and build
       run: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
         uv venv
         source .venv/bin/activate
         uv pip install jupyterlab
@@ -59,7 +71,7 @@ jobs:
         fi
 
     - name: Store the build artifacts from plotly/labextension
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
       if: failure()
       with:
         name: labextension

@@ -33,7 +33,7 @@ classifiers = [
 requires-python = ">=3.8"
 license = "MIT"
 license-files = ["LICENSE.txt"]
-version = "6.6.0"
+version = "6.7.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -81,6 +81,27 @@ dev_optional = [
 ]
 dev = [
     "plotly[dev_optional]"
+]
+
+# The following extras are intended for use in CI only
+dev_pandas1 = [
+    "pandas>=1,<2",
+    "numpy>=1,<2",
+    "setuptools<82"
+]
+dev_pandas2 = [
+    "pandas>=2,<3",
+]
+dev_pandas3 = [
+    "pandas>=3;python_version>='3.11'",
+]
+
+[tool.uv]
+exclude-newer = "72 hours"
+conflicts = [
+    [{ extra = "dev_pandas1" }, { extra = "dev_pandas2" }],
+    [{ extra = "dev_pandas1" }, { extra = "dev_pandas3" }],
+    [{ extra = "dev_pandas2" }, { extra = "dev_pandas3" }],
 ]
 
 [project.scripts]
