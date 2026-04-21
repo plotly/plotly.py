@@ -453,10 +453,7 @@ def test_colab_renderer_when_env_var_is_set():
 def test_colab_renderer_when_env_var_is_absent():
     """
     Without COLAB_NOTEBOOK_ID the default renderer must not be 'colab',
-    even when ``google.colab`` is importable.  The old detection used
-    ``import google.colab`` which wrongly activated the colab renderer
-    in environments that merely had the package installed (e.g. the
-    Colab VS Code extension).
+    even when ``google.colab`` is importable.
 
     Regression test for https://github.com/plotly/plotly.py/pull/5473.
     """
