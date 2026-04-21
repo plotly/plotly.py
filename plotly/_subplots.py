@@ -92,7 +92,7 @@ def make_subplots(
 
           - 'top-left': Subplots are numbered with (1, 1) in the top
                         left corner
-          - 'bottom-left': Subplots are numbererd with (1, 1) in the bottom
+          - 'bottom-left': Subplots are numbered with (1, 1) in the bottom
                            left corner
 
     print_grid: boolean (default True):
@@ -166,7 +166,7 @@ def make_subplots(
                 for this subplot to span.
             * l (float, default 0.0): padding left of cell
             * r (float, default 0.0): padding right of cell
-            * t (float, default 0.0): padding right of cell
+            * t (float, default 0.0): padding top of cell
             * b (float, default 0.0): padding bottom of cell
 
         - Note: Use 'horizontal_spacing' and 'vertical_spacing' to adjust
