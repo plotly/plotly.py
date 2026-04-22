@@ -916,8 +916,10 @@ def _configure_shared_axes(
 
         if x_or_y == "x":
             span = spec["colspan"]
+            match_axis = 'xaxis'
         else:
             span = spec["rowspan"]
+            match_axis = 'yaxis'
 
         if subplot_ref.subplot_type == "xy" and span == 1:
             if first_axis_id is None:
@@ -926,7 +928,7 @@ def _configure_shared_axes(
             else:
                 axis_name = subplot_ref.layout_keys[layout_key_ind]
                 axis_to_match = layout[axis_name]
-                subplot_ref.trace_kwargs[axis_name] = first_axis_id # Changes the reference axis in the set up to the initial axis (the axis to match)
+                subplot_ref.trace_kwargs[match_axis] = first_axis_id # Changes the reference axis in the set up to the initial axis (the axis to match)
                 axis_to_match.matches = first_axis_id
                 if remove_label:
                     axis_to_match.showticklabels = False
