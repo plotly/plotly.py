@@ -1,5 +1,8 @@
 import plotly.graph_objs as go
 import plotly.io as pio
+from typing import Optional, Any, TYPE_CHECKING
+if TYPE_CHECKING:
+    import pandas as pd
 from collections import namedtuple, OrderedDict
 from ._special_inputs import IdentityMap, Constant, Range
 from .trendline_functions import ols, lowess, rolling, expanding, ewm
@@ -98,7 +101,7 @@ del PxDefaults
 MAPBOX_TOKEN = None
 
 
-def set_mapbox_access_token(token):
+def set_mapbox_access_token(token: str):
     """
     Arguments:
         token: A Mapbox token to be used in `plotly.express.scatter_mapbox` and \
@@ -109,7 +112,7 @@ def set_mapbox_access_token(token):
     MAPBOX_TOKEN = token
 
 
-def get_trendline_results(fig):
+def get_trendline_results(fig: go.Figure) -> Optional["pd.DataFrame"]:
     """
     Extracts fit statistics for trendlines (when applied to figures generated with
     the `trendline` argument set to `"ols"`).

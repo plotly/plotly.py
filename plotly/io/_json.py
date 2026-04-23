@@ -172,7 +172,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         return _safe(orjson.dumps(cleaned, option=opts).decode("utf8"), _swap_orjson)
 
 
-def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
+def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None, base64=True):
     """
     Convert a figure to a JSON string representation
 
@@ -200,6 +200,10 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
 
+    base64: bool (default True)
+        True if large numerical arrays should be converted to a binary
+        base64 encoding (bdata), False otherwise.
+
     Returns
     -------
     str
@@ -211,7 +215,10 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
     """
     # Validate figure
     # ---------------
-    fig_dict = validate_coerce_fig_to_dict(fig, validate)
+    if hasattr(fig, "to_dict"):
+        fig_dict = fig.to_dict(encode_base64=base64)
+    else:
+        fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # Remove trace uid
     # ----------------

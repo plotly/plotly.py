@@ -1,3 +1,5 @@
+from typing import Any, Optional
+
 class IdentityMap(object):
     """
     `dict`-like object which acts as if the value for any key is the key itself. Objects
@@ -7,13 +9,13 @@ class IdentityMap(object):
     functions, such as `line_dash_map` and `symbol_map`.
     """
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: Any) -> Any:
         return key
 
-    def __contains__(self, key):
+    def __contains__(self, key: Any) -> bool:
         return True
 
-    def copy(self):
+    def copy(self) -> "IdentityMap":
         return self
 
 
@@ -24,7 +26,7 @@ class Constant(object):
     constant value. An optional label can be provided.
     """
 
-    def __init__(self, value, label=None):
+    def __init__(self, value: Any, label: Optional[str] = None) -> None:
         self.value = value
         self.label = label
 
@@ -36,5 +38,5 @@ class Range(object):
     onto integers starting at 0. An optional label can be provided.
     """
 
-    def __init__(self, label=None):
+    def __init__(self, label: Optional[str] = None) -> None:
         self.label = label
