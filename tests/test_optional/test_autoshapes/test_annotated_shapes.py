@@ -425,5 +425,84 @@ def test_all_annotation_positions():
     draw_all_annotation_positions(testing=True)
 
 
+
 if __name__ == "__main__":
     draw_all_annotation_positions()
+
+
+# Tests for datetime axis annotation support (issue #3065)
+import datetime
+
+
+def test_vline_datetime_string_annotation():
+    """add_vline with annotation_text on datetime x-axis should not crash."""
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(x=["2018-01-01", "2018-06-01", "2018-12-31"], y=[1, 2, 3])
+    )
+    fig.add_vline(x="2018-09-24", annotation_text="test")
+    assert len(fig.layout.annotations) == 1
+    assert fig.layout.annotations[0].text == "test"
+
+
+def test_hline_with_datetime_vline():
+    """add_hline should still work alongside datetime vline usage."""
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(x=["2018-01-01", "2018-06-01", "2018-12-31"], y=[1, 2, 3])
+    )
+    fig.add_hline(y=2, annotation_text="hline test")
+    assert len(fig.layout.annotations) == 1
+    assert fig.layout.annotations[0].text == "hline test"
+
+
+def test_vrect_datetime_string_annotation():
+    """add_vrect with annotation_text on datetime x-axis should not crash."""
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(x=["2018-01-01", "2018-06-01", "2018-12-31"], y=[1, 2, 3])
+    )
+    fig.add_vrect(x0="2018-03-01", x1="2018-09-01", annotation_text="rect test")
+    assert len(fig.layout.annotations) == 1
+    assert fig.layout.annotations[0].text == "rect test"
+
+
+def test_vline_datetime_object_annotation():
+    """add_vline with datetime.datetime object should not crash."""
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(
+            x=[
+                datetime.datetime(2018, 1, 1),
+                datetime.datetime(2018, 6, 1),
+                datetime.datetime(2018, 12, 31),
+            ],
+            y=[1, 2, 3],
+        )
+    )
+    fig.add_vline(x=datetime.datetime(2018, 9, 24), annotation_text="dt test")
+    assert len(fig.layout.annotations) == 1
+    assert fig.layout.annotations[0].text == "dt test"
+
+
+def test_vrect_datetime_object_annotation():
+    """add_vrect with datetime.datetime objects should compute correct mean."""
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(
+            x=[
+                datetime.datetime(2018, 1, 1),
+                datetime.datetime(2018, 6, 1),
+                datetime.datetime(2018, 12, 31),
+            ],
+            y=[1, 2, 3],
+        )
+    )
+    fig.add_vrect(
+        x0=datetime.datetime(2018, 3, 1),
+        x1=datetime.datetime(2018, 9, 1),
+        annotation_text="rect dt test",
+    )
+    assert len(fig.layout.annotations) == 1
+    assert fig.layout.annotations[0].text == "rect dt test"
+
