@@ -996,7 +996,7 @@ def _configure_shared_axes(
             return
         
         axis_name      : str   = trace.layout_keys[axis_index]
-        axis_dimension : str   = 'xaxis' if x_or_y == 'x' else 'yaxis'
+        # axis_dimension : str   = 'xaxis' if x_or_y == 'x' else 'yaxis'
         axis           : XAxis = layout[axis_name]
 
         if can_match_axis:
