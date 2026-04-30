@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Add `facet_row` support to `px.imshow` for creating subplots along an additional dimension [[#5445](https://github.com/plotly/plotly.py/pull/5445)]
+- Begin migrating `add_vline`, `add_hline`, `add_vrect`, `add_hrect` to use native `layout.shape.label`; the new `label=` parameter is now supported on all four helpers, and legacy `annotation_*` kwargs are forwarded to `shape.label` with a `FutureWarning` [[#5373](https://github.com/plotly/plotly.py/pull/5373)]
 
 ### Fixed
 - Update `numpy.percentile` syntax to stop using deprecated alias [[5483](https://github.com/plotly/plotly.py/pull/5483)], with thanks to @Mr-Neutr0n for the contribution!
