@@ -6,10 +6,12 @@
 # properties.
 # Note that this set does not contain `xaxis`/`yaxis` because these behave a
 # little differently.
+from __future__ import annotations
 import collections
 
-import plotly.graph_objects as go
-from typing import Literal, Optional, Tuple, TypedDict, Iterable
+from typing import Literal, Optional, Tuple, TypedDict, TYPE_CHECKING
+if TYPE_CHECKING:
+    from plotly.graph_objects import Layout, XAxis
 
 _single_subplot_types = {"scene", "geo", "polar", "ternary", "map", "mapbox"}
 _subplot_types = set.union(_single_subplot_types, {"xy", "domain"})
@@ -38,8 +40,9 @@ class SubplotSpec(TypedDict):
     type : Literal['xy', 'scene', 'polar', 'ternary', 'map', 'mapbox', 'domain'] | str
     secondary_y : bool 
     colspan : int
-    rowspan : int 
-    l : float 
+    rowspan : int
+    # NOTE: that this is the dictionary as defined by the documentation, so the ambiguous name 'l' can't be changed without changing the documentation
+    l : float # noqa: E741
     r : float 
     t : float 
     b : float 
@@ -759,19 +762,10 @@ The row_titles argument to make_subplots must be a list or tuple
             )
             grid_ref[r][c] = subplot_refs
 
-    _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir, False)
-    _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir, False)
 
-    any_secondary_y = any(
-        spec["secondary_y"]
-        for spec_row in specs
-        for spec in spec_row
-        if spec is not None
-    )
-    if any_secondary_y:
-        _configure_shared_axes(
-            layout, grid_ref, specs, "y", shared_yaxes, row_dir, True
-        )
+    _configure_shared_axes(layout, grid_ref, specs, "x", shared_xaxes, row_dir)
+    _configure_shared_axes(layout, grid_ref, specs, "y", shared_yaxes, row_dir)
+
 
     # Build inset reference
     # ---------------------
@@ -903,46 +897,40 @@ The row_titles argument to make_subplots must be a list or tuple
     return figure
 
 def _configure_shared_axes(
-    layout        : go.Layout, 
+    layout        : Layout, 
     grid_ref      : Tuple[Tuple[SubplotRef]], 
     specs         : Tuple[Tuple[SubplotSpec]], 
     x_or_y        : Literal['x', 'y'], 
     shared        : bool | Literal['rows', 'columns', 'all'],
-    row_direction : Literal[1, -1], 
-    secondary_y   : bool 
+    row_direction : Literal[1, -1]
 ) -> None:
     '''
-        Sets the axes to be shared, making them use the same axis 
+        Sets the axes to be shared, making them use the same axis
 
         Parameters: 
         -----------
         layout        (go.Layout)                         : The layout of the figure to be updating
         grid_ref      (Tuple[Tuple[SubplotRef]])          : The grid of subplots within the figure; grid_ref[row][column] = subplot at that coordinate
         specs         (Tuple[Tuple[SubplotSpec]])         : The specifications of each of the subplots within the figure; specs[row][column] = specs of the subplot at that coordinate 
-        x_or_y        ('x' | 'y')                         : The axis to make shared (x-axis or y-axis)
-        shared        ('rows' | 'columns' | 'all' | bool) : Share the axis within the row, column, or across all of the subplots (True defaults to columns mode)
-        row_direction (1 | -1)                            : The directional that the rows go 
-        secondary_y   (bool)                              : Whether there are different or shared y-axis
+        x_or_y        ('x' | 'y')                         : The axis to configure
+        shared        ('rows' | 'columns' | 'all' | bool) : The sharing mode, (True is 'columns' mode, False means no sharing) ie share the axis with all subplots in the corresponding row, column, or entire figure
+        row_direction (1 | -1)                            : The directional that the rows go
     '''
     
     row_count    : int = len(grid_ref)
     column_count : int = len(grid_ref[0])
 
-    rows    : Iterable[int] = tuple(range(row_count - 1, -1, -1))    if row_direction < 0 else tuple(range(row_count))
-    columns : Iterable[int] = tuple(range(column_count - 1, -1, -1)) if secondary_y       else tuple(range(column_count))
-
-    axis_index        : int = 1 if secondary_y   else 0
-    layout_axis_index : int = 0 if x_or_y == 'x' else 1 
+    axis_index : int = 0 if x_or_y == 'x' else 1 
     
-    def find_label_and_index(row_order : int | Iterable[int], column_order : int | Iterable[int]) -> Optional[Tuple[str, Tuple[int, int]]]: 
+    def find_label_and_index(row_order : int | Tuple[int], column_order : int | Tuple[int], trace_layer : int) -> Optional[Tuple[str, Tuple[int, int]]]: 
         '''
-            Searches the grid through the row, column order provided (doing row, then column); will only check things that appear in those lists
+            Searches the grid through the row, column order provided (doing row, then column); will only check things that appear in those lists; ONLY WORKS WITH 2D CARTESIAN SUBPLOTS AKA 'xy' TYPE SUBPLOTS
 
             Parameters: 
             -----------
-            row_order    (int | Iterable[int]): If an int, will look only at the that row index, else it will look at all of the rows in the order of the iterable
-            column_order (int | Iterable[int]): If an int, will only look at that column index, else it will look at all of the columns in the order of the iterable 
-
+            row_order    (int | Tuple[int]): If an int, will look only at the that row index, else it will look at all of the rows in the order of the iterable
+            column_order (int | Tuple[int]): If an int, will only look at that column index, else it will look at all of the columns in the order of the iterable 
+            trace_layer  (int)             : Which axis of traces to look at [Since there can be multiple traces on one subplot ie the secondary_y traces are on layer 1]
             Return: 
             -------
             Returns (Label : str, (Row : int, Column : int)): returning the label found, and the row and column it was found at (uses x_or_y to determine which of the axes' labels to pull)
@@ -950,125 +938,139 @@ def _configure_shared_axes(
         '''
         
         # Turn them into lists with one element, so that both row_order and column_order are iterables
-        row_order    : Iterable[int] = [row_order]    if isinstance(row_order, int)    else row_order
-        column_order : Iterable[int] = [column_order] if isinstance(column_order, int) else column_order
+        row_order    : Tuple[int] = [row_order]    if isinstance(row_order, int)    else row_order
+        column_order : Tuple[int] = [column_order] if isinstance(column_order, int) else column_order
         
         
         # Iterate through the rows and columns 
         for row in row_order: 
             for column in column_order: 
-                if not grid_ref[row][column] or axis_index >= len(grid_ref[row][column]): 
+                if not grid_ref[row][column]: 
                     continue 
-
-                subplot_reference : SubplotRef  = grid_ref[row][column][axis_index]
-                spec              : SubplotSpec = specs[row][column]
                 
-                if subplot_reference is None: 
-                    continue  
-
-                span = spec['colspan'] if x_or_y == 'x' else spec['rowspan']
-                if subplot_reference.subplot_type != 'xy' or span != 1: 
+                subplot_traces : Tuple[Optional[SubplotRef]] = grid_ref[row][column]
+                subplot_spec   : SubplotSpec       = specs[row][column]
+                
+                span = subplot_spec['colspan'] if x_or_y == 'x' else subplot_spec['rowspan']
+                if subplot_spec['type'] != 'xy' or span != 1 or trace_layer >= len(subplot_traces):
+                    continue 
+                
+                trace = subplot_traces[trace_layer]
+                if trace is None or trace.subplot_type != 'xy':
                     continue 
 
-                label_name : str = subplot_reference.layout_keys[layout_axis_index]
+                label_name : str = trace.layout_keys[axis_index]
                 label      : str = label_name.replace("axis", "")
                 return label, (row, column)
         return None 
 
 
-    def update_trace_axis(matched_label : str, row : int, column : int, can_remove_label : bool) -> None: 
+    def update_trace_axis(axis_label : str, row : int, column : int, trace_layer : int, can_reassign_axis : bool, can_hide_ticks : bool, can_match_axis : bool) -> None: 
         '''
-            Updates the trace at the given row and column with the given label, and removes the label visibility if necessary
+            Updates the specific subplot trace at the given row and column with the given label, and removes the label visibility if necessary; ONLY WORKS WITH 2D CARTESIAN SUBPLOTS AKA 'xy' TYPE SUBPLOTS
 
             Parameters: 
             -----------
-            matched_label           (str) : The label to make the axis match (uses the x_or_y value to determine which of the axes to change), if there is a subplot at the given location
-            row                     (int) : The row of the subplot within grid_ref to update 
-            column                  (int) : The column of the subplot within grid_ref to update 
-            can_remove_label        (bool): Whether the label should be visible (only the bottom label should be visible)
-            can_change_trace_kwargs (bool): If True the label itself can be changed directly to be the exact same axis (ie use the exact same axis in the trace keyword arguments), or if False, can only mark as matching (ie don't change the trace keyword args)
+            axis_label        (str) : The label to make the axis match (uses the x_or_y value to determine which of the axes to change), if there is a subplot at the given location
+            row               (int) : The row of the subplot within grid_ref to update 
+            column            (int) : The column of the subplot within grid_ref to update 
+            trace_layer       (int) : Which axis of traces to look at [Since there can be multiple traces on one subplot ie the secondary_y traces are on layer 1]
+            can_reassign_axis (bool): If True, can change the unique axis for the shared axis in the trace keywords, otherwise, will keep using the axis name it already has
+            can_hide_ticks    (bool): If the function is allowed to hide the ticks (if True, it will hide the ticks, if False, it will leave the ticks as their current state)
+            can_match_axis    (bool): If the axis should be marked as a match to the axis label
         '''
-        if not grid_ref[row][column] or axis_index >= len(grid_ref[row][column]): 
+
+        if not grid_ref[row][column] or specs[row][column] is None: 
             return  
         
-        subplot_reference : SubplotRef  = grid_ref[row][column][axis_index]
-        spec              : SubplotSpec = specs[row][column]
+        subplot_traces : Tuple[Optional[SubplotRef]] = grid_ref[row][column]
+        subplot_spec   : SubplotSpec                 = specs[row][column]
+
+        span = subplot_spec['colspan'] if x_or_y == 'x' else subplot_spec['rowspan']
+        if subplot_spec['type'] != 'xy' or span != 1 or trace_layer >= len(subplot_traces):
+            return
+
+        trace : Optional[SubplotRef] = subplot_traces[trace_layer]
         
-        if subplot_reference is None: 
-            return 
-
-        span = spec['colspan'] if x_or_y == 'x' else spec['rowspan']
-        if subplot_reference.subplot_type != 'xy' or span != 1: 
-            return 
+        if trace is None or trace.subplot_type != 'xy' or span != 1: 
+            return
         
-        axis_name      : str      = subplot_reference.layout_keys[layout_axis_index]
-        axis_dimension : str      = 'xaxis' if x_or_y == 'x' else 'yaxis'
-        axis           : go.XAxis = layout[axis_name]
+        axis_name      : str   = trace.layout_keys[axis_index]
+        axis_dimension : str   = 'xaxis' if x_or_y == 'x' else 'yaxis'
+        axis           : XAxis = layout[axis_name]
 
-        axis.matches = matched_label
-        subplot_reference.trace_kwargs[axis_dimension] = matched_label
-
-        if can_remove_label:
-            axis.showticklabels = False 
-
-    def columns_mode(): 
+        if can_match_axis:
+            axis.matches = axis_label
+        
+        if can_hide_ticks:
+            axis.showticklabels = False
+        
+        if can_reassign_axis:
+            # trace.trace_kwargs[axis_dimension] = axis_label
+            pass
+            
+    def columns_mode(rows : Tuple[int], columns : Tuple[int], trace_layer : int): 
         for column in columns:
             # Get the label used by all the rows in the column
-            label_data = find_label_and_index(rows, column) 
+            label_data = find_label_and_index(rows, column, trace_layer) 
             if label_data is None: 
                 continue 
-            column_label, (label_row, _) = label_data
-            # Set all of the values in the column 
+            axis_label, (label_row, _) = label_data
 
-            can_remove_label : bool = (x_or_y == 'x')
-            
+            # Set all of the values in the column 
             for row in rows: 
-                if row == label_row: # Don't update the figure that the label we are matching comes from
-                    continue
-                
-                update_trace_axis(column_label, row, column, can_remove_label)
+                subplot_spec      : SubplotSpec = specs[row][column]
+                can_reassign_axis : bool        = (x_or_y != 'y' or not subplot_spec["secondary_y"]) # Every subplot in the same column should share the same axis if in columns mode
+                can_match_axis    : bool        = (row != label_row)   
+                can_hide_ticks    : bool        = can_match_axis and x_or_y == 'x' # Sharing column wise can only hide x-axis; still need all of the different y-axis across plots in the same columns
+
+                update_trace_axis(axis_label, row, column, trace_layer, can_reassign_axis, can_hide_ticks, can_match_axis)
 
     
-    def rows_mode(): 
+    def rows_mode(rows : Tuple[int], columns : Tuple[int], trace_layer : int):
         for row in rows: 
-            label_data = find_label_and_index(row, columns) 
+            label_data = find_label_and_index(row, columns, trace_layer) 
             if label_data is None: 
                 continue 
-            row_label, (_, label_column) = label_data
-            
-            can_remove_label : bool = (x_or_y == 'y')
+            axis_label, (_, label_column) = label_data
 
             for column in columns: 
-                if column == label_column:  # Don't update the figure that the label we are matching comes from
-                    continue 
+                spec              : SubplotSpec = specs[row][column]
+                can_reassign_axis : bool        = (x_or_y != 'y' or not spec['secondary_y'])
+                can_match_axis    : bool        = (column != label_column)
+                can_hide_ticks    : bool        = can_match_axis and x_or_y == 'y'  # Sharing row wise can only hide y-axis; still need all of the different x-axis across plots in the same row
 
-                update_trace_axis(row_label, row, column, can_remove_label)
+                update_trace_axis(axis_label, row, column, trace_layer, can_reassign_axis, can_hide_ticks, can_match_axis)
 
-    def all_mode(): 
-        label_data = find_label_and_index(rows, columns) 
+    def all_mode(rows : Tuple[int], columns : Tuple[int], trace_layer : int): 
+        label_data = find_label_and_index(rows, columns, trace_layer) 
         if label_data is None: 
             return 
-        label, (label_row, label_column) = label_data
+        axis_label, (label_row, label_column) = label_data
     
-        for row_index, row in enumerate(rows): 
+        for row in rows: 
             for column in columns: 
-                if row == label_row and column == label_column:  # Don't update the figure that the label we are matching comes from
-                    continue
+                spec              : SubplotSpec = specs[row][column]
+                can_reassign_axis : bool        = (x_or_y != 'y' or not spec['secondary_y'])
+                can_match_axis    : bool        = (row != label_row or column != label_column)
+                can_hide_ticks    : bool        = not ((row == label_row and x_or_y == 'x') or (column == label_column and x_or_y == 'y')) # The x-axis is across the first row, and the y-axis is along the first column
+                update_trace_axis(axis_label, row, column, trace_layer, can_reassign_axis, can_hide_ticks, can_match_axis)
 
-                if x_or_y == 'y': 
-                    can_remove_label : bool = (column < column_count - 1 if secondary_y else column > 0)
-                else:
-                    can_remove_label : bool = (row_index > 0 if row_direction > 0 else row < row_count - 1)
-
-                update_trace_axis(label, row, column, can_remove_label)
-
-    match(shared, x_or_y, shared):
-        case ('columns', _, _) | (_, 'x', True): # If columns mode, or shared and x
-            columns_mode()
-        case ('rows', _, _) | (_, 'y', True): # If rows mode, or shared and y
-            rows_mode() 
-        case ('all', _, _): # If all mode
-            all_mode()
+    
+    rows    : Tuple[int] = tuple(range(row_count - 1, -1, -1)) if row_direction < 0 else tuple(range(row_count))
+    columns : Tuple[int] = tuple(range(column_count))
+    BASE_TRACE_LAYER = 0
+    SECOND_Y_LAYER   = 1
+    match(shared, x_or_y):
+        case ('columns', _) | (True, 'x'): # If columns mode, or shared and x
+            columns_mode(rows, columns, BASE_TRACE_LAYER)
+            columns_mode(tuple(reversed(rows)), columns, SECOND_Y_LAYER)
+        case ('rows', _) | (True, 'y'): # If rows mode, or shared and y
+            rows_mode(rows, columns, BASE_TRACE_LAYER)
+            rows_mode(rows, tuple(reversed(columns)), SECOND_Y_LAYER) 
+        case ('all', _): # If all mode
+            all_mode(rows, columns, BASE_TRACE_LAYER)
+            all_mode(tuple(reversed(rows)), tuple(reversed(columns)), SECOND_Y_LAYER)
         case _: # If reached the other case
             return 
 
