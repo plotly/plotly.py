@@ -120,6 +120,10 @@ include = [
     "js/install.json",  # used by Jupyter extension
 ]
 
+[tool.hatch.build.targets.wheel]
+# Prevent js/ directory from being installed as top-level package
+exclude = ["js"]
+
 [tool.hatch.build.targets.wheel.shared-data]
 # Specify files from this package which will be copied to the user's system on install
 # This is how the jupyterlab extension gets installed
