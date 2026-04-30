@@ -965,7 +965,7 @@ def _configure_shared_axes(
         return None 
 
 
-    def update_trace_axis(axis_label : str, row : int, column : int, trace_layer : int, can_reassign_axis : bool, can_hide_ticks : bool, can_match_axis : bool) -> None: 
+    def update_trace_axis(axis_label : str, row : int, column : int, trace_layer : int, can_hide_ticks : bool, can_match_axis : bool) -> None: 
         '''
             Updates the specific subplot trace at the given row and column with the given label, and removes the label visibility if necessary; ONLY WORKS WITH 2D CARTESIAN SUBPLOTS AKA 'xy' TYPE SUBPLOTS
 
@@ -996,7 +996,6 @@ def _configure_shared_axes(
             return
         
         axis_name      : str   = trace.layout_keys[axis_index]
-        # axis_dimension : str   = 'xaxis' if x_or_y == 'x' else 'yaxis'
         axis           : XAxis = layout[axis_name]
 
         if can_match_axis:
@@ -1004,10 +1003,6 @@ def _configure_shared_axes(
         
         if can_hide_ticks:
             axis.showticklabels = False
-        
-        if can_reassign_axis:
-            # trace.trace_kwargs[axis_dimension] = axis_label
-            pass
             
     def columns_mode(rows : Tuple[int], columns : Tuple[int], trace_layer : int): 
         for column in columns:
@@ -1019,12 +1014,10 @@ def _configure_shared_axes(
 
             # Set all of the values in the column 
             for row in rows: 
-                subplot_spec      : SubplotSpec = specs[row][column]
-                can_reassign_axis : bool        = (x_or_y != 'y' or not subplot_spec["secondary_y"]) # Every subplot in the same column should share the same axis if in columns mode
-                can_match_axis    : bool        = (row != label_row)   
-                can_hide_ticks    : bool        = can_match_axis and x_or_y == 'x' # Sharing column wise can only hide x-axis; still need all of the different y-axis across plots in the same columns
+                can_match_axis : bool = (row != label_row)   
+                can_hide_ticks : bool = can_match_axis and x_or_y == 'x' # Sharing column wise can only hide x-axis; still need all of the different y-axis across plots in the same columns
 
-                update_trace_axis(axis_label, row, column, trace_layer, can_reassign_axis, can_hide_ticks, can_match_axis)
+                update_trace_axis(axis_label, row, column, trace_layer, can_hide_ticks, can_match_axis)
 
     
     def rows_mode(rows : Tuple[int], columns : Tuple[int], trace_layer : int):
@@ -1035,12 +1028,10 @@ def _configure_shared_axes(
             axis_label, (_, label_column) = label_data
 
             for column in columns: 
-                spec              : SubplotSpec = specs[row][column]
-                can_reassign_axis : bool        = (x_or_y != 'y' or not spec['secondary_y'])
-                can_match_axis    : bool        = (column != label_column)
-                can_hide_ticks    : bool        = can_match_axis and x_or_y == 'y'  # Sharing row wise can only hide y-axis; still need all of the different x-axis across plots in the same row
+                can_match_axis : bool = (column != label_column)
+                can_hide_ticks : bool = can_match_axis and x_or_y == 'y'  # Sharing row wise can only hide y-axis; still need all of the different x-axis across plots in the same row
 
-                update_trace_axis(axis_label, row, column, trace_layer, can_reassign_axis, can_hide_ticks, can_match_axis)
+                update_trace_axis(axis_label, row, column, trace_layer, can_hide_ticks, can_match_axis)
 
     def all_mode(rows : Tuple[int], columns : Tuple[int], trace_layer : int): 
         label_data = find_label_and_index(rows, columns, trace_layer) 
@@ -1050,11 +1041,9 @@ def _configure_shared_axes(
     
         for row in rows: 
             for column in columns: 
-                spec              : SubplotSpec = specs[row][column]
-                can_reassign_axis : bool        = (x_or_y != 'y' or not spec['secondary_y'])
-                can_match_axis    : bool        = (row != label_row or column != label_column)
-                can_hide_ticks    : bool        = not ((row == label_row and x_or_y == 'x') or (column == label_column and x_or_y == 'y')) # The x-axis is across the first row, and the y-axis is along the first column
-                update_trace_axis(axis_label, row, column, trace_layer, can_reassign_axis, can_hide_ticks, can_match_axis)
+                can_match_axis : bool = (row != label_row or column != label_column)
+                can_hide_ticks : bool = not ((row == label_row and x_or_y == 'x') or (column == label_column and x_or_y == 'y')) # The x-axis is across the first row, and the y-axis is along the first column
+                update_trace_axis(axis_label, row, column, trace_layer, can_hide_ticks, can_match_axis)
 
     
     rows    : Tuple[int] = tuple(range(row_count - 1, -1, -1)) if row_direction < 0 else tuple(range(row_count))
