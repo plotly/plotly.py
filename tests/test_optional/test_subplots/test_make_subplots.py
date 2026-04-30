@@ -57,201 +57,201 @@ class TestAddTracesRowsColsDataTypes(TestCase):
 
         self.assertEqual(expected_data_length, len(fig2.data))
 
-# class TestSharedAxisOnMakeColumn(TestCase): 
-#     """
-#         Regression test for #5427: traces should reference the primary axis
-#         when shared_xaxes=True, so spike lines and hover sync work correctly.
-#     """
+class TestSharedAxisOnMakeColumn(TestCase): 
+    """
+        Regression test for #5427: traces should reference the primary axis
+        when shared_xaxes=True, so spike lines and hover sync work correctly.
+    """
     
-#     def test_xaxes_shared_columns_mode_single_column(self):
-#         """
-#             When 'columns' mode for shared_xaxis, all of the traces in the same column should reference the same x-axis
-#         """
+    def test_xaxes_shared_columns_mode_single_column(self):
+        """
+            When 'columns' mode for shared_xaxis, all of the traces in the same column should reference the same x-axis
+        """
 
-#         from plotly.subplots import make_subplots
-#         from plotly.graph_objects import Figure, Scatter, XAxis
+        from plotly.subplots import make_subplots
+        from plotly.graph_objects import Figure, Scatter, XAxis
 
-#         fig : Figure = make_subplots(rows=3, cols=1, shared_xaxes='columns')
+        fig : Figure = make_subplots(rows=3, cols=1, shared_xaxes='columns')
 
-#         trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
-#         trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
-#         trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
+        trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
+        trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
+        trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
 
-#         fig.add_trace(trace_1, row=1, col=1)
-#         fig.add_trace(trace_2, row=2, col=1)
-#         fig.add_trace(trace_3, row=3, col=1)
+        fig.add_trace(trace_1, row=1, col=1)
+        fig.add_trace(trace_2, row=2, col=1)
+        fig.add_trace(trace_3, row=3, col=1)
         
 
-#         # The x-axis of all of the figures should be the same
-#         trace_1_xaxis : XAxis = fig.data[0].xaxis
-#         trace_2_xaxis : XAxis = fig.data[1].xaxis
-#         trace_3_xaxis : XAxis = fig.data[2].xaxis
+        # The x-axis of all of the figures should be the same
+        trace_1_xaxis : XAxis = fig.data[0].xaxis
+        trace_2_xaxis : XAxis = fig.data[1].xaxis
+        trace_3_xaxis : XAxis = fig.data[2].xaxis
 
-#         self.assertEqual(trace_1_xaxis, trace_2_xaxis, "Shared x-axis column don't match: Figure 1 and Figure 2 have different x-axes")
-#         self.assertEqual(trace_1_xaxis, trace_3_xaxis, "Shared x-axis column don't match: Figure 1 and Figure 3 have different x-axes")
-#         self.assertEqual(trace_2_xaxis, trace_3_xaxis, "Shared x-axis column don't match: Figure 2 and Figure 3 have different x-axes")
+        self.assertEqual(trace_1_xaxis, trace_2_xaxis, "Shared x-axis column don't match: Figure 1 and Figure 2 have different x-axes")
+        self.assertEqual(trace_1_xaxis, trace_3_xaxis, "Shared x-axis column don't match: Figure 1 and Figure 3 have different x-axes")
+        self.assertEqual(trace_2_xaxis, trace_3_xaxis, "Shared x-axis column don't match: Figure 2 and Figure 3 have different x-axes")
 
-#     def test_xaxes_shared_columns_mode_multiple_columns(self): 
-#         """
-#             When 'columns' mode for shared_xaxis, different columns should have different references
-#         """
-#         from plotly.subplots import make_subplots
-#         from plotly.graph_objects import Figure, Scatter, XAxis
+    def test_xaxes_shared_columns_mode_multiple_columns(self): 
+        """
+            When 'columns' mode for shared_xaxis, different columns should have different references
+        """
+        from plotly.subplots import make_subplots
+        from plotly.graph_objects import Figure, Scatter, XAxis
 
-#         fig : Figure = make_subplots(rows=2, cols=2, shared_xaxes='columns')
+        fig : Figure = make_subplots(rows=2, cols=2, shared_xaxes='columns')
 
-#         trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
-#         trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
-#         trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
-#         trace_4 : Scatter = Scatter(x=[1, 2, 3], y=[10, 11, 12])
+        trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
+        trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
+        trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
+        trace_4 : Scatter = Scatter(x=[1, 2, 3], y=[10, 11, 12])
 
-#         fig.add_trace(trace_1, row=1, col=1)
-#         fig.add_trace(trace_2, row=2, col=1)
-#         fig.add_trace(trace_3, row=1, col=2)
-#         fig.add_trace(trace_4, row=2, col=2)
+        fig.add_trace(trace_1, row=1, col=1)
+        fig.add_trace(trace_2, row=2, col=1)
+        fig.add_trace(trace_3, row=1, col=2)
+        fig.add_trace(trace_4, row=2, col=2)
 
-#         fig.update_xaxes()
-#         fig.update_layout()
+        fig.update_xaxes()
+        fig.update_layout()
 
-#         # The x-axis of figures that are in the same column should be the same, and different if they are in different columns
-#         trace_1_xaxis : XAxis = fig.data[0].xaxis
-#         trace_2_xaxis : XAxis = fig.data[1].xaxis
-#         trace_3_xaxis : XAxis = fig.data[2].xaxis
-#         trace_4_xaxis : XAxis = fig.data[3].xaxis
+        # The x-axis of figures that are in the same column should be the same, and different if they are in different columns
+        trace_1_xaxis : XAxis = fig.data[0].xaxis
+        trace_2_xaxis : XAxis = fig.data[1].xaxis
+        trace_3_xaxis : XAxis = fig.data[2].xaxis
+        trace_4_xaxis : XAxis = fig.data[3].xaxis
 
-#         self.assertEqual(trace_1_xaxis, trace_2_xaxis, "Shared x-axis column don't match: Figure 1 and Figure 2 have different x-axes")
-#         self.assertEqual(trace_3_xaxis, trace_4_xaxis, "Shared x-axis column don't match: Figure 3 and Figure 4 have different x-axes")
-#         self.assertNotEqual(trace_1_xaxis, trace_3_xaxis, "Different x-axis column match: Figure 1 and Figure 3 have the same x-axes")
-#         self.assertNotEqual(trace_2_xaxis, trace_4_xaxis, "Different x-axis column match: Figure 2 and Figure 4 have the same x-axes")
+        self.assertEqual(trace_1_xaxis, trace_2_xaxis, "Shared x-axis column don't match: Figure 1 and Figure 2 have different x-axes")
+        self.assertEqual(trace_3_xaxis, trace_4_xaxis, "Shared x-axis column don't match: Figure 3 and Figure 4 have different x-axes")
+        self.assertNotEqual(trace_1_xaxis, trace_3_xaxis, "Different x-axis column match: Figure 1 and Figure 3 have the same x-axes")
+        self.assertNotEqual(trace_2_xaxis, trace_4_xaxis, "Different x-axis column match: Figure 2 and Figure 4 have the same x-axes")
 
-#     def test_xaxes_shared_rows_mode_single_row(self):
-#         """
-#             When 'rows' mode for shared_xaxis, all of the traces in the same row should reference the same x-axis
-#         """
+    def test_yaxes_shared_rows_mode_single_row(self):
+        """
+            When 'rows' mode for shared_xaxis, all of the traces in the same row should reference the same x-axis
+        """
 
-#         from plotly.subplots import make_subplots
-#         from plotly.graph_objects import Figure, Scatter, XAxis
+        from plotly.subplots import make_subplots
+        from plotly.graph_objects import Figure, Scatter, YAxis
 
-#         fig : Figure = make_subplots(rows=1, cols=3, shared_xaxes='rows')
+        fig : Figure = make_subplots(rows=1, cols=3, shared_yaxes='rows')
 
-#         trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
-#         trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
-#         trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
+        trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
+        trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
+        trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
 
-#         fig.add_trace(trace_1, row=1, col=1)
-#         fig.add_trace(trace_2, row=1, col=2)
-#         fig.add_trace(trace_3, row=1, col=3)
+        fig.add_trace(trace_1, row=1, col=1)
+        fig.add_trace(trace_2, row=1, col=2)
+        fig.add_trace(trace_3, row=1, col=3)
 
-#         fig.update_xaxes()
-#         fig.update_layout()
+        fig.update_xaxes()
+        fig.update_layout()
 
-#         # The x-axis of all of the figures should be the same
-#         trace_1_xaxis : XAxis = fig.data[0].xaxis
-#         trace_2_xaxis : XAxis = fig.data[1].xaxis
-#         trace_3_xaxis : XAxis = fig.data[2].xaxis
+        # The x-axis of all of the figures should be the same
+        trace_1_yaxis : YAxis = fig.data[0].yaxis
+        trace_2_yaxis : YAxis = fig.data[1].yaxis
+        trace_3_yaxis : YAxis = fig.data[2].yaxis
 
-#         self.assertEqual(trace_1_xaxis, trace_2_xaxis, "Shared x-axis row don't match: Figure 1 and Figure 2 have different x-axes")
-#         self.assertEqual(trace_1_xaxis, trace_3_xaxis, "Shared x-axis row don't match: Figure 1 and Figure 3 have different x-axes")
-#         self.assertEqual(trace_2_xaxis, trace_3_xaxis, "Shared x-axis row don't match: Figure 2 and Figure 3 have different x-axes")
+        self.assertEqual(trace_1_yaxis, trace_2_yaxis, "Shared y-axis row don't match: Figure 1 and Figure 2 have different y-axes")
+        self.assertEqual(trace_1_yaxis, trace_3_yaxis, "Shared y-axis row don't match: Figure 1 and Figure 3 have different y-axes")
+        self.assertEqual(trace_2_yaxis, trace_3_yaxis, "Shared y-axis row don't match: Figure 2 and Figure 3 have different y-axes")
 
-#     def test_xaxes_shared_rows_mode_multiple_rows(self): 
-#         """
-#             When 'rows' mode for shared_xaxis, different rows should have different references
-#         """
-#         from plotly.subplots import make_subplots
-#         from plotly.graph_objects import Figure, Scatter, XAxis
+    def test_yaxes_shared_rows_mode_multiple_rows(self): 
+        """
+            When 'rows' mode for shared_xaxis, different rows should have different references
+        """
+        from plotly.subplots import make_subplots
+        from plotly.graph_objects import Figure, Scatter, YAxis
 
-#         fig : Figure = make_subplots(rows=2, cols=2, shared_xaxes='rows')
+        fig : Figure = make_subplots(rows=2, cols=2, shared_yaxes='rows')
 
-#         trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
-#         trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
-#         trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
-#         trace_4 : Scatter = Scatter(x=[1, 2, 3], y=[10, 11, 12])
+        trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
+        trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
+        trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
+        trace_4 : Scatter = Scatter(x=[1, 2, 3], y=[10, 11, 12])
 
-#         fig.add_trace(trace_1, row=1, col=1)
-#         fig.add_trace(trace_2, row=1, col=2)
-#         fig.add_trace(trace_3, row=2, col=1)
-#         fig.add_trace(trace_4, row=2, col=2)
+        fig.add_trace(trace_1, row=1, col=1)
+        fig.add_trace(trace_2, row=1, col=2)
+        fig.add_trace(trace_3, row=2, col=1)
+        fig.add_trace(trace_4, row=2, col=2)
 
-#         fig.update_xaxes()
-#         fig.update_layout()
+        fig.update_xaxes()
+        fig.update_layout()
 
-#         # The x-axis of figures in the same row should be the same, and different if they are in different rows
-#         trace_1_xaxis : XAxis = fig.data[0].xaxis
-#         trace_2_xaxis : XAxis = fig.data[1].xaxis
-#         trace_3_xaxis : XAxis = fig.data[2].xaxis
-#         trace_4_xaxis : XAxis = fig.data[3].xaxis
+        # The x-axis of figures in the same row should be the same, and different if they are in different rows
+        trace_1_yaxis : YAxis = fig.data[0].yaxis
+        trace_2_yaxis : YAxis = fig.data[1].yaxis
+        trace_3_yaxis : YAxis = fig.data[2].yaxis
+        trace_4_yaxis : YAxis = fig.data[3].yaxis
 
-#         self.assertEqual(trace_1_xaxis, trace_2_xaxis, "Shared x-axis row don't match: Figure 1 and Figure 2 have different x-axes")
-#         self.assertEqual(trace_3_xaxis, trace_4_xaxis, "Shared x-axis row don't match: Figure 3 and Figure 4 have different x-axes")
-#         self.assertNotEqual(trace_1_xaxis, trace_3_xaxis, "Different x-axis row match: Figure 1 and Figure 3 have the same x-axes")
-#         self.assertNotEqual(trace_2_xaxis, trace_4_xaxis, "Different x-axis row match: Figure 2 and Figure 4 have the same x-axes")
+        self.assertEqual(trace_1_yaxis, trace_2_yaxis, "Shared y-axis row don't match: Figure 1 and Figure 2 have different y-axes")
+        self.assertEqual(trace_3_yaxis, trace_4_yaxis, "Shared y-axis row don't match: Figure 3 and Figure 4 have different y-axes")
+        self.assertNotEqual(trace_1_yaxis, trace_3_yaxis, "Different y-axis row match: Figure 1 and Figure 3 have the same y-axes")
+        self.assertNotEqual(trace_2_yaxis, trace_4_yaxis, "Different y-axis row match: Figure 2 and Figure 4 have the same y-axes")
 
-#     def test_xaxes_shared_all_mode(self): 
-#         """
-#             When 'all' mode for shared_xaxis, all rows share the same x-axes
-#         """
-#         from plotly.subplots import make_subplots
-#         from plotly.graph_objects import Figure, Scatter, XAxis
+    # def test_xaxes_shared_all_mode(self): # TODO: All mode is currently disabled as it causes all of the graphs to overlap in one subplot
+    #     """
+    #         When 'all' mode for shared_xaxis, all rows share the same x-axes
+    #     """
+    #     from plotly.subplots import make_subplots
+    #     from plotly.graph_objects import Figure, Scatter, XAxis
 
-#         fig : Figure = make_subplots(rows=2, cols=2, shared_xaxes='all')
+    #     fig : Figure = make_subplots(rows=2, cols=2, shared_xaxes='all')
 
-#         trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
-#         trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
-#         trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
-#         trace_4 : Scatter = Scatter(x=[1, 2, 3], y=[10, 11, 12])
+    #     trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
+    #     trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
+    #     trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
+    #     trace_4 : Scatter = Scatter(x=[1, 2, 3], y=[10, 11, 12])
 
-#         fig.add_trace(trace_1, row=1, col=1)
-#         fig.add_trace(trace_2, row=1, col=2)
-#         fig.add_trace(trace_3, row=2, col=1)
-#         fig.add_trace(trace_4, row=2, col=2)
+    #     fig.add_trace(trace_1, row=1, col=1)
+    #     fig.add_trace(trace_2, row=1, col=2)
+    #     fig.add_trace(trace_3, row=2, col=1)
+    #     fig.add_trace(trace_4, row=2, col=2)
 
-#         fig.update_xaxes()
-#         fig.update_layout()
+    #     fig.update_xaxes()
+    #     fig.update_layout()
 
-#         # The x-axis of all the figures should be the same
-#         trace_1_xaxis : XAxis = fig.data[0].xaxis
-#         trace_2_xaxis : XAxis = fig.data[1].xaxis
-#         trace_3_xaxis : XAxis = fig.data[2].xaxis
-#         trace_4_xaxis : XAxis = fig.data[3].xaxis
+    #     # The x-axis of all the figures should be the same
+    #     trace_1_xaxis : XAxis = fig.data[0].xaxis
+    #     trace_2_xaxis : XAxis = fig.data[1].xaxis
+    #     trace_3_xaxis : XAxis = fig.data[2].xaxis
+    #     trace_4_xaxis : XAxis = fig.data[3].xaxis
 
-#         self.assertEqual(trace_1_xaxis, trace_2_xaxis, "Shared x-axis all don't match: Figure 1 and Figure 2 have different x-axes")
-#         self.assertEqual(trace_3_xaxis, trace_4_xaxis, "Shared x-axis all don't match: Figure 3 and Figure 4 have different x-axes")
-#         self.assertEqual(trace_1_xaxis, trace_3_xaxis, "Shared x-axis all don't match: Figure 1 and Figure 3 have the same x-axes")
-#         self.assertEqual(trace_2_xaxis, trace_4_xaxis, "Shared x-axis all don't match: Figure 2 and Figure 4 have the same x-axes")
+    #     self.assertEqual(trace_1_xaxis, trace_2_xaxis, "Shared x-axis all don't match: Figure 1 and Figure 2 have different x-axes")
+    #     self.assertEqual(trace_3_xaxis, trace_4_xaxis, "Shared x-axis all don't match: Figure 3 and Figure 4 have different x-axes")
+    #     self.assertEqual(trace_1_xaxis, trace_3_xaxis, "Shared x-axis all don't match: Figure 1 and Figure 3 have the same x-axes")
+    #     self.assertEqual(trace_2_xaxis, trace_4_xaxis, "Shared x-axis all don't match: Figure 2 and Figure 4 have the same x-axes")
 
-#     def test_xaxes_not_shared_mode(self):
-#         """
-#             When not shared, all plots have different x-axes
-#         """
-#         from plotly.subplots import make_subplots
-#         from plotly.graph_objects import Figure, Scatter, XAxis
+    def test_xaxes_not_shared_mode(self):
+        """
+            When not shared, all plots have different x-axes
+        """
+        from plotly.subplots import make_subplots
+        from plotly.graph_objects import Figure, Scatter, XAxis
 
-#         fig : Figure = make_subplots(rows=2, cols=2, shared_xaxes=False)
+        fig : Figure = make_subplots(rows=2, cols=2, shared_xaxes=False)
 
-#         trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
-#         trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
-#         trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
-#         trace_4 : Scatter = Scatter(x=[1, 2, 3], y=[10, 11, 12])
+        trace_1 : Scatter = Scatter(x=[1, 2, 3], y=[1, 2, 3])
+        trace_2 : Scatter = Scatter(x=[1, 2, 3], y=[4, 5, 6])
+        trace_3 : Scatter = Scatter(x=[1, 2, 3], y=[7, 8, 9])
+        trace_4 : Scatter = Scatter(x=[1, 2, 3], y=[10, 11, 12])
 
-#         fig.add_trace(trace_1, row=1, col=1)
-#         fig.add_trace(trace_2, row=1, col=2)
-#         fig.add_trace(trace_3, row=2, col=1)
-#         fig.add_trace(trace_4, row=2, col=2)
+        fig.add_trace(trace_1, row=1, col=1)
+        fig.add_trace(trace_2, row=1, col=2)
+        fig.add_trace(trace_3, row=2, col=1)
+        fig.add_trace(trace_4, row=2, col=2)
 
         
-#         fig.update_xaxes()
-#         fig.update_layout()
+        fig.update_xaxes()
+        fig.update_layout()
 
-#         # The x-axis of all of the figures should be different
-#         trace_1_xaxis : XAxis = fig.data[0].xaxis
-#         trace_2_xaxis : XAxis = fig.data[1].xaxis
-#         trace_3_xaxis : XAxis = fig.data[2].xaxis
-#         trace_4_xaxis : XAxis = fig.data[3].xaxis
+        # The x-axis of all of the figures should be different
+        trace_1_xaxis : XAxis = fig.data[0].xaxis
+        trace_2_xaxis : XAxis = fig.data[1].xaxis
+        trace_3_xaxis : XAxis = fig.data[2].xaxis
+        trace_4_xaxis : XAxis = fig.data[3].xaxis
 
-#         self.assertNotEqual(trace_1_xaxis, trace_2_xaxis, "Different x-axis match: Figure 1 and Figure 2 have the same x-axes")
-#         self.assertNotEqual(trace_1_xaxis, trace_3_xaxis, "Different x-axis match: Figure 1 and Figure 3 have the same x-axes")
-#         self.assertNotEqual(trace_1_xaxis, trace_4_xaxis, "Different x-axis match: Figure 1 and Figure 4 have the same x-axes")
-#         self.assertNotEqual(trace_2_xaxis, trace_3_xaxis, "Different x-axis match: Figure 2 and Figure 3 have the same x-axes")
-#         self.assertNotEqual(trace_2_xaxis, trace_4_xaxis, "Different x-axis match: Figure 2 and Figure 4 have the same x-axes")
-#         self.assertNotEqual(trace_3_xaxis, trace_4_xaxis, "Different x-axis match: Figure 3 and Figure 4 have the same x-axes")
+        self.assertNotEqual(trace_1_xaxis, trace_2_xaxis, "Different x-axis match: Figure 1 and Figure 2 have the same x-axes")
+        self.assertNotEqual(trace_1_xaxis, trace_3_xaxis, "Different x-axis match: Figure 1 and Figure 3 have the same x-axes")
+        self.assertNotEqual(trace_1_xaxis, trace_4_xaxis, "Different x-axis match: Figure 1 and Figure 4 have the same x-axes")
+        self.assertNotEqual(trace_2_xaxis, trace_3_xaxis, "Different x-axis match: Figure 2 and Figure 3 have the same x-axes")
+        self.assertNotEqual(trace_2_xaxis, trace_4_xaxis, "Different x-axis match: Figure 2 and Figure 4 have the same x-axes")
+        self.assertNotEqual(trace_3_xaxis, trace_4_xaxis, "Different x-axis match: Figure 3 and Figure 4 have the same x-axes")
