@@ -35,7 +35,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         Determines which button (by index starting from 0) is
         considered active.
 
-        The 'active' property is a integer and may be specified as:
+        The 'active' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 
@@ -248,8 +248,8 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
         Highlights active dropdown item or active button if true.
 
-        The 'showactive' property must be specified as a bool
-        (either True, or False)
+        The 'showactive' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -313,8 +313,8 @@ class Updatemenu(_BaseLayoutHierarchyType):
         """
         Determines whether or not the update menu is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

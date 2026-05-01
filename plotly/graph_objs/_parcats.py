@@ -65,8 +65,8 @@ class Parcats(_BaseTraceType):
         Sort paths so that like colors are bundled together within each
         category.
 
-        The 'bundlecolors' property must be specified as a bool
-        (either True, or False)
+        The 'bundlecolors' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

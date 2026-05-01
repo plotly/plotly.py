@@ -37,8 +37,8 @@ class Line(_BaseTraceHierarchyType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -59,8 +59,8 @@ class Line(_BaseTraceHierarchyType):
         `line.color` is set to a numerical array. Defaults to `false`
         when `line.cmin` and `line.cmax` are set by the user.
 
-        The 'cauto' property must be specified as a bool
-        (either True, or False)
+        The 'cauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -175,9 +175,9 @@ class Line(_BaseTraceHierarchyType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -352,8 +352,8 @@ class Line(_BaseTraceHierarchyType):
         will correspond to the last color in the array and `line.cmax`
         will correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -393,8 +393,8 @@ class Line(_BaseTraceHierarchyType):
         trace. Has an effect only if in `line.color` is set to a
         numerical array.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

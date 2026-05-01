@@ -35,7 +35,7 @@ fig_frames = {
 PLOTLYJS = plotly.offline.get_plotlyjs()
 
 plotly_config_script = """\
-<script type="text/javascript">\
+<script>\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
 cdn_script = '<script charset="utf-8" src="{cdn_url}" integrity="{js_hash}" crossorigin="anonymous"></script>'.format(

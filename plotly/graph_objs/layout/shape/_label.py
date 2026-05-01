@@ -149,12 +149,13 @@ class Label(_BaseLayoutHierarchyType):
         coordinate variables and center variables use datetimes, while
         all other variable values use values in ms. Finally, the
         template string has access to variables `x0`, `x1`, `y0`, `y1`,
-        `slope`, `dx`, `dy`, `width`, `height`, `length`, `xcenter` and
-        `ycenter`. Variables that can't be found will be replaced with
-        the specifier. For example, a template of "data: %{x}, %{y}"
-        will result in a value of "data: 1, %{y}" if x is 1 and y is
-        missing. Variables with an undefined value will be replaced
-        with the fallback value.
+        `slope`, `dx`, `dy`, `width`, `height`, `length`, `xcenter`,
+        `ycenter`, `simpleXVariables` and `simpleYVariables`. Variables
+        that can't be found will be replaced with the specifier. For
+        example, a template of "data: %{x}, %{y}" will result in a
+        value of "data: 1, %{y}" if x is 1 and y is missing. Variables
+        with an undefined value will be replaced with the fallback
+        value.
 
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -284,12 +285,13 @@ class Label(_BaseLayoutHierarchyType):
             variable values use values in ms. Finally, the template
             string has access to variables `x0`, `x1`, `y0`, `y1`,
             `slope`, `dx`, `dy`, `width`, `height`, `length`,
-            `xcenter` and `ycenter`. Variables that can't be found
-            will be replaced with the specifier. For example, a
-            template of "data: %{x}, %{y}" will result in a value
-            of "data: 1, %{y}" if x is 1 and y is missing.
-            Variables with an undefined value will be replaced with
-            the fallback value.
+            `xcenter`, `ycenter`, `simpleXVariables` and
+            `simpleYVariables`. Variables that can't be found will
+            be replaced with the specifier. For example, a template
+            of "data: %{x}, %{y}" will result in a value of "data:
+            1, %{y}" if x is 1 and y is missing. Variables with an
+            undefined value will be replaced with the fallback
+            value.
         texttemplatefallback
             Fallback string that's displayed when a variable
             referenced in a template is missing. If the boolean
@@ -379,12 +381,13 @@ class Label(_BaseLayoutHierarchyType):
             variable values use values in ms. Finally, the template
             string has access to variables `x0`, `x1`, `y0`, `y1`,
             `slope`, `dx`, `dy`, `width`, `height`, `length`,
-            `xcenter` and `ycenter`. Variables that can't be found
-            will be replaced with the specifier. For example, a
-            template of "data: %{x}, %{y}" will result in a value
-            of "data: 1, %{y}" if x is 1 and y is missing.
-            Variables with an undefined value will be replaced with
-            the fallback value.
+            `xcenter`, `ycenter`, `simpleXVariables` and
+            `simpleYVariables`. Variables that can't be found will
+            be replaced with the specifier. For example, a template
+            of "data: %{x}, %{y}" will result in a value of "data:
+            1, %{y}" if x is 1 and y is missing. Variables with an
+            undefined value will be replaced with the fallback
+            value.
         texttemplatefallback
             Fallback string that's displayed when a variable
             referenced in a template is missing. If the boolean
