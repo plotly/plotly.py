@@ -57,7 +57,7 @@ By default, the resulting HTML file is a fully self-contained HTML file which ca
 
 ### Inserting Plotly Output into HTML using a Jinja2 Template
 
-You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We don't want to output a full HTML page, as the template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja `{{ variable }}`.  In this example, we customize the HTML in the template file by replacing the Jinja variable `{{ fig }}` with our graphic `fig`.
+You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We do not want to output a full HTML page, as the Jinja template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja variable, `{{ fig }}`.  We use Python to generate HTML that is the  template file with the Jinja variable `{{ fig }}` replaced with our graphic `fig`.  The Python shows the steps to specify the height of the graphic as a percentage of the height of the browser window and provides a much simpler option if you are comfortable with a fixed height figure.
 
 <!-- #region -->
 
@@ -90,7 +90,21 @@ fig = px.bar(data_canada, x='year', y='pop')
 output_html_path=r"/path/to/output.html"
 input_template_path = r"/path/to/template.html"
 
-plotly_jinja_data = {"fig":fig.to_html(full_html=False)}
+# code block to set the vertical height as a percentage of the window height
+# if you are comfortable with a fixed height graph, substitute
+#     plotly_jinja_data = {"fig":fig.to_html(full_html=False)}
+# for all the code up to the end of the responsive Plotly figure HTML Jinja dictionary population block
+
+# we defer to the HTML and window size for the height by setting autosize to True,  height to None and responsive to True
+fig.update_layout(autosize=True, height=None, )
+fig_html = fig.to_html(full_html=False, config=dict(responsive=True))
+#consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
+
+vertical_height_as_pct_window = 80
+fig_html_with_vertical_height = f'<div style="height: {vertical_height_as_pct_window}vh;">'+fig_html.replace("<div>","", 1)
+plotly_jinja_data = {"fig":fig_html_with_vertical_height}
+# end of responsive Plotly figure HTML Jinja dictionary population block
+
 #consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
 
 with open(output_html_path, "w", encoding="utf-8") as output_file:
