@@ -437,9 +437,7 @@ import datetime
 def test_vline_datetime_string_annotation():
     """add_vline with annotation_text on datetime x-axis should not crash."""
     fig = go.Figure()
-    fig.add_trace(
-        go.Scatter(x=["2018-01-01", "2018-06-01", "2018-12-31"], y=[1, 2, 3])
-    )
+    fig.add_trace(go.Scatter(x=["2018-01-01", "2018-06-01", "2018-12-31"], y=[1, 2, 3]))
     fig.add_vline(x="2018-09-24", annotation_text="test")
     assert len(fig.layout.annotations) == 1
     assert fig.layout.annotations[0].text == "test"
