@@ -924,8 +924,8 @@ def _configure_shared_axes(
     row_count    : int = len(grid_ref)
     column_count : int = len(grid_ref[0])
 
-    BASE_TRACE_LAYER = 0
-    SECOND_Y_LAYER   = 1
+    BASE_TRACE_LAYER = 0 # Layer for subplots
+    SECOND_Y_LAYER   = 1 # Layer for the second y-axis on the right hand side
 
     axis_index : int = 0 if x_or_y == 'x' else 1 
     
@@ -1077,18 +1077,17 @@ def _configure_shared_axes(
     rows    : Tuple[int] = tuple(range(row_count - 1, -1, -1)) if row_direction < 0 else tuple(range(row_count))
     columns : Tuple[int] = tuple(range(column_count))
     
-    match(shared, x_or_y):
-        case ('columns', _) | (True, 'x'): # If columns mode, or shared and x
-            columns_mode(rows, columns, BASE_TRACE_LAYER)
-            columns_mode(tuple(reversed(rows)), columns, SECOND_Y_LAYER)
-        case ('rows', _) | (True, 'y'): # If rows mode, or shared and y
-            rows_mode(rows, columns, BASE_TRACE_LAYER)
-            rows_mode(rows, tuple(reversed(columns)), SECOND_Y_LAYER) 
-        case ('all', _): # If all mode
-            all_mode(rows, columns, BASE_TRACE_LAYER)
-            all_mode(tuple(reversed(rows)), tuple(reversed(columns)), SECOND_Y_LAYER)
-        case _: # If reached the other case
-            return 
+    if shared == 'columns' or (x_or_y == 'x' and shared == True):
+        columns_mode(rows, columns, BASE_TRACE_LAYER)
+        columns_mode(tuple(reversed(rows)), columns, SECOND_Y_LAYER)
+    elif shared == 'rows' or (x_or_y == 'y' and shared == True):
+        rows_mode(rows, columns, BASE_TRACE_LAYER)
+        rows_mode(rows, tuple(reversed(columns)), SECOND_Y_LAYER) 
+    elif shared == 'all': 
+        all_mode(rows, columns, BASE_TRACE_LAYER)
+        all_mode(tuple(reversed(rows)), tuple(reversed(columns)), SECOND_Y_LAYER)
+    else: 
+        return 
 
 def _init_subplot_xy(layout, secondary_y, x_domain, y_domain, max_subplot_ids=None):
     if max_subplot_ids is None:
