@@ -878,7 +878,7 @@ class IntegerValidator(BaseValidator):
 
     def description(self):
         desc = """\
-    The '{plotly_name}' property is a integer and may be specified as:""".format(
+    The '{plotly_name}' property is an integer and may be specified as:""".format(
             plotly_name=self.plotly_name
         )
 

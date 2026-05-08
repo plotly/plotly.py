@@ -60,3 +60,24 @@ def test_color_categorical_dtype():
     px.scatter(
         df[df.day != df.day.cat.categories[0]], x="total_bill", y="tip", color="day"
     )
+
+
+def test_color_continuous_scale_autocolorscale():
+    # User-provided colorscale should override template autocolorscale=True
+    fig = px.scatter(
+        x=[1, 2],
+        y=[1, 2],
+        color=[1, 2],
+        color_continuous_scale="Viridis",
+        template=dict(layout_coloraxis_autocolorscale=True),
+    )
+    assert fig.layout.coloraxis1.autocolorscale is False
+
+    # Without user-provided colorscale, template autocolorscale should be respected
+    fig2 = px.scatter(
+        x=[1, 2],
+        y=[1, 2],
+        color=[1, 2],
+        template=dict(layout_coloraxis_autocolorscale=True),
+    )
+    assert fig2.layout.coloraxis1.autocolorscale is None

@@ -17,7 +17,7 @@ class Surface(_BaseTraceHierarchyType):
         iso-values. By default this value is 2 meaning that only
         minimum and maximum surfaces would be drawn.
 
-        The 'count' property is a integer and may be specified as:
+        The 'count' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 

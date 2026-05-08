@@ -122,7 +122,7 @@ IFrame(snippet_url + 'mapbox-county-choropleth', width='100%', height=1200)
 
 ### Indexing by GeoJSON Properties
 
-If the GeoJSON you are using either does not have an `id` field or you wish you use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
+If the GeoJSON you are using either does not have an `id` field or you wish to use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
 
 In the following GeoJSON object/data-file pairing, the values of `properties.district` match the values of the `district` column:
 
@@ -226,7 +226,7 @@ The earlier examples using `px.choropleth_map` and `go.Choroplethmap` use [Mapli
 
 To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
-Here's an exmaple of using the Mapbox Light base map, which requires a free token.
+Here's an example of using the Mapbox Light base map, which requires a free token.
 
 ```python
 token = open(".mapbox_token").read() # you will need your own token

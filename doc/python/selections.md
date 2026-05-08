@@ -153,7 +153,7 @@ fig.show()
 ## Referencing Selections on Multiple Cartesian Subplots
 
 
-You can add selections to multiple Cartesian subplots by specifying `xref` and/or `yref`. Here, we add one selection on the plot with axis ids `x` and `y2` and two selections to the the plot with axis ids `x` and `y`.
+You can add selections to multiple Cartesian subplots by specifying `xref` and/or `yref`. Here, we add one selection on the plot with axis ids `x` and `y2` and two selections to the plot with axis ids `x` and `y`.
 
 ```python
 import plotly.graph_objects as go

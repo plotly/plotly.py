@@ -171,6 +171,42 @@ and create your pull request.
 > Please do _not_ commit changes to `uv.lock`
 > unless you have added, removed, or changed dependencies in `pyproject.toml`.
 
+## Opening a pull request
+
+When creating your pull request, please follow the guidelines below. 
+
+### Code pull request
+
+- *Make sure you have reviewed the full [contributing notes (this file)](https://github.com/plotly/plotly.py/blob/main/CONTRIBUTING.md) and understand the structure of the package.*
+- If your PR modifies code of `plotly.graph_objects`, the modifications should be made to the code generator, *not* the generated files.
+- You have added tests or modified existing tests, as needed.
+- For a new feature, you have added documentation examples (please see the doc checklist as well).
+- You have added a CHANGELOG entry if changing anything substantial.
+- For a new feature or a change in behavior, you have updated the relevant docstrings in the code.
+
+### Documentation pull request
+
+- *Make sure you have reviewed the [`doc/README.md`](https://github.com/plotly/plotly.py/blob/main/doc/README.md) file.*
+- This change runs in the current version of Plotly on PyPI and targets the `doc-prod` branch OR it targets the `main` branch.
+- If this PR modifies the first example in a page or adds a new one, it is a `px` example if at all possible.
+- Every new/modified example has a descriptive title and motivating sentence or paragraph.
+- Every new/modified example is independently runnable.
+- Every new/modified example is optimized for short line count and focuses on the Plotly/visualization-related aspects of the example rather than the computation required to produce the data being visualized.
+- Meaningful/relatable datasets are used for all new examples instead of randomly-generated data where possible.
+- The random seed is set if using randomly-generated data.
+- New/modified remote datasets are loaded from https://plotly.github.io/datasets and added to https://github.com/plotly/datasets.
+- Large computations are avoided in the new/modified examples in favour of loading remote datasets that represent the output of such computations.
+- Imports are `plotly.graph_objects as go`, `plotly.express as px`, and/or `plotly.io as pio`.
+- Data frames are always called `df`.
+- `fig = <something>` is called high up in each new/modified example (either `px.<something>` or `make_subplots` or `go.Figure`).
+- Liberal use is made of `fig.add_*` and `fig.update_*` rather than `go.Figure(data=..., layout=...)`.
+- Specific adders and updaters like `fig.add_shape` and `fig.update_xaxes` are used instead of big `fig.update_layout` calls.
+- `fig.show()` is at the end of each example.
+- `plotly.plot()` and `plotly.iplot()` are not used in any example.
+- Named colors are used instead of hex codes wherever possible.
+- Code blocks are marked with `&#96;&#96;&#96;python`.
+
+
 ### Testing
 
 We use [pytest](https://docs.pytest.org/) for managing and running tests.
@@ -271,3 +307,18 @@ You can then run the following command
 ```bash
 python commands.py updateplotlyjsdev --local /path/to/your/plotly.js/
 ```
+
+## Documentation for `commands.py`
+
+`commands.py` serves as an entry point for utilities to help with plotly.py development.
+
+Usage: `python commands.py <subcommand> <args>`
+
+| Subcommand | Purpose |
+|------------|---------|
+| `codegen [--noformat]` | Regenerate Python files according to `plot-schema.json`.`--noformat` skips formatter step. |
+| `lint` | Lint all Python code in `plotly/`. |
+| `format` | Format all Python code in `plotly/`. |
+| `updateplotlyjs` | Update `plotly.min.js` and `plot-schema.json` to match the `plotly.js` version specified in `js/package.json`. Then, run codegen to regenerate the Python files. |
+| `updateplotlyjsdev [--devrepo REPONAME --devbranch BRANCHNAME] \| [--local PATH]` | Update `plot-schema.json` and `plotly.min.js` to match the version in the provided plotly.js repo name and branch name, OR local path. Then, run codegen to regenerate the Python files. |
+| `bumpversion X.Y.Z` | Update the plotly.py version number to X.Y.Z across all files where it needs to be updated. |

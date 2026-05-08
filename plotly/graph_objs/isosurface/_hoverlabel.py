@@ -175,7 +175,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         that many characters, but if it is longer, will truncate to
         `namelength - 3` characters and add an ellipsis.
 
-        The 'namelength' property is a integer and may be specified as:
+        The 'namelength' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
           - A tuple, list, or one-dimensional numpy array of the above
