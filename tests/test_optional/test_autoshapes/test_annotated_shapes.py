@@ -425,7 +425,6 @@ def test_all_annotation_positions():
     draw_all_annotation_positions(testing=True)
 
 
-
 if __name__ == "__main__":
     draw_all_annotation_positions()
 
