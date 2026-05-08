@@ -443,10 +443,11 @@ def test_vline_datetime_string_annotation():
     fig.add_vline(x="2018-09-24", annotation_text="test")
     assert len(fig.layout.annotations) == 1
     assert fig.layout.annotations[0].text == "test"
+    assert fig.layout.annotations[0].x == "2018-09-24"
 
 
 def test_hline_with_datetime_vline():
-    """add_hline should still work alongside datetime vline usage."""
+    """numeric add_hline should still work with datetime x-axis."""
     fig = go.Figure()
     fig.add_trace(
         go.Scatter(x=["2018-01-01", "2018-06-01", "2018-12-31"], y=[1, 2, 3])
@@ -454,6 +455,7 @@ def test_hline_with_datetime_vline():
     fig.add_hline(y=2, annotation_text="hline test")
     assert len(fig.layout.annotations) == 1
     assert fig.layout.annotations[0].text == "hline test"
+    assert fig.layout.annotations[0].y == 2
 
 
 def test_vrect_datetime_string_annotation():
@@ -465,6 +467,7 @@ def test_vrect_datetime_string_annotation():
     fig.add_vrect(x0="2018-03-01", x1="2018-09-01", annotation_text="rect test")
     assert len(fig.layout.annotations) == 1
     assert fig.layout.annotations[0].text == "rect test"
+    assert fig.layout.annotations[0].x == "2018-09-01"
 
 
 def test_vline_datetime_object_annotation():
@@ -483,6 +486,7 @@ def test_vline_datetime_object_annotation():
     fig.add_vline(x=datetime.datetime(2018, 9, 24), annotation_text="dt test")
     assert len(fig.layout.annotations) == 1
     assert fig.layout.annotations[0].text == "dt test"
+    assert fig.layout.annotations[0].x == datetime.datetime(2018, 9, 24, 0, 0)
 
 
 def test_vrect_datetime_object_annotation():
@@ -505,4 +509,5 @@ def test_vrect_datetime_object_annotation():
     )
     assert len(fig.layout.annotations) == 1
     assert fig.layout.annotations[0].text == "rect dt test"
+    assert fig.layout.annotations[0].x == datetime.datetime(2018, 9, 1)
 
