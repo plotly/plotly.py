@@ -57,7 +57,7 @@ By default, the resulting HTML file is a fully self-contained HTML file which ca
 
 ### Inserting Plotly Output into HTML using a Jinja2 Template
 
-You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We do not want to output a full HTML page, as the Jinja template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja variable, `{{ fig }}`.  We use Python to generate HTML that is the  template file with the Jinja variable `{{ fig }}` replaced with our graphic `fig`.  The Python shows the steps to specify the height of the graphic as a percentage of the height of the browser window and provides a much simpler option if you are comfortable with a fixed height figure.
+You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` which sends the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary for a component of a larger webpage.  The Jinja template will provide the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja variable, `{{ fig }}`.  The Python takes the template file, replaces the Jinja variable `{{ fig }}` with our graphic `fig`, and saves the resulting complete HTML.  The first Python example produces a webpage with a fixed height graph; a second example program shows the additional steps to specify the height of the graphic as a percentage of the height of the browser window.
 
 <!-- #region -->
 
@@ -90,12 +90,29 @@ fig = px.bar(data_canada, x='year', y='pop')
 output_html_path=r"/path/to/output.html"
 input_template_path = r"/path/to/template.html"
 
-# code block to set the vertical height as a percentage of the window height
-# if you are comfortable with a fixed height graph, substitute
-#     plotly_jinja_data = {"fig":fig.to_html(full_html=False)}
-# for all the code up to the end of the responsive Plotly figure HTML Jinja dictionary population block
+plotly_jinja_data = {"fig":fig.to_html(full_html=False)}
+#consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
 
-# we defer to the HTML and window size for the height by setting autosize to True,  height to None and responsive to True
+with open(output_html_path, "w", encoding="utf-8") as output_file:
+    with open(input_template_path) as template_file:
+        j2_template = Template(template_file.read())
+        output_file.write(j2_template.render(plotly_jinja_data))
+```
+
+The next example allows the size of your graphs to change depending on the screen resolution and window size.  It replaces the `plotly_jinja_data = {"fig":fig.to_html(full_html=False)}` line with a code block that sets autosize to True,  height to None and responsive to True.  It replaces the `<div>` at the beginning of the to_html output with a new div that specifies the desired height as a percentage of the window height.  It uses the same Jinja template (above) as the prior example.
+
+
+```python
+import plotly.express as px
+from jinja2 import Template
+
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+
+output_html_path=r"/path/to/output.html"
+input_template_path = r"/path/to/template.html"
+
+# set the vertical height as a percentage of the window height by setting autosize to True,  height to None and responsive to True
 fig.update_layout(autosize=True, height=None, )
 fig_html = fig.to_html(full_html=False, config=dict(responsive=True))
 #consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
