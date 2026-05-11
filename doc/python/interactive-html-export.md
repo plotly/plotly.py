@@ -57,7 +57,7 @@ By default, the resulting HTML file is a fully self-contained HTML file which ca
 
 ### Inserting Plotly Output into HTML using a Jinja2 Template
 
-You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` which sends the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary for a component of a larger webpage.  The Jinja template will provide the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja variable, `{{ fig }}`.  The Python takes the template file, replaces the Jinja variable `{{ fig }}` with our graphic `fig`, and saves the resulting complete HTML.  The first Python example produces a webpage with a fixed height graph; a second example program shows the additional steps to specify the height of the graphic as a percentage of the height of the browser window.
+You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We do not want to output a full HTML page, as the template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create a template file containing HTML and a Jinja variable, `{{ fig }}`.  We use Python to replace the Jinja variable with our graphic `fig`.
 
 <!-- #region -->
 
