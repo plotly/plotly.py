@@ -99,7 +99,7 @@ with open(output_html_path, "w", encoding="utf-8") as output_file:
         output_file.write(j2_template.render(plotly_jinja_data))
 ```
 
-The next example allows the size of your graphs to change depending on the screen resolution and window size.  It replaces the `plotly_jinja_data = {"fig":fig.to_html(full_html=False)}` line with a code block that sets autosize to True,  height to None and responsive to True.  It replaces the `<div>` at the beginning of the to_html output with a new div that specifies the desired height as a percentage of the window height.  It uses the same Jinja template (above) as the prior example.
+The height of the figure can be made responsive by setting `autosize` to `True` and  `height` to `None` in the layout, and `responsive` to `True` in the config.
 
 
 ```python
@@ -112,16 +112,13 @@ fig = px.bar(data_canada, x='year', y='pop')
 output_html_path=r"/path/to/output.html"
 input_template_path = r"/path/to/template.html"
 
-# set the vertical height as a percentage of the window height by setting autosize to True,  height to None and responsive to True
-fig.update_layout(autosize=True, height=None, )
-fig_html = fig.to_html(full_html=False, config=dict(responsive=True))
-#consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
-
-vertical_height_as_pct_window = 80
-fig_html_with_vertical_height = f'<div style="height: {vertical_height_as_pct_window}vh;">'+fig_html.replace("<div>","", 1)
-plotly_jinja_data = {"fig":fig_html_with_vertical_height}
-# end of responsive Plotly figure HTML Jinja dictionary population block
-
+fig.update_layout(autosize=True, height=None)
+fig_html = fig.to_html(
+    config={"responsive": True},
+    default_height="80vh",
+    full_html=False,
+)
+plotly_jinja_data = {"fig": fig_html}
 #consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
 
 with open(output_html_path, "w", encoding="utf-8") as output_file:
