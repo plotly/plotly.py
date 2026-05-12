@@ -98,6 +98,23 @@ def test_colorscale():
     assert fig.layout.coloraxis1.colorscale[0] == (0.0, "#440154")
 
 
+def test_imshow_color_continuous_scale_autocolorscale():
+    # User-provided colorscale should override template autocolorscale=True
+    fig = px.imshow(
+        img_gray,
+        color_continuous_scale="Viridis",
+        template=dict(layout_coloraxis_autocolorscale=True),
+    )
+    assert fig.layout.coloraxis1.autocolorscale is False
+
+    # Without user-provided colorscale, template autocolorscale should be respected
+    fig2 = px.imshow(
+        img_gray,
+        template=dict(layout_coloraxis_autocolorscale=True),
+    )
+    assert fig2.layout.coloraxis1.autocolorscale is None
+
+
 def test_wrong_dimensions():
     imgs = [1, np.ones((5,) * 3), np.ones((5,) * 4)]
     msg = "px.imshow only accepts 2D single-channel, RGB or RGBA images."

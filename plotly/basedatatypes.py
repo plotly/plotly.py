@@ -789,7 +789,7 @@ class BaseFigure(object):
     def __eq__(self, other):
         if not isinstance(other, BaseFigure):
             # Require objects to both be BaseFigure instances
-            return False
+            return NotImplemented
         else:
             # Compare plotly_json representations
 
@@ -5017,7 +5017,7 @@ class BasePlotlyType(object):
         """
         if not isinstance(other, self.__class__):
             # Require objects to be of the same plotly type
-            return False
+            return NotImplemented
         else:
             # Compare plotly_json representations
 

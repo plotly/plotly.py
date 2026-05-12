@@ -103,7 +103,7 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         Sets the end annotation arrow head style.
 
-        The 'arrowhead' property is a integer and may be specified as:
+        The 'arrowhead' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 8]
 
@@ -604,7 +604,7 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         Sets the start annotation arrow head style.
 
-        The 'startarrowhead' property is a integer and may be specified as:
+        The 'startarrowhead' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 8]
 

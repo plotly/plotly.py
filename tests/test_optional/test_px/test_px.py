@@ -36,7 +36,7 @@ def test_custom_data_scatter(backend):
     )
     for data in fig.data:
         assert np.all(
-            np.in1d(data.customdata[:, 1], iris.get_column("petal_width").to_numpy())
+            np.isin(data.customdata[:, 1], iris.get_column("petal_width").to_numpy())
         )
     # Hover and custom data, no repeated arguments
     fig = px.scatter(

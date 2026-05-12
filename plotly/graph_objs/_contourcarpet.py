@@ -773,7 +773,7 @@ class Contourcarpet(_BaseTraceType):
         to the value of `ncontours`. Has an effect only if
         `autocontour` is True or if `contours.size` is missing.
 
-        The 'ncontours' property is a integer and may be specified as:
+        The 'ncontours' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -1158,7 +1158,7 @@ class Contourcarpet(_BaseTraceType):
         other SVG traces on the same subplot. SVG traces with higher
         `zorder` appear in front of those with lower `zorder`.
 
-        The 'zorder' property is a integer and may be specified as:
+        The 'zorder' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns

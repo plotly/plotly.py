@@ -35,7 +35,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         Determines which button (by index starting from 0) is
         considered active.
 
-        The 'active' property is a integer and may be specified as:
+        The 'active' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
 

@@ -1,10 +1,18 @@
-import plotly.express as px
-import plotly.graph_objects as go
-from numpy.testing import assert_array_equal
 import narwhals.stable.v1 as nw
 import numpy as np
+from numpy.testing import assert_array_equal
+from packaging.version import Version
+import pandas
+import plotly.express as px
+import plotly.graph_objects as go
 from polars.exceptions import InvalidOperationError
 import pytest
+
+from .conftest import pandas_pyarrow_constructor
+
+
+def _pandas_version_at_least(version: str) -> bool:
+    return Version(pandas.__version__) >= Version(version)
 
 
 def _compare_figures(go_trace, px_fig):
@@ -153,6 +161,11 @@ def test_sunburst_treemap_colorscales():
 
 
 def test_sunburst_treemap_with_path(constructor):
+    if _pandas_version_at_least("3.0.0") and constructor == pandas_pyarrow_constructor:
+        pytest.skip(
+            "known issue with pandas 3 + pandas_pyarrow_constructor + px.sunburst() (https://github.com/plotly/plotly.py/issues/5571)"
+        )
+
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
         "Tech",
@@ -249,6 +262,11 @@ def test_sunburst_treemap_with_path_and_hover(backend):
 
 
 def test_sunburst_treemap_with_path_color(constructor):
+    if _pandas_version_at_least("3.0.0") and constructor == pandas_pyarrow_constructor:
+        pytest.skip(
+            "known issue with pandas 3 + pandas_pyarrow_constructor + px.sunburst() (https://github.com/plotly/plotly.py/issues/5571)"
+        )
+
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
         "Tech",
@@ -307,7 +325,7 @@ def test_sunburst_treemap_with_path_color(constructor):
     fig = px.sunburst(
         df.to_native(), path=path, color="sectors", color_discrete_map=cmap
     )
-    assert np.all(np.in1d(fig.data[0].marker.colors, list(cmap.values())))
+    assert np.all(np.isin(fig.data[0].marker.colors, list(cmap.values())))
 
     # Numerical column in path
     df = (
@@ -327,6 +345,11 @@ def test_sunburst_treemap_with_path_color(constructor):
 
 
 def test_sunburst_treemap_column_parent(constructor):
+    if _pandas_version_at_least("3.0.0") and constructor == pandas_pyarrow_constructor:
+        pytest.skip(
+            "known issue with pandas 3 + pandas_pyarrow_constructor + px.sunburst() (https://github.com/plotly/plotly.py/issues/5571)"
+        )
+
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
         "Tech",
@@ -354,6 +377,11 @@ def test_sunburst_treemap_column_parent(constructor):
 
 
 def test_sunburst_treemap_with_path_non_rectangular(constructor):
+    if _pandas_version_at_least("3.0.0") and constructor == pandas_pyarrow_constructor:
+        pytest.skip(
+            "known issue with pandas 3 + pandas_pyarrow_constructor + px.sunburst() (https://github.com/plotly/plotly.py/issues/5571)"
+        )
+
     vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
     sectors = [
         "Tech",
