@@ -145,10 +145,6 @@ IFrame(snippet_url + 'interactive-html-export', width='100%', height=1200)
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
-### Full Parameter Documentation
+### Reference
 
-```python
-import plotly.graph_objects as go
-
-help(go.Figure.write_html)
-```
+See [function reference for `plotly.io.to_html()`](https://plotly.com/python-api-reference/generated/plotly.io.to_html.html) for more information and HTML figure export options.  
