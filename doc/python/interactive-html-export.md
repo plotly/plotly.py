@@ -147,4 +147,7 @@ IFrame(snippet_url + 'interactive-html-export', width='100%', height=1200)
 
 ### Reference
 
-See [function reference for `plotly.io.to_html()`](https://plotly.com/python-api-reference/generated/plotly.io.to_html.html) for more information and HTML figure export options.  
+See the following links for parameter information and HTML figure export options:
+
+- [`plotly.io.to_html()`](https://plotly.com/python-api-reference/generated/plotly.io.to_html.html)
+- [`plotly.io.write_html()`](https://plotly.com/python-api-reference/generated/plotly.io.write_html.html)
