@@ -143,7 +143,7 @@ def _get_jconfig(config=None):
         "notifyOnLogging",
         "queueLength",
         "locale",
-        "locales"
+        "locales",
     )
 
     if config and isinstance(config, dict):
