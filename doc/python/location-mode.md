@@ -382,7 +382,7 @@ fig.show()
 
 ## Supported US State Codes
 
-The following state codes are supported when `locationmode='USA-states'`:
+The following state names and codes are supported when `locationmode='USA-states'`:
 
 <table style="text-align: left; margin-left: 0; margin-right: auto;">
 <thead>
