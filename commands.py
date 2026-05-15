@@ -149,34 +149,20 @@ __plotlyjs_version__ = "{plotlyjs_version}"
         )
 
 
-def request_json(url):
-    """Get JSON data from a URL."""
+def get_latest_commit_info(repo, branch):
+    """Get latest commit info from GitHub API."""
 
+    url = "https://api.github.com/repos/{repo}/commits/{branch}".format(
+        repo=repo, branch=branch
+    )
     req = requests.get(url)
-    return json.loads(req.content.decode("utf-8"))
+    assert req.status_code == 200, "Failed to fetch commit info: %s" % req.text
+    commit = req.json()
 
-
-def get_latest_publish_build_info(repo, branch):
-    """Get build info from Circle CI."""
-
-    url = (
-        r"https://circleci.com/api/v1.1/project/github/"
-        r"{repo}/tree/{branch}?limit=100&filter=completed"
-    ).format(repo=repo, branch=branch)
-
-    branch_jobs = request_json(url)
-
-    # Get most recent successful publish build for branch
-    builds = [
-        j
-        for j in branch_jobs
-        if j.get("workflows", {}).get("job_name", None) == "publish-dist"
-        and j.get("status", None) == "success"
-    ]
-    build = builds[0]
-
-    # Extract build info
-    return {p: build[p] for p in ["vcs_revision", "build_num", "committer_date"]}
+    return {
+        "vcs_revision": commit["sha"],
+        "committer_date": commit["commit"]["committer"]["date"],
+    }
 
 
 def get_bundle_schema_local(local):
@@ -188,29 +174,15 @@ def get_bundle_schema_local(local):
     return plotly_archive, plotly_bundle, plotly_schemas
 
 
-def get_bundle_schema_urls(build_num):
-    """Get URLs for required files."""
+def get_github_urls(repo, revision):
+    """Get URLs for required files from GitHub."""
 
-    url = (
-        "https://circleci.com/api/v1.1/project/github/"
-        "plotly/plotly.js/{build_num}/artifacts"
-    ).format(build_num=build_num)
+    raw = f"https://raw.githubusercontent.com/{repo}/{revision}"
+    archive_url = f"https://github.com/{repo}/tarball/{revision}"
+    bundle_url = raw + "/dist/plotly.min.js"
+    schema_url = raw + "/dist/plot-schema.json"
 
-    artifacts = request_json(url)
-
-    # Find archive
-    archives = [a for a in artifacts if a.get("path", None) == "plotly.js.tgz"]
-    archive = archives[0]
-
-    # Find bundle
-    bundles = [a for a in artifacts if a.get("path", None) == "dist/plotly.min.js"]
-    bundle = bundles[0]
-
-    # Find schema
-    schemas = [a for a in artifacts if a.get("path", None) == "dist/plot-schema.json"]
-    schema = schemas[0]
-
-    return archive["url"], bundle["url"], schema["url"]
+    return archive_url, bundle_url, schema_url
 
 
 def update_schema(plotly_js_version):
@@ -249,9 +221,9 @@ def update_plotlyjs(plotly_js_version, outdir):
 def update_schema_bundle_from_master(args):
     """Update the plotly.js schema and bundle from master."""
     if args.local is None:
-        build_info = get_latest_publish_build_info(args.devrepo, args.devbranch)
-        archive_url, bundle_url, schema_url = get_bundle_schema_urls(
-            build_info["build_num"]
+        build_info = get_latest_commit_info(args.devrepo, args.devbranch)
+        archive_url, bundle_url, schema_url = get_github_urls(
+            args.devrepo, build_info["vcs_revision"]
         )
 
         # Update bundle in package data
