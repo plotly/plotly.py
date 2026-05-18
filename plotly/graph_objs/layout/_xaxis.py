@@ -951,7 +951,7 @@ class XAxis(_BaseLayoutHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -1688,7 +1688,7 @@ class XAxis(_BaseLayoutHierarchyType):
         ends with each major tick instead of the period that begins
         there.
 
-        The 'ticklabelindex' property is a integer and may be specified as:
+        The 'ticklabelindex' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
           - A tuple, list, or one-dimensional numpy array of the above
 
@@ -1802,7 +1802,7 @@ class XAxis(_BaseLayoutHierarchyType):
         parallel to the axis. Positive values move the labels in the
         positive direction of the axis.
 
-        The 'ticklabelshift' property is a integer and may be specified as:
+        The 'ticklabelshift' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1828,7 +1828,7 @@ class XAxis(_BaseLayoutHierarchyType):
         the outside. If the negative value is large enough, inside
         ticks can even end up outside and vice versa.
 
-        The 'ticklabelstandoff' property is a integer and may be specified as:
+        The 'ticklabelstandoff' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1851,7 +1851,7 @@ class XAxis(_BaseLayoutHierarchyType):
         which labels are shown. Not implemented for axes with `type`
         "log" or "multicategory", or when `tickmode` is "array".
 
-        The 'ticklabelstep' property is a integer and may be specified as:
+        The 'ticklabelstep' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 

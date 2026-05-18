@@ -668,7 +668,7 @@ class Streamtube(_BaseTraceType):
         """
         The maximum number of displayed segments in a streamtube.
 
-        The 'maxdisplayed' property is a integer and may be specified as:
+        The 'maxdisplayed' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 

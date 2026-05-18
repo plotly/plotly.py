@@ -18,6 +18,8 @@ class Line(_BaseTraceHierarchyType):
         "coloraxis",
         "colorscale",
         "colorsrc",
+        "dash",
+        "dashsrc",
         "reversescale",
         "width",
         "widthsrc",
@@ -260,6 +262,48 @@ class Line(_BaseTraceHierarchyType):
         self["colorsrc"] = val
 
     @property
+    def dash(self):
+        """
+        Sets the dash style of lines. Set to a dash type string
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
+
+        The 'dash' property is an enumeration that may be specified as:
+          - One of the following dash styles:
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+          - A string containing a dash length list in pixels or percentages
+                (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self["dash"]
+
+    @dash.setter
+    def dash(self, val):
+        self["dash"] = val
+
+    @property
+    def dashsrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for `dash`.
+
+        The 'dashsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["dashsrc"]
+
+    @dashsrc.setter
+    def dashsrc(self, val):
+        self["dashsrc"] = val
+
+    @property
     def reversescale(self):
         """
         Reverses the color mapping if true. Has an effect only if in
@@ -387,6 +431,14 @@ class Line(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
+        dash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
+        dashsrc
+            Sets the source reference on Chart Studio Cloud for
+            `dash`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.line.color` is set to a numerical array.
@@ -413,6 +465,8 @@ class Line(_BaseTraceHierarchyType):
         coloraxis=None,
         colorscale=None,
         colorsrc=None,
+        dash=None,
+        dashsrc=None,
         reversescale=None,
         width=None,
         widthsrc=None,
@@ -493,6 +547,14 @@ class Line(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             `color`.
+        dash
+            Sets the dash style of lines. Set to a dash type string
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
+        dashsrc
+            Sets the source reference on Chart Studio Cloud for
+            `dash`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.line.color` is set to a numerical array.
@@ -539,6 +601,8 @@ an instance of :class:`plotly.graph_objs.scattergeo.marker.Line`""")
         self._set_property("coloraxis", arg, coloraxis)
         self._set_property("colorscale", arg, colorscale)
         self._set_property("colorsrc", arg, colorsrc)
+        self._set_property("dash", arg, dash)
+        self._set_property("dashsrc", arg, dashsrc)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("width", arg, width)
         self._set_property("widthsrc", arg, widthsrc)

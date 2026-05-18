@@ -157,7 +157,9 @@ fig.show()
 
 ### Explicitly Constructing a Color scale
 
-The Plotly Express `color_continuous_scale` argument accepts explicitly-constructed color scales as well:
+The Plotly Express `color_continuous_scale` argument accepts explicitly-constructed color scales as well.  
+
+The Graph Objects `colorscale` parameter also accepts an explicitly-constructed color scale, as shown in the example [below](#custom-heatmap-color-scale-with-graph-objects).
 
 ```python
 import plotly.express as px

@@ -324,7 +324,7 @@ fig.show()
 
 ### Enhanced prediction error analysis using `plotly.express`
 
-Add marginal histograms to quickly diagnoses any prediction bias your model might have. The built-in `OLS` functionality let you visualize how well your model generalizes by comparing it with the theoretical optimal fit (black dotted line).
+Add marginal histograms to quickly diagnose any prediction bias your model might have. The built-in `OLS` functionality let you visualize how well your model generalizes by comparing it with the theoretical optimal fit (black dotted line).
 
 ```python
 import plotly.express as px

@@ -249,9 +249,9 @@ fig.show()
 ```
 
 #### Implementation of shared axes with `make_subplots`
-The implementation of shared axis support in the `make_subplots` function has been simplified.  Prior to version 4, shared y-axes were implemented by associating a single `yaxis` object with multiple `xaxis` objects, and vica versa.
+The implementation of shared axis support in the `make_subplots` function has been simplified.  Prior to version 4, shared y-axes were implemented by associating a single `yaxis` object with multiple `xaxis` objects, and vice versa.
 
-In version 4, every 2D Cartesian subplot has a dedicated x-axis and and a dedicated y-axis. Axes are now "shared" by being linked together using the `matches` axis property.
+In version 4, every 2D Cartesian subplot has a dedicated x-axis and a dedicated y-axis. Axes are now "shared" by being linked together using the `matches` axis property.
 
 For legacy code that makes use of the `make_subplots` and add trace APIs, this change does not require any action on the user's part.  However, legacy code that uses `make_subplots` to create a figure with shared axes, and then manipulates the axes directly, may require updates.  The output of the `.print_grid` method on a figure created using `make_subplots` can be used to identify which axis objects are associated with each subplot.
 

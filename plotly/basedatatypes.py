@@ -555,7 +555,7 @@ class BaseFigure(object):
         for trace_ind, trace in enumerate(data):
             # By setting the trace's parent to be this figure, we tell the
             # trace object to use the figure's _data and _data_defaults
-            # dicts to get/set it's properties, rather than using the trace
+            # dicts to get/set its properties, rather than using the trace
             # object's internal _orphan_props dict.
             trace._parent = self
 
@@ -789,7 +789,7 @@ class BaseFigure(object):
     def __eq__(self, other):
         if not isinstance(other, BaseFigure):
             # Require objects to both be BaseFigure instances
-            return False
+            return NotImplemented
         else:
             # Compare plotly_json representations
 
@@ -1921,7 +1921,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
             val_parent = val_parent[key_path_el]
 
-        # Assign value to to final parent dict or list
+        # Assign value to final parent dict or list
         # --------------------------------------------
         # ### Get reference to final key path element ###
         last_key = key_path[-1]
@@ -4281,7 +4281,7 @@ Invalid property path '{key_path_str}' for layout
                 ret |= any(
                     t == (xref, yref)
                     for t in [
-                        # if a object exists but has no xaxis or yaxis keys, then it
+                        # if an object exists but has no xaxis or yaxis keys, then it
                         # is plotted with xaxis/xref 'x' and yaxis/yref 'y'
                         (
                             "x" if d[xaxiskw] is None else d[xaxiskw],
@@ -5017,7 +5017,7 @@ class BasePlotlyType(object):
         """
         if not isinstance(other, self.__class__):
             # Require objects to be of the same plotly type
-            return False
+            return NotImplemented
         else:
             # Compare plotly_json representations
 

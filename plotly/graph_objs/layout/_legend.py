@@ -25,6 +25,8 @@ class Legend(_BaseLayoutHierarchyType):
         "maxheight",
         "orientation",
         "title",
+        "titleclick",
+        "titledoubleclick",
         "tracegroupgap",
         "traceorder",
         "uirevision",
@@ -374,6 +376,55 @@ class Legend(_BaseLayoutHierarchyType):
         self["title"] = val
 
     @property
+    def titleclick(self):
+        """
+        Determines the behavior on legend title click. "toggle" toggles
+        the visibility of all items in the legend. "toggleothers"
+        toggles the visibility of all other legends. False disables
+        legend title click interactions. Defaults to "toggle" when
+        there are multiple legends, False otherwise. Not supported for
+        legends containing pie and pie-like traces.
+
+        The 'titleclick' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['toggle', 'toggleothers', False]
+
+        Returns
+        -------
+        Any
+        """
+        return self["titleclick"]
+
+    @titleclick.setter
+    def titleclick(self, val):
+        self["titleclick"] = val
+
+    @property
+    def titledoubleclick(self):
+        """
+        Determines the behavior on legend title double-click. "toggle"
+        toggles the visibility of all items in the legend.
+        "toggleothers" toggles the visibility of all other legends.
+        False disables legend title double-click interactions. Defaults
+        to "toggleothers" when there are multiple legends, False
+        otherwise. Not supported for legends containing pie and pie-
+        like traces.
+
+        The 'titledoubleclick' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['toggle', 'toggleothers', False]
+
+        Returns
+        -------
+        Any
+        """
+        return self["titledoubleclick"]
+
+    @titledoubleclick.setter
+    def titledoubleclick(self, val):
+        self["titledoubleclick"] = val
+
+    @property
     def tracegroupgap(self):
         """
         Sets the amount of vertical space (in px) between legend
@@ -680,6 +731,22 @@ class Legend(_BaseLayoutHierarchyType):
         title
             :class:`plotly.graph_objects.layout.legend.Title`
             instance or dict with compatible properties
+        titleclick
+            Determines the behavior on legend title click. "toggle"
+            toggles the visibility of all items in the legend.
+            "toggleothers" toggles the visibility of all other
+            legends. False disables legend title click
+            interactions. Defaults to "toggle" when there are
+            multiple legends, False otherwise. Not supported for
+            legends containing pie and pie-like traces.
+        titledoubleclick
+            Determines the behavior on legend title double-click.
+            "toggle" toggles the visibility of all items in the
+            legend. "toggleothers" toggles the visibility of all
+            other legends. False disables legend title double-click
+            interactions. Defaults to "toggleothers" when there are
+            multiple legends, False otherwise. Not supported for
+            legends containing pie and pie-like traces.
         tracegroupgap
             Sets the amount of vertical space (in px) between
             legend groups.
@@ -765,6 +832,8 @@ class Legend(_BaseLayoutHierarchyType):
         maxheight=None,
         orientation=None,
         title=None,
+        titleclick=None,
+        titledoubleclick=None,
         tracegroupgap=None,
         traceorder=None,
         uirevision=None,
@@ -849,6 +918,22 @@ class Legend(_BaseLayoutHierarchyType):
         title
             :class:`plotly.graph_objects.layout.legend.Title`
             instance or dict with compatible properties
+        titleclick
+            Determines the behavior on legend title click. "toggle"
+            toggles the visibility of all items in the legend.
+            "toggleothers" toggles the visibility of all other
+            legends. False disables legend title click
+            interactions. Defaults to "toggle" when there are
+            multiple legends, False otherwise. Not supported for
+            legends containing pie and pie-like traces.
+        titledoubleclick
+            Determines the behavior on legend title double-click.
+            "toggle" toggles the visibility of all items in the
+            legend. "toggleothers" toggles the visibility of all
+            other legends. False disables legend title double-click
+            interactions. Defaults to "toggleothers" when there are
+            multiple legends, False otherwise. Not supported for
+            legends containing pie and pie-like traces.
         tracegroupgap
             Sets the amount of vertical space (in px) between
             legend groups.
@@ -954,6 +1039,8 @@ an instance of :class:`plotly.graph_objs.layout.Legend`""")
         self._set_property("maxheight", arg, maxheight)
         self._set_property("orientation", arg, orientation)
         self._set_property("title", arg, title)
+        self._set_property("titleclick", arg, titleclick)
+        self._set_property("titledoubleclick", arg, titledoubleclick)
         self._set_property("tracegroupgap", arg, tracegroupgap)
         self._set_property("traceorder", arg, traceorder)
         self._set_property("uirevision", arg, uirevision)
