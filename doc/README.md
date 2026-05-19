@@ -62,19 +62,15 @@ install (`pip install -e`, as described in [main
 contributing notes](../CONTRIBUTING.md)), so that you only need to restart
 the Jupyter kernel when you have changed the source code of the feature.
 
-### Branches
+### Branching strategy  
 
-Two different cases exist, whether you are documenting a feature already
-released, or which has just been included but not yet released.
+- The `doc-prod` branch contains the live docs which are available on the website. As soon as a change is merged into `doc-prod`, the updated docs are deployed and made publicly available.  
+- The `main` branch contains docs which have been written but are not ready to be released, such as for an upcoming feature in the next plotly.py release.  
 
-- Case of an already released feature: your changes can be deployed to the
-  documentation website as soon as they have been merged, and you should start
-  your branch off the `doc-prod` branch and open your pull request against this
-  `doc-prod` branch.
-- Case of a new (not released yet) feature: start your branch / pull request
-  against the `main` branch. `main` and `doc-prod` will be synchronized at
-  release time, so that the documentation of the feature is only deployed when
-  it is available in a released version of `plotly.py`.
+When updating the docs, two workflows are possible:  
+
+- In the case of updating the docs for an already-released feature: your changes can be deployed to the documentation website as soon as they have been merged, so you should branch off of the `doc-prod` branch and open your pull request into the `doc-prod` branch.  
+- In the case of writing docs for a new (not-yet-released) feature: you should branch off `main` and open your pull request into `main`, so that the documentation of the feature is only deployed when it is available in a released version of `plotly.py`. The `main` branch will be merged into `doc-prod` at release time, as described below.  
 
 #### Keeping `main` and `doc-prod` in sync
 
@@ -98,7 +94,7 @@ At release time the synchronization is bidirectional (see also
    section of `RELEASE.md` for the full procedure.
 
 > **Release prep:** When synchronizing `main` into `doc-prod` for a new
-> release, update the `plotly==` version pin in `requirements.txt` to match
+> release, update the `plotly==` version pin in `doc/requirements.txt` to match
 > the newly released version. The `doc-prod` build uses this pinned version
 > (not an editable install), so examples that rely on new features will fail
 > if the pin is stale.
@@ -148,7 +144,7 @@ jupyter:
 ---
 ```
 
-The `plotly` metadata fields are the most important to get right:
+The `plotly` metadata fields are the most important to enter correctly when creating/updating a tutorial:
 
 | Field | Description |
 |-------|-------------|
@@ -335,7 +331,7 @@ defined in `.github/workflows/build-doc.yml`.
 
 | Event | What happens |
 |-------|-------------|
-| Pull request (any branch) | Tutorials are built and validated. The build artifact is uploaded but not deployed. |
+| Pull request (any branch) | Tutorials (markdown files in doc/python) are built and validated. The build artifact is uploaded but not deployed. |
 | Push to `doc-prod` | Full build: tutorials are built, validated, and deployed. API docs are also built and deployed. |
 
 ### Build steps
