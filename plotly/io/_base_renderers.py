@@ -7,7 +7,6 @@ from os.path import isdir
 
 from plotly import optional_imports
 from plotly.io import to_json, to_image, write_image, write_html
-from plotly.io._utils import plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 from plotly.tools import return_figure_from_figure_or_data
 
@@ -277,11 +276,9 @@ class HtmlRenderer(MimetypeRenderer):
         {win_config}
         {mathjax_config}
         </script>
-        <script type="module">import \"{plotly_cdn}\"</script>
         """.format(
                     win_config=_window_plotly_config,
                     mathjax_config=_mathjax_config,
-                    plotly_cdn=plotly_cdn_url().rstrip(".js"),
                 )
 
             else:
