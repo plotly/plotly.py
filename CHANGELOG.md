@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Update tests to be compatible with numpy 2.4 [[#5522](https://github.com/plotly/plotly.py/pull/5522)], with thanks to @thunze for the contribution!
 - Add default headers to be passed in to Kaleido v1.3.0 to avoid blocked Open Street Map tiles [#5588](https://github.com/plotly/plotly.py/pull/5588)]
 
+### Performance
+- Optimize `to_dict()` serialization path: eliminate redundant array copies and narwhals overhead in base64 conversion, ~40% faster for data-heavy figures [[#5577](https://github.com/plotly/plotly.py/pull/5577)]
+
 ### Updated
 - The `__eq__` method for  `graph_objects` classes now returns `NotImplemented` to give the other operand an opportunity to handle the comparison [[#5547](https://github.com/plotly/plotly.py/pull/5547)], with thanks to @RazerM for the contribution!
 
