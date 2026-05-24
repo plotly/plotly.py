@@ -241,6 +241,89 @@ def test_rejection_aok_colorscale(val, validator_aok_colorscale):
 
 
 # Test dynamic description logic
+def test_acceptance_aok_none(validator_aok):
+    """None input should pass through unchanged (typed_array_spec path)."""
+    assert validator_aok.validate_coerce(None) is None
+
+
+def test_acceptance_aok_typed_array_spec(validator_aok):
+    """Typed array spec dict should pass through unchanged."""
+    spec = {"bdata": "AQID", "dtype": "i1"}
+    result = validator_aok.validate_coerce(spec)
+    assert result == spec
+
+
+@pytest.mark.parametrize(
+    "val",
+    [
+        np.array(["redd", "rgb(255, 0, 0)"]),
+        np.array(["bad_color"]),
+    ],
+)
+def test_rejection_aok_numpy_1d(val, validator_aok):
+    """Invalid colors in a 1D numpy array should raise."""
+    with pytest.raises(ValueError) as validation_failure:
+        validator_aok.validate_coerce(val)
+
+    assert "Invalid element(s)" in str(validation_failure.value)
+
+
+def test_rejection_aok_numpy_1d_colorscale(validator_aok_colorscale):
+    """Invalid colors in a 1D numpy string array with numbers_allowed should raise."""
+    val = np.array(["redd", "rgb(255, 0, 0)"])
+    with pytest.raises(ValueError) as validation_failure:
+        validator_aok_colorscale.validate_coerce(val)
+
+    assert "Invalid element(s)" in str(validation_failure.value)
+
+
+def test_rejection_aok_nested_list_with_invalid(validator_aok):
+    """Nested list with invalid colors should raise, exercising find_invalid_els."""
+    val = [["redd", "rgb(255, 0, 0)"], ["blue", "not_a_color"]]
+    with pytest.raises(ValueError) as validation_failure:
+        validator_aok.validate_coerce(val)
+
+    assert "Invalid element(s)" in str(validation_failure.value)
+
+
+def test_acceptance_aok_3d_nested_list(validator_aok):
+    """3-level nested list should validate, exercising recursive find_invalid_els."""
+    val = [[["red", "blue"], ["green"]]]
+    result = validator_aok.validate_coerce(val)
+    assert validator_aok.present(result) == tuple(val)
+
+
+def test_rejection_aok_3d_nested_list(validator_aok):
+    """3-level nested list with invalid colors should raise."""
+    val = [[["redd", "blue"], ["green"]]]
+    with pytest.raises(ValueError) as validation_failure:
+        validator_aok.validate_coerce(val)
+
+    assert "Invalid element(s)" in str(validation_failure.value)
+
+
+@pytest.mark.parametrize(
+    "val",
+    [
+        np.array([["redd", "rgb(255, 0, 0)"], ["blue", "not_a_color"]]),
+        np.array([["bad_color", "blue"]]),
+    ],
+)
+def test_rejection_aok_numpy_2d(val, validator_aok):
+    """Invalid colors in a 2D numpy array should raise."""
+    with pytest.raises(ValueError) as validation_failure:
+        validator_aok.validate_coerce(val)
+
+    assert "Invalid element(s)" in str(validation_failure.value)
+
+
+def test_acceptance_aok_colorscale_numpy_numeric(validator_aok_colorscale):
+    """Numeric numpy array with numbers_allowed should pass through (numeric fast path)."""
+    val = np.array([0, 1, 2, 3])
+    result = validator_aok_colorscale.validate_coerce(val)
+    assert np.array_equal(result, val)
+
+
 def test_description(validator):
     desc = validator.description()
     assert "A number that will be interpreted as a color" not in desc

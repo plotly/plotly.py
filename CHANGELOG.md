@@ -8,10 +8,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add optional `font` parameter for `make_subplots` [[#5393](https://github.com/plotly/plotly.py/pull/5393)]
 
 ### Fixed
+- Fix `ColorValidator` silently accepting invalid colors in 2D numpy arrays instead of raising `ValueError` [[#5576](https://github.com/plotly/plotly.py/pull/5576)]
 - Fix issue where user-specified `color_continuous_scale` was ignored when template had `autocolorscale=True` [[#5439](https://github.com/plotly/plotly.py/pull/5439)], with thanks to @antonymilne for the contribution!
 - Use presence of `COLAB_NOTEBOOK_ID` env var to enable Colab renderer instead of testing import of `google.colab` [[#5473](https://github.com/plotly/plotly.py/pull/5473)], with thanks to @kevineger for the contribution!
 - Update tests to be compatible with numpy 2.4 [[#5522](https://github.com/plotly/plotly.py/pull/5522)], with thanks to @thunze for the contribution!
 - Add default headers to be passed in to Kaleido v1.3.0 to avoid blocked Open Street Map tiles [#5588](https://github.com/plotly/plotly.py/pull/5588)]
+
+### Performance
+- Optimize `ColorValidator` array validation: up to 3x faster on numpy arrays, 2x on lists, 14x on scalars [[#5576](https://github.com/plotly/plotly.py/pull/5576)]
 
 ### Updated
 - The `__eq__` method for  `graph_objects` classes now returns `NotImplemented` to give the other operand an opportunity to handle the comparison [[#5547](https://github.com/plotly/plotly.py/pull/5547)], with thanks to @RazerM for the contribution!
