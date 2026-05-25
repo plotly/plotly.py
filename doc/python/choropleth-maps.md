@@ -147,7 +147,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 ```python hide_code=true
 from IPython.display import IFrame
@@ -216,7 +216,7 @@ In **Plotly.py 6.3 and later**, the built-in countries geometry is created from 
 
 In **earlier versions of Plotly.py**, the built-in countries geometry is based on Natural Earth data only. Plotly includes data from Natural Earth "as-is". This dataset draws boundaries of countries according to de facto status. See the [Natural Earth page for more details](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/).
 
-To use the built-in countries geometry, provide `locations` as [three-letter ISO country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
+To use the built-in countries geometry, provide `locations` as [three-letter ISO country codes](/python/outline-map-locations/#supported-iso-codes).
 
 ```python
 import plotly.express as px
@@ -229,7 +229,7 @@ fig = px.choropleth(df, locations="iso_alpha",
 fig.show()
 ```
 
-To use the USA States geometry, set `locationmode='USA-states'` and provide `locations` as two-letter state abbreviations:
+To use the USA States geometry, set `locationmode='USA-states'` and provide `locations` as [two-letter state abbreviations](/python/outline-map-locations/#supported-us-state-codes) or [full state names](/python/outline-map-locations/#locationmodeusastates):
 
 ```python
 import plotly.express as px
@@ -258,7 +258,7 @@ fig = go.Figure(data=go.Choropleth(
 
 fig.update_layout(
     title_text = '2011 US Agriculture Exports by State',
-    geo_scope='usa', # limite map scope to USA
+    geo_scope='usa', # limit map scope to USA
 )
 
 fig.show()

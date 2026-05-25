@@ -107,7 +107,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -122,7 +122,7 @@ IFrame(snippet_url + 'mapbox-county-choropleth', width='100%', height=1200)
 
 ### Indexing by GeoJSON Properties
 
-If the GeoJSON you are using either does not have an `id` field or you wish you use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
+If the GeoJSON you are using either does not have an `id` field or you wish to use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
 
 In the following GeoJSON object/data-file pairing, the values of `properties.district` match the values of the `district` column:
 
@@ -226,7 +226,7 @@ The earlier examples using `px.choropleth_map` and `go.Choroplethmap` use [Mapli
 
 To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
-Here's an exmaple of using the Mapbox Light base map, which requires a free token.
+Here's an example of using the Mapbox Light base map, which requires a free token.
 
 ```python
 token = open(".mapbox_token").read() # you will need your own token

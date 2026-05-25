@@ -131,7 +131,7 @@ print("\n\n")
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -281,7 +281,7 @@ import plotly.graph_objects as go
 df = px.data.iris()
 
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", facet_col="species",
-                 title="Adding Traces To Subplots Witin A Plotly Express Figure")
+                 title="Adding Traces To Subplots Within A Plotly Express Figure")
 
 reference_line = go.Scatter(x=[2, 4],
                             y=[4, 8],
@@ -624,7 +624,7 @@ Figures created with the plotly.py graphing library also support:
 
 #### Chaining Figure Operations
 
-All of the figure update operations described above are methods that return a reference to the figure being modified. This makes it possible the chain multiple figure modification operations together into a single expression.
+All of the figure update operations described above are methods that return a reference to the figure being modified. This makes it possible to chain multiple figure modification operations together into a single expression.
 
 Here is an example of a chained expression that creates:
 

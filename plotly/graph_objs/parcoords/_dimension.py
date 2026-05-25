@@ -78,8 +78,8 @@ class Dimension(_BaseTraceHierarchyType):
         """
         Do we allow multiple selection ranges or just a single range?
 
-        The 'multiselect' property must be specified as a bool
-        (either True, or False)
+        The 'multiselect' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -312,8 +312,8 @@ class Dimension(_BaseTraceHierarchyType):
         Shows the dimension when set to `true` (the default). Hides the
         dimension for `false`.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

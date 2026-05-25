@@ -67,8 +67,8 @@ class Cluster(_BaseTraceHierarchyType):
         """
         Determines whether clustering is enabled or disabled.
 
-        The 'enabled' property must be specified as a bool
-        (either True, or False)
+        The 'enabled' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

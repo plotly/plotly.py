@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.17.2
+      jupytext_version: 1.16.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.12.4
+    version: 3.9.19
   plotly:
     description: How to set the configuration options of figures using the Plotly
       Python graphing library.
@@ -40,7 +40,7 @@ The `.show()` method that you use to display your figures also accepts a `config
 
 You can set the configuration options for your figure by passing a dictionary to this parameter which contains the options you want to set.
 
-If you don't set an option's value, it will be automatically be set to the default value for that option.
+If you don't set an option's value, it will automatically be set to the default value for that option.
 
 For the complete list of configuration options and their defaults see: https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
 
@@ -348,7 +348,7 @@ fig = go.Figure(
         title='Google Stock Price Over Time with Mode Bar Disabled',
         xaxis=dict(
             title='Date',
-            # Try zooming in or out using the modebar buttons. These only apply to the yaxis in this exampe.
+            # Try zooming in or out using the modebar buttons. These only apply to the yaxis in this example.
             modebardisable='zoominout'
         ),
         yaxis=dict(
@@ -357,6 +357,22 @@ fig = go.Figure(
     )
 )
 fig.show()
+```
+
+### Hiding Notifications 
+
+*New in 6.7*
+
+Plotly displays a notification in the top-right corner of the plot when downloading the plot as an image, when first clicking a legend item, and when zooming in. Set `displayNotifier` to `False` to hide these notifications.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+
+config = {"displayNotifier": False}
+fig.show(config=config)
 ```
 
 ### Configuring Figures in Dash Apps

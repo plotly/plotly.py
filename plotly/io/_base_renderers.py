@@ -273,7 +273,7 @@ class HtmlRenderer(MimetypeRenderer):
 
             if self.connected:
                 script = """\
-        <script type="text/javascript">
+        <script>
         {win_config}
         {mathjax_config}
         </script>
@@ -288,7 +288,7 @@ class HtmlRenderer(MimetypeRenderer):
                 # If not connected then we embed a copy of the plotly.js
                 # library in the notebook
                 script = """\
-        <script type="text/javascript">
+        <script>
         {win_config}
         {mathjax_config}
         </script>

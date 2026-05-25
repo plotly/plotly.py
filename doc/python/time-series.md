@@ -65,7 +65,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -174,14 +174,14 @@ df = df.loc[(df["Date"] >= "2016-07-01") & (df["Date"] <= "2016-12-01")]
 
 fig = px.line(df, x='Date', y='AAPL.High')
 fig.update_xaxes(ticks= "outside",
-                 ticklabelmode= "period", 
-                 tickcolor= "black", 
-                 ticklen=10, 
+                 ticklabelmode= "period",
+                 tickcolor= "black",
+                 ticklen=10,
                  minor=dict(
-                     ticklen=4,  
-                     dtick=7*24*60*60*1000,  
-                     tick0="2016-07-03", 
-                     griddash='dot', 
+                     ticklen=4,
+                     dtick=7*24*60*60*1000,
+                     tick0="2016-07-03",
+                     griddash='dot',
                      gridcolor='white')
                 )
 

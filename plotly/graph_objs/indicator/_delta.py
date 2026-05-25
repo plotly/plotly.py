@@ -141,8 +141,8 @@ class Delta(_BaseTraceHierarchyType):
         """
         Show relative change
 
-        The 'relative' property must be specified as a bool
-        (either True, or False)
+        The 'relative' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

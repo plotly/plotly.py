@@ -57,7 +57,7 @@ By default, the resulting HTML file is a fully self-contained HTML file which ca
 
 ### Inserting Plotly Output into HTML using a Jinja2 Template
 
-You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We don't want to output a full HTML page, as the template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create an HTML template file containing a Jinja `{{ variable }}`.  In this example, we customize the HTML in the template file by replacing the Jinja variable `{{ fig }}` with our graphic `fig`.
+You can insert Plotly output and text related to your data into HTML templates using Jinja2. Use `.to_html` to send the HTML to a Python string variable rather than using `write_html` to send the HTML to a disk file.  Use the `full_html=False` option to output just the code necessary to add a figure to a template. We do not want to output a full HTML page, as the template will define the rest of the page's structure — for example, the page's `HTML` and `BODY` tags.  First create a template file containing HTML and a Jinja variable, `{{ fig }}`.  We use Python to replace the Jinja variable with our graphic `fig`.
 
 <!-- #region -->
 
@@ -98,13 +98,41 @@ with open(output_html_path, "w", encoding="utf-8") as output_file:
         j2_template = Template(template_file.read())
         output_file.write(j2_template.render(plotly_jinja_data))
 ```
+
+The height of the figure can be made responsive by setting `autosize` to `True` and  `height` to `None` in the layout, and `responsive` to `True` in the config.
+
+
+```python
+import plotly.express as px
+from jinja2 import Template
+
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+
+output_html_path=r"/path/to/output.html"
+input_template_path = r"/path/to/template.html"
+
+fig.update_layout(autosize=True, height=None)
+fig_html = fig.to_html(
+    config={"responsive": True},
+    default_height="80vh",
+    full_html=False,
+)
+plotly_jinja_data = {"fig": fig_html}
+#consider also defining the include_plotlyjs parameter to point to an external Plotly.js as described above
+
+with open(output_html_path, "w", encoding="utf-8") as output_file:
+    with open(input_template_path) as template_file:
+        j2_template = Template(template_file.read())
+        output_file.write(j2_template.render(plotly_jinja_data))
+```
 <!-- #endregion -->
 
 ### HTML export in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & publish apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a> or <a class="plotly-red" href="https://plotly.com/cloud/">Plotly Cloud</a>.**
 
 
 ```python hide_code=true
@@ -117,10 +145,9 @@ IFrame(snippet_url + 'interactive-html-export', width='100%', height=1200)
 <u><a href="https://go.plotly.com/dash-club?utm_source=Dash+Club+2022&utm_medium=graphing_libraries&utm_content=inline">Join now</a></u>.</p></div></div></div></div>
 
 
-### Full Parameter Documentation
+### Reference
 
-```python
-import plotly.graph_objects as go
+See the following links for parameter information and HTML figure export options:
 
-help(go.Figure.write_html)
-```
+- [`plotly.io.to_html()`](https://plotly.com/python-api-reference/generated/plotly.io.to_html.html)
+- [`plotly.io.write_html()`](https://plotly.com/python-api-reference/generated/plotly.io.write_html.html)
