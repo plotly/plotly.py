@@ -240,9 +240,9 @@ def test_legend_dots():
                          draw line with 3 points
                          draw 3 markers
                          opening legend
-                         draw line with 2 points
+                         draw line with 3 points
                          draw text 'label' None
-                         draw 1 markers
+                         draw 3 markers
                          draw text 'dots' None
                          draw path with 13 vertices
                          closing legend
