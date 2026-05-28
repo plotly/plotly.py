@@ -800,6 +800,41 @@ Frames are not supported by the plotly.graph_objs.FigureWidget class.
 Note: Frames are supported by the plotly.graph_objs.Figure class"""
         raise ValueError(msg)
 
+    def animate_frames(self, frames_data, durations):
+        """
+        Animate through a sequence of data states with per-frame durations.
+
+        Each entry in frames_data is a dict of property updates applied to
+        data[0]. The corresponding entry in durations controls how long
+        that step is displayed (in milliseconds).
+
+        Parameters
+        ----------
+        frames_data : list[dict]
+            List of property-update dicts, each applied to data[0].
+        durations : list of int or float
+            Duration in milliseconds for each frame.
+        """
+        if not isinstance(frames_data, (list, tuple)):
+            raise ValueError("frames_data must be a list.")
+        if not isinstance(durations, (list, tuple)):
+            raise ValueError("durations must be a list of numbers.")
+        if len(frames_data) != len(durations):
+            raise ValueError(
+                f"len(frames_data) ({len(frames_data)}) must equal "
+                f"len(durations) ({len(durations)})."
+            )
+        for d in durations:
+            if not isinstance(d, (int, float)):
+                raise ValueError("All durations must be numbers.")
+            if d < 0:
+                raise ValueError("Durations must be non-negative.")
+
+        for frame_data, duration in zip(frames_data, durations):
+            with self.batch_animate(duration=duration):
+                for prop, val in frame_data.items():
+                    self.data[0][prop] = val
+
     # Static Helpers
     # --------------
     @staticmethod
