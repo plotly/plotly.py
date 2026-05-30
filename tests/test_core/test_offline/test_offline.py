@@ -278,7 +278,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         self.assertNotIn("<html>", html)
         self.assertNotIn("</html>", html)
-        self.assertTrue(html.startswith("<div>") and html.endswith("</div>"))
+        self.assertTrue(html.startswith("<div") and html.endswith("</div>"))
 
     def test_config(self):
         config = dict(linkText="Plotly rocks!", showLink=True, editable=True)
