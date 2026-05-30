@@ -200,7 +200,7 @@ def get_text_style(text):
 def get_axis_properties(axis):
     """Return the property dictionary for a matplotlib.Axis instance"""
     props = {}
-    label1On = axis._major_tick_kw.get("label1On", True)
+    label1On = axis.get_tick_params().get("label1On", True)
 
     if isinstance(axis, matplotlib.axis.XAxis):
         if label1On:
@@ -257,7 +257,7 @@ def get_axis_properties(axis):
 
 def get_grid_style(axis):
     gridlines = axis.get_gridlines()
-    if axis._major_tick_kw["gridOn"] and len(gridlines) > 0:
+    if axis.get_tick_params()["gridOn"] and len(gridlines) > 0:
         color = export_color(gridlines[0].get_color())
         alpha = gridlines[0].get_alpha()
         dasharray = get_dasharray(gridlines[0])
