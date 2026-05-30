@@ -318,11 +318,11 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
         )
 
     plotly_html_div = """\
-<div>\
+<div style="height:{height}; width:{width};">\
         {mathjax_script}\
         {load_plotlyjs}\
             <div id="{id}" class="plotly-graph-div" \
-style="height:{height}; width:{width};"></div>\
+style="height:100%; width:100%;"></div>\
             <script>\
                 window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
                 {script};\
