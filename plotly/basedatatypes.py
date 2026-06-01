@@ -1447,10 +1447,12 @@ class BaseFigure(object):
 
         layout_keys_filters = [
             lambda k: k.startswith(prefix) and self.layout[k] is not None,
-            lambda k: row is None
-            or container_to_row_col.get(k, (None, None, None))[0] == row,
-            lambda k: col is None
-            or container_to_row_col.get(k, (None, None, None))[1] == col,
+            lambda k: (
+                row is None or container_to_row_col.get(k, (None, None, None))[0] == row
+            ),
+            lambda k: (
+                col is None or container_to_row_col.get(k, (None, None, None))[1] == col
+            ),
             lambda k: (
                 secondary_y is None
                 or container_to_row_col.get(k, (None, None, None))[2] == secondary_y
@@ -2871,6 +2873,52 @@ Invalid property path '{key_path_str}' for layout
 
         # Validate frames
         self._frame_objs = self._frames_validator.validate_coerce(new_frames)
+
+    def set_frame_durations(self, durations):
+        """
+        Set per-frame durations for animations.
+
+        Parameters
+        ----------
+        durations : int or float or list
+            Duration in milliseconds for each frame. A scalar applies the
+            same duration to all frames. A list must have one entry per
+            frame, in frame order.
+
+        Returns
+        -------
+        BaseFigure
+            The Figure object that the method was called on
+        """
+        frames = self._frame_objs
+        if not frames:
+            raise ValueError(
+                "Figure has no frames. Add frames before setting durations."
+            )
+
+        if isinstance(durations, (int, float)):
+            durations = [durations] * len(frames)
+        elif isinstance(durations, (list, tuple)):
+            durations = list(durations)
+        else:
+            raise ValueError("durations must be a number or a list of numbers.")
+
+        if len(durations) != len(frames):
+            raise ValueError(
+                f"len(durations) ({len(durations)}) must equal "
+                f"the number of frames ({len(frames)})."
+            )
+
+        for d in durations:
+            if not isinstance(d, (int, float)):
+                raise ValueError("All durations must be numbers.")
+            if d < 0:
+                raise ValueError("Durations must be non-negative.")
+
+        for frame, d in zip(frames, durations):
+            frame._props["duration"] = d
+
+        return self
 
     # Update
     # ------

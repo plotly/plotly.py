@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Add optional `font` parameter for `make_subplots` [[#5393](https://github.com/plotly/plotly.py/pull/5393)]
+- Add `set_frame_durations` method to `Figure` for setting per-frame animation durations, and `animate_frames` method to `FigureWidget` for animating through data states with per-frame durations [[#XXXX](https://github.com/plotly/plotly.py/pull/XXXX)]
 
 ### Fixed
 - Fix issue where user-specified `color_continuous_scale` was ignored when template had `autocolorscale=True` [[#5439](https://github.com/plotly/plotly.py/pull/5439)], with thanks to @antonymilne for the contribution!

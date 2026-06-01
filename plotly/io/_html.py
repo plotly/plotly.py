@@ -216,11 +216,43 @@ def to_html(
                         }})""".format(id=plotdivid, frames=jframes)
 
         if auto_play:
-            if animation_opts:
-                animation_opts_arg = ", " + _json.dumps(animation_opts)
+            frames_list = fig_dict.get("frames", [])
+            per_frame_durations = [f.get("duration") for f in frames_list]
+
+            if any(d is not None for d in per_frame_durations):
+                durations_js = _json.dumps(per_frame_durations)
+                frame_names_js = _json.dumps(
+                    [f.get("name", str(i)) for i, f in enumerate(frames_list)]
+                )
+                then_animate = """.then(function(){{
+                            var gd = document.getElementById('{id}');
+                            var durations = {durations};
+                            var frameNames = {frame_names};
+                            var idx = 0;
+                            function playNext() {{
+                                if (idx >= frameNames.length) return;
+                                var dur = durations[idx] !== null ? durations[idx] : 500;
+                                Plotly.animate(gd, [frameNames[idx]], {{
+                                    frame: {{duration: dur, redraw: true}},
+                                    transition: {{duration: dur}},
+                                    mode: 'immediate'
+                                }}).then(function() {{
+                                    idx++;
+                                    setTimeout(playNext, dur);
+                                }});
+                            }}
+                            playNext();
+                        }})""".format(
+                    id=plotdivid,
+                    durations=durations_js,
+                    frame_names=frame_names_js,
+                )
             else:
-                animation_opts_arg = ""
-            then_animate = """.then(function(){{
+                if animation_opts:
+                    animation_opts_arg = ", " + _json.dumps(animation_opts)
+                else:
+                    animation_opts_arg = ""
+                then_animate = """.then(function(){{
                             Plotly.animate('{id}', null{animation_opts});
                         }})""".format(id=plotdivid, animation_opts=animation_opts_arg)
 
