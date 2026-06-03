@@ -66,6 +66,9 @@ conflicts = [[
 exclude-newer = "0001-01-01T00:00:00Z" # This has no effect and is included for backwards compatibility when using relative exclude-newer values.
 exclude-newer-span = "PT72H"
 
+[options.exclude-newer-package]
+plotly = false
+
 [[package]]
 name = "annotated-doc"
 version = "0.0.4"

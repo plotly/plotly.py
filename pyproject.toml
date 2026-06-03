@@ -98,6 +98,7 @@ dev_pandas3 = [
 
 [tool.uv]
 exclude-newer = "72 hours"
+exclude-newer-package = { plotly = false }
 conflicts = [
     [{ extra = "dev_pandas1" }, { extra = "dev_pandas2" }],
     [{ extra = "dev_pandas1" }, { extra = "dev_pandas3" }],
