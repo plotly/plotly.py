@@ -277,6 +277,8 @@ The following settings are available.
 
 `topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
 
+`headers`: *New in 6.8.* A dict of HTTP headers Kaleido sends when fetching external resources during image export (for example, when fetching OpenStreetMap tiles for tile maps). Defaults to `{"X-Requested-With": "plotly.py"}`, which is required to comply with the [OpenStreetMap tile usage policy](https://operations.osmfoundation.org/policies/tiles/). Requires Kaleido v1.3.0 or later.
+
 `mapbox_access_token`: The default Mapbox access token (Kaleido v0 only). Mapbox traces are deprecated. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for more details.
 
 ### Set Defaults

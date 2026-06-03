@@ -27,7 +27,7 @@ pooch
 psutil
 pyarrow
 pyshp==2.1.2
-python-frontmatter
+python-frontmatter==1.1.0
 recommonmark
 requests
 scikit-image==0.20.0

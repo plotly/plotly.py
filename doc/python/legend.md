@@ -154,6 +154,25 @@ fig.add_shape(
 fig.show()
 ```
 
+##### Per-Slice `legendrank` for Pie Traces
+
+*New in 6.8*
+
+For `pie` traces, `legendrank` also accepts an array so that each slice can be ranked individually. In the example below, the slices appear in the legend in the order specified by `legendrank` (lowest rank first), independent of the order of `values`.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(
+    go.Pie(
+        labels=["Oxygen", "Hydrogen", "Carbon", "Nitrogen", "Other"],
+        values=[4500, 2500, 1053, 500, 600],
+        legendrank=[3, 1, 2, 5, 4],
+    )
+)
+fig.show()
+```
+
 #### Showing and Hiding the Legend
 
 By default the legend is displayed on Plotly charts with multiple traces, and this can be explicitly set with the `layout.showlegend` attribute.

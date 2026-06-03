@@ -274,7 +274,21 @@ python commands.py updateplotlyjs
 
 This downloads new versions of `plot-schema.json` and `plotly.min.js` from the `plotly/plotly.js` GitHub repository
 and places them in `plotly/package_data`.
-It then regenerates all of the `graph_objs` classes based on the new schema.
+It then regenerates all of the `graph_objs` classes based on the new schema,
+and finally runs `npm install` in `js/` to refresh `js/package-lock.json` against the new `plotly.js`.
+Commit the updated `js/package-lock.json` along with the regenerated files.
+
+The JupyterLab extension and FigureWidget bundles in `plotly/labextension` and `plotly/package_data/widgetbundle.js`
+are rebuilt as part of the release flow (see [RELEASE.md](RELEASE.md)) rather than on every plotly.js bump.
+
+If you need to skip the `npm install` step entirely (e.g. `npm` isn't available),
+set the `SKIP_NPM=1` environment variable:
+
+```bash
+SKIP_NPM=1 python commands.py updateplotlyjs
+```
+
+If you do skip it, you'll need to run `npm install` in `js/` yourself before committing so the lockfile stays in sync.
 
 ### Using a Development Branch of Plotly.js
 
@@ -319,6 +333,6 @@ Usage: `python commands.py <subcommand> <args>`
 | `codegen [--noformat]` | Regenerate Python files according to `plot-schema.json`.`--noformat` skips formatter step. |
 | `lint` | Lint all Python code in `plotly/`. |
 | `format` | Format all Python code in `plotly/`. |
-| `updateplotlyjs` | Update `plotly.min.js` and `plot-schema.json` to match the `plotly.js` version specified in `js/package.json`. Then, run codegen to regenerate the Python files. |
+| `updateplotlyjs` | Update `plotly.min.js` and `plot-schema.json` to match the `plotly.js` version specified in `js/package.json`, run codegen to regenerate the Python files, then run `npm install` in `js/` to refresh `js/package-lock.json`. Set `SKIP_NPM=1` to skip the npm step. |
 | `updateplotlyjsdev [--devrepo REPONAME --devbranch BRANCHNAME] \| [--local PATH]` | Update `plot-schema.json` and `plotly.min.js` to match the version in the provided plotly.js repo name and branch name, OR local path. Then, run codegen to regenerate the Python files. |
 | `bumpversion X.Y.Z` | Update the plotly.py version number to X.Y.Z across all files where it needs to be updated. |
