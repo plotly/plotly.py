@@ -1,4 +1,4 @@
-plotly==6.7.0
+plotly==6.8.0
 anywidget
 cufflinks==0.17.3
 dash-bio
@@ -27,7 +27,7 @@ pooch
 psutil
 pyarrow
 pyshp==2.1.2
-python-frontmatter
+python-frontmatter==1.1.0
 recommonmark
 requests
 scikit-image==0.20.0

@@ -4,17 +4,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## [6.8.0] - 2026-06-03
+
 ### Added
-- Add optional `font` parameter for `make_subplots` [[#5393](https://github.com/plotly/plotly.py/pull/5393)]
+- Add optional `font` parameter for `make_subplots` [[#5393](https://github.com/plotly/plotly.py/pull/5393)], with thanks to @Zomtir for the contribution!
 
 ### Fixed
 - Fix issue where user-specified `color_continuous_scale` was ignored when template had `autocolorscale=True` [[#5439](https://github.com/plotly/plotly.py/pull/5439)], with thanks to @antonymilne for the contribution!
 - Use presence of `COLAB_NOTEBOOK_ID` env var to enable Colab renderer instead of testing import of `google.colab` [[#5473](https://github.com/plotly/plotly.py/pull/5473)], with thanks to @kevineger for the contribution!
+- Fix incorrect annotation placement for `add_vline`, `add_hline`, `add_vrect`, and `add_hrect` on datetime axes [[#5508](https://github.com/plotly/plotly.py/pull/5508)], with thanks to @mosh3eb for the contribution!
 - Update tests to be compatible with numpy 2.4 [[#5522](https://github.com/plotly/plotly.py/pull/5522)], with thanks to @thunze for the contribution!
-- Add default headers to be passed in to Kaleido v1.3.0 to avoid blocked Open Street Map tiles [#5588](https://github.com/plotly/plotly.py/pull/5588)]
+- Fix issue where `js/` directory was unintentionally installed as a top-level Python package when installing `plotly` [[#5587](https://github.com/plotly/plotly.py/pull/5587)] 
+- Add default headers to be passed in to Kaleido v1.3.0 to avoid blocked Open Street Map tiles [[#5588](https://github.com/plotly/plotly.py/pull/5588)]
+- Propagate the requested `default_height`/`default_width` to the outer wrapper div produced by `to_html` so that responsive (percentage) dimensions inherit from a sized parent container instead of collapsing to the plotly.js 450px fallback [[#5591](https://github.com/plotly/plotly.py/issues/5591)], with thanks to @SharadhNaidu for the contribution!
 
 ### Updated
 - The `__eq__` method for  `graph_objects` classes now returns `NotImplemented` to give the other operand an opportunity to handle the comparison [[#5547](https://github.com/plotly/plotly.py/pull/5547)], with thanks to @RazerM for the contribution!
+- Update plotly.js from version 3.5.0 to version 3.6.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.6.0) for more information [[#5608](https://github.com/plotly/plotly.py/pull/5608)]. Notable changes include:
+  - Add support for arrays for the pie property `legendrank`, so that it can be configured per slice [[#7723](https://github.com/plotly/plotly.js/pull/7723)]
+  - Add `hoversort` layout attribute to sort unified hover label items by value [[#7734](https://github.com/plotly/plotly.js/pull/7734)]
 
 ## [6.7.0] - 2026-04-09
 

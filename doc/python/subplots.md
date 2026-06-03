@@ -156,6 +156,28 @@ fig.update_layout(height=500, width=700,
 fig.show()
 ```
 
+#### Customizing the Subplot Title Font
+
+*New in 6.8*
+
+Use the `font` argument of `make_subplots` to customize the font used for `subplot_titles`, `column_titles`, `row_titles`, `x_title`, and `y_title`. The argument accepts a dict with any of the standard [font attributes](https://plotly.com/python/reference/layout/annotations/#layout-annotations-items-annotation-font) (`family`, `size`, `color`, `weight`, etc.).
+
+```python
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+fig = make_subplots(
+    rows=1, cols=2,
+    subplot_titles=("Plot 1", "Plot 2"),
+    font=dict(family="Courier New, monospace", size=20, color="RebeccaPurple"),
+)
+
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[4, 5, 6]), row=1, col=1)
+fig.add_trace(go.Scatter(x=[20, 30, 40], y=[50, 60, 70]), row=1, col=2)
+
+fig.show()
+```
+
 #### Subplots with Annotations
 
 ```python

@@ -33,7 +33,7 @@ classifiers = [
 requires-python = ">=3.8"
 license = "MIT"
 license-files = ["LICENSE.txt"]
-version = "6.7.0"
+version = "6.8.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -98,6 +98,7 @@ dev_pandas3 = [
 
 [tool.uv]
 exclude-newer = "72 hours"
+exclude-newer-package = { plotly = false }
 conflicts = [
     [{ extra = "dev_pandas1" }, { extra = "dev_pandas2" }],
     [{ extra = "dev_pandas1" }, { extra = "dev_pandas3" }],

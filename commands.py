@@ -44,8 +44,15 @@ def plotly_js_version():
     return version
 
 
-def install_js_deps(local):
-    """Install package.json dependencies using npm."""
+def install_js_deps(local, build=True):
+    """Install package.json dependencies using npm.
+
+    When ``build`` is True (the default), also runs ``npm run build`` to
+    rebuild the JupyterLab extension and FigureWidget bundles and verifies
+    that the widget bundle exists. Pass ``build=False`` when you only need
+    to refresh ``node_modules`` / ``package-lock.json`` (e.g. after a
+    plotly.js version bump) and don't need the bundles rebuilt.
+    """
 
     npmName = "npm"
     if platform.system() == "Windows":
@@ -86,18 +93,20 @@ def install_js_deps(local):
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
-        check_call(
-            [npmName, "run", "build"],
-            cwd=NODE_ROOT,
-            stdout=sys.stdout,
-            stderr=sys.stderr,
-        )
+        if build:
+            check_call(
+                [npmName, "run", "build"],
+                cwd=NODE_ROOT,
+                stdout=sys.stdout,
+                stderr=sys.stderr,
+            )
         os.utime(NODE_MODULES, None)
 
-    for target in WIDGET_TARGETS:
-        if not os.path.exists(target):
-            msg = "Missing file: %s" % target
-            raise ValueError(msg)
+    if build:
+        for target in WIDGET_TARGETS:
+            if not os.path.exists(target):
+                msg = "Missing file: %s" % target
+                raise ValueError(msg)
 
 
 def overwrite_schema_local(uri):
@@ -215,6 +224,7 @@ def update_plotlyjs(plotly_js_version, outdir):
     update_bundle(plotly_js_version)
     update_schema(plotly_js_version)
     perform_codegen(outdir)
+    install_js_deps(local=None, build=False)
 
 
 # FIXME: switch to argparse

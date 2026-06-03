@@ -18244,6 +18244,19 @@
         },
         "superclass": "EnumeratedValidator"
     },
+    "layout.hoversort": {
+        "params": {
+            "plotly_name": "hoversort",
+            "parent_name": "layout",
+            "edit_type": "none",
+            "values": [
+                "trace",
+                "value descending",
+                "value ascending"
+            ]
+        },
+        "superclass": "EnumeratedValidator"
+    },
     "layout.hovermode": {
         "params": {
             "plotly_name": "hovermode",
@@ -76892,10 +76905,19 @@
         },
         "superclass": "SrcValidator"
     },
+    "pie.legendranksrc": {
+        "params": {
+            "plotly_name": "legendranksrc",
+            "parent_name": "pie",
+            "edit_type": "none"
+        },
+        "superclass": "SrcValidator"
+    },
     "pie.legendrank": {
         "params": {
             "plotly_name": "legendrank",
             "parent_name": "pie",
+            "array_ok": true,
             "edit_type": "style"
         },
         "superclass": "NumberValidator"

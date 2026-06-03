@@ -83,6 +83,24 @@ fig.update_layout(hovermode="x unified")
 fig.show()
 ```
 
+#### Sorting Unified Hover Labels by Value
+
+*New in 6.8*
+
+In `'x unified'` and `'y unified'` hover modes, items in the hover label appear in the order their traces were added to the figure (the default, `hoversort="trace"`). Set `layout.hoversort` to `"value descending"` or `"value ascending"` to instead sort the items by the value being shown, which makes it easier to compare traces at a glance.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks()
+
+fig = px.line(df, x="date", y=df.columns[1:], title="layout.hoversort='value descending'")
+fig.update_traces(hovertemplate=None)
+fig.update_layout(hovermode="x unified", hoversort="value descending")
+
+fig.show()
+```
+
 #### Customize Title in Unified Hover Mode
 
 *New in 6.3*
@@ -221,7 +239,13 @@ fig.update_layout(
 fig.show()
 ```
 
-### Customizing Hover text with Plotly Express
+### Emitting Hover and Click Events Anywhere in the Plot Area
+
+*New in 6.7*
+
+By default, hover and click events are only emitted when the cursor is over a trace. Set `hoveranywhere` or `clickanywhere` to `True` to emit these events anywhere inside the plot area, including over empty space: `fig.update_layout(hoveranywhere=True, clickanywhere=True)`. The events carry the cursor's data coordinates, which is useful when building interactive callbacks (for example, in [Dash](https://dash.plotly.com/)) that need to respond to clicks on locations that don't correspond to a specific data point.
+
+### Customizing Hover Text with Plotly Express
 
 Plotly Express functions automatically add all the data being plotted (x, y, color etc) to the hover label. Many Plotly Express functions also support configurable hover text. The `hover_data` argument accepts a list of column names to be added to the hover tooltip, or a dictionary for advanced formatting (see the next section). The `hover_name` property controls which column is displayed in bold as the tooltip title.
 
