@@ -200,24 +200,6 @@ or conda.
 $ conda install -c plotly python-kaleido
 ```
 
-#### Extended Geo Support
-
-Some plotly.py features rely on fairly large geographic shape files. The county
-choropleth figure factory is one such example. These shape files are distributed as a
-separate `plotly-geo` package. This package can be installed using pip...
-
-```
-$ pip install plotly-geo==1.0.0
-```
-
-or conda.
-
-```
-$ conda install -c plotly plotly-geo=1.0.0
-```
-
-See [_USA County Choropleth Maps in Python_](/python/county-choropleth/) for more information on the county choropleth figure factory.
-
 ### Where to next?
 
 Once you've installed, you can use our documentation in three main ways:

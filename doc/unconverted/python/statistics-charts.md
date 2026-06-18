@@ -86,19 +86,6 @@ data = [
 py.iplot(data, filename='wind-data-box-plot')
 ```
 
-#### Scatterplot Matrix
-
-
-We will be producing a `scatterplot matrix` with all the columns of our data. For more info on the histogram charts, you can checkout the [documentation page](https://plot.ly/python/scatterplot-matrix/).
-
-```python
-fig = FF.create_scatterplotmatrix(wind_data,
-                                  height=1000,
-                                  width=1000,
-                                  title='Wind Data - Scatterplot Matrix')
-py.iplot(fig, filename='wind-data-scatterplot-matrix')
-```
-
 ```python
 from IPython.display import display, HTML
 

@@ -38,14 +38,14 @@ jupyter:
 
 *New in v5.5*
 
-As of version 5.5.0 of `plotly`, the **recommended way to [display annotated heatmaps is to use `px.imshow()`](/python/heatmaps/)** rather than the now-deprecated `create_annotated_heatmap` figure factory documented below for historical reasons.
+Plotly Express provides the [`px.imshow()`](/python/heatmaps/) function which can be used for creating annotated heatmaps.
 
 
 #### Basic Annotated Heatmap for z-annotations
 
 *New in v5.5*
 
-After creating a figure with `px.imshow`, you can add z-annotations with `.update_traces(texttemplate="%{z}")`.
+When creating a figure with `px.imshow`, you can pass the parameter `text_auto=True` to add z-annotations.
 
 ```python
 import plotly.express as px
@@ -60,50 +60,9 @@ fig = px.imshow(z, text_auto=True)
 fig.show()
 ```
 
-### Deprecated Figure Factory
+#### Custom Text and Axis Labels
 
-The remaining examples show how to create Annotated Heatmaps with the deprecated `create_annotated_heatmap` [figure factory](/python/figure-factories/).
-
-
-#### Simple Annotated Heatmap
-
-```python
-import plotly.figure_factory as ff
-
-z = [[.1, .3, .5, .7, .9],
-     [1, .8, .6, .4, .2],
-     [.2, 0, .5, .7, .9],
-     [.9, .8, .4, .2, 0],
-     [.3, .4, .5, .7, 1]]
-
-fig = ff.create_annotated_heatmap(z)
-fig.show()
-```
-
-#### Custom Text and X & Y Labels
-set `annotation_text` to a matrix with the same dimensions as `z`
-
-> WARNING: this legacy figure factory requires the `y` array to be provided in reverse order, and will map the `z_text` to the `z` values in reverse order. **The use of the `px.imshow()` version below is highly recommended**
-
-```python
-import plotly.figure_factory as ff
-
-z = [[.1, .3, .5],
-     [1.0, .8, .6],
-     [.6, .4, .2]]
-
-x = ['Team A', 'Team B', 'Team C']
-y = ['Game Three', 'Game Two', 'Game One']
-
-z_text = [['Win', 'Lose', 'Win'],
-          ['Lose', 'Lose', 'Win'],
-          ['Win', 'Win', 'Lose']]
-
-fig = ff.create_annotated_heatmap(z, x=x, y=y, annotation_text=z_text, colorscale='Viridis')
-fig.show()
-```
-
-Here is the same figure using `px.imshow()`
+To annotate cells with text other than the `z` values, set the `text` attribute with `update_traces` and display it with a `texttemplate`. You can also label the axes by passing `x` and `y`.
 
 ```python
 import plotly.express as px
@@ -125,27 +84,9 @@ fig.update_xaxes(side="top")
 fig.show()
 ```
 
-#### Annotated Heatmap with numpy
+#### Annotated Heatmap with a NumPy Array
 
-```python
-import plotly.figure_factory as ff
-import numpy as np
-np.random.seed(1)
-
-z = np.random.randn(20, 20)
-z_text = np.around(z, decimals=2) # Only show rounded value (full value on hover)
-
-fig = ff.create_annotated_heatmap(z, annotation_text=z_text, colorscale='Greys',
-                                  hoverinfo='z')
-
-# Make text size smaller
-for i in range(len(fig.layout.annotations)):
-    fig.layout.annotations[i].font.size = 8
-
-fig.show()
-```
-
-Here is the same figure using `px.imshow()`
+`px.imshow` works directly with NumPy arrays. Pass a [`d3-format`](https://github.com/d3/d3-format/tree/v1.4.5#d3-format) string to `text_auto` to control how the annotations are formatted.
 
 ```python
 import plotly.express as px
@@ -158,10 +99,14 @@ fig = px.imshow(z, text_auto=".2f", color_continuous_scale='Greys', aspect="auto
 fig.show()
 ```
 
-Here is a fairly contrived example showing how one can display a periodic table with custom text and hover using `ff.create_annotated_heatmap()` (scroll below to see the `px.imshow()` equivalent).
+#### Periodic Table with Custom Text and Hover
+
+`px.imshow()` can produce more elaborate annotated heatmaps. The example below renders a periodic table: the cell labels come from a custom `text` array, while `customdata` combined with a `hovertemplate` displays the element name and atomic mass on hover.
 
 ```python
-# Periodic Table Data
+import plotly.express as px
+import numpy as np
+
 symbol = [['H', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'He'],
          ['Li', 'Be', '', '', '', '', '', '', '', '', '', '', 'B', 'C', 'N', 'O', 'F', 'Ne'],
          ['Na', 'Mg', '', '', '', '', '', '', '', '', '', '', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar'],
@@ -214,35 +159,9 @@ color = [[.8, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, .0, 1.
      [.1, .1, .1, .3, .3, .3, .5, .5, .5, .7, .7, .7, .9, .9, .9, .0, .0, .0],
      [.2, .2, .2, .4, .4, .4, .6, .6, .6, .8, .8, .8, 1., 1., 1., .0, .0, .0]]
 
-# Set Colorscale
 colorscale=[[0.0, 'rgb(255,255,255)'], [.2, 'rgb(255, 255, 153)'],
             [.4, 'rgb(153, 255, 204)'], [.6, 'rgb(179, 217, 255)'],
             [.8, 'rgb(240, 179, 255)'],[1.0, 'rgb(255, 77, 148)']]
-
-# Display element name and atomic mass on hover
-hover=[]
-for x in range(len(symbol)):
-    hover.append([i + '<br>' + 'Atomic Mass: ' + str(j) if i else ''
-                      for i, j in zip(element[x], atomic_mass[x])])
-
-import plotly.figure_factory as ff
-# Make Annotated Heatmap
-fig = ff.create_annotated_heatmap(color[::-1], annotation_text=symbol[::-1], text=hover[::-1],
-                                 colorscale=colorscale, font_colors=['black'], hoverinfo='text')
-fig.update_layout(
-     title_text='Periodic Table',
-     margin=dict(l=10, r=10, t=10, b=10, pad=10),
-     xaxis=dict(zeroline=False, showgrid=False),
-     yaxis=dict(zeroline=False, showgrid=False, scaleanchor="x"),
-)
-fig.show()
-```
-
-Here is the same output using `px.imshow()` with much less array manipulation:
-
-```python
-import plotly.express as px
-import numpy as np
 
 fig = px.imshow(color, color_continuous_scale=colorscale, aspect="auto",
                title='Periodic Table')
@@ -259,4 +178,4 @@ fig.show()
 
 #### Reference
 
-For more info on Plotly heatmaps, see: https://plotly.com/python/reference/heatmap/.<br> For more info on using colorscales with Plotly see: https://plotly.com/python/heatmap-and-contour-colorscales/ <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_annotated_heatmap.html#plotly.figure_factory.create_annotated_heatmap)
+For more info on Plotly heatmaps, see: https://plotly.com/python/reference/heatmap/.<br> For more info on using colorscales with Plotly see: https://plotly.com/python/heatmap-and-contour-colorscales/

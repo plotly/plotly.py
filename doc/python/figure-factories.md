@@ -35,7 +35,7 @@ jupyter:
 
 #### `plotly.figure_factory`
 
-The `plotly.figure_factory` module contains dedicated functions for creating very specific types of plots that were at the time of their creation difficult to create with [graph objects](/python/graph-objects/) and prior to the existence of [Plotly Express](/python/plotly-express/). As new functionality gets added to [Plotly.js](https://plotly.com/javascript/) and to Plotly Express, certain Figure Factories become unnecessary and are therefore deprecated as "legacy", but remain in the module for backwards-compatibility reasons.
+The `plotly.figure_factory` module contains dedicated functions for creating very specific types of plots that were at the time of their creation difficult to create with [graph objects](/python/graph-objects/) and prior to the existence of [Plotly Express](/python/plotly-express/). As new functionality gets added to [Plotly.js](https://plotly.com/javascript/) and to Plotly Express, certain Figure Factories become unnecessary and have therefore been removed.
 
 The following types of plots are still difficult to create with Graph Objects or Plotly Express and therefore the corresponding Figure Factories are *not* deprecated:
 
@@ -47,12 +47,20 @@ The following types of plots are still difficult to create with Graph Objects or
   * [Ternary Contour Plots](/python/ternary-contour/)
   * [Triangulated Surface Plots](/python/trisurf/)
 
-Deprecated "legacy" Figure Factories include:
+The following "legacy" Figure Factories have been removed. Use the recommended alternative instead:
 
-  * [Annotated Heatmaps](/python/annotated-heatmap/), deprecated by [heatmaps with `px.imshow()`](/python/heatmaps/)
-  * [County Choropleth Maps](/python/county-choropleth/), deprecated by regular [Choropleth maps with GeoJSON input](/python/choropleth-maps/)
-  * [Distplots](/python/distplot/), mostly deprecated by [`px.histogram`](/python/histograms/) except for KDE plots, which `px.histogram` doesn't support yet
-  * [Gantt Charts](/python/gantt/), deprecated by [`px.timeline`](/python/gantt/)
+  * `create_2d_density`: use [`px.density_heatmap`](/python/2D-Histogram/)
+  * `create_annotated_heatmap`: use [`px.imshow`](/python/heatmaps/)
+  * `create_bullet`: use [`go.Indicator`](/python/indicator/)
+  * `create_candlestick`: use [`go.Candlestick`](/python/candlestick-charts/)
+  * `create_choropleth`: use [`px.choropleth`](/python/choropleth-maps/) with custom GeoJSON
+  * `create_distplot`: use [Plotly Express](/python/plotly-express/) functions like [`px.histogram`](/python/histograms/)
+  * `create_facet_grid`: use [Plotly Express](/python/plotly-express/) functions with the [`facet_row` and `facet_col` arguments](/python/facet-plots/)
+  * `create_gantt`: use [`px.timeline`](/python/gantt/)
+  * `create_hexbin_mapbox`: use [`create_hexbin_map`](/python/hexbin-mapbox/)
+  * `create_ohlc`: use [`go.Ohlc`](/python/ohlc-charts/)
+  * `create_scatterplotmatrix`: use [`go.Splom`](/python/splom/)
+  * `create_violin`: use [`go.Violin`](/python/violin/)
 
 #### Reference
 
