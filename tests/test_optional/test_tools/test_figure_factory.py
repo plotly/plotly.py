@@ -456,5 +456,3 @@ class TestTable(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(index_table["data"][0], exp_index_table["data"][0])
 
         self.assert_fig_equal(index_table["layout"], exp_index_table["layout"])
-
-
