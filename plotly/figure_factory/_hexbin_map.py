@@ -3,7 +3,6 @@ from plotly.express._doc import make_docstring
 from plotly.express._chart_types import choropleth_map, scatter_map
 import narwhals.stable.v1 as nw
 import numpy as np
-import warnings
 
 
 def _project_latlon_to_wgs84(lat, lon):
@@ -530,17 +529,3 @@ create_hexbin_map.__doc__ = make_docstring(
         original_data_marker=["dict", "Scattermap marker options."],
     ),
 )
-
-
-def create_hexbin_mapbox(*args, **kwargs):
-    warnings.warn(
-        "create_hexbin_mapbox() is deprecated and will be removed in the next major version. "
-        + "Please use create_hexbin_map() instead. "
-        + "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-        category=DeprecationWarning,
-    )
-    if "mapbox_style" in kwargs:
-        kwargs["map_style"] = kwargs.pop("mapbox_style")
-
-    return create_hexbin_map(*args, **kwargs)

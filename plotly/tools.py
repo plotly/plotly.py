@@ -556,14 +556,6 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     return figure
 
 
-# Default colours for finance charts
-_DEFAULT_INCREASING_COLOR = "#3D9970"  # http://clrs.cc
-_DEFAULT_DECREASING_COLOR = "#FF4136"
-
-DIAG_CHOICES = ["scatter", "histogram", "box"]
-VALID_COLORMAP_TYPES = ["cat", "seq"]
-
-
 # Deprecations
 class FigureFactory(object):
     @staticmethod
@@ -577,27 +569,6 @@ class FigureFactory(object):
         )
 
     @staticmethod
-    def create_2D_density(*args, **kwargs):
-        FigureFactory._deprecated("create_2D_density", "create_2d_density")
-        from plotly.figure_factory import create_2d_density
-
-        return create_2d_density(*args, **kwargs)
-
-    @staticmethod
-    def create_annotated_heatmap(*args, **kwargs):
-        FigureFactory._deprecated("create_annotated_heatmap")
-        from plotly.figure_factory import create_annotated_heatmap
-
-        return create_annotated_heatmap(*args, **kwargs)
-
-    @staticmethod
-    def create_candlestick(*args, **kwargs):
-        FigureFactory._deprecated("create_candlestick")
-        from plotly.figure_factory import create_candlestick
-
-        return create_candlestick(*args, **kwargs)
-
-    @staticmethod
     def create_dendrogram(*args, **kwargs):
         FigureFactory._deprecated("create_dendrogram")
         from plotly.figure_factory import create_dendrogram
@@ -605,46 +576,11 @@ class FigureFactory(object):
         return create_dendrogram(*args, **kwargs)
 
     @staticmethod
-    def create_distplot(*args, **kwargs):
-        FigureFactory._deprecated("create_distplot")
-        from plotly.figure_factory import create_distplot
-
-        return create_distplot(*args, **kwargs)
-
-    @staticmethod
-    def create_facet_grid(*args, **kwargs):
-        FigureFactory._deprecated("create_facet_grid")
-        from plotly.figure_factory import create_facet_grid
-
-        return create_facet_grid(*args, **kwargs)
-
-    @staticmethod
-    def create_gantt(*args, **kwargs):
-        FigureFactory._deprecated("create_gantt")
-        from plotly.figure_factory import create_gantt
-
-        return create_gantt(*args, **kwargs)
-
-    @staticmethod
-    def create_ohlc(*args, **kwargs):
-        FigureFactory._deprecated("create_ohlc")
-        from plotly.figure_factory import create_ohlc
-
-        return create_ohlc(*args, **kwargs)
-
-    @staticmethod
     def create_quiver(*args, **kwargs):
         FigureFactory._deprecated("create_quiver")
         from plotly.figure_factory import create_quiver
 
         return create_quiver(*args, **kwargs)
-
-    @staticmethod
-    def create_scatterplotmatrix(*args, **kwargs):
-        FigureFactory._deprecated("create_scatterplotmatrix")
-        from plotly.figure_factory import create_scatterplotmatrix
-
-        return create_scatterplotmatrix(*args, **kwargs)
 
     @staticmethod
     def create_streamline(*args, **kwargs):
@@ -666,13 +602,6 @@ class FigureFactory(object):
         from plotly.figure_factory import create_trisurf
 
         return create_trisurf(*args, **kwargs)
-
-    @staticmethod
-    def create_violin(*args, **kwargs):
-        FigureFactory._deprecated("create_violin")
-        from plotly.figure_factory import create_violin
-
-        return create_violin(*args, **kwargs)
 
 
 def get_config_plotly_server_url():
