@@ -36,6 +36,7 @@ The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://plot
 
 ```python
 import plotly.plotly as py
+import plotly.express as px
 import plotly.graph_objs as go
 from plotly.tools import FigureFactory as FF
 
@@ -61,7 +62,7 @@ matrix2 = np.matrix(
 )
 
 matrix_sum = matrix1 + matrix2
-matrix_sum
+px.imshow(matrix_sum, text_auto=True)
 ```
 
 #### Multiply Two Matrices
@@ -79,7 +80,7 @@ matrix2 = np.matrix(
 )
 
 matrix_prod = matrix1 * matrix2
-matrix_prod
+px.imshow(matrix_prod, text_auto=True)
 ```
 
 #### Solve Matrix Equation
@@ -97,7 +98,7 @@ B = np.matrix(
 )
 
 X = np.linalg.solve(A, B)
-X
+px.imshow(X, text_auto=True)
 ```
 
 #### Find the Determinant
@@ -121,7 +122,7 @@ matrix = np.matrix(
 )
 
 inverse = np.linalg.inv(matrix)
-inverse
+px.imshow(inverse, text_auto=True)
 ```
 
 #### Find Eigenvalues

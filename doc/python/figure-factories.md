@@ -35,9 +35,9 @@ jupyter:
 
 #### `plotly.figure_factory`
 
-The `plotly.figure_factory` module contains dedicated functions for creating very specific types of plots that were at the time of their creation difficult to create with [graph objects](/python/graph-objects/) and prior to the existence of [Plotly Express](/python/plotly-express/). As new functionality gets added to [Plotly.js](https://plotly.com/javascript/) and to Plotly Express, certain Figure Factories become unnecessary and have therefore been removed.
+The `plotly.figure_factory` module contains dedicated functions for creating very specific types of plots that are difficult to create with [graph objects](/python/graph-objects/) and [Plotly Express](/python/plotly-express/).
 
-The following types of plots are still difficult to create with Graph Objects or Plotly Express and therefore the corresponding Figure Factories are *not* deprecated:
+The following plot types can be created with Figure Factory:
 
   * [Dendrograms](/python/dendrogram/)
   * [Hexagonal Binning Tile Map](/python/hexbin-mapbox/)
@@ -47,7 +47,7 @@ The following types of plots are still difficult to create with Graph Objects or
   * [Ternary Contour Plots](/python/ternary-contour/)
   * [Triangulated Surface Plots](/python/trisurf/)
 
-The following "legacy" Figure Factories have been removed. Use the recommended alternative instead:
+The following legacy Figure Factory functions have been replaced by Plotly Express functions, or native Graph Objects trace types, and have been removed from the library in version 7.0. Use the recommended alternatives instead:
 
   * `create_2d_density`: use [`px.density_heatmap`](/python/2D-Histogram/)
   * `create_annotated_heatmap`: use [`px.imshow`](/python/heatmaps/)
@@ -64,5 +64,5 @@ The following "legacy" Figure Factories have been removed. Use the recommended a
 
 #### Reference
 
-For more information about the contents of `plotly.figure_factory`, including deprecated methods, please refer to our [API Reference documentation](https://plotly.com/python-api-reference/plotly.figure_factory.html).
+For more information about the contents of `plotly.figure_factory`, please refer to our [API Reference documentation](https://plotly.com/python-api-reference/plotly.figure_factory.html).
 

@@ -86,6 +86,26 @@ data = [
 py.iplot(data, filename='wind-data-box-plot')
 ```
 
+#### Scatterplot Matrix (SPLOM)
+
+
+We will be producing a scatterplot matrix chart, also known as a SPLOM chart, with all the columns of our data. For more info on SPLOM traces, you can checkout the [documentation page](https://plot.ly/python/splom/).
+
+```python
+fig = go.Figure(data=go.Splom(
+    dimensions=[
+        dict(label=col, values=wind_data[col]) for col in wind_data.columns
+    ]
+))
+
+fig.update_layout(
+    title='Wind Data - Scatterplot Matrix',
+    height=1000,
+    width=1000,
+)
+py.iplot(fig, filename='wind-data-scatterplot-matrix')
+```
+
 ```python
 from IPython.display import display, HTML
 
