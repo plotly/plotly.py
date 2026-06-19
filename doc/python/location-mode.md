@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Locations for Outline-based Maps
-    order: 15
+    order: 14
     page_type: example_index
     permalink: python/outline-map-locations/
     thumbnail: thumbnail/choropleth.jpg
