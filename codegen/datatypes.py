@@ -56,6 +56,80 @@ def get_typing_type(plotly_type, array_ok=False):
         return pytype
 
 
+def get_implied_edits_code(node):
+    """
+    Generate Python code to apply impliedEdits during initialization.
+
+    This handles cases where setting certain properties should automatically
+    set other properties. For example, when contours.size is set, autocontour
+    should be set to False.
+
+    Parameters
+    ----------
+    node : PlotlyNode
+        The trace/datatype node to check for impliedEdits
+
+    Returns
+    -------
+    str or None
+        Generated Python code, or None if no impliedEdits apply
+    """
+    # Only apply to traces that have both autocontour and contours
+    if node.name_property not in ["contour", "histogram2dcontour", "contourcarpet"]:
+        return None
+
+    node_data = node.node_data
+    if not isinstance(node_data, dict):
+        return None
+
+    has_autocontour = "autocontour" in node_data
+    has_contours = "contours" in node_data
+
+    if not (has_autocontour and has_contours):
+        return None
+
+    # Check if contours property has children with impliedEdits
+    contours_data = node_data.get("contours", {})
+    if not isinstance(contours_data, dict):
+        return None
+
+    # Look for properties that trigger autocontour=False
+    trigger_props = []
+    for prop_name in ["size", "start", "end"]:
+        prop_data = contours_data.get(prop_name, {})
+        if isinstance(prop_data, dict) and "impliedEdits" in prop_data:
+            implied_edits = prop_data.get("impliedEdits", {})
+            # Check if this property's impliedEdits sets autocontour to false
+            if implied_edits.get("^autocontour") == False:
+                trigger_props.append(prop_name)
+
+    if not trigger_props:
+        return None
+
+    # Generate the code
+    code = f'''
+        # Apply impliedEdits: if any of contours.{"/".join(trigger_props)} are set,
+        # autocontour should be False unless explicitly set by the user
+        if "contours" in self._props and self._props["contours"] is not None:
+            contours_obj = self._props["contours"]
+            # contours_obj might be a dict or a Contours object
+            if isinstance(contours_obj, dict):
+                contours_dict = contours_obj
+            elif hasattr(contours_obj, "_props"):
+                contours_dict = contours_obj._props
+            else:
+                contours_dict = {{}}
+            # Check if any of the properties that trigger autocontour=False are set
+            triggers_autocontour_false = any(
+                prop in contours_dict and contours_dict[prop] is not None
+                for prop in {repr(trigger_props)}
+            )
+            if triggers_autocontour_false and autocontour is None:
+                self._set_property("autocontour", {{}}, False)
+'''
+    return code
+
+
 def build_datatype_py(node):
     """
     Build datatype (graph_objs) class source code string for a datatype
@@ -403,6 +477,11 @@ an instance of :class:`{class_name}`\"\"\")
         self._props["{lit_name}"] = {lit_val}
         arg.pop("{lit_name}", None)"""
             )
+
+    # Apply impliedEdits code if applicable
+    implied_edits_code = get_implied_edits_code(node)
+    if implied_edits_code:
+        buffer.write(implied_edits_code)
 
     buffer.write(
         """

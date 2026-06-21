@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 ### Fixed
+- Fix issue where `contours.size`, `contours.start`, and `contours.end` properties were ignored during initial render of Contour, Histogram2dContour, and Contourcarpet traces by applying impliedEdits logic from the schema during initialization [[#5613](https://github.com/plotly/plotly.py/issues/5613)]
 - Raise a clear `ValueError` when an unsupported marginal plot type is passed to Plotly Express, instead of failing later with a cryptic `'NoneType' object has no attribute 'constructor'` message [[#5625](https://github.com/plotly/plotly.py/pull/5625)], with thanks to @eugen-goebel for the contribution!
 
 
