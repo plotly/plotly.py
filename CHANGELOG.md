@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Removed
+- Remove the deprecated Figure Factory functions `create_2d_density`, `create_annotated_heatmap`, `create_bullet`, `create_candlestick`, `create_choropleth`, `create_distplot`, `create_facet_grid`, `create_gantt`, `create_hexbin_mapbox`, `create_ohlc`, `create_scatterplotmatrix`, and `create_violin` [[#5627](https://github.com/plotly/plotly.py/pull/5627)]
+
 ### Fixed
 - Raise a clear `ValueError` when an unsupported marginal plot type is passed to Plotly Express, instead of failing later with a cryptic `'NoneType' object has no attribute 'constructor'` message [[#5625](https://github.com/plotly/plotly.py/pull/5625)], with thanks to @eugen-goebel for the contribution!
 

@@ -36,7 +36,6 @@ Plotly's Python library is free and open source! [Get started](https://plot.ly/p
 import numpy as np
 import plotly.plotly as py
 import plotly.graph_objs as go
-from plotly.figure_factory import create_annotated_heatmap
 
 n=250
 

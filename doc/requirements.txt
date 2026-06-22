@@ -21,12 +21,10 @@ orjson
 pandas==1.4.0
 pathlib
 patsy==0.5.6
-plotly-geo
 polars
 pooch
 psutil
 pyarrow
-pyshp==2.1.2
 python-frontmatter==1.1.0
 recommonmark
 requests
@@ -34,7 +32,6 @@ scikit-image==0.20.0
 scikit-learn
 scipy==1.9.1
 setuptools<=81
-shapely==2.0.5
 sphinx==3.5.4
 sphinx_bootstrap_theme
 sphinxcontrib-applehelp==1.0.2
