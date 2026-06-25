@@ -107,7 +107,7 @@ def get_implied_edits_code(node):
         return None
 
     # Generate the code
-    code = f'''
+    code = f"""
         # Apply impliedEdits: if any of contours.{"/".join(trigger_props)} are set,
         # autocontour should be False unless explicitly set by the user
         if "contours" in self._props and self._props["contours"] is not None:
@@ -126,7 +126,7 @@ def get_implied_edits_code(node):
             )
             if triggers_autocontour_false and autocontour is None:
                 self._set_property("autocontour", {{}}, False)
-'''
+"""
     return code
 
 
