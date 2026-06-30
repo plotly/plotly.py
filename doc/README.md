@@ -17,6 +17,8 @@ Python packages required to build the docs are listed in
 Before building the documentation locally, you need to set up a dedicated
 environment with the doc-specific dependencies.
 
+You will need the `gdal` library (e.g. Fedora `sudo dnf install -y gdal-*`)
+
 ```bash
 cd doc
 uv venv --python 3.9
