@@ -3462,9 +3462,6 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        fig:
-            Figure object or dict representing a figure
-
         warn: bool
             If False, suppress warnings about not using this in production.
 
