@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Raise a clear `ValueError` when an unsupported marginal plot type is passed to Plotly Express, instead of failing later with a cryptic `'NoneType' object has no attribute 'constructor'` message [[#5625](https://github.com/plotly/plotly.py/pull/5625)], with thanks to @eugen-goebel for the contribution!
+- Stop emitting leftover empty `{}` containers when a nested property is set to `None`, which could make a later `Plotly.restyle` of `marker.colorbar` attributes collapse the scatter-matrix layout [[#5615](https://github.com/plotly/plotly.py/issues/5615)]
 
 
 ## [6.8.0] - 2026-06-03
