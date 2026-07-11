@@ -33,7 +33,7 @@
     "outputDir": "../plotly/labextension",
     "webpackConfig": "./webpack.config.js",
     "_build": {
-      "load": "static/remoteEntry.58c394332ed33325ffe5.js",
+      "load": "static\\remoteEntry.58c394332ed33325ffe5.js",
       "mimeExtension": "./mimeExtension"
     }
   }
