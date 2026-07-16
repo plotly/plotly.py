@@ -35,6 +35,7 @@ class Pie(_BaseTraceType):
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
+        "legendranksrc",
         "legendsrc",
         "legendwidth",
         "marker",
@@ -608,27 +609,49 @@ class Pie(_BaseTraceType):
     @property
     def legendrank(self):
         """
-        Sets the legend rank for this trace. Items and groups with
-        smaller ranks are presented on top/left side while with
-        "reversed" `legend.traceorder` they are on bottom/right side.
-        The default legendrank is 1000, so that you can use ranks less
-        than 1000 to place certain items before all unranked items, and
-        ranks greater than 1000 to go after all unranked items. When
-        having unranked or equal rank items shapes would be displayed
-        after traces i.e. according to their order in data and layout.
+        Sets the legend rank for this pie. If passed as an array, this
+        will set the legend rank of the individual pie slices. Items
+        and groups with smaller ranks are presented on top/left side
+        while with "reversed" `legend.traceorder` they are on
+        bottom/right side. The default legendrank is 1000, so that you
+        can use ranks less than 1000 to place certain items before all
+        unranked items, and ranks greater than 1000 to go after all
+        unranked items. When having unranked or equal rank items shapes
+        would be displayed after traces i.e. according to their order
+        in data and layout.
 
         The 'legendrank' property is a number and may be specified as:
           - An int or float
+          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        int|float
+        int|float|numpy.ndarray
         """
         return self["legendrank"]
 
     @legendrank.setter
     def legendrank(self, val):
         self["legendrank"] = val
+
+    @property
+    def legendranksrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for
+        `legendrank`.
+
+        The 'legendranksrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["legendranksrc"]
+
+    @legendranksrc.setter
+    def legendranksrc(self, val):
+        self["legendranksrc"] = val
 
     @property
     def legendsrc(self):
@@ -1416,16 +1439,20 @@ class Pie(_BaseTraceType):
             :class:`plotly.graph_objects.pie.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
-            Sets the legend rank for this trace. Items and groups
-            with smaller ranks are presented on top/left side while
-            with "reversed" `legend.traceorder` they are on
-            bottom/right side. The default legendrank is 1000, so
-            that you can use ranks less than 1000 to place certain
-            items before all unranked items, and ranks greater than
-            1000 to go after all unranked items. When having
-            unranked or equal rank items shapes would be displayed
-            after traces i.e. according to their order in data and
-            layout.
+            Sets the legend rank for this pie. If passed as an
+            array, this will set the legend rank of the individual
+            pie slices. Items and groups with smaller ranks are
+            presented on top/left side while with "reversed"
+            `legend.traceorder` they are on bottom/right side. The
+            default legendrank is 1000, so that you can use ranks
+            less than 1000 to place certain items before all
+            unranked items, and ranks greater than 1000 to go after
+            all unranked items. When having unranked or equal rank
+            items shapes would be displayed after traces i.e.
+            according to their order in data and layout.
+        legendranksrc
+            Sets the source reference on Chart Studio Cloud for
+            `legendrank`.
         legendsrc
             Sets the source reference on Chart Studio Cloud for
             `legend`.
@@ -1605,6 +1632,7 @@ class Pie(_BaseTraceType):
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
+        legendranksrc=None,
         legendsrc=None,
         legendwidth=None,
         marker=None,
@@ -1785,16 +1813,20 @@ class Pie(_BaseTraceType):
             :class:`plotly.graph_objects.pie.Legendgrouptitle`
             instance or dict with compatible properties
         legendrank
-            Sets the legend rank for this trace. Items and groups
-            with smaller ranks are presented on top/left side while
-            with "reversed" `legend.traceorder` they are on
-            bottom/right side. The default legendrank is 1000, so
-            that you can use ranks less than 1000 to place certain
-            items before all unranked items, and ranks greater than
-            1000 to go after all unranked items. When having
-            unranked or equal rank items shapes would be displayed
-            after traces i.e. according to their order in data and
-            layout.
+            Sets the legend rank for this pie. If passed as an
+            array, this will set the legend rank of the individual
+            pie slices. Items and groups with smaller ranks are
+            presented on top/left side while with "reversed"
+            `legend.traceorder` they are on bottom/right side. The
+            default legendrank is 1000, so that you can use ranks
+            less than 1000 to place certain items before all
+            unranked items, and ranks greater than 1000 to go after
+            all unranked items. When having unranked or equal rank
+            items shapes would be displayed after traces i.e.
+            according to their order in data and layout.
+        legendranksrc
+            Sets the source reference on Chart Studio Cloud for
+            `legendrank`.
         legendsrc
             Sets the source reference on Chart Studio Cloud for
             `legend`.
@@ -1994,6 +2026,7 @@ an instance of :class:`plotly.graph_objs.Pie`""")
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendrank", arg, legendrank)
+        self._set_property("legendranksrc", arg, legendranksrc)
         self._set_property("legendsrc", arg, legendsrc)
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("marker", arg, marker)

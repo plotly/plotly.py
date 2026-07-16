@@ -155,20 +155,20 @@ class Modebar(_BaseLayoutHierarchyType):
         """
         Determines which predefined modebar buttons to remove. Similar
         to `config.modeBarButtonsToRemove` option. This may include
-        "autoScale2d", "autoscale", "editInChartStudio",
-        "editinchartstudio", "hoverCompareCartesian", "hovercompare",
-        "lasso", "lasso2d", "orbitRotation", "orbitrotation", "pan",
-        "pan2d", "pan3d", "reset", "resetCameraDefault3d",
-        "resetCameraLastSave3d", "resetGeo", "resetSankeyGroup",
-        "resetScale2d", "resetViewMap", "resetViewMapbox",
-        "resetViews", "resetcameradefault", "resetcameralastsave",
-        "resetsankeygroup", "resetscale", "resetview", "resetviews",
-        "select", "select2d", "sendDataToCloud", "senddatatocloud",
-        "tableRotation", "tablerotation", "toImage", "toggleHover",
-        "toggleSpikelines", "togglehover", "togglespikelines",
-        "toimage", "zoom", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
-        "zoomInMap", "zoomInMapbox", "zoomOut2d", "zoomOutGeo",
-        "zoomOutMap", "zoomOutMapbox", "zoomin", "zoomout".
+        "autoScale2d", "autoscale", "hoverCompareCartesian",
+        "hovercompare", "lasso", "lasso2d", "orbitRotation",
+        "orbitrotation", "pan", "pan2d", "pan3d", "reset",
+        "resetCameraDefault3d", "resetCameraLastSave3d", "resetGeo",
+        "resetSankeyGroup", "resetScale2d", "resetViewMap",
+        "resetViewMapbox", "resetViews", "resetcameradefault",
+        "resetcameralastsave", "resetsankeygroup", "resetscale",
+        "resetview", "resetviews", "select", "select2d",
+        "sendChartToCloud", "sendcharttocloud", "tableRotation",
+        "tablerotation", "toImage", "toggleHover", "toggleSpikelines",
+        "togglehover", "togglespikelines", "toimage", "zoom", "zoom2d",
+        "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMap", "zoomInMapbox",
+        "zoomOut2d", "zoomOutGeo", "zoomOutMap", "zoomOutMapbox",
+        "zoomin", "zoomout".
 
         The 'remove' property is a string and must be specified as:
           - A string
@@ -251,7 +251,6 @@ class Modebar(_BaseLayoutHierarchyType):
             Determines which predefined modebar buttons to remove.
             Similar to `config.modeBarButtonsToRemove` option. This
             may include "autoScale2d", "autoscale",
-            "editInChartStudio", "editinchartstudio",
             "hoverCompareCartesian", "hovercompare", "lasso",
             "lasso2d", "orbitRotation", "orbitrotation", "pan",
             "pan2d", "pan3d", "reset", "resetCameraDefault3d",
@@ -260,7 +259,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "resetViewMapbox", "resetViews", "resetcameradefault",
             "resetcameralastsave", "resetsankeygroup",
             "resetscale", "resetview", "resetviews", "select",
-            "select2d", "sendDataToCloud", "senddatatocloud",
+            "select2d", "sendChartToCloud", "sendcharttocloud",
             "tableRotation", "tablerotation", "toImage",
             "toggleHover", "toggleSpikelines", "togglehover",
             "togglespikelines", "toimage", "zoom", "zoom2d",
@@ -325,7 +324,6 @@ class Modebar(_BaseLayoutHierarchyType):
             Determines which predefined modebar buttons to remove.
             Similar to `config.modeBarButtonsToRemove` option. This
             may include "autoScale2d", "autoscale",
-            "editInChartStudio", "editinchartstudio",
             "hoverCompareCartesian", "hovercompare", "lasso",
             "lasso2d", "orbitRotation", "orbitrotation", "pan",
             "pan2d", "pan3d", "reset", "resetCameraDefault3d",
@@ -334,7 +332,7 @@ class Modebar(_BaseLayoutHierarchyType):
             "resetViewMapbox", "resetViews", "resetcameradefault",
             "resetcameralastsave", "resetsankeygroup",
             "resetscale", "resetview", "resetviews", "select",
-            "select2d", "sendDataToCloud", "senddatatocloud",
+            "select2d", "sendChartToCloud", "sendcharttocloud",
             "tableRotation", "tablerotation", "toImage",
             "toggleHover", "toggleSpikelines", "togglehover",
             "togglespikelines", "toimage", "zoom", "zoom2d",

@@ -24,3 +24,15 @@ def test_single_marginals(backend, px_fn, marginal, orientation):
         df, x="total_bill", y="total_bill", marginal=marginal, orientation=orientation
     )
     assert len(fig.data) == 1 + (marginal is not None)
+
+
+def test_unsupported_marginal_raises_clear_error():  # issue 4654
+    # An unsupported marginal type used to fail deep inside make_figure with a
+    # cryptic "'NoneType' object has no attribute 'constructor'". It should
+    # instead raise a clear error naming the supported values.
+    with pytest.raises(ValueError, match="Supported marginal plot types"):
+        px.scatter(x=[1, 2, 3], y=[2, 3, 4], marginal_x="density")
+    with pytest.raises(ValueError, match="Supported marginal plot types"):
+        px.scatter(x=[1, 2, 3], y=[2, 3, 4], marginal_y="density")
+    with pytest.raises(ValueError, match="Supported marginal plot types"):
+        px.histogram(x=[1, 2, 3], marginal="density")

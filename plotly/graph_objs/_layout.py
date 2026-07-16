@@ -99,6 +99,7 @@ class Layout(_BaseLayoutType):
         "hoverdistance",
         "hoverlabel",
         "hovermode",
+        "hoversort",
         "hoversubplots",
         "iciclecolorway",
         "imagedefaults",
@@ -1108,6 +1109,30 @@ class Layout(_BaseLayoutType):
     @hovermode.setter
     def hovermode(self, val):
         self["hovermode"] = val
+
+    @property
+    def hoversort(self):
+        """
+        Determines the order of items shown in unified hover labels. If
+        "trace", items are sorted by trace index. If *value
+        descending*, items are sorted by value from largest to
+        smallest. If *value ascending*, items are sorted by value from
+        smallest to largest. Only applies when `hovermode` is *x
+        unified* or *y unified*.
+
+        The 'hoversort' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['trace', 'value descending', 'value ascending']
+
+        Returns
+        -------
+        Any
+        """
+        return self["hoversort"]
+
+    @hoversort.setter
+    def hoversort(self, val):
+        self["hoversort"] = val
 
     @property
     def hoversubplots(self):
@@ -2491,6 +2516,13 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        hoversort
+            Determines the order of items shown in unified hover
+            labels. If "trace", items are sorted by trace index. If
+            *value descending*, items are sorted by value from
+            largest to smallest. If *value ascending*, items are
+            sorted by value from smallest to largest. Only applies
+            when `hovermode` is *x unified* or *y unified*.
         hoversubplots
             Determines expansion of hover effects to other subplots
             If "single" just the axis pair of the primary point is
@@ -2793,6 +2825,7 @@ class Layout(_BaseLayoutType):
         hoverdistance=None,
         hoverlabel=None,
         hovermode=None,
+        hoversort=None,
         hoversubplots=None,
         iciclecolorway=None,
         images=None,
@@ -3106,6 +3139,13 @@ class Layout(_BaseLayoutType):
             mode, spikelines are enabled by default perpendicular
             to the specified axis. If false, hover interactions are
             disabled.
+        hoversort
+            Determines the order of items shown in unified hover
+            labels. If "trace", items are sorted by trace index. If
+            *value descending*, items are sorted by value from
+            largest to smallest. If *value ascending*, items are
+            sorted by value from smallest to largest. Only applies
+            when `hovermode` is *x unified* or *y unified*.
         hoversubplots
             Determines expansion of hover effects to other subplots
             If "single" just the axis pair of the primary point is
@@ -3414,6 +3454,7 @@ class Layout(_BaseLayoutType):
             "hoverdistance",
             "hoverlabel",
             "hovermode",
+            "hoversort",
             "hoversubplots",
             "iciclecolorway",
             "imagedefaults",
@@ -3528,6 +3569,7 @@ an instance of :class:`plotly.graph_objs.Layout`""")
         self._set_property("hoverdistance", arg, hoverdistance)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovermode", arg, hovermode)
+        self._set_property("hoversort", arg, hoversort)
         self._set_property("hoversubplots", arg, hoversubplots)
         self._set_property("iciclecolorway", arg, iciclecolorway)
         self._set_property("images", arg, images)

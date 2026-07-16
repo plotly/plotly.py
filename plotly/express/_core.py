@@ -971,6 +971,11 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
                     ),
                     marginal=letter,
                 )
+            else:
+                raise ValueError(
+                    f"Invalid value '{args['marginal_' + letter]}' for `marginal_{letter}`. "
+                    "Supported marginal plot types are: 'rug', 'box', 'violin', 'histogram'."
+                )
             if "color" in attrs or "color" not in args:
                 if "marker" not in trace_spec.trace_patch:
                     trace_spec.trace_patch["marker"] = dict()
