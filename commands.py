@@ -12,6 +12,7 @@ import subprocess
 from subprocess import check_call
 import sys
 import time
+import tempfile
 
 from codegen import perform_codegen, lint_code, reformat_code
 
@@ -86,7 +87,8 @@ def install_js_deps(local, build=True):
             stderr=sys.stderr,
         )
         if local is not None:
-            plotly_archive = os.path.join(local, "plotly.js.tgz")
+            # plotly_archive = os.path.join(local, "plotly.js.tgz")
+            plotly_archive = local  # Use the local path directly as the archive path
             check_call(
                 [npmName, "install", plotly_archive],
                 cwd=NODE_ROOT,
@@ -113,6 +115,7 @@ def overwrite_schema_local(uri):
     """Replace plot-schema.json with local copy."""
 
     path = os.path.join(PROJECT_ROOT, "codegen", "resources", "plot-schema.json")
+    print("Copying local plot-schema.json from %s to %s" % (uri, path))
     shutil.copyfile(uri, path)
 
 
@@ -130,6 +133,7 @@ def overwrite_bundle_local(uri):
     """Replace minified JavaScript bundle.json with local copy."""
 
     path = os.path.join(PROJECT_ROOT, "plotly", "package_data", "plotly.min.js")
+    print("Copying local plotly.min.js from %s to %s" % (uri, path))
     shutil.copyfile(uri, path)
 
 
@@ -177,21 +181,54 @@ def get_latest_commit_info(repo, branch):
 def get_bundle_schema_local(local):
     """Get paths to local build files."""
 
-    plotly_archive = os.path.join(local, "plotly.js.tgz")
-    plotly_bundle = os.path.join(local, "dist/plotly.min.js")
-    plotly_schemas = os.path.join(local, "dist/plot-schema.json")
+    abs_path_local = os.path.abspath(local)
+
+    # plotly_archive = os.path.join(abs_path_local, "plotly.js.tgz")
+    plotly_archive = abs_path_local  # Use the local path directly as the archive path
+    plotly_bundle = os.path.join(abs_path_local, "dist/plotly.min.js")
+    plotly_schemas = os.path.join(abs_path_local, "dist/plot-schema.json")
+
+    # Check that the files exist
+    for path in [plotly_archive, plotly_bundle, plotly_schemas]:
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Expected file not found: {path}")
+
     return plotly_archive, plotly_bundle, plotly_schemas
 
 
-def get_github_urls(repo, revision):
-    """Get URLs for required files from GitHub."""
-
-    raw = f"https://raw.githubusercontent.com/{repo}/{revision}"
+def get_archive_url(repo, revision):
+    """Get URL for the archive of the provided repo and commit from GitHub."""
     archive_url = f"https://github.com/{repo}/tarball/{revision}"
-    bundle_url = raw + "/dist/plotly.min.js"
-    schema_url = raw + "/dist/plot-schema.json"
+    return archive_url
 
-    return archive_url, bundle_url, schema_url
+def github_auth_headers():
+    """Auth headers for the GitHub API.
+
+    Downloading Actions artifacts requires authentication even for public
+    repos. Use $GITHUB_TOKEN if set (e.g. in CI), otherwise fall back to the
+    locally-authenticated `gh` CLI, which manages/refreshes the token itself.
+    """
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        token = subprocess.check_output(["gh", "auth", "token"], text=True).strip()
+    return {"Authorization": f"Bearer {token}"}
+
+
+def get_dist_artifact_url(revision):
+    """Get the download URL for the dist artifact of the 'Publish Dist'
+    plotly.js CI job on GitHub Actions."""
+
+    headers = github_auth_headers()
+    runs = requests.get(
+        "https://api.github.com/repos/plotly/plotly.js/actions/runs",
+        params={"head_sha": revision},
+        headers=headers,
+    ).json()["workflow_runs"]
+    for run in runs:
+        for artifact in requests.get(run["artifacts_url"], headers=headers).json()["artifacts"]:
+            if artifact["name"] == "dist":
+                return artifact["archive_download_url"]
+    raise RuntimeError(f"No dist artifact found for revision {revision}")
 
 
 def update_schema(plotly_js_version):
@@ -227,56 +264,115 @@ def update_plotlyjs(plotly_js_version, outdir):
     install_js_deps(local=None, build=True)
 
 
-# FIXME: switch to argparse
-def update_schema_bundle_from_master(args):
-    """Update the plotly.js schema and bundle from master."""
-    if args.local is None:
-        build_info = get_latest_commit_info(args.devrepo, args.devbranch)
-        archive_url, bundle_url, schema_url = get_github_urls(
-            args.devrepo, build_info["vcs_revision"]
-        )
-
-        # Update bundle in package data
-        overwrite_bundle(bundle_url)
-
-        # Update schema in package data
-        overwrite_schema(schema_url)
+def download_and_extract_tarball(url, download_path, unzip_dir=None, headers=None):
+    """Download a tarball from the given URL and save it to the specified destination path.
+    Returns the path to the directory the archive was extracted into."""
+    print(f"Downloading tarball from {url} to {download_path}")
+    with requests.get(url, stream=True, headers=headers) as r:
+        r.raise_for_status()
+        with open(download_path, "wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
+    if unzip_dir:
+        if not os.path.exists(unzip_dir):
+            os.makedirs(unzip_dir)
+        else:
+            raise FileExistsError(f"Directory {unzip_dir} already exists. Please remove it before extracting.")
     else:
-        # this info could be more informative but it doesn't seem as
-        # useful in a local context and requires dependencies and
-        # programming.
-        build_info = {"vcs_revision": "local", "committer_date": str(time.time())}
-        args.devrepo = args.local
-        args.devbranch = ""
+        unzip_dir = tempfile.mkdtemp(dir=os.path.dirname(download_path))
+    print(f"Extracting tarball to {unzip_dir}")
+    shutil.unpack_archive(download_path, unzip_dir)
+    return unzip_dir
 
-        archive_uri, bundle_uri, schema_uri = get_bundle_schema_local(args.local)
-        overwrite_bundle_local(bundle_uri)
-        overwrite_schema_local(schema_uri)
 
-    # Update plotly.js url in package.json
-    package_json_path = os.path.join(NODE_ROOT, "package.json")
-    with open(package_json_path, "r") as f:
-        package_json = json.load(f)
 
-    # Replace version with bundle url
-    package_json["dependencies"]["plotly.js"] = (
-        archive_url if args.local is None else archive_uri
-    )
-    with open(package_json_path, "w") as f:
-        json.dump(package_json, f, indent=2)
+# FIXME: switch to argparse
+def update_schema_bundle_from_branch(args):
+    """Update the plotly.js schema and bundle from the provided dev repo
+    and dev branch."""
 
-    # update plotly.js version in _plotlyjs_version
-    rev = build_info["vcs_revision"]
-    date = str(build_info["committer_date"])
-    version = "_".join([args.devrepo, args.devbranch, date[:10], rev[:8]])
-    overwrite_plotlyjs_version_file(version)
-    install_js_deps(args.local)
+    # Create temp directory using tempfile
+    # Only needed for the non-local case, but nesting everything inside the context manager
+    # allows for simpler code
+    with tempfile.TemporaryDirectory() as temp_dir:
+
+        if args.local is None:
+            build_info = get_latest_commit_info(args.devrepo, args.devbranch)
+            archive_url = get_archive_url(
+                args.devrepo, build_info["vcs_revision"]
+            )
+            dist_artifact_url = get_dist_artifact_url(build_info["vcs_revision"])
+
+            # Download and extract the plotly.js archive
+            print("Downloading plotly.js repo from:", archive_url)
+            repo_archive_path = os.path.join(temp_dir, "plotly.js.tgz")
+            repo_unzip_dir = download_and_extract_tarball(archive_url, repo_archive_path)
+            # The repo tarball extracts into a single top-level directory
+            repo_extracted_path = os.path.join(
+                repo_unzip_dir,
+                [d for d in os.listdir(repo_unzip_dir) if os.path.isdir(os.path.join(repo_unzip_dir, d))][0],
+            )
+
+            # Download and extract the dist artifact if available
+            print("Downloading plotly.js dist artifact from:", dist_artifact_url)
+            dist_archive_path = os.path.join(temp_dir, "dist.zip")
+            # The dist artifact extracts its contents (plotly.min.js, plot-schema.json, ...)
+            # directly at the root of the extraction directory
+            dist_dir = download_and_extract_tarball(
+                dist_artifact_url, dist_archive_path, headers=github_auth_headers()
+            )
+
+            # Copy the extracted dist files to the appropriate location in the extracted repo
+            target_dist_dir = os.path.join(repo_extracted_path, "dist")
+            shutil.copytree(dist_dir, target_dist_dir, dirs_exist_ok=True)
+
+            # Get paths to the bundle and schema files
+            bundle_path = os.path.join(repo_extracted_path, "dist", "plotly.min.js")
+            schema_path = os.path.join(repo_extracted_path, "dist", "plot-schema.json")
+
+            # Update bundle and schema in package_data
+            overwrite_bundle_local(bundle_path)
+            overwrite_schema_local(schema_path)
+
+        else:
+            # this info could be more informative but it doesn't seem as
+            # useful in a local context and requires dependencies and
+            # programming.
+            build_info = {"vcs_revision": "local", "committer_date": str(time.time())}
+            args.devrepo = args.local
+            args.devbranch = ""
+
+            archive_uri, bundle_uri, schema_uri = get_bundle_schema_local(args.local)
+            overwrite_bundle_local(bundle_uri)
+            overwrite_schema_local(schema_uri)
+
+        # Update plotly.js url in package.json
+        package_json_path = os.path.join(NODE_ROOT, "package.json")
+        with open(package_json_path, "r") as f:
+            package_json = json.load(f)
+
+        print("Updating package.json to use plotly.js from:", repo_extracted_path if args.local is None else archive_uri)
+
+        # Replace version with bundle url
+        package_json["dependencies"]["plotly.js"] = (
+            repo_extracted_path if args.local is None else archive_uri
+        )
+        with open(package_json_path, "w") as f:
+            json.dump(package_json, f, indent=2)
+
+        # update plotly.js version in _plotlyjs_version
+        rev = build_info["vcs_revision"]
+        date = str(build_info["committer_date"])
+        version = "_".join([args.devrepo, args.devbranch, date[:10], rev[:8]])
+        overwrite_plotlyjs_version_file(version)
+        # install_js_deps(args.local)
+        install_js_deps(archive_uri if args.local is None else None)
 
 
 def update_plotlyjs_dev(args, outdir):
     """Update project to a new development version of plotly.js."""
 
-    update_schema_bundle_from_master(args)
+    update_schema_bundle_from_branch(args)
     perform_codegen(outdir)
 
 
