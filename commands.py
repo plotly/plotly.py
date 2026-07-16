@@ -50,8 +50,8 @@ def install_js_deps(local, build=True):
     When ``build`` is True (the default), also runs ``npm run build`` to
     rebuild the JupyterLab extension and FigureWidget bundles and verifies
     that the widget bundle exists. Pass ``build=False`` when you only need
-    to refresh ``node_modules`` / ``package-lock.json`` (e.g. after a
-    plotly.js version bump) and don't need the bundles rebuilt.
+    to refresh ``node_modules`` / ``package-lock.json`` but don't
+    need the bundles rebuilt.
     """
 
     npmName = "npm"
@@ -224,7 +224,7 @@ def update_plotlyjs(plotly_js_version, outdir):
     update_bundle(plotly_js_version)
     update_schema(plotly_js_version)
     perform_codegen(outdir)
-    install_js_deps(local=None, build=False)
+    install_js_deps(local=None, build=True)
 
 
 # FIXME: switch to argparse

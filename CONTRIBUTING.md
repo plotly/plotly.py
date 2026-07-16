@@ -273,22 +273,30 @@ python commands.py updateplotlyjs
 ```
 
 This downloads new versions of `plot-schema.json` and `plotly.min.js` from the `plotly/plotly.js` GitHub repository
-and places them in `plotly/package_data`.
-It then regenerates all of the `graph_objs` classes based on the new schema,
-and finally runs `npm install` in `js/` to refresh `js/package-lock.json` against the new `plotly.js`.
-Commit the updated `js/package-lock.json` along with the regenerated files.
+and places them in `codegen/resources/` and `plotly/package_data/`, respectively.
 
-The JupyterLab extension and FigureWidget bundles in `plotly/labextension` and `plotly/package_data/widgetbundle.js`
-are rebuilt as part of the release flow (see [RELEASE.md](RELEASE.md)) rather than on every plotly.js bump.
+It then does the following:
+ - Regenerates all of the `graph_objs` classes based on the new schema
+ - Runs `npm install` in `js/` to refresh `js/package-lock.json` against the new `plotly.js`
+ - Runs `npm run build` to rebuild the JupyterLab extension and FigureWidget bundles in `plotly/labextension` and `plotly/package_data/widgetbundle.js`.
 
-If you need to skip the `npm install` step entirely (e.g. `npm` isn't available),
+Commit the updated files under:
+ - `codegen/resources/`
+ - `js/`
+ - `plotly/graph_objs/`
+ - `plotly/labextension/`
+ - `plotly/offline/`
+ - `plotly/package_data/`
+
+If you need to skip the `npm` steps entirely (e.g. `npm` isn't available),
 set the `SKIP_NPM=1` environment variable:
 
 ```bash
 SKIP_NPM=1 python commands.py updateplotlyjs
 ```
 
-If you do skip it, you'll need to run `npm install` in `js/` yourself before committing so the lockfile stays in sync.
+If you do skip it, you'll need to find a way to manually run `npm install && npm run build` in `js/` before committing,
+so that the lockfile and build artifacts stay in sync with `js/package.json`.
 
 ### Using a Development Branch of Plotly.js
 

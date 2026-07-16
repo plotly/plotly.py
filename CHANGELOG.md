@@ -4,8 +4,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## [6.9.0] - 2026-07-09
+
 ### Fixed
 - Raise a clear `ValueError` when an unsupported marginal plot type is passed to Plotly Express, instead of failing later with a cryptic `'NoneType' object has no attribute 'constructor'` message [[#5625](https://github.com/plotly/plotly.py/pull/5625)], with thanks to @eugen-goebel for the contribution!
+
+
+### Updated
+- Update plotly.js from version 3.6.0 to version 3.7.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.7.0) for more information [[#5639](https://github.com/plotly/plotly.py/pull/5639)]. Notable changes include:
+  - Rename `sendDataToCloud` modebar button to `sendChartToCloud`, and update to upload chart to Plotly Cloud [[#7802](https://github.com/plotly/plotly.js/pull/7802), [#7852](https://github.com/plotly/plotly.js/pull/7852), [#7854](https://github.com/plotly/plotly.js/pull/7854)]. NOTE: The Plotly Cloud endpoint for receiving charts is not yet functional, so this button won't complete the upload.
+  - Fix stale `scattergl` error bars after toggling traces with mixed error bar visibility [[#7773](https://github.com/plotly/plotly.js/issues/7773)], with thanks to @JulienIcon for the contribution!
+  - Fix geo `fitbounds` to choose a compact longitude range when point data straddles the antimeridian [[#7837](https://github.com/plotly/plotly.js/pull/7837)], with thanks to @SharadhNaidu for the contribution!
 
 
 ## [6.8.0] - 2026-06-03
