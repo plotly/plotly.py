@@ -1,5 +1,3 @@
-import pytest
-
 from _plotly_utils.colors import (
     find_intermediate_color,
     hex_to_rgb,
@@ -43,7 +41,3 @@ def test_find_intermediate_color_rgb_colortype():
         "rgb(0, 0, 0)", "rgb(10, 20, 30)", 0.5, colortype="rgb"
     )
     assert result == "rgb(5.0, 10.0, 15.0)"
-
-
-if __name__ == "__main__":
-    raise SystemExit(pytest.main([__file__, "-v"]))
