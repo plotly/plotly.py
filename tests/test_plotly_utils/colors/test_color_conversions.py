@@ -12,6 +12,15 @@ def test_hex_to_rgb_basic_values():
     assert hex_to_rgb("#aabbcc") == (170, 187, 204)
 
 
+def test_hex_to_rgb_shorthand_3_digit():
+    assert hex_to_rgb("#fff") == (255, 255, 255)
+    assert hex_to_rgb("#000") == (0, 0, 0)
+    assert hex_to_rgb("#abc") == (170, 187, 204)
+    assert hex_to_rgb("#f00") == (255, 0, 0)
+    assert hex_to_rgb("#0f0") == (0, 255, 0)
+    assert hex_to_rgb("#00f") == (0, 0, 255)
+
+
 def test_label_rgb_formats_tuple():
     assert label_rgb((255, 0, 0)) == "rgb(255, 0, 0)"
     assert label_rgb((1, 2, 3)) == "rgb(1, 2, 3)"

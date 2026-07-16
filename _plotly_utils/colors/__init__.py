@@ -757,6 +757,8 @@ def hex_to_rgb(value):
     :rtype (tuple) (r_value, g_value, b_value): tuple of rgb values
     """
     value = value.lstrip("#")
+    if len(value) == 3:
+        value = "".join(c * 2 for c in value)
     hex_total_length = len(value)
     rgb_section_length = hex_total_length // 3
     return tuple(
