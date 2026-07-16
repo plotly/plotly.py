@@ -95,20 +95,6 @@ defaults = PxDefaults()
 del PxDefaults
 
 
-MAPBOX_TOKEN = None
-
-
-def set_mapbox_access_token(token):
-    """
-    Arguments:
-        token: A Mapbox token to be used in `plotly.express.scatter_mapbox` and \
-        `plotly.express.line_mapbox` figures. See \
-        https://docs.mapbox.com/help/how-mapbox-works/access-tokens/ for more details
-    """
-    global MAPBOX_TOKEN
-    MAPBOX_TOKEN = token
-
-
 def get_trendline_results(fig):
     """
     Extracts fit statistics for trendlines (when applied to figures generated with
@@ -503,7 +489,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if trace_spec.constructor in [
                     go.Choropleth,
                     go.Choroplethmap,
-                    go.Choroplethmapbox,
                 ]:
                     trace_patch["z"] = trace_data.get_column(attr_value)
                     trace_patch["coloraxis"] = "coloraxis1"
@@ -621,9 +606,6 @@ def configure_axes(args, constructor, fig, orders):
         go.Scattermap: configure_map,
         go.Choroplethmap: configure_map,
         go.Densitymap: configure_map,
-        go.Scattermapbox: configure_mapbox,
-        go.Choroplethmapbox: configure_mapbox,
-        go.Densitymapbox: configure_mapbox,
         go.Scattergeo: configure_geo,
         go.Choropleth: configure_geo,
     }
@@ -808,21 +790,6 @@ def configure_3d_axes(args, fig, orders):
             axis["categoryorder"] = "array"
             axis["categoryarray"] = orders[args[letter]]
     fig.update_scenes(patch)
-
-
-def configure_mapbox(args, fig, orders):
-    center = args["center"]
-    if not center and "lat" in args and "lon" in args:
-        center = dict(
-            lat=args["data_frame"][args["lat"]].mean(),
-            lon=args["data_frame"][args["lon"]].mean(),
-        )
-    fig.update_mapboxes(
-        accesstoken=MAPBOX_TOKEN,
-        center=center,
-        zoom=args["zoom"],
-        style=args["mapbox_style"],
-    )
 
 
 def configure_map(args, fig, orders):
@@ -2334,7 +2301,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         else:
             trace_patch["texttemplate"] = "%{" + letter + ":" + args["text_auto"] + "}"
 
-    if constructor in [go.Histogram2d, go.Densitymap, go.Densitymapbox]:
+    if constructor in [go.Histogram2d, go.Densitymap]:
         show_colorbar = True
         trace_patch["coloraxis"] = "coloraxis1"
 
@@ -2344,7 +2311,6 @@ def infer_config(args, constructor, trace_patch, layout_patch):
                 trace_patch["marker"] = dict(opacity=0.5)
         elif constructor in [
             go.Densitymap,
-            go.Densitymapbox,
             go.Pie,
             go.Funnel,
             go.Funnelarea,
@@ -2365,9 +2331,7 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         if len(modes) == 0:
             modes.add("lines")
         trace_patch["mode"] = "+".join(sorted(modes))
-    elif constructor != go.Splom and (
-        "symbol" in args or constructor in [go.Scattermap, go.Scattermapbox]
-    ):
+    elif constructor != go.Splom and ("symbol" in args or constructor == go.Scattermap):
         trace_patch["mode"] = "markers" + ("+text" if args["text"] else "")
 
     if "line_shape" in args:
@@ -2589,9 +2553,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 go.Parcoords,
                 go.Choropleth,
                 go.Choroplethmap,
-                go.Choroplethmapbox,
                 go.Densitymap,
-                go.Densitymapbox,
                 go.Histogram2d,
                 go.Sunburst,
                 go.Treemap,
@@ -2639,8 +2601,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     ):
                         trace.update(marker=dict(color=m.val_map[val]))
                     elif (
-                        trace_spec.constructor
-                        in [go.Choropleth, go.Choroplethmap, go.Choroplethmapbox]
+                        trace_spec.constructor in [go.Choropleth, go.Choroplethmap]
                         and m.variable == "color"
                     ):
                         trace.update(
@@ -2725,11 +2686,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         )
 
     if show_colorbar:
-        colorvar = (
-            "z"
-            if constructor in [go.Histogram2d, go.Densitymap, go.Densitymapbox]
-            else "color"
-        )
+        colorvar = "z" if constructor in [go.Histogram2d, go.Densitymap] else "color"
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
@@ -2879,7 +2836,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             horizontal_spacing = args.get("facet_col_spacing") or 0.02
     else:
         # Other subplot types:
-        #   'scene', 'geo', 'polar', 'ternary', 'mapbox', 'domain', None
+        #   'scene', 'geo', 'polar', 'ternary', 'map', 'domain', None
         #
         # We can customize subplot spacing per type once we enable faceting
         # for all plot types
