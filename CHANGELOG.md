@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add `add_abline` method to `Figure` for drawing a straight line from a slope and an intercept, alongside the existing `add_hline`/`add_vline`/`add_hrect`/`add_vrect` convenience methods [[#3166](https://github.com/plotly/plotly.py/issues/3166)]
+
 ### Fixed
 - Fix `hex_to_rgb` parsing of 3-digit shorthand hexadecimal colors such as `#FFF` [[#5662](https://github.com/plotly/plotly.py/pull/5662)], with thanks to @genrichez for the contribution!
 

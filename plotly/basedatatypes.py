@@ -4236,6 +4236,205 @@ Invalid property path '{key_path_str}' for layout
 
     add_hrect.__doc__ = _axis_spanning_shapes_docstr("hrect")
 
+    def _abline_xrange(self, xaxis, xref):
+        """
+        Determine the (x0, x1) pair of x-axis coordinates to use as the
+        endpoints of a line drawn from a slope and an intercept, such as in
+        add_abline.
+
+        If the axis's `range` has been explicitly set (either by the user or
+        by a previous render that fed values back into the figure, e.g. a
+        FigureWidget), that range is used as-is, including the case where it
+        is reversed (range[0] > range[1]).
+
+        Otherwise, the numeric x-values already present in the traces drawn
+        on this axis are used to compute a (min, max) pair. Traces that have
+        no explicit `x` values but do have `y` values are treated as if they
+        were plotted against their implied integer index (0, 1, 2, ...),
+        matching how plotly.js positions them.
+
+        Returns None if neither an explicit range nor any usable data could
+        be found, which happens for an axis that has no traces plotted on it
+        yet and no range set.
+        """
+        if xaxis.range is not None:
+            return tuple(xaxis.range)
+
+        xs = []
+        for trace in self.data:
+            trace_xref = "x" if trace.xaxis is None else trace.xaxis
+            if trace_xref != xref:
+                continue
+
+            trace_x = getattr(trace, "x", None)
+            numeric_x = []
+            if trace_x is not None:
+                for v in trace_x:
+                    try:
+                        numeric_x.append(float(v))
+                    except (TypeError, ValueError):
+                        # skip non-numeric values (e.g. categories or dates);
+                        # add_abline does not attempt to support category or
+                        # date x-axes
+                        pass
+
+            if numeric_x:
+                xs.extend(numeric_x)
+            else:
+                trace_y = getattr(trace, "y", None)
+                if trace_y is not None and len(trace_y) > 0:
+                    xs.extend([0, len(trace_y) - 1])
+
+        if not xs:
+            return None
+        return (min(xs), max(xs))
+
+    def add_abline(
+        self,
+        slope=1,
+        intercept=0,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs,
+    ):
+        """
+        Add a straight line to a plot or subplot defined by a slope and an
+        intercept, in the style of matplotlib's `axline` or R's `abline`.
+
+        Unlike add_hline and add_vline, this line's position is not fixed
+        relative to the plot's edges: the shape's endpoints are ordinary
+        data-coordinate points, computed once at the time this method is
+        called, from either the axis's currently-set `range` or, if that is
+        not set, from the minimum and maximum x-values already plotted on
+        that axis. Because of this, the line is NOT automatically
+        recalculated or extended if the figure is later panned or zoomed, or
+        if new data with a wider x-range is added afterwards; it will simply
+        stay at the x-range it was drawn with, the same way any other shape
+        added with `add_shape` behaves. If you change the axis range and
+        want the line to reflect it, call `add_abline` again (after removing
+        the previous line, if needed).
+
+        This method only supports linear x-axes. It does not attempt to
+        compute a sensible line for logarithmic, date, or category x-axes.
+
+        Parameters
+        ----------
+        slope: float or int
+            The slope of the line. Defaults to 1.
+        intercept: float or int
+            The y-value of the line at x=0. Defaults to 0.
+        exclude_empty_subplots: Boolean
+            If True (default) do not place the shape on subplots that have no
+            data plotted on them.
+        row: None, int or 'all'
+            Subplot row for shape indexed starting at 1. If 'all', addresses
+            all rows in the specified column(s). If both row and col are
+            None, addresses the first subplot if subplots exist, or the only
+            plot. By default is "all".
+        col: None, int or 'all'
+            Subplot column for shape indexed starting at 1. If 'all',
+            addresses all rows in the specified column(s). If both row and
+            col are None, addresses the first subplot if subplots exist, or
+            the only plot. By default is "all".
+        annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+            it is interpreted as describing an annotation. The annotation is
+            placed relative to the line based on annotation_position (see
+            below) unless its x or y value has been specified for the
+            annotation passed here. xref and yref are always the same as for
+            the added shape and cannot be overridden.
+        annotation_position: a string containing optionally ["top", "bottom"]
+            and ["left", "right"] specifying where the text should be
+            anchored to on the line. Example positions are "bottom left",
+            "right top", "right", "bottom". If an annotation is added but
+            annotation_position is not specified, this defaults to "top
+            right".
+        annotation_*: any parameters to go.layout.Annotation can be passed as
+            keywords by prefixing them with "annotation_". For example, to
+            specify the annotation text "example" you can pass
+            annotation_text="example" as a keyword argument.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, y1 or type.
+
+        Returns
+        -------
+        Figure
+        """
+        if (row is not None or col is not None) and (not self._has_subplots()):
+            # this has no subplots to address, so we force row and col to be
+            # None, matching the behaviour of add_hline/add_vline
+            row = None
+            col = None
+
+        if row is not None and _is_select_subplot_coordinates_arg(row, col):
+            rows_cols = self._select_subplot_coordinates(row, col)
+            for r, c in rows_cols:
+                self.add_abline(
+                    slope=slope,
+                    intercept=intercept,
+                    row=r,
+                    col=c,
+                    exclude_empty_subplots=exclude_empty_subplots,
+                    annotation=annotation,
+                    **kwargs,
+                )
+            return self
+
+        if row is None:
+            xaxis = self.layout.xaxis
+            xref = "x"
+            add_kwargs = dict()
+        else:
+            grid_ref = self._validate_get_grid_ref()
+            if row > len(grid_ref) or col > len(grid_ref[row - 1]):
+                raise IndexError("row/col index (%d, %d) out-of-bounds" % (row, col))
+            refs = grid_ref[row - 1][col - 1]
+            if not refs or refs[0].subplot_type != "xy":
+                # nothing sensible to draw an abline on here
+                return self
+            xaxis_key, yaxis_key = refs[0].layout_keys
+            xref = xaxis_key.replace("axis", "")
+            yref = yaxis_key.replace("axis", "")
+            if exclude_empty_subplots and not self._subplot_not_empty(
+                xref, yref, selector=bool(exclude_empty_subplots)
+            ):
+                return self
+            xaxis = self.layout[xaxis_key]
+            add_kwargs = dict(row=row, col=col)
+
+        x_range = self._abline_xrange(xaxis, xref)
+        if x_range is None:
+            # no data and no explicit range to compute the line's endpoints
+            # from; fall back to the default plotly.js x-axis range for an
+            # otherwise-empty axis
+            x0, x1 = 0, 1
+        else:
+            x0, x1 = x_range
+        y0 = intercept + slope * x0
+        y1 = intercept + slope * x1
+
+        shape_args = dict(type="line", x0=x0, x1=x1, y0=y0, y1=y1)
+        shape_kwargs, annotation_kwargs = shapeannotation.split_dict_by_key_prefix(
+            kwargs, "annotation_"
+        )
+        augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
+            annotation, "abline", shape_args, annotation_kwargs
+        )
+        self.add_shape(
+            exclude_empty_subplots=exclude_empty_subplots,
+            **_combine_dicts([shape_args, shape_kwargs]),
+            **add_kwargs,
+        )
+        if augmented_annotation is not None:
+            self.add_annotation(
+                augmented_annotation,
+                exclude_empty_subplots=exclude_empty_subplots,
+                **add_kwargs,
+            )
+        return self
+
     def _has_subplots(self):
         """Returns True if figure contains subplots, otherwise it contains a
         single plot and so this returns False."""
