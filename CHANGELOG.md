@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add pure-Python, dependency-free text renderers `text-utf` (braille/block-char, default) and `text-ascii` (7-bit fallback) that draw an existing `go.Figure` as plain text — `fig.show(renderer="text-utf")` / `"text-ascii"`. Supports scatter/scattergl (lines & markers), bar (honouring `orientation`), and histogram (bins reproduced client-side, numpy-accelerated when available); multi-series bars fan out into sub-columns, unsupported traces and undersized canvases degrade to a one-line note instead of crashing, and output is written as forced UTF-8.
+- Add colour text renderers `text-ansi` (24-bit truecolor ANSI escapes) and `text-html` (self-contained class-based HTML fragment) — `fig.show(renderer="text-ansi")` / `"text-html"` — and `heatmap` / `histogram2d` trace support (density shaded via a colorscale-sampled ramp, `histogram2d` binned client-side). Each series is coloured from its own `marker`/`line` colour (normalized from `#hex`, `rgb()/rgba()`, or a CSS name) or the default qualitative palette.
+
 
 ## [6.9.0] - 2026-07-09
 
