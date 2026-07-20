@@ -67,7 +67,7 @@ you can do it directly on GitHub by clicking on the "Edit this page on GitHub" l
 
 We use Git and GitHub to manage our project;
 if you are not familiar with them,
-there are great resources like <http://try.github.io/> to get you started.
+there are great resources like <https://try.github.io/> to get you started.
 
 The first step is to [fork the repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) on GitHub
 so that you have your own copy to work with.
@@ -99,7 +99,7 @@ source .venv/bin/activate
 
 Alternatively,
 you can use [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands)
-or [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+or [virtualenv](https://docs.python-guide.org/en/latest/dev/virtualenvs/)
 to create and manage your virtual environment;
 see those tools' documentation for more information.
 
