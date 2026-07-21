@@ -271,3 +271,17 @@ def test_to_dict_empty_np_array_int64():
     )
     # to_dict() should not raise an exception
     fig.to_dict()
+
+
+def test_write_read_json_utf8_non_ascii(tmp_path):
+    """write_json/read_json must use UTF-8 so Windows cp1252 locales work (#5665)."""
+    fig = go.Figure(layout_title_text="μ 中文")
+    path = tmp_path / "fig_utf8.json"
+    pio.write_json(fig, path)
+    # File bytes must be valid UTF-8 containing the title characters
+    raw = path.read_bytes()
+    raw.decode("utf-8")
+    assert "μ".encode("utf-8") in raw or "\\u03bc".encode("ascii") in raw
+    loaded = pio.read_json(path)
+    title = loaded.layout.title.text
+    assert "μ" in title and "中文" in title

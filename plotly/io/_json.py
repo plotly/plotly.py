@@ -295,7 +295,9 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.
         # Now we can use `write_bytes()`.
-        path.write_text(json_str)
+        # Explicit UTF-8: Windows default encodings (e.g. cp1252) raise
+        # UnicodeEncodeError for non-ASCII figure text (#5665).
+        path.write_text(json_str, encoding="utf-8")
 
 
 def from_json_plotly(value, engine=None):
@@ -464,7 +466,9 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     # Read file contents into JSON string
     # -----------------------------------
     if path is not None:
-        json_str = path.read_text()
+        # Explicit UTF-8 so files written by write_json decode correctly on
+        # Windows (default locale encoding is often not UTF-8) (#5665).
+        json_str = path.read_text(encoding="utf-8")
     else:
         json_str = file.read()
 
