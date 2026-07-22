@@ -447,24 +447,6 @@ def test_load_px_data(return_type):
         assert len(df) > 0
 
 
-def test_warn_on_deprecated_mapbox_px_constructors():
-    # This test will fail if any of the following px constructors
-    # fails to emit a DeprecationWarning
-    for fig_constructor in [
-        px.line_mapbox,
-        px.scatter_mapbox,
-        px.density_mapbox,
-        px.choropleth_mapbox,
-    ]:
-        # Look for warnings with the string "_mapbox" in them
-        # to make sure the warning is coming from px rather than go
-        with pytest.warns(DeprecationWarning, match="_mapbox"):
-            if fig_constructor == px.choropleth_mapbox:
-                fig_constructor(locations=["CA", "TX", "NY"])
-            else:
-                fig_constructor(lat=[10, 20, 30], lon=[10, 20, 30])
-
-
 def test_no_warn_on_non_deprecated_px_constructors():
     # This test will fail if any of the following px constructors
     # emits a DeprecationWarning

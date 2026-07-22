@@ -1121,7 +1121,7 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
             assert len(fig.data) == ncontours + 2 + arg_set["showscale"]
 
 
-class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
+class TestHexbinMap(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def compare_list_values(self, list1, list2, decimal=7):
         assert len(list1) == len(list2), "Lists are not of the same length."
         for i in range(len(list1)):
