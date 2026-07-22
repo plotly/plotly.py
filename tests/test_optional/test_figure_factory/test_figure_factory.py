@@ -3252,7 +3252,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCaseNoTemplate):
                     "x": [2.8, 2.8, 3.1],
                     "xaxis": "x2",
                     "y": [16, 18, 18],
-                    "yaxis": "y2",
+                    "yaxis": "y",
                 },
             ],
             "layout": {

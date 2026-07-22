@@ -1465,6 +1465,8 @@ class TestMakeSubplots(TestCase):
             shared_xaxes="rows",
             shared_yaxes="columns",
         )
+        print(f'Expected {expected}') 
+        print(f'Actual: {fig}')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_irregular_layout(self):
@@ -1848,8 +1850,8 @@ class TestMakeSubplots(TestCase):
             fig.add_scatter(y=[0, 2, 4], name="Fifth", row=2, col=1)
             fig.add_scatter(y=[2, 1, 3], name="Sixth", row=2, col=1, secondary_y=True)
 
-            fig.add_scatter(y=[2, 4, 0], name="Fifth", row=2, col=2)
-            fig.add_scatter(y=[2, 3, 6], name="Sixth", row=2, col=2, secondary_y=True)
+            fig.add_scatter(y=[2, 4, 0], name="Seventh", row=2, col=2)
+            fig.add_scatter(y=[2, 3, 6], name="Eighth", row=2, col=2, secondary_y=True)
 
             fig.update_traces(uid=None)
 
@@ -1899,14 +1901,14 @@ class TestMakeSubplots(TestCase):
                             "yaxis": "y6",
                         },
                         {
-                            "name": "Fifth",
+                            "name": "Seventh",
                             "type": "scatter",
                             "xaxis": "x4",
                             "y": [2, 4, 0],
                             "yaxis": "y7",
                         },
                         {
-                            "name": "Sixth",
+                            "name": "Eighth",
                             "type": "scatter",
                             "xaxis": "x4",
                             "y": [2, 3, 6],
