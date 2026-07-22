@@ -467,6 +467,13 @@ renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="
 renderers["sphinx_gallery"] = SphinxGalleryHtmlRenderer()
 renderers["sphinx_gallery_png"] = SphinxGalleryOrcaRenderer()
 
+# Text renderers: text-utf (default), text-ascii, and the colour modes
+# text-ansi / text-html.
+# Registered via a hook so the _text subpackage owns its own renderer classes.
+from plotly.io._text import register_text_renderers  # noqa: E402
+
+register_text_renderers(renderers)
+
 # Set default renderer
 # --------------------
 # Version 4 renderer configuration
