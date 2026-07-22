@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Raise a clear `ValueError` when an unsupported marginal plot type is passed to Plotly Express, instead of failing later with a cryptic `'NoneType' object has no attribute 'constructor'` message [[#5625](https://github.com/plotly/plotly.py/pull/5625)], with thanks to @eugen-goebel for the contribution!
+- Read and write figure JSON files as UTF-8 in `read_json`/`write_json` so figures containing non-ASCII text are handled correctly on platforms whose default encoding is not UTF-8 (e.g. cp1252 on Windows) [[#5633](https://github.com/plotly/plotly.py/pull/5633)]
 
 
 ### Updated
