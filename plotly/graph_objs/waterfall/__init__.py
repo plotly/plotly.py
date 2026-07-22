@@ -9,7 +9,6 @@ if TYPE_CHECKING:
     from ._insidetextfont import Insidetextfont
     from ._legendgrouptitle import Legendgrouptitle
     from ._outsidetextfont import Outsidetextfont
-    from ._stream import Stream
     from ._textfont import Textfont
     from ._totals import Totals
     from . import connector
@@ -39,7 +38,6 @@ else:
             "._insidetextfont.Insidetextfont",
             "._legendgrouptitle.Legendgrouptitle",
             "._outsidetextfont.Outsidetextfont",
-            "._stream.Stream",
             "._textfont.Textfont",
             "._totals.Totals",
         ],

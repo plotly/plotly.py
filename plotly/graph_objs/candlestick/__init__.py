@@ -7,7 +7,6 @@ if TYPE_CHECKING:
     from ._increasing import Increasing
     from ._legendgrouptitle import Legendgrouptitle
     from ._line import Line
-    from ._stream import Stream
     from . import decreasing
     from . import hoverlabel
     from . import increasing
@@ -24,6 +23,5 @@ else:
             "._increasing.Increasing",
             "._legendgrouptitle.Legendgrouptitle",
             "._line.Line",
-            "._stream.Stream",
         ],
     )

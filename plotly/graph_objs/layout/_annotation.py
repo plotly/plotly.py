@@ -210,7 +210,7 @@ class Annotation(_BaseLayoutHierarchyType):
         (separated by a space), the position behaves like for "paper",
         but refers to the distance in fractions of the domain length
         from the left of the domain of that axis: e.g., *x2 domain*
-        refers to the domain of the second x  axis and a x position of
+        refers to the domain of the second x axis and a x position of
         0.5 refers to the point between the left and the right of the
         domain of the second x axis. In order for absolute positioning
         of the arrow to work, "axref" must be exactly the same as
@@ -272,7 +272,7 @@ class Annotation(_BaseLayoutHierarchyType):
         (separated by a space), the position behaves like for "paper",
         but refers to the distance in fractions of the domain length
         from the bottom of the domain of that axis: e.g., *y2 domain*
-        refers to the domain of the second y  axis and a y position of
+        refers to the domain of the second y axis and a y position of
         0.5 refers to the point between the bottom and the top of the
         domain of the second y axis. In order for absolute positioning
         of the arrow to work, "ayref" must be exactly the same as
@@ -869,7 +869,7 @@ class Annotation(_BaseLayoutHierarchyType):
         behaves like for "paper", but refers to the distance in
         fractions of the domain length from the left of the domain of
         that axis: e.g., *x2 domain* refers to the domain of the second
-        x  axis and a x position of 0.5 refers to the point between the
+        x axis and a x position of 0.5 refers to the point between the
         left and the right of the domain of the second x axis.
 
         The 'xref' property is an enumeration that may be specified as:
@@ -987,7 +987,7 @@ class Annotation(_BaseLayoutHierarchyType):
         behaves like for "paper", but refers to the distance in
         fractions of the domain length from the bottom of the domain of
         that axis: e.g., *y2 domain* refers to the domain of the second
-        y  axis and a y position of 0.5 refers to the point between the
+        y axis and a y position of 0.5 refers to the point between the
         bottom and the top of the domain of the second y axis.
 
         The 'yref' property is an enumeration that may be specified as:
@@ -1066,7 +1066,7 @@ class Annotation(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis. In order for absolute
             positioning of the arrow to work, "axref" must be
@@ -1099,7 +1099,7 @@ class Annotation(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis. In order for absolute
             positioning of the arrow to work, "ayref" must be
@@ -1259,7 +1259,7 @@ class Annotation(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis.
         xshift
@@ -1301,7 +1301,7 @@ class Annotation(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         yshift
@@ -1404,7 +1404,7 @@ class Annotation(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis. In order for absolute
             positioning of the arrow to work, "axref" must be
@@ -1437,7 +1437,7 @@ class Annotation(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis. In order for absolute
             positioning of the arrow to work, "ayref" must be
@@ -1597,7 +1597,7 @@ class Annotation(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis.
         xshift
@@ -1639,7 +1639,7 @@ class Annotation(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         yshift

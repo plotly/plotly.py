@@ -11,62 +11,46 @@ class Pie(_BaseTraceType):
     _valid_props = {
         "automargin",
         "customdata",
-        "customdatasrc",
         "direction",
         "dlabel",
         "domain",
         "hole",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "insidetextfont",
         "insidetextorientation",
         "label0",
         "labels",
-        "labelssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
         "legendrank",
-        "legendranksrc",
-        "legendsrc",
         "legendwidth",
         "marker",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "outsidetextfont",
         "pull",
-        "pullsrc",
         "rotation",
         "scalegroup",
         "showlegend",
-        "showlegendsrc",
         "sort",
-        "stream",
         "text",
         "textfont",
         "textinfo",
         "textposition",
-        "textpositionsrc",
-        "textsrc",
         "texttemplate",
         "texttemplatefallback",
-        "texttemplatesrc",
         "title",
         "type",
         "uid",
         "uirevision",
         "values",
-        "valuessrc",
         "visible",
     }
 
@@ -108,25 +92,6 @@ class Pie(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def direction(self):
@@ -207,9 +172,10 @@ class Pie(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
-        or `skip` are set, no information is displayed upon hovering.
-        But, if `none` is set, click and hover events are still fired.
+        Determines what trace information appears on hover. Flags are
+        rendered in a fixed order; use `hovertemplate` if you need
+        explicit control over the rendered string, including the order
+        of fields and surrounding text.
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
@@ -227,25 +193,6 @@ class Pie(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -334,25 +281,6 @@ class Pie(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Sets hover text elements associated with each sector. If a
@@ -377,25 +305,6 @@ class Pie(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -414,24 +323,6 @@ class Pie(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def insidetextfont(self):
@@ -521,24 +412,6 @@ class Pie(_BaseTraceType):
     @labels.setter
     def labels(self, val):
         self["labels"] = val
-
-    @property
-    def labelssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `labels`.
-
-        The 'labelssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["labelssrc"]
-
-    @labelssrc.setter
-    def labelssrc(self, val):
-        self["labelssrc"] = val
 
     @property
     def legend(self):
@@ -635,43 +508,6 @@ class Pie(_BaseTraceType):
         self["legendrank"] = val
 
     @property
-    def legendranksrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `legendrank`.
-
-        The 'legendranksrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["legendranksrc"]
-
-    @legendranksrc.setter
-    def legendranksrc(self, val):
-        self["legendranksrc"] = val
-
-    @property
-    def legendsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `legend`.
-
-        The 'legendsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["legendsrc"]
-
-    @legendsrc.setter
-    def legendsrc(self, val):
-        self["legendsrc"] = val
-
-    @property
     def legendwidth(self):
         """
         Sets the width (in px or fraction) of the legend for this
@@ -734,24 +570,6 @@ class Pie(_BaseTraceType):
     @meta.setter
     def meta(self, val):
         self["meta"] = val
-
-    @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
 
     @property
     def name(self):
@@ -835,24 +653,6 @@ class Pie(_BaseTraceType):
         self["pull"] = val
 
     @property
-    def pullsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `pull`.
-
-        The 'pullsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["pullsrc"]
-
-    @pullsrc.setter
-    def pullsrc(self, val):
-        self["pullsrc"] = val
-
-    @property
     def rotation(self):
         """
         Instead of the first slice starting at 12 o'clock, rotate to
@@ -917,25 +717,6 @@ class Pie(_BaseTraceType):
         self["showlegend"] = val
 
     @property
-    def showlegendsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `showlegend`.
-
-        The 'showlegendsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["showlegendsrc"]
-
-    @showlegendsrc.setter
-    def showlegendsrc(self, val):
-        self["showlegendsrc"] = val
-
-    @property
     def sort(self):
         """
         Determines whether or not the sectors are reordered from
@@ -953,25 +734,6 @@ class Pie(_BaseTraceType):
     @sort.setter
     def sort(self, val):
         self["sort"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.pie.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.pie.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def text(self):
@@ -1019,7 +781,10 @@ class Pie(_BaseTraceType):
     @property
     def textinfo(self):
         """
-        Determines which trace information appear on the graph.
+        Determines what trace information appears on the graph. Flags
+        are rendered in a fixed order; use `texttemplate` if you need
+        explicit control over the rendered string, including the order
+        of fields and surrounding text.
 
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
@@ -1056,43 +821,6 @@ class Pie(_BaseTraceType):
     @textposition.setter
     def textposition(self, val):
         self["textposition"] = val
-
-    @property
-    def textpositionsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `textposition`.
-
-        The 'textpositionsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textpositionsrc"]
-
-    @textpositionsrc.setter
-    def textpositionsrc(self, val):
-        self["textpositionsrc"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def texttemplate(self):
@@ -1149,25 +877,6 @@ class Pie(_BaseTraceType):
     @texttemplatefallback.setter
     def texttemplatefallback(self, val):
         self["texttemplatefallback"] = val
-
-    @property
-    def texttemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `texttemplate`.
-
-        The 'texttemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["texttemplatesrc"]
-
-    @texttemplatesrc.setter
-    def texttemplatesrc(self, val):
-        self["texttemplatesrc"] = val
 
     @property
     def title(self):
@@ -1259,24 +968,6 @@ class Pie(_BaseTraceType):
         self["values"] = val
 
     @property
-    def valuessrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `values`.
-
-        The 'valuessrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["valuessrc"]
-
-    @valuessrc.setter
-    def valuessrc(self, val):
-        self["valuessrc"] = val
-
-    @property
     def visible(self):
         """
         Determines whether or not this trace is visible. If
@@ -1312,9 +1003,6 @@ class Pie(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         direction
             Specifies the direction at which succeeding sectors
             follow one another.
@@ -1327,13 +1015,11 @@ class Pie(_BaseTraceType):
             Sets the fraction of the radius to cut out of the pie.
             Use this to make a donut chart.
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.pie.Hoverlabel` instance
             or dict with compatible properties
@@ -1378,25 +1064,16 @@ class Pie(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -1420,9 +1097,6 @@ class Pie(_BaseTraceType):
             occurrences if `values` is not provided. For other
             array attributes (including color) we use the first
             non-empty entry among all occurrences of the label.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         legend
             Sets the reference to a legend to show the pie slices
             in. Can be an array if `values` is set. In that case,
@@ -1450,12 +1124,6 @@ class Pie(_BaseTraceType):
             all unranked items. When having unranked or equal rank
             items shapes would be displayed after traces i.e.
             according to their order in data and layout.
-        legendranksrc
-            Sets the source reference on Chart Studio Cloud for
-            `legendrank`.
-        legendsrc
-            Sets the source reference on Chart Studio Cloud for
-            `legend`.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1475,9 +1143,6 @@ class Pie(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1491,9 +1156,6 @@ class Pie(_BaseTraceType):
             out from the center. This can be a constant to pull all
             slices apart from each other equally or an array to
             highlight one or more slices.
-        pullsrc
-            Sets the source reference on Chart Studio Cloud for
-            `pull`.
         rotation
             Instead of the first slice starting at 12 o'clock,
             rotate to some other angle.
@@ -1507,15 +1169,9 @@ class Pie(_BaseTraceType):
             pie slices are shown in the legend. Can be an array if
             `values` is set. In that case, each entry specifies
             appearance in the legend for one slice.
-        showlegendsrc
-            Sets the source reference on Chart Studio Cloud for
-            `showlegend`.
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
-        stream
-            :class:`plotly.graph_objects.pie.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -1525,15 +1181,12 @@ class Pie(_BaseTraceType):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         textposition
             Specifies the location of the `textinfo`.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -1562,9 +1215,6 @@ class Pie(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
@@ -1593,9 +1243,6 @@ class Pie(_BaseTraceType):
         values
             Sets the values of the sectors. If omitted, we count
             occurrences of each label.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1608,61 +1255,45 @@ class Pie(_BaseTraceType):
         arg=None,
         automargin=None,
         customdata=None,
-        customdatasrc=None,
         direction=None,
         dlabel=None,
         domain=None,
         hole=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextfont=None,
         insidetextorientation=None,
         label0=None,
         labels=None,
-        labelssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
         legendrank=None,
-        legendranksrc=None,
-        legendsrc=None,
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         outsidetextfont=None,
         pull=None,
-        pullsrc=None,
         rotation=None,
         scalegroup=None,
         showlegend=None,
-        showlegendsrc=None,
         sort=None,
-        stream=None,
         text=None,
         textfont=None,
         textinfo=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
         texttemplatefallback=None,
-        texttemplatesrc=None,
         title=None,
         uid=None,
         uirevision=None,
         values=None,
-        valuessrc=None,
         visible=None,
         **kwargs,
     ):
@@ -1686,9 +1317,6 @@ class Pie(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         direction
             Specifies the direction at which succeeding sectors
             follow one another.
@@ -1701,13 +1329,11 @@ class Pie(_BaseTraceType):
             Sets the fraction of the radius to cut out of the pie.
             Use this to make a donut chart.
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.pie.Hoverlabel` instance
             or dict with compatible properties
@@ -1752,25 +1378,16 @@ class Pie(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -1794,9 +1411,6 @@ class Pie(_BaseTraceType):
             occurrences if `values` is not provided. For other
             array attributes (including color) we use the first
             non-empty entry among all occurrences of the label.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         legend
             Sets the reference to a legend to show the pie slices
             in. Can be an array if `values` is set. In that case,
@@ -1824,12 +1438,6 @@ class Pie(_BaseTraceType):
             all unranked items. When having unranked or equal rank
             items shapes would be displayed after traces i.e.
             according to their order in data and layout.
-        legendranksrc
-            Sets the source reference on Chart Studio Cloud for
-            `legendrank`.
-        legendsrc
-            Sets the source reference on Chart Studio Cloud for
-            `legend`.
         legendwidth
             Sets the width (in px or fraction) of the legend for
             this trace.
@@ -1849,9 +1457,6 @@ class Pie(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1865,9 +1470,6 @@ class Pie(_BaseTraceType):
             out from the center. This can be a constant to pull all
             slices apart from each other equally or an array to
             highlight one or more slices.
-        pullsrc
-            Sets the source reference on Chart Studio Cloud for
-            `pull`.
         rotation
             Instead of the first slice starting at 12 o'clock,
             rotate to some other angle.
@@ -1881,15 +1483,9 @@ class Pie(_BaseTraceType):
             pie slices are shown in the legend. Can be an array if
             `values` is set. In that case, each entry specifies
             appearance in the legend for one slice.
-        showlegendsrc
-            Sets the source reference on Chart Studio Cloud for
-            `showlegend`.
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
-        stream
-            :class:`plotly.graph_objects.pie.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -1899,15 +1495,12 @@ class Pie(_BaseTraceType):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         textposition
             Specifies the location of the `textinfo`.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -1936,9 +1529,6 @@ class Pie(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
         title
             :class:`plotly.graph_objects.pie.Title` instance or
             dict with compatible properties
@@ -1967,9 +1557,6 @@ class Pie(_BaseTraceType):
         values
             Sets the values of the sectors. If omitted, we count
             occurrences of each label.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2002,61 +1589,45 @@ an instance of :class:`plotly.graph_objs.Pie`""")
 
         self._set_property("automargin", arg, automargin)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("direction", arg, direction)
         self._set_property("dlabel", arg, dlabel)
         self._set_property("domain", arg, domain)
         self._set_property("hole", arg, hole)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("insidetextfont", arg, insidetextfont)
         self._set_property("insidetextorientation", arg, insidetextorientation)
         self._set_property("label0", arg, label0)
         self._set_property("labels", arg, labels)
-        self._set_property("labelssrc", arg, labelssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendrank", arg, legendrank)
-        self._set_property("legendranksrc", arg, legendranksrc)
-        self._set_property("legendsrc", arg, legendsrc)
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("marker", arg, marker)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("outsidetextfont", arg, outsidetextfont)
         self._set_property("pull", arg, pull)
-        self._set_property("pullsrc", arg, pullsrc)
         self._set_property("rotation", arg, rotation)
         self._set_property("scalegroup", arg, scalegroup)
         self._set_property("showlegend", arg, showlegend)
-        self._set_property("showlegendsrc", arg, showlegendsrc)
         self._set_property("sort", arg, sort)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
         self._set_property("textfont", arg, textfont)
         self._set_property("textinfo", arg, textinfo)
         self._set_property("textposition", arg, textposition)
-        self._set_property("textpositionsrc", arg, textpositionsrc)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("texttemplate", arg, texttemplate)
         self._set_property("texttemplatefallback", arg, texttemplatefallback)
-        self._set_property("texttemplatesrc", arg, texttemplatesrc)
         self._set_property("title", arg, title)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("values", arg, values)
-        self._set_property("valuessrc", arg, valuessrc)
         self._set_property("visible", arg, visible)
 
         self._props["type"] = "pie"

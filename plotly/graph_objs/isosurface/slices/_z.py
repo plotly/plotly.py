@@ -8,7 +8,7 @@ import copy as _copy
 class Z(_BaseTraceHierarchyType):
     _parent_path_str = "isosurface.slices"
     _path_str = "isosurface.slices.z"
-    _valid_props = {"fill", "locations", "locationssrc", "show"}
+    _valid_props = {"fill", "locations", "show"}
 
     @property
     def fill(self):
@@ -52,25 +52,6 @@ class Z(_BaseTraceHierarchyType):
         self["locations"] = val
 
     @property
-    def locationssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `locations`.
-
-        The 'locationssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["locationssrc"]
-
-    @locationssrc.setter
-    def locationssrc(self, val):
-        self["locationssrc"] = val
-
-    @property
     def show(self):
         """
         Determines whether or not slice planes about the z dimension
@@ -102,23 +83,12 @@ class Z(_BaseTraceHierarchyType):
             Specifies the location(s) of slices on the axis. When
             not specified slices would be created for all points of
             the axis z except start and end.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         show
             Determines whether or not slice planes about the z
             dimension are drawn.
         """
 
-    def __init__(
-        self,
-        arg=None,
-        fill=None,
-        locations=None,
-        locationssrc=None,
-        show=None,
-        **kwargs,
-    ):
+    def __init__(self, arg=None, fill=None, locations=None, show=None, **kwargs):
         """
         Construct a new Z object
 
@@ -138,9 +108,6 @@ class Z(_BaseTraceHierarchyType):
             Specifies the location(s) of slices on the axis. When
             not specified slices would be created for all points of
             the axis z except start and end.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         show
             Determines whether or not slice planes about the z
             dimension are drawn.
@@ -171,7 +138,6 @@ an instance of :class:`plotly.graph_objs.isosurface.slices.Z`""")
 
         self._set_property("fill", arg, fill)
         self._set_property("locations", arg, locations)
-        self._set_property("locationssrc", arg, locationssrc)
         self._set_property("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

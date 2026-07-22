@@ -11,7 +11,6 @@ if TYPE_CHECKING:
     from ._lightposition import Lightposition
     from ._slices import Slices
     from ._spaceframe import Spaceframe
-    from ._stream import Stream
     from ._surface import Surface
     from . import caps
     from . import colorbar
@@ -34,7 +33,6 @@ else:
             "._lightposition.Lightposition",
             "._slices.Slices",
             "._spaceframe.Spaceframe",
-            "._stream.Stream",
             "._surface.Surface",
         ],
     )

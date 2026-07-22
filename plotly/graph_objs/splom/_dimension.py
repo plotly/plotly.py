@@ -8,15 +8,7 @@ import copy as _copy
 class Dimension(_BaseTraceHierarchyType):
     _parent_path_str = "splom"
     _path_str = "splom.dimension"
-    _valid_props = {
-        "axis",
-        "label",
-        "name",
-        "templateitemname",
-        "values",
-        "valuessrc",
-        "visible",
-    }
+    _valid_props = {"axis", "label", "name", "templateitemname", "values", "visible"}
 
     @property
     def axis(self):
@@ -126,24 +118,6 @@ class Dimension(_BaseTraceHierarchyType):
         self["values"] = val
 
     @property
-    def valuessrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `values`.
-
-        The 'valuessrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["valuessrc"]
-
-    @valuessrc.setter
-    def valuessrc(self, val):
-        self["valuessrc"] = val
-
-    @property
     def visible(self):
         """
         Determines whether or not this dimension is shown on the graph.
@@ -192,9 +166,6 @@ class Dimension(_BaseTraceHierarchyType):
             explicitly show it with `visible: true`.
         values
             Sets the dimension values to be plotted.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this dimension is shown on
             the graph. Note that even visible false dimension
@@ -210,7 +181,6 @@ class Dimension(_BaseTraceHierarchyType):
         name=None,
         templateitemname=None,
         values=None,
-        valuessrc=None,
         visible=None,
         **kwargs,
     ):
@@ -249,9 +219,6 @@ class Dimension(_BaseTraceHierarchyType):
             explicitly show it with `visible: true`.
         values
             Sets the dimension values to be plotted.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this dimension is shown on
             the graph. Note that even visible false dimension
@@ -287,7 +254,6 @@ an instance of :class:`plotly.graph_objs.splom.Dimension`""")
         self._set_property("name", arg, name)
         self._set_property("templateitemname", arg, templateitemname)
         self._set_property("values", arg, values)
-        self._set_property("valuessrc", arg, valuessrc)
         self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

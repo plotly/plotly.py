@@ -10,7 +10,6 @@ class Line(_BaseTraceHierarchyType):
     _path_str = "scatter.line"
     _valid_props = {
         "backoff",
-        "backoffsrc",
         "color",
         "dash",
         "shape",
@@ -40,24 +39,6 @@ class Line(_BaseTraceHierarchyType):
     @backoff.setter
     def backoff(self, val):
         self["backoff"] = val
-
-    @property
-    def backoffsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `backoff`.
-
-        The 'backoffsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["backoffsrc"]
-
-    @backoffsrc.setter
-    def backoffsrc(self, val):
-        self["backoffsrc"] = val
 
     @property
     def color(self):
@@ -194,9 +175,6 @@ class Line(_BaseTraceHierarchyType):
             avoid overlap with arrowhead markers. With "auto" the
             lines would trim before markers if `marker.angleref` is
             set to "previous".
-        backoffsrc
-            Sets the source reference on Chart Studio Cloud for
-            `backoff`.
         color
             Sets the line color.
         dash
@@ -225,7 +203,6 @@ class Line(_BaseTraceHierarchyType):
         self,
         arg=None,
         backoff=None,
-        backoffsrc=None,
         color=None,
         dash=None,
         shape=None,
@@ -248,9 +225,6 @@ class Line(_BaseTraceHierarchyType):
             avoid overlap with arrowhead markers. With "auto" the
             lines would trim before markers if `marker.angleref` is
             set to "previous".
-        backoffsrc
-            Sets the source reference on Chart Studio Cloud for
-            `backoff`.
         color
             Sets the line color.
         dash
@@ -299,7 +273,6 @@ an instance of :class:`plotly.graph_objs.scatter.Line`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("backoff", arg, backoff)
-        self._set_property("backoffsrc", arg, backoffsrc)
         self._set_property("color", arg, color)
         self._set_property("dash", arg, dash)
         self._set_property("shape", arg, shape)

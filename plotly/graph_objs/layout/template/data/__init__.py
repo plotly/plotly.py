@@ -9,12 +9,10 @@ if TYPE_CHECKING:
     from ._carpet import Carpet
     from ._choropleth import Choropleth
     from ._choroplethmap import Choroplethmap
-    from ._choroplethmapbox import Choroplethmapbox
     from ._cone import Cone
     from ._contour import Contour
     from ._contourcarpet import Contourcarpet
     from ._densitymap import Densitymap
-    from ._densitymapbox import Densitymapbox
     from ._funnel import Funnel
     from ._funnelarea import Funnelarea
     from ._heatmap import Heatmap
@@ -30,6 +28,7 @@ if TYPE_CHECKING:
     from ._parcats import Parcats
     from ._parcoords import Parcoords
     from ._pie import Pie
+    from ._quiver import Quiver
     from ._sankey import Sankey
     from ._scatter import Scatter
     from ._scatter3d import Scatter3d
@@ -37,7 +36,6 @@ if TYPE_CHECKING:
     from ._scattergeo import Scattergeo
     from ._scattergl import Scattergl
     from ._scattermap import Scattermap
-    from ._scattermapbox import Scattermapbox
     from ._scatterpolar import Scatterpolar
     from ._scatterpolargl import Scatterpolargl
     from ._scattersmith import Scattersmith
@@ -65,12 +63,10 @@ else:
             "._carpet.Carpet",
             "._choropleth.Choropleth",
             "._choroplethmap.Choroplethmap",
-            "._choroplethmapbox.Choroplethmapbox",
             "._cone.Cone",
             "._contour.Contour",
             "._contourcarpet.Contourcarpet",
             "._densitymap.Densitymap",
-            "._densitymapbox.Densitymapbox",
             "._funnel.Funnel",
             "._funnelarea.Funnelarea",
             "._heatmap.Heatmap",
@@ -86,6 +82,7 @@ else:
             "._parcats.Parcats",
             "._parcoords.Parcoords",
             "._pie.Pie",
+            "._quiver.Quiver",
             "._sankey.Sankey",
             "._scatter.Scatter",
             "._scatter3d.Scatter3d",
@@ -93,7 +90,6 @@ else:
             "._scattergeo.Scattergeo",
             "._scattergl.Scattergl",
             "._scattermap.Scattermap",
-            "._scattermapbox.Scattermapbox",
             "._scatterpolar.Scatterpolar",
             "._scatterpolargl.Scatterpolargl",
             "._scattersmith.Scattersmith",

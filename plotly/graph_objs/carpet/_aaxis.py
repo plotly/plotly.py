@@ -14,7 +14,6 @@ class Aaxis(_BaseTraceHierarchyType):
         "autorange",
         "autotypenumbers",
         "categoryarray",
-        "categoryarraysrc",
         "categoryorder",
         "cheatertype",
         "color",
@@ -62,9 +61,7 @@ class Aaxis(_BaseTraceHierarchyType):
         "tickprefix",
         "ticksuffix",
         "ticktext",
-        "ticktextsrc",
         "tickvals",
-        "tickvalssrc",
         "title",
         "type",
     }
@@ -169,25 +166,6 @@ class Aaxis(_BaseTraceHierarchyType):
     @categoryarray.setter
     def categoryarray(self, val):
         self["categoryarray"] = val
-
-    @property
-    def categoryarraysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `categoryarray`.
-
-        The 'categoryarraysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["categoryarraysrc"]
-
-    @categoryarraysrc.setter
-    def categoryarraysrc(self, val):
-        self["categoryarraysrc"] = val
 
     @property
     def categoryorder(self):
@@ -1161,24 +1139,6 @@ class Aaxis(_BaseTraceHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
@@ -1196,24 +1156,6 @@ class Aaxis(_BaseTraceHierarchyType):
     @tickvals.setter
     def tickvals(self, val):
         self["tickvals"] = val
-
-    @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
 
     @property
     def title(self):
@@ -1277,9 +1219,6 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1457,16 +1396,10 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         title
             :class:`plotly.graph_objects.carpet.aaxis.Title`
             instance or dict with compatible properties
@@ -1484,7 +1417,6 @@ class Aaxis(_BaseTraceHierarchyType):
         autorange=None,
         autotypenumbers=None,
         categoryarray=None,
-        categoryarraysrc=None,
         categoryorder=None,
         cheatertype=None,
         color=None,
@@ -1532,9 +1464,7 @@ class Aaxis(_BaseTraceHierarchyType):
         tickprefix=None,
         ticksuffix=None,
         ticktext=None,
-        ticktextsrc=None,
         tickvals=None,
-        tickvalssrc=None,
         title=None,
         type=None,
         **kwargs,
@@ -1566,9 +1496,6 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1746,16 +1673,10 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         title
             :class:`plotly.graph_objects.carpet.aaxis.Title`
             instance or dict with compatible properties
@@ -1793,7 +1714,6 @@ an instance of :class:`plotly.graph_objs.carpet.Aaxis`""")
         self._set_property("autorange", arg, autorange)
         self._set_property("autotypenumbers", arg, autotypenumbers)
         self._set_property("categoryarray", arg, categoryarray)
-        self._set_property("categoryarraysrc", arg, categoryarraysrc)
         self._set_property("categoryorder", arg, categoryorder)
         self._set_property("cheatertype", arg, cheatertype)
         self._set_property("color", arg, color)
@@ -1841,9 +1761,7 @@ an instance of :class:`plotly.graph_objs.carpet.Aaxis`""")
         self._set_property("tickprefix", arg, tickprefix)
         self._set_property("ticksuffix", arg, ticksuffix)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("title", arg, title)
         self._set_property("type", arg, type)
         self._process_kwargs(**dict(arg, **kwargs))

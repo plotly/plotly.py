@@ -11,7 +11,6 @@ class Scattergl(_BaseTraceType):
     _valid_props = {
         "connectgaps",
         "customdata",
-        "customdatasrc",
         "dx",
         "dy",
         "error_x",
@@ -19,15 +18,11 @@ class Scattergl(_BaseTraceType):
         "fill",
         "fillcolor",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -36,22 +31,17 @@ class Scattergl(_BaseTraceType):
         "line",
         "marker",
         "meta",
-        "metasrc",
         "mode",
         "name",
         "opacity",
         "selected",
         "selectedpoints",
         "showlegend",
-        "stream",
         "text",
         "textfont",
         "textposition",
-        "textpositionsrc",
-        "textsrc",
         "texttemplate",
         "texttemplatefallback",
-        "texttemplatesrc",
         "type",
         "uid",
         "uirevision",
@@ -65,7 +55,6 @@ class Scattergl(_BaseTraceType):
         "xperiod",
         "xperiod0",
         "xperiodalignment",
-        "xsrc",
         "y",
         "y0",
         "yaxis",
@@ -74,7 +63,6 @@ class Scattergl(_BaseTraceType):
         "yperiod",
         "yperiod0",
         "yperiodalignment",
-        "ysrc",
     }
 
     @property
@@ -116,25 +104,6 @@ class Scattergl(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def dx(self):
@@ -275,7 +244,7 @@ class Scattergl(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -295,25 +264,6 @@ class Scattergl(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -401,25 +351,6 @@ class Scattergl(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Sets hover text elements associated with each (x,y) pair. If a
@@ -444,25 +375,6 @@ class Scattergl(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -481,24 +393,6 @@ class Scattergl(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -672,24 +566,6 @@ class Scattergl(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def mode(self):
         """
         Determines the drawing mode for this scatter trace.
@@ -809,25 +685,6 @@ class Scattergl(_BaseTraceType):
         self["showlegend"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.scattergl.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.scattergl.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets text elements associated with each (x,y) pair. If a single
@@ -897,43 +754,6 @@ class Scattergl(_BaseTraceType):
         self["textposition"] = val
 
     @property
-    def textpositionsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `textposition`.
-
-        The 'textpositionsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textpositionsrc"]
-
-    @textpositionsrc.setter
-    def textpositionsrc(self, val):
-        self["textpositionsrc"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
-
-    @property
     def texttemplate(self):
         """
         Template string used for rendering the information text that
@@ -987,25 +807,6 @@ class Scattergl(_BaseTraceType):
     @texttemplatefallback.setter
     def texttemplatefallback(self, val):
         self["texttemplatefallback"] = val
-
-    @property
-    def texttemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `texttemplate`.
-
-        The 'texttemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["texttemplatesrc"]
-
-    @texttemplatesrc.setter
-    def texttemplatesrc(self, val):
-        self["texttemplatesrc"] = val
 
     @property
     def uid(self):
@@ -1183,7 +984,7 @@ class Scattergl(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1271,24 +1072,6 @@ class Scattergl(_BaseTraceType):
         self["xperiodalignment"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         Sets the y coordinates.
@@ -1373,7 +1156,7 @@ class Scattergl(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1461,24 +1244,6 @@ class Scattergl(_BaseTraceType):
         self["yperiodalignment"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def type(self):
         return self._props["type"]
 
@@ -1493,9 +1258,6 @@ class Scattergl(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -1534,13 +1296,10 @@ class Scattergl(_BaseTraceType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattergl.Hoverlabel`
             instance or dict with compatible properties
@@ -1583,9 +1342,6 @@ class Scattergl(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -1593,16 +1349,10 @@ class Scattergl(_BaseTraceType):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1649,9 +1399,6 @@ class Scattergl(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace.
         name
@@ -1672,9 +1419,6 @@ class Scattergl(_BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scattergl.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -1688,12 +1432,6 @@ class Scattergl(_BaseTraceType):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -1720,9 +1458,6 @@ class Scattergl(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1767,7 +1502,7 @@ class Scattergl(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1795,9 +1530,6 @@ class Scattergl(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -1812,7 +1544,7 @@ class Scattergl(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1840,9 +1572,6 @@ class Scattergl(_BaseTraceType):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         """
 
     def __init__(
@@ -1850,7 +1579,6 @@ class Scattergl(_BaseTraceType):
         arg=None,
         connectgaps=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         error_x=None,
@@ -1858,15 +1586,11 @@ class Scattergl(_BaseTraceType):
         fill=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -1875,22 +1599,17 @@ class Scattergl(_BaseTraceType):
         line=None,
         marker=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
         texttemplatefallback=None,
-        texttemplatesrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -1903,7 +1622,6 @@ class Scattergl(_BaseTraceType):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -1912,7 +1630,6 @@ class Scattergl(_BaseTraceType):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         **kwargs,
     ):
         """
@@ -1936,9 +1653,6 @@ class Scattergl(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -1977,13 +1691,10 @@ class Scattergl(_BaseTraceType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.scattergl.Hoverlabel`
             instance or dict with compatible properties
@@ -2026,9 +1737,6 @@ class Scattergl(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -2036,16 +1744,10 @@ class Scattergl(_BaseTraceType):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -2092,9 +1794,6 @@ class Scattergl(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines the drawing mode for this scatter trace.
         name
@@ -2115,9 +1814,6 @@ class Scattergl(_BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.scattergl.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -2131,12 +1827,6 @@ class Scattergl(_BaseTraceType):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -2163,9 +1853,6 @@ class Scattergl(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2210,7 +1897,7 @@ class Scattergl(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2238,9 +1925,6 @@ class Scattergl(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2255,7 +1939,7 @@ class Scattergl(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2283,9 +1967,6 @@ class Scattergl(_BaseTraceType):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
 
         Returns
         -------
@@ -2313,7 +1994,6 @@ an instance of :class:`plotly.graph_objs.Scattergl`""")
 
         self._set_property("connectgaps", arg, connectgaps)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("dx", arg, dx)
         self._set_property("dy", arg, dy)
         self._set_property("error_x", arg, error_x)
@@ -2321,15 +2001,11 @@ an instance of :class:`plotly.graph_objs.Scattergl`""")
         self._set_property("fill", arg, fill)
         self._set_property("fillcolor", arg, fillcolor)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -2338,22 +2014,17 @@ an instance of :class:`plotly.graph_objs.Scattergl`""")
         self._set_property("line", arg, line)
         self._set_property("marker", arg, marker)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("mode", arg, mode)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("selected", arg, selected)
         self._set_property("selectedpoints", arg, selectedpoints)
         self._set_property("showlegend", arg, showlegend)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
         self._set_property("textfont", arg, textfont)
         self._set_property("textposition", arg, textposition)
-        self._set_property("textpositionsrc", arg, textpositionsrc)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("texttemplate", arg, texttemplate)
         self._set_property("texttemplatefallback", arg, texttemplatefallback)
-        self._set_property("texttemplatesrc", arg, texttemplatesrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("unselected", arg, unselected)
@@ -2366,7 +2037,6 @@ an instance of :class:`plotly.graph_objs.Scattergl`""")
         self._set_property("xperiod", arg, xperiod)
         self._set_property("xperiod0", arg, xperiod0)
         self._set_property("xperiodalignment", arg, xperiodalignment)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("y0", arg, y0)
         self._set_property("yaxis", arg, yaxis)
@@ -2375,7 +2045,6 @@ an instance of :class:`plotly.graph_objs.Scattergl`""")
         self._set_property("yperiod", arg, yperiod)
         self._set_property("yperiod0", arg, yperiod0)
         self._set_property("yperiodalignment", arg, yperiodalignment)
-        self._set_property("ysrc", arg, ysrc)
 
         self._props["type"] = "scattergl"
         arg.pop("type", None)

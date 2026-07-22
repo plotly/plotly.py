@@ -8,7 +8,16 @@ import copy as _copy
 class Projection(_BaseLayoutHierarchyType):
     _parent_path_str = "layout.geo"
     _path_str = "layout.geo.projection"
-    _valid_props = {"distance", "parallels", "rotation", "scale", "tilt", "type"}
+    _valid_props = {
+        "distance",
+        "maxscale",
+        "minscale",
+        "parallels",
+        "rotation",
+        "scale",
+        "tilt",
+        "type",
+    }
 
     @property
     def distance(self):
@@ -29,6 +38,50 @@ class Projection(_BaseLayoutHierarchyType):
     @distance.setter
     def distance(self, val):
         self["distance"] = val
+
+    @property
+    def maxscale(self):
+        """
+        Sets the maximum zoom level of the map view, relative to
+        `projection.scale`. A `maxscale` of 2 (200%) prevents the user
+        from zooming in beyond twice the base zoom level. Must be
+        greater than or equal to *0*; has no upper bound. Defaults to
+        "null" for no upper bound on zoom.
+
+        The 'maxscale' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["maxscale"]
+
+    @maxscale.setter
+    def maxscale(self, val):
+        self["maxscale"] = val
+
+    @property
+    def minscale(self):
+        """
+        Sets the minimum zoom level of the map view, relative to
+        `projection.scale`. A `minscale` of 0.5 (50%) prevents the user
+        from zooming out beyond half the base zoom level. Must be
+        greater than or equal to *0*; has no upper bound. The default
+        of 0 imposes no lower bound on zoom.
+
+        The 'minscale' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minscale"]
+
+    @minscale.setter
+    def minscale(self, val):
+        self["minscale"] = val
 
     @property
     def parallels(self):
@@ -160,6 +213,20 @@ class Projection(_BaseLayoutHierarchyType):
             For satellite projection type only. Sets the distance
             from the center of the sphere to the point of view as a
             proportion of the sphere’s radius.
+        maxscale
+            Sets the maximum zoom level of the map view, relative
+            to `projection.scale`. A `maxscale` of 2 (200%)
+            prevents the user from zooming in beyond twice the base
+            zoom level. Must be greater than or equal to *0*; has
+            no upper bound. Defaults to "null" for no upper bound
+            on zoom.
+        minscale
+            Sets the minimum zoom level of the map view, relative
+            to `projection.scale`. A `minscale` of 0.5 (50%)
+            prevents the user from zooming out beyond half the base
+            zoom level. Must be greater than or equal to *0*; has
+            no upper bound. The default of 0 imposes no lower bound
+            on zoom.
         parallels
             For conic projection types only. Sets the parallels
             (tangent, secant) where the cone intersects the sphere.
@@ -181,6 +248,8 @@ class Projection(_BaseLayoutHierarchyType):
         self,
         arg=None,
         distance=None,
+        maxscale=None,
+        minscale=None,
         parallels=None,
         rotation=None,
         scale=None,
@@ -201,6 +270,20 @@ class Projection(_BaseLayoutHierarchyType):
             For satellite projection type only. Sets the distance
             from the center of the sphere to the point of view as a
             proportion of the sphere’s radius.
+        maxscale
+            Sets the maximum zoom level of the map view, relative
+            to `projection.scale`. A `maxscale` of 2 (200%)
+            prevents the user from zooming in beyond twice the base
+            zoom level. Must be greater than or equal to *0*; has
+            no upper bound. Defaults to "null" for no upper bound
+            on zoom.
+        minscale
+            Sets the minimum zoom level of the map view, relative
+            to `projection.scale`. A `minscale` of 0.5 (50%)
+            prevents the user from zooming out beyond half the base
+            zoom level. Must be greater than or equal to *0*; has
+            no upper bound. The default of 0 imposes no lower bound
+            on zoom.
         parallels
             For conic projection types only. Sets the parallels
             (tangent, secant) where the cone intersects the sphere.
@@ -242,6 +325,8 @@ an instance of :class:`plotly.graph_objs.layout.geo.Projection`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("distance", arg, distance)
+        self._set_property("maxscale", arg, maxscale)
+        self._set_property("minscale", arg, minscale)
         self._set_property("parallels", arg, parallels)
         self._set_property("rotation", arg, rotation)
         self._set_property("scale", arg, scale)

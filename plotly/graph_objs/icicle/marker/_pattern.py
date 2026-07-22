@@ -10,19 +10,13 @@ class Pattern(_BaseTraceHierarchyType):
     _path_str = "icicle.marker.pattern"
     _valid_props = {
         "bgcolor",
-        "bgcolorsrc",
         "fgcolor",
-        "fgcolorsrc",
         "fgopacity",
         "fillmode",
         "path",
-        "pathsrc",
         "shape",
-        "shapesrc",
         "size",
-        "sizesrc",
         "solidity",
-        "soliditysrc",
     }
 
     @property
@@ -52,24 +46,6 @@ class Pattern(_BaseTraceHierarchyType):
         self["bgcolor"] = val
 
     @property
-    def bgcolorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `bgcolor`.
-
-        The 'bgcolorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["bgcolorsrc"]
-
-    @bgcolorsrc.setter
-    def bgcolorsrc(self, val):
-        self["bgcolorsrc"] = val
-
-    @property
     def fgcolor(self):
         """
         When there is no colorscale sets the color of foreground
@@ -94,24 +70,6 @@ class Pattern(_BaseTraceHierarchyType):
     @fgcolor.setter
     def fgcolor(self, val):
         self["fgcolor"] = val
-
-    @property
-    def fgcolorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `fgcolor`.
-
-        The 'fgcolorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["fgcolorsrc"]
-
-    @fgcolorsrc.setter
-    def fgcolorsrc(self, val):
-        self["fgcolorsrc"] = val
 
     @property
     def fgopacity(self):
@@ -175,24 +133,6 @@ class Pattern(_BaseTraceHierarchyType):
         self["path"] = val
 
     @property
-    def pathsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `path`.
-
-        The 'pathsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["pathsrc"]
-
-    @pathsrc.setter
-    def pathsrc(self, val):
-        self["pathsrc"] = val
-
-    @property
     def shape(self):
         """
         Sets the shape of the pattern fill. By default, no pattern is
@@ -214,24 +154,6 @@ class Pattern(_BaseTraceHierarchyType):
         self["shape"] = val
 
     @property
-    def shapesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `shape`.
-
-        The 'shapesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["shapesrc"]
-
-    @shapesrc.setter
-    def shapesrc(self, val):
-        self["shapesrc"] = val
-
-    @property
     def size(self):
         """
         Sets the size of unit squares of the pattern fill in pixels,
@@ -250,24 +172,6 @@ class Pattern(_BaseTraceHierarchyType):
     @size.setter
     def size(self, val):
         self["size"] = val
-
-    @property
-    def sizesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `size`.
-
-        The 'sizesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["sizesrc"]
-
-    @sizesrc.setter
-    def sizesrc(self, val):
-        self["sizesrc"] = val
 
     @property
     def solidity(self):
@@ -292,24 +196,6 @@ class Pattern(_BaseTraceHierarchyType):
         self["solidity"] = val
 
     @property
-    def soliditysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `solidity`.
-
-        The 'soliditysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["soliditysrc"]
-
-    @soliditysrc.setter
-    def soliditysrc(self, val):
-        self["soliditysrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         bgcolor
@@ -317,18 +203,12 @@ class Pattern(_BaseTraceHierarchyType):
             background pattern fill. Defaults to a `marker.color`
             background when `fillmode` is "overlay". Otherwise,
             defaults to a transparent background.
-        bgcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `bgcolor`.
         fgcolor
             When there is no colorscale sets the color of
             foreground pattern fill. Defaults to a `marker.color`
             background when `fillmode` is "replace". Otherwise,
             defaults to dark grey or white to increase contrast
             with the `bgcolor`.
-        fgcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `fgcolor`.
         fgopacity
             Sets the opacity of the foreground pattern fill.
             Defaults to a 0.5 when `fillmode` is "overlay".
@@ -341,50 +221,32 @@ class Pattern(_BaseTraceHierarchyType):
             `shape` or `solidity`, provide an SVG path string for
             the regions of the square from (0,0) to (`size`,`size`)
             to color.
-        pathsrc
-            Sets the source reference on Chart Studio Cloud for
-            `path`.
         shape
             Sets the shape of the pattern fill. By default, no
             pattern is used for filling the area.
-        shapesrc
-            Sets the source reference on Chart Studio Cloud for
-            `shape`.
         size
             Sets the size of unit squares of the pattern fill in
             pixels, which corresponds to the interval of repetition
             of the pattern.
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         solidity
             Sets the solidity of the pattern fill. Solidity is
             roughly the fraction of the area filled by the pattern.
             Solidity of 0 shows only the background color without
             pattern and solidty of 1 shows only the foreground
             color without pattern.
-        soliditysrc
-            Sets the source reference on Chart Studio Cloud for
-            `solidity`.
         """
 
     def __init__(
         self,
         arg=None,
         bgcolor=None,
-        bgcolorsrc=None,
         fgcolor=None,
-        fgcolorsrc=None,
         fgopacity=None,
         fillmode=None,
         path=None,
-        pathsrc=None,
         shape=None,
-        shapesrc=None,
         size=None,
-        sizesrc=None,
         solidity=None,
-        soliditysrc=None,
         **kwargs,
     ):
         """
@@ -403,18 +265,12 @@ class Pattern(_BaseTraceHierarchyType):
             background pattern fill. Defaults to a `marker.color`
             background when `fillmode` is "overlay". Otherwise,
             defaults to a transparent background.
-        bgcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `bgcolor`.
         fgcolor
             When there is no colorscale sets the color of
             foreground pattern fill. Defaults to a `marker.color`
             background when `fillmode` is "replace". Otherwise,
             defaults to dark grey or white to increase contrast
             with the `bgcolor`.
-        fgcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `fgcolor`.
         fgopacity
             Sets the opacity of the foreground pattern fill.
             Defaults to a 0.5 when `fillmode` is "overlay".
@@ -427,31 +283,19 @@ class Pattern(_BaseTraceHierarchyType):
             `shape` or `solidity`, provide an SVG path string for
             the regions of the square from (0,0) to (`size`,`size`)
             to color.
-        pathsrc
-            Sets the source reference on Chart Studio Cloud for
-            `path`.
         shape
             Sets the shape of the pattern fill. By default, no
             pattern is used for filling the area.
-        shapesrc
-            Sets the source reference on Chart Studio Cloud for
-            `shape`.
         size
             Sets the size of unit squares of the pattern fill in
             pixels, which corresponds to the interval of repetition
             of the pattern.
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         solidity
             Sets the solidity of the pattern fill. Solidity is
             roughly the fraction of the area filled by the pattern.
             Solidity of 0 shows only the background color without
             pattern and solidty of 1 shows only the foreground
             color without pattern.
-        soliditysrc
-            Sets the source reference on Chart Studio Cloud for
-            `solidity`.
 
         Returns
         -------
@@ -478,18 +322,12 @@ an instance of :class:`plotly.graph_objs.icicle.marker.Pattern`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("bgcolor", arg, bgcolor)
-        self._set_property("bgcolorsrc", arg, bgcolorsrc)
         self._set_property("fgcolor", arg, fgcolor)
-        self._set_property("fgcolorsrc", arg, fgcolorsrc)
         self._set_property("fgopacity", arg, fgopacity)
         self._set_property("fillmode", arg, fillmode)
         self._set_property("path", arg, path)
-        self._set_property("pathsrc", arg, pathsrc)
         self._set_property("shape", arg, shape)
-        self._set_property("shapesrc", arg, shapesrc)
         self._set_property("size", arg, size)
-        self._set_property("sizesrc", arg, sizesrc)
         self._set_property("solidity", arg, solidity)
-        self._set_property("soliditysrc", arg, soliditysrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

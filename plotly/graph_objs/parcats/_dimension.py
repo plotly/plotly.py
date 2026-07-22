@@ -10,14 +10,11 @@ class Dimension(_BaseTraceHierarchyType):
     _path_str = "parcats.dimension"
     _valid_props = {
         "categoryarray",
-        "categoryarraysrc",
         "categoryorder",
         "displayindex",
         "label",
         "ticktext",
-        "ticktextsrc",
         "values",
-        "valuessrc",
         "visible",
     }
 
@@ -40,25 +37,6 @@ class Dimension(_BaseTraceHierarchyType):
     @categoryarray.setter
     def categoryarray(self, val):
         self["categoryarray"] = val
-
-    @property
-    def categoryarraysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `categoryarray`.
-
-        The 'categoryarraysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["categoryarraysrc"]
-
-    @categoryarraysrc.setter
-    def categoryarraysrc(self, val):
-        self["categoryarraysrc"] = val
 
     @property
     def categoryorder(self):
@@ -150,24 +128,6 @@ class Dimension(_BaseTraceHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def values(self):
         """
         Dimension values. `values[n]` represents the category value of
@@ -187,24 +147,6 @@ class Dimension(_BaseTraceHierarchyType):
     @values.setter
     def values(self, val):
         self["values"] = val
-
-    @property
-    def valuessrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `values`.
-
-        The 'valuessrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["valuessrc"]
-
-    @valuessrc.setter
-    def valuessrc(self, val):
-        self["valuessrc"] = val
 
     @property
     def visible(self):
@@ -232,9 +174,6 @@ class Dimension(_BaseTraceHierarchyType):
             Sets the order in which categories in this dimension
             appear. Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the categories in the
             dimension. By default, plotly uses "trace", which
@@ -258,17 +197,11 @@ class Dimension(_BaseTraceHierarchyType):
             dimension. Only has an effect if `categoryorder` is set
             to "array". Should be an array the same length as
             `categoryarray` Used with `categoryorder`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         values
             Dimension values. `values[n]` represents the category
             value of the `n`th point in the dataset, therefore the
             `values` vector for all dimensions must be the same
             (longer vectors will be truncated).
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -278,14 +211,11 @@ class Dimension(_BaseTraceHierarchyType):
         self,
         arg=None,
         categoryarray=None,
-        categoryarraysrc=None,
         categoryorder=None,
         displayindex=None,
         label=None,
         ticktext=None,
-        ticktextsrc=None,
         values=None,
-        valuessrc=None,
         visible=None,
         **kwargs,
     ):
@@ -304,9 +234,6 @@ class Dimension(_BaseTraceHierarchyType):
             Sets the order in which categories in this dimension
             appear. Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the categories in the
             dimension. By default, plotly uses "trace", which
@@ -330,17 +257,11 @@ class Dimension(_BaseTraceHierarchyType):
             dimension. Only has an effect if `categoryorder` is set
             to "array". Should be an array the same length as
             `categoryarray` Used with `categoryorder`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         values
             Dimension values. `values[n]` represents the category
             value of the `n`th point in the dataset, therefore the
             `values` vector for all dimensions must be the same
             (longer vectors will be truncated).
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -370,14 +291,11 @@ an instance of :class:`plotly.graph_objs.parcats.Dimension`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("categoryarray", arg, categoryarray)
-        self._set_property("categoryarraysrc", arg, categoryarraysrc)
         self._set_property("categoryorder", arg, categoryorder)
         self._set_property("displayindex", arg, displayindex)
         self._set_property("label", arg, label)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("values", arg, values)
-        self._set_property("valuessrc", arg, valuessrc)
         self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

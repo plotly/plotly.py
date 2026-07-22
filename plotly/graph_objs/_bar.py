@@ -11,25 +11,19 @@ class Bar(_BaseTraceType):
     _valid_props = {
         "alignmentgroup",
         "base",
-        "basesrc",
         "cliponaxis",
         "constraintext",
         "customdata",
-        "customdatasrc",
         "dx",
         "dy",
         "error_x",
         "error_y",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "insidetextanchor",
         "insidetextfont",
         "legend",
@@ -39,34 +33,27 @@ class Bar(_BaseTraceType):
         "legendwidth",
         "marker",
         "meta",
-        "metasrc",
         "name",
         "offset",
         "offsetgroup",
-        "offsetsrc",
         "opacity",
         "orientation",
         "outsidetextfont",
         "selected",
         "selectedpoints",
         "showlegend",
-        "stream",
         "text",
         "textangle",
         "textfont",
         "textposition",
-        "textpositionsrc",
-        "textsrc",
         "texttemplate",
         "texttemplatefallback",
-        "texttemplatesrc",
         "type",
         "uid",
         "uirevision",
         "unselected",
         "visible",
         "width",
-        "widthsrc",
         "x",
         "x0",
         "xaxis",
@@ -75,7 +62,6 @@ class Bar(_BaseTraceType):
         "xperiod",
         "xperiod0",
         "xperiodalignment",
-        "xsrc",
         "y",
         "y0",
         "yaxis",
@@ -84,7 +70,6 @@ class Bar(_BaseTraceType):
         "yperiod",
         "yperiod0",
         "yperiodalignment",
-        "ysrc",
         "zorder",
     }
 
@@ -127,24 +112,6 @@ class Bar(_BaseTraceType):
     @base.setter
     def base(self, val):
         self["base"] = val
-
-    @property
-    def basesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `base`.
-
-        The 'basesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["basesrc"]
-
-    @basesrc.setter
-    def basesrc(self, val):
-        self["basesrc"] = val
 
     @property
     def cliponaxis(self):
@@ -207,25 +174,6 @@ class Bar(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def dx(self):
@@ -304,7 +252,7 @@ class Bar(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -324,25 +272,6 @@ class Bar(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -431,25 +360,6 @@ class Bar(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Sets hover text elements associated with each (x,y) pair. If a
@@ -474,25 +384,6 @@ class Bar(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -511,24 +402,6 @@ class Bar(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def insidetextanchor(self):
@@ -724,24 +597,6 @@ class Bar(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -802,24 +657,6 @@ class Bar(_BaseTraceType):
     @offsetgroup.setter
     def offsetgroup(self, val):
         self["offsetgroup"] = val
-
-    @property
-    def offsetsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `offset`.
-
-        The 'offsetsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["offsetsrc"]
-
-    @offsetsrc.setter
-    def offsetsrc(self, val):
-        self["offsetsrc"] = val
 
     @property
     def opacity(self):
@@ -941,25 +778,6 @@ class Bar(_BaseTraceType):
         self["showlegend"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.bar.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.bar.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets text elements associated with each (x,y) pair. If a single
@@ -1056,43 +874,6 @@ class Bar(_BaseTraceType):
         self["textposition"] = val
 
     @property
-    def textpositionsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `textposition`.
-
-        The 'textpositionsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textpositionsrc"]
-
-    @textpositionsrc.setter
-    def textpositionsrc(self, val):
-        self["textpositionsrc"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
-
-    @property
     def texttemplate(self):
         """
         Template string used for rendering the information text that
@@ -1147,25 +928,6 @@ class Bar(_BaseTraceType):
     @texttemplatefallback.setter
     def texttemplatefallback(self, val):
         self["texttemplatefallback"] = val
-
-    @property
-    def texttemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `texttemplate`.
-
-        The 'texttemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["texttemplatesrc"]
-
-    @texttemplatesrc.setter
-    def texttemplatesrc(self, val):
-        self["texttemplatesrc"] = val
 
     @property
     def uid(self):
@@ -1278,24 +1040,6 @@ class Bar(_BaseTraceType):
         self["width"] = val
 
     @property
-    def widthsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `width`.
-
-        The 'widthsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["widthsrc"]
-
-    @widthsrc.setter
-    def widthsrc(self, val):
-        self["widthsrc"] = val
-
-    @property
     def x(self):
         """
         Sets the x coordinates.
@@ -1380,7 +1124,7 @@ class Bar(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1468,24 +1212,6 @@ class Bar(_BaseTraceType):
         self["xperiodalignment"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         Sets the y coordinates.
@@ -1570,7 +1296,7 @@ class Bar(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1658,24 +1384,6 @@ class Bar(_BaseTraceType):
         self["yperiodalignment"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def zorder(self):
         """
         Sets the layer on which this trace is displayed, relative to
@@ -1712,9 +1420,6 @@ class Bar(_BaseTraceType):
             units). In "stack" or "relative" barmode, traces that
             set "base" will be excluded and drawn in "overlay" mode
             instead.
-        basesrc
-            Sets the source reference on Chart Studio Cloud for
-            `base`.
         cliponaxis
             Determines whether the text nodes are clipped about the
             subplot axes. To show the text nodes above axis lines
@@ -1728,9 +1433,6 @@ class Bar(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -1742,13 +1444,10 @@ class Bar(_BaseTraceType):
             :class:`plotly.graph_objects.bar.ErrorY` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.bar.Hoverlabel` instance
             or dict with compatible properties
@@ -1792,9 +1491,6 @@ class Bar(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -1802,16 +1498,10 @@ class Bar(_BaseTraceType):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -1860,9 +1550,6 @@ class Bar(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1875,9 +1562,6 @@ class Bar(_BaseTraceType):
             Set several traces linked to the same position axis or
             matching axes to the same offsetgroup where bars of the
             same position coordinate will line up.
-        offsetsrc
-            Sets the source reference on Chart Studio Cloud for
-            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -1899,9 +1583,6 @@ class Bar(_BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.bar.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -1928,12 +1609,6 @@ class Bar(_BaseTraceType):
             inside the bar, but if the bar is too small and no bar
             is stacked on this one the text is moved outside. If
             "none", no text appears.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -1961,9 +1636,6 @@ class Bar(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1996,9 +1668,6 @@ class Bar(_BaseTraceType):
             visible).
         width
             Sets the bar width (in position axis units).
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
         x
             Sets the x coordinates.
         x0
@@ -2013,7 +1682,7 @@ class Bar(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2041,9 +1710,6 @@ class Bar(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2058,7 +1724,7 @@ class Bar(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2086,9 +1752,6 @@ class Bar(_BaseTraceType):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -2101,25 +1764,19 @@ class Bar(_BaseTraceType):
         arg=None,
         alignmentgroup=None,
         base=None,
-        basesrc=None,
         cliponaxis=None,
         constraintext=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         error_x=None,
         error_y=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
         legend=None,
@@ -2129,33 +1786,26 @@ class Bar(_BaseTraceType):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         offset=None,
         offsetgroup=None,
-        offsetsrc=None,
         opacity=None,
         orientation=None,
         outsidetextfont=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textangle=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
-        textsrc=None,
         texttemplate=None,
         texttemplatefallback=None,
-        texttemplatesrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
         visible=None,
         width=None,
-        widthsrc=None,
         x=None,
         x0=None,
         xaxis=None,
@@ -2164,7 +1814,6 @@ class Bar(_BaseTraceType):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
@@ -2173,7 +1822,6 @@ class Bar(_BaseTraceType):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         zorder=None,
         **kwargs,
     ):
@@ -2200,9 +1848,6 @@ class Bar(_BaseTraceType):
             units). In "stack" or "relative" barmode, traces that
             set "base" will be excluded and drawn in "overlay" mode
             instead.
-        basesrc
-            Sets the source reference on Chart Studio Cloud for
-            `base`.
         cliponaxis
             Determines whether the text nodes are clipped about the
             subplot axes. To show the text nodes above axis lines
@@ -2216,9 +1861,6 @@ class Bar(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -2230,13 +1872,10 @@ class Bar(_BaseTraceType):
             :class:`plotly.graph_objects.bar.ErrorY` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.bar.Hoverlabel` instance
             or dict with compatible properties
@@ -2280,9 +1919,6 @@ class Bar(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -2290,16 +1926,10 @@ class Bar(_BaseTraceType):
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
             a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -2348,9 +1978,6 @@ class Bar(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2363,9 +1990,6 @@ class Bar(_BaseTraceType):
             Set several traces linked to the same position axis or
             matching axes to the same offsetgroup where bars of the
             same position coordinate will line up.
-        offsetsrc
-            Sets the source reference on Chart Studio Cloud for
-            `offset`.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -2387,9 +2011,6 @@ class Bar(_BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.bar.Stream` instance or
-            dict with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -2416,12 +2037,6 @@ class Bar(_BaseTraceType):
             inside the bar, but if the bar is too small and no bar
             is stacked on this one the text is moved outside. If
             "none", no text appears.
-        textpositionsrc
-            Sets the source reference on Chart Studio Cloud for
-            `textposition`.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -2449,9 +2064,6 @@ class Bar(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2484,9 +2096,6 @@ class Bar(_BaseTraceType):
             visible).
         width
             Sets the bar width (in position axis units).
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
         x
             Sets the x coordinates.
         x0
@@ -2501,7 +2110,7 @@ class Bar(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2529,9 +2138,6 @@ class Bar(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates.
         y0
@@ -2546,7 +2152,7 @@ class Bar(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2574,9 +2180,6 @@ class Bar(_BaseTraceType):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -2609,25 +2212,19 @@ an instance of :class:`plotly.graph_objs.Bar`""")
 
         self._set_property("alignmentgroup", arg, alignmentgroup)
         self._set_property("base", arg, base)
-        self._set_property("basesrc", arg, basesrc)
         self._set_property("cliponaxis", arg, cliponaxis)
         self._set_property("constraintext", arg, constraintext)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("dx", arg, dx)
         self._set_property("dy", arg, dy)
         self._set_property("error_x", arg, error_x)
         self._set_property("error_y", arg, error_y)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("insidetextanchor", arg, insidetextanchor)
         self._set_property("insidetextfont", arg, insidetextfont)
         self._set_property("legend", arg, legend)
@@ -2637,33 +2234,26 @@ an instance of :class:`plotly.graph_objs.Bar`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("marker", arg, marker)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("offset", arg, offset)
         self._set_property("offsetgroup", arg, offsetgroup)
-        self._set_property("offsetsrc", arg, offsetsrc)
         self._set_property("opacity", arg, opacity)
         self._set_property("orientation", arg, orientation)
         self._set_property("outsidetextfont", arg, outsidetextfont)
         self._set_property("selected", arg, selected)
         self._set_property("selectedpoints", arg, selectedpoints)
         self._set_property("showlegend", arg, showlegend)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
         self._set_property("textangle", arg, textangle)
         self._set_property("textfont", arg, textfont)
         self._set_property("textposition", arg, textposition)
-        self._set_property("textpositionsrc", arg, textpositionsrc)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("texttemplate", arg, texttemplate)
         self._set_property("texttemplatefallback", arg, texttemplatefallback)
-        self._set_property("texttemplatesrc", arg, texttemplatesrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("unselected", arg, unselected)
         self._set_property("visible", arg, visible)
         self._set_property("width", arg, width)
-        self._set_property("widthsrc", arg, widthsrc)
         self._set_property("x", arg, x)
         self._set_property("x0", arg, x0)
         self._set_property("xaxis", arg, xaxis)
@@ -2672,7 +2262,6 @@ an instance of :class:`plotly.graph_objs.Bar`""")
         self._set_property("xperiod", arg, xperiod)
         self._set_property("xperiod0", arg, xperiod0)
         self._set_property("xperiodalignment", arg, xperiodalignment)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("y0", arg, y0)
         self._set_property("yaxis", arg, yaxis)
@@ -2681,7 +2270,6 @@ an instance of :class:`plotly.graph_objs.Bar`""")
         self._set_property("yperiod", arg, yperiod)
         self._set_property("yperiod0", arg, yperiod0)
         self._set_property("yperiodalignment", arg, yperiodalignment)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("zorder", arg, zorder)
 
         self._props["type"] = "bar"

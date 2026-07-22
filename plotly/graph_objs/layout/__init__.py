@@ -14,7 +14,6 @@ if TYPE_CHECKING:
     from ._image import Image
     from ._legend import Legend
     from ._map import Map
-    from ._mapbox import Mapbox
     from ._margin import Margin
     from ._modebar import Modebar
     from ._newselection import Newselection
@@ -40,7 +39,6 @@ if TYPE_CHECKING:
     from . import hoverlabel
     from . import legend
     from . import map
-    from . import mapbox
     from . import newselection
     from . import newshape
     from . import polar
@@ -68,7 +66,6 @@ else:
             ".hoverlabel",
             ".legend",
             ".map",
-            ".mapbox",
             ".newselection",
             ".newshape",
             ".polar",
@@ -97,7 +94,6 @@ else:
             "._image.Image",
             "._legend.Legend",
             "._map.Map",
-            "._mapbox.Mapbox",
             "._margin.Margin",
             "._modebar.Modebar",
             "._newselection.Newselection",

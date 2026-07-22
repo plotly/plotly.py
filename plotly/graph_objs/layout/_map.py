@@ -13,6 +13,7 @@ class Map(_BaseLayoutHierarchyType):
         "bounds",
         "center",
         "domain",
+        "fitbounds",
         "layerdefaults",
         "layers",
         "pitch",
@@ -96,6 +97,30 @@ class Map(_BaseLayoutHierarchyType):
     @domain.setter
     def domain(self, val):
         self["domain"] = val
+
+    @property
+    def fitbounds(self):
+        """
+        Determines if this subplot's view settings are auto-computed to
+        fit trace data. If "locations" (default), the view is auto-fit
+        to the lon/lat coordinates of the visible trace data. If False,
+        the view settings are used as-is; set this to opt out of auto-
+        fitting. If `fitbounds` is enabled but a user provides `center`
+        or `zoom`, auto-fit will be skipped.
+
+        The 'fitbounds' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [False, 'locations']
+
+        Returns
+        -------
+        Any
+        """
+        return self["fitbounds"]
+
+    @fitbounds.setter
+    def fitbounds(self, val):
+        self["fitbounds"] = val
 
     @property
     def layers(self):
@@ -242,6 +267,14 @@ class Map(_BaseLayoutHierarchyType):
         domain
             :class:`plotly.graph_objects.layout.map.Domain`
             instance or dict with compatible properties
+        fitbounds
+            Determines if this subplot's view settings are auto-
+            computed to fit trace data. If "locations" (default),
+            the view is auto-fit to the lon/lat coordinates of the
+            visible trace data. If False, the view settings are
+            used as-is; set this to opt out of auto-fitting. If
+            `fitbounds` is enabled but a user provides `center` or
+            `zoom`, auto-fit will be skipped.
         layers
             A tuple of
             :class:`plotly.graph_objects.layout.map.Layer`
@@ -288,6 +321,7 @@ class Map(_BaseLayoutHierarchyType):
         bounds=None,
         center=None,
         domain=None,
+        fitbounds=None,
         layers=None,
         layerdefaults=None,
         pitch=None,
@@ -316,6 +350,14 @@ class Map(_BaseLayoutHierarchyType):
         domain
             :class:`plotly.graph_objects.layout.map.Domain`
             instance or dict with compatible properties
+        fitbounds
+            Determines if this subplot's view settings are auto-
+            computed to fit trace data. If "locations" (default),
+            the view is auto-fit to the lon/lat coordinates of the
+            visible trace data. If False, the view settings are
+            used as-is; set this to opt out of auto-fitting. If
+            `fitbounds` is enabled but a user provides `center` or
+            `zoom`, auto-fit will be skipped.
         layers
             A tuple of
             :class:`plotly.graph_objects.layout.map.Layer`
@@ -382,6 +424,7 @@ an instance of :class:`plotly.graph_objs.layout.Map`""")
         self._set_property("bounds", arg, bounds)
         self._set_property("center", arg, center)
         self._set_property("domain", arg, domain)
+        self._set_property("fitbounds", arg, fitbounds)
         self._set_property("layers", arg, layers)
         self._set_property("layerdefaults", arg, layerdefaults)
         self._set_property("pitch", arg, pitch)

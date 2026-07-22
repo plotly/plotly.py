@@ -14,7 +14,7 @@ class Domain(_BaseLayoutHierarchyType):
     def column(self):
         """
         If there is a layout grid, use the domain for this column in
-        the grid for this geo subplot . Note that geo subplots are
+        the grid for this geo subplot. Note that geo subplots are
         constrained by domain. In general, when `projection.scale` is
         set to 1. a map will fit either its x or y domain, but not
         both.
@@ -37,7 +37,7 @@ class Domain(_BaseLayoutHierarchyType):
     def row(self):
         """
         If there is a layout grid, use the domain for this row in the
-        grid for this geo subplot . Note that geo subplots are
+        grid for this geo subplot. Note that geo subplots are
         constrained by domain. In general, when `projection.scale` is
         set to 1. a map will fit either its x or y domain, but not
         both.
@@ -113,13 +113,13 @@ class Domain(_BaseLayoutHierarchyType):
         return """\
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this geo subplot . Note that geo
+            column in the grid for this geo subplot. Note that geo
             subplots are constrained by domain. In general, when
             `projection.scale` is set to 1. a map will fit either
             its x or y domain, but not both.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this geo subplot . Note that geo
+            in the grid for this geo subplot. Note that geo
             subplots are constrained by domain. In general, when
             `projection.scale` is set to 1. a map will fit either
             its x or y domain, but not both.
@@ -149,13 +149,13 @@ class Domain(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objs.layout.geo.Domain`
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this geo subplot . Note that geo
+            column in the grid for this geo subplot. Note that geo
             subplots are constrained by domain. In general, when
             `projection.scale` is set to 1. a map will fit either
             its x or y domain, but not both.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this geo subplot . Note that geo
+            in the grid for this geo subplot. Note that geo
             subplots are constrained by domain. In general, when
             `projection.scale` is set to 1. a map will fit either
             its x or y domain, but not both.

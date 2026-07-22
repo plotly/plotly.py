@@ -18,16 +18,12 @@ class Streamtube(_BaseTraceType):
         "colorbar",
         "colorscale",
         "customdata",
-        "customdatasrc",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
         "ids",
-        "idssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -37,7 +33,6 @@ class Streamtube(_BaseTraceType):
         "lightposition",
         "maxdisplayed",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "reversescale",
@@ -46,30 +41,23 @@ class Streamtube(_BaseTraceType):
         "showscale",
         "sizeref",
         "starts",
-        "stream",
         "text",
         "type",
         "u",
         "uhoverformat",
         "uid",
         "uirevision",
-        "usrc",
         "v",
         "vhoverformat",
         "visible",
-        "vsrc",
         "w",
         "whoverformat",
-        "wsrc",
         "x",
         "xhoverformat",
-        "xsrc",
         "y",
         "yhoverformat",
-        "ysrc",
         "z",
         "zhoverformat",
-        "zsrc",
     }
 
     @property
@@ -226,7 +214,7 @@ class Streamtube(_BaseTraceType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `cmin` and `cmax`.
@@ -294,28 +282,9 @@ class Streamtube(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -335,25 +304,6 @@ class Streamtube(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -443,25 +393,6 @@ class Streamtube(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Same as `text`.
@@ -499,24 +430,6 @@ class Streamtube(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -709,24 +622,6 @@ class Streamtube(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -890,25 +785,6 @@ class Streamtube(_BaseTraceType):
         self["starts"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.streamtube.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.streamtube.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets a text element associated with this trace. If trace
@@ -951,7 +827,7 @@ class Streamtube(_BaseTraceType):
     @property
     def uhoverformat(self):
         """
-        Sets the hover text formatting rulefor `u`  using d3 formatting
+        Sets the hover text formatting rule for `u` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1023,24 +899,6 @@ class Streamtube(_BaseTraceType):
         self["uirevision"] = val
 
     @property
-    def usrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `u`.
-
-        The 'usrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["usrc"]
-
-    @usrc.setter
-    def usrc(self, val):
-        self["usrc"] = val
-
-    @property
     def v(self):
         """
         Sets the y components of the vector field.
@@ -1061,7 +919,7 @@ class Streamtube(_BaseTraceType):
     @property
     def vhoverformat(self):
         """
-        Sets the hover text formatting rulefor `v`  using d3 formatting
+        Sets the hover text formatting rule for `v` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1103,24 +961,6 @@ class Streamtube(_BaseTraceType):
         self["visible"] = val
 
     @property
-    def vsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `v`.
-
-        The 'vsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["vsrc"]
-
-    @vsrc.setter
-    def vsrc(self, val):
-        self["vsrc"] = val
-
-    @property
     def w(self):
         """
         Sets the z components of the vector field.
@@ -1141,7 +981,7 @@ class Streamtube(_BaseTraceType):
     @property
     def whoverformat(self):
         """
-        Sets the hover text formatting rulefor `w`  using d3 formatting
+        Sets the hover text formatting rule for `w` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1160,24 +1000,6 @@ class Streamtube(_BaseTraceType):
     @whoverformat.setter
     def whoverformat(self, val):
         self["whoverformat"] = val
-
-    @property
-    def wsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `w`.
-
-        The 'wsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["wsrc"]
-
-    @wsrc.setter
-    def wsrc(self, val):
-        self["wsrc"] = val
 
     @property
     def x(self):
@@ -1200,7 +1022,7 @@ class Streamtube(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1227,24 +1049,6 @@ class Streamtube(_BaseTraceType):
         self["xhoverformat"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         Sets the y coordinates of the vector field.
@@ -1265,7 +1069,7 @@ class Streamtube(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1292,24 +1096,6 @@ class Streamtube(_BaseTraceType):
         self["yhoverformat"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def z(self):
         """
         Sets the z coordinates of the vector field.
@@ -1330,7 +1116,7 @@ class Streamtube(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rulefor `z`  using d3 formatting
+        Sets the hover text formatting rule for `z` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1355,24 +1141,6 @@ class Streamtube(_BaseTraceType):
     @zhoverformat.setter
     def zhoverformat(self, val):
         self["zhoverformat"] = val
-
-    @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
 
     @property
     def type(self):
@@ -1419,31 +1187,25 @@ class Streamtube(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.streamtube.Hoverlabel`
             instance or dict with compatible properties
@@ -1489,18 +1251,12 @@ class Streamtube(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1550,9 +1306,6 @@ class Streamtube(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1587,9 +1340,6 @@ class Streamtube(_BaseTraceType):
         starts
             :class:`plotly.graph_objects.streamtube.Starts`
             instance or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.streamtube.Stream`
-            instance or dict with compatible properties
         text
             Sets a text element associated with this trace. If
             trace `hoverinfo` contains a "text" flag, this text
@@ -1598,7 +1348,7 @@ class Streamtube(_BaseTraceType):
         u
             Sets the x components of the vector field.
         uhoverformat
-            Sets the hover text formatting rulefor `u`  using d3
+            Sets the hover text formatting rule for `u` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -1625,13 +1375,10 @@ class Streamtube(_BaseTraceType):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
-        usrc
-            Sets the source reference on Chart Studio Cloud for
-            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
-            Sets the hover text formatting rulefor `v`  using d3
+            Sets the hover text formatting rule for `v` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -1641,24 +1388,18 @@ class Streamtube(_BaseTraceType):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        vsrc
-            Sets the source reference on Chart Studio Cloud for
-            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
-            Sets the hover text formatting rulefor `w`  using d3
+            Sets the hover text formatting rule for `w` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        wsrc
-            Sets the source reference on Chart Studio Cloud for
-            `w`.
         x
             Sets the x coordinates of the vector field.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1670,13 +1411,10 @@ class Streamtube(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates of the vector field.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1688,13 +1426,10 @@ class Streamtube(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z coordinates of the vector field.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1706,9 +1441,6 @@ class Streamtube(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -1723,16 +1455,12 @@ class Streamtube(_BaseTraceType):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -1742,7 +1470,6 @@ class Streamtube(_BaseTraceType):
         lightposition=None,
         maxdisplayed=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -1751,29 +1478,22 @@ class Streamtube(_BaseTraceType):
         showscale=None,
         sizeref=None,
         starts=None,
-        stream=None,
         text=None,
         u=None,
         uhoverformat=None,
         uid=None,
         uirevision=None,
-        usrc=None,
         v=None,
         vhoverformat=None,
         visible=None,
-        vsrc=None,
         w=None,
         whoverformat=None,
-        wsrc=None,
         x=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zhoverformat=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -1832,31 +1552,25 @@ class Streamtube(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.streamtube.Hoverlabel`
             instance or dict with compatible properties
@@ -1902,18 +1616,12 @@ class Streamtube(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1963,9 +1671,6 @@ class Streamtube(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2000,9 +1705,6 @@ class Streamtube(_BaseTraceType):
         starts
             :class:`plotly.graph_objects.streamtube.Starts`
             instance or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.streamtube.Stream`
-            instance or dict with compatible properties
         text
             Sets a text element associated with this trace. If
             trace `hoverinfo` contains a "text" flag, this text
@@ -2011,7 +1713,7 @@ class Streamtube(_BaseTraceType):
         u
             Sets the x components of the vector field.
         uhoverformat
-            Sets the hover text formatting rulefor `u`  using d3
+            Sets the hover text formatting rule for `u` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -2038,13 +1740,10 @@ class Streamtube(_BaseTraceType):
             the same trace has a different index, you can still
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
-        usrc
-            Sets the source reference on Chart Studio Cloud for
-            `u`.
         v
             Sets the y components of the vector field.
         vhoverformat
-            Sets the hover text formatting rulefor `v`  using d3
+            Sets the hover text formatting rule for `v` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -2054,24 +1753,18 @@ class Streamtube(_BaseTraceType):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        vsrc
-            Sets the source reference on Chart Studio Cloud for
-            `v`.
         w
             Sets the z components of the vector field.
         whoverformat
-            Sets the hover text formatting rulefor `w`  using d3
+            Sets the hover text formatting rule for `w` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        wsrc
-            Sets the source reference on Chart Studio Cloud for
-            `w`.
         x
             Sets the x coordinates of the vector field.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2083,13 +1776,10 @@ class Streamtube(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y coordinates of the vector field.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2101,13 +1791,10 @@ class Streamtube(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z coordinates of the vector field.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2119,9 +1806,6 @@ class Streamtube(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -2156,16 +1840,12 @@ an instance of :class:`plotly.graph_objs.Streamtube`""")
         self._set_property("colorbar", arg, colorbar)
         self._set_property("colorscale", arg, colorscale)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -2175,7 +1855,6 @@ an instance of :class:`plotly.graph_objs.Streamtube`""")
         self._set_property("lightposition", arg, lightposition)
         self._set_property("maxdisplayed", arg, maxdisplayed)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("reversescale", arg, reversescale)
@@ -2184,29 +1863,22 @@ an instance of :class:`plotly.graph_objs.Streamtube`""")
         self._set_property("showscale", arg, showscale)
         self._set_property("sizeref", arg, sizeref)
         self._set_property("starts", arg, starts)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
         self._set_property("u", arg, u)
         self._set_property("uhoverformat", arg, uhoverformat)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
-        self._set_property("usrc", arg, usrc)
         self._set_property("v", arg, v)
         self._set_property("vhoverformat", arg, vhoverformat)
         self._set_property("visible", arg, visible)
-        self._set_property("vsrc", arg, vsrc)
         self._set_property("w", arg, w)
         self._set_property("whoverformat", arg, whoverformat)
-        self._set_property("wsrc", arg, wsrc)
         self._set_property("x", arg, x)
         self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("z", arg, z)
         self._set_property("zhoverformat", arg, zhoverformat)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "streamtube"
         arg.pop("type", None)

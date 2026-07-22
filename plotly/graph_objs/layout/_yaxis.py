@@ -18,7 +18,6 @@ class YAxis(_BaseLayoutHierarchyType):
         "autotypenumbers",
         "calendar",
         "categoryarray",
-        "categoryarraysrc",
         "categoryorder",
         "color",
         "constrain",
@@ -79,7 +78,6 @@ class YAxis(_BaseLayoutHierarchyType):
         "tickformatstopdefaults",
         "tickformatstops",
         "ticklabelindex",
-        "ticklabelindexsrc",
         "ticklabelmode",
         "ticklabeloverflow",
         "ticklabelposition",
@@ -93,9 +91,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "tickson",
         "ticksuffix",
         "ticktext",
-        "ticktextsrc",
         "tickvals",
-        "tickvalssrc",
         "tickwidth",
         "title",
         "type",
@@ -314,25 +310,6 @@ class YAxis(_BaseLayoutHierarchyType):
     @categoryarray.setter
     def categoryarray(self, val):
         self["categoryarray"] = val
-
-    @property
-    def categoryarraysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `categoryarray`.
-
-        The 'categoryarraysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["categoryarraysrc"]
-
-    @categoryarraysrc.setter
-    def categoryarraysrc(self, val):
-        self["categoryarraysrc"] = val
 
     @property
     def categoryorder(self):
@@ -1465,7 +1442,7 @@ class YAxis(_BaseLayoutHierarchyType):
     def spikemode(self):
         """
         Determines the drawing mode for the spike line If "toaxis", the
-        line is drawn from the data point to the axis the  series is
+        line is drawn from the data point to the axis the series is
         plotted on. If "across", the line is drawn across the entire
         plot area, and supercedes "toaxis". If "marker", then a marker
         dot is drawn on the axis the series is plotted on
@@ -1711,25 +1688,6 @@ class YAxis(_BaseLayoutHierarchyType):
         self["ticklabelindex"] = val
 
     @property
-    def ticklabelindexsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `ticklabelindex`.
-
-        The 'ticklabelindexsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticklabelindexsrc"]
-
-    @ticklabelindexsrc.setter
-    def ticklabelindexsrc(self, val):
-        self["ticklabelindexsrc"] = val
-
-    @property
     def ticklabelmode(self):
         """
         Determines where tick labels are drawn with respect to their
@@ -1902,7 +1860,9 @@ class YAxis(_BaseLayoutHierarchyType):
         is set via `tickvals` and the tick text is `ticktext`. ("array"
         is the default value if `tickvals` is provided). If "sync", the
         number of ticks will sync with the overlayed axis set by
-        `overlaying` property.
+        `overlaying` property. When no other tick info is provided,
+        overlaying (non-categorical) axes default to "sync", while
+        other axes default to "auto".
 
         The 'tickmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -2021,24 +1981,6 @@ class YAxis(_BaseLayoutHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
@@ -2056,24 +1998,6 @@ class YAxis(_BaseLayoutHierarchyType):
     @tickvals.setter
     def tickvals(self, val):
         self["tickvals"] = val
-
-    @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
 
     @property
     def tickwidth(self):
@@ -2328,9 +2252,6 @@ class YAxis(_BaseLayoutHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -2635,8 +2556,8 @@ class YAxis(_BaseLayoutHierarchyType):
         spikemode
             Determines the drawing mode for the spike line If
             "toaxis", the line is drawn from the data point to the
-            axis the  series is plotted on. If "across", the line
-            is drawn across the entire plot area, and supercedes
+            axis the series is plotted on. If "across", the line is
+            drawn across the entire plot area, and supercedes
             "toaxis". If "marker", then a marker dot is drawn on
             the axis the series is plotted on
         spikesnap
@@ -2694,9 +2615,6 @@ class YAxis(_BaseLayoutHierarchyType):
             "period" if you want to label the period that ends with
             each major tick instead of the period that begins
             there.
-        ticklabelindexsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticklabelindex`.
         ticklabelmode
             Determines where tick labels are drawn with respect to
             their corresponding ticks and grid lines. Only has an
@@ -2756,7 +2674,10 @@ class YAxis(_BaseLayoutHierarchyType):
             `tickvals` and the tick text is `ticktext`. ("array" is
             the default value if `tickvals` is provided). If
             "sync", the number of ticks will sync with the
-            overlayed axis set by `overlaying` property.
+            overlayed axis set by `overlaying` property. When no
+            other tick info is provided, overlaying (non-
+            categorical) axes default to "sync", while other axes
+            default to "auto".
         tickprefix
             Sets a tick label prefix.
         ticks
@@ -2776,16 +2697,10 @@ class YAxis(_BaseLayoutHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -2836,7 +2751,6 @@ class YAxis(_BaseLayoutHierarchyType):
         autotypenumbers=None,
         calendar=None,
         categoryarray=None,
-        categoryarraysrc=None,
         categoryorder=None,
         color=None,
         constrain=None,
@@ -2897,7 +2811,6 @@ class YAxis(_BaseLayoutHierarchyType):
         tickformatstops=None,
         tickformatstopdefaults=None,
         ticklabelindex=None,
-        ticklabelindexsrc=None,
         ticklabelmode=None,
         ticklabeloverflow=None,
         ticklabelposition=None,
@@ -2911,9 +2824,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickson=None,
         ticksuffix=None,
         ticktext=None,
-        ticktextsrc=None,
         tickvals=None,
-        tickvalssrc=None,
         tickwidth=None,
         title=None,
         type=None,
@@ -2983,9 +2894,6 @@ class YAxis(_BaseLayoutHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -3290,8 +3198,8 @@ class YAxis(_BaseLayoutHierarchyType):
         spikemode
             Determines the drawing mode for the spike line If
             "toaxis", the line is drawn from the data point to the
-            axis the  series is plotted on. If "across", the line
-            is drawn across the entire plot area, and supercedes
+            axis the series is plotted on. If "across", the line is
+            drawn across the entire plot area, and supercedes
             "toaxis". If "marker", then a marker dot is drawn on
             the axis the series is plotted on
         spikesnap
@@ -3349,9 +3257,6 @@ class YAxis(_BaseLayoutHierarchyType):
             "period" if you want to label the period that ends with
             each major tick instead of the period that begins
             there.
-        ticklabelindexsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticklabelindex`.
         ticklabelmode
             Determines where tick labels are drawn with respect to
             their corresponding ticks and grid lines. Only has an
@@ -3411,7 +3316,10 @@ class YAxis(_BaseLayoutHierarchyType):
             `tickvals` and the tick text is `ticktext`. ("array" is
             the default value if `tickvals` is provided). If
             "sync", the number of ticks will sync with the
-            overlayed axis set by `overlaying` property.
+            overlayed axis set by `overlaying` property. When no
+            other tick info is provided, overlaying (non-
+            categorical) axes default to "sync", while other axes
+            default to "auto".
         tickprefix
             Sets a tick label prefix.
         ticks
@@ -3431,16 +3339,10 @@ class YAxis(_BaseLayoutHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -3511,7 +3413,6 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`""")
         self._set_property("autotypenumbers", arg, autotypenumbers)
         self._set_property("calendar", arg, calendar)
         self._set_property("categoryarray", arg, categoryarray)
-        self._set_property("categoryarraysrc", arg, categoryarraysrc)
         self._set_property("categoryorder", arg, categoryorder)
         self._set_property("color", arg, color)
         self._set_property("constrain", arg, constrain)
@@ -3572,7 +3473,6 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`""")
         self._set_property("tickformatstops", arg, tickformatstops)
         self._set_property("tickformatstopdefaults", arg, tickformatstopdefaults)
         self._set_property("ticklabelindex", arg, ticklabelindex)
-        self._set_property("ticklabelindexsrc", arg, ticklabelindexsrc)
         self._set_property("ticklabelmode", arg, ticklabelmode)
         self._set_property("ticklabeloverflow", arg, ticklabeloverflow)
         self._set_property("ticklabelposition", arg, ticklabelposition)
@@ -3586,9 +3486,7 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`""")
         self._set_property("tickson", arg, tickson)
         self._set_property("ticksuffix", arg, ticksuffix)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("tickwidth", arg, tickwidth)
         self._set_property("title", arg, title)
         self._set_property("type", arg, type)

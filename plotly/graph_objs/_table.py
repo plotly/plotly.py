@@ -11,26 +11,19 @@ class Table(_BaseTraceType):
     _valid_props = {
         "cells",
         "columnorder",
-        "columnordersrc",
         "columnwidth",
-        "columnwidthsrc",
         "customdata",
-        "customdatasrc",
         "domain",
         "header",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "ids",
-        "idssrc",
         "legend",
         "legendgrouptitle",
         "legendrank",
         "legendwidth",
         "meta",
-        "metasrc",
         "name",
-        "stream",
         "type",
         "uid",
         "uirevision",
@@ -78,25 +71,6 @@ class Table(_BaseTraceType):
         self["columnorder"] = val
 
     @property
-    def columnordersrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `columnorder`.
-
-        The 'columnordersrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["columnordersrc"]
-
-    @columnordersrc.setter
-    def columnordersrc(self, val):
-        self["columnordersrc"] = val
-
-    @property
     def columnwidth(self):
         """
         The width of columns expressed as a ratio. Columns fill the
@@ -115,25 +89,6 @@ class Table(_BaseTraceType):
     @columnwidth.setter
     def columnwidth(self, val):
         self["columnwidth"] = val
-
-    @property
-    def columnwidthsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `columnwidth`.
-
-        The 'columnwidthsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["columnwidthsrc"]
-
-    @columnwidthsrc.setter
-    def columnwidthsrc(self, val):
-        self["columnwidthsrc"] = val
 
     @property
     def customdata(self):
@@ -155,25 +110,6 @@ class Table(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def domain(self):
@@ -216,7 +152,7 @@ class Table(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -236,25 +172,6 @@ class Table(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -294,24 +211,6 @@ class Table(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -426,24 +325,6 @@ class Table(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -462,25 +343,6 @@ class Table(_BaseTraceType):
     @name.setter
     def name(self, val):
         self["name"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.table.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.table.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def uid(self):
@@ -569,24 +431,15 @@ class Table(_BaseTraceType):
             example, a value `2` at position `0` means that column
             index `0` in the data will be rendered as the third
             column, as columns have an index base of zero.
-        columnordersrc
-            Sets the source reference on Chart Studio Cloud for
-            `columnorder`.
         columnwidth
             The width of columns expressed as a ratio. Columns fill
             the available width in proportion of their specified
             column widths.
-        columnwidthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `columnwidth`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         domain
             :class:`plotly.graph_objects.table.Domain` instance or
             dict with compatible properties
@@ -594,13 +447,10 @@ class Table(_BaseTraceType):
             :class:`plotly.graph_objects.table.Header` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.table.Hoverlabel` instance
             or dict with compatible properties
@@ -608,9 +458,6 @@ class Table(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -647,15 +494,9 @@ class Table(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
-        stream
-            :class:`plotly.graph_objects.table.Stream` instance or
-            dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -690,26 +531,19 @@ class Table(_BaseTraceType):
         arg=None,
         cells=None,
         columnorder=None,
-        columnordersrc=None,
         columnwidth=None,
-        columnwidthsrc=None,
         customdata=None,
-        customdatasrc=None,
         domain=None,
         header=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         meta=None,
-        metasrc=None,
         name=None,
-        stream=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -737,24 +571,15 @@ class Table(_BaseTraceType):
             example, a value `2` at position `0` means that column
             index `0` in the data will be rendered as the third
             column, as columns have an index base of zero.
-        columnordersrc
-            Sets the source reference on Chart Studio Cloud for
-            `columnorder`.
         columnwidth
             The width of columns expressed as a ratio. Columns fill
             the available width in proportion of their specified
             column widths.
-        columnwidthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `columnwidth`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         domain
             :class:`plotly.graph_objects.table.Domain` instance or
             dict with compatible properties
@@ -762,13 +587,10 @@ class Table(_BaseTraceType):
             :class:`plotly.graph_objects.table.Header` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.table.Hoverlabel` instance
             or dict with compatible properties
@@ -776,9 +598,6 @@ class Table(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -815,15 +634,9 @@ class Table(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
-        stream
-            :class:`plotly.graph_objects.table.Stream` instance or
-            dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -878,26 +691,19 @@ an instance of :class:`plotly.graph_objs.Table`""")
 
         self._set_property("cells", arg, cells)
         self._set_property("columnorder", arg, columnorder)
-        self._set_property("columnordersrc", arg, columnordersrc)
         self._set_property("columnwidth", arg, columnwidth)
-        self._set_property("columnwidthsrc", arg, columnwidthsrc)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("domain", arg, domain)
         self._set_property("header", arg, header)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendrank", arg, legendrank)
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
-        self._set_property("stream", arg, stream)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("visible", arg, visible)

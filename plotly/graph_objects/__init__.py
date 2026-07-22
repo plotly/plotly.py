@@ -16,7 +16,6 @@ if TYPE_CHECKING:
     from ..graph_objs import Scattersmith
     from ..graph_objs import Scatterpolargl
     from ..graph_objs import Scatterpolar
-    from ..graph_objs import Scattermapbox
     from ..graph_objs import Scattermap
     from ..graph_objs import Scattergl
     from ..graph_objs import Scattergeo
@@ -24,6 +23,7 @@ if TYPE_CHECKING:
     from ..graph_objs import Scatter3d
     from ..graph_objs import Scatter
     from ..graph_objs import Sankey
+    from ..graph_objs import Quiver
     from ..graph_objs import Pie
     from ..graph_objs import Parcoords
     from ..graph_objs import Parcats
@@ -39,12 +39,10 @@ if TYPE_CHECKING:
     from ..graph_objs import Heatmap
     from ..graph_objs import Funnelarea
     from ..graph_objs import Funnel
-    from ..graph_objs import Densitymapbox
     from ..graph_objs import Densitymap
     from ..graph_objs import Contourcarpet
     from ..graph_objs import Contour
     from ..graph_objs import Cone
-    from ..graph_objs import Choroplethmapbox
     from ..graph_objs import Choroplethmap
     from ..graph_objs import Choropleth
     from ..graph_objs import Carpet
@@ -93,7 +91,6 @@ if TYPE_CHECKING:
     from ..graph_objs import scattersmith
     from ..graph_objs import scatterpolargl
     from ..graph_objs import scatterpolar
-    from ..graph_objs import scattermapbox
     from ..graph_objs import scattermap
     from ..graph_objs import scattergl
     from ..graph_objs import scattergeo
@@ -101,6 +98,7 @@ if TYPE_CHECKING:
     from ..graph_objs import scatter3d
     from ..graph_objs import scatter
     from ..graph_objs import sankey
+    from ..graph_objs import quiver
     from ..graph_objs import pie
     from ..graph_objs import parcoords
     from ..graph_objs import parcats
@@ -116,12 +114,10 @@ if TYPE_CHECKING:
     from ..graph_objs import heatmap
     from ..graph_objs import funnelarea
     from ..graph_objs import funnel
-    from ..graph_objs import densitymapbox
     from ..graph_objs import densitymap
     from ..graph_objs import contourcarpet
     from ..graph_objs import contour
     from ..graph_objs import cone
-    from ..graph_objs import choroplethmapbox
     from ..graph_objs import choroplethmap
     from ..graph_objs import choropleth
     from ..graph_objs import carpet
@@ -149,7 +145,6 @@ else:
             "..graph_objs.scattersmith",
             "..graph_objs.scatterpolargl",
             "..graph_objs.scatterpolar",
-            "..graph_objs.scattermapbox",
             "..graph_objs.scattermap",
             "..graph_objs.scattergl",
             "..graph_objs.scattergeo",
@@ -157,6 +152,7 @@ else:
             "..graph_objs.scatter3d",
             "..graph_objs.scatter",
             "..graph_objs.sankey",
+            "..graph_objs.quiver",
             "..graph_objs.pie",
             "..graph_objs.parcoords",
             "..graph_objs.parcats",
@@ -172,12 +168,10 @@ else:
             "..graph_objs.heatmap",
             "..graph_objs.funnelarea",
             "..graph_objs.funnel",
-            "..graph_objs.densitymapbox",
             "..graph_objs.densitymap",
             "..graph_objs.contourcarpet",
             "..graph_objs.contour",
             "..graph_objs.cone",
-            "..graph_objs.choroplethmapbox",
             "..graph_objs.choroplethmap",
             "..graph_objs.choropleth",
             "..graph_objs.carpet",
@@ -201,7 +195,6 @@ else:
             "..graph_objs.Scattersmith",
             "..graph_objs.Scatterpolargl",
             "..graph_objs.Scatterpolar",
-            "..graph_objs.Scattermapbox",
             "..graph_objs.Scattermap",
             "..graph_objs.Scattergl",
             "..graph_objs.Scattergeo",
@@ -209,6 +202,7 @@ else:
             "..graph_objs.Scatter3d",
             "..graph_objs.Scatter",
             "..graph_objs.Sankey",
+            "..graph_objs.Quiver",
             "..graph_objs.Pie",
             "..graph_objs.Parcoords",
             "..graph_objs.Parcats",
@@ -224,12 +218,10 @@ else:
             "..graph_objs.Heatmap",
             "..graph_objs.Funnelarea",
             "..graph_objs.Funnel",
-            "..graph_objs.Densitymapbox",
             "..graph_objs.Densitymap",
             "..graph_objs.Contourcarpet",
             "..graph_objs.Contour",
             "..graph_objs.Cone",
-            "..graph_objs.Choroplethmapbox",
             "..graph_objs.Choroplethmap",
             "..graph_objs.Choropleth",
             "..graph_objs.Carpet",

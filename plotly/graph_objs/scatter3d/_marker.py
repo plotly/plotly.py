@@ -18,7 +18,6 @@ class Marker(_BaseTraceHierarchyType):
         "coloraxis",
         "colorbar",
         "colorscale",
-        "colorsrc",
         "line",
         "opacity",
         "reversescale",
@@ -27,9 +26,7 @@ class Marker(_BaseTraceHierarchyType):
         "sizemin",
         "sizemode",
         "sizeref",
-        "sizesrc",
         "symbol",
-        "symbolsrc",
     }
 
     @property
@@ -221,9 +218,9 @@ class Marker(_BaseTraceHierarchyType):
         Sets the colorscale. Has an effect only if in `marker.color` is
         set to a numerical array. The colorscale must be an array
         containing arrays mapping a normalized value to an rgb, rgba,
-        hex, hsl, hsv, or named color string. At minimum, a mapping for
-        the lowest (0) and highest (1) values are required. For
-        example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
+        hex, hsl, hsla, hwb, or named color string. At minimum, a
+        mapping for the lowest (0) and highest (1) values are required.
+        For example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
         control the bounds of the colorscale in color space, use
         `marker.cmin` and `marker.cmax`. Alternatively, `colorscale`
         may be a palette name string of the following list: Blackbody,B
@@ -266,24 +263,6 @@ class Marker(_BaseTraceHierarchyType):
     @colorscale.setter
     def colorscale(self, val):
         self["colorscale"] = val
-
-    @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
 
     @property
     def line(self):
@@ -448,24 +427,6 @@ class Marker(_BaseTraceHierarchyType):
         self["sizeref"] = val
 
     @property
-    def sizesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `size`.
-
-        The 'sizesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["sizesrc"]
-
-    @sizesrc.setter
-    def sizesrc(self, val):
-        self["sizesrc"] = val
-
-    @property
     def symbol(self):
         """
         Sets the marker symbol type.
@@ -485,24 +446,6 @@ class Marker(_BaseTraceHierarchyType):
     @symbol.setter
     def symbol(self, val):
         self["symbol"] = val
-
-    @property
-    def symbolsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `symbol`.
-
-        The 'symbolsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["symbolsrc"]
-
-    @symbolsrc.setter
-    def symbolsrc(self, val):
-        self["symbolsrc"] = val
 
     @property
     def _prop_descriptions(self):
@@ -560,8 +503,8 @@ class Marker(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if in
             `marker.color` is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
-            normalized value to an rgb, rgba, hex, hsl, hsv, or
-            named color string. At minimum, a mapping for the
+            normalized value to an rgb, rgba, hex, hsl, hsla, hwb,
+            or named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
@@ -570,9 +513,6 @@ class Marker(_BaseTraceHierarchyType):
             following list: Blackbody,Bluered,Blues,Cividis,Earth,E
             lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         line
             :class:`plotly.graph_objects.scatter3d.marker.Line`
             instance or dict with compatible properties
@@ -607,14 +547,8 @@ class Marker(_BaseTraceHierarchyType):
             numerical array. Sets the scale factor used to
             determine the rendered size of marker points. Use with
             `sizemin` and `sizemode`.
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         symbol
             Sets the marker symbol type.
-        symbolsrc
-            Sets the source reference on Chart Studio Cloud for
-            `symbol`.
         """
 
     def __init__(
@@ -629,7 +563,6 @@ class Marker(_BaseTraceHierarchyType):
         coloraxis=None,
         colorbar=None,
         colorscale=None,
-        colorsrc=None,
         line=None,
         opacity=None,
         reversescale=None,
@@ -638,9 +571,7 @@ class Marker(_BaseTraceHierarchyType):
         sizemin=None,
         sizemode=None,
         sizeref=None,
-        sizesrc=None,
         symbol=None,
-        symbolsrc=None,
         **kwargs,
     ):
         """
@@ -705,8 +636,8 @@ class Marker(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if in
             `marker.color` is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
-            normalized value to an rgb, rgba, hex, hsl, hsv, or
-            named color string. At minimum, a mapping for the
+            normalized value to an rgb, rgba, hex, hsl, hsla, hwb,
+            or named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
@@ -715,9 +646,6 @@ class Marker(_BaseTraceHierarchyType):
             following list: Blackbody,Bluered,Blues,Cividis,Earth,E
             lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         line
             :class:`plotly.graph_objects.scatter3d.marker.Line`
             instance or dict with compatible properties
@@ -752,14 +680,8 @@ class Marker(_BaseTraceHierarchyType):
             numerical array. Sets the scale factor used to
             determine the rendered size of marker points. Use with
             `sizemin` and `sizemode`.
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         symbol
             Sets the marker symbol type.
-        symbolsrc
-            Sets the source reference on Chart Studio Cloud for
-            `symbol`.
 
         Returns
         -------
@@ -794,7 +716,6 @@ an instance of :class:`plotly.graph_objs.scatter3d.Marker`""")
         self._set_property("coloraxis", arg, coloraxis)
         self._set_property("colorbar", arg, colorbar)
         self._set_property("colorscale", arg, colorscale)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("line", arg, line)
         self._set_property("opacity", arg, opacity)
         self._set_property("reversescale", arg, reversescale)
@@ -803,8 +724,6 @@ an instance of :class:`plotly.graph_objs.scatter3d.Marker`""")
         self._set_property("sizemin", arg, sizemin)
         self._set_property("sizemode", arg, sizemode)
         self._set_property("sizeref", arg, sizeref)
-        self._set_property("sizesrc", arg, sizesrc)
         self._set_property("symbol", arg, symbol)
-        self._set_property("symbolsrc", arg, symbolsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

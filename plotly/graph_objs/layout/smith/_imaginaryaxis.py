@@ -31,7 +31,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         "ticks",
         "ticksuffix",
         "tickvals",
-        "tickvalssrc",
         "tickwidth",
         "visible",
     }
@@ -506,24 +505,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         self["tickvals"] = val
 
     @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
-
-    @property
     def tickwidth(self):
         """
         Sets the tick width (in px).
@@ -658,9 +639,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
             Sets the values at which ticks on this axis appear.
             Defaults to `realaxis.tickvals` plus the same as
             negatives and zero.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         visible
@@ -694,7 +672,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
         ticks=None,
         ticksuffix=None,
         tickvals=None,
-        tickvalssrc=None,
         tickwidth=None,
         visible=None,
         **kwargs,
@@ -802,9 +779,6 @@ class Imaginaryaxis(_BaseLayoutHierarchyType):
             Sets the values at which ticks on this axis appear.
             Defaults to `realaxis.tickvals` plus the same as
             negatives and zero.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         visible
@@ -858,7 +832,6 @@ an instance of :class:`plotly.graph_objs.layout.smith.Imaginaryaxis`""")
         self._set_property("ticks", arg, ticks)
         self._set_property("ticksuffix", arg, ticksuffix)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("tickwidth", arg, tickwidth)
         self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
