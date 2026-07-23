@@ -21,13 +21,6 @@ all: $(HTML_FILES) $(V3_REDIR_FILES) $(NEXT_REDIR_FILES)
 
 .PRECIOUS: $(IPYNB_FILES)
 
-$(IPYNB_DIR)/.mapbox_token: $(MD_DIR)/.mapbox_token
-	@mkdir -p $(IPYNB_DIR)
-	@echo "[symlink]    .mapbox_token"
-	@cd $(IPYNB_DIR) && ln -s ../../$<
-
-$(IPYNB_FILES): $(IPYNB_DIR)/.mapbox_token
-
 $(IPYNB_DIR)/%.ipynb: $(MD_DIR)/%.md
 	@mkdir -p $(IPYNB_DIR)
 	@echo "[jupytext]   $<"

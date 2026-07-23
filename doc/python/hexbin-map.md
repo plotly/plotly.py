@@ -26,11 +26,11 @@ jupyter:
     display_as: maps
     language: python
     layout: base
-    name: Hexbin Mapbox
+    name: Hexbin Map
     order: 13
     page_type: u-guide
-    permalink: python/hexbin-mapbox/
-    thumbnail: thumbnail/hexbin_mapbox.jpg
+    permalink: python/hexbin-map/
+    thumbnail: thumbnail/hexbin_map.jpg
 ---
 
 #### Simple Count Hexbin

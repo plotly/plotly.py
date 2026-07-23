@@ -19,14 +19,12 @@ plotly's high-level API for rapid figure generation. ::
     scatter_polar
     scatter_ternary
     scatter_map
-    scatter_mapbox
     scatter_geo
     line
     line_3d
     line_polar
     line_ternary
     line_map
-    line_mapbox
     line_geo
     area
     bar
@@ -48,13 +46,10 @@ plotly's high-level API for rapid figure generation. ::
     parallel_categories
     choropleth
     choropleth_map
-    choropleth_mapbox
     density_contour
     density_heatmap
     density_map
-    density_mapbox
     imshow
-    set_mapbox_access_token
     get_trendline_results
 
 

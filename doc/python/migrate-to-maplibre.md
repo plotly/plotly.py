@@ -31,7 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/mapbox-to-maplibre/
     redirect_from: python/maplibre-migration/
-    thumbnail: thumbnail/mapbox-layers.png
+    thumbnail: thumbnail/map-layers.png
 ---
 
 ## Migrating from Mapbox traces to MapLibre traces
