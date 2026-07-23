@@ -602,30 +602,3 @@ class FigureFactory(object):
         from plotly.figure_factory import create_trisurf
 
         return create_trisurf(*args, **kwargs)
-
-
-def get_config_plotly_server_url():
-    """
-    Function to get the .config file's 'plotly_domain' without importing
-    the chart_studio package.  This property is needed to compute the default
-    value of the plotly.js config plotlyServerURL, so it is independent of
-    the chart_studio integration and still needs to live in
-
-    Returns
-    -------
-    str
-    """
-    config_file = os.path.join(PLOTLY_DIR, ".config")
-    default_server_url = "https://plot.ly"
-    if not os.path.exists(config_file):
-        return default_server_url
-    with open(config_file, "rt") as f:
-        try:
-            config_dict = json.load(f)
-            if not isinstance(config_dict, dict):
-                config_dict = {}
-        except Exception:
-            # TODO: issue a warning and bubble it up
-            config_dict = {}
-
-    return config_dict.get("plotly_domain", default_server_url)

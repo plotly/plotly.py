@@ -281,14 +281,12 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertTrue(html.startswith("<div") and html.endswith("</div>"))
 
     def test_config(self):
-        config = dict(linkText="Plotly rocks!", showLink=True, editable=True)
+        config = dict(editable=True)
         html = self._read_html(
             plotly.offline.plot(
                 fig, config=config, auto_open=False, filename=html_filename
             )
         )
-        self.assertIn('"linkText": "Plotly rocks!"', html)
-        self.assertIn('"showLink": true', html)
         self.assertIn('"editable": true', html)
 
     def test_config_bad_options(self):

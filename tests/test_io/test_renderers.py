@@ -96,8 +96,6 @@ def test_plotly_mimetype_renderer_mimetype(fig1, renderer):
     pio.renderers.default = renderer
     expected = {plotly_mimetype: json.loads(pio.to_json(fig1, remove_uids=False))}
 
-    expected[plotly_mimetype]["config"] = {"plotlyServerURL": "https://plot.ly"}
-
     pio.renderers.render_on_display = False
 
     with mock.patch("IPython.display.display") as mock_display:
@@ -116,8 +114,6 @@ def test_plotly_mimetype_renderer_mimetype(fig1, renderer):
 def test_plotly_mimetype_renderer_show(fig1, renderer):
     pio.renderers.default = renderer
     expected = {plotly_mimetype: json.loads(pio.to_json(fig1, remove_uids=False))}
-
-    expected[plotly_mimetype]["config"] = {"plotlyServerURL": "https://plot.ly"}
 
     with mock.patch("IPython.display.display") as mock_display:
         pio.show(fig1)
