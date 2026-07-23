@@ -5,11 +5,6 @@ from io import StringIO
 from codegen.utils import CAVEAT, write_source_py
 
 
-deprecated_mapbox_traces = [
-    "scattermapbox",
-    "choroplethmapbox",
-    "densitymapbox",
-]
 locationmode_traces = [
     "choropleth",
     "scattergeo",
@@ -102,11 +97,7 @@ def build_datatype_py(node):
     )
     buffer.write("import copy as _copy\n")
 
-    if (
-        node.name_property in deprecated_mapbox_traces
-        or node.name_property in locationmode_traces
-        or node.name_property == "template"
-    ):
+    if node.name_property in locationmode_traces or node.name_property == "template":
         buffer.write("import warnings\n")
 
     # Write class definition
@@ -375,22 +366,10 @@ an instance of :class:`{class_name}`\"\"\")
     buffer.write("\n\n")
     for subtype_node in subtype_nodes:
         name_prop = subtype_node.name_property
-        if datatype_class == "Template" and name_prop == "data":
-            buffer.write(
-                f"""
-        # Template.data contains a 'scattermapbox' key, which causes a
-        # go.Scattermapbox trace object to be created during validation.
-        # In order to prevent false deprecation warnings from surfacing,
-        # we suppress deprecation warnings for this line only.
-        with warnings.catch_warnings():
-            warnings.filterwarnings("ignore", category=DeprecationWarning)
-            self._set_property("{name_prop}", arg, {name_prop})"""
-            )
-        else:
-            buffer.write(
-                f"""
+        buffer.write(
+            f"""
         self._set_property("{name_prop}", arg, {name_prop})"""
-            )
+        )
 
     # Literals
     if literal_nodes:
@@ -410,19 +389,6 @@ an instance of :class:`{class_name}`\"\"\")
         self._skip_invalid = False
 """
     )
-
-    if node.name_property in deprecated_mapbox_traces:
-        buffer.write(
-            f"""
-        warnings.warn(
-            "*{node.name_property}* is deprecated!"
-            + " Use *{node.name_property.replace("mapbox", "map")}* instead."
-            + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-            stacklevel=2,
-            category=DeprecationWarning,
-        )
-"""
-        )
 
     # Return source string
     return buffer.getvalue()
