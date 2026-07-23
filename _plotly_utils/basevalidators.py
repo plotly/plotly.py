@@ -667,33 +667,6 @@ class BooleanValidator(BaseValidator):
         return v
 
 
-class SrcValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, **kwargs):
-        super(SrcValidator, self).__init__(
-            plotly_name=plotly_name, parent_name=parent_name, **kwargs
-        )
-
-        self.chart_studio = get_module("chart_studio")
-
-    def description(self):
-        return """\
-    The '{plotly_name}' property must be specified as a string or
-    as a plotly.grid_objs.Column object""".format(plotly_name=self.plotly_name)
-
-    def validate_coerce(self, v):
-        if is_none_or_typed_array_spec(v):
-            pass
-        elif isinstance(v, str):
-            pass
-        elif self.chart_studio and isinstance(v, self.chart_studio.grid_objs.Column):
-            # Convert to id string
-            v = v.id
-        else:
-            self.raise_invalid_val(v)
-
-        return v
-
-
 class NumberValidator(BaseValidator):
     """
     "number": {
