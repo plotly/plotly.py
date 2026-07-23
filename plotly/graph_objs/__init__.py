@@ -31,7 +31,6 @@ if TYPE_CHECKING:
     from ._deprecations import Marker
     from ._deprecations import RadialAxis
     from ._deprecations import Scene
-    from ._deprecations import Stream
     from ._deprecations import Trace
     from ._deprecations import XAxis
     from ._deprecations import XBins
@@ -210,7 +209,6 @@ else:
             "._deprecations.Marker",
             "._deprecations.RadialAxis",
             "._deprecations.Scene",
-            "._deprecations.Stream",
             "._deprecations.Trace",
             "._deprecations.XAxis",
             "._deprecations.XBins",

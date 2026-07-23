@@ -34,7 +34,6 @@ OLD_CLASS_NAMES = [
     "Scatter",
     "Scatter3d",
     "Scene",
-    "Stream",
     "Surface",
     "Trace",
     "XAxis",

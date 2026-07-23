@@ -70,7 +70,6 @@ if TYPE_CHECKING:
     from ..graph_objs import Marker
     from ..graph_objs import RadialAxis
     from ..graph_objs import Scene
-    from ..graph_objs import Stream
     from ..graph_objs import XAxis
     from ..graph_objs import YAxis
     from ..graph_objs import ZAxis
@@ -249,7 +248,6 @@ else:
             "..graph_objs.Marker",
             "..graph_objs.RadialAxis",
             "..graph_objs.Scene",
-            "..graph_objs.Stream",
             "..graph_objs.XAxis",
             "..graph_objs.YAxis",
             "..graph_objs.ZAxis",
