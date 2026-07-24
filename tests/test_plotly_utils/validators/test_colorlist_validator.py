@@ -35,13 +35,11 @@ def test_rejection_element(validator, val):
     "val",
     [
         ["blue"],
-        ["red", "rgb(255, 0, 0)"],
+        ["red", "rgb(255, 0, 0)", "rgb(255 0 0)"],
         np.array(["red", "rgb(255, 0, 0)"]),
-        ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsv(0, 100%, 100%)"],
-        np.array(
-            ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsv(0, 100%, 100%)"]
-        ),
-        ["hsva(0, 100%, 100%, 50%)"],
+        ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsl(0 100% 100%)"],
+        np.array(["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsl(0 100% 100%)"]),
+        ["hsla(0, 100%, 100%, 50%)"],
     ],
 )
 def test_acceptance_aok(val, validator):
