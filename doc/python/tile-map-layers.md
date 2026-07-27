@@ -72,11 +72,8 @@ Maplibre-based tile maps have three different types of layers:
 
 The accepted values for `layout.map.style` are one of:
 
-
-The accepted values for `layout.map.style` are one of:
-
 - `"white-bg"`, which yields an empty white canvas which results in no external HTTP requests
-- `'carto-voyager'` (and `"basic"`, `"streets"`, `"outdoors"`, and `"light"`) which yields the [CARTO](https://github.com/cartodb/basemap-styles) Voyager basemap vector tiles
+- `'carto-voyager'` (and `"basic"`, `"streets"`, and `"outdoors"`) which yields the [CARTO](https://github.com/cartodb/basemap-styles) Voyager basemap vector tiles
 - `"carto-voyager-nolabels"` which yields the same tiles as the above but without text labels
 - `"carto-positron"` (and `"light"`) which yields the [CARTO](https://github.com/cartodb/basemap-styles) Positron basemap vector tiles
 - `"carto-positron-nolabels"` which yields the same tiles as the above but without text labels
@@ -89,7 +86,7 @@ The accepted values for `layout.map.style` are one of:
 
 - A Map Style object as defined at https://maplibre.org/maplibre-style-spec/
 
-Note: Style values beginning with `"stamen-"` are no longer supported following the [transition to Maplibre](python/mapbox-to-maplibre/). The large number of aliases for `'carto-voyager'` are included for backwards-compatibility with previously-supported style values.
+Note: Style values beginning with `"stamen-"` are no longer supported following the [transition to Maplibre](/python/mapbox-to-maplibre/). The large number of aliases for `'carto-voyager'` are included for backwards-compatibility with previously-supported style values.
 
 
 #### OpenStreetMap tiles
