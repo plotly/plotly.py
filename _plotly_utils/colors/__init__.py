@@ -752,9 +752,16 @@ def hex_to_rgb(value):
     """
     Calculates rgb values from a hex color code.
 
-    :param (string) value: Hex color string
+    :param (string) value: Hex color string. May be a full 6-character code
+        or a 3-character shorthand code.
 
     :rtype (tuple) (r_value, g_value, b_value): tuple of rgb values
+
+    Example:
+
+        '#FFFFFF' --> (255, 255, 255)
+        '#FFF'    --> (255, 255, 255)
+
     """
     value = value.lstrip("#")
     if len(value) == 3:
