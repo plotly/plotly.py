@@ -10,6 +10,8 @@ import math
 import warnings
 import matplotlib.dates
 
+from _plotly_utils.colors import hex_to_rgb
+
 
 def check_bar_match(old_bar, new_bar):
     """Check if two bars belong in the same collection (bar chart).
@@ -102,23 +104,6 @@ def convert_symbol(mpl_symbol):
         return SYMBOL_MAP[mpl_symbol]
     else:
         return "circle"  # default
-
-
-def hex_to_rgb(value):
-    """
-    Change a hex color to an rgb tuple
-
-    :param (str|unicode) value: The hex string we want to convert.
-    :return: (int, int, int) The red, green, blue int-tuple.
-
-    Example:
-
-        '#FFFFFF' --> (255, 255, 255)
-
-    """
-    value = value.lstrip("#")
-    lv = len(value)
-    return tuple(int(value[i : i + lv // 3], 16) for i in range(0, lv, lv // 3))
 
 
 def merge_color_and_opacity(color, opacity):
