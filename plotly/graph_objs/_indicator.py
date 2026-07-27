@@ -11,22 +11,18 @@ class Indicator(_BaseTraceType):
     _valid_props = {
         "align",
         "customdata",
-        "customdatasrc",
         "delta",
         "domain",
         "gauge",
         "ids",
-        "idssrc",
         "legend",
         "legendgrouptitle",
         "legendrank",
         "legendwidth",
         "meta",
-        "metasrc",
         "mode",
         "name",
         "number",
-        "stream",
         "title",
         "type",
         "uid",
@@ -76,25 +72,6 @@ class Indicator(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def delta(self):
@@ -174,24 +151,6 @@ class Indicator(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -306,24 +265,6 @@ class Indicator(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def mode(self):
         """
         Determines how the value is displayed on the graph. `number`
@@ -384,25 +325,6 @@ class Indicator(_BaseTraceType):
     @number.setter
     def number(self, val):
         self["number"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.indicator.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.indicator.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def title(self):
@@ -530,9 +452,6 @@ class Indicator(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         delta
             :class:`plotly.graph_objects.indicator.Delta` instance
             or dict with compatible properties
@@ -545,9 +464,6 @@ class Indicator(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -584,9 +500,6 @@ class Indicator(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines how the value is displayed on the graph.
             `number` displays the value numerically in text.
@@ -598,9 +511,6 @@ class Indicator(_BaseTraceType):
             legend item and on hover.
         number
             :class:`plotly.graph_objects.indicator.Number` instance
-            or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.indicator.Stream` instance
             or dict with compatible properties
         title
             :class:`plotly.graph_objects.indicator.Title` instance
@@ -641,22 +551,18 @@ class Indicator(_BaseTraceType):
         arg=None,
         align=None,
         customdata=None,
-        customdatasrc=None,
         delta=None,
         domain=None,
         gauge=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         meta=None,
-        metasrc=None,
         mode=None,
         name=None,
         number=None,
-        stream=None,
         title=None,
         uid=None,
         uirevision=None,
@@ -689,9 +595,6 @@ class Indicator(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         delta
             :class:`plotly.graph_objects.indicator.Delta` instance
             or dict with compatible properties
@@ -704,9 +607,6 @@ class Indicator(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -743,9 +643,6 @@ class Indicator(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         mode
             Determines how the value is displayed on the graph.
             `number` displays the value numerically in text.
@@ -757,9 +654,6 @@ class Indicator(_BaseTraceType):
             legend item and on hover.
         number
             :class:`plotly.graph_objects.indicator.Number` instance
-            or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.indicator.Stream` instance
             or dict with compatible properties
         title
             :class:`plotly.graph_objects.indicator.Title` instance
@@ -820,22 +714,18 @@ an instance of :class:`plotly.graph_objs.Indicator`""")
 
         self._set_property("align", arg, align)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("delta", arg, delta)
         self._set_property("domain", arg, domain)
         self._set_property("gauge", arg, gauge)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendrank", arg, legendrank)
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("mode", arg, mode)
         self._set_property("name", arg, name)
         self._set_property("number", arg, number)
-        self._set_property("stream", arg, stream)
         self._set_property("title", arg, title)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)

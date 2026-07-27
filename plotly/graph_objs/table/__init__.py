@@ -7,7 +7,6 @@ if TYPE_CHECKING:
     from ._header import Header
     from ._hoverlabel import Hoverlabel
     from ._legendgrouptitle import Legendgrouptitle
-    from ._stream import Stream
     from . import cells
     from . import header
     from . import hoverlabel
@@ -24,6 +23,5 @@ else:
             "._header.Header",
             "._hoverlabel.Hoverlabel",
             "._legendgrouptitle.Legendgrouptitle",
-            "._stream.Stream",
         ],
     )

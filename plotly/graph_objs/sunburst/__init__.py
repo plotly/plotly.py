@@ -10,7 +10,6 @@ if TYPE_CHECKING:
     from ._marker import Marker
     from ._outsidetextfont import Outsidetextfont
     from ._root import Root
-    from ._stream import Stream
     from ._textfont import Textfont
     from . import hoverlabel
     from . import legendgrouptitle
@@ -30,7 +29,6 @@ else:
             "._marker.Marker",
             "._outsidetextfont.Outsidetextfont",
             "._root.Root",
-            "._stream.Stream",
             "._textfont.Textfont",
         ],
     )

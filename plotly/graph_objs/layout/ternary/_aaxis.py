@@ -44,9 +44,7 @@ class Aaxis(_BaseLayoutHierarchyType):
         "ticks",
         "ticksuffix",
         "ticktext",
-        "ticktextsrc",
         "tickvals",
-        "tickvalssrc",
         "tickwidth",
         "title",
         "uirevision",
@@ -827,24 +825,6 @@ class Aaxis(_BaseLayoutHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
@@ -862,24 +842,6 @@ class Aaxis(_BaseLayoutHierarchyType):
     @tickvals.setter
     def tickvals(self, val):
         self["tickvals"] = val
-
-    @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
 
     @property
     def tickwidth(self):
@@ -1133,16 +1095,10 @@ class Aaxis(_BaseLayoutHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -1192,9 +1148,7 @@ class Aaxis(_BaseLayoutHierarchyType):
         ticks=None,
         ticksuffix=None,
         ticktext=None,
-        ticktextsrc=None,
         tickvals=None,
-        tickvalssrc=None,
         tickwidth=None,
         title=None,
         uirevision=None,
@@ -1402,16 +1356,10 @@ class Aaxis(_BaseLayoutHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -1481,9 +1429,7 @@ an instance of :class:`plotly.graph_objs.layout.ternary.Aaxis`""")
         self._set_property("ticks", arg, ticks)
         self._set_property("ticksuffix", arg, ticksuffix)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("tickwidth", arg, tickwidth)
         self._set_property("title", arg, title)
         self._set_property("uirevision", arg, uirevision)

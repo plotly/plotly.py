@@ -11,7 +11,6 @@ class Layout(_BaseLayoutType):
         "geo",
         "legend",
         "map",
-        "mapbox",
         "polar",
         "scene",
         "smith",
@@ -40,7 +39,6 @@ class Layout(_BaseLayoutType):
             "geo": ValidatorCache.get_validator("layout", "geo"),
             "legend": ValidatorCache.get_validator("layout", "legend"),
             "map": ValidatorCache.get_validator("layout", "map"),
-            "mapbox": ValidatorCache.get_validator("layout", "mapbox"),
             "polar": ValidatorCache.get_validator("layout", "polar"),
             "scene": ValidatorCache.get_validator("layout", "scene"),
             "smith": ValidatorCache.get_validator("layout", "smith"),
@@ -93,8 +91,6 @@ class Layout(_BaseLayoutType):
         "grid",
         "height",
         "hiddenlabels",
-        "hiddenlabelssrc",
-        "hidesources",
         "hoveranywhere",
         "hoverdistance",
         "hoverlabel",
@@ -106,10 +102,8 @@ class Layout(_BaseLayoutType):
         "images",
         "legend",
         "map",
-        "mapbox",
         "margin",
         "meta",
-        "metasrc",
         "minreducedheight",
         "minreducedwidth",
         "modebar",
@@ -974,47 +968,6 @@ class Layout(_BaseLayoutType):
         self["hiddenlabels"] = val
 
     @property
-    def hiddenlabelssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hiddenlabels`.
-
-        The 'hiddenlabelssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hiddenlabelssrc"]
-
-    @hiddenlabelssrc.setter
-    def hiddenlabelssrc(self, val):
-        self["hiddenlabelssrc"] = val
-
-    @property
-    def hidesources(self):
-        """
-        Determines whether or not a text link citing the data source is
-        placed at the bottom-right cored of the figure. Has only an
-        effect only on graphs that have been generated via forked
-        graphs from the Chart Studio Cloud (at https://chart-
-        studio.plotly.com or on-premise).
-
-        The 'hidesources' property is a boolean and must be specified as:
-          - A boolean value: True or False
-
-        Returns
-        -------
-        bool
-        """
-        return self["hidesources"]
-
-    @hidesources.setter
-    def hidesources(self, val):
-        self["hidesources"] = val
-
-    @property
     def hoveranywhere(self):
         """
         If true, `plotly_hover` events will fire for any cursor
@@ -1261,25 +1214,6 @@ class Layout(_BaseLayoutType):
         self["map"] = val
 
     @property
-    def mapbox(self):
-        """
-        The 'mapbox' property is an instance of Mapbox
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.Mapbox`
-          - A dict of string/value properties that will be passed
-            to the Mapbox constructor
-
-        Returns
-        -------
-        plotly.graph_objs.layout.Mapbox
-        """
-        return self["mapbox"]
-
-    @mapbox.setter
-    def mapbox(self, val):
-        self["mapbox"] = val
-
-    @property
     def margin(self):
         """
         The 'margin' property is an instance of Margin
@@ -1321,24 +1255,6 @@ class Layout(_BaseLayoutType):
     @meta.setter
     def meta(self, val):
         self["meta"] = val
-
-    @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
 
     @property
     def minreducedheight(self):
@@ -2473,16 +2389,6 @@ class Layout(_BaseLayoutType):
             visible:'legendonly' but it can contain many labels,
             and can simultaneously hide slices from several
             pies/funnelarea charts
-        hiddenlabelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `hiddenlabels`.
-        hidesources
-            Determines whether or not a text link citing the data
-            source is placed at the bottom-right cored of the
-            figure. Has only an effect only on graphs that have
-            been generated via forked graphs from the Chart Studio
-            Cloud (at https://chart-studio.plotly.com or on-
-            premise).
         hoveranywhere
             If true, `plotly_hover` events will fire for any cursor
             position within the plot area, not just over traces.
@@ -2549,9 +2455,6 @@ class Layout(_BaseLayoutType):
         map
             :class:`plotly.graph_objects.layout.Map` instance or
             dict with compatible properties
-        mapbox
-            :class:`plotly.graph_objects.layout.Mapbox` instance or
-            dict with compatible properties
         margin
             :class:`plotly.graph_objects.layout.Margin` instance or
             dict with compatible properties
@@ -2566,9 +2469,6 @@ class Layout(_BaseLayoutType):
             `meta` item in question. `meta` can also be an object
             for example `{key: value}` which can be accessed
             %{meta[key]}.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         minreducedheight
             Minimum height of the plot with margin.automargin
             applied (in px)
@@ -2819,8 +2719,6 @@ class Layout(_BaseLayoutType):
         grid=None,
         height=None,
         hiddenlabels=None,
-        hiddenlabelssrc=None,
-        hidesources=None,
         hoveranywhere=None,
         hoverdistance=None,
         hoverlabel=None,
@@ -2832,10 +2730,8 @@ class Layout(_BaseLayoutType):
         imagedefaults=None,
         legend=None,
         map=None,
-        mapbox=None,
         margin=None,
         meta=None,
-        metasrc=None,
         minreducedheight=None,
         minreducedwidth=None,
         modebar=None,
@@ -3096,16 +2992,6 @@ class Layout(_BaseLayoutType):
             visible:'legendonly' but it can contain many labels,
             and can simultaneously hide slices from several
             pies/funnelarea charts
-        hiddenlabelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `hiddenlabels`.
-        hidesources
-            Determines whether or not a text link citing the data
-            source is placed at the bottom-right cored of the
-            figure. Has only an effect only on graphs that have
-            been generated via forked graphs from the Chart Studio
-            Cloud (at https://chart-studio.plotly.com or on-
-            premise).
         hoveranywhere
             If true, `plotly_hover` events will fire for any cursor
             position within the plot area, not just over traces.
@@ -3172,9 +3058,6 @@ class Layout(_BaseLayoutType):
         map
             :class:`plotly.graph_objects.layout.Map` instance or
             dict with compatible properties
-        mapbox
-            :class:`plotly.graph_objects.layout.Mapbox` instance or
-            dict with compatible properties
         margin
             :class:`plotly.graph_objects.layout.Margin` instance or
             dict with compatible properties
@@ -3189,9 +3072,6 @@ class Layout(_BaseLayoutType):
             `meta` item in question. `meta` can also be an object
             for example `{key: value}` which can be accessed
             %{meta[key]}.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         minreducedheight
             Minimum height of the plot with margin.automargin
             applied (in px)
@@ -3448,8 +3328,6 @@ class Layout(_BaseLayoutType):
             "grid",
             "height",
             "hiddenlabels",
-            "hiddenlabelssrc",
-            "hidesources",
             "hoveranywhere",
             "hoverdistance",
             "hoverlabel",
@@ -3461,10 +3339,8 @@ class Layout(_BaseLayoutType):
             "images",
             "legend",
             "map",
-            "mapbox",
             "margin",
             "meta",
-            "metasrc",
             "minreducedheight",
             "minreducedwidth",
             "modebar",
@@ -3563,8 +3439,6 @@ an instance of :class:`plotly.graph_objs.Layout`""")
         self._set_property("grid", arg, grid)
         self._set_property("height", arg, height)
         self._set_property("hiddenlabels", arg, hiddenlabels)
-        self._set_property("hiddenlabelssrc", arg, hiddenlabelssrc)
-        self._set_property("hidesources", arg, hidesources)
         self._set_property("hoveranywhere", arg, hoveranywhere)
         self._set_property("hoverdistance", arg, hoverdistance)
         self._set_property("hoverlabel", arg, hoverlabel)
@@ -3576,10 +3450,8 @@ an instance of :class:`plotly.graph_objs.Layout`""")
         self._set_property("imagedefaults", arg, imagedefaults)
         self._set_property("legend", arg, legend)
         self._set_property("map", arg, map)
-        self._set_property("mapbox", arg, mapbox)
         self._set_property("margin", arg, margin)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("minreducedheight", arg, minreducedheight)
         self._set_property("minreducedwidth", arg, minreducedwidth)
         self._set_property("modebar", arg, modebar)

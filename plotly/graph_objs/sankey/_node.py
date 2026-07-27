@@ -11,24 +11,19 @@ class Node(_BaseTraceHierarchyType):
     _valid_props = {
         "align",
         "color",
-        "colorsrc",
         "customdata",
-        "customdatasrc",
         "groups",
         "hoverinfo",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "label",
-        "labelsrc",
         "line",
         "pad",
+        "sort",
         "thickness",
         "x",
-        "xsrc",
         "y",
-        "ysrc",
     }
 
     @property
@@ -80,24 +75,6 @@ class Node(_BaseTraceHierarchyType):
         self["color"] = val
 
     @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
-
-    @property
     def customdata(self):
         """
         Assigns extra data to each node.
@@ -114,25 +91,6 @@ class Node(_BaseTraceHierarchyType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def groups(self):
@@ -159,7 +117,7 @@ class Node(_BaseTraceHierarchyType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear when hovering nodes.
+        Determines what trace information appears when hovering nodes.
         If `none` or `skip` are set, no information is displayed upon
         hovering. But, if `none` is set, click and hover events are
         still fired.
@@ -265,25 +223,6 @@ class Node(_BaseTraceHierarchyType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def label(self):
         """
         The shown name of the node.
@@ -300,24 +239,6 @@ class Node(_BaseTraceHierarchyType):
     @label.setter
     def label(self, val):
         self["label"] = val
-
-    @property
-    def labelsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `label`.
-
-        The 'labelsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["labelsrc"]
-
-    @labelsrc.setter
-    def labelsrc(self, val):
-        self["labelsrc"] = val
 
     @property
     def line(self):
@@ -357,6 +278,28 @@ class Node(_BaseTraceHierarchyType):
         self["pad"] = val
 
     @property
+    def sort(self):
+        """
+        For `auto` (the default), the vertical order of nodes will be
+        determined automatically by the layout. For `input`, the
+        vertical order of nodes is kept the same as the order in the
+        input array.
+
+        The 'sort' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['auto', 'input']
+
+        Returns
+        -------
+        Any
+        """
+        return self["sort"]
+
+    @sort.setter
+    def sort(self, val):
+        self["sort"] = val
+
+    @property
     def thickness(self):
         """
         Sets the thickness (in px) of the `nodes`.
@@ -393,24 +336,6 @@ class Node(_BaseTraceHierarchyType):
         self["x"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         The normalized vertical position of the node.
@@ -429,24 +354,6 @@ class Node(_BaseTraceHierarchyType):
         self["y"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         align
@@ -459,20 +366,14 @@ class Node(_BaseTraceHierarchyType):
             color palette will be cycled through to have a variety
             of colors. These defaults are not fully opaque, to
             allow some visibility of what is beneath the node.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         customdata
             Assigns extra data to each node.
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         groups
             Groups of nodes. Each group is defined by an array with
             the indices of the nodes it contains. Multiple groups
             can be specified.
         hoverinfo
-            Determines which trace information appear when hovering
+            Determines what trace information appears when hovering
             nodes. If `none` or `skip` are set, no information is
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
@@ -519,31 +420,24 @@ class Node(_BaseTraceHierarchyType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         label
             The shown name of the node.
-        labelsrc
-            Sets the source reference on Chart Studio Cloud for
-            `label`.
         line
             :class:`plotly.graph_objects.sankey.node.Line` instance
             or dict with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
+        sort
+            For `auto` (the default), the vertical order of nodes
+            will be determined automatically by the layout. For
+            `input`, the vertical order of nodes is kept the same
+            as the order in the input array.
         thickness
             Sets the thickness (in px) of the `nodes`.
         x
             The normalized horizontal position of the node.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             The normalized vertical position of the node.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         """
 
     def __init__(
@@ -551,24 +445,19 @@ class Node(_BaseTraceHierarchyType):
         arg=None,
         align=None,
         color=None,
-        colorsrc=None,
         customdata=None,
-        customdatasrc=None,
         groups=None,
         hoverinfo=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         label=None,
-        labelsrc=None,
         line=None,
         pad=None,
+        sort=None,
         thickness=None,
         x=None,
-        xsrc=None,
         y=None,
-        ysrc=None,
         **kwargs,
     ):
         """
@@ -591,20 +480,14 @@ class Node(_BaseTraceHierarchyType):
             color palette will be cycled through to have a variety
             of colors. These defaults are not fully opaque, to
             allow some visibility of what is beneath the node.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         customdata
             Assigns extra data to each node.
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         groups
             Groups of nodes. Each group is defined by an array with
             the indices of the nodes it contains. Multiple groups
             can be specified.
         hoverinfo
-            Determines which trace information appear when hovering
+            Determines what trace information appears when hovering
             nodes. If `none` or `skip` are set, no information is
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
@@ -651,31 +534,24 @@ class Node(_BaseTraceHierarchyType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         label
             The shown name of the node.
-        labelsrc
-            Sets the source reference on Chart Studio Cloud for
-            `label`.
         line
             :class:`plotly.graph_objects.sankey.node.Line` instance
             or dict with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
+        sort
+            For `auto` (the default), the vertical order of nodes
+            will be determined automatically by the layout. For
+            `input`, the vertical order of nodes is kept the same
+            as the order in the input array.
         thickness
             Sets the thickness (in px) of the `nodes`.
         x
             The normalized horizontal position of the node.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             The normalized vertical position of the node.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
 
         Returns
         -------
@@ -703,23 +579,18 @@ an instance of :class:`plotly.graph_objs.sankey.Node`""")
 
         self._set_property("align", arg, align)
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("groups", arg, groups)
         self._set_property("hoverinfo", arg, hoverinfo)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("label", arg, label)
-        self._set_property("labelsrc", arg, labelsrc)
         self._set_property("line", arg, line)
         self._set_property("pad", arg, pad)
+        self._set_property("sort", arg, sort)
         self._set_property("thickness", arg, thickness)
         self._set_property("x", arg, x)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
-        self._set_property("ysrc", arg, ysrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

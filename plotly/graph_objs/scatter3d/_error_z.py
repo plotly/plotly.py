@@ -11,8 +11,6 @@ class ErrorZ(_BaseTraceHierarchyType):
     _valid_props = {
         "array",
         "arrayminus",
-        "arrayminussrc",
-        "arraysrc",
         "color",
         "symmetric",
         "thickness",
@@ -63,43 +61,6 @@ class ErrorZ(_BaseTraceHierarchyType):
     @arrayminus.setter
     def arrayminus(self, val):
         self["arrayminus"] = val
-
-    @property
-    def arrayminussrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `arrayminus`.
-
-        The 'arrayminussrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["arrayminussrc"]
-
-    @arrayminussrc.setter
-    def arrayminussrc(self, val):
-        self["arrayminussrc"] = val
-
-    @property
-    def arraysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `array`.
-
-        The 'arraysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["arraysrc"]
-
-    @arraysrc.setter
-    def arraysrc(self, val):
-        self["arraysrc"] = val
 
     @property
     def color(self):
@@ -310,12 +271,6 @@ class ErrorZ(_BaseTraceHierarchyType):
             bar in the bottom (left) direction for vertical
             (horizontal) bars Values are plotted relative to the
             underlying data.
-        arrayminussrc
-            Sets the source reference on Chart Studio Cloud for
-            `arrayminus`.
-        arraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `array`.
         color
             Sets the stroke color of the error bars.
         symmetric
@@ -361,8 +316,6 @@ class ErrorZ(_BaseTraceHierarchyType):
         arg=None,
         array=None,
         arrayminus=None,
-        arrayminussrc=None,
-        arraysrc=None,
         color=None,
         symmetric=None,
         thickness=None,
@@ -393,12 +346,6 @@ class ErrorZ(_BaseTraceHierarchyType):
             bar in the bottom (left) direction for vertical
             (horizontal) bars Values are plotted relative to the
             underlying data.
-        arrayminussrc
-            Sets the source reference on Chart Studio Cloud for
-            `arrayminus`.
-        arraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `array`.
         color
             Sets the stroke color of the error bars.
         symmetric
@@ -464,8 +411,6 @@ an instance of :class:`plotly.graph_objs.scatter3d.ErrorZ`""")
 
         self._set_property("array", arg, array)
         self._set_property("arrayminus", arg, arrayminus)
-        self._set_property("arrayminussrc", arg, arrayminussrc)
-        self._set_property("arraysrc", arg, arraysrc)
         self._set_property("color", arg, color)
         self._set_property("symmetric", arg, symmetric)
         self._set_property("thickness", arg, thickness)

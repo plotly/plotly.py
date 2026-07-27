@@ -8,7 +8,7 @@ import copy as _copy
 class Line(_BaseLayoutHierarchyType):
     _parent_path_str = "layout.map.layer"
     _path_str = "layout.map.layer.line"
-    _valid_props = {"dash", "dashsrc", "width"}
+    _valid_props = {"dash", "width"}
 
     @property
     def dash(self):
@@ -28,24 +28,6 @@ class Line(_BaseLayoutHierarchyType):
     @dash.setter
     def dash(self, val):
         self["dash"] = val
-
-    @property
-    def dashsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `dash`.
-
-        The 'dashsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["dashsrc"]
-
-    @dashsrc.setter
-    def dashsrc(self, val):
-        self["dashsrc"] = val
 
     @property
     def width(self):
@@ -73,15 +55,12 @@ class Line(_BaseLayoutHierarchyType):
             Sets the length of dashes and gaps
             (map.layer.paint.line-dasharray). Has an effect only
             when `type` is set to "line".
-        dashsrc
-            Sets the source reference on Chart Studio Cloud for
-            `dash`.
         width
             Sets the line width (map.layer.paint.line-width). Has
             an effect only when `type` is set to "line".
         """
 
-    def __init__(self, arg=None, dash=None, dashsrc=None, width=None, **kwargs):
+    def __init__(self, arg=None, dash=None, width=None, **kwargs):
         """
         Construct a new Line object
 
@@ -95,9 +74,6 @@ class Line(_BaseLayoutHierarchyType):
             Sets the length of dashes and gaps
             (map.layer.paint.line-dasharray). Has an effect only
             when `type` is set to "line".
-        dashsrc
-            Sets the source reference on Chart Studio Cloud for
-            `dash`.
         width
             Sets the line width (map.layer.paint.line-width). Has
             an effect only when `type` is set to "line".
@@ -127,7 +103,6 @@ an instance of :class:`plotly.graph_objs.layout.map.layer.Line`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("dash", arg, dash)
-        self._set_property("dashsrc", arg, dashsrc)
         self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

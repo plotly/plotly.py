@@ -118,8 +118,7 @@ class Contours(_BaseTraceHierarchyType):
         "(]" keep regions inside `value[0]` to `value[1]` "][", ")(",
         "](", ")[" keep regions outside `value[0]` to value[1]` Open
         vs. closed intervals make no difference to constraint display,
-        but all versions are allowed for consistency with filter
-        transforms.
+        but all versions are allowed.
 
         The 'operation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -286,7 +285,7 @@ class Contours(_BaseTraceHierarchyType):
             `value[1]` "][", ")(", "](", ")[" keep regions outside
             `value[0]` to value[1]` Open vs. closed intervals make
             no difference to constraint display, but all versions
-            are allowed for consistency with filter transforms.
+            are allowed.
         showlabels
             Determines whether to label the contour lines with
             their values.
@@ -368,7 +367,7 @@ class Contours(_BaseTraceHierarchyType):
             `value[1]` "][", ")(", "](", ")[" keep regions outside
             `value[0]` to value[1]` Open vs. closed intervals make
             no difference to constraint display, but all versions
-            are allowed for consistency with filter transforms.
+            are allowed.
         showlabels
             Determines whether to label the contour lines with
             their values.

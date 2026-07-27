@@ -306,8 +306,7 @@ Failed to write orca configuration file at '{path}'""".format(path=self.config_f
         The server URL to use for an external orca server, or None if orca
         should be managed locally
 
-        Overrides executable, port, timeout, mathjax, topojson,
-        and mapbox_access_token
+        Overrides executable, port, timeout, mathjax, and topojson
 
         Returns
         -------
@@ -336,7 +335,6 @@ The server_url property must be a string, but received value of type {typ}.
         self.timeout = None
         self.mathjax = None
         self.topojson = None
-        self.mapbox_access_token = None
         self._props["server_url"] = val
 
     @property
@@ -624,34 +622,6 @@ The mathjax property must be a string, but received value of type {typ}.
         shutdown_server()
 
     @property
-    def mapbox_access_token(self):
-        """
-        Mapbox access token required to render mapbox traces.
-
-        Returns
-        -------
-        str
-        """
-        return self._props.get("mapbox_access_token", None)
-
-    @mapbox_access_token.setter
-    def mapbox_access_token(self, val):
-        if val is None:
-            self._props.pop("mapbox_access_token", None)
-        else:
-            if not isinstance(val, str):
-                raise ValueError(
-                    """
-The mapbox_access_token property must be a string, \
-but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val)
-                )
-            self._props["mapbox_access_token"] = val
-
-        # Server must restart before setting is active
-        shutdown_server()
-
-    @property
     def use_xvfb(self):
         dflt = "auto"
         return self._props.get("use_xvfb", dflt)
@@ -719,7 +689,6 @@ orca configuration
     default_format: {default_format}
     mathjax: {mathjax}
     topojson: {topojson}
-    mapbox_access_token: {mapbox_access_token}
     use_xvfb: {use_xvfb}
 
 constants
@@ -738,7 +707,6 @@ constants
             default_format=self.default_format,
             mathjax=self.mathjax,
             topojson=self.topojson,
-            mapbox_access_token=self.mapbox_access_token,
             plotlyjs=self.plotlyjs,
             config_file=self.config_file,
             use_xvfb=self.use_xvfb,
@@ -1299,11 +1267,6 @@ Install using conda:
                 if config.mathjax:
                     cmd_list.extend(["--mathjax", config.mathjax])
 
-                if config.mapbox_access_token:
-                    cmd_list.extend(
-                        ["--mapbox-access-token", config.mapbox_access_token]
-                    )
-
                 # Create subprocess that launches the orca server on the
                 # specified port.
                 DEVNULL = open(os.devnull, "wb")
@@ -1513,25 +1476,6 @@ with the following error:
             err_message += """
 Try setting the `validate` argument to True to check for errors in the
 figure specification"""
-        elif response.status_code == 525:
-            any_mapbox = any(
-                [
-                    trace.get("type", None) == "scattermapbox"
-                    for trace in fig_dict.get("data", [])
-                ]
-            )
-            if any_mapbox and config.mapbox_access_token is None:
-                err_message += """
-Exporting scattermapbox traces requires a mapbox access token.
-Create a token in your mapbox account and then set it using:
-
->>> plotly.io.orca.config.mapbox_access_token = 'pk.abc...'
-
-If you would like this token to be applied automatically in
-future sessions, then save your orca configuration as follows:
-
->>> plotly.io.orca.config.save()
-"""
         elif response.status_code == 530 and format == "eps":
             err_message += """
 Exporting to EPS format requires the poppler library.  You can install

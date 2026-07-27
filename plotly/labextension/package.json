@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
-    "plotly.js": "3.6.0",
+    "plotly.js": "4.0.0-rc.0",
     "@lumino/widgets": "~2.4.0"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "outputDir": "../plotly/labextension",
     "webpackConfig": "./webpack.config.js",
     "_build": {
-      "load": "static/remoteEntry.2a6392a40c19ad8383a0.js",
+      "load": "static/remoteEntry.c5efd356a40443797e61.js",
       "mimeExtension": "./mimeExtension"
     }
   }

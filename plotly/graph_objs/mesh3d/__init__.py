@@ -8,7 +8,6 @@ if TYPE_CHECKING:
     from ._legendgrouptitle import Legendgrouptitle
     from ._lighting import Lighting
     from ._lightposition import Lightposition
-    from ._stream import Stream
     from . import colorbar
     from . import hoverlabel
     from . import legendgrouptitle
@@ -25,6 +24,5 @@ else:
             "._legendgrouptitle.Legendgrouptitle",
             "._lighting.Lighting",
             "._lightposition.Lightposition",
-            "._stream.Stream",
         ],
     )

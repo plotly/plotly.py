@@ -12,7 +12,6 @@ class Parcats(_BaseTraceType):
         "arrangement",
         "bundlecolors",
         "counts",
-        "countssrc",
         "dimensiondefaults",
         "dimensions",
         "domain",
@@ -25,10 +24,8 @@ class Parcats(_BaseTraceType):
         "legendwidth",
         "line",
         "meta",
-        "metasrc",
         "name",
         "sortpaths",
-        "stream",
         "tickfont",
         "type",
         "uid",
@@ -99,24 +96,6 @@ class Parcats(_BaseTraceType):
         self["counts"] = val
 
     @property
-    def countssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `counts`.
-
-        The 'countssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["countssrc"]
-
-    @countssrc.setter
-    def countssrc(self, val):
-        self["countssrc"] = val
-
-    @property
     def dimensions(self):
         """
         The dimensions (variables) of the parallel categories diagram.
@@ -183,7 +162,7 @@ class Parcats(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -398,24 +377,6 @@ class Parcats(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -455,25 +416,6 @@ class Parcats(_BaseTraceType):
     @sortpaths.setter
     def sortpaths(self, val):
         self["sortpaths"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.parcats.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.parcats.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def tickfont(self):
@@ -589,9 +531,6 @@ class Parcats(_BaseTraceType):
             The number of observations represented by each state.
             Defaults to 1 so that each state represents one
             observation
-        countssrc
-            Sets the source reference on Chart Studio Cloud for
-            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -604,7 +543,7 @@ class Parcats(_BaseTraceType):
             :class:`plotly.graph_objects.parcats.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
@@ -681,9 +620,6 @@ class Parcats(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -692,9 +628,6 @@ class Parcats(_BaseTraceType):
             paths based on dimension categories from left to right.
             If `backward`, sort paths based on dimensions
             categories from right to left.
-        stream
-            :class:`plotly.graph_objects.parcats.Stream` instance
-            or dict with compatible properties
         tickfont
             Sets the font for the `category` labels.
         uid
@@ -732,7 +665,6 @@ class Parcats(_BaseTraceType):
         arrangement=None,
         bundlecolors=None,
         counts=None,
-        countssrc=None,
         dimensions=None,
         dimensiondefaults=None,
         domain=None,
@@ -745,10 +677,8 @@ class Parcats(_BaseTraceType):
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         sortpaths=None,
-        stream=None,
         tickfont=None,
         uid=None,
         uirevision=None,
@@ -780,9 +710,6 @@ class Parcats(_BaseTraceType):
             The number of observations represented by each state.
             Defaults to 1 so that each state represents one
             observation
-        countssrc
-            Sets the source reference on Chart Studio Cloud for
-            `counts`.
         dimensions
             The dimensions (variables) of the parallel categories
             diagram.
@@ -795,7 +722,7 @@ class Parcats(_BaseTraceType):
             :class:`plotly.graph_objects.parcats.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
@@ -872,9 +799,6 @@ class Parcats(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -883,9 +807,6 @@ class Parcats(_BaseTraceType):
             paths based on dimension categories from left to right.
             If `backward`, sort paths based on dimensions
             categories from right to left.
-        stream
-            :class:`plotly.graph_objects.parcats.Stream` instance
-            or dict with compatible properties
         tickfont
             Sets the font for the `category` labels.
         uid
@@ -943,7 +864,6 @@ an instance of :class:`plotly.graph_objs.Parcats`""")
         self._set_property("arrangement", arg, arrangement)
         self._set_property("bundlecolors", arg, bundlecolors)
         self._set_property("counts", arg, counts)
-        self._set_property("countssrc", arg, countssrc)
         self._set_property("dimensions", arg, dimensions)
         self._set_property("dimensiondefaults", arg, dimensiondefaults)
         self._set_property("domain", arg, domain)
@@ -956,10 +876,8 @@ an instance of :class:`plotly.graph_objs.Parcats`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("line", arg, line)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("sortpaths", arg, sortpaths)
-        self._set_property("stream", arg, stream)
         self._set_property("tickfont", arg, tickfont)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)

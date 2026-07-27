@@ -10,12 +10,10 @@ class Parcoords(_BaseTraceType):
     _path_str = "parcoords"
     _valid_props = {
         "customdata",
-        "customdatasrc",
         "dimensiondefaults",
         "dimensions",
         "domain",
         "ids",
-        "idssrc",
         "labelangle",
         "labelfont",
         "labelside",
@@ -25,10 +23,8 @@ class Parcoords(_BaseTraceType):
         "legendwidth",
         "line",
         "meta",
-        "metasrc",
         "name",
         "rangefont",
-        "stream",
         "tickfont",
         "type",
         "uid",
@@ -57,25 +53,6 @@ class Parcoords(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def dimensions(self):
@@ -161,24 +138,6 @@ class Parcoords(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def labelangle(self):
@@ -378,24 +337,6 @@ class Parcoords(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -435,25 +376,6 @@ class Parcoords(_BaseTraceType):
     @rangefont.setter
     def rangefont(self, val):
         self["rangefont"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.parcoords.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.parcoords.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def tickfont(self):
@@ -579,9 +501,6 @@ class Parcoords(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
@@ -597,9 +516,6 @@ class Parcoords(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         labelangle
             Sets the angle of the labels with respect to the
             horizontal. For example, a `tickangle` of -90 draws the
@@ -653,17 +569,11 @@ class Parcoords(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         rangefont
             Sets the font for the `dimension` range values.
-        stream
-            :class:`plotly.graph_objects.parcoords.Stream` instance
-            or dict with compatible properties
         tickfont
             Sets the font for the `dimension` tick values.
         uid
@@ -702,12 +612,10 @@ class Parcoords(_BaseTraceType):
         self,
         arg=None,
         customdata=None,
-        customdatasrc=None,
         dimensions=None,
         dimensiondefaults=None,
         domain=None,
         ids=None,
-        idssrc=None,
         labelangle=None,
         labelfont=None,
         labelside=None,
@@ -717,10 +625,8 @@ class Parcoords(_BaseTraceType):
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         rangefont=None,
-        stream=None,
         tickfont=None,
         uid=None,
         uirevision=None,
@@ -745,9 +651,6 @@ class Parcoords(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
@@ -763,9 +666,6 @@ class Parcoords(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         labelangle
             Sets the angle of the labels with respect to the
             horizontal. For example, a `tickangle` of -90 draws the
@@ -819,17 +719,11 @@ class Parcoords(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         rangefont
             Sets the font for the `dimension` range values.
-        stream
-            :class:`plotly.graph_objects.parcoords.Stream` instance
-            or dict with compatible properties
         tickfont
             Sets the font for the `dimension` tick values.
         uid
@@ -888,12 +782,10 @@ an instance of :class:`plotly.graph_objs.Parcoords`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("dimensions", arg, dimensions)
         self._set_property("dimensiondefaults", arg, dimensiondefaults)
         self._set_property("domain", arg, domain)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("labelangle", arg, labelangle)
         self._set_property("labelfont", arg, labelfont)
         self._set_property("labelside", arg, labelside)
@@ -903,10 +795,8 @@ an instance of :class:`plotly.graph_objs.Parcoords`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("line", arg, line)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("rangefont", arg, rangefont)
-        self._set_property("stream", arg, stream)
         self._set_property("tickfont", arg, tickfont)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)

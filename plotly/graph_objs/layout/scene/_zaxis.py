@@ -15,7 +15,6 @@ class ZAxis(_BaseLayoutHierarchyType):
         "backgroundcolor",
         "calendar",
         "categoryarray",
-        "categoryarraysrc",
         "categoryorder",
         "color",
         "dtick",
@@ -59,9 +58,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         "ticks",
         "ticksuffix",
         "ticktext",
-        "ticktextsrc",
         "tickvals",
-        "tickvalssrc",
         "tickwidth",
         "title",
         "type",
@@ -207,25 +204,6 @@ class ZAxis(_BaseLayoutHierarchyType):
     @categoryarray.setter
     def categoryarray(self, val):
         self["categoryarray"] = val
-
-    @property
-    def categoryarraysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `categoryarray`.
-
-        The 'categoryarraysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["categoryarraysrc"]
-
-    @categoryarraysrc.setter
-    def categoryarraysrc(self, val):
-        self["categoryarraysrc"] = val
 
     @property
     def categoryorder(self):
@@ -1174,24 +1152,6 @@ class ZAxis(_BaseLayoutHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
@@ -1209,24 +1169,6 @@ class ZAxis(_BaseLayoutHierarchyType):
     @tickvals.setter
     def tickvals(self, val):
         self["tickvals"] = val
-
-    @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
 
     @property
     def tickwidth(self):
@@ -1401,9 +1343,6 @@ class ZAxis(_BaseLayoutHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1635,16 +1574,10 @@ class ZAxis(_BaseLayoutHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -1677,7 +1610,6 @@ class ZAxis(_BaseLayoutHierarchyType):
         backgroundcolor=None,
         calendar=None,
         categoryarray=None,
-        categoryarraysrc=None,
         categoryorder=None,
         color=None,
         dtick=None,
@@ -1721,9 +1653,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         ticks=None,
         ticksuffix=None,
         ticktext=None,
-        ticktextsrc=None,
         tickvals=None,
-        tickvalssrc=None,
         tickwidth=None,
         title=None,
         type=None,
@@ -1774,9 +1704,6 @@ class ZAxis(_BaseLayoutHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -2008,16 +1935,10 @@ class ZAxis(_BaseLayoutHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         title
@@ -2070,7 +1991,6 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`""")
         self._set_property("backgroundcolor", arg, backgroundcolor)
         self._set_property("calendar", arg, calendar)
         self._set_property("categoryarray", arg, categoryarray)
-        self._set_property("categoryarraysrc", arg, categoryarraysrc)
         self._set_property("categoryorder", arg, categoryorder)
         self._set_property("color", arg, color)
         self._set_property("dtick", arg, dtick)
@@ -2114,9 +2034,7 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`""")
         self._set_property("ticks", arg, ticks)
         self._set_property("ticksuffix", arg, ticksuffix)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("tickwidth", arg, tickwidth)
         self._set_property("title", arg, title)
         self._set_property("type", arg, type)

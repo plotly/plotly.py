@@ -17,7 +17,6 @@ class Line(_BaseTraceHierarchyType):
         "color",
         "coloraxis",
         "colorscale",
-        "colorsrc",
         "reversescale",
         "width",
     }
@@ -193,7 +192,7 @@ class Line(_BaseTraceHierarchyType):
         Sets the colorscale. Has an effect only if in
         `marker.line.color` is set to a numerical array. The colorscale
         must be an array containing arrays mapping a normalized value
-        to an rgb, rgba, hex, hsl, hsv, or named color string. At
+        to an rgb, rgba, hex, hsl, hsla, hwb, or named color string. At
         minimum, a mapping for the lowest (0) and highest (1) values
         are required. For example, `[[0, 'rgb(0,0,255)'], [1,
         'rgb(255,0,0)']]`. To control the bounds of the colorscale in
@@ -239,24 +238,6 @@ class Line(_BaseTraceHierarchyType):
     @colorscale.setter
     def colorscale(self, val):
         self["colorscale"] = val
-
-    @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
 
     @property
     def reversescale(self):
@@ -354,8 +335,8 @@ class Line(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if in
             `marker.line.color` is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
-            normalized value to an rgb, rgba, hex, hsl, hsv, or
-            named color string. At minimum, a mapping for the
+            normalized value to an rgb, rgba, hex, hsl, hsla, hwb,
+            or named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
@@ -364,9 +345,6 @@ class Line(_BaseTraceHierarchyType):
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.line.color` is set to a numerical array.
@@ -389,7 +367,6 @@ class Line(_BaseTraceHierarchyType):
         color=None,
         coloraxis=None,
         colorscale=None,
-        colorsrc=None,
         reversescale=None,
         width=None,
         **kwargs,
@@ -456,8 +433,8 @@ class Line(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if in
             `marker.line.color` is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
-            normalized value to an rgb, rgba, hex, hsl, hsv, or
-            named color string. At minimum, a mapping for the
+            normalized value to an rgb, rgba, hex, hsl, hsla, hwb,
+            or named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
@@ -466,9 +443,6 @@ class Line(_BaseTraceHierarchyType):
             string of the following list: Blackbody,Bluered,Blues,C
             ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
             and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.line.color` is set to a numerical array.
@@ -511,7 +485,6 @@ an instance of :class:`plotly.graph_objs.scatter3d.marker.Line`""")
         self._set_property("color", arg, color)
         self._set_property("coloraxis", arg, coloraxis)
         self._set_property("colorscale", arg, colorscale)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("width", arg, width)
         self._process_kwargs(**dict(arg, **kwargs))

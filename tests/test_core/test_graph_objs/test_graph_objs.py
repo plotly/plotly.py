@@ -1,7 +1,6 @@
 from unittest import TestCase
 import warnings
 
-import pytest
 import plotly.graph_objs as go
 
 
@@ -35,7 +34,6 @@ OLD_CLASS_NAMES = [
     "Scatter",
     "Scatter3d",
     "Scene",
-    "Stream",
     "Surface",
     "Trace",
     "XAxis",
@@ -158,17 +156,6 @@ class TestPop(TestCase):
 
 
 class TestDeprecationWarnings(TestCase):
-    def test_warn_on_deprecated_mapbox_traces(self):
-        # This test will fail if any of the following traces
-        # fails to emit a DeprecationWarning
-        for trace_constructor in [
-            go.Scattermapbox,
-            go.Densitymapbox,
-            go.Choroplethmapbox,
-        ]:
-            with pytest.warns(DeprecationWarning):
-                _ = go.Figure([trace_constructor()])
-
     def test_no_warn_on_non_deprecated_traces(self):
         # This test will fail if any of the following traces emits a DeprecationWarning
         for trace_constructor in [

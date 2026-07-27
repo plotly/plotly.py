@@ -8,7 +8,7 @@ import copy as _copy
 class Line(_BaseTraceHierarchyType):
     _parent_path_str = "funnelarea.marker"
     _path_str = "funnelarea.marker.line"
-    _valid_props = {"color", "colorsrc", "width", "widthsrc"}
+    _valid_props = {"color", "width"}
 
     @property
     def color(self):
@@ -35,24 +35,6 @@ class Line(_BaseTraceHierarchyType):
         self["color"] = val
 
     @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
-
-    @property
     def width(self):
         """
         Sets the width (in px) of the line enclosing each sector.
@@ -72,43 +54,17 @@ class Line(_BaseTraceHierarchyType):
         self["width"] = val
 
     @property
-    def widthsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `width`.
-
-        The 'widthsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["widthsrc"]
-
-    @widthsrc.setter
-    def widthsrc(self, val):
-        self["widthsrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         color
             Sets the color of the line enclosing each sector.
             Defaults to the `paper_bgcolor` value.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         width
             Sets the width (in px) of the line enclosing each
             sector.
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
         """
 
-    def __init__(
-        self, arg=None, color=None, colorsrc=None, width=None, widthsrc=None, **kwargs
-    ):
+    def __init__(self, arg=None, color=None, width=None, **kwargs):
         """
         Construct a new Line object
 
@@ -121,15 +77,9 @@ class Line(_BaseTraceHierarchyType):
         color
             Sets the color of the line enclosing each sector.
             Defaults to the `paper_bgcolor` value.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         width
             Sets the width (in px) of the line enclosing each
             sector.
-        widthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `width`.
 
         Returns
         -------
@@ -156,8 +106,6 @@ an instance of :class:`plotly.graph_objs.funnelarea.marker.Line`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("width", arg, width)
-        self._set_property("widthsrc", arg, widthsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

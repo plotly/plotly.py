@@ -8,7 +8,7 @@ import copy as _copy
 class Fill(_BaseTraceHierarchyType):
     _parent_path_str = "table.header"
     _path_str = "table.header.fill"
-    _valid_props = {"color", "colorsrc"}
+    _valid_props = {"color"}
 
     @property
     def color(self):
@@ -35,35 +35,14 @@ class Fill(_BaseTraceHierarchyType):
         self["color"] = val
 
     @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         color
             Sets the cell fill color. It accepts either a specific
             color or an array of colors or a 2D array of colors.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         """
 
-    def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
+    def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Fill object
 
@@ -76,9 +55,6 @@ class Fill(_BaseTraceHierarchyType):
         color
             Sets the cell fill color. It accepts either a specific
             color or an array of colors or a 2D array of colors.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
 
         Returns
         -------
@@ -105,6 +81,5 @@ an instance of :class:`plotly.graph_objs.table.header.Fill`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

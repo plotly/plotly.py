@@ -139,8 +139,8 @@ def simple_white():
     opts = {"marker": {"line": {"width": 0.6, "color": "white"}}}
     template.data.histogram = [opts]
 
-    # Mapbox light style
-    template.layout.mapbox.style = "light"
+    # Light map style
+    template.layout.map.style = "light"
 
     # Automargin for pie chart
     template.data.pie = [{"automargin": True}]
@@ -407,8 +407,8 @@ def plotly():
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
 
-    # Mapbox light style
-    template.layout.mapbox.style = "light"
+    # Light map style
+    template.layout.map.style = "light"
 
     # Automargin for pie chart
     template.data.pie = [{"automargin": True}]
@@ -487,8 +487,8 @@ def plotly_white():
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
 
-    # Mapbox light style
-    template.layout.mapbox.style = "light"
+    # Light map style
+    template.layout.map.style = "light"
 
     # Automargin for pie chart
     template.data.pie = [{"automargin": True}]
@@ -575,8 +575,8 @@ def plotly_dark():
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
 
-    # Mapbox light style
-    template.layout.mapbox.style = "dark"
+    # Light map style
+    template.layout.map.style = "dark"
 
     # Set marker outline color
     opts = {"marker": {"line": {"color": plotly_clrs["Rhino Darker"]}}}

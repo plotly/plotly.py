@@ -167,7 +167,7 @@ Go check out your newly pushed branch at https://github.com/plotly/plotly.py. If
 | Name              | Documentation                             | In GitHub     |
 | ----------------- | ----------------------------------------- | ------------- |
 | Dendrogram        | https://plot.ly/python/dendrogram/        |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_dendrogram.py|
-| Hexbin Map        | https://plot.ly/python/hexbin-mapbox/     |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_hexbin_map.py|
+| Hexbin Map        | https://plot.ly/python/hexbin-map/     |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_hexbin_map.py|
 | Quiver            | https://plot.ly/python/quiver-plots/      |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_quiver.py|
 | Streamline        | https://plot.ly/python/streamline-plots/  |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_streamline.py|
 | Table             | https://plot.ly/python/table/             |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_table.py|

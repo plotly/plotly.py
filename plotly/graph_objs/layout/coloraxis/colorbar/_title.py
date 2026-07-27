@@ -35,8 +35,8 @@ class Title(_BaseLayoutHierarchyType):
     def side(self):
         """
         Determines the location of color bar's title with respect to
-        the color bar. Defaults to "top" when `orientation` if "v" and
-        defaults to "right" when `orientation` if "h".
+        the color bar. Defaults to "top" when `orientation` is "v" and
+        defaults to "right" when `orientation` is "h".
 
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -79,8 +79,8 @@ class Title(_BaseLayoutHierarchyType):
         side
             Determines the location of color bar's title with
             respect to the color bar. Defaults to "top" when
-            `orientation` if "v" and  defaults to "right" when
-            `orientation` if "h".
+            `orientation` is "v" and defaults to "right" when
+            `orientation` is "h".
         text
             Sets the title of the color bar.
         """
@@ -100,8 +100,8 @@ class Title(_BaseLayoutHierarchyType):
         side
             Determines the location of color bar's title with
             respect to the color bar. Defaults to "top" when
-            `orientation` if "v" and  defaults to "right" when
-            `orientation` if "h".
+            `orientation` is "v" and defaults to "right" when
+            `orientation` is "h".
         text
             Sets the title of the color bar.
 

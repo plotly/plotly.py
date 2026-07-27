@@ -10,7 +10,6 @@ if TYPE_CHECKING:
     from ._line import Line
     from ._marker import Marker
     from ._projection import Projection
-    from ._stream import Stream
     from ._textfont import Textfont
     from . import hoverlabel
     from . import legendgrouptitle
@@ -32,7 +31,6 @@ else:
             "._line.Line",
             "._marker.Marker",
             "._projection.Projection",
-            "._stream.Stream",
             "._textfont.Textfont",
         ],
     )

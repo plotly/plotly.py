@@ -195,10 +195,11 @@ class Geo(_BaseLayoutHierarchyType):
         `fitbounds` leads to `center.lon`, `center.lat`,
         `projection.rotation.lon`, `projection.rotation.lat`,
         `lonaxis.range` and `lataxis.range` getting auto-filled. If
-        "locations", only the trace's visible locations are considered
-        in the `fitbounds` computations. If "geojson", the entire trace
-        input `geojson` (if provided) is considered in the `fitbounds`
-        computations, Defaults to False.
+        "locations" (default), only the trace's visible locations are
+        considered in the `fitbounds` computations. If "geojson", the
+        entire trace input `geojson` (if provided) is considered in the
+        `fitbounds` computations. If False, the view settings are used
+        as-is; set this to opt out of auto-fitting.
 
         The 'fitbounds' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -709,11 +710,12 @@ class Geo(_BaseLayoutHierarchyType):
             `fitbounds` leads to `center.lon`, `center.lat`,
             `projection.rotation.lon`, `projection.rotation.lat`,
             `lonaxis.range` and `lataxis.range` getting auto-
-            filled. If "locations", only the trace's visible
-            locations are considered in the `fitbounds`
+            filled. If "locations" (default), only the trace's
+            visible locations are considered in the `fitbounds`
             computations. If "geojson", the entire trace input
             `geojson` (if provided) is considered in the
-            `fitbounds` computations, Defaults to False.
+            `fitbounds` computations. If False, the view settings
+            are used as-is; set this to opt out of auto-fitting.
         framecolor
             Sets the color the frame.
         framewidth
@@ -845,11 +847,12 @@ class Geo(_BaseLayoutHierarchyType):
             `fitbounds` leads to `center.lon`, `center.lat`,
             `projection.rotation.lon`, `projection.rotation.lat`,
             `lonaxis.range` and `lataxis.range` getting auto-
-            filled. If "locations", only the trace's visible
-            locations are considered in the `fitbounds`
+            filled. If "locations" (default), only the trace's
+            visible locations are considered in the `fitbounds`
             computations. If "geojson", the entire trace input
             `geojson` (if provided) is considered in the
-            `fitbounds` computations, Defaults to False.
+            `fitbounds` computations. If False, the view settings
+            are used as-is; set this to opt out of auto-fitting.
         framecolor
             Sets the color the frame.
         framewidth

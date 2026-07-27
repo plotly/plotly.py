@@ -6,7 +6,6 @@ if TYPE_CHECKING:
     from ._contours import Contours
     from ._legendgrouptitle import Legendgrouptitle
     from ._line import Line
-    from ._stream import Stream
     from . import colorbar
     from . import contours
     from . import legendgrouptitle
@@ -21,6 +20,5 @@ else:
             "._contours.Contours",
             "._legendgrouptitle.Legendgrouptitle",
             "._line.Line",
-            "._stream.Stream",
         ],
     )

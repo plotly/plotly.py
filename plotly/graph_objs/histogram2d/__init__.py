@@ -6,7 +6,6 @@ if TYPE_CHECKING:
     from ._hoverlabel import Hoverlabel
     from ._legendgrouptitle import Legendgrouptitle
     from ._marker import Marker
-    from ._stream import Stream
     from ._textfont import Textfont
     from ._xbins import XBins
     from ._ybins import YBins
@@ -24,7 +23,6 @@ else:
             "._hoverlabel.Hoverlabel",
             "._legendgrouptitle.Legendgrouptitle",
             "._marker.Marker",
-            "._stream.Stream",
             "._textfont.Textfont",
             "._xbins.XBins",
             "._ybins.YBins",

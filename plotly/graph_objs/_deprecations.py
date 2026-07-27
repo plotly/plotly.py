@@ -496,34 +496,6 @@ Please replace it with one of the following more specific types
         super().__init__(*args, **kwargs)
 
 
-class Stream(dict):
-    """
-        plotly.graph_objs.Stream is deprecated.
-    Please replace it with one of the following more specific types
-      - plotly.graph_objs.scatter.Stream
-      - plotly.graph_objs.area.Stream
-
-    """
-
-    def __init__(self, *args, **kwargs):
-        """
-                plotly.graph_objs.Stream is deprecated.
-        Please replace it with one of the following more specific types
-          - plotly.graph_objs.scatter.Stream
-          - plotly.graph_objs.area.Stream
-
-        """
-        warnings.warn(
-            """plotly.graph_objs.Stream is deprecated.
-Please replace it with one of the following more specific types
-  - plotly.graph_objs.scatter.Stream
-  - plotly.graph_objs.area.Stream
-""",
-            DeprecationWarning,
-        )
-        super().__init__(*args, **kwargs)
-
-
 class XAxis(dict):
     """
         plotly.graph_objs.XAxis is deprecated.

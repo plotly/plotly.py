@@ -8,7 +8,7 @@ import copy as _copy
 class X(_BaseTraceHierarchyType):
     _parent_path_str = "volume.slices"
     _path_str = "volume.slices.x"
-    _valid_props = {"fill", "locations", "locationssrc", "show"}
+    _valid_props = {"fill", "locations", "show"}
 
     @property
     def fill(self):
@@ -52,25 +52,6 @@ class X(_BaseTraceHierarchyType):
         self["locations"] = val
 
     @property
-    def locationssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `locations`.
-
-        The 'locationssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["locationssrc"]
-
-    @locationssrc.setter
-    def locationssrc(self, val):
-        self["locationssrc"] = val
-
-    @property
     def show(self):
         """
         Determines whether or not slice planes about the x dimension
@@ -102,23 +83,12 @@ class X(_BaseTraceHierarchyType):
             Specifies the location(s) of slices on the axis. When
             not specified slices would be created for all points of
             the axis x except start and end.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         show
             Determines whether or not slice planes about the x
             dimension are drawn.
         """
 
-    def __init__(
-        self,
-        arg=None,
-        fill=None,
-        locations=None,
-        locationssrc=None,
-        show=None,
-        **kwargs,
-    ):
+    def __init__(self, arg=None, fill=None, locations=None, show=None, **kwargs):
         """
         Construct a new X object
 
@@ -138,9 +108,6 @@ class X(_BaseTraceHierarchyType):
             Specifies the location(s) of slices on the axis. When
             not specified slices would be created for all points of
             the axis x except start and end.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         show
             Determines whether or not slice planes about the x
             dimension are drawn.
@@ -171,7 +138,6 @@ an instance of :class:`plotly.graph_objs.volume.slices.X`""")
 
         self._set_property("fill", arg, fill)
         self._set_property("locations", arg, locations)
-        self._set_property("locationssrc", arg, locationssrc)
         self._set_property("show", arg, show)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

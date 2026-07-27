@@ -7,7 +7,6 @@ if TYPE_CHECKING:
     from ._labelfont import Labelfont
     from ._legendgrouptitle import Legendgrouptitle
     from ._line import Line
-    from ._stream import Stream
     from ._tickfont import Tickfont
     from . import legendgrouptitle
     from . import line
@@ -23,7 +22,6 @@ else:
             "._labelfont.Labelfont",
             "._legendgrouptitle.Legendgrouptitle",
             "._line.Line",
-            "._stream.Stream",
             "._tickfont.Tickfont",
         ],
     )

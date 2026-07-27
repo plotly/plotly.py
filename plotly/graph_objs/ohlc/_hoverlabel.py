@@ -10,14 +10,10 @@ class Hoverlabel(_BaseTraceHierarchyType):
     _path_str = "ohlc.hoverlabel"
     _valid_props = {
         "align",
-        "alignsrc",
         "bgcolor",
-        "bgcolorsrc",
         "bordercolor",
-        "bordercolorsrc",
         "font",
         "namelength",
-        "namelengthsrc",
         "showarrow",
         "split",
     }
@@ -45,24 +41,6 @@ class Hoverlabel(_BaseTraceHierarchyType):
         self["align"] = val
 
     @property
-    def alignsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `align`.
-
-        The 'alignsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["alignsrc"]
-
-    @alignsrc.setter
-    def alignsrc(self, val):
-        self["alignsrc"] = val
-
-    @property
     def bgcolor(self):
         """
         Sets the background color of the hover labels for this trace
@@ -86,24 +64,6 @@ class Hoverlabel(_BaseTraceHierarchyType):
         self["bgcolor"] = val
 
     @property
-    def bgcolorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `bgcolor`.
-
-        The 'bgcolorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["bgcolorsrc"]
-
-    @bgcolorsrc.setter
-    def bgcolorsrc(self, val):
-        self["bgcolorsrc"] = val
-
-    @property
     def bordercolor(self):
         """
         Sets the border color of the hover labels for this trace.
@@ -125,25 +85,6 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @bordercolor.setter
     def bordercolor(self, val):
         self["bordercolor"] = val
-
-    @property
-    def bordercolorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `bordercolor`.
-
-        The 'bordercolorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["bordercolorsrc"]
-
-    @bordercolorsrc.setter
-    def bordercolorsrc(self, val):
-        self["bordercolorsrc"] = val
 
     @property
     def font(self):
@@ -192,25 +133,6 @@ class Hoverlabel(_BaseTraceHierarchyType):
         self["namelength"] = val
 
     @property
-    def namelengthsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `namelength`.
-
-        The 'namelengthsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["namelengthsrc"]
-
-    @namelengthsrc.setter
-    def namelengthsrc(self, val):
-        self["namelengthsrc"] = val
-
-    @property
     def showarrow(self):
         """
         Sets whether or not to show the hover label arrow/triangle
@@ -256,21 +178,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
             label text spans more two or more lines
-        alignsrc
-            Sets the source reference on Chart Studio Cloud for
-            `align`.
         bgcolor
             Sets the background color of the hover labels for this
             trace
-        bgcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `bgcolor`.
         bordercolor
             Sets the border color of the hover labels for this
             trace.
-        bordercolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `bordercolor`.
         font
             Sets the font used in hover labels.
         namelength
@@ -281,9 +194,6 @@ class Hoverlabel(_BaseTraceHierarchyType):
             the whole name if it is less than that many characters,
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
-        namelengthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `namelength`.
         showarrow
             Sets whether or not to show the hover label
             arrow/triangle pointing to the data point.
@@ -298,14 +208,10 @@ class Hoverlabel(_BaseTraceHierarchyType):
         self,
         arg=None,
         align=None,
-        alignsrc=None,
         bgcolor=None,
-        bgcolorsrc=None,
         bordercolor=None,
-        bordercolorsrc=None,
         font=None,
         namelength=None,
-        namelengthsrc=None,
         showarrow=None,
         split=None,
         **kwargs,
@@ -323,21 +229,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
             label text spans more two or more lines
-        alignsrc
-            Sets the source reference on Chart Studio Cloud for
-            `align`.
         bgcolor
             Sets the background color of the hover labels for this
             trace
-        bgcolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `bgcolor`.
         bordercolor
             Sets the border color of the hover labels for this
             trace.
-        bordercolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `bordercolor`.
         font
             Sets the font used in hover labels.
         namelength
@@ -348,9 +245,6 @@ class Hoverlabel(_BaseTraceHierarchyType):
             the whole name if it is less than that many characters,
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
-        namelengthsrc
-            Sets the source reference on Chart Studio Cloud for
-            `namelength`.
         showarrow
             Sets whether or not to show the hover label
             arrow/triangle pointing to the data point.
@@ -385,14 +279,10 @@ an instance of :class:`plotly.graph_objs.ohlc.Hoverlabel`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("align", arg, align)
-        self._set_property("alignsrc", arg, alignsrc)
         self._set_property("bgcolor", arg, bgcolor)
-        self._set_property("bgcolorsrc", arg, bgcolorsrc)
         self._set_property("bordercolor", arg, bordercolor)
-        self._set_property("bordercolorsrc", arg, bordercolorsrc)
         self._set_property("font", arg, font)
         self._set_property("namelength", arg, namelength)
-        self._set_property("namelengthsrc", arg, namelengthsrc)
         self._set_property("showarrow", arg, showarrow)
         self._set_property("split", arg, split)
         self._process_kwargs(**dict(arg, **kwargs))

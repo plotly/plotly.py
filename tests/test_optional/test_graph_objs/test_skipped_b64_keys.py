@@ -41,7 +41,7 @@ class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):
 
     def test_np_layers(self):
         layout = {
-            "mapbox": {
+            "map": {
                 "layers": [
                     {
                         "sourcetype": "geojson",
@@ -70,9 +70,9 @@ class TestShouldNotUseBase64InUnsupportedKeys(NumpyTestUtilsMixin, TestCase):
 
         fig = go.Figure(data=data, layout=layout)
 
-        assert (fig.layout["mapbox"]["layers"][0]["line"]["dash"] == (2.5, 1)).all()
+        assert (fig.layout["map"]["layers"][0]["line"]["dash"] == (2.5, 1)).all()
 
-        assert json.loads(fig.to_json())["layout"]["mapbox"]["layers"][0]["source"][
+        assert json.loads(fig.to_json())["layout"]["map"]["layers"][0]["source"][
             "features"
         ][0]["geometry"]["coordinates"] == [[0.25, 52], [0.75, 50]]
 

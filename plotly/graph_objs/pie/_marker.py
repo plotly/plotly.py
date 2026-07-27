@@ -8,7 +8,7 @@ import copy as _copy
 class Marker(_BaseTraceHierarchyType):
     _parent_path_str = "pie"
     _path_str = "pie.marker"
-    _valid_props = {"colors", "colorssrc", "line", "pattern"}
+    _valid_props = {"colors", "line", "pattern"}
 
     @property
     def colors(self):
@@ -28,24 +28,6 @@ class Marker(_BaseTraceHierarchyType):
     @colors.setter
     def colors(self, val):
         self["colors"] = val
-
-    @property
-    def colorssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `colors`.
-
-        The 'colorssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorssrc"]
-
-    @colorssrc.setter
-    def colorssrc(self, val):
-        self["colorssrc"] = val
 
     @property
     def line(self):
@@ -94,9 +76,6 @@ class Marker(_BaseTraceHierarchyType):
             Sets the color of each sector. If not specified, the
             default trace color set is used to pick the sector
             colors.
-        colorssrc
-            Sets the source reference on Chart Studio Cloud for
-            `colors`.
         line
             :class:`plotly.graph_objects.pie.marker.Line` instance
             or dict with compatible properties
@@ -104,9 +83,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the pattern within the marker.
         """
 
-    def __init__(
-        self, arg=None, colors=None, colorssrc=None, line=None, pattern=None, **kwargs
-    ):
+    def __init__(self, arg=None, colors=None, line=None, pattern=None, **kwargs):
         """
         Construct a new Marker object
 
@@ -119,9 +96,6 @@ class Marker(_BaseTraceHierarchyType):
             Sets the color of each sector. If not specified, the
             default trace color set is used to pick the sector
             colors.
-        colorssrc
-            Sets the source reference on Chart Studio Cloud for
-            `colors`.
         line
             :class:`plotly.graph_objects.pie.marker.Line` instance
             or dict with compatible properties
@@ -153,7 +127,6 @@ an instance of :class:`plotly.graph_objs.pie.Marker`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("colors", arg, colors)
-        self._set_property("colorssrc", arg, colorssrc)
         self._set_property("line", arg, line)
         self._set_property("pattern", arg, pattern)
         self._process_kwargs(**dict(arg, **kwargs))
