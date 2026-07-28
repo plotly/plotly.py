@@ -195,7 +195,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Drop deprecated `zauto`, `zmin` and `zmax` from the surface trace [[#7234](https://github.com/plotly/plotly.js/pull/7234)]
   - Drop deprecated `autotick` attributes from cartesian axes [[#7236](https://github.com/plotly/plotly.js/pull/7236)]
   - Drop `transforms` from the API [[#7240](https://github.com/plotly/plotly.js/pull/7240), [#7254](https://github.com/plotly/plotly.js/pull/7254)]
-- Deprecate Mapbox-based traces.[[#4900](https://github.com/plotly/plotly.py/pull/4900)]. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for details on migrating from Mapbox to Maplibre.
+- Deprecate Mapbox-based traces.[[#4900](https://github.com/plotly/plotly.py/pull/4900)]. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for details on migrating from Mapbox to MapLibre.
 - Update plotly.py to use base64 encoding of typed arrays e.g. numpy in plotly JSON to keep precision intact and improve performance [[#4470](https://github.com/plotly/plotly.py/pull/4470)].
 - Make plotly-express dataframe agnostic via Narwhals [[#4790](https://github.com/plotly/plotly.py/pull/4790)].
 - Update `go.FigureWidget` to use `anywidget` [[#4823](https://github.com/plotly/plotly.py/pull/4823)]

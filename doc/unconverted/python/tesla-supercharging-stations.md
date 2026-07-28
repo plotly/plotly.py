@@ -38,10 +38,6 @@ import plotly
 plotly.__version__
 ```
 
-#### Mapbox Access Token
-
-To plot on Mapbox maps with Plotly you'll need a Mapbox account and a [Public Mapbox Access Token](https://www.mapbox.com/studio) which you can add to your [Plotly settings](https://plot.ly/settings/mapbox). If you're using a Chart Studio Enterprise server, please see additional instructions here: https://help.plot.ly/mapbox-atlas/.
-
 
 #### Google Maps API
 In order to use the `Google Maps - Directions API`, you need to create an account with Google and get your API key [here](https://developers.google.com/maps/documentation/directions/).
@@ -149,10 +145,8 @@ def plot_route_between_tesla_stations(address_start, address_end, zoom=3, endpt_
 
     steps.append(end)  # add ending coordinate to trip
 
-    mapbox_access_token = "ADD_YOUR_TOKEN_HERE"
-
     data = Data([
-        Scattermapbox(
+        Scattermap(
             lat=[item_x[0] for item_x in steps],
             lon=[item_y[1] for item_y in steps],
             mode='markers+lines',
@@ -164,8 +158,7 @@ def plot_route_between_tesla_stations(address_start, address_end, zoom=3, endpt_
     layout = Layout(
         autosize=True,
         hovermode='closest',
-        mapbox=dict(
-            accesstoken=mapbox_access_token,
+        map=dict(
             bearing=0,
             style='streets',
             center=dict(
@@ -192,7 +185,7 @@ py.iplot(fig, filename='tesla-driving-directions-between-superchargers')
 ```
 
 #### Reference
-See http://moderndata.plot.ly/visualize-tesla-supercharging-stations-with-mysql-and-plotly/ to visualize Tesla supercharging stations with MYSQL and https://plot.ly/python/scattermapbox/ for more information on how to plot scatterplots on maps.
+See http://moderndata.plot.ly/visualize-tesla-supercharging-stations-with-mysql-and-plotly/ to visualize Tesla supercharging stations with MYSQL and https://plot.ly/python/scattermap/ for more information on how to plot scatterplots on maps.
 
 ```python
 from IPython.display import display, HTML

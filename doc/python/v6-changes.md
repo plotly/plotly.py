@@ -66,7 +66,7 @@ Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to 
 
 ## Mapbox Deprecation
 
-Mapbox-based traces are deprecated and will be removed in a future version of Plotly.py. Use [Maplibre-based](https://plotly.com/python/mapbox-to-maplibre/) traces instead.
+Mapbox-based traces are deprecated and will be removed in a future version of Plotly.py. Use [MapLibre-based](https://plotly.com/python/mapbox-to-maplibre/) traces instead.
 
 ## Removed Attributes
 

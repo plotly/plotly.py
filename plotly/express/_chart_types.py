@@ -1111,15 +1111,6 @@ def choropleth(
     colored region mark on a map.
     """
 
-    if locationmode == "country names":
-        warn(
-            "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
-            "Country names in existing plots may not work in the new version. "
-            "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
-            DeprecationWarning,
-            stacklevel=2,
-        )
-
     return make_figure(
         args=locals(),
         constructor=go.Choropleth,
@@ -1178,15 +1169,6 @@ def scatter_geo(
     In a geographic scatter plot, each row of `data_frame` is represented
     by a symbol mark on a map.
     """
-
-    if locationmode == "country names":
-        warn(
-            "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
-            "Country names in existing plots may not work in the new version. "
-            "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
-            DeprecationWarning,
-            stacklevel=2,
-        )
 
     return make_figure(
         args=locals(),
