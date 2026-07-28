@@ -11,10 +11,7 @@ from plotly.io._utils import validate_coerce_fig_to_dict, broadcast_args_to_dict
 from plotly.io._defaults import defaults
 from _plotly_utils.optional_imports import get_module
 
-try:
-    kaleido = get_module("kaleido", should_load=True)
-except ImportError:
-    kaleido = None
+kaleido = get_module("kaleido", should_load=True)
 
 PLOTLY_GET_CHROME_ERROR_MSG = """
 
