@@ -25,7 +25,8 @@ jobs:
       run: |
         uv venv
         source .venv/bin/activate
-        uv pip install ".[dev_codegen]"
+        uv lock --check
+        uv sync --extra dev_codegen
     - name: Run codegen
       run: |
         source .venv/bin/activate
