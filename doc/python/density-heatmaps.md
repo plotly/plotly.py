@@ -31,7 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/density-heatmaps/
     redirect_from: python/mapbox-density-heatmaps/
-    thumbnail: thumbnail/map-density.png
+    thumbnail: thumbnail/mapbox-density.png
 ---
 
 ### Density map with `plotly.express`

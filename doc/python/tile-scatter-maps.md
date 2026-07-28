@@ -31,7 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/tile-scatter-maps/
     redirect_from: python/scattermapbox/
-    thumbnail: thumbnail/scatter-map.jpg
+    thumbnail: thumbnail/scatter-mapbox.jpg
 ---
 
 ### Basic example with Plotly Express

@@ -30,7 +30,7 @@ jupyter:
     order: 13
     page_type: u-guide
     permalink: python/hexbin-map/
-    thumbnail: thumbnail/hexbin_map.jpg
+    thumbnail: thumbnail/hexbin_mapbox.jpg
 ---
 
 #### Simple Count Hexbin

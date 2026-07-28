@@ -31,7 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/tile-county-choropleth/
     redirect_from: python/mapbox-county-choropleth/
-    thumbnail: thumbnail/map-choropleth.png
+    thumbnail: thumbnail/mapbox-choropleth.png
 ---
 
 A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **tile-map** choropleth maps, but you can also build [**outline** choropleth maps](/python/choropleth-maps).

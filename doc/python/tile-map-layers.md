@@ -31,7 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/tile-map-layers/
     redirect_from: python/mapbox-layers/
-    thumbnail: thumbnail/map-layers.png
+    thumbnail: thumbnail/mapbox-layers.png
 ---
 
 <!-- #region -->

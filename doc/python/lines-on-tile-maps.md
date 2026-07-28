@@ -31,7 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/lines-on-tile-maps/
     redirect_from: python/lines-on-mapbox/
-    thumbnail: thumbnail/line_map.jpg
+    thumbnail: thumbnail/line_mapbox.jpg
 ---
 
 ### Lines on tile maps using Plotly Express
