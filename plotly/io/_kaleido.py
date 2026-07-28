@@ -32,14 +32,24 @@ which can be installed using pip:
 """
 
 
+_KALEIDO_AVAILABLE = None
+
+
 def kaleido_available() -> bool:
     """
     Returns True if Kaleido version 1.0.0 or greater is installed, otherwise False.
     """
+    global _KALEIDO_AVAILABLE
+    if _KALEIDO_AVAILABLE is not None:
+        return _KALEIDO_AVAILABLE
 
-    return kaleido is not None and Version(
+    if kaleido is not None and Version(
         importlib_metadata.version("kaleido")
-    ) >= Version("1.0.0")
+    ) >= Version("1.0.0"):
+        _KALEIDO_AVAILABLE = True
+    else:
+        _KALEIDO_AVAILABLE = False
+    return _KALEIDO_AVAILABLE
 
 
 def as_path_object(file: Union[str, Path]) -> Union[Path, None]:
