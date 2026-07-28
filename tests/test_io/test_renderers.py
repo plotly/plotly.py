@@ -121,11 +121,6 @@ def test_plotly_mimetype_renderer_show(fig1, renderer):
     mock_display.assert_called_once_with(expected, raw=True)
 
 
-# Static Image
-# ------------
-# See tests/test_orca/test_image_renderers.py
-
-
 # HTML
 # ----
 def assert_full_html(html):
@@ -327,7 +322,7 @@ def test_repr_html(renderer):
         assert str_html.replace(id_html, "") == template.replace(id_pattern, "")
 
 
-all_renderers_without_orca = [
+all_renderers = [
     "plotly_mimetype",
     "jupyterlab",
     "nteract",
@@ -350,7 +345,7 @@ all_renderers_without_orca = [
 ]
 
 
-@pytest.mark.parametrize("renderer_str", all_renderers_without_orca)
+@pytest.mark.parametrize("renderer_str", all_renderers)
 def test_repr_mimebundle(renderer_str):
     pio.renderers.default = renderer_str
     fig = go.Figure()
