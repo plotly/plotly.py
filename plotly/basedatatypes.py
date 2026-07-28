@@ -3462,9 +3462,6 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        fig:
-            Figure object or dict representing a figure
-
         warn: bool
             If False, suppress warnings about not using this in production.
 
@@ -3717,9 +3714,6 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        fig:
-            Figure object or dict representing a figure
-
         format: str
             (optional) The desired image format. One of:
                 - 'png'
@@ -3767,9 +3761,6 @@ Invalid property path '{key_path_str}' for layout
 
         Parameters
         ----------
-        fig:
-            Figure object or dict representing a figure
-
         file: str or writeable
             A string representing a local file path or a writeable object
             (e.g. a pathlib.Path object or an open file descriptor)
