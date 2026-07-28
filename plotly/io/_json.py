@@ -9,8 +9,6 @@ from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
 
-# Orca configuration class
-# ------------------------
 class JsonConfig(object):
     _valid_engines = ("json", "orjson", "auto")
 
