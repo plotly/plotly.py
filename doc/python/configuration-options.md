@@ -212,7 +212,7 @@ To delete buttons from the modebar, pass an array of strings containing the name
   - **3D**: `zoom3d`, `pan3d`, `orbitRotation`, `tableRotation`, `handleDrag3d`, `resetCameraDefault3d`, `resetCameraLastSave3d`, `hoverClosest3d`
   - **Cartesian**: `hoverClosestCartesian`, `hoverCompareCartesian`
   - **Geo**: `zoomInGeo`, `zoomOutGeo`, `resetGeo`, `hoverClosestGeo`
-  - **Other**: `hoverClosestGl2d`, `hoverClosestPie`, `toggleHover`, `resetViews`, `toImage`, `sendDataToCloud`, `toggleSpikelines`, `resetViewMapbox`
+  - **Other**: `hoverClosestGl2d`, `hoverClosestPie`, `toggleHover`, `resetViews`, `toImage`, `sendDataToCloud`, `toggleSpikelines`, `resetViewMap`
 
 ```python
 import plotly.graph_objects as go
@@ -305,7 +305,7 @@ fig.show()
 
 ### Double-Click Delay
 Sets the maximum delay between two consecutive clicks to be interpreted as a double-click in milliseconds. This is the time interval between first mousedown and second mouseup. The default timing is 300 ms (less than half a second).
-This setting propagates to all on-subplot double clicks (except for `geo` and `mapbox`).
+This setting propagates to all on-subplot double clicks (except for `geo` and `map`).
 
 ```python
 import plotly.graph_objects as go

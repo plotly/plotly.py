@@ -268,8 +268,31 @@ The following settings are available:
 
 `headers`: *New in 6.8.* A dict of HTTP headers Kaleido sends when fetching external resources during image export (for example, when fetching OpenStreetMap tiles for tile maps). Defaults to `{"X-Requested-With": "plotly.py"}`, which is required to comply with the [OpenStreetMap tile usage policy](https://operations.osmfoundation.org/policies/tiles/). Requires Kaleido v1.3.0 or later.
 
-`mapbox_access_token`: The default Mapbox access token (Kaleido v0 only). Mapbox traces are deprecated. See the [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) page for more details.
+### Set Defaults
 
+Since Plotly.py 6.1, settings are available on `plotly.io.defaults`.
+
+To set the `default_format` to "jpeg":
+
+~~~python
+import plotly.io as pio
+pio.defaults.default_format = "jpeg"
+~~~
+
+You can also access current defaults. To see the default value for height:
+
+~~~python
+import plotly.io as pio
+pio.defaults.default_height
+~~~
+
+In earlier versions of Plotly.py, these settings are available on `plotly.io.kaleido.scope`. This is deprecated since version 6.2. Use `plotly.io.defaults` instead.
+
+~~~python
+import plotly.io as pio
+# Example using deprecated `plotly.io.kaleido.scope`
+pio.kaleido.scope.default_format = "jpeg"
+~~~
 
 ### Additional Information on Browsers with Kaleido
 

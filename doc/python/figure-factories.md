@@ -40,7 +40,7 @@ The `plotly.figure_factory` module contains dedicated functions for creating ver
 The following plot types can be created with Figure Factory:
 
   * [Dendrograms](/python/dendrogram/)
-  * [Hexagonal Binning Tile Map](/python/hexbin-mapbox/)
+  * [Hexagonal Binning Tile Map](/python/hexbin-map/)
   * [Quiver Plots](/python/quiver-plots/)
   * [Streamline Plots](/python/streamline-plots/)
   * [Tables](/python/figure-factory-table/)
@@ -57,7 +57,7 @@ The following legacy Figure Factory functions have been replaced by Plotly Expre
   * `create_distplot`: use [Plotly Express](/python/plotly-express/) functions like [`px.histogram`](/python/histograms/)
   * `create_facet_grid`: use [Plotly Express](/python/plotly-express/) functions with the [`facet_row` and `facet_col` arguments](/python/facet-plots/)
   * `create_gantt`: use [`px.timeline`](/python/gantt/)
-  * `create_hexbin_mapbox`: use [`create_hexbin_map`](/python/hexbin-mapbox/)
+  * `create_hexbin_mapbox`: use [`create_hexbin_map`](/python/hexbin-map/)
   * `create_ohlc`: use [`go.Ohlc`](/python/ohlc-charts/)
   * `create_scatterplotmatrix`: use [`go.Splom`](/python/splom/)
   * `create_violin`: use [`go.Violin`](/python/violin/)
