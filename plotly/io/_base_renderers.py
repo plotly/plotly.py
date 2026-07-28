@@ -6,9 +6,10 @@ import os
 from os.path import isdir
 
 from plotly import optional_imports
-from plotly.io import to_json, to_image, write_html
+from plotly.io import to_json, to_image, write_image, write_html
 from plotly.io._utils import plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
+from plotly.tools import return_figure_from_figure_or_data
 
 ipython_display = optional_imports.get_module("IPython.display")
 IPython = optional_imports.get_module("IPython")
@@ -809,3 +810,31 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
         )
 
         return {"text/html": html}
+
+
+class SphinxGalleryPngRenderer(ExternalRenderer):
+    # Note: This renderer was originally designed for use with the orca image generation utility
+    # before the introduction of kaleido. It has not been tested with kaleido, but I'm not aware
+    # of any reason why it shouldn't work.
+    def render(self, fig_dict):
+        stack = inspect.stack()
+        # Name of script from which plot function was called is retrieved
+        try:
+            filename = stack[3].filename  # let's hope this is robust...
+        except Exception:  # python 2
+            filename = stack[3][1]
+        filename_root, _ = os.path.splitext(filename)
+        filename_html = filename_root + ".html"
+        filename_png = filename_root + ".png"
+        figure = return_figure_from_figure_or_data(fig_dict, True)
+        _ = write_html(fig_dict, file=filename_html, include_plotlyjs="cdn")
+        try:
+            write_image(figure, filename_png)
+        except (ValueError, ImportError):
+            raise ImportError(
+                "kaleido and psutil are required to use the `sphinx_gallery_png` renderer. "
+                "See https://plotly.com/python/static-image-export/ for instructions on "
+                "how to install kaleido. Alternatively, you can use the `sphinx_gallery` "
+                "renderer (note that png thumbnails can only be generated with "
+                "the `sphinx_gallery_png` renderer)."
+            )

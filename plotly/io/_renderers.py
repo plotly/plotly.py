@@ -22,6 +22,7 @@ from plotly.io._base_renderers import (
     BrowserRenderer,
     IFrameRenderer,
     SphinxGalleryHtmlRenderer,
+    SphinxGalleryPngRenderer,
     CoCalcRenderer,
     DatabricksRenderer,
 )
@@ -464,6 +465,7 @@ renderers["chromium"] = BrowserRenderer(
 renderers["iframe"] = IFrameRenderer(config=config, include_plotlyjs=True)
 renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="cdn")
 renderers["sphinx_gallery"] = SphinxGalleryHtmlRenderer()
+renderers["sphinx_gallery_png"] = SphinxGalleryPngRenderer()
 
 # Set default renderer
 # --------------------
