@@ -830,11 +830,11 @@ class SphinxGalleryPngRenderer(ExternalRenderer):
         _ = write_html(fig_dict, file=filename_html, include_plotlyjs="cdn")
         try:
             write_image(figure, filename_png)
-        except (ValueError, ImportError):
-            raise ImportError(
+        except (ValueError, ImportError, RuntimeError) as e:
+            raise RuntimeError(
                 "kaleido and psutil are required to use the `sphinx_gallery_png` renderer. "
                 "See https://plotly.com/python/static-image-export/ for instructions on "
                 "how to install kaleido. Alternatively, you can use the `sphinx_gallery` "
                 "renderer (note that png thumbnails can only be generated with "
                 "the `sphinx_gallery_png` renderer)."
-            )
+            ) from e
