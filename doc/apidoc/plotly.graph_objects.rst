@@ -101,9 +101,6 @@ Map Traces
    Scattermap
    Choroplethmap
    Densitymap
-   Scattermapbox
-   Choroplethmapbox
-   Densitymapbox
 
 Specialized Traces
 -----------

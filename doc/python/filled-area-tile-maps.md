@@ -134,36 +134,7 @@ fig.update_layout(
 fig.show()
 ```
 
-<!-- #region -->
-### Mapbox Maps
-
-> Mapbox traces are deprecated and may be removed in a future version of Plotly.py.
-
-The earlier examples using `go.Scattermap` use [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) for rendering. This trace was introduced in Plotly.py 5.24 and is now the recommended way to draw filled areas on tile-based maps. There is also a trace that uses [Mapbox](https://docs.mapbox.com), called `go.Scattermapbox`.
-
-To use the `Scattermapbox` trace type, in some cases you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
-
-Here's one of the earlier examples rewritten to use `Scattermapbox`.
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure(go.Scattermapbox(
-    fill = "toself",
-    lon = [-74, -70, -70, -74], lat = [47, 47, 45, 45],
-    marker = { 'size': 10, 'color': "orange" }))
-
-fig.update_layout(
-    mapbox = {
-        'style': "open-street-map",
-        'center': {'lon': -73, 'lat': 46 },
-        'zoom': 5},
-    showlegend = False)
-
-fig.show()
-```
-<!-- #endregion -->
 
 #### Reference
 
-See  https://plotly.com/python/reference/scattermap/ for available attribute options, or for `go.Scattermapbox`, see https://plotly.com/python/reference/scattermapbox/.
+See  https://plotly.com/python/reference/scattermap/ for available attribute options.
