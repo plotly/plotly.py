@@ -380,6 +380,9 @@ def write_images(
     None
     """
 
+    if not kaleido_available():
+        raise RuntimeError(KALEIDO_REQUIRED_MSG)
+
     # Broadcast arguments into correct format for passing to Kaleido
     arg_dicts = broadcast_args_to_dicts(
         fig=fig,

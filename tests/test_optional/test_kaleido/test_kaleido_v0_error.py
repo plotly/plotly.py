@@ -42,6 +42,14 @@ def test_write_image_raises(tmp_path):
     assert_error_message_contents(excinfo)
 
 
+def test_write_images_raises(tmp_path):
+    figs = [dict(fig), dict(fig)]
+    paths = [tmp_path / f"test_{i}.png" for i in range(len(figs))]
+    with pytest.raises(RuntimeError) as excinfo:
+        pio.write_images(fig, paths, validate=False)
+    assert_error_message_contents(excinfo)
+
+
 def test_full_figure_for_development_raises():
     with pytest.raises(RuntimeError) as excinfo:
         pio.full_figure_for_development(fig, warn=False)
