@@ -22,7 +22,6 @@ from plotly.io._base_renderers import (
     BrowserRenderer,
     IFrameRenderer,
     SphinxGalleryHtmlRenderer,
-    SphinxGalleryOrcaRenderer,
     CoCalcRenderer,
     DatabricksRenderer,
 )
@@ -465,7 +464,6 @@ renderers["chromium"] = BrowserRenderer(
 renderers["iframe"] = IFrameRenderer(config=config, include_plotlyjs=True)
 renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="cdn")
 renderers["sphinx_gallery"] = SphinxGalleryHtmlRenderer()
-renderers["sphinx_gallery_png"] = SphinxGalleryOrcaRenderer()
 
 # Set default renderer
 # --------------------
@@ -515,17 +513,6 @@ elif ipython and ipython.get_ipython():
 
     if not default_renderer and "DATABRICKS_RUNTIME_VERSION" in os.environ:
         default_renderer = "databricks"
-
-    # Check if we're running in spyder and orca is installed
-    if not default_renderer and "SPYDER_ARGS" in os.environ:
-        try:
-            from plotly.io.orca import validate_executable
-
-            validate_executable()
-            default_renderer = "svg"
-        except ValueError:
-            # orca not found
-            pass
 
     # Check if we're running in ipython terminal
     ipython_info = ipython.get_ipython()

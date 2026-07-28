@@ -109,7 +109,6 @@ class ImageRenderer(MimetypeRenderer):
         width=None,
         height=None,
         scale=None,
-        engine="auto",
     ):
         self.mime_type = mime_type
         self.b64_encode = b64_encode
@@ -117,7 +116,6 @@ class ImageRenderer(MimetypeRenderer):
         self.width = width
         self.height = height
         self.scale = scale
-        self.engine = engine
 
     def to_mimebundle(self, fig_dict):
         image_bytes = to_image(
@@ -127,7 +125,6 @@ class ImageRenderer(MimetypeRenderer):
             height=self.height,
             scale=self.scale,
             validate=False,
-            engine=self.engine,
         )
 
         if self.b64_encode:
@@ -141,14 +138,14 @@ class ImageRenderer(MimetypeRenderer):
 class PngRenderer(ImageRenderer):
     """
     Renderer to display figures as static PNG images.  This renderer requires
-    either the kaleido package or the orca command-line utility and is broadly
-    compatible across IPython environments (classic Jupyter Notebook, JupyterLab,
-    QtConsole, VSCode, PyCharm, etc) and nbconvert targets (HTML, PDF, etc.).
+    the kaleido package and is broadly compatible across IPython environments
+    (classic Jupyter Notebook, JupyterLab, QtConsole, VSCode, PyCharm, etc)
+    and nbconvert targets (HTML, PDF, etc.).
 
     mime type: 'image/png'
     """
 
-    def __init__(self, width=None, height=None, scale=None, engine=None):
+    def __init__(self, width=None, height=None, scale=None):
         super(PngRenderer, self).__init__(
             mime_type="image/png",
             b64_encode=True,
@@ -156,21 +153,20 @@ class PngRenderer(ImageRenderer):
             width=width,
             height=height,
             scale=scale,
-            engine=engine,
         )
 
 
 class SvgRenderer(ImageRenderer):
     """
     Renderer to display figures as static SVG images.  This renderer requires
-    either the kaleido package or the orca command-line utility and is broadly
-    compatible across IPython environments (classic Jupyter Notebook, JupyterLab,
-    QtConsole, VSCode, PyCharm, etc) and nbconvert targets (HTML, PDF, etc.).
+    the kaleido package and is broadly compatible across IPython environments
+    (classic Jupyter Notebook, JupyterLab, QtConsole, VSCode, PyCharm, etc)
+    and nbconvert targets (HTML, PDF, etc.).
 
     mime type: 'image/svg+xml'
     """
 
-    def __init__(self, width=None, height=None, scale=None, engine=None):
+    def __init__(self, width=None, height=None, scale=None):
         super(SvgRenderer, self).__init__(
             mime_type="image/svg+xml",
             b64_encode=False,
@@ -178,21 +174,20 @@ class SvgRenderer(ImageRenderer):
             width=width,
             height=height,
             scale=scale,
-            engine=engine,
         )
 
 
 class JpegRenderer(ImageRenderer):
     """
     Renderer to display figures as static JPEG images.  This renderer requires
-    either the kaleido package or the orca command-line utility and is broadly
-    compatible across IPython environments (classic Jupyter Notebook, JupyterLab,
-    QtConsole, VSCode, PyCharm, etc) and nbconvert targets (HTML, PDF, etc.).
+    the kaleido package and is broadly compatible across IPython environments
+    (classic Jupyter Notebook, JupyterLab, QtConsole, VSCode, PyCharm, etc)
+    and nbconvert targets (HTML, PDF, etc.).
 
     mime type: 'image/jpeg'
     """
 
-    def __init__(self, width=None, height=None, scale=None, engine=None):
+    def __init__(self, width=None, height=None, scale=None):
         super(JpegRenderer, self).__init__(
             mime_type="image/jpeg",
             b64_encode=True,
@@ -200,20 +195,19 @@ class JpegRenderer(ImageRenderer):
             width=width,
             height=height,
             scale=scale,
-            engine=engine,
         )
 
 
 class PdfRenderer(ImageRenderer):
     """
     Renderer to display figures as static PDF images.  This renderer requires
-    either the kaleido package or the orca command-line utility and is compatible
-    with JupyterLab and the LaTeX-based nbconvert export to PDF.
+    the kaleido package and is compatible with JupyterLab and the LaTeX-based
+    nbconvert export to PDF.
 
     mime type: 'application/pdf'
     """
 
-    def __init__(self, width=None, height=None, scale=None, engine=None):
+    def __init__(self, width=None, height=None, scale=None):
         super(PdfRenderer, self).__init__(
             mime_type="application/pdf",
             b64_encode=True,
@@ -221,7 +215,6 @@ class PdfRenderer(ImageRenderer):
             width=width,
             height=height,
             scale=scale,
-            engine=engine,
         )
 
 
@@ -819,28 +812,3 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
         )
 
         return {"text/html": html}
-
-
-class SphinxGalleryOrcaRenderer(ExternalRenderer):
-    def render(self, fig_dict):
-        stack = inspect.stack()
-        # Name of script from which plot function was called is retrieved
-        try:
-            filename = stack[3].filename  # let's hope this is robust...
-        except Exception:  # python 2
-            filename = stack[3][1]
-        filename_root, _ = os.path.splitext(filename)
-        filename_html = filename_root + ".html"
-        filename_png = filename_root + ".png"
-        figure = return_figure_from_figure_or_data(fig_dict, True)
-        _ = write_html(fig_dict, file=filename_html, include_plotlyjs="cdn")
-        try:
-            write_image(figure, filename_png)
-        except (ValueError, ImportError):
-            raise ImportError(
-                "orca and psutil are required to use the `sphinx-gallery-orca` renderer. "
-                "See https://plotly.com/python/static-image-export/ for instructions on "
-                "how to install orca. Alternatively, you can use the `sphinx-gallery` "
-                "renderer (note that png thumbnails can only be generated with "
-                "the `sphinx-gallery-orca` renderer)."
-            )
