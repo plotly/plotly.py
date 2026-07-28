@@ -6,10 +6,9 @@ import os
 from os.path import isdir
 
 from plotly import optional_imports
-from plotly.io import to_json, to_image, write_image, write_html
+from plotly.io import to_json, to_image, write_html
 from plotly.io._utils import plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
-from plotly.tools import return_figure_from_figure_or_data
 
 ipython_display = optional_imports.get_module("IPython.display")
 IPython = optional_imports.get_module("IPython")
@@ -502,8 +501,6 @@ class IFrameRenderer(MimetypeRenderer):
         self.html_directory = html_directory
 
     def to_mimebundle(self, fig_dict):
-        from plotly.io import write_html
-
         # Make iframe size slightly larger than figure size to avoid
         # having iframe have its own scroll bar.
         iframe_buffer = 20
