@@ -135,7 +135,7 @@ jobs:
           python -m pytest -x test_init/test_lazy_imports.py
 
   test-kaleido-v0:
-    name: Optional tests (Kaleido only), Kaleido v0 (Python 3.12, kaleido 0.2.1)
+    name: Kaleido v0 RuntimeError verification (Python 3.12, kaleido 0.2.1)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
@@ -157,7 +157,7 @@ jobs:
           uv pip uninstall kaleido
           uv pip install kaleido==0.2.1
           python --version
-      - name: Test plotly.io image output with Kaleido v0
+      - name: Test that plotly.io raises correct error with Kaleido v0
         run: |
           source .venv/bin/activate
-          python -m pytest tests/test_optional/test_kaleido
+          python -m pytest tests/test_optional/test_kaleido/test_kaleido_v0_error.py
