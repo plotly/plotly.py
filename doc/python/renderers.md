@@ -45,7 +45,7 @@ In general, there are six different approaches you can take in order to display 
  - Using [Dash](https://dash.plot.ly) in a web app context
  - Using a [`FigureWidget` rather than a `Figure`](https://plotly.com/python/figurewidget/) in an [`ipywidgets` context](https://ipywidgets.readthedocs.io/en/stable/)
  - By [exporting to an HTML file](https://plotly.com/python/interactive-html-export/) and loading that file in a browser immediately or later
- - By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG, PDF or EPS and loading the resulting file in any viewer
+ - By [rendering the figure to a static image file using Kaleido](https://plotly.com/python/static-image-export/) such as PNG, JPEG, SVG or PDF and loading the resulting file in any viewer
 
 Each of the first four approaches is discussed below.
 
