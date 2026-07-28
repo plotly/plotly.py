@@ -3,7 +3,6 @@
 
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
-import warnings
 
 
 class Scattergeo(_BaseTraceType):
@@ -143,12 +142,15 @@ class Scattergeo(_BaseTraceType):
         the line color, marker color, or marker line color, whichever
         is available.
 
-        The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'fillcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0, 0%, 100%)', 'hwb(0 0% 100%)')
+          - a named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -1546,15 +1548,6 @@ class Scattergeo(_BaseTraceType):
 The first argument to the plotly.graph_objs.Scattergeo
 constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Scattergeo`""")
-
-        if locationmode == "country names" and kwargs.get("_validate"):
-            warnings.warn(
-                "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
-                "Country names in existing plots may not work in the new version. "
-                "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
-                DeprecationWarning,
-                stacklevel=5,
-            )
 
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)

@@ -275,12 +275,15 @@ class RadialAxis(_BaseLayoutHierarchyType):
         lightened by blending this with the plot background Individual
         pieces can override this.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0, 0%, 100%)', 'hwb(0 0% 100%)')
+          - a named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -361,12 +364,15 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Sets the color of the grid lines.
 
-        The 'gridcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'gridcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0, 0%, 100%)', 'hwb(0 0% 100%)')
+          - a named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -502,12 +508,15 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Sets the axis line color.
 
-        The 'linecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'linecolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0, 0%, 100%)', 'hwb(0 0% 100%)')
+          - a named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
@@ -895,12 +904,15 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Sets the tick color.
 
-        The 'tickcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'tickcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0, 0%, 100%)', 'hwb(0 0% 100%)')
+          - a named CSS color: see https://plotly.com/python/css-colors/ for a list
 
         Returns
         -------
