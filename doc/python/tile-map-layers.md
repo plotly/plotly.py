@@ -52,16 +52,16 @@ Geo maps are outline-based maps. If your figure is created with a `px.scatter_ge
 
 ## Tile Map Renderers
 
-Tile-based traces in Plotly use Maplibre.
+Tile-based traces in Plotly use MapLibre.
 
-Maplibre-based traces (new in 5.24) are ones generated in Plotly Express using `px.scatter_map`, `px.line_map`, `px.choropleth_map`, `px.density_map`, or Graph Objects using `go.Scattermap`, `go.Choroplethmap`, or `go.Densitymap`.
+MapLibre-based traces (new in 5.24) are ones generated in Plotly Express using `px.scatter_map`, `px.line_map`, `px.choropleth_map`, `px.density_map`, or Graph Objects using `go.Scattermap`, `go.Choroplethmap`, or `go.Densitymap`.
 
 
-### Maplibre
+### MapLibre
 
 *New in 5.24*
 
-Maplibre-based tile maps have three different types of layers:
+MapLibre-based tile maps have three different types of layers:
 
 - `layout.map.style` defines the lowest layers of the map, also known as the "base map".
 - The various traces in `data` are by default rendered above the base map (although this can be controlled via the `below` attribute).
@@ -86,7 +86,7 @@ The accepted values for `layout.map.style` are one of:
 
 - A Map Style object as defined at https://maplibre.org/maplibre-style-spec/
 
-Note: Style values beginning with `"stamen-"` are no longer supported following the [transition to Maplibre](/python/mapbox-to-maplibre/). The large number of aliases for `'carto-voyager'` are included for backwards-compatibility with previously-supported style values.
+Note: Style values beginning with `"stamen-"` are no longer supported following the [transition to MapLibre](/python/mapbox-to-maplibre/). The large number of aliases for `'carto-voyager'` are included for backwards-compatibility with previously-supported style values.
 
 
 #### OpenStreetMap tiles
@@ -247,4 +247,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/map/ for more information and options on Maplibre-based tile maps.
+See https://plotly.com/python/reference/layout/map/ for more information and options on MapLibre-based tile maps.
