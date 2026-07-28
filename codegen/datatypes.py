@@ -5,12 +5,6 @@ from io import StringIO
 from codegen.utils import CAVEAT, write_source_py
 
 
-locationmode_traces = [
-    "choropleth",
-    "scattergeo",
-]
-
-
 def get_typing_type(plotly_type, array_ok=False):
     """
     Get Python type corresponding to a valType string from the plotly schema
@@ -97,7 +91,7 @@ def build_datatype_py(node):
     )
     buffer.write("import copy as _copy\n")
 
-    if node.name_property in locationmode_traces or node.name_property == "template":
+    if node.name_property == "template":
         buffer.write("import warnings\n")
 
     # Write class definition
