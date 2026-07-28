@@ -340,22 +340,6 @@ an instance of :class:`{class_name}`\"\"\")
         """
     )
 
-    # Add warning for 'country names' locationmode
-    if node.name_property in locationmode_traces:
-        buffer.write(
-            f"""
-        if locationmode == "country names" and kwargs.get("_validate"):
-            warnings.warn(
-                "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
-                "Country names in existing plots may not work in the new version. "
-                "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
-                DeprecationWarning,
-                stacklevel=5,
-            )
-
-            """
-        )
-
     buffer.write(
         f"""
         self._skip_invalid = kwargs.pop("skip_invalid", False)
