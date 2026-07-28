@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## [7.0.0rc0] - 2026-07-29
+
 ### Removed
 - Remove the deprecated Figure Factory functions `create_2d_density`, `create_annotated_heatmap`, `create_bullet`, `create_candlestick`, `create_choropleth`, `create_distplot`, `create_facet_grid`, `create_gantt`, `create_hexbin_mapbox`, `create_ohlc`, `create_scatterplotmatrix`, and `create_violin` [[#5627](https://github.com/plotly/plotly.py/pull/5627)]
 - Remove support for Kaleido versions less than v1.0.0 for static image generation [[#5677](https://github.com/plotly/plotly.py/pull/5677)]
