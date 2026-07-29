@@ -42,7 +42,8 @@ This page demonstrates how to export interactive Plotly figures to static image 
 
 ### Kaleido
 
-Static image generation requires [Kaleido](https://github.com/plotly/Kaleido).
+Static image generation requires [Kaleido](https://github.com/plotly/Kaleido) version 1.0.0 or greater.
+
 Install Kaleido with pip:
 ```
 $ pip install --upgrade kaleido
@@ -52,11 +53,10 @@ or with conda:
 $ conda install -c conda-forge python-kaleido
 ```
 
-It's also possible to generate static images using [Orca](https://github.com/plotly/orca), though support for Orca will be removed after September 2025. See the [Orca Management](/python/orca-management/) page for more details.
 
 ### Chrome
 
-Kaleido uses Chrome for static image generation. Versions of Kaleido prior to v1 included Chrome as part of the Kaleido package. Kaleido v1 does not include Chrome; instead, it looks for a compatible version of Chrome (or Chromium) already installed on the machine on which it's running.
+Kaleido uses Chrome for static image generation. Starting with Kaleido version 1.0.0, Chrome is not included in the package itself; instead, Kaleido looks for a compatible version of Chrome (or Chromium) already installed on the machine on which it's running.
 
 If you don't have Chrome installed, you can install it directly from Google following the instructions for your operating system.
 
@@ -121,18 +121,6 @@ fig.write_image("images/fig1.svg")
 ...
 fig.write_image("images/fig1.pdf")
 ~~~
-
----
-
-**EPS** (Kaleido<1.0.0)
-
-Kaleido versions earlier than 1.0.0 also support **EPS** (requires the poppler library). If using Kaleido v1 or later, we recommend PDF or SVG format.
-
-~~~python
-...
-fig.write_image("images/fig1.eps")
-~~~
-
 
 **Note:** Figures containing WebGL traces (i.e. of type `scattergl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
 
@@ -215,23 +203,6 @@ img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
 Image(img_bytes)
 ```
 
-## Specify Image Export Engine
-
-> The `engine` parameter, as well as Orca support, is deprecated in Plotly.py 6.2.0 and will be removed after September 2025.
-
-If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
-
-Here is an example of specifying `orca` for the image export engine:
-~~~python
-fig.to_image(format="png", engine="orca")
-~~~
-
-And, here is an example of specifying that Kaleido should be used:
-~~~python
-fig.to_image(format="png", engine="kaleido")
-~~~
-
-
 <!-- #region -->
 ## plotly.io Functions
 
@@ -255,33 +226,13 @@ pio.write_image(fig, "fig.png")
 ~~~
 <!-- #endregion -->
 
-## Image Export Settings (Kaleido)
+## Image Export Settings
 
 As well as configuring height, width, and other settings by passing arguments when calling `write_image` and `to_image`, you can also set a single default to be used throughout the duration of the program.
 
-### Available Settings
+### How to Configure
 
-The following settings are available.
-
-`default_width`: The default pixel width to use on image export.
-
-`default_height`: The default pixel height to use on image export.
-
-`default_scale`: The default image scale factor applied on image export.
-
-`default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", or "pdf". ("eps" support is available with Kaleido v0 only)
-
-`mathjax`: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
-
-`plotlyjs`: Location of the Plotly.js bundle to use. Can be a local file path or URL. By default, Kaleido uses the Plotly.js bundle included with Plotly.py.
-
-`topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
-
-`headers`: *New in 6.8.* A dict of HTTP headers Kaleido sends when fetching external resources during image export (for example, when fetching OpenStreetMap tiles for tile maps). Defaults to `{"X-Requested-With": "plotly.py"}`, which is required to comply with the [OpenStreetMap tile usage policy](https://operations.osmfoundation.org/policies/tiles/). Requires Kaleido v1.3.0 or later.
-
-### Set Defaults
-
-Since Plotly.py 6.1, settings are available on `plotly.io.defaults`
+Image export settings can be configured by setting their values in `plotly.io.defaults`.
 
 To set the `default_format` to "jpeg":
 
@@ -297,13 +248,26 @@ import plotly.io as pio
 pio.defaults.default_height
 ~~~
 
-In earlier versions of Plotly.py, these settings are available on `plotly.io.kaleido.scope`. This is deprecated since version 6.2. Use `plotly.io.defaults` instead.
+### Available Settings
 
-~~~python
-import plotly.io as pio
-# Example using deprecated `plotly.io.kaleido.scope`
-pio.kaleido.scope.default_format = "jpeg"
-~~~
+The following settings are available:
+
+`default_width`: The default pixel width to use on image export.
+
+`default_height`: The default pixel height to use on image export.
+
+`default_scale`: The default image scale factor applied on image export.
+
+`default_format`: The default image format used on export. One of "png", "jpeg", "webp", "svg", or "pdf".
+
+`mathjax`: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
+
+`plotlyjs`: Location of the Plotly.js bundle to use. Can be a local file path or URL. By default, Kaleido uses the Plotly.js bundle included with Plotly.py.
+
+`topojson`: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the Plotly.js topojson files.
+
+`headers`: *New in 6.8.* A dict of HTTP headers Kaleido sends when fetching external resources during image export (for example, when fetching OpenStreetMap tiles for tile maps). Defaults to `{"X-Requested-With": "plotly.py"}`, which is required to comply with the [OpenStreetMap tile usage policy](https://operations.osmfoundation.org/policies/tiles/). Requires Kaleido v1.3.0 or later.
+
 
 ### Additional Information on Browsers with Kaleido
 
