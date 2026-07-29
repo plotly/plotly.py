@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Improve `px.*_map()` auto-fitting behavior when `zoom` and `center` are not specified [[#5686](https://github.com/plotly/plotly.py/pull/5686)]
+
 
 ## [7.0.0rc0] - 2026-07-29
 
