@@ -7,6 +7,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [7.0.0rc0] - 2026-07-29
 
+### Updated
+- Update plotly.js from version 3.6.0 to version 4.0.0-rc.0 [[#5673](https://github.com/plotly/plotly.py/pull/5673)]. This is a major-version release candidate with many changes. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.0.0-rc.0) for the full list. The most significant changes include:
+  - Add `quiver` trace type to visualize vector fields using arrows [[#7710](https://github.com/plotly/plotly.js/pull/7710)], with thanks to @degzhaus for the contribution!
+  - Add "Share Chart" modebar button for generating a chart-sharing link via Plotly Cloud [[#7909](https://github.com/plotly/plotly.js/pull/7909)]
+  - Remove `scattermapbox`, `choroplethmapbox`, `densitymapbox` trace types, the `mapbox` subplot, and the `mapboxAccessToken` config option [[#7860](https://github.com/plotly/plotly.js/pull/7860)]. Use the equivalent `*map` traces instead.
+    - The corresponding `graph_objects` and Plotly Express functions have also been removed in plotly.py; use the `map` versions instead
+  - Drop support for MathJax v2, and add support for v4 [[#7898](https://github.com/plotly/plotly.js/pull/7898)]. MathJax is the JavaScript library used for rendering mathematical equations in plotly charts.
+  - Switch color processing library from [TinyColor](https://github.com/bgrins/TinyColor) to [color](https://github.com/Qix-/color) [[#7536](https://github.com/plotly/plotly.js/pull/7536)]. There are some changes to supported color string formats as a result:
+    - `rgb()`/`rgba()` strings with decimal 0–1 fractions are no longer supported
+    - `hsv()` color strings are no longer supported
+    - New supported formats: `'#ff0000aa'`, `'#f00a'`, `'rgb(255 0 0)'`, `'rgba(255 0 0 / 0.5)'`, `'hsl(0 100% 50% / 0.5)'`, `'hsla(0, 100%, 50%, 0.5)'`, `'hwb(0, 0%, 0%)'` 
+  - Replace `country-regex` with `country-iso-search` to search for country names in choropleth, scattergeo traces [[#7856](https://github.com/plotly/plotly.js/pull/7856)]. Most country names are handled exactly the same; a small number of legacy entries have been removed.
+  - Change `layout.geo.fitbounds` default from `false` to `'locations'` [[#7895](https://github.com/plotly/plotly.js/pull/7895)]. `geo` subplots will now auto-fit the initial view to the trace data by default.
+  - Dynamically compute `center` and `zoom` values for `scattermap` and `densitymap` traces. The initial map view will now auto-fit to the trace data by default. Add `layout.map.fitbounds` attribute (default `'locations'`) to enable or disable auto-fitting behavior [[#7884](https://github.com/plotly/plotly.js/pull/7884), [#7913](https://github.com/plotly/plotly.js/pull/7913)], with thanks to @palmerusaf and @DhruvGarg111 for the contributions!
+  - Fix GeoJSON bounding-box computation for `choropleth` and `scattergeo` traces whose geometry crosses the antimeridian [[#7891](https://github.com/plotly/plotly.js/pull/7891)]
+
 ### Removed
 - Remove the deprecated Figure Factory functions `create_2d_density`, `create_annotated_heatmap`, `create_bullet`, `create_candlestick`, `create_choropleth`, `create_distplot`, `create_facet_grid`, `create_gantt`, `create_hexbin_mapbox`, `create_ohlc`, `create_scatterplotmatrix`, and `create_violin` [[#5627](https://github.com/plotly/plotly.py/pull/5627)]
 - Remove support for Kaleido versions less than v1.0.0 for static image generation [[#5677](https://github.com/plotly/plotly.py/pull/5677)]
