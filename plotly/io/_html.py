@@ -280,12 +280,14 @@ def to_html(
         include_mathjax = include_mathjax.lower()
 
     mathjax_template = """\
-    <script src="{url}?config=TeX-AMS-MML_SVG"></script>"""
+    <script src="{url}"></script>"""
 
     if include_mathjax == "cdn":
         mathjax_script = (
             mathjax_template.format(
-                url=("https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js")
+                url=(
+                    "https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"
+                )
             )
             + _mathjax_config
         )
