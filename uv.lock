@@ -63,7 +63,7 @@ conflicts = [[
 ]]
 
 [options]
-exclude-newer = "0001-01-01T00:00:00Z" # This has no effect and is included for backwards compatibility when using relative exclude-newer values.
+exclude-newer = "2026-07-25T16:47:51.95233Z"
 exclude-newer-span = "PT72H"
 
 [options.exclude-newer-package]
@@ -6724,6 +6724,17 @@ dev-build = [
     { name = "requests", version = "2.33.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "ruff" },
 ]
+dev-codegen = [
+    { name = "inflect", version = "7.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "inflect", version = "7.5.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "pytest", version = "8.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "pytest", version = "9.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "requests", version = "2.32.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "requests", version = "2.32.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "requests", version = "2.33.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
+    { name = "ruff" },
+]
 dev-core = [
     { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
     { name = "pytest", version = "8.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*' or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas2') or (extra == 'extra-6-plotly-dev-pandas1' and extra == 'extra-6-plotly-dev-pandas3') or (extra == 'extra-6-plotly-dev-pandas2' and extra == 'extra-6-plotly-dev-pandas3')" },
@@ -6823,7 +6834,7 @@ requires-dist = [
     { name = "colorcet", marker = "extra == 'dev-optional'" },
     { name = "fiona", marker = "python_full_version < '3.9' and extra == 'dev-optional'", specifier = "<=1.9.6" },
     { name = "geopandas", marker = "extra == 'dev-optional'" },
-    { name = "inflect", marker = "extra == 'dev-optional'" },
+    { name = "inflect", marker = "extra == 'dev-codegen'" },
     { name = "jupyterlab", marker = "extra == 'dev-build'" },
     { name = "kaleido", marker = "extra == 'kaleido'", specifier = ">=1.3.0" },
     { name = "narwhals", specifier = ">=1.15.1" },
@@ -6838,7 +6849,9 @@ requires-dist = [
     { name = "pdfrw", marker = "extra == 'dev-optional'" },
     { name = "pillow", marker = "extra == 'dev-optional'" },
     { name = "plotly", extras = ["dev-build"], marker = "extra == 'dev-optional'" },
+    { name = "plotly", extras = ["dev-codegen"], marker = "extra == 'dev-optional'" },
     { name = "plotly", extras = ["dev-core"], marker = "extra == 'dev-build'" },
+    { name = "plotly", extras = ["dev-core"], marker = "extra == 'dev-codegen'" },
     { name = "plotly", extras = ["dev-optional"], marker = "extra == 'dev'" },
     { name = "plotly", extras = ["express"], marker = "extra == 'dev-optional'" },
     { name = "plotly", extras = ["kaleido"], marker = "extra == 'dev-optional'" },
@@ -6855,7 +6868,7 @@ requires-dist = [
     { name = "vaex", marker = "python_full_version < '3.10' and extra == 'dev-optional'" },
     { name = "xarray", marker = "extra == 'dev-optional'" },
 ]
-provides-extras = ["express", "kaleido", "dev-core", "dev-build", "dev-optional", "dev", "dev-pandas1", "dev-pandas2", "dev-pandas3"]
+provides-extras = ["express", "kaleido", "dev-core", "dev-build", "dev-codegen", "dev-optional", "dev", "dev-pandas1", "dev-pandas2", "dev-pandas3"]
 
 [[package]]
 name = "pluggy"
