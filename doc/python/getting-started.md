@@ -198,11 +198,9 @@ or conda.
 $ conda install -c plotly python-kaleido
 ```
 
-Kaleido requires Chrome or Chromium to generate images. By default, Kaleido will use the Chrome or Chromium version already installed on your system. If you don't have it installed or Kaleido can't find it, you may need to install it by running the command:
+Kaleido requires Chrome or Chromium to generate images. By default, Kaleido will use the Chrome or Chromium version already installed on your system. If you don't have it installed or Kaleido can't find it, you may need to install it by running the following command:
 
 `plotly_get_chrome`
-
-on your command line.
 
 ### Where to next?
 
