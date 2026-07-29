@@ -100,7 +100,7 @@ def _build_resize_script(plotdivid, plotly_root="Plotly"):
 
 
 def _build_mathjax_script(url):
-    return '<script src="{url}?config=TeX-AMS-MML_SVG"></script>'.format(url=url)
+    return '<script src="{url}"></script>'.format(url=url)
 
 
 def _get_jconfig(config=None):
