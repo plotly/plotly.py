@@ -17,6 +17,8 @@ Python packages required to build the docs are listed in
 Before building the documentation locally, you need to set up a dedicated
 environment with the doc-specific dependencies.
 
+> You will need the [`gdal`](https://gdal.org/) system library installed (it's a build dependency of `geopandas`, a required dependency). The `uv pip install` step below will fail without it.
+
 ```bash
 cd doc
 uv venv --python 3.9

@@ -14,7 +14,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Remove `engine` argument from functions `fig.write_image()`,`fig.to_image()`, `pio.write_image()`, `pio.write_images()`, `pio.to_image()`, `pio.full_figure_for_development()`, and from renderer constructors [[#5677](https://github.com/plotly/plotly.py/pull/5677)]
 
 ### Fixed
+- Fix `hex_to_rgb` parsing of 3-digit shorthand hexadecimal colors such as `#FFF` [[#5662](https://github.com/plotly/plotly.py/pull/5662)], with thanks to @genrichez for the contribution!
+
+
+## [6.9.0] - 2026-07-09
+
+### Fixed
 - Raise a clear `ValueError` when an unsupported marginal plot type is passed to Plotly Express, instead of failing later with a cryptic `'NoneType' object has no attribute 'constructor'` message [[#5625](https://github.com/plotly/plotly.py/pull/5625)], with thanks to @eugen-goebel for the contribution!
+- Read and write figure JSON files as UTF-8 in `read_json`/`write_json` so figures containing non-ASCII text are handled correctly on platforms whose default encoding is not UTF-8 (e.g. cp1252 on Windows) [[#5633](https://github.com/plotly/plotly.py/pull/5633)]
+
+
+### Updated
+- Update plotly.js from version 3.6.0 to version 3.7.0. See the plotly.js [release notes](https://github.com/plotly/plotly.js/releases/tag/v3.7.0) for more information [[#5639](https://github.com/plotly/plotly.py/pull/5639)]. Notable changes include:
+  - Rename `sendDataToCloud` modebar button to `sendChartToCloud`, and update to upload chart to Plotly Cloud [[#7802](https://github.com/plotly/plotly.js/pull/7802), [#7852](https://github.com/plotly/plotly.js/pull/7852), [#7854](https://github.com/plotly/plotly.js/pull/7854)]. NOTE: The Plotly Cloud endpoint for receiving charts is not yet functional, so this button won't complete the upload.
+  - Fix stale `scattergl` error bars after toggling traces with mixed error bar visibility [[#7773](https://github.com/plotly/plotly.js/issues/7773)], with thanks to @JulienIcon for the contribution!
+  - Fix geo `fitbounds` to choose a compact longitude range when point data straddles the antimeridian [[#7837](https://github.com/plotly/plotly.js/pull/7837)], with thanks to @SharadhNaidu for the contribution!
 
 ### Updated
 - Update plotly.js from version 3.6.0 to version 4.0.0-rc.0 [[#5673](https://github.com/plotly/plotly.py/pull/5673)]. This is a major-version release candidate with many changes. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.0.0-rc.0) for the full list. The most significant changes include:
