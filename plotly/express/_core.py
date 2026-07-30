@@ -793,14 +793,8 @@ def configure_3d_axes(args, fig, orders):
 
 
 def configure_map(args, fig, orders):
-    center = args["center"]
-    if not center and "lat" in args and "lon" in args:
-        center = dict(
-            lat=args["data_frame"][args["lat"]].mean(),
-            lon=args["data_frame"][args["lon"]].mean(),
-        )
     fig.update_maps(
-        center=center,
+        center=args["center"],
         zoom=args["zoom"],
         style=args["map_style"],
     )

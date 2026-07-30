@@ -500,7 +500,12 @@ docs = dict(
         "In `'overlay'` mode, strips are on drawn top of one another.",
         "In `'group'` mode, strips are placed beside each other.",
     ],
-    zoom=["int (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
+    zoom=[
+        "int (default `None`)",
+        "Between 0 and 20.",
+        "Sets initial map zoom level. Higher values are more zoomed-in.",
+        "If not provided, the map will select its own zoom level.",
+    ],
     orientation=[
         "str, one of `'h'` for horizontal or `'v'` for vertical. ",
         "(default `'v'` if `x` and `y` are provided and both continuous or both categorical, ",
