@@ -179,6 +179,11 @@ def test_read_json_from_pathlib(fig1, fig_type_spec, fig_type):
     # read_json on mock file
     fig1_loaded = pio.read_json(filemock, output_type=fig_type_spec)
 
+    # The file must be read as UTF-8 (JSON is UTF-8 per RFC 8259); otherwise a
+    # figure with non-ASCII text is mangled on platforms whose default codec is
+    # not UTF-8 (e.g. cp1252 on Windows).
+    filemock.read_text.assert_called_once_with(encoding="utf-8")
+
     # Check return type
     assert isinstance(fig1_loaded, fig_type)
 
@@ -240,7 +245,10 @@ def test_write_json_pathlib(fig1, pretty, remove_uids):
 
     # check write contents
     expected = pio.to_json(fig1, pretty=pretty, remove_uids=remove_uids)
-    filemock.write_text.assert_called_once_with(expected)
+    # The figure must be written as UTF-8 so non-ASCII text does not raise
+    # UnicodeEncodeError on platforms whose default codec is not UTF-8
+    # (e.g. cp1252 on Windows).
+    filemock.write_text.assert_called_once_with(expected, encoding="utf-8")
 
 
 @pytest.mark.parametrize("pretty", [True, False])
