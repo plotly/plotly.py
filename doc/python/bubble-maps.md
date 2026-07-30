@@ -208,4 +208,4 @@ fig.show()
 
 #### Reference
 
-See [function reference for `px.(scatter_geo)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo) or https://plotly.com/python/reference/choropleth/ and https://plotly.com/python/reference/scattergeo/ for more information and chart attribute options!
+See [function reference for `px.scatter_geo`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo) or https://plotly.com/python/reference/scattergeo/ for more information and chart attribute options!

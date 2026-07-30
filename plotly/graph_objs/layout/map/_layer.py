@@ -400,8 +400,8 @@ class Layer(_BaseLayoutHierarchyType):
         """
         Determines whether this layer is displayed
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

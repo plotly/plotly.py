@@ -72,8 +72,8 @@ class Choropleth(_BaseTraceType):
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
 
-        The 'autocolorscale' property must be specified as a bool
-        (either True, or False)
+        The 'autocolorscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -96,9 +96,9 @@ class Choropleth(_BaseTraceType):
         axis.
 
         The 'coloraxis' property is an identifier of a particular
-        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
-        optionally followed by an integer >= 1
-        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+        subplot, of type 'coloraxis', that may be specified as:
+          - the string 'coloraxis' optionally followed by an integer >= 1
+            (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
 
         Returns
         -------
@@ -251,9 +251,9 @@ class Choropleth(_BaseTraceType):
         geospatial coordinates refer to `layout.geo2`, and so on.
 
         The 'geo' property is an identifier of a particular
-        subplot, of type 'geo', that may be specified as the string 'geo'
-        optionally followed by an integer >= 1
-        (e.g. 'geo', 'geo1', 'geo2', 'geo3', etc.)
+        subplot, of type 'geo', that may be specified as:
+          - the string 'geo' optionally followed by an integer >= 1
+            (e.g. 'geo', 'geo1', 'geo2', 'geo3', etc.)
 
         Returns
         -------
@@ -519,9 +519,9 @@ class Choropleth(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -627,7 +627,9 @@ class Choropleth(_BaseTraceType):
         the map. Values "ISO-3", "USA-states", *country names*
         correspond to features on the base map and value "geojson-id"
         corresponds to features from a custom GeoJSON linked to the
-        `geojson` attribute.
+        `geojson` attribute. "USA-states" accepts both two-letter
+        abbreviations (e.g. "CA") and full state names (e.g.
+        "California").
 
         The 'locationmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -771,8 +773,8 @@ class Choropleth(_BaseTraceType):
         correspond to the last color in the array and `zmax` will
         correspond to the first color.
 
-        The 'reversescale' property must be specified as a bool
-        (either True, or False)
+        The 'reversescale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -831,8 +833,8 @@ class Choropleth(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -850,8 +852,8 @@ class Choropleth(_BaseTraceType):
         Determines whether or not a colorbar is displayed for this
         trace.
 
-        The 'showscale' property must be specified as a bool
-        (either True, or False)
+        The 'showscale' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1037,8 +1039,8 @@ class Choropleth(_BaseTraceType):
         `zmin` and `zmax` Defaults to `false` when `zmin` and `zmax`
         are set by the user.
 
-        The 'zauto' property must be specified as a bool
-        (either True, or False)
+        The 'zauto' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1289,7 +1291,9 @@ class Choropleth(_BaseTraceType):
             "ISO-3", "USA-states", *country names* correspond to
             features on the base map and value "geojson-id"
             corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute.
+            the `geojson` attribute. "USA-states" accepts both two-
+            letter abbreviations (e.g. "CA") and full state names
+            (e.g. "California").
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
@@ -1623,7 +1627,9 @@ class Choropleth(_BaseTraceType):
             "ISO-3", "USA-states", *country names* correspond to
             features on the base map and value "geojson-id"
             corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute.
+            the `geojson` attribute. "USA-states" accepts both two-
+            letter abbreviations (e.g. "CA") and full state names
+            (e.g. "California").
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.

@@ -145,9 +145,9 @@ class Newshape(_BaseLayoutHierarchyType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -301,8 +301,8 @@ class Newshape(_BaseLayoutHierarchyType):
         """
         Determines whether or not new shape is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

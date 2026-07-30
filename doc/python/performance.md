@@ -181,7 +181,7 @@ it is also possible to use [datashader](/python/datashader/).
 
 The `render_mode` argument to supported Plotly Express functions (e.g. `scatter` and `scatter_polar`) can be used to enable WebGL rendering.
 
-> **Note** The default `render_mode` is `"auto"`, in which case Plotly Express will automatically set `render_mode="webgl"` if the input data is more than 1,000 rows long. In this case, WebGl can be disabled by setting `render_mode=svg`.
+> **Note** The default `render_mode` is `"auto"`, in which case Plotly Express will automatically set `render_mode="webgl"` if the input data is more than 1,000 rows long. In this case, WebGL can be disabled by setting `render_mode=svg`.
 
 Here is an example that creates a 100,000 point scatter plot using Plotly Express with WebGL rendering explicitly enabled.
 

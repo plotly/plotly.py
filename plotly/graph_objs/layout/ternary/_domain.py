@@ -16,7 +16,7 @@ class Domain(_BaseLayoutHierarchyType):
         If there is a layout grid, use the domain for this column in
         the grid for this ternary subplot .
 
-        The 'column' property is a integer and may be specified as:
+        The 'column' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -36,7 +36,7 @@ class Domain(_BaseLayoutHierarchyType):
         If there is a layout grid, use the domain for this row in the
         grid for this ternary subplot .
 
-        The 'row' property is a integer and may be specified as:
+        The 'row' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 

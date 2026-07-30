@@ -70,8 +70,8 @@ class Scattersmith(_BaseTraceType):
         axis lines and tick labels, make sure to set `xaxis.layer` and
         `yaxis.layer` to *below traces*.
 
-        The 'cliponaxis' property must be specified as a bool
-        (either True, or False)
+        The 'cliponaxis' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -89,8 +89,8 @@ class Scattersmith(_BaseTraceType):
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
 
-        The 'connectgaps' property must be specified as a bool
-        (either True, or False)
+        The 'connectgaps' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -491,9 +491,9 @@ class Scattersmith(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -819,8 +819,8 @@ class Scattersmith(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -860,9 +860,9 @@ class Scattersmith(_BaseTraceType):
         `layout.smith2`, and so on.
 
         The 'subplot' property is an identifier of a particular
-        subplot, of type 'smith', that may be specified as the string 'smith'
-        optionally followed by an integer >= 1
-        (e.g. 'smith', 'smith1', 'smith2', 'smith3', etc.)
+        subplot, of type 'smith', that may be specified as:
+          - the string 'smith' optionally followed by an integer >= 1
+            (e.g. 'smith', 'smith1', 'smith2', 'smith3', etc.)
 
         Returns
         -------

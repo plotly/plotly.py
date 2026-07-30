@@ -149,5 +149,5 @@ Code and documentation copyright 2019 Plotly, Inc.
 
 Code released under the [MIT license](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt).
 
-Docs released under the [Creative Commons license](https://github.com/plotly/documentation/blob/source/LICENSE).
+Docs released under the [Creative Commons license](https://creativecommons.org/licenses/by/4.0/).
 

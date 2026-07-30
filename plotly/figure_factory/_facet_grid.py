@@ -819,7 +819,7 @@ def create_facet_grid(
     else:
         SUBPLOT_SPACING = 0.015
 
-    # seperate kwargs for marker and else
+    # separate kwargs for marker and else
     if "marker" in kwargs:
         kwargs_marker = kwargs["marker"]
     else:

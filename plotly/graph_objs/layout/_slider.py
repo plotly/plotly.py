@@ -432,8 +432,8 @@ class Slider(_BaseLayoutHierarchyType):
         """
         Determines whether or not the slider is visible.
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

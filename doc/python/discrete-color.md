@@ -162,7 +162,7 @@ fig = px.bar(df, y="continent", x="pop", color="continent", orientation="h", hov
 fig.show()
 ```
 
-**_Warning_**: If your color sequence is has fewer colors than the number of unique values in the column you are mapping to `color`, the colors will cycle through and repeat, possibly leading to ambiguity:
+**_Warning_**: If your color sequence has fewer colors than the number of unique values in the column you are mapping to `color`, the colors will cycle through and repeat, possibly leading to ambiguity:
 
 ```python
 import plotly.express as px

@@ -76,8 +76,8 @@ class X(_BaseTraceHierarchyType):
         Determines whether or not slice planes about the x dimension
         are drawn.
 
-        The 'show' property must be specified as a bool
-        (either True, or False)
+        The 'show' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

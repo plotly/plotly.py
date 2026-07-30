@@ -79,7 +79,7 @@ fig.show()
 
 #### Plot a Dendrogram with a Heatmap
 
-See also the [Dash Bio demo](https://dash-bio.plotly.host/dash-clustergram/).
+This example uses randomly generated sample data to demonstrate how to plot a dendrogram with a heatmap.
 
 ```python
 import plotly.graph_objects as go
@@ -89,12 +89,11 @@ import numpy as np
 from scipy.spatial.distance import pdist, squareform
 
 
-# get data
-data = np.genfromtxt("http://files.figshare.com/2133304/ExpRawData_E_TABM_84_A_AFFY_44.tab",
-                     names=True,usecols=tuple(range(1,30)),dtype=float, delimiter="\t")
-data_array = data.view((float, len(data.dtype.names)))
-data_array = data_array.transpose()
-labels = data.dtype.names
+# Generate sample data
+np.random.seed(1)
+X = np.random.rand(15, 15)
+labels = [f'Sample_{i}' for i in range(15)]
+data_array = X
 
 # Initialize figure by creating upper dendrogram
 fig = ff.create_dendrogram(data_array, orientation='bottom', labels=labels)

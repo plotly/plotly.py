@@ -558,8 +558,8 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether or not this axis is zoom-able. If true, then
         zoom is disabled.
 
-        The 'fixedrange' property must be specified as a bool
-        (either True, or False)
+        The 'fixedrange' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -951,7 +951,7 @@ class XAxis(_BaseLayoutHierarchyType):
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
 
-        The 'nticks' property is a integer and may be specified as:
+        The 'nticks' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -1216,8 +1216,8 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         If "true", even 4-digit integers are separated
 
-        The 'separatethousands' property must be specified as a bool
-        (either True, or False)
+        The 'separatethousands' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1236,8 +1236,8 @@ class XAxis(_BaseLayoutHierarchyType):
         category levels of this axis. Only has an effect on
         "multicategory" axes.
 
-        The 'showdividers' property must be specified as a bool
-        (either True, or False)
+        The 'showdividers' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1277,8 +1277,8 @@ class XAxis(_BaseLayoutHierarchyType):
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1295,8 +1295,8 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not a line bounding this axis is drawn.
 
-        The 'showline' property must be specified as a bool
-        (either True, or False)
+        The 'showline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1315,8 +1315,8 @@ class XAxis(_BaseLayoutHierarchyType):
         this axis. Note: This only takes affect when hovermode =
         closest
 
-        The 'showspikes' property must be specified as a bool
-        (either True, or False)
+        The 'showspikes' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1333,8 +1333,8 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Determines whether or not the tick labels are drawn.
 
-        The 'showticklabels' property must be specified as a bool
-        (either True, or False)
+        The 'showticklabels' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -1688,7 +1688,7 @@ class XAxis(_BaseLayoutHierarchyType):
         ends with each major tick instead of the period that begins
         there.
 
-        The 'ticklabelindex' property is a integer and may be specified as:
+        The 'ticklabelindex' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
           - A tuple, list, or one-dimensional numpy array of the above
 
@@ -1802,7 +1802,7 @@ class XAxis(_BaseLayoutHierarchyType):
         parallel to the axis. Positive values move the labels in the
         positive direction of the axis.
 
-        The 'ticklabelshift' property is a integer and may be specified as:
+        The 'ticklabelshift' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1828,7 +1828,7 @@ class XAxis(_BaseLayoutHierarchyType):
         the outside. If the negative value is large enough, inside
         ticks can even end up outside and vice versa.
 
-        The 'ticklabelstandoff' property is a integer and may be specified as:
+        The 'ticklabelstandoff' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
 
         Returns
@@ -1851,7 +1851,7 @@ class XAxis(_BaseLayoutHierarchyType):
         which labels are shown. Not implemented for axes with `type`
         "log" or "multicategory", or when `tickmode` is "array".
 
-        The 'ticklabelstep' property is a integer and may be specified as:
+        The 'ticklabelstep' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
 
@@ -2171,8 +2171,8 @@ class XAxis(_BaseLayoutHierarchyType):
         like dragging. Default is true when a cheater plot is present
         on the axis, otherwise false
 
-        The 'visible' property must be specified as a bool
-        (either True, or False)
+        The 'visible' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -2191,8 +2191,8 @@ class XAxis(_BaseLayoutHierarchyType):
         of this axis. If True, the zero line is drawn on top of the
         grid lines.
 
-        The 'zeroline' property must be specified as a bool
-        (either True, or False)
+        The 'zeroline' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

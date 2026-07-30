@@ -189,7 +189,7 @@ class Rangefont(_BaseTraceHierarchyType):
         """
         Sets the weight (or boldness) of the font.
 
-        The 'weight' property is a integer and may be specified as:
+        The 'weight' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 1000]
             OR exactly one of ['normal', 'bold'] (e.g. 'bold')

@@ -75,8 +75,8 @@ class Scatter3d(_BaseTraceType):
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
 
-        The 'connectgaps' property must be specified as a bool
-        (either True, or False)
+        The 'connectgaps' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------
@@ -422,9 +422,9 @@ class Scatter3d(_BaseTraceType):
         `layout.legend`, `layout.legend2`, etc.
 
         The 'legend' property is an identifier of a particular
-        subplot, of type 'legend', that may be specified as the string 'legend'
-        optionally followed by an integer >= 1
-        (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
+        subplot, of type 'legend', that may be specified as:
+          - the string 'legend' optionally followed by an integer >= 1
+            (e.g. 'legend', 'legend1', 'legend2', 'legend3', etc.)
 
         Returns
         -------
@@ -694,9 +694,9 @@ class Scatter3d(_BaseTraceType):
         coordinates refer to `layout.scene2`, and so on.
 
         The 'scene' property is an identifier of a particular
-        subplot, of type 'scene', that may be specified as the string 'scene'
-        optionally followed by an integer >= 1
-        (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
+        subplot, of type 'scene', that may be specified as:
+          - the string 'scene' optionally followed by an integer >= 1
+            (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
 
         Returns
         -------
@@ -714,8 +714,8 @@ class Scatter3d(_BaseTraceType):
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
 
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
+        The 'showlegend' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

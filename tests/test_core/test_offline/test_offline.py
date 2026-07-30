@@ -35,7 +35,7 @@ fig_frames = {
 PLOTLYJS = plotly.offline.get_plotlyjs()
 
 plotly_config_script = """\
-<script type="text/javascript">\
+<script>\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
 cdn_script = '<script charset="utf-8" src="{cdn_url}" integrity="{js_hash}" crossorigin="anonymous"></script>'.format(
@@ -278,7 +278,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         self.assertNotIn("<html>", html)
         self.assertNotIn("</html>", html)
-        self.assertTrue(html.startswith("<div>") and html.endswith("</div>"))
+        self.assertTrue(html.startswith("<div") and html.endswith("</div>"))
 
     def test_config(self):
         config = dict(linkText="Plotly rocks!", showLink=True, editable=True)

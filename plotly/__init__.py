@@ -57,7 +57,7 @@ if TYPE_CHECKING:
         "__version__",
     ]
 
-    # Set default template (for >= 3.7 this is done in ploty/io/__init__.py)
+    # Set default template (for >= 3.7 this is done in plotly/io/__init__.py)
     from plotly.io import templates
 
     templates._default = "plotly"

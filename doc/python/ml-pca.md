@@ -105,16 +105,16 @@ fig.show()
 
 When you will have too many features to visualize, you might be interested in only visualizing the most relevant components. Those components often capture a majority of the [explained variance](https://en.wikipedia.org/wiki/Explained_variation), which is a good way to tell if those components are sufficient for modelling this dataset.
 
-In the example below, our dataset contains 8 features, but we only select the first 2 components.
+In the example below, our dataset contains 10 features, but we only select the first 2 components.
 
 ```python
 import pandas as pd
 import plotly.express as px
 from sklearn.decomposition import PCA
-from sklearn.datasets import fetch_california_housing
+from sklearn.datasets import load_diabetes
 
-housing = fetch_california_housing(as_frame=True)
-df = housing.data
+diabetes = load_diabetes()
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
 n_components = 2
 
 pca = PCA(n_components=n_components)
@@ -123,11 +123,11 @@ components = pca.fit_transform(df)
 total_var = pca.explained_variance_ratio_.sum() * 100
 
 labels = {str(i): f"PC {i+1}" for i in range(n_components)}
-labels['color'] = 'Median Price'
+labels['color'] = 'Disease Progression'
 
 fig = px.scatter_matrix(
     components,
-    color=housing.target,
+    color=diabetes.target,
     dimensions=range(n_components),
     labels=labels,
     title=f'Total Explained Variance: {total_var:.2f}%',
@@ -222,6 +222,7 @@ For more details about the linear algebra behind eigenvectors and loadings, see 
 
 ```python
 import plotly.express as px
+import numpy as np
 from sklearn.decomposition import PCA
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler

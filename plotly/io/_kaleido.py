@@ -375,6 +375,8 @@ To downgrade to Kaleido v0, run:
                 kopts["plotlyjs"] = defaults.plotlyjs
             if defaults.mathjax:
                 kopts["mathjax"] = defaults.mathjax
+            if defaults.headers:
+                kopts["headers"] = defaults.headers
 
             width = (
                 width
@@ -429,7 +431,7 @@ def write_image(
     height: Union[int, None] = None,
     validate: bool = True,
     # Deprecated
-    engine: Union[str, None] = "auto",
+    engine: Union[str, None] = None,
 ):
     """
     Convert a figure to a static image and write it to a file or writeable
@@ -712,6 +714,8 @@ which can be installed using pip:
             kopts["plotlyjs"] = defaults.plotlyjs
         if defaults.mathjax:
             kopts["mathjax"] = defaults.mathjax
+        if defaults.headers:
+            kopts["headers"] = defaults.headers
         kaleido.write_fig_from_object_sync(
             kaleido_specs,
             kopts=kopts,

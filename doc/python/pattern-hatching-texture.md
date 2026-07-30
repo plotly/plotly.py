@@ -88,7 +88,7 @@ fig = px.bar(df, x="medal", y="count", color="nation",
 fig.show()
 ```
 
-Here we use `pattern_shape_map` to explictly assign a shape to each value of `nation`, regardless of order:
+Here we use `pattern_shape_map` to explicitly assign a shape to each value of `nation`, regardless of order:
 
 ```python
 import plotly.express as px

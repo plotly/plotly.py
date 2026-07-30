@@ -350,7 +350,7 @@ class ChunkError(FormatError):
 
 
 class Default:
-    """The default for the greyscale paramter."""
+    """The default for the greyscale parameter."""
 
 
 class Writer:

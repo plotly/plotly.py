@@ -187,7 +187,7 @@ fig =go.Figure(go.Icicle(
     "North America", "Europe", "Australia", "North America - Football", "Soccer",
     "North America - Rugby", "Europe - Football", "Rugby",
     "Europe - American Football","Australia - Football", "Association",
-    "Australian Rules", "Autstralia - American Football", "Australia - Rugby",
+    "Australian Rules", "Australia - American Football", "Australia - Rugby",
     "Rugby League", "Rugby Union"
   ],
   labels= ["Sports",

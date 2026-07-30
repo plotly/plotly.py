@@ -31,7 +31,6 @@ jupyter:
     page_type: u-guide
     permalink: python/2D-Histogram/
     redirect_from:
-    - python/2d-histogram/
     - python/2d-histograms/
     thumbnail: thumbnail/histogram2d.jpg
 ---

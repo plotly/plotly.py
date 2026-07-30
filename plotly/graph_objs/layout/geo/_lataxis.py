@@ -129,8 +129,8 @@ class Lataxis(_BaseLayoutHierarchyType):
         """
         Sets whether or not graticule are shown on the map.
 
-        The 'showgrid' property must be specified as a bool
-        (either True, or False)
+        The 'showgrid' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

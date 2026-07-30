@@ -55,14 +55,6 @@ DEFAULT_HISTNORM = "probability density"
 ALTERNATIVE_HISTNORM = "probability"
 
 
-# Warning format
-def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
-    return "%s:%s: %s:\n\n%s\n\n" % (filename, lineno, category.__name__, message)
-
-
-warnings.formatwarning = warning_on_one_line
-
-
 ### mpl-related tools ###
 def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     """Convert a matplotlib figure to plotly dictionary and send.

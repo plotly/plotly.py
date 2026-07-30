@@ -19,7 +19,7 @@ class Domain(_BaseLayoutHierarchyType):
         set to 1. a map will fit either its x or y domain, but not
         both.
 
-        The 'column' property is a integer and may be specified as:
+        The 'column' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 
@@ -42,7 +42,7 @@ class Domain(_BaseLayoutHierarchyType):
         set to 1. a map will fit either its x or y domain, but not
         both.
 
-        The 'row' property is a integer and may be specified as:
+        The 'row' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
 

@@ -37,8 +37,8 @@ class Title(_BaseLayoutHierarchyType):
         allowed y values. Invalid values will be reset to the default
         1.
 
-        The 'automargin' property must be specified as a bool
-        (either True, or False)
+        The 'automargin' property is a boolean and must be specified as:
+          - A boolean value: True or False
 
         Returns
         -------

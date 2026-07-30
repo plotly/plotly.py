@@ -53,6 +53,53 @@ def test_cdn_includes_integrity_attribute(fig1):
     assert match is not None, "CDN script tag with integrity attribute not found"
 
 
+def test_outer_wrapper_carries_requested_dimensions(fig1):
+    """
+    Regression test for https://github.com/plotly/plotly.py/issues/5591.
+
+    The outer wrapper div produced by ``to_html`` must carry the requested
+    height/width so that percentage values propagate from a parent container
+    down to the figure element. Without this, a default of ``height='100%'``
+    collapses to zero (because the wrapper has no height) and plotly.js falls
+    back to its hardcoded 450px, breaking any responsive layout.
+    """
+    html = pio.to_html(fig1, include_plotlyjs="cdn", full_html=False)
+
+    wrapper_match = re.match(r'<div style="([^"]+)">', html)
+    assert wrapper_match is not None, (
+        "Outer wrapper div is missing inline style; responsive parents cannot "
+        "propagate dimensions to the figure."
+    )
+    wrapper_style = wrapper_match.group(1)
+    assert "height:100%" in wrapper_style
+    assert "width:100%" in wrapper_style
+
+    inner_match = re.search(
+        r'<div id="[^"]+" class="plotly-graph-div" style="([^"]+)">',
+        html,
+    )
+    assert inner_match is not None
+    assert "height:100%" in inner_match.group(1)
+    assert "width:100%" in inner_match.group(1)
+
+
+def test_outer_wrapper_respects_explicit_pixel_dimensions(fig1):
+    """Explicit pixel dimensions must reach the outer wrapper unchanged."""
+    html = pio.to_html(
+        fig1,
+        include_plotlyjs="cdn",
+        full_html=False,
+        default_width=600,
+        default_height=400,
+    )
+
+    wrapper_match = re.match(r'<div style="([^"]+)">', html)
+    assert wrapper_match is not None
+    wrapper_style = wrapper_match.group(1)
+    assert "height:400px" in wrapper_style
+    assert "width:600px" in wrapper_style
+
+
 def test_cdn_integrity_hash_matches_bundled_content(fig1):
     """Test that the SRI hash in CDN script tag matches the bundled plotly.js content"""
     html_output = pio.to_html(fig1, include_plotlyjs="cdn")

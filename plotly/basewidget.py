@@ -34,7 +34,7 @@ class BaseFigureWidget(BaseFigure, anywidget.AnyWidget):
     # ### Python -> JS message properties ###
     # These properties are used to send messages from Python to the
     # frontend. Messages are sent by assigning the message contents to the
-    # appropriate _py2js_* property and then immediatly assigning None to the
+    # appropriate _py2js_* property and then immediately assigning None to the
     # property.
     #
     # See JSDoc comments in the FigureModel class in js/src/Figure.js for
