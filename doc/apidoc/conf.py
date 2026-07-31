@@ -202,4 +202,4 @@ todo_include_todos = True
 
 
 def setup(app):
-    app.add_stylesheet("plotly-style.css")  # also can be a full URL
+    app.add_css_file("plotly-style.css")  # also can be a full URL
