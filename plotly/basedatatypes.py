@@ -1904,21 +1904,32 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # This variable will be assigned to the parent of the next key path
         # element currently being processed
         val_parent = d
+        parents = []
 
         # Initialize parent dict or list of value to be assigned
         # -----------------------------------------------------
         for kp, key_path_el in enumerate(key_path[:-1]):
             # Extend val_parent list if needed
             if isinstance(val_parent, list) and isinstance(key_path_el, int):
+                if v is None and not 0 <= key_path_el < len(val_parent):
+                    return False
+
                 while len(val_parent) <= key_path_el:
                     val_parent.append(None)
 
             elif isinstance(val_parent, dict) and key_path_el not in val_parent:
+                if v is None:
+                    return False
+
                 if isinstance(key_path[kp + 1], int):
                     val_parent[key_path_el] = []
                 else:
                     val_parent[key_path_el] = {}
 
+            elif not isinstance(val_parent, (dict, list)) and v is None:
+                return False
+
+            parents.append((val_parent, key_path_el))
             val_parent = val_parent[key_path_el]
 
         # Assign value to final parent dict or list
@@ -1945,6 +1956,16 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                     # we can pop the key, which alters parent
                     val_parent.pop(last_key)
                     val_changed = True
+
+                    for parent, key in reversed(parents):
+                        child = parent[key]
+                        if isinstance(child, dict) and not child:
+                            if isinstance(parent, dict):
+                                parent.pop(key)
+                            else:
+                                break
+                        else:
+                            break
             elif isinstance(val_parent, list):
                 if isinstance(last_key, int) and 0 <= last_key < len(val_parent):
                     # Parent is a list and last_key is a valid index so we
@@ -4607,6 +4628,28 @@ class BasePlotlyType(object):
         else:
             raise ValueError("Invalid child with name: %s" % child.plotly_name)
 
+    def _prune_empty_child_props(self, child):
+        """
+        Remove a compound child's properties dict if it is empty.
+
+        Compound array elements can rely on empty dict placeholders for index
+        position, so this only prunes scalar compound properties.
+        """
+        if (
+            child.plotly_name in self._compound_props
+            and self._compound_props[child.plotly_name] is child
+            and self._props is not None
+            and self._props.get(child.plotly_name) == {}
+        ):
+            self._props.pop(child.plotly_name)
+
+            if (
+                not self._props
+                and self.parent is not None
+                and isinstance(self.parent, BasePlotlyType)
+            ):
+                self.parent._prune_empty_child_props(self)
+
     def _get_child_prop_defaults(self, child):
         """
         Return default properties dict for child
@@ -5286,6 +5329,14 @@ class BasePlotlyType(object):
 
                 # Send property update message
                 self._send_prop_set(prop, val)
+
+                if (
+                    not self._in_batch_mode
+                    and not self._props
+                    and self.parent is not None
+                    and isinstance(self.parent, BasePlotlyType)
+                ):
+                    self.parent._prune_empty_child_props(self)
 
         # val is valid value
         # ------------------

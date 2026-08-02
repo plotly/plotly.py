@@ -82,3 +82,34 @@ class TestRestyleMessage(TestCase):
         self.figure._send_restyle_msg.assert_called_once_with(
             {"marker": {"color": "green"}, "name": "MARKER 1"}, trace_indexes=[0, 1]
         )
+
+    def test_plotly_restyle_nested_none_does_not_create_empty_parents(self):
+        figure = go.Figure(data=[go.Splom()])
+        figure._send_restyle_msg = MagicMock()
+        expected = figure.to_plotly_json()
+
+        figure.plotly_restyle({"marker.colorbar.thicknessmode": None}, trace_indexes=0)
+
+        assert figure.to_plotly_json() == expected
+        figure._send_restyle_msg.assert_not_called()
+
+    def test_property_assignment_nested_none_prunes_empty_parents(self):
+        figure = go.Figure(
+            data=[
+                go.Splom(
+                    dimensions=[{"values": [1, 2]}, {"values": [3, 4]}],
+                    marker={
+                        "color": [1, 2],
+                        "colorbar": {"thicknessmode": "pixels"},
+                    },
+                )
+            ]
+        )
+        figure._send_restyle_msg = MagicMock()
+
+        figure.data[0].marker.colorbar.thicknessmode = None
+
+        assert figure.to_plotly_json()["data"][0]["marker"] == {"color": [1, 2]}
+        figure._send_restyle_msg.assert_called_once_with(
+            {"marker.colorbar.thicknessmode": [None]}, trace_indexes=0
+        )

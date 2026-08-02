@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Fix `hex_to_rgb` parsing of 3-digit shorthand hexadecimal colors such as `#FFF` [[#5662](https://github.com/plotly/plotly.py/pull/5662)], with thanks to @genrichez for the contribution!
-
+- Stop emitting leftover empty `{}` containers when a nested property is set to `None`, which could make a later `Plotly.restyle` of `marker.colorbar` attributes collapse the scatter-matrix layout [[#5615](https://github.com/plotly/plotly.py/issues/5615)]
 
 ## [6.9.0] - 2026-07-09
 
