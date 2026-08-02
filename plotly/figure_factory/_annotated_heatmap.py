@@ -28,7 +28,7 @@ def validate_annotated_heatmap(z, x, y, annotation_text):
                     "z and text should have the same dimensions"
                 )
 
-    if x:
+    if x is not None:
         if len(x) != len(z[0]):
             raise exceptions.PlotlyError(
                 "oops, the x list that you "
@@ -36,7 +36,7 @@ def validate_annotated_heatmap(z, x, y, annotation_text):
                 "width of your z matrix "
             )
 
-    if y:
+    if y is not None:
         if len(y) != len(z):
             raise exceptions.PlotlyError(
                 "oops, the y list that you "
@@ -65,8 +65,8 @@ def create_annotated_heatmap(
     This function adds annotations to each cell of the heatmap.
 
     :param (list[list]|ndarray) z: z matrix to create heatmap.
-    :param (list) x: x axis labels.
-    :param (list) y: y axis labels.
+    :param (list|ndarray) x: x axis labels.
+    :param (list|ndarray) y: y axis labels.
     :param (list[list]|ndarray) annotation_text: Text strings for
         annotations. Should have the same dimensions as the z matrix. If no
         text is added, the values of the z matrix are annotated. Default =
@@ -109,7 +109,7 @@ def create_annotated_heatmap(
         z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
     ).make_annotations()
 
-    if x or y:
+    if x is not None or y is not None:
         trace = dict(
             type="heatmap",
             z=z,
@@ -174,11 +174,11 @@ class _AnnotatedHeatmap(object):
         self, z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
     ):
         self.z = z
-        if x:
+        if x is not None:
             self.x = x
         else:
             self.x = range(len(z[0]))
-        if y:
+        if y is not None:
             self.y = y
         else:
             self.y = range(len(z))

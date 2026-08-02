@@ -1,6 +1,7 @@
 import math
 
 import datetime
+import numpy as np
 import plotly.figure_factory as ff
 
 from plotly.exceptions import PlotlyError
@@ -779,6 +780,25 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
         # check: PlotlyError if y is the wrong size
 
         kwargs = {"z": [[1, 2], [1, 2]], "y": [1, 2, 3]}
+        self.assertRaises(PlotlyError, ff.create_annotated_heatmap, **kwargs)
+
+    def test_numpy_x_and_y(self):
+        # check: numpy arrays are accepted as x and y axis labels
+
+        a_heat = ff.create_annotated_heatmap(
+            [[1, 2], [3, 4]], x=np.array(["A", "B"]), y=np.array(["C", "D"])
+        )
+
+        self.assertEqual(list(a_heat["data"][0]["x"]), ["A", "B"])
+        self.assertEqual(list(a_heat["data"][0]["y"]), ["C", "D"])
+        # tick labels are shown when x and y are supplied
+        self.assertNotEqual(a_heat["layout"]["xaxis"]["showticklabels"], False)
+        self.assertNotEqual(a_heat["layout"]["yaxis"]["showticklabels"], False)
+
+    def test_numpy_x_wrong_size(self):
+        # check: PlotlyError if a numpy x is the wrong size
+
+        kwargs = {"z": [[1, 2], [1, 2]], "x": np.array(["A", "B", "C"])}
         self.assertRaises(PlotlyError, ff.create_annotated_heatmap, **kwargs)
 
     def test_simple_annotated_heatmap(self):
