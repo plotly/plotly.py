@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Fix concurrent first access to lazily initialized graph object properties, which could raise `ValueError("Invalid value")` [[#3441](https://github.com/plotly/plotly.py/issues/3441)]
+
 
 ## [7.1.0] - 2026-09-15
 
