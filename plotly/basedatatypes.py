@@ -4784,24 +4784,27 @@ class BasePlotlyType(object):
             if isinstance(validator, CompoundValidator):
                 if self._compound_props.get(prop, None) is None:
                     # Init compound objects
-                    self._compound_props[prop] = validator.data_class(
-                        _parent=self, plotly_name=prop
-                    )
+                    child = validator.data_class(_parent=self, plotly_name=prop)
                     # Update plotly_name value in case the validator applies
                     # non-standard name (e.g. imagedefaults instead of image)
-                    self._compound_props[prop]._plotly_name = prop
+                    child._plotly_name = prop
+                    # Concurrent readers may both construct a child, but they
+                    # must use the first child published to the cache.
+                    self._compound_props.setdefault(prop, child)
 
                 return validator.present(self._compound_props[prop])
             elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
                 if self._compound_array_props.get(prop, None) is None:
                     # Init list of compound objects
                     if self._props is not None:
-                        self._compound_array_props[prop] = [
+                        children = [
                             validator.data_class(_parent=self)
                             for _ in self._props.get(prop, [])
                         ]
                     else:
-                        self._compound_array_props[prop] = []
+                        children = []
+                    # Keep every concurrent reader attached to the same list.
+                    self._compound_array_props.setdefault(prop, children)
 
                 return validator.present(self._compound_array_props[prop])
             elif self._props is not None and prop in self._props:
