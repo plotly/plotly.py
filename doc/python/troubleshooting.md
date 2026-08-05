@@ -35,6 +35,21 @@ jupyter:
 ---
 
 <!-- #region -->
+### Jupyter and JupyterLab Problems
+
+If a figure appears blank in JupyterLab, first check that the Jupyter server
+environment and the environment used by the notebook kernel can both access the
+Plotly packages they need. This is especially important when JupyterLab and
+`plotly` are installed in separate virtual environments.
+
+As a workaround, try the `notebook` renderer explicitly:
+
+```python
+fig.show(renderer="notebook")
+```
+
+This can help when the default renderer does not display the figure correctly.
+
 ### Version Problems
 
 In order to follow the examples in this documentation site, you should have the latest version of `plotly` installed (5.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under https://plotly.com/python) is compatible with `plotly` version 4.x but *not* with version 3.x, for which the documentation is available under https://plotly.com/python/v3. In general you must also have the correct version of the underlying Plotly.js rendering engine installed, and the way to do that depends on the environment in which you are rendering figures: Dash, Jupyter Lab or Classic Notebook, VSCode etc. Read on for details about troubleshooting `plotly` in these environments.
