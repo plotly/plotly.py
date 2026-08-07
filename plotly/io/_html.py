@@ -341,7 +341,10 @@ style="height:100%; width:100%;"></div>\
         return """\
 <!doctype html>
 <html>
-<head><meta charset="utf-8" /></head>
+<head>
+    <meta charset="utf-8" />
+    <style>html, body {{height: 100%;}}</style>
+</head>
 <body>
     {div}
 </body>
