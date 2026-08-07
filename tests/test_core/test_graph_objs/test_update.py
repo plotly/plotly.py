@@ -90,7 +90,7 @@ class TestUpdateMethod(TestCase):
         """
         If the original list is empty, treat is just as if it's undefined.
         This is a change in behavior from version 2
-        (where the input list would just be completly ignored), because
+        (where the input list would just be completely ignored), because
         in version 3 the difference between an uninitialized and empty list
         is not obvious to the user.
         """
