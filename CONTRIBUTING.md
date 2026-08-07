@@ -251,7 +251,7 @@ Two kinds of Jupyter support are included:
     which allows us to avoid embedding `plotly.js` in the notebook output.
     The JupyterLab extension source code is located at `js/src/mimeExtension.ts`
     and the compiled extension code is located at `plotly/labextension` in the built Python package.
-    The command `jupyter labextension build` (which is one of the steps called by `npm run build`) compiles the extension
+    The command `jupyter-builder build` (which is one of the steps called by `npm run build`) compiles the extension
     and places the build artifacts in `plotly/labextension`. 
 
 2.  **FigureWidget**:
