@@ -51,7 +51,7 @@ dev_core = [
 dev_build = [
     "plotly[dev_core]",
     "build",
-    "jupyterlab"
+    "jupyter-builder"
 ]
 dev_optional = [
     "plotly[dev_build]",
@@ -63,6 +63,7 @@ dev_optional = [
     "fiona<=1.9.6;python_version<='3.8'",
     "geopandas",
     "inflect",
+    "jupyterlab",
     "orjson",
     "pandas",
     "pdfrw",
