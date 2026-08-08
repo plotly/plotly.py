@@ -82,3 +82,18 @@ The situation is similar for environments like Nteract and Streamlit: in these e
 If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
 
 `plotly.io.orca.config.executable = '/home/your_name/miniconda3/bin/orca'`
+
+### Jupyter and JupyterLab Problems
+
+If a figure appears blank in JupyterLab, first check that the Jupyter server
+environment and the environment used by the notebook kernel can both access the
+Plotly packages they need. This is especially important when JupyterLab and
+`plotly` are installed in separate virtual environments.
+
+As a workaround, try the `notebook` renderer explicitly:
+
+```python
+fig.show(renderer="notebook")
+```
+
+This can help when the default renderer does not display the figure correctly.
