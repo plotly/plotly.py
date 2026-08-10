@@ -235,6 +235,19 @@ def test_semitransparent_axes_background_preserved():
     assert plotly_fig.layout.plot_bgcolor == "rgba(26, 51, 76, 0.4)"
 
 
+def test_histogram_converts():
+    """Histograms must convert without error and keep bargap in plotly's
+    valid [0, 1] range; get_bar_gap can return a gap with floating point
+    noise for touching bars, which plotly rejects."""
+    fig, ax = plt.subplots()
+    ax.hist(np.random.randn(1000), 30)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    assert 0 <= plotly_fig.layout.bargap <= 1
+
+
 def test_line_color_is_valid_plotly_color():
     """Converted line colors are valid plotly color strings: plotly rejects
     a space between 'rgba' and the opening parenthesis."""
