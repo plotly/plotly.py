@@ -37,6 +37,22 @@ def test_no_fake_legend_shapes_with_native_legend():
     assert len(plotly_fig.layout.annotations) == 0
 
 
+def test_drawstyle_maps_to_line_shape():
+    cases = {
+        "steps-pre": "vh",
+        "steps": "vh",
+        "steps-post": "hv",
+        "steps-mid": "hvh",
+    }
+    for drawstyle, shape in cases.items():
+        fig, ax = plt.subplots()
+        ax.plot([0, 1, 2], [0, 1, 0], drawstyle=drawstyle)
+
+        plotly_fig = tls.mpl_to_plotly(fig)
+
+        assert plotly_fig.data[0].line.shape == shape
+
+
 def test_legend_disabled_when_no_matplotlib_legend():
     """Test that legend is not enabled when no matplotlib legend is present."""
     fig, ax = plt.subplots()
