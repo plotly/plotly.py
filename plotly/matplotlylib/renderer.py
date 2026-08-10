@@ -197,7 +197,12 @@ class PlotlyRenderer(Renderer):
             left_spine, right_spine, left_tick_markers, right_tick_markers
         )
         xaxis["showline"] = bottom_spine
-        yaxis["showline"] = top_spine
+        yaxis["showline"] = left_spine
+        # hide tick markers when the mpl main-side tick markers are hidden
+        if not bottom_tick_markers:
+            xaxis["ticks"] = ""
+        if not left_tick_markers:
+            yaxis["ticks"] = ""
 
         # put axes in our figure
         self.plotly_fig["layout"]["xaxis{0}".format(self.axis_ct)] = xaxis
