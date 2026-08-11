@@ -752,3 +752,18 @@ def test_transparent_tick_label_color_exports():
 
     assert plotly_fig.layout.xaxis.tickfont.color == "rgba(0,0,0,0)"
     assert plotly_fig.layout.yaxis.tickfont.color == "rgba(0,0,0,0)"
+
+
+def test_contour_rings_are_closed():
+    """Closed contour loops (Z codes) must close in plotly, not leave a gap."""
+    x = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(x, x)
+    fig, ax = plt.subplots()
+    ax.contour(X, Y, np.sin(X) * np.cos(Y), 10)
+    plotly_fig = tls.mpl_to_plotly(fig)
+    rings = [
+        t
+        for t in plotly_fig.data
+        if len(t.x) > 30 and t.x[0] == t.x[-1] and t.y[0] == t.y[-1]
+    ]
+    assert len(rings) >= 2
