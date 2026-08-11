@@ -564,20 +564,33 @@ class PlotlyRenderer(Renderer):
             linewidth = per_path(linewidths, i, 0)
             # a path may contain several disjoint lines (e.g. contour lines
             # of the same level); drawing them in one trace would connect
-            # them, so draw each subpath separately
+            # them, so draw each subpath separately.  The Z (close) codes
+            # carry no vertex, so the codes are iterated by index.
             subpaths = []
             current = []
-            for v, c in zip(verts, codes):
-                if c == "M" and current:
-                    subpaths.append(current)
-                    current = [v]
+            closed = False
+            vi = 0
+            for c in codes:
+                if c == "M":
+                    if current:
+                        subpaths.append((current, closed))
+                    current = [verts[vi]]
+                    closed = False
+                    vi += 1
+                elif c == "Z":
+                    closed = True
                 else:
-                    current.append(v)
+                    current.append(verts[vi])
+                    vi += 1
             if current:
-                subpaths.append(current)
-            for sub in subpaths:
+                subpaths.append((current, closed))
+            for sub, closed in subpaths:
                 if len(sub) < 2:
                     continue
+                # a closed subpath (Z code) must be closed explicitly since
+                # plotly's lines mode does not close the loop
+                if closed:
+                    sub = sub + [sub[0]]
                 self.plotly_fig.add_trace(
                     go.Scatter(
                         x=[v[0] for v in sub],
