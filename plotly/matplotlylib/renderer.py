@@ -526,8 +526,13 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Drawing path collection as markers\n"
             self.draw_marked_line(**scatter_props)
         elif props["path_coordinates"] == "data":
-            self.msg += "    Drawing path collection as filled polygons\n"
-            self._draw_filled_path_collection(props)
+            if len(props["styles"]["facecolor"]) == 0:
+                # no face colors: a line collection (e.g. contour lines)
+                self.msg += "    Drawing path collection as lines\n"
+                self._draw_line_collection(props)
+            else:
+                self.msg += "    Drawing path collection as filled polygons\n"
+                self._draw_filled_path_collection(props)
         else:
             self.msg += "    Path collection not linked to 'data', not drawing\n"
             warnings.warn(
@@ -536,6 +541,55 @@ class PlotlyRenderer(Renderer):
                 "it yet! Plotly can only import path "
                 "collections linked to 'data' coordinates"
             )
+
+    def _draw_line_collection(self, props):
+        """Draw a path collection without face colors (e.g. contour lines)
+        as plain lines."""
+        edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
+        linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
+
+        def per_path(colors, i, default):
+            if isinstance(colors, str):
+                return colors
+            if colors is None:
+                return default
+            try:
+                n = len(colors)
+            except TypeError:
+                return colors
+            return colors[i % n] if n else default
+
+        for i, (verts, codes) in enumerate(props["paths"]):
+            edgecolor = per_path(edgecolors, i, "rgba(0,0,0,0)")
+            linewidth = per_path(linewidths, i, 0)
+            # a path may contain several disjoint lines (e.g. contour lines
+            # of the same level); drawing them in one trace would connect
+            # them, so draw each subpath separately
+            subpaths = []
+            current = []
+            for v, c in zip(verts, codes):
+                if c == "M" and current:
+                    subpaths.append(current)
+                    current = [v]
+                else:
+                    current.append(v)
+            if current:
+                subpaths.append(current)
+            for sub in subpaths:
+                if len(sub) < 2:
+                    continue
+                self.plotly_fig.add_trace(
+                    go.Scatter(
+                        x=[v[0] for v in sub],
+                        y=[v[1] for v in sub],
+                        mode="lines",
+                        line=go.scatter.Line(
+                            color=_export_color(edgecolor), width=linewidth
+                        ),
+                        xaxis="x{0}".format(self.axis_ct),
+                        yaxis="y{0}".format(self.axis_ct),
+                    )
+                )
 
     def _draw_filled_path_collection(self, props):
         """Draw a path collection (e.g. violin plot bodies) as filled polygons."""

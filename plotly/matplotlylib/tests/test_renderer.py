@@ -167,13 +167,15 @@ def test_stem_plot_renders():
 
 
 def test_contour_lines_convert():
-    """Contour lines used to crash with an ndarray line width."""
+    """Contour lines must render as lines, not filled polygons."""
     x = np.linspace(-3, 3, 30)
     X, Y = np.meshgrid(x, x)
     fig, ax = plt.subplots()
     ax.contour(X, Y, np.sin(X) * np.cos(Y), 10)
     plotly_fig = tls.mpl_to_plotly(fig)
     assert len(plotly_fig.data) > 0
+    assert all(t.fill is None for t in plotly_fig.data)
+    assert all(t.mode == "lines" for t in plotly_fig.data)
 
 
 def test_contourf_bands_render():
