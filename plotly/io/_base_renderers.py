@@ -6,10 +6,9 @@ import os
 from os.path import isdir
 
 from plotly import optional_imports
-from plotly.io import to_json, to_image, write_image, write_html
+from plotly.io import to_json, to_image
 from plotly.io._utils import plotly_cdn_url
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
-from plotly.tools import return_figure_from_figure_or_data
 
 ipython_display = optional_imports.get_module("IPython.display")
 IPython = optional_imports.get_module("IPython")
@@ -821,26 +820,21 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
         return {"text/html": html}
 
 
+# Figures shown with the "sphinx_gallery_png" renderer are queued here until
+# plotly.io._sg_scraper.plotly_sg_scraper collects them, so the renderer itself
+# does not need to know where sphinx-gallery wants the files to be written.
+sphinx_gallery_figures = []
+
+
 class SphinxGalleryOrcaRenderer(ExternalRenderer):
+    """Renderer used together with the sphinx-gallery image scraper.
+
+    Instead of displaying the figure, this renderer queues it in
+    ``plotly.io._base_renderers.sphinx_gallery_figures``;
+    :func:`plotly.io._sg_scraper.plotly_sg_scraper` then writes each queued
+    figure to the gallery's image directory, both as an interactive HTML file
+    and as a static image used for the gallery thumbnail.
+    """
+
     def render(self, fig_dict):
-        stack = inspect.stack()
-        # Name of script from which plot function was called is retrieved
-        try:
-            filename = stack[3].filename  # let's hope this is robust...
-        except Exception:  # python 2
-            filename = stack[3][1]
-        filename_root, _ = os.path.splitext(filename)
-        filename_html = filename_root + ".html"
-        filename_png = filename_root + ".png"
-        figure = return_figure_from_figure_or_data(fig_dict, True)
-        _ = write_html(fig_dict, file=filename_html, include_plotlyjs="cdn")
-        try:
-            write_image(figure, filename_png)
-        except (ValueError, ImportError):
-            raise ImportError(
-                "orca and psutil are required to use the `sphinx-gallery-orca` renderer. "
-                "See https://plotly.com/python/static-image-export/ for instructions on "
-                "how to install orca. Alternatively, you can use the `sphinx-gallery` "
-                "renderer (note that png thumbnails can only be generated with "
-                "the `sphinx-gallery-orca` renderer)."
-            )
+        sphinx_gallery_figures.append(fig_dict)

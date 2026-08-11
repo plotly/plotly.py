@@ -1,11 +1,10 @@
 # This module defines an image scraper for sphinx-gallery
 # https://sphinx-gallery.github.io/
 # which can be used by projects using plotly in their documentation.
-from glob import glob
 import os
-import shutil
 
 import plotly
+from plotly.io._base_renderers import sphinx_gallery_figures
 
 plotly.io.renderers.default = "sphinx_gallery_png"
 
@@ -14,11 +13,15 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     """Scrape Plotly figures for galleries of examples using
     sphinx-gallery.
 
-    Examples should use ``plotly.io.show()`` to display the figure with
-    the custom sphinx_gallery renderer.
+    Examples should use ``plotly.io.show()`` (or the equivalent
+    ``fig.show()``) to display the figure with the custom
+    ``sphinx_gallery_png`` renderer, which is made the default renderer as a
+    side effect of importing this module.
 
-    Since the sphinx_gallery renderer generates both html and static png
-    files, we simply crawl these files and give them the appropriate path.
+    Every figure shown that way is written to the gallery image directory
+    twice: once as an interactive HTML file, which is embedded in the page,
+    and once as a static image, which sphinx-gallery uses to generate the
+    thumbnail of the example.
 
     Parameters
     ----------
@@ -29,10 +32,9 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     gallery_conf : dict
         Contains the configuration of Sphinx-Gallery
     **kwargs : dict
-        Additional keyword arguments to pass to
-        :meth:`~matplotlib.figure.Figure.savefig`, e.g. ``format='svg'``.
-        The ``format`` kwarg in particular is used to set the file extension
-        of the output file (currently only 'png' and 'svg' are supported).
+        Additional keyword arguments.
+        The ``format`` kwarg is used to set the file extension
+        of the static images (currently only 'png' and 'svg' are supported).
 
     Returns
     -------
@@ -44,54 +46,73 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     -----
     Add this function to the image scrapers
     """
-    examples_dir = os.path.dirname(block_vars["src_file"])
-    pngs = sorted(glob(os.path.join(examples_dir, "*.png")))
-    htmls = sorted(glob(os.path.join(examples_dir, "*.html")))
+    image_format = kwargs.get("format", "png")
+    if image_format not in ("png", "svg"):
+        raise ValueError(f"format must be one of 'png' or 'svg', got {image_format!r}")
     image_path_iterator = block_vars["image_path_iterator"]
-    image_names = list()
-    seen = set()
-    for html, png in zip(htmls, pngs):
-        if png not in seen:
-            seen |= set(png)
-            this_image_path_png = next(image_path_iterator)
-            this_image_path_html = os.path.splitext(this_image_path_png)[0] + ".html"
-            image_names.append(this_image_path_html)
-            shutil.move(png, this_image_path_png)
-            shutil.move(html, this_image_path_html)
+    html_names = []
+    try:
+        for fig_dict, image_path in zip(sphinx_gallery_figures, image_path_iterator):
+            # sphinx-gallery hands out one path per image; the HTML file sits
+            # next to the image it is the interactive counterpart of.
+            path_root = os.path.splitext(image_path)[0]
+            _write_image(fig_dict, f"{path_root}.{image_format}", image_format)
+            plotly.io.write_html(
+                fig_dict,
+                file=f"{path_root}.html",
+                include_plotlyjs="cdn",
+                full_html=False,
+                default_width="100%",
+                default_height=525,
+                validate=False,
+            )
+            html_names.append(f"{path_root}.html")
+    finally:
+        # Don't let figures leak into the next block if writing one failed.
+        del sphinx_gallery_figures[:]
     # Use the `figure_rst` helper function to generate rST for image files
-    return figure_rst(image_names, gallery_conf["src_dir"])
+    return figure_rst(html_names, gallery_conf["src_dir"])
+
+
+def _write_image(fig_dict, file, image_format):
+    """Write a static image, with a helpful message if that is not possible."""
+    try:
+        plotly.io.write_image(fig_dict, file, format=image_format, validate=False)
+    except Exception as exc:
+        raise RuntimeError(
+            f"Kaleido and a compatible browser are required to use the "
+            f"`sphinx_gallery_png` renderer, but writing {file} failed with: "
+            f"{type(exc).__name__}: {exc}\n"
+            "See https://plotly.com/python/static-image-export/ for "
+            "installation instructions. Alternatively, you can use the "
+            "`sphinx_gallery` renderer without this scraper (note that "
+            "thumbnails can only be generated with the `sphinx_gallery_png` "
+            "renderer)."
+        ) from exc
 
 
 def figure_rst(figure_list, sources_dir):
-    """Generate RST for a list of PNG filenames.
-
-    Depending on whether we have one or more figures, we use a
-    single rst call to 'image' or a horizontal list.
+    """Generate RST for a list of HTML filenames.
 
     Parameters
     ----------
     figure_list : list
         List of strings of the figures' absolute paths.
     sources_dir : str
-        absolute path of Sphinx documentation sources
+        absolute path of Sphinx documentation sources (unused, kept for
+        compatibility with the equivalent sphinx-gallery helper)
 
     Returns
     -------
     images_rst : str
         rst code to embed the images in the document
     """
-
-    figure_paths = [
-        os.path.relpath(figure_path, sources_dir).replace(os.sep, "/").lstrip("/")
+    # The HTML files live in the "images" directory next to the document that
+    # includes them, so the paths are relative to that document.
+    return "".join(
+        SINGLE_HTML % ("images/" + os.path.basename(figure_path))
         for figure_path in figure_list
-    ]
-    images_rst = ""
-    if not figure_paths:
-        return images_rst
-    figure_name = figure_paths[0]
-    figure_path = os.path.join("images", os.path.basename(figure_name))
-    images_rst = SINGLE_HTML % figure_path
-    return images_rst
+    )
 
 
 SINGLE_HTML = """

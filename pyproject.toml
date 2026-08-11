@@ -76,6 +76,7 @@ dev_optional = [
     "scikit-image",
     "scipy",
     "shapely",
+    "sphinx-gallery",
     "statsmodels",
     "vaex;python_version<='3.9'",
     "xarray"

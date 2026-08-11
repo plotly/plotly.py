@@ -1,0 +1,191 @@
+"""Tests for the sphinx-gallery image scraper.
+
+The scraper implements the interface described at
+https://sphinx-gallery.github.io/stable/advanced.html#write-a-custom-image-scraper
+so these tests drive it through sphinx-gallery itself rather than through a
+copy of that interface.
+"""
+
+import functools
+import importlib
+import os
+from pathlib import Path
+from types import SimpleNamespace
+
+import plotly.graph_objects as go
+import plotly.io as pio
+import pytest
+
+pytest.importorskip("sphinx_gallery")
+
+# The color of each successive image written during one test, so that the
+# figure an image or thumbnail came from can be identified.
+COLORS = ["red", "blue"]
+
+
+def dummy_image_writer():
+    """Return a pio.write_image stand-in, so the tests do not need Kaleido."""
+    colors = iter(COLORS)
+
+    def write_dummy_image(fig, file, format="png", **kwargs):
+        color = next(colors)
+        if format == "svg":
+            with open(file, "w") as f:
+                f.write(f'<svg xmlns="http://www.w3.org/2000/svg" fill="{color}"/>')
+        else:
+            from PIL import Image
+
+            Image.new("RGB", (16, 16), color).save(file)
+
+    return write_dummy_image
+
+
+def assert_image_color(path, color, image_format):
+    """Assert an image came from the figure that was written in `color`."""
+    if image_format == "svg":
+        assert f'fill="{color}"' in path.read_text()
+    else:
+        from PIL import Image, ImageColor
+
+        # Sphinx-gallery pads thumbnails onto a white canvas, so only the
+        # center is guaranteed to come from the scraped image.
+        image = Image.open(path).convert("RGB")
+        center = image.getpixel((image.width // 2, image.height // 2))
+        assert center == ImageColor.getrgb(color)
+
+
+@pytest.fixture
+def gallery(tmp_path, monkeypatch):
+    """Emulate a sphinx-gallery build of a single example.
+
+    Calls into sphinx-gallery for everything that drives or consumes the
+    scraper, so that the tests exercise the real API. Images are written by a
+    stand-in for `pio.write_image`, so that the tests do not need Kaleido.
+    """
+    from sphinx_gallery.gen_gallery import DEFAULT_GALLERY_CONF
+    from sphinx_gallery.gen_rst import save_thumbnail
+    from sphinx_gallery.scrapers import ImagePathIterator, save_figures
+
+    from plotly.io._base_renderers import sphinx_gallery_figures
+    from plotly.io._sg_scraper import plotly_sg_scraper
+
+    # Importing the scraper sets the renderer too, but only the first time it
+    # is imported, which may have happened in another test already.
+    monkeypatch.setattr(pio.renderers, "default", "sphinx_gallery_png")
+    monkeypatch.setattr(pio, "write_image", dummy_image_writer())
+
+    example_dir = tmp_path / "auto_examples"
+    thumb_dir = example_dir / "images" / "thumb"
+    thumb_dir.parent.mkdir(parents=True)
+    template = str(example_dir / "images" / "sphx_glr_plot_example_{0:03}.png")
+    src_file = str(example_dir / "plot_example.py")
+    conf = {
+        **DEFAULT_GALLERY_CONF,
+        "src_dir": str(tmp_path),
+        "image_scrapers": (plotly_sg_scraper,),
+    }
+    block_vars = {
+        "image_path_iterator": ImagePathIterator(template),
+        "src_file": src_file,
+    }
+
+    def scrape():
+        """Scrape one code block, as sphinx-gallery does after executing it."""
+        return save_figures(("code", "", 1), block_vars, conf)
+
+    def thumbnail(**file_conf):
+        """Generate the gallery thumbnail and return the one file produced."""
+        save_thumbnail(template, src_file, block_vars, file_conf, conf)
+        (thumb,) = thumb_dir.iterdir()
+        return thumb
+
+    yield SimpleNamespace(
+        conf=conf,
+        example_dir=example_dir,
+        paths=block_vars["image_path_iterator"].paths,
+        scraper=plotly_sg_scraper,
+        scrape=scrape,
+        thumbnail=thumbnail,
+    )
+    del sphinx_gallery_figures[:]
+
+
+@pytest.mark.parametrize("image_format", ["png", "svg"])
+def test_scraper(gallery, image_format):
+    """Each shown figure gets an image and an HTML file, and can be a thumbnail."""
+    # Selecting a format by wrapping the scraper is the approach documented at
+    # https://sphinx-gallery.github.io/stable/advanced.html#example-3-matplotlib-with-svg-format
+    gallery.conf["image_scrapers"] = (
+        functools.partial(gallery.scraper, format=image_format),
+    )
+    fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
+    pio.show(fig)
+    fig.show()  # both ways of showing a figure must be scraped
+
+    rst = gallery.scrape()
+
+    assert len(gallery.paths) == 2
+    for path, color in zip(gallery.paths, COLORS):
+        root = os.path.splitext(path)[0]
+        assert os.path.isfile(f"{root}.html")
+        assert f"images/{os.path.basename(root)}.html" in rst
+        assert_image_color(Path(f"{root}.{image_format}"), color, image_format)
+    assert rst.count(".. raw:: html") == 2
+
+    # The thumbnail must be a scraped figure rather than a "no image" default,
+    # and one image per figure in order is what makes `thumbnail_number` work
+    for number, color in enumerate(COLORS, start=1):
+        thumb = gallery.thumbnail(thumbnail_number=number)
+        assert thumb.name == f"sphx_glr_plot_example_thumb.{image_format}"
+        assert_image_color(thumb, color, image_format)
+
+    # The figures have been consumed, so a block showing none scrapes nothing
+    assert gallery.scrape() == ""
+    assert len(gallery.paths) == 2
+
+
+def test_scraper_ignores_other_examples(gallery):
+    """Files belonging to another example must be left alone (issue #4959).
+
+    Sphinx-gallery can execute examples in parallel, so the directory holding
+    the example being scraped may contain files from other examples.
+    """
+    others = [gallery.example_dir / f"plot_other.{ext}" for ext in ("png", "html")]
+    for other in others:
+        other.write_text("another example")
+    pio.show(go.Figure())
+    rst = gallery.scrape()
+
+    for other in others:
+        assert other.read_text() == "another example", f"{other.name} was scraped"
+    assert len(gallery.paths) == 1
+    assert rst.count(".. raw:: html") == 1
+
+
+def test_scraper_bad_format(gallery):
+    gallery.conf["image_scrapers"] = (functools.partial(gallery.scraper, format="pdf"),)
+    pio.show(go.Figure())
+    with pytest.raises(ValueError, match="format must be one of"):
+        gallery.scrape()
+
+
+def test_scraper_image_error(gallery, monkeypatch):
+    """A failure to write the image says how to fix it, and doesn't stick."""
+
+    def raise_no_browser(*args, **kwargs):
+        raise ValueError("no browser")
+
+    monkeypatch.setattr(pio, "write_image", raise_no_browser)
+    pio.show(go.Figure())
+
+    with pytest.raises(RuntimeError, match="Kaleido"):
+        gallery.scrape()
+
+    assert gallery.scrape() == ""  # the failed figure is not scraped again
+
+
+def test_import_sets_default_renderer(monkeypatch):
+    """Importing the scraper selects the renderer that it knows how to scrape."""
+    monkeypatch.setattr(pio.renderers, "default", "browser")
+    importlib.reload(importlib.import_module("plotly.io._sg_scraper"))
+    assert pio.renderers.default == "sphinx_gallery_png"
