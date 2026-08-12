@@ -825,6 +825,11 @@ class BaseFigure(object):
         if "text/html" in bundle:
             return bundle["text/html"]
         else:
+            import uuid
+
+            from plotly.io._utils import resize_after_load_script
+
+            div_id = str(uuid.uuid4())
             # Size like the html renderers do: "100%" height collapses or
             # overflows in plain-HTML consumers such as sphinx-gallery.
             return self.to_html(
@@ -832,7 +837,8 @@ class BaseFigure(object):
                 include_plotlyjs="cdn",
                 default_width="100%",
                 default_height=525,
-            )
+                div_id=div_id,
+            ) + resize_after_load_script(div_id)
 
     def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
         """

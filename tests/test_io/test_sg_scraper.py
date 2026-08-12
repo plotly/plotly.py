@@ -140,6 +140,8 @@ def test_scraper(gallery, image_format):
     assert rst.count("plotly-graph-div") == 2
     # The wrapper sphinx-gallery uses for HTML reprs, so themes can style both
     assert rst.count('class="output_subarea') == 2
+    # Fixes up figures drawn while the page was still laying out
+    assert rst.count("Plotly.Plots.resize") == 2
 
     # The thumbnail must be a scraped figure rather than a "no image" default,
     # and one image per figure in order is what makes `thumbnail_number` work
@@ -258,7 +260,10 @@ def test_repr_html_fallback_size(monkeypatch):
     with no set height.
     """
     monkeypatch.setattr(pio.renderers, "default", "sphinx_gallery_png")
-    assert 'style="height:525px; width:100%;"' in go.Figure()._repr_html_()
+    html = go.Figure()._repr_html_()
+    assert 'style="height:525px; width:100%;"' in html
+    # Fixes up figures drawn while the page was still laying out
+    assert "Plotly.Plots.resize" in html
     fig = go.Figure(layout={"height": 400})
     assert 'style="height:400px; width:100%;"' in fig._repr_html_()
 

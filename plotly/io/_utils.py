@@ -91,3 +91,22 @@ def plotly_cdn_url(cdn_ver=get_plotlyjs_version()):
     return "https://cdn.plot.ly/plotly-{cdn_ver}.min.js".format(
         cdn_ver=cdn_ver,
     )
+
+
+def resize_after_load_script(div_id):
+    """Script that resizes a plotly div once the page finishes loading.
+
+    A figure drawn while its page is still loading (e.g. one embedded in a
+    sphinx-gallery page) can be sized to a container whose width changes by
+    the time loading finishes, so fix it up once afterwards.
+    """
+    return (
+        '<script>(function() {'
+        "function fit() {"
+        f'var gd = document.getElementById("{div_id}");'
+        "if (window.Plotly && gd) Plotly.Plots.resize(gd);"
+        "}"
+        'if (document.readyState === "complete") fit();'
+        'else window.addEventListener("load", fit);'
+        "})();</script>"
+    )

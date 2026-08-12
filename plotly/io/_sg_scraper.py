@@ -6,10 +6,12 @@ import functools
 import logging
 import os
 import textwrap
+import uuid
 
 import plotly
 from plotly.basedatatypes import BaseFigure
 from plotly.io._base_renderers import sphinx_gallery_figures
+from plotly.io._utils import resize_after_load_script
 
 plotly.io.renderers.default = "sphinx_gallery_png"
 
@@ -147,6 +149,7 @@ def _inline_html(fig_dict):
     The figure is wrapped in the same div that sphinx-gallery wraps captured
     HTML reprs in, so that themes can style both kinds of embed alike.
     """
+    div_id = str(uuid.uuid4())
     html = plotly.io.to_html(
         fig_dict,
         include_plotlyjs="cdn",
@@ -154,10 +157,14 @@ def _inline_html(fig_dict):
         default_width="100%",
         default_height=525,
         validate=False,
+        div_id=div_id,
     )
     html = (
         '<div class="output_subarea output_html rendered_html output_result">\n'
         f"{html}\n"
+        # The figure may draw before the page finishes laying out, ending up
+        # sized to a container whose width then changes.
+        f"{resize_after_load_script(div_id)}\n"
         "</div>"
     )
     return "\n.. raw:: html\n\n" + textwrap.indent(html, "    ") + "\n"
