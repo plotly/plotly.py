@@ -75,8 +75,9 @@ def gallery(tmp_path, monkeypatch):
     # is imported, which may have happened in another test already.
     monkeypatch.setattr(pio.renderers, "default", "sphinx_gallery_png")
     monkeypatch.setattr(pio, "write_image", dummy_image_writer())
-    # Images come from the stand-in above, so skip the Kaleido probe.
-    monkeypatch.setattr(sg_scraper, "_export_available", True)
+    # Images come from the stand-in above, so the Kaleido probe must pass too
+    monkeypatch.setattr(pio, "to_image", lambda *args, **kwargs: b"")
+    sg_scraper._static_export_available.cache_clear()
 
     example_dir = tmp_path / "auto_examples"
     thumb_dir = example_dir / "images" / "thumb"
@@ -114,6 +115,7 @@ def gallery(tmp_path, monkeypatch):
         thumbnail=thumbnail,
     )
     del sphinx_gallery_figures[:]
+    sg_scraper._static_export_available.cache_clear()
 
 
 @pytest.mark.parametrize("image_format", ["png", "svg"])
@@ -222,7 +224,7 @@ def test_scraper_no_static_export(gallery, monkeypatch, caplog):
         raise ValueError("no browser")
 
     monkeypatch.setattr(pio, "to_image", raise_no_browser)
-    monkeypatch.setattr(sg_scraper, "_export_available", None)
+    sg_scraper._static_export_available.cache_clear()
     fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
     pio.show(fig)
     gallery.globals["___"] = fig

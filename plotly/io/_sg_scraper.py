@@ -126,39 +126,35 @@ def _trailing_repr_figure(block, block_vars):
     return figure
 
 
-# Whether static image export works at all, probed on the first scrape so
-# that a build without Kaleido or a browser warns once (per worker, for
-# parallel sphinx-gallery builds) instead of once per figure.
-_export_available = None
-
-
+@functools.lru_cache(maxsize=None)  # functools.cache needs Python 3.9
 def _static_export_available():
-    global _export_available
-    if _export_available is None:
-        try:
-            plotly.io.to_image({"data": []}, format="png", validate=False)
-        except Exception as exc:
-            _export_available = False
-            try:
-                from sphinx.util.logging import getLogger
+    """Whether static image export works, probed on the first scrape.
 
-                warn = functools.partial(
-                    getLogger(__name__).warning, type="plotly", subtype="sg_scraper"
-                )
-            except Exception:
-                warn = logging.getLogger(__name__).warning
-            warn(
-                "plotly static image export is unavailable, so example "
-                "thumbnails will fall back to a placeholder image. Static "
-                "export requires Kaleido and a Chromium-based browser; see "
-                "https://plotly.com/python/static-image-export/ for "
-                "installation instructions. The failure was: %s: %s",
-                type(exc).__name__,
-                exc,
+    Cached so that a build without Kaleido or a browser warns once (per
+    worker, for parallel sphinx-gallery builds) instead of once per figure.
+    """
+    try:
+        plotly.io.to_image({"data": []}, format="png", validate=False)
+    except Exception as exc:
+        try:
+            from sphinx.util.logging import getLogger
+
+            warn = functools.partial(
+                getLogger(__name__).warning, type="plotly", subtype="sg_scraper"
             )
-        else:
-            _export_available = True
-    return _export_available
+        except Exception:
+            warn = logging.getLogger(__name__).warning
+        warn(
+            "plotly static image export is unavailable, so example "
+            "thumbnails will fall back to a placeholder image. Static "
+            "export requires Kaleido and a Chromium-based browser; see "
+            "https://plotly.com/python/static-image-export/ for "
+            "installation instructions. The failure was: %s: %s",
+            type(exc).__name__,
+            exc,
+        )
+        return False
+    return True
 
 
 def _inline_html(fig_dict):
