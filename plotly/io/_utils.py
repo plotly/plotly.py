@@ -101,7 +101,7 @@ def resize_after_load_script(div_id):
     the time loading finishes, so fix it up once afterwards.
     """
     return (
-        '<script>(function() {'
+        "<script>(function() {"
         "function fit() {"
         f'var gd = document.getElementById("{div_id}");'
         "if (window.Plotly && gd) Plotly.Plots.resize(gd);"

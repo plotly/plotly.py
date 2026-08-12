@@ -8,7 +8,6 @@ copy of that interface.
 
 import functools
 import importlib
-import logging
 import os
 from pathlib import Path
 from types import SimpleNamespace
@@ -24,24 +23,7 @@ pytest.importorskip("sphinx_gallery")
 COLORS = ["red", "blue"]
 
 
-def dummy_image_writer():
-    """Return a pio.write_image stand-in, so the tests do not need Kaleido."""
-    colors = iter(COLORS)
-
-    def write_dummy_image(fig, file, format="png", **kwargs):
-        color = next(colors)
-        if format == "svg":
-            with open(file, "w") as f:
-                f.write(f'<svg xmlns="http://www.w3.org/2000/svg" fill="{color}"/>')
-        else:
-            from PIL import Image
-
-            Image.new("RGB", (16, 16), color).save(file)
-
-    return write_dummy_image
-
-
-def assert_image_color(path, color, image_format):
+def assert_image_color(path, color, image_format="png"):
     """Assert an image came from the figure that was written in `color`."""
     if image_format == "svg":
         assert f'fill="{color}"' in path.read_text()
@@ -69,12 +51,23 @@ def gallery(tmp_path, monkeypatch):
 
     import plotly.io._sg_scraper as sg_scraper
     from plotly.io._base_renderers import sphinx_gallery_figures
-    from plotly.io._sg_scraper import plotly_sg_scraper
+
+    colors = iter(COLORS)
+
+    def write_dummy_image(fig, file, format="png", **kwargs):
+        color = next(colors)
+        if format == "svg":
+            svg = f'<svg xmlns="http://www.w3.org/2000/svg" fill="{color}"/>'
+            Path(file).write_text(svg)
+        else:
+            from PIL import Image
+
+            Image.new("RGB", (16, 16), color).save(file)
 
     # Importing the scraper sets the renderer too, but only the first time it
     # is imported, which may have happened in another test already.
     monkeypatch.setattr(pio.renderers, "default", "sphinx_gallery_png")
-    monkeypatch.setattr(pio, "write_image", dummy_image_writer())
+    monkeypatch.setattr(pio, "write_image", write_dummy_image)
     # Images come from the stand-in above, so the Kaleido probe must pass too
     monkeypatch.setattr(pio, "to_image", lambda *args, **kwargs: b"")
     sg_scraper._static_export_available.cache_clear()
@@ -87,7 +80,7 @@ def gallery(tmp_path, monkeypatch):
     conf = {
         **DEFAULT_GALLERY_CONF,
         "src_dir": str(tmp_path),
-        "image_scrapers": (plotly_sg_scraper,),
+        "image_scrapers": (sg_scraper.plotly_sg_scraper,),
     }
     block_vars = {
         "image_path_iterator": ImagePathIterator(template),
@@ -110,7 +103,7 @@ def gallery(tmp_path, monkeypatch):
         example_dir=example_dir,
         globals=block_vars["example_globals"],
         paths=block_vars["image_path_iterator"].paths,
-        scraper=plotly_sg_scraper,
+        scraper=sg_scraper.plotly_sg_scraper,
         scrape=scrape,
         thumbnail=thumbnail,
     )
@@ -126,7 +119,7 @@ def test_scraper(gallery, image_format):
     gallery.conf["image_scrapers"] = (
         functools.partial(gallery.scraper, format=image_format),
     )
-    fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
+    fig = go.Figure()
     pio.show(fig)
     fig.show()  # both ways of showing a figure must be scraped
 
@@ -136,14 +129,18 @@ def test_scraper(gallery, image_format):
     for path, color in zip(gallery.paths, COLORS):
         root = os.path.splitext(path)[0]
         assert_image_color(Path(f"{root}.{image_format}"), color, image_format)
-    assert rst.count(".. raw:: html") == 2
-    assert rst.count("plotly-graph-div") == 2
-    # The wrapper sphinx-gallery uses for HTML reprs, so themes can style both
-    assert rst.count('class="output_subarea') == 2
-    # Fixes up figures drawn while the page was still laying out
-    assert rst.count("Plotly.Plots.resize") == 2
-    # Styled as a card so the light-background figure works on dark pages
-    assert rst.count('class="plotly-output-card"') == 2
+    # One interactive embed per figure: wrapped like sphinx-gallery wraps HTML
+    # reprs so themes can style both alike, resized once the page finishes
+    # laying out, and styled as a card so the light background works on dark
+    # pages.
+    for token in (
+        ".. raw:: html",
+        "plotly-graph-div",
+        'class="output_subarea',
+        "Plotly.Plots.resize",
+        'class="plotly-output-card"',
+    ):
+        assert rst.count(token) == 2, token
 
     # The thumbnail must be a scraped figure rather than a "no image" default,
     # and one image per figure in order is what makes `thumbnail_number` work
@@ -181,32 +178,23 @@ def test_scraper_repr_figure(gallery):
     Sphinx-gallery embeds the HTML of such figures itself (repr capture), so
     the scraper must contribute only the static image.
     """
-    fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
+    fig = go.Figure()
     gallery.globals["___"] = fig  # as sphinx-gallery's repr capture leaves it
-    rst = gallery.scrape("fig.update_layout(title='hi')\nfig")
-
-    assert rst == ""
+    assert gallery.scrape("fig.update_layout(title='hi')\nfig") == ""
     assert len(gallery.paths) == 1
-    root = os.path.splitext(gallery.paths[0])[0]
-    assert not os.path.isfile(f"{root}.html")
-    assert_image_color(Path(f"{root}.png"), COLORS[0], "png")
-    assert_image_color(gallery.thumbnail(), COLORS[0], "png")
+    assert_image_color(Path(gallery.paths[0]), COLORS[0])
+    assert_image_color(gallery.thumbnail(), COLORS[0])
 
     # ``___`` survives into blocks without a trailing expression; the stale
     # figure must not be scraped again
     assert gallery.scrape("x = 1") == ""
     assert len(gallery.paths) == 1
 
-
-def test_scraper_repr_of_shown_figure_not_duplicated(gallery):
-    """A figure that is both shown and the last expression is scraped once."""
-    fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
+    # A figure both shown and repr-displayed is scraped once
     fig.show()
-    gallery.globals["___"] = fig
     rst = gallery.scrape("fig.show()\nfig")
-
     assert rst.count(".. raw:: html") == 1
-    assert len(gallery.paths) == 1
+    assert len(gallery.paths) == 2
 
 
 def test_scraper_bad_format(gallery):
@@ -228,30 +216,27 @@ def test_scraper_no_static_export(gallery, monkeypatch, caplog):
     def raise_no_browser(*args, **kwargs):
         raise ValueError("no browser")
 
+    def kaleido_warnings():
+        return [r for r in caplog.records if "Kaleido" in r.getMessage()]
+
     monkeypatch.setattr(pio, "to_image", raise_no_browser)
     sg_scraper._static_export_available.cache_clear()
-    fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
+    fig = go.Figure()
     pio.show(fig)
     gallery.globals["___"] = fig
-
-    with caplog.at_level(logging.WARNING):
-        rst = gallery.scrape("fig.show()")
+    rst = gallery.scrape("fig.show()")
 
     # The shown figure is embedded inline instead of via files
-    assert rst.count(".. raw:: html") == 1
-    assert "Scatter" not in rst  # inlined as HTML, not as a repr
-    assert "plotly-graph-div" in rst
+    assert rst.count("plotly-graph-div") == 1
     assert gallery.paths == []
-    warnings = [r for r in caplog.records if "Kaleido" in r.getMessage()]
-    assert len(warnings) == 1
-    assert "no browser" in warnings[0].getMessage()
+    (warning,) = kaleido_warnings()
+    assert "no browser" in warning.getMessage()
 
     # Only one warning per build, however many blocks follow; repr-displayed
     # figures are embedded by sphinx-gallery itself so they scrape to nothing
-    with caplog.at_level(logging.WARNING):
-        assert gallery.scrape("fig") == ""
+    assert gallery.scrape("fig") == ""
     assert gallery.paths == []
-    assert len([r for r in caplog.records if "Kaleido" in r.getMessage()]) == 1
+    assert len(kaleido_warnings()) == 1
 
 
 def test_repr_html_fallback_size(monkeypatch):

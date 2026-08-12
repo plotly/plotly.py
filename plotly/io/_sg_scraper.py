@@ -180,5 +180,3 @@ def _write_image(fig_dict, file, image_format):
             "See https://plotly.com/python/static-image-export/ for "
             "requirements and installation instructions."
         ) from exc
-
-
