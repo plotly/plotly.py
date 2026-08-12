@@ -129,18 +129,17 @@ def test_scraper(gallery, image_format):
     for path, color in zip(gallery.paths, COLORS):
         root = os.path.splitext(path)[0]
         assert_image_color(Path(f"{root}.{image_format}"), color, image_format)
-    # One interactive embed per figure: wrapped like sphinx-gallery wraps HTML
-    # reprs so themes can style both alike, resized once the page finishes
-    # laying out, and styled as a card so the light background works on dark
-    # pages.
-    for token in (
-        ".. raw:: html",
-        "plotly-graph-div",
-        'class="output_subarea',
-        "Plotly.Plots.resize",
-        'class="plotly-output-card"',
+    # One interactive embed per figure, wrapped like sphinx-gallery wraps HTML
+    # reprs, plus one fix-up block styling the embeds as cards on dark pages
+    # and resizing them once the page finishes laying out.
+    for token, count in (
+        (".. raw:: html", 3),
+        ('class="plotly-graph-div"', 2),
+        ('class="output_subarea', 2),
+        ("div.output_subarea:has(.plotly-graph-div)", 2),
+        ("Plotly.Plots.resize", 1),
     ):
-        assert rst.count(token) == 2, token
+        assert rst.count(token) == count, token
 
     # The thumbnail must be a scraped figure rather than a "no image" default,
     # and one image per figure in order is what makes `thumbnail_number` work
@@ -169,7 +168,7 @@ def test_scraper_ignores_other_examples(gallery):
     for other in others:
         assert other.read_text() == "another example", f"{other.name} was scraped"
     assert len(gallery.paths) == 1
-    assert rst.count(".. raw:: html") == 1
+    assert rst.count('class="plotly-graph-div"') == 1
 
 
 def test_scraper_repr_figure(gallery):
@@ -180,7 +179,9 @@ def test_scraper_repr_figure(gallery):
     """
     fig = go.Figure()
     gallery.globals["___"] = fig  # as sphinx-gallery's repr capture leaves it
-    assert gallery.scrape("fig.update_layout(title='hi')\nfig") == ""
+    rst = gallery.scrape("fig.update_layout(title='hi')\nfig")
+    assert 'class="plotly-graph-div"' not in rst  # sphinx-gallery embeds it
+    assert "Plotly.Plots.resize" in rst  # but the fix-up block still applies
     assert len(gallery.paths) == 1
     assert_image_color(Path(gallery.paths[0]), COLORS[0])
     assert_image_color(gallery.thumbnail(), COLORS[0])
@@ -193,7 +194,7 @@ def test_scraper_repr_figure(gallery):
     # A figure both shown and repr-displayed is scraped once
     fig.show()
     rst = gallery.scrape("fig.show()\nfig")
-    assert rst.count(".. raw:: html") == 1
+    assert rst.count('class="plotly-graph-div"') == 1
     assert len(gallery.paths) == 2
 
 
@@ -227,14 +228,14 @@ def test_scraper_no_static_export(gallery, monkeypatch, caplog):
     rst = gallery.scrape("fig.show()")
 
     # The shown figure is embedded inline instead of via files
-    assert rst.count("plotly-graph-div") == 1
+    assert rst.count('class="plotly-graph-div"') == 1
     assert gallery.paths == []
     (warning,) = kaleido_warnings()
     assert "no browser" in warning.getMessage()
 
     # Only one warning per build, however many blocks follow; repr-displayed
     # figures are embedded by sphinx-gallery itself so they scrape to nothing
-    assert gallery.scrape("fig") == ""
+    assert 'class="plotly-graph-div"' not in gallery.scrape("fig")
     assert gallery.paths == []
     assert len(kaleido_warnings()) == 1
 
@@ -249,10 +250,6 @@ def test_repr_html_fallback_size(monkeypatch):
     monkeypatch.setattr(pio.renderers, "default", "sphinx_gallery_png")
     html = go.Figure()._repr_html_()
     assert 'style="height:525px; width:100%;"' in html
-    # Fixes up figures drawn while the page was still laying out
-    assert "Plotly.Plots.resize" in html
-    # Styled as a card so the light-background figure works on dark pages
-    assert 'class="plotly-output-card"' in html
     fig = go.Figure(layout={"height": 400})
     assert 'style="height:400px; width:100%;"' in fig._repr_html_()
 

@@ -6,14 +6,39 @@ import functools
 import logging
 import os
 import textwrap
-import uuid
 
 import plotly
 from plotly.basedatatypes import BaseFigure
 from plotly.io._base_renderers import sphinx_gallery_figures
-from plotly.io._utils import embed_in_output_card, resize_after_load_script
 
 plotly.io.renderers.default = "sphinx_gallery_png"
+
+# Fix-up markup for the figures of a code block, both the ones this scraper
+# embeds and the repr-captured ones sphinx-gallery embeds itself (both sit in
+# an ``output_subarea`` div). The card keeps the light background baked into
+# the figures presentable on dark pages, detected via ``data-theme`` (themes
+# with a toggle) or the OS preference (theme-less pages); on light pages it is
+# invisible. The resize fixes up figures that drew while the page was still
+# laying out and so can be sized to a container whose width then changed.
+_CARD = "background:#fff;border-radius:0.25rem;padding:0.5rem"
+_SELECTOR = "div.output_subarea:has(.plotly-graph-div)"
+_FIXUP_HTML = (
+    "<style>"
+    f'html[data-theme="dark"] {_SELECTOR}{{{_CARD}}}'
+    "@media (prefers-color-scheme: dark){"
+    f'html:not([data-theme="light"]) {_SELECTOR}{{{_CARD}}}'
+    "}"
+    "</style>"
+    "<script>"
+    "if (!window.plotlySphinxGalleryResize) {"
+    "window.plotlySphinxGalleryResize = true;"
+    'window.addEventListener("load", function () {'
+    'document.querySelectorAll(".plotly-graph-div").forEach('
+    "function (gd) { Plotly.Plots.resize(gd); });"
+    "});"
+    "}"
+    "</script>"
+)
 
 
 def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
@@ -86,6 +111,8 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
                 # Repr-displayed figures are embedded by sphinx-gallery
                 # itself; their static image only serves as the thumbnail.
                 rst += _inline_html(fig_dict)
+        if figures:
+            rst += _raw_html_rst(_FIXUP_HTML)
         return rst
     finally:
         # Don't let figures leak into the next block if writing one failed.
@@ -147,9 +174,8 @@ def _inline_html(fig_dict):
     """Embed a figure into the rst directly, rather than via a file.
 
     The figure is wrapped in the same div that sphinx-gallery wraps captured
-    HTML reprs in, so that themes can style both kinds of embed alike.
+    HTML reprs in, so that the fix-up markup applies to both kinds of embed.
     """
-    div_id = str(uuid.uuid4())
     html = plotly.io.to_html(
         fig_dict,
         include_plotlyjs="cdn",
@@ -157,16 +183,16 @@ def _inline_html(fig_dict):
         default_width="100%",
         default_height=525,
         validate=False,
-        div_id=div_id,
     )
-    # The figure may draw before the page finishes laying out, ending up
-    # sized to a container whose width then changes.
-    html = embed_in_output_card(html + resize_after_load_script(div_id))
     html = (
         '<div class="output_subarea output_html rendered_html output_result">\n'
         f"{html}\n"
         "</div>"
     )
+    return _raw_html_rst(html)
+
+
+def _raw_html_rst(html):
     return "\n.. raw:: html\n\n" + textwrap.indent(html, "    ") + "\n"
 
 
