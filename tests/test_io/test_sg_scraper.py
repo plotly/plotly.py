@@ -120,7 +120,7 @@ def gallery(tmp_path, monkeypatch):
 
 @pytest.mark.parametrize("image_format", ["png", "svg"])
 def test_scraper(gallery, image_format):
-    """Each shown figure gets an image and an HTML file, and can be a thumbnail."""
+    """Each shown figure gets an embed and a static image, and can be a thumbnail."""
     # Selecting a format by wrapping the scraper is the approach documented at
     # https://sphinx-gallery.github.io/stable/advanced.html#example-3-matplotlib-with-svg-format
     gallery.conf["image_scrapers"] = (
@@ -135,10 +135,11 @@ def test_scraper(gallery, image_format):
     assert len(gallery.paths) == 2
     for path, color in zip(gallery.paths, COLORS):
         root = os.path.splitext(path)[0]
-        assert os.path.isfile(f"{root}.html")
-        assert f"images/{os.path.basename(root)}.html" in rst
         assert_image_color(Path(f"{root}.{image_format}"), color, image_format)
     assert rst.count(".. raw:: html") == 2
+    assert rst.count("plotly-graph-div") == 2
+    # The wrapper sphinx-gallery uses for HTML reprs, so themes can style both
+    assert rst.count('class="output_subarea') == 2
 
     # The thumbnail must be a scraped figure rather than a "no image" default,
     # and one image per figure in order is what makes `thumbnail_number` work
@@ -247,6 +248,19 @@ def test_scraper_no_static_export(gallery, monkeypatch, caplog):
         assert gallery.scrape("fig") == ""
     assert gallery.paths == []
     assert len([r for r in caplog.records if "Kaleido" in r.getMessage()]) == 1
+
+
+def test_repr_html_fallback_size(monkeypatch):
+    """The repr of a figure must have a usable pixel height, not "100%".
+
+    With the (non-mimetype) sphinx_gallery_png renderer selected, sphinx-
+    gallery captures ``_repr_html_``, whose output ends up in a container
+    with no set height.
+    """
+    monkeypatch.setattr(pio.renderers, "default", "sphinx_gallery_png")
+    assert 'style="height:525px; width:100%;"' in go.Figure()._repr_html_()
+    fig = go.Figure(layout={"height": 400})
+    assert 'style="height:400px; width:100%;"' in fig._repr_html_()
 
 
 def test_image_scrapers_by_name(monkeypatch):

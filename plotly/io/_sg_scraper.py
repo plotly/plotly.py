@@ -23,10 +23,9 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     ``sphinx_gallery_png`` renderer, which is made the default renderer as a
     side effect of importing this module.
 
-    Every figure shown that way is written to the gallery image directory
-    twice: once as an interactive HTML file, which is embedded in the page,
-    and once as a static image, which sphinx-gallery uses to generate the
-    thumbnail of the example.
+    Every figure shown that way is embedded in the page as interactive HTML,
+    and written to the gallery image directory as a static image, which
+    sphinx-gallery uses to generate the thumbnail of the example.
 
     A figure that is instead displayed by making it the last expression of a
     code block (sphinx-gallery's repr capture) gets a static image too, so
@@ -72,35 +71,20 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
         if fig_dict not in sphinx_gallery_figures:
             figures.append((fig_dict, False))
     try:
-        if not _static_export_available():
-            # No images means no thumbnails, and sphinx-gallery requires an
-            # image for every path taken from the iterator, so embed shown
-            # figures inline instead of via files.
-            return "".join(
-                _inline_html(fig_dict) for fig_dict, shown in figures if shown
-            )
-        html_names = []
-        for (fig_dict, shown), image_path in zip(figures, image_path_iterator):
-            # sphinx-gallery hands out one path per image; the HTML file sits
-            # next to the image it is the interactive counterpart of.
-            path_root = os.path.splitext(image_path)[0]
-            _write_image(fig_dict, f"{path_root}.{image_format}", image_format)
-            if not shown:
-                # Repr-displayed: sphinx-gallery embeds the HTML itself, the
-                # static image only makes the figure available as a thumbnail.
-                continue
-            plotly.io.write_html(
-                fig_dict,
-                file=f"{path_root}.html",
-                include_plotlyjs="cdn",
-                full_html=False,
-                default_width="100%",
-                default_height=525,
-                validate=False,
-            )
-            html_names.append(f"{path_root}.html")
-        # Use the `figure_rst` helper function to generate rST for image files
-        return figure_rst(html_names, gallery_conf["src_dir"])
+        export_available = _static_export_available()
+        rst = ""
+        for fig_dict, shown in figures:
+            if export_available:
+                # sphinx-gallery requires an image at every path taken from
+                # the iterator, so don't consume paths when export failed.
+                image_path = next(image_path_iterator)
+                path_root = os.path.splitext(image_path)[0]
+                _write_image(fig_dict, f"{path_root}.{image_format}", image_format)
+            if shown:
+                # Repr-displayed figures are embedded by sphinx-gallery
+                # itself; their static image only serves as the thumbnail.
+                rst += _inline_html(fig_dict)
+        return rst
     finally:
         # Don't let figures leak into the next block if writing one failed.
         del sphinx_gallery_figures[:]
@@ -158,7 +142,11 @@ def _static_export_available():
 
 
 def _inline_html(fig_dict):
-    """Embed a figure into the rst directly, rather than via a file."""
+    """Embed a figure into the rst directly, rather than via a file.
+
+    The figure is wrapped in the same div that sphinx-gallery wraps captured
+    HTML reprs in, so that themes can style both kinds of embed alike.
+    """
     html = plotly.io.to_html(
         fig_dict,
         include_plotlyjs="cdn",
@@ -166,6 +154,11 @@ def _inline_html(fig_dict):
         default_width="100%",
         default_height=525,
         validate=False,
+    )
+    html = (
+        '<div class="output_subarea output_html rendered_html output_result">\n'
+        f"{html}\n"
+        "</div>"
     )
     return "\n.. raw:: html\n\n" + textwrap.indent(html, "    ") + "\n"
 
@@ -182,31 +175,3 @@ def _write_image(fig_dict, file, image_format):
         ) from exc
 
 
-def figure_rst(figure_list, sources_dir):
-    """Generate RST for a list of HTML filenames.
-
-    Parameters
-    ----------
-    figure_list : list
-        List of strings of the figures' absolute paths.
-    sources_dir : str
-        absolute path of Sphinx documentation sources (unused, kept for
-        compatibility with the equivalent sphinx-gallery helper)
-
-    Returns
-    -------
-    images_rst : str
-        rst code to embed the images in the document
-    """
-    # The HTML files live in the "images" directory next to the document that
-    # includes them, so the paths are relative to that document.
-    return "".join(
-        SINGLE_HTML % ("images/" + os.path.basename(figure_path))
-        for figure_path in figure_list
-    )
-
-
-SINGLE_HTML = """
-.. raw:: html
-    :file: %s
-"""
