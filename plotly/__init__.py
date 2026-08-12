@@ -182,6 +182,20 @@ def hist_series(data_frame, **kwargs):
     return histogram(data_frame, **new_kwargs)
 
 
+def _get_sg_image_scraper():
+    """Called by sphinx-gallery when ``"plotly"`` is listed in ``image_scrapers``.
+
+    See https://sphinx-gallery.github.io/stable/advanced.html#integrate-custom-scrapers-with-sphinx-gallery
+    """
+    import plotly.io as pio
+    from plotly.io._sg_scraper import plotly_sg_scraper
+
+    # Not left to the import side effect: sphinx-gallery resolves the scraper
+    # repeatedly, so this also undoes any later renderer change.
+    pio.renderers.default = "sphinx_gallery_png"
+    return plotly_sg_scraper
+
+
 def _jupyter_labextension_paths():
     """Called by Jupyter Lab Server to detect if it is a valid labextension and
     to install the extension.

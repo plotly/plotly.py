@@ -87,11 +87,12 @@ def gallery(tmp_path, monkeypatch):
     block_vars = {
         "image_path_iterator": ImagePathIterator(template),
         "src_file": src_file,
+        "example_globals": {},
     }
 
-    def scrape():
+    def scrape(content=""):
         """Scrape one code block, as sphinx-gallery does after executing it."""
-        return save_figures(("code", "", 1), block_vars, conf)
+        return save_figures(("code", content, 1), block_vars, conf)
 
     def thumbnail(**file_conf):
         """Generate the gallery thumbnail and return the one file produced."""
@@ -102,6 +103,7 @@ def gallery(tmp_path, monkeypatch):
     yield SimpleNamespace(
         conf=conf,
         example_dir=example_dir,
+        globals=block_vars["example_globals"],
         paths=block_vars["image_path_iterator"].paths,
         scraper=plotly_sg_scraper,
         scrape=scrape,
@@ -162,6 +164,40 @@ def test_scraper_ignores_other_examples(gallery):
     assert rst.count(".. raw:: html") == 1
 
 
+def test_scraper_repr_figure(gallery):
+    """A figure displayed as a block's last expression still gets a thumbnail.
+
+    Sphinx-gallery embeds the HTML of such figures itself (repr capture), so
+    the scraper must contribute only the static image.
+    """
+    fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
+    gallery.globals["___"] = fig  # as sphinx-gallery's repr capture leaves it
+    rst = gallery.scrape("fig.update_layout(title='hi')\nfig")
+
+    assert rst == ""
+    assert len(gallery.paths) == 1
+    root = os.path.splitext(gallery.paths[0])[0]
+    assert not os.path.isfile(f"{root}.html")
+    assert_image_color(Path(f"{root}.png"), COLORS[0], "png")
+    assert_image_color(gallery.thumbnail(), COLORS[0], "png")
+
+    # ``___`` survives into blocks without a trailing expression; the stale
+    # figure must not be scraped again
+    assert gallery.scrape("x = 1") == ""
+    assert len(gallery.paths) == 1
+
+
+def test_scraper_repr_of_shown_figure_not_duplicated(gallery):
+    """A figure that is both shown and the last expression is scraped once."""
+    fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
+    fig.show()
+    gallery.globals["___"] = fig
+    rst = gallery.scrape("fig.show()\nfig")
+
+    assert rst.count(".. raw:: html") == 1
+    assert len(gallery.paths) == 1
+
+
 def test_scraper_bad_format(gallery):
     gallery.conf["image_scrapers"] = (functools.partial(gallery.scraper, format="pdf"),)
     pio.show(go.Figure())
@@ -182,6 +218,20 @@ def test_scraper_image_error(gallery, monkeypatch):
         gallery.scrape()
 
     assert gallery.scrape() == ""  # the failed figure is not scraped again
+
+
+def test_image_scrapers_by_name(monkeypatch):
+    """`image_scrapers=("plotly",)` must resolve through sphinx-gallery."""
+    from sphinx_gallery.gen_rst import _get_callables
+
+    from plotly.io._sg_scraper import plotly_sg_scraper
+
+    monkeypatch.setattr(pio.renderers, "default", "browser")
+    (scraper,) = _get_callables({"image_scrapers": ("plotly",)}, "image_scrapers")
+    assert scraper is plotly_sg_scraper
+    # Resolving the scraper must select the renderer that it knows how to
+    # scrape, so that no other configuration is needed.
+    assert pio.renderers.default == "sphinx_gallery_png"
 
 
 def test_import_sets_default_renderer(monkeypatch):
