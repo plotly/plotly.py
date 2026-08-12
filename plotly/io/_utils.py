@@ -110,3 +110,24 @@ def resize_after_load_script(div_id):
         'else window.addEventListener("load", fit);'
         "})();</script>"
     )
+
+
+def embed_in_output_card(html):
+    """Wrap embedded-figure HTML in a card that stays legible on dark pages.
+
+    The figure keeps the light background baked into it, so on dark pages an
+    edge-to-edge white slab results; a white padded card reads as intentional
+    instead. Both dark selectors are needed: ``data-theme`` covers themes
+    with an explicit toggle, the media query covers theme-less pages under a
+    dark OS preference. On light pages the white-on-white card is invisible.
+    """
+    card = "background:#fff;border-radius:0.25rem;padding:0.5rem"
+    return (
+        "<style>"
+        f'html[data-theme="dark"] .plotly-output-card{{{card}}}'
+        "@media (prefers-color-scheme: dark){"
+        f'html:not([data-theme="light"]) .plotly-output-card{{{card}}}'
+        "}"
+        "</style>"
+        f'<div class="plotly-output-card">{html}</div>'
+    )

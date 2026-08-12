@@ -142,6 +142,8 @@ def test_scraper(gallery, image_format):
     assert rst.count('class="output_subarea') == 2
     # Fixes up figures drawn while the page was still laying out
     assert rst.count("Plotly.Plots.resize") == 2
+    # Styled as a card so the light-background figure works on dark pages
+    assert rst.count('class="plotly-output-card"') == 2
 
     # The thumbnail must be a scraped figure rather than a "no image" default,
     # and one image per figure in order is what makes `thumbnail_number` work
@@ -264,6 +266,8 @@ def test_repr_html_fallback_size(monkeypatch):
     assert 'style="height:525px; width:100%;"' in html
     # Fixes up figures drawn while the page was still laying out
     assert "Plotly.Plots.resize" in html
+    # Styled as a card so the light-background figure works on dark pages
+    assert 'class="plotly-output-card"' in html
     fig = go.Figure(layout={"height": 400})
     assert 'style="height:400px; width:100%;"' in fig._repr_html_()
 

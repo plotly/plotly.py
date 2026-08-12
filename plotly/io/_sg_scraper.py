@@ -11,7 +11,7 @@ import uuid
 import plotly
 from plotly.basedatatypes import BaseFigure
 from plotly.io._base_renderers import sphinx_gallery_figures
-from plotly.io._utils import resize_after_load_script
+from plotly.io._utils import embed_in_output_card, resize_after_load_script
 
 plotly.io.renderers.default = "sphinx_gallery_png"
 
@@ -159,12 +159,12 @@ def _inline_html(fig_dict):
         validate=False,
         div_id=div_id,
     )
+    # The figure may draw before the page finishes laying out, ending up
+    # sized to a container whose width then changes.
+    html = embed_in_output_card(html + resize_after_load_script(div_id))
     html = (
         '<div class="output_subarea output_html rendered_html output_result">\n'
         f"{html}\n"
-        # The figure may draw before the page finishes laying out, ending up
-        # sized to a container whose width then changes.
-        f"{resize_after_load_script(div_id)}\n"
         "</div>"
     )
     return "\n.. raw:: html\n\n" + textwrap.indent(html, "    ") + "\n"

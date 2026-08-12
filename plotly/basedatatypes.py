@@ -827,18 +827,19 @@ class BaseFigure(object):
         else:
             import uuid
 
-            from plotly.io._utils import resize_after_load_script
+            from plotly.io._utils import embed_in_output_card, resize_after_load_script
 
             div_id = str(uuid.uuid4())
             # Size like the html renderers do: "100%" height collapses or
             # overflows in plain-HTML consumers such as sphinx-gallery.
-            return self.to_html(
+            html = self.to_html(
                 full_html=False,
                 include_plotlyjs="cdn",
                 default_width="100%",
                 default_height=525,
                 div_id=div_id,
-            ) + resize_after_load_script(div_id)
+            )
+            return embed_in_output_card(html + resize_after_load_script(div_id))
 
     def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
         """
