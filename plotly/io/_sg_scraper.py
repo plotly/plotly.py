@@ -2,7 +2,10 @@
 # https://sphinx-gallery.github.io/
 # which can be used by projects using plotly in their documentation.
 import ast
+import functools
+import logging
 import os
+import textwrap
 
 import plotly
 from plotly.basedatatypes import BaseFigure
@@ -29,6 +32,10 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     code block (sphinx-gallery's repr capture) gets a static image too, so
     that it can also serve as the thumbnail; its HTML is embedded by
     sphinx-gallery itself.
+
+    Static image export requires Kaleido and a Chromium-based browser; when
+    unavailable, a warning is emitted once per build and the examples fall
+    back to placeholder thumbnails, with the interactive figures unaffected.
 
     Parameters
     ----------
@@ -64,8 +71,15 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
         # A figure both shown and repr-displayed only needs one image.
         if fig_dict not in sphinx_gallery_figures:
             figures.append((fig_dict, False))
-    html_names = []
     try:
+        if not _static_export_available():
+            # No images means no thumbnails, and sphinx-gallery requires an
+            # image for every path taken from the iterator, so embed shown
+            # figures inline instead of via files.
+            return "".join(
+                _inline_html(fig_dict) for fig_dict, shown in figures if shown
+            )
+        html_names = []
         for (fig_dict, shown), image_path in zip(figures, image_path_iterator):
             # sphinx-gallery hands out one path per image; the HTML file sits
             # next to the image it is the interactive counterpart of.
@@ -85,11 +99,11 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
                 validate=False,
             )
             html_names.append(f"{path_root}.html")
+        # Use the `figure_rst` helper function to generate rST for image files
+        return figure_rst(html_names, gallery_conf["src_dir"])
     finally:
         # Don't let figures leak into the next block if writing one failed.
         del sphinx_gallery_figures[:]
-    # Use the `figure_rst` helper function to generate rST for image files
-    return figure_rst(html_names, gallery_conf["src_dir"])
 
 
 def _trailing_repr_figure(block, block_vars):
@@ -112,20 +126,63 @@ def _trailing_repr_figure(block, block_vars):
     return figure
 
 
+# Whether static image export works at all, probed on the first scrape so
+# that a build without Kaleido or a browser warns once (per worker, for
+# parallel sphinx-gallery builds) instead of once per figure.
+_export_available = None
+
+
+def _static_export_available():
+    global _export_available
+    if _export_available is None:
+        try:
+            plotly.io.to_image({"data": []}, format="png", validate=False)
+        except Exception as exc:
+            _export_available = False
+            try:
+                from sphinx.util.logging import getLogger
+
+                warn = functools.partial(
+                    getLogger(__name__).warning, type="plotly", subtype="sg_scraper"
+                )
+            except Exception:
+                warn = logging.getLogger(__name__).warning
+            warn(
+                "plotly static image export is unavailable, so example "
+                "thumbnails will fall back to a placeholder image. Static "
+                "export requires Kaleido and a Chromium-based browser; see "
+                "https://plotly.com/python/static-image-export/ for "
+                "installation instructions. The failure was: %s: %s",
+                type(exc).__name__,
+                exc,
+            )
+        else:
+            _export_available = True
+    return _export_available
+
+
+def _inline_html(fig_dict):
+    """Embed a figure into the rst directly, rather than via a file."""
+    html = plotly.io.to_html(
+        fig_dict,
+        include_plotlyjs="cdn",
+        full_html=False,
+        default_width="100%",
+        default_height=525,
+        validate=False,
+    )
+    return "\n.. raw:: html\n\n" + textwrap.indent(html, "    ") + "\n"
+
+
 def _write_image(fig_dict, file, image_format):
     """Write a static image, with a helpful message if that is not possible."""
     try:
         plotly.io.write_image(fig_dict, file, format=image_format, validate=False)
     except Exception as exc:
         raise RuntimeError(
-            f"Kaleido and a compatible browser are required to use the "
-            f"`sphinx_gallery_png` renderer, but writing {file} failed with: "
-            f"{type(exc).__name__}: {exc}\n"
+            f"Writing {file} failed with:\n{type(exc).__name__}: {exc}\n"
             "See https://plotly.com/python/static-image-export/ for "
-            "installation instructions. Alternatively, you can use the "
-            "`sphinx_gallery` renderer without this scraper (note that "
-            "thumbnails can only be generated with the `sphinx_gallery_png` "
-            "renderer)."
+            "requirements and installation instructions."
         ) from exc
 
 

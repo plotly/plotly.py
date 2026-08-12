@@ -8,6 +8,7 @@ copy of that interface.
 
 import functools
 import importlib
+import logging
 import os
 from pathlib import Path
 from types import SimpleNamespace
@@ -66,6 +67,7 @@ def gallery(tmp_path, monkeypatch):
     from sphinx_gallery.gen_rst import save_thumbnail
     from sphinx_gallery.scrapers import ImagePathIterator, save_figures
 
+    import plotly.io._sg_scraper as sg_scraper
     from plotly.io._base_renderers import sphinx_gallery_figures
     from plotly.io._sg_scraper import plotly_sg_scraper
 
@@ -73,6 +75,8 @@ def gallery(tmp_path, monkeypatch):
     # is imported, which may have happened in another test already.
     monkeypatch.setattr(pio.renderers, "default", "sphinx_gallery_png")
     monkeypatch.setattr(pio, "write_image", dummy_image_writer())
+    # Images come from the stand-in above, so skip the Kaleido probe.
+    monkeypatch.setattr(sg_scraper, "_export_available", True)
 
     example_dir = tmp_path / "auto_examples"
     thumb_dir = example_dir / "images" / "thumb"
@@ -205,19 +209,42 @@ def test_scraper_bad_format(gallery):
         gallery.scrape()
 
 
-def test_scraper_image_error(gallery, monkeypatch):
-    """A failure to write the image says how to fix it, and doesn't stick."""
+def test_scraper_no_static_export(gallery, monkeypatch, caplog):
+    """Without static export, warn once and keep the interactive figures.
+
+    Sphinx-gallery requires an image file for every image path taken, so no
+    image paths may be consumed either; the examples then get sphinx-gallery's
+    placeholder thumbnail.
+    """
+    import plotly.io._sg_scraper as sg_scraper
 
     def raise_no_browser(*args, **kwargs):
         raise ValueError("no browser")
 
-    monkeypatch.setattr(pio, "write_image", raise_no_browser)
-    pio.show(go.Figure())
+    monkeypatch.setattr(pio, "to_image", raise_no_browser)
+    monkeypatch.setattr(sg_scraper, "_export_available", None)
+    fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[3, 2, 1])])
+    pio.show(fig)
+    gallery.globals["___"] = fig
 
-    with pytest.raises(RuntimeError, match="Kaleido"):
-        gallery.scrape()
+    with caplog.at_level(logging.WARNING):
+        rst = gallery.scrape("fig.show()")
 
-    assert gallery.scrape() == ""  # the failed figure is not scraped again
+    # The shown figure is embedded inline instead of via files
+    assert rst.count(".. raw:: html") == 1
+    assert "Scatter" not in rst  # inlined as HTML, not as a repr
+    assert "plotly-graph-div" in rst
+    assert gallery.paths == []
+    warnings = [r for r in caplog.records if "Kaleido" in r.getMessage()]
+    assert len(warnings) == 1
+    assert "no browser" in warnings[0].getMessage()
+
+    # Only one warning per build, however many blocks follow; repr-displayed
+    # figures are embedded by sphinx-gallery itself so they scrape to nothing
+    with caplog.at_level(logging.WARNING):
+        assert gallery.scrape("fig") == ""
+    assert gallery.paths == []
+    assert len([r for r in caplog.records if "Kaleido" in r.getMessage()]) == 1
 
 
 def test_image_scrapers_by_name(monkeypatch):
