@@ -59,9 +59,10 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     that it can also serve as the thumbnail; its HTML is embedded by
     sphinx-gallery itself.
 
-    Static image export requires Kaleido and a Chromium-based browser; when
-    unavailable, a warning is emitted once per build and the examples fall
-    back to placeholder thumbnails, with the interactive figures unaffected.
+    Static image export requires Kaleido and a Chromium-based browser (the
+    ``plotly_get_chrome`` command installs one); when unavailable, a warning
+    is emitted once per build and the examples fall back to placeholder
+    thumbnails, with the interactive figures unaffected.
 
     Parameters
     ----------
@@ -160,9 +161,10 @@ def _static_export_available():
         warn(
             "plotly static image export is unavailable, so example "
             "thumbnails will fall back to a placeholder image. Static "
-            "export requires Kaleido and a Chromium-based browser; see "
-            "https://plotly.com/python/static-image-export/ for "
-            "installation instructions. The failure was: %s: %s",
+            "export requires Kaleido and a Chromium-based browser "
+            "(the `plotly_get_chrome` command installs one); see "
+            "https://plotly.com/python/static-image-export/ for details. "
+            "The failure was: %s: %s",
             type(exc).__name__,
             exc,
         )
