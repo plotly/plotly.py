@@ -70,6 +70,8 @@ def gallery(tmp_path, monkeypatch):
     monkeypatch.setattr(pio, "write_image", write_dummy_image)
     # Images come from the stand-in above, so the Kaleido probe must pass too
     monkeypatch.setattr(pio, "to_image", lambda *args, **kwargs: b"")
+    # and no real browser should be launched by the tests
+    monkeypatch.setattr(sg_scraper, "_start_export_server", lambda: None)
     sg_scraper._static_export_available.cache_clear()
 
     example_dir = tmp_path / "auto_examples"

@@ -6,6 +6,7 @@ import functools
 import logging
 import os
 import textwrap
+import warnings
 
 import plotly
 from plotly.basedatatypes import BaseFigure
@@ -140,6 +141,32 @@ def _trailing_repr_figure(block, block_vars):
     return figure
 
 
+def _start_export_server():
+    """Keep one browser running for the whole build.
+
+    Without it, every static image export launches and tears down a browser
+    (~1.5 s each); with it, only the first does (~50 ms each after that).
+    Kaleido stops the server atexit.
+    """
+    try:
+        import kaleido
+
+        from plotly.io import defaults
+
+        # The options plotly.io.to_image would otherwise pass per export.
+        kopts = {}
+        if defaults.plotlyjs:
+            kopts["plotlyjs"] = defaults.plotlyjs
+        if defaults.mathjax:
+            kopts["mathjax"] = defaults.mathjax
+        if getattr(defaults, "headers", None):
+            kopts["headers"] = defaults.headers
+        kaleido.start_sync_server(silence_warnings=True, **kopts)
+    except Exception:
+        pass  # Kaleido v0 keeps a persistent instance itself; the probe
+        # reports any other problem
+
+
 @functools.lru_cache(maxsize=None)  # functools.cache needs Python 3.9
 def _static_export_available():
     """Whether static image export works, probed on the first scrape.
@@ -147,8 +174,9 @@ def _static_export_available():
     Cached so that a build without Kaleido or a browser warns once (per
     worker, for parallel sphinx-gallery builds) instead of once per figure.
     """
+    _start_export_server()
     try:
-        plotly.io.to_image({"data": []}, format="png", validate=False)
+        _export_image({"data": []}, None, "png")
     except Exception as exc:
         try:
             from sphinx.util.logging import getLogger
@@ -198,10 +226,23 @@ def _raw_html_rst(html):
     return "\n.. raw:: html\n\n" + textwrap.indent(html, "    ") + "\n"
 
 
+def _export_image(fig_dict, file, image_format):
+    """Export one static image (to memory when `file` is None)."""
+    with warnings.catch_warnings():
+        # The kopts the export server was started with already apply
+        warnings.filterwarnings(
+            "ignore", message="The kopts argument", category=UserWarning
+        )
+        if file is None:
+            plotly.io.to_image(fig_dict, format=image_format, validate=False)
+        else:
+            plotly.io.write_image(fig_dict, file, format=image_format, validate=False)
+
+
 def _write_image(fig_dict, file, image_format):
     """Write a static image, with a helpful message if that is not possible."""
     try:
-        plotly.io.write_image(fig_dict, file, format=image_format, validate=False)
+        _export_image(fig_dict, file, image_format)
     except Exception as exc:
         raise RuntimeError(
             f"Writing {file} failed with:\n{type(exc).__name__}: {exc}\n"
