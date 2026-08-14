@@ -141,6 +141,10 @@ def _trailing_repr_figure(block, block_vars):
     return figure
 
 
+# Whether the shared export browser is "unstarted", "running", or "disabled"
+_export_server_state = "unstarted"
+
+
 def _start_export_server():
     """Keep one browser running for the whole build.
 
@@ -148,6 +152,9 @@ def _start_export_server():
     (~1.5 s each); with it, only the first does (~50 ms each after that).
     Kaleido stops the server atexit.
     """
+    global _export_server_state
+    if _export_server_state != "unstarted":
+        return
     try:
         import kaleido
 
@@ -163,8 +170,38 @@ def _start_export_server():
             kopts["headers"] = defaults.headers
         kaleido.start_sync_server(silence_warnings=True, **kopts)
     except Exception:
-        pass  # Kaleido v0 keeps a persistent instance itself; the probe
-        # reports any other problem
+        # Kaleido v0 keeps a persistent instance itself; the probe reports
+        # any other problem
+        _export_server_state = "disabled"
+    else:
+        _export_server_state = "running"
+
+
+def _abandon_export_server(exc):
+    """Stop using the shared browser; return whether a retry makes sense."""
+    global _export_server_state
+    if _export_server_state != "running":
+        return False
+    _export_server_state = "disabled"
+    try:
+        from sphinx.util.logging import getLogger
+
+        log = getLogger(__name__).info
+    except Exception:
+        log = logging.getLogger(__name__).info
+    log(
+        "The shared plotly static image export browser failed with '%s: %s'; "
+        "falling back to one browser per exported figure.",
+        type(exc).__name__,
+        exc,
+    )
+    try:
+        import kaleido
+
+        kaleido.stop_sync_server(silence_warnings=True)
+    except Exception:
+        pass
+    return True
 
 
 @functools.lru_cache(maxsize=None)  # functools.cache needs Python 3.9
@@ -228,15 +265,28 @@ def _raw_html_rst(html):
 
 def _export_image(fig_dict, file, image_format):
     """Export one static image (to memory when `file` is None)."""
-    with warnings.catch_warnings():
-        # The kopts the export server was started with already apply
-        warnings.filterwarnings(
-            "ignore", message="The kopts argument", category=UserWarning
-        )
-        if file is None:
-            plotly.io.to_image(fig_dict, format=image_format, validate=False)
-        else:
-            plotly.io.write_image(fig_dict, file, format=image_format, validate=False)
+
+    def export():
+        with warnings.catch_warnings():
+            # The kopts the export server was started with already apply
+            warnings.filterwarnings(
+                "ignore", message="The kopts argument", category=UserWarning
+            )
+            if file is None:
+                plotly.io.to_image(fig_dict, format=image_format, validate=False)
+            else:
+                plotly.io.write_image(
+                    fig_dict, file, format=image_format, validate=False
+                )
+
+    try:
+        export()
+    except Exception as exc:
+        # The shared browser can die mid-build (seen on CircleCI Linux);
+        # retry with one browser per export.
+        if not _abandon_export_server(exc):
+            raise
+        export()
 
 
 def _write_image(fig_dict, file, image_format):

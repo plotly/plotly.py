@@ -207,6 +207,35 @@ def test_scraper_bad_format(gallery):
         gallery.scrape()
 
 
+def test_scraper_export_server_fallback(gallery, monkeypatch):
+    """A shared browser dying mid-build falls back to per-export browsers."""
+    import plotly.io._sg_scraper as sg_scraper
+
+    real_write_image = pio.write_image
+    failed = []
+
+    def flaky_write_image(*args, **kwargs):
+        if not failed:
+            failed.append(True)
+            raise ValueError("browser died")
+        return real_write_image(*args, **kwargs)
+
+    monkeypatch.setattr(pio, "write_image", flaky_write_image)
+    monkeypatch.setattr(sg_scraper, "_export_server_state", "running")
+    pio.show(go.Figure())
+    rst = gallery.scrape()
+
+    assert rst.count('class="plotly-graph-div"') == 1
+    assert_image_color(Path(gallery.paths[0]), COLORS[0])
+    assert sg_scraper._export_server_state == "disabled"
+
+    # With no server left to abandon, an export failure is fatal
+    failed.clear()
+    pio.show(go.Figure())
+    with pytest.raises(RuntimeError, match="static-image-export"):
+        gallery.scrape()
+
+
 def test_scraper_no_static_export(gallery, monkeypatch, caplog):
     """Without static export, warn once and keep the interactive figures.
 
