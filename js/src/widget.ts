@@ -109,9 +109,7 @@ type Py2JsUpdateMsg = Py2JsMsg & {
 
 type Selector = {
   type: "box" | "lasso";
-  selector_state:
-    | { xrange: number[]; yrange: number[] }
-    | { xs: number[]; ys: number[] };
+  selector_state: Record<string, any>;
 };
 
 // Model
@@ -1149,22 +1147,30 @@ export class FigureView {
     var selectorObject: Selector;
 
     if (data.hasOwnProperty("range")) {
-      // Box selection
+      // Box selection - preserve all subplot-specific axis keys (x, x2, x3, ... and y, y2, y3, ...)
+      var rangeData = data["range"];
+      // Verify we have at least an x and y range (in any subplot)
+      var hasXRange = Object.keys(rangeData || {}).some((key: string) => /^x\d*$/.test(key));
+      var hasYRange = Object.keys(rangeData || {}).some((key: string) => /^y\d*$/.test(key));
+      if (!hasXRange || !hasYRange) {
+        return null;
+      }
       selectorObject = {
         type: "box",
-        selector_state: {
-          xrange: data["range"]["x"],
-          yrange: data["range"]["y"],
-        },
+        selector_state: rangeData,
       };
     } else if (data.hasOwnProperty("lassoPoints")) {
-      // Lasso selection
+      // Lasso selection - preserve all subplot-specific axis keys
+      var lassoData = data["lassoPoints"];
+      // Verify we have at least an x and y coordinate array (in any subplot)
+      var hasXCoords = Object.keys(lassoData || {}).some((key: string) => /^x\d*$/.test(key));
+      var hasYCoords = Object.keys(lassoData || {}).some((key: string) => /^y\d*$/.test(key));
+      if (!hasXCoords || !hasYCoords) {
+        return null;
+      }
       selectorObject = {
         type: "lasso",
-        selector_state: {
-          xs: data["lassoPoints"]["x"],
-          ys: data["lassoPoints"]["y"],
-        },
+        selector_state: lassoData,
       };
     } else {
       selectorObject = null;
