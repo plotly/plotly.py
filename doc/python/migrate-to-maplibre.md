@@ -36,7 +36,7 @@ jupyter:
 
 ## Migrating from Mapbox traces to MapLibre traces
 
-With the release of Plotly.py v5.24.0, we are introducing a new set of trace types for maps with tile underlays, including from Plotly Express:
+Plotly.py v5.24.0 introduced a set of trace types for maps with tile underlays, including from Plotly Express:
 - `px.scatter_map`
 - `px.line_map`
 - `px.choropleth_map`
@@ -47,7 +47,9 @@ as well as Plotly Graph Objects:
 - `go.Scattermap`
 - `go.Densitymap`
 
-These traces replace the existing Mapbox traces, `px.scatter_mapbox`, `px.line_mapbox`, etc., but use [MapLibre](https://maplibre.org) as the map renderer rather than Mapbox.
+These traces replaced the Mapbox traces, `px.scatter_mapbox`, `px.line_mapbox`, and the rest, and use [MapLibre](https://maplibre.org) as the map renderer rather than Mapbox.
+
+**The Mapbox traces, the `layout.mapbox` subplot, and the `mapboxAccessToken` configuration option were removed in Plotly.py 7.** If you are upgrading to version 7, follow the steps below, then see [Changes in Version 7](/python/v7-migration/) for the rest of the upgrade.
 
 When switching to the new traces, keep an eye out for improved rendering performance, WebGL2 support, and over time, improved features in the Plotly map traces inherited from the MapLibre renderer, including projection support, globe views, terrain support, and support for modern mapping standards.
 

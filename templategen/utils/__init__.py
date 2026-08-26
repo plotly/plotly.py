@@ -20,7 +20,6 @@ colorscale_parent_paths = [
     ("scatter3d", "line"),
     ("scatter3d", "marker"),
     ("scattermap", "marker"),
-    ("scattermapbox", "marker"),
     ("scatterternary", "marker"),
     ("scattercarpet", "marker"),
     ("scatter", "marker", "line"),

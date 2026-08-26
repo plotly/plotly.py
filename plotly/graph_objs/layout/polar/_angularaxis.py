@@ -11,7 +11,6 @@ class AngularAxis(_BaseLayoutHierarchyType):
     _valid_props = {
         "autotypenumbers",
         "categoryarray",
-        "categoryarraysrc",
         "categoryorder",
         "color",
         "direction",
@@ -52,9 +51,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         "ticks",
         "ticksuffix",
         "ticktext",
-        "ticktextsrc",
         "tickvals",
-        "tickvalssrc",
         "tickwidth",
         "type",
         "uirevision",
@@ -104,25 +101,6 @@ class AngularAxis(_BaseLayoutHierarchyType):
         self["categoryarray"] = val
 
     @property
-    def categoryarraysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `categoryarray`.
-
-        The 'categoryarraysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["categoryarraysrc"]
-
-    @categoryarraysrc.setter
-    def categoryarraysrc(self, val):
-        self["categoryarraysrc"] = val
-
-    @property
     def categoryorder(self):
         """
         Specifies the ordering logic for the case of categorical
@@ -169,12 +147,18 @@ class AngularAxis(_BaseLayoutHierarchyType):
         lightened by blending this with the plot background Individual
         pieces can override this.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -274,12 +258,18 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Sets the color of the grid lines.
 
-        The 'gridcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'gridcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -415,12 +405,18 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Sets the axis line color.
 
-        The 'linecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'linecolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -765,12 +761,18 @@ class AngularAxis(_BaseLayoutHierarchyType):
         """
         Sets the tick color.
 
-        The 'tickcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'tickcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -1020,24 +1022,6 @@ class AngularAxis(_BaseLayoutHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
@@ -1055,24 +1039,6 @@ class AngularAxis(_BaseLayoutHierarchyType):
     @tickvals.setter
     def tickvals(self, val):
         self["tickvals"] = val
-
-    @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
 
     @property
     def tickwidth(self):
@@ -1165,9 +1131,6 @@ class AngularAxis(_BaseLayoutHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1395,16 +1358,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         type
@@ -1426,7 +1383,6 @@ class AngularAxis(_BaseLayoutHierarchyType):
         arg=None,
         autotypenumbers=None,
         categoryarray=None,
-        categoryarraysrc=None,
         categoryorder=None,
         color=None,
         direction=None,
@@ -1467,9 +1423,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         ticks=None,
         ticksuffix=None,
         ticktext=None,
-        ticktextsrc=None,
         tickvals=None,
-        tickvalssrc=None,
         tickwidth=None,
         type=None,
         uirevision=None,
@@ -1495,9 +1449,6 @@ class AngularAxis(_BaseLayoutHierarchyType):
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
-        categoryarraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `categoryarray`.
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -1725,16 +1676,10 @@ class AngularAxis(_BaseLayoutHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         tickwidth
             Sets the tick width (in px).
         type
@@ -1776,7 +1721,6 @@ an instance of :class:`plotly.graph_objs.layout.polar.AngularAxis`""")
 
         self._set_property("autotypenumbers", arg, autotypenumbers)
         self._set_property("categoryarray", arg, categoryarray)
-        self._set_property("categoryarraysrc", arg, categoryarraysrc)
         self._set_property("categoryorder", arg, categoryorder)
         self._set_property("color", arg, color)
         self._set_property("direction", arg, direction)
@@ -1817,9 +1761,7 @@ an instance of :class:`plotly.graph_objs.layout.polar.AngularAxis`""")
         self._set_property("ticks", arg, ticks)
         self._set_property("ticksuffix", arg, ticksuffix)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("tickwidth", arg, tickwidth)
         self._set_property("type", arg, type)
         self._set_property("uirevision", arg, uirevision)

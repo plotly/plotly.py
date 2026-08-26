@@ -14,6 +14,19 @@ from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
 
 
+def _export_color(color):
+    """Export a matplotlib color for use as a plotly color.
+
+    matplotlib uses "none" for fully transparent colors, which plotly does not
+    accept, so transparent colors are exported as transparent black.
+    Colors already exported by the mplexporter (hex or rgba strings) are
+    passed through unchanged.
+    """
+    if isinstance(color, str):
+        return "rgba(0,0,0,0)" if color == "none" else color
+    return [_export_color(c) for c in color]
+
+
 class PlotlyRenderer(Renderer):
     """A renderer class inheriting from base for rendering mpl plots in plotly.
 
@@ -54,6 +67,15 @@ class PlotlyRenderer(Renderer):
         self.msg = "Initialized PlotlyRenderer\n"
         self._processing_legend = False
         self._legend_visible = False
+
+    def _convert_x_dates(self, x):
+        """Convert x values to date strings when the x-axis is a date axis."""
+        if self.x_is_mpl_date:
+            formatter = (
+                self.current_mpl_ax.get_xaxis().get_major_formatter().__class__.__name__
+            )
+            x = mpltools.mpl_dates_to_datestrings(x, formatter)
+        return x
 
     def open_figure(self, fig, props):
         """Creates a new figure by beginning to fill out layout dict.
@@ -286,13 +308,7 @@ class PlotlyRenderer(Renderer):
                 [bar["x0"] for bar in trace], [bar["x1"] for bar in trace]
             )
             if self.x_is_mpl_date:
-                x = [bar["x0"] for bar in trace]
-                formatter = (
-                    self.current_mpl_ax.get_xaxis()
-                    .get_major_formatter()
-                    .__class__.__name__
-                )
-                x = mpltools.mpl_dates_to_datestrings(x, formatter)
+                x = self._convert_x_dates([bar["x0"] for bar in trace])
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
             old_rights = [bar_props["x1"] for bar_props in trace]
@@ -436,14 +452,7 @@ class PlotlyRenderer(Renderer):
                 marker=marker,
             )
             if self.x_is_mpl_date:
-                formatter = (
-                    self.current_mpl_ax.get_xaxis()
-                    .get_major_formatter()
-                    .__class__.__name__
-                )
-                marked_line["x"] = mpltools.mpl_dates_to_datestrings(
-                    marked_line["x"], formatter
-                )
+                marked_line["x"] = self._convert_x_dates(marked_line["x"])
             self.plotly_fig.add_trace(marked_line)
             self.msg += "    Heck yeah, I drew that line\n"
         elif props["coordinates"] == "axes":
@@ -513,6 +522,9 @@ class PlotlyRenderer(Renderer):
             }
             self.msg += "    Drawing path collection as markers\n"
             self.draw_marked_line(**scatter_props)
+        elif props["path_coordinates"] == "data":
+            self.msg += "    Drawing path collection as filled polygons\n"
+            self._draw_filled_path_collection(props)
         else:
             self.msg += "    Path collection not linked to 'data', not drawing\n"
             warnings.warn(
@@ -520,6 +532,42 @@ class PlotlyRenderer(Renderer):
                 "world. I totally don't know what to do with "
                 "it yet! Plotly can only import path "
                 "collections linked to 'data' coordinates"
+            )
+
+    def _draw_filled_path_collection(self, props):
+        """Draw a path collection (e.g. violin plot bodies) as filled polygons."""
+        facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
+        edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
+        linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
+
+        def per_path(colors, i, default):
+            if isinstance(colors, str):
+                return colors
+            if colors is None:
+                return default
+            try:
+                n = len(colors)
+            except TypeError:
+                return colors
+            return colors[i % n] if n else default
+
+        for i, (verts, codes) in enumerate(props["paths"]):
+            facecolor = per_path(facecolors, i, "rgba(0,0,0,0)")
+            edgecolor = per_path(edgecolors, i, "rgba(0,0,0,0)")
+            linewidth = per_path(linewidths, i, 0)
+            self.plotly_fig.add_trace(
+                go.Scatter(
+                    x=self._convert_x_dates([v[0] for v in verts]),
+                    y=[v[1] for v in verts],
+                    mode="lines",
+                    line=go.scatter.Line(
+                        color=_export_color(edgecolor), width=linewidth
+                    ),
+                    fill="toself",
+                    fillcolor=_export_color(facecolor),
+                    xaxis="x{0}".format(self.axis_ct),
+                    yaxis="y{0}".format(self.axis_ct),
+                )
             )
 
     def draw_path(self, **props):

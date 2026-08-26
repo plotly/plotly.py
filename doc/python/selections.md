@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Selections
-    order: 38
+    order: 39
     permalink: python/selections/
     thumbnail: thumbnail/ml_apps.png
 ---

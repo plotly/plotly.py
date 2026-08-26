@@ -11,8 +11,6 @@ class ErrorY(_BaseTraceHierarchyType):
     _valid_props = {
         "array",
         "arrayminus",
-        "arrayminussrc",
-        "arraysrc",
         "color",
         "symmetric",
         "thickness",
@@ -65,53 +63,22 @@ class ErrorY(_BaseTraceHierarchyType):
         self["arrayminus"] = val
 
     @property
-    def arrayminussrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `arrayminus`.
-
-        The 'arrayminussrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["arrayminussrc"]
-
-    @arrayminussrc.setter
-    def arrayminussrc(self, val):
-        self["arrayminussrc"] = val
-
-    @property
-    def arraysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `array`.
-
-        The 'arraysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["arraysrc"]
-
-    @arraysrc.setter
-    def arraysrc(self, val):
-        self["arraysrc"] = val
-
-    @property
     def color(self):
         """
         Sets the stroke color of the error bars.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -310,12 +277,6 @@ class ErrorY(_BaseTraceHierarchyType):
             bar in the bottom (left) direction for vertical
             (horizontal) bars Values are plotted relative to the
             underlying data.
-        arrayminussrc
-            Sets the source reference on Chart Studio Cloud for
-            `arrayminus`.
-        arraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `array`.
         color
             Sets the stroke color of the error bars.
         symmetric
@@ -361,8 +322,6 @@ class ErrorY(_BaseTraceHierarchyType):
         arg=None,
         array=None,
         arrayminus=None,
-        arrayminussrc=None,
-        arraysrc=None,
         color=None,
         symmetric=None,
         thickness=None,
@@ -393,12 +352,6 @@ class ErrorY(_BaseTraceHierarchyType):
             bar in the bottom (left) direction for vertical
             (horizontal) bars Values are plotted relative to the
             underlying data.
-        arrayminussrc
-            Sets the source reference on Chart Studio Cloud for
-            `arrayminus`.
-        arraysrc
-            Sets the source reference on Chart Studio Cloud for
-            `array`.
         color
             Sets the stroke color of the error bars.
         symmetric
@@ -464,8 +417,6 @@ an instance of :class:`plotly.graph_objs.scattergl.ErrorY`""")
 
         self._set_property("array", arg, array)
         self._set_property("arrayminus", arg, arrayminus)
-        self._set_property("arrayminussrc", arg, arrayminussrc)
-        self._set_property("arraysrc", arg, arraysrc)
         self._set_property("color", arg, color)
         self._set_property("symmetric", arg, symmetric)
         self._set_property("thickness", arg, thickness)

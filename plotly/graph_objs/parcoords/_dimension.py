@@ -17,11 +17,8 @@ class Dimension(_BaseTraceHierarchyType):
         "templateitemname",
         "tickformat",
         "ticktext",
-        "ticktextsrc",
         "tickvals",
-        "tickvalssrc",
         "values",
-        "valuessrc",
         "visible",
     }
 
@@ -214,24 +211,6 @@ class Dimension(_BaseTraceHierarchyType):
         self["ticktext"] = val
 
     @property
-    def ticktextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ticktext`.
-
-        The 'ticktextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ticktextsrc"]
-
-    @ticktextsrc.setter
-    def ticktextsrc(self, val):
-        self["ticktextsrc"] = val
-
-    @property
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear.
@@ -248,24 +227,6 @@ class Dimension(_BaseTraceHierarchyType):
     @tickvals.setter
     def tickvals(self, val):
         self["tickvals"] = val
-
-    @property
-    def tickvalssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `tickvals`.
-
-        The 'tickvalssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tickvalssrc"]
-
-    @tickvalssrc.setter
-    def tickvalssrc(self, val):
-        self["tickvalssrc"] = val
 
     @property
     def values(self):
@@ -287,24 +248,6 @@ class Dimension(_BaseTraceHierarchyType):
     @values.setter
     def values(self, val):
         self["values"] = val
-
-    @property
-    def valuessrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `values`.
-
-        The 'valuessrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["valuessrc"]
-
-    @valuessrc.setter
-    def valuessrc(self, val):
-        self["valuessrc"] = val
 
     @property
     def visible(self):
@@ -379,23 +322,14 @@ class Dimension(_BaseTraceHierarchyType):
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         values
             Dimension values. `values[n]` represents the value of
             the `n`th point in the dataset, therefore the `values`
             vector for all dimensions must be the same (longer
             vectors will be truncated). Each value must be a finite
             number.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -412,11 +346,8 @@ class Dimension(_BaseTraceHierarchyType):
         templateitemname=None,
         tickformat=None,
         ticktext=None,
-        ticktextsrc=None,
         tickvals=None,
-        tickvalssrc=None,
         values=None,
-        valuessrc=None,
         visible=None,
         **kwargs,
     ):
@@ -483,23 +414,14 @@ class Dimension(_BaseTraceHierarchyType):
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`.
-        ticktextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `ticktext`.
         tickvals
             Sets the values at which ticks on this axis appear.
-        tickvalssrc
-            Sets the source reference on Chart Studio Cloud for
-            `tickvals`.
         values
             Dimension values. `values[n]` represents the value of
             the `n`th point in the dataset, therefore the `values`
             vector for all dimensions must be the same (longer
             vectors will be truncated). Each value must be a finite
             number.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -536,11 +458,8 @@ an instance of :class:`plotly.graph_objs.parcoords.Dimension`""")
         self._set_property("templateitemname", arg, templateitemname)
         self._set_property("tickformat", arg, tickformat)
         self._set_property("ticktext", arg, ticktext)
-        self._set_property("ticktextsrc", arg, ticktextsrc)
         self._set_property("tickvals", arg, tickvals)
-        self._set_property("tickvalssrc", arg, tickvalssrc)
         self._set_property("values", arg, values)
-        self._set_property("valuessrc", arg, valuessrc)
         self._set_property("visible", arg, visible)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

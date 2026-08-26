@@ -49,7 +49,9 @@ jobs:
       run: |
         uv venv
         source .venv/bin/activate
-        uv pip install jupyterlab
+        # Technically, we only need the `jupyter-builder` package, but using the dev_build extra
+        # keeps build behavior consistent across all CI jobs
+        uv sync --extra dev_build
         cd js
         npm ci
         npm run build

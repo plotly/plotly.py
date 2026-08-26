@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Setting the Font, Title, Legend Entries, and Axis Titles
-    order: 13
+    order: 14
     permalink: python/figure-labels/
     redirect_from: python/font/
     thumbnail: thumbnail/figure-labels.png

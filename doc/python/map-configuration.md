@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Map Configuration and Styling on Geo Maps
-    order: 13
+    order: 12
     page_type: u-guide
     permalink: python/map-configuration/
     thumbnail: thumbnail/county-level-choropleth.jpg
@@ -39,7 +39,7 @@ Plotly supports two different kinds of maps:
 
 - **[Tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map)**
 
-If your figure is created with a `px.scatter_map`, `px.scatter_mapbox`, `px.line_map`, `px.line_mapbox`, `px.choropleth_map`, `px.choropleth_mapbox`, `px.density_map`, or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermap`, `go.Scattermapbox`, `go.Choroplethmap`, `go.Choroplethmapbox`, `go.Densitymap`, or `go.Densitymapbox`, the `layout.map` object in your figure contains configuration information for the map itself.
+If your figure is created with a `px.scatter_map`, `px.line_map`, `px.choropleth_map`, or `px.density_map` function or otherwise contains one or more traces of type `go.Scattermap`, `go.Choroplethmap`, or `go.Densitymap`, the `layout.map` object in your figure contains configuration information for the map itself.
 
 - **Outline-based maps**
 
@@ -171,13 +171,30 @@ fig.show()
 
 ### Automatic Zooming or Bounds Fitting
 
-The `layout.geo.fitbounds` attribute can be set to `locations` to automatically set the center and latitude and longitude range according to the data being plotted. See the [choropleth maps](/python/choropleth-maps/) documentation for more information.
+The `layout.geo.fitbounds` attribute set to `locations` automatically sets the center and the latitude and longitude range according to the data being plotted. See the [choropleth maps](/python/choropleth-maps/) documentation for more information.
+
+*Changed in 7.0*: `fitbounds` defaults to `"locations"`, so a `geo` subplot fits its data without any configuration. Set `fitbounds=False` for the world view that earlier versions showed by default. Setting your own `center` or `projection.scale` also turns auto-fitting off.
 
 ```python
 import plotly.express as px
 
 fig = px.line_geo(lat=[0,15,20,35], lon=[5,10,25,30])
 fig.update_geos(fitbounds="locations")
+fig.update_layout(height=300, margin={"r":0,"t":0,"l":0,"b":0})
+fig.show()
+```
+
+### Limiting the Zoom Range
+
+*New in 7.0*
+
+`projection.minscale` and `projection.maxscale` clamp how far a user can zoom the map in or out. The two attributes are multipliers of `projection.scale`, so `minscale=0.5` allows zooming out to half the initial view and `maxscale=4` allows zooming in to four times it.
+
+```python
+import plotly.express as px
+
+fig = px.line_geo(lat=[0,15,20,35], lon=[5,10,25,30])
+fig.update_geos(projection=dict(scale=1, minscale=0.5, maxscale=4))
 fig.update_layout(height=300, margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```

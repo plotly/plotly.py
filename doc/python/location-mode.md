@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Locations for Outline-based Maps
-    order: 15
+    order: 14
     page_type: example_index
     permalink: python/outline-map-locations/
     thumbnail: thumbnail/choropleth.jpg
@@ -461,17 +461,7 @@ fig = px.choropleth(
 fig.show()
 ```
 
-> How Plotly matches 'country names' will change in a future version. Matching will become stricter and some country names may no longer match. We recommend using `locationmode='ISO-3'` with ISO codes for `locations` to ensure consistent behavior across versions.
-
-```python
-import plotly.express as px
-
-fig = px.choropleth(
-    locations=['USA', 'CAN', 'GBR'],
-    locationmode='ISO-3'
-)
-fig.show()
-```
+*Changed in 7.0*: country names are matched by a different library, which accepts more forms and rejects some names that matched by accident before. See [Changes in Version 7](/python/v7-migration/#Country-Names) for details. To get identical results across versions, use [`locationmode='ISO-3'`](#locationmode='ISO-3') with ISO codes for `locations`.
 
 ## Using Different Data Types with `locations`
 

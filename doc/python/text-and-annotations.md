@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Text and Annotations
-    order: 22
+    order: 23
     permalink: python/text-and-annotations/
     thumbnail: thumbnail/text-and-annotations.png
 ---

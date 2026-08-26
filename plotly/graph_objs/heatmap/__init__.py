@@ -5,7 +5,6 @@ if TYPE_CHECKING:
     from ._colorbar import ColorBar
     from ._hoverlabel import Hoverlabel
     from ._legendgrouptitle import Legendgrouptitle
-    from ._stream import Stream
     from ._textfont import Textfont
     from . import colorbar
     from . import hoverlabel
@@ -20,7 +19,6 @@ else:
             "._colorbar.ColorBar",
             "._hoverlabel.Hoverlabel",
             "._legendgrouptitle.Legendgrouptitle",
-            "._stream.Stream",
             "._textfont.Textfont",
         ],
     )

@@ -667,33 +667,6 @@ class BooleanValidator(BaseValidator):
         return v
 
 
-class SrcValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, **kwargs):
-        super(SrcValidator, self).__init__(
-            plotly_name=plotly_name, parent_name=parent_name, **kwargs
-        )
-
-        self.chart_studio = get_module("chart_studio")
-
-    def description(self):
-        return """\
-    The '{plotly_name}' property must be specified as a string or
-    as a plotly.grid_objs.Column object""".format(plotly_name=self.plotly_name)
-
-    def validate_coerce(self, v):
-        if is_none_or_typed_array_spec(v):
-            pass
-        elif isinstance(v, str):
-            pass
-        elif self.chart_studio and isinstance(v, self.chart_studio.grid_objs.Column):
-            # Convert to id string
-            v = v.id
-        else:
-            self.raise_invalid_val(v)
-
-        return v
-
-
 class NumberValidator(BaseValidator):
     """
     "number": {
@@ -1145,14 +1118,18 @@ class StringValidator(BaseValidator):
 class ColorValidator(BaseValidator):
     """
     "color": {
-        "description": "A string describing color. Supported formats:
-                        - hex (e.g. '#d3d3d3')
-                        - rgb (e.g. 'rgb(255, 0, 0)')
-                        - rgba (e.g. 'rgb(255, 0, 0, 0.5)')
-                        - hsl (e.g. 'hsl(0, 100%, 50%)')
-                        - hsv (e.g. 'hsv(0, 100%, 100%)')
-                        - named colors(full list:
-                          http://www.w3.org/TR/css3-color/#svg-color)",
+        "description": "A string describing color. All CSS 4 color formats are supported, including:
+                        - hex or short hex (e.g. '#d3d3d3', '#d3d')
+                        - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+                        - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+                        - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+                        - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+                        - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+                        - hwb (e.g. 'hwb(0 0% 100%)')
+                        - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+                        - color (e.g. 'color(display-p3 1 0 0)')
+                        - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+                        - See full CSS 4 color spec: https://www.w3.org/TR/css-color-4/",
         "requiredOpts": [],
         "otherOpts": [
             "dflt",
@@ -1161,8 +1138,14 @@ class ColorValidator(BaseValidator):
     },
     """
 
-    re_hex = re.compile(r"#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})")
-    re_rgb_etc = re.compile(r"(rgb|hsl|hsv)a?\([\d.]+%?(,[\d.]+%?){2,3}\)")
+    re_spaces_to_remove = re.compile(r"(?<!(\d|%|g)) | (?!\d)")
+
+    re_hex = re.compile(
+        r"#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})"
+    )
+    re_rgb_etc = re.compile(
+        r"((rgb|hsl)a?|hwb|(ok)?(lab|lch))\([\d.]+(%|deg)?([ ,] ?[\d.]+%?){2}([ /,] ?[\d.]+%?)?\)|color\([\w-]+([ ,] ?[\d.]+){3,4}\)"
+    )
     re_ddk = re.compile(r"var\(\-\-.*\)")
 
     named_colors = [
@@ -1335,12 +1318,18 @@ class ColorValidator(BaseValidator):
 
     def description(self):
         valid_color_description = """\
-    The '{plotly_name}' property is a color and may be specified as:
-      - A hex string (e.g. '#ff0000')
-      - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-      - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-      - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-      - A named CSS color: see https://plotly.com/python/css-colors/ for a list""".format(
+    The '{plotly_name}' property is a color and may be specified as a string in the following formats:
+      - hex or short hex (e.g. '#d3d3d3', '#d3d')
+      - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+      - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+      - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+      - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+      - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+      - hwb (e.g. 'hwb(0 0% 100%)')
+      - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+      - color (e.g. 'color(display-p3 1 0 0)')
+      - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+      - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/""".format(
             plotly_name=self.plotly_name
         )
 
@@ -1455,7 +1444,11 @@ class ColorValidator(BaseValidator):
             return None
         else:
             # Remove spaces so regexes don't need to bother with them.
-            v_normalized = v.replace(" ", "").lower()
+            # Don't remove spaces between two digits, though.
+            v_normalized = v.strip()
+            v_normalized = re.sub(" +", " ", v_normalized)
+            v_normalized = re.sub(ColorValidator.re_spaces_to_remove, "", v_normalized)
+            v_normalized = v_normalized.lower()
 
             # if ColorValidator.re_hex.fullmatch(v_normalized):
             if fullmatch(ColorValidator.re_hex, v_normalized):

@@ -12,9 +12,6 @@ base64 encoded arrays.
 
 
 @pytest.mark.parametrize("return_type", ["pandas", "polars", "pyarrow"])
-@pytest.mark.filterwarnings(
-    r"ignore:\*scattermapbox\* is deprecated! Use \*scattermap\* instead"
-)
 def test_deepcopy_dataframe(return_type):
     gapminder = px.data.gapminder(return_type=return_type)
     fig = px.line(gapminder, x="year", y="gdpPercap", color="country")
@@ -23,9 +20,6 @@ def test_deepcopy_dataframe(return_type):
     assert fig_copied.to_dict() == fig.to_dict()
 
 
-@pytest.mark.filterwarnings(
-    r"ignore:\*scattermapbox\* is deprecated! Use \*scattermap\* instead"
-)
 def test_deepcopy_array():
     gapminder = px.data.gapminder()
     x = gapminder["year"].to_numpy()

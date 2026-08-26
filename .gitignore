@@ -1,7 +1,6 @@
 0
 0.html
 iframe_figures/
-tests/test_orca/images/linux/failed/
 
 *.egg-info
 
@@ -49,13 +48,10 @@ plotly.egg-info/
 # macOS utility file
 **/.DS_Store
 
-tests/test_orca/images/*/failed
-tests/test_orca/images/*/tmp
 tests/test_core/test_offline/plotly.min.js
 temp-plot.html
 .vscode
 doc/python/.ipynb_checkpoints
-doc/python/.mapbox_token
 doc/.ipynb_checkpoints
 tags
 doc/check-or-enforce-order.py

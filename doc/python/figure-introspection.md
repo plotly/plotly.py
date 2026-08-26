@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Introspecting Figures
-    order: 36
+    order: 37
     page_type: u-guide
     permalink: python/figure-introspection/
     thumbnail: thumbnail/violin.jpg

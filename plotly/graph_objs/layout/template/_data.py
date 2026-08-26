@@ -16,12 +16,10 @@ class Data(_BaseLayoutHierarchyType):
         "carpet",
         "choropleth",
         "choroplethmap",
-        "choroplethmapbox",
         "cone",
         "contour",
         "contourcarpet",
         "densitymap",
-        "densitymapbox",
         "funnel",
         "funnelarea",
         "heatmap",
@@ -37,6 +35,7 @@ class Data(_BaseLayoutHierarchyType):
         "parcats",
         "parcoords",
         "pie",
+        "quiver",
         "sankey",
         "scatter",
         "scatter3d",
@@ -44,7 +43,6 @@ class Data(_BaseLayoutHierarchyType):
         "scattergeo",
         "scattergl",
         "scattermap",
-        "scattermapbox",
         "scatterpolar",
         "scatterpolargl",
         "scattersmith",
@@ -156,25 +154,6 @@ class Data(_BaseLayoutHierarchyType):
         self["carpet"] = val
 
     @property
-    def choroplethmapbox(self):
-        """
-        The 'choroplethmapbox' property is a tuple of instances of
-        Choroplethmapbox that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Choroplethmapbox
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Choroplethmapbox constructor
-
-        Returns
-        -------
-        tuple[plotly.graph_objs.layout.template.data.Choroplethmapbox]
-        """
-        return self["choroplethmapbox"]
-
-    @choroplethmapbox.setter
-    def choroplethmapbox(self, val):
-        self["choroplethmapbox"] = val
-
-    @property
     def choroplethmap(self):
         """
         The 'choroplethmap' property is a tuple of instances of
@@ -268,25 +247,6 @@ class Data(_BaseLayoutHierarchyType):
     @contour.setter
     def contour(self, val):
         self["contour"] = val
-
-    @property
-    def densitymapbox(self):
-        """
-        The 'densitymapbox' property is a tuple of instances of
-        Densitymapbox that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Densitymapbox
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Densitymapbox constructor
-
-        Returns
-        -------
-        tuple[plotly.graph_objs.layout.template.data.Densitymapbox]
-        """
-        return self["densitymapbox"]
-
-    @densitymapbox.setter
-    def densitymapbox(self, val):
-        self["densitymapbox"] = val
 
     @property
     def densitymap(self):
@@ -593,6 +553,25 @@ class Data(_BaseLayoutHierarchyType):
         self["pie"] = val
 
     @property
+    def quiver(self):
+        """
+        The 'quiver' property is a tuple of instances of
+        Quiver that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Quiver
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Quiver constructor
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Quiver]
+        """
+        return self["quiver"]
+
+    @quiver.setter
+    def quiver(self, val):
+        self["quiver"] = val
+
+    @property
     def sankey(self):
         """
         The 'sankey' property is a tuple of instances of
@@ -686,25 +665,6 @@ class Data(_BaseLayoutHierarchyType):
     @scattergl.setter
     def scattergl(self, val):
         self["scattergl"] = val
-
-    @property
-    def scattermapbox(self):
-        """
-        The 'scattermapbox' property is a tuple of instances of
-        Scattermapbox that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Scattermapbox
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Scattermapbox constructor
-
-        Returns
-        -------
-        tuple[plotly.graph_objs.layout.template.data.Scattermapbox]
-        """
-        return self["scattermapbox"]
-
-    @scattermapbox.setter
-    def scattermapbox(self, val):
-        self["scattermapbox"] = val
 
     @property
     def scattermap(self):
@@ -1009,10 +969,6 @@ class Data(_BaseLayoutHierarchyType):
         carpet
             A tuple of :class:`plotly.graph_objects.Carpet`
             instances or dicts with compatible properties
-        choroplethmapbox
-            A tuple of
-            :class:`plotly.graph_objects.Choroplethmapbox`
-            instances or dicts with compatible properties
         choroplethmap
             A tuple of :class:`plotly.graph_objects.Choroplethmap`
             instances or dicts with compatible properties
@@ -1027,9 +983,6 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         contour
             A tuple of :class:`plotly.graph_objects.Contour`
-            instances or dicts with compatible properties
-        densitymapbox
-            A tuple of :class:`plotly.graph_objects.Densitymapbox`
             instances or dicts with compatible properties
         densitymap
             A tuple of :class:`plotly.graph_objects.Densitymap`
@@ -1080,6 +1033,9 @@ class Data(_BaseLayoutHierarchyType):
         pie
             A tuple of :class:`plotly.graph_objects.Pie` instances
             or dicts with compatible properties
+        quiver
+            A tuple of :class:`plotly.graph_objects.Quiver`
+            instances or dicts with compatible properties
         sankey
             A tuple of :class:`plotly.graph_objects.Sankey`
             instances or dicts with compatible properties
@@ -1094,9 +1050,6 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         scattergl
             A tuple of :class:`plotly.graph_objects.Scattergl`
-            instances or dicts with compatible properties
-        scattermapbox
-            A tuple of :class:`plotly.graph_objects.Scattermapbox`
             instances or dicts with compatible properties
         scattermap
             A tuple of :class:`plotly.graph_objects.Scattermap`
@@ -1153,13 +1106,11 @@ class Data(_BaseLayoutHierarchyType):
         box=None,
         candlestick=None,
         carpet=None,
-        choroplethmapbox=None,
         choroplethmap=None,
         choropleth=None,
         cone=None,
         contourcarpet=None,
         contour=None,
-        densitymapbox=None,
         densitymap=None,
         funnelarea=None,
         funnel=None,
@@ -1176,12 +1127,12 @@ class Data(_BaseLayoutHierarchyType):
         parcats=None,
         parcoords=None,
         pie=None,
+        quiver=None,
         sankey=None,
         scatter3d=None,
         scattercarpet=None,
         scattergeo=None,
         scattergl=None,
-        scattermapbox=None,
         scattermap=None,
         scatterpolargl=None,
         scatterpolar=None,
@@ -1223,10 +1174,6 @@ class Data(_BaseLayoutHierarchyType):
         carpet
             A tuple of :class:`plotly.graph_objects.Carpet`
             instances or dicts with compatible properties
-        choroplethmapbox
-            A tuple of
-            :class:`plotly.graph_objects.Choroplethmapbox`
-            instances or dicts with compatible properties
         choroplethmap
             A tuple of :class:`plotly.graph_objects.Choroplethmap`
             instances or dicts with compatible properties
@@ -1241,9 +1188,6 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         contour
             A tuple of :class:`plotly.graph_objects.Contour`
-            instances or dicts with compatible properties
-        densitymapbox
-            A tuple of :class:`plotly.graph_objects.Densitymapbox`
             instances or dicts with compatible properties
         densitymap
             A tuple of :class:`plotly.graph_objects.Densitymap`
@@ -1294,6 +1238,9 @@ class Data(_BaseLayoutHierarchyType):
         pie
             A tuple of :class:`plotly.graph_objects.Pie` instances
             or dicts with compatible properties
+        quiver
+            A tuple of :class:`plotly.graph_objects.Quiver`
+            instances or dicts with compatible properties
         sankey
             A tuple of :class:`plotly.graph_objects.Sankey`
             instances or dicts with compatible properties
@@ -1308,9 +1255,6 @@ class Data(_BaseLayoutHierarchyType):
             instances or dicts with compatible properties
         scattergl
             A tuple of :class:`plotly.graph_objects.Scattergl`
-            instances or dicts with compatible properties
-        scattermapbox
-            A tuple of :class:`plotly.graph_objects.Scattermapbox`
             instances or dicts with compatible properties
         scattermap
             A tuple of :class:`plotly.graph_objects.Scattermap`
@@ -1387,13 +1331,11 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`""")
         self._set_property("box", arg, box)
         self._set_property("candlestick", arg, candlestick)
         self._set_property("carpet", arg, carpet)
-        self._set_property("choroplethmapbox", arg, choroplethmapbox)
         self._set_property("choroplethmap", arg, choroplethmap)
         self._set_property("choropleth", arg, choropleth)
         self._set_property("cone", arg, cone)
         self._set_property("contourcarpet", arg, contourcarpet)
         self._set_property("contour", arg, contour)
-        self._set_property("densitymapbox", arg, densitymapbox)
         self._set_property("densitymap", arg, densitymap)
         self._set_property("funnelarea", arg, funnelarea)
         self._set_property("funnel", arg, funnel)
@@ -1410,12 +1352,12 @@ an instance of :class:`plotly.graph_objs.layout.template.Data`""")
         self._set_property("parcats", arg, parcats)
         self._set_property("parcoords", arg, parcoords)
         self._set_property("pie", arg, pie)
+        self._set_property("quiver", arg, quiver)
         self._set_property("sankey", arg, sankey)
         self._set_property("scatter3d", arg, scatter3d)
         self._set_property("scattercarpet", arg, scattercarpet)
         self._set_property("scattergeo", arg, scattergeo)
         self._set_property("scattergl", arg, scattergl)
-        self._set_property("scattermapbox", arg, scattermapbox)
         self._set_property("scattermap", arg, scattermap)
         self._set_property("scatterpolargl", arg, scatterpolargl)
         self._set_property("scatterpolar", arg, scatterpolar)

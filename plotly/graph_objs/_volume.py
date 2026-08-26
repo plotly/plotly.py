@@ -20,18 +20,13 @@ class Volume(_BaseTraceType):
         "colorscale",
         "contour",
         "customdata",
-        "customdatasrc",
         "flatshading",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "isomax",
         "isomin",
         "legend",
@@ -42,7 +37,6 @@ class Volume(_BaseTraceType):
         "lighting",
         "lightposition",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "opacityscale",
@@ -52,26 +46,20 @@ class Volume(_BaseTraceType):
         "showscale",
         "slices",
         "spaceframe",
-        "stream",
         "surface",
         "text",
-        "textsrc",
         "type",
         "uid",
         "uirevision",
         "value",
         "valuehoverformat",
-        "valuesrc",
         "visible",
         "x",
         "xhoverformat",
-        "xsrc",
         "y",
         "yhoverformat",
-        "ysrc",
         "z",
         "zhoverformat",
-        "zsrc",
     }
 
     @property
@@ -244,7 +232,7 @@ class Volume(_BaseTraceType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `cmin` and `cmax`.
@@ -331,25 +319,6 @@ class Volume(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def flatshading(self):
         """
         Determines whether or not normal smoothing is applied to the
@@ -372,7 +341,7 @@ class Volume(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -392,25 +361,6 @@ class Volume(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -498,25 +448,6 @@ class Volume(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Same as `text`.
@@ -537,25 +468,6 @@ class Volume(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -574,24 +486,6 @@ class Volume(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def isomax(self):
@@ -801,24 +695,6 @@ class Volume(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -1006,25 +882,6 @@ class Volume(_BaseTraceType):
         self["spaceframe"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.volume.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.volume.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def surface(self):
         """
         The 'surface' property is an instance of Surface
@@ -1064,24 +921,6 @@ class Volume(_BaseTraceType):
     @text.setter
     def text(self, val):
         self["text"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -1155,7 +994,7 @@ class Volume(_BaseTraceType):
     @property
     def valuehoverformat(self):
         """
-        Sets the hover text formatting rulefor `value`  using d3
+        Sets the hover text formatting rule for `value` using d3
         formatting mini-languages which are very similar to those in
         Python. For numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1174,24 +1013,6 @@ class Volume(_BaseTraceType):
     @valuehoverformat.setter
     def valuehoverformat(self, val):
         self["valuehoverformat"] = val
-
-    @property
-    def valuesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `value`.
-
-        The 'valuesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["valuesrc"]
-
-    @valuesrc.setter
-    def valuesrc(self, val):
-        self["valuesrc"] = val
 
     @property
     def visible(self):
@@ -1235,7 +1056,7 @@ class Volume(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1262,24 +1083,6 @@ class Volume(_BaseTraceType):
         self["xhoverformat"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         Sets the Y coordinates of the vertices on Y axis.
@@ -1300,7 +1103,7 @@ class Volume(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1327,24 +1130,6 @@ class Volume(_BaseTraceType):
         self["yhoverformat"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def z(self):
         """
         Sets the Z coordinates of the vertices on Z axis.
@@ -1365,7 +1150,7 @@ class Volume(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rulefor `z`  using d3 formatting
+        Sets the hover text formatting rule for `z` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1390,24 +1175,6 @@ class Volume(_BaseTraceType):
     @zhoverformat.setter
     def zhoverformat(self, val):
         self["zhoverformat"] = val
-
-    @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
 
     @property
     def type(self):
@@ -1457,15 +1224,15 @@ class Volume(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
             :class:`plotly.graph_objects.volume.Contour` instance
             or dict with compatible properties
@@ -1474,21 +1241,15 @@ class Volume(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
             poly look via flat reflections.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.volume.Hoverlabel`
             instance or dict with compatible properties
@@ -1531,21 +1292,12 @@ class Volume(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         isomax
             Sets the maximum boundary for iso-surface plot.
         isomin
@@ -1596,9 +1348,6 @@ class Volume(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1643,9 +1392,6 @@ class Volume(_BaseTraceType):
         spaceframe
             :class:`plotly.graph_objects.volume.Spaceframe`
             instance or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.volume.Stream` instance or
-            dict with compatible properties
         surface
             :class:`plotly.graph_objects.volume.Surface` instance
             or dict with compatible properties
@@ -1654,9 +1400,6 @@ class Volume(_BaseTraceType):
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1682,14 +1425,11 @@ class Volume(_BaseTraceType):
         value
             Sets the 4th dimension (value) of the vertices.
         valuehoverformat
-            Sets the hover text formatting rulefor `value`  using
+            Sets the hover text formatting rule for `value` using
             d3 formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        valuesrc
-            Sets the source reference on Chart Studio Cloud for
-            `value`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1698,7 +1438,7 @@ class Volume(_BaseTraceType):
         x
             Sets the X coordinates of the vertices on X axis.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1710,13 +1450,10 @@ class Volume(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the Y coordinates of the vertices on Y axis.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1728,13 +1465,10 @@ class Volume(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the Z coordinates of the vertices on Z axis.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1746,9 +1480,6 @@ class Volume(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -1765,18 +1496,13 @@ class Volume(_BaseTraceType):
         colorscale=None,
         contour=None,
         customdata=None,
-        customdatasrc=None,
         flatshading=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         isomax=None,
         isomin=None,
         legend=None,
@@ -1787,7 +1513,6 @@ class Volume(_BaseTraceType):
         lighting=None,
         lightposition=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         opacityscale=None,
@@ -1797,25 +1522,19 @@ class Volume(_BaseTraceType):
         showscale=None,
         slices=None,
         spaceframe=None,
-        stream=None,
         surface=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         value=None,
         valuehoverformat=None,
-        valuesrc=None,
         visible=None,
         x=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yhoverformat=None,
-        ysrc=None,
         z=None,
         zhoverformat=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -1874,15 +1593,15 @@ class Volume(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `cmin` and
+            `cmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         contour
             :class:`plotly.graph_objects.volume.Contour` instance
             or dict with compatible properties
@@ -1891,21 +1610,15 @@ class Volume(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         flatshading
             Determines whether or not normal smoothing is applied
             to the meshes, creating meshes with an angular, low-
             poly look via flat reflections.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.volume.Hoverlabel`
             instance or dict with compatible properties
@@ -1948,21 +1661,12 @@ class Volume(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         isomax
             Sets the maximum boundary for iso-surface plot.
         isomin
@@ -2013,9 +1717,6 @@ class Volume(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2060,9 +1761,6 @@ class Volume(_BaseTraceType):
         spaceframe
             :class:`plotly.graph_objects.volume.Spaceframe`
             instance or dict with compatible properties
-        stream
-            :class:`plotly.graph_objects.volume.Stream` instance or
-            dict with compatible properties
         surface
             :class:`plotly.graph_objects.volume.Surface` instance
             or dict with compatible properties
@@ -2071,9 +1769,6 @@ class Volume(_BaseTraceType):
             trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2099,14 +1794,11 @@ class Volume(_BaseTraceType):
         value
             Sets the 4th dimension (value) of the vertices.
         valuehoverformat
-            Sets the hover text formatting rulefor `value`  using
+            Sets the hover text formatting rule for `value` using
             d3 formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
             are formatted using generic number format.
-        valuesrc
-            Sets the source reference on Chart Studio Cloud for
-            `value`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2115,7 +1807,7 @@ class Volume(_BaseTraceType):
         x
             Sets the X coordinates of the vertices on X axis.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2127,13 +1819,10 @@ class Volume(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the Y coordinates of the vertices on Y axis.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2145,13 +1834,10 @@ class Volume(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the Z coordinates of the vertices on Z axis.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2163,9 +1849,6 @@ class Volume(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `zaxis.hoverformat`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -2202,18 +1885,13 @@ an instance of :class:`plotly.graph_objs.Volume`""")
         self._set_property("colorscale", arg, colorscale)
         self._set_property("contour", arg, contour)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("flatshading", arg, flatshading)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("isomax", arg, isomax)
         self._set_property("isomin", arg, isomin)
         self._set_property("legend", arg, legend)
@@ -2224,7 +1902,6 @@ an instance of :class:`plotly.graph_objs.Volume`""")
         self._set_property("lighting", arg, lighting)
         self._set_property("lightposition", arg, lightposition)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("opacityscale", arg, opacityscale)
@@ -2234,25 +1911,19 @@ an instance of :class:`plotly.graph_objs.Volume`""")
         self._set_property("showscale", arg, showscale)
         self._set_property("slices", arg, slices)
         self._set_property("spaceframe", arg, spaceframe)
-        self._set_property("stream", arg, stream)
         self._set_property("surface", arg, surface)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("value", arg, value)
         self._set_property("valuehoverformat", arg, valuehoverformat)
-        self._set_property("valuesrc", arg, valuesrc)
         self._set_property("visible", arg, visible)
         self._set_property("x", arg, x)
         self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("z", arg, z)
         self._set_property("zhoverformat", arg, zhoverformat)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "volume"
         arg.pop("type", None)

@@ -121,13 +121,7 @@ an instance of :class:`plotly.graph_objs.layout.Template`""")
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
-        # Template.data contains a 'scattermapbox' key, which causes a
-        # go.Scattermapbox trace object to be created during validation.
-        # In order to prevent false deprecation warnings from surfacing,
-        # we suppress deprecation warnings for this line only.
-        with warnings.catch_warnings():
-            warnings.filterwarnings("ignore", category=DeprecationWarning)
-            self._set_property("data", arg, data)
+        self._set_property("data", arg, data)
         self._set_property("layout", arg, layout)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -115,7 +115,6 @@ def make_subplots(
                 - 'polar': Polar subplot for scatterpolar, barpolar, etc.
                 - 'ternary': Ternary subplot for scatterternary
                 - 'map': Map subplot for scattermap
-                - 'mapbox': Mapbox subplot for scattermapbox
                 - 'domain': Subplot type for traces that are individually
                             positioned. pie, parcoords, parcats, etc.
                 - trace type: A trace type which will be used to determine

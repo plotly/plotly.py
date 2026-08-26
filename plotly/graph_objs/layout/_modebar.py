@@ -11,12 +11,10 @@ class Modebar(_BaseLayoutHierarchyType):
     _valid_props = {
         "activecolor",
         "add",
-        "addsrc",
         "bgcolor",
         "color",
         "orientation",
         "remove",
-        "removesrc",
         "uirevision",
     }
 
@@ -26,12 +24,18 @@ class Modebar(_BaseLayoutHierarchyType):
         Sets the color of the active or hovered on icons in the
         modebar.
 
-        The 'activecolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'activecolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -70,34 +74,22 @@ class Modebar(_BaseLayoutHierarchyType):
         self["add"] = val
 
     @property
-    def addsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `add`.
-
-        The 'addsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["addsrc"]
-
-    @addsrc.setter
-    def addsrc(self, val):
-        self["addsrc"] = val
-
-    @property
     def bgcolor(self):
         """
         Sets the background color of the modebar.
 
-        The 'bgcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'bgcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -114,12 +106,18 @@ class Modebar(_BaseLayoutHierarchyType):
         """
         Sets the color of the icons in the modebar.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -155,20 +153,19 @@ class Modebar(_BaseLayoutHierarchyType):
         """
         Determines which predefined modebar buttons to remove. Similar
         to `config.modeBarButtonsToRemove` option. This may include
-        "autoScale2d", "autoscale", "editInChartStudio",
-        "editinchartstudio", "hoverCompareCartesian", "hovercompare",
-        "lasso", "lasso2d", "orbitRotation", "orbitrotation", "pan",
-        "pan2d", "pan3d", "reset", "resetCameraDefault3d",
-        "resetCameraLastSave3d", "resetGeo", "resetSankeyGroup",
-        "resetScale2d", "resetViewMap", "resetViewMapbox",
+        "autoScale2d", "autoscale", "hoverCompareCartesian",
+        "hovercompare", "lasso", "lasso2d", "orbitRotation",
+        "orbitrotation", "pan", "pan2d", "pan3d", "reset",
+        "resetCameraDefault3d", "resetCameraLastSave3d", "resetGeo",
+        "resetSankeyGroup", "resetScale2d", "resetViewMap",
         "resetViews", "resetcameradefault", "resetcameralastsave",
         "resetsankeygroup", "resetscale", "resetview", "resetviews",
-        "select", "select2d", "sendDataToCloud", "senddatatocloud",
+        "select", "select2d", "sendChartToCloud", "sendcharttocloud",
         "tableRotation", "tablerotation", "toImage", "toggleHover",
         "toggleSpikelines", "togglehover", "togglespikelines",
         "toimage", "zoom", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo",
-        "zoomInMap", "zoomInMapbox", "zoomOut2d", "zoomOutGeo",
-        "zoomOutMap", "zoomOutMapbox", "zoomin", "zoomout".
+        "zoomInMap", "zoomOut2d", "zoomOutGeo", "zoomOutMap", "zoomin",
+        "zoomout".
 
         The 'remove' property is a string and must be specified as:
           - A string
@@ -184,24 +181,6 @@ class Modebar(_BaseLayoutHierarchyType):
     @remove.setter
     def remove(self, val):
         self["remove"] = val
-
-    @property
-    def removesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `remove`.
-
-        The 'removesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["removesrc"]
-
-    @removesrc.setter
-    def removesrc(self, val):
-        self["removesrc"] = val
 
     @property
     def uirevision(self):
@@ -238,9 +217,6 @@ class Modebar(_BaseLayoutHierarchyType):
             "hovercompare", "togglehover", "togglespikelines",
             "drawline", "drawopenpath", "drawclosedpath",
             "drawcircle", "drawrect", "eraseshape".
-        addsrc
-            Sets the source reference on Chart Studio Cloud for
-            `add`.
         bgcolor
             Sets the background color of the modebar.
         color
@@ -251,25 +227,21 @@ class Modebar(_BaseLayoutHierarchyType):
             Determines which predefined modebar buttons to remove.
             Similar to `config.modeBarButtonsToRemove` option. This
             may include "autoScale2d", "autoscale",
-            "editInChartStudio", "editinchartstudio",
             "hoverCompareCartesian", "hovercompare", "lasso",
             "lasso2d", "orbitRotation", "orbitrotation", "pan",
             "pan2d", "pan3d", "reset", "resetCameraDefault3d",
             "resetCameraLastSave3d", "resetGeo",
             "resetSankeyGroup", "resetScale2d", "resetViewMap",
-            "resetViewMapbox", "resetViews", "resetcameradefault",
+            "resetViews", "resetcameradefault",
             "resetcameralastsave", "resetsankeygroup",
             "resetscale", "resetview", "resetviews", "select",
-            "select2d", "sendDataToCloud", "senddatatocloud",
+            "select2d", "sendChartToCloud", "sendcharttocloud",
             "tableRotation", "tablerotation", "toImage",
             "toggleHover", "toggleSpikelines", "togglehover",
             "togglespikelines", "toimage", "zoom", "zoom2d",
             "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMap",
-            "zoomInMapbox", "zoomOut2d", "zoomOutGeo",
-            "zoomOutMap", "zoomOutMapbox", "zoomin", "zoomout".
-        removesrc
-            Sets the source reference on Chart Studio Cloud for
-            `remove`.
+            "zoomOut2d", "zoomOutGeo", "zoomOutMap", "zoomin",
+            "zoomout".
         uirevision
             Controls persistence of user-driven changes related to
             the modebar, including `hovermode`, `dragmode`, and
@@ -282,12 +254,10 @@ class Modebar(_BaseLayoutHierarchyType):
         arg=None,
         activecolor=None,
         add=None,
-        addsrc=None,
         bgcolor=None,
         color=None,
         orientation=None,
         remove=None,
-        removesrc=None,
         uirevision=None,
         **kwargs,
     ):
@@ -312,9 +282,6 @@ class Modebar(_BaseLayoutHierarchyType):
             "hovercompare", "togglehover", "togglespikelines",
             "drawline", "drawopenpath", "drawclosedpath",
             "drawcircle", "drawrect", "eraseshape".
-        addsrc
-            Sets the source reference on Chart Studio Cloud for
-            `add`.
         bgcolor
             Sets the background color of the modebar.
         color
@@ -325,25 +292,21 @@ class Modebar(_BaseLayoutHierarchyType):
             Determines which predefined modebar buttons to remove.
             Similar to `config.modeBarButtonsToRemove` option. This
             may include "autoScale2d", "autoscale",
-            "editInChartStudio", "editinchartstudio",
             "hoverCompareCartesian", "hovercompare", "lasso",
             "lasso2d", "orbitRotation", "orbitrotation", "pan",
             "pan2d", "pan3d", "reset", "resetCameraDefault3d",
             "resetCameraLastSave3d", "resetGeo",
             "resetSankeyGroup", "resetScale2d", "resetViewMap",
-            "resetViewMapbox", "resetViews", "resetcameradefault",
+            "resetViews", "resetcameradefault",
             "resetcameralastsave", "resetsankeygroup",
             "resetscale", "resetview", "resetviews", "select",
-            "select2d", "sendDataToCloud", "senddatatocloud",
+            "select2d", "sendChartToCloud", "sendcharttocloud",
             "tableRotation", "tablerotation", "toImage",
             "toggleHover", "toggleSpikelines", "togglehover",
             "togglespikelines", "toimage", "zoom", "zoom2d",
             "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMap",
-            "zoomInMapbox", "zoomOut2d", "zoomOutGeo",
-            "zoomOutMap", "zoomOutMapbox", "zoomin", "zoomout".
-        removesrc
-            Sets the source reference on Chart Studio Cloud for
-            `remove`.
+            "zoomOut2d", "zoomOutGeo", "zoomOutMap", "zoomin",
+            "zoomout".
         uirevision
             Controls persistence of user-driven changes related to
             the modebar, including `hovermode`, `dragmode`, and
@@ -376,12 +339,10 @@ an instance of :class:`plotly.graph_objs.layout.Modebar`""")
 
         self._set_property("activecolor", arg, activecolor)
         self._set_property("add", arg, add)
-        self._set_property("addsrc", arg, addsrc)
         self._set_property("bgcolor", arg, bgcolor)
         self._set_property("color", arg, color)
         self._set_property("orientation", arg, orientation)
         self._set_property("remove", arg, remove)
-        self._set_property("removesrc", arg, removesrc)
         self._set_property("uirevision", arg, uirevision)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

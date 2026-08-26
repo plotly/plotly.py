@@ -6,7 +6,6 @@ if TYPE_CHECKING:
     from ._baxis import Baxis
     from ._font import Font
     from ._legendgrouptitle import Legendgrouptitle
-    from ._stream import Stream
     from . import aaxis
     from . import baxis
     from . import legendgrouptitle
@@ -21,6 +20,5 @@ else:
             "._baxis.Baxis",
             "._font.Font",
             "._legendgrouptitle.Legendgrouptitle",
-            "._stream.Stream",
         ],
     )

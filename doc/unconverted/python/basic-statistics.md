@@ -104,7 +104,24 @@ We can visualize these statistics by producing a Plotly box or Violin chart.
 ```python
 y = data['alcohol'].values.tolist()
 
-fig = FF.create_violin(y, title='Violin Plot', colors='#604d9e')
+trace = go.Violin(
+    y=y,
+    name='Violin Plot',
+    box_visible=True,
+    meanline_visible=True,
+    fillcolor='#604d9e',
+    points='all',
+)
+
+layout = go.Layout(
+    width=500,
+    yaxis=dict(
+        title='Alcohol Consumption by Country',
+        zeroline=False
+    ),
+)
+
+fig = go.Figure(data=[trace], layout=layout)
 py.iplot(fig, filename='alcohol-violin-visual')
 ```
 

@@ -1111,15 +1111,6 @@ def choropleth(
     colored region mark on a map.
     """
 
-    if locationmode == "country names":
-        warn(
-            "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
-            "Country names in existing plots may not work in the new version. "
-            "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
-            DeprecationWarning,
-            stacklevel=2,
-        )
-
     return make_figure(
         args=locals(),
         constructor=go.Choropleth,
@@ -1178,15 +1169,6 @@ def scatter_geo(
     In a geographic scatter plot, each row of `data_frame` is represented
     by a symbol mark on a map.
     """
-
-    if locationmode == "country names":
-        warn(
-            "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
-            "Country names in existing plots may not work in the new version. "
-            "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
-            DeprecationWarning,
-            stacklevel=2,
-        )
 
     return make_figure(
         args=locals(),
@@ -1276,7 +1258,7 @@ def scatter_map(
     color_continuous_midpoint=None,
     opacity=None,
     size_max=None,
-    zoom=8,
+    zoom=None,
     center=None,
     map_style=None,
     title=None,
@@ -1314,7 +1296,7 @@ def choropleth_map(
     range_color=None,
     color_continuous_midpoint=None,
     opacity=None,
-    zoom=8,
+    zoom=None,
     center=None,
     map_style=None,
     title=None,
@@ -1349,7 +1331,7 @@ def density_map(
     range_color=None,
     color_continuous_midpoint=None,
     opacity=None,
-    zoom=8,
+    zoom=None,
     center=None,
     map_style=None,
     radius=None,
@@ -1387,7 +1369,7 @@ def line_map(
     labels=None,
     color_discrete_sequence=None,
     color_discrete_map=None,
-    zoom=8,
+    zoom=None,
     center=None,
     map_style=None,
     title=None,
@@ -1404,193 +1386,6 @@ def line_map(
 
 
 line_map.__doc__ = make_docstring(line_map)
-
-
-def scatter_mapbox(
-    data_frame=None,
-    lat=None,
-    lon=None,
-    color=None,
-    text=None,
-    hover_name=None,
-    hover_data=None,
-    custom_data=None,
-    size=None,
-    animation_frame=None,
-    animation_group=None,
-    category_orders=None,
-    labels=None,
-    color_discrete_sequence=None,
-    color_discrete_map=None,
-    color_continuous_scale=None,
-    range_color=None,
-    color_continuous_midpoint=None,
-    opacity=None,
-    size_max=None,
-    zoom=8,
-    center=None,
-    mapbox_style=None,
-    title=None,
-    subtitle=None,
-    template=None,
-    width=None,
-    height=None,
-) -> go.Figure:
-    """
-    *scatter_mapbox* is deprecated! Use *scatter_map* instead.
-    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
-    In a Mapbox scatter plot, each row of `data_frame` is represented by a
-    symbol mark on a Mapbox map.
-    """
-    warn(
-        "*scatter_mapbox* is deprecated!"
-        + " Use *scatter_map* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-        category=DeprecationWarning,
-    )
-    return make_figure(args=locals(), constructor=go.Scattermapbox)
-
-
-scatter_mapbox.__doc__ = make_docstring(scatter_mapbox)
-
-
-def choropleth_mapbox(
-    data_frame=None,
-    geojson=None,
-    featureidkey=None,
-    locations=None,
-    color=None,
-    hover_name=None,
-    hover_data=None,
-    custom_data=None,
-    animation_frame=None,
-    animation_group=None,
-    category_orders=None,
-    labels=None,
-    color_discrete_sequence=None,
-    color_discrete_map=None,
-    color_continuous_scale=None,
-    range_color=None,
-    color_continuous_midpoint=None,
-    opacity=None,
-    zoom=8,
-    center=None,
-    mapbox_style=None,
-    title=None,
-    subtitle=None,
-    template=None,
-    width=None,
-    height=None,
-) -> go.Figure:
-    """
-    *choropleth_mapbox* is deprecated! Use *choropleth_map* instead.
-    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
-    In a Mapbox choropleth map, each row of `data_frame` is represented by a
-    colored region on a Mapbox map.
-    """
-    warn(
-        "*choropleth_mapbox* is deprecated!"
-        + " Use *choropleth_map* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-        category=DeprecationWarning,
-    )
-    return make_figure(args=locals(), constructor=go.Choroplethmapbox)
-
-
-choropleth_mapbox.__doc__ = make_docstring(choropleth_mapbox)
-
-
-def density_mapbox(
-    data_frame=None,
-    lat=None,
-    lon=None,
-    z=None,
-    hover_name=None,
-    hover_data=None,
-    custom_data=None,
-    animation_frame=None,
-    animation_group=None,
-    category_orders=None,
-    labels=None,
-    color_continuous_scale=None,
-    range_color=None,
-    color_continuous_midpoint=None,
-    opacity=None,
-    zoom=8,
-    center=None,
-    mapbox_style=None,
-    radius=None,
-    title=None,
-    subtitle=None,
-    template=None,
-    width=None,
-    height=None,
-) -> go.Figure:
-    """
-    *density_mapbox* is deprecated! Use *density_map* instead.
-    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
-    In a Mapbox density map, each row of `data_frame` contributes to the intensity of
-    the color of the region around the corresponding point on the map
-    """
-    warn(
-        "*density_mapbox* is deprecated!"
-        + " Use *density_map* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-        category=DeprecationWarning,
-    )
-    return make_figure(
-        args=locals(), constructor=go.Densitymapbox, trace_patch=dict(radius=radius)
-    )
-
-
-density_mapbox.__doc__ = make_docstring(density_mapbox)
-
-
-def line_mapbox(
-    data_frame=None,
-    lat=None,
-    lon=None,
-    color=None,
-    text=None,
-    hover_name=None,
-    hover_data=None,
-    custom_data=None,
-    line_group=None,
-    animation_frame=None,
-    animation_group=None,
-    category_orders=None,
-    labels=None,
-    color_discrete_sequence=None,
-    color_discrete_map=None,
-    zoom=8,
-    center=None,
-    mapbox_style=None,
-    title=None,
-    subtitle=None,
-    template=None,
-    width=None,
-    height=None,
-) -> go.Figure:
-    """
-    *line_mapbox* is deprecated! Use *line_map* instead.
-    Learn more at: https://plotly.com/python/mapbox-to-maplibre/
-    In a Mapbox line plot, each row of `data_frame` is represented as
-    a vertex of a polyline mark on a Mapbox map.
-    """
-    warn(
-        "*line_mapbox* is deprecated!"
-        + " Use *line_map* instead."
-        + " Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-        category=DeprecationWarning,
-    )
-    return make_figure(args=locals(), constructor=go.Scattermapbox)
-
-
-line_mapbox.__doc__ = make_docstring(line_mapbox)
 
 
 def scatter_matrix(

@@ -8,7 +8,7 @@ import copy as _copy
 class Marker(_BaseTraceHierarchyType):
     _parent_path_str = "histogram2dcontour"
     _path_str = "histogram2dcontour.marker"
-    _valid_props = {"color", "colorsrc"}
+    _valid_props = {"color"}
 
     @property
     def color(self):
@@ -29,34 +29,13 @@ class Marker(_BaseTraceHierarchyType):
         self["color"] = val
 
     @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         color
             Sets the aggregation data.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         """
 
-    def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
+    def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Marker object
 
@@ -68,9 +47,6 @@ class Marker(_BaseTraceHierarchyType):
             :class:`plotly.graph_objs.histogram2dcontour.Marker`
         color
             Sets the aggregation data.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
 
         Returns
         -------
@@ -97,6 +73,5 @@ an instance of :class:`plotly.graph_objs.histogram2dcontour.Marker`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -82,7 +82,6 @@ class FramesTest(TestCase):
         self.assertEqual(
             set(matches),
             {
-                "colorsrc",
                 "autocolorscale",
                 "cmin",
                 "colorscale",
@@ -90,7 +89,6 @@ class FramesTest(TestCase):
                 "reversescale",
                 "width",
                 "cauto",
-                "widthsrc",
                 "cmax",
                 "coloraxis",
             },

@@ -38,12 +38,9 @@ jobs:
 
 
       - name: Build HTML docs
-        env:
-          MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
         run: |
           cd doc
           source .venv/bin/activate
-          echo "${MAPBOX_TOKEN}" > python/.mapbox_token
           make -kj8 || make -kj8
           curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
           curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/check-or-enforce-order.py > check-or-enforce-order.py

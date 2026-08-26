@@ -44,7 +44,7 @@ class YBins(_BaseTraceHierarchyType):
         `axis.dtick`. For category data, the number of categories to
         bin together (always defaults to 1). If multiple non-overlaying
         histograms share a subplot, the first explicit `size` is used
-        and all others discarded. If no `size` is provided,the sample
+        and all others discarded. If no `size` is provided, the sample
         data from all traces is combined to determine `size` as
         described above.
 
@@ -111,7 +111,7 @@ class YBins(_BaseTraceHierarchyType):
             together (always defaults to 1). If multiple non-
             overlaying histograms share a subplot, the first
             explicit `size` is used and all others discarded. If no
-            `size` is provided,the sample data from all traces is
+            `size` is provided, the sample data from all traces is
             combined to determine `size` as described above.
         start
             Sets the starting value for the y axis bins. Defaults
@@ -160,7 +160,7 @@ class YBins(_BaseTraceHierarchyType):
             together (always defaults to 1). If multiple non-
             overlaying histograms share a subplot, the first
             explicit `size` is used and all others discarded. If no
-            `size` is provided,the sample data from all traces is
+            `size` is provided, the sample data from all traces is
             combined to determine `size` as described above.
         start
             Sets the starting value for the y axis bins. Defaults

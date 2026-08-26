@@ -14,7 +14,7 @@ class Domain(_BaseTraceHierarchyType):
     def column(self):
         """
         If there is a layout grid, use the domain for this column in
-        the grid for this pie trace .
+        the grid for this pie trace.
 
         The 'column' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
@@ -34,7 +34,7 @@ class Domain(_BaseTraceHierarchyType):
     def row(self):
         """
         If there is a layout grid, use the domain for this row in the
-        grid for this pie trace .
+        grid for this pie trace.
 
         The 'row' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
@@ -102,10 +102,10 @@ class Domain(_BaseTraceHierarchyType):
         return """\
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this pie trace .
+            column in the grid for this pie trace.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this pie trace .
+            in the grid for this pie trace.
         x
             Sets the horizontal domain of this pie trace (in plot
             fraction).
@@ -125,10 +125,10 @@ class Domain(_BaseTraceHierarchyType):
             an instance of :class:`plotly.graph_objs.pie.Domain`
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this pie trace .
+            column in the grid for this pie trace.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this pie trace .
+            in the grid for this pie trace.
         x
             Sets the horizontal domain of this pie trace (in plot
             fraction).

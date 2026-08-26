@@ -9,8 +9,6 @@ from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
 
-# Orca configuration class
-# ------------------------
 class JsonConfig(object):
     _valid_engines = ("json", "orjson", "auto")
 
@@ -295,7 +293,7 @@ The 'file' argument '{file}' is not a string, pathlib.Path object, or file descr
     else:
         # We previously succeeded in interpreting `file` as a pathlib object.
         # Now we can use `write_bytes()`.
-        path.write_text(json_str)
+        path.write_text(json_str, encoding="utf-8")
 
 
 def from_json_plotly(value, engine=None):
@@ -464,7 +462,7 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     # Read file contents into JSON string
     # -----------------------------------
     if path is not None:
-        json_str = path.read_text()
+        json_str = path.read_text(encoding="utf-8")
     else:
         json_str = file.read()
 

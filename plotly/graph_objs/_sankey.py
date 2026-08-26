@@ -11,24 +11,21 @@ class Sankey(_BaseTraceType):
     _valid_props = {
         "arrangement",
         "customdata",
-        "customdatasrc",
+        "direction",
         "domain",
         "hoverinfo",
         "hoverlabel",
         "ids",
-        "idssrc",
         "legend",
         "legendgrouptitle",
         "legendrank",
         "legendwidth",
         "link",
         "meta",
-        "metasrc",
         "name",
         "node",
         "orientation",
         "selectedpoints",
-        "stream",
         "textfont",
         "type",
         "uid",
@@ -85,23 +82,26 @@ class Sankey(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
+    def direction(self):
         """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
+        Sets the direction of the flow along the `orientation` axis.
+        With `forward` (the default), sources are on the left
+        (horizontal) or top (vertical). With `reversed`, sources are on
+        the right (horizontal) or bottom (vertical).
 
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
+        The 'direction' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['forward', 'reversed']
 
         Returns
         -------
-        str
+        Any
         """
-        return self["customdatasrc"]
+        return self["direction"]
 
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
+    @direction.setter
+    def direction(self, val):
+        self["direction"] = val
 
     @property
     def domain(self):
@@ -125,7 +125,7 @@ class Sankey(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
         Note that this attribute is superseded by `node.hoverinfo` and
@@ -185,24 +185,6 @@ class Sankey(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -338,24 +320,6 @@ class Sankey(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -399,7 +363,10 @@ class Sankey(_BaseTraceType):
     @property
     def orientation(self):
         """
-        Sets the orientation of the Sankey diagram.
+        Sets the orientation of the Sankey diagram. With `h` (the
+        default), the flow runs horizontally. With `v`, the flow runs
+        vertically. Use `direction` to control which side the sources
+        are placed on.
 
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -436,25 +403,6 @@ class Sankey(_BaseTraceType):
     @selectedpoints.setter
     def selectedpoints(self, val):
         self["selectedpoints"] = val
-
-    @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.sankey.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.sankey.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
 
     @property
     def textfont(self):
@@ -611,14 +559,17 @@ class Sankey(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
+        direction
+            Sets the direction of the flow along the `orientation`
+            axis. With `forward` (the default), sources are on the
+            left (horizontal) or top (vertical). With `reversed`,
+            sources are on the right (horizontal) or bottom
+            (vertical).
         domain
             :class:`plotly.graph_objects.sankey.Domain` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired. Note that this attribute is
@@ -631,9 +582,6 @@ class Sankey(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -672,16 +620,16 @@ class Sankey(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         node
             The nodes of the Sankey plot.
         orientation
-            Sets the orientation of the Sankey diagram.
+            Sets the orientation of the Sankey diagram. With `h`
+            (the default), the flow runs horizontally. With `v`,
+            the flow runs vertically. Use `direction` to control
+            which side the sources are placed on.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -689,9 +637,6 @@ class Sankey(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
-        stream
-            :class:`plotly.graph_objects.sankey.Stream` instance or
-            dict with compatible properties
         textfont
             Sets the font for node labels
         uid
@@ -737,24 +682,21 @@ class Sankey(_BaseTraceType):
         arg=None,
         arrangement=None,
         customdata=None,
-        customdatasrc=None,
+        direction=None,
         domain=None,
         hoverinfo=None,
         hoverlabel=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgrouptitle=None,
         legendrank=None,
         legendwidth=None,
         link=None,
         meta=None,
-        metasrc=None,
         name=None,
         node=None,
         orientation=None,
         selectedpoints=None,
-        stream=None,
         textfont=None,
         uid=None,
         uirevision=None,
@@ -789,14 +731,17 @@ class Sankey(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
+        direction
+            Sets the direction of the flow along the `orientation`
+            axis. With `forward` (the default), sources are on the
+            left (horizontal) or top (vertical). With `reversed`,
+            sources are on the right (horizontal) or bottom
+            (vertical).
         domain
             :class:`plotly.graph_objects.sankey.Domain` instance or
             dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired. Note that this attribute is
@@ -809,9 +754,6 @@ class Sankey(_BaseTraceType):
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -850,16 +792,16 @@ class Sankey(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
         node
             The nodes of the Sankey plot.
         orientation
-            Sets the orientation of the Sankey diagram.
+            Sets the orientation of the Sankey diagram. With `h`
+            (the default), the flow runs horizontally. With `v`,
+            the flow runs vertically. Use `direction` to control
+            which side the sources are placed on.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -867,9 +809,6 @@ class Sankey(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
-        stream
-            :class:`plotly.graph_objects.sankey.Stream` instance or
-            dict with compatible properties
         textfont
             Sets the font for node labels
         uid
@@ -935,24 +874,21 @@ an instance of :class:`plotly.graph_objs.Sankey`""")
 
         self._set_property("arrangement", arg, arrangement)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
+        self._set_property("direction", arg, direction)
         self._set_property("domain", arg, domain)
         self._set_property("hoverinfo", arg, hoverinfo)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
         self._set_property("legendrank", arg, legendrank)
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("link", arg, link)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("node", arg, node)
         self._set_property("orientation", arg, orientation)
         self._set_property("selectedpoints", arg, selectedpoints)
-        self._set_property("stream", arg, stream)
         self._set_property("textfont", arg, textfont)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)

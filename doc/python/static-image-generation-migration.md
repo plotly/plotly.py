@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Static Image Generation Changes in Plotly.py 6.1
-    order: 40
+    order: 41
     page_type: u-guide
     permalink: python/static-image-generation-changes/
     thumbnail: thumbnail/static-image-export.png
@@ -38,7 +38,7 @@ jupyter:
 
 Plotly.py 6.1 introduces support for Kaleido v1, which [improves static image generation](https://plotly.com/blog/kaleido-the-next-generation/) for Plotly figures.
 
-While adding support for Kaleido v1, we are deprecating support for earlier versions of Kaleido and support for [Orca](/python/orca-management/). Support for Orca and earlier versions of Kaleido will be removed after September 2025, and we recommend updating to the latest Kaleido. This page documents how to migrate your Plotly code to Kaleido v1 and outlines the changes in functionality.
+Plotly.py 7.0 removed support for earlier versions of Kaleido and support for [Orca](/python/orca-management/). If you still use Orca or Kaleido v0, update to the latest Kaleido. This page documents how to migrate your Plotly code to Kaleido v1 and outlines the changes in functionality.
 
 To migrate from either Orca or Kaleido v0, first install the latest Kaleido with:
 
@@ -72,8 +72,6 @@ pio.defaults.default_format = "jpeg"
 # Instead of:
 # pio.kaleido.scope.default_format = "jpeg"
 ~~~
-
-The `mapbox_access_token` config setting is not available on `plotly.io.defaults` because Mapbox maps are deprecated and will be removed in a future version of Plotly.py. See [MapLibre Migration](https://plotly.com/python/mapbox-to-maplibre/) for more details.
 
 If you are migrating from Orca, the following config settings do not apply to Kaleido: `server_url`, `port`, `timeout`, and `use_xvfb`, but other settings, such as `default_format`, can be accessed via `plotly.io.defaults`.
 

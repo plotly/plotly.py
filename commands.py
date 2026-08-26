@@ -50,8 +50,8 @@ def install_js_deps(local, build=True):
     When ``build`` is True (the default), also runs ``npm run build`` to
     rebuild the JupyterLab extension and FigureWidget bundles and verifies
     that the widget bundle exists. Pass ``build=False`` when you only need
-    to refresh ``node_modules`` / ``package-lock.json`` (e.g. after a
-    plotly.js version bump) and don't need the bundles rebuilt.
+    to refresh ``node_modules`` / ``package-lock.json`` but don't
+    need the bundles rebuilt.
     """
 
     npmName = "npm"
@@ -224,12 +224,12 @@ def update_plotlyjs(plotly_js_version, outdir):
     update_bundle(plotly_js_version)
     update_schema(plotly_js_version)
     perform_codegen(outdir)
-    install_js_deps(local=None, build=False)
+    install_js_deps(local=None, build=True)
 
 
 # FIXME: switch to argparse
-def update_schema_bundle_from_master(args):
-    """Update the plotly.js schema and bundle from master."""
+def update_schema_bundle_from_main(args):
+    """Update the plotly.js schema and bundle from main."""
     if args.local is None:
         build_info = get_latest_commit_info(args.devrepo, args.devbranch)
         archive_url, bundle_url, schema_url = get_github_urls(
@@ -276,7 +276,7 @@ def update_schema_bundle_from_master(args):
 def update_plotlyjs_dev(args, outdir):
     """Update project to a new development version of plotly.js."""
 
-    update_schema_bundle_from_master(args)
+    update_schema_bundle_from_main(args)
     perform_codegen(outdir)
 
 
@@ -484,7 +484,7 @@ def make_parser():
     p_update_dev.add_argument(
         "--devrepo", default="plotly/plotly.js", help="repository"
     )
-    p_update_dev.add_argument("--devbranch", default="master", help="branch")
+    p_update_dev.add_argument("--devbranch", default="main", help="branch")
     p_update_dev.add_argument("--local", default=None, help="local path")
 
     subparsers.add_parser("updateplotlyjs", help="update plotly.js")
