@@ -30,7 +30,7 @@ jupyter:
     language: python
     layout: base
     name: Built-in Continuous Color Scales
-    order: 28
+    order: 29
     permalink: python/builtin-colorscales/
     thumbnail: thumbnail/heatmap_colorscale.jpg
     v4upgrade: true

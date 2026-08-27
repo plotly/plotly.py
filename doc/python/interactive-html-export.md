@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Interactive HTML Export
-    order: 31
+    order: 32
     page_type: u-guide
     permalink: python/interactive-html-export/
     thumbnail: thumbnail/static-image-export.png

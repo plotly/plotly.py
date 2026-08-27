@@ -13,25 +13,18 @@ class Link(_BaseTraceHierarchyType):
         "color",
         "colorscaledefaults",
         "colorscales",
-        "colorsrc",
         "customdata",
-        "customdatasrc",
         "hovercolor",
-        "hovercolorsrc",
         "hoverinfo",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "label",
-        "labelsrc",
         "line",
+        "sort",
         "source",
-        "sourcesrc",
         "target",
-        "targetsrc",
         "value",
-        "valuesrc",
     }
 
     @property
@@ -60,12 +53,18 @@ class Link(_BaseTraceHierarchyType):
         for specifying color for each `link`. If `link.color` is
         omitted, then by default, a translucent grey link will be used.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A list or array of any of the above
 
         Returns
@@ -122,24 +121,6 @@ class Link(_BaseTraceHierarchyType):
         self["colorscaledefaults"] = val
 
     @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
-
-    @property
     def customdata(self):
         """
         Assigns extra data to each link.
@@ -158,25 +139,6 @@ class Link(_BaseTraceHierarchyType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def hovercolor(self):
         """
         Sets the `link` hover color. It can be a single value, or an
@@ -184,12 +146,18 @@ class Link(_BaseTraceHierarchyType):
         `link.hovercolor` is omitted, then by default, links will
         become slightly more opaque when hovered over.
 
-        The 'hovercolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'hovercolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A list or array of any of the above
 
         Returns
@@ -203,28 +171,9 @@ class Link(_BaseTraceHierarchyType):
         self["hovercolor"] = val
 
     @property
-    def hovercolorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovercolor`.
-
-        The 'hovercolorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovercolorsrc"]
-
-    @hovercolorsrc.setter
-    def hovercolorsrc(self, val):
-        self["hovercolorsrc"] = val
-
-    @property
     def hoverinfo(self):
         """
-        Determines which trace information appear when hovering links.
+        Determines what trace information appears when hovering links.
         If `none` or `skip` are set, no information is displayed upon
         hovering. But, if `none` is set, click and hover events are
         still fired.
@@ -330,25 +279,6 @@ class Link(_BaseTraceHierarchyType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def label(self):
         """
         The shown name of the link.
@@ -365,24 +295,6 @@ class Link(_BaseTraceHierarchyType):
     @label.setter
     def label(self, val):
         self["label"] = val
-
-    @property
-    def labelsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `label`.
-
-        The 'labelsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["labelsrc"]
-
-    @labelsrc.setter
-    def labelsrc(self, val):
-        self["labelsrc"] = val
 
     @property
     def line(self):
@@ -404,6 +316,28 @@ class Link(_BaseTraceHierarchyType):
         self["line"] = val
 
     @property
+    def sort(self):
+        """
+        For `auto` (the default), the order of links attached to each
+        node is determined automatically by the layout. For `input`,
+        the order of links at each node is kept the same as the order
+        in the input array.
+
+        The 'sort' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['auto', 'input']
+
+        Returns
+        -------
+        Any
+        """
+        return self["sort"]
+
+    @sort.setter
+    def sort(self, val):
+        self["sort"] = val
+
+    @property
     def source(self):
         """
         An integer number `[0..nodes.length - 1]` that represents the
@@ -421,24 +355,6 @@ class Link(_BaseTraceHierarchyType):
     @source.setter
     def source(self, val):
         self["source"] = val
-
-    @property
-    def sourcesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `source`.
-
-        The 'sourcesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["sourcesrc"]
-
-    @sourcesrc.setter
-    def sourcesrc(self, val):
-        self["sourcesrc"] = val
 
     @property
     def target(self):
@@ -460,24 +376,6 @@ class Link(_BaseTraceHierarchyType):
         self["target"] = val
 
     @property
-    def targetsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `target`.
-
-        The 'targetsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["targetsrc"]
-
-    @targetsrc.setter
-    def targetsrc(self, val):
-        self["targetsrc"] = val
-
-    @property
     def value(self):
         """
         A numeric value representing the flow volume value.
@@ -494,24 +392,6 @@ class Link(_BaseTraceHierarchyType):
     @value.setter
     def value(self, val):
         self["value"] = val
-
-    @property
-    def valuesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `value`.
-
-        The 'valuesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["valuesrc"]
-
-    @valuesrc.setter
-    def valuesrc(self, val):
-        self["valuesrc"] = val
 
     @property
     def _prop_descriptions(self):
@@ -533,25 +413,16 @@ class Link(_BaseTraceHierarchyType):
             layout.template.data.sankey.link.colorscaledefaults),
             sets the default property values to use for elements of
             sankey.link.colorscales
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         customdata
             Assigns extra data to each link.
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hovercolor
             Sets the `link` hover color. It can be a single value,
             or an array for specifying hover colors for each
             `link`. If `link.hovercolor` is omitted, then by
             default, links will become slightly more opaque when
             hovered over.
-        hovercolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovercolor`.
         hoverinfo
-            Determines which trace information appear when hovering
+            Determines what trace information appears when hovering
             links. If `none` or `skip` are set, no information is
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
@@ -598,34 +469,24 @@ class Link(_BaseTraceHierarchyType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         label
             The shown name of the link.
-        labelsrc
-            Sets the source reference on Chart Studio Cloud for
-            `label`.
         line
             :class:`plotly.graph_objects.sankey.link.Line` instance
             or dict with compatible properties
+        sort
+            For `auto` (the default), the order of links attached
+            to each node is determined automatically by the layout.
+            For `input`, the order of links at each node is kept
+            the same as the order in the input array.
         source
             An integer number `[0..nodes.length - 1]` that
             represents the source node.
-        sourcesrc
-            Sets the source reference on Chart Studio Cloud for
-            `source`.
         target
             An integer number `[0..nodes.length - 1]` that
             represents the target node.
-        targetsrc
-            Sets the source reference on Chart Studio Cloud for
-            `target`.
         value
             A numeric value representing the flow volume value.
-        valuesrc
-            Sets the source reference on Chart Studio Cloud for
-            `value`.
         """
 
     def __init__(
@@ -635,25 +496,18 @@ class Link(_BaseTraceHierarchyType):
         color=None,
         colorscales=None,
         colorscaledefaults=None,
-        colorsrc=None,
         customdata=None,
-        customdatasrc=None,
         hovercolor=None,
-        hovercolorsrc=None,
         hoverinfo=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         label=None,
-        labelsrc=None,
         line=None,
+        sort=None,
         source=None,
-        sourcesrc=None,
         target=None,
-        targetsrc=None,
         value=None,
-        valuesrc=None,
         **kwargs,
     ):
         """
@@ -683,25 +537,16 @@ class Link(_BaseTraceHierarchyType):
             layout.template.data.sankey.link.colorscaledefaults),
             sets the default property values to use for elements of
             sankey.link.colorscales
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         customdata
             Assigns extra data to each link.
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         hovercolor
             Sets the `link` hover color. It can be a single value,
             or an array for specifying hover colors for each
             `link`. If `link.hovercolor` is omitted, then by
             default, links will become slightly more opaque when
             hovered over.
-        hovercolorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovercolor`.
         hoverinfo
-            Determines which trace information appear when hovering
+            Determines what trace information appears when hovering
             links. If `none` or `skip` are set, no information is
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
@@ -748,34 +593,24 @@ class Link(_BaseTraceHierarchyType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         label
             The shown name of the link.
-        labelsrc
-            Sets the source reference on Chart Studio Cloud for
-            `label`.
         line
             :class:`plotly.graph_objects.sankey.link.Line` instance
             or dict with compatible properties
+        sort
+            For `auto` (the default), the order of links attached
+            to each node is determined automatically by the layout.
+            For `input`, the order of links at each node is kept
+            the same as the order in the input array.
         source
             An integer number `[0..nodes.length - 1]` that
             represents the source node.
-        sourcesrc
-            Sets the source reference on Chart Studio Cloud for
-            `source`.
         target
             An integer number `[0..nodes.length - 1]` that
             represents the target node.
-        targetsrc
-            Sets the source reference on Chart Studio Cloud for
-            `target`.
         value
             A numeric value representing the flow volume value.
-        valuesrc
-            Sets the source reference on Chart Studio Cloud for
-            `value`.
 
         Returns
         -------
@@ -805,24 +640,17 @@ an instance of :class:`plotly.graph_objs.sankey.Link`""")
         self._set_property("color", arg, color)
         self._set_property("colorscales", arg, colorscales)
         self._set_property("colorscaledefaults", arg, colorscaledefaults)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("hovercolor", arg, hovercolor)
-        self._set_property("hovercolorsrc", arg, hovercolorsrc)
         self._set_property("hoverinfo", arg, hoverinfo)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("label", arg, label)
-        self._set_property("labelsrc", arg, labelsrc)
         self._set_property("line", arg, line)
+        self._set_property("sort", arg, sort)
         self._set_property("source", arg, source)
-        self._set_property("sourcesrc", arg, sourcesrc)
         self._set_property("target", arg, target)
-        self._set_property("targetsrc", arg, targetsrc)
         self._set_property("value", arg, value)
-        self._set_property("valuesrc", arg, valuesrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Setting Graph Size
-    order: 11
+    order: 12
     permalink: python/setting-graph-size/
     thumbnail: thumbnail/sizing.png
 ---

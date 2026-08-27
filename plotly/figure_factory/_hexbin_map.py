@@ -3,12 +3,11 @@ from plotly.express._doc import make_docstring
 from plotly.express._chart_types import choropleth_map, scatter_map
 import narwhals.stable.v1 as nw
 import numpy as np
-import warnings
 
 
 def _project_latlon_to_wgs84(lat, lon):
     """
-    Projects lat and lon to WGS84, used to get regular hexagons on a mapbox map
+    Projects lat and lon to WGS84, used to get regular hexagons on a map
     """
     x = lon * np.pi / 180
     y = np.arctanh(np.sin(lat * np.pi / 180))
@@ -17,7 +16,7 @@ def _project_latlon_to_wgs84(lat, lon):
 
 def _project_wgs84_to_latlon(x, y):
     """
-    Projects WGS84 to lat and lon, used to get regular hexagons on a mapbox map
+    Projects WGS84 to lat and lon, used to get regular hexagons on a map
     """
     lon = x * 180 / np.pi
     lat = (2 * np.arctan(np.exp(y)) - np.pi / 2) * 180 / np.pi
@@ -26,13 +25,11 @@ def _project_wgs84_to_latlon(x, y):
 
 def _getBoundsZoomLevel(lon_min, lon_max, lat_min, lat_max, mapDim):
     """
-    Get the mapbox zoom level given bounds and a figure dimension
+    Get the map zoom level given bounds and a figure dimension
     Source: https://stackoverflow.com/questions/6048975/google-maps-v3-how-to-calculate-the-zoom-level-for-a-given-bounds
     """
 
-    scale = (
-        2  # adjustment to reflect MapBox base tiles are 512x512 vs. Google's 256x256
-    )
+    scale = 2  # adjustment to reflect map base tiles are 512x512 vs. Google's 256x256
     WORLD_DIM = {"height": 256 * scale, "width": 256 * scale}
     ZOOM_MAX = 18
 
@@ -530,17 +527,3 @@ create_hexbin_map.__doc__ = make_docstring(
         original_data_marker=["dict", "Scattermap marker options."],
     ),
 )
-
-
-def create_hexbin_mapbox(*args, **kwargs):
-    warnings.warn(
-        "create_hexbin_mapbox() is deprecated and will be removed in the next major version. "
-        + "Please use create_hexbin_map() instead. "
-        + "Learn more at: https://plotly.com/python/mapbox-to-maplibre/",
-        stacklevel=2,
-        category=DeprecationWarning,
-    )
-    if "mapbox_style" in kwargs:
-        kwargs["map_style"] = kwargs.pop("mapbox_style")
-
-    return create_hexbin_map(*args, **kwargs)

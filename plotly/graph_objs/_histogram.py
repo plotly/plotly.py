@@ -17,21 +17,16 @@ class Histogram(_BaseTraceType):
         "constraintext",
         "cumulative",
         "customdata",
-        "customdatasrc",
         "error_x",
         "error_y",
         "histfunc",
         "histnorm",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "insidetextanchor",
         "insidetextfont",
         "legend",
@@ -41,7 +36,6 @@ class Histogram(_BaseTraceType):
         "legendwidth",
         "marker",
         "meta",
-        "metasrc",
         "name",
         "nbinsx",
         "nbinsy",
@@ -52,12 +46,10 @@ class Histogram(_BaseTraceType):
         "selected",
         "selectedpoints",
         "showlegend",
-        "stream",
         "text",
         "textangle",
         "textfont",
         "textposition",
-        "textsrc",
         "texttemplate",
         "texttemplatefallback",
         "type",
@@ -70,13 +62,11 @@ class Histogram(_BaseTraceType):
         "xbins",
         "xcalendar",
         "xhoverformat",
-        "xsrc",
         "y",
         "yaxis",
         "ybins",
         "ycalendar",
         "yhoverformat",
-        "ysrc",
         "zorder",
     }
 
@@ -250,25 +240,6 @@ class Histogram(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def error_x(self):
         """
         The 'error_x' property is an instance of ErrorX
@@ -365,7 +336,7 @@ class Histogram(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -385,25 +356,6 @@ class Histogram(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -492,25 +444,6 @@ class Histogram(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Same as `text`.
@@ -531,25 +464,6 @@ class Histogram(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -568,24 +482,6 @@ class Histogram(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def insidetextanchor(self):
@@ -779,24 +675,6 @@ class Histogram(_BaseTraceType):
     @meta.setter
     def meta(self, val):
         self["meta"] = val
-
-    @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
 
     @property
     def name(self):
@@ -1003,25 +881,6 @@ class Histogram(_BaseTraceType):
         self["showlegend"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.histogram.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.histogram.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets hover text elements associated with each bar. If a single
@@ -1113,24 +972,6 @@ class Histogram(_BaseTraceType):
     @textposition.setter
     def textposition(self, val):
         self["textposition"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def texttemplate(self):
@@ -1363,7 +1204,7 @@ class Histogram(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1388,24 +1229,6 @@ class Histogram(_BaseTraceType):
     @xhoverformat.setter
     def xhoverformat(self, val):
         self["xhoverformat"] = val
-
-    @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
 
     @property
     def y(self):
@@ -1492,7 +1315,7 @@ class Histogram(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1517,24 +1340,6 @@ class Histogram(_BaseTraceType):
     @yhoverformat.setter
     def yhoverformat(self, val):
         self["yhoverformat"] = val
-
-    @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
 
     @property
     def zorder(self):
@@ -1605,9 +1410,6 @@ class Histogram(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         error_x
             :class:`plotly.graph_objects.histogram.ErrorX` instance
             or dict with compatible properties
@@ -1640,13 +1442,10 @@ class Histogram(_BaseTraceType):
             corresponding bin (here, the sum of all bin AREAS
             equals 1).
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram.Hoverlabel`
             instance or dict with compatible properties
@@ -1690,21 +1489,12 @@ class Histogram(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -1753,9 +1543,6 @@ class Histogram(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1796,9 +1583,6 @@ class Histogram(_BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.histogram.Stream` instance
-            or dict with compatible properties
         text
             Sets hover text elements associated with each bar. If a
             single string, the same string appears over all bars.
@@ -1822,9 +1606,6 @@ class Histogram(_BaseTraceType):
             inside the bar, but if the bar is too small and no bar
             is stacked on this one the text is moved outside. If
             "none", no text appears.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -1895,7 +1676,7 @@ class Histogram(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1907,9 +1688,6 @@ class Histogram(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -1923,7 +1701,7 @@ class Histogram(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1935,9 +1713,6 @@ class Histogram(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -1956,21 +1731,16 @@ class Histogram(_BaseTraceType):
         constraintext=None,
         cumulative=None,
         customdata=None,
-        customdatasrc=None,
         error_x=None,
         error_y=None,
         histfunc=None,
         histnorm=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextanchor=None,
         insidetextfont=None,
         legend=None,
@@ -1980,7 +1750,6 @@ class Histogram(_BaseTraceType):
         legendwidth=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
@@ -1991,12 +1760,10 @@ class Histogram(_BaseTraceType):
         selected=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
         textangle=None,
         textfont=None,
         textposition=None,
-        textsrc=None,
         texttemplate=None,
         texttemplatefallback=None,
         uid=None,
@@ -2008,13 +1775,11 @@ class Histogram(_BaseTraceType):
         xbins=None,
         xcalendar=None,
         xhoverformat=None,
-        xsrc=None,
         y=None,
         yaxis=None,
         ybins=None,
         ycalendar=None,
         yhoverformat=None,
-        ysrc=None,
         zorder=None,
         **kwargs,
     ):
@@ -2074,9 +1839,6 @@ class Histogram(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         error_x
             :class:`plotly.graph_objects.histogram.ErrorX` instance
             or dict with compatible properties
@@ -2109,13 +1871,10 @@ class Histogram(_BaseTraceType):
             corresponding bin (here, the sum of all bin AREAS
             equals 1).
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.histogram.Hoverlabel`
             instance or dict with compatible properties
@@ -2159,21 +1918,12 @@ class Histogram(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -2222,9 +1972,6 @@ class Histogram(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2265,9 +2012,6 @@ class Histogram(_BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.histogram.Stream` instance
-            or dict with compatible properties
         text
             Sets hover text elements associated with each bar. If a
             single string, the same string appears over all bars.
@@ -2291,9 +2035,6 @@ class Histogram(_BaseTraceType):
             inside the bar, but if the bar is too small and no bar
             is stacked on this one the text is moved outside. If
             "none", no text appears.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -2364,7 +2105,7 @@ class Histogram(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2376,9 +2117,6 @@ class Histogram(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `xaxis.hoverformat`.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the sample data to be binned on the y axis.
         yaxis
@@ -2392,7 +2130,7 @@ class Histogram(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2404,9 +2142,6 @@ class Histogram(_BaseTraceType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display *09~15~23.46*By default the values are
             formatted using `yaxis.hoverformat`.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         zorder
             Sets the layer on which this trace is displayed,
             relative to other SVG traces on the same subplot. SVG
@@ -2445,21 +2180,16 @@ an instance of :class:`plotly.graph_objs.Histogram`""")
         self._set_property("constraintext", arg, constraintext)
         self._set_property("cumulative", arg, cumulative)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("error_x", arg, error_x)
         self._set_property("error_y", arg, error_y)
         self._set_property("histfunc", arg, histfunc)
         self._set_property("histnorm", arg, histnorm)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("insidetextanchor", arg, insidetextanchor)
         self._set_property("insidetextfont", arg, insidetextfont)
         self._set_property("legend", arg, legend)
@@ -2469,7 +2199,6 @@ an instance of :class:`plotly.graph_objs.Histogram`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("marker", arg, marker)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("nbinsx", arg, nbinsx)
         self._set_property("nbinsy", arg, nbinsy)
@@ -2480,12 +2209,10 @@ an instance of :class:`plotly.graph_objs.Histogram`""")
         self._set_property("selected", arg, selected)
         self._set_property("selectedpoints", arg, selectedpoints)
         self._set_property("showlegend", arg, showlegend)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
         self._set_property("textangle", arg, textangle)
         self._set_property("textfont", arg, textfont)
         self._set_property("textposition", arg, textposition)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("texttemplate", arg, texttemplate)
         self._set_property("texttemplatefallback", arg, texttemplatefallback)
         self._set_property("uid", arg, uid)
@@ -2497,13 +2224,11 @@ an instance of :class:`plotly.graph_objs.Histogram`""")
         self._set_property("xbins", arg, xbins)
         self._set_property("xcalendar", arg, xcalendar)
         self._set_property("xhoverformat", arg, xhoverformat)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
         self._set_property("yaxis", arg, yaxis)
         self._set_property("ybins", arg, ybins)
         self._set_property("ycalendar", arg, ycalendar)
         self._set_property("yhoverformat", arg, yhoverformat)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("zorder", arg, zorder)
 
         self._props["type"] = "histogram"

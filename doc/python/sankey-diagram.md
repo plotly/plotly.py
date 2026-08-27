@@ -318,6 +318,49 @@ fig = go.Figure(go.Sankey(
 fig.show()
 ```
 
+### Node and Link Order
+
+*New in 7.0*
+
+By default, the layout reorders nodes within a column, and links within a node, to reduce the number of crossings. Set `node.sort="input"` and `link.sort="input"` to keep the order you provide instead: nodes appear in the order given in `node.label`, and links in the order given in `link.source` and `link.target`. Use this when the order carries meaning, such as a ranking, or when you need a layout that stays the same across renders.
+
+```python
+import plotly.graph_objects as go
+
+labels = ["Gold", "Silver", "Bronze", "Q1", "Q2", "Q3"]
+
+fig = go.Figure(go.Sankey(
+    node=dict(label=labels, pad=15, thickness=20, sort="input"),
+    link=dict(
+        source=[0, 0, 0, 1, 1, 1, 2, 2, 2],
+        target=[3, 4, 5, 3, 4, 5, 3, 4, 5],
+        value=[8, 4, 2, 5, 6, 3, 2, 3, 7],
+        sort="input"
+    )
+))
+
+fig.update_layout(title_text="Medals by quarter, categories in ranked order")
+fig.show()
+```
+
+### Flow Direction
+
+*New in 7.0*
+
+`direction` sets which way flows run along the `orientation` axis. With the default `"forward"`, sources are on the left for a horizontal diagram and at the top for a vertical one. With `"reversed"`, sources are on the right or at the bottom.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Sankey(
+    direction="reversed",
+    node=dict(label=["A", "B", "Total"], pad=15, thickness=20),
+    link=dict(source=[0, 1], target=[2, 2], value=[8, 4])
+))
+
+fig.show()
+```
+
 ### Reference
 
 See [https://plotly.com/python/reference/sankey](https://plotly.com/python/reference/sankey/) for more information and options!

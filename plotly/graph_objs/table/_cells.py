@@ -10,19 +10,14 @@ class Cells(_BaseTraceHierarchyType):
     _path_str = "table.cells"
     _valid_props = {
         "align",
-        "alignsrc",
         "fill",
         "font",
         "format",
-        "formatsrc",
         "height",
         "line",
         "prefix",
-        "prefixsrc",
         "suffix",
-        "suffixsrc",
         "values",
-        "valuessrc",
     }
 
     @property
@@ -47,24 +42,6 @@ class Cells(_BaseTraceHierarchyType):
     @align.setter
     def align(self, val):
         self["align"] = val
-
-    @property
-    def alignsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `align`.
-
-        The 'alignsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["alignsrc"]
-
-    @alignsrc.setter
-    def alignsrc(self, val):
-        self["alignsrc"] = val
 
     @property
     def fill(self):
@@ -126,24 +103,6 @@ class Cells(_BaseTraceHierarchyType):
         self["format"] = val
 
     @property
-    def formatsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `format`.
-
-        The 'formatsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["formatsrc"]
-
-    @formatsrc.setter
-    def formatsrc(self, val):
-        self["formatsrc"] = val
-
-    @property
     def height(self):
         """
         The height of cells.
@@ -201,24 +160,6 @@ class Cells(_BaseTraceHierarchyType):
         self["prefix"] = val
 
     @property
-    def prefixsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `prefix`.
-
-        The 'prefixsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["prefixsrc"]
-
-    @prefixsrc.setter
-    def prefixsrc(self, val):
-        self["prefixsrc"] = val
-
-    @property
     def suffix(self):
         """
         Suffix for cell values.
@@ -237,24 +178,6 @@ class Cells(_BaseTraceHierarchyType):
     @suffix.setter
     def suffix(self, val):
         self["suffix"] = val
-
-    @property
-    def suffixsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `suffix`.
-
-        The 'suffixsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["suffixsrc"]
-
-    @suffixsrc.setter
-    def suffixsrc(self, val):
-        self["suffixsrc"] = val
 
     @property
     def values(self):
@@ -278,24 +201,6 @@ class Cells(_BaseTraceHierarchyType):
         self["values"] = val
 
     @property
-    def valuessrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `values`.
-
-        The 'valuessrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["valuessrc"]
-
-    @valuessrc.setter
-    def valuessrc(self, val):
-        self["valuessrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         align
@@ -304,9 +209,6 @@ class Cells(_BaseTraceHierarchyType):
             lines (i.e. `text` contains one or more <br> HTML tags)
             or if an explicit width is set to override the text
             width.
-        alignsrc
-            Sets the source reference on Chart Studio Cloud for
-            `align`.
         fill
             :class:`plotly.graph_objects.table.cells.Fill` instance
             or dict with compatible properties
@@ -318,9 +220,6 @@ class Cells(_BaseTraceHierarchyType):
             mini-languages which are very similar to those in
             Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
-        formatsrc
-            Sets the source reference on Chart Studio Cloud for
-            `format`.
         height
             The height of cells.
         line
@@ -328,42 +227,28 @@ class Cells(_BaseTraceHierarchyType):
             or dict with compatible properties
         prefix
             Prefix for cell values.
-        prefixsrc
-            Sets the source reference on Chart Studio Cloud for
-            `prefix`.
         suffix
             Suffix for cell values.
-        suffixsrc
-            Sets the source reference on Chart Studio Cloud for
-            `suffix`.
         values
             Cell values. `values[m][n]` represents the value of the
             `n`th point in column `m`, therefore the `values[m]`
             vector length for all columns must be the same (longer
             vectors will be truncated). Each value must be a finite
             number or a string.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         """
 
     def __init__(
         self,
         arg=None,
         align=None,
-        alignsrc=None,
         fill=None,
         font=None,
         format=None,
-        formatsrc=None,
         height=None,
         line=None,
         prefix=None,
-        prefixsrc=None,
         suffix=None,
-        suffixsrc=None,
         values=None,
-        valuessrc=None,
         **kwargs,
     ):
         """
@@ -380,9 +265,6 @@ class Cells(_BaseTraceHierarchyType):
             lines (i.e. `text` contains one or more <br> HTML tags)
             or if an explicit width is set to override the text
             width.
-        alignsrc
-            Sets the source reference on Chart Studio Cloud for
-            `align`.
         fill
             :class:`plotly.graph_objects.table.cells.Fill` instance
             or dict with compatible properties
@@ -394,9 +276,6 @@ class Cells(_BaseTraceHierarchyType):
             mini-languages which are very similar to those in
             Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
-        formatsrc
-            Sets the source reference on Chart Studio Cloud for
-            `format`.
         height
             The height of cells.
         line
@@ -404,23 +283,14 @@ class Cells(_BaseTraceHierarchyType):
             or dict with compatible properties
         prefix
             Prefix for cell values.
-        prefixsrc
-            Sets the source reference on Chart Studio Cloud for
-            `prefix`.
         suffix
             Suffix for cell values.
-        suffixsrc
-            Sets the source reference on Chart Studio Cloud for
-            `suffix`.
         values
             Cell values. `values[m][n]` represents the value of the
             `n`th point in column `m`, therefore the `values[m]`
             vector length for all columns must be the same (longer
             vectors will be truncated). Each value must be a finite
             number or a string.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
 
         Returns
         -------
@@ -447,18 +317,13 @@ an instance of :class:`plotly.graph_objs.table.Cells`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("align", arg, align)
-        self._set_property("alignsrc", arg, alignsrc)
         self._set_property("fill", arg, fill)
         self._set_property("font", arg, font)
         self._set_property("format", arg, format)
-        self._set_property("formatsrc", arg, formatsrc)
         self._set_property("height", arg, height)
         self._set_property("line", arg, line)
         self._set_property("prefix", arg, prefix)
-        self._set_property("prefixsrc", arg, prefixsrc)
         self._set_property("suffix", arg, suffix)
-        self._set_property("suffixsrc", arg, suffixsrc)
         self._set_property("values", arg, values)
-        self._set_property("valuessrc", arg, valuessrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

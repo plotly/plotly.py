@@ -8,30 +8,25 @@ import copy as _copy
 class Cluster(_BaseTraceHierarchyType):
     _parent_path_str = "scattermap"
     _path_str = "scattermap.cluster"
-    _valid_props = {
-        "color",
-        "colorsrc",
-        "enabled",
-        "maxzoom",
-        "opacity",
-        "opacitysrc",
-        "size",
-        "sizesrc",
-        "step",
-        "stepsrc",
-    }
+    _valid_props = {"color", "enabled", "maxzoom", "opacity", "size", "step"}
 
     @property
     def color(self):
         """
         Sets the color for each cluster step.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A list or array of any of the above
 
         Returns
@@ -43,24 +38,6 @@ class Cluster(_BaseTraceHierarchyType):
     @color.setter
     def color(self, val):
         self["color"] = val
-
-    @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
 
     @property
     def enabled(self):
@@ -119,24 +96,6 @@ class Cluster(_BaseTraceHierarchyType):
         self["opacity"] = val
 
     @property
-    def opacitysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `opacity`.
-
-        The 'opacitysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["opacitysrc"]
-
-    @opacitysrc.setter
-    def opacitysrc(self, val):
-        self["opacitysrc"] = val
-
-    @property
     def size(self):
         """
         Sets the size for each cluster step.
@@ -154,24 +113,6 @@ class Cluster(_BaseTraceHierarchyType):
     @size.setter
     def size(self, val):
         self["size"] = val
-
-    @property
-    def sizesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `size`.
-
-        The 'sizesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["sizesrc"]
-
-    @sizesrc.setter
-    def sizesrc(self, val):
-        self["sizesrc"] = val
 
     @property
     def step(self):
@@ -197,31 +138,10 @@ class Cluster(_BaseTraceHierarchyType):
         self["step"] = val
 
     @property
-    def stepsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `step`.
-
-        The 'stepsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["stepsrc"]
-
-    @stepsrc.setter
-    def stepsrc(self, val):
-        self["stepsrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         color
             Sets the color for each cluster step.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         enabled
             Determines whether clustering is enabled or disabled.
         maxzoom
@@ -229,14 +149,8 @@ class Cluster(_BaseTraceHierarchyType):
             greater than this, points will never be clustered.
         opacity
             Sets the marker opacity.
-        opacitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `opacity`.
         size
             Sets the size for each cluster step.
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         step
             Sets how many points it takes to create a cluster or
             advance to the next cluster step. Use this in
@@ -244,24 +158,17 @@ class Cluster(_BaseTraceHierarchyType):
             an integer, steps start at multiples of this number. If
             an array, each step extends from the given value until
             one less than the next value.
-        stepsrc
-            Sets the source reference on Chart Studio Cloud for
-            `step`.
         """
 
     def __init__(
         self,
         arg=None,
         color=None,
-        colorsrc=None,
         enabled=None,
         maxzoom=None,
         opacity=None,
-        opacitysrc=None,
         size=None,
-        sizesrc=None,
         step=None,
-        stepsrc=None,
         **kwargs,
     ):
         """
@@ -275,9 +182,6 @@ class Cluster(_BaseTraceHierarchyType):
             :class:`plotly.graph_objs.scattermap.Cluster`
         color
             Sets the color for each cluster step.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         enabled
             Determines whether clustering is enabled or disabled.
         maxzoom
@@ -285,14 +189,8 @@ class Cluster(_BaseTraceHierarchyType):
             greater than this, points will never be clustered.
         opacity
             Sets the marker opacity.
-        opacitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `opacity`.
         size
             Sets the size for each cluster step.
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         step
             Sets how many points it takes to create a cluster or
             advance to the next cluster step. Use this in
@@ -300,9 +198,6 @@ class Cluster(_BaseTraceHierarchyType):
             an integer, steps start at multiples of this number. If
             an array, each step extends from the given value until
             one less than the next value.
-        stepsrc
-            Sets the source reference on Chart Studio Cloud for
-            `step`.
 
         Returns
         -------
@@ -329,14 +224,10 @@ an instance of :class:`plotly.graph_objs.scattermap.Cluster`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("enabled", arg, enabled)
         self._set_property("maxzoom", arg, maxzoom)
         self._set_property("opacity", arg, opacity)
-        self._set_property("opacitysrc", arg, opacitysrc)
         self._set_property("size", arg, size)
-        self._set_property("sizesrc", arg, sizesrc)
         self._set_property("step", arg, step)
-        self._set_property("stepsrc", arg, stepsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

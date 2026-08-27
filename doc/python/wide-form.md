@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Plotly Express Wide-Form Support
-    order: 34
+    order: 35
     page_type: u-guide
     permalink: python/wide-form/
     thumbnail: thumbnail/plotly-express.png
@@ -38,7 +38,7 @@ jupyter:
 
 Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a `DataFrame` (in either "long" or "wide" format, see below). These functions use Pandas internally to process the data, but also accept other types of DataFrames as arguments. See the [Plotly Express arguments page](/python/px-arguments/) for more details.
 
-[`px.imshow` operates on matrix-like data](/python/imshow/) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](/python/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions, but you can also check out our [detailed column-input-format documentation](/python/px-arguments/).
+[`px.imshow` operates on matrix-like data](/python/imshow/) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` can operate on geographic data](/python/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions, but you can also check out our [detailed column-input-format documentation](/python/px-arguments/).
 
 ### Plotly Express works with Long-, Wide-, and Mixed-Form Data
 

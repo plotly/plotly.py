@@ -8,30 +8,23 @@ import copy as _copy
 class Textfont(_BaseTraceHierarchyType):
     _parent_path_str = "scattergl"
     _path_str = "scattergl.textfont"
-    _valid_props = {
-        "color",
-        "colorsrc",
-        "family",
-        "familysrc",
-        "size",
-        "sizesrc",
-        "style",
-        "stylesrc",
-        "variant",
-        "variantsrc",
-        "weight",
-        "weightsrc",
-    }
+    _valid_props = {"color", "family", "size", "style", "variant", "weight"}
 
     @property
     def color(self):
         """
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A list or array of any of the above
 
         Returns
@@ -43,24 +36,6 @@ class Textfont(_BaseTraceHierarchyType):
     @color.setter
     def color(self, val):
         self["color"] = val
-
-    @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
 
     @property
     def family(self):
@@ -86,24 +61,6 @@ class Textfont(_BaseTraceHierarchyType):
         self["family"] = val
 
     @property
-    def familysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `family`.
-
-        The 'familysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["familysrc"]
-
-    @familysrc.setter
-    def familysrc(self, val):
-        self["familysrc"] = val
-
-    @property
     def size(self):
         """
         The 'size' property is a number and may be specified as:
@@ -119,24 +76,6 @@ class Textfont(_BaseTraceHierarchyType):
     @size.setter
     def size(self, val):
         self["size"] = val
-
-    @property
-    def sizesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `size`.
-
-        The 'sizesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["sizesrc"]
-
-    @sizesrc.setter
-    def sizesrc(self, val):
-        self["sizesrc"] = val
 
     @property
     def style(self):
@@ -160,24 +99,6 @@ class Textfont(_BaseTraceHierarchyType):
         self["style"] = val
 
     @property
-    def stylesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `style`.
-
-        The 'stylesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["stylesrc"]
-
-    @stylesrc.setter
-    def stylesrc(self, val):
-        self["stylesrc"] = val
-
-    @property
     def variant(self):
         """
         Sets the variant of the font.
@@ -196,24 +117,6 @@ class Textfont(_BaseTraceHierarchyType):
     @variant.setter
     def variant(self, val):
         self["variant"] = val
-
-    @property
-    def variantsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `variant`.
-
-        The 'variantsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["variantsrc"]
-
-    @variantsrc.setter
-    def variantsrc(self, val):
-        self["variantsrc"] = val
 
     @property
     def weight(self):
@@ -236,31 +139,10 @@ class Textfont(_BaseTraceHierarchyType):
         self["weight"] = val
 
     @property
-    def weightsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `weight`.
-
-        The 'weightsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["weightsrc"]
-
-    @weightsrc.setter
-    def weightsrc(self, val):
-        self["weightsrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         color
 
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         family
             HTML font family - the typeface that will be applied by
             the web browser. The web browser can only apply a font
@@ -268,47 +150,26 @@ class Textfont(_BaseTraceHierarchyType):
             multiple font families, separated by commas, to
             indicate the order in which to apply fonts if they
             aren't available.
-        familysrc
-            Sets the source reference on Chart Studio Cloud for
-            `family`.
         size
 
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         style
             Sets whether a font should be styled with a normal or
             italic face from its family.
-        stylesrc
-            Sets the source reference on Chart Studio Cloud for
-            `style`.
         variant
             Sets the variant of the font.
-        variantsrc
-            Sets the source reference on Chart Studio Cloud for
-            `variant`.
         weight
             Sets the weight (or boldness) of the font.
-        weightsrc
-            Sets the source reference on Chart Studio Cloud for
-            `weight`.
         """
 
     def __init__(
         self,
         arg=None,
         color=None,
-        colorsrc=None,
         family=None,
-        familysrc=None,
         size=None,
-        sizesrc=None,
         style=None,
-        stylesrc=None,
         variant=None,
-        variantsrc=None,
         weight=None,
-        weightsrc=None,
         **kwargs,
     ):
         """
@@ -324,9 +185,6 @@ class Textfont(_BaseTraceHierarchyType):
             :class:`plotly.graph_objs.scattergl.Textfont`
         color
 
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         family
             HTML font family - the typeface that will be applied by
             the web browser. The web browser can only apply a font
@@ -334,30 +192,15 @@ class Textfont(_BaseTraceHierarchyType):
             multiple font families, separated by commas, to
             indicate the order in which to apply fonts if they
             aren't available.
-        familysrc
-            Sets the source reference on Chart Studio Cloud for
-            `family`.
         size
 
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         style
             Sets whether a font should be styled with a normal or
             italic face from its family.
-        stylesrc
-            Sets the source reference on Chart Studio Cloud for
-            `style`.
         variant
             Sets the variant of the font.
-        variantsrc
-            Sets the source reference on Chart Studio Cloud for
-            `variant`.
         weight
             Sets the weight (or boldness) of the font.
-        weightsrc
-            Sets the source reference on Chart Studio Cloud for
-            `weight`.
 
         Returns
         -------
@@ -384,16 +227,10 @@ an instance of :class:`plotly.graph_objs.scattergl.Textfont`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("family", arg, family)
-        self._set_property("familysrc", arg, familysrc)
         self._set_property("size", arg, size)
-        self._set_property("sizesrc", arg, sizesrc)
         self._set_property("style", arg, style)
-        self._set_property("stylesrc", arg, stylesrc)
         self._set_property("variant", arg, variant)
-        self._set_property("variantsrc", arg, variantsrc)
         self._set_property("weight", arg, weight)
-        self._set_property("weightsrc", arg, weightsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

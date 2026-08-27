@@ -106,13 +106,10 @@ conda install jupyter anywidget
 ### Static Image Export
 
 plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
-using either the [`kaleido`](https://github.com/plotly/Kaleido)
-package (recommended, supported as of `plotly` version 4.9) or the [orca](https://github.com/plotly/orca)
-command line utility (legacy as of `plotly` version 4.9).
+using the [`kaleido`](https://github.com/plotly/Kaleido)
+package (version 1.0 or greater).
 
-#### Kaleido
-
-The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies and can be installed
+Kaleido has minimal dependencies and can be installed
 using pip
 
 ```
@@ -125,23 +122,11 @@ or conda
 conda install -c conda-forge python-kaleido
 ```
 
-### Extended Geo Support
+Kaleido requires Chrome or Chromium to generate images. By default, Kaleido will use the Chrome or Chromium version already installed on your system. If you don't have it installed or Kaleido can't find it, you may need to install it by running the command:
 
-Some plotly.py features rely on fairly large geographic shape files. The county
-choropleth figure factory is one such example. These shape files are distributed as a
-separate `plotly-geo` package. This package can be installed using pip...
+`plotly_get_chrome`
 
-```
-pip install plotly-geo==1.0.0
-```
-
-or conda
-
-```
-conda install -c plotly plotly-geo=1.0.0
-```
-
-`plotly-geo` can be found on Github at https://github.com/plotly/plotly-geo.
+on your command line.
 
 ## Copyright and Licenses
 

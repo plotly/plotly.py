@@ -8,7 +8,7 @@ import copy as _copy
 class Gradient(_BaseTraceHierarchyType):
     _parent_path_str = "scattergeo.marker"
     _path_str = "scattergeo.marker.gradient"
-    _valid_props = {"color", "colorsrc", "type", "typesrc"}
+    _valid_props = {"color", "type"}
 
     @property
     def color(self):
@@ -16,12 +16,18 @@ class Gradient(_BaseTraceHierarchyType):
         Sets the final color of the gradient fill: the center color for
         radial, the right for horizontal, or the bottom for vertical.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A list or array of any of the above
 
         Returns
@@ -33,24 +39,6 @@ class Gradient(_BaseTraceHierarchyType):
     @color.setter
     def color(self, val):
         self["color"] = val
-
-    @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
 
     @property
     def type(self):
@@ -73,43 +61,17 @@ class Gradient(_BaseTraceHierarchyType):
         self["type"] = val
 
     @property
-    def typesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `type`.
-
-        The 'typesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["typesrc"]
-
-    @typesrc.setter
-    def typesrc(self, val):
-        self["typesrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         color
             Sets the final color of the gradient fill: the center
             color for radial, the right for horizontal, or the
             bottom for vertical.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         type
             Sets the type of gradient used to fill the markers
-        typesrc
-            Sets the source reference on Chart Studio Cloud for
-            `type`.
         """
 
-    def __init__(
-        self, arg=None, color=None, colorsrc=None, type=None, typesrc=None, **kwargs
-    ):
+    def __init__(self, arg=None, color=None, type=None, **kwargs):
         """
         Construct a new Gradient object
 
@@ -123,14 +85,8 @@ class Gradient(_BaseTraceHierarchyType):
             Sets the final color of the gradient fill: the center
             color for radial, the right for horizontal, or the
             bottom for vertical.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         type
             Sets the type of gradient used to fill the markers
-        typesrc
-            Sets the source reference on Chart Studio Cloud for
-            `type`.
 
         Returns
         -------
@@ -157,8 +113,6 @@ an instance of :class:`plotly.graph_objs.scattergeo.marker.Gradient`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("color", arg, color)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("type", arg, type)
-        self._set_property("typesrc", arg, typesrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

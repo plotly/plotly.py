@@ -411,8 +411,6 @@ class PlotlyNode:
         """
         if self.path_str in CUSTOM_VALIDATOR_DATATYPES:
             validator_base = CUSTOM_VALIDATOR_DATATYPES[self.path_str]
-        elif self.plotly_name.endswith("src") and self.datatype == "string":
-            validator_base = "_plotly_utils.basevalidators.SrcValidator"
         elif self.plotly_name.endswith("dash") and self.datatype == "string":
             validator_base = "_plotly_utils.basevalidators.DashValidator"
         elif self.plotly_name == "title" and self.datatype == "compound":

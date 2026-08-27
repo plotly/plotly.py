@@ -49,7 +49,9 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     Examples should use ``plotly.io.show()`` (or the equivalent
     ``fig.show()``) to display the figure with the custom
     ``sphinx_gallery_png`` renderer, which is made the default renderer as a
-    side effect of importing this module.
+    side effect of importing this module. Parallel builds on sphinx-gallery
+    0.21 and earlier also need :func:`reset_renderer`, since their worker
+    processes never import it.
 
     Every figure shown that way is embedded in the page as interactive HTML,
     and written to the gallery image directory as a static image, which
@@ -119,6 +121,49 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     finally:
         # Don't let figures leak into the next block if writing one failed.
         del sphinx_gallery_figures[:]
+
+
+def reset_renderer(gallery_conf, fname, *, when=None):
+    """Select the ``sphinx_gallery_png`` renderer, as a sphinx-gallery resetter.
+
+    Importing this module selects that renderer too, but the worker processes
+    of a parallel build never import it: ``conf.py`` is read only in the
+    parent process, and ``image_scrapers=("plotly",)`` reaches a worker as a
+    plain string that sphinx-gallery resolves only after the example has run.
+    The example therefore executes with the default ``browser`` renderer,
+    whose ``fig.show()`` serves the figure from a local web server and waits
+    for a browser that a worker does not have, hanging the build.
+
+    Naming this function in ``reset_modules`` runs it in every worker, before
+    each example::
+
+        sphinx_gallery_conf = {
+            ...
+            "image_scrapers": ("plotly",),
+            "reset_modules": ("matplotlib", "plotly.io._sg_scraper.reset_renderer"),
+        }
+
+    Passing it by name rather than importing it keeps ``sphinx_gallery_conf``
+    picklable, which Sphinx needs in order to cache the environment.
+
+    Up to and including sphinx-gallery 0.21, ``image_scrapers`` is resolved
+    only after an example has run, which is what makes this necessary. From
+    0.22 it is resolved beforehand and selects the renderer itself, so this
+    resetter is redundant there -- but harmless, and still worth configuring
+    if the documentation is also built against older sphinx-gallery.
+
+    Parameters
+    ----------
+    gallery_conf : dict
+        Contains the configuration of Sphinx-Gallery (unused).
+    fname : str
+        Name of the example file about to be executed (unused).
+    when : str or None
+        Whether sphinx-gallery is resetting before or after the example
+        (unused). Sphinx-gallery passes it by keyword, and only to resetters
+        that accept it.
+    """
+    plotly.io.renderers.default = "sphinx_gallery_png"
 
 
 def _trailing_repr_figure(block, block_vars):

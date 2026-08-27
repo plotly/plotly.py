@@ -33,7 +33,6 @@ class Shape(_BaseLayoutHierarchyType):
         "x1shift",
         "xanchor",
         "xref",
-        "xrefsrc",
         "xsizemode",
         "y0",
         "y0shift",
@@ -41,7 +40,6 @@ class Shape(_BaseLayoutHierarchyType):
         "y1shift",
         "yanchor",
         "yref",
-        "yrefsrc",
         "ysizemode",
     }
 
@@ -71,12 +69,18 @@ class Shape(_BaseLayoutHierarchyType):
         Sets the color filling the shape's interior. Only applies to
         closed shapes.
 
-        The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'fillcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
 
         Returns
         -------
@@ -558,7 +562,7 @@ class Shape(_BaseLayoutHierarchyType):
         by "domain" (separated by a space), the position behaves like
         for "paper", but refers to the distance in fractions of the
         domain length from the left of the domain of that axis: e.g.,
-        *x2 domain* refers to the domain of the second x  axis and a x
+        *x2 domain* refers to the domain of the second x axis and a x
         position of 0.5 refers to the point between the left and the
         right of the domain of the second x axis. If an array of axis
         IDs is provided, each `x` value will refer to the corresponding
@@ -583,24 +587,6 @@ class Shape(_BaseLayoutHierarchyType):
     @xref.setter
     def xref(self, val):
         self["xref"] = val
-
-    @property
-    def xrefsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `xref`.
-
-        The 'xrefsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xrefsrc"]
-
-    @xrefsrc.setter
-    def xrefsrc(self, val):
-        self["xrefsrc"] = val
 
     @property
     def xsizemode(self):
@@ -740,7 +726,7 @@ class Shape(_BaseLayoutHierarchyType):
         behaves like for "paper", but refers to the distance in
         fractions of the domain length from the bottom of the domain of
         that axis: e.g., *y2 domain* refers to the domain of the second
-        y  axis and a y position of 0.5 refers to the point between the
+        y axis and a y position of 0.5 refers to the point between the
         bottom and the top of the domain of the second y axis. If an
         array of axis IDs is provided, each `y` value will refer to the
         corresponding axis, e.g., ['y', 'y2'] for a rectangle, line, or
@@ -764,24 +750,6 @@ class Shape(_BaseLayoutHierarchyType):
     @yref.setter
     def yref(self, val):
         self["yref"] = val
-
-    @property
-    def yrefsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `yref`.
-
-        The 'yrefsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["yrefsrc"]
-
-    @yrefsrc.setter
-    def yrefsrc(self, val):
-        self["yrefsrc"] = val
 
     @property
     def ysizemode(self):
@@ -961,7 +929,7 @@ class Shape(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis. If an array of axis
             IDs is provided, each `x` value will refer to the
@@ -969,9 +937,6 @@ class Shape(_BaseLayoutHierarchyType):
             line, or circle means `x0` uses the `x` axis and `x1`
             uses the `x2` axis. Path shapes using an array should
             have one entry for each x coordinate in the string.
-        xrefsrc
-            Sets the source reference on Chart Studio Cloud for
-            `xref`.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -1018,7 +983,7 @@ class Shape(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis. If an array of axis
             IDs is provided, each `y` value will refer to the
@@ -1026,9 +991,6 @@ class Shape(_BaseLayoutHierarchyType):
             line, or circle means `y0` uses the `y` axis and `y1`
             uses the `y2` axis. Path shapes using an array should
             have one entry for each y coordinate in the string.
-        yrefsrc
-            Sets the source reference on Chart Studio Cloud for
-            `yref`.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
@@ -1070,7 +1032,6 @@ class Shape(_BaseLayoutHierarchyType):
         x1shift=None,
         xanchor=None,
         xref=None,
-        xrefsrc=None,
         xsizemode=None,
         y0=None,
         y0shift=None,
@@ -1078,7 +1039,6 @@ class Shape(_BaseLayoutHierarchyType):
         y1shift=None,
         yanchor=None,
         yref=None,
-        yrefsrc=None,
         ysizemode=None,
         **kwargs,
     ):
@@ -1238,7 +1198,7 @@ class Shape(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis. If an array of axis
             IDs is provided, each `x` value will refer to the
@@ -1246,9 +1206,6 @@ class Shape(_BaseLayoutHierarchyType):
             line, or circle means `x0` uses the `x` axis and `x1`
             uses the `x2` axis. Path shapes using an array should
             have one entry for each x coordinate in the string.
-        xrefsrc
-            Sets the source reference on Chart Studio Cloud for
-            `xref`.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -1295,7 +1252,7 @@ class Shape(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis. If an array of axis
             IDs is provided, each `y` value will refer to the
@@ -1303,9 +1260,6 @@ class Shape(_BaseLayoutHierarchyType):
             line, or circle means `y0` uses the `y` axis and `y1`
             uses the `y2` axis. Path shapes using an array should
             have one entry for each y coordinate in the string.
-        yrefsrc
-            Sets the source reference on Chart Studio Cloud for
-            `yref`.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
@@ -1367,7 +1321,6 @@ an instance of :class:`plotly.graph_objs.layout.Shape`""")
         self._set_property("x1shift", arg, x1shift)
         self._set_property("xanchor", arg, xanchor)
         self._set_property("xref", arg, xref)
-        self._set_property("xrefsrc", arg, xrefsrc)
         self._set_property("xsizemode", arg, xsizemode)
         self._set_property("y0", arg, y0)
         self._set_property("y0shift", arg, y0shift)
@@ -1375,7 +1328,6 @@ an instance of :class:`plotly.graph_objs.layout.Shape`""")
         self._set_property("y1shift", arg, y1shift)
         self._set_property("yanchor", arg, yanchor)
         self._set_property("yref", arg, yref)
-        self._set_property("yrefsrc", arg, yrefsrc)
         self._set_property("ysizemode", arg, ysizemode)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

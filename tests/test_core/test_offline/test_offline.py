@@ -45,13 +45,9 @@ cdn_script = '<script charset="utf-8" src="{cdn_url}" integrity="{js_hash}" cros
 directory_script = '<script charset="utf-8" src="plotly.min.js"></script>'
 
 
-mathjax_cdn = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+mathjax_cdn = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"
 
-mathjax_config_str = "?config=TeX-AMS-MML_SVG"
-
-mathjax_cdn_script = '<script src="{cdn}{config}"></script>'.format(
-    cdn=mathjax_cdn, config=mathjax_config_str
-)
+mathjax_cdn_script = f'<script src="{mathjax_cdn}"></script>'
 
 mathjax_font = "STIX-Web"
 
@@ -281,14 +277,12 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertTrue(html.startswith("<div") and html.endswith("</div>"))
 
     def test_config(self):
-        config = dict(linkText="Plotly rocks!", showLink=True, editable=True)
+        config = dict(editable=True)
         html = self._read_html(
             plotly.offline.plot(
                 fig, config=config, auto_open=False, filename=html_filename
             )
         )
-        self.assertIn('"linkText": "Plotly rocks!"', html)
-        self.assertIn('"showLink": true', html)
         self.assertIn('"editable": true', html)
 
     def test_config_bad_options(self):
@@ -371,7 +365,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)
         self.assertIn(PLOTLYJS, html)
         self.assertNotIn(mathjax_cdn_script, html)
-        self.assertIn(other_cdn + mathjax_config_str, html)
+        self.assertIn(other_cdn, html)
         self.assertIn(mathjax_font, html)
 
     def test_include_mathjax_path_div(self):
@@ -381,7 +375,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)
         self.assertIn(PLOTLYJS, html)
         self.assertNotIn(mathjax_cdn_script, html)
-        self.assertIn(other_cdn + mathjax_config_str, html)
+        self.assertIn(other_cdn, html)
         self.assertIn(mathjax_font, html)
 
     def test_auto_play(self):

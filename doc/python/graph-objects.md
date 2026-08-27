@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Graph Objects
-    order: 35
+    order: 36
     page_type: u-guide
     permalink: python/graph-objects/
     thumbnail: thumbnail/horizontal-bar.jpg

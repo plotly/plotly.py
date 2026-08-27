@@ -10,7 +10,6 @@ if TYPE_CHECKING:
     from ._outsidetextfont import Outsidetextfont
     from ._pathbar import Pathbar
     from ._root import Root
-    from ._stream import Stream
     from ._textfont import Textfont
     from ._tiling import Tiling
     from . import hoverlabel
@@ -32,7 +31,6 @@ else:
             "._outsidetextfont.Outsidetextfont",
             "._pathbar.Pathbar",
             "._root.Root",
-            "._stream.Stream",
             "._textfont.Textfont",
             "._tiling.Tiling",
         ],

@@ -10,7 +10,6 @@ if TYPE_CHECKING:
         write_images,
         full_figure_for_development,
     )
-    from . import orca, kaleido
     from . import json
     from ._json import to_json, from_json, read_json, write_json
     from ._templates import templates, to_templated
@@ -23,7 +22,6 @@ if TYPE_CHECKING:
         "to_image",
         "write_image",
         "write_images",
-        "orca",
         "json",
         "to_json",
         "from_json",
@@ -43,7 +41,7 @@ if TYPE_CHECKING:
 else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".orca", ".kaleido", ".json", ".base_renderers"],
+        [".kaleido", ".json", ".base_renderers"],
         [
             "._kaleido.to_image",
             "._kaleido.write_image",

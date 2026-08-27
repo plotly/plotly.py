@@ -299,6 +299,24 @@ def test_image_scrapers_by_name(monkeypatch):
     assert pio.renderers.default == "sphinx_gallery_png"
 
 
+def test_reset_renderer(monkeypatch):
+    """The resetter selects the renderer without importing the scraper.
+
+    A parallel build's worker processes never import this module, so on
+    sphinx-gallery 0.21 and earlier the renderer has to be selected through
+    `reset_modules`.
+    """
+    from sphinx_gallery.scrapers import clean_modules
+
+    monkeypatch.setattr(pio.renderers, "default", "browser")
+    # By name, so that sphinx_gallery_conf stays picklable
+    conf = {"reset_modules": ("plotly.io._sg_scraper.reset_renderer",)}
+    # Let sphinx-gallery resolve and call it, so that the signature it
+    # dispatches on is covered as well
+    clean_modules(conf, "plot_example.py", "before")
+    assert pio.renderers.default == "sphinx_gallery_png"
+
+
 def test_import_sets_default_renderer(monkeypatch):
     """Importing the scraper selects the renderer that it knows how to scrape."""
     monkeypatch.setattr(pio.renderers, "default", "browser")

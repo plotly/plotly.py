@@ -3,7 +3,6 @@
 
 from plotly.basedatatypes import BaseTraceType as _BaseTraceType
 import copy as _copy
-import warnings
 
 
 class Choropleth(_BaseTraceType):
@@ -15,20 +14,15 @@ class Choropleth(_BaseTraceType):
         "colorbar",
         "colorscale",
         "customdata",
-        "customdatasrc",
         "featureidkey",
         "geo",
         "geojson",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -36,19 +30,15 @@ class Choropleth(_BaseTraceType):
         "legendwidth",
         "locationmode",
         "locations",
-        "locationssrc",
         "marker",
         "meta",
-        "metasrc",
         "name",
         "reversescale",
         "selected",
         "selectedpoints",
         "showlegend",
         "showscale",
-        "stream",
         "text",
-        "textsrc",
         "type",
         "uid",
         "uirevision",
@@ -59,7 +49,6 @@ class Choropleth(_BaseTraceType):
         "zmax",
         "zmid",
         "zmin",
-        "zsrc",
     }
 
     @property
@@ -134,7 +123,7 @@ class Choropleth(_BaseTraceType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `zmin` and `zmax`.
@@ -200,25 +189,6 @@ class Choropleth(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def featureidkey(self):
@@ -289,7 +259,7 @@ class Choropleth(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -309,25 +279,6 @@ class Choropleth(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -415,25 +366,6 @@ class Choropleth(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Same as `text`.
@@ -454,25 +386,6 @@ class Choropleth(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -491,24 +404,6 @@ class Choropleth(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -620,16 +515,13 @@ class Choropleth(_BaseTraceType):
     @property
     def locationmode(self):
         """
-        The library used by the *country names* `locationmode` option
-        is changing in an upcoming version. Country names in existing
-        plots may not work in the new version. Determines the set of
-        locations used to match entries in `locations` to regions on
-        the map. Values "ISO-3", "USA-states", *country names*
-        correspond to features on the base map and value "geojson-id"
-        corresponds to features from a custom GeoJSON linked to the
-        `geojson` attribute. "USA-states" accepts both two-letter
-        abbreviations (e.g. "CA") and full state names (e.g.
-        "California").
+        Determines the set of locations used to match entries in
+        `locations` to regions on the map. Values "ISO-3", "USA-
+        states", *country names* correspond to features on the base map
+        and value "geojson-id" corresponds to features from a custom
+        GeoJSON linked to the `geojson` attribute. "USA-states" accepts
+        both two-letter abbreviations (e.g. "CA") and full state names
+        (e.g. "California").
 
         The 'locationmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -663,25 +555,6 @@ class Choropleth(_BaseTraceType):
     @locations.setter
     def locations(self, val):
         self["locations"] = val
-
-    @property
-    def locationssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `locations`.
-
-        The 'locationssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["locationssrc"]
-
-    @locationssrc.setter
-    def locationssrc(self, val):
-        self["locationssrc"] = val
 
     @property
     def marker(self):
@@ -727,24 +600,6 @@ class Choropleth(_BaseTraceType):
     @meta.setter
     def meta(self, val):
         self["meta"] = val
-
-    @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
 
     @property
     def name(self):
@@ -866,25 +721,6 @@ class Choropleth(_BaseTraceType):
         self["showscale"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.choropleth.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.choropleth.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets the text elements associated with each location.
@@ -903,24 +739,6 @@ class Choropleth(_BaseTraceType):
     @text.setter
     def text(self, val):
         self["text"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -1111,24 +929,6 @@ class Choropleth(_BaseTraceType):
         self["zmin"] = val
 
     @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
-
-    @property
     def type(self):
         return self._props["type"]
 
@@ -1155,23 +955,20 @@ class Choropleth(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -1191,13 +988,10 @@ class Choropleth(_BaseTraceType):
             "FeatureCollection" or "Feature" with geometries of
             type "Polygon" or "MultiPolygon".
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.choropleth.Hoverlabel`
             instance or dict with compatible properties
@@ -1240,21 +1034,12 @@ class Choropleth(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1283,23 +1068,17 @@ class Choropleth(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         locationmode
-            The library used by the *country names* `locationmode`
-            option is changing in an upcoming version. Country
-            names in existing plots may not work in the new
-            version. Determines the set of locations used to match
-            entries in `locations` to regions on the map. Values
-            "ISO-3", "USA-states", *country names* correspond to
-            features on the base map and value "geojson-id"
-            corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute. "USA-states" accepts both two-
-            letter abbreviations (e.g. "CA") and full state names
-            (e.g. "California").
+            Determines the set of locations used to match entries
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute. "USA-states" accepts both two-letter
+            abbreviations (e.g. "CA") and full state names (e.g.
+            "California").
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         marker
             :class:`plotly.graph_objects.choropleth.Marker`
             instance or dict with compatible properties
@@ -1316,9 +1095,6 @@ class Choropleth(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1342,14 +1118,8 @@ class Choropleth(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.choropleth.Stream`
-            instance or dict with compatible properties
         text
             Sets the text elements associated with each location.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1400,9 +1170,6 @@ class Choropleth(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -1413,20 +1180,15 @@ class Choropleth(_BaseTraceType):
         colorbar=None,
         colorscale=None,
         customdata=None,
-        customdatasrc=None,
         featureidkey=None,
         geo=None,
         geojson=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -1434,19 +1196,15 @@ class Choropleth(_BaseTraceType):
         legendwidth=None,
         locationmode=None,
         locations=None,
-        locationssrc=None,
         marker=None,
         meta=None,
-        metasrc=None,
         name=None,
         reversescale=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -1456,7 +1214,6 @@ class Choropleth(_BaseTraceType):
         zmax=None,
         zmid=None,
         zmin=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -1491,23 +1248,20 @@ class Choropleth(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         featureidkey
             Sets the key in GeoJSON features which is used as id to
             match the items included in the `locations` array. Only
@@ -1527,13 +1281,10 @@ class Choropleth(_BaseTraceType):
             "FeatureCollection" or "Feature" with geometries of
             type "Polygon" or "MultiPolygon".
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.choropleth.Hoverlabel`
             instance or dict with compatible properties
@@ -1576,21 +1327,12 @@ class Choropleth(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1619,23 +1361,17 @@ class Choropleth(_BaseTraceType):
             Sets the width (in px or fraction) of the legend for
             this trace.
         locationmode
-            The library used by the *country names* `locationmode`
-            option is changing in an upcoming version. Country
-            names in existing plots may not work in the new
-            version. Determines the set of locations used to match
-            entries in `locations` to regions on the map. Values
-            "ISO-3", "USA-states", *country names* correspond to
-            features on the base map and value "geojson-id"
-            corresponds to features from a custom GeoJSON linked to
-            the `geojson` attribute. "USA-states" accepts both two-
-            letter abbreviations (e.g. "CA") and full state names
-            (e.g. "California").
+            Determines the set of locations used to match entries
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute. "USA-states" accepts both two-letter
+            abbreviations (e.g. "CA") and full state names (e.g.
+            "California").
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
-        locationssrc
-            Sets the source reference on Chart Studio Cloud for
-            `locations`.
         marker
             :class:`plotly.graph_objects.choropleth.Marker`
             instance or dict with compatible properties
@@ -1652,9 +1388,6 @@ class Choropleth(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1678,14 +1411,8 @@ class Choropleth(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.choropleth.Stream`
-            instance or dict with compatible properties
         text
             Sets the text elements associated with each location.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1736,9 +1463,6 @@ class Choropleth(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -1761,15 +1485,6 @@ The first argument to the plotly.graph_objs.Choropleth
 constructor must be a dict or
 an instance of :class:`plotly.graph_objs.Choropleth`""")
 
-        if locationmode == "country names" and kwargs.get("_validate"):
-            warnings.warn(
-                "The library used by the *country names* `locationmode` option is changing in an upcoming version. "
-                "Country names in existing plots may not work in the new version. "
-                "To ensure consistent behavior, consider setting `locationmode` to *ISO-3*.",
-                DeprecationWarning,
-                stacklevel=5,
-            )
-
         self._skip_invalid = kwargs.pop("skip_invalid", False)
         self._validate = kwargs.pop("_validate", True)
 
@@ -1778,20 +1493,15 @@ an instance of :class:`plotly.graph_objs.Choropleth`""")
         self._set_property("colorbar", arg, colorbar)
         self._set_property("colorscale", arg, colorscale)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("featureidkey", arg, featureidkey)
         self._set_property("geo", arg, geo)
         self._set_property("geojson", arg, geojson)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -1799,19 +1509,15 @@ an instance of :class:`plotly.graph_objs.Choropleth`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("locationmode", arg, locationmode)
         self._set_property("locations", arg, locations)
-        self._set_property("locationssrc", arg, locationssrc)
         self._set_property("marker", arg, marker)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("selected", arg, selected)
         self._set_property("selectedpoints", arg, selectedpoints)
         self._set_property("showlegend", arg, showlegend)
         self._set_property("showscale", arg, showscale)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("unselected", arg, unselected)
@@ -1821,7 +1527,6 @@ an instance of :class:`plotly.graph_objs.Choropleth`""")
         self._set_property("zmax", arg, zmax)
         self._set_property("zmid", arg, zmid)
         self._set_property("zmin", arg, zmin)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "choropleth"
         arg.pop("type", None)

@@ -18,7 +18,6 @@ class Marker(_BaseTraceHierarchyType):
         "colorbar",
         "colors",
         "colorscale",
-        "colorssrc",
         "line",
         "pattern",
         "reversescale",
@@ -202,7 +201,7 @@ class Marker(_BaseTraceHierarchyType):
         Sets the colorscale. Has an effect only if colors is set to a
         numerical array. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `marker.cmin` and
@@ -247,24 +246,6 @@ class Marker(_BaseTraceHierarchyType):
     @colorscale.setter
     def colorscale(self, val):
         self["colorscale"] = val
-
-    @property
-    def colorssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `colors`.
-
-        The 'colorssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorssrc"]
-
-    @colorssrc.setter
-    def colorssrc(self, val):
-        self["colorssrc"] = val
 
     @property
     def line(self):
@@ -400,9 +381,9 @@ class Marker(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if colors is
             set to a numerical array. The colorscale must be an
             array containing arrays mapping a normalized value to
-            an rgb, rgba, hex, hsl, hsv, or named color string. At
-            minimum, a mapping for the lowest (0) and highest (1)
-            values are required. For example, `[[0,
+            an rgb, rgba, hex, hsl, hsla, hwb, or named color
+            string. At minimum, a mapping for the lowest (0) and
+            highest (1) values are required. For example, `[[0,
             'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
             bounds of the colorscale in color space, use
             `marker.cmin` and `marker.cmax`. Alternatively,
@@ -410,9 +391,6 @@ class Marker(_BaseTraceHierarchyType):
             following list: Blackbody,Bluered,Blues,Cividis,Earth,E
             lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorssrc
-            Sets the source reference on Chart Studio Cloud for
-            `colors`.
         line
             :class:`plotly.graph_objects.icicle.marker.Line`
             instance or dict with compatible properties
@@ -442,7 +420,6 @@ class Marker(_BaseTraceHierarchyType):
         colorbar=None,
         colors=None,
         colorscale=None,
-        colorssrc=None,
         line=None,
         pattern=None,
         reversescale=None,
@@ -507,9 +484,9 @@ class Marker(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if colors is
             set to a numerical array. The colorscale must be an
             array containing arrays mapping a normalized value to
-            an rgb, rgba, hex, hsl, hsv, or named color string. At
-            minimum, a mapping for the lowest (0) and highest (1)
-            values are required. For example, `[[0,
+            an rgb, rgba, hex, hsl, hsla, hwb, or named color
+            string. At minimum, a mapping for the lowest (0) and
+            highest (1) values are required. For example, `[[0,
             'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
             bounds of the colorscale in color space, use
             `marker.cmin` and `marker.cmax`. Alternatively,
@@ -517,9 +494,6 @@ class Marker(_BaseTraceHierarchyType):
             following list: Blackbody,Bluered,Blues,Cividis,Earth,E
             lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorssrc
-            Sets the source reference on Chart Studio Cloud for
-            `colors`.
         line
             :class:`plotly.graph_objects.icicle.marker.Line`
             instance or dict with compatible properties
@@ -569,7 +543,6 @@ an instance of :class:`plotly.graph_objs.icicle.Marker`""")
         self._set_property("colorbar", arg, colorbar)
         self._set_property("colors", arg, colors)
         self._set_property("colorscale", arg, colorscale)
-        self._set_property("colorssrc", arg, colorssrc)
         self._set_property("line", arg, line)
         self._set_property("pattern", arg, pattern)
         self._set_property("reversescale", arg, reversescale)

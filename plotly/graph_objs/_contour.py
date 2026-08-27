@@ -17,21 +17,16 @@ class Contour(_BaseTraceType):
         "connectgaps",
         "contours",
         "customdata",
-        "customdatasrc",
         "dx",
         "dy",
         "fillcolor",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hoverongaps",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "legend",
         "legendgroup",
         "legendgrouptitle",
@@ -39,17 +34,14 @@ class Contour(_BaseTraceType):
         "legendwidth",
         "line",
         "meta",
-        "metasrc",
         "name",
         "ncontours",
         "opacity",
         "reversescale",
         "showlegend",
         "showscale",
-        "stream",
         "text",
         "textfont",
-        "textsrc",
         "texttemplate",
         "texttemplatefallback",
         "transpose",
@@ -65,7 +57,6 @@ class Contour(_BaseTraceType):
         "xperiod",
         "xperiod0",
         "xperiodalignment",
-        "xsrc",
         "xtype",
         "y",
         "y0",
@@ -75,7 +66,6 @@ class Contour(_BaseTraceType):
         "yperiod",
         "yperiod0",
         "yperiodalignment",
-        "ysrc",
         "ytype",
         "z",
         "zauto",
@@ -84,7 +74,6 @@ class Contour(_BaseTraceType):
         "zmid",
         "zmin",
         "zorder",
-        "zsrc",
     }
 
     @property
@@ -180,7 +169,7 @@ class Contour(_BaseTraceType):
         """
         Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
-        hsv, or named color string. At minimum, a mapping for the
+        hsla, hwb, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use `zmin` and `zmax`.
@@ -287,25 +276,6 @@ class Contour(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def dx(self):
         """
         Sets the x coordinate step. See `x0` for more info.
@@ -348,12 +318,18 @@ class Contour(_BaseTraceType):
         Defaults to a half-transparent variant of the line color,
         marker color, or marker line color, whichever is available.
 
-        The 'fillcolor' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'fillcolor' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A number that will be interpreted as a color
             according to contour.colorscale
 
@@ -370,7 +346,7 @@ class Contour(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -390,25 +366,6 @@ class Contour(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -515,25 +472,6 @@ class Contour(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Same as `text`.
@@ -550,25 +488,6 @@ class Contour(_BaseTraceType):
     @hovertext.setter
     def hovertext(self, val):
         self["hovertext"] = val
-
-    @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
 
     @property
     def ids(self):
@@ -589,24 +508,6 @@ class Contour(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def legend(self):
@@ -761,24 +662,6 @@ class Contour(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -897,25 +780,6 @@ class Contour(_BaseTraceType):
         self["showscale"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.contour.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.contour.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets the text elements associated with each z value.
@@ -954,24 +818,6 @@ class Contour(_BaseTraceType):
     @textfont.setter
     def textfont(self, val):
         self["textfont"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def texttemplate(self):
@@ -1204,7 +1050,7 @@ class Contour(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1290,24 +1136,6 @@ class Contour(_BaseTraceType):
     @xperiodalignment.setter
     def xperiodalignment(self, val):
         self["xperiodalignment"] = val
-
-    @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
 
     @property
     def xtype(self):
@@ -1416,7 +1244,7 @@ class Contour(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1504,24 +1332,6 @@ class Contour(_BaseTraceType):
         self["yperiodalignment"] = val
 
     @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
-
-    @property
     def ytype(self):
         """
         If "array", the heatmap's y coordinates are given by "y" (the
@@ -1585,7 +1395,7 @@ class Contour(_BaseTraceType):
     @property
     def zhoverformat(self):
         """
-        Sets the hover text formatting rulefor `z`  using d3 formatting
+        Sets the hover text formatting rule for `z` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format.By
@@ -1684,24 +1494,6 @@ class Contour(_BaseTraceType):
         self["zorder"] = val
 
     @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
-
-    @property
     def type(self):
         return self._props["type"]
 
@@ -1733,15 +1525,15 @@ class Contour(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in. It is defaulted
@@ -1755,9 +1547,6 @@ class Contour(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -1768,13 +1557,10 @@ class Contour(_BaseTraceType):
             color, marker color, or marker line color, whichever is
             available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.contour.Hoverlabel`
             instance or dict with compatible properties
@@ -1821,21 +1607,12 @@ class Contour(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -1879,9 +1656,6 @@ class Contour(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1903,17 +1677,11 @@ class Contour(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.contour.Stream` instance
-            or dict with compatible properties
         text
             Sets the text elements associated with each z value.
         textfont
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Sets the text font.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
@@ -1985,7 +1753,7 @@ class Contour(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2013,9 +1781,6 @@ class Contour(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -2036,7 +1801,7 @@ class Contour(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2064,9 +1829,6 @@ class Contour(_BaseTraceType):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -2081,7 +1843,7 @@ class Contour(_BaseTraceType):
             bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -2104,9 +1866,6 @@ class Contour(_BaseTraceType):
             relative to other SVG traces on the same subplot. SVG
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
     def __init__(
@@ -2120,21 +1879,16 @@ class Contour(_BaseTraceType):
         connectgaps=None,
         contours=None,
         customdata=None,
-        customdatasrc=None,
         dx=None,
         dy=None,
         fillcolor=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hoverongaps=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         legend=None,
         legendgroup=None,
         legendgrouptitle=None,
@@ -2142,17 +1896,14 @@ class Contour(_BaseTraceType):
         legendwidth=None,
         line=None,
         meta=None,
-        metasrc=None,
         name=None,
         ncontours=None,
         opacity=None,
         reversescale=None,
         showlegend=None,
         showscale=None,
-        stream=None,
         text=None,
         textfont=None,
-        textsrc=None,
         texttemplate=None,
         texttemplatefallback=None,
         transpose=None,
@@ -2167,7 +1918,6 @@ class Contour(_BaseTraceType):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         xtype=None,
         y=None,
         y0=None,
@@ -2177,7 +1927,6 @@ class Contour(_BaseTraceType):
         yperiod=None,
         yperiod0=None,
         yperiodalignment=None,
-        ysrc=None,
         ytype=None,
         z=None,
         zauto=None,
@@ -2186,7 +1935,6 @@ class Contour(_BaseTraceType):
         zmid=None,
         zmin=None,
         zorder=None,
-        zsrc=None,
         **kwargs,
     ):
         """
@@ -2230,15 +1978,15 @@ class Contour(_BaseTraceType):
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
-            rgba, hex, hsl, hsv, or named color string. At minimum,
-            a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)'], [1,
-            'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `zmin` and `zmax`.
-            Alternatively, `colorscale` may be a palette name
-            string of the following list: Blackbody,Bluered,Blues,C
-            ividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,Portl
-            and,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
+            rgba, hex, hsl, hsla, hwb, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0,
+            'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
+            bounds of the colorscale in color space, use `zmin` and
+            `zmax`. Alternatively, `colorscale` may be a palette
+            name string of the following list: Blackbody,Bluered,Bl
+            ues,Cividis,Earth,Electric,Greens,Greys,Hot,Jet,Picnic,
+            Portland,Rainbow,RdBu,Reds,Viridis,YlGnBu,YlOrRd.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in. It is defaulted
@@ -2252,9 +2000,6 @@ class Contour(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -2265,13 +2010,10 @@ class Contour(_BaseTraceType):
             color, marker color, or marker line color, whichever is
             available.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.contour.Hoverlabel`
             instance or dict with compatible properties
@@ -2318,21 +2060,12 @@ class Contour(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         legend
             Sets the reference to a legend to show this trace in.
             References to these legends are "legend", "legend2",
@@ -2376,9 +2109,6 @@ class Contour(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -2400,17 +2130,11 @@ class Contour(_BaseTraceType):
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
-        stream
-            :class:`plotly.graph_objects.contour.Stream` instance
-            or dict with compatible properties
         text
             Sets the text elements associated with each z value.
         textfont
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Sets the text font.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         texttemplate
             For this trace it only has an effect if `coloring` is
             set to "heatmap". Template string used for rendering
@@ -2482,7 +2206,7 @@ class Contour(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2510,9 +2234,6 @@ class Contour(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         xtype
             If "array", the heatmap's x coordinates are given by
             "x" (the default behavior when `x` is provided). If
@@ -2533,7 +2254,7 @@ class Contour(_BaseTraceType):
         ycalendar
             Sets the calendar system to use with `y` date data.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -2561,9 +2282,6 @@ class Contour(_BaseTraceType):
         yperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the y axis.
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         ytype
             If "array", the heatmap's y coordinates are given by
             "y" (the default behavior when `y` is provided) If
@@ -2578,7 +2296,7 @@ class Contour(_BaseTraceType):
             bounds set in `zmin` and `zmax` Defaults to `false`
             when `zmin` and `zmax` are set by the user.
         zhoverformat
-            Sets the hover text formatting rulefor `z`  using d3
+            Sets the hover text formatting rule for `z` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see: https://github.com/d
             3/d3-format/tree/v1.4.5#d3-format.By default the values
@@ -2601,9 +2319,6 @@ class Contour(_BaseTraceType):
             relative to other SVG traces on the same subplot. SVG
             traces with higher `zorder` appear in front of those
             with lower `zorder`.
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -2637,21 +2352,16 @@ an instance of :class:`plotly.graph_objs.Contour`""")
         self._set_property("connectgaps", arg, connectgaps)
         self._set_property("contours", arg, contours)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("dx", arg, dx)
         self._set_property("dy", arg, dy)
         self._set_property("fillcolor", arg, fillcolor)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hoverongaps", arg, hoverongaps)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -2659,17 +2369,14 @@ an instance of :class:`plotly.graph_objs.Contour`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("line", arg, line)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("ncontours", arg, ncontours)
         self._set_property("opacity", arg, opacity)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("showlegend", arg, showlegend)
         self._set_property("showscale", arg, showscale)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
         self._set_property("textfont", arg, textfont)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("texttemplate", arg, texttemplate)
         self._set_property("texttemplatefallback", arg, texttemplatefallback)
         self._set_property("transpose", arg, transpose)
@@ -2684,7 +2391,6 @@ an instance of :class:`plotly.graph_objs.Contour`""")
         self._set_property("xperiod", arg, xperiod)
         self._set_property("xperiod0", arg, xperiod0)
         self._set_property("xperiodalignment", arg, xperiodalignment)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("xtype", arg, xtype)
         self._set_property("y", arg, y)
         self._set_property("y0", arg, y0)
@@ -2694,7 +2400,6 @@ an instance of :class:`plotly.graph_objs.Contour`""")
         self._set_property("yperiod", arg, yperiod)
         self._set_property("yperiod0", arg, yperiod0)
         self._set_property("yperiodalignment", arg, yperiodalignment)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("ytype", arg, ytype)
         self._set_property("z", arg, z)
         self._set_property("zauto", arg, zauto)
@@ -2703,7 +2408,6 @@ an instance of :class:`plotly.graph_objs.Contour`""")
         self._set_property("zmid", arg, zmid)
         self._set_property("zmin", arg, zmin)
         self._set_property("zorder", arg, zorder)
-        self._set_property("zsrc", arg, zsrc)
 
         self._props["type"] = "contour"
         arg.pop("type", None)

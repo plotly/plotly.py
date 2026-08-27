@@ -7,7 +7,6 @@ if TYPE_CHECKING:
     from ._gauge import Gauge
     from ._legendgrouptitle import Legendgrouptitle
     from ._number import Number
-    from ._stream import Stream
     from ._title import Title
     from . import delta
     from . import gauge
@@ -26,7 +25,6 @@ else:
             "._gauge.Gauge",
             "._legendgrouptitle.Legendgrouptitle",
             "._number.Number",
-            "._stream.Stream",
             "._title.Title",
         ],
     )

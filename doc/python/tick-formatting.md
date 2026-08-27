@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Formatting Ticks
-    order: 12
+    order: 13
     permalink: python/tick-formatting/
     thumbnail: thumbnail/tick-formatting.gif
 ---
