@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Support `marginal_x`/`marginal_y="heatmap"` in `density_heatmap`, drawing a single-row/column heatmap strip in the margin colored by the same `z`/`histfunc` aggregate as the main plot and sharing its color scale [[#5706](https://github.com/plotly/plotly.py/issues/5706)], with thanks to @lucasjamar for the contribution!
 
+### Fixed
+- Fix `FigureWidget` state synchronization bug where frontend modifications to array properties (like `layout.shapes`) failed to properly update the Python property cache and occasionally surfaced `Undefined` objects [[#5689](https://github.com/plotly/plotly.py/issues/5689)]
+
 ## [7.0.0] - 2026-08-25
 
 ### Fixed
