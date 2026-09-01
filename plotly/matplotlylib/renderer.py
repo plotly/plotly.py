@@ -85,10 +85,11 @@ class PlotlyRenderer(Renderer):
         """Create a plotly polar layout object for a matplotlib polar axes.
 
         matplotlib polar data coordinates are (theta, r) with theta in
-        radians measured from the positive x-axis (east). Plotly polar
-        angles are in degrees measured from 12 o'clock, so the angular
-        axis rotation and direction are set to map the two systems onto
-        each other.
+        radians measured from the positive x-axis (east). Plotly angular
+        values are in degrees, with the rotation property setting the
+        position of angular value 0 and direction setting the direction
+        of positive angles, so both are taken from the matplotlib axes
+        to map the two coordinate systems onto each other.
         """
         self.polar_ct += 1
         self.current_polar_subplot = (
@@ -98,8 +99,10 @@ class PlotlyRenderer(Renderer):
         theta_direction = ax.get_theta_direction()
         self.plotly_fig["layout"][self.current_polar_subplot] = go.layout.Polar(
             angularaxis=dict(
-                rotation=90 - float(np.degrees(theta_offset)),
-                direction=("clockwise" if theta_direction >= 0 else "counterclockwise"),
+                rotation=float(np.degrees(theta_offset)),
+                direction=(
+                    "counterclockwise" if theta_direction >= 0 else "clockwise"
+                ),
                 tickvals=[float(t) for t in np.degrees(ax.xaxis.get_majorticklocs())],
                 ticktext=[t.get_text() for t in ax.xaxis.get_majorticklabels()],
             ),

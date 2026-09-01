@@ -349,8 +349,8 @@ def test_polar_plot_converts():
     assert np.allclose(trace.r[0], 1)
     assert np.allclose(trace.theta[-1], 360)
     polar = plotly_fig.layout.polar
-    assert polar.angularaxis.direction == "clockwise"
-    assert polar.angularaxis.rotation == 90
+    assert polar.angularaxis.direction == "counterclockwise"
+    assert polar.angularaxis.rotation == 0
     assert polar.angularaxis.ticktext[0] == "0°"
     assert polar.radialaxis.range == tuple(float(v) for v in ax.get_ylim())
 
