@@ -353,6 +353,12 @@ def test_polar_plot_converts():
     assert polar.angularaxis.rotation == 0
     assert polar.angularaxis.ticktext[0] == "0°"
     assert polar.radialaxis.range == tuple(float(v) for v in ax.get_ylim())
+    assert polar.bgcolor == "#FFFFFF"
+    assert polar.angularaxis.gridcolor == "#b0b0b0"
+    assert polar.radialaxis.gridcolor == "#b0b0b0"
+    assert polar.angularaxis.linecolor == "#000000"
+    assert polar.angularaxis.linewidth == 0.8
+    assert polar.radialaxis.showline is False
 
 
 def test_custom_date_xtickvals_given_as_numbers_are_converted():

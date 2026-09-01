@@ -81,7 +81,7 @@ class PlotlyRenderer(Renderer):
             x = mpltools.mpl_dates_to_datestrings(x, formatter)
         return x
 
-    def _open_polar_axes(self, ax):
+    def _open_polar_axes(self, ax, props):
         """Create a plotly polar layout object for a matplotlib polar axes.
 
         matplotlib polar data coordinates are (theta, r) with theta in
@@ -89,7 +89,9 @@ class PlotlyRenderer(Renderer):
         values are in degrees, with the rotation property setting the
         position of angular value 0 and direction setting the direction
         of positive angles, so both are taken from the matplotlib axes
-        to map the two coordinate systems onto each other.
+        to map the two coordinate systems onto each other. Background,
+        grid, and frame colors are taken from the matplotlib axes like
+        they are for cartesian axes.
         """
         self.polar_ct += 1
         self.current_polar_subplot = (
@@ -97,19 +99,43 @@ class PlotlyRenderer(Renderer):
         )
         theta_offset = ax.get_theta_offset()
         theta_direction = ax.get_theta_direction()
+        angular_gridlines = ax.xaxis.get_gridlines()
+        radial_gridlines = ax.yaxis.get_gridlines()
+        angular_grid = (
+            (angular_gridlines[0].get_color(), angular_gridlines[0].get_visible())
+            if len(angular_gridlines)
+            else ("#b0b0b0", True)
+        )
+        radial_grid = (
+            (radial_gridlines[0].get_color(), radial_gridlines[0].get_visible())
+            if len(radial_gridlines)
+            else ("#b0b0b0", True)
+        )
+        frame = ax.spines.get("polar")
         self.plotly_fig["layout"][self.current_polar_subplot] = go.layout.Polar(
+            bgcolor=_export_color(props["axesbg"]),
             angularaxis=dict(
                 rotation=float(np.degrees(theta_offset)),
-                direction=(
-                    "counterclockwise" if theta_direction >= 0 else "clockwise"
-                ),
+                direction=("counterclockwise" if theta_direction >= 0 else "clockwise"),
                 tickvals=[float(t) for t in np.degrees(ax.xaxis.get_majorticklocs())],
                 ticktext=[t.get_text() for t in ax.xaxis.get_majorticklabels()],
+                showgrid=angular_grid[1],
+                gridcolor=_export_color(angular_grid[0]),
+                showline=frame.get_visible() if frame is not None else True,
+                linecolor=(
+                    _export_color(frame.get_edgecolor())
+                    if frame is not None
+                    else "black"
+                ),
+                linewidth=frame.get_linewidth() if frame is not None else 1,
             ),
             radialaxis=dict(
                 range=[float(v) for v in ax.get_ylim()],
                 tickvals=[float(t) for t in ax.yaxis.get_majorticklocs()],
                 ticktext=[t.get_text() for t in ax.yaxis.get_majorticklabels()],
+                showgrid=radial_grid[1],
+                gridcolor=_export_color(radial_grid[0]),
+                showline=False,
             ),
         )
 
@@ -205,7 +231,7 @@ class PlotlyRenderer(Renderer):
         self.current_is_polar = getattr(ax, "name", None) == "polar"
         if self.current_is_polar:
             self.msg += "  Opening polar axes\n"
-            self._open_polar_axes(ax)
+            self._open_polar_axes(ax, props)
             return
         self.axis_ct += 1
         # update plot background with the axes background from mpl
