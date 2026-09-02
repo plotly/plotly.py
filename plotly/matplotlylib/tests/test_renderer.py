@@ -1392,3 +1392,52 @@ def test_mixed_style_lines_group_consecutive_matches():
     else:
         # older matplotlib emits one collection per level
         assert dashes == ["5.55px,2.4px"] * 2 + ["solid"] * 2
+
+
+def test_plot3d_converts():
+    """plot3d converts 3D line plots to scatter3d traces and scene layout."""
+    fig = plt.figure()
+    ax = plt.axes(projection="3d")
+    z = np.linspace(0, 10, 100)
+    ax.plot(z, np.sin(z), np.cos(z), "r--", label="spiral")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    trace = plotly_fig.data[0]
+    assert trace.type == "scatter3d"
+    assert trace.mode == "lines"
+    assert trace.name == "spiral"
+    assert len(trace.x) == 100
+    assert len(trace.y) == 100
+    assert len(trace.z) == 100
+    assert trace.line.dash == "dash"
+
+    assert hasattr(plotly_fig.layout, "scene")
+    scene = plotly_fig.layout.scene
+    assert abs(scene.xaxis.range[0] - ax.get_xlim()[0]) < 1e-5
+    assert abs(scene.xaxis.range[1] - ax.get_xlim()[1]) < 1e-5
+    assert abs(scene.yaxis.range[0] - ax.get_ylim()[0]) < 1e-5
+    assert abs(scene.yaxis.range[1] - ax.get_ylim()[1]) < 1e-5
+    assert abs(scene.zaxis.range[0] - ax.get_zlim()[0]) < 1e-5
+    assert abs(scene.zaxis.range[1] - ax.get_zlim()[1]) < 1e-5
+
+
+def test_plot3d_labels_and_dark_background():
+    """plot3d preserves axis labels and styling under dark_background."""
+    with plt.style.context("dark_background"):
+        fig = plt.figure()
+        ax = plt.axes(projection="3d")
+        ax.set_xlabel("X-Axis")
+        ax.set_ylabel("Y-Axis")
+        ax.set_zlabel("Z-Axis")
+        ax.plot([0, 1], [0, 1], [0, 1])
+
+        plotly_fig = tls.mpl_to_plotly(fig)
+        assert len(plotly_fig.data) == 1
+        assert plotly_fig.data[0].type == "scatter3d"
+        scene = plotly_fig.layout.scene
+        assert scene.xaxis.title.text == "X-Axis"
+        assert scene.yaxis.title.text == "Y-Axis"
+        assert scene.zaxis.title.text == "Z-Axis"
+        assert plotly_fig.layout.paper_bgcolor == "#000000"

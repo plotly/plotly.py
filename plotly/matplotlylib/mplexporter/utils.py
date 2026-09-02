@@ -297,18 +297,26 @@ def get_figure_properties(fig):
 
 
 def get_axes_properties(ax):
+    axes_list = [get_axis_properties(ax.xaxis), get_axis_properties(ax.yaxis)]
+    if hasattr(ax, "zaxis"):
+        axes_list.append(get_axis_properties(ax.zaxis))
     props = {
         "axesbg": export_color(ax.patch.get_facecolor()),
         "axesbgalpha": ax.patch.get_alpha(),
         "bounds": ax.get_position().bounds,
         "dynamic": ax.get_navigate(),
         "axison": ax.axison,
-        "frame_on": ax.get_frame_on(),
+        "frame_on": (
+            ax.get_frame_on() if callable(getattr(ax, "get_frame_on", None)) else True
+        ),
         "patch_visible": ax.patch.get_visible(),
-        "axes": [get_axis_properties(ax.xaxis), get_axis_properties(ax.yaxis)],
+        "axes": axes_list,
     }
 
-    for axname in ["x", "y"]:
+    axnames = ["x", "y"]
+    if hasattr(ax, "zaxis"):
+        axnames.append("z")
+    for axname in axnames:
         axis = getattr(ax, axname + "axis")
         domain = getattr(ax, "get_{0}lim".format(axname))()
         lim = domain
