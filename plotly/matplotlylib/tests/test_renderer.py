@@ -1392,3 +1392,64 @@ def test_mixed_style_lines_group_consecutive_matches():
     else:
         # older matplotlib emits one collection per level
         assert dashes == ["5.55px,2.4px"] * 2 + ["solid"] * 2
+
+
+def test_axhspan_converts():
+    """axhspan converts to a layout shape spanning the axes width."""
+    fig, ax = plt.subplots()
+    ax.axhspan(0.25, 0.75)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "rect"
+    x0, x1 = ax.get_xlim()
+    assert abs(shape.x0 - x0) < 1e-9
+    assert abs(shape.x1 - x1) < 1e-9
+    assert abs(shape.y0 - 0.25) < 1e-9
+    assert abs(shape.y1 - 0.75) < 1e-9
+    assert shape.xref == "x"
+    assert shape.yref == "y"
+    assert shape.fillcolor == "#1F77B4"
+    assert shape.layer == "below"
+
+
+def test_axvspan_converts():
+    """axvspan converts to a layout shape spanning the axes height."""
+    fig, ax = plt.subplots()
+    ax.axvspan(0.25, 0.75)
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "rect"
+    y0, y1 = ax.get_ylim()
+    assert abs(shape.x0 - 0.25) < 1e-9
+    assert abs(shape.x1 - 0.75) < 1e-9
+    assert abs(shape.y0 - y0) < 1e-9
+    assert abs(shape.y1 - y1) < 1e-9
+    assert shape.xref == "x"
+    assert shape.yref == "y"
+    assert shape.fillcolor == "#1F77B4"
+    assert shape.layer == "below"
+
+
+def test_axhspan_with_custom_style_converts():
+    """axhspan with custom colors and alpha converts to a styled layout shape."""
+    fig, ax = plt.subplots()
+    ax.axhspan(0.25, 0.75, facecolor="red", edgecolor="blue", alpha=0.5, linestyle="--")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 0
+    assert len(plotly_fig.layout.shapes) == 1
+    shape = plotly_fig.layout.shapes[0]
+    assert shape.type == "rect"
+    assert shape.fillcolor == "rgba(255, 0, 0, 0.5)"
+    assert shape.line.color == "rgba(0, 0, 255, 0.5)"
+    assert shape.line.dash == "dash"
+    assert shape.line.width == 1.0

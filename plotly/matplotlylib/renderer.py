@@ -56,6 +56,21 @@ def _convert_collection_dash(linestyle):
     return ",".join("{0:g}px".format(d) for d in dashes)
 
 
+def _has_blended_transform(transform):
+    """Check whether a matplotlib transform contains a blended transform."""
+    if isinstance(
+        transform, (transforms.BlendedGenericTransform, transforms.BlendedAffine2D)
+    ):
+        return True
+    if hasattr(transform, "_a") and hasattr(transform, "_b"):
+        return _has_blended_transform(transform._a) or _has_blended_transform(
+            transform._b
+        )
+    if hasattr(transform, "_transform"):
+        return _has_blended_transform(transform._transform)
+    return False
+
+
 class PlotlyRenderer(Renderer):
     """A renderer class inheriting from base for rendering mpl plots in plotly.
 
@@ -683,6 +698,39 @@ class PlotlyRenderer(Renderer):
         self.msg += "    Heck yeah, I drew that reference line\n"
         return True
 
+    def _draw_axes_span(self, props):
+        """Draw a reference span (axhspan/axvspan) as a layout shape spanning
+        the region in data coordinates."""
+        ax = self.current_mpl_ax
+        px_points = props["data"]
+        data_points = [ax.transData.inverted().transform(pt) for pt in px_points]
+        xs = [pt[0] for pt in data_points]
+        ys = [pt[1] for pt in data_points]
+        x0, x1 = float(min(xs)), float(max(xs))
+        y0, y1 = float(min(ys)), float(max(ys))
+        style = props["style"]
+        fillcolor = _export_color(style["facecolor"])
+        edgecolor = _export_color(style["edgecolor"])
+        linewidth = style["edgewidth"] if style["edgecolor"] != "none" else 0
+        shape = go.layout.Shape(
+            type="rect",
+            x0=x0,
+            y0=y0,
+            x1=x1,
+            y1=y1,
+            xref="x{0}".format(self.axis_ct),
+            yref="y{0}".format(self.axis_ct),
+            fillcolor=fillcolor,
+            line=go.layout.shape.Line(
+                color=edgecolor,
+                width=linewidth,
+                dash=mpltools.convert_dash(style["dasharray"]),
+            ),
+            layer="below" if style.get("zorder", 1) < 2 else "above",
+        )
+        self.plotly_fig["layout"]["shapes"] += (shape,)
+        self.msg += "    Heck yeah, I drew that reference span\n"
+
     def draw_image(self, **props):
         """Draw image.
 
@@ -908,6 +956,16 @@ class PlotlyRenderer(Renderer):
         elif isinstance(props["mplobj"], mpatches.StepPatch):
             self.msg += "    Drawing a step path\n"
             self._draw_step_path(props)
+        elif (
+            isinstance(props["mplobj"], (mpatches.Rectangle, mpatches.Polygon))
+            and props["coordinates"] == "display"
+            and _has_blended_transform(props["mplobj"].get_transform())
+        ):
+            if self._processing_legend:
+                self.msg += "    Using native legend\n"
+            else:
+                self.msg += "    Drawing an axes span\n"
+                self._draw_axes_span(props)
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn(
