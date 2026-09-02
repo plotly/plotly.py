@@ -11,8 +11,10 @@ import math
 import warnings
 
 import matplotlib.patches as mpatches
+import matplotlib.quiver as mquiver
 from matplotlib import lines as mlines
 from matplotlib import transforms
+import numpy as np
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
@@ -729,7 +731,13 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path collection\n"
-        if props["offset_coordinates"] == "data":
+        if (
+            isinstance(props["mplobj"], mquiver.Quiver)
+            and props["mplobj"].pivot == "tail"
+        ):
+            self.msg += "    Drawing a quiver as arrow annotations\n"
+            self._draw_quiver(props)
+        elif props["offset_coordinates"] == "data":
             markerstyle = mpltools.get_markerstyle_from_collection(props)
             scatter_props = {
                 "coordinates": "data",
@@ -849,6 +857,56 @@ class PlotlyRenderer(Renderer):
                 grouped_y.extend(path_y)
 
         flush()
+
+    def _draw_quiver(self, props):
+        """Draw a matplotlib Quiver collection as layout annotations with
+        arrows. The exporter reports the arrow path vertices in pixels
+        relative to the pivot point, and the pivot positions as data
+        coordinates. The annotation arrowhead lands on the annotation
+        position, so each annotation is anchored at the arrow tip in data
+        coordinates and offset back to the tail in pixels."""
+        q = props["mplobj"]
+        trans = q.get_offset_transform()
+        ax = self.current_mpl_ax
+        box_min = np.asarray(trans.transform((ax.get_xlim()[0], ax.get_ylim()[0])))
+        box_max = np.asarray(trans.transform((ax.get_xlim()[1], ax.get_ylim()[1])))
+        facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
+        linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
+        dpi = self.mpl_fig.dpi
+        axis_ref = str(self.axis_ct)
+        annotations = []
+        for tail, path in zip(props["offsets"], props["paths"]):
+            tail_px = np.asarray(trans.transform(tail))
+            # matplotlib clips arrowheads at the axes box, so clamp the
+            # arrowhead position into the axes range the same way
+            tip_px = np.clip(tail_px + np.asarray(path[0][3]), box_min, box_max)
+            tip = trans.inverted().transform(tip_px)
+            if isinstance(facecolors, list):
+                color = facecolors[0]
+            else:
+                color = facecolors
+            if isinstance(linewidths, list):
+                linewidth = linewidths[0]
+            else:
+                linewidth = linewidths
+            annotations.append(
+                go.layout.Annotation(
+                    x=tip[0],
+                    y=tip[1],
+                    xref="x{0}".format(axis_ref),
+                    yref="y{0}".format(axis_ref),
+                    text="",
+                    showarrow=True,
+                    ax=tail_px[0] - tip_px[0],
+                    ay=tip_px[1] - tail_px[1],
+                    arrowhead=2,
+                    arrowsize=max(1.0, linewidth * dpi / 72 * 2),
+                    arrowwidth=max(1.0, linewidth * dpi / 72),
+                    arrowcolor=color,
+                )
+            )
+        self.plotly_fig["layout"]["annotations"] += tuple(annotations)
+        self.msg += "    Heck yeah, I drew that quiver\n"
 
     def _draw_filled_path_collection(self, props):
         """Draw a path collection (e.g. violin plot bodies) as filled polygons."""
