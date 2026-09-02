@@ -348,6 +348,24 @@ def test_uneven_custom_date_xtickvals_are_converted():
     )
 
 
+def test_fill_converts():
+    """plt.fill polygons convert to filled scatter traces."""
+    x = np.linspace(0, 2 * np.pi, 50)
+    fig, ax = plt.subplots()
+    ax.fill(x, np.sin(x), "g")
+
+    plotly_fig = tls.mpl_to_plotly(fig)
+
+    assert len(plotly_fig.data) == 1
+    trace = plotly_fig.data[0]
+    assert trace.type == "scatter"
+    assert trace.fill == "toself"
+    assert np.allclose(trace.x, x)
+    assert np.allclose(trace.y, np.sin(x))
+    assert trace.fillcolor == "#007F00"
+    assert trace.line.color == "rgba(0,0,0,0)"
+
+
 def test_custom_date_xtickvals_given_as_numbers_are_converted():
     """Custom date ticks given as matplotlib date numbers must be converted
     to date strings."""

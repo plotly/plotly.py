@@ -9,6 +9,7 @@ with the matplotlylib package.
 
 import warnings
 
+import matplotlib.patches as mpatches
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
@@ -602,12 +603,37 @@ class PlotlyRenderer(Renderer):
         is_bar = mpltools.is_bar(self.current_mpl_ax.containers, **props)
         if is_bar:
             self.current_bars += [props]
+        elif (
+            isinstance(props["mplobj"], mpatches.Polygon)
+            and props["coordinates"] == "data"
+        ):
+            self.msg += "    Drawing a filled polygon\n"
+            self._draw_filled_polygon(props)
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn(
                 "I found a path object that I don't think is part "
                 "of a bar chart. Ignoring."
             )
+
+    def _draw_filled_polygon(self, props):
+        """Draw a matplotlib Polygon patch as a filled scatter trace."""
+        style = props["style"]
+        verts = props["data"]
+        facecolor = _export_color(style["facecolor"])
+        edgecolor = _export_color(style["edgecolor"])
+        self.plotly_fig.add_trace(
+            go.Scatter(
+                x=self._convert_x_dates([v[0] for v in verts]),
+                y=[v[1] for v in verts],
+                mode="lines",
+                line=go.scatter.Line(color=edgecolor, width=style["edgewidth"]),
+                fill="toself",
+                fillcolor=facecolor,
+                xaxis="x{0}".format(self.axis_ct),
+                yaxis="y{0}".format(self.axis_ct),
+            )
+        )
 
     def draw_text(self, **props):
         """Create an annotation dict for a text obj.
