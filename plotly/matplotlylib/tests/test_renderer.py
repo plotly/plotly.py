@@ -1430,6 +1430,10 @@ def test_plot3d_converts():
     assert scene.camera.eye.x == 1.65
     assert scene.camera.eye.y == 1.65
     assert scene.camera.eye.z == 1.65
+    tmpl_scene = plotly_fig.layout.template.layout.scene
+    assert tmpl_scene.camera.eye.x == 1.65
+    assert tmpl_scene.camera.eye.y == 1.65
+    assert tmpl_scene.camera.eye.z == 1.65
 
 
 def test_plot3d_labels_and_dark_background():

@@ -157,15 +157,16 @@ class PlotlyRenderer(Renderer):
                 )()
             return d
 
+        camera = dict(
+            eye=dict(x=1.65, y=1.65, z=1.65),
+        )
         scene_kwargs = dict(
             domain=domain,
             bgcolor=_export_color(props["axesbg"]),
             xaxis=_axis_dict("x"),
             yaxis=_axis_dict("y"),
             zaxis=_axis_dict("z"),
-            camera=dict(
-                eye=dict(x=1.65, y=1.65, z=1.65),
-            ),
+            camera=camera,
         )
         if hasattr(ax, "get_box_aspect"):
             aspect = ax.get_box_aspect()
@@ -178,6 +179,13 @@ class PlotlyRenderer(Renderer):
         self.plotly_fig["layout"][self.current_3d_subplot] = go.layout.Scene(
             **scene_kwargs
         )
+        layout = self.plotly_fig["layout"]
+        if layout.template and hasattr(layout.template, "layout"):
+            tmpl_layout = layout.template.layout
+            if hasattr(tmpl_layout, self.current_3d_subplot):
+                getattr(tmpl_layout, self.current_3d_subplot).camera = camera
+            else:
+                tmpl_layout[self.current_3d_subplot] = dict(camera=camera)
         self.plotly_fig["layout"].plot_bgcolor = _export_color(props["axesbg"])
 
     def open_figure(self, fig, props):
