@@ -163,6 +163,9 @@ class PlotlyRenderer(Renderer):
             xaxis=_axis_dict("x"),
             yaxis=_axis_dict("y"),
             zaxis=_axis_dict("z"),
+            camera=dict(
+                eye=dict(x=1.65, y=1.65, z=1.65),
+            ),
         )
         if hasattr(ax, "get_box_aspect"):
             aspect = ax.get_box_aspect()

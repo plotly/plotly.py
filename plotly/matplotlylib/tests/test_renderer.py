@@ -1427,6 +1427,9 @@ def test_plot3d_converts():
     assert plotly_fig.layout.margin.r == 0
     assert plotly_fig.layout.margin.b == 0
     assert plotly_fig.layout.margin.t == 0
+    assert scene.camera.eye.x == 1.65
+    assert scene.camera.eye.y == 1.65
+    assert scene.camera.eye.z == 1.65
 
 
 def test_plot3d_labels_and_dark_background():
