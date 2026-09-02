@@ -1421,6 +1421,12 @@ def test_plot3d_converts():
     assert abs(scene.yaxis.range[1] - ax.get_ylim()[1]) < 1e-5
     assert abs(scene.zaxis.range[0] - ax.get_zlim()[0]) < 1e-5
     assert abs(scene.zaxis.range[1] - ax.get_zlim()[1]) < 1e-5
+    assert scene.domain.x == (0.0, 1.0)
+    assert scene.domain.y == (0.0, 1.0)
+    assert plotly_fig.layout.margin.l == 0
+    assert plotly_fig.layout.margin.r == 0
+    assert plotly_fig.layout.margin.b == 0
+    assert plotly_fig.layout.margin.t == 0
 
 
 def test_plot3d_labels_and_dark_background():

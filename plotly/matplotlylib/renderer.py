@@ -118,8 +118,8 @@ class PlotlyRenderer(Renderer):
         )
         bounds = props["bounds"]
         domain = dict(
-            x=[float(bounds[0]), float(bounds[0] + bounds[2])],
-            y=[float(bounds[1]), float(bounds[1] + bounds[3])],
+            x=mpltools.convert_x_domain(bounds, self.mpl_x_bounds),
+            y=mpltools.convert_y_domain(bounds, self.mpl_y_bounds),
         )
 
         def _axis_dict(axis_name):
@@ -207,13 +207,24 @@ class PlotlyRenderer(Renderer):
         )
         self.plotly_fig["layout"].paper_bgcolor = _export_color(props["figbg"])
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
-        margin = go.layout.Margin(
-            l=int(self.mpl_x_bounds[0] * self.plotly_fig["layout"]["width"]),
-            r=int((1 - self.mpl_x_bounds[1]) * self.plotly_fig["layout"]["width"]),
-            t=int((1 - self.mpl_y_bounds[1]) * self.plotly_fig["layout"]["height"]),
-            b=int(self.mpl_y_bounds[0] * self.plotly_fig["layout"]["height"]),
-            pad=0,
+        all_3d = fig.get_axes() and all(
+            getattr(ax, "name", None) == "3d" for ax in fig.get_axes()
         )
+        if all_3d:
+            has_title = any(
+                getattr(ax, "title", None) and ax.title.get_text()
+                for ax in fig.get_axes()
+            ) or bool(fig.texts)
+            top_margin = 40 if has_title else 0
+            margin = go.layout.Margin(l=0, r=0, t=top_margin, b=0, pad=0)
+        else:
+            margin = go.layout.Margin(
+                l=int(self.mpl_x_bounds[0] * self.plotly_fig["layout"]["width"]),
+                r=int((1 - self.mpl_x_bounds[1]) * self.plotly_fig["layout"]["width"]),
+                t=int((1 - self.mpl_y_bounds[1]) * self.plotly_fig["layout"]["height"]),
+                b=int(self.mpl_y_bounds[0] * self.plotly_fig["layout"]["height"]),
+                pad=0,
+            )
         self.plotly_fig["layout"]["margin"] = margin
 
     def close_figure(self, fig):
