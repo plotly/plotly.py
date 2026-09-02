@@ -158,7 +158,7 @@ class PlotlyRenderer(Renderer):
             return d
 
         camera = dict(
-            eye=dict(x=1.65, y=1.65, z=1.65),
+            eye=dict(x=1.65, y=-1.65, z=1.65),
         )
         scene_kwargs = dict(
             domain=domain,
