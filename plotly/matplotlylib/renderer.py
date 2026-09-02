@@ -13,6 +13,7 @@ import warnings
 import matplotlib.patches as mpatches
 from matplotlib import lines as mlines
 from matplotlib import transforms
+import numpy as np
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
 from plotly.matplotlylib import mpltools
@@ -99,12 +100,21 @@ class PlotlyRenderer(Renderer):
         self.axes_list = []
 
     def _convert_x_dates(self, x):
-        """Convert x values to date strings when the x-axis is a date axis."""
+        """Convert x values to date strings when the x-axis is a date axis.
+
+        None values (subpath separators) stay None.
+        """
         if self.x_is_mpl_date:
             formatter = (
                 self.current_mpl_ax.get_xaxis().get_major_formatter().__class__.__name__
             )
-            x = mpltools.mpl_dates_to_datestrings(x, formatter)
+            if any(val is None for val in x):
+                valid_x = [val for val in x if val is not None]
+                converted = mpltools.mpl_dates_to_datestrings(valid_x, formatter)
+                conv_iter = iter(converted)
+                x = [next(conv_iter) if val is not None else None for val in x]
+            else:
+                x = mpltools.mpl_dates_to_datestrings(x, formatter)
         return x
 
     def open_figure(self, fig, props):
@@ -851,7 +861,11 @@ class PlotlyRenderer(Renderer):
         flush()
 
     def _draw_filled_path_collection(self, props):
-        """Draw a path collection (e.g. violin plot bodies) as filled polygons."""
+        """Draw a path collection (e.g. violin plot bodies) as filled polygons.
+
+        Each path becomes one trace, with None separating its disjoint
+        subpaths (e.g. the islands and holes of a contourf band).
+        """
         facecolors = mpltools.convert_rgba_array(props["styles"]["facecolor"])
         edgecolors = mpltools.convert_rgba_array(props["styles"]["edgecolor"])
         linewidths = mpltools.convert_linewidth_array(props["styles"]["linewidth"])
@@ -860,10 +874,46 @@ class PlotlyRenderer(Renderer):
             facecolor = _per_path(facecolors, i, "rgba(0,0,0,0)")
             edgecolor = _per_path(edgecolors, i, "rgba(0,0,0,0)")
             linewidth = _per_path(linewidths, i, 0)
+            subpaths = []
+            current = []
+            closed = False
+            vi = 0
+            for c in codes:
+                if c == "M":
+                    if current:
+                        subpaths.append((current, closed))
+                    current = [verts[vi]]
+                    closed = False
+                    vi += 1
+                elif c == "Z":
+                    closed = True
+                else:
+                    current.append(verts[vi])
+                    vi += 1
+            if current:
+                subpaths.append((current, closed))
+
+            xs = []
+            ys = []
+            for sub, cl in subpaths:
+                if len(sub) < 2:
+                    continue
+                if xs:
+                    xs.append(None)
+                    ys.append(None)
+                if cl and not np.allclose(sub[0], sub[-1]):
+                    sub = sub + [sub[0]]
+                xs.extend([v[0] for v in sub])
+                ys.extend([v[1] for v in sub])
+
+            if not xs and len(verts) > 0:
+                xs = [v[0] for v in verts]
+                ys = [v[1] for v in verts]
+
             self.plotly_fig.add_trace(
                 go.Scatter(
-                    x=self._convert_x_dates([v[0] for v in verts]),
-                    y=[v[1] for v in verts],
+                    x=self._convert_x_dates(xs),
+                    y=ys,
                     mode="lines",
                     line=go.scatter.Line(
                         color=_export_color(edgecolor), width=linewidth

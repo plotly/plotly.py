@@ -528,7 +528,8 @@ def test_contour_lines_convert():
 
 
 def test_contourf_bands_render():
-    """Contourf bands (multi-subpath collections) must render as fills."""
+    """Contourf bands (multi-subpath collections) must render as fills with
+    None separating disjoint subpaths."""
     x = np.linspace(-3, 3, 30)
     X, Y = np.meshgrid(x, x)
     fig, ax = plt.subplots()
@@ -536,6 +537,27 @@ def test_contourf_bands_render():
     plotly_fig = tls.mpl_to_plotly(fig)
     filled = [t for t in plotly_fig.data if t.fill == "toself"]
     assert len(filled) > 0
+    assert any(None in t.x for t in filled)
+    assert any(None in t.y for t in filled)
+
+
+def test_contourf_bands_date_xaxis():
+    """Contourf bands on a date x-axis export date strings, with None
+    separating disjoint subpaths."""
+    dates = [
+        datetime.datetime(2023, 1, 1) + datetime.timedelta(days=i) for i in range(30)
+    ]
+    y = np.linspace(-3, 3, 30)
+    X, Y = np.meshgrid(np.linspace(-3, 3, 30), y)
+    fig, ax = plt.subplots()
+    ax.contourf(dates, y, np.sin(X) * np.cos(Y), 10)
+    plotly_fig = tls.mpl_to_plotly(fig)
+    filled = [t for t in plotly_fig.data if t.fill == "toself"]
+    split = [t for t in filled if None in t.x]
+    assert len(split) > 0
+    for t in split:
+        assert [v is None for v in t.x] == [v is None for v in t.y]
+        assert all(isinstance(v, str) for v in t.x if v is not None)
 
 
 def test_axis_linecolor_defaults_to_black():
