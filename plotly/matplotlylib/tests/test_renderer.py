@@ -1434,6 +1434,9 @@ def test_plot3d_converts():
     assert tmpl_scene.camera.eye.x == 1.65
     assert tmpl_scene.camera.eye.y == -1.65
     assert tmpl_scene.camera.eye.z == 1.65
+    assert scene.xaxis.backgroundcolor == "rgb(249, 249, 249)"
+    assert scene.yaxis.backgroundcolor == "rgb(242, 242, 242)"
+    assert scene.zaxis.backgroundcolor == "rgb(245, 245, 245)"
 
 
 def test_plot3d_labels_and_dark_background():
@@ -1453,4 +1456,8 @@ def test_plot3d_labels_and_dark_background():
         assert scene.xaxis.title.text == "X-Axis"
         assert scene.yaxis.title.text == "Y-Axis"
         assert scene.zaxis.title.text == "Z-Axis"
+        assert scene.xaxis.backgroundcolor == "rgb(121, 121, 121)"
+        assert scene.yaxis.backgroundcolor == "rgb(115, 115, 115)"
+        assert scene.zaxis.backgroundcolor == "rgb(118, 118, 118)"
+        assert scene.xaxis.showbackground is True
         assert plotly_fig.layout.paper_bgcolor == "#000000"

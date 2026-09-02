@@ -12,6 +12,7 @@ import warnings
 
 import matplotlib.patches as mpatches
 from matplotlib import lines as mlines
+from matplotlib import colors as mcolors
 from matplotlib import transforms
 import plotly.graph_objs as go
 from plotly.matplotlylib.mplexporter import Renderer
@@ -122,6 +123,14 @@ class PlotlyRenderer(Renderer):
             y=mpltools.convert_y_domain(bounds, self.mpl_y_bounds),
         )
 
+        bg_color = (
+            ax.patch.get_facecolor() if hasattr(ax, "patch") else (1.0, 1.0, 1.0, 1.0)
+        )
+        try:
+            bg_rgba = mcolors.to_rgba(bg_color)
+        except Exception:
+            bg_rgba = (1.0, 1.0, 1.0, 1.0)
+
         def _axis_dict(axis_name):
             axis_obj = getattr(ax, axis_name + "axis")
             lim = getattr(ax, "get_{0}lim".format(axis_name))()
@@ -136,11 +145,26 @@ class PlotlyRenderer(Renderer):
                 if axis_obj.get_ticklabels()
                 else None
             )
-            pane_color = (
-                _export_color(axis_obj.pane.get_facecolor())
-                if hasattr(axis_obj, "pane")
-                else None
-            )
+            pane_color = None
+            show_bg = False
+            if hasattr(axis_obj, "pane"):
+                fc = axis_obj.pane.get_facecolor()
+                alpha = fc[3] if len(fc) > 3 else 1.0
+                show_bg = (
+                    getattr(axis_obj.pane, "get_visible", lambda: True)()
+                    and alpha > 0.0
+                )
+                if alpha < 1.0:
+                    blended = tuple(
+                        fc[i] * alpha + bg_rgba[i] * (1.0 - alpha) for i in range(3)
+                    )
+                    pane_color = "rgb({0}, {1}, {2})".format(
+                        int(round(blended[0] * 255)),
+                        int(round(blended[1] * 255)),
+                        int(round(blended[2] * 255)),
+                    )
+                else:
+                    pane_color = _export_color(fc)
             d = dict(
                 range=[float(lim[0]), float(lim[1])],
                 showline=True,
@@ -152,9 +176,7 @@ class PlotlyRenderer(Renderer):
                 d["tickfont"] = dict(color=tick_color)
             if pane_color:
                 d["backgroundcolor"] = pane_color
-                d["showbackground"] = getattr(
-                    axis_obj.pane, "get_visible", lambda: True
-                )()
+                d["showbackground"] = show_bg
             return d
 
         camera = dict(
