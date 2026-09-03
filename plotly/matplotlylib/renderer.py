@@ -100,6 +100,10 @@ class PlotlyRenderer(Renderer):
             height=int(props["figheight"] * props["dpi"]),
             autosize=False,
             hovermode="closest",
+            # plotly.js auto-names unnamed traces "trace N" and shows them
+            # in the legend; the legend is only enabled when the mpl figure
+            # actually has one (see open_legend)
+            showlegend=False,
         )
         self.plotly_fig["layout"].paper_bgcolor = _export_color(props["figbg"])
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
@@ -440,13 +444,14 @@ class PlotlyRenderer(Renderer):
                     ),
                 )
         if props["coordinates"] == "data":
+            label = props["label"]
+            # matplotlib uses "_nolegend_" and auto-generated "_childN"
+            # labels for artists that must not appear in a legend
+            if isinstance(label, str) and label.startswith("_"):
+                label = None
             marked_line = go.Scatter(
                 mode=mode,
-                name=(
-                    str(props["label"])
-                    if isinstance(props["label"], str)
-                    else props["label"]
-                ),
+                name=label,
                 x=[xy_pair[0] for xy_pair in props["data"]],
                 y=[xy_pair[1] for xy_pair in props["data"]],
                 xaxis="x{0}".format(self.axis_ct),
