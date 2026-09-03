@@ -452,7 +452,7 @@ class ColabRenderer(HtmlRenderer):
     ):
         super(ColabRenderer, self).__init__(
             connected=True,
-            full_html=True,
+            full_html=False,
             global_init=False,
             config=config,
             auto_play=auto_play,
