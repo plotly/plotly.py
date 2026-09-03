@@ -10,22 +10,15 @@ class Candlestick(_BaseTraceType):
     _path_str = "candlestick"
     _valid_props = {
         "close",
-        "closesrc",
         "customdata",
-        "customdatasrc",
         "decreasing",
         "high",
-        "highsrc",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "increasing",
         "legend",
         "legendgroup",
@@ -34,18 +27,13 @@ class Candlestick(_BaseTraceType):
         "legendwidth",
         "line",
         "low",
-        "lowsrc",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "open",
-        "opensrc",
         "selectedpoints",
         "showlegend",
-        "stream",
         "text",
-        "textsrc",
         "type",
         "uid",
         "uirevision",
@@ -58,7 +46,6 @@ class Candlestick(_BaseTraceType):
         "xperiod",
         "xperiod0",
         "xperiodalignment",
-        "xsrc",
         "yaxis",
         "yhoverformat",
         "zorder",
@@ -83,24 +70,6 @@ class Candlestick(_BaseTraceType):
         self["close"] = val
 
     @property
-    def closesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `close`.
-
-        The 'closesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["closesrc"]
-
-    @closesrc.setter
-    def closesrc(self, val):
-        self["closesrc"] = val
-
-    @property
     def customdata(self):
         """
         Assigns extra data each datum. This may be useful when
@@ -120,25 +89,6 @@ class Candlestick(_BaseTraceType):
     @customdata.setter
     def customdata(self, val):
         self["customdata"] = val
-
-    @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
 
     @property
     def decreasing(self):
@@ -178,27 +128,9 @@ class Candlestick(_BaseTraceType):
         self["high"] = val
 
     @property
-    def highsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `high`.
-
-        The 'highsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["highsrc"]
-
-    @highsrc.setter
-    def highsrc(self, val):
-        self["highsrc"] = val
-
-    @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
+        Determines what trace information appears on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
 
@@ -218,25 +150,6 @@ class Candlestick(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -325,25 +238,6 @@ class Candlestick(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Same as `text`.
@@ -364,25 +258,6 @@ class Candlestick(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -401,24 +276,6 @@ class Candlestick(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def increasing(self):
@@ -584,24 +441,6 @@ class Candlestick(_BaseTraceType):
         self["low"] = val
 
     @property
-    def lowsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `low`.
-
-        The 'lowsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["lowsrc"]
-
-    @lowsrc.setter
-    def lowsrc(self, val):
-        self["lowsrc"] = val
-
-    @property
     def meta(self):
         """
         Assigns extra meta information associated with this trace that
@@ -626,24 +465,6 @@ class Candlestick(_BaseTraceType):
     @meta.setter
     def meta(self, val):
         self["meta"] = val
-
-    @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
 
     @property
     def name(self):
@@ -702,24 +523,6 @@ class Candlestick(_BaseTraceType):
         self["open"] = val
 
     @property
-    def opensrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `open`.
-
-        The 'opensrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["opensrc"]
-
-    @opensrc.setter
-    def opensrc(self, val):
-        self["opensrc"] = val
-
-    @property
     def selectedpoints(self):
         """
         Array containing integer indices of selected points. Has an
@@ -761,25 +564,6 @@ class Candlestick(_BaseTraceType):
         self["showlegend"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.candlestick.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.candlestick.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets hover text elements associated with each sample point. If
@@ -801,24 +585,6 @@ class Candlestick(_BaseTraceType):
     @text.setter
     def text(self, val):
         self["text"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def uid(self):
@@ -978,7 +744,7 @@ class Candlestick(_BaseTraceType):
     @property
     def xhoverformat(self):
         """
-        Sets the hover text formatting rulefor `x`  using d3 formatting
+        Sets the hover text formatting rule for `x` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1066,24 +832,6 @@ class Candlestick(_BaseTraceType):
         self["xperiodalignment"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
@@ -1109,7 +857,7 @@ class Candlestick(_BaseTraceType):
     @property
     def yhoverformat(self):
         """
-        Sets the hover text formatting rulefor `y`  using d3 formatting
+        Sets the hover text formatting rule for `y` using d3 formatting
         mini-languages which are very similar to those in Python. For
         numbers, see:
         https://github.com/d3/d3-format/tree/v1.4.5#d3-format. And for
@@ -1164,33 +912,21 @@ class Candlestick(_BaseTraceType):
         return """\
         close
             Sets the close values.
-        closesrc
-            Sets the source reference on Chart Studio Cloud for
-            `close`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         decreasing
             :class:`plotly.graph_objects.candlestick.Decreasing`
             instance or dict with compatible properties
         high
             Sets the high values.
-        highsrc
-            Sets the source reference on Chart Studio Cloud for
-            `high`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.candlestick.Hoverlabel`
             instance or dict with compatible properties
@@ -1235,21 +971,12 @@ class Candlestick(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         increasing
             :class:`plotly.graph_objects.candlestick.Increasing`
             instance or dict with compatible properties
@@ -1285,9 +1012,6 @@ class Candlestick(_BaseTraceType):
             or dict with compatible properties
         low
             Sets the low values.
-        lowsrc
-            Sets the source reference on Chart Studio Cloud for
-            `low`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1301,9 +1025,6 @@ class Candlestick(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1311,9 +1032,6 @@ class Candlestick(_BaseTraceType):
             Sets the opacity of the trace.
         open
             Sets the open values.
-        opensrc
-            Sets the source reference on Chart Studio Cloud for
-            `open`.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -1324,17 +1042,11 @@ class Candlestick(_BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.candlestick.Stream`
-            instance or dict with compatible properties
         text
             Sets hover text elements associated with each sample
             point. If a single string, the same string appears over
             all the data points. If an array of string, the items
             are mapped in order to this trace's sample points.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1377,7 +1089,7 @@ class Candlestick(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1405,16 +1117,13 @@ class Candlestick(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1437,22 +1146,15 @@ class Candlestick(_BaseTraceType):
         self,
         arg=None,
         close=None,
-        closesrc=None,
         customdata=None,
-        customdatasrc=None,
         decreasing=None,
         high=None,
-        highsrc=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         increasing=None,
         legend=None,
         legendgroup=None,
@@ -1461,18 +1163,13 @@ class Candlestick(_BaseTraceType):
         legendwidth=None,
         line=None,
         low=None,
-        lowsrc=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         open=None,
-        opensrc=None,
         selectedpoints=None,
         showlegend=None,
-        stream=None,
         text=None,
-        textsrc=None,
         uid=None,
         uirevision=None,
         visible=None,
@@ -1484,7 +1181,6 @@ class Candlestick(_BaseTraceType):
         xperiod=None,
         xperiod0=None,
         xperiodalignment=None,
-        xsrc=None,
         yaxis=None,
         yhoverformat=None,
         zorder=None,
@@ -1498,7 +1194,7 @@ class Candlestick(_BaseTraceType):
         time). The boxes represent the spread between the `open` and
         `close` values and the lines represent the spread between the
         `low` and `high` values Sample points where the close value is
-        higher (lower) then the open value are called increasing
+        higher (lower) than the open value are called increasing
         (decreasing). By default, increasing candles are drawn in green
         whereas decreasing are drawn in red.
 
@@ -1509,33 +1205,21 @@ class Candlestick(_BaseTraceType):
             an instance of :class:`plotly.graph_objs.Candlestick`
         close
             Sets the close values.
-        closesrc
-            Sets the source reference on Chart Studio Cloud for
-            `close`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         decreasing
             :class:`plotly.graph_objects.candlestick.Decreasing`
             instance or dict with compatible properties
         high
             Sets the high values.
-        highsrc
-            Sets the source reference on Chart Studio Cloud for
-            `high`.
         hoverinfo
-            Determines which trace information appear on hover. If
+            Determines what trace information appears on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
         hoverlabel
             :class:`plotly.graph_objects.candlestick.Hoverlabel`
             instance or dict with compatible properties
@@ -1580,21 +1264,12 @@ class Candlestick(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Same as `text`.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         increasing
             :class:`plotly.graph_objects.candlestick.Increasing`
             instance or dict with compatible properties
@@ -1630,9 +1305,6 @@ class Candlestick(_BaseTraceType):
             or dict with compatible properties
         low
             Sets the low values.
-        lowsrc
-            Sets the source reference on Chart Studio Cloud for
-            `low`.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1646,9 +1318,6 @@ class Candlestick(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1656,9 +1325,6 @@ class Candlestick(_BaseTraceType):
             Sets the opacity of the trace.
         open
             Sets the open values.
-        opensrc
-            Sets the source reference on Chart Studio Cloud for
-            `open`.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -1669,17 +1335,11 @@ class Candlestick(_BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.candlestick.Stream`
-            instance or dict with compatible properties
         text
             Sets hover text elements associated with each sample
             point. If a single string, the same string appears over
             all the data points. If an array of string, the items
             are mapped in order to this trace's sample points.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1722,7 +1382,7 @@ class Candlestick(_BaseTraceType):
         xcalendar
             Sets the calendar system to use with `x` date data.
         xhoverformat
-            Sets the hover text formatting rulefor `x`  using d3
+            Sets the hover text formatting rule for `x` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1750,16 +1410,13 @@ class Candlestick(_BaseTraceType):
         xperiodalignment
             Only relevant when the axis `type` is "date". Sets the
             alignment of data points on the x axis.
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         yhoverformat
-            Sets the hover text formatting rulefor `y`  using d3
+            Sets the hover text formatting rule for `y` using d3
             formatting mini-languages which are very similar to
             those in Python. For numbers, see:
             https://github.com/d3/d3-format/tree/v1.4.5#d3-format.
@@ -1802,22 +1459,15 @@ an instance of :class:`plotly.graph_objs.Candlestick`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("close", arg, close)
-        self._set_property("closesrc", arg, closesrc)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("decreasing", arg, decreasing)
         self._set_property("high", arg, high)
-        self._set_property("highsrc", arg, highsrc)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("increasing", arg, increasing)
         self._set_property("legend", arg, legend)
         self._set_property("legendgroup", arg, legendgroup)
@@ -1826,18 +1476,13 @@ an instance of :class:`plotly.graph_objs.Candlestick`""")
         self._set_property("legendwidth", arg, legendwidth)
         self._set_property("line", arg, line)
         self._set_property("low", arg, low)
-        self._set_property("lowsrc", arg, lowsrc)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("open", arg, open)
-        self._set_property("opensrc", arg, opensrc)
         self._set_property("selectedpoints", arg, selectedpoints)
         self._set_property("showlegend", arg, showlegend)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("visible", arg, visible)
@@ -1849,7 +1494,6 @@ an instance of :class:`plotly.graph_objs.Candlestick`""")
         self._set_property("xperiod", arg, xperiod)
         self._set_property("xperiod0", arg, xperiod0)
         self._set_property("xperiodalignment", arg, xperiodalignment)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("yaxis", arg, yaxis)
         self._set_property("yhoverformat", arg, yhoverformat)
         self._set_property("zorder", arg, zorder)

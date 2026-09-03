@@ -14,7 +14,7 @@ class Domain(_BaseLayoutHierarchyType):
     def column(self):
         """
         If there is a layout grid, use the domain for this column in
-        the grid for this polar subplot .
+        the grid for this polar subplot.
 
         The 'column' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
@@ -34,7 +34,7 @@ class Domain(_BaseLayoutHierarchyType):
     def row(self):
         """
         If there is a layout grid, use the domain for this row in the
-        grid for this polar subplot .
+        grid for this polar subplot.
 
         The 'row' property is an integer and may be specified as:
           - An int (or float that will be cast to an int)
@@ -103,10 +103,10 @@ class Domain(_BaseLayoutHierarchyType):
         return """\
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this polar subplot .
+            column in the grid for this polar subplot.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this polar subplot .
+            in the grid for this polar subplot.
         x
             Sets the horizontal domain of this polar subplot (in
             plot fraction).
@@ -127,10 +127,10 @@ class Domain(_BaseLayoutHierarchyType):
             :class:`plotly.graph_objs.layout.polar.Domain`
         column
             If there is a layout grid, use the domain for this
-            column in the grid for this polar subplot .
+            column in the grid for this polar subplot.
         row
             If there is a layout grid, use the domain for this row
-            in the grid for this polar subplot .
+            in the grid for this polar subplot.
         x
             Sets the horizontal domain of this polar subplot (in
             plot fraction).

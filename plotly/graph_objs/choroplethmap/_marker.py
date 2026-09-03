@@ -8,7 +8,7 @@ import copy as _copy
 class Marker(_BaseTraceHierarchyType):
     _parent_path_str = "choroplethmap"
     _path_str = "choroplethmap.marker"
-    _valid_props = {"line", "opacity", "opacitysrc"}
+    _valid_props = {"line", "opacity"}
 
     @property
     def line(self):
@@ -49,24 +49,6 @@ class Marker(_BaseTraceHierarchyType):
         self["opacity"] = val
 
     @property
-    def opacitysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `opacity`.
-
-        The 'opacitysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["opacitysrc"]
-
-    @opacitysrc.setter
-    def opacitysrc(self, val):
-        self["opacitysrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         line
@@ -74,12 +56,9 @@ class Marker(_BaseTraceHierarchyType):
             instance or dict with compatible properties
         opacity
             Sets the opacity of the locations.
-        opacitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `opacity`.
         """
 
-    def __init__(self, arg=None, line=None, opacity=None, opacitysrc=None, **kwargs):
+    def __init__(self, arg=None, line=None, opacity=None, **kwargs):
         """
         Construct a new Marker object
 
@@ -94,9 +73,6 @@ class Marker(_BaseTraceHierarchyType):
             instance or dict with compatible properties
         opacity
             Sets the opacity of the locations.
-        opacitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `opacity`.
 
         Returns
         -------
@@ -124,6 +100,5 @@ an instance of :class:`plotly.graph_objs.choroplethmap.Marker`""")
 
         self._set_property("line", arg, line)
         self._set_property("opacity", arg, opacity)
-        self._set_property("opacitysrc", arg, opacitysrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

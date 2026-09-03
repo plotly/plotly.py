@@ -273,7 +273,7 @@ class Image(_BaseLayoutHierarchyType):
         behaves like for "paper", but refers to the distance in
         fractions of the domain length from the left of the domain of
         that axis: e.g., *x2 domain* refers to the domain of the second
-        x  axis and a x position of 0.5 refers to the point between the
+        x axis and a x position of 0.5 refers to the point between the
         left and the right of the domain of the second x axis.
 
         The 'xref' property is an enumeration that may be specified as:
@@ -342,7 +342,7 @@ class Image(_BaseLayoutHierarchyType):
         behaves like for "paper", but refers to the distance in
         fractions of the domain length from the bottom of the domain of
         that axis: e.g., *y2 domain* refers to the domain of the second
-        y  axis and a y position of 0.5 refers to the point between the
+        y axis and a y position of 0.5 refers to the point between the
         bottom and the top of the domain of the second y axis.
 
         The 'yref' property is an enumeration that may be specified as:
@@ -426,7 +426,7 @@ class Image(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis.
         y
@@ -446,7 +446,7 @@ class Image(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         """
@@ -541,7 +541,7 @@ class Image(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the left of the
             domain of that axis: e.g., *x2 domain* refers to the
-            domain of the second x  axis and a x position of 0.5
+            domain of the second x axis and a x position of 0.5
             refers to the point between the left and the right of
             the domain of the second x axis.
         y
@@ -561,7 +561,7 @@ class Image(_BaseLayoutHierarchyType):
             like for "paper", but refers to the distance in
             fractions of the domain length from the bottom of the
             domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y  axis and a y position of 0.5
+            domain of the second y axis and a y position of 0.5
             refers to the point between the bottom and the top of
             the domain of the second y axis.
 

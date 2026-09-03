@@ -11,7 +11,6 @@ class Marker(_BaseTraceHierarchyType):
     _valid_props = {
         "allowoverlap",
         "angle",
-        "anglesrc",
         "autocolorscale",
         "cauto",
         "cmax",
@@ -21,18 +20,14 @@ class Marker(_BaseTraceHierarchyType):
         "coloraxis",
         "colorbar",
         "colorscale",
-        "colorsrc",
         "opacity",
-        "opacitysrc",
         "reversescale",
         "showscale",
         "size",
         "sizemin",
         "sizemode",
         "sizeref",
-        "sizesrc",
         "symbol",
-        "symbolsrc",
     }
 
     @property
@@ -74,24 +69,6 @@ class Marker(_BaseTraceHierarchyType):
     @angle.setter
     def angle(self, val):
         self["angle"] = val
-
-    @property
-    def anglesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `angle`.
-
-        The 'anglesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["anglesrc"]
-
-    @anglesrc.setter
-    def anglesrc(self, val):
-        self["anglesrc"] = val
 
     @property
     def autocolorscale(self):
@@ -212,12 +189,18 @@ class Marker(_BaseTraceHierarchyType):
         the max and min values of the array or relative to
         `marker.cmin` and `marker.cmax` if set.
 
-        The 'color' property is a color and may be specified as:
-          - A hex string (e.g. '#ff0000')
-          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
-          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
-          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
-          - A named CSS color: see https://plotly.com/python/css-colors/ for a list
+        The 'color' property is a color and may be specified as a string in the following formats:
+          - hex or short hex (e.g. '#d3d3d3', '#d3d')
+          - hex or short hex with alpha (e.g. '#d3d3d380', '#d3d8')
+          - rgb (e.g. 'rgb(255, 0, 0)', 'rgb(255 0 0)')
+          - rgba (e.g. 'rgba(255, 0, 0, 0.5)', 'rgba(255 0 0 / 0.5)')
+          - hsl (e.g. 'hsl(0, 100%, 50%)', 'hsl(0deg 100% 50%)')
+          - hsla (e.g. 'hsla(0, 100%, 50%, 0.5)', 'hsla(0deg 100% 50% / 0.5)')
+          - hwb (e.g. 'hwb(0 0% 100%)')
+          - lab/lch/oklab/oklch (e.g. 'oklch(0.7 0.15 180)')
+          - color (e.g. 'color(display-p3 1 0 0)')
+          - named colors (full list: https://www.w3.org/TR/css-color-4/#named-color)
+          - Any other supported CSS 4 color format: https://www.w3.org/TR/css-color-4/
           - A number that will be interpreted as a color
             according to scattermap.marker.colorscale
           - A list or array of any of the above
@@ -282,9 +265,9 @@ class Marker(_BaseTraceHierarchyType):
         Sets the colorscale. Has an effect only if in `marker.color` is
         set to a numerical array. The colorscale must be an array
         containing arrays mapping a normalized value to an rgb, rgba,
-        hex, hsl, hsv, or named color string. At minimum, a mapping for
-        the lowest (0) and highest (1) values are required. For
-        example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
+        hex, hsl, hsla, hwb, or named color string. At minimum, a
+        mapping for the lowest (0) and highest (1) values are required.
+        For example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
         control the bounds of the colorscale in color space, use
         `marker.cmin` and `marker.cmax`. Alternatively, `colorscale`
         may be a palette name string of the following list: Blackbody,B
@@ -329,24 +312,6 @@ class Marker(_BaseTraceHierarchyType):
         self["colorscale"] = val
 
     @property
-    def colorsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `color`.
-
-        The 'colorsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["colorsrc"]
-
-    @colorsrc.setter
-    def colorsrc(self, val):
-        self["colorsrc"] = val
-
-    @property
     def opacity(self):
         """
         Sets the marker opacity.
@@ -364,24 +329,6 @@ class Marker(_BaseTraceHierarchyType):
     @opacity.setter
     def opacity(self, val):
         self["opacity"] = val
-
-    @property
-    def opacitysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `opacity`.
-
-        The 'opacitysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["opacitysrc"]
-
-    @opacitysrc.setter
-    def opacitysrc(self, val):
-        self["opacitysrc"] = val
 
     @property
     def reversescale(self):
@@ -505,24 +452,6 @@ class Marker(_BaseTraceHierarchyType):
         self["sizeref"] = val
 
     @property
-    def sizesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `size`.
-
-        The 'sizesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["sizesrc"]
-
-    @sizesrc.setter
-    def sizesrc(self, val):
-        self["sizesrc"] = val
-
-    @property
     def symbol(self):
         """
         Sets the marker symbol. Full list: https://www.mapbox.com/maki-
@@ -545,24 +474,6 @@ class Marker(_BaseTraceHierarchyType):
         self["symbol"] = val
 
     @property
-    def symbolsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `symbol`.
-
-        The 'symbolsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["symbolsrc"]
-
-    @symbolsrc.setter
-    def symbolsrc(self, val):
-        self["symbolsrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         allowoverlap
@@ -572,9 +483,6 @@ class Marker(_BaseTraceHierarchyType):
             clockwise. When using the "auto" default, no rotation
             would be applied in perspective views which is
             different from using a zero angle.
-        anglesrc
-            Sets the source reference on Chart Studio Cloud for
-            `angle`.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -628,8 +536,8 @@ class Marker(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if in
             `marker.color` is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
-            normalized value to an rgb, rgba, hex, hsl, hsv, or
-            named color string. At minimum, a mapping for the
+            normalized value to an rgb, rgba, hex, hsl, hsla, hwb,
+            or named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
@@ -638,14 +546,8 @@ class Marker(_BaseTraceHierarchyType):
             following list: Blackbody,Bluered,Blues,Cividis,Earth,E
             lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         opacity
             Sets the marker opacity.
-        opacitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `opacity`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.color` is set to a numerical array. If
@@ -671,17 +573,11 @@ class Marker(_BaseTraceHierarchyType):
             numerical array. Sets the scale factor used to
             determine the rendered size of marker points. Use with
             `sizemin` and `sizemode`.
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         symbol
             Sets the marker symbol. Full list:
             https://www.mapbox.com/maki-icons/ Note that the array
             `marker.color` and `marker.size` are only available for
             "circle" symbols.
-        symbolsrc
-            Sets the source reference on Chart Studio Cloud for
-            `symbol`.
         """
 
     def __init__(
@@ -689,7 +585,6 @@ class Marker(_BaseTraceHierarchyType):
         arg=None,
         allowoverlap=None,
         angle=None,
-        anglesrc=None,
         autocolorscale=None,
         cauto=None,
         cmax=None,
@@ -699,18 +594,14 @@ class Marker(_BaseTraceHierarchyType):
         coloraxis=None,
         colorbar=None,
         colorscale=None,
-        colorsrc=None,
         opacity=None,
-        opacitysrc=None,
         reversescale=None,
         showscale=None,
         size=None,
         sizemin=None,
         sizemode=None,
         sizeref=None,
-        sizesrc=None,
         symbol=None,
-        symbolsrc=None,
         **kwargs,
     ):
         """
@@ -729,9 +620,6 @@ class Marker(_BaseTraceHierarchyType):
             clockwise. When using the "auto" default, no rotation
             would be applied in perspective views which is
             different from using a zero angle.
-        anglesrc
-            Sets the source reference on Chart Studio Cloud for
-            `angle`.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -785,8 +673,8 @@ class Marker(_BaseTraceHierarchyType):
             Sets the colorscale. Has an effect only if in
             `marker.color` is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
-            normalized value to an rgb, rgba, hex, hsl, hsv, or
-            named color string. At minimum, a mapping for the
+            normalized value to an rgb, rgba, hex, hsl, hsla, hwb,
+            or named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
@@ -795,14 +683,8 @@ class Marker(_BaseTraceHierarchyType):
             following list: Blackbody,Bluered,Blues,Cividis,Earth,E
             lectric,Greens,Greys,Hot,Jet,Picnic,Portland,Rainbow,Rd
             Bu,Reds,Viridis,YlGnBu,YlOrRd.
-        colorsrc
-            Sets the source reference on Chart Studio Cloud for
-            `color`.
         opacity
             Sets the marker opacity.
-        opacitysrc
-            Sets the source reference on Chart Studio Cloud for
-            `opacity`.
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `marker.color` is set to a numerical array. If
@@ -828,17 +710,11 @@ class Marker(_BaseTraceHierarchyType):
             numerical array. Sets the scale factor used to
             determine the rendered size of marker points. Use with
             `sizemin` and `sizemode`.
-        sizesrc
-            Sets the source reference on Chart Studio Cloud for
-            `size`.
         symbol
             Sets the marker symbol. Full list:
             https://www.mapbox.com/maki-icons/ Note that the array
             `marker.color` and `marker.size` are only available for
             "circle" symbols.
-        symbolsrc
-            Sets the source reference on Chart Studio Cloud for
-            `symbol`.
 
         Returns
         -------
@@ -866,7 +742,6 @@ an instance of :class:`plotly.graph_objs.scattermap.Marker`""")
 
         self._set_property("allowoverlap", arg, allowoverlap)
         self._set_property("angle", arg, angle)
-        self._set_property("anglesrc", arg, anglesrc)
         self._set_property("autocolorscale", arg, autocolorscale)
         self._set_property("cauto", arg, cauto)
         self._set_property("cmax", arg, cmax)
@@ -876,17 +751,13 @@ an instance of :class:`plotly.graph_objs.scattermap.Marker`""")
         self._set_property("coloraxis", arg, coloraxis)
         self._set_property("colorbar", arg, colorbar)
         self._set_property("colorscale", arg, colorscale)
-        self._set_property("colorsrc", arg, colorsrc)
         self._set_property("opacity", arg, opacity)
-        self._set_property("opacitysrc", arg, opacitysrc)
         self._set_property("reversescale", arg, reversescale)
         self._set_property("showscale", arg, showscale)
         self._set_property("size", arg, size)
         self._set_property("sizemin", arg, sizemin)
         self._set_property("sizemode", arg, sizemode)
         self._set_property("sizeref", arg, sizeref)
-        self._set_property("sizesrc", arg, sizesrc)
         self._set_property("symbol", arg, symbol)
-        self._set_property("symbolsrc", arg, symbolsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

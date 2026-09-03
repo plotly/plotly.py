@@ -30,7 +30,7 @@ jupyter:
     language: python
     layout: base
     name: Discrete Colors
-    order: 29
+    order: 30
     permalink: python/discrete-color/
     thumbnail: thumbnail/heatmap_colorscale.jpg
     v4upgrade: true

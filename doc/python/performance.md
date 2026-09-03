@@ -133,14 +133,14 @@ Each `plotly` trace type is rendered with either SVG or WebGL. The following tra
 * Accelerated versions of SVG trace types: `scattergl`, `scatterpolargl`,
 * High-performance multidimensional trace types: `splom`, or `parcoords`
 * 3D trace types `scatter3d`, `surface`, `mesh3d`, `cone`, `streamtube`, `isosurface`, `volume`
-* Mapbox Gl JS-powered trace types: `scattermap`, `choroplethmap`, `densitymap`
+* MapLibre GL JS-powered trace types: `scattermap`, `choroplethmap`, `densitymap`
 
 ### WebGL Limitations and Tradeoffs
 
 WebGL is a powerful technology for accelerating rendering but comes with some strict limitations:
 
 1. GPU requirement: WebGL is a GPU (graphics card) technology and therefore requires specific hardware which is available in most but not all cases and is supported by most but not all browsers.
-2. Rasterization: WebGL-rendered data is drawn as a grid of pixels rather than as individual shapes, so can appear pixelated or fuzz in certain cases, and when exported to static file formats will appear pixelated on zoom. In addition, text rendering will differ between SVG and WebGL-powered traces.
+2. Rasterization: WebGL-rendered data is drawn as a grid of pixels rather than as individual shapes, so can appear pixelated or fuzzy in certain cases. This also applies to static export: when a figure with WebGL traces is exported to a *vector* format such as SVG or PDF, the WebGL traces are embedded as an encapsulated raster (a bitmap) rather than as true vectors, so those parts will appear pixelated on zoom. To force fully-vector output, use `render_mode="svg"` to supported Plotly Express functions (see [WebGL with Plotly Express](#webgl-with-plotly-express) below). In addition, text rendering will differ between SVG and WebGL-powered traces.
 3. Context limits: browsers impose a strict limit on the number of WebGL "contexts" that any given web document can access. WebGL-powered traces in `plotly` can use multiple contexts in some cases but as a general rule, **it may not be possible to render more than 8 WebGL-involving figures on the same page at the same time.** See the following section, Multiple WebGL Contexts, for more details.
 4. Size limits: browsers impose hardware-dependent limits on the height and width of figures using WebGL which users may encounter with extremely large plots (e.g. tens of thousands of pixels of height).
 
@@ -181,7 +181,7 @@ it is also possible to use [datashader](/python/datashader/).
 
 The `render_mode` argument to supported Plotly Express functions (e.g. `scatter` and `scatter_polar`) can be used to enable WebGL rendering.
 
-> **Note** The default `render_mode` is `"auto"`, in which case Plotly Express will automatically set `render_mode="webgl"` if the input data is more than 1,000 rows long. In this case, WebGL can be disabled by setting `render_mode=svg`.
+> **Note** The default `render_mode` is `"auto"`, in which case Plotly Express will automatically set `render_mode="webgl"` if the input data is more than 1,000 rows long. In this case, WebGL can be disabled by setting `render_mode="svg"`. Because WebGL traces are embedded as rasters rather than vectors when [exported to a static vector format](/python/static-image-export/) such as SVG or PDF, set `render_mode="svg"` if you need fully-vector output from a large scatter figure.
 
 Here is an example that creates a 100,000 point scatter plot using Plotly Express with WebGL rendering explicitly enabled.
 

@@ -1,7 +1,7 @@
 {
   "name": "jupyterlab-plotly",
   "main": "lib/mimeExtension.js",
-  "version": "6.9.0",
+  "version": "7.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/plotly/plotly.py"
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
-    "plotly.js": "3.7.0",
+    "plotly.js": "4.0.0",
     "@lumino/widgets": "~2.4.0"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "outputDir": "../plotly/labextension",
     "webpackConfig": "./webpack.config.js",
     "_build": {
-      "load": "static/remoteEntry.3ce3f9fcc6cbd017.js",
+      "load": "static/remoteEntry.6f1030bf65ead662.js",
       "mimeExtension": "./mimeExtension"
     }
   }

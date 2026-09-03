@@ -33,7 +33,7 @@ classifiers = [
 requires-python = ">=3.8"
 license = "MIT"
 license-files = ["LICENSE.txt"]
-version = "6.9.0"
+version = "7.0.0"
 dependencies = [
     "narwhals>=1.15.1",
     "packaging"
@@ -53,8 +53,13 @@ dev_build = [
     "build",
     "jupyter-builder"
 ]
+dev_codegen = [             # Dependencies for running Python codegen
+    "plotly[dev_core]",
+    "inflect"
+]
 dev_optional = [
     "plotly[dev_build]",
+    "plotly[dev_codegen]",
     "plotly[express]",
     "plotly[kaleido]",
     "anywidget",
@@ -62,20 +67,16 @@ dev_optional = [
     # fiona>1.9.6 is not compatible with geopandas<1; geopandas>=1 is not compatible with python 3.8
     "fiona<=1.9.6;python_version<='3.8'",
     "geopandas",
-    "inflect",
     "jupyterlab",
     "orjson",
     "pandas",
     "pdfrw",
     "pillow",
-    "plotly-geo",
     "polars[timezone]",
     "pyarrow",
-    "pyshp",
     "pytz",
     "scikit-image",
     "scipy",
-    "shapely",
     "statsmodels",
     "vaex;python_version<='3.9'",
     "xarray"

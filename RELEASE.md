@@ -143,7 +143,7 @@ to features in the release.
        If plotly.js adds new traces or trace/layout attributes that aren't listed in `orderings.json`, `get_plotschema.py` prints a warning like `missing key in attributes: <attribute-name>` and appends the missing entry to the end of its section. To resolve:
 
        - Add each missing attribute to the appropriate section of `/_data/orderings.json` in the position you want it to appear in the reference docs.
-       - When in doubt about trace-attribute placement, match plotly.js's native order: open the regenerated `_data/plotschema.json` and find where plotly.js itself places the attribute (e.g. inspect a representative trace's `attributes` keys in order). Following the native order keeps related attributes grouped (for example, `texttemplate` → `texttemplatefallback` → `texttemplatesrc`).
+       - When in doubt about trace-attribute placement, match plotly.js's native order: open the regenerated `_data/plotschema.json` and find where plotly.js itself places the attribute (e.g. inspect a representative trace's `attributes` keys in order). Following the native order keeps related attributes grouped (for example, `texttemplate` → `texttemplatefallback`).
        - For new top-level layout attributes, group them with semantically related entries rather than appending to the end (for example, a new click-behavior attribute like `clickanywhere` belongs next to `clickmode`).
        - Re-run `python get_plotschema.py <PLOTLY.JS VERSION>` after editing `orderings.json` and confirm the warnings are gone.
     3. Rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`

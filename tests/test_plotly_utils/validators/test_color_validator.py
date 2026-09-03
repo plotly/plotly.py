@@ -28,26 +28,61 @@ def validator_aok_colorscale():
     )
 
 
+VALID_COLORS = [
+    "red",
+    "BLUE",
+    "#8574b2",
+    "#8574B2",
+    "#8574b2cc",
+    "#8574B2CC",
+    "#87b",
+    "#87B",
+    "#87bc",
+    "#87BC",
+    "rgb(248, 12, 0)",
+    "rgb(248 12 0)",
+    "rgba(248, 12, 0, 0.5)",
+    "rgba(248 12 0 / 0.5)",
+    "var(--accent)",
+    "hsl(0, 100%, 50%)",
+    "hsl(0 100% 50%)",
+    "hsl(0deg 100% 50%)",
+    "hsla(0, 100%, 50%, 100%)",
+    "hsla(0 100% 50% 100%)",
+    "hsla(0deg 100% 50% 100%)",
+    "hwb(0 100% 50%)",
+    "hwb(0 100% 50% 0.5)",
+    "oklch(0.7 0.15 180)",
+    "oklab(0.7 0.15 0.5)",
+    "lab(70 15 50)",
+    "lch(70 15 180)",
+    "color(display-p3 1 0 0)",
+]
+
+INVALID_COLORS_WRONG_TYPE = [
+    set(),
+    {},
+    ["red"],
+    [12],
+]
+
+INVALID_COLORS_WRONG_FORMAT = [
+    "redd",
+    "rgbbb(255, 0, 0)",
+    "hsl(0, 1%0000%, 50%)",
+    "hsv(0, 100%, 100%)",
+    "hsva(0, 100%, 100%, 50%)",
+]
+
+
 # Array not ok, numbers not ok
-@pytest.mark.parametrize(
-    "val",
-    [
-        "red",
-        "BLUE",
-        "rgb(255, 0, 0)",
-        "var(--accent)",
-        "hsl(0, 100%, 50%)",
-        "hsla(0, 100%, 50%, 100%)",
-        "hsv(0, 100%, 100%)",
-        "hsva(0, 100%, 100%, 50%)",
-    ],
-)
+@pytest.mark.parametrize("val", VALID_COLORS)
 def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
 
 
 # Rejection by type
-@pytest.mark.parametrize("val", [set(), 23, 0.5, {}, ["red"], [12]])
+@pytest.mark.parametrize("val", INVALID_COLORS_WRONG_TYPE + [23, 0.5])
 def test_rejection_1(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
@@ -56,7 +91,7 @@ def test_rejection_1(val, validator):
 
 
 # Rejection by value
-@pytest.mark.parametrize("val", ["redd", "rgbbb(255, 0, 0)", "hsl(0, 1%0000%, 50%)"])
+@pytest.mark.parametrize("val", INVALID_COLORS_WRONG_FORMAT)
 def test_rejection_2(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
@@ -68,27 +103,13 @@ def test_rejection_2(val, validator):
 
 
 # Acceptance
-@pytest.mark.parametrize(
-    "val",
-    [
-        "red",
-        "BLUE",
-        23,
-        15,
-        "rgb(255, 0, 0)",
-        "var(--accent)",
-        "hsl(0, 100%, 50%)",
-        "hsla(0, 100%, 50%, 100%)",
-        "hsv(0, 100%, 100%)",
-        "hsva(0, 100%, 100%, 50%)",
-    ],
-)
+@pytest.mark.parametrize("val", VALID_COLORS + [23, 15])
 def test_acceptance_colorscale(val, validator_colorscale):
     assert validator_colorscale.validate_coerce(val) == val
 
 
 # Rejection by type
-@pytest.mark.parametrize("val", [set(), {}, ["red"], [12]])
+@pytest.mark.parametrize("val", INVALID_COLORS_WRONG_TYPE)
 def test_rejection_colorscale_1(val, validator_colorscale):
     with pytest.raises(ValueError) as validation_failure:
         validator_colorscale.validate_coerce(val)
@@ -97,7 +118,7 @@ def test_rejection_colorscale_1(val, validator_colorscale):
 
 
 # Rejection by value
-@pytest.mark.parametrize("val", ["redd", "rgbbb(255, 0, 0)", "hsl(0, 1%0000%, 50%)"])
+@pytest.mark.parametrize("val", INVALID_COLORS_WRONG_FORMAT)
 def test_rejection_colorscale_2(val, validator_colorscale):
     with pytest.raises(ValueError) as validation_failure:
         validator_colorscale.validate_coerce(val)
@@ -115,11 +136,11 @@ def test_rejection_colorscale_2(val, validator_colorscale):
         "blue",
         ["red", "rgb(255, 0, 0)"],
         np.array(["red", "rgb(255, 0, 0)"]),
-        ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsv(0, 100%, 100%)"],
+        ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsl(0, 100%, 100%)"],
         np.array(
-            ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsv(0, 100%, 100%)"]
+            ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsl(0, 100%, 100%)"]
         ),
-        ["hsva(0, 100%, 100%, 50%)"],
+        ["hsla(0, 100%, 100%, 50%)"],
     ],
 )
 def test_acceptance_aok(val, validator_aok):
@@ -165,8 +186,8 @@ def test_acceptance_aok_2D(val, validator_aok):
         [23],
         [0, 1, 2],
         ["redd", "rgb(255, 0, 0)"],
-        ["hsl(0, 100%, 50_00%)", "hsla(0, 100%, 50%, 100%)", "hsv(0, 100%, 100%)"],
-        ["hsva(0, 1%00%, 100%, 50%)"],
+        ["hsl(0, 100%, 50_00%)", "hsla(0, 100%, 50%, 100%)", "hsl(0, 100%, 100%)"],
+        ["hsla(0, 1%00%, 100%, 50%)"],
     ],
 )
 def test_rejection_aok(val, validator_aok):
@@ -182,11 +203,11 @@ def test_rejection_aok(val, validator_aok):
         [["redd", "rgb(255, 0, 0)"]],
         [
             ["hsl(0, 100%, 50_00%)", "hsla(0, 100%, 50%, 100%)"],
-            ["hsv(0, 100%, 100%)", "purple"],
+            ["hsl(0, 100%, 100%)", "purple"],
         ],
         [
             np.array(["hsl(0, 100%, 50_00%)", "hsla(0, 100%, 50%, 100%)"]),
-            np.array(["hsv(0, 100%, 100%)", "purple"]),
+            np.array(["hsl(0, 100%, 100%)", "purple"]),
         ],
         [["blue"], [2]],
     ],
@@ -209,8 +230,8 @@ def test_rejection_aok_2D(val, validator_aok):
         23,
         [0, 1, 2],
         ["red", 0.5, "rgb(255, 0, 0)"],
-        ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsv(0, 100%, 100%)"],
-        ["hsva(0, 100%, 100%, 50%)"],
+        ["hsl(0, 100%, 50%)", "hsla(0, 100%, 50%, 100%)", "hsl(0, 100%, 100%)"],
+        ["hsla(0, 100%, 100%, 50%)"],
     ],
 )
 def test_acceptance_aok_colorscale(val, validator_aok_colorscale):
@@ -226,8 +247,8 @@ def test_acceptance_aok_colorscale(val, validator_aok_colorscale):
     "val",
     [
         ["redd", 0.5, "rgb(255, 0, 0)"],
-        ["hsl(0, 100%, 50_00%)", "hsla(0, 100%, 50%, 100%)", "hsv(0, 100%, 100%)"],
-        ["hsva(0, 1%00%, 100%, 50%)"],
+        ["hsl(0, 100%, 50_00%)", "hsla(0, 100%, 50%, 100%)", "hsl(0, 100%, 100%)"],
+        ["hsla(0, 1%00%, 100%, 50%)"],
     ],
 )
 def test_rejection_aok_colorscale(val, validator_aok_colorscale):

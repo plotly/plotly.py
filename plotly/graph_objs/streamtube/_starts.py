@@ -8,7 +8,7 @@ import copy as _copy
 class Starts(_BaseTraceHierarchyType):
     _parent_path_str = "streamtube"
     _path_str = "streamtube.starts"
-    _valid_props = {"x", "xsrc", "y", "ysrc", "z", "zsrc"}
+    _valid_props = {"x", "y", "z"}
 
     @property
     def x(self):
@@ -30,24 +30,6 @@ class Starts(_BaseTraceHierarchyType):
         self["x"] = val
 
     @property
-    def xsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `x`.
-
-        The 'xsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["xsrc"]
-
-    @xsrc.setter
-    def xsrc(self, val):
-        self["xsrc"] = val
-
-    @property
     def y(self):
         """
         Sets the y components of the starting position of the
@@ -65,24 +47,6 @@ class Starts(_BaseTraceHierarchyType):
     @y.setter
     def y(self, val):
         self["y"] = val
-
-    @property
-    def ysrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `y`.
-
-        The 'ysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["ysrc"]
-
-    @ysrc.setter
-    def ysrc(self, val):
-        self["ysrc"] = val
 
     @property
     def z(self):
@@ -104,57 +68,20 @@ class Starts(_BaseTraceHierarchyType):
         self["z"] = val
 
     @property
-    def zsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `z`.
-
-        The 'zsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["zsrc"]
-
-    @zsrc.setter
-    def zsrc(self, val):
-        self["zsrc"] = val
-
-    @property
     def _prop_descriptions(self):
         return """\
         x
             Sets the x components of the starting position of the
             streamtubes
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y components of the starting position of the
             streamtubes
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z components of the starting position of the
             streamtubes
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
         """
 
-    def __init__(
-        self,
-        arg=None,
-        x=None,
-        xsrc=None,
-        y=None,
-        ysrc=None,
-        z=None,
-        zsrc=None,
-        **kwargs,
-    ):
+    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Starts object
 
@@ -167,21 +94,12 @@ class Starts(_BaseTraceHierarchyType):
         x
             Sets the x components of the starting position of the
             streamtubes
-        xsrc
-            Sets the source reference on Chart Studio Cloud for
-            `x`.
         y
             Sets the y components of the starting position of the
             streamtubes
-        ysrc
-            Sets the source reference on Chart Studio Cloud for
-            `y`.
         z
             Sets the z components of the starting position of the
             streamtubes
-        zsrc
-            Sets the source reference on Chart Studio Cloud for
-            `z`.
 
         Returns
         -------
@@ -208,10 +126,7 @@ an instance of :class:`plotly.graph_objs.streamtube.Starts`""")
         self._validate = kwargs.pop("_validate", True)
 
         self._set_property("x", arg, x)
-        self._set_property("xsrc", arg, xsrc)
         self._set_property("y", arg, y)
-        self._set_property("ysrc", arg, ysrc)
         self._set_property("z", arg, z)
-        self._set_property("zsrc", arg, zsrc)
         self._process_kwargs(**dict(arg, **kwargs))
         self._skip_invalid = False

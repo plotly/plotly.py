@@ -16,14 +16,11 @@ def get_fig(html):
 
 for filename in os.listdir("pandas2"):
     if filename not in [
-        "density_mapbox.html",
         "density_map.html",
         "scatter_hover.html",
-        "scatter_mapbox.html",
         "scatter_map.html",
         "line.html",
         "choropleth.html",
-        "line_mapbox.html",
         "line_map.html",
         "scatter_log.html",
     ]:

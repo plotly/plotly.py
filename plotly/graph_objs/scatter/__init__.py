@@ -11,7 +11,6 @@ if TYPE_CHECKING:
     from ._line import Line
     from ._marker import Marker
     from ._selected import Selected
-    from ._stream import Stream
     from ._textfont import Textfont
     from ._unselected import Unselected
     from . import hoverlabel
@@ -35,7 +34,6 @@ else:
             "._line.Line",
             "._marker.Marker",
             "._selected.Selected",
-            "._stream.Stream",
             "._textfont.Textfont",
             "._unselected.Unselected",
         ],

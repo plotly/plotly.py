@@ -34,17 +34,6 @@ uv pip uninstall plotly       # remove the PyPI version installed by requirement
 uv pip install -e ..          # install from your local checkout
 ```
 
-### Mapbox token
-
-Several geographic examples require a free Mapbox public token. Without it,
-those specific pages will fail to build.
-
-1. Create an account at https://account.mapbox.com/auth/signup
-2. Navigate to https://account.mapbox.com/ and copy your "Default public token"
-3. Save it to the file `doc/python/.mapbox_token`
-
-The Makefile symlinks this token into the build directory automatically.
-
 ## Tutorials (`python` directory)
 
 Each tutorial is a markdown (`.md`) file, which can be opened in Jupyter
@@ -393,8 +382,6 @@ Check `build/failures/<page-name>` for the full error output. Common causes:
 - **Timeout** — the default is 600 seconds (10 minutes). If your example
   legitimately needs more time, discuss in an issue before increasing the
   timeout.
-- **Missing Mapbox token** — geographic examples will fail if
-  `doc/python/.mapbox_token` does not exist.
 
 ### `make` fails immediately
 

@@ -12,22 +12,16 @@ class Sunburst(_BaseTraceType):
         "branchvalues",
         "count",
         "customdata",
-        "customdatasrc",
         "domain",
         "hoverinfo",
-        "hoverinfosrc",
         "hoverlabel",
         "hovertemplate",
         "hovertemplatefallback",
-        "hovertemplatesrc",
         "hovertext",
-        "hovertextsrc",
         "ids",
-        "idssrc",
         "insidetextfont",
         "insidetextorientation",
         "labels",
-        "labelssrc",
         "leaf",
         "legend",
         "legendgrouptitle",
@@ -37,28 +31,22 @@ class Sunburst(_BaseTraceType):
         "marker",
         "maxdepth",
         "meta",
-        "metasrc",
         "name",
         "opacity",
         "outsidetextfont",
         "parents",
-        "parentssrc",
         "root",
         "rotation",
         "sort",
-        "stream",
         "text",
         "textfont",
         "textinfo",
-        "textsrc",
         "texttemplate",
         "texttemplatefallback",
-        "texttemplatesrc",
         "type",
         "uid",
         "uirevision",
         "values",
-        "valuessrc",
         "visible",
     }
 
@@ -130,25 +118,6 @@ class Sunburst(_BaseTraceType):
         self["customdata"] = val
 
     @property
-    def customdatasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `customdata`.
-
-        The 'customdatasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["customdatasrc"]
-
-    @customdatasrc.setter
-    def customdatasrc(self, val):
-        self["customdatasrc"] = val
-
-    @property
     def domain(self):
         """
         The 'domain' property is an instance of Domain
@@ -170,9 +139,10 @@ class Sunburst(_BaseTraceType):
     @property
     def hoverinfo(self):
         """
-        Determines which trace information appear on hover. If `none`
-        or `skip` are set, no information is displayed upon hovering.
-        But, if `none` is set, click and hover events are still fired.
+        Determines what trace information appears on hover. Flags are
+        rendered in a fixed order; use `hovertemplate` if you need
+        explicit control over the rendered string, including the order
+        of fields and surrounding text.
 
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
@@ -190,25 +160,6 @@ class Sunburst(_BaseTraceType):
     @hoverinfo.setter
     def hoverinfo(self, val):
         self["hoverinfo"] = val
-
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hoverinfo`.
-
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hoverinfosrc"]
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self["hoverinfosrc"] = val
 
     @property
     def hoverlabel(self):
@@ -298,25 +249,6 @@ class Sunburst(_BaseTraceType):
         self["hovertemplatefallback"] = val
 
     @property
-    def hovertemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertemplate`.
-
-        The 'hovertemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertemplatesrc"]
-
-    @hovertemplatesrc.setter
-    def hovertemplatesrc(self, val):
-        self["hovertemplatesrc"] = val
-
-    @property
     def hovertext(self):
         """
         Sets hover text elements associated with each sector. If a
@@ -341,25 +273,6 @@ class Sunburst(_BaseTraceType):
         self["hovertext"] = val
 
     @property
-    def hovertextsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `hovertext`.
-
-        The 'hovertextsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["hovertextsrc"]
-
-    @hovertextsrc.setter
-    def hovertextsrc(self, val):
-        self["hovertextsrc"] = val
-
-    @property
     def ids(self):
         """
         Assigns id labels to each datum. These ids for object constancy
@@ -378,24 +291,6 @@ class Sunburst(_BaseTraceType):
     @ids.setter
     def ids(self, val):
         self["ids"] = val
-
-    @property
-    def idssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `ids`.
-
-        The 'idssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["idssrc"]
-
-    @idssrc.setter
-    def idssrc(self, val):
-        self["idssrc"] = val
 
     @property
     def insidetextfont(self):
@@ -461,24 +356,6 @@ class Sunburst(_BaseTraceType):
     @labels.setter
     def labels(self, val):
         self["labels"] = val
-
-    @property
-    def labelssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `labels`.
-
-        The 'labelssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["labelssrc"]
-
-    @labelssrc.setter
-    def labelssrc(self, val):
-        self["labelssrc"] = val
 
     @property
     def leaf(self):
@@ -670,24 +547,6 @@ class Sunburst(_BaseTraceType):
         self["meta"] = val
 
     @property
-    def metasrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `meta`.
-
-        The 'metasrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["metasrc"]
-
-    @metasrc.setter
-    def metasrc(self, val):
-        self["metasrc"] = val
-
-    @property
     def name(self):
         """
         Sets the trace name. The trace name appears as the legend item
@@ -774,24 +633,6 @@ class Sunburst(_BaseTraceType):
         self["parents"] = val
 
     @property
-    def parentssrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `parents`.
-
-        The 'parentssrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["parentssrc"]
-
-    @parentssrc.setter
-    def parentssrc(self, val):
-        self["parentssrc"] = val
-
-    @property
     def root(self):
         """
         The 'root' property is an instance of Root
@@ -851,25 +692,6 @@ class Sunburst(_BaseTraceType):
         self["sort"] = val
 
     @property
-    def stream(self):
-        """
-        The 'stream' property is an instance of Stream
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.sunburst.Stream`
-          - A dict of string/value properties that will be passed
-            to the Stream constructor
-
-        Returns
-        -------
-        plotly.graph_objs.sunburst.Stream
-        """
-        return self["stream"]
-
-    @stream.setter
-    def stream(self, val):
-        self["stream"] = val
-
-    @property
     def text(self):
         """
         Sets text elements associated with each sector. If trace
@@ -915,7 +737,10 @@ class Sunburst(_BaseTraceType):
     @property
     def textinfo(self):
         """
-        Determines which trace information appear on the graph.
+        Determines what trace information appears on the graph. Flags
+        are rendered in a fixed order; use `texttemplate` if you need
+        explicit control over the rendered string, including the order
+        of fields and surrounding text.
 
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
@@ -932,24 +757,6 @@ class Sunburst(_BaseTraceType):
     @textinfo.setter
     def textinfo(self, val):
         self["textinfo"] = val
-
-    @property
-    def textsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `text`.
-
-        The 'textsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["textsrc"]
-
-    @textsrc.setter
-    def textsrc(self, val):
-        self["textsrc"] = val
 
     @property
     def texttemplate(self):
@@ -1007,25 +814,6 @@ class Sunburst(_BaseTraceType):
     @texttemplatefallback.setter
     def texttemplatefallback(self, val):
         self["texttemplatefallback"] = val
-
-    @property
-    def texttemplatesrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for
-        `texttemplate`.
-
-        The 'texttemplatesrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["texttemplatesrc"]
-
-    @texttemplatesrc.setter
-    def texttemplatesrc(self, val):
-        self["texttemplatesrc"] = val
 
     @property
     def uid(self):
@@ -1098,24 +886,6 @@ class Sunburst(_BaseTraceType):
         self["values"] = val
 
     @property
-    def valuessrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for `values`.
-
-        The 'valuessrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["valuessrc"]
-
-    @valuessrc.setter
-    def valuessrc(self, val):
-        self["valuessrc"] = val
-
-    @property
     def visible(self):
         """
         Determines whether or not this trace is visible. If
@@ -1159,20 +929,15 @@ class Sunburst(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         domain
             :class:`plotly.graph_objects.sunburst.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.sunburst.Hoverlabel`
             instance or dict with compatible properties
@@ -1218,25 +983,16 @@ class Sunburst(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -1252,9 +1008,6 @@ class Sunburst(_BaseTraceType):
             perpendicular to the radius of the sector.
         labels
             Sets the labels of each of the sectors.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
@@ -1307,9 +1060,6 @@ class Sunburst(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1329,9 +1079,6 @@ class Sunburst(_BaseTraceType):
             items are understood to be "ids" themselves. When `ids`
             is not set, plotly attempts to find matching items in
             `labels`, but beware they must be unique.
-        parentssrc
-            Sets the source reference on Chart Studio Cloud for
-            `parents`.
         root
             :class:`plotly.graph_objects.sunburst.Root` instance or
             dict with compatible properties
@@ -1341,9 +1088,6 @@ class Sunburst(_BaseTraceType):
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
-        stream
-            :class:`plotly.graph_objects.sunburst.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -1353,10 +1097,10 @@ class Sunburst(_BaseTraceType):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -1386,9 +1130,6 @@ class Sunburst(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1415,9 +1156,6 @@ class Sunburst(_BaseTraceType):
             Sets the values associated with each of the sectors.
             Use with `branchvalues` to determine how the values are
             summed.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1431,22 +1169,16 @@ class Sunburst(_BaseTraceType):
         branchvalues=None,
         count=None,
         customdata=None,
-        customdatasrc=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatefallback=None,
-        hovertemplatesrc=None,
         hovertext=None,
-        hovertextsrc=None,
         ids=None,
-        idssrc=None,
         insidetextfont=None,
         insidetextorientation=None,
         labels=None,
-        labelssrc=None,
         leaf=None,
         legend=None,
         legendgrouptitle=None,
@@ -1456,27 +1188,21 @@ class Sunburst(_BaseTraceType):
         marker=None,
         maxdepth=None,
         meta=None,
-        metasrc=None,
         name=None,
         opacity=None,
         outsidetextfont=None,
         parents=None,
-        parentssrc=None,
         root=None,
         rotation=None,
         sort=None,
-        stream=None,
         text=None,
         textfont=None,
         textinfo=None,
-        textsrc=None,
         texttemplate=None,
         texttemplatefallback=None,
-        texttemplatesrc=None,
         uid=None,
         uirevision=None,
         values=None,
-        valuessrc=None,
         visible=None,
         **kwargs,
     ):
@@ -1508,20 +1234,15 @@ class Sunburst(_BaseTraceType):
             listening to hover, click and selection events. Note
             that, "scatter" traces also appends customdata items in
             the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            `customdata`.
         domain
             :class:`plotly.graph_objects.sunburst.Domain` instance
             or dict with compatible properties
         hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            `hoverinfo`.
+            Determines what trace information appears on hover.
+            Flags are rendered in a fixed order; use
+            `hovertemplate` if you need explicit control over the
+            rendered string, including the order of fields and
+            surrounding text.
         hoverlabel
             :class:`plotly.graph_objects.sunburst.Hoverlabel`
             instance or dict with compatible properties
@@ -1567,25 +1288,16 @@ class Sunburst(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        hovertemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertemplate`.
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
             trace `hoverinfo` must contain a "text" flag.
-        hovertextsrc
-            Sets the source reference on Chart Studio Cloud for
-            `hovertext`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
             array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            `ids`.
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
@@ -1601,9 +1313,6 @@ class Sunburst(_BaseTraceType):
             perpendicular to the radius of the sector.
         labels
             Sets the labels of each of the sectors.
-        labelssrc
-            Sets the source reference on Chart Studio Cloud for
-            `labels`.
         leaf
             :class:`plotly.graph_objects.sunburst.Leaf` instance or
             dict with compatible properties
@@ -1656,9 +1365,6 @@ class Sunburst(_BaseTraceType):
             layout attributes, use `%{data[n[.meta[i]}` where `i`
             is the index or key of the `meta` and `n` is the trace
             index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            `meta`.
         name
             Sets the trace name. The trace name appears as the
             legend item and on hover.
@@ -1678,9 +1384,6 @@ class Sunburst(_BaseTraceType):
             items are understood to be "ids" themselves. When `ids`
             is not set, plotly attempts to find matching items in
             `labels`, but beware they must be unique.
-        parentssrc
-            Sets the source reference on Chart Studio Cloud for
-            `parents`.
         root
             :class:`plotly.graph_objects.sunburst.Root` instance or
             dict with compatible properties
@@ -1690,9 +1393,6 @@ class Sunburst(_BaseTraceType):
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
-        stream
-            :class:`plotly.graph_objects.sunburst.Stream` instance
-            or dict with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -1702,10 +1402,10 @@ class Sunburst(_BaseTraceType):
         textfont
             Sets the font used for `textinfo`.
         textinfo
-            Determines which trace information appear on the graph.
-        textsrc
-            Sets the source reference on Chart Studio Cloud for
-            `text`.
+            Determines what trace information appears on the graph.
+            Flags are rendered in a fixed order; use `texttemplate`
+            if you need explicit control over the rendered string,
+            including the order of fields and surrounding text.
         texttemplate
             Template string used for rendering the information text
             that appears on points. Note that this will override
@@ -1735,9 +1435,6 @@ class Sunburst(_BaseTraceType):
             referenced in a template is missing. If the boolean
             value 'false' is passed in, the specifier with the
             missing variable will be displayed.
-        texttemplatesrc
-            Sets the source reference on Chart Studio Cloud for
-            `texttemplate`.
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1764,9 +1461,6 @@ class Sunburst(_BaseTraceType):
             Sets the values associated with each of the sectors.
             Use with `branchvalues` to determine how the values are
             summed.
-        valuessrc
-            Sets the source reference on Chart Studio Cloud for
-            `values`.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1800,22 +1494,16 @@ an instance of :class:`plotly.graph_objs.Sunburst`""")
         self._set_property("branchvalues", arg, branchvalues)
         self._set_property("count", arg, count)
         self._set_property("customdata", arg, customdata)
-        self._set_property("customdatasrc", arg, customdatasrc)
         self._set_property("domain", arg, domain)
         self._set_property("hoverinfo", arg, hoverinfo)
-        self._set_property("hoverinfosrc", arg, hoverinfosrc)
         self._set_property("hoverlabel", arg, hoverlabel)
         self._set_property("hovertemplate", arg, hovertemplate)
         self._set_property("hovertemplatefallback", arg, hovertemplatefallback)
-        self._set_property("hovertemplatesrc", arg, hovertemplatesrc)
         self._set_property("hovertext", arg, hovertext)
-        self._set_property("hovertextsrc", arg, hovertextsrc)
         self._set_property("ids", arg, ids)
-        self._set_property("idssrc", arg, idssrc)
         self._set_property("insidetextfont", arg, insidetextfont)
         self._set_property("insidetextorientation", arg, insidetextorientation)
         self._set_property("labels", arg, labels)
-        self._set_property("labelssrc", arg, labelssrc)
         self._set_property("leaf", arg, leaf)
         self._set_property("legend", arg, legend)
         self._set_property("legendgrouptitle", arg, legendgrouptitle)
@@ -1825,27 +1513,21 @@ an instance of :class:`plotly.graph_objs.Sunburst`""")
         self._set_property("marker", arg, marker)
         self._set_property("maxdepth", arg, maxdepth)
         self._set_property("meta", arg, meta)
-        self._set_property("metasrc", arg, metasrc)
         self._set_property("name", arg, name)
         self._set_property("opacity", arg, opacity)
         self._set_property("outsidetextfont", arg, outsidetextfont)
         self._set_property("parents", arg, parents)
-        self._set_property("parentssrc", arg, parentssrc)
         self._set_property("root", arg, root)
         self._set_property("rotation", arg, rotation)
         self._set_property("sort", arg, sort)
-        self._set_property("stream", arg, stream)
         self._set_property("text", arg, text)
         self._set_property("textfont", arg, textfont)
         self._set_property("textinfo", arg, textinfo)
-        self._set_property("textsrc", arg, textsrc)
         self._set_property("texttemplate", arg, texttemplate)
         self._set_property("texttemplatefallback", arg, texttemplatefallback)
-        self._set_property("texttemplatesrc", arg, texttemplatesrc)
         self._set_property("uid", arg, uid)
         self._set_property("uirevision", arg, uirevision)
         self._set_property("values", arg, values)
-        self._set_property("valuessrc", arg, valuessrc)
         self._set_property("visible", arg, visible)
 
         self._props["type"] = "sunburst"

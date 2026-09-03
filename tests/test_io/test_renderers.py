@@ -96,8 +96,6 @@ def test_plotly_mimetype_renderer_mimetype(fig1, renderer):
     pio.renderers.default = renderer
     expected = {plotly_mimetype: json.loads(pio.to_json(fig1, remove_uids=False))}
 
-    expected[plotly_mimetype]["config"] = {"plotlyServerURL": "https://plot.ly"}
-
     pio.renderers.render_on_display = False
 
     with mock.patch("IPython.display.display") as mock_display:
@@ -117,17 +115,10 @@ def test_plotly_mimetype_renderer_show(fig1, renderer):
     pio.renderers.default = renderer
     expected = {plotly_mimetype: json.loads(pio.to_json(fig1, remove_uids=False))}
 
-    expected[plotly_mimetype]["config"] = {"plotlyServerURL": "https://plot.ly"}
-
     with mock.patch("IPython.display.display") as mock_display:
         pio.show(fig1)
 
     mock_display.assert_called_once_with(expected, raw=True)
-
-
-# Static Image
-# ------------
-# See tests/test_orca/test_image_renderers.py
 
 
 # HTML
@@ -331,7 +322,7 @@ def test_repr_html(renderer):
         assert str_html.replace(id_html, "") == template.replace(id_pattern, "")
 
 
-all_renderers_without_orca = [
+all_renderers = [
     "plotly_mimetype",
     "jupyterlab",
     "nteract",
@@ -354,7 +345,7 @@ all_renderers_without_orca = [
 ]
 
 
-@pytest.mark.parametrize("renderer_str", all_renderers_without_orca)
+@pytest.mark.parametrize("renderer_str", all_renderers)
 def test_repr_mimebundle(renderer_str):
     pio.renderers.default = renderer_str
     fig = go.Figure()

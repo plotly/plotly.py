@@ -36,6 +36,7 @@ The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://plot
 
 ```python
 import plotly.plotly as py
+import plotly.express as px
 import plotly.graph_objs as go
 from plotly.tools import FigureFactory as FF
 
@@ -61,12 +62,7 @@ matrix2 = np.matrix(
 )
 
 matrix_sum = matrix1 + matrix2
-
-colorscale = [[0, '#EAEFC4'], [1, '#9BDF46']]
-font=['#000000', '#000000']
-
-table = FF.create_annotated_heatmap(matrix_sum.tolist(), colorscale=colorscale, font_colors=font)
-py.iplot(table, filename='matrix-sum')
+px.imshow(matrix_sum, text_auto=True)
 ```
 
 #### Multiply Two Matrices
@@ -84,12 +80,7 @@ matrix2 = np.matrix(
 )
 
 matrix_prod = matrix1 * matrix2
-
-colorscale = [[0, '#F1FFD9'], [1, '#8BDBF5']]
-font=['#000000', '#000000']
-
-table = FF.create_annotated_heatmap(matrix_prod.tolist(), colorscale=colorscale, font_colors=font)
-py.iplot(table, filename='matrix-prod')
+px.imshow(matrix_prod, text_auto=True)
 ```
 
 #### Solve Matrix Equation
@@ -107,12 +98,7 @@ B = np.matrix(
 )
 
 X = np.linalg.solve(A, B)
-
-colorscale = [[0, '#497285'], [1, '#DFEBED']]
-font=['#000000', '#000000']
-
-table = FF.create_annotated_heatmap(X.tolist(), colorscale=colorscale, font_colors=font)
-py.iplot(table, filename='matrix-eq')
+px.imshow(X, text_auto=True)
 ```
 
 #### Find the Determinant
@@ -136,12 +122,7 @@ matrix = np.matrix(
 )
 
 inverse = np.linalg.inv(matrix)
-
-colorscale = [[0, '#F1FAFB'], [1, '#A0E4F1']]
-font=['#000000', '#000000']
-
-table = FF.create_annotated_heatmap(inverse.tolist(), colorscale=colorscale, font_colors=font)
-py.iplot(table, filename='inverse')
+px.imshow(inverse, text_auto=True)
 ```
 
 #### Find Eigenvalues

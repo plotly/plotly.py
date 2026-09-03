@@ -7,7 +7,6 @@ if TYPE_CHECKING:
     from ._legendgrouptitle import Legendgrouptitle
     from ._link import Link
     from ._node import Node
-    from ._stream import Stream
     from ._textfont import Textfont
     from . import hoverlabel
     from . import legendgrouptitle
@@ -25,7 +24,6 @@ else:
             "._legendgrouptitle.Legendgrouptitle",
             "._link.Link",
             "._node.Node",
-            "._stream.Stream",
             "._textfont.Textfont",
         ],
     )

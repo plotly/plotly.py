@@ -6,7 +6,6 @@ if TYPE_CHECKING:
     from ._legendgrouptitle import Legendgrouptitle
     from ._marker import Marker
     from ._selected import Selected
-    from ._stream import Stream
     from ._unselected import Unselected
     from . import hoverlabel
     from . import legendgrouptitle
@@ -24,7 +23,6 @@ else:
             "._legendgrouptitle.Legendgrouptitle",
             "._marker.Marker",
             "._selected.Selected",
-            "._stream.Stream",
             "._unselected.Unselected",
         ],
     )

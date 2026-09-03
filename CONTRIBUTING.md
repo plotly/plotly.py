@@ -309,7 +309,7 @@ python commands.py updateplotlyjsdev --devrepo reponame --devbranch branchname
 
 This fetches the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`.
 If `--devrepo` or `--devbranch` are omitted,
-`updateplotlyjsdev` defaults to `plotly/plotly.js` and `master` respectively.
+`updateplotlyjsdev` defaults to `plotly/plotly.js` and `main` respectively.
 
 ### Local Repository
 

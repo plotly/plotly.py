@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/v4-migration.png
 ---
 
-This page outlines the changes in Plotly.py version 6 and cases where you may need to update your charts or tools that you use for working with Plotly.py.
+This page outlines the changes in Plotly.py version 6 and cases where you may need to update your charts or tools that you use for working with Plotly.py. For the next release, see [Changes in Version 7](/python/v7-migration/).
 
 <!-- #region -->
 ## Jupyter Notebook Support
@@ -66,7 +66,7 @@ Plotly Express now uses [Narwhals](https://narwhals-dev.github.io/narwhals/) to 
 
 ## Mapbox Deprecation
 
-Mapbox-based traces are deprecated and will be removed in a future version of Plotly.py. Use [Maplibre-based](https://plotly.com/python/mapbox-to-maplibre/) traces instead.
+Mapbox-based traces are deprecated and will be removed in a future version of Plotly.py. Use [MapLibre-based](https://plotly.com/python/mapbox-to-maplibre/) traces instead.
 
 ## Removed Attributes
 
