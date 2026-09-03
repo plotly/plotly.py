@@ -272,6 +272,23 @@ def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
             return gap0
 
 
+DRAWSTYLE_SHAPE_MAP = {
+    "steps": "vh",
+    "steps-pre": "vh",
+    "steps-post": "hv",
+    "steps-mid": "hvh",
+}
+
+
+def convert_drawstyle(drawstyle):
+    """Convert a matplotlib line drawstyle to a plotly line shape.
+
+    Matplotlib draws steps as vertical/horizontal segments; plotly's
+    ``line.shape`` expresses the same via "vh", "hv" and "hvh".
+    """
+    return DRAWSTYLE_SHAPE_MAP.get(drawstyle)
+
+
 def convert_rgba_array(color_list):
     clean_color_list = list()
     for c in color_list:
