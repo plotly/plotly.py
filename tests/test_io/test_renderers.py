@@ -154,7 +154,7 @@ def test_colab_renderer_show(fig1):
 
     # Check html contents
     html = mock_arg1["text/html"]
-    assert_full_html(html)
+    assert_not_full_html(html)
     assert_html_renderer_connected(html)
 
     # check kwargs
