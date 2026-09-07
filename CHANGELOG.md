@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add `<!doctype html>` to the `to_html()` template to comply with modern web standards [[#5693](https://github.com/plotly/plotly.py/pull/5693)], with thanks to @mishrakushal for the contribution!
 - Apply `histfunc`/`z` aggregation to `marginal_x`/`marginal_y="histogram"` subplots in `density_heatmap`/`density_contour`, instead of always showing raw bin counts [[#3521](https://github.com/plotly/plotly.py/issues/3521)], with thanks to @lucasjamar for the contribution!
 - Fix `mpl_to_plotly` silently dropping matplotlib path collections in data coordinates (such as violin plots, pcolor, event plots, stack plots, fill_between, and stem plots) by rendering them as filled polygons or lines [[#5702](https://github.com/plotly/plotly.py/pull/5702)], with thanks to @robertoffmoura for the contribution!
+- Fix serialization of box/lasso select data for multiple subplots
 
 ### Updated
 - Update plotly.js from version 3.6.0 to version 4.0.0 [[#5673](https://github.com/plotly/plotly.py/pull/5673)]. This is a major-version release with many changes. See the [plotly.js release notes](https://github.com/plotly/plotly.js/releases/tag/v4.0.0) for the full list. The most significant changes include:
