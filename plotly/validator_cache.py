@@ -57,7 +57,9 @@ class ValidatorCache(object):
                     validator_classname = base_item["superclass"]
                 else:
                     validator_params = validator_item["params"]
+
                 validator_params["plotly_name"] = prop_name
+                validator_params["parent_name"] = parent_path
                 validator_class = getattr(basevalidators, validator_classname)
 
                 validator = validator_class(**validator_params)

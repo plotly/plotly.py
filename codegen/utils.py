@@ -427,7 +427,7 @@ class PlotlyNode:
     def get_validator_params(self):
         """
         Get kwargs to pass to the constructor of this node's validator
-        superclass.
+        superclass, excluding the node's position in the schema.
 
         Returns
         -------
@@ -440,14 +440,10 @@ class PlotlyNode:
             the constructor directly.
 
         """
-        params = {
-            "plotly_name": repr(self.name_property),
-            "parent_name": repr(self.parent_path_str),
-        }
+        params = {}
 
         if self.is_compound:
             params["data_class_str"] = repr(self.name_datatype_class)
-            params["data_docs"] = '"""\n"""'
         else:
             assert self.is_simple
 
@@ -494,8 +490,12 @@ class PlotlyNode:
         # Evaluate validator params to convert repr strings into values
         # e.g. '2' -> 2
         params = {
-            prop: eval(repr_val)
-            for prop, repr_val in self.get_validator_params().items()
+            "plotly_name": self.name_property,
+            "parent_name": self.parent_path_str,
+            **{
+                prop: eval(repr_val)
+                for prop, repr_val in self.get_validator_params().items()
+            },
         }
 
         validator_parts = self.name_base_validator.split(".")

@@ -80,7 +80,15 @@ def write_validator_json(outdir, params: dict):
     # Write file
     filepath = opath.join(outdir, "validators", "_validators.json")
     with open(filepath, "w") as f:
-        f.write(json.dumps(params, indent=4))
+        # Format as one validator per line, to balance readability vs. file size
+        f.write("{\n")
+        f.write(
+            ",\n".join(
+                f"{json.dumps(k)}:{json.dumps(v, separators=(',', ':'))}"
+                for k, v in params.items()
+            )
+        )
+        f.write("\n}\n")
 
 
 def build_data_validator_params(base_trace_node: TraceNode):
@@ -102,11 +110,7 @@ def build_data_validator_params(base_trace_node: TraceNode):
         [(node.name_property, node.name_datatype_class) for node in tracetype_nodes]
     )
 
-    return {
-        "class_strs_map": class_strs_map,
-        "plotly_name": "data",
-        "parent_name": "",
-    }
+    return {"class_strs_map": class_strs_map}
 
 
 def get_data_validator_instance(base_trace_node: TraceNode):
@@ -123,10 +127,9 @@ def get_data_validator_instance(base_trace_node: TraceNode):
     BaseDataValidator
     """
 
-    # Build constructor params
-    # We need to eval the values to convert out of the repr-form of the
-    # params. e.g. '3' -> 3
-    params = build_data_validator_params(base_trace_node)
-
     # Build and return BaseDataValidator instance
-    return _plotly_utils.basevalidators.BaseDataValidator(**params)
+    return _plotly_utils.basevalidators.BaseDataValidator(
+        plotly_name="data",
+        parent_name="",
+        **build_data_validator_params(base_trace_node),
+    )

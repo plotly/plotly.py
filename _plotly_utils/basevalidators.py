@@ -2390,7 +2390,9 @@ class ImageUriValidator(BaseValidator):
 
 
 class CompoundValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, data_class_str, data_docs, **kwargs):
+    def __init__(
+        self, plotly_name, parent_name, data_class_str, data_docs="\n", **kwargs
+    ):
         super(CompoundValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
         )
@@ -2495,7 +2497,9 @@ class TitleValidator(CompoundValidator):
 
 
 class CompoundArrayValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, data_class_str, data_docs, **kwargs):
+    def __init__(
+        self, plotly_name, parent_name, data_class_str, data_docs="\n", **kwargs
+    ):
         super(CompoundArrayValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
         )
@@ -2690,7 +2694,9 @@ class BaseDataValidator(BaseValidator):
 
 
 class BaseTemplateValidator(CompoundValidator):
-    def __init__(self, plotly_name, parent_name, data_class_str, data_docs, **kwargs):
+    def __init__(
+        self, plotly_name, parent_name, data_class_str, data_docs="\n", **kwargs
+    ):
         super(BaseTemplateValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
