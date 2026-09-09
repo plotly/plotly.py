@@ -1321,8 +1321,8 @@ class YAxis(_BaseLayoutHierarchyType):
     def showspikes(self):
         """
         Determines whether or not spikes (aka droplines) are drawn for
-        this axis. Note: This only takes affect when hovermode =
-        closest
+        this axis. Note that spikes will never be drawn when
+        `hovermode` is False.
 
         The 'showspikes' property is a boolean and must be specified as:
           - A boolean value: True or False
@@ -2572,8 +2572,8 @@ class YAxis(_BaseLayoutHierarchyType):
             drawn.
         showspikes
             Determines whether or not spikes (aka droplines) are
-            drawn for this axis. Note: This only takes affect when
-            hovermode = closest
+            drawn for this axis. Note that spikes will never be
+            drawn when `hovermode` is False.
         showticklabels
             Determines whether or not the tick labels are drawn.
         showtickprefix
@@ -3214,8 +3214,8 @@ class YAxis(_BaseLayoutHierarchyType):
             drawn.
         showspikes
             Determines whether or not spikes (aka droplines) are
-            drawn for this axis. Note: This only takes affect when
-            hovermode = closest
+            drawn for this axis. Note that spikes will never be
+            drawn when `hovermode` is False.
         showticklabels
             Determines whether or not the tick labels are drawn.
         showtickprefix

@@ -56,7 +56,8 @@ class Modebar(_BaseLayoutHierarchyType):
         `config.modeBarButtonsToAdd` option. This may include
         "v1hovermode", "hoverclosest", "hovercompare", "togglehover",
         "togglespikelines", "drawline", "drawopenpath",
-        "drawclosedpath", "drawcircle", "drawrect", "eraseshape".
+        "drawclosedpath", "drawcircle", "drawrect", "eraseshape",
+        "downloadJson".
 
         The 'add' property is a string and must be specified as:
           - A string
@@ -216,7 +217,7 @@ class Modebar(_BaseLayoutHierarchyType):
             This may include "v1hovermode", "hoverclosest",
             "hovercompare", "togglehover", "togglespikelines",
             "drawline", "drawopenpath", "drawclosedpath",
-            "drawcircle", "drawrect", "eraseshape".
+            "drawcircle", "drawrect", "eraseshape", "downloadJson".
         bgcolor
             Sets the background color of the modebar.
         color
@@ -281,7 +282,7 @@ class Modebar(_BaseLayoutHierarchyType):
             This may include "v1hovermode", "hoverclosest",
             "hovercompare", "togglehover", "togglespikelines",
             "drawline", "drawopenpath", "drawclosedpath",
-            "drawcircle", "drawrect", "eraseshape".
+            "drawcircle", "drawrect", "eraseshape", "downloadJson".
         bgcolor
             Sets the background color of the modebar.
         color
