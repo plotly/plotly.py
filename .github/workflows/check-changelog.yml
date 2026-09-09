@@ -1,0 +1,18 @@
+name: Check changelog
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled]
+
+jobs:
+  check-changelog:
+    name: Check if CHANGELOG.md was updated
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-changelog') }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/pulls/${{ github.event.number }}/files" --paginate --jq '.[].filename' \
+            | grep -qx CHANGELOG.md \
+            || { echo "::error::CHANGELOG.md was not updated. Either add a changelog entry, or add the 'no-changelog' label to this PR if a changelog entry is not needed."; exit 1; }
